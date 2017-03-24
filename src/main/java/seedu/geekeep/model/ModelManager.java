@@ -158,22 +158,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class TitleQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+        private Set<String> titleKeyWords;
 
         TitleQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
+            this.titleKeyWords = nameKeyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
+            return titleKeyWords.stream()
                     .filter(keyword-> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
                     .findAny().isPresent();
         }
 
         @Override
         public String toString() {
-            return "title=" + String.join(", ", nameKeyWords);
+            return "title=" + String.join(", ", titleKeyWords);
         }
     }
 
