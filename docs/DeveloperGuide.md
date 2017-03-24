@@ -141,7 +141,7 @@ The sections below give more details of each component.
 
 Author: Shen Qi
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/UiComponentClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/taskmanager/ui/Ui.java)
