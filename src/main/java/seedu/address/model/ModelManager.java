@@ -165,6 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         this.currentAddressBookStateIndex++;
         this.currentAddressBook.resetData(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        applyCurrentComparatorToTaskList();
         indicateAddressBookChanged();
     }
 
@@ -175,6 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         this.currentAddressBookStateIndex--;
         this.currentAddressBook.resetData(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        applyCurrentComparatorToTaskList();
         indicateAddressBookChanged();
     }
 

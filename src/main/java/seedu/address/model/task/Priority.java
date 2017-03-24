@@ -12,8 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Priority Levels are only 1-5";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Priority Levels are only 1-5 or blank.";
     public static final String PRIORITY_VALIDATION_REGEX = "[-]?(1|2|3|4|5)";
 
     public static final String PRIORITY_LEVEL_ONE = "lame";
@@ -30,15 +29,13 @@ public class Priority {
     public static final String PRIORITY_LEVEL_5 = "5";
     public static final String PRIORITY_LEVEL_DEFAULT_VALUE = PRIORITY_LEVEL_2;
 
-    //public String value;
     public HashMap<String, String> priorityMap = new HashMap<String, String>();
     public final String value;
 
-
     /**
-     * Validates given email.
+     * Validates given priority string.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given priority string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
         priorityMap.put(PRIORITY_LEVEL_1, PRIORITY_LEVEL_ONE);
@@ -47,7 +44,6 @@ public class Priority {
         priorityMap.put(PRIORITY_LEVEL_4, PRIORITY_LEVEL_FOUR);
         priorityMap.put(PRIORITY_LEVEL_5, PRIORITY_LEVEL_FIVE);
 
-
         assert priority != null;
 
         String trimmedPriority = priority.trim();
@@ -55,29 +51,14 @@ public class Priority {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
 
-        /*int actualValue = Integer.parseInt(trimmedPriority);
-
-        if (actualValue < 0) { // means task is completed
-            this.number = trimmedPriority;
-            this.value = PRIORITY_LEVEL_DONE;
-
-        } else {
-
-
-            this.value = priorityMap.get(trimmedPriority); // string word
-            this.number = trimmedPriority; // string number
-        }
-        */
-        this.value = trimmedPriority;
-
-
+        this.value = trimmedPriority.isEmpty() ? PRIORITY_LEVEL_DEFAULT_VALUE : trimmedPriority;
     }
 
     /**
      * Returns if a given string is a valid person email.
      */
     public static boolean isValidPriority(String test) {
-        return test.matches(PRIORITY_VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(PRIORITY_VALIDATION_REGEX);
     }
 
     @Override
