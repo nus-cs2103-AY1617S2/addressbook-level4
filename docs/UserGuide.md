@@ -8,20 +8,20 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 2. [Quick Start](#2-quick-start)  
 3. [Features](#3-features)  
   3.1. [Viewing help](#31-viewing-help--help)  
-  3.2. [Adding a new task](#32-adding-a-new-task--add-do)  
-  3.3. [Listing tasks](#33-listing-tasks--list-ls)  
-  3.4. [Finding a task](#34-finding-all-tasks-containing-any-search-key-in-their-description--find)  
-  3.5. [Deleting tasks](#35-deleting-tasks--delete)  
+  3.2. [Adding a new task](#32-adding-a-new-task--add)  
+  3.3. [Listing tasks](#33-listing-tasks--list)  
+  3.4. [Finding a task](#34-finding-a-task--find)  
+  3.5. [Deleting a task](#35-deleting-a-task--delete)  
   3.6. [Marking tasks as finished](#36-marking-tasks-as-finished--finish)  
   3.7. [Editing an existing task](#37-editing-an-existing-task--edit)  
-  3.8. [Listing all the tags](#38-listing-all-the-tags--list-tag-ls-tag)  
-  3.9. [Undoing the previous commands](#39-undoing-the-previous-commands--undo)  
-  3.10. [Clearing all entries](#310-clearing-all-entries--clear)  
-  3.11. [Setting an alias for a command word](#311-setting-an-alias-for-a-command-word--alias)  
-  3.12. [Changing the storage destination](#313-changing-the-storage-destination--save-at)  
-  3.13. [Saving the data](#314-saving-the-data)  
-  3.14. [Exiting the program](#312-exiting-the-program--exit)  
-4. [FAQ](#4-faq)
+  3.8. [Listing all tags](#38-listing-all-tags--listtag)
+  3.9. [Undoing previous commands](#39-undoing-previous-commands--undo-redo)  
+  3.10. [Clearing all tasks](#310-clearing-all-tasks--clear)  
+  3.11. [Setting an alias for a command word](#311-setting-an-alias-for-a-command-word--alias-view-alias)  
+  3.12. [Changing the storage location](#312-changing-the-storage-location--save-at)  
+  3.13. [Saving the data](#313-saving-the-data)  
+  3.14. [Exiting the program](#314-exiting-the-program--exit)  
+4. [FAQs](#4-faqs)
 5. [Command Summary](#5-command-summary)
 
 ## 1. Introduction
@@ -42,7 +42,7 @@ Are you ready to be a Doist?
 >    This app will not work with earlier versions of Java 8.
 
 1. Download the latest `.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for Doist. Note that you change Doist's storage location of its data in the future.
+2. Copy the file to the folder you want to use as the home folder for Doist. You can change this later.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 <br> <br>
  <img src="images/Ui.png" width="450"> <br>
@@ -149,6 +149,7 @@ Hour.Min | 03.00, 3.00
 Hour am/pm (12 hour format) | 3pm, 3am
 Hour (24 hour format)| 3
  <br>
+ 
  *Figure 3.2.1: Acceptable date and time formats* <br>
 
 > **Remarks:** <br>
@@ -285,10 +286,9 @@ Format: `delete INDEX [INDEX...]`
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-### 3.6 Marking tasks as finished : `finish`, `fin`, `finished`, `unfinish`
+### 3.6 Marking tasks as finished : `finish`
 
-You can use the `finish` command to mark the specified tasks as finished.
-We feel your excitement to finish tasks, so we've even provided two alternative command words `fin` and `finished`!<br>
+You can use the `finish` command to mark the specified tasks as finished. <br>
 <br>
 Format: `finish INDEX [INDEX...]`
 
@@ -331,12 +331,12 @@ Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
   the new description will be changed to `watch NBA`.
   The reminder time will also be updated to the specified one which is `this Sunday 8am`.
 
-### 3.8 Listing all the tags : `list_tag`, `ls_tag`
-You can use `list_tag` to display a list of all existing tags. <br>
+### 3.8 Listing all tags : `list_tag`
+If you want to list tasks by tag but you can't remember what tags there are, you can use the `list_tag` command to display a list of all existing tags. <br>
 <br>
-Format: `(list_tag|ls_tag)`  
+Format: `list_tag`  
 
-### 3.9 Undoing the previous commands : `undo`, `redo`
+### 3.9 Undoing previous commands : `undo`, `redo`
 
 You can use `undo` to undo previous commands. Undo as many times as you wish! <br>
 <br>
@@ -344,14 +344,14 @@ Format: `undo` <br>
 <br>
 If you regret undoing a command, you can use `redo` to restore your changes.
 
-### 3.10 Clearing all tasks: `clear`
+### 3.10 Clearing all tasks : `clear`
 
 Done with all your tasks? Need an empty to-do list?
 You can simply use `clear` to clear all tasks. <br>
 <br>
 Format: `clear`
 
-### 3.11 Setting an alias for a command word : `alias`
+### 3.11 Setting an alias for a command word : `alias`, `view_alias`
 
 Do you feel that our default command words are too lengthy and will like to set your own command words? <br>
 You can use `alias` to set an alias for an existing command word. You will then be able to use the alias to trigger the command! <br> <br>
@@ -369,7 +369,7 @@ There are already some default aliases set for you. For example, `do` can be use
 <br>
 Format: `view_alias`
 
-### 3.12 Changing the storage destination : `save_at`
+### 3.12 Changing the storage location : `save_at`
 
 You can use `save_at` to change the place that Doist would store its data at. <br>
 <br>
