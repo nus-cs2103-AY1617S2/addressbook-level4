@@ -84,13 +84,7 @@ public class CommandBox extends UiPart<Region> {
                     event.consume();
                     logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
                 }
-            } catch (CommandException e) {
-                // handle command failure
-                setStyleToIndicateCommandFailure();
-                setCommandInput("");
-                logger.info("Invalid command: " + commandTextField.getText());
-                raise(new NewResultAvailableEvent(e.getMessage()));
-            }
+            } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
         }
     }
 
