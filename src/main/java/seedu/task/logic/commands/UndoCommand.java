@@ -32,15 +32,15 @@ public class UndoCommand extends Command {
         System.out.println(previousCommand);
 
         switch (previousCommand) {
-        case "Add":
+        case AddCommand.COMMAND_WORD:
             Task previousTask = model.getUndoManager().popUndo();
             new DeleteCommand().executeUndo(previousTask, model);
             break;
-        case "Delete":
+        case DeleteCommand.COMMAND_WORD:
             previousTask = model.getUndoManager().popUndo();
             new AddCommand().executeUndo(previousTask, model);
             break;
-        case "Edit":
+        case EditCommand.COMMAND_WORD:
             previousTask = model.getUndoManager().popUndo();
             Task editedTask = model.getUndoManager().popEdited();
             new EditCommand().executeUndo(previousTask, editedTask, model);

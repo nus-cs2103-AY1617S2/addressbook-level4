@@ -7,6 +7,7 @@ import java.util.Optional;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.UncheckCommand;
+import seedu.task.model.UndoManager;
 
 public class UncheckedCommandParser {
     public Command parse(String args) {
@@ -16,6 +17,10 @@ public class UncheckedCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UncheckCommand.MESSAGE_USAGE));
         }
+
+        // Add the undo entry after the UncheckCommand is successfully parsed.
+        UndoManager.pushCommand(UncheckCommand.COMMAND_WORD);
+
         return new UncheckCommand(index.get());
     }
 }

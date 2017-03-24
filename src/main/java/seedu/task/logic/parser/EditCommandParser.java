@@ -16,8 +16,10 @@ import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.UndoManager;
 import seedu.task.model.tag.UniqueTagList;
 
+//@@author A0146789H
 /**
  * Parses input arguments and creates a new EditCommand object
  */
@@ -54,6 +56,9 @@ public class EditCommandParser {
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
+
+        // Add the undo entry after successfully parsing an EditCommand.
+        UndoManager.pushCommand(EditCommand.COMMAND_WORD);
 
         return new EditCommand(index.get(), editTaskDescriptor);
     }
