@@ -32,7 +32,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullName() {
+    public String getTitle() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
@@ -74,7 +74,7 @@ public class TaskCardHandle extends GuiHandle {
 
     //TODO only works for v0.2
     public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getTitle().fullTitle)
+        return getTitle().equals(task.getTitle().fullTitle)
                 && getPhone().equals(getDisplayedDate(task))
                 && getLocation().equals(task.getLocation().value)
                 && getTags().equals(getTags(task.getTags()));
@@ -96,7 +96,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
+            return getTitle().equals(handle.getTitle())
                     && getPhone().equals(handle.getPhone())
                     && getLocation().equals(handle.getLocation())
                     && getTags().equals(handle.getTags());
@@ -106,6 +106,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getLocation();
+        return getTitle() + " " + getLocation();
     }
 }
