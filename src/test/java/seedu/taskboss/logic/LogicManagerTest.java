@@ -506,6 +506,7 @@ public class LogicManagerTest {
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
+            categories.add(new Category("AllTasks"));
             return new Task(name, privatePriorityLevel, startDateTime,
                     endDateTime, privateInformation, categories);
         }
