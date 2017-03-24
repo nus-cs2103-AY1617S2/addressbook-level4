@@ -47,7 +47,7 @@ public class CommandBox extends UiView {
     private void configureKeyCombinations() {
         FxViewUtil.setKeyCombination(commandTextField, new KeyCodeCombination(KeyCode.TAB),
             event -> handleCommandInputAutoComplete());
-        FxViewUtil.setKeyCombination(commandTextField, new KeyCodeCombination(KeyCode.ENTER),
+        FxViewUtil.setKeyCombination(commandTextField, new KeyCodeCombination(KeyCode.RIGHT),
             event -> handleCommandInputSelectSuggestedCommand());
     }
 
