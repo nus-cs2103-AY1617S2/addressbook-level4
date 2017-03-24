@@ -17,7 +17,7 @@ public class Task implements ReadOnlyTask  {
     public static final int EVENT_PRIORITY = 0;
     public static final int FLOATING_TASK_PRIORITY = 1;
     public static final int DEADLINE_PRIORITY = 2;
-    
+
     private Title title;
     private DateTime endDateTime;
     private DateTime startDateTime;
@@ -100,7 +100,7 @@ public class Task implements ReadOnlyTask  {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(title, endDateTime, startDateTime, location, tags);
     }
-    
+
     /**
      * Computes task's priority which determines the ordering of index
      */
