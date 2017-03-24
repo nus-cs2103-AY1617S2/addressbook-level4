@@ -349,6 +349,11 @@ public class Task implements Comparable<Task> {
      * @throws CloneNotSupportedException
      */
     public Task getNextRecurringTask() {
+        LocalDateTime nextRecurringStartDateTime = getNextRecurringDateTime(this.getStartDateTime());
+        LocalDateTime nextRecurringEndDateTime = getNextRecurringDateTime(this.getEndDateTime());
+        if (nextRecurringEndDateTime.isAfter(recurringEndDateTime)) {
+            return null;
+        }
         assert this.isRecurring();
         Task task;
         try {
@@ -357,8 +362,8 @@ public class Task implements Comparable<Task> {
             throw new RuntimeException("Task cannot be cloned.");
         }
         task.setCompleted(false);
-        task.setStartDateTime(getNextRecurringDateTime(this.getStartDateTime()));
-        task.setEndDateTime(getNextRecurringDateTime(this.getEndDateTime()));
+        task.setStartDateTime(nextRecurringStartDateTime);
+        task.setEndDateTime(nextRecurringEndDateTime);
         return task;
     }
 

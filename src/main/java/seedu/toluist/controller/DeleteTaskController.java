@@ -62,7 +62,9 @@ public class DeleteTaskController extends Controller {
         todoList.remove(task);
         if (task.isRecurring()) {
             Task nextRecurringTask = task.getNextRecurringTask();
-            todoList.add(nextRecurringTask);
+            if (nextRecurringTask != null) {
+                todoList.add(nextRecurringTask);
+            }
         }
         String taskType = task.isEvent() ? "Event" : "Task";
         return new CommandResult(String.format(RESULT_MESSAGE_DELETE_TASK, taskType, task.getDescription()));

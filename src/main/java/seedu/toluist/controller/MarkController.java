@@ -69,7 +69,9 @@ public class MarkController extends Controller {
             task.setCompleted(isCompleted);
             if (task.isRecurring()) {
                 Task nextRecurringTask = task.getNextRecurringTask();
-                todoList.add(nextRecurringTask);
+                if (nextRecurringTask != null) {
+                    todoList.add(nextRecurringTask);
+                }
             }
         }
         String indexString = CollectionUtil.toString(", ", taskIndexes);
