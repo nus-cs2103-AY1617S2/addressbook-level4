@@ -29,10 +29,29 @@ public interface ReadOnlyTask {
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
-        return other == this // short circuit if same object
-                || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription())
-                && other.getFinishedStatus().equals(this.getFinishedStatus())); // state checks here onwards
+        return other == this  // short circuit if same object
+                || (other != null  // this is first to avoid NPE below
+                && other.getDescription().equals(this.getDescription())  // state checks here onwards
+                && other.getFinishedStatus().equals(this.getFinishedStatus())
+                && other.getPriority().equals(this.getPriority())
+                && areEqualDates(other.getStartDate(), this.getStartDate())
+                && areEqualDates(other.getEndDate(), this.getEndDate()));
+    }
+
+    /**
+     * Check whether 2 Date objects are equal or not
+     * @return: true if both are null, or, both are not null with the same value. false otherwise.
+     */
+    default boolean areEqualDates(Date date1, Date date2) {
+        // case 1: both are null, considered as equal
+        if (date1 == null && date2 == null) {
+            return true;
+        }
+        // case 2: both are not null and the values are equal
+        if (date1 != null && date2 != null) {
+            return date1.equals(date2);
+        }
+        return false;
     }
 
     /**
