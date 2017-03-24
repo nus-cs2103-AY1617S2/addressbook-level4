@@ -1,5 +1,7 @@
 package seedu.toluist.dispatcher;
 
+import java.util.Set;
+
 /**
  * Dispatcher is the bridge between the UI input & Controller
  * It acts like a Router in a MVC. From the input, it deduces what is the appropriate
@@ -19,4 +21,9 @@ public abstract class Dispatcher {
      * @param command command to be executed
      */
     public abstract void dispatch(String command);
+
+    /**
+     * Returns set of keywords/command words used by Controllers
+     */
+    public abstract Set<String> getControllerKeywords();
 }

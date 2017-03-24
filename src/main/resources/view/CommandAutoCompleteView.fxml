@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
 
 
-<ListView fx:id="suggestedCommandListView" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" />
+<VBox fx:id="suggestedCommandList" style="-fx-background-color: white;" stylesheets="@../stylesheet/DefaultTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" />

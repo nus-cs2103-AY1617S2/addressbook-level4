@@ -100,35 +100,6 @@ public class MainWindow extends UiPart<Region> {
         configureSwitchTabKeyCombinations();
     }
 
-    /**
-     * Sets the key combination on root.
-     * @param keyCombination the KeyCombination value of the accelerator
-     * @param handler the event handler
-     */
-    private void setKeyCombination(KeyCombination keyCombination, EventHandler<ActionEvent> handler) {
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultView contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultView.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (keyCombination.match(event)) {
-                handler.handle(new ActionEvent());
-                event.consume();
-            }
-        });
-    }
-
     void hide() {
         primaryStage.hide();
     }
@@ -140,7 +111,7 @@ public class MainWindow extends UiPart<Region> {
                     KeyCombination.CONTROL_DOWN);
             String switchCommand = "switch " + tabName;
             EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(switchCommand);
-            setKeyCombination(keyCombination, handler);
+            FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
         });
     }
 

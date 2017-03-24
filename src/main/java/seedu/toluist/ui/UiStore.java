@@ -6,9 +6,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -33,6 +36,8 @@ public class UiStore {
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));
     private SimpleStringProperty observableCommandText = new SimpleStringProperty("");
+    private ObservableList<String> observableSuggestedCommands = FXCollections.observableArrayList();
+    private SimpleIntegerProperty observableSuggestedCommandIndex = new SimpleIntegerProperty(-1);
 
     public static UiStore getInstance() {
         if (instance == null) {
@@ -78,12 +83,30 @@ public class UiStore {
         return observableCommandText;
     }
 
+    public void setSuggestedCommands(List<String> suggestedCommands) {
+        observableSuggestedCommandIndex.set(-1);
+        observableSuggestedCommands.setAll(suggestedCommands);
+    }
+
+    public ObservableList<String> getObservableSuggestedCommands() {
+        return observableSuggestedCommands;
+    }
+
     public void setCommandText(String commandText) {
         observableCommandText.set(commandText);
     }
 
     public ObservableValue<CommandResult> getObservableCommandResult() {
         return observableCommandResult;
+    }
+
+    public void incrementSuggestedCommandIndex() {
+        observableSuggestedCommandIndex.set((observableSuggestedCommandIndex.get() + 1) %
+                observableSuggestedCommands.size());
+    }
+
+    public ObservableIntegerValue getObservableSuggestedCommandIndex() {
+        return observableSuggestedCommandIndex;
     }
 
     public void setTasks(ArrayList<Task> tasks) {

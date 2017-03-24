@@ -60,7 +60,8 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public void dispatch(String command) {
-        String deAliasedCommand = aliasConfig.dealias(command);
+        String trimmedCommand = command.trim();
+        String deAliasedCommand = aliasConfig.dealias(trimmedCommand);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
         Controller controller = getBestFitController(deAliasedCommand);
@@ -70,6 +71,23 @@ public class CommandDispatcher extends Dispatcher {
             ((HistoryController) controller).setCommandHistory(commandHistory);
         }
         controller.execute(deAliasedCommand);
+    }
+
+    public Set<String> getControllerKeywords() {
+        List<String> keywordList = getAllControllerClasses()
+                .stream()
+                .map((Class<? extends Controller> klass) -> {
+                    try {
+                        final String methodName = "getCommandWords";
+                        Method method = klass.getMethod(methodName);
+                        return Arrays.asList((String[]) method.invoke(null));
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        return new ArrayList<String>();
+                    }
+                })
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+        return new HashSet<>(keywordList);
     }
 
     private void recordCommand(String command) {
@@ -125,22 +143,5 @@ public class CommandDispatcher extends Dispatcher {
                     }
                 })
                 .collect(Collectors.toList());
-    }
-
-    private Set<String> getControllerKeywords() {
-        List<String> keywordList = getAllControllerClasses()
-                .stream()
-                .map((Class<? extends Controller> klass) -> {
-                    try {
-                        final String methodName = "getCommandWords";
-                        Method method = klass.getMethod(methodName);
-                        return Arrays.asList((String[]) method.invoke(null));
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                        return new ArrayList<String>();
-                    }
-                })
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
-        return new HashSet<>(keywordList);
     }
 }

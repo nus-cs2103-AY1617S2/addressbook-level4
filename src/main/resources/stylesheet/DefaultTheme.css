@@ -128,3 +128,8 @@
     -fx-background-color: derive(theme-accent, -10%);
 }
 
+/* COMMAND SUGGESTION */
+
+.command-suggestion.selected {
+    -fx-background-color: theme-primary;
+}
