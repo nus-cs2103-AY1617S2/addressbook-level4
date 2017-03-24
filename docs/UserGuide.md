@@ -61,19 +61,22 @@ To start the application, double-click on `ezDo.jar`. The user interface should 
 
 Figure 2 above illustrates some features that you will find useful when you embark on ezDo:
 
-1. **Command Box**
+1. **Command Box**<br>
 Your commands should be typed here.<br><br>
-2. **Description Box**
+2. **Description Box**<br>
 The results of your command executions will be shown here.<br><br>
-3. **Task Card**
-Each task in ezDo is represented by a task card with the following properties:<br><br>
-    * Each task card has an index on the left.<br><bR>
-    * The color bar on the left indicates its priority. <br><br>
+3. **Task Card**<br>
+Each task in ezDo is represented by a task card with the following properties:<br>
+    * Each task card has an index on the left.<br>
+    * The color bar on the left indicates its priority.<br> 
         * <font color="green">Green</font>: low priority <br>
         * <font color="orange">Orange</font>: medium priority <br>
-        * <font color="red">Red</font>: high priority <br><br>
+        * <font color="red">Red</font>: high priority 
     * Task cards may have a start/end time.<br>
     * Task cards may have any number of tags associated with it.<br>
+
+4. **Tags**<br>
+Each task may have some tags associated with it. Tags are a way for you to group and classify your tasks.
 
 Now that we are familiar with ezDo's interface, let us get started with the features of ezDo!<br>
 
@@ -129,9 +132,9 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 
 <br>
 
-> - Add as many tags as you want to a task<br><br>
+> - Add as many tags as you want to a task, if required.<br><br>
 > - Add a **`STARTDATE`** or **`DUEDATE`** if required. Refer to Table 2 for examples of **`STARTDATE`** and **`DUEDATE`**.<br><br>
-> - Mark tasks with **`PRIORITY`** level 1, 2 or 3, with 1 the lowest priority and 3 the highest.<br>
+> - Mark tasks with **`PRIORITY`** level 1, 2 or 3, with 1 the lowest priority and 3 the highest, if required.<br>
 
 <br>
 
@@ -154,13 +157,13 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 <br>
 
 #### Examples:
-* Buy milk:
+* Buy milk:<br>
 **`add Buy milk`** <br><br>
-* Buy plane tickets to Hong Kong urgently:
+* Buy plane tickets to Hong Kong urgently:<br>
 **`a Buy plane tickets to Hong Kong p/3`** <br><br>
-* Buy a table by 03/02/2017 13:00:
+* Buy a table by 03/02/2017 13:00:<br>
 **`add Buy a table d/03/02/2017 13:00 t/watchingTV`** <br><br>
-* Start marking CS2101 reflections on 01/03/2017 08:00:
+* Start marking CS2101 reflections on 01/03/2017 08:00:<br>
 **`a Mark CS2101 reflections s/01/03/2017 08:00 t/school`** <br>
 
 <br>
@@ -182,7 +185,7 @@ _**Edits a particular task by <u>specifying its index</u> and <u> new informatio
 
 #### Example:
 
-This task has just been added at index 1 with the Add command:
+This task has just been added at `INDEX` 1 with the `add` command:
 
  **`add Buy milk p/1 t/NTUC`**<br>
 
@@ -210,8 +213,7 @@ _**Marks the task at a specified index as done.**_<br>
 
 <br>
 
-> - Index refers to the index number of the tasks shown in the most recent listing.<br><br>
-> - You must input a valid index.<br><br>
+> - `INDEX` refers to the index number of the tasks shown in the most recent listing.<br><br>
 > - Once a task is marked as done, it will be removed from the task list and added to the done list.<br><br>
 > - View the done list with the command `done` without any index specified.
 
@@ -219,9 +221,9 @@ _**Marks the task at a specified index as done.**_<br>
 
 #### Example:
 
-* Mark the task at index 1 as done:
+* Mark the task at `INDEX` 1 as done:<br>
 **`d 1`** <br>
-* Mark the task at index 3 as done:
+* Mark the task at `INDEX` 3 as done:<br>
 **`done 3`** <br>
 
 <br>
@@ -237,17 +239,17 @@ _**Marks the task at a specified index as deleted.**_<br>
 
 <br>
 
-> - Index refers to the index number of the tasks shown in the most recent listing.<br><br>
-> - You must input a valid index.<br><br>
+> - `INDEX` refers to the index number of the tasks shown in the most recent listing.<br><br>
+> - You must input a valid `INDEX`.<br><br>
 > - Once a task is deleted, it will be removed from the task list.<br><br>
 
 <br>
 
 #### Example:
 
-* Delete the task at index 2:
+* Delete the task at index 2:<br>
 **`kill 2`** <br><br>
-* Delete the task at index 4:
+* Delete the task at index 4:<br>
 **`k 4`** <br>
 
 <br>
@@ -323,9 +325,9 @@ _**Finds tasks whose information contains any of the given keywords specified by
 
 #### Examples:
 
-*  Find tasks that have a due date on `20/03/2017`:
+*  Find tasks that have a due date on `20/03/2017`:<br>
 **`f d/20/03/2017`** <br><br>
-*  Find tasks containing `School` with a priority of `1`:
+*  Find tasks containing `School` with a priority of `1`:<br>
 **`find School p/1`** <br>
 
 <br>
@@ -389,7 +391,7 @@ _**Moves the save file of ezDo to a specified directory.**_<br>
 <br>
 
 #### Example:
-* Move the save file of ezDo to `C:/Desktop`:
+* Move the save file of ezDo to `C:/Desktop`:<br>
 **`save C:/Desktop`** <br>
 
 <br>
