@@ -14,7 +14,9 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.UndoManager;
 
+//@@author A0146789H
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -49,6 +51,9 @@ public class AddCommandParser {
             if (args.contains("#")) {
                 tagSet = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
             }
+
+            // Add the undo entry after successfully parsing an AddCommand
+            UndoManager.pushCommand(AddCommand.COMMAND_WORD);
 
             return new AddCommand(
                     taskName,
