@@ -35,6 +35,8 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority();
         this.finishedStatus = taskToCopy.getFinishedStatus();
         this.tags = taskToCopy.getTags();
+        this.startDate = taskToCopy.getStartDate();
+        this.endDate = taskToCopy.getEndDate();
     }
 
     public void setName(Description desc) {
@@ -103,6 +105,10 @@ public class TestTask implements ReadOnlyTask {
         if (!this.getTags().isEmpty()) {
             sb.append("\\under");
             this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));
+        }
+        if 
+        (this.getStartDate() != null && this.getEndDate() != null) {
+            sb.append("\\from " + this.getStartDate().toString() + " \\to " + this.getEndDate().toString());
         }
         return sb.toString();
     }
