@@ -14,13 +14,13 @@ public class ClearCommandTest extends TaskBossGuiTest {
         assertClearCommandSuccess(false);
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(taskListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.taskH.getAddCommand());
+        assertTrue(taskListPanel.isListMatching(td.taskH));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
         //verify the short clear command can work
-        commandBox.runCommand(td.kelvin.getShortAddCommand());
+        commandBox.runCommand(td.taskK.getShortAddCommand());
         assertListSize(1);
         assertClearCommandSuccess(true);
 
