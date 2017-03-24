@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
@@ -46,7 +45,7 @@ public class CommandBox extends UiPart<Region> {
         addToPlaceholder(commandBoxPlaceholder);
 
         commandTextField.textProperty().addListener((observable, oldValue, newValue)
-            -> highlightSyntax(observable, oldValue, newValue));
+            -> highlightSyntax(newValue));
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -56,7 +55,7 @@ public class CommandBox extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
 
-    private void highlightSyntax(ObservableValue<?> value, String oldValue, String newValue) {
+    private void highlightSyntax(String newValue) {
         CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
         String content = newValue;
         highlightManager.highlight(commandTextField, content);

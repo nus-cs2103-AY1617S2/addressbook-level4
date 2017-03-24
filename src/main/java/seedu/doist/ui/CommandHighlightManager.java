@@ -18,7 +18,7 @@ public class CommandHighlightManager {
 
     private static CommandHighlightManager instance;
 
-    static CommandHighlightManager getInstance() {
+    protected static CommandHighlightManager getInstance() {
         if (instance == null) {
             instance = new CommandHighlightManager();
         }
