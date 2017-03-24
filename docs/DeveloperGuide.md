@@ -86,7 +86,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/project/taskcrusher/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -144,13 +144,13 @@ Author: Yoshi Nishimura
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/project/taskcrusher/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `UserInboxPanel` and its components, and `StatusBarFooter`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/project/taskcrusher/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -160,11 +160,8 @@ The `UI` component,
 * Responds to events raised from various parts of the App and updates the UI accordingly. For example, when the user has made changes to the underlying `Model` data by deleting a task, the `statusBar` will update its `syncStatus` field through `UserInboxChangedEvent`.
 
 **The `UserInboxPanel`:**
-- Consists of two sub-components, namely, `TaskListPanel` and `EventListPanel`.
-- These two panels consists of:
-1. A header in the form of `Label` i.e. "Tasks" for `TaskListPanel` and "Events" for `EventListPanel`
-2. Corresponding `ListView` i.e. `taskList` for `TaskListPanel` and `eventList` for `EventListPanel`
-- The visibility of these two sub-components will be altered according to the command entered. For example, if the user wants to list tasks whose deadlines are set before next Monday, he would type in `list t d/next Monday`. This command would set the visibility of `EventListPanel` to hidden so that the user can use the entire window to list the tasks he/she is interested in. 
+- contains two `ListView`s, namely, `taskList` and `eventList`.
+- The visibility of these two lists will be altered according to the command entered. For example, if the user wants to list tasks whose deadlines are set before next Monday, he would type in `list t d/next Monday`. This command would set the visibility of `eventList` to hidden so that the user can use the entire window to list the tasks he/she is interested in. This is accomplished by the `Model` posting `taskListToShowUpdatedEvent` and `eventListShowUpdatedEvent` and the `UserInboxPanel` listening to these events to determine whether the filtered lists are empty or not.
 
 ### 2.3. Logic component
 
@@ -173,7 +170,7 @@ Author: Brea Dionisio
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/project/taskcrusher/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. `Parser` calls the appropriate parser for the identified command, e.g. `AddCommandParser` and `DeleteCommandParser`
@@ -194,31 +191,31 @@ Author: Yoshi Nishimura
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/project/taskcrusher/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the User inbox data, including the list of events, list of tasks and list of tags associated with the items in user inbox.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` and `UnmodifiableObservableList<ReadOnlyEvent>` that can be 'observed' e.g. the `TaskListPanel` and `EventListPanel` in UI can be notified of any updates so that the UI automatically updates when the data in the list change.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` and `UnmodifiableObservableList<ReadOnlyEvent>` that can be 'observed' e.g. the `UserInboxPanel` in UI can be notified of any updates so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 * `Task` and `Event` inherits of `UserItem`.
 
-**Tasks** consists of:
+**Task** consists of:
 1. Name
-2. Deadline (may not be set)
-3. Priority (default = 0)
-4. Description (may not be set)
+2. Deadline (optional)
+3. Priority: 1, 2, 3 in ascending order (optional. default = 0)
+4. Description (optional)
 5. Zero or more tags
 
-**Events** consists of:
+**Event** consists of:
 1. Name
 2. One or more Timeslots
-3. Location (may not be set)
-4. Description (may not be set)
+3. Location (optional)
+4. Description (optional)
 5. Zero or more tags
 
-**Note**: the reason why although some elements are optional but are still tied as composition is that when they are not supplied by the user, the `Model` would set their values to empty values (e.g. empty string).
+**Note**: the reason why although some elements are optional but are still tied as composition is that when they are not supplied by the user, the `Model` would set their values to default values (e.g. empty string).
 
 ### 2.5. Storage component
 
@@ -227,13 +224,13 @@ Author: Yoshi Nishimura
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/project/taskcrusher/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the User inbox data in xml format and read it back.
-* gets notified of the changes in model by `UserInboxChangedEvent` posted by the `Model` each time it updates the data upon executing add, delete or edit. This way, the coupling between `Storage` and `Model` is reduced. 
+* can save the `UserInbox` data in xml format and read it back.
+* gets notified of the changes in model by `UserInboxChangedEvent` posted by the `Model` each time it updates the data upon executing add, delete or edit. This way, the coupling between `Storage` and `Model` is reduced.
 
 ### 2.6. Common classes
 
@@ -288,13 +285,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `project.taskcrusher.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `project.taskcrusher.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `project.taskcrusher.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -357,7 +354,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Taskcrusher depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
