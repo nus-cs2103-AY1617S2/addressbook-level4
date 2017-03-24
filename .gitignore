@@ -10,8 +10,8 @@ lib/*
 .DS_Store
 ./screenshot*.png
 classes/
-data/
-bin/
+/data/
+/bin/
 preferences.json
 src/test/data/sandbox/
 config.json
