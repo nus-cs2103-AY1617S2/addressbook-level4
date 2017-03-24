@@ -120,8 +120,8 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class TaskManagerTest extends Test {
-    public TaskManagerTest() {
+class GeeKeepTest extends Test {
+    public GeeKeepTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
@@ -146,7 +146,7 @@ class TaskManagerTest extends Test {
     }
 }
 
-task guiTests(type: TaskManagerTest) {
+task guiTests(type: GeeKeepTest) {
     include 'guitests/**'
 
     jacoco {
@@ -155,7 +155,7 @@ task guiTests(type: TaskManagerTest) {
 }
 
 
-task nonGuiTests(type: TaskManagerTest) {
+task nonGuiTests(type: GeeKeepTest) {
     include 'seedu/geekeep/**'
 
     jacoco {
@@ -164,7 +164,7 @@ task nonGuiTests(type: TaskManagerTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: TaskManagerTest) {
+task allTests(type: GeeKeepTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }
