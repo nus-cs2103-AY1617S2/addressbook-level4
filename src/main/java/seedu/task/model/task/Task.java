@@ -35,7 +35,7 @@ public class Task implements ReadOnlyTask {
 	this.taskStartTime = taskStartTime;
 	this.taskEndTime = taskEndTime;
 	this.taskDescription = taskDescription;
-	this.taskStatus = new TaskStatus("Ongoing");
+	this.taskStatus = taskStatus;
 	this.tags = new UniqueTagList(tags); // protect internal tags from
 					     // changes in the arg list
     }

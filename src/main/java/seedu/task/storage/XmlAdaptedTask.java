@@ -81,8 +81,8 @@ public class XmlAdaptedTask {
 	final TaskTime taskStartTime = new TaskTime(this.taskStartTime);
 	final TaskTime taskEndTime = new TaskTime(this.taskEndTime);
 	final String taskDescription = this.taskDescription;
-	//final TaskStatus taskStatus = new TaskStatus(this.taskStatus.toString());
+	final TaskStatus taskStatus = new TaskStatus(this.taskStatus.toString());
 	final UniqueTagList tags = new UniqueTagList(taskTags);
-	return new Task(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,null, tags);
+	return new Task(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,taskStatus, tags);
     }
 }
