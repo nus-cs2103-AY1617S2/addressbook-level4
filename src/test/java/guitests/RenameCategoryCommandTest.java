@@ -68,7 +68,12 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RenameCategoryCommandParser.ERROR_NON_ALPHANUMERIC));
 
+        //category name does not exist
         commandBox.runCommand("name superman batman");
         assertResultMessage("[superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
+
+        //category name is AllTasks
+        commandBox.runCommand("name AllTasks batman");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
     }
 }

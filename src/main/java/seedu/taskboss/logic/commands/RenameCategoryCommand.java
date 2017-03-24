@@ -22,6 +22,8 @@ public class RenameCategoryCommand extends Command {
             + " || " + COMMAND_WORD_SHORT + " Home HomeSweetHome";
 
     public static final String MESSAGE_SUCCESS = "Category successfully renamed!";
+    //@@author A0144904H
+    public static final String MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME = "All Tasks category cannot be renamed";
     public static final String MESSAGE_DUPLICATE_CATEGORY = "This category already exists in TaskBoss.";
     public static final String MESSAGE_DOES_NOT_EXIST_CATEGORY = "This category does not exist in TaskBoss.";
 
@@ -42,12 +44,17 @@ public class RenameCategoryCommand extends Command {
         Category newCategory = new Category(this.newCategory);
         model.updateFilteredTaskListByCategory(oldCategory);
 
-        try {
-            model.renameCategory(oldCategory, newCategory);
-            model.updateFilteredTaskListByCategory(newCategory);
-            return new CommandResult(MESSAGE_SUCCESS);
-        } catch (UniqueCategoryList.DuplicateCategoryException e) {
-            return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
+        //@@author A0144904H
+        if (oldCategory.equals(new Category(AddCommand.DEFAULT))) {
+            throw new CommandException(RenameCategoryCommand.MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
+        } else {
+            try {
+                model.renameCategory(oldCategory, newCategory);
+                model.updateFilteredTaskListByCategory(newCategory);
+                return new CommandResult(MESSAGE_SUCCESS);
+            } catch (UniqueCategoryList.DuplicateCategoryException e) {
+                return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
+            }
         }
 
     }
