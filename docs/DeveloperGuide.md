@@ -10,6 +10,12 @@ By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
      1.3 Configuring Checkstyle<br/>
      1.4 Troubleshooting project setup<br/>
 2. [Design](#design)
+   > 2.1 Architecture<br/>
+     2.2 UI component<br/>
+     2.3 Logic component<br/>
+     2.4 Model component<br/>
+     2.5 Storage component<br/>
+     2.6 Common classes<br/>
 3. [Implementation](#implementation)
 0. [Introduction](#introduction)
 1. [Setting Up](#setting-up)
