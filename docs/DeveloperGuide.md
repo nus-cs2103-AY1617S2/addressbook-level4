@@ -3,7 +3,10 @@
 By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
-
+0. [Introduction](#introduction)
+1. [Setting Up](#setting-up)
+   > 1.1 Prerequisites<br/>
+     1.2 Importing the project into Eclipse<br/>
      1.3 Configuring Checkstyle<br/>
      1.4 Troubleshooting project setup<br/>
 2. [Design](#design)
@@ -94,35 +97,35 @@ Please ensure you have the following prerequisites before contributing to develo
    <img src="images/Architecture.png" width="600"><br>
    Figure 2.1.1 : Architecture Diagram
 </p>
-
+<br/>
 The **_Architecture Diagram_** above condenses the high-level design of Burdens.<br/>
 Here is a quick overview of the main components of Burdens and their functions:
 
-**`Main`**
+**`Main`**<br/>
 The 'Main' component has one class: [MainApp](../src/main/java/seedu/address/MainApp.java). <br/>
 During application launch, it intialises all components of Burdens in proper sequence and connects them.<br/>
 During application shutdown, it ceases all ongoing operations of Burdens and invokes cleanup when necessary.<br/>
-
-**`Commons`**
+<br/>
+**`Commons`**<br/>
 ['Commons'](#common-classes) represents a collection of classes used by multiple other components.<br/>
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : Written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained), this class
   is used by components to communicate with other components using events.
 * `LogsCenter` : Used by many classes to write log messages to Burdens' log file to record system information and events.
-
+<br/>
 **`UI`**<br/>
 The ['UI'](#ui-component) component handles display interactions on screen such as data and results of the task lists.
-
+<br/>
 **`Logic`**<br/>
 The ['Logic'](#logic-component) component handles the process and execution of user's commands.
-
+<br/>
 **`Model`**<br/>
 The ['Model'](#model-component) handles data representation and data structures of Burdens.
-
+<br/>
 **`Storage`**<br/>
 The ['Storage'](#storage-component) handles the process of reading data from and writing data to the hard disk.
-
+<br/>
 Each of the ** `UI` , `Logic`, `Model`, `Storage`** components:
 
 * Defines its _API_ in an `interface` with the same name as the Component.
@@ -204,7 +207,7 @@ API call.<br>
 ### 2.4 Model component
 `Model` manages and stores Burdens's tasklist data and user's preferences. <br>
 `Model` exposes an UnmodifiableObservableList<ReadOnlyTask> that can be 'observed' by other components<br>
-&nbsp;&nbsp; e.g. the UI can be bound to this list and will automatically update when the data in the list change.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e.g. the UI can be bound to this list and will automatically update when the data in the list change.
 <p align="center">
    <img src="images/ModelClassDiagram.png" width="800"><br>
    Figure 2.4.1 : Structure of the Model Component
