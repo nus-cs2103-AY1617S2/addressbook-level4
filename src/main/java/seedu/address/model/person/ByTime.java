@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -13,7 +14,7 @@ import seedu.address.commons.util.StringUtil;
 public class ByTime {
 
     public static final String MESSAGE_BYTIME_CONSTRAINTS =
-            "Deadline ByTime can only be in this format: HH:MM(AM/PM) format, e.g. 12:00pm";
+            "Deadline ByTime can only be in this format: hhmm, e.g. 1300";
 
     public final LocalTime value;
 //@@author A0110491U A0121668A
@@ -29,7 +30,7 @@ public class ByTime {
         else {
             try {
                 this.value = StringUtil.parseStringToTime(byTimeArg);
-            } catch (IllegalValueException illegalValueException) {
+            } catch (DateTimeException illegalValueException) {
                 throw new IllegalValueException(MESSAGE_BYTIME_CONSTRAINTS);
                 }
             }

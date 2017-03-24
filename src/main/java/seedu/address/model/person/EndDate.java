@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -28,7 +29,7 @@ public class EndDate {
         } else {
         	try {
         		this.value = StringUtil.parseStringToDate(endDateArg);
-        	} catch (IllegalValueException illegalValueException) {
+        	} catch (DateTimeException illegalValueException) {
         		throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
         	}
         }
