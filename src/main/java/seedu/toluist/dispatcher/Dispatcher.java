@@ -1,6 +1,7 @@
 package seedu.toluist.dispatcher;
 
 import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * Dispatcher is the bridge between the UI input & Controller
@@ -23,7 +24,8 @@ public abstract class Dispatcher {
     public abstract void dispatch(String command);
 
     /**
-     * Returns set of keywords/command words used by Controllers
+     * Returns set of possible command extensions from a command
+     * @param command a command
      */
-    public abstract Set<String> getControllerKeywords();
+    public abstract SortedSet<String> getPredictedCommands(String command);
 }

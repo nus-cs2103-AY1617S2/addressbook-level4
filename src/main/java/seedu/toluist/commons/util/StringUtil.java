@@ -16,7 +16,7 @@ public class StringUtil {
      * @param string
      */
     public static boolean isPresent(String string) {
-        return string != null && !string.isEmpty();
+        return string != null && !string.trim().isEmpty();
     }
 
     /**

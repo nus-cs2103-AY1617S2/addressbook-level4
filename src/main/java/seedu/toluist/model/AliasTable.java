@@ -1,5 +1,7 @@
 package seedu.toluist.model;
 
+import seedu.toluist.commons.util.StringUtil;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -91,8 +93,7 @@ public class AliasTable {
 
         for (String alias : aliasMapping.keySet()) {
             if (firstWord.equals(alias)) {
-                wordsInCommand[0] = aliasMapping.get(alias);
-                return String.join(" ", wordsInCommand);
+                return StringUtil.replaceFirstWord(command, aliasMapping.get(alias));
             }
         }
         return command;

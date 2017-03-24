@@ -32,8 +32,7 @@ public class CommandBox extends UiView {
         store.bind(this, store.getObservableCommandText());
         commandTextField.textProperty().addListener((observable, oldValue, newValue) ->
                 handleCommandInputChanged(newValue));
-        FxViewUtil.setKeyCombination(commandTextField.getParent(), new KeyCodeCombination(KeyCode.TAB),
-                event -> store.incrementSuggestedCommandIndex());
+        configureKeyCombinations();
     }
 
     @Override
@@ -45,6 +44,13 @@ public class CommandBox extends UiView {
         commandTextField.end();
     }
 
+    private void configureKeyCombinations() {
+        FxViewUtil.setKeyCombination(commandTextField, new KeyCodeCombination(KeyCode.TAB),
+                event -> handleCommandInputAutoComplete());
+        FxViewUtil.setKeyCombination(commandTextField, new KeyCodeCombination(KeyCode.ENTER),
+                event -> handleCommandInputSelectSuggestedCommand());
+    }
+
     @FXML
     private void handleCommandInputEntered() {
         dispatcher.dispatchRecordingHistory(commandTextField.getText());
@@ -52,16 +58,29 @@ public class CommandBox extends UiView {
     }
 
     private void handleCommandInputChanged(String newCommand) {
-        String commandFirstWord = newCommand.trim().split("\\s+")[0];
+        UiStore.getInstance().setSuggestedCommands(
+                new ArrayList(dispatcher.getPredictedCommands(newCommand)));
+    }
 
-        if (!StringUtil.isPresent(commandFirstWord)) {
-            UiStore.getInstance().setSuggestedCommands(new ArrayList<>());
+    private void handleCommandInputAutoComplete() {
+        UiStore store = UiStore.getInstance();
+        store.incrementSuggestedCommandIndex();
+
+        List<String> suggestedCommands = store.getObservableSuggestedCommands();
+        if (suggestedCommands.size() == 1) {
+            store.setCommandText(suggestedCommands.get(0));
+        }
+    }
+
+    private void handleCommandInputSelectSuggestedCommand() {
+        UiStore store = UiStore.getInstance();
+        List<String> suggestedCommands = store.getObservableSuggestedCommands();
+
+        if (suggestedCommands.isEmpty()) {
             return;
         }
 
-        ArrayList<String> commandWords = new ArrayList(new TreeSet(dispatcher.getControllerKeywords()));
-        List<String> filteredCommandWords = commandWords.stream()
-                .filter(commandWord -> commandWord.startsWith(commandFirstWord)).collect(Collectors.toList());
-        UiStore.getInstance().setSuggestedCommands(filteredCommandWords);
+        int index = store.getObservableSuggestedCommandIndex().get();
+        store.setCommandText(suggestedCommands.get(index));
     }
 }

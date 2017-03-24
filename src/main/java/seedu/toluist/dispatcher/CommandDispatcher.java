@@ -9,12 +9,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.AddTaskController;
 import seedu.toluist.controller.AliasController;
 import seedu.toluist.controller.ClearController;
@@ -73,21 +77,22 @@ public class CommandDispatcher extends Dispatcher {
         controller.execute(deAliasedCommand);
     }
 
-    public Set<String> getControllerKeywords() {
-        List<String> keywordList = getAllControllerClasses()
-                .stream()
-                .map((Class<? extends Controller> klass) -> {
-                    try {
-                        final String methodName = "getCommandWords";
-                        Method method = klass.getMethod(methodName);
-                        return Arrays.asList((String[]) method.invoke(null));
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                        return new ArrayList<String>();
-                    }
-                })
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
-        return new HashSet<>(keywordList);
+    public SortedSet<String> getPredictedCommands(String command) {
+        SortedSet<String> predictedCommands = new TreeSet<>();
+
+        if (!StringUtil.isPresent(command)) {
+            return predictedCommands;
+        }
+
+        String firstWordOfCommand = command.trim().split("\\s+")[0];
+        for (String commandWord : getControllerKeywords()) {
+            if (commandWord.startsWith(firstWordOfCommand)) {
+                predictedCommands.add(command.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord));
+            }
+        }
+
+        logger.info("Predicted commands: " + predictedCommands.toString());
+        return predictedCommands;
     }
 
     private void recordCommand(String command) {
@@ -143,5 +148,22 @@ public class CommandDispatcher extends Dispatcher {
                     }
                 })
                 .collect(Collectors.toList());
+    }
+
+    private Set<String> getControllerKeywords() {
+        List<String> keywordList = getAllControllerClasses()
+                .stream()
+                .map((Class<? extends Controller> klass) -> {
+                    try {
+                        final String methodName = "getCommandWords";
+                        Method method = klass.getMethod(methodName);
+                        return Arrays.asList((String[]) method.invoke(null));
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        return new ArrayList<String>();
+                    }
+                })
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+        return new HashSet<>(keywordList);
     }
 }
