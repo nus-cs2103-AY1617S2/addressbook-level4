@@ -14,56 +14,56 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            taskA = new TaskBuilder().withName("Clean house")
-                    .withInformation("clean bedroom, study and kitchen")
+            taskA = new TaskBuilder().withName("Alice Pauline")
+                    .withInformation("123, Jurong West Ave 6, #08-111")
                     .withPriorityLevel("Yes")
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Mar 28, 2017 5pm")
-                    .withCategories("personal").build();
-            taskB = new TaskBuilder().withName("Have dinner with parents")
-                    .withInformation("ABCRestaurant, 311, Clementi Ave 2, #02-25")
+                    .withCategories("friends").build();
+            taskB = new TaskBuilder().withName("Benson Meier")
+                    .withInformation("311, Clementi Ave 2, #02-25")
                     .withPriorityLevel("No")
                     .withStartDateTime("Feb 23, 2017 10pm")
                     .withEndDateTime("Jun 28, 2017 5pm")
-                    .withCategories("family", "personal").build();
-            taskC = new TaskBuilder().withName("project meeting").withPriorityLevel("Yes")
+                    .withCategories("owesMoney", "friends").build();
+            taskC = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 11pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
-                    .withInformation("finish report").build();
-            taskD = new TaskBuilder().withName("Report submition").withPriorityLevel("Yes")
+                    .withInformation("wall street").build();
+            taskD = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 20, 2017 11.30pm")
                     .withEndDateTime("Apr 28, 2017 3pm")
-                    .withInformation("print report, submit to manager").build();
-            taskE = new TaskBuilder().withName("Fix bugs in code").withPriorityLevel("No")
+                    .withInformation("10th street").build();
+            taskE = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("No")
                     .withStartDateTime("Feb 22, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
-                    .withInformation("bugs in: part A and part D").build();
-            taskF = new TaskBuilder().withName("Product testing").withPriorityLevel("No")
+                    .withInformation("michegan ave").build();
+            taskF = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("No")
                     .withStartDateTime("Feb 21, 2017 1pm")
                     .withEndDateTime("Dec 10, 2017 5pm")
-                    .withInformation("Do it with Jack's team").build();
-            taskG = new TaskBuilder().withName("Game project player testing").withPriorityLevel("Yes")
+                    .withInformation("little tokyo").build();
+            taskG = new TaskBuilder().withName("George Best").withPriorityLevel("Yes")
                     .withStartDateTime("Jan 1, 2017 5pm")
                     .withEndDateTime("Nov 28, 2017 5pm")
-                    .withInformation("Finish all the UI and model before the test").build();
+                    .withInformation("4th street").build();
 
             // Manually added
-            taskH = new TaskBuilder().withName("Have dinner with Hoon Meier").withPriorityLevel("Yes")
+            taskH = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2018 5pm")
                     .withEndDateTime("Feb 28, 2018 5pm")
                     .withInformation("little india").build();
-            taskI = new TaskBuilder().withName("Dating").withPriorityLevel("Yes")
+            taskI = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2019 5pm")
                     .withEndDateTime("Feb 28, 2019 5pm")
                     .withInformation("chicago ave").build();
-            taskJ = new TaskBuilder().withName("Buy a laptop").withPriorityLevel("Yes")
+            taskJ = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("Yes")
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
                     .withInformation("Silicon Valley").build();
-            taskK = new TaskBuilder().withName("Attend Alice's wedding").withPriorityLevel("Yes")
+            taskK = new TaskBuilder().withName("Kelvin Koo").withPriorityLevel("Yes")
                     .withStartDateTime("Dec 20 2019")
                     .withEndDateTime("Dec 21 2019")
-                    .withInformation("Remember to bring the gift").build();
+                    .withInformation("clementi ave 2").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
