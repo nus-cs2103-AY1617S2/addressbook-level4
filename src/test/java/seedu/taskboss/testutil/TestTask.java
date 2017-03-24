@@ -100,11 +100,8 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         //@@author A0144904H
-        if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
-            sb.append("add " + "n/" + this.getName().fullName + " ");
-        } else {
-            sb.append("add " + "n/" + this.getName().fullName + "! ");
-        }
+        sb.append(" n/" + this.getName().toString());
+        sb.append(" p/" + this.getPriorityLevel().value);
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");
@@ -116,11 +113,8 @@ public class TestTask implements ReadOnlyTask {
     public String getShortAddCommand() {
         StringBuilder sb = new StringBuilder();
         //@@author A0144904H
-        if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
-            sb.append("add " + "n/" + this.getName().fullName + " ");
-        } else {
-            sb.append("add " + "n/" + this.getName().fullName + "! ");
-        }
+        sb.append(" n/" + this.getName().toString());
+        sb.append(" p/" + this.getPriorityLevel().value);
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");
