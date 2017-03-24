@@ -25,6 +25,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.dispatcher.Dispatcher;
+import seedu.toluist.ui.view.CommandAutoCompleteView;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
 import seedu.toluist.ui.view.TabBarView;
@@ -56,10 +57,14 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane tabPanePlaceholder;
 
+    @FXML
+    private AnchorPane commandAutoCompletePlaceholder;
+
     private CommandBox commandBox;
     private TaskListUiView taskListUiView;
     private ResultView resultView;
     private TabBarView tabBarView;
+    private CommandAutoCompleteView commandAutoCompleteView;
 
 
     public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
@@ -88,6 +93,7 @@ public class MainWindow extends UiPart<Region> {
         commandBox.render();
         resultView.render();
         tabBarView.render();
+        commandAutoCompleteView.render();
     }
 
     private void configureKeyCombinations() {
@@ -130,7 +136,8 @@ public class MainWindow extends UiPart<Region> {
     private void configureSwitchTabKeyCombinations() {
         String[] tabNames = new String[] { "i", "t", "n", "c", "a" };
         Arrays.stream(tabNames).forEach(tabName -> {
-            KeyCombination keyCombination = new KeyCodeCombination(getKeyCode(tabName), KeyCombination.CONTROL_DOWN);
+            KeyCombination keyCombination = new KeyCodeCombination(getKeyCode(tabName),
+                    KeyCombination.CONTROL_DOWN);
             String switchCommand = "switch " + tabName;
             EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(switchCommand);
             setKeyCombination(keyCombination, handler);
@@ -167,6 +174,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTabPanePlaceholder() {
         return tabPanePlaceholder;
+    }
+
+    private AnchorPane getCommandAutoCompletePlaceholder() {
+        return commandAutoCompletePlaceholder;
     }
 
     private void setWindowMinSize() {
@@ -219,6 +230,9 @@ public class MainWindow extends UiPart<Region> {
 
         tabBarView = new TabBarView();
         tabBarView.setParent(getTabPanePlaceholder());
+
+        commandAutoCompleteView = new CommandAutoCompleteView();
+        commandAutoCompleteView.setParent(getCommandAutoCompletePlaceholder());
     }
 
     void show() {
