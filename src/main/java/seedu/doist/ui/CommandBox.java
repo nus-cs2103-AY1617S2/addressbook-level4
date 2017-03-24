@@ -81,8 +81,7 @@ public class CommandBox extends UiPart<Region> {
             handleDownKey();
         }  else if (event.getCode() == KeyCode.TAB) {  // auto complete
             event.consume();
-            commandTextField.moveTo(commandTextField.getLength());
-            highlightManager.highlight(commandTextField);
+            completeWithSelectedSuggestion();
         } else {  // use control+z and control+y to execute undo and re-do operation
             try {
                 if (undoKeys.match(event)) {
@@ -150,6 +149,10 @@ public class CommandBox extends UiPart<Region> {
 
         // move the cursor to the end of the input string
         commandTextField.positionCaret(string.length());
+    }
+
+    private void completeWithSelectedSuggestion() {
+
     }
 
     //@@author A0140887W

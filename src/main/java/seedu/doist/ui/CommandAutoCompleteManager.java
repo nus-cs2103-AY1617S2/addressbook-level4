@@ -13,7 +13,9 @@ import seedu.doist.model.Model;
 
 public class CommandAutoCompleteManager {
     private static CommandAutoCompleteManager instance;
-    private static final String SUGGESTION_STYLE = "-fx-fill: grey;";
+
+    // relative to cursor center
+    private final Point2D suggestionBoxOffset = new Point2D(-8, 12);
 
     // for singleton pattern
     protected static CommandAutoCompleteManager getInstance() {
@@ -25,10 +27,13 @@ public class CommandAutoCompleteManager {
 
     // main function method
     public void suggestCompletion(InlineCssTextArea commandTextField, Model model) {
-        String[] words = commandTextField.getText().split(" +");
-        String lastWord = words[words.length - 1];
+        int cursorPosition = commandTextField.getCaretPosition();
+        String[] words = commandTextField.getText(0, cursorPosition).split(" +", -1);
+        String lastWord = words[words.length - 1];  // -1 means trailing space will NOT be discarded
         if (!lastWord.equals("")) {
-            displaySuggestion(commandTextField, getSuggestions(lastWord, model));
+            displaySuggestions(commandTextField, getSuggestions(lastWord, model));
+        } else {
+            commandTextField.getPopupWindow().hide();
         }
     }
 
@@ -48,26 +53,29 @@ public class CommandAutoCompleteManager {
     }
 
     /**
-     * display the suggested text in light grey
+     * display the suggested text in a ContextMenu pop-up window
      */
-    private void displaySuggestion(InlineCssTextArea commandTextField, ArrayList<String> suggestedWords) {
+    private void displaySuggestions(InlineCssTextArea commandTextField, ArrayList<String> suggestions) {
 
         if (commandTextField.getPopupWindow() == null) {
             commandTextField.setPopupWindow(new ContextMenu());
+            commandTextField.setPopupAnchorOffset(suggestionBoxOffset);
         }
+
         ContextMenu suggestionList = (ContextMenu) commandTextField.getPopupWindow();
-        commandTextField.setPopupAnchorOffset(new Point2D(-18, 18));
         suggestionList.getItems().clear();
+
         int index = 0;
-        for (String word : suggestedWords) {
+        for (String word : suggestions) {
             MenuItem m = new MenuItem(word);
             suggestionList.getItems().add(index, m);
             index++;
         }
-        if (commandTextField.getPopupWindow().isShowing()) {
-            return;
+        if (!commandTextField.getPopupWindow().isShowing()) {
+            commandTextField.getPopupWindow().show(commandTextField,
+                                                   suggestionList.getAnchorX(),
+                                                   suggestionList.getAnchorY());
         }
-        commandTextField.getPopupWindow().show(commandTextField, suggestionList.getAnchorX(), suggestionList.getAnchorY());;;
     }
 
     private List<String> getAllCommandWords(Model model) {
