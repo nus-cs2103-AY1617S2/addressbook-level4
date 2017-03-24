@@ -57,7 +57,6 @@ public class Event implements ReadOnlyEvent {
             this.description = new Description(" ");
         }
         this.isDone = new IsDone(ISDONE_NOTDONE);
-        this.period = new Periodic("none");
         this.tags = new UniqueTagList(tags);
         
         //check number of time group, if>2, throws exception

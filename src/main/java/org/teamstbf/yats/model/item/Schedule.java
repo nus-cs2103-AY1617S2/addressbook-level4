@@ -11,6 +11,7 @@ public class Schedule {
     
     private static final SimpleDateFormat FORMATTER_DATE
         = new SimpleDateFormat("hh:mma dd/MM/yyyy");
+    public static final String MESSAGE_TIME_CONSTRAINTS = "non valid time";
     
     private Date scheduleDate;
 
