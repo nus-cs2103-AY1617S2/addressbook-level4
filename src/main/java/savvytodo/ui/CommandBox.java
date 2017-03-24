@@ -2,6 +2,8 @@ package savvytodo.ui;
 
 import java.util.logging.Logger;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
@@ -24,9 +26,11 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
+    //@@author A0147827U
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
+        TextFields.bindAutoCompletion(commandTextField, AutoCompleteDictionaryFactory.getDictionary());
         addToPlaceholder(commandBoxPlaceholder);
     }
 
@@ -56,6 +60,28 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@authoer A0147827U
+    /**
+     * Executes the given string as a command as though it was from the text input
+     * @author jingloon
+     * @param command
+     */
+    public void executeExternalCommand(String command) {
+        try {
+            CommandResult commandResult = logic.execute(command);
+
+            // process result of the command
+            setStyleToIndicateCommandSuccess();
+            logger.info("Result: " + commandResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+
+        } catch (CommandException e) {
+            // handle command failure
+            setStyleToIndicateCommandFailure();
+            logger.info("Invalid command: " + commandTextField.getText());
+            raise(new NewResultAvailableEvent(e.getMessage()));
+        }
+    }
 
     /**
      * Sets the command box style to indicate a successful command.
