@@ -101,7 +101,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws TaskNotFoundException if no such task could be found in the list.
      * @throws TaskAlreadyFinishedException if task is already finished but trying to finish it
      * @throws TaskAlreadyUnfinishedException if task is already not finished but trying to unfinish it
-     * @returns a task that is exactly the same except that its finished status is changed
+     * @returns true if finish status of task is successfully changed
      */
     public boolean changeFinishStatus(ReadOnlyTask toChangeFinish, boolean isToFinish) throws TaskNotFoundException,
             TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
@@ -123,7 +123,7 @@ public class UniqueTaskList implements Iterable<Task> {
             // Update the observable list so that UI can be updated too
             internalList.set(taskIndex, taskToUpdate);
         }
-        return true;
+        return taskExists;
     }
 
     private void finishTask(Task toFinish) throws TaskAlreadyFinishedException {
