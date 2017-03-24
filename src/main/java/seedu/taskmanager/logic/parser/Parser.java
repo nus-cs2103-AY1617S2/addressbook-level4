@@ -19,8 +19,8 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.MoveCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
-import seedu.taskmanager.logic.commands.UndoCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
+import seedu.taskmanager.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
