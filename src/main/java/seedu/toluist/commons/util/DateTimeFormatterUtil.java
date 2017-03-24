@@ -9,6 +9,8 @@ import seedu.toluist.model.Task.RecurringFrequency;
  * A class to assist in formatting date
  */
 public class DateTimeFormatterUtil {
+    public static final String EVERY = "Every";
+    public static final String OF_THE = "of the";
     public static final String TO = "to";
     public static final String UNTIL = "until";
     public static final String TASK_DEADLINE = "by ";
@@ -16,13 +18,13 @@ public class DateTimeFormatterUtil {
     public static final String YESTERDAY = "yesterday";
     public static final String TODAY = "today";
     public static final String TOMORROW = "tomorrow";
-    public static final String DAILY = "Every day";
-    public static final String WEEKLY = "Every week";
-    public static final String MONTHLY = "Every month";
-    public static final String YEARLY = "Every year";
+    public static final String DAY = "day";
+    public static final String WEEK = "week";
+    public static final String MONTH = "month";
+    public static final String YEAR = "year";
     public static final String FORMAT_DAY_OF_WEEK = "EEEE";
     public static final String FORMAT_DAY_OF_MONTH = "d";
-    public static final String FORMAT_DATE_OF_YEAR = "dd MMMM";
+    public static final String FORMAT_MONTH_OF_YEAR = "MMMM";
     public static final String FORMAT_DATE = "E, dd MMM yyy";
     public static final String FORMAT_TIME = "hh:mm a";
     public static final String DATE_TIME_SEPARATOR = ", ";
@@ -63,23 +65,22 @@ public class DateTimeFormatterUtil {
         String formattedResult = "";
         switch (recurringFrequency) {
         case DAILY:
-            formattedResult += DAILY + RECURRING_DATE_SEPARATOR + formatTime(deadline);
+            formattedResult += String.join(" ", EVERY, formatTime(deadline), OF_THE, DAY);
             break;
         case WEEKLY:
-            formattedResult += WEEKLY + RECURRING_DATE_SEPARATOR + formatDayOfWeek(deadline);
+            formattedResult += String.join(" ", EVERY, formatDayOfWeek(deadline), OF_THE, WEEK);
             break;
         case MONTHLY:
-            formattedResult += MONTHLY + RECURRING_DATE_SEPARATOR + formatDayOfMonth(deadline);
+            formattedResult += String.join(" ", EVERY, formatDayOfMonth(deadline), OF_THE, MONTH);
             break;
         case YEARLY:
-            formattedResult += YEARLY + RECURRING_DATE_SEPARATOR + formatDateOfYear(deadline);
+            formattedResult += String.join(" ", EVERY, formatDateOfYear(deadline), OF_THE, YEAR);
             break;
         default:
             // won't happen
         }
         if (recurringEndDateTime != null) {
-            formattedResult += RECURRING_DATE_SEPARATOR + UNTIL
-                             + RECURRING_DATE_SEPARATOR + formatDate(recurringEndDateTime);
+            formattedResult += RECURRING_DATE_SEPARATOR + String.join(" ", UNTIL, formatDate(recurringEndDateTime));
         }
         return formattedResult;
     }
@@ -92,43 +93,34 @@ public class DateTimeFormatterUtil {
         String formattedResult = "";
         switch (recurringFrequency) {
         case DAILY:
-            formattedResult += DAILY;
             if (formatTime(from).equals(formatTime(to))) {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatTime(from);
+                formattedResult += String.join(" ", EVERY, formatTime(from), OF_THE, DAY);
             } else {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatTime(from)
-                                 + RECURRING_DATE_SEPARATOR + TO
-                                 + RECURRING_DATE_SEPARATOR + formatTime(to);
+                formattedResult += String.join(" ", EVERY, formatTime(from), TO, formatTime(to), OF_THE, DAY);
             }
             break;
         case WEEKLY:
-            formattedResult += WEEKLY;
             if (formatDayOfWeek(from).equals(formatDayOfWeek(to))) {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfWeek(from);
+                formattedResult += String.join(" ", EVERY, formatDayOfWeek(from), OF_THE, WEEK);
             } else {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfWeek(from)
-                                 + RECURRING_DATE_SEPARATOR + TO
-                                 + RECURRING_DATE_SEPARATOR + formatDayOfWeek(to);
+                formattedResult += String.join(" ", EVERY, formatDayOfWeek(from),
+                                                       TO, formatDayOfWeek(to), OF_THE, WEEK);
             }
             break;
         case MONTHLY:
-            formattedResult += MONTHLY;
             if (formatDayOfMonth(from).equals(formatDayOfMonth(to))) {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfMonth(from);
+                formattedResult += String.join(" ", EVERY, formatDayOfMonth(from), OF_THE, MONTH);
             } else {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfMonth(from)
-                                 + RECURRING_DATE_SEPARATOR + TO
-                                 + RECURRING_DATE_SEPARATOR + formatDayOfMonth(to);
+                formattedResult += String.join(" ", EVERY, formatDayOfMonth(from),
+                                                       TO, formatDayOfMonth(to), OF_THE, MONTH);
             }
             break;
         case YEARLY:
-            formattedResult += YEARLY;
             if (formatDateOfYear(from).equals(formatDateOfYear(to))) {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDateOfYear(from);
+                formattedResult += String.join(" ", EVERY, formatDateOfYear(from), OF_THE, YEAR);
             } else {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDateOfYear(from)
-                                 + RECURRING_DATE_SEPARATOR + TO
-                                 + RECURRING_DATE_SEPARATOR + formatDateOfYear(to);
+                formattedResult += String.join(" ", EVERY, formatDateOfYear(from),
+                                                       TO, formatDateOfYear(to), OF_THE, YEAR);
             }
             break;
         default:
@@ -153,8 +145,10 @@ public class DateTimeFormatterUtil {
     }
 
     public static String formatDateOfYear(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMAT_DATE_OF_YEAR);
-        return dateTime.format(formatter);
+        String formattedDay = formatDayOfMonth(dateTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMAT_MONTH_OF_YEAR);
+        String formattedMonth = dateTime.format(formatter);
+        return String.join(" ", formattedDay, formattedMonth);
     }
 
     public static String formatDate(LocalDateTime dateTime) {
