@@ -34,9 +34,11 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
+        this.dateTime = taskToCopy.getDateTime();
         this.description = taskToCopy.getDescription();
         this.location = taskToCopy.getLocation();
         this.categories = taskToCopy.getCategories();
+        this.isCompleted = taskToCopy.isCompleted();
     }
 
     public void setName(Name name) {
@@ -123,6 +125,8 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().name + " ");
         sb.append("l/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
+        sb.append("dt/" + this.getDateTime().startValue + DateTime.DATETIME_STRING_CONNECTOR
+                + this.getDateTime().endValue + " ");
         sb.append("d/" + this.getDescription().value + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();

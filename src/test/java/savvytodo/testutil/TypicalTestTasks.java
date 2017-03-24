@@ -18,7 +18,7 @@ import savvytodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask assignment, appointment, birthday, meeting, test, presentation, project, discussion, interview;
+    public TestTask assignment, appointment, birthday, meeting, test, presentation, project, discussion, interview, job;
 
     public TypicalTestTasks() {
         try {
@@ -57,6 +57,10 @@ public class TypicalTestTasks {
             interview = new TaskBuilder().withName("Google Interview").withPriority("medium")
                     .withDescription("Prepare for interview questions").withLocation("Google SG")
                     .withDateTime("09/03/2017 1400", "10/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
+                    .withStatus(false).build();
+            job = new TaskBuilder().withName("Potential Job Calling").withPriority("medium")
+                    .withDescription("Call interview").withLocation("Marina Bay")
+                    .withDateTime("10/03/2017 1000", "10/03/2017 1600").withRecurrence(Recurrence.DEFAULT_VALUES)
                     .withStatus(false).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();

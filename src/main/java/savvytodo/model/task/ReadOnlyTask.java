@@ -33,7 +33,8 @@ public interface ReadOnlyTask {
                 && other.getPriority().equals(this.getPriority())
                 && other.isCompleted().equals(this.isCompleted())
                 && other.getDescription().equals(this.getDescription())
-                && other.getLocation().equals(this.getLocation()));
+                && other.getLocation().equals(this.getLocation()))
+                && other.isCompleted().equals(this.isCompleted());
     }
 
     /**

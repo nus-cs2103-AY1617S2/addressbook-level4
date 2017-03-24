@@ -48,6 +48,8 @@ public class DateTimeUtil {
             .withResolverStyle(ResolverStyle.STRICT);
     public static final DateTimeFormatter DATE_STRING_FORMATTER = DateTimeFormatter.ofPattern(DATE_STRING_FORMAT);
 
+    public static final String MESSAGE_INCORRECT_SYNTAX = "It must be a valid date";
+
     private static final String MESSAGE_DURATION = "%1$s hr %2$s min";
 
     public static final String MESSAGE_FREE_TIME_SLOT = StringUtil.SYSTEM_NEWLINE + "%1$s. %2$shrs to %3$shrs (%4$s)";
@@ -129,9 +131,15 @@ public class DateTimeUtil {
      * @throws IllegalValueException
      * @throws DateTimeException
      */
-    public static boolean isDateTimeConflicting(DateTime dateTimeSource, DateTime dateTimeQuery)
+    public static boolean isDateTimeConflict(DateTime dateTimeSource, DateTime dateTimeQuery)
             throws DateTimeException, IllegalValueException {
-        if (dateTimeSource.endValue == null) {
+        if (dateTimeSource.startValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)
+                || dateTimeSource.endValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)) {
+            return false;
+        }
+
+        if (dateTimeQuery.startValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)
+                || dateTimeQuery.endValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)) {
             return false;
         }
 
@@ -143,16 +151,12 @@ public class DateTimeUtil {
                         .isBefore(parseStringToLocalDateTime(dateTime2.endValue));
     }
 
-    private static DateTime fillDateTime(DateTime filledDateTime) throws DateTimeException, IllegalValueException {
-        DateTime dateTimeToFill = new DateTime();
+    private static DateTime fillDateTime(DateTime filledDateTime) throws IllegalValueException {
+        DateTime dateTimeToFill = filledDateTime;
 
         dateTimeToFill.setEnd(parseStringToLocalDateTime(filledDateTime.endValue));
+        dateTimeToFill.setStart(parseStringToLocalDateTime(filledDateTime.startValue));
 
-        if (filledDateTime.startValue != null) {
-            dateTimeToFill.setStart(parseStringToLocalDateTime(filledDateTime.startValue));
-        } else {
-            dateTimeToFill.setStart(parseStringToLocalDateTime(filledDateTime.endValue));
-        }
         return dateTimeToFill;
     }
 
@@ -249,10 +253,11 @@ public class DateTimeUtil {
     }
 
     /**
-     * Modifies the date based on the frequency for recurring tasks.
+     * @param recurDate usually is the start date of an event
+     * Modifies the recurDate based on the frequency for recurring tasks.
      * freqType cannot be null or None
      */
-    public static String modifyDate(String recurDate, String freqType) {
+    public static String getRecurDate(String recurDate, String freqType) {
         LocalDateTime date = LocalDateTime.parse(recurDate, DATE_FORMATTER);
 
         switch (freqType.toLowerCase()) {

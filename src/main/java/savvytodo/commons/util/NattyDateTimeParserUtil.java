@@ -18,19 +18,20 @@ import savvytodo.commons.core.Messages;
  */
 public class NattyDateTimeParserUtil {
 
-    private static final SimpleDateFormat CONVERT_NATTY_TIME_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    private static final String DASH_DATE_FORMAT = "(\\b\\d{1,2})-(\\d{1,2})";
-    private static final String SLASH_DATE_FORMAT = "(\\b\\d{1,2})/(\\d{1,2})";
-    private static final String DASH_DATE_REPLACEMENT = "$2-$1";
-    private static final String SLASH_DATE_REPLACEMENT = "$2/$1";
-
     private static final int EMPTY_GROUP_SIZE = 0;
-    private static final int START_DATE_SIZE = 1;
-    private static final int START_END_DATE_SIZE = 2;
-    private static final int FIRST_GROUP = 0;
-    private static final int SECOND_GROUP = 1;
-    private static final int FIRST_CHILD = 0;
-    private static final int SECOND_CHILD = 1;
+    private static final int START_DATE_GROUP_SIZE = 1;
+    private static final int START_AND_END_DATE_GROUP_SIZE = 2;
+    private static final int GROUP_ONE = 0;
+    private static final int GROUP_TWO = 1;
+    private static final int CHILD_ONE = 0;
+    private static final int CHILD_TWO = 1;
+
+    private static final SimpleDateFormat CONVERT_NATTY_TIME_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
+
+    private static final String DASH_CONNECTOR_DATE_FORMAT = "(\\b\\d{1,2})-(\\d{1,2})";
+    private static final String SLASH_CONNECTOR_DATE_FORMAT = "(\\b\\d{1,2})/(\\d{1,2})";
+    private static final String DASH_CONNECTOR_DATE_REPLACEMENT = "$2-$1";
+    private static final String SLASH_CONNECTOR_DATE_REPLACEMENT = "$2/$1";
     private static final String NATTY_TIME_PREFIX = "EXPLICIT_TIME";
 
     /**
@@ -51,12 +52,12 @@ public class NattyDateTimeParserUtil {
         }
 
         if (groups.size() > EMPTY_GROUP_SIZE) {
-            DateGroup group = groups.get(FIRST_GROUP);
-            if (group.getDates().size() == START_DATE_SIZE) {
+            DateGroup group = groups.get(GROUP_ONE);
+            if (group.getDates().size() == START_DATE_GROUP_SIZE) {
                 return extractStartDate(group);
             }
 
-            if (group.getDates().size() == START_END_DATE_SIZE) {
+            if (group.getDates().size() == START_AND_END_DATE_GROUP_SIZE) {
                 return extractStartAndEndDate(group);
             }
         }
@@ -70,8 +71,8 @@ public class NattyDateTimeParserUtil {
      */
     private static String convertToUsDateFormat(String rawDateTime) {
         String formattedDateTime = rawDateTime.trim()
-                .replaceAll(DASH_DATE_FORMAT, DASH_DATE_REPLACEMENT)
-                .replaceAll(SLASH_DATE_FORMAT, SLASH_DATE_REPLACEMENT);
+                .replaceAll(DASH_CONNECTOR_DATE_FORMAT, DASH_CONNECTOR_DATE_REPLACEMENT)
+                .replaceAll(SLASH_CONNECTOR_DATE_FORMAT, SLASH_CONNECTOR_DATE_REPLACEMENT);
         return formattedDateTime;
     }
 
@@ -99,8 +100,8 @@ public class NattyDateTimeParserUtil {
         String endDateTime = StringUtil.EMPTY_STRING;
         Date date;
 
-        treeString = group.getSyntaxTree().getChild(FIRST_CHILD).toStringTree();
-        date = group.getDates().get(FIRST_GROUP);
+        treeString = group.getSyntaxTree().getChild(CHILD_ONE).toStringTree();
+        date = group.getDates().get(GROUP_ONE);
         if (!isTimePresent(treeString)) {
             date = DateTimeUtil.setDateTime(date,
                     DateTimeUtil.LAST_HOUR_OF_DAY,
@@ -117,36 +118,36 @@ public class NattyDateTimeParserUtil {
      * Extracts start and end date time from natty group
      */
     private static String[] extractStartAndEndDate(DateGroup group) {
-        String firstTreeString = StringUtil.EMPTY_STRING;
-        String secondTreeString = StringUtil.EMPTY_STRING;
+        String treeFirstString = StringUtil.EMPTY_STRING;
+        String treeSecondString = StringUtil.EMPTY_STRING;
         String startDateTime = StringUtil.EMPTY_STRING;
         String endDateTime = StringUtil.EMPTY_STRING;
-        Date firstDate;
-        Date secondDate;
+        Date dateOne;
+        Date dateTwo;
 
-        firstTreeString =
-                group.getSyntaxTree().getChild(FIRST_CHILD).toStringTree();
-        secondTreeString =
-                group.getSyntaxTree().getChild(SECOND_CHILD).toStringTree();
-        firstDate = group.getDates().get(FIRST_GROUP);
-        secondDate = group.getDates().get(SECOND_GROUP);
+        treeFirstString =
+                group.getSyntaxTree().getChild(CHILD_ONE).toStringTree();
+        treeSecondString =
+                group.getSyntaxTree().getChild(CHILD_TWO).toStringTree();
+        dateOne = group.getDates().get(GROUP_ONE);
+        dateTwo = group.getDates().get(GROUP_TWO);
 
-        if (!isTimePresent(firstTreeString)) {
-            firstDate = DateTimeUtil.setDateTime(firstDate,
+        if (!isTimePresent(treeFirstString)) {
+            dateOne = DateTimeUtil.setDateTime(dateOne,
                     DateTimeUtil.FIRST_HOUR_OF_DAY,
                     DateTimeUtil.FIRST_MINUTE_OF_DAY,
                     DateTimeUtil.FIRST_SECOND_OF_DAY);
         }
 
-        if (!isTimePresent(secondTreeString)) {
-            secondDate = DateTimeUtil.setDateTime(secondDate,
+        if (!isTimePresent(treeSecondString)) {
+            dateTwo = DateTimeUtil.setDateTime(dateTwo,
                     DateTimeUtil.LAST_HOUR_OF_DAY,
                     DateTimeUtil.LAST_MINUTE_OF_DAY,
                     DateTimeUtil.FIRST_SECOND_OF_DAY);
         }
 
-        startDateTime = CONVERT_NATTY_TIME_FORMAT.format(firstDate);
-        endDateTime = CONVERT_NATTY_TIME_FORMAT.format(secondDate);
+        startDateTime = CONVERT_NATTY_TIME_FORMAT.format(dateOne);
+        endDateTime = CONVERT_NATTY_TIME_FORMAT.format(dateTwo);
 
         return new String[] {startDateTime, endDateTime};
     }
