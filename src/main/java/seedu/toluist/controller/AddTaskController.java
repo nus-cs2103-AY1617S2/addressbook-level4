@@ -88,7 +88,7 @@ public class AddTaskController extends Controller {
         } else {
             task = new Task(description);
         }
-        if (StringUtil.isPresent(taskPriority)) {
+        if (taskPriority != null) {
             task.setTaskPriority(taskPriority);
         }
         if (StringUtil.isPresent(recurringFrequency)) {
