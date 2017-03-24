@@ -6,6 +6,8 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.person.ByDate;
 import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
@@ -82,11 +84,15 @@ public class EditCommand extends Command {
             ReadOnlyEvent eventToEdit = lastShownEventList.get(filteredActivityListIndex);
             Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
             try {
+                //store for undo operation
+                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+                ModelManager.setPreviousState(currState);
                 model.updateEvent(filteredActivityListIndex, editedEvent);
             } catch (UniqueEventList.DuplicateEventException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_EVENT);
             }
             model.updateFilteredListToShowAll();
+            model.storePreviousCommand("edit");
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, eventToEdit));
         }
 
@@ -98,11 +104,15 @@ public class EditCommand extends Command {
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredActivityListIndex);
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             try {
+                //store for undo operation
+                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+                ModelManager.setPreviousState(currState);
                 model.updateTask(filteredActivityListIndex, editedTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
             model.updateFilteredListToShowAll();
+            model.storePreviousCommand("edit");
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));

@@ -68,4 +68,8 @@ public interface Model {
 
     /** Updates the filter of the filtered Event list to filter by the given keywords*/
     void updateFilteredEventList(Set<String> keywords);
+    
+    /** Empties the previousCommand list and adds the newest one in, always keeping only 1*/
+    void storePreviousCommand(String command);
+    
 }

@@ -29,6 +29,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final WhatsLeft whatsLeft;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
+    private static String previousCommand;
+    private static WhatsLeft previousState;
 
     /**
      * Initializes a ModelManager with the given whatsLeft and userPrefs.
@@ -40,8 +42,10 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with WhatsLeft: " + whatsLeft + " and user prefs " + userPrefs);
 
         this.whatsLeft = new WhatsLeft(whatsLeft);
+        previousState = new WhatsLeft();
         filteredTasks = new FilteredList<>(this.whatsLeft.getTaskList());
         filteredEvents = new FilteredList<>(this.whatsLeft.getEventList());
+        previousCommand = "";
     }
 
     public ModelManager() {
@@ -109,6 +113,24 @@ public class ModelManager extends ComponentManager implements Model {
         whatsLeft.updateEvent(addressBookIndex, editedEvent);
         indicateWhatsLeftChanged();
     }
+    
+    //@@author A0110491U
+    public void storePreviousCommand(String command) {
+        previousCommand = command;
+    }
+    
+    public static String getPreviousCommand() {
+        return previousCommand;
+    }
+
+    public static WhatsLeft getPreviousState() {
+        return previousState;
+    }
+    
+    public static void setPreviousState(ReadOnlyWhatsLeft state) {
+        previousState = new WhatsLeft(state);
+    }
+    //@@author
 
     //=========== Filtered Task List Accessors =============================================================
 

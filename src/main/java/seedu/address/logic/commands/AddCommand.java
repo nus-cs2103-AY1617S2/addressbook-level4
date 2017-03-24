@@ -83,6 +83,7 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
+            model.storePreviousCommand("");
             if (toAddTask == null) {
                 model.addEvent(toAddEvent);                
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));

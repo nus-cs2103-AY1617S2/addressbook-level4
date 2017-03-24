@@ -36,6 +36,7 @@ public class SelectCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
+        model.storePreviousCommand("");
 
         if (type.equals("ev")) {
             if (lastShownEventList.size() < targetIndex) {
