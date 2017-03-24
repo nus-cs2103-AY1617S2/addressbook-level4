@@ -7,10 +7,11 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
@@ -27,11 +28,16 @@
                     </padding>
 
                     <children>
-                        <HBox spacing="5" alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+                                    <Label fx:id="id" styleClass="cell_big_label">
+                                        <minWidth>
+                                            <!-- Ensures that the label text is never truncated -->
+                                            <Region fx:constant="USE_PREF_SIZE" />
+                                        </minWidth>
+                                    </Label>
+                                    <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                                 </HBox>
                             </children>
                         </HBox>
@@ -39,11 +45,13 @@
                         <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
                         <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
                         <Label fx:id="loc" styleClass="cell_small_label" text="\$loc" />
-                        <Label fx:id="done" styleClass="cell_small_label" text="\$done"/>
                         <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
                     </children>
                 </VBox>
             </children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
     </children>
 </HBox>

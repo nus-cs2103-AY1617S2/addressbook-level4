@@ -3,11 +3,17 @@ package seedu.task.model;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.model.FilePathChangedEvent;
+import seedu.task.commons.events.model.LoadNewFileEvent;
+import seedu.task.commons.events.model.LoadNewFileSuccessEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
@@ -27,6 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     * @throws IllegalValueException
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
@@ -43,9 +50,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
+    }
+
+    /**
+     * undo should not update kit.xml
+     */
+    @Override
+    public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
+        taskManager.resetData(newData);
+        indicateTaskManagerChanged(false);
     }
 
     @Override
@@ -53,38 +69,75 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
-    /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged() {
-        raise(new TaskManagerChangedEvent(taskManager));
+    /** Raises an event to indicate the model has changed
+     * @param shouldBackup */
+    private void indicateTaskManagerChanged(boolean shouldBackup) {
+        raise(new TaskManagerChangedEvent(taskManager, shouldBackup));
+    }
+
+    /** Raises an event to indicate the file path has changed */
+    private void indicateFilePathChanged(String newPath) {
+        raise(new FilePathChangedEvent(newPath, taskManager));
+    }
+
+    private void indicateLoadChanged(String loadPath) {
+        raise(new LoadNewFileEvent(loadPath, taskManager));
+        raise(new FilePathChangedEvent(loadPath, taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
     }
 
     @Override
-    public void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
-        taskManager.updateDone(index, target);
-        indicateTaskManagerChanged();
+    public synchronized void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        int taskManagerIndex = filteredTasks.getSourceIndex(index);
+        taskManager.updateDone(taskManagerIndex, target);
+        indicateTaskManagerChanged(true);
+    }
+
+    @Override
+    public synchronized void unDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        int taskManagerIndex = filteredTasks.getSourceIndex(index);
+        taskManager.updateUnDone(taskManagerIndex, target);
+        indicateTaskManagerChanged(true);
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskManager.addTask(task);
+        taskManager.addTaskToFront(task);
         updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
     }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws IllegalValueException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
+    }
+
+    @Override
+    public void sortTaskList() {
+        taskManager.sortTaskList();
+        indicateTaskManagerChanged(false);
+    }
+
+
+    @Override
+    public void changeFilePath(String newPath) {
+        indicateFilePathChanged(newPath);
+        indicateTaskManagerChanged(false);
+    }
+
+    @Override
+    public void loadFromLocation(String loadPath) {
+        indicateLoadChanged(loadPath);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -127,6 +180,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -151,6 +205,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -174,6 +229,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent();
             }
         }
+
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
@@ -190,7 +246,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return StringUtil.containsTagIgnoreCase(task.getTags(), tagKeyWord);
+            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyWord);
         }
 
         @Override
@@ -211,17 +267,21 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             if (this.value  & task.isDone()) {
                 return true;
-            }
-            else if (!this.value  & !task.isDone()) {
+            } else if (!this.value  & !task.isDone()) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
 
         }
     }
 
+    @Override
+    @Subscribe
+    public void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event) {
+        taskManager.resetData(event.readOnlyTaskManager);
+        logger.info("Resetting data from new load location.");
+    }
 
 
 }

@@ -21,8 +21,9 @@ public class TaskBuilder {
 
     /**
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
+     * @throws IllegalValueException when startDate is not strictly before endDate
      */
-    public TaskBuilder(TestTask taskToCopy) {
+    public TaskBuilder(TestTask taskToCopy) throws IllegalValueException {
         this.task = new TestTask(taskToCopy);
     }
 

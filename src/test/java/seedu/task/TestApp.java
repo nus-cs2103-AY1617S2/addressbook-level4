@@ -51,6 +51,10 @@ public class TestApp extends MainApp {
         return config;
     }
 
+    public void restartConfig() {
+        super.restartConfig();
+    }
+
     @Override
     protected UserPrefs initPrefs(Config config) {
         UserPrefs userPrefs = super.initPrefs(config);

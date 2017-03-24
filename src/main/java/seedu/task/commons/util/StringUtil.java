@@ -6,8 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
+
 
 /**
  * Helper functions for handling strings.
@@ -60,24 +59,6 @@ public class StringUtil {
         Set<String> tokenizedTaskNameInSet = new HashSet<>(Arrays.asList(tokenizedTaskName));
         return tokenizedTaskNameInSet.containsAll(keywords);
     }
-
-    /**
-     * Returns true if {@code tags} contains the {@code keyword}.
-     * Ignores case, but a full word match is required.
-     *
-     * @param tags may be null
-     * @param keyword cannot be null, cannot be empty, must be a single word
-     * @return
-     */
-    public static boolean containsTagIgnoreCase(UniqueTagList tags, String keyword) {
-        for (Tag t : tags) {
-            if (containsWordIgnoreCase((t.tagName), keyword)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     /**
      * Returns a detailed message of the t, including the stack trace.

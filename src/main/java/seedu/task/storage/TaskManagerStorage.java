@@ -1,5 +1,6 @@
 package seedu.task.storage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -15,6 +16,8 @@ public interface TaskManagerStorage {
      * Returns the file path of the data file.
      */
     String getTaskManagerFilePath();
+
+    void setTaskManagerFilePath(String path);
 
     /**
      * Returns TaskManager data as a {@link ReadOnlyTaskManager}.
@@ -41,4 +44,5 @@ public interface TaskManagerStorage {
      */
     void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException;
 
+    void saveBackup() throws IOException, FileNotFoundException;
 }

@@ -33,7 +33,8 @@ public class HelpFormatWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         //Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
-        dialogStage.setMaximized(false); //TODO: set a more appropriate initial size
+        dialogStage.setMaximized(false);
+        dialogStage.setMinWidth(835);
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
         URL help = MainApp.class.getResource(USERGUIDE_URL);

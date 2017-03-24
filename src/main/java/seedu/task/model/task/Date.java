@@ -1,6 +1,7 @@
 package seedu.task.model.task;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.ocpsoft.prettytime.PrettyTime;
@@ -16,10 +17,17 @@ public class Date {
 
     // add to user guide
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, try dates like,"
-                                                        + " tomorrow at 5pm or 4th April";
+                                                        + " tomorrow at 5pm or 4th April."
+                                                        + " Check that Month is before date,"
+                                                        + " MM/DD/YY or MM-DD-YY";
     public static final String DEFAULT_DATE = "DEFAULT_DATE";
     private final java.util.Date value;
-    private static PrettyTimeParser p = new PrettyTimeParser();
+    private static PrettyTimeParser pretty = new PrettyTimeParser();
+
+    //Allows an empty constructor
+    public Date() {
+        this.value = null;
+    }
 
     /**
      * Validates given date.
@@ -39,8 +47,13 @@ public class Date {
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
             }
 
-            List<java.util.Date> dates = p.parse(date);
-            this.value = dates.get(0);
+            List<java.util.Date> dates = pretty.parse(date);
+            Calendar cal = Calendar.getInstance(); // locale-specific
+            cal.setTime(dates.get(0));
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            long time = cal.getTimeInMillis();
+            this.value = new java.util.Date(time);
         }
     }
 
@@ -49,13 +62,17 @@ public class Date {
      */
     public static boolean isValidDate(String input) {
 
-        List<java.util.Date> dates = p.parse(input);
+        List<java.util.Date> dates = pretty.parse(input);
 
         if (dates.isEmpty()) {
             return false;
         } else {
             return true;
         }
+    }
+
+    public boolean isNull() {
+        return this.value == null;
     }
 
     @Override
@@ -70,6 +87,12 @@ public class Date {
 
     @Override
     public boolean equals(Object other) {
+        Date otherDate = ((Date) other);
+        if (otherDate.value == null && this.value == null) {
+            return true;
+        } else if (otherDate.value == null || this.value == null) {
+            return false;
+        }
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
                         && this.value.equals(((Date) other).value)); // state
@@ -81,4 +104,17 @@ public class Date {
         return value.hashCode();
     }
 
+    public java.util.Date getDateValue() {
+        return this.value;
+    }
+
+    /**
+     * Compares two dates and returns true if date1 is before date 2
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public static boolean isBefore(Date date1, Date date2) {
+        return date1.value.before(date2.value);
+    }
 }

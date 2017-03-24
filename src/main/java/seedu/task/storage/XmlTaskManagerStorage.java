@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
+import seedu.task.logic.commands.UndoCommand;
 import seedu.task.model.ReadOnlyTaskManager;
 
 /**
@@ -24,8 +25,13 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         this.filePath = filePath;
     }
 
+    @Override
     public String getTaskManagerFilePath() {
         return filePath;
+    }
+
+    public void setTaskManagerFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
@@ -38,6 +44,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
+    @Override
     public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
@@ -63,13 +70,42 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
      * @param filePath location of the data. Cannot be null
      */
+    @Override
     public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+
         assert taskManager != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
+    }
+
+    /**
+     * Reads from kit.xml and creates backup.
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
+    @Override
+    public void saveBackup() throws IOException, FileNotFoundException {
+        try {
+            Optional<ReadOnlyTaskManager> optionalTaskManagerBackup = readTaskManager();
+            ReadOnlyTaskManager taskManagerBackup;
+
+            if (!optionalTaskManagerBackup.isPresent()) {
+                throw new DataConversionException(null);
+            }
+
+            taskManagerBackup = optionalTaskManagerBackup.get();
+
+            File file = new File(UndoCommand.backupFilePath);
+            FileUtil.createIfMissing(file);
+            file.deleteOnExit();
+            XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManagerBackup));
+
+        } catch (DataConversionException e) {
+            logger.info("Data file not found. Unable to backup.");
+        }
     }
 
 }

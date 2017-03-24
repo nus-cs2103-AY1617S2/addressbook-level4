@@ -7,10 +7,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.DuplicateDataException;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 
 /**
- * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
+ * A list of tasks that enforces uniqueness between its elements.
  *
  * Supports a minimal set of list operations.
  *
@@ -39,7 +40,20 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(toAdd);
+        internalList.add(toAdd); // the most recently added task will be displayed at the top
+    }
+
+    /**
+     * Adds a task to the front of list.
+     *
+     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     */
+    public void addToFront(Task toAdd) throws DuplicateTaskException {
+        assert toAdd != null;
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(0, toAdd); // the most recently added task will be displayed at the top
     }
 
     /**
@@ -62,15 +76,20 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+
     }
 
     public void done(int index) {
-    // TODO Auto-generated method stub
         Task taskDone = internalList.get(index);
         taskDone.setIsDone(true);
         internalList.set(index, taskDone);
     }
 
+    public void undone(int index) {
+        Task taskUnDone = internalList.get(index);
+        taskUnDone.setIsDone(false);
+        internalList.set(index, taskUnDone);
+    }
 
     /**
      * Removes the equivalent task from the list.
@@ -86,12 +105,11 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
-
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
@@ -110,6 +128,10 @@ public class UniqueTaskList implements Iterable<Task> {
 
     @Override
     public boolean equals(Object other) {
+        ObservableList<Task> list1 = this.internalList;
+        list1.sort(new TaskComparator());
+        ObservableList<Task> list2 = ((UniqueTaskList) other).internalList;
+        list2.sort(new TaskComparator());
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
                 && this.internalList.equals(
@@ -135,5 +157,10 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+
+    public void sort() {
+        // TODO Auto-generated method stub
+        FXCollections.sort(internalList, new TaskComparator());
+    }
 
 }

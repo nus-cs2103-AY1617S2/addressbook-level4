@@ -4,9 +4,9 @@ import seedu.task.model.tag.UniqueTagList;
 
 /**
  * A read-only immutable interface for a Task in the taskmanager.
- * Implementations should guarantee: details are present and not null, field values are validated.
+ * Implementations should guarantee: details are validated.
  */
-public interface ReadOnlyTask {
+public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
 
     Name getName();
     Date getStartDate();
@@ -35,7 +35,7 @@ public interface ReadOnlyTask {
     }
 
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the task as text, showing all task details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();

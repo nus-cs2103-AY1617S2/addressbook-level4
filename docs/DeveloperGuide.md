@@ -1,10 +1,10 @@
 # KIT Developer Guide:
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -114,10 +114,10 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+command `done 1`.
 
 <img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+_Figure 2.1.3a : Component interactions for `done 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
@@ -125,7 +125,7 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+_Figure 2.1.3b : Component interactions for `done 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -135,7 +135,7 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Walter Tay
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
@@ -158,7 +158,7 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Xu Xinyi
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -166,18 +166,37 @@ _Figure 2.3.1 : Structure of the Logic Component_
 **API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+2. `Parser` will in turn check the `Command Library` to formulate the correct command, with which it then creates a `Command` object.
+3. The `Command` object is executed by the `LogicManager`.
+4. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
+5. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
+1. The `LogicManager` receives `execute("done 1")`.
+2. It passes this command text (as a string) to `Parser`.
+3. `Parser` checks it against `CommandLibrary`.
+4. `Parser` formulates a done command and sends it to `DoneCommandParser`.
+5. `DoneCommandParser` creates the corresponding command and returns it.
+6. The `LogicManager` exectes the returned delete command, accessing `Model`, and then returns the `CommandResult` back to `UI`.
+
+
+#### Implemenation of `CommandLibrary` class:
+
+This class serves as an intermediate between the `Parser` class and other utility classes like `CliSyntax`, threreby decreasing the **coupling** between `Parser` and these utility classes.
+
+The `CommandLibrary` class is implemented using the **singleton pattern** as one instance is sufficient and such practice prevents the program from creating too many unnucessary instances.
+
+#### Rationale behind various `Command` classes:
+
+KIT can accept various commands and correctly execute them by having different command classes such as `AddCommand`, `UndoCommand` and `ListByTagCommand`, each of which dedicated to handle specific instructions. Such practice allows KIT to have higher **cohesion**.
+
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Chan Lup Seng
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -192,9 +211,28 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+## Task Object
+This section briefly describes the design of the task object.
+
+<img src="images/TaskClassDiagram.png"><br>
+
+The task object represents a task in KIT. Each of its detail such as Name and Date are objects.
+
+This clean design allows us to do the verification of each value and specify the desired regex for each detail easily.
+
+Task only verifies that startDate is before endDate and lets each individual class do their own verification. isDone represents whether a task is completed or not. As it's function is simple we do not create unnecessary objects.
+
+**Pretty Time**
+
+To implement natural language date parsing we incorporated [pretty time library](http://www.ocpsoft.org/prettytime/), an open source, date formatting library.
+
+We are using it to parse user input and obtain the the date in java.util.Date format. We also use it for the display of time in a more friendly manner such as:
+
+> "10 minutes from now" or "2 days from now"
+
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Zhang Ying
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -203,12 +241,24 @@ _Figure 2.5.1 : Structure of the Storage Component_
 
 The `Storage` component,
 
+* can save `Config` objects in json format and read it back.
 * can save `UserPref` objects in json format and read it back.
 * can save the Task Manager data in xml format and read it back.
 
+This class is called by other components such as `Model` to assist it in saving and loading the tasks from .xml files. The StorageManager class managers any changes in the storage through its implementation of `TaskManagerStorage` and `UserPrefsStorage` for when the Model class requires a change in the task manager's model. For example, when saving the file to a new directory, `ModelManager` would raise a new save file event which will be handled by `StorageManager` which relies on methods from sub-components  in `Storage` like `JsonUserPrefsStorage` and `XmlTaskManagerStorage`.
+
 ### 2.6. Common classes
 
+Author: Zhang Ying
+
 Classes used by multiple components are in the `seedu.task.commons` package.
+
+They are further divided into sub-groups like `core`, `events`, `exceptions` and `util`.
+
+* `Core` contains core classes that are used by multiple components. They include `ComponentManager`, `Config`, `EventsCenter`, `GuiSettings`, `LogsCentre`, `Messages`, `UnmodifiableObservableList` and `Version`. For example, in the save and handle command, the storage component would need to call the `Config` class to edit information in the config.json file.
+* `Events` contains event classes that are raised whenever required. The subsequent classes would subscribe and catch these events whenever neccessary and carry out the changes.
+* `Exceptions` contains exception classes which are thrown in various other components in the program
+* `Util` contains utilities that other components might require when carrying out certain tasks. For example, in the `JsonUtil`, it simplifies the job of reading json files as we can simply call the functions inside of it.
 
 ## 3. Implementation
 
@@ -236,6 +286,71 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
+### 3.3. Undo/Redo Command Implementation
+
+This section describes the design process and implementation of undo/redo feature in KIT.
+
+**Function of Undo**
+
+* It should revert any command that modifies the data.
+* It should revert add, edit, delete and clear commands but ignores list, listtag, listnotdone commands.
+* For example, if a list command is issued after an add, undo should revert the add command and ignore list command.
+
+**Designs Considered**
+
+One of the design we considered for undo involves the Command pattern. The idea is to have a History class that stores a stack of Commands executed. Each Command will have an undo method that handles the undo for itself. For example, delete will remember the deleted task and the undo method will add it back.
+
+When undo command is called, it can obtain the latest command from History and invoke it's undo method. An undo call is simple with this design, however each current Command and every new Command needs it's own individual implementation of undo method.
+
+The alternate design, which was implemented, involves storing a backup file. This makes use of how every command that modifies data will invoke an automatic save to kit.xml. Before the data is saved, a backup is saved. Undo command now simply loads the backup into memory. Future commands can also support undo easily as they do not need to implmennt any new methods.
+
+The downside is the extra storage space used. To reduce the downside, the backup file is deleted everytime the program closes. The backup file thus functions as a temporary file.
+
+**Implementation Details**
+
+1. Every command that modifies data raises a `TaskManagerChangedEvent` containing the TaskManager's data and a boolean flag indicating if a backup.xml should be saved.
+2. Storage listens to this event, check if a backup is needed and carry out the saving to xml file. Commands that will not backup are command such as list and find commands etc. Undo itself will not create a backup.
+3. When undo command is issued, storage reads backup.xml and undo pass the data to model to load it into memory.
+
+<img src="images/UndoHighLevelSequenceDiagram.png" width="800">
+
+**Future Improvements**
+
+Currently only one undo is implemented. Multiple undo and redo implementation are planned.
+
+### 3.4 Done/Undone task command implementation
+
+This sections describes the done/undone implementation in KIT.
+
+All added task will be set to undone as a default setting. By using the done command it will update the selected task to done. This allows the user indicate if his task is done or undone. It also allow the sorting of task by done/undone to provide the user a better view of the outstanding task.
+
+One of the design considering being implemented for this specific command is that rather than making a new class under Model/task, we created a boolean method inside the task class. True being that the task is done and false being that the task is undone. This allows us avoid implmenting unnecessary classes thereby improving the efficency of our code. Done and undone command works in similar ways.
+
+### 3.5 Save/Load file command implementation
+
+This section describes the save/load implementation in KIT.
+
+**Function of save**
+
+* Makes a copy of the .xml file in specified directory
+* Creates a new .xml file specified in the folder
+* Prompts user if the file they are saving to already exists and whether they would like to overwrite it with the new data
+* Once saved to a new file, any changes made would be done on the newly saved file
+* File status would be updated in the status bar footer
+
+**Implementation details**
+
+The initial save location would be in `data/kit.xml` file. To manually change the save location, we can edit `config.json` in a text editor and overwrite the `taskManagerFilePath` parameter. In the save command, whenever the user specifies a new location, the `Logic` component checks if the file is valid (i.e. not a directory) and if the file already exists. If the file with the same name exists, it will prompt the user whether they would like to overwrite it with the new data.
+
+**Function of load**
+
+* Loads the .xml file from a specified file
+* Any changes made would be done to the current loaded file
+* File status would be updated in the status bar footer
+
+**Implementation details**
+
+The load location by default would be `data/kit.xml` unless specified by the user previously. If the user had loaded a file in a different directory and closed the program, when they restart the program, it will still load from the file where they last loaded the data.
 
 ## 4. Testing
 
@@ -336,7 +451,7 @@ a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
 
-## Appendex A : User Stories
+## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
@@ -367,9 +482,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 | `* *` | mark a task as not done | undone a done task
 
 
-
-
-## Appendex B : Use Cases
+## Appendix B : Use Cases
 (For all use cases below, the **System** is the `KIT` and the **Actor** is the `user`, unless specified otherwise)
 
 
@@ -402,11 +515,35 @@ Use case resumes from step 2.
 	Steps 1a1-1a2 are repeated until the input entered is of a correct form.
 	Use case resumes from step 2.
 
+#### use case: UC3 - Done task
+**Main sucess scenario**
+
+    1. User enters listundone.
+    2. Kit display all the undone task with a index.
+    3. User choose one of the undone task to done by entering done INDEX.
+    4. KIT request confirmation.
+    5. User confirms action.
+    6. KIT update the task from undone to done from the list and display status.
+        use case ends.
+
+**Extensions**
+1a. KIT detects and error in the command.
+>   1a1. KIT waits for another valid command.
+>   1a2. User enters the correct command.
+>   Steps 1a1-1a2 are repeated untill the command entered is valid.
+>   Use case resumes from step 2.
+
+3a.KIT detects an error in the command.
+>   3a1. KIT waits for another valid command.
+>   3a2. User enters the valid command.
+>   Steps 3a1-3a2 are repeated untill the command entered is valid.
+>   Use case resumes from step 4.
+
 #### Use case: UC3 - Delete task
 **Main success scenario**
 
 	1.  User enters list.
-	2.  KIT displays all the entered tasks with in index.
+	2.  KIT displays all the entered tasks with a index.
 	3.  User chooses one of the tasks to delete by entering delete INDEX.
 	4.  KIT requests confirmation.
 	5.  User confirms action.
@@ -434,7 +571,7 @@ Use case resumes from step 2.
 **Main success scenario**
 
     1.User enters Find with keyword or index
-    2.KIT display all task that contain input keyword or index.
+    2.KIT display all tasks that contain input keyword or index.
 	Use case ends.
 
 **Extensions**
@@ -447,7 +584,24 @@ Use case resumes from step 2.
 > 2a1. KIT show an message that says no similar task
 	2a2. KIT waits for another valid command..
 
-## Appendex C : Non Functional Requirements
+#### Use case: UC5 - List tasks by Tag
+**Main success scenario**
+
+    1.User enters Listtag with tag
+    2.KIT display all tasks that contain the input tag.
+	Use case ends.
+
+**Extensions**
+
+1a. KIT detects an error in command.
+>  1a1. KIT waits for another valid command..
+    1a2. User enters the correct command.
+
+  2a. KIT find no task with required tag
+> 2a1. KIT show an message that says no task with the required tag.
+ 	2a2. KIT waits for another valid command..
+
+## Appendix C : Non Functional Requirements
 1. Core functions work without internet.
 2. Can run without installation
 3. Must be command line interface
@@ -458,7 +612,7 @@ Use case resumes from step 2.
 8. Work on windows 7 or later
 9. Third-party framework/libraries must be free and does not require installation
 
-## Appendex D :  Glossary
+## Appendix D :  Glossary
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
@@ -469,7 +623,7 @@ Use case resumes from step 2.
 
 {More to be added}
 
-## Appendex E : Product Survey
+## Appendix E : Product Survey
 
 **Todoist**
 

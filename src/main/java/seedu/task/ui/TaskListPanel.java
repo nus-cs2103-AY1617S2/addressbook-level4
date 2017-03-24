@@ -15,6 +15,7 @@ import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.model.task.ReadOnlyTask;
 
+
 /**
  * Panel containing the list of tasks.
  */

@@ -8,8 +8,8 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class Location {
 
-    public static final String MESSAGE_LOCATION_CONSTRAINTS = "Task locations can take any values,"
-            + " and it should not be blank";
+    public static final String MESSAGE_LOCATION_CONSTRAINTS = "Task locations can take any values";
+
     /*
      * The first character of the location must not be a whitespace, otherwise
      * " " (a blank string) becomes a valid input.
@@ -18,6 +18,10 @@ public class Location {
     public static final String DEFAULT_LOCATION = "DEFAULT_LOCATION";
     public final String value;
 
+    //Allows an empty constructor
+    public Location() {
+        this.value = DEFAULT_LOCATION;
+    }
     /**
      * Validates given location.
      *
@@ -39,8 +43,8 @@ public class Location {
     /**
      * Returns true if a given string is a valid task email.
      */
-    public static boolean isValidLocation(String test) {
-        return test.matches(LOCATION_VALIDATION_REGEX);
+    public static boolean isValidLocation(String input) {
+        return input.matches(LOCATION_VALIDATION_REGEX);
     }
 
     @Override

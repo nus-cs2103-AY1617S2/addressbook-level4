@@ -218,7 +218,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.allocate();
         TaskManager expectedTM = new TaskManager();
-        expectedTM.addTask(toBeAdded);
+        expectedTM.addTaskToFront(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
@@ -441,8 +441,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Date("4-05-15 2200"), //not random for now
-                    new Date("05-05-2015 2100"),
+                    new Date(seed + "-05-15 2000"),
+                    new Date(seed + "-05-15 2001"),
                     new Remark(seed + "@email"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))), false
@@ -474,6 +474,7 @@ public class LogicManagerTest {
         TaskManager generateTaskManager(int numGenerated) throws Exception {
             TaskManager taskManager = new TaskManager();
             addToTaskManager(taskManager, numGenerated);
+            taskManager.sortTaskList();
             return taskManager;
         }
 
@@ -499,7 +500,7 @@ public class LogicManagerTest {
          */
         void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
-                taskManager.addTask(p);
+                taskManager.addTaskToFront(p);
             }
         }
 
@@ -532,7 +533,9 @@ public class LogicManagerTest {
         }
 
         List<Task> generateTaskList(Task... tasks) {
-            return Arrays.asList(tasks);
+            List<Task> toReturn = Arrays.asList(tasks);
+            Collections.sort(toReturn);
+            return toReturn;
         }
 
         /**

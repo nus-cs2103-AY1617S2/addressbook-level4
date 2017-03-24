@@ -2,6 +2,7 @@ package seedu.task.model.task;
 
 import java.util.Objects;
 
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
@@ -9,7 +10,10 @@ import seedu.task.model.tag.UniqueTagList;
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
+
+    public static final String MESSAGE_TASK_CONSTRAINTS =
+            "Start date/time must be earlier than end date/time";
 
     private Name name;
     private Date startDate;
@@ -23,10 +27,16 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      * @param startDate TODO
      * @param isDone TODO
+     * @throws IllegalValueException
      */
     public Task(Name name, Date startDate, Date endDate, Remark remark,
-        Location location, UniqueTagList tags, boolean isDone) {
+        Location location, UniqueTagList tags, boolean isDone) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, endDate, remark, location, tags);
+
+        if (!isValidDates(startDate, endDate)) {
+            throw new IllegalValueException(MESSAGE_TASK_CONSTRAINTS);
+        }
+
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -36,10 +46,23 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
+    /***
+     * *
+     * @param startDate
+     * @param endDate
+     * @return true if one of two dates is null. if both not null, only returns
+     *         true if startDate is strictly before endDate
+     */
+    private boolean isValidDates(Date startDate, Date endDate) {
+        return (startDate.isNull() || endDate.isNull()) ? true
+                : startDate.getDateValue().before(endDate.getDateValue());
+    }
+
     /**
      * Creates a copy of the given ReadOnlyTask.
+     * @throws IllegalValueException
      */
-    public Task(ReadOnlyTask source) {
+    public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRemark(),
                 source.getLocation(), source.getTags(), source.isDone());
     }
@@ -146,4 +169,16 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    @Override
+    public int compareTo(ReadOnlyTask o) {
+        //Same end date then compare according to names lexicographically
+        if ((this.getEndDate() == null && o.getEndDate() == null)
+                || (this.getEndDate().equals(o.getEndDate()))) {
+            return this.getName().fullName.compareTo(o.getName().fullName);
+        } else {
+            if (this.getEndDate().isNull()) return 1;
+            if (o.getEndDate().isNull()) return -1;
+            return (Date.isBefore(this.getEndDate(), o.getEndDate())) ? -1 : 1;
+        }
+    }
 }

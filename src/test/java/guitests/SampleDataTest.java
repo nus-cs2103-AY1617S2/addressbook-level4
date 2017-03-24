@@ -2,7 +2,10 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+
 import org.junit.Test;
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
 import seedu.task.model.TaskManager;
 import seedu.task.model.task.Task;
@@ -25,6 +28,12 @@ public class SampleDataTest extends TaskManagerGuiTest {
     @Test
     public void taskManager_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
+        Arrays.sort(expectedList);
         assertTrue(taskListPanel.isListMatching(expectedList));
+
+        //clean up
+        File toDelete = new File(TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml"));
+        assert toDelete.exists();
+        toDelete.delete();
     }
 }
