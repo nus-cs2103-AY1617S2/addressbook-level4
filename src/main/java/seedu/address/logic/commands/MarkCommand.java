@@ -66,13 +66,13 @@ public class MarkCommand extends Command {
     	
     	UniqueTagList updatedTags = new UniqueTagList();
         for (Tag tag : personToEdit.getTags()) {
-        	if (tag.tagName != tag.TAG_INCOMPLETE) {
-        		try {
-        			updatedTags.add(tag);
-        		} catch (DuplicateTagException e) {
-        			e.printStackTrace();
-        		}
-        	}
+        	if (tag.tagName == tag.TAG_INCOMPLETE) continue;
+        	
+        	try {
+       			updatedTags.add(tag);
+       		} catch (DuplicateTagException e) {
+       			e.printStackTrace();
+       		}
         }
         
         try {
