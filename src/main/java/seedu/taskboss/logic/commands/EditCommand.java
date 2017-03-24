@@ -10,7 +10,6 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
-import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.DateTime;
@@ -114,12 +113,6 @@ public class EditCommand extends Command {
                 updatedEndDateTime.getDate() != null &&
                 updatedStartDateTime.getDate().after(updatedEndDateTime.getDate())) {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
-        }
-
-        if (taskToEdit.getCategories().contains((new Category("Done")))) {
-            updatedCategories.add(new Category("Done"));
-        } else {
-            updatedCategories.add(new Category("Alltasks"));
         }
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
