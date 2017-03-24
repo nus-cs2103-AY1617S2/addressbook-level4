@@ -43,6 +43,7 @@ public class TaskCard extends UiPart<Region> {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    // @@joshuaching A0163673Y
     private void updateDueLabel(ReadOnlyTask task) {
         if (task.getDueDate() == null) {
             due.setVisible(false);
@@ -70,4 +71,5 @@ public class TaskCard extends UiPart<Region> {
         }
         complete.setText(task.getComplete().getCompletion() ? "✓" : EMPTY_STRING);
     }
+    // @@author
 }
