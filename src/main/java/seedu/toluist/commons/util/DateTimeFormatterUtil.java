@@ -127,8 +127,7 @@ public class DateTimeFormatterUtil {
             // won't happen
         }
         if (recurringEndDateTime != null) {
-            formattedResult += RECURRING_DATE_SEPARATOR + UNTIL
-                             + RECURRING_DATE_SEPARATOR + formatDate(recurringEndDateTime);
+            formattedResult += RECURRING_DATE_SEPARATOR + String.join(" ", UNTIL, formatDate(recurringEndDateTime));
         }
         return formattedResult;
     }
