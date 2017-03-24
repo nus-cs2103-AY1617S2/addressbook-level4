@@ -188,7 +188,7 @@ public class MainApp extends Application {
     }
 
     @Subscribe
-    private void handleSortCriteriaChangedEvent(SortCriteriaChangedEvent event) {
+    public void handleSortCriteriaChangedEvent(SortCriteriaChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.userPrefs.updateLastUsedSortCriteria(event.getNewSortCriteria());
     }
