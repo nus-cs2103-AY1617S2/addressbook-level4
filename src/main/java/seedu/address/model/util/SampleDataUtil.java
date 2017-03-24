@@ -16,7 +16,7 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Wash clothes"), new Time("07/05/1990"), new ClockTime("18:00"),
+                new Task(new Name("Alex Yeoh"), new Time("07/05/1990"), new ClockTime("18:00"),
                          new Priority("high"), new UniqueTagList("friends"), new Status(0))
             };
         } catch (IllegalValueException e) {
