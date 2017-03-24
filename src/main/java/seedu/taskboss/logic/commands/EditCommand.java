@@ -115,6 +115,7 @@ public class EditCommand extends Command {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
+        //@@author A0144904H
         if (taskToEdit.getCategories().contains(new Category("Done"))) {
             updatedCategories.setCategories(new UniqueCategoryList("Done"));
         } else {
