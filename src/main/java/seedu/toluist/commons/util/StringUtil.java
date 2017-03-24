@@ -101,4 +101,29 @@ public class StringUtil {
         }
         return replacementList.toArray(new String[0]);
     }
+
+    /**
+     * Return a transformed string of an original string, with the first word replaced
+     * @param s the original string
+     * @param replacement the string to replace the first word
+     * @return the transformed string
+     */
+    public static String replaceFirstWord(String s, String replacement) {
+        if (replacement == null) {
+            return s;
+        }
+
+        if (!StringUtil.isPresent(s)) {
+            return s;
+        }
+
+        String[] words = s.split("\\s+");
+
+        if (words.length == 0) {
+            return s;
+        }
+
+        words[0] = replacement;
+        return String.join(" ", words);
+    }
 }

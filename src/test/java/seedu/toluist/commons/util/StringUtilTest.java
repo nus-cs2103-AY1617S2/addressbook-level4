@@ -2,6 +2,7 @@ package seedu.toluist.commons.util;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -146,6 +147,33 @@ public class StringUtilTest {
     public void getDetails_nullGiven_assertionError() {
         thrown.expect(AssertionError.class);
         StringUtil.getDetails(null);
+    }
+
+    //---------------- Tests for replaceFirstWord ----------------------------------
+
+    @Test
+    public void replaceFirstWord_nullString() {
+        assertEquals(StringUtil.replaceFirstWord(null, "a"), null);
+    }
+
+    @Test
+    public void replaceFirstWord_nullReplacement() {
+        assertEquals(StringUtil.replaceFirstWord("word", null), "word");
+    }
+
+    @Test
+    public void replaceFirstWord_emptyString() {
+        assertEquals(StringUtil.replaceFirstWord("", "r"), "");
+    }
+
+    @Test
+    public void replaceFirstWord_emptyReplacement() {
+        assertEquals(StringUtil.replaceFirstWord("word a", ""), " a");
+    }
+
+    @Test
+    public void replaceFirstWord_nonEmptyString() {
+        assertEquals(StringUtil.replaceFirstWord("a b", "c"), "c b");
     }
 
     //---------------- Tests for convertToArray --------------------------------------
