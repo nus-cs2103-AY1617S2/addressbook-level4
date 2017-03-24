@@ -3,6 +3,8 @@ package savvytodo.model;
 import java.time.DateTimeException;
 import java.util.Set;
 
+import java.util.function.Predicate;
+
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.task.DateTime;
@@ -50,13 +52,21 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
+    //@@A0124863A
+    /** Updates the filter of the filtered task list to filter by the given predicate*/
+    void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate);
+
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    //@@A0124863A
     /** Undo an operation */
     void undo() throws UndoFailureException;
 
+    //@@A0124863A
     /** Redo an operation */
     void redo() throws RedoFailureException;
+
+
 
 }

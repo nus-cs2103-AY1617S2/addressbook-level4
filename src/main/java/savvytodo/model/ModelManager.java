@@ -3,6 +3,7 @@ package savvytodo.model;
 import java.time.DateTimeException;
 import java.util.EmptyStackException;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -60,11 +61,13 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
+    //@@A0124863A
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
         UndoClearCommand undoClear = new UndoClearCommand(taskManager, newData);
         undoRedoManager.storeUndoCommand(undoClear);
         undoRedoManager.resetRedo();
+
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
@@ -79,25 +82,32 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
+    //@@A0124863A
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
+
         UndoDeleteCommand undoDelete = new UndoDeleteCommand(target);
         undoRedoManager.storeUndoCommand(undoDelete);
         undoRedoManager.resetRedo();
+
         indicateTaskManagerChanged();
     }
 
+    //@@A0124863A
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
+
         UndoAddCommand undoAdd = new UndoAddCommand(task);
         undoRedoManager.storeUndoCommand(undoAdd);
         undoRedoManager.resetRedo();
+
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
+    //@@A0124863A
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
@@ -108,8 +118,39 @@ public class ModelManager extends ComponentManager implements Model {
         UndoEditCommand undoEdit = new UndoEditCommand(filteredTaskListIndex, originalTask, editedTask);
         undoRedoManager.storeUndoCommand(undoEdit);
         undoRedoManager.resetRedo();
+
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+    }
+
+    //@@A0124863A
+    @Override
+    public void undo() throws UndoFailureException {
+        try {
+            UndoCommand undo = undoRedoManager.getUndoCommand();
+            undo.setTaskManager(taskManager);
+            undo.execute();
+            indicateTaskManagerChanged();
+        } catch (EmptyStackException e) {
+            throw new UndoFailureException(e.getMessage());
+        } catch (CommandException e) {
+            throw new UndoFailureException(e.getMessage());
+        }
+    }
+
+    //@@A0124863A
+    @Override
+    public void redo() throws RedoFailureException {
+        try {
+            UndoCommand redo = undoRedoManager.getRedoCommand();
+            redo.setTaskManager(taskManager);
+            redo.execute();
+            indicateTaskManagerChanged();
+        } catch (EmptyStackException e) {
+            throw new RedoFailureException(e.getMessage());
+        } catch (CommandException e) {
+            throw new RedoFailureException(e.getMessage());
+        }
     }
 
     //@@author A0140016B
@@ -146,7 +187,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
     }
-    //@@author A0140016B
+    //@@author A0140016
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -163,6 +204,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+
+    //@@A0124863A
+    public void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate) {
+        filteredTasks.setPredicate(predicate);
+
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -224,31 +271,5 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    @Override
-    public void undo() throws UndoFailureException {
-        try {
-            UndoCommand undo = undoRedoManager.getUndoCommand();
-            undo.setTaskManager(taskManager);
-            undo.execute();
-            indicateTaskManagerChanged();
-        } catch (EmptyStackException e) {
-            throw new UndoFailureException(e.getMessage());
-        } catch (CommandException e) {
-            throw new UndoFailureException(e.getMessage());
-        }
-    }
 
-    @Override
-    public void redo() throws RedoFailureException {
-        try {
-            UndoCommand redo = undoRedoManager.getRedoCommand();
-            redo.setTaskManager(taskManager);
-            redo.execute();
-            indicateTaskManagerChanged();
-        } catch (EmptyStackException e) {
-            throw new RedoFailureException(e.getMessage());
-        } catch (CommandException e) {
-            throw new RedoFailureException(e.getMessage());
-        }
-    }
 }

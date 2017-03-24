@@ -1,8 +1,9 @@
 package savvytodo.model.category;
 
+import java.util.function.Predicate;
 
 import savvytodo.commons.exceptions.IllegalValueException;
-
+import savvytodo.model.task.ReadOnlyTask;
 /**
  * Represents a Category in the task manager.
  * Guarantees: immutable; name is valid as declared in {@link #isValidCategoryName(String)}
@@ -33,6 +34,15 @@ public class Category {
      */
     public static boolean isValidCategoryName(String test) {
         return test.matches(CATEGORY_VALIDATION_REGEX);
+    }
+
+    //@@A0124863A
+    /**
+     * Return predicate of the category to filter tasks
+     * @return predicate expression to help filter tasks
+     */
+    public Predicate<ReadOnlyTask> getPredicate() {
+        return (ReadOnlyTask task) -> task.getCategories().contains(this);
     }
 
     @Override

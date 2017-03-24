@@ -1,6 +1,5 @@
 package savvytodo.model;
 
-
 import javafx.collections.ObservableList;
 import savvytodo.model.category.Category;
 import savvytodo.model.task.ReadOnlyTask;
