@@ -24,6 +24,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     //edit all field of a task.
     //Should not affect the Done Category
+    //@@author A0144904H
     @Test
     public void edit_allFieldsSpecified_markedDoneTask_success() throws Exception {
         String detailsToEdit = "n/Alice p/Yes sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
