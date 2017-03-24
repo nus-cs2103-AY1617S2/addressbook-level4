@@ -81,7 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
-    
+
     public void markTask(int index, Task editedTask) throws UniqueTaskList.DuplicateTaskException{
         taskManager.markTask(index,editedTask);
         indicateTaskManagerChanged();

@@ -39,13 +39,13 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        
+
         String[] parameters = keywords.toArray(new String[keywords.size()]);
         int filteredTaskListIndex = Integer.parseInt(parameters[0]);
-        
+
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, parameters[1]);
-        
+
         try {
             model.markTask(filteredTaskListIndex,editedTask);
         } catch (DuplicateTaskException e) {

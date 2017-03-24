@@ -163,7 +163,7 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return address;
         }
-        
+
         public void setStatus(Optional<Status> status) {
             assert status != null;
             this.status = status;

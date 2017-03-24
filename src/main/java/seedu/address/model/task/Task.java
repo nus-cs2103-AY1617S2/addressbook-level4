@@ -81,12 +81,12 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-    
+
     public void setStatus(Status status) {
         assert status.status != this.status.status;
         this.status = status;
     }
-    
+
     @Override
     public Status getStatus() {
         return status;

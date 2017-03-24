@@ -49,7 +49,7 @@ public class TestTask implements ReadOnlyTask {
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
-    
+
     public void setStatus(Status status){
         this.status = status;
     }
@@ -73,7 +73,7 @@ public class TestTask implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return tags;
     }
-    
+
     @Override
     public Status getStatus() {
         return status;
