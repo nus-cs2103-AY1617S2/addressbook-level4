@@ -471,9 +471,9 @@ public class LogicManagerTest {
          * Generates an TaskManager based on the list of Tasks given.
          */
         TaskManager generateTaskManager(List<Task> tasks) throws Exception {
-            TaskManager TaskManager = new TaskManager();
-            addToTaskManager(TaskManager, tasks);
-            return TaskManager;
+            TaskManager taskManager = new TaskManager();
+            addToTaskManager(taskManager, tasks);
+            return taskManager;
         }
 
         /**
