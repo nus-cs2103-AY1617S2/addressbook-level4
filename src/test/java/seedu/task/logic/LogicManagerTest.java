@@ -418,7 +418,7 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             StartTime privatePhone = new StartTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
-            EndTime email = new EndTime("111211 0909");
+            EndTime email = new EndTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
             CompletionStatus privateAddress = new CompletionStatus(false);
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -437,7 +437,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Task " + seed),
                     new StartTime(NattyDateUtil.parseSingleDate("12/11/11 0909")),
-                    new EndTime("111211 0909"),
+                    new EndTime(NattyDateUtil.parseSingleDate("12/11/11 0909")),
                     new CompletionStatus(false),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
                     );
@@ -536,7 +536,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new StartTime(NattyDateUtil.parseSingleDate("11/12/12 0000")),
-                    new EndTime("121112 0000"),
+                    new EndTime(NattyDateUtil.parseSingleDate("11/12/12 0000")),
                     new CompletionStatus(false),
                     new UniqueTagList(new Tag("tag"))
                     );

@@ -16,7 +16,6 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
-import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
 
 /**
@@ -83,14 +82,6 @@ public class ParserUtil {
         assert completionStatus != null;
         return completionStatus.isPresent() ?
                 Optional.of(new CompletionStatus(Boolean.valueOf(completionStatus.get()))) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> endDate} into an {@code Optional<EndTime>} if {@code endDate} is present.
-     */
-    public static Optional<EndTime> parseEndTime(Optional<String> endDate) throws IllegalValueException {
-        assert endDate != null;
-        return endDate.isPresent() ? Optional.of(new EndTime(endDate.get())) : Optional.empty();
     }
 
     /**

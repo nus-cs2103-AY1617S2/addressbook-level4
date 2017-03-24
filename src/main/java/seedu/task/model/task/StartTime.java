@@ -23,7 +23,6 @@ public class StartTime {
      * @throws IllegalValueException if given time string is invalid.
      */
     public StartTime(Date startTime) throws IllegalValueException {
-        assert startTime != null;
         if (!isValidTime(startTime)) {
             throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
         }
@@ -40,7 +39,7 @@ public class StartTime {
 
     @Override
     public String toString() {
-        if (value == null) {
+        if (this.value == null) {
             return "";
         }
         return value.toString();

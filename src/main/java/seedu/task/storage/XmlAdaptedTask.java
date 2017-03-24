@@ -26,7 +26,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private Date startDate;
     @XmlElement(required = true)
-    private String endDate;
+    private Date endDate;
     @XmlElement(required = true)
     private String completionStatus;
 

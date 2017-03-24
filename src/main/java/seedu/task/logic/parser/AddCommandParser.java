@@ -92,7 +92,7 @@ public class AddCommandParser {
             return new AddCommand(
                     taskName,
                     startDate,
-                    endDateString,
+                    endDate,
                     false,
                     tagSet);
         } catch (NoSuchElementException nsee) {

@@ -7,10 +7,10 @@ import org.junit.Test;
 import seedu.task.commons.util.NattyDateUtil;
 import seedu.task.model.task.StartTime;
 
-public class DateTest {
+public class StartTimeTest {
 
     @Test
-    public void isValidPhone() {
+    public void isStartTime() {
         // invalid phone numbers
 //        assertFalse(StartTime.isValidTime("")); // empty string
 //        assertFalse(StartTime.isValidTime(" ")); // spaces only

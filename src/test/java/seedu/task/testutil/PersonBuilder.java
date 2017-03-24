@@ -51,7 +51,8 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new EndTime(email));
+        // TODO: Fix this nonsense.
+        this.person.setEmail(new EndTime(NattyDateUtil.parseSingleDate(email)));
         return this;
     }
 
