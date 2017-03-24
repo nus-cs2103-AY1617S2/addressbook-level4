@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.ClockTime;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -75,11 +75,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> phone} into an {@code Optional<Time>} if {@code phone} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
+    public static Optional<Time> parseTime(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+        return phone.isPresent() ? Optional.of(new Time(phone.get())) : Optional.empty();
     }
 
     /**
@@ -91,11 +91,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> email} into an {@code Optional<ClockTime>} if {@code email} is present.
      */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
+    public static Optional<ClockTime> parseClockTime(Optional<String> email) throws IllegalValueException {
         assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+        return email.isPresent() ? Optional.of(new ClockTime(email.get())) : Optional.empty();
     }
 
     /**
