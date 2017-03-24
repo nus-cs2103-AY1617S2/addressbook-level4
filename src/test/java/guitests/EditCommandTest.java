@@ -32,7 +32,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
         TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("Yes")
                .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
-               .withInformation("123, Jurong West Ave 6, #08-111").withCategories("AllTasks","friends").build();
+               .withInformation("123, Jurong West Ave 6, #08-111").withCategories("AllTasks", "friends").build();
 
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -59,7 +59,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("work","AllTasks","fun").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("work", "AllTasks", "fun").build();
 
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -85,7 +85,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie","bestie","AllTasks").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie", "bestie", "AllTasks").build();
 
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
