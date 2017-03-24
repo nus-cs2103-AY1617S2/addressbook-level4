@@ -27,7 +27,7 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> phone} into an {@code Optional<DateTime>} if {@code phone} is present.
      * Returns null if {@code Optional<String> phone} is an empty string.
      */
     public static Optional<DateTime> parseEndDateTime(Optional<String> phone) throws IllegalValueException {
