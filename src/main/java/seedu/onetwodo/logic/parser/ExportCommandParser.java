@@ -4,24 +4,24 @@ import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 
 import seedu.onetwodo.logic.commands.Command;
 import seedu.onetwodo.logic.commands.IncorrectCommand;
-import seedu.onetwodo.logic.commands.SaveToCommand;
+import seedu.onetwodo.logic.commands.ExportCommand;
 
 /**
- * Parses input arguments and creates a new SaveTo object
+ * Parses input arguments and creates a new Export object
  */
-public class SaveToCommandParser extends FileTransferCommandParser {
+public class ExportCommandParser extends FileTransferCommandParser {
     
     /**
-     * Parses the given {@code String} of arguments in the context of the SaveToCommand
-     * and returns an SaveToCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the Export Command
+     * and returns an ExportCommand object for execution.
      */
     public Command parse(String argument) {
         assert argument != null;
         String args = argument.trim().toLowerCase();
-        SaveToCommand command;
+        ExportCommand command;
         if (args.isEmpty()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SaveToCommand.MESSAGE_USAGE));
+                    ExportCommand.MESSAGE_USAGE));
         }
         
         // check if the number of word in the input is correct
@@ -29,22 +29,22 @@ public class SaveToCommandParser extends FileTransferCommandParser {
         int argSize = argArray.length;
         if(argSize != SIZE_ONE && argSize != SIZE_TWO) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SaveToCommand.MESSAGE_USAGE));
+                    ExportCommand.MESSAGE_USAGE));
         }
         
         // check if overwrite exist in the string
         String overwriteWord, pathInput;
         if(argSize == SIZE_ONE) {
             pathInput = argArray[INDEX_ZERO];
-            command = new SaveToCommand(pathInput);
+            command = new ExportCommand(pathInput);
             command.setIsOverWriting(false);
         } else {    // has 2 arguments
             pathInput = argArray[INDEX_ONE];
             overwriteWord = argArray[INDEX_ZERO];
-            command = new SaveToCommand(pathInput);
+            command = new ExportCommand(pathInput);
             if (!isOverWrittingFormat(overwriteWord)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SaveToCommand.MESSAGE_USAGE));
+                        ExportCommand.MESSAGE_USAGE));
             } else {
                 command.setIsOverWriting(true);
             }
@@ -53,7 +53,7 @@ public class SaveToCommandParser extends FileTransferCommandParser {
         // checks if path is valid
         if(!isValidPath(pathInput)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SaveToCommand.MESSAGE_USAGE));
+                    ExportCommand.MESSAGE_USAGE));
         } else {
             return command;
         }
