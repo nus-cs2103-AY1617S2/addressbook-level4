@@ -16,7 +16,7 @@ import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing task in the task manager.
+ * Edits the details of an existing task in GeeKeep.
  */
 public class UpdateCommand extends Command {
 
@@ -106,7 +106,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in GeeKeep.";
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.

@@ -3,7 +3,7 @@ package seedu.geekeep.model.task;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's location in the task manager. Guarantees: immutable; is valid as declared in
+ * Represents a Task's location in GeeKeep. Guarantees: immutable; is valid as declared in
  * {@link #isValidLocation(String)}
  */
 public class Location {

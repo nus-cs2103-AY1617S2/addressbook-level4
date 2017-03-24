@@ -3,7 +3,7 @@ package seedu.geekeep.commons.events.model;
 import seedu.geekeep.commons.events.BaseEvent;
 import seedu.geekeep.model.ReadOnlyTaskManager;
 
-/** Indicates the TaskManager in the model has changed*/
+/** Indicates the GeeKeep in the model has changed*/
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;

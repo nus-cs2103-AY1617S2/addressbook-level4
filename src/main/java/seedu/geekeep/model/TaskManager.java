@@ -20,7 +20,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the task manager level
+ * Wraps all data at the GeeKeep level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
@@ -54,7 +54,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     //// list overwrite operations
 
     /**
-     * Adds a task to the task manager. Also checks the new task's tags and updates {@link #tags} with any new tags
+     * Adds a task to GeeKeep. Also checks the new task's tags and updates {@link #tags} with any new tags
      * found, and updates the Tag objects in the task to point to those in {@link #tags}.
      *
      * @throws UniqueTaskList.DuplicateTaskException
@@ -112,9 +112,9 @@ public class TaskManager implements ReadOnlyTaskManager {
             setTasks(newData.getTaskList());
 
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "TaskManager should not have duplicate tasks";
+            assert false : "GeeKeep should not have duplicate tasks";
         } catch (IllegalValueException ive) {
-            assert false : "TaskManager tasks startDateTime should be matched"
+            assert false : "GeeKeep tasks startDateTime should be matched"
                     + "with a later endDateTime";
         }
         try {

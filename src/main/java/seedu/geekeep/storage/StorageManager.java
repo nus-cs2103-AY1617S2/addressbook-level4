@@ -15,7 +15,7 @@ import seedu.geekeep.model.ReadOnlyTaskManager;
 import seedu.geekeep.model.UserPrefs;
 
 /**
- * Manages storage of TaskManager data in local storage.
+ * Manages storage of GeeKeep data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -47,7 +47,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ TaskManager methods ==============================
+    // ================ GeeKeep methods ==============================
 
     @Override
     public String getTaskManagerFilePath() {

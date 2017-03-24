@@ -31,7 +31,7 @@ import seedu.geekeep.testutil.TestUtil;
 import seedu.geekeep.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for TaskManager.
+ * A GUI Test class for GeeKeep.
  */
 public abstract class TaskManagerGuiTest {
 

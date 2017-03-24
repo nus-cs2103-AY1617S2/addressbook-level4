@@ -5,7 +5,7 @@ import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
- * Unmodifiable view of an task manager
+ * Unmodifiable view of GeeKeep
  */
 public interface ReadOnlyTaskManager {
 

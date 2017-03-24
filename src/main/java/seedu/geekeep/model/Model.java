@@ -32,7 +32,7 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Returns the task manager */
+    /** Returns the GeeKeep */
     ReadOnlyTaskManager getTaskManager();
 
     /** Clears existing backing model and replaces with the provided new data. */

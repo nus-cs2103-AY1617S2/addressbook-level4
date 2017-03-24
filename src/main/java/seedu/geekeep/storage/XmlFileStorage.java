@@ -25,7 +25,7 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns task manager in the file or an empty task manager
+     * Returns GeeKeep in the file or an empty GeeKeep
      */
     public static XmlSerializableTaskManager loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {
