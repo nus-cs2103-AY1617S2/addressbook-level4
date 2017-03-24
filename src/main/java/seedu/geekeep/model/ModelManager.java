@@ -173,7 +173,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "title=" + String.join(", ", nameKeyWords);
         }
     }
 

@@ -3,7 +3,7 @@ package seedu.geekeep.model.task;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's name in the Task Manager. Guarantees: immutable; is valid as declared in
+ * Represents a Task's title in the Task Manager. Guarantees: immutable; is valid as declared in
  * {@link #isValidTitle(String)}
  */
 public class Title {

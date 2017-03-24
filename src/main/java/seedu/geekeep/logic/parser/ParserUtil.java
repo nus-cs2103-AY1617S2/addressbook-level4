@@ -89,11 +89,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Title>} if {@code name} is present.
+     * Parses a {@code Optional<String> title} into an {@code Optional<Title>} if {@code title} is present.
      */
-    public static Optional<Title> parseTitle(Optional<String> name) throws IllegalValueException {
-        assert name != null;
-        return name.isPresent() ? Optional.of(new Title(name.get())) : Optional.empty();
+    public static Optional<Title> parseTitle(Optional<String> title) throws IllegalValueException {
+        assert title != null;
+        return title.isPresent() ? Optional.of(new Title(title.get())) : Optional.empty();
     }
 
     /**

@@ -3,8 +3,8 @@ package seedu.geekeep.logic.commands;
 import java.util.Set;
 
 /**
- * Finds and lists all tasks in task manager whose name contains any of the argument keywords.
- * Keyword matching is case sensitive.
+ * Finds and lists all tasks in task manager whose title contains any of the argument keywords. Keyword matching is case
+ * sensitive.
  */
 public class FindCommand extends Command {
 

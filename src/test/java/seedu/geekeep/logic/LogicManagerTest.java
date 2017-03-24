@@ -183,11 +183,11 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given title. Other fields will have some dummy values.
          */
-        Task generateTaskWithTitle(String name) throws Exception {
+        Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
-                    new Title(name),
+                    new Title(title),
                     new DateTime("01-04-17 1630"),
                     new DateTime("01-05-17 1630"),
                     new Location("House of 1"),
