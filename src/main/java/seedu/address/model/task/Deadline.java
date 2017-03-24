@@ -27,6 +27,7 @@ public class Deadline {
     public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/:-]]+";
     public static final String DATE_FORMAT = "EEE, MMM d yyyy HH:mm";
     public static final String DATE_TYPE_FLOATING = "floating";
+    public static final String DATE_STRING_DEFAULT_VALUE = DATE_TYPE_FLOATING;
 
     public final String value;
     private final List<DateGroup> parsedDeadline;

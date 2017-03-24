@@ -24,8 +24,8 @@ public class ClearCommandTest extends AddressBookGuiTest {
     }
 
     private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear");
+        commandBox.runCommand("reset");
         assertListSize(0);
-        assertResultMessage("Task manager has been cleared!");
+        assertResultMessage("Task manager has been reset!");
     }
 }

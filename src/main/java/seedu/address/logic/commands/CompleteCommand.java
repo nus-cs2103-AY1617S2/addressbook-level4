@@ -24,6 +24,8 @@ import seedu.address.model.task.UniqueTaskList;
 public class CompleteCommand extends Command {
 
     public static final String COMMAND_WORD = "complete";
+    public static final String COMMAND_WORD_FIRST_ALTERNATIVE = "finish";
+    public static final String COMMAND_WORD_SECOND_ALTERNATIVE = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task as complete "

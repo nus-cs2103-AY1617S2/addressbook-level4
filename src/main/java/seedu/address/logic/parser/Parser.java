@@ -53,15 +53,21 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD_ALTERNATIVE:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD_ALTERNATIVE:
             return new EditCommandParser().parse(arguments);
 
         case CompleteCommand.COMMAND_WORD:
+        case CompleteCommand.COMMAND_WORD_FIRST_ALTERNATIVE:
+        case CompleteCommand.COMMAND_WORD_SECOND_ALTERNATIVE:
             return new CompleteCommandParser().parse(arguments);
 
         case IncompleteCommand.COMMAND_WORD:
+        case IncompleteCommand.COMMAND_WORD_FIRST_ALTERNATIVE:
+        case IncompleteCommand.COMMAND_WORD_SECOND_ALTERNATIVE:
             return new IncompleteCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:

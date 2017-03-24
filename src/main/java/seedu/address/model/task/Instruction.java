@@ -11,13 +11,15 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Instruction {
 
     public static final String MESSAGE_INSTRUCTION_CONSTRAINTS =
-            "Task instructions can take any values, and it should not be blank";
+            "Task instructions can take any values including blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String INSTRUCTION_VALIDATION_REGEX = "[^\\s].*";
+
+    public static final String DEFAULT_VALUE = "nothing yet";
 
     public final String value;
 
@@ -31,14 +33,14 @@ public class Instruction {
         if (!isValidInstruction(instruction)) {
             throw new IllegalValueException(MESSAGE_INSTRUCTION_CONSTRAINTS);
         }
-        this.value = instruction;
+        this.value = instruction.isEmpty() ? DEFAULT_VALUE : instruction;
     }
 
     /**
      * Returns true if a given string is a valid person email.
      */
     public static boolean isValidInstruction(String test) {
-        return test.matches(INSTRUCTION_VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(INSTRUCTION_VALIDATION_REGEX);
     }
 
     @Override

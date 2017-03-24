@@ -39,7 +39,7 @@ public class UndoCommandTest extends AddressBookGuiTest {
 
     @Test
     public void undo_clearThenUndo_success() throws Exception {
-        commandBox.runCommand("clear");
+        commandBox.runCommand("reset");
 
         assertUndoSuccess();
     }
@@ -53,7 +53,7 @@ public class UndoCommandTest extends AddressBookGuiTest {
 
     @Test
     public void undo_editThenUndo_success() throws Exception {
-        String detailsToEdit = "Bobby d/91234567 p/1 i/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby for:91234567 priority:1 note:Block 123, Bobby Street 3 #husband";
         int taskListIndex = 1;
 
         commandBox.runCommand("edit " + taskListIndex + " " + detailsToEdit);
@@ -67,7 +67,7 @@ public class UndoCommandTest extends AddressBookGuiTest {
 
         assertUndoSuccess();
 
-        commandBox.runCommand("edit 1 d/floating");
+        commandBox.runCommand("edit 1 for:floating");
         commandBox.runCommand("complete floating 1");
 
         assertUndoSuccess();

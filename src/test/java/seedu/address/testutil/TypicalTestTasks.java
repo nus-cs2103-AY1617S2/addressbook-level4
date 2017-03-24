@@ -15,10 +15,10 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withTitle("Alice Pauline")
-                    .withInstruction("123, Jurong West Ave 6, #08-111").withPriority("1")
+                    .withInstruction("123, Jurong West Ave 6, 08-111").withPriority("1")
                     .withDate("140317")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withTitle("Benson Meier").withInstruction("311, Clementi Ave 2, #02-25")
+            benson = new TaskBuilder().withTitle("Benson Meier").withInstruction("311, Clementi Ave 2, 02-25")
                     .withPriority("1").withDate("140317")
                     .withTags("owesMoney", "friends").build();
             carl = new TaskBuilder().withTitle("Carl Kurz").withDate("140317")
