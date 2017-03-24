@@ -44,7 +44,7 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTDATE)));
+            //TODO: REMOVE editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTDATE)));
             editTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDDATE)));
             editTaskDescriptor.setCompletionStatus(ParserUtil.parseCompletionStatus
                     (argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS)));

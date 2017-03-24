@@ -1,6 +1,7 @@
 package seedu.task.storage;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -23,7 +24,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String startDate;
+    private Date startDate;
     @XmlElement(required = true)
     private String endDate;
     @XmlElement(required = true)

@@ -1,6 +1,7 @@
 package seedu.task.testutil;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.NattyDateUtil;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
@@ -44,8 +45,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new StartTime(phone));
+    public PersonBuilder withDateString(String dateString) throws IllegalValueException {
+        this.person.setPhone(new StartTime(NattyDateUtil.parseSingleDate(dateString)));
         return this;
     }
 

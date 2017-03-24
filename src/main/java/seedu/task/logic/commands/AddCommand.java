@@ -1,5 +1,6 @@
 package seedu.task.logic.commands;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String startDate, String endDate, boolean completionStatus, Set<String> tags)
+    public AddCommand(String name, Date startDate, String endDate, boolean completionStatus, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -75,7 +76,7 @@ public class AddCommand extends Command {
         final Set<Tag> tagSet = new HashSet<>();
         this.toAdd = new Task(
                 new Name(name),
-                new StartTime(""),
+                new StartTime(null),
                 new EndTime(""),
                 new CompletionStatus(false),
                 new UniqueTagList(tagSet)

@@ -24,6 +24,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
+import seedu.task.commons.util.NattyDateUtil;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
@@ -416,7 +417,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            StartTime privatePhone = new StartTime("111211 0909");
+            StartTime privatePhone = new StartTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
             EndTime email = new EndTime("111211 0909");
             CompletionStatus privateAddress = new CompletionStatus(false);
             Tag tag1 = new Tag("tag1");
@@ -435,7 +436,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new StartTime("111211 0909"),
+                    new StartTime(NattyDateUtil.parseSingleDate("12/11/11 0909")),
                     new EndTime("111211 0909"),
                     new CompletionStatus(false),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -534,7 +535,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new StartTime("121112 0000"),
+                    new StartTime(NattyDateUtil.parseSingleDate("11/12/12 0000")),
                     new EndTime("121112 0000"),
                     new CompletionStatus(false),
                     new UniqueTagList(new Tag("tag"))

@@ -28,6 +28,7 @@ import junit.framework.AssertionFailedError;
 import seedu.task.TestApp;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.FileUtil;
+import seedu.task.commons.util.NattyDateUtil;
 import seedu.task.commons.util.XmlUtil;
 import seedu.task.model.TaskManager;
 import seedu.task.model.tag.Tag;
@@ -73,17 +74,18 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
+            StartTime SAMPLE_START_TIME = new StartTime(NattyDateUtil.parseSingleDate("06/13/13 0909"));
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("George Best"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList())
+                new Task(new Name("Ali Muster"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("George Best"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), SAMPLE_START_TIME, new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

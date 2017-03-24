@@ -18,7 +18,6 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
 import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.StartTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -74,13 +73,6 @@ public class ParserUtil {
         return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
     }
 
-    /**
-     * Parses a {@code Optional<String> startDate} into an {@code Optional<StartTime>} if {@code startDate} is present.
-     */
-    public static Optional<StartTime> parseStartTime(Optional<String> startDate) throws IllegalValueException {
-        assert startDate != null;
-        return startDate.isPresent() ? Optional.of(new StartTime(startDate.get())) : Optional.empty();
-    }
 
     /**
      * Parses a {@code Optional<String> completionStatus} into an
