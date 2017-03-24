@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -152,7 +153,15 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void completeWithSelectedSuggestion() {
-
+        ContextMenu suggestionList = (ContextMenu) commandTextField.getPopupWindow();
+        if (suggestionList.isShowing() && !suggestionList.getItems().isEmpty()) {
+            int cursorPosition = commandTextField.getCaretPosition();
+            String[] words = commandTextField.getText(0, cursorPosition).split(" +", -1);
+            String lastWord = words[words.length - 1];  // -1 means trailing space will NOT be discarded
+            String suggestion = suggestionList.getItems().get(0).getText();
+            String remainingString = suggestion.replaceAll(lastWord, "");
+            commandTextField.insertText(cursorPosition, remainingString);
+        }
     }
 
     //@@author A0140887W
@@ -177,5 +186,4 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
         }
     }
-
 }

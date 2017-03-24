@@ -6,6 +6,9 @@ import java.util.Set;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import javafx.event.Event;
+import javafx.event.EventDispatchChain;
+import javafx.event.EventDispatcher;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -64,6 +67,7 @@ public class CommandAutoCompleteManager {
         }
 
         ContextMenu suggestionList = (ContextMenu) commandTextField.getPopupWindow();
+        suggestionList.setEventDispatcher(new ConsumeEventDispatch());
         suggestionList.getItems().clear();
 
         for (int i = 0; i < suggestions.size(); i++) {
@@ -84,5 +88,12 @@ public class CommandAutoCompleteManager {
             allCommandWords.addAll(model.getValidCommandList(defaultCommandWords));
         }
         return allCommandWords;
+    }
+}
+
+class ConsumeEventDispatch implements EventDispatcher {
+    @Override
+    public Event dispatchEvent(Event event, EventDispatchChain tail) {
+        return null;
     }
 }
