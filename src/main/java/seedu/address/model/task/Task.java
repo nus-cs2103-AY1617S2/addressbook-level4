@@ -34,6 +34,7 @@ public abstract class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
+        this(source.getName(), source.getTags(), source.isDone());
     }
 
     public void setName(Name name) {
@@ -64,6 +65,7 @@ public abstract class Task implements ReadOnlyTask {
      * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
+        assert replacement != null;
         tags.setTags(replacement);
     }
 

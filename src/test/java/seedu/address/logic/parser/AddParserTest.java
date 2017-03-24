@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
@@ -44,6 +45,6 @@ public class AddParserTest extends AddCommandParser {
         assertTrue(task.getName().fullName.equals(name.fullName));
         assertTrue(task.getStartingTime() == null);
         assertTrue(task.getTags().toSet().equals(tags.toSet()));
-        assertTrue(task.getTaskDateTime() == null);
+        assertFalse(task.getTaskDateTime() == null);
     }
 }
