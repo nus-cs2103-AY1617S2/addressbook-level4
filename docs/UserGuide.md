@@ -288,13 +288,13 @@ Sort the tasks by name using either one of the following commands:<br>
 
 <br>
 
-<p align="center"><img src="images/Sorting.png" width="700"></p><br>
+<p align="center"><img src="images/Sorting.png" width="700"></p>
 
 <h5 align="center">Figure 4: View Before and After Sorting Tasks</h5>
 
 <br>
 
-Figure 4 above illustrates the screenshots <u>before</u> and <u>after</u> the **`sort`** command was used.<br>
+Figure 4 illustrates the screenshots <u>before</u> and <u>after</u> the **`sort`** command was used.<br>
 
 <br>
 
