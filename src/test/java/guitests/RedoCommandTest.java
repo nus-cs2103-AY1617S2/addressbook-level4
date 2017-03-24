@@ -34,7 +34,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
      * Checks that the redo command properly rollback previous undo command
      * @param expectedTasksList
      */
-    public void assertRedoSuccess(TestTask...expectedTasksList ) {
+    public void assertRedoSuccess(TestTask...expectedTasksList) {
         commandBox.runCommand(RedoCommand.COMMAND_WORD);
 
         //confirm that redo command restores changes made by previous undo command
