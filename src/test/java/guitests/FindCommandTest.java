@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.tasklist.commons.core.Messages;
+import seedu.tasklist.model.task.Status;
 import seedu.tasklist.testutil.TestTask;
 
 public class FindCommandTest extends TaskListGuiTest {
@@ -33,10 +34,24 @@ public class FindCommandTest extends TaskListGuiTest {
     }
 
     @Test
+    public void find_nonEmptyList_byStatus() {
+        commandBox.runCommand("done 1");
+        td.tutorial.setStatus(new Status(true));
+        assertFindResult("find s/completed", td.tutorial);
+        assertFindResult("find s/not completed", td.homework, td.groceries, td.java, td.project, td.drink);
+
+        //find after deleting
+        commandBox.runCommand("delete 1");
+        assertFindResult("find s/not completed", td.groceries, td.java, td.project, td.drink);
+    }
+
+    @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
         assertFindResult("find CS2103T"); // no results
         assertFindResult("find t/2103"); // no results
+        assertFindResult("find s/completed"); // no results
+        assertFindResult("find s/not completed"); // no results
     }
 
     @Test
@@ -50,6 +65,7 @@ public class FindCommandTest extends TaskListGuiTest {
     public void findWithFlexibleCommand() {
         assertFindResult("locate CS2103T", td.tutorial, td.java); // multiple results
     }
+    //@@author
 
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
