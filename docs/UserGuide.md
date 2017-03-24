@@ -51,7 +51,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Add a new task to TaskIt<br>
-Format: `add <TITLE> [t/TAG|by DATE|from DATE to DATE]
+Format: `add <TITLE> [t/TAG|by DATE|from DATE to DATE]`
 
 Examples:
 
