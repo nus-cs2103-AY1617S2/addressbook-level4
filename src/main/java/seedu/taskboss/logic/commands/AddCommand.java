@@ -39,6 +39,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
+    public static final String DEFAULT = "AllTasks";
 
     private final Task toAdd;
 
@@ -51,6 +52,11 @@ public class AddCommand extends Command {
     public AddCommand(String name, String startDateTime, String endDateTime,
             String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
         final Set<Category> categorySet = new HashSet<>();
+
+        //@@author A0144904H
+        //default Category "All Tasks" assigned to all tasks automatically
+        categorySet.add(new Category(DEFAULT));
+
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
         }

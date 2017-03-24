@@ -1,6 +1,7 @@
 package seedu.taskboss.testutil;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
+import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.model.TaskBoss;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
@@ -51,19 +52,23 @@ public class TypicalTestTasks {
             hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2018 5pm")
                     .withEndDateTime("Feb 28, 2018 5pm")
-                    .withInformation("little india").build();
+                    .withInformation("little india")
+                    .withCategories(AddCommand.DEFAULT).build();
             ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2019 5pm")
                     .withEndDateTime("Feb 28, 2019 5pm")
-                    .withInformation("chicago ave").build();
+                    .withInformation("chicago ave")
+                    .withCategories(AddCommand.DEFAULT).build();
             johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("Yes")
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
-                    .withInformation("Silicon Valley").build();
+                    .withInformation("Silicon Valley")
+                    .withCategories(AddCommand.DEFAULT).build();
             kelvin = new TaskBuilder().withName("Kelvin Koo").withPriorityLevel("Yes")
                     .withStartDateTime("Dec 20 2019")
                     .withEndDateTime("Dec 21 2019")
-                    .withInformation("clementi ave 2").build();
+                    .withInformation("clementi ave 2")
+                    .withCategories(AddCommand.DEFAULT).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
