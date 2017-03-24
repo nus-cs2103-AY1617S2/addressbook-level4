@@ -138,6 +138,21 @@ Format: `exit`
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
+### 2.13. Change the directory of the task manager : `cd`
+
+Load Task Manager data from specified file path and continue using that directory for operations.<br>
+Default file path is at data/taskmanager.xml.<br>
+Format: `cd /Users/admin/taskmanager.xml`
+Format: `cd data/new/cloudsync.xml`
+
+### 2.14. Move the directory of the task manager : `mv`
+
+Save Task Manager data to specified file path and continue using that directory for operations.<br>
+If existing file with the same name exists, it will be overwritten with current Task Manager data.<br>
+Default file path is at data/taskmanager.xml.<br>
+Format: `mv /Users/admin/taskmanager.xml`
+Format: `mv data/new/cloudsync.xml`
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
