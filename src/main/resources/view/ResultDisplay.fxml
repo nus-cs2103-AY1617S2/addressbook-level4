@@ -11,7 +11,7 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <AnchorPane fx:id="mainPane">
-        <TextArea fx:id="resultDisplay" editable="false" style="-fx-background-color: derive (black, 30%);" styleClass="result-display" AnchorPane.bottomAnchor="0.0">
+        <TextArea fx:id="resultDisplay" editable="false" style="-fx-background-color: derive (black, 30%);" styleClass="result-display" wrapText="true" AnchorPane.bottomAnchor="0.0">
          <font>
             <Font name="LiSong Pro" size="14.0" />
          </font></TextArea>

@@ -178,6 +178,10 @@
     -fx-background-color: derive(#000000, 20%);
 }
 
+.menu-bar :hover{
+    -fx-background-color: transparent;
+}
+
 .menu-bar .label {
     -fx-font-size: 12pt;
     -fx-font-family: "LiSong Pro";
