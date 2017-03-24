@@ -13,6 +13,8 @@ import seedu.doist.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
+    private static final String START_TIME_TEXT = "Start: ";
+    private static final String END_TIME_TEXT = "End: ";
 
     @FXML
     private HBox cardPane;
@@ -37,28 +39,35 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    //@@author A0140887W
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        checkbox.setDisable(true);
-        checkbox.setStyle("-fx-opacity: 1");
         desc.setText(task.getDescription().desc);
         id.setText(displayedIndex + ". ");
         priority.setText(task.getPriority().toString());
+
+        // Times
         if (task.getStartDate() == null) {
             startTime.setText("");
         } else {
-            startTime.setText(task.getStartDate().toString());
+            startTime.setText(START_TIME_TEXT + task.getStartDate().toString());
         }
         if (task.getEndDate() == null) {
             endTime.setText("");
         } else {
-            endTime.setText(task.getEndDate().toString());
+            endTime.setText(END_TIME_TEXT + task.getEndDate().toString());
         }
+
+        // Checkbox
+        checkbox.setDisable(true);
+        checkbox.setStyle("-fx-opacity: 1");
         if (task.getFinishedStatus().getIsFinished()) {
             checkbox.setSelected(true);
         } else {
             checkbox.setSelected(false);
         }
+
+        // Tags
         initTags(task);
     }
 

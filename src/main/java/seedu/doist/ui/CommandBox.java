@@ -150,12 +150,16 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(string.length());
     }
 
+    //@@author A0140887W
     /**
      * Sets the command box style to indicate a successful command.
      */
     private void setStyleToIndicateCommandSuccess() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
-        commandTextField.getStyleClass().add(SUCCESS_STYLE_CLASS);
+        // Only add success style if don't already have
+        if (!commandTextField.getStyleClass().contains(SUCCESS_STYLE_CLASS)) {
+            commandTextField.getStyleClass().add(SUCCESS_STYLE_CLASS);
+        }
     }
 
     /**
@@ -163,7 +167,10 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToIndicateCommandFailure() {
         commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
-        commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
+        // Only add error style if don't already have
+        if (!commandTextField.getStyleClass().contains(ERROR_STYLE_CLASS)) {
+            commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
+        }
     }
 
 }
