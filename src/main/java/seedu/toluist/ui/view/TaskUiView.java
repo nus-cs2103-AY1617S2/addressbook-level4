@@ -21,6 +21,7 @@ public class TaskUiView extends UiView {
     private static final String CLOCK_ICON_IMAGE_PATH = "/images/clock.png";
     private static final String OVERDUE_ICON_IMAGE_PATH = "/images/warning.png";
     private static final String HIGH_PRIORITY_ICON_IMAGE_PATH = "/images/star.png";
+    private static final String RECURRING_ICON_IMAGE_PATH = "/images/clock.png";
     private static final String COMPLETED_STYLE_CLASS = "completed";
     private static final String OVERDUE_STYLE_CLASS = "overdue";
     private static final double STATUS_BOX_SPACING_VALUE = 10.0;
@@ -36,9 +37,13 @@ public class TaskUiView extends UiView {
     @FXML
     private Label date;
     @FXML
+    private Label recurringDate;
+    @FXML
     private HBox statusBox;
     @FXML
     private ImageView clockIcon;
+    @FXML
+    private ImageView recurringIcon;
 
     private Task task;
     private int displayedIndex;
@@ -56,6 +61,7 @@ public class TaskUiView extends UiView {
         boolean isTaskWithDeadline = task.isTaskWithDeadline();
         boolean isTask = isFloatingTask || isTaskWithDeadline;
         boolean isEvent = task.isEvent();
+        boolean isRecurring = task.isRecurring();
 
         tagsPane.getChildren().clear();
 
@@ -92,6 +98,24 @@ public class TaskUiView extends UiView {
         }
         if (isTaskWithDeadline || task.isEvent()) {
             clockIcon.setImage(AppUtil.getImage(CLOCK_ICON_IMAGE_PATH));
+        }
+
+        if (isRecurring && isTaskWithDeadline) {
+            recurringDate.setText(
+                    DateTimeFormatterUtil.formatRecurringTaskDeadline(
+                            task.getEndDateTime(),
+                            task.getRecurringEndDateTime(),
+                            task.getRecurringFrequency()));
+        } else if (isRecurring && isEvent) {
+            recurringDate.setText(
+                    DateTimeFormatterUtil.formatRecurringEvent(
+                            task.getStartDateTime(),
+                            task.getEndDateTime(),
+                            task.getRecurringEndDateTime(),
+                            task.getRecurringFrequency()));
+        }
+        if (isRecurring) {
+            recurringIcon.setImage(AppUtil.getImage(RECURRING_ICON_IMAGE_PATH));
         }
         if (task.isCompleted()) {
             FxViewUtil.addStyleClass(taskPane, COMPLETED_STYLE_CLASS);
