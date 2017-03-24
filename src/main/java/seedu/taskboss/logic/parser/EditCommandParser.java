@@ -19,11 +19,16 @@ import seedu.taskboss.logic.commands.EditCommand;
 import seedu.taskboss.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
+
+    private static final String STRING_PREFIX_END_DATE = "ed/";
+    private static final String STRING_PREFIX_START_DATE = "sd/";
+    private static final String EMPTY_STRING = "";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -35,7 +40,8 @@ public class EditCommandParser {
                 new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_INFORMATION,
                         PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
-        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+        List<Optional<String>> preambleFields = ParserUtil.
+                splitPreamble(argsTokenizer.getPreamble().orElse(EMPTY_STRING), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
@@ -47,10 +53,27 @@ public class EditCommandParser {
             editTaskDescriptor.setName(ParserUtil.parseName(argsTokenizer.getValue(PREFIX_NAME)));
             editTaskDescriptor.setPriorityLevel(ParserUtil.
                     parsePriorityLevel(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setStartDateTime(ParserUtil.
-                    parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE)));
-            editTaskDescriptor.setEndDateTime(ParserUtil.
-                    parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE)));
+
+            Optional<DateTime> startDateTimeOp = ParserUtil.
+                    parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE));
+            // if user input is "edit INDEX sd/", remove the current startDateTime
+            if (!startDateTimeOp.isPresent() && args.contains(STRING_PREFIX_START_DATE)) {
+                editTaskDescriptor.setStartDateTime(Optional.of(new DateTime(EMPTY_STRING)));
+            } else {
+                editTaskDescriptor.setStartDateTime(ParserUtil.
+                        parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE)));
+            }
+
+            Optional<DateTime> endDateTimeOp = ParserUtil.
+                    parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE));
+            // if user input is "edit INDEX ed/", remove the current endDateTime
+            if (!endDateTimeOp.isPresent() && args.contains(STRING_PREFIX_END_DATE)) {
+                editTaskDescriptor.setEndDateTime(Optional.of(new DateTime(EMPTY_STRING)));
+            } else {
+                editTaskDescriptor.setEndDateTime(ParserUtil.
+                        parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE)));
+            }
+
             editTaskDescriptor.setInformation(ParserUtil.parseInformation
                     (argsTokenizer.getValue(PREFIX_INFORMATION)));
             editTaskDescriptor.setCategories(parseCategoriesForEdit
@@ -79,7 +102,7 @@ public class EditCommandParser {
         if (categories.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> categorySet = categories.size() == 1 && categories.contains("")
+        Collection<String> categorySet = categories.size() == 1 && categories.contains(EMPTY_STRING)
                 ? Collections.emptySet() : categories;
         return Optional.of(ParserUtil.parseCategories(categorySet));
     }

@@ -1,4 +1,3 @@
-//@@author A0143157J
 package seedu.taskboss.logic.parser;
 
 import java.util.List;
@@ -9,6 +8,7 @@ import com.joestelmach.natty.DateGroup;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.task.DateTime;
 
+//@@author A0143157J
 /*
  * Parses date and returns a DateTime object for execution
  */
@@ -57,10 +57,14 @@ public class DateTimeParser {
      * @return parsed DateTime object
      */
     public DateTime parseDate(String date) throws IllegalValueException {
+        if (date.equals("Optional[" + EMPTY_STRING + "]")) {
+            return new DateTime(EMPTY_STRING);
+        }
+
         List <DateGroup> dateGroupList = parse(date);
         int numDates = countDates(dateGroupList);
 
-        if (!date.equals(EMPTY_STRING) && numDates == 0) {
+        if (numDates == 0) {
             throw new IllegalValueException(ERROR_INVALID_DATE);
         } else if (numDates > 1) {
             throw new IllegalValueException(ERROR_MULTIPLE_DATES);
