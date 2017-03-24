@@ -27,8 +27,9 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)"
-            + "[TITLE] [s/STARTDATE] [e/ENDDATE] [d/DESCRIPTION ] [#TAG]...\n" + "Example: " + COMMAND_WORD + " or "
-            + ALTERNATIVE_COMMAND_WORD + " 1 s/23/05/2017 d/Go to John's house instead";
+            + "[TITLE] [s/STARTDATE] [e/ENDDATE] [d/DESCRIPTION ] [#TAG]...\n"
+            + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD
+            + " 1 s/23/05/2017 d/Go to John's house instead";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -84,7 +85,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
+                                             EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);

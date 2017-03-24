@@ -15,11 +15,11 @@ public class TaskManagerStorageDirectoryChangedEvent extends BaseEvent {
         this.newFilePath = newFilePath;
         this.newConfig = newConfig;
     }
-    
+
     public String getNewFilePath() {
         return this.newFilePath;
     }
-    
+
     public Config getNewConfig() {
         return this.newConfig;
     }
