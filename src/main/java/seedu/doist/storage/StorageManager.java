@@ -15,7 +15,7 @@ import seedu.doist.model.ReadOnlyTodoList;
 import seedu.doist.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Doist data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -24,14 +24,14 @@ public class StorageManager extends ComponentManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(TodoListStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TodoListStorage doistStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.todoListStorage = addressBookStorage;
+        this.todoListStorage = doistStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlTodoListStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String doistFilePath, String userPrefsFilePath) {
+        this(new XmlTodoListStorage(doistFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -47,7 +47,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ Doist methods ==============================
 
     @Override
     public String getTodoListFilePath() {
@@ -66,14 +66,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveTodoList(ReadOnlyTodoList addressBook) throws IOException {
-        saveTodoList(addressBook, todoListStorage.getTodoListFilePath());
+    public void saveTodoList(ReadOnlyTodoList doist) throws IOException {
+        saveTodoList(doist, todoListStorage.getTodoListFilePath());
     }
 
     @Override
-    public void saveTodoList(ReadOnlyTodoList addressBook, String filePath) throws IOException {
+    public void saveTodoList(ReadOnlyTodoList doist, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        todoListStorage.saveTodoList(addressBook, filePath);
+        todoListStorage.saveTodoList(doist, filePath);
     }
 
 

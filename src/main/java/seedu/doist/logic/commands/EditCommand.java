@@ -86,12 +86,12 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         FinishedStatus finishStatus = editTaskDescriptor.getFinishStatus().orElse(taskToEdit.getFinishedStatus());
-        Date startDate = (editTaskDescriptor.getStartDate() == null) ? null :
+        Date updatedStartDate = (editTaskDescriptor.getStartDate() == null) ? null :
             editTaskDescriptor.getStartDate().orElse(taskToEdit.getStartDate());
-        Date endDate = (editTaskDescriptor.getEndDate() == null) ? null :
+        Date updateEndDate = (editTaskDescriptor.getEndDate() == null) ? null :
             editTaskDescriptor.getEndDate().orElse(taskToEdit.getStartDate());
 
-        return new Task(updatedName, updatedPriority, finishStatus, updatedTags, startDate, endDate);
+        return new Task(updatedName, updatedPriority, finishStatus, updatedTags, updatedStartDate, updateEndDate);
     }
 
     /**
