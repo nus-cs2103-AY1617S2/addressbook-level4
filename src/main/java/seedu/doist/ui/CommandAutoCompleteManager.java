@@ -11,6 +11,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import seedu.doist.model.Model;
 
+//@@author A0147980U
 public class CommandAutoCompleteManager {
     private static CommandAutoCompleteManager instance;
 
@@ -65,12 +66,10 @@ public class CommandAutoCompleteManager {
         ContextMenu suggestionList = (ContextMenu) commandTextField.getPopupWindow();
         suggestionList.getItems().clear();
 
-        int index = 0;
-        for (String word : suggestions) {
-            MenuItem m = new MenuItem(word);
-            suggestionList.getItems().add(index, m);
-            index++;
+        for (int i = 0; i < suggestions.size(); i++) {
+            suggestionList.getItems().add(i, new MenuItem(suggestions.get(i)));
         }
+
         if (!commandTextField.getPopupWindow().isShowing()) {
             commandTextField.getPopupWindow().show(commandTextField,
                                                    suggestionList.getAnchorX(),

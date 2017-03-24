@@ -8,6 +8,7 @@ import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
+//@@author A0147980U
 public class CommandHighlightManager {
     private static final String COMMAND_WORD_STYLE = "-fx-fill: #1a75ff;";  // blue"
     private static final String PARAMETER_KEY_STYLE = "-fx-fill: #55ae47;";  // green
