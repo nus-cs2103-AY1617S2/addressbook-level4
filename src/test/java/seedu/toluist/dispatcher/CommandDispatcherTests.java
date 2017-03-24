@@ -28,7 +28,12 @@ public class CommandDispatcherTests {
 
     @Before
     public void setUp() {
+        when(aliasTable.dealias("m")).thenReturn("m");
         when(aliasTable.dealias("mi")).thenReturn("mark incomplete");
+        when(aliasTable.dealias( "a")).thenReturn("a");
+        when(aliasTable.dealias("add")).thenReturn("add");
+        when(aliasTable.dealias("add a task")).thenReturn("add a task");
+        dispatcher.setAliasConfig(aliasTable);
     }
 
     @Test
