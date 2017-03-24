@@ -19,7 +19,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
     public void clearByCategory_existingCategory() {
         String categoryDetails = "c/friends";
         TestTask[] expectedTaskList =
-                new TestTask[]{td.carl,  td.elle, td.daniel, td.george, td.fiona};
+                new TestTask[]{td.taskC,  td.taskE, td.taskD, td.taskG, td.taskF};
         boolean isShortedCommand = false;
         assertClearSuccess(isShortedCommand, categoryDetails, expectedTaskList);
     }
@@ -30,7 +30,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
     public void clearByCategory_existingCategoryWithShortcut() {
         String categoryDetails = "c/friends";
         TestTask[] expectedTaskList =
-                new TestTask[]{td.carl,  td.elle, td.daniel, td.george, td.fiona};
+                new TestTask[]{td.taskC,  td.taskE, td.taskD, td.taskG, td.taskF};
         boolean isShortedCommand = true;
         assertClearSuccess(isShortedCommand, categoryDetails, expectedTaskList);
     }

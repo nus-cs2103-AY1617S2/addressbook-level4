@@ -27,13 +27,13 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
     private void assertRenameCategoryResult(String command) throws IllegalValueException {
         TestTask sampleA;
         TestTask sampleB;
-        sampleA = new TaskBuilder().withName("Alice Pauline")
+        sampleA = new TaskBuilder().withName("Attend wedding")
                 .withInformation("123, Jurong West Ave 6, #08-111")
                 .withPriorityLevel("Yes")
                 .withStartDateTime("Feb 18, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withCategories("Project").build();
-        sampleB = new TaskBuilder().withName("Benson Meier")
+        sampleB = new TaskBuilder().withName("Birthday party")
                 .withInformation("311, Clementi Ave 2, #02-25")
                 .withPriorityLevel("No")
                 .withStartDateTime("Feb 23, 2017 10pm")

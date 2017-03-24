@@ -21,26 +21,26 @@ public class FindCommandTest extends TaskBossGuiTest {
     // Equivalence partition: find by keywords in a non-empty list
     @Test
     public void find_byKeywordNonEmptyList() {
-        assertFindResult("find k/Mark"); // no results
-        assertFindResult("find k/Meier", td.daniel, td.benson); // multiple results
+        assertFindResult("find k/Hey"); // no results
+        assertFindResult("find k/code", td.taskE, td.taskD); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 2");
-        assertFindResult("find k/Meier", td.daniel);
+        assertFindResult("find k/code", td.taskE);
     }
 
     // EP: find by name in an empty list
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
-        assertFindResult("find k/Jean"); // no results
+        assertFindResult("find k/meeting"); // no results
     }
 
     // EP: find by start datetime with short command
     @Test
     public void find_usingShortCommand() {
         assertFindResult("f sd/Jul"); // no results
-        assertFindResult("f sd/5:00 PM", td.elle, td.alice, td.george); // multiple results
+        assertFindResult("f sd/5:00 PM", td.taskE, td.taskA, td.taskG); // multiple results
     }
 
     //EP: invalid command word

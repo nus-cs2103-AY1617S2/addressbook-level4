@@ -30,7 +30,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
     public void markTaskDone_success() throws Exception {
         int taskBossIndex = 1;
 
-        TestTask markedDoneTask = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("Yes")
+        TestTask markedDoneTask = new TaskBuilder().withName("Clean house").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 19, 2017 11pm")
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withInformation("wall street").withCategories("Done").build();
@@ -100,7 +100,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
     public void markTaskDoneLong_success() throws Exception {
         int taskBossIndex = 1;
 
-        TestTask markedDoneTask = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("Yes")
+        TestTask markedDoneTask = new TaskBuilder().withName("Clean house").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 19, 2017 11pm")
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withInformation("wall street").withCategories("Done").build();
@@ -119,7 +119,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
     public void markTaskDone_Short_Command_success() throws Exception {
         int taskBossIndex = 4;
 
-        TestTask markedDoneTask = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("Yes")
+        TestTask markedDoneTask = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 20, 2017 11.30pm")
                 .withEndDateTime("Apr 28, 2017 3pm")
                 .withInformation("10th street").withCategories("Done").build();
@@ -137,7 +137,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markDone_findThenMarkDone_success() throws Exception {
-        commandBox.runCommand("find n/Carl");
+        commandBox.runCommand("find k/Clean house");
 
         int filteredTaskListIndex = 1;
         int taskBossIndex = 1;
