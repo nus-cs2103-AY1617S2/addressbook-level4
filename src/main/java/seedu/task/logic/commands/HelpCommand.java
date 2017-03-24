@@ -89,7 +89,7 @@ public class HelpCommand extends Command {
             case ExitCommand.COMMAND_WORD_1:
                 return new CommandResult(ExitCommand.MESSAGE_USAGE);
 
-            case SaveCommand.COMMAND_WORD:
+            case SaveCommand.COMMAND_WORD_1:
                 return new CommandResult(SaveCommand.MESSAGE_USAGE);
 
             default:
