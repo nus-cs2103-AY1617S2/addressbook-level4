@@ -317,4 +317,8 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(sortCriteria);
         indicateEzDoChanged();
     }
+
+    public void indicateSortCriteriaChanged() {
+        raise(new SortCriteriaChangedEvent(currentSortCriteria));
+    }
 }
