@@ -10,7 +10,6 @@ import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.EditCommand;
 import seedu.taskboss.model.category.Category;
-import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.testutil.TaskBuilder;
 import seedu.taskboss.testutil.TestTask;
@@ -132,9 +131,6 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 n/*&");
-        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
-
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
 
