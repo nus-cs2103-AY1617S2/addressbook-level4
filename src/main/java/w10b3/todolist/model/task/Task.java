@@ -3,7 +3,6 @@ package w10b3.todolist.model.task;
 import java.util.Objects;
 import java.util.Optional;
 
-import w10b3.todolist.commons.util.CollectionUtil;
 import w10b3.todolist.model.tag.UniqueTagList;
 
 /**
@@ -37,8 +36,6 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Title title, Venue venue, StartTime startTime, EndTime endTime,
             UrgencyLevel urgencyLevel, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(title);
-        assert isValidTime(startTime, endTime);
         this.title = title;
         this.venue = venue;
         this.startTime = startTime;
