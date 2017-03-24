@@ -32,6 +32,7 @@ public class XmlAdaptedTask {
     private String address;
     @XmlElement(required = true)
     private String status;
+    @XmlElement(required = true)
     private String priority;
 
     @XmlElement
@@ -53,6 +54,7 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         time = source.getTime().value;
         clockTime = source.getClockTime().value;
+        priority = source.getPriority().priorityLevel;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));

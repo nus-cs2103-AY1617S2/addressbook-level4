@@ -43,6 +43,8 @@ public interface ReadOnlyTask {
                 .append(getTime())
                 .append(" ClockTime: ")
                 .append(getClockTime())
+                .append(" Priority: ")
+                .append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
