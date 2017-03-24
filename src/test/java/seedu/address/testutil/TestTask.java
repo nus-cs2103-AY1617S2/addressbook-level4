@@ -1,10 +1,13 @@
+/* @@author A0119505J */
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Time;
 
 /**
@@ -13,10 +16,11 @@ import seedu.address.model.task.Time;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
     private ClockTime clockTime;
     private Time time;
+    private Priority priority;
     private UniqueTagList tags;
+    private Status status;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -29,7 +33,9 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.time = taskToCopy.getTime();
         this.clockTime = taskToCopy.getClockTime();
+        this.priority = taskToCopy.getPriority();
         this.tags = taskToCopy.getTags();
+        this.status = taskToCopy.getStatus();
     }
 
     public void setName(Name name) {
@@ -44,9 +50,17 @@ public class TestTask implements ReadOnlyTask {
     public void setClockTime(ClockTime clockTime) {
         this.clockTime = clockTime;
     }
+    //@@author A0143873Y
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
+    }
+    
+    public void setStatus(Status status){
+        this.status = status;
     }
 
     @Override
@@ -63,10 +77,19 @@ public class TestTask implements ReadOnlyTask {
     public ClockTime getClockTime() {
         return clockTime;
     }
+  
+    public Priority getPriority() {
+        return priority;
+    }
 
     @Override
     public UniqueTagList getTags() {
         return tags;
+    }
+    
+    @Override
+    public Status getStatus() {
+        return status;
     }
 
     @Override
@@ -79,6 +102,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getTime().value + " ");
         sb.append("c/" + this.getClockTime().value + " ");
+        sb.append("p/" + this.getPriority().priorityLevel + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

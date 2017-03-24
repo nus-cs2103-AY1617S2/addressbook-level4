@@ -10,7 +10,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
 
@@ -28,6 +30,9 @@ public class XmlAdaptedTask {
     private String clockTime;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String status;
+    private String priority;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -75,7 +80,9 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final Time time = new Time(this.time);
         final ClockTime clockTime = new ClockTime(this.clockTime);
+        final Priority priority = new Priority(this.priority);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, time, clockTime, tags);
+        final Status status = new Status(0);
+        return new Task(name, time, clockTime, priority, tags, status);
     }
 }

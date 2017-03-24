@@ -11,7 +11,9 @@ public interface ReadOnlyTask {
     Name getName();
     Time getTime();
     ClockTime getClockTime();
+    Status getStatus();
     //Address getAddress();
+    Priority getPriority();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -45,5 +47,5 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
+    
 }

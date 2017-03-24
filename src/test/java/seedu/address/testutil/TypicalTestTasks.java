@@ -1,3 +1,4 @@
+/* @@author A0119505J */
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -10,23 +11,25 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, hoon, ida;
 
     public TypicalTestTasks() {
         try {
+
             alice = new TaskBuilder().withName("Alice Pauline").withTime("17/02/2017").withClockTime("23:59")
-                    .withTags("friends").build();
+              .withPriority("high").withTags("friends").withPriority("med").withStatus(0).build();
             benson = new TaskBuilder().withName("Benson Meier").withTime("17/02/2017").withClockTime("23:59")
-            .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withTime("17/02/2017").withClockTime("23:59").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withTime("17/02/2017").withClockTime("23:59").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withTime("17/02/2017").withClockTime("23:59").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withTime("17/02/2017").withClockTime("23:59").build();
-            george = new TaskBuilder().withName("George Best").withTime("17/02/2017").withClockTime("23:59").build();
+              .withTags("owesMoney", "friends").withPriority("med").withStatus(0).build();
+            carl = new TaskBuilder().withName("Carl Kurz").withTime("17/02/2017").withClockTime("23:59")
+              .withPriority("med").withStatus(0).build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withTime("17/02/2017").withClockTime("23:59")
+              .withPriority("low").withStatus(0).build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withTime("17/02/2017").withClockTime("23:59").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withTime("17/02/2017").withClockTime("23:59").build();
+            hoon = new TaskBuilder().withName("Hoon Meier").withTime("17/02/2017").withClockTime("23:59")
+              .withPriority("med").withStatus(0).build();
+            ida = new TaskBuilder().withName("Ida Mueller").withTime("17/02/2017").withClockTime("23:59")
+              .withPriority("low").withStatus(0).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -44,7 +47,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{alice, benson, carl, daniel};
     }
 
     public TaskManager getTypicalTaskManager() {

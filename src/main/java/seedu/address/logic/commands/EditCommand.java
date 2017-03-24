@@ -10,7 +10,9 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
 import seedu.address.model.task.UniqueTaskList;
@@ -80,10 +82,10 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
         ClockTime updatedClockTime = editTaskDescriptor.getClockTime().orElseGet(taskToEdit::getClockTime);
-        //Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
+        Status updatedStatus = editTaskDescriptor.getStatus().orElseGet(taskToEdit::getStatus);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-
-        return new Task(updatedName, updatedTime, updatedClockTime, updatedTags);
+        return new Task(updatedName, updatedTime, updatedClockTime, updatedPriority, updatedTags, updatedStatus);
     }
 
     /**
@@ -95,7 +97,9 @@ public class EditCommand extends Command {
         private Optional<Time> phone = Optional.empty();
         private Optional<ClockTime> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Status> status = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -104,7 +108,9 @@ public class EditCommand extends Command {
             this.phone = toCopy.getTime();
             this.email = toCopy.getClockTime();
             this.address = toCopy.getAddress();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
+            this.status = toCopy.getStatus();
         }
 
         /**
@@ -141,6 +147,15 @@ public class EditCommand extends Command {
             return email;
         }
 
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
+        }
+
         public void setAddress(Optional<Address> address) {
             assert address != null;
             this.address = address;
@@ -148,6 +163,15 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return address;
+        }
+        
+        public void setStatus(Optional<Status> status) {
+            assert status != null;
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return status;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

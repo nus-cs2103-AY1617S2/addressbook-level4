@@ -5,6 +5,8 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Time;
 
 /**
@@ -48,6 +50,16 @@ public class TaskBuilder {
 
     public TaskBuilder withTime(String time) throws IllegalValueException {
         this.task.setTime(new Time(time));
+        return this;
+    }
+
+    public TaskBuilder withPriority(String priority) throws IllegalValueException {
+        this.task.setPriority(new Priority(priority));
+        return this;
+    }
+    
+    public TaskBuilder withStatus(int status) throws IllegalValueException {
+        this.task.setStatus(new Status(status));
         return this;
     }
 

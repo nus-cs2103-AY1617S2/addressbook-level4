@@ -19,6 +19,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String TIME_FIELD_ID = "#time";
     private static final String CLOCKTIME_FIELD_ID = "#clockTime";
+    private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -46,6 +47,10 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getClockTime() {
         return getTextFromLabel(CLOCKTIME_FIELD_ID);
+    }
+
+    public String getPriority() {
+        return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -87,6 +92,7 @@ public class TaskCardHandle extends GuiHandle {
                     && getTime().equals(handle.getTime())
                     && getClockTime().equals(handle.getClockTime())
                     && getAddress().equals(handle.getAddress())
+                    && getPriority().equals(handle.getPriority())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
