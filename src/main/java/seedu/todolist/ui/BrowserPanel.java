@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.todolist.commons.util.FxViewUtil;
 import seedu.todolist.model.task.Task;
 
@@ -22,7 +23,14 @@ public class BrowserPanel extends UiPart<Region> {
     private Label nameLabel;
 
     @FXML
+    private Label tagsheader;
+
+    @FXML
     private FlowPane tagsFlow;
+
+    @FXML
+    private VBox taskDetails;
+
 
 
 
@@ -44,7 +52,9 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadPersonPage(Task task) {
+        tagsFlow.setHgap(10);
         nameLabel.setText(task.getName().toString());
+        tagsheader.setText("Tags:");
         //will need to fix this
         task.getTags().forEach(tag -> tagsFlow.getChildren().add(new Label(tag.tagName)));
     }

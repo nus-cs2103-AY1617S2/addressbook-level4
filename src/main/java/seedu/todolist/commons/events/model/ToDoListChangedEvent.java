@@ -7,9 +7,11 @@ import seedu.todolist.model.ReadOnlyToDoList;
 public class ToDoListChangedEvent extends BaseEvent {
 
     public final ReadOnlyToDoList data;
+    public final int index;
 
-    public ToDoListChangedEvent(ReadOnlyToDoList data) {
+    public ToDoListChangedEvent(ReadOnlyToDoList data, int index) {
         this.data = data;
+        this.index = index;
     }
 
     @Override
