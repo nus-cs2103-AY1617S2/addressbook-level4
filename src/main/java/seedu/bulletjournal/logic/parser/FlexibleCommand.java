@@ -3,7 +3,7 @@ package seedu.bulletjournal.logic.parser;
 /**
  * Provides variations of commands Note: hard-coded for v0.2, will implement nlp
  * for future versions
- * @author Tu An - arishuynhvan
+ * @author A0127826Y
  */
 
 public class FlexibleCommand {
