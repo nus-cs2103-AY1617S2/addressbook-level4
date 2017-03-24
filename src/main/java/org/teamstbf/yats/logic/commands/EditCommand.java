@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
-import org.teamstbf.yats.model.item.Date;
+import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
@@ -104,7 +104,7 @@ public class EditCommand extends Command {
 	public static class EditTaskDescriptor {
 		private Optional<Title> name = Optional.empty();
 		private Optional<Location> location = Optional.empty();
-		private Optional<Date> deadline = Optional.empty();
+		private Optional<SimpleDate> deadline = Optional.empty();
 		private Optional<Schedule> startTime = Optional.empty();
 		private Optional<Schedule> endTime = Optional.empty();
 		private Optional<Description> description = Optional.empty();
@@ -189,7 +189,7 @@ public class EditCommand extends Command {
 			return description;
 		}
 
-		public Optional<Date> getDeadline() {
+		public Optional<SimpleDate> getDeadline() {
 			return deadline;
 		}
 

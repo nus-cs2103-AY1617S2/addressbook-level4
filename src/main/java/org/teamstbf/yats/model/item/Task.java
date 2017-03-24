@@ -12,7 +12,7 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 public class Task implements ReadOnlyItem {
 
 	private Title title;
-	private Date deadline;
+	private SimpleDate deadline;
 	private Schedule schedule;
 	private Description description;
 	private Periodic periodic;
@@ -29,7 +29,7 @@ public class Task implements ReadOnlyItem {
 	/**
 	 * Every field must be present and not null.
 	 */
-	public Task(Title title, Date deadline, Schedule schedule, Description description, UniqueTagList tags) {
+	public Task(Title title, SimpleDate deadline, Schedule schedule, Description description, UniqueTagList tags) {
 		assert !CollectionUtil.isAnyNull(title, deadline, schedule, description, tags);
 		this.title = title;
 		this.deadline = deadline;
@@ -47,7 +47,7 @@ public class Task implements ReadOnlyItem {
 	}
 
 	@Override
-	public Date getDeadline() {
+	public SimpleDate getDeadline() {
 		return deadline;
 	}
 
@@ -96,7 +96,7 @@ public class Task implements ReadOnlyItem {
 		this.setTags(replacement.getTags());
 	}
 
-	public void setDeadline(Date deadline) {
+	public void setDeadline(SimpleDate deadline) {
 		assert deadline != null;
 		this.deadline = deadline;
 	}

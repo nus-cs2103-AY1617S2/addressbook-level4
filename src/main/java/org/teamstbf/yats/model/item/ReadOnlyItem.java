@@ -9,7 +9,7 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 public interface ReadOnlyItem {
 
     Title getTitle();
-    Date getDeadline();
+    SimpleDate getDeadline();
     Schedule getTiming();
     Description getDescription();
     Periodic getPeriodic();

@@ -330,7 +330,7 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return dateKeyWords.stream().filter(
-					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().getDate().toString(), keyword))
+					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
 					.findAny().isPresent();
 		}
 
@@ -351,7 +351,7 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return startTimeKeyWords.stream().filter(
-					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().getTime().toString(), keyword))
+					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
 					.findAny().isPresent();
 		}
 

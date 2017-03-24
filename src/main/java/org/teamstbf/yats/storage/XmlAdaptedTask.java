@@ -61,8 +61,8 @@ public class XmlAdaptedTask {
         title = source.getTitle().fullName;
         location = source.getLocation().value;
         period = source.getPeriod().value;
-        startTime = source.getStartTime().value;
-        endTime = source.getEndTime().value;
+        startTime = source.getStartTime().toString();
+        endTime = source.getEndTime().toString();
         description = source.getDescription().value;
         completed = source.getIsDone().value;
         tagged = new ArrayList<>();

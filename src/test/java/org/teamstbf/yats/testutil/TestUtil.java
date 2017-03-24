@@ -17,7 +17,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.FileUtil;
 import org.teamstbf.yats.commons.util.XmlUtil;
 import org.teamstbf.yats.model.TaskManager;
-import org.teamstbf.yats.model.item.Date;
+import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;

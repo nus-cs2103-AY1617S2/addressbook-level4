@@ -1,6 +1,6 @@
 package org.teamstbf.yats.testutil;
 
-import org.teamstbf.yats.model.item.Date;
+import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
@@ -47,15 +47,15 @@ public class TestEvent implements ReadOnlyEvent {
 		sb.append("add " + this.getTitle().fullName + " ");
 		sb.append("l/" + this.getLocation().value + " ");
 		sb.append("p/" + this.getPeriod().value + " ");
-		sb.append("s/" + this.getStartTime().value + " ");
-		sb.append("e/" + this.getEndTime().value + " ");
+		sb.append("s/" + this.getStartTime().toString() + " ");
+		sb.append("e/" + this.getEndTime().toString() + " ");
 		sb.append("d/" + this.getDescription().value + " ");
 		this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
 		return sb.toString();
 	}
 
 	@Override
-	public Date getDeadline() {
+	public SimpleDate getDeadline() {
 		// TODO Auto-generated method stub
 		return null;
 	}

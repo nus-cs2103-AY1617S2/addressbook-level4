@@ -38,8 +38,8 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         phone.setText(person.getLocation().value);
         address.setText(person.getDescription().value);
-        email.setText(person.getStartTime().value);
-        endTime.setText(person.getEndTime().value);
+        email.setText(person.getStartTime().toString());
+        endTime.setText(person.getEndTime().toString());
         initTags(person);
     }
 

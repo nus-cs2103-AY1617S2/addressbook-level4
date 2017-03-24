@@ -89,10 +89,10 @@ public class PersonCardHandle extends GuiHandle {
 	}
 
 	public boolean isSamePerson(ReadOnlyEvent person) {
-		return getTitle().equals(person.getTitle().fullName) && getStartTime().equals(person.getStartTime().value)
-				&& getPeriod().equals(person.getPeriod().value) && getEndTime().equals(person.getEndTime().value)
+		return getTitle().equals(person.getTitle().fullName) && getStartTime().equals(person.getStartTime().toString())
+				&& getPeriod().equals(person.getPeriod().value) && getEndTime().equals(person.getEndTime().toString())
 				&& getDescription().equals(person.getDescription().value)
-				&& getLocation().equals(person.getLocation().value) && getEndTime().equals(person.getEndTime().value)
+				&& getLocation().equals(person.getLocation().value) && getEndTime().equals(person.getEndTime().toString())
 				&& getTags().equals(getTags(person.getTags()));
 	}
 
