@@ -216,9 +216,9 @@ Format: `find KEYWORD [MORE_KEYWORDS] [DATE]`
 
 Examples:
 
-* You can find any tasks with the word `report` in their name: <br> `find report`
-* You can find any tasks with the partial word `meet` in their name, even if their name is `team meeting`: <br>`find meet`
-* You can find any tasks with the partial word `meet` in their name, on a specific date: <br>`find meet 17-3-17`
+* You can find any tasks with the word `report` in their title: <br> `find report`
+* You can find any tasks with the partial word `meet` in their title, even if their title is `team meeting`: <br>`find meet`
+* You can find any tasks with the partial word `meet` in their title, on a specific date: <br>`find meet 17-3-17`
 
 
 ### 3.11. Undo most recent command: `undo`
