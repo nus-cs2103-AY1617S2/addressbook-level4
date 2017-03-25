@@ -30,8 +30,8 @@ public class CliSyntax {
     public static final int INDEX_OF_DEADLINE = 0;
     public static final String STARTINGTIME_AND_DEADLINE_REVERSE_REGEX = "(?<deadlineReverse>.*)\\b+ot\\b+"
             + "(?<startingTimeReverse>.*)\\b+morf\\b+(?<rest>.*)";
-    public static final String[] CAPTURE_GROUPS_OF_EVENT = { "deadlineReverse",
-            "startingTimeReverse" };
+    public static final String[] CAPTURE_GROUPS_OF_DEADLINES_AND_STARTINGTIMES_OF_EVENTS = {
+        "deadlineReverse", "startingTimeReverse" };
 
     public static final String STARTING_TIME = "from";
     public static final String DEADLINE = "to";
