@@ -178,6 +178,19 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    //@@author A0143355J
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getTodayTaskList() {
+        return new UnmodifiableObservableList<>(todaysTasks);
+    }
+
+    //@@author A0143355J
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getTomorrowTaskList() {
+        return new UnmodifiableObservableList<>(tomorrowsTasks);
+    }
+
+    //@@author
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
