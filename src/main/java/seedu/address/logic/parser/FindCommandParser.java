@@ -31,7 +31,8 @@ public class FindCommandParser {
     public Command parse(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
@@ -47,7 +48,8 @@ public class FindCommandParser {
             keywordSet = new HashSet<>(Arrays.asList(keywords));
             return new FindCommand(keywordSet, null, null);
         case CliSyntax.FIND_DEADLINE:
-            dates = new PrettyTimeParser().parseSyntax(key);
+            dates = new PrettyTimeParser()
+                    .parseSyntax(ParserUtil.correctDateFormat(key));
             if (dates.get(0).getText().equals(keywords[1].trim())) {
                 return new FindCommand(null, dates, null);
             }
