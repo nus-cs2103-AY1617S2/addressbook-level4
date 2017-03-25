@@ -46,11 +46,16 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(getStartDateTime())
-                .append(getEndDateTime())
-                .append(" Tags: ");
+        builder.append("\"" + getName() + "\"");
+        if (getStartDateTime().isPresent()) {
+            builder.append(" Start Date: \"" + getStartDateTime().get().toString() + "\"");
+        }
+        if (getEndDateTime().isPresent()) {
+            builder.append(" End Date: \"" + getEndDateTime().get().toString() + "\"");
+        }
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append("\n");
         return builder.toString();
     }
 
