@@ -10,7 +10,7 @@ public class AliasCommandTest extends DoistGUITest {
     @Test
     public void testInputAliasSuccess() {
         commandBox.runCommand("alias addeaais \\for add");
-        assertResultMessage(String.format(AliasCommand.MESSAGE_SUCCESS, "adds", "add"));
+        assertResultMessage(String.format(AliasCommand.MESSAGE_SUCCESS, "addeaais", "add"));
     }
 
     @Test

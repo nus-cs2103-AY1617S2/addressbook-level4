@@ -142,6 +142,7 @@ public class StorageManager extends ComponentManager implements Storage {
         aliasListMapStorage.setAliasListMapFilePath(path);
     }
 
+    //@@author
     @Override
     @Subscribe
     public void handleTodoListChangedEvent(TodoListChangedEvent event) {
@@ -153,6 +154,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    //@@author A0140887W
     @Override
     @Subscribe
     public void handleAliasListMapChangedEvent(AliasListMapChangedEvent event) {
