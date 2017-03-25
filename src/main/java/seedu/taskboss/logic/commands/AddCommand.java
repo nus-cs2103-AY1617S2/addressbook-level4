@@ -61,6 +61,8 @@ public class AddCommand extends Command {
         //@@author A0143157J
         if (frequency.isEmpty()) {
             frequency = Frequency.NONE.toString();
+        } else {
+            frequency = frequency.trim().toUpperCase();
         }
 
         DateTime startDateTimeObj = new DateTime(startDateTime);
@@ -88,7 +90,7 @@ public class AddCommand extends Command {
                 startDateTimeObj,
                 endDateTimeObj,
                 new Information(information),
-                new Recurrence(Frequency.valueOf(frequency.toUpperCase().trim())),
+                new Recurrence(Frequency.valueOf(frequency)),
                 new UniqueCategoryList(categorySet)
         );
     }
