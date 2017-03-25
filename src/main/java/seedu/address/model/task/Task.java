@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
@@ -8,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
 /**
  * Represents a Task in the task manager. not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public abstract class Task implements ReadOnlyTask {
     public static final int MAX_TIME_DIFF = 2 ^ 32 - 1;
 
     private Name name;
@@ -37,23 +38,23 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getTags(), source.isDone());
     }
 
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
     @Override
     public Name getName() {
         return name;
     }
 
+    public void setName(Name name) {
+        assert name != null;
+        this.name = name;
+    }
+
     @Override
     public boolean isDone() {
         return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     @Override
@@ -99,16 +100,8 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskType getTaskType() {
-        return null;
-    }
+    public abstract String getTaskDateTime();
 
-    @Override
-    public String getTaskDateTime() {
-        return null;
-    }
-
-    @Override
     public void setToday() {
         today = true;
     }
@@ -119,33 +112,21 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public DateTime getDeadline() {
-        return null;
-    }
+    public abstract Optional<DateTime> getDeadline();
 
     @Override
     public String getID() {
         return this.id;
     }
 
-    @Override
     public void setID(String id) {
         this.id = id;
     }
 
     @Override
-    public String getTaskAbsoluteDateTime() {
-        return null;
-    }
+    public abstract String getTaskAbsoluteDateTime();
 
     @Override
-    public DateTime getStartingTime() {
-        return null;
-    }
-
-    @Override
-    public int compareTo(ReadOnlyTask task2) {
-        return 0;
-    }
+    public abstract Optional<DateTime> getStartingTime();
 
 }
