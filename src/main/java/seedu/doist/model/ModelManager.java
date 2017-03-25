@@ -75,6 +75,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void removeAlias(String alias) {
+        aliasListMap.removeAlias(alias);
+        indicateAliasListMapChanged();
+    }
+
+    @Override
     public List<String> getAliasList(String defaultCommandWord) {
         return aliasListMap.getAliasList(defaultCommandWord);
     }
@@ -93,7 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetToDefaultCommandWords() {
-        aliasListMap.setDefaultCommandWords();
+        aliasListMap.setDefaultAliasListMapping();
     }
 
     private void indicateAliasListMapChanged() {
