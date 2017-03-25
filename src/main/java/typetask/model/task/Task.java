@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
         this.setDate(replacement.getDate());
         this.setEndDate(replacement.getEndDate());
         this.setTime(replacement.getTime());
-        this.setTime(replacement.getEndTime());
+        this.setEndTime(replacement.getEndTime());
     }
 
     /**

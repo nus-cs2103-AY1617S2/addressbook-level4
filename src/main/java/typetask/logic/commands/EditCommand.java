@@ -72,8 +72,10 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         DueDate updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
+        DueDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
+        Time updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
 
-        return new Task(updatedName, updatedDate, updatedTime);
+        return new Task(updatedName, updatedDate, updatedEndDate, updatedTime, updatedEndTime, false);
     }
 
     /**
@@ -84,6 +86,8 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<DueDate> date = Optional.empty();
         private Optional<Time> time = Optional.empty();
+        private Optional<DueDate> endDate = Optional.empty();
+        private Optional<Time> endTime = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -91,13 +95,16 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.date = toCopy.getDate();
             this.time = toCopy.getTime();
+            this.endDate = toCopy.getEndDate();
+            this.endTime = toCopy.getEndTime();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.date, this.time);
+            return CollectionUtil.isAnyPresent(this.name, this.date, this.time,
+                    this.endDate, this.endTime);
         }
 
         public void setName(Optional<Name> name) {
@@ -112,18 +119,32 @@ public class EditCommand extends Command {
         public Optional<Time> getTime() {
             return time;
         }
+        public Optional<Time> getEndTime() {
+            return endTime;
+        }
 
         public void setTime(Optional<Time> time) {
             assert time != null;
             this.time = time;
         }
+        public void setEndTime(Optional<Time> endTime) {
+            assert endTime != null;
+            this.endTime = endTime;
+        }
         public void setDate(Optional<DueDate> date) {
             assert date != null;
             this.date = date;
         }
+        public void setEndDate(Optional<DueDate> endDate) {
+            assert endDate != null;
+            this.endDate = endDate;
+        }
 
         public Optional<DueDate> getDate() {
             return date;
+        }
+        public Optional<DueDate> getEndDate() {
+            return endDate;
         }
 
     }

@@ -2,6 +2,9 @@ package typetask.logic.parser;
 
 import static typetask.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static typetask.logic.parser.CliSyntax.PREFIX_DATE;
+import static typetask.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static typetask.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static typetask.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.List;
@@ -26,7 +29,8 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME);
+                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE,
+                        PREFIX_END_DATE, PREFIX_END_TIME);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -44,7 +48,15 @@ public class EditCommandParser {
             if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
                 editTaskDescriptor.setTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_TIME)));
             }
-
+            if (argsTokenizer.getValue(PREFIX_END_TIME).isPresent()) {
+                editTaskDescriptor.setEndTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_END_TIME)));
+            }
+            if (argsTokenizer.getValue(PREFIX_END_DATE).isPresent()) {
+                editTaskDescriptor.setEndDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_END_DATE)));
+            }
+            if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent()) {
+                editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_START_DATE)));
+            }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }

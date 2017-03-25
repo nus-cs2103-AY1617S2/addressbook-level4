@@ -3,8 +3,8 @@ package typetask.logic.parser;
 import static typetask.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static typetask.logic.parser.CliSyntax.PREFIX_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static typetask.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static typetask.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static typetask.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.NoSuchElementException;
@@ -31,7 +31,7 @@ public class AddCommandParser {
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE,
-                        PREFIX_START_TIME,PREFIX_END_DATE);
+                        PREFIX_END_TIME,PREFIX_END_DATE);
         argsTokenizer.tokenize(args);
         try {
             if (checkTaskType(argsTokenizer) == floatingTask) {
@@ -43,8 +43,8 @@ public class AddCommandParser {
                         argsTokenizer.getPreamble().get(),
                         argsTokenizer.getValue(PREFIX_START_DATE).get(),
                         argsTokenizer.getValue(PREFIX_END_DATE).get(),
-                        argsTokenizer.getValue(PREFIX_START_TIME).get(),
-                        argsTokenizer.getValue(PREFIX_TIME).get()
+                        argsTokenizer.getValue(PREFIX_TIME).get(),
+                        argsTokenizer.getValue(PREFIX_END_TIME).get()
                 );
             } else if (checkTaskType(argsTokenizer) == eventTaskWithoutTime) {
                 return new AddCommand(
@@ -81,9 +81,9 @@ public class AddCommandParser {
 
     public int checkTaskType(ArgumentTokenizer argsTokenizer) {
         if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent() &&
-                argsTokenizer.getValue(PREFIX_START_TIME).isPresent() &&
+                argsTokenizer.getValue(PREFIX_TIME).isPresent() &&
                 argsTokenizer.getValue(PREFIX_END_DATE).isPresent() &&
-                argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
+                argsTokenizer.getValue(PREFIX_END_TIME).isPresent()) {
             return eventTaskWithTime;
         } else if (argsTokenizer.getValue(PREFIX_DATE).isPresent() &&
                 argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
