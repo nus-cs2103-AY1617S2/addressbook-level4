@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- @@author A0131125Y -->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -7,7 +9,7 @@
 
 <VBox stylesheets="@../stylesheet/DefaultTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane alignment="BOTTOM_CENTER">
+      <StackPane alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
          <children>
             <VBox>
                <children>
