@@ -6,7 +6,7 @@ import seedu.opus.logic.commands.exceptions.CommandException;
 public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = "";
+    public static final String MESSAGE_USAGE = "Format should be `schedule INDEX [STARTTIME] ENDTIME`.";
     public static final String MESSAGE_SCHEDULE_TASK_SUCCESS = "Task is scheduled successfully";
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;

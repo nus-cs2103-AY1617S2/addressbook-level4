@@ -22,8 +22,8 @@ import seedu.opus.model.task.DateTime;
 public class ScheduleCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ScheduleCommand
+     * and returns an ScheduleCommand object for execution.
      */
     public Command parse(String args) {
         assert args != null;
