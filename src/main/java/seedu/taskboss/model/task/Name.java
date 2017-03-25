@@ -16,8 +16,8 @@ public class Name {
      * The first character of the information must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}|\\s|!|"
-            + "|_|-|+|$|#|@|%|^|*|?+/||<|>|`|~|&]*";
+//    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}|\\s|!|"
+//            + "|_|-|+|$|#|@|%|^|*|?+/||<|>|`|~|&]*";
 
     public final String fullName;
 
@@ -39,7 +39,10 @@ public class Name {
      * Returns true if a given string is a valid person name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+        if (test.equals("")) {
+            return false;
+        }
+        return true;
     }
 
 
