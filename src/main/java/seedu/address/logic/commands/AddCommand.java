@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskWithDeadline;
 import seedu.address.model.task.TaskWithoutDeadline;
@@ -32,7 +33,15 @@ public class AddCommand extends Command {
     private final Task toAdd;
 
     public Task getTask() {
-        return toAdd;
+        if (toAdd.getTaskType() == TaskType.TaskWithNoDeadline) {
+            return new TaskWithoutDeadline(toAdd);
+        } else {
+            try {
+                return new TaskWithDeadline(toAdd);
+            } catch (IllegalValueException e) {
+                return null;
+            }
+        }
     }
 
     /**

@@ -11,6 +11,8 @@ import org.junit.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
@@ -110,5 +112,19 @@ public class AddParserTest extends AddCommandParser {
                 .isSameDay(new Date(milisecondsTilStartingTime)));
         assertTrue(task.getTags().toSet().equals(tags.toSet()));
         assertFalse(task.getTaskDateTime() == null);
+    }
+
+    @Test
+    public void parserTestWithNameException() throws Exception {
+        Command command = parse("CS2103 project^^^^ due today");
+        assertTrue(
+                command.getClass().equals(new IncorrectCommand("").getClass()));
+    }
+
+    @Test
+    public void parserTestWithTagException() throws Exception {
+        Command command = parse("CS2103 project #yyy^ #^^^ due today");
+        assertTrue(
+                command.getClass().equals(new IncorrectCommand("").getClass()));
     }
 }
