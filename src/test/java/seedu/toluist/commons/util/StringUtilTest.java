@@ -149,6 +149,7 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
+    //@@ author A0131125Y
     //---------------- Tests for replaceFirstWord ----------------------------------
 
     @Test
@@ -176,6 +177,7 @@ public class StringUtilTest {
         assertEquals(StringUtil.replaceFirstWord("a b", "c"), "c b");
     }
 
+    //@@ author A0162011A
     //---------------- Tests for convertToArray --------------------------------------
 
     /*
