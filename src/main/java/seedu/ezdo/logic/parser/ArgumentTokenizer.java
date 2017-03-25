@@ -48,6 +48,13 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Returns a list of all prefixes
+     */
+    public List<Prefix> getAllValue() {
+        return this.prefixes;
+    }
+
+    /**
      * Returns all values of given prefix.
      */
     public Optional<List<String>> getAllValues(Prefix prefix) {
@@ -76,6 +83,14 @@ public class ArgumentTokenizer {
 
     private void resetTokenizerState() {
         this.tokenizedArguments.clear();
+    }
+
+    /**
+     * Returns the preamble (text before the first valid prefix), if any. Leading/trailing spaces will be trimmed.
+     *     If the string before the first prefix is empty, Optional.empty() will be returned.
+     */
+    public Map<Prefix, List<String>> getMapping() {
+        return this.tokenizedArguments;
     }
 
     /**
