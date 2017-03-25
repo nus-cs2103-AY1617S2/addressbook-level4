@@ -81,7 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         TaskList taskListToPush = new TaskList(taskList);
-        undoStack.push(new Pair(taskListToPush, "delete"));
+        undoStack.push(new Pair(taskListToPush, userInput));
         taskList.removeTask(target);
         indicateTaskListChanged();
 
@@ -104,7 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
         TaskList taskListToPush = new TaskList(taskList);
-        undoStack.push(new Pair(taskListToPush, "edit"));
+        undoStack.push(new Pair(taskListToPush, userInput));
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
         indicateTaskListChanged();
@@ -154,7 +154,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Generates a Pair object with the task list, and a null task, since clear command does not involve a certain task.
      */
     public void enableUndoForClear() {
-        Pair current = new Pair(new TaskList(taskList), "clear");
+        Pair current = new Pair(new TaskList(taskList), userInput);
         undoStack.push(current);
     }
 //@@author A0141993X

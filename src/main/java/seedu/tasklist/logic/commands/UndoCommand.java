@@ -6,7 +6,7 @@ import java.util.EmptyStackException;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_UNDO_SUCCESS = "Reverted to the most recent action: ";
+    public static final String MESSAGE_UNDO_SUCCESS = "Reverted the most recent action: ";
     public static final String MESSAGE_UNDO_FAILED = "No command to undo.";
 
     @Override
