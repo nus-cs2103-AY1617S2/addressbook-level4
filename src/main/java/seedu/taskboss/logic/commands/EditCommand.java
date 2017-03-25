@@ -2,8 +2,10 @@ package seedu.taskboss.logic.commands;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.taskboss.commons.core.EventsCenter;
+import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
@@ -25,6 +27,8 @@ import seedu.taskboss.model.task.UniqueTaskList;
  * Edits the details of an existing task in TaskBoss.
  */
 public class EditCommand extends Command {
+
+    private final static Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_WORD_SHORT = "e";
@@ -114,6 +118,8 @@ public class EditCommand extends Command {
         if (updatedStartDateTime.getDate() != null &&
                 updatedEndDateTime.getDate() != null &&
                 updatedStartDateTime.getDate().after(updatedEndDateTime.getDate())) {
+            logger.info("Attempting to update dates where start: " + updatedStartDateTime.getDate().toString()
+                    + "is later than end: " + updatedEndDateTime.getDate().toString());
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
