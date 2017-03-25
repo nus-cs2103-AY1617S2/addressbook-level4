@@ -65,7 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
-        indicateTaskManagerChanged("");
+        raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
     @Override

@@ -20,11 +20,11 @@ public class HistoryTest {
         //redo count should always be 0 after any taskmanager changes
         assertEquals(0, history.getRedoCount());
 
-        //path to save backup should loop back and continue at backup1
-        assertEquals("data/temp/backup1.xml", history.getBackupFilePath());
+        //path to save backup should loop back and continue at backup0
+        assertEquals("data/temp/backup0.xml", history.getBackupFilePath());
 
-        //path to load from for undo should loop back and be backup0
-        assertEquals("data/temp/backup0.xml", history.getUndoFilePath());
+        //path to load from for undo remains at backup10
+        assertEquals("data/temp/backup10.xml", history.getUndoFilePath());
     }
 
 

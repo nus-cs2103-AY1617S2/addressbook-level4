@@ -10,18 +10,16 @@ import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.task.Task;
 
 /**
- * Undo last task.
+ * Redo last undo.
  */
-public class UndoCommand extends Command {
+public class RedoCommand extends Command {
 
-    public static final String COMMAND_WORD_1 = "undo";
-    public static final String COMMAND_WORD_2 = "uhoh";
-    public static final String MESSAGE_SUCCESS = "Undo successful!";
-    public static final String MESSAGE_FAIL_NOT_FOUND = "Unable to undo. Backup file not found.";
-    public static final String MESSAGE_FAIL = "Unable to undo. Either max undo reached or nothing to undo.";
+    public static final String COMMAND_WORD_1 = "redo";
+    public static final String MESSAGE_SUCCESS = "Redo successful!";
+    public static final String MESSAGE_FAIL_NOT_FOUND = "Unable to redo. Can only redo after undo.";
+    public static final String MESSAGE_FAIL = "Nothing to redo. Already at latest state.";
     public static final String MESSAGE_USAGE = COMMAND_WORD_1
-            + ": Undo the most recent command that modifies the data. Commands like list,"
-            + "find and findexact will not be affected.\n"
+            + ": Redo the most recent undo.\n"
             + "Example: " + COMMAND_WORD_1;
     private History history = History.getInstance();
 
@@ -30,9 +28,9 @@ public class UndoCommand extends Command {
         assert model != null;
         assert storage != null;
 
-        int undoCount = history.getUndoCount();
+        int redoCount = history.getRedoCount();
 
-        if (undoCount <= 0) {
+        if (redoCount <= 0) {
             return new CommandResult(MESSAGE_FAIL);
         }
 
@@ -40,7 +38,7 @@ public class UndoCommand extends Command {
         ReadOnlyTaskManager backupData;
 
         try {
-            taskManagerOptional = storage.readTaskManager(history.getUndoFilePath());
+            taskManagerOptional = storage.readTaskManager(history.getRedoFilePath());
             if (!taskManagerOptional.isPresent()) {
                 return new CommandResult(MESSAGE_FAIL_NOT_FOUND);
             }
@@ -53,7 +51,7 @@ public class UndoCommand extends Command {
         } catch (IllegalValueException ive) {
             return new CommandResult(Task.MESSAGE_TASK_CONSTRAINTS);
         }
-        history.handleUndo();
+        history.handleRedo();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

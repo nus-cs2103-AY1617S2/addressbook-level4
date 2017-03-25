@@ -12,7 +12,7 @@ public class History {
     private int redoCount;
     private String backupDirectory = "data/temp/";
     private final String backupFilePaths[] = {"backup0.xml", "backup1.xml", "backup2.xml", "backup3.xml", "backup4.xml",
-        "backup5.xml", "backup6.xml", "backup7.xml", "backup8.xml", "backup9.xml"};
+        "backup5.xml", "backup6.xml", "backup7.xml", "backup8.xml", "backup9.xml", "backup10.xml"};
     private int currentFileIndex;
 
     public static History getInstance() {
@@ -60,17 +60,25 @@ public class History {
         }
     }
 
+    private void decreaseRedoCount() {
+        if (this.redoCount > 0) {
+            this.redoCount--;
+        } else {
+            this.redoCount = 0;
+        }
+    }
+
     public String getBackupFilePath() {
         return backupDirectory + backupFilePaths[currentFileIndex];
     }
 
     private void increaseCurrentFileIndex() {
-        currentFileIndex = (currentFileIndex + 1) % MAX_NUM_UNDO;
+        currentFileIndex = (currentFileIndex + 1) % (MAX_NUM_UNDO + 1);
     }
 
     private void decreaseCurrentFileIndex() {
         if (currentFileIndex <= 0) {
-            currentFileIndex = MAX_NUM_UNDO - 1;
+            currentFileIndex = MAX_NUM_UNDO;
         } else {
             currentFileIndex--;
         }
@@ -80,9 +88,18 @@ public class History {
     public String getUndoFilePath() {
         assert undoCount != 0;
         if (currentFileIndex <= 0) {
-            return backupDirectory + backupFilePaths[MAX_NUM_UNDO - 1];
+            return backupDirectory + backupFilePaths[MAX_NUM_UNDO];
         } else {
             return backupDirectory + backupFilePaths[currentFileIndex - 1];
+        }
+    }
+
+    public String getRedoFilePath() {
+        assert redoCount != 0;
+        if (currentFileIndex < MAX_NUM_UNDO) {
+            return backupDirectory + backupFilePaths[currentFileIndex + 1];
+        } else {
+            return backupDirectory + backupFilePaths[0];
         }
     }
 
@@ -103,6 +120,14 @@ public class History {
         decreaseCurrentFileIndex();
     }
 
+    //This methods means redo is called
+    public void handleRedo() {
+        assert undoCount != 0;
+        decreaseRedoCount();
+        increaseUndoCount();
+        increaseCurrentFileIndex();
+    }
+
     //used for Junit test
     public void test_setBackupDirectory(String backupDirectory) {
         this.backupDirectory = backupDirectory;
@@ -112,4 +137,5 @@ public class History {
         instance = new History();
         return instance;
     }
+
 }

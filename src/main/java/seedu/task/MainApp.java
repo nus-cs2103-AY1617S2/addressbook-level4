@@ -71,13 +71,14 @@ public class MainApp extends Application {
         initEventsCenter();
         initHistory();
 
-        TaskManagerChangedEvent tmce = new TaskManagerChangedEvent(model.getTaskManager(), history.getBackupFilePath());
-        storage.handleTaskManagerChangedEvent(tmce);
         logic.execute(ListByNotDoneCommand.COMMAND_WORD_1);
     }
 
     private void initHistory() {
         this.history = History.getInstance();
+
+        TaskManagerChangedEvent tmce = new TaskManagerChangedEvent(model.getTaskManager(), "");
+        storage.handleTaskManagerChangedEvent(tmce);
     }
 
     private String getApplicationParameter(String parameterName) {

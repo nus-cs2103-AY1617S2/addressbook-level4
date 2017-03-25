@@ -23,6 +23,7 @@ import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
+import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UnDoneCommand;
@@ -80,6 +81,9 @@ public class Parser {
         case UndoCommand.COMMAND_WORD_1:
         case UndoCommand.COMMAND_WORD_2:
             return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD_1:
+            return new RedoCommand();
 
         case ClearCommand.COMMAND_WORD_1:
             return new ClearCommand();
