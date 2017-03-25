@@ -1,17 +1,12 @@
 package guitests;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ezdo.logic.commands.AliasCommand.MESSAGE_ALIAS_ALREADY_IN_USE;
 import static seedu.ezdo.logic.commands.AliasCommand.MESSAGE_COMMAND_DOES_NOT_EXIST;
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
 import seedu.ezdo.logic.commands.AliasCommand;
-import seedu.ezdo.testutil.TestTask;
-import seedu.ezdo.testutil.TestUtil;
 
 public class AliasCommandTest extends EzDoGuiTest {
 
