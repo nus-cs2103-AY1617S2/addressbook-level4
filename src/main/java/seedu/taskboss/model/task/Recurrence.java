@@ -7,7 +7,12 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 
+//@@author A0143157J
 public class Recurrence {
+
+    public static final String MESSAGE_RECURRENCE_CONSTRAINTS =
+            "Task recurrence can be daily/weekly/monthly/yearly,"
+            + " and is none by default.";
 
     public enum Frequency {
         DAILY, WEEKLY, MONTHLY, YEARLY, NONE
@@ -99,9 +104,12 @@ public class Recurrence {
                 task.setEndDateTime(new DateTime(endDateTime.toString()));
             }
             break;
- 
+
+        case NONE:
+            break; // do nothing
+
         default:
-            // NONE
+            throw new IllegalValueException(Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
         }
     }
 
