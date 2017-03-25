@@ -21,11 +21,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private HBox startEndOnly;
     @FXML
-    private Label address;
+    private HBox deadlineOnly;
     @FXML
-    private Label email;
+    private Label startDate;
+    @FXML
+    private Label endDate;
+    @FXML
+    private Label deadline;
     @FXML
     private FlowPane tags;
 
@@ -33,29 +37,25 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         name.setText(person.getName().value);
         id.setText(displayedIndex + ". ");
-        phone.setText("No deadline!"); // TODO
-        initDeadline(person);
-        address.setText(""); // TODO
-        email.setText(""); // TODO
 
         // TODO make sure both address and email are available though
         // and also SLAP
         if (person.getStartEndDateTime().isPresent()) {
+            startEndOnly.setVisible(true);
+            deadlineOnly.setVisible(false);
             StartEndDateTime startEndDateTime = person.getStartEndDateTime().get();
-            address.setText("Start Date: "
-                    + startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
-            email.setText("End Date: "
-                    + startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            startDate.setText(startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            endDate.setText(startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+        } else if (person.getDeadline().isPresent()) {
+            startEndOnly.setVisible(false);
+            deadlineOnly.setVisible(true);
+            deadline.setText(person.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
+        } else {
+            startEndOnly.setVisible(false);
+            deadlineOnly.setVisible(false);
         }
 
         initTags(person);
-    }
-
-    private void initDeadline(ReadOnlyTask person) {
-        assert person.getDeadline() != null;
-        if (person.getDeadline().isPresent()) {
-            phone.setText("Deadline: " + person.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
-        }
     }
 
     private void initTags(ReadOnlyTask person) {
