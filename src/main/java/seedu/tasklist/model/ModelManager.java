@@ -47,6 +47,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyTask> todaysTasks;
+    private final FilteredList<ReadOnlyTask> tomorrowsTasks;
     private Stack<ReadOnlyTaskList> undoStack;
     private Stack<ReadOnlyTaskList> redoStack;
 //@@author A0141993X
@@ -65,6 +66,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
         todaysTasks = new FilteredList<>(this.taskList.getTaskList());
         updateTodaysTaskList();
+        tomorrowsTasks = new FilteredList<>(this.taskList.getTaskList());
+        updateTomorrowsTaskList();
 
         this.undoStack = new Stack<ReadOnlyTaskList>();
         this.redoStack = new Stack<ReadOnlyTaskList>();
@@ -179,6 +182,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
         updateTodaysTaskList();
+        updateTomorrowsTaskList();
     }
 
     @Override
@@ -213,6 +217,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateTomorrowsTaskList() {
+        tomorrowsTasks.setPredicate(isTomorrowTask());
+    }
+
+    private static Predicate<ReadOnlyTask> isTomorrowTask() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.DATE, 1);
+        Date tomorrow = c.getTime();
+        return p -> (p.getType().equals(DeadlineTask.TYPE)
+                && DateUtils.isSameDay(((ReadOnlyDeadlineTask) p).getDeadline(), tomorrow))
+            || (p.getType().equals(EventTask.TYPE)
+                && DateUtils.isSameDay(((ReadOnlyEventTask) p).getStartDate(), tomorrow));
+    }
+
 //@@author A0141993X
     /**
      * Sort based on parameter specified

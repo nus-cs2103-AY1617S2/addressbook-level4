@@ -74,4 +74,6 @@ public interface Model {
     void updateFilteredTaskListStatus(Set<String> keywords);
 
     void updateTodaysTaskList();
+
+    void updateTomorrowsTaskList();
 }
