@@ -32,9 +32,6 @@ public class DueDate extends TaskDate {
      */
     public DueDate(String dueDate, boolean isFind) throws IllegalValueException {
         super(dueDate, isFind);
-        if (!isValidTaskDate(this.value, true)) {
-            throw new IllegalValueException(MESSAGE_FIND_DATE_CONSTRAINTS);
-        }
     }
 
 }

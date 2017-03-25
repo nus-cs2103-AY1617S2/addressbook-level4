@@ -32,9 +32,6 @@ public class StartDate extends TaskDate {
      */
     public StartDate(String startDate, boolean isFind) throws IllegalValueException {
         super(startDate, isFind);
-        if (!isValidTaskDate(this.value, true)) {
-            throw new IllegalValueException(MESSAGE_FIND_DATE_CONSTRAINTS);
-        }
     }
 
 }
