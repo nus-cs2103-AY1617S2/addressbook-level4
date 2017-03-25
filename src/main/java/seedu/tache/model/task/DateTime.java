@@ -57,6 +57,28 @@ public class DateTime {
         return sdf.format(date);
     }
 
+    public void setDateOnly(String date) throws IllegalValueException {
+        List<DateGroup> temp = new Parser().parse(date);
+        if (temp.isEmpty()) {
+            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        }
+        Date parsedDate = temp.get(0).getDates().get(0);
+        this.date.setDate(parsedDate.getDate());
+        this.date.setMonth(parsedDate.getMonth());
+        this.date.setYear(parsedDate.getYear());
+    }
+
+    public void setTimeOnly(String time) throws IllegalValueException {
+        List<DateGroup> temp = new Parser().parse(time);
+        if (temp.isEmpty()) {
+            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        }
+        Date parsedTime = temp.get(0).getDates().get(0);
+        this.date.setHours(parsedTime.getHours());
+        this.date.setMinutes(parsedTime.getMinutes());
+        this.date.setSeconds(parsedTime.getSeconds());
+    }
+
     public String getTimeOnly() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         return sdf.format(date);
