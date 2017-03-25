@@ -67,7 +67,7 @@ Try FlexiTask now and benefit from its convenient features.
 > * Items with `...` after them can have multiple instances
 > * Parameters can be in any order
 > * Commands can be case-insensitive (Both "Add" and "add" are acceptable)
-> * <span style="color:red;">Contents entered can contain any character except slash '/'</span>
+> * <span style="color:red;">Contents entered can contain any character except slash '/'. Please use backslash '\' instead.</span>
 > * Commands support ***flexible commands:*** Common alternatives for the keywords will be accepted. These will be listed in the respective sections below.
 
 `Entering in dates`: Flexitask supports flexible date formats that can be entered in the formats specified below:
