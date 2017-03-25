@@ -57,7 +57,7 @@ Format: `help`
 
 > Command-specific tips are also shown if you happen to enter an incorrect command or incomplete information e.g. typing `ad` instead of `add`.
 
-### 3.2. Adding a task 
+### 3.2. Adding a task
 
 #### 3.2.1. Adding a task with no specified completion date: `add`
 
@@ -83,7 +83,7 @@ Format: `add DESCRIPTION by DUE_DATE`
 
 Examples:
 
-* `add write essay by 13/7/17`
+* `add write essay by 7/13/17`
 
 #### 3.2.3. Adding a task with a start date: `add DESCRIPTION from START_DATE`
 
@@ -95,7 +95,7 @@ Format: `add DESCRIPTION from START_DATE`
 
 Examples:
 
-* `add write essay from 13/7/17`
+* `add write essay from 7/13/17`
 
 #### 3.2.4. Adding a task with a duration: `add DESCRIPTION from START_DATE to END_DATE`
 
@@ -107,7 +107,7 @@ Format: `add DESCRIPTION from START_DATE to END_DATE`
 
 Examples:
 
-* `add write essay from 13/7/17 to 15/7/17`
+* `add write essay from 7/13/17 to 7/13/17`
 
 #### 3.2.5. Adding a task with tags: `add DESCRIPTION #TAGNAME`
 
@@ -119,9 +119,9 @@ Format: `add DESCRIPTION #TAGNAME`
 
 Examples:
 
-* `add write essay from 13/7/17 to 15/7/17 #school #homework`
-* `add write essay from 13/7/17 #school #homework`
-* `add write essay by 15/7/17 #blogging`
+* `add write essay from 7/13/17 to 7/15/17 #school #homework`
+* `add write essay from 7/13/17 #school #homework`
+* `add write essay by 7/15/17 #blogging`
 * `add write essay #blogging`
 
 ### 3.3. Listing
@@ -167,13 +167,13 @@ Format: `edit INDEX`
 Examples:
 
 * `list`<br>
-`edit 1 buy groceries by 13/5/17`<br>
-  Edits the description of the selected task to `buy groceries` and due date to `13/5/17`.
+`edit 1 buy groceries by 5/13/17`<br>
+  Edits the description of the selected task to `buy groceries` and due date to `5/13/17`.
 
 * `list`<br>
 `edit 2 buy groceries`<br>
  Edits the description of the 2nd task in the list to be `buy groceries`.
- 
+
 #### 3.4.1. Edit tags: `edit INDEX #TAGNAME`
 
 Edit tags at the specified task `INDEX`.
@@ -208,7 +208,7 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the list.
-  
+
 #### 3.5.1 Deleting tags in a task: `delete INDEX #TAG_NAME`
 
 Deletes tags in the selected task from your task manager.
@@ -280,10 +280,10 @@ Examples:
 * `find Essay`<br>
   `uncheck 1`<br>
   Unchecks the 1st task in the results of the `find` command.
-  
-### 3.10. Search 
 
-#### 3.10.1. Finding all tasks containing a keyword: `find KEYWORD [MORE_KEYWORDS]` 
+### 3.10. Search
+
+#### 3.10.1. Finding all tasks containing a keyword: `find KEYWORD [MORE_KEYWORDS]`
 
 Finds tasks whose properties contain any of your given keywords.
 
@@ -304,8 +304,8 @@ Examples:
   Returns `Write Essay` and `essay writing`.
 * `find Essay Writing Competition`<br>
   Returns any task having keywords `Essay`, `Writing`, or `Competition`.
-* `find 17/7/17`<br>
-  Returns any task having the date `17/7/17`.
+* `find 7/17/17`<br>
+  Returns any task having the date `7/17/17`.
 
 #### 3.10.2. Finding unchecked tasks containg a keyword: `find unchecked KEYWORD`
 
@@ -366,7 +366,7 @@ Accepted frequencies:
 Examples:
 
 * `add go jogging reminders: every 3 days`
-* `add write article on blog from 27/01/17 to 26/06/17 reminders: every week`
+* `add write article on blog from 1/26/17 to 6/26/17 reminders: every week`
 
 
 ### 3.14. Editing reminders of a task: `edit INDEX reminders: FREQUENCY`
@@ -474,7 +474,7 @@ Format: `exit`
     **A**: No! You can use all the features of Suru without connecting to the internet.
 
 4. Where can we seek further assistance for Suru?
-    
+
     **A**: Feel free to contact us at e0003823@u.nus.edu.
 
 ## 5. Command Summary
@@ -482,9 +482,9 @@ Format: `exit`
 |Command|Syntax|Examples|
 |-------|--------|------|
 |[**Help**](#31-viewing-usage-instructions-help)|`help`|`help`|
-|[**Add**](#32-adding-a-task-with-no-specified-completion-date-add)|`add DESCRIPTION from START_DATE to END_DATE` <br> `#TAGNAME... recurring:... reminders:...`| `add Write essay`<br>`add Write essay by 24/12/17`<br>`add Write essay from 20/12/17`<br>`add Write essay from 20/12/17 to 24/12/17`<br>`add Write essay #school #homework`<br>`add Write essay from 20/12/17 recurring: weekly`<br>`add Write essay reminders: 1 day, 30 mins`|
+|[**Add**](#32-adding-a-task-with-no-specified-completion-date-add)|`add DESCRIPTION from START_DATE to END_DATE` <br> `#TAGNAME... recurring:... reminders:...`| `add Write essay`<br>`add Write essay by 12/24/17`<br>`add Write essay from 12/20/17`<br>`add Write essay from 12/24/17 to 12/24/17`<br>`add Write essay #school #homework`<br>`add Write essay from 12/20/17 recurring: weekly`<br>`add Write essay reminders: 1 day, 30 mins`|
 |[**List**](#38-listing-all-tasks-list)|`list`|`list unchecked`<br>`list checked`|
-|[**Edit**](#311-edit-task-edit-index)|`edit INDEX`|`edit 2 buy groceries`<br>`edit 1 buy groceries by 13/5/17`|
+|[**Edit**](#311-edit-task-edit-index)|`edit INDEX`|`edit 2 buy groceries`<br>`edit 1 buy groceries by 5/13/17`|
 |[**Delete**](#312-deleting-a-task-delete-index)|`delete INDEX`|`delete 3`|
 |[**Undo**](#313-undoing-a-command-undo)|`undo`|`undo`|
 |[**Redo**](#314-redoing-an-undone-command-redo)|`redo`|`redo`|
