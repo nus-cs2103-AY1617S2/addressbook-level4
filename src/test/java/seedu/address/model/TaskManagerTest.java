@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -51,8 +51,8 @@ public class TaskManagerTest {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(
-                new TaskWithoutDeadline(td.mathAssgn),
-                new TaskWithoutDeadline(td.mathAssgn));
+                new FloatingTask(td.mathAssgn),
+                new FloatingTask(td.mathAssgn));
         List<Tag> newTags = td.mathAssgn.getTags().asObservableList();
         TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 

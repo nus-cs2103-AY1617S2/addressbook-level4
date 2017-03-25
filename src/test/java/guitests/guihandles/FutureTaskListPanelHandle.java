@@ -15,8 +15,8 @@ import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.ReadOnlyTask.TaskType;
-import seedu.address.model.task.TaskWithDeadline;
-import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.testutil.TestUtil;
 
 /**
@@ -170,11 +170,11 @@ public class FutureTaskListPanelHandle extends GuiHandle {
         ReadOnlyTask source = getListView().getItems().get(index);
         if (source.getTaskType() == TaskType.TaskWithNoDeadline
                 || source.getTaskType() == null) {
-            return getTaskCardHandle(new TaskWithoutDeadline(
+            return getTaskCardHandle(new FloatingTask(
                     getListView().getItems().get(index)));
         } else {
             return getTaskCardHandle(
-                    new TaskWithDeadline(getListView().getItems().get(index)));
+                    new EventTask(getListView().getItems().get(index)));
         }
     }
 

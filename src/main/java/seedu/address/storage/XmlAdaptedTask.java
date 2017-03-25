@@ -13,8 +13,8 @@ import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithDeadline;
-import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.FloatingTask;
 
 /**
  * JAXB-friendly version of the Task.
@@ -102,13 +102,13 @@ public class XmlAdaptedTask {
         Task t = null;
         switch (taskType) {
         case TaskWithNoDeadline:
-            t = new TaskWithoutDeadline(name, tags, done);
+            t = new FloatingTask(name, tags, done);
             break;
         case TaskWithOnlyDeadline:
-            t = new TaskWithDeadline(name, tags, new Date(this.deadline), null, done);
+            t = new EventTask(name, tags, new Date(this.deadline), null, done);
             break;
         case TaskWithDeadlineAndStartingTime:
-            t = new TaskWithDeadline(name, tags, new Date(this.deadline), new Date(this.startingTime), done);
+            t = new EventTask(name, tags, new Date(this.deadline), new Date(this.startingTime), done);
         }
 
         if (t == null) {

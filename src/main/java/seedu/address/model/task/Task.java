@@ -17,17 +17,18 @@ public abstract class Task implements ReadOnlyTask {
     private UniqueTagList tags;
 
     private boolean done;
-    protected boolean today = false;
+    protected boolean manualToday = false;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, UniqueTagList tags, boolean done) {
+    public Task(Name name, UniqueTagList tags, boolean done, boolean manualToday) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.done = done;
+        this.manualToday = manualToday;
         this.id = "";
     }
 
@@ -35,7 +36,7 @@ public abstract class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags(), source.isDone());
+        this(source.getName(), source.getTags(), source.isDone(), source.isManualToday());
     }
 
     @Override
@@ -69,16 +70,17 @@ public abstract class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
-    /**
-     * Updates this task with the details of {@code replacement}.
-     */
-    public void resetData(ReadOnlyTask replacement) {
-        assert replacement != null;
-
-        this.setName(replacement.getName());
-        this.setTags(replacement.getTags());
-        this.setDone(replacement.isDone());
+    public void setToday() {
+        manualToday = true;
     }
+
+    @Override
+    public boolean isManualToday() {
+        return manualToday;
+    }
+
+    @Override
+    public abstract boolean isToday();
 
     @Override
     public boolean equals(Object other) {
@@ -101,15 +103,6 @@ public abstract class Task implements ReadOnlyTask {
 
     @Override
     public abstract String getTaskDateTime();
-
-    public void setToday() {
-        today = true;
-    }
-
-    @Override
-    public boolean isToday() {
-        return today;
-    }
 
     @Override
     public abstract Optional<DateTime> getDeadline();

@@ -11,8 +11,8 @@ import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithDeadline;
-import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -112,10 +112,10 @@ public class EditCommand extends Command {
                         ? taskToEdit.getStartingTime().getDate()
                         : editTaskDescriptor.getStartingTime();
             }
-            return new TaskWithDeadline(updatedName, updatedTags, deadline,
+            return new EventTask(updatedName, updatedTags, deadline,
                     startingTime, updatedDone);
         } else {
-            return new TaskWithoutDeadline(updatedName, updatedTags,
+            return new FloatingTask(updatedName, updatedTags,
                     updatedDone);
         }
     }

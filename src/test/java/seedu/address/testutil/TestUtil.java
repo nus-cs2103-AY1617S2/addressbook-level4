@@ -36,7 +36,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.storage.XmlSerializableTaskManager;
 
 /**
@@ -73,15 +73,15 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             // CHECKSTYLE.OFF: LineLength
-            return new Task[] { new TaskWithoutDeadline(new Name("Ali Muster"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Boris Mueller"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Carl Kurz"), new UniqueTagList(), true),
-                                new TaskWithoutDeadline(new Name("Daniel Meier"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Elle Meyer"), new UniqueTagList(), true),
-                                new TaskWithoutDeadline(new Name("Fiona Kunz"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("George Best"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Hoon Meier"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Ida Mueller"), new UniqueTagList(), true) };
+            return new Task[] { new FloatingTask(new Name("Ali Muster"), new UniqueTagList(), false),
+                                new FloatingTask(new Name("Boris Mueller"), new UniqueTagList(), false),
+                                new FloatingTask(new Name("Carl Kurz"), new UniqueTagList(), true),
+                                new FloatingTask(new Name("Daniel Meier"), new UniqueTagList(), false),
+                                new FloatingTask(new Name("Elle Meyer"), new UniqueTagList(), true),
+                                new FloatingTask(new Name("Fiona Kunz"), new UniqueTagList(), false),
+                                new FloatingTask(new Name("George Best"), new UniqueTagList(), false),
+                                new FloatingTask(new Name("Hoon Meier"), new UniqueTagList(), false),
+                                new FloatingTask(new Name("Ida Mueller"), new UniqueTagList(), true) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;

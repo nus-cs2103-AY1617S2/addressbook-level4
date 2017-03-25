@@ -17,8 +17,8 @@ import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithDeadline;
-import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -118,11 +118,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         if (editedReadOnlyTask.getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
                 || editedReadOnlyTask.getTaskType() == TaskType.TaskWithOnlyDeadline) {
             try {
-                editedTask = new TaskWithDeadline(editedReadOnlyTask);
+                editedTask = new EventTask(editedReadOnlyTask);
             } catch (IllegalValueException e) {
             }
         } else {
-            editedTask = new TaskWithoutDeadline(editedReadOnlyTask);
+            editedTask = new FloatingTask(editedReadOnlyTask);
         }
 
         // syncMasterTagListWith(editedTask);

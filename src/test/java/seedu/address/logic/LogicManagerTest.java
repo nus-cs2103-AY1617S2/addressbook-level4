@@ -53,7 +53,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 
@@ -344,7 +344,7 @@ public class LogicManagerTest {
         List<Task> threeTasks = helper.generateTaskList(3);
         // TestUtil.assignUiIndex(threeTasks);
         Task taskToDone = threeTasks.get(0);
-        Task doneTask = new TaskWithoutDeadline(taskToDone.getName(),
+        Task doneTask = new FloatingTask(taskToDone.getName(),
                 taskToDone.getTags(), true);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -378,7 +378,7 @@ public class LogicManagerTest {
         List<Task> threeTasks = helper.generateTaskList(3);
         Task taskToNotDone = threeTasks.get(1);
         taskToNotDone.setDone(true);
-        Task notDoneTask = new TaskWithoutDeadline(taskToNotDone.getName(),
+        Task notDoneTask = new FloatingTask(taskToNotDone.getName(),
                 taskToNotDone.getTags(), false);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -815,7 +815,7 @@ public class LogicManagerTest {
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             boolean done = false;
-            return new TaskWithoutDeadline(name, tags, done);
+            return new FloatingTask(name, tags, done);
         }
 
         /**
@@ -827,7 +827,7 @@ public class LogicManagerTest {
          *            used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new TaskWithoutDeadline(new Name("Task " + seed),
+            return new FloatingTask(new Name("Task " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)),
                             new Tag("tag" + Math.abs(seed + 1))),
                     seed % 2 == 0);
@@ -927,7 +927,7 @@ public class LogicManagerTest {
          * dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new TaskWithoutDeadline(new Name(name),
+            return new FloatingTask(new Name(name),
                     new UniqueTagList(new Tag("tag")), false);
         }
 
@@ -941,7 +941,7 @@ public class LogicManagerTest {
             for (String tagName : tagNames) {
                 tags.add(new Tag(tagName));
             }
-            return new TaskWithoutDeadline(new Name(name),
+            return new FloatingTask(new Name(name),
                     new UniqueTagList(tags), false);
         }
     }

@@ -18,6 +18,9 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     // Returns Completion status of Task
     boolean isDone();
 
+    // Returns whether this task has been manually set to Today
+    boolean isManualToday();
+
     // Returns whether this task should appear in the today task list
     boolean isToday();
 
