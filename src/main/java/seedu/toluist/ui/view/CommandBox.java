@@ -87,7 +87,7 @@ public class CommandBox extends UiView {
         int index = store.getObservableSuggestedCommandIndex().get();
 
         if (suggestedCommands.isEmpty()
-            || index == UiStore.INVALID_SUGGESTION_INDEX
+            || index == UiStore.INDEX_INVALID_SUGGESTION
             || suggestedCommands.get(index).equals(commandTextField.getText())) {
             dispatchCommand();
             return;

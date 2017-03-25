@@ -113,11 +113,7 @@ public class StringUtil {
      * @return the transformed string
      */
     public static String replaceFirstWord(String s, String replacement) {
-        if (replacement == null) {
-            return s;
-        }
-
-        if (!StringUtil.isPresent(s)) {
+        if (replacement == null || !StringUtil.isPresent(s)) {
             return s;
         }
 

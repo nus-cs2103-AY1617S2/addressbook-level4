@@ -74,7 +74,7 @@ public class CommandDispatcher extends Dispatcher {
         }
         controller.execute(deAliasedCommand);
     }
-    
+
     public SortedSet<String> getPredictedCommands(String command) {
         SortedSet<String> predictedCommands = new TreeSet<>();
 
