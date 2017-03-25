@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.logic.commands.SortCommand;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.todo.Task;
@@ -13,6 +14,7 @@ import seedu.ezdo.testutil.TypicalTestTasks;
 
 public class SortCommandTest extends EzDoGuiTest {
 
+    @Override
     protected EzDo getInitialData() {
         EzDo ez = new EzDo();
         TypicalTestTasks.loadEzDoWithSampleData(ez);
@@ -57,6 +59,10 @@ public class SortCommandTest extends EzDoGuiTest {
         //invalid command
         commandBox.runCommand("sort blah");
         assertResultMessage(SortCommand.MESSAGE_INVALID_FIELD);
+
+        //invalid command
+        commandBox.runCommand("sort");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 
     @Test
