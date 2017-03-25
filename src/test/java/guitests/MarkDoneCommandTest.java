@@ -33,7 +33,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         TestTask markedDoneTask = new TaskBuilder().withName("Clean house").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 19, 2017 11pm")
                 .withEndDateTime("Feb 28, 2017 5pm")
-                .withInformation("wall street").withCategories("Done").build();
+                .withInformation("wall street").withRecurrence("NONE")
+                .withCategories("Done").build();
 
         assertMarkDoneSuccess(false, taskBossIndex, taskBossIndex, markedDoneTask);
     }
@@ -103,7 +104,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         TestTask markedDoneTask = new TaskBuilder().withName("Clean house").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 19, 2017 11pm")
                 .withEndDateTime("Feb 28, 2017 5pm")
-                .withInformation("wall street").withCategories("Done").build();
+                .withInformation("wall street").withRecurrence("NONE")
+                .withCategories("Done").build();
 
         assertMarkDoneSuccess(false, taskBossIndex, taskBossIndex, markedDoneTask);
     }
@@ -122,7 +124,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         TestTask markedDoneTask = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 20, 2017 11.30pm")
                 .withEndDateTime("Apr 28, 2017 3pm")
-                .withInformation("10th street").withCategories("Done").build();
+                .withInformation("10th street").withRecurrence("NONE")
+                .withCategories("Done").build();
 
         assertMarkDoneSuccess(true, taskBossIndex, taskBossIndex, markedDoneTask);
     }

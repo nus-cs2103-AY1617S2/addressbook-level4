@@ -7,6 +7,8 @@ import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
+import seedu.taskboss.model.task.Recurrence;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 
 /**
  *
@@ -56,6 +58,11 @@ public class TaskBuilder {
 
     public TaskBuilder withEndDateTime(String endDateTime) throws IllegalValueException {
         this.task.setEndDateTime(new DateTime(endDateTime));
+        return this;
+    }
+
+    public TaskBuilder withRecurrence(String frequency) throws IllegalArgumentException {
+        this.task.setRecurrence(new Recurrence(Frequency.valueOf(frequency)));
         return this;
     }
 

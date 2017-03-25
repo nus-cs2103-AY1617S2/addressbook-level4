@@ -505,7 +505,7 @@ public class LogicManagerTest {
             DateTime startDateTime = new DateTime("today 5pm");
             DateTime endDateTime = new DateTime("tomorrow 8pm");
             Information information = new Information("111, alpha street");
-            Recurrence recurrence = new Recurrence(Frequency.DAILY);
+            Recurrence recurrence = new Recurrence(Frequency.NONE);
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
@@ -528,7 +528,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 19 10am 2017"),
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of " + seed),
-                    new Recurrence(Frequency.DAILY),
+                    new Recurrence(Frequency.NONE),
                     new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                            new Category("category" + Math.abs(seed + 1)))
             );
@@ -643,7 +643,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 19 10am 2017"),
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of 1"),
-                    new Recurrence(Frequency.DAILY),
+                    new Recurrence(Frequency.NONE),
                     new UniqueCategoryList(new Category("category"))
             );
         }
@@ -660,7 +660,7 @@ public class LogicManagerTest {
                     new DateTime(startDatetime),
                     new DateTime("Feb 20 10am 2018"),
                     new Information("House of 1"),
-                    new Recurrence(Frequency.DAILY),
+                    new Recurrence(Frequency.NONE),
                     new UniqueCategoryList(new Category("category"))
             );
         }
@@ -677,7 +677,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 20 10am 2017"),
                     new DateTime(endDatetime),
                     new Information("House of 1"),
-                    new Recurrence(Frequency.DAILY),
+                    new Recurrence(Frequency.NONE),
                     new UniqueCategoryList(new Category("category"))
             );
         }

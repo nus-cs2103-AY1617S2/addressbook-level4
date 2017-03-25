@@ -47,6 +47,10 @@ public class TestTask implements ReadOnlyTask {
         this.information = information;
     }
 
+    public void setRecurrence(Recurrence recurrence) {
+        this.recurrence = recurrence;
+    }
+
     public void setPriorityLevel(PriorityLevel priorityLevel) {
         this.priorityLevel = priorityLevel;
     }
