@@ -45,5 +45,6 @@ public class StartDateTest {
     public void invalidDate_IllegalValueException() throws Exception {
         thrown.expect(IllegalValueException.class);
         StartDate date = new StartDate("fgasdf", true);
+        date.toString();
     }
 }

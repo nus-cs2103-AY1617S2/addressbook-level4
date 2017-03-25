@@ -142,7 +142,7 @@ public class VersionTest {
     @Test
     public void equalsMethod_notVersion() {
         Version one = new Version(0, 0, 0, false);
-        assertFalse(one.equals("notVersion"));
+        assertFalse(one.equals(new Integer(1)));
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

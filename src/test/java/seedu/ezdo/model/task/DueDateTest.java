@@ -34,6 +34,7 @@ public class DueDateTest {
     public void invalidDate_IllegalValueException() throws Exception {
         thrown.expect(IllegalValueException.class);
         DueDate one = new DueDate("asdf", true);
+        one.toString();
     }
 }
 

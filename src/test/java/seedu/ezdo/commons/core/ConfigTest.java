@@ -32,9 +32,9 @@ public class ConfigTest {
     }
 
     @Test
-    public void equalsMethod_null() {
+    public void equalsMethod_notConfig() {
         Config defaultConfig = new Config();
-        assertFalse(defaultConfig.equals(null));
+        assertFalse(defaultConfig.equals(new Integer(1)));
     }
 
     @Test
