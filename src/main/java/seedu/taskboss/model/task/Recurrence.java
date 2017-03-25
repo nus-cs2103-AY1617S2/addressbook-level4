@@ -37,21 +37,18 @@ public class Recurrence {
         task.setCategories(newCategoryList);
 
        Date startDateTime = task.getStartDateTime().getDate();
-       Calendar startCalendar = Calendar.getInstance();
-       startCalendar.setTime(startDateTime);
-
        Date endDateTime = task.getEndDateTime().getDate();
-       Calendar endCalendar = Calendar.getInstance();
-       endCalendar.setTime(endDateTime);
 
         switch(this.frequency) {
         case DAILY:
             if (startDateTime != null) {
+                Calendar startCalendar = initCalendar(task, startDateTime);
                 startCalendar.add(Calendar.DATE, 1);
                 startDateTime = startCalendar.getTime();
                 task.setStartDateTime(new DateTime(startDateTime.toString()));
             }
             if (endDateTime != null) {
+                Calendar endCalendar = initCalendar(task, endDateTime);
                 endCalendar.add(Calendar.DATE, 1);
                 endDateTime = endCalendar.getTime();
                 task.setEndDateTime(new DateTime(endDateTime.toString()));
@@ -60,11 +57,13 @@ public class Recurrence {
 
         case WEEKLY:
             if (startDateTime != null) {
+                Calendar startCalendar = initCalendar(task, startDateTime);
                 startCalendar.add(Calendar.WEEK_OF_YEAR, 1);
                 startDateTime = startCalendar.getTime();
                 task.setStartDateTime(new DateTime(startDateTime.toString()));
             }
             if (endDateTime != null) {
+                Calendar endCalendar = initCalendar(task, endDateTime);
                 endCalendar.add(Calendar.WEEK_OF_YEAR, 1);
                 endDateTime = endCalendar.getTime();
                 task.setEndDateTime(new DateTime(endDateTime.toString()));
@@ -73,11 +72,13 @@ public class Recurrence {
 
         case MONTHLY:
             if (startDateTime != null) {
+                Calendar startCalendar = initCalendar(task, startDateTime);
                 startCalendar.add(Calendar.MONTH, 1);
                 startDateTime = startCalendar.getTime();
                 task.setStartDateTime(new DateTime(startDateTime.toString()));
             }
             if (endDateTime != null) {
+                Calendar endCalendar = initCalendar(task, endDateTime);
                 endCalendar.add(Calendar.MONTH, 1);
                 endDateTime = endCalendar.getTime();
                 task.setEndDateTime(new DateTime(endDateTime.toString()));
@@ -86,11 +87,13 @@ public class Recurrence {
 
         case YEARLY:
             if (startDateTime != null) {
+                Calendar startCalendar = initCalendar(task, startDateTime);
                 startCalendar.add(Calendar.YEAR, 1);
                 startDateTime = startCalendar.getTime();
                 task.setStartDateTime(new DateTime(startDateTime.toString()));
             }
             if (endDateTime != null) {
+                Calendar endCalendar = initCalendar(task, endDateTime);
                 endCalendar.add(Calendar.YEAR, 1);
                 endDateTime = endCalendar.getTime();
                 task.setEndDateTime(new DateTime(endDateTime.toString()));
@@ -100,6 +103,12 @@ public class Recurrence {
         default:
             // NONE
         }
+    }
+
+    private Calendar initCalendar(Task task, Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
     }
 
     public boolean isRecurring() {
