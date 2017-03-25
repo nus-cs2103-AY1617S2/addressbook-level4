@@ -1,7 +1,6 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.person.ReadOnlyTask;
 
 //@@author A0148038A
 /**
@@ -10,9 +9,9 @@ import seedu.address.model.person.ReadOnlyTask;
 public class JumpToTaskListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
-    public final ReadOnlyTask targetTask;
+    public final String targetTask;
 
-    public JumpToTaskListRequestEvent(ReadOnlyTask task, int targetIndex) {
+    public JumpToTaskListRequestEvent(int targetIndex, String task) {
         this.targetIndex = targetIndex;
         this.targetTask = task;
     }

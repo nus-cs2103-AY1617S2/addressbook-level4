@@ -150,16 +150,12 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0148038A
     @Override
     public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
-    	SortedList<ReadOnlyEvent> sortedEvents = new SortedList<ReadOnlyEvent>(filteredEvents);
-    	sortedEvents.setComparator((Comparator<? super ReadOnlyEvent>) ReadOnlyEvent.getComparator());
-    	return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
+    	return new UnmodifiableObservableList<ReadOnlyEvent>(filteredEvents);
     }
     
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-    	SortedList<ReadOnlyTask> sortedTasks = new SortedList<ReadOnlyTask>(filteredTasks);
-    	sortedTasks.setComparator((Comparator<? super ReadOnlyTask>) ReadOnlyTask.getComparator());
-    	return new UnmodifiableObservableList<ReadOnlyTask>(sortedTasks);
+    	return new UnmodifiableObservableList<ReadOnlyTask>(filteredTasks);
     }
 
     @Override
