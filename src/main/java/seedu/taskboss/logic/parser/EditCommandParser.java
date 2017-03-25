@@ -63,8 +63,7 @@ public class EditCommandParser {
             if (!startDateTimeOp.isPresent() && args.contains(STRING_PREFIX_START_DATE)) {
                 editTaskDescriptor.setStartDateTime(Optional.of(new DateTime(EMPTY_STRING)));
             } else {
-                editTaskDescriptor.setStartDateTime(ParserUtil.
-                        parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE)));
+                editTaskDescriptor.setStartDateTime(startDateTimeOp);
             }
 
             Optional<DateTime> endDateTimeOp = ParserUtil.
@@ -73,8 +72,7 @@ public class EditCommandParser {
             if (!endDateTimeOp.isPresent() && args.contains(STRING_PREFIX_END_DATE)) {
                 editTaskDescriptor.setEndDateTime(Optional.of(new DateTime(EMPTY_STRING)));
             } else {
-                editTaskDescriptor.setEndDateTime(ParserUtil.
-                        parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE)));
+                editTaskDescriptor.setEndDateTime(endDateTimeOp);
             }
 
             editTaskDescriptor.setInformation(ParserUtil.parseInformation
