@@ -1,6 +1,10 @@
 package guitests;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
+import javafx.scene.input.KeyCode;
 
 //@@author A0147980U
 public class ContentAssistTests extends DoistGUITest {
@@ -38,4 +42,13 @@ public class ContentAssistTests extends DoistGUITest {
         commandBox.enterCommand(input);
         assertCorrectSuggestions(input);
     }
+
+    @Test
+    public void testCompleteByTappingTap() {
+        String input = "reset_alia";
+        commandBox.enterCommand(input);
+        (new GuiRobot()).press(KeyCode.TAB);
+        assertTrue("reset_alias".equals(commandBox.getCommandInput()));
+    }
+
 }
