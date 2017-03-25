@@ -9,7 +9,9 @@ public interface ReadOnlyTask {
 
     Name getName();
     DueDate getDate();
+    DueDate getEndDate();
     Time getTime();
+    Time getEndTime();
     boolean getIsCompleted();
 
     /**

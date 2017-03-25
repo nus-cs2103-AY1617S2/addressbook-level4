@@ -14,6 +14,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_DATE = new Prefix("by:");
     public static final Prefix PREFIX_TIME = new Prefix("@");
+    public static final Prefix PREFIX_START_DATE = new Prefix("from:");
+    public static final Prefix PREFIX_END_DATE = new Prefix("to:");
+    public static final Prefix PREFIX_START_TIME = new Prefix("t/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

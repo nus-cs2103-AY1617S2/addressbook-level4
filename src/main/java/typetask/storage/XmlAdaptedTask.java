@@ -1,6 +1,7 @@
 package typetask.storage;
 
 
+
 import javax.xml.bind.annotation.XmlElement;
 
 import typetask.commons.exceptions.IllegalValueException;
@@ -22,6 +23,10 @@ public class XmlAdaptedTask {
     private String time;
     @XmlElement(required = true)
     private Boolean isCompleted;
+    @XmlElement(required = true)
+    private String endDate;
+    @XmlElement(required = true)
+    private String endTime;
 
 
     /**
@@ -40,6 +45,8 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         date = source.getDate().value;
         time = source.getTime().value;
+        endDate = source.getEndDate().value;
+        endTime = source.getEndTime().value;
         isCompleted = source.getIsCompleted();
     }
 
@@ -52,10 +59,12 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final DueDate date = new DueDate(this.date);
         final Time time = new Time(this.time);
+        final DueDate endDate = new DueDate(this.endDate);
+        final Time endTime = new Time(this.endTime);
         boolean isCompleted = false;
         if (this.isCompleted != null) {
             isCompleted = this.isCompleted;
         }
-        return new Task(name, date, time, isCompleted);
+        return new Task(name, date, endDate, time, endTime, isCompleted);
     }
 }
