@@ -208,4 +208,8 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
+    public UpcomingTaskPanel getUpcomingTaskPanel() {
+        return this.upcomingTaskPanel;
+    }
+
 }
