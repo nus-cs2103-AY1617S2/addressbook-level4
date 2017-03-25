@@ -23,7 +23,7 @@ import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 @RunWith(MockitoJUnitRunner.class)
 public class UniqueTaskListTest {
 
-    UniqueTaskList utl = new UniqueTaskList();
+    private UniqueTaskList utl = new UniqueTaskList();
 
     @Mock
     public ObservableList<Task> mock;
