@@ -15,7 +15,7 @@ public abstract class TaskDate {
             + "(2[0-3]|[0-1][0-9])[:][0-5][0-9]";
     public static final String FIND_TASKDATE_VALIDATION_REGEX = "^$|(0[1-9]|[12][0-9]|3[01])"
             + "[/](0[1-9]|1[012])[/](19|20)[0-9]{2}";
-    public static final String MESSAGE_FIND_DATE_CONSTRAINTS = "Please enter a date in this form: DD/MM/YYYY or in the natural language";
+    public static final String MESSAGE_FIND_DATE_CONSTRAINTS = "Please enter a date in this form: DD/MM/YYYY or in the natural language.";
 
     public TaskDate(String taskDate) {
         DateParser dateParser = new DateParser(taskDate);
