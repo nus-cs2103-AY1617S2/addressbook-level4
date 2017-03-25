@@ -9,7 +9,7 @@ import seedu.tasklist.model.task.ReadOnlyTask;
 //@@author A0143355J
 public class UpcomingTaskCard extends UiPart<Region> {
 
-    private static final String FXML = "TaskListCard.fxml";
+    private static final String FXML = "UpcomingTaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
