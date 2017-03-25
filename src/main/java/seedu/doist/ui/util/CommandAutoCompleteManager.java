@@ -29,7 +29,7 @@ public class CommandAutoCompleteManager {
         int cursorPosition = commandTextField.getCaretPosition();
         String[] words = commandTextField.getText(0, cursorPosition).split(" +", -1);
         String lastWord = words[words.length - 1];  // -1 means trailing space will NOT be discarded
-        if (!lastWord.equals("")) {
+        if (!"".equals(lastWord)) {
             displaySuggestions(commandTextField, getSuggestions(lastWord, logic));
         } else {
             commandTextField.getPopupWindow().hide();

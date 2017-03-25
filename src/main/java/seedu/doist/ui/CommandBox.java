@@ -39,8 +39,8 @@ public class CommandBox extends UiPart<Region> {
     private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
     private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
-    CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
-    CommandAutoCompleteManager autoCompleteManager = CommandAutoCompleteManager.getInstance();
+    private CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
+    private CommandAutoCompleteManager autoCompleteManager = CommandAutoCompleteManager.getInstance();
 
     @FXML
     private InlineCssTextArea commandTextField;
