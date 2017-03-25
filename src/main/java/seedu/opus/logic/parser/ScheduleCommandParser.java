@@ -10,7 +10,6 @@ import com.joestelmach.natty.DateGroup;
 
 import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.logic.commands.Command;
-import seedu.opus.logic.commands.EditCommand;
 import seedu.opus.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.opus.logic.commands.IncorrectCommand;
 import seedu.opus.logic.commands.ScheduleCommand;
@@ -31,11 +30,20 @@ public class ScheduleCommandParser {
         Optional<DateTime> startTime = Optional.empty();
         Optional<DateTime> endTime = Optional.empty();
         String[] preambleFields = args.trim().split(" ", 2);
-        Optional<Integer> index = Optional.ofNullable(Integer.parseInt(preambleFields[0]));
+
+        if (preambleFields.length < 2) {
+            return new IncorrectCommand(ScheduleCommand.MESSAGE_NOT_SCHEDULED);
+        }
+
+        Optional<Integer> index = ParserUtil.parseIndex(preambleFields[0]);
         Optional<DateGroup> dateGroup = DateTimeParser.parseDateGroup(preambleFields[1]);
 
-        if (!index.isPresent() || !dateGroup.isPresent()) {
+        if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+        }
+
+        if (!dateGroup.isPresent()) {
+            return new IncorrectCommand(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         }
 
         List<Date> dates = dateGroup.get().getDates();
@@ -64,10 +72,6 @@ public class ScheduleCommandParser {
 
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
-        }
-
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
-            return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new ScheduleCommand(index.get(), editTaskDescriptor);
