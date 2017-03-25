@@ -2,6 +2,7 @@
 package seedu.toluist.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.TreeSet;
@@ -382,8 +383,14 @@ public class Task implements Comparable<Task> {
      */
     public void updateToNextRecurringTask() {
         assert isRecurring();
-        setStartDateTime(getNextRecurringDateTime(startDateTime));
-        setEndDateTime(getNextRecurringDateTime(endDateTime));
+        if (isTaskWithDeadline()) {
+            setStartDateTime(getNextRecurringDateTime(startDateTime));
+            setEndDateTime(getNextRecurringDateTime(endDateTime));
+        } else if (isEvent()) {
+            long days = ChronoUnit.DAYS.between(endDateTime, getNextRecurringDateTime(endDateTime));
+            setStartDateTime(startDateTime.plusDays(days));
+            setEndDateTime(endDateTime.plusDays(days));
+        }
         setCompleted(false);
     }
 
@@ -397,7 +404,11 @@ public class Task implements Comparable<Task> {
         case WEEKLY:
             return dateTime.plusWeeks(1);
         case MONTHLY:
-            return dateTime.plusMonths(1);
+            int numberOfMonths = 1;
+            while (dateTime.plusMonths(numberOfMonths).getDayOfMonth() != dateTime.getDayOfMonth()) {
+                numberOfMonths++;
+            }
+            return dateTime.plusMonths(numberOfMonths);
         case YEARLY:
             return dateTime.plusYears(1);
         default:
