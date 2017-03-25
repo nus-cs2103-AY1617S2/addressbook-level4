@@ -73,29 +73,37 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.add(toAdd);
         internalList.sorted();
     }
-
+    //@@author A0110491U
     /**
      * Updates the event in the list at position {@code index} with {@code editedEvent}.
      *
      * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
      *      another existing event in the list.
+     * @throws DuplicateTimeClashException if the updating event's details clashes with another event
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateEvent(int index, ReadOnlyEvent editedEvent) throws DuplicateEventException {
+    public void updateEvent(int index, ReadOnlyEvent editedEvent) throws DuplicateEventException, DuplicateTimeClashException {
         assert editedEvent != null;
 
         Event eventToUpdate = internalList.get(index);
         if (!eventToUpdate.equals(editedEvent) && internalList.contains(editedEvent)) {
             throw new DuplicateEventException();
         }
-
+        Event eventToUpdateKeep = internalList.get(index);
+        Event toStore = new Event(eventToUpdateKeep);
         eventToUpdate.resetData(editedEvent);
+        internalList.remove(index);
+        if (containsTimeClash(eventToUpdate)) {
+            internalList.add(index, toStore);
+            throw new DuplicateTimeClashException();
+        }
         // TODO: The code below is just a workaround to notify observers of the updated event.
         // The right way is to implement observable properties in the Event class.
         // Then, EventCard should then bind its text labels to those observable properties.
         internalList.set(index, eventToUpdate);
     }
-
+    //@@author
+    
     /**
      * Removes the equivalent event from the list.
      *

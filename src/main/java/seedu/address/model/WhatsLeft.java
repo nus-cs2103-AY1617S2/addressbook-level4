@@ -113,7 +113,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      * and updates the Tag objects in the event to point to those in {@link #tags}.
      *
      * @throws UniqueEventList.DuplicateEventException if an equivalent event already exists.
-     * @throws DuplicateTimeClashException 
+     * @throws DuplicateTimeClashException if another event with time that clashes exist.
      */
     public void addEvent(Event e) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
         syncMasterTagListWith(e);
@@ -148,10 +148,11 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      *
      * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
      *      another existing event in the list.
+     * @throws DuplicateTimeClashException if the updating event clashes with another event
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
-            throws UniqueEventList.DuplicateEventException {
+            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
         assert editedReadOnlyEvent != null;
 
         Event editedEvent = new Event(editedReadOnlyEvent);

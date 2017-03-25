@@ -120,7 +120,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
-            throws UniqueEventList.DuplicateEventException {
+            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
         assert editedEvent != null;
 
         int addressBookIndex = filteredEvents.getSourceIndex(filteredEventListIndex);

@@ -54,10 +54,11 @@ public interface Model {
      *
      * @throws DuplicateEventException if updating the Event's details causes the Event to be equivalent to
      *      another existing Event in the list.
+     * @throws DuplicateTimeClashException if the updating Event clashes in time with another Event.
      * @throws IndexOutOfBoundsException if {@code filteredEventListIndex} < 0 or >= the size of the filtered list.
      */
     void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
-            throws UniqueEventList.DuplicateEventException;
+            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
 
     /** Returns the filtered Task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

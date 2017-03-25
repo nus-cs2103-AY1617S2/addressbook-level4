@@ -22,6 +22,7 @@ import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList;
 
 import seedu.address.model.tag.UniqueTagList;
@@ -47,6 +48,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DIFFERENT_DEADLINE = "Cannot edit Deadline into Task or Event";
     public static final String MESSAGE_DIFFERENT_TASK = "Cannot edit Task into Event or Deadline";
     public static final String MESSAGE_DIFFERENT_EVENT = "Cannot edit Event into Deadline or Task";
+    public static final String MESSAGE_EDIT_CLASH_TIME = "Cannot edit Event as it clashes with another event!";
 
     private final int filteredActivityListIndex;
     private final EditEventDescriptor editEventDescriptor;
@@ -90,6 +92,8 @@ public class EditCommand extends Command {
                 model.updateEvent(filteredActivityListIndex, editedEvent);
             } catch (UniqueEventList.DuplicateEventException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+            } catch (DuplicateTimeClashException e) {
+                throw new CommandException(MESSAGE_EDIT_CLASH_TIME);
             }
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
