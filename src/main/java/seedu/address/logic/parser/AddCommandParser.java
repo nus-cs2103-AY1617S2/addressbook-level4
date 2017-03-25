@@ -41,11 +41,8 @@ public class AddCommandParser {
         if (startingTimeAndDeadline != null) {
             try {
                 return new AddCommand(args.trim(),
-                        startingTimeAndDeadline
-                                .get(CliSyntax.INDEX_OF_DEADLINE),
-                        startingTimeAndDeadline
-                                .get(CliSyntax.INDEX_OF_STARTINGTIME),
-                        tags);
+                        startingTimeAndDeadline.get(1),
+                        startingTimeAndDeadline.get(0), tags);
             } catch (IllegalValueException e) {
                 return new IncorrectCommand(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -101,19 +98,19 @@ public class AddCommandParser {
         }
     }
 
-    private List<String> getMoreThanOneArguments(String reverseRegex) {
+    private List<String> getMoreThanOneArguments(String reverseRegex,
+            String[] captureGroups) {
         String reverseString = new StringBuilder(args).reverse().toString();
         Pattern pattern = Pattern.compile(reverseRegex);
         Matcher matcher = pattern.matcher(reverseString);
         if (matcher.matches()) {
-            int length = matcher.groupCount();
             List<String> arguments = new ArrayList<String>();
-            for (int i = length - 1; i >= 0; i--) {
-                arguments.add(new StringBuilder(matcher.group(i)).reverse()
-                        .toString());
+            for (String captureGroup : captureGroups) {
+                arguments.add(new StringBuilder(matcher.group(captureGroup))
+                        .reverse().toString().trim());
             }
-            args = new StringBuilder(matcher.group(length)).reverse()
-                    .toString();
+            args = new StringBuilder(matcher.group("rest")).reverse().toString()
+                    .trim();
             return arguments;
         } else {
             return null;
@@ -123,22 +120,21 @@ public class AddCommandParser {
     private List<Date> getStartingTimeAndDeadline() {
         String tmpArgs = args;
         List<String> datesString = getMoreThanOneArguments(
-                CliSyntax.STARTINGTIME_AND_DEADLINE_REVERSE_REGEX);
+                CliSyntax.STARTINGTIME_AND_DEADLINE_REVERSE_REGEX,
+                CliSyntax.CAPTURE_GROUPS_OF_EVENT);
         if (datesString == null) {
             args = tmpArgs;
             return null;
         }
-        args = new StringBuilder(args).reverse().toString();
         assert datesString
                 .size() == NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE;
         List<Date> dates = new ArrayList<Date>();
         for (int i = 0; i < NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE; i++) {
             List<DateGroup> group = new PrettyTimeParser()
                     .parseSyntax(ParserUtil.correctDateFormat(datesString.get(i)
-                            + (i == 0 ? CliSyntax.DEFAULT_STARTING_TIME
+                            + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
                                     : CliSyntax.DEFAULT_DEADLINE)));
-            if (group == null || group.get(0).getPosition() != 0
-                    || group.size() > 2) {
+            if (group == null || group.size() > 2) {
                 args = tmpArgs;
                 return null;
             } else {

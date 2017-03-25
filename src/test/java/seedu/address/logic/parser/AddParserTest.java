@@ -19,7 +19,7 @@ import seedu.address.model.task.Task;;
 
 public class AddParserTest extends AddCommandParser {
     @Test
-    public void parserTest() throws Exception {
+    public void parserTestWithTitle() throws Exception {
         AddCommand command = (AddCommand) parse("CS2103 project due");
         Task task = command.getTask();
         Name name = new Name("CS2103 project due");
@@ -31,12 +31,15 @@ public class AddParserTest extends AddCommandParser {
         assertTrue(task.getTags().toSet().equals(tags.toSet()));
         assertTrue(task.getTaskDateTime().equals(""));
         assertTrue(task.getTaskAbsoluteDateTime().equals(""));
+    }
 
-        command = (AddCommand) parse(
+    @Test
+    public void parserTestWithTitleDeadlineTag() throws Exception {
+        AddCommand command = (AddCommand) parse(
                 "CS2103 project due today #schoolwork #team");
-        task = command.getTask();
-        name = new Name("CS2103 project");
-        tags = new UniqueTagList(new HashSet<>());
+        Task task = command.getTask();
+        Name name = new Name("CS2103 project");
+        UniqueTagList tags = new UniqueTagList(new HashSet<>());
         ObservableList<Tag> listOfTags = FXCollections.observableArrayList();
         listOfTags.addAll(new Tag("schoolwork"), new Tag("team"));
         tags = new UniqueTagList(listOfTags);
@@ -44,6 +47,30 @@ public class AddParserTest extends AddCommandParser {
         assertTrue(task.getDeadline().isSameDay(new Date()));
         assertTrue(task.getName().fullName.equals(name.fullName));
         assertTrue(task.getStartingTime() == null);
+        assertTrue(task.getTags().toSet().equals(tags.toSet()));
+        assertFalse(task.getTaskDateTime() == null);
+    }
+
+    @Test
+    public void parserTestWithTitleDeadlineStartingTimeTag() throws Exception {
+        AddCommand command = (AddCommand) parse(
+                "CS2103 project from 2 days later to 20/4/2017 #schoolwork #team");
+        Task task = command.getTask();
+        Name name = new Name("CS2103 project");
+        UniqueTagList tags = new UniqueTagList(new HashSet<>());
+        ObservableList<Tag> listOfTags = FXCollections.observableArrayList();
+        listOfTags.addAll(new Tag("schoolwork"), new Tag("team"));
+        tags = new UniqueTagList(listOfTags);
+        long milisecondsTilDeadline = 1492646400000L;
+        long milisecondsTilStartingTime = new Date().getTime()
+                + 24 * 60 * 60 * 1000 * 2;
+        assertTrue(task.getTaskType()
+                .equals(TaskType.TaskWithDeadlineAndStartingTime));
+        assertTrue(
+                task.getDeadline().isSameDay(new Date(milisecondsTilDeadline)));
+        assertTrue(task.getName().fullName.equals(name.fullName));
+        assertTrue(task.getStartingTime()
+                .isSameDay(new Date(milisecondsTilStartingTime)));
         assertTrue(task.getTags().toSet().equals(tags.toSet()));
         assertFalse(task.getTaskDateTime() == null);
     }
