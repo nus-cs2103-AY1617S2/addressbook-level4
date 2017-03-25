@@ -58,4 +58,8 @@ public interface Model {
 
 	void updateBackup() throws DuplicateTaskException;
 
+	void sortByTime();
+
+	void sortByName();
+
 }

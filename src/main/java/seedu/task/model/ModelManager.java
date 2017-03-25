@@ -192,4 +192,14 @@ public class ModelManager extends ComponentManager implements Model {
 		
 	}
 
+	@Override
+	public void sortByTime() {
+		taskmanager.sortTasksByTime();
+		
+	}
+	public void sortByName() {
+		System.out.println("test");
+		taskmanager.sortTasksByName();
+	}
+
 }

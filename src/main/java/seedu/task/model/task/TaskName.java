@@ -6,7 +6,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
  * Represents a Task's name in the task manager. Guarantees: immutable; is valid
  * as declared in {@link #isValidTaskName(String)}
  */
-public class TaskName {
+public class TaskName implements Comparable<TaskName> {
 
     public static final String MESSAGE_NAME_CONSTRAINTS = "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
 
@@ -56,6 +56,26 @@ public class TaskName {
     @Override
     public int hashCode() {
 	return fullTaskName.hashCode();
+    }
+    
+    public int compareTo(TaskName other) {
+    	String x = new String(fullTaskName.toLowerCase());
+    	String y = new String(other.fullTaskName.toLowerCase());
+    	for (int i = 0; i < x.length() && i < y.length(); i++) {
+    		if (x.charAt(i) < y.charAt(i)) {
+    			return -1;
+    		} else if (x.charAt(i) > y.charAt(i)) {
+    			return 1;
+    		}
+    	}
+    	if (x.length() > y.length()) {
+    		return 1;
+    	} else if (x.length() < y.length()) {
+    		return -1;
+    	} else {
+    		return 0;
+    	}
+    	
     }
 
 }

@@ -1,6 +1,8 @@
 package seedu.task.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -217,4 +219,34 @@ public class TaskManager implements ReadOnlyTaskManager {
     		backupTasks.add(new Task(t));
     	}
     }
+
+	public void sortTasksByTime() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void sortTasksByName() {
+		List<Task> taskList = new ArrayList<Task>();
+		for (Task t : tasks) {
+			taskList.add(t);
+		}
+		for (int i = 0; i < taskList.size() - 1; i++) {
+			for (int j = i; j < taskList.size(); j++) {
+				if (taskList.get(i).getTaskName().compareTo(taskList.get(j).getTaskName()) > 0) {
+					Task temp = taskList.get(i);
+					taskList.set(i, taskList.get(j));
+					taskList.set(j, temp);
+				}
+			}
+		}
+		tasks.clear();
+		for (Task t : taskList) {
+			try {
+				tasks.add(t);
+			} catch (DuplicateTaskException dte) {
+				System.out.println("Unexpected error in TASKMANAGER sort by name");
+			}
+		}
+		
+	}
 }
