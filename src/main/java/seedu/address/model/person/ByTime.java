@@ -17,7 +17,8 @@ public class ByTime {
             "Deadline ByTime can only be in this format: hhmm, e.g. 1300";
 
     public final LocalTime value;
-//@@author A0110491U A0121668A
+
+    //@@author A0110491U A0121668A
     /**
      * Validates given start time.
      *
@@ -35,15 +36,19 @@ public class ByTime {
                 }
             }
         }
-//@@author A0121668A
-/*
- * For JAXB use
- */
+
+    //@@author A0121668A
+    /**
+     * For JAXB use
+     */
     public ByTime(LocalTime bytime) {
             value = bytime;
         }
+    
+    public LocalTime getValue() {
+        return value;
+    }
 
-    //@@author
     @Override
     public String toString() {
         if (value == null) {
@@ -63,9 +68,9 @@ public class ByTime {
     public int hashCode() {
         return value.hashCode();
     }
-
-    public LocalTime getValue() {
-        return value;
-    }
-
+    
+    //@@author A0148038A
+  	public int compareTo(ByTime o) {
+  		return this.getValue().compareTo(o.getValue());
+  	}
 }

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
-
+//@@author A0148038A
 /**
  * Represents an event's start date in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidStartDate(String)}
@@ -35,15 +35,15 @@ public class StartDate {
     /*
      * for JAXB use
      */
-    public StartDate(LocalDate startdate) {
-        value = startdate;
+    public StartDate(LocalDate startDate) {
+        value = startDate;
     }
    
     public LocalDate getValue() {
         return value;
     }
-//@@author
-
+    
+    //@@author A0148038A
     @Override
     public String toString() {
         return value.toString();
@@ -60,5 +60,9 @@ public class StartDate {
     public int hashCode() {
         return value.hashCode();
     }
+    
+	public int compareTo(StartDate o) {
+    	return this.getValue().compareTo(o.getValue());
+	}
 
 }

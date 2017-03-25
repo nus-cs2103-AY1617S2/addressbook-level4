@@ -11,29 +11,30 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.ActivityPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.EventPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.person.ReadOnlyEvent;
 
+//@@author A0148038A
 /**
  * Panel containing the list of activities.
  */
-public class ActivityListPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(ActivityListPanel.class);
-    private static final String FXML = "ActivityListPanel.fxml";
+public class EventListPanel extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
+    private static final String FXML = "EventListPanel.fxml";
 
     @FXML
     private ListView<ReadOnlyEvent> eventListView;
 
-    public ActivityListPanel(AnchorPane activityListPlaceholder, ObservableList<ReadOnlyEvent> eventList) {
+    public EventListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyEvent> eventList) {
         super(FXML);
         setConnections(eventList);
-        addToPlaceholder(activityListPlaceholder);
+        addToPlaceholder(eventListPlaceholder);
     }
 
     private void setConnections(ObservableList<ReadOnlyEvent> eventList) {
         eventListView.setItems(eventList);
-        eventListView.setCellFactory(listView -> new ActivityListViewCell());
+        eventListView.setCellFactory(listView -> new EventListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -48,7 +49,7 @@ public class ActivityListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in event list panel changed to : '" + newValue + "'");
-                        raise(new ActivityPanelSelectionChangedEvent(newValue));
+                        raise(new EventPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -60,7 +61,7 @@ public class ActivityListPanel extends UiPart<Region> {
         });
     }
 
-    class ActivityListViewCell extends ListCell<ReadOnlyEvent> {
+    class EventListViewCell extends ListCell<ReadOnlyEvent> {
 
         @Override
         protected void updateItem(ReadOnlyEvent event, boolean empty) {

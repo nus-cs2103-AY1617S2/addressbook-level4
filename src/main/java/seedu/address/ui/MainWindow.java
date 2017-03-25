@@ -19,6 +19,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 
+//@@author A0148038A
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -35,7 +36,8 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private ActivityListPanel activityListPanel;
+    private EventListPanel eventListPanel;
+    private TaskListPanel taskListPanel;
     private Config config;
 
     @FXML
@@ -48,7 +50,10 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane activityListPanelPlaceholder;
+    private AnchorPane eventListPanelPlaceholder;
+    
+    @FXML
+    private AnchorPane taskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -115,7 +120,8 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        activityListPanel = new ActivityListPanel(getActivityListPlaceholder(), logic.getFilteredEventList());
+        eventListPanel = new EventListPanel(getEventListPlaceholder(), logic.getFilteredEventList());
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getWhatsLeftFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -133,8 +139,12 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getActivityListPlaceholder() {
-        return activityListPanelPlaceholder;
+    private AnchorPane getEventListPlaceholder() {
+        return eventListPanelPlaceholder;
+    }
+    
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
     }
 
     void hide() {
@@ -196,16 +206,20 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public ActivityListPanel getActivityListPanel() {
-        return this.activityListPanel;
-    }
-
-    void loadActivityPage(ReadOnlyEvent event) {
-        browserPanel.loadActivityPage(event);
+    public EventListPanel getEventListPanel() {
+        return this.eventListPanel;
     }
     
-    void loadActivityPage(ReadOnlyTask task) {
-        browserPanel.loadActivityPage(task);
+    public TaskListPanel getTaskListPanel() {
+        return this.taskListPanel;
+    }
+
+    void loadEventPage(ReadOnlyEvent event) {
+        browserPanel.loadEventPage(event);
+    }
+    
+    void loadTaskPage(ReadOnlyTask task) {
+        browserPanel.loadTaskPage(task);
     }
 
     void releaseResources() {

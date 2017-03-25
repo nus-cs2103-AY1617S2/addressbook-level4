@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
-
+//@@author A0148038A
 /**
  * Represents an Event's EndDate in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndDate(String)}
@@ -38,8 +38,8 @@ public class EndDate {
     /*
      * for JAXB use
      */
-    public EndDate(LocalDate startdate) {
-            value = startdate;
+    public EndDate(LocalDate startDate) {
+            value = startDate;
         }
     
     public LocalDate getValue() {
@@ -65,5 +65,9 @@ public class EndDate {
     public int hashCode() {
         return value.hashCode();
     }
+    
+  	public int compareTo(EndDate o) {
+      	return this.getValue().compareTo(o.getValue());
+  	}
 
 }

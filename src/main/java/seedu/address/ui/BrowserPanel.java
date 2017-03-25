@@ -9,6 +9,7 @@ import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 
+//@@author A0148038A
 /**
  * The Browser Panel of the App.
  */
@@ -30,7 +31,7 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadActivityPage(ReadOnlyEvent event) {
+    public void loadEventPage(ReadOnlyEvent event) {
         if (event.getLocation().value != null) {
             loadPage("https://www.google.com.sg/maps/search/" + event.getLocation().value.replaceAll(" ", "+"));
         } else {
@@ -39,7 +40,7 @@ public class BrowserPanel extends UiPart<Region> {
         }
     }
     
-    public void loadActivityPage(ReadOnlyTask task) {
+    public void loadTaskPage(ReadOnlyTask task) {
         if (task.getLocation().value != null) {
             loadPage("https://www.google.com.sg/maps/search/" + task.getLocation().value.replaceAll(" ", "+"));
         } else {

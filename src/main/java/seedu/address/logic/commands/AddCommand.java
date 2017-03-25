@@ -61,18 +61,18 @@ public class AddCommand extends Command {
             this.toAddTask = new Task(
                     new Description(description),
                     new Priority(priority),
-                    new ByDate(bydate),
                     new ByTime(bytime),
+                    new ByDate(bydate),
                     new Location(location),
                     new UniqueTagList(tagSet));
             this.toAddEvent = null;
         } else {
             this.toAddEvent = new Event(
                     new Description(description),
-                    new StartDate(startdate),
-                    new EndDate(enddate),
                     new StartTime(starttime),
+                    new StartDate(startdate),
                     new EndTime(endtime),
+                    new EndDate(enddate),
                     new Location(location),
                     new UniqueTagList(tagSet));
             this.toAddTask = null;

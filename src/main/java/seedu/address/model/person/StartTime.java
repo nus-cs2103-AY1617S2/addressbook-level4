@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
+//@@author A0148038A
 /**
  * Represents an Event's StartTime in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidStartTime(String)}
@@ -38,8 +39,8 @@ public class StartTime {
     /*
      * For JAXB use
      */
-    public StartTime(LocalTime starttime) {
-        value = starttime;
+    public StartTime(LocalTime startTime) {
+        value = startTime;
     }
 
     public LocalTime getValue() {
@@ -65,4 +66,8 @@ public class StartTime {
     public int hashCode() {
         return value.hashCode();
     }
+
+	public int compareTo(StartTime o) {
+    	return this.getValue().compareTo(o.getValue());
+	}
 }
