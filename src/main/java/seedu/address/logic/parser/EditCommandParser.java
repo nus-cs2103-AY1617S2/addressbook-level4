@@ -116,18 +116,16 @@ public class EditCommandParser {
         }
     }
 
-    private List<String> getMoreThanOneArguments(String reverseRegex) {
-        String reverseString = new StringBuilder(args).reverse().toString();
-        Pattern pattern = Pattern.compile(reverseRegex);
-        Matcher matcher = pattern.matcher(reverseString);
+    private List<String> getMoreThanOneArguments(String regex,
+            String[] captureGroups) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(args);
         if (matcher.matches()) {
-            int length = matcher.groupCount();
             List<String> arguments = new ArrayList<String>();
-            for (int i = length - 1; i >= 0; i--) {
-                arguments.add(new StringBuilder(matcher.group(i)).reverse()
-                        .toString());
+            for (String captureGroup : captureGroups) {
+                arguments.add(matcher.group(captureGroup).trim());
             }
-            args = matcher.group(length);
+            args = matcher.group("rest").trim();
             return arguments;
         } else {
             return null;
@@ -137,7 +135,8 @@ public class EditCommandParser {
     private List<Date> getStartingTimeAndDeadline() {
         String tmpArgs = args;
         List<String> datesString = getMoreThanOneArguments(
-                CliSyntax.STARTINGTIME_AND_DEADLINE_REVERSE_REGEX);
+                CliSyntax.STARTINGTIME_AND_DEADLINE_REVERSE_REGEX,
+                CliSyntax.CAPTURE_GROUPS_OF_EVENT);
         if (datesString == null) {
             args = tmpArgs;
             return null;
@@ -146,12 +145,16 @@ public class EditCommandParser {
                 .size() == NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE;
         List<Date> dates = new ArrayList<Date>();
         for (int i = 0; i < NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE; i++) {
-            List<DateGroup> group = new PrettyTimeParser()
-                    .parseSyntax(ParserUtil.correctDateFormat(datesString.get(i)
-                            + (i == 0 ? CliSyntax.DEFAULT_STARTING_TIME
-                                    : CliSyntax.DEFAULT_DEADLINE)));
-            if (group == null || group.get(0).getPosition() != 0
-                    || group.size() > 2) {
+            List<DateGroup> group = new PrettyTimeParser().parseSyntax(
+                    ParserUtil.correctDateFormat(datesString.get(i))
+                            + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
+                                    : CliSyntax.DEFAULT_DEADLINE));
+            if (group == null || group.size() > 1 || (!group.get(0).getText()
+                    .equals(datesString.get(i))
+                    && !group.get(0).getText().equals(
+                            ParserUtil.correctDateFormat(datesString.get(i))
+                                    + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
+                                            : CliSyntax.DEFAULT_DEADLINE)))) {
                 args = tmpArgs;
                 return null;
             } else {
