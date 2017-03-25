@@ -39,7 +39,7 @@ public abstract class GeeKeepGuiTest {
     @Rule
     public TestName name = new TestName();
 
-    TestApp testApp;
+    protected TestApp testApp;
 
     protected TypicalTestTasks td = new TypicalTestTasks();
 

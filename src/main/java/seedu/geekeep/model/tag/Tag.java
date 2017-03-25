@@ -1,6 +1,5 @@
 package seedu.geekeep.model.tag;
 
-
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**

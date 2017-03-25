@@ -17,14 +17,14 @@ public class Title {
      */
     public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
+    public final String title;
+
     /**
      * Returns true if a given string is a valid task title.
      */
     public static boolean isValidTitle(String test) {
         return test.matches(TITLE_VALIDATION_REGEX);
     }
-
-    public final String title;
 
     /**
      * Validates given title.

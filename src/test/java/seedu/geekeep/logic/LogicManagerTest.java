@@ -68,7 +68,7 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
+        public Task adam() throws Exception {
             Title title = new Title("Adam Brown");
             DateTime privateEndDateTime = new DateTime("01-05-17 1630");
             DateTime startDateTime = new DateTime("01-04-17 1630");
@@ -83,14 +83,14 @@ public class LogicManagerTest {
          * Adds auto-generated Task objects to the given model
          * @param model The model to which the Tasks will be added
          */
-        void addToModel(Model model, int numGenerated) throws Exception {
+        public void addToModel(Model model, int numGenerated) throws Exception {
             addToModel(model, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given model
          */
-        void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+        public void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
                 model.addTask(p);
             }
@@ -100,21 +100,21 @@ public class LogicManagerTest {
          * Adds auto-generated Task objects to the given GeeKeep
          * @param geeKeep The GeeKeep to which the Tasks will be added
          */
-        void addToGeeKeep(GeeKeep geeKeep, int numGenerated) throws Exception {
+        public void addToGeeKeep(GeeKeep geeKeep, int numGenerated) throws Exception {
             addToGeeKeep(geeKeep, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given GeeKeep
          */
-        void addToGeeKeep(GeeKeep geeKeep, List<Task> tasksToAdd) throws Exception {
+        public void addToGeeKeep(GeeKeep geeKeep, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
                 geeKeep.addTask(p);
             }
         }
 
         /** Generates the correct add command based on the task given */
-        String generateAddCommand(Task p) {
+        public String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
@@ -139,7 +139,7 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the task data field values
          */
-        Task generateTask(int seed) throws Exception {
+        public Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
                     new DateTime("01-04-17 1630"),
@@ -152,7 +152,7 @@ public class LogicManagerTest {
         /**
          * Generates a list of Tasks based on the flags.
          */
-        List<Task> generateTaskList(int numGenerated) throws Exception {
+        public List<Task> generateTaskList(int numGenerated) throws Exception {
             List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
                 tasks.add(generateTask(i));
@@ -160,14 +160,14 @@ public class LogicManagerTest {
             return tasks;
         }
 
-        List<Task> generateTaskList(Task... tasks) {
+        public List<Task> generateTaskList(Task... tasks) {
             return Arrays.asList(tasks);
         }
 
         /**
          * Generates a GeeKeep with auto-generated tasks.
          */
-        GeeKeep generateGeeKeep(int numGenerated) throws Exception {
+        public GeeKeep generateGeeKeep(int numGenerated) throws Exception {
             GeeKeep geeKeep = new GeeKeep();
             addToGeeKeep(geeKeep, numGenerated);
             return geeKeep;
@@ -176,7 +176,7 @@ public class LogicManagerTest {
         /**
          * Generates a GeeKeep based on the list of Tasks given.
          */
-        GeeKeep generateGeeKeep(List<Task> tasks) throws Exception {
+        public GeeKeep generateGeeKeep(List<Task> tasks) throws Exception {
             GeeKeep geeKeep = new GeeKeep();
             addToGeeKeep(geeKeep, tasks);
             return geeKeep;
@@ -185,7 +185,7 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given title. Other fields will have some dummy values.
          */
-        Task generateTaskWithTitle(String title) throws Exception {
+        public Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
                     new Title(title),
                     new DateTime("01-04-17 1630"),

@@ -20,25 +20,14 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
+ * GeeKeep is TaskManager
  * Wraps all data at the GeeKeep level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class GeeKeep implements ReadOnlyGeeKeep {
 
-    private final UniqueTaskList tasks;
-    private final UniqueTagList tags;
-
-    /*
-     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication between
-     * constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication among
-     * constructors.
-     */
-    {
-        tasks = new UniqueTaskList();
-        tags = new UniqueTagList();
-    }
+    private final UniqueTaskList tasks = new UniqueTaskList();
+    private final UniqueTagList tags = new UniqueTagList();
 
     public GeeKeep() {
     }
@@ -51,7 +40,7 @@ public class GeeKeep implements ReadOnlyGeeKeep {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+//// list overwrite operations
 
     /**
      * Adds a task to GeeKeep. Also checks the new task's tags and updates {@link #tags} with any new tags
@@ -77,7 +66,7 @@ public class GeeKeep implements ReadOnlyGeeKeep {
                         && this.tags.equalsOrderInsensitive(((GeeKeep) other).tags));
     }
 
-    //// task-level operations
+//// task-level operations
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
@@ -125,14 +114,14 @@ public class GeeKeep implements ReadOnlyGeeKeep {
         syncMasterTagListWith(tasks);
     }
 
-    //// tag-level operations
+//// tag-level operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
-    //// util methods
+//// util methods
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
