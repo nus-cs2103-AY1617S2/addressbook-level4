@@ -8,7 +8,7 @@ import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
 
 //@@author A0162877N
-public class UndoManager implements Changeable {
+public class UndoManager implements Undo {
 
     private static UndoManager instance = null;
     private LinkedList<UndoPair<ObservableList<ReadOnlyTask>, ObservableList<Label>>> storageHistory;
@@ -24,10 +24,10 @@ public class UndoManager implements Changeable {
         return instance;
     }
 
-    public void addStorageHistory(ObservableList<ReadOnlyTask> oldTaskState, ObservableList<Label> oldLabelState) {
+    public void addStorageHistory(ObservableList<ReadOnlyTask> currentTasks, ObservableList<Label> currentLabels) {
         this.storageHistory.addLast(
                 new UndoPair<ObservableList<ReadOnlyTask>,
-                ObservableList<Label>>(oldTaskState, oldLabelState));
+                ObservableList<Label>>(currentTasks, currentLabels));
     }
 
     public boolean isEmpty() {
