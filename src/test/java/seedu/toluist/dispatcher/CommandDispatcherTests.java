@@ -26,7 +26,7 @@ public class CommandDispatcherTests {
 
     private Dispatcher dispatcher = new CommandDispatcher();
     @Mock
-    AliasTable aliasTable;
+    private AliasTable aliasTable;
 
     @Before
     public void setUp() {
