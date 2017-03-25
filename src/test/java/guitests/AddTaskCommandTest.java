@@ -25,8 +25,12 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
     private static IllegalArgumentException illegalArgumentException2 =
             new IllegalArgumentException("Start date must be before end date.");
     private static IllegalArgumentException illegalArgumentException3 =
+            new IllegalArgumentException("Task priority must be either 'low' or 'high'.");
+    private static IllegalArgumentException illegalArgumentException4 =
             new IllegalArgumentException("Floating task cannot be recurring task,"
                     + " include at least an end date.");
+    private static IllegalArgumentException illegalArgumentException5 =
+            new IllegalArgumentException("Invalid recurring frequency string");
     private Tag tag1 = new Tag("tag1");
     private Tag tag2 = new Tag("tag2");
     private Tag tag3 = new Tag("tag3");
@@ -169,16 +173,33 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
     @Test
     public void addTaskWithInvalidPriorityLevel_shouldNotBeCreated() {
         String taskDescription = "attend CS2103T tutorial";
-        String command = "add " + taskDescription + " priority/high low";
-        commandBox.runCommand(command);
-        Task task1 = new Task(taskDescription);
-        Task task2 = new Task(taskDescription);
-        task2.setTaskPriority(TaskPriority.HIGH);
+        String priorityString = "high low";
+        String command = "add " + taskDescription + " priority/" + priorityString;
+        Task task1 = null;
+        Task task2 = null;
+        try {
+            commandBox.runCommand(command);
+            task1 = new Task(taskDescription);
+            task2 = new Task(taskDescription);
+            task2.setTaskPriority(priorityString);
+            fail("Should not reach here since priority is both high and low at the same time.");
+        } catch (IllegalArgumentException illegalArgumentException) {
+            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException3.getMessage()));
+        }
         assertFalse(isTaskShown(task1));
         assertFalse(isTaskShown(task2));
 
-        command = "add " + taskDescription + " priority/";
-        commandBox.runCommand(command);
+        priorityString = "";
+        command = "add " + taskDescription + " priority/" + priorityString;
+        try {
+            commandBox.runCommand(command);
+            task1 = new Task(taskDescription);
+            task2 = new Task(taskDescription);
+            task2.setTaskPriority(priorityString);
+            fail("Should not reach here since priority is blank.");
+        } catch (IllegalArgumentException illegalArgumentException) {
+            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException3.getMessage()));
+        }
         assertFalse(isTaskShown(task1));
         assertFalse(isTaskShown(task2));
     }
@@ -229,5 +250,55 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         Task task2 = new Task(taskDescription, from, to);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
         assertTrue(isTaskShown(task1));
+    }
+
+    @Test
+    public void addRecurringTaskWithWrongParams_shouldThrowException() {
+        // Recurring floating task
+        String taskDescription = "shower";
+        String recurFrequencyString = "daily";
+        String command = "add " + taskDescription + " repeat/" + recurFrequencyString;
+        Task task1 = null;
+        try {
+            commandBox.runCommand(command);
+            task1 = new Task(taskDescription);
+            task1.setRecurring(recurFrequencyString);
+            fail("Should not reach here since floating task cannot be recurring");
+        } catch (IllegalArgumentException illegalArgumentException) {
+            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException4.getMessage()));
+        }
+        assertFalse(isTaskShown(task1));
+
+        // Recurring event with empty repeat
+        LocalDateTime from = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        recurFrequencyString = "";
+        command = "add " + taskDescription + " repeat/" + recurFrequencyString
+                + " from/" + from + " to/" + to;
+        Task task2 = null;
+        try {
+            commandBox.runCommand(command);
+            task2 = new Task(taskDescription, from, to);
+            task2.setRecurring(recurFrequencyString);
+            fail("Should not reach here since recurring task must have a repeat frequency.");
+        } catch (IllegalArgumentException illegalArgumentException) {
+            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException5.getMessage()));
+        }
+        assertTrue(isTaskShown(task2));
+
+        // Recurring event with two repeats
+        recurFrequencyString = "weekly yearly";
+        command = "add " + taskDescription + " repeat/" + recurFrequencyString
+                + " from/" + from + " to/" + to;
+        Task task3 = null;
+        try {
+            commandBox.runCommand(command);
+            task3 = new Task(taskDescription, from, to);
+            task3.setRecurring(recurFrequencyString);
+            fail("Should not reach here since recurring task must have only one repeat frequency.");
+        } catch (IllegalArgumentException illegalArgumentException) {
+            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException5.getMessage()));
+        }
+        assertTrue(isTaskShown(task3));
     }
 }
