@@ -209,7 +209,7 @@ _**Marks the task at a specified index as done.**_<br>
 
 #### Format:
 
-**`done INDEX`**
+**`done INDEX [INDEX]...`**
 
 <br>
 
@@ -223,8 +223,8 @@ _**Marks the task at a specified index as done.**_<br>
 
 * Mark the task at `INDEX` 1 as done:<br>
 **`d 1`** <br>
-* Mark the task at `INDEX` 3 as done:<br>
-**`done 3`** <br>
+* Marks the task at indexes 3, 5 and 6 as done:
+**`done 3 5 6`** <br>
 
 <br>
 
@@ -235,7 +235,7 @@ _**Marks the task at a specified index as deleted.**_<br>
 
 #### Format:
 
-**`kill INDEX`**
+**`kill INDEX [INDEX]...`**
 
 <br>
 
@@ -249,8 +249,8 @@ _**Marks the task at a specified index as deleted.**_<br>
 
 * Delete the task at index 2:<br>
 **`kill 2`** <br><br>
-* Delete the task at index 4:<br>
-**`k 4`** <br>
+* Deletes the task at indexes 4, 5 and 6:
+**`k 4 5 6`** <br>
 
 <br>
 
