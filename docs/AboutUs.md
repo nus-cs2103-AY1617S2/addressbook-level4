@@ -4,45 +4,26 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Yoshiaki Nishimura](http://github.com/yoshi-1224)
+<img src="images/yoshi-1224.jpg" width="150"><br>
+**Role**: Team lead, in charge of UI & Model <br>
+**Responsibilities**: Documentation, Deliverables and deadlines, Scheduling and tracking, Testing, Travis, Git
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Brea Dionisio](http://github.com/bdioni)
+<img src="images/bdioni.jpg" width="150"><br>
+**Role**: Developer, in charge of Logic <br>
+**Responsibilities**: Code Quality, Integration, Eclipse expert, Git expert
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Anshul Aggarwal](http://github.com/aanshul20)
+<img src="images/aanshul20.jpg" width="150"><br>
+**Role**: Developer, in charge of Storage <br>
+**Responsibilities**: Testing
 
 -----
-
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
 
 # Contributors
 
