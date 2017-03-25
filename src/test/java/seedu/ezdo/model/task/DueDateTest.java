@@ -9,7 +9,6 @@ import org.junit.rules.ExpectedException;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.todo.DueDate;
-import seedu.ezdo.model.todo.StartDate;
 
 public class DueDateTest {
 
