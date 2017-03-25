@@ -130,4 +130,5 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getDeadlineListPanel().switchListView(event.category);
         mainWindow.getEventListPanel().switchListView(event.category);
     }
+
 }

@@ -208,24 +208,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskListToShowEvents() {
-        filteredTasks.setPredicate(t -> t.isEvent());
-
-    }
-
-    @Override
-    public void updateFilteredTaskListToShowDeadlines() {
-        filteredTasks.setPredicate(t -> t.isDeadline());
-
-    }
-
-    @Override
-    public void updateFilteredTaskListToShowFloatingTasks() {
-        filteredTasks.setPredicate(t -> t.isFloatingTask());
-
-    }
-
-    @Override
     public void undo() throws NothingToUndoException {
         if (pastGeeKeeps.empty()) {
             throw new NothingToUndoException();
