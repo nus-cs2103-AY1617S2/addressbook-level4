@@ -1,3 +1,4 @@
+/* @@author A0135998H */
 .background {
     -fx-background-color: #ff4745;
 }
@@ -34,7 +35,7 @@
 }
 
 .tab:pressed, .tab:default:hover:pressed {
-  -fx-background-color: #14987e;
+    -fx-background-color: #14987e;
 }
 
 .button1 {
@@ -53,7 +54,7 @@
 }
 
 .button1:pressed, .button:default:hover:pressed {
-  -fx-background-color: #ff418b;
+    -fx-background-color: #ff418b;
 }
 
 .button2 {
@@ -66,7 +67,7 @@
 }
 
 .button2:pressed, .button:default:hover:pressed {
-  -fx-background-color: #f1cadb;
+    -fx-background-color: #f1cadb;
 }
 
 #cardPane {
