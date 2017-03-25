@@ -42,7 +42,7 @@ public class DateTimeTest {
         assertTrue(df.format(dateTime.getDate()).equals("31/05/2017"));
         Date date2 = new PrettyTimeParser().parse("31 May 2017 3.45pm").get(0);
         assertTrue(dateTime.isSameDay(date2));
-        Date date3 = new PrettyTimeParser().parse("5 seconds ago").get(0);
+        Date date3 = new PrettyTimeParser().parse("5 seconds ago ").get(0);
         dateTime.set(date3);
         assertTrue(/*
                     * dateTime.toString().equals("Æ¬¿ÌÖ®Ç°") ||
