@@ -13,6 +13,8 @@ import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Recurrence;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.model.task.Task;
 
 /**
@@ -30,6 +32,8 @@ public class XmlAdaptedTask {
     private String endDateTime;
     @XmlElement(required = true)
     private String information;
+    @XmlElement (required = true)
+    private String recurrence;
 
     @XmlElement
     private List<XmlAdaptedCategory> addedToCategory = new ArrayList<>();
@@ -55,9 +59,12 @@ public class XmlAdaptedTask {
         } else {
             priorityLevel = PriorityLevel.PRIORITY_NO;
         }
+        
+        //@@author
         startDateTime = source.getStartDateTime().value;
         endDateTime = source.getEndDateTime().value;
         information = source.getInformation().value;
+        recurrence = source.getRecurrence().toString();
         addedToCategory = new ArrayList<>();
         for (Category category : source.getCategories()) {
             addedToCategory.add(new XmlAdaptedCategory(category));
@@ -79,7 +86,9 @@ public class XmlAdaptedTask {
         final DateTime startDateTime = new DateTime(this.startDateTime);
         final DateTime endDateTime = new DateTime(this.endDateTime);
         final Information information = new Information(this.information);
+        final Recurrence recurrence = new Recurrence(Frequency.valueOf(this.recurrence));
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(name, priorityLevel, startDateTime, endDateTime, information, categories);
+        return new Task(name, priorityLevel, startDateTime, endDateTime, information,
+                recurrence, categories);
     }
 }
