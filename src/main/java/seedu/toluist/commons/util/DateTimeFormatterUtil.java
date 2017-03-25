@@ -59,6 +59,34 @@ public class DateTimeFormatterUtil {
     }
 
     /**
+     * Format recurring floating task
+     */
+    public static String formatRecurringFloatingTask(LocalDateTime recurringEndDateTime,
+            RecurringFrequency recurringFrequency) {
+        String formattedResult = "";
+        switch (recurringFrequency) {
+        case DAILY:
+            formattedResult += String.join(" ", EVERY, DAY);
+            break;
+        case WEEKLY:
+            formattedResult += String.join(" ", EVERY, WEEK);
+            break;
+        case MONTHLY:
+            formattedResult += String.join(" ", EVERY, MONTH);
+            break;
+        case YEARLY:
+            formattedResult += String.join(" ", EVERY, YEAR);
+            break;
+        default:
+            // won't happen
+        }
+        if (recurringEndDateTime != null) {
+            formattedResult += RECURRING_DATE_SEPARATOR + String.join(" ", UNTIL, formatDate(recurringEndDateTime));
+        }
+        return formattedResult;
+    }
+
+    /**
      * Format recurring task with deadline
      */
     public static String formatRecurringTaskDeadline(LocalDateTime deadline, LocalDateTime recurringEndDateTime,

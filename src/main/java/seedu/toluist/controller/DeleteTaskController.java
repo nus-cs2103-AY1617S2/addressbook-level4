@@ -60,8 +60,7 @@ public class DeleteTaskController extends Controller {
     }
 
     private CommandResult delete(TodoList todoList, Task task) {
-        if (task.isRecurring() && (task.getRecurringEndDateTime() == null
-                || task.getNextRecurringDateTime(task.getEndDateTime()).isBefore(task.getRecurringEndDateTime()))) {
+        if (task.canUpdateToNextRecurringTask()) {
             task.updateToNextRecurringTask();
         } else {
             todoList.remove(task);

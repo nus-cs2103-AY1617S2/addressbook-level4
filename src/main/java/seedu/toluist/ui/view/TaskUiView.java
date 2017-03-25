@@ -103,19 +103,25 @@ public class TaskUiView extends UiView {
             clockIcon.setImage(AppUtil.getImage(IMAGE_PATH_CLOCK_ICON));
         }
 
-        if (isRecurring && isTaskWithDeadline) {
-            recurringDate.setText(
-                    DateTimeFormatterUtil.formatRecurringTaskDeadline(
-                            task.getEndDateTime(),
-                            task.getRecurringEndDateTime(),
-                            task.getRecurringFrequency()));
-        } else if (isRecurring && isEvent) {
-            recurringDate.setText(
-                    DateTimeFormatterUtil.formatRecurringEvent(
-                            task.getStartDateTime(),
-                            task.getEndDateTime(),
-                            task.getRecurringEndDateTime(),
-                            task.getRecurringFrequency()));
+        if (isRecurring) {
+            if (isFloatingTask) {
+                recurringDate.setText(DateTimeFormatterUtil.formatRecurringFloatingTask(
+                        task.getRecurringEndDateTime(),
+                        task.getRecurringFrequency()));
+            } else if (isTaskWithDeadline) {
+                recurringDate.setText(
+                        DateTimeFormatterUtil.formatRecurringTaskDeadline(
+                                task.getEndDateTime(),
+                                task.getRecurringEndDateTime(),
+                                task.getRecurringFrequency()));
+            } else if (isEvent) {
+                recurringDate.setText(
+                        DateTimeFormatterUtil.formatRecurringEvent(
+                                task.getStartDateTime(),
+                                task.getEndDateTime(),
+                                task.getRecurringEndDateTime(),
+                                task.getRecurringFrequency()));
+            }
         }
         if (isRecurring) {
             recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));

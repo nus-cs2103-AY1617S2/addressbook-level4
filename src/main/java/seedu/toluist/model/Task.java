@@ -187,7 +187,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isRecurring() {
-        return endDateTime != null && recurringFrequency != null;
+        return recurringFrequency != null;
     }
 
     //@@author A0162011A
@@ -322,10 +322,6 @@ public class Task implements Comparable<Task> {
     }
 
     public void setRecurringFrequency(RecurringFrequency recurringFrequency) {
-        // This is to prevent setting a recurring floating task.
-        if (isFloatingTask()) {
-            throw new IllegalArgumentException("Floating task cannot be recurring.");
-        }
         if (isRecurring()) {
             this.recurringFrequency = recurringFrequency;
         } else {
@@ -357,9 +353,6 @@ public class Task implements Comparable<Task> {
         if (recurringFrequency == null) {
             throw new IllegalArgumentException("Recurring task must have a"
                     + " frequency of 'daily', 'weekly', 'monthly' or 'yearly'.");
-        } else if (isFloatingTask()) {
-            throw new IllegalArgumentException("Floating task cannot be recurring task,"
-                    + " include at least an end date.");
         }
         this.recurringEndDateTime = recurringEndDateTime;
         this.recurringFrequency = recurringFrequency;
@@ -368,6 +361,19 @@ public class Task implements Comparable<Task> {
     public void unsetRecurring() {
         this.recurringEndDateTime = null;
         this.recurringFrequency = null;
+    }
+
+    public boolean canUpdateToNextRecurringTask() {
+        if (!isRecurring()) {
+            return false;
+        }
+        if (recurringEndDateTime == null) {
+            return true;
+        }
+        if (endDateTime == null) {
+            return LocalDateTime.now().isBefore(recurringEndDateTime);
+        }
+        return endDateTime.isBefore(recurringEndDateTime);
     }
 
     /**

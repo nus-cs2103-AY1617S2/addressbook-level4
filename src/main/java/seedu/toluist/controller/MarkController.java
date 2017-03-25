@@ -68,9 +68,7 @@ public class MarkController extends Controller {
     private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
         ArrayList<Task> tasks = UiStore.getInstance().getShownTasks(taskIndexes);
         for (Task task : tasks) {
-            if (task.isRecurring()
-                && (task.getRecurringEndDateTime() == null
-                || task.getNextRecurringDateTime(task.getEndDateTime()).isBefore(task.getRecurringEndDateTime()))) {
+            if (task.canUpdateToNextRecurringTask()) {
                 task.updateToNextRecurringTask();
             } else {
                 task.setCompleted(isCompleted);

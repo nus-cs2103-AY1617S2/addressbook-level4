@@ -206,6 +206,25 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
     }
 
     @Test
+    public void addRecurringFloatingTask() {
+        String taskDescription = "shower";
+        String recurFrequencyString = "daily";
+        String command = "add " + taskDescription + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task1 = new Task(taskDescription);
+        task1.setRecurring(recurFrequencyString);
+        assertTrue(isTaskShown(task1));
+
+        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017, 2pm");
+        command = "add " + taskDescription + " repeat/" + recurFrequencyString + " repeatuntil/" + recurUntilEndDate;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription);
+        task2.setRecurring(recurUntilEndDate, recurFrequencyString);
+        assertTrue(isTaskShown(task1));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
     public void addRecurringTaskWithDeadline() {
         String taskDescription = "shower";
         String recurFrequencyString = "daily";
@@ -219,13 +238,14 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         taskDescription = "do CS2103T project";
         recurFrequencyString = "weekly";
         endDate = DateTimeUtil.parseDateString("28 April 2017, 11pm");
-        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017");
+        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017, 2pm");
         command = "add " + taskDescription + " by/" + endDate + " repeat/" + recurFrequencyString
                 + " repeatuntil/" + recurUntilEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, endDate);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
         assertTrue(isTaskShown(task1));
+        assertTrue(isTaskShown(task2));
     }
 
     @Test
@@ -242,39 +262,26 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
 
         taskDescription = "do CS2103T project";
         recurFrequencyString = "weekly";
-        from = DateTimeUtil.parseDateString("now");
+        from = DateTimeUtil.parseDateString("28 April 2017, 9pm");
         to = DateTimeUtil.parseDateString("28 April 2017, 11pm");
-        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017");
+        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017, 2pm");
         command = "add " + taskDescription + " from/" + from + " to/" + to + " repeat/" + recurFrequencyString
                 + " repeatuntil/" + recurUntilEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, from, to);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
         assertTrue(isTaskShown(task1));
+        assertTrue(isTaskShown(task2));
     }
 
     @Test
     public void addRecurringTaskWithWrongParams_shouldThrowException() {
-        // Recurring floating task
-        String taskDescription = "shower";
-        String recurFrequencyString = "daily";
-        String command = "add " + taskDescription + " repeat/" + recurFrequencyString;
-        Task task1 = null;
-        try {
-            commandBox.runCommand(command);
-            task1 = new Task(taskDescription);
-            task1.setRecurring(recurFrequencyString);
-            fail("Should not reach here since floating task cannot be recurring");
-        } catch (IllegalArgumentException illegalArgumentException) {
-            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException4.getMessage()));
-        }
-        assertFalse(isTaskShown(task1));
-
         // Recurring event with empty repeat
+        String taskDescription = "shower";
         LocalDateTime from = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
-        recurFrequencyString = "";
-        command = "add " + taskDescription + " repeat/" + recurFrequencyString
+        String recurFrequencyString = "";
+        String command = "add " + taskDescription + " repeat/" + recurFrequencyString
                 + " from/" + from + " to/" + to;
         Task task2 = null;
         try {
