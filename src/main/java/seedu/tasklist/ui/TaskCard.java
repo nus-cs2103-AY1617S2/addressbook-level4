@@ -11,6 +11,7 @@ import seedu.tasklist.commons.util.AppUtil;
 import seedu.tasklist.model.task.DeadlineTask;
 import seedu.tasklist.model.task.EventTask;
 import seedu.tasklist.model.task.FloatingTask;
+import seedu.tasklist.model.task.Priority;
 import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
 import seedu.tasklist.model.task.ReadOnlyEventTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
@@ -58,6 +59,21 @@ public class TaskCard extends UiPart<Region> {
         comment.setText(task.getComment().value);
         priority.setText("Priority: " + task.getPriority().value);
         initTags(task);
+        String priorityLevel = task.getPriority().value;
+        switch(priorityLevel) {
+        case Priority.PRIORITY_LOW:
+            priority.setStyle("-fx-text-fill: #ff5050; -fx-border-color: #ff5050; -fx-padding: 2px");
+            priority.setText("HIGH");
+            break;
+        case Priority.PRIORITY_MEDIUM:
+            priority.setStyle("-fx-text-fill: #ff9900; -fx-border-color: #ff9900; -fx-padding: 2px");
+            priority.setText("MEDIUM");
+            break;
+        case Priority.PRIORITY_HIGH:
+            priority.setStyle("-fx-text-fill: #33cc33; -fx-border-color: #33cc33; -fx-padding: 2px");
+            priority.setText("LOW");
+            break;
+        }
         switch(taskType) {
         case DeadlineTask.TYPE:
             deadline.setText("Deadline: " + ((ReadOnlyDeadlineTask) task).getDeadlineString());
