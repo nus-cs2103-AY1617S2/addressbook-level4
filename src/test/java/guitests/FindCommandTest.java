@@ -12,7 +12,7 @@ public class FindCommandTest extends EzDoGuiTest {
 
     @Test
     public void find_nonEmptyList() {
-        
+
         assertFindResult("find Mark"); // no results
         assertFindResult("find Meier", td.benson, td.daniel); // multiple results
         assertFindResult("find p/1", td.alice, td.benson);
