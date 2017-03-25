@@ -201,7 +201,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
     }
 
     public ObservableList<Task> getEditableTaskList() {
-       return new UnmodifiableObservableList<>(tasks.asObservableList());
+        return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
     @Override
