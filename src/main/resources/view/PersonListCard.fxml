@@ -87,7 +87,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox fx:id="startend_prefix11" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="255.0" HBox.hgrow="NEVER">
+                  <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="255.0" HBox.hgrow="NEVER">
                      <padding>
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </padding>
@@ -95,51 +95,6 @@
                         <Label fx:id="deadline1" text="\$deadline" VBox.vgrow="NEVER">
                            <font>
                               <Font size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox fx:id="startend_deadline" layoutX="10.0" layoutY="10.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="170.0" HBox.hgrow="NEVER">
-                     <children>
-                        <Label text="Start:" textFill="#149544" VBox.vgrow="NEVER">
-                           <font>
-                              <Font name="Arial Rounded MT Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label text="Due:" textFill="#e01021" VBox.vgrow="NEVER">
-                           <font>
-                              <Font name="Arial Rounded MT Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="25.0" layoutY="49.0" text="Deadline:" textFill="#1234de" VBox.vgrow="NEVER">
-                           <font>
-                              <Font name="Arial Rounded MT Bold" size="17.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="255.0" HBox.hgrow="NEVER">
-                     <children>
-                        <Label fx:id="startdate2" text="\$start_date" VBox.vgrow="NEVER">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="enddate2" text="\$end_date" VBox.vgrow="NEVER">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="deadline2" layoutX="10.0" layoutY="50.0" text="\$deadline" VBox.vgrow="NEVER">
-                           <font>
-                              <Font size="17.0" />
                            </font>
                         </Label>
                      </children>
