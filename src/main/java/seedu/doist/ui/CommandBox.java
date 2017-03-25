@@ -82,16 +82,10 @@ public class CommandBox extends UiPart<Region> {
         }  else if (event.getCode() == KeyCode.TAB) {  // auto complete
             event.consume();
             completeWithSelectedSuggestion();
-        } else {  // use control+z and control+y to execute undo and re-do operation
-            try {
-                if (undoKeys.match(event)) {
-                    event.consume();
-                    logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
-                } else if (redoKeys.match(event)) {
-                    event.consume();
-                    logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
-                }
-            } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
+        } else if (undoKeys.match(event)) {  // use control+z and control+y to execute undo and re-do operation
+            handleCtrlZKeyCombination();
+        } else if (redoKeys.match(event)) {
+            handleCtrlYKeyCombination();
         }
     }
 
@@ -134,6 +128,22 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0147980U
+    //Handle Control + z key combination
+    private void handleCtrlZKeyCombination() {
+        try {
+            logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
+        } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
+    }
+
+    //Handle Control + y key combination
+    private void handleCtrlYKeyCombination() {
+        try {
+            logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
+        } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
+    }
+    //@@author
+
     //Restores the command history pointer
     //Throws exception is 'add' fails
     private void restoreCommandHistoryAndAppend(String userCommandText) {
@@ -142,7 +152,6 @@ public class CommandBox extends UiPart<Region> {
             throw new ArrayIndexOutOfBoundsException();
         }
     }
-
 
     private void setCommandInput(String string) {
         commandTextField.replaceText(string);
