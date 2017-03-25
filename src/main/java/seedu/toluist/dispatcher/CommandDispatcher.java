@@ -86,14 +86,14 @@ public class CommandDispatcher extends Dispatcher {
 
         Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
         for (String alias : aliasMapping.keySet()) {
-            if (alias.startsWith(firstWordOfCommand.toLowerCase())) {
+            if (StringUtil.startsWithIgnoreCase(alias, firstWordOfCommand)) {
                 String replacedCommand = command.replaceFirst(Pattern.quote(firstWordOfCommand), alias);
                 predictedCommands.add(getDealiasedCommand(replacedCommand));
             }
         }
 
         for (String commandWord : getControllerKeywords()) {
-            if (commandWord.startsWith(firstWordOfCommand.toLowerCase())) {
+            if (StringUtil.startsWithIgnoreCase(commandWord, firstWordOfCommand)) {
                 predictedCommands.add(command.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord));
             }
         }

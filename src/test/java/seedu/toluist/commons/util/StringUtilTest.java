@@ -177,6 +177,38 @@ public class StringUtilTest {
         assertEquals(StringUtil.replaceFirstWord("a b", "c"), "c b");
     }
 
+    //---------------- Tests for startsWithIgnoreCase ----------------------------------
+
+    @Test
+    public void startsWithIgnoreCase_nullString() {
+        assertEquals(StringUtil.startsWithIgnoreCase(null, "a"), false);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_nullComparison() {
+        assertEquals(StringUtil.startsWithIgnoreCase("word", null), false);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_emptyString() {
+        assertEquals(StringUtil.startsWithIgnoreCase("", "r"), false);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_emptyComparison() {
+        assertEquals(StringUtil.startsWithIgnoreCase("word a", ""), true);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_sameCase() {
+        assertEquals(StringUtil.startsWithIgnoreCase("ab c ", "a"), true);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_differentCase() {
+        assertEquals(StringUtil.startsWithIgnoreCase("ab c ", "A"), true);
+    }
+
     //@@ author A0162011A
     //---------------- Tests for convertToArray --------------------------------------
 

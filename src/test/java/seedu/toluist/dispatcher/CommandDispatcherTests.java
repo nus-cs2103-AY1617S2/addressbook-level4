@@ -3,6 +3,8 @@ package seedu.toluist.dispatcher;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -30,14 +32,14 @@ public class CommandDispatcherTests {
     public void setUp() {
         when(aliasTable.dealias("m")).thenReturn("m");
         when(aliasTable.dealias("mi")).thenReturn("mark incomplete");
-        when(aliasTable.dealias( "a")).thenReturn("a");
-        when(aliasTable.dealias("add")).thenReturn("add");
-        when(aliasTable.dealias("add a task")).thenReturn("add a task");
+        Map<String, String> aliasMapping = new HashMap();
+        aliasMapping.put("mi", "mark incomplete");
+        when(aliasTable.getAliasMapping()).thenReturn(aliasMapping);
         dispatcher.setAliasConfig(aliasTable);
     }
 
     @Test
-    public void getPredictedCommand_EmptyCommand() {
+    public void getPredictedCommand_emptyCommand() {
         assertEquals(dispatcher.getPredictedCommands(""), new TreeSet<>());
     }
 
@@ -45,6 +47,7 @@ public class CommandDispatcherTests {
     public void getPredictedCommand_partialCommandWord() {
         SortedSet<String> expected = new TreeSet<>();
         expected.add("mark");
+        expected.add("mark incomplete");
         assertEquals(dispatcher.getPredictedCommands("m"), expected);
 
         SortedSet<String> expected2 = new TreeSet<>();
@@ -70,10 +73,34 @@ public class CommandDispatcherTests {
     }
 
     @Test
+    public void getPredictedCommand_caseInsensitive() {
+        SortedSet<String> expected = new TreeSet<>();
+        expected.add("add");
+        expected.add("alias");
+        assertEquals(dispatcher.getPredictedCommands("A"), expected);
+    }
+
+    @Test
+    public void getPredictedCommand_withWhiteSpaces() {
+        SortedSet<String> expected = new TreeSet<>();
+        expected.add(" add");
+        expected.add(" alias");
+        assertEquals(dispatcher.getPredictedCommands(" a"), expected);
+    }
+
+    @Test
     public void getPredictedCommand_alias() {
         SortedSet<String> expected = new TreeSet<>();
         expected.add("mark incomplete");
 
         assertEquals(dispatcher.getPredictedCommands("mi"), expected);
+    }
+
+    @Test
+    public void getPredictedCommand_aliasCaseInsensitive() {
+        SortedSet<String> expected = new TreeSet<>();
+        expected.add("mark incomplete");
+
+        assertEquals(dispatcher.getPredictedCommands("MI"), expected);
     }
 }

@@ -126,4 +126,17 @@ public class StringUtil {
         words[0] = replacement;
         return String.join(" ", words);
     }
+
+    /**
+     * Check if a string starts with another phrase, case-ignored
+     * @param s a string
+     * @param comparision a phrase to compare with
+     * @return true / false
+     */
+    public static boolean startsWithIgnoreCase(String s, String comparision) {
+        if (s == null || comparision == null) {
+            return false;
+        }
+        return s.toLowerCase().startsWith(comparision.toLowerCase());
+    }
 }
