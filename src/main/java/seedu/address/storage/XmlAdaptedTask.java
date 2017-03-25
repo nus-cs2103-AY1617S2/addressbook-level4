@@ -19,6 +19,7 @@ import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0148038A
 /**
  * JAXB-friendly version of the Task.
  */
@@ -28,12 +29,12 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String priority;
-    @XmlElement(required = true) 
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate bydate;
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalTimeAdapter.class)
-    private LocalTime bytime;
+    private LocalTime byTime;
+    @XmlElement(required = true) 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private LocalDate byDate;
     @XmlElement(required = true)
     private String location;
     @XmlElement
@@ -54,8 +55,8 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().toString();
         priority = source.getPriority().toString();
-        bydate = source.getByDate().getValue();
-        bytime = source.getByTime().getValue();
+        byTime = source.getByTime().getValue();
+        byDate = source.getByDate().getValue();
         location = source.getLocation().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -75,10 +76,10 @@ public class XmlAdaptedTask {
         }
         final Description description = new Description(this.description);
         final Priority priority = new Priority(this.priority);
-        final ByDate bydate = new ByDate(this.bydate);
-        final ByTime bytime = new ByTime(this.bytime);
+        final ByTime byTime = new ByTime(this.byTime);
+        final ByDate byDate = new ByDate(this.byDate);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(description, priority, bydate, bytime, location, tags);
+        return new Task(description, priority, byTime, byDate, location, tags);
     }
 }

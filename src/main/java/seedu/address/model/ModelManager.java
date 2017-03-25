@@ -1,9 +1,11 @@
 package seedu.address.model;
 
+import java.util.Comparator;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -110,16 +112,21 @@ public class ModelManager extends ComponentManager implements Model {
         indicateWhatsLeftChanged();
     }
 
-    //=========== Filtered Task List Accessors =============================================================
-
+    //=========== Filtered List Accessors =============================================================
+    
+    //@@author A0148038A
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
+    	SortedList<ReadOnlyEvent> sortedEvents = new SortedList<ReadOnlyEvent>(filteredEvents);
+    	sortedEvents.setComparator((Comparator<? super ReadOnlyEvent>) ReadOnlyEvent.getComparator());
+    	return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
     }
     
     @Override
-    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
-        return new UnmodifiableObservableList<>(filteredEvents);
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+    	SortedList<ReadOnlyTask> sortedTasks = new SortedList<ReadOnlyTask>(filteredTasks);
+    	sortedTasks.setComparator((Comparator<? super ReadOnlyTask>) ReadOnlyTask.getComparator());
+    	return new UnmodifiableObservableList<ReadOnlyTask>(sortedTasks);
     }
 
     @Override

@@ -15,15 +15,17 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Helper functions for handling strings.
  */
 public class StringUtil {
-//@@author  A0121668A
+
+	//@@author  A0121668A
     public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments can only be in this format: "
-                            + "HH:MM(AM/PM) format, e.g. 12:00pm";
+                            + "HHMM format, e.g. 1200";
     public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments can take only 6 digits, "
                             + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417";
     public static final int YEAR_CONVERSION_INDEX = 2000;
     
     public static final String DATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
-//@@author
+    
+    //@@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -62,7 +64,7 @@ public class StringUtil {
         return t.getMessage() + "\n" + sw.toString();
     }
 
-//@@author A0121668A
+    //@@author A0121668A
     /**
      * Parse a String argument into date format.
      * @param dateArg
@@ -74,8 +76,8 @@ public class StringUtil {
         if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
         return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHMM"));
     }
-
-//@@author A0148038A
+    
+//    //@@author A0148038A
 //    /**
 //     * Parse a String argument into date format.
 //     * @param dateArg
@@ -88,7 +90,7 @@ public class StringUtil {
 //        return LocalDate.parse(dateString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
 //    }
 
-//@@author A0121668A
+    //@@author A0121668A
     /**
      * Parse a String argument into date format.
      * @param dateString
@@ -109,7 +111,8 @@ public class StringUtil {
 
         return LocalDate.of(year, month, day);
     }
-//@@author
+    
+    //@@author
     /**
      * Returns true if s represents an unsigned integer e.g. 1, 2, 3, ... <br>
      * Will return false if the string is:

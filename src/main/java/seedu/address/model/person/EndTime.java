@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
+//@@author A0148038A
 /**
  * Represents an Event's EndTime in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
@@ -37,8 +38,8 @@ public class EndTime {
     /*
      * For JAXB use
      */
-    public EndTime(LocalTime endtime) {
-        value = endtime;
+    public EndTime(LocalTime endTime) {
+        value = endTime;
     }
 
     public LocalTime getValue() {
@@ -61,4 +62,8 @@ public class EndTime {
     public int hashCode() {
         return value.hashCode();
     }
+    
+  	public int compareTo(EndTime o) {
+      	return this.getValue().compareTo(o.getValue());
+  	}
 }

@@ -113,21 +113,61 @@ public class ParserUtil {
         assert priority != null;
         return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
+    
+    /**
+     * Parses a {@code Optional<String> startTime} into an {@code Optional<StartTime>} if {@code startTime} is present.
+     */
+    public static Optional<StartTime> parseStartTime(Optional<String> startTime) throws IllegalValueException {
+        assert startTime != null;
+        return startTime.isPresent() ? Optional.of(new StartTime(startTime.get())) : Optional.empty();
+    }
+    
+    /**
+     * Parses a {@code Optional<String> startDate} into an {@code Optional<StartDate>} if {@code startDate} is present.
+     */
+    public static Optional<StartDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
+        assert startDate != null;
+        return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
+    }
+    
+    /**
+     * Parses a {@code Optional<String> startTime} into an {@code Optional<StartTime>} if {@code startTime} is present.
+     */
+    public static Optional<EndTime> parseEndTime(Optional<String> endTime) throws IllegalValueException {
+        assert endTime != null;
+        return endTime.isPresent() ? Optional.of(new EndTime(endTime.get())) : Optional.empty();
+    }
 
+    /**
+     * Parses a {@code Optional<String> endDate} into an {@code Optional<EndDate>} if {@code endDate} is present.
+     */
+    public static Optional<EndDate> parseEndDate(Optional<String> endDate) throws IllegalValueException {
+        assert endDate != null;
+        return endDate.isPresent() ? Optional.of(new EndDate(endDate.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> byTime} into an {@code Optional<ByTime>} if {@code email} is present.
+     */
+    public static Optional<ByTime> parseByTime(Optional<String> byTime) throws IllegalValueException {
+        assert byTime != null;
+        return byTime.isPresent() ? Optional.of(new ByTime(byTime.get())) : Optional.empty();
+    }
+    
+    /**
+     * Parses a {@code Optional<String> byDate} into an {@code Optional<byDate>} if {@code ByDate} is present.
+     */
+    public static Optional<ByDate> parseByDate(Optional<String> byDate) throws IllegalValueException {
+        assert byDate != null;
+        return byDate.isPresent() ? Optional.of(new ByDate(byDate.get())) : Optional.empty();
+    }
+    
     /**
      * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
      */
     public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
         assert location != null;
         return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     */
-    public static Optional<ByTime> parseByTime(Optional<String> bytime) throws IllegalValueException {
-        assert bytime != null;
-        return bytime.isPresent() ? Optional.of(new ByTime(bytime.get())) : Optional.empty();
     }
 
     /**
@@ -140,45 +180,5 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
-    }
-
-    /**
-     * Parses a {@code Optional<String> fromdate} into an {@code Optional<FromDate>} if {@code fromdate} is present.
-     */
-    public static Optional<StartDate> parseStartDate(Optional<String> startdate) throws IllegalValueException {
-        assert startdate != null;
-        return startdate.isPresent() ? Optional.of(new StartDate(startdate.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> todate} into an {@code Optional<ToDate>} if {@code todate} is present.
-     */
-    public static Optional<EndDate> parseEndDate(Optional<String> enddate) throws IllegalValueException {
-        assert enddate != null;
-        return enddate.isPresent() ? Optional.of(new EndDate(enddate.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> bydate} into an {@code Optional<ByDate>} if {@code bydate} is present.
-     */
-    public static Optional<ByDate> parseByDate(Optional<String> bydate) throws IllegalValueException {
-        assert bydate != null;
-        return bydate.isPresent() ? Optional.of(new ByDate(bydate.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> starttime} into an {@code Optional<StartTime>} if {@code starttime} is present.
-     */
-    public static Optional<StartTime> parseStartTime(Optional<String> starttime) throws IllegalValueException {
-        assert starttime != null;
-        return starttime.isPresent() ? Optional.of(new StartTime(starttime.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> endtime} into an {@code Optional<EndTime>} if {@code endtime} is present.
-     */
-    public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
-        assert endtime != null;
-        return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
     }
 }

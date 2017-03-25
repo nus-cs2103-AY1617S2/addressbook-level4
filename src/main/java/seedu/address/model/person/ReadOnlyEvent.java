@@ -1,7 +1,10 @@
 package seedu.address.model.person;
 
+import java.util.Comparator;
+
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0148038A
 /**
  * A read-only immutable interface for an Event in WhatsLeft.
  * Implementations should guarantee: details are present and not null, field values are validated.
@@ -55,5 +58,22 @@ public interface ReadOnlyEvent {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+    
+    //@@author A0148038A
+	static Comparator<? super ReadOnlyEvent> getComparator() {
+		// sort by start date first
+		Comparator<ReadOnlyEvent> byStartDate = (e1, e2) -> e1.getStartDate().compareTo(e2.getStartDate());
+						
+		// then sort by start time
+		Comparator<ReadOnlyEvent> byStartTime = (e1, e2) -> e1.getStartTime().compareTo(e2.getStartTime());
+				
+		// then sort by end date
+		Comparator<ReadOnlyEvent> byEndDate = (e1, e2) -> e1.getEndDate().compareTo(e2.getEndDate());
+				
+		// then sort by end time
+		Comparator<ReadOnlyEvent> byEndTime = (e1, e2) -> e1.getEndTime().compareTo(e2.getEndTime());
+						
+		return byStartDate.thenComparing(byStartTime).thenComparing(byEndDate).thenComparing(byEndTime);
+	}
 
 }

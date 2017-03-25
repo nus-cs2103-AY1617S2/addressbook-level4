@@ -20,6 +20,7 @@ import seedu.address.model.person.StartTime;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0148038A
 /**
  * JAXB-friendly version of the Event.
  */
@@ -27,18 +28,18 @@ public class XmlAdaptedEvent {
 
     @XmlElement(required = true)
     private String description;
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(LocalTimeAdapter.class)
+    private LocalTime startTime;
     @XmlElement(required = true) 
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate startdate;
+    private LocalDate startDate;
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(LocalTimeAdapter.class)
+    private LocalTime endTime;
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate enddate;
-    @XmlElement(required = true)
-    @XmlJavaTypeAdapter(LocalTimeAdapter.class)
-    private LocalTime starttime;
-    @XmlElement(required = true)
-    @XmlJavaTypeAdapter(LocalTimeAdapter.class)
-    private LocalTime endtime;
+    private LocalDate endDate;
     @XmlElement(required = true)
     private String location;
     @XmlElement
@@ -58,10 +59,10 @@ public class XmlAdaptedEvent {
      */
     public XmlAdaptedEvent(ReadOnlyEvent source) {
         description = source.getDescription().toString();
-        startdate = source.getStartDate().getValue();
-        enddate = source.getEndDate().getValue();
-        starttime = source.getStartTime().getValue();
-        endtime = source.getEndTime().getValue();
+        startTime = source.getStartTime().getValue();
+        startDate = source.getStartDate().getValue();
+        endTime = source.getEndTime().getValue();
+        endDate = source.getEndDate().getValue();
         location = source.getLocation().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -80,12 +81,12 @@ public class XmlAdaptedEvent {
             personTags.add(tag.toModelType());
         }
         final Description description = new Description(this.description);
-        final StartDate startdate = new StartDate(this.startdate);
-        final EndDate enddate = new EndDate(this.startdate);
-        final StartTime starttime = new StartTime(this.starttime);
-        final EndTime endtime = new EndTime(this.endtime);
+        final StartTime startTime = new StartTime(this.startTime);
+        final StartDate startDate = new StartDate(this.startDate);
+        final EndTime endTime = new EndTime(this.endTime);
+        final EndDate endDate = new EndDate(this.startDate);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Event(description, startdate, enddate, starttime, endtime, location, tags);
+        return new Event(description, startTime, startDate, endTime, endDate, location, tags);
     }
 }
