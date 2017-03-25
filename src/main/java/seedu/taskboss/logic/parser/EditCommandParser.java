@@ -75,12 +75,14 @@ public class EditCommandParser {
 
             editTaskDescriptor.setInformation(ParserUtil.parseInformation
                     (argsTokenizer.getValue(PREFIX_INFORMATION)));
-            Optional<Recurrence> recurrenceOp = ParserUtil.parseRecurrence
-                    (argsTokenizer.getValue(PREFIX_RECURRENCE));
-            if (!recurrenceOp.isPresent() && args.contains(PREFIX_RECURRENCE.getPrefix())) {
-                editTaskDescriptor.setRecurrence(Optional.of(new Recurrence(Frequency.valueOf(EMPTY_STRING))));
+
+            // if user in put is "edit INDEX r/", set recurrence as NONE
+            if (args.contains(PREFIX_RECURRENCE.getPrefix()) &&
+                    argsTokenizer.getValue(PREFIX_RECURRENCE).get().equals(EMPTY_STRING)) {
+                editTaskDescriptor.setRecurrence(Optional.of(new Recurrence(Frequency.NONE)));
             } else {
-                editTaskDescriptor.setRecurrence(recurrenceOp);
+                editTaskDescriptor.setRecurrence(ParserUtil.parseRecurrence
+                        (argsTokenizer.getValue(PREFIX_RECURRENCE)));
             }
 
             editTaskDescriptor.setCategories(parseCategoriesForEdit
