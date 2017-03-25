@@ -335,6 +335,28 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
     }
 
     @Test
+    public void updateRecurringEventToRecurringFloatingTask() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        String recurFrequencyString = "weekly";
+        LocalDateTime from = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String command = "add " + taskDescription + " from/" + from + " to/" + to + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, from, to);
+        task.setRecurring(recurFrequencyString);
+        assertTrue(isTaskShown(task));
+
+        command = "update " + eventIndex + " floating/";
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription);
+        task2.setRecurring(recurFrequencyString);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
     public void updateNonRecurringFloatingTaskToRecurringEvent() {
         int eventIndex = 1;
 
@@ -455,7 +477,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         task.setRecurring(recurFrequencyString);
         assertTrue(isTaskShown(task));
 
-        command = "update " + eventIndex + " floating/";
+        command = "update " + eventIndex + " floating/ stoprepeating/";
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription);
         assertFalse(isTaskShown(task));
