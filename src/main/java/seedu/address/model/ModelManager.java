@@ -89,6 +89,17 @@ public class ModelManager extends ComponentManager implements Model {
         indicateWhatsLeftChanged();
     }
     
+    //@@author A0121668A
+    
+    @Override
+    public synchronized void MarkTaskAsComplete(int filteredTaskListIndex) throws TaskNotFoundException {
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        whatsLeft.completeTask(addressBookIndex);
+        updateFilteredListToShowAll();
+        indicateWhatsLeftChanged();
+    }
+    //@@author
+    
     @Override
     public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
         whatsLeft.addEvent(event);

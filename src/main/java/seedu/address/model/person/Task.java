@@ -6,26 +6,36 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 public class Task implements ReadOnlyTask {
+    
+    public static final boolean DEFAULT_TASK_STATUS = false;
+    public static final boolean COMPLETED_TASK_STATUS = true;
 
     private Description description;
     private Priority priority;
     private ByDate byDate;
     private ByTime byTime;
     private Location location;
+    private boolean status;
 
     private UniqueTagList tags;
 
     /**
      * Description and Priority must be present.
      */
+<<<<<<< Updated upstream
     public Task(Description description, Priority priority, ByTime byTime, ByDate byDate,
             Location location, UniqueTagList tags) {
+=======
+    public Task(Description description, Priority priority, ByDate bydate, ByTime bytime,
+            Location location, UniqueTagList tags, boolean status) {
+>>>>>>> Stashed changes
         assert !CollectionUtil.isAnyNull(description, priority, tags);
         this.description = description;
         this.priority = priority;
         this.byTime = byTime;
         this.byDate = byDate;
         this.location = location;
+        this.status = status;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -33,8 +43,13 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
+<<<<<<< Updated upstream
         this(source.getDescription(), source.getPriority(), source.getByTime(),
                 source.getByDate(), source.getLocation(), source.getTags());
+=======
+        this(source.getDescription(), source.getPriority(), source.getByDate(),
+                source.getByTime(), source.getLocation(), source.getTags(), source.getStatus());
+>>>>>>> Stashed changes
     }
 
     public void setDescription(Description description) {
@@ -95,6 +110,15 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
+    
+    @Override
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     /**
      * Updates this task with the details of {@code replacement}.
@@ -107,6 +131,14 @@ public class Task implements ReadOnlyTask {
         this.setByTime(replacement.getByTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
+    }
+    
+    /**
+     * Mark a task as complete
+     */
+    
+    public void completeTask(){
+        this.status = true;
     }
 
     @Override
@@ -126,5 +158,4 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
-
 }

@@ -65,6 +65,18 @@ public class UniqueTaskList implements Iterable<Task> {
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
     }
+    
+    //@@author A0121668A
+    /**
+     * Marks the task in the list at position {@code index} as complete.
+     *
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void completeTask(int index) {
+        Task taskToComplete = internalList.get(index);
+        taskToComplete.completeTask();
+        internalList.set(index, taskToComplete);
+    }
 
     /**
      * Removes the equivalent Task from the list.

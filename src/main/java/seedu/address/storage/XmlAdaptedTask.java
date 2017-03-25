@@ -39,6 +39,8 @@ public class XmlAdaptedTask {
     private String location;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElement(required = true)
+    private boolean status;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -62,6 +64,7 @@ public class XmlAdaptedTask {
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
+        status = source.getStatus();
     }
 
     /**
@@ -80,6 +83,11 @@ public class XmlAdaptedTask {
         final ByDate byDate = new ByDate(this.byDate);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);
+<<<<<<< Updated upstream
         return new Task(description, priority, byTime, byDate, location, tags);
+=======
+        final boolean status = this.status;
+        return new Task(description, priority, bydate, bytime, location, tags, status);
+>>>>>>> Stashed changes
     }
 }

@@ -159,6 +159,14 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         // in the event list.
         events.updateEvent(index, editedEvent);
     }
+    
+    /**
+     * Marks the task in the list at position {@code index} as complete.
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void completeTask(int index) {
+        tasks.completeTask(index);
+    }
 
     /**
      * Ensures that every tag in this task:

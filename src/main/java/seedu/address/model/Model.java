@@ -30,6 +30,9 @@ public interface Model {
 
     /** Adds the given Task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Mark the given Task as complete **/
+    void MarkTaskAsComplete(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given Event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
@@ -71,5 +74,5 @@ public interface Model {
     
     /** Empties the previousCommand list and adds the newest one in, always keeping only 1*/
     void storePreviousCommand(String command);
-    
+
 }

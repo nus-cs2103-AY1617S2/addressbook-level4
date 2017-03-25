@@ -15,6 +15,7 @@ public interface ReadOnlyTask {
     ByDate getByDate();
     ByTime getByTime();
     Location getLocation();
+    boolean getStatus();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
