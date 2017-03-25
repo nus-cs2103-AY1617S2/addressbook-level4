@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.LogsCenter;
 
@@ -105,8 +106,10 @@ public class FindController extends Controller {
         }
 
         // keyword for matching
-        String keywords = command.toLowerCase().replace(PARAMETER_TAG, PARAMETER_NULL);
-        keywords = keywords.replace(PARAMETER_NAME, PARAMETER_NULL);
+        String keywords = Pattern.compile(PARAMETER_TAG, Pattern.CASE_INSENSITIVE).matcher(command)
+                .replaceAll(PARAMETER_NULL);
+        keywords = Pattern.compile(PARAMETER_NAME, Pattern.CASE_INSENSITIVE).matcher(keywords)
+                .replaceAll(PARAMETER_NULL);
         String[] listOfParameters = keywords.split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
         if (listOfParameters.length > 1) {
             tokens.put(PARAMETER_KEYWORDS, listOfParameters[SECTION_PARAMETER].trim());

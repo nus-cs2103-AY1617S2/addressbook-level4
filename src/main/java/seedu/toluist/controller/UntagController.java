@@ -4,6 +4,7 @@ package seedu.toluist.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.LogsCenter;
 
@@ -100,7 +101,8 @@ public class UntagController extends Controller {
     public HashMap<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
-        command = command.toLowerCase().replace(COMMAND_UNTAG_WORD, "").trim();
+        command = Pattern.compile(COMMAND_UNTAG_WORD, Pattern.CASE_INSENSITIVE).matcher(command)
+                .replaceFirst("").trim();
         String[] listOfParameters = command.split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
         tokens.put(PARAMETER_INDEX, listOfParameters[SECTION_INDEX]);
         tokens.put(PARAMETER_KEYWORDS, listOfParameters[SECTION_KEYWORDS]);
