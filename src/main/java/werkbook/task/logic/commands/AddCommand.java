@@ -43,7 +43,7 @@ public class AddCommand extends Command {
     public AddCommand(String name, String description, String startDateTime, String endDateTime,
             Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new LinkedHashSet<>();
-
+        
         // Starts with default "Incomplete" tag, followed by the rest that are
         // specified
         tagSet.add(new Tag("Incomplete"));

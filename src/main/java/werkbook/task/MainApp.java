@@ -37,7 +37,7 @@ import werkbook.task.ui.UiManager;
 public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    public static final Version VERSION = new Version(2, 0, 0, true);
+    public static final Version VERSION = new Version(10, 0, 0, true);
 
     protected Ui ui;
     protected Logic logic;
@@ -49,7 +49,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Werkbook ]===========================");
+        logger.info("=============================[ Initializing wtf ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));

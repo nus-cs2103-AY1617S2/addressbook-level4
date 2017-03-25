@@ -96,17 +96,19 @@ public class ParserUtil {
     public static Optional<EndDateTime> parseEndDateTime(Optional<String> endDateTime)
             throws IllegalValueException {
         assert endDateTime != null;
-        return endDateTime.isPresent() ? Optional.of(new EndDateTime(endDateTime.get())) : Optional.empty();
+        return endDateTime.isPresent() ? Optional.of(new EndDateTime(DateTimeParser.Parse(endDateTime.get())))
+                : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> startDateTime} into an {@code Optional<StartDateTime>}
-     * if {@code startDateTime} is present.
+     * Parses a {@code Optional<String> startDateTime} into an
+     * {@code Optional<StartDateTime>} if {@code startDateTime} is present.
      */
     public static Optional<StartDateTime> parseStartDateTime(Optional<String> startDateTime)
             throws IllegalValueException {
         assert startDateTime != null;
-        return startDateTime.isPresent() ? Optional.of(new StartDateTime(startDateTime.get())) : Optional.empty();
+        return startDateTime.isPresent() ? Optional.of(new StartDateTime(DateTimeParser.Parse(startDateTime.get())))
+                : Optional.empty();
     }
 
     /**
@@ -121,15 +123,15 @@ public class ParserUtil {
         return new UniqueTagList(tagSet);
     }
 
-    //@@author A0162266E
+    // @@author A0162266E
     /**
-     * Parses a {@code Optional<String> Path} into an
-     * {@code Optional<Path>} if {@code path} is present.
+     * Parses a {@code Optional<String> Path} into an {@code Optional<Path>} if
+     * {@code path} is present.
      */
     public static Optional<Path> parsePath(String path) {
         assert path != null;
         return !path.equals("") ? Optional.of(Paths.get(path.trim())) : Optional.empty();
     }
 
-    //@@author
+    // @@author
 }
