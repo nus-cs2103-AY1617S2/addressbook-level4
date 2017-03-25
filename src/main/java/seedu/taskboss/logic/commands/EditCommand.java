@@ -65,7 +65,8 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, InvalidDatesException, IllegalValueException, DefaultCategoryException {
+    public CommandResult execute() throws CommandException, InvalidDatesException,
+                                        IllegalValueException, DefaultCategoryException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {

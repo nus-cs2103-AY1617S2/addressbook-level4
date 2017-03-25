@@ -41,7 +41,8 @@ public class RenameCategoryCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public CommandResult execute() throws CommandException, IllegalValueException,
+                                        InvalidDatesException, DefaultCategoryException {
         assert model != null;
 
         Category oldCategory = new Category(this.oldCategory);
@@ -53,12 +54,11 @@ public class RenameCategoryCommand extends Command {
                 throw new DefaultCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
             } else if (oldCategory.equals(new Category("Done"))) {
                 throw new DefaultCategoryException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
-            } else if(newCategory.equals(new Category("Done"))) {
+            } else if (newCategory.equals(new Category("Done"))) {
                 throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
             } else if (newCategory.equals(new Category("AllTasks"))) {
                 throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
-            }
-            else {
+            } else {
                 try {
                     model.renameCategory(oldCategory, newCategory);
                     model.updateFilteredTaskListByCategory(newCategory);
@@ -67,7 +67,7 @@ public class RenameCategoryCommand extends Command {
                     return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
                 }
             }
-        } catch (DefaultCategoryException dce){
+        } catch (DefaultCategoryException dce) {
             if (dce.getMessage().equals(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME)) {
                 throw new CommandException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
             } else if (dce.getMessage().equals(MESSAGE_DONE_CATEGORY_CANNOT_RENAME)) {

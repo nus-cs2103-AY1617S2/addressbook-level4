@@ -53,7 +53,9 @@ public class AddCommand extends Command {
      * @throws DefaultCategoryException
      */
     public AddCommand(String name, String startDateTime, String endDateTime,
-            String information, Set<String> categories) throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+            String information, Set<String> categories) throws IllegalValueException,
+                                                            InvalidDatesException,
+                                                            DefaultCategoryException {
         final Set<Category> categorySet = new HashSet<>();
 
         //@@author A0144904H
