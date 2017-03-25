@@ -16,8 +16,8 @@ public class AliasCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " kill z";
     public static final String MESSAGE_SUCCESS = "Successfully aliased command";
-    private static final String MESSAGE_ALIAS_ALREADY_IN_USE = "The alias you specified is reserved for other commands";
-    private static final String MESSAGE_COMMAND_DOES_NOT_EXIST = "The command you specified does not exist";
+    public static final String MESSAGE_ALIAS_ALREADY_IN_USE = "The alias you specified is reserved for other commands";
+    public static final String MESSAGE_COMMAND_DOES_NOT_EXIST = "The command you specified does not exist";
 
     private String command;
     private String alias;
