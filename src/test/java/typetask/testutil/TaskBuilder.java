@@ -27,7 +27,10 @@ public class TaskBuilder {
         this.task.setName(new Name(name));
         return this;
     }
-
+    public TaskBuilder withCompleted(boolean isCompleted) {
+        this.task.setIsCompleted(isCompleted);
+        return this;
+    }
 
     public TaskBuilder withTime(String time) throws IllegalValueException {
         this.task.setTime(new Time(time));

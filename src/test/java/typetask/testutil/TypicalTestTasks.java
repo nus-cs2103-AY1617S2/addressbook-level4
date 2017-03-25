@@ -13,17 +13,26 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline").withDate("").withTime("").build();
-            benson = new TaskBuilder().withName("Benson Meier").withDate("").withTime("").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withDate("").withTime("").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withDate("").withTime("").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withDate("").withTime("").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withDate("").withTime("").build();
-            george = new TaskBuilder().withName("George Best").withDate("").withTime("").build();
+            alice = new TaskBuilder().withName("Alice Pauline").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
+            benson = new TaskBuilder().withName("Benson Meier").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
+            carl = new TaskBuilder().withName("Carl Kurz").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
+            elle = new TaskBuilder().withName("Elle Meyer").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
+            fiona = new TaskBuilder().withName("Fiona Kunz").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
+            george = new TaskBuilder().withName("George Best").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withDate("").withTime("").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withDate("").withTime("").build();
+            hoon = new TaskBuilder().withName("Hoon Meier").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
+            ida = new TaskBuilder().withName("Ida Mueller").withDate("").withDate("")
+                    .withTime("").withTime("").withCompleted(false).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
