@@ -58,8 +58,12 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        startDateTime = source.getStartDateTime().toString();
-        endDateTime = source.getEndDateTime().toString();
+        if (source.getStartDateTime().isPresent()) {
+            startDateTime = source.getStartDateTime().get().getAmericanDateTime();
+        }
+        if (source.getEndDateTime().isPresent()) {
+            endDateTime = source.getEndDateTime().get().getAmericanDateTime();
+        }
         isActive = source.getActiveStatus();
         isTimed = source.getTimedStatus();
         isRecurring = source.getRecurringStatus();
@@ -82,13 +86,13 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Optional<DateTime> startDateTime;
-        if (this.startDateTime != null && !(this.startDateTime.equals("Optional.empty"))) {
+        if (this.startDateTime != null) {
             startDateTime = Optional.of(new DateTime(this.startDateTime));
         } else {
             startDateTime = Optional.empty();
         }
         final Optional<DateTime> endDateTime;
-        if (this.endDateTime != null && !(this.endDateTime.equals("Optional.empty"))) {
+        if (this.endDateTime != null) {
             endDateTime = Optional.of(new DateTime(this.endDateTime));
         } else {
             endDateTime = Optional.empty();
