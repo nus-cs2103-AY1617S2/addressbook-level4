@@ -1,5 +1,7 @@
 package seedu.taskboss.logic.commands;
 
+import java.io.IOException;
+
 /**
  * Saves the data at specific filepath. Creates filepath if it does not exist
  */
@@ -31,10 +33,13 @@ public class SaveCommand extends Command {
         if (filepath.contains("+") || filepath.contains ("#") ||
                 filepath.contains ("^") || filepath.contains ("*")) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
-        } else {
-            storage.setFilePath(filepath);
         }
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        try {
+            storage.setFilePath(filepath);
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (IOException e) {
+            return new CommandResult(MESSAGE_INVALID_FILEPATH);
+        }
     }
 }
