@@ -92,7 +92,6 @@ public class ParserUtil {
         }
         String commandToAlias = matcher.group("command");
         String alias = matcher.group("alias");
-
         return new String[] {commandToAlias, alias};
     }
 

@@ -55,19 +55,17 @@ public class CommandAliases implements Serializable {
                                                             RedoCommand.COMMAND_WORD,
                                                             RedoCommand.SHORT_COMMAND_WORD};
 
-
     private HashMap<String, String> commandAliasesMap;
-
 
     public CommandAliases() {
         this.commandAliasesMap = new HashMap<>();
     }
 
     public void addAlias(String command, String alias) throws AliasAlreadyInUseException, CommandDoesNotExistException {
-        if(Arrays.asList(EXISTING_COMMAND_WORDS).contains(alias)) {
+        if (Arrays.asList(EXISTING_COMMAND_WORDS).contains(alias)) {
             throw new AliasAlreadyInUseException();
         }
-        if(!Arrays.asList(EXISTING_COMMAND_WORDS).contains(command)) {
+        if (!Arrays.asList(EXISTING_COMMAND_WORDS).contains(command)) {
             throw new CommandDoesNotExistException();
         }
         commandAliasesMap.put(alias, command);
