@@ -8,6 +8,8 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.opus.commons.core.Messages;
 import seedu.opus.logic.commands.EditCommand;
+import seedu.opus.logic.commands.ScheduleCommand;
+import seedu.opus.model.task.DateTime;
 import seedu.opus.testutil.TaskBuilder;
 import seedu.opus.testutil.TestTask;
 
@@ -29,9 +31,28 @@ public class ScheduleCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
+    public void scheduleEndTimeSuccess() throws Exception {
+        String detailsToSchedule = "12/12/2017 14:00";
+        int taskManagerIndex = 2;
+
+        TestTask scheduledTask = new TaskBuilder().withName("Wash the dishes")
+                .withNote("They're in the sink").withStatus("incomplete").withPriority("mid")
+                .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 14:00")
+                .withTags("chores").build();
+
+        assertScheduleSuccess(taskManagerIndex, taskManagerIndex, detailsToSchedule, scheduledTask);
+    }
+
+    @Test
+    public void scheduleInvalidDateTimeFailure() throws Exception {
+        commandBox.runCommand("schedule 2 afdasf");
+        assertResultMessage(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+    }
+
+    @Test
     public void scheduleMissingTaskIndexFailure() {
         commandBox.runCommand("schedule next friday");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -43,11 +64,11 @@ public class ScheduleCommandTest extends TaskManagerGuiTest {
     @Test
     public void scheduleNoFieldsSpecifiedFailure() {
         commandBox.runCommand("schedule 1");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+        assertResultMessage(ScheduleCommand.MESSAGE_NOT_SCHEDULED);
 
         // trailing whitespace after command should be considered as a invalid command
         commandBox.runCommand("schedule 1    ");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+        assertResultMessage(ScheduleCommand.MESSAGE_NOT_SCHEDULED);
     }
 
     /**
