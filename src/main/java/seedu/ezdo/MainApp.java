@@ -14,6 +14,7 @@ import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.Version;
+import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.events.ui.ExitAppRequestEvent;
 import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.commons.util.ConfigUtil;
@@ -184,6 +185,12 @@ public class MainApp extends Application {
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
+    }
+
+    @Subscribe
+    public void handleSortCriteriaChangedEvent(SortCriteriaChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        this.userPrefs.updateLastUsedSortCriteria(event.getNewSortCriteria());
     }
 
     public static void main(String[] args) {

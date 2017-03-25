@@ -13,6 +13,7 @@ import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
+import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.DateUtil;
@@ -53,7 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.ezDo = new EzDo(ezDo);
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
-        currentSortCriteria = SortCriteria.NAME;
+        currentSortCriteria = userPrefs.getSortCriteria();
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         redoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         updateFilteredListToShowAll();
@@ -309,8 +310,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void sortTasks(SortCriteria sortCriteria) {
-        this.currentSortCriteria = sortCriteria;
+        if (!this.currentSortCriteria.equals(sortCriteria)) {
+            this.currentSortCriteria = sortCriteria;
+            indicateSortCriteriaChanged();
+        }
         ezDo.sortTasks(sortCriteria);
         indicateEzDoChanged();
+    }
+
+    public void indicateSortCriteriaChanged() {
+        raise(new SortCriteriaChangedEvent(currentSortCriteria));
     }
 }
