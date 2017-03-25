@@ -106,6 +106,7 @@ public class Task implements ReadOnlyTask {
         this.startTime = dateTime;
     }
 
+    @Override
     public Optional<DateTime> getEndTime() {
         return Optional.ofNullable(endTime);
     }
@@ -137,6 +138,7 @@ public class Task implements ReadOnlyTask {
         this.setStatus(replacement.getStatus());
         this.setNote(replacement.getNote().orElse(null));
         this.setStartTime(replacement.getStartTime().orElse(null));
+        this.setEndTime(replacement.getEndTime().orElse(null));
         this.setTags(replacement.getTags());
     }
 

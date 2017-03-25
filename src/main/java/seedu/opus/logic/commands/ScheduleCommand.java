@@ -17,13 +17,14 @@ public class ScheduleCommand extends Command {
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        this.filteredTaskListIndex = filteredTaskListIndex;
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         EditCommand editCommand = new EditCommand(filteredTaskListIndex, editTaskDescriptor);
+        editCommand.setData(model);
         return editCommand.execute();
     }
 }

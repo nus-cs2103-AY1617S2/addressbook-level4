@@ -18,6 +18,7 @@ import seedu.opus.logic.commands.IncorrectCommand;
 import seedu.opus.logic.commands.ListCommand;
 import seedu.opus.logic.commands.MarkCommand;
 import seedu.opus.logic.commands.RedoCommand;
+import seedu.opus.logic.commands.ScheduleCommand;
 import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
 import seedu.opus.logic.commands.UndoCommand;
@@ -62,6 +63,9 @@ public class Parser {
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
+
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
