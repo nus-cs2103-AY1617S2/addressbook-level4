@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.ezdo.commons.core.Messages;
-import seedu.ezdo.testutil.TestTask;
 import seedu.ezdo.model.todo.TaskDate;
+import seedu.ezdo.testutil.TestTask;
 
 public class FindCommandTest extends EzDoGuiTest {
 
