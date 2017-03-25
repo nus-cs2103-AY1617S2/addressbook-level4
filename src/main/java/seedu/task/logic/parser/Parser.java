@@ -19,7 +19,11 @@ import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.LoadFromCommand;
+import seedu.task.logic.commands.RedoCommand;
+import seedu.task.logic.commands.SaveToCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.SortCommand;
 import seedu.task.logic.commands.UncheckCommand;
 import seedu.task.logic.commands.UndoCommand;
 
@@ -53,7 +57,7 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments").trim();
 
         logger.info(logPrefix + " Command Word: '" + commandWord + "'");
@@ -96,6 +100,18 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case SaveToCommand.COMMAND_WORD:
+            return new SaveToCommandParser().parse(arguments);
+
+        case LoadFromCommand.COMMAND_WORD:
+            return new LoadFromCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
