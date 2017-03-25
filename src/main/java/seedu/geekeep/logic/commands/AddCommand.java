@@ -44,7 +44,8 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
 
-        DateTime start = null, end = null;
+        DateTime start = null;
+        DateTime end = null;
         Location loc = null;
 
         if (startDateTime.isPresent()) {

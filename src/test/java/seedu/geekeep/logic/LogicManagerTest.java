@@ -45,8 +45,6 @@ import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
-import seedu.geekeep.storage.StorageManager;
-
 
 public class LogicManagerTest {
     /**
@@ -499,7 +497,7 @@ public class LogicManagerTest {
         model = new ModelManager();
         String tempGeeKeepFile = saveFolder.getRoot().getPath() + "TempGeeKeep.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempGeeKeepFile, tempPreferencesFile));
+        logic = new LogicManager(model);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedGeeKeep = new GeeKeep(model.getGeeKeep()); // last saved assumed to be up to date

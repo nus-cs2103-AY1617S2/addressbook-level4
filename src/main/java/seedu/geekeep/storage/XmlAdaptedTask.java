@@ -67,11 +67,19 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.title);
-        final DateTime endDateTime = this.endDateTime.isEmpty() ? null : new DateTime(this.endDateTime);
-        final DateTime startDateTime = this.startDateTime.isEmpty() ? null : new DateTime(this.startDateTime);
-        final Location location = this.location.isEmpty() ? null : new Location(this.location);
+        final DateTime endDateTime = convertStringToDateTime(this.endDateTime);
+        final DateTime startDateTime = convertStringToDateTime(this.startDateTime);
+        final Location location = convertStringToLocation(this.location);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final boolean isDone = this.isDone.equals("True");
         return new Task(title, startDateTime, endDateTime, location, tags, isDone);
+    }
+
+    private DateTime convertStringToDateTime(String date) throws IllegalValueException {
+        return date.isEmpty() ? null : new DateTime(date);
+    }
+
+    private Location convertStringToLocation(String location) throws IllegalValueException {
+        return location.isEmpty() ? null : new Location(location);
     }
 }

@@ -17,14 +17,14 @@ public class Location {
      */
     public static final String LOCATION_VALIDATION_REGEX = ".*";
 
+    public final String value;
+
     /**
      * Returns true if a given string is a valid task location.
      */
     public static boolean isValidLocation(String test) {
         return test.matches(LOCATION_VALIDATION_REGEX);
     }
-
-    public final String value;
 
     /**
      * Validates given location.

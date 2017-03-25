@@ -33,6 +33,7 @@ public class HelpWindowTest extends GeeKeepGuiTest {
         helpWindowHandle.closeWindow();
     }
 
+    //TODO to remove
     private void assertHelpWindowNotOpen(HelpWindowHandle helpWindowHandle) {
         assertFalse(helpWindowHandle.isWindowOpen());
     }

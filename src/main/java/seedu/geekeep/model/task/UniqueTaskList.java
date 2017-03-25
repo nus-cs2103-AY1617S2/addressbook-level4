@@ -20,6 +20,8 @@ import seedu.geekeep.commons.util.CollectionUtil;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -35,8 +37,6 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class TaskNotFoundException extends Exception {
     }
-
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Adds a task to the list.

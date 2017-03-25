@@ -41,14 +41,6 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> completedListView;
 
-
-    //TODO only works for v0.2 checks
-    public TaskListPanel(String type, AnchorPane taskListPlaceholder) {
-        super(getFxmlFromType(type));
-        addToPlaceholder(taskListPlaceholder);
-    }
-
-    //TODO  only works for v0.2 checks
     public TaskListPanel(String type, AnchorPane taskListPlaceholder,
             ObservableList<ReadOnlyTask> allList) {
         super(getFxmlFromType(type));
@@ -60,13 +52,14 @@ public class TaskListPanel extends UiPart<Region> {
         addToPlaceholder(taskListPlaceholder);
     }
 
-    //TODO this method should not be there. After v0.2 it is to remove
+    //TODO to remove
     private static String getFxmlFromType(String type) {
-        if (type.equals("deadline")) {
+        if ("deadline".equals(type)) {
             return DEADLINEFXML;
-        } else if (type.equals("floatingTask")) {
+        } else if ("floatingTask".equals(type)) {
             return FTASKFXML;
         } else {
+            assert "event".equals(type);
             return EVENTFXML;
         }
     }
@@ -117,13 +110,7 @@ public class TaskListPanel extends UiPart<Region> {
         logger.info("Switched to " + category + " in " + type);
     }
 
-/*  //TODO scrollTo should works for all the ListView
-    public void scrollToVersion2() {
-
-    }*/
-
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
-
 
         protected int getSourceIndex() {
             FilteredList<ReadOnlyTask> filteredList = (FilteredList<ReadOnlyTask>) getListView().getItems();
