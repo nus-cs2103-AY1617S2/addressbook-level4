@@ -15,6 +15,7 @@ import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.FindExactCommand;
+import seedu.task.logic.commands.GetGoogleCalendarCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -67,7 +68,6 @@ public class Parser {
         case UnDoneCommand.COMMAND_WORD_2:
             return new EditUnDoneParser().parse(arguments);
 
-
         case EditCommand.COMMAND_WORD_1:
             return new EditCommandParser().parse(arguments);
 
@@ -84,6 +84,10 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD_1:
             return new RedoCommand();
+
+        case GetGoogleCalendarCommand.COMMAND_WORD_1:
+        case GetGoogleCalendarCommand.COMMAND_WORD_2:
+            return new GetGoogleCalendarCommand();
 
         case ClearCommand.COMMAND_WORD_1:
             return new ClearCommand();

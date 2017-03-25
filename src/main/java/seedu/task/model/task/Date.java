@@ -7,6 +7,8 @@ import java.util.List;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
+import com.google.api.services.calendar.model.EventDateTime;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
@@ -27,6 +29,14 @@ public class Date {
     //Allows an empty constructor
     public Date() {
         this.value = null;
+    }
+
+    public Date(EventDateTime eventDateTime) {
+        if (eventDateTime == null) {
+            this.value = null;
+        } else {
+            this.value = new java.util.Date(eventDateTime.getDate().getValue());
+        }
     }
 
     /**

@@ -25,8 +25,7 @@ public class Remark {
      *             if given remark string is invalid.
      */
     public Remark(String remark) throws IllegalValueException {
-        assert remark != null;
-        if (remark.equals(DEFAULT_REMARK)) {
+        if (remark == null || remark.equals(DEFAULT_REMARK)) {
             this.value = "";
         } else {
             String trimmedRemark = remark.trim();
