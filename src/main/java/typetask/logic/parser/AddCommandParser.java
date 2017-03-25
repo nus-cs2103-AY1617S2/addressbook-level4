@@ -31,7 +31,7 @@ public class AddCommandParser {
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE,
-                        PREFIX_END_TIME,PREFIX_END_DATE);
+                        PREFIX_END_TIME, PREFIX_END_DATE);
         argsTokenizer.tokenize(args);
         try {
             if (checkTaskType(argsTokenizer) == floatingTask) {
