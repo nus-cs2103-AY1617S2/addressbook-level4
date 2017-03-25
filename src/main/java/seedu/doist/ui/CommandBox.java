@@ -165,8 +165,9 @@ public class CommandBox extends UiPart<Region> {
         ContextMenu suggestionList = (ContextMenu) commandTextField.getPopupWindow();
         if (suggestionList.isShowing() && !suggestionList.getItems().isEmpty()) {
             int cursorPosition = commandTextField.getCaretPosition();
+            // -1 means trailing space will NOT be discarded
             String[] words = commandTextField.getText(0, cursorPosition).split(" +", -1);
-            String lastWord = words[words.length - 1];  // -1 means trailing space will NOT be discarded
+            String lastWord = words[words.length - 1].replaceAll("\\\\", "\\\\\\\\");
             String suggestion = suggestionList.getItems().get(0).getText();
             String remainingString = suggestion.replaceAll(lastWord, "");
             commandTextField.insertText(cursorPosition, remainingString);

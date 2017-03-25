@@ -6,6 +6,9 @@ import org.fxmisc.richtext.InlineCssTextArea;
 
 import javafx.geometry.Point2D;
 import seedu.doist.logic.Logic;
+import seedu.doist.logic.parser.ArgumentTokenizer.Prefix;
+import seedu.doist.logic.parser.CliSyntax;
+
 
 //@@author A0147980U
 public class CommandAutoCompleteManager {
@@ -13,6 +16,7 @@ public class CommandAutoCompleteManager {
 
     // relative to cursor center
     private final Point2D suggestionBoxOffset = new Point2D(-8, 12);
+    private final int maxItemNu = 8;
 
     // for singleton pattern
     public static CommandAutoCompleteManager getInstance() {
@@ -40,11 +44,18 @@ public class CommandAutoCompleteManager {
         // TODO: make this method more "powerful"
         // handle different cases (command word, key, search history) differently
         // make better suggestion by using a queue to store history and store the frequency
-
+        int count = 0;
         ArrayList<String> suggestions = new ArrayList<>();
         for (String commandWord : logic.getAllCommandWords()) {
-            if (commandWord.startsWith(lastWord)) {
+            if (commandWord.startsWith(lastWord) && count < maxItemNu) {
                 suggestions.add(commandWord);
+                count++;
+            }
+        }
+        for (Prefix prefix : CliSyntax.ALL_PREFICES) {
+            if (prefix.toString().startsWith(lastWord) && count < maxItemNu) {
+                suggestions.add(prefix.toString());
+                count++;
             }
         }
         return suggestions;

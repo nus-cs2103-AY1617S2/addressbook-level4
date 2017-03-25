@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 
 //@@author A0147980U
 public class ContentAssistTests extends DoistGUITest {
+    GuiRobot bot = new GuiRobot();
     @Test
     public void testCorrectSuggestionsDisplayed() {
         String input = "f";
@@ -44,11 +45,37 @@ public class ContentAssistTests extends DoistGUITest {
     }
 
     @Test
-    public void testCompleteByTappingTap() {
-        String input = "reset_alia";
+    public void testSuggestionOnCorrectParameterKey() {
+        String input = "do task \\fro";
         commandBox.enterCommand(input);
-        (new GuiRobot()).press(KeyCode.TAB);
-        assertTrue("reset_alias".equals(commandBox.getCommandInput()));
+        assertCorrectSuggestions("\\fro");
     }
 
+    @Test
+    public void testSuggestionOnIncorrectParameterKey() {
+        String input = "do task \\incorrect_key";
+        commandBox.enterCommand(input);
+        assertCorrectSuggestions(input);
+    }
+
+    @Test
+    public void testCompleteByTappingTap() {
+        String input = "view_alia";
+        commandBox.enterCommand(input);
+        bot.type(KeyCode.TAB);
+        assertTrue("view_alias".equals(commandBox.getCommandInput()));
+    }
+
+    @Test
+    public void testCompleteKeyByTappingTap() {
+        String input = "do task \\unde";
+        commandBox.enterCommand(input);
+        bot.type(KeyCode.TAB);
+        assertTrue("do task \\under".equals(commandBox.getCommandInput()));
+    }
 }
+
+
+
+
+
