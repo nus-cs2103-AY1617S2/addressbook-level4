@@ -84,9 +84,9 @@ public class FindCommandParser {
                         keywords = extractedKeywords;
                     // user only enters month
                     } else if (!keywords.trim().contains(WHITESPACE)) {
-                      String extractedKeywords = parsedFormattedDateTime.value
+                        String extractedKeywords = parsedFormattedDateTime.value
                               .substring(INDEX_MONTH_START_POSITION, INDEX_MONTH_END_POSITION);
-                      keywords = extractedKeywords;
+                        keywords = extractedKeywords;
                     // user enters date with or without time
                     } else {
                         keywords = parsedFormattedDateTime.value;
