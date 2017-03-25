@@ -1,5 +1,7 @@
 package seedu.doist.logic;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.exceptions.CommandException;
@@ -19,4 +21,12 @@ public interface Logic {
 
     /** Returns the filtered list of persons */
     ObservableList<ReadOnlyTask> getFilteredPersonList();
+
+    /**
+     * This method is used for auto completion in UI component
+     * It is defined in Logic component rather than in Model component to
+     * avoid introducing the association from UI component to Model component
+     * @return all the command words, including the default command words and aliases specified by the user
+     */
+    List<String> getAllCommandWords();
 }

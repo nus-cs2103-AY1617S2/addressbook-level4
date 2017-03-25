@@ -6,7 +6,7 @@ import seedu.doist.commons.core.Messages;
 import seedu.doist.logic.commands.ResetAliasCommand;
 
 
-
+//@@author A0147980U
 public class ResetAliasCommandTest extends DoistGUITest {
     @Test
     public void testResetAliasSuccess() {
