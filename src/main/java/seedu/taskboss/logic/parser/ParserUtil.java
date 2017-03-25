@@ -141,7 +141,7 @@ public class ParserUtil {
     public static Optional<Recurrence> parseRecurrence(Optional<String> frequency) throws IllegalValueException {
         assert frequency != null;
         return frequency.isPresent() ? Optional.of(new Recurrence(Frequency
-                .valueOf(frequency.get().trim().toUpperCase()))) : Optional.empty();
+                .valueOf(frequency.get().toUpperCase().trim()))) : Optional.empty();
     }
 
     //@@author

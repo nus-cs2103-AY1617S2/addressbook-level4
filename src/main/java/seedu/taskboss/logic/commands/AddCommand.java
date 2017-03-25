@@ -62,7 +62,7 @@ public class AddCommand extends Command {
         if (frequency.isEmpty()) {
             frequency = Frequency.NONE.toString();
         } else {
-            frequency = frequency.trim().toUpperCase();
+            frequency = frequency.toUpperCase().trim();
         }
 
         DateTime startDateTimeObj = new DateTime(startDateTime);
