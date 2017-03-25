@@ -55,9 +55,9 @@ public class AddTaskController extends Controller {
 
         String taskPriority = tokens.get(TaskTokenizer.KEYWORD_TASK_PRIORITY);
 
-        String recurringFrequency = tokens.get(TaskTokenizer.TASK_RECURRING_FREQUENCY_KEYWORD);
+        String recurringFrequency = tokens.get(TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY);
 
-        String recurringUntilEndDateToken = tokens.get(TaskTokenizer.TASK_RECURRING_UNTIL_END_DATE);
+        String recurringUntilEndDateToken = tokens.get(TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE);
         LocalDateTime recurringUntilEndDate = DateTimeUtil.parseDateString(recurringUntilEndDateToken);
 
         commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime,

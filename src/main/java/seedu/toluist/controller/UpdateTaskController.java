@@ -68,12 +68,12 @@ public class UpdateTaskController extends Controller {
         String tagsToken = tokens.get(TaskTokenizer.KEYWORD_TASK_TAGS);
         Set<Tag> tags = TagParser.parseTags(tagsToken);
 
-        String recurringFrequency = tokens.get(TaskTokenizer.TASK_RECURRING_FREQUENCY_KEYWORD);
+        String recurringFrequency = tokens.get(TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY);
 
-        String recurringUntilEndDateToken = tokens.get(TaskTokenizer.TASK_RECURRING_UNTIL_END_DATE);
+        String recurringUntilEndDateToken = tokens.get(TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE);
         LocalDateTime recurringUntilEndDate = DateTimeUtil.parseDateString(recurringUntilEndDateToken);
 
-        boolean isStopRecurring = tokens.containsKey(TaskTokenizer.TASK_STOP_RECURRING_KEYWORD);
+        boolean isStopRecurring = tokens.containsKey(TaskTokenizer.KEYWORD_TASK_STOP_RECURRING);
 
         commandResult = update(task, description, eventStartDateTime, eventEndDateTime,
                 taskDeadline, isFloating, taskPriority, tags,
