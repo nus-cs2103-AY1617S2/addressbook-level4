@@ -83,4 +83,7 @@ public interface Model {
 
     /** Resets alias list to default */
     void resetToDefaultCommandWords();
+
+    /** Remove the alias if it exists, otherwise nothing happens */
+    public void removeAlias(String alias);
 }
