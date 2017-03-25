@@ -332,4 +332,131 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command);
         assertTrue(isTaskShown(task));
     }
+
+    @Test
+    public void updateNonRecurringFloatingTaskToRecurringEvent() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        String command = "add " + taskDescription;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription);
+        assertTrue(isTaskShown(task));
+
+        LocalDateTime from = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String recurFrequencyString = "weekly";
+        command = "update " + eventIndex + " from/" + from + " to/" + to + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, from, to);
+        task2.setRecurring(recurFrequencyString);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateNonRecurringEventToRecurringEvent() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime from = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String command = "add " + taskDescription + " from/" + from + " to/" + to;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, from, to);
+        assertTrue(isTaskShown(task));
+
+        String recurFrequencyString = "monthly";
+        LocalDateTime recurEndDate = DateTimeUtil.parseDateString("15 Mar 2018, 1pm");
+        command = "update " + eventIndex + " repeat/" + recurFrequencyString + " until/" + recurEndDate;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, from, to);
+        task2.setRecurring(recurEndDate, recurFrequencyString);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateNonRecurringEventToRecurringTaskWithDeadline() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime from = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String command = "add " + taskDescription + " from/" + from + " to/" + to;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, from, to);
+        assertTrue(isTaskShown(task));
+
+        String recurFrequencyString = "yearly";
+        LocalDateTime recurEndDate = DateTimeUtil.parseDateString("15 Mar 2020, 1pm");
+        command = "update " + eventIndex + " by/" + to + " repeat/" + recurFrequencyString + " until/" + recurEndDate;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, to);
+        task2.setRecurring(recurEndDate, recurFrequencyString);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateRecurringTaskWithDeadlineToNonRecurringTaskWithDeadline() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        String recurFrequencyString = "daily";
+        LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String command = "add " + taskDescription + " by/" + to + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, to);
+        task.setRecurring(recurFrequencyString);
+        assertTrue(isTaskShown(task));
+
+        command = "update " + eventIndex + " stoprepeating/";
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, to);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateRecurringEventToNonRecurringTaskWithDeadline() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        String recurFrequencyString = "weekly";
+        LocalDateTime from = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String command = "add " + taskDescription + " from/" + from + " to/" + to + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, from, to);
+        task.setRecurring(recurFrequencyString);
+        assertTrue(isTaskShown(task));
+
+        command = "update " + eventIndex + " by/" + to + " stoprepeating/";
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, to);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateRecurringEventToNonRecurringFloatingTask() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        String recurFrequencyString = "weekly";
+        LocalDateTime from = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String command = "add " + taskDescription + " from/" + from + " to/" + to + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, from, to);
+        task.setRecurring(recurFrequencyString);
+        assertTrue(isTaskShown(task));
+
+        command = "update " + eventIndex + " floating/";
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
 }
