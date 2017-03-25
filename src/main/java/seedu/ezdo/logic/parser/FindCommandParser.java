@@ -67,7 +67,6 @@ public class FindCommandParser implements CommandParser {
         return new FindCommand(keywords, findPriority, findStartDate, findDueDate, findTags);
     }
 
-
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
         Optional<String> optionalString;
         if (!tokenizer.getValue(prefix).isPresent()) {
