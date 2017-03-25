@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <?import java.net.URL?>
-<?import javafx.scene.control.TextArea?>
-<AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@DarkTheme.css"/>
-        <URL value="@Extensions.css"/>
-    </stylesheets>
-    <AnchorPane fx:id="mainPane">
-        <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
-    </AnchorPane>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@RedTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
+   <children>
+      <AnchorPane prefHeight="73.0" prefWidth="447.0">
+         <children>
+            <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
