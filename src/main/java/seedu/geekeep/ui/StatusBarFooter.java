@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.geekeep.commons.core.LogsCenter;
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
+import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
 
 /**
@@ -49,7 +49,7 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     @Subscribe
-    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
+    public void handleGeeKeepChangedEvent(GeeKeepChangedEvent abce) {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);

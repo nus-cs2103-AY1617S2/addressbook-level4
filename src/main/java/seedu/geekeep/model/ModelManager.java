@@ -9,8 +9,8 @@ import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.TaskCategory;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
+import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
@@ -20,70 +20,70 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data. All changes to any model should be synchronized.
+ * Represents the in-memory model of the GeeKeep data. All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager taskManager;
+    private final GeeKeep geeKeep;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private final Stack<TaskManager> pastTaskManagers;
-    private final Stack<TaskManager> futureTaskManagers;
+    private final Stack<GeeKeep> pastGeeKeeps;
+    private final Stack<GeeKeep> futureGeeKeeps;
 
     /**
-     * Initializes a ModelManager with the given taskManager and userPrefs.
+     * Initializes a ModelManager with the given geekeep and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyGeeKeep geeKeep, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
+        assert !CollectionUtil.isAnyNull(geeKeep, userPrefs);
 
-        logger.fine("Initializing with address book: " + taskManager + " and user prefs " + userPrefs);
+        logger.fine("Initializing with GeeKeep: " + geeKeep + " and user prefs " + userPrefs);
 
-        this.taskManager = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        pastTaskManagers = new Stack<>();
-        futureTaskManagers = new Stack<>();
+        this.geeKeep = new GeeKeep(geeKeep);
+        filteredTasks = new FilteredList<>(this.geeKeep.getTaskList());
+        pastGeeKeeps = new Stack<>();
+        futureGeeKeeps = new Stack<>();
 
     }
 
     public ModelManager() {
-        this(new TaskManager(), new UserPrefs());
+        this(new GeeKeep(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
-        taskManager.resetData(newData);
-        indicateTaskManagerChanged();
+    public void resetData(ReadOnlyGeeKeep newData) {
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
+        geeKeep.resetData(newData);
+        indicateGeeKeepChanged();
     }
 
     @Override
-    public ReadOnlyTaskManager getTaskManager() {
-        return taskManager;
+    public ReadOnlyGeeKeep getGeeKeep() {
+        return geeKeep;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged() {
-        raise(new TaskManagerChangedEvent(taskManager));
+    private void indicateGeeKeepChanged() {
+        raise(new GeeKeepChangedEvent(geeKeep));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
-        taskManager.removeTask(target);
-        indicateTaskManagerChanged();
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
+        geeKeep.removeTask(target);
+        indicateGeeKeepChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
-        taskManager.addTask(task);
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
+        geeKeep.addTask(task);
         updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
+        indicateGeeKeepChanged();
     }
 
     @Override
@@ -91,15 +91,15 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedTask != null;
 
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskListIndex, editedTask);
+        geeKeep.updateTask(taskListIndex, editedTask);
 
-        indicateTaskManagerChanged();
+        indicateGeeKeepChanged();
     }
 
-    // =========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -114,18 +114,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new TitleQualifier(keywords)));
         raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
+    private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
     // ========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask person);
+        boolean satisfies(ReadOnlyTask task);
 
         @Override
         String toString();
@@ -140,8 +140,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -151,48 +151,48 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask person);
+        boolean run(ReadOnlyTask task);
 
         @Override
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    private class TitleQualifier implements Qualifier {
+        private Set<String> titleKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
+        TitleQualifier(Set<String> nameKeyWords) {
+            this.titleKeyWords = nameKeyWords;
         }
 
         @Override
-        public boolean run(ReadOnlyTask person) {
-            return nameKeyWords.stream()
-                    .filter(keyword-> StringUtil.containsWordIgnoreCase(person.getTitle().fullTitle, keyword))
+        public boolean run(ReadOnlyTask task) {
+            return titleKeyWords.stream()
+                    .filter(keyword-> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
                     .findAny().isPresent();
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "title=" + String.join(", ", titleKeyWords);
         }
     }
 
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskDone(taskListIndex);
-        indicateTaskManagerChanged();
+        geeKeep.markTaskDone(taskListIndex);
+        indicateGeeKeepChanged();
     }
 
     @Override
     public void markTaskUndone(int filteredTaskListIndex) {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskUndone(taskListIndex);
-        indicateTaskManagerChanged();
+        geeKeep.markTaskUndone(taskListIndex);
+        indicateGeeKeepChanged();
     }
 
     @Override
@@ -209,22 +209,22 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void undo() throws NothingToUndoException {
-        if (pastTaskManagers.empty()) {
+        if (pastGeeKeeps.empty()) {
             throw new NothingToUndoException();
         }
-        futureTaskManagers.push(new TaskManager(taskManager));
-        taskManager.resetData(pastTaskManagers.pop());
-        indicateTaskManagerChanged();
+        futureGeeKeeps.push(new GeeKeep(geeKeep));
+        geeKeep.resetData(pastGeeKeeps.pop());
+        indicateGeeKeepChanged();
     }
 
     @Override
     public void redo() throws NothingToRedoException {
-        if (futureTaskManagers.empty()) {
+        if (futureGeeKeeps.empty()) {
             throw new NothingToRedoException();
         }
-        pastTaskManagers.push(new TaskManager(taskManager));
-        taskManager.resetData(futureTaskManagers.pop());
-        indicateTaskManagerChanged();
+        pastGeeKeeps.push(new GeeKeep(geeKeep));
+        geeKeep.resetData(futureGeeKeeps.pop());
+        indicateGeeKeepChanged();
     }
 
 }

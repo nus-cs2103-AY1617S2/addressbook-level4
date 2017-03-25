@@ -20,6 +20,8 @@ import seedu.geekeep.commons.util.CollectionUtil;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -35,8 +37,6 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class TaskNotFoundException extends Exception {
     }
-
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Adds a task to the list.
@@ -112,7 +112,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be equivalent to another existing task in the
@@ -129,9 +129,9 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
-        // The right way is to implement observable properties in the Person class.
-        // Then, PersonCard should then bind its text labels to those observable properties.
+        // TODO: The code below is just a workaround to notify observers of the updated task.
+        // The right way is to implement observable properties in the Task class.
+        // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
         internalList.sort((thisTask, otherTask) -> thisTask.computePriority() - otherTask.computePriority());
     }

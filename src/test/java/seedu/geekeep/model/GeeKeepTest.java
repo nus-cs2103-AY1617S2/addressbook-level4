@@ -18,46 +18,46 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
-import seedu.geekeep.testutil.TypicalTestPersons;
+import seedu.geekeep.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class GeeKeepTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final TaskManager taskManager = new TaskManager();
+    private final GeeKeep geeKeep = new GeeKeep();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), taskManager.getTaskList());
-        assertEquals(Collections.emptyList(), taskManager.getTagList());
+        assertEquals(Collections.emptyList(), geeKeep.getTaskList());
+        assertEquals(Collections.emptyList(), geeKeep.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        taskManager.resetData(null);
+        geeKeep.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TaskManager newData = new TypicalTestPersons().getTypicalTaskManager();
-        taskManager.resetData(newData);
-        assertEquals(newData, taskManager);
+    public void resetData_withValidReadOnlyGeeKeep_replacesData() {
+        GeeKeep newData = new TypicalTestTasks().getTypicalGeeKeep();
+        geeKeep.resetData(newData);
+        assertEquals(newData, geeKeep);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
+        TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks;
         try {
             newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
             List<Tag> newTags = td.alice.getTags().asObservableList();
-            AddressBookStub newData = new AddressBookStub(newTasks, newTags);
+            GeeKeepStub newData = new GeeKeepStub(newTasks, newTags);
 
             thrown.expect(AssertionError.class);
-            taskManager.resetData(newData);
+            geeKeep.resetData(newData);
         } catch (IllegalValueException ive) {
             assert false : "not possible";
         }
@@ -65,32 +65,32 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskManager typicalTaskManager = new TypicalTestPersons().getTypicalTaskManager();
-        List<ReadOnlyTask> newPersons = typicalTaskManager.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
+        GeeKeep typicalGeeKeep = new TypicalTestTasks().getTypicalGeeKeep();
+        List<ReadOnlyTask> newTasks = typicalGeeKeep.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalGeeKeep.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        GeeKeepStub newData = new GeeKeepStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
+        geeKeep.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyGeeKeep whose tasks and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskManager {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+    private static class GeeKeepStub implements ReadOnlyGeeKeep {
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        GeeKeepStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+            this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
 
         @Override
         public ObservableList<ReadOnlyTask> getTaskList() {
-            return persons;
+            return tasks;
         }
 
         @Override

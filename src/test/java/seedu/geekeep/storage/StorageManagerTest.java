@@ -12,13 +12,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
+import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
-import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.GeeKeep;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.testutil.EventsCollector;
-import seedu.geekeep.testutil.TypicalTestPersons;
+import seedu.geekeep.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 
@@ -54,30 +54,30 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void taskManagerReadSave() throws Exception {
+    public void geeKeepReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlTaskManagerStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlTaskManagerStorageTest} class.
+         * {@link XmlGeeKeepStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlGeeKeepStorageTest} class.
          */
-        TaskManager original = new TypicalTestPersons().getTypicalTaskManager();
-        storageManager.saveTaskManager(original);
-        ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
-        assertEquals(original, new TaskManager(retrieved));
+        GeeKeep original = new TypicalTestTasks().getTypicalGeeKeep();
+        storageManager.saveGeeKeep(original);
+        ReadOnlyGeeKeep retrieved = storageManager.readGeeKeep().get();
+        assertEquals(original, new GeeKeep(retrieved));
     }
 
     @Test
-    public void getTaskManagerFilePath() {
-        assertNotNull(storageManager.getTaskManagerFilePath());
+    public void getGeeKeepFilePath() {
+        assertNotNull(storageManager.getGeeKeepFilePath());
     }
 
     @Test
-    public void handleTaskManagerChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleGeeKeepChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlTaskManagerStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(new XmlGeeKeepStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(new TaskManager()));
+        storage.handleGeeKeepChangedEvent(new GeeKeepChangedEvent(new GeeKeep()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -85,14 +85,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlTaskManagerStorageExceptionThrowingStub extends XmlTaskManagerStorage {
+    class XmlGeeKeepStorageExceptionThrowingStub extends XmlGeeKeepStorage {
 
-        public XmlTaskManagerStorageExceptionThrowingStub(String filePath) {
+        public XmlGeeKeepStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+        public void saveGeeKeep(ReadOnlyGeeKeep geeKeep, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

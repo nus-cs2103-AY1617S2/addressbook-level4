@@ -1,8 +1,8 @@
 package seedu.geekeep.model.util;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
-import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.GeeKeep;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Location;
@@ -11,9 +11,9 @@ import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static ReadOnlyTaskManager getSampleAddressBook() {
+    public static ReadOnlyGeeKeep getSampleGeeKeep() {
         try {
-            TaskManager sampleAB = new TaskManager();
+            GeeKeep sampleAB = new GeeKeep();
             for (Task sampleTask : getSampleTasks()) {
                 sampleAB.addTask(sampleTask);
             }

@@ -77,7 +77,7 @@ public class ConfigUtilTest {
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
         config.setGeeKeepFilePath("geekeep.xml");
-        config.setGeeKeepName("TypicalTaskManagerName");
+        config.setGeeKeepName("TypicalGeeKeepName");
         return config;
     }
 

@@ -3,7 +3,7 @@ package seedu.geekeep.model.task;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's location in the address book. Guarantees: immutable; is valid as declared in
+ * Represents a Task's location in GeeKeep. Guarantees: immutable; is valid as declared in
  * {@link #isValidLocation(String)}
  */
 public class Location {
@@ -17,14 +17,14 @@ public class Location {
      */
     public static final String LOCATION_VALIDATION_REGEX = ".*";
 
+    public final String value;
+
     /**
      * Returns true if a given string is a valid task location.
      */
     public static boolean isValidLocation(String test) {
         return test.matches(LOCATION_VALIDATION_REGEX);
     }
-
-    public final String value;
 
     /**
      * Validates given location.

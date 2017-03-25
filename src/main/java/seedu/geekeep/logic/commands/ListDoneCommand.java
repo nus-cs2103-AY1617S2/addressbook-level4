@@ -1,7 +1,7 @@
 package seedu.geekeep.logic.commands;
 
 /**
- * Lists all completed tasks in the task manager to the user.
+ * Lists all completed tasks in GeeKeep to the user.
  */
 public class ListDoneCommand extends Command {
 

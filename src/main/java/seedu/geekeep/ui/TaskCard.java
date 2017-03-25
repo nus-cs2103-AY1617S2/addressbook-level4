@@ -9,46 +9,44 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label title;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label date;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
+    private Label locationOfTask;
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getTitle().fullTitle);
+        title.setText(task.getTitle().title);
         id.setText("#" + displayedIndex + " ");
 
-        if (person.getEndDateTime() != null && person.getStartDateTime() != null) {
-            phone.setText(person.getStartDateTime() + " until " + person.getEndDateTime());
-        } else if (person.getEndDateTime() != null && person.getStartDateTime() == null) {
-            phone.setText(person.getEndDateTime().value);
+        if (task.getEndDateTime() != null && task.getStartDateTime() != null) {
+            date.setText(task.getStartDateTime() + " until " + task.getEndDateTime());
+        } else if (task.getEndDateTime() != null && task.getStartDateTime() == null) {
+            date.setText(task.getEndDateTime().value);
         } else {
-            phone.setText(null);
+            date.setText(null);
         }
 
-        if (person.getLocation() == null) {
-            address.setText("");
+        if (task.getLocation() == null) {
+            locationOfTask.setText("");
         } else {
-            address.setText(person.getLocation().value);
+            locationOfTask.setText(task.getLocation().value);
         }
 
-        initTags(person);
+        initTags(task);
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
