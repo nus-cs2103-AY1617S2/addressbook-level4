@@ -280,16 +280,22 @@ public class ModelManager extends ComponentManager implements Model {
 
             String taskStartDate = task.getStartDate().toString();
             String taskDueDate = task.getDueDate().toString();
+            String taskPriority = task.getPriority().toString();
 
             Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
+            boolean startDateExist = (taskStartDate.length() != 0);
+            boolean dueDateExist = (taskDueDate.length() != 0);
+            boolean priorityExist = (taskPriority.length() != 0);
+
             return (nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
-                    && (!priority.isPresent() || task.getPriority().toString().equals(priority.get().toString()))
-                    && (!startDate.isPresent() || (taskStartDate.length() != 0)
-                            && taskStartDate.substring(0, 9).equals(startDate.get().toString().substring(0, 9)))
-                    && (!dueDate.isPresent() || (taskDueDate.length() != 0)
-                            && taskDueDate.substring(0, 9).equals(dueDate.get().toString().substring(0, 9)))
+                    && (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist) || (priorityExist
+                            && task.getPriority().toString().equals(priority.get().toString())))
+                    && (!startDate.isPresent() || (startDate.get().toString().equals("") && startDateExist) || (startDateExist
+                            && taskStartDate.substring(0, 9).equals(startDate.get().toString().substring(0, 9))))
+                    && (!dueDate.isPresent() || (dueDate.get().toString().equals("") && dueDateExist) || (dueDateExist
+                            && taskDueDate.substring(0, 9).equals(dueDate.get().toString().substring(0, 9))))
                     && (taskTagStringSet.containsAll(tags));
 
         }
