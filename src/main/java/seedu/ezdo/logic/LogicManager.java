@@ -22,12 +22,10 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
-    private final UserPrefs prefs;
 
     public LogicManager(Model model, Storage storage, UserPrefs prefs) {
         this.model = model;
         this.parser = new Parser(prefs.getCommandAliases());
-        this.prefs = prefs;
     }
 
     @Override
