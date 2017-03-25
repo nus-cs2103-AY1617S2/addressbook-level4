@@ -13,8 +13,8 @@ import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
-import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.events.model.IsSortedAscendingChangedEvent;
+import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.DateUtil;
@@ -324,7 +324,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.currentSortCriteria = sortCriteria;
             indicateSortCriteriaChanged();
         }
-        if(!this.currentIsSortedAscending.equals(isSortedAscending)) {
+        if (!this.currentIsSortedAscending.equals(isSortedAscending)) {
             this.currentIsSortedAscending = isSortedAscending;
             indicateIsSortedAscendingChanged();
         }
