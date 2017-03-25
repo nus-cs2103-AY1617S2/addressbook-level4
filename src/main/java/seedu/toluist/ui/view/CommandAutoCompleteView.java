@@ -24,9 +24,14 @@ public class CommandAutoCompleteView extends UiView {
 
     public CommandAutoCompleteView() {
         super(FXML);
-        UiStore store = UiStore.getInstance();
+        configureBindings();
         configureConstraints();
-        configureBindings(store);
+    }
+
+    private void configureBindings() {
+        UiStore store = UiStore.getInstance();
+        store.bind(this, store.getObservableSuggestedCommands());
+        store.bind(this, store.getObservableSuggestedCommandIndex());
     }
 
     @Override
@@ -40,11 +45,6 @@ public class CommandAutoCompleteView extends UiView {
         for (int i = 0; i < observableSuggestedCommands.size(); i++) {
             addCommandSuggestion(observableSuggestedCommands.get(i), i);
         }
-    }
-
-    private void configureBindings(UiStore store) {
-        store.bind(this, store.getObservableSuggestedCommands());
-        store.bind(this, store.getObservableSuggestedCommandIndex());
     }
 
     private void configureConstraints() {

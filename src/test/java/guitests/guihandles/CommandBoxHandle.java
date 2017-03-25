@@ -22,6 +22,10 @@ public class CommandBoxHandle extends GuiHandle {
         guiRobot.clickOn(COMMAND_INPUT_FIELD_ID);
     }
 
+    public void focus() {
+        guiRobot.clickOn(COMMAND_INPUT_FIELD_ID);
+    }
+
     public void enterCommand(String command) {
         setTextField(COMMAND_INPUT_FIELD_ID, command);
     }

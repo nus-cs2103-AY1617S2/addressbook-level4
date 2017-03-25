@@ -1,4 +1,5 @@
-package guitests.guihandles;
+//@@author A0131125Y
+package guitests;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -7,7 +8,6 @@ import java.util.Objects;
 import org.junit.Before;
 import org.junit.Test;
 
-import guitests.ToLuistGuiTest;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;

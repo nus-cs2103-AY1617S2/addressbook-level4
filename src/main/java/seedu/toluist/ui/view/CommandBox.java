@@ -32,8 +32,7 @@ public class CommandBox extends UiView {
         FxViewUtil.makeFullWidth(getRoot());
         FxViewUtil.makeFullWidth(commandTextField);
         UiStore store = UiStore.getInstance();
-        commandTextField.setText(store.getObservableCommandText().getValue());
-        commandTextField.end();
+        setCommandTextFieldText(store.getObservableCommandText().getValue());
     }
 
     private void configureBindings() {
@@ -71,8 +70,7 @@ public class CommandBox extends UiView {
 
         List<String> suggestedCommands = store.getObservableSuggestedCommands();
         if (suggestedCommands.size() == 1) {
-            commandTextField.setText(suggestedCommands.get(0));
-            commandTextField.end();
+            setCommandTextFieldText(suggestedCommands.get(0));
         }
     }
 
@@ -93,6 +91,11 @@ public class CommandBox extends UiView {
             return;
         }
 
-        store.setCommandText(suggestedCommands.get(index));
+        setCommandTextFieldText(suggestedCommands.get(index));
+    }
+
+    private void setCommandTextFieldText(String text) {
+        commandTextField.setText(text);
+        commandTextField.end();
     }
 }

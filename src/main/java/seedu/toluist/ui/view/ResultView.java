@@ -22,6 +22,10 @@ public class ResultView extends UiView {
 
     public ResultView () {
         super(FXML);
+        configureBindings();
+    }
+
+    private void configureBindings() {
         UiStore store = UiStore.getInstance();
         store.bind(this, store.getObservableCommandResult());
     }
