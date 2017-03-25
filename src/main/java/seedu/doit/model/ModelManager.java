@@ -113,12 +113,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void markTask(int taskIndex, ReadOnlyTask taskToDone)
+    public synchronized void markTask(int filteredTaskListIndex, ReadOnlyTask taskToDone)
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
         logger.info("marked a task in model manager as done");
         taskManagerStack.addToUndoStack(this.getTaskManager());
         taskManagerStack.clearRedoStack();
-        this.taskManager.markTask(taskIndex, taskToDone);
+        int taskManagerIndex = this.filteredTasks.getSourceIndex(filteredTaskListIndex);
+        this.taskManager.markTask(taskManagerIndex, taskToDone);
+        updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 

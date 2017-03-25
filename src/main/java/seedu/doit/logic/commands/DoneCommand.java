@@ -17,10 +17,11 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Completed Task: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
-    public final int targetIndex;
+    public final int filteredTaskListIndex;
 
-    public DoneCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+    public DoneCommand(int filteredTaskListIndex) {
+        assert filteredTaskListIndex > 0;
+        this.filteredTaskListIndex = filteredTaskListIndex;
     }
 
     @Override
@@ -28,11 +29,11 @@ public class DoneCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
 
-        if (targetIndex <= lastShownTaskList.size()) {
-            ReadOnlyTask taskToDone = lastShownTaskList.get(targetIndex - 1);
+        if (filteredTaskListIndex <= lastShownTaskList.size()) {
+            ReadOnlyTask taskToDone = lastShownTaskList.get(filteredTaskListIndex - 1);
 
             try {
-                model.markTask(targetIndex - 1, taskToDone);
+                model.markTask(filteredTaskListIndex - 1, taskToDone);
             } catch (UniqueTaskList.TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
