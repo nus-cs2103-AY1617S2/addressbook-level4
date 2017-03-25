@@ -2,6 +2,7 @@ package seedu.tasklist.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -59,5 +60,19 @@ public class UpcomingTaskPanel extends UiPart<Region> {
                         raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
+    }
+
+    public void todayScrollTo(int index) {
+        Platform.runLater(() -> {
+            todayTaskListView.scrollTo(index);
+            todayTaskListView.getSelectionModel().clearAndSelect(index);
+        });
+    }
+
+    public void tomorrowScrollTo(int index) {
+        Platform.runLater(() -> {
+            tomorrowTaskListView.scrollTo(index);
+            tomorrowTaskListView.getSelectionModel().clearAndSelect(index);
+        });
     }
 }
