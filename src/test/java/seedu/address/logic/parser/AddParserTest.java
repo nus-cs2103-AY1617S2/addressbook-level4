@@ -74,4 +74,41 @@ public class AddParserTest extends AddCommandParser {
         assertTrue(task.getTags().toSet().equals(tags.toSet()));
         assertFalse(task.getTaskDateTime() == null);
     }
+
+    @Test
+    public void parserTestWithTitle2() throws Exception {
+        AddCommand command = (AddCommand) parse(
+                "CS2103 project from school to home");
+        Task task = command.getTask();
+        Name name = new Name("CS2103 project from school to home");
+        UniqueTagList tags = new UniqueTagList(new HashSet<>());
+        assertTrue(task.getTaskType().equals(TaskType.TaskWithNoDeadline));
+        assertTrue(task.getDeadline() == null);
+        assertTrue(task.getName().fullName.equals(name.fullName));
+        assertTrue(task.getStartingTime() == null);
+        assertTrue(task.getTags().toSet().equals(tags.toSet()));
+        assertTrue(task.getTaskDateTime().equals(""));
+        assertTrue(task.getTaskAbsoluteDateTime().equals(""));
+    }
+
+    @Test
+    public void parserTestWithTitleDeadlineStartingTime() throws Exception {
+        AddCommand command = (AddCommand) parse(
+                "CS2103 project from school to home from 2 days later to 20/4/2017");
+        Task task = command.getTask();
+        Name name = new Name("CS2103 project from school to home");
+        UniqueTagList tags = new UniqueTagList(new HashSet<>());
+        long milisecondsTilDeadline = 1492646400000L;
+        long milisecondsTilStartingTime = new Date().getTime()
+                + 24 * 60 * 60 * 1000 * 2;
+        assertTrue(task.getTaskType()
+                .equals(TaskType.TaskWithDeadlineAndStartingTime));
+        assertTrue(
+                task.getDeadline().isSameDay(new Date(milisecondsTilDeadline)));
+        assertTrue(task.getName().fullName.equals(name.fullName));
+        assertTrue(task.getStartingTime()
+                .isSameDay(new Date(milisecondsTilStartingTime)));
+        assertTrue(task.getTags().toSet().equals(tags.toSet()));
+        assertFalse(task.getTaskDateTime() == null);
+    }
 }

@@ -98,19 +98,16 @@ public class AddCommandParser {
         }
     }
 
-    private List<String> getMoreThanOneArguments(String reverseRegex,
+    private List<String> getMoreThanOneArguments(String regex,
             String[] captureGroups) {
-        String reverseString = new StringBuilder(args).reverse().toString();
-        Pattern pattern = Pattern.compile(reverseRegex);
-        Matcher matcher = pattern.matcher(reverseString);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(args);
         if (matcher.matches()) {
             List<String> arguments = new ArrayList<String>();
             for (String captureGroup : captureGroups) {
-                arguments.add(new StringBuilder(matcher.group(captureGroup))
-                        .reverse().toString().trim());
+                arguments.add(matcher.group(captureGroup).trim());
             }
-            args = new StringBuilder(matcher.group("rest")).reverse().toString()
-                    .trim();
+            args = matcher.group("rest").trim();
             return arguments;
         } else {
             return null;
