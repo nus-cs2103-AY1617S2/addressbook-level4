@@ -52,7 +52,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name, String startDateTime, String endDateTime,
             String information, String frequency,
-            Set<String> categories) throws IllegalValueException, InvalidDatesException {
+            Set<String> categories) throws IllegalValueException, InvalidDatesException, IllegalArgumentException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
@@ -106,6 +106,8 @@ public class AddCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalArgumentException iae) {
+            throw new CommandException(Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
         }
 
     }

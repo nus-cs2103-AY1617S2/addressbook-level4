@@ -21,6 +21,8 @@ import seedu.taskboss.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.DateTime;
+import seedu.taskboss.model.task.Recurrence;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -77,12 +79,20 @@ public class EditCommandParser {
 
             editTaskDescriptor.setInformation(ParserUtil.parseInformation
                     (argsTokenizer.getValue(PREFIX_INFORMATION)));
-            editTaskDescriptor.setRecurrence(ParserUtil.parseRecurrence
-                    (argsTokenizer.getValue(PREFIX_RECURRENCE)));
+            Optional<Recurrence> recurrenceOp = ParserUtil.parseRecurrence
+                    (argsTokenizer.getValue(PREFIX_RECURRENCE));
+            if (!recurrenceOp.isPresent()) {
+                editTaskDescriptor.setRecurrence(Optional.of(new Recurrence(Frequency.valueOf(EMPTY_STRING))));
+            } else {
+                editTaskDescriptor.setRecurrence(recurrenceOp);
+            }
+
             editTaskDescriptor.setCategories(parseCategoriesForEdit
                     (ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        } catch (IllegalArgumentException iae) {
+            return new IncorrectCommand(Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
         }
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {

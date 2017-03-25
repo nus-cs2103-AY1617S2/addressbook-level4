@@ -16,6 +16,7 @@ import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
+import seedu.taskboss.model.task.Recurrence;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -49,6 +50,8 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         } catch (InvalidDatesException ide) {
             return new IncorrectCommand(ide.getMessage());
+        } catch (IllegalArgumentException iae) {
+            return new IncorrectCommand(Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
         }
     }
 
