@@ -123,7 +123,8 @@ public class LogicManagerTest {
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
             ReadOnlyTaskBoss expectedTaskBoss,
-            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException,
+                                                                InvalidDatesException, DefaultCategoryException {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
     }
 
@@ -160,7 +161,8 @@ public class LogicManagerTest {
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand,
             String expectedMessage, ReadOnlyTaskBoss expectedTaskBoss,
-            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException,
+                                                                InvalidDatesException, DefaultCategoryException {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -180,13 +182,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unknownCommandWord() throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public void execute_unknownCommandWord() throws IllegalValueException,
+                                                 InvalidDatesException, DefaultCategoryException {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_help() throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public void execute_help() throws IllegalValueException, InvalidDatesException,
+                                    DefaultCategoryException {
         assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE,
                 new TaskBoss(), Collections.emptyList());
         assertTrue(helpShown);
@@ -194,20 +198,23 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_helpShortCommand() throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public void execute_helpShortCommand() throws IllegalValueException, InvalidDatesException,
+                                                DefaultCategoryException {
         assertCommandSuccess("h", HelpCommand.SHOWING_HELP_MESSAGE,
                 new TaskBoss(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
-    public void execute_exit() throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public void execute_exit() throws IllegalValueException, InvalidDatesException,
+                                    DefaultCategoryException {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBoss(), Collections.emptyList());
     }
 
     @Test
-    public void execute_exitShortCommand() throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public void execute_exitShortCommand() throws IllegalValueException, InvalidDatesException,
+                                                DefaultCategoryException {
         assertCommandSuccess("x", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBoss(), Collections.emptyList());
     }
@@ -223,13 +230,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidArgsFormat() throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public void execute_add_invalidArgsFormat() throws IllegalValueException,
+                                                    InvalidDatesException, DefaultCategoryException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add Valid Name p/Yes sd/today ed/tomorrow", expectedMessage);
     }
 
     @Test
-    public void execute_add_invalidTaskData() throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public void execute_add_invalidTaskData() throws IllegalValueException,
+                                                  InvalidDatesException, DefaultCategoryException {
         assertCommandFailure("add n/[]\\[;] sd/today ed/tomorrow i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name! sd/today ed/tomorrow "
@@ -385,7 +394,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_invalidArgsFormat() throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+    public void execute_find_invalidArgsFormat() throws IllegalValueException,
+                                                     InvalidDatesException, DefaultCategoryException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }
