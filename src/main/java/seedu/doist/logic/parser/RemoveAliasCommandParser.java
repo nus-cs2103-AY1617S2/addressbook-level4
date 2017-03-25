@@ -33,7 +33,7 @@ public class RemoveAliasCommandParser {
         final String preamble = matcher.group("preamble").trim();
 
         try {
-            if (preamble.equals("")) {
+            if ("".equals(preamble)) {
                 throw new IllegalValueException(MESSAGE_ALIAS_NOT_SPECIFIED);
             }
             if (!preamble.matches("[a-zA-Z_]+")) {
