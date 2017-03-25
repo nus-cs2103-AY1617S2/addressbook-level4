@@ -3,7 +3,9 @@ package seedu.ezdo.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.core.Messages;
+import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
@@ -71,6 +73,9 @@ public class EditCommand extends Command {
         }
 
         model.updateFilteredListToShowAll();
+        lastShownList = model.getFilteredTaskList();
+        int index = lastShownList.lastIndexOf(editedTask);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
