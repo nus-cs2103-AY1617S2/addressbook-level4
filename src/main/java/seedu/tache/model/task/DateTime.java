@@ -52,6 +52,11 @@ public class DateTime {
         return sdf.format(date);
     }
 
+    public String getAmericanDateTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        return sdf.format(date);
+    }
+
     public String getTimeOnly() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         return sdf.format(date);
