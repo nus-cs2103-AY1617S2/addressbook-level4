@@ -7,6 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.EditCommand;
+import seedu.tache.logic.parser.EditCommandParser;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.testutil.TaskBuilder;
 import seedu.tache.testutil.TestTask;
@@ -84,7 +85,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void editInvalidValuesFailure() {
         commandBox.runCommand("edit 1; *&");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+        assertResultMessage(EditCommandParser.MESSAGE_INVALID_PARAMETER);
 
         commandBox.runCommand("edit 1; tag *&;");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
