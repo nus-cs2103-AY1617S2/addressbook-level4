@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.ReadOnlyEvent;
 
+//@@author A0148038A
 public class EventCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
@@ -18,13 +19,15 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label fromDate;
-    @FXML
-    private Label toDate;
-    @FXML
-    private Label startTime;
-    @FXML
-    private Label endTime;
+    private Label duration;
+//    @FXML
+//    private Label startTime;
+//    @FXML
+//    private Label startDate;
+//    @FXML
+//    private Label endTime;
+//    @FXML
+//    private Label endDate;
     @FXML
     private Label locations;
     @FXML
@@ -34,23 +37,33 @@ public class EventCard extends UiPart<Region> {
         super(FXML);
         description.setText(event.getDescription().description);
         id.setText(displayedIndex + ". ");
-        fromDate.setText("Start Date: " + event.getStartDate().value);
+        
+        duration.setText(event.getStartTime().toString() 
+        		+ " " + event.getStartDate().toString() 
+        		+ " ~ " + event.getEndTime().toString()
+        		+ " " + event.getEndDate().toString());
+        
+//        if (event.getStartTime().value == null) {
+//            startTime.setText("Start Time: -");
+//        } else {
+//            startTime.setText("Start Time: " + event.getStartTime().value);
+//        }
+//        
+//        startDate.setText("Start Date: " + event.getStartDate().value);
+//        
+//        if (event.getEndTime().value == null) {
+//            endTime.setText("End Time: -");
+//        } else {
+//            endTime.setText("End Time: " + event.getEndTime().value);
+//        }
+//
+//        if (event.getEndDate().value == null) {
+//            endDate.setText("End Date: -");
+//        } else {
+//            endDate.setText("End Date: " + event.getEndDate().value);
+//        }
 
-        if (event.getEndDate().value == null) {
-            toDate.setText("End Date: -");
-        } else {
-            toDate.setText("End Date: " + event.getEndDate().value);
-        }
-
-        startTime.setText("Start Time: " + event.getStartTime().value);
-
-        if (event.getEndTime().value == null) {
-            endTime.setText("End Time: -");
-        } else {
-            endTime.setText("End Time: " + event.getEndTime().value);
-        }
-
-        locations.setText(event.getLocation().value);
+        locations.setText("@" + event.getLocation().toString());
         initTags(event);
     }
 
