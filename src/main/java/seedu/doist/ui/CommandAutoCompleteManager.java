@@ -71,7 +71,9 @@ public class CommandAutoCompleteManager {
         suggestionList.getItems().clear();
 
         for (int i = 0; i < suggestions.size(); i++) {
-            suggestionList.getItems().add(i, new MenuItem(suggestions.get(i)));
+            MenuItem item = new MenuItem(suggestions.get(i));
+            item.setMnemonicParsing(false);
+            suggestionList.getItems().add(i, item);
         }
 
         if (!commandTextField.getPopupWindow().isShowing()) {
