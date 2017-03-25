@@ -52,7 +52,7 @@ public class FindCommandParser implements CommandParser {
         try {
 
             boolean isFind = true;
-            Optional<String> optionalStartDate = getOptionalValue(argsTokenizer, PREFIX_STARTDATE); 
+            Optional<String> optionalStartDate = getOptionalValue(argsTokenizer, PREFIX_STARTDATE);
             Optional<String> optionalDueDate = getOptionalValue(argsTokenizer, PREFIX_DUEDATE);
             findStartDate = ParserUtil.parseStartDate(optionalStartDate, isFind);
             findDueDate = ParserUtil.parseDueDate(optionalDueDate, isFind);
