@@ -16,7 +16,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,10 +24,10 @@ import seedu.address.model.person.ReadOnlyPerson;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/iManager_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 700;
+    private static final int MIN_WIDTH = 1000;
 
     private Stage primaryStage;
     private Logic logic;
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
+    void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 

@@ -3,50 +3,49 @@
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
+#### [Leslie Ho Zong Hong](https://github.com/e0011875)
+<img src="images/e0011875.jpg" width="150"><br>
+Year 2 Computer Science Major<br>
+**Role**: Team lead <br>
+**Responsibilities**: Deliverables and deadlines, Scheduling and tracking <br>
+* Components in charge of: GUI
+* Code written: 
+* Contributions:
+ * 
+ * 
+ * 
+ 
+-----
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Tan Li Hao](https://github.com/LiHaoTan)
+<img src="images/lihaotan.jpg" width="150"><br>
+Year 2 Computer Science Major<br>
+**Role**: Developer <br>
+**Responsibilities**: Testing, Integration <br>
+* Components in charge of: Logic 
+* Code written: 
+* Contributions:
+ * 
+ * 
+ * 
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Liu Yulin](https://github.com/LiuYulin0629)
+<img src="images/liuyulin0629.png" width="150"><br>
+Year 2 Computer Science Major<br>
+**Role**: Developer <br>
+**Responsibilities**: Code quality <br>
+* Components in charge of: Model, Storage
+* Code written: 
+* Contributions:
+ * 
+ * 
+ * 
 
 -----
-
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Nirandika Wanigasekara](https://github.com/nirandiw)
+<img src="images/nirandiw.png" width="150"><br>
+**Role**: Tutor
 
 -----
-
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)

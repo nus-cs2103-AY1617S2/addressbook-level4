@@ -5,8 +5,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartEndDateTime;
 
+// TODO card design
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
@@ -18,25 +21,44 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private HBox startEndOnly;
     @FXML
-    private Label address;
+    private HBox deadlineOnly;
     @FXML
-    private Label email;
+    private Label startDate;
+    @FXML
+    private Label endDate;
+    @FXML
+    private Label deadline;
     @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyPerson person, int displayedIndex) {
+    public PersonCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        name.setText(person.getName().value);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+
+        // TODO make sure both address and email are available though
+        // and also SLAP
+        if (person.getStartEndDateTime().isPresent()) {
+            startEndOnly.setVisible(true);
+            deadlineOnly.setVisible(false);
+            StartEndDateTime startEndDateTime = person.getStartEndDateTime().get();
+            startDate.setText(startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            endDate.setText(startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+        } else if (person.getDeadline().isPresent()) {
+            startEndOnly.setVisible(false);
+            deadlineOnly.setVisible(true);
+            deadline.setText(person.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
+        } else {
+            startEndOnly.setVisible(false);
+            deadlineOnly.setVisible(false);
+        }
+
         initTags(person);
     }
 
-    private void initTags(ReadOnlyPerson person) {
+    private void initTags(ReadOnlyTask person) {
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
