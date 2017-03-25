@@ -1,17 +1,18 @@
 package guitests;
 
-
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
 import org.junit.Test;
 
+import seedu.doit.commons.core.Messages;
 import seedu.doit.logic.commands.DoneCommand;
 import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
 
+//@@author A0139399J
 public class DoneCommandTest extends TaskManagerGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
@@ -41,14 +42,24 @@ public class DoneCommandTest extends TaskManagerGuiTest {
         this.commandBox.runCommand("find Elle");
 
         int filteredTaskListIndex = 1;
-
         int taskManagerIndex = 5;
-
         TestTask taskToMark = this.expectedTasksList[taskManagerIndex - 1];
         TestTask markedTask = new TaskBuilder(taskToMark).withIsDone(true).build();
 
         assertDoneSuccess(filteredTaskListIndex, taskManagerIndex, markedTask);
     }
+
+    @Test
+    public void edit_findThenEdit_failure() throws Exception {
+        this.commandBox.runCommand("find Elle");
+        int filteredTaskListIndex = 5;
+        this.commandBox.runCommand("done " + filteredTaskListIndex);
+
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+    }
+
+
 
 
 
