@@ -4,22 +4,24 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClearCommandTest extends AddressBookGuiTest {
+import seedu.address.commons.exceptions.IllegalValueException;
+
+public class ClearCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void clear() {
+    public void clear() throws IllegalArgumentException, IllegalValueException {
 
-        //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalPersons()));
+        // verify a non-empty list can be cleared
+        assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
         assertClearCommandSuccess();
 
-        //verify other commands can work after a clear command
+        // verify other commands can work after a clear command
         commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.hoon));
-        commandBox.runCommand("delete 1");
+        assertTrue(futureTaskListPanel.isListMatching(td.hoon));
+        commandBox.runCommand("delete F1");
         assertListSize(0);
 
-        //verify clear command works when the list is empty
+        // verify clear command works when the list is empty
         assertClearCommandSuccess();
     }
 

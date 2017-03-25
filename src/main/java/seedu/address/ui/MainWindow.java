@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -16,11 +18,11 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar
+ * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
 
@@ -33,27 +35,32 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
+    private CompletedTaskListPanel completedTaskListPanel;
     private Config config;
 
-    @FXML
-    private AnchorPane browserPlaceholder;
+    // Categorised Task List
+    public ObservableList<ReadOnlyTask> taskListToday;
+    private ObservableList<ReadOnlyTask> taskListFuture;
+    private ObservableList<ReadOnlyTask> taskListCompleted;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
-
-    @FXML
-    private AnchorPane personListPanelPlaceholder;
-
-    @FXML
     private AnchorPane resultDisplayPlaceholder;
 
     @FXML
+    private MenuItem helpMenuItem;
+
+    @FXML
+    private AnchorPane taskListPanelPlaceholder;
+
+    @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane completedTaskListPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -84,25 +91,27 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination
+     *            the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later
+         * version of SDK.
          *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
+         * According to the bug report, TextInputControl (TextField, TextArea)
+         * will consume function-key events. Because CommandBox contains a
+         * TextField, and ResultDisplay contains a TextArea, thus some
+         * accelerators (e.g F1) will not work when the focus is in them because
+         * the key event is consumed by the TextInputControl(s).
          *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * For now, we add following event filter to capture such key events and
+         * open help window purposely so to support accelerators even when focus
+         * is in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -113,27 +122,50 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
-        new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        taskListToday = FXCollections.observableArrayList();
+        taskListFuture = FXCollections.observableArrayList();
+        taskListCompleted = FXCollections.observableArrayList();
+        prepareTaskList();
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), taskListToday, taskListFuture);
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        // TODO: show completedTaskPanel when show completed command is
+        // implemented
+        new ResultDisplay(getResultDisplayPlaceholder());
+        completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
+    }
+
+    /*
+     * Prepares categorised task list for today/future/completed ListView
+     *
+     */
+    public void prepareTaskList() {
+        // Assume the three lists will always be initialised by fillInnerParts()
+        assert taskListToday != null;
+        assert taskListFuture != null;
+        assert taskListCompleted != null;
+
+        logic.prepareTaskList(taskListToday, taskListFuture, taskListCompleted);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
 
-    private AnchorPane getStatusbarPlaceholder() {
-        return statusbarPlaceholder;
-    }
-
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getStatusbarPlaceholder() {
+        return statusbarPlaceholder;
+    }
+
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
+    }
+
+    private AnchorPane getCompletedTaskListPlaceholder() {
+        return completedTaskListPlaceholder;
     }
 
     void hide() {
@@ -146,7 +178,9 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
+     *
+     * @param iconSource
+     *            e.g. {@code "/images/help_icon.png"}
      */
     private void setIcon(String iconSource) {
         FxViewUtil.setStageIcon(primaryStage, iconSource);
@@ -173,8 +207,8 @@ public class MainWindow extends UiPart<Region> {
      * Returns the current size and the position of the main Window.
      */
     GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
+                (int) primaryStage.getY());
     }
 
     @FXML
@@ -195,16 +229,8 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
-    }
-
-    void loadPersonPage(ReadOnlyPerson person) {
-        browserPanel.loadPersonPage(person);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
+    public TaskListPanel getTaskListPanel() {
+        return this.taskListPanel;
     }
 
 }
