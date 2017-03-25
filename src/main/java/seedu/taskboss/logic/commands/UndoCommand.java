@@ -2,6 +2,8 @@ package seedu.taskboss.logic.commands;
 
 import java.util.EmptyStackException;
 
+import seedu.taskboss.commons.exceptions.IllegalValueException;
+
 /**
  * Undoes the most recent operation entered by user.
  */
@@ -31,6 +33,8 @@ public class UndoCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (EmptyStackException ese) {
             return new CommandResult(MESSAGE_WITHOUT_PREVIOUS_OPERATION);
+        } catch (IllegalValueException e) {
+            return new CommandResult("HELLO UNDO DEBUG");
         }
     }
 }

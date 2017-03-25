@@ -58,7 +58,7 @@ public class AddCommand extends Command {
             categorySet.add(new Category(categoryName));
         }
 
-        if (frequency == null) {
+        if (frequency.isEmpty()) {
             frequency = Frequency.NONE.toString();
         }
 

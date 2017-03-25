@@ -59,7 +59,7 @@ public class XmlAdaptedTask {
         } else {
             priorityLevel = PriorityLevel.PRIORITY_NO;
         }
-        
+
         //@@author
         startDateTime = source.getStartDateTime().value;
         endDateTime = source.getEndDateTime().value;

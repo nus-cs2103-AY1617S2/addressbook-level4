@@ -1,6 +1,8 @@
 package seedu.taskboss.model;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -44,10 +46,12 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
     /**
      * Creates a TaskBoss using the Tasks and Categories in the {@code toBeCopied}
+     * @throws IllegalValueException 
      */
-    public TaskBoss(ReadOnlyTaskBoss toBeCopied) {
+    public TaskBoss(ReadOnlyTaskBoss toBeCopied) throws IllegalValueException {
         this();
         resetData(toBeCopied);
+        
     }
 
 //// list overwrite operations
@@ -61,7 +65,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         this.categories.setCategories(categories);
     }
 
-    public void resetData(ReadOnlyTaskBoss newData) {
+    public void resetData(ReadOnlyTaskBoss newData) throws IllegalValueException {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
@@ -73,6 +77,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         } catch (UniqueCategoryList.DuplicateCategoryException e) {
             assert false : "TaskBoss should not have duplicate categories";
         }
+        updateTasksRecurrence();
         syncMasterCategoryListWith(tasks);
     }
 
@@ -109,6 +114,24 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         // This can cause the categories master list to have additional categories that are not tagged to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
+    }
+
+    //@@author A0143157J
+    /**
+     * Updates the dates of a task based on the recurrence frequency.
+     * @throws IllegalValueException 
+     */
+    public void updateTasksRecurrence() throws IllegalValueException {
+        for (Task task : this.getEditableTaskList()) {
+            if (task.isRecurring()) { 
+                Date startDateTime = task.getStartDateTime().getDate();
+                Date endDateTime = task.getEndDateTime().getDate();
+                if ((startDateTime != null && startDateTime.before(Calendar.getInstance().getTime()))
+                     || endDateTime != null && endDateTime.before(Calendar.getInstance().getTime())) {
+                    task.getRecurrence().updateTaskDates(task);
+                }
+            }
+        }
     }
 
     /**
@@ -176,6 +199,10 @@ public class TaskBoss implements ReadOnlyTaskBoss {
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+
+    public ObservableList<Task> getEditableTaskList() {
+       return new UnmodifiableObservableList<>(tasks.asObservableList()); 
     }
 
     @Override

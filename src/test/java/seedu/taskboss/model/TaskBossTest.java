@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
@@ -33,20 +34,20 @@ public class TaskBossTest {
     }
 
     @Test
-    public void resetData_null_throwsAssertionError() {
+    public void resetData_null_throwsAssertionError() throws IllegalValueException {
         thrown.expect(AssertionError.class);
         taskBoss.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyTaskBoss_replacesData() {
+    public void resetData_withValidReadOnlyTaskBoss_replacesData() throws IllegalValueException {
         TaskBoss newData = new TypicalTestTasks().getTypicalTaskBoss();
         taskBoss.resetData(newData);
         assertEquals(newData, taskBoss);
     }
 
     @Test
-    public void resetData_withDuplicateTasks_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() throws IllegalValueException {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.taskA), new Task(td.taskA));
@@ -58,7 +59,7 @@ public class TaskBossTest {
     }
 
     @Test
-    public void resetData_withDuplicateCategories_throwsAssertionError() {
+    public void resetData_withDuplicateCategories_throwsAssertionError() throws IllegalValueException {
         TaskBoss typicalTaskBoss = new TypicalTestTasks().getTypicalTaskBoss();
         List<ReadOnlyTask> newTasks = typicalTaskBoss.getTaskList();
         List<Category> newCategories = new ArrayList<>(typicalTaskBoss.getCategoryList());

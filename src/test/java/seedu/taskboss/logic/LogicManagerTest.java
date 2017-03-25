@@ -71,7 +71,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskBossChangedEvent abce) {
+    private void handleLocalModelChangedEvent(TaskBossChangedEvent abce) throws IllegalValueException {
         latestSavedTaskBoss = new TaskBoss(abce.data);
     }
 
