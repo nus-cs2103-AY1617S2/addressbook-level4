@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -74,5 +75,20 @@ public class UpcomingTaskPanel extends UiPart<Region> {
             tomorrowTaskListView.scrollTo(index);
             tomorrowTaskListView.getSelectionModel().clearAndSelect(index);
         });
+    }
+
+    class UpcomingTaskViewCell extends ListCell<ReadOnlyTask> {
+
+        @Override
+        protected void updateItem(ReadOnlyTask task, boolean empty) {
+            super.updateItem(task, empty);
+
+            if (empty || task == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new UpcomingTaskCard(task, getIndex() + 1).getRoot());
+            }
+        }
     }
 }
