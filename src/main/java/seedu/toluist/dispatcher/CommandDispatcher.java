@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -75,17 +76,25 @@ public class CommandDispatcher extends Dispatcher {
     }
     
     public SortedSet<String> getPredictedCommands(String command) {
-        String deAliasedCommand = getDealiasedCommand(command);
         SortedSet<String> predictedCommands = new TreeSet<>();
 
-        if (!StringUtil.isPresent(deAliasedCommand)) {
+        if (!StringUtil.isPresent(command)) {
             return predictedCommands;
         }
 
-        String firstWordOfCommand = deAliasedCommand.trim().split("\\s+")[0];
+        String firstWordOfCommand = command.trim().split("\\s+")[0];
+
+        Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
+        for (String alias : aliasMapping.keySet()) {
+            if (alias.startsWith(firstWordOfCommand.toLowerCase())) {
+                String replacedCommand = command.replaceFirst(Pattern.quote(firstWordOfCommand), alias);
+                predictedCommands.add(getDealiasedCommand(replacedCommand));
+            }
+        }
+
         for (String commandWord : getControllerKeywords()) {
-            if (commandWord.startsWith(firstWordOfCommand)) {
-                predictedCommands.add(deAliasedCommand.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord));
+            if (commandWord.startsWith(firstWordOfCommand.toLowerCase())) {
+                predictedCommands.add(command.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord));
             }
         }
 
