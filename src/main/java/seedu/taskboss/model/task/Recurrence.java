@@ -1,5 +1,6 @@
 package seedu.taskboss.model.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -41,67 +42,69 @@ public class Recurrence {
         }
         task.setCategories(newCategoryList);
 
-       Date startDateTime = task.getStartDateTime().getDate();
-       Date endDateTime = task.getEndDateTime().getDate();
+       Date startDate = task.getStartDateTime().getDate();
+       Date endDate = task.getEndDateTime().getDate();
+       SimpleDateFormat startSdfFormat = initSimpleDateFormat(task.getStartDateTime());
+       SimpleDateFormat endSdfFormat = initSimpleDateFormat(task.getEndDateTime());
 
         switch(this.frequency) {
         case DAILY:
-            if (startDateTime != null) {
-                Calendar startCalendar = initCalendar(task, startDateTime);
+            if (startDate != null) {
+                Calendar startCalendar = initCalendar(task, startDate);
                 startCalendar.add(Calendar.DATE, 1);
-                startDateTime = startCalendar.getTime();
-                task.setStartDateTime(new DateTime(startDateTime.toString()));
+                String startDateStr = startSdfFormat.format(startCalendar.getTime());
+                task.setStartDateTime(new DateTime(startDateStr));
             }
-            if (endDateTime != null) {
-                Calendar endCalendar = initCalendar(task, endDateTime);
+            if (endDate != null) {
+                Calendar endCalendar = initCalendar(task, endDate);
                 endCalendar.add(Calendar.DATE, 1);
-                endDateTime = endCalendar.getTime();
-                task.setEndDateTime(new DateTime(endDateTime.toString()));
+                String endDateStr = endSdfFormat.format(endCalendar.getTime());
+                task.setEndDateTime(new DateTime(endDateStr));
             }
             break;
 
         case WEEKLY:
-            if (startDateTime != null) {
-                Calendar startCalendar = initCalendar(task, startDateTime);
+            if (startDate != null) {
+                Calendar startCalendar = initCalendar(task, startDate);
                 startCalendar.add(Calendar.WEEK_OF_YEAR, 1);
-                startDateTime = startCalendar.getTime();
-                task.setStartDateTime(new DateTime(startDateTime.toString()));
+                String startDateStr = startSdfFormat.format(startCalendar.getTime());
+                task.setStartDateTime(new DateTime(startDateStr));
             }
-            if (endDateTime != null) {
-                Calendar endCalendar = initCalendar(task, endDateTime);
+            if (endDate != null) {
+                Calendar endCalendar = initCalendar(task, endDate);
                 endCalendar.add(Calendar.WEEK_OF_YEAR, 1);
-                endDateTime = endCalendar.getTime();
-                task.setEndDateTime(new DateTime(endDateTime.toString()));
+                String endDateStr = endSdfFormat.format(endCalendar.getTime());
+                task.setEndDateTime(new DateTime(endDateStr));
             }
             break;
 
         case MONTHLY:
-            if (startDateTime != null) {
-                Calendar startCalendar = initCalendar(task, startDateTime);
+            if (startDate != null) {
+                Calendar startCalendar = initCalendar(task, startDate);
                 startCalendar.add(Calendar.MONTH, 1);
-                startDateTime = startCalendar.getTime();
-                task.setStartDateTime(new DateTime(startDateTime.toString()));
+                String startDateStr = startSdfFormat.format(startCalendar.getTime());
+                task.setStartDateTime(new DateTime(startDateStr));
             }
-            if (endDateTime != null) {
-                Calendar endCalendar = initCalendar(task, endDateTime);
+            if (endDate != null) {
+                Calendar endCalendar = initCalendar(task, endDate);
                 endCalendar.add(Calendar.MONTH, 1);
-                endDateTime = endCalendar.getTime();
-                task.setEndDateTime(new DateTime(endDateTime.toString()));
+                String endDateStr = endSdfFormat.format(endCalendar.getTime());
+                task.setEndDateTime(new DateTime(endDateStr));
             }
             break;
 
         case YEARLY:
-            if (startDateTime != null) {
-                Calendar startCalendar = initCalendar(task, startDateTime);
+            if (startDate != null) {
+                Calendar startCalendar = initCalendar(task, startDate);
                 startCalendar.add(Calendar.YEAR, 1);
-                startDateTime = startCalendar.getTime();
-                task.setStartDateTime(new DateTime(startDateTime.toString()));
+                String startDateStr = startSdfFormat.format(startCalendar.getTime());
+                task.setStartDateTime(new DateTime(startDateStr));
             }
-            if (endDateTime != null) {
-                Calendar endCalendar = initCalendar(task, endDateTime);
+            if (endDate != null) {
+                Calendar endCalendar = initCalendar(task, endDate);
                 endCalendar.add(Calendar.YEAR, 1);
-                endDateTime = endCalendar.getTime();
-                task.setEndDateTime(new DateTime(endDateTime.toString()));
+                String endDateStr = endSdfFormat.format(endCalendar.getTime());
+                task.setEndDateTime(new DateTime(endDateStr));
             }
             break;
 
@@ -117,6 +120,14 @@ public class Recurrence {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar;
+    }
+
+    private SimpleDateFormat initSimpleDateFormat(DateTime dateTime) {
+        if (dateTime.isTimeInferred()) {
+            return new SimpleDateFormat("MMM dd, yyyy");
+        } else {
+            return new SimpleDateFormat("MMM dd, yyyy h:mm aa");
+        }
     }
 
     public boolean isRecurring() {
