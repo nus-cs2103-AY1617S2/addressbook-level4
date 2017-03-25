@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 import org.junit.Test;
 
