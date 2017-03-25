@@ -33,7 +33,6 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskList taskList;
-    private Pair currentPair;
     private final Storage storage;
 
     private final FilteredList<ReadOnlyTask> filteredTasks;
@@ -81,20 +80,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         TaskList taskListToPush = new TaskList(taskList);
-        undoStack.push(new Pair(taskListToPush, (Task) target));
+        undoStack.push(new Pair(taskListToPush, "delete"));
         taskList.removeTask(target);
-        currentPair = new Pair(taskList, (Task) target);
         indicateTaskListChanged();
 
 
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task, String userInput) throws UniqueTaskList.DuplicateTaskException {
         TaskList taskListToPush = new TaskList(taskList);
-        undoStack.push(new Pair(taskListToPush, task));
+        undoStack.push(new Pair(taskListToPush, userInput));
         taskList.addTask(task);
-        currentPair = new Pair(taskList, task);
         updateFilteredListToShowAll();
         indicateTaskListChanged();
 
@@ -106,46 +103,44 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
         TaskList taskListToPush = new TaskList(taskList);
-        undoStack.push(new Pair(taskListToPush, (Task) editedTask));
+        undoStack.push(new Pair(taskListToPush, "edit"));
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
-        currentPair = new Pair(taskList, (Task) editedTask);
         indicateTaskListChanged();
 
     }
 
     //@@author A0139747N
     @Override
-    public void setPreviousState() throws EmptyStackException {
+    public String setPreviousState() throws EmptyStackException {
         if (undoStack.empty()) {
             throw new EmptyStackException();
         }
 
 
         Pair previousState = undoStack.pop();
-        if (previousState.isNullTask()) {
-            redoStack.push(new Pair(new TaskList(taskList)));
-        } else {
-            redoStack.push(new Pair(new TaskList(taskList), currentPair.getSecond()));
-        }
-        taskList.resetData(previousState.getFirst());
+
+        redoStack.push(new Pair(new TaskList(taskList), previousState.getUserInput()));
+
+        taskList.resetData(previousState.getList());
         updateFilteredListToShowAll();
+
+        return previousState.getUserInput();
     }
 
     @Override
-    public void setNextState() throws EmptyStackException {
+    public String setNextState() throws EmptyStackException {
         if (redoStack.empty()) {
             throw new EmptyStackException();
         }
         Pair nextState = redoStack.pop();
-        if (nextState.isNullTask()) {
-            undoStack.push(new Pair(new TaskList(taskList)));
-        } else {
-            undoStack.push(new Pair(new TaskList(taskList), currentPair.getSecond()));
-        }
 
-        taskList.resetData(nextState.getFirst());
+        undoStack.push(new Pair(new TaskList(taskList), nextState.getUserInput()));
+
+        taskList.resetData(nextState.getList());
         updateFilteredListToShowAll();
+
+        return nextState.getUserInput();
     }
 
     @Override
@@ -153,7 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Generates a Pair object with the task list, and a null task, since clear command does not involve a certain task.
      */
     public void enableUndoForClear() {
-        Pair current = new Pair(new TaskList(taskList));
+        Pair current = new Pair(new TaskList(taskList), "clear");
         undoStack.push(current);
     }
 //@@author A0141993X

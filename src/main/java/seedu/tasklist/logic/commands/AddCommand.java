@@ -40,14 +40,16 @@ public class AddCommand extends Command {
     public static final int EVENT_SIZE = 2;
 
     private final Task toAdd;
+    private final String userInput;
 
     /**
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, Optional<List<Date>> dates, Optional<String> comment,
+    public AddCommand(String userInput, String name, Optional<List<Date>> dates, Optional<String> comment,
             Optional<String> priority, Set<String> tags) throws IllegalValueException {
+        this.userInput = userInput;
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -138,7 +140,7 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addTask(toAdd);
+            model.addTask(toAdd, userInput);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

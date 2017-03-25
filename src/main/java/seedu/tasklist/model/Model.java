@@ -24,7 +24,7 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Task task, String userInput) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -47,10 +47,10 @@ public interface Model {
 
     //@@author A0139747N
     /** Get the previous state (undo) of the task list */
-    public void setPreviousState() throws EmptyStackException;
+    public String setPreviousState() throws EmptyStackException;
 
     /** Get the next state (redo) of the task list */
-    public void setNextState() throws EmptyStackException;
+    public String setNextState() throws EmptyStackException;
 
     /** Enables undo to work after a clear command, by pushing the existing state into UndoStack. */
     public void enableUndoForClear();

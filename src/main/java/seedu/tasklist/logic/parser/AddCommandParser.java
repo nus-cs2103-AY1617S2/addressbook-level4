@@ -23,14 +23,14 @@ public class AddCommandParser {
      * and returns an AddCommand object for execution.
      */
     //@@author A0143355J
-    public Command parse(String args) {
+    public Command parse(String args, String userInput) {
         args = ParserUtil.parseFlexiblePrefix(args);
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_COMMENT, PREFIX_PRIORITY, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
+                    userInput, argsTokenizer.getPreamble().get(),
                     ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)),
                     argsTokenizer.getValue(PREFIX_COMMENT),
                     argsTokenizer.getValue(PREFIX_PRIORITY),

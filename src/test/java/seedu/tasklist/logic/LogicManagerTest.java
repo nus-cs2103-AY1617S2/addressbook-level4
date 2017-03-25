@@ -213,9 +213,9 @@ public class LogicManagerTest {
     @Test
     public void execute_clear() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        model.addTask(helper.generateTask(1));
-        model.addTask(helper.generateTask(2));
-        model.addTask(helper.generateTask(3));
+        model.addTask(helper.generateTask(1), "test");
+        model.addTask(helper.generateTask(2), "test");
+        model.addTask(helper.generateTask(3), "test");
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskList(), Collections.emptyList());
     }
@@ -259,7 +259,7 @@ public class LogicManagerTest {
         Task toBeAdded = helper.adam();
 
         // setup starting state
-        model.addTask(toBeAdded); // task already in internal task list
+        model.addTask(toBeAdded, "test"); // task already in internal task list
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -313,7 +313,7 @@ public class LogicManagerTest {
         // set AB state to 2 tasks
         model.resetData(new TaskList());
         for (Task p : taskList) {
-            model.addTask(p);
+            model.addTask(p, "test");
         }
 
         assertCommandFailure(commandWord + " 3", expectedMessage);
@@ -574,7 +574,7 @@ public class LogicManagerTest {
          */
         void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
-                model.addTask(p);
+                model.addTask(p, "test");
             }
         }
 
