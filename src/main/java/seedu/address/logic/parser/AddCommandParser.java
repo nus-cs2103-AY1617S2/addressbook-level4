@@ -130,11 +130,16 @@ public class AddCommandParser {
                 .size() == NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE;
         List<Date> dates = new ArrayList<Date>();
         for (int i = 0; i < NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE; i++) {
-            List<DateGroup> group = new PrettyTimeParser()
-                    .parseSyntax(ParserUtil.correctDateFormat(datesString.get(i)
+            List<DateGroup> group = new PrettyTimeParser().parseSyntax(
+                    ParserUtil.correctDateFormat(datesString.get(i))
                             + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
-                                    : CliSyntax.DEFAULT_DEADLINE)));
-            if (group == null || group.size() > 2) {
+                                    : CliSyntax.DEFAULT_DEADLINE));
+            if (group == null || group.size() > 1 || (!group.get(0).getText()
+                    .equals(datesString.get(i))
+                    && !group.get(0).getText().equals(
+                            ParserUtil.correctDateFormat(datesString.get(i))
+                                    + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
+                                            : CliSyntax.DEFAULT_DEADLINE)))) {
                 args = tmpArgs;
                 return null;
             } else {
