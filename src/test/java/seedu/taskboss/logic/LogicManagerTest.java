@@ -226,8 +226,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() throws IllegalValueException, InvalidDatesException {
-        assertCommandFailure("add n/[]\\[;] sd/today ed/tomorrow i/valid, information",
-                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name! sd/today ed/tomorrow "
                 + "i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
