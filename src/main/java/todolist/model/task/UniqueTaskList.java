@@ -1,5 +1,6 @@
 package todolist.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javafx.collections.ObservableList;
 import todolist.commons.core.UnmodifiableObservableList;
 import todolist.commons.exceptions.DuplicateDataException;
 import todolist.commons.util.CollectionUtil;
+import todolist.model.task.ReadOnlyTask.Category;
 
 /**
  * A list of Tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -95,7 +97,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return new UnmodifiableObservableList<>(internalList);
     }
 
-    public UnmodifiableObservableList<Task> getFilteredTaskList(String filter) {
+    public UnmodifiableObservableList<Task> getFilteredTaskList(Category filter) {
         return new UnmodifiableObservableList<>(internalList.filtered(p -> p.getTaskCategory().equals(filter)));
     }
 

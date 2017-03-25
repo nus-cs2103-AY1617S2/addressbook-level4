@@ -22,12 +22,12 @@ public class TestTask implements ReadOnlyTask {
 
     private Title title;
     private Optional<Venue> venue;
-    private Optional<StartTime> starttime;
-    private Optional<EndTime> endtime;
+    private Optional<StartTime> startTime;
+    private Optional<EndTime> endTime;
     private Optional<UrgencyLevel> urgencyLevel;
     private Optional<Description> description;
     private UniqueTagList tags;
-    private String category;
+    private Category category;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -39,11 +39,12 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.title = taskToCopy.getTitle();
         this.venue = taskToCopy.getVenue();
-        this.endtime = taskToCopy.getEndTime();
+        this.startTime = taskToCopy.getStartTime();
+        this.endTime = taskToCopy.getEndTime();
         this.urgencyLevel = taskToCopy.getUrgencyLevel();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
-        this.category = taskToCopy.getTaskCategory();
+        this.category = sortCategory();
     }
 
     // @@author A0122017Y
@@ -52,11 +53,13 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public void setStartTime(StartTime starttime) {
-        this.starttime = Optional.of(starttime);
+        this.startTime = Optional.of(starttime);
+        updateCategory();
     }
 
     public void setEndTime(EndTime endtime) {
-        this.endtime = Optional.of(endtime);
+        this.endTime = Optional.of(endtime);
+        updateCategory();
     }
 
     public void setVenue(Venue venue) {
@@ -81,18 +84,18 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public String getTaskCategory() {
+    public Category getTaskCategory() {
         return category;
     }
 
     @Override
     public Optional<StartTime> getStartTime() {
-        return starttime;
+        return startTime;
     }
 
     @Override
     public Optional<EndTime> getEndTime() {
-        return endtime;
+        return endTime;
     }
 
     @Override
@@ -121,6 +124,32 @@ public class TestTask implements ReadOnlyTask {
     }
 
     // @@author A0110791M
+    private boolean isDeadlineTask() {
+        return this.endTime != null && startTime == null;
+    }
+
+    private boolean isEventTask() {
+        return this.endTime != null && startTime != null;
+    }
+
+    private boolean isFloatingTask() {
+        return this.endTime == null;
+    }
+
+    private void updateCategory() {
+        this.category = sortCategory();
+    }
+
+    private Category sortCategory() {
+        if (isDeadlineTask()) {
+            return Category.DEADLINE;
+        } else if (isEventTask()) {
+            return Category.EVENT;
+        } else {
+            return Category.FLOAT;
+        }
+    }
+
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
@@ -145,9 +174,9 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Character getTaskChar() {
-        if (starttime.isPresent()) {
+        if (startTime.isPresent()) {
             return EVENT_CHAR;
-        } else if (endtime.isPresent()) {
+        } else if (endTime.isPresent()) {
             return DEADLINE_CHAR;
         } else {
             return FLOAT_CHAR;

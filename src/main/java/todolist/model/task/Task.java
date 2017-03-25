@@ -11,10 +11,6 @@ import todolist.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    public static final String TASK_TYPE_DEADLINE = "deadline";
-    public static final String TASK_TYPE_EVENT = "event";
-    public static final String TASK_TYPE_FLOAT = "float";
-
     public static final char FLOAT_CHAR = 'f';
     public static final char DEADLINE_CHAR = 'd';
     public static final char EVENT_CHAR = 'e';
@@ -26,7 +22,7 @@ public class Task implements ReadOnlyTask {
     private Description description;
     private UrgencyLevel urgencyLevel;
 
-    private String category;
+    private Category category;
     private boolean isCompleted;
 
     private UniqueTagList tags;
@@ -76,18 +72,18 @@ public class Task implements ReadOnlyTask {
         return this.endTime == null;
     }
 
-    private String sortCategory() {
+    private Category sortCategory() {
         if (isDeadlineTask()) {
-            return TASK_TYPE_DEADLINE;
+            return Category.DEADLINE;
         } else if (isEventTask()) {
-            return TASK_TYPE_EVENT;
+            return Category.EVENT;
         } else {
-            return TASK_TYPE_FLOAT;
+            return Category.FLOAT;
         }
     }
 
     @Override
-    public String getTaskCategory() {
+    public Category getTaskCategory() {
         this.category = sortCategory();
         return this.category;
     }

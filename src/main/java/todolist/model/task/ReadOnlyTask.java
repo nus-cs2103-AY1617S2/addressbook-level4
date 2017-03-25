@@ -16,8 +16,9 @@ public interface ReadOnlyTask {
     Optional<Venue> getVenue();
     Optional<Description> getDescription();
     Optional<UrgencyLevel> getUrgencyLevel();
+    public enum Category {DEADLINE, EVENT, FLOAT}
 
-    String getTaskCategory();
+    Category getTaskCategory();
     Character getTaskChar();
 
     /**

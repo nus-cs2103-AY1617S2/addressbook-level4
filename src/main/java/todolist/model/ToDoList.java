@@ -13,6 +13,7 @@ import todolist.commons.core.UnmodifiableObservableList;
 import todolist.model.tag.Tag;
 import todolist.model.tag.UniqueTagList;
 import todolist.model.task.ReadOnlyTask;
+import todolist.model.task.ReadOnlyTask.Category;
 import todolist.model.task.Task;
 import todolist.model.task.UniqueTaskList;
 import todolist.model.task.UniqueTaskList.DuplicateTaskException;
@@ -166,21 +167,21 @@ public class ToDoList implements ReadOnlyToDoList {
     }
 
     public ObservableList<ReadOnlyTask> getFilteredFloats() {
-        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_FLOAT));
+        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Category.FLOAT));
     }
 
     /**
      * Returns a task list filtered to only contain Deadlines
      */
     public ObservableList<ReadOnlyTask> getFilteredTasks() {
-        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_DEADLINE));
+        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Category.DEADLINE));
     }
 
     /**
      * Returns a task list filtered to only contain Events
      */
     public ObservableList<ReadOnlyTask> getFilteredEvents() {
-        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_EVENT));
+        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Category.EVENT));
     }
 
 
