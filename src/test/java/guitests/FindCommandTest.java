@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.testutil.TestTask;
 
@@ -69,6 +70,14 @@ public class FindCommandTest extends TaskBossGuiTest {
     public void find_invalidDate_fail() {
         commandBox.runCommand("find sd/mynameisbob");
         assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
+    }
+
+    //EP: invalid prefix
+    @Test
+    public void find_invalidPrefix_fail() {
+        commandBox.runCommand("find keyword/");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
     }
 
     //@@author A0147990R
