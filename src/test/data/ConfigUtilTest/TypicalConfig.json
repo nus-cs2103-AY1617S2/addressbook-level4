@@ -1,7 +1,7 @@
 {
-  "appTitle" : "Typical App Title",
+  "appTitle" : "FlexiTask",
   "logLevel" : "INFO",
   "userPrefsFilePath" : "C:\\preferences.json",
-  "addressBookFilePath" : "addressbook.xml",
-  "addressBookName" : "TypicalAddressBookName"
+  "taskListFilePath" : "tasklist.xml",
+  "taskListName" : "MyTaskList"
 }

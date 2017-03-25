@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<flexitask>
+	<tasks>
+		<name>Meeting</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Shopping</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>AI Conference</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Watch Movie</name>
+		<comment>prepare clothes</comment>
+		<type>floating</type>
+		<priority>low</priority>
+	</tasks>
+	<tasks>
+		<name>Check Email</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Dinner with wife</name>
+		<comment>prepare flowers</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Project Meeting</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Progress Report</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>high</priority>
+	</tasks>
+	<tasks>
+		<name>Evaluation Report</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>high</priority>
+	</tasks>
+</flexitask>
