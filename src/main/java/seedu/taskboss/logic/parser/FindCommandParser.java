@@ -21,9 +21,9 @@ import seedu.taskboss.model.task.DateTime;
  */
 public class FindCommandParser {
 
+    private static final String DIGITS = "\\d";
     private static final String EMPTY_STRING = "";
     private static final String WHITESPACE = " ";
-    private static final String REGEX_ONLY_DIGITS = "/^[0-9]+$/";
 
     private static final int INDEX_TIME_START_POSITION = 13;
     private static final int INDEX_MONTH_START_POSITION = 0;
@@ -73,8 +73,7 @@ public class FindCommandParser {
             if ((inputPrefix == PREFIX_START_DATE || inputPrefix == PREFIX_END_DATE)) {
                 // only parse with natty if input is (not only integers and not a single word) or (contains time)
                 // so that user can also search for numeral day_of_month/year
-                if ((!keywords.matches(REGEX_ONLY_DIGITS) && keywords.trim().contains(WHITESPACE))
-                    || hasAmOrPm(keywords)) {
+                if (keywords.replaceAll(DIGITS, EMPTY_STRING).length() > 0 || hasAmOrPm(keywords)) {
                     DateTime parsedFormattedDateTime = new DateTime(keywords);
 
                     // user only enters time
