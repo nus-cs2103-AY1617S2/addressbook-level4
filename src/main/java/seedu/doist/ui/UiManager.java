@@ -19,7 +19,6 @@ import seedu.doist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.doist.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.Logic;
-import seedu.doist.model.Model;
 import seedu.doist.model.UserPrefs;
 
 /**
@@ -31,15 +30,13 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
-    private Model model;
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs, Model model) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
         this.logic = logic;
-        this.model = model;
         this.config = config;
         this.prefs = prefs;
     }
@@ -53,7 +50,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic, model);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

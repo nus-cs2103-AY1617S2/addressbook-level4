@@ -1,4 +1,4 @@
-package seedu.doist.ui;
+package seedu.doist.ui.util;
 
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_AS;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_BY;
@@ -19,7 +19,8 @@ public class CommandHighlightManager {
 
     private static CommandHighlightManager instance;
 
-    protected static CommandHighlightManager getInstance() {
+    // for singleton pattern
+    public static CommandHighlightManager getInstance() {
         if (instance == null) {
             instance = new CommandHighlightManager();
         }

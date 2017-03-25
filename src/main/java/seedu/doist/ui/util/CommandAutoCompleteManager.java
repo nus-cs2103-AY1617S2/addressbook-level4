@@ -1,8 +1,7 @@
-package seedu.doist.ui;
+package seedu.doist.ui.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -12,7 +11,7 @@ import javafx.event.EventDispatcher;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import seedu.doist.model.Model;
+import seedu.doist.logic.Logic;
 
 //@@author A0147980U
 public class CommandAutoCompleteManager {
@@ -22,7 +21,7 @@ public class CommandAutoCompleteManager {
     private final Point2D suggestionBoxOffset = new Point2D(-8, 12);
 
     // for singleton pattern
-    protected static CommandAutoCompleteManager getInstance() {
+    public static CommandAutoCompleteManager getInstance() {
         if (instance == null) {
             instance = new CommandAutoCompleteManager();
         }
@@ -30,24 +29,24 @@ public class CommandAutoCompleteManager {
     }
 
     // main function method
-    public void suggestCompletion(InlineCssTextArea commandTextField, Model model) {
+    public void suggestCompletion(InlineCssTextArea commandTextField, Logic logic) {
         int cursorPosition = commandTextField.getCaretPosition();
         String[] words = commandTextField.getText(0, cursorPosition).split(" +", -1);
         String lastWord = words[words.length - 1];  // -1 means trailing space will NOT be discarded
         if (!lastWord.equals("")) {
-            displaySuggestions(commandTextField, getSuggestions(lastWord, model));
+            displaySuggestions(commandTextField, getSuggestions(lastWord, logic));
         } else {
             commandTextField.getPopupWindow().hide();
         }
     }
 
-    private ArrayList<String> getSuggestions(String lastWord, Model model) {
-        //TODO: make this method more "powerful"
+    private ArrayList<String> getSuggestions(String lastWord, Logic logic) {
+        // TODO: make this method more "powerful"
         // handle different cases (command word, key, search history) differently
         // make better suggestion by using a queue to store history and store the frequency
 
         ArrayList<String> suggestions = new ArrayList<>();
-        List<String> allCommandWords = getAllCommandWords(model);
+        List<String> allCommandWords = logic.getAllCommandWords();
         for (String commandWord : allCommandWords) {
             if (commandWord.startsWith(lastWord)) {
                 suggestions.add(commandWord);
@@ -81,15 +80,6 @@ public class CommandAutoCompleteManager {
                                                    suggestionList.getAnchorX(),
                                                    suggestionList.getAnchorY());
         }
-    }
-
-    private List<String> getAllCommandWords(Model model) {
-        ArrayList<String> allCommandWords = new ArrayList<String>();
-        Set<String> allDefaultCommandWords = model.getDefaultCommandWordSet();
-        for (String defaultCommandWords : allDefaultCommandWords) {
-            allCommandWords.addAll(model.getValidCommandList(defaultCommandWords));
-        }
-        return allCommandWords;
     }
 }
 
