@@ -25,8 +25,9 @@ public class DateTimeTest {
         assertTrue(dateTime.isSameDay(date2));
         Date date3 = new PrettyTimeParser().parse("now").get(0);
         dateTime.set(date3);
-        assertTrue(dateTime.toString().equals("片刻之前")
-                || dateTime.toString().equals("a moment ago"));
+        assertTrue(/*
+                    * dateTime.toString().equals("片刻之前") ||
+                    */ dateTime.toString().equals("a moment ago"));
     }
 
     @Test
@@ -43,7 +44,8 @@ public class DateTimeTest {
         assertTrue(dateTime.isSameDay(date2));
         Date date3 = new PrettyTimeParser().parse("now").get(0);
         dateTime.set(date3);
-        assertTrue(dateTime.toString().equals("片刻之前")
-                || dateTime.toString().equals("a moment ago"));
+        assertTrue(/*
+                    * dateTime.toString().equals("片刻之前") ||
+                    */ dateTime.toString().equals("a moment ago"));
     }
 }
