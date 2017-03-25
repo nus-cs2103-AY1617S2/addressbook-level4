@@ -61,8 +61,8 @@ public class EzDo implements ReadOnlyEzDo {
         this.tags.setTags(tags);
     }
 
-    public void sortTasks(SortCriteria sortCriteria) {
-        tasks.sortTasks(sortCriteria);
+    public void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending) {
+        tasks.sortTasks(sortCriteria, isSortedAscending);
     }
 
     public void resetData(ReadOnlyEzDo newData) {

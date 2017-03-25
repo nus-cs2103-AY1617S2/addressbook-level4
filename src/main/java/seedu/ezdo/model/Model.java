@@ -27,7 +27,7 @@ public interface Model {
     /** Returns the UserPrefs */
     UserPrefs getUserPrefs();
 
-    void sortTasks(SortCriteria sortCriteria);
+    void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending);
 
     /** Deletes the given task. */
     void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException;

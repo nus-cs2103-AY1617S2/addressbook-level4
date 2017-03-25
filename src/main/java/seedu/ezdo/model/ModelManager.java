@@ -41,6 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final UserPrefs userPrefs;
 
     private SortCriteria currentSortCriteria;
+    private Boolean isSortedAscending;
 
     private final FixedStack<ReadOnlyEzDo> undoStack;
     private final FixedStack<ReadOnlyEzDo> redoStack;
@@ -57,6 +58,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.userPrefs = userPrefs;
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
         currentSortCriteria = userPrefs.getSortCriteria();
+        isSortedAscending = userPrefs.getIsSortedAscending();
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         redoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         updateFilteredListToShowAll();
@@ -102,7 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
         checkTaskDate(task);
         updateStacks();
         ezDo.addTask(task);
-        ezDo.sortTasks(currentSortCriteria);
+        ezDo.sortTasks(currentSortCriteria, isSortedAscending);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
@@ -123,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateStacks();
         int ezDoIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         ezDo.updateTask(ezDoIndex, editedTask);
-        ezDo.sortTasks(currentSortCriteria);
+        ezDo.sortTasks(currentSortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
 
@@ -316,12 +318,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void sortTasks(SortCriteria sortCriteria) {
+    public void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending) {
         if (!this.currentSortCriteria.equals(sortCriteria)) {
             this.currentSortCriteria = sortCriteria;
             indicateSortCriteriaChanged();
         }
-        ezDo.sortTasks(sortCriteria);
+        ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
 
