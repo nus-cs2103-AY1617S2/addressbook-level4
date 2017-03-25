@@ -2,14 +2,13 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-##### Work in progress
 
 ## Project Team W14-B1
 
 -----
 
 #### [Ellango Vesali](http://github.com/vesaliE)
-<img src="images/vesaliE.png" width="150"><br>
+<img src="images/vesaliE.png" width="150" height="250"><br>
 Role: Developer <br>
 Responsibilities: Deliverables and deadlines, Documentation<br>
 Component in charge of: [Storage](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/DeveloperGuide.md#25-storage-component)<br>
@@ -24,7 +23,7 @@ Code Written: <br>
 
 Other major contributions:<br>
 * [Did the inital refactoring from AddressBook to TaskList for storage and documents](https://github.com/CS2103JAN2017-W14-B1/main/pull/35)
-* Did AboutUs.md 
+* [Did AboutUs.md](https://github.com/CS2103JAN2017-W14-B1/main/pull/97/)
 * Did Documentation of User and Developer guide
 
 -----
