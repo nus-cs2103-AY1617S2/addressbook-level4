@@ -26,6 +26,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label information;
     @FXML
+    private Label recurrence;
+    @FXML
     private FlowPane categories;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -36,6 +38,7 @@ public class TaskCard extends UiPart<Region> {
         startDateTime.setText(task.getStartDateTime().value);
         endDateTime.setText(task.getEndDateTime().value);
         information.setText(task.getInformation().value);
+        recurrence.setText(task.getRecurrence().toString());
 
         initCategories(task);
     }
