@@ -101,9 +101,15 @@ public class TaskUiView extends UiView {
         }
         if (isTaskWithDeadline || task.isEvent()) {
             clockIcon.setImage(AppUtil.getImage(IMAGE_PATH_CLOCK_ICON));
+        } else {
+            date.setVisible(false);
+            date.setManaged(false);
+            clockIcon.setVisible(false);
+            clockIcon.setManaged(false);
         }
 
         if (isRecurring) {
+            recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));
             if (isFloatingTask) {
                 recurringDate.setText(DateTimeFormatterUtil.formatRecurringFloatingTask(
                         task.getRecurringEndDateTime(),
@@ -122,9 +128,11 @@ public class TaskUiView extends UiView {
                                 task.getRecurringEndDateTime(),
                                 task.getRecurringFrequency()));
             }
-        }
-        if (isRecurring) {
-            recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));
+        } else {
+            recurringIcon.setVisible(false);
+            recurringIcon.setManaged(false);
+            recurringDate.setVisible(false);
+            recurringDate.setManaged(false);
         }
         if (task.isCompleted()) {
             FxViewUtil.addStyleClass(taskPane, STYLE_CLASS_COMPLETED);
