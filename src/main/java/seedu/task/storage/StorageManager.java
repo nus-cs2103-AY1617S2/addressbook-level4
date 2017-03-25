@@ -30,7 +30,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
     private Config config;
 
-
     public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.taskManagerStorage = taskManagerStorage;
@@ -96,9 +95,9 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveBackup() throws IOException, FileNotFoundException {
-        logger.fine("Attempting to backup data");
-        taskManagerStorage.saveBackup();
+    public void saveBackup(String backupFilePath) throws IOException, FileNotFoundException {
+        logger.fine("Attempting to backup data from " + backupFilePath);
+        taskManagerStorage.saveBackup(backupFilePath);
     }
 
     @Override
@@ -121,8 +120,8 @@ public class StorageManager extends ComponentManager implements Storage {
 
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            if (event.shouldBackup) {
-                saveBackup();
+            if (!event.backupFilePath.trim().equals("")) {
+                saveBackup(event.backupFilePath);
             }
             saveTaskManager(event.data);
         } catch (IOException e) {

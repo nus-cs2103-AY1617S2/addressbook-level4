@@ -33,11 +33,12 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     @Override
-    void saveBackup() throws IOException, FileNotFoundException;
+    void saveBackup(String backupFilePath) throws IOException, FileNotFoundException;
 
     void handleFilePathChangedEvent(FilePathChangedEvent fpce);
 
     void handleLoadNewFileEvent(LoadNewFileEvent lnfe);
+
     /**
      * Saves the current version of KIT to the hard disk.
      *   Creates the data file if it is missing.
