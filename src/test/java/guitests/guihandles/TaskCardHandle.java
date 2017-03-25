@@ -15,10 +15,9 @@ import seedu.geekeep.model.task.ReadOnlyTask;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
-    private static final String TITLE_FIELD_ID = "#name";
-    private static final String LOCATION_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String TITLE_FIELD_ID = "#title";
+    private static final String LOCATION_FIELD_ID = "#locationOfTask";
+    private static final String DATE_FIELD_ID = "#date";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -40,12 +39,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(LOCATION_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
-    }
-
-    public String getEmail() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
+    public String getDate() {
+        return getTextFromLabel(DATE_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -75,7 +70,7 @@ public class TaskCardHandle extends GuiHandle {
     //TODO only works for v0.2
     public boolean isSameTask(ReadOnlyTask task) {
         return getTitle().equals(task.getTitle().title)
-                && getPhone().equals(getDisplayedDate(task))
+                && getDate().equals(getDisplayedDate(task))
                 && getLocation().equals(task.getLocation().value)
                 && getTags().equals(getTags(task.getTags()));
     }
@@ -97,7 +92,7 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getTitle().equals(handle.getTitle())
-                    && getPhone().equals(handle.getPhone())
+                    && getDate().equals(handle.getDate())
                     && getLocation().equals(handle.getLocation())
                     && getTags().equals(handle.getTags());
         }
