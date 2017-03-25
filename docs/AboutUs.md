@@ -18,7 +18,7 @@ Role: Team Leader <br>
   - Most of the GUI including the different tab filter + Switch command
 * Code written:
   - [Functional Codes](../collated/main/A0131125Y.md)
-  - [Test Codes](../collated/test/A0131125Y)
+  - [Test Codes](../collated/test/A0131125Y.md)
   - [Documentation](../collated/docs/A0131125Y.md)
 * Other major contributions:
   - Designed the MVC architecture for back-end
@@ -39,7 +39,7 @@ Role: Developer <br>
     - Delete multiple tasks
 * Code written:
     - [Functional Codes](../collated/main/A0127545A.md)
-    - [Test Codes](../collated/test/A0127545A)
+    - [Test Codes](../collated/test/A0127545A.md)
     - [Documentation](../collated/docs/A0127545A.md)
 * Other major contributions:
     - Wrote most of the re-usable Tokenizer/Parser classes to be used by various Controllers
@@ -63,7 +63,7 @@ Role: Developer <br>
   - Hot key up & down to navigate command history
 * Code written:
   - [Functional Codes](../collated/main/A0162011A.md)
-  - [Test Codes](../collated/test/A0162011A)
+  - [Test Codes](../collated/test/A0162011A.md)
   - [Documentation](../collated/docs/A0162011A.md)
 * Other major contribution:
   - Regularly update the project manual
