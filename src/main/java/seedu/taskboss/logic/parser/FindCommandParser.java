@@ -71,9 +71,10 @@ public class FindCommandParser {
 
             //@@author A0143157J
             if ((inputPrefix == PREFIX_START_DATE || inputPrefix == PREFIX_END_DATE)) {
-                // only parse with natty if keywords are not only integers or contains time
+                // only parse with natty if input is (not only integers and not a single word) or (contains time)
                 // so that user can also search for numeral day_of_month/year
-                if (!keywords.matches(REGEX_ONLY_DIGITS) || hasAmOrPm(keywords)) {
+                if ((!keywords.matches(REGEX_ONLY_DIGITS) && keywords.trim().contains(WHITESPACE))
+                    || hasAmOrPm(keywords)) {
                     DateTime parsedFormattedDateTime = new DateTime(keywords);
 
                     // user only enters time
