@@ -111,6 +111,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0143355J
     void fillInnerParts() {
         upcomingTaskPanel = new UpcomingTaskPanel(getUpcomingTaskListPlaceholder(), logic.getTodayTaskList(),
                 logic.getTomorrowTaskList());
@@ -120,6 +121,7 @@ public class MainWindow extends UiPart<Region> {
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
+    //@@author
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
@@ -132,14 +134,17 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
+    //@@author A0143355J
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
 
+    //@@author A0143355J
     private AnchorPane getUpcomingTaskListPlaceholder() {
         return upcomingTaskPlaceholder;
     }
 
+    //@@author
     void hide() {
         primaryStage.hide();
     }

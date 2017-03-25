@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.tasklist.model.task.ReadOnlyTask;
 
+//@@author A0143355J
 public class UpcomingTaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";

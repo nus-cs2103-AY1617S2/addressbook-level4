@@ -13,6 +13,7 @@ import seedu.tasklist.commons.core.LogsCenter;
 import seedu.tasklist.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tasklist.model.task.ReadOnlyTask;
 
+//@@author A0143355J
 public class UpcomingTaskPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(UpcomingTaskPanel.class);
     private static final String FXML = "UpcomingTaskPanel.fxml";
