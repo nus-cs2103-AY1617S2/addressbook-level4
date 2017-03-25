@@ -3,11 +3,15 @@ package seedu.address.logic.commands;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithDeadline;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -68,8 +72,18 @@ public class DoneCommand extends Command {
         Name updatedName = taskToDone.getName();
         UniqueTagList updatedTags = taskToDone.getTags();
         boolean updatedDone = true;
-        // TODO: Change Task constructor to TaskWithoutDeadline() or
-        // TaskWithDeadline() based on task type
-        return new Task(updatedName, updatedTags, updatedDone);
+        Task newTask = null;
+        if (taskToDone.getTaskType() == TaskType.TaskWithNoDeadline) {
+            newTask = new TaskWithoutDeadline(taskToDone.getName(), updatedTags,
+                    updatedDone);
+        } else {
+            try {
+                newTask = new TaskWithDeadline(taskToDone);
+                newTask.setDone(updatedDone);
+            } catch (IllegalValueException e) {
+                System.exit(1);
+            }
+        }
+        return newTask;
     }
 }

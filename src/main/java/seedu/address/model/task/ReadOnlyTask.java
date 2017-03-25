@@ -104,7 +104,7 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
-    enum TaskType {
+    public enum TaskType {
         TaskWithNoDeadline, TaskWithOnlyDeadline, TaskWithDeadlineAndStartingTime, RecurringTask;
     }
 
