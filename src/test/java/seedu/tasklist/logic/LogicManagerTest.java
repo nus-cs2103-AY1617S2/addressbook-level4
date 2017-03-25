@@ -436,7 +436,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-
+//@@author A0141993X
     @Test
     public void load_invalidCommand_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE);
@@ -445,8 +445,14 @@ public class LogicManagerTest {
 
     @Test
     public void load_invalidFilePath_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(LoadCommand.MESSAGE_INVALID_PATH, "dejt/%!%");
-        assertCommandBehavior("load dejt/%!%", expectedMessage);
+        String expectedMessage = String.format(LoadCommand.MESSAGE_FAILURE, "del/tasklist.xml");
+        assertCommandBehavior("load del/tasklist.xml", expectedMessage);
+    }
+
+    @Test
+    public void load_nonExistentDirectory_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(LoadCommand.MESSAGE_FAILURE, "data/data/tasklist.xml");
+        assertCommandBehavior("load data/data/tasklist.xml", expectedMessage);
     }
 
     @Test
@@ -463,16 +469,23 @@ public class LogicManagerTest {
 
     @Test
     public void save_invalidFilePath_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(SaveCommand.MESSAGE_INVALID_PATH, "dejt/%!%");
-        assertCommandBehavior("save dejt/%!%", expectedMessage);
+        String expectedMessage = String.format(SaveCommand.MESSAGE_INVALID_PATH, "data/tasklist");
+        assertCommandBehavior("save data/tasklist", expectedMessage);
     }
+
+    @Test
+    public void save_nonExistentDirectory_successful() throws Exception {
+        String expectedMessage = String.format(SaveCommand.MESSAGE_SUCCESS, "data/data1/tasklist.xml");
+        assertCommandBehavior("save data/data1/tasklist.xml", expectedMessage);
+    }
+
 
     @Test
     public void save_invalidFileExtension_errorMessageShown() throws Exception {
         String expectedMessage = String.format(SaveCommand.MESSAGE_INVALID_PATH, "data/task.png");
         assertCommandBehavior("save data/task.png", expectedMessage);
     }
-
+//@@author
     /**
      * A utility class to generate test data.
      */
