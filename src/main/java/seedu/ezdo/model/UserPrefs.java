@@ -55,6 +55,10 @@ public class UserPrefs {
         return commandAliases;
     }
 
+    public void updateLastUsedIsSortedAscending(Boolean isSortedAscending) {
+        this.isSortedAscending = isSortedAscending;
+    }
+
     public boolean getIsSortedAscending() {
         return isSortedAscending;
     }
