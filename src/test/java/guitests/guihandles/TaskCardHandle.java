@@ -81,13 +81,21 @@ public class TaskCardHandle extends GuiHandle {
         return node.getStyleClass().contains(style);
     }
 
-    public boolean isSameTask(ReadOnlyTask person) {
-        return getDesc().equals(person.getDescription().desc)
-                && getPriority().equals(person.getPriority().toString())
-                && getFinishStatus() == person.getFinishedStatus().getIsFinished()
-                && getTags().equals(getTags(person.getTags()));
+    //@@author A0140887W
+    public boolean isSameTask(ReadOnlyTask task) {
+
+        // Sort by alphabetical order
+        List<String> cardTags = getTags().stream().sorted().collect(Collectors.toList());
+        List<String> taskTags = getTags(task.getTags()).stream().sorted().collect(Collectors.toList());
+        return getDesc().equals(task.getDescription().desc)
+                && getPriority().equals(task.getPriority().toString())
+                && getFinishStatus() == task.getFinishedStatus().getIsFinished()
+                //&& getStartTime().equals(task.getStartDate().toString())
+                //&& getEndTime().equals(task.getEndDate().toString())
+                && cardTags.equals(taskTags);
     }
 
+    //@@author
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
