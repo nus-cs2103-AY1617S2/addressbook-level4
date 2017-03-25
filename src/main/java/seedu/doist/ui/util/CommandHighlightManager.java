@@ -10,12 +10,12 @@ import org.fxmisc.richtext.InlineCssTextArea;
 
 //@@author A0147980U
 public class CommandHighlightManager {
-    private static final String COMMAND_WORD_STYLE = "-fx-fill: #1a75ff;";  // blue"
-    private static final String PARAMETER_KEY_STYLE = "-fx-fill: #55ae47;";  // green
-    private static final String TIME_VALUE_STYLE = "-fx-fill: #e68a00;";  // orange
-    private static final String PRIORITY_VALUE_STYLE = "-fx-fill: #cd5c5c;";  // red
-    private static final String TAGS_STYLE = "-fx-fill: #7300e6;";  // purple
-    private static final String NORMAL_STYLE = "-fx-fill: black;";
+    public static final String COMMAND_WORD_STYLE = "-fx-fill: #1a75ff;";  // blue"
+    public static final String PARAMETER_KEY_STYLE = "-fx-fill: #55ae47;";  // green
+    public static final String TIME_VALUE_STYLE = "-fx-fill: #e68a00;";  // orange
+    public static final String PRIORITY_VALUE_STYLE = "-fx-fill: #cd5c5c;";  // red
+    public static final String TAGS_STYLE = "-fx-fill: #7300e6;";  // purple
+    public static final String NORMAL_STYLE = "-fx-fill: black;";
 
     private static CommandHighlightManager instance;
 

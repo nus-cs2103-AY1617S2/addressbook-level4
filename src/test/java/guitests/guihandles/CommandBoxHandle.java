@@ -73,6 +73,25 @@ public class CommandBoxHandle extends GuiHandle {
         }
         return itemtTexts;
     }
+
+    public List<String> getWordListWithStyle(String styleInCSS) {
+        InlineCssTextArea inputBox = (InlineCssTextArea) getNode(COMMAND_INPUT_FIELD_ID);
+        ArrayList<String> wordList = new ArrayList<String>();
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < inputBox.getLength(); i++) {
+            if (inputBox.getText().charAt(i) == ' ') {
+                if (sb.toString().length() > 0) {
+                    wordList.add(sb.toString());
+                    sb = new StringBuilder();
+                }
+            } else if (inputBox.getStyleOfChar(i).equals(styleInCSS)) {
+                sb.append(inputBox.getText().charAt(i));
+            }
+        }
+
+        return wordList;
+    }
 }
 
 

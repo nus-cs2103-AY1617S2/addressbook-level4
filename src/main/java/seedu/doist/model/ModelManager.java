@@ -282,6 +282,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147980U
     private class TaskTypeQualifier implements Qualifier {
         private TaskType type;
 

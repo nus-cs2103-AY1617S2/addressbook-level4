@@ -29,6 +29,7 @@ import seedu.doist.model.TodoList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.testutil.TestUtil;
 import seedu.doist.testutil.TypicalTestTasks;
+import seedu.doist.ui.util.CommandHighlightManager;
 
 /**
  * A GUI Test class for Doist
@@ -129,6 +130,22 @@ public abstract class DoistGUITest {
             for (String text : contentAssistItemTexts) {
                 assertTrue(text.contains((CharSequence) lastWord.subSequence(0, lastWord.length())));
             }
+        }
+    }
+
+    protected void assertCorrectHighlight() {
+        List<String> wordsInKeyStyle =
+                commandBox.getWordListWithStyle(CommandHighlightManager.PARAMETER_KEY_STYLE);
+        for (String word : wordsInKeyStyle) {
+            assertTrue(word.startsWith("\\"));
+        }
+
+        List<String> wordsInCommandWordStyle =
+                commandBox.getWordListWithStyle(CommandHighlightManager.COMMAND_WORD_STYLE);
+        assertTrue(wordsInCommandWordStyle.size() <= 1);
+        if (wordsInCommandWordStyle.size() == 1) {
+            String firstWord = commandBox.getCommandInput().split(" +")[0];
+            assertTrue(wordsInCommandWordStyle.get(0).equals(firstWord));
         }
     }
     //@@author
