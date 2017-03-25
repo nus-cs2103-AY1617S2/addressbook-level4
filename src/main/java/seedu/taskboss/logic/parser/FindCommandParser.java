@@ -27,7 +27,7 @@ public class FindCommandParser {
 
     private static final int INDEX_TIME_START_POSITION = 13;
     private static final int INDEX_MONTH_START_POSITION = 0;
-    private static final int INDEX_MONTH_END_POSITION = 3;
+    private static final int INDEX_MONTH_END_POSITION = 2;
 
     private static final String prefixStartDate = PREFIX_START_DATE.getPrefix();
     private static final String prefixEndDate = PREFIX_END_DATE.getPrefix();
@@ -86,7 +86,7 @@ public class FindCommandParser {
                     // user only enters month
                     } else if (!keywords.trim().contains(WHITESPACE)) {
                         String extractedKeywords = parsedFormattedDateTime.value
-                              .substring(INDEX_MONTH_START_POSITION, INDEX_MONTH_END_POSITION);
+                              .substring(INDEX_MONTH_START_POSITION, INDEX_MONTH_END_POSITION + 1);
                         keywords = extractedKeywords;
                     // user enters date with or without time
                     } else {
