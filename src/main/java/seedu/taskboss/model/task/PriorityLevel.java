@@ -30,7 +30,7 @@ public class PriorityLevel {
 
         String trimmedPriorityLevel = priorityLevel.trim();
 
-        if ("".equals(priorityLevel)) {
+        if (priorityLevel.equals("")) {
             this.value = PRIORITY_NO_VALUE;
             this.input = "No";
         } else {
