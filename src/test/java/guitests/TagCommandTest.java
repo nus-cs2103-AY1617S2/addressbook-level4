@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -19,6 +20,28 @@ public class TagCommandTest extends ToLuistGuiTest {
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
         task.addTag(new Tag(tagName));
         String command = "tag 1 " + tagName;
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+    }
+
+    @Test
+    public void addTag_MultipleTags() {
+        String tagName = "aTag";
+        String tagName2 = "bTag";
+        Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
+        task.addTag(new Tag(tagName));
+        task.addTag(new Tag(tagName2));
+        String command = " taG 1 " + tagName + " " + tagName2;
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+    }
+
+    @Test
+    public void addTag_MultipleTagsWithDuplicate() {
+        String tagName = "aTag";
+        Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
+        task.addTag(new Tag(tagName));
+        String command = " taG 1 " + tagName + " " + tagName;
         commandBox.runCommand(command);
         assertTrue(isTaskShown(task));
     }

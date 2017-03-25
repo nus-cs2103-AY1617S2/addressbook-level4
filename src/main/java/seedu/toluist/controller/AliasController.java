@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.controller;
 
 import java.util.HashMap;
@@ -12,21 +13,21 @@ import seedu.toluist.ui.commons.CommandResult;
  * Alias Controller is responsible for handling alias requests
  */
 public class AliasController extends Controller {
-    public static final String ALIAS_TERM = "alias";
-    public static final String COMMAND_TERM = "command";
+    public static final String PARAMETER_ALIAS = "alias";
+    public static final String PARAMETER_COMMAND = "command";
     public static final String COMMAND_WORD = "alias";
 
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s for %s was added";
     private static final String RESULT_MESSAGE_FAILURE = "Alias %s for %s could not be added";
     public static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
-    private static final String COMMAND_TEMPLATE = "alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
+    private static final String COMMAND_TEMPLATE = "(?iu)\\s*alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public void execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
-        String alias = tokens.get(ALIAS_TERM);
-        String commandPhrase = tokens.get(COMMAND_TERM);
+        String alias = tokens.get(PARAMETER_ALIAS);
+        String commandPhrase = tokens.get(PARAMETER_COMMAND);
 
         if (aliasConfig.isReservedWord(alias)) {
             uiStore.setCommandResult(
@@ -48,8 +49,8 @@ public class AliasController extends Controller {
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(ALIAS_TERM, matcher.group(ALIAS_TERM));
-        tokens.put(COMMAND_TERM, matcher.group(COMMAND_TERM));
+        tokens.put(PARAMETER_ALIAS, matcher.group(PARAMETER_ALIAS));
+        tokens.put(PARAMETER_COMMAND, matcher.group(PARAMETER_COMMAND));
         return tokens;
     }
 

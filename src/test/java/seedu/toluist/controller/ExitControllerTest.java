@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.controller;
 
 import static junit.framework.TestCase.assertFalse;
@@ -27,7 +28,7 @@ public class ExitControllerTest extends ControllerTest {
         assertTrue(controller.matchesCommand("exit "));
         assertTrue(controller.matchesCommand("exit"));
         assertTrue(controller.matchesCommand("quit"));
-        assertFalse(controller.matchesCommand(" quit"));
+        assertTrue(controller.matchesCommand(" quit"));
     }
 
     @Test

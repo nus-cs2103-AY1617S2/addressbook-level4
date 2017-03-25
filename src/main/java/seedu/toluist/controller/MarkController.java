@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
@@ -25,21 +26,22 @@ import seedu.toluist.ui.commons.CommandResult;
 public class MarkController extends Controller {
     private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "%s %s marked completed";
     private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "%s %s marked incomplete";
-    private static final String COMMAND_TEMPLATE = "mark(\\s+(?<markType>(complete|incomplete)))?(?<index>.*)?\\s*";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*mark(\\s+(?<markType>(complete|incomplete)))" +
+            "?(?<index>.*)?\\s*";
     private static final String COMMAND_WORD = "mark";
 
-    private static final String MARK_TERM = "markType";
-    private static final String INDEX_TERM = "index";
-    private static final String MARK_COMPLETE = "complete";
-    private static final String MARK_INCOMPLETE = "incomplete";
+    private static final String PARAMETER_MARK = "markType";
+    private static final String PARAMETER_INDEX = "index";
+    private static final String PARAMETER_MARK_COMPLETE = "complete";
+    private static final String PARAMETER_MARK_INCOMPLETE = "incomplete";
     private static final Logger logger = LogsCenter.getLogger(MarkController.class);
 
     public void execute(String command) {
         logger.info(getClass().toString() + " will handle command");
 
         HashMap<String, String> tokens = tokenize(command);
-        String indexToken = tokens.get(INDEX_TERM);
-        String markTypeToken = tokens.get(MARK_TERM);
+        String indexToken = tokens.get(PARAMETER_INDEX);
+        String markTypeToken = tokens.get(PARAMETER_MARK);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken,
                 UiStore.getInstance().getShownTasks().size());
 
@@ -49,7 +51,7 @@ public class MarkController extends Controller {
         }
 
         CommandResult commandResult;
-        if (Objects.equals(markTypeToken, MARK_INCOMPLETE)) {
+        if (Objects.equals(markTypeToken, PARAMETER_MARK_INCOMPLETE)) {
             commandResult = mark(indexes, false);
         } else {
             commandResult = mark(indexes, true);
@@ -81,8 +83,8 @@ public class MarkController extends Controller {
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(MARK_TERM, matcher.group(MARK_TERM));
-        tokens.put(INDEX_TERM, matcher.group(INDEX_TERM));
+        tokens.put(PARAMETER_MARK, matcher.group(PARAMETER_MARK));
+        tokens.put(PARAMETER_INDEX, matcher.group(PARAMETER_INDEX));
         return tokens;
     }
 

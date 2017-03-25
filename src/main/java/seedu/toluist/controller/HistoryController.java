@@ -1,3 +1,4 @@
+//@@author A0162011A
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class HistoryController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(ClearController.class);
     private static final String RESULT_MESSAGE = "%s\n%s displayed.";
     private static final String COMMAND_WORD = "history";
-    private static final String COMMAND_REGEX = "^history\\s*";
+    private static final String COMMAND_REGEX = "(?iu)^\\s*history\\s*";
 
     private ArrayList<String> commandHistory;
 

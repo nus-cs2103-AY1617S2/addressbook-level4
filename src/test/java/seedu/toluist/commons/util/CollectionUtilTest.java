@@ -85,6 +85,7 @@ public class CollectionUtilTest {
         CollectionUtil.isAnyNull((Collection<Object>) null);
     }
 
+    //@@author A0131125Y
     @Test
     public void isAnyPresent() throws Exception {
         // no arguments
@@ -105,6 +106,7 @@ public class CollectionUtilTest {
         assertTrue(CollectionUtil.isAnyPresent(Optional.empty(), Optional.empty(), Optional.of(true)));
     }
 
+    //@@author
     @Test
     public void elementsAreUnique() throws Exception {
         // empty list
@@ -130,6 +132,7 @@ public class CollectionUtilTest {
         assertNotUnique(null, "a", "b", null);
     }
 
+    //@@author A0131125Y
     @Test
     public void elementsAreSimilar() {
         // empty collections
@@ -160,6 +163,7 @@ public class CollectionUtilTest {
         assertEquals(CollectionUtil.toString("-", Arrays.asList("a", "b")), "a-b");
     }
 
+    //@@author
     private void assertAreUnique(Object... objects) {
         assertTrue(CollectionUtil.elementsAreUnique(Arrays.asList(objects)));
     }

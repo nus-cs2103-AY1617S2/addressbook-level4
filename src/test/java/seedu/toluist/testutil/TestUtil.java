@@ -46,6 +46,7 @@ public class TestUtil {
         return SANDBOX_FOLDER + fileName;
     }
 
+    //@@author A0131125Y
     /**
      * Clear all files in the sandbox folder
      * Creates the sandbox folder if it doesn't exist.
@@ -85,6 +86,22 @@ public class TestUtil {
     }
 
     /**
+     * Reset the instance for a singleton class
+     * @param klass The singleton class to reset the instance
+     * @throws SecurityException
+     * @throws NoSuchFieldException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     */
+    public static void resetSingleton(Class klass) throws SecurityException, NoSuchFieldException,
+            IllegalArgumentException, IllegalAccessException {
+        Field instance = klass.getDeclaredField("instance");
+        instance.setAccessible(true);
+        instance.set(null, null);
+    }
+
+    //@@author
+    /**
      * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
      * respective platform-specific keycodes
      */
@@ -117,21 +134,6 @@ public class TestUtil {
         Method method = objectClass.getDeclaredMethod(methodName);
         method.setAccessible(true);
         return method;
-    }
-
-    /**
-     * Reset the instance for a singleton class
-     * @param klass The singleton class to reset the instance
-     * @throws SecurityException
-     * @throws NoSuchFieldException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     */
-    public static void resetSingleton(Class klass) throws SecurityException, NoSuchFieldException,
-            IllegalArgumentException, IllegalAccessException {
-        Field instance = klass.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(null, null);
     }
 
     /**

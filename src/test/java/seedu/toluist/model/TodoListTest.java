@@ -1,3 +1,4 @@
+//@@author A0127545A
 package seedu.toluist.model;
 
 import static org.junit.Assert.assertEquals;
@@ -24,6 +25,7 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
  * Tests for TodoList model
  */
 public class TodoListTest {
+    //@@author A0131125Y
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
@@ -64,6 +66,7 @@ public class TodoListTest {
         assertEquals(TodoList.getInstance(), TodoList.getInstance());
     }
 
+    //@@author A0127545A
     @Test
     public void testEquals() {
         TodoList todoList2 = new TodoList();
