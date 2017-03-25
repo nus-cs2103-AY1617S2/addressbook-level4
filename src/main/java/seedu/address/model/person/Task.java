@@ -9,8 +9,8 @@ public class Task implements ReadOnlyTask {
 
     private Description description;
     private Priority priority;
-    private ByDate bydate;
-    private ByTime bytime;
+    private ByDate byDate;
+    private ByTime byTime;
     private Location location;
 
     private UniqueTagList tags;
@@ -18,13 +18,13 @@ public class Task implements ReadOnlyTask {
     /**
      * Description and Priority must be present.
      */
-    public Task(Description description, Priority priority, ByDate bydate, ByTime bytime,
+    public Task(Description description, Priority priority, ByTime byTime, ByDate byDate,
             Location location, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, priority, tags);
         this.description = description;
         this.priority = priority;
-        this.bydate = bydate;
-        this.bytime = bytime;
+        this.byTime = byTime;
+        this.byDate = byDate;
         this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -33,8 +33,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getPriority(), source.getByDate(),
-                source.getByTime(), source.getLocation(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getByTime(),
+                source.getByDate(), source.getLocation(), source.getTags());
     }
 
     public void setDescription(Description description) {
@@ -55,24 +55,23 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public void setByDate(ByDate bydate) {
-        assert bydate != null;
-        this.bydate = bydate;
-    }
-
-    @Override
-    public ByDate getByDate() {
-        return bydate;
-    }
-
-    public void setByTime(ByTime bytime) {
-        //can be null
-        this.bytime = bytime;
+    public void setByTime(ByTime byTime) {
+        this.byTime = byTime;
     }
 
     @Override
     public ByTime getByTime() {
-        return bytime;
+        return byTime;
+    }
+    
+    public void setByDate(ByDate byDate) {
+        assert byDate != null;
+        this.byDate = byDate;
+    }
+
+    @Override
+    public ByDate getByDate() {
+        return byDate;
     }
 
     public void setLocation(Location location) {
@@ -120,7 +119,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, bydate, bytime, location, tags);
+        return Objects.hash(description, byDate, byTime, location, tags);
     }
 
     @Override

@@ -3,8 +3,9 @@ package seedu.address.model.person;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+//@@author A0148038A
 /**
- * Represents an Activity's location in WhatsLeft.
+ * Represents an activity's location in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
  */
 public class Location {

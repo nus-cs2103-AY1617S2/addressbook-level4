@@ -1,11 +1,12 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
-
+//@@author A0148038A
 /**
  * Represents an event's start date in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidStartDate(String)}
@@ -13,7 +14,7 @@ import seedu.address.commons.util.StringUtil;
 public class StartDate {
 	
 	public static final String MESSAGE_STARTDATE_CONSTRAINTS =
-            "Event start date should be in YYYY-MM-DD format e.g. 2010-12-05";
+            "Event End Date can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
 
     public final LocalDate value;
 
@@ -25,11 +26,24 @@ public class StartDate {
     public StartDate(String startDateArg) throws IllegalValueException {
         try {
         	this.value = StringUtil.parseStringToDate(startDateArg);
-        } catch (IllegalValueException illegalValueException) {
+        } catch (DateTimeException illegalValueException) {
         	throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
     }
 
+    //@@author A0121668A
+    /*
+     * for JAXB use
+     */
+    public StartDate(LocalDate startDate) {
+        value = startDate;
+    }
+   
+    public LocalDate getValue() {
+        return value;
+    }
+    
+    //@@author A0148038A
     @Override
     public String toString() {
         return value.toString();
@@ -46,5 +60,9 @@ public class StartDate {
     public int hashCode() {
         return value.hashCode();
     }
+    
+	public int compareTo(StartDate o) {
+    	return this.getValue().compareTo(o.getValue());
+	}
 
 }

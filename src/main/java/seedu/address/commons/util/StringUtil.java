@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -10,19 +11,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.ByDate;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
-//@@author  A0121668A
+
+	//@@author  A0121668A
     public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments can only be in this format: "
-                            + "HH:MM(AM/PM) format, e.g. 12:00pm";
+                            + "HHMM format, e.g. 1200";
     public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments can take only 6 digits, "
                             + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417";
     public static final int YEAR_CONVERSION_INDEX = 2000;
-//@@author
+    
+    public static final String DATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
+    
+    //@@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -61,20 +65,20 @@ public class StringUtil {
         return t.getMessage() + "\n" + sw.toString();
     }
 
-//@@author A0121668A
+    //@@author A0121668A
     /**
      * Parse a String argument into date format.
      * @param dateArg
      * @return time in localTime format
-     * @throws IllegalValueException
+     * @throws DateTimeException
      */
-    public static LocalTime parseStringToTime(String timeString) throws IllegalValueException {
+    public static LocalTime parseStringToTime(String timeString) throws DateTimeException {
         //empty start date
-        if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
-        return LocalTime.parse(timeString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+        if (timeString == null) throw new DateTimeException(TIME_FORMAT_CONSTRAINTS);
+        return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHMM"));
     }
-
-//@@author A0148038A
+    
+//    //@@author A0148038A
 //    /**
 //     * Parse a String argument into date format.
 //     * @param dateArg
@@ -87,28 +91,22 @@ public class StringUtil {
 //        return LocalDate.parse(dateString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
 //    }
 
-//@@author A0121668A
+    //@@author A0121668A
     /**
      * Parse a String argument into date format.
      * @param dateString
      * @return time in LocalDate format
-     * @throws IllegalValueException
+     * @throws DateTimeException
      */
 
-    public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
+    public static LocalDate parseStringToDate(String dateString) throws DateTimeException {
         //empty start date
-        if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
-        Pattern pattern = Pattern.compile(ByDate.BYDATE_VALIDATION_REGEX);
-        Matcher matchers = pattern.matcher(dateString);
-        matchers.matches();
-        int day = Integer.parseInt(matchers.group(1));
-        int month = Integer.parseInt(matchers.group(2));
-        int year = Integer.parseInt(matchers.group(3));
-        year += YEAR_CONVERSION_INDEX;
-
-        return LocalDate.of(year, month, day);
+        if (dateString == null) throw new DateTimeException(DATE_FORMAT_CONSTRAINTS);
+        return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("ddMMyy"));
+            
     }
-//@@author
+    
+    //@@author
     /**
      * Returns true if s represents an unsigned integer e.g. 1, 2, 3, ... <br>
      * Will return false if the string is:
@@ -118,4 +116,5 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+    
 }

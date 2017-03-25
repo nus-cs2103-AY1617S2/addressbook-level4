@@ -12,8 +12,10 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyWhatsLeft;
-import seedu.address.model.person.Activity;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.Event;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,7 +25,9 @@ import seedu.address.model.tag.Tag;
 public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
 
     @XmlElement
-    private List<XmlAdaptedActivity> activities;
+    private List<XmlAdaptedTask> tasks;
+    @XmlElement
+    private List<XmlAdaptedEvent> events;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -32,7 +36,8 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableWhatsLeft() {
-        activities = new ArrayList<>();
+        tasks = new ArrayList<>();
+        events = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -41,13 +46,14 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
      */
     public XmlSerializableWhatsLeft(ReadOnlyWhatsLeft src) {
         this();
-        activities.addAll(src.getActivityList().stream().map(XmlAdaptedActivity::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        events.addAll(src.getEventList().stream().map(XmlAdaptedEvent::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyActivity> getActivityList() {
-        final ObservableList<Activity> persons = this.activities.stream().map(p -> {
+    public ObservableList<ReadOnlyTask> getTaskList() {
+        final ObservableList<Task> taskList = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -56,7 +62,21 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(persons);
+        return new UnmodifiableObservableList<>(taskList);
+    }
+    
+    @Override
+    public ObservableList<ReadOnlyEvent> getEventList() {
+        final ObservableList<Event> eventList = this.events.stream().map(p -> {
+            try {
+                return p.toModelType();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+                //TODO: better error handling
+                return null;
+            }
+        }).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        return new UnmodifiableObservableList<>(eventList);
     }
 
     @Override

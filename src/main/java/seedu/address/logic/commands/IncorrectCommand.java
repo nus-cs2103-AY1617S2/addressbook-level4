@@ -15,6 +15,7 @@ public class IncorrectCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        model.storePreviousCommand("");
         throw new CommandException(feedbackToUser);
     }
 

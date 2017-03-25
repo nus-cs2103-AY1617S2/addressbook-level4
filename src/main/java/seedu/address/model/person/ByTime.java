@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -13,44 +14,46 @@ import seedu.address.commons.util.StringUtil;
 public class ByTime {
 
     public static final String MESSAGE_BYTIME_CONSTRAINTS =
-            "Deadline ByTime can only be in this format: HH:MM(AM/PM) format, e.g. 12:00pm";
-
-    /*
-     * must be in digits only
-     *
-     */
-    public static final String BYTIME_VALIDATION_REGEX = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
+            "Deadline ByTime can only be in this format: hhmm, e.g. 1300";
 
     public final LocalTime value;
-//@@author A0110491U A0121668A
+
+    //@@author A0110491U A0121668A
     /**
-     * Validates given ByTime.
+     * Validates given start time.
      *
-     * @throws IllegalValueException if given ByTime string is invalid.
+     * @throws IllegalValueException if given start time is invalid.
      */
-    public ByTime(String byTime) throws IllegalValueException {
-        if (byTime == null) {
+    public ByTime(String byTimeArg) throws IllegalValueException {
+        if (byTimeArg == null) {
             this.value = null;
-        } else {
-            if (!isValidByTime(byTime)) {
+        } 
+        else {
+            try {
+                this.value = StringUtil.parseStringToTime(byTimeArg);
+            } catch (DateTimeException illegalValueException) {
                 throw new IllegalValueException(MESSAGE_BYTIME_CONSTRAINTS);
+                }
             }
-            this.value = StringUtil.parseStringToTime(byTime);
         }
-    }
-//@@author A0121668A
+
+    //@@author A0121668A
     /**
-     * Returns true if a given string is a valid deadline ByTime.
+     * For JAXB use
      */
-    public static boolean isValidByTime(String test) {
-        if (test == null) {
-            return true;
+    public ByTime(LocalTime bytime) {
+            value = bytime;
         }
-        return test.matches(BYTIME_VALIDATION_REGEX);
+    
+    public LocalTime getValue() {
+        return value;
     }
-//@@author
+
     @Override
     public String toString() {
+        if (value == null) {
+            return null;
+        }
         return value.toString();
     }
 
@@ -65,5 +68,9 @@ public class ByTime {
     public int hashCode() {
         return value.hashCode();
     }
-
+    
+    //@@author A0148038A
+  	public int compareTo(ByTime o) {
+  		return this.getValue().compareTo(o.getValue());
+  	}
 }

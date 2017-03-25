@@ -1,32 +1,40 @@
 package seedu.address.model.person;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
-public class Event implements ReadOnlyEvent {
+//@@author A0148038A
+/**
+ * Represents an event in WhatsLeft
+ */
+public class Event implements ReadOnlyEvent{
 
     private Description description;
-    private StartDate startdate;
-    private EndDate enddate;
-    private StartTime starttime;
-    private EndTime endtime;
+    private StartTime startTime;
+    private StartDate startDate;
+    private EndTime endTime;
+    private EndDate endDate;
     private Location location;
 
     private UniqueTagList tags;
 
     /**
-     * Description must be present, StartDate must be present.
+     * Description and start date must be present and not null.
      */
-    public Event(Description description, StartDate startdate, EndDate enddate,
-            StartTime starttime, EndTime endtime, Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, startdate);
+    public Event(Description description, StartTime startTime, StartDate startDate,
+    		EndTime endTime, EndDate endDate, Location location, UniqueTagList tags) {
+    	
+    	//check description and start date are present
+        assert !CollectionUtil.isAnyNull(description, startDate);
+        
         this.description = description;
-        this.startdate = startdate;
-        this.enddate = enddate;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.startTime = startTime;
+        this.startDate = startDate;
+        this.endTime = endTime;
+        this.endDate = endDate;
         this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -35,12 +43,12 @@ public class Event implements ReadOnlyEvent {
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getDescription(), source.getStartDate(), source.getEndDate(), source.getStartTime(),
-                source.getEndTime(), source.getLocation(), source.getTags());
+        this(source.getDescription(), source.getStartTime(), source.getStartDate(),
+        		source.getEndTime(), source.getEndDate(), source.getLocation(), source.getTags());
     }
 
     public void setDescription(Description description) {
-        assert description != null;
+        assert description != null; // description must be present
         this.description = description;
     }
 
@@ -48,47 +56,45 @@ public class Event implements ReadOnlyEvent {
     public Description getDescription() {
         return description;
     }
-
-    public void setStartDate(StartDate startdate) {
-        assert startdate != null;
-        this.startdate = startdate;
-    }
-
-    @Override
-    public StartDate getStartDate() {
-        return startdate;
-    }
-
-    public void setEndDate(EndDate enddate) {
-        this.enddate = enddate;
-    }
-
-    @Override
-    public EndDate getEndDate() {
-        return enddate;
-    }
-
-    public void setStartTime(StartTime starttime) {
-        //can be null
-        this.starttime = starttime;
+    
+    public void setStartTime(StartTime startTime) {
+        this.startTime = startTime;
     }
 
     @Override
     public StartTime getStartTime() {
-        return starttime;
+        return startTime;
     }
 
-    public void setEndTime(EndTime endtime) {
-        //can be null
-        this.endtime = endtime;
+    public void setStartDate(StartDate startDate) {
+        assert startDate != null; // start date must be present
+        this.startDate = startDate;
+    }
+
+    @Override
+    public StartDate getStartDate() {
+        return startDate;
+    }
+    
+    public void setEndTime(EndTime endTime) {
+        this.endTime = endTime;
     }
 
     @Override
     public EndTime getEndTime() {
-        return endtime;
+        return endTime;
     }
+
+    public void setEndDate(EndDate endDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public EndDate getEndDate() {
+        return endDate;
+    }
+
     public void setLocation(Location location) {
-        //can be null
         this.location = location;
     }
 
@@ -116,10 +122,10 @@ public class Event implements ReadOnlyEvent {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
-        this.setStartDate(replacement.getStartDate());
-        this.setEndDate(replacement.getEndDate());
         this.setStartTime(replacement.getStartTime());
+        this.setStartDate(replacement.getStartDate());
         this.setEndTime(replacement.getEndTime());
+        this.setEndDate(replacement.getEndDate());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
@@ -134,12 +140,27 @@ public class Event implements ReadOnlyEvent {
     @Override
     public int hashCode() {
         // use this method for custend fields hashing instead of implementing your own
-        return Objects.hash(description, startdate, enddate, starttime, endtime, location, tags);
+        return Objects.hash(description, startTime, startDate, endTime, endDate, location, tags);
     }
 
     @Override
     public String toString() {
         return getAsText();
     }
-
+ 
+	public static Comparator<? super Event> getComparator() {
+		// sort by start date first
+		Comparator<Event> byStartDate = (e1, e2) -> e1.getStartDate().compareTo(e2.getStartDate());
+				
+		// then sort by start time
+		Comparator<Event> byStartTime = (e1, e2) -> e1.getStartTime().compareTo(e2.getStartTime());
+		
+		// then sort by end date
+		Comparator<Event> byEndDate = (e1, e2) -> e1.getEndDate().compareTo(e2.getEndDate());
+		
+		// then sort by end time
+		Comparator<Event> byEndTime = (e1, e2) -> e1.getEndTime().compareTo(e2.getEndTime());
+				
+		return byStartDate.thenComparing(byStartTime).thenComparing(byEndDate).thenComparing(byEndTime);
+	}
 }

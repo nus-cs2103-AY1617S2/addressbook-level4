@@ -6,8 +6,12 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.person.ByDate;
+import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
+import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
@@ -74,35 +78,44 @@ public class EditCommand extends Command {
         List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
         if (type.equals("ev")) {
             if (filteredActivityListIndex >= lastShownEventList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
             }
 
             ReadOnlyEvent eventToEdit = lastShownEventList.get(filteredActivityListIndex);
             Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
             try {
+                //store for undo operation
+                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+                ModelManager.setPreviousState(currState);
                 model.updateEvent(filteredActivityListIndex, editedEvent);
             } catch (UniqueEventList.DuplicateEventException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_EVENT);
             }
             model.updateFilteredListToShowAll();
+            model.storePreviousCommand("edit");
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, eventToEdit));
         }
 
         if (type.equals("ts")) {
             if (filteredActivityListIndex >= lastShownTaskList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredActivityListIndex);
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             try {
+                //store for undo operation
+                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+                ModelManager.setPreviousState(currState);
                 model.updateTask(filteredActivityListIndex, editedTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
             model.updateFilteredListToShowAll();
+            model.storePreviousCommand("edit");
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
         }
+        return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
     }
 
@@ -117,13 +130,12 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(
             taskToEdit::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        EndTime updatedByTime = editTaskDescriptor.getByTime().orElseGet(taskToEdit::getByTime);
+        ByTime updatedByTime = editTaskDescriptor.getByTime().orElseGet(taskToEdit::getByTime);
         ByDate updatedByDate = editTaskDescriptor.getByDate().orElseGet(taskToEdit::getByDate);
         Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedDescription, updatedPriority, updatedByDate,
-                updatedByTime, updatedLocation, updatedTags);
+        return new Task(updatedDescription, updatedPriority, updatedByTime, updatedByDate, updatedLocation, updatedTags);
     }
 
     /**
@@ -143,8 +155,8 @@ public class EditCommand extends Command {
         Location updatedLocation = editEventDescriptor.getLocation().orElseGet(eventToEdit::getLocation);
         UniqueTagList updatedTags = editEventDescriptor.getTags().orElseGet(eventToEdit::getTags);
 
-        return new Event(updatedDescription, updatedStartDate, updatedEndDate,
-                updatedStartTime, updatedEndTime, updatedLocation, updatedTags);
+        return new Event(updatedDescription, updatedStartTime, updatedStartDate,
+        		updatedEndTime, updatedEndDate, updatedLocation, updatedTags);
     }
     /**
      * Stores the details to edit the activity with. Each non-empty field value will replace the
@@ -152,10 +164,10 @@ public class EditCommand extends Command {
      */
     public static class EditEventDescriptor {
         private Optional<Description> description = Optional.empty();
-        private Optional<StartTime> starttime = Optional.empty();
-        private Optional<StartDate> startdate = Optional.empty();
-        private Optional<EndTime> endtime = Optional.empty();
-        private Optional<EndDate> enddate = Optional.empty();
+        private Optional<StartTime> startTime = Optional.empty();
+        private Optional<StartDate> startDate = Optional.empty();
+        private Optional<EndTime> endTime = Optional.empty();
+        private Optional<EndDate> endDate = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -163,10 +175,10 @@ public class EditCommand extends Command {
 
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             this.description = toCopy.getDescription();
-            this.starttime = toCopy.getStartTime();
-            this.startdate = toCopy.getStartDate();
-            this.endtime = toCopy.getEndTime();
-            this.enddate = toCopy.getToDate();
+            this.startTime = toCopy.getStartTime();
+            this.startDate = toCopy.getStartDate();
+            this.endTime = toCopy.getEndTime();
+            this.endDate = toCopy.getEndDate();
             this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
@@ -175,8 +187,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.starttime, this.endtime,
-                    this.startdate, this.enddate, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.startTime, this.endTime,
+                    this.startDate, this.endDate, this.location, this.tags);
         }
 
         public void setDescription(Optional<Description> description) {
@@ -188,36 +200,36 @@ public class EditCommand extends Command {
             return description;
         }
 
-        public void setStartTime(Optional<StartTime> starttime) {
-            this.starttime = starttime;
+        public void setStartTime(Optional<StartTime> startTime) {
+            this.startTime = startTime;
         }
 
         public Optional<StartTime> getStartTime() {
-            return starttime;
+            return startTime;
         }
 
-        public void setStartDate(Optional<StartDate> startdate) {
-            this.startdate = startdate;
+        public void setStartDate(Optional<StartDate> startDate) {
+            this.startDate = startDate;
         }
 
         public Optional<StartDate> getStartDate() {
-            return startdate;
+            return startDate;
         }
 
-        public void setEndTime(Optional<EndTime> endtime) {
-            this.endtime = endtime;
+        public void setEndTime(Optional<EndTime> endTime) {
+            this.endTime = endTime;
         }
 
         public Optional<EndTime> getEndTime() {
-            return endtime;
+            return endTime;
         }
 
-        public void setEndDate(Optional<EndDate> enddate) {
-            this.enddate = enddate;
+        public void setEndDate(Optional<EndDate> endDate) {
+            this.endDate = endDate;
         }
 
         public Optional<EndDate> getEndDate() {
-            return enddate;
+            return endDate;
         }
 
         public void setLocation(Optional<Location> location) {
@@ -245,8 +257,8 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Description> description = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
-        private Optional<ByDate> bydate = Optional.empty();
-        private Optional<ByTime> bytime = Optional.empty();
+        private Optional<ByDate> byDate = Optional.empty();
+        private Optional<ByTime> byTime = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -255,8 +267,8 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.description = toCopy.getDescription();
             this.priority = toCopy.getPriority();
-            this.bydate = toCopy.getByDate();
-            this.bytime = toCopy.getByTime();
+            this.byDate = toCopy.getByDate();
+            this.byTime = toCopy.getByTime();
             this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
@@ -266,7 +278,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.description,
-                    this.bydate, this.bytime, this.priority, this.location, this.tags);
+                    this.byDate, this.byTime, this.priority, this.location, this.tags);
         }
 
         public void setDescription(Optional<Description> description) {
@@ -278,20 +290,20 @@ public class EditCommand extends Command {
             return description;
         }
 
-        public void setByTime(Optional<ByTime> bytime) {
-            this.bytime = bytime;
+        public void setByTime(Optional<ByTime> byTime) {
+            this.byTime = byTime;
         }
 
         public Optional<ByTime> getByTime() {
-            return bytime;
+            return byTime;
         }
 
-        public void setByDate(Optional<ByDate> bydate) {
-            this.bydate = bydate;
+        public void setByDate(Optional<ByDate> byDate) {
+            this.byDate = byDate;
         }
 
         public Optional<ByDate> getByDate() {
-            return bydate;
+            return byDate;
         }
 
         public void setPriority(Optional<Priority> priority) {

@@ -14,19 +14,21 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.commons.events.ui.ActivityPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.EventPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
+//@@author A0148038A
 /**
  * The manager of the UI component.
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/WhatsLeft.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -116,13 +118,18 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getActivityListPanel().scrollTo(event.targetIndex);
+        mainWindow.getEventListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handleActivityPanelSelectionChangedEvent(ActivityPanelSelectionChangedEvent event) {
+    private void handleEventPanelSelectionChangedEvent(EventPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadActivityPage(event.getNewSelection());
+        mainWindow.loadEventPage(event.getNewSelection());
     }
-
+    
+    @Subscribe
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.loadTaskPage(event.getNewSelection());
+    }
 }

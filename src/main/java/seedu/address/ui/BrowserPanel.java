@@ -6,8 +6,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 
+//@@author A0148038A
 /**
  * The Browser Panel of the App.
  */
@@ -29,11 +31,20 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadActivityPage(ReadOnlyActivity activity) {
-        if (activity.getLocation().value != null) {
-            loadPage("https://www.google.com.sg/maps/search/" + activity.getLocation().value.replaceAll(" ", "+"));
+    public void loadEventPage(ReadOnlyEvent event) {
+        if (event.getLocation().value != null) {
+            loadPage("https://www.google.com.sg/maps/search/" + event.getLocation().value.replaceAll(" ", "+"));
         } else {
-            loadPage("https://www.google.com.sg/#safe=off&q=" + activity.getDescription().description
+            loadPage("https://www.google.com.sg/#safe=off&q=" + event.getDescription().description
+                    .replaceAll(" ", "+"));
+        }
+    }
+    
+    public void loadTaskPage(ReadOnlyTask task) {
+        if (task.getLocation().value != null) {
+            loadPage("https://www.google.com.sg/maps/search/" + task.getLocation().value.replaceAll(" ", "+"));
+        } else {
+            loadPage("https://www.google.com.sg/#safe=off&q=" + task.getDescription().description
                     .replaceAll(" ", "+"));
         }
     }
