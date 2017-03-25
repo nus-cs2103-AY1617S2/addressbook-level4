@@ -38,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final EzDo ezDo;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final UserPrefs userPrefs;
 
     private SortCriteria currentSortCriteria;
 
@@ -53,6 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with ezDo: " + ezDo + " and user prefs " + userPrefs);
 
         this.ezDo = new EzDo(ezDo);
+        this.userPrefs = userPrefs;
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
         currentSortCriteria = userPrefs.getSortCriteria();
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
@@ -75,6 +77,9 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyEzDo getEzDo() {
         return ezDo;
     }
+
+    @Override
+    public UserPrefs getUserPrefs() { return userPrefs; }
 
     /** Raises an event to indicate the model has changed */
     private void indicateEzDoChanged() {

@@ -24,6 +24,9 @@ public interface Model {
     /** Returns the EzDo */
     ReadOnlyEzDo getEzDo();
 
+    /** Returns the UserPrefs */
+    UserPrefs getUserPrefs();
+
     void sortTasks(SortCriteria sortCriteria);
 
     /** Deletes the given task. */
