@@ -14,11 +14,13 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
+import guitests.guihandles.CommandAutoCompleteViewHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TabBarViewHandle;
 import guitests.guihandles.TaskListHandle;
+
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -48,6 +50,7 @@ public abstract class ToLuistGuiTest {
     protected CommandBoxHandle commandBox;
     protected TaskListHandle taskList;
     protected TabBarViewHandle tabBar;
+    protected CommandAutoCompleteViewHandle commandAutoCompleteView;
 
     private Stage stage;
 
@@ -69,6 +72,7 @@ public abstract class ToLuistGuiTest {
             commandBox = mainGui.getCommandBox();
             taskList = mainGui.getTaskList();
             tabBar = mainGui.getTabBar();
+            commandAutoCompleteView = mainGui.getCommandAutoCompleteView();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();

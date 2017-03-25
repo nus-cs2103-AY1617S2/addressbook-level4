@@ -32,6 +32,10 @@
     -fx-padding: 8 1 8 1;
 }
 
+.list-view {
+    -fx-background-color: transparent;
+}
+
 .list-cell {
     -fx-background-color: transparent;
 }
@@ -48,6 +52,10 @@
 
 .text-field:focused {
     -fx-border-color: theme-primary-dark;
+}
+
+.text-field.error {
+    -fx-border-color: theme-danger;
 }
 
 .text-area {
@@ -97,16 +105,16 @@
 
 /* TASK */
 
-.task {
+.tasks .task {
     -fx-border-color: theme-secondary-text;
     -fx-border-width: 0 0 1 0;
 }
 
-.task.completed .status-text .text {
+.tasks .task.completed .status-text .text {
     -fx-strikethrough: true;
 }
 
-.task.overdue .status-text.label {
+.tasks .task.overdue .status-text.label {
     -fx-text-fill: theme-danger;
 }
 
@@ -129,3 +137,15 @@
     -fx-background-color: derive(theme-accent, -10%);
 }
 
+/* COMMAND SUGGESTION */
+
+.command-suggestions {
+    -fx-background-color: theme-background;
+    -fx-background-radius: 5;
+}
+
+.command-suggestions .command-suggestion.selected {
+    -fx-text-fill: theme-primary-dark;
+}
+
+/* COMMAND INPUT */

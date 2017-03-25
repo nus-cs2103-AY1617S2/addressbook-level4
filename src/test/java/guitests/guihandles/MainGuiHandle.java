@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package guitests.guihandles;
 
 import guitests.GuiRobot;
@@ -26,5 +27,9 @@ public class MainGuiHandle extends GuiHandle {
 
     public TabBarViewHandle getTabBar() {
         return new TabBarViewHandle(guiRobot, primaryStage);
+    }
+
+    public CommandAutoCompleteViewHandle getCommandAutoCompleteView() {
+        return new CommandAutoCompleteViewHandle(guiRobot, primaryStage);
     }
 }

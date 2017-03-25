@@ -9,13 +9,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import seedu.toluist.commons.core.Config;
-import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.AddTaskController;
 import seedu.toluist.controller.AliasController;
 import seedu.toluist.controller.ClearController;
@@ -36,12 +39,9 @@ import seedu.toluist.controller.UnknownCommandController;
 import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
-import seedu.toluist.model.AliasTable;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
-    private final EventsCenter eventsCenter = EventsCenter.getInstance();
-    private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     //@@author A0162011A
     /**
@@ -63,7 +63,7 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public void dispatch(String command) {
-        String deAliasedCommand = aliasConfig.dealias(command);
+        String deAliasedCommand = getDealiasedCommand(command);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
         Controller controller = getBestFitController(deAliasedCommand);
@@ -75,7 +75,38 @@ public class CommandDispatcher extends Dispatcher {
         controller.execute(deAliasedCommand);
     }
 
-    //@a@author A0162011A
+    public SortedSet<String> getPredictedCommands(String command) {
+        SortedSet<String> predictedCommands = new TreeSet<>();
+
+        if (!StringUtil.isPresent(command)) {
+            return predictedCommands;
+        }
+
+        String firstWordOfCommand = command.trim().split("\\s+")[0];
+
+        Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
+        for (String alias : aliasMapping.keySet()) {
+            if (StringUtil.startsWithIgnoreCase(alias, firstWordOfCommand)) {
+                String replacedCommand = command.replaceFirst(Pattern.quote(firstWordOfCommand), alias);
+                predictedCommands.add(getDealiasedCommand(replacedCommand));
+            }
+        }
+
+        for (String commandWord : getControllerKeywords()) {
+            if (StringUtil.startsWithIgnoreCase(commandWord, firstWordOfCommand)) {
+                predictedCommands.add(command.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord));
+            }
+        }
+
+        logger.info("Predicted commands: " + predictedCommands.toString());
+        return predictedCommands;
+    }
+
+    private String getDealiasedCommand(String command) {
+        String trimmedCommand = command.trim();
+        return aliasConfig.dealias(trimmedCommand);
+    }
+
     private void recordCommand(String command) {
         commandHistory.add(command);
         historyPointer = commandHistory.size();

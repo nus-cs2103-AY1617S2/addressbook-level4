@@ -2,6 +2,7 @@ package seedu.toluist.commons.util;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -148,7 +149,67 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
-    //@@author A0162011A
+    //@@ author A0131125Y
+    //---------------- Tests for replaceFirstWord ----------------------------------
+
+    @Test
+    public void replaceFirstWord_nullString() {
+        assertEquals(StringUtil.replaceFirstWord(null, "a"), null);
+    }
+
+    @Test
+    public void replaceFirstWord_nullReplacement() {
+        assertEquals(StringUtil.replaceFirstWord("word", null), "word");
+    }
+
+    @Test
+    public void replaceFirstWord_emptyString() {
+        assertEquals(StringUtil.replaceFirstWord("", "r"), "");
+    }
+
+    @Test
+    public void replaceFirstWord_emptyReplacement() {
+        assertEquals(StringUtil.replaceFirstWord("word a", ""), " a");
+    }
+
+    @Test
+    public void replaceFirstWord_nonEmptyString() {
+        assertEquals(StringUtil.replaceFirstWord("a b", "c"), "c b");
+    }
+
+    //---------------- Tests for startsWithIgnoreCase ----------------------------------
+
+    @Test
+    public void startsWithIgnoreCase_nullString() {
+        assertEquals(StringUtil.startsWithIgnoreCase(null, "a"), false);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_nullComparison() {
+        assertEquals(StringUtil.startsWithIgnoreCase("word", null), false);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_emptyString() {
+        assertEquals(StringUtil.startsWithIgnoreCase("", "r"), false);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_emptyComparison() {
+        assertEquals(StringUtil.startsWithIgnoreCase("word a", ""), true);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_sameCase() {
+        assertEquals(StringUtil.startsWithIgnoreCase("ab c ", "a"), true);
+    }
+
+    @Test
+    public void startsWithIgnoreCase_differentCase() {
+        assertEquals(StringUtil.startsWithIgnoreCase("ab c ", "A"), true);
+    }
+
+    //@@ author A0162011A
     //---------------- Tests for convertToArray --------------------------------------
 
     /*

@@ -22,6 +22,10 @@ public class TabBarView extends UiView {
 
     public TabBarView() {
         super(FXML);
+        configureBindings();
+    }
+
+    private void configureBindings() {
         UiStore store = UiStore.getInstance();
         store.bind(this, store.getObservableSwitchPredicate());
         store.bind(this, store.getObservableTasks());
