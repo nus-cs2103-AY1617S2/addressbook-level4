@@ -209,7 +209,7 @@ public class Task implements ReadOnlyTask {
     }
 
     public void setTaskEndTime(TaskTime taskEndTime) throws IllegalValueException {
-	if (this.taskStartTime == null || this.taskStartTime.compareTo(taskEndTime) <= 0) {
+	if (this.taskStartTime == null || this.taskEndTime.compareTo(taskStartTime) >= 0) {
 	    this.taskEndTime = taskEndTime;
 	} else {
 	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
