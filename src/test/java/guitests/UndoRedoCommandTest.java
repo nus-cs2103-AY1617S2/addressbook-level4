@@ -22,13 +22,13 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
         commandBox.runCommand("undo");
         TestTask[] expectedTaskList = td.getTypicalTasks();
         assertTrue(taskListPanel.isListMatching(expectedTaskList));
-        assertResultMessage(String.format(UndoCommand.MESSAGE_UNDO_SUCCESS));
+        assertResultMessage(String.format(UndoCommand.MESSAGE_UNDO_SUCCESS + taskToBeAdded.getAddCommand()));
 
         //redo
         commandBox.runCommand("redo");
         TestTask[] currentList = TestUtil.addTasksToList(td.getTypicalTasks(), td.internship);
         assertTrue(taskListPanel.isListMatching(currentList));
-        assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS));
+        assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS + taskToBeAdded.getAddCommand()));
     }
 
     /**
@@ -42,13 +42,13 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
         commandBox.runCommand("undo");
         TestTask[] expectedTaskList = td.getTypicalTasks();
         assertTrue(taskListPanel.isListMatching(expectedTaskList));
-        assertResultMessage(String.format(UndoCommand.MESSAGE_UNDO_SUCCESS));
+        assertResultMessage(String.format(UndoCommand.MESSAGE_UNDO_SUCCESS + "edit 1 Evalution Report"));
 
         //redo
         commandBox.runCommand("redo");
         expectedTaskList[0].setName(new Name("Evalution Report"));
         assertTrue(taskListPanel.isListMatching(expectedTaskList));
-        assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS));
+        assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS + "edit 1 Evalution Report"));
     }
 
     @Test
@@ -58,13 +58,13 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
         commandBox.runCommand("undo");
         TestTask[] expectedTaskList = td.getTypicalTasks();
         assertTrue(taskListPanel.isListMatching(expectedTaskList));
-        assertResultMessage(String.format(UndoCommand.MESSAGE_UNDO_SUCCESS));
+        assertResultMessage(String.format(UndoCommand.MESSAGE_UNDO_SUCCESS + "delete 6"));
 
         //redo
         commandBox.runCommand("redo");
         currentList = TestUtil.removeTaskFromList(td.getTypicalTasks(), 6);
         assertTrue(taskListPanel.isListMatching(currentList));
-        assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS));
+        assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS + "delete 6"));
 
     }
 
@@ -76,12 +76,12 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
         TestTask taskToBeAdded = td.internship;
         commandBox.runCommand(taskToBeAdded.getAddCommand());
         commandBox.runCommand("undo");
-        assertResultMessage(UndoCommand.MESSAGE_UNDO_SUCCESS);
+        assertResultMessage(UndoCommand.MESSAGE_UNDO_SUCCESS + taskToBeAdded.getAddCommand());
         commandBox.runCommand("undo");
         assertResultMessage(UndoCommand.MESSAGE_UNDO_FAILED);
 
         commandBox.runCommand("redo");
-        assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS));
+        assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS + taskToBeAdded.getAddCommand()));
         commandBox.runCommand("redo");
         assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_FAILED));
 
@@ -91,12 +91,12 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
     public void assertUndoRedoClearSuccess() {
         commandBox.runCommand("clear");
         commandBox.runCommand("undo");
-        assertResultMessage(UndoCommand.MESSAGE_UNDO_SUCCESS);
+        assertResultMessage(UndoCommand.MESSAGE_UNDO_SUCCESS + "clear");
         TestTask[] expectedTaskList = td.getTypicalTasks();
         assertTrue(taskListPanel.isListMatching(expectedTaskList));
 
         commandBox.runCommand("redo");
-        assertResultMessage(RedoCommand.MESSAGE_REDO_SUCCESS);
+        assertResultMessage(RedoCommand.MESSAGE_REDO_SUCCESS + "clear");
         assertTrue(taskListPanel.isListMatching());
     }
 }
