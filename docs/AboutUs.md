@@ -87,7 +87,7 @@ Code Written: <br>
 [[Functional Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/main/A0139747N.md)] [[Testing Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/test/A0139747N.md)]
 
 Other major contributions:<br>
-* [Did the inital refactoring from AddressBook to TaskList](https://github.com/CS2103JAN2017-W14-B1/main/pull/13)
+* Did the inital refactoring from AddressBook to TaskList [#1](https://github.com/CS2103JAN2017-W14-B1/main/pull/13)
 * Did Documentation of User and Developer guide
 
  -----
