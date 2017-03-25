@@ -12,27 +12,27 @@ By : `W13-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 1. About
 Ever had the feeling that you are forgetting to do something important? Tired of always
-forgetting events because you forgot to write it down? Docket is the application that 
+forgetting events because you forgot to write them down? Docket is the application that 
 will solve all your problems. 
 
 Docket is a simple and lightweight application that will keep track of your tasks for you.
-It will tell you if a task's due date is coming in a quick and easy to understand manner.
+It will tell you if a task's due date is coming in manner that is quick and easy to understand.
 
-In contrast to other comprenhensive task managers out there, Docket is simple and 
-straightforward. A single mode of input and a boiled down interface. Let's get started
+In contrast to other comprehensive task managers out there, Docket is simple and 
+straightforward. It has one mode of input with a boiled down interface. Let's get started
 on simplifying the way you handle tasks now.
 
 ## 2. Quick Start
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
-1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Task Manager.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
+1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+2. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
+3. Copy the file to the folder you want to use as the home folder for your Task Manager.
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
+5. Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+   Some example commands you can try:
+   * **`help`** : will open the help window.
    * **`list`** : lists all tasks
    * **`add`**` Meeting dl/15-05-2017 ds/Meeting Room 1 t/important` :
      adds a task named `Meeting` to the Task Manager.
@@ -50,6 +50,7 @@ on simplifying the way you handle tasks now.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 > * Date has to be in the format DD-MM-YYYY
+> * Time has to be in the format <INSERT TIME FORMAT HERE>
 
 ## 3.1. Viewing help : `help`
 
@@ -64,8 +65,9 @@ Format: help
 
 This command adds a task to your task list to keep track of it. 
 Enter the name, the deadline, and a brief description of the 
-task you want to keep track of.<br>
-Format: add TASKNAME [dl/DATE] [ds/DESCRIPTION] [-p]
+task you want to keep track of. There can be more than one tags 
+per task<br>
+Format: add TASKNAME [dl/DATE&TIME] [ds/DESCRIPTION] [t/TAG]
 > Tasks includes:
 > * Event tasks where deadlines include a specific timing
 > * Floating tasks where deadlines are not specified
@@ -73,22 +75,25 @@ Format: add TASKNAME [dl/DATE] [ds/DESCRIPTION] [-p]
 
 Examples:
 
-* `add Make payment dl/01/08/2017 ds/Pay credit card bills -p`
+* `add Make payment dl/01/08/2017 ds/Pay credit card bills`
 * `add Lose weight dl/from 12/12/2017 to 24/12/2017`
-* `add Performance rehearsal dl/today 10pm`
+* `add Performance rehearsal dl/today 10pm t/important t/urgent`
 * `add Complete project dl/12/12/2017`
-* `add Buy a cake`
+* `add Buy a cake t/hungry`
 
 ## 3.3. Listing all tasks: `list`
 
-Shows you a list of all tasks with an index number attached, 
-you will need this index number to use some of the tasks below.<br>
+Shows you a list of all tasks with an index number attached. 
+This index number is associated with a task as it is seen on the list. 
+You will need this index number to use some of the tasks below.<br>
 Format: list
 
 ## 3.4. View tasks : `view`
 
-Changes the different views of the task managers so that you can 
-better differentiate the time that the task is due.<br>
+Changes the type of view seen on the task manager so that you can 
+better differentiate the time that the task is due. The tasks are 
+seperated based on the status of the task. The statuses of the tasks, 
+if are still not done, are based on the time left to their due date.<br>
 Format: view all|calendar|done|floating|overdue|today|tomorrow|future
 
 Examples:
@@ -99,13 +104,17 @@ Examples:
 ## 3.5. Modifying a task: `edit`
 
 You can change the details of a task that you are currently 
-keeping track of with the edit command.<br>
-Format: edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]
+keeping track of with the edit command. If you want remove details 
+from the select task, enter the prefix for the field and leave the 
+parameter empty.<br>
+Format: edit INDEX [TASKNAME] [dl/DATE&TIME] [ds/DESCRIPTION] [t/TAG][-p]
 
 Examples:
 
-* `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
-* `edit 1 tie shoelace dl/25-12-2017`
+* `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible t/dinner`
+* `edit 3 ds/`
+* `edit 1 tie shoelace dl/25-12-2017 t/urgent`
+* `edit 1 dl/ t/`
 
 ## 3.6. Delete a task: `delete`
 
@@ -119,7 +128,7 @@ Examples:
 
 ## 3.7. Undo a command: `undo`
 
-Made a mistake? Use this command to quickly revert the 
+Made a mistake? Use this command to quickly reverse the 
 changes made with the last command used. <br>
 Format: undo
 
@@ -132,19 +141,15 @@ Format: redo
 
 ## 3.9. Finding all tasks using keyword or deadline: `find`
 
-Helps you quickly finds tasks whose name contain any of the 
-given keywords. The results will come with an index number 
-attached.<br>
-Format: find KEYWORDS [dl/DATE]
-
-> finds tasks whose task name or description contains any of the given keywords
-> ‘find dl/’ finds tasks whose deadline falls on specified date
-> 
-> The search is case insensitive, the order of the keywords does not matter, only the name is searched, and tasks matching at least one keyword will be returned
+Helps you quickly finds tasks whose name or description contain 
+any of the given keywords. The results will come with an index number 
+attached. The search is case insensitive. Also, the order 
+of the keywords does not matter.<br>
+Format: find KEYWORDS|dl/DATE&TIME
 
 Examples:
 
-* `find Project Name/Description`
+* `find Project`
 * `find dl/12-08-2017`
 
 ## 3.10. Marking entries as done : `mark`
@@ -158,19 +163,25 @@ Examples:
 
 ## 3.11. Clearing all entries : `clear`
 
-Clears your list of tasks to start from a clean slate.<br>
+Clears your list of tasks to start from a clean slate. Be warned, once deleted, the tasks are lost forever (unless you use the undo command).<br>
 Format: clear
 
-## 3.12. Exiting the program : `exit`
+## 3.12. Saving the data
+
+Application data are saved onto hard drive automatically after any commands are executed that changes the data.
+There is no need to manually save the data. However, you can change the location of the storage file that holds the data for Docket.<br>
+Format: set-storage STORAGE_LOCATION
+
+Examples:
+
+* `set-storage C:\Users\Public\Documents\Data`
+
+## 3.13. Exiting the program : `exit`
 
 When you are tired and want to stop tracking tasks for the day, 
 use this command to exit the program. <br>
 Format: exit
 
-## 3.13. Saving the data
-
-Application data are saved onto hard drive automatically after any commands are executed that changes the data.
-There is no need to manually save the data
 
 ## 4. FAQ
 
@@ -191,15 +202,15 @@ There is no need to manually save the data
 
 * **Help** : `help`
 
-* **Add**  `add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]` <br>
-  e.g. `add Make payment dl/01-08-2017 ds/Pay credit card bills -p`
+* **Add**  `add TASKNAME dl/DATE [ds/DESCRIPTION]` <br>
+  e.g. `add Make payment dl/01-08-2017 ds/Pay credit card bills`
 
 * **List** : `list` <br>
 
 * **View** : `view all|calendar|done|floating|overdue|today|tomorrow|future` <br>
   e.g. `view all`
   
-* **Edit** : `edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]` <br>
+* **Edit** : `edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION]` <br>
   e.g. `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
 
 * **Delete** : `delete INDEX` <br>
