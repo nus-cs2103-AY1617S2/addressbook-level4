@@ -47,14 +47,6 @@ public class DateTime {
         }
     }
 
-    /**
-     * Returns true if a given string is a valid task date.
-     */
-    public static boolean isValidDate(String test) {
-        List<DateGroup> temp = new Parser().parse(test);
-        return !temp.isEmpty();
-    }
-
     @Override
     public String toString() {
         return new PrettyTime().format(date);
