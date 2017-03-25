@@ -1,13 +1,18 @@
 package seedu.tasklist.model;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.Vector;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
+
+import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -19,6 +24,10 @@ import seedu.tasklist.commons.exceptions.DataConversionException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.commons.util.StringUtil;
 import seedu.tasklist.model.tag.Tag;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
+import seedu.tasklist.model.task.ReadOnlyEventTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
@@ -37,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final FilteredList<ReadOnlyTask> todaysTasks;
     private Stack<ReadOnlyTaskList> undoStack;
     private Stack<ReadOnlyTaskList> redoStack;
 //@@author A0141993X
@@ -53,6 +63,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskList = new TaskList(taskList);
         this.storage = storage;
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
+        todaysTasks = new FilteredList<>(this.taskList.getTaskList());
+        updateTodaysTaskList();
 
         this.undoStack = new Stack<ReadOnlyTaskList>();
         this.redoStack = new Stack<ReadOnlyTaskList>();
@@ -83,8 +95,6 @@ public class ModelManager extends ComponentManager implements Model {
         undoStack.push(new TaskList(taskList));
         taskList.removeTask(target);
         indicateTaskListChanged();
-
-
     }
 
     @Override
@@ -93,8 +103,6 @@ public class ModelManager extends ComponentManager implements Model {
         taskList.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskListChanged();
-
-
     }
 
     @Override
@@ -105,7 +113,6 @@ public class ModelManager extends ComponentManager implements Model {
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
         indicateTaskListChanged();
-
     }
 
     //@@author A0139747N
@@ -135,6 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void enableUndoForClear() {
         undoStack.push(new TaskList(taskList));
     }
+
 //@@author A0141993X
     @Override
     public synchronized void loadTaskList(String filePath) throws IOException {
@@ -170,6 +178,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        updateTodaysTaskList();
     }
 
     @Override
@@ -191,6 +200,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));
     }
 
+    @Override
+    public void updateTodaysTaskList() {
+        todaysTasks.setPredicate(isTodayTask());
+    }
+
+    private static Predicate<ReadOnlyTask> isTodayTask() {
+        return p -> (p.getType().equals(DeadlineTask.TYPE)
+                        && DateUtils.isSameDay(((ReadOnlyDeadlineTask) p).getDeadline(), new Date()))
+                    || (p.getType().equals(EventTask.TYPE)
+                        && DateUtils.isSameDay(((ReadOnlyEventTask) p).getStartDate(), new Date()));
+    }
+
+    @Override
 //@@author A0141993X
     /**
      * Sort based on parameter specified

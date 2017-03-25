@@ -72,4 +72,6 @@ public interface Model {
     void saveTaskList(String filePath) throws IOException;
 
     void updateFilteredTaskListStatus(Set<String> keywords);
+
+    void updateTodaysTaskList();
 }
