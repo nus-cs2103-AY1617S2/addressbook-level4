@@ -23,13 +23,13 @@ public class Priority {
     	if (priority == null) {
             this.value = null;
             this.integerLevel = 0;
-        } else if (priority == "high") {
+        } else if (priority.equals("high")) {
         	this.value = priority;
         	this.integerLevel = 3;
-        } else if (priority == "medium") {
+        } else if (priority.equals("medium")) {
         	this.value = priority;
         	this.integerLevel = 2;
-        } else if (priority == "low") {
+        } else if (priority.equals("low")) {
         	this.value = priority;
         	this.integerLevel = 1;
         } else {
