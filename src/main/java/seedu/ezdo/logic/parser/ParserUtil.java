@@ -30,6 +30,7 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern SORT_CRITERIA_ARGS_FORMAT = Pattern.compile("(?<sortCriteria>.+)");
     private static final Pattern INDEXES_ARGS_FORMAT = Pattern.compile("^([0-9]*\\s+)*[0-9]*$");
+    private static final Pattern COMMAND_ALIAS_ARGS_FORMAT = Pattern.compile("(?<command>.+) (?<alias>.+)");;
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -67,7 +68,6 @@ public class ParserUtil {
     }
 
     /**
-     *
      * Returns the specified sorting criteria in the {@code command} if it is present.
      * Returns an {@code Optional.empty()} otherwise.
      */
@@ -79,6 +79,21 @@ public class ParserUtil {
 
         String sortCriteria = matcher.group("sortCriteria");
         return Optional.of(sortCriteria);
+    }
+
+    /**
+     * Returns a string array of the specified command and alias in the {@code command} if both are present.
+     * Returns an empty String {@code Array} otherwise.
+     */
+    public static String[] parseCommandAlias(String command) {
+        final Matcher matcher = COMMAND_ALIAS_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return new String[0];
+        }
+        String commandToAlias = matcher.group("command");
+        String alias = matcher.group("alias");
+
+        return new String[] {commandToAlias, alias};
     }
 
     /**
