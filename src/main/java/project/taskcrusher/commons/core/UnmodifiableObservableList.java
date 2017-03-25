@@ -1,6 +1,7 @@
 package project.taskcrusher.commons.core;
 
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,6 +27,8 @@ public class UnmodifiableObservableList<E> implements ObservableList<E> {
     public static final String MUTATION_OP_EXCEPTION_MESSAGE = "Attempted to modify an unmodifiable view";
 
     private final ObservableList<? extends E> backingList;
+    
+   
 
     public UnmodifiableObservableList(ObservableList<? extends E> backingList) {
         assert backingList != null;

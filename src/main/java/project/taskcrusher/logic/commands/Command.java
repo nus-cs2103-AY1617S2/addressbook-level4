@@ -10,7 +10,7 @@ import project.taskcrusher.model.Model;
 public abstract class Command {
     protected Model model;
 
-    /**
+    /**c
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
      *
      * @param displaySize used to generate summary

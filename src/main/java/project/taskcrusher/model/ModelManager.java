@@ -1,6 +1,7 @@
 package project.taskcrusher.model;
 
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
-
+import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
 /**
  * Represents the in-memory model of the address book data.
  * All changes to any model should be synchronized.
@@ -32,6 +33,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final UserInbox userInbox;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
+    private final FilteredList<ReadOnlyTask> filteredDeleted;
+    private final FilteredList<ReadOnlyTask> filteredAdded;
 
     /**
      * Initializes a ModelManager with the given userInbox and userPrefs.
@@ -45,6 +48,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.userInbox = new UserInbox(userInbox);
         filteredTasks = new FilteredList<>(this.userInbox.getTaskList());
         filteredEvents = new FilteredList<>(this.userInbox.getEventList());
+        filteredDeleted = new FilteredList<>(this.userInbox.getDeletedList());
+        filteredAdded = new FilteredList<>(this.userInbox.getAddedList());
     }
 
     public ModelManager() {
@@ -58,8 +63,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyUserInbox getUserInbox() {
-        return userInbox;
+    public ReadOnlyUserInbox getUserInbox(){
+        	return userInbox;
     }
 
     /** Raises an event to indicate the model has changed */
@@ -70,8 +75,15 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Task operations =========================================================================
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        userInbox.removeTask(target);
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException{
+    	try{userInbox.removeTask(target);}
+    	catch(UniqueTaskList.DuplicateTaskException e){}
+        indicateUserInboxChanged();
+    }
+    
+    public synchronized void deleteUndoTask(ReadOnlyTask target) throws TaskNotFoundException{
+    	try{userInbox.removeUndoTask(target);}
+    	catch(UniqueTaskList.DuplicateTaskException e){}
         indicateUserInboxChanged();
     }
 
@@ -81,6 +93,15 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskListToShowAll();
         indicateUserInboxChanged();
     }
+    
+    public synchronized void addUndoTask(Task task) throws UniqueTaskList.DuplicateTaskException{
+        try{userInbox.addUndoTask(task);}
+        catch(UniqueTaskList.TaskNotFoundException e){}
+        updateFilteredListToShowAll();
+        indicateUserInboxChanged();
+    }
+    
+   
 
     @Override
     public synchronized void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
@@ -126,6 +147,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
+    }
+    
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredAddedList() {
+        return new UnmodifiableObservableList<>(filteredAdded);
+    }
+    
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredDeletedList() {
+        return new UnmodifiableObservableList<>(filteredDeleted);
     }
 
     @Override
@@ -280,4 +309,10 @@ public class ModelManager extends ComponentManager implements Model {
             return "user-interested timeslot is " + userInterestedTimeslot.toString();
         }
     }
+
+	@Override
+	public void doneTask(ReadOnlyTask target) throws TaskNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
 }

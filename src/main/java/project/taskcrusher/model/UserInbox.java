@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
@@ -20,6 +21,7 @@ import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
 import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
+import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -28,6 +30,8 @@ import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
 public class UserInbox implements ReadOnlyUserInbox {
 
     private final UniqueTaskList tasks;
+    private final UniqueTaskList deleted;
+    private final UniqueTaskList added;
     private final UniqueTagList tags;
     private final UniqueEventList events;
 
@@ -35,6 +39,8 @@ public class UserInbox implements ReadOnlyUserInbox {
         tasks = new UniqueTaskList();
         events = new UniqueEventList();
         tags = new UniqueTagList();
+        deleted = new UniqueTaskList();
+        added = new UniqueTaskList();
     }
 
     public UserInbox() {}
@@ -104,8 +110,15 @@ public class UserInbox implements ReadOnlyUserInbox {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+    	syncMasterTagListWith(p);
+        tasks.add(p);
+        added.add(p);
+    }
+    
+    public void addUndoTask(Task p) throws UniqueTaskList.DuplicateTaskException, UniqueTaskList.TaskNotFoundException {
         syncMasterTagListWith(p);
         tasks.add(p);
+        deleted.remove(p);
     }
 
     /**
@@ -121,20 +134,20 @@ public class UserInbox implements ReadOnlyUserInbox {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
-        Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
+        FilteredList<Task> editTasks = new FilteredList<>(tasks.asObservableList());
+        int addressBookIndex = editTasks.getSourceIndex(index);
+        Task t = editTasks.get(addressBookIndex);
+        System.out.println(t.getTaskName());
+        deleted.add(t);
+        Task editedTask = new Task(editedReadOnlyTask);
+        syncMasterTagListWith(editedTask);
+        System.out.println(editedTask.getTaskName());
+        System.out.println(t.getTaskName());
+        added.add(editedTask);
         tasks.updateTask(index, editedTask);
-    }
-
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-        if (tasks.remove(key)) {
-            return true;
-        } else {
-            throw new UniqueTaskList.TaskNotFoundException();
-        }
     }
 
     /**
@@ -234,6 +247,24 @@ public class UserInbox implements ReadOnlyUserInbox {
 
     public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
         if (events.remove(key)) {
+        	return true;
+        } else {
+            throw new UniqueEventList.EventNotFoundException();
+        }
+    }
+
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException {
+    	if (tasks.remove(key)) {
+        	deleted.add((Task) key);
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+    
+    public boolean removeUndoTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException {
+        if (tasks.remove(key)) {
+        	added.remove(key);
             return true;
         } else {
             throw new UniqueEventList.EventNotFoundException();
@@ -262,6 +293,14 @@ public class UserInbox implements ReadOnlyUserInbox {
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+    
+    public ObservableList<ReadOnlyTask> getDeletedList() {
+        return new UnmodifiableObservableList<>(deleted.asObservableList());
+    }
+    
+    public ObservableList<ReadOnlyTask> getAddedList() {
+        return new UnmodifiableObservableList<>(added.asObservableList());
     }
 
     @Override

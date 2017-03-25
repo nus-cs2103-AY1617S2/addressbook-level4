@@ -5,6 +5,7 @@ import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
+import project.taskcrusher.model.Model;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -30,6 +31,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String flag, int targetIndex) {
         this.flag = flag;
         this.targetIndex = targetIndex;
+        Model.adddel.add(0);
     }
 
     @Override

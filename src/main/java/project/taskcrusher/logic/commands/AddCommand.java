@@ -1,6 +1,6 @@
 package project.taskcrusher.logic.commands;
-
 import java.util.ArrayList;
+import project.taskcrusher.model.Model;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -76,6 +76,7 @@ public class AddCommand extends Command {
         this.eventToAdd = new Event(new Name(name), new ArrayList<Timeslot>(timeslots), new Location(location),
                 new Description(description), new UniqueTagList(tagSet));
         this.taskToAdd = null;
+        Model.adddel.add(1);
     }
 
     @Override
