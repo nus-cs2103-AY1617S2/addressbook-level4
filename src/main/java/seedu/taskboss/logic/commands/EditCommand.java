@@ -17,6 +17,7 @@ import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Recurrence;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
 
@@ -105,6 +106,8 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getEndDateTime);
         Information updatedInformation = editTaskDescriptor.getInformation()
                 .orElseGet(taskToEdit::getInformation);
+        Recurrence updatedRecurrence = editTaskDescriptor.getRecurrence()
+                .orElseGet(taskToEdit::getRecurrence);
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
                 .orElseGet(taskToEdit::getCategories);
 
@@ -115,7 +118,7 @@ public class EditCommand extends Command {
         }
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
-                updatedInformation, updatedCategories);
+                updatedInformation, updatedRecurrence, updatedCategories);
     }
 
     /**
@@ -129,6 +132,7 @@ public class EditCommand extends Command {
         private Optional<Information> information = Optional.empty();
         private Optional<DateTime> startDateTime = Optional.empty();
         private Optional<DateTime> endDateTime = Optional.empty();
+        private Optional<Recurrence> recurrence = Optional.empty();
         private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -139,6 +143,7 @@ public class EditCommand extends Command {
             this.startDateTime = toCopy.getStartDateTime();
             this.endDateTime = toCopy.getEndDateTime();
             this.information = toCopy.getInformation();
+            this.recurrence = toCopy.getRecurrence();
             this.categories = toCopy.getCategories();
         }
 
@@ -207,6 +212,15 @@ public class EditCommand extends Command {
 
         public Optional<Information> getInformation() {
             return information;
+        }
+
+        public void setRecurrence(Optional<Recurrence> recurrence) {
+            assert recurrence != null;
+            this.recurrence = recurrence;
+        }
+
+        public Optional<Recurrence> getRecurrence() {
+            return recurrence;
         }
 
         public void setCategories(Optional<UniqueCategoryList> categories) {

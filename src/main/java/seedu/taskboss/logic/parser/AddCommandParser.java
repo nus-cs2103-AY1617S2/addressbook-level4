@@ -5,6 +5,7 @@ import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_RECURRENCE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
@@ -31,14 +32,15 @@ public class AddCommandParser {
     public Command parse(String args) throws InvalidDatesException {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_NAME, PREFIX_START_DATE,
-                        PREFIX_END_DATE, PREFIX_INFORMATION, PREFIX_CATEGORY);
+                        PREFIX_END_DATE, PREFIX_INFORMATION, PREFIX_RECURRENCE, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getValue(PREFIX_NAME).get(),
                     checkStartDateTimeEmpty(argsTokenizer.getValue(PREFIX_START_DATE)),
                     checkEndDateTimeEmpty(argsTokenizer.getValue(PREFIX_END_DATE)),
-                    checkEmpty(argsTokenizer.getValue(PREFIX_INFORMATION)),
+                    checkInformationEmpty(argsTokenizer.getValue(PREFIX_INFORMATION)),
+                    checkRecurrenceEmpty(argsTokenizer.getValue(PREFIX_RECURRENCE)),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))
             );
         } catch (NoSuchElementException nsee) {
@@ -50,7 +52,7 @@ public class AddCommandParser {
         }
     }
 
-    private String checkEmpty(Optional<String> test) {
+    private String checkInformationEmpty(Optional<String> test) {
         try {
             return test.get();
         } catch (NoSuchElementException nsee) {
@@ -74,4 +76,11 @@ public class AddCommandParser {
         }
     }
 
+    private String checkRecurrenceEmpty(Optional<String> test) throws IllegalValueException {
+        try {
+            return test.get();
+        } catch (NoSuchElementException nsee) {
+            return EMPTY_STRING;
+        }
+    }
 }

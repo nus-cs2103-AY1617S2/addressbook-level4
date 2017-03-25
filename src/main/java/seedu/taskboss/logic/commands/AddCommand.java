@@ -16,6 +16,8 @@ import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Recurrence;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
 
@@ -49,11 +51,17 @@ public class AddCommand extends Command {
      * @throws InvalidDatesException
      */
     public AddCommand(String name, String startDateTime, String endDateTime,
-            String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
+            String information, String frequency,
+            Set<String> categories) throws IllegalValueException, InvalidDatesException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
         }
+
+        if (frequency == null) {
+            frequency = Frequency.NONE.toString();
+        }
+
         //@@author A0144904H
         String priorityLevel = PriorityLevel.PRIORITY_NO;
         DateTime startDateTimeObj = new DateTime(startDateTime);
@@ -73,12 +81,14 @@ public class AddCommand extends Command {
             filteredName = name;
         }
 
+        //@@author
         this.toAdd = new Task(
                 new Name(filteredName),
                 new PriorityLevel(priorityLevel),
                 startDateTimeObj,
                 endDateTimeObj,
                 new Information(information),
+                new Recurrence(Frequency.valueOf(frequency.toUpperCase().trim())),
                 new UniqueCategoryList(categorySet)
         );
     }

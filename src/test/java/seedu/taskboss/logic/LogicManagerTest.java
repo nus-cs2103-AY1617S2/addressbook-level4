@@ -49,6 +49,8 @@ import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Recurrence;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.storage.StorageManager;
 
@@ -499,15 +501,16 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            PriorityLevel privatePriorityLevel = new PriorityLevel("Yes");
+            PriorityLevel priorityLevel = new PriorityLevel("Yes");
             DateTime startDateTime = new DateTime("today 5pm");
             DateTime endDateTime = new DateTime("tomorrow 8pm");
-            Information privateInformation = new Information("111, alpha street");
+            Information information = new Information("111, alpha street");
+            Recurrence recurrence = new Recurrence(Frequency.DAILY);
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            return new Task(name, privatePriorityLevel, startDateTime,
-                    endDateTime, privateInformation, categories);
+            return new Task(name, priorityLevel, startDateTime,
+                    endDateTime, information, recurrence, categories);
         }
 
         /**
@@ -525,6 +528,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 19 10am 2017"),
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of " + seed),
+                    new Recurrence(Frequency.DAILY),
                     new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                            new Category("category" + Math.abs(seed + 1)))
             );
@@ -547,6 +551,7 @@ public class LogicManagerTest {
             cmd.append(" sd/").append(p.getStartDateTime().toString());
             cmd.append(" ed/").append(p.getEndDateTime().toString());
             cmd.append(" i/").append(p.getInformation());
+            cmd.append(" r/").append(p.getRecurrence().toString());
 
             UniqueCategoryList categories = p.getCategories();
             for (Category t : categories) {
@@ -638,6 +643,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 19 10am 2017"),
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of 1"),
+                    new Recurrence(Frequency.DAILY),
                     new UniqueCategoryList(new Category("category"))
             );
         }
@@ -654,6 +660,7 @@ public class LogicManagerTest {
                     new DateTime(startDatetime),
                     new DateTime("Feb 20 10am 2018"),
                     new Information("House of 1"),
+                    new Recurrence(Frequency.DAILY),
                     new UniqueCategoryList(new Category("category"))
             );
         }
@@ -670,6 +677,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 20 10am 2017"),
                     new DateTime(endDatetime),
                     new Information("House of 1"),
+                    new Recurrence(Frequency.DAILY),
                     new UniqueCategoryList(new Category("category"))
             );
         }
