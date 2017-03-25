@@ -1,5 +1,6 @@
 package seedu.doist.model;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
@@ -83,4 +84,7 @@ public interface Model {
 
     /** Resets alias list to default */
     void resetToDefaultCommandWords();
+
+    /** Change absolute path in config */
+    void changeConfigAbsolutePath(Path path);
 }

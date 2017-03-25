@@ -31,6 +31,7 @@ public class UnfinishCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        assert model != null;
         String outputMessage = "";
 
         ArrayList<ReadOnlyTask> tasksToUnfinish = getMultipleTasksFromIndices(targetIndices);

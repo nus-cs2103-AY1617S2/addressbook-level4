@@ -13,11 +13,6 @@ import seedu.doist.model.ReadOnlyAliasListMap;
 public interface AliasListMapStorage {
 
     /**
-     * Returns the file path of the data file.
-     */
-    String getAliasListMapFilePath();
-
-    /**
      * Returns AliasListMap data as a {@link ReadOnlyAliasListMap}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
@@ -42,5 +37,15 @@ public interface AliasListMapStorage {
      * @see #saveAliasListMap(ReadOnlyAliasListMap)
      */
     void saveAliasListMap(ReadOnlyAliasListMap aliasList, String filePath) throws IOException;
+
+    /**
+     * Returns the file path of the data file.
+     */
+    String getAliasListMapFilePath();
+
+    /**
+     * Sets the file path of the data file.
+     */
+    void setAliasListMapFilePath(String path);
 
 }

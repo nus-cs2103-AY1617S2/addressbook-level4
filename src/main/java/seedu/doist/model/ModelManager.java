@@ -1,5 +1,7 @@
 package seedu.doist.model;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -7,11 +9,14 @@ import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.doist.commons.core.ComponentManager;
+import seedu.doist.commons.core.Config;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.core.UnmodifiableObservableList;
+import seedu.doist.commons.events.config.AbsoluteStoragePathChangedEvent;
 import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
+import seedu.doist.commons.util.ConfigUtil;
 import seedu.doist.commons.util.History;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.commands.ListCommand.TaskType;
@@ -33,7 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TodoList todoList;
-
+    private final Config config;
     private final History<TodoList> todoListHistory = new History<TodoList>();
     private final AliasListMap aliasListMap;
     private final FilteredList<ReadOnlyTask> filteredTasks;
@@ -41,22 +46,24 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
      */
-    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap,
+            UserPrefs userPrefs, Config config) {
         super();
-        assert !CollectionUtil.isAnyNull(todoList, aliasListMap, userPrefs);
+        assert !CollectionUtil.isAnyNull(todoList, aliasListMap, userPrefs, config);
 
         logger.fine("Initializing with To-do List: " + todoList + " aliasListMap: " + aliasListMap
-                + " and user prefs " + userPrefs);
+                + " and user prefs " + userPrefs + " and config: " + config);
 
         this.todoList = new TodoList(todoList);
         this.aliasListMap = new AliasListMap(aliasListMap);
+        this.config = config;
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
         saveCurrentToHistory();
     }
 
     public ModelManager() {
-        this(new TodoList(), new AliasListMap(), new UserPrefs());
+        this(new TodoList(), new AliasListMap(), new UserPrefs(), new Config());
     }
 
 
@@ -330,6 +337,24 @@ public class ModelManager extends ComponentManager implements Model {
             todoList.resetData(nextTodoList);
         }
         indicateTodoListChanged();
+    }
+
+  //========== change absolute storage path =================================================
+    @Override
+    public void changeConfigAbsolutePath(Path path) {
+        config.setAbsoluteStoragePath(path.toString());
+        try {
+            ConfigUtil.saveConfig(config, ConfigUtil.getConfigPath());
+            indicateAbsoluteStoragePathChanged();
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
+    }
+
+    /** Raises an event to indicate the absolute storage path has changed */
+    private void indicateAbsoluteStoragePathChanged() {
+        raise(new AbsoluteStoragePathChangedEvent(config.getAbsoluteTodoListFilePath(),
+                config.getAbsoluteAliasListMapFilePath(), config.getAbsoluteUserPrefsFilePath()));
     }
 }
 

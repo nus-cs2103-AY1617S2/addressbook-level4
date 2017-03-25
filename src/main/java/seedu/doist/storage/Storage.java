@@ -3,6 +3,7 @@ package seedu.doist.storage;
 import java.io.IOException;
 import java.util.Optional;
 
+import seedu.doist.commons.events.config.AbsoluteStoragePathChangedEvent;
 import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.events.storage.DataSavingExceptionEvent;
@@ -36,7 +37,7 @@ public interface Storage extends TodoListStorage, UserPrefsStorage, AliasListMap
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleTodoListChangedEvent(TodoListChangedEvent abce);
+    void handleTodoListChangedEvent(TodoListChangedEvent tlce);
 
     //@@author A0140887W
     @Override
@@ -53,5 +54,10 @@ public interface Storage extends TodoListStorage, UserPrefsStorage, AliasListMap
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAliasListMapChangedEvent(AliasListMapChangedEvent abce);
+    void handleAliasListMapChangedEvent(AliasListMapChangedEvent almce);
+
+    /**
+     * Edits the storage path for todolistStorage, userPrefsStorage, aliasMapStorage
+     */
+    void handleAbsoluteStoragePathChangedEvent(AbsoluteStoragePathChangedEvent aspce);
 }

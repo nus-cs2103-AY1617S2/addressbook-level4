@@ -75,4 +75,9 @@ public class XmlAliasListMapStorage implements AliasListMapStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableAliasListMap(aliasListMap));
     }
 
+    @Override
+    public void setAliasListMapFilePath(String path) {
+        this.filePath = path;
+    }
+
 }

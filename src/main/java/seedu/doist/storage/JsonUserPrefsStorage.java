@@ -37,4 +37,14 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
         JsonUtil.saveJsonFile(userPrefs, filePath);
     }
 
+    //@@author A0140887W
+    @Override
+    public void setUserPrefsFilePath(String path) {
+        this.filePath = path;
+    }
+
+    @Override
+    public String getUserPrefsFilePath() {
+        return filePath;
+    }
 }

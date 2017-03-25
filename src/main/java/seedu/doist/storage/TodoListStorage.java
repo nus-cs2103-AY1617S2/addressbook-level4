@@ -10,12 +10,6 @@ import seedu.doist.model.ReadOnlyTodoList;
  * Represents a storage for {@link seedu.doist.model.TodoList}.
  */
 public interface TodoListStorage {
-
-    /**
-     * Returns the file path of the data file.
-     */
-    String getTodoListFilePath();
-
     /**
      * Returns TodoList data as a {@link ReadOnlyTodoList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
@@ -41,4 +35,13 @@ public interface TodoListStorage {
      */
     void saveTodoList(ReadOnlyTodoList todoList, String filePath) throws IOException;
 
+    /**
+     * Returns the file path of the data file.
+     */
+    String getTodoListFilePath();
+
+    /**
+     * Sets the file path of the data file.
+     */
+    void setTodoListFilePath(String path);
 }

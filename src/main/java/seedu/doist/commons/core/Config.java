@@ -12,6 +12,7 @@ import java.util.logging.Level;
 public class Config {
 
     public static final String DEFAULT_CONFIG_FILE = "config.json";
+    public static String lastUsedFile = "";
 
     // Config values customizable through config file
     private String appTitle = "Doist";
@@ -47,6 +48,7 @@ public class Config {
         return absoluteStoragePath;
     }
 
+    /** Model should call this to save the absolute storage path */
     public void setAbsoluteStoragePath(String absoluteStoragePath) {
         this.absoluteStoragePath = absoluteStoragePath;
     }

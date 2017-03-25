@@ -30,6 +30,7 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         commandAliases.put("finish",  new ArrayList<>(Arrays.asList("fin")));
         commandAliases.put("help",  new ArrayList<>());
         commandAliases.put("list",  new ArrayList<>(Arrays.asList("ls")));
+        commandAliases.put("save_at",  new ArrayList<>(Arrays.asList("save")));
         commandAliases.put("select",  new ArrayList<>());
         commandAliases.put("sort",  new ArrayList<>(Arrays.asList("sort_by")));
         commandAliases.put("unfinish",  new ArrayList<>(Arrays.asList("unfin")));

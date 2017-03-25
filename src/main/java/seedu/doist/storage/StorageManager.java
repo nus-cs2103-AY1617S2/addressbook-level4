@@ -1,6 +1,11 @@
 package seedu.doist.storage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -8,10 +13,12 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.doist.commons.core.ComponentManager;
 import seedu.doist.commons.core.LogsCenter;
+import seedu.doist.commons.events.config.AbsoluteStoragePathChangedEvent;
 import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.doist.commons.exceptions.DataConversionException;
+import seedu.doist.commons.util.StringUtil;
 import seedu.doist.model.ReadOnlyAliasListMap;
 import seedu.doist.model.ReadOnlyTodoList;
 import seedu.doist.model.UserPrefs;
@@ -52,7 +59,18 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
+    //@@author A0140887W
+    @Override
+    public void setUserPrefsFilePath(String path) {
+        userPrefsStorage.setUserPrefsFilePath(path);
+    }
 
+    @Override
+    public String getUserPrefsFilePath() {
+        return userPrefsStorage.getUserPrefsFilePath();
+    }
+
+    //@@author
     // ================ TodoList methods ==============================
 
     @Override
@@ -80,6 +98,12 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveTodoList(ReadOnlyTodoList todoList, String filePath) throws IOException {
         logger.fine("Attempting to write to todolist data file: " + filePath);
         todoListStorage.saveTodoList(todoList, filePath);
+    }
+
+    //@@author A0140887W
+    @Override
+    public void setTodoListFilePath(String path) {
+        todoListStorage.setTodoListFilePath(path);
     }
 
     //@@author A0140887W
@@ -114,6 +138,11 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
+    public void setAliasListMapFilePath(String path) {
+        aliasListMapStorage.setAliasListMapFilePath(path);
+    }
+
+    @Override
     @Subscribe
     public void handleTodoListChangedEvent(TodoListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data todolist changed, saving to file"));
@@ -133,5 +162,33 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    private void moveFileToNewLocation(String oldPath, String newPath) {
+        try {
+            Path oldFile = Paths.get(oldPath);
+            if (Files.exists(oldFile)) {
+                Path newFile = Paths.get(newPath);
+                // Ensure that the new directory exists before moving if not there will be an I/O exception
+                boolean doMkDir = new File(newPath).mkdirs();
+                Files.move(oldFile, newFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (IOException e) {
+            logger.info("Tried to move any existing files but failed" + StringUtil.getDetails(e));
+        }
+    }
+    @Override
+    @Subscribe
+    public void handleAbsoluteStoragePathChangedEvent(AbsoluteStoragePathChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Absolute storage path changed,"
+                + "changing for all storages"));
+        // Move to the new locations
+        moveFileToNewLocation(aliasListMapStorage.getAliasListMapFilePath(), event.aliasListMapPath);
+        moveFileToNewLocation(todoListStorage.getTodoListFilePath(), event.todoListPath);
+        moveFileToNewLocation(userPrefsStorage.getUserPrefsFilePath(), event.userPrefsPath);
+        // Change the paths
+        todoListStorage.setTodoListFilePath(event.todoListPath);
+        userPrefsStorage.setUserPrefsFilePath(event.userPrefsPath);
+        aliasListMapStorage.setAliasListMapFilePath(event.aliasListMapPath);
     }
 }
