@@ -29,8 +29,6 @@ import seedu.taskboss.model.task.Recurrence.Frequency;
  */
 public class EditCommandParser {
 
-    private static final String STRING_PREFIX_END_DATE = "ed/";
-    private static final String STRING_PREFIX_START_DATE = "sd/";
     private static final String EMPTY_STRING = "";
 
     /**
@@ -60,7 +58,7 @@ public class EditCommandParser {
             Optional<DateTime> startDateTimeOp = ParserUtil.
                     parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE));
             // if user input is "edit INDEX sd/", remove the current startDateTime
-            if (!startDateTimeOp.isPresent() && args.contains(STRING_PREFIX_START_DATE)) {
+            if (!startDateTimeOp.isPresent() && args.contains(PREFIX_START_DATE.getPrefix())) {
                 editTaskDescriptor.setStartDateTime(Optional.of(new DateTime(EMPTY_STRING)));
             } else {
                 editTaskDescriptor.setStartDateTime(startDateTimeOp);
@@ -69,7 +67,7 @@ public class EditCommandParser {
             Optional<DateTime> endDateTimeOp = ParserUtil.
                     parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE));
             // if user input is "edit INDEX ed/", remove the current endDateTime
-            if (!endDateTimeOp.isPresent() && args.contains(STRING_PREFIX_END_DATE)) {
+            if (!endDateTimeOp.isPresent() && args.contains(PREFIX_END_DATE.getPrefix())) {
                 editTaskDescriptor.setEndDateTime(Optional.of(new DateTime(EMPTY_STRING)));
             } else {
                 editTaskDescriptor.setEndDateTime(endDateTimeOp);
@@ -79,7 +77,7 @@ public class EditCommandParser {
                     (argsTokenizer.getValue(PREFIX_INFORMATION)));
             Optional<Recurrence> recurrenceOp = ParserUtil.parseRecurrence
                     (argsTokenizer.getValue(PREFIX_RECURRENCE));
-            if (!recurrenceOp.isPresent()) {
+            if (!recurrenceOp.isPresent() && args.contains(PREFIX_RECURRENCE.getPrefix())) {
                 editTaskDescriptor.setRecurrence(Optional.of(new Recurrence(Frequency.valueOf(EMPTY_STRING))));
             } else {
                 editTaskDescriptor.setRecurrence(recurrenceOp);
