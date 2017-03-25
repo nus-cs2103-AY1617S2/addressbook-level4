@@ -12,7 +12,7 @@ public class SortCommand extends Command {
 		this.sortMethod = sortMethod;
 	}
 	public CommandResult execute() throws CommandException {
-		try {
+		//try {
 			assert model != null;
 			if (sortMethod.equals("name")) {
 				model.sortByName();
@@ -22,9 +22,9 @@ public class SortCommand extends Command {
 				return new CommandResult(MESSAGE_FAILURE);
 			}
 			return new CommandResult(MESSAGE_SUCCESS);
-		} catch (Exception e) {
-			throw new CommandException(MESSAGE_FAILURE);
-		}
+		//} catch (Exception e) {
+			//throw new CommandException(MESSAGE_FAILURE);
+		//}
 	}
 	public boolean isUndoable() {
 		return true;

@@ -15,6 +15,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskTimeComparable;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -221,8 +222,27 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
 	public void sortTasksByTime() {
-		// TODO Auto-generated method stub
-		
+		List<Task> taskList = new ArrayList<Task>();
+		for (Task t : tasks) {
+			taskList.add(t);
+		}
+		for (int i = 0; i < taskList.size() - 1; i++) {
+			for (int j = i; j < taskList.size(); j++) {
+				if (new TaskTimeComparable(taskList.get(i)).compareTo(new TaskTimeComparable(taskList.get(j))) > 0) {
+					Task temp = taskList.get(i);
+					taskList.set(i, taskList.get(j));
+					taskList.set(j, temp);
+				}
+			}
+		}
+		tasks.clear();
+		for (Task t : taskList) {
+			try {
+				tasks.add(t);
+			} catch (DuplicateTaskException dte) {
+				System.out.println("Unexpected error in TASKMANAGER sort by name");
+			}
+		}
 	}
 
 	public void sortTasksByName() {
