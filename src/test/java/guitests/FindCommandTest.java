@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.testutil.TestTask;
 
 //@@author A0147990R
@@ -61,6 +62,13 @@ public class FindCommandTest extends TaskBossGuiTest {
     @Test
     public void find_usingNaturalLanguage_onlyDayOfMonth() {
         assertFindResult("find ed/28", td.taskC, td.taskE, td.taskA, td.taskD, td.taskB, td.taskG);
+    }
+
+    //EP: invalid date
+    @Test
+    public void find_invalidDate_fail() {
+        commandBox.runCommand("find sd/mynameisbob");
+        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
     }
 
     //@@author A0147990R
