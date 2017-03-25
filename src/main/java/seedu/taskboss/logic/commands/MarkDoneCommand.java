@@ -39,11 +39,18 @@ public class MarkDoneCommand extends Command {
         }
 
         ReadOnlyTask taskToMarkDone = lastShownList.get(filteredTaskListIndex);
-        Task taskMarked = new Task(taskToMarkDone.getName(), taskToMarkDone.getPriorityLevel(),
+        //@@author A0143157J
+        if (taskToMarkDone.isRecurring()) {
+            Task newRecurredTask = new Task(taskToMarkDone);
+            newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+            model.updateTask(filteredTaskListIndex, newRecurredTask);
+        } else {
+            Task taskMarked = new Task(taskToMarkDone.getName(), taskToMarkDone.getPriorityLevel(),
                 taskToMarkDone.getStartDateTime(), taskToMarkDone.getEndDateTime(),
-                taskToMarkDone.getInformation(), new UniqueCategoryList("Done"));
-
-        model.updateTask(filteredTaskListIndex, taskMarked);
+                taskToMarkDone.getInformation(), taskToMarkDone.getRecurrence(),
+                new UniqueCategoryList("Done"));
+            model.updateTask(filteredTaskListIndex, taskMarked);
+        }
 
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkDone));

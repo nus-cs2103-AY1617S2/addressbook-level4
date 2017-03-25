@@ -21,7 +21,8 @@ public class Recurrence {
     }
 
     /**
-     * Update task dates according to the recurrence of the task
+     * Marks a recurring task undone and
+     * updates task dates according to the recurrence of the task
      * @throws IllegalValueException
      */
     public void updateTaskDates(Task task) throws IllegalValueException {
