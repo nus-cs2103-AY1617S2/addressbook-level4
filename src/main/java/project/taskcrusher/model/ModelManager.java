@@ -83,7 +83,10 @@ public class ModelManager extends ComponentManager implements Model {
     
     public synchronized void deleteUndoTask(ReadOnlyTask target) throws TaskNotFoundException{
     	try{userInbox.removeUndoTask(target);}
-    	catch(UniqueTaskList.DuplicateTaskException e){}
+    	catch(UniqueTaskList.DuplicateTaskException e){} catch (EventNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         indicateUserInboxChanged();
     }
 
@@ -97,7 +100,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addUndoTask(Task task) throws UniqueTaskList.DuplicateTaskException{
         try{userInbox.addUndoTask(task);}
         catch(UniqueTaskList.TaskNotFoundException e){}
-        updateFilteredListToShowAll();
+        updateFilteredTaskListToShowAll();
         indicateUserInboxChanged();
     }
     

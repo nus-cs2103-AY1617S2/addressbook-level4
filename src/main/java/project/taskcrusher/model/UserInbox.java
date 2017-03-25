@@ -15,6 +15,7 @@ import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList;
+import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.ReadOnlyTask;
@@ -140,12 +141,9 @@ public class UserInbox implements ReadOnlyUserInbox {
         FilteredList<Task> editTasks = new FilteredList<>(tasks.asObservableList());
         int addressBookIndex = editTasks.getSourceIndex(index);
         Task t = editTasks.get(addressBookIndex);
-        System.out.println(t.getTaskName());
         deleted.add(t);
         Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
-        System.out.println(editedTask.getTaskName());
-        System.out.println(t.getTaskName());
         added.add(editedTask);
         tasks.updateTask(index, editedTask);
     }
@@ -262,7 +260,7 @@ public class UserInbox implements ReadOnlyUserInbox {
         }
     }
     
-    public boolean removeUndoTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException {
+    public boolean removeUndoTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException, EventNotFoundException {
         if (tasks.remove(key)) {
         	added.remove(key);
             return true;

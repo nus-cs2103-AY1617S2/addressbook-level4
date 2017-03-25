@@ -59,6 +59,7 @@ public class AddCommand extends Command {
         this.taskToAdd = new Task(new Name(name), new Deadline(deadline), new Priority(priority),
                 new Description(description), new UniqueTagList(tagSet));
         this.eventToAdd = null;
+        Model.adddel.add(1);
     }
 
     /**

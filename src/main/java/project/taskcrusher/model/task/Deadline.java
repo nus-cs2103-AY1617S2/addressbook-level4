@@ -32,8 +32,6 @@ public class Deadline {
             this.deadline = NO_DEADLINE;
         }else if (deadline.equals(COMPLETED_DEADLINE)) {
             this.deadline = COMPLETED_DEADLINE;
-        }else if (isValidDeadline(deadline)) {
-            this.deadline = deadline;
         } else {
             this.deadline = DateUtil.dateAsString(DateUtil.parseDate(deadline, true));
         }

@@ -52,12 +52,10 @@ public class UndoCommand extends Command {
         {
         	UnmodifiableObservableList<ReadOnlyTask> addedList = model.getFilteredAddedList();
         	Task taskToDelete = (Task) addedList.get(addedList.size()-1);
-        	System.out.println(taskToDelete.getTaskName());
         	try{model.deleteUndoTask(taskToDelete);}
         	catch(TaskNotFoundException e){}
         	UnmodifiableObservableList<ReadOnlyTask> deletedList = model.getFilteredDeletedList();
         	Task taskToAdd = (Task) deletedList.get(deletedList.size()-1);
-        	System.out.println(taskToAdd.getTaskName());
         	try{model.addUndoTask(taskToAdd);}
         	catch(DuplicateTaskException e){}
         }
