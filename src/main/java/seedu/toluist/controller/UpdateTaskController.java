@@ -31,7 +31,7 @@ public class UpdateTaskController extends Controller {
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
     private static final String RESULT_MESSAGE_ERROR_DATE_INPUT =
             "Something is wrong with the given dates input";
-    private static final String RESULT_MESSAGE_ERROR_STOP_RECURRING =
+    private static final String RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING =
             "Input contains both recurring and stop recurring arguments at the same time.";
 
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
@@ -95,10 +95,8 @@ public class UpdateTaskController extends Controller {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
         }
-        if (isStopRecurring && (task.isFloatingTask()
-                || StringUtil.isPresent(recurringFrequency)
-                || recurringUntilEndDate != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_STOP_RECURRING);
+        if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
+            return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
         }
         if (isFloating) {
             task.setStartDateTime(null);

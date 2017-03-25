@@ -483,4 +483,28 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task));
         assertTrue(isTaskShown(task2));
     }
+
+    @Test
+    public void updateRecurringTask_invalidParams_shouldNotUpdate() {
+        int eventIndex = 1;
+
+        String taskDescription = "shower";
+        String recurFrequencyString = "daily";
+        String command = "add " + taskDescription + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription);
+        task.setRecurring(recurFrequencyString);
+        assertTrue(isTaskShown(task));
+
+        command = "update " + eventIndex + " stoprepeating/ repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+        assertResultMessage("Input contains both recurring and stop recurring arguments at the same time.");
+
+        LocalDateTime recurEndDate = DateTimeUtil.parseDateString("15 Mar 2020, 1pm");
+        command = "update " + eventIndex + " stoprepeating/ repeatUntil/" + recurEndDate;
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+        assertResultMessage("Input contains both recurring and stop recurring arguments at the same time.");
+    }
 }
