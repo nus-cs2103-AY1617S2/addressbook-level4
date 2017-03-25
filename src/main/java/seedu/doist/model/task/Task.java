@@ -22,35 +22,27 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description name, Priority priority, FinishedStatus finishedStatus,
-            UniqueTagList tags, Date startDate, Date endDate) {
+    public Task(Description name, Priority priority, FinishedStatus finishedStatus, Date startDate,
+            Date endDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priority, finishedStatus, tags);
         this.desc = name;
         this.priority = priority;
         this.finishedStatus = finishedStatus;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    public Task(Description name, Priority priority, FinishedStatus finishedStatus, UniqueTagList tags) {
-        this(name, priority, finishedStatus, tags, null, null);
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     public Task(Description name, Priority priority, UniqueTagList tags) {
-        this(name, priority, new FinishedStatus(), tags, null, null);
+        this(name, priority, new FinishedStatus(), null, null, tags);
     }
 
-    public Task(Description name, UniqueTagList tags) {
-        this(name, new Priority(), new FinishedStatus(), tags, null, null);
+    public Task(Description name, Date startDate, Date endDate, UniqueTagList tags) {
+        this(name, new Priority(), new FinishedStatus(), startDate, endDate, tags);
     }
 
-    public Task(Description name, Date startDate, Date endDate) {
-        this(name, new Priority(), new FinishedStatus(), new UniqueTagList(), startDate, endDate);
-    }
-
-    public Task(Description name, UniqueTagList tags, Date startDate, Date endDate) {
-        this(name, new Priority(), new FinishedStatus(), tags, startDate, endDate);
+    public Task(Description name, Priority priority, Date startDate, Date endDate, UniqueTagList tags) {
+        this(name, priority, new FinishedStatus(), startDate, endDate, tags);
     }
 
     /**
@@ -58,7 +50,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getDescription(), source.getPriority(), source.getFinishedStatus(),
-                source.getTags(), source.getStartDate(), source.getEndDate());
+                source.getStartDate(), source.getEndDate(), source.getTags());
     }
 
     public void setDescription(Description desc) {

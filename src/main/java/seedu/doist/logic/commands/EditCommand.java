@@ -91,7 +91,7 @@ public class EditCommand extends Command {
         Date updateEndDate = (editTaskDescriptor.getEndDate() == null) ? null :
             editTaskDescriptor.getEndDate().orElse(taskToEdit.getStartDate());
 
-        return new Task(updatedName, updatedPriority, finishStatus, updatedTags, updatedStartDate, updateEndDate);
+        return new Task(updatedName, updatedPriority, finishStatus, updatedStartDate, updateEndDate, updatedTags);
     }
 
     /**

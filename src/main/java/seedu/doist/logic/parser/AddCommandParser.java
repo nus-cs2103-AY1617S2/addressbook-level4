@@ -100,7 +100,7 @@ public class AddCommandParser {
         if (!validDate) {
             throw new IllegalValueException("Incorrect Dates");
         }
-        Task toAdd = new Task(new Description(preamble), tagList, startDate, endDate);
+        Task toAdd = new Task(new Description(preamble), startDate, endDate, tagList);
         // set priority
         Optional<Priority> priority = ParserUtil.parsePriority(tokenizer.getValue(PREFIX_AS));
         if (priority.isPresent()) {

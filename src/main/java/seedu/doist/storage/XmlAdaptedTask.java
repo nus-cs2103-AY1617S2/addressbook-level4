@@ -1,11 +1,13 @@
 package seedu.doist.storage;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
+import seedu.doist.logic.parser.ParserUtil;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
@@ -14,10 +16,13 @@ import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
 
+//@@author A0140887W
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
+
+    static final String NULL_STRING = "null";
 
     @XmlElement(required = true)
     private String desc;
@@ -27,6 +32,12 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String finishedStatus;
+
+    @XmlElement(required = true)
+    private String startDate;
+
+    @XmlElement(required = true)
+    private String endDate;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -47,9 +58,19 @@ public class XmlAdaptedTask {
         desc = source.getDescription().desc;
         priority = source.getPriority().getPriorityLevel().toString();
         finishedStatus = Boolean.toString(source.getFinishedStatus().getIsFinished());
+        startDate = getDateString(source.getStartDate());
+        endDate = getDateString(source.getEndDate());
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
+        }
+    }
+
+    private String getDateString(Date date) {
+        if (date != null) {
+            return date.toString();
+        } else {
+            return NULL_STRING;
         }
     }
 
@@ -68,8 +89,18 @@ public class XmlAdaptedTask {
         final Description name = new Description(this.desc);
         final Priority priority = new Priority(this.priority);
         final FinishedStatus finishedStatus = new FinishedStatus(Boolean.parseBoolean(this.finishedStatus));
+        final Date startDate = getDate(this.startDate);
+        final Date endDate = getDate(this.endDate);
         final UniqueTagList tags = new UniqueTagList(personTags);
 
-        return new Task(name, priority, finishedStatus, tags);
+        return new Task(name, priority, finishedStatus, startDate, endDate, tags);
+    }
+
+    private Date getDate(String dateString) {
+        if (dateString != NULL_STRING) {
+            return ParserUtil.parseDate(dateString);
+        } else {
+            return null;
+        }
     }
 }
