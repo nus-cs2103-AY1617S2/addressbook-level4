@@ -2,7 +2,7 @@ package werkbook.task.logic.parser;
 
 import java.util.Date;
 import java.util.List;
- 
+
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 import werkbook.task.model.task.EndDateTime;
@@ -19,8 +19,8 @@ public class DateTimeParser {
      * @param date Any string to be parsed
      * @return Returns formatted date time if a string was found, an empty string otherwise
      */
-    public static String Parse(String date) {
-        List<Date> dateList = p.parse(date);        
+    public static String parse(String date) {
+        List<Date> dateList = p.parse(date);
         return dateList.size() == 0 ? "" : EndDateTime.END_DATETIME_FORMATTER.format(dateList.get(0));
     }
 

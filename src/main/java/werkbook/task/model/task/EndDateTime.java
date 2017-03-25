@@ -16,7 +16,6 @@ public class EndDateTime {
     public static final String MESSAGE_END_DATETIME_CONSTRAINTS = "End Date/Time must be in the format of "
             + "DD/MM/YYYY HHMM, where time is represented in 24 hours";
     public static final SimpleDateFormat END_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    public static final SimpleDateFormat LENIENT_FORMATTER = new SimpleDateFormat("dd/MM");
 
     public final Optional<Date> value;
 

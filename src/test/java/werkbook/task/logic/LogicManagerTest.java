@@ -201,6 +201,8 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         // Add without any arguments
         assertCommandFailure("add", expectedMessage);
+
+        expectedMessage = Name.MESSAGE_NAME_CONSTRAINTS;
         // Add without task name
         assertCommandFailure("add to 01/01/1980 1111", expectedMessage);
     }
@@ -468,7 +470,7 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(new Name("Task " + seed), new Description("" + Math.abs(seed)),
-                    new StartDateTime("01/01/2016 0900"), new EndDateTime("02/01/2016 1000"),
+                    new StartDateTime("10/10/2016 0900"), new EndDateTime("10/10/2016 1000"),
                     new UniqueTagList("Incomplete"));
         }
 

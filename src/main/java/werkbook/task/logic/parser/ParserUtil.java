@@ -92,22 +92,46 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> endDateTime} into an
      * {@code Optional<EndDateTime>} if {@code endDateTime} is present.
+     * Converts the string into a valid end date time if applicable
      */
     public static Optional<EndDateTime> parseEndDateTime(Optional<String> endDateTime)
             throws IllegalValueException {
         assert endDateTime != null;
-        return endDateTime.isPresent() ? Optional.of(new EndDateTime(DateTimeParser.Parse(endDateTime.get())))
+        return endDateTime.isPresent() ? Optional.of(new EndDateTime(DateTimeParser.parse(endDateTime.get())))
                 : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> startDateTime} into an
      * {@code Optional<StartDateTime>} if {@code startDateTime} is present.
+     * Converts the string into a valid start date time if applicable
      */
     public static Optional<StartDateTime> parseStartDateTime(Optional<String> startDateTime)
             throws IllegalValueException {
         assert startDateTime != null;
-        return startDateTime.isPresent() ? Optional.of(new StartDateTime(DateTimeParser.Parse(startDateTime.get())))
+        return startDateTime.isPresent()
+                ? Optional.of(new StartDateTime(DateTimeParser.parse(startDateTime.get())))
+                : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> endDateTime} into an
+     * {@code Optional<EndDateTime>} if {@code endDateTime} is present.
+     */
+    public static Optional<EndDateTime> createEndDateTime(Optional<String> endDateTime)
+            throws IllegalValueException {
+        assert endDateTime != null;
+        return endDateTime.isPresent() ? Optional.of(new EndDateTime(endDateTime.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> startDateTime} into an
+     * {@code Optional<StartDateTime>} if {@code startDateTime} is present.
+     */
+    public static Optional<StartDateTime> createStartDateTime(Optional<String> startDateTime)
+            throws IllegalValueException {
+        assert startDateTime != null;
+        return startDateTime.isPresent() ? Optional.of(new StartDateTime(startDateTime.get()))
                 : Optional.empty();
     }
 

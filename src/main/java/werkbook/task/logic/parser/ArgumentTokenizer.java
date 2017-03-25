@@ -75,12 +75,28 @@ public class ArgumentTokenizer {
      * prefix is empty, Optional.empty() will be returned.
      */
     public Optional<String> getPreamble() {
-        Optional<List<String>> storedPreamble = getAllValues(new Prefix(""));
-        String fullPreamble = String.join(" ", storedPreamble.get());
+        Optional<String> storedPreamble = getValue(new Prefix(""));
 
         /* An empty preamble is considered 'no preamble present' */
         if (storedPreamble.isPresent() && !storedPreamble.get().isEmpty()) {
-            return Optional.of(fullPreamble);
+            return storedPreamble;
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<String> getFullPreamble() {
+        Optional<List<String>> storedPreamble = getAllValues(new Prefix(""));
+
+        if (!storedPreamble.isPresent()) {
+            return Optional.empty();
+        }
+
+        String fullPreamble = String.join(" ", storedPreamble.get());
+
+        /* A empty full preamble is when the concat string is empty */
+        if (!fullPreamble.isEmpty()) {
+            return Optional.of(fullPreamble.trim());
         } else {
             return Optional.empty();
         }
@@ -125,6 +141,7 @@ public class ArgumentTokenizer {
         return positions;
     }
 
+    //@@author A0139903B
     /**
      * Extracts the preamble/arguments and stores them in local variables.
      *
@@ -132,17 +149,6 @@ public class ArgumentTokenizer {
      *            {@code argsString}
      */
     private void extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
-        // Sort by start position
-        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
-
-        // Insert a PrefixPosition to represent the preamble
-        PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
-        prefixPositions.add(0, preambleMarker);
-
-        // Add a dummy PrefixPosition to represent the end of the string
-        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
-        prefixPositions.add(endPositionMarker);
-
         // Extract the prefixed arguments and preamble (if any)
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
             String argValue = extractArgumentValue(argsString, prefixPositions.get(i),
@@ -151,7 +157,6 @@ public class ArgumentTokenizer {
         }
     }
 
-    //@@author A0139903B
     private List<PrefixPosition> filterPositionsForDate(String argsString,
             List<PrefixPosition> prefixPositions) {
         List<PrefixPosition> filteredList = new ArrayList<PrefixPosition>();
@@ -176,6 +181,9 @@ public class ArgumentTokenizer {
 
             // If it is a date, but text following it is not value, continue
             if (prefix.isDateTime() && !DateTimeParser.isValidDate(value)) {
+                PrefixPosition another = new PrefixPosition(new Prefix(""),
+                        prefixPositions.get(i + 1).getStartPosition());
+                filteredList.add(another);
                 continue;
             }
 
@@ -207,10 +215,9 @@ public class ArgumentTokenizer {
         // Should already be filtered by now, time to convert to fit date time
         // format
         if (prefix.isDateTime()) {
-            value = DateTimeParser.Parse(value);
+            value = DateTimeParser.parse(value);
         }
         //@@author
-
         return value.trim();
     }
 
@@ -235,19 +242,16 @@ public class ArgumentTokenizer {
     public static class Prefix {
         final String prefix;
         private final boolean isDateTime;
-        private final boolean isFrom;
 
         public Prefix(String prefix) {
             this.prefix = prefix;
             this.isDateTime = false;
-            this.isFrom = false;
         }
 
         // Overloaded constructor for prefixes with date time that follows
-        public Prefix(String prefix, boolean isDateTime, boolean isFrom) {
+        public Prefix(String prefix, boolean isDateTime) {
             this.prefix = prefix;
             this.isDateTime = isDateTime;
-            this.isFrom = isFrom;
         }
 
         public String getPrefix() {
@@ -256,10 +260,6 @@ public class ArgumentTokenizer {
 
         public boolean isDateTime() {
             return this.isDateTime;
-        }
-
-        public boolean isFrom() {
-            return this.isFrom;
         }
 
         @Override
