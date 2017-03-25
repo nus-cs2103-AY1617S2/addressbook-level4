@@ -149,6 +149,7 @@ public class TodoList implements ReadOnlyTodoList {
         // Rebuild the list of todo tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         todoTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+
         todo.setTags(new UniqueTagList(correctTagReferences));
     }
 

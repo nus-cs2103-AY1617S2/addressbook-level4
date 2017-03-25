@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -100,7 +101,8 @@ public class TodoCardHandle extends GuiHandle {
         if (todo.getCompleteTime() != null && getCompleteTime().equals("Not Complete")) {
             return false;
         }
-        return getFullName().equals(todo.getName().fullName) && getTags().equals(getTags(todo.getTags()));
+        return getFullName().equals(todo.getName().fullName) &&
+                equalLists(getTags(), getTags(todo.getTags()));
     }
 
     @Override
@@ -108,11 +110,15 @@ public class TodoCardHandle extends GuiHandle {
         if (obj instanceof TodoCardHandle) {
             TodoCardHandle handle = (TodoCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getTags().equals(handle.getTags());
+                    && equalLists(getTags(), handle.getTags());
         }
         return super.equals(obj);
     }
-
+    private boolean equalLists (List<String> str1, List<String> str2) {
+        Collections.sort(str1);
+        Collections.sort(str2);
+        return str1.equals(str2);
+    }
     @Override
     public String toString() {
         return getFullName();

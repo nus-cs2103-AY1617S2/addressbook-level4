@@ -7,7 +7,9 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.address.model.todo.Name;
 import seedu.address.model.todo.ReadOnlyTodo;
 import seedu.address.model.todo.Todo;
@@ -77,6 +79,7 @@ public class EditCommand extends Command {
 
         Name updatedName = editTodoDescriptor.getName().orElseGet(todoToEdit::getName);
         UniqueTagList updatedTags = editTodoDescriptor.getTags().orElseGet(todoToEdit::getTags);
+        updatedTags = editTodoDescriptor.getCompleteTags(updatedTags,  editTodoDescriptor.getAddTags());
 
         if (editTodoDescriptor.getStartTime().isPresent() && editTodoDescriptor.getEndTime().isPresent()) {
             return new Todo(updatedName, editTodoDescriptor.getStartTime().get(),
@@ -101,12 +104,14 @@ public class EditCommand extends Command {
         private Optional<Date> startTime = Optional.empty();
         private Optional<Date> endTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<UniqueTagList> addTags = Optional.empty();
 
         public EditTodoDescriptor() {}
 
         public EditTodoDescriptor(EditTodoDescriptor toCopy) {
             this.name = toCopy.getName();
             this.tags = toCopy.getTags();
+            this.addTags = toCopy.getAddTags();
             this.startTime = toCopy.getStartTime();
             this.endTime = toCopy.getEndTime();
         }
@@ -116,11 +121,11 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             if (!this.startTime.isPresent() && !this.endTime.isPresent()) {
-                return CollectionUtil.isAnyPresent(this.name, this.tags);
+                return CollectionUtil.isAnyPresent(this.name, this.tags, this.addTags);
             } else if (!this.startTime.isPresent() && this.endTime.isPresent()) {
-                return CollectionUtil.isAnyPresent(this.name, this.endTime, this.tags);
+                return CollectionUtil.isAnyPresent(this.name, this.endTime, this.tags, this.addTags);
             } else {
-                return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.tags);
+                return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.tags, this.addTags);
             }
         }
 
@@ -137,11 +142,16 @@ public class EditCommand extends Command {
             assert tags != null;
             this.tags = tags;
         }
-
+        public void setAddTags(Optional<UniqueTagList> addTags) {
+            assert addTags != null;
+            this.addTags = addTags;
+        }
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
-
+        public Optional<UniqueTagList> getAddTags() {
+            return addTags;
+        }
         public Optional<Date> getStartTime() {
             if (this.startTime != null) {
                 return this.startTime;
@@ -170,6 +180,18 @@ public class EditCommand extends Command {
             } else {
                 this.endTime = Optional.of(endTime);
             }
+        }
+        public UniqueTagList getCompleteTags(UniqueTagList tags, Optional<UniqueTagList> addTags) {
+            if  (addTags.isPresent()) {
+                for (Tag t : addTags.get()) {
+                    try {
+                        tags.add(t);
+                    } catch (DuplicateTagException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return tags;
         }
     }
 }
