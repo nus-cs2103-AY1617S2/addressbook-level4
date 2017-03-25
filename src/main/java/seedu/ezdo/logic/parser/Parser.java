@@ -118,8 +118,8 @@ public class Parser {
         default:
             if (commandAliases.isAlias(commandWord)) {
                 String mappedCommand = commandAliases.getCommandFromAlias(commandWord);
-                String properInput = mappedCommand + arguments;
-                return parseCommand(properInput);
+                String properInput = mappedCommand + arguments; // change the alias to the default command word
+                return parseCommand(properInput); // parse the command again
             }
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
