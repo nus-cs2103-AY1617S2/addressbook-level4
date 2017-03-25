@@ -37,7 +37,7 @@ public class FindCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public Command parse(String args) throws IllegalValueException {
 
@@ -73,7 +73,7 @@ public class FindCommandParser {
             if ((inputPrefix == PREFIX_START_DATE || inputPrefix == PREFIX_END_DATE)) {
                 // only parse with natty if keywords are not only integers or contains time
                 // so that user can also search for numeral day_of_month/year
-                if (!keywords.matches(REGEX_ONLY_DIGITS) || hasAmOrPm(keywords)) { 
+                if (!keywords.matches(REGEX_ONLY_DIGITS) || hasAmOrPm(keywords)) {
                     DateTime parsedFormattedDateTime = new DateTime(keywords);
 
                     // user only enters time
