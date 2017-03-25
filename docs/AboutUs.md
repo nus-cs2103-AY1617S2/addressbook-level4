@@ -20,7 +20,7 @@ Features implemented: <br>
 * [Load Command](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#313-loading-the-program-data-from-a-specified-path-load)<br>
 
 Code Written: <br>
-[[Functional Code]()] [[Testing Code]()]
+[[Functional Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/main/A0141993X.md)] [[Testing Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/test/A0141993X.md)]
 
 -----
 
@@ -35,7 +35,7 @@ Features implemented:<br>
 * [Find Command](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#33-finding-a-task-find)<br>
 
 Code Written: <br>
-[[Functional Code]()] [[Testing Code]()]
+[[Functional Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/main/A0139221N.md)] [[Testing Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/test/A0139221N.md)]
 
 -----
 
@@ -50,7 +50,7 @@ Features implemented: <br>
 * [Done/Undone Command](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#done)<br>
 
 Code Written: <br>
-[[Functional Code]()] [[Testing Code]()]
+[[Functional Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/main/A0143355J.md)] [[Testing Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/test/A0143355J.md)]
 
 -----
 
@@ -66,7 +66,7 @@ Code Written: <br>
  * [Flexible Command Format](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#3-features)<br>
  
 Code Written: <br>
-[[Functional Code]()] [[Testing Code]()]
+[[Functional Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/main/A0139747N.md)] [[Testing Code](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/collated/test/A0139747N.md)]
 
  -----
 
