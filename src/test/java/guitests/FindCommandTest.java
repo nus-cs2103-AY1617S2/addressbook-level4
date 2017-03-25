@@ -64,6 +64,7 @@ public class FindCommandTest extends EzDoGuiTest {
         assertResultMessage("0 tasks listed!");
     }
 
+    @Test
     public void find_invalidCommand_fail_2() {
         commandBox.runCommand("find s/asdasd");
         assertResultMessage(TaskDate.MESSAGE_FIND_DATE_CONSTRAINTS);
