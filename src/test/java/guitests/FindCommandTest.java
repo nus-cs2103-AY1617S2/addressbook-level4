@@ -19,15 +19,15 @@ public class FindCommandTest extends EzDoGuiTest {
         assertFindResult("find Meier", td.benson, td.daniel); // multiple results
         assertFindResult("find p/1", td.alice, td.benson);
         assertFindResult("find s/11/11/2015", td.benson);
-        assertFindResult("find d/04/14/2016", td.daniel);
+        assertFindResult("find d/14/04/2016", td.daniel);
         assertFindResult("find t/owesMoney", td.benson);
         assertFindResult("find Meier p/1", td.benson);
         assertFindResult("find Meier p/1 s/11/11/2015", td.benson);
         assertFindResult("find Meier p/1 s/11th Nov 2015", td.benson);
         assertFindResult("find Meier p/1 s/Nov 11th 2015", td.benson);
-        assertFindResult("find Meier p/1 s/11-11-2015 d/02/12/2017 t/owesMoney t/friends", td.benson);
+        assertFindResult("find Meier p/1 s/11-11-2015 d/12/02/2017 t/owesMoney t/friends", td.benson);
         assertFindResult("find p/2 d/april 14th 2016", td.daniel);
-        assertFindResult("find p/2 d/04/14/2016", td.daniel);
+        assertFindResult("find p/2 d/14/04/2016", td.daniel);
         assertFindResult("find p/1", td.alice, td.benson);
 
         //find after deleting one result
