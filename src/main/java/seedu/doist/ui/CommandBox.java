@@ -79,12 +79,14 @@ public class CommandBox extends UiPart<Region> {
         } else if (event.getCode() == KeyCode.DOWN) {
             event.consume();
             handleDownKey();
-        }  else if (event.getCode() == KeyCode.TAB) {  // auto complete
+        } else if (event.getCode() == KeyCode.TAB) {  // auto complete
             event.consume();
             completeWithSelectedSuggestion();
         } else if (undoKeys.match(event)) {  // use control+z and control+y to execute undo and re-do operation
+            event.consume();
             handleCtrlZKeyCombination();
         } else if (redoKeys.match(event)) {
+            event.consume();
             handleCtrlYKeyCombination();
         }
     }
