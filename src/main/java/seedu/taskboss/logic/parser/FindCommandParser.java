@@ -70,27 +70,27 @@ public class FindCommandParser {
             String keywords = argsTokenizer.getValue(inputPrefix).get();
 
             //@@author A0143157J
-            if ((inputPrefix == PREFIX_START_DATE || inputPrefix == PREFIX_END_DATE)) {
-                // only parse with natty if input is (not only integers and not a single word) or (contains time)
-                // so that user can also search for numeral day_of_month/year
-                if (keywords.replaceAll(DIGITS, EMPTY_STRING).length() > 0 || hasAmOrPm(keywords)) {
-                    DateTime parsedFormattedDateTime = new DateTime(keywords);
+            // only parse with natty if input is (not only integers and not a single word) or (contains time)
+            // so that user can also search for numeral day_of_month/year
+            if ((inputPrefix == PREFIX_START_DATE || inputPrefix == PREFIX_END_DATE) &&
+                    (keywords.replaceAll(DIGITS, EMPTY_STRING).length() > 0 || hasAmOrPm(keywords))) {
 
-                    // user only enters time
-                    if (parsedFormattedDateTime.isDateInferred() &&
-                            !parsedFormattedDateTime.isTimeInferred()) {
-                        String extractedKeywords = parsedFormattedDateTime.value
-                                .substring(INDEX_TIME_START_POSITION);
-                        keywords = extractedKeywords;
-                    // user only enters month
-                    } else if (!keywords.trim().contains(WHITESPACE)) {
-                        String extractedKeywords = parsedFormattedDateTime.value
-                              .substring(INDEX_MONTH_START_POSITION, INDEX_MONTH_END_POSITION + 1);
-                        keywords = extractedKeywords;
-                    // user enters date with or without time
-                    } else {
-                        keywords = parsedFormattedDateTime.value;
-                    }
+                DateTime parsedFormattedDateTime = new DateTime(keywords);
+
+                // user only enters time
+                if (parsedFormattedDateTime.isDateInferred() &&
+                        !parsedFormattedDateTime.isTimeInferred()) {
+                    String extractedKeywords = parsedFormattedDateTime.value
+                            .substring(INDEX_TIME_START_POSITION);
+                    keywords = extractedKeywords;
+                // user only enters month
+                } else if (!keywords.trim().contains(WHITESPACE)) {
+                    String extractedKeywords = parsedFormattedDateTime.value
+                          .substring(INDEX_MONTH_START_POSITION, INDEX_MONTH_END_POSITION + 1);
+                    keywords = extractedKeywords;
+                // user enters date with or without time
+                } else {
+                    keywords = parsedFormattedDateTime.value;
                 }
             }
 
