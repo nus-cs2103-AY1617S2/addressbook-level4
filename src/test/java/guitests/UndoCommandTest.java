@@ -2,9 +2,11 @@ package guitests;
 
 import org.junit.Test;
 
+import seedu.doit.logic.commands.UndoCommand;
 import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TypicalTestTasks;
 
+//@@author A0139399J
 public class UndoCommandTest extends TaskManagerGuiTest {
 
     public static final String MESSAGE_UNDO_COMMAND = "undo";
@@ -47,6 +49,14 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         this.commandBox.runCommand(MESSAGE_TEST_CLEAR_COMMAND);
         this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
     }
+
+    @Test
+    public void undo_emptyStack_failure() {
+        this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_FAILURE);
+    }
+
+
 
     private void assertUndoSuccess() {
         // confirm the list now contains all previous tasks plus the new task
