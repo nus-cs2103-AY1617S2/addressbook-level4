@@ -88,6 +88,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public String getTaskCategory() {
+        this.category = sortCategory();
         return this.category;
     }
 
