@@ -229,9 +229,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] c/valid, address",
+        assertCommandFailure("add []/[;] c/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name c/valid, t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name c/valid, t/wrong/-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
