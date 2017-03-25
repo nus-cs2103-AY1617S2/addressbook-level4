@@ -9,8 +9,8 @@ import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.TaskCategory;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
+import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
@@ -26,64 +26,64 @@ public class ModelManager extends ComponentManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager taskManager;
+    private final GeeKeep geeKeep;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private final Stack<TaskManager> pastTaskManagers;
-    private final Stack<TaskManager> futureTaskManagers;
+    private final Stack<GeeKeep> pastGeeKeeps;
+    private final Stack<GeeKeep> futureGeeKeeps;
 
     /**
-     * Initializes a ModelManager with the given taskManager and userPrefs.
+     * Initializes a ModelManager with the given geekeep and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyGeeKeep geeKeep, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
+        assert !CollectionUtil.isAnyNull(geeKeep, userPrefs);
 
-        logger.fine("Initializing with GeeKeep: " + taskManager + " and user prefs " + userPrefs);
+        logger.fine("Initializing with GeeKeep: " + geeKeep + " and user prefs " + userPrefs);
 
-        this.taskManager = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        pastTaskManagers = new Stack<>();
-        futureTaskManagers = new Stack<>();
+        this.geeKeep = new GeeKeep(geeKeep);
+        filteredTasks = new FilteredList<>(this.geeKeep.getTaskList());
+        pastGeeKeeps = new Stack<>();
+        futureGeeKeeps = new Stack<>();
 
     }
 
     public ModelManager() {
-        this(new TaskManager(), new UserPrefs());
+        this(new GeeKeep(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
-        taskManager.resetData(newData);
-        indicateTaskManagerChanged();
+    public void resetData(ReadOnlyGeeKeep newData) {
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
+        geeKeep.resetData(newData);
+        indicateGeeKeepChanged();
     }
 
     @Override
-    public ReadOnlyTaskManager getTaskManager() {
-        return taskManager;
+    public ReadOnlyGeeKeep getGeeKeep() {
+        return geeKeep;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged() {
-        raise(new TaskManagerChangedEvent(taskManager));
+    private void indicateGeeKeepChanged() {
+        raise(new GeeKeepChangedEvent(geeKeep));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
-        taskManager.removeTask(target);
-        indicateTaskManagerChanged();
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
+        geeKeep.removeTask(target);
+        indicateGeeKeepChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
-        taskManager.addTask(task);
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
+        geeKeep.addTask(task);
         updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
+        indicateGeeKeepChanged();
     }
 
     @Override
@@ -91,12 +91,12 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedTask != null;
 
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskListIndex, editedTask);
+        geeKeep.updateTask(taskListIndex, editedTask);
 
-        indicateTaskManagerChanged();
+        indicateGeeKeepChanged();
     }
 
     // =========== Filtered Task List Accessors =============================================================
@@ -179,20 +179,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskDone(taskListIndex);
-        indicateTaskManagerChanged();
+        geeKeep.markTaskDone(taskListIndex);
+        indicateGeeKeepChanged();
     }
 
     @Override
     public void markTaskUndone(int filteredTaskListIndex) {
-        pastTaskManagers.add(new TaskManager(taskManager));
-        futureTaskManagers.clear();
+        pastGeeKeeps.add(new GeeKeep(geeKeep));
+        futureGeeKeeps.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskUndone(taskListIndex);
-        indicateTaskManagerChanged();
+        geeKeep.markTaskUndone(taskListIndex);
+        indicateGeeKeepChanged();
     }
 
     @Override
@@ -227,22 +227,22 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void undo() throws NothingToUndoException {
-        if (pastTaskManagers.empty()) {
+        if (pastGeeKeeps.empty()) {
             throw new NothingToUndoException();
         }
-        futureTaskManagers.push(new TaskManager(taskManager));
-        taskManager.resetData(pastTaskManagers.pop());
-        indicateTaskManagerChanged();
+        futureGeeKeeps.push(new GeeKeep(geeKeep));
+        geeKeep.resetData(pastGeeKeeps.pop());
+        indicateGeeKeepChanged();
     }
 
     @Override
     public void redo() throws NothingToRedoException {
-        if (futureTaskManagers.empty()) {
+        if (futureGeeKeeps.empty()) {
             throw new NothingToRedoException();
         }
-        pastTaskManagers.push(new TaskManager(taskManager));
-        taskManager.resetData(futureTaskManagers.pop());
-        indicateTaskManagerChanged();
+        pastGeeKeeps.push(new GeeKeep(geeKeep));
+        geeKeep.resetData(futureGeeKeeps.pop());
+        indicateGeeKeepChanged();
     }
 
 }

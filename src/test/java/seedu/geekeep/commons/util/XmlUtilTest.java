@@ -11,9 +11,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.geekeep.model.TaskManager;
-import seedu.geekeep.storage.XmlSerializableTaskManager;
-import seedu.geekeep.testutil.TaskManagerBuilder;
+import seedu.geekeep.model.GeeKeep;
+import seedu.geekeep.storage.XmlSerializableGeeKeep;
+import seedu.geekeep.testutil.GeeKeepBuilder;
 import seedu.geekeep.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -30,7 +30,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_AssertionError() throws Exception {
         thrown.expect(AssertionError.class);
-        XmlUtil.getDataFromFile(null, TaskManager.class);
+        XmlUtil.getDataFromFile(null, GeeKeep.class);
     }
 
     @Test
@@ -42,18 +42,18 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_FileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, TaskManager.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, GeeKeep.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_DataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, TaskManager.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, GeeKeep.class);
     }
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableTaskManager.class);
+        XmlSerializableGeeKeep dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableGeeKeep.class);
         assertEquals(9, dataFromFile.getTaskList().size());
         assertEquals(0, dataFromFile.getTagList().size());
     }
@@ -61,7 +61,7 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_nullFile_AssertionError() throws Exception {
         thrown.expect(AssertionError.class);
-        XmlUtil.saveDataToFile(null, new TaskManager());
+        XmlUtil.saveDataToFile(null, new GeeKeep());
     }
 
     @Test
@@ -73,24 +73,24 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_FileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new TaskManager());
+        XmlUtil.saveDataToFile(MISSING_FILE, new GeeKeep());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         TEMP_FILE.createNewFile();
-        XmlSerializableTaskManager dataToWrite = new XmlSerializableTaskManager(new TaskManager());
+        XmlSerializableGeeKeep dataToWrite = new XmlSerializableGeeKeep(new GeeKeep());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
-        assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
+        XmlSerializableGeeKeep dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableGeeKeep.class);
+        assertEquals((new GeeKeep(dataToWrite)).toString(), (new GeeKeep(dataFromFile)).toString());
         //TODO: use equality instead of string comparisons
 
-        TaskManagerBuilder builder = new TaskManagerBuilder(new TaskManager());
-        dataToWrite = new XmlSerializableTaskManager(
+        GeeKeepBuilder builder = new GeeKeepBuilder(new GeeKeep());
+        dataToWrite = new XmlSerializableGeeKeep(
                 builder.withTask(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
-        assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableGeeKeep.class);
+        assertEquals((new GeeKeep(dataToWrite)).toString(), (new GeeKeep(dataFromFile)).toString());
     }
 }

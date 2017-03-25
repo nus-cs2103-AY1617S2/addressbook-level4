@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.geekeep.commons.core.EventsCenter;
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
+import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.events.ui.ShowHelpRequestEvent;
 import seedu.geekeep.logic.commands.AddCommand;
@@ -34,10 +34,10 @@ import seedu.geekeep.logic.commands.FindCommand;
 import seedu.geekeep.logic.commands.HelpCommand;
 import seedu.geekeep.logic.commands.ListCommand;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
+import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
-import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
@@ -58,7 +58,7 @@ public class LogicManagerTest {
 
     private Logic logic;
     //These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedTaskManager;
+    private ReadOnlyGeeKeep latestSavedGeeKeep;
     private boolean helpShown;
 
     private int targetedJumpIndex;
@@ -97,19 +97,19 @@ public class LogicManagerTest {
         }
 
         /**
-         * Adds auto-generated Task objects to the given TaskManager
-         * @param taskManager The TaskManager to which the Tasks will be added
+         * Adds auto-generated Task objects to the given GeeKeep
+         * @param geeKeep The GeeKeep to which the Tasks will be added
          */
-        void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
-            addToTaskManager(taskManager, generateTaskList(numGenerated));
+        void addToGeeKeep(GeeKeep geeKeep, int numGenerated) throws Exception {
+            addToGeeKeep(geeKeep, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Tasks to the given TaskManager
+         * Adds the given list of Tasks to the given GeeKeep
          */
-        void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+        void addToGeeKeep(GeeKeep geeKeep, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
-                taskManager.addTask(p);
+                geeKeep.addTask(p);
             }
         }
 
@@ -165,21 +165,21 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an TaskManager with auto-generated tasks.
+         * Generates a GeeKeep with auto-generated tasks.
          */
-        TaskManager generateTaskManager(int numGenerated) throws Exception {
-            TaskManager taskManager = new TaskManager();
-            addToTaskManager(taskManager, numGenerated);
-            return taskManager;
+        GeeKeep generateGeeKeep(int numGenerated) throws Exception {
+            GeeKeep geeKeep = new GeeKeep();
+            addToGeeKeep(geeKeep, numGenerated);
+            return geeKeep;
         }
 
         /**
-         * Generates an TaskManager based on the list of Tasks given.
+         * Generates a GeeKeep based on the list of Tasks given.
          */
-        TaskManager generateTaskManager(List<Task> tasks) throws Exception {
-            TaskManager taskManager = new TaskManager();
-            addToTaskManager(taskManager, tasks);
-            return taskManager;
+        GeeKeep generateGeeKeep(List<Task> tasks) throws Exception {
+            GeeKeep geeKeep = new GeeKeep();
+            addToGeeKeep(geeKeep, tasks);
+            return geeKeep;
         }
 
         /**
@@ -202,12 +202,12 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
+     *      - the internal geekeep data are same as those in the {@code expectedGeeKeep} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedTaskManager} was saved to the storage file. <br>
+     *      - {@code expectedGeeKeep} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskManager expectedTaskManager,
+                                       ReadOnlyGeeKeep expectedGeeKeep,
                                        List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
@@ -223,30 +223,30 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedTaskManager, model.getTaskManager());
-        assertEquals(expectedTaskManager, latestSavedTaskManager);
+        assertEquals(expectedGeeKeep, model.getGeeKeep());
+        assertEquals(expectedGeeKeep, latestSavedGeeKeep);
     }
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'task manager' and the 'last shown list' are verified to be unchanged.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * Both the 'geekeep' and the 'last shown list' are verified to be unchanged.
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyGeeKeep, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
+        GeeKeep expectedGeeKeep = new GeeKeep(model.getGeeKeep());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-        assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
+        assertCommandBehavior(true, inputCommand, expectedMessage, expectedGeeKeep, expectedShownList);
     }
 
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'task manager' and the 'last shown list' are as specified.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * Also confirms that both the 'geekeep' and the 'last shown list' are as specified.
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyGeeKeep, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTaskManager expectedTaskManager,
+                                      ReadOnlyGeeKeep expectedGeeKeep,
                                       List<? extends ReadOnlyTask> expectedShownList) {
-        assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
+        assertCommandBehavior(false, inputCommand, expectedMessage, expectedGeeKeep, expectedShownList);
     }
 
     /**
@@ -276,7 +276,7 @@ public class LogicManagerTest {
         List<Task> taskList = helper.generateTaskList(2);
 
         // set AB state to 2 tasks
-        model.resetData(new TaskManager());
+        model.resetData(new GeeKeep());
         for (Task p : taskList) {
             model.addTask(p);
         }
@@ -311,7 +311,7 @@ public class LogicManagerTest {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
-        TaskManager expectedAB = new TaskManager();
+        GeeKeep expectedAB = new GeeKeep();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -329,7 +329,7 @@ public class LogicManagerTest {
         Task toBeAdded = helper.adam();
 
         // setup starting state
-        model.addTask(toBeAdded); // task already in internal task manager
+        model.addTask(toBeAdded); // task already in internal geekeep
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -343,7 +343,7 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new GeeKeep(), Collections.emptyList());
     }
 
     @Test
@@ -351,7 +351,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        GeeKeep expectedAB = helper.generateGeeKeep(threeTasks);
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
@@ -376,7 +376,7 @@ public class LogicManagerTest {
     @Test
     public void execute_exit() {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
-                new TaskManager(), Collections.emptyList());
+                new GeeKeep(), Collections.emptyList());
     }
 
     @Test
@@ -394,7 +394,7 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithTitle("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        GeeKeep expectedAB = helper.generateGeeKeep(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
@@ -414,7 +414,7 @@ public class LogicManagerTest {
         Task p1 = helper.generateTaskWithTitle("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        GeeKeep expectedAB = helper.generateGeeKeep(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
@@ -434,7 +434,7 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        GeeKeep expectedAB = helper.generateGeeKeep(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
@@ -446,7 +446,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new GeeKeep(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
@@ -460,10 +460,10 @@ public class LogicManagerTest {
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedAB = helper.generateTaskManager(2);
+        GeeKeep expectedAB = helper.generateGeeKeep(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
-        // prepare task manager state
+        // prepare geekeep state
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
@@ -485,8 +485,8 @@ public class LogicManagerTest {
     }
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-        latestSavedTaskManager = new TaskManager(abce.data);
+    private void handleLocalModelChangedEvent(GeeKeepChangedEvent abce) {
+        latestSavedGeeKeep = new GeeKeep(abce.data);
     }
 
     @Subscribe
@@ -497,12 +497,12 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
+        String tempGeeKeepFile = saveFolder.getRoot().getPath() + "TempGeeKeep.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempGeeKeepFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
+        latestSavedGeeKeep = new GeeKeep(model.getGeeKeep()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }

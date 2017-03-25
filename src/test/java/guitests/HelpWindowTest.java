@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
 
-public class HelpWindowTest extends TaskManagerGuiTest {
+public class HelpWindowTest extends GeeKeepGuiTest {
 
     @Test
     public void openHelpWindow() {

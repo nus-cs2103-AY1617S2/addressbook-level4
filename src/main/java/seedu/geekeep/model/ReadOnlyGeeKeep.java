@@ -7,7 +7,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 /**
  * Unmodifiable view of GeeKeep
  */
-public interface ReadOnlyTaskManager {
+public interface ReadOnlyGeeKeep {
 
     /**
      * Returns an unmodifiable view of the tasks list. This list will not contain any duplicate tasks.

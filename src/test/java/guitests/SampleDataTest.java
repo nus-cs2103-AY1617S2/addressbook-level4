@@ -4,14 +4,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.util.SampleDataUtil;
 import seedu.geekeep.testutil.TestUtil;
 
-public class SampleDataTest extends TaskManagerGuiTest {
+public class SampleDataTest extends GeeKeepGuiTest {
     @Override
-    protected TaskManager getInitialData() {
+    protected GeeKeep getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -23,7 +23,7 @@ public class SampleDataTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void taskManager_dataFileDoesNotExist_loadSampleData() throws Exception {
+    public void geeKeep_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
         assertTrue(taskListPanel.isListMatching(expectedList));
     }

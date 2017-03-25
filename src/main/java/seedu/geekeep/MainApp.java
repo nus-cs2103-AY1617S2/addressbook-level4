@@ -20,10 +20,10 @@ import seedu.geekeep.commons.util.ConfigUtil;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.logic.Logic;
 import seedu.geekeep.logic.LogicManager;
+import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
-import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.model.util.SampleDataUtil;
 import seedu.geekeep.storage.Storage;
@@ -78,20 +78,20 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManager> taskManagerOptional;
-        ReadOnlyTaskManager initialData;
+        Optional<ReadOnlyGeeKeep> geeKeepOptional;
+        ReadOnlyGeeKeep initialData;
         try {
-            taskManagerOptional = storage.readTaskManager();
-            if (!taskManagerOptional.isPresent()) {
+            geeKeepOptional = storage.readGeeKeep();
+            if (!geeKeepOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample GeeKeep");
             }
-            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+            initialData = geeKeepOptional.orElseGet(SampleDataUtil::getSampleGeeKeep);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty GeeKeep");
-            initialData = new TaskManager();
+            initialData = new GeeKeep();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty GeeKeep");
-            initialData = new TaskManager();
+            initialData = new GeeKeep();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -173,7 +173,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Task Manager ] =============================");
+        logger.info("============================ [ Stopping GeeKeep ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

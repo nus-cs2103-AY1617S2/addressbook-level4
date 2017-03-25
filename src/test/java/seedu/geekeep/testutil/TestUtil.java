@@ -29,7 +29,7 @@ import seedu.geekeep.TestApp;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.FileUtil;
 import seedu.geekeep.commons.util.XmlUtil;
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
@@ -37,7 +37,7 @@ import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
-import seedu.geekeep.storage.XmlSerializableTaskManager;
+import seedu.geekeep.storage.XmlSerializableGeeKeep;
 
 /**
  * A utility class for test cases.
@@ -115,7 +115,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
+        createDataFileWithData(generateSampleStorageGeeKeep(), filePath);
     }
 
     public static String descOnFail(Object... comparedObjects) {
@@ -125,8 +125,8 @@ public class TestUtil {
                 .collect(Collectors.joining("\n"));
     }
 
-    public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
-        return new XmlSerializableTaskManager(new TaskManager());
+    public static XmlSerializableGeeKeep generateSampleStorageGeeKeep() {
+        return new XmlSerializableGeeKeep(new GeeKeep());
     }
 
     public static List<Task> generateSampleTaskData() {

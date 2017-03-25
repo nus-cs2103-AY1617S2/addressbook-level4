@@ -10,7 +10,7 @@ import seedu.geekeep.logic.commands.AddCommand;
 import seedu.geekeep.testutil.TestTask;
 import seedu.geekeep.testutil.TestUtil;
 
-public class AddCommandTest extends TaskManagerGuiTest {
+public class AddCommandTest extends GeeKeepGuiTest {
 
     @Test
     public void add() {

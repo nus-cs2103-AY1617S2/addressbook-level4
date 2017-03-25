@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClearCommandTest extends TaskManagerGuiTest {
+public class ClearCommandTest extends GeeKeepGuiTest {
 
     @Test
     public void clear() {

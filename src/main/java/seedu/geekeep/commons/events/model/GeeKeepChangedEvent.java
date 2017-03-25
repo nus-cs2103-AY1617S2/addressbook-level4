@@ -1,14 +1,14 @@
 package seedu.geekeep.commons.events.model;
 
 import seedu.geekeep.commons.events.BaseEvent;
-import seedu.geekeep.model.ReadOnlyTaskManager;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 
 /** Indicates the GeeKeep in the model has changed*/
-public class TaskManagerChangedEvent extends BaseEvent {
+public class GeeKeepChangedEvent extends BaseEvent {
 
-    public final ReadOnlyTaskManager data;
+    public final ReadOnlyGeeKeep data;
 
-    public TaskManagerChangedEvent(ReadOnlyTaskManager data) {
+    public GeeKeepChangedEvent(ReadOnlyGeeKeep data) {
         this.data = data;
     }
 

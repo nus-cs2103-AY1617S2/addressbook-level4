@@ -33,10 +33,10 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     /** Returns the GeeKeep */
-    ReadOnlyTaskManager getTaskManager();
+    ReadOnlyGeeKeep getGeeKeep();
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyTaskManager newData);
+    void resetData(ReadOnlyGeeKeep newData);
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();

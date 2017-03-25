@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 import seedu.geekeep.TestApp;
 import seedu.geekeep.commons.core.EventsCenter;
 import seedu.geekeep.commons.events.BaseEvent;
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.testutil.TestUtil;
 import seedu.geekeep.testutil.TypicalTestTasks;
@@ -33,7 +33,7 @@ import seedu.geekeep.testutil.TypicalTestTasks;
 /**
  * A GUI Test class for GeeKeep.
  */
-public abstract class TaskManagerGuiTest {
+public abstract class GeeKeepGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -52,7 +52,6 @@ public abstract class TaskManagerGuiTest {
     protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    //protected BrowserPanelHandle browserPanel;
     private Stage stage;
 
     @BeforeClass
@@ -87,9 +86,9 @@ public abstract class TaskManagerGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected TaskManager getInitialData() {
-        TaskManager ab = new TaskManager();
-        TypicalTestTasks.loadTaskManagerWithSampleData(ab);
+    protected GeeKeep getInitialData() {
+        GeeKeep ab = new GeeKeep();
+        TypicalTestTasks.loadGeeKeepWithSampleData(ab);
         return ab;
     }
 

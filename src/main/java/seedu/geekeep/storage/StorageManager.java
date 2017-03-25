@@ -8,10 +8,10 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
+import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
-import seedu.geekeep.model.ReadOnlyTaskManager;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
 
 /**
@@ -20,18 +20,18 @@ import seedu.geekeep.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private TaskManagerStorage taskManagerStorage;
+    private GeeKeepStorage geeKeepStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(GeeKeepStorage geeKeepStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.taskManagerStorage = taskManagerStorage;
+        this.geeKeepStorage = geeKeepStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
-        this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String geeKeepFilePath, String userPrefsFilePath) {
+        this(new XmlGeeKeepStorage(geeKeepFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -50,39 +50,39 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ GeeKeep methods ==============================
 
     @Override
-    public String getTaskManagerFilePath() {
-        return taskManagerStorage.getTaskManagerFilePath();
+    public String getGeeKeepFilePath() {
+        return geeKeepStorage.getGeeKeepFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-        return readTaskManager(taskManagerStorage.getTaskManagerFilePath());
+    public Optional<ReadOnlyGeeKeep> readGeeKeep() throws DataConversionException, IOException {
+        return readGeeKeep(geeKeepStorage.getGeeKeepFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyGeeKeep> readGeeKeep(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return taskManagerStorage.readTaskManager(filePath);
+        return geeKeepStorage.readGeeKeep(filePath);
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-        saveTaskManager(taskManager, taskManagerStorage.getTaskManagerFilePath());
+    public void saveGeeKeep(ReadOnlyGeeKeep geeKeep) throws IOException {
+        saveGeeKeep(geeKeep, geeKeepStorage.getGeeKeepFilePath());
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+    public void saveGeeKeep(ReadOnlyGeeKeep geeKeep, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskManagerStorage.saveTaskManager(taskManager, filePath);
+        geeKeepStorage.saveGeeKeep(geeKeep, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
+    public void handleGeeKeepChangedEvent(GeeKeepChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveTaskManager(event.data);
+            saveGeeKeep(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

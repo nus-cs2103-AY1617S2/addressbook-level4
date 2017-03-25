@@ -20,30 +20,30 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.testutil.TypicalTestTasks;
 
-public class TaskManagerTest {
+public class GeeKeepTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final TaskManager taskManager = new TaskManager();
+    private final GeeKeep geeKeep = new GeeKeep();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), taskManager.getTaskList());
-        assertEquals(Collections.emptyList(), taskManager.getTagList());
+        assertEquals(Collections.emptyList(), geeKeep.getTaskList());
+        assertEquals(Collections.emptyList(), geeKeep.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        taskManager.resetData(null);
+        geeKeep.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyTaskManager_replacesData() {
-        TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
-        taskManager.resetData(newData);
-        assertEquals(newData, taskManager);
+    public void resetData_withValidReadOnlyGeeKeep_replacesData() {
+        GeeKeep newData = new TypicalTestTasks().getTypicalGeeKeep();
+        geeKeep.resetData(newData);
+        assertEquals(newData, geeKeep);
     }
 
     @Test
@@ -54,10 +54,10 @@ public class TaskManagerTest {
         try {
             newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
             List<Tag> newTags = td.alice.getTags().asObservableList();
-            TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
+            GeeKeepStub newData = new GeeKeepStub(newTasks, newTags);
 
             thrown.expect(AssertionError.class);
-            taskManager.resetData(newData);
+            geeKeep.resetData(newData);
         } catch (IllegalValueException ive) {
             assert false : "not possible";
         }
@@ -65,25 +65,25 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
-        List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
+        GeeKeep typicalGeeKeep = new TypicalTestTasks().getTypicalGeeKeep();
+        List<ReadOnlyTask> newTasks = typicalGeeKeep.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalGeeKeep.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
+        GeeKeepStub newData = new GeeKeepStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
+        geeKeep.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyTaskManager whose tasks and tags lists can violate interface constraints.
+     * A stub ReadOnlyGeeKeep whose tasks and tags lists can violate interface constraints.
      */
-    private static class TaskManagerStub implements ReadOnlyTaskManager {
+    private static class GeeKeepStub implements ReadOnlyGeeKeep {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+        GeeKeepStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
             this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }

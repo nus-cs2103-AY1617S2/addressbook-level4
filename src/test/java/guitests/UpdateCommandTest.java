@@ -15,7 +15,7 @@ import seedu.geekeep.testutil.TaskBuilder;
 import seedu.geekeep.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class UpdateCommandTest extends TaskManagerGuiTest {
+public class UpdateCommandTest extends GeeKeepGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
@@ -25,12 +25,12 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
      * Checks whether the edited task has the correct updated details.
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
-     * @param taskManagerIndex index of task to edit in GeeKeep.
+     * @param geeKeepIndex index of task to edit in GeeKeep.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
+    private void assertEditSuccess(int filteredTaskListIndex, int geeKeepIndex,
                                     String detailsToEdit, TestTask editedTask) {
         commandBox.runCommand("update " + filteredTaskListIndex + " " + detailsToEdit);
 
@@ -39,7 +39,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[taskManagerIndex - 1] = editedTask;
+        expectedTasksList[geeKeepIndex - 1] = editedTask;
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(UpdateCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
@@ -50,7 +50,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit
             = "Bobby s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
-        int taskManagerIndex = 1;
+        int geeKeepIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Bobby")
                 .withEndDateTime("01-05-17 1630")
@@ -58,18 +58,18 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
                 .withLocation("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertEditSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int taskManagerIndex = 2;
+        int geeKeepIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertEditSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -86,12 +86,12 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
-        int taskManagerIndex = 5;
+        int geeKeepIndex = 5;
 
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Belle").build();
 
-        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredTaskListIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -130,11 +130,11 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int taskManagerIndex = 2;
+        int geeKeepIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertEditSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 }

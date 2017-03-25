@@ -8,7 +8,7 @@ import org.junit.Test;
 import seedu.geekeep.testutil.TestTask;
 import seedu.geekeep.testutil.TestUtil;
 
-public class DeleteCommandTest extends TaskManagerGuiTest {
+public class DeleteCommandTest extends GeeKeepGuiTest {
 
     /**
      * Runs the delete command to delete the task at specified index and confirms the result is correct.

@@ -7,7 +7,7 @@ import org.junit.Test;
 import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.testutil.TestTask;
 
-public class FindCommandTest extends TaskManagerGuiTest {
+public class FindCommandTest extends GeeKeepGuiTest {
 
     @Test
     public void find_nonEmptyList() {

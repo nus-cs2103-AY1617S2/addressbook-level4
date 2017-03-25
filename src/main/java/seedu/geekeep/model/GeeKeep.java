@@ -23,7 +23,7 @@ import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
  * Wraps all data at the GeeKeep level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskManager implements ReadOnlyTaskManager {
+public class GeeKeep implements ReadOnlyGeeKeep {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -40,13 +40,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         tags = new UniqueTagList();
     }
 
-    public TaskManager() {
+    public GeeKeep() {
     }
 
     /**
-     * Creates an TaskManager using the Tasks and Tags in the {@code toBeCopied}
+     * Creates a GeeKeep using the Tasks and Tags in the {@code toBeCopied}
      */
-    public TaskManager(ReadOnlyTaskManager toBeCopied) {
+    public GeeKeep(ReadOnlyGeeKeep toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -72,9 +72,9 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TaskManager // instanceof handles nulls
-                        && this.tasks.equals(((TaskManager) other).tasks)
-                        && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
+                || (other instanceof GeeKeep // instanceof handles nulls
+                        && this.tasks.equals(((GeeKeep) other).tasks)
+                        && this.tags.equalsOrderInsensitive(((GeeKeep) other).tags));
     }
 
     //// task-level operations
@@ -105,7 +105,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void resetData(ReadOnlyGeeKeep newData) {
         assert newData != null;
         try {
 
@@ -174,7 +174,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}. {@code TaskManager}'s
+     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}. {@code GeeKeep}'s
      * tag list will be updated with the tags of {@code editedReadOnlyTask}.
      *
      * @see #syncMasterTagListWith(Task)
