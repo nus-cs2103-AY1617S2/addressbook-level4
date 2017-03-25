@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class DateParserTest {
 
-    DateParser dateParser;
+    private DateParser dateParser;
 
     /**
      * Checks if dates in natural language are parsed correctly

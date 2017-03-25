@@ -39,8 +39,7 @@ public class DateParser {
         Matcher matcher = dayMonthYearPattern.matcher(input);
 
         matcher.matches();
-        input = matcher.group(2) + matcher.group(1) + matcher.group(3);
-        return input;
+        return matcher.group(2) + matcher.group(1) + matcher.group(3);
     }
 
     /**
@@ -59,9 +58,8 @@ public class DateParser {
             Date parsedDate = dateGroupList.get(0).getDates().get(0);
 
             // Format parsed date to suit the UI
-            String formattedFinalTaskDate = userOutputDateFormat.format(parsedDate);
 
-            return formattedFinalTaskDate;
+            return userOutputDateFormat.format(parsedDate);
 
         } catch (IndexOutOfBoundsException e) {
             return taskDate;
