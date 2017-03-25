@@ -31,7 +31,7 @@ public class Recurrence {
             this.frequency = Frequency.NONE;
         } else {
             this.frequency = frequency;
-        } 
+        }
     }
 
     /**
@@ -50,7 +50,7 @@ public class Recurrence {
 
         switch(this.frequency) {
         case DAILY:
-            if (startDate != null) {              
+            if (startDate != null) {         
                 Calendar startCalendar = addFrequencyToCalendar(startDate, Frequency.DAILY);
                 updateDateTime(startCalendar, task, startSdfFormat, isStartDate);
             }
@@ -103,7 +103,7 @@ public class Recurrence {
 
     /**
      * Updates the start/end DateTime of a given task with
-     * the Date extracted from Calendar, based on its original DateTime format 
+     * the Date extracted from Calendar, based on its original DateTime format
      * @throws IllegalValueException
      */
     private void updateDateTime(Calendar calendar, Task task,

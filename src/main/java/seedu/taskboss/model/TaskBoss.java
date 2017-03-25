@@ -46,12 +46,11 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
     /**
      * Creates a TaskBoss using the Tasks and Categories in the {@code toBeCopied}
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public TaskBoss(ReadOnlyTaskBoss toBeCopied) throws IllegalValueException {
         this();
         resetData(toBeCopied);
-        
     }
 
 //// list overwrite operations
@@ -119,11 +118,11 @@ public class TaskBoss implements ReadOnlyTaskBoss {
     //@@author A0143157J
     /**
      * Updates the dates of a task based on the recurrence frequency.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public void updateTasksRecurrence() throws IllegalValueException {
         for (Task task : this.getEditableTaskList()) {
-            if (task.isRecurring()) { 
+            if (task.isRecurring()) {
                 Date startDateTime = task.getStartDateTime().getDate();
                 Date endDateTime = task.getEndDateTime().getDate();
                 if ((startDateTime != null && startDateTime.before(Calendar.getInstance().getTime()))
@@ -202,7 +201,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
     }
 
     public ObservableList<Task> getEditableTaskList() {
-       return new UnmodifiableObservableList<>(tasks.asObservableList()); 
+       return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
     @Override
