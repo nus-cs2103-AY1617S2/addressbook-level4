@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package guitests;
 
 import org.junit.Before;
@@ -17,7 +18,7 @@ public class ViewAliasCommandTest extends ToLuistGuiTest {
 
     @Test
     public void viewAlias_noAliases() {
-        checkResultOfViewAlias(ViewAliasController.NO_ALIAS_MESSAGE);
+        checkResultOfViewAlias(ViewAliasController.RESULT_MESSAGE_NO_ALIAS);
     }
 
     @Test

@@ -148,6 +148,7 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
+    //@@author A0162011A
     //---------------- Tests for convertToArray --------------------------------------
 
     /*

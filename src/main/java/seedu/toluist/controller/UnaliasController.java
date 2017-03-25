@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.controller;
 
 import java.util.HashMap;
@@ -15,16 +16,16 @@ public class UnaliasController extends Controller {
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s has been removed";
     private static final String RESULT_MESSAGE_FAILURE = "Alias %s cannot be removed";
     public static final String RESULT_MESSAGE_NOT_ALIAS = "%s is not an alias";
-    private static final String COMMAND_TEMPLATE = "unalias\\s+(?<alias>\\S+)\\s*";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*unalias\\s+(?<alias>\\S+)\\s*";
     private static final String COMMAND_WORD = "unalias";
 
-    private static final String ALIAS_TERM = "alias";
+    private static final String PARAMETER_ALIAS = "alias";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public void execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
-        String alias = tokens.get(ALIAS_TERM);
+        String alias = tokens.get(PARAMETER_ALIAS);
 
         if (!aliasConfig.isAlias(alias)) {
             uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_NOT_ALIAS, alias)));
@@ -43,7 +44,7 @@ public class UnaliasController extends Controller {
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(ALIAS_TERM, matcher.group(ALIAS_TERM));
+        tokens.put(PARAMETER_ALIAS, matcher.group(PARAMETER_ALIAS));
         return tokens;
     }
 

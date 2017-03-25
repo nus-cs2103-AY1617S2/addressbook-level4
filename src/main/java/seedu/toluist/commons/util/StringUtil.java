@@ -11,6 +11,7 @@ import org.atteo.evo.inflector.English;
  */
 public class StringUtil {
 
+    //@@author A0127545A
     /**
      * Returns true if string is not null and not empty
      * @param string
@@ -19,6 +20,7 @@ public class StringUtil {
         return string != null && !string.isEmpty();
     }
 
+    //@@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -69,6 +71,7 @@ public class StringUtil {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
 
+    //@@author A0131125Y
     /**
      * Given a noun and a count, return the count followed by the noun in singular/plural form appropriately
      * E.g:
@@ -82,6 +85,7 @@ public class StringUtil {
         return count + " " + English.plural(noun, count);
     }
 
+    //@@author A0162011A
     /**
      * Returns an array containing each word in the string.
      * @param string

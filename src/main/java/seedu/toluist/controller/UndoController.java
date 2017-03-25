@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.controller;
 
 import java.util.HashMap;
@@ -15,9 +16,9 @@ import seedu.toluist.ui.commons.CommandResult;
  * Responsible for storage-related task
  */
 public class UndoController extends Controller {
-    private static final String COMMAND_TEMPLATE = "^undo(\\s+(?<number>\\d+))?\\s*";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*undo(\\s+(?<number>\\d+))?\\s*";
     private static final String COMMAND_WORD = "undo";
-    private static final String UNDO_TIMES = "number";
+    private static final String PARAMETER_UNDO_TIMES = "number";
     private static final String RESULT_MESSAGE_TEMPLATE = "Your last %s to the data %s undone.";
 
     private static final Logger logger = LogsCenter.getLogger(UndoController.class);
@@ -26,7 +27,7 @@ public class UndoController extends Controller {
         logger.info(getClass() + "will handle command");
 
         HashMap<String, String> tokens = tokenize(command);
-        String undoTimesToken = tokens.get(UNDO_TIMES);
+        String undoTimesToken = tokens.get(PARAMETER_UNDO_TIMES);
         int undoTimes = undoTimesToken != null ? Integer.parseInt(undoTimesToken) : 1;
 
         Pair<TodoList, Integer> undoResult = TodoList.getInstance().getStorage().undo(undoTimes);
@@ -46,7 +47,7 @@ public class UndoController extends Controller {
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(UNDO_TIMES, matcher.group(UNDO_TIMES));
+        tokens.put(PARAMETER_UNDO_TIMES, matcher.group(PARAMETER_UNDO_TIMES));
         return tokens;
     }
 

@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.controller;
 
 import java.util.HashMap;
@@ -22,13 +23,13 @@ public class SwitchController extends Controller {
     public static final String RESULT_MESSAGE_SWITCH_FAILURE = "%s is not a valid tab.";
     public static final String RESULT_MESSAGE_NO_TAB = "A tab to switch to was not provided";
     public static final String COMMAND_WORD = "switch";
-    public static final String TAB = "tab";
-    private static final String COMMAND_TEMPLATE = "switch(\\s+(?<tab>\\S+))?\\s*";
+    public static final String PARAMETER_TAB = "tab";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*switch(\\s+(?<tab>\\S+))?\\s*";
     private SwitchConfig switchConfig = SwitchConfig.getDefaultSwitchConfig();
 
     public void execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
-        String keyword = tokens.get(TAB);
+        String keyword = tokens.get(PARAMETER_TAB);
 
         if (keyword == null) {
             uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_NO_TAB));
@@ -61,7 +62,7 @@ public class SwitchController extends Controller {
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(TAB, matcher.group(TAB));
+        tokens.put(PARAMETER_TAB, matcher.group(PARAMETER_TAB));
         return tokens;
     }
 

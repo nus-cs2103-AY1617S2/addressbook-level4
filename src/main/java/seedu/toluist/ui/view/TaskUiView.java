@@ -1,3 +1,4 @@
+//@@author A0127545A
 package seedu.toluist.ui.view;
 
 import javafx.fxml.FXML;
@@ -18,12 +19,12 @@ import seedu.toluist.model.Task;
 public class TaskUiView extends UiView {
 
     private static final String FXML = "TaskView.fxml";
-    private static final String CLOCK_ICON_IMAGE_PATH = "/images/clock.png";
-    private static final String OVERDUE_ICON_IMAGE_PATH = "/images/warning.png";
-    private static final String HIGH_PRIORITY_ICON_IMAGE_PATH = "/images/star.png";
-    private static final String RECURRING_ICON_IMAGE_PATH = "/images/recurring_icon.png";
-    private static final String COMPLETED_STYLE_CLASS = "completed";
-    private static final String OVERDUE_STYLE_CLASS = "overdue";
+    private static final String IMAGE_PATH_CLOCK_ICON = "/images/clock.png";
+    private static final String IMAGE_PATH_OVERDUE_ICON = "/images/warning.png";
+    private static final String IMAGE_PATH_HIGH_PRIORITY_ICON = "/images/star.png";
+    private static final String IMAGE_PATH_RECURRING_ICON = "/images/recurring_icon.png";
+    private static final String STYLE_CLASS_COMPLETED = "completed";
+    private static final String STYLE_CLASS_OVERDUE = "overdue";
     private static final double STATUS_BOX_SPACING_VALUE = 10.0;
 
     @FXML
@@ -78,13 +79,14 @@ public class TaskUiView extends UiView {
         statusBox.getChildren().clear();
         statusBox.setSpacing(STATUS_BOX_SPACING_VALUE);
         if (task.isOverdue()) {
-            TaskStatusView statusView = new TaskStatusView(AppUtil.getImage(OVERDUE_ICON_IMAGE_PATH));
+            TaskStatusView statusView = new TaskStatusView(AppUtil.getImage(IMAGE_PATH_OVERDUE_ICON));
             statusView.setParent(statusBox);
             statusView.render();
-            FxViewUtil.addStyleClass(taskPane, OVERDUE_STYLE_CLASS);
+            FxViewUtil.addStyleClass(taskPane, STYLE_CLASS_OVERDUE);
         }
         if (task.isHighPriority()) {
-            TaskStatusView highPriorityView = new TaskStatusView(AppUtil.getImage(HIGH_PRIORITY_ICON_IMAGE_PATH));
+            TaskStatusView highPriorityView = new TaskStatusView(
+                    AppUtil.getImage(IMAGE_PATH_HIGH_PRIORITY_ICON));
             highPriorityView.setParent(statusBox);
             highPriorityView.render();
         }
@@ -94,10 +96,11 @@ public class TaskUiView extends UiView {
         if (isTaskWithDeadline) {
             date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
         } else if (isEvent) {
-            date.setText(DateTimeFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
+            date.setText(DateTimeFormatterUtil
+                    .formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
         }
         if (isTaskWithDeadline || task.isEvent()) {
-            clockIcon.setImage(AppUtil.getImage(CLOCK_ICON_IMAGE_PATH));
+            clockIcon.setImage(AppUtil.getImage(IMAGE_PATH_CLOCK_ICON));
         }
 
         if (isRecurring && isTaskWithDeadline) {
@@ -115,10 +118,10 @@ public class TaskUiView extends UiView {
                             task.getRecurringFrequency()));
         }
         if (isRecurring) {
-            recurringIcon.setImage(AppUtil.getImage(RECURRING_ICON_IMAGE_PATH));
+            recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));
         }
         if (task.isCompleted()) {
-            FxViewUtil.addStyleClass(taskPane, COMPLETED_STYLE_CLASS);
+            FxViewUtil.addStyleClass(taskPane, STYLE_CLASS_COMPLETED);
         }
     }
 }

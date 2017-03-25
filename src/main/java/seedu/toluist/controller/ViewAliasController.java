@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
@@ -14,11 +15,11 @@ import seedu.toluist.ui.commons.CommandResult;
  * Alias Controller is responsible for handling viewalias requests
  */
 public class ViewAliasController extends Controller {
-    private static final String COMMAND_TEMPLATE = "viewalias\\s*";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*viewalias\\s*";
     private static final String COMMAND_WORD = "viewalias";
-    private static final String ALIAS_COMMAND_SEPARATOR = ":";
+    private static final String COMMAND_SEPARATOR_ALIAS = ":";
     private static final String NEW_LINE = "\n";
-    public static final String NO_ALIAS_MESSAGE = "No aliases found";
+    public static final String RESULT_MESSAGE_NO_ALIAS = "No aliases found";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
@@ -44,11 +45,11 @@ public class ViewAliasController extends Controller {
 
         SortedSet<String> aliases = new TreeSet<>(aliasMapping.keySet());
         for (String alias : aliases) {
-            String line = alias + ALIAS_COMMAND_SEPARATOR + aliasMapping.get(alias);
+            String line = alias + COMMAND_SEPARATOR_ALIAS + aliasMapping.get(alias);
             lines.add(line);
         }
 
         String result = String.join(NEW_LINE, lines);
-        return result.isEmpty() ? NO_ALIAS_MESSAGE : result;
+        return result.isEmpty() ? RESULT_MESSAGE_NO_ALIAS : result;
     }
 }
