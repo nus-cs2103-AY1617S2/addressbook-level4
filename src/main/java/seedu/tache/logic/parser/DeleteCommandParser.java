@@ -24,13 +24,7 @@ public class DeleteCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
-
-        Optional<Integer> indexType = ParserUtil.determineIndexType(args);
-        if (indexType.get() == ParserUtil.TYPE_TASK) {
-            return new DeleteCommand(index.get());
-        } else {
-            return new DeleteCommand(index.get(), DeleteCommand.TaskType.TypeDetailedTask);
-        }
+        return new DeleteCommand(index.get());
     }
 
 }

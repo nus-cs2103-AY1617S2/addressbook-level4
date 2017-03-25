@@ -51,6 +51,7 @@ public class EditCommandParser {
         assert args != null;
         String[] preambleFields = args.split(PARAMETER_DELIMITER);
         Optional<Integer> index = ParserUtil.parseIndex(preambleFields[0]);
+
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }

@@ -105,12 +105,12 @@ public class EditCommand extends Command implements Undoable {
             }
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
-            String timeNoChange = "";
             if (updatedEndDateTime.isPresent()) {
-                timeNoChange = updatedEndDateTime.get().getTimeOnly();
+                updatedEndDateTime.get().setDateOnly(editTaskDescriptor.getEndDate().get());
+            } else {
+                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndDate().get()));
+                updatedEndDateTime.get().setTimeOnly("00:00:00");
             }
-            DateTime tempEndDateTime = new DateTime(editTaskDescriptor.getEndDate().orElse("") + " " + timeNoChange);
-            updatedEndDateTime = Optional.of(tempEndDateTime);
         }
         if (editTaskDescriptor.getStartTime().isPresent()) {
             if (updatedStartDateTime.isPresent()) {
