@@ -1,5 +1,6 @@
 package seedu.task.logic.commands;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import seedu.task.model.task.StartTime;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
+//@@author A0146789H
 /**
  * Adds a task to the task manager.
  */
@@ -23,9 +25,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [s/STARTDATE] [e/ENDDATE]  [t/TAG]...\n"
+            + "Parameters: DESCRIPTION from START_DATE to END_DATE #TAGS\n"
             + "Example: " + COMMAND_WORD
-            + " Do CS2103 tutorial s/060317 e/080317 t/CS2103 t/uni";
+            + " Do CS2103 tutorial from 03/06/17 to 03/08/17 #CS2103 #uni";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -40,7 +42,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String startDate, String endDate, String completionStatus, Set<String> tags)
+    public AddCommand(String name, Date startDate, Date endDate, boolean completionStatus, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -50,11 +52,20 @@ public class AddCommand extends Command {
                 new Name(name),
                 new StartTime(startDate),
                 new EndTime(endDate),
-                new CompletionStatus(Boolean.valueOf(completionStatus)),
+                new CompletionStatus(completionStatus),
                 new UniqueTagList(tagSet)
                 );
     }
 
+    //@@author A0146789H
+    /**
+     * @return the task to be added
+     */
+    public Task getToAdd() {
+        return toAdd;
+    }
+
+    //@@author
     /**
      * Creates an AddCommand using raw values.
      *
@@ -65,8 +76,8 @@ public class AddCommand extends Command {
         final Set<Tag> tagSet = new HashSet<>();
         this.toAdd = new Task(
                 new Name(name),
-                new StartTime(""),
-                new EndTime(""),
+                new StartTime(null),
+                new EndTime(null),
                 new CompletionStatus(false),
                 new UniqueTagList(tagSet)
         );

@@ -29,7 +29,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "Bobby s/121112 0000 e/131112 0000 c/Block 123, Bobby Street 3 #husband";
         int addressBookIndex = 1;
 
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("121112 0000")
+        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withDateString("121112 0000")
                 .withEmail("131112 0000").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);

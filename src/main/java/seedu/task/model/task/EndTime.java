@@ -1,6 +1,9 @@
 package seedu.task.model.task;
 
+import java.util.Date;
+
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.MiscDateUtil;
 
 /**
  * Represents a Task's end time in the task manager.
@@ -8,43 +11,45 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class EndTime {
 
-    public static final String MESSAGE_TIME_CONSTRAINTS = "Task End Time should be given in ddmmyy tttt(24hour format)";
-    public static final String TIME_VALIDATION_REGEX = "\\d{6} \\d{4}";
+    public static final String MESSAGE_TIME_CONSTRAINTS = ""; // Validation on this object is no longer necessary.
+    public static final String TIME_VALIDATION_REGEX = ""; // Regex is no longer required.
     public static final String EMPTY_TIME_VALIDATION_REGEX = "";
 
-    public final String value;
+    public final Date value;
 
     /**
      * Validates given end time.
      *
      * @throws IllegalValueException if given end time is invalid.
      */
-    public EndTime(String endTime) throws IllegalValueException {
-        assert endTime != null;
-        String trimmedEndTime = endTime.trim();
-        if (!isValidTime(trimmedEndTime)) {
+    public EndTime(Date endTime) throws IllegalValueException {
+        if (!isValidTime(endTime)) {
             throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
         }
-        this.value = trimmedEndTime;
+        this.value = endTime;
     }
 
     /**
      * Returns if a given string is a valid task end time.
      */
-    public static boolean isValidTime(String test) {
-        return (test.matches(TIME_VALIDATION_REGEX)  || test.matches(EMPTY_TIME_VALIDATION_REGEX));
+    public static boolean isValidTime(Date test) {
+        // TODO: Remove this later on.
+        return true;
     }
 
     @Override
     public String toString() {
-        return value;
+        if (this.value == null) {
+            return "";
+        }
+        return value.toString();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EndTime // instanceof handles nulls
-                        && this.value.equals(((EndTime) other).value)); // state check
+                        && MiscDateUtil.compareDatesFuzzy(this.value, ((EndTime) other).value, 1000)); // state check
     }
 
     @Override
