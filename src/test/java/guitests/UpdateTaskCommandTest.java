@@ -369,7 +369,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
 
         String recurFrequencyString = "monthly";
         LocalDateTime recurEndDate = DateTimeUtil.parseDateString("15 Mar 2018, 1pm");
-        command = "update " + eventIndex + " repeat/" + recurFrequencyString + " until/" + recurEndDate;
+        command = "update " + eventIndex + " repeat/" + recurFrequencyString + " repeatuntil/" + recurEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, from, to);
         task2.setRecurring(recurEndDate, recurFrequencyString);
@@ -391,7 +391,8 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
 
         String recurFrequencyString = "yearly";
         LocalDateTime recurEndDate = DateTimeUtil.parseDateString("15 Mar 2020, 1pm");
-        command = "update " + eventIndex + " by/" + to + " repeat/" + recurFrequencyString + " until/" + recurEndDate;
+        command = "update " + eventIndex + " by/" + to
+                + " repeat/" + recurFrequencyString + " repeatuntil/" + recurEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, to);
         task2.setRecurring(recurEndDate, recurFrequencyString);

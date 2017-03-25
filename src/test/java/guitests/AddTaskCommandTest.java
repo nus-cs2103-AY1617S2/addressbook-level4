@@ -221,7 +221,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         endDate = DateTimeUtil.parseDateString("28 April 2017, 11pm");
         LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017");
         command = "add " + taskDescription + " by/" + endDate + " repeat/" + recurFrequencyString
-                + " until/" + recurUntilEndDate;
+                + " repeatuntil/" + recurUntilEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, endDate);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
@@ -246,7 +246,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         to = DateTimeUtil.parseDateString("28 April 2017, 11pm");
         LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017");
         command = "add " + taskDescription + " from/" + from + " to/" + to + " repeat/" + recurFrequencyString
-                + " until/" + recurUntilEndDate;
+                + " repeatuntil/" + recurUntilEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, from, to);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
