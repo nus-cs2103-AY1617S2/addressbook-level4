@@ -4,7 +4,7 @@ import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Optional;
 
-import seedu.ezdo.commons.exceptions.InvalidSortingOrderException;
+import seedu.ezdo.commons.exceptions.InvalidSortOrderException;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.SortCommand;
@@ -48,7 +48,7 @@ public class SortCommandParser implements CommandParser {
         } else {
             try {
                 isSortedAscending = determineIfIsSortedAscending(sortOrder);
-            } catch (InvalidSortingOrderException isoe) {
+            } catch (InvalidSortOrderException isoe) {
                 isSortedAscending = null;
             }
         }
@@ -67,7 +67,7 @@ public class SortCommandParser implements CommandParser {
         }
     }
 
-    private boolean determineIfIsSortedAscending(String sortOrder) throws InvalidSortingOrderException {
+    private boolean determineIfIsSortedAscending(String sortOrder) throws InvalidSortOrderException {
         Boolean isSortedAscending;
         switch(sortOrder) {
         case ASCENDING_KEYWORD:
@@ -77,7 +77,7 @@ public class SortCommandParser implements CommandParser {
             isSortedAscending = false;
             break;
         default:
-            throw new InvalidSortingOrderException();
+            throw new InvalidSortOrderException();
         }
         return isSortedAscending;
     }
