@@ -97,7 +97,7 @@ public class ToDoList implements ReadOnlyToDoList {
      *      another existing Task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedReadOnlyTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
@@ -106,7 +106,7 @@ public class ToDoList implements ReadOnlyToDoList {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any Task
         // in the Task list.
-        tasks.updateTask(index, editedTask);
+        tasks.updateTask(taskToEdit, editedTask);
     }
 
     /**

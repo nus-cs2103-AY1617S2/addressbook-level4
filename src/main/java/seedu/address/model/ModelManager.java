@@ -81,19 +81,20 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    // @@author A0143648Y
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
+        assert taskToEdit != null;
         assert editedTask != null;
-
-        int todoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        todoList.updateTask(todoListIndex, editedTask);
+        todoList.updateTask(taskToEdit, editedTask);
+        refreshLists();
         indicateToDoListChanged();
     }
 
     // =========== Filtered Task List Accessors
     // =============================================================
-    // @@author A0143648Y
+
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
@@ -216,5 +217,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return foundIt;
     }
+    
+    private void refreshLists(){
+//        filteredTasks = new FilteredList<>(this.todoList.getFilteredTasks());
+//        filteredFloats = new FilteredList<>(this.todoList.getFilteredFloats());
+//        filteredEvents = new FilteredList<>(this.todoList.getFilteredEvents());
+    }
+
 
 }

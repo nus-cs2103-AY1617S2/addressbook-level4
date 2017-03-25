@@ -51,10 +51,10 @@ public class UniqueTaskList implements Iterable<Task> {
      *      another existing Task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
-        assert editedTask != null;
-
-        Task taskToUpdate = internalList.get(index);
+    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask) throws DuplicateTaskException {
+        assert editedTask != null;        
+        Task taskToUpdate = new Task(taskToEdit);
+        int index = internalList.indexOf(taskToUpdate);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
