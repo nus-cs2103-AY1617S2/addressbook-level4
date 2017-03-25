@@ -38,7 +38,6 @@
                             <ImageView fx:id="tickLogo" disable="false" fitHeight="20.0" fitWidth="20.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true"/>
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <Label fx:id="status" styleClass="cell_small_label" text='\$status' />
                         <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" />
                         <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
                         <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />

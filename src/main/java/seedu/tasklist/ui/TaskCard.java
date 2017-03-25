@@ -39,8 +39,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label endDate;
     @FXML
-    private Label status;
-    @FXML
     private ImageView tickLogo;
 
     @FXML
@@ -59,7 +57,6 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         comment.setText(task.getComment().value);
         priority.setText("Priority: " + task.getPriority().value);
-        status.setText(task.getStatus().toString());
         initTags(task);
         switch(taskType) {
         case DeadlineTask.TYPE:
