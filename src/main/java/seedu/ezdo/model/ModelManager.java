@@ -30,8 +30,8 @@ import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the ezDo data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the ezDo data. All changes to any model
+ * should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -46,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final FixedStack<ReadOnlyEzDo> undoStack;
     private final FixedStack<ReadOnlyEzDo> redoStack;
+
     /**
      * Initializes a ModelManager with the given ezDo and userPrefs.
      */
@@ -100,8 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task)
-            throws UniqueTaskList.DuplicateTaskException, DateException {
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException {
         checkTaskDate(task);
         updateStacks();
         ezDo.addTask(task);
@@ -168,18 +168,18 @@ public class ModelManager extends ComponentManager implements Model {
             throw new DateException("Error parsing dates!");
         }
     }
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority,
-                                       Optional optionalStartDate, Optional optionalDueDate, Set<String> findTag) {
-        updateFilteredTaskList(
-                new PredicateExpression(new NameQualifier(
-                        keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
+    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority, Optional optionalStartDate,
+            Optional optionalDueDate, Set<String> findTag) {
+        updateFilteredTaskList(new PredicateExpression(
+                new NameQualifier(keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
     }
 
     @Override
@@ -197,10 +197,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier()));
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         @Override
         String toString();
     }
@@ -226,6 +228,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         @Override
         String toString();
     }
@@ -273,8 +276,8 @@ public class ModelManager extends ComponentManager implements Model {
         private Optional<DueDate> dueDate;
         private Set<String> tags;
 
-        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority,
-                      Optional<StartDate> startDate, Optional<DueDate> dueDate, Set<String> tags) {
+        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority, Optional<StartDate> startDate,
+                Optional<DueDate> dueDate, Set<String> tags) {
             this.nameKeyWords = nameKeyWords;
             this.priority = priority;
             this.startDate = startDate;
@@ -284,21 +287,28 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
+
             String taskStartDate = task.getStartDate().toString();
             String taskDueDate = task.getDueDate().toString();
+            String taskPriority = task.getPriority().toString();
+
             Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
+            boolean startDateExist = (taskStartDate.length() != 0);
+            boolean dueDateExist = (taskDueDate.length() != 0);
+            boolean priorityExist = (taskPriority.length() != 0);
 
             return (nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
-                    && (!priority.isPresent() || task.getPriority().toString().equals(priority.get().toString()))
-                    && (!startDate.isPresent() || (taskStartDate.length() != 0)
-                            && taskStartDate.substring(0, startDate.get().toString().length())
-                                            .equals(startDate.get().toString()))
-                    && (!dueDate.isPresent() || (taskDueDate.length() != 0)
-                            && taskDueDate.substring(0, dueDate.get().toString().length())
-                                          .equals(dueDate.get().toString()))
+                    && (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
+                            || (priorityExist && task.getPriority().toString().equals(priority.get().toString())))
+                    && (!startDate.isPresent() || (startDate.get().toString().equals("") && startDateExist)
+                            || (startDateExist && taskStartDate.substring(0, 9).equals
+                                    (startDate.get().toString().substring(0, 9))))
+                    && (!dueDate.isPresent() || (dueDate.get().toString().equals("") && dueDateExist) || (dueDateExist
+                            && taskDueDate.substring(0, 9).equals(dueDate.get().toString().substring(0, 9))))
                     && (taskTagStringSet.containsAll(tags));
+
         }
 
         @Override
