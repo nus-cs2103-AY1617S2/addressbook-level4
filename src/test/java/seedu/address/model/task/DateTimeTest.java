@@ -27,7 +27,7 @@ public class DateTimeTest {
         dateTime.set(date3);
         assertTrue(/*
                     * dateTime.toString().equals("片刻之前") ||
-                    */ dateTime.toString().equals("片刻之前"));
+                    */ dateTime.toString().equals("a moment ago"));
     }
 
     @Test
@@ -46,6 +46,6 @@ public class DateTimeTest {
         dateTime.set(date3);
         assertTrue(/*
                     * dateTime.toString().equals("片刻之前") ||
-                    */ dateTime.toString().equals("片刻之前"));
+                    */ dateTime.toString().equals("a moment ago"));
     }
 }
