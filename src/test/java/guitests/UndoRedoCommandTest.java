@@ -7,6 +7,7 @@ import org.junit.Test;
 import seedu.doist.testutil.TestTask;
 import seedu.doist.testutil.TestUtil;
 
+//@@author A0147980U
 public class UndoRedoCommandTest extends DoistGUITest {
     @Test
     public void testUndoAndRedoOneAddCommand() {  // test undoing and redoing one mutating command

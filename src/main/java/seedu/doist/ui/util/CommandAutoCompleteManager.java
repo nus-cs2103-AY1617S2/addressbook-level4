@@ -62,7 +62,7 @@ public class CommandAutoCompleteManager {
         }
     }
 
-    private void attachSuggestionWindowIfNecessary(InlineCssTextArea commandTextField) {
+    public void attachSuggestionWindowIfNecessary(InlineCssTextArea commandTextField) {
         if (commandTextField.getPopupWindow() == null) {
             commandTextField.setPopupWindow(new ContentAssistPopupWindow());
             commandTextField.setPopupAnchorOffset(suggestionBoxOffset);

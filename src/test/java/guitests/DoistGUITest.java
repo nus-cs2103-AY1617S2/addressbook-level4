@@ -3,6 +3,7 @@ package guitests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.After;
@@ -105,19 +106,32 @@ public abstract class DoistGUITest {
     }
 
     /**
-     * Asserts the person shown in the card is same as the given person
+     * Asserts the person shown in the card is same as the given task
      */
     public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, task));
     }
 
     /**
-     * Asserts the size of the person list is equal to the given number.
+     * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
         int numberOfPeople = taskListPanel.getNumberOfTasks();
         assertEquals(size, numberOfPeople);
     }
+
+    //@@author A0147980U
+    protected void assertCorrectSuggestions(String lastWord) {
+        List<String> contentAssistItemTexts = commandBox.getContentAssistItemTexts();
+        if (contentAssistItemTexts.isEmpty()) {
+            assertTrue(!commandBox.getContentAssistWindow().isShowing());
+        } else {
+            for (String text : contentAssistItemTexts) {
+                assertTrue(text.contains((CharSequence) lastWord.subSequence(0, lastWord.length())));
+            }
+        }
+    }
+    //@@author
 
     /**
      * Asserts the message shown in the Result Display area is same as the given string.

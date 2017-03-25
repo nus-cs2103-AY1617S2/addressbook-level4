@@ -1,8 +1,16 @@
 package guitests.guihandles;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.fxmisc.richtext.InlineCssTextArea;
+
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
+import seedu.doist.ui.util.CommandAutoCompleteManager;
+import seedu.doist.ui.util.ContentAssistPopupWindow;
 
 /**
  * A handle to the Command Box in the GUI.
@@ -48,4 +56,35 @@ public class CommandBoxHandle extends GuiHandle {
     public ObservableList<String> getStyleClass() {
         return getNode(COMMAND_INPUT_FIELD_ID).getStyleClass();
     }
+
+    //@@author A0147980U
+    public ContentAssistPopupWindow getContentAssistWindow() {
+        InlineCssTextArea inputBox = (InlineCssTextArea) getNode(COMMAND_INPUT_FIELD_ID);
+        CommandAutoCompleteManager.getInstance().attachSuggestionWindowIfNecessary(inputBox);
+        ContentAssistPopupWindow contentAssistWindow = (ContentAssistPopupWindow) inputBox.getPopupWindow();
+        return contentAssistWindow;
+    }
+
+    public List<String> getContentAssistItemTexts() {
+        ContentAssistPopupWindow contentAssistWindow = getContentAssistWindow();
+        ArrayList<String> itemtTexts = new ArrayList<String>();
+        for (MenuItem item : contentAssistWindow.getItems()) {
+            itemtTexts.add(item.getText());
+        }
+        return itemtTexts;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
