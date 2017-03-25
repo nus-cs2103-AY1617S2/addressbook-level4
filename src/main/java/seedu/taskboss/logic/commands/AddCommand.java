@@ -32,9 +32,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Adds a task to TaskBoss. "
             + "Parameters: n/NAME [sd/START_DATE] [ed/END_DATE] "
-            + "[i/INFORMATION] [c/CATEGORY]...\n"
+            + "[i/INFORMATION] [r/RECURRENCE] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
-            + " n/Submit report sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project\n"
+            + " n/Submit report sd/today 5pm ed/next friday 11.59pm i/inform partner r/WEEKLY c/Work c/Project\n"
             + "Example: " + COMMAND_WORD_SHORT
             + " n/Watch movie sd/feb 19 c/Fun";
 
@@ -58,12 +58,11 @@ public class AddCommand extends Command {
             categorySet.add(new Category(categoryName));
         }
 
+        //@@author A0143157J
         if (frequency.isEmpty()) {
             frequency = Frequency.NONE.toString();
         }
 
-        //@@author A0144904H
-        String priorityLevel = PriorityLevel.PRIORITY_NO;
         DateTime startDateTimeObj = new DateTime(startDateTime);
         DateTime endDateTimeObj = new DateTime(endDateTime);
 
@@ -73,6 +72,7 @@ public class AddCommand extends Command {
         }
 
         //@@author A0144904H
+        String priorityLevel = PriorityLevel.PRIORITY_NO;
         String filteredName;
         if (name.contains("!")) {
             filteredName = name.replaceAll("!", "");
