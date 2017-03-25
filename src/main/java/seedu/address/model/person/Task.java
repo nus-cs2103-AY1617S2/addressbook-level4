@@ -22,13 +22,10 @@ public class Task implements ReadOnlyTask {
     /**
      * Description and Priority must be present.
      */
-<<<<<<< Updated upstream
+
     public Task(Description description, Priority priority, ByTime byTime, ByDate byDate,
-            Location location, UniqueTagList tags) {
-=======
-    public Task(Description description, Priority priority, ByDate bydate, ByTime bytime,
             Location location, UniqueTagList tags, boolean status) {
->>>>>>> Stashed changes
+
         assert !CollectionUtil.isAnyNull(description, priority, tags);
         this.description = description;
         this.priority = priority;
@@ -43,13 +40,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-<<<<<<< Updated upstream
         this(source.getDescription(), source.getPriority(), source.getByTime(),
-                source.getByDate(), source.getLocation(), source.getTags());
-=======
-        this(source.getDescription(), source.getPriority(), source.getByDate(),
-                source.getByTime(), source.getLocation(), source.getTags(), source.getStatus());
->>>>>>> Stashed changes
+                source.getByDate(), source.getLocation(), source.getTags(), source.getStatus());
     }
 
     public void setDescription(Description description) {

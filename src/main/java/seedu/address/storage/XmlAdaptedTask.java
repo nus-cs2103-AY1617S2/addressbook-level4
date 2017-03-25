@@ -83,11 +83,8 @@ public class XmlAdaptedTask {
         final ByDate byDate = new ByDate(this.byDate);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);
-<<<<<<< Updated upstream
-        return new Task(description, priority, byTime, byDate, location, tags);
-=======
         final boolean status = this.status;
-        return new Task(description, priority, bydate, bytime, location, tags, status);
->>>>>>> Stashed changes
+        
+        return new Task(description, priority, byTime, byDate, location, tags, status);
     }
 }

@@ -135,12 +135,8 @@ public class EditCommand extends Command {
         Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-<<<<<<< Updated upstream
-        return new Task(updatedDescription, updatedPriority, updatedByTime, updatedByDate, updatedLocation, updatedTags);
-=======
-        return new Task(updatedDescription, updatedPriority, updatedByDate,
-                updatedByTime, updatedLocation, updatedTags, taskToEdit.getStatus());
->>>>>>> Stashed changes
+        return new Task(updatedDescription, updatedPriority, updatedByTime, updatedByDate,
+                 updatedLocation, updatedTags, taskToEdit.getStatus());
     }
 
     /**

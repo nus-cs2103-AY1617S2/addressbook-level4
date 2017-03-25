@@ -49,22 +49,22 @@ public class SampleDataUtil {
             return new Task[] {
                 new Task(new Description("Buy Fruits"), new Priority("medium"),
                 	new ByTime("1300"), new ByDate("120517"),
-                    new Location("FairPrice"), new UniqueTagList("health")),
+                    new Location("FairPrice"), new UniqueTagList("health"), false),
                 new Task(new Description("Top-up EZ-link"), new Priority("low"),
                     	new ByTime("0800"), new ByDate("140217"),
-                        new Location("MRT"), new UniqueTagList("transportation")),
+                        new Location("MRT"), new UniqueTagList("transportation"), false),
                 new Task(new Description("Video Project & Report"), new Priority("high"),
                     	new ByTime("2359"), new ByDate("020417"),
-                        new Location("CLB"), new UniqueTagList("graded")),
+                        new Location("CLB"), new UniqueTagList("graded"), false),
                 new Task(new Description("MA3252 Home Assignment 3"), new Priority("high"),
                     	new ByTime("1900"), new ByDate("280317"),
-                        new Location("LT26"), new UniqueTagList("assignment")),
+                        new Location("LT26"), new UniqueTagList("assignment"), false),
                 new Task(new Description("Visit Grandparents"), new Priority("medium"),
                     	new ByTime("0700"), new ByDate("040517"),
-                        new Location("Bishan"), new UniqueTagList("family")),
+                        new Location("Bishan"), new UniqueTagList("family"), false),
                 new Task(new Description("Exercise"), new Priority("high"),
                     	new ByTime("2200"), new ByDate("200317"),
-                        new Location("Gym"), new UniqueTagList("health"))
+                        new Location("Gym"), new UniqueTagList("health"), false)
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
