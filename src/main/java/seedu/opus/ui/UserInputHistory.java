@@ -7,6 +7,10 @@ import java.util.logging.Logger;
 
 import seedu.opus.commons.core.LogsCenter;
 
+//@@author A0148087W
+/**
+ * Stores and manage user inputs in ui.CommandBox
+ */
 public class UserInputHistory {
 
     private LinkedList<String> commandHistory;
@@ -19,17 +23,28 @@ public class UserInputHistory {
         resetIterator();
     }
 
+    /**
+     * Captures user input and reset iterator to include new input
+     * @param input - User input String
+     */
     public void saveUserInput(String input) {
         commandHistory.addFirst(input);
         resetIterator();
         logger.info("Capturing user input: " + input);
     }
 
+    /**
+     * Rebuilds the iterator and reset current iteration
+     */
     public void resetIterator() {
         iterator = commandHistory.listIterator();
         current = null;
     }
 
+    /**
+     * Returns the previous user input relative to current history iteration
+     * @return Previous user input Optional<String> if available, null otherwise
+     */
     public Optional<String> getPreviousUserInput() {
         String previousInput;
         if (!iterator.hasNext()) {
@@ -45,6 +60,10 @@ public class UserInputHistory {
         }
     }
 
+    /**
+     * Returns the preceding user input relative to current history iteration
+     * @return Preceding user input Optional<String> if available, null otherwise
+     */
     public Optional<String> getPrecedingUserInput() {
         String precedingInput = null;
         if (!iterator.hasPrevious()) {
