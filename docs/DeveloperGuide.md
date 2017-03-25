@@ -1,3 +1,4 @@
+[comment]: # (@@author A0162011A)
 # ToLuist - Developer Guide
 
 By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
@@ -80,7 +81,7 @@ We have organized the guide in a top-down manner so that, as a new developer, yo
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
-
+[comment]: # (@@author A0131125Y)
 ## 3. Design
 
 ### 3.1. Architecture
@@ -220,6 +221,7 @@ changes in the storage is much more robust, as we can avoid checking every Contr
 get the previous data state. An additional benefit is that the integrity of the data change order is guaranteed in 
 the `historyStack`, and we do not need to keep track of what the previous mutating commands were.
 
+[comment]: # (@@author A0162011A)
 ### 3.7. Common classes
 
 Classes used by multiple components are in the `seedu.toluist.commons` package.
@@ -331,6 +333,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+[comment]: # (@@author A0127545A)
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
@@ -592,6 +595,7 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
+[comment]: # (@@author A0127545A)
 **Google Calendar**
 
 Pros:
@@ -609,6 +613,7 @@ Cons:
 * Does not support marking task as complete/incomplete.
 * Certain operations requires clicking (e.g. update task), which is not what Jim wants.
 
+[comment]: # (@@author A0131125Y)
 **Trello**
 
 Pros:
@@ -623,6 +628,7 @@ Cons:
 * Cannot be used offline.
 * Certain operations requires clicking (e.g. dragging and dropping tasks between list), which is not what Jim wants.
 
+[comment]: # (@@author A0162011A)
 **Google Tasks**
 
 Pros:
