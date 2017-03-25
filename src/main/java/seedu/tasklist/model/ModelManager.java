@@ -38,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private Stack<Pair> undoStack;
     private Stack<Pair> redoStack;
+    public String userInput;
 //@@author A0141993X
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -88,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task, String userInput) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         TaskList taskListToPush = new TaskList(taskList);
         undoStack.push(new Pair(taskListToPush, userInput));
         taskList.addTask(task);
@@ -141,6 +142,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
 
         return nextState.getUserInput();
+    }
+
+    @Override
+    public void setUserInput(String input) {
+        userInput = input;
     }
 
     @Override

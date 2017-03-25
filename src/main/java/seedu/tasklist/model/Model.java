@@ -20,11 +20,13 @@ public interface Model {
     /** Returns the TaskList */
     ReadOnlyTaskList getTaskList();
 
+    void setUserInput(String userInput);
+
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task task, String userInput) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
