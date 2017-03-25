@@ -122,7 +122,7 @@ public class History {
 
     //This methods means redo is called
     public void handleRedo() {
-        assert undoCount != 0;
+        assert redoCount != 0;
         decreaseRedoCount();
         increaseUndoCount();
         increaseCurrentFileIndex();

@@ -20,12 +20,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
     public static final String BACKUP_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("temp/");
     private History history = History.getInstance();
+    TestTask[] currentList = td.getTypicalTasks();
 
     @Test
     public void undo() {
         // save back up file in sandbox
         history.test_setBackupDirectory(BACKUP_LOCATION_FOR_TESTING);
-        TestTask[] currentList = td.getTypicalTasks();
 
         // add task then undo
         TestTask taskToAdd = td.handle;
@@ -56,7 +56,6 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     public void multipleUndo() {
         // save back up file in sandbox
         history.test_setBackupDirectory(BACKUP_LOCATION_FOR_TESTING);
-        TestTask[] currentList = td.getTypicalTasks();
         // apply, buy, calculate, decide, eat, find, give. these test are in td
         // handle, identify, jump, kick, look, mark, neglect. these are not
 
@@ -95,6 +94,8 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         for (int i = 0; i < 11; i++) {
             commandBox.runCommand(UndoCommand.COMMAND_WORD_1);
         }
+        assertResultMessage(UndoCommand.MESSAGE_FAIL);
+
         TestTask[] emptyList = {};
 
         //clear command cannot be undone as max have been reached
