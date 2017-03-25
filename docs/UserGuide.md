@@ -257,19 +257,23 @@ _**Marks the task at a specified index as deleted.**_<br>
 
 ### 3.5 Sorting a list of tasks: `sort / s`
 ---
-_**Sorts the list of tasks according to the specified ordertype lexicographically.**_ <br>
+_**Sorts the list of tasks by the specified field according to the specified ordering.**_ <br>
 
 #### Format:
 
-**`sort ORDERTYPE`**
+**`sort FIELD [ORDER]`**
 
 <br>
 
-> **`ORDERTYPE`** can be any of the following:<br>
+> **`FIELD`** can be any of the following:<br>
 > - n - name<br>
 > - p - priority<br>
 > - s - start date<br>
 > - d - due date<br>
+
+> **`ORDER`** can be any of the following:<br>
+> - a - ascending order<br>
+> - d - descending order<br>
 
 <br>
 
@@ -284,7 +288,7 @@ You have just added a few tasks to ezDo with the following **`add`** commands:<b
 Sort the tasks by name using either one of the following commands:<br>
 
 * **`sort n`**
-* **`s n`**
+* **`s n d`**
 
 <br>
 
@@ -442,7 +446,7 @@ For your convenience, the parameters for every command available in ezDo are sum
 |[edit / e](#2-editing-a-task-edit--e)          |**`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME...]`**            |
 |[done / d](#3-marking-a-task-as-done-done--d)  |**`done INDEX`**    |
 |[kill / k](#4-deleting-a-task-kill--k)         |**`kill INDEX`**          |
-|[sort / s](#5-sorting-a-list-of-tasks-sort--s) |**`sort ORDERTYPE`** |
+|[sort / s](#5-sorting-a-list-of-tasks-sort--s) |**`sort FIELD [ORDER]`** |
 |[find / f](#6-finding-tasks-find--f)           |**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**      |
 |[list / l](#7-listing-all-tasks-list--l)       |**`list`**         |
 |[undo / u](#8-undoing-the-last-action-undo--u) |**`undo`** |
