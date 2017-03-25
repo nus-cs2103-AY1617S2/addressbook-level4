@@ -11,7 +11,6 @@ public class NameTest {
     public void isValidName() {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
-        
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
