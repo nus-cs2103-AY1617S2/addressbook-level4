@@ -238,7 +238,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0147990R
     /**
-     *Removes the category from the UniqueCategoryList of Taskboss 
+     * Removes the category from the UniqueCategoryList of Taskboss
      **/
     public void removeCategoryFromTaskboss(Category category) {
         taskBoss.removeCategory(category);
