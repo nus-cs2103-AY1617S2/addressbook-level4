@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskboss.commons.exceptions.DefaultCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
@@ -42,6 +43,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss.";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
+    public static final String ERROR_CANNOT_EDIT_ALLTASKS_CATEGORY = "Cannot edit AllTasks category";
+    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot edit Done category";
+
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -61,7 +65,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, InvalidDatesException, IllegalValueException {
+    public CommandResult execute() throws CommandException, InvalidDatesException, IllegalValueException, DefaultCategoryException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -79,6 +83,12 @@ public class EditCommand extends Command {
             throw new CommandException(ERROR_INVALID_DATES);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (DefaultCategoryException dce) {
+            if (dce.getMessage().equals(ERROR_CANNOT_EDIT_ALLTASKS_CATEGORY)) {
+                throw new CommandException(ERROR_CANNOT_EDIT_ALLTASKS_CATEGORY);
+            } else {
+                throw new CommandException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
+            }
         }
 
         model.updateFilteredListToShowAll();
@@ -89,12 +99,13 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      * @throws InvalidDatesException
+     * @throws DefaultCategoryException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor)
                                                      throws InvalidDatesException, DuplicateCategoryException,
                                                      IllegalValueException, InvalidDatesException,
-                                                     IllegalValueException {
+                                                     IllegalValueException, DefaultCategoryException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -106,6 +117,11 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getEndDateTime);
         Information updatedInformation = editTaskDescriptor.getInformation()
                 .orElseGet(taskToEdit::getInformation);
+        if (editTaskDescriptor.getCategories().get().contains(new Category("AllTasks"))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_ALLTASKS_CATEGORY);
+        } else if (editTaskDescriptor.getCategories().get().contains(new Category("Done"))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
+        }
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
                 .orElseGet(taskToEdit::getCategories);
 

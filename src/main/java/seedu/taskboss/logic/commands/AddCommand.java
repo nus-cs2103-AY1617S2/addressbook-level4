@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskboss.commons.exceptions.DefaultCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
@@ -40,6 +41,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
     public static final String DEFAULT = "AllTasks";
+    public static final String ERROR_CANNOT_ADD_DONE_CATEGORY = "Cannot add Done category";
 
     private final Task toAdd;
 
@@ -48,14 +50,18 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      * @throws InvalidDatesException
+     * @throws DefaultCategoryException
      */
     public AddCommand(String name, String startDateTime, String endDateTime,
-            String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
+            String information, Set<String> categories) throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
         final Set<Category> categorySet = new HashSet<>();
 
         //@@author A0144904H
         //default Category "All Tasks" assigned to all tasks automatically
         categorySet.add(new Category(DEFAULT));
+        if (categories.contains("Done")) {
+            throw new DefaultCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
+        }
 
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
