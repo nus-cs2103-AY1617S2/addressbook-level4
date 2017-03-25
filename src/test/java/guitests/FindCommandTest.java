@@ -1,10 +1,12 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import seedu.ezdo.commons.core.Messages;
+import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.testutil.TestTask;
 
@@ -52,6 +54,8 @@ public class FindCommandTest extends EzDoGuiTest {
 
     @Test
     public void find_invalidCommand_fail_1() {
+        commandBox.runCommand("find");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
         commandBox.runCommand("find s/10a");
