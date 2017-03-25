@@ -28,8 +28,8 @@ import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the ezDo data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the ezDo data. All changes to any model
+ * should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -42,6 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final FixedStack<ReadOnlyEzDo> undoStack;
     private final FixedStack<ReadOnlyEzDo> redoStack;
+
     /**
      * Initializes a ModelManager with the given ezDo and userPrefs.
      */
@@ -89,8 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task)
-            throws UniqueTaskList.DuplicateTaskException, DateException {
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException {
         checkTaskDate(task);
         updateStacks();
         ezDo.addTask(task);
@@ -157,18 +157,18 @@ public class ModelManager extends ComponentManager implements Model {
             throw new DateException("Error parsing dates!");
         }
     }
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority,
-                                       Optional optionalStartDate, Optional optionalDueDate, Set<String> findTag) {
-        updateFilteredTaskList(
-                new PredicateExpression(new NameQualifier(
-                        keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
+    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority, Optional optionalStartDate,
+            Optional optionalDueDate, Set<String> findTag) {
+        updateFilteredTaskList(new PredicateExpression(
+                new NameQualifier(keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
     }
 
     @Override
@@ -186,10 +186,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier()));
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         @Override
         String toString();
     }
@@ -215,6 +217,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         @Override
         String toString();
     }
@@ -259,35 +262,41 @@ public class ModelManager extends ComponentManager implements Model {
         private Set<String> nameKeyWords;
         private Optional<Priority> priority;
         private Optional<StartDate> startDate;
+        private Optional<String> day;
+        private Optional<String> month;
+        private Optional<String> year;
         private Optional<DueDate> dueDate;
         private Set<String> tags;
 
-        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority,
-                      Optional<StartDate> startDate, Optional<DueDate> dueDate, Set<String> tags) {
+        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority, Optional<StartDate> startDate,
+                Optional<DueDate> dueDate, Set<String> tags) {
             this.nameKeyWords = nameKeyWords;
             this.priority = priority;
             this.startDate = startDate;
+            this.day = null;
+            this.month = null;
+            this.year = null;
             this.dueDate = dueDate;
             this.tags = tags;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
+
             String taskStartDate = task.getStartDate().toString();
             String taskDueDate = task.getDueDate().toString();
-            Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
 
+            Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
             return (nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
                     && (!priority.isPresent() || task.getPriority().toString().equals(priority.get().toString()))
                     && (!startDate.isPresent() || (taskStartDate.length() != 0)
-                            && taskStartDate.substring(0, startDate.get().toString().length())
-                                            .equals(startDate.get().toString()))
+                            && taskStartDate.substring(0, 9).equals(startDate.get().toString().substring(0, 9)))
                     && (!dueDate.isPresent() || (taskDueDate.length() != 0)
-                            && taskDueDate.substring(0, dueDate.get().toString().length())
-                                          .equals(dueDate.get().toString()))
+                            && taskDueDate.substring(0, 9).equals(dueDate.get().toString().substring(0, 9)))
                     && (taskTagStringSet.containsAll(tags));
+
         }
 
         @Override
