@@ -28,7 +28,7 @@ public class ExitControllerTest extends ControllerTest {
         assertTrue(controller.matchesCommand("exit "));
         assertTrue(controller.matchesCommand("exit"));
         assertTrue(controller.matchesCommand("quit"));
-        assertFalse(controller.matchesCommand(" quit"));
+        assertTrue(controller.matchesCommand(" quit"));
     }
 
     @Test
