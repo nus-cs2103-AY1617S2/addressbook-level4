@@ -88,7 +88,6 @@ public class ModelManager extends ComponentManager implements Model {
         assert taskToEdit != null;
         assert editedTask != null;
         todoList.updateTask(taskToEdit, editedTask);
-        refreshLists();
         indicateToDoListChanged();
     }
 
@@ -217,12 +216,5 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return foundIt;
     }
-    
-    private void refreshLists(){
-//        filteredTasks = new FilteredList<>(this.todoList.getFilteredTasks());
-//        filteredFloats = new FilteredList<>(this.todoList.getFilteredFloats());
-//        filteredEvents = new FilteredList<>(this.todoList.getFilteredEvents());
-    }
-
 
 }
