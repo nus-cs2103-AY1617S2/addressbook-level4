@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.tache.commons.core.Messages;
+import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.tag.UniqueTagList;
@@ -66,24 +67,30 @@ public class EditCommand extends Command implements Undoable {
 
         taskToEdit = lastShownList.get(filteredTaskListIndex);
         originalTask = new Task(taskToEdit);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask;
         try {
-            model.updateTask(taskToEdit, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            try {
+                model.updateTask(taskToEdit, editedTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+            model.updateFilteredListToShowAll();
+            commandSuccess = true;
+            undoHistory.push(this);
+            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        } catch (IllegalValueException e) {
+            return new CommandResult(e.getMessage());
         }
-        model.updateFilteredListToShowAll();
-        commandSuccess = true;
-        undoHistory.push(this);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalValueException if date or time could not be parsed
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+                                             EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -229,7 +236,6 @@ public class EditCommand extends Command implements Undoable {
 
     @Override
     public String undo() throws CommandException {
-        // TODO Auto-generated method stub
         try {
             model.updateTask(taskToEdit, originalTask);
             model.updateFilteredListToShowAll();

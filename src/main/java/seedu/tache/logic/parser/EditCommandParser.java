@@ -40,6 +40,9 @@ import seedu.tache.model.task.Name;
  */
 public class EditCommandParser {
 
+    public static final String MESSAGE_INVALID_PARAMETER = "Invalid parameter given. Valid parameters" +
+                                                   " include name, start_date, start_time, end_date, end_time and tags";
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -92,7 +95,7 @@ public class EditCommandParser {
                                                                               .split(EDIT_PARAMETER_DELIMITER))));
                     break;
                 default:
-                    break;
+                    throw new IllegalValueException(MESSAGE_INVALID_PARAMETER);
                 }
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());

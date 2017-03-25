@@ -7,40 +7,45 @@ import java.util.Date;
 import java.util.List;
 
 import org.ocpsoft.prettytime.PrettyTime;
-import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 
 
 public class DateTime {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Task date should only contain <CONSTRAINT>";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Unknown date format. It is recommended to "
+                                        + "interchangeably use the following few formats:"
+                                        + "\nMM-DD-YY hh:mm:ss or MM/DD/YY 10.30pm";
 
-    public final Date date;
+    private final Date date;
 
     /**
      * Validates given date.
      *
      * @throws IllegalValueException if given date string is invalid.
      */
-    public DateTime(String date) {
+    public DateTime(String date) throws IllegalValueException {
         assert date != null;
         String trimmedStartDate = date.trim();
-        List<Date> temp = new PrettyTimeParser().parse(trimmedStartDate);
-
-        /*if (!isValidDate(trimmedStartDate)) {
-            throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
-        }*/
-        this.date = temp.get(0);
+        List<DateGroup> temp = new Parser().parse(trimmedStartDate);
+        if (temp.isEmpty()) {
+            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        }
+        this.date = temp.get(0).getDates().get(0);
+        String syntaxTree = temp.get(0).getSyntaxTree().toStringTree();
+        boolean hasExplicitDate = syntaxTree.contains("EXPLICIT_DATE");
+        boolean hasExplicitTime = syntaxTree.contains("EXPLICIT_TIME");
+        if (hasExplicitDate ^ hasExplicitTime) {
+            if (hasExplicitDate) {
+                this.date.setHours(0);
+                this.date.setMinutes(0);
+                this.date.setSeconds(0);
+            }
+        }
     }
-
-    /**
-     * Returns true if a given string is a valid task date.
-     */
-    /*public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
-    }*/
 
     @Override
     public String toString() {
@@ -52,13 +57,18 @@ public class DateTime {
         return sdf.format(date);
     }
 
+    public String getTimeOnly() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        return sdf.format(date);
+    }
+
     public String getAmericanDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         return sdf.format(date);
     }
 
-    public String getTimeOnly() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    public String getAmericanDateOnly() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         return sdf.format(date);
     }
 
