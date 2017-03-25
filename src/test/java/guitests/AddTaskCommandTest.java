@@ -28,9 +28,6 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
     private static IllegalArgumentException illegalArgumentException3 =
             new IllegalArgumentException("Task priority must be either 'low' or 'high'.");
     private static IllegalArgumentException illegalArgumentException4 =
-            new IllegalArgumentException("Floating task cannot be recurring task,"
-                    + " include at least an end date.");
-    private static IllegalArgumentException illegalArgumentException5 =
             new IllegalArgumentException("Invalid recurring frequency string");
     private Tag tag1 = new Tag("tag1");
     private Tag tag2 = new Tag("tag2");
@@ -290,7 +287,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
             task2.setRecurring(recurFrequencyString);
             fail("Should not reach here since recurring task must have a repeat frequency.");
         } catch (IllegalArgumentException illegalArgumentException) {
-            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException5.getMessage()));
+            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException4.getMessage()));
         }
         assertTrue(isTaskShown(task2));
 
@@ -305,7 +302,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
             task3.setRecurring(recurFrequencyString);
             fail("Should not reach here since recurring task must have only one repeat frequency.");
         } catch (IllegalArgumentException illegalArgumentException) {
-            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException5.getMessage()));
+            assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException4.getMessage()));
         }
         assertTrue(isTaskShown(task3));
     }
