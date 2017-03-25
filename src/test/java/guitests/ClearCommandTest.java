@@ -4,18 +4,18 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClearCommandTest extends AddressBookGuiTest {
+public class ClearCommandTest extends TaskListGuiTest {
 
     @Test
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalPersons()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.internship.getAddCommand());
+        assertTrue(taskListPanel.isListMatching(td.internship));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
@@ -23,9 +23,17 @@ public class ClearCommandTest extends AddressBookGuiTest {
         assertClearCommandSuccess();
     }
 
+    //@@author A0139747N
+    @Test
+    public void clearWithFlexibleCommand() {
+        commandBox.runCommand("clean");
+        assertListSize(0);
+        assertResultMessage("Task list has been cleared!");
+    }
+    //@@author
     private void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertResultMessage("Address book has been cleared!");
+        assertResultMessage("Task list has been cleared!");
     }
 }

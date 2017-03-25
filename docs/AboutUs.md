@@ -14,6 +14,7 @@ Role: Developer <br>
 Responsibilities: Deliverables and deadlines, Documentation<br>
 Component in charge of: [Storage](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/DeveloperGuide.md#25-storage-component)<br>
 
+
 Features implemented: <br>
 * [Sort Command](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#310-sorting-tasks-sort) <br>
 * [Save Commmand](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#312-saving-the-program-data-to-a-specified-path-save)<br>
@@ -47,12 +48,14 @@ Other major contributions:<br>
 * [Set up Travis and Coveralls](https://github.com/CS2103JAN2017-W14-B1/main/pull/37)
 * Formatting of User and Developer guide 
 
+
 -----
 
 #### [Sherina Toh Shi Pei](http://github.com/sherinatoh)
 <img src="images/sherinatoh.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Scheduling and tracking <br>
+
 Component in charge of: [UI](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/DeveloperGuide.md#22-ui-component)<br> 
 
 Features implemented: <br>
@@ -67,11 +70,11 @@ Other major contributions:<br>
 * [Did README.md](https://github.com/CS2103JAN2017-W14-B1/main/pull/16) 
 * Did Documentation of User and Developer guide
 
-
 -----
 
 #### [Wang Pengcheng](https://github.com/peng229)
 <img src="images/peng229.png" width="150"><br>
+
  Role: Developer <br>
  Responsibilities: Integration, Documentation<br>
  Component in charge of: [Model](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/DeveloperGuide.md#24-model-component)<br>
@@ -87,7 +90,6 @@ Code Written: <br>
 Other major contributions:<br>
 * [Did the inital refactoring from AddressBook to TaskList](https://github.com/CS2103JAN2017-W14-B1/main/pull/13)
 * Did Documentation of User and Developer guide
-
 
  -----
 
