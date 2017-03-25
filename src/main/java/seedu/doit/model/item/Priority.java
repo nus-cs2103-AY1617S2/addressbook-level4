@@ -2,6 +2,7 @@ package seedu.doit.model.item;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 
+//@@author A0139399J
 /**
  * Represents a Task's priority in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}

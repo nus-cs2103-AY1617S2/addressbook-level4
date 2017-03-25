@@ -1,6 +1,12 @@
-package seedu.doit.model.item;
+package seedu.doit.model.comparators;
 
-public class EndTimeComparator implements TaskComparator {
+import seedu.doit.model.item.ReadOnlyTask;
+
+//@@author A0139399J
+/**
+ * Compares ReadOnlyTasks by their names in lexicographical order
+ */
+public class TaskNameComparator implements TaskComparator {
 
     @Override
     public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
@@ -34,24 +40,12 @@ public class EndTimeComparator implements TaskComparator {
         int compareInt = currType.compareTo(otherType);
 
         if (compareInt == 0) {
-            switch(currType) {
-            case 1:
-                //fallthrough
-            case 2:
-                return compareEndTime(curr, other);
-            default:
-                return compareName(curr, other);
-            }
+            return compareName(curr, other);
         }
         return compareInt;
-    }
-
-    private int compareEndTime(ReadOnlyTask curr, ReadOnlyTask other) {
-        return curr.getDeadline().compareTo(other.getDeadline());
     }
 
     private int compareName(ReadOnlyTask curr, ReadOnlyTask other) {
         return curr.getName().toString().compareToIgnoreCase(other.getName().toString());
     }
-
 }

@@ -7,7 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.RedoCommand;
-import seedu.doit.model.item.TaskNameComparator;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TestUtil;

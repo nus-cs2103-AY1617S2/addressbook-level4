@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import seedu.doit.commons.core.Messages;
 import seedu.doit.logic.commands.DoneCommand;
-import seedu.doit.model.item.TaskNameComparator;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
 

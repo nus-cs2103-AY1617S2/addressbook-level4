@@ -5,6 +5,7 @@ import java.util.Objects;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.model.tag.UniqueTagList;
 
+//@@author A0139399J
 /**
  * Represents a Task in the task manager. Guarantees: details are present and
  * not null, field values are validated.

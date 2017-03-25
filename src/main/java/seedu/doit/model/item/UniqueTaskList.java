@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.exceptions.DuplicateDataException;
 import seedu.doit.commons.util.CollectionUtil;
+import seedu.doit.model.comparators.TaskNameComparator;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.

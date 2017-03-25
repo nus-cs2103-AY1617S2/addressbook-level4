@@ -1,6 +1,7 @@
 package seedu.doit.model;
 
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -9,19 +10,21 @@ import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
-import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.CollectionUtil;
-import seedu.doit.commons.util.StringUtil;
-import seedu.doit.model.item.EndTimeComparator;
-import seedu.doit.model.item.PriorityComparator;
+import seedu.doit.model.comparators.EndTimeComparator;
+import seedu.doit.model.comparators.PriorityComparator;
+import seedu.doit.model.comparators.StartTimeComparator;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.model.item.ReadOnlyTask;
-import seedu.doit.model.item.StartTimeComparator;
 import seedu.doit.model.item.Task;
-import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
-import seedu.doit.model.tag.Tag;
+import seedu.doit.model.predicates.AlwaysTruePredicate;
+import seedu.doit.model.predicates.DescriptionPredicate;
+import seedu.doit.model.predicates.DonePredicate;
+import seedu.doit.model.predicates.NamePredicate;
+import seedu.doit.model.predicates.PriorityPredicate;
 
 /**
  * Represents the in-memory model of the task manager data. All changes to any
@@ -46,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         updateFilteredTasks();
+        updateFilteredListToShowAll();
 
     }
 
@@ -155,101 +159,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    // =========== Filtered Task List Accessors
-    // ============================================================
-
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(this.filteredTasks);
-    }
-
-    @Override
-    public void updateFilteredListToShowAll() {
-        this.filteredTasks.setPredicate(null);
-    }
-
-    @Override
-    public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
-            Set<String> descriptionKeywords, Set<String> tagKeywords) {
-        if (!nameKeywords.isEmpty()) {
-            updateFilteredTaskList(new PredicateExpression(new NameQualifier(nameKeywords)));
-        }
-
-        if (!priorityKeywords.isEmpty()) {
-            updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(priorityKeywords)));
-        }
-
-        if (!descriptionKeywords.isEmpty()) {
-            updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(descriptionKeywords)));
-        }
-
-        if (!tagKeywords.isEmpty()) {
-            updateFilteredTaskList(new PredicateExpression(new TagQualifier(tagKeywords)));
-        }
-
-    }
-
-    private void updateFilteredTaskList(Expression expression) {
-        this.filteredTasks.setPredicate(expression::satisfies);
-    }
-
-    // ========== Inner classes/interfaces used for filtering
-    // =================================================
-
-    interface Expression {
-        boolean satisfies(ReadOnlyTask task);
-
-        @Override
-        String toString();
-    }
-
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-
-        @Override
-        String toString();
-    }
-
-    private class PredicateExpression implements Expression {
-
-        private final Qualifier qualifier;
-
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
-        }
-
-        @Override
-        public boolean satisfies(ReadOnlyTask task) {
-            return this.qualifier.run(task);
-        }
-
-        @Override
-        public String toString() {
-            return this.qualifier.toString();
-        }
-    }
-
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
-
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
-        }
-
-        @Override
-
-        public boolean run(ReadOnlyTask task) {
-            return this.nameKeyWords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
-        }
-
-        @Override
-        public String toString() {
-            return "name=" + String.join(", ", this.nameKeyWords);
-        }
-    }
-
-    // @@author A0138909R
+ // @@author A0138909R
     @Override
     public void undo() throws EmptyTaskManagerStackException {
         this.taskManager.resetData(taskManagerStack.loadOlderTaskManager(this.getTaskManager()));
@@ -265,68 +175,53 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author
-    private class PriorityQualifier implements Qualifier {
-        private Set<String> priorityKeywords;
 
-        PriorityQualifier(Set<String> priorityKeywords) {
-            this.priorityKeywords = priorityKeywords;
-        }
+    // =========== Filtered Task List Accessors
+    // ============================================================
 
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return this.priorityKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword));
-        }
-
-        @Override
-        public String toString() {
-            return "priority=" + String.join(", ", this.priorityKeywords);
-        }
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return new UnmodifiableObservableList<>(this.filteredTasks);
     }
 
-    private class DescriptionQualifier implements Qualifier {
-        private Set<String> descriptionKeywords;
-
-        DescriptionQualifier(Set<String> descriptionKeywords) {
-            this.descriptionKeywords = descriptionKeywords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return this.descriptionKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword));
-        }
-
-        @Override
-        public String toString() {
-            return "description=" + String.join(", ", this.descriptionKeywords);
-        }
+    @Override
+    public void updateFilteredListToShowAll() {
+        this.filteredTasks.setPredicate(null);
+        this.filteredTasks.setPredicate(new DonePredicate(false));
     }
 
-    private class TagQualifier implements Qualifier {
-        private Set<String> tagKeywords;
+    @Override
+    public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
+            Set<String> descriptionKeywords, Set<String> tagKeywords) {
+        Predicate combined = new AlwaysTruePredicate();
 
-        TagQualifier(Set<String> tagKeywords) {
-            this.tagKeywords = tagKeywords;
+        if (!nameKeywords.isEmpty()) {
+            Predicate namePredicate = new NamePredicate(nameKeywords);
+            combined = combined.and(namePredicate);
+            System.out.println("start" + nameKeywords + "end");
+        }
+        if (!priorityKeywords.isEmpty()) {
+            Predicate priorityPredicate = new PriorityPredicate(priorityKeywords);
+            combined = combined.and(priorityPredicate);
+            System.out.println("2");
+        }
+        if (!descriptionKeywords.isEmpty()) {
+            Predicate descriptionPredicate = new DescriptionPredicate(descriptionKeywords);
+            combined = combined.and(descriptionPredicate);
+            System.out.println("3");
+        }
+        if (!tagKeywords.isEmpty()) {
+            //Predicate tagPredicate = new TagPredicate(tagKeywords);
+            Predicate donePredicate = new DonePredicate(true);
+            combined = combined.and(donePredicate);
+            System.out.println("4");
         }
 
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return this.tagKeywords.stream().anyMatch(keyword -> {
-                try {
-                    return (task.getTags().contains(new Tag(keyword)));
-                } catch (IllegalValueException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return false;
-                }
-            });
-        }
-
-        @Override
-        public String toString() {
-            return "tag=" + String.join(", ", this.tagKeywords);
-        }
+        this.filteredTasks.setPredicate(combined);
     }
 
+    public void showDoneTaskList(boolean showDone) {
+        this.filteredTasks.setPredicate(null);
+        this.filteredTasks.setPredicate(new DonePredicate(showDone));
+    }
 }

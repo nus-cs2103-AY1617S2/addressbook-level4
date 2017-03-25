@@ -8,11 +8,11 @@ import java.util.Comparator;
 import org.junit.Test;
 
 import seedu.doit.logic.commands.SortCommand;
-import seedu.doit.model.item.EndTimeComparator;
-import seedu.doit.model.item.PriorityComparator;
+import seedu.doit.model.comparators.EndTimeComparator;
+import seedu.doit.model.comparators.PriorityComparator;
+import seedu.doit.model.comparators.StartTimeComparator;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.model.item.ReadOnlyTask;
-import seedu.doit.model.item.StartTimeComparator;
-import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.testutil.TestTask;
 
 public class SortCommandTest extends TaskManagerGuiTest {
