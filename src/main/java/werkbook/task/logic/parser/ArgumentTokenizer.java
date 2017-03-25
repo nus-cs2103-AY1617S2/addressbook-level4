@@ -85,6 +85,11 @@ public class ArgumentTokenizer {
         }
     }
 
+    //@@author A0139903B
+    /**
+     * Returns the full text, only excludes date times
+     * @return Full preamble without date times
+     */
     public Optional<String> getFullPreamble() {
         Optional<List<String>> storedPreamble = getAllValues(new Prefix(""));
 
@@ -101,6 +106,7 @@ public class ArgumentTokenizer {
             return Optional.empty();
         }
     }
+    //@@author
 
     private void resetTokenizerState() {
         this.tokenizedArguments.clear();
@@ -212,8 +218,7 @@ public class ArgumentTokenizer {
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
         //@@author A0139903B
-        // Should already be filtered by now, time to convert to fit date time
-        // format
+        // Should already be filtered by now, time to convert to fit date time format
         if (prefix.isDateTime()) {
             value = DateTimeParser.parse(value);
         }
