@@ -12,6 +12,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<!-- @@author A0138952W -->
+
 <AnchorPane fx:id="calendarView" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane fx:id="dWMView" prefHeight="435.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -22,7 +24,7 @@
                      <children>
                         <TableView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn minWidth="-1.0" prefWidth="-1.0" text="Time" />
+                            <TableColumn fx:id="timeColumn" minWidth="-1.0" prefWidth="-1.0" text="Time" />
                               <TableColumn minWidth="-1.0" prefWidth="-1.0" text="Events" />
                           </columns>
                            <columnResizePolicy>

@@ -2,14 +2,15 @@ package org.teamstbf.yats.ui;
 
 import org.teamstbf.yats.commons.util.FxViewUtil;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
+//@@author A0138952W
 /**
  * The Browser Panel of the App.
  */
@@ -23,12 +24,6 @@ public class CalendarViewPanel extends UiPart<Region> {
 	private TabPane dWMView;
 	@FXML
 	private Tab dayView;
-	@FXML
-	private TableView<String> dayViewTable;
-	@FXML
-	private TableColumn<String, String> timeColumn;
-	@FXML
-	private TableColumn<String, String> eventsColumn;
 	@FXML
 	private Tab weekView;
 	@FXML
@@ -57,7 +52,36 @@ public class CalendarViewPanel extends UiPart<Region> {
 	}
 
 	private void initializeDayView() {
-
 	}
 
+	// ====== Inner classes to define calendar view ================
+
+	private class InnerTime {
+
+		private final StringProperty time;
+
+		/**
+		 * Default constructor
+		 */
+		public InnerTime() {
+			this(null);
+		}
+
+		/**
+		 * Constructor with some initial data
+		 *
+		 * @param time
+		 */
+		public InnerTime(String time) {
+			this.time = new SimpleStringProperty(time);
+		}
+
+		public String getTime() {
+			return time.get();
+		}
+
+		public StringProperty timeProperty() {
+			return time;
+		}
+	}
 }
