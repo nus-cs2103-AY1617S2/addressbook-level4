@@ -36,6 +36,7 @@ import seedu.tasklist.logic.commands.ListCommand;
 import seedu.tasklist.logic.commands.LoadCommand;
 import seedu.tasklist.logic.commands.SaveCommand;
 import seedu.tasklist.logic.commands.SelectCommand;
+import seedu.tasklist.logic.commands.SortCommand;
 import seedu.tasklist.logic.commands.exceptions.CommandException;
 import seedu.tasklist.model.Model;
 import seedu.tasklist.model.ModelManager;
@@ -485,6 +486,43 @@ public class LogicManagerTest {
         String expectedMessage = String.format(SaveCommand.MESSAGE_INVALID_PATH, "data/task.png");
         assertCommandBehavior("save data/task.png", expectedMessage);
     }
+
+    @Test
+    public void sort_invalidCommand_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        assertCommandFailure("sort", expectedMessage);
+    }
+
+    @Test
+    public void sort_invalidParameter_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(SortCommand.MESSAGE_FAILURE);
+        assertCommandBehavior("sort z", expectedMessage);
+    }
+
+    @Test
+    public void sort_validParameterName_successful() throws Exception {
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS);
+        assertCommandBehavior("sort n", expectedMessage);
+    }
+
+    @Test
+    public void sort_validParameterDate_successful() throws Exception {
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS);
+        assertCommandBehavior("sort d", expectedMessage);
+    }
+
+    @Test
+    public void sort_validParameterPriority_successful() throws Exception {
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS);
+        assertCommandBehavior("sort p", expectedMessage);
+    }
+
+    @Test
+    public void sort_invalidParameterNull_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        assertCommandFailure("sort ", expectedMessage);
+    }
+
 //@@author
     /**
      * A utility class to generate test data.
