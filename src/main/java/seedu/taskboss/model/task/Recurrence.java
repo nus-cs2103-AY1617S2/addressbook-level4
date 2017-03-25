@@ -50,7 +50,7 @@ public class Recurrence {
 
         switch(this.frequency) {
         case DAILY:
-            if (startDate != null) {         
+            if (startDate != null) {
                 Calendar startCalendar = addFrequencyToCalendar(startDate, Frequency.DAILY);
                 updateDateTime(startCalendar, task, startSdfFormat, isStartDate);
             }
