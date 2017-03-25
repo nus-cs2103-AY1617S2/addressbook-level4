@@ -33,5 +33,4 @@ public class DueDate extends TaskDate {
     public DueDate(String dueDate, boolean isFind) throws IllegalValueException {
         super(dueDate, isFind);
     }
-
 }
