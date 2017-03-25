@@ -25,6 +25,7 @@ import seedu.doit.model.predicates.DescriptionPredicate;
 import seedu.doit.model.predicates.DonePredicate;
 import seedu.doit.model.predicates.NamePredicate;
 import seedu.doit.model.predicates.PriorityPredicate;
+import seedu.doit.model.predicates.TagPredicate;
 
 /**
  * Represents the in-memory model of the task manager data. All changes to any
@@ -193,27 +194,27 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
             Set<String> descriptionKeywords, Set<String> tagKeywords) {
-        Predicate combined = new AlwaysTruePredicate();
+        Predicate<ReadOnlyTask> combined = new AlwaysTruePredicate();
 
         if (!nameKeywords.isEmpty()) {
-            Predicate namePredicate = new NamePredicate(nameKeywords);
+            Predicate<ReadOnlyTask> namePredicate = new NamePredicate(nameKeywords);
             combined = combined.and(namePredicate);
             System.out.println("start" + nameKeywords + "end");
         }
         if (!priorityKeywords.isEmpty()) {
-            Predicate priorityPredicate = new PriorityPredicate(priorityKeywords);
+            Predicate<ReadOnlyTask> priorityPredicate = new PriorityPredicate(priorityKeywords);
             combined = combined.and(priorityPredicate);
             System.out.println("2");
         }
         if (!descriptionKeywords.isEmpty()) {
-            Predicate descriptionPredicate = new DescriptionPredicate(descriptionKeywords);
+            Predicate<ReadOnlyTask> descriptionPredicate = new DescriptionPredicate(descriptionKeywords);
             combined = combined.and(descriptionPredicate);
             System.out.println("3");
         }
         if (!tagKeywords.isEmpty()) {
-            //Predicate tagPredicate = new TagPredicate(tagKeywords);
-            Predicate donePredicate = new DonePredicate(true);
-            combined = combined.and(donePredicate);
+            Predicate<ReadOnlyTask> tagPredicate = new TagPredicate(tagKeywords);
+            //Predicate donePredicate = new DonePredicate(true);
+            combined = combined.and(tagPredicate);
             System.out.println("4");
         }
 
