@@ -1,51 +1,63 @@
 package org.teamstbf.yats.ui;
 
 import org.teamstbf.yats.commons.util.FxViewUtil;
-import org.teamstbf.yats.model.item.ReadOnlyEvent;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
 
 /**
  * The Browser Panel of the App.
  */
 public class CalendarViewPanel extends UiPart<Region> {
 
-	private static final String FXML = "BrowserPanel.fxml";
+	private static final String FXML = "CalendarView.fxml";
 
 	@FXML
-	private WebView browser;
+	private AnchorPane calendarView;
+	@FXML
+	private TabPane dWMView;
+	@FXML
+	private Tab dayView;
+	@FXML
+	private TableView<String> dayViewTable;
+	@FXML
+	private TableColumn<String, String> timeColumn;
+	@FXML
+	private TableColumn<String, String> eventsColumn;
+	@FXML
+	private Tab weekView;
+	@FXML
+	private Tab monthView;
+	@FXML
+	private Tab yearView;
 
 	/**
+	 * The AnchorPane where the CalendarView must be inserted
+	 *
 	 * @param placeholder
-	 *            The AnchorPane where the BrowserPanel must be inserted
 	 */
 	public CalendarViewPanel(AnchorPane placeholder) {
 		super(FXML);
-		placeholder.setOnKeyPressed(Event::consume); // To prevent triggering
-														// events for typing
-														// inside the
-														// loaded Web page.
-		FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
-		placeholder.getChildren().add(browser);
+		FxViewUtil.applyAnchorBoundaryParameters(calendarView, 0.0, 0.0, 0.0, 0.0);
+		invokeTabPane();
+		initializeDayView();
+		placeholder.getChildren().add(calendarView);
 	}
 
-	public void loadPersonPage(ReadOnlyEvent person) {
-		loadPage("https://www.google.com.sg/#safe=off&q=" + person.getTitle().fullName.replaceAll(" ", "+"));
+	private void invokeTabPane() {
+		dayView.setText("Day");
+		weekView.setText("Week");
+		monthView.setText("Month");
+		yearView.setText("Year");
 	}
 
-	public void loadPage(String url) {
-		browser.getEngine().load(url);
-	}
+	private void initializeDayView() {
 
-	/**
-	 * Frees resources allocated to the browser.
-	 */
-	public void freeResources() {
-		browser = null;
 	}
 
 }

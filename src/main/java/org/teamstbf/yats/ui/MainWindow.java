@@ -110,7 +110,7 @@ public class MainWindow extends UiPart<Region> {
 	}
 
 	void fillInnerParts() {
-		calendarViewPanel = new CalendarViewPanel(calendarViewPlaceholder);
+		calendarViewPanel = new CalendarViewPanel(getCalendarViewPlaceholder());
 		taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
 		new ResultDisplay(getResultDisplayPlaceholder());
 		new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
@@ -131,6 +131,10 @@ public class MainWindow extends UiPart<Region> {
 
 	private AnchorPane getTaskListPlaceholder() {
 		return taskListPanelPlaceholder;
+	}
+
+	private AnchorPane getCalendarViewPlaceholder() {
+		return calendarViewPlaceholder;
 	}
 
 	void hide() {
