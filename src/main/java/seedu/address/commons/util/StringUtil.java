@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -69,11 +70,11 @@ public class StringUtil {
      * Parse a String argument into date format.
      * @param dateArg
      * @return time in localTime format
-     * @throws IllegalValueException
+     * @throws DateTimeException
      */
-    public static LocalTime parseStringToTime(String timeString) throws IllegalValueException {
+    public static LocalTime parseStringToTime(String timeString) throws DateTimeException {
         //empty start date
-        if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
+        if (timeString == null) throw new DateTimeException(TIME_FORMAT_CONSTRAINTS);
         return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHMM"));
     }
     
@@ -95,21 +96,14 @@ public class StringUtil {
      * Parse a String argument into date format.
      * @param dateString
      * @return time in LocalDate format
-     * @throws IllegalValueException
+     * @throws DateTimeException
      */
 
-    public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
+    public static LocalDate parseStringToDate(String dateString) throws DateTimeException {
         //empty start date
-        if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
-        Pattern pattern = Pattern.compile(DATE_VALIDATION_REGEX);
-        Matcher matchers = pattern.matcher(dateString);
-        matchers.matches();
-        int day = Integer.parseInt(matchers.group(1));
-        int month = Integer.parseInt(matchers.group(2));
-        int year = Integer.parseInt(matchers.group(3));
-        year += YEAR_CONVERSION_INDEX;
-
-        return LocalDate.of(year, month, day);
+        if (dateString == null) throw new DateTimeException(DATE_FORMAT_CONSTRAINTS);
+        return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("ddMMyy"));
+            
     }
     
     //@@author
@@ -122,4 +116,5 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+    
 }

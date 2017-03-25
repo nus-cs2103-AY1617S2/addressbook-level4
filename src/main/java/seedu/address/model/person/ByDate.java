@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -33,7 +34,7 @@ public class ByDate {
         } else {
             try {
                 this.value = StringUtil.parseStringToDate(byDateArg);
-            } catch (IllegalValueException illegalValueException) {
+            } catch (DateTimeException illegalValueException) {
                 throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
             }
         }
@@ -50,6 +51,9 @@ public class ByDate {
     //@@author
     @Override
     public String toString() {
+        if (value == null) {
+            return null;
+        }
         return value.toString();
     }
 

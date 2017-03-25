@@ -18,7 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_BYDATE = new Prefix("bd/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_TAG = new Prefix("ta/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

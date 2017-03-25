@@ -15,7 +15,9 @@ import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueEventList.DuplicateEventException;
 import seedu.address.model.person.UniqueTaskList;
+import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -28,6 +30,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
     private final UniqueTaskList tasks;
     private final UniqueEventList events;
     private final UniqueTagList tags;
+
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication

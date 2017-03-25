@@ -28,11 +28,17 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                && other.getPriority().equals(this.getPriority())
-                && other.getByDate().equals(this.getByDate())
-                && other.getByTime().equals(this.getByTime())
-                && other.getTags().equals(other.getTags())
+                && (other.getDescription().toString() == null? this.getDescription().toString() == null :
+                    other.getDescription().toString().equals(this.getDescription().toString())) // state checks here onwards
+                && (other.getPriority().toString() == null? this.getPriority().toString() == null :
+                    other.getPriority().toString().equals(this.getPriority().toString()))
+                && (other.getByDate().toString() == null? this.getByDate().toString() == null :
+                    other.getByDate().toString().equals(this.getByDate().toString()))
+                && (other.getByTime().toString() == null? this.getByTime().toString() == null :
+                    other.getByTime().toString().equals(this.getByTime().toString()))
+                && (other.getLocation().toString() == null? this.getLocation().toString() == null :
+                    other.getLocation().toString().equals(this.getLocation().toString()))
+                && (other.getTags().equals(other.getTags()))
                 );
     }
 
@@ -43,13 +49,13 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" Priority: ")
-                .append(getPriority())
+                .append(getPriority().toString())
                 .append(" ByDate: ")
-                .append(getByDate())
+                .append(getByDate().toString())
                 .append(" ByTime: ")
-                .append(getByTime())
+                .append(getByTime().toString())
                 .append(" Location: ")
-                .append(getLocation())
+                .append(getLocation().toString())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

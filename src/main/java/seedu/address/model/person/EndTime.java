@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -13,7 +14,7 @@ import seedu.address.commons.util.StringUtil;
 public class EndTime {
     
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
-            "Event end time can only be in this format: hh:mm(AM/PM) format, e.g. 12:00pm";
+            "Event end time can only be in this format: hhmm, e.g. 1300";
 
     public final LocalTime value;
 
@@ -29,7 +30,7 @@ public class EndTime {
         else {
             try {
                 this.value = StringUtil.parseStringToTime(endTimeArg);
-            } catch (IllegalValueException illegalValueException) {
+            } catch (DateTimeException illegalValueException) {
                 throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
                 }
             }
@@ -48,6 +49,9 @@ public class EndTime {
 
     @Override
     public String toString() {
+        if (value == null) {
+            return null;
+        }
         return value.toString();
     }
 

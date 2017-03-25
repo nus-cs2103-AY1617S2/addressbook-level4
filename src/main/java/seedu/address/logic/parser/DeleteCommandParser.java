@@ -30,8 +30,7 @@ public class DeleteCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
-
-        if (!type.get().equals("ev") || !type.get().equals("ts")) {
+        if (!type.get().equals("ev") && !type.get().equals("ts")) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
