@@ -2,9 +2,12 @@ package seedu.tasklist.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.tasklist.commons.util.AppUtil;
 import seedu.tasklist.model.task.DeadlineTask;
 import seedu.tasklist.model.task.EventTask;
 import seedu.tasklist.model.task.FloatingTask;
@@ -15,6 +18,7 @@ import seedu.tasklist.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
+    private static final String tickSource = "/images/tick.png";
 
     @FXML
     private HBox cardPane;
@@ -36,6 +40,8 @@ public class TaskCard extends UiPart<Region> {
     private Label endDate;
     @FXML
     private Label status;
+    @FXML
+    private ImageView tickLogo;
 
     @FXML
     private FlowPane tags;
@@ -43,6 +49,11 @@ public class TaskCard extends UiPart<Region> {
     //@@author A0143355J
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        Image tickImage = AppUtil.getImage(tickSource);
+        tickLogo.setImage(tickImage);
+        if (task.getStatus().value == false) {
+            tickLogo.setVisible(false);
+        }
         String taskType = task.getType();
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
