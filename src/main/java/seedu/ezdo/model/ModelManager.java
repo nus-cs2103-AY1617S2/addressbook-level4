@@ -262,9 +262,6 @@ public class ModelManager extends ComponentManager implements Model {
         private Set<String> nameKeyWords;
         private Optional<Priority> priority;
         private Optional<StartDate> startDate;
-        private Optional<String> day;
-        private Optional<String> month;
-        private Optional<String> year;
         private Optional<DueDate> dueDate;
         private Set<String> tags;
 
@@ -273,9 +270,6 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
             this.priority = priority;
             this.startDate = startDate;
-            this.day = null;
-            this.month = null;
-            this.year = null;
             this.dueDate = dueDate;
             this.tags = tags;
         }

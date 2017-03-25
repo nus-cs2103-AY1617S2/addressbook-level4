@@ -86,14 +86,6 @@ public class ArgumentTokenizer {
     }
 
     /**
-     * Returns the preamble (text before the first valid prefix), if any. Leading/trailing spaces will be trimmed.
-     *     If the string before the first prefix is empty, Optional.empty() will be returned.
-     */
-    public Map<Prefix, List<String>> getMapping() {
-        return this.tokenizedArguments;
-    }
-
-    /**
      * Finds all positions in an arguments string at which any prefix appears
      */
     private List<PrefixPosition> findAllPrefixPositions(String argsString) {
