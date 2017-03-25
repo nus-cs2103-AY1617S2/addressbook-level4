@@ -77,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void saveTaskboss(); {
+    public void saveTaskboss() {
         indicateTaskBossChanged();
     }
 
