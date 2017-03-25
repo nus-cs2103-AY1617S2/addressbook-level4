@@ -9,7 +9,7 @@ import seedu.toluist.ui.UiPart;
  * To show a UiView, {@link #render()} needs to be explicitly called
  * Also a parent node is required through {@link #setParent(Pane)}
  */
-abstract class UiView extends UiPart<Pane> {
+public class UiView extends UiPart<Pane> {
     private Pane parent;
 
     public UiView(String fxmlFileName) {

@@ -32,7 +32,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
 
     @Before
     public void setUp() {
-        TodoList todoList = TodoList.load();
+        TodoList todoList = TodoList.getInstance();
         todoList.setTasks(new ArrayList<>());
         taskWithDeadline.setCompleted(true);
         todoList.add(floatingTask);

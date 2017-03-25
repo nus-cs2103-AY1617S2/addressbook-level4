@@ -16,7 +16,4 @@ public interface Ui {
     void stop();
 
     void init(Dispatcher dispatcher);
-
-    void render();
-
 }

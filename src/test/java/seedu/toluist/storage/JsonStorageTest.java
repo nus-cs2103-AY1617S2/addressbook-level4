@@ -226,6 +226,15 @@ public class JsonStorageTest {
     }
 
     @Test
+    public void undo_IdenticalDataSavedMultipleTimes() {
+        saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
+        storage.save(typicalTodoList);
+        storage.save(typicalTodoList);
+
+        assertValidUndoRedoData(storage.undo(ZILLION), new TodoList(), 1);
+    }
+
+    @Test
     public void redo_nothingToRedo() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
         assertValidUndoRedoData(storage.redo(1), new TodoList(), 0);

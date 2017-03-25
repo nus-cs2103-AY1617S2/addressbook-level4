@@ -4,15 +4,25 @@ package guitests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
  * Gui tests for redo command
  */
 public class RedoCommandTest extends ToLuistGuiTest {
+    @Before
+    public void setUp() {
+        TodoList.getInstance().setTasks(Arrays.asList(new TypicalTestTodoLists().getTypicalTasks()));
+        TodoList.getInstance().save();
+    }
+
     @Test
     public void redoSingleCommand() {
         String taskDescription = "build a rocket";
@@ -24,12 +34,12 @@ public class RedoCommandTest extends ToLuistGuiTest {
         String undoCommand = "undo";
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task));
-        assertFalse(TodoList.load().getTasks().contains(task));
+        assertFalse(TodoList.getInstance().getTasks().contains(task));
 
         String redoCommand = "redo";
         commandBox.runCommand(redoCommand);
         assertTrue(isTaskShown(task));
-        assertTrue(TodoList.load().getTasks().contains(task));
+        assertTrue(TodoList.getInstance().getTasks().contains(task));
     }
 
     @Test
@@ -50,7 +60,7 @@ public class RedoCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
-        assertFalse(TodoList.load().getTasks().contains(task));
+        assertFalse(TodoList.getInstance().getTasks().contains(task));
 
         String redoCommand = "redo 2";
         commandBox.runCommand(redoCommand);
@@ -69,7 +79,7 @@ public class RedoCommandTest extends ToLuistGuiTest {
         String undoCommand = "undo";
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task1));
-        assertFalse(TodoList.load().getTasks().contains(task1));
+        assertFalse(TodoList.getInstance().getTasks().contains(task1));
 
         String taskDescription2 = "build a castle";
         String addCommand2 = "add " + taskDescription2;
@@ -81,6 +91,6 @@ public class RedoCommandTest extends ToLuistGuiTest {
         String redoCommand = "redo";
         commandBox.runCommand(redoCommand);
         assertFalse(isTaskShown(task1));
-        assertFalse(TodoList.load().getTasks().contains(task1));
+        assertFalse(TodoList.getInstance().getTasks().contains(task1));
     }
 }

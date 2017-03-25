@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * DeleteTaskController is responsible for deleting a task
@@ -26,11 +26,11 @@ public class DeleteTaskController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
-        TodoList todoList = TodoList.load();
-        CommandResult commandResult = new CommandResult("");
+        TodoList todoList = TodoList.getInstance();
+        CommandResult commandResult;
 
         HashMap<String, String> tokens = tokenize(command);
 
@@ -43,7 +43,7 @@ public class DeleteTaskController extends Controller {
             uiStore.setTasks(todoList.getTasks());
         }
 
-        return commandResult;
+        uiStore.setCommandResult(commandResult);
     }
 
     public HashMap<String, String> tokenize(String command) {

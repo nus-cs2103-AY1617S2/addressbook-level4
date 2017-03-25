@@ -29,6 +29,7 @@ public class KeywordTokenizer {
             // Early termination, no description means there is nothing to tokenize.
             return tokens;
         }
+        String descriptionInLowerCase = description.toLowerCase();
 
         ArrayList<Pair<Integer, String>> indexKeywordPairs = new ArrayList<>();
         String[] nonNullKeywords = keywords == null ? new String[] {} : keywords;
@@ -38,7 +39,7 @@ public class KeywordTokenizer {
         }
 
         for (String keyword : nonNullKeywords) {
-            int index = description.lastIndexOf(keyword);
+            int index = descriptionInLowerCase.lastIndexOf(keyword);
             if (index != INVALID_INDEX) {
                 // Index in indexKeywordPairs refers to the index behind the last character of the keyword.
                 Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length(), keyword);

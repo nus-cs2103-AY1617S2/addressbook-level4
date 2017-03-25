@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * ListController is responsible for rendering the initial UI
@@ -24,13 +24,13 @@ public class HistoryController extends Controller {
         this.commandHistory = commandHistory;
     }
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
         String result = String.join("\n", commandHistory);
 
-        return new CommandResult(String.format(RESULT_MESSAGE, result,
-                StringUtil.nounWithCount("command", commandHistory.size())));
+        uiStore.setCommandResult(new CommandResult(String.format(
+                RESULT_MESSAGE, result, StringUtil.nounWithCount("command", commandHistory.size()))));
     }
 
     public HashMap<String, String> tokenize(String command) {

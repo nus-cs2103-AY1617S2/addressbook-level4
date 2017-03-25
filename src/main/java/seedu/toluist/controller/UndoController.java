@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Responsible for storage-related task
@@ -23,22 +23,23 @@ public class UndoController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(UndoController.class);
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass() + "will handle command");
 
         HashMap<String, String> tokens = tokenize(command);
         String undoTimesToken = tokens.get(UNDO_TIMES);
         int undoTimes = undoTimesToken != null ? Integer.parseInt(undoTimesToken) : 1;
 
-        Pair<TodoList, Integer> undoResult = TodoList.load().getStorage().undo(undoTimes);
-        TodoList todoList = undoResult.getKey();
+        Pair<TodoList, Integer> undoResult = TodoList.getInstance().getStorage().undo(undoTimes);
+        TodoList todoList = TodoList.getInstance();
+        todoList.setTasks(undoResult.getKey().getTasks());
         int actualUndoTimes =  undoResult.getValue();
 
         uiStore.setTasks(todoList.getTasks());
 
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
+        uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
                 StringUtil.nounWithCount ("change", actualUndoTimes),
-                actualUndoTimes == 1 ? "was" : "were"));
+                actualUndoTimes == 1 ? "was" : "were")));
     }
 
     public HashMap<String, String> tokenize(String command) {

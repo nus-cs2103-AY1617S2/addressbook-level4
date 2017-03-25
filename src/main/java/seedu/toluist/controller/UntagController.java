@@ -8,11 +8,11 @@ import java.util.logging.Logger;
 import seedu.toluist.commons.core.LogsCenter;
 
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received
@@ -34,14 +34,14 @@ public class UntagController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(UntagController.class);
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
         String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER)) - 1;
-        TodoList todoList = TodoList.load();
+        TodoList todoList = TodoList.getInstance();
         Task task = UiStore.getInstance().getShownTasks().get(index);
         ArrayList<String> successfulList = new ArrayList<String>();
         ArrayList<String> failedList = new ArrayList<String>();
@@ -59,9 +59,9 @@ public class UntagController extends Controller {
         }
 
         // display formatting
-        return formatDisplay(successfulList.toArray(new String[successfulList.size()]),
+        uiStore.setCommandResult(formatDisplay(successfulList.toArray(new String[successfulList.size()]),
                                 failedList.toArray(new String[failedList.size()]),
-                                successfulList.size());
+                                successfulList.size()));
     }
 
     //!!!!!same as FindController method

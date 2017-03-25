@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Responsible for redo-related task
@@ -23,22 +23,23 @@ public class RedoController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(RedoController.class);
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass() + "will handle command");
 
         HashMap<String, String> tokens = tokenize(command);
         String redoTimesToken = tokens.get(REDO_TIMES);
         int redoTimes = redoTimesToken != null ? Integer.parseInt(redoTimesToken) : 1;
 
-        Pair<TodoList, Integer> redoResult = TodoList.load().getStorage().redo(redoTimes);
-        TodoList todoList = redoResult.getKey();
+        Pair<TodoList, Integer> redoResult = TodoList.getInstance().getStorage().redo(redoTimes);
+        TodoList todoList = TodoList.getInstance();
+        todoList.setTasks(redoResult.getKey().getTasks());
         int actualRedoTimes = redoResult.getValue();
 
         uiStore.setTasks(todoList.getTasks());
 
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
+        uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
                 StringUtil.nounWithCount("change", actualRedoTimes),
-                actualRedoTimes == 1 ? "was" : "were"));
+                actualRedoTimes == 1 ? "was" : "were")));
     }
 
     public HashMap<String, String> tokenize(String command) {

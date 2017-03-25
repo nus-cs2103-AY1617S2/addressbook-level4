@@ -17,7 +17,7 @@ import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
- * Gui tests for load command
+ * Gui tests for getInstance command
  */
 public class LoadCommandTest extends ToLuistGuiTest {
     @Test
@@ -42,7 +42,7 @@ public class LoadCommandTest extends ToLuistGuiTest {
         assertEquals(Config.getInstance().getTodoListFilePath(), newPath);
 
         // Check that todo list loaded is the same as previous todo list
-        TodoList todoListAtLoadedLocation = TodoList.load();
+        TodoList todoListAtLoadedLocation = TodoList.getInstance();
         assertTrue(TestUtil.compareTasksOfTodoLists(todoListAtLoadedLocation,
                 new TypicalTestTodoLists().getTypicalTodoList()));
         assertResultMessage(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, newPath));

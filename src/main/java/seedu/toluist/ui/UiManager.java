@@ -48,7 +48,6 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow.render();
             mainWindow.show();
             // Re-render when data change is observed
-            UiStore.getInstance().bind(this);
             String listCommand = "list";
             dispatcher.dispatch(listCommand);
         } catch (Throwable e) {
