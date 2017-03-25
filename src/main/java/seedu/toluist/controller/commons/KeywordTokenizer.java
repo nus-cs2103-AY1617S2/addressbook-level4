@@ -1,4 +1,4 @@
-//@@author Melvin
+//@@author A0127545A
 package seedu.toluist.controller.commons;
 
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ import seedu.toluist.commons.util.StringUtil;
  * Tokenize string of description by keywords
  */
 public class KeywordTokenizer {
-    public static final int INVALID_INDEX = -1;
-    public static final int START_INDEX = 0;
+    public static final int INDEX_INVALID = -1;
+    public static final int INDEX_START = 0;
 
     /**
      * Tokenize a string description into their respective keywords (by best effort matching)
@@ -35,12 +35,12 @@ public class KeywordTokenizer {
         String[] nonNullKeywords = keywords == null ? new String[] {} : keywords;
         if (defaultKeyword != null) {
             // Everything that is not matched (guaranteed to be at the left) will be tokenized to the default keyword
-            indexKeywordPairs.add(new Pair<>(START_INDEX, defaultKeyword));
+            indexKeywordPairs.add(new Pair<>(INDEX_START, defaultKeyword));
         }
 
         for (String keyword : nonNullKeywords) {
             int index = descriptionInLowerCase.lastIndexOf(keyword);
-            if (index != INVALID_INDEX) {
+            if (index != INDEX_INVALID) {
                 // Index in indexKeywordPairs refers to the index behind the last character of the keyword.
                 Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length(), keyword);
                 indexKeywordPairs.add(indexKeywordPair);

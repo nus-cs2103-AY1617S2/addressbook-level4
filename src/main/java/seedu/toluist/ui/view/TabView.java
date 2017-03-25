@@ -14,7 +14,7 @@ import seedu.toluist.ui.UiStore;
  * View to display the individual tab
  */
 public class TabView extends UiView {
-    private static final String SELECTED_TAB_CLASS = "selected";
+    private static final String STYLE_CLASS_SELECTED_TAB = "selected";
     private static final String FXML = "TabView.fxml";
 
     @FXML
@@ -42,7 +42,7 @@ public class TabView extends UiView {
         tabShortcutLabel.setText(switchPredicate.getDisplayName().substring(0, 1));
         tabLabel.setText(switchPredicate.getDisplayName().substring(1) + taskInfo);
         if (isSelected) {
-            FxViewUtil.addStyleClass(tabPane, SELECTED_TAB_CLASS);
+            FxViewUtil.addStyleClass(tabPane, STYLE_CLASS_SELECTED_TAB);
         }
     }
 }

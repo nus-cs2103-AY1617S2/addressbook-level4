@@ -1,4 +1,4 @@
-//@@author Melvin
+//@@author A0127545A
 package seedu.toluist.controller;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ import seedu.toluist.ui.commons.CommandResult;
  */
 public class UpdateTaskController extends Controller {
 
-    private static final String COMMAND_TEMPLATE = "^update"
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*update"
             + "(\\s+(?<index>\\d+))?"
             + "(\\s+(?<description>.+))?\\s*";
 
@@ -41,26 +41,26 @@ public class UpdateTaskController extends Controller {
 
         HashMap<String, String> tokens = tokenize(command);
 
-        String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
+        String description = tokens.get(TaskTokenizer.PARAMETER_TASK_DESCRIPTION);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
         Task task = uiStore.getShownTasks(indexes).get(0);
 
-        String eventStartDateToken = tokens.get(TaskTokenizer.EVENT_START_DATE_KEYWORD);
+        String eventStartDateToken = tokens.get(TaskTokenizer.KEYWORD_EVENT_START_DATE);
         LocalDateTime eventStartDateTime = DateTimeUtil.parseDateString(eventStartDateToken);
 
-        String eventEndDateToken = tokens.get(TaskTokenizer.EVENT_END_DATE_KEYWORD);
+        String eventEndDateToken = tokens.get(TaskTokenizer.KEYWORD_EVENT_END_DATE);
         LocalDateTime eventEndDateTime = DateTimeUtil.parseDateString(eventEndDateToken);
 
-        String taskDeadlineToken = tokens.get(TaskTokenizer.TASK_DEADLINE_KEYWORD);
+        String taskDeadlineToken = tokens.get(TaskTokenizer.KEYWORD_TASK_DEADLINE);
         LocalDateTime taskDeadline = DateTimeUtil.parseDateString(taskDeadlineToken);
 
-        boolean isFloating = tokens.containsKey(TaskTokenizer.TASK_FLOATING_KEYWORD);
+        boolean isFloating = tokens.containsKey(TaskTokenizer.KEYWORD_TASK_FLOATING);
 
-        String taskPriority = tokens.get(TaskTokenizer.TASK_PRIORITY_KEYWORD);
+        String taskPriority = tokens.get(TaskTokenizer.KEYWORD_TASK_PRIORITY);
 
-        String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
+        String tagsToken = tokens.get(TaskTokenizer.KEYWORD_TASK_TAGS);
         Set<Tag> tags = TagParser.parseTags(tagsToken);
 
         commandResult = update(task, description, eventStartDateTime, eventEndDateTime,

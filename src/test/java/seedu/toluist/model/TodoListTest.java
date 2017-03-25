@@ -1,4 +1,4 @@
-//@@author Melvin
+//@@author A0127545A
 package seedu.toluist.model;
 
 import static org.junit.Assert.assertEquals;
@@ -66,7 +66,7 @@ public class TodoListTest {
         assertEquals(TodoList.getInstance(), TodoList.getInstance());
     }
 
-    //@@author Melvin
+    //@@author A0127545A
     @Test
     public void testEquals() {
         TodoList todoList2 = new TodoList();

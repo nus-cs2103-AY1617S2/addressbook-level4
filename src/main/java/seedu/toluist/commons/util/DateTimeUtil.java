@@ -15,7 +15,7 @@ import com.joestelmach.natty.Parser;
  * Utility class for DateTime
  */
 public class DateTimeUtil {
-    //@@author Melvin
+    //@@author A0127545A
     public static LocalDateTime parseDateString(String stringDate) {
         if (stringDate == null) {
             return null;

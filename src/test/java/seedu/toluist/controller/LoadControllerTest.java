@@ -43,11 +43,11 @@ public class LoadControllerTest extends ControllerTest {
     @Test
     public void tokenize() {
         HashMap<String, String> tokensNoArgument = new HashMap<>();
-        tokensNoArgument.put(StoreController.STORE_DIRECTORY, null);
+        tokensNoArgument.put(StoreController.PARAMETER_STORE_DIRECTORY, null);
         assertEquals(tokensNoArgument, controller.tokenize("load"));
 
         HashMap<String, String> tokensOneArgument = new HashMap<>();
-        tokensOneArgument.put(StoreController.STORE_DIRECTORY, "abc");
+        tokensOneArgument.put(StoreController.PARAMETER_STORE_DIRECTORY, "abc");
         assertEquals(tokensOneArgument, controller.tokenize("load abc"));
     }
 }

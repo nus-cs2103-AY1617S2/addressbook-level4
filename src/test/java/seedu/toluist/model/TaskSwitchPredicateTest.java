@@ -13,25 +13,25 @@ import org.junit.Test;
 public class TaskSwitchPredicateTest {
     @Test
     public void todaySwitchPredicate() {
-        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now(), TaskSwitchPredicate.TODAY_SWITCH_PREDICATE, true);
+        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now(), TaskSwitchPredicate.SWITCH_PREDICATE_TODAY, true);
         assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().minusDays(1), TaskSwitchPredicate
-                        .TODAY_SWITCH_PREDICATE,
+                        .SWITCH_PREDICATE_TODAY,
                 false);
         assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(1), TaskSwitchPredicate
-                        .TODAY_SWITCH_PREDICATE,
+                        .SWITCH_PREDICATE_TODAY,
                 false);
     }
 
     @Test
     public void next7DaysSwitchPredicate() {
         assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now(),
-                TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, false);
+                TaskSwitchPredicate.SWITCH_PREDICATE_NEXT_7_DAYS, false);
         assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(7),
-                TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, true);
+                TaskSwitchPredicate.SWITCH_PREDICATE_NEXT_7_DAYS, true);
         assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(1),
-                TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, true);
+                TaskSwitchPredicate.SWITCH_PREDICATE_NEXT_7_DAYS, true);
         assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(8),
-                TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, false);
+                TaskSwitchPredicate.SWITCH_PREDICATE_NEXT_7_DAYS, false);
     }
 
 

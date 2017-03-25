@@ -29,7 +29,7 @@ public class UiStore {
 
     private ArrayList<Task> allTasks = new ArrayList<>();
     private ObjectProperty<TaskSwitchPredicate> observableSwitchPredicate =
-            new SimpleObjectProperty<>(TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE);
+            new SimpleObjectProperty<>(TaskSwitchPredicate.SWITCH_PREDICATE_INCOMPLETE);
     private ObservableList<Task> shownTasks = FXCollections.observableArrayList();
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));

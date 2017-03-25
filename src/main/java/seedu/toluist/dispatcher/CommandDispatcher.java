@@ -75,11 +75,13 @@ public class CommandDispatcher extends Dispatcher {
         controller.execute(deAliasedCommand);
     }
 
+    //@a@author A0162011A
     private void recordCommand(String command) {
         commandHistory.add(command);
         historyPointer = commandHistory.size();
     }
 
+    //@@author A0131125Y
     private Controller getBestFitController(String command) {
         Collection<Controller> controllerCollection = getAllControllers();
 

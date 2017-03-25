@@ -19,16 +19,16 @@ import seedu.toluist.ui.commons.CommandResult;
  */
 public class StoreController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(StoreController.class);
-    private static final String COMMAND_TEMPLATE = "^save(\\s+(?<directory>\\S+))?\\s*";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*save(\\s+(?<directory>\\S+))?\\s*";
     public static final String COMMAND_WORD = "save";
-    public static final String STORE_DIRECTORY = "directory";
+    public static final String PARAMETER_STORE_DIRECTORY = "directory";
 
     public static final String RESULT_MESSAGE_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
 
     public void execute(String command) {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
-        String path = tokens.get(STORE_DIRECTORY);
+        String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
         if (path == null) {
             uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
@@ -61,7 +61,7 @@ public class StoreController extends Controller {
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(STORE_DIRECTORY, matcher.group(STORE_DIRECTORY));
+        tokens.put(PARAMETER_STORE_DIRECTORY, matcher.group(PARAMETER_STORE_DIRECTORY));
         return tokens;
     }
 

@@ -17,11 +17,11 @@ public class SwitchConfig {
 
     public static SwitchConfig getDefaultSwitchConfig() {
         SwitchConfig switchConfig = new SwitchConfig();
-        switchConfig.setPredicate(TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE, "i", "1");
-        switchConfig.setPredicate(TaskSwitchPredicate.TODAY_SWITCH_PREDICATE, "t", "2");
-        switchConfig.setPredicate(TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, "n", "3");
+        switchConfig.setPredicate(TaskSwitchPredicate.SWITCH_PREDICATE_INCOMPLETE, "i", "1");
+        switchConfig.setPredicate(TaskSwitchPredicate.SWITCH_PREDICATE_TODAY, "t", "2");
+        switchConfig.setPredicate(TaskSwitchPredicate.SWITCH_PREDICATE_NEXT_7_DAYS, "n", "3");
         switchConfig.setPredicate(TaskSwitchPredicate.COMPLETED_SWITCH_PREDICATE, "c", "4");
-        switchConfig.setPredicate(TaskSwitchPredicate.ALL_SWITCH_PREDICATE, "a", "5");
+        switchConfig.setPredicate(TaskSwitchPredicate.SWITCH_PREDICATE_ALL, "a", "5");
         return switchConfig;
     }
 

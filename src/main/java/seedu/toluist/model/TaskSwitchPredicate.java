@@ -10,21 +10,24 @@ import java.util.function.Predicate;
  * Predicates to filter tasks on switching tab
  */
 public class TaskSwitchPredicate {
-    public static final Predicate<Task> ALL_PREDICATE = task -> true;
-    public static final Predicate<Task> INCOMPLETE_PREDICATE = task -> !task.isCompleted();
-    public static final Predicate<Task> COMPLETED_PREDICATE = task -> task.isCompleted();
-    public static final Predicate<Task> TODAY_PREDICATE = task -> {
-        ZonedDateTime startOfTodayDatetime = ZonedDateTime.now().toLocalDate().atStartOfDay(ZoneId.systemDefault());
-        LocalDateTime startOfToday =  LocalDateTime.ofInstant(startOfTodayDatetime.toInstant(), ZoneId.systemDefault());
+    public static final Predicate<Task> PREDICATE_ALL = task -> true;
+    public static final Predicate<Task> PREDICATE_INCOMPLETE = task -> !task.isCompleted();
+    public static final Predicate<Task> PREDICATE_COMPLETED = task -> task.isCompleted();
+    public static final Predicate<Task> PREDICATE_TODAY = task -> {
+        ZonedDateTime startOfTodayDatetime = ZonedDateTime.now().toLocalDate()
+                .atStartOfDay(ZoneId.systemDefault());
+        LocalDateTime startOfToday =  LocalDateTime
+                .ofInstant(startOfTodayDatetime.toInstant(), ZoneId.systemDefault());
 
         ZonedDateTime endOfTodayDatetime = ZonedDateTime.now().toLocalDate()
                 .atStartOfDay(ZoneId.systemDefault())
                 .plusDays(1).minusSeconds(1);
-        LocalDateTime endOfToday =  LocalDateTime.ofInstant(endOfTodayDatetime.toInstant(), ZoneId.systemDefault());
+        LocalDateTime endOfToday =  LocalDateTime
+                .ofInstant(endOfTodayDatetime.toInstant(), ZoneId.systemDefault());
 
         return task.isWithinInterval(startOfToday, endOfToday);
     };
-    public static final Predicate<Task> NEXT_7_DAYS_PREDICATE = task -> {
+    public static final Predicate<Task> PREDICATE_NEXT_7_DAYS = task -> {
         ZonedDateTime startOfTomorrowDatetime = ZonedDateTime.now().toLocalDate()
                 .plusDays(1).atStartOfDay(ZoneId.systemDefault());
         LocalDateTime startOfTomorrow =  LocalDateTime
@@ -33,20 +36,21 @@ public class TaskSwitchPredicate {
         ZonedDateTime endOf7DaysDatetime = ZonedDateTime.now().toLocalDate()
                 .atStartOfDay(ZoneId.systemDefault())
                 .plusDays(8).minusSeconds(1);
-        LocalDateTime endOf7Days =  LocalDateTime.ofInstant(endOf7DaysDatetime.toInstant(), ZoneId.systemDefault());
+        LocalDateTime endOf7Days =  LocalDateTime
+                .ofInstant(endOf7DaysDatetime.toInstant(), ZoneId.systemDefault());
 
         return task.isWithinInterval(startOfTomorrow, endOf7Days);
     };
-    public static final TaskSwitchPredicate ALL_SWITCH_PREDICATE =
-            new TaskSwitchPredicate(ALL_PREDICATE, "ALL");
-    public static final TaskSwitchPredicate INCOMPLETE_SWITCH_PREDICATE =
-            new TaskSwitchPredicate(INCOMPLETE_PREDICATE, "INCOMPLETE");
+    public static final TaskSwitchPredicate SWITCH_PREDICATE_ALL =
+            new TaskSwitchPredicate(PREDICATE_ALL, "ALL");
+    public static final TaskSwitchPredicate SWITCH_PREDICATE_INCOMPLETE =
+            new TaskSwitchPredicate(PREDICATE_INCOMPLETE, "INCOMPLETE");
     public static final TaskSwitchPredicate COMPLETED_SWITCH_PREDICATE =
-            new TaskSwitchPredicate(COMPLETED_PREDICATE, "COMPLETED");
-    public static final TaskSwitchPredicate TODAY_SWITCH_PREDICATE =
-            new TaskSwitchPredicate(TODAY_PREDICATE, "TODAY");
-    public static final TaskSwitchPredicate NEXT_7_DAYS_SWITCH_PREDICATE =
-            new TaskSwitchPredicate(NEXT_7_DAYS_PREDICATE, "NEXT 7 DAYS");
+            new TaskSwitchPredicate(PREDICATE_COMPLETED, "COMPLETED");
+    public static final TaskSwitchPredicate SWITCH_PREDICATE_TODAY =
+            new TaskSwitchPredicate(PREDICATE_TODAY, "TODAY");
+    public static final TaskSwitchPredicate SWITCH_PREDICATE_NEXT_7_DAYS =
+            new TaskSwitchPredicate(PREDICATE_NEXT_7_DAYS, "NEXT 7 DAYS");
 
     private final Predicate<Task> predicate;
     private final String displayName;

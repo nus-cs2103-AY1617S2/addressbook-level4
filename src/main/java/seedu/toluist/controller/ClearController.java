@@ -17,7 +17,7 @@ public class ClearController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(ClearController.class);
     private static final String RESULT_MESSAGE = "All tasks cleared.";
     private static final String COMMAND_WORD = "clear";
-    private static final String COMMAND_REGEX = "^clear\\s*";
+    private static final String COMMAND_REGEX = "(?iu)^\\s*clear\\s*";
 
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");

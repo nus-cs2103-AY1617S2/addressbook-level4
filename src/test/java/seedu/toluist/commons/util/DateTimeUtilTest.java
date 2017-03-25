@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class DateTimeUtilTest {
 
-    //@@author Melvin
+    //@@author A0127545A
     @Test
     public void isSameLocalDateTime() {
         String stringDate;
@@ -215,7 +215,7 @@ public class DateTimeUtilTest {
         assertTrue(DateTimeUtil.isBeforeOrEqual(LocalDateTime.MIN, LocalDateTime.MAX));
     }
 
-    //@@author Melvin
+    //@@author A0127545A
     private boolean datesApproximatelyEqual(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
         // Dates are approximately equal so long as they are accurate up to the minute.
         return localDateTime1.getYear() == localDateTime2.getYear()

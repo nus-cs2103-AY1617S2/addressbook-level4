@@ -1,4 +1,4 @@
-//@@author Melvin
+//@@author A0127545A
 package seedu.toluist.controller;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,7 @@ import seedu.toluist.ui.commons.CommandResult;
  */
 public class DeleteTaskController extends Controller {
 
-    private static final String COMMAND_TEMPLATE = "^delete"
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*delete"
             + "(\\s+(?<index>.+))?\\s*";
 
     private static final String COMMAND_DELETE_TASK = "delete";

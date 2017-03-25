@@ -1,4 +1,4 @@
-//@@author Melvin
+//@@author A0127545A
 package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
@@ -21,7 +21,7 @@ import seedu.toluist.ui.commons.CommandResult;
 public class AddTaskController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(AddTaskController.class);
 
-    private static final String COMMAND_TEMPLATE = "^add"
+    private static final String COMMAND_TEMPLATE = "(?iu)^add"
             + "(\\s+(?<description>.+))?";
 
     private static final String COMMAND_ADD_TASK = "add";
@@ -37,21 +37,21 @@ public class AddTaskController extends Controller {
 
         HashMap<String, String> tokens = tokenize(command);
 
-        String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
+        String description = tokens.get(TaskTokenizer.PARAMETER_TASK_DESCRIPTION);
 
-        String eventStartDateToken = tokens.get(TaskTokenizer.EVENT_START_DATE_KEYWORD);
+        String eventStartDateToken = tokens.get(TaskTokenizer.KEYWORD_EVENT_START_DATE);
         LocalDateTime eventStartDateTime = DateTimeUtil.parseDateString(eventStartDateToken);
 
-        String eventEndDateToken = tokens.get(TaskTokenizer.EVENT_END_DATE_KEYWORD);
+        String eventEndDateToken = tokens.get(TaskTokenizer.KEYWORD_EVENT_END_DATE);
         LocalDateTime eventEndDateTime = DateTimeUtil.parseDateString(eventEndDateToken);
 
-        String taskDeadlineToken = tokens.get(TaskTokenizer.TASK_DEADLINE_KEYWORD);
+        String taskDeadlineToken = tokens.get(TaskTokenizer.KEYWORD_TASK_DEADLINE);
         LocalDateTime taskDeadline = DateTimeUtil.parseDateString(taskDeadlineToken);
 
-        String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
+        String tagsToken = tokens.get(TaskTokenizer.KEYWORD_TASK_TAGS);
         Set<Tag> tags = TagParser.parseTags(tagsToken);
 
-        String taskPriority = tokens.get(TaskTokenizer.TASK_PRIORITY_KEYWORD);
+        String taskPriority = tokens.get(TaskTokenizer.KEYWORD_TASK_PRIORITY);
 
         commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime,
                 taskDeadline, taskPriority, tags);

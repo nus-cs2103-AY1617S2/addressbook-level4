@@ -11,6 +11,7 @@ import org.atteo.evo.inflector.English;
  */
 public class StringUtil {
 
+    //@@author A0127545A
     /**
      * Returns true if string is not null and not empty
      * @param string
@@ -19,6 +20,7 @@ public class StringUtil {
         return string != null && !string.isEmpty();
     }
 
+    //@@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.

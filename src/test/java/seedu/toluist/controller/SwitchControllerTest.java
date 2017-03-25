@@ -39,11 +39,11 @@ public class SwitchControllerTest extends ControllerTest {
     @Test
     public void tokenize() {
         HashMap<String, String> tokensNoArgument = new HashMap<>();
-        tokensNoArgument.put(SwitchController.TAB, null);
+        tokensNoArgument.put(SwitchController.PARAMETER_TAB, null);
         assertEquals(tokensNoArgument, controller.tokenize("switch  "));
 
         HashMap<String, String> tokensOneArgument = new HashMap<>();
-        tokensOneArgument.put(SwitchController.TAB, "abc");
+        tokensOneArgument.put(SwitchController.PARAMETER_TAB, "abc");
         assertEquals(tokensOneArgument, controller.tokenize("switch abc"));
     }
 }

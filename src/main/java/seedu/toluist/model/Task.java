@@ -40,7 +40,7 @@ public class Task implements Comparable<Task> {
         this(description, null, endDateTime);
     }
 
-    //@@author Melvin
+    //@@author A0127545A
     public Task(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.setDescription(description.trim());
         this.setStartDateTime(startDateTime);
@@ -237,7 +237,7 @@ public class Task implements Comparable<Task> {
         }
     }
 
-    //@@author Melvin
+    //@@author A0127545A
     public String getDescription() {
         return description;
     }

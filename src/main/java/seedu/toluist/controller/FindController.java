@@ -17,27 +17,27 @@ import seedu.toluist.ui.commons.CommandResult;
  * Searches the task list for matches in the parameters, and displays the results received
  */
 public class FindController extends Controller {
-    private static final String COMMAND_FIND_WORD = "find";
-    private static final String COMMAND_FILTER_WORD = "filter";
-    private static final String COMMAND_LIST_WORD = "list";
+    private static final String COMMAND_WORD_FIND = "find";
+    private static final String COMMAND_WORD_FILTER = "filter";
+    private static final String COMMAND_WORD_LIST = "list";
 
-    private static final String TAG_PARAMETER = "tag/";
-    private static final String NAME_PARAMETER = "name/";
-    private static final String NULL_PARAMETER = "";
-    private static final String TRUE_PARAMETER = "true";
-    private static final String FALSE_PARAMETER = "false";
-    private static final String KEYWORDS_PARAMETER = "keywords";
+    private static final String PARAMETER_TAG = "tag/";
+    private static final String PARAMETER_NAME = "name/";
+    private static final String PARAMETER_NULL = "";
+    private static final String PARAMETER_TRUE = "true";
+    private static final String PARAMETER_FALSE = "false";
+    private static final String PARAMETER_KEYWORDS = "keywords";
 
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
     private static final String COMMAND_SPLITTER_REGEX = " ";
-    private static final int PARAMETER_SECTION = 1;
+    private static final int SECTION_PARAMETER = 1;
 
-    private static final String FIND_RESULT_MESSAGE_TEMPLATE = "Searching for \"%s\" by %s.\n%s found";
-    private static final String LIST_RESULT_MESSAGE_TEMPLATE = "Listing all %s.";
-    private static final String NAME_MESSAGE = "name";
-    private static final String TAG_MESSAGE = "tag";
-    private static final String NAME_AND_TAG_MESSAGE = "name and tag";
-    private static final String STRING_JOINING_MESSAGE = "\", \"";
+    private static final String MESSAGE_RESULT_TEMPLATE_FIND = "Searching for \"%s\" by %s.\n%s found";
+    private static final String MESSAGE_RESULT_TEMPLATE_LIST = "Listing all %s.";
+    private static final String MESSAGE_NAME = "name";
+    private static final String MESSAGE_TAG = "tag";
+    private static final String MESSAGE_NAME_AND_TAG = "name and tag";
+    private static final String MESSAGE_STRING_JOINING = "\", \"";
 
     private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
@@ -46,9 +46,9 @@ public class FindController extends Controller {
 
         // initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
-        boolean isSearchByTag = tokens.get(TAG_PARAMETER).equals(TRUE_PARAMETER);
-        boolean isSearchByName = tokens.get(NAME_PARAMETER).equals(TRUE_PARAMETER);
-        String[] keywordList = StringUtil.convertToArray(tokens.get(KEYWORDS_PARAMETER));
+        boolean isSearchByTag = tokens.get(PARAMETER_TAG).equals(PARAMETER_TRUE);
+        boolean isSearchByName = tokens.get(PARAMETER_NAME).equals(PARAMETER_TRUE);
+        String[] keywordList = StringUtil.convertToArray(tokens.get(PARAMETER_KEYWORDS));
 
         Predicate<Task> taskPredicate = task ->
                 (isSearchByTag && task.isAnyKeywordsContainedInAnyTagIgnoreCase(keywordList)
@@ -65,61 +65,64 @@ public class FindController extends Controller {
 
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,
                                         String[] keywordList, int foundCount) {
-        if (keywordList[0].equals(NULL_PARAMETER)) {
-            return new CommandResult(String.format(LIST_RESULT_MESSAGE_TEMPLATE,
+        if (keywordList[0].equals(PARAMETER_NULL)) {
+            return new CommandResult(String.format(MESSAGE_RESULT_TEMPLATE_LIST,
                 StringUtil.nounWithCount("task", foundCount)));
         }
 
         String searchParameters;
 
         if (isSearchByName && isSearchByTag) {
-            searchParameters = NAME_AND_TAG_MESSAGE;
+            searchParameters = MESSAGE_NAME_AND_TAG;
         } else if (isSearchByName) {
-            searchParameters = NAME_MESSAGE;
+            searchParameters = MESSAGE_NAME;
         } else { //isSearchByTag
-            searchParameters = TAG_MESSAGE;
+            searchParameters = MESSAGE_TAG;
         }
 
-        String keywords = String.join(STRING_JOINING_MESSAGE, keywordList);
-        return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
-                                 keywords, searchParameters, StringUtil.nounWithCount("result", foundCount)));
+        String keywords = String.join(MESSAGE_STRING_JOINING, keywordList);
+        return new CommandResult(String.format(MESSAGE_RESULT_TEMPLATE_FIND,
+                keywords, searchParameters, StringUtil.nounWithCount("result", foundCount)));
     }
 
     public HashMap<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
         // search by tag
-        if (command.contains(TAG_PARAMETER) || !command.contains(NAME_PARAMETER)) {
-            tokens.put(TAG_PARAMETER, TRUE_PARAMETER);
+        if (StringUtil.containsWordIgnoreCase(command, PARAMETER_TAG)
+            || !StringUtil.containsWordIgnoreCase(command, PARAMETER_NAME)) {
+            tokens.put(PARAMETER_TAG, PARAMETER_TRUE);
         } else {
-            tokens.put(TAG_PARAMETER, FALSE_PARAMETER);
+            tokens.put(PARAMETER_TAG, PARAMETER_FALSE);
         }
 
         // search by name
-        if (command.contains(NAME_PARAMETER) || !command.contains(TAG_PARAMETER)) {
-            tokens.put(NAME_PARAMETER, TRUE_PARAMETER);
+        if (StringUtil.containsWordIgnoreCase(command, PARAMETER_NAME)
+            || !StringUtil.containsWordIgnoreCase(command, PARAMETER_TAG)) {
+            tokens.put(PARAMETER_NAME, PARAMETER_TRUE);
         } else {
-            tokens.put(NAME_PARAMETER, FALSE_PARAMETER);
+            tokens.put(PARAMETER_NAME, PARAMETER_FALSE);
         }
 
         // keyword for matching
-        String keywords = command.replace(TAG_PARAMETER, NULL_PARAMETER);
-        keywords = keywords.replace(NAME_PARAMETER, NULL_PARAMETER);
+        String keywords = command.toLowerCase().replace(PARAMETER_TAG, PARAMETER_NULL);
+        keywords = keywords.replace(PARAMETER_NAME, PARAMETER_NULL);
         String[] listOfParameters = keywords.split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
         if (listOfParameters.length > 1) {
-            tokens.put(KEYWORDS_PARAMETER, listOfParameters[PARAMETER_SECTION].trim());
+            tokens.put(PARAMETER_KEYWORDS, listOfParameters[SECTION_PARAMETER].trim());
         }
 
         return tokens;
     }
 
     public boolean matchesCommand(String command) {
-        return (command.startsWith(COMMAND_FILTER_WORD)
-                || command.startsWith(COMMAND_FIND_WORD)
-                || command.startsWith(COMMAND_LIST_WORD));
+        String trimmedAndLowerCasedCommand = command.trim().toLowerCase();
+        return (trimmedAndLowerCasedCommand.startsWith(COMMAND_WORD_FILTER.toLowerCase())
+                || trimmedAndLowerCasedCommand.startsWith(COMMAND_WORD_FIND.toLowerCase())
+                || trimmedAndLowerCasedCommand.startsWith(COMMAND_WORD_LIST.toLowerCase()));
     }
 
     public static String[] getCommandWords() {
-        return new String[] { COMMAND_FILTER_WORD, COMMAND_FIND_WORD, COMMAND_LIST_WORD };
+        return new String[] { COMMAND_WORD_FILTER, COMMAND_WORD_FIND, COMMAND_WORD_LIST };
     }
 }

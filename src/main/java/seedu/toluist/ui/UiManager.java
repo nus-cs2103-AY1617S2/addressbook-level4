@@ -68,11 +68,6 @@ public class UiManager extends ComponentManager implements Ui {
         this.dispatcher = dispatcher;
     }
 
-    public void render() {
-        assert dispatcher != null;
-        mainWindow.render();
-    }
-
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }

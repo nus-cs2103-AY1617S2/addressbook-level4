@@ -12,7 +12,7 @@ import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 public class ExitController extends Controller {
     public static final String COMMAND_WORD_EXIT = "exit";
     public static final String COMMAND_WORD_QUIT = "quit";
-    private static final String COMMAND_TEMPLATE = "^(exit|quit)\\s*";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*(exit|quit)\\s*";
 
     public void execute(String command) {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());

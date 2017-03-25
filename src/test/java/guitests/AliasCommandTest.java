@@ -51,7 +51,7 @@ public class AliasCommandTest extends ToLuistGuiTest {
 
         String viewAliasCommand = "viewalias";
         commandBox.runCommand(viewAliasCommand);
-        assertResultMessage(ViewAliasController.NO_ALIAS_MESSAGE);
+        assertResultMessage(ViewAliasController.RESULT_MESSAGE_NO_ALIAS);
     }
 
     @Test

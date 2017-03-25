@@ -20,38 +20,38 @@ public class SwitchConfigTest {
         SwitchConfig switchConfig = SwitchConfig.getDefaultSwitchConfig();
 
         ArrayList<TaskSwitchPredicate> expectedPredicates = new ArrayList<>(Arrays.asList(
-            TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE,
-            TaskSwitchPredicate.TODAY_SWITCH_PREDICATE,
-            TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE,
+            TaskSwitchPredicate.SWITCH_PREDICATE_INCOMPLETE,
+            TaskSwitchPredicate.SWITCH_PREDICATE_TODAY,
+            TaskSwitchPredicate.SWITCH_PREDICATE_NEXT_7_DAYS,
             TaskSwitchPredicate.COMPLETED_SWITCH_PREDICATE,
-            TaskSwitchPredicate.ALL_SWITCH_PREDICATE
+            TaskSwitchPredicate.SWITCH_PREDICATE_ALL
         ));
         assertEquals(expectedPredicates, switchConfig.getAllPredicates());
 
         assertEquals(switchConfig.getPredicate("1"),
-                Optional.of(TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_INCOMPLETE));
         assertEquals(switchConfig.getPredicate("2"),
-                Optional.of(TaskSwitchPredicate.TODAY_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_TODAY));
         assertEquals(switchConfig.getPredicate("3"),
-                Optional.of(TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_NEXT_7_DAYS));
         assertEquals(switchConfig.getPredicate("4"),
                 Optional.of(TaskSwitchPredicate.COMPLETED_SWITCH_PREDICATE));
         assertEquals(switchConfig.getPredicate("5"),
-                Optional.of(TaskSwitchPredicate.ALL_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_ALL));
 
         assertEquals(switchConfig.getPredicate("i"),
-                Optional.of(TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_INCOMPLETE));
         assertEquals(switchConfig.getPredicate("T"),
-                Optional.of(TaskSwitchPredicate.TODAY_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_TODAY));
         assertEquals(switchConfig.getPredicate("N"),
-                Optional.of(TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_NEXT_7_DAYS));
         assertEquals(switchConfig.getPredicate("C"),
                 Optional.of(TaskSwitchPredicate.COMPLETED_SWITCH_PREDICATE));
         assertEquals(switchConfig.getPredicate("a"),
-                Optional.of(TaskSwitchPredicate.ALL_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_ALL));
 
         assertEquals(switchConfig.getPredicate("a"),
-                Optional.of(TaskSwitchPredicate.ALL_SWITCH_PREDICATE));
+                Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_ALL));
 
         assertEquals(switchConfig.getPredicate("gibberish"), Optional.empty());
     }

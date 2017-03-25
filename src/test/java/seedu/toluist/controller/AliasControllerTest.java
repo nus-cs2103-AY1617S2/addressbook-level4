@@ -35,13 +35,13 @@ public class AliasControllerTest extends ControllerTest {
     @Test
     public void tokenize() {
         HashMap<String, String> tokensForAliasingOneWord = new HashMap<>();
-        tokensForAliasingOneWord.put(AliasController.ALIAS_TERM, "a");
-        tokensForAliasingOneWord.put(AliasController.COMMAND_TERM, "add");
+        tokensForAliasingOneWord.put(AliasController.PARAMETER_ALIAS, "a");
+        tokensForAliasingOneWord.put(AliasController.PARAMETER_COMMAND, "add");
         assertEquals(tokensForAliasingOneWord, controller.tokenize("alias a add"));
 
         HashMap<String, String> tokensForAliasingMultipleWords = new HashMap<>();
-        tokensForAliasingMultipleWords.put(AliasController.ALIAS_TERM, "u1");
-        tokensForAliasingMultipleWords.put(AliasController.COMMAND_TERM, "update 1");
+        tokensForAliasingMultipleWords.put(AliasController.PARAMETER_ALIAS, "u1");
+        tokensForAliasingMultipleWords.put(AliasController.PARAMETER_COMMAND, "update 1");
         assertEquals(tokensForAliasingMultipleWords, controller.tokenize("alias u1   update 1"));
     }
 }
