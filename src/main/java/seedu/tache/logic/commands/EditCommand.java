@@ -97,38 +97,34 @@ public class EditCommand extends Command implements Undoable {
         Optional<DateTime> updatedStartDateTime = taskToEdit.getStartDateTime();
         Optional<DateTime> updatedEndDateTime = taskToEdit.getEndDateTime();
         if (editTaskDescriptor.getStartDate().isPresent()) {
-            String timeNoChange = "";
             if (updatedStartDateTime.isPresent()) {
-                timeNoChange = updatedStartDateTime.get().getTimeOnly();
+                updatedStartDateTime.get().setDateOnly(editTaskDescriptor.getStartDate().get());
+            } else {
+                updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
+                updatedStartDateTime.get().setTimeOnly("00:00:00");
             }
-            DateTime tempStartDateTime = new DateTime(editTaskDescriptor.getStartDate().orElse("") + " "
-                                                                                + timeNoChange);
-            updatedStartDateTime = Optional.of(tempStartDateTime);
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
-            String timeNoChange = "";
             if (updatedEndDateTime.isPresent()) {
-                timeNoChange = updatedEndDateTime.get().getTimeOnly();
+                updatedEndDateTime.get().setDateOnly(editTaskDescriptor.getEndDate().get());
+            } else {
+                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndDate().get()));
+                updatedEndDateTime.get().setTimeOnly("00:00:00");
             }
-            DateTime tempEndDateTime = new DateTime(editTaskDescriptor.getEndDate().orElse("") + " " + timeNoChange);
-            updatedEndDateTime = Optional.of(tempEndDateTime);
         }
         if (editTaskDescriptor.getStartTime().isPresent()) {
-            String dateNoChange = "";
             if (updatedStartDateTime.isPresent()) {
-                dateNoChange = updatedStartDateTime.get().getDateOnly();
+                updatedStartDateTime.get().setTimeOnly(editTaskDescriptor.getStartTime().get());
+            } else {
+                updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartTime().get()));
             }
-            DateTime tempStartDateTime = new DateTime(dateNoChange + " "
-                                                        + editTaskDescriptor.getStartTime().orElse(""));
-            updatedStartDateTime = Optional.of(tempStartDateTime);
         }
         if (editTaskDescriptor.getEndTime().isPresent()) {
-            String dateNoChange = "";
             if (updatedEndDateTime.isPresent()) {
-                dateNoChange = updatedEndDateTime.get().getDateOnly();
+                updatedEndDateTime.get().setTimeOnly(editTaskDescriptor.getEndTime().get());
+            } else {
+                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndTime().get()));
             }
-            DateTime tempEndDateTime = new DateTime(dateNoChange + " " + editTaskDescriptor.getEndTime().orElse(""));
-            updatedEndDateTime = Optional.of(tempEndDateTime);
         }
         boolean isTimed;
         if (updatedStartDateTime.isPresent() || updatedEndDateTime.isPresent()) {
