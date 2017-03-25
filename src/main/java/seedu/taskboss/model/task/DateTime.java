@@ -60,7 +60,7 @@ public class DateTime {
         }
     }
 
-    private void parseDateTime(String date) throws IllegalValueException {
+    public void parseDateTime(String date) throws IllegalValueException {
         if (date.equals(EMPTY_STRING)) {
             return;
         }
@@ -76,10 +76,10 @@ public class DateTime {
      */
     public String formatDateTime() {
         SimpleDateFormat sdfGeneral = new SimpleDateFormat("MMM dd, yyyy h:mm aa");
-        SimpleDateFormat sdfToday = new SimpleDateFormat("MMM dd, yyyy");
+        SimpleDateFormat sdfNoTime = new SimpleDateFormat("MMM dd, yyyy");
         // No time provided by user
         if (this.isTimeInferred()) {
-            this.value = sdfToday.format(this.date);
+            this.value = sdfNoTime.format(this.date);
         } else if (!this.value.equals(EMPTY_STRING)) {
             this.value = sdfGeneral.format(this.date);
         }
