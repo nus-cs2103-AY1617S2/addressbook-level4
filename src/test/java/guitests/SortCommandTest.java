@@ -19,7 +19,7 @@ public class SortCommandTest extends DoistGUITest {
     public void testSortByPriority() {
         commandBox.runCommand("sort priority");
         assertSortedByPriority();
-        assertResultMessage(Command.getMessageForPersonListSortedSummary(SortType.PRIORITY));
+        assertResultMessage(Command.getMessageForTaskListSortedSummary(SortType.PRIORITY));
     }
 
     @Test

@@ -26,19 +26,10 @@ public interface Storage extends TodoListStorage, UserPrefsStorage, AliasListMap
     String getTodoListFilePath();
 
     @Override
-    String getAliasListMapFilePath();
-
-    @Override
     Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
 
     @Override
-    Optional<ReadOnlyAliasListMap> readAliasListMap() throws DataConversionException, IOException;
-
-    @Override
     void saveTodoList(ReadOnlyTodoList todoList) throws IOException;
-
-    @Override
-    void saveAliasListMap(ReadOnlyAliasListMap aliasListMap) throws IOException;
 
     /**
      * Saves the current version of the To-do List to the hard disk.
@@ -46,6 +37,16 @@ public interface Storage extends TodoListStorage, UserPrefsStorage, AliasListMap
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTodoListChangedEvent(TodoListChangedEvent abce);
+
+    //@@author A0140887W
+    @Override
+    String getAliasListMapFilePath();
+
+    @Override
+    Optional<ReadOnlyAliasListMap> readAliasListMap() throws DataConversionException, IOException;
+
+    @Override
+    void saveAliasListMap(ReadOnlyAliasListMap aliasListMap) throws IOException;
 
     /**
      * Saves the current version of the Aliaslist Map to the hard disk.

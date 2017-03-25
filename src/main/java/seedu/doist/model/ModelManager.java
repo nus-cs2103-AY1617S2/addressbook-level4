@@ -60,6 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
+    //@@author A0140887W
     //=========== AliasListMap =============================================================
     /** Raises an event to indicate the alias list model has changed */
 
@@ -100,6 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AliasListMapChangedEvent(aliasListMap));
     }
 
+    //@@author
     //=========== TodoList =============================================================
 
     @Override

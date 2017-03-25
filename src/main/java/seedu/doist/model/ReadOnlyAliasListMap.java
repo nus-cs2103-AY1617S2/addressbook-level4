@@ -3,6 +3,7 @@ package seedu.doist.model;
 import java.util.ArrayList;
 import java.util.Map;
 
+//@@author A0140887W
 /**
  * Unmodifiable map of an alias list mapping
  */

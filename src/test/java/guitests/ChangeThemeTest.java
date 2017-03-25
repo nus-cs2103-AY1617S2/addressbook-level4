@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import javafx.stage.Stage;
 
+//@@author A0140887W
 public class ChangeThemeTest extends DoistGUITest {
 
     private static final String LIGHT_THEME = "LightTheme";
@@ -13,7 +14,6 @@ public class ChangeThemeTest extends DoistGUITest {
     private final String lightThemeUrl = getClass().getResource("/view/LightTheme.css").toExternalForm();
     private final String darkThemeUrl = getClass().getResource("/view/DarkTheme.css").toExternalForm();
 
-    //@@author A0140887W
     @Test
     public void changeTheme() {
         //using menu button

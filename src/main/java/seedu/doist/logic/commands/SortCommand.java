@@ -1,5 +1,6 @@
 package seedu.doist.logic.commands;
 
+//@@author A0140887W
 /**
  * Sorts all persons in the to-do list by the specified parameter and shows it to the user.
  */
@@ -30,13 +31,14 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        assert model != null;
         switch(sortType) {
         case PRIORITY:
             model.sortTasksByPriority();
-            return new CommandResult(getMessageForPersonListSortedSummary(sortType));
+            return new CommandResult(getMessageForTaskListSortedSummary(sortType));
         default:
             model.sortTasksByPriority();
-            return new CommandResult(getMessageForPersonListSortedSummary(sortType));
+            return new CommandResult(getMessageForTaskListSortedSummary(sortType));
         }
     }
 }

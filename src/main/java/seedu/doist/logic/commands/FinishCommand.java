@@ -31,6 +31,7 @@ public class FinishCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        assert model != null;
         String outputMessage = "";
 
         ArrayList<ReadOnlyTask> tasksToFinish = getMultipleTasksFromIndices(targetIndices);

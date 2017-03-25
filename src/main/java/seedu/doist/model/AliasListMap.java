@@ -15,6 +15,7 @@ public class AliasListMap implements ReadOnlyAliasListMap {
 
     private HashMap<String, ArrayList<String>> commandAliases;
 
+    //@@author A0147980U
     /**
      * Initializes the entire hashmap for all aliases, resets to default
      */
@@ -39,6 +40,7 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         commandAliases.put("redo",  new ArrayList<>());
     }
 
+    //@@author A0140887W
     /**
      * @return a set of strings which are the default command words
      */
