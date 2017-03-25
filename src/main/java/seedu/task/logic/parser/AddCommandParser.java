@@ -25,8 +25,12 @@ import seedu.task.model.UndoManager;
  */
 public class AddCommandParser {
 
-    private static final String ARGUMENTS_PATTERN =
-            "^(?<description>.+?)(?:\\s+from\\s+(?<startdate>.+?))?(?:\\s+(?:to|by)\\s+(?<enddate>.+?))?(?<tags>(?:\\s+#\\w+)+)?$";
+    private static final String PATTERN_MANDATORY_DESCRIPTION = "(?<description>.+?)";
+    private static final String PATTERN_OPTIONAL_STARTDATE = "(?:\\s+from\\s+(?<startdate>.+?))?";
+    private static final String PATTERN_OPTIONAL_ENDDATE = "(?:\\s+(?:to|by)\\s+(?<enddate>.+?))?";
+    private static final String PATTERN_OPTIONAL_TAGS = "(?<tags>(?:\\s+#\\w+)+)?";
+    private static final String ARGUMENTS_PATTERN = "^" + PATTERN_MANDATORY_DESCRIPTION + PATTERN_OPTIONAL_STARTDATE
+            + PATTERN_OPTIONAL_ENDDATE + PATTERN_OPTIONAL_TAGS + "$";
     private static final Pattern ARGUMENTS_FORMAT = Pattern.compile(ARGUMENTS_PATTERN, Pattern.CASE_INSENSITIVE);
 
     private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
@@ -38,6 +42,8 @@ public class AddCommandParser {
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
+
+        assert args != null;
 
         String taskName;
         String startDateString;
@@ -79,11 +85,7 @@ public class AddCommandParser {
             }
 
             // Add each tag to the tag set.
-            for (String i : tagsString.split("\\s+")) {
-                if (i.length() > 1) {
-                    tagSet.add(i.substring(1));
-                }
-            }
+            tagSet = ParserUtil.parseTagStringToSet(tagsString);
 
             // Log the tags
             logger.info(String.format("%s tagSet: %s", logPrefix, tagSet.toString()));

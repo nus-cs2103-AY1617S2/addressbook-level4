@@ -3,6 +3,7 @@ package seedu.task.logic.parser;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -12,12 +13,16 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.NattyDateUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
+import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
+import seedu.task.model.task.StartTime;
 
+//@@author A0146789H
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
@@ -72,6 +77,18 @@ public class ParserUtil {
         return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
     }
 
+    /**
+     * Parses a {@code String name} into a {@code Optional<Name>} if {@code name} is present.
+     *
+     * @param name
+     * @return
+     * @throws IllegalValueException
+     */
+    public static Optional<Name> parseName(String name) throws IllegalValueException {
+        assert name != null;
+        String tempName = name.equals("") ? null : name;
+        return parseName(Optional.ofNullable(tempName));
+    }
 
     /**
      * Parses a {@code Optional<String> completionStatus} into an
@@ -85,6 +102,40 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Optional<String> startDate} into an {@code Optional<StartTime>} if {@code startDate} is present.
+     */
+    public static Optional<StartTime> parseStartTime(Optional<Date> startDate) throws IllegalValueException {
+        assert startDate != null;
+        return startDate.isPresent() ? Optional.of(new StartTime(startDate.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String startDate} into an {@code Optional<StartTime>} if {@code startDate} is present.
+     */
+    public static Optional<StartTime> parseStartTime(String startDate) throws IllegalValueException {
+        String processedDate = Optional.ofNullable(startDate).orElse("");
+        Date parsedDate = NattyDateUtil.parseSingleDate(processedDate);
+        return parseStartTime(Optional.ofNullable(parsedDate));
+    }
+
+    /**
+     * Parses a {@code Optional<String> endDate} into an {@code Optional<EndTime>} if {@code endDate} is present.
+     */
+    public static Optional<EndTime> parseEndTime(Optional<Date> endDate) throws IllegalValueException {
+        assert endDate != null;
+        return endDate.isPresent() ? Optional.of(new EndTime(endDate.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String endDate} into an {@code Optional<EndTime>} if {@code endDate} is present.
+     */
+    public static Optional<EndTime> parseEndTime(String endDate) throws IllegalValueException {
+        String processedDate = Optional.ofNullable(endDate).orElse("");
+        Date parsedDate = NattyDateUtil.parseSingleDate(processedDate);
+        return parseEndTime(Optional.ofNullable(parsedDate));
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
@@ -94,5 +145,37 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+     /**
+     * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Optional<UniqueTagList>} containing zero tags.
+     */
+    public static Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
+        assert tags != null;
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Split the tags string into a set.
+     * Example: "#one #two" into ["one", "two"]
+     *
+     * @param tagsString
+     * @return
+     */
+    public static Set<String> parseTagStringToSet(String tagsString) {
+        Set<String> tagSet = new HashSet<String>();
+        for (String i : tagsString.split("\\s+")) {
+            if (i.length() > 1) {
+                tagSet.add(i.substring(1));
+            }
+        }
+        return tagSet;
     }
 }
