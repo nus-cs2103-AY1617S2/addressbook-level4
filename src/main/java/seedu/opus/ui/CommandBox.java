@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.opus.commons.core.LogsCenter;
@@ -18,8 +20,10 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
+    public static final String EMPTY_STRING = "";
 
     private final Logic logic;
+    private final UserInputHistory history;
 
     @FXML
     private TextField commandTextField;
@@ -28,6 +32,8 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
+        history = new UserInputHistory();
+        registerCursorKeyEventFilter();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -40,21 +46,22 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandInputChanged() {
         try {
+            history.saveUserInput(commandTextField.getText());
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
             // process result of the command
             setStyleToIndicateCommandSuccess();
-            commandTextField.setText("");
+            commandTextField.setText(EMPTY_STRING);
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
             // handle command failure
             logger.info("Invalid command: " + commandTextField.getText());
+            commandTextField.setText(EMPTY_STRING);
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
-
 
     /**
      * Sets the command box style to indicate a successful command.
@@ -63,4 +70,17 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
+    private void registerCursorKeyEventFilter() {
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode().equals(KeyCode.UP)) {
+                commandTextField.setText(history.getPreviousUserInput().orElse(EMPTY_STRING));
+            } else if (event.getCode().equals(KeyCode.DOWN)) {
+                commandTextField.setText(history.getPrecedingUserInput().orElse(EMPTY_STRING));
+
+            } else {
+                return;
+            }
+            commandTextField.end();
+        });
+    }
 }
