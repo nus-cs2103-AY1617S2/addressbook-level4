@@ -1,6 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
@@ -9,6 +10,7 @@ import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.parser.EditCommandParser;
 import seedu.tache.model.tag.Tag;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.testutil.TaskBuilder;
 import seedu.tache.testutil.TestTask;
 
@@ -50,6 +52,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
+    //@@author A0139925U
     @Test
     public void editFindThenEditSuccess() throws Exception {
         commandBox.runCommand("find Grandma");
@@ -62,19 +65,64 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Visit Grandpa").build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
+
+        commandBox.runCommand("find Grandpa");
+
+        detailsToEdit = "start_date 02-02-17";
+        taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        editedTask = new TaskBuilder(taskToEdit).withStartDateTime("02-02-17").build();
+
+        commandBox.runCommand("find Grandpa");
+
+        detailsToEdit = "end_date 02-04-17";
+        taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        editedTask = new TaskBuilder(taskToEdit).withEndDateTime("02-04-17").build();
+
+        commandBox.runCommand("find Grandpa");
+
+        detailsToEdit = "start_time 3pm";
+        taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        editedTask = new TaskBuilder(taskToEdit).withStartDateTime("3pm").build();
+
+        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
+    //@@author
 
     @Test
     public void editMissingTaskIndexFailure() {
         commandBox.runCommand("edit Project");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
+
+    //@@author A0139925U
+    @Test
+    public void editParameterFailure() {
+        commandBox.runCommand("edit 1; chicken ccc;");
+        assertResultMessage(EditCommandParser.MESSAGE_INVALID_PARAMETER);
+
+        commandBox.runCommand("edit 1; chicken 02-02-17;");
+        assertResultMessage(EditCommandParser.MESSAGE_INVALID_PARAMETER);
     }
 
     @Test
     public void editInvalidTaskIndexFailure() {
+        commandBox.runCommand("edit -1; name Project");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("edit 0; name Project");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+
         commandBox.runCommand("edit 8; name Project");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("edit 8a; name Project");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("edit A; name Project");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
+
+    //@@author
 
     @Test
     public void editNoFieldsSpecifiedFailure() {
@@ -82,14 +130,31 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
+    //@@author A0139925U
     @Test
     public void editInvalidValuesFailure() {
-        commandBox.runCommand("edit 1; *&");
-        assertResultMessage(EditCommandParser.MESSAGE_INVALID_PARAMETER);
+        commandBox.runCommand("edit 1; start_date *&");
+        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1; startdate *&");
+        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1; sd *&");
+        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1; end_date *&");
+        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1; enddate *&");
+        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1; ed *&");
+        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1; tag *&;");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
+    //@@author
 
     @Test
     public void editDuplicateTaskFailure() {
