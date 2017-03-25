@@ -13,13 +13,13 @@ import seedu.opus.commons.core.LogsCenter;
  */
 public class UserInputHistory {
 
-    private LinkedList<String> commandHistory;
+    private LinkedList<String> userInputHistory;
     private ListIterator<String> iterator;
     private final Logger logger = LogsCenter.getLogger(UserInputHistory.class);
     private String current;
 
     public UserInputHistory() {
-        this.commandHistory = new LinkedList<String>();
+        this.userInputHistory = new LinkedList<String>();
         resetIterator();
     }
 
@@ -28,7 +28,7 @@ public class UserInputHistory {
      * @param input - User input String
      */
     public void saveUserInput(String input) {
-        commandHistory.addFirst(input);
+        userInputHistory.addFirst(input);
         resetIterator();
         logger.info("Capturing user input: " + input);
     }
@@ -37,7 +37,7 @@ public class UserInputHistory {
      * Rebuilds the iterator and reset current iteration
      */
     public void resetIterator() {
-        iterator = commandHistory.listIterator();
+        iterator = userInputHistory.listIterator();
         current = null;
     }
 
