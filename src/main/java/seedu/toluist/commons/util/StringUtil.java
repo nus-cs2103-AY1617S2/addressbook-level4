@@ -17,7 +17,7 @@ public class StringUtil {
      * @param string
      */
     public static boolean isPresent(String string) {
-        return string != null && !string.isEmpty();
+        return string != null && !string.trim().isEmpty();
     }
 
     //@@author
@@ -104,5 +104,39 @@ public class StringUtil {
             }
         }
         return replacementList.toArray(new String[0]);
+    }
+
+    /**
+     * Return a transformed string of an original string, with the first word replaced
+     * @param s the original string
+     * @param replacement the string to replace the first word
+     * @return the transformed string
+     */
+    public static String replaceFirstWord(String s, String replacement) {
+        if (replacement == null || !StringUtil.isPresent(s)) {
+            return s;
+        }
+
+        String[] words = s.split("\\s+");
+
+        if (words.length == 0) {
+            return s;
+        }
+
+        words[0] = replacement;
+        return String.join(" ", words);
+    }
+
+    /**
+     * Check if a string starts with another phrase, case-ignored
+     * @param s a string
+     * @param comparision a phrase to compare with
+     * @return true / false
+     */
+    public static boolean startsWithIgnoreCase(String s, String comparision) {
+        if (s == null || comparision == null) {
+            return false;
+        }
+        return s.toLowerCase().startsWith(comparision.toLowerCase());
     }
 }

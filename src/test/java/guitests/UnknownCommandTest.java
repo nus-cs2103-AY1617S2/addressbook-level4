@@ -11,7 +11,7 @@ import seedu.toluist.commons.core.Messages;
 public class UnknownCommandTest extends ToLuistGuiTest {
     @Test
     public void unknownCommand() {
-        commandBox.runCommand("unknown");
+        commandBox.runCommand("alias unknown");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 }

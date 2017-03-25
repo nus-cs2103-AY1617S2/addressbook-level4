@@ -1,6 +1,10 @@
 package seedu.toluist.commons.util;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -43,4 +47,29 @@ public class FxViewUtil {
             node.getStyleClass().add(styleClass);
         }
     }
+
+    /**
+     * Remove a style class from a node
+     * @param node a node
+     * @param styleClass a style class string
+     */
+    public static void removeStyleClass(Node node, String styleClass) {
+        node.getStyleClass().remove(styleClass);
+    }
+
+    /**
+     * Sets the key combination on node.
+     * @param keyCombination the KeyCombination value of the accelerator
+     * @param handler the event handler
+     */
+    public static void setKeyCombination(Node node, KeyCombination keyCombination,
+                                         EventHandler<ActionEvent> handler) {
+        node.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (keyCombination.match(event)) {
+                handler.handle(new ActionEvent());
+                event.consume();
+            }
+        });
+    }
+
 }

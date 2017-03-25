@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import seedu.toluist.commons.util.StringUtil;
+
 /**
  * A model to manage alias
  */
@@ -92,8 +94,7 @@ public class AliasTable {
 
         for (String alias : aliasMapping.keySet()) {
             if (firstWord.equals(alias)) {
-                wordsInCommand[0] = aliasMapping.get(alias);
-                return String.join(" ", wordsInCommand);
+                return StringUtil.replaceFirstWord(command, aliasMapping.get(alias));
             }
         }
         return command;

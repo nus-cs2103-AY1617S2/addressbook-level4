@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -26,6 +25,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.dispatcher.Dispatcher;
+import seedu.toluist.ui.view.CommandAutoCompleteView;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
 import seedu.toluist.ui.view.TabBarView;
@@ -54,10 +54,14 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane tabPanePlaceholder;
 
+    @FXML
+    private AnchorPane commandAutoCompletePlaceholder;
+
     private CommandBox commandBox;
     private TaskListUiView taskListUiView;
     private ResultView resultView;
     private TabBarView tabBarView;
+    private CommandAutoCompleteView commandAutoCompleteView;
 
 
     public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
@@ -86,39 +90,11 @@ public class MainWindow extends UiPart<Region> {
         commandBox.render();
         resultView.render();
         tabBarView.render();
+        commandAutoCompleteView.render();
     }
 
     private void configureKeyCombinations() {
         configureSwitchTabKeyCombinations();
-    }
-
-    /**
-     * Sets the key combination on root.
-     * @param keyCombination the KeyCombination value of the accelerator
-     * @param handler the event handler
-     */
-    private void setKeyCombination(KeyCombination keyCombination, EventHandler<ActionEvent> handler) {
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultView contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultView.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (keyCombination.match(event)) {
-                handler.handle(new ActionEvent());
-                event.consume();
-            }
-        });
     }
 
     void hide() {
@@ -128,10 +104,11 @@ public class MainWindow extends UiPart<Region> {
     private void configureSwitchTabKeyCombinations() {
         String[] tabNames = new String[] { "i", "t", "n", "c", "a" };
         Arrays.stream(tabNames).forEach(tabName -> {
-            KeyCombination keyCombination = new KeyCodeCombination(getKeyCode(tabName), KeyCombination.CONTROL_DOWN);
+            KeyCombination keyCombination = new KeyCodeCombination(getKeyCode(tabName),
+                    KeyCombination.CONTROL_DOWN);
             String switchCommand = "switch " + tabName;
             EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(switchCommand);
-            setKeyCombination(keyCombination, handler);
+            FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
         });
     }
 
@@ -165,6 +142,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTabPanePlaceholder() {
         return tabPanePlaceholder;
+    }
+
+    private AnchorPane getCommandAutoCompletePlaceholder() {
+        return commandAutoCompletePlaceholder;
     }
 
     private void setWindowMinSize() {
@@ -217,6 +198,9 @@ public class MainWindow extends UiPart<Region> {
 
         tabBarView = new TabBarView();
         tabBarView.setParent(getTabPanePlaceholder());
+
+        commandAutoCompleteView = new CommandAutoCompleteView();
+        commandAutoCompleteView.setParent(getCommandAutoCompletePlaceholder());
     }
 
     void show() {
