@@ -19,6 +19,8 @@ import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
+import seedu.taskboss.model.task.Recurrence;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -130,6 +132,16 @@ public class ParserUtil {
         } else {
             return Optional.empty();
         }
+    }
+
+    /**
+     * Parses a {@code Optional<String> frequency} into an {@code Optional<Recurrence>}
+     * if {@code recurrence} is present.
+     */
+    public static Optional<Recurrence> parseRecurrence(Optional<String> frequency) throws IllegalValueException {
+        assert frequency != null;
+        return frequency.isPresent() ? Optional.of(new Recurrence(Frequency
+                .valueOf(frequency.get().trim().toUpperCase()))) : Optional.empty();
     }
 
     //@@author
