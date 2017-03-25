@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.dispatcher;
 
 import java.lang.reflect.Constructor;
@@ -41,12 +42,14 @@ import seedu.toluist.controller.ViewAliasController;
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
 
+    //@@author A0162011A
     /**
      * ArrayList to store previous commands entered since starting the application
      */
     private ArrayList<String> commandHistory;
     private int historyPointer = 0;
 
+    //@@author A0131125Y
     public CommandDispatcher() {
         super();
         aliasConfig.setReservedKeywords(getControllerKeywords());
@@ -70,7 +73,7 @@ public class CommandDispatcher extends Dispatcher {
         }
         controller.execute(deAliasedCommand);
     }
-
+    
     public SortedSet<String> getPredictedCommands(String command) {
         String deAliasedCommand = getDealiasedCommand(command);
         SortedSet<String> predictedCommands = new TreeSet<>();
@@ -100,6 +103,7 @@ public class CommandDispatcher extends Dispatcher {
         historyPointer = commandHistory.size();
     }
 
+    //@@author A0131125Y
     private Controller getBestFitController(String command) {
         Collection<Controller> controllerCollection = getAllControllers();
 

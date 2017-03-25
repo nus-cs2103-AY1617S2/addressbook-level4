@@ -1,3 +1,4 @@
+[comment]: # (@@author A0162011A)
 # ToLuist - User Guide
 
 By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
@@ -72,6 +73,7 @@ Format: `help`
 
 > * Help is also shown if you enter an incorrect command.
 
+[comment]: # (@@author A0127545A)
 ### 3.3. Adding a task: `add`
 
 For when you have a task you need to remember.<br>
@@ -97,6 +99,7 @@ Examples:
 * `add Check Email enddate/today` <br>
   Adds a task called 'Check Email', and sets the deadline to be today's date.
 
+[comment]: # (@@author A0162011A)
 ### 3.4. Viewing tasks
 
 For when you need to see your tasks.<br>
@@ -106,6 +109,7 @@ Format: `list`
 > * When starting the program, the list will show all tasks which are currently not completed.
 > * When performing `filter` operations, this list will be updated to show only the results searched for.
 
+[comment]: # (@@author A0127545A)
 ### 3.5. Updating a task : `update`
 
 For when you need to update or fix a previously entered task.<br>
@@ -125,6 +129,7 @@ Examples:
 * `update 3 startdate/today enddate/tomorrow` <br>
   Updates the start date and end date of the 3rd task to today and tomorrow respectively.
 
+[comment]: # (@@author A0162011A)
 ### 3.6. Filter all tasks for a given keyword: `filter`
 
 Finds tasks whose names contain any of the given keywords.<br>
@@ -149,6 +154,7 @@ Examples:
 * `find school tag/` <br>
   Returns any task with the word 'school' in the tag name.
 
+[comment]: # (@@author A0127545A)
 ### 3.7. Deleting a task : `delete`
 
 For when your task is no longer necessary.<br>
@@ -172,6 +178,7 @@ Examples:
 * `delete 5, - 3, 7-8 10, 12 -`<br>
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
+[comment]: # (@@author A0131125Y)
 ### 3.8. Complete or Make Incomplete a Task : `mark`
 
 For when you need to indicate that a task is finished or not.<br>
@@ -190,7 +197,14 @@ Example:
   Marks task 2 as incomplete.
 * `mark 3` <br>
   Marks task 3 as complete.
+* `mark 3 -`<br>
+  Marks tasks from 3rd to last in the todo list as complete.
+* `mark incomplete - 5`<br>
+  Marks tasks from first to 5th task in the todo list as incomplete.
+* `mark 5, - 3, 7-8 10, 12 -`<br>
+  Marks tasks from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list as complete.
 
+[comment]: # (@@author A0162011A)
 ### 3.9. Add a Tag to a Task : `tag`
 
 For when you want to differentiate your tasks by categories.<br>
@@ -227,14 +241,28 @@ For when you want to start from a clean slate.<br>
 Clears all entries from the todo list.<br>
 Format: `clear`
 
+[comment]: # (@@author A0131125Y)
 ### 3.12. Undo a command : `undo`
 
 For when you accidentally entered a wrong command.<br>
 Undoes previous commands by the user.<br>
 Format: `undo [NUMBER]`
 
-> Undo the last data-mutating command inputted by the user.<br>
-> If a number is entered, undoes that ammount of previous commands instead.
+> `Undo` allows reverting of modifications to the tasks in the todo list. This means that commands like 
+`add`, `update`, `delete`, `clear`, `tag`, `untag` and `mark` which modifies the tasks can be reversed with
+> `undo`. If loading a different data file with `load` cause the current tasks to be changed, you can go back
+> to the previous task using `undo` too (Using `undo`, however, won't revert the change of data storage 
+path. It's not considered modifications to the task).
+> Changes that are not modifications to the tasks in the todo list cannot be reversed with `undo`. However, 
+> you can still easily revert their effects:
+>   * Change of storage path location (due to `save` / `load` ) - You can change your storage path to the 
+previous location with `save`.
+>   * Setting of aliases (due to `alias`) - You can remove the alias with `unalias`.
+>   * Removal of aliases (due to `unalias`) - You can set back the alias with `alias`.
+>
+> Note that commands that commands that do not modifies the content of the todo list cannot be undone with 
+> `undo`. E.g
+> If a number is entered, undoes that amount of previous commands instead.
 
 Examples:
 
@@ -252,8 +280,9 @@ For when you accidentally undo a correct command.<br>
 Redo previously undone commands by the user.<br>
 Format: `redo [NUMBER]`
 
-> Redo the last data-mutating command inputted since the undone point.<br>
-> If a number is entered, redo that ammount of previous commands instead.<br>
+> Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that 
+> you mistakenly revoked (using `undo`).<br>
+> If a number is entered, redo that amount of previous commands instead.<br>
 > The number must be less than or equal to the number of commands undone.
 
 Examples:
@@ -268,6 +297,7 @@ Examples:
   `redo`<br>
   Redo `add Assignment`.
 
+[comment]: # (@@author A0162011A)
 ### 3.14. Viewing previous commands and accessing them : `history`
 
 For when you want to check what you have previously entered.<br>

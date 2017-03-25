@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.model;
 
 import java.util.ArrayList;
@@ -31,10 +32,6 @@ public class TodoList {
         return allTasks;
     }
 
-    /**
-     * Load the todo list data using the default storage if currentTodoList is null
-     * Otherwise returns the current in-memory todo list
-     */
     public static TodoList getInstance() {
         // Initialize currentTodoList if not done
         if (instance == null) {
@@ -101,6 +98,7 @@ public class TodoList {
         return new ArrayList<>(taskList);
     }
 
+    //@@author A0162011A
     public void setTasks(List<Task> newTaskList) {
         allTasks = new ArrayList<>(newTaskList);
     }

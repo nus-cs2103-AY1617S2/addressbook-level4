@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.ui;
 
 import java.lang.reflect.InvocationTargetException;
@@ -36,7 +37,7 @@ import seedu.toluist.ui.view.TaskListUiView;
  */
 public class MainWindow extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(MainWindow.class);
-    private static final String LOGO_IMAGE_PATH = "/images/logo.png";
+    private static final String IMAGE_PATH_LOGO = "/images/logo.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 800;
@@ -46,13 +47,10 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
-
     @FXML
     private AnchorPane taskListPlaceholder;
-
     @FXML
     private AnchorPane resultDisplayPlaceholder;
-
     @FXML
     private AnchorPane tabPanePlaceholder;
 
@@ -159,7 +157,7 @@ public class MainWindow extends UiPart<Region> {
      * Sets the logo for the app
      */
     private void setLogo() {
-        FxViewUtil.setStageIcon(primaryStage, LOGO_IMAGE_PATH);
+        FxViewUtil.setStageIcon(primaryStage, IMAGE_PATH_LOGO);
         // Only in macOS, you can try to use reflection to access this library
         // and use it to set a custom app icon
         try {
@@ -168,7 +166,7 @@ public class MainWindow extends UiPart<Region> {
             Object application = getApplication.invoke(applicationClass);
             Method setDockIconImage = applicationClass.getMethod("setDockIconImage", java.awt.Image.class);
             setDockIconImage.invoke(application,
-                    new ImageIcon(MainWindow.class.getResource(LOGO_IMAGE_PATH)).getImage());
+                    new ImageIcon(MainWindow.class.getResource(IMAGE_PATH_LOGO)).getImage());
         } catch (NoSuchMethodException | IllegalAccessException
                 | InvocationTargetException | ClassNotFoundException e) {
             logger.info("Not on macOS");

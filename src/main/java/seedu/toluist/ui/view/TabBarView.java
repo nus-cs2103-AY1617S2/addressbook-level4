@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.ui.view;
 
 import javafx.fxml.FXML;
@@ -32,8 +33,7 @@ public class TabBarView extends UiView {
         tabContainer.getChildren().clear();
         for (TaskSwitchPredicate switchPredicate : switchConfig.getAllPredicates()) {
             TabView tabView = new TabView(switchPredicate,
-                                          switchPredicate.equals(UiStore.getInstance()
-                                                                        .getObservableSwitchPredicate().getValue()));
+                    switchPredicate.equals(UiStore.getInstance().getObservableSwitchPredicate().getValue()));
             tabView.setParent(tabContainer);
             tabView.render();
         }

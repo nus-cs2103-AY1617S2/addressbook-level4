@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.ui;
 
 import java.util.logging.Logger;
@@ -65,11 +66,6 @@ public class UiManager extends ComponentManager implements Ui {
 
     public void init(Dispatcher dispatcher) {
         this.dispatcher = dispatcher;
-    }
-
-    public void render() {
-        assert dispatcher != null;
-        mainWindow.render();
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {

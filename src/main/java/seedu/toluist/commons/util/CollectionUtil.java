@@ -48,8 +48,8 @@ public class CollectionUtil {
         return true;
     }
 
+    //@@author A0131125Y
     /**
-
      * Returns true if the two collections holds exactly the same set of items, and have same sizes
      */
     public static <T> boolean elementsAreSimilar(Collection<T> items1, Collection<T> items2) {

@@ -28,18 +28,19 @@ public class FxViewUtil {
         stage.getIcons().setAll(AppUtil.getImage(iconSource));
     }
 
+    //@@author A0131125Y
     /**
-     * Apply anchor so that the node will take full width of parent
-     * @param node a node
+     * Apply anchor 0 to all 4 corners of a node, making it take the width of the parent
+     * @param node a given node
      */
     public static void makeFullWidth(Node node) {
         applyAnchorBoundaryParameters(node, 0.0, 0.0, 0.0, 0.0);
     }
 
     /**
-     * Add style class to a node. Prevent duplicate style class from being added
-     * @param node a node
-     * @param styleClass a style class string
+     * Add a style class to a node. Style class won't be re-added if the node already has it
+     * @param node a given node
+     * @param styleClass a given style class string
      */
     public static void addStyleClass(Node node, String styleClass) {
         if (!node.getStyleClass().contains(styleClass)) {
