@@ -60,9 +60,9 @@ public class GuiSettings implements Serializable {
     }
 }
 ```
-###### /java/seedu/toluist/dispatcher/CommandResult.java
+###### /java/seedu/toluist/ui/commons/CommandResult.java
 ``` java
-package seedu.toluist.dispatcher;
+package seedu.toluist.ui.commons;
 
 /**
  * Represents the result of a command execution.
@@ -79,5 +79,26 @@ public class CommandResult {
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
+}
+```
+###### /java/seedu/toluist/ui/Ui.java
+``` java
+package seedu.toluist.ui;
+
+import javafx.stage.Stage;
+import seedu.toluist.dispatcher.Dispatcher;
+
+/**
+ * API of UI component
+ */
+public interface Ui {
+
+    /** Starts the UI (and the App).  */
+    void start(Stage primaryStage);
+
+    /** Stops the UI. */
+    void stop();
+
+    void init(Dispatcher dispatcher);
 }
 ```

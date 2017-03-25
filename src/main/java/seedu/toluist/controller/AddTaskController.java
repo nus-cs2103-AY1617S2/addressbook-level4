@@ -27,7 +27,8 @@ public class AddTaskController extends Controller {
     private static final String COMMAND_ADD_TASK = "add";
 
     private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
-    private static final String RESULT_MESSAGE_ERROR_DATE_INPUT = "Something is wrong with the given dates input";
+    private static final String RESULT_MESSAGE_ERROR_DATE_INPUT =
+            "Something is wrong with the given dates input";
 
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");

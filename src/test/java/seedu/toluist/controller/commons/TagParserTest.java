@@ -31,7 +31,8 @@ public class TagParserTest {
     @Test
     public void parseTags_multipleTags() {
         Set<Tag> actual = TagParser.parseTags("  yoohoo lololol   wheeeeeee     ");
-        Set<Tag> expected = new TreeSet<>(Arrays.asList(new Tag("yoohoo"), new Tag("lololol"), new Tag("wheeeeeee")));
+        Set<Tag> expected = new TreeSet<>(Arrays.asList(new Tag("yoohoo"), new Tag("lololol"),
+                new Tag("wheeeeeee")));
         assertTrue(actual.equals(expected));
     }
 }
