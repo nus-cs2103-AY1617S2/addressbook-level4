@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <stylesheets>
-      <URL value="@RedTheme.css" />
-      <URL value="@Extensions.css" />
-   </stylesheets>
    <children>
-      <AnchorPane prefHeight="73.0" prefWidth="447.0">
+      <AnchorPane prefHeight="225.0" prefWidth="770.0">
          <children>
-            <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
+            <TextArea fx:id="resultDisplay" prefHeight="225.0" prefWidth="770.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <stylesheets>
+                  <URL value="@RedTheme.css" />
+                  <URL value="@Extensions.css" />
+               </stylesheets></TextArea>
          </children>
       </AnchorPane>
    </children>

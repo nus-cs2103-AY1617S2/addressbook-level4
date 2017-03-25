@@ -23,7 +23,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="event" styleClass="cell_event" text="\$event" HBox.hgrow="ALWAYS">
+                  <Label fx:id="name" styleClass="cell_event" text="\$name" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -35,7 +35,7 @@
       </VBox>
       <StackPane prefHeight="78.0" prefWidth="346.0" HBox.hgrow="ALWAYS">
          <children>
-            <HBox fx:id="startend_only" prefHeight="100.0" prefWidth="268.0" visible="false">
+            <HBox fx:id="startEndOnly" prefHeight="100.0" prefWidth="268.0">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="170.0" HBox.hgrow="NEVER">
                      <padding>
@@ -59,12 +59,12 @@
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </padding>
                      <children>
-                        <Label fx:id="startdate1" text="\$start_date" VBox.vgrow="NEVER">
+                        <Label fx:id="startDate" text="\$start_date" VBox.vgrow="NEVER">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="enddate1" text="\$end_date" VBox.vgrow="NEVER">
+                        <Label fx:id="endDate" text="\$end_date" VBox.vgrow="NEVER">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -73,7 +73,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox fx:id="deadline_only">
+            <HBox fx:id="deadlineOnly">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="170.0" HBox.hgrow="NEVER">
                      <padding>
@@ -92,7 +92,7 @@
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </padding>
                      <children>
-                        <Label fx:id="deadline1" text="\$deadline" VBox.vgrow="NEVER">
+                        <Label fx:id="deadline" text="\$deadline" VBox.vgrow="NEVER">
                            <font>
                               <Font size="20.0" />
                            </font>

@@ -25,17 +25,13 @@ public class ResultDisplay extends UiPart<Region> {
     private final StringProperty displayed = new SimpleStringProperty("");
 
     @FXML
-    private AnchorPane mainPane;
-
-    @FXML
     private TextArea resultDisplay;
 
     public ResultDisplay(AnchorPane placeHolder) {
         super(FXML);
         resultDisplay.textProperty().bind(displayed);
         FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
-        FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
-        placeHolder.getChildren().add(mainPane);
+        placeHolder.getChildren().add(resultDisplay);
         registerAsAnEventHandler(this);
     }
 
