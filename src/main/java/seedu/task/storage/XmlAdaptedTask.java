@@ -95,31 +95,31 @@ public class XmlAdaptedTask {
 	final Optional<TaskTime> taskEndTimeOpt;
 	final Optional<String> taskDescriptionOpt;
 	final Optional<TaskStatus> taskStatusOpt;
-	if (this.taskDate != null) {
+	if (this.taskDate == null) {
 		taskDateOpt = Optional.ofNullable(null);
 	} else {
 		taskDateOpt = Optional.ofNullable(new TaskDate(this.taskDate));
 	}
 	
-	if (this.taskStartTime != null) {
+	if (this.taskStartTime == null) {
 		taskStartTimeOpt = Optional.ofNullable(null);
 	} else {
 		taskStartTimeOpt = Optional.ofNullable(new TaskTime(this.taskStartTime));
 	}
 	
-	if (this.taskEndTime != null) {
+	if (this.taskEndTime == null) {
 		taskEndTimeOpt = Optional.ofNullable(null);
 	} else {
 		taskEndTimeOpt = Optional.ofNullable(new TaskTime(this.taskEndTime));
 	}
 	
-	if (this.taskDescription != null) {
+	if (this.taskDescription == null) {
 		taskDescriptionOpt = Optional.ofNullable(null);
 	} else {
 		taskDescriptionOpt = Optional.ofNullable(this.taskDescription);
 	}
 	
-	if (this.taskStatus != null) {
+	if (this.taskStatus == null) {
 		taskStatusOpt = Optional.ofNullable(null);
 	} else {
 		taskStatusOpt = Optional.ofNullable(new TaskStatus(this.taskStatus));

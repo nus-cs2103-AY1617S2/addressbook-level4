@@ -201,19 +201,23 @@ public class Task implements ReadOnlyTask {
     }
 
     public void setTaskStartTime(TaskTime taskStartTime) throws IllegalValueException {
-	if (this.taskEndTime == null || this.taskEndTime.compareTo(taskStartTime) >= 0) {
-	    this.taskStartTime = taskStartTime;
-	} else {
-	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
-	}
+    	if (taskStartTime == null) {
+    		
+    	} else if  (this.taskEndTime == null || this.taskEndTime.compareTo(taskStartTime) >= 0) {
+    		this.taskStartTime = taskStartTime;
+    	} else {
+    		throw new IllegalValueException(MESSAGE_INVALID_TIME);
+    	}
     }
 
     public void setTaskEndTime(TaskTime taskEndTime) throws IllegalValueException {
-	if (this.taskStartTime == null || this.taskEndTime.compareTo(taskStartTime) >= 0) {
-	    this.taskEndTime = taskEndTime;
-	} else {
-	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
-	}
+	    if (taskEndTime == null) {
+	    	
+	    } else if (this.taskStartTime == null || this.taskEndTime.compareTo(taskStartTime) >= 0) {
+		    this.taskEndTime = taskEndTime;
+		} else {
+		    throw new IllegalValueException(MESSAGE_INVALID_TIME);
+		}
     }
 
 }
