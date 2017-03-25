@@ -14,6 +14,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueEventList.EventNotFoundException;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Event;
@@ -101,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author
     
     @Override
-    public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
+    public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
         whatsLeft.addEvent(event);
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();

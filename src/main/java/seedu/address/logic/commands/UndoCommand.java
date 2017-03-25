@@ -21,7 +21,6 @@ public class UndoCommand extends Command {
         if (previousCommand.equals("")) {
             return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
         }
-        System.out.println(previousCommand);
         if (!previousCommand.equals("edit") && !previousCommand.equals("delete") && !previousCommand.equals("clear")) {
             return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
         }

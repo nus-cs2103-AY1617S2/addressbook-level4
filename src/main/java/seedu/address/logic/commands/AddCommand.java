@@ -17,6 +17,7 @@ import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList;
 
 import seedu.address.model.tag.Tag;
@@ -40,6 +41,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
+    public static final String MESSAGE_CLASH_TIMING = "This event clashes with another event";
 
     private final Event toAddEvent;
     private final Task toAddTask;
@@ -94,6 +96,8 @@ public class AddCommand extends Command {
             }
         } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
+        } catch (DuplicateTimeClashException e) {
+            throw new CommandException(MESSAGE_CLASH_TIMING);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
 

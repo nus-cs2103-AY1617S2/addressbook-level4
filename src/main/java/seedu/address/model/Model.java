@@ -8,6 +8,7 @@ import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueEventList;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
@@ -34,8 +35,9 @@ public interface Model {
     /** Mark the given Task as complete **/
     void MarkTaskAsComplete(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given Event */
-    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
+    /** Adds the given Event 
+     * @throws DuplicateTimeClashException */
+    void addEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
 
     /**
      * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.

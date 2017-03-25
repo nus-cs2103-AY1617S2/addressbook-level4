@@ -15,6 +15,7 @@ import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -85,6 +86,8 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot contain duplicate events", e);
         } catch (DuplicateTaskException t) {
         	throw new AssertionError("sample data cannot contain duplicate tasks", t);
+        } catch (DuplicateTimeClashException d) {
+            throw new AssertionError("sample data cannot contain events with clashing time", d);
         }
     }
 }

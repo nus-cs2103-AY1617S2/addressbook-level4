@@ -6,11 +6,6 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Helper functions for handling strings.
@@ -75,7 +70,7 @@ public class StringUtil {
     public static LocalTime parseStringToTime(String timeString) throws DateTimeException {
         //empty start date
         if (timeString == null) throw new DateTimeException(TIME_FORMAT_CONSTRAINTS);
-        return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHMM"));
+        return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHmm"));
     }
     
 //    //@@author A0148038A

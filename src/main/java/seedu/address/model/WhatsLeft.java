@@ -16,6 +16,7 @@ import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.Tag;
@@ -63,7 +64,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
     }
     
     public void setEvents(List<? extends ReadOnlyEvent> events)
-            throws UniqueEventList.DuplicateEventException {
+            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
         this.events.setEvents(events);
     }
 
@@ -80,7 +81,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         }
         try {
             setEvents(newData.getEventList());
-        } catch (UniqueEventList.DuplicateEventException e) {
+        } catch (UniqueEventList.DuplicateEventException | DuplicateTimeClashException e) {
             assert false : "WhatsLeft should not have duplicate events";
         }
         try {
@@ -112,8 +113,9 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      * and updates the Tag objects in the event to point to those in {@link #tags}.
      *
      * @throws UniqueEventList.DuplicateEventException if an equivalent event already exists.
+     * @throws DuplicateTimeClashException 
      */
-    public void addEvent(Event e) throws UniqueEventList.DuplicateEventException {
+    public void addEvent(Event e) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
         syncMasterTagListWith(e);
         events.add(e);
     }
