@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -35,13 +37,9 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private EventListPanel eventListPanel;
     private TaskListPanel taskListPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -119,7 +117,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
         eventListPanel = new EventListPanel(getEventListPlaceholder(), logic.getFilteredEventList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
@@ -212,18 +209,6 @@ public class MainWindow extends UiPart<Region> {
     
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
-    }
-
-    void loadEventPage(ReadOnlyEvent event) {
-        browserPanel.loadEventPage(event);
-    }
-    
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
 }

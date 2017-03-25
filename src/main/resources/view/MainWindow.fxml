@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 
 <!-- @@author A0148038A -->
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -40,29 +41,39 @@
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.35, 0.70" VBox.vgrow="ALWAYS">
+<!-- @@author A0124377A -->
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.35, 0.5" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="eventList" minWidth="300.0" prefWidth="350.0">
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                </padding>
-               <children>
+           <SplitPane dividerPositions="0.5" orientation="HORIZONTAL">
+            <items> 
+                <VBox fx:id="eventList" minWidth="300.0" prefWidth="350.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                <children>
+                  <AnchorPane VBox.vgrow="NEVER">
+                    <children>
+                       <Label alignment= "CENTER_RIGHT" contentDisplay="LEFT" styleClass="label-header" text="Upcoming Events" textAlignment="LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                  </AnchorPane>
                   <AnchorPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-               </children>
-            </VBox>
-            <VBox fx:id="taskList" minWidth="300.0" prefWidth="350.0">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <children>
+                </children>
+                </VBox>
+                <VBox fx:id="taskList" minWidth="300.0" prefWidth="350.0" alignment="CENTER_RIGHT">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                <children>
+                  <AnchorPane VBox.vgrow="NEVER">
+                    <children>
+                       <Label alignment= "CENTER_RIGHT" contentDisplay="LEFT" styleClass="label-header" text="Tasks and Deadlines" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                  </AnchorPane>                  
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
-            </VBox>
-            <AnchorPane fx:id="browserPlaceholder" maxWidth="300.0" minWidth="200.0" prefWidth="300.0">
-                <padding>
-                    <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-            </AnchorPane>
+               </VBox>   
+            </items>
+           </SplitPane>        
          </items>
       </SplitPane>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
