@@ -4,10 +4,10 @@ import seedu.opus.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.opus.logic.commands.exceptions.CommandException;
 
 public class ScheduleCommand extends Command {
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = "";
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s as complete";
+    public static final String MESSAGE_SCHEDULE_TASK_SUCCESS = "Task is scheduled successfully";
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
