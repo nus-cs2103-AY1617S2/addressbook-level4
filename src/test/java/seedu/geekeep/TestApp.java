@@ -6,9 +6,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.core.GuiSettings;
-import seedu.geekeep.model.ReadOnlyTaskManager;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
-import seedu.geekeep.storage.XmlSerializableTaskManager;
+import seedu.geekeep.storage.XmlSerializableGeeKeep;
 import seedu.geekeep.testutil.TestUtil;
 
 /**
@@ -21,14 +21,14 @@ public class TestApp extends MainApp {
     protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
-    protected static final String ADDRESS_BOOK_NAME = "Test";
-    protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
+    protected static final String TASK_MANAGER_NAME = "Test";
+    protected Supplier<ReadOnlyGeeKeep> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyTaskManager> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyGeeKeep> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
@@ -36,7 +36,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableTaskManager(this.initialDataSupplier.get()),
+                    new XmlSerializableGeeKeep(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
@@ -47,7 +47,7 @@ public class TestApp extends MainApp {
         config.setAppTitle(APP_TITLE);
         config.setGeeKeepFilePath(saveFileLocation);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
-        config.setGeeKeepName(ADDRESS_BOOK_NAME);
+        config.setGeeKeepName(TASK_MANAGER_NAME);
         return config;
     }
 

@@ -20,40 +20,30 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)
+ * GeeKeep is TaskManager
+ * Wraps all data at the GeeKeep level
+ * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskManager implements ReadOnlyTaskManager {
+public class GeeKeep implements ReadOnlyGeeKeep {
 
-    private final UniqueTaskList tasks;
-    private final UniqueTagList tags;
+    private final UniqueTaskList tasks = new UniqueTaskList();
+    private final UniqueTagList tags = new UniqueTagList();
 
-    /*
-     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication between
-     * constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication among
-     * constructors.
-     */
-    {
-        tasks = new UniqueTaskList();
-        tags = new UniqueTagList();
-    }
-
-    public TaskManager() {
+    public GeeKeep() {
     }
 
     /**
-     * Creates an TaskManager using the Tasks and Tags in the {@code toBeCopied}
+     * Creates a GeeKeep using the Tasks and Tags in the {@code toBeCopied}
      */
-    public TaskManager(ReadOnlyTaskManager toBeCopied) {
+    public GeeKeep(ReadOnlyGeeKeep toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+//// list overwrite operations
 
     /**
-     * Adds a task to the address book. Also checks the new task's tags and updates {@link #tags} with any new tags
+     * Adds a task to GeeKeep. Also checks the new task's tags and updates {@link #tags} with any new tags
      * found, and updates the Tag objects in the task to point to those in {@link #tags}.
      *
      * @throws UniqueTaskList.DuplicateTaskException
@@ -71,12 +61,12 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TaskManager // instanceof handles nulls
-                        && this.tasks.equals(((TaskManager) other).tasks)
-                        && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
+                || (other instanceof GeeKeep // instanceof handles nulls
+                        && this.tasks.equals(((GeeKeep) other).tasks)
+                        && this.tags.equalsOrderInsensitive(((GeeKeep) other).tags));
     }
 
-    //// task-level operations
+//// task-level operations
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
@@ -104,16 +94,16 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void resetData(ReadOnlyGeeKeep newData) {
         assert newData != null;
         try {
 
             setTasks(newData.getTaskList());
 
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "TaskManager should not have duplicate tasks";
+            assert false : "GeeKeep should not have duplicate tasks";
         } catch (IllegalValueException ive) {
-            assert false : "TaskManager tasks startDateTime should be matched"
+            assert false : "GeeKeep tasks startDateTime should be matched"
                     + "with a later endDateTime";
         }
         try {
@@ -124,14 +114,14 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(tasks);
     }
 
-    //// tag-level operations
+//// tag-level operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
-    //// util methods
+//// util methods
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
@@ -173,8 +163,8 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}. {@code AddressBook}'s
-     * tag list will be updated with the tags of {@code editedReadOnlyTask}.
+     * Updates the task in the list at position {@code index} with {@code updatedReadOnlyTask}. {@code GeeKeep}'s
+     * tag list will be updated with the tags of {@code updatedReadOnlyTask}.
      *
      * @see #syncMasterTagListWith(Task)
      *
@@ -185,21 +175,21 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+    public void updateTask(int index, ReadOnlyTask updatedReadOnlyTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
-        assert editedReadOnlyTask != null;
+        assert updatedReadOnlyTask != null;
 
-        Task editedTask;
+        Task updatedTask;
         try {
-            editedTask = new Task(editedReadOnlyTask);
+            updatedTask = new Task(updatedReadOnlyTask);
         } catch (IllegalValueException ive) {
             throw new IllegalValueException(ive.getMessage());
         }
-        syncMasterTagListWith(editedTask);
+        syncMasterTagListWith(updatedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
-        tasks.updateTask(index, editedTask);
+        tasks.updateTask(index, updatedTask);
     }
 
     public void markTaskDone(int index) {

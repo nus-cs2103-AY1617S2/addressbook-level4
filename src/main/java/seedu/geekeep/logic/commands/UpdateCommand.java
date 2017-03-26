@@ -16,24 +16,104 @@ import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing task in the address book.
+ * Edits the details of an existing task in GeeKeep.
  */
 public class UpdateCommand extends Command {
 
+    public static final String COMMAND_WORD = "update";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the task identified "
+            + "by the index number used in the last task listing. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[TITLE] [s/STARTING_TIME] [e/ENDING_TIME] [l/LOCATION] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 s/01-04-17 1630 e/01-04-17 1730";
+    public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
+    public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in GeeKeep.";
+
+    private final int filteredTaskListIndex;
+    private final UpdateTaskDescriptor updateTaskDescriptor;
+
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
+     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
+     * @param updateTaskDescriptor details to edit the task with
+     */
+    public UpdateCommand(int filteredTaskListIndex, UpdateTaskDescriptor updateTaskDescriptor) {
+        assert filteredTaskListIndex > 0;
+        assert updateTaskDescriptor != null;
+
+        // converts filteredTaskListIndex from one-based to zero-based.
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+
+        this.updateTaskDescriptor = new UpdateTaskDescriptor(updateTaskDescriptor);
+    }
+
+    @Override
+    public CommandResult execute() throws CommandException {
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (filteredTaskListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
+        ReadOnlyTask taskToUpdate = lastShownList.get(filteredTaskListIndex);
+        Task updatedTask;
+        try {
+            updatedTask = createEditedTask(taskToUpdate, updateTaskDescriptor);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage());
+        }
+
+        try {
+            model.updateTask(filteredTaskListIndex, updatedTask);
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage());
+        }
+        model.updateFilteredListToShowAll();
+        return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
+    }
+
+    /**
+     * Creates and returns a {@code Task} with the details of {@code taskToUpdate}
+     * updated with {@code updateTaskDescriptor}.
+     * @throws IllegalValueException
+     */
+    private static Task createEditedTask(ReadOnlyTask taskToUpdate,
+            UpdateTaskDescriptor updateTaskDescriptor) throws IllegalValueException {
+        assert taskToUpdate != null;
+
+        Title updatedTitle = updateTaskDescriptor.getTitle().orElseGet(taskToUpdate::getTitle);
+        DateTime updatedEndDateTime = null;
+        if (updateTaskDescriptor.getEndDateTime() != null) {
+            updatedEndDateTime = updateTaskDescriptor.getEndDateTime().orElseGet(taskToUpdate::getEndDateTime);
+        }
+        DateTime updatedStartDateTime = null;
+        if (updateTaskDescriptor.getStartDateTime() != null) {
+            updatedStartDateTime = updateTaskDescriptor.getStartDateTime().orElseGet(taskToUpdate::getStartDateTime);
+        }
+        Location updatedLocation = updateTaskDescriptor.getLocation().orElseGet(taskToUpdate::getLocation);
+        UniqueTagList updatedTags = updateTaskDescriptor.getTags().orElseGet(taskToUpdate::getTags);
+
+        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags);
+    }
+
+    /**
+     * Stores the details to update the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
      */
-    public static class EditTaskDescriptor {
+    public static class UpdateTaskDescriptor {
         private Optional<Title> title = Optional.empty();
         private Optional<DateTime> endDateTime = Optional.empty();
         private Optional<DateTime> startDateTime = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+        public UpdateTaskDescriptor() {}
 
-        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+        public UpdateTaskDescriptor(UpdateTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
             this.endDateTime = toCopy.getEndDateTime();
             this.startDateTime = toCopy.getStartDateTime();
@@ -68,7 +148,8 @@ public class UpdateCommand extends Command {
             if (this.startDateTime == null || this.endDateTime == null) {
                 return true;
             }
-            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags,
+                    this.startDateTime, this.endDateTime);
         }
 
         public void setEndDateTime(Optional<DateTime> endDateTime) {
@@ -93,86 +174,5 @@ public class UpdateCommand extends Command {
             assert title != null;
             this.title = title;
         }
-    }
-
-    public static final String COMMAND_WORD = "update";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the task identified "
-            + "by the index number used in the last task listing. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[TITLE] [s/STARTING_TIME] [e/ENDING_TIME] [l/LOCATION] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 s/01-04-17 1630 e/01-04-17 1730";
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    /**
-     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
-     * edited with {@code editTaskDescriptor}.
-     * @throws IllegalValueException
-     */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-            EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
-        assert taskToEdit != null;
-
-        Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        DateTime updatedEndDateTime = null;
-        if (editTaskDescriptor.getEndDateTime() != null) {
-            updatedEndDateTime = editTaskDescriptor.getEndDateTime().orElseGet(taskToEdit::getEndDateTime);
-        }
-        DateTime updatedStartDateTime = null;
-        if (editTaskDescriptor.getStartDateTime() != null) {
-            updatedStartDateTime = editTaskDescriptor.getStartDateTime().orElseGet(taskToEdit::getStartDateTime);
-        }
-        Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-
-        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags);
-    }
-
-    private final int filteredTaskListIndex;
-
-    private final EditTaskDescriptor editTaskDescriptor;
-
-    /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
-     */
-    public UpdateCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
-        assert editTaskDescriptor != null;
-
-        // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
-    }
-
-    @Override
-    public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask;
-        try {
-            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-        } catch (IllegalValueException ive) {
-            throw new CommandException(ive.getMessage());
-        }
-
-        try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        } catch (IllegalValueException ive) {
-            throw new CommandException(ive.getMessage());
-        }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 }

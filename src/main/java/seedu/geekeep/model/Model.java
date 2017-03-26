@@ -32,11 +32,11 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Returns the task manager */
-    ReadOnlyTaskManager getTaskManager();
+    /** Returns the GeeKeep */
+    ReadOnlyGeeKeep getGeeKeep();
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyTaskManager newData);
+    void resetData(ReadOnlyGeeKeep newData);
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
@@ -50,24 +50,18 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by status of the tasks */
     void updateFilteredTaskListToShowUndone();
 
-    void updateFilteredTaskListToShowEvents();
-
-    void updateFilteredTaskListToShowDeadlines();
-
-    void updateFilteredTaskListToShowFloatingTasks();
-
     /**
-     * Updates the person located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * Updates the task located at {@code filteredTaskListIndex} with {@code updatedTask}.
      *
      * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be equivalent to another existing person in the
+     *             if updating the task's details causes the task to be equivalent to another existing task in the
      *             list.
      * @throws IllegalValueException
      *             if the task's startDateTime is not matched with a later endDateTime
      * @throws IndexOutOfBoundsException
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask updatedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
 
     /** Mark the specified task as done */

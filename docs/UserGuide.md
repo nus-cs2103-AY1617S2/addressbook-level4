@@ -40,7 +40,7 @@ This guide will help you get started with the commands and features of GeeKeep.
 	> Having any Java 8 version is not enough. <br>
    This app will not work with earlier versions of Java 8.
 
-2. Download the latest taskmanager.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
+2. Download the latest geekeep.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
 3. Move the file to the folder you want to use as the home folder for your task manager.
 4. Double-click the file to start the app. You should see the UI appear in a few seconds.
     <br><br>
@@ -113,7 +113,7 @@ Format: `help`
 
 Adds a task with the specified details.
 
-Format: `add TASKNAME [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
+Format: `add TASKTITLE [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
 
 > * Each parameter has its own prefix. See the [Parameter Summary](#6-parameter-summary) for a complete list.
 > * You can use abbreviations to represent all the parameter prefixes<br>
@@ -134,7 +134,7 @@ You should see the following after the above commands are entered.
 
 Updates any details of existing task's to the new specified .
 
-Format: `update TASKID [TASKNAME] [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
+Format: `update TASKID [TASKTITLE] [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
 
 > * Updates the task at the specified *TaskID*. 
 > * *TaskID* refers to the number shown beside the title of the task.
@@ -216,9 +216,9 @@ Format: `find KEYWORD [MORE_KEYWORDS] [DATE]`
 
 Examples:
 
-* You can find any tasks with the word `report` in their name: <br> `find report`
-* You can find any tasks with the partial word `meet` in their name, even if their name is `team meeting`: <br>`find meet`
-* You can find any tasks with the partial word `meet` in their name, on a specific date: <br>`find meet 17-3-17`
+* You can find any tasks with the word `report` in their title: <br> `find report`
+* You can find any tasks with the partial word `meet` in their title, even if their title is `team meeting`: <br>`find meet`
+* You can find any tasks with the partial word `meet` in their title, on a specific date: <br>`find meet 17-3-17`
 
 
 ### 3.11. Undo most recent command: `undo`
@@ -310,7 +310,7 @@ Format: `exit`
 
 | Parameter | Prefix | Format | Can be empty | Example |
 |--- | :--- | :--- | :--- | :--- |
-| TASKNAME | - | Alphanumeric Characters and spaces | :x: |`CS2103 Assignment 1`|
+| TASKTITLE | - | Alphanumeric Characters and spaces | :x: |`CS2103 Assignment 1`|
 | START_DATETIME | `start/` | `DD-MM-YY HHMM` | :heavy_check_mark: |`01-04-17 0000`|
 | END_DATETIME | `end/` | `DD-MM-YY HHMM` | :heavy_check_mark: | `01-04-17 2359`|
 | LOCATION | `loc/` | No restriction | :heavy_check_mark: | `School of Computing`|

@@ -27,15 +27,15 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
-     * Returns null if {@code Optional<String> phone} is an empty string.
+     * Parses a {@code Optional<String> endDateTime} into an {@code Optional<DateTime>} if {@code endDateTime} is
+     * present. Returns null if {@code Optional<String> endDateTime} is an empty string.
      */
-    public static Optional<DateTime> parseEndDateTime(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        if (phone.isPresent() && phone.get().equals("")) {
+    public static Optional<DateTime> parseEndDateTime(Optional<String> endDateTime) throws IllegalValueException {
+        assert endDateTime != null;
+        if (endDateTime.isPresent() && endDateTime.get().equals("")) {
             return null;
         }
-        return phone.isPresent() ? Optional.of(new DateTime(phone.get())) : Optional.empty();
+        return endDateTime.isPresent() ? Optional.of(new DateTime(endDateTime.get())) : Optional.empty();
     }
 
     /**
@@ -57,23 +57,23 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
      */
-    public static Optional<Location> parseLocation(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Location(address.get())) : Optional.empty();
+    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
+        assert location != null;
+        return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     * Returns an {@code Optional.empty()} otherwise.
+     * Parses a {@code Optional<String> startDateTime} into an {@code Optional<DateTime>} if {@code startDateTime} is
+     * present. Returns an {@code Optional.empty()} otherwise.
      */
-    public static Optional<DateTime> parseStartDateTime(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        if (email.isPresent() && email.get().equals("")) {
+    public static Optional<DateTime> parseStartDateTime(Optional<String> startDateTime) throws IllegalValueException {
+        assert startDateTime != null;
+        if (startDateTime.isPresent() && startDateTime.get().equals("")) {
             return null;
         }
-        return email.isPresent() ? Optional.of(new DateTime(email.get())) : Optional.empty();
+        return startDateTime.isPresent() ? Optional.of(new DateTime(startDateTime.get())) : Optional.empty();
     }
 
     /**
@@ -89,11 +89,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> title} into an {@code Optional<Title>} if {@code title} is present.
      */
-    public static Optional<Title> parseTitle(Optional<String> name) throws IllegalValueException {
-        assert name != null;
-        return name.isPresent() ? Optional.of(new Title(name.get())) : Optional.empty();
+    public static Optional<Title> parseTitle(Optional<String> title) throws IllegalValueException {
+        assert title != null;
+        return title.isPresent() ? Optional.of(new Title(title.get())) : Optional.empty();
     }
 
     /**

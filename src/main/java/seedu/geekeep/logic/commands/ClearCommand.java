@@ -1,6 +1,6 @@
 package seedu.geekeep.logic.commands;
 
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.GeeKeep;
 
 /**
  * Clears the Task Manager.
@@ -14,7 +14,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        model.resetData(new TaskManager());
+        model.resetData(new GeeKeep());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

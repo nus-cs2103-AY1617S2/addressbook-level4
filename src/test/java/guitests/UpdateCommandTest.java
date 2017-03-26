@@ -5,103 +5,103 @@ import static seedu.geekeep.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.logic.commands.UpdateCommand;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Title;
-import seedu.geekeep.testutil.PersonBuilder;
+import seedu.geekeep.testutil.TaskBuilder;
 import seedu.geekeep.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class UpdateCommandTest extends AddressBookGuiTest {
+public class UpdateCommandTest extends GeeKeepGuiTest {
 
-    // The list of persons in the person list panel is expected to match this list.
+    // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedTasksList = td.getTypicalPersons();
+    private TestTask[] expectedTasksList = td.getTypicalTasks();
 
     /**
-     * Checks whether the edited person has the correct updated details.
+     * Checks whether the edited task has the correct updated details.
      *
-     * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the address book.
-     *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedPerson the expected person after editing the person's details
+     * @param filteredTaskListIndex index of task to edit in filtered list
+     * @param geeKeepIndex index of task to edit in GeeKeep.
+     *      Must refer to the same task as {@code filteredTaskListIndex}
+     * @param detailsToEdit details to edit the task with as input to the edit command
+     * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestTask editedPerson) {
-        commandBox.runCommand("update " + filteredPersonListIndex + " " + detailsToEdit);
+    private void assertUpdateSuccess(int filteredTaskListIndex, int geeKeepIndex,
+                                    String detailsToEdit, TestTask editedTask) {
+        commandBox.runCommand("update " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedPerson.getTitle().fullTitle);
-        assertMatching(editedPerson, editedCard);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
+        assertMatching(editedTask, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
-        expectedTasksList[addressBookIndex - 1] = editedPerson;
+        // confirm the list now contains all previous tasks plus the task with updated details
+        expectedTasksList[geeKeepIndex - 1] = editedTask;
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(UpdateCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
+        assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, editedTask));
 
     }
 
     @Test
-    public void edit_allFieldsSpecified_success() throws Exception {
+    public void update_allFieldsSpecified_success() throws Exception {
         String detailsToEdit
-            = "Bobby s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
-        int addressBookIndex = 1;
+            = "Smile s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
+        int geeKeepIndex = 1;
 
-        TestTask editedPerson = new PersonBuilder().withName("Bobby")
+        TestTask editedTask = new TaskBuilder().withTitle("Smile")
                 .withEndDateTime("01-05-17 1630")
                 .withStartDateTime("01-04-17 1630")
                 .withLocation("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertUpdateSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_clearTags_success() throws Exception {
+    public void update_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int addressBookIndex = 2;
+        int geeKeepIndex = 2;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertUpdateSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("update 3 Alice Pauline s/01-04-17 1630 e/01-05-17 1630 "
+    public void update_duplicateTask_failure() {
+        commandBox.runCommand("update 3 Dance Camp s/01-04-17 1630 e/01-05-17 1630 "
 
                                 + "l/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
-    public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+    public void update_findThenEdit_success() throws Exception {
+        commandBox.runCommand("find Hackathon");
 
-        String detailsToEdit = "Belle";
-        int filteredPersonListIndex = 1;
-        int addressBookIndex = 5;
+        String detailsToEdit = "New Event";
+        int filteredTaskListIndex = 1;
+        int geeKeepIndex = 5;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
+        TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("New Event").build();
 
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertUpdateSuccess(filteredTaskListIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_invalidPersonIndex_failure() {
-        commandBox.runCommand("update 8 Bobby");
+    public void update_invalidTaskIndex_failure() {
+        commandBox.runCommand("update 8 Random Event");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
-    public void edit_invalidValues_failure() {
+    public void update_invalidValues_failure() {
         commandBox.runCommand("update 1 *&");
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
@@ -116,25 +116,25 @@ public class UpdateCommandTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void edit_missingPersonIndex_failure() {
-        commandBox.runCommand("update Bobby");
+    public void update_missingTaskIndex_failure() {
+        commandBox.runCommand("update Random Event");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void edit_noFieldsSpecified_failure() {
+    public void update_noFieldsSpecified_failure() {
         commandBox.runCommand("update 1");
-        assertResultMessage(UpdateCommand.MESSAGE_NOT_EDITED);
+        assertResultMessage(UpdateCommand.MESSAGE_NOT_UPDATED);
     }
 
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
+    public void update_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int addressBookIndex = 2;
+        int geeKeepIndex = 2;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertUpdateSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 }

@@ -3,16 +3,16 @@ package seedu.geekeep.storage;
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
+import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
-import seedu.geekeep.model.ReadOnlyTaskManager;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends TaskManagerStorage, UserPrefsStorage {
+public interface Storage extends GeeKeepStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,18 +21,18 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getTaskManagerFilePath();
+    String getGeeKeepFilePath();
 
     @Override
-    Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
+    Optional<ReadOnlyGeeKeep> readGeeKeep() throws DataConversionException, IOException;
 
     @Override
-    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
+    void saveGeeKeep(ReadOnlyGeeKeep geeKeep) throws IOException;
 
     /**
      * Saves the current version of the Task Manager to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+    void handleGeeKeepChangedEvent(GeeKeepChangedEvent abce);
 }

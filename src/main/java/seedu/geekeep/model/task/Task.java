@@ -14,6 +14,9 @@ public class Task implements ReadOnlyTask  {
             "Starting date and time must be matched with a ending date and time";
     public static final String MESSAGE_ENDDATETIME_LATER_CONSTRAINTS =
             "Starting date and time must be earlier than ending date and time";
+    public static final int EVENT_PRIORITY = 0;
+    public static final int FLOATING_TASK_PRIORITY = 1;
+    public static final int DEADLINE_PRIORITY = 2;
 
     private Title title;
     private DateTime endDateTime;
@@ -96,6 +99,20 @@ public class Task implements ReadOnlyTask  {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(title, endDateTime, startDateTime, location, tags);
+    }
+
+    /**
+     * Computes task's priority which determines the ordering of index
+     */
+    public int computePriority() {
+        if (isEvent()) {
+            return EVENT_PRIORITY;
+        } else if (isFloatingTask()) {
+            return FLOATING_TASK_PRIORITY;
+        } else {
+            assert isDeadline();
+            return DEADLINE_PRIORITY;
+        }
     }
 
     /**

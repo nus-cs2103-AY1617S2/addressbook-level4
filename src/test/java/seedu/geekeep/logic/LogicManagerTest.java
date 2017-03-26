@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.geekeep.commons.core.EventsCenter;
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
+import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.events.ui.ShowHelpRequestEvent;
 import seedu.geekeep.logic.commands.AddCommand;
@@ -34,10 +34,10 @@ import seedu.geekeep.logic.commands.FindCommand;
 import seedu.geekeep.logic.commands.HelpCommand;
 import seedu.geekeep.logic.commands.ListCommand;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
+import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
-import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
@@ -45,8 +45,6 @@ import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
-import seedu.geekeep.storage.StorageManager;
-
 
 public class LogicManagerTest {
     /**
@@ -58,7 +56,7 @@ public class LogicManagerTest {
 
     private Logic logic;
     //These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedAddressBook;
+    private ReadOnlyGeeKeep latestSavedGeeKeep;
     private boolean helpShown;
 
     private int targetedJumpIndex;
@@ -80,15 +78,15 @@ public class LogicManagerTest {
         }
 
         /**
-         * Adds auto-generated Person objects to the given model
-         * @param model The model to which the Persons will be added
+         * Adds auto-generated Task objects to the given model
+         * @param model The model to which the Tasks will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {
             addToModel(model, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Persons to the given model
+         * Adds the given list of Tasks to the given model
          */
         void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
@@ -97,23 +95,23 @@ public class LogicManagerTest {
         }
 
         /**
-         * Adds auto-generated Person objects to the given AddressBook
-         * @param taskManager The AddressBook to which the Persons will be added
+         * Adds auto-generated Task objects to the given GeeKeep
+         * @param geeKeep The GeeKeep to which the Tasks will be added
          */
-        void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
-            addToTaskManager(taskManager, generateTaskList(numGenerated));
+        void addToGeeKeep(GeeKeep geeKeep, int numGenerated) throws Exception {
+            addToGeeKeep(geeKeep, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Persons to the given AddressBook
+         * Adds the given list of Tasks to the given GeeKeep
          */
-        void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+        void addToGeeKeep(GeeKeep geeKeep, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
-                taskManager.addTask(p);
+                geeKeep.addTask(p);
             }
         }
 
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
@@ -133,15 +131,15 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a valid person using the given seed.
-         * Running this function with the same parameter values guarantees the returned person will have the same state.
-         * Each unique seed will generate a unique Person object.
+         * Generates a valid task using the given seed.
+         * Running this function with the same parameter values guarantees the returned task will have the same state.
+         * Each unique seed will generate a unique Task object.
          *
-         * @param seed used to generate the person data field values
+         * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Title("Person " + seed),
+                    new Title("Task " + seed),
                     new DateTime("01-04-17 1630"),
                     new DateTime("01-05-17 1630"),
                     new Location("House of " + seed),
@@ -150,7 +148,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a list of Persons based on the flags.
+         * Generates a list of Tasks based on the flags.
          */
         List<Task> generateTaskList(int numGenerated) throws Exception {
             List<Task> tasks = new ArrayList<>();
@@ -160,34 +158,34 @@ public class LogicManagerTest {
             return tasks;
         }
 
-        List<Task> generateTaskList(Task... persons) {
-            return Arrays.asList(persons);
+        List<Task> generateTaskList(Task... tasks) {
+            return Arrays.asList(tasks);
         }
 
         /**
-         * Generates an AddressBook with auto-generated persons.
+         * Generates a GeeKeep with auto-generated tasks.
          */
-        TaskManager generateTaskManager(int numGenerated) throws Exception {
-            TaskManager taskManager = new TaskManager();
-            addToTaskManager(taskManager, numGenerated);
-            return taskManager;
+        GeeKeep generateGeeKeep(int numGenerated) throws Exception {
+            GeeKeep geeKeep = new GeeKeep();
+            addToGeeKeep(geeKeep, numGenerated);
+            return geeKeep;
         }
 
         /**
-         * Generates an AddressBook based on the list of Persons given.
+         * Generates a GeeKeep based on the list of Tasks given.
          */
-        TaskManager generateTaskManager(List<Task> tasks) throws Exception {
-            TaskManager taskManager = new TaskManager();
-            addToTaskManager(taskManager, tasks);
-            return taskManager;
+        GeeKeep generateGeeKeep(List<Task> tasks) throws Exception {
+            GeeKeep geeKeep = new GeeKeep();
+            addToGeeKeep(geeKeep, tasks);
+            return geeKeep;
         }
 
         /**
-         * Generates a Person object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given title. Other fields will have some dummy values.
          */
-        Task generateTaskWithName(String name) throws Exception {
+        Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
-                    new Title(name),
+                    new Title(title),
                     new DateTime("01-04-17 1630"),
                     new DateTime("01-05-17 1630"),
                     new Location("House of 1"),
@@ -202,12 +200,12 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal address book data are same as those in the {@code expectedAddressBook} <br>
+     *      - the internal geekeep data are same as those in the {@code expectedGeeKeep} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedAddressBook} was saved to the storage file. <br>
+     *      - {@code expectedGeeKeep} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskManager expectedAddressBook,
+                                       ReadOnlyGeeKeep expectedGeeKeep,
                                        List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
@@ -223,36 +221,36 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getTaskManager());
-        assertEquals(expectedAddressBook, latestSavedAddressBook);
+        assertEquals(expectedGeeKeep, model.getGeeKeep());
+        assertEquals(expectedGeeKeep, latestSavedGeeKeep);
     }
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'address book' and the 'last shown list' are verified to be unchanged.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * Both the 'geekeep' and the 'last shown list' are verified to be unchanged.
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyGeeKeep, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
+        GeeKeep expectedGeeKeep = new GeeKeep(model.getGeeKeep());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-        assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
+        assertCommandBehavior(true, inputCommand, expectedMessage, expectedGeeKeep, expectedShownList);
     }
 
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'address book' and the 'last shown list' are as specified.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * Also confirms that both the 'geekeep' and the 'last shown list' are as specified.
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyGeeKeep, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTaskManager expectedAddressBook,
+                                      ReadOnlyGeeKeep expectedGeeKeep,
                                       List<? extends ReadOnlyTask> expectedShownList) {
-        assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+        assertCommandBehavior(false, inputCommand, expectedMessage, expectedGeeKeep, expectedShownList);
     }
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single person in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list
+     * targeting a single task in the shown list, using visible index.
+     * @param commandWord to test assuming it targets a single task in the last shown list
      *                    based on visible index.
      */
     private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
@@ -266,8 +264,8 @@ public class LogicManagerTest {
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single person in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list
+     * targeting a single task in the shown list, using visible index.
+     * @param commandWord to test assuming it targets a single task in the last shown list
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
@@ -275,8 +273,8 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
-        // set AB state to 2 persons
-        model.resetData(new TaskManager());
+        // set AB state to 2 tasks
+        model.resetData(new GeeKeep());
         for (Task p : taskList) {
             model.addTask(p);
         }
@@ -293,15 +291,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 l/valid, address",
+    public void execute_add_invalidTaskData() {
+        assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 l/valid, location",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/not_numbers e/01-05-17 1630 l/valid, address",
+        assertCommandFailure("add Valid Title s/not_numbers e/01-05-17 1630 l/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/01-04-17 1630 e/not_numbers l/valid, address",
+        assertCommandFailure("add Valid Title s/01-04-17 1630 e/not_numbers l/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Name s/01-04-17 1630 e/01-05-17 1630 l/valid, address t/invalid_-[.tag",
+                "add Valid Title s/01-04-17 1630 e/01-05-17 1630 l/valid, location t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -311,7 +309,7 @@ public class LogicManagerTest {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
-        TaskManager expectedAB = new TaskManager();
+        GeeKeep expectedAB = new GeeKeep();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -329,7 +327,7 @@ public class LogicManagerTest {
         Task toBeAdded = helper.adam();
 
         // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
+        model.addTask(toBeAdded); // task already in internal geekeep
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -343,15 +341,15 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new GeeKeep(), Collections.emptyList());
     }
 
     @Test
-    public void execute_delete_removesCorrectPerson() throws Exception {
+    public void execute_delete_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        GeeKeep expectedAB = helper.generateGeeKeep(threeTasks);
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
@@ -376,7 +374,7 @@ public class LogicManagerTest {
     @Test
     public void execute_exit() {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
-                new TaskManager(), Collections.emptyList());
+                new GeeKeep(), Collections.emptyList());
     }
 
     @Test
@@ -388,18 +386,18 @@ public class LogicManagerTest {
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithName("key key");
-        Task p4 = helper.generateTaskWithName("KEy sduauo");
+        Task p1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task p2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task p3 = helper.generateTaskWithTitle("key key");
+        Task p4 = helper.generateTaskWithTitle("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        GeeKeep expectedAB = helper.generateGeeKeep(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -408,45 +406,45 @@ public class LogicManagerTest {
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
-        Task p1 = helper.generateTaskWithName("sduauo");
+        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithTitle("bla rAnDoM bla bceofeia");
+        Task pTarget3 = helper.generateTaskWithTitle("key key");
+        Task p1 = helper.generateTaskWithTitle("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        GeeKeep expectedAB = helper.generateGeeKeep(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
 
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_find_onlyMatchesFullWordsInTitles() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task p1 = helper.generateTaskWithTitle("KE Y");
+        Task p2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        GeeKeep expectedAB = helper.generateGeeKeep(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new GeeKeep(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
@@ -457,13 +455,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_list_showsAllPersons() throws Exception {
+    public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedAB = helper.generateTaskManager(2);
+        GeeKeep expectedAB = helper.generateGeeKeep(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
-        // prepare address book state
+        // prepare geekeep state
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
@@ -485,8 +483,8 @@ public class LogicManagerTest {
     }
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-        latestSavedAddressBook = new TaskManager(abce.data);
+    private void handleLocalModelChangedEvent(GeeKeepChangedEvent abce) {
+        latestSavedGeeKeep = new GeeKeep(abce.data);
     }
 
     @Subscribe
@@ -497,12 +495,10 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
-        String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
+        logic = new LogicManager(model);
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
+        latestSavedGeeKeep = new GeeKeep(model.getGeeKeep()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }

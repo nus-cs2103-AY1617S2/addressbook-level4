@@ -1,7 +1,7 @@
 package seedu.geekeep.logic.commands;
 
 /**
- * Lists all uncompleted tasks in the task manager to the user.
+ * Lists all uncompleted tasks in GeeKeep to the user.
  */
 public class ListUndoneCommand extends Command {
 

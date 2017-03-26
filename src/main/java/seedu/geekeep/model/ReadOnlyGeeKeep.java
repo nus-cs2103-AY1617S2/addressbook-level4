@@ -5,12 +5,12 @@ import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of GeeKeep
  */
-public interface ReadOnlyTaskManager {
+public interface ReadOnlyGeeKeep {
 
     /**
-     * Returns an unmodifiable view of the persons list. This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the tasks list. This list will not contain any duplicate tasks.
      */
     ObservableList<ReadOnlyTask> getTaskList();
 

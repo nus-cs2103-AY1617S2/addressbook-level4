@@ -54,8 +54,8 @@ public class GuiHandle {
         return guiRobot.lookup(query).query();
     }
 
-    protected String getTextFieldText(String filedName) {
-        TextField textField = getNode(filedName);
+    protected String getTextFieldText(String fieldName) {
+        TextField textField = getNode(fieldName);
         return textField.getText();
     }
 

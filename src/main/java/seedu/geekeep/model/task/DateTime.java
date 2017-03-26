@@ -16,15 +16,15 @@ public class DateTime {
     public static final String DATETIME_VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{2}\\s{1}\\d{4}";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yy HHmm");
 
+    public final LocalDateTime dateTime;
+    public final String value;
+
     /**
      *  Validates given dateTime.
      */
     public static boolean isValidDateTime(String test) {
         return test.matches(DATETIME_VALIDATION_REGEX);
     }
-
-    public final LocalDateTime dateTime;
-    public final String value;
 
     public DateTime(String dateTimeString) throws IllegalValueException {
         if (!isValidDateTime(dateTimeString)) {

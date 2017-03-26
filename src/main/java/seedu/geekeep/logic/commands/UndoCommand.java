@@ -4,7 +4,7 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.Model.NothingToUndoException;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all tasks in GeeKeep to the user.
  */
 public class UndoCommand extends Command {
 
