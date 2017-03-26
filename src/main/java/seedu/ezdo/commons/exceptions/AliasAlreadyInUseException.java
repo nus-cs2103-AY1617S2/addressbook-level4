@@ -1,6 +1,6 @@
 package seedu.ezdo.commons.exceptions;
 
 /**
- * Signals that some given data does not fulfill some constraints.
+ * Signals that the alias is already in use by an existing command.
  */
 public class AliasAlreadyInUseException extends Exception {}

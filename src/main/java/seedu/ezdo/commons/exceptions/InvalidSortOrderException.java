@@ -1,6 +1,6 @@
 package seedu.ezdo.commons.exceptions;
 
 /**
- * Signals that some given data does not fulfill some constraints.
+ * Signals that the sort order is not recognised and is invalid.
  */
 public class InvalidSortOrderException extends Exception {}
