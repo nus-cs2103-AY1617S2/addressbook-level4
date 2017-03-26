@@ -26,26 +26,9 @@ up doTASK, as well as guide you on how to use it to make you more efficient in p
 3. Copy the file to the folder you want to use as the home folder for your doTASK.
 
 4. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
-> <img src="images/startup_screen.jpg" width="600">
+> <img src="images/startup.png" width="600">
 
-5. Get started by adding your first task that you have in mind! Refer to **3. Features** for further instructions. <br>
-> <img src="images/add_screen.jpg" width="600">
-
-6. After step 5, you can view your task in 3 different tabs. <br>
-
- **Today/Date**
- > Shows you the list of tasks you have for the specified date. By default, it will show the tasks for today. Press __Ctrl+Left Arrow__ or __Ctrl+Right Arrow__ to navigate between the dates.
-   > <img src="images/today_screen.jpg" width="600">
-   >
-
- **Overview**
- > Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Hold the __Down Arrow key__ to navigate between the dates.
-   > <img src="images/overview_screen.jpg" width="600">
-
- **Priority**
- > Shows you 4 options of priority tabs, from highest to lowest, which are indicated by different colours. Selecting the tab allows you to view the list of tasks that is under that priority.<br>
-   > Eg. By using `switch` feature, you can select the _Highest Priority_ tab. It will bring you to the list of tasks that you have in that tab.<br>
-   > <img src="images/priority_screen.jpg" width="600">
+5. Get started by adding your first task that you have in mind! Refer to **3. Features** for further instructions.<br>
 
 ## 3. Features
 
