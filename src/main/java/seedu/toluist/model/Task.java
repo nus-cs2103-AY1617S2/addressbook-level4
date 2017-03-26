@@ -383,7 +383,7 @@ public class Task implements Comparable<Task> {
         if (endDateTime == null) {
             return LocalDateTime.now().isBefore(recurringEndDateTime);
         }
-        return endDateTime.isBefore(recurringEndDateTime);
+        return getNextRecurringDateTime(endDateTime).isBefore(recurringEndDateTime);
     }
 
     /**
