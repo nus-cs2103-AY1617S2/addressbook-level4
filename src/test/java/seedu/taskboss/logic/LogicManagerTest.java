@@ -235,8 +235,14 @@ public class LogicManagerTest {
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name sd/today to next week ed/tomorrow i/valid, information",
                 DateTimeParser.getMultipleDatesError());
-        assertCommandFailure("add n/Valid Name sd/invalid date ed/tomorroq i/valid, information",
+        assertCommandFailure("add n/Valid Name sd/invalid date ed/tomorrow i/valid, information",
                 DateTime.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add n/Valid Name sd/today ed/invalid i/valid, information",
+                DateTime.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add n/Valid Name sd/tomorrow ed/next friday i/valid info r/invalid recurrence",
+                Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
+        assertCommandFailure("add n/Valid Name r/weekly monthly",
+                Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
     }
 
     @Test
@@ -251,7 +257,6 @@ public class LogicManagerTest {
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB, expectedAB.getTaskList());
-
     }
 
     @Test

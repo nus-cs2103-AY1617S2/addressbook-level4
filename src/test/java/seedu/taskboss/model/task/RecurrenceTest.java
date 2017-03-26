@@ -156,7 +156,7 @@ public class RecurrenceTest {
     private Task initSampleTask() throws DuplicateCategoryException,
         IllegalArgumentException, IllegalValueException {
         return new Task(new Name("Attending wedding"), new PriorityLevel("Yes"),
-                new DateTime("Feb 18, 2017 5pm"),
+                new DateTime("Feb 18, 2017"),
                 new DateTime("Mar 28, 2017 5pm"),
                 new Information("123, Jurong West Ave 6, #08-111"),
                 new Recurrence(Frequency.NONE),
