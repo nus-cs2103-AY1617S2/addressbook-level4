@@ -4,49 +4,32 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
-
------
-
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Teo Tian Song](http://github.com/ephyra)
+<img src="images/ephyra.jpeg" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+Responsibilities: Code Quality + Eclipse expert + Model
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Mustaqiim Muhar](http://github.com/mustaqiimuhar)
+<img src="images/mustaqiimuhar.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: Testing + Storage + Documentation
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Jeremy Heng](http://github.com/nnamon)
+<img src="images/nnamon.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+Responsibilities:  Integration + Git expert + Parser & Logic
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
+#### [Shawn Lin](https://github.com/e0003823)
+<img src="images/e0003823.jpeg" width="150">
+
+Role: Developer
+
+Responsibilities: Team Lead + Deadlines, Deliverables (admin stuff)  + UI
 
  -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)

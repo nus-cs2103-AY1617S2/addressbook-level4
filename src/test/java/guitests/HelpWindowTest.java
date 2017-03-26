@@ -21,9 +21,6 @@ public class HelpWindowTest extends AddressBookGuiTest {
         personListPanel.clickOnListView();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        browserPanel.clickOnWebView();
-        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
-
         //use menu button
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
 
