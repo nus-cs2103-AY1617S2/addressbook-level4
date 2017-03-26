@@ -29,12 +29,12 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
         return readAddressBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readTaskManager()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */

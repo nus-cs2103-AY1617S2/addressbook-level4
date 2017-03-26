@@ -82,7 +82,7 @@ public class XmlAddressBookStorageTest {
         //Save and read without specifying file path
         original.addTask(new Task(td.task9));
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        readBack = xmlAddressBookStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
 
     }

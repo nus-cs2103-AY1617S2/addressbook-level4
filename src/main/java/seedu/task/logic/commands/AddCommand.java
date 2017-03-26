@@ -22,13 +22,13 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Task Manager. "
             + "Parameters: TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " Walk the dog d/07032017 p/1 i/Also makes sure he shits t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the Task Manager";
 
     private final Task toAdd;
 

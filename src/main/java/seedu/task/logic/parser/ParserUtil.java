@@ -67,7 +67,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> taskName} into an {@code Optional<TaskName>} if {@code taskName} is present.
      */
     public static Optional<TaskName> parseTaskName(Optional<String> name) throws IllegalValueException {
         assert name != null;
@@ -75,7 +75,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
      */
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;
@@ -83,7 +83,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> information} into an {@code Optional<Information>}
+     * if {@code information} is present.
      */
     // Keep, just rename
     public static Optional<Information> parseInfo(Optional<String> information) throws IllegalValueException {
@@ -92,7 +93,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> priorityLevel} into an {@code Optional<PriorityLevel>}
+     * if {@code priorityLevel} is present.
      */
     // Convert to ANY_INFO
     public static Optional<PriorityLevel> parsePriorityLevel(Optional<String> priorityLevel)
