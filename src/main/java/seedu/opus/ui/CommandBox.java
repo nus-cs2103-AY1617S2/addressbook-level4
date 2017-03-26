@@ -118,8 +118,8 @@ public class CommandBox extends UiPart<Region> {
      */
     private static class AutocompleteTrie extends Trie {
 
-        private static final String[] COMMANDS = { "add", "delete", "edit", "mark", "unmark", "schedule", "list", "help",
-            "find", "undo", "redo", "clear" };
+        private static final String[] COMMANDS = { "add", "delete", "edit", "mark", "unmark", "schedule", "list",
+            "help", "find", "undo", "redo", "clear" };
 
         private void init() {
             for (String command : COMMANDS) {
