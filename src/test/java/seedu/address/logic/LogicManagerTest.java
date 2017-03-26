@@ -303,6 +303,7 @@ public class LogicManagerTest {
                 expectedAB, expectedAB.getTaskList());
     }
 
+    // @@author A0093999Y
     @Test
     public void execute_done_invalidArgsFormat() {
         String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
@@ -392,6 +393,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
     }
 
+    // @@author
     @Test
     public void execute_find_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
@@ -470,6 +472,7 @@ public class LogicManagerTest {
                 expectedAB, expectedList);
     }
 
+    // @@author A0093999Y
     @Test
     public void execute_renametag_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE);
@@ -565,7 +568,7 @@ public class LogicManagerTest {
     }
 
     // SaveToCommand Tests
-
+    // @@author
     @Test
     public void execute_saveTo_canonicalSameDirectory() throws Exception {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);

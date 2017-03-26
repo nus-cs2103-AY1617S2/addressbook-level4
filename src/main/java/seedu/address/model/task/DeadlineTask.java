@@ -7,6 +7,10 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 
+/**
+ * Represents a Task in the task manager with deadline only. not null, field
+ * values are validated.
+ */
 public class DeadlineTask extends Task {
     static final String MESSAGE_DATETIME_CONSTRAINTS = "Deadline should be after starting time.";
 
@@ -50,6 +54,7 @@ public class DeadlineTask extends Task {
         return manualToday || fmt.format(this.deadline.getDate()).equals(fmt.format(new Date()));
     }
 
+    // @@author A0093999Y
     @Override
     public String getTaskAbsoluteDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

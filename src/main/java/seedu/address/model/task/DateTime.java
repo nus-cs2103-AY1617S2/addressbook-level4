@@ -66,6 +66,7 @@ public class DateTime implements Comparable<DateTime> {
         return duration.format(this.dateTime.calculatePreciseDuration(date));
     }
 
+    // @@author A0093999Y
     /**
      * Check if same day
      *

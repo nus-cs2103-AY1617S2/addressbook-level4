@@ -342,6 +342,7 @@ public class ModelManager extends ComponentManager implements Model {
         return indexMap.containsKey(uiIndex);
     }
 
+    // @@author A0093999Y
     public Predicate<ReadOnlyTask> isDueOnThisDate(Date date) {
         assert date != null : "no date provided for a deadline search";
         return t -> {

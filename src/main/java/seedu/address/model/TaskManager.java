@@ -155,6 +155,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
+    // @@author A0093999Y
     /**
      * After a tag is no longer found is in any task, ensure that it is removed
      * from the master tag list {@link #tags} - points to a Tag object in the
@@ -173,6 +174,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
+    // @@author
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             refreshMasterTagList();

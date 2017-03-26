@@ -7,6 +7,10 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 
+/**
+ * Represents a Task in the task manager with deadline and starting time, also
+ * known as an event. not null, field values are validated.
+ */
 public class EventTask extends Task {
     static final String MESSAGE_DATETIME_CONSTRAINTS = "Deadline should be after starting time.";
 
@@ -62,6 +66,7 @@ public class EventTask extends Task {
         return "Begin: " + startingTime.toString() + "; Due: " + deadline.toString();
     }
 
+    // @@author A0093999Y
     @Override
     public boolean isToday() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");

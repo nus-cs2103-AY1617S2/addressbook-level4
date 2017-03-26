@@ -42,6 +42,7 @@ public abstract class Task implements ReadOnlyTask {
         this(source.getName(), source.getTags(), source.isDone(), source.isManualToday());
     }
 
+    // @@author A0093999Y
     /**
      * Selecting the Task to construct based on what dates is available
      */
@@ -66,6 +67,7 @@ public abstract class Task implements ReadOnlyTask {
                 readOnlyTask.getStartingTime(), readOnlyTask.isDone(), readOnlyTask.isManualToday());
     }
 
+    // @@author
     @Override
     public Name getName() {
         return name;

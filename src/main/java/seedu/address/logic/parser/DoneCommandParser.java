@@ -6,14 +6,15 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 
+//@@author A0093999Y
 /**
  * Parses input arguments and creates a new DoneCommand object
  */
 public class DoneCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DoneCommand
-     * and returns an DoneCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * DoneCommand and returns an DoneCommand object for execution.
      */
     public Command parse(String args, Logic logic) {
         // TODO allow multiple index

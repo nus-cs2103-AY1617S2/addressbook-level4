@@ -48,6 +48,7 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
      */
     UniqueTagList getTags();
 
+    // @@author A0093999Y
     /**
      * Returns true if both have the same state. (interfaces cannot override
      * .equals)

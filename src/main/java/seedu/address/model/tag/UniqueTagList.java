@@ -138,6 +138,7 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.add(toAdd);
     }
 
+    // @@author A0093999Y
     /**
      * Clears all the tag in the list.
      */
@@ -145,6 +146,7 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.clear();
     }
 
+    // @@author
     @Override
     public Iterator<Tag> iterator() {
         return internalList.iterator();
