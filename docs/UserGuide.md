@@ -8,17 +8,17 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)
-> 3.1. [Viewing Help](#31-viewing-help--help)
-> 3.2. [Adding a task](#32-adding-a-task--add)
-> 3.3. [Listing the tasks](#33-listing-the-tasks-list)
-> 3.4. [Editing a task](#34-editing-an-existing-task-edit)
-> 3.5. [Deleting a task](#35-deleting-a-task-delete)
-> 3.6. [Completing a task](#36-completing-a-task-complete)
-> 3.7. [Uncompleting a task](#37-uncompleting-a-task-uncomplete)
-> 3.8. [Search for tasks](#38-searching-for-tasks-find)
-> 3.9. [Undo previous action](#39-undo-ing-previous-action--undo)
-> 3.10. [Redo previous action](#310-redo-ing-previous-action--redo)
-> 3.11. [Saving the task manager](#312-saving-the-tasks)
+> 3.1. [Viewing Help](#31-viewing-help--help)<br>
+> 3.2. [Adding a task](#32-adding-a-task--add)<br>
+> 3.3. [Listing the tasks](#33-listing-the-tasks-list)<br>
+> 3.4. [Editing a task](#34-editing-an-existing-task-edit)<br>
+> 3.5. [Deleting a task](#35-deleting-a-task-delete)<br>
+> 3.6. [Completing a task](#36-completing-a-task-complete)<br>
+> 3.7. [Uncompleting a task](#37-uncompleting-a-task-uncomplete)<br>
+> 3.8. [Search for tasks](#38-searching-for-tasks-find)<br>
+> 3.9. [Undo previous action](#39-undo-ing-previous-action--undo)<br>
+> 3.10. [Redo previous action](#310-redo-ing-previous-action--redo)<br>
+> 3.11. [Saving the task manager](#312-saving-the-tasks)<br>
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
