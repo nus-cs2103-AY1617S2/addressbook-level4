@@ -118,7 +118,7 @@ public class UniqueTaskList implements Iterable<Task> {
             FXCollections.sort(internalList, new StatusComparator());
             break;
         default:
-            throw new AssertionError();
+            break;
         }
         return new UnmodifiableObservableList<>(internalList);
     }
