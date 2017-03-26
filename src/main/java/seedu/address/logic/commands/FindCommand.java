@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     public FindCommand(Set<String> keywords) {
         this.keywords = keywords;
     }
-    
+
     //@@author A0163720M
     /**
      * Creates a FindCommand with tags as parameters
@@ -40,12 +40,12 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if (!tags.isEmpty()) {
+        if (this.tags != null) {
             model.updateFilteredTodoList(tags);
         } else {
             model.updateFilteredTodoList(keywords);
         }
-        
+
         return new CommandResult(getMessageForTodoListShownSummary(model.getFilteredTodoList().size()));
     }
 }

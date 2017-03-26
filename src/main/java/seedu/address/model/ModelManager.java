@@ -136,7 +136,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTodoList(Set<String> keywords) {
         updateFilteredTodoList(new PredicateExpression(new NameQualifier(keywords)));
     }
-    
+
     @Override
     public void updateFilteredTodoList(UniqueTagList tags) {
         updateFilteredTodoList(new PredicateExpression(new NameQualifier(tags)));
@@ -180,26 +180,37 @@ public class ModelManager extends ComponentManager implements Model {
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private Set<Tag> tagKeyWords;
-        
+
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-        
+
         NameQualifier(UniqueTagList tags) {
             this.tagKeyWords = tags.toSet();
         }
-        
+
         @Override
         public boolean run(ReadOnlyTodo todo) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(todo.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+            if (nameKeyWords != null) {
+                return nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(todo.getName().fullName, keyword))
+                        .findAny()
+                        .isPresent();
+            } else {
+                return tagKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(todo.getTags().toString(), keyword))
+                        .findAny()
+                        .isPresent();
+            }
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            if (!tagKeyWords.isEmpty()) {
+                return "tag=" + String.join(", ", tagKeyWords.toString());
+            } else {
+                return "name=" + String.join(", ", nameKeyWords);
+            }
         }
     }
 
