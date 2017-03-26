@@ -15,6 +15,7 @@ import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
+import seedu.doist.model.task.TaskDate;
 
 //@@author A0140887W
 /**
@@ -58,8 +59,8 @@ public class XmlAdaptedTask {
         desc = source.getDescription().desc;
         priority = source.getPriority().getPriorityLevel().toString();
         finishedStatus = Boolean.toString(source.getFinishedStatus().getIsFinished());
-        startDate = getDateString(source.getStartDate());
-        endDate = getDateString(source.getEndDate());
+        startDate = getDateString(source.getDates().getStartDate());
+        endDate = getDateString(source.getDates().getEndDate());
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -93,7 +94,7 @@ public class XmlAdaptedTask {
         final Date endDate = getDate(this.endDate);
         final UniqueTagList tags = new UniqueTagList(personTags);
 
-        return new Task(name, priority, finishedStatus, startDate, endDate, tags);
+        return new Task(name, priority, finishedStatus, new TaskDate(startDate, endDate), tags);
     }
 
     private Date getDate(String dateString) {

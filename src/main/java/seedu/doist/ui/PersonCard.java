@@ -34,15 +34,15 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         priority.setText(task.getPriority().toString());
         isFinished.setText("finished: " + task.getFinishedStatus().toString());
-        if (task.getStartDate() == null) {
+        if (task.getDates().getStartDate() == null) {
             startTime.setText("No start time");
         } else {
-            startTime.setText(task.getStartDate().toString());
+            startTime.setText(task.getDates().getStartDate().toString());
         }
-        if (task.getEndDate() == null) {
+        if (task.getDates().getEndDate() == null) {
             endTime.setText("No end time");
         } else {
-            endTime.setText(task.getEndDate().toString());
+            endTime.setText(task.getDates().getEndDate().toString());
         }
         initTags(task);
     }
