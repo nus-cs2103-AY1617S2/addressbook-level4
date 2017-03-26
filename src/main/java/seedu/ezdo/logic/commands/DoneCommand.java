@@ -7,7 +7,6 @@ import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
-import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Marks a task as identified using its last displayed index from ezDo as done
@@ -65,11 +64,7 @@ public class DoneCommand extends Command {
             tasksToDone.add(taskToDone);
         }
 
-        try {
-            model.doneTasks(tasksToDone);
-        } catch (TaskNotFoundException tnfe) {
-            assert false : "The target task cannot be missing";
-        }
+        model.doneTasks(tasksToDone);
 
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
     }

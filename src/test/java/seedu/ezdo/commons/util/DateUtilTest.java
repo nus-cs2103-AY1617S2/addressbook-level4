@@ -1,14 +1,42 @@
 package seedu.ezdo.commons.util;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import seedu.ezdo.testutil.TaskBuilder;
 import seedu.ezdo.testutil.TestTask;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({DateUtil.class, SimpleDateFormat.class})
 public class DateUtilTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void dateFormat_parseException() throws Exception {
+        thrown.expect(AssertionError.class);
+        SimpleDateFormat mock = mock(SimpleDateFormat.class);
+        PowerMockito.whenNew(SimpleDateFormat.class).
+        withAnyArguments().thenReturn(mock);
+        String dateString1 = "omg";
+        String dateString2 = "asdf";
+        when(mock.parse(dateString1)).thenThrow(new ParseException("parse exception", 1));
+        DateUtil.compareDateStrings(dateString1, dateString2);
+    }
+
     @Test
     public void noStartDate_pass() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3").withStartDate("")

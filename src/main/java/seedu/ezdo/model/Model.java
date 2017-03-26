@@ -40,7 +40,7 @@ public interface Model {
 
     /** Marks a task as done.
      * @throws TaskNotFoundException */
-    void doneTasks(ArrayList<Task> tasksToDone) throws TaskNotFoundException;
+    void doneTasks(ArrayList<Task> tasksToDone);
 
     /** Undo the previous undoable command
      * @throws EmptyStackException */

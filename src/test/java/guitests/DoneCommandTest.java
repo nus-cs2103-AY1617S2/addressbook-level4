@@ -16,7 +16,6 @@ import seedu.ezdo.testutil.TestTask;
 import seedu.ezdo.testutil.TestUtil;
 
 public class DoneCommandTest extends EzDoGuiTest {
-
     @Test
     public void done_success() {
         //marks first task in the list as done

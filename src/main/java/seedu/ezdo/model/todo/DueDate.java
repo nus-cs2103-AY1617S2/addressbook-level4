@@ -1,6 +1,5 @@
 package seedu.ezdo.model.todo;
 
-
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 
@@ -36,5 +35,4 @@ public class DueDate extends TaskDate {
             throw new IllegalValueException(MESSAGE_FIND_DATE_CONSTRAINTS);
         }
     }
-
 }
