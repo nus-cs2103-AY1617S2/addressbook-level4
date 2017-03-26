@@ -30,4 +30,8 @@ public class IsDone {
 	public void markDone() {
 		this.value = ISDONE_DONE;
 	}
+
+	public void markUndone() {
+		this.value = ISDONE_NOTDONE;
+	}
 }
