@@ -206,7 +206,7 @@ Reverses previous `undo` that you've made.<br>
 Format : `redo`
 > Any previous `undo` will be reversed, in successive order.
 
-### 3.12. Saving the task manager
+### 3.11. Saving the task manager
 
 Upon creation of tasks, the tasks will be automatically saved in the folder where the program is stored in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
