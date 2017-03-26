@@ -308,24 +308,22 @@ Priority | As a ... | I want to ... | So that I can...
 `* *`   | user | be notified if two tasks have a time conflict | be aware of schedule conflicts
 `* *`   | user | can use multiple devices | have more opportunity to check task manager
 `* *`   | user | can undo last command | to fix mistakes.
-`*`     | user | drag and drop events from UI | change event times easier
-`*`     | user | copy and paste events from UI | add events quicker
-`*`     | user | can send copy of task manager | share my schedule easily
-`*`     | user | can have a shared group calendar | to coordinate with team members
+`*`     | user | send copy of task manager | share my schedule easily
+`*`     | user | have a shared group calendar | to coordinate with team members
+`*`     | user | google | search things all in one window
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Fast Task` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Add a new task
 
 **MSS**
 
-1. User requests to add a task
-2. Task manager shows dialouge box for users to enter task details.
-3. Task shows up in list.<br>
+1. User requests to add a task in the command line. 
+2. Task shows up in list.<br>
 Use case ends.
 
 **Extensions**
@@ -334,24 +332,18 @@ Use case ends.
 
 > 3a1. Task manager shows an error message <br>
   Use case resumes at step 2
-  
-3b. The task name is empty.
-
-> 3b1. Task manager shows an error message <br>
-  Use case resumes at step 2  
 
 #### Use case: Search for existing task
 
 **MSS**
 
-1. User requests to search for a task
-2. Task manager shows dialogue box for users to enter search parameters.
-3. Task shows up in list.<br>
+1. User requests to search for a task in the command line with search parameters.
+2. Requested task shows up in list.<br>
 Use case ends.
 
 **Extensions**
 
-3a. The tasks is not in list
+3a. The task is not in list
 
 > 3a1. Task manager shows an error message <br>
   Use case resumes at step 2
@@ -365,9 +357,8 @@ Use case ends.
 
 **MSS**
 
-1. User requests to edit an existing task
-2. Task manager shows dialouge box for users to enter task details.
-3. Task gets updated and shows up in list.<br>
+1. User requests to edit an existing task in the command line with edit details.
+3. Task is updated and shows up in list.<br>
 Use case ends.
 
 **Extensions**
@@ -387,9 +378,9 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks
-2. Task manager shows a list of tasks.
+2. System shows a list of tasks.
 3. User requests to delete a specific task in the list
-4. Task manager deletes the task <br>
+4. System deletes the task <br>
 Use case ends.
 
 **Extensions**
