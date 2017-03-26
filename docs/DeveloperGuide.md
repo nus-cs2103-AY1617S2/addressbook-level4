@@ -559,7 +559,7 @@ Use case ends.
 
 #### Use case 9 : Clear all the tasks
 
-**MSS** 
+**MSS**
 
 1. User requests to clear all the tasks
 2. doTASK clears the list of tasks
@@ -604,9 +604,9 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Trello**
 
-Author: Trello
+Author: Dylan
 
 Pros:
 
@@ -620,3 +620,21 @@ Cons:
 * No calendar
 * No progress chart to indicate the amount of tasks completed
 
+
+**Wunderlist**
+
+Author: Ian
+
+Pros:
+
+* Pleasant, detailed GUI
+* Adding a task is quick, and allows for adding a flexible deadline
+* Allows tasks to have extra details and information
+* Organises everything into different lists
+* Marking a task as completed is met with a satisfying jingle
+* Reminders are present
+
+Cons:
+
+* No tutorial for new users
+* Many features are locked behind a paywall
