@@ -18,7 +18,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 > 3.8. [Searching for tasks](#38-searching-for-tasks-find)<br>
 > 3.9. [Undo-ing previous action](#39-undo-ing-previous-action--undo)<br>
 > 3.10. [Redo-ing previous action](#310-redo-ing-previous-action--redo)<br>
-> 3.11. [Saving the task manager](#312-saving-the-tasks)<br>
+> 3.11. [Saving the task manager](#312-saving-the-task-manager)<br>
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
