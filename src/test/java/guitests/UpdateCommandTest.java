@@ -23,7 +23,8 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
     public TestTask updatedTask;
-    
+
+    // @@author A0141102H
     @Test
     public void update_allFieldsSpecified_success() throws Exception {
         String detailsToUpdate = "take a snack break ON thursday 1500 TO 1600";

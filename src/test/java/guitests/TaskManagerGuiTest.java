@@ -34,6 +34,7 @@ import seedu.taskmanager.testutil.TypicalTestTasks;
  */
 public abstract class TaskManagerGuiTest {
 
+    // @@author A0141102H
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
     public TestName name = new TestName();

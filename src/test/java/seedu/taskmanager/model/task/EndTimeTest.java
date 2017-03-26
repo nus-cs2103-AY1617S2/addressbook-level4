@@ -9,6 +9,7 @@ import seedu.taskmanager.model.task.EndTime;
 
 public class EndTimeTest {
 
+    // @@author A0141102H
     @Test
     public void isValidEndTime() {
         // invalid phone numbers

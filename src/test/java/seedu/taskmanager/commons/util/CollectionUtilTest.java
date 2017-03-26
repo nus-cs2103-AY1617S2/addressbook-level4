@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CollectionUtilTest {
+
+    // @@author A0141102H
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

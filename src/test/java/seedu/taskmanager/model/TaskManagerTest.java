@@ -23,6 +23,7 @@ import seedu.taskmanager.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
 
+    // @@author A0141102H
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

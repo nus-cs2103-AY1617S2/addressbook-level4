@@ -20,6 +20,7 @@ public class ConfigUtilTest {
 
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/ConfigUtilTest/");
 
+    // @@author A0141102H
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
