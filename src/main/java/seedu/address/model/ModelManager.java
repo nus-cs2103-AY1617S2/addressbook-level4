@@ -216,6 +216,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public int getDisplayedIndex(ReadOnlyTask task) {
+        int index = -1;
+        if (task.isFloating()) {
+            index = this.floatingTasks.indexOf(task);
+        } else {
+            index = this.nonFloatingTasks.indexOf(task);
+        }
+        if (task.isCompleted()) {
+            index = this.completedTasks.indexOf(task);
+        }
+        return index;
+    }
+
+    @Override
     public void updateTask(String targetList, int taskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;

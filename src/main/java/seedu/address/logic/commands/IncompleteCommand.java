@@ -61,6 +61,7 @@ public class IncompleteCommand extends Command {
         editedTask.setAsIncompleted();
         try {
             model.updateTask(Task.TASK_NAME_COMPLETED, filteredTaskListIndex, editedTask);
+            highlight(editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
