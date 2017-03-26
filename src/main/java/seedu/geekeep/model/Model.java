@@ -51,7 +51,7 @@ public interface Model {
     void updateFilteredTaskListToShowUndone();
 
     /**
-     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * Updates the task located at {@code filteredTaskListIndex} with {@code updatedTask}.
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be equivalent to another existing task in the
@@ -61,7 +61,7 @@ public interface Model {
      * @throws IndexOutOfBoundsException
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask updatedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
 
     /** Mark the specified task as done */

@@ -15,17 +15,17 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.logic.commands.Command;
 import seedu.geekeep.logic.commands.IncorrectCommand;
 import seedu.geekeep.logic.commands.UpdateCommand;
-import seedu.geekeep.logic.commands.UpdateCommand.EditTaskDescriptor;
+import seedu.geekeep.logic.commands.UpdateCommand.UpdateTaskDescriptor;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new UpdateCommand object
  */
 public class UpdateCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UpdateCommand
+     * and returns an UpdateCommand object for execution.
      */
     public Command parse(String args) {
         assert args != null;
@@ -39,24 +39,24 @@ public class UpdateCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
         }
 
-        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+        UpdateTaskDescriptor updateTaskDescriptor = new UpdateTaskDescriptor();
         try {
-            editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
-            editTaskDescriptor.setEndDateTime(
+            updateTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
+            updateTaskDescriptor.setEndDateTime(
                     ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_ENDING_DATETIME)));
-            editTaskDescriptor.setStartDateTime(
+            updateTaskDescriptor.setStartDateTime(
                     ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_STARTING_DATETIME)));
-            editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            updateTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+            updateTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
-            return new IncorrectCommand(UpdateCommand.MESSAGE_NOT_EDITED);
+        if (!updateTaskDescriptor.isAnyFieldEdited()) {
+            return new IncorrectCommand(UpdateCommand.MESSAGE_NOT_UPDATED);
         }
 
-        return new UpdateCommand(index.get(), editTaskDescriptor);
+        return new UpdateCommand(index.get(), updateTaskDescriptor);
     }
 
     /**
