@@ -46,6 +46,24 @@ public class CommandBoxHandle extends GuiHandle {
 
     public void pressDownKey() {
         guiRobot.push(KeyCode.DOWN).sleep(500);
+	}
+
+    /**
+     * Enters the given input, and autocompletes it by pressing tab for multiple times.
+     *
+     * @param input: input to autocomplete
+     * @param times: to press the tab key
+     */
+    public void autocompleteInput(String input, int times) {
+        // This clears the previous autocomplete suggestions. This mocks an actual user typing out the commands rather
+        // than just setting the text field to be a certain value.
+        pressBackspace();
+
+        enterCommand(input);
+        for (int i = 0; i < times; i++) {
+            pressTab();
+        }
+        guiRobot.sleep(200);
     }
 
     public HelpWindowHandle runHelpCommand() {
