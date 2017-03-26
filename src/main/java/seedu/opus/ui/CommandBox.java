@@ -71,16 +71,31 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Handles cursor key inputs to browse previous user input history text field
+     * Catch cursor key inputs from user to browse previous user input history
      */
     private void registerCursorKeyEventFilter() {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode().equals(KeyCode.UP)) {
-                commandTextField.setText(history.getPreviousUserInput().orElse(EMPTY_STRING));
-            } else if (event.getCode().equals(KeyCode.DOWN)) {
-                commandTextField.setText(history.getPrecedingUserInput().orElse(EMPTY_STRING));
-            }
-            commandTextField.selectEnd();
+            handleCursorKeyEvent(event);
         });
+    }
+
+    private void handleCursorKeyEvent(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.UP)) {
+            browseToPreviousCommand();
+        } else if (event.getCode().equals(KeyCode.DOWN)) {
+            browseToPrecedingCommand();
+        }
+    }
+
+    private void browseToPreviousCommand() {
+        String input  = history.getPreviousUserInput().orElse(EMPTY_STRING);
+        commandTextField.setText(input);
+        commandTextField.positionCaret(input.length());
+    }
+
+    private void browseToPrecedingCommand() {
+        String input  = history.getPrecedingUserInput().orElse(EMPTY_STRING);
+        commandTextField.setText(input);
+        commandTextField.positionCaret(input.length());
     }
 }
