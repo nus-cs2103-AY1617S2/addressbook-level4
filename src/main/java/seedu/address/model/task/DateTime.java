@@ -40,10 +40,10 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * @return a Calendar object referenced by this instance
+     * @return a copy of Date object referenced by this instance
      */
     public Date getDate() {
-        return this.dateTime.getReference();
+        return new Date(dateTime.getReference().getTime());
     }
 
     /**

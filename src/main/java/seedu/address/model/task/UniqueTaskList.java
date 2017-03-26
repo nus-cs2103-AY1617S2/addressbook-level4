@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.ReadOnlyTask.TaskType;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
@@ -57,21 +56,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, Task editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
-        }
-        if (editedTask.getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
-                || editedTask.getTaskType() == TaskType.TaskWithOnlyDeadline) {
-            try {
-                taskToUpdate = new EventTask(editedTask);
-            } catch (IllegalValueException e) {
-            }
-        } else {
-            taskToUpdate = new FloatingTask(editedTask);
         }
 
         // TODO: The code below is just a workaround to notify observers of the
@@ -80,7 +70,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // class.
         // Then, TaskCard should then bind its text labels to those observable
         // properties.
-        internalList.set(index, taskToUpdate);
+        internalList.set(index, editedTask);
     }
 
     /**
@@ -102,24 +92,9 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
-        Task toAdd = null;
+    public void setTasks(List<? extends Task> tasks) throws IllegalValueException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyTask task : tasks) {
-            switch (task.getTaskType()) {
-            case TaskWithNoDeadline:
-                toAdd = new FloatingTask(task);
-                break;
-            case TaskWithOnlyDeadline:
-                toAdd = new EventTask(task);
-                break;
-            case TaskWithDeadlineAndStartingTime:
-                toAdd = new EventTask(task);
-                break;
-            default:
-                throw new IllegalValueException("No valid task type provided");
-            }
-
+        for (final Task task : tasks) {
             replacement.add(task);
         }
         setTasks(replacement);

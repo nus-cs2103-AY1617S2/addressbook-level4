@@ -8,10 +8,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -40,7 +41,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new FloatingTask(new Name(name), new UniqueTagList(tagSet), false);
+        this.toAdd = new FloatingTask(new Name(name), new UniqueTagList(tagSet), false, false);
     }
 
     /**
@@ -55,7 +56,7 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName.trim()));
         }
         System.out.print("deadline: " + deadline);
-        this.toAdd = new EventTask(new Name(name), new UniqueTagList(tagSet), deadline, null, false);
+        this.toAdd = new DeadlineTask(new Name(name), new UniqueTagList(tagSet), deadline, false, false);
     }
 
     /**
@@ -69,7 +70,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new EventTask(new Name(name), new UniqueTagList(tagSet), deadline, startingTime, false);
+        this.toAdd = new EventTask(new Name(name), new UniqueTagList(tagSet), deadline, startingTime, false, false);
     }
 
     @Override

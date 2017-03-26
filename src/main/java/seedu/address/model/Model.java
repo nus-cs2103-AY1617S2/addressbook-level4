@@ -50,7 +50,7 @@ public interface Model {
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the
      *             filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
+    void updateTask(int filteredTaskListIndex, Task editedTask) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Returns the filtered task list as an

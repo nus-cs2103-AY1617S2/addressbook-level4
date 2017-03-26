@@ -27,16 +27,19 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     // Returns id field reserved for UI to store temporary index
     String getID();
 
+    // Set id field reserved for UI to store temporary index
+    void setID(String id);
+
     // Returns a natural relative representation of a datetime
     String getTaskDateTime();
 
     // Returns a natural absolute representation of a datetime
     String getTaskAbsoluteDateTime();
 
-    // Returns Deadline of Task
+    // Returns copy of Deadline of Task
     Optional<DateTime> getDeadline();
 
-    // Returns Starting Time of Task
+    // Returns copy of Starting Time of Task
     Optional<DateTime> getStartingTime();
 
     /**
@@ -66,6 +69,9 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         return builder.toString();
     }
 
+    /**
+     * Used for sorting tasks in lists
+     */
     @Override
     public default int compareTo(ReadOnlyTask other) {
         DateTime minDateTime = new DateTime(new Date(Long.MIN_VALUE));

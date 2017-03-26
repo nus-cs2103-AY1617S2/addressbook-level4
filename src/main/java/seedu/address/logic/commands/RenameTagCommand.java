@@ -19,10 +19,8 @@ public class RenameTagCommand extends Command {
 
     public static final String COMMAND_WORD = "renametag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Renames an existing tag in the task manager "
-            + "Parameters: <tag_name> <new_tag_name>\n" + "Example: "
-            + COMMAND_WORD + " parttime fulltime";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames an existing tag in the task manager "
+            + "Parameters: <tag_name> <new_tag_name>\n" + "Example: " + COMMAND_WORD + " parttime fulltime";
 
     public static final String MESSAGE_RENAME_TAG_SUCCESS = "Renamed Tag: %1$s to %2$s";
 
@@ -35,8 +33,7 @@ public class RenameTagCommand extends Command {
      * @param newTagName
      *            is the name of the replacement tag
      */
-    public RenameTagCommand(String oldTagName, String newTagName)
-            throws IllegalValueException {
+    public RenameTagCommand(String oldTagName, String newTagName) throws IllegalValueException {
         assert oldTagName != null;
         assert newTagName != null;
 
@@ -64,21 +61,21 @@ public class RenameTagCommand extends Command {
             }
 
             if (containsOldTag) {
-                // TODO: Change Task constructor to TaskWithoutDeadline() or
-                // TaskWithDeadline() based on task type
-                Task newTask = new Task(taskToEdit.getName(),
-                        new UniqueTagList(newTagList), taskToEdit.isDone());
                 try {
+                    Task newTask = Task.createTask(taskToEdit.getName(), new UniqueTagList(newTagList),
+                            taskToEdit.getDeadline(), taskToEdit.getStartingTime(), taskToEdit.isDone(),
+                            taskToEdit.isManualToday());
                     model.updateTask(index, newTask);
                 } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                    throw new CommandException(
-                            EditCommand.MESSAGE_DUPLICATE_PERSON);
+                    throw new CommandException(EditCommand.MESSAGE_DUPLICATE_PERSON);
+                } catch (IllegalValueException e) {
+                    // Should not happen
+                    throw new CommandException(e.getMessage());
                 }
 
             }
         }
 
-        return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS,
-                oldTag.getTagName(), newTag.getTagName()));
+        return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, oldTag.getTagName(), newTag.getTagName()));
     }
 }

@@ -58,7 +58,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public Optional<DateTime> getDeadline() {
-        return Optional.of(deadline);
+        return Optional.of(new DateTime(deadline.getDate()));
     }
 
     @Override

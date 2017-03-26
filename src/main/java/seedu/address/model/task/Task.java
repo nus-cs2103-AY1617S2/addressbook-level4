@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -10,7 +11,9 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Task in the task manager. not null, field values are validated.
  */
 public abstract class Task implements ReadOnlyTask {
-    public static final int MAX_TIME_DIFF = 2 ^ 32 - 1;
+
+    public static final String ONLY_STARTING_DATE_AVAILABLE_ERROR = "Task should not contain"
+            + " a starting time without a deadline";
 
     private Name name;
     private String id;
@@ -37,6 +40,30 @@ public abstract class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getTags(), source.isDone(), source.isManualToday());
+    }
+
+    /**
+     * Selecting the Task to construct based on what dates is available
+     */
+    public static Task createTask(Name name, UniqueTagList tags, Optional<DateTime> deadline,
+            Optional<DateTime> startingTime, boolean done, boolean manualToday) throws IllegalValueException {
+        if (!deadline.isPresent() && !startingTime.isPresent()) {
+            return new FloatingTask(name, tags, done, manualToday);
+        } else if (deadline.isPresent() && !startingTime.isPresent()) {
+            return new DeadlineTask(name, tags, deadline.get().getDate(), done, manualToday);
+        } else if (deadline.isPresent() && startingTime.isPresent()) {
+            return new EventTask(name, tags, deadline.get().getDate(), startingTime.get().getDate(), done, manualToday);
+        } else {
+            throw new IllegalValueException(ONLY_STARTING_DATE_AVAILABLE_ERROR);
+        }
+    }
+
+    /**
+     * Selecting the Task to construct from a ReadOnlyTask
+     */
+    public static Task createTask(ReadOnlyTask readOnlyTask) throws IllegalValueException {
+        return createTask(readOnlyTask.getName(), readOnlyTask.getTags(), readOnlyTask.getDeadline(),
+                readOnlyTask.getStartingTime(), readOnlyTask.isDone(), readOnlyTask.isManualToday());
     }
 
     @Override
@@ -112,6 +139,7 @@ public abstract class Task implements ReadOnlyTask {
         return this.id;
     }
 
+    @Override
     public void setID(String id) {
         this.id = id;
     }

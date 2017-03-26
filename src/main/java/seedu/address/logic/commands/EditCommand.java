@@ -1,18 +1,17 @@
 package seedu.address.logic.commands;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.EventTask;
-import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -22,12 +21,11 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [due DEADLINE] [tag TAGS]...\n"
-            + "Example: " + COMMAND_WORD + " 1 CS2103 Finish Tutorial";
+            + "Parameters: INDEX (must be a positive integer) [NAME] [due DEADLINE] [tag TAGS]...\n" + "Example: "
+            + COMMAND_WORD + " 1 CS2103 Finish Tutorial";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -42,8 +40,7 @@ public class EditCommand extends Command {
      * @param editTaskDescriptor
      *            details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex,
-            EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
@@ -58,8 +55,7 @@ public class EditCommand extends Command {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(
-                    Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
@@ -76,8 +72,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(
-                String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
     }
 
     /**
@@ -86,38 +81,28 @@ public class EditCommand extends Command {
      *
      * @throws IllegalValueException
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-            EditTaskDescriptor editTaskDescriptor)
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
             throws IllegalValueException {
         assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName() == null
-                ? taskToEdit.getName() : editTaskDescriptor.getName();
-        UniqueTagList updatedTags = editTaskDescriptor.getTags() == null
-                ? taskToEdit.getTags() : editTaskDescriptor.getTags();
-        boolean updatedDone = taskToEdit.isDone();
-        if (taskToEdit.getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
-                || taskToEdit.getTaskType() == TaskType.TaskWithOnlyDeadline
-                || editTaskDescriptor.getDeadline() != null
-                || editTaskDescriptor.getStartingTime() != null) {
-            Date deadline = editTaskDescriptor.getDeadline() == null
-                    ? taskToEdit.getDeadline().getDate()
-                    : editTaskDescriptor.getDeadline();
-            Date startingTime;
-            if (editTaskDescriptor.getDeadline() == null
-                    && taskToEdit.getStartingTime() == null) {
-                startingTime = null;
-            } else {
-                startingTime = editTaskDescriptor.getDeadline() == null
-                        ? taskToEdit.getStartingTime().getDate()
-                        : editTaskDescriptor.getStartingTime();
-            }
-            return new EventTask(updatedName, updatedTags, deadline,
-                    startingTime, updatedDone);
+        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        Optional<DateTime> updatedStartingTime;
+        Optional<DateTime> updatedDeadline;
+
+        if (editTaskDescriptor.getStartingTime().isPresent()) {
+            updatedStartingTime = editTaskDescriptor.getStartingTime();
         } else {
-            return new FloatingTask(updatedName, updatedTags,
-                    updatedDone);
+            updatedStartingTime = taskToEdit.getStartingTime();
         }
+        if (editTaskDescriptor.getDeadline().isPresent()) {
+            updatedDeadline = editTaskDescriptor.getDeadline();
+        } else {
+            updatedDeadline = taskToEdit.getDeadline();
+        }
+
+        return Task.createTask(updatedName, updatedTags, updatedDeadline, updatedStartingTime, taskToEdit.isDone(),
+                taskToEdit.isManualToday());
     }
 
     /**
@@ -125,10 +110,10 @@ public class EditCommand extends Command {
      * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
-        private Name name = null;
-        private UniqueTagList tags = null;
-        private Date deadline = null;
-        private Date startingTime = null;
+        private Optional<Name> name = Optional.empty();
+        private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<DateTime> deadline = Optional.empty();
+        private Optional<DateTime> startingTime = Optional.empty();
 
         public EditTaskDescriptor() {
         }
@@ -144,41 +129,40 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return this.name != null || this.tags != null
-                    || this.deadline != null || this.startingTime != null;
+            return CollectionUtil.isAnyPresent(this.name, this.tags, this.deadline, this.startingTime);
         }
 
-        public void setName(Name name) {
+        public void setName(Optional<Name> name) {
             assert name != null;
             this.name = name;
         }
 
-        public Name getName() {
+        public Optional<Name> getName() {
             return name;
         }
 
-        public void setTags(UniqueTagList tags) {
+        public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
         }
 
-        public UniqueTagList getTags() {
+        public Optional<UniqueTagList> getTags() {
             return tags;
         }
 
-        public void setStartingTime(Date startingTime) {
+        public void setStartingTime(Optional<DateTime> startingTime) {
             this.startingTime = startingTime;
         }
 
-        public Date getStartingTime() {
+        public Optional<DateTime> getStartingTime() {
             return this.startingTime;
         }
 
-        public void setDeadline(Date deadline) {
+        public void setDeadline(Optional<DateTime> deadline) {
             this.deadline = deadline;
         }
 
-        public Date getDeadline() {
+        public Optional<DateTime> getDeadline() {
             return this.deadline;
         }
     }
