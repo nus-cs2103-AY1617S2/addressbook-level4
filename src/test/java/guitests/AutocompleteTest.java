@@ -6,9 +6,9 @@ import org.junit.Test;
 
 public class AutocompleteTest extends TaskManagerGuiTest {
 
-    private static String[] COMMANDS_ONE_TAB = { "add", "delete", "edit", "mark", "schedule", "list",
-            "help", "find", "undo", "redo", "clear" };
-    private static String[] COMMANDS_TWO_TAB = { "unmark" };
+    private final String[] COMMANDS_ONE_TAB = { "add", "delete", "edit", "mark", "schedule", "list",
+        "help", "find", "undo", "redo", "clear" };
+    private final String[] COMMANDS_TWO_TAB = { "unmark" };
 
     @Test
     public void testAutocompleteEmptyCommand() {
