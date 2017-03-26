@@ -21,6 +21,9 @@ public interface ReadOnlyTask {
     
     TaskStatus getTaskStatus();
 
+    void setTaskStatus(TaskStatus status);
+
+
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
      * the returned list will not affect the task's internal tags.
@@ -43,8 +46,8 @@ public interface ReadOnlyTask {
 			&& other.getTaskEndTime() != null && other.getTaskEndTime().equals(this.getTaskEndTime()))
 			&& other.getTaskDescription() != null
 			&& other.getTaskDescription().equals(this.getTaskDescription())
-			&& other.getTaskStatus() != null
-			&& other.getTaskStatus().equals(this.getTaskStatus());
+	&& other.getTaskStatus() != null
+		&& other.getTaskStatus().equals(this.getTaskStatus());
     }
 
     /**
@@ -54,7 +57,8 @@ public interface ReadOnlyTask {
 	final StringBuilder builder = new StringBuilder();
 	builder.append(getTaskName()).append(" Date: ").append(getTaskDate())
 		.append(" Start Time: ").append(getTaskStartTime()).append(" End Time: ").append(getTaskEndTime())
-		.append(" Description: " + getTaskDescription()).append(" Status: "+ getTaskStatus());
+		.append(" Description: " + getTaskDescription()).append(" Status: ").append(getTaskStatus());
+
 	getTags().forEach(builder::append);
 	return builder.toString();
     }

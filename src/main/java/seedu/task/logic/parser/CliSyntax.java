@@ -32,4 +32,11 @@ public class CliSyntax {
 												     // separated
 												     // by
 												     // whitespace
+    public static final Pattern DONE_ARGS_FORMAT = Pattern.compile("(?<index>\\d+(?:\\s+\\d+)*)"); // one
+    // or
+    // more
+    // number
+    // separated
+    // by
+    // whitespace
 }

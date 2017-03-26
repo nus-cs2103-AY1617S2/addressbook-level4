@@ -35,14 +35,16 @@ public class Task implements ReadOnlyTask {
 	this.taskStartTime = taskStartTime;
 	this.taskEndTime = taskEndTime;
 	this.taskDescription = taskDescription;
-	this.taskStatus = new TaskStatus("Ongoing");
-	
+
+	this.taskStatus = taskStatus;
 	this.tags = new UniqueTagList(tags); // protect internal tags from
 					     // changes in the arg list
     }
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
-	    Optional<TaskTime> parseTime2, Optional<String> parseString) throws IllegalValueException {
+
+	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus) {
+
 	this.taskName = parseTaskName;
 	if (parseDate.isPresent()) {
 	    this.taskDate = parseDate.get();
@@ -93,8 +95,9 @@ public class Task implements ReadOnlyTask {
         }
 
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
-	    String taskDescription, TaskStatus taskStatus) {
-	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,taskStatus, new UniqueTagList());
+	    String taskDescription,TaskStatus taskStatus ) {
+	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, taskStatus, new UniqueTagList());
+
     }
 
     /**
@@ -177,8 +180,9 @@ public class Task implements ReadOnlyTask {
     }
 
     public TaskStatus getTaskStatus() {
-	return taskStatus;
-    }
+   	return taskStatus;
+       }
+
     
     public String getTaskDescription() {
 	return taskDescription;
@@ -188,8 +192,9 @@ public class Task implements ReadOnlyTask {
 	this.taskStatus = taskStatus;
     }
     
-    public void setTaskDescription(String taskDescription) {
-	this.taskDescription = taskDescription;
+
+    public void setTaskDescription(String description) {
+	this.taskDescription = description;
     }
 
     public void setTaskName(TaskName taskName) {

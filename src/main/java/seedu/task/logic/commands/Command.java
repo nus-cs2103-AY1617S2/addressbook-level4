@@ -1,6 +1,8 @@
 package seedu.task.logic.commands;
 
+import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.Messages;
+import seedu.task.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 
@@ -21,6 +23,13 @@ public abstract class Command {
      */
     public static String getMessageForTaskListShownSummary(int displaySize) {
 	return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
+    }
+
+    /**
+     * Raises an event to indicate an attempt to execute an incorrect command
+     */
+    protected void indicateAttemptToExecuteIncorrectCommand() {
+	EventsCenter.getInstance().post(new IncorrectCommandAttemptedEvent(this));
     }
 
     /**

@@ -89,8 +89,9 @@ public class EditCommand extends Command {
 	TaskStatus remainStatus = new TaskStatus("Ongoing");
 	UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-	return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime, updatedDescription,
-		remainStatus, updatedTags);
+	return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime, updatedDescription, remainStatus,
+		updatedTags);
+
     }
 
     /**

@@ -44,13 +44,15 @@ public class AddCommand extends Command {
 	    tagSet.add(new Tag(tagName));
 	}
 	this.taskToAdd = new Task(new TaskName(taskName), new TaskDate(taskDate), new TaskTime(taskStartTime),
-		new TaskTime(taskEndTime), new String(taskDescription), new TaskStatus("Ongoing"));
+
+		new TaskTime(taskEndTime), new String(taskDescription),new TaskStatus("Ongoing"), new UniqueTagList(tagSet));
 
     }
 
     public AddCommand(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseStartTime,
 	    Optional<TaskTime> parseEndTime, Optional<String> parseString) throws IllegalValueException {
-	this.taskToAdd = new Task(parseTaskName, parseDate, parseStartTime, parseEndTime, parseString);
+	this.taskToAdd = new Task(parseTaskName, parseDate, parseStartTime, parseEndTime, parseString, new TaskStatus("Ongoing"));
+
     }
 
     @Override
