@@ -72,21 +72,22 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
+    //@@author A0146789H
     private static Task[] getSampleTaskData() {
         try {
-            StartTime SAMPLE_START_TIME = new StartTime(NattyDateUtil.parseSingleDate("06/13/13 0909"));
-            EndTime SAMPLE_END_TIME = new EndTime(NattyDateUtil.parseSingleDate("06/13/13 0909"));
+            StartTime sampleStartTime = new StartTime(NattyDateUtil.parseSingleDate("06/13/13 0909"));
+            EndTime sampleEndTime = new EndTime(NattyDateUtil.parseSingleDate("06/13/13 0909"));
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("George Best"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), SAMPLE_START_TIME, SAMPLE_END_TIME, new CompletionStatus(false), new UniqueTagList())
+                new Task(new Name("Ali Muster"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("George Best"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), sampleStartTime, sampleEndTime, new CompletionStatus(false), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -96,7 +97,7 @@ public class TestUtil {
         }
     }
 
-
+    //@@author
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
