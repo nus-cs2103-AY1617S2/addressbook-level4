@@ -17,16 +17,16 @@ import seedu.bulletjournal.model.task.UniqueTaskList;
 /**
  * Adds a task to the address book.
  */
-public class AddCommandFloating extends Command {
+public class AddCommandDeadline extends Command {
 
-    public static final String COMMAND_WORD = "addf";
+    public static final String COMMAND_WORD = "addd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a floating task to the todo list. "
-            + "Parameters: TASKNAME s/STATUS [t/TAG]...\n" + "Example: " + COMMAND_WORD
-            + " Join groups s/undone t/friends t/owesMoney";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deadline task to the todo list. "
+            + "Parameters: TASKNAME d/DUEDATE s/STATUS [t/TAG]...\n" + "Example: " + COMMAND_WORD
+            + " Join groups d/98765432 s/undone t/friends t/owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New floating task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This floating task already exists in the todo list";
+    public static final String MESSAGE_SUCCESS = "New deadline task added: %1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This deadline task already exists in the todo list";
 
     private final Task toAdd;
 
@@ -36,7 +36,7 @@ public class AddCommandFloating extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommandFloating(String taskname, String duedate, String status, String begindate, Set<String> tags)
+    public AddCommandDeadline(String taskname, String duedate, String status, String begindate, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
