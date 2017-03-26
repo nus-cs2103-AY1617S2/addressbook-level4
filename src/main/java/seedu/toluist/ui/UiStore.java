@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,6 +19,7 @@ import javafx.collections.ObservableList;
 
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
+import seedu.toluist.ui.commons.CommandInput;
 import seedu.toluist.ui.commons.CommandResult;
 import seedu.toluist.ui.view.UiView;
 
@@ -38,7 +38,8 @@ public class UiStore {
     private ObservableList<Task> shownTasks = FXCollections.observableArrayList();
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));
-    private SimpleStringProperty observableCommandText = new SimpleStringProperty("");
+    private ObjectProperty<CommandInput> observableCommandInput =
+            new SimpleObjectProperty<>(new CommandInput(""));
     private ObservableList<String> observableSuggestedCommands = FXCollections.observableArrayList();
     private SimpleIntegerProperty observableSuggestedCommandIndex =
             new SimpleIntegerProperty(INDEX_INVALID_SUGGESTION);
@@ -93,10 +94,6 @@ public class UiStore {
         observableCommandResult.setValue(commandResult);
     }
 
-    public ObservableValue<String> getObservableCommandText() {
-        return observableCommandText;
-    }
-
     public void setSuggestedCommands(List<String> suggestedCommands) {
         observableSuggestedCommandIndex.set(INDEX_INVALID_SUGGESTION);
         observableSuggestedCommands.setAll(suggestedCommands);
@@ -106,8 +103,12 @@ public class UiStore {
         return observableSuggestedCommands;
     }
 
-    public void setCommandText(String commandText) {
-        observableCommandText.set(commandText);
+    public void setCommandInput(String command) {
+        observableCommandInput.setValue(new CommandInput(command));
+    }
+
+    public ObservableValue<CommandInput> getObservableCommandInput() {
+        return observableCommandInput;
     }
 
     public ObservableValue<CommandResult> getObservableCommandResult() {
