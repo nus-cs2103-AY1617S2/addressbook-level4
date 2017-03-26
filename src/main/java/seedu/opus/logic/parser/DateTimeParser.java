@@ -42,8 +42,10 @@ public class DateTimeParser {
         Parser parser = new Parser();
         List<DateGroup> groups = parser.parse(dateString);
 
-        if (groups.isEmpty())
+        if (groups.isEmpty()) {
             return Optional.empty();
+        }
+
 
         return Optional.ofNullable(groups.get(0));
     }

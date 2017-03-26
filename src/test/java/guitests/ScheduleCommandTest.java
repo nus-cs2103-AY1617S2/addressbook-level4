@@ -15,8 +15,6 @@ import seedu.opus.testutil.TestTask;
 
 public class ScheduleCommandTest extends TaskManagerGuiTest {
 
-    private TestTask[] expectedTasksList = td.getTypicalTasks();
-
     @Test
     public void scheduleEventSuccess() throws Exception {
         String detailsToSchedule = "sunday 10pm to sunday 11pm";
@@ -83,6 +81,7 @@ public class ScheduleCommandTest extends TaskManagerGuiTest {
     private void assertScheduleSuccess(int filteredTaskListIndex, int taskManagerIndex,
         String detailsToSchedule, TestTask scheduledTask) {
 
+        TestTask[] expectedTasksList = td.getTypicalTasks();
         commandBox.runCommand("schedule " + filteredTaskListIndex + " " + detailsToSchedule);
 
         // confirm the new card contains the right data
