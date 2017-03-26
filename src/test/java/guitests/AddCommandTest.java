@@ -6,11 +6,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.task.Deadline;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
+import seedu.task.commons.core.Messages;
+import seedu.task.logic.commands.AddCommand;
+import seedu.task.model.task.Deadline;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 

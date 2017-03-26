@@ -11,13 +11,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.TaskManagerChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.TaskManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.testutil.EventsCollector;
 import seedu.address.testutil.TypicalTestTasks;
+import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.TaskManager;
+import seedu.task.model.UserPrefs;
+import seedu.task.storage.JsonUserPrefsStorage;
+import seedu.task.storage.Storage;
+import seedu.task.storage.StorageManager;
+import seedu.task.storage.XmlAddressBookStorage;
 
 public class StorageManagerTest {
 

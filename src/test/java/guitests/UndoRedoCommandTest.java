@@ -5,14 +5,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.GlobalStack;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.logic.GlobalStack;
+import seedu.task.logic.commands.EditCommand;
+import seedu.task.logic.commands.RedoCommand;
+import seedu.task.logic.commands.UndoCommand;
 
 //@@author A0139161J
 public class UndoRedoCommandTest extends TaskManagerGuiTest {

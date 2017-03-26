@@ -10,12 +10,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.TaskManager;
-import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTestTasks;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.TaskManager;
+import seedu.task.model.task.Task;
+import seedu.task.storage.XmlAddressBookStorage;
 
 public class XmlAddressBookStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");

@@ -26,19 +26,19 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
 import seedu.address.TestApp;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.TaskManager;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Information;
-import seedu.address.model.task.PriorityLevel;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskName;
-import seedu.address.storage.XmlSerializableTaskManager;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.commons.util.XmlUtil;
+import seedu.task.model.TaskManager;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Deadline;
+import seedu.task.model.task.Information;
+import seedu.task.model.task.PriorityLevel;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskName;
+import seedu.task.storage.XmlSerializableTaskManager;
 
 /**
  * A utility class for test cases.
