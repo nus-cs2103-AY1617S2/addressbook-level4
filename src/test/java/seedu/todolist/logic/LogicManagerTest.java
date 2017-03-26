@@ -161,11 +161,8 @@ public class LogicManagerTest {
     @Test
     public void execute_unknownCommandWord() {
         String unknownCommand = "uicfhmowqewca";
-        String unknownCommand1 = "          ";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
-        assertCommandFailure(unknownCommand1, MESSAGE_UNKNOWN_COMMAND);
     }
-    
 
     @Test
     public void execute_help() {
@@ -194,11 +191,6 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add t/validTag", expectedMessage);
-        assertCommandFailure("add s/startTime", expectedMessage);
-        assertCommandFailure("add e/endTime", expectedMessage);
-        assertCommandFailure("add s/2500", expectedMessage);
-        assertCommandFailure("add e/2401", expectedMessage);
-        assertCommandFailure("add s/1200 e/2401", expectedMessage);
     }
 
     @Test
