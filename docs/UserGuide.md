@@ -389,7 +389,8 @@ Format: `exit`
 ## 4. FAQ
 
 **Q**: How do I save my data in FlexiTask? <br>
-**A**: FlexiTask saves your data automatically, whenever the task list is updated. Data is saved to ‘data/tasklist.xml’.
+**A**: FlexiTask saves your data automatically, whenever the task list is updated. Data is saved to ‘data/tasklist.xml’. You can specify the path using the save command.
+
 
 **Q**: How do I transfer my data to another Computer? <br>
 **A**: Install FlexiTask in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlexiTask folder.
