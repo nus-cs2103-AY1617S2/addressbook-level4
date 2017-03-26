@@ -22,7 +22,6 @@ public class RedoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        // TODO Auto-generated method stub
         assert model != null;
         if (model.checkEmptyRedoStack()) {
             throw new CommandException(MESSAGE_EMPTY_REDO_STACK);

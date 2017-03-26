@@ -93,8 +93,14 @@ public interface Model {
 	 */
 	void getNextState();
 
+	/**
+     * Method to check if the undo stack is empty - nothing to undo
+     */
 	boolean checkEmptyUndoStack();
-
+	
+    /**
+     * Method to check if the redo stack is empty - nothing to redo
+     */
 	boolean checkEmptyRedoStack();
 
 }

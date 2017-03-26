@@ -70,6 +70,7 @@ public class MainApp extends Application {
     }
 
     private String getApplicationParameter(String parameterName) {
+
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
     }
