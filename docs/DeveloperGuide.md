@@ -51,7 +51,7 @@ By : `Miao Ling`, `Ian`, `Qi Xiang` and `Dylan`  &nbsp;&nbsp;&nbsp;&nbsp; Since:
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskmanager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -123,7 +123,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -191,8 +191,8 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the Task Manager data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -208,7 +208,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
@@ -263,13 +263,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.task.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -332,7 +332,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -342,17 +342,6 @@ b. Require developers to download those libraries manually (this creates extra w
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
-
-### Examples
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
 
 ### New User Guide
 Priority | As a ... | I want to ... | So that I can...
@@ -437,7 +426,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `doTASK` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case 1 : Add Task
 
