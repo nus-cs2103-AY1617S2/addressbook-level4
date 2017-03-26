@@ -40,7 +40,7 @@ public class AddCommandParser {
             String argsWithDatesExtracted = dateTimeParser.trimArgsOfDates(args);
 
             extractTags(argsWithDatesExtracted);
-            String argsWithDatesAndTagsExtracted = trimArgsOfTags(argsWithDatesExtracted);
+            String argsWithDatesAndTagsExtracted = trimArgsOfTags(argsWithDatesExtracted.trim());
             description = argsWithDatesAndTagsExtracted;
 
             return new AddCommand(description, dateTimeParser.getStartDate(), dateTimeParser.getEndDate(),
@@ -74,7 +74,7 @@ public class AddCommandParser {
      *
      */
     private String trimArgsOfTags(String args) {
-        return args.replaceAll(PREFIX_TAG.getPrefix() + "(\\S+)", "");
+        return args.replaceAll(PREFIX_TAG.getPrefix() + "(\\S+)", "").trim();
     }
 
 }
