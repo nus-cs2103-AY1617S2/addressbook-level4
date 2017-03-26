@@ -8,14 +8,14 @@ import org.junit.Test;
 public class DetailTest {
 
     @Test
-    public void isValidAddress() {
+    public void isValidBeginDate() {
         // invalid addresses
-        assertFalse(BeginDate.isValidAddress("")); // empty string
-        assertFalse(BeginDate.isValidAddress(" ")); // spaces only
+        assertFalse(BeginDate.isValidBeginDate("")); // empty string
+        assertFalse(BeginDate.isValidBeginDate(" ")); // spaces only
 
         // valid addresses
-        assertTrue(BeginDate.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(BeginDate.isValidAddress("-")); // one character
-        assertTrue(BeginDate.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(BeginDate.isValidBeginDate("Blk 456, Den Road, #01-355"));
+        assertTrue(BeginDate.isValidBeginDate("-")); // one character
+        assertTrue(BeginDate.isValidBeginDate("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 }
