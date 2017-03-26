@@ -10,7 +10,7 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Recurrence;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
@@ -122,6 +122,7 @@ public class TestTask implements ReadOnlyTask {
         } else {
             sb.append("add " + "n/" + this.getName().fullName + "! ");
         }
+        //@@author
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");
@@ -139,6 +140,7 @@ public class TestTask implements ReadOnlyTask {
         } else {
             sb.append("add " + "n/" + this.getName().fullName + "! ");
         }
+        //@@author A0143157J
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");

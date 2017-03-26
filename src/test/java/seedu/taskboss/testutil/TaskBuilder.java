@@ -61,8 +61,8 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withRecurrence(String frequency) throws IllegalArgumentException {
-        this.task.setRecurrence(new Recurrence(Frequency.valueOf(frequency)));
+    public TaskBuilder withRecurrence(Frequency frequency) throws IllegalArgumentException {
+        this.task.setRecurrence(new Recurrence(frequency));
         return this;
     }
 
