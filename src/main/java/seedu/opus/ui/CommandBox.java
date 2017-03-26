@@ -38,6 +38,11 @@ public class CommandBox extends UiPart<Region> {
         this.suggestions = Collections.emptyIterator();
         addToPlaceholder(commandBoxPlaceholder);
         listenForTab();
+        focusCommandBox();
+    }
+
+    private void focusCommandBox() {
+        commandTextField.requestFocus();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
