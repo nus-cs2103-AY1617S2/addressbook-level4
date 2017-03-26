@@ -137,8 +137,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
-        @Override
-        String toString();
     }
 
     private class PredicateExpression implements Expression {
@@ -159,20 +157,10 @@ public class ModelManager extends ComponentManager implements Model {
             return result;
         }
 
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            for (Qualifier qualifier: qualifiers) {
-                builder.append(qualifier.toString());
-            }
-            return builder.toString();
-        }
     }
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
-        @Override
-        String toString();
     }
 
     private class NameQualifier implements Qualifier {
@@ -190,10 +178,6 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent();
         }
 
-        @Override
-        public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
-        }
     }
 
     private class NoteQualifier implements Qualifier {
@@ -212,10 +196,6 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent();
         }
 
-        @Override
-        public String toString() {
-            return "note=" + String.join(", ", noteKeyWords);
-        }
     }
 
     private class TagQualifier implements Qualifier {
@@ -240,10 +220,6 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent();
         }
 
-        @Override
-        public String toString() {
-            return "tags=" + String.join(", ", tagKeyWords);
-        }
     }
 
 }
