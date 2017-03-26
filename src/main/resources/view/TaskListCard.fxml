@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+
+<HBox id="cardPane" fx:id="cardPane" style="-fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
@@ -26,7 +27,7 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
 
-                    <children>
+                          <children>
                         <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <HBox>
@@ -36,9 +37,9 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-                        <Label fx:id="instruction" styleClass="cell_small_label" text="\$instruction" />
-                        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
+                        <Label fx:id="date" styleClass="cell_small_label_date" text="\$date" />
+                        <Label fx:id="instruction" styleClass="cell_small_label_instruction" text="\$instruction" />
+                        <Label fx:id="priority" styleClass="cell_small_label_priority" text="\$priority" />
                     </children>
                 </VBox>
             </children>

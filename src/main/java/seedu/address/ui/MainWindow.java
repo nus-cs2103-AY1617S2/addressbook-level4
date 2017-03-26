@@ -49,8 +49,8 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
-    @FXML
-    private MenuItem helpMenuItem;
+    /*@FXML
+    private MenuItem helpMenuItem;*/
 
     @FXML
     private AnchorPane nonFloatingTaskListPanelPlaceholder;
@@ -64,8 +64,8 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
-    @FXML
-    private AnchorPane statusbarPlaceholder;
+    /*@FXML
+    private AnchorPane statusbarPlaceholder;*/
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -83,7 +83,7 @@ public class MainWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
 
-        setAccelerators();
+        //setAccelerators();
         registerAsAnEventHandler(this);
     }
 
@@ -91,9 +91,9 @@ public class MainWindow extends UiPart<Region> {
         return primaryStage;
     }
 
-    private void setAccelerators() {
+    /*private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-    }
+    }*/
 
     /**
      * Sets the accelerator of a MenuItem.
@@ -140,7 +140,7 @@ public class MainWindow extends UiPart<Region> {
                 logic.getFilteredCompletedTaskList()
                 );
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        //new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
@@ -148,9 +148,9 @@ public class MainWindow extends UiPart<Region> {
         return commandBoxPlaceholder;
     }
 
-    private AnchorPane getStatusbarPlaceholder() {
+    /*private AnchorPane getStatusbarPlaceholder() {
         return statusbarPlaceholder;
-    }
+    }*/
 
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
