@@ -23,4 +23,3 @@ runtests.sh
 /config/checkstyle/awesometodoformat.xml
 Collate-GUI.jar
 Collate-TUI.jar
-collate.sh
