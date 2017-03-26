@@ -49,8 +49,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         Task task2 = new Task(taskDescription2, null, null);
         task2.setTaskPriority(TaskPriority.HIGH);
         task2.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag2, tag3)));
-        assertTrue(isTaskShown(task));
-        assertTrue(isTaskShown(task2));
+        assertTrue(areTasksShown(task, task2));
     }
 
     @Test
@@ -85,9 +84,8 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, null, endDate3);
         task3.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag2)));
-        assertTrue(isTaskShown(task1));
+        assertTrue(areTasksShown(task1, task3));
         assertFalse(isTaskShown(task2));
-        assertTrue(isTaskShown(task3));
     }
 
     @Test
@@ -144,10 +142,9 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         Task task4 = new Task(taskDescription4, startDate4, endDate4);
         task4.setTaskPriority(TaskPriority.HIGH);
         task4.replaceTags(new ArrayList<>(Arrays.asList(tag3)));
-        assertTrue(isTaskShown(task1));
+        assertTrue(areTasksShown(task1, task4));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
-        assertTrue(isTaskShown(task4));
     }
 
     @Test
@@ -217,8 +214,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
-        assertTrue(isTaskShown(task1));
-        assertTrue(isTaskShown(task2));
+        assertTrue(areTasksShown(task1, task2));
     }
 
     @Test
@@ -241,8 +237,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, endDate);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
-        assertTrue(isTaskShown(task1));
-        assertTrue(isTaskShown(task2));
+        assertTrue(areTasksShown(task1, task2));
     }
 
     @Test
@@ -267,8 +262,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, from, to);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
-        assertTrue(isTaskShown(task1));
-        assertTrue(isTaskShown(task2));
+        assertTrue(areTasksShown(task1, task2));
     }
 
     @Test
@@ -280,30 +274,30 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         String recurFrequencyString = "";
         String command = "add " + taskDescription + " repeat/" + recurFrequencyString
                 + " from/" + from + " to/" + to;
-        Task task2 = null;
+        Task task = null;
         try {
             commandBox.runCommand(command);
-            task2 = new Task(taskDescription, from, to);
-            task2.setRecurring(recurFrequencyString);
+            task = new Task(taskDescription, from, to);
+            task.setRecurring(recurFrequencyString);
             fail("Should not reach here since recurring task must have a repeat frequency.");
         } catch (IllegalArgumentException illegalArgumentException) {
             assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException4.getMessage()));
         }
-        assertTrue(isTaskShown(task2));
+        assertTrue(isTaskShown(task));
 
         // Recurring event with two repeats
         recurFrequencyString = "weekly yearly";
         command = "add " + taskDescription + " repeat/" + recurFrequencyString
                 + " from/" + from + " to/" + to;
-        Task task3 = null;
+        Task task2 = null;
         try {
             commandBox.runCommand(command);
-            task3 = new Task(taskDescription, from, to);
-            task3.setRecurring(recurFrequencyString);
+            task2 = new Task(taskDescription, from, to);
+            task2.setRecurring(recurFrequencyString);
             fail("Should not reach here since recurring task must have only one repeat frequency.");
         } catch (IllegalArgumentException illegalArgumentException) {
             assertTrue(illegalArgumentException.getMessage().equals(illegalArgumentException4.getMessage()));
         }
-        assertTrue(isTaskShown(task3));
+        assertTrue(isTaskShown(task2));
     }
 }

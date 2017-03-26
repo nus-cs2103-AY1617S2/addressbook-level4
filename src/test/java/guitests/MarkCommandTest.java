@@ -151,8 +151,7 @@ public class MarkCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task3));
         task2.updateToNextRecurringTask();
         task3.updateToNextRecurringTask();
-        assertTrue(isTaskShown(task2));
-        assertTrue(isTaskShown(task3));
+        assertTrue(areTasksShown(task2, task3));
 
         commandBox.runCommand(markCompleteAllCommand);
         assertTrue(isTaskShown(task));

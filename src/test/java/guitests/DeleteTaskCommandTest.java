@@ -56,14 +56,11 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
 
-        assertTrue(isTaskShown(task));
-        assertTrue(isTaskShown(task2));
-        assertTrue(isTaskShown(task3));
+        assertTrue(areTasksShown(task, task2, task3));
 
         commandBox.runCommand("delete 3");
         assertFalse(isTaskShown(task));
-        assertTrue(isTaskShown(task2));
-        assertTrue(isTaskShown(task3));
+        assertTrue(areTasksShown(task2, task3));
 
         commandBox.runCommand("delete 1");
         assertFalse(isTaskShown(task));
@@ -144,8 +141,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(switchAgainCommand);
 
         TodoList todoList = new TypicalTestTodoLists().getTypicalTodoList();
-        assertTrue(isTaskShown(todoList.getTasks().get(0)));
-        assertTrue(isTaskShown(todoList.getTasks().get(1)));
+        assertTrue(areTasksShown(todoList.getTasks().get(0), todoList.getTasks().get(1)));
     }
 
     @Test
@@ -192,8 +188,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task3));
         task2.updateToNextRecurringTask();
         task3.updateToNextRecurringTask();
-        assertTrue(isTaskShown(task2));
-        assertTrue(isTaskShown(task3));
+        assertTrue(areTasksShown(task2, task3));
 
         commandBox.runCommand(deleteAllCommand);
         assertTrue(isTaskShown(task));
