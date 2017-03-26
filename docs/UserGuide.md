@@ -6,7 +6,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
 
 1. [Introduction](#introduction)
-2. [Quick Start](#quick-start)
+2. [Quick Start](#2-quick-start)
 3. [Features](#features)
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
