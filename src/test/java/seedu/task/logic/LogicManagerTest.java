@@ -196,19 +196,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidPersonData() {
-        //        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-        //                Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/not_numbers e/121212 0000 c/valid, address",
-                StartTime.MESSAGE_TIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/121212 0000 e/notAnEmail c/valid, address",
-                EndTime.MESSAGE_TIME_CONSTRAINTS);
-        //        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-        //                Tag.MESSAGE_TAG_CONSTRAINTS);
-
-    }
-
-    @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
@@ -417,13 +404,13 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            StartTime privatePhone = new StartTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
-            EndTime email = new EndTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
-            CompletionStatus privateAddress = new CompletionStatus(false);
+            StartTime startDate = new StartTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
+            EndTime endDate = new EndTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
+            CompletionStatus completion = new CompletionStatus(false);
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(name, startDate, endDate, completion, tags);
         }
 
         /**
@@ -450,13 +437,12 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEndTime());
-            cmd.append(" s/").append(p.getStartTime());
-            cmd.append(" c/").append(p.getCompletionStatus());
+            cmd.append(" from ").append(p.getEndTime());
+            cmd.append(" to ").append(p.getStartTime());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
-                cmd.append("#").append(t.tagName);
+                cmd.append(" #").append(t.tagName);
             }
 
             return cmd.toString();

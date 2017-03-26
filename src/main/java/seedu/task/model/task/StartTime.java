@@ -1,5 +1,6 @@
 package seedu.task.model.task;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -12,9 +13,7 @@ import seedu.task.commons.util.MiscDateUtil;
  */
 public class StartTime {
 
-    public static final String MESSAGE_TIME_CONSTRAINTS = ""; // Validation no longer necessary
-    public static final String TIME_VALIDATION_REGEX = ""; // Regex validation no longer necessary.
-    public static final String EMPTY_TIME_VALIDATION_REGEX = "";
+    public static final String MESSAGE_TIME_CONSTRAINTS = ""; // Validation on string no longer necessary in model.
 
     public final Date value;
 
@@ -43,7 +42,8 @@ public class StartTime {
         if (this.value == null) {
             return "";
         }
-        return value.toString();
+        DateFormat formatter = DateFormat.getDateTimeInstance();
+        return formatter.format(this.value);
     }
 
     @Override

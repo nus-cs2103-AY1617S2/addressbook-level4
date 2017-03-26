@@ -1,5 +1,6 @@
 package seedu.task.model.task;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -42,7 +43,8 @@ public class EndTime {
         if (this.value == null) {
             return "";
         }
-        return value.toString();
+        DateFormat formatter = DateFormat.getDateTimeInstance();
+        return formatter.format(this.value);
     }
 
     @Override
