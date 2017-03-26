@@ -7,7 +7,7 @@ import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.util.CollectionUtil;
 //import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartTime;
@@ -82,7 +82,7 @@ public class UpdateCommand extends Command {
         assert taskToUpdate != null;
 
         TaskName updatedTaskName = updateTaskDescriptor.getTaskName().orElseGet(taskToUpdate::getTaskName);
-        Date updatedDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getDate);
+        StartDate updatedDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getStartDate);
         StartTime updatedStartTime = updateTaskDescriptor.getStartTime().orElseGet(taskToUpdate::getStartTime);
         EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
         // UniqueCategoryList updatedCategories =
@@ -98,7 +98,7 @@ public class UpdateCommand extends Command {
      */
     public static class UpdateTaskDescriptor {
         private Optional<TaskName> taskname = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<StartDate> startDate = Optional.empty();
         private Optional<StartTime> starttime = Optional.empty();
         private Optional<EndTime> endtime = Optional.empty();
         // private Optional<UniqueCategoryList> categories = Optional.empty();
@@ -108,7 +108,7 @@ public class UpdateCommand extends Command {
 
         public UpdateTaskDescriptor(UpdateTaskDescriptor toCopy) {
             this.taskname = toCopy.getTaskName();
-            this.date = toCopy.getDate();
+            this.startDate = toCopy.getDate();
             this.starttime = toCopy.getStartTime();
             this.endtime = toCopy.getEndTime();
             // this.categories = toCopy.getCategories();
@@ -118,7 +118,7 @@ public class UpdateCommand extends Command {
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.date, this.starttime, this.endtime
+            return CollectionUtil.isAnyPresent(this.taskname, this.startDate, this.starttime, this.endtime
                     /*, this.categories*/);
         }
 
@@ -131,13 +131,13 @@ public class UpdateCommand extends Command {
             return taskname;
         }
 
-        public void setDate(Optional<Date> date) {
-            assert date != null;
-            this.date = date;
+        public void setDate(Optional<StartDate> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
         }
 
-        public Optional<Date> getDate() {
-            return date;
+        public Optional<StartDate> getDate() {
+            return startDate;
         }
 
         public void setStartTime(Optional<StartTime> starttime) {

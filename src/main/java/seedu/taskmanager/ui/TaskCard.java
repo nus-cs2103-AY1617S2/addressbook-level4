@@ -37,10 +37,10 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         taskname.setText(task.getTaskName().fullTaskName);
         id.setText(displayedIndex + ". ");
-        if ((task.getDate().value).equals("EMPTY_FIELD")) {
+        if ((task.getStartDate().value).equals("EMPTY_FIELD")) {
             date.textProperty().bind(empty);
         } else {
-            date.setText(task.getDate().value);
+            date.setText(task.getStartDate().value);
         }
         if ((task.getStartTime().value).equals("EMPTY_FIELD")) {
             startTime.textProperty().bind(empty);

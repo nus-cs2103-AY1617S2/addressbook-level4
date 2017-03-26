@@ -32,7 +32,7 @@ import seedu.taskmanager.commons.util.XmlUtil;
 import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.StartTime;
@@ -76,16 +76,16 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new TaskName("Eat breakfast with mom"), new Date("03/03/17"), new StartTime("1000"), new EndTime("1100")),
-                new Task(new TaskName("Eat lunch at techno"), new Date("04/03/17"), new StartTime("EMPTY_FIELD"), new EndTime("1400")),
-                new Task(new TaskName("Eat dinner with my only 2 friends"), new Date("09/03/17"), new StartTime("1800"), new EndTime("2000")),
-                new Task(new TaskName("Start on the CS2103 project"), new Date("EMPTY_FIELD"), new StartTime("03/03/17 1400"), new EndTime("03/04/17 1800")),
-                new Task(new TaskName("Give up on CS2103 project"), new Date("04/04/17"), new StartTime("1400"), new EndTime("1500")),
-                new Task(new TaskName("Try again for CS2103"), new Date("EMPTY_FIELD"), new StartTime("05/04/17 1400"), new EndTime("05/05/17 1500")),
-                new Task(new TaskName("Endless cycles of regret"), new Date("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
-                new Task(new TaskName("Time to relax a little"), new Date("06/05/17"), new StartTime("1400"), new EndTime("1800")),
-                new Task(new TaskName("Chiong all day everyday"), new Date("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
-                new Task(new TaskName("Get it done"), new Date("06/05/17"), new StartTime("EMPTY_FIELD"), new EndTime("1700"))
+                new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"), new EndTime("1100")),
+                new Task(new TaskName("Eat lunch at techno"), new StartDate("04/03/17"), new StartTime("EMPTY_FIELD"), new EndTime("1400")),
+                new Task(new TaskName("Eat dinner with my only 2 friends"), new StartDate("09/03/17"), new StartTime("1800"), new EndTime("2000")),
+                new Task(new TaskName("Start on the CS2103 project"), new StartDate("EMPTY_FIELD"), new StartTime("03/03/17 1400"), new EndTime("03/04/17 1800")),
+                new Task(new TaskName("Give up on CS2103 project"), new StartDate("04/04/17"), new StartTime("1400"), new EndTime("1500")),
+                new Task(new TaskName("Try again for CS2103"), new StartDate("EMPTY_FIELD"), new StartTime("05/04/17 1400"), new EndTime("05/05/17 1500")),
+                new Task(new TaskName("Endless cycles of regret"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
+                new Task(new TaskName("Time to relax a little"), new StartDate("06/05/17"), new StartTime("1400"), new EndTime("1800")),
+                new Task(new TaskName("Chiong all day everyday"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
+                new Task(new TaskName("Get it done"), new StartDate("06/05/17"), new StartTime("EMPTY_FIELD"), new EndTime("1700"))
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

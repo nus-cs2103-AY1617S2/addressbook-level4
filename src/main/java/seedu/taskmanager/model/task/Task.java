@@ -12,8 +12,9 @@ import seedu.taskmanager.commons.util.CollectionUtil;
 public class Task implements ReadOnlyTask {
 
     private TaskName taskName;
-    private Date date;
+    private StartDate startDate;
     private StartTime startTime;
+    private EndDate endDate;
     private EndTime endTime;
     private boolean isMarkedAsComplete;
     // private UniqueCategoryList categories;
@@ -21,11 +22,14 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Date date, StartTime startTime, EndTime endTime /* ,UniqueCategoryList categories */) {
-        assert !CollectionUtil.isAnyNull(taskName, date, startTime, endTime/* , categories */);
+    public Task(TaskName taskName, StartDate startDate, StartTime startTime, EndDate endDate,
+            EndTime endTime /* ,UniqueCategoryList categories */) {
+        assert !CollectionUtil.isAnyNull(taskName, startDate, startTime,
+                endTime/* , categories */);
         this.taskName = taskName;
-        this.date = date;
+        this.startDate = startDate;
         this.startTime = startTime;
+        this.endDate = endDate;
         this.endTime = endTime;
         this.isMarkedAsComplete = false;
         // this.categories = new UniqueCategoryList(categories); // protect
@@ -36,7 +40,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getDate(), source.getStartTime(),
+        this(source.getTaskName(), source.getStartDate(), source.getStartTime(), source.getEndDate(),
                 source.getEndTime() /* ,source.getCategories() */);
     }
 
@@ -50,14 +54,14 @@ public class Task implements ReadOnlyTask {
         return taskName;
     }
 
-    public void setDate(Date date) {
-        assert date != null;
-        this.date = date;
+    public void setStartDate(StartDate startDate) {
+        assert startDate != null;
+        this.startDate = startDate;
     }
 
     @Override
-    public Date getDate() {
-        return date;
+    public StartDate getStartDate() {
+        return startDate;
     }
 
     public void setStartTime(StartTime startTime) {
@@ -70,6 +74,16 @@ public class Task implements ReadOnlyTask {
         return startTime;
     }
 
+    @Override
+    public EndDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(EndDate endDate) {
+        assert startTime != null;
+        this.endDate = endDate;
+    }
+
     public void setEndTime(EndTime endTime) {
         assert endTime != null;
         this.endTime = endTime;
@@ -79,7 +93,7 @@ public class Task implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endTime;
     }
-    
+
     public void setIsMarkedAsComplete(boolean isMarkedAsComplete) {
         this.isMarkedAsComplete = isMarkedAsComplete;
     }
@@ -107,8 +121,9 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setTaskName(replacement.getTaskName());
-        this.setDate(replacement.getDate());
+        this.setStartDate(replacement.getStartDate());
         this.setStartTime(replacement.getStartTime());
+        this.setEndDate(replacement.getEndDate());
         this.setEndTime(replacement.getEndTime());
         this.setIsMarkedAsComplete(replacement.getIsMarkedAsComplete());
         // this.setCategories(replacement.getCategories());
@@ -125,7 +140,8 @@ public class Task implements ReadOnlyTask {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing
         // your own
-        return Objects.hash(taskName, date, startTime, endTime/* , categories */);
+        return Objects.hash(taskName, startDate, startTime, endDate,
+                endTime/* , categories */);
     }
 
     @Override

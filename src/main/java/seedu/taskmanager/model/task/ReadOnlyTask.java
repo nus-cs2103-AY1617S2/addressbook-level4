@@ -11,9 +11,11 @@ public interface ReadOnlyTask {
 
     TaskName getTaskName();
 
-    Date getDate();
+    StartDate getStartDate();
 
     StartTime getStartTime();
+
+    EndDate getEndDate();
 
     EndTime getEndTime();
 
@@ -38,7 +40,9 @@ public interface ReadOnlyTask {
                         // here
                         // onwards
                         && other.getStartTime().equals(this.getStartTime())
-                        && other.getEndTime().equals(this.getEndTime()) && other.getDate().equals(this.getDate())
+                        && other.getEndTime().equals(this.getEndTime())
+                        && other.getStartDate().equals(this.getStartDate())
+                        && other.getEndDate().equals(this.getEndDate())
                         && other.getIsMarkedAsComplete().equals(this.getIsMarkedAsComplete()));
     }
 
@@ -49,12 +53,16 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTaskName());
 
-        if (getDate().toString() != "EMPTY_FIELD") {
-            builder.append(" Date: ").append(getDate());
+        if (getStartDate().toString() != "EMPTY_FIELD") {
+            builder.append(" Date: ").append(getStartDate());
         }
 
         if (getStartTime().toString() != "EMPTY_FIELD") {
             builder.append(" Start Time: ").append(getStartTime());
+        }
+
+        if (getEndDate().toString() != "EMPTY_FIELD") {
+            builder.append(" End Date: ").append(getEndDate());
         }
 
         if (getEndTime().toString() != "EMPTY_FIELD") {
