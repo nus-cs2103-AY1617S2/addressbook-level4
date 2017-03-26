@@ -12,6 +12,7 @@ import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryExcepti
 //@@author A0143157J
 public class Recurrence {
 
+    private static final String EMPTY_STRING = "";
     private static final String CATEGORY_DONE = "Done";
     private static final int AMOUNT_ONE = 1;
 
@@ -27,7 +28,7 @@ public class Recurrence {
 
     public Recurrence(Frequency frequency) throws IllegalArgumentException {
         assert frequency != null;
-        if (frequency.toString().equals("")) {
+        if (frequency.toString().equals(EMPTY_STRING)) {
             this.frequency = Frequency.NONE;
         } else {
             this.frequency = frequency;
@@ -228,5 +229,16 @@ public class Recurrence {
         return other == this // short circuit if same object
                 || (other instanceof Recurrence // instanceof handles nulls
                 && this.frequency.equals(((Recurrence) other).frequency)); // state check
+    }
+
+    /**
+     * Returns true if a given string is a valid task recurrence.
+     * Created for testing purposes only.
+     */
+    public static boolean isValidRecurrence(String inputFreq) {
+        String freq = inputFreq.toUpperCase().trim();
+        return (freq.equals("DAILY") || freq.equals("WEEKLY") ||
+                freq.equals("MONTHLY") || freq.equals("YEARLY") ||
+                freq.equals("NONE") || freq.equals(EMPTY_STRING));
     }
 }
