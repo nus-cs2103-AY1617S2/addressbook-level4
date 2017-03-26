@@ -11,12 +11,10 @@ public class StartTimeTest {
 
     @Test
     public void isStartTime() {
-        // invalid phone numbers
-//        assertFalse(StartTime.isValidTime("")); // empty string
-//        assertFalse(StartTime.isValidTime(" ")); // spaces only
-        // valid dates
+        // blank StartTime
+        assertTrue(StartTime.isValidTime(null)); // empty string
+
+        // valid StartTime
         assertTrue(StartTime.isValidTime(NattyDateUtil.parseSingleDate("03/10/1993 0000")));
-//        assertTrue(StartTime.isValidTime("4")); // short phone numbers
-//        assertTrue(StartTime.isValidTime("124293842033123")); // long phone numbers
     }
 }

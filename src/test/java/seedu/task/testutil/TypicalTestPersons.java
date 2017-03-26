@@ -5,38 +5,39 @@ import seedu.task.model.TaskManager;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
+//@@author A0146789H
 /**
- *
+ * Creates sample test people.
  */
 public class TypicalTestPersons {
 
-    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestPersons() {
         try {
-            alice = new PersonBuilder().withName("Alice Pauline")
-                    .withAddress("123, Jurong West Ave 6,").withEmail("060317 0000")
-                    .withDateString("060317 0000")
+            alice = new TestTaskBuilder().withName("Alice Pauline")
+                    .withCompletion(true).withEndDate("03/06/17 00:00")
+                    .withStartDate("03/06/17 00:00")
                     .withTags("friends").build();
-            benson = new PersonBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2,")
-                    .withEmail("060317 0000").withDateString("060317 0000")
+            benson = new TestTaskBuilder().withName("Benson Meier").withCompletion(false)
+                    .withEndDate("03/06/17 00:00").withStartDate("03/06/17 00:00")
                     .withTags("owesMoney", "friends").build();
-            carl = new PersonBuilder().withName("Carl Kurz").withDateString("060317 0000")
-                    .withEmail("060317 0000").withAddress("wall street").withTags("test").build();
-            daniel = new PersonBuilder().withName("Daniel Meier").withDateString("060317 0000")
-                    .withEmail("060317 0000").withAddress("10th street").withTags("test").build();
-            elle = new PersonBuilder().withName("Elle Meyer").withDateString("060317 0000")
-                    .withEmail("060317 0000").withAddress("michegan ave").withTags("test").build();
-            fiona = new PersonBuilder().withName("Fiona Kunz").withDateString("060317 0000")
-                    .withEmail("060317 0000").withAddress("little tokyo").withTags("test").build();
-            george = new PersonBuilder().withName("George Best").withDateString("060317 0000")
-                    .withEmail("060317 0000").withAddress("4th street").withTags("test").build();
+            carl = new TestTaskBuilder().withName("Carl Kurz").withStartDate("03/06/17 00:00")
+                    .withEndDate("03/06/17 00:00").withCompletion(false).withTags("test").build();
+            daniel = new TestTaskBuilder().withName("Daniel Meier").withStartDate("03/06/17 00:000")
+                    .withEndDate("03/06/17 00:000").withCompletion(false).withTags("test").build();
+            elle = new TestTaskBuilder().withName("Elle Meyer").withStartDate("03/06/17 00:000")
+                    .withEndDate("03/06/17 00:000").withCompletion(false).withTags("test").build();
+            fiona = new TestTaskBuilder().withName("Fiona Kunz").withStartDate("03/06/17 00:000")
+                    .withEndDate("03/06/17 00:000").withCompletion(true).withTags("test").build();
+            george = new TestTaskBuilder().withName("George Best").withStartDate("03/06/17 00:000")
+                    .withEndDate("03/06/17 00:000").withCompletion(true).withTags("test").build();
 
             // Manually added
-            hoon = new PersonBuilder().withName("Hoon Meier").withDateString("060317 0000")
-                    .withEmail("060317 0000").withAddress("little india").withTags("test").build();
-            ida = new PersonBuilder().withName("Ida Mueller").withDateString("060317 0000")
-                    .withEmail("060317 0000").withAddress("chicago ave").withTags("test").build();
+            hoon = new TestTaskBuilder().withName("Hoon Meier").withStartDate("03/06/17 00:000")
+                    .withEndDate("03/06/17 00:000").withCompletion(false).withTags("test").build();
+            ida = new TestTaskBuilder().withName("Ida Mueller").withStartDate("03/06/17 00:000")
+                    .withEndDate("03/06/17 00:000").withCompletion(false).withTags("test").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -44,17 +45,17 @@ public class TypicalTestPersons {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestTask task : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addTask(new Task(person));
+                ab.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalPersons() {
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskManager getTypicalTaskManager() {
