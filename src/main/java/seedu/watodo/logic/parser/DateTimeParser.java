@@ -1,5 +1,6 @@
 package seedu.watodo.logic.parser;
 
+import static seedu.watodo.logic.parser.AddCommandParser.EXTRACT_ARGS_REGEX;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_ON;
@@ -29,7 +30,6 @@ public class DateTimeParser {
     private String startDate;
     private String endDate;
 
-    private final String DATETIME_ARGS_REGEX = "\\s*" + "%1$s" + "\\s*" + "%2$s" + "\\s*";
     public static final String MESSAGE_INVALID_NUM_DATETIME = "Too many/few dateTime arguments!";
 
     /** Constructs a DateTimeParser object with both default start and end date-times null */
@@ -64,13 +64,13 @@ public class DateTimeParser {
     public String trimArgsOfDates(String args) {
 
         if (startDate != null) {
-            args = args.replaceAll(String.format(DATETIME_ARGS_REGEX, PREFIX_FROM.getPrefix(), startDate), " ");
-            args = args.replaceAll(String.format(DATETIME_ARGS_REGEX, PREFIX_ON.getPrefix(), startDate), " ");
+            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_FROM.getPrefix(), startDate), " ");
+            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), startDate), " ");
         }
         if (endDate != null) {
-            args = args.replaceAll(String.format(DATETIME_ARGS_REGEX, PREFIX_BY.getPrefix(), endDate), " ");
-            args = args.replaceAll(String.format(DATETIME_ARGS_REGEX, PREFIX_ON.getPrefix(), endDate), " ");
-            args = args.replaceAll(String.format(DATETIME_ARGS_REGEX, PREFIX_TO.getPrefix(), endDate), " ");
+            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_BY.getPrefix(), endDate), " ");
+            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), endDate), " ");
+            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_TO.getPrefix(), endDate), " ");
         }
         return args.trim();
     }
