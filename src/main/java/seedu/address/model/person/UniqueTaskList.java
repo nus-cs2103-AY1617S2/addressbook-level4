@@ -79,6 +79,17 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Marks the task in the list at position {@code index} as pending.
+     *
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void RedoTask(int index) {
+        Task taskToComplete = internalList.get(index);
+        taskToComplete.redoTask();
+        internalList.set(index, taskToComplete);
+    }
+    
+    /**
      * Removes the equivalent Task from the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
@@ -140,5 +151,4 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
-
 }

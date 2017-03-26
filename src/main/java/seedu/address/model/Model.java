@@ -34,7 +34,10 @@ public interface Model {
     
     /** Mark the given Task as complete **/
     void MarkTaskAsComplete(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException;
-
+    
+    /** Mark the given Task as pending **/
+    void MarkTaskAsPending(int i) throws UniqueTaskList.TaskNotFoundException;
+    
     /** Adds the given Event 
      * @throws DuplicateTimeClashException */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
@@ -90,5 +93,4 @@ public interface Model {
 
     /** Finds the index of the task in the filtered list*/
     int findTaskIndex(Task task);
-
 }

@@ -112,6 +112,14 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }
+    
+    @Override
+    public synchronized void MarkTaskAsPending(int filteredTaskListIndex) throws TaskNotFoundException {
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        whatsLeft.RedoTask(addressBookIndex);
+        updateFilteredListToShowAll();
+        indicateWhatsLeftChanged();
+    }
     // @@author
 
     @Override

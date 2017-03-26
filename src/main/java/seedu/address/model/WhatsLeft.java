@@ -165,12 +165,19 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
     
     /**
      * Marks the task in the list at position {@code index} as complete.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void completeTask(int index) {
         tasks.completeTask(index);
     }
-
+    
+    /**
+     * Marks the task in the list at position {@code index} as pending.
+     */
+    public void RedoTask(int index) {
+        tasks.RedoTask(index);
+        
+    }
+    
     /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}

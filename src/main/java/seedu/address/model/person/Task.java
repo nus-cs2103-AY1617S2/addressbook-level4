@@ -125,6 +125,7 @@ public class Task implements ReadOnlyTask {
         this.setTags(replacement.getTags());
     }
     
+    //@@author A0121668A
     /**
      * Mark a task as complete
      */
@@ -132,7 +133,15 @@ public class Task implements ReadOnlyTask {
     public void completeTask(){
         this.status = true;
     }
-
+    
+    /**
+     * Mark a task as pending
+     */
+    public void redoTask() {
+        this.status = false;
+        
+    }
+    //@@author A0121668A
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
