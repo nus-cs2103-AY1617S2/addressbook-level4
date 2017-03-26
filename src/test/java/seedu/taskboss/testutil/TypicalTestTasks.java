@@ -37,7 +37,7 @@ public class TypicalTestTasks {
             taskD = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 20, 2017 11.30pm")
                     .withEndDateTime("Apr 28, 2017 3pm")
-                    .withRecurrence(Frequency.YEARLY)
+                    .withRecurrence(Frequency.NONE)
                     .withInformation("10th street").build();
             taskE = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
                     .withStartDateTime("Feb 22, 2017 5pm")
