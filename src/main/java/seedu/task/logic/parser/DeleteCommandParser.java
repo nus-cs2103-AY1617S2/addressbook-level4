@@ -7,7 +7,9 @@ import java.util.Optional;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.UndoManager;
 
+//@@author A0146789H
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
@@ -24,6 +26,9 @@ public class DeleteCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        // Add the undo entry after the DeleteCommand is successfully parsed.
+        UndoManager.pushCommand(DeleteCommand.COMMAND_WORD);
 
         return new DeleteCommand(index.get());
     }

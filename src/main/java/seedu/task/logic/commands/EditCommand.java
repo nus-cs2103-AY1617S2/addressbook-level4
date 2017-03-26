@@ -30,6 +30,22 @@ public class EditCommand extends Command {
             + " [c/COMPLETIONSTATUS]  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 e/090617 c/Done";
 
+    //@@author A0146789H
+    /**
+     * @return the editTaskDescriptor
+     */
+    public EditTaskDescriptor getEditTaskDescriptor() {
+        return editTaskDescriptor;
+    }
+
+    //@@author
+    /**
+     * @param editTaskDescriptor the editTaskDescriptor to set
+     */
+    public void setEditTaskDescriptor(EditTaskDescriptor editTaskDescriptor) {
+        this.editTaskDescriptor = editTaskDescriptor;
+    }
+
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";

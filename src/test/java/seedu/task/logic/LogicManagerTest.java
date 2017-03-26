@@ -24,6 +24,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
+import seedu.task.commons.util.NattyDateUtil;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
@@ -182,29 +183,6 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(3));
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
-    }
-
-
-    @Test
-    public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-//        assertCommandFailure("add wrong args wrong args", expectedMessage);
-//        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-//        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-//        assertCommandFailure("add Valid Name p/12345 e/valid@email.NoAddressPrefix valid, address", expectedMessage);
-    }
-
-    @Test
-    public void execute_add_invalidPersonData() {
-        //        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-        //                Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/not_numbers e/121212 0000 c/valid, address",
-                StartTime.MESSAGE_TIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/121212 0000 e/notAnEmail c/valid, address",
-                EndTime.MESSAGE_TIME_CONSTRAINTS);
-        //        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-        //                Tag.MESSAGE_TAG_CONSTRAINTS);
-
     }
 
     @Test
@@ -416,15 +394,16 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            StartTime privatePhone = new StartTime("111211 0909");
-            EndTime email = new EndTime("111211 0909");
-            CompletionStatus privateAddress = new CompletionStatus(false);
+            StartTime startDate = new StartTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
+            EndTime endDate = new EndTime(NattyDateUtil.parseSingleDate("12/11/11 0909"));
+            CompletionStatus completion = new CompletionStatus(false);
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(name, startDate, endDate, completion, tags);
         }
 
+        //@@author A0146789H
         /**
          * Generates a valid person using the given seed.
          * Running this function with the same parameter values guarantees the returned person will have the same state.
@@ -435,8 +414,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new StartTime("111211 0909"),
-                    new EndTime("111211 0909"),
+                    new StartTime(NattyDateUtil.parseSingleDate("12/11/11 0909")),
+                    new EndTime(NattyDateUtil.parseSingleDate("12/11/11 0909")),
                     new CompletionStatus(false),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
                     );
@@ -449,18 +428,18 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEndTime());
-            cmd.append(" s/").append(p.getStartTime());
-            cmd.append(" c/").append(p.getCompletionStatus());
+            cmd.append(" from ").append(p.getEndTime());
+            cmd.append(" to ").append(p.getStartTime());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
-                cmd.append("#").append(t.tagName);
+                cmd.append(" #").append(t.tagName);
             }
 
             return cmd.toString();
         }
 
+        //@@author
         /**
          * Generates an TaskManager with auto-generated persons.
          */
@@ -534,8 +513,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new StartTime("121112 0000"),
-                    new EndTime("121112 0000"),
+                    new StartTime(NattyDateUtil.parseSingleDate("11/12/12 0000")),
+                    new EndTime(NattyDateUtil.parseSingleDate("11/12/12 0000")),
                     new CompletionStatus(false),
                     new UniqueTagList(new Tag("tag"))
                     );

@@ -7,46 +7,47 @@ import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.StartTime;
 
+//@@author A0146789H
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private CompletionStatus address;
-    private EndTime email;
-    private StartTime phone;
+    private CompletionStatus completionStatus;
+    private StartTime startTime;
+    private EndTime endTime;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getStartTime();
-        this.email = personToCopy.getEndTime();
-        this.address = personToCopy.getCompletionStatus();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.startTime = taskToCopy.getStartTime();
+        this.endTime = taskToCopy.getEndTime();
+        this.completionStatus = taskToCopy.getCompletionStatus();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
         this.name = name;
     }
 
-    public void setAddress(CompletionStatus address) {
-        this.address = address;
+    public void setCompletionStatus(CompletionStatus completionStatus) {
+        this.completionStatus = completionStatus;
     }
 
-    public void setEmail(EndTime email) {
-        this.email = email;
+    public void setEndTime(EndTime endTime) {
+        this.endTime = endTime;
     }
 
-    public void setPhone(StartTime phone) {
-        this.phone = phone;
+    public void setStartTime(StartTime startTime) {
+        this.startTime = startTime;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -60,17 +61,17 @@ public class TestPerson implements ReadOnlyTask {
 
     @Override
     public StartTime getStartTime() {
-        return phone;
+        return startTime;
     }
 
     @Override
     public EndTime getEndTime() {
-        return email;
+        return endTime;
     }
 
     @Override
     public CompletionStatus getCompletionStatus() {
-        return address;
+        return completionStatus;
     }
 
     @Override
@@ -86,10 +87,9 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("c/" + this.getCompletionStatus().toString() + " ");
-        sb.append("s/" + this.getStartTime().value + " ");
-        sb.append("e/" + this.getEndTime().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
+        sb.append(" from " + this.getStartTime().value + " ");
+        sb.append(" to " + this.getEndTime().value + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append(" #" + s.tagName + " "));
         return sb.toString();
     }
 }

@@ -20,7 +20,7 @@ By : `Team W09-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 * [Appendix E : Product Survey](appendix-e--product-survey)
 
 ## 1. Introduction
-Welcome to Suru, the innovative personal assistant designed to help you manage your tasks like a boss. This developer guide aims to document every feature of Suru so you can get started contributing to this project. The guide teaches you all you need to know from setting up your development environment to deploying Suru for production. 
+Welcome to Suru, the innovative personal assistant designed to help you manage your tasks like a boss. This developer guide aims to document every feature of Suru so you can get started contributing to this project. The guide teaches you all you need to know from setting up your development environment to deploying Suru for production.
 
 ## 2. Setting up
 
@@ -30,7 +30,7 @@ Welcome to Suru, the innovative personal assistant designed to help you manage y
 
     > Having any Java 8 version is not enough. <br>
     This app will not work with earlier versions of Java 8.
-    
+
 2. [**Eclipse** IDE](https://www.eclipse.org/downloads/)
 3. **e(fx)clipse** plugin for Eclipse (Follow from step 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
@@ -263,10 +263,10 @@ We have two types of tests:
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include:
    1. _Unit tests_ targeting the lowest level methods/classes.
       e.g. `seedu.task.commons.UrlUtilTest`
-      
+
    2. _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working).
       e.g. `seedu.task.storage.StorageManagerTest`
-      
+
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.
       e.g. `seedu.task.logic.LogicManagerTest`
 
@@ -320,9 +320,9 @@ Here are the steps to convert the project documentation files to PDF format.
  2. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file.
     e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://github.com/CS2103JAN2017-W09-B3/main/docs/UserGuide.html`.
- 
+
  3. Click on the `Print` option in Chrome's menu.
- 
+
  4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
     <img src="images/chrome_save_as_pdf.png" width="300"><br>

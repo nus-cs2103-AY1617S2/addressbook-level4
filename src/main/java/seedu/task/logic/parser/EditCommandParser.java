@@ -1,27 +1,38 @@
 package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_COMPLETIONSTATUS;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_ENDDATE;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_STARTDATE;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.task.logic.commands.IncorrectCommand;
-import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.UndoManager;
 
+//@@author A0146789H
 /**
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
+
+    private static final String PATTERN_MANDATORY_INDEX = "(?<index>[1-9]\\d*)";
+    private static final String PATTERN_OPTIONAL_DESCRIPTION = "(?:\\s+(?<description>[^#]+?))?";
+    private static final String PATTERN_OPTIONAL_STARTDATE = "(?:\\s+from\\s+(?<startdate>.+?))?";
+    private static final String PATTERN_OPTIONAL_ENDDATE = "(?:\\s+(?:to|by)\\s+(?<enddate>.+?))?";
+    private static final String PATTERN_OPTIONAL_TAGS = "(?<tags>(?:\\s+#\\w+)+)?";
+    private static final String ARGUMENTS_PATTERN = "^" + PATTERN_MANDATORY_INDEX + PATTERN_OPTIONAL_DESCRIPTION
+            + PATTERN_OPTIONAL_STARTDATE + PATTERN_OPTIONAL_ENDDATE + PATTERN_OPTIONAL_TAGS + "$";
+    private static final Pattern ARGUMENTS_FORMAT = Pattern.compile(ARGUMENTS_PATTERN, Pattern.CASE_INSENSITIVE);
+
+    private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
+    private static final String logPrefix = "[EditCommandParser]";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -29,24 +40,42 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_COMPLETIONSTATUS, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
-        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
-        Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-        if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
+        int index;
+        String taskName;
+        String startDateString;
+        String endDateString;
+        String tagsString;
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+
+
         try {
-            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTDATE)));
-            editTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDDATE)));
-            editTaskDescriptor.setCompletionStatus(ParserUtil.parseCompletionStatus
-                    (argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS)));
-            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            // Extract the tokens from the argument string.
+            final Matcher matcher = ARGUMENTS_FORMAT.matcher(args);
+            if (!matcher.matches()) {
+                throw new NoSuchElementException();
+            }
+
+            index = ParserUtil.parseIndex(matcher.group("index")).get();
+            taskName = Optional.ofNullable(matcher.group("description")).orElse("").trim();
+            startDateString = Optional.ofNullable(matcher.group("startdate")).orElse("");
+            endDateString = Optional.ofNullable(matcher.group("enddate")).orElse("");
+            tagsString = Optional.ofNullable(matcher.group("tags")).orElse("").trim();
+
+            // Log tokens for debugging.
+            logger.info(String.format("%s taskName: '%s', startDateString: '%s', endDateString: '%s', tags: '%s'",
+                    logPrefix, taskName, startDateString, endDateString, tagsString));
+
+            // Set the EditTaskDescriptor change values.
+            editTaskDescriptor.setName(ParserUtil.parseName(taskName));
+            editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(startDateString));
+            editTaskDescriptor.setEndTime(ParserUtil.parseEndTime(endDateString));
+            editTaskDescriptor.setTags(ParserUtil.parseTagsForEdit(ParserUtil.parseTagStringToSet(tagsString)));
+
+        } catch (NoSuchElementException nsee) {
+            // TODO: This needs to be changed to the default case of search.
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -55,22 +84,12 @@ public class EditCommandParser {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
+        // Add the undo entry after successfully parsing an EditCommand.
+        UndoManager.pushCommand(EditCommand.COMMAND_WORD);
+
+        return new EditCommand(index, editTaskDescriptor);
     }
 
-    /**
-     * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Optional<UniqueTagList>} containing zero tags.
-     */
-    private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
 
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
-    }
 
 }

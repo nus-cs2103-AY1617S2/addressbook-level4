@@ -27,6 +27,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
+        assert internalList instanceof Collection;
         return internalList.contains(toCheck);
     }
 
@@ -133,3 +134,4 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
 }
+
