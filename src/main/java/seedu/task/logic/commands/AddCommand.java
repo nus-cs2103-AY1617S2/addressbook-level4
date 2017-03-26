@@ -51,7 +51,7 @@ public class AddCommand extends Command {
                 new Timing(endTiming),
                 new UniqueTagList(tagSet)
                 );
-        if (!Timing.checkTimingOrder(toAdd.getStartTiming(),toAdd.getEndTiming())) {
+        if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
     }

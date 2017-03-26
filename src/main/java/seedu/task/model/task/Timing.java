@@ -89,7 +89,7 @@ public class Timing implements Comparable<Timing> {
         }
     }
 
-    public Date getTiming(){
+    public Date getTiming() {
         return timing;
     }
 
@@ -130,7 +130,7 @@ public class Timing implements Comparable<Timing> {
      * @param time2
      * @return returns True if time1 is before time2
      */
-    public static boolean checkTimingOrder(Timing time1, Timing time2){
+    public static boolean checkTimingOrder(Timing time1, Timing time2) {
         boolean isOrdered = true;
         if (time1 == null || time1.value.equals(NULL_TIMING)
                 || time2 == null || time2.value.equals(NULL_TIMING)) {
@@ -141,24 +141,10 @@ public class Timing implements Comparable<Timing> {
         cal1.setTime(time1.getTiming());
         cal2.setTime(time2.getTiming());
 
-        int result = cal1.compareTo(cal2);
-
-        if (result > 0) {
+        if (cal1.compareTo(cal2) > 0) {
             isOrdered = false;
         }
 
-        //        if (cal1.get(Calendar.YEAR) > cal2.get(Calendar.YEAR)) {
-        //            isOrdered = false;
-        //        } else if (cal1.get(Calendar.MONTH) > cal2.get(Calendar.MONTH)) {
-        //            isOrdered = false;
-        //        } else if (cal1.get(Calendar.DAY_OF_MONTH) > cal2.get(Calendar.DAY_OF_MONTH)) {
-        //            isOrdered = false;
-        //        } else if (cal1.get(Calendar.HOUR_OF_DAY) > cal2.get(Calendar.HOUR_OF_DAY)) {
-        //            isOrdered = false;
-        //        } else if (cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY)
-        //                && cal1.get(Calendar.MINUTE) > cal2.get(Calendar.MINUTE)) {
-        //            isOrdered = false;
-        //        }
         return isOrdered;
     }
 

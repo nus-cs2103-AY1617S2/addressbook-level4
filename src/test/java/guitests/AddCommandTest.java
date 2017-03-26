@@ -32,10 +32,29 @@ public class AddCommandTest extends AddressBookGuiTest {
         //// //add to empty list
         commandBox.runCommand("clear");
         assertAddSuccess(td.alice);
-        //
         //// //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        //@@author A0164212U
+        //
+        // //invalid timing order
+        //start date = end date (start time > end time)
+        commandBox.runCommand("add timeOrderTest sd/11:45 ed/10:45");
+        assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
+        //start date > end date (same time)
+        commandBox.runCommand("add timeOrderTest sd/10:45 26/03/2017 ed/10:45 25/03/2016");
+        assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
+        //start date > end date (no time)
+        commandBox.runCommand("add timeOrderTest sd/3/8/2017 ed/25/03/2016");
+        assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
+        //start date > end date (start time > end time)
+        commandBox.runCommand("add timeOrderTest sd/10:45 1/1/2017 ed/9:45 1/1/2016");
+        assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
+        //start date > end date (start time < end time)
+        commandBox.runCommand("add timeOrderTest sd/8:45 05/06/2012 ed/9:45 02/05/2012");
+        assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
+        //@@author
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
