@@ -8,6 +8,7 @@ import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueEventList;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
@@ -30,9 +31,13 @@ public interface Model {
 
     /** Adds the given Task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Mark the given Task as complete **/
+    void MarkTaskAsComplete(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given Event */
-    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
+    /** Adds the given Event 
+     * @throws DuplicateTimeClashException */
+    void addEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
 
     /**
      * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -49,26 +54,41 @@ public interface Model {
      *
      * @throws DuplicateEventException if updating the Event's details causes the Event to be equivalent to
      *      another existing Event in the list.
+     * @throws DuplicateTimeClashException if the updating Event clashes in time with another Event.
      * @throws IndexOutOfBoundsException if {@code filteredEventListIndex} < 0 or >= the size of the filtered list.
      */
     void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
-            throws UniqueEventList.DuplicateEventException;
+            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
 
     /** Returns the filtered Task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     /** Returns the filtered Event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
     UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
-
-    /** Updates the filter of the filtered Task list to show all activities */
-    void updateFilteredTaskListToShowAll();
-
-    /** Updates the filter of the filtered Event list to show all activities */
-    void updateFilteredEventListToShowAll();
+    
+    /** Updates the filters of the filtered Task list and filtered Event list to show all activities */
+    public void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered Task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
     /** Updates the filter of the filtered Event list to filter by the given keywords*/
     void updateFilteredEventList(Set<String> keywords);
+    
+    /** Empties the previousCommand list and adds the newest one in, always keeping only 1*/
+    void storePreviousCommand(String command);
+    /** Updates the filter of the filtered Event list to show completed task*/
+    //void updateFilteredListToShowComplete();
+    /** Updates the filter of the filtered Event list to show unfinished task*/
+    //void updateFilteredListToShowIncomplete();
+    
+    void setDisplayStatus(String status);
+
+
+    /** Finds the index of the event in the filtered list*/
+    int findEventIndex(Event event);
+
+    /** Finds the index of the task in the filtered list*/
+    int findTaskIndex(Task task);
+
 }

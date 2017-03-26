@@ -103,7 +103,7 @@ public class EditCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editEventDescriptor.isAnyFieldEdited()) {
+        if (!editEventDescriptor.isAnyFieldEdited() && !editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
         String taskorevent = preambleFields.get(0).get();

@@ -6,26 +6,33 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 public class Task implements ReadOnlyTask {
+    
+    public static final boolean DEFAULT_TASK_STATUS = false;
+    public static final boolean COMPLETED_TASK_STATUS = true;
 
     private Description description;
     private Priority priority;
-    private ByDate bydate;
-    private ByTime bytime;
+    private ByDate byDate;
+    private ByTime byTime;
     private Location location;
+    private boolean status;
 
     private UniqueTagList tags;
 
     /**
      * Description and Priority must be present.
      */
-    public Task(Description description, Priority priority, ByDate bydate, ByTime bytime,
-            Location location, UniqueTagList tags) {
+
+    public Task(Description description, Priority priority, ByTime byTime, ByDate byDate,
+            Location location, UniqueTagList tags, boolean status) {
+
         assert !CollectionUtil.isAnyNull(description, priority, tags);
         this.description = description;
         this.priority = priority;
-        this.bydate = bydate;
-        this.bytime = bytime;
+        this.byTime = byTime;
+        this.byDate = byDate;
         this.location = location;
+        this.status = status;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -33,8 +40,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getPriority(), source.getByDate(),
-                source.getByTime(), source.getLocation(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getByTime(),
+                source.getByDate(), source.getLocation(), source.getTags(), source.getStatus());
     }
 
     public void setDescription(Description description) {
@@ -55,24 +62,23 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public void setByDate(ByDate bydate) {
-        assert bydate != null;
-        this.bydate = bydate;
-    }
-
-    @Override
-    public ByDate getByDate() {
-        return bydate;
-    }
-
-    public void setByTime(ByTime bytime) {
-        //can be null
-        this.bytime = bytime;
+    public void setByTime(ByTime byTime) {
+        this.byTime = byTime;
     }
 
     @Override
     public ByTime getByTime() {
-        return bytime;
+        return byTime;
+    }
+    
+    public void setByDate(ByDate byDate) {
+        assert byDate != null;
+        this.byDate = byDate;
+    }
+
+    @Override
+    public ByDate getByDate() {
+        return byDate;
     }
 
     public void setLocation(Location location) {
@@ -96,6 +102,15 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
+    
+    @Override
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     /**
      * Updates this task with the details of {@code replacement}.
@@ -109,6 +124,14 @@ public class Task implements ReadOnlyTask {
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
+    
+    /**
+     * Mark a task as complete
+     */
+    
+    public void completeTask(){
+        this.status = true;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -120,12 +143,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, bydate, bytime, location, tags);
+        return Objects.hash(description, byDate, byTime, location, tags);
     }
 
     @Override
     public String toString() {
         return getAsText();
     }
-
 }

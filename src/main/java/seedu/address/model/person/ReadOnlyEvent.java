@@ -1,7 +1,10 @@
 package seedu.address.model.person;
 
+import java.util.Comparator;
+
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0148038A
 /**
  * A read-only immutable interface for an Event in WhatsLeft.
  * Implementations should guarantee: details are present and not null, field values are validated.
@@ -27,12 +30,18 @@ public interface ReadOnlyEvent {
     default boolean isSameStateAs(ReadOnlyEvent other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                && other.getStartTime().equals(this.getStartTime())
-                && other.getEndTime().equals(this.getEndTime())
-                && other.getStartDate().equals(this.getStartDate())
-                && other.getEndDate().equals(this.getEndDate())
-                && other.getLocation().equals(this.getLocation()));
+                && (other.getDescription().toString() == null? this.getDescription().toString() == null :
+                    other.getDescription().toString().equals(this.getDescription().toString())) // state checks here onwards
+                && (other.getStartTime().toString() == null? this.getStartTime().toString() == null :
+                    other.getStartTime().toString().equals(this.getStartTime().toString()))
+                && (other.getEndTime().toString() == null? this.getEndTime().toString() == null :
+                    other.getEndTime().toString().equals(this.getEndTime().toString()))
+                && (other.getStartDate().toString() == null? this.getStartDate().toString() == null :
+                    other.getStartDate().toString().equals(this.getStartDate().toString()))
+                && (other.getEndDate().toString() == null? this.getEndDate().toString() == null :
+                    other.getEndDate().toString().equals(this.getEndDate().toString()))
+                && (other.getLocation().toString() == null? this.getLocation().toString() == null :
+                    other.getLocation().toString().equals(this.getLocation().toString())));
     }
 
     /**
@@ -42,18 +51,35 @@ public interface ReadOnlyEvent {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" Start Time: ")
-                .append(getStartTime())
+                .append(getStartTime().toString())
                 .append(" Start Date: ")
-                .append(getStartDate())
+                .append(getStartDate().toString())
                 .append(" End Time: ")
-                .append(getEndTime())
+                .append(getEndTime().toString())
                 .append(" End Date: ")
-                .append(getEndDate())
+                .append(getEndDate().toString())
                 .append(" Location: ")
                 .append(getLocation())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
+    
+    //@@author A0148038A
+	static Comparator<? super ReadOnlyEvent> getComparator() {
+		// sort by start date first
+		Comparator<ReadOnlyEvent> byStartDate = (e1, e2) -> e1.getStartDate().compareTo(e2.getStartDate());
+						
+		// then sort by start time
+		Comparator<ReadOnlyEvent> byStartTime = (e1, e2) -> e1.getStartTime().compareTo(e2.getStartTime());
+				
+		// then sort by end date
+		Comparator<ReadOnlyEvent> byEndDate = (e1, e2) -> e1.getEndDate().compareTo(e2.getEndDate());
+				
+		// then sort by end time
+		Comparator<ReadOnlyEvent> byEndTime = (e1, e2) -> e1.getEndTime().compareTo(e2.getEndTime());
+						
+		return byStartDate.thenComparing(byStartTime).thenComparing(byEndDate).thenComparing(byEndTime);
+	}
 
 }

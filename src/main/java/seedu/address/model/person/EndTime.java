@@ -1,20 +1,23 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
+//@@author A0148038A
 /**
  * Represents an Event's EndTime in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
 public class EndTime {
-	public static final String MESSAGE_ENDTIME_CONSTRAINTS =
-            "Event start time should be in HH:MM format e.g. 00:00 represents midnight";
+    
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS =
+            "Event end time can only be in this format: hhmm, e.g. 1300";
 
     public final LocalTime value;
-    
+
     /**
      * Validates given start time.
      *
@@ -23,17 +26,32 @@ public class EndTime {
     public EndTime(String endTimeArg) throws IllegalValueException {
         if (endTimeArg == null) {
             this.value = null;
-        } else {
-        	try {
-        		this.value = StringUtil.parseStringToTime(endTimeArg);
-        	} catch (IllegalValueException illegalValueException) {
-        		throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
-        	}
+        } 
+        else {
+            try {
+                this.value = StringUtil.parseStringToTime(endTimeArg);
+            } catch (DateTimeException illegalValueException) {
+                throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
+                }
+            }
         }
+    
+    /*
+     * For JAXB use
+     */
+    public EndTime(LocalTime endTime) {
+        value = endTime;
+    }
+
+    public LocalTime getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
+        if (value == null) {
+            return null;
+        }
         return value.toString();
     }
 
@@ -48,5 +66,8 @@ public class EndTime {
     public int hashCode() {
         return value.hashCode();
     }
-
+    
+  	public int compareTo(EndTime o) {
+      	return this.getValue().compareTo(o.getValue());
+  	}
 }

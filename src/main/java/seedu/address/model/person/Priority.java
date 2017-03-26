@@ -2,15 +2,17 @@ package seedu.address.model.person;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+//@@author A0148038A
 /**
  * Represents an Activity's priority level in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Activity priority should only be high, medium or low";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be high, medium or low";
 
     public final String value;
+    public final int integerLevel;
 
     /**
      * Validates given priority level.
@@ -18,28 +20,23 @@ public class Priority {
      * @throws IllegalValueException if given priority level is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-        if (priority == null) {
+    	if (priority == null) {
             this.value = null;
+            this.integerLevel = 0;
+        } else if (priority.equals("high")) {
+        	this.value = priority;
+        	this.integerLevel = 3;
+        } else if (priority.equals("medium")) {
+        	this.value = priority;
+        	this.integerLevel = 2;
+        } else if (priority.equals("low")) {
+        	this.value = priority;
+        	this.integerLevel = 1;
         } else {
-            String trimmedPriority = priority.trim();
-            if (!isValidPriority(trimmedPriority)) {
-                throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
-            }
-            this.value = trimmedPriority;
+        	throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
     }
 
-    /**
-     * Returns true if a given string is a valid person phone number.
-     */
-    public static boolean isValidPriority(String test) {
-        if (test == null) {
-            return true;
-        }
-        return PriorityLevel.isInEnum(test);
-    }
-
-    @Override
     public String toString() {
         return value;
     }
@@ -55,5 +52,9 @@ public class Priority {
     public int hashCode() {
         return value.hashCode();
     }
+    
+    public int compareTo(Priority o) {
+  		return this.integerLevel - o.integerLevel;
+  	}
 
 }

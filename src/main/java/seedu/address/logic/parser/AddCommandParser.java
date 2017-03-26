@@ -23,6 +23,10 @@ import seedu.address.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser {
+    
+    private static String DEFAULT_START_TIME = "0001";
+    private static String DEFAULT_END_TIME = "2359";
+    
     //@@author A0110491U
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -62,6 +66,24 @@ public class AddCommandParser {
             //Event cannot have non-event attributes
             if (startdate != null && (priority != null || bydate != null || bytime != null)) {
                 throw new IllegalValueException(MESSAGE_CAN_ONLY_ADD_ONE);
+            }
+            
+            //default enddate to same startdate
+            if (startdate != null && enddate == null) {
+                enddate = startdate;
+            }
+            //default block whole day
+            if (starttime == null && endtime == null) {
+                starttime = DEFAULT_START_TIME;
+                endtime = DEFAULT_END_TIME;
+            }
+            //default block to end of day
+            if (starttime != null && endtime == null) {
+                endtime = DEFAULT_END_TIME;
+            }
+            //default block from start of day
+            if (endtime != null && starttime == null) {
+                starttime = DEFAULT_START_TIME;
             }
 
             return new AddCommand(
