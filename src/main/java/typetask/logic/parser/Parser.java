@@ -17,6 +17,7 @@ import typetask.logic.commands.FindCommand;
 import typetask.logic.commands.HelpCommand;
 import typetask.logic.commands.IncorrectCommand;
 import typetask.logic.commands.ListCommand;
+import typetask.logic.commands.SaveCommand;
 import typetask.logic.commands.SelectCommand;
 import typetask.logic.commands.SettingCommand;
 import typetask.logic.commands.UndoCommand;
@@ -93,6 +94,9 @@ public class Parser {
 
         case SettingCommand.COMMAND_WORD:
             return new SettingCommandParser().parse(arguments);
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommandParser().parse(arguments);
