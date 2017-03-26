@@ -24,7 +24,7 @@ public class TestApp extends MainApp {
     protected static final String EZDO_NAME = "Test";
     protected Supplier<ReadOnlyEzDo> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
-    
+
     private static final double MIN_HEIGHT = 820;
     private static final double MIN_WIDTH = 1400;
 
