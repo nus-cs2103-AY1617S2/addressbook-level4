@@ -53,6 +53,7 @@
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
+      <AnchorPane fx:id="taskCardHeaderPlaceholder" />
       <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="SOMETIMES" />
    </children>
 </VBox>
