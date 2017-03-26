@@ -69,8 +69,8 @@ public class AddCommandParser {
             tagsString = Optional.ofNullable(matcher.group("tags")).orElse("").trim();
 
             // Log tokens for debugging.
-            logger.info(String.format("%s taskName: '%s', startDateString: '%s', endDateString: '%s', tags: '%s'", logPrefix,
-                    taskName, startDateString, endDateString, tagsString));
+            logger.info(String.format("%s taskName: '%s', startDateString: '%s', endDateString: '%s', tags: '%s'",
+                    logPrefix, taskName, startDateString, endDateString, tagsString));
 
             // Convert the String to Date objects
             startDate = NattyDateUtil.parseSingleDate(startDateString);
@@ -108,3 +108,4 @@ public class AddCommandParser {
     }
 
 }
+

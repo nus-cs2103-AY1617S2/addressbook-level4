@@ -51,21 +51,21 @@ public class EditCommandParser {
 
 
         try {
-	    // Extract the tokens from the argument string.
-	    final Matcher matcher = ARGUMENTS_FORMAT.matcher(args);
-	    if (!matcher.matches()) {
-	        throw new NoSuchElementException();
-	    }
+            // Extract the tokens from the argument string.
+            final Matcher matcher = ARGUMENTS_FORMAT.matcher(args);
+            if (!matcher.matches()) {
+                throw new NoSuchElementException();
+            }
 
-	    index = ParserUtil.parseIndex(matcher.group("index")).get();
+            index = ParserUtil.parseIndex(matcher.group("index")).get();
             taskName = Optional.ofNullable(matcher.group("description")).orElse("").trim();
             startDateString = Optional.ofNullable(matcher.group("startdate")).orElse("");
             endDateString = Optional.ofNullable(matcher.group("enddate")).orElse("");
             tagsString = Optional.ofNullable(matcher.group("tags")).orElse("").trim();
 
             // Log tokens for debugging.
-            logger.info(String.format("%s taskName: '%s', startDateString: '%s', endDateString: '%s', tags: '%s'", logPrefix,
-                    taskName, startDateString, endDateString, tagsString));
+            logger.info(String.format("%s taskName: '%s', startDateString: '%s', endDateString: '%s', tags: '%s'",
+                    logPrefix, taskName, startDateString, endDateString, tagsString));
 
             // Set the EditTaskDescriptor change values.
             editTaskDescriptor.setName(ParserUtil.parseName(taskName));

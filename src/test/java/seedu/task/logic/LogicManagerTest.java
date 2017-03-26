@@ -413,6 +413,7 @@ public class LogicManagerTest {
             return new Task(name, startDate, endDate, completion, tags);
         }
 
+        //@@author A0146789H
         /**
          * Generates a valid person using the given seed.
          * Running this function with the same parameter values guarantees the returned person will have the same state.
@@ -448,6 +449,7 @@ public class LogicManagerTest {
             return cmd.toString();
         }
 
+        //@@author
         /**
          * Generates an TaskManager with auto-generated persons.
          */
