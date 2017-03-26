@@ -1,7 +1,9 @@
 package seedu.opus.model.task;
 
 import java.time.Clock;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
@@ -54,8 +56,12 @@ public class DateTime {
         // 1 for Monday, 7 for Sunday
         int dayOfCurrentWeek = now.getDayOfWeek().getValue();
 
-        LocalDateTime startOfWeek = now.minusDays(dayOfCurrentWeek);
-        LocalDateTime endOfWeek = now.plusDays(7 - dayOfCurrentWeek);
+        // We take last Sunday and next Monday because isAfter and isBefore methods are not inclusive.
+        LocalDate lastSundayDate = now.minusDays(dayOfCurrentWeek - 2).toLocalDate();
+        LocalDate nextMondayDate = now.plusDays(8 - dayOfCurrentWeek).toLocalDate();
+
+        LocalDateTime startOfWeek = LocalDateTime.of(lastSundayDate, LocalTime.MAX);
+        LocalDateTime endOfWeek = LocalDateTime.of(nextMondayDate, LocalTime.MIDNIGHT);
 
         return dateTime.isAfter(startOfWeek) && dateTime.isBefore(endOfWeek);
     }
