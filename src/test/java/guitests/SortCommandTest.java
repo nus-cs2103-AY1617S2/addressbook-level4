@@ -2,7 +2,6 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.junit.Test;
 
 import seedu.ezdo.commons.core.Messages;
