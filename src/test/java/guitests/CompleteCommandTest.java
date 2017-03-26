@@ -3,7 +3,7 @@ package guitests;
 import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 
-public class CompleteCommandTest extends ActivityManagerGuiTest {
+public class CompleteCommandTest extends ToDoListGuiTest {
     
     @Test
     public void complete() {
