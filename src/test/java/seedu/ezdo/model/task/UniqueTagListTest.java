@@ -1,7 +1,9 @@
 package seedu.ezdo.model.task;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import org.junit.Rule;
 import org.junit.Test;
