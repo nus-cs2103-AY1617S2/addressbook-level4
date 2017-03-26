@@ -125,8 +125,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         TestTask markedDoneTask = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 20, 2018 11.30pm")
                 .withEndDateTime("Apr 28, 2018 3pm")
-                .withInformation("10th street").withRecurrence(Frequency.YEARLY)
-                .withCategories("Done").build();
+                .withInformation("10th street").withRecurrence(Frequency.YEARLY).build();
 
         assertMarkDoneSuccess(true, taskBossIndex, taskBossIndex, markedDoneTask);
     }
