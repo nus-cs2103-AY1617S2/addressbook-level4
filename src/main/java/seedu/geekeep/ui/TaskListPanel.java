@@ -120,7 +120,7 @@ public class TaskListPanel extends UiPart<Region> {
             }
         }
     }
-    
+
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         protected int getSourceIndex() {
