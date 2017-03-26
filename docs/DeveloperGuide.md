@@ -597,11 +597,12 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on Windows 7 or later as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. A user should be able to start using this without needing an installer.
+5. Commands should take less than 3 seconds to run.
+6. Should come with automated unit tests and open source code.
 
 ## Appendix D : Glossary
 
@@ -610,6 +611,28 @@ Use case ends.
 > A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
+
+**Google Tasks**
+
+Author: Lim Miao Ling
+
+Pros:
+
+* Supported on almost every platform, web or mobile.
+* Synced with Google Calendar. Displays tasks with deadlines along with Google calendar so you can better manage your schedule.
+* Able to add task by deadline by clicking the date in Google Calendar.
+* Able to create subtasks easily (just by pressing tab). Marking the supertask as complete will auto-complete all subtasks as complete.
+* Uncluttered presentation as you can only see the task title along with the deadline.
+* Extremely easy to get into and use.
+* Completely free to use. No features locked behind a paywall.
+
+Cons:
+
+* Can't categorise tasks. You can make different lists for tasks, but then you can't view more than one list simultaneously.
+* Must refresh page if the computer goes to sleep while the page is open. (Fixed recently.)
+* No reminders or notifications for tasks that are due soon. No indication if a task is overdue.
+* Can't see or edit task hiearchy when sorted by deadline.
+* No search function, so it can be difficult to find a specific task when the user has a lot of tasks.
 
 **Product Name**
 
