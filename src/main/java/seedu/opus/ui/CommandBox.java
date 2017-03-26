@@ -116,7 +116,7 @@ public class CommandBox extends UiPart<Region> {
      * @author xbili
      *
      */
-    private class AutocompleteTrie extends Trie {
+    private static class AutocompleteTrie extends Trie {
 
         private static final String[] COMMANDS = { "add", "delete", "edit", "mark", "unmark", "schedule", "list", "help",
             "find", "undo", "redo", "clear" };
