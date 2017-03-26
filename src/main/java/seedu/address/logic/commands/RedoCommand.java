@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
@@ -38,10 +40,13 @@ public class RedoCommand extends Command {
         }
         ReadOnlyTask taskToComplete = lastShownTaskList.get(filteredActivityListIndex-1);
         try {
+            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+            ModelManager.setPreviousState(currState);
             model.MarkTaskAsPending(filteredActivityListIndex-1);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
+        model.storePreviousCommand("redo");
         return new CommandResult(String.format(MESSAGE_REDO_TASK_SUCCESS, taskToComplete));
     }
 }

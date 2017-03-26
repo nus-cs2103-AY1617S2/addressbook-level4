@@ -21,7 +21,8 @@ public class UndoCommand extends Command {
         if (previousCommand.equals("")) {
             return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
         }
-        if (!previousCommand.equals("edit") && !previousCommand.equals("delete") && !previousCommand.equals("clear")) {
+        if (!previousCommand.equals("edit") && !previousCommand.equals("delete") && !previousCommand.equals("clear")
+                && !previousCommand.equals("finish") && !previousCommand.equals("add") && !previousCommand.equals("redo")) {
             return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
         }
         ReadOnlyWhatsLeft previousState = ModelManager.getPreviousState();

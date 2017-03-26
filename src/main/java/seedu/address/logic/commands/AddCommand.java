@@ -8,6 +8,8 @@ import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.person.ByDate;
 import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
@@ -89,14 +91,17 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.storePreviousCommand("");
+            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+            ModelManager.setPreviousState(currState);
             if (toAddTask == null) {
                 model.addEvent(toAddEvent);
                 EventsCenter.getInstance().post(new JumpToEventListRequestEvent(model.findEventIndex(toAddEvent), "ev"));
+                model.storePreviousCommand("add");
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
             } else if (toAddEvent == null) {
                 model.addTask(toAddTask);
                 EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(model.findTaskIndex(toAddTask), "ts"));
+                model.storePreviousCommand("add");
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
             }
         } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {
