@@ -24,6 +24,7 @@ import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
@@ -285,25 +286,14 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
 
-            String taskStartDate = task.getStartDate().toString();
-            String taskDueDate = task.getDueDate().toString();
-            String taskPriority = task.getPriority().toString();
-
             Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
-            boolean startDateExist = (taskStartDate.length() != 0);
-            boolean dueDateExist = (taskDueDate.length() != 0);
-            boolean priorityExist = (taskPriority.length() != 0);
 
             return (nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
-                    && (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
-                            || (priorityExist && task.getPriority().toString().equals(priority.get().toString())))
-                    && (!startDate.isPresent() || (startDate.get().toString().equals("") && startDateExist)
-                            || (startDateExist && taskStartDate.substring(0, 9).equals
-                                    (startDate.get().toString().substring(0, 9))))
-                    && (!dueDate.isPresent() || (dueDate.get().toString().equals("") && dueDateExist) || (dueDateExist
-                            && taskDueDate.substring(0, 9).equals(dueDate.get().toString().substring(0, 9))))
+                    && comparePriority(task.getPriority())
+                    && compareStartDate(task.getStartDate())
+                    && compareDueDate(task.getDueDate())
                     && (taskTagStringSet.containsAll(tags));
 
         }
@@ -313,7 +303,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
 
-        public Set<String> convertToTagStringSet(Set<Tag> tags) {
+        private Set<String> convertToTagStringSet(Set<Tag> tags) {
             Object[] tagArray = tags.toArray();
             Set<String> tagSet = new HashSet<String>();
 
@@ -322,6 +312,35 @@ public class ModelManager extends ComponentManager implements Model {
             }
 
             return tagSet;
+        }
+
+        private boolean comparePriority(Priority taskPriority) {
+
+            String taskPriorityString = taskPriority.toString();
+            boolean priorityExist = (taskPriorityString.length() != 0);
+
+            return (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
+                    || (priorityExist && taskPriorityString.equals(priority.get().toString())));
+        }
+
+        private boolean compareStartDate(TaskDate taskStartDate) {
+
+            String taskStartDateString = taskStartDate.toString();
+            boolean taskStartDateExist = (taskStartDateString.length() != 0);
+
+            return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+                    || (taskStartDateExist
+                            && taskStartDateString.substring(0, 9).equals(startDate.get().toString().substring(0, 9))));
+        }
+
+        private boolean compareDueDate(TaskDate taskDueDate) {
+
+            String taskDueDateString = taskDueDate.toString();
+            boolean taskDueDateExist = (taskDueDateString.length() != 0);
+
+            return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+                    || (taskDueDateExist
+                            && taskDueDateString.substring(0, 9).equals(dueDate.get().toString().substring(0, 9))));
         }
     }
 
