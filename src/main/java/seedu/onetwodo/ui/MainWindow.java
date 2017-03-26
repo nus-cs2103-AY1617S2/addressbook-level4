@@ -22,6 +22,7 @@ import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.GuiSettings;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.logic.Logic;
+import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.logic.commands.RedoCommand;
 import seedu.onetwodo.logic.commands.UndoCommand;
 import seedu.onetwodo.model.UserPrefs;
@@ -33,6 +34,8 @@ import seedu.onetwodo.model.task.TaskType;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
+
+    private static final String LIST_DONE_COMMAND_INPUT = ListCommand.COMMAND_WORD + " done";
 
     private static final String FXML = "MainWindow.fxml";
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
@@ -69,6 +72,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem redoMenuItem;
+
+    @FXML
+    private MenuItem listDoneMenuItem;
 
     @FXML
     private AnchorPane deadlineListPanelPlaceholder;
@@ -129,6 +135,7 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
         setAccelerator(undoMenuItem, KeyCombination.valueOf("Ctrl + Z"));
         setAccelerator(redoMenuItem, KeyCombination.valueOf("Ctrl + R"));
+        setAccelerator(listDoneMenuItem, KeyCombination.valueOf("Ctrl + Shift + D"));
     }
 
     /**
@@ -248,6 +255,11 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleRedo() {
         commandBox.handleCommands(RedoCommand.COMMAND_WORD);
+    }
+
+    @FXML
+    public void handleListDone() {
+        commandBox.handleCommands(LIST_DONE_COMMAND_INPUT);
     }
 
     void show() {
