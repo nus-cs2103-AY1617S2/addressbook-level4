@@ -34,6 +34,11 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.isDone = false;
+        checkTaskType(startDate, endDate);
+    }
+
+    // @@ author A0141138N
+    private void checkTaskType(StartDate startDate, EndDate endDate) {
         if (!startDate.hasDate() && !endDate.hasDate()) {
             this.type = TaskType.TODO;
         } else if (!startDate.hasDate() && endDate.hasDate()) {
