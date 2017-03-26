@@ -34,6 +34,11 @@ public class CommandBox extends UiPart<Region> {
         addToPlaceholder(commandBoxPlaceholder);
         history = new UserInputHistory();
         registerCursorKeyEventFilter();
+        focusCommandBox();
+    }
+
+    private void focusCommandBox() {
+        commandTextField.requestFocus();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
