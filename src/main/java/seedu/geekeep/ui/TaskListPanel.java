@@ -114,7 +114,7 @@ public class TaskListPanel extends UiPart<Region> {
     public void selectTab(int tab) {
         tabPanePlaceHolder.getTabs().get(tab).setDisable(false);
         tabPanePlaceHolder.getSelectionModel().select(tab);
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             if (i != tab) {
                 tabPanePlaceHolder.getTabs().get(i).setDisable(true);
             }
