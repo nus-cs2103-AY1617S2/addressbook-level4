@@ -15,6 +15,14 @@ import seedu.toluist.commons.util.DateTimeUtil;
 public class Task implements Comparable<Task> {
     private static final String HIGH_PRIORITY_STRING = "high";
     private static final String LOW_PRIORITY_STRING = "low";
+    private static final String ERROR_VALIDATION_EMPTY_DESCRIPTION = "Description must not be empty.";
+    private static final String ERROR_VALIDATION_START_DATE_AFTER_END_DATE = "Start date must be before end date.";
+    private static final String ERROR_VALIDATION_UNCLASSIFIED_TASK = "Task cannot contain only start date.";
+    private static final String ERROR_INVALID_PRIORITY_LEVEL = "Priority level must be either 'low' or 'high'.";
+    private static final String ERROR_INVALID_RECURRING_FREQUENCY = "Recurring frequency must be either 'daily',"
+            + "'weekly', 'monthly' or 'yearly'.";
+    private static final String ERROR_INVALID_RECURRING_END_DATE = "Non-recurring tasks cannot have end "
+            + "date of recurrence,";
 
     // List of tags is unique
     private TreeSet<Tag> allTags = new TreeSet<>();
@@ -57,13 +65,13 @@ public class Task implements Comparable<Task> {
 
     public void validate() {
         if (!validateDescriptionMustNotBeEmpty()) {
-            throw new IllegalArgumentException("Description must not be empty.");
+            throw new IllegalArgumentException(ERROR_VALIDATION_EMPTY_DESCRIPTION);
         }
         if (!validateStartDateMustBeBeforeEndDate()) {
-            throw new IllegalArgumentException("Start date must be before end date.");
+            throw new IllegalArgumentException(ERROR_VALIDATION_START_DATE_AFTER_END_DATE);
         }
         if (!validateTaskIsFloatingIsEventOrHasDeadline()) {
-            throw new IllegalArgumentException("Task must be floating, must be an event, or has deadline,");
+            throw new IllegalArgumentException(ERROR_VALIDATION_UNCLASSIFIED_TASK);
         }
     }
 
@@ -284,7 +292,7 @@ public class Task implements Comparable<Task> {
         this.priority = priority;
     }
 
-    public void setTaskPriority(String priorityString) {
+    public void setTaskPriority(String priorityString) throws IllegalArgumentException {
         switch (priorityString.toLowerCase()) {
         case HIGH_PRIORITY_STRING:
             setTaskPriority(TaskPriority.HIGH);
@@ -293,7 +301,7 @@ public class Task implements Comparable<Task> {
             setTaskPriority(TaskPriority.LOW);
             break;
         default:
-            throw new IllegalArgumentException("Task priority must be either 'low' or 'high'.");
+            throw new IllegalArgumentException(ERROR_INVALID_PRIORITY_LEVEL);
         }
     }
 
@@ -310,11 +318,12 @@ public class Task implements Comparable<Task> {
         return recurringFrequency;
     }
 
-    public RecurringFrequency toRecurringFrequency(String recurringFrequencyString) {
+    public RecurringFrequency toRecurringFrequency(String recurringFrequencyString)
+        throws IllegalArgumentException, NullPointerException {
         try {
             return RecurringFrequency.valueOf(recurringFrequencyString.toUpperCase());
         } catch (IllegalArgumentException | NullPointerException exception) {
-            throw new IllegalArgumentException("Invalid recurring frequency string");
+            throw new IllegalArgumentException(ERROR_INVALID_RECURRING_FREQUENCY);
         }
     }
 
@@ -330,11 +339,11 @@ public class Task implements Comparable<Task> {
         }
     }
 
-    public void setRecurringEndDateTime(LocalDateTime recurringEndDateTime) {
+    public void setRecurringEndDateTime(LocalDateTime recurringEndDateTime) throws IllegalArgumentException {
         if (isRecurring()) {
             this.recurringEndDateTime = recurringEndDateTime;
         } else {
-            throw new IllegalArgumentException("Non-recurring task cannot have recurring until end date.");
+            throw new IllegalArgumentException(ERROR_INVALID_RECURRING_END_DATE);
         }
     }
 
@@ -350,10 +359,10 @@ public class Task implements Comparable<Task> {
         setRecurring(recurringEndDateTime, toRecurringFrequency(recurringFrequencyString));
     }
 
-    public void setRecurring(LocalDateTime recurringEndDateTime, RecurringFrequency recurringFrequency) {
+    public void setRecurring(LocalDateTime recurringEndDateTime, RecurringFrequency recurringFrequency)
+        throws IllegalArgumentException {
         if (recurringFrequency == null) {
-            throw new IllegalArgumentException("Recurring task must have a"
-                    + " frequency of 'daily', 'weekly', 'monthly' or 'yearly'.");
+            throw new IllegalArgumentException(ERROR_INVALID_RECURRING_FREQUENCY);
         }
         this.recurringEndDateTime = recurringEndDateTime;
         this.recurringFrequency = recurringFrequency;
