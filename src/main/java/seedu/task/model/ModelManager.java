@@ -13,6 +13,7 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -184,5 +185,27 @@ public class ModelManager extends ComponentManager implements Model {
 	    return "name=" + String.join(", ", nameKeyWords);
 	}
     }
+
+	@Override
+	public void undo() throws Exception {
+		taskmanager.undo();
+	}
+
+	@Override
+	public void updateBackup() throws DuplicateTaskException {
+		taskmanager.updateBackup();
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sortByTime() {
+		taskmanager.sortTasksByTime();
+		
+	}
+	public void sortByName() {
+		System.out.println("test");
+		taskmanager.sortTasksByName();
+	}
 
 }

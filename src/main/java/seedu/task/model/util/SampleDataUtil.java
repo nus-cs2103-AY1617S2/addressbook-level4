@@ -30,6 +30,7 @@ public class SampleDataUtil {
 		    new Task(new TaskName("Buy orange juice"), new TaskDate("050117"), new TaskTime("1010"),
 			    new TaskTime("1100"), new String("Look out for sweets along the way."),
 			    new TaskStatus("Ongoing"), new UniqueTagList()) };
+
 	} catch (IllegalValueException e) {
 	    throw new AssertionError("sample data cannot be invalid", e);
 	}

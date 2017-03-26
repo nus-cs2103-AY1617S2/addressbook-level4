@@ -122,19 +122,23 @@ public class LogicManagerTest {
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
+
 	    ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
 	assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
+
     }
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that
      * the result message is correct. Both the 'task manager' and the 'last
+
      * shown list' are verified to be unchanged.
      * 
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
      *      List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
+
 	TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
 	List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
 	assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
@@ -168,6 +172,7 @@ public class LogicManagerTest {
 	// Confirm the state of data (saved and in-memory) is as expected
 	assertEquals(expectedTaskManager, model.getTaskManager());
 	assertEquals(expectedTaskManager, latestSavedTaskManager);
+
     }
 
     @Test
@@ -208,6 +213,7 @@ public class LogicManagerTest {
     }
 
     @Test
+
     public void execute_add_invalidTaskData() {
 	assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", TaskName.MESSAGE_NAME_CONSTRAINTS);
 	/*
@@ -242,7 +248,7 @@ public class LogicManagerTest {
 	Task toBeAdded = helper.adam();
 
 	// setup starting state
-	model.addTask(toBeAdded); // task already in internal address book
+	model.addTask(toBeAdded); // task already in internal task manager
 
 	// execute command and verify result
 	assertCommandFailure(helper.generateAddCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -251,6 +257,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_list_showsAllTasks() throws Exception {
+
 	// prepare expectations
 	TestDataHelper helper = new TestDataHelper();
 	TaskManager expectedAB = helper.generateTaskManager(2);
@@ -258,7 +265,7 @@ public class LogicManagerTest {
 
 	// prepare task manager state
 	helper.addToModel(model, 2);
-
+      
 	assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
     }
 
@@ -296,11 +303,13 @@ public class LogicManagerTest {
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
 	String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 	TestDataHelper helper = new TestDataHelper();
+
 	List<Task> taskList = helper.generateTaskList(2);
 
 	// set TM state to 2 task
 	model.resetData(new TaskManager());
 	for (Task p : taskList) {
+
 	    model.addTask(p);
 	}
 
@@ -370,6 +379,7 @@ public class LogicManagerTest {
 	Task p1 = helper.generateTaskWithName("KE Y");
 	Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
+
 	List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
 	TaskManager expectedTM = helper.generateTaskManager(fourTasks);
 	List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
@@ -392,6 +402,7 @@ public class LogicManagerTest {
 	List<Task> expectedList = fourTasks;
 	helper.addToModel(model, fourTasks);
 
+
 	assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
 		expectedList);
     }
@@ -408,6 +419,7 @@ public class LogicManagerTest {
 	TaskManager expectedAB = helper.generateTaskManager(fourTasks);
 	List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
 	helper.addToModel(model, fourTasks);
+
 
 	assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
 		expectedAB, expectedList);
@@ -450,6 +462,7 @@ public class LogicManagerTest {
 
 	}
 
+
 	/** Generates the correct add command based on the person given */
 	String generateAddCommand(Task p) {
 	    StringBuffer cmd = new StringBuffer();
@@ -482,6 +495,7 @@ public class LogicManagerTest {
 	/**
 	 * Generates an TaskManager based on the list of Tasks given.
 	 */
+
 	TaskManager generateTaskManager(List<Task> persons) throws Exception {
 	    TaskManager taskManager = new TaskManager();
 	    addToTaskManager(taskManager, persons);
@@ -511,7 +525,8 @@ public class LogicManagerTest {
 	 * Adds auto-generated Task objects to the given model
 	 * 
 	 * @param model
-	 *            The model to which the Persons will be added
+   
+	 *           The model to which the Tasks will be added
 	 */
 	void addToModel(Model model, int numGenerated) throws Exception {
 	    addToModel(model, generateTaskList(numGenerated));
@@ -520,14 +535,14 @@ public class LogicManagerTest {
 	/**
 	 * Adds the given list of Tasks to the given model
 	 */
-	void addToModel(Model model, List<Task> personsToAdd) throws Exception {
-	    for (Task p : personsToAdd) {
+	void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+	    for (Task p : tasksToAdd) {
 		model.addTask(p);
 	    }
 	}
 
 	/**
-	 * Generates a list of Persons based on the flags.
+	 * Generates a list of Tasks based on the flags.
 	 */
 	List<Task> generateTaskList(int numGenerated) throws Exception {
 	    List<Task> tasks = new ArrayList<>();

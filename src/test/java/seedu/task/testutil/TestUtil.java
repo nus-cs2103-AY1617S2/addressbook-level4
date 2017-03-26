@@ -41,11 +41,6 @@ import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.storage.XmlSerializableTaskManager;
 
-/*
-import seedu.task.model.task.Phone;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
- */
 /**
  * A utility class for test cases.
  */
@@ -78,9 +73,10 @@ public class TestUtil {
     }
 
     private static Task[] getSampleTaskData() {
+
 	try {
 	    // CHECKSTYLE.OFF: LineLength
-	    return new Task[] { new Task(new TaskName("Buy cookies"), new TaskDate("2002017"), new TaskTime("0800"),
+	    return new Task[] { new Task(new TaskName("Buy cookies"), new TaskDate("200217"), new TaskTime("0800"),
 		    new TaskTime("1000"), new String("Look out for grand lucky draws."), new TaskStatus("Ongoing"),
 		    new UniqueTagList()) };
 	    // CHECKSTYLE.ON: LineLength
@@ -88,7 +84,7 @@ public class TestUtil {
 	    assert false;
 	    // not possible
 	    return null;
-	}
+  }
     }
 
     private static Tag[] getSampleTagData() {
@@ -103,6 +99,7 @@ public class TestUtil {
 
     public static List<Task> generateSampleTaskData() {
 	return Arrays.asList(SAMPLE_TASK_DATA);
+
     }
 
     /**
@@ -278,55 +275,42 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * 
-     * @param persons
-     *            The list of persons
-     * @param personsToRemove
-     *            The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removePersonsFromList(final TestTask[] persons, TestTask... personsToRemove) {
-	List<TestTask> listOfPersons = asList(persons);
-	listOfPersons.removeAll(asList(personsToRemove));
-	return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+    public static TestTask[] removetasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
+        List<TestTask> listOftasks = asList(tasks);
+        listOftasks.removeAll(asList(tasksToRemove));
+        return listOftasks.toArray(new TestTask[listOftasks.size()]);
     }
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
-     * 
-     * @param list
-     *            original list to copy from
-     * @param targetIndexInOneIndexedFormat
-     *            e.g. index 1 if the first element is to be removed
+     * Returns a copy of the list with the task at specified index removed.
+     * @param list original list to copy from
+     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestTask[] removePersonFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
-	return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
+        return removetasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * 
-     * @param persons
-     *            The array of persons.
-     * @param person
-     *            The replacement person
-     * @param index
-     *            The index of the person to be replaced.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
-    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
-	persons[index] = person;
-	return persons;
+    public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
+        tasks[index] = task;
+        return tasks;
     }
 
     /**
-     * Appends persons to the array of persons.
-     * 
-     * @param tasks
-     *            A array of persons.
-     * @param tasksToAdd
-     *            The persons that are to be appended behind the original array.
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
@@ -343,8 +327,8 @@ public class TestUtil {
 	return list;
     }
 
-    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask person) {
-	return card.isSameTask(person);
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {

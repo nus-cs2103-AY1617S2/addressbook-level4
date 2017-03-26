@@ -136,4 +136,22 @@ public class TaskDate {
 	}
 
     }
+    public int compareTo(TaskDate other) {
+    	if (this.year > other.year) {
+    		return 1;
+    	} else if (this.year < other.year) {
+    		return -1;
+    	}
+    	if (this.month > other.month) {
+    		return 1;
+    	} else if (this.month < other.month){
+    		return -1;
+    	}
+    	if (this.day > other.day) {
+    		return 1;
+    	} else if (this.day < other.day){
+    		return -1;
+    	}
+    	return 0;
+    }
 }
