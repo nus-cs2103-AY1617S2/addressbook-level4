@@ -1,7 +1,6 @@
 package seedu.doist.model.task;
 
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import seedu.doist.model.tag.UniqueTagList;
@@ -16,8 +15,8 @@ public interface ReadOnlyTask {
     Description getDescription();
     Priority getPriority();
     FinishedStatus getFinishedStatus();
-    Date getStartDate();
-    Date getEndDate();
+    TaskDate getDates();
+
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
