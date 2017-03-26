@@ -8,7 +8,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)
-3.1. [Viewing Help](#31-viewing-help--help)
+* 3.1. [Viewing Help](#31-viewing-help--help)
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
