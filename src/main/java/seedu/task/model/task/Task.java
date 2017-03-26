@@ -24,7 +24,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Priority priority, Timing startTiming, Timing endTiming, UniqueTagList tags) {
+    public Task(Description description, Priority priority, Timing startTiming, Timing endTiming, UniqueTagList tags, boolean recurring) {
         assert !CollectionUtil.isAnyNull(description, priority, startTiming, tags);
         this.description = description;
         this.priority = priority;
@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.complete = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from
         // changes in the arg list
-        this.recurring = false;
+        this.recurring = recurring;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      */
     public Task(ReadOnlyTask source) {
         this(source.getDescription(), source.getPriority(), source.getStartTiming(), source.getEndTiming(),
-                source.getTags());
+                source.getTags(), source.isRecurring());
     }
 
     public void setDescription(Description description) {
@@ -142,6 +142,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return getAsText();
     }
 
+    @Override
     public boolean isRecurring() {
         return recurring;
     }

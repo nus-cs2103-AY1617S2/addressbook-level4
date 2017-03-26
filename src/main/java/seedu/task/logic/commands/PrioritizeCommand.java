@@ -74,8 +74,9 @@ public class PrioritizeCommand extends Command {
         Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToPrioritize::getStartTiming);
         Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToPrioritize::getEndTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToPrioritize::getTags);
+        boolean updatedRecurring = editTaskDescriptor.isRecurring().orElseGet(taskToPrioritize::isRecurring);
 
 
-        return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags);
+        return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags, updatedRecurring);
     }
 }

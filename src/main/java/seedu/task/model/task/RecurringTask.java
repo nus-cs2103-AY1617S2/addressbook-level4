@@ -4,7 +4,6 @@ package seedu.task.model.task;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Objects;
 
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -22,7 +21,7 @@ public class RecurringTask implements ReadOnlyTask {
     private UniqueTagList tags;
     private RecurringFrequency frequency;
 
-    private List<RecurringTaskOccurrence> occurrences;
+    private ArrayList<RecurringTaskOccurrence> occurrences;
 
     /**
      * Every field must be present and not null.
@@ -83,7 +82,7 @@ public class RecurringTask implements ReadOnlyTask {
     public RecurringFrequency getFrequency() {
         return frequency;
     }
-    public List<RecurringTaskOccurrence> getOccurrences() {
+    public ArrayList<RecurringTaskOccurrence> getOccurrences() {
         return occurrences;
     }
 
@@ -171,7 +170,6 @@ public class RecurringTask implements ReadOnlyTask {
                 }
                 occurenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
                 occurrences.add(occurenceToAdd);
-                System.out.println(i);
             }
             break;
         }
@@ -212,13 +210,13 @@ public class RecurringTask implements ReadOnlyTask {
     //returns initial start time
     @Override
     public Timing getStartTiming() {
-        return getOccurrences().get(0).getStartTime();
+        return getOccurrences().get(0).getStartTiming();
     }
 
     //returns initial start time
     @Override
     public Timing getEndTiming() {
-        return getOccurrences().get(0).getEndTime();
+        return getOccurrences().get(0).getEndTiming();
     }
 
     @Override

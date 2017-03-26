@@ -53,13 +53,15 @@ public class AddCommand extends Command {
         Timing startTime = new Timing(startTiming);
         Timing endTime = new Timing(endTiming);
         UniqueTagList tagList = new UniqueTagList(tagSet);
+        boolean recurring = (recurFreq != null);
 
         this.toAdd = new Task(
                 description,
                 pri,
                 startTime,
                 endTime,
-                tagList
+                tagList,
+                recurring
                 );
 
         if (recurFreq != null) {
@@ -71,7 +73,6 @@ public class AddCommand extends Command {
                     tagList,
                     new RecurringFrequency(recurFreq)
                     );
-            toAdd.setRecurring(true);
         }
 
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {

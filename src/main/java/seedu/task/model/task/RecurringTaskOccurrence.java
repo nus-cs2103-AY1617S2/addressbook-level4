@@ -4,33 +4,33 @@ package seedu.task.model.task;
 import seedu.task.commons.util.CollectionUtil;
 
 public class RecurringTaskOccurrence {
-    private Timing startTime;
-    private Timing endTime;
+    private Timing startTiming;
+    private Timing endTiming;
     private boolean complete;
 
     public RecurringTaskOccurrence(Timing startTime, Timing endTime){
         assert !CollectionUtil.isAnyNull(startTime, endTime);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTiming = startTime;
+        this.endTiming = endTime;
         this.complete = false;
     }
 
-    public Timing getStartTime() {
-        return startTime;
+    public Timing getStartTiming() {
+        return startTiming;
     }
 
-    public void setStartTime(Timing startTime) {
+    public void setStartTiming(Timing startTime) {
         assert startTime != null;
-        this.startTime = startTime;
+        this.startTiming = startTime;
     }
 
-    public Timing getEndTime() {
-        return endTime;
+    public Timing getEndTiming() {
+        return endTiming;
     }
 
-    public void setEndTime(Timing endTime) {
+    public void setEndTiming(Timing endTime) {
         assert endTime != null;
-        this.endTime = endTime;
+        this.endTiming = endTime;
 
     }
 

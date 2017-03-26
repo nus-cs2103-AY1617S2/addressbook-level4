@@ -27,6 +27,8 @@ public class XmlAdaptedTask {
     private String startDate;
     @XmlElement(required = true)
     private String endDate;
+    @XmlElement(required = true)
+    private boolean recurring;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -48,6 +50,7 @@ public class XmlAdaptedTask {
         priority = source.getPriority().value;
         startDate = source.getStartTiming().value;
         endDate = source.getEndTiming().value;
+        recurring = source.isRecurring();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -69,6 +72,6 @@ public class XmlAdaptedTask {
         final Timing startDate = new Timing(this.startDate);
         final Timing endDate = new Timing(this.endDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(description, priority, startDate, endDate, tags);
+        return new Task(description, priority, startDate, endDate, tags, recurring);
     }
 }

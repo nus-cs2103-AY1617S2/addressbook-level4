@@ -1,7 +1,6 @@
 package seedu.task.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
@@ -16,7 +15,7 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public interface Model {
     /** Stores list of tasks that are recurring */
-    List<RecurringTask> recurringTaskList = new ArrayList<RecurringTask>();
+    ArrayList<RecurringTask> recurringTaskList = new ArrayList<RecurringTask>();
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyTaskList newData);

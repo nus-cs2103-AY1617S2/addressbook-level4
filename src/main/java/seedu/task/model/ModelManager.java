@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -10,9 +11,12 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskListChangedEvent;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.RecurringTaskOccurrence;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -142,8 +146,56 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        //@@author A0164212U
         @Override
         public boolean run(ReadOnlyTask task) {
+            if (task.isRecurring()) {
+                // find corresponding RecurringTask in recurringTaskList based on description
+                int taskIndex = -1;
+                int occurrenceIndex = -1;
+                Description description = task.getDescription();
+                for (int i = 0; i < Model.recurringTaskList.size(); i++) {
+                    if (Model.recurringTaskList.get(i).getDescription().equals(description)) {
+                        taskIndex = i;
+                        break;
+                    }
+                }
+                // find if any RecurringTaskOccurence exist for the dates corresponding to nameKeyWords in task.getOccurences
+                if (taskIndex != -1) {
+                    ArrayList<RecurringTaskOccurrence> taskOccurrenceList = Model.recurringTaskList.get(taskIndex).getOccurrences();
+
+                    boolean isPresent = false;
+                    for (int j = 0; j < taskOccurrenceList.size(); j++) {
+                        final int finalIndex = j;
+                        isPresent = (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(taskOccurrenceList.get(finalIndex).getStartTiming().value, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                                (nameKeyWords.stream()
+                                        .filter(keyword -> StringUtil.containsWordIgnoreCase(taskOccurrenceList.get(finalIndex).getEndTiming().value, keyword))
+                                        .findAny()
+                                        .isPresent());
+                        if (isPresent) {
+                            occurrenceIndex = j;
+                        }
+                    }
+                }
+                // use the ReccurringTaskOccurence object in addition to the RecurringTask to create a Task object
+                // use model.addTask with this task
+                if (occurrenceIndex != -1) {
+                    Task toAdd = new Task(task.getDescription(), task.getPriority(),
+                            Model.recurringTaskList.get(taskIndex).getOccurrences().get(occurrenceIndex).getStartTiming(),
+                            Model.recurringTaskList.get(taskIndex).getOccurrences().get(occurrenceIndex).getEndTiming(),
+                            task.getTags(), task.isRecurring());
+                    //                    toAdd.setRecurring(task.isRecurring());
+                    try {
+                        addTask(toAdd);
+                    } catch (DuplicateTaskException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
             return
                     (nameKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
@@ -162,6 +214,9 @@ public class ModelManager extends ComponentManager implements Model {
                             .findAny()
                             .isPresent());
         }
+
+        //@@author
+
 
         @Override
         public String toString() {

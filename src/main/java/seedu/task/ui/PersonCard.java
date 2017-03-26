@@ -30,32 +30,32 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyTask person, int displayedIndex) {
+    public PersonCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        description.setText(person.getDescription().description);
+        description.setText(task.getDescription().description);
         id.setText(displayedIndex + ". ");
-        priority.setText("Priority: " + person.getPriority().value);
-        priority.setStyle("-fx-background-color: " + person.getPriority().getPriorityColor() + ";");
+        priority.setText("Priority: " + task.getPriority().value);
+        priority.setStyle("-fx-background-color: " + task.getPriority().getPriorityColor() + ";");
 
-        if (person.getStartTiming().value.equals(Timing.NULL_TIMING)) {
+        if (task.getStartTiming().value.equals(Timing.NULL_TIMING)) {
             startTiming.setText("");
         } else {
-            startTiming.setText("Start Timing: " + person.getStartTiming().value);
+            startTiming.setText("Start Timing: " + task.getStartTiming().value);
         }
 
-        if (person.getEndTiming().value.equals(Timing.NULL_TIMING)) {
+        if (task.getEndTiming().value.equals(Timing.NULL_TIMING)) {
             endTiming.setText("");
         } else {
-            endTiming.setText("End Timing: " + person.getEndTiming().value);
+            endTiming.setText("End Timing: " + task.getEndTiming().value);
 
         }
-        if (person.isRecurring()) {
+        if (task.isRecurring()) {
             recurring.setText("Recurring Task");
             recurring.setStyle("-fx-background-color: pink;");
         } else {
             recurring.setText("");
         }
-        initTags(person);
+        initTags(task);
     }
     //@@author
 

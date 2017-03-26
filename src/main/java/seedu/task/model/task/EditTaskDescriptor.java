@@ -15,6 +15,7 @@ public class EditTaskDescriptor {
     private Optional<Priority> priority = Optional.empty();
     private Optional<Timing> startTiming = Optional.empty();
     private Optional<Timing> endTiming = Optional.empty();
+    private Optional<Boolean> recurring = Optional.empty();
     private Optional<UniqueTagList> tags = Optional.empty();
 
     public EditTaskDescriptor() {}
@@ -25,6 +26,7 @@ public class EditTaskDescriptor {
         this.startTiming = toCopy.getStartTiming();
         this.endTiming = toCopy.getEndTiming();
         this.tags = toCopy.getTags();
+        this.recurring = toCopy.isRecurring();
     }
 
     /**
@@ -32,7 +34,7 @@ public class EditTaskDescriptor {
      */
     public boolean isAnyFieldEdited() {
         return CollectionUtil.isAnyPresent(this.description, this.priority,
-                                      this.startTiming, this.endTiming, this.tags);
+                this.startTiming, this.endTiming, this.tags);
     }
 
     public void setDescription(Optional<Description> description) {
@@ -79,5 +81,14 @@ public class EditTaskDescriptor {
 
     public Optional<UniqueTagList> getTags() {
         return tags;
+    }
+
+    public void setRecurring(Optional<Boolean> recurring) {
+        assert recurring != null;
+        this.recurring = recurring;
+    }
+
+    public Optional<Boolean> isRecurring() {
+        return recurring;
     }
 }
