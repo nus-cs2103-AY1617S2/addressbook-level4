@@ -33,7 +33,7 @@ public class AddCommandParserFloating {
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommandFloating.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
