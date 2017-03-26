@@ -184,6 +184,12 @@
     -fx-opacity: 0.9;
     -fx-alignment: center;
 }
+
+.task-card-date-time {
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #010504;
+    -fx-opacity: 0.7;
+}
 /* @@author */
 
 /*

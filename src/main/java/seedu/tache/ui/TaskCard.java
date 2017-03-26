@@ -5,10 +5,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
+    private static final String START_DATE_INDICATOR = "Start Date: ";
+    private static final String START_TIME_INDICATOR = "Start Time: ";
+    private static final String END_DATE_INDICATOR = "End Date: ";
+    private static final String END_TIME_INDICATOR = "End Time: ";
     private static final String FXML = "TaskListCard.fxml";
 
     @FXML
@@ -21,16 +26,7 @@ public class TaskCard extends UiPart<Region> {
     private Label name;
 
     @FXML
-    private Label startDate;
-
-    @FXML
-    private Label endDate;
-
-    @FXML
-    private Label startTime;
-
-    @FXML
-    private Label endTime;
+    private FlowPane datesAndTimes;
 
     @FXML
     private FlowPane tags;
@@ -39,26 +35,15 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         id.setText(Integer.toString(displayedIndex) + ". ");
         name.setText(task.getName().toString());
-        String defaultValue = "-";
         if (task.getStartDateTime().isPresent()) {
-            startDate.setText(task.getStartDateTime().get().getDateOnly());
-        } else {
-            startDate.setText(defaultValue);
+            DateTime start = task.getStartDateTime().get();
+            datesAndTimes.getChildren().add(new Label(START_DATE_INDICATOR + start.getDateOnly()));
+            datesAndTimes.getChildren().add(new Label(START_TIME_INDICATOR + start.getTimeOnly()));
         }
         if (task.getEndDateTime().isPresent()) {
-            endDate.setText(task.getEndDateTime().get().getDateOnly());
-        } else {
-            endDate.setText(defaultValue);
-        }
-        if (task.getStartDateTime().isPresent()) {
-            startTime.setText(task.getStartDateTime().get().getTimeOnly());
-        } else {
-            startTime.setText(defaultValue);
-        }
-        if (task.getEndDateTime().isPresent()) {
-            endTime.setText(task.getEndDateTime().get().getTimeOnly());
-        } else {
-            endTime.setText(defaultValue);
+            DateTime end = task.getEndDateTime().get();
+            datesAndTimes.getChildren().add(new Label(END_DATE_INDICATOR + end.getDateOnly()));
+            datesAndTimes.getChildren().add(new Label(END_TIME_INDICATOR + end.getTimeOnly()));
         }
         initTags(task);
     }
