@@ -372,7 +372,7 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return doneKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().value, keyword)).findAny()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().getValue(), keyword)).findAny()
 					.isPresent();
 		}
 

@@ -22,7 +22,7 @@ public class ClearDoneCommand extends Command {
 		int formerSize = lastShownList.size();
 
 		for (int index = 0; index < lastShownList.size(); index++) {
-			if (lastShownList.get(index).getIsDone().value.equals(IsDone.ISDONE_DONE)) {
+			if (lastShownList.get(index).getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
 				ReadOnlyEvent eventToDelete = lastShownList.get(index);
 				try {
 					model.deleteEvent(eventToDelete);

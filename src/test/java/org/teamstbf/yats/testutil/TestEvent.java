@@ -103,10 +103,10 @@ public class TestEvent implements ReadOnlyEvent {
 		this.name = name;
 	}
 
-    public void setIsDone(IsDone isDone) {
-        this.isDone = isDone;
-    }
-    
+	public void setIsDone(IsDone isDone) {
+		this.isDone = isDone;
+	}
+
 	@Override
 	public String toString() {
 		return getAsText();
@@ -122,8 +122,4 @@ public class TestEvent implements ReadOnlyEvent {
 		isDone.markDone();
 	}
 
-	@Override
-	public boolean isTaskDone() {
-		return isDone.getIsDone();
-	}
 }

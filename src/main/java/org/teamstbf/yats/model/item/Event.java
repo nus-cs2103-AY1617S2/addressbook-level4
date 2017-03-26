@@ -1,5 +1,7 @@
 package org.teamstbf.yats.model.item;
 
+import static org.teamstbf.yats.model.item.IsDone.ISDONE_NOTDONE;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -8,26 +10,25 @@ import java.util.Objects;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.model.tag.UniqueTagList;
-import static org.teamstbf.yats.model.item.IsDone.ISDONE_NOTDONE;
 
 public class Event implements ReadOnlyEvent {
 
-    public static final String MESSAGE_TOO_MANY_TIME = "There should be at most 2 time points in the task.";
-    public static final String MESSAGE_INVALID_TIME = "Invalid time slots.";
-    public static final int SIZE_DEADLINE_TASK = 1;
-    public static final int SIZE_EVENT_TASK = 2;
-    public static final int SIZE_FLOATING_TASK = 0;
-    public static final int INDEX_FIRST_DATE = 0;
-    public static final int INDEX_SECOND_DATE = 1;
-    
-    private Title name;
-    private Schedule startTime;
-    private Schedule endTime;
-    private Description description;
-    private IsDone isDone;
-    private Location location;
-    private UniqueTagList tags;
-    
+	public static final String MESSAGE_TOO_MANY_TIME = "There should be at most 2 time points in the task.";
+	public static final String MESSAGE_INVALID_TIME = "Invalid time slots.";
+	public static final int SIZE_DEADLINE_TASK = 1;
+	public static final int SIZE_EVENT_TASK = 2;
+	public static final int SIZE_FLOATING_TASK = 0;
+	public static final int INDEX_FIRST_DATE = 0;
+	public static final int INDEX_SECOND_DATE = 1;
+
+	private Title name;
+	private Schedule startTime;
+	private Schedule endTime;
+	private Description description;
+	private IsDone isDone;
+	private Location location;
+	private UniqueTagList tags;
+
 	public Event() {
 
 	}
@@ -43,43 +44,43 @@ public class Event implements ReadOnlyEvent {
 	 */
 
 	public Event(HashMap<String, Object> parameters, UniqueTagList tags) throws IllegalValueException {
-        assert !CollectionUtil.isAnyNull(parameters.get("name"));
-        this.name = new Title((String) parameters.get("name"));
-        // check optional parameters' existence
-        if (parameters.get("location") != null) {
-            this.location = new Location((String) parameters.get("location"));
-        } else {
-            this.location = new Location(" ");
-        }
-        if (parameters.get("description") != null) {
-            this.description = new Description((String) parameters.get("description"));
-        } else {
-            this.description = new Description(" ");
-        }
-        this.isDone = new IsDone(ISDONE_NOTDONE);
-        this.tags = new UniqueTagList(tags);
-        
-        //check number of time group, if>2, throws exception
-        if (parameters.get("time") != null) {
-            List<Date> dateList = (List<Date>) parameters.get("time");
-            if (dateList.size() > SIZE_EVENT_TASK) {
-                throw new IllegalValueException(MESSAGE_TOO_MANY_TIME);
-            } else if (dateList.size() == SIZE_EVENT_TASK) {
-                //event task with start and end time
-                this.startTime = new Schedule(dateList.get(INDEX_FIRST_DATE));
-                this.endTime = new Schedule(dateList.get(INDEX_SECOND_DATE));
-            } else if (dateList.size() == SIZE_DEADLINE_TASK) {
-                //deadline task with only end time
-                this.startTime = new Schedule("");
-                this.endTime = new Schedule(dateList.get(INDEX_FIRST_DATE));
-            } else {
-                throw new IllegalValueException(MESSAGE_INVALID_TIME);
-            }
-        } else {
-            //floating task with no time
-            this.startTime = new Schedule("");
-            this.endTime = new Schedule("");
-        }
+		assert !CollectionUtil.isAnyNull(parameters.get("name"));
+		this.name = new Title((String) parameters.get("name"));
+		// check optional parameters' existence
+		if (parameters.get("location") != null) {
+			this.location = new Location((String) parameters.get("location"));
+		} else {
+			this.location = new Location(" ");
+		}
+		if (parameters.get("description") != null) {
+			this.description = new Description((String) parameters.get("description"));
+		} else {
+			this.description = new Description(" ");
+		}
+		this.isDone = new IsDone(ISDONE_NOTDONE);
+		this.tags = new UniqueTagList(tags);
+
+		//check number of time group, if>2, throws exception
+		if (parameters.get("time") != null) {
+			List<Date> dateList = (List<Date>) parameters.get("time");
+			if (dateList.size() > SIZE_EVENT_TASK) {
+				throw new IllegalValueException(MESSAGE_TOO_MANY_TIME);
+			} else if (dateList.size() == SIZE_EVENT_TASK) {
+				//event task with start and end time
+				this.startTime = new Schedule(dateList.get(INDEX_FIRST_DATE));
+				this.endTime = new Schedule(dateList.get(INDEX_SECOND_DATE));
+			} else if (dateList.size() == SIZE_DEADLINE_TASK) {
+				//deadline task with only end time
+				this.startTime = new Schedule("");
+				this.endTime = new Schedule(dateList.get(INDEX_FIRST_DATE));
+			} else {
+				throw new IllegalValueException(MESSAGE_INVALID_TIME);
+			}
+		} else {
+			//floating task with no time
+			this.startTime = new Schedule("");
+			this.endTime = new Schedule("");
+		}
 	}
 
 	public Event(ReadOnlyEvent editedReadOnlyEvent) {
@@ -226,11 +227,6 @@ public class Event implements ReadOnlyEvent {
 	@Override
 	public IsDone getIsDone() {
 		return this.isDone;
-	}
-
-	@Override
-	public boolean isTaskDone() {
-		return this.isDone.getIsDone();
 	}
 
 	@Override
