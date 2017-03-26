@@ -77,5 +77,23 @@ public class FindCommandParser implements CommandParser {
         return optionalString;
     }
 
-
+    private Optional<String> parseByDate(Optional<String> taskDate) {
+        if (!taskDate.isPresent()) {
+            return taskDate;
+        } else {
+            String taskDateString = taskDate.get();
+            if (taskDateString.length() < 2) {
+                return taskDate;
+            } else {
+                String byPrefix = taskDateString.substring(0, 2);
+                if (byPrefix.equals("b/")) {
+                    Optional<String> optionalDate;
+                    optionalDate = Optional.of(taskDateString.substring(2, taskDateString.length()));
+                    return optionalDate;
+                } else {
+                    return taskDate;
+                }
+            }
+        }
+    }
 }
