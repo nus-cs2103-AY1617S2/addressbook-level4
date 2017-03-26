@@ -50,7 +50,7 @@ public class CommandBox extends UiPart<Region> {
         String command = commandTextField.getText();
         handleCommands(command);
     }
-    
+
     public void handleCommands(String command) {
         try {
             CommandResult commandResult = logic.execute(command);

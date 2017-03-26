@@ -27,7 +27,6 @@ import seedu.onetwodo.logic.commands.UndoCommand;
 import seedu.onetwodo.model.UserPrefs;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
-import seedu.onetwodo.ui.StatusBarFooter;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -61,16 +60,16 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem exitMenuItem;
-    
+
     @FXML
     private MenuItem helpMenuItem;
 
     @FXML
     private MenuItem undoMenuItem;
-    
+
     @FXML
     private MenuItem redoMenuItem;
-    
+
     @FXML
     private AnchorPane deadlineListPanelPlaceholder;
 
@@ -112,7 +111,7 @@ public class MainWindow extends UiPart<Region> {
     public static StatusBarFooter getStatusBarFooter() {
         return statusBarFooter;
     }
-    
+
     private void loadFonts(Scene scene) {
         Font.loadFont(MainWindow.class.getResource(FONT_AVENIR).toExternalForm(), 10);
     }
@@ -240,12 +239,12 @@ public class MainWindow extends UiPart<Region> {
         HelpWindow helpWindow = new HelpWindow();
         helpWindow.show();
     }
-    
+
     @FXML
     public void handleUndo() {
         commandBox.handleCommands(UndoCommand.COMMAND_WORD);
     }
-    
+
     @FXML
     public void handleRedo() {
         commandBox.handleCommands(RedoCommand.COMMAND_WORD);
