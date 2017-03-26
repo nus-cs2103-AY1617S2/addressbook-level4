@@ -38,7 +38,7 @@ public class RecurrenceTest {
         assertTrue(Recurrence.isValidRecurrence("")); // empty string
         assertTrue(Recurrence.isValidRecurrence("DAilY")); // mixed case
         assertTrue(Recurrence.isValidRecurrence("weekly")); // accepted input
-        assertTrue(Recurrence.isValidRecurrence("   yearly    ")); // with trailing whitespace    
+        assertTrue(Recurrence.isValidRecurrence("   yearly    ")); // with trailing whitespace
     }
 
     //---------------- Tests for different types of recurrence -------------------------------
@@ -62,7 +62,7 @@ public class RecurrenceTest {
         assertEquals(addToDate(originalStartDate.getDate(), Frequency.DAILY, startSdf),
                 updatedStartDate);
         assertEquals(addToDate(originalEndDate.getDate(), Frequency.DAILY, endSdf),
-                updatedEndDate);       
+                updatedEndDate);
     }
 
     // Test for WEEKLY recurrence
@@ -85,7 +85,7 @@ public class RecurrenceTest {
         assertEquals(addToDate(originalStartDate.getDate(), Frequency.WEEKLY, startSdf),
                 updatedStartDate);
         assertEquals(addToDate(originalEndDate.getDate(), Frequency.WEEKLY, endSdf),
-                updatedEndDate);       
+                updatedEndDate);
     }
 
     // Test for MONTHLY recurrence
@@ -108,7 +108,7 @@ public class RecurrenceTest {
         assertEquals(addToDate(originalStartDate.getDate(), Frequency.MONTHLY, startSdf),
                 updatedStartDate);
         assertEquals(addToDate(originalEndDate.getDate(), Frequency.MONTHLY, endSdf),
-                updatedEndDate);       
+                updatedEndDate);
     }
 
     // Test for YEARLY recurrence
@@ -131,7 +131,7 @@ public class RecurrenceTest {
         assertEquals(addToDate(originalStartDate.getDate(), Frequency.YEARLY, startSdf),
                 updatedStartDate);
         assertEquals(addToDate(originalEndDate.getDate(), Frequency.YEARLY, endSdf),
-                updatedEndDate);       
+                updatedEndDate);
     }
 
     // Test for NONE recurrence
@@ -149,7 +149,7 @@ public class RecurrenceTest {
 
         assertEquals(sampleTask.getRecurrence().toString(), Frequency.NONE.toString());
         assertEquals(originalStartDate, updatedStartDate);
-        assertEquals(originalEndDate, updatedEndDate);       
+        assertEquals(originalEndDate, updatedEndDate);
     }
 
     //---------------- Helper functions -------------------------------
@@ -186,5 +186,5 @@ public class RecurrenceTest {
         } else {
             return new SimpleDateFormat("MMM dd, yyyy h:mm aa");
         }
-    } 
+    }
 }
