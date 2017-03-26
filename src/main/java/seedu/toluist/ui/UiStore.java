@@ -1,6 +1,7 @@
 //@@author A0131125Y
 package seedu.toluist.ui;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -57,7 +58,12 @@ public class UiStore {
      * @param observableList an observable list
      */
     public void bind(UiView view, ObservableList<?> observableList) {
-        observableList.addListener((ListChangeListener) (c -> view.render()));
+        WeakReference<UiView> weakView = new WeakReference<>(view);
+        observableList.addListener((ListChangeListener) (c -> {
+            if (weakView.get() != null) {
+                weakView.get().render();
+            }
+        }));
     }
 
     /**
@@ -66,7 +72,12 @@ public class UiStore {
      * @param observableValue an observable value
      */
     public void bind(UiView view, ObservableValue<?> observableValue) {
-        observableValue.addListener(c ->  view.render());
+        WeakReference<UiView> weakView = new WeakReference<>(view);
+        observableValue.addListener(c -> {
+            if (weakView.get() != null) {
+                weakView.get().render();
+            }
+        });
     }
 
     public void setObservableSwitchPredicate(TaskSwitchPredicate switchPredicate) {
