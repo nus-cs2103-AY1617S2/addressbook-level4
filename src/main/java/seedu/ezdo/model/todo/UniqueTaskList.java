@@ -134,8 +134,8 @@ public class UniqueTaskList implements Iterable<Task> {
                 public int compare(Task taskOne, Task taskTwo) {
                     String taskOneStartDate = taskOne.getStartDate().toString();
                     String taskTwoStartDate = taskTwo.getStartDate().toString();
-                    int result = compareDateStrings(taskOneStartDate, taskTwoStartDate);
-                    return isSortedAscending ? result : -result;
+
+                    return compareDateStrings(taskOneStartDate, taskTwoStartDate, isSortedAscending);
                 }
             };
             break;
@@ -145,8 +145,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 public int compare(Task taskOne, Task taskTwo) {
                     String taskOneDueDate = taskOne.getDueDate().toString();
                     String taskTwoDueDate = taskTwo.getDueDate().toString();
-                    int result = compareDateStrings(taskOneDueDate, taskTwoDueDate);
-                    return isSortedAscending ? result : -result;
+                    return compareDateStrings(taskOneDueDate, taskTwoDueDate, isSortedAscending);
                 }
             };
             break;
