@@ -82,6 +82,12 @@ public class UndoCommandTest extends TodoListGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    @Test
+    public void undo_undo_success() {
+        commandBox.runCommand("undo");
+        assertUndoSuccess();
+    }
+
     /**
      * Runs undo command and asserts resulting list matches currentList
      */

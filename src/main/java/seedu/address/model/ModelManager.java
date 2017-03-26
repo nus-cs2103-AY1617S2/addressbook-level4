@@ -117,7 +117,6 @@ public class ModelManager extends ComponentManager implements Model {
             throw new NoPreviousStateException();
         }
         resetData(previousTodoList);
-        previousTodoList = null;
     }
     //@@author
     //=========== Filtered Todo List Accessors =============================================================
