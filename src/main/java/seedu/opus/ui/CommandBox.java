@@ -1,5 +1,7 @@
 package seedu.opus.ui;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -22,7 +24,8 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
 
     private final Logic logic;
-    private final Trie autocompleteTrie;
+    private final AutocompleteTrie autocompleteTrie;
+    private Iterator<String> suggestions;
 
     @FXML
     private TextField commandTextField;
@@ -30,7 +33,9 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
-        this.autocompleteTrie = new Trie();
+        this.autocompleteTrie = new AutocompleteTrie();
+        this.autocompleteTrie.init();
+        this.suggestions = Collections.emptyIterator();
         addToPlaceholder(commandBoxPlaceholder);
         listenForTab();
     }
@@ -62,20 +67,73 @@ public class CommandBox extends UiPart<Region> {
 
     private void listenForTab() {
         commandTextField.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.TAB)) {
-                e.consume();
-                commandTextField.setText("Autocomplete bitch");
-                commandTextField.positionCaret(commandTextField.getText().length());
-            }
+            if (!e.getCode().equals(KeyCode.TAB)) return;
+
+            // prevents the event from propagating up, resulting in shift out of focus
+            e.consume();
+
+            autocompleteUserInput();
         });
     }
 
+    private void autocompleteUserInput() {
+        String userInput = commandTextField.getText();
+        if (userInput.isEmpty()) return;
+
+        boolean hasMatch = autocompleteTrie.hasMatch(userInput);
+        boolean outOfSuggestions = !suggestions.hasNext();
+
+        if (hasMatch && outOfSuggestions) {
+            suggestions = autocompleteTrie.autoComplete(userInput).iterator();
+        }
+
+        if (hasMatch) {
+            setCommandLineInput(suggestions.next());
+        } else {
+            clearAutocompleteSuggestions();
+        }
+    }
+
+    private void clearAutocompleteSuggestions() {
+        suggestions = Collections.emptyIterator();
+    }
+
+    private void setCommandLineInput(String input) {
+        commandTextField.setText(input);
+        commandTextField.positionCaret(input.length());
+    }
 
     /**
      * Sets the command box style to indicate a successful command.
      */
     private void setStyleToIndicateCommandSuccess() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Custom Trie for autocomplete feature.
+     *
+     * @author xbili
+     *
+     */
+    private class AutocompleteTrie extends Trie {
+
+        private final String[] COMMANDS = { "add", "delete", "edit", "mark", "unmark", "schedule", "list", "help",
+                "find", "undo", "redo", "clear" };
+
+        private void init() {
+            for (String command : COMMANDS) {
+                this.insert(command);
+            }
+        }
+
+        /**
+         * @return true if prefix matches any commands.
+         */
+        private boolean hasMatch(String prefix) {
+            return !autoComplete(prefix).isEmpty();
+        }
+
     }
 
 }
