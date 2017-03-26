@@ -34,7 +34,7 @@ public interface ReadOnlyTodo {
                 //&& other.getEndTime().equals(this.getEndTime())
                 //&& other.getCompleteTime().equals(this.getCompleteTime()));
     }
-    
+
     //@@author A0163720M
     /**
      * Formats the todo as text, showing all todo details.
@@ -64,7 +64,8 @@ public interface ReadOnlyTodo {
 
         return builder.toString();
     }
-    
+    //@@author
+
     //@@author A0163720M
     /**
      *  Formats the todo's tags as a string
@@ -78,4 +79,5 @@ public interface ReadOnlyTodo {
 
         return builder.toString();
     }
+    //@@author
 }

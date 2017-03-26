@@ -56,6 +56,7 @@ public class AddCommand extends Command {
                 StringUtil.parseDate(endTime, DATE_FORMAT),
                 new UniqueTagList(tagSet));
     }
+    //@@author
 
     //@@author A0163720M
     /**
@@ -77,7 +78,8 @@ public class AddCommand extends Command {
                 StringUtil.parseDate(endTime, DATE_FORMAT),
                 new UniqueTagList(tagSet));
     }
-    
+    //@@author
+
     /**
      * Creates an AddCommand using raw values to create a floating task
      *

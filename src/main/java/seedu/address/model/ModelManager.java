@@ -137,12 +137,13 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTodoList(Set<String> keywords) {
         updateFilteredTodoList(new PredicateExpression(new NameQualifier(keywords)));
     }
-    
+
     //@@author A0163720M
     @Override
     public void updateFilteredTodoList(UniqueTagList tags) {
         updateFilteredTodoList(new PredicateExpression(new NameQualifier(tags)));
     }
+    //@@author
 
     private void updateFilteredTodoList(Expression expression) {
         filteredTodos.setPredicate(expression::satisfies);
@@ -178,7 +179,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTodo todo);
         String toString();
     }
-    
+
     //@@author A0163720M
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
@@ -193,7 +194,7 @@ public class ModelManager extends ComponentManager implements Model {
         // the parameter cannot be of type Set so use UniqueTagList instead
         NameQualifier(UniqueTagList tags) {
             this.tags = tags.toSet();
-            
+
             // for simplicity sake, convert the Set<Tag> into Set<String> so that it can easily be filtered out
             // similar to filtering out by name
             this.tagKeyWords = new HashSet<String>();
@@ -202,8 +203,7 @@ public class ModelManager extends ComponentManager implements Model {
                 this.tagKeyWords.add(tag.tagName);
             }
         }
-        
-        //@@author A0163720M
+
         @Override
         public boolean run(ReadOnlyTodo todo) {
             if (nameKeyWords != null) {
@@ -212,7 +212,7 @@ public class ModelManager extends ComponentManager implements Model {
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(name, keyword))
                         .findAny()
                         .isPresent();
-            } else {                
+            } else {
                 String todoTags = todo.getTagsAsString();
                 return tagKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(todoTags, keyword))
@@ -220,8 +220,7 @@ public class ModelManager extends ComponentManager implements Model {
                         .isPresent();
             }
         }
-        
-        //@@author A0163720M
+
         /**
          * Returns the tags or the name of the todo depending on which field is present
          */
@@ -234,5 +233,5 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
     }
-
+    //@@author
 }

@@ -52,11 +52,12 @@ public class FindCommandParser {
                 }
 
                 final UniqueTagList uniqueTagList = new UniqueTagList(tagsSet);
-                
+
                 return new FindCommand(uniqueTagList);
             }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
+    //@@author
 }
