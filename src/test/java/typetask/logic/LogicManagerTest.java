@@ -115,7 +115,8 @@ public class LogicManagerTest {
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
                                       ReadOnlyTaskManager expectedTaskManager,
-                                      List<? extends ReadOnlyTask> expectedShownList) throws IOException, DataConversionException {
+                                      List<? extends ReadOnlyTask> expectedShownList) throws IOException,
+                                                                                             DataConversionException {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
@@ -126,7 +127,8 @@ public class LogicManagerTest {
      * @throws DataConversionException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IOException, DataConversionException {
+    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IOException,
+                                                                                          DataConversionException {
         TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
@@ -144,7 +146,8 @@ public class LogicManagerTest {
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyTaskManager expectedTaskManager,
-                                       List<? extends ReadOnlyTask> expectedShownList) throws IOException, DataConversionException {
+                                       List<? extends ReadOnlyTask> expectedShownList) throws IOException,
+                                                                                              DataConversionException {
 
         try {
             CommandResult result = logic.execute(inputCommand);
