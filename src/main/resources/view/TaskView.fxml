@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- @@author A0131125Y -->
+
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <BorderPane fx:id="taskPane" styleClass="task" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <right>
@@ -23,7 +25,7 @@
          <children>
             <FlowPane fx:id="primaryTaskPane" alignment="CENTER_LEFT">
                <children>
-                  <Label fx:id="id" text="Label">
+                  <Label fx:id="id" styleClass="bold-text" text="Label">
                      <FlowPane.margin>
                         <Insets />
                      </FlowPane.margin>
@@ -46,31 +48,45 @@
                   </FlowPane>
                </children>
             </FlowPane>
-            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <ImageView fx:id="clockIcon" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="date" styleClass="status-text">
+                  <ImageView fx:id="clockIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="date">
                      <font>
                         <Font size="15.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="status-text" />
+                        <String fx:value="meta-text" />
+                     </styleClass>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <ImageView fx:id="recurringIcon" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="recurringDate" styleClass="status-text">
+                  <ImageView fx:id="recurringIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="recurringDate">
                      <font>
                         <Font size="15.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="status-text" />
+                        <String fx:value="meta-text" />
+                     </styleClass>
                   </Label>
                 </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
             </HBox>
          </children>
          <padding>

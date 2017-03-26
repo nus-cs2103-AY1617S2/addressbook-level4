@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- @@author A0131125Y -->
+
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <HBox fx:id="tabPane" alignment="CENTER" prefHeight="35.0" prefWidth="149.0" styleClass="tab" stylesheets="@../stylesheet/DefaultTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="tabShortcutLabel" styleClass="tab-lbl" text="Label" underline="true">
+      <Label fx:id="tabShortcutLabel" text="Label">
          <font>
             <Font name="System Bold" size="13.0" />
-         </font></Label>
-      <Label fx:id="tabLabel" text="Label" />
+         </font>
+         <styleClass>
+            <String fx:value="initial" />
+            <String fx:value="bold-text" />
+         </styleClass></Label>
+      <Label fx:id="tabLabel" styleClass="bold-text" text="Label" />
    </children>
 </HBox>
