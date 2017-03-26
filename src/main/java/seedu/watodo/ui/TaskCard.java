@@ -16,6 +16,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
+    private Label status;
+    @FXML
     private Label id;
     @FXML
     private Label startDate;
@@ -41,6 +43,8 @@ public class TaskCard extends UiPart<Region> {
         } else {
             endDate.setText("");
         }
+        
+        status.setText(task.getStatus().toString());
 
         initTags(task);
     }
