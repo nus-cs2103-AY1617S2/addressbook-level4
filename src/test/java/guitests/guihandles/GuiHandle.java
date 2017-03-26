@@ -74,6 +74,10 @@ public class GuiHandle {
         guiRobot.type(KeyCode.TAB).sleep(500);
     }
 
+    public void pressBackspace() {
+        guiRobot.type(KeyCode.BACK_SPACE).sleep(500);
+    }
+
     protected String getTextFromLabel(String fieldId, Node parentNode) {
         return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
     }
