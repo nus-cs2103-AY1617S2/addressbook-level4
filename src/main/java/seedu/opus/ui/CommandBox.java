@@ -70,17 +70,17 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
+    /**
+     * Handles cursor key inputs to browse previous user input history text field
+     */
     private void registerCursorKeyEventFilter() {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode().equals(KeyCode.UP)) {
                 commandTextField.setText(history.getPreviousUserInput().orElse(EMPTY_STRING));
             } else if (event.getCode().equals(KeyCode.DOWN)) {
                 commandTextField.setText(history.getPrecedingUserInput().orElse(EMPTY_STRING));
-
-            } else {
-                return;
             }
-            commandTextField.end();
+            commandTextField.selectEnd();
         });
     }
 }
