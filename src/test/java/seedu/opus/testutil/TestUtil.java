@@ -82,17 +82,17 @@ public class TestUtil {
                         new DateTime("06/05/2017 12:00"), new DateTime("05/05/2017 13:00"), new UniqueTagList()),
                 new Task(new Name("Carl Kurz"), new Priority("low"), new Status("incomplete"), new Note("wall street"),
                         new DateTime("07/06/2017 12:00"), new DateTime("05/05/2017 13:00"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Priority("hi"), new Status("werner@gmail.com"), new Note("michegan ave"),
+                new Task(new Name("Elle Meyer"), new Priority("hi"), new Status("incomplete"), new Note("michegan ave"),
                         new DateTime("08/05/2017 12:00"), new DateTime("05/05/2017 13:00"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Priority("mid"), new Status("cornelia@google.com"), new Note("10th street"),
+                new Task(new Name("Daniel Meier"), new Priority("mid"), new Status("incomplete"), new Note("10th street"),
                         new DateTime("08/05/2017 12:00"), new DateTime("05/05/2017 13:00"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Priority("hi"), new Status("hans@google.com"), new Note("chicago ave"),
+                new Task(new Name("Ida Mueller"), new Priority("hi"), new Status("incomplete"), new Note("chicago ave"),
                         new DateTime("12/06/2017 12:00"), new DateTime("05/05/2017 13:00"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Priority("mid"), new Status("stefan@mail.com"), new Note("little india"),
+                new Task(new Name("Hoon Meier"), new Priority("mid"), new Status("incomplete"), new Note("little india"),
                         new DateTime("12/06/2017 12:00"), new DateTime("05/05/2017 13:00"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Priority("mid"), new Status("lydia@gmail.com"), new Note("little tokyo"),
+                new Task(new Name("Fiona Kunz"), new Priority("mid"), new Status("incomplete"), new Note("little tokyo"),
                         new DateTime("12/05/2017 12:00"), new DateTime("05/05/2017 13:00"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Priority("low"), new Status("anna@google.com"), new Note("4th street"),
+                new Task(new Name("George Best"), new Priority("low"), new Status("incomplete"), new Note("4th street"),
                         new DateTime("12/05/2017 12:00"), new DateTime("05/05/2017 13:00"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
