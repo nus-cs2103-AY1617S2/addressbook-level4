@@ -144,7 +144,7 @@ public class ModelManager extends ComponentManager implements Model {
     private class PredicateExpression implements Expression {
 
         private final List<Qualifier> qualifiers;
-        boolean result = false;
+
 
         PredicateExpression(Qualifier... qualifiers) {
             this.qualifiers = Arrays.asList(qualifiers);
@@ -152,19 +152,19 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            result = false;
-            qualifiers.forEach((qualifier)-> {
+            boolean result = false;
+            for (Qualifier qualifier: qualifiers) {
                 result = result | qualifier.run(task);
-            });
+            }
             return result;
         }
 
         @Override
         public String toString() {
             StringBuilder builder = new StringBuilder();
-            qualifiers.forEach((qualifier)-> {
+            for (Qualifier qualifier: qualifiers) {
                 builder.append(qualifier.toString());
-            });
+            }
             return builder.toString();
         }
     }
