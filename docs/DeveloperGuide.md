@@ -183,7 +183,7 @@ _Figure 2.3.2 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 Author: Alvin Loh
 
-<img src="images/ModelClassDiagram.png" width="800"><br>
+<img src="images/ModelClassDiagram_TaskManager.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/taskmanager/model/Model.java)
@@ -200,7 +200,7 @@ The `Model`,
 
 Author: Alvin Loh
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
+<img src="images/StorageClassDiagram_TaskManager.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/taskmanager/storage/Storage.java)
