@@ -276,7 +276,7 @@ public class LogicManagerTest {
         model.addTask(p1);
         model.addTask(p4);
 
-        assertCommandSuccess("sort deadline",
+        assertCommandSuccess("sort end",
                 SortCommand.MESSAGE_SUCCESS,
                 expectedTaskManager,
                 fiveTasks);
@@ -301,6 +301,25 @@ public class LogicManagerTest {
                 SortCommand.MESSAGE_SUCCESS,
                 expectedTaskManager,
                 threeTasks);
+    }
+
+    @Test
+    public void executeSortTasksByStatus() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithStatus("incomplete");
+        Task p2 = helper.generateTaskWithStatus("complete");
+
+        List<Task> twoTasks = helper.generateTaskList(p1, p2);
+        TaskManager expectedTaskManager = helper.generateTaskManager(twoTasks);
+
+        model.resetData(new TaskManager());
+        model.addTask(p2);
+        model.addTask(p1);
+
+        assertCommandSuccess("sort status",
+                SortCommand.MESSAGE_SUCCESS,
+                expectedTaskManager,
+                twoTasks);
     }
 
     /**
@@ -365,6 +384,11 @@ public class LogicManagerTest {
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
 
+    @Test
+    public void executeSortInvalidArgsFormat() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        assertCommandFailure("sort ", expectedMessage);
+    }
 
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
@@ -761,13 +785,28 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given end date. Other fields will have some dummy values.
+         * Generates a Task object with given priority. Other fields will have some dummy values.
          */
         private Task generateTaskWithPriority(String priority) throws Exception {
             return new Task(
                     new Name("Finish assignment"),
                     new Priority(priority),
                     new Status("incomplete"),
+                    new Note("House of 1"),
+                    new DateTime("01/01/2017 00:00"),
+                    new DateTime("01/01/2017 23:59"),
+                    new UniqueTagList(new Tag("tag"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given status. Other fields will have some dummy values.
+         */
+        private Task generateTaskWithStatus(String status) throws Exception {
+            return new Task(
+                    new Name("Finish assignment"),
+                    new Priority("hi"),
+                    new Status(status),
                     new Note("House of 1"),
                     new DateTime("01/01/2017 00:00"),
                     new DateTime("01/01/2017 23:59"),
