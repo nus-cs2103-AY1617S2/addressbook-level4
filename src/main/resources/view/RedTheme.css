@@ -190,12 +190,15 @@
     -fx-background-color: #2e4053;
 }
 
+.status-bar {
+    -fx-background-color: #2e4053;
+}
+
 .status-bar .label {
     -fx-text-fill: white;
 }
 
 .status-bar-with-border {
-    -fx-background-color: #2e4053;
     -fx-border-color:#2e4053;
     -fx-border-width: 1px;
 }
