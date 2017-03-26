@@ -89,7 +89,7 @@ The sections below give more details of each component.
 
 Author: Jacob Levy
 
-<img src="images/UITaskDiagram.png" width="800"><br>
+<img src="images/UIDiagram2.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
