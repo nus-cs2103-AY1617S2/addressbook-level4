@@ -6,41 +6,41 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.bulletjournal.commons.core.Messages;
-import seedu.bulletjournal.logic.commands.AddCommandFloating;
+import seedu.bulletjournal.logic.commands.AddCommandDeadline;
 import seedu.bulletjournal.testutil.TestTask;
 import seedu.bulletjournal.testutil.TestUtil;
 
-public class AddCommandTestFloating extends TodoListGuiTest {
+public class AddCommandTestDeadline extends TodoListGuiTest {
 
     @Test
     public void add() {
-        //add one floating task
+        //add one deadline task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.floatone;
-        assertAddSuccessFloating(taskToAdd, currentList);
+        TestTask taskToAdd = td.deadone;
+        assertAddSuccessDeadline(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
-        taskToAdd = td.floattwo;
-        assertAddSuccessFloating(taskToAdd, currentList);
+        taskToAdd = td.deadtwo;
+        assertAddSuccessDeadline(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
-        commandBox.runCommand(td.floatone.getAddCommandFloating("addf "));
-        assertResultMessage(AddCommandFloating.MESSAGE_DUPLICATE_TASK);
+        commandBox.runCommand(td.deadone.getAddCommandDeadline("addd "));
+        assertResultMessage(AddCommandDeadline.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccessFloating(td.floatone);
+        assertAddSuccessDeadline(td.deadone);
 
         //invalid command
         commandBox.runCommand("ad Join club");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccessFloating(TestTask taskToAdd, TestTask... currentList) {
-        commandBox.runCommand(taskToAdd.getAddCommandFloating("addf "));
+    private void assertAddSuccessDeadline(TestTask taskToAdd, TestTask... currentList) {
+        commandBox.runCommand(taskToAdd.getAddCommandDeadline("addd "));
 
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTaskName().fullName);

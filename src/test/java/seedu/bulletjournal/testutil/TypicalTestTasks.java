@@ -11,7 +11,7 @@ import seedu.bulletjournal.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask assignment, buymilk, creatework, dumpmilk, eatleftovers, findsocks, getclothes, hangclothes,
-            interviewprep, floatone, floattwo;
+            interviewprep, floatone, floattwo, deadone, deadtwo;
 
     public TypicalTestTasks() {
         try {
@@ -39,6 +39,10 @@ public class TypicalTestTasks {
             floatone = new TaskBuilder().withTaskName("Float task one").withDueDate("-")
                     .withStatus("undone").withBeginDate("-").build();
             floattwo = new TaskBuilder().withTaskName("Float task two").withDueDate("-")
+                    .withStatus("undone").withBeginDate("-").build();
+            deadone = new TaskBuilder().withTaskName("Deadline task one").withDueDate("210317")
+                    .withStatus("undone").withBeginDate("-").build();
+            deadtwo = new TaskBuilder().withTaskName("Deadline task two").withDueDate("210417")
                     .withStatus("undone").withBeginDate("-").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
