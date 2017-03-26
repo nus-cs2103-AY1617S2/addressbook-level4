@@ -76,7 +76,6 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         } catch (UniqueCategoryList.DuplicateCategoryException e) {
             assert false : "TaskBoss should not have duplicate categories";
         }
-        updateTasksRecurrence();
         syncMasterCategoryListWith(tasks);
     }
 
@@ -113,24 +112,6 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         // This can cause the categories master list to have additional categories that are not tagged to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
-    }
-
-    //@@author A0143157J
-    /**
-     * Updates the dates of a task based on the recurrence frequency.
-     * @throws IllegalValueException
-     */
-    public void updateTasksRecurrence() throws IllegalValueException {
-        for (Task task : this.getEditableTaskList()) {
-            if (task.isRecurring()) {
-                Date startDateTime = task.getStartDateTime().getDate();
-                Date endDateTime = task.getEndDateTime().getDate();
-                if ((startDateTime != null && startDateTime.before(Calendar.getInstance().getTime()))
-                     || endDateTime != null && endDateTime.before(Calendar.getInstance().getTime())) {
-                    task.getRecurrence().updateTaskDates(task);
-                }
-            }
-        }
     }
 
     /**
