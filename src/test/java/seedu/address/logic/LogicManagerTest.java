@@ -7,7 +7,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -420,10 +419,11 @@ public class LogicManagerTest {
      * A utility class to generate test data.
      */
     class TestDataHelper {
-        // TODO starting test date time, start from 1970, which means to be updated
-        // since time can pass and tasks won't always be valid
-        // note also systemDefault is a bad idea
-        private ZonedDateTime startTestDateTime = ZonedDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneId.systemDefault());
+        //@@author A0140023E
+        // TODO should this be done in another way?
+        // Starting Test Date Time is set to one day after today so that we would not generate dates in the past
+        // otherwise a PastDateTimeException might be generated
+        private ZonedDateTime startTestDateTime = ZonedDateTime.now().plusDays(1);
 
         Task accept() throws Exception {
             Name name = new Name("Accept Changes");
@@ -483,6 +483,7 @@ public class LogicManagerTest {
             return cmd.toString();
         }
 
+        //@@author
         /**
          * Generates a TaskList with auto-generated tasks.
          */
@@ -550,15 +551,17 @@ public class LogicManagerTest {
             return Arrays.asList(taskss);
         }
 
+        //@@author A0140023E
         /**
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            // TODO check if we really want optional
+            // Note that we are generating tasks with a StartEndDateTime as that would be more complex
+            // than a task with Deadline or a Task with no Deadline and StartEndDateTime, thus more likely to fail
             return new Task(
                     new Name(name),
                     Optional.empty(),
-                    Optional.empty(),
+                    Optional.of(new StartEndDateTime(startTestDateTime.plusDays(3), startTestDateTime.plusDays(6))),
                     new UniqueTagList(new Tag("tag"))
             );
         }
