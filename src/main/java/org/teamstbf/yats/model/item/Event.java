@@ -1,7 +1,5 @@
 package org.teamstbf.yats.model.item;
 
-import static org.teamstbf.yats.model.item.IsDone.ISDONE_NOTDONE;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +55,7 @@ public class Event implements ReadOnlyEvent {
 		} else {
 			this.description = new Description(" ");
 		}
-		this.isDone = new IsDone(ISDONE_NOTDONE);
+		this.isDone = new IsDone();
 		this.tags = new UniqueTagList(tags);
 
 		//check number of time group, if>2, throws exception

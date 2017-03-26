@@ -13,7 +13,7 @@ import org.teamstbf.yats.model.item.UniqueEventList;
  *
  * Marks an existing task as not done in the task scheduler.
  */
-//@@author A0139448U
+// @@author A0139448U
 public class MarkUndoneCommand extends Command {
 
 	public final int targetIndex;
