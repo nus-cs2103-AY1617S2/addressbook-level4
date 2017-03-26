@@ -36,6 +36,8 @@ import seedu.onetwodo.model.task.TaskType;
 public class MainWindow extends UiPart<Region> {
 
     private static final String LIST_DONE_COMMAND_INPUT = ListCommand.COMMAND_WORD + " done";
+    private static final String LIST_UNDONE_COMMAND_INPUT = ListCommand.COMMAND_WORD + " undone";
+    private static final String LIST_ALL_COMMAND_INPUT = ListCommand.COMMAND_WORD + " all";
 
     private static final String FXML = "MainWindow.fxml";
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
@@ -75,6 +77,12 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem listDoneMenuItem;
+
+    @FXML
+    private MenuItem listUndoneMenuItem;
+
+    @FXML
+    private MenuItem listAllMenuItem;
 
     @FXML
     private AnchorPane deadlineListPanelPlaceholder;
@@ -136,6 +144,8 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(undoMenuItem, KeyCombination.valueOf("Ctrl + Z"));
         setAccelerator(redoMenuItem, KeyCombination.valueOf("Ctrl + R"));
         setAccelerator(listDoneMenuItem, KeyCombination.valueOf("Ctrl + Shift + D"));
+        setAccelerator(listUndoneMenuItem, KeyCombination.valueOf("Ctrl + Shift + U"));
+        setAccelerator(listAllMenuItem, KeyCombination.valueOf("Ctrl + Shift + A"));
     }
 
     /**
@@ -260,6 +270,16 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleListDone() {
         commandBox.handleCommands(LIST_DONE_COMMAND_INPUT);
+    }
+
+    @FXML
+    public void handleListUndone() {
+        commandBox.handleCommands(LIST_UNDONE_COMMAND_INPUT);
+    }
+
+    @FXML
+    public void handleListAll() {
+        commandBox.handleCommands(LIST_ALL_COMMAND_INPUT);
     }
 
     void show() {

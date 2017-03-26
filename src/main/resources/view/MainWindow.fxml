@@ -34,6 +34,8 @@
             <Menu mnemonicParsing="false" text="List">
               <items>
                 <MenuItem fx:id="listDoneMenuItem" mnemonicParsing="false" onAction="#handleListDone" text="Done" />
+                  <MenuItem fx:id="listUndoneMenuItem" mnemonicParsing="false" onAction="#handleListUndone" text="Undone" />
+                  <MenuItem fx:id="listAllMenuItem" mnemonicParsing="false" onAction="#handleListAll" text="All" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
