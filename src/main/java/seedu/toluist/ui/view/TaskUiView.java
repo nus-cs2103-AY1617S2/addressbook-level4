@@ -58,82 +58,142 @@ public class TaskUiView extends UiView {
 
     @Override
     protected void viewDidMount() {
-        boolean isFloatingTask = task.isFloatingTask();
-        boolean isTaskWithDeadline = task.isTaskWithDeadline();
-        boolean isTask = isFloatingTask || isTaskWithDeadline;
-        boolean isEvent = task.isEvent();
-        boolean isRecurring = task.isRecurring();
+        initializeView();
+        handleTaskType();
+        handleTaskWithTags();
+        handleOverdueTask();
+        handleHighPriorityTask();
+        handleTaskDescriptionAndId();
+        handleTaskWithDates();
+        handleRecurringTask();
+        handleCompletedTask();
+    }
 
+    private void initializeView() {
         tagsPane.getChildren().clear();
-
-        TaskTypeTagView taskTypeTagView = new TaskTypeTagView(isTask);
-        taskTypeTagView.setParent(tagsPane);
-        taskTypeTagView.render();
-
-        for (Tag tag : task.getAllTags()) {
-            TagView tagView = new TagView(tag.tagName);
-            tagView.setParent(tagsPane);
-            tagView.render();
-        }
-
         statusBox.getChildren().clear();
         statusBox.setSpacing(STATUS_BOX_SPACING_VALUE);
+    }
+
+    private void handleTaskType() {
+        TaskTypeTagView taskTypeTagView = new TaskTypeTagView(task.isFloatingTask() || task.isTaskWithDeadline());
+        taskTypeTagView.setParent(tagsPane);
+        taskTypeTagView.render();
+    }
+
+    private void handleTaskWithTags() {
+        for (Tag tag : task.getAllTags()) {
+            renderTag(tag);
+        }
+    }
+
+    private void renderTag(Tag tag) {
+        TagView tagView = new TagView(tag.tagName);
+        tagView.setParent(tagsPane);
+        tagView.render();
+    }
+
+    private void handleOverdueTask() {
         if (task.isOverdue()) {
             TaskStatusView statusView = new TaskStatusView(AppUtil.getImage(IMAGE_PATH_OVERDUE_ICON));
             statusView.setParent(statusBox);
             statusView.render();
             FxViewUtil.addStyleClass(taskPane, STYLE_CLASS_OVERDUE);
         }
+    }
+
+    private void handleHighPriorityTask() {
         if (task.isHighPriority()) {
-            TaskStatusView highPriorityView = new TaskStatusView(
-                    AppUtil.getImage(IMAGE_PATH_HIGH_PRIORITY_ICON));
+            TaskStatusView highPriorityView = new TaskStatusView(AppUtil.getImage(IMAGE_PATH_HIGH_PRIORITY_ICON));
             highPriorityView.setParent(statusBox);
             highPriorityView.render();
         }
+    }
 
+    private void handleTaskDescriptionAndId() {
         name.setText(task.getDescription());
         id.setText(displayedIndex + ". ");
-        if (isTaskWithDeadline) {
-            date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
-        } else if (isEvent) {
-            date.setText(DateTimeFormatterUtil
-                    .formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
-        }
-        if (isTaskWithDeadline || task.isEvent()) {
-            clockIcon.setImage(AppUtil.getImage(IMAGE_PATH_CLOCK_ICON));
-        } else {
-            date.setVisible(false);
-            date.setManaged(false);
-            clockIcon.setVisible(false);
-            clockIcon.setManaged(false);
-        }
+    }
 
-        if (isRecurring) {
-            recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));
-            if (isFloatingTask) {
-                recurringDate.setText(DateTimeFormatterUtil.formatRecurringFloatingTask(
-                        task.getRecurringEndDateTime(),
-                        task.getRecurringFrequency()));
-            } else if (isTaskWithDeadline) {
-                recurringDate.setText(
-                        DateTimeFormatterUtil.formatRecurringTaskDeadline(
-                                task.getEndDateTime(),
-                                task.getRecurringEndDateTime(),
-                                task.getRecurringFrequency()));
-            } else if (isEvent) {
-                recurringDate.setText(
-                        DateTimeFormatterUtil.formatRecurringEvent(
-                                task.getStartDateTime(),
-                                task.getEndDateTime(),
-                                task.getRecurringEndDateTime(),
-                                task.getRecurringFrequency()));
-            }
+    private void handleTaskWithDates() {
+        if (task.isTaskWithDeadline() || task.isEvent()) {
+            renderTaskWithDatesBox();
         } else {
-            recurringIcon.setVisible(false);
-            recurringIcon.setManaged(false);
-            recurringDate.setVisible(false);
-            recurringDate.setManaged(false);
+            hideTaskWithDatesBox();
         }
+    }
+
+    private void renderTaskWithDatesBox() {
+        clockIcon.setImage(AppUtil.getImage(IMAGE_PATH_CLOCK_ICON));
+        if (task.isTaskWithDeadline()) {
+            date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
+        } else if (task.isEvent()) {
+            date.setText(DateTimeFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
+        }
+    }
+
+    private void hideTaskWithDatesBox() {
+        hideDateBox();
+        hideClockIcon();
+    }
+
+    private void hideDateBox() {
+        date.setVisible(false);
+        date.setManaged(false);
+    }
+
+    private void hideClockIcon() {
+        clockIcon.setVisible(false);
+        clockIcon.setManaged(false);
+    }
+
+    private void handleRecurringTask() {
+        if (task.isRecurring()) {
+            renderRecurringTaskBox();
+        } else {
+            hideRecurringTaskBox();
+        }
+    }
+
+    private void renderRecurringTaskBox() {
+        recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));
+        if (task.isFloatingTask()) {
+            recurringDate.setText(
+                    DateTimeFormatterUtil.formatRecurringFloatingTask(
+                            task.getRecurringEndDateTime(),
+                            task.getRecurringFrequency()));
+        } else if (task.isTaskWithDeadline()) {
+            recurringDate.setText(
+                    DateTimeFormatterUtil.formatRecurringTaskDeadline(
+                            task.getEndDateTime(),
+                            task.getRecurringEndDateTime(),
+                            task.getRecurringFrequency()));
+        } else if (task.isEvent()) {
+            recurringDate.setText(
+                    DateTimeFormatterUtil.formatRecurringEvent(
+                            task.getStartDateTime(),
+                            task.getEndDateTime(),
+                            task.getRecurringEndDateTime(),
+                            task.getRecurringFrequency()));
+        }
+    }
+
+    private void hideRecurringTaskBox() {
+        hideRecurringIcon();
+        hideRecurringDateBox();
+    }
+
+    private void hideRecurringIcon() {
+        recurringIcon.setVisible(false);
+        recurringIcon.setManaged(false);
+    }
+
+    private void hideRecurringDateBox() {
+        recurringIcon.setVisible(false);
+        recurringIcon.setManaged(false);
+    }
+
+    private void handleCompletedTask() {
         if (task.isCompleted()) {
             FxViewUtil.addStyleClass(taskPane, STYLE_CLASS_COMPLETED);
         }
