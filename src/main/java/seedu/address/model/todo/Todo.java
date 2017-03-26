@@ -27,7 +27,7 @@ public class Todo implements ReadOnlyTodo {
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    //@@author A0163786N
+    //@@author A0163786N, A0163720M
     /**
      * Constructor for a deadline
      */
@@ -37,7 +37,7 @@ public class Todo implements ReadOnlyTodo {
         this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    //@@author A0163786N
+    //@@author A0163786N, A0163720M
     /**
      * Constructor for an event
      */

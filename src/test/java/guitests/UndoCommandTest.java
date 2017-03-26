@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.testutil.TestTodo;
@@ -85,7 +84,6 @@ public class UndoCommandTest extends TodoListGuiTest {
 
     /**
      * Runs undo command and asserts resulting list matches currentList
-     * @param currentList
      */
     private void assertUndoSuccess() {
         commandBox.runCommand(UndoCommand.COMMAND_WORD);

@@ -1,6 +1,6 @@
 # TodoList Level 4 - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team AwesomeTodo`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -191,14 +191,19 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the TodoList data.
+* stores another TodoList instance which holds the previous state of the todo list before the most recent modifying change.
 * exposes a `UnmodifiableObservableList<ReadOnlyTodo>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+**Handling Undo Command**
+
+The second TodoList object stored by the Model makes undoing commands very simple. When the Logic component instructs the Model to undo the last command, the Model simply copies the previous state into the TodoList data and sets the previous state to null. Of course, as with other modifying commands, a TodoListEventChanged event is raised.
+
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Darius Foong, Justin Wong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -209,6 +214,22 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
+
+**Handling Save File Location Changes**
+
+The Sequence Diagrams below show how the components interact for the scenario where the user requests to change the save file location.
+
+<img src="images/saveFile1.png" width="800"><br>
+_Figure 2.5.2 : Component interactions for `saveFile data/new.xml` command (part 1)_
+
+>The `StorageManager` raises a SaveFileChangedEvent when the save file is changed by the user
+
+The diagram below shows how the EventsCenter reacts to that event, which eventually updates the path location in the configuration file and updates the status bar of the UI to reflect the 'Last Updated' time and new save file path.
+
+<img src="images/saveFile2.png" width="800"><br>
+_Figure 2.5.3 : Component interactions for `savefile data/new.xml` command (part 2)_
+
+>The event is fired through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
 
 ### 2.6. Common classes
 
