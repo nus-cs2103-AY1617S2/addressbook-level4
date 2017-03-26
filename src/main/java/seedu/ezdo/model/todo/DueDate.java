@@ -1,6 +1,5 @@
 package seedu.ezdo.model.todo;
 
-
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 
