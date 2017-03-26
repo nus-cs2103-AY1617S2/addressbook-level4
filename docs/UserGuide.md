@@ -1,11 +1,32 @@
 # User Guide
 
-## Starting the program
+1. [Starting the Program](#quick-start)
+2. [Features](#features)
+3. [Command Summary](#command-summary)
 
-1. Locate the .jar file
-2. Right click on the project
-3. Click `Run As` > `Java Application`
-4. The GUI should appear in a few seconds.
+## Starting the Program
+
+0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+
+   > Having any Java 8 version is not enough. <br>
+   > This app will not work with earlier versions of Java 8.
+
+1. Download the latest `fasttask.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
+3. Double-click the file to start the app. The GUI should appear in a few seconds.
+   > <img src="images/Ui.png" width="600">
+4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+5. Some example commands you can try:
+   * **`list`** : lists all tasks
+   * **`add`**`add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk` :
+     adds a task called `Groceries Shopping` to the Task Manager.
+   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+   * **`exit`** : exits the app
+6. Refer to the [Features](#features) section below for details of each command.<br>
+
+
+## 2. Features
 
 ## Getting Help : `help`
 Format: `help`
@@ -40,10 +61,10 @@ Examples:
 * `find groceries` returns `Groceries Shopping`
 
 ## Deleting a Task : `delete`
-Deletes a specified task from the task manager. Irreversible.<br>
-Format: `delete INDEX`
+Deletes a specified task or tasks from the task manager. Irreversible.<br>
+Format: `delete INDEX [MORE INDECIES]`
 
-> Deletes the name of the tasks at the specified `INDEX`. 
+> Deletes the tasks at the specified `INDEX` or indecies. 
   The index refers to the task number shown in the list. 
   `INDEX` must be an exact match in order for the function to work.
 
@@ -60,6 +81,10 @@ for the function to work.
 
 Examples: 
 * `edit 2` m/Go to Ralph's
+
+## Editing a Task : `undo`
+Undos the most recent action. Irreversible.
+Format: `undo`
 
 ## Googling a Task or Phrase: `google` 
 Format: `google [INDEX] [KEYWORDS]`
@@ -79,3 +104,25 @@ There is no need to save manually.
 
 ## Save Location
 Tasks manager data are saved in a file called `TasksManagerData.xml` in the project root folder.
+
+## 4. Command Summary
+
+* **Add**  `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]` <br>
+  e.g. `add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk`
+
+* **Clear** : `clear`
+
+* **Delete** : `delete INDEX` <br>
+   e.g. `delete 3`
+
+* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+  e.g. `find groceries`
+
+* **List** : `list` <br>
+
+* **Help** : `help` <br>
+
+* **Undo** : `undo` <br>
+
+* **Google** : `google INDEX` <br>
+  e.g.`google 2`
