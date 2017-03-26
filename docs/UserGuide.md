@@ -40,44 +40,56 @@ up doTASK, as well as guide you on how to use it to make you more efficient in p
 > * Parameters can be in any order.
 
 ### 3.1. Viewing help : `help`
-Allows you to view the list of commands available in doTASK. <br>
+Allows you to view the list of commands available in doTASK via the user guide. <br>
 Format: `help`
 
+### 3.2. Adding a Task : `add`
+There are a total of 5 parameters : `taskname` , `priority level` , `deadline` , `information`, `tags`.<br>
+> `taskname` is mandatory. The rest of the parameters are optional.<br>
+> User can add a task with any of the optional parameters, as stated from 3.2.2(#3.2.2-adds-a-task-with-`priority-level`) - `3.2.5`.
 
-> Help is shown if you enter an incorrect command e.g. `asdf` <br>
-> Alternatively, type `help` to obtain a list of commands that you can use.
+#### 3.2.1 Adds a floating task.<br>
+> * Floating tasks are tasks that excludes other parameters. Priority level, deadline, information and taggings are excluded. <br>
+Format: `add TASK_NAME`
 
+Example:
+> I want to buy a packet of milk.<br>
+* add Buy Milk
 
-### 3.2. Switching tabs: `switch`
-Switch the current tab to the next tab. <br>
-Format: `switch`
-
-> There will be 4 tabs, which can be toggled using this command.
-> The order in which the tabs will be switched is as follows: 'Priority' -> 'Overview' -> 'Today' -> 'Priority'.
-
-### 3.3. Adding a Task : `add`
-Adds a task to the task manager.
-> doTASK currently supports the use of floating tasks and tasks with a single deadline.<br>
-> * Floating tasks are tasks that have no deadlines, and can be completed at any time. <br>
-> * Tasks with deadlines will be complemented with reminders, so you won't forget to do them!
-
-Adds a floating task to the task manager. <br>
-Format: `add TASK_NAME p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]`
+#### 3.2.2 Adds a task with `priority level`. <br>
+Format: `add TASK_NAME [p/PRIORITY_LEVEL]`
   > * `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
-	 > * `ANY_INFO` allows you to key in details with regards to the task [optional].<br>
-	 > * `TAGS` allows you to assign tags to the tasks [optional].
 
-Adds a task, with a specified deadline, to the task manager. <br>
-Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]`
+Example:
+> I want to buy a packet of milk. Highest priority as it is urgent.<br>
+* add Buy Milk p/1
+
+#### 3.2.3 Adds a task with `deadline`. <br>
+Format: `add TASK_NAME [d/DEADLINE]`
    > * `DEADLINE` can be entered in the format of "date month", "month date", "date month year" or "month date year". <br>
 	 > * If no year is specified, the current year of the system will be used as the year of the deadline.<br>
-	 > * The month must be typed out as the first three letters of the month.
-
+	 > * The month must be typed out as the first three letters of the month.<br>
+   > * Tasks with deadlines will be complemented with reminders, so you won't forget to do them!
 
 Examples:
-* add Buy Milk p/4 t/Chores
-* add CS3230 Assignment 1 d/8 Jan 2018 p/1 i/How to do? t/School t/CS3230
+> I want to buy a packet of milk by 17 March 2017.
+* add Buy Milk d/17-Mar-2017
 
+#### 3.2.4 Adds a task with `information`.<br>
+Format: `add TASK_NAME [i/INFORMATION]`
+   > * `INFORMATION` refers to the details of the task.<br>
+
+Examples:
+> I want to buy a packet of milk, HL brand 1.5 Litres.<br>
+* add Buy Milk i/HL Milk 1.5 Litres
+
+#### 3.2.5 Adds a task with `tags`.<br>
+Format: `add TASK_NAME [t/TAGS]`
+   > * `TAGS` refers to the tags of the task.<br>
+
+Examples:
+> I want to buy a packet of milk for home usage.<br>
+* add Buy Milk t/home
 
 ### 3.4. Listing the tasks: `list`
 
