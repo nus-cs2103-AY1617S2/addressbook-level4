@@ -137,6 +137,17 @@ public class UniqueCategoryList implements Iterable<Category> {
         internalList.add(toAdd);
     }
 
+    //@@author A0147990R
+    /**
+     * Removes a Category to the list.
+     *
+     */
+    public void remove(Category toRemove) {
+        assert toRemove != null;
+        if (contains(toRemove)) {
+            internalList.remove(toRemove);
+        }
+    }
     @Override
     public Iterator<Category> iterator() {
         return internalList.iterator();

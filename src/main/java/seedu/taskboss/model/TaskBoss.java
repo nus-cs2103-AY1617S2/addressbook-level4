@@ -166,6 +166,11 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         categories.add(t);
     }
 
+    //@@author A0147990R
+    public void removeCategory(Category t) {
+        categories.remove(t);
+    }
+
 //// util methods
 
     @Override
