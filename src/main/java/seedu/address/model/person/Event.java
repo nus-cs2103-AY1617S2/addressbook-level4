@@ -147,20 +147,4 @@ public class Event implements ReadOnlyEvent{
     public String toString() {
         return getAsText();
     }
- 
-	public static Comparator<? super Event> getComparator() {
-		// sort by start date first
-		Comparator<Event> byStartDate = (e1, e2) -> e1.getStartDate().compareTo(e2.getStartDate());
-				
-		// then sort by start time
-		Comparator<Event> byStartTime = (e1, e2) -> e1.getStartTime().compareTo(e2.getStartTime());
-		
-		// then sort by end date
-		Comparator<Event> byEndDate = (e1, e2) -> e1.getEndDate().compareTo(e2.getEndDate());
-		
-		// then sort by end time
-		Comparator<Event> byEndTime = (e1, e2) -> e1.getEndTime().compareTo(e2.getEndTime());
-				
-		return byStartDate.thenComparing(byStartTime).thenComparing(byEndDate).thenComparing(byEndTime);
-	}
 }

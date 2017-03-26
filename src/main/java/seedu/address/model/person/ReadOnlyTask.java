@@ -16,6 +16,7 @@ public interface ReadOnlyTask {
     ByTime getByTime();
     Location getLocation();
     boolean getStatus();
+    boolean hasDeadline();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -63,17 +64,32 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
     
-    //@@author A0148038A
-	static Comparator<? super ReadOnlyTask> getComparator() {
-		// sort by by date first
-		Comparator<ReadOnlyTask> byByDate = (t1, t2) -> t1.getByDate().compareTo(t2.getByDate());
-						
-		// then sort by by time
-		Comparator<ReadOnlyTask> byByTime = (t1, t2) -> t1.getByTime().compareTo(t2.getByTime());
-				
-		// then sort by priority
+//    //@@author A0148038A
+//    default int compareTo(ReadOnlyTask o) {
+//    	if (!this.hasDeadline() && !o.hasDeadline()) {
+//    		return this.getPriority().compareTo(o.getPriority());
+//    	} else if (this.hasDeadline() && !o.hasDeadline()) {
+//    		return 1;
+//    	} else if (!this.hasDeadline() && o.hasDeadline()) {
+//    		return -1;
+//    	} else {
+//    		if (!this.getByDate().equals(o.getByDate())) {
+//    			return getByDate().compareTo(o.getByDate());
+//    		} else if (!this.getByTime().equals(o.getByTime())) {
+//    			return getByTime().compareTo(o.getByTime());
+//    		} else {
+//    			return this.getPriority().compareTo(o.getPriority());
+//    		}
+//    	}
+//    }
+//    
+//    //@@author A0148038A
+//	static Comparator<? super ReadOnlyTask> getComparator() {
+//		Comparator<ReadOnlyTask> byTask = (t1, t2) -> t1.compareTo(t2);
+//		return byTask;
+//	}
+    static Comparator<? super ReadOnlyTask> getComparator() {
 		Comparator<ReadOnlyTask> byPriority = (t1, t2) -> t1.getPriority().compareTo(t2.getPriority());
-						
-		return byByDate.thenComparing(byByTime).thenComparing(byByTime).thenComparing(byPriority);
+		return byPriority;
 	}
 }

@@ -31,8 +31,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final WhatsLeft whatsLeft;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
+    private final FilteredList<ReadOnlyTask> filteredTasks;
     private static String previousCommand;
     private static WhatsLeft previousState;
     private static String displayStatus;
@@ -48,8 +48,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.whatsLeft = new WhatsLeft(whatsLeft);
         previousState = new WhatsLeft();
-        filteredTasks = new FilteredList<>(this.whatsLeft.getTaskList());
         filteredEvents = new FilteredList<>(this.whatsLeft.getEventList());
+        filteredTasks = new FilteredList<>(this.whatsLeft.getTaskList());
         previousCommand = "";
         displayStatus = "Pending";
         updateFilteredListToShowAll();
@@ -97,13 +97,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateWhatsLeftChanged();
     }
 
-    @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        whatsLeft.addTask(task);
-        updateFilteredListToShowAll();
-        indicateWhatsLeftChanged();
-    }
-
     // @@author A0121668A
     @Override
     public synchronized void MarkTaskAsComplete(int filteredTaskListIndex) throws TaskNotFoundException {
@@ -122,6 +115,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     // @@author
 
+    // @@author A0148038A
     @Override
     public synchronized void addEvent(Event event)
             throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
@@ -129,24 +123,29 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }
-
+    
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
-        assert editedTask != null;
-
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        whatsLeft.updateTask(addressBookIndex, editedTask);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        whatsLeft.addTask(task);
+        updateFilteredListToShowAll();
+        indicateWhatsLeftChanged();
+    }
+    
+    @Override
+    public void updateEvent(Event eventToEdit, Event editedEvent) 
+    		throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+        assert editedEvent != null;
+        
+        whatsLeft.updateEvent(eventToEdit, editedEvent);
         indicateWhatsLeftChanged();
     }
 
     @Override
-    public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
-        assert editedEvent != null;
+    public void updateTask(Task taskToEdit, Task editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
 
-        int addressBookIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
-        whatsLeft.updateEvent(addressBookIndex, editedEvent);
+        whatsLeft.updateTask(taskToEdit, editedTask);
         indicateWhatsLeftChanged();
     }
 
@@ -199,12 +198,16 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0148038A
     @Override
     public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
-        return new UnmodifiableObservableList<ReadOnlyEvent>(filteredEvents);
+    	SortedList<ReadOnlyEvent> sortedEvents = new SortedList<ReadOnlyEvent>(filteredEvents);
+    	sortedEvents.setComparator(ReadOnlyEvent.getComparator());
+    	return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<ReadOnlyTask>(filteredTasks);
+    	SortedList<ReadOnlyTask> sortedTasks = new SortedList<ReadOnlyTask>(filteredTasks);
+    	sortedTasks.setComparator(ReadOnlyTask.getComparator());
+    	return new UnmodifiableObservableList<ReadOnlyTask>(sortedTasks);
     }
 
     // @Override

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -18,6 +19,8 @@ import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
@@ -95,12 +98,14 @@ public class AddCommand extends Command {
             ModelManager.setPreviousState(currState);
             if (toAddTask == null) {
                 model.addEvent(toAddEvent);
-                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(model.findEventIndex(toAddEvent), "ev"));
+                UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
+                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
                 model.storePreviousCommand("add");
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
             } else if (toAddEvent == null) {
                 model.addTask(toAddTask);
-                EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(model.findTaskIndex(toAddTask), "ts"));
+                UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+                EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(toAddTask)));
                 model.storePreviousCommand("add");
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
             }
