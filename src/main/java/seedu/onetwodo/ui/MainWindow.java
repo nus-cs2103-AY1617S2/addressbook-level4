@@ -59,6 +59,9 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
+    private MenuItem exitMenuItem;
+    
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
@@ -119,6 +122,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private void setAccelerators() {
+        setAccelerator(exitMenuItem, KeyCombination.valueOf("Ctrl + E"));
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
         setAccelerator(undoMenuItem, KeyCombination.valueOf("Ctrl + Z"));
     }
