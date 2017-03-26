@@ -18,7 +18,7 @@ public class UseCommandParser {
         } else if (args.substring(args.trim().length() - 3).equals(".xml")) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, "Specify the folder Location"));
-        } else if (!FileUtil.isFileExists(new File(FileUtil.getPath(args.trim()+ "\\taskManager.xml")))) {
+        } else if (!FileUtil.isFileExists(new File(FileUtil.getPath(args.trim() + "\\taskManager.xml")))) {
             return new IncorrectCommand(
                     String.format("File does not exists."));
         }
