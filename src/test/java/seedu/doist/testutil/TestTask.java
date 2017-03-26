@@ -7,6 +7,7 @@ import seedu.doist.model.task.Description;
 import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.TaskDate;
 
 /**
  * A mutable person object. For testing only.
@@ -17,14 +18,13 @@ public class TestTask implements ReadOnlyTask {
     private Priority priority;
     private FinishedStatus finishedStatus;
     private UniqueTagList tags;
-    private Date startDate;
-    private Date endDate;
+    private TaskDate dates;
 
     public TestTask() {
         tags = new UniqueTagList();
         finishedStatus = new FinishedStatus();
         priority = new Priority();
-        startDate = endDate = null;
+        dates = new TaskDate();
     }
 
     /**
@@ -35,8 +35,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority();
         this.finishedStatus = taskToCopy.getFinishedStatus();
         this.tags = taskToCopy.getTags();
-        this.startDate = taskToCopy.getStartDate();
-        this.endDate = taskToCopy.getEndDate();
+        this.dates = taskToCopy.getDates();
     }
 
     public void setName(Description desc) {
@@ -55,12 +54,8 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setDates(TaskDate dates) {
+        this.dates = dates;
     }
 
     @Override
@@ -84,13 +79,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    @Override
-    public Date getEndDate() {
-        return endDate;
+    public TaskDate getDates() {
+        return dates;
     }
 
     @Override
@@ -102,9 +92,9 @@ public class TestTask implements ReadOnlyTask {
     public boolean isOverdue() {
         if (this.getFinishedStatus().getIsFinished()) {
             return false;
-        } else if (this.getStartDate() != null && this.getEndDate() != null) {
+        } else if (this.getDates().getStartDate() != null && this.getDates().getEndDate() != null) {
             Date currentDate = new Date();
-            return (this.getEndDate().compareTo(currentDate) < 0);
+            return (this.getDates().getEndDate().compareTo(currentDate) < 0);
         } else {
             return false;
         }
@@ -118,8 +108,9 @@ public class TestTask implements ReadOnlyTask {
             sb.append("\\under");
             this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));
         }
-        if (this.getStartDate() != null && this.getEndDate() != null) {
-            sb.append("\\from " + this.getStartDate().toString() + " \\to " + this.getEndDate().toString());
+        if (this.getDates().getStartDate() != null && this.getDates().getEndDate() != null) {
+            sb.append("\\from " + this.getDates().getStartDate().toString() + " \\to " +
+                    this.getDates().getEndDate().toString());
         }
         return sb.toString();
     }
