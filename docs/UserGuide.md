@@ -1,8 +1,5 @@
 # User Guide
 
-This product is not meant for end-users and therefore there is no user-friendly installer. 
-Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn how to set up the project.
-
 ## Starting the program
 
 1. Locate the .jar file
@@ -24,10 +21,10 @@ Adds a task to the task manager<br>
 Format: `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]` 
  
 > Words in `UPPER_CASE` are the parameters, items in `[SQUARE_BRACKETS]` are optional. 
-> `add` and `TASKNAME` must be in the order shown, but there is not set order for all other parameters.
+> `add` and `TASKNAME` must be in the order shown, but there is no set order for all other parameters.
 > A format hint will be added if the user types in an incorrect command. 
 
-> `s/STARTTIME` and `e/ENDTIME` can be entered in the format `12:12` or `1212`. Time is formated using a 24 hour clock. 
+> `s/STARTTIME` and `e/ENDTIME` can be entered in the format `12:12` or `1212`. `[d/DATE1 [DATE2]` can be entered in the format `ddmmyy`. Time is formated using a 24 hour clock. 
 
 Example: 
 * `add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk`
