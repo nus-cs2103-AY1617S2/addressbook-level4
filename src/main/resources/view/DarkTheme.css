@@ -354,10 +354,22 @@
     -fx-highlight-fill: #7ecfff;
 }
 
-.accordion .titled-pane > *.content{
-    -fx-background-color: transparent ;
+.titled-pane * {
+    -fx-background-color: transparent;
 }
 
-.accordion .titled-pane .title {
-    -fx-background-color: transparent ;
+.titled-pane > *.content {
+    -fx-border-color: transparent;
+}
+.titled-pane:pressed {
+    -fx-text-fill: red;
+}
+.titled-pane .title{
+    -fx-background-color: transparent;
+}
+.titled-pane .title:hover {
+    -fx-background-color: #b7b7b7;
+}
+.titled-pane .title:pressed {
+    -fx-background-color: #DDDDDD;
 }
