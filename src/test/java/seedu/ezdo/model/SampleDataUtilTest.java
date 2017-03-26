@@ -1,7 +1,5 @@
 package seedu.ezdo.model;
 
-import static org.junit.Assert.*;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -9,11 +7,10 @@ import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
-import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 import seedu.ezdo.model.util.SampleDataUtil;
 
 @RunWith(PowerMockRunner.class)
