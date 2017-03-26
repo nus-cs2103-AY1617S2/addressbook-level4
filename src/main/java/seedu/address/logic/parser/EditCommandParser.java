@@ -49,7 +49,7 @@ public class EditCommandParser {
 
             if (startTime.isPresent() && endTime.isPresent()) {
                 try {
-                    DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+                    DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yy");
                     editTodoDescriptor.setStartTime(dateFormat.parse(startTime.get()));
                     editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
                 } catch (NoSuchElementException | ParseException e) {
@@ -57,7 +57,7 @@ public class EditCommandParser {
                 }
             } else if (endTime.isPresent() && !startTime.isPresent()) {
                 try {
-                    DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+                    DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yy");
                     editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
                 } catch (NoSuchElementException | ParseException e) {
 

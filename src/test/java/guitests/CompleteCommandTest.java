@@ -17,7 +17,7 @@ public class CompleteCommandTest extends TodoListGuiTest {
      * The list of todos in the todo list panel is expected to match this list
      */
     private TestTodo[] currentList;
-    private String timeOfCompletion = "7:11PM 19/03/2017";
+    private String timeOfCompletion = "7:11PM 19/03/17";
 
     @Before
     public void setUp() {

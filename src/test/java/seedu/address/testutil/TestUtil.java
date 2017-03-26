@@ -357,6 +357,7 @@ public class TestUtil {
         todoToComplete.setCompleteTime(completeDate);
         return replaceTodoFromList(todos, todoToComplete, index);
     }
+    //@@author
     //@@author A0163786N
     /**
      * Uncompletes the todo at targetIndexOneIndexedFormat
@@ -370,7 +371,7 @@ public class TestUtil {
         todoToUncomplete.setCompleteTime(null);
         return replaceTodoFromList(todos, todoToUncomplete, index);
     }
-
+    //@@author
     public static boolean compareCardAndTodo(TodoCardHandle card, ReadOnlyTodo todo, boolean compareCompleteTime) {
         return card.isSameTodo(todo, compareCompleteTime);
     }

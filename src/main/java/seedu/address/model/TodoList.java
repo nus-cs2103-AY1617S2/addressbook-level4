@@ -124,6 +124,7 @@ public class TodoList implements ReadOnlyTodoList {
     public void completeTodo(int index, Date completeTime) {
         todos.completeTodo(index, completeTime);
     }
+    //@@author
     //@@author A0163786N
     /**
      * Uncompletes the todo in the list at position {@code index}.
@@ -131,7 +132,7 @@ public class TodoList implements ReadOnlyTodoList {
     public void uncompleteTodo(int index) {
         todos.uncompleteTodo(index);
     }
-
+    //@@author
     /**
      * Ensures that every tag in this todo:
      *  - exists in the master list {@link #tags}

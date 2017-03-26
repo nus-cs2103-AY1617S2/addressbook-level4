@@ -100,6 +100,7 @@ public class ModelManager extends ComponentManager implements Model {
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
+    //@@author
     //@@author A0163786N
     @Override
     public synchronized void uncompleteTodo(int filteredTodoListIndex) {
@@ -108,6 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
+    //@@author
     //@@author A0163786N
     @Override
     public void loadPreviousState() throws NoPreviousStateException {
@@ -117,7 +119,7 @@ public class ModelManager extends ComponentManager implements Model {
         resetData(previousTodoList);
         previousTodoList = null;
     }
-
+    //@@author
     //=========== Filtered Todo List Accessors =============================================================
 
     @Override

@@ -53,7 +53,7 @@ public class TestTodo implements ReadOnlyTodo {
         }
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-
+    //@@author
     /**
      * Constructor for an event
      */
@@ -77,7 +77,7 @@ public class TestTodo implements ReadOnlyTodo {
         this.completeTime = completeTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-
+    //@@author
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
@@ -118,12 +118,13 @@ public class TestTodo implements ReadOnlyTodo {
     public void setCompleteTime(Date completeTime) {
         this.completeTime = completeTime;
     }
+    //@@author
     //@@author A0163786N
     @Override
     public Date getCompleteTime() {
         return completeTime;
     }
-
+    //@@author
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -180,4 +181,5 @@ public class TestTodo implements ReadOnlyTodo {
         this.getTags().asObservableList().stream().forEach(s -> sb.append(" t/" + s.tagName + " "));
         return sb.toString();
     }
+    //@@author
 }

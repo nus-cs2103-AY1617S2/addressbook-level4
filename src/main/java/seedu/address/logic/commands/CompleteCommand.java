@@ -25,7 +25,7 @@ public class CompleteCommand extends Command {
 
     public static final String MESSAGE_TODO_ALREADY_COMPLETE = "This todo is already complete";
 
-    public static final String COMPLETE_TIME_FORMAT = "h:mma dd/MM/yyyy";
+    public static final String COMPLETE_TIME_FORMAT = "h:mma dd/MM/yy";
 
     public final int filteredTodoListIndex;
     public final Date completeTime;

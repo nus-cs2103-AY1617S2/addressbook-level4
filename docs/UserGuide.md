@@ -23,9 +23,9 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all Todos
-   * **`add`**` Take the dog for a walk s/5:00PM 11/11/2011 e/6:00PM 11/11/2011` :
+   * **`add`**` Take the dog for a walk s/5:00PM 11/11/11 e/6:00PM 11/11/11` :
    * **`delete`**` 3` : deletes the 3rd Todo shown in the current list
-   * **`edit`**` 3 take the cat for a walk e/6:00am 11/11/2017` : edits the 3rd Todo's title and end time shown in the current list.
+   * **`edit`**` 3 take the cat for a walk e/6:00am 11/11/17` : edits the 3rd Todo's title and end time shown in the current list.
    * **`complete`**` 3`: marks the 3rd Todo shown in the current list as complete
    * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
    * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml
@@ -62,8 +62,8 @@ Format: `add DEADLINE e/DEADLINE [t/tag]`
 Examples:
 
 * `add Finish math homework t/school`
-* `add Take the dog for a walk s/5:00PM 11/11/2011 e/6:00PM 11/11/2011`
-* `add Finish programming project d/5:00PM 11/11/2011`
+* `add Take the dog for a walk s/5:00PM 11/11/11 e/6:00PM 11/11/11`
+* `add Finish programming project d/5:00PM 11/11/11`
 
 ### 2.3. Listing all todos : `list`
 
@@ -112,7 +112,7 @@ Format: `edit INDEX [TASK] [t/TAG]`
 
 Examples:
 
-* `edit 1 Play with dog e/5:00PM 11/11/2011`<br>
+* `edit 1 Play with dog e/5:00PM 11/11/11`<br>
   Edits the task description and deadline of the 1st todo to be listed
 
 ### 2.5. Finding all todos containing any keyword in their description: `find`
@@ -214,13 +214,13 @@ Examples:
   e.g. `add Finish math homework`
 
 * **Add Event** : `add TODO s/STARTTIME e/ENDTIME` <br>
-  e.g. `add Take the dog for a walk s/6:00PM 11/11/2017 e/7:00PM 11/11/2017`
+  e.g. `add Take the dog for a walk s/6:00PM 11/11/17 e/7:00PM 11/11/17`
 
 * **Add Deadline** : `add TODO e/DEADLINE` <br>
   e.g. `add Finish programming project e/17-03-17T8:00`
 
 * **Edit** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME t/TAGS` <br>
-  e.g. `edit 1 Take cat for a walk s/11:11am 11/11/2011 e/12:12pm 11/11/2011 t/cat`
+  e.g. `edit 1 Take cat for a walk s/11:11am 11/11/11 e/12:12pm 11/11/11 t/cat`
 
 * **Clear** : `clear` <br>
   e.g. `clear`
