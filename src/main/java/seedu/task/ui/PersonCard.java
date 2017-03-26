@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Timing;
 
 public class PersonCard extends UiPart<Region> {
 
@@ -35,12 +36,24 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         priority.setText("Priority: " + person.getPriority().value);
         priority.setStyle("-fx-background-color: " + person.getPriority().getPriorityColor() + ";");
-        startTiming.setText("Start Timing: " + person.getStartTiming().value);
-        endTiming.setText("End Timing: " + person.getEndTiming().value);
-        recurring.setText("");
+
+        if (person.getStartTiming().value.equals(Timing.NULL_TIMING)) {
+            startTiming.setText("");
+        } else {
+            startTiming.setText("Start Timing: " + person.getStartTiming().value);
+        }
+
+        if (person.getEndTiming().value.equals(Timing.NULL_TIMING)) {
+            endTiming.setText("");
+        } else {
+            endTiming.setText("End Timing: " + person.getEndTiming().value);
+
+        }
         if (person.isRecurring()) {
             recurring.setText("Recurring Task");
             recurring.setStyle("-fx-background-color: pink;");
+        } else {
+            recurring.setText("");
         }
         initTags(person);
     }
