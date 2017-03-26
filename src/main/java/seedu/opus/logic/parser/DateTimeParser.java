@@ -39,13 +39,12 @@ public class DateTimeParser {
     }
 
     public static Optional<DateGroup> parseDateGroup(String dateString) {
-        Parser parser = new Parser();
-        List<DateGroup> groups = parser.parse(dateString);
+        Parser dateTimeParser = new Parser();
+        List<DateGroup> groups = dateTimeParser.parse(dateString);
 
         if (groups.isEmpty()) {
             return Optional.empty();
         }
-
 
         return Optional.ofNullable(groups.get(0));
     }

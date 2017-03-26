@@ -62,13 +62,8 @@ public class ScheduleCommandParser {
                 endTime = Optional.ofNullable(new DateTime(DateTimeParser.convertDateToLocalDateTime(dates.get(0))));
             }
 
-            if (startTime.isPresent()) {
-                editTaskDescriptor.setStartTime(startTime);
-            }
-
-            if (endTime.isPresent()) {
-                editTaskDescriptor.setEndTime(endTime);
-            }
+            startTime.ifPresent(sTime -> editTaskDescriptor.setStartTime(Optional.of(sTime)));
+            endTime.ifPresent(eTime -> editTaskDescriptor.setEndTime(Optional.of(eTime)));
 
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
