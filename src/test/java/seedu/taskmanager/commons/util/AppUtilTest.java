@@ -8,6 +8,7 @@ import org.junit.rules.ExpectedException;
 
 public class AppUtilTest {
 
+    // @@author A0141102H
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

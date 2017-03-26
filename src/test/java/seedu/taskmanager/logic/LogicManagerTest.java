@@ -54,6 +54,7 @@ import seedu.taskmanager.storage.StorageManager;
 
 public class LogicManagerTest {
 
+    // @@author A0141102H
     /**
      * See https://github.com/junit-team/junit4/wiki/rules#temporaryfolder-rule
      */

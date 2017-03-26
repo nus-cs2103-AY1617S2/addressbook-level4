@@ -9,6 +9,7 @@ import seedu.taskmanager.model.task.TaskName;
 
 public class TaskNameTest {
 
+    // @@author A0141102H
     @Test
     public void isValidName() {
         // invalid name

@@ -159,6 +159,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
+    // @@author A0139520L
     /**
      * Marks the task in the list at position {@code index} as complete.
      *
@@ -181,6 +182,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.markTask(index, isCompleted);
     }
 
+    // @@author
     //// tag-level operations
     /*
      * public void addCategory(Category c) throws

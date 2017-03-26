@@ -8,9 +8,7 @@ import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 
-/**
- *
- */
+// @@author A0141102H
 public class TaskBuilder {
 
 	private TestTask task;

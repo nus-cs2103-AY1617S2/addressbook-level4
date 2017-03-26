@@ -3,26 +3,27 @@ package seedu.taskmanager.model.task;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's name in ProcrastiNoMore.
- * Guarantees: immutable; is valid as declared in {@link #isValidTaskName(String)}
+ * Represents a Task's name in ProcrastiNoMore. Guarantees: immutable; is valid
+ * as declared in {@link #isValidTaskName(String)}
  */
 public class TaskName {
 
-    public static final String MESSAGE_TASKNAME_CONSTRAINTS =
-            "Tasks names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_TASKNAME_CONSTRAINTS = "Tasks names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character of the address must not be a whitespace, otherwise
+     * " " (a blank string) becomes a valid input.
      */
     public static final String TASKNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullTaskName;
 
+    // @@author A0139520L
     /**
      * Validates given name.
      *
-     * @throws IllegalValueException if given name string is invalid.
+     * @throws IllegalValueException
+     *             if given name string is invalid.
      */
     public TaskName(String taskName) throws IllegalValueException {
         assert taskName != null;
@@ -40,7 +41,7 @@ public class TaskName {
         return test.matches(TASKNAME_VALIDATION_REGEX);
     }
 
-
+    // @@author
     @Override
     public String toString() {
         return fullTaskName;
@@ -50,7 +51,8 @@ public class TaskName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskName // instanceof handles nulls
-                && this.fullTaskName.equals(((TaskName) other).fullTaskName)); // state check
+                        && this.fullTaskName.equals(((TaskName) other).fullTaskName)); // state
+                                                                                       // check
     }
 
     @Override

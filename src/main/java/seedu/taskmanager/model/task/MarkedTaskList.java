@@ -9,8 +9,10 @@ import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.exceptions.DuplicateDataException;
 import seedu.taskmanager.commons.util.CollectionUtil;
 
+// @@author A0139520L
 /**
- * A list of Tasks that enforces uniqueness between its elements and does not allow nulls.
+ * A list of Tasks that enforces uniqueness between its elements and does not
+ * allow nulls.
  *
  * Supports a minimal set of list operations.
  *
@@ -22,7 +24,8 @@ public class MarkedTaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent task as the given argument.
+     * Returns true if the list contains an equivalent task as the given
+     * argument.
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
@@ -33,7 +36,7 @@ public class MarkedTaskList implements Iterable<Task> {
      * Adds a task to the list.
      *
      */
-    public void add(Task toAdd){
+    public void add(Task toAdd) {
         assert toAdd != null;
         internalList.add(toAdd);
     }
@@ -41,7 +44,8 @@ public class MarkedTaskList implements Iterable<Task> {
     /**
      * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws TaskNotFoundException
+     *             if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
@@ -77,8 +81,7 @@ public class MarkedTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MarkedTaskList // instanceof handles nulls
-                && this.internalList.equals(
-                ((MarkedTaskList) other).internalList));
+                        && this.internalList.equals(((MarkedTaskList) other).internalList));
     }
 
     @Override
@@ -87,7 +90,8 @@ public class MarkedTaskList implements Iterable<Task> {
     }
 
     /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     * Signals that an operation would have violated the 'no duplicates'
+     * property of the list.
      */
     public static class DuplicateTaskException extends DuplicateDataException {
         protected DuplicateTaskException() {
@@ -96,9 +100,10 @@ public class MarkedTaskList implements Iterable<Task> {
     }
 
     /**
-     * Signals that an operation targeting a specified task in the list would fail because
-     * there is no such matching task in the list.
+     * Signals that an operation targeting a specified task in the list would
+     * fail because there is no such matching task in the list.
      */
-    public static class TaskNotFoundException extends Exception {}
+    public static class TaskNotFoundException extends Exception {
+    }
 
 }

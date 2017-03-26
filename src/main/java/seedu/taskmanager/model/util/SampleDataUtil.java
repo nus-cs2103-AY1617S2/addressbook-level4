@@ -11,6 +11,7 @@ import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
 
+//@@author A0141102H
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {

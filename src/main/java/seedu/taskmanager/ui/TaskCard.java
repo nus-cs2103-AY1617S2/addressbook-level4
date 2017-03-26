@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
+//@@author A0142418L
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskCard.fxml";

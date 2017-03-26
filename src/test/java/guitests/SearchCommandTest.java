@@ -9,12 +9,14 @@ import seedu.taskmanager.testutil.TestTask;
 
 public class SearchCommandTest extends TaskManagerGuiTest {
 
+    // @@author A0141102H
     @Test
     public void find_nonEmptyList() {
         assertFindResult("SEARCH food"); // no results
-        assertFindResult("SEARCH with", td.eatbreakfast, td.eatdinner); // multiple results
+        assertFindResult("SEARCH with", td.eatbreakfast, td.eatdinner); // multiple
+                                                                        // results
 
-        //find after deleting one result
+        // find after deleting one result
         commandBox.runCommand("DELETE 1");
         assertFindResult("SEARCH with", td.eatdinner);
     }
