@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class TaskNameTest {
+public class DescriptionTest {
 
     @Test
     public void isValidName() {

@@ -9,7 +9,7 @@ import org.junit.Test;
 public class DueDateTest {
 
     @Test
-    public void isValidDueDate() {
+    public void isValidPhone() {
         // invalid phone numbers
         assertFalse(DueDate.isValidDueDate("")); // empty string
         assertFalse(DueDate.isValidDueDate(" ")); // spaces only
