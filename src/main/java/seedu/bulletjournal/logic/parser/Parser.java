@@ -54,10 +54,10 @@ public class Parser {
 
         case AddCommandFloating.COMMAND_WORD:
             return new AddCommandParserFloating().parse(arguments);
-        
+
         case AddCommandDeadline.COMMAND_WORD:
             return new AddCommandParserDeadline().parse(arguments);
-            
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
