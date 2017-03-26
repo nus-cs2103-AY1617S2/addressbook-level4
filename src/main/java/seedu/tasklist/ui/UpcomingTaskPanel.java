@@ -99,7 +99,7 @@ public class UpcomingTaskPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new UpcomingTaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new UpcomingTaskCard(task).getRoot());
             }
         }
     }

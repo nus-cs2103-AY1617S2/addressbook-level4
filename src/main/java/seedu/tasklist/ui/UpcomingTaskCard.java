@@ -20,18 +20,15 @@ public class UpcomingTaskCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
 
     @FXML
     private Label startTime;
     @FXML
     private Label endTime;
 
-    public UpcomingTaskCard(ReadOnlyTask task, int displayedIndex) {
+    public UpcomingTaskCard(ReadOnlyTask task) {
         super(FXML);
         name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
         String taskType = task.getType();
         switch (taskType) {
         case FloatingTask.TYPE:
@@ -45,6 +42,7 @@ public class UpcomingTaskCard extends UiPart<Region> {
         case EventTask.TYPE:
             startTime.setText(((ReadOnlyEventTask) task).getStartTime());
             endTime.setText(((ReadOnlyEventTask) task).getEndTime());
+            break;
         }
     }
 }
