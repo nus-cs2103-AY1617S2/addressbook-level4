@@ -26,7 +26,7 @@ public class TaskTest {
         Optional<Deadline> deadlineOne = Optional.of(new Deadline(dateTime));
         Optional<Deadline> deadlineTwo = Optional.of(new Deadline(dateTimeTwo));
 
-        Optional<Deadline> deadlineSame = Optional.of(new Deadline(dateTime));
+        //Optional<Deadline> deadlineSame = Optional.of(new Deadline(dateTime));
         Task taskDeadlineOne = new Task(new Name("Test"), deadlineOne, Optional.empty(), new UniqueTagList());
         Task taskDeadlineTwo = new Task(new Name("Test"), deadlineTwo, Optional.empty(), new UniqueTagList());
 
@@ -38,10 +38,5 @@ public class TaskTest {
         assertTrue(taskNormalOne.equals(taskNormalTwo));
 
         assertFalse(taskSpecialA.equals(taskSpecialB)); // currently expected behaviour
-    }
-
-    @Test
-    public void anyhowTestTwo() {
-
     }
 }
