@@ -102,6 +102,9 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public UnmodifiableObservableList<Task> asSortedList(String keyword) {
         switch (keyword) {
+        case "all":
+            FXCollections.sort(internalList, new TaskComparator());
+            break;
         case "priority":
             FXCollections.sort(internalList, new PriorityComparator());
             break;
@@ -115,7 +118,7 @@ public class UniqueTaskList implements Iterable<Task> {
             FXCollections.sort(internalList, new StatusComparator());
             break;
         default:
-            break;
+            throw new AssertionError();
         }
         return new UnmodifiableObservableList<>(internalList);
     }
