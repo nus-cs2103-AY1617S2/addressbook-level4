@@ -9,11 +9,9 @@ import seedu.address.commons.events.BaseEvent;
 public class JumpToTaskListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
-    public final String targetTask;
 
-    public JumpToTaskListRequestEvent(int targetIndex, String task) {
+    public JumpToTaskListRequestEvent(int targetIndex) {
         this.targetIndex = targetIndex;
-        this.targetTask = task;
     }
 
     @Override

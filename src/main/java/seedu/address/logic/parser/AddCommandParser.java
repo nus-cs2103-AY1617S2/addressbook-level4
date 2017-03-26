@@ -26,6 +26,7 @@ public class AddCommandParser {
     
     private static String DEFAULT_START_TIME = "0001";
     private static String DEFAULT_END_TIME = "2359";
+    private static String DEFAULT_BY_TIME = "2359";
     
     //@@author A0110491U
     /**
@@ -84,6 +85,10 @@ public class AddCommandParser {
             //default block from start of day
             if (endtime != null && starttime == null) {
                 starttime = DEFAULT_START_TIME;
+            }
+            
+            if (bydate != null && bytime == null) {
+            	bytime = DEFAULT_BY_TIME;
             }
 
             return new AddCommand(

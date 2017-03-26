@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.util.CollectionUtil;
@@ -57,6 +58,7 @@ public class EditCommand extends Command {
     private final EditEventDescriptor editEventDescriptor;
     private final EditTaskDescriptor editTaskDescriptor;
     private final String type;
+    
     //@@author A0110491U
     /**
      * @param filteredActivityListIndex the index of the activity in the filtered activity list to edit
@@ -79,20 +81,19 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
-        List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
         if (type.equals("ev")) {
+            List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
             if (filteredActivityListIndex >= lastShownEventList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
             }
 
-            ReadOnlyEvent eventToEdit = lastShownEventList.get(filteredActivityListIndex);
+            Event eventToEdit = (Event) lastShownEventList.get(filteredActivityListIndex);
             Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
             try {
                 //store for undo operation
                 ReadOnlyWhatsLeft currState = model.getWhatsLeft();
                 ModelManager.setPreviousState(currState);
-                model.updateEvent(filteredActivityListIndex, editedEvent);
+                model.updateEvent(eventToEdit, editedEvent);
             } catch (UniqueEventList.DuplicateEventException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_EVENT);
             } catch (DuplicateTimeClashException e) {
@@ -101,28 +102,32 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
             
-            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(model.findEventIndex(editedEvent), type));
-            return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, eventToEdit));
+            UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
+            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
+            return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
         }
 
         if (type.equals("ts")) {
+            List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
             if (filteredActivityListIndex >= lastShownTaskList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
-            ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredActivityListIndex);
+            Task taskToEdit = (Task)lastShownTaskList.get(filteredActivityListIndex);
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             try {
                 //store for undo operation
                 ReadOnlyWhatsLeft currState = model.getWhatsLeft();
                 ModelManager.setPreviousState(currState);
-                model.updateTask(filteredActivityListIndex, editedTask);
+                model.updateTask(taskToEdit, editedTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
-            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(model.findTaskIndex(editedTask), type));
+            
+            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(editedTask)));
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
