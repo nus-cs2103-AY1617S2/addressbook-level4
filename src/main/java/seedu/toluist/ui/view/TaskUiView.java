@@ -64,8 +64,8 @@ public class TaskUiView extends UiView {
         handleOverdueTask();
         handleHighPriorityTask();
         handleTaskDescriptionAndId();
-        handleTaskWithDates();
-        handleRecurringTask();
+        handleTaskWithDates(task.isTaskWithDeadline() || task.isEvent());
+        handleRecurringTask(task.isRecurring());
         handleCompletedTask();
     }
 
@@ -115,26 +115,18 @@ public class TaskUiView extends UiView {
         id.setText(displayedIndex + ". ");
     }
 
-    private void handleTaskWithDates() {
-        if (task.isTaskWithDeadline() || task.isEvent()) {
-            renderTaskWithDatesBox();
+    private void handleTaskWithDates(boolean isShown) {
+        if (isShown) {
+            clockIcon.setImage(AppUtil.getImage(IMAGE_PATH_CLOCK_ICON));
+            if (task.isTaskWithDeadline()) {
+                date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
+            } else if (task.isEvent()) {
+                date.setText(DateTimeFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
+            }
         } else {
-            hideTaskWithDatesBox();
+            hideDateBox();
+            hideClockIcon();
         }
-    }
-
-    private void renderTaskWithDatesBox() {
-        clockIcon.setImage(AppUtil.getImage(IMAGE_PATH_CLOCK_ICON));
-        if (task.isTaskWithDeadline()) {
-            date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
-        } else if (task.isEvent()) {
-            date.setText(DateTimeFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
-        }
-    }
-
-    private void hideTaskWithDatesBox() {
-        hideDateBox();
-        hideClockIcon();
     }
 
     private void hideDateBox() {
@@ -147,40 +139,32 @@ public class TaskUiView extends UiView {
         clockIcon.setManaged(false);
     }
 
-    private void handleRecurringTask() {
-        if (task.isRecurring()) {
-            renderRecurringTaskBox();
+    private void handleRecurringTask(boolean isShown) {
+        if (isShown) {
+            recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));
+            if (task.isFloatingTask()) {
+                recurringDate.setText(
+                        DateTimeFormatterUtil.formatRecurringFloatingTask(
+                        task.getRecurringEndDateTime(),
+                        task.getRecurringFrequency()));
+            } else if (task.isTaskWithDeadline()) {
+                recurringDate.setText(
+                        DateTimeFormatterUtil.formatRecurringTaskDeadline(
+                        task.getEndDateTime(),
+                        task.getRecurringEndDateTime(),
+                        task.getRecurringFrequency()));
+            } else if (task.isEvent()) {
+                recurringDate.setText(
+                        DateTimeFormatterUtil.formatRecurringEvent(
+                        task.getStartDateTime(),
+                        task.getEndDateTime(),
+                        task.getRecurringEndDateTime(),
+                        task.getRecurringFrequency()));
+            }
         } else {
-            hideRecurringTaskBox();
+            hideRecurringIcon();
+            hideRecurringDateBox();
         }
-    }
-
-    private void renderRecurringTaskBox() {
-        recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));
-        if (task.isFloatingTask()) {
-            recurringDate.setText(
-                    DateTimeFormatterUtil.formatRecurringFloatingTask(
-                            task.getRecurringEndDateTime(),
-                            task.getRecurringFrequency()));
-        } else if (task.isTaskWithDeadline()) {
-            recurringDate.setText(
-                    DateTimeFormatterUtil.formatRecurringTaskDeadline(
-                            task.getEndDateTime(),
-                            task.getRecurringEndDateTime(),
-                            task.getRecurringFrequency()));
-        } else if (task.isEvent()) {
-            recurringDate.setText(
-                    DateTimeFormatterUtil.formatRecurringEvent(
-                            task.getStartDateTime(),
-                            task.getEndDateTime(),
-                            task.getRecurringEndDateTime(),
-                            task.getRecurringFrequency()));
-        }
-    }
-
-    private void hideRecurringTaskBox() {
-        hideRecurringIcon();
-        hideRecurringDateBox();
     }
 
     private void hideRecurringIcon() {
