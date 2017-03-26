@@ -88,4 +88,48 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals("", commandBox.getCommandInput());
     }
 
+    @Test
+    public void commandBoxBrowsePrecedingUserInputWithoutHistory() {
+        //no commands in hisotry
+        commandBox.pressDownKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBoxBrowsePrecedingUserInputWithValidCommands() {
+        //valid commands
+        commandBox.runCommand("add task1");
+        commandBox.runCommand("add task2");
+        commandBox.pressUpKey();
+        commandBox.pressUpKey();
+        commandBox.pressUpKey();
+
+        //move down the history
+        assertEquals("", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("add task1", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("add task2", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBoxBrowsePrecedingUserInputWithInvalidCommands() {
+      //valid commands
+        commandBox.runCommand("command1");
+        commandBox.runCommand("command2");
+        commandBox.pressUpKey();
+        commandBox.pressUpKey();
+        commandBox.pressUpKey();
+
+        //move down the history
+        assertEquals("", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("command1", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("command2", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
 }
