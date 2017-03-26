@@ -22,6 +22,7 @@ import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.GuiSettings;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.logic.Logic;
+import seedu.onetwodo.logic.commands.UndoCommand;
 import seedu.onetwodo.model.UserPrefs;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
@@ -60,6 +61,9 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private MenuItem helpMenuItem;
 
+    @FXML
+    private MenuItem undoMenuItem;
+    
     @FXML
     private AnchorPane deadlineListPanelPlaceholder;
 
@@ -116,6 +120,7 @@ public class MainWindow extends UiPart<Region> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(undoMenuItem, KeyCombination.valueOf("Ctrl + Z"));
     }
 
     /**
@@ -225,6 +230,11 @@ public class MainWindow extends UiPart<Region> {
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
         helpWindow.show();
+    }
+    
+    @FXML
+    public void handleUndo() {
+        commandBox.handleCommands(UndoCommand.COMMAND_WORD);
     }
 
     void show() {

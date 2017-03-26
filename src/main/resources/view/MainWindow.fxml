@@ -30,6 +30,11 @@
                   <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                </items>
             </Menu>
+            <Menu fx:id="editMenu" mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem fx:id="undoMenuItem" mnemonicParsing="false" onAction="#handleUndo" text="undo" />
+              </items>
+            </Menu>
          </menus>
       </MenuBar>
       <StackPane fx:id="dialogStackPane" VBox.vgrow="ALWAYS">
