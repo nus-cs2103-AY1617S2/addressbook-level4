@@ -16,7 +16,6 @@ import seedu.ezdo.commons.events.ui.ExitAppRequestEvent;
 import seedu.ezdo.commons.util.FxViewUtil;
 import seedu.ezdo.logic.Logic;
 import seedu.ezdo.model.UserPrefs;
-import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
