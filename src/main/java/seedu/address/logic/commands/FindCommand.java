@@ -26,9 +26,19 @@ public class FindCommand extends Command {
      * Creates a FindCommand with keywords as parameters
      */
     public FindCommand(Set<String> keywords) {
-        this.keywords = keywords;
+        this(keywords, null);
     }
-
+    
+    //@@author A0163720M
+    /**
+     * Creates a FindCommand with tags as parameters
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public FindCommand(UniqueTagList tags) {
+        this(null, tags);
+    }
+    
     //@@author A0163720M
     /**
      * Creates a FindCommand with keywords and tags as parameters
@@ -40,15 +50,6 @@ public class FindCommand extends Command {
         this.tags = tags;
     }
 
-    //@@author A0163720M
-    /**
-     * Creates a FindCommand with tags as parameters
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
-    public FindCommand(UniqueTagList tags) {
-        this.tags = tags;
-    }
 
     @Override
     public CommandResult execute() {
