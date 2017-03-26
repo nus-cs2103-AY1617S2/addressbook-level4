@@ -46,7 +46,7 @@ Format: `help`
 ### 3.2. Adding a Task : `add`
 There are a total of 5 parameters : `taskname` , `priority level` , `deadline` , `information`, `tags`.<br>
 > `taskname` is mandatory. The rest of the parameters are optional.<br>
-> User can add a task with any of the optional parameters, as stated from [3.2.2](#322-adds-a-task-with-priority-level-) - [3.2.5](#325-adds-a-task-with-tags.
+> User can add a task with any of the optional parameters, as stated from [3.2.2](#322-adds-a-task-with-priority-level-) - [3.2.5](#325-adds-a-task-with-tags).
 
 #### 3.2.1 Adds a floating task.<br>
 > * Floating tasks are tasks that excludes other parameters. Priority level, deadline, information and taggings are excluded. <br>
