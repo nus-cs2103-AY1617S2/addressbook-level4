@@ -37,6 +37,7 @@ public class PersonCard extends UiPart<Region> {
         priority.setStyle("-fx-background-color: " + person.getPriority().getPriorityColor() + ";");
         startTiming.setText("Start Timing: " + person.getStartTiming().value);
         endTiming.setText("End Timing: " + person.getEndTiming().value);
+        recurring.setText("");
         if (person.isRecurring()) {
             recurring.setText("Recurring Task");
             recurring.setStyle("-fx-background-color: pink;");

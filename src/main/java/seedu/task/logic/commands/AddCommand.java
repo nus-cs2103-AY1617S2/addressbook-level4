@@ -42,28 +42,34 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String startTiming, String endTiming, String recur, Set<String> tags)
+    public AddCommand(String name, String priority, String startTiming, String endTiming, String recurFreq, Set<String> tags)
             throws IllegalValueException, IllegalTimingOrderException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+        Description description = new Description(name);
+        Priority pri = new Priority(priority);
+        Timing startTime = new Timing(startTiming);
+        Timing endTime = new Timing(endTiming);
+        UniqueTagList tagList = new UniqueTagList(tagSet);
+
         this.toAdd = new Task(
-                new Description(name),
-                new Priority(priority),
-                new Timing(startTiming),
-                new Timing(endTiming),
-                new UniqueTagList(tagSet)
+                description,
+                pri,
+                startTime,
+                endTime,
+                tagList
                 );
 
-        if (recur != null) {
+        if (recurFreq != null) {
             this.toAddRecur = new RecurringTask(
-                    new Description(name),
-                    new Priority(priority),
-                    new Timing(startTiming),
-                    new Timing(endTiming),
-                    new UniqueTagList(tagSet),
-                    new RecurringFrequency(recur)
+                    description,
+                    pri,
+                    startTime,
+                    endTime,
+                    tagList,
+                    new RecurringFrequency(recurFreq)
                     );
             toAdd.setRecurring(true);
         }
