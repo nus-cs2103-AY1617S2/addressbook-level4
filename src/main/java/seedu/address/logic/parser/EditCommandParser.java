@@ -64,9 +64,9 @@ public class EditCommandParser {
         List<Date> startingTimeAndDeadline = getStartingTimeAndDeadline();
         if (startingTimeAndDeadline != null) {
             editTaskDescriptor.setStartingTime(
-                    Optional.of(new DateTime(startingTimeAndDeadline.get(CliSyntax.INDEX_OF_STARTINGTIME))));
+                    Optional.of(new DateTime(startingTimeAndDeadline.get(0))));
             editTaskDescriptor
-                    .setDeadline(Optional.of(new DateTime(startingTimeAndDeadline.get(CliSyntax.INDEX_OF_DEADLINE))));
+                    .setDeadline(Optional.of(new DateTime(startingTimeAndDeadline.get(1))));
         } else {
             // find and remove starting time and deadline if the syntax is
             // "<name> due <deadline>"
@@ -128,6 +128,7 @@ public class EditCommandParser {
 
     private List<Date> getStartingTimeAndDeadline() {
         String tmpArgs = args;
+        String correctDateTime = "";
         List<String> datesString = getMoreThanOneArguments(CliSyntax.STARTINGTIME_AND_DEADLINE_REVERSE_REGEX,
                 CliSyntax.CAPTURE_GROUPS_OF_EVENT);
         if (datesString == null) {
@@ -138,7 +139,9 @@ public class EditCommandParser {
         List<Date> dates = new ArrayList<Date>();
         for (int i = 0; i < NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE; i++) {
             List<DateGroup> group = new PrettyTimeParser().parseSyntax(ParserUtil.correctDateFormat(datesString.get(i))
+         
                     + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME : CliSyntax.DEFAULT_DEADLINE));
+       
             if (group == null || group.size() > 1
                     || (!group.get(0).getText().equals(datesString.get(i))
                             && !group.get(0).getText().equals(ParserUtil.correctDateFormat(datesString.get(i))
@@ -147,13 +150,15 @@ public class EditCommandParser {
                 return null;
             } else {
                 dates.addAll(group.get(0).getDates());
+          
+                correctDateTime = ((i == 1 ? "from " : "to ") + group.get(0).getText() + " ") + correctDateTime;
             }
         }
         if (dates.get(CliSyntax.INDEX_OF_STARTINGTIME).after(dates.get(CliSyntax.INDEX_OF_DEADLINE))) {
             args = tmpArgs;
             return null;
         }
-        dates = new PrettyTimeParser().parse(tmpArgs);
+        dates = new PrettyTimeParser().parse(correctDateTime);
         return dates;
     }
 
