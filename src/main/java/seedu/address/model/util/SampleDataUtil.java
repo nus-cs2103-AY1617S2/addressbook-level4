@@ -17,7 +17,7 @@ public class SampleDataUtil {
         try {
             // TODO improve variety of test cases
             return new Task[] {
-                new Task(new Name("EE2021"), Optional.of(new Deadline(ZonedDateTime.now())),
+                new Task(new Name("EE2021"), Optional.of(new Deadline(ZonedDateTime.now().plusDays(3))),
                          Optional.empty(), new UniqueTagList("homework")),
                 new Task(new Name("MA1506"), Optional.empty(), Optional.empty(),
                          new UniqueTagList("killer", "revision")),
