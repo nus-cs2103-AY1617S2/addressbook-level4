@@ -15,11 +15,11 @@
 
 ## 1. Introduction
 
-Welcome to the developer guide of iManager. This guide helps you get familiar with setting up iManager on your device. It also covers code design and feature implementation of the application.
+Welcome to the developer guide of iManager. This guide helps you get familiar with setting up iManager on your device. In addition, it is also for your convenience of achieving further development of the application such as adding features or doing modifications to perfect our product. We will introduce code design, feature implementation and testing of the application. 
 
-iManager is created to help those who are struggling with task management. It uses a command line Interface as its primary mode of input to cater for users who prefer typing over mouse actions. 
+iManager is created to help those who are struggling with task management. It is particularly suitable for users who love typing. It uses a command line Interface as its primary mode of input to cater for users who prefer typing over mouse actions.
 
-iManager comes with features such as Flexi Commands and Google Integration that bring convenience to its users in managing their tasks and schedules. With its interactive UI design, iManager is sure to provide a pleasant experience for users when managing their tasks.
+iManager comes with features such as Flexi Commands and Google Integration that bring convenience to its users in managing their tasks and schedules. With its interactive UI design, iManager is surely capable of providing a pleasant experience for users when managing their tasks.
 
 Without further ado, let us get started.
 
@@ -218,7 +218,7 @@ The `Storage` component,
 
 ### 3.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.taskList.commons` package.
 
 ## 4. Implementation
 
