@@ -109,10 +109,10 @@ public class MarkCommandTest extends ToLuistGuiTest {
     //@@author A0127545A
     @Test
     public void markMultipleRecurringTaskAsCompletedMultipleTimes() {
-        // add recurring floating task
+        // add recurring floating task, will recur until end date is due.
         String taskDescription = "do homework for Melvin";
         String recurFrequencyString = "daily";
-        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("15 May 2017, 12pm");
+        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("15 May 2018, 12pm");
         String command = "add " + taskDescription + " repeat/" + recurFrequencyString
                        + " repeatuntil/" + recurUntilEndDate;
         commandBox.runCommand(command);
@@ -120,11 +120,11 @@ public class MarkCommandTest extends ToLuistGuiTest {
         task.setRecurring(recurUntilEndDate, recurFrequencyString);
         assertTrue(isTaskShown(task));
 
-        // add task with deadline
+        // add task with deadline, can recur once and then get deleted
         String taskDescription2 = "get v0.4 ready";
         String recurFrequencyString2 = "monthly";
-        LocalDateTime recurUntilEndDate2 = DateTimeUtil.parseDateString("15 May 2017, 12pm");
-        LocalDateTime endDate2 = DateTimeUtil.parseDateString("30 Apr 2017, 12pm");
+        LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime recurUntilEndDate2 = DateTimeUtil.parseDateString("30 Apr 2017, 12pm");
         String command2 = "add " + taskDescription2 + " by/" + endDate2 + " repeat/" + recurFrequencyString2
                 + " repeatuntil/" + recurUntilEndDate2;
         commandBox.runCommand(command2);
@@ -132,35 +132,37 @@ public class MarkCommandTest extends ToLuistGuiTest {
         task2.setRecurring(recurUntilEndDate2, recurFrequencyString2);
         assertTrue(isTaskShown(task2));
 
-        // add event
+        // add event, can recur 0 times and then get deleted
         String taskDescription3 = "attend CS2103T tutorial";
         String recurFrequencyString3 = "weekly";
-        LocalDateTime startDate3 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
-        LocalDateTime endDate3 = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        LocalDateTime startDate3 = DateTimeUtil.parseDateString("24 Mar 2017, 12pm");
+        LocalDateTime endDate3 = DateTimeUtil.parseDateString("24 Mar 2017, 1pm");
+        LocalDateTime recurUntilEndDate3 = DateTimeUtil.parseDateString("28 Mar 2017, 1pm");
         String command3 = "add " + taskDescription3 + " from/" + startDate3 + " to/" + endDate3
-                        + " repeat/" + recurFrequencyString3;
+                        + " repeat/" + recurFrequencyString3 + " repeatuntil/" + recurUntilEndDate3;
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
-        task3.setRecurring(recurFrequencyString3);
+        task3.setRecurring(recurUntilEndDate3, recurFrequencyString3);
         assertTrue(isTaskShown(task3));
 
-        String markCompleteAllCommand = "mark complete -";
-        commandBox.runCommand(markCompleteAllCommand);
+        String deleteAllCommand = "mark complete -";
+        commandBox.runCommand(deleteAllCommand);
         assertTrue(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
         task2.updateToNextRecurringTask();
         task3.updateToNextRecurringTask();
-        assertTrue(areTasksShown(task2, task3));
+        assertTrue(isTaskShown(task2));
+        assertFalse(isTaskShown(task3)); // recurring task reached end date, so it got deleted
 
-        commandBox.runCommand(markCompleteAllCommand);
+        commandBox.runCommand(deleteAllCommand);
         assertTrue(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
         task2.updateToNextRecurringTask();
         task3.updateToNextRecurringTask();
-        assertFalse(isTaskShown(task2)); // recurring task reached end date, so it got marked as completed for real
-        assertTrue(isTaskShown(task3));
+        assertFalse(isTaskShown(task2)); // recurring task reached end date, so it got deleted for real
+        assertFalse(isTaskShown(task3));
     }
 
     @Test
