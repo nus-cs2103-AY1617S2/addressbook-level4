@@ -11,6 +11,18 @@ public class AutocompleteTest extends TaskManagerGuiTest {
     private static String[] COMMANDS_TWO_TAB = { "unmark" };
 
     @Test
+    public void testAutocompleteEmptyCommand() {
+        // Empty command should not autocomplete
+        assertCommandAutocompleted("", "", 1);
+    }
+
+    @Test
+    public void testInvalidCommand() {
+        // Invalid commands should not autocomplete
+        assertCommandAutocompleted("invalid", "invalid", 1);
+    }
+
+    @Test
     public void testAutocompleteCommands() {
         for (String command : COMMANDS_ONE_TAB) {
             assertCommandAutocompleted(String.valueOf(command.charAt(0)), command, 1);
