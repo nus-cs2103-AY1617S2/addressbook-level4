@@ -50,7 +50,7 @@ public class Parser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-            
+
         case AddCommandFloating.COMMAND_WORD:
             return new AddCommandParserFloating().parse(arguments);
 
