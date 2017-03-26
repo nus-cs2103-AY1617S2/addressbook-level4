@@ -34,6 +34,15 @@ public class TaskDate {
         this.endDate = endDate;
     }
 
+    @Override
+    public String toString() {
+        if (this.startDate != null && this.endDate != null) {
+            return this.startDate.toString() + "--" + this.endDate.toString();
+        } else {
+            return "No dates";
+        }
+    }
+
     public boolean isPast() {
         if (this.getStartDate() != null && this.getEndDate() != null) {
             Date currentDate = new Date();
