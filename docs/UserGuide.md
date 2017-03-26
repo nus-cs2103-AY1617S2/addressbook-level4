@@ -24,7 +24,7 @@ Unlike other software, *DoMe!* is simple and intuitive. All you need is your key
 2. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your Address Book.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-> <img src="images/Ui.png" width="600">
+> <img src="images/UISketch.jpg" width="600">
 
 ## 3. Features
 
@@ -206,7 +206,7 @@ _Format:_
 > Next command
 
 ## 3.1.17 Clear the data : `clear`
-You can clear your entire todo list
+You can clear your entire to-do list
 
 _Format:_
 `clear`
@@ -295,7 +295,7 @@ There is no need to save manually.
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Copy the app to the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task Manager folder.
+**A**: Copy the app to the other computer and overwrite the empty data file it creates with the file that contains the data of your previous *DoMe!* folder.
 
 ## 5. Command Summary
 
@@ -355,5 +355,5 @@ There is no need to save manually.
   
   | Word | Definition |
 |-----|-----|
-|[GUI](#GUI)|Graphic User Interface. The interface presented to users to interact with TaskManager.|
+|[GUI](#GUI)|Graphic User Interface. The interface presented to users to interact with *DoMe!*.|
 |[Storage Path](#storage-path)|This is the directory where your data will be saved.|
