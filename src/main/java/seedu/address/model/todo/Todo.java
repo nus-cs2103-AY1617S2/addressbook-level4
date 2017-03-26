@@ -156,5 +156,4 @@ public class Todo implements ReadOnlyTodo {
     public String toString() {
         return getAsText();
     }
-
 }

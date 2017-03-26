@@ -46,13 +46,13 @@ public class FindCommandParser {
                 // Store the individual tag strings in a set
                 final Set<String> tagsStrings = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
                 final Set<Tag> tagsSet = new HashSet<>();
-                
+
                 for (String tagName : tagsStrings) {
                     tagsSet.add(new Tag(tagName));
                 }
 
                 final UniqueTagList uniqueTagList = new UniqueTagList(tagsSet);
-                
+
                 return new FindCommand(uniqueTagList);
             }
         } catch (IllegalValueException ive) {

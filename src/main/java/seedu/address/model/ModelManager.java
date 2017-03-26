@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -179,14 +180,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
-        private Set<Tag> tagKeyWords;
+        private Set<Tag> tags;
 
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
 
         NameQualifier(UniqueTagList tags) {
-            this.tagKeyWords = tags.toSet();
+            this.tags = tags.toSet();
         }
 
         @Override
@@ -197,8 +198,16 @@ public class ModelManager extends ComponentManager implements Model {
                         .findAny()
                         .isPresent();
             } else {
+                Set<String> tagKeyWords = new HashSet<String>();
+
+                for (Tag tag:tags) {
+                    tagKeyWords.add(tag.toString());
+                }
+
+                String todoTags = todo.getTagsAsString();
+
                 return tagKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(todo.getTags().toString(), keyword))
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(todoTags, keyword))
                         .findAny()
                         .isPresent();
             }
@@ -206,8 +215,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            if (!tagKeyWords.isEmpty()) {
-                return "tag=" + String.join(", ", tagKeyWords.toString());
+            if (!tags.isEmpty()) {
+                return "tag=" + String.join(", ", tags.toString());
             } else {
                 return "name=" + String.join(", ", nameKeyWords);
             }

@@ -171,7 +171,7 @@ public class UniqueTagList implements Iterable<Tag> {
             super("Operation would result in duplicate tags");
         }
     }
-    
+
     public boolean isEmpty() {
         return this.internalList.isEmpty();
     }

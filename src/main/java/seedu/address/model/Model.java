@@ -56,7 +56,7 @@ public interface Model {
 
     /** Updates the filter of the filtered todo list to filter by the given keywords*/
     void updateFilteredTodoList(Set<String> keywords);
-    
+
     /** Updates the filter of the filtered todo list to filter by the given tags*/
     void updateFilteredTodoList(UniqueTagList tags);
 

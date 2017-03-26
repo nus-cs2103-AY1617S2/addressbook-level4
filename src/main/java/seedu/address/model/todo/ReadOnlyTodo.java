@@ -58,6 +58,16 @@ public interface ReadOnlyTodo {
         }
 
         builder.append(" Tags: ");
+        builder.append(getTagsAsString());
+        
+        return builder.toString();
+    }
+    
+    /**
+     *  Formats the todo's tags as a string
+     */
+    default String getTagsAsString() {
+        final StringBuilder builder = new StringBuilder();
 
         getTags().forEach(builder::append);
         return builder.toString();
