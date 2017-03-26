@@ -28,12 +28,16 @@ public class DateParserTest {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
+        c.set(Calendar.HOUR_OF_DAY, 14);
+        c.set(Calendar.MINUTE, 0);
 
-        dateParser = new DateParser("today");
+        dateParser = new DateParser("today 2pm");
+        dt = c.getTime();
         String expectedValue = expectedFormat.format(dt);
+        System.out.println(expectedValue);
         assertTrue(expectedValue.equals(dateParser.value));
 
-        dateParser = new DateParser("tomorrow");
+        dateParser = new DateParser("tomorrow 2pm");
         c.add(Calendar.DATE, 1); // add 1 day to get tomorrow's date
         dt = c.getTime();
         expectedValue = expectedFormat.format(dt);
