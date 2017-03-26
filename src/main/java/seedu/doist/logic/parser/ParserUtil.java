@@ -80,22 +80,6 @@ public class ParserUtil {
     }
 
     /**
-     * Function to check whether the date input is valid i.e, the Start date is before or equal to the End Date.
-     * Also checks if the parsing of dates has been successful
-     * @param startDate
-     * @param endDate
-     * @return
-     * @throws IllegalValueException
-     */
-    public static boolean validateDate (Date startDate, Date endDate) throws IllegalValueException {
-        if (startDate == null || endDate == null) {
-            throw new IllegalValueException("Incorrect Dates");
-        } else {
-            return (startDate.compareTo(endDate) <= 0) ? true : false;
-        }
-    }
-
-    /**
      * Returns an array of integers separated using space in the input string
      */
     public static int[] parseStringToIntArray(String string) {

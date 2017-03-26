@@ -20,6 +20,7 @@ import seedu.doist.logic.commands.EditCommand;
 import seedu.doist.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.model.tag.UniqueTagList;
+import seedu.doist.model.task.TaskDate;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -56,33 +57,29 @@ public class EditCommandParser {
             case ArgumentTokenizer.DATE_NIL : break;
             case ArgumentTokenizer.DATE_BY :  String deadline = argsTokenizer.getValue(PREFIX_BY).get();
                 if (deadline.isEmpty()) {
-                    editTaskDescriptor.setStartDate(null);
-                    editTaskDescriptor.setEndDate(null);
+                    editTaskDescriptor.setDates(Optional.of(new TaskDate()));
                 } else {
                     startDate = ParserUtil.parseDate(deadline);
                     endDate = ParserUtil.parseDate(deadline);
-                    boolean validDate = ParserUtil.validateDate(startDate, endDate);
+                    boolean validDate = TaskDate.validateDate(startDate, endDate);
                     if (!validDate) {
                         throw new IllegalValueException("Incorrect Dates");
                     }
-                    editTaskDescriptor.setStartDate(Optional.of(startDate));
-                    editTaskDescriptor.setEndDate(Optional.of(endDate));
+                    editTaskDescriptor.setDates(Optional.of(new TaskDate(startDate, endDate)));
                 }
                                               break;
             case ArgumentTokenizer.DATE_FROM : String start = argsTokenizer.getValue(PREFIX_FROM).get();
                 String end = argsTokenizer.getValue(PREFIX_TO).get();
                 if (start.isEmpty() && end.isEmpty()) {
-                    editTaskDescriptor.setStartDate(null);
-                    editTaskDescriptor.setEndDate(null);
+                    editTaskDescriptor.setDates(Optional.of(new TaskDate()));
                 } else {
                     startDate = ParserUtil.parseDate(start);
                     endDate = ParserUtil.parseDate(end);
-                    boolean validDate = ParserUtil.validateDate(startDate, endDate);
+                    boolean validDate = TaskDate.validateDate(startDate, endDate);
                     if (!validDate) {
                         throw new IllegalValueException("Incorrect Dates");
                     }
-                    editTaskDescriptor.setStartDate(Optional.of(startDate));
-                    editTaskDescriptor.setEndDate(Optional.of(endDate));
+                    editTaskDescriptor.setDates(Optional.of(new TaskDate(startDate, endDate)));
                 }
                                                break;
             default : break;
