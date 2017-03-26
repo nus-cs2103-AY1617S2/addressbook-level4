@@ -11,6 +11,7 @@ import seedu.opus.model.task.DateTime;
 import seedu.opus.model.task.Note;
 import seedu.opus.model.task.Priority;
 import seedu.opus.model.task.ReadOnlyTask;
+import seedu.opus.model.task.Status;
 
 public class TaskCard extends UiPart<Region> {
 
@@ -47,7 +48,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         setPriorityView(task);
         note.setText(task.getNote().map(Note::toString).orElse(""));
-        status.setText(task.getStatus().value);
+        status.setText(task.getStatus().toString());
         startTime.setText(task.getStartTime().map(DateTime::toString).map(s -> "Start: " + s).orElse(""));
         endTime.setText(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""));
         initTags(task);
