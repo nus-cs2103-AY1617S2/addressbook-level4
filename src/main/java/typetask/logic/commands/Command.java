@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import typetask.commons.core.Config;
 import typetask.commons.core.Messages;
+import typetask.commons.exceptions.DataConversionException;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.Model;
 import typetask.storage.Storage;
@@ -32,8 +33,9 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      * @throws IOException
+     * @throws DataConversionException
      */
-    public abstract CommandResult execute() throws CommandException, IOException;
+    public abstract CommandResult execute() throws CommandException, IOException, DataConversionException;
 
     /**
      * Provides any needed dependencies to the command.

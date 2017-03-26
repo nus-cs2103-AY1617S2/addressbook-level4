@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import typetask.commons.core.ComponentManager;
 import typetask.commons.core.Config;
 import typetask.commons.core.LogsCenter;
+import typetask.commons.exceptions.DataConversionException;
 import typetask.logic.commands.Command;
 import typetask.logic.commands.CommandResult;
 import typetask.logic.commands.exceptions.CommandException;
@@ -34,7 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, IOException {
+    public CommandResult execute(String commandText) throws CommandException, IOException, DataConversionException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model, storage, config);
