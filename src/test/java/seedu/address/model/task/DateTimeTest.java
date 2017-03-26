@@ -12,23 +12,8 @@ import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 public class DateTimeTest {
     @Test
-    public void deadlineTest() {
-        Deadline dateTime = new Deadline(
-                new PrettyTimeParser().parse("30 APRIL 2017").get(0));
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        assertTrue(df.format(dateTime.getDate()).equals("30/04/2017"));
-        Date date1 = new PrettyTimeParser().parse("31 May 2017").get(0);
-        assertFalse(dateTime.isSameDay(date1));
-        dateTime.set(date1);
-        assertTrue(df.format(dateTime.getDate()).equals("31/05/2017"));
-        Date date2 = new PrettyTimeParser().parse("31 May 2017 3.45pm").get(0);
-        assertTrue(dateTime.isSameDay(date2));
-    }
-
-    @Test
-    public void startingTimeTest() {
-        StartingTime dateTime = new StartingTime(
-                new PrettyTimeParser().parse("30 APRIL 2017").get(0));
+    public void dateTimeTest() {
+        DateTime dateTime = new DateTime(new PrettyTimeParser().parse("30 APRIL 2017").get(0));
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         assertTrue(df.format(dateTime.getDate()).equals("30/04/2017"));
         Date date1 = new PrettyTimeParser().parse("31 May 2017").get(0);

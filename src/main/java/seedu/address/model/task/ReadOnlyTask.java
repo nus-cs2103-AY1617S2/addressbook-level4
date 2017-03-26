@@ -55,7 +55,7 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     default boolean isSameStateAs(ReadOnlyTask other) {
         assert other != null;
         return other == this // short circuit if same object
-                || (other.compareTo(this) == 0);
+                || (other.compareTo(this) == 0 && other.getName().equals(this.getName()));
     }
 
     /**
@@ -78,14 +78,11 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         int compareEnd = this.getDeadline().orElse(minDateTime).compareTo(other.getDeadline().orElse(minDateTime));
         int compareStart = this.getStartingTime().orElse(minDateTime)
                 .compareTo(other.getStartingTime().orElse(minDateTime));
-        int compareName = this.getName().compareTo(other.getName());
 
         if (compareEnd != 0) {
             return compareEnd;
-        } else if (compareStart != 0) {
-            return compareStart;
         } else {
-            return compareName;
+            return compareStart;
         }
     }
 }
