@@ -5,6 +5,7 @@ import java.util.List;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.UniqueEventList;
 
@@ -43,6 +44,10 @@ public class MarkDoneCommand extends Command {
 
 		ReadOnlyEvent taskToMark = lastShownList.get(targetIndex);
 		Event markedTask = new Event(taskToMark);
+		if (markedTask.getIsDone().value.equals(IsDone.ISDONE_DONE)) {
+			return new CommandResult(MESSAGE_ALR_MARKED);
+		}
+
 		markedTask.getIsDone().markDone();
 
 		try {
