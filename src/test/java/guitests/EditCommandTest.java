@@ -12,6 +12,7 @@ import seedu.taskboss.logic.commands.EditCommand;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
 import seedu.taskboss.testutil.TestTask;
 
@@ -25,12 +26,13 @@ public class EditCommandTest extends TaskBossGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "n/Attend wedding tmr p/Yes sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
-                + " Jurong West Ave 6, #08-111 c/friends";
+                + " Jurong West Ave 6, #08-111 r/none c/friends";
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Attend wedding tmr").withPriorityLevel("Yes")
                .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
-               .withInformation("123, Jurong West Ave 6, #08-111").withCategories("friends").build();
+               .withInformation("123, Jurong West Ave 6, #08-111").withRecurrence(Frequency.NONE)
+               .withCategories("friends").build();
 
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -40,12 +42,13 @@ public class EditCommandTest extends TaskBossGuiTest {
     @Test
     public void edit_allFieldsWithShortCommand_success() throws Exception {
 
-        String detailsToEdit = "n/Amanda p/Yes sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax";
+        String detailsToEdit = "n/Amanda p/Yes sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax r/none";
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("Yes")
                .withStartDateTime("feb 27 2016").withEndDateTime("feb 28 2016")
-               .withInformation("discuss about life").withCategories("relax").build();
+               .withInformation("discuss about life").withRecurrence(Frequency.NONE)
+               .withCategories("relax").build();
 
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -145,7 +148,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 1 n/Attend wedding p/Yes sd/Feb 18, 2017 5pm 5pm ed/Mar 28, 2017 5pm"
-                                + "i/123, Jurong West Ave 6, #08-111 c/friends");
+                                + "i/123, Jurong West Ave 6, #08-111 r/none c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }

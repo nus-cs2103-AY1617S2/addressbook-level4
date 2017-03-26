@@ -1,3 +1,5 @@
+
+
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -8,6 +10,7 @@ import org.junit.Test;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.parser.RenameCategoryCommandParser;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
 import seedu.taskboss.testutil.TestTask;
 
@@ -32,12 +35,14 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
                 .withPriorityLevel("Yes")
                 .withStartDateTime("Feb 18, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
+                .withRecurrence(Frequency.NONE)
                 .withCategories("Project").build();
         sampleB = new TaskBuilder().withName("Birthday party")
                 .withInformation("311, Clementi Ave 2, #02-25")
                 .withPriorityLevel("No")
                 .withStartDateTime("Feb 23, 2017 10pm")
                 .withEndDateTime("Jun 28, 2017 5pm")
+                .withRecurrence(Frequency.NONE)
                 .withCategories("owesMoney", "Project").build();
 
         TestTask[] taskListExpected = {sampleA, sampleB};
