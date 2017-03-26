@@ -40,7 +40,7 @@ public class Status {
      */
     public Status(String status) throws IllegalValueException {
         assert status != null;
-        String trimmedStatus = status.trim();
+        String trimmedStatus = status.trim().toLowerCase();
         if (!isValidStatus(trimmedStatus)) {
             throw new IllegalValueException(MESSAGE_STATUS_CONSTRAINTS);
         }
