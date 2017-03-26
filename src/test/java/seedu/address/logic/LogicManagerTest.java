@@ -42,6 +42,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SaveToCommand;
+import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -358,6 +359,37 @@ public class LogicManagerTest {
         assertCommandSuccess("notdone C1", String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
                 expectedAB, expectedAB.getTaskList());
 
+    }
+
+    // ----------------------Today----------------------
+
+    @Test
+    public void execute_today_invalidArgsFormat() {
+        String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+        assertCommandFailure("today ", expectedMessage);
+    }
+
+    @Test
+    public void execute_todayIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("today");
+    }
+
+    @Test
+    public void execute_today_valid() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+        // TestUtil.assignUiIndex(threeTasks);
+        Task taskToToday = threeTasks.get(0);
+        Task todayTask = new FloatingTask(taskToToday.getName(), taskToToday.getTags(), taskToToday.isDone(), true);
+
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        expectedAB.updateTask(0, todayTask);
+
+        helper.addToModel(model, threeTasks);
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
+                FXCollections.observableArrayList());
+        assertCommandSuccess("today F1", String.format(TodayCommand.MESSAGE_TODAY_TASK_SUCCESS, todayTask), expectedAB,
+                expectedAB.getTaskList());
     }
 
     @Test
