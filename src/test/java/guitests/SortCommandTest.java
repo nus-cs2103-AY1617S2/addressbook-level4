@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.junit.Test;
 
 import seedu.ezdo.commons.core.Messages;
@@ -38,6 +39,12 @@ public class SortCommandTest extends EzDoGuiTest {
                                       td.leroy, td.megan};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
+        // sort by start date in descending order
+        commandBox.runCommand("s s d");
+        expectedList = new TestTask[]{td.alice, td.fiona, td.benson, td.carl, td.daniel, td.george, td.elle, td.kappa,
+                                      td.leroy, td.megan};
+        assertTrue(taskListPanel.isListMatching(expectedList));
+
         // sort by due date
         commandBox.runCommand("s d");
         expectedList = new TestTask[]{td.carl, td.elle, td.george, td.daniel, td.fiona, td.benson, td.alice, td.kappa,
@@ -45,7 +52,7 @@ public class SortCommandTest extends EzDoGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         // sort by name
-        commandBox.runCommand("sort n");
+        commandBox.runCommand("sort n a");
         expectedList = new TestTask[]{td.alice, td.benson, td.carl, td.daniel, td.elle, td.fiona, td.george, td.kappa,
                                       td.leroy, td.megan};
         assertTrue(taskListPanel.isListMatching(expectedList));
@@ -57,7 +64,7 @@ public class SortCommandTest extends EzDoGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         //invalid command
-        commandBox.runCommand("sort blah");
+        commandBox.runCommand("sort z");
         assertResultMessage(SortCommand.MESSAGE_INVALID_FIELD);
 
         //invalid command

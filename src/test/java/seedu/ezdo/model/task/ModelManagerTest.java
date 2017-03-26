@@ -52,7 +52,7 @@ public class ModelManagerTest {
 
         boolean parsingFailed;
         try {
-            compareDateStrings(dateStringOne, dateStringTwo);
+            compareDateStrings(dateStringOne, dateStringTwo, true);
             parsingFailed = false;
         } catch (AssertionError ae) {
             parsingFailed =  true;

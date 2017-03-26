@@ -34,7 +34,7 @@ public class DateUtilTest {
         String dateString1 = "omg";
         String dateString2 = "asdf";
         when(mock.parse(dateString1)).thenThrow(new ParseException("parse exception", 1));
-        DateUtil.compareDateStrings(dateString1, dateString2);
+        DateUtil.compareDateStrings(dateString1, dateString2, true);
     }
 
     @Test
