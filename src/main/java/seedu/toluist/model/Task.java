@@ -2,6 +2,7 @@
 package seedu.toluist.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.TreeSet;
@@ -14,6 +15,14 @@ import seedu.toluist.commons.util.DateTimeUtil;
 public class Task implements Comparable<Task> {
     private static final String HIGH_PRIORITY_STRING = "high";
     private static final String LOW_PRIORITY_STRING = "low";
+    private static final String ERROR_VALIDATION_EMPTY_DESCRIPTION = "Description must not be empty.";
+    private static final String ERROR_VALIDATION_START_DATE_AFTER_END_DATE = "Start date must be before end date.";
+    private static final String ERROR_VALIDATION_UNCLASSIFIED_TASK = "Task cannot contain only start date.";
+    private static final String ERROR_INVALID_PRIORITY_LEVEL = "Priority level must be either 'low' or 'high'.";
+    private static final String ERROR_INVALID_RECURRING_FREQUENCY = "Recurring frequency must be either 'daily',"
+            + "'weekly', 'monthly' or 'yearly'.";
+    private static final String ERROR_INVALID_RECURRING_END_DATE = "Non-recurring tasks cannot have end "
+            + "date of recurrence,";
 
     // List of tags is unique
     private TreeSet<Tag> allTags = new TreeSet<>();
@@ -21,10 +30,16 @@ public class Task implements Comparable<Task> {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private LocalDateTime completionDateTime;
+    private LocalDateTime recurringEndDateTime;
+    private RecurringFrequency recurringFrequency;
     private TaskPriority priority = TaskPriority.LOW;
 
     public enum TaskPriority {
         HIGH, LOW
+    }
+
+    public enum RecurringFrequency {
+        DAILY, WEEKLY, MONTHLY, YEARLY
     }
 
     /**
@@ -50,13 +65,13 @@ public class Task implements Comparable<Task> {
 
     public void validate() {
         if (!validateDescriptionMustNotBeEmpty()) {
-            throw new IllegalArgumentException("Description must not be empty.");
+            throw new IllegalArgumentException(ERROR_VALIDATION_EMPTY_DESCRIPTION);
         }
         if (!validateStartDateMustBeBeforeEndDate()) {
-            throw new IllegalArgumentException("Start date must be before end date.");
+            throw new IllegalArgumentException(ERROR_VALIDATION_START_DATE_AFTER_END_DATE);
         }
         if (!validateTaskIsFloatingIsEventOrHasDeadline()) {
-            throw new IllegalArgumentException("Task must be floating, must be an event, or has deadline,");
+            throw new IllegalArgumentException(ERROR_VALIDATION_UNCLASSIFIED_TASK);
         }
     }
 
@@ -83,9 +98,11 @@ public class Task implements Comparable<Task> {
                 && this.description.equals(((Task) other).description)) // state check
                 && this.priority.equals(((Task) other).priority)
                 && this.allTags.equals(((Task) other).allTags)
+                && Objects.equals(this.recurringFrequency, ((Task) other).recurringFrequency) // handles null
                 && Objects.equals(this.startDateTime, ((Task) other).startDateTime) // handles null
                 && Objects.equals(this.endDateTime, ((Task) other).endDateTime) // handles null
-                && Objects.equals(this.completionDateTime, ((Task) other).completionDateTime); // handles null
+                && Objects.equals(this.completionDateTime, ((Task) other).completionDateTime) // handles null
+                && Objects.equals(this.recurringEndDateTime, ((Task) other).recurringEndDateTime); // handles null
     }
 
     /**
@@ -176,6 +193,10 @@ public class Task implements Comparable<Task> {
 
     public boolean isCompleted() {
         return completionDateTime != null && DateTimeUtil.isBeforeOrEqual(completionDateTime, LocalDateTime.now());
+    }
+
+    public boolean isRecurring() {
+        return recurringFrequency != null;
     }
 
     //@@author A0162011A
@@ -271,17 +292,136 @@ public class Task implements Comparable<Task> {
         this.priority = priority;
     }
 
-    public void setTaskPriority(String priorityString) {
-        if (priorityString.equalsIgnoreCase(HIGH_PRIORITY_STRING)) {
+    public void setTaskPriority(String priorityString) throws IllegalArgumentException {
+        switch (priorityString.toLowerCase()) {
+        case HIGH_PRIORITY_STRING:
             setTaskPriority(TaskPriority.HIGH);
-        } else if (priorityString.equalsIgnoreCase(LOW_PRIORITY_STRING)) {
+            break;
+        case LOW_PRIORITY_STRING:
             setTaskPriority(TaskPriority.LOW);
-        } else {
-            throw new IllegalArgumentException("Task priority must be either 'low' or 'high'.");
+            break;
+        default:
+            throw new IllegalArgumentException(ERROR_INVALID_PRIORITY_LEVEL);
         }
     }
 
     public LocalDateTime getCompletionDateTime() {
         return completionDateTime;
+    }
+
+    //@@author A0127545A
+    public LocalDateTime getRecurringEndDateTime() {
+        return recurringEndDateTime;
+    }
+
+    public RecurringFrequency getRecurringFrequency() {
+        return recurringFrequency;
+    }
+
+    public RecurringFrequency toRecurringFrequency(String recurringFrequencyString)
+        throws IllegalArgumentException, NullPointerException {
+        try {
+            return RecurringFrequency.valueOf(recurringFrequencyString.toUpperCase());
+        } catch (IllegalArgumentException | NullPointerException exception) {
+            throw new IllegalArgumentException(ERROR_INVALID_RECURRING_FREQUENCY);
+        }
+    }
+
+    public void setRecurringFrequency(String recurringFrequencyString) {
+        setRecurringFrequency(toRecurringFrequency(recurringFrequencyString));
+    }
+
+    public void setRecurringFrequency(RecurringFrequency recurringFrequency) {
+        if (isRecurring()) {
+            this.recurringFrequency = recurringFrequency;
+        } else {
+            setRecurring(recurringFrequency);
+        }
+    }
+
+    public void setRecurringEndDateTime(LocalDateTime recurringEndDateTime) throws IllegalArgumentException {
+        if (isRecurring()) {
+            this.recurringEndDateTime = recurringEndDateTime;
+        } else {
+            throw new IllegalArgumentException(ERROR_INVALID_RECURRING_END_DATE);
+        }
+    }
+
+    public void setRecurring(String recurringFrequencyString) {
+        setRecurring(toRecurringFrequency(recurringFrequencyString));
+    }
+
+    public void setRecurring(RecurringFrequency recurringFrequency) {
+        setRecurring(null, recurringFrequency);
+    }
+
+    public void setRecurring(LocalDateTime recurringEndDateTime, String recurringFrequencyString) {
+        setRecurring(recurringEndDateTime, toRecurringFrequency(recurringFrequencyString));
+    }
+
+    public void setRecurring(LocalDateTime recurringEndDateTime, RecurringFrequency recurringFrequency)
+        throws IllegalArgumentException {
+        if (recurringFrequency == null) {
+            throw new IllegalArgumentException(ERROR_INVALID_RECURRING_FREQUENCY);
+        }
+        this.recurringEndDateTime = recurringEndDateTime;
+        this.recurringFrequency = recurringFrequency;
+    }
+
+    public void unsetRecurring() {
+        this.recurringEndDateTime = null;
+        this.recurringFrequency = null;
+    }
+
+    public boolean canUpdateToNextRecurringTask() {
+        if (!isRecurring()) {
+            return false;
+        }
+        if (recurringEndDateTime == null) {
+            return true;
+        }
+        if (endDateTime == null) {
+            return LocalDateTime.now().isBefore(recurringEndDateTime);
+        }
+        return getNextRecurringDateTime(endDateTime).isBefore(recurringEndDateTime);
+    }
+
+    /**
+     * For this recurring task, update to the next recurring task
+     * Start date and end date will be updated (if they exist)
+     */
+    public void updateToNextRecurringTask() {
+        assert isRecurring();
+        if (isTaskWithDeadline()) {
+            setStartDateTime(getNextRecurringDateTime(startDateTime));
+            setEndDateTime(getNextRecurringDateTime(endDateTime));
+        } else if (isEvent()) {
+            long days = ChronoUnit.DAYS.between(endDateTime, getNextRecurringDateTime(endDateTime));
+            setStartDateTime(startDateTime.plusDays(days));
+            setEndDateTime(endDateTime.plusDays(days));
+        }
+        setCompleted(false);
+    }
+
+    public LocalDateTime getNextRecurringDateTime(LocalDateTime dateTime) {
+        if (dateTime == null || this.recurringFrequency == null) {
+            return null;
+        }
+        switch (recurringFrequency) {
+        case DAILY:
+            return dateTime.plusDays(1);
+        case WEEKLY:
+            return dateTime.plusWeeks(1);
+        case MONTHLY:
+            int numberOfMonths = 1;
+            while (dateTime.plusMonths(numberOfMonths).getDayOfMonth() != dateTime.getDayOfMonth()) {
+                numberOfMonths++;
+            }
+            return dateTime.plusMonths(numberOfMonths);
+        case YEARLY:
+            return dateTime.plusYears(1);
+        default:
+            return null;
+        }
     }
 }

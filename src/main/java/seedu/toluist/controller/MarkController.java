@@ -68,7 +68,11 @@ public class MarkController extends Controller {
     private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
         ArrayList<Task> tasks = UiStore.getInstance().getShownTasks(taskIndexes);
         for (Task task : tasks) {
-            task.setCompleted(isCompleted);
+            if (task.canUpdateToNextRecurringTask()) {
+                task.updateToNextRecurringTask();
+            } else {
+                task.setCompleted(isCompleted);
+            }
         }
         String indexString = CollectionUtil.toString(", ", taskIndexes);
         String messageTemplate = isCompleted

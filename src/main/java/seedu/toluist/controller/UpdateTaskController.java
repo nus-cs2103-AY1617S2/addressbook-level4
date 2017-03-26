@@ -29,7 +29,10 @@ public class UpdateTaskController extends Controller {
     private static final String COMMAND_UPDATE_TASK = "update";
 
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
-    private static final String RESULT_MESSAGE_ERROR_DATE_INPUT = "Something is wrong with the given dates input";
+    private static final String RESULT_MESSAGE_ERROR_DATE_INPUT =
+            "Something is wrong with the given dates input";
+    private static final String RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING =
+            "Input contains both recurring and stop recurring arguments at the same time.";
 
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
@@ -63,8 +66,16 @@ public class UpdateTaskController extends Controller {
         String tagsToken = tokens.get(TaskTokenizer.KEYWORD_TASK_TAGS);
         Set<Tag> tags = TagParser.parseTags(tagsToken);
 
+        String recurringFrequency = tokens.get(TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY);
+
+        String recurringUntilEndDateToken = tokens.get(TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE);
+        LocalDateTime recurringUntilEndDate = DateTimeUtil.parseDateString(recurringUntilEndDateToken);
+
+        boolean isStopRecurring = tokens.containsKey(TaskTokenizer.KEYWORD_TASK_STOP_RECURRING);
+
         commandResult = update(task, description, eventStartDateTime, eventEndDateTime,
-                taskDeadline, isFloating, taskPriority, tags);
+                taskDeadline, isFloating, taskPriority, tags,
+                recurringFrequency, recurringUntilEndDate, isStopRecurring);
 
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks());
@@ -79,11 +90,14 @@ public class UpdateTaskController extends Controller {
 
     private CommandResult update(Task task, String description,
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime, LocalDateTime taskDeadline,
-            boolean isFloating, String taskPriority, Set<Tag> tags) {
+            boolean isFloating, String taskPriority, Set<Tag> tags,
+            String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
         }
-
+        if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
+            return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
+        }
         if (isFloating) {
             task.setStartDateTime(null);
             task.setEndDateTime(null);
@@ -102,11 +116,20 @@ public class UpdateTaskController extends Controller {
         if (StringUtil.isPresent(description)) {
             task.setDescription(description);
         }
-        if (taskPriority != null) {
+        if (StringUtil.isPresent(taskPriority)) {
             task.setTaskPriority(taskPriority);
+        }
+        if (StringUtil.isPresent(recurringFrequency)) {
+            task.setRecurringFrequency(recurringFrequency);
+        }
+        if (recurringUntilEndDate != null) {
+            task.setRecurringEndDateTime(recurringUntilEndDate);
         }
         if (!tags.isEmpty()) {
             task.replaceTags(tags);
+        }
+        if (isStopRecurring) {
+            task.unsetRecurring();
         }
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }

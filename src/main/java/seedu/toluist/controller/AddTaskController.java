@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.TagParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Tag;
@@ -54,8 +55,13 @@ public class AddTaskController extends Controller {
 
         String taskPriority = tokens.get(TaskTokenizer.KEYWORD_TASK_PRIORITY);
 
+        String recurringFrequency = tokens.get(TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY);
+
+        String recurringUntilEndDateToken = tokens.get(TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE);
+        LocalDateTime recurringUntilEndDate = DateTimeUtil.parseDateString(recurringUntilEndDateToken);
+
         commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime,
-                taskDeadline, taskPriority, tags);
+                taskDeadline, taskPriority, tags, recurringFrequency, recurringUntilEndDate);
 
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks());
@@ -70,7 +76,8 @@ public class AddTaskController extends Controller {
 
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
-            LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags) {
+            LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags,
+            String recurringFrequency, LocalDateTime recurringUntilEndDate) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
         }
@@ -85,6 +92,13 @@ public class AddTaskController extends Controller {
         }
         if (taskPriority != null) {
             task.setTaskPriority(taskPriority);
+        }
+        if (StringUtil.isPresent(recurringFrequency)) {
+            if (recurringUntilEndDate == null) {
+                task.setRecurring(recurringFrequency);
+            } else {
+                task.setRecurring(recurringUntilEndDate, recurringFrequency);
+            }
         }
         task.replaceTags(tags);
         todoList.add(task);
