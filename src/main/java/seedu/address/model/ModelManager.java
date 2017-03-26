@@ -181,11 +181,14 @@ public class ModelManager extends ComponentManager implements Model {
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private Set<Tag> tags;
+        private Set<String> tagKeyWords;
 
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
 
+        // In order for Java to overload the NameQualifier constructor
+        // the parameter cannot be of type Set so use UniqueTagList instead
         NameQualifier(UniqueTagList tags) {
             this.tags = tags.toSet();
         }
@@ -193,19 +196,19 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTodo todo) {
             if (nameKeyWords != null) {
+                String name = todo.getName().fullName;
                 return nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(todo.getName().fullName, keyword))
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(name, keyword))
                         .findAny()
                         .isPresent();
             } else {
-                Set<String> tagKeyWords = new HashSet<String>();
+                tagKeyWords = new HashSet<String>();
 
                 for (Tag tag:tags) {
-                    tagKeyWords.add(tag.toString());
+                    tagKeyWords.add(tag.tagName);
                 }
 
                 String todoTags = todo.getTagsAsString();
-
                 return tagKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(todoTags, keyword))
                         .findAny()
@@ -216,7 +219,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             if (!tags.isEmpty()) {
-                return "tag=" + String.join(", ", tags.toString());
+                return "tag=" + String.join(", ", tagKeyWords);
             } else {
                 return "name=" + String.join(", ", nameKeyWords);
             }

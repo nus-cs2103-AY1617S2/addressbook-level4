@@ -2,6 +2,7 @@ package seedu.address.model.todo;
 
 import java.util.Date;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -59,17 +60,20 @@ public interface ReadOnlyTodo {
 
         builder.append(" Tags: ");
         builder.append(getTagsAsString());
-        
+
         return builder.toString();
     }
-    
+
     /**
      *  Formats the todo's tags as a string
      */
     default String getTagsAsString() {
         final StringBuilder builder = new StringBuilder();
 
-        getTags().forEach(builder::append);
+        for (Tag tag:getTags()) {
+            builder.append(tag.tagName + " ");
+        }
+
         return builder.toString();
     }
 }
