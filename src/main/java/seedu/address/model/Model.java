@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.ReadOnlyTodo;
 import seedu.address.model.todo.Todo;
 import seedu.address.model.todo.UniqueTodoList;
@@ -54,6 +56,9 @@ public interface Model {
 
     /** Updates the filter of the filtered todo list to filter by the given keywords*/
     void updateFilteredTodoList(Set<String> keywords);
+    
+    /** Updates the filter of the filtered todo list to filter by the given tags*/
+    void updateFilteredTodoList(UniqueTagList tags);
 
     /** Loads the previous state of the todo list*/
     void loadPreviousState() throws NoPreviousStateException;

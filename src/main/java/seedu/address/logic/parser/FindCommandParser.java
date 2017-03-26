@@ -26,36 +26,33 @@ public class FindCommandParser {
      * @throws IllegalValueException
      */
     public Command parse(String args) {
-//        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
         argsTokenizer.tokenize(args);
         // Fetch the keyword string before the prefix
         Optional<String> keywordsString = argsTokenizer.getPreamble();
 
         // User must enter either the search keyword or parameters with which to search
         if (!keywordsString.isPresent() && !argsTokenizer.getAllValues(PREFIX_TAG).isPresent()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         try {
-            // Store the individual tag strings in a set
-            final Set<String> tagsStrings = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
-            final Set<Tag> tagsSet = new HashSet<>();
-
-            for (String tagName : tagsStrings) {
-                tagsSet.add(new Tag(tagName));
-            }
-
-            final UniqueTagList uniqueTagList = new UniqueTagList(tagsSet);
-
             if (keywordsString.isPresent()) {
                 final String[] keywords = keywordsString.get().split("\\s+");
                 final Set<String> keywordsSet = new HashSet<>(Arrays.asList(keywords));
 
-                return new FindCommand(keywordsSet, uniqueTagList);
+                return new FindCommand(keywordsSet);
             } else {
+                // Store the individual tag strings in a set
+                final Set<String> tagsStrings = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
+                final Set<Tag> tagsSet = new HashSet<>();
+                
+                for (String tagName : tagsStrings) {
+                    tagsSet.add(new Tag(tagName));
+                }
+
+                final UniqueTagList uniqueTagList = new UniqueTagList(tagsSet);
+                
                 return new FindCommand(uniqueTagList);
             }
         } catch (IllegalValueException ive) {

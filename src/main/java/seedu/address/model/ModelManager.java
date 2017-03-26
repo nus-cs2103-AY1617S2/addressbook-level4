@@ -136,6 +136,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTodoList(Set<String> keywords) {
         updateFilteredTodoList(new PredicateExpression(new NameQualifier(keywords)));
     }
+    
+    @Override
+    public void updateFilteredTodoList(UniqueTagList tags) {
+        updateFilteredTodoList(new PredicateExpression(new NameQualifier(tags)));
+    }
 
     private void updateFilteredTodoList(Expression expression) {
         filteredTodos.setPredicate(expression::satisfies);

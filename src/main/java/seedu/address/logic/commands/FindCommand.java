@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
-
 import java.util.Set;
-
 import seedu.address.model.tag.UniqueTagList;
 
 
@@ -26,7 +24,7 @@ public class FindCommand extends Command {
      * Creates a FindCommand with keywords as parameters
      */
     public FindCommand(Set<String> keywords) {
-        this(keywords, null);
+        this.keywords = keywords;
     }
     
     //@@author A0163720M
@@ -36,24 +34,18 @@ public class FindCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public FindCommand(UniqueTagList tags) {
-        this(null, tags);
-    }
-    
-    //@@author A0163720M
-    /**
-     * Creates a FindCommand with keywords and tags as parameters
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
-    public FindCommand(Set<String> keywords, UniqueTagList tags) {
-        this.keywords = keywords;
         this.tags = tags;
     }
 
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTodoList(keywords);
+        if (!tags.isEmpty()) {
+            model.updateFilteredTodoList(tags);
+        } else {
+            model.updateFilteredTodoList(keywords);
+        }
+        
         return new CommandResult(getMessageForTodoListShownSummary(model.getFilteredTodoList().size()));
     }
 }
