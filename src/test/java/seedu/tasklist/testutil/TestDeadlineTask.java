@@ -229,10 +229,4 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
         return dateFormat.format(this.deadline);
     }
 
-    //@@author A0143355J
-    @Override
-    public String getTime() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        return dateFormat.format(deadline);
-    }
 }

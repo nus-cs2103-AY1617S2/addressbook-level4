@@ -12,7 +12,6 @@ import java.util.Date;
 public interface ReadOnlyDeadlineTask extends ReadOnlyTask {
     Date getDeadline();
     String getDeadlineString();
-    String getTime();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)

@@ -60,14 +60,6 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
         return dateFormat.format(deadline);
     }
 
-    //@@author A0143355J
-    @Override
-    public String getTime() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        return dateFormat.format(deadline);
-    }
-
-    //@@author A0141993X
     public void setName(Name name) {
         assert name != null;
         this.name = name;

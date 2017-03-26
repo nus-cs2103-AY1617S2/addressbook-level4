@@ -274,22 +274,4 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
         return dateFormat.format(this.endDate);
     }
 
-    //@@author A0143355J
-    /**
-     * Returns the time of the start date as a String in the format HH:mm
-     */
-    @Override
-    public String getStartTime() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        return dateFormat.format(this.startDate);
-    }
-
-    /**
-     * Returns the time of the end date as a String in the format HH:mm
-     */
-    @Override
-    public String getEndTime() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        return dateFormat.format(this.endDate);
-    }
 }

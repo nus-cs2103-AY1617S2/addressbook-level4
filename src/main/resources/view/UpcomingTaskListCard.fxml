@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- @@author A0143355J -->
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -29,8 +30,6 @@
                         <HBox spacing="5" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
-                                    <Label fx:id="startTime" styleClass="cell_small_label"/>
-                                    <Label fx:id="endTime" styleClass="cell_small_label"/>
                                     <Label fx:id="name" text="\$first" styleClass="cell_small_label"/>
                                 </HBox>
                             </children>
