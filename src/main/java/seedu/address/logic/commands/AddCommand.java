@@ -85,4 +85,9 @@ public class AddCommand extends Command {
         }
     }
 
+    // For testing
+    public Task getTask() {
+        return toAdd;
+    }
+
 }
