@@ -29,13 +29,14 @@
 #### Dependencies
 
 * Libraries
-  * Guava
-  * JavaFX
-  * Jackson
-  * TestFX
+  * [Guava](https://github.com/google/guava)
+  * [JavaFX](http://docs.oracle.com/javafx/2/overview/jfxpub-overview.htm)
+  * [Jackson](http://wiki.fasterxml.com/JacksonHome)
+  * [JFoenix](https://github.com/jfoenixadmin/JFoenix)
+  * [TestFX](https://github.com/TestFX/TestFX)
 
 * Testing Frameworks
-  * JUnit
+  * [JUnit](https://github.com/junit-team/junit4)
 
 
 #### Licence : [MIT](LICENSE)
