@@ -35,6 +35,7 @@ public class LoadCommand extends Command {
 		if (!file.exists()) {
 			return new CommandResult(String.format(MESSAGE_NOT_FOUND, pathName));
 		}
+		
 		model.loadFromLocation(pathName);
 		return new CommandResult(String.format(MESSAGE_SUCCESS, pathName));
 	}

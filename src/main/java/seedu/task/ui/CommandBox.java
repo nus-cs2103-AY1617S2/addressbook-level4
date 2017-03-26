@@ -71,4 +71,15 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
 
+    public void setText(String text) {
+    	commandTextField.setText(text);
+    }
+
+    public void requestFocus() {
+    	commandTextField.requestFocus();
+    }
+    
+    public void end() {
+    	commandTextField.end();
+    }
 }
