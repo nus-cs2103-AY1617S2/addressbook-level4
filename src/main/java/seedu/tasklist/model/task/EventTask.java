@@ -127,6 +127,7 @@ public class EventTask extends Task implements ReadOnlyEventTask {
         return dateFormat.format(endDate);
     }
 
+    //@@author A0143355J
     @Override
     public String getEndTime() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
