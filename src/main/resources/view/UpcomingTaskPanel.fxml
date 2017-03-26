@@ -10,10 +10,10 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-        <ListView fx:id="todayTaskListView" VBox.vgrow="todayTaskListView" />
+        <ListView fx:id="todayTaskListView" VBox.vgrow="ALWAYS" />
     </children>
     <children>
-        <ListView fx:id="tomorrowTaskListView" VBox.vgrow="tomorrowTaskListView" />
+        <ListView fx:id="tomorrowTaskListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>
 
