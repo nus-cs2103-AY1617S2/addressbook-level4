@@ -3,10 +3,10 @@ package seedu.opus.model.task;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 import seedu.opus.commons.exceptions.IllegalValueException;
+import seedu.opus.logic.parser.DateTimeParser;
 
 public class DateTime {
 
@@ -16,7 +16,7 @@ public class DateTime {
      */
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
-            "Task date time should be in the format of [Day]/[Month]/[Year] [Hour]:[Minute]";
+            "Opus does not recognize the date time format. Please try again.";
 
     public final LocalDateTime dateTime;
     private static DateTimeFormatter formatter = DateTimeFormatter
@@ -38,12 +38,9 @@ public class DateTime {
 
     public DateTime(String dateTime) throws IllegalValueException {
         assert dateTime != null;
-
         this.clock = Clock.systemDefaultZone();
-        if (!isValidDateTime(dateTime)) {
-            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
-        }
-        this.dateTime = LocalDateTime.parse(dateTime, formatter);
+        this.dateTime =  DateTimeParser.parse(dateTime)
+                .orElseThrow(() -> new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS));
     }
 
     /**
@@ -68,14 +65,7 @@ public class DateTime {
      * @throws IllegalValueException
      */
     public static boolean isValidDateTime(String test) {
-        try {
-            if (LocalDateTime.parse(test, formatter) != null) {
-                return true;
-            }
-        } catch (DateTimeParseException dtpe) {
-
-        }
-        return false;
+        return DateTimeParser.parse(test).isPresent();
     }
 
     public void setClock(Clock clock) {
