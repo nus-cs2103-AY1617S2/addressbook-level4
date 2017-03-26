@@ -2,7 +2,10 @@ package seedu.taskboss.logic.commands;
 
 import java.util.List;
 
+import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.core.UnmodifiableObservableList;
+import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.UniqueCategoryList;
@@ -53,6 +56,10 @@ public class MarkDoneCommand extends Command {
         }
 
         model.updateFilteredListToShowAll();
+
+        UnmodifiableObservableList<ReadOnlyTask> latestShownList = model.getFilteredTaskList();
+        int targetIndex = latestShownList.indexOf(taskToMarkDone);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkDone));
     }
 
