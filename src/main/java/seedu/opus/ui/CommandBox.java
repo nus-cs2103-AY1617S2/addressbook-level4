@@ -67,7 +67,10 @@ public class CommandBox extends UiPart<Region> {
 
     private void listenForTab() {
         commandTextField.setOnKeyPressed(e -> {
-            if (!e.getCode().equals(KeyCode.TAB)) return;
+            if (!e.getCode().equals(KeyCode.TAB)) {
+                clearAutocompleteSuggestions();
+                return;
+            }
 
             // prevents the event from propagating up, resulting in shift out of focus
             e.consume();
