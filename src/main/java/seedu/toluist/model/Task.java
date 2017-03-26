@@ -12,7 +12,7 @@ import seedu.toluist.commons.util.DateTimeUtil;
 /**
  * Represents a Task
  */
-public class Task implements Comparable<Task> {
+public class Task implements Comparable<Task>, Cloneable {
     private static final String HIGH_PRIORITY_STRING = "high";
     private static final String LOW_PRIORITY_STRING = "low";
     private static final String ERROR_VALIDATION_EMPTY_DESCRIPTION = "Description must not be empty.";
@@ -88,6 +88,10 @@ public class Task implements Comparable<Task> {
 
     public boolean validateTaskIsFloatingIsEventOrHasDeadline() {
         return startDateTime == null || endDateTime != null;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     //@@author A0131125Y

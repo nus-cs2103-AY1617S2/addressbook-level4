@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import com.google.common.base.Objects;
+
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.StringUtil;
@@ -100,43 +102,50 @@ public class UpdateTaskController extends Controller {
         if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
         }
-        if (isFloating && (eventStartDateTime == null || eventEndDateTime == null || taskDeadline == null)) {
+        if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
         }
-        if (isFloating) {
-            task.setStartDateTime(null);
-            task.setEndDateTime(null);
-        } else if (taskDeadline != null) {
-            task.setStartDateTime(null);
-            task.setEndDateTime(taskDeadline);
-        } else {
-            if (eventStartDateTime != null) {
-                task.setStartDateTime(eventStartDateTime);
+        try {
+            Task taskCopy = (Task) task.clone();
+            if (isFloating) {
+                task.setStartDateTime(null);
+                task.setEndDateTime(null);
+            } else if (taskDeadline != null) {
+                task.setStartDateTime(null);
+                task.setEndDateTime(taskDeadline);
+            } else {
+                if (eventStartDateTime != null) {
+                    task.setStartDateTime(eventStartDateTime);
+                }
+                if (eventEndDateTime != null) {
+                    task.setEndDateTime(eventEndDateTime);
+                }
             }
-            if (eventEndDateTime != null) {
-                task.setEndDateTime(eventEndDateTime);
-            }
-        }
 
-        if (StringUtil.isPresent(description)) {
-            task.setDescription(description);
+            if (StringUtil.isPresent(description)) {
+                task.setDescription(description);
+            }
+            if (StringUtil.isPresent(taskPriority)) {
+                task.setTaskPriority(taskPriority);
+            }
+            if (StringUtil.isPresent(recurringFrequency)) {
+                task.setRecurringFrequency(recurringFrequency);
+            }
+            if (recurringUntilEndDate != null) {
+                task.setRecurringEndDateTime(recurringUntilEndDate);
+            }
+            if (!tags.isEmpty()) {
+                task.replaceTags(tags);
+            }
+            if (isStopRecurring) {
+                task.unsetRecurring();
+            }
+            return new CommandResult(getSuccessUpdateMessage(taskCopy, task));
+        } catch (IllegalArgumentException illegalArgumentException) {
+            return new CommandResult(illegalArgumentException.getMessage());
+        } catch (CloneNotSupportedException cloneNotSupportedException) {
+            return new CommandResult("Bad things happen when copying task. Deal with it.");
         }
-        if (StringUtil.isPresent(taskPriority)) {
-            task.setTaskPriority(taskPriority);
-        }
-        if (StringUtil.isPresent(recurringFrequency)) {
-            task.setRecurringFrequency(recurringFrequency);
-        }
-        if (recurringUntilEndDate != null) {
-            task.setRecurringEndDateTime(recurringUntilEndDate);
-        }
-        if (!tags.isEmpty()) {
-            task.replaceTags(tags);
-        }
-        if (isStopRecurring) {
-            task.unsetRecurring();
-        }
-        return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }
 
     /**
@@ -162,6 +171,37 @@ public class UpdateTaskController extends Controller {
             numberOfTaskTypes++;
         }
         return numberOfTaskTypes <= 1;
+    }
+
+    // Try this command: update 1 lololol floating/ repeat/monthly repeatuntil/friday tags/wheee lol hello priority/low
+    private String getSuccessUpdateMessage(Task oldTask, Task newTask) {
+        String result = "Updated the following details:";
+        result = addMoreSuccessMessage(result, "Description", oldTask.getDescription(), newTask.getDescription());
+        result = addMoreSuccessMessage(result, "Start date", oldTask.getStartDateTime(), newTask.getStartDateTime());
+        result = addMoreSuccessMessage(result, "End date", oldTask.getEndDateTime(), newTask.getEndDateTime());
+        result = addMoreSuccessMessage(result, "Priority", oldTask.getTaskPriority(), newTask.getTaskPriority());
+        result = addMoreSuccessMessage(result, "Repeat",
+                oldTask.getRecurringFrequency(), newTask.getRecurringFrequency());
+        result = addMoreSuccessMessage(result, "Repeat until",
+                oldTask.getRecurringEndDateTime(), newTask.getRecurringEndDateTime());
+        result = addMoreSuccessMessage(result, "Tags", oldTask.getAllTags(), newTask.getAllTags());
+        return result;
+    }
+
+    private String addMoreSuccessMessage(String result, String category, Object oldObject, Object newObject) {
+        if (!Objects.equal(oldObject, newObject)) {
+            result = String.join("\n", result, String.format(category + ": \"%s\" to \"%s\"",
+                    clean(oldObject), clean(newObject)));
+        }
+        return result;
+    }
+
+    private String clean(Object o) {
+        if (o == null) {
+            return "null";
+        } else {
+            return o.toString();
+        }
     }
 
     public boolean matchesCommand(String command) {
