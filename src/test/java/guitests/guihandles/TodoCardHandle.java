@@ -75,6 +75,7 @@ public class TodoCardHandle extends GuiHandle {
     private String getCompleteTime() {
         return getTextFromLabel(COMPLETETIME_FIELD_ID);
     }
+    //@@author
     //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo, boolean checkCompleteTime) {
         if (checkCompleteTime) {
@@ -86,6 +87,7 @@ public class TodoCardHandle extends GuiHandle {
         }
         return isSameTodo(todo);
     }
+    //@@author
     //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo) {
         DateFormat addCommandDateFormat = new SimpleDateFormat(AddCommand.DATE_FORMAT);
@@ -102,7 +104,7 @@ public class TodoCardHandle extends GuiHandle {
         }
         return getFullName().equals(todo.getName().fullName) && getTags().equals(getTags(todo.getTags()));
     }
-
+    //@@author
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TodoCardHandle) {

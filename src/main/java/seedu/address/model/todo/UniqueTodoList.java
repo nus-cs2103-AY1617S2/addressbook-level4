@@ -73,6 +73,7 @@ public class UniqueTodoList implements Iterable<Todo> {
         todoToComplete.setCompleteTime(completeTime);
         internalList.set(index, todoToComplete);
     }
+    //@@author
     //@@author A0163786N
     /**
      * Uncompletes the todo in the list at position {@code index}
@@ -82,7 +83,7 @@ public class UniqueTodoList implements Iterable<Todo> {
         todoToUncomplete.setCompleteTime(null);
         internalList.set(index, todoToUncomplete);
     }
-
+    //@@author
     /**
      * Removes the equivalent todo from the list.
      *

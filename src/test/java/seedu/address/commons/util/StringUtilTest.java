@@ -160,12 +160,14 @@ public class StringUtilTest {
         thrown.expect(IllegalValueException.class);
         StringUtil.parseDate("", "dd/MM/yyyy");
     }
+    //@@author
     //@@author A0163786N
     @Test
     public void parseDate_noMatch_illegalValueException() throws IllegalValueException {
         thrown.expect(IllegalValueException.class);
         StringUtil.parseDate("asdf", "dd/MM/yyyy");
     }
+    //@@author
     //@@author A0163786N
     @Test
     public void parseDate_stringMatch_success() throws IllegalValueException, ParseException {
@@ -174,5 +176,5 @@ public class StringUtilTest {
         assertEquals(StringUtil.parseDate(dateString, dateFormat),
                 new SimpleDateFormat(dateFormat).parse(dateString));
     }
-
+    //@@author
 }
