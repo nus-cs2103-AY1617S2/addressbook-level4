@@ -1,8 +1,8 @@
 package seedu.address.model.task;
 
+import java.util.Objects;
 import java.util.Optional;
 
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -35,15 +35,31 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    //@@author A0140023E
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
-    default boolean isSameStateAs(ReadOnlyTask other) {
-        // TODO check other fields as well
-        // since this is error prone might want to consider Google's equals checker
-        return other == this // short circuit if same object
-                || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName())); // state checks here onwards
+    default boolean isSameStateAs(ReadOnlyTask o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        final ReadOnlyTask other = (ReadOnlyTask) o;
+
+        return Objects.equals(getName(), other.getName())
+                && Objects.equals(getDeadline(), other.getDeadline())
+                && Objects.equals(getStartEndDateTime(), other.getStartEndDateTime());
+        // TODO tags should actually be checked because that's how equals should usually function
+        // However, the equals here is used to check for duplicates and is not really consistent
+        // with how equals behave. Thus to further investigate.
+        // Furthermore, this current implementation does not allow Tasks with same name to go through
+        // if there are no deadlines or start and end date time. Probably would be better to remove
+        // the duplicate task exception in this case.
     }
 
     /**
@@ -51,30 +67,36 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
+        buildNameString(builder);
+        buildDeadlineString(builder);
+        buildStartEndDateTimeString(builder);
+        buildTagsString(builder);
+
+        return builder.toString();
+    }
+
+    default void buildNameString(final StringBuilder builder) {
         builder.append(getName());
+    }
 
-        // TODO improve SLAP and consider lambda
-        if (getDeadline().isPresent()) {
-            builder.append(" Deadline: " + getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
-        } else {
-            builder.append(" Deadline: none ");
-        }
+    default void buildDeadlineString(final StringBuilder builder) {
+        builder.append(" Deadline: ");
+        builder.append(getDeadline().isPresent() ? getDeadline().get().toString() : "none");
+    }
 
-        // TODO improve SLAP and consider lambda
+    default void buildStartEndDateTimeString(final StringBuilder builder) {
         if (getStartEndDateTime().isPresent()) {
-            final StartEndDateTime startEndDateTime = getStartEndDateTime().get();
-            builder.append(" Start Date: " + startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
-            builder.append(" End Date: " + startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            builder.append(" ");
+            builder.append(getStartEndDateTime().get().toString());
         } else {
             builder.append(" Start Date: none ");
             builder.append(" End Date: none ");
         }
+    }
 
-        // TODO although only two lines, but SLAP can still be improved
+    default void buildTagsString(final StringBuilder builder) {
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
-
-        return builder.toString();
     }
 
 }
