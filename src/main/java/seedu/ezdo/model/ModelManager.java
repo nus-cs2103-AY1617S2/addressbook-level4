@@ -287,18 +287,19 @@ public class ModelManager extends ComponentManager implements Model {
 
             String taskStartDate = task.getStartDate().toString();
             String taskDueDate = task.getDueDate().toString();
-            String taskPriority = task.getPriority().toString();
+      //      String taskPriority = task.getPriority().toString();
 
             Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
             boolean startDateExist = (taskStartDate.length() != 0);
             boolean dueDateExist = (taskDueDate.length() != 0);
-            boolean priorityExist = (taskPriority.length() != 0);
+     //       boolean priorityExist = (taskPriority.length() != 0);
 
             return (nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
-                    && (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
-                            || (priorityExist && task.getPriority().toString().equals(priority.get().toString())))
+                    && comparePriority(priority, task.getPriority())
+           //         && (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
+             //               || (priorityExist && task.getPriority().toString().equals(priority.get().toString())))
                     && (!startDate.isPresent() || (startDate.get().toString().equals("") && startDateExist)
                             || (startDateExist && taskStartDate.substring(0, 9).equals
                                     (startDate.get().toString().substring(0, 9))))
@@ -313,7 +314,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
 
-        public Set<String> convertToTagStringSet(Set<Tag> tags) {
+        private Set<String> convertToTagStringSet(Set<Tag> tags) {
             Object[] tagArray = tags.toArray();
             Set<String> tagSet = new HashSet<String>();
 
@@ -322,6 +323,13 @@ public class ModelManager extends ComponentManager implements Model {
             }
 
             return tagSet;
+        }
+
+        private boolean comparePriority(Optional<Priority> givenPriority, Priority taskPriority) {
+            String taskPriorityString = taskPriority.toString();
+            boolean priorityExist = (taskPriorityString.length() != 0);
+            return (!givenPriority.isPresent() || (givenPriority.get().toString().equals("") && priorityExist)
+                    || (priorityExist && taskPriorityString.equals(givenPriority.get().toString())));
         }
     }
 
