@@ -38,10 +38,10 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
+    public void commandBox_commandFails_textClearsAndStyleClassRemainsTheSame() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
-        assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
+        assertEquals("", commandBox.getCommandInput());
     }
 
     @Test
