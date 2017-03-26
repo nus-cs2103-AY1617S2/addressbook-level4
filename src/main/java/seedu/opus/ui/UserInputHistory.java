@@ -51,14 +51,17 @@ public class UserInputHistory {
             current = null;
             return Optional.empty();
         }
+
         String previousInput = iterator.next();
+
         if (!previousInput.equals(current)) {
             current = previousInput;
-            return Optional.ofNullable(current);
-        } else {
+        } else if (iterator.hasNext()) {
             current = iterator.next();
-            return Optional.ofNullable(current);
+        } else {
+            current = null;
         }
+        return Optional.ofNullable(current);
     }
 
     /**
@@ -71,13 +74,16 @@ public class UserInputHistory {
             current = null;
             return Optional.empty();
         }
+
         String precedingInput = iterator.previous();
+
         if (!precedingInput.equals(current)) {
             current = precedingInput;
-            return Optional.ofNullable(current);
-        } else {
+        } else if (iterator.hasPrevious()) {
             current = iterator.previous();
-            return Optional.ofNullable(current);
+        } else {
+            current = null;
         }
+        return Optional.ofNullable(current);
     }
 }
