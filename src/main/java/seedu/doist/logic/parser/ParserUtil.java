@@ -47,6 +47,7 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
     }
 
+    //@@author A0147980U
     /**
      * Returns an list of integers separated using space in the input string
      */
@@ -54,25 +55,35 @@ public class ParserUtil {
         ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
         String[] commandStringComponents = command.trim().split(" +");
         for (String component : commandStringComponents) {
-            indices.add(parseIndex(component));
+            String[] ends = component.trim().split("-+");
+            if (ends.length == 1 || Arrays.asList(ends).contains("")) {
+                indices.add(parseIndex(component));
+            } else if (ends.length == 2) {
+                indices.addAll(parseRange(ends));
+            }
         }
         return indices;
     }
 
-
-    public static Date parseDate (String date) {
-        com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
-        List<DateGroup> groups = parser.parse(date);
-        Date extractDate = null;
-        boolean flag = false;
-        for (DateGroup group:groups) {
-            List<Date> dates = group.getDates();
-            if (!dates.isEmpty()) {
-                extractDate = dates.get(0);
-                flag = true;
+    /**
+     *
+     * @param twoEnds, an 2-element String array,
+     *                 whose 1st element is the start of the range
+     *                 and the 2nd element is the end of the range
+     * @return A list of optional integer in the range, including both the start and the end.
+     */
+    private static List<Optional<Integer>> parseRange(String[] twoEnds) {
+        assert twoEnds.length == 2;
+        assert !Arrays.asList(twoEnds).contains("");
+        ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
+        Optional<Integer> start = parseIndex(twoEnds[0]);
+        Optional<Integer> end = parseIndex(twoEnds[1]);
+        if (start.isPresent() && end.isPresent()) {
+            for (int i = start.get(); i <= end.get(); i++) {
+                indices.add(Optional.of(i));
             }
         }
-        return (flag ? extractDate : null);
+        return indices;
     }
 
     /**
@@ -90,6 +101,22 @@ public class ParserUtil {
             indices[i] = optionalIndices.get(i).get().intValue();
         }
         return indices;
+    }
+    //@@author
+
+    public static Date parseDate (String date) {
+        com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
+        List<DateGroup> groups = parser.parse(date);
+        Date extractDate = null;
+        boolean flag = false;
+        for (DateGroup group:groups) {
+            List<Date> dates = group.getDates();
+            if (!dates.isEmpty()) {
+                extractDate = dates.get(0);
+                flag = true;
+            }
+        }
+        return (flag ? extractDate : null);
     }
 
     /**

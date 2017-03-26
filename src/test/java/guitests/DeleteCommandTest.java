@@ -30,7 +30,11 @@ public class DeleteCommandTest extends DoistGUITest {
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
 
-        //invalid index
+        //invalid index, right bound
+        commandBox.runCommand("delete " + currentList.length + 1);
+        assertResultMessage("The task index provided is invalid");
+
+        //invalid index, left bound
         commandBox.runCommand("delete " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
     }

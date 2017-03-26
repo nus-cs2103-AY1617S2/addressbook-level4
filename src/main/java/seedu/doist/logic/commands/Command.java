@@ -56,7 +56,7 @@ public abstract class Command {
         ArrayList<ReadOnlyTask> relatedTasks = new ArrayList<ReadOnlyTask>();
 
         for (int targetIndex : targetIndices) {
-            if (lastShownList.size() < targetIndex) {
+            if (lastShownList.size() < targetIndex || targetIndex < 0) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             ReadOnlyTask relatedTask = lastShownList.get(targetIndex - 1);
