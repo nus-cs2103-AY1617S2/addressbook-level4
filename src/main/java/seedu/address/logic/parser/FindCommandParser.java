@@ -19,7 +19,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser {
-
+    //@@author A0163720M
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
@@ -52,7 +52,7 @@ public class FindCommandParser {
                 }
 
                 final UniqueTagList uniqueTagList = new UniqueTagList(tagsSet);
-
+                
                 return new FindCommand(uniqueTagList);
             }
         } catch (IllegalValueException ive) {
