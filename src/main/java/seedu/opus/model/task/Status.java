@@ -8,11 +8,30 @@ import seedu.opus.commons.exceptions.IllegalValueException;
  */
 public class Status {
 
-    public static final String MESSAGE_STATUS_CONSTRAINTS =
-            "Status can take any values";
-    public static final String STATUS_VALIDATION_REGEX = ".*";
+    public static enum Flag {
 
-    public final String value;
+        COMPLETE,
+        INCOMPLETE;
+
+        @Override
+        public String toString() {
+            switch(this) {
+            case COMPLETE:
+                return STATUS_COMPLETE;
+            case INCOMPLETE:
+                return STATUS_INCOMPLETE;
+            default:
+                throw new AssertionError();
+            }
+        }
+
+    }
+
+    public static final String MESSAGE_STATUS_CONSTRAINTS = "Status can only be 'complete' or 'incomplete";
+    public static final String STATUS_COMPLETE = "complete";
+    public static final String STATUS_INCOMPLETE = "incomplete";
+
+    public final Flag value;
 
     /**
      * Validates given status.
@@ -25,26 +44,26 @@ public class Status {
         if (!isValidStatus(trimmedStatus)) {
             throw new IllegalValueException(MESSAGE_STATUS_CONSTRAINTS);
         }
-        this.value = trimmedStatus;
+        this.value = Flag.valueOf(trimmedStatus.toUpperCase());
     }
 
     /**
      * Initialise a Status with value of incomplete
      */
     public Status() {
-        this.value = "incomplete";
+        this.value = Flag.INCOMPLETE;
     }
 
     /**
      * Returns if a given string is a valid task status.
      */
     public static boolean isValidStatus(String test) {
-        return test.matches(STATUS_VALIDATION_REGEX);
+        return test.equals(STATUS_COMPLETE) || test.equals(STATUS_INCOMPLETE);
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
