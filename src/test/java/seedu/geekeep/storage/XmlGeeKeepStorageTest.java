@@ -71,8 +71,8 @@ public class XmlGeeKeepStorageTest {
         assertEquals(original, new GeeKeep(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(td.hoon));
-        original.removeTask(new Task(td.alice));
+        original.addTask(new Task(td.meeting));
+        original.removeTask(new Task(td.dance));
 
         xmlGeeKeepStorage.saveGeeKeep(original, filePath);
         readBack = xmlGeeKeepStorage.readGeeKeep(filePath).get();
@@ -80,7 +80,7 @@ public class XmlGeeKeepStorageTest {
         assertEquals(original, new GeeKeep(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(td.ida));
+        original.addTask(new Task(td.spend));
         xmlGeeKeepStorage.saveGeeKeep(original); //file path not specified
         readBack = xmlGeeKeepStorage.readGeeKeep().get(); //file path not specified
         assertEquals(original, new GeeKeep(readBack));

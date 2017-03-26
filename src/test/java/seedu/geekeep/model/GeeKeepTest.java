@@ -52,8 +52,8 @@ public class GeeKeepTest {
         // Repeat td.alice twice
         List<Task> newTasks;
         try {
-            newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
-            List<Tag> newTags = td.alice.getTags().asObservableList();
+            newTasks = Arrays.asList(new Task(td.dance), new Task(td.dance));
+            List<Tag> newTags = td.dance.getTags().asObservableList();
             GeeKeepStub newData = new GeeKeepStub(newTasks, newTags);
 
             thrown.expect(AssertionError.class);

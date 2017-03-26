@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -69,7 +68,7 @@ public class TaskListPanelHandle extends GuiHandle {
         return getNode(TASK_LIST_VIEW_ID);
     }
 
-    public int getNumberOfPeople() {
+    public int getNumberOfTasks() {
         return getListView().getItems().size();
     }
 

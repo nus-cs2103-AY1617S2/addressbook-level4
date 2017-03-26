@@ -30,7 +30,7 @@ public class UpdateCommandTest extends GeeKeepGuiTest {
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int geeKeepIndex,
+    private void assertUpdateSuccess(int filteredTaskListIndex, int geeKeepIndex,
                                     String detailsToEdit, TestTask editedTask) {
         commandBox.runCommand("update " + filteredTaskListIndex + " " + detailsToEdit);
 
@@ -42,66 +42,66 @@ public class UpdateCommandTest extends GeeKeepGuiTest {
         expectedTasksList[geeKeepIndex - 1] = editedTask;
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(UpdateCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+        assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, editedTask));
 
     }
 
     @Test
-    public void edit_allFieldsSpecified_success() throws Exception {
+    public void update_allFieldsSpecified_success() throws Exception {
         String detailsToEdit
-            = "Bobby s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
+            = "Smile s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
         int geeKeepIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withTitle("Bobby")
+        TestTask editedTask = new TaskBuilder().withTitle("Smile")
                 .withEndDateTime("01-05-17 1630")
                 .withStartDateTime("01-04-17 1630")
                 .withLocation("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 
-        assertEditSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
+        assertUpdateSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_clearTags_success() throws Exception {
+    public void update_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
         int geeKeepIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
+        assertUpdateSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_duplicateTask_failure() {
-        commandBox.runCommand("update 3 Alice Pauline s/01-04-17 1630 e/01-05-17 1630 "
+    public void update_duplicateTask_failure() {
+        commandBox.runCommand("update 3 Dance Camp s/01-04-17 1630 e/01-05-17 1630 "
 
                                 + "l/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
-    public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+    public void update_findThenEdit_success() throws Exception {
+        commandBox.runCommand("find Hackathon");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "New Event";
         int filteredTaskListIndex = 1;
         int geeKeepIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("New Event").build();
 
-        assertEditSuccess(filteredTaskListIndex, geeKeepIndex, detailsToEdit, editedTask);
+        assertUpdateSuccess(filteredTaskListIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_invalidTaskIndex_failure() {
-        commandBox.runCommand("update 8 Bobby");
+    public void update_invalidTaskIndex_failure() {
+        commandBox.runCommand("update 8 Random Event");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
-    public void edit_invalidValues_failure() {
+    public void update_invalidValues_failure() {
         commandBox.runCommand("update 1 *&");
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
@@ -116,25 +116,25 @@ public class UpdateCommandTest extends GeeKeepGuiTest {
     }
 
     @Test
-    public void edit_missingTaskIndex_failure() {
-        commandBox.runCommand("update Bobby");
+    public void update_missingTaskIndex_failure() {
+        commandBox.runCommand("update Random Event");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void edit_noFieldsSpecified_failure() {
+    public void update_noFieldsSpecified_failure() {
         commandBox.runCommand("update 1");
-        assertResultMessage(UpdateCommand.MESSAGE_NOT_EDITED);
+        assertResultMessage(UpdateCommand.MESSAGE_NOT_UPDATED);
     }
 
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
+    public void update_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
         int geeKeepIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
+        assertUpdateSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
     }
 }

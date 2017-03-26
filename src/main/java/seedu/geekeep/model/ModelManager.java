@@ -87,14 +87,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask updatedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
-        assert editedTask != null;
+        assert updatedTask != null;
 
         pastGeeKeeps.add(new GeeKeep(geeKeep));
         futureGeeKeeps.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        geeKeep.updateTask(taskListIndex, editedTask);
+        geeKeep.updateTask(taskListIndex, updatedTask);
 
         indicateGeeKeepChanged();
     }

@@ -163,8 +163,8 @@ public class GeeKeep implements ReadOnlyGeeKeep {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}. {@code GeeKeep}'s
-     * tag list will be updated with the tags of {@code editedReadOnlyTask}.
+     * Updates the task in the list at position {@code index} with {@code updatedReadOnlyTask}. {@code GeeKeep}'s
+     * tag list will be updated with the tags of {@code updatedReadOnlyTask}.
      *
      * @see #syncMasterTagListWith(Task)
      *
@@ -175,21 +175,21 @@ public class GeeKeep implements ReadOnlyGeeKeep {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+    public void updateTask(int index, ReadOnlyTask updatedReadOnlyTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
-        assert editedReadOnlyTask != null;
+        assert updatedReadOnlyTask != null;
 
-        Task editedTask;
+        Task updatedTask;
         try {
-            editedTask = new Task(editedReadOnlyTask);
+            updatedTask = new Task(updatedReadOnlyTask);
         } catch (IllegalValueException ive) {
             throw new IllegalValueException(ive.getMessage());
         }
-        syncMasterTagListWith(editedTask);
+        syncMasterTagListWith(updatedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
-        tasks.updateTask(index, editedTask);
+        tasks.updateTask(index, updatedTask);
     }
 
     public void markTaskDone(int index) {

@@ -495,8 +495,6 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempGeeKeepFile = saveFolder.getRoot().getPath() + "TempGeeKeep.xml";
-        String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model);
         EventsCenter.getInstance().registerHandler(this);
 
