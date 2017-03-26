@@ -25,6 +25,7 @@ Role: Team Leader <br>
   - Designed the reactive architecture for front-end
   - Set up CI for the project
   - Set up GUI test infrastructure for the project
+  - Do code review for every PR
 
 -----
 
