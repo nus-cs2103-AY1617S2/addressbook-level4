@@ -11,7 +11,7 @@ import seedu.ezdo.model.todo.Task;
 /**
  * Marks a task as identified using its last displayed index from ezDo as done
  */
-public class DoneCommand extends Command {
+public class DoneCommand extends Command implements MultipleIndexCommand {
 
     public static final String COMMAND_WORD = "done";
     public static final String SHORT_COMMAND_WORD = "d";
@@ -79,7 +79,8 @@ public class DoneCommand extends Command {
         return false;
     }
 
-    private boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+    @Override
+    public boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
         return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
     }
 }
