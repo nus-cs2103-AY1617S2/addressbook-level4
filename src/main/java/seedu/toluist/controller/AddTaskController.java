@@ -27,7 +27,7 @@ public class AddTaskController extends Controller {
 
     private static final String COMMAND_ADD_TASK = "add";
 
-    private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
+    private static final String RESULT_MESSAGE_ADD_TASK = "New %s added: \"%s\"";
     private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
             "The task cannot be classified as a floating task, deadline, or event.";
     private static final String RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE =
@@ -81,6 +81,7 @@ public class AddTaskController extends Controller {
             LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate) {
         try {
+            // validates that the dates input belongs to only one type of task, or exception is thrown
             validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline);
             Task task;
             if (eventStartDateTime != null && eventEndDateTime != null) {
@@ -105,14 +106,16 @@ public class AddTaskController extends Controller {
             }
             task.replaceTags(tags);
             todoList.add(task);
-            return new CommandResult(RESULT_MESSAGE_ADD_TASK);
+            String taskType = (task.isEvent()) ? "event" : "task";
+            return new CommandResult(String.format(RESULT_MESSAGE_ADD_TASK, taskType, description));
         } catch (IllegalArgumentException exception) {
             return new CommandResult(exception.getMessage());
         }
     }
 
     /**
-     * Checks whether the user input for dates is valid. Throws IllegalArgumentException when it is invalid.
+     * Checks whether the user input for dates is valid (belongs to only one type of task)
+     * @throws IllegalArgumentException when the input for dates is invalid
      * @param eventStartDateTime
      * @param eventEndDateTime
      * @param taskDeadline
