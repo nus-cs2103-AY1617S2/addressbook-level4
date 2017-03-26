@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.ReadOnlyTodo;
 import seedu.address.model.todo.Todo;
