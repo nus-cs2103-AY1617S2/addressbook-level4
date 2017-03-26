@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: TYPE (ev represents event and ts represents task, INDEX (must be a positive integer) "
             + "[DESCRIPTION] [p/PRIORITY] [l/LOCATION ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + "ts 1 p/high bd/050517";
+            + "Example: " + COMMAND_WORD + " ts 1 p/high bd/050517";
 
     public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

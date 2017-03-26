@@ -3,11 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyWhatsLeft;
-import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.UniqueEventList.EventNotFoundException;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
 //@@ author A0121668A
@@ -27,9 +23,9 @@ public class FinishCommand extends Command {
     private final int filteredActivityListIndex;
 
     // @@author A0121668A
-    public FinishCommand(int filteredActivityListIndex, String targetType) {
+    public FinishCommand(int filteredActivityListIndex) {
         assert filteredActivityListIndex > 0;
-        this.filteredActivityListIndex = filteredActivityListIndex - 1;
+        this.filteredActivityListIndex = filteredActivityListIndex;
     }
 
     @Override
@@ -37,12 +33,12 @@ public class FinishCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
 
-        if (filteredActivityListIndex >= lastShownTaskList.size()) {
+        if (filteredActivityListIndex > lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        ReadOnlyTask taskToComplete = lastShownTaskList.get(filteredActivityListIndex);
+        ReadOnlyTask taskToComplete = lastShownTaskList.get(filteredActivityListIndex-1);
         try {
-            model.MarkTaskAsComplete(filteredActivityListIndex - 1);
+            model.MarkTaskAsComplete(filteredActivityListIndex-1);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

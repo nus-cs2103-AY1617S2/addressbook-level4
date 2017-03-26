@@ -70,7 +70,7 @@ public class AddCommand extends Command {
                     new ByDate(bydate),
                     new Location(location),
                     new UniqueTagList(tagSet),
-                    Task.COMPLETED_TASK_STATUS);
+                    Task.DEFAULT_TASK_STATUS);
             this.toAddEvent = null;
         } else {
             this.toAddEvent = new Event(

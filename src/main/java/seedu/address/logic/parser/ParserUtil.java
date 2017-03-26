@@ -181,4 +181,10 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
+    
+    //@@author A0121668A
+    public static String parseStatus(String command) {
+        String trimmedCommand = command.trim();
+        return trimmedCommand;
+    }
 }

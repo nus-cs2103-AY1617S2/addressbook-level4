@@ -77,6 +77,13 @@ public interface Model {
     
     /** Empties the previousCommand list and adds the newest one in, always keeping only 1*/
     void storePreviousCommand(String command);
+    /** Updates the filter of the filtered Event list to show completed task*/
+    //void updateFilteredListToShowComplete();
+    /** Updates the filter of the filtered Event list to show unfinished task*/
+    //void updateFilteredListToShowIncomplete();
+    
+    void setDisplayStatus(String status);
+
 
     /** Finds the index of the event in the filtered list*/
     int findEventIndex(Event event);
