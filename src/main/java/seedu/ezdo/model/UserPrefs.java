@@ -3,6 +3,9 @@ package seedu.ezdo.model;
 import java.util.Objects;
 
 import seedu.ezdo.commons.core.GuiSettings;
+import seedu.ezdo.commons.exceptions.AliasAlreadyInUseException;
+import seedu.ezdo.commons.exceptions.CommandDoesNotExistException;
+import seedu.ezdo.logic.CommandAliases;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
@@ -13,6 +16,7 @@ public class UserPrefs {
 
     public GuiSettings guiSettings;
     public SortCriteria sortCriteria;
+    public CommandAliases commandAliases;
 
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
@@ -25,6 +29,7 @@ public class UserPrefs {
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
         this.sortCriteria = UniqueTaskList.SortCriteria.NAME;
+        this.commandAliases = new CommandAliases();
     }
 
     public void setGuiSettings(double width, double height, int x, int y) {
@@ -37,6 +42,15 @@ public class UserPrefs {
 
     public SortCriteria getSortCriteria() {
         return sortCriteria;
+    }
+
+    public void addCommandAlias(String command, String alias) throws AliasAlreadyInUseException,
+        CommandDoesNotExistException {
+        commandAliases.addAlias(command, alias);
+    }
+
+    public CommandAliases getCommandAliases() {
+        return commandAliases;
     }
 
     @Override
