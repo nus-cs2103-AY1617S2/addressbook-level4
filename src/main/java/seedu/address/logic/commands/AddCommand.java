@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
+import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ByDate;
@@ -88,10 +91,12 @@ public class AddCommand extends Command {
         try {
             model.storePreviousCommand("");
             if (toAddTask == null) {
-                model.addEvent(toAddEvent);                
+                model.addEvent(toAddEvent);
+                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(model.findEventIndex(toAddEvent), "ev"));
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
             } else if (toAddEvent == null) {
                 model.addTask(toAddTask);
+                EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(model.findTaskIndex(toAddTask), "ts"));
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
             }
         } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {

@@ -144,6 +144,32 @@ public class ModelManager extends ComponentManager implements Model {
     public static void setPreviousState(ReadOnlyWhatsLeft state) {
         previousState = new WhatsLeft(state);
     }
+    
+    @Override
+    public int findEventIndex(Event event) {
+        int currIndex = 0;
+        for (ReadOnlyEvent each : filteredEvents) {
+            if (each.equals(event)) {
+                return currIndex;
+            } else {
+                currIndex++;
+            }
+        }
+        return currIndex;
+    }
+    
+    @Override
+    public int findTaskIndex(Task task) {
+        int currIndex = 0;
+        for (ReadOnlyTask each : filteredTasks) {
+            if (each.equals(task)) {
+                return currIndex;
+            } else {
+                currIndex++;
+            }
+        }
+        return currIndex;
+    }
     //@@author
 
     //=========== Filtered List Accessors =============================================================

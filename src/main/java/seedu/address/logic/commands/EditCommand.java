@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
+import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
@@ -97,6 +100,8 @@ public class EditCommand extends Command {
             }
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
+            
+            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(model.findEventIndex(editedEvent), type));
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, eventToEdit));
         }
 
@@ -117,6 +122,7 @@ public class EditCommand extends Command {
             }
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
+            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(model.findTaskIndex(editedTask), type));
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
