@@ -42,14 +42,15 @@ public class TaskListPanel extends UiPart<Region> {
     private ListView<ReadOnlyTask> completedListView;
 
     public TaskListPanel(String type, AnchorPane taskListPlaceholder,
-            ObservableList<ReadOnlyTask> allList) {
+            ObservableList<ReadOnlyTask> filteredList) {
         super(getFxmlFromType(type));
         this.type = type;
         currentListView = allListView;
-        setConnections(allList, allListView);
-        setConnections(allList, completedListView);
-        setConnections(allList, upcomingListView);
+        setConnections(filteredList, allListView);
+        setConnections(filteredList, completedListView);
+        setConnections(filteredList, upcomingListView);
         addToPlaceholder(taskListPlaceholder);
+        selectTab(0);
     }
 
     //TODO to remove
@@ -98,18 +99,28 @@ public class TaskListPanel extends UiPart<Region> {
     public void switchListView(TaskCategory category) {
         switch (category) {
         case UNDONE:
-            tabPanePlaceHolder.getSelectionModel().select(1);
+            selectTab(1);
             break;
         case DONE:
-            tabPanePlaceHolder.getSelectionModel().select(2);
+            selectTab(2);
             break;
         default:
-            tabPanePlaceHolder.getSelectionModel().select(0);
+            selectTab(0);
             break;
         }
         logger.info("Switched to " + category + " in " + type);
     }
 
+    public void selectTab(int tab) {
+        tabPanePlaceHolder.getTabs().get(tab).setDisable(false);
+        tabPanePlaceHolder.getSelectionModel().select(tab);
+        for(int i = 0; i < 3; i++) {
+            if (i != tab) {
+                tabPanePlaceHolder.getTabs().get(i).setDisable(true);
+            }
+        }
+    }
+    
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         protected int getSourceIndex() {
