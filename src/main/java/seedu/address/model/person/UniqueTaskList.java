@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
+import seedu.address.commons.util.StringUtil;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -57,6 +57,19 @@ public class UniqueTaskList implements Iterable<Task> {
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
+        }
+        if (editedTask.getByTime().getValue() != null && editedTask.getByDate().getValue() == null &&
+                taskToUpdate.getByDate().getValue() == null) {
+            editedTask = new Task(editedTask.getDescription(), editedTask.getPriority(), editedTask.getByTime()
+                    , new ByDate(StringUtil.parseStringToDate(StringUtil.getTodayDateInString())), editedTask.getLocation(), editedTask.getTags()
+                    , editedTask.getStatus());
+        }
+        
+        if (editedTask.getByDate() != null && editedTask.getByTime().getValue() == null &&
+                taskToUpdate.getByTime().getValue() == null) {
+            editedTask = new Task(editedTask.getDescription(), editedTask.getPriority(), new ByTime(StringUtil.parseStringToTime("2359"))
+                    , editedTask.getByDate(), editedTask.getLocation(), editedTask.getTags()
+                    , editedTask.getStatus());
         }
 
         taskToUpdate.resetData(editedTask);

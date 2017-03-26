@@ -2,10 +2,12 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * Helper functions for handling strings.
@@ -111,5 +113,15 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+    
+    //@@author A0110491U
+    /** 
+     * returns today's date in DDMMYY format in string
+     */
+    public static String getTodayDateInString() {
+        String todaydate = new SimpleDateFormat("ddMMyy").format(new Date());
+        return todaydate;
+    }
+    //@@author
     
 }
