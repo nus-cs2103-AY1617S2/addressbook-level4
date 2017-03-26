@@ -92,7 +92,8 @@ public class XmlAdaptedTask {
             // to make further checks because file may be corrupted ane field is missing
             ZonedDateTime startDateTime = ZonedDateTime.parse(eventStartDate, ParserUtil.DATE_TIME_FORMAT);
             ZonedDateTime endDateTime = ZonedDateTime.parse(eventEndDate, ParserUtil.DATE_TIME_FORMAT);
-            startEndDateTime = Optional.of(new StartEndDateTime(startDateTime, endDateTime));
+            // construct StartEndDateTime with allowPastDateTime set to true because this is loaded from storage
+            startEndDateTime = Optional.of(new StartEndDateTime(startDateTime, endDateTime, true));
         }
 
 
