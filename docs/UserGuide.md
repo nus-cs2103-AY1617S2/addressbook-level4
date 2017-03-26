@@ -8,7 +8,17 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)
-* 3.1. [Viewing Help](#31-viewing-help--help)
+> 3.1. [Viewing Help](#31-viewing-help--help)
+> 3.2. [Adding a task](#32-adding-a-task--add)
+> 3.3. [Listing the tasks](#33-listing-the-tasks-list)
+> 3.4. [Editing a task](#34-editing-an-existing-task-edit)
+> 3.5. [Deleting a task](#35-deleting-a-task-delete)
+> 3.6. [Completing a task](#36-completing-a-task-complete)
+> 3.7. [Uncompleting a task](#37-uncompleting-a-task-uncomplete)
+> 3.8. [Search for tasks](#38-searching-for-tasks-find)
+> 3.9. [Undo previous action](#39-undo-ing-previous-action--undo)
+> 3.10. [Redo previous action](#310-redo-ing-previous-action--redo)
+> 3.11. [Saving the task manager](#312-saving-the-tasks)
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -44,12 +54,12 @@ up doTASK, as well as guide you on how to use it to make you more efficient in p
 Allows you to view the list of commands available in doTASK via the user guide. <br>
 Format: `help`
 
-### 3.2. Adding a Task : `add`
+### 3.2. Adding a task : `add`
 There are a total of 5 parameters : `TASK_NAME` , `PRIORITY_LEVEL` , `DEADLINE` , `INFORMATION`, `TAGS`.<br>
 > `taskname` is mandatory. The rest of the parameters are optional.<br>
 > User can add a task with any of the optional parameters, mentioned from [3.2.2](#322-adds-a-task-with-priority-level-) - [3.2.5](#325-adds-a-task-with-tags).
 
-#### 3.2.1 Adds a floating task.<br>
+#### 3.2.1. Adds a floating task.<br>
 > * Floating tasks are tasks that excludes other parameters. Priority level, deadline, information and taggings are excluded. <br>
 Format: `add TASK_NAME`
 
@@ -57,7 +67,7 @@ Example:
 > I want to buy a packet of milk.<br>
 * add Buy Milk
 
-#### 3.2.2 Adds a task with `PRIORITY_LEVEL`. <br>
+#### 3.2.2. Adds a task with `PRIORITY_LEVEL`. <br>
 Format: `add TASK_NAME [p/PRIORITY_LEVEL]`
   > * `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
 
@@ -65,7 +75,7 @@ Example:
 > I want to buy a packet of milk. Highest priority as it is urgent.<br>
 * add Buy Milk p/1
 
-#### 3.2.3 Adds a task with `DEADLINE`. <br>
+#### 3.2.3. Adds a task with `DEADLINE`. <br>
 Format: `add TASK_NAME [d/DEADLINE]`
    > * `DEADLINE` can be entered in the format of "date month", "month date", "date month year" or "month date year". <br>
 	 > * If no year is specified, the current year of the system will be used as the year of the deadline.<br>
@@ -76,7 +86,7 @@ Examples:
 > I want to buy a packet of milk by 17 March 2017.
 * add Buy Milk d/17-Mar-2017
 
-#### 3.2.4 Adds a task with `INFORMATION`.<br>
+#### 3.2.4. Adds a task with `INFORMATION`.<br>
 Format: `add TASK_NAME [i/INFORMATION]`
    > * `INFORMATION` refers to the details of the task.<br>
 
@@ -84,7 +94,7 @@ Examples:
 > I want to buy a packet of milk, HL brand 1.5 Litres.<br>
 * add Buy Milk i/HL Milk 1.5 Litres
 
-#### 3.2.5 Adds a task with `TAGS`.<br>
+#### 3.2.5. Adds a task with `TAGS`.<br>
 Format: `add TASK_NAME [t/TAGS]`
    > * `TAGS` refers to the tags of the task.<br>
 
@@ -124,7 +134,7 @@ Format: `list t/TAGS...`
 Examples:
 * `list t/CS3230 t/Work`
 
-### 3.4. Editing an existing task: `edit`
+### 3.4. Editing a task: `edit`
 Edits an existing task in the task manager.<br>
 Format: `edit i/INDEX [n/TASK_NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
 
@@ -148,7 +158,7 @@ Examples:
 * `delete 2`
 * `delete 5`
 
-### 3.6. Completion of a task: `complete`
+### 3.6. Completing a task: `complete`
 
 Marks the specified task in the "Uncompleted" list as complete.<br>
 Format: `complete INDEX_NUMBER`
@@ -160,7 +170,7 @@ Example:
 * `complete 2`
 > The task indicated by index number 2 in the "Uncompleted" list section will be marked as completed and shifted over the the "Completed" list section.
 
-### 3.7 Uncomplete a task: `uncomplete`
+### 3.7 Uncompleting a task: `uncomplete`
 
 Marks the specified task in the "Completed" list as uncomplete.<br>
 Format: `uncomplete INDEX_NUMER`
@@ -172,7 +182,7 @@ Example:
 * `uncomplete 2`
 > The task indicated by index number 2 in the "Completed" list section will be marked as completed and shifted over the the "Uncompleted" list section.
 
-### 3.8. Search for tasks: `find`
+### 3.8. Searching for tasks: `find`
 
 Searches for tasks based on keywords that you want.<br>
 
@@ -183,20 +193,20 @@ Format: `find KEYWORD`
 Examples:
 * `find potato`
 
-### 3.9. Undo previous action : `undo`
+### 3.9. Undo-ing previous action : `undo`
 
 Reverses previous action that you've made.<br>
 Format : `undo`
 > The command last executed will be reversed.
 > Only 1 command will be reversed at a time.
 
-### 3.10. Redo previous action : `redo`
+### 3.10. Redo-ing previous action : `redo`
 
 Reverses previous `undo` that you've made.<br>
 Format : `redo`
 > Any previous `undo` will be reversed, in successive order.
 
-### 3.12. Saving the tasks
+### 3.12. Saving the task manager
 
 Upon creation of tasks, the tasks will be automatically saved in the folder where the program is stored in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
