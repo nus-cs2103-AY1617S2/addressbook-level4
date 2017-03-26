@@ -17,7 +17,7 @@ public class BeginDate {
      * The first character of the begin date must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
+    public static final String BEGINDATE_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
@@ -28,7 +28,7 @@ public class BeginDate {
      */
     public BeginDate(String address) throws IllegalValueException {
         assert address != null;
-        if (!isValidAddress(address)) {
+        if (!isValidBeginDate(address)) {
             throw new IllegalValueException(MESSAGE_BEGINDATE_CONSTRAINTS);
         }
         this.value = address;
@@ -37,8 +37,8 @@ public class BeginDate {
     /**
      * Returns true if a given string is a valid task email.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+    public static boolean isValidBeginDate(String test) {
+        return test.matches(BEGINDATE_VALIDATION_REGEX);
     }
 
     @Override

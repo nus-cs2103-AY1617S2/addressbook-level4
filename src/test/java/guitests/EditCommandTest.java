@@ -95,7 +95,6 @@ public class EditCommandTest extends TodoListGuiTest {
         assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 d/");
-
         assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 s/yahoo!!!");
