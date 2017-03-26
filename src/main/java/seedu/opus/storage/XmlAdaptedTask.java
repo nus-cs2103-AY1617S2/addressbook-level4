@@ -52,7 +52,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         priority = source.getPriority().isPresent() ? source.getPriority().get().getValue().name() : null;
-        status = source.getStatus().value;
+        status = source.getStatus().toString();
         note = source.getNote().isPresent() ? source.getNote().get().toString() : null;
         startTime = source.getStartTime().isPresent() ? source.getStartTime().get().toString() : null;
         endTime = source.getEndTime().isPresent() ? source.getEndTime().get().toString() : null;
