@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
