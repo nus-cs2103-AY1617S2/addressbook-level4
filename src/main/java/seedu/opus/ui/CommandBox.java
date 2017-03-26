@@ -5,9 +5,11 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.opus.commons.core.LogsCenter;
+import seedu.opus.commons.core.Trie;
 import seedu.opus.commons.events.ui.NewResultAvailableEvent;
 import seedu.opus.commons.util.FxViewUtil;
 import seedu.opus.logic.Logic;
@@ -20,6 +22,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
 
     private final Logic logic;
+    private final Trie autocompleteTrie;
 
     @FXML
     private TextField commandTextField;
@@ -27,7 +30,9 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
+        this.autocompleteTrie = new Trie();
         addToPlaceholder(commandBoxPlaceholder);
+        listenForTab();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -53,6 +58,16 @@ public class CommandBox extends UiPart<Region> {
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
+    }
+
+    private void listenForTab() {
+        commandTextField.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.TAB)) {
+                e.consume();
+                commandTextField.setText("Autocomplete bitch");
+                commandTextField.positionCaret(commandTextField.getText().length());
+            }
+        });
     }
 
 
