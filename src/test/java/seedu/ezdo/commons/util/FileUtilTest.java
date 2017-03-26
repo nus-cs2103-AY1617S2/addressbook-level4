@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,6 +37,15 @@ public class FileUtilTest {
         File mock = mock(File.class);
         when(mock.exists()).thenReturn(true);
         assertFalse(FileUtil.createFile(mock));
+    }
+
+    @Test
+    public void createDirs_missingDir_throwsIOException() throws Exception {
+        thrown.expect(IOException.class);
+        File dir = mock(File.class);
+        when(dir.exists()).thenReturn(false);
+        when(dir.mkdirs()).thenReturn(false);
+        FileUtil.createDirs(dir);
     }
 
 }
