@@ -33,6 +33,7 @@ public class AddCommand extends Command {
 
     private final Task toAdd;
 
+    //@@author A0140023E
     /**
      * Creates an AddCommand using raw values.
      *
@@ -40,42 +41,68 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name, Optional<String> deadlineDateTimeArgs, Optional<String> startDateTimeArgs,
                       Optional<String> endDateTimeArgs, Set<String> tags) throws IllegalValueException {
+        // TODO the init method names may be improved
+        final Optional<Deadline> deadline = initDeadline(deadlineDateTimeArgs);
+        final Optional<StartEndDateTime> startEndDateTime =
+                initStartEndDateTime(startDateTimeArgs, endDateTimeArgs);
+        final UniqueTagList tagList = initTagList(tags);
 
-        // TODO Improve SLAP initializeDeadline and maybe use lambda?
-        Optional<Deadline> deadline = Optional.empty();
-        if (deadlineDateTimeArgs.isPresent()) {
-            ZonedDateTime deadlineDateTime = ParserUtil.parseDateTimeString(deadlineDateTimeArgs.get());
-            deadline = Optional.of(new Deadline(deadlineDateTime));
-        }
-
-        // TODO Improve SLAP initializeStartEndDateTime and maybe use lambda?
-        Optional<StartEndDateTime> startEndDateTime = Optional.empty();
-        boolean isStartDateTimePresent = startDateTimeArgs.isPresent();
-
-        if (isStartDateTimePresent) {
-            if (!endDateTimeArgs.isPresent()) {
-                throw new IllegalValueException("End date must exist if there is a start date");
-                // TODO probably not worth but might want to consider allowing endDateTime to be optional
-            }
-            ZonedDateTime startDateTime = ParserUtil.parseDateTimeString(startDateTimeArgs.get());
-            ZonedDateTime endDateTime = ParserUtil.parseDateTimeString(endDateTimeArgs.get());
-            startEndDateTime = Optional.of(new StartEndDateTime(startDateTime, endDateTime));
-        }
-
-        // TODO Improve SLAP initializeTags
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-
+        // maybe to rearrange the tag to be before
         this.toAdd = new Task(
                 new Name(name),
                 deadline,
                 startEndDateTime,
-                new UniqueTagList(tagSet)
+                tagList
         );
     }
 
+    /**
+     * Returns an Optional of {@link Deadline} if deadline arguments are present, otherwise return an empty Optional.
+     * @throws IllegalValueException if the deadline string cannot be parsed as date
+     */
+    private Optional<Deadline> initDeadline(Optional<String> deadlineDateTimeArgs)
+            throws IllegalValueException {
+        if (deadlineDateTimeArgs.isPresent()) {
+            ZonedDateTime deadlineDateTime = ParserUtil.parseDateTimeString(deadlineDateTimeArgs.get());
+            return Optional.of(new Deadline(deadlineDateTime));
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Returns an Optional of {@link StartEndDateTime} if Start and End Date time arguments are
+     * present, otherwise return an empty Optional.
+     * @throws IllegalValueException if a StartEndDateTime cannot be constructed
+     */
+    private Optional<StartEndDateTime> initStartEndDateTime(Optional<String> startDateTimeArgs,
+            Optional<String> endDateTimeArgs) throws IllegalValueException {
+        if (startDateTimeArgs.isPresent()) {
+            if (!endDateTimeArgs.isPresent()) {
+                throw new IllegalValueException("End date must exist if there is a start date");
+                // TODO currently not worth the effort but can consider allowing endDateTime to be
+                // optional in the future
+            }
+
+            ZonedDateTime startDateTime = ParserUtil.parseDateTimeString(startDateTimeArgs.get());
+            ZonedDateTime endDateTime = ParserUtil.parseDateTimeString(endDateTimeArgs.get());
+            return Optional.of(new StartEndDateTime(startDateTime, endDateTime));
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Returns initialized tags as a {@link UniqueTagList}
+     * @throws IllegalValueException if there is a tag name that is invalid in the given tags set
+     */
+    private UniqueTagList initTagList(Set<String> tags) throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        return new UniqueTagList(tagSet);
+    }
+
+    //@@author
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
