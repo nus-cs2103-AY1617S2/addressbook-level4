@@ -11,7 +11,6 @@ import seedu.opus.model.task.DateTime;
 import seedu.opus.model.task.Note;
 import seedu.opus.model.task.Priority;
 import seedu.opus.model.task.ReadOnlyTask;
-import seedu.opus.model.task.Status;
 
 public class TaskCard extends UiPart<Region> {
 
