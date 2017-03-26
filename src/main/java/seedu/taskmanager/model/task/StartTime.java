@@ -21,6 +21,7 @@ public class StartTime {
 
     public final String value;
 
+    // @@author A0139520L
     /**
      * Validates given start time.
      *
@@ -45,6 +46,7 @@ public class StartTime {
                 || test.matches(EMPTY_FIELD);
     }
 
+    // @@author
     @Override
     public String toString() {
         return value;

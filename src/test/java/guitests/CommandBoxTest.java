@@ -18,6 +18,7 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     private ArrayList<String> defaultStyleOfCommandBox;
     private ArrayList<String> errorStyleOfCommandBox;
 
+    // @@author A0141102H
     @Before
     public void setUp() {
         defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());

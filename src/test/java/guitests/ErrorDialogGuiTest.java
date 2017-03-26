@@ -11,6 +11,7 @@ import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
 
 public class ErrorDialogGuiTest extends TaskManagerGuiTest {
 
+    // @@author A0141102H
     @Test
     public void showErrorDialogs() throws InterruptedException {
         //Test DataSavingExceptionEvent dialog

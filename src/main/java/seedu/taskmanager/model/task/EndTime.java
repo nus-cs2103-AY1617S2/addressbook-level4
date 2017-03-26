@@ -20,6 +20,7 @@ public class EndTime {
 
     public final String value;
 
+    // @@author A0139520L
     /**
      * Validates given end time.
      *
@@ -44,6 +45,7 @@ public class EndTime {
                 || test.matches(EMPTY_FIELD);
     }
 
+    // @@author
     @Override
     public String toString() {
         return value;

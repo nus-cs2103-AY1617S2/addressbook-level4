@@ -19,7 +19,6 @@ public class Config {
     private String taskManagerFilePath = "data/taskmanager.xml";
     private String taskManagerName = "MyTaskManager";
 
-
     public String getAppTitle() {
         return appTitle;
     }
@@ -48,6 +47,7 @@ public class Config {
         return taskManagerFilePath;
     }
 
+    // @@author A0142418L
     public void setTaskManagerFilePath(String taskManagerFilePath) throws DuplicateTaskManagerFilePathException {
         if (this.taskManagerFilePath.equals(taskManagerFilePath)) {
             throw new DuplicateTaskManagerFilePathException();
@@ -55,7 +55,8 @@ public class Config {
             this.taskManagerFilePath = taskManagerFilePath;
         }
     }
-
+    
+    // @@author
     public String getTaskManagerName() {
         return taskManagerName;
     }
@@ -64,6 +65,7 @@ public class Config {
         this.taskManagerName = taskManagerName;
     }
 
+    // @@author A0142418L
     /**
      * Signals that the file path specified is the same as the current one.
      */
@@ -72,20 +74,20 @@ public class Config {
             super("Operation would result in duplicate tasks");
         }
     }
-
+    
+    // @@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof Config)) { //this handles null as well.
+        if (!(other instanceof Config)) { // this handles null as well.
             return false;
         }
 
         Config o = (Config) other;
 
-        return Objects.equals(appTitle, o.appTitle)
-                && Objects.equals(logLevel, o.logLevel)
+        return Objects.equals(appTitle, o.appTitle) && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
                 && Objects.equals(taskManagerFilePath, o.taskManagerFilePath)
                 && Objects.equals(taskManagerName, o.taskManagerName);

@@ -26,6 +26,7 @@ public interface Model {
     /** Deletes the task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
+    // @@author A0142418L
     /** Deletes tasks by their date. */
     void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException;
 
@@ -33,6 +34,7 @@ public interface Model {
     void deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws UniqueTaskList.TaskNotFoundException;
 
+    // @@author
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
@@ -49,8 +51,10 @@ public interface Model {
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
 
+    // @@author A0139520L
     void markTask(int filteredTaskListIndex) throws DuplicateTaskException;
 
+    // @@author
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
@@ -66,6 +70,7 @@ public interface Model {
      */
     void updateFilteredTaskList(Set<String> keywords);
 
+    // @@author A0139520L
     /**
      * Updates the filter of the filtered task list to filter by completed tasks
      */

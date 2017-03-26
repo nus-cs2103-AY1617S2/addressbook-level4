@@ -18,6 +18,7 @@ public class Date {
 
     public final String value;
 
+    // @@author A0139520L
     /**
      * Validates given date.
      *
@@ -41,6 +42,7 @@ public class Date {
                 || test.matches(EMPTY_FIELD);
     }
 
+    // @@author
     @Override
     public String toString() {
         return value;

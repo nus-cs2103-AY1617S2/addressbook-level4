@@ -69,6 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    // @@author A0142418L
     @Override
     public synchronized void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
             throws TaskNotFoundException {
@@ -102,6 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    // @@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
@@ -119,6 +121,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    // @@author A0139520L
     @Override
     public void markTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
 
@@ -137,6 +140,7 @@ public class ModelManager extends ComponentManager implements Model {
     // =========== Filtered Person List Accessors
     // =============================================================
 
+    // @@author
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
@@ -153,11 +157,13 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
     }
 
+    // @@author A0139520L
     @Override
     public void updateFilteredTaskListToShowByCompletion(boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompletedQualifier(isComplete)));
     }
 
+    // @@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -223,7 +229,8 @@ public class ModelManager extends ComponentManager implements Model {
             return "task name=" + String.join(", ", taskKeyWords);
         }
     }
-
+    
+    // @@author A0139520L
     private class CompletedQualifier implements Qualifier {
         private boolean isComplete;
 
