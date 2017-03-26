@@ -147,11 +147,7 @@ public class EzDo implements ReadOnlyEzDo {
 
     public boolean removeTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException {
         for (int i = 0; i < tasksToKill.size(); i++) {
-            if (tasks.remove(tasksToKill.get(i))) {
-                continue;
-            } else {
-                throw new UniqueTaskList.TaskNotFoundException();
-            }
+            tasks.remove(tasksToKill.get(i));
         }
         return true;
     }
