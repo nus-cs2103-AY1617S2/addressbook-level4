@@ -18,8 +18,7 @@ classes/
 /bin/
 # Generated files from Github Flavored Markdown Viewer plugin
 .*.md.html
-# Temporarily ignore Collate files
+# Ignore Collate binaries
 collate
-collated/*
 Collate-GUI.jar
 Collate-TUI.jar
