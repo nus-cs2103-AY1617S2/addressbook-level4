@@ -51,18 +51,19 @@ public class AddCommand extends Command {
      * @throws InvalidDatesException
      */
     public AddCommand(String name, String startDateTime, String endDateTime,
-            String information, String frequency,
-            Set<String> categories) throws IllegalValueException, InvalidDatesException, IllegalArgumentException {
+            String information, String frequency, Set<String> categories)
+                    throws IllegalValueException, InvalidDatesException, IllegalArgumentException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
         }
 
         //@@author A0143157J
+        String updatedFreq;
         if (frequency.isEmpty()) {
-            frequency = Frequency.NONE.toString();
+            updatedFreq = Frequency.NONE.toString();
         } else {
-            frequency = frequency.toUpperCase().trim();
+            updatedFreq = frequency.toUpperCase().trim();
         }
 
         DateTime startDateTimeObj = new DateTime(startDateTime);
@@ -90,7 +91,7 @@ public class AddCommand extends Command {
                 startDateTimeObj,
                 endDateTimeObj,
                 new Information(information),
-                new Recurrence(Frequency.valueOf(frequency)),
+                new Recurrence(Frequency.valueOf(updatedFreq)),
                 new UniqueCategoryList(categorySet)
         );
     }
