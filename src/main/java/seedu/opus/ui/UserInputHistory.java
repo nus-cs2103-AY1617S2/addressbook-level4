@@ -1,3 +1,4 @@
+//@@author A0148087W
 package seedu.opus.ui;
 
 import java.util.LinkedList;
@@ -7,7 +8,6 @@ import java.util.logging.Logger;
 
 import seedu.opus.commons.core.LogsCenter;
 
-//@@author A0148087W
 /**
  * Stores and manage user inputs in ui.CommandBox
  */
@@ -46,11 +46,12 @@ public class UserInputHistory {
      * @return Previous user input Optional<String> if available, null otherwise
      */
     public Optional<String> getPreviousUserInput() {
-        String previousInput;
+        assert iterator != null;
         if (!iterator.hasNext()) {
+            current = null;
             return Optional.empty();
         }
-        previousInput = iterator.next();
+        String previousInput = iterator.next();
         if (!previousInput.equals(current)) {
             current = previousInput;
             return Optional.ofNullable(current);
@@ -65,11 +66,12 @@ public class UserInputHistory {
      * @return Preceding user input Optional<String> if available, null otherwise
      */
     public Optional<String> getPrecedingUserInput() {
-        String precedingInput = null;
+        assert iterator != null;
         if (!iterator.hasPrevious()) {
+            current = null;
             return Optional.empty();
         }
-        precedingInput = iterator.previous();
+        String precedingInput = iterator.previous();
         if (!precedingInput.equals(current)) {
             current = precedingInput;
             return Optional.ofNullable(current);
