@@ -8,10 +8,13 @@ import java.util.Set;
 import seedu.task.commons.exceptions.IllegalTimingOrderException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.Model;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
+import seedu.task.model.task.RecurringFrequency;
+import seedu.task.model.task.RecurringTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
@@ -32,13 +35,14 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
+    private RecurringTask toAddRecur = null;
 
     /**
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String startTiming, String endTiming, Set<String> tags)
+    public AddCommand(String name, String priority, String startTiming, String endTiming, String recur, Set<String> tags)
             throws IllegalValueException, IllegalTimingOrderException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -51,6 +55,19 @@ public class AddCommand extends Command {
                 new Timing(endTiming),
                 new UniqueTagList(tagSet)
                 );
+
+        if (recur != null) {
+            this.toAddRecur = new RecurringTask(
+                    new Description(name),
+                    new Priority(priority),
+                    new Timing(startTiming),
+                    new Timing(endTiming),
+                    new UniqueTagList(tagSet),
+                    new RecurringFrequency(recur)
+                    );
+            toAdd.setRecurring(true);
+        }
+
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
@@ -61,6 +78,9 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            if (toAddRecur != null) {
+                Model.recurringTaskList.add(toAddRecur);
+            }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

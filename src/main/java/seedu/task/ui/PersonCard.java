@@ -13,7 +13,7 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
-//@@author A0164212U
+    //@@author A0164212U
     @FXML
     private Label description;
     @FXML
@@ -25,6 +25,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label endTiming;
     @FXML
+    private Label recurring;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(ReadOnlyTask person, int displayedIndex) {
@@ -35,12 +37,16 @@ public class PersonCard extends UiPart<Region> {
         priority.setStyle("-fx-background-color: " + person.getPriority().getPriorityColor() + ";");
         startTiming.setText("Start Timing: " + person.getStartTiming().value);
         endTiming.setText("End Timing: " + person.getEndTiming().value);
+        if (person.isRecurring()) {
+            recurring.setText("Recurring Task");
+            recurring.setStyle("-fx-background-color: pink;");
+        }
         initTags(person);
     }
-//@@author
+    //@@author
 
     private void initTags(ReadOnlyTask person) {
-//        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        //        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         person.getTags().forEach(tag -> {
             String complete = "complete";

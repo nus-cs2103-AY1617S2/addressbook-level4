@@ -17,6 +17,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     private Timing startTiming;
     private Timing endTiming;
     private boolean complete;
+    private boolean recurring;
 
     private UniqueTagList tags;
 
@@ -32,6 +33,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.complete = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from
         // changes in the arg list
+        this.recurring = false;
     }
 
     /**
@@ -131,13 +133,26 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     @Override
+    public RecurringFrequency getFrequency() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return getAsText();
     }
 
+    public boolean isRecurring() {
+        return recurring;
+    }
+
+    public void setRecurring(boolean recurring) {
+        this.recurring = recurring;
+    }
+
     /**
      * Results in Tasks sorted by completed state, followed by priority, endTiming, startTiming
-     * and lastly by description.
+     * and lastly by frequency.
      * Note: If a and b are tasks and a.compareTo(b) == 0, that does not imply
      * a.equals(b).
      */

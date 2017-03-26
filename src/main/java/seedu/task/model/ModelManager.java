@@ -106,6 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -130,6 +131,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -143,22 +145,22 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return
-                (nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
-                    .findAny()
-                    .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
-                        .findAny()
-                        .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTiming().value, keyword))
-                        .findAny()
-                        .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTiming().value, keyword))
-                        .findAny()
-                        .isPresent());
+                    (nameKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
+                            .findAny()
+                            .isPresent()) ||
+                    (nameKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
+                            .findAny()
+                            .isPresent()) ||
+                    (nameKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTiming().value, keyword))
+                            .findAny()
+                            .isPresent()) ||
+                    (nameKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTiming().value, keyword))
+                            .findAny()
+                            .isPresent());
         }
 
         @Override
