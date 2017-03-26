@@ -16,35 +16,35 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         try {
-            StartTime SAMPLE_START_DATE = new StartTime(NattyDateUtil.parseSingleDate("03/06/17 0000"));
-            EndTime SAMPLE_END_DATE = new EndTime(NattyDateUtil.parseSingleDate("03/07/17 0000"));
+            StartTime sampleStartDate = new StartTime(NattyDateUtil.parseSingleDate("03/06/17 0000"));
+            EndTime sampleEndDate = new EndTime(NattyDateUtil.parseSingleDate("03/07/17 0000"));
 
             return new Task[] {
-                new Task(new Name("Alice Pauline"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("Alice Pauline"), sampleStartDate, sampleEndDate,
                         new CompletionStatus(false),
                         new UniqueTagList("friends")),
-                new Task(new Name("Benson Meier"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("Benson Meier"), sampleStartDate, sampleEndDate,
                         new CompletionStatus(false),
                         new UniqueTagList("owesMoney", "friends")),
-                new Task(new Name("Carl Kurz"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("Carl Kurz"), sampleStartDate, sampleEndDate,
                         new CompletionStatus(true),
                         new UniqueTagList("test")),
-                new Task(new Name("Daniel Meier"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("Daniel Meier"), sampleStartDate, sampleEndDate,
                         new CompletionStatus(false),
                         new UniqueTagList("test")),
-                new Task(new Name("Elle Meyer"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("Elle Meyer"), sampleStartDate, sampleEndDate,
                         new CompletionStatus(false),
                         new UniqueTagList("test")),
-                new Task(new Name("Fiona Kunz"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("Fiona Kunz"), sampleStartDate, sampleEndDate,
                         new CompletionStatus(true),
                         new UniqueTagList("test")),
-                new Task(new Name("George Best"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("George Best"), sampleStartDate, sampleEndDate,
                             new CompletionStatus(true),
                             new UniqueTagList("test")),
-                new Task(new Name("Hoon Meier"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("Hoon Meier"), sampleStartDate, sampleEndDate,
                             new CompletionStatus(true),
                             new UniqueTagList("test")),
-                new Task(new Name("Ida Mueller"), SAMPLE_START_DATE, SAMPLE_END_DATE,
+                new Task(new Name("Ida Mueller"), sampleStartDate, sampleEndDate,
                             new CompletionStatus(false),
                             new UniqueTagList("test"))
                 };

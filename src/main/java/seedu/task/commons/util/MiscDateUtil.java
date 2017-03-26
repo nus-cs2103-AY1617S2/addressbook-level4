@@ -16,7 +16,7 @@ public class MiscDateUtil {
         }
 
         if (Math.abs(first.getTime() - second.getTime()) < allowance) {
-           return true;
+            return true;
         }
 
         return false;
