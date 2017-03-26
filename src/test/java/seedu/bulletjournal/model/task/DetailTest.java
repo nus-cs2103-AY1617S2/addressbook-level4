@@ -16,6 +16,7 @@ public class DetailTest {
         // valid addresses
         assertTrue(BeginDate.isValidBeginDate("Blk 456, Den Road, #01-355"));
         assertTrue(BeginDate.isValidBeginDate("-")); // one character
-        assertTrue(BeginDate.isValidBeginDate("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(BeginDate.isValidBeginDate("Leng Inc; 1234 Market St; "
+                + "San Francisco CA 2349879; USA")); // long address
     }
 }
