@@ -1,8 +1,5 @@
 package seedu.task.ui;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -23,6 +20,7 @@ import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
+import seedu.task.model.task.Timing;
 
 /**
  * The manager of the UI component.
@@ -52,9 +50,8 @@ public class UiManager extends ComponentManager implements Ui {
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
-        //@@author A0164212U
         try {
-            logic.execute("find " + getTodayDate());
+            logic.execute("find " + Timing.getTodayDate());
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
@@ -64,14 +61,6 @@ public class UiManager extends ComponentManager implements Ui {
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
-
-    private String getTodayDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        String dateString = dateFormat.format(date);
-        return dateString;
-    }
-    //@@author
 
     @Override
     public void stop() {

@@ -1,14 +1,15 @@
 package seedu.task.logic.commands;
 
+import static seedu.task.commons.core.Messages.MESSSAGE_INVALID_TIMING_ORDER;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.task.commons.exceptions.IllegalTimingOrderException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
-
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.Task;
@@ -38,7 +39,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String name, String priority, String startTiming, String endTiming, Set<String> tags)
-            throws IllegalValueException {
+            throws IllegalValueException, IllegalTimingOrderException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -49,7 +50,10 @@ public class AddCommand extends Command {
                 new Timing(startTiming),
                 new Timing(endTiming),
                 new UniqueTagList(tagSet)
-        );
+                );
+        if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
+            throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
+        }
     }
 
     @Override

@@ -1,8 +1,5 @@
 package seedu.task.ui;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -16,6 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.ui.NewResultAvailableEvent;
 import seedu.task.commons.util.FxViewUtil;
+import seedu.task.model.task.Timing;
 
 /**
  * A ui for the status bar that is displayed at the header of the application.
@@ -25,13 +23,8 @@ public class ResultDisplay extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplay.fxml";
 
-    //@@author A0164212U
-    DateFormat df = new SimpleDateFormat("MMMM dd, YYYY");
-    Date dateobj = new Date();
-    String date = df.format(dateobj);
-    private final StringProperty displayed = new SimpleStringProperty("Welcome!\nToday is " + date +
-        ".\nYour tasks for today are shown below.\nType 'list' to display all tasks.");
-    //@@author
+    private final StringProperty displayed = new SimpleStringProperty("Welcome!\nToday is " + Timing.getTodayDate() +
+            ".\nYour tasks for today are shown below.\nType 'list' to display all tasks.");
 
     @FXML
     private AnchorPane mainPane;

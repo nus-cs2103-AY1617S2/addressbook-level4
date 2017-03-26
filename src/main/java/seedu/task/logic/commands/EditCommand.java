@@ -1,9 +1,11 @@
 package seedu.task.logic.commands;
 
+import static seedu.task.commons.core.Messages.MESSSAGE_INVALID_TIMING_ORDER;
+
 import java.util.List;
 
 import seedu.task.commons.core.Messages;
-
+import seedu.task.commons.exceptions.IllegalTimingOrderException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
@@ -58,7 +60,12 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask;
+        try {
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        } catch (IllegalTimingOrderException e) {
+            throw new CommandException(MESSSAGE_INVALID_TIMING_ORDER);
+        }
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -72,16 +79,21 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalTimingOrderException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+            EditTaskDescriptor editTaskDescriptor) throws IllegalTimingOrderException {
         assert taskToEdit != null;
 
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToEdit::getStartTiming);
-        Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToEdit::getStartTiming);
+        Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToEdit::getEndTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+
+        if (!Timing.checkTimingOrder(updatedStartDate, updatedEndDate)) {
+            throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
+        }
 
         return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags);
     }
