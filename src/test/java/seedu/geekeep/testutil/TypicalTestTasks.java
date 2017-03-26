@@ -10,32 +10,32 @@ import seedu.geekeep.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask dance, japan, exercise, spain, hackathon, fishing, song, meeting, spend;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withTitle("Alice Pauline")
+            dance = new TaskBuilder().withTitle("Dance Camp")
                     .withLocation("123, Jurong West Ave 6, #08-111").withStartDateTime("01-04-17 1630")
                     .withEndDateTime("01-05-17 1630")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withTitle("Benson Meier").withLocation("311, Clementi Ave 2, #02-25")
+            japan = new TaskBuilder().withTitle("Trip to Japan").withLocation("Japan")
                     .withStartDateTime("01-04-17 1630").withEndDateTime("01-05-17 1630")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withTitle("Carl Kurz").withEndDateTime("01-05-17 1630")
+            exercise = new TaskBuilder().withTitle("Physical Exercise").withEndDateTime("01-05-17 1630")
                     .withStartDateTime("01-04-17 1630").withLocation("wall street").build();
-            daniel = new TaskBuilder().withTitle("Daniel Meier").withEndDateTime("01-05-17 1630")
-                    .withStartDateTime("01-04-17 1630").withLocation("10th street").build();
-            elle = new TaskBuilder().withTitle("Elle Meyer").withEndDateTime("01-05-17 1630")
-                    .withStartDateTime("01-04-17 1630").withLocation("michegan ave").build();
-            fiona = new TaskBuilder().withTitle("Fiona Kunz").withEndDateTime("01-05-17 1630")
+            spain = new TaskBuilder().withTitle("Trip to Spain").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("Spain").build();
+            hackathon = new TaskBuilder().withTitle("Hackathon").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("silicon valley").build();
+            fishing = new TaskBuilder().withTitle("Go Fishing").withEndDateTime("01-05-17 1630")
                     .withStartDateTime("01-04-17 1630").withLocation("little tokyo").build();
-            george = new TaskBuilder().withTitle("George Best").withEndDateTime("01-05-17 1630")
+            song = new TaskBuilder().withTitle("Compose Songs").withEndDateTime("01-05-17 1630")
                     .withStartDateTime("01-04-17 1630").withLocation("4th street").build();
 
             // Manually added
-            hoon = new TaskBuilder().withTitle("Hoon Meier").withEndDateTime("01-05-17 1630")
+            meeting = new TaskBuilder().withTitle("Group Meeting").withEndDateTime("01-05-17 1630")
                     .withStartDateTime("01-04-17 1630").withLocation("little india").build();
-            ida = new TaskBuilder().withTitle("Ida Mueller").withEndDateTime("01-05-17 1630")
+            spend = new TaskBuilder().withTitle("Spend 30 Days").withEndDateTime("01-05-17 1630")
                     .withStartDateTime("01-04-17 1630").withLocation("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{dance, japan, exercise, spain, hackathon, fishing, song};
     }
 
     public GeeKeep getTypicalGeeKeep() {
