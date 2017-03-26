@@ -15,6 +15,7 @@ import seedu.watodo.logic.commands.AddCommand;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.IncorrectCommand;
 
+//@@author A0143076J
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -26,7 +27,7 @@ public class AddCommandParser {
 
     public static final String EXTRACT_ARGS_REGEX = "\\s*" + "%1$s" + "\\s*" + "%2$s" + "\\s*";
 
-    /** Creates an AddCommandParser object that contains a dateTimeParser object */
+    /** Creates an AddCommandParser object that creates a new dateTimeParser object to parse date args */
     public AddCommandParser() {
         dateTimeParser = new DateTimeParser();
         tags = new HashSet<String>();
@@ -56,8 +57,7 @@ public class AddCommandParser {
     }
 
     /**
-     *
-     * @param argsWithDatesExtracted
+     * Finds all instances of the PREFIX_TAG in the given arg and returns a set of all the tags
      */
     private void extractTags(String argsWithDatesExtracted) {
         ArgumentTokenizer tagsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
@@ -66,18 +66,19 @@ public class AddCommandParser {
             List<String> tags = tagsTokenizer.getAllValues(PREFIX_TAG).get();
             List<String> parsedTags = new ArrayList<String>();
             for (String tag : tags) {
-                parsedTags.add(tag.split("[\\s+]", 2)[0]);
+                parsedTags.add(tag.split("[\\s+]", 2)[0]);  //tag name is only until the first whitespace
             }
             this.tags = ParserUtil.toSet(Optional.of(parsedTags));
         }
     }
 
     /**
-     *
+     * Removes all instances of the PREFIX_TAG and the corresponding tag name in the arg
+     * to return the resulting task description
      */
     private String trimArgsOfTags(String args) {
         String tagArgs = String.format(EXTRACT_ARGS_REGEX, PREFIX_TAG.getPrefix() + "(\\S+)", "");
-        return args.replaceAll(tagArgs, " ").trim();
+        return args.replaceAll(tagArgs, " ").trim();  //to remove excess whitespace
     }
 
 }

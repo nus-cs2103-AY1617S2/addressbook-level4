@@ -29,8 +29,9 @@ public class AddCommand extends Command {
 
     private Task toAdd;
 
+    //@@author A0143076J
     /**
-     * Creates an AddCommand using raw values
+     * Creates an AddCommand using raw values and create a new Task according to the taskType
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
@@ -56,7 +57,7 @@ public class AddCommand extends Command {
         case EVENT:
             DateTime start = new DateTime(startDate);
             DateTime end = new DateTime(endDate);
-            if (start.isLater(end)) {
+            if (start.isLater(end)) { //checks if the end time is later than start time
                 throw new IllegalValueException("End date must be later than start date!");
             }
             this.toAdd = new Task(new Description(description), start, end, new UniqueTagList(tagSet));

@@ -16,11 +16,9 @@ import com.joestelmach.natty.Parser;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.task.DateTime;
 
-//@@author
+//@@author A0143076J
 /**
- *
- *
- *
+ * Parses out the startDate and endDate, if any, in a given String of args
  */
 public class DateTimeParser {
 
@@ -39,10 +37,8 @@ public class DateTimeParser {
     }
 
     /**
-     *
-     * @param args
-     * @return
-     * @throws IllegalValueException
+     * Determines if the combination of dateTime prefixes are valid, and if so, extracts out the
+     * startDate and endDate if they exist
      */
     public void parse(String args) throws IllegalValueException {
         ArgumentTokenizer datesTokenizer = new ArgumentTokenizer(PREFIX_BY, PREFIX_ON,
@@ -57,31 +53,28 @@ public class DateTimeParser {
     }
 
     /**
-     *
-     * @param args
-     * @return
+     * Returns the arg with the dateTime prefixes and dates removed
      */
-    public String trimArgsOfDates(String args) {
+    public String trimArgsOfDates(String arg) {
 
         if (startDate != null) {
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_FROM.getPrefix(), startDate), " ");
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), startDate), " ");
+            arg = arg.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_FROM.getPrefix(), startDate), " ");
+            arg = arg.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), startDate), " ");
         }
         if (endDate != null) {
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_BY.getPrefix(), endDate), " ");
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), endDate), " ");
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_TO.getPrefix(), endDate), " ");
+            arg = arg.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_BY.getPrefix(), endDate), " ");
+            arg = arg.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), endDate), " ");
+            arg = arg.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_TO.getPrefix(), endDate), " ");
         }
-        return args.trim();
+        return arg.trim();
     }
 
 
     /**
      * Checks the type of task(floating, deadline or event) to be added based on
-     * the DATETIME parameters entered by the user.
+     * the dateTime prefixes entered by the user.
      *
-     * @throws IllegalValueException if too many or too few dateTime args are
-     *             entered
+     * @throws IllegalValueException if the combination of dateTime prefixes is not recognized             entered
      */
     private TaskType checkTaskType(ArgumentTokenizer datesTokenizer) throws IllegalValueException {
 
@@ -103,9 +96,10 @@ public class DateTimeParser {
     }
 
     /**
+     * Reads and validates the dates following the dateTime prefix and stores it as startDate
+     * or endDate accordingly
      *
-     * @param datesTokenizer
-     * @throws IllegalValueException
+     * @throws IllegalValueException if the dates format are invalid
      */
     private void extractDates(ArgumentTokenizer datesTokenizer) throws IllegalValueException {
 
@@ -137,7 +131,6 @@ public class DateTimeParser {
         }
     }
 
-
     public TaskType getTaskType() {
         return type;
     }
@@ -147,6 +140,5 @@ public class DateTimeParser {
     public String getEndDate() {
         return endDate;
     }
-
 
 }
