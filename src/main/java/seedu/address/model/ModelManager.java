@@ -11,6 +11,8 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TodoListChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.ReadOnlyTodo;
 import seedu.address.model.todo.Todo;
 import seedu.address.model.todo.UniqueTodoList;
@@ -172,11 +174,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
-
+        private Set<Tag> tagKeyWords;
+        
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-
+        
+        NameQualifier(UniqueTagList tags) {
+            this.tagKeyWords = tags.toSet();
+        }
+        
         @Override
         public boolean run(ReadOnlyTodo todo) {
             return nameKeyWords.stream()
