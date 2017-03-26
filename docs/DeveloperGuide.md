@@ -617,15 +617,17 @@ Use case ends.
 
 **Product Name**
 
-Author: ...
+Author: Trello
 
 Pros:
 
-* ...
-* ...
+* A well constructed GUI
+* Logical flow of task construction
+* A subtle reminder that involves changes in the layout of the taskcard
+* Allows the sharing of information about a task with others
 
 Cons:
 
-* ...
-* ...
+* No calendar
+* No progress chart to indicate the amount of tasks completed
 
