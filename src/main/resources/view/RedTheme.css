@@ -8,7 +8,7 @@
 }
 
 .text-field,.text-area, .split-pane,.tab {
-	-fx-border-color: #2e4053;
+    -fx-border-color: #2e4053;
     -fx-border-width: 2;
 }
 
@@ -19,8 +19,8 @@
 }
 
 .tab {
-	-fx-background-color: #2e4053;
-	-fx-border-radius: 5 5 0 0; /* roundness of border */
+    -fx-background-color: #2e4053;
+    -fx-border-radius: 5 5 0 0; /* roundness of border */
     -fx-background-radius: 8 8 0 0; /* roundness of fill */
 }
 
@@ -39,7 +39,7 @@
 }
 
 .button1 {
-	-fx-background-color: #ff7292;
+    -fx-background-color: #ff7292;
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
     -fx-font-family: "Arial Rounded MT Bold";
@@ -58,7 +58,7 @@
 }
 
 .button2 {
-	-fx-background-color: transparent;
+    -fx-background-color: transparent;
     -fx-background-radius: 50 50 50 50; /* roundness of fill */
 }
 
@@ -82,7 +82,7 @@
 }
 
 #tags .label {
-	-fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: "Arial Rounded MT Bold";
     -fx-text-fill: white;
     -fx-background-color: #146cc8;
     -fx-padding: 1 3 1 3;
@@ -98,18 +98,18 @@
 }
 
 .cell_event {
-	-fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 20px;
 }
 
 .cell_start {
-	-fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 20px;
     -fx-text-fill: #149544;
 }
 
 .cell_due {
-	-fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 20px;
     -fx-text-fill: #e01021;
 }
