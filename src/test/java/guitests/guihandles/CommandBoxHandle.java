@@ -46,7 +46,7 @@ public class CommandBoxHandle extends GuiHandle {
 
     public void pressDownKey() {
         guiRobot.push(KeyCode.DOWN).sleep(500);
-	}
+    }
 
     /**
      * Enters the given input, and autocompletes it by pressing tab for multiple times.
