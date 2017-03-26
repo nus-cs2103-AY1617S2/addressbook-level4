@@ -53,7 +53,7 @@ public class EditCommandParser {
         this.args = indexAndArguments[1];
         String tags[] = getTags();
         try {
-            editTaskDescriptor.setTags(Optional.of(parseTagsForEdit(Arrays.asList(tags))));
+            editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(tags)));
         } catch (IllegalValueException e1) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
@@ -181,14 +181,14 @@ public class EditCommandParser {
      * {@code tags} contain only one element which is an empty string, it will
      * be parsed into a {@code Optional<UniqueTagList>} containing zero tags.
      */
-    private UniqueTagList parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
+    private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
 
         if (tags.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return ParserUtil.parseTags(tagSet);
+        return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
 }
