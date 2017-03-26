@@ -13,8 +13,7 @@ By : `Miao Ling`, `Ian`, `Qi Xiang` and `Dylan`  &nbsp;&nbsp;&nbsp;&nbsp; Since:
 * [Appendix A: User Stories](#appendix-a-user-stories)
 * [Appendix B: Use Cases](#appendix-b-use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d-glossary)
-* [Appendix E : Product Survey](#appendix-e-product-survey)
+* [Appendix D: Product Survey](#appendix-d-product-survey)
 
 
 ## 1. Setting up
@@ -343,17 +342,6 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-### Examples
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-
 ### New User Guide
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
@@ -361,6 +349,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | new user | get help if I enter an invalid command | know that I am using it wrongly and how to correct myself.
 `* * *` | new user | view more information about a particular command | learn how to use various commands.
 `* * *` | new user | view the features offered by this task manager | identify what I can actually do with this task manager.
+
 
 ### Essential Functions
 Priority | As a ... | I want to ... | So that I can...
@@ -604,13 +593,7 @@ Use case ends.
 5. Commands should take less than 3 seconds to run.
 6. Should come with automated unit tests and open source code.
 
-## Appendix D : Glossary
-
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
-## Appendix E : Product Survey
+## Appendix D : Product Survey
 
 **Google Tasks**
 
