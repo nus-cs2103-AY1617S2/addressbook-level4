@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<todolist>
+    <tasks>
+        <desc>Make some friends</desc>
+        <priority>NORMAL</priority>
+        <finishedStatus>false</finishedStatus>
+        <tagged>Friends</tagged>
+    </tasks>
+    <tags>Friends</tags>
+</todolist>
