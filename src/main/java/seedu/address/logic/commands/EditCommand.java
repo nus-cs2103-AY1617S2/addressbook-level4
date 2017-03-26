@@ -69,32 +69,81 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
+    //@@author A0140023E
     /**
      * Creates and returns a {@link Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
-        assert taskToEdit != null;
+                                         EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null && editTaskDescriptor != null;
 
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Name updatedName = getUpdatedName(taskToEdit, editTaskDescriptor);
+        Optional<Deadline> updatedDeadline = getUpdatedDeadline(taskToEdit, editTaskDescriptor);
+        Optional<StartEndDateTime> updatedStartEndDateTime =
+                getUpdatedStartEndDateTime(taskToEdit, editTaskDescriptor);
+        UniqueTagList updatedTagList = getUpdatedTagList(taskToEdit, editTaskDescriptor);
 
-        Optional<Deadline> updatedDeadline = taskToEdit.getDeadline();
-        if (editTaskDescriptor.getDeadline().isPresent()) {
-            // TODO can we just pass the optional instead?
-            updatedDeadline = Optional.of(editTaskDescriptor.getDeadline().get());
-        }
-
-        Optional<StartEndDateTime> updatedStartEndDateTime = taskToEdit.getStartEndDateTime();
-        if (editTaskDescriptor.getStartEndDateTime().isPresent()) {
-            // TODO can we just pass the optional instead?
-            updatedStartEndDateTime = Optional.of(editTaskDescriptor.getStartEndDateTime().get());
-        }
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-
-        return new Task(updatedName, updatedDeadline, updatedStartEndDateTime, updatedTags);
+        return new Task(updatedName, updatedDeadline, updatedStartEndDateTime, updatedTagList);
     }
 
+    /**
+     * Returns the updated {@link Name} from {@code editTaskDescriptor} if it exists, otherwise
+     * returns the original task {@link Name} from {@code taskToEdit}
+     */
+    private static Name getUpdatedName(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null && editTaskDescriptor != null;
+
+        return editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+    }
+
+    /**
+     * Returns an {@link Optional} wrapping the updated {@link Deadline} from
+     * {@code editTaskDescriptor} if it exists, otherwise returns the original task {@link Deadline}
+     * from {@code taskToEdit}
+     */
+    private static Optional<Deadline> getUpdatedDeadline(ReadOnlyTask taskToEdit,
+                                                         EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null && editTaskDescriptor != null;
+
+        if (editTaskDescriptor.getDeadline().isPresent()) {
+            // Wrap the deadline from editTaskDescriptor with a new Optional
+            // so we do not depend on the descriptor anymore
+            return Optional.of(editTaskDescriptor.getDeadline().get());
+        }
+
+        return taskToEdit.getDeadline();
+    }
+
+    /**
+     * Returns an {@link Optional} wrapping the updated {@link StartEndDateTime} from
+     * {@code editTaskDescriptor} if it exists, otherwise returns the original task
+     * {@link StartEndDateTime} from {@code taskToEdit}
+     */
+    private static Optional<StartEndDateTime> getUpdatedStartEndDateTime(ReadOnlyTask taskToEdit,
+            EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null && editTaskDescriptor != null;
+
+        if (editTaskDescriptor.getStartEndDateTime().isPresent()) {
+            // Wrap the StartEndDateTime from editTaskDescriptor with a new Optional
+            // so we do not depend on the descriptor anymore
+            return Optional.of(editTaskDescriptor.getStartEndDateTime().get());
+        }
+
+        return taskToEdit.getStartEndDateTime();
+    }
+
+    /**
+     * Returns the updated {@link UniqueTagList} from {@code editTaskDescriptor} if it exists, otherwise
+     * returns the original task's {@link UniqueTagList} from {@code taskToEdit}
+     */
+    private static UniqueTagList getUpdatedTagList(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null && editTaskDescriptor != null;
+
+        return editTaskDescriptor.getTagList().orElseGet(taskToEdit::getTags);
+    }
+
+    //@@author
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
@@ -103,22 +152,22 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<StartEndDateTime> startEndDateTime = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<UniqueTagList> tagList = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.deadline = toCopy.getDeadline();
-            this.startEndDateTime = toCopy.getStartEndDateTime();
-            this.tags = toCopy.getTags();
+            name = toCopy.getName();
+            deadline = toCopy.getDeadline();
+            startEndDateTime = toCopy.getStartEndDateTime();
+            tagList = toCopy.getTagList();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.deadline, this.startEndDateTime, this.tags);
+            return CollectionUtil.isAnyPresent(name, deadline, startEndDateTime, tagList);
         }
 
         public void setName(Optional<Name> name) {
@@ -148,13 +197,13 @@ public class EditCommand extends Command {
             return startEndDateTime;
         }
 
-        public void setTags(Optional<UniqueTagList> tags) {
+        public void setTagList(Optional<UniqueTagList> tags) {
             assert tags != null;
-            this.tags = tags;
+            this.tagList = tags;
         }
 
-        public Optional<UniqueTagList> getTags() {
-            return tags;
+        public Optional<UniqueTagList> getTagList() {
+            return tagList;
         }
     }
 }
