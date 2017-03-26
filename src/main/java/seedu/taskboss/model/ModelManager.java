@@ -218,7 +218,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0147990R
     @Override
-    public void clearTasksByCategory(Category category) {
+    public void clearTasksByCategory(Category category) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         FilteredList<ReadOnlyTask> taskListWithCategory = filteredTasks;
         int listSize = taskListWithCategory.size();

@@ -34,7 +34,7 @@ public class UndoCommand extends Command {
         } catch (EmptyStackException ese) {
             return new CommandResult(MESSAGE_WITHOUT_PREVIOUS_OPERATION);
         } catch (IllegalValueException e) {
-            return new CommandResult("HELLO UNDO DEBUG");
+            return new CommandResult(e.getMessage());
         }
     }
 }
