@@ -19,7 +19,7 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         //loads a directory
         commandBox.runCommand("load data");
         assertResultMessage(String.format(MESSAGE_FAILURE_DIRECTORY, "data"));
-        
+
         //loads a non-existing file
         commandBox.runCommand("load fileThatDoesntExist");
         assertResultMessage(String.format(MESSAGE_NOT_FOUND, "fileThatDoesntExist"));
