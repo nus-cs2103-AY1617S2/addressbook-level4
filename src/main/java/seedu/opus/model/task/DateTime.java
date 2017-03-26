@@ -22,7 +22,7 @@ public class DateTime {
 
     public final LocalDateTime dateTime;
     private static DateTimeFormatter formatter = DateTimeFormatter
-            .ofPattern("dd/MM/uuuu HH:mm")
+            .ofPattern("MM/dd/uuuu HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
     private Clock clock;
 
