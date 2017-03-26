@@ -76,7 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
 	 * remove half of the earlier saved states and only keep the later half.
 	 */
 	private void saveImageOfCurrentTaskManager() {
-		checkIfUndoStackSizeTooLarge();
+		removeUndoEntriesIfUndoStackSizeTooLarge();
 		TaskManager tempManager = new TaskManager();
 		tempManager.resetData(taskManager);
 		undoTaskManager.push(tempManager);
@@ -95,7 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
 	 * This method checks if the undo stack size is above the maximum allowed
 	 * size
 	 */
-	private void checkIfUndoStackSizeTooLarge() {
+	private void removeUndoEntriesIfUndoStackSizeTooLarge() {
 		if (undoTaskManager.size() >= MAXIMUM_SIZE_OF_UNDO_STACK) {
 			removeHalfOfUndoStack(undoTaskManager);
 		}
@@ -125,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
 		indicateTaskManagerChanged();
 	}
 
-	// @@author A0102778B
+	//@@author A0102778B
 
 	@Override
 	public boolean checkEmptyUndoStack() {
@@ -154,7 +154,9 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.resetData(redoTaskManager.pop());
 		indicateTaskManagerChanged();
 	}
-
+	
+	// @@author 
+	
 	/*
 	 * @Override public synchronized void getNextState() { saveImage();
 	 * taskManager.resetData(redoTaskManager.pop()); }

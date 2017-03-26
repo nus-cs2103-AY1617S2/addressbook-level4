@@ -16,12 +16,10 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_EMPTY_UNDO_STACK = "Nothing to undo";
 
     public UndoCommand() {
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        // TODO Auto-generated method stub
         assert model != null;
         if (model.checkEmptyUndoStack()) {
             throw new CommandException(MESSAGE_EMPTY_UNDO_STACK);
