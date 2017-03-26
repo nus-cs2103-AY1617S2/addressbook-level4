@@ -33,10 +33,10 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.storage.XmlSerializableTaskManager;
 
 /**
@@ -72,17 +72,15 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            // CHECKSTYLE.OFF: LineLength
-            return new Task[] { new TaskWithoutDeadline(new Name("Ali Muster"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Boris Mueller"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Carl Kurz"), new UniqueTagList(), true),
-                                new TaskWithoutDeadline(new Name("Daniel Meier"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Elle Meyer"), new UniqueTagList(), true),
-                                new TaskWithoutDeadline(new Name("Fiona Kunz"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("George Best"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Hoon Meier"), new UniqueTagList(), false),
-                                new TaskWithoutDeadline(new Name("Ida Mueller"), new UniqueTagList(), true) };
-            // CHECKSTYLE.ON: LineLength
+            return new Task[] { new FloatingTask(new Name("Ali Muster"), new UniqueTagList(), false, false),
+                new FloatingTask(new Name("Boris Mueller"), new UniqueTagList(), false, false),
+                new FloatingTask(new Name("Carl Kurz"), new UniqueTagList(), true, false),
+                new FloatingTask(new Name("Daniel Meier"), new UniqueTagList(), false, false),
+                new FloatingTask(new Name("Elle Meyer"), new UniqueTagList(), true, false),
+                new FloatingTask(new Name("Fiona Kunz"), new UniqueTagList(), false, false),
+                new FloatingTask(new Name("George Best"), new UniqueTagList(), false, false),
+                new FloatingTask(new Name("Hoon Meier"), new UniqueTagList(), false, false),
+                new FloatingTask(new Name("Ida Mueller"), new UniqueTagList(), true, false) };
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -367,8 +365,8 @@ public class TestUtil {
     }
 
     /**
-     * Assigns relative indexes for test tasks
-     * The index is the same as the actual index shown on the UI
+     * Assigns relative indexes for test tasks The index is the same as the
+     * actual index shown on the UI
      */
     public static void assignUiIndex(TestTask[] taskList) {
         // initialise displayed index
@@ -392,8 +390,8 @@ public class TestUtil {
     }
 
     /**
-     * Assigns relative indexes for test tasks
-     * The index is the same as the actual index shown on the UI
+     * Assigns relative indexes for test tasks The index is the same as the
+     * actual index shown on the UI
      */
     public static void assignUiIndex(List<Task> taskList) {
         // initialise displayed index

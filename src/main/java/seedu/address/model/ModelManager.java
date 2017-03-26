@@ -140,7 +140,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int filteredTaskListIndex, Task editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
@@ -342,8 +342,14 @@ public class ModelManager extends ComponentManager implements Model {
         return indexMap.containsKey(uiIndex);
     }
 
+    // @@author A0093999Y
     public Predicate<ReadOnlyTask> isDueOnThisDate(Date date) {
         assert date != null : "no date provided for a deadline search";
-        return t -> t.getDeadline().isSameDay(date);
+        return t -> {
+            if (t.getDeadline().isPresent()) {
+                return t.getDeadline().get().isSameDay(date);
+            }
+            return false;
+        };
     }
 }

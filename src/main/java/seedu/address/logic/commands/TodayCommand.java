@@ -11,17 +11,18 @@ import seedu.address.model.task.UniqueTaskList;
 
 //@@author A0093999Y
 /**
- * Indicates an existing task is not done in the task manager.
+ * Indicates an existing task should be done today in the task manager. In other
+ * words, place it in the Today list.
  */
-public class NotDoneCommand extends Command {
+public class TodayCommand extends Command {
 
-    public static final String COMMAND_WORD = "notdone";
+    public static final String COMMAND_WORD = "today";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates that the task identified is not done"
-            + "by the index number used in the last task listing.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates that the task identified"
+            + "by the index number used in the last task listing should be done today.\n"
             + "Parameters: INDEX (must be a positive integer) \n" + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_NOTDONE_TASK_SUCCESS = "Task Not Done: %1$s";
+    public static final String MESSAGE_TODAY_TASK_SUCCESS = "Task for Today: %1$s";
 
     private final int filteredTaskListIndex;
 
@@ -29,7 +30,7 @@ public class NotDoneCommand extends Command {
      * @param filteredTaskListIndex
      *            the index of the task in the filtered task list to edit
      */
-    public NotDoneCommand(int filteredTaskListIndex) {
+    public TodayCommand(int filteredTaskListIndex) {
         assert filteredTaskListIndex > 0;
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
@@ -43,13 +44,12 @@ public class NotDoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToNotDone = lastShownList.get(filteredTaskListIndex);
-
+        ReadOnlyTask taskToToday = lastShownList.get(filteredTaskListIndex);
         try {
-            Task notDoneTask = createDoneTask(taskToNotDone);
-            model.updateTask(filteredTaskListIndex, notDoneTask);
+            Task todayTask = createTodayTask(taskToToday);
+            model.updateTask(filteredTaskListIndex, todayTask);
             model.updateFilteredListToShowAll();
-            return new CommandResult(String.format(MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask));
+            return new CommandResult(String.format(MESSAGE_TODAY_TASK_SUCCESS, todayTask));
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(EditCommand.MESSAGE_DUPLICATE_PERSON);
         } catch (IllegalValueException e) {
@@ -60,15 +60,15 @@ public class NotDoneCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Task} that is not done
+     * Creates and returns a {@code Task} that should be done today
      *
      * @throws IllegalValueException
      */
-    private static Task createDoneTask(ReadOnlyTask taskToNotDone) throws IllegalValueException {
-        assert taskToNotDone != null;
+    private static Task createTodayTask(ReadOnlyTask taskToToday) throws IllegalValueException {
+        assert taskToToday != null;
 
-        boolean updatedDone = false;
-        return Task.createTask(taskToNotDone.getName(), taskToNotDone.getTags(), taskToNotDone.getDeadline(),
-                taskToNotDone.getStartingTime(), updatedDone, taskToNotDone.isManualToday());
+        boolean updatedToday = true;
+        return Task.createTask(taskToToday.getName(), taskToToday.getTags(), taskToToday.getDeadline(),
+                taskToToday.getStartingTime(), taskToToday.isDone(), updatedToday);
     }
 }

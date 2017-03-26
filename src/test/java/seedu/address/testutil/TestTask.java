@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
@@ -63,16 +65,9 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         if (!this.getTags().toSet().isEmpty()) {
-            this.getTags().asObservableList().stream()
-                    .forEach(s -> sb.append(" #" + s.tagName));
+            this.getTags().asObservableList().stream().forEach(s -> sb.append(" #" + s.tagName));
         }
         return sb.toString();
-    }
-
-    @Override
-    public TaskType getTaskType() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
@@ -82,31 +77,13 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public void setToday() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public boolean isToday() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public DateTime getDeadline() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public String getTaskAbsoluteDateTime() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public DateTime getStartingTime() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -125,5 +102,23 @@ public class TestTask implements ReadOnlyTask {
     public int compareTo(ReadOnlyTask task2) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public boolean isManualToday() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Optional<DateTime> getDeadline() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Optional<DateTime> getStartingTime() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

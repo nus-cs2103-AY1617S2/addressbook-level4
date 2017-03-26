@@ -8,11 +8,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithDeadline;
-import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -22,27 +22,13 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a task to the task manager. "
-            + "Parameters: NAME [t/TAG]...\n" + "Example: " + COMMAND_WORD
-            + " CS2103 Refactoring Task t/CS2103";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
+            + "Parameters: NAME [t/TAG]...\n" + "Example: " + COMMAND_WORD + " CS2103 Refactoring Task t/CS2103";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager";
 
     private final Task toAdd;
-
-    public Task getTask() {
-        if (toAdd.getTaskType() == TaskType.TaskWithNoDeadline) {
-            return new TaskWithoutDeadline(toAdd);
-        } else {
-            try {
-                return new TaskWithDeadline(toAdd);
-            } catch (IllegalValueException e) {
-                return null;
-            }
-        }
-    }
 
     /**
      * Creates an AddCommand using raw values.
@@ -55,8 +41,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithoutDeadline(new Name(name),
-                new UniqueTagList(tagSet), false);
+        this.toAdd = new FloatingTask(new Name(name), new UniqueTagList(tagSet), false, false);
     }
 
     /**
@@ -65,15 +50,13 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, Date deadline, String tags[])
-            throws IllegalValueException {
+    public AddCommand(String name, Date deadline, String tags[]) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
         System.out.print("deadline: " + deadline);
-        this.toAdd = new TaskWithDeadline(new Name(name),
-                new UniqueTagList(tagSet), deadline, null, false);
+        this.toAdd = new DeadlineTask(new Name(name), new UniqueTagList(tagSet), deadline, false, false);
     }
 
     /**
@@ -82,14 +65,12 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, Date deadline, Date startingTime,
-            String tags[]) throws IllegalValueException {
+    public AddCommand(String name, Date deadline, Date startingTime, String tags[]) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithDeadline(new Name(name),
-                new UniqueTagList(tagSet), deadline, startingTime, false);
+        this.toAdd = new EventTask(new Name(name), new UniqueTagList(tagSet), deadline, startingTime, false, false);
     }
 
     @Override
