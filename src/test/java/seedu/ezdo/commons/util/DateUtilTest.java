@@ -54,6 +54,14 @@ public class DateUtilTest {
     }
 
     @Test
+    public void noDates_pass() throws Exception {
+        TestTask task = new TaskBuilder().withName("Alson").withPriority("3").withStartDate("")
+                .withDueDate("")
+                .withTags("guy").build();
+        assertTrue(DateUtil.isTaskDateValid(task));
+    }
+
+    @Test
     public void twoDates_equal_pass() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3")
                 .withStartDate("02/02/2017").withDueDate("02/02/2017")
