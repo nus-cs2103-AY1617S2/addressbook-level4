@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all the existing tasks in TaskIt \n"
-            + "Parameters: [done, undone, overdue, today]\n" 
+            + "Parameters: [all, done, undone, overdue, today]\n" 
             + "Example: " + COMMAND_WORD + " undone\n" + COMMAND_WORD + " today\n";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all tasks";
@@ -33,7 +33,7 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         int taskListSize;
         switch (parameter) {
-              case "":
+              case "all":
                   model.updateFilteredListToShowAll();
                   return new CommandResult(MESSAGE_SUCCESS_ALL);
           

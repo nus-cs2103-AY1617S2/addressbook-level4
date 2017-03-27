@@ -114,8 +114,8 @@ public class Date {
     
     //author A0141872E
     public boolean isEndTimePassCurrentTime() {
-        Date currentDate = new Date();
-        if(date!= null && isBefore(currentDate)) {
+        java.util.Date currentDate = new java.util.Date();
+        if(date!= null && date.before(currentDate)) {
             return true;
         }
         return false;
