@@ -1,8 +1,7 @@
 package seedu.taskmanager.model;
 
-
 import javafx.collections.ObservableList;
-//import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
@@ -11,15 +10,15 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 public interface ReadOnlyTaskManager {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the persons list. This list will not
+     * contain any duplicate persons.
      */
     ObservableList<ReadOnlyTask> getTaskList();
 
     /**
-     * Returns an unmodifiable view of the tags list.
-     * This list will not contain any duplicate tags.
+     * Returns an unmodifiable view of the tags list. This list will not contain
+     * any duplicate categories.
      */
-//    ObservableList<Category> getCategoryList();
+    ObservableList<Category> getCategoryList();
 
 }

@@ -14,7 +14,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
-//import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.Category;
 
 /**
  * An Immutable TaskManager that is serializable to XML format
@@ -24,16 +24,16 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
-//    @XmlElement
-//    private List<XmlAdaptedCategory> categories;
+    @XmlElement
+    private List<XmlAdaptedCategory> categories;
 
     /**
-     * Creates an empty XmlSerializableTaskManager.
-     * This empty constructor is required for marshalling.
+     * Creates an empty XmlSerializableTaskManager. This empty constructor is
+     * required for marshalling.
      */
     public XmlSerializableTaskManager() {
         tasks = new ArrayList<>();
-//        categories = new ArrayList<>();
+        categories = new ArrayList<>();
     }
 
     /**
@@ -42,7 +42,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
-//        categories.addAll(src.getCategoryList().stream().map(XmlAdaptedCategory::new).collect(Collectors.toList()));
+        categories.addAll(src.getCategoryList().stream().map(XmlAdaptedCategory::new).collect(Collectors.toList()));
     }
 
     @Override
@@ -52,13 +52,13 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
                 return p.toModelType();
             } catch (IllegalValueException e) {
                 e.printStackTrace();
-                //TODO: better error handling
+                // TODO: better error handling
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tasks);
     }
-/*
+
     @Override
     public ObservableList<Category> getCategoryList() {
         final ObservableList<Category> categories = this.categories.stream().map(t -> {
@@ -66,11 +66,11 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
                 return t.toModelType();
             } catch (IllegalValueException e) {
                 e.printStackTrace();
-                //TODO: better error handling
+                // TODO: better error handling
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(categories);
     }
-*/
+
 }

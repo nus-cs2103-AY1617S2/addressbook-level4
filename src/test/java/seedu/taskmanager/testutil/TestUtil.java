@@ -55,7 +55,7 @@ public class TestUtil {
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
-//    public static final Category[] SAMPLE_CATEGORY_DATA = getSampleCategoryData();
+    public static final Category[] SAMPLE_CATEGORY_DATA = getSampleCategoryData();
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
@@ -74,20 +74,29 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"), new EndTime("1100")),
-                new Task(new TaskName("Eat lunch at techno"), new StartDate("04/03/17"), new StartTime("EMPTY_FIELD"), new EndTime("1400")),
-                new Task(new TaskName("Eat dinner with my only 2 friends"), new StartDate("09/03/17"), new StartTime("1800"), new EndTime("2000")),
-                new Task(new TaskName("Start on the CS2103 project"), new StartDate("EMPTY_FIELD"), new StartTime("03/03/17 1400"), new EndTime("03/04/17 1800")),
-                new Task(new TaskName("Give up on CS2103 project"), new StartDate("04/04/17"), new StartTime("1400"), new EndTime("1500")),
-                new Task(new TaskName("Try again for CS2103"), new StartDate("EMPTY_FIELD"), new StartTime("05/04/17 1400"), new EndTime("05/05/17 1500")),
-                new Task(new TaskName("Endless cycles of regret"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
-                new Task(new TaskName("Time to relax a little"), new StartDate("06/05/17"), new StartTime("1400"), new EndTime("1800")),
-                new Task(new TaskName("Chiong all day everyday"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
-                new Task(new TaskName("Get it done"), new StartDate("06/05/17"), new StartTime("EMPTY_FIELD"), new EndTime("1700"))
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Task[] {
+                    new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"),
+                            new EndTime("1100")),
+                    new Task(new TaskName("Eat lunch at techno"), new StartDate("04/03/17"),
+                            new StartTime("EMPTY_FIELD"), new EndTime("1400")),
+                    new Task(new TaskName("Eat dinner with my only 2 friends"), new StartDate("09/03/17"),
+                            new StartTime("1800"), new EndTime("2000")),
+                    new Task(new TaskName("Start on the CS2103 project"), new StartDate("EMPTY_FIELD"),
+                            new StartTime("03/03/17 1400"), new EndTime("03/04/17 1800")),
+                    new Task(new TaskName("Give up on CS2103 project"), new StartDate("04/04/17"),
+                            new StartTime("1400"), new EndTime("1500")),
+                    new Task(new TaskName("Try again for CS2103"), new StartDate("EMPTY_FIELD"),
+                            new StartTime("05/04/17 1400"), new EndTime("05/05/17 1500")),
+                    new Task(new TaskName("Endless cycles of regret"), new StartDate("EMPTY_FIELD"),
+                            new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
+                    new Task(new TaskName("Time to relax a little"), new StartDate("06/05/17"), new StartTime("1400"),
+                            new EndTime("1800")),
+                    new Task(new TaskName("Chiong all day everyday"), new StartDate("EMPTY_FIELD"),
+                            new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
+                    new Task(new TaskName("Get it done"), new StartDate("06/05/17"), new StartTime("EMPTY_FIELD"),
+                            new EndTime("1700")) };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -95,26 +104,24 @@ public class TestUtil {
         }
     }
 
-/*    private static Category[] getSampleCategoryData() {
+    private static Category[] getSampleCategoryData() {
         try {
-            return new Category[]{
-                new Category("relatives"),
-                new Category("friends")
-            };
+            return new Category[] { new Category("relatives"), new Category("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
-    } */
+    }
 
     public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
     /**
-     * Appends the file TaskName to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the file TaskName to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
+     * 
      * @param fileName
      * @return
      */
@@ -150,8 +157,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -168,7 +175,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -187,18 +194,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -214,10 +220,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -235,6 +242,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     * 
      * @param node
      * @return
      */
@@ -246,6 +254,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     * 
      * @param node
      * @return
      */
@@ -257,6 +266,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     * 
      * @param node
      * @return
      */
@@ -282,8 +292,11 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * @param tasks The list of tasks
-     * @param tasksToRemove The subset of tasks.
+     * 
+     * @param tasks
+     *            The list of tasks
+     * @param tasksToRemove
+     *            The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
@@ -292,11 +305,13 @@ public class TestUtil {
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
-
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     * 
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -304,9 +319,13 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
-     * @param tasks The array of tasks.
-     * @param task The replacement task
-     * @param index The index of the task to be replaced.
+     * 
+     * @param tasks
+     *            The array of tasks.
+     * @param task
+     *            The replacement task
+     * @param index
+     *            The index of the task to be replaced.
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -316,8 +335,11 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
-     * @param tasks A array of tasks.
-     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     * 
+     * @param tasks
+     *            A array of tasks.
+     * @param tasksToAdd
+     *            The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
@@ -340,7 +362,7 @@ public class TestUtil {
 
     public static Category[] getCategoryList(String categories) {
         if ("".equals(categories)) {
-            return new Category[]{};
+            return new Category[] {};
         }
 
         final String[] split = categories.split(", ");
@@ -349,7 +371,7 @@ public class TestUtil {
             try {
                 return new Category(e.replaceFirst("Category: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }

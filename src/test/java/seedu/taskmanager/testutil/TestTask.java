@@ -21,7 +21,7 @@ public class TestTask implements ReadOnlyTask {
     private UniqueCategoryList categories;
 
     public TestTask() {
-//        categories = new UniqueCategoryList();
+        categories = new UniqueCategoryList();
     }
 
     /**
@@ -32,7 +32,7 @@ public class TestTask implements ReadOnlyTask {
         this.startDate = taskToCopy.getStartDate();
         this.starttime = taskToCopy.getStartTime();
         this.endtime = taskToCopy.getEndTime();
-//        this.categories = taskToCopy.getCategories();
+        this.categories = taskToCopy.getCategories();
     }
 
     public void setTaskName(TaskName taskname) {
@@ -51,9 +51,9 @@ public class TestTask implements ReadOnlyTask {
     	this.endtime = endtime;
     }
 
-/*    public void setCategories(UniqueCategoryList categories) {
+    public void setCategories(UniqueCategoryList categories) {
         this.categories = categories;
-    } */
+    } 
 
     @Override
     public TaskName getTaskName() {
@@ -74,12 +74,12 @@ public class TestTask implements ReadOnlyTask {
     public EndTime getEndTime() {
     	return endtime;
     }
-/*
+
     @Override
     public UniqueCategoryList getCategories() {
         return categories;
     }
-*/
+
     @Override
     public String toString() {
         return getAsText();

@@ -1,7 +1,7 @@
 package seedu.taskmanager.logic.commands;
 
-//import java.util.HashSet;
-//import java.util.Set;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
@@ -12,8 +12,8 @@ import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.UniqueTaskList;
-//import seedu.taskmanager.model.category.Category;
-//import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 //@@author A0139520L
 /**
@@ -40,14 +40,13 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     public AddCommand(String taskName, String startDate, String startTime, String endDate,
-            String endTime /* ,Set<String> categories */) throws IllegalValueException {
-        // final Set<Category> categorySet = new HashSet<>();
-        // for (String tagCategoryName : categories) {
-        // categorySet.add(new Category(tagCategoryName));
-        // }
+            String endTime ,Set<String> categories) throws IllegalValueException {
+         final Set<Category> categorySet = new HashSet<>();
+         for (String categoryName : categories) {
+         categorySet.add(new Category(categoryName));
+         }
         this.toAdd = new Task(new TaskName(taskName), new StartDate(startDate), new StartTime(startTime),
-                new EndDate(endDate), new EndTime(endTime)
-        /* new UniqueCategoryList(categorySet) */);
+                new EndDate(endDate), new EndTime(endTime), new UniqueCategoryList(categorySet));
     }
 
     @Override

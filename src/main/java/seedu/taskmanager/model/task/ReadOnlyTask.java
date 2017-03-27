@@ -1,6 +1,6 @@
 package seedu.taskmanager.model.task;
 
-//import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * A read-only immutable interface for a Task in ProcrastiNomore.
@@ -26,7 +26,7 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the task's internal
      * categories.
      */
-    // UniqueCategoryList getCategories();
+    UniqueCategoryList getCategories();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override
@@ -68,8 +68,12 @@ public interface ReadOnlyTask {
         if (getEndTime().toString() != "EMPTY_FIELD") {
             builder.append(" End Time: ").append(getEndTime());
         }
-        // .append(" Categories: ");
-        // getCategories().forEach(builder::append);
+
+        if (getCategories().toString() != "EMPTY_FIELD") {
+            builder.append(" Categories: ");
+            getCategories().forEach(builder::append);
+        }
+
         return builder.toString();
     }
 }
