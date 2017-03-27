@@ -52,8 +52,8 @@ public class FindCommandParser implements CommandParser {
         try {
 
             boolean isFind = true;
-            Optional<String> optionalStartDate = getOptionalValue(argsTokenizer, PREFIX_STARTDATE);
-            Optional<String> optionalDueDate = getOptionalValue(argsTokenizer, PREFIX_DUEDATE);
+            Optional<String> optionalStartDate = parseByDate(getOptionalValue(argsTokenizer, PREFIX_STARTDATE));
+            Optional<String> optionalDueDate = parseByDate(getOptionalValue(argsTokenizer, PREFIX_DUEDATE));
             findStartDate = ParserUtil.parseStartDate(optionalStartDate, isFind);
             findDueDate = ParserUtil.parseDueDate(optionalDueDate, isFind);
             findTags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
@@ -82,13 +82,16 @@ public class FindCommandParser implements CommandParser {
             return taskDate;
         } else {
             String taskDateString = taskDate.get();
-            if (taskDateString.length() < 2) {
+            if (taskDateString.length() < 3) {
                 return taskDate;
             } else {
-                String byPrefix = taskDateString.substring(0, 2);
-                if (byPrefix.equals("b/")) {
+                String byPrefix = taskDateString.substring(0, 3);
+                System.out.println(byPrefix);
+                if (byPrefix.equals("by/")) {
                     Optional<String> optionalDate;
-                    optionalDate = Optional.of(taskDateString.substring(2, taskDateString.length()));
+                    String commandString = taskDateString.substring(3, taskDateString.length()).trim();
+                    optionalDate = Optional.of(commandString);
+                    System.out.println(optionalDate.get());
                     return optionalDate;
                 } else {
                     return taskDate;

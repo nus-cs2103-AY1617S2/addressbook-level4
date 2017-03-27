@@ -300,8 +300,8 @@ public class ModelManager extends ComponentManager implements Model {
                     && (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
                             || (priorityExist && task.getPriority().toString().equals(priority.get().toString())))
                     && (!startDate.isPresent() || (startDate.get().toString().equals("") && startDateExist)
-                            || (startDateExist && taskStartDate.substring(0, 9).equals
-                                    (startDate.get().toString().substring(0, 9))))
+                            || (startDateExist && taskStartDate.substring(0, 10).equals
+                                    (startDate.get().toString().substring(0, 10))))
                     && (!dueDate.isPresent() || (dueDate.get().toString().equals("") && dueDateExist) || (dueDateExist
                             && taskDueDate.substring(0, 9).equals(dueDate.get().toString().substring(0, 9))))
                     && (taskTagStringSet.containsAll(tags));
