@@ -21,6 +21,7 @@ import guitests.guihandles.StatusBarFooterHandle;
 import guitests.guihandles.TaskCardHandle;
 import guitests.guihandles.TaskCountHandle;
 import guitests.guihandles.TaskListPanelHandle;
+import guitests.guihandles.TaskListTypeHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.tache.TestApp;
@@ -55,6 +56,7 @@ public abstract class TaskManagerGuiTest {
     protected CommandBoxHandle commandBox;
     protected CalendarPanelHandle calendarPanel;
     //@@author A0142255M
+    protected TaskListTypeHandle taskListType;
     protected TaskCountHandle taskCount;
     protected StatusBarFooterHandle statusBarFooter;
     //@@author
@@ -75,6 +77,7 @@ public abstract class TaskManagerGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
+            taskListType = mainGui.getTaskListType();
             taskCount = mainGui.getTaskCount();
             taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();

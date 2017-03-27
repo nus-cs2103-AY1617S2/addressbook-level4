@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import seedu.tache.TestApp;
 
 /**
- * A handler for the StatusBarFooter of the UI
+ * A handler for the TaskCount of the UI
  */
 public class TaskCountHandle extends GuiHandle {
 

@@ -6,8 +6,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.tache.testutil.TestTask;
-
 public class TaskCountTest extends TaskManagerGuiTest {
 
     @Test
