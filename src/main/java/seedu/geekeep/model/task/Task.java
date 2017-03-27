@@ -134,7 +134,7 @@ public class Task implements ReadOnlyTask  {
     }
 
     /**
-     * Compares this task's type priority with another
+     * Compares this task's type priority with another.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
@@ -143,7 +143,7 @@ public class Task implements ReadOnlyTask  {
     }
 
     /**
-     * Compares this task's reference datetime with another
+     * Compares this task's reference datetime with another in chronological order.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
@@ -153,18 +153,29 @@ public class Task implements ReadOnlyTask  {
     }
 
     /**
-     * Compares this task's type priority and reference datetime with another
+     * Compares this task's type priority and reference datetime with another.
+     * Compares this task's title with another in lexicographic order if both are floating tasks.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int compareBothPriorityAndDate(Task otherTask) {
+    public int comparePriorityAndDatetimeAndTitle(Task otherTask) {
         int comparePriorityResult = this.comparePriority(otherTask);
-        if (comparePriorityResult != 0 || this.isFloatingTask()
-                || otherTask.isFloatingTask()) {
+        if (comparePriorityResult != 0) {
             return comparePriorityResult;
+        } else if (this.isFloatingTask() || otherTask.isFloatingTask()) {
+            return this.compareTitle(otherTask);
         } else {
             return this.compareDate(otherTask);
         }
+    }
+
+    /**
+     * Compares this task's title with another in lexicographic order.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
+    public int compareTitle(Task otherTask) {
+        return this.getTitle().toString().compareTo(otherTask.getTitle().toString());
     }
 
     /**

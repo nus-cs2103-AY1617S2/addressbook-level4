@@ -27,7 +27,7 @@ public class SampleDataTest extends GeeKeepGuiTest {
     @Test
     public void geeKeep_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
-        Arrays.sort(expectedList, (thisTask, otherTask) -> thisTask.compareBothPriorityAndDate(otherTask));
+        Arrays.sort(expectedList, (thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

@@ -50,7 +50,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
-        internalList.sort((thisTask, otherTask) -> thisTask.compareBothPriorityAndDate(otherTask));
+        internalList.sort((thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {
