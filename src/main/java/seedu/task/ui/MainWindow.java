@@ -49,16 +49,16 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem helpFormatMenuItem;
-    
+
     @FXML
     private MenuItem quickAddMenuItem;
-    
+
     @FXML
     private MenuItem quickUndoMenuItem;
-    
+
     @FXML
     private MenuItem quickScrollDownMenuItem;
-    
+
     @FXML
     private MenuItem quickScrollUpMenuItem;
 
@@ -209,29 +209,29 @@ public class MainWindow extends UiPart<Region> {
         HelpFormatWindow helpFormatWindow = new HelpFormatWindow();
         helpFormatWindow.show();
     }
-    
+
     @FXML
     public void handleAdd() {
-    	commandBox.setText("add ");
-    	commandBox.requestFocus();
-    	commandBox.end();
+        commandBox.setText("add ");
+        commandBox.requestFocus();
+        commandBox.end();
     }
-    
+
     @FXML
     public void handleUndo() {
-    	commandBox.setText("undo");
-    	commandBox.requestFocus();
-    	commandBox.end();
+        commandBox.setText("undo");
+        commandBox.requestFocus();
+        commandBox.end();
     }
-    
+
     @FXML
     public void handleScrollDown() {
-    	taskListPanel.scrollDown();
+        taskListPanel.scrollDown();
     }
-    
+
     @FXML
     public void handleScrollUp() {
-    	taskListPanel.scrollUp();
+        taskListPanel.scrollUp();
     }
 
     void show() {

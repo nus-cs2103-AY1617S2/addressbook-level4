@@ -49,14 +49,14 @@ public class CommandLibrary {
     private static CommandLibrary instance = null;
     private static HashMap<String, CommandParser> commandParserTable;
 //    private static commandKeyParserPair[] commandKeyParserPairs;
-    
+
     protected CommandLibrary() {
         init();
     }
 
     public static CommandLibrary getInstance() {
         if (instance == null) {
-           instance =new CommandLibrary();
+            instance = new CommandLibrary();
         }
         return instance;
     }
@@ -68,16 +68,16 @@ public class CommandLibrary {
         commandParserTable =  new HashMap<>();
         // TODO Auto-generated method stub
         commandParserTable.put(AddCommand.COMMAND_WORD_1, new AddCommandParser());
-        
+
         commandParserTable.put(ClearCommand.COMMAND_WORD_1, new ClearCommandParser());
-        
+
         commandParserTable.put(DeleteCommand.COMMAND_WORD_1, new DeleteCommandParser());
-        
+
         commandParserTable.put(DoneCommand.COMMAND_WORD_1, new EditIsDoneCommandParser());
         commandParserTable.put(DoneCommand.COMMAND_WORD_2, new EditIsDoneCommandParser());
-        
+
         commandParserTable.put(EditCommand.COMMAND_WORD_1, new EditCommandParser());
-        
+
         commandParserTable.put(ExitCommand.COMMAND_WORD_1, new ExitCommandParser());
 
         commandParserTable.put(FindCommand.COMMAND_WORD_1, new FindCommandParser());
@@ -104,32 +104,32 @@ public class CommandLibrary {
         commandParserTable.put(ListByNotDoneCommand.COMMAND_WORD_1, new ListByNotDoneCommandParser());
         commandParserTable.put(ListByNotDoneCommand.COMMAND_WORD_2, new ListByNotDoneCommandParser());
         commandParserTable.put(ListByNotDoneCommand.COMMAND_WORD_3, new ListByNotDoneCommandParser());
-        
+
         commandParserTable.put(ListByTagCommand.COMMAND_WORD_1, new ListByTagCommandParser());
         commandParserTable.put(ListByTagCommand.COMMAND_WORD_2, new ListByTagCommandParser());
         commandParserTable.put(ListByTagCommand.COMMAND_WORD_3, new ListByTagCommandParser());
         commandParserTable.put(ListByTagCommand.COMMAND_WORD_4, new ListByTagCommandParser());
-        
+
         commandParserTable.put(ListCommand.COMMAND_WORD_1, new ListCommandParser());
         commandParserTable.put(ListCommand.COMMAND_WORD_2, new ListCommandParser());
         commandParserTable.put(ListCommand.COMMAND_WORD_3, new ListCommandParser());
 
         commandParserTable.put(LoadCommand.COMMAND_WORD_1, new LoadCommandParser());
-        
+
         commandParserTable.put(SaveCommand.COMMAND_WORD_1, new SaveCommandParser());
-        
+
         commandParserTable.put(UndoCommand.COMMAND_WORD_1, new UndoCommandParser());
         commandParserTable.put(UndoCommand.COMMAND_WORD_2, new UndoCommandParser());
 
         commandParserTable.put(UnDoneCommand.COMMAND_WORD_1, new EditUnDoneCommandParser());
         commandParserTable.put(UnDoneCommand.COMMAND_WORD_2, new EditUnDoneCommandParser());
-        
+
 //        for(commandKeyParserPair pair: commandKeyParserPairs){
 //            commandParserTable.put(pair.getKey(), pair.getParser());
 //        }
     }
     /**
-     * 
+     *
      * @param commandWord
      * @param arguments
      * @return Returns the correct command with the correct arguments
@@ -141,12 +141,12 @@ public class CommandLibrary {
 //    protected class commandKeyParserPair{
 //        private String commandKey;
 //        private CommandParser commandParser;
-//        
+//
 //        protected commandKeyParserPair(String commandKey, CommandParser commandParser){
 //            this.commandKey = commandKey;
 //            this.commandParser =(CommandParser) commandParser;
 //        }
-//        
+//
 //        public String getKey(){
 //            return this.commandKey;
 //        }
