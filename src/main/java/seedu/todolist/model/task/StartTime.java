@@ -15,14 +15,13 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 public class StartTime implements Comparable<StartTime> {
 
     public static final String MESSAGE_STARTTIME_CONSTRAINTS =
-            "Start time should follow the format: DD-MM-YYYY TIME. E.g. \n"
-            + "12-12-2008 3.30 PM";
+            "Start time should follow the format: DD-MM-YYYY (TIME - optional). E.g. \n"
+            + "12-12-2008 3.30 PM, or simply 12-12-2008";
 
     private Date startTime;
 
     public StartTime(String startTime) throws IllegalValueException {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h.mm a");
-        Date temp = dateFormatter.parse(startTime, new ParsePosition(0));
+        Date temp = TimeUtil.parseTime(startTime);
         if (temp == null) {
             throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
         } else {
