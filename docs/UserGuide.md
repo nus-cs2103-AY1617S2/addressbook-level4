@@ -176,6 +176,8 @@ Example:
 Undoes last command if it involves changing a todo.<br>
 Format: `undo`
 
+> * You may also redo a command by simply running undo again. This will undo the effects of the last undo command.
+
 ### 2.10. Clearing all entries : `clear`
 
 Clears all todos. Irreversible.<br>
