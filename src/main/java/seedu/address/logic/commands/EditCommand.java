@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +10,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
@@ -53,6 +56,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DIFFERENT_TASK = "Cannot edit Task into Event or Deadline";
     public static final String MESSAGE_DIFFERENT_EVENT = "Cannot edit Event into Deadline or Task";
     public static final String MESSAGE_EDIT_CLASH_TIME = "Cannot edit Event as it clashes with another event!";
+    public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date!";
 
     private final int filteredActivityListIndex;
     private final EditEventDescriptor editEventDescriptor;
@@ -64,19 +68,23 @@ public class EditCommand extends Command {
      * @param filteredActivityListIndex the index of the activity in the filtered activity list to edit
      * @param editEventDescriptor details to edit the event with
      * @param editTaskDescriptor details to edit the task with
+     * @throws IllegalValueException 
      */
     public EditCommand(int filteredActivityListIndex, EditEventDescriptor editEventDescriptor,
-            EditTaskDescriptor editTaskDescriptor, String type) {
+            EditTaskDescriptor editTaskDescriptor, String type) throws IllegalValueException {
         assert filteredActivityListIndex > 0;
         assert editEventDescriptor != null;
         assert editTaskDescriptor != null;
         assert type != null;
-
+        
         // converts filteredActivityListIndex from one-based to zero-based.
         this.filteredActivityListIndex = filteredActivityListIndex - 1;
         this.type = type;
         this.editEventDescriptor = new EditEventDescriptor(editEventDescriptor);
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor); 
+        if(!isValidEndDateTime()) {
+            throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+        }
     }
 
     @Override
@@ -88,7 +96,8 @@ public class EditCommand extends Command {
             }
 
             Event eventToEdit = (Event) lastShownEventList.get(filteredActivityListIndex);
-            Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
+            try {
+                Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
             try {
                 //store for undo operation
                 ReadOnlyWhatsLeft currState = model.getWhatsLeft();
@@ -105,6 +114,9 @@ public class EditCommand extends Command {
             UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
             EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
+            } catch (IllegalValueException e) {
+                throw new CommandException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+            }
         }
 
         if (type.equals("ts")) {
@@ -157,9 +169,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Activity} with the details of {@code activityToEdit}
      * edited with {@code editActivityDescriptor}.
+     * @throws IllegalValueException 
      */
     private static Event createEditedEvent(ReadOnlyEvent eventToEdit,
-                                             EditEventDescriptor editEventDescriptor) {
+                                             EditEventDescriptor editEventDescriptor) throws IllegalValueException {
         assert eventToEdit != null;
 
         Description updatedDescription = editEventDescriptor.getDescription().orElseGet(
@@ -265,7 +278,46 @@ public class EditCommand extends Command {
             return tags;
         }
     }
-
+    
+    //@@author A0121668A
+    /**
+     * Checks if input values violates time/date constraint
+     */
+    private boolean isValidEndDateTime() {
+        
+        EndDate endDateToCompare;
+        EndTime endTimeToCompare;
+        StartDate startDateToCompare;
+        StartTime startTimeToCompare;
+        System.out.println(filteredActivityListIndex);
+        ReadOnlyEvent eventToEdit = model.getFilteredEventList().get(filteredActivityListIndex);
+        
+        if(editEventDescriptor.getEndDate().isPresent()){
+            endDateToCompare = editEventDescriptor.getEndDate().get();
+        } else {
+            endDateToCompare = eventToEdit.getEndDate();
+        }
+        
+        if(editEventDescriptor.getStartDate().isPresent()){
+            startDateToCompare = editEventDescriptor.getStartDate().get();
+        } else {
+            startDateToCompare = eventToEdit.getStartDate();
+        }
+        
+        if(editEventDescriptor.getEndTime().isPresent()){
+            endTimeToCompare = editEventDescriptor.getEndTime().get();
+        } else {
+            endTimeToCompare = eventToEdit.getEndTime();
+        }
+        
+        if(editEventDescriptor.getStartTime().isPresent()){
+            startTimeToCompare = editEventDescriptor.getStartTime().get();
+        } else {
+            startTimeToCompare = eventToEdit.getStartTime();
+        }
+        
+        return Event.isValideEndDateTime(endTimeToCompare, endDateToCompare, startTimeToCompare, startDateToCompare);
+    }
     /**
      * Stores the details to edit the Task with. Each non-empty field value will replace the
      * corresponding field value of the activity.

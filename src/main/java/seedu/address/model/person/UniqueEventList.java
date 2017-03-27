@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 
@@ -118,7 +119,7 @@ public class UniqueEventList implements Iterable<Event> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setActivities(List<? extends ReadOnlyEvent> events) throws DuplicateEventException, DuplicateTimeClashException {
+    public void setActivities(List<? extends ReadOnlyEvent> events) throws IllegalValueException {
         final UniqueEventList replacement = new UniqueEventList();
         for (final ReadOnlyEvent event : events) {
             replacement.add(new Event(event));
@@ -174,7 +175,7 @@ public class UniqueEventList implements Iterable<Event> {
     public static class EventNotFoundException extends Exception {}
 
 
-    public void setEvents(List<? extends ReadOnlyEvent> events) throws DuplicateEventException, DuplicateTimeClashException {
+    public void setEvents(List<? extends ReadOnlyEvent> events) throws IllegalValueException {
         final UniqueEventList replacement = new UniqueEventList();
         for (final ReadOnlyEvent event : events) {
             replacement.add(new Event(event));

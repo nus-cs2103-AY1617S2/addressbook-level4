@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
@@ -64,7 +65,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
     }
     
     public void setEvents(List<? extends ReadOnlyEvent> events)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+            throws IllegalValueException {
         this.events.setEvents(events);
     }
 
@@ -83,6 +84,8 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
             setEvents(newData.getEventList());
         } catch (UniqueEventList.DuplicateEventException | DuplicateTimeClashException e) {
             assert false : "WhatsLeft should not have duplicate events";
+        } catch (IllegalValueException e) {
+            assert false : "WhatsLeft should not have events with start date after end date";
         }
         try {
             setTags(newData.getTagList());

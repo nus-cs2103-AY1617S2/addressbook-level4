@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.UniqueTagList;
 
 //@@author A0148038A
@@ -24,13 +26,17 @@ public class Event implements ReadOnlyEvent{
 
     /**
      * Description and start date must be present and not null.
+     * @throws IllegalValueException 
      */
     public Event(Description description, StartTime startTime, StartDate startDate,
-    		EndTime endTime, EndDate endDate, Location location, UniqueTagList tags) {
+    		EndTime endTime, EndDate endDate, Location location, UniqueTagList tags) throws IllegalValueException {
     	
     	//check description and start date are present
         assert !CollectionUtil.isAnyNull(description, startDate);
-        
+        if (!isValideEndDateTime(endTime, endDate, startTime, startDate)) {
+            throw new IllegalValueException(EditCommand.MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+        }
+       
         this.description = description;
         this.startTime = startTime;
         this.startDate = startDate;
@@ -42,8 +48,9 @@ public class Event implements ReadOnlyEvent{
 
     /**
      * Creates a copy of the given ReadOnlyEvent.
+     * @throws IllegalValueException 
      */
-    public Event(ReadOnlyEvent source) {
+    public Event(ReadOnlyEvent source) throws IllegalValueException {
         this(source.getDescription(), source.getStartTime(), source.getStartDate(),
         		source.getEndTime(), source.getEndDate(), source.getLocation(), source.getTags());
     }
@@ -108,7 +115,22 @@ public class Event implements ReadOnlyEvent{
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
+    //@@author A0121668A
+    
+    /**
+     * Checks if start Date/Time is before end Date/Time
+     */
+    public static boolean isValideEndDateTime(EndTime et, EndDate ed, StartTime st, StartDate sd) {
+        if (sd.getValue().isAfter(ed.getValue())) {
+            return false;
+        }
+        if (sd.getValue().equals(ed.getValue())&&st.getValue().isAfter(et.getValue())) {
+            return false;
+        }
+        return true;
+    }
 
+    //@@author A0121668A
     /**
      * Replaces this event's tags with the tags in the argument tag list.
      */
