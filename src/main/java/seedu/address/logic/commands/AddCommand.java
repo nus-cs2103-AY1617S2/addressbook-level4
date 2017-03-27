@@ -50,13 +50,13 @@ public class AddCommand extends Command {
             for (String tagName : tags) {
                 tagSet.add(new Tag(tagName));
             }
-            
+
             // Check for existence of each of the fields
             Name name = (todo == null) ? new Name(todo) : null;
             Date start = (startTime == null) ? StringUtil.parseDate(startTime, DATE_FORMAT) : null;
             Date end = (endTime == null) ? StringUtil.parseDate(endTime, DATE_FORMAT) : null;
             UniqueTagList tagList = new UniqueTagList(tagSet);
-            
+
             this.toAdd = new Todo(name, start, end, tagList);
         } catch (IllegalValueException e) {
             throw new IllegalValueException(MESSAGE_INVALID_PARAMETERS);
@@ -74,7 +74,7 @@ public class AddCommand extends Command {
         // Cannot throw an exception since there's only one line in the constructor and the first line cannot be try{}
         this(todo, null, endTime, tags);
     }
-    
+
     //@@author A0163720M
     /**
      * Creates an AddCommand using raw values.
@@ -86,7 +86,7 @@ public class AddCommand extends Command {
         // Cannot throw an exception since there's only one line in the constructor and the first line cannot be try{}
         this(todo, null, null, tags);
     }
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
