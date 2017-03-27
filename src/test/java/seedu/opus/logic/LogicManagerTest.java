@@ -419,17 +419,18 @@ public class LogicManagerTest {
     @Test
     public void executeMarkCompleteTest() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
+        Task p1 = helper.generateTaskWithStatus("incomplete");
+        List<Task> oneTask = helper.generateTaskList(p1);
 
-        TaskManager expectedTaskManager = helper.generateTaskManager(threeTasks);
-        Task editedTask = threeTasks.get(0);
+        TaskManager expectedTaskManager = helper.generateTaskManager(oneTask);
+        Task editedTask = oneTask.get(0);
         editedTask.setStatus(new Status("complete"));
 
         expectedTaskManager.updateTask(0, editedTask);
-        helper.addToModel(model, threeTasks);
+        helper.addToModel(model, oneTask);
 
         assertCommandSuccess("mark 1",
-                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, threeTasks.get(0)),
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, oneTask.get(0)),
                 expectedTaskManager,
                 expectedTaskManager.getTaskList());
     }
