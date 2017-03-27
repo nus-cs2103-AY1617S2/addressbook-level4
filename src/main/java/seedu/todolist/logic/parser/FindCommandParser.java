@@ -1,30 +1,18 @@
 package seedu.todolist.logic.parser;
 
-<<<<<<< HEAD:src/main/java/seedu/todolist/logic/parser/FindCommandParser.java
 import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.todolist.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
-=======
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
->>>>>>> master:src/main/java/seedu/address/logic/parser/FindCommandParser.java
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-<<<<<<< HEAD:src/main/java/seedu/todolist/logic/parser/FindCommandParser.java
+import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.FindCommand;
 import seedu.todolist.logic.commands.IncorrectCommand;
-=======
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
->>>>>>> master:src/main/java/seedu/address/logic/parser/FindCommandParser.java
+import seedu.todolist.model.tag.Tag;
+import seedu.todolist.model.tag.UniqueTagList;
 
 /**
  * Parses input arguments and creates a new FindCommand object

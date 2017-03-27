@@ -3,20 +3,12 @@ package seedu.todolist.model;
 import java.util.Date;
 import java.util.Set;
 
-<<<<<<< HEAD:src/main/java/seedu/todolist/model/Model.java
 import seedu.todolist.commons.core.UnmodifiableObservableList;
+import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.todo.ReadOnlyTodo;
 import seedu.todolist.model.todo.Todo;
 import seedu.todolist.model.todo.UniqueTodoList;
 import seedu.todolist.model.todo.UniqueTodoList.DuplicateTodoException;
-=======
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.todo.ReadOnlyTodo;
-import seedu.address.model.todo.Todo;
-import seedu.address.model.todo.UniqueTodoList;
-import seedu.address.model.todo.UniqueTodoList.DuplicateTodoException;
->>>>>>> master:src/main/java/seedu/address/model/Model.java
 
 /**
  * The API of the Model component.

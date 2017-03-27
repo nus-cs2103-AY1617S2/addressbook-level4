@@ -6,31 +6,18 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
-<<<<<<< HEAD:src/main/java/seedu/todolist/model/ModelManager.java
 import seedu.todolist.commons.core.ComponentManager;
 import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.commons.events.model.TodoListChangedEvent;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.commons.util.StringUtil;
+import seedu.todolist.model.tag.Tag;
+import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.todo.ReadOnlyTodo;
 import seedu.todolist.model.todo.Todo;
 import seedu.todolist.model.todo.UniqueTodoList;
 import seedu.todolist.model.todo.UniqueTodoList.TodoNotFoundException;
-=======
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.TodoListChangedEvent;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.todo.ReadOnlyTodo;
-import seedu.address.model.todo.Todo;
-import seedu.address.model.todo.UniqueTodoList;
-import seedu.address.model.todo.UniqueTodoList.TodoNotFoundException;
->>>>>>> master:src/main/java/seedu/address/model/ModelManager.java
 
 /**
  * Represents the in-memory model of the todo list data.

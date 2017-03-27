@@ -1,9 +1,9 @@
-package seedu.todolist.logic.commands;
+[package seedu.todolist.logic.commands;
 
 import java.util.Set;
 
-import seedu.address.logic.parser.CliSyntax;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.todolist.logic.parser.CliSyntax;
+import seedu.todolist.model.tag.UniqueTagList;
 
 
 /**
