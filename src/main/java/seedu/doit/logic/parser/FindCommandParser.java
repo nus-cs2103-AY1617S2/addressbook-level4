@@ -21,7 +21,7 @@ import seedu.doit.logic.commands.IncorrectCommand;
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindCommandParser {
+public class FindCommandParser implements CommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -29,6 +29,7 @@ public class FindCommandParser {
      */
 
 
+    @Override
     public Command parse(String args) {
 
         ArgumentTokenizer argsTokenizer =

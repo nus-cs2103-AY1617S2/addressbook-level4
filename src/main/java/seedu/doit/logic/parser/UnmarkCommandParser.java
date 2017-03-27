@@ -13,12 +13,13 @@ import seedu.doit.logic.commands.UnmarkCommand;
 /**
  * Parses input arguments and creates a new MarkCommand object
  */
-public class UnmarkCommandParser {
+public class UnmarkCommandParser implements CommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the MarkCommand
      * and returns an MarkCommand object for execution.
      */
+    @Override
     public Command parse(String args) {
 
         Optional<Integer> index = ParserUtil.parseIndex(args);
