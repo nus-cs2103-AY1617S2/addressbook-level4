@@ -62,13 +62,13 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
         String priorityLevel = task.getPriority().value;
         switch(priorityLevel) {
-        case Priority.PRIORITY_LOW:
+        case Priority.PRIORITY_HIGH:
             priority.setStyle("-fx-text-fill: #ff5050; -fx-border-color: #ff5050; -fx-padding: 2px");
             break;
         case Priority.PRIORITY_MEDIUM:
             priority.setStyle("-fx-text-fill: #ff9900; -fx-border-color: #ff9900; -fx-padding: 2px");
             break;
-        case Priority.PRIORITY_HIGH:
+        case Priority.PRIORITY_LOW:
             priority.setStyle("-fx-text-fill: #33cc33; -fx-border-color: #33cc33; -fx-padding: 2px");
             break;
 
