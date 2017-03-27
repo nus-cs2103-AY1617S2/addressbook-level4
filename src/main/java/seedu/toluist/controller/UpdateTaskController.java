@@ -29,8 +29,8 @@ public class UpdateTaskController extends Controller {
 
     private static final String COMMAND_UPDATE_TASK = "update";
 
-    private static final String RESULT_MESSAGE_ERROR_NO_INDEX_FOUND =
-            "No index provided.";
+    private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
+            "Task provided already exist in the list.";
     private static final String RESULT_MESSAGE_ERROR_INVALID_INDEX =
             "The index provided is invalid.";
     private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
@@ -146,6 +146,9 @@ public class UpdateTaskController extends Controller {
             }
 
             TodoList todoList = TodoList.getInstance();
+            if (todoList.getTasks().contains(task)) {
+                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+            }
             if (todoList.save()) {
                 uiStore.setTasks(todoList.getTasks());
             }

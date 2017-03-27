@@ -28,6 +28,8 @@ public class AddTaskController extends Controller {
 
     private static final String COMMAND_ADD_TASK = "add";
 
+    private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
+            "Task provided already exist in the list.";
     private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
             "The task cannot be classified as a floating task, deadline, or event.";
     private static final String RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE =
@@ -101,6 +103,9 @@ public class AddTaskController extends Controller {
             }
             task.replaceTags(tags);
 
+            if (todoList.getTasks().contains(task)) {
+                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+            }
             todoList.add(task);
             if (todoList.save()) {
                 uiStore.setTasks(todoList.getTasks());
