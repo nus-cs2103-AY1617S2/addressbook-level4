@@ -130,28 +130,35 @@ public class CommandBox extends UiPart<Region> {
      */
     private void registerCursorKeyEventFilter() {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            handleCursorKeyEvent(event);
+            KeyCode key = event.getCode();
+            if (!handleCursorKeyEvent(key)) {
+                return;
+            }
+            event.consume();
         });
     }
 
-    private void handleCursorKeyEvent(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.UP)) {
+    private boolean handleCursorKeyEvent(KeyCode key) {
+        if (key.equals(KeyCode.UP)) {
             browseToPreviousCommand();
-        } else if (event.getCode().equals(KeyCode.DOWN)) {
+        } else if (key.equals(KeyCode.DOWN)) {
             browseToPrecedingCommand();
+        } else {
+            return false;
         }
+        return true;
     }
 
     private void browseToPreviousCommand() {
         String input  = history.getPreviousUserInput().orElse(EMPTY_STRING);
         commandTextField.setText(input);
-        commandTextField.positionCaret(input.length());
+        commandTextField.end();
     }
 
     private void browseToPrecedingCommand() {
         String input  = history.getPrecedingUserInput().orElse(EMPTY_STRING);
         commandTextField.setText(input);
-        commandTextField.positionCaret(input.length());
+        commandTextField.end();
     }
 
      /** Custom Trie for autocomplete feature.
