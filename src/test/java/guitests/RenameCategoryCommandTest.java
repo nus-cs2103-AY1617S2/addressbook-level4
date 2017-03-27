@@ -6,6 +6,7 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
+import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.parser.RenameCategoryCommandParser;
 import seedu.taskboss.testutil.TaskBuilder;
@@ -32,7 +33,7 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
                 .withPriorityLevel("Yes")
                 .withStartDateTime("Feb 18, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
-                .withCategories("Project").build();
+                .withCategories("Project", AddCommand.DEFAULT).build();
         sampleB = new TaskBuilder().withName("Birthday party")
                 .withInformation("311, Clementi Ave 2, #02-25")
                 .withPriorityLevel("No")
