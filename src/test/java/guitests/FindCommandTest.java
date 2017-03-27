@@ -41,21 +41,24 @@ public class FindCommandTest extends TodoListGuiTest {
     }
 
     @Test
+    //@@author A0163720M
     /**
      * Test to find todo with just one tag e.g. tags = some_Tag
      */
     public void find_todo_with_one_tag() {
         assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TAG.getPrefix() + SINGLE_TAG, td.cat);
     }
-
+    //@@author
+    
     @Test
+    //@@author A0163720M
     /**
      * Test to find todo with multiple tags e.g. tags = some_tag, some_tag2
      */
     public void find_todo_with_multiple_tags() {
         assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TAG.getPrefix() + MULTI_TAG, td.dog, td.cat);
     }
-
+    //@@author
 
     private void assertFindResult(String command, TestTodo... expectedHits) {
         commandBox.runCommand(command);
