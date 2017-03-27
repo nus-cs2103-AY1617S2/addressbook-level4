@@ -110,11 +110,11 @@ public class FindCommandParser implements CommandParser {
             return false;
         } else {
             String taskDateString = taskDate.get();
-            if (taskDateString.length() < 3) {
+            if (taskDateString.length() < 6) {
                 return false;
             } else {
-                String prefixToCompare = "by/";
-                String byPrefix = taskDateString.substring(0, 3);
+                String prefixToCompare = "before";
+                String byPrefix = taskDateString.substring(0, 6);
                 return byPrefix.equals(prefixToCompare);
             }
         }
