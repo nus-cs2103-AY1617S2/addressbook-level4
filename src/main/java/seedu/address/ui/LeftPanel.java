@@ -142,6 +142,16 @@ public class LeftPanel extends UiPart<Region> {
         return labels;
     }
 
+    @FXML
+    private void toggleLabelList() {
+        labelListView.setVisible(!labelListView.isVisible());
+        if (labelListView.isVisible()) {
+            labelArrow.setIcon(FontAwesomeIcon.ANGLE_UP);
+        } else {
+            labelArrow.setIcon(FontAwesomeIcon.ANGLE_DOWN);
+        }
+    }
+
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
