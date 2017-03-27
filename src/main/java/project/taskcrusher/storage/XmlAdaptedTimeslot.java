@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.event.Timeslot;
-import project.taskcrusher.model.shared.DateUtil;
+import project.taskcrusher.model.shared.DateUtilApache;
 
 public class XmlAdaptedTimeslot {
 
@@ -27,8 +27,8 @@ public class XmlAdaptedTimeslot {
     public XmlAdaptedTimeslot(Timeslot timeslot) {
 //        startDate = timeslot.start.toString();
 //        endDate = timeslot.end.toString();
-        startDate = DateUtil.dateAsString(timeslot.start);
-        endDate = DateUtil.dateAsString(timeslot.end);
+        startDate = DateUtilApache.dateAsString(timeslot.start);
+        endDate = DateUtilApache.dateAsString(timeslot.end);
     }
 
     /**

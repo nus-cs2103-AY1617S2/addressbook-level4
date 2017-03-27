@@ -33,12 +33,12 @@ public class AddCommandParser {
     private static final Pattern ADD_COMMAND_FORMAT = Pattern.compile("(?<flag>[te])(?<name>.+)");
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TAG, PREFIX_PRIORITY, PREFIX_LOCATION, PREFIX_DESCRIPTION);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_TAG, PREFIX_PRIORITY,
+                PREFIX_LOCATION, PREFIX_DESCRIPTION);
         argsTokenizer.tokenize(args);
 
         Matcher matcher;
@@ -95,12 +95,7 @@ public class AddCommandParser {
 
     private Command addTask(String name, String deadline, String priority, String description, Set<String> tags) {
         try {
-            return new AddCommand(
-                    name,
-                    deadline,
-                    priority,
-                    description,
-                    tags);
+            return new AddCommand(name, deadline, priority, description, tags);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
@@ -118,17 +113,17 @@ public class AddCommandParser {
 
             String[] timeslotsAsStrings = timesToParse.split("\\s+or\\s+");
             List<Timeslot> timeslots = new ArrayList<>();
-            for (String t: timeslotsAsStrings) {
+            for (String t : timeslotsAsStrings) {
                 String[] dates = t.split("\\s+to\\s+");
+
+                if (dates.length != 2) {
+                    throw new IllegalValueException("Each timeslot must have start and end date");
+                }
+
                 timeslots.add(new Timeslot(dates[0], dates[1]));
             }
 
-            return new AddCommand(
-                    name,
-                    timeslots,
-                    location,
-                    description,
-                    tags);
+            return new AddCommand(name, timeslots, location, description, tags);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {

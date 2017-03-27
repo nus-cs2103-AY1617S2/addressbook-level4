@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
-import project.taskcrusher.model.shared.DateUtil;
+import project.taskcrusher.model.shared.DateUtilApache;
 
 /**
  * Represents a deadline for a task. Empty deadline means no deadline.
@@ -30,7 +30,7 @@ public class Deadline {
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtil.dateAsString(DateUtil.parseDate(deadline, true));
+            this.deadline = DateUtilApache.dateAsString(DateUtilApache.parseDate(deadline, true));
         }
     }
 
@@ -49,7 +49,7 @@ public class Deadline {
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtil.dateAsString(DateUtil.parseDate(deadline, isNew));
+            this.deadline = DateUtilApache.dateAsString(DateUtilApache.parseDate(deadline, isNew));
         }
 
     }
@@ -57,7 +57,7 @@ public class Deadline {
     @Override
     public String toString() {
         if (this.hasDeadline()) {
-            return DateUtil.dateAsString(this.getDate().get());
+            return DateUtilApache.dateAsString(this.getDate().get());
         } else {
             return Deadline.NO_DEADLINE;
         }
@@ -83,7 +83,7 @@ public class Deadline {
 
         if (this.hasDeadline()) {
             try {
-                return Optional.of(DateUtil.parseDate(this.deadline, false));
+                return Optional.of(DateUtilApache.parseDate(this.deadline, false));
             } catch (IllegalValueException e) {
                 // TODO this should not occur by default, provided that this object was instantiated successfully.
                 e.printStackTrace();

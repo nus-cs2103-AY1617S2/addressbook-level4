@@ -3,7 +3,7 @@ package project.taskcrusher.model.event;
 import java.util.Date;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
-import project.taskcrusher.model.shared.DateUtil;
+import project.taskcrusher.model.shared.DateUtilApache;
 
 /**
  * Represents a timeslot for an event from {@code start} to {@code end}
@@ -22,8 +22,8 @@ public class Timeslot {
         assert start != null;
         assert end != null;
 
-        this.start = DateUtil.parseDate(start, true);
-        this.end = DateUtil.parseDate(end, true);
+        this.start = DateUtilApache.parseDate(start, true);
+        this.end = DateUtilApache.parseDate(end, true);
 
         if (!isValidTimeslot(this.start, this.end)) {
             throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
@@ -34,8 +34,8 @@ public class Timeslot {
         assert start != null;
         assert end != null;
 
-        this.start = DateUtil.parseDate(start, isNew);
-        this.end = DateUtil.parseDate(end, isNew);
+        this.start = DateUtilApache.parseDate(start, isNew);
+        this.end = DateUtilApache.parseDate(end, isNew);
 
         if (!isValidTimeslot(this.start, this.end, isNew)) {
             throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
@@ -80,7 +80,7 @@ public class Timeslot {
 
     @Override
     public String toString() {
-        return DateUtil.dateAsString(start) + " to " + DateUtil.dateAsString(end);
+        return DateUtilApache.dateAsString(start) + " to " + DateUtilApache.dateAsString(end);
     }
 
     @Override
