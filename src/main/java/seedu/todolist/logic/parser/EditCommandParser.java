@@ -18,8 +18,8 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.logic.commands.AddCommand;
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.EditCommand;
-import seedu.todolist.logic.commands.IncorrectCommand;
 import seedu.todolist.logic.commands.EditCommand.EditTodoDescriptor;
+import seedu.todolist.logic.commands.IncorrectCommand;
 import seedu.todolist.model.tag.UniqueTagList;
 
 /**
