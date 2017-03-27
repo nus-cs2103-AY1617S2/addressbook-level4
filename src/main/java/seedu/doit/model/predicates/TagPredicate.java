@@ -1,3 +1,4 @@
+// @@author A0139399J
 package seedu.doit.model.predicates;
 
 import java.util.Set;
@@ -7,7 +8,6 @@ import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.tag.Tag;
 
-//@@author A0139399J
 /**
 * A predicate that will return true if any of the ReadOnlyTask tags matches the
 * tagKeywords
