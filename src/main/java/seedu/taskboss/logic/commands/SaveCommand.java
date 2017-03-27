@@ -37,6 +37,7 @@ public class SaveCommand extends Command {
 
         try {
             storage.setFilePath(filepath);
+            model.saveTaskboss();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (IOException e) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);

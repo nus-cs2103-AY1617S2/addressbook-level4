@@ -148,6 +148,7 @@ public class UniqueCategoryList implements Iterable<Category> {
             internalList.remove(toRemove);
         }
     }
+
     @Override
     public Iterator<Category> iterator() {
         return internalList.iterator();
