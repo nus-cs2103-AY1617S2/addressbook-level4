@@ -32,7 +32,7 @@ public class TaskListCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         startTime.setText(task.getStartTime() != null ? task.getStartTime().toString() : "");
         endTime.setText(task.getEndTime() != null ? task.getEndTime().toString() : "");
-        description.setText("");
+        description.setText(task.getDescription() == null ? "" : task.getDescription());
         initTags(task);
     }
 
