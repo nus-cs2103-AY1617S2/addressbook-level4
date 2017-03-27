@@ -7,6 +7,7 @@ import seedu.todolist.model.tag.UniqueTagList;
 
 public class FloatingTask extends Task {
 
+    private static final String TYPE = "FloatingTask";
     /**
      * name, tags is guaranteed to be present and not null.
      */
@@ -30,19 +31,23 @@ public class FloatingTask extends Task {
         this.completed = isComplete;
     }
 
+    @Override
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
 
+    @Override
     public Name getName() {
         return name;
     }
 
+    @Override
     public StartTime getStartTime() {
         return null;
     }
 
+    @Override
     public EndTime getEndTime() {
         return null;
     }
@@ -69,5 +74,10 @@ public class FloatingTask extends Task {
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 }

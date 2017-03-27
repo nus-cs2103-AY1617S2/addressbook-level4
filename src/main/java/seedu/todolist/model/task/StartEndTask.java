@@ -10,6 +10,7 @@ import seedu.todolist.model.tag.UniqueTagList;
  */
 public class StartEndTask extends Task {
 
+    private static final String TYPE = "StartEndTask";
     private StartTime startTime;
     private EndTime endTime;
 
@@ -40,15 +41,18 @@ public class StartEndTask extends Task {
         this.completed = isComplete;
     }
 
+    @Override
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
 
+    @Override
     public Name getName() {
         return name;
     }
 
+    @Override
     public StartTime getStartTime() {
         return startTime;
     }
@@ -58,6 +62,7 @@ public class StartEndTask extends Task {
         this.startTime = startTime;
     }
 
+    @Override
     public EndTime getEndTime() {
         return endTime;
     }
@@ -93,5 +98,10 @@ public class StartEndTask extends Task {
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 }
