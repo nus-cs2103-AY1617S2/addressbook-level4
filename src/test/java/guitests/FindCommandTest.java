@@ -1,3 +1,4 @@
+// @@author A0139399J
 package guitests;
 
 import org.junit.Test;
@@ -7,43 +8,51 @@ import seedu.doit.testutil.TestTask;
 
 public class FindCommandTest extends TaskManagerGuiTest {
 
+    public static final String MESSAGE_FIND_COMMAND = "find ";
+    public static final String MESSAGE_TEST_CLEAR_COMMAND = "clear";
+    public static final String MESSAGE_TEST_FIND_MARK = "find n/Mark";
+    public static final String MESSAGE_TEST_FIND_MEIER = "find n/Meier";
+    public static final String MESSAGE_TEST_FIND_JEAN = "find n/Jean";
+    public static final String MESSAGE_TEST_FIND_PRIORITY = "find p/high";
+    public static final String MESSAGE_TEST_FIND_DESCRIPTION = "find d/l";
+    public static final String MESSAGE_TEST_FIND_TAG = "find t/owesMoney";
+    public static final String MESSAGE_TEST_DELETE_COMMAND = "delete 1";
+    public static final String MESSAGE_TEST_FIND_INVALID = "findn/george";
+
     @Test
     public void find_name_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+        assertFindResult(MESSAGE_TEST_FIND_MARK); // no results
+        assertFindResult(MESSAGE_TEST_FIND_MEIER, td.benson, td.daniel); // multiple results
 
         //find after deleting one result
-        commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        commandBox.runCommand(MESSAGE_TEST_DELETE_COMMAND);
+        assertFindResult(MESSAGE_TEST_FIND_MEIER, td.daniel);
     }
 
-    //@@author A0139399J
     @Test
     public void find_priority_nonEmptyList() {
-        assertFindResult("find p/high", td.carl, td.daniel, td.george); // multiple results
+        assertFindResult(MESSAGE_TEST_FIND_PRIORITY, td.carl, td.daniel, td.george); // multiple results
     }
 
-    //@@author A0139399J
     @Test
     public void find_description_nonEmptyList() {
-        assertFindResult("find d/l", td.aF, td.bF, td.cF, td.aE, td.bE, td.cE); // multiple results
+        assertFindResult(MESSAGE_TEST_FIND_DESCRIPTION, td.aF, td.bF, td.cF, td.aE, td.bE, td.cE); // multiple results
     }
 
-    //@@author A0139399J
     @Test
     public void find_tag_nonEmptyList() {
-        assertFindResult("find t/owesMoney", td.benson); // multiple results
+        assertFindResult(MESSAGE_TEST_FIND_TAG, td.benson); // multiple results
     }
 
     @Test
     public void find_emptyList() {
-        commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+        commandBox.runCommand(MESSAGE_TEST_CLEAR_COMMAND);
+        assertFindResult(MESSAGE_TEST_FIND_JEAN); // no results
     }
 
     @Test
     public void find_invalidCommand_fail() {
-        commandBox.runCommand("findgeorge");
+        commandBox.runCommand(MESSAGE_TEST_FIND_INVALID);
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 

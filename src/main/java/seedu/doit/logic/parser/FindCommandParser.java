@@ -9,7 +9,6 @@ import static seedu.doit.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,26 +24,26 @@ import seedu.doit.logic.commands.IncorrectCommand;
 public class FindCommandParser implements CommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns an FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * FindCommand and returns an FindCommand object for execution.
      */
-
 
     @Override
     public Command parse(String args) {
 
-        ArgumentTokenizer argsTokenizer =
-            new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_START, PREFIX_END,
+                PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
-        Set<String> nameKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_NAME)
-            .orElse(Collections.emptyList()));
-        Set<String> priorityKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_PRIORITY)
-            .orElse(Collections.emptyList()));
-        Set<String> startKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_START)
-            .orElse(Collections.emptyList()));
-        Set<String> deadlineKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_END)
-            .orElse(Collections.emptyList()));
-        Set<String> tagsKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_TAG)
+        Set<String> nameKeyWordSet = new HashSet<>(
+                argsTokenizer.getAllValuesWithoutPrefix(PREFIX_NAME).orElse(Collections.emptyList()));
+        Set<String> priorityKeyWordSet = new HashSet<>(
+                argsTokenizer.getAllValuesWithoutPrefix(PREFIX_PRIORITY).orElse(Collections.emptyList()));
+        Set<String> startKeyWordSet = new HashSet<>(
+                argsTokenizer.getAllValuesWithoutPrefix(PREFIX_START).orElse(Collections.emptyList()));
+        Set<String> deadlineKeyWordSet = new HashSet<>(
+                argsTokenizer.getAllValuesWithoutPrefix(PREFIX_END).orElse(Collections.emptyList()));
+        Set<String> tagsKeyWordSet = new HashSet<>(
+                argsTokenizer.getAllValuesWithoutPrefix(PREFIX_TAG)
             .orElse(Collections.emptyList()));
         Set<String> descKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_DESCRIPTION)
             .orElse(Collections.emptyList()));

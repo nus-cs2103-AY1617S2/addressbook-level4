@@ -381,7 +381,7 @@ public class LogicManagerTest {
         Collections.sort(expectedList, new TaskNameComparator());
         helper.addToModel(this.model, fourTasks);
 
-        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
 
@@ -416,7 +416,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(this.model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+        assertCommandSuccess("find n/key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 

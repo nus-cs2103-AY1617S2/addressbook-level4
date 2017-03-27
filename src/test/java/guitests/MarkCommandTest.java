@@ -16,7 +16,7 @@ import seedu.doit.testutil.TestTask;
 public class MarkCommandTest extends TaskManagerGuiTest {
 
     public static final String MESSAGE_MARK_COMMAND = "mark ";
-    public static final String MESSAGE_TEST_FIND_COMMAND = "find Elle";
+    public static final String MESSAGE_TEST_FIND_COMMAND = "find n/Elle";
 
     public static final int INDEX_MARK_VALID = 2;
     public static final int INDEX_MARK_INVALID = -2;

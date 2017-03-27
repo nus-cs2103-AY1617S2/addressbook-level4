@@ -38,7 +38,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void undo_done_success() throws Exception {
+    public void undo_mark_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_MARK_COMMAND);
         this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
     }
