@@ -34,6 +34,10 @@ public class MainGuiHandle extends GuiHandle {
     }
 
     //@@author A0142255M
+    public TaskCountHandle getTaskCount() {
+        return new TaskCountHandle(guiRobot, primaryStage);
+    }
+
     public StatusBarFooterHandle getStatusBarFooter() {
         return new StatusBarFooterHandle(guiRobot, primaryStage);
     }

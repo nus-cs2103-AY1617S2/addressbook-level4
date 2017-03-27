@@ -1,12 +1,10 @@
 //@@author A0142255M
 
-package seedu.tache.ui;
+package guitests;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import guitests.TaskManagerGuiTest;
 
 public class StatusBarFooterTest extends TaskManagerGuiTest {
 
