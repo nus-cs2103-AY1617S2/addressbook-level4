@@ -37,6 +37,21 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
     private static Tag tag3 = new Tag("tag3");
 
     @Test
+    public void testInvalidIndexInput() {
+        String command = UPDATE + " 0 " + "description";
+        commandBox.runCommand(command);
+        assertResultMessage("The index provided is invalid.");
+
+        command = UPDATE + " 3 " + "description";
+        commandBox.runCommand(command);
+        assertResultMessage("The index provided is invalid.");
+
+        command = UPDATE + " potato " + "description";
+        commandBox.runCommand(command);
+        assertResultMessage("The index provided is invalid.");
+    }
+
+    @Test
     public void updateFloatingTask() {
         // update description
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
