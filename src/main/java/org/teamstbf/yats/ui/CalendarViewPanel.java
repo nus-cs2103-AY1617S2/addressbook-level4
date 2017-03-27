@@ -19,8 +19,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
@@ -31,6 +29,7 @@ import javafx.scene.layout.Region;
 public class CalendarViewPanel extends UiPart<Region> {
 
 	private static final String FXML = "CalendarView.fxml";
+	private static ObservableList<String> timeData = FXCollections.observableArrayList();
 
 	@FXML
 	private AnchorPane calendarView;
@@ -39,35 +38,46 @@ public class CalendarViewPanel extends UiPart<Region> {
 	@FXML
 	private Tab dayView;
 	@FXML
+	private Tab weekView;
+	@FXML
+	private Tab monthView;
+	@FXML
+	private Tab yearView;
+	@FXML
 	private TableView<String> timeList;
 	@FXML
 	private TableColumn<LocalDateTime, String> timeListColumn;
 	@FXML
 	private ListView<ReadOnlyEvent> taskListView;
 	@FXML
-	private Button leftArrow;
+	private Button leftArrowDay;
 	@FXML
-	private Button rightArrow;
+	private Button rightArrowDay;
+	@FXML
+	private Button leftArrowWeek;
+	@FXML
+	private Button rightArrowWeek;
+	@FXML
+	private Button leftArrowMonth;
+	@FXML
+	private Button rightArrowMonth;
+	@FXML
+	private Button leftArrowYear;
+	@FXML
+	private Button rightArrowYear;
 	@FXML
 	private Label currentDay;
 	@FXML
+	private Label currentWeekMonth;
+	@FXML
 	private Label currentMonth;
 	@FXML
-	private Label currentMonth2;
-	@FXML
 	private Label currentYear;
-	@FXML
-	private Tab weekView;
-	@FXML
-	private Tab monthView;
-	@FXML
-	private Tab yearView;
 
+	private static LocalDate today = LocalDate.now();
 	private final LocalTime firstTimeSlot = LocalTime.of(0, 0);
 	private final Duration timeDifference = Duration.ofMinutes(60);
 	private final LocalTime lastTimeSlot = LocalTime.of(23, 00);
-
-	private LocalDate today = LocalDate.now();
 	private LocalDateTime startTime = today.atTime(firstTimeSlot);
 
 	/**
@@ -79,6 +89,7 @@ public class CalendarViewPanel extends UiPart<Region> {
 		super(FXML);
 		FxViewUtil.applyAnchorBoundaryParameters(calendarView, 0.0, 0.0, 0.0, 0.0);
 		invokeTabPane();
+		invokeArrowImage();
 		initializeDayView();
 		initializeWeekView();
 		initializeMonthView();
@@ -95,15 +106,17 @@ public class CalendarViewPanel extends UiPart<Region> {
 	}
 
 	private void invokeArrowImage() {
-		Image leftArrowImage = new Image(getClass().getResourceAsStream("arrow_left_48px.png"));
-		leftArrow.setGraphic(new ImageView(leftArrowImage));
-		Image rightArrowImage = new Image(getClass().getResourceAsStream("arrow_right_48px.png"));
-		rightArrow.setGraphic(new ImageView(rightArrowImage));
+		leftArrowDay.setText("<<");
+		rightArrowDay.setText(">>");
+		leftArrowWeek.setText("<<");
+		rightArrowWeek.setText(">>");
+		leftArrowMonth.setText("<<");
+		rightArrowMonth.setText(">>");
+		leftArrowYear.setText("<<");
+		rightArrowYear.setText(">>");
 	}
 
 	private void initializeDayView() {
-
-		ObservableList<String> timeData = FXCollections.observableArrayList();
 
 		for (startTime = today.atTime(firstTimeSlot); !startTime
 				.isAfter(today.atTime(lastTimeSlot)); startTime = startTime.plus(timeDifference)) {
@@ -113,21 +126,81 @@ public class CalendarViewPanel extends UiPart<Region> {
 	}
 
 	private void initializeWeekView() {
-		currentMonth.setText(today.format(dateFormatter("MMM")));
+		currentWeekMonth.setText(today.format(dateFormatter("MMM")));
 	}
 
 	private void initializeMonthView() {
-		currentMonth2.setText(today.format(dateFormatter("MMM")));
+		currentMonth.setText(today.format(dateFormatter("MMM")));
 	}
 
 	private void initializeYearView() {
 		currentYear.setText(today.format(dateFormatter("uuuu")));
 	}
 
+	// ======= Utility methods for the Button Bar ==========
+
 	private DateTimeFormatter dateFormatter(String toFormat) {
 		return DateTimeFormatter.ofPattern(toFormat);
 	}
 
-	// ====== Inner classes to define calendar view ================
+	public void nextDay() {
+		today = today.plusDays(1);
+		currentDay.setText(today.format(dateFormatter("d MMM")));
+	}
+
+	public void prevDay() {
+		today = today.minusDays(1);
+		currentDay.setText(today.format(dateFormatter("d MMM")));
+	}
+
+	public void nextWeekMonth() {
+		today = today.plusMonths(1);
+		currentWeekMonth.setText(today.format(dateFormatter("MMM")));
+	}
+
+	public void prevWeekMonth() {
+		today = today.minusMonths(1);
+		currentWeekMonth.setText(today.format(dateFormatter("MMM")));
+	}
+
+	public void nextMonth() {
+		today = today.plusMonths(1);
+		currentMonth.setText(today.format(dateFormatter("MMM")));
+	}
+
+	public void prevMonth() {
+		today = today.minusMonths(1);
+		currentMonth.setText(today.format(dateFormatter("MMM")));
+	}
+
+	public void nextYear() {
+		today = today.plusYears(1);
+		currentYear.setText(today.format(dateFormatter("uuuu")));
+	}
+
+	public void prevYear() {
+		today = today.minusYears(1);
+		currentYear.setText(today.format(dateFormatter("uuuu")));
+	}
+
+	public void resetTodayDay() {
+		today = LocalDate.now();
+		currentDay.setText(today.format(dateFormatter("d MMM")));
+	}
+
+	public void resetTodayWeek() {
+		today = LocalDate.now();
+		currentWeekMonth.setText(today.format(dateFormatter("MMM")));
+	}
+
+	public void resetTodayMonth() {
+		today = LocalDate.now();
+		currentMonth.setText(today.format(dateFormatter("MMM")));
+	}
+
+	public void resetTodayYear() {
+		today = LocalDate.now();
+		currentYear.setText(today.format(dateFormatter("uuuu")));
+	}
 
 }

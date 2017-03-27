@@ -50,9 +50,9 @@
                            <children>
                               <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="NEVER">
                                 <buttons>
-                                  <Button fx:id="rightArrow" mnemonicParsing="false" text="\$next" />
-                                    <Button fx:id="leftArrow" mnemonicParsing="false" text="\$previous" />
-                                    <Label fx:id="currentDay" text="\$day" />
+                                  <Button fx:id="rightArrowDay" mnemonicParsing="false" onAction="#nextDay" text="\$next" />
+                                    <Button fx:id="leftArrowDay" mnemonicParsing="false" onAction="#prevDay" text="\$previous" />
+                                    <Label fx:id="currentDay" onMouseClicked="#resetTodayDay" text="\$day" />
                                 </buttons>
                               </ButtonBar>
                            </children>
@@ -81,9 +81,9 @@
                         </TableView>
                         <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                            <buttons>
-                              <Button mnemonicParsing="false" text="\$next" />
-                              <Button mnemonicParsing="false" text="\$previous" />
-                              <Label fx:id="currentMonth" text="\$month" />
+                              <Button fx:id="rightArrowWeek" mnemonicParsing="false" onAction="#nextWeekMonth" text="\$next" />
+                              <Button fx:id="leftArrowWeek" mnemonicParsing="false" onAction="#prevWeekMonth" text="\$previous" />
+                              <Label fx:id="currentWeekMonth" onMouseClicked="#resetTodayWeek" text="\$month" />
                            </buttons>
                         </ButtonBar>
                      </children>
@@ -110,9 +110,9 @@
                         </TableView>
                         <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                            <buttons>
-                              <Button mnemonicParsing="false" text="\$next" />
-                              <Button mnemonicParsing="false" text="\$previous" />
-                              <Label fx:id="currentMonth2" text="\$month" />
+                              <Button fx:id="rightArrowMonth" mnemonicParsing="false" onAction="#nextMonth" text="\$next" />
+                              <Button fx:id="leftArrowMonth" mnemonicParsing="false" onAction="#prevMonth" text="\$previous" />
+                              <Label fx:id="currentMonth" onMouseClicked="#resetTodayMonth" text="\$month" />
                            </buttons>
                         </ButtonBar>
                      </children>
@@ -140,7 +140,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$february" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="February" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -164,48 +164,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -219,7 +184,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$march" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="March" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -243,48 +208,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -298,7 +228,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$april" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="April" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -322,48 +252,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -377,7 +272,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$may" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="May" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -401,48 +296,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -456,7 +316,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$june" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="June" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -480,48 +340,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -535,7 +360,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$july" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="July" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -559,48 +384,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -614,7 +404,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$august" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="August" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -638,48 +428,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -693,7 +448,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$september" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="September" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -717,48 +472,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -772,7 +492,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$october" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="October" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -796,48 +516,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -851,7 +536,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$november" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="November" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -875,48 +560,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -930,7 +580,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$december" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="December" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -954,48 +604,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -1009,7 +624,7 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label prefHeight="24.0" prefWidth="148.0" text="\$january" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label prefHeight="24.0" prefWidth="148.0" text="January" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="148.0">
@@ -1033,48 +648,13 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="\$sunday" />
-                                                <Label text="\$monday" GridPane.columnIndex="1" />
-                                                <Label text="\$tuesday" GridPane.columnIndex="2" />
-                                                <Label text="\$wednesday" GridPane.columnIndex="3" />
-                                                <Label text="\$thursday" GridPane.columnIndex="4" />
-                                                <Label text="\$friday" GridPane.columnIndex="5" />
-                                                <Label text="\$saturday" GridPane.columnIndex="6" />
-                                                <Label text="\$sunday" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                                <Label text="\$sunday" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                                                <Label text="\$sunday" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                                                <Label text="\$sunday" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                                                <Label text="\$sunday" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                                                <Label text="\$sunday" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                                <Label text="Sun" />
+                                                <Label text="Mon" GridPane.columnIndex="1" />
+                                                <Label text="Tue" GridPane.columnIndex="2" />
+                                                <Label text="Wed" GridPane.columnIndex="3" />
+                                                <Label text="Thu" GridPane.columnIndex="4" />
+                                                <Label text="Fri" GridPane.columnIndex="5" />
+                                                <Label text="Sat" GridPane.columnIndex="6" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -1088,9 +668,9 @@
                         </GridPane>
                         <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                            <buttons>
-                              <Button mnemonicParsing="false" text="\$next" />
-                              <Button mnemonicParsing="false" text="\$previous" />
-                              <Label fx:id="currentYear" text="\$year" />
+                              <Button fx:id="rightArrowYear" mnemonicParsing="false" onAction="#nextYear" text="\$next" />
+                              <Button fx:id="leftArrowYear" mnemonicParsing="false" onAction="#prevYear" text="\$previous" />
+                              <Label fx:id="currentYear" onMouseClicked="#resetTodayYear" text="\$year" />
                            </buttons>
                         </ButtonBar>
                      </children>
