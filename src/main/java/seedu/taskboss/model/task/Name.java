@@ -11,6 +11,7 @@ public class Name {
     public static final String MESSAGE_NAME_CONSTRAINTS =
             "Task names should only contain alphanumeric characters,"
             + " special characters and spaces, and it should not be blank";
+    public static final String EMPTY_STRING = "";
 
     /*
      * The first character of the information must not be a whitespace,
@@ -39,10 +40,7 @@ public class Name {
      * Returns true if a given string is a valid person name.
      */
     public static boolean isValidName(String test) {
-        if ("".equals(test)) {
-            return false;
-        }
-        return true;
+        return !test.equals(EMPTY_STRING);
     }
 
 
