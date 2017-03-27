@@ -85,9 +85,7 @@ public class CalendarPanel extends UiPart<Region> {
         ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
         refreshCalendar(taskList);
     }
-    //@@author
 
-    //@@author A0139925U
     private String getRemoveAllTaskScript() {
         return "remove_all()";
     }
