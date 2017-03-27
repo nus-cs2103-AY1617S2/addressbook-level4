@@ -222,7 +222,20 @@ As shown in Figure 8, **`Model`**:
 * Stores `ezDo` data which includes the `Tag` list and `Task` list.
 
 * Exposes a `UnmodifiableObservableList<ReadOnlyTask>` object that can only be 'observed' i.e **`UI`** can be bound to this list so that the displayed list on the interface displays changes when the data in the list changes.
- 
+
+#### Design Choices
+ezDo supports undo/redo commands. We saw two ways of doing it:
+* Save history states.
+
+* Remember what actions were taken, and do the logical reverse of them when the undo command is called.
+
+After consideration, we decided to go with saving history states. In a task manager, tasks can be deleted and cleared. We can specify a 'de-clear' action, but since data is already lost, we can never actually return to the original state.
+
+As such, our undo/redo functionality is designed similar to the Memento pattern. The `ModelManager` class that implements **`Model`** holds two custom fixed-capacity array-based stacks of size 5. One stack holds history states for the undo command, while the other is for the redo command. We decided to limit the size of the stack in order to prevent stack overflow. This is a real possibility when the task manager holds a lot of data, and the user inputs many commands that keep accumulating history states in the undo stack. We felt that 5 is a good number of history states to save, in that users can undo up to 5 undo-able commands. If the stack is full, the newest history state overwrites the oldest one in the stack, thereby maintaining its size of 5. 
+
+Before any undo-able command is fully executed, a copy of the current history state is saved onto the undo stack and the redo stack is cleared. 
+
+If a user executes the undo command, the current state would be saved onto the redo stack, and the previous state in the undo stack popped off so that `ModelManager` can rollback to it.
 <br><br>
 
 
@@ -239,6 +252,9 @@ As shown in Figure 9, **`Storage`**:
 * Saves `UserPref` objects in `.json` format and read it back.
 
 * Saves ezDo data in `.xml` format and read it back.
+
+#### Design Choices
+ezDo allows users to specify a new location to save their data. Instead of populating a user's machine with many duplicates of the saved data by simply copying the old file and creating a new copy, we move the current savefile to the new location specified. This new location is saved in `Config` so that ezDo knows where to retrieve the right savefile in the next session.
 <br><br>
 
 
