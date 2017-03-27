@@ -14,6 +14,8 @@ public class DateTime {
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date and time format should be in this format: DD-MM-YY HHMM";
     public static final String DATETIME_VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{2}(\\s{1}\\d{4})?";
+    public static final String DATETIME_REGEX_WITHOUT_TIME = "\\d{2}-\\d{2}-\\d{2}";
+    public static final String DEFAULT_TIME = "0000";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yy HHmm");
 
     public final LocalDateTime dateTime;
@@ -26,11 +28,18 @@ public class DateTime {
         return test.matches(DATETIME_VALIDATION_REGEX);
     }
 
+    public static boolean isValidDateTimeWithoutTime(String test) {
+        return test.matches(DATETIME_REGEX_WITHOUT_TIME);
+    }
+
     public DateTime(String dateTimeString) throws IllegalValueException {
         if (!isValidDateTime(dateTimeString)) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
         this.value = dateTimeString;
+        if (isValidDateTimeWithoutTime(dateTimeString)) {
+            dateTimeString = dateTimeString + " " + DEFAULT_TIME;
+        }
         this.dateTime = LocalDateTime.parse(dateTimeString, FORMATTER);
     }
 
