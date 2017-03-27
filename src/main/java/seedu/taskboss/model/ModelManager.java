@@ -76,6 +76,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
+    @Override
+    public void saveTaskboss() {
+        indicateTaskBossChanged();
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
