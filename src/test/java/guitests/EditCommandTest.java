@@ -26,7 +26,7 @@ public class EditCommandTest extends WhatsLeftGuiTest {
         String detailsToEdit = "Bobby p/high l/Block 123, Bobby Street 3 t/husband";
         int whatsLeftIndex = 1;
 
-        TestActivity editedActivity = new ActivityBuilder().withDescription("Bobby").withPriority("high")
+        TestActivity editedActivity = new ActivityBuilder().withDescription("Bobby").withStartTime("high")
                 .withLocation("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(whatsLeftIndex, whatsLeftIndex, detailsToEdit, editedActivity);
@@ -76,35 +76,35 @@ public class EditCommandTest extends WhatsLeftGuiTest {
 
     @Test
     public void edit_invalidActivityIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+        commandBox.runCommand("edit ev 8 Bobby");
+        assertResultMessage(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void edit_noFieldsSpecified_failure() {
-        commandBox.runCommand("edit 1");
+        commandBox.runCommand("edit ev 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
 
-        commandBox.runCommand("edit 1  ");
+        commandBox.runCommand("edit ev 1  ");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 p/abcd");
+        commandBox.runCommand("edit ev 1 p/abcd");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 l/");
+        commandBox.runCommand("edit ev 1 l/");
         assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit ev 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicateActivity_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/high "
-                                + "l/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit ev 3 CS2103 TUT 1 sd/200517 st/0900 ed/200517 et/1000"
+                                + "l/123, Jurong West Ave 6, #08-111 ta/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
@@ -119,7 +119,7 @@ public class EditCommandTest extends WhatsLeftGuiTest {
      */
     private void assertEditSuccess(int filteredActivityListIndex, int whatsLeftIndex,
                                     String detailsToEdit, TestActivity editedActivity) {
-        commandBox.runCommand("edit " + filteredActivityListIndex + " " + detailsToEdit);
+        commandBox.runCommand("edit ev " + filteredActivityListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
         ActivityCardHandle editedCard = activityListPanel.navigateToActivity(

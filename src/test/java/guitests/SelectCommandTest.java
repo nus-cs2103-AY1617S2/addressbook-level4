@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
 
 public class SelectCommandTest extends WhatsLeftGuiTest {
 
@@ -41,19 +41,19 @@ public class SelectCommandTest extends WhatsLeftGuiTest {
 
     private void assertSelectionSuccess(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("Selected Activity: " + index);
+        assertResultMessage("Selected Event: " + index);
         assertActivitySelected(index);
     }
 
     private void assertActivitySelected(int index) {
-        assertEquals(activityListPanel.getSelectedActivities().size(), 1);
-        ReadOnlyActivity selectedActivity = activityListPanel.getSelectedActivities().get(0);
-        assertEquals(activityListPanel.getActivity(index - 1), selectedActivity);
+        assertEquals(activityListPanel.getSelectedEvents().size(), 1);
+        ReadOnlyEvent selectedEvent = activityListPanel.getSelectedEvents().get(0);
+        assertEquals(activityListPanel.getEvent(index - 1), selectedEvent);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoActivitySelected() {
-        assertEquals(activityListPanel.getSelectedActivities().size(), 0);
+        assertEquals(activityListPanel.getSelectedEvents().size(), 0);
     }
 
 }

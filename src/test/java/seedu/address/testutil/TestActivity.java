@@ -1,19 +1,25 @@
 package seedu.address.testutil;
 
 import seedu.address.model.person.Description;
+import seedu.address.model.person.EndDate;
+import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Priority;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.StartDate;
+import seedu.address.model.person.StartTime;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * A mutable activity object. For testing only.
+ * A mutable Event object. For testing only.
  */
-public class TestActivity implements ReadOnlyActivity {
+public class TestActivity implements ReadOnlyEvent {
 
     private Description description;
     private Location location;
-    private Priority priority;
+    private StartTime starttime;
+    private StartDate startdate;
+    private EndTime endtime;
+    private EndDate enddate;
     private UniqueTagList tags;
 
     public TestActivity() {
@@ -23,11 +29,14 @@ public class TestActivity implements ReadOnlyActivity {
     /**
      * Creates a copy of {@code activityToCopy}.
      */
-    public TestActivity(TestActivity activityToCopy) {
-        this.description = activityToCopy.getDescription();
-        this.priority = activityToCopy.getPriority();
-        this.location = activityToCopy.getLocation();
-        this.tags = activityToCopy.getTags();
+    public TestActivity(TestActivity eventToCopy) {
+        this.description = eventToCopy.getDescription();
+        this.starttime = eventToCopy.getStartTime();
+        this.startdate = eventToCopy.getStartDate();
+        this.endtime = eventToCopy.getEndTime();
+        this.enddate = eventToCopy.getEndDate();
+        this.location = eventToCopy.getLocation();
+        this.tags = eventToCopy.getTags();
     }
 
     public void setDescription(Description description) {
@@ -38,8 +47,20 @@ public class TestActivity implements ReadOnlyActivity {
         this.location = location;
     }
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
+    public void setStartTime(StartTime starttime) {
+        this.starttime = starttime;
+    }
+    
+    public void setStartDate(StartDate startdate) {
+        this.startdate = startdate;
+    }
+    
+    public void setEndTime(EndTime endtime) {
+        this.endtime = endtime;
+    }
+    
+    public void setEndDate(EndDate enddate) {
+        this.enddate = enddate;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -52,9 +73,25 @@ public class TestActivity implements ReadOnlyActivity {
     }
 
     @Override
-    public Priority getPriority() {
-        return priority;
+    public StartTime getStartTime() {
+        return starttime;
     }
+    
+    @Override
+    public StartDate getStartDate() {
+        return startdate;
+    }
+    
+    @Override
+    public EndTime getEndTime() {
+        return endtime;
+    }
+    
+    @Override
+    public EndDate getEndDate() {
+        return enddate;
+    }
+   
 
     @Override
     public Location getLocation() {
@@ -74,9 +111,12 @@ public class TestActivity implements ReadOnlyActivity {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
+        sb.append("sd/" + this.getStartDate().value + " ");
+        sb.append("st/" + this.getStartTime().value + " ");
+        sb.append("ed/" + this.getEndDate().value + " ");
+        sb.append("et/" + this.getEndTime().value + " ");
         sb.append("l/" + this.getLocation().value + " ");
-        sb.append("p/" + this.getPriority().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("ta/" + s.tagName + " "));
         return sb.toString();
     }
 }

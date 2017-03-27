@@ -14,8 +14,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Activity;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.Event;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalTestActivities;
 
@@ -28,7 +29,7 @@ public class WhatsLeftTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getActivityList());
+        assertEquals(Collections.emptyList(), addressBook.getEventList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
@@ -49,9 +50,9 @@ public class WhatsLeftTest {
     public void resetData_withDuplicateActivities_throwsAssertionError() {
         TypicalTestActivities td = new TypicalTestActivities();
         // Repeat td.alice twice
-        List<Activity> newActivities = Arrays.asList(new Activity(td.alice), new Activity(td.alice));
+        List<Event> newEvents = Arrays.asList(new Event(td.alice), new Event(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        WhatsLeftStub newData = new WhatsLeftStub(newActivities, newTags);
+        WhatsLeftStub newData = new WhatsLeftStub(newEvents, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -60,11 +61,11 @@ public class WhatsLeftTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         WhatsLeft typicalWhatsLeft = new TypicalTestActivities().getTypicalWhatsLeft();
-        List<ReadOnlyActivity> newActivities = typicalWhatsLeft.getActivityList();
+        List<ReadOnlyEvent> newEvents = typicalWhatsLeft.getEventList();
         List<Tag> newTags = new ArrayList<>(typicalWhatsLeft.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        WhatsLeftStub newData = new WhatsLeftStub(newActivities, newTags);
+        WhatsLeftStub newData = new WhatsLeftStub(newEvents, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -74,22 +75,28 @@ public class WhatsLeftTest {
      * A stub ReadOnlyWhatsLeft whose persons and tags lists can violate interface constraints.
      */
     private static class WhatsLeftStub implements ReadOnlyWhatsLeft {
-        private final ObservableList<ReadOnlyActivity> persons = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyEvent> events = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        WhatsLeftStub(Collection<? extends ReadOnlyActivity> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        WhatsLeftStub(Collection<? extends ReadOnlyEvent> persons, Collection<? extends Tag> tags) {
+            this.events.setAll(persons);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyActivity> getActivityList() {
-            return persons;
+        public ObservableList<ReadOnlyEvent> getEventList() {
+            return events;
         }
 
         @Override
         public ObservableList<Tag> getTagList() {
             return tags;
+        }
+
+        @Override
+        public List<? extends ReadOnlyTask> getTaskList() {
+            return tasks;
         }
     }
 
