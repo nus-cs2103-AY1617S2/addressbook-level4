@@ -9,7 +9,7 @@ import seedu.taskit.logic.commands.Command;
 import seedu.taskit.logic.commands.IncorrectCommand;
 import seedu.taskit.logic.commands.ListCommand;
 
-//author A0141872E
+//@@author A0141872E
 public class ListCommandParser {
     
     private static final List<String> parameters = Arrays.asList("all","done", "undone", "overdue", "today", "week");

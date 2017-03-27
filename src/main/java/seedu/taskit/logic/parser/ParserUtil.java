@@ -24,6 +24,7 @@ import seedu.taskit.model.task.Title;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern PARAMETER_ARGS_FORMAT = Pattern.compile("^[a-zA-Z0-9_]*$");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -42,6 +43,20 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
 
     }
+    
+    //@@author A0141872E
+    /**
+     * Returns the specified parameter in the {@code parameter} if it only contains alphanumeric
+     * Returns an {@code Optional.empty()} otherwise.
+     */
+    public static Optional<String> parseParameter(String parameter) {
+        final Matcher matcher = PARAMETER_ARGS_FORMAT.matcher(parameter.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+        return Optional.of(parameter);
+
+    }//@@author
 
     /**
      * Returns a new Set populated by all elements in the given list of strings

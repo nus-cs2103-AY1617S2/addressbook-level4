@@ -112,7 +112,7 @@ public class Date {
         return true;
     }
     
-    //author A0141872E
+    //@@author A0141872E
     public boolean isEndTimePassCurrentTime() {
         java.util.Date currentDate = new java.util.Date();
         if(date!= null && date.before(currentDate)) {
@@ -128,7 +128,7 @@ public class Date {
         }
         return false;
     }
-    //author
+    //@@author
 
     @Override
     public int hashCode() {

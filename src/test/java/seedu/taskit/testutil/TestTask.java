@@ -11,6 +11,9 @@ public class TestTask implements ReadOnlyTask {
     private Title title;
     private Date start;
     private Date end;
+    
+    private boolean isDone;
+    private boolean isOverdue;
 
     private UniqueTagList tags;
 
@@ -26,6 +29,8 @@ public class TestTask implements ReadOnlyTask {
         this.tags = taskToCopy.getTags();
         this.start = taskToCopy.getStart();
         this.end = taskToCopy.getEnd();
+        this.isDone = false;
+        this.isOverdue = false;
     }
 
     public void setTitle(Title title) {
@@ -74,5 +79,20 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getTitle().title + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public Boolean isDone() {
+        return isDone;
+    }
+
+    @Override
+    public Boolean isOverdue() {
+        return isOverdue;
+    }
+
+    @Override
+    public void setDone(Boolean status) {
+        this.isDone=status;
     }
 }

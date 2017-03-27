@@ -155,7 +155,7 @@ public class Task implements ReadOnlyTask{
 
     }
     
-    //author A0141872E
+    //@@author A0141872E
     @Override
     public Boolean isDone() {
         return isDone;
@@ -180,5 +180,5 @@ public class Task implements ReadOnlyTask{
         } else {
             return false;
         }
-    }
+    }//@@author
 }

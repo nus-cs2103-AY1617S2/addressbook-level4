@@ -2,9 +2,9 @@ package seedu.taskit.logic.commands;
 
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-//@author A0141872E
+//@@author A0141872E
 /**
- * Lists all persons in the address book to the user.
+ * Lists all tasks in TaskIt to the user based on given parameters.
  */
 public class ListCommand extends Command {
 

@@ -16,6 +16,7 @@ import seedu.taskit.logic.commands.FindCommand;
 import seedu.taskit.logic.commands.HelpCommand;
 import seedu.taskit.logic.commands.IncorrectCommand;
 import seedu.taskit.logic.commands.ListCommand;
+import seedu.taskit.logic.commands.MarkCommand;
 import seedu.taskit.logic.commands.SaveCommand;
 import seedu.taskit.logic.commands.SelectCommand;
 
@@ -65,6 +66,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
+            
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
