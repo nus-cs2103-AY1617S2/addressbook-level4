@@ -216,20 +216,24 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class NameQualifier implements Qualifier {
         private boolean isExact = false;
-        private Set<String> nameKeyWords;
+        private Set<String> keyWords;
 
-        NameQualifier(Set<String> nameKeyWords, boolean isExact) {
+        NameQualifier(Set<String> keyWords, boolean isExact) {
             this.isExact = isExact;
-            this.nameKeyWords = nameKeyWords;
+            this.keyWords = keyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
             if (isExact) {
-                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, nameKeyWords);
+                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keyWords)
+                        ||StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords);
             } else {
-                return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
+                return keyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
+                            ||StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
+                            ||StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
+                            ||StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword))
                     .findAny()
                     .isPresent();
             }
@@ -237,7 +241,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "name=" + String.join(", ", keyWords);
         }
     }
 

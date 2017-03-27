@@ -23,7 +23,7 @@ import seedu.task.model.task.Remark;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddCommandParser {
+public class AddCommandParser extends CommandParser{
 
     private String START_DATE, END_DATE, REMARK, LOCATION;
 

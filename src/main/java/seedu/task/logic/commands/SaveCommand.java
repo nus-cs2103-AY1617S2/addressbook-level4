@@ -10,11 +10,11 @@ import seedu.task.commons.util.FileUtil;
  */
 public class SaveCommand extends Command {
 
-    public static final String COMMAND_WORD = "save";
+    public static final String COMMAND_WORD_1 = "save";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves the task manager in a different directory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Saves the task manager in a different directory. "
             + "Parameters: PATHNAME \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD_1
             + " ";
 
     public static final String MESSAGE_SUCCESS = "File save at: %1$s";

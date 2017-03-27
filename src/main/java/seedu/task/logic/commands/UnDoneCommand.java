@@ -41,7 +41,7 @@ public class UnDoneCommand extends Command {
             assert false : "The target task cannot be missing";
         }
 
-        model.updateFilteredListToShowAll();
+//        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, updatedTaskDone));
     }
 

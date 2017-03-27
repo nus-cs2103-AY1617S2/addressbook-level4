@@ -12,6 +12,7 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD_1 = "help";
     public static final String COMMAND_WORD_2 = "h";
 
+
     public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Shows program usage instructions.\n" + "Example: "
             + COMMAND_WORD_1;
 
@@ -92,7 +93,7 @@ public class HelpCommand extends Command {
             case ExitCommand.COMMAND_WORD_1:
                 return new CommandResult(ExitCommand.MESSAGE_USAGE);
 
-            case SaveCommand.COMMAND_WORD:
+            case SaveCommand.COMMAND_WORD_1:
                 return new CommandResult(SaveCommand.MESSAGE_USAGE);
 
             default:
