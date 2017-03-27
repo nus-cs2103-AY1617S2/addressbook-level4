@@ -29,6 +29,10 @@ public class UpdateTaskController extends Controller {
 
     private static final String COMMAND_UPDATE_TASK = "update";
 
+    private static final String RESULT_MESSAGE_ERROR_NO_INDEX_FOUND =
+            "No index provided.";
+    private static final String RESULT_MESSAGE_ERROR_INVALID_INDEX =
+            "The index provided is invalid.";
     private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
             "The task cannot be classified as a floating task, deadline, or event.";
     private static final String RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING =
@@ -51,7 +55,12 @@ public class UpdateTaskController extends Controller {
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
-        Task task = uiStore.getShownTasks(indexes).get(0);
+        if (indexes == null || indexes.isEmpty()) {
+            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_ERROR_INVALID_INDEX));
+            return;
+        }
+        List<Task> shownTasks = uiStore.getShownTasks(indexes);
+        Task task = shownTasks.get(0);
 
         String eventStartDateToken = tokens.get(TaskTokenizer.KEYWORD_EVENT_START_DATE);
         LocalDateTime eventStartDateTime = DateTimeUtil.parseDateString(eventStartDateToken);

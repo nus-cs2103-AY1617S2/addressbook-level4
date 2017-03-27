@@ -21,6 +21,9 @@ public class IndexParser {
      * @return the list of unique indexes in sorted order (which is the union of all the parsed substring)
      */
     public static List<Integer> splitStringToIndexes(String indexToken, int maxIndex) {
+        if (!StringUtil.isPresent(indexToken)) {
+            return new ArrayList<Integer>();
+        }
         String[] splittedStringIndexes = indexToken.split(",");
         Set<Integer> indexes = new TreeSet<Integer>();
         for (String splittedStringIndex : splittedStringIndexes) {
