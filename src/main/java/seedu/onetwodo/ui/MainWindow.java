@@ -345,9 +345,9 @@ public class MainWindow extends UiPart<Region> {
         dialog.show();
     }
 
-	private void deselectTaskCards() {
-		EventsCenter.getInstance().post(new DeselectCardsEvent());		
-	}
+    private void deselectTaskCards() {
+        EventsCenter.getInstance().post(new DeselectCardsEvent());
+    }
 
     void closeDialog() {
         if (dialog == null) {

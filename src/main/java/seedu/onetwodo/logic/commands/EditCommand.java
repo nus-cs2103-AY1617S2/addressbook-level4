@@ -67,7 +67,6 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex - 1);
-        
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
         int internalIdx = model.getFilteredTaskList().indexOf(taskToEdit);
 
@@ -81,16 +80,20 @@ public class EditCommand extends Command {
             jumpToNewTask(editedTask);
             EventsCenter.getInstance().post(new DeselectCardsEvent());
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-        	try {
-            model.addTask(internalIdx, (Task) taskToEdit);
-        	} catch (UniqueTaskList.DuplicateTaskException dpe2) {
-        		throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        	}
+            reverseAdd(taskToEdit, internalIdx);
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (UniqueTaskList.TaskNotFoundException tne) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+    }
+
+    private void reverseAdd(ReadOnlyTask taskToEdit, int internalIdx) throws CommandException {
+        try {
+            model.addTask(internalIdx, (Task) taskToEdit);
+        } catch (UniqueTaskList.DuplicateTaskException dpe2) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
     }
 
     /**

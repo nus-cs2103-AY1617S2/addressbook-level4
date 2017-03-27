@@ -71,10 +71,10 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void registerCard() {
-		EventsCenter.getInstance().registerHandler(this);
-	}
+        EventsCenter.getInstance().registerHandler(this);
+    }
 
-	private void setPriority(ReadOnlyTask task) {
+    private void setPriority(ReadOnlyTask task) {
         String priorityText = task.getPriority().value;
         priority.setText(priorityText);
         switch (priorityText) {
@@ -83,11 +83,11 @@ public class TaskCard extends UiPart<Region> {
             priority.pseudoClassStateChanged(donePseudoClass, true);
             break;
         case Priority.MEDIUM_LABEL:
-        	PseudoClass mediumPseudoClass = PseudoClass.getPseudoClass(Priority.MEDIUM_LABEL);
+            PseudoClass mediumPseudoClass = PseudoClass.getPseudoClass(Priority.MEDIUM_LABEL);
             priority.pseudoClassStateChanged(mediumPseudoClass, true);
             break;
         case Priority.LOW_LABEL:
-        	PseudoClass lowPseudoClass = PseudoClass.getPseudoClass(Priority.LOW_LABEL);
+            PseudoClass lowPseudoClass = PseudoClass.getPseudoClass(Priority.LOW_LABEL);
             priority.pseudoClassStateChanged(lowPseudoClass, true);
             break;
         }
@@ -131,15 +131,15 @@ public class TaskCard extends UiPart<Region> {
         String prefix = event.taskType.toString();
         String cardPrefixId = prefix + (event.targetIndex + 1);
         if (prefixId.equals(cardPrefixId)) {
-        	PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
-        	cardPane.pseudoClassStateChanged(selectedPseudoClass, true);
+            PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
+            cardPane.pseudoClassStateChanged(selectedPseudoClass, true);
         }
     }
 
     @Subscribe
     private void handleDeselectCard(DeselectCardsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    	PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
+        PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
         cardPane.pseudoClassStateChanged(selectedPseudoClass, false);
     }
 }

@@ -1,6 +1,5 @@
 package seedu.onetwodo.model;
 
-
 import javafx.collections.ObservableList;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.task.ReadOnlyTask;
