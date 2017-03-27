@@ -18,18 +18,18 @@ public class TaskCard extends UiPart<Region> {
     private static final String DEFAULT_PRIORITY_COLOR = "transparent";
 
     private static final String LOW_PRIORITY_NUMBER = "1";
-    private static final String LOW_PRIORITY_COLOR = "green";
+    private static final String LOW_PRIORITY_COLOR = "red";
 
     private static final String MEDIUM_PRIORITY_NUMBER = "2";
     private static final String MEDIUM_PRIORITY_COLOR = "orange";
 
-    private static final String HIGH_PRIORITY_COLOR = "red";
     private static final String HIGH_PRIORITY_NUMBER = "3";
+    private static final String HIGH_PRIORITY_COLOR = "green";
 
     private static final String FXML = "TaskListCard.fxml";
     private static final String CSS_BACKGROUND_COLOR = "-fx-background-color: ";
 
-    public static final HashMap<String, String> PRIORITY_COLOR_HASHMAP = new HashMap<>(3);
+    public static final HashMap<String, String> PRIORITY_COLOR_HASHMAP = new HashMap<>();
 
     @FXML
     private HBox cardPane;
