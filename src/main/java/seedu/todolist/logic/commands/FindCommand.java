@@ -1,4 +1,4 @@
-[package seedu.todolist.logic.commands;
+package seedu.todolist.logic.commands;
 
 import java.util.Set;
 
