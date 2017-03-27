@@ -1,3 +1,4 @@
+//@@author A0139399J
 package guitests;
 
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -12,8 +13,17 @@ import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
 
-//@@author A0139399J
 public class DoneCommandTest extends TaskManagerGuiTest {
+
+    public static final String MESSAGE_MARK_COMMAND = "mark";
+    public static final String MESSAGE_TEST_FIND_COMMAND = "find Elle";
+
+    public static final int INDEX_MARK_VALID = 2;
+    public static final int INDEX_MARK_INVALID = -2;
+
+    public static final int INDEX_FIND_VALID = 5;
+    public static final int INDEX_FIND_VALID_FILTERED = 1;
+    public static final int INDEX_FIND_INVALID_FILTERED = 5;
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
@@ -21,53 +31,36 @@ public class DoneCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void mark_task_success() throws Exception {
-        int taskManagerIndex = 2;
-
-        TestTask taskToMark = this.expectedTasksList[taskManagerIndex - 1];
+        TestTask taskToMark = this.expectedTasksList[INDEX_MARK_VALID - 1];
         TestTask markedTask = new TaskBuilder(taskToMark).withIsDone(true).build();
-
-        assertDoneSuccess(taskManagerIndex, taskManagerIndex, markedTask);
+        assertDoneSuccess(INDEX_MARK_VALID, INDEX_MARK_VALID, markedTask);
     }
 
     @Test
-    public void mark_task_failure() throws Exception {
-        int taskManagerIndex = -2;
-        this.commandBox.runCommand("done " + taskManagerIndex);
-
+    public void mark_task_invalid_index_failure() throws Exception {
+        this.commandBox.runCommand(MESSAGE_MARK_COMMAND + INDEX_MARK_INVALID);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        this.commandBox.runCommand("find Elle");
-
-        int filteredTaskListIndex = 1;
-        int taskManagerIndex = 5;
-        TestTask taskToMark = this.expectedTasksList[taskManagerIndex - 1];
+        this.commandBox.runCommand(MESSAGE_TEST_FIND_COMMAND);
+        TestTask taskToMark = this.expectedTasksList[INDEX_FIND_VALID - 1];
         TestTask markedTask = new TaskBuilder(taskToMark).withIsDone(true).build();
-
-        assertDoneSuccess(filteredTaskListIndex, taskManagerIndex, markedTask);
+        assertDoneSuccess(INDEX_FIND_VALID_FILTERED, INDEX_FIND_VALID, markedTask);
     }
 
     @Test
     public void edit_findThenEdit_failure() throws Exception {
-        this.commandBox.runCommand("find Elle");
-        int filteredTaskListIndex = 5;
-        this.commandBox.runCommand("done " + filteredTaskListIndex);
+        this.commandBox.runCommand(MESSAGE_TEST_FIND_COMMAND);
+        this.commandBox.runCommand(MESSAGE_MARK_COMMAND + INDEX_FIND_INVALID_FILTERED);
 
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-
     }
 
+    private void assertDoneSuccess(int filteredTaskListIndex, int taskManagerIndex, TestTask markedTask) {
 
-
-
-
-    private void assertDoneSuccess(int filteredTaskListIndex, int taskManagerIndex,
-                                   TestTask markedTask) {
-
-        this.commandBox.runCommand("done " + filteredTaskListIndex);
-
+        this.commandBox.runCommand(MESSAGE_MARK_COMMAND + filteredTaskListIndex);
 
         // confirm the list now contains all previous tasks plus the task with
         // updated isDone variable

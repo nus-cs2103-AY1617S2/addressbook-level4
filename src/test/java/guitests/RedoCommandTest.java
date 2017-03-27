@@ -1,3 +1,4 @@
+//@@author A0139399J
 package guitests;
 
 import java.util.Arrays;
@@ -13,16 +14,14 @@ import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TestUtil;
 import seedu.doit.testutil.TypicalTestTasks;
 
-//@@author A0139399J
 public class RedoCommandTest extends TaskManagerGuiTest {
 
     public static final String MESSAGE_REDO_COMMAND = "redo";
     public static final String MESSAGE_TEST_CLEAR_COMMAND = "clear";
-    public static final String MESSAGE_TEST_DONE_COMMAND = "done 5";
+    public static final String MESSAGE_TEST_MARK_COMMAND = "mark 5";
     public static final String MESSAGE_TEST_DELETE_COMMAND = "delete 7";
     public static final String MESSAGE_TEST_EDIT_COMMAND = "edit 2 t/hi";
     public static final String MESSAGE_TEST_UNDO_COMMAND = "undo";
-
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
@@ -56,8 +55,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void redo_done_success() throws Exception {
-        this.commandBox.runCommand(MESSAGE_TEST_DONE_COMMAND);
+    public void redo_mark_success() throws Exception {
+        this.commandBox.runCommand(MESSAGE_TEST_MARK_COMMAND);
         this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
         this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
         assertDoneSuccess();
@@ -99,7 +98,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
-        //confirm the new card contains the right data
+        // confirm the new card contains the right data
         if (!taskToAdd.getIsDone() && taskToAdd.isFloatingTask()) {
             TaskCardHandle addedCard = this.floatingTaskListPanel.navigateToTask(taskToAdd.getName().fullName);
             assertMatching(taskToAdd, addedCard);
@@ -110,7 +109,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
             TaskCardHandle addedCard = this.taskListPanel.navigateToTask(taskToAdd.getName().fullName);
             assertMatching(taskToAdd, addedCard);
         }
-        //confirm the list now contains all previous tasks plus the new task
+        // confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertAllPanelsMatch(expectedList);
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
@@ -120,14 +119,14 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         TestTask[] currentList = this.td.getTypicalTasks();
         int targetIndexOneIndexed = 7;
 
-        TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestUtil.sortTasks(currentList);
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
-        //confirm the list now contains all previous tasks except the deleted task
+        // confirm the list now contains all previous tasks except the deleted
+        // task
         assertAllPanelsMatch(expectedRemainder);
 
-        //confirm the result message is correct
+        // confirm the result message is correct
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
     }
 
