@@ -86,10 +86,17 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0142255M
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append(";" + s.tagName + " "));
+        sb.append("add " + this.getName().fullName + "; ");
+        if (this.getStartDateTime().isPresent()) {
+            sb.append(this.getStartDateTime().get().getDate());
+        }
+        if (this.getEndDateTime().isPresent()) {
+            sb.append(this.getEndDateTime().get().getDate());
+        }
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("; " + s.tagName + " "));
         return sb.toString();
     }
 
@@ -97,6 +104,7 @@ public class TestTask implements ReadOnlyTask {
     public boolean getTimedStatus() {
         return isTimed;
     }
+    //@@author
 
     @Override
     public boolean getActiveStatus() {

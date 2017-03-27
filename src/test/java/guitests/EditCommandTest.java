@@ -21,14 +21,17 @@ public class EditCommandTest extends TaskManagerGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
+    //@@author A0142255M
     @Test
     public void editAllFieldsSpecifiedSuccess() throws Exception {
         String detailsToEdit = "name Buy Eggs and Bread; tag HighPriority;";
         int taskManagerIndex = 1;
-        TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread").withTags("HighPriority").build();
-
+        TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread")
+                              .withStartDateTime("01-04-17 19:55:12")
+                              .withTags("HighPriority").build();
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
+    //@@author
 
     @Test
     public void editNotAllFieldsSpecifiedSuccess() throws Exception {
@@ -80,9 +83,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("find Grandpa");
 
-        detailsToEdit = "start_time 3pm";
+        detailsToEdit = "start_time 15-04-17 3pm";
         taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        editedTask = new TaskBuilder(taskToEdit).withStartDateTime("3pm").build();
+        editedTask = new TaskBuilder(taskToEdit).withStartDateTime("15-04-17 3pm").build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -154,13 +157,15 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1; tag *&;");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
-    //@@author
 
+    //@@author A0142255M
     @Test
     public void editDuplicateTaskFailure() {
-        commandBox.runCommand("edit 3; name Buy Eggs and Bread; tag HighPriority;");
+        commandBox.runCommand("edit 3; name Buy Eggs and Bread; start_date 01-04-17; start_time 19:55:12; "
+                + "tag HighPriority;");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
+    //@@author
 
     /**
      * Checks whether the edited task has the correct updated details.

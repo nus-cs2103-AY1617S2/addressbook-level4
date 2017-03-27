@@ -100,12 +100,17 @@ public class DateTime {
         return sdf.format(date);
     }
 
-   /* @Override
+    public Date getDate() {
+        return date;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && this.time.equals(((Date) other).time)); // state check
-    }*/
+                || (other instanceof DateTime // instanceof handles nulls
+                && this.date.equals(((DateTime) other).getDate())); // state check
+    }
+    //@@author
 
     /*@Override
     public int hashCode() {

@@ -26,20 +26,29 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    //@@author A0142255M
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
+        boolean start = true;
+        boolean end = true;
+        if (other.getStartDateTime().isPresent() && this.getStartDateTime().isPresent()) {
+            start = other.getStartDateTime().equals(this.getStartDateTime());
+        }
+        if (other.getEndDateTime().isPresent() && this.getEndDateTime().isPresent()) {
+            end = other.getEndDateTime().equals(this.getEndDateTime());
+        }
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName())
-                && other.getStartDateTime().equals(this.getStartDateTime())
-                && other.getEndDateTime().equals(this.getEndDateTime())
+                && start && end
                 && (other.getActiveStatus() == this.getActiveStatus())
                 && (other.getTimedStatus() == this.getTimedStatus())
                 && (other.getRecurringStatus() == this.getRecurringStatus())
                 && other.getRecurInterval().equals(this.getRecurInterval())); // state checks here onwards
     }
+    //@@author
 
     /**
      * Formats the task as text, showing all contact details.
@@ -48,10 +57,10 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append("\"" + getName() + "\"");
         if (getStartDateTime().isPresent()) {
-            builder.append(" Start Date: \"" + getStartDateTime().get().toString() + "\"");
+            builder.append(" Start Date and Time: \"" + getStartDateTime().get().toString() + "\"");
         }
         if (getEndDateTime().isPresent()) {
-            builder.append(" End Date: \"" + getEndDateTime().get().toString() + "\"");
+            builder.append(" End Date and Time: \"" + getEndDateTime().get().toString() + "\"");
         }
         builder.append(" Tags: ");
         getTags().forEach(builder::append);

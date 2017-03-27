@@ -21,4 +21,10 @@ public interface ReadOnlyTaskManager {
      */
     ObservableList<Tag> getTagList();
 
+    //@@author A0142255M
+    /**
+     * Returns a string that contains the no. of tasks and no. of tags.
+     */
+    String toString();
+
 }

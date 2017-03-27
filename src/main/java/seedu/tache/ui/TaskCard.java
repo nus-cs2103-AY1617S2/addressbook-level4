@@ -1,20 +1,27 @@
 package seedu.tache.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
+    //@@author A0142255M
     private static final String START_DATE_INDICATOR = "Start Date: ";
     private static final String START_TIME_INDICATOR = "Start Time: ";
     private static final String END_DATE_INDICATOR = "End Date: ";
     private static final String END_TIME_INDICATOR = "End Time: ";
     private static final String FXML = "TaskListCard.fxml";
+
+    private final Logger logger = LogsCenter.getLogger(TaskCard.class);
+    //@@author
 
     @FXML
     private HBox cardPane;
@@ -33,20 +40,33 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        assert task != null;
+        assert displayedIndex > 0;
         id.setText(Integer.toString(displayedIndex) + ". ");
         name.setText(task.getName().toString());
         if (task.getStartDateTime().isPresent()) {
             DateTime start = task.getStartDateTime().get();
-            datesAndTimes.getChildren().add(new Label(START_DATE_INDICATOR + start.getDateOnly()));
-            datesAndTimes.getChildren().add(new Label(START_TIME_INDICATOR + start.getTimeOnly()));
+            Label startDateLabel = new Label(START_DATE_INDICATOR + start.getDateOnly());
+            startDateLabel.setId("startdate");
+            datesAndTimes.getChildren().add(startDateLabel);
+            Label startTimeLabel = new Label(START_TIME_INDICATOR + start.getTimeOnly());
+            startTimeLabel.setId("starttime");
+            datesAndTimes.getChildren().add(startTimeLabel);
+            logger.fine("Start date and time added in Labels for " + task.getName().toString());
         }
         if (task.getEndDateTime().isPresent()) {
             DateTime end = task.getEndDateTime().get();
-            datesAndTimes.getChildren().add(new Label(END_DATE_INDICATOR + end.getDateOnly()));
-            datesAndTimes.getChildren().add(new Label(END_TIME_INDICATOR + end.getTimeOnly()));
+            Label endDateLabel = new Label(END_DATE_INDICATOR + end.getDateOnly());
+            endDateLabel.setId("enddate");
+            datesAndTimes.getChildren().add(endDateLabel);
+            Label endTimeLabel = new Label(END_TIME_INDICATOR + end.getTimeOnly());
+            endTimeLabel.setId("endtime");
+            datesAndTimes.getChildren().add(endTimeLabel);
+            logger.fine("End date and time added in Labels for " + task.getName().toString());
         }
         initTags(task);
     }
+    //@@author
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

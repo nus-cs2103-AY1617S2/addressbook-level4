@@ -36,7 +36,9 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
+                        <!-- @@author A0142255M -->
                         <FlowPane fx:id="datesAndTimes" styleClass="task-card-date-time"/>
+                        <!-- @@author -->
                     </children>
                 </VBox>
             </children>
