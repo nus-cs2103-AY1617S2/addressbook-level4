@@ -217,16 +217,19 @@ public class MainWindow extends UiPart<Region> {
     	commandBox.end();
     }
     
+    @FXML
     public void handleUndo() {
     	commandBox.setText("undo");
     	commandBox.requestFocus();
     	commandBox.end();
     }
     
+    @FXML
     public void handleScrollDown() {
     	taskListPanel.scrollDown();
     }
     
+    @FXML
     public void handleScrollUp() {
     	taskListPanel.scrollUp();
     }

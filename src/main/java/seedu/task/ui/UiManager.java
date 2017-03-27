@@ -114,6 +114,7 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
 
+    //@@author A0142939W
     @Subscribe
     public void handleShowHelpFormatEvent(ShowHelpFormatRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
