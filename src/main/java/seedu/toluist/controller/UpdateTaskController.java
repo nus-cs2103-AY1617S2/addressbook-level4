@@ -16,6 +16,7 @@ import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.ResultMessage;
 
 /**
  * UpdateTaskController is responsible for updating a task
@@ -28,18 +29,24 @@ public class UpdateTaskController extends Controller {
 
     private static final String COMMAND_UPDATE_TASK = "update";
 
-    private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
-    private static final String RESULT_MESSAGE_ERROR_DATE_INPUT =
-            "Something is wrong with the given dates input";
+    private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
+            "Task provided already exist in the list.";
+    private static final String RESULT_MESSAGE_ERROR_INVALID_INDEX =
+            "No valid index found.";
+    private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
+            "The task cannot be classified as a floating task, deadline, or event.";
     private static final String RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING =
             "Input contains both recurring and stop recurring arguments at the same time.";
+    private static final String RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING =
+            "Input contains both floating and non-floating task arguments at the same time.";
+    private static final String RESULT_MESSAGE_ERROR_CLONING_ERROR =
+            "Bad things happened and we have no idea why! Please contact the administrators.";
 
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
-        TodoList todoList = TodoList.getInstance();
         CommandResult commandResult;
 
         HashMap<String, String> tokens = tokenize(command);
@@ -48,7 +55,12 @@ public class UpdateTaskController extends Controller {
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
-        Task task = uiStore.getShownTasks(indexes).get(0);
+        if (indexes == null || indexes.isEmpty()) {
+            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_ERROR_INVALID_INDEX));
+            return;
+        }
+        List<Task> shownTasks = uiStore.getShownTasks(indexes);
+        Task task = shownTasks.get(0);
 
         String eventStartDateToken = tokens.get(TaskTokenizer.KEYWORD_EVENT_START_DATE);
         LocalDateTime eventStartDateTime = DateTimeUtil.parseDateString(eventStartDateToken);
@@ -77,10 +89,6 @@ public class UpdateTaskController extends Controller {
                 taskDeadline, isFloating, taskPriority, tags,
                 recurringFrequency, recurringUntilEndDate, isStopRecurring);
 
-        if (todoList.save()) {
-            uiStore.setTasks(todoList.getTasks());
-        }
-
         uiStore.setCommandResult(commandResult);
     }
 
@@ -93,45 +101,73 @@ public class UpdateTaskController extends Controller {
             boolean isFloating, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
+            return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
         }
         if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
         }
-        if (isFloating) {
-            task.setStartDateTime(null);
-            task.setEndDateTime(null);
-        } else if (taskDeadline != null) {
-            task.setStartDateTime(null);
-            task.setEndDateTime(taskDeadline);
-        } else {
-            if (eventStartDateTime != null) {
-                task.setStartDateTime(eventStartDateTime);
-            }
-            if (eventEndDateTime != null) {
-                task.setEndDateTime(eventEndDateTime);
-            }
+        if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
+            return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
         }
+        Task taskCopy = null;
+        try {
+            taskCopy = (Task) task.clone();
+        } catch (CloneNotSupportedException cloneNotSupportedException) {
+            // should never reach here
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
+        }
+        try {
+            if (isFloating) {
+                taskCopy.setStartDateTime(null);
+                taskCopy.setEndDateTime(null);
+            } else if (taskDeadline != null) {
+                taskCopy.setStartDateTime(null);
+                taskCopy.setEndDateTime(taskDeadline);
+            } else {
+                if (eventStartDateTime != null) {
+                    taskCopy.setStartDateTime(eventStartDateTime);
+                }
+                if (eventEndDateTime != null) {
+                    taskCopy.setEndDateTime(eventEndDateTime);
+                }
+            }
 
-        if (StringUtil.isPresent(description)) {
-            task.setDescription(description);
+            if (StringUtil.isPresent(description)) {
+                taskCopy.setDescription(description);
+            }
+            if (StringUtil.isPresent(taskPriority)) {
+                taskCopy.setTaskPriority(taskPriority);
+            }
+            if (StringUtil.isPresent(recurringFrequency)) {
+                taskCopy.setRecurringFrequency(recurringFrequency);
+            }
+            if (recurringUntilEndDate != null) {
+                taskCopy.setRecurringEndDateTime(recurringUntilEndDate);
+            }
+            if (!tags.isEmpty()) {
+                taskCopy.replaceTags(tags);
+            }
+            if (isStopRecurring) {
+                taskCopy.unsetRecurring();
+            }
+
+            TodoList todoList = TodoList.getInstance();
+            if (todoList.getTasks().contains(taskCopy)) {
+                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+            }
+
+            // Update all changes in taskCopy to task
+            Task oldTask = (Task) task.clone();
+            task.setTask(taskCopy);
+            if (todoList.save()) {
+                uiStore.setTasks(todoList.getTasks());
+            }
+            return new CommandResult(ResultMessage.getUpdateCommandResultMessage(oldTask, task, uiStore));
+        } catch (IllegalArgumentException illegalArgumentException) {
+            return new CommandResult(illegalArgumentException.getMessage());
+        } catch (CloneNotSupportedException cloneNotSupportedException) {
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
         }
-        if (StringUtil.isPresent(taskPriority)) {
-            task.setTaskPriority(taskPriority);
-        }
-        if (StringUtil.isPresent(recurringFrequency)) {
-            task.setRecurringFrequency(recurringFrequency);
-        }
-        if (recurringUntilEndDate != null) {
-            task.setRecurringEndDateTime(recurringUntilEndDate);
-        }
-        if (!tags.isEmpty()) {
-            task.replaceTags(tags);
-        }
-        if (isStopRecurring) {
-            task.unsetRecurring();
-        }
-        return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }
 
     /**

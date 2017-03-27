@@ -23,6 +23,7 @@ public class DeleteTaskController extends Controller {
     private static final String COMMAND_DELETE_TASK = "delete";
 
     private static final String RESULT_MESSAGE_DELETE_TASK = "Deleted %s: %s";
+    private static final String RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED = "No valid index found.";
 
     private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
@@ -36,6 +37,10 @@ public class DeleteTaskController extends Controller {
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, todoList.getTasks().size());
+        if (indexes == null || indexes.isEmpty()) {
+            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED));
+            return;
+        }
         List<Task> tasks = uiStore.getShownTasks(indexes);
         commandResult = delete(todoList, tasks);
 

@@ -20,7 +20,7 @@ public class TagTest {
     public void testConstruct() {
         String tagName = "I am a tag";
         Tag tag = new Tag(tagName);
-        assertEquals(tag.tagName, tagName);
+        assertEquals(tag.getTagName(), tagName);
     }
 
     @Test

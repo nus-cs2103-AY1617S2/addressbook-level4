@@ -8,11 +8,12 @@ import java.util.Objects;
 import java.util.TreeSet;
 
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.commons.util.StringUtil;
 
 /**
  * Represents a Task
  */
-public class Task implements Comparable<Task> {
+public class Task implements Comparable<Task>, Cloneable {
     private static final String HIGH_PRIORITY_STRING = "high";
     private static final String LOW_PRIORITY_STRING = "low";
     private static final String ERROR_VALIDATION_EMPTY_DESCRIPTION = "Description must not be empty.";
@@ -33,6 +34,10 @@ public class Task implements Comparable<Task> {
     private LocalDateTime recurringEndDateTime;
     private RecurringFrequency recurringFrequency;
     private TaskPriority priority = TaskPriority.LOW;
+
+    public enum TaskType {
+        TASK, DEADLINE, EVENT
+    }
 
     public enum TaskPriority {
         HIGH, LOW
@@ -63,6 +68,17 @@ public class Task implements Comparable<Task> {
         validate();
     }
 
+    public void setTask(Task task) {
+        allTags = task.allTags;
+        description = task.description;
+        startDateTime = task.startDateTime;
+        endDateTime = task.endDateTime;
+        completionDateTime = task.completionDateTime;
+        recurringEndDateTime = task.recurringEndDateTime;
+        recurringFrequency = task.recurringFrequency;
+        priority = task.priority;
+    }
+
     public void validate() {
         if (!validateDescriptionMustNotBeEmpty()) {
             throw new IllegalArgumentException(ERROR_VALIDATION_EMPTY_DESCRIPTION);
@@ -76,7 +92,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean validateDescriptionMustNotBeEmpty() {
-        return description != null && !description.isEmpty();
+        return StringUtil.isPresent(description);
     }
 
     public boolean validateStartDateMustBeBeforeEndDate() {
@@ -88,6 +104,20 @@ public class Task implements Comparable<Task> {
 
     public boolean validateTaskIsFloatingIsEventOrHasDeadline() {
         return startDateTime == null || endDateTime != null;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public TaskType getTaskType() {
+        if (isEvent()) {
+            return TaskType.EVENT;
+        } else if (isTaskWithDeadline()) {
+            return TaskType.DEADLINE;
+        } else {
+            return TaskType.TASK;
+        }
     }
 
     //@@author A0131125Y
@@ -212,7 +242,7 @@ public class Task implements Comparable<Task> {
     public boolean isAnyKeywordsContainedInAnyTagIgnoreCase(String[] keywords) {
         for (String keyword: keywords) {
             for (Tag tag : allTags) {
-                if (tag.tagName.toLowerCase().contains(keyword.toLowerCase())) {
+                if (tag.getTagName().toLowerCase().contains(keyword.toLowerCase())) {
                     return true;
                 }
             }

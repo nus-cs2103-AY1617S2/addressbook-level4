@@ -15,6 +15,7 @@ import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.ResultMessage;
 
 /**
  * AddTaskController is responsible for adding a task (and event)
@@ -27,9 +28,14 @@ public class AddTaskController extends Controller {
 
     private static final String COMMAND_ADD_TASK = "add";
 
-    private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
-    private static final String RESULT_MESSAGE_ERROR_DATE_INPUT =
-            "Something is wrong with the given dates input";
+    private static final String RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION =
+            "Please provide a description.";
+    private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
+            "Task provided already exist in the list.";
+    private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
+            "The task cannot be classified as a floating task, deadline, or event.";
+    private static final String RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE =
+            "An event must have both a start date (from/) and an end date (to/).";
 
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
@@ -62,11 +68,6 @@ public class AddTaskController extends Controller {
 
         commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime,
                 taskDeadline, taskPriority, tags, recurringFrequency, recurringUntilEndDate);
-
-        if (todoList.save()) {
-            uiStore.setTasks(todoList.getTasks());
-        }
-
         uiStore.setCommandResult(commandResult);
     }
 
@@ -78,52 +79,68 @@ public class AddTaskController extends Controller {
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
             LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate) {
-        if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
+        if (!StringUtil.isPresent(description)) {
+            return new CommandResult(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION);
         }
-
-        Task task;
-        if (eventStartDateTime != null && eventEndDateTime != null) {
-            task = new Task(description, eventStartDateTime, eventEndDateTime);
-        } else if (taskDeadline != null) {
-            task = new Task(description, taskDeadline);
-        } else {
-            task = new Task(description);
-        }
-        if (taskPriority != null) {
-            task.setTaskPriority(taskPriority);
-        }
-        if (StringUtil.isPresent(recurringFrequency)) {
-            if (recurringUntilEndDate == null) {
-                task.setRecurring(recurringFrequency);
+        try {
+            // validates that the dates input belongs to only one type of task, or exception is thrown
+            validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline);
+            Task task;
+            if (eventStartDateTime != null && eventEndDateTime != null) {
+                task = new Task(description, eventStartDateTime, eventEndDateTime);
+            } else if (taskDeadline != null) {
+                task = new Task(description, taskDeadline);
+            } else if (eventStartDateTime == null && eventEndDateTime == null && taskDeadline == null) {
+                task = new Task(description);
             } else {
-                task.setRecurring(recurringUntilEndDate, recurringFrequency);
+                // should not reach here since it will fail validation at the top
+                return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
             }
+            if (taskPriority != null) {
+                task.setTaskPriority(taskPriority);
+            }
+            if (StringUtil.isPresent(recurringFrequency)) {
+                if (recurringUntilEndDate == null) {
+                    task.setRecurring(recurringFrequency);
+                } else {
+                    task.setRecurring(recurringUntilEndDate, recurringFrequency);
+                }
+            }
+            task.replaceTags(tags);
+
+            if (todoList.getTasks().contains(task)) {
+                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+            }
+            todoList.add(task);
+            if (todoList.save()) {
+                uiStore.setTasks(todoList.getTasks());
+            }
+            return new CommandResult(ResultMessage.getAddCommandResultMessage(task, uiStore));
+        } catch (IllegalArgumentException exception) {
+            return new CommandResult(exception.getMessage());
         }
-        task.replaceTags(tags);
-        todoList.add(task);
-        return new CommandResult(RESULT_MESSAGE_ADD_TASK);
     }
 
     /**
-     * Checks whether the user input for dates is valid.
-     * The input is valid if there is only one possible task type, or zero (task type is floating task).
+     * Checks whether the user input for dates is valid (belongs to only one type of task)
+     * @throws IllegalArgumentException when the input for dates is invalid
      * @param eventStartDateTime
      * @param eventEndDateTime
      * @param taskDeadline
-     * @return true if there is at most 1 possible task type
      */
-    private boolean isValidTaskType(LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
-            LocalDateTime taskDeadline) {
-        int numberOfTaskTypes = 0;
-        // Must have both event start date time AND end date time to be valid event
+    private void validateTaskDatesInput(LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
+            LocalDateTime taskDeadline) throws IllegalArgumentException {
         if (eventStartDateTime != null && eventEndDateTime != null) {
-            numberOfTaskTypes++;
-        }
-        if (taskDeadline != null) {
-            numberOfTaskTypes++;
-        }
-        return numberOfTaskTypes <= 1;
+            if (taskDeadline != null) {
+                throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+            } // else it is a valid event
+        } else if (eventStartDateTime != null || eventEndDateTime != null) {
+            if (taskDeadline != null) {
+                throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+            } else {
+                throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE);
+            }
+        } // else it is a valid task (floating or deadline)
     }
 
     public boolean matchesCommand(String command) {

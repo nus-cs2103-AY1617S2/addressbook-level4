@@ -6,7 +6,7 @@ package seedu.toluist.model;
  */
 public class Tag implements Comparable<Tag> {
 
-    public String tagName;
+    private String tagName;
 
     public Tag() {}
 
@@ -17,6 +17,10 @@ public class Tag implements Comparable<Tag> {
         assert name != null;
         String trimmedName = name.trim();
         this.tagName = trimmedName;
+    }
+
+    public String getTagName() {
+        return tagName;
     }
 
     @Override

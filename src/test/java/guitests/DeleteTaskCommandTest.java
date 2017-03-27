@@ -73,6 +73,17 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task3));
     }
 
+    @Test
+    public void testInvalidIndexInput() {
+        String command = "delete 0";
+        commandBox.runCommand(command);
+        assertResultMessage("No valid index found.");
+
+        command = "delete potato";
+        commandBox.runCommand(command);
+        assertResultMessage("No valid index found.");
+    }
+
     public void deleteMultipleTasksTogether(String deleteCommand, int listSize, int... taskIndexesLeft) {
         // Start with empty list
         commandBox.runCommand("delete 2");

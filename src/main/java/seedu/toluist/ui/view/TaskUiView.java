@@ -88,7 +88,7 @@ public class TaskUiView extends UiView {
     }
 
     private void renderTag(Tag tag) {
-        TagView tagView = new TagView(tag.tagName);
+        TagView tagView = new TagView(tag.getTagName());
         tagView.setParent(tagsPane);
         tagView.render();
     }
