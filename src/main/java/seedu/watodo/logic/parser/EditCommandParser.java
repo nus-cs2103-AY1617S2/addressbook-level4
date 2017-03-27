@@ -3,8 +3,10 @@ package seedu.watodo.logic.parser;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
@@ -62,7 +64,14 @@ public class EditCommandParser {
             // get any tags arguments entered by the user
             ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
             argsTokenizer.tokenize(argsWithDatesExtracted);
-            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            if (argsTokenizer.getAllValues(PREFIX_TAG).isPresent()) {
+                List<String> tags = argsTokenizer.getAllValues(PREFIX_TAG).get();
+                List<String> parsedTags = new ArrayList<String>();
+                for (String tag : tags) {
+                    parsedTags.add(tag.split("[\\s+]", 2)[0]);  //tag name is only until the first whitespace
+                }
+                editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(Optional.of(parsedTags))));
+            }
 
             //get any new task description entered by the user
             String tagArgs = String.format(AddCommandParser.EXTRACT_ARGS_REGEX, PREFIX_TAG.getPrefix() + "(\\S+)", "");
