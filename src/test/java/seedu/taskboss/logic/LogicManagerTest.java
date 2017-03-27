@@ -50,6 +50,8 @@ import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Recurrence;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.storage.StorageManager;
 
@@ -70,7 +72,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskBossChangedEvent abce) {
+    private void handleLocalModelChangedEvent(TaskBossChangedEvent abce) throws IllegalValueException {
         latestSavedTaskBoss = new TaskBoss(abce.data);
     }
 
@@ -237,8 +239,14 @@ public class LogicManagerTest {
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
         assertCommandFailure("add Valid Name sd/today to next week ed/tomorrow i/valid, information",
                 DateTimeParser.getMultipleDatesError());
-        assertCommandFailure("add Valid Name sd/invalid date ed/tomorroq i/valid, information",
+        assertCommandFailure("add Valid Name sd/invalid date ed/tomorrow i/valid, information",
                 DateTime.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add n/Valid Name sd/today ed/invalid i/valid, information",
+                DateTime.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add n/Valid Name sd/tomorrow ed/next friday i/valid info r/invalid recurrence",
+                Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
+        assertCommandFailure("add n/Valid Name r/weekly monthly",
+                Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
     }
 
     @Test
@@ -253,7 +261,6 @@ public class LogicManagerTest {
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB, expectedAB.getTaskList());
-
     }
 
     @Test
@@ -504,16 +511,17 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            PriorityLevel privatePriorityLevel = new PriorityLevel("Yes");
+            PriorityLevel priorityLevel = new PriorityLevel("Yes");
             DateTime startDateTime = new DateTime("today 5pm");
             DateTime endDateTime = new DateTime("tomorrow 8pm");
-            Information privateInformation = new Information("111, alpha street");
+            Information information = new Information("111, alpha street");
+            Recurrence recurrence = new Recurrence(Frequency.NONE);
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
             categories.add(new Category("AllTasks"));
-            return new Task(name, privatePriorityLevel, startDateTime,
-                    endDateTime, privateInformation, categories);
+            return new Task(name, priorityLevel, startDateTime,
+                    endDateTime, information, recurrence, categories);
         }
 
         /**
@@ -531,6 +539,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 19 10am 2017"),
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of " + seed),
+                    new Recurrence(Frequency.NONE),
                     new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                            new Category("category" + Math.abs(seed + 1)))
             );
@@ -549,6 +558,7 @@ public class LogicManagerTest {
             cmd.append(" sd/").append(p.getStartDateTime().toString());
             cmd.append(" ed/").append(p.getEndDateTime().toString());
             cmd.append(" i/").append(p.getInformation());
+            cmd.append(" r/").append(p.getRecurrence().toString());
 
             UniqueCategoryList categories = p.getCategories();
             for (Category t : categories) {
@@ -640,6 +650,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 19 10am 2017"),
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of 1"),
+                    new Recurrence(Frequency.NONE),
                     new UniqueCategoryList(new Category("category"))
             );
         }
@@ -656,6 +667,7 @@ public class LogicManagerTest {
                     new DateTime(startDatetime),
                     new DateTime("Feb 20 10am 2018"),
                     new Information("House of 1"),
+                    new Recurrence(Frequency.NONE),
                     new UniqueCategoryList(new Category("category"))
             );
         }
@@ -672,6 +684,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 20 10am 2017"),
                     new DateTime(endDatetime),
                     new Information("House of 1"),
+                    new Recurrence(Frequency.NONE),
                     new UniqueCategoryList(new Category("category"))
             );
         }

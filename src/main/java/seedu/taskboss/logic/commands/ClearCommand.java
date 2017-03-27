@@ -1,5 +1,6 @@
 package seedu.taskboss.logic.commands;
 
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.TaskBoss;
 
 /**
@@ -13,7 +14,7 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws IllegalValueException {
         assert model != null;
         model.resetData(new TaskBoss());
         return new CommandResult(MESSAGE_SUCCESS);

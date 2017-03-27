@@ -13,6 +13,8 @@ public interface ReadOnlyTask {
     Information getInformation();
     DateTime getStartDateTime();
     DateTime getEndDateTime();
+    Recurrence getRecurrence();
+    boolean isRecurring();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
@@ -30,7 +32,9 @@ public interface ReadOnlyTask {
                 && other.getPriorityLevel().equals(this.getPriorityLevel())
                 && other.getStartDateTime().equals(this.getStartDateTime())
                 && other.getEndDateTime().equals(this.getEndDateTime())
-                && other.getInformation().equals(this.getInformation()));
+                && other.getInformation().equals(this.getInformation()))
+                && other.getRecurrence().equals(this.getRecurrence())
+                && other.getCategories().equals(this.getCategories());
     }
 
     /**
@@ -47,6 +51,8 @@ public interface ReadOnlyTask {
                 .append(getEndDateTime())
                 .append(" Information: ")
                 .append(getInformation())
+                .append(" Recurrence: ")
+                .append(getRecurrence())
                 .append(" Categories: ");
         getCategories().forEach(builder::append);
         return builder.toString();

@@ -10,12 +10,13 @@ import seedu.taskboss.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
-    public static final Prefix PREFIX_INFORMATION = new Prefix("i/");
-    public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
     public static final Prefix PREFIX_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_START_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_END_DATE = new Prefix("ed/");
+    public static final Prefix PREFIX_INFORMATION = new Prefix("i/");
+    public static final Prefix PREFIX_RECURRENCE = new Prefix("r/");
+    public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
     public static final Prefix PREFIX_KEYWORD = new Prefix("k/");
 
     /* Patterns definitions */

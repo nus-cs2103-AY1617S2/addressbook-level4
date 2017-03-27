@@ -19,6 +19,7 @@ import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Recurrence;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
 
@@ -36,7 +37,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY_LEVEL]"
             + " [sd/START_DATE] [ed/END_DATE]"
-            + " [i/INFORMATION ] [c/CATEGORY]...\n"
+            + " [i/INFORMATION ] [r/RECURRENCE] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/Yes" + " || " + COMMAND_WORD_SHORT + " 1 p/No";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -118,6 +119,8 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getEndDateTime);
         Information updatedInformation = editTaskDescriptor.getInformation()
                 .orElseGet(taskToEdit::getInformation);
+        Recurrence updatedRecurrence = editTaskDescriptor.getRecurrence()
+                .orElseGet(taskToEdit::getRecurrence);
 
         //check whether user input for editing task categories contains AllTasks category
         //and remove it from user input
@@ -149,7 +152,7 @@ public class EditCommand extends Command {
         }
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
-                updatedInformation, updatedCategories);
+                updatedInformation, updatedRecurrence, updatedCategories);
     }
 
     /**
@@ -163,6 +166,7 @@ public class EditCommand extends Command {
         private Optional<Information> information = Optional.empty();
         private Optional<DateTime> startDateTime = Optional.empty();
         private Optional<DateTime> endDateTime = Optional.empty();
+        private Optional<Recurrence> recurrence = Optional.empty();
         private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -173,6 +177,7 @@ public class EditCommand extends Command {
             this.startDateTime = toCopy.getStartDateTime();
             this.endDateTime = toCopy.getEndDateTime();
             this.information = toCopy.getInformation();
+            this.recurrence = toCopy.getRecurrence();
             this.categories = toCopy.getCategories();
         }
 
@@ -181,7 +186,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.priorityLevel, this.startDateTime,
-                    this.endDateTime, this.information, this.categories);
+                    this.endDateTime, this.recurrence, this.information, this.categories);
         }
 
         public void setName(Optional<Name> name) {
@@ -241,6 +246,15 @@ public class EditCommand extends Command {
 
         public Optional<Information> getInformation() {
             return information;
+        }
+
+        public void setRecurrence(Optional<Recurrence> recurrence) {
+            assert recurrence != null;
+            this.recurrence = recurrence;
+        }
+
+        public Optional<Recurrence> getRecurrence() {
+            return recurrence;
         }
 
         public void setCategories(Optional<UniqueCategoryList> categories) {
