@@ -49,7 +49,7 @@ public class FindCommandTest extends TodoListGuiTest {
         assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TAG.getPrefix() + SINGLE_TAG, td.cat);
     }
     //@@author
-    
+
     @Test
     //@@author A0163720M
     /**
