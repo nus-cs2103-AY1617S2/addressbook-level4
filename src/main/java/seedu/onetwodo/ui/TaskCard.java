@@ -38,6 +38,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
+    private HBox descriptionBox;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex, char indexPrefix) {
@@ -98,6 +100,7 @@ public class TaskCard extends UiPart<Region> {
             description.setText(descriptionText);
         } else {
             description.setText("");
+            descriptionBox.getChildren().clear();
         }
     }
 

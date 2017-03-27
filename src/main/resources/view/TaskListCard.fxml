@@ -17,11 +17,11 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-            <HBox prefHeight="0.0" prefWidth="0.0">
+            <HBox prefHeight="75.0" prefWidth="202.0">
                <children>
                   <Label fx:id="id" alignment="CENTER" contentDisplay="CENTER" minHeight="33.0" minWidth="33.0" style="-fx-background-radius: 40; -fx-background-color: lightgray; -fx-text-fill: white;" styleClass="chip" stylesheets="@PanelTheme.css" text="E1" textAlignment="CENTER" HBox.hgrow="NEVER">
                      <HBox.margin>
-                        <Insets bottom="15.0" left="18.0" right="6.0" top="12.0" />
+                        <Insets bottom="15.0" left="18.0" right="6.0" top="18.0" />
                      </HBox.margin>
                   </Label>
                       <VBox alignment="CENTER_LEFT">
@@ -31,25 +31,23 @@
                         <URL value="@PanelTheme.css" />
                           </stylesheets>
                           <padding>
-                              <Insets bottom="5" left="15" right="5" top="5" />
+                              <Insets bottom="5.0" left="15.0" right="5.0" />
                           </padding>
                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="0.0">
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="20.0" prefHeight="0.0">
                                   <children>
                                        <Label fx:id="name" styleClass="cell_big_label" stylesheets="@PanelTheme.css" text="\$first">
                                  <HBox.margin>
                                     <Insets top="6.0" />
                                  </HBox.margin>
-                              </Label>
-                              <Label fx:id="priority" alignment="CENTER" minWidth="40.0" style="-fx-padding: 3;" styleClass="label-priority" stylesheets="@PanelTheme.css" text="\$p">
-                                 <HBox.margin>
-                                    <Insets left="3.0" top="9.0" />
-                                 </HBox.margin>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets right="6.0" />
+                                 </padding>
                               </Label>
                                   </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                               </HBox>
                               <FlowPane fx:id="tags" />
                         <HBox fx:id="dateBox" fillHeight="false" maxHeight="0.0" prefHeight="0.0" prefWidth="73.0" styleClass="date-box" stylesheets="@DarkTheme.css">
@@ -58,9 +56,21 @@
                                     <Label id="endDate" fx:id="endDate" prefHeight="0.0" styleClass="cell_small_label" />
                            </children>
                         </HBox>
-                              <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                        <HBox fx:id="descriptionBox" prefHeight="0.0" prefWidth="200.0">
+                           <children>
+                                    <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                           </children>
+                        </HBox>
                           </children>
                       </VBox>
+                  <Label fx:id="priority" alignment="CENTER" contentDisplay="CENTER" minWidth="40.0" style="-fx-padding: 3;" styleClass="label-priority" stylesheets="@PanelTheme.css" text="\$p">
+                     <HBox.margin>
+                        <Insets left="3.0" right="10.0" top="30.0" />
+                     </HBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
                </children>
             </HBox>
             </children>
