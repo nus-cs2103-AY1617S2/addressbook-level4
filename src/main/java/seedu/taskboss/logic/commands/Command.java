@@ -1,6 +1,7 @@
 package seedu.taskboss.logic.commands;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.exceptions.DefaultCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
@@ -30,9 +31,10 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      * @throws IllegalValueException
+     * @throws
      */
     public abstract CommandResult execute() throws CommandException, IllegalValueException,
-        InvalidDatesException;
+        InvalidDatesException, DefaultCategoryException;
 
     /**
      * Provides any needed dependencies to the command.

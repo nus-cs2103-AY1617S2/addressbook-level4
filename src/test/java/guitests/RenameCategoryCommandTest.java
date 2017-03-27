@@ -1,3 +1,5 @@
+
+
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -6,8 +8,10 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
+import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.parser.RenameCategoryCommandParser;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
 import seedu.taskboss.testutil.TestTask;
 
@@ -32,12 +36,14 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
                 .withPriorityLevel("Yes")
                 .withStartDateTime("Feb 18, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
-                .withCategories("Project").build();
+                .withRecurrence(Frequency.NONE)
+                .withCategories("Project", AddCommand.DEFAULT).build();
         sampleB = new TaskBuilder().withName("Birthday party")
                 .withInformation("311, Clementi Ave 2, #02-25")
                 .withPriorityLevel("No")
                 .withStartDateTime("Feb 23, 2017 10pm")
                 .withEndDateTime("Jun 28, 2017 5pm")
+                .withRecurrence(Frequency.NONE)
                 .withCategories("owesMoney", "Project").build();
 
         TestTask[] taskListExpected = {sampleA, sampleB};
@@ -68,7 +74,18 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RenameCategoryCommandParser.ERROR_NON_ALPHANUMERIC));
 
+        //category name does not exist
         commandBox.runCommand("name superman batman");
         assertResultMessage("[superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
+
+        //category name is AllTasks
+        //@@author A0144904H
+        commandBox.runCommand("name AllTasks batman");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
+
+        //category name is Done
+        //@@author A0144904H
+        commandBox.runCommand("name Done batman");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
     }
 }

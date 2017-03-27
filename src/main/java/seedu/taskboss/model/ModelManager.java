@@ -59,7 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskBoss newData) {
+    public void resetData(ReadOnlyTaskBoss newData) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.resetData(newData);
         indicateTaskBossChanged();
@@ -71,7 +71,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void undoTaskboss() throws EmptyStackException {
+    public void undoTaskboss() throws EmptyStackException, IllegalValueException {
         taskBoss.resetData(taskbossHistory.pop());
         indicateTaskBossChanged();
     }
@@ -87,7 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException, IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.removeTask(target);
         indicateTaskBossChanged();
@@ -223,7 +223,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0147990R
     @Override
-    public void clearTasksByCategory(Category category) {
+    public void clearTasksByCategory(Category category) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         FilteredList<ReadOnlyTask> taskListWithCategory = filteredTasks;
         int listSize = taskListWithCategory.size();

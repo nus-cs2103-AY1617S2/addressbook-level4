@@ -6,10 +6,12 @@ import java.util.Optional;
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskboss.commons.exceptions.DefaultCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.DateTime;
@@ -17,6 +19,7 @@ import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Recurrence;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
 
@@ -32,15 +35,18 @@ public class EditCommand extends Command {
             + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [n/NAME] [p/PRIORITY_LEVEL]"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY_LEVEL]"
             + " [sd/START_DATE] [ed/END_DATE]"
-            + " [i/INFORMATION ] [c/CATEGORY]...\n"
+            + " [i/INFORMATION ] [r/RECURRENCE] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/Yes" + " || " + COMMAND_WORD_SHORT + " 1 p/No";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss.";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
+    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot add Done category";
+    public static final String ERROR_CANNOT_EDIT_DONE_TASK = "Cannot edit Done tasks";
+
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -60,7 +66,8 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, InvalidDatesException, IllegalValueException {
+    public CommandResult execute() throws CommandException, InvalidDatesException,
+                                        IllegalValueException, DefaultCategoryException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -78,6 +85,12 @@ public class EditCommand extends Command {
             throw new CommandException(ERROR_INVALID_DATES);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (DefaultCategoryException dce) {
+            if (dce.getMessage().equals(ERROR_CANNOT_EDIT_DONE_TASK)) {
+                throw new CommandException(ERROR_CANNOT_EDIT_DONE_TASK);
+            } else {
+                throw new CommandException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
+            }
         }
 
         model.updateFilteredListToShowAll();
@@ -88,12 +101,13 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      * @throws InvalidDatesException
+     * @throws DefaultCategoryException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor)
                                                      throws InvalidDatesException, DuplicateCategoryException,
                                                      IllegalValueException, InvalidDatesException,
-                                                     IllegalValueException {
+                                                     IllegalValueException, DefaultCategoryException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -105,6 +119,22 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getEndDateTime);
         Information updatedInformation = editTaskDescriptor.getInformation()
                 .orElseGet(taskToEdit::getInformation);
+        Recurrence updatedRecurrence = editTaskDescriptor.getRecurrence()
+                .orElseGet(taskToEdit::getRecurrence);
+
+        //check whether user input for editing task categories contains AllTasks category
+        //and remove it from user input
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category("AllTasks"))) {
+            editTaskDescriptor.getCategories().get().remove(new Category("AllTasks"));
+        }
+
+        //check whether user input for editing task categories contains Done category
+        //and throw DefaultCategoryException
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category("Done"))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
+        }
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
                 .orElseGet(taskToEdit::getCategories);
 
@@ -114,8 +144,15 @@ public class EditCommand extends Command {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
+        //@@author A0144904H
+        if (taskToEdit.getCategories().contains(new Category("Done"))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
+        } else {
+            updatedCategories.add(new Category(AddCommand.DEFAULT));
+        }
+
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
-                updatedInformation, updatedCategories);
+                updatedInformation, updatedRecurrence, updatedCategories);
     }
 
     /**
@@ -129,6 +166,7 @@ public class EditCommand extends Command {
         private Optional<Information> information = Optional.empty();
         private Optional<DateTime> startDateTime = Optional.empty();
         private Optional<DateTime> endDateTime = Optional.empty();
+        private Optional<Recurrence> recurrence = Optional.empty();
         private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -139,6 +177,7 @@ public class EditCommand extends Command {
             this.startDateTime = toCopy.getStartDateTime();
             this.endDateTime = toCopy.getEndDateTime();
             this.information = toCopy.getInformation();
+            this.recurrence = toCopy.getRecurrence();
             this.categories = toCopy.getCategories();
         }
 
@@ -147,7 +186,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.priorityLevel, this.startDateTime,
-                    this.endDateTime, this.information, this.categories);
+                    this.endDateTime, this.recurrence, this.information, this.categories);
         }
 
         public void setName(Optional<Name> name) {
@@ -207,6 +246,15 @@ public class EditCommand extends Command {
 
         public Optional<Information> getInformation() {
             return information;
+        }
+
+        public void setRecurrence(Optional<Recurrence> recurrence) {
+            assert recurrence != null;
+            this.recurrence = recurrence;
+        }
+
+        public Optional<Recurrence> getRecurrence() {
+            return recurrence;
         }
 
         public void setCategories(Optional<UniqueCategoryList> categories) {
