@@ -25,19 +25,19 @@ public class EndDate {
      * @throws IllegalValueException
      *             if given date string is invalid.
      */
-    public EndDate(String date) throws IllegalValueException {
-        assert date != null;
-        String trimmedDate = date.trim();
-        if (!isValidDate(trimmedDate)) {
+    public EndDate(String endDate) throws IllegalValueException {
+        assert endDate != null;
+        String trimmedEndDate = endDate.trim();
+        if (!isValidEndDate(trimmedEndDate)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = trimmedDate;
+        this.value = trimmedEndDate;
     }
 
     /**
      * Returns if a given string is a valid task date.
      */
-    public static boolean isValidDate(String test) {
+    public static boolean isValidEndDate(String test) {
         return test.matches(ENDDATE_VALIDATION_REGEX1) || test.matches(ENDDATE_VALIDATION_REGEX2)
                 || test.matches(EMPTY_FIELD);
     }

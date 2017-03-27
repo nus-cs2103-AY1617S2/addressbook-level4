@@ -220,6 +220,9 @@ public class ModelManager extends ComponentManager implements Model {
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTime().value, keyword))
                             .findAny().isPresent())
                     || (taskKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
+                            .findAny().isPresent())
+                    || (taskKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTime().value, keyword))
                             .findAny().isPresent());
         }
