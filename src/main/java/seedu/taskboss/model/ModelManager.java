@@ -76,6 +76,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
+    @Override
+    public void saveTaskboss() {
+        indicateTaskBossChanged();
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
@@ -172,26 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
             throw new CommandException(oldCategory.toString()
                     + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
         }
-
-        indicateTaskBossChanged();
-    }
-
-    //@@author A0147990R
-    @Override
-    public void clearTasksByCategory(Category category) {
-        taskbossHistory.push(new TaskBoss(this.taskBoss));
-        FilteredList<ReadOnlyTask> taskListWithCategory = filteredTasks;
-        int listSize = taskListWithCategory.size();
-        int i;
-        for (i = 0; i < listSize; i++) {
-            ReadOnlyTask target = taskListWithCategory.get(0);
-            try {
-                taskBoss.removeTask(target);
-            } catch (TaskNotFoundException pnfe) {
-                assert false : "The target task cannot be missing";
-            }
-        }
-        updateFilteredListToShowAll();
+        removeCategoryFromTaskboss(oldCategory);
         indicateTaskBossChanged();
     }
 
@@ -235,6 +221,33 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    //@@author A0147990R
+    @Override
+    public void clearTasksByCategory(Category category) {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        FilteredList<ReadOnlyTask> taskListWithCategory = filteredTasks;
+        int listSize = taskListWithCategory.size();
+        int i;
+        for (i = 0; i < listSize; i++) {
+            ReadOnlyTask target = taskListWithCategory.get(0);
+            try {
+                taskBoss.removeTask(target);
+            } catch (TaskNotFoundException pnfe) {
+                assert false : "The target task cannot be missing";
+            }
+        }
+        updateFilteredListToShowAll();
+        removeCategoryFromTaskboss(category);
+        indicateTaskBossChanged();
+    }
+
+    //@@author A0147990R
+    /**
+     * Removes the category from the UniqueCategoryList of Taskboss
+     **/
+    public void removeCategoryFromTaskboss(Category category) {
+        taskBoss.removeCategory(category);
+    }
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
