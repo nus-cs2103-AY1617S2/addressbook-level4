@@ -1,4 +1,4 @@
-//@@author A0131125Y
+//@@author A0162011A
 package seedu.toluist.model;
 
 import static org.junit.Assert.assertEquals;
