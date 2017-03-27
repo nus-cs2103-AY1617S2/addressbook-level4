@@ -25,13 +25,13 @@ public class FindCommandParser {
      * @throws IllegalValueException
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(CliSyntax.PREFIX_TAG);
         argsTokenizer.tokenize(args);
         // Fetch the keyword string before the prefix
         Optional<String> keywordsString = argsTokenizer.getPreamble();
 
         // User must enter either the search keyword or parameters with which to search
-        if (!keywordsString.isPresent() && !argsTokenizer.getAllValues(PREFIX_TAG).isPresent()) {
+        if (!keywordsString.isPresent() && !argsTokenizer.getAllValues(CliSyntax.PREFIX_TAG).isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -43,7 +43,7 @@ public class FindCommandParser {
                 return new FindCommand(keywordsSet);
             } else {
                 // Store the individual tag strings in a set
-                final Set<String> tagsStrings = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
+                final Set<String> tagsStrings = ParserUtil.toSet(argsTokenizer.getAllValues(CliSyntax.PREFIX_TAG));
                 final Set<Tag> tagsSet = new HashSet<>();
 
                 for (String tagName : tagsStrings) {
