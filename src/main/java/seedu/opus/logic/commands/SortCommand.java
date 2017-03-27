@@ -16,6 +16,14 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Sorted all tasks by ";
 
+    public static final String ALL = "all";
+    public static final String STATUS = "status";
+    public static final String PRIORITY = "priority";
+    public static final String STARTTIME = "start";
+    public static final String ENDTIME = "end";
+
+    private static String[] keywordCheckList = new String[]{"all", "status", "priority", "start", "end"};
+
     private String keyword;
 
     public SortCommand(String keyword) {
@@ -25,11 +33,11 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute() {
         model.sortList(keyword);
-        if (keyword.contains("all") || keyword.contains("status") || keyword.contains("priority")
-                || keyword.contains("start") || keyword.contains("end")) {
-            return new CommandResult(MESSAGE_SUCCESS + keyword);
-        } else {
-            return new CommandResult(MESSAGE_SORT_CONSTRAINTS);
+        for (String i : keywordCheckList) {
+            if (keyword.contains(i)) {
+                return new CommandResult(MESSAGE_SUCCESS + keyword);
+            }
         }
+        return new CommandResult(MESSAGE_SORT_CONSTRAINTS);
     }
 }
