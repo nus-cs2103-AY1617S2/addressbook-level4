@@ -55,6 +55,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager() {
         this(new ToDoList(), new UserPrefs());
+        isViewAll = true;
     }
 
     @Override
@@ -357,7 +358,7 @@ public class ModelManager extends ComponentManager implements Model {
      *
      */
     private boolean matchName(String taskName, String searchName) {
-        if (taskName.toLowerCase().contains(searchName)) {
+        if (taskName.toLowerCase().contains(searchName.toLowerCase())) {
             return true;
         }
         return false;
