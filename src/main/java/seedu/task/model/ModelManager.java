@@ -84,9 +84,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-	public synchronized void completeTask(ReadOnlyTask target, ReadOnlyTask toBeComplete) throws TaskNotFoundException {
-		taskManager.completeTask(target, toBeComplete);
-		indicateTaskManagerChanged();
+	public synchronized void completeTask(int index) throws TaskNotFoundException {
+		taskManager.completeTask(index);
 	}
     
     @Override

@@ -124,10 +124,10 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     //Mark a task as completed
-    public boolean completeTask(ReadOnlyTask target, ReadOnlyTask toBeComplete) throws UniqueTaskList.TaskNotFoundException {
-        if (tasks.complete(target, toBeComplete)) {
-            return true;
-        } else {
+    public void completeTask(int index) throws UniqueTaskList.TaskNotFoundException {
+        try {
+        	tasks.complete(index);
+        } catch (Exception e) {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }

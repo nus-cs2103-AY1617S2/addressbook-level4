@@ -6,6 +6,9 @@ public class TaskStatus {
 
     public String status;
     
+    public static final String INCOMPLETE = "Ongoing";
+    public static final String DONE = "Completed";
+    
     public TaskStatus(String status) {
         this.status = status;
     }

@@ -62,7 +62,7 @@ public class Task implements ReadOnlyTask {
 	if (parseString.isPresent()) {
 	    this.taskDescription = parseString.get();
 	}
-	this.taskStatus = new TaskStatus("Ongoing");
+	this.taskStatus = new TaskStatus(TaskStatus.INCOMPLETE);
 	this.tags = new UniqueTagList();
 
     }
@@ -89,7 +89,7 @@ public class Task implements ReadOnlyTask {
     	if (parseTaskStatus.isPresent()) {
     		this.taskStatus = parseTaskStatus.get();
     	}
-    	this.taskStatus = new TaskStatus("Ongoing");
+    	this.taskStatus = new TaskStatus(TaskStatus.INCOMPLETE);
     	this.tags = tags;
 
         }
