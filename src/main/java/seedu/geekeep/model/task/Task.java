@@ -31,7 +31,7 @@ public class Task implements ReadOnlyTask  {
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getTitle(), source.getStartDateTime(),
-             source.getEndDateTime(), source.getLocation(), source.getTags());
+                source.getEndDateTime(), source.getLocation(), source.getTags(), source.isDone());
     }
 
     /**
