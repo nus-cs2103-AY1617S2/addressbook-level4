@@ -117,7 +117,9 @@ public class Task implements ReadOnlyTask  {
     }
 
     /**
-     * Get the task's DateTime that is used to compare date time
+     * Get the task's DateTime that is used to compare date time.
+     * For events, the startDateTime is used for comparison.
+     * For deadlines, the endDateTime is used for comparison.
      * @return DateTime object
      */
     public DateTime getReferenceDateTime() {
@@ -131,15 +133,30 @@ public class Task implements ReadOnlyTask  {
         }
     }
 
+    /**
+     * Compares this task's type priority with another
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
     public int comparePriority(Task otherTask) {
         return this.getPriority() - otherTask.getPriority();
     }
 
+    /**
+     * Compares this task's reference datetime with another
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
     public int compareDate(Task otherTask) {
         assert !isFloatingTask() && !otherTask.isFloatingTask();
         return this.getReferenceDateTime().dateTime.compareTo(otherTask.getReferenceDateTime().dateTime);
     }
 
+    /**
+     * Compares this task's type priority and reference datetime with another
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
     public int compareBothPriorityAndDate(Task otherTask) {
         int comparePriorityResult = this.comparePriority(otherTask);
         if (comparePriorityResult != 0 || this.isFloatingTask()
