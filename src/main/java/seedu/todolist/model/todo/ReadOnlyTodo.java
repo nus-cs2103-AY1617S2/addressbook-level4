@@ -2,12 +2,8 @@ package seedu.todolist.model.todo;
 
 import java.util.Date;
 
-<<<<<<< HEAD:src/main/java/seedu/todolist/model/todo/ReadOnlyTodo.java
+import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
-=======
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
->>>>>>> master:src/main/java/seedu/address/model/todo/ReadOnlyTodo.java
 
 /**
  * A read-only immutable interface for a Todo in the addressbook.
