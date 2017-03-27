@@ -47,7 +47,6 @@ public class TaskListCard extends UiPart<Region> {
         } else {
             imageView.setImage(completeIcon);
         }
-       
         initTags(task);
     }
 
