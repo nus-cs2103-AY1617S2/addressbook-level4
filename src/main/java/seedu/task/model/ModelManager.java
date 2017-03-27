@@ -29,9 +29,9 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskList taskList;
-    private FilteredList<ReadOnlyTask> filteredTasks;
+    private final FilteredList<ReadOnlyTask> filteredTasks;
     //@@evanyeung A0163744B
-    private SortedList<ReadOnlyTask> sortedTasks;
+    private final SortedList<ReadOnlyTask> sortedTasks;
     //@@evanyeung
 
     /**

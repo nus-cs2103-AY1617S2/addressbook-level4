@@ -374,7 +374,7 @@ public class LogicManagerTest {
         Task p3 = helper.generatePersonWithName("key key");
         Task p4 = helper.generatePersonWithName("KEy sduauo");
 
-        List<Task> fourPersons = helper.generateListOfTasks(p3, p1, p4, p2);
+        List<Task> fourPersons = helper.generateListOfTasks(p1, p2, p3, p4);
         TaskList expectedAB = helper.generateTaskList(fourPersons);
         List<Task> expectedList = fourPersons;
         helper.addToModel(model, fourPersons);
@@ -416,7 +416,7 @@ public class LogicManagerTest {
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             Complete complete = new Complete(false);
-            return new Task(name, null, null, tags, complete, new TaskId(System.currentTimeMillis()));
+            return new Task(name, null, null, tags, complete, new TaskId(1));
         }
 
         /**
@@ -433,7 +433,7 @@ public class LogicManagerTest {
                     null,
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
                     new Complete(false),
-                    new TaskId(System.currentTimeMillis())
+                    new TaskId(seed)
             );
         }
 
@@ -520,17 +520,19 @@ public class LogicManagerTest {
             return Arrays.asList(persons);
         }
 
+        private int nextGeneratePersonWithNameId = 0;
         /**
          * Generates a Person object with given name. Other fields will have some dummy values.
          */
         Task generatePersonWithName(String description) throws Exception {
+            nextGeneratePersonWithNameId++;
             return new Task(
                     new Description(description),
                     null,
                     null,
                     new UniqueTagList(new Tag("tag")),
                     new Complete(false),
-                    new TaskId(System.currentTimeMillis())
+                    new TaskId(nextGeneratePersonWithNameId)
             );
         }
 
