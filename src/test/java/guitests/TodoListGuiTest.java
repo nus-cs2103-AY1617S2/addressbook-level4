@@ -21,13 +21,13 @@ import guitests.guihandles.TodoCardHandle;
 import guitests.guihandles.TodoListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.TodoList;
-import seedu.address.model.todo.ReadOnlyTodo;
-import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TypicalTestTodos;
+import seedu.todolist.TestApp;
+import seedu.todolist.commons.core.EventsCenter;
+import seedu.todolist.commons.events.BaseEvent;
+import seedu.todolist.model.TodoList;
+import seedu.todolist.model.todo.ReadOnlyTodo;
+import seedu.todolist.testutil.TestUtil;
+import seedu.todolist.testutil.TypicalTestTodos;
 
 /**
  * A GUI Test class for TodoList.

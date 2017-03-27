@@ -3,12 +3,12 @@
     <todos>
         <name>aaaa</name>
         <startTime></startTime>
-        <endTime>Sun Nov 12 04:00:00 SGT 2017</endTime>
+        <endTime>Sun Nov 12 04:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>wwwww</tagged>
     </todos>
     <todos>
-        <name>asdfj</name>
+        <name>thing</name>
         <startTime></startTime>
         <endTime></endTime>
         <completeTime></completeTime>

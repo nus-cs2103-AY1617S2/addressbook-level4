@@ -75,7 +75,7 @@ To enable _exceptions_ to code styles, add in the comment `//CODESTYLE.OFF: Rule
   Runs all tests in the `guitests` package
 
 * **`nonGuiTests`**<br>
-  Runs all non-GUI tests in the `seedu.address` package
+  Runs all non-GUI tests in the `seedu.todolist` package
 
 * **`headless`**<br>
   Sets the test mode as _headless_.
