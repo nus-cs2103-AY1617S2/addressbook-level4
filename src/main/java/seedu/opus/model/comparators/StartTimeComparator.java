@@ -6,17 +6,19 @@ import seedu.opus.model.task.ReadOnlyTask;
 
 public class StartTimeComparator implements Comparator<ReadOnlyTask> {
     public int compare(ReadOnlyTask d1, ReadOnlyTask d2) {
-        boolean hasStartAndEnd = d1.getStartTime().isPresent() && d2.getStartTime().isPresent();
-        boolean hasStartOrEnd = d1.getStartTime().isPresent() || d2.getStartTime().isPresent();
-        if (hasStartAndEnd) {
-            if (d1.getStartTime().get().dateTime.isBefore(d2.getStartTime().get().dateTime)) {
+        boolean bothHaveStart = d1.getStartTime().isPresent() && d2.getStartTime().isPresent();
+        boolean oneHasStart = d1.getStartTime().isPresent() || d2.getStartTime().isPresent();
+        boolean d1IsBefore = d1.getStartTime().get().dateTime.isBefore(d2.getStartTime().get().dateTime);
+        boolean d1IsAfter = d1.getStartTime().get().dateTime.isAfter(d2.getStartTime().get().dateTime);
+        if (bothHaveStart) {
+            if (d1IsBefore) {
                 return -1;
-            } else if (d1.getStartTime().get().dateTime.isAfter(d2.getStartTime().get().dateTime)) {
+            } else if (d1IsAfter) {
                 return 1;
             } else {
                 return 0;
             }
-        } else if (hasStartOrEnd) {
+        } else if (oneHasStart) {
             return -1;
         } else {
             return 1;
