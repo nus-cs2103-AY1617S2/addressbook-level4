@@ -207,7 +207,11 @@ public class CalendarViewPanel extends UiPart<Region> {
 		currentYear.setText(today.format(dateFormatter("uuuu")));
 	}
 
-	// ======= Utility methods for the Day View ==========
+	// ========== Inner Methods for calendarview ==========
+
+	private void populateMonth() {
+		LocalDate calendarDate = LocalDate.of(today.getYear(), today.getMonth(), today.getDayOfMonth());
+	}
 
 	private void createFullDayTime() {
 		timeSlots.setItems(timeData);
