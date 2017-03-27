@@ -34,15 +34,6 @@ public class Task implements ReadOnlyTask  {
                 source.getEndDateTime(), source.getLocation(), source.getTags(), source.isDone());
     }
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location,
-                UniqueTagList tags) throws IllegalValueException {
-        this(title, startDateTime, endDateTime, location, tags, false);
-    }
-
     public Task(Title title, DateTime startDateTime,
                 DateTime endDateTime, Location location,
                 UniqueTagList tags, boolean isDone) throws IllegalValueException {

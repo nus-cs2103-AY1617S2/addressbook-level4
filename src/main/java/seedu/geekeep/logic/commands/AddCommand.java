@@ -63,7 +63,8 @@ public class AddCommand extends Command {
                 start,
                 end,
                 loc,
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                false
         );
     }
 
