@@ -43,8 +43,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss.";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
-    public static final String ERROR_CANNOT_EDIT_ALLTASKS_CATEGORY = "Cannot edit AllTasks category";
-    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot edit Done category";
+    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot add Done category";
+    public static final String ERROR_CANNOT_EDIT_DONE_TASK = "Cannot edit Done tasks";
 
 
     private final int filteredTaskListIndex;
@@ -85,8 +85,8 @@ public class EditCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (DefaultCategoryException dce) {
-            if (dce.getMessage().equals(ERROR_CANNOT_EDIT_ALLTASKS_CATEGORY)) {
-                throw new CommandException(ERROR_CANNOT_EDIT_ALLTASKS_CATEGORY);
+            if (dce.getMessage().equals(ERROR_CANNOT_EDIT_DONE_TASK)) {
+                throw new CommandException(ERROR_CANNOT_EDIT_DONE_TASK);
             } else {
                 throw new CommandException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
             }
@@ -118,9 +118,18 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getEndDateTime);
         Information updatedInformation = editTaskDescriptor.getInformation()
                 .orElseGet(taskToEdit::getInformation);
-        if (editTaskDescriptor.getCategories().get().contains(new Category("AllTasks"))) {
-            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_ALLTASKS_CATEGORY);
-        } else if (editTaskDescriptor.getCategories().get().contains(new Category("Done"))) {
+
+        //check whether user input for editing task categories contains AllTasks category
+        //and remove it from user input
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category("AllTasks"))) {
+            editTaskDescriptor.getCategories().get().remove(new Category("AllTasks"));
+        }
+
+        //check whether user input for editing task categories contains Done category
+        //and throw DefaultCategoryException
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category("Done"))) {
             throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
         }
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
@@ -134,7 +143,7 @@ public class EditCommand extends Command {
 
         //@@author A0144904H
         if (taskToEdit.getCategories().contains(new Category("Done"))) {
-            updatedCategories.setCategories(new UniqueCategoryList("Done"));
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
         } else {
             updatedCategories.add(new Category(AddCommand.DEFAULT));
         }
