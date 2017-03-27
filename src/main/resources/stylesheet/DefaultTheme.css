@@ -7,7 +7,7 @@
 .root {
     -fx-background-color: theme-background;
     -fx-control-inner-background: theme-background;
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Roboto Medium";
 }
 
 .scroll-bar .thumb {
