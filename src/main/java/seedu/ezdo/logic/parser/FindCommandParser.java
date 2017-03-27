@@ -72,8 +72,8 @@ public class FindCommandParser implements CommandParser {
             }
 
             if (isFindAfter(optionalStartDate)) {
-                optionalDueDate = parseFindAfter(optionalStartDate);
-                searchAfterDueDate = true;
+                optionalStartDate = parseFindAfter(optionalStartDate);
+                searchAfterStartDate = true;
             }
 
             if (isFindAfter(optionalDueDate)) {
@@ -113,7 +113,7 @@ public class FindCommandParser implements CommandParser {
     private Optional<String> parseFindBefore(Optional<String> taskDate) {
         Optional<String> optionalDate;
         String taskDateString = taskDate.get();
-        String commandString = taskDateString.substring(7, taskDateString.length()).trim();
+        String commandString = taskDateString.substring(6, taskDateString.length()).trim();
         optionalDate = Optional.of(commandString);
         return optionalDate;
     }
@@ -121,7 +121,8 @@ public class FindCommandParser implements CommandParser {
     private Optional<String> parseFindAfter(Optional<String> taskDate) {
         Optional<String> optionalDate;
         String taskDateString = taskDate.get();
-        String commandString = taskDateString.substring(6, taskDateString.length()).trim();
+        String commandString = taskDateString.substring(5, taskDateString.length()).trim();
+        System.out.println(commandString);
         optionalDate = Optional.of(commandString);
         return optionalDate;
     }
@@ -131,7 +132,7 @@ public class FindCommandParser implements CommandParser {
             return false;
         } else {
             String taskDateString = taskDate.get();
-            if (taskDateString.length() < 6) {
+            if (taskDateString.length() <= 6) {
                 return false;
             } else {
                 String prefixToCompare = "before";
@@ -146,7 +147,7 @@ public class FindCommandParser implements CommandParser {
             return false;
         } else {
             String taskDateString = taskDate.get();
-            if (taskDateString.length() < 5) {
+            if (taskDateString.length() <= 5) {
                 return false;
             } else {
                 String prefixToCompare = "after";
