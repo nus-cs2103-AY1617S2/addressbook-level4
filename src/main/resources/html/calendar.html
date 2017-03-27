@@ -1,0 +1,55 @@
+<!-- @@author A0139925U -->
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
+
+<body>
+    <div id='calendar'></div>
+</body>
+
+<script>
+
+<!-- @@author A0142255M -->
+$(document).ready(function() {
+    $('#calendar').fullCalendar({
+        aspectRatio: 1.3,
+        height: 440,
+        header: {
+            left: 'prev, next, today',
+            center: 'title',
+            right: 'month, basicWeek, basicDay'
+        },
+        navLinks: true, // can click day/week names to navigate views
+        editable: true,
+        selectable: true,
+        eventLimit: true, // allow "more" link when too many events
+    });
+    $('#calendar').fullCalendar('render');
+});
+
+function add_event(title, start, end, isActive) {
+    $(document).ready(function() {
+        var color = 'white';
+        if (isActive === "true") {
+            color = 'light blue';
+        }
+        var event = {
+            title: title,
+            start: start,
+            eventColor: color
+        };
+        if (end !== "'0'") {
+            event.end = end;
+        }
+        $('#calendar').fullCalendar( 'renderEvent', event, true );
+    });
+}
+
+function remove_all() {
+    $(document).ready(function() {
+        $('#calendar').fullCalendar( 'destroy' );
+    });
+}
+
+</script>
