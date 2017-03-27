@@ -101,9 +101,9 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         //@@author A0144904H
         if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
-            sb.append("add " + "n/" + this.getName().fullName + " ");
+            sb.append("add " + this.getName().fullName + " ");
         } else {
-            sb.append("add " + "n/" + this.getName().fullName + "! ");
+            sb.append("add " + this.getName().fullName + "! ");
         }
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
@@ -117,9 +117,9 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         //@@author A0144904H
         if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
-            sb.append("add " + "n/" + this.getName().fullName + " ");
+            sb.append("add " + this.getName().fullName + " ");
         } else {
-            sb.append("add " + "n/" + this.getName().fullName + "! ");
+            sb.append("add " + this.getName().fullName + "! ");
         }
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
