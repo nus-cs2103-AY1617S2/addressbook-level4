@@ -11,7 +11,10 @@ public class SortCommand extends Command {
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " priority";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all tasks!";
+    public static final String MESSAGE_SORT_CONSTRAINTS = "Sort can only take in 'all', 'status', 'priority', "
+            + "'start', 'end' as parameters";
+
+    public static final String MESSAGE_SUCCESS = "Sorted all tasks by ";
 
     private String keyword;
 
@@ -22,6 +25,10 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute() {
         model.sortList(keyword);
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (keyword.contains("all") || keyword.contains("status") || keyword.contains("priority")
+                || keyword.contains("start") || keyword.contains("end"))
+            return new CommandResult(MESSAGE_SUCCESS + keyword);
+        else
+            return new CommandResult(MESSAGE_SORT_CONSTRAINTS);
     }
 }
