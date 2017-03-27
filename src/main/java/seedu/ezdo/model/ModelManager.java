@@ -292,6 +292,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.dueBefore = dueBefore;
             this.startAfter = startAfter;
             this.dueAfter = dueAfter;
+
         }
 
         @Override
@@ -303,9 +304,12 @@ public class ModelManager extends ComponentManager implements Model {
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
                     && comparePriority(task.getPriority())
-                    && ((!startBefore && compareStartDate(task.getStartDate()))
-                            || (startBefore && compareBeforeStart(task.getStartDate())))
-                    && ((!dueBefore && compareDueDate(task.getDueDate())) || (dueBefore && compareBeforeDue(task.getDueDate())))
+                    && (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
+                            || (startBefore && compareBeforeStart(task.getStartDate()))
+                            || (startAfter && compareAfterStart(task.getStartDate())))
+                    && (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
+                            || (dueBefore && compareBeforeDue(task.getDueDate()))
+                            || (dueAfter && compareAfterDue(task.getDueDate())))
                     && (taskTagStringSet.containsAll(tags));
 
         }
@@ -369,6 +373,22 @@ public class ModelManager extends ComponentManager implements Model {
 
             return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
                     || (taskDueDateExist && comesBefore(dueDate.get().toString(), taskDueDateString)));
+        }
+
+        private boolean compareAfterStart(TaskDate taskStartDate) {
+            String taskStartDateString = taskStartDate.toString();
+            boolean taskStartDateExist = (taskStartDateString.length() != 0);
+
+            return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+                    || (taskStartDateExist && comesBefore(taskStartDateString, startDate.get().toString())));
+        }
+
+        private boolean compareAfterDue(TaskDate taskDueDate) {
+            String taskDueDateString = taskDueDate.toString();
+            boolean taskDueDateExist = (taskDueDateString.length() != 0);
+
+            return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+                    || (taskDueDateExist && comesBefore(taskDueDateString, dueDate.get().toString())));
         }
 
         private boolean comesBefore(String givenDate, String taskDate) {
