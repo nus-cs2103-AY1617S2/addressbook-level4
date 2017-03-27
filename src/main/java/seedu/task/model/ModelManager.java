@@ -86,6 +86,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
 	public synchronized void completeTask(int index) throws TaskNotFoundException {
 		taskManager.completeTask(index);
+		indicateTaskManagerChanged();
 	}
     
     @Override
@@ -188,11 +189,13 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void undo() throws Exception {
 		taskManager.undo();
+		indicateTaskManagerChanged();
 	}
 
 	@Override
 	public void updateBackup() throws DuplicateTaskException {
 		taskManager.updateBackup();
+		
 		// TODO Auto-generated method stub
 		
 	}
@@ -200,11 +203,13 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void sortByTime() {
 		taskManager.sortTasksByTime();
+		indicateTaskManagerChanged();
 		
 	}
 	public void sortByName() {
 		System.out.println("test");
 		taskManager.sortTasksByName();
+		indicateTaskManagerChanged();
 	}
 
 }
