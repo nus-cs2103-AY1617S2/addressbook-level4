@@ -60,6 +60,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0142255M
     /**
      * Sets autocomplete functionality for user commands.
      * Uses ControlsFX Autocomplete TextField function.
@@ -70,6 +71,7 @@ public class CommandBox extends UiPart<Region> {
         AutoCompletionBinding<String> binding = TextFields.bindAutoCompletion(commandTextField, possibleCommands);
         binding.setMaxWidth(70);
     }
+    //@@author
 
 
     /**

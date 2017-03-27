@@ -26,6 +26,12 @@ public class CommandBoxHandle extends GuiHandle {
         setTextField(COMMAND_INPUT_FIELD_ID, command);
     }
 
+    //@@author A0142255M
+    public void pressEnterKey() {
+        pressEnter();
+    }
+    //@@author
+
     public String getCommandInput() {
         return getTextFieldText(COMMAND_INPUT_FIELD_ID);
     }
