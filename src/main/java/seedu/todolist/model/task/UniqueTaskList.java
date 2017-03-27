@@ -63,7 +63,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, editedTask);
     }
-    
+
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *

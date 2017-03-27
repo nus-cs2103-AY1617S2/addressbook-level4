@@ -97,13 +97,13 @@ public class XmlAdaptedTask {
         } else {
             startTime = new StartTime(this.startTime);
         }
-        
+
         if (this.endTime.equals("")) {
             endTime = null;
         } else {
             endTime = new EndTime(this.endTime);
         }
-        
+
         if (this.description == "") {
             description = null;
         } else {

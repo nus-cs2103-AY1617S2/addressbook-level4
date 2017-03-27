@@ -112,7 +112,7 @@ public class ToDoList implements ReadOnlyToDoList {
         // in the task list.
         tasks.updateTask(index, editedTask);
     }
-    
+
     public void describeTask(int index, Task editedTask) {
         assert editedTask != null;
         tasks.describeTask(index, editedTask);
