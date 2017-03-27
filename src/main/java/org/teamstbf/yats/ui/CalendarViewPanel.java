@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -29,6 +30,7 @@ import javafx.scene.layout.Region;
 public class CalendarViewPanel extends UiPart<Region> {
 
 	private static final String FXML = "CalendarView.fxml";
+	private static final String FXMLTIME = "TimeCard.fxml";
 	private static ObservableList<String> timeData = FXCollections.observableArrayList();
 
 	@FXML
@@ -73,6 +75,8 @@ public class CalendarViewPanel extends UiPart<Region> {
 	private Label currentMonth;
 	@FXML
 	private Label currentYear;
+	@FXML
+	private ListView<String> timeSlots;
 
 	private static LocalDate today = LocalDate.now();
 	private final LocalTime firstTimeSlot = LocalTime.of(0, 0);
@@ -201,6 +205,13 @@ public class CalendarViewPanel extends UiPart<Region> {
 	public void resetTodayYear() {
 		today = LocalDate.now();
 		currentYear.setText(today.format(dateFormatter("uuuu")));
+	}
+
+	// ======= Utility methods for the Day View ==========
+
+	private void createFullDayTime() {
+		timeSlots.setItems(timeData);
+		timeSlots.setCellFactory(listView -> new ListCell<String>());
 	}
 
 }
