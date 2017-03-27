@@ -12,7 +12,7 @@ import seedu.tasklist.model.task.UniqueTaskList;
 
 public class TypicalTestTasks {
 
-    public TestTask tutorial, homework, groceries, java, project, drink, internship, ida;
+    public TestTask tutorial, homework, groceries, java, project, drink, internship, ida, exam;
 
     public TypicalTestTasks() {
         try {
@@ -41,6 +41,8 @@ public class TypicalTestTasks {
                     .withComment("at mediacorp").withPriority("high").withStatus(false).build();
             ida = new FloatingTaskBuilder().withName("Yet another interview")
                     .withComment("also at mediacorp").withPriority("high").withStatus(false).build();
+            exam = new FloatingTaskBuilder().withName("paper@Hall").withComment("bring $5 buy pen before exam!")
+                    .withPriority("low").withStatus(false).build();
         } catch (IllegalValueException | ParseException e) {
             e.printStackTrace();
             assert false : "not possible";

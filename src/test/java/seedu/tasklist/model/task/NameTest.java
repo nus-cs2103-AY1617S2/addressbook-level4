@@ -11,9 +11,8 @@ public class NameTest {
     public void isValidName() {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("CS2103T*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("/")); // only slash character
+        assertFalse(Name.isValidName("CS2103/do/homework")); // contains slash characters
 
         // valid name
         assertTrue(Name.isValidName("do tutorial")); // alphabets only
@@ -21,5 +20,6 @@ public class NameTest {
         assertTrue(Name.isValidName("CS3245")); // alphanumeric characters
         assertTrue(Name.isValidName("Update Java")); // with capital letters
         assertTrue(Name.isValidName("CS3245 homework 3")); // long names
+        assertTrue(Name.isValidName("!@#$%^&*with alphabets123")); // alphanumeric characters with various symbols
     }
 }

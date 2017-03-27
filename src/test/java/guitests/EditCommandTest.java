@@ -201,13 +201,13 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
+        commandBox.runCommand("edit 1 omg/it's failing!");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 c/");
         assertResultMessage(Comment.MESSAGE_COMMENT_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit 1 t/failing/tag");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
