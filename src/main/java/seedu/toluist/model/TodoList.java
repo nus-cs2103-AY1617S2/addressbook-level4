@@ -89,6 +89,15 @@ public class TodoList {
     }
 
     /**
+     * Finds a task from todo list
+     * @param task task to be found
+     * @return index number of task if found, else -1
+     */
+    public int find(Task task) {
+        return allTasks.indexOf(task);
+    }
+
+    /**
      * Returns list of tasks based on predicate
      * @param predicate a predicate
      * @return a list of task

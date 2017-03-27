@@ -34,6 +34,10 @@ public class Task implements Comparable<Task>, Cloneable {
     private RecurringFrequency recurringFrequency;
     private TaskPriority priority = TaskPriority.LOW;
 
+    public enum TaskType {
+        TASK, DEADLINE, EVENT
+    }
+
     public enum TaskPriority {
         HIGH, LOW
     }
@@ -92,6 +96,16 @@ public class Task implements Comparable<Task>, Cloneable {
 
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    public TaskType getTaskType() {
+        if (isEvent()) {
+            return TaskType.EVENT;
+        } else if (isTaskWithDeadline()) {
+            return TaskType.DEADLINE;
+        } else {
+            return TaskType.TASK;
+        }
     }
 
     //@@author A0131125Y
@@ -216,7 +230,7 @@ public class Task implements Comparable<Task>, Cloneable {
     public boolean isAnyKeywordsContainedInAnyTagIgnoreCase(String[] keywords) {
         for (String keyword: keywords) {
             for (Tag tag : allTags) {
-                if (tag.tagName.toLowerCase().contains(keyword.toLowerCase())) {
+                if (tag.getTagName().toLowerCase().contains(keyword.toLowerCase())) {
                     return true;
                 }
             }

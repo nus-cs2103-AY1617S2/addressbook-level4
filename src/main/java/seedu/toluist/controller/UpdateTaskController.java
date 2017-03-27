@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import com.google.common.base.Objects;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.DateTimeFormatterUtil;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.IndexParser;
@@ -30,13 +31,13 @@ public class UpdateTaskController extends Controller {
 
     private static final String COMMAND_UPDATE_TASK = "update";
 
-    private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
     private static final String RESULT_MESSAGE_ERROR_DATE_INPUT =
             "Something is wrong with the given dates input";
     private static final String RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING =
             "Input contains both recurring and stop recurring arguments at the same time.";
     private static final String RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING =
             "Input contains both floating and non-floating task arguments at the same time.";
+    private static final String RESULT_MESSAGE_ERROR_CLONING_ERROR = "Bad things happened when cloning task.";
 
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
@@ -144,7 +145,7 @@ public class UpdateTaskController extends Controller {
         } catch (IllegalArgumentException illegalArgumentException) {
             return new CommandResult(illegalArgumentException.getMessage());
         } catch (CloneNotSupportedException cloneNotSupportedException) {
-            return new CommandResult("Bad things happen when copying task. Deal with it.");
+            throw new RuntimeException(RESULT_MESSAGE_ERROR_CLONING_ERROR);
         }
     }
 
@@ -173,9 +174,10 @@ public class UpdateTaskController extends Controller {
         return numberOfTaskTypes <= 1;
     }
 
-    // Try this command: update 1 lololol floating/ repeat/monthly repeatuntil/friday tags/wheee lol hello priority/low
     private String getSuccessUpdateMessage(Task oldTask, Task newTask) {
-        String result = "Updated the following details:";
+        int index = TodoList.getInstance().find(newTask);
+        String result = String.format("Updated the following details at index %d:", index);
+        result = addMoreSuccessMessage(result, "Task type", oldTask.getTaskType(), newTask.getTaskType());
         result = addMoreSuccessMessage(result, "Description", oldTask.getDescription(), newTask.getDescription());
         result = addMoreSuccessMessage(result, "Start date", oldTask.getStartDateTime(), newTask.getStartDateTime());
         result = addMoreSuccessMessage(result, "End date", oldTask.getEndDateTime(), newTask.getEndDateTime());
@@ -190,17 +192,34 @@ public class UpdateTaskController extends Controller {
 
     private String addMoreSuccessMessage(String result, String category, Object oldObject, Object newObject) {
         if (!Objects.equal(oldObject, newObject)) {
-            result = String.join("\n", result, String.format(category + ": \"%s\" to \"%s\"",
-                    clean(oldObject), clean(newObject)));
+            result = String.join("\n", result, String.format("- " + category + ": \"%s\" to \"%s\"",
+                    toStringCustomized(oldObject), toStringCustomized(newObject)));
         }
         return result;
     }
 
-    private String clean(Object o) {
-        if (o == null) {
+    /**
+     * Helper method to convert certain types of objects to string.
+     * @param object
+     * @return string representing the object in human-readable form
+     */
+    private String toStringCustomized(Object object) {
+        if (object == null) {
             return "null";
+        } else if (object instanceof LocalDateTime) {
+            return String.join(" ", DateTimeFormatterUtil.formatDate((LocalDateTime) object),
+                    DateTimeFormatterUtil.formatTime((LocalDateTime) object));
+        } else if (object instanceof Set<?>) {
+            String result = "[";
+            for (Object oneObject : (Set<?>) object) {
+                if (oneObject instanceof Tag) {
+                    result = String.join(" ", result, ((Tag) oneObject).getTagName());
+                }
+            }
+            result = String.join(" ", result, "]");
+            return result;
         } else {
-            return o.toString();
+            return object.toString();
         }
     }
 
