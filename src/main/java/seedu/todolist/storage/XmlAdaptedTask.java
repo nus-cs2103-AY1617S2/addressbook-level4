@@ -104,7 +104,7 @@ public class XmlAdaptedTask {
             endTime = new EndTime(this.endTime);
         }
 
-        if (this.description == "") {
+        if (this.description.equals("")) {
             description = null;
         } else {
             description = this.description;
