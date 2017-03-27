@@ -22,8 +22,8 @@ import project.taskcrusher.logic.commands.IncorrectCommand;
 import project.taskcrusher.model.event.Location;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.Description;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.task.Deadline;
-import project.taskcrusher.model.task.Priority;
 
 /**
  * Parses input arguments and creates a new AddCommand object

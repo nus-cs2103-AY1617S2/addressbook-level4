@@ -2,7 +2,6 @@ package project.taskcrusher.model.shared;
 
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.tag.UniqueTagList;
-import project.taskcrusher.model.task.Priority;
 
 /** Acts as a parent class of Event and Task. Represents some "thing" that user is going to do
  *  at "some point in time" i.e. no notion of time introduced yet.

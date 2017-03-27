@@ -1,4 +1,4 @@
-package project.taskcrusher.model.task;
+package project.taskcrusher.model.shared;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 
