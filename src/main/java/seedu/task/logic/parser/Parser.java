@@ -20,6 +20,7 @@ import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.SortCommand;
 import seedu.task.logic.commands.UndoCommand;
+import seedu.task.logic.commands.PathCommand;
 
 /**
  * Parses user input.
@@ -83,6 +84,9 @@ public class Parser {
 		
 	case SortCommand.COMMAND_WORD:
 		return new SortCommandParser().parse(arguments);
+		
+	case PathCommand.COMMAND_WORD:
+		return new PathCommandParser().parse(arguments);
 
 	default:
 	    return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

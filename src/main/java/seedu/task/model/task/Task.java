@@ -19,6 +19,7 @@ public class Task implements ReadOnlyTask {
     private TaskTime taskEndTime;
     private String taskDescription;
     private TaskStatus taskStatus;
+    private TaskPath taskPath;
 
     public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time.";
 
@@ -43,7 +44,7 @@ public class Task implements ReadOnlyTask {
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
 
-	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus) {
+	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus) throws IllegalValueException {
 
 	this.taskName = parseTaskName;
 	if (parseDate.isPresent()) {
@@ -224,5 +225,11 @@ public class Task implements ReadOnlyTask {
 		    throw new IllegalValueException(MESSAGE_INVALID_TIME);
 		}
     }
+
+	@Override
+	public String getTaskPath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

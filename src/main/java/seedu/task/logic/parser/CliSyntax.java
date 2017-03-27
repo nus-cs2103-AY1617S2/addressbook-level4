@@ -39,4 +39,5 @@ public class CliSyntax {
     // separated
     // by
     // whitespace
+    public static final Pattern PATH_ARGS_FORMAT = Pattern.compile("(?<keyword>\\S+(?:\\s+\\S+)*)");
 }
