@@ -64,7 +64,6 @@ public class AddTaskController extends Controller {
 
         commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime,
                 taskDeadline, taskPriority, tags, recurringFrequency, recurringUntilEndDate);
-
         uiStore.setCommandResult(commandResult);
     }
 

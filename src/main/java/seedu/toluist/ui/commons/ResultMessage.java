@@ -112,12 +112,11 @@ public class ResultMessage {
             return String.join(STRING_SPACE, DateTimeFormatterUtil.formatDate((LocalDateTime) object),
                     DateTimeFormatterUtil.formatTime((LocalDateTime) object));
         } else if (object instanceof Set<?>) {
-            String result = STRING_NULL;
-            for (Object oneObject : (Set<?>) object) {
-                if (oneObject instanceof Tag) {
-                    result = String.join(STRING_NULL, result, ((Tag) oneObject).getTagName());
-                }
-            }
+            String[] tagNames = ((Set<?>) object)
+                    .stream()
+                    .map(t -> ((Tag) t).getTagName())
+                    .toArray(size -> new String[size]);
+            String result = String.join(STRING_SPACE, tagNames);
             return result;
         } else {
             return object.toString();

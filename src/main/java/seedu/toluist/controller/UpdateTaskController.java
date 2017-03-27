@@ -35,7 +35,8 @@ public class UpdateTaskController extends Controller {
             "Input contains both recurring and stop recurring arguments at the same time.";
     private static final String RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING =
             "Input contains both floating and non-floating task arguments at the same time.";
-    private static final String RESULT_MESSAGE_ERROR_CLONING_ERROR = "Bad things happened when cloning task.";
+    private static final String RESULT_MESSAGE_ERROR_CLONING_ERROR =
+            "Bad things happened and we have no idea why! Please contact the administrators.";
 
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
@@ -78,7 +79,7 @@ public class UpdateTaskController extends Controller {
         commandResult = update(task, description, eventStartDateTime, eventEndDateTime,
                 taskDeadline, isFloating, taskPriority, tags,
                 recurringFrequency, recurringUntilEndDate, isStopRecurring);
-
+        System.out.println(commandResult.getFeedbackToUser());
         uiStore.setCommandResult(commandResult);
     }
 
@@ -143,7 +144,8 @@ public class UpdateTaskController extends Controller {
         } catch (IllegalArgumentException illegalArgumentException) {
             return new CommandResult(illegalArgumentException.getMessage());
         } catch (CloneNotSupportedException cloneNotSupportedException) {
-            throw new RuntimeException(RESULT_MESSAGE_ERROR_CLONING_ERROR);
+            // should never reach here
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
         }
     }
 

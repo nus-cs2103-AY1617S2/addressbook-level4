@@ -309,4 +309,23 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         }
         assertTrue(isTaskShown(task2));
     }
+
+    @Test
+    public void addEventWithMultipleParameters_testResultMessage() {
+        LocalDateTime from = DateTimeUtil.parseDateString("5 May 2017, 9pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("5 May 2017, 10pm");
+        LocalDateTime recurUntil = DateTimeUtil.parseDateString("5 May 2019, 10pm");
+        String command = ADD + "write code" + FROM + from + TO + to + PRIORITY + "high" + TAGS + "hello world"
+                + REPEAT + "weekly" + REPEAT_UNTIL + recurUntil;
+        commandBox.runCommand(command);
+        assertResultMessage("Updated task at index 1:\n" +
+                "- Task type: \"EVENT\"\n" +
+                "- Description: \"write code\"\n" +
+                "- Start date: \"Fri, 05 May 2017 09:00 PM\"\n" +
+                "- End date: \"Fri, 05 May 2017 10:00 PM\"\n" +
+                "- Priority: \"HIGH\"\n" +
+                "- Repeat: \"WEEKLY\"\n" +
+                "- Repeat until: \"Sun, 05 May 2019 10:00 PM\"\n" +
+                "- Tags: \"hello world\"");
+    }
 }
