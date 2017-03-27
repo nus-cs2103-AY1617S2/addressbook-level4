@@ -89,7 +89,6 @@ public class Task implements ReadOnlyTask {
     	if (parseTaskStatus.isPresent()) {
     		this.taskStatus = parseTaskStatus.get();
     	}
-    	this.taskStatus = new TaskStatus(TaskStatus.INCOMPLETE);
     	this.tags = tags;
 
         }
