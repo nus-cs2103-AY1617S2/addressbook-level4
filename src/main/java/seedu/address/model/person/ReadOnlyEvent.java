@@ -81,5 +81,11 @@ public interface ReadOnlyEvent {
 						
 		return byStartDate.thenComparing(byStartTime).thenComparing(byEndDate).thenComparing(byEndTime);
 	}
+    //@@author A0121668A
+    /**
+     * Check with current date/time to see if the event is over.
+     */
+    boolean isOver();
+    //@@author
 
 }

@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
@@ -128,6 +130,26 @@ public class Event implements ReadOnlyEvent{
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
+    
+    //@@author A0121668A
+    @Override
+    public boolean isOver() {
+        if (LocalDate.now().isAfter(this.getEndDate().getValue())) {
+            return true;
+        }
+        else if (LocalDate.now().isBefore(this.getEndDate().getValue())) {
+            return false;
+        }
+        else {
+            if (LocalTime.now().isAfter(this.getEndTime().getValue())) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    //@@author A0121668A
 
     @Override
     public boolean equals(Object other) {

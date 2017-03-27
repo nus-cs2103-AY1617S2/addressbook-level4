@@ -221,23 +221,25 @@ public class ModelManager extends ComponentManager implements Model {
     // StatusQualifier(true))::satisfies);
     // filteredEvents.setPredicate(null);
     // }
-
+    //@@author A0121668A
     @Override
     public void updateFilteredListToShowAll() {
         try {
             if (displayStatus.equals("All")) {
                 filteredTasks.setPredicate(null);
+                filteredEvents.setPredicate(null);
             } else if (displayStatus.equals("Completed")) {
                 filteredTasks.setPredicate(new PredicateExpression(new StatusQualifier(true))::satisfies);
+                filteredEvents.setPredicate(new PredicateExpression(new StatusQualifier(true))::satisfies);
             } else if (displayStatus.equals("Pending")) {
                 filteredTasks.setPredicate(new PredicateExpression(new StatusQualifier(false))::satisfies);
+                filteredEvents.setPredicate(new PredicateExpression(new StatusQualifier(false))::satisfies);
             } else {
                 throw new IllegalValueException("Wrong model manager display status");
             }
         } catch (IllegalValueException e) {
             System.out.print(e);
         }
-        filteredEvents.setPredicate(null);
     }
 
     @Override
@@ -249,7 +251,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredEventList(Set<String> keywords) {
         updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords, displayStatus)));
     }
-
+    //@@author A0121668A
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -309,7 +311,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
             this.displayStatus = status;
         }
-
+        //@@author A0121668A
         @Override
         public boolean run(ReadOnlyTask task) {
             if (displayStatus.equals("All")) {
@@ -338,9 +340,28 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyEvent event) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword))
-                    .findAny().isPresent();
+            if (displayStatus.equals("All")) {
+                return nameKeyWords.stream().filter(
+                        keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword))
+                        .findAny().isPresent();
+            } else if (displayStatus.equals("Completed")) {
+                return nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
+                                && event.isOver())
+                        .findAny().isPresent();
+            } else if (displayStatus.equals("Pending")) {
+                return nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
+                                && !event.isOver())
+                        .findAny().isPresent();
+            } else {
+                try {
+                    throw new IllegalValueException("Wrong qualifier display status");
+                } catch (IllegalValueException e) {
+                    e.printStackTrace();
+                }
+                return false;
+                }
         }
 
         @Override
@@ -348,7 +369,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords) + " Displat Status: " + displayStatus;
         }
     }
-
+    //@@author A0121668A
     private class StatusQualifier implements Qualifier {
         private boolean statusKey;
 
@@ -363,7 +384,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyEvent event) {
-            return true;
+            if (statusKey) {
+                return event.isOver();
+            }
+            else {
+                return !event.isOver();
+            }
         }
 
         @Override
