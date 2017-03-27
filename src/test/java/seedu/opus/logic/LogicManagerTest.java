@@ -322,6 +322,12 @@ public class LogicManagerTest {
                 twoTasks);
     }
 
+    @Test
+    public void executeSortInvalidArgsFormat() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        assertCommandFailure("sort ", expectedMessage);
+    }
+
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
      * targeting a single task in the shown list, using visible index.
@@ -382,12 +388,6 @@ public class LogicManagerTest {
                 expectedTaskManager.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
-    }
-
-    @Test
-    public void executeSortInvalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
-        assertCommandFailure("sort ", expectedMessage);
     }
 
     @Test
