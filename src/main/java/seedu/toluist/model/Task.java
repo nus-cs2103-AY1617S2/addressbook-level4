@@ -68,6 +68,17 @@ public class Task implements Comparable<Task>, Cloneable {
         validate();
     }
 
+    public void setTask(Task task) {
+        allTags = task.allTags;
+        description = task.description;
+        startDateTime = task.startDateTime;
+        endDateTime = task.endDateTime;
+        completionDateTime = task.completionDateTime;
+        recurringEndDateTime = task.recurringEndDateTime;
+        recurringFrequency = task.recurringFrequency;
+        priority = task.priority;
+    }
+
     public void validate() {
         if (!validateDescriptionMustNotBeEmpty()) {
             throw new IllegalArgumentException(ERROR_VALIDATION_EMPTY_DESCRIPTION);

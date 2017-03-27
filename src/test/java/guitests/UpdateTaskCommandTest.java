@@ -174,6 +174,30 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
     }
 
     @Test
+    public void updateTaskToADuplicatedTask_shouldNotBeUpdated() {
+        String taskDescription = "yet another task";
+        String command = ADD + taskDescription;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription);
+
+        taskDescription = "task";
+        command = ADD + taskDescription;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription);
+        assertTrue(areTasksShown(task, task2));
+
+        command = UPDATE + " 3 " + taskDescription;
+        commandBox.runCommand(command);
+        assertTrue(areTasksShown(task, task2));
+        assertResultMessage("Task provided already exist in the list.");
+
+        command = UPDATE + " 4 " + taskDescription;
+        commandBox.runCommand(command);
+        assertTrue(areTasksShown(task, task2));
+        assertResultMessage("Task provided already exist in the list.");
+    }
+
+    @Test
     public void updateMultipleTypeTask_shouldNotBeUpdated() {
         int eventIndex = 1;
 

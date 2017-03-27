@@ -109,8 +109,14 @@ public class UpdateTaskController extends Controller {
         if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
         }
+        Task taskCopy = null;
         try {
-            Task taskCopy = (Task) task.clone();
+            taskCopy = (Task) task.clone();
+        } catch (CloneNotSupportedException cloneNotSupportedException) {
+            // should never reach here
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
+        }
+        try {
             if (isFloating) {
                 task.setStartDateTime(null);
                 task.setEndDateTime(null);
@@ -147,6 +153,8 @@ public class UpdateTaskController extends Controller {
 
             TodoList todoList = TodoList.getInstance();
             if (todoList.getTasks().contains(task)) {
+                // rollback all changes to task
+                task.setTask(taskCopy);
                 return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
             }
             if (todoList.save()) {
@@ -154,10 +162,9 @@ public class UpdateTaskController extends Controller {
             }
             return new CommandResult(ResultMessage.getUpdateCommandResultMessage(taskCopy, task, uiStore));
         } catch (IllegalArgumentException illegalArgumentException) {
+            // rollback all changes to task
+            task.setTask(taskCopy);
             return new CommandResult(illegalArgumentException.getMessage());
-        } catch (CloneNotSupportedException cloneNotSupportedException) {
-            // should never reach here
-            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
         }
     }
 

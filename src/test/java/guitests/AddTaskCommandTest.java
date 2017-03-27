@@ -157,6 +157,20 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
     }
 
     @Test
+    public void addDuplicatedTask() {
+        String command = ADD + "task";
+        commandBox.runCommand(command);
+        assertResultMessage("Added task at index 3:\n" +
+                "- Task type: \"TASK\"\n" +
+                "- Description: \"task\"\n" +
+                "- Priority: \"LOW\"");
+
+        command = ADD + "task";
+        commandBox.runCommand(command);
+        assertResultMessage("Task provided already exist in the list.");
+    }
+
+    @Test
     public void addMultipleTypeTask_shouldNotBeCreated() {
         String taskDescription = "attend CS2103T tutorial";
         LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
@@ -314,7 +328,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
     public void addEventWithMultipleParameters_testResultMessage() {
         String command = ADD + "get a life";
         commandBox.runCommand(command);
-        assertResultMessage("Updated task at index 3:\n" +
+        assertResultMessage("Added task at index 3:\n" +
                 "- Task type: \"TASK\"\n" +
                 "- Description: \"get a life\"\n" +
                 "- Priority: \"LOW\"");
@@ -325,7 +339,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         command = ADD + "write code" + FROM + from + TO + to + PRIORITY + "high" + TAGS + "hello world"
                 + REPEAT + "weekly" + REPEAT_UNTIL + recurUntil;
         commandBox.runCommand(command);
-        assertResultMessage("Updated task at index 1:\n" +
+        assertResultMessage("Added task at index 1:\n" +
                 "- Task type: \"EVENT\"\n" +
                 "- Description: \"write code\"\n" +
                 "- Start date: \"Fri, 05 May 2017 09:00 PM\"\n" +

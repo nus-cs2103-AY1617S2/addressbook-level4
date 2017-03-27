@@ -16,6 +16,7 @@ import seedu.toluist.ui.UiStore;
  * Represents the result message of a command execution.
  */
 public class ResultMessage {
+    private static final String RESULT_MESSAGE_ADDED_TASK_HEADER = "Added task at index %d:";
     private static final String RESULT_MESSAGE_UPDATED_TASK_HEADER = "Updated task at index %d:";
     private static final String RESULT_MESSAGE_PARAMETER_INDENTATION = "- ";
     private static final String RESULT_MESSAGE_ADD_PARAMETER_FORMAT = ": \"%s\"";
@@ -34,7 +35,7 @@ public class ResultMessage {
 
     public static String getAddCommandResultMessage(Task newTask, UiStore uiStore) {
         int index = uiStore.getTaskIndex(newTask);
-        String result = String.format(RESULT_MESSAGE_UPDATED_TASK_HEADER, index);
+        String result = String.format(RESULT_MESSAGE_ADDED_TASK_HEADER, index);
         result = appendAddedParameterMessage(result, TASK_TYPE, newTask.getTaskType());
         result = appendAddedParameterMessage(result, TASK_DESCRIPTION, newTask.getDescription());
         result = appendAddedParameterMessage(result, TASK_START_DATE, newTask.getStartDateTime());
