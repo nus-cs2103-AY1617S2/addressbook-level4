@@ -13,7 +13,7 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
  */
 public abstract class Command {
     protected Model model;
-	private static int SELECTION_TIMEOUT = 200; 
+	private static int SELECTION_TIMEOUT = 300; 
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
