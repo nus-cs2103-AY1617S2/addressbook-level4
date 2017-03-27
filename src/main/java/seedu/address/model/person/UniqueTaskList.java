@@ -8,6 +8,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.person.UniqueEventList.DuplicateEventException;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
+import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
@@ -63,7 +66,6 @@ public class UniqueTaskList implements Iterable<Task> {
         taskToEdit.resetData(editedTask);
         internalList.set(index, editedTask); 
         internalList.sorted();
-
     }
     
     //@@author A0121668A

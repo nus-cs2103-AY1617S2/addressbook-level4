@@ -94,6 +94,7 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
+            model.storePreviousCommand("");
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
             if (toAddTask == null) {

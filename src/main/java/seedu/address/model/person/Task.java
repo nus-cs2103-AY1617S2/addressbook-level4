@@ -22,7 +22,6 @@ public class Task implements ReadOnlyTask {
     /**
      * Description and Priority must be present.
      */
-
     public Task(Description description, Priority priority, ByTime byTime, ByDate byDate,
             Location location, UniqueTagList tags, boolean status) {
 
