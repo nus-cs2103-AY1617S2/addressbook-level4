@@ -280,40 +280,70 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
+        splitTaskList(taskListToday, taskListFuture, taskListCompleted);
+        sortTaskList(taskListToday, taskListFuture, taskListCompleted);
+        assignUiIndex(taskListToday, taskListFuture, taskListCompleted);
+    }
+
+    private void splitTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+            ObservableList<ReadOnlyTask> taskListCompleted) {
         ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
         taskListToday.clear();
         taskListFuture.clear();
         taskListCompleted.clear();
+        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
+        while (iter.hasNext()) {
+            ReadOnlyTask tmpTask = iter.next();
+            // set task id to be displayed, the id here is 1-based
+            if (tmpTask.isToday() && !tmpTask.isDone()) {
+                taskListToday.add(tmpTask);
+            } else if (!tmpTask.isDone()) {
+                taskListFuture.add(tmpTask);
+            } else {
+                taskListCompleted.add(tmpTask);
+            }
+        }
+    }
+
+    private void sortTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+            ObservableList<ReadOnlyTask> taskListCompleted) {
+        taskListToday.sort(TaskDatetimeComparator);
+        taskListFuture.sort(TaskDatetimeComparator);
+        taskListCompleted.sort(TaskDatetimeComparator);
+    }
+
+    private void assignUiIndex(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+            ObservableList<ReadOnlyTask> taskListCompleted) {
         // TODO potential performance bottleneck here
         indexMap.clear();
         // initialise displayed index
         int todayID = 1;
         int futureID = 1;
         int completedID = 1;
-        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
-        while (iter.hasNext()) {
-            ReadOnlyTask tmpTask = iter.next();
-            // set task id to be displayed, the id here is 1-based
-            if (tmpTask.isToday() && !tmpTask.isDone()) {
-                tmpTask.setID("T" + todayID);
-                taskListToday.add(tmpTask);
-                indexMap.put("T" + todayID, iter.nextIndex() - 1);
-                todayID++;
-            } else if (!tmpTask.isDone()) {
-                tmpTask.setID("F" + futureID);
-                taskListFuture.add(tmpTask);
-                indexMap.put("F" + futureID, iter.nextIndex() - 1);
-                futureID++;
-            } else {
-                tmpTask.setID("C" + completedID);
-                taskListCompleted.add(tmpTask);
-                indexMap.put("C" + completedID, iter.nextIndex() - 1);
-                completedID++;
-            }
+        ListIterator<ReadOnlyTask> iterToday = taskListToday.listIterator();
+        ListIterator<ReadOnlyTask> iterFuture = taskListFuture.listIterator();
+        ListIterator<ReadOnlyTask> iterCompleted = taskListCompleted.listIterator();
+        while (iterToday.hasNext()) {
+            ReadOnlyTask tmpTask = iterToday.next();
+            tmpTask.setID("T" + todayID);
+            indexMap.put("T" + todayID, iterToday.nextIndex() - 1);
+            todayID++;
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
         }
-        taskListToday.sort(TaskDatetimeComparator);
-        taskListFuture.sort(TaskDatetimeComparator);
-        taskListCompleted.sort(TaskDatetimeComparator);
+        while (iterFuture.hasNext()) {
+            ReadOnlyTask tmpTask = iterFuture.next();
+            tmpTask.setID("F" + futureID);
+            indexMap.put("F" + futureID, iterFuture.nextIndex() - 1);
+            futureID++;
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
+        }
+        while (iterCompleted.hasNext()) {
+            ReadOnlyTask tmpTask = iterCompleted.next();
+            tmpTask.setID("C" + completedID);
+            indexMap.put("C" + completedID, iterCompleted.nextIndex() - 1);
+            completedID++;
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
+        }
     }
 
     // For debugging
