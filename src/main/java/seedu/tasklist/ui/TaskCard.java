@@ -63,9 +63,11 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setCompleted(ReadOnlyTask task) {
         Image tickImage = AppUtil.getImage(tickSource);
-        tickLogo.setImage(tickImage);
+        tickLogo.setTranslateX(400);
         if (task.getStatus().value == false) {
             tickLogo.setVisible(false);
+        } else {
+            tickLogo.setImage(tickImage);
         }
     }
 
@@ -87,7 +89,12 @@ public class TaskCard extends UiPart<Region> {
      * Set comment for tasks
      */
     private void setComment(ReadOnlyTask task) {
-        comment.setText(task.getComment().value);
+        String taskComment = task.getComment().value;
+        if (taskComment.equals("NIL")) {
+            comment.setVisible(false);
+        } else {
+            comment.setText(task.getComment().value);
+        }
     }
 
     /*
