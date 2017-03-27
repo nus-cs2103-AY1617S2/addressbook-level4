@@ -19,8 +19,9 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
     3.8. [Completing Tasks](#38-complete-a-task--complete) <br>
 	3.9. [Getting Help](#39-get-help--help) <br>
 	3.10. [Change Data File Location](#310-change-data-file-location) <br>
-	3.11. [Undo a change](#311-undo-a-change--undo) <br>
-	3.12. [Exit](#312-exit-the-program--exit)
+	3.11. [Load Data File From Location](#311-load-data-file-from-location) <br>
+	3.12. [Undo a change](#312-undo-a-change--undo) <br>
+	3.13. [Exit](#313-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 6. [Glossary](#6-glossary)
@@ -382,9 +383,6 @@ Here is a reason why you might want to _change my data file location_:
   > You can choose to store my data file in a local folder controlled by a cloud
   syncing device (e.g. Dropbox) so that you can access my data from multiple computers.
 
-Format: **`save`** <br>
-This command directs me to save all my data into the data file.
-
 Format: **`save`** `<new_save_location_directory>` <br>
 This command directs me to set my new data file in a `<new_save_location_directory>`,
 then save all my data in that file.
@@ -392,7 +390,17 @@ then save all my data in that file.
 <img src="images/UiSaveCommand.png" width="600"><br>
 _Figure 3.10.1. Save Command_
 
-### 3.11. Undo a change : `undo`
+### 3.11. Load data file from location
+
+Loads the specified data file in Tache. <br>
+
+The current data file became corrupted out of the blue. Luckily, you've made a backup copy previously.
+Now you'll need Tache to load from that backup copy instead.
+
+Format: **`load`** `<file_path>` <br>
+This command loads the data from the specified file in the `<file_path>`.
+
+### 3.12. Undo a change : `undo`
 
 Undoes the last change made to my data. <br>
 
@@ -403,7 +411,7 @@ Format: **`undo`** <br>
 I'll undo the last change you made to your tasks. <br>
 I can't remember anything before a **`delete /all`** though.
 
-### 3.12. Exit the program : `exit`
+### 3.13. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
@@ -430,6 +438,7 @@ Your wish is my command!
 |Complete     |**`complete`** `<task_index>`                |**`complete`** `1`                                  |
 |Help         |**`help`**                                   |                                                    |
 |Save         |**`save`** `<directory>`                     |**`save`** `C:\Users\Jim\Desktop`                   |
+|Load         |**`load`** `<file_path>`                     |**`load`** `C:\Users\Jim\Desktop\taskmanager.xml`   |
 |Exit         |**`exit`**                                   |                                                    |
 
 

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -50,10 +51,10 @@ public class CalendarPanel extends UiPart<Region> {
         String calendarURL = MainApp.class.getResource("/html/calendar.html").toExternalForm();
         WebEngine engine = calendar.getEngine();
         engine.load(calendarURL);
-        for (ReadOnlyTask task : taskList) {
-            if (!task.getStartDateTime().isPresent()) {
-                continue;
-            }
+        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
+        if (webViewState.get() == Worker.State.SUCCEEDED) {
+            addAllEvents(taskList);
+        } else {
             engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
                 @Override
                 public void changed(ObservableValue<? extends Worker.State> observable,
@@ -61,7 +62,7 @@ public class CalendarPanel extends UiPart<Region> {
                     if (newValue != Worker.State.SUCCEEDED) {
                         return;
                     }
-                    engine.executeScript(getLoadTaskExecuteScript(task));
+                    addAllEvents(taskList);
                 }
             });
         }
@@ -82,16 +83,49 @@ public class CalendarPanel extends UiPart<Region> {
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
+        refreshCalendar(taskList);
+    }
+
+    private String getRemoveAllTaskScript() {
+        return "remove_all()";
+    }
+
+    private void refreshCalendar(ObservableList<ReadOnlyTask> taskList) {
         WebEngine engine = calendar.getEngine();
-        engine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
-            if (newState == Worker.State.SUCCEEDED) {
-                calendar.getEngine().executeScript("'remove_all'");
+        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
+        if (webViewState.get() == Worker.State.SUCCEEDED) {
+            removeAllEvents();
+            addAllEvents(taskList);
+        } else {
+            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable,
+                        Worker.State oldValue, Worker.State newValue) {
+                    if (newValue != Worker.State.SUCCEEDED) {
+                        return;
+                    }
+                    removeAllEvents();
+                    addAllEvents(taskList);
+                }
+            });
+        }
+    }
+
+    private void removeAllEvents() {
+        WebEngine engine = calendar.getEngine();
+        engine.executeScript(getRemoveAllTaskScript());
+    }
+
+    private void addAllEvents(ObservableList<ReadOnlyTask> taskList) {
+        WebEngine engine = calendar.getEngine();
+        for (ReadOnlyTask task : taskList) {
+            if (!task.getStartDateTime().isPresent()) {
+                continue;
             }
-        });
-        loadCalendar(taskList);
+            engine.executeScript(getLoadTaskExecuteScript(task));
+        }
     }
     //@@author
-
     /**
      * Frees resources allocated to the calendar.
      */
