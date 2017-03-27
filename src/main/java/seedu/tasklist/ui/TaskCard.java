@@ -57,22 +57,23 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         comment.setText(task.getComment().value);
-        priority.setText("Priority: " + task.getPriority().value);
+        priority.setText(task.getPriority().value.toUpperCase());
+        priority.setTranslateX(20);
         initTags(task);
         String priorityLevel = task.getPriority().value;
         switch(priorityLevel) {
         case Priority.PRIORITY_LOW:
             priority.setStyle("-fx-text-fill: #ff5050; -fx-border-color: #ff5050; -fx-padding: 2px");
-            priority.setText("HIGH");
             break;
         case Priority.PRIORITY_MEDIUM:
             priority.setStyle("-fx-text-fill: #ff9900; -fx-border-color: #ff9900; -fx-padding: 2px");
-            priority.setText("MEDIUM");
             break;
         case Priority.PRIORITY_HIGH:
             priority.setStyle("-fx-text-fill: #33cc33; -fx-border-color: #33cc33; -fx-padding: 2px");
-            priority.setText("LOW");
             break;
+
+        case Priority.PRIORITY_NIL:
+            priority.setVisible(false);;
         }
         switch(taskType) {
         case DeadlineTask.TYPE:
