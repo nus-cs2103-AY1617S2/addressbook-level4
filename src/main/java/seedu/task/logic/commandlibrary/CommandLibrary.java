@@ -92,7 +92,9 @@ public class CommandLibrary {
         commandParserTable.put(HelpFormatCommand.COMMAND_WORD_2, new HelpFormatCommandParser());
         commandParserTable.put(HelpFormatCommand.COMMAND_WORD_3, new HelpFormatCommandParser());
         commandParserTable.put(HelpFormatCommand.COMMAND_WORD_4, new HelpFormatCommandParser());
-        
+        commandParserTable.put(HelpFormatCommand.COMMAND_WORD_5, new HelpFormatCommandParser());
+        commandParserTable.put(HelpFormatCommand.COMMAND_WORD_6, new HelpFormatCommandParser());
+
         commandParserTable.put(ListByDoneCommand.COMMAND_WORD_1, new ListByDoneCommandParser());
         commandParserTable.put(ListByDoneCommand.COMMAND_WORD_2, new ListByDoneCommandParser());
 
