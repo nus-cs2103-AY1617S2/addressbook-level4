@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -57,6 +58,20 @@ public class TaskCard extends UiPart<Region> {
     private void setPriority(ReadOnlyTask task) {
         String priorityText = task.getPriority().value;
         priority.setText(priorityText);
+        switch (priorityText) {
+        case Priority.HIGH_LABEL:
+            PseudoClass donePseudoClass = PseudoClass.getPseudoClass(Priority.HIGH_LABEL);
+            priority.pseudoClassStateChanged(donePseudoClass, true);
+            break;
+        case Priority.MEDIUM_LABEL:
+        	PseudoClass mediumPseudoClass = PseudoClass.getPseudoClass(Priority.MEDIUM_LABEL);
+            priority.pseudoClassStateChanged(mediumPseudoClass, true);
+            break;
+        case Priority.LOW_LABEL:
+        	PseudoClass lowPseudoClass = PseudoClass.getPseudoClass(Priority.LOW_LABEL);
+            priority.pseudoClassStateChanged(lowPseudoClass, true);
+            break;
+        }
     }
 
     private void setDate(ReadOnlyTask task) {

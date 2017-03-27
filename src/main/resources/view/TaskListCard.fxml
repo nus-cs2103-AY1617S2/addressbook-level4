@@ -41,10 +41,13 @@
                                     <Insets top="6.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="priority" alignment="BOTTOM_LEFT" minWidth="40.0" styleClass="label-priority" text="\$p">
+                              <Label fx:id="priority" alignment="CENTER" minWidth="40.0" style="-fx-padding: 3;" styleClass="label-priority" stylesheets="@PanelTheme.css" text="\$p">
                                  <HBox.margin>
                                     <Insets left="3.0" top="9.0" />
                                  </HBox.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
                               </Label>
                                   </children>
                               </HBox>

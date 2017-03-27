@@ -3,6 +3,28 @@
 	-fx-opacity: 0.5;
 }
 
-#cardPane:done {
+.label:done .text {
 	-fx-background-color: lightgray;
+	-fx-text-fill: white;
+}
+
+.label-priority:HIGH {
+	-fx-background-color: #FF4C25 !important;
+	-fx-text-fill: white !important;
+	-fx-padding: 3px;
+	-fx-background-radius: 3px;
+}
+
+.label-priority:MEDIUM {
+	-fx-background-color: #FA8215 !important;
+	-fx-text-fill: white !important;
+	-fx-padding: 3px;
+	-fx-background-radius: 3px;
+}
+
+.label-priority:LOW {
+	-fx-background-color: #9DFA00 !important;
+	-fx-text-fill: white !important;
+	-fx-padding: 3px;
+	-fx-background-radius: 3px;
 }
