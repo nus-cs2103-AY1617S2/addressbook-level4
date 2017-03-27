@@ -2,6 +2,7 @@ package seedu.doist.model.task;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import com.joestelmach.natty.DateGroup;
 
@@ -37,15 +38,6 @@ public class TaskDate {
         this.endDate = endDate;
     }
 
-    @Override
-    public String toString() {
-        if (this.startDate != null && this.endDate != null) {
-            return this.startDate.toString() + "--" + this.endDate.toString();
-        } else {
-            return "No dates";
-        }
-    }
-
     public boolean isPast() {
         if (this.getStartDate() != null && this.getEndDate() != null) {
             Date currentDate = new Date();
@@ -53,6 +45,23 @@ public class TaskDate {
         } else {
             return false;
         }
+    }
+
+    public boolean isFloating() {
+        return this.getStartDate() == null || this.getEndDate() == null;
+    }
+
+    public boolean isDeadline() {
+        // Both not null
+        if (!isFloating()) {
+            return this.getStartDate().equals(this.getEndDate());
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isEvent() {
+        return !isDeadline() && !isFloating();
     }
 
     /**
@@ -74,7 +83,7 @@ public class TaskDate {
     /**
      * Function to support natural language input for date and time, using a 3rd party library 'Natty'
      * @param date
-     * @return extracte Date if parsing is succesful, or null if it fails
+     * @return extracted Date if parsing is successful, or null if it fails
      */
     public static Date parseDate (String date) {
         com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
@@ -89,5 +98,27 @@ public class TaskDate {
             }
         }
         return (flag ? extractDate : null);
+    }
+
+    @Override
+    public String toString() {
+        if (this.startDate != null && this.endDate != null) {
+            return this.startDate.toString() + "--" + this.endDate.toString();
+        } else {
+            return "No dates";
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TaskDate // instanceof handles nulls
+                && this.startDate == ((TaskDate) other).startDate // state check
+                && this.endDate == ((TaskDate) other).endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(startDate, endDate);
     }
 }
