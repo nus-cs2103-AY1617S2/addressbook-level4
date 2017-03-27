@@ -28,6 +28,8 @@ public class AddTaskController extends Controller {
 
     private static final String COMMAND_ADD_TASK = "add";
 
+    private static final String RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION =
+            "Please provide a description.";
     private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
             "Task provided already exist in the list.";
     private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
@@ -77,6 +79,9 @@ public class AddTaskController extends Controller {
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
             LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate) {
+        if (!StringUtil.isPresent(description)) {
+            return new CommandResult(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION);
+        }
         try {
             // validates that the dates input belongs to only one type of task, or exception is thrown
             validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline);
