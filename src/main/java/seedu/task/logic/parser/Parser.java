@@ -37,5 +37,4 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         return CommandLibrary.getInstance().getCorrectCommand(commandWord, arguments);
     }
-
 }

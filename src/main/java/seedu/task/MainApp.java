@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.core.History;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
@@ -47,7 +48,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    protected History history;
 
     @Override
     public void init() throws Exception {
@@ -68,9 +69,16 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+        initHistory();
 
-        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(model.getTaskManager(), true));
         logic.execute(ListByNotDoneCommand.COMMAND_WORD_1);
+    }
+
+    private void initHistory() {
+        this.history = History.getInstance();
+
+        TaskManagerChangedEvent tmce = new TaskManagerChangedEvent(model.getTaskManager(), "");
+        storage.handleTaskManagerChangedEvent(tmce);
     }
 
     private String getApplicationParameter(String parameterName) {

@@ -114,10 +114,10 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+command `done 1`.
 
 <img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+_Figure 2.1.3a : Component interactions for `done 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
@@ -125,7 +125,7 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+_Figure 2.1.3b : Component interactions for `done 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -176,11 +176,11 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-1. The `LogicManager` receives `execute("delete 1")`.
+1. The `LogicManager` receives `execute("done 1")`.
 2. It passes this command text (as a string) to `Parser`.
 3. `Parser` checks it against `CommandLibrary`.
-4. `Parser` formulates a delete command and sends it to `DeleteCommandParser`.
-5. `DeleteCommandParser` creates the corresponding command and returns it.
+4. `Parser` formulates a done command and sends it to `DoneCommandParser`.
+5. `DoneCommandParser` creates the corresponding command and returns it.
 6. The `LogicManager` exectes the returned delete command, accessing `Model`, and then returns the `CommandResult` back to `UI`.
 
 
@@ -455,10 +455,9 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
-| Priority | As a user I want to ... | So that I can... |
-| -------- | :-------- | :--------- | :----------- |
-| `* * *` | see usage instructions | know how to use the commands |
+| Priority | As a user I want to ... | So that I can... 
+| -------- | :-------- | :---------  
+| `* * *` | see usage instructions | know how to use the commands
 | `* * *` | add a new task without deadlines | plan for the future
 | `* * *` | add a new task with deadline | know when my task is due
 | `* * *` | add a new task with start and end time | fit it into my calendar
@@ -480,7 +479,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 | `* *` | list task in sorted order | plan my time
 | `* *` | list task by due date | see which task are most urgent
 | `* *` | mark a task as not done | undone a done task
-
 
 ## Appendix B : Use Cases
 (For all use cases below, the **System** is the `KIT` and the **Actor** is the `user`, unless specified otherwise)

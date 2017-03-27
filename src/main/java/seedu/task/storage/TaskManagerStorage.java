@@ -44,5 +44,5 @@ public interface TaskManagerStorage {
      */
     void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException;
 
-    void saveBackup() throws IOException, FileNotFoundException;
+    void saveBackup(String backupFilePath) throws IOException, FileNotFoundException;
 }

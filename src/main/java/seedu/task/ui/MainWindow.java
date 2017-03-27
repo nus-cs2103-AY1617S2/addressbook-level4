@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Region> {
     private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private Config config;
+    private CommandBox commandBox;
 
     @FXML
     private AnchorPane browserPlaceholder;
@@ -48,6 +49,18 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem helpFormatMenuItem;
+    
+    @FXML
+    private MenuItem quickAddMenuItem;
+    
+    @FXML
+    private MenuItem quickUndoMenuItem;
+    
+    @FXML
+    private MenuItem quickScrollDownMenuItem;
+    
+    @FXML
+    private MenuItem quickScrollUpMenuItem;
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
@@ -84,6 +97,10 @@ public class MainWindow extends UiPart<Region> {
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
         setAccelerator(helpFormatMenuItem, KeyCombination.valueOf("F3"));
+        setAccelerator(quickAddMenuItem, KeyCombination.valueOf("Ctrl+Alt+A"));
+        setAccelerator(quickUndoMenuItem, KeyCombination.valueOf("Ctrl+Alt+Z"));
+        setAccelerator(quickScrollDownMenuItem, KeyCombination.valueOf("Shift+DOWN"));
+        setAccelerator(quickScrollUpMenuItem, KeyCombination.valueOf("SHIFT+UP"));
     }
 
     /**
@@ -121,7 +138,7 @@ public class MainWindow extends UiPart<Region> {
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+        commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -191,6 +208,27 @@ public class MainWindow extends UiPart<Region> {
     public void handleHelpFormat() {
         HelpFormatWindow helpFormatWindow = new HelpFormatWindow();
         helpFormatWindow.show();
+    }
+    
+    @FXML
+    public void handleAdd() {
+    	commandBox.setText("add ");
+    	commandBox.requestFocus();
+    	commandBox.end();
+    }
+    
+    public void handleUndo() {
+    	commandBox.setText("undo");
+    	commandBox.requestFocus();
+    	commandBox.end();
+    }
+    
+    public void handleScrollDown() {
+    	taskListPanel.scrollDown();
+    }
+    
+    public void handleScrollUp() {
+    	taskListPanel.scrollUp();
     }
 
     void show() {

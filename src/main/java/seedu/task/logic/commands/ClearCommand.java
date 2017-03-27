@@ -11,8 +11,8 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "clear";
     public static final String MESSAGE_SUCCESS = "KIT has been cleared!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Clears all tasks in KIT.\n" + "Example: "
-            + COMMAND_WORD_1;
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Clears all tasks in KIT.\n"
+            + "Example: " + COMMAND_WORD_1;
 
     @Override
     public CommandResult execute() {

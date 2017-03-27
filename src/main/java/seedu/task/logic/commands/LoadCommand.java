@@ -16,6 +16,7 @@ public class LoadCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "File loaded from: %1$s";
     public static final String MESSAGE_FAILURE_DIRECTORY = "The path %1$s leads to a directory";
+    public static final String MESSAGE_NOT_FOUND = "The file %1$s cannot be found";
 
     private String pathName;
 
@@ -35,5 +36,4 @@ public class LoadCommand extends Command {
         model.loadFromLocation(pathName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, pathName));
     }
-
 }

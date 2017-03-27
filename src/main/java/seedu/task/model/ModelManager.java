@@ -7,6 +7,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
+import seedu.task.commons.core.History;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.FilePathChangedEvent;
@@ -30,6 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final History history;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -43,6 +45,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+
+        this.history = History.getInstance();
     }
 
     public ModelManager() {
@@ -52,7 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     /**
@@ -61,7 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
-        indicateTaskManagerChanged(false);
+        raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
     @Override
@@ -70,9 +74,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed
-     * @param shouldBackup */
-    private void indicateTaskManagerChanged(boolean shouldBackup) {
-        raise(new TaskManagerChangedEvent(taskManager, shouldBackup));
+     * @param backupFilePath */
+    private void indicateTaskManagerChanged(String backupFilePath) {
+        history.handleTaskManagerChanged(backupFilePath);
+        raise(new TaskManagerChangedEvent(taskManager, backupFilePath));
     }
 
     /** Raises an event to indicate the file path has changed */
@@ -88,28 +93,28 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     @Override
     public synchronized void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
         taskManager.updateDone(taskManagerIndex, target);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     @Override
     public synchronized void unDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
         taskManager.updateUnDone(taskManagerIndex, target);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTaskToFront(task);
         updateFilteredListToShowAll();
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     @Override
@@ -119,20 +124,20 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     @Override
     public void sortTaskList() {
         taskManager.sortTaskList();
-        indicateTaskManagerChanged(false);
+        indicateTaskManagerChanged("");
     }
 
 
     @Override
     public void changeFilePath(String newPath) {
         indicateFilePathChanged(newPath);
-        indicateTaskManagerChanged(false);
+        indicateTaskManagerChanged("");
     }
 
     @Override

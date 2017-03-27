@@ -28,6 +28,14 @@
                   <MenuItem fx:id="helpFormatMenuItem" mnemonicParsing="false" onAction="#handleHelpFormat" text="Summary" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Shortcut">
+              <items>
+                <MenuItem fx:id="quickAddMenuItem" mnemonicParsing="false" onAction="#handleAdd" text="Quick Add" />
+                  <MenuItem fx:id="quickUndoMenuItem" mnemonicParsing="false" onAction="#handleUndo" text="Quick Undo" />
+                  <MenuItem fx:id="quickScrollDownMenuItem" mnemonicParsing="false" onAction="#handleScrollDown" text="Quick Scroll Down" />
+                  <MenuItem fx:id="quickScrollUpMenuItem" mnemonicParsing="false" onAction="#handleScrollUp" text="Quick Scroll Up" />
+              </items>
+            </Menu>
          </menus>
       </MenuBar>
       <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
