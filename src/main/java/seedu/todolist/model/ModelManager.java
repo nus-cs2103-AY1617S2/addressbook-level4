@@ -37,6 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String ADD = "add";
     private static final String COMPLETE = "complete";
     private static final String UPDATE = "update";
+    private static final String DESCRIBE = "describe";
 
 
     /**
@@ -124,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.describeTask(toDoListIndex, editedTask);
-        indicateToDoListChanged();
+        indicateToDoListChanged(DESCRIBE);
     }
 
     //=========== Filtered Task List Accessors =============================================================
