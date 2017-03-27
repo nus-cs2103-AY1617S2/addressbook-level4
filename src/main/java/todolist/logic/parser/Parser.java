@@ -19,6 +19,7 @@ import todolist.logic.commands.ListCommand;
 import todolist.logic.commands.ListTagCommand;
 import todolist.logic.commands.SelectCommand;
 import todolist.logic.commands.UndoCommand;
+import todolist.logic.commands.SaveCommand;
 
 /**
  * Parses user input.
@@ -78,6 +79,9 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
