@@ -1,3 +1,8 @@
+
+#cardPane:done {
+	-fx-background-color: lightgray;
+}
+
 .label:done .text {
 	-fx-strikethrough: true;
 	-fx-opacity: 0.5;

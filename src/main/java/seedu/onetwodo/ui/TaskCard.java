@@ -130,7 +130,7 @@ public class TaskCard extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         String prefix = event.taskType.toString();
         String cardPrefixId = prefix + (event.targetIndex + 1);
-        if (prefixId == cardPrefixId) {
+        if (prefixId.equals(cardPrefixId)) {
         	PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
         	cardPane.pseudoClassStateChanged(selectedPseudoClass, true);
         }

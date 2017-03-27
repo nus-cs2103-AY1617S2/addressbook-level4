@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.onetwodo.commons.core.LogsCenter;
+import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.events.ui.NewResultAvailableEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.logic.Logic;
@@ -41,6 +42,7 @@ public class CommandBox extends UiPart<Region> {
             @Override
             public void handle(KeyEvent ke) {
                 setStyleToIndicateCommandSuccess();
+                raise(new DeselectCardsEvent());
             }
         });
     }
