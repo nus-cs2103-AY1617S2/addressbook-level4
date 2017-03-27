@@ -8,11 +8,13 @@ import javafx.geometry.Point2D;
 import seedu.doist.logic.Logic;
 import seedu.doist.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.doist.logic.parser.CliSyntax;
+import seedu.doist.model.Model;
 
 
 //@@author A0147980U
 public class CommandAutoCompleteManager {
     private static CommandAutoCompleteManager instance;
+    private boolean isFind = false;
 
     // relative to cursor center
     private final Point2D suggestionBoxOffset = new Point2D(-8, 12);
@@ -27,14 +29,19 @@ public class CommandAutoCompleteManager {
     }
 
     // main function method
-    public void suggestCompletion(InlineCssTextArea commandTextField, Logic logic) {
+    public void suggestCompletion(InlineCssTextArea commandTextField, Logic logic, Model model) {
         attachSuggestionWindowIfNecessary(commandTextField);
 
         int cursorPosition = commandTextField.getCaretPosition();
         String[] words = commandTextField.getText(0, cursorPosition).split(" +", -1);
         String lastWord = words[words.length - 1];  // -1 means trailing space will NOT be discarded
+        isFindCommand(words);
         if (!"".equals(lastWord)) {
-            displaySuggestions(commandTextField, getSuggestions(lastWord, logic));
+            if (isFind) {
+                displaySuggestions(commandTextField, getSuggestionsForSearch(words, model));
+            } else {
+                displaySuggestions(commandTextField, getSuggestions(lastWord, logic));
+            }
         } else {
             commandTextField.getPopupWindow().hide();
         }
@@ -61,6 +68,31 @@ public class CommandAutoCompleteManager {
         return suggestions;
     }
 
+    private ArrayList<String> getSuggestionsForSearch(String[] words, Model model) {
+        int count = 0;
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < words.length; i++) {
+            s.append(words[i]).append(" ");
+        }
+        ArrayList<String> suggestions = new ArrayList<>();
+        for (String desc : model.getAllNames()) {
+            if ((Double.compare(org.apache.commons.lang3.StringUtils.
+                    getJaroWinklerDistance(desc, s.toString()), 0.60) >= 0) && count < maxItemNu) {
+                suggestions.add(desc);
+                count++;
+            }
+        }
+
+        return suggestions;
+    }
+
+    private void isFindCommand(String[] words) {
+        if (words.length > 0) {
+            isFind = words[0].equals(new String("find"));
+        } else {
+            isFind = false;
+        }
+    }
     /**
      * display the suggested text in a ContextMenu pop-up window
      */
