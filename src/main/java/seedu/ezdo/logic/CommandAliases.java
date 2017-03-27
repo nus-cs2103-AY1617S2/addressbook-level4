@@ -27,33 +27,21 @@ import seedu.ezdo.logic.commands.UndoCommand;
  */
 public class CommandAliases implements Serializable {
 
-    private static final String[] EXISTING_COMMAND_WORDS = {AddCommand.COMMAND_WORD,
-                                                            AddCommand.SHORT_COMMAND_WORD,
+    private static final String[] EXISTING_COMMAND_WORDS = {AddCommand.COMMAND_WORD, AddCommand.SHORT_COMMAND_WORD,
+                                                            ClearCommand.COMMAND_WORD, ClearCommand.SHORT_COMMAND_WORD,
+                                                            DoneCommand.COMMAND_WORD, DoneCommand.SHORT_COMMAND_WORD,
+                                                            EditCommand.COMMAND_WORD, EditCommand.SHORT_COMMAND_WORD,
+                                                            FindCommand.COMMAND_WORD, FindCommand.SHORT_COMMAND_WORD,
+                                                            HelpCommand.COMMAND_WORD, HelpCommand.SHORT_COMMAND_WORD,
+                                                            KillCommand.COMMAND_WORD, KillCommand.SHORT_COMMAND_WORD,
+                                                            ListCommand.COMMAND_WORD, ListCommand.SHORT_COMMAND_WORD,
+                                                            QuitCommand.COMMAND_WORD, QuitCommand.SHORT_COMMAND_WORD,
+                                                            RedoCommand.COMMAND_WORD, RedoCommand.SHORT_COMMAND_WORD,
+                                                            SortCommand.COMMAND_WORD, SortCommand.SHORT_COMMAND_WORD,
+                                                            UndoCommand.COMMAND_WORD, UndoCommand.SHORT_COMMAND_WORD,
                                                             AliasCommand.COMMAND_WORD,
-                                                            EditCommand.COMMAND_WORD,
-                                                            EditCommand.SHORT_COMMAND_WORD,
-                                                            SelectCommand.COMMAND_WORD,
-                                                            KillCommand.COMMAND_WORD,
-                                                            KillCommand.SHORT_COMMAND_WORD,
-                                                            ClearCommand.COMMAND_WORD,
-                                                            ClearCommand.SHORT_COMMAND_WORD,
-                                                            FindCommand.COMMAND_WORD,
-                                                            FindCommand.SHORT_COMMAND_WORD,
-                                                            ListCommand.COMMAND_WORD,
-                                                            ListCommand.SHORT_COMMAND_WORD,
-                                                            QuitCommand.COMMAND_WORD,
-                                                            QuitCommand.SHORT_COMMAND_WORD,
-                                                            DoneCommand.COMMAND_WORD,
-                                                            DoneCommand.SHORT_COMMAND_WORD,
-                                                            HelpCommand.COMMAND_WORD,
-                                                            HelpCommand.SHORT_COMMAND_WORD,
-                                                            SortCommand.COMMAND_WORD,
-                                                            SortCommand.SHORT_COMMAND_WORD,
                                                             SaveCommand.COMMAND_WORD,
-                                                            UndoCommand.COMMAND_WORD,
-                                                            UndoCommand.SHORT_COMMAND_WORD,
-                                                            RedoCommand.COMMAND_WORD,
-                                                            RedoCommand.SHORT_COMMAND_WORD};
+                                                            SelectCommand.COMMAND_WORD};
 
     private HashMap<String, String> commandAliasesMap;
 
