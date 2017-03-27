@@ -135,14 +135,27 @@ public class EditCommand extends Command {
         }
 
         //@@author A0144904H
+        errorDetect(taskToEdit, updatedCategories);
+
+        return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
+                updatedInformation, updatedRecurrence, updatedCategories);
+    }
+
+    //@@author A014490H
+    /**
+     * @param taskToEdit
+     * @param updatedCategories
+     * @throws IllegalValueException
+     * @throws DefaultCategoryException
+     * @throws DuplicateCategoryException
+     */
+    private static void errorDetect(ReadOnlyTask taskToEdit, UniqueCategoryList updatedCategories)
+            throws IllegalValueException, DefaultCategoryException, DuplicateCategoryException {
         if (taskToEdit.getCategories().contains(new Category(AddCommand.DEFAULT_DONE))) {
             throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
         } else {
             updatedCategories.add(new Category(AddCommand.DEFAULT_All_TASKS));
         }
-
-        return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
-                updatedInformation, updatedRecurrence, updatedCategories);
     }
 
     //@@author A0144904H
