@@ -36,6 +36,7 @@ import seedu.tasklist.logic.commands.ListCommand;
 import seedu.tasklist.logic.commands.LoadCommand;
 import seedu.tasklist.logic.commands.SaveCommand;
 import seedu.tasklist.logic.commands.SelectCommand;
+import seedu.tasklist.logic.commands.SortCommand;
 import seedu.tasklist.logic.commands.exceptions.CommandException;
 import seedu.tasklist.model.Model;
 import seedu.tasklist.model.ModelManager;
@@ -436,7 +437,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-
+//@@author A0141993X
     @Test
     public void load_invalidCommand_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE);
@@ -445,8 +446,14 @@ public class LogicManagerTest {
 
     @Test
     public void load_invalidFilePath_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(LoadCommand.MESSAGE_INVALID_PATH, "dejt/%!%");
-        assertCommandBehavior("load dejt/%!%", expectedMessage);
+        String expectedMessage = String.format(LoadCommand.MESSAGE_FAILURE, "del/tasklist.xml");
+        assertCommandBehavior("load del/tasklist.xml", expectedMessage);
+    }
+
+    @Test
+    public void load_nonExistentDirectory_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(LoadCommand.MESSAGE_FAILURE, "data/data/tasklist.xml");
+        assertCommandBehavior("load data/data/tasklist.xml", expectedMessage);
     }
 
     @Test
@@ -463,9 +470,16 @@ public class LogicManagerTest {
 
     @Test
     public void save_invalidFilePath_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(SaveCommand.MESSAGE_INVALID_PATH, "dejt/%!%");
-        assertCommandBehavior("save dejt/%!%", expectedMessage);
+        String expectedMessage = String.format(SaveCommand.MESSAGE_INVALID_PATH, "data/tasklist");
+        assertCommandBehavior("save data/tasklist", expectedMessage);
     }
+
+    @Test
+    public void save_nonExistentDirectory_successful() throws Exception {
+        String expectedMessage = String.format(SaveCommand.MESSAGE_SUCCESS, "data/data1/tasklist.xml");
+        assertCommandBehavior("save data/data1/tasklist.xml", expectedMessage);
+    }
+
 
     @Test
     public void save_invalidFileExtension_errorMessageShown() throws Exception {
@@ -473,6 +487,43 @@ public class LogicManagerTest {
         assertCommandBehavior("save data/task.png", expectedMessage);
     }
 
+    @Test
+    public void sort_invalidCommand_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        assertCommandFailure("sort", expectedMessage);
+    }
+
+    @Test
+    public void sort_invalidParameter_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(SortCommand.MESSAGE_FAILURE);
+        assertCommandBehavior("sort z", expectedMessage);
+    }
+
+    @Test
+    public void sort_validParameterName_successful() throws Exception {
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS);
+        assertCommandBehavior("sort n", expectedMessage);
+    }
+
+    @Test
+    public void sort_validParameterDate_successful() throws Exception {
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS);
+        assertCommandBehavior("sort d", expectedMessage);
+    }
+
+    @Test
+    public void sort_validParameterPriority_successful() throws Exception {
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS);
+        assertCommandBehavior("sort p", expectedMessage);
+    }
+
+    @Test
+    public void sort_invalidParameterNull_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        assertCommandFailure("sort ", expectedMessage);
+    }
+
+//@@author
     /**
      * A utility class to generate test data.
      */

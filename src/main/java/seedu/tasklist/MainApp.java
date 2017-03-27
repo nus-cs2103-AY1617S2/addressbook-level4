@@ -72,7 +72,7 @@ public class MainApp extends Application {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
     }
-//@@author A0141993X
+
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyTaskList> flexiTaskOptional;
         ReadOnlyTaskList initialData;
@@ -92,7 +92,7 @@ public class MainApp extends Application {
 
         return new ModelManager(initialData, storage, userPrefs);
     }
-//@@author
+
     private void initLogging(Config config) {
         LogsCenter.init(config);
     }
