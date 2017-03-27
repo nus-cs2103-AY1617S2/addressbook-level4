@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import project.taskcrusher.logic.commands.AddCommand;
 import project.taskcrusher.logic.commands.ClearCommand;
 import project.taskcrusher.logic.commands.Command;
+import project.taskcrusher.logic.commands.ConfirmCommand;
 import project.taskcrusher.logic.commands.DeleteCommand;
 import project.taskcrusher.logic.commands.EditCommand;
 import project.taskcrusher.logic.commands.ExitCommand;
@@ -31,7 +32,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -50,14 +52,17 @@ public class Parser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-            //TODO remove this later on
+        // TODO remove this later on
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-          //TODO remove this later on
+        case ConfirmCommand.COMMAND_WORD:
+            return new ConfirmCommandParser().parse(arguments);
+
+        // TODO remove this later on
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
