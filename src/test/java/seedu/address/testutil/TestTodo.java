@@ -21,52 +21,43 @@ public class TestTodo implements ReadOnlyTodo {
     private Date starttime;
     private Date endtime;
     private Date completeTime;
-
     private UniqueTagList tags;
+    
+    //@@author A0163720M
     /**
      * Constructor for a empty floating task
      */
     public TestTodo() {
-        this.name = null;
-        this.starttime = null;
-        this.endtime = null;
-        this.tags = new UniqueTagList(); // protect internal tags from changes in the arg list
+        this(null, null, null, null, new UniqueTagList());
     }
-
+    //@@author
+    
+    //@@author A0163720M
     /**
      * Constructor for a floating task
      */
     public TestTodo(Name name, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, tags);
-        this.name = name;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this(name, null, null, null, tags);
     }
-    //@@author A0163786N
+    //@@author
+    
+    //@@author A0163786N, A0163720M
     /**
      * Constructor for a deadline
      */
     public TestTodo(Name name, Date endtime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name);
-        this.name = name;
-        if (endtime != null) {
-            this.endtime = endtime;
-        }
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this(name, null, endtime, null, tags);
     }
     //@@author
+
     /**
      * Constructor for an event
      */
     public TestTodo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name);
-        this.name = name;
-        if (starttime != null && endtime != null) {
-            this.starttime = starttime;
-            this.endtime = endtime;
-        }
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this(name, starttime, endtime, null, tags);
     }
-    //@@author A0163786N
+
+    //@@author A0163786N, A0163720M
     /**
      * General todo constructor
      */
@@ -78,6 +69,7 @@ public class TestTodo implements ReadOnlyTodo {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     //@@author
+
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */

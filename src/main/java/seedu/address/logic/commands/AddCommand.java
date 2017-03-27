@@ -32,7 +32,6 @@ public class AddCommand extends Command {
     public static final String MESSAGE_INVALID_STARTTIME = "Invalid start time entered";
     public static final String MESSAGE_INVALID_ENDTIME = "Invalid end time entered";
     public static final String DATE_FORMAT = "h:mma dd/MM/yy";
-    public static final String MESSAGE_INVALID_PARAMETERS = "Error parsing through parameters";
 
     private final Todo toAdd;
 
@@ -52,14 +51,15 @@ public class AddCommand extends Command {
             }
 
             // Check for existence of each of the fields
-            Name name = (todo == null) ? new Name(todo) : null;
-            Date start = (startTime == null) ? StringUtil.parseDate(startTime, DATE_FORMAT) : null;
-            Date end = (endTime == null) ? StringUtil.parseDate(endTime, DATE_FORMAT) : null;
+            Name name = (todo != null) ? new Name(todo) : null;
+            Date start = (startTime != null) ? StringUtil.parseDate(startTime, DATE_FORMAT) : null;
+            Date end = (endTime != null) ? StringUtil.parseDate(endTime, DATE_FORMAT) : null;
             UniqueTagList tagList = new UniqueTagList(tagSet);
 
-            this.toAdd = new Todo(name, start, end, tagList);
+            // Todo(name, start_time, end_time, complete_time, taglist)
+            this.toAdd = new Todo(name, start, end, null, tagList);
         } catch (IllegalValueException e) {
-            throw new IllegalValueException(MESSAGE_INVALID_PARAMETERS);
+            throw e;
         }
     }
 
@@ -71,7 +71,8 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String todo, String endTime, Set<String> tags) throws IllegalValueException {
-        // Cannot throw an exception since there's only one line in the constructor and the first line cannot be try{}
+        // Cannot throw an exception since there's only one line in the constructor
+        // and the first line must be the call to the constructor, not try{}
         this(todo, null, endTime, tags);
     }
 
