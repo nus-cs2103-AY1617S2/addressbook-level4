@@ -48,7 +48,7 @@ public class DeleteCommand extends Command {
         for (int index: targetIndex) {
             ReadOnlyTask taskToDelete = lastShownList.get(index - 1);
             
-            if (lastShownList.size() < index) {
+            if ((lastShownList.size() < index) || (index == 0)) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             
@@ -63,7 +63,7 @@ public class DeleteCommand extends Command {
             }
         }
         
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
     }
 
 }
