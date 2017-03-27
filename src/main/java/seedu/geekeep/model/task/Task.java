@@ -102,9 +102,10 @@ public class Task implements ReadOnlyTask  {
     }
 
     /**
-     * Computes task's priority which determines the ordering of index
+     * Get the task's priority which determines the ordering of index
+     * @return int value of Priority
      */
-    public int computePriority() {
+    public int getPriority() {
         if (isEvent()) {
             return EVENT_PRIORITY;
         } else if (isFloatingTask()) {
@@ -112,6 +113,40 @@ public class Task implements ReadOnlyTask  {
         } else {
             assert isDeadline();
             return DEADLINE_PRIORITY;
+        }
+    }
+
+    /**
+     * Get the task's DateTime that is used to compare date time
+     * @return DateTime object
+     */
+    public DateTime getReferenceDateTime() {
+        if (isEvent()) {
+            return this.startDateTime;
+        } else if (isDeadline()) {
+            return this.endDateTime;
+        } else {
+            assert isFloatingTask();
+            return null;
+        }
+    }
+
+    public int comparePriority(Task otherTask) {
+        return this.getPriority() - otherTask.getPriority();
+    }
+
+    public int compareDate(Task otherTask) {
+        assert !isFloatingTask() && !otherTask.isFloatingTask();
+        return this.getReferenceDateTime().dateTime.compareTo(otherTask.getReferenceDateTime().dateTime);
+    }
+
+    public int compareBothPriorityAndDate(Task otherTask) {
+        int comparePriorityResult = this.comparePriority(otherTask);
+        if (comparePriorityResult != 0 || this.isFloatingTask()
+                || otherTask.isFloatingTask()) {
+            return comparePriorityResult;
+        } else {
+            return this.compareDate(otherTask);
         }
     }
 
