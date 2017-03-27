@@ -20,7 +20,7 @@ public class DeleteCommandParser {
      */
     public Command parse(String args) {
 
-        if ((args.isEmpty()) || (args.matches(".*[a-z].*"))) {
+        if ((args == NULL) || (args.isEmpty()) || (args.matches(".*[a-z].*"))) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
