@@ -21,7 +21,7 @@ import seedu.toluist.model.TodoList;
  */
 public class JsonStorage implements TodoListStorage {
     private Config config = Config.getInstance();
-    private ArrayDeque<String> historyStack = new ArrayDeque<>();
+    private ArrayDeque<String> undoHistoryStack = new ArrayDeque<>();
     private ArrayDeque<String> redoHistoryStack = new ArrayDeque<>();
 
     public boolean save(TodoList todoList) {
@@ -47,8 +47,8 @@ public class JsonStorage implements TodoListStorage {
     public TodoList load(String storagePath) throws DataStorageException {
         try {
             String jsonString = FileUtil.readFromFile(new File(storagePath));
-            // push todo list json string into historyStack if the stack is empty
-            if (historyStack.isEmpty()) {
+            // push todo list json string into undoHistoryStack if the stack is empty
+            if (undoHistoryStack.isEmpty()) {
                 addToHistory(jsonString);
             }
             TodoList todoList = JsonUtil.fromJsonString(jsonString, TodoList.class);
@@ -81,13 +81,13 @@ public class JsonStorage implements TodoListStorage {
     }
 
     public Pair<TodoList, Integer> undo(int times) {
-        assert historyStack.size() >= 1;
+        assert undoHistoryStack.size() >= 1;
         int steps = times;
-        while (steps > 0 && historyStack.size() > 1) {
-            redoHistoryStack.addLast(historyStack.pollLast());
+        while (steps > 0 && undoHistoryStack.size() > 1) {
+            redoHistoryStack.addLast(undoHistoryStack.pollLast());
             steps -= 1;
         }
-        TodoList todoList = todoListFromJson(historyStack.peekLast()).get();
+        TodoList todoList = todoListFromJson(undoHistoryStack.peekLast()).get();
         // So as to not clear the redo history
         saveNotAffectingHistory(todoList, config.getTodoListFilePath());
         return new Pair<>(todoList, times - steps);
@@ -96,11 +96,11 @@ public class JsonStorage implements TodoListStorage {
     public Pair<TodoList, Integer> redo(int times) {
         int steps = times;
         while (steps > 0 && redoHistoryStack.size() > 0) {
-            historyStack.addLast(redoHistoryStack.pollLast());
+            undoHistoryStack.addLast(redoHistoryStack.pollLast());
             steps -= 1;
         }
 
-        TodoList todoList = todoListFromJson(historyStack.peekLast()).get();
+        TodoList todoList = todoListFromJson(undoHistoryStack.peekLast()).get();
         // So as to not clear the redo history
         saveNotAffectingHistory(todoList, config.getTodoListFilePath());
         return new Pair<>(todoList, times - steps);
@@ -126,8 +126,8 @@ public class JsonStorage implements TodoListStorage {
      * @param jsonString json representation of todolist data
      */
     public void addToHistory(String jsonString) {
-        if (historyStack.isEmpty() || (!historyStack.getLast().equals(jsonString))) {
-            historyStack.addLast(jsonString);
+        if (undoHistoryStack.isEmpty() || (!undoHistoryStack.getLast().equals(jsonString))) {
+            undoHistoryStack.addLast(jsonString);
         }
     }
 

@@ -208,9 +208,10 @@ The `Storage` component
 
 #### Undoable History
 
-`historyStack` hold the serialized json strings of the task list data. The minimum size of this stack is always 1. The json string at the top of the stack is the serialization of the current todo list data.
+`undoHistoryStack` hold the serialized json strings of the task list data. The minimum size of this stack is 
+always 1. The json string at the top of the stack is the serialization of the current todo list data.
 
-To undo the most recent changes, we simply pop the irrelevant strings in `historyStack` and then deserialize the json string at the top of the stack into task list data.
+To undo the most recent changes, we simply pop the irrelevant strings in `undoHistoryStack` and then deserialize the json string at the top of the stack into task list data.
 
 An alternative approach to implementing undoable history is to create a `unexecute` method for each mutating 
 command, 
@@ -219,7 +220,7 @@ history
 of the data changes in each Controller instance. Compared to this alternative, storing a centralized history of data 
 changes in the storage is much more robust, as we can avoid checking every Controller instance to 
 get the previous data state. An additional benefit is that the integrity of the data change order is guaranteed in 
-the `historyStack`, and we do not need to keep track of what the previous mutating commands were.
+the `undoHistoryStack`, and we do not need to keep track of what the previous mutating commands were.
 
 [comment]: # (@@author A0162011A)
 ### 3.7. Common classes
