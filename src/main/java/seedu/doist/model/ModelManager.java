@@ -180,6 +180,12 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
     }
 
+    //@@author A0147620L
+    public ArrayList<String> getAllNames() {
+        return todoList.getTaskNames();
+    }
+
+
     //@@author
     //=========== Filtered Task List Accessors =============================================================
 
