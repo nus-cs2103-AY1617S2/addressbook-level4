@@ -10,10 +10,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CompleteCommand;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.todolist.logic.commands.AddCommand;
+import seedu.todolist.logic.commands.CompleteCommand;
+import seedu.todolist.model.tag.UniqueTagList;
+import seedu.todolist.model.todo.ReadOnlyTodo;
 
 /**
  * Provides a handle to a todo card in the todo list panel.

@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestTodo;
-import seedu.address.testutil.TestUtil;
+import seedu.todolist.commons.core.Messages;
+import seedu.todolist.testutil.TestTodo;
+import seedu.todolist.testutil.TestUtil;
 
 public class UncompleteCommandTest extends TodoListGuiTest {
     //@@author A0163786N
