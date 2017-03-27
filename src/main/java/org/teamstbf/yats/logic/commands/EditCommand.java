@@ -95,6 +95,7 @@ public class EditCommand extends Command {
 		Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
 		Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
 		Schedule updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
+		Schedule updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
 		Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
 		UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 		if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
@@ -102,7 +103,7 @@ public class EditCommand extends Command {
 		}
 		IsDone isDone = taskToEdit.getIsDone();
 
-		return new Event(updatedName, updatedLocation, updatedStartTime, updatedEndTime,
+		return new Event(updatedName, updatedLocation, updatedStartTime, updatedEndTime, updatedDeadline,
 				updatedDescription, updatedTags, isDone);
 	}
 
@@ -113,7 +114,7 @@ public class EditCommand extends Command {
 	public static class EditTaskDescriptor {
 		private Optional<Title> name = Optional.empty();
 		private Optional<Location> location = Optional.empty();
-		private Optional<SimpleDate> deadline = Optional.empty();
+		private Optional<Schedule> deadline = Optional.empty();
 		private Optional<Schedule> startTime = Optional.empty();
 		private Optional<Schedule> endTime = Optional.empty();
 		private Optional<Description> description = Optional.empty();
@@ -183,12 +184,15 @@ public class EditCommand extends Command {
 			} else if (times.size() == SIZE_EVENT_TASK) {
 			    this.startTime = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
 			    this.endTime = Optional.of(new Schedule(timeList.get().get(INDEX_SECOND_DATE)));
+			    this.deadline = Optional.empty();
 			} else if (times.size() == SIZE_DEADLINE_TASK) {
 			    this.startTime = Optional.empty();
-			    this.endTime = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
+			    this.endTime =  Optional.empty();
+			    this.deadline = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
 			} else if (times.size() == SIZE_FLOATING_TASK) {
 			    this.startTime = Optional.empty();
 			    this.endTime = Optional.empty();
+			    this.deadline = Optional.empty();
 			} else {
 			    throw new IllegalValueException(null);
 			}
@@ -220,7 +224,7 @@ public class EditCommand extends Command {
 			return description;
 		}
 
-		public Optional<SimpleDate> getDeadline() {
+		public Optional<Schedule> getDeadline() {
 			return deadline;
 		}
 

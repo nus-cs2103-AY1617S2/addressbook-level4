@@ -2,10 +2,14 @@ package org.teamstbf.yats.model.item;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 
+
 /**
  * Represents a Task's Date in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
+ * 
+ * @Deprecated use {@link #Schedule()} instead
  */
+@Deprecated
 public class Date {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Task deadline should only be in the format dd/mm/yyyy";

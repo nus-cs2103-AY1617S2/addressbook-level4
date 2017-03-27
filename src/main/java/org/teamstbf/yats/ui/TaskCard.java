@@ -28,6 +28,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label endTime;
     @FXML
+    private Label deadline;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyEvent person, int displayedIndex, String FXML) {
@@ -36,8 +38,18 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         loc.setText(person.getLocation().value);
         description.setText(person.getDescription().value);
-        startTime.setText(person.getStartTime().toString());
-        endTime.setText(person.getEndTime().toString());
+        if (person.hasStartEndTime()){
+            startTime.setText(person.getStartTime().toString() + " - ");
+            endTime.setText(person.getEndTime().toString());
+        } else {
+            startTime.setText("");
+            endTime.setText("");
+        }
+        if (person.hasDeadline()) {
+            deadline.setText(" by " +person.getDeadline().toString());
+        } else {
+            deadline.setText("");
+        }
         initTags(person);
     }
 

@@ -46,16 +46,14 @@ public class MarkUndoneCommand extends Command {
 		if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_NOTDONE)) {
 			return new CommandResult(MESSAGE_ALR_MARKED);
 		}
-
 		markedTask.getIsDone().markUndone();
-
 		try {
 			model.updateEvent(targetIndex, markedTask);
 		} catch (UniqueEventList.DuplicateEventException dpe) {
 			throw new CommandException(MESSAGE_DUPLICATE_TASK);
 		}
 		model.updateFilteredListToShowAll();
-
+        markedTask.setPriority(1);
 		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));
 	}
 

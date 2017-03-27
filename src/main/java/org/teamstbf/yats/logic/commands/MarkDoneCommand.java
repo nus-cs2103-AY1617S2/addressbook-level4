@@ -56,7 +56,7 @@ public class MarkDoneCommand extends Command {
 			throw new CommandException(MESSAGE_DUPLICATE_TASK);
 		}
 		model.updateFilteredListToShowAll();
-
+        markedTask.setPriority(0);
 		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));
 	}
 }

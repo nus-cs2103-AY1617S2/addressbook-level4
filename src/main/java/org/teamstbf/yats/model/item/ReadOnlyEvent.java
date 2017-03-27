@@ -36,6 +36,12 @@ public interface ReadOnlyEvent {
 
 	Schedule getEndTime();
 
+	Schedule getDeadline();
+	
+	boolean hasDeadline();
+	
+	boolean hasStartEndTime();
+	
 	IsDone getIsDone();
 
 	public void markDone();
