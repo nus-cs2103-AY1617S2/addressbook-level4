@@ -3,7 +3,6 @@ package seedu.todolist.model.todo;
 import java.util.Date;
 import java.util.Objects;
 
-import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.model.tag.UniqueTagList;
 
 /**
@@ -23,33 +22,27 @@ public class Todo implements ReadOnlyTodo {
      * Constructor for a floating task
      */
     public Todo(Name name, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, tags);
-        this.name = name;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this(name, null, null, null, tags);
     }
+
     //@@author A0163786N, A0163720M
     /**
      * Constructor for a deadline
      */
     public Todo(Name name, Date endTime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, endTime, tags);
-        this.name = name;
-        this.endTime = endTime;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this(name, null, endTime, null, tags);
     }
     //@@author
+
     //@@author A0163786N, A0163720M
     /**
      * Constructor for an event
      */
     public Todo(Name name, Date startTime, Date endTime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, startTime, endTime, tags);
-        this.name = name;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this(name, startTime, endTime, null, tags);
     }
     //@@author
+
     //@@author A0163786N
     /**
      * Constructor for general todo
@@ -62,6 +55,7 @@ public class Todo implements ReadOnlyTodo {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     //@@author
+
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
