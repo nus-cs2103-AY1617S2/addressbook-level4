@@ -296,10 +296,15 @@ public class ModelManager extends ComponentManager implements Model {
             ReadOnlyTask tmpTask = iter.next();
             // set task id to be displayed, the id here is 1-based
             if (tmpTask.isToday() && !tmpTask.isDone()) {
+                // absolute index here will be replace to relative index in
+                // assignUiIndex method
+                tmpTask.setID("" + (iter.nextIndex() - 1));
                 taskListToday.add(tmpTask);
             } else if (!tmpTask.isDone()) {
+                tmpTask.setID("" + (iter.nextIndex() - 1));
                 taskListFuture.add(tmpTask);
             } else {
+                tmpTask.setID("" + (iter.nextIndex() - 1));
                 taskListCompleted.add(tmpTask);
             }
         }
@@ -325,22 +330,22 @@ public class ModelManager extends ComponentManager implements Model {
         ListIterator<ReadOnlyTask> iterCompleted = taskListCompleted.listIterator();
         while (iterToday.hasNext()) {
             ReadOnlyTask tmpTask = iterToday.next();
+            indexMap.put("T" + todayID, Integer.valueOf(tmpTask.getID()));
             tmpTask.setID("T" + todayID);
-            indexMap.put("T" + todayID, iterToday.nextIndex() - 1);
             todayID++;
             logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
         }
         while (iterFuture.hasNext()) {
             ReadOnlyTask tmpTask = iterFuture.next();
+            indexMap.put("F" + futureID, Integer.valueOf(tmpTask.getID()));
             tmpTask.setID("F" + futureID);
-            indexMap.put("F" + futureID, iterFuture.nextIndex() - 1);
             futureID++;
             logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
         }
         while (iterCompleted.hasNext()) {
             ReadOnlyTask tmpTask = iterCompleted.next();
+            indexMap.put("C" + completedID, Integer.valueOf(tmpTask.getID()));
             tmpTask.setID("C" + completedID);
-            indexMap.put("C" + completedID, iterCompleted.nextIndex() - 1);
             completedID++;
             logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
         }
