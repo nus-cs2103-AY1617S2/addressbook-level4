@@ -82,9 +82,6 @@ public class EditCommand extends Command {
         this.type = type;
         this.editEventDescriptor = new EditEventDescriptor(editEventDescriptor);
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor); 
-        if(!isValidEndDateTime()) {
-            throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
-        }
     }
 
     @Override
@@ -97,6 +94,9 @@ public class EditCommand extends Command {
 
             Event eventToEdit = (Event) lastShownEventList.get(filteredActivityListIndex);
             try {
+                if(!isValidEndDateTime()) {
+                    throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+                }
                 Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
             try {
                 //store for undo operation
