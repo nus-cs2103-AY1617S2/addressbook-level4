@@ -10,7 +10,6 @@ import seedu.doit.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_START = new Prefix("s/");
     public static final Prefix PREFIX_END = new Prefix("e/");
