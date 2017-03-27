@@ -1,5 +1,7 @@
 package seedu.task.logic.commandlibrary;
 
+import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.util.HashMap;
 
 import seedu.task.logic.commands.AddCommand;
@@ -13,6 +15,7 @@ import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
+import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListByDoneCommand;
 import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListByTagCommand;
@@ -132,6 +135,7 @@ public class CommandLibrary {
      * @return Returns the correct command with the correct arguments
      */
     public Command getCorrectCommand(String commandWord, String arguments){
+        if(!commandParserTable.containsKey(commandWord))  {return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);}
         return  commandParserTable.get(commandWord).parse(arguments);
     }
 //    protected class commandKeyParserPair{
