@@ -256,10 +256,10 @@ and logging destinations.
 
 **Logging Levels**
 
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
+* `SEVERE` : This level means that there is a critical problem detected which may possibly cause the termination of the application
+* `WARNING` : This level means that there are potential harmful situations
+* `INFO` : This level designates the information showing the noteworthy actions by the App
+* `FINE` : This level designates the details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
 ### 4.2. Configuration
