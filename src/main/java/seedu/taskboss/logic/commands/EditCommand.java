@@ -34,7 +34,7 @@ public class EditCommand extends Command {
             + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [n/NAME] [p/PRIORITY_LEVEL]"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY_LEVEL]"
             + " [sd/START_DATE] [ed/END_DATE]"
             + " [i/INFORMATION ] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/Yes" + " || " + COMMAND_WORD_SHORT + " 1 p/No";
