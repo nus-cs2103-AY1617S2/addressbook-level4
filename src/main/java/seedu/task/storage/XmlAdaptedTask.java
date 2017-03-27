@@ -53,14 +53,6 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
 
-	taskName = source.getTaskName().fullTaskName;
-	taskDate = source.getTaskDate().value;
-	taskStartTime = source.getTaskStartTime().value;
-	taskEndTime = source.getTaskEndTime().value;
-	taskDescription = source.getTaskDescription();
-	taskStatus = source.getTaskStatus().toString();
-	tagged = new ArrayList<>();
-
     	if (source.getTaskName() != null) {
     		taskName = source.getTaskName().fullTaskName;
     	}
@@ -100,14 +92,6 @@ public class XmlAdaptedTask {
 	    taskTags.add(tag.toModelType());
 	}
 	final TaskName taskName = new TaskName(this.taskName);
-	final TaskDate taskDate = new TaskDate(this.taskDate);
-	final TaskTime taskStartTime = new TaskTime(this.taskStartTime);
-	final TaskTime taskEndTime = new TaskTime(this.taskEndTime);
-	final String taskDescription = this.taskDescription;
-	final TaskStatus taskStatus = new TaskStatus(this.taskStatus.toString());
-	final UniqueTagList tags = new UniqueTagList(taskTags);
-	//return new Task(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,taskStatus, tags);
-
 	final Optional<TaskDate> taskDateOpt;
 	final Optional<TaskTime> taskStartTimeOpt;
 	final Optional<TaskTime> taskEndTimeOpt;
@@ -142,9 +126,9 @@ public class XmlAdaptedTask {
 	} else {
 		taskStatusOpt = Optional.ofNullable(new TaskStatus(this.taskStatus));
 	}
-    //final UniqueTagList tags = new UniqueTagList(taskTags);
+	final UniqueTagList listOfTags = new UniqueTagList(taskTags);
 	
-	return new Task(taskName, taskDateOpt, taskStartTimeOpt, taskEndTimeOpt, taskDescriptionOpt, taskStatusOpt, tags);
+	return new Task(taskName, taskDateOpt, taskStartTimeOpt, taskEndTimeOpt, taskDescriptionOpt, taskStatusOpt, listOfTags);
 
     }
 }

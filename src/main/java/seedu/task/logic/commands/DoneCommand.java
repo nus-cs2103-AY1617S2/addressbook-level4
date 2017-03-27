@@ -36,7 +36,8 @@ public class DoneCommand extends Command {
 
     @Override
     public CommandResult execute() {
-
+    	
+    	assert model != null;
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         StringBuilder sb = new StringBuilder();
 	for (int i = 0; i < targetIndex.length; i++) {
@@ -50,13 +51,12 @@ public class DoneCommand extends Command {
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex[i] - 1 - i);
 
         targetStatus= taskToComplete.getTaskStatus().status;
-        if(targetStatus.equals("Completed"))
+        if (targetStatus.equals(TaskStatus.DONE)) {
         	return new CommandResult(MESSAGE_ALREADY_COMPLETED);
+        }
         
         try {
-            ReadOnlyTask completedTask = taskToComplete;
-            completedTask.setTaskStatus(new TaskStatus("Completed"));
-            model.completeTask(taskToComplete, completedTask);
+            model.completeTask(targetIndex[i]);
             //to focus on the completed task
             EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskList().size() - 1));
             
@@ -69,5 +69,8 @@ public class DoneCommand extends Command {
 	    sb.append("\n");
 	}
         return new CommandResult(sb.toString());
+    }
+    public boolean isUndoable() {
+    	return true;
     }
 }

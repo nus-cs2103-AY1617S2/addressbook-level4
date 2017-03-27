@@ -23,8 +23,6 @@ public interface ReadOnlyTask {
     
     String getTaskPath();
 
-    void setTaskStatus(TaskStatus status);
-
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on

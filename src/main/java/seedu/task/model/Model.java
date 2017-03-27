@@ -27,7 +27,7 @@ public interface Model {
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /** Complete the given task. */
-    void completeTask(ReadOnlyTask target, ReadOnlyTask toBeComplete) throws UniqueTaskList.TaskNotFoundException;
+    void completeTask(int index) throws UniqueTaskList.TaskNotFoundException;
     
     /**
      * Updates the task located at {@code filteredTaskListIndex} with

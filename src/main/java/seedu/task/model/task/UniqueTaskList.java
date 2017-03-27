@@ -9,6 +9,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.DuplicateDataException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.task.model.task.TaskStatus;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -103,15 +104,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
     
-    public boolean complete(ReadOnlyTask toRemove, ReadOnlyTask toReplaceWith) throws TaskNotFoundException {
-        assert toRemove != null;
-        assert toReplaceWith != null;
-        final boolean taskFoundAndDeleted = internalList.remove(toRemove);
-        if (!taskFoundAndDeleted) {
-            throw new TaskNotFoundException();
-        }
-        internalList.add((Task)toReplaceWith);
-        return taskFoundAndDeleted;
+    public void complete(int index) throws TaskNotFoundException {
+    	Task temp = internalList.get(index);
+    	temp.setTaskStatus(new TaskStatus(TaskStatus.DONE));
+        internalList.remove(index);
+        internalList.add(temp);
+        System.out.println("true");
     }
     
     public void setTasks(UniqueTaskList replacement) {
