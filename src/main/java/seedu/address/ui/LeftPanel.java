@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -9,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -29,7 +31,6 @@ public class LeftPanel extends UiPart<Region> {
     private static final String FXML = "LeftPanel.fxml";
     private HashMap<Label, Integer> labelCount;
     private ObservableList<ReadOnlyTask> taskList;
-    private ObservableList<Label> labelList;
 
     @FXML
     private javafx.scene.control.Label appTitleLabel;
@@ -65,11 +66,9 @@ public class LeftPanel extends UiPart<Region> {
     private ListView<Label> labelListView;
 
     public LeftPanel(AnchorPane leftListPlaceholder,
-            ObservableList<ReadOnlyTask> taskList,
-            ObservableList<Label> labelList) {
+            ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         this.taskList = taskList;
-        this.labelList = labelList;
         initIcons();
         updateLabelCount();
         setTodayListView(taskList);
@@ -80,18 +79,15 @@ public class LeftPanel extends UiPart<Region> {
 
     public void updateLabelCount() {
         labelCount = new HashMap<Label, Integer>();
-        //Set all to 0
-        for (Label label : labelList) {
-            labelCount.put(label, 0);
-        }
 
         for (ReadOnlyTask task : taskList) {
             for (Label label : task.getLabels()) {
-                labelCount.put(label, labelCount.get(label) + 1);
+                int currentCount = labelCount.get(label) == null ? 0 : labelCount.get(label);
+                labelCount.put(label, currentCount + 1);
             }
         }
 
-        setConnections(labelList);
+        setConnections(labelCount);
     }
 
     private void initIcons() {
@@ -124,11 +120,26 @@ public class LeftPanel extends UiPart<Region> {
         calendarLabel.setText("Calendar");
     }
 
-    public void setConnections(ObservableList<Label> labelList) {
+    public void setConnections(HashMap<Label, Integer> labelList) {
+        ObservableList<Label> labels = getLabelsWithCount(labelList);
         labelCounterLabel.setText(Integer.toString(labelList.size()));
-        labelListView.setItems(labelList);
+        labelListView.setItems(labels);
         labelListView.setCellFactory(listView -> new LabelListViewCell());
         setEventHandlerForSelectionChangeEvent();
+    }
+
+    /**
+     * Returns labels with count more than 0, ignoring all empty labels
+     */
+    private ObservableList<Label> getLabelsWithCount(HashMap<Label, Integer> labelList) {
+        ObservableList<Label> labels = FXCollections.observableArrayList();
+        for (Entry<Label, Integer> entry : labelList.entrySet()) {
+            if (entry.getValue() > 0) {
+                labels.add(entry.getKey());
+            }
+        }
+        FXCollections.sort(labels);
+        return labels;
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
