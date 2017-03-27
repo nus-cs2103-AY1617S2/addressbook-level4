@@ -9,11 +9,11 @@ import seedu.task.commons.util.FileUtil;
  */
 public class LoadCommand extends Command {
 
-	public static final String COMMAND_WORD = "load";
+	public static final String COMMAND_WORD_1 = "load";
 
-	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads the task manager from a different directory. "
+	public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Loads the task manager from a different directory. "
 			+ "Parameters: PATHNAME \n"
-			+ "Example: " + COMMAND_WORD
+			+ "Example: " + COMMAND_WORD_1
 			+ " ";
 
 	public static final String MESSAGE_SUCCESS = "File loaded from: %1$s";
@@ -23,7 +23,7 @@ public class LoadCommand extends Command {
 	private String pathName;
 
 	/**
-	 * Creates a Save command
+	 * Creates a Load command
 	 */
 	public LoadCommand(String pathName) {
 		this.pathName = pathName;

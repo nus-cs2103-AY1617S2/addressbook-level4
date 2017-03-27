@@ -5,13 +5,14 @@ import static org.junit.Assert.assertTrue;
 import static seedu.task.logic.commands.LoadCommand.MESSAGE_FAILURE_DIRECTORY;
 import static seedu.task.logic.commands.LoadCommand.MESSAGE_SUCCESS;
 import static seedu.task.logic.commands.LoadCommand.MESSAGE_NOT_FOUND;
+import static seedu.task.logic.commands.LoadCommand.MESSAGE_WRONG_FORMAT;
 
 import java.io.File;
 
 import org.junit.Test;
 
 import seedu.task.testutil.TestUtil;
-
+//@@author A0142939W
 public class LoadCommandTest extends TaskManagerGuiTest {
 
     @Test
@@ -23,8 +24,14 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         //loads a non-existing file
         commandBox.runCommand("load fileThatDoesntExist");
         assertResultMessage(String.format(MESSAGE_NOT_FOUND, "fileThatDoesntExist"));
-        //saves to new file
+        
+        //loads an incompatible file
+        commandBox.runCommand("load README.md");
+        assertResultMessage(String.format(MESSAGE_WRONG_FORMAT, "README.md"));
+        
+        //loads to new file
         assertNewFileLoaded(TestUtil.getFilePathInSandboxFolder("sampleData.xml"));
+        
         //resets config back to testdummy
         testApp.restartConfig();
     }
