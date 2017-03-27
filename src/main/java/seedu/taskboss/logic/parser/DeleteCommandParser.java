@@ -20,7 +20,7 @@ public class DeleteCommandParser {
      */
     public Command parse(String args) {
         
-        if (args.isEmpty()) {
+        if ((args.isEmpty()) || !(args.matches("[0-9]+")) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
