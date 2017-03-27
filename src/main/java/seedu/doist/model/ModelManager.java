@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.doist.commons.core.ComponentManager;
 import seedu.doist.commons.core.LogsCenter;
@@ -13,7 +15,6 @@ import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.commons.util.History;
-import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
@@ -259,7 +260,9 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return descriptionKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().desc, keyword))
+                    .filter(keyword -> ((Double.compare(org.apache.commons.lang3.StringUtils.
+                            getJaroWinklerDistance(task.getDescription().desc, keyword), 0.90) >= 0)
+                            || (StringUtils.containsIgnoreCase(task.getDescription().desc, keyword))))
                     .findAny()
                     .isPresent();
         }
