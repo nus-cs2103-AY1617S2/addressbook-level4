@@ -6,6 +6,11 @@ import com.joestelmach.natty.*;
 
 import seedu.taskit.commons.exceptions.IllegalValueException;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.List;
 
 /**
@@ -21,10 +26,14 @@ public class Date {
     public final java.util.Date date;
     public final String dateString;
     Parser parser = new Parser();
+    
+    private final LocalTime localTime;
+    
 
     public Date() {
         this.date = null;
         this.dateString = null;
+        this.localTime = null;
     }
 
     /**
@@ -41,17 +50,28 @@ public class Date {
                 try {
                     DateGroup group = (DateGroup) groups.get(0);
                     this.date = group.getDates().get(0);
+                    localTime=convertToLocalTime();
                 } catch (Exception exception) {
                     throw new IllegalValueException(MESSAGE_DATE_FAIL);
                 }
             } else {
                 this.date = null;
+                this.localTime = null;
             }
         } else {
             this.date = null;
+            this.localTime = null;
         }
     }
 
+    //author A0141872E
+    private LocalTime convertToLocalTime() {
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        LocalTime localTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalTime();
+        return localTime;
+    }
+    //author
+    
     @Override
     public String toString() {
         if (date != null) {
@@ -107,6 +127,20 @@ public class Date {
         }
         return true;
     }
+    
+    //author A0141872E
+    public boolean isEndTimePassCurrentTime() {
+        
+        if(date!=null && localTime.isBefore(LocalTime.now())) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isDateEqualCurrentDate() {
+        return date.equals(LocalDate.now());
+    }
+    //author
 
     @Override
     public int hashCode() {
