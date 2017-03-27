@@ -75,6 +75,7 @@ public class LeftPanel extends UiPart<Region> {
         setCalendarListView(taskList);
         addToPlaceholder(leftListPlaceholder);
         registerAsAnEventHandler(this);
+        setEventHandlerForSelectionChangeEvent();
     }
 
     public void updateLabelCount() {
@@ -125,7 +126,6 @@ public class LeftPanel extends UiPart<Region> {
         labelCounterLabel.setText(Integer.toString(labelList.size()));
         labelListView.setItems(labels);
         labelListView.setCellFactory(listView -> new LabelListViewCell());
-        setEventHandlerForSelectionChangeEvent();
     }
 
     /**
