@@ -34,7 +34,8 @@ public class FindController extends Controller {
     private static final int SECTION_PARAMETER = 1;
 
     private static final String MESSAGE_RESULT_TEMPLATE_FIND = "Searching for \"%s\" by %s.\n%s found";
-    private static final String MESSAGE_RESULT_TEMPLATE_LIST = "Listing all %s.";
+    private static final String MESSAGE_RESULT_TEMPLATE_LIST = "Listing all %s";
+    private static final String MESSAGE_RESULT_TEMPLATE_TAB = ", %s of which are shown in the current tab.";
     private static final String MESSAGE_NAME = "name";
     private static final String MESSAGE_TAG = "tag";
     private static final String MESSAGE_NAME_AND_TAG = "name and tag";
@@ -68,7 +69,8 @@ public class FindController extends Controller {
                                         String[] keywordList, int foundCount) {
         if (keywordList[0].equals(PARAMETER_NULL)) {
             return new CommandResult(String.format(MESSAGE_RESULT_TEMPLATE_LIST,
-                StringUtil.nounWithCount("task", foundCount)));
+                StringUtil.nounWithCount("task", foundCount))
+                + String.format(MESSAGE_RESULT_TEMPLATE_TAB, uiStore.getShownTasks().size()));
         }
 
         String searchParameters;
@@ -83,7 +85,8 @@ public class FindController extends Controller {
 
         String keywords = String.join(MESSAGE_STRING_JOINING, keywordList);
         return new CommandResult(String.format(MESSAGE_RESULT_TEMPLATE_FIND,
-                keywords, searchParameters, StringUtil.nounWithCount("result", foundCount)));
+                keywords, searchParameters, StringUtil.nounWithCount("result", foundCount))
+                + String.format(MESSAGE_RESULT_TEMPLATE_TAB, uiStore.getShownTasks().size()));
     }
 
     public HashMap<String, String> tokenize(String command) {
