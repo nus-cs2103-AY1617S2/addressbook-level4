@@ -16,6 +16,7 @@ import seedu.taskit.logic.commands.FindCommand;
 import seedu.taskit.logic.commands.HelpCommand;
 import seedu.taskit.logic.commands.IncorrectCommand;
 import seedu.taskit.logic.commands.ListCommand;
+import seedu.taskit.logic.commands.SaveCommand;
 import seedu.taskit.logic.commands.SelectCommand;
 
 /**
@@ -70,6 +71,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+            
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
