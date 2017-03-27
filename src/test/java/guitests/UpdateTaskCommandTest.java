@@ -40,15 +40,15 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
     public void testInvalidIndexInput() {
         String command = UPDATE + " 0 " + "description";
         commandBox.runCommand(command);
-        assertResultMessage("The index provided is invalid.");
+        assertResultMessage("No valid index found.");
 
         command = UPDATE + " 3 " + "description";
         commandBox.runCommand(command);
-        assertResultMessage("The index provided is invalid.");
+        assertResultMessage("No valid index found.");
 
         command = UPDATE + " potato " + "description";
         commandBox.runCommand(command);
-        assertResultMessage("The index provided is invalid.");
+        assertResultMessage("No valid index found.");
     }
 
     @Test

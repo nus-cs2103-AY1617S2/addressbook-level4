@@ -32,7 +32,7 @@ public class UpdateTaskController extends Controller {
     private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
             "Task provided already exist in the list.";
     private static final String RESULT_MESSAGE_ERROR_INVALID_INDEX =
-            "The index provided is invalid.";
+            "No valid index found.";
     private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
             "The task cannot be classified as a floating task, deadline, or event.";
     private static final String RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING =
@@ -118,53 +118,55 @@ public class UpdateTaskController extends Controller {
         }
         try {
             if (isFloating) {
-                task.setStartDateTime(null);
-                task.setEndDateTime(null);
+                taskCopy.setStartDateTime(null);
+                taskCopy.setEndDateTime(null);
             } else if (taskDeadline != null) {
-                task.setStartDateTime(null);
-                task.setEndDateTime(taskDeadline);
+                taskCopy.setStartDateTime(null);
+                taskCopy.setEndDateTime(taskDeadline);
             } else {
                 if (eventStartDateTime != null) {
-                    task.setStartDateTime(eventStartDateTime);
+                    taskCopy.setStartDateTime(eventStartDateTime);
                 }
                 if (eventEndDateTime != null) {
-                    task.setEndDateTime(eventEndDateTime);
+                    taskCopy.setEndDateTime(eventEndDateTime);
                 }
             }
 
             if (StringUtil.isPresent(description)) {
-                task.setDescription(description);
+                taskCopy.setDescription(description);
             }
             if (StringUtil.isPresent(taskPriority)) {
-                task.setTaskPriority(taskPriority);
+                taskCopy.setTaskPriority(taskPriority);
             }
             if (StringUtil.isPresent(recurringFrequency)) {
-                task.setRecurringFrequency(recurringFrequency);
+                taskCopy.setRecurringFrequency(recurringFrequency);
             }
             if (recurringUntilEndDate != null) {
-                task.setRecurringEndDateTime(recurringUntilEndDate);
+                taskCopy.setRecurringEndDateTime(recurringUntilEndDate);
             }
             if (!tags.isEmpty()) {
-                task.replaceTags(tags);
+                taskCopy.replaceTags(tags);
             }
             if (isStopRecurring) {
-                task.unsetRecurring();
+                taskCopy.unsetRecurring();
             }
 
             TodoList todoList = TodoList.getInstance();
-            if (todoList.getTasks().contains(task)) {
-                // rollback all changes to task
-                task.setTask(taskCopy);
+            if (todoList.getTasks().contains(taskCopy)) {
                 return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
             }
+
+            // Update all changes in taskCopy to task
+            Task oldTask = (Task) task.clone();
+            task.setTask(taskCopy);
             if (todoList.save()) {
                 uiStore.setTasks(todoList.getTasks());
             }
-            return new CommandResult(ResultMessage.getUpdateCommandResultMessage(taskCopy, task, uiStore));
+            return new CommandResult(ResultMessage.getUpdateCommandResultMessage(oldTask, task, uiStore));
         } catch (IllegalArgumentException illegalArgumentException) {
-            // rollback all changes to task
-            task.setTask(taskCopy);
             return new CommandResult(illegalArgumentException.getMessage());
+        } catch (CloneNotSupportedException cloneNotSupportedException) {
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
         }
     }
 
