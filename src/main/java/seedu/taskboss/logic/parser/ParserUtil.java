@@ -25,7 +25,7 @@ import seedu.taskboss.model.task.PriorityLevel;
  */
 public class ParserUtil {
 
-    private static final String WHITESPACE = " ";
+    private static final String ALL_WHITESPACE = "\\s+";
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern SORT_TYPE_ARGS_FORMAT = Pattern.compile("(?<sortType>.+)");
 
@@ -70,7 +70,7 @@ public class ParserUtil {
      */
     public static String[] parseRenameCategory(String command) {
         String trimmedCommand = command.trim();
-        String[] categories = trimmedCommand.split(WHITESPACE);
+        String[] categories = trimmedCommand.split(ALL_WHITESPACE);
         return categories;
     }
 
