@@ -277,7 +277,7 @@ public class LogicManagerTest {
         model.addTask(p4);
 
         assertCommandSuccess("sort end",
-                SortCommand.MESSAGE_SUCCESS,
+                SortCommand.MESSAGE_SUCCESS + "end",
                 expectedTaskManager,
                 fiveTasks);
     }
@@ -298,7 +298,7 @@ public class LogicManagerTest {
         model.addTask(p1);
 
         assertCommandSuccess("sort priority",
-                SortCommand.MESSAGE_SUCCESS,
+                SortCommand.MESSAGE_SUCCESS + "priority",
                 expectedTaskManager,
                 threeTasks);
     }
@@ -317,7 +317,7 @@ public class LogicManagerTest {
         model.addTask(p1);
 
         assertCommandSuccess("sort status",
-                SortCommand.MESSAGE_SUCCESS,
+                SortCommand.MESSAGE_SUCCESS + "status",
                 expectedTaskManager,
                 twoTasks);
     }
