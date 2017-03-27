@@ -39,7 +39,7 @@
                   <Label fx:id="calendarLabel" text="Calendar" />
                </children>
             </HBox>
-            <HBox maxHeight="100.0" onMouseClicked="#toggleLabelList" styleClass="sidePanel">
+            <HBox maxHeight="100.0" fx:id="labelListHeader" onMouseClicked="#toggleLabelList" styleClass="sidePanel">
                <children>
                   <FontAwesomeIconView fx:id="labelIconLabel" size="20">
                      <HBox.margin>
