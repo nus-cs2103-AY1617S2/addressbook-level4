@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
-import seedu.todolist.commons.util.StringUtil;
 
 public class StringUtilTest {
 

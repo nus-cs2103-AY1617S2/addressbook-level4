@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.todolist.commons.util.FileUtil;
-import seedu.todolist.commons.util.XmlUtil;
 import seedu.todolist.model.TodoList;
 import seedu.todolist.storage.XmlSerializableTodoList;
 import seedu.todolist.testutil.TestUtil;

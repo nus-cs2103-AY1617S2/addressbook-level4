@@ -15,7 +15,6 @@ import seedu.todolist.commons.util.FileUtil;
 import seedu.todolist.model.ReadOnlyTodoList;
 import seedu.todolist.model.TodoList;
 import seedu.todolist.model.todo.Todo;
-import seedu.todolist.storage.XmlTodoListStorage;
 import seedu.todolist.testutil.TypicalTestTodos;
 
 public class XmlTodoListStorageTest {

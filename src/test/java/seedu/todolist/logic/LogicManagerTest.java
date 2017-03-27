@@ -24,8 +24,6 @@ import seedu.todolist.commons.core.EventsCenter;
 import seedu.todolist.commons.events.model.TodoListChangedEvent;
 import seedu.todolist.commons.events.ui.JumpToListRequestEvent;
 import seedu.todolist.commons.events.ui.ShowHelpRequestEvent;
-import seedu.todolist.logic.Logic;
-import seedu.todolist.logic.LogicManager;
 import seedu.todolist.logic.commands.AddCommand;
 import seedu.todolist.logic.commands.ClearCommand;
 import seedu.todolist.logic.commands.Command;

@@ -15,7 +15,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.todolist.commons.exceptions.DataConversionException;
 import seedu.todolist.commons.util.FileUtil;
 import seedu.todolist.model.UserPrefs;
-import seedu.todolist.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

@@ -8,8 +8,6 @@ import java.net.URL;
 
 import org.junit.Test;
 
-import seedu.todolist.commons.util.UrlUtil;
-
 /**
  * Tests the UrlUtil methods.
  */

@@ -16,10 +16,6 @@ import seedu.todolist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.todolist.model.ReadOnlyTodoList;
 import seedu.todolist.model.TodoList;
 import seedu.todolist.model.UserPrefs;
-import seedu.todolist.storage.JsonUserPrefsStorage;
-import seedu.todolist.storage.Storage;
-import seedu.todolist.storage.StorageManager;
-import seedu.todolist.storage.XmlTodoListStorage;
 import seedu.todolist.testutil.EventsCollector;
 import seedu.todolist.testutil.TypicalTestTodos;
 
