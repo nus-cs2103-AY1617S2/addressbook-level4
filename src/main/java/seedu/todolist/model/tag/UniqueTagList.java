@@ -172,4 +172,9 @@ public class UniqueTagList implements Iterable<Tag> {
         }
     }
 
+    //@@author A0163720M
+    public boolean isEmpty() {
+        return this.internalList.isEmpty();
+    }
+    //@@author
 }

@@ -1,10 +1,12 @@
 package seedu.todolist.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+<<<<<<< HEAD:src/main/java/seedu/todolist/model/ModelManager.java
 import seedu.todolist.commons.core.ComponentManager;
 import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
@@ -15,6 +17,20 @@ import seedu.todolist.model.todo.ReadOnlyTodo;
 import seedu.todolist.model.todo.Todo;
 import seedu.todolist.model.todo.UniqueTodoList;
 import seedu.todolist.model.todo.UniqueTodoList.TodoNotFoundException;
+=======
+import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.model.TodoListChangedEvent;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.address.model.todo.Todo;
+import seedu.address.model.todo.UniqueTodoList;
+import seedu.address.model.todo.UniqueTodoList.TodoNotFoundException;
+>>>>>>> master:src/main/java/seedu/address/model/ModelManager.java
 
 /**
  * Represents the in-memory model of the todo list data.
@@ -137,6 +153,13 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTodoList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    //@@author A0163720M
+    @Override
+    public void updateFilteredTodoList(UniqueTagList tags) {
+        updateFilteredTodoList(new PredicateExpression(new NameQualifier(tags)));
+    }
+    //@@author
+
     private void updateFilteredTodoList(Expression expression) {
         filteredTodos.setPredicate(expression::satisfies);
     }
@@ -172,25 +195,58 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    //@@author A0163720M
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
+        private Set<Tag> tags;
+        private Set<String> tagKeyWords;
 
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
 
+        // In order for Java to overload the NameQualifier constructor
+        // the parameter cannot be of type Set so use UniqueTagList instead
+        NameQualifier(UniqueTagList tags) {
+            this.tags = tags.toSet();
+
+            // for simplicity sake, convert the Set<Tag> into Set<String> so that it can easily be filtered out
+            // similar to filtering out by name
+            this.tagKeyWords = new HashSet<String>();
+
+            for (Tag tag:tags) {
+                this.tagKeyWords.add(tag.tagName);
+            }
+        }
+
         @Override
         public boolean run(ReadOnlyTodo todo) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(todo.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+            if (nameKeyWords != null) {
+                String name = todo.getName().fullName;
+                return nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(name, keyword))
+                        .findAny()
+                        .isPresent();
+            } else {
+                String todoTags = todo.getTagsAsString();
+                return tagKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(todoTags, keyword))
+                        .findAny()
+                        .isPresent();
+            }
         }
 
+        /**
+         * Returns the tags or the name of the todo depending on which field is present
+         */
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            if (!tags.isEmpty()) {
+                return "tag=" + String.join(", ", tagKeyWords);
+            } else {
+                return "name=" + String.join(", ", nameKeyWords);
+            }
         }
     }
-
+    //@@author
 }

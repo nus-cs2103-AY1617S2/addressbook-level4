@@ -55,6 +55,7 @@ public class StorageManager extends ComponentManager implements Storage {
     private void indicateSaveFilePathChanged(String saveFilePath) {
         raise(new SaveFilePathChangedEvent(saveFilePath));
     }
+    //@@author
 
     @Override
     public String getTodoListFilePath() {
@@ -103,6 +104,7 @@ public class StorageManager extends ComponentManager implements Storage {
             throw new IOException(e);
         }
     }
+    //@@author
 
     @Override
     @Subscribe
@@ -121,4 +123,5 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleSaveFilePathChangedEvent(SaveFilePathChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Save file location changed"));
     }
+    //@@author
 }

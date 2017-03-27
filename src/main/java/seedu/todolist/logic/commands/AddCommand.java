@@ -36,8 +36,7 @@ public class AddCommand extends Command {
 
     //@@author A0163720M
     /**
-     * Creates an AddCommand using raw values.
-     * * Only adds floating task for now
+     * Creates an AddCommand using raw values to create a todo with start time and end time (event)
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
@@ -57,11 +56,11 @@ public class AddCommand extends Command {
                 StringUtil.parseDate(endTime, DATE_FORMAT),
                 new UniqueTagList(tagSet));
     }
+    //@@author
 
     //@@author A0163720M
     /**
-     * Creates an AddCommand using raw values.
-     * * Only adds floating task for now
+     * Creates an AddCommand using raw values to create a todo with just the end time (deadline)
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
@@ -79,7 +78,13 @@ public class AddCommand extends Command {
                 StringUtil.parseDate(endTime, DATE_FORMAT),
                 new UniqueTagList(tagSet));
     }
+    //@@author
 
+    /**
+     * Creates an AddCommand using raw values to create a floating task
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
     public AddCommand(String todo, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {

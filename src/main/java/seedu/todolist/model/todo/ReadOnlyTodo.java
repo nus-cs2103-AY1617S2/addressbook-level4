@@ -2,7 +2,12 @@ package seedu.todolist.model.todo;
 
 import java.util.Date;
 
+<<<<<<< HEAD:src/main/java/seedu/todolist/model/todo/ReadOnlyTodo.java
 import seedu.todolist.model.tag.UniqueTagList;
+=======
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+>>>>>>> master:src/main/java/seedu/address/model/todo/ReadOnlyTodo.java
 
 /**
  * A read-only immutable interface for a Todo in the addressbook.
@@ -34,6 +39,7 @@ public interface ReadOnlyTodo {
                 //&& other.getCompleteTime().equals(this.getCompleteTime()));
     }
 
+    //@@author A0163720M
     /**
      * Formats the todo as text, showing all todo details.
      */
@@ -58,8 +64,24 @@ public interface ReadOnlyTodo {
         }
 
         builder.append(" Tags: ");
+        builder.append(getTagsAsString());
 
-        getTags().forEach(builder::append);
         return builder.toString();
     }
+    //@@author
+
+    //@@author A0163720M
+    /**
+     *  Formats the todo's tags as a string
+     */
+    default String getTagsAsString() {
+        final StringBuilder builder = new StringBuilder();
+
+        for (Tag tag:getTags()) {
+            builder.append(tag.tagName + " ");
+        }
+
+        return builder.toString();
+    }
+    //@@author
 }
