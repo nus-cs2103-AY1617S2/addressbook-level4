@@ -271,8 +271,8 @@ public class ModelManager extends ComponentManager implements Model {
         private Optional<StartDate> startDate;
         private Optional<DueDate> dueDate;
         private Set<String> tags;
-        boolean startBy;
-        boolean dueBy;
+        private boolean startBy;
+        private boolean dueBy;
 
         NameQualifier(ArrayList<Object> listToCompare, boolean startBy, boolean dueBy) {
             this.nameKeyWords = (Set<String>) listToCompare.get(0);
