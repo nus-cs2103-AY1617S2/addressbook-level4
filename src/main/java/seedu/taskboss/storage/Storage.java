@@ -36,5 +36,5 @@ public interface Storage extends TaskBossStorage, UserPrefsStorage {
      */
     void handleTaskBossChangedEvent(TaskBossChangedEvent tbce);
 
-    void setFilePath(String filepath);
+    void setFilePath(String filepath) throws IOException;
 }

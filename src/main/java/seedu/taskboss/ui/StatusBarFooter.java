@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
+import seedu.taskboss.commons.events.storage.TaskBossStorageChangedEvent;
 import seedu.taskboss.commons.util.FxViewUtil;
 
 /**
@@ -31,7 +32,7 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
+        setSaveLocation(saveLocation);
         registerAsAnEventHandler(this);
     }
 
@@ -46,6 +47,11 @@ public class StatusBarFooter extends UiPart<Region> {
 
     private void setSyncStatus(String status) {
         this.syncStatus.setText(status);
+    }
+
+    @Subscribe
+    public void handleTaskBossStorageChangedEvent(TaskBossStorageChangedEvent newFilePath) {
+        setSaveLocation(newFilePath.newPath);
     }
 
     @Subscribe

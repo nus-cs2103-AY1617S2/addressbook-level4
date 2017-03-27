@@ -68,6 +68,9 @@ public interface Model {
     /** Undoes previous command of TaskBoss*/
     void undoTaskboss() throws EmptyStackException;
 
+    /** Save current state of TaskBoss*/
+    void saveTaskboss();
+
     /** Sorts the task list according to the provided sort type
      * @throws IllegalValueException */
     void sortTasks(SortBy sortType) throws IllegalValueException;

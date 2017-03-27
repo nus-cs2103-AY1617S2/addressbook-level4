@@ -219,19 +219,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidArgsFormat() throws IllegalValueException, InvalidDatesException {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add Valid Name p/Yes sd/today ed/tomorrow", expectedMessage);
-    }
-
-    @Test
     public void execute_add_invalidTaskData() throws IllegalValueException, InvalidDatesException {
         assertCommandFailure("add n/Valid Name! sd/today ed/tomorrow "
                 + "i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
-        assertCommandFailure("add n/Valid Name sd/today to next week ed/tomorrow i/valid, information",
+        assertCommandFailure("add Valid Name sd/today to next week ed/tomorrow i/valid, information",
                 DateTimeParser.getMultipleDatesError());
-        assertCommandFailure("add n/Valid Name sd/invalid date ed/tomorroq i/valid, information",
+        assertCommandFailure("add Valid Name sd/invalid date ed/tomorroq i/valid, information",
                 DateTime.MESSAGE_DATE_CONSTRAINTS);
     }
 
@@ -536,7 +530,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             //@@author A0144904H
-            cmd.append(" n/").append(p.getName().toString());
+            cmd.append(p.getName().toString());
             cmd.append(" p/").append(p.getPriorityLevel().input);
             cmd.append(" sd/").append(p.getStartDateTime().toString());
             cmd.append(" ed/").append(p.getEndDateTime().toString());

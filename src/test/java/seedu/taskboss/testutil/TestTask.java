@@ -101,7 +101,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         //@@author A0144904H
         sb.append("add");
-        sb.append(" n/" + this.getName().toString());
+        sb.append(this.getName().toString());
         sb.append(" p/" + this.getPriorityLevel().input);
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
@@ -115,7 +115,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         //@@author A0144904H
         sb.append("a");
-        sb.append(" n/" + this.getName().toString());
+        sb.append(this.getName().toString());
         sb.append(" p/" + this.getPriorityLevel().input);
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");

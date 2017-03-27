@@ -23,7 +23,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "n/Attend wedding tmr p/Yes sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
+        String detailsToEdit = "Attend wedding tmr p/Yes sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
                 + " Jurong West Ave 6, #08-111 c/friends";
         int taskBossIndex = 1;
 
@@ -39,7 +39,8 @@ public class EditCommandTest extends TaskBossGuiTest {
     @Test
     public void edit_allFieldsWithShortCommand_success() throws Exception {
 
-        String detailsToEdit = "n/Amanda p/No sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax";
+        String detailsToEdit = "Amanda p/No sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax";
+
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("no")
@@ -101,7 +102,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find k/Ensure");
 
-        String detailsToEdit = "n/Code quality";
+        String detailsToEdit = "Code quality";
         int filteredTaskListIndex = 1;
         int taskBossIndex = 2;
 
@@ -113,13 +114,13 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_missingTaskIndex_failure() {
-        commandBox.runCommand("edit n/Bobby");
+        commandBox.runCommand("edit Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidTaskIndex_failure() {
-        commandBox.runCommand("edit 8 n/Bobby");
+        commandBox.runCommand("edit 8 Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -140,7 +141,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 1 n/Attend wedding p/Yes sd/Feb 18, 2017 5pm 5pm ed/Mar 28, 2017 5pm"
+        commandBox.runCommand("edit 1 Attend wedding p/Yes sd/Feb 18, 2017 5pm 5pm ed/Mar 28, 2017 5pm"
                                 + "i/123, Jurong West Ave 6, #08-111 c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
