@@ -157,10 +157,12 @@ public class EditCommandParser {
 
             if (group == null || group.size() > 1 || (!group.get(0).getText()
                     .equals(datesString.get(i))
-                    && !group.get(0).getText().equals(
+                    && (!group.get(0).getText().equals(
                             ParserUtil.correctDateFormat(datesString.get(i))
                                     + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
-                                            : CliSyntax.DEFAULT_DEADLINE)))) {
+                                            : CliSyntax.DEFAULT_DEADLINE))
+                            && !group.get(0).getText().equals(ParserUtil
+                                    .correctDateFormat(datesString.get(i)))))) {
                 args = tmpArgs;
                 return null;
             } else {
