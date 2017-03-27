@@ -61,7 +61,7 @@ public class DeleteCommandTest extends TaskBossGuiTest {
         //confirm the result message is correct
         ArrayList<TestTask> deletedTasks = new ArrayList<TestTask>();
         deletedTasks.add(taskToDelete);
-        assertResultMessage(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, deletedTasks));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTasks));
     }
 
 }
