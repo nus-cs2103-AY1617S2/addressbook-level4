@@ -8,6 +8,12 @@ import javafx.collections.ObservableList;
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.exceptions.DuplicateDataException;
 import seedu.opus.commons.util.CollectionUtil;
+import seedu.opus.logic.commands.SortCommand;
+import seedu.opus.model.comparators.EndTimeComparator;
+import seedu.opus.model.comparators.PriorityComparator;
+import seedu.opus.model.comparators.StartTimeComparator;
+import seedu.opus.model.comparators.StatusComparator;
+import seedu.opus.model.comparators.TaskComparator;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -40,7 +46,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
-        FXCollections.sort(internalList, new EndTimeComparator());
+        FXCollections.sort(internalList, new TaskComparator());
     }
 
     /**
@@ -97,10 +103,19 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public UnmodifiableObservableList<Task> asSortedList(String keyword) {
         switch (keyword) {
-        case "priority":
+        case SortCommand.ALL:
+            FXCollections.sort(internalList, new TaskComparator());
+            break;
+        case SortCommand.STATUS:
+            FXCollections.sort(internalList, new StatusComparator());
+            break;
+        case SortCommand.PRIORITY:
             FXCollections.sort(internalList, new PriorityComparator());
             break;
-        case "deadline":
+        case SortCommand.STARTTIME:
+            FXCollections.sort(internalList, new StartTimeComparator());
+            break;
+        case SortCommand.ENDTIME:
             FXCollections.sort(internalList, new EndTimeComparator());
             break;
         default:

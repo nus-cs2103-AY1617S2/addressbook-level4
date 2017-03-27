@@ -258,13 +258,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void executeSortTasksByDeadline() throws Exception {
+    public void executeSortTasksByStartTime() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithDeadline("02/01/2017 00:00");
-        Task p2 = helper.generateTaskWithDeadline("02/01/2017 23:59");
-        Task p3 = helper.generateTaskWithDeadline("03/01/2017 00:00");
-        Task p4 = helper.generateTaskWithDeadline("03/02/2017 00:00");
-        Task p5 = helper.generateTaskWithDeadline("03/02/2018 00:00");
+        Task p1 = helper.generateTaskWithStartTime("02/01/2017 00:00");
+        Task p2 = helper.generateTaskWithStartTime("02/01/2017 23:59");
+        Task p3 = helper.generateTaskWithStartTime("03/01/2017 00:00");
+        Task p4 = helper.generateTaskWithStartTime("03/02/2017 00:00");
+        Task p5 = helper.generateTaskWithStartTime("03/02/2018 00:00");
 
         List<Task> fiveTasks = helper.generateTaskList(p1, p2, p3, p4, p5);
         TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
@@ -276,8 +276,33 @@ public class LogicManagerTest {
         model.addTask(p1);
         model.addTask(p4);
 
-        assertCommandSuccess("sort deadline",
-                SortCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess("sort end",
+                SortCommand.MESSAGE_SUCCESS + "end",
+                expectedTaskManager,
+                fiveTasks);
+    }
+
+    @Test
+    public void executeSortTasksByEndTime() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithEndTime("02/01/2017 00:00");
+        Task p2 = helper.generateTaskWithEndTime("02/01/2017 23:59");
+        Task p3 = helper.generateTaskWithEndTime("03/01/2017 00:00");
+        Task p4 = helper.generateTaskWithEndTime("03/02/2017 00:00");
+        Task p5 = helper.generateTaskWithEndTime("03/02/2018 00:00");
+
+        List<Task> fiveTasks = helper.generateTaskList(p1, p2, p3, p4, p5);
+        TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
+
+        model.resetData(new TaskManager());
+        model.addTask(p2);
+        model.addTask(p3);
+        model.addTask(p5);
+        model.addTask(p1);
+        model.addTask(p4);
+
+        assertCommandSuccess("sort end",
+                SortCommand.MESSAGE_SUCCESS + "end",
                 expectedTaskManager,
                 fiveTasks);
     }
@@ -298,9 +323,34 @@ public class LogicManagerTest {
         model.addTask(p1);
 
         assertCommandSuccess("sort priority",
-                SortCommand.MESSAGE_SUCCESS,
+                SortCommand.MESSAGE_SUCCESS + "priority",
                 expectedTaskManager,
                 threeTasks);
+    }
+
+    @Test
+    public void executeSortTasksByStatus() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithStatus("incomplete");
+        Task p2 = helper.generateTaskWithStatus("complete");
+
+        List<Task> twoTasks = helper.generateTaskList(p1, p2);
+        TaskManager expectedTaskManager = helper.generateTaskManager(twoTasks);
+
+        model.resetData(new TaskManager());
+        model.addTask(p2);
+        model.addTask(p1);
+
+        assertCommandSuccess("sort status",
+                SortCommand.MESSAGE_SUCCESS + "status",
+                expectedTaskManager,
+                twoTasks);
+    }
+
+    @Test
+    public void executeSortInvalidArgsFormat() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        assertCommandFailure("sort ", expectedMessage);
     }
 
     /**
@@ -365,7 +415,6 @@ public class LogicManagerTest {
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
 
-
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -395,17 +444,18 @@ public class LogicManagerTest {
     @Test
     public void executeMarkCompleteTest() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
+        Task p1 = helper.generateTaskWithStatus("incomplete");
+        List<Task> oneTask = helper.generateTaskList(p1);
 
-        TaskManager expectedTaskManager = helper.generateTaskManager(threeTasks);
-        Task editedTask = threeTasks.get(0);
+        TaskManager expectedTaskManager = helper.generateTaskManager(oneTask);
+        Task editedTask = oneTask.get(0);
         editedTask.setStatus(new Status("complete"));
 
         expectedTaskManager.updateTask(0, editedTask);
-        helper.addToModel(model, threeTasks);
+        helper.addToModel(model, oneTask);
 
         assertCommandSuccess("mark 1",
-                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, threeTasks.get(0)),
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, oneTask.get(0)),
                 expectedTaskManager,
                 expectedTaskManager.getTaskList());
     }
@@ -746,9 +796,24 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given end date. Other fields will have some dummy values.
+         * Generates a Task object with given end time. Other fields will have some dummy values.
          */
-        private Task generateTaskWithDeadline(String endTime) throws Exception {
+        private Task generateTaskWithStartTime(String startTime) throws Exception {
+            return new Task(
+                    new Name("Finish assignment"),
+                    new Priority("hi"),
+                    new Status("incomplete"),
+                    new Note("House of 1"),
+                    new DateTime(startTime),
+                    new DateTime("02/02/2017 00:00"),
+                    new UniqueTagList(new Tag("tag"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given end time. Other fields will have some dummy values.
+         */
+        private Task generateTaskWithEndTime(String endTime) throws Exception {
             return new Task(
                     new Name("Finish assignment"),
                     new Priority("hi"),
@@ -761,13 +826,28 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given end date. Other fields will have some dummy values.
+         * Generates a Task object with given priority. Other fields will have some dummy values.
          */
         private Task generateTaskWithPriority(String priority) throws Exception {
             return new Task(
                     new Name("Finish assignment"),
                     new Priority(priority),
                     new Status("incomplete"),
+                    new Note("House of 1"),
+                    new DateTime("01/01/2017 00:00"),
+                    new DateTime("01/01/2017 23:59"),
+                    new UniqueTagList(new Tag("tag"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given status. Other fields will have some dummy values.
+         */
+        private Task generateTaskWithStatus(String status) throws Exception {
+            return new Task(
+                    new Name("Finish assignment"),
+                    new Priority("hi"),
+                    new Status(status),
                     new Note("House of 1"),
                     new DateTime("01/01/2017 00:00"),
                     new DateTime("01/01/2017 23:59"),

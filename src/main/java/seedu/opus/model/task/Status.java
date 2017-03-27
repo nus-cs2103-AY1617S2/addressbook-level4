@@ -61,6 +61,13 @@ public class Status {
         return test.equals(STATUS_COMPLETE) || test.equals(STATUS_INCOMPLETE);
     }
 
+    /**
+     * @return the current value of status
+     */
+    public Flag getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return value.toString();
