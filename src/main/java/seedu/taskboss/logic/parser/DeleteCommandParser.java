@@ -2,6 +2,7 @@ package seedu.taskboss.logic.parser;
 
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,12 +23,12 @@ public class DeleteCommandParser {
 
         Set<Integer> index = parseIndex(args);
 
-        if (!index.isPresent()) {
+        if (index.isEmpty()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        return new DeleteCommand(index.get());
+        return new DeleteCommand(index);
     }
 
     private Set<Integer> parseIndex(String indexList) {
