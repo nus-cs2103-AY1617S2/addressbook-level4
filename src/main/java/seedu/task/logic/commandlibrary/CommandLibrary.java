@@ -45,49 +45,10 @@ public class CommandLibrary {
 
     private static CommandLibrary instance = null;
     private static HashMap<String, CommandParser> commandParserTable;
-    private static commandKeyParserPair[] commandKeyParserPairs;
+//    private static commandKeyParserPair[] commandKeyParserPairs;
     
     protected CommandLibrary() {
-//        commandKeyParserPairs = new commandKeyParserPair[]{new commandKeyParserPair(AddCommand.COMMAND_WORD_1, new AddCommandParser()),
-//                new commandKeyParserPair(ClearCommand.COMMAND_WORD_1,new ClearCommandParser()),
-//                new commandKeyParserPair(DeleteCommand.COMMAND_WORD_1, new DeleteCommandParser()),
-//                new commandKeyParserPair(DoneCommand.COMMAND_WORD_1, new EditIsDoneCommandParser()),
-//                new commandKeyParserPair(DoneCommand.COMMAND_WORD_2, new EditIsDoneCommandParser()),
-//                new commandKeyParserPair(EditCommand.COMMAND_WORD_1, new EditCommandParser()),
-//                new commandKeyParserPair(ExitCommand.COMMAND_WORD_1, new ExitCommandParser()),
-//                new commandKeyParserPair(FindCommand.COMMAND_WORD_1, new FindCommandParser()),
-//                new commandKeyParserPair(FindCommand.COMMAND_WORD_2, new FindCommandParser()),
-//                new commandKeyParserPair(FindExactCommand.COMMAND_WORD_1, new FindExactCommandParser()),
-//                new commandKeyParserPair(FindExactCommand.COMMAND_WORD_2, new FindExactCommandParser()),
-//                new commandKeyParserPair(FindExactCommand.COMMAND_WORD_3, new FindExactCommandParser()),
-//                new commandKeyParserPair(FindExactCommand.COMMAND_WORD_4, new FindExactCommandParser()),
-//                new commandKeyParserPair(HelpCommand.COMMAND_WORD_1, new HelpCommandParser()),
-//                new commandKeyParserPair(HelpCommand.COMMAND_WORD_2, new HelpCommandParser()),
-//                new commandKeyParserPair(HelpFormatCommand.COMMAND_WORD_1,new HelpFormatCommandParser()),
-//                new commandKeyParserPair(HelpFormatCommand.COMMAND_WORD_2,new HelpFormatCommandParser()),
-//                new commandKeyParserPair(HelpFormatCommand.COMMAND_WORD_3,new HelpFormatCommandParser()),
-//                new commandKeyParserPair(HelpFormatCommand.COMMAND_WORD_4,new HelpFormatCommandParser()),
-//                new commandKeyParserPair(ListByDoneCommand.COMMAND_WORD_1, new ListByDoneCommandParser()),
-//                new commandKeyParserPair(ListByDoneCommand.COMMAND_WORD_2, new ListByDoneCommandParser()),
-//                new commandKeyParserPair(ListByNotDoneCommand.COMMAND_WORD_1, new ListByNotDoneCommandParser()),
-//                new commandKeyParserPair(ListByNotDoneCommand.COMMAND_WORD_2, new ListByNotDoneCommandParser()),
-//                new commandKeyParserPair(ListByNotDoneCommand.COMMAND_WORD_3, new ListByNotDoneCommandParser()),
-//                new commandKeyParserPair(ListByTagCommand.COMMAND_WORD_1, new ListByTagCommandParser()),
-//                new commandKeyParserPair(ListByTagCommand.COMMAND_WORD_2, new ListByTagCommandParser()),
-//                new commandKeyParserPair(ListByTagCommand.COMMAND_WORD_3, new ListByTagCommandParser()),
-//                new commandKeyParserPair(ListByTagCommand.COMMAND_WORD_4, new ListByTagCommandParser()),
-//                new commandKeyParserPair(ListCommand.COMMAND_WORD_1, new ListCommandParser()),
-//                new commandKeyParserPair(ListCommand.COMMAND_WORD_2, new ListCommandParser()),
-//                new commandKeyParserPair(ListCommand.COMMAND_WORD_3, new ListCommandParser()),
-//                new commandKeyParserPair(LoadCommand.COMMAND_WORD_1, new LoadCommandParser()),
-//                new commandKeyParserPair(SaveCommand.COMMAND_WORD_1, new SaveCommandParser()),
-//                new commandKeyParserPair(UndoCommand.COMMAND_WORD_1, new UndoCommandParser()),
-//                new commandKeyParserPair(UndoCommand.COMMAND_WORD_2, new UndoCommandParser()),
-//                new commandKeyParserPair(UnDoneCommand.COMMAND_WORD_1, new EditUnDoneCommandParser()),
-//                new commandKeyParserPair(UnDoneCommand.COMMAND_WORD_2, new EditUnDoneCommandParser()),
-//        };
         init();
-        
     }
 
     public static CommandLibrary getInstance() {
@@ -162,7 +123,6 @@ public class CommandLibrary {
 //            commandParserTable.put(pair.getKey(), pair.getParser());
 //        }
     }
-
     /**
      * 
      * @param commandWord
@@ -172,32 +132,20 @@ public class CommandLibrary {
     public Command getCorrectCommand(String commandWord, String arguments){
         return  commandParserTable.get(commandWord).parse(arguments);
     }
-    
-    protected class commandKeyParserPair{
-        private String commandKey;
-        private CommandParser commandParser;
-        
-        protected commandKeyParserPair(String commandKey, CommandParser commandParser){
-            this.commandKey = commandKey;
-            this.commandParser =(CommandParser) commandParser;
-        }
-        
-        public String getKey(){
-            return this.commandKey;
-        }
-        public CommandParser getParser(){
-            return this.commandParser;
-        }
-    }
-
-//    public CommandParser getCommandParser()
-//            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-//        String commonPackage = "seedu.task.logic.parser";
-//        // String addCommandParser = "AddCommandParser";
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append(commonPackage).append(commandWordTable.get("add"));
-//
-//        Class<?> unknownParser = Class.forName(stringBuilder.toString());
-//        return (CommandParser) unknownParser.newInstance();
+//    protected class commandKeyParserPair{
+//        private String commandKey;
+//        private CommandParser commandParser;
+//        
+//        protected commandKeyParserPair(String commandKey, CommandParser commandParser){
+//            this.commandKey = commandKey;
+//            this.commandParser =(CommandParser) commandParser;
+//        }
+//        
+//        public String getKey(){
+//            return this.commandKey;
+//        }
+//        public CommandParser getParser(){
+//            return this.commandParser;
+//        }
 //    }
 }
