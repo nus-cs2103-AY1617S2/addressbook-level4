@@ -15,6 +15,7 @@ import seedu.doist.commons.core.GuiSettings;
 import seedu.doist.commons.events.ui.ExitAppRequestEvent;
 import seedu.doist.commons.util.FxViewUtil;
 import seedu.doist.logic.Logic;
+import seedu.doist.model.Model;
 import seedu.doist.model.UserPrefs;
 import seedu.doist.model.task.ReadOnlyTask;
 
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Region> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
 
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
@@ -60,13 +62,14 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Model model) {
         super(FXML);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.config = config;
+        this.model = model;
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -126,7 +129,7 @@ public class MainWindow extends UiPart<Region> {
         personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+        new CommandBox(getCommandBoxPlaceholder(), logic, model);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
