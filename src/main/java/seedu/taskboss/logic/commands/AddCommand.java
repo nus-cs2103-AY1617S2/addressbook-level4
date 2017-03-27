@@ -44,7 +44,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
     //@@author A0144904H
-    public static final String DEFAULT_All_TASKS = "AllTasks";
+    public static final String DEFAULT_ALL_TASKS = "AllTasks";
     public static final String DEFAULT_DONE = "Done";
     public static final String ERROR_CANNOT_ADD_DONE_CATEGORY = "Cannot add Done category";
 
@@ -106,7 +106,7 @@ public class AddCommand extends Command {
      */
     private void categoriesSetUp(Set<String> categories, final Set<Category> categorySet)
             throws IllegalValueException, DefaultCategoryException {
-        categorySet.add(new Category(DEFAULT_All_TASKS));
+        categorySet.add(new Category(DEFAULT_ALL_TASKS));
         if (categories.contains(DEFAULT_DONE)) {
             throw new DefaultCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
         }

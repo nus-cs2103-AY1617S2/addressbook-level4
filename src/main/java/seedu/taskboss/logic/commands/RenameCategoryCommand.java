@@ -53,13 +53,13 @@ public class RenameCategoryCommand extends Command {
         Category newCategory = new Category(this.newCategory);
 
         try {
-            if (oldCategory.equals(new Category(AddCommand.DEFAULT_All_TASKS))) {
+            if (oldCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
                 throw new DefaultCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
             } else if (oldCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
                 throw new DefaultCategoryException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
             } else if (newCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
                 throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
-            } else if (newCategory.equals(new Category(AddCommand.DEFAULT_All_TASKS))) {
+            } else if (newCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
                 throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
             } else {
                 try {
