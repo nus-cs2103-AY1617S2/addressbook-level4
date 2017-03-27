@@ -63,18 +63,20 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask;
-        try {
-            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-        } catch (IllegalValueException e) {
-            throw new CommandException(e.getMessage());
-        }
+        if (editTaskDescriptor.isAnyFieldEdited()) {
+            try {
+                editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            } catch (IllegalValueException e) {
+                throw new CommandException(e.getMessage());
+            }
 
-        try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            try {
+                model.updateTask(filteredTaskListIndex, editedTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+            model.updateFilteredListToShowAll();
         }
-        model.updateFilteredListToShowAll();
         return new CommandResult(
                 String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
