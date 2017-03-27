@@ -57,12 +57,12 @@ public class TypicalTestTasks {
             taskI = new TaskBuilder().withName("Invite friends home").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2019 5pm")
                     .withEndDateTime("Feb 28, 2019 5pm")
-                    .withInformation("chicago ave").build();
+                    .withInformation("chicago ave")
                     .withCategories(AddCommand.DEFAULT).build();
             taskJ = new TaskBuilder().withName("Join Leader Group").withPriorityLevel("Yes")
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
-                    .withInformation("Silicon Valley").build();
+                    .withInformation("Silicon Valley")
                     .withCategories(AddCommand.DEFAULT).build();
             taskK = new TaskBuilder().withName("Kelvin Koo party").withPriorityLevel("Yes")
                     .withStartDateTime("Dec 20 2019")
