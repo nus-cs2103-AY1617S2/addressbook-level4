@@ -293,7 +293,8 @@ public class ModelManager extends ComponentManager implements Model {
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
                     && comparePriority(task.getPriority())
-                    && ((!startBy && compareStartDate(task.getStartDate())) || (startBy && compareByStart(task.getStartDate())))
+                    && ((!startBy && compareStartDate(task.getStartDate()))
+                            || (startBy && compareByStart(task.getStartDate())))
                     && ((!dueBy && compareDueDate(task.getDueDate())) || (dueBy && compareByDue(task.getDueDate())))
                     && (taskTagStringSet.containsAll(tags));
 
@@ -330,8 +331,8 @@ public class ModelManager extends ComponentManager implements Model {
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
             return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
-                    || (taskStartDateExist
-                            && taskStartDateString.substring(0, 10).equals(startDate.get().toString().substring(0, 10))));
+                    || (taskStartDateExist && taskStartDateString.substring(0, 10).equals
+                       (startDate.get().toString().substring(0, 10))));
         }
 
         private boolean compareDueDate(TaskDate taskDueDate) {
@@ -340,8 +341,8 @@ public class ModelManager extends ComponentManager implements Model {
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
             return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
-                    || (taskDueDateExist
-                            && taskDueDateString.substring(0, 10).equals(dueDate.get().toString().substring(0, 10))));
+                    || (taskDueDateExist && taskDueDateString.substring(0, 10).equals
+                       (dueDate.get().toString().substring(0, 10))));
         }
 
         private boolean compareByStart(TaskDate taskStartDate) {
@@ -361,19 +362,19 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         private boolean comesBefore(String givenDate, String taskDate) {
- 
-            int givenDD = Integer.parseInt(givenDate.substring(0,2));
-            int givenMM = Integer.parseInt(givenDate.substring(3,5));
-            int givenYYYY = Integer.parseInt(givenDate.substring(6,10));
 
-            int taskDD = Integer.parseInt(taskDate.substring(0,2));
-            int taskMM = Integer.parseInt(taskDate.substring(3,5));
-            int taskYYYY = Integer.parseInt(taskDate.substring(6,10));
+            int givenDD = Integer.parseInt(givenDate.substring(0, 2));
+            int givenMM = Integer.parseInt(givenDate.substring(3, 5));
+            int givenYYYY = Integer.parseInt(givenDate.substring(6, 10));
+
+            int taskDD = Integer.parseInt(taskDate.substring(0, 2));
+            int taskMM = Integer.parseInt(taskDate.substring(3, 5));
+            int taskYYYY = Integer.parseInt(taskDate.substring(6, 10));
 
             return (taskYYYY < givenYYYY) 
                    || ((taskYYYY == givenYYYY) && (taskMM < givenMM))
-                   || ((taskYYYY == givenYYYY) && (taskMM == givenMM) && (taskDD <= givenMM));
-                   
+                   || ((taskYYYY == givenYYYY) && (taskMM == givenMM) && (taskDD <= givenDD));
+
         }
 
     }
