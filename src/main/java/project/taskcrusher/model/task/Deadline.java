@@ -43,13 +43,13 @@ public class Deadline {
      * @param deadline
      * @throws IllegalValueException
      */
-    public Deadline(String deadline, boolean isNew) throws IllegalValueException {
+    public Deadline(String deadline, boolean filterOverdue) throws IllegalValueException {
         assert deadline != null;
 
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtil.dateAsString(DateUtil.parseDate(deadline, isNew));
+            this.deadline = DateUtil.dateAsString(DateUtil.parseDate(deadline, filterOverdue));
         }
 
     }
@@ -93,61 +93,6 @@ public class Deadline {
             return deadlineAsDate;
         }
     }
-
-//    /**
-//     * Checks whether a deadline is valid
-//     *
-//     * @param deadlineToCheck
-//     * @return true if deadline exists and is on or after time of checking,
-//     *         false if no deadline, multiple deadlines or deadline is before
-//     *         time of checking
-//     */
-//    private static boolean isValidDeadline(String deadlineToCheck) {
-//        assert deadlineToCheck != null;
-//
-//        Date parsed = DateUtil.parseDate(deadlineToCheck);
-//
-//        if (!DateUtil.hasPassed(parsed)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//
-//    }
-//
-//    /**
-//     * Checks whether a deadline is valid
-//     *
-//     * @param deadlineToCheck
-//     * @return true if deadline exists and is on or after time of checking,
-//     *         false if no deadline, multiple deadlines or deadline is before
-//     *         time of checking
-//     */
-//    public static boolean isValidDeadline(String deadlineToCheck, boolean isNew) {
-//        assert deadlineToCheck != null;
-//        if (!isNew) {
-//            return true;
-//        } else if (deadlineToCheck.equals(NO_DEADLINE)) {
-//            return true;
-//        }
-//        Date rightNow = new Date();
-//        PrettyTimeParser dateParser = new PrettyTimeParser();
-//        List<Date> parsedDeadline = dateParser.parse(deadlineToCheck);
-//
-//        // //TODO replace parsing with set deadlines to avoid ambiguity/multiple
-//        // deadlines
-//        // if (parsedDeadline.size() != 1) {
-//        // return false;
-//        // }
-//
-//        Date deadline = parsedDeadline.get(0);
-//
-//        if (!deadline.before(rightNow)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 
     public boolean hasDeadline() {
         return !deadline.equals(NO_DEADLINE);

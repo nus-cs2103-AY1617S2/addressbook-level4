@@ -15,6 +15,7 @@ import project.taskcrusher.model.tag.UniqueTagList;
 public class Task extends UserToDo implements ReadOnlyTask {
 
     private Deadline deadline;
+    private boolean isOverdue;
 
     /**
      * Modified for Task.
@@ -23,6 +24,7 @@ public class Task extends UserToDo implements ReadOnlyTask {
         super(name, priority, description, tags);
         assert deadline != null;
         this.deadline = deadline;
+        this.isOverdue = false;
     }
 
     /**
@@ -45,6 +47,16 @@ public class Task extends UserToDo implements ReadOnlyTask {
 
     public boolean hasDeadline() {
         return this.deadline.hasDeadline();
+    }
+
+    public boolean isOverdue() {
+        return this.isOverdue;
+    }
+
+    @Override
+    public void markComplete() {
+        super.markComplete();
+        isOverdue = false;
     }
 
     /**
@@ -89,7 +101,9 @@ public class Task extends UserToDo implements ReadOnlyTask {
             return -1;
         }
 
-        if (!this.getDeadline().hasDeadline() && another.getDeadline().hasDeadline()) {
+        if (!this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
+            return this.getPriority().compareTo(another.getPriority());
+        } else if (!this.getDeadline().hasDeadline() && another.getDeadline().hasDeadline()) {
             return 1;
         } else if (this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
             return -1;

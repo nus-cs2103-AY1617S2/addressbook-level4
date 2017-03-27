@@ -11,8 +11,6 @@ public interface ReadOnlyTask extends ReadOnlyUserToDo, Comparable<ReadOnlyTask>
 
     Deadline getDeadline();
 
-    public int compareTo(ReadOnlyTask another);
-
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals).
      * Does not check for priority equality

@@ -1,6 +1,5 @@
 package project.taskcrusher.model;
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -71,7 +70,8 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
-    private void indicateIfEventListToShowIsEmpty() {
+    private void prepareEventListForUi() {
+        sortFilteredEventListByTimeslot();
         if (filteredEvents.isEmpty()) {
             raise(new EventListToShowUpdatedEvent(LIST_EMPTY));
         } else {
@@ -79,7 +79,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private void indicateIfTaskListToShowIsEmpty() {
+    private void prepareTaskListForUi() {
+        sortFilteredTaskListByDeadline();
         if (filteredTasks.isEmpty()) {
             raise(new TaskListToShowUpdatedEvent(LIST_EMPTY));
         } else {
@@ -145,13 +146,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        sortFilteredTaskListByDeadline();
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredTaskListToShowAll() {
         filteredTasks.setPredicate(null);
-        indicateIfTaskListToShowIsEmpty();
+        prepareTaskListForUi();
     }
 
     @Override
@@ -166,10 +168,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
-        indicateIfTaskListToShowIsEmpty();
+        prepareTaskListForUi();
     }
 
-    private void sortFilteredTaskListByDeadline () {
+    private void sortFilteredTaskListByDeadline() {
         filteredTasks.sorted();
     }
 
@@ -183,7 +185,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredEventListToShowAll() {
         filteredEvents.setPredicate(null);
-        indicateIfEventListToShowIsEmpty();
+        prepareEventListForUi();
     }
 
     @Override
@@ -198,7 +200,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
-        indicateIfEventListToShowIsEmpty();
+        prepareEventListForUi();
+    }
+
+    private void sortFilteredEventListByTimeslot() {
+        filteredEvents.sorted();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -306,14 +312,6 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "user-interested timeslot is " + userInterestedTimeslot.toString();
-        }
-    }
-
-    public class PriorityComparator implements Comparator<ReadOnlyTask> {
-        public int compare(ReadOnlyTask first, ReadOnlyTask second) {
-            String firstPriority = first.getPriority().priority;
-            String secondPriority = second.getPriority().priority;
-            return firstPriority.compareTo(secondPriority);
         }
     }
 }

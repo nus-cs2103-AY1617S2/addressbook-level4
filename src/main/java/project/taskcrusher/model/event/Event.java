@@ -1,5 +1,6 @@
 package project.taskcrusher.model.event;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +13,7 @@ import project.taskcrusher.model.tag.UniqueTagList;
 public class Event extends UserToDo implements ReadOnlyEvent {
     private List<Timeslot> timeslots;
     private Location location;
-    private boolean isPast;
+    private boolean isOverdue;
 
     public Event(Name name, List<Timeslot> timeslots, Location location,
             Description description, UniqueTagList tags) {
@@ -22,7 +23,15 @@ public class Event extends UserToDo implements ReadOnlyEvent {
 
         this.timeslots = timeslots;
         this.location = location;
-        this.isPast = false;
+        this.isOverdue = false;
+    }
+
+    /**
+     * Creates a copy of the given ReadOnlyEvent.
+     */
+    public Event(ReadOnlyEvent source) {
+        this(source.getName(), source.getTimeslots(), source.getLocation(),
+                source.getDescription(), source.getTags());
     }
 
     /**Checks if any of the Timeslot object in the timeslots list has overlapping start and end date with
@@ -38,14 +47,6 @@ public class Event extends UserToDo implements ReadOnlyEvent {
             }
         }
         return false;
-    }
-
-    /**
-     * Creates a copy of the given ReadOnlyEvent.
-     */
-    public Event(ReadOnlyEvent source) {
-        this(source.getName(), source.getTimeslots(), source.getLocation(),
-                source.getDescription(), source.getTags());
     }
 
     public List<Timeslot> getTimeslots() {
@@ -67,11 +68,11 @@ public class Event extends UserToDo implements ReadOnlyEvent {
     }
 
     public void setOverdue(boolean toSet) {
-        isPast = toSet;
+        isOverdue = toSet;
     }
 
-    public boolean isPast() {
-        return this.isPast;
+    public boolean isOverdue() {
+        return this.isOverdue;
     }
 
     public void resetData(ReadOnlyEvent replacement) {
@@ -100,6 +101,24 @@ public class Event extends UserToDo implements ReadOnlyEvent {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public int compareTo(ReadOnlyEvent another) {
+        if (this.isComplete) {
+            if (another.isComplete()) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else if (another.isComplete()) {
+            return -1;
+        }
+        //TODO: just for now
+        Date thisEarliestSlot = this.timeslots.get(0).start;
+        Date anotherEarliestSlot = another.getTimeslots().get(0).start;
+
+        return thisEarliestSlot.compareTo(anotherEarliestSlot);
     }
 
 }
