@@ -56,8 +56,6 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         comment.setText(task.getComment().value);
-        priority.setText(task.getPriority().value.toUpperCase());
-        priority.setTranslateX(20);
         initTags(task);
         setPriority(task);
         setDate(task);
@@ -83,10 +81,12 @@ public class TaskCard extends UiPart<Region> {
         case Priority.PRIORITY_LOW:
             priority.setStyle("-fx-text-fill: #33cc33; -fx-border-color: #33cc33; -fx-padding: 2px");
             break;
-
         case Priority.PRIORITY_NIL:
-            priority.setVisible(false);;
+            priority.setVisible(false);
+            break;
         }
+        priority.setText(priorityLevel.toUpperCase());
+        priority.setTranslateX(20);
     }
 
     /*
