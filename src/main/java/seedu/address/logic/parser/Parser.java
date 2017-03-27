@@ -25,6 +25,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -64,6 +65,9 @@ public class Parser {
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments, logicManager);
+
+        case TodayCommand.COMMAND_WORD:
+            return new TodayCommandParser().parse(arguments, logicManager);
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments, logicManager);

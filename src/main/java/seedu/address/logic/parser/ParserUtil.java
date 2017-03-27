@@ -92,9 +92,14 @@ public class ParserUtil {
      */
     public static String correctDateFormat(String original) {
         assert original != null;
+        original = original.trim();
         Pattern pattern = Pattern.compile(
                 "(?<=^|\\s)(\\d{1,2})(-|/)(\\d{1,2})(-|/)(\\d{4})(?=$|\\s)");
         Matcher matcher = pattern.matcher(original);
-        return matcher.replaceAll("$3/$1/$5");
+        original = matcher.replaceAll("$3/$1/$5");
+        if (original.endsWith(" later") || original.endsWith(" ago")) {
+            original = original.substring(0, original.lastIndexOf(" "));
+        }
+        return original;
     }
 }
