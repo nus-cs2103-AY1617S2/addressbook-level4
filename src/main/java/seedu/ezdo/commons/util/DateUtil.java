@@ -28,7 +28,7 @@ public class DateUtil {
      * @return an int representing the comparison result of the two date strings.
      * @throws ParseException if any of the date strings cannot be parsed.
      */
-    public static int compareDateStrings(String dateString1, String dateString2) {
+    public static int compareDateStrings(String dateString1, String dateString2, Boolean isSortedAscending) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date date1 = null;
         Date date2 = null;
@@ -48,7 +48,7 @@ public class DateUtil {
         } catch (ParseException pe) {
             assert false : "The date format should not be invalid.";
         }
-
-        return date1.compareTo(date2);
+        int result = date1.compareTo(date2);
+        return isSortedAscending ? result : -result;
     }
 }

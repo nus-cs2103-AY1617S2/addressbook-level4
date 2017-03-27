@@ -2,8 +2,6 @@ package seedu.ezdo.model;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
-import java.util.Optional;
-import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.exceptions.DateException;
@@ -27,7 +25,7 @@ public interface Model {
     /** Returns the UserPrefs */
     UserPrefs getUserPrefs();
 
-    void sortTasks(SortCriteria sortCriteria);
+    void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending);
 
     /** Deletes the given task. */
     void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException;
@@ -74,8 +72,7 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by multiple fields*/
-    void updateFilteredTaskList(Set<String> keywords, Optional toMatch1,
-            Optional toMatch2, Optional toMatch3, Set<String> toMatchTag);
+    void updateFilteredTaskList(ArrayList<Object> listToCompare, boolean searchByStartDate, boolean searchByDueDate);
 
     /** Updates the filter of the filtered task list to show done tasks*/
     void updateFilteredDoneList();

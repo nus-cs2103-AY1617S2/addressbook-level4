@@ -13,6 +13,7 @@ import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
+import seedu.ezdo.commons.events.model.IsSortedAscendingChangedEvent;
 import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
@@ -24,6 +25,7 @@ import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
@@ -41,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final UserPrefs userPrefs;
 
     private SortCriteria currentSortCriteria;
+    private Boolean currentIsSortedAscending;
 
     private final FixedStack<ReadOnlyEzDo> undoStack;
     private final FixedStack<ReadOnlyEzDo> redoStack;
@@ -58,6 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.userPrefs = userPrefs;
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
         currentSortCriteria = userPrefs.getSortCriteria();
+        currentIsSortedAscending = userPrefs.getIsSortedAscending();
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         redoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         updateFilteredListToShowAll();
@@ -102,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
         checkTaskDate(task);
         updateStacks();
         ezDo.addTask(task);
-        ezDo.sortTasks(currentSortCriteria);
+        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
@@ -123,7 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateStacks();
         int ezDoIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         ezDo.updateTask(ezDoIndex, editedTask);
-        ezDo.sortTasks(currentSortCriteria);
+        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         indicateEzDoChanged();
     }
 
@@ -173,10 +177,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority, Optional optionalStartDate,
-            Optional optionalDueDate, Set<String> findTag) {
-        updateFilteredTaskList(new PredicateExpression(
-                new NameQualifier(keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
+    public void updateFilteredTaskList(ArrayList<Object> listToCompare, boolean startBy, boolean dueBy) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(listToCompare, startBy, dueBy)));
     }
 
     @Override
@@ -272,38 +274,31 @@ public class ModelManager extends ComponentManager implements Model {
         private Optional<StartDate> startDate;
         private Optional<DueDate> dueDate;
         private Set<String> tags;
+        private boolean startBy;
+        private boolean dueBy;
 
-        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority, Optional<StartDate> startDate,
-                Optional<DueDate> dueDate, Set<String> tags) {
-            this.nameKeyWords = nameKeyWords;
-            this.priority = priority;
-            this.startDate = startDate;
-            this.dueDate = dueDate;
-            this.tags = tags;
+        NameQualifier(ArrayList<Object> listToCompare, boolean startBy, boolean dueBy) {
+            this.nameKeyWords = (Set<String>) listToCompare.get(0);
+            this.priority = (Optional<Priority>) listToCompare.get(1);
+            this.startDate = (Optional<StartDate>) listToCompare.get(2);
+            this.dueDate = (Optional<DueDate>) listToCompare.get(3);
+            this.tags = (Set<String>) listToCompare.get(4);
+            this.startBy = startBy;
+            this.dueBy = dueBy;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
 
-            String taskStartDate = task.getStartDate().toString();
-            String taskDueDate = task.getDueDate().toString();
-            String taskPriority = task.getPriority().toString();
-
             Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
-            boolean startDateExist = (taskStartDate.length() != 0);
-            boolean dueDateExist = (taskDueDate.length() != 0);
-            boolean priorityExist = (taskPriority.length() != 0);
 
             return (nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
-                    && (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
-                            || (priorityExist && task.getPriority().toString().equals(priority.get().toString())))
-                    && (!startDate.isPresent() || (startDate.get().toString().equals("") && startDateExist)
-                            || (startDateExist && taskStartDate.substring(0, 9).equals
-                                    (startDate.get().toString().substring(0, 9))))
-                    && (!dueDate.isPresent() || (dueDate.get().toString().equals("") && dueDateExist) || (dueDateExist
-                            && taskDueDate.substring(0, 9).equals(dueDate.get().toString().substring(0, 9))))
+                    && comparePriority(task.getPriority())
+                    && ((!startBy && compareStartDate(task.getStartDate()))
+                            || (startBy && compareByStart(task.getStartDate())))
+                    && ((!dueBy && compareDueDate(task.getDueDate())) || (dueBy && compareByDue(task.getDueDate())))
                     && (taskTagStringSet.containsAll(tags));
 
         }
@@ -313,7 +308,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
 
-        public Set<String> convertToTagStringSet(Set<Tag> tags) {
+        private Set<String> convertToTagStringSet(Set<Tag> tags) {
             Object[] tagArray = tags.toArray();
             Set<String> tagSet = new HashSet<String>();
 
@@ -323,19 +318,89 @@ public class ModelManager extends ComponentManager implements Model {
 
             return tagSet;
         }
+
+        private boolean comparePriority(Priority taskPriority) {
+
+            String taskPriorityString = taskPriority.toString();
+            boolean priorityExist = (taskPriorityString.length() != 0);
+
+            return (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
+                    || (priorityExist && taskPriorityString.equals(priority.get().toString())));
+        }
+
+        private boolean compareStartDate(TaskDate taskStartDate) {
+
+            String taskStartDateString = taskStartDate.toString();
+            boolean taskStartDateExist = (taskStartDateString.length() != 0);
+
+            return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+                    || (taskStartDateExist && taskStartDateString.substring(0, 10).equals
+                       (startDate.get().toString().substring(0, 10))));
+        }
+
+        private boolean compareDueDate(TaskDate taskDueDate) {
+
+            String taskDueDateString = taskDueDate.toString();
+            boolean taskDueDateExist = (taskDueDateString.length() != 0);
+
+            return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+                    || (taskDueDateExist && taskDueDateString.substring(0, 10).equals
+                       (dueDate.get().toString().substring(0, 10))));
+        }
+
+        private boolean compareByStart(TaskDate taskStartDate) {
+            String taskStartDateString = taskStartDate.toString();
+            boolean taskStartDateExist = (taskStartDateString.length() != 0);
+
+            return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+                    || (taskStartDateExist && comesBefore(startDate.get().toString(), taskStartDateString)));
+        }
+
+        private boolean compareByDue(TaskDate taskDueDate) {
+            String taskDueDateString = taskDueDate.toString();
+            boolean taskDueDateExist = (taskDueDateString.length() != 0);
+
+            return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+                    || (taskDueDateExist && comesBefore(dueDate.get().toString(), taskDueDateString)));
+        }
+
+        private boolean comesBefore(String givenDate, String taskDate) {
+
+            int givenDD = Integer.parseInt(givenDate.substring(0, 2));
+            int givenMM = Integer.parseInt(givenDate.substring(3, 5));
+            int givenYYYY = Integer.parseInt(givenDate.substring(6, 10));
+
+            int taskDD = Integer.parseInt(taskDate.substring(0, 2));
+            int taskMM = Integer.parseInt(taskDate.substring(3, 5));
+            int taskYYYY = Integer.parseInt(taskDate.substring(6, 10));
+
+            return (taskYYYY < givenYYYY)
+                   || ((taskYYYY == givenYYYY) && (taskMM < givenMM))
+                   || ((taskYYYY == givenYYYY) && (taskMM == givenMM) && (taskDD <= givenDD));
+
+        }
+
     }
 
     @Override
-    public void sortTasks(SortCriteria sortCriteria) {
+    public void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending) {
         if (!this.currentSortCriteria.equals(sortCriteria)) {
             this.currentSortCriteria = sortCriteria;
             indicateSortCriteriaChanged();
         }
-        ezDo.sortTasks(sortCriteria);
+        if (!this.currentIsSortedAscending.equals(isSortedAscending)) {
+            this.currentIsSortedAscending = isSortedAscending;
+            indicateIsSortedAscendingChanged();
+        }
+        ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
 
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
+    }
+
+    public void indicateIsSortedAscendingChanged() {
+        raise(new IsSortedAscendingChangedEvent(currentIsSortedAscending));
     }
 }

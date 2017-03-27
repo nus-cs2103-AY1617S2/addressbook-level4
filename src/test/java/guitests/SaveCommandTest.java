@@ -2,11 +2,8 @@ package guitests;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 
 import mockit.Mock;
 import mockit.MockUp;
@@ -51,6 +48,6 @@ public class SaveCommandTest extends EzDoGuiTest {
         };
         commandBox.runCommand("save " + validDirectory);
         assertResultMessage(String.format(SaveCommand.MESSAGE_DIRECTORY_PATH_INVALID));
-    }
 
+    }
 }
