@@ -2,6 +2,9 @@ package seedu.tache.ui;
 
 import java.util.logging.Logger;
 
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
@@ -28,6 +31,7 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
+        setAutocomplete();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -54,6 +58,17 @@ public class CommandBox extends UiPart<Region> {
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
+    }
+
+    /**
+     * Sets autocomplete functionality for user commands.
+     * Uses ControlsFX Autocomplete TextField function.
+     */
+    private void setAutocomplete() {
+        String[] possibleCommands = {"add ", "clear", "complete ", "delete ", "edit ", "exit", "find ",
+                                        "help", "list", "save ", "select ", "undo" };
+        AutoCompletionBinding<String> binding = TextFields.bindAutoCompletion(commandTextField, possibleCommands);
+        binding.setMaxWidth(70);
     }
 
 
