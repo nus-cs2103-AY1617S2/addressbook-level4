@@ -34,7 +34,22 @@ public class DateTimeParser {
             return Optional.empty();
         }
 
-        LocalDateTime output = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        LocalDateTime output = convertDateToLocalDateTime(date);
         return Optional.ofNullable(output);
+    }
+
+    public static Optional<DateGroup> parseDateGroup(String dateString) {
+        Parser dateTimeParser = new Parser();
+        List<DateGroup> groups = dateTimeParser.parse(dateString);
+
+        if (groups.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(groups.get(0));
+    }
+
+    public static LocalDateTime convertDateToLocalDateTime(Date date) {
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 }

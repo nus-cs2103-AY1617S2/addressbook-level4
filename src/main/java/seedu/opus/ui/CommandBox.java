@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.opus.commons.core.LogsCenter;
@@ -22,8 +23,10 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
+    public static final String EMPTY_STRING = "";
 
     private final Logic logic;
+    private final UserInputHistory history;
     private final AutocompleteTrie autocompleteTrie;
     private Iterator<String> suggestions;
 
@@ -37,6 +40,8 @@ public class CommandBox extends UiPart<Region> {
         this.autocompleteTrie.init();
         this.suggestions = Collections.emptyIterator();
         addToPlaceholder(commandBoxPlaceholder);
+        history = new UserInputHistory();
+        registerCursorKeyEventFilter();
         listenForTab();
         focusCommandBox();
     }
@@ -55,17 +60,19 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandInputChanged() {
         try {
+            history.saveUserInput(commandTextField.getText());
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
             // process result of the command
             setStyleToIndicateCommandSuccess();
-            commandTextField.setText("");
+            commandTextField.setText(EMPTY_STRING);
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
             // handle command failure
             logger.info("Invalid command: " + commandTextField.getText());
+            commandTextField.setText(EMPTY_STRING);
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
@@ -119,7 +126,42 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Custom Trie for autocomplete feature.
+     * Catch cursor key inputs from user to browse previous user input history
+     */
+    private void registerCursorKeyEventFilter() {
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            KeyCode key = event.getCode();
+            if (!handleCursorKeyEvent(key)) {
+                return;
+            }
+            event.consume();
+        });
+    }
+
+    private boolean handleCursorKeyEvent(KeyCode key) {
+        if (key.equals(KeyCode.UP)) {
+            browseToPreviousCommand();
+        } else if (key.equals(KeyCode.DOWN)) {
+            browseToPrecedingCommand();
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    private void browseToPreviousCommand() {
+        String input  = history.getPreviousUserInput().orElse(EMPTY_STRING);
+        commandTextField.setText(input);
+        commandTextField.end();
+    }
+
+    private void browseToPrecedingCommand() {
+        String input  = history.getPrecedingUserInput().orElse(EMPTY_STRING);
+        commandTextField.setText(input);
+        commandTextField.end();
+    }
+
+     /** Custom Trie for autocomplete feature.
      *
      * @author xbili
      *
@@ -141,7 +183,5 @@ public class CommandBox extends UiPart<Region> {
         private boolean hasMatch(String prefix) {
             return !autoComplete(prefix).isEmpty();
         }
-
     }
-
 }

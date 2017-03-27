@@ -1,5 +1,7 @@
 package seedu.opus.model;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -8,9 +10,11 @@ import seedu.opus.commons.core.ComponentManager;
 import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
+import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.commons.util.CollectionUtil;
 import seedu.opus.commons.util.StringUtil;
+import seedu.opus.model.tag.Tag;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
@@ -120,7 +124,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(
+                new NameQualifier(keywords), new NoteQualifier(keywords), new TagQualifier(keywords)
+                ));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -131,31 +137,30 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
-        String toString();
     }
 
     private class PredicateExpression implements Expression {
 
-        private final Qualifier qualifier;
+        private final List<Qualifier> qualifiers;
 
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
+
+        PredicateExpression(Qualifier... qualifiers) {
+            this.qualifiers = Arrays.asList(qualifiers);
         }
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
+            boolean result = false;
+            for (Qualifier qualifier: qualifiers) {
+                result = result | qualifier.run(task);
+            }
+            return result;
         }
 
-        @Override
-        public String toString() {
-            return qualifier.toString();
-        }
     }
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
-        String toString();
     }
 
     private class NameQualifier implements Qualifier {
@@ -173,10 +178,48 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent();
         }
 
-        @Override
-        public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+    }
+
+    private class NoteQualifier implements Qualifier {
+        private Set<String> noteKeyWords;
+
+        NoteQualifier(Set<String> noteKeyWords) {
+            this.noteKeyWords = noteKeyWords;
         }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            String note = task.getNote().isPresent() ? task.getNote().get().value : "";
+            return noteKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(note, keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+    }
+
+    private class TagQualifier implements Qualifier {
+        private Set<String> tagKeyWords;
+
+        TagQualifier(Set<String> tagKeyWords) {
+            this.tagKeyWords = tagKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return tagKeyWords.stream()
+                    .filter(keyword -> {
+                        try {
+                            return task.getTags().contains(new Tag(keyword));
+                        } catch (IllegalValueException e) {
+                            e.printStackTrace();
+                        }
+                        return false;
+                    })
+                    .findAny()
+                    .isPresent();
+        }
+
     }
 
 }
