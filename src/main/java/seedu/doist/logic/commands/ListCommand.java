@@ -1,5 +1,7 @@
 package seedu.doist.logic.commands;
 
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,12 @@ import seedu.doist.model.tag.UniqueTagList;
  * Lists all persons in the address book to the user.
  */
 public class ListCommand extends Command {
+
+    public enum TaskType {
+        pending,
+        finished,
+        overdue
+    }
 
     public static final String DEFAULT_COMMAND_WORD = "list";
 
@@ -31,7 +39,7 @@ public class ListCommand extends Command {
             try {
                 type = TaskType.valueOf(preamble.trim());
             } catch (IllegalArgumentException e) {
-                throw new IllegalValueException("Incorrect argument");
+                throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
             }
         }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
@@ -56,11 +64,5 @@ public class ListCommand extends Command {
         }
         message = message.trim();
         return message;
-    }
-
-    public enum TaskType {
-        pending,
-        finished,
-        overdue
     }
 }
