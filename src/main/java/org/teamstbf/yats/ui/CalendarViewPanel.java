@@ -18,8 +18,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
@@ -30,7 +28,6 @@ import javafx.scene.layout.Region;
 public class CalendarViewPanel extends UiPart<Region> {
 
 	private static final String FXML = "CalendarView.fxml";
-	private static final String FXMLTIME = "TimeCard.fxml";
 	private static ObservableList<String> timeData = FXCollections.observableArrayList();
 
 	@FXML
@@ -45,10 +42,6 @@ public class CalendarViewPanel extends UiPart<Region> {
 	private Tab monthView;
 	@FXML
 	private Tab yearView;
-	@FXML
-	private TableView<String> timeList;
-	@FXML
-	private TableColumn<LocalDateTime, String> timeListColumn;
 	@FXML
 	private ListView<ReadOnlyEvent> taskListView;
 	@FXML
@@ -124,8 +117,10 @@ public class CalendarViewPanel extends UiPart<Region> {
 
 		for (startTime = today.atTime(firstTimeSlot); !startTime
 				.isAfter(today.atTime(lastTimeSlot)); startTime = startTime.plus(timeDifference)) {
-			timeData.add(startTime.toString());
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ha");
+			timeData.add(startTime.format(formatter));
 		}
+		createFullDayTime();
 		currentDay.setText(today.format(dateFormatter("d MMM")));
 	}
 
@@ -207,7 +202,7 @@ public class CalendarViewPanel extends UiPart<Region> {
 		currentYear.setText(today.format(dateFormatter("uuuu")));
 	}
 
-	// ========== Inner Methods for calendarview ==========
+	// ========== Inner Class and Methods for calendar view ==========
 
 	private void populateMonth() {
 		LocalDate calendarDate = LocalDate.of(today.getYear(), today.getMonth(), today.getDayOfMonth());
@@ -215,7 +210,22 @@ public class CalendarViewPanel extends UiPart<Region> {
 
 	private void createFullDayTime() {
 		timeSlots.setItems(timeData);
-		timeSlots.setCellFactory(listView -> new ListCell<String>());
+		timeSlots.setCellFactory(listView -> new TimeSlotListViewCell());
+	}
+
+	private class TimeSlotListViewCell extends ListCell<String> {
+
+		@Override
+		protected void updateItem(String time, boolean empty) {
+			super.updateItem(time, empty);
+
+			if (empty || (time == null && time.isEmpty())) {
+				setGraphic(null);
+				setText(null);
+			} else {
+				setGraphic(new TimeCard(time).getRoot());
+			}
+		}
 	}
 
 }

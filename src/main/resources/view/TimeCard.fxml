@@ -4,10 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -32,17 +30,11 @@
                      <children>
                         <HBox>
                            <children>
-                              <Label fx:id="id" styleClass="cell_big_label">
-                                 <minWidth>
-                                    <Region fx:constant="USE_PREF_SIZE" />
-                                 </minWidth>
-                              </Label>
-                              <Label fx:id="name" styleClass="cell_big_label" text="\\$time" />
+                              <Label fx:id="timeSlot" styleClass="cell_big_label" text="\\$time" />
                            </children>
                         </HBox>
                      </children>
                   </HBox>
-                  <FlowPane fx:id="tags" />
                </children>
             </VBox>
          </children>
