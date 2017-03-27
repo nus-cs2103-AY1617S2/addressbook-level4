@@ -126,6 +126,7 @@ public class Task implements ReadOnlyTask  {
         this.setStartDateTime(replacement.getStartDateTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
+        this.setDone(replacement.isDone());
     }
 
     public void setStartDateTime(DateTime startDateTime) {
