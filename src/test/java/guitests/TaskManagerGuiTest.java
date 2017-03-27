@@ -17,6 +17,7 @@ import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.StatusBarFooterHandle;
 import guitests.guihandles.TaskCardHandle;
 import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
@@ -52,6 +53,9 @@ public abstract class TaskManagerGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected CalendarPanelHandle calendarPanel;
+    //@@author A0142255M
+    protected StatusBarFooterHandle statusBarFooter;
+    //@@author
     private Stage stage;
 
     @BeforeClass
@@ -73,6 +77,7 @@ public abstract class TaskManagerGuiTest {
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             calendarPanel = mainGui.getCalendarPanel();
+            statusBarFooter = mainGui.getStatusBarFooter();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
