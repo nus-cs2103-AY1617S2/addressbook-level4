@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.AddCommand;
+import seedu.watodo.logic.commands.AlternativeCommand;
 import seedu.watodo.logic.commands.ClearCommand;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.DeleteCommand;
@@ -51,8 +52,14 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
+
+        AlternativeCommand alt = new AlternativeCommand();
+        if (alt.containsAlternative(commandWord)) {
+            commandWord = alt.getStandardCommandWord(commandWord);
+        }
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
