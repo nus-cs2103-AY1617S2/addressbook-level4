@@ -25,7 +25,7 @@ import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.WhatsLeft;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestActivities;
 
@@ -107,8 +107,8 @@ public abstract class WhatsLeftGuiTest {
     /**
      * Asserts the activity shown in the card is same as the given activity
      */
-    public void assertMatching(ReadOnlyActivity activity, ActivityCardHandle card) {
-        assertTrue(TestUtil.compareCardAndActivity(card, activity));
+    public void assertMatching(ReadOnlyEvent event, ActivityCardHandle card) {
+        assertTrue(TestUtil.compareCardAndEvent(card, event));
     }
 
     /**

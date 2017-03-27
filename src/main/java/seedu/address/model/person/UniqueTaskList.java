@@ -12,6 +12,7 @@ import seedu.address.model.person.UniqueEventList.DuplicateEventException;
 import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -61,8 +62,8 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
 
-        taskToEdit.resetData(editedTask);
         int index = internalList.indexOf(taskToEdit);
+        taskToEdit.resetData(editedTask);
         internalList.set(index, editedTask); 
         internalList.sorted();
     }
@@ -73,8 +74,9 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void completeTask(int index) {
-        Task taskToComplete = internalList.get(index);
+    public void completeTask(ReadOnlyTask taskToMark) {
+        Task taskToComplete = new Task(taskToMark);
+        int index = internalList.indexOf(taskToComplete);
         taskToComplete.completeTask();
         internalList.set(index, taskToComplete);
     }
@@ -84,8 +86,9 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void RedoTask(int index) {
-        Task taskToComplete = internalList.get(index);
+    public void RedoTask(ReadOnlyTask taskToMark) {
+        Task taskToComplete = new Task(taskToMark);
+        int index = internalList.indexOf(taskToComplete);
         taskToComplete.redoTask();
         internalList.set(index, taskToComplete);
     }

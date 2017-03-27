@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.model.WhatsLeft;
-import seedu.address.model.person.Activity;
+import seedu.address.model.person.Event;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
@@ -24,7 +24,7 @@ public class SampleDataTest extends WhatsLeftGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Activity[] expectedList = SampleDataUtil.getSampleActivities();
+        Event[] expectedList = SampleDataUtil.getSampleEvents();
         assertTrue(activityListPanel.isListMatching(expectedList));
     }
 }

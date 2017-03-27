@@ -199,7 +199,7 @@ The `Model`,
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Li Chengcheng
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
