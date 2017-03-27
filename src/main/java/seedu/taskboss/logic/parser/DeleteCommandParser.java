@@ -3,6 +3,7 @@ package seedu.taskboss.logic.parser;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.DeleteCommand;
@@ -18,7 +19,7 @@ public class DeleteCommandParser {
      * and returns an DeleteCommand object for execution.
      */
     public Command parse(String args) {
-        
+
         Set<Integer> index = parseIndex(args);
 
         if (!index.isPresent()) {
@@ -28,12 +29,11 @@ public class DeleteCommandParser {
 
         return new DeleteCommand(index.get());
     }
-    
+
     public static String[] parseIndex(String indexList) {
         String trimmedList = indexList.trim();
         String[] indexes = trimmedList.split(" ");
-        
+
         return indexes;
     }
-
 }
