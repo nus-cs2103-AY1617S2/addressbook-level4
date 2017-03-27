@@ -371,7 +371,7 @@ public class ModelManager extends ComponentManager implements Model {
             int taskMM = Integer.parseInt(taskDate.substring(3, 5));
             int taskYYYY = Integer.parseInt(taskDate.substring(6, 10));
 
-            return (taskYYYY < givenYYYY) 
+            return (taskYYYY < givenYYYY)
                    || ((taskYYYY == givenYYYY) && (taskMM < givenMM))
                    || ((taskYYYY == givenYYYY) && (taskMM == givenMM) && (taskDD <= givenDD));
 
