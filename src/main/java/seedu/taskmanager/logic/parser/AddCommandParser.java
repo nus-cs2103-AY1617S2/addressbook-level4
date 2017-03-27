@@ -6,7 +6,8 @@ import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTTIME;
-import static seedu.taskmanager.model.task.Date.DATE_VALIDATION_REGEX2;
+//import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX1;
+import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX2;
 
 import java.util.NoSuchElementException;
 
@@ -35,34 +36,58 @@ public class AddCommandParser {
         argsTokenizer.tokenize(args);
         try {
             String taskName = argsTokenizer.getPreamble().get();
-            String date = argsTokenizer.getValue(PREFIX_DATE).orElse(EMPTY_FIELD);
-            String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse(EMPTY_FIELD);
-            String startTime = argsTokenizer.getValue(PREFIX_STARTTIME).orElse(EMPTY_FIELD);
-            String endTime = argsTokenizer.getValue(PREFIX_ENDTIME).orElse(EMPTY_FIELD);
-
+            String onPrefixInput = argsTokenizer.getValue(PREFIX_DATE).orElse(EMPTY_FIELD);
+            String byPrefixInput = argsTokenizer.getValue(PREFIX_DEADLINE).orElse(EMPTY_FIELD);
+            String fromPrefixInput = argsTokenizer.getValue(PREFIX_STARTTIME).orElse(EMPTY_FIELD);
+            String toPrefixInput = argsTokenizer.getValue(PREFIX_ENDTIME).orElse(EMPTY_FIELD);
+            String startDate = EMPTY_FIELD;
+            String startTime = EMPTY_FIELD;
+            String endDate = EMPTY_FIELD;
+            String endTime = EMPTY_FIELD;
             /*
              * Checks to ensure correct combinations of arguments are added by
              * user when adding tasks to the task manager
              */
 
-            if (date.equals(EMPTY_FIELD) || deadline.equals(EMPTY_FIELD) || startTime.equals(EMPTY_FIELD)
-                    || endTime.equals(EMPTY_FIELD)) {
-                if (!(date.equals(EMPTY_FIELD))
-                        && (!(deadline.equals(EMPTY_FIELD)) || !(startTime.equals(EMPTY_FIELD)))) {
-                    throw new NoSuchElementException("");
+            addTaskInputValidation(onPrefixInput, byPrefixInput, fromPrefixInput, toPrefixInput);
+
+            if ((!fromPrefixInput.equals("EMPTY_FIELD")) && (!toPrefixInput.equals("EMPTY_FIELD"))) {
+                if ((!fromPrefixInput.equals("EMPTY_FIELD")) && (!(fromPrefixInput.matches("\\d+")))) {
+                    String[] splitedFromPrefixInput = fromPrefixInput.split("\\s+");
+                    try {
+                        if (splitedFromPrefixInput[0].matches(STARTDATE_VALIDATION_REGEX2)) {
+                            startDate = CurrentDate.getNewDate(splitedFromPrefixInput[0]);
+                            startDate = convertDateForm(startDate);
+                        } else {
+                            startDate = splitedFromPrefixInput[0];
+                        }
+
+                        startTime = splitedFromPrefixInput[1];
+
+                    } catch (ArrayIndexOutOfBoundsException aioobe) {
+                        startTime = "0000";
+                        /*
+                         * if (splitedStartTime[0].matches(
+                         * STARTDATE_VALIDATION_REGEX2) ) { startTime =
+                         * CurrentDate.getNewDate(splitedStartTime[0]); }
+                         */
+                    }
                 }
-                if (!(deadline.equals(EMPTY_FIELD)) && (!(date.equals(EMPTY_FIELD)) || !(startTime.equals(EMPTY_FIELD))
-                        || !(endTime.equals(EMPTY_FIELD)))) {
-                    throw new NoSuchElementException("");
-                }
-                if ((!(startTime.equals(EMPTY_FIELD))
-                        && (date.equals(EMPTY_FIELD) && deadline.equals(EMPTY_FIELD) && endTime.equals(EMPTY_FIELD)))
-                        || (!(startTime.equals(EMPTY_FIELD))
-                                && (!(date.equals(EMPTY_FIELD)) || !(deadline.equals(EMPTY_FIELD))))) {
-                    throw new NoSuchElementException("");
-                }
-                if (!(endTime.equals(EMPTY_FIELD)) && (date.equals(EMPTY_FIELD) && startTime.equals(EMPTY_FIELD))) {
-                    throw new NoSuchElementException("");
+
+                if ((!toPrefixInput.equals("EMPTY_FIELD")) && (!toPrefixInput.matches("\\d+"))) {
+                    String[] splitedToPrefixInput = toPrefixInput.split("\\s+");
+                    try {
+                        if (splitedToPrefixInput[0].matches(STARTDATE_VALIDATION_REGEX2)) {
+                            endDate = CurrentDate.getNewDate(splitedToPrefixInput[0]);
+                            endDate = convertDateForm(endDate);
+                        } else {
+                            endDate = splitedToPrefixInput[0];
+                        }
+                        endTime = splitedToPrefixInput[1];
+
+                    } catch (ArrayIndexOutOfBoundsException aioobe) {
+                        endTime = "2359";
+                    }
                 }
             }
 
@@ -71,20 +96,48 @@ public class AddCommandParser {
              * incorrect arguments of date are included
              */
 
-            if (!(date.equals(EMPTY_FIELD))) {
-                String[] splited = date.split("\\s+");
-                date = splited[0];
+            else if (!(onPrefixInput.equals(EMPTY_FIELD))) {
+                String[] splited = onPrefixInput.split("\\s+");
+                startDate = splited[0];
+                startDate = convertDateForm(startDate);
+                endDate = startDate;
+
                 try {
                     startTime = splited[1];
-                    if (Integer.parseInt(startTime) >= 2400) {
+
+                    if (!isValidTime(startTime)) {
                         throw new IllegalValueException(INVALID_TIME);
                     }
-                    if (endTime.equals(EMPTY_FIELD)) {
-                        endTime = Integer.toString(100 + Integer.parseInt(splited[1]));
+
+                    if (toPrefixInput.equals(EMPTY_FIELD)) {
+
+                        endTime = Integer.toString(100 + Integer.parseInt(startTime));
+
+                        if (!isValidTime(endTime)) {
+                            // endDate = nextDay(due to +1hr > 2400hrs)
+                            endTime = Integer.toString(Integer.parseInt(endTime) - 2400);
+
+                            if (Integer.parseInt(endTime) >= 10) {
+                                StringBuilder stringBuilderTime = new StringBuilder();
+
+                                stringBuilderTime.append("00");
+                                stringBuilderTime.append(endTime);
+                                endTime = stringBuilderTime.toString();
+
+                            } else {
+                                StringBuilder stringBuilderTime = new StringBuilder();
+
+                                stringBuilderTime.append("000");
+                                stringBuilderTime.append(endTime);
+                                endTime = stringBuilderTime.toString();
+                            }
+
+                        }
+
                     } else {
-                        String[] splitedEndTime = endTime.split("\\s+");
+                        String[] splitedToPrefixInput = toPrefixInput.split("\\s+");
                         try {
-                            if (!(splitedEndTime[1].isEmpty())) {
+                            if (!(splitedToPrefixInput[1].isEmpty())) {
                                 throw new IllegalValueException("End time for task "
                                         + "should only contain a day (e.g. thursday) "
                                         + "or a date with the format: DD/MM/YY (e.g. 03/03/17))\n"
@@ -92,31 +145,33 @@ public class AddCommandParser {
                                         + "Enter HELP for user guide with detailed explanations of all commands");
                             }
                         } catch (ArrayIndexOutOfBoundsException aioobe) {
-                            endTime = splitedEndTime[0];
-                            if (Integer.parseInt(endTime) >= 2400) {
+                            endTime = splitedToPrefixInput[0];
+                            if (!(endTime.matches("\\d{4}"))) {
+                                throw new NoSuchElementException();
+                            }
+                            if (!isValidTime(endTime)) {
                                 throw new IllegalValueException(INVALID_TIME);
                             }
                         }
                     }
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
                     startTime = "0000";
-                    if (endTime.equals(EMPTY_FIELD)) {
+                    if (toPrefixInput.equals(EMPTY_FIELD)) {
                         endTime = "2359";
                     } else {
-                        String[] splitedEndTime = endTime.split("\\s+");
+                        String[] splitedToPrefixInput = toPrefixInput.split("\\s+");
                         try {
-                            if (!(splitedEndTime[1].isEmpty())) {
-                                throw new IllegalValueException("End time for task "
-                                        + "should only contain a day (e.g. thursday) "
-                                        + "or a date with the format: DD/MM/YY (e.g. 03/03/17))\n"
-                                        + "May also include time (e.g. 1400) behind date in some instances\n"
-                                        + "Enter HELP for user guide with detailed explanations of all commands");
+                            if (!(splitedToPrefixInput[1].isEmpty())) {
+                                throw new IllegalValueException(
+                                        "When using prefix ON and TO, input after prefix TO should only include time (e.g. 1400)\n"
+                                                + "Enter HELP for user guide with detailed explanations of all commands");
                             }
                         } catch (ArrayIndexOutOfBoundsException aiobe) {
-                            endTime = splitedEndTime[0];
-                            if (Integer.parseInt(endTime) >= 2400) {
+                            endTime = splitedToPrefixInput[0];
+                            if (!isValidTime(endTime)) {
                                 throw new IllegalValueException(INVALID_TIME);
                             }
+                            compareStartEndTime(startTime, endTime);
                         }
                     }
                 }
@@ -126,10 +181,7 @@ public class AddCommandParser {
                     }
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
                 }
-                if (Integer.parseInt(startTime) > Integer.parseInt(endTime)) {
-                    throw new IllegalValueException(
-                            "Invalid input of time, start time has to be earlier than end time");
-                }
+
             }
 
             /*
@@ -137,14 +189,17 @@ public class AddCommandParser {
              * incorrect arguments of deadline are included
              */
 
-            if (!(deadline.equals(EMPTY_FIELD))) {
-                String[] splited = deadline.split("\\s+");
-                date = splited[0];
+            else if (!(byPrefixInput.equals(EMPTY_FIELD))) {
+                String[] splited = byPrefixInput.split("\\s+");
+                endDate = splited[0];
+                endDate = convertDateForm(endDate);
                 try {
                     endTime = splited[1];
-                    if (Integer.parseInt(endTime) >= 2400) {
+
+                    if (!isValidTime(endTime)) {
                         throw new IllegalValueException(INVALID_TIME);
                     }
+
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
                     endTime = "2359";
                 } catch (NumberFormatException nfe) {
@@ -160,71 +215,7 @@ public class AddCommandParser {
                 }
             }
 
-            if (date.matches(DATE_VALIDATION_REGEX2)) {
-                date = CurrentDate.getNewDate(date);
-            }
-
-            if (startTime.matches("[a-zA-Z]+")) {
-                StringBuilder stringBuilderStartTime = new StringBuilder();
-
-                stringBuilderStartTime.append(startTime);
-                stringBuilderStartTime.append(" ");
-                stringBuilderStartTime.append("0000");
-
-                startTime = stringBuilderStartTime.toString();
-            }
-
-            if (endTime.matches("[a-zA-Z]+")) {
-                StringBuilder stringBuilderEndTime = new StringBuilder();
-
-                stringBuilderEndTime.append(endTime);
-                stringBuilderEndTime.append(" ");
-                stringBuilderEndTime.append("2359");
-
-                endTime = stringBuilderEndTime.toString();
-            }
-
-            if ((!startTime.equals("EMPTY_FIELD")) && (!startTime.matches("\\d+"))) {
-                String[] splitedStartTime = startTime.split("\\s+");
-                try {
-                    if (splitedStartTime[0].matches(DATE_VALIDATION_REGEX2)) {
-                        splitedStartTime[0] = CurrentDate.getNewDate(splitedStartTime[0]);
-                    }
-                    StringBuilder stringBuilder = new StringBuilder();
-
-                    stringBuilder.append(splitedStartTime[0]);
-                    stringBuilder.append(" ");
-                    stringBuilder.append(splitedStartTime[1]);
-
-                    startTime = stringBuilder.toString();
-                } catch (ArrayIndexOutOfBoundsException aioobe) {
-                    if (splitedStartTime[0].matches(DATE_VALIDATION_REGEX2)) {
-                        startTime = CurrentDate.getNewDate(splitedStartTime[0]);
-                    }
-                }
-            }
-
-            if ((!endTime.equals("EMPTY_FIELD")) && (!endTime.matches("\\d+"))) {
-                String[] splitedEndTime = endTime.split("\\s+");
-                try {
-                    if (splitedEndTime[0].matches(DATE_VALIDATION_REGEX2)) {
-                        splitedEndTime[0] = CurrentDate.getNewDate(splitedEndTime[0]);
-                    }
-                    StringBuilder stringBuilder = new StringBuilder();
-
-                    stringBuilder.append(splitedEndTime[0]);
-                    stringBuilder.append(" ");
-                    stringBuilder.append(splitedEndTime[1]);
-
-                    endTime = stringBuilder.toString();
-                } catch (ArrayIndexOutOfBoundsException aioobe) {
-                    if (splitedEndTime[0].matches(DATE_VALIDATION_REGEX2)) {
-                        endTime = CurrentDate.getNewDate(splitedEndTime[0]);
-                    }
-                }
-            }
-
-            return new AddCommand(taskName, date, startTime, endTime
+            return new AddCommand(taskName, startDate, startTime, endDate, endTime
             // ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)
             );
         } catch (NoSuchElementException nsee) {
@@ -236,11 +227,47 @@ public class AddCommandParser {
                     "Invalid command input!\nExample of Allowed Format: ADD e-mail John BY thursday 1400\n"
                             + "Type HELP for user guide with detailed explanations of all commands");
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand("Start/End time for task "
-                    + "should only contain a day (e.g. thursday) "
-                    + "or a date with the format: DD/MM/YY (e.g. 03/03/17)\n"
-                    + "May also include time (e.g. 1400) behind date in some instances\n"
-                    + "Enter HELP for user guide with detailed explanations of all commands");
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private void compareStartEndTime(String startTime, String endTime) throws IllegalValueException {
+        if (Integer.parseInt(startTime) > Integer.parseInt(endTime)) {
+            throw new IllegalValueException("Invalid input of time, start time has to be earlier than end time");
+        }
+    }
+
+    private String convertDateForm(String date) throws IllegalValueException {
+        if (date.matches(STARTDATE_VALIDATION_REGEX2)) {
+            date = CurrentDate.getNewDate(date);
+        }
+        return date;
+    }
+
+    private boolean isValidTime(String value) {
+        return (value.matches("\\d+") && (Integer.parseInt(value) < 2400) && (Integer.parseInt(value) >= 0)
+                && (((Integer.parseInt(value)) % 100) < 60));
+    }
+
+    private void addTaskInputValidation(String date, String deadline, String startTime, String endTime) {
+        if (date.equals(EMPTY_FIELD) || deadline.equals(EMPTY_FIELD) || startTime.equals(EMPTY_FIELD)
+                || endTime.equals(EMPTY_FIELD)) {
+            if (!(date.equals(EMPTY_FIELD)) && (!(deadline.equals(EMPTY_FIELD)) || !(startTime.equals(EMPTY_FIELD)))) {
+                throw new NoSuchElementException("");
+            }
+            if (!(deadline.equals(EMPTY_FIELD)) && (!(date.equals(EMPTY_FIELD)) || !(startTime.equals(EMPTY_FIELD))
+                    || !(endTime.equals(EMPTY_FIELD)))) {
+                throw new NoSuchElementException("");
+            }
+            if ((!(startTime.equals(EMPTY_FIELD))
+                    && (date.equals(EMPTY_FIELD) && deadline.equals(EMPTY_FIELD) && endTime.equals(EMPTY_FIELD)))
+                    || (!(startTime.equals(EMPTY_FIELD))
+                            && (!(date.equals(EMPTY_FIELD)) || !(deadline.equals(EMPTY_FIELD))))) {
+                throw new NoSuchElementException("");
+            }
+            if (!(endTime.equals(EMPTY_FIELD)) && (date.equals(EMPTY_FIELD) && startTime.equals(EMPTY_FIELD))) {
+                throw new NoSuchElementException("");
+            }
         }
     }
 

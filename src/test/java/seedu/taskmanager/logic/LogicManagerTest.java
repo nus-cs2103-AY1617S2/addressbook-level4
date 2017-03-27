@@ -41,7 +41,7 @@ import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.StartTime;
@@ -201,7 +201,7 @@ public class LogicManagerTest {
         assertCommandFailure("ADD []\\[;] ON 03/03/17 1400 TO 1600",
                 TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
         assertCommandFailure("ADD Valid TaskName ON wrongdateformat 1400 TO 1600",
-                Date.MESSAGE_DATE_CONSTRAINTS);
+                StartDate.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("ADD Valid TaskName ON thursday 1400hrs TO 1600",
                 StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
         assertCommandFailure("ADD Valid Name ON thursday 1400 TO 1600hrs",
@@ -420,7 +420,7 @@ public class LogicManagerTest {
 
         Task travis() throws Exception {
             TaskName taskName = new TaskName("Travis the bro is assisting");
-            Date privateDate = new Date("03/03/17");
+            StartDate privateDate = new StartDate("03/03/17");
             StartTime privateStartTime = new StartTime("1200");
             EndTime privateEndTime = new EndTime("1400");
 //            Category category1 = new Category("category1");
@@ -440,7 +440,7 @@ public class LogicManagerTest {
             seed = seed%10;
             return new Task(
                     new TaskName("Task " + seed),
-                    new Date("0" + seed + "/02/17"),
+                    new StartDate("0" + seed + "/02/17"),
                     new StartTime("140" + seed),
                     new EndTime("160" + seed)
 //                    new UniqueCategoryList(new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1)))
@@ -455,7 +455,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getTaskName().toString());
             cmd.append(" ON");
-            cmd.append(p.getDate().toString());
+            cmd.append(p.getStartDate().toString());
             cmd.append(" ");
             cmd.append(p.getStartTime().toString());
 //            cmd.append(" FROM").append(p.getStartTime());
@@ -543,7 +543,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String taskname) throws Exception {
             return new Task(
                     new TaskName(taskname),
-                    new Date("03/03/17"),
+                    new StartDate("03/03/17"),
                     new StartTime("1400"),
                     new EndTime("1600")
 //                    new UniqueCategoryList(new Category("category"))

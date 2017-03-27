@@ -15,7 +15,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.TaskName;
@@ -82,9 +82,9 @@ public class ParserUtil {
      * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if
      * {@code date} is present.
      */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
+    public static Optional<StartDate> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+        return date.isPresent() ? Optional.of(new StartDate(date.get())) : Optional.empty();
     }
 
     /**

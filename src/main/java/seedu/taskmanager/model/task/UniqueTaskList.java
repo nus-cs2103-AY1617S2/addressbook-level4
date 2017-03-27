@@ -88,8 +88,9 @@ public class UniqueTaskList implements Iterable<Task> {
     public void markTask(int index, boolean isComplete) throws DuplicateTaskException {
         if (isComplete != internalList.get(index).getIsMarkedAsComplete()) {
 
-            Task taskToMark = new Task(internalList.get(index).getTaskName(), internalList.get(index).getDate(),
-                    internalList.get(index).getStartTime(), internalList.get(index).getEndTime());
+            Task taskToMark = new Task(internalList.get(index).getTaskName(), internalList.get(index).getStartDate(),
+                    internalList.get(index).getStartTime(), internalList.get(index).getEndDate(),
+                    internalList.get(index).getEndTime());
 
             taskToMark.setIsMarkedAsComplete(isComplete);
 

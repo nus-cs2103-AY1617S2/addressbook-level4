@@ -214,7 +214,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().fullTaskName, keyword))
                     .findAny().isPresent())
                     || (taskKeyWords.stream()
-                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDate().value, keyword))
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword))
                             .findAny().isPresent())
                     || (taskKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTime().value, keyword))

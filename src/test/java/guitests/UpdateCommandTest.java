@@ -8,7 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UpdateCommand;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartTime;
@@ -96,7 +96,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 ON 030317");
-        assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
+        assertResultMessage(StartDate.MESSAGE_DATE_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 FROM 1200hrs TO 1400");
         assertResultMessage(StartTime.MESSAGE_STARTTIME_CONSTRAINTS);

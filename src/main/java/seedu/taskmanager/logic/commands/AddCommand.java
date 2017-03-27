@@ -5,7 +5,8 @@ package seedu.taskmanager.logic.commands;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
@@ -38,13 +39,14 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String taskName, String date, String startTime,
+    public AddCommand(String taskName, String startDate, String startTime, String endDate,
             String endTime /* ,Set<String> categories */) throws IllegalValueException {
         // final Set<Category> categorySet = new HashSet<>();
         // for (String tagCategoryName : categories) {
         // categorySet.add(new Category(tagCategoryName));
         // }
-        this.toAdd = new Task(new TaskName(taskName), new Date(date), new StartTime(startTime), new EndTime(endTime)
+        this.toAdd = new Task(new TaskName(taskName), new StartDate(startDate), new StartTime(startTime),
+                new EndDate(endDate), new EndTime(endTime)
         /* new UniqueCategoryList(categorySet) */);
     }
 

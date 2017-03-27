@@ -6,7 +6,7 @@ import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTTIME;
-import static seedu.taskmanager.model.task.Date.DATE_VALIDATION_REGEX2;
+import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX2;
 
 //import java.util.Collection;
 //import java.util.Collections;
@@ -167,7 +167,7 @@ public class UpdateCommandParser {
             if ((startTime.isPresent()) && (!stringStartTime.matches("\\d+"))) {
                 String[] splitedStartTime = stringStartTime.split("\\s+");
                 try {
-                    if (splitedStartTime[0].matches(DATE_VALIDATION_REGEX2)) {
+                    if (splitedStartTime[0].matches(STARTDATE_VALIDATION_REGEX2)) {
                         splitedStartTime[0] = CurrentDate.getNewDate(splitedStartTime[0]);
                     }
                     StringBuilder stringBuilder = new StringBuilder();
@@ -178,7 +178,7 @@ public class UpdateCommandParser {
 
                     stringStartTime = stringBuilder.toString();
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
-                    if (splitedStartTime[0].matches(DATE_VALIDATION_REGEX2)) {
+                    if (splitedStartTime[0].matches(STARTDATE_VALIDATION_REGEX2)) {
                         stringStartTime = CurrentDate.getNewDate(splitedStartTime[0]);
                     }
                 }
@@ -187,7 +187,7 @@ public class UpdateCommandParser {
             if ((endTime.isPresent()) && (!stringEndTime.matches("\\d+"))) {
                 String[] splitedEndTime = stringEndTime.split("\\s+");
                 try {
-                    if (splitedEndTime[0].matches(DATE_VALIDATION_REGEX2)) {
+                    if (splitedEndTime[0].matches(STARTDATE_VALIDATION_REGEX2)) {
                         splitedEndTime[0] = CurrentDate.getNewDate(splitedEndTime[0]);
                     }
                     StringBuilder stringBuilder = new StringBuilder();
@@ -198,7 +198,7 @@ public class UpdateCommandParser {
 
                     stringEndTime = stringBuilder.toString();
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
-                    if (splitedEndTime[0].matches(DATE_VALIDATION_REGEX2)) {
+                    if (splitedEndTime[0].matches(STARTDATE_VALIDATION_REGEX2)) {
                         stringEndTime = CurrentDate.getNewDate(splitedEndTime[0]);
                     }
                 }
@@ -250,7 +250,7 @@ public class UpdateCommandParser {
             }
 
             if (date.isPresent()) {
-                if (date.get().matches(DATE_VALIDATION_REGEX2)) {
+                if (date.get().matches(STARTDATE_VALIDATION_REGEX2)) {
                     date = Optional.of(CurrentDate.getNewDate(date.get()));
                 }
             }

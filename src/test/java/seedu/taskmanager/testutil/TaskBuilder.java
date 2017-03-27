@@ -4,7 +4,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 
@@ -37,7 +37,7 @@ public class TaskBuilder {
 	 */
 
 	public TaskBuilder withDate(String date) throws IllegalValueException {
-		this.task.setDate(new Date(date));
+		this.task.setDate(new StartDate(date));
 		return this;
 	}
 
