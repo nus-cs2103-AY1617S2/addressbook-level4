@@ -7,6 +7,7 @@ import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
@@ -32,12 +33,15 @@ public class EditCommand extends Command {
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
+    private final boolean hasEditDate;
+    private final boolean hasRemoveDate;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor,
+                       boolean hasEditDate, boolean hasRemoveDate) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
@@ -45,6 +49,8 @@ public class EditCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.hasEditDate = hasEditDate;
+        this.hasRemoveDate = hasRemoveDate;
     }
 
     @Override
@@ -56,7 +62,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor, hasEditDate, hasRemoveDate);
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -71,13 +77,25 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor,
+                                         boolean hasEditDate, boolean hasRemoveDate) {
         assert taskToEdit != null;
 
         Description updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-
-        return new Task(updatedName, updatedTags);
+        if (hasRemoveDate) {
+            return new Task(updatedName, null, null, updatedTags);
+        }
+        DateTime startDate;
+        DateTime endDate;
+        if (!hasEditDate) {
+            startDate = taskToEdit.getStartDate();
+            endDate = taskToEdit.getEndDate();
+        } else {
+            startDate = editTaskDescriptor.getStartDate().orElse(null);
+            endDate = editTaskDescriptor.getEndDate().get();
+        }
+        return new Task(updatedName, startDate, endDate, updatedTags);
     }
 
     /**
@@ -86,12 +104,16 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Description> description = Optional.empty();
+        private Optional<DateTime> startDate = Optional.empty();
+        private Optional<DateTime> endDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.description = toCopy.getTaskName();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getEndDate();
             this.tags = toCopy.getTags();
         }
 
@@ -99,7 +121,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.startDate, this.endDate, this.tags);
         }
 
         public void setTaskName(Optional<Description> description) {
@@ -118,6 +140,22 @@ public class EditCommand extends Command {
 
         public Optional<UniqueTagList> getTags() {
             return tags;
+        }
+
+        public Optional<DateTime> getStartDate() {
+            return startDate;
+        }
+
+        public void setStartDate(Optional<DateTime> startDate) {
+            this.startDate = startDate;
+        }
+
+        public Optional<DateTime> getEndDate() {
+            return endDate;
+        }
+
+        public void setEndDate(Optional<DateTime> endDate) {
+            this.endDate = endDate;
         }
     }
 }
