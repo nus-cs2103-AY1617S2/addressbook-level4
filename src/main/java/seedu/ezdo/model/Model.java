@@ -2,8 +2,6 @@ package seedu.ezdo.model;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
-import java.util.Optional;
-import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.exceptions.DateException;
