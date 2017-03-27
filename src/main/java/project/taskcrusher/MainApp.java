@@ -14,6 +14,7 @@ import project.taskcrusher.commons.core.Config;
 import project.taskcrusher.commons.core.EventsCenter;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.Version;
+import project.taskcrusher.commons.events.storage.LoadNewStorageFileEvent;
 import project.taskcrusher.commons.events.ui.ExitAppRequestEvent;
 import project.taskcrusher.commons.exceptions.DataConversionException;
 import project.taskcrusher.commons.util.ConfigUtil;
@@ -49,7 +50,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Taskcrusher ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
@@ -74,23 +75,26 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyUserInbox> addressBookOptional;
+        return new ModelManager(loadInitialUserInboxFromStorage(storage), userPrefs);
+    }
+
+    private ReadOnlyUserInbox loadInitialUserInboxFromStorage(Storage newStorage) {
+        Optional<ReadOnlyUserInbox> userInboxOptional;
         ReadOnlyUserInbox initialData;
         try {
-            addressBookOptional = storage.readUserInbox();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            userInboxOptional = storage.readUserInbox();
+            if (!userInboxOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample user inbox");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleUserInbox);
+            initialData = userInboxOptional.orElseGet(SampleDataUtil::getSampleUserInbox);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty user inbox");
             initialData = new UserInbox();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty user inbox");
             initialData = new UserInbox();
         }
-
-        return new ModelManager(initialData, userPrefs);
+        return initialData;
     }
 
     private void initLogging(Config config) {
@@ -163,13 +167,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Taskcrusher " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Taskcrusher ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
@@ -184,6 +188,34 @@ public class MainApp extends Application {
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
+    }
+
+    @Subscribe
+    public void handleLoadNewStorageFileEvent(LoadNewStorageFileEvent lnsfe) {
+        logger.info("Attempting to change storage file to  " + lnsfe.filePathToLoad);
+        String currentStorageFilePath = config.getUserInboxFilePath();
+        try {
+            setStoragePathInConfig(lnsfe.filePathToLoad);
+        } catch (IOException e) {
+            logger.warning(LoadNewStorageFileEvent.MESSAGE_LOAD_FAILED);
+            config.setUserInboxFilePath(currentStorageFilePath); //set it back to old path
+            return;
+        }
+        reinitialiseMainAppWithNewStorage(lnsfe.filePathToLoad);
+        logger.info("New storage file successfully loaded");
+    }
+
+    private void setStoragePathInConfig(String newStorageFile) throws IOException {
+        config.setUserInboxFilePath(newStorageFile);
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    }
+
+    private void reinitialiseMainAppWithNewStorage(String newStorageFile) {
+        EventsCenter.getInstance().unregisterHandler(storage);
+        storage = new StorageManager(newStorageFile, config.getUserPrefsFilePath());
+        model.resetData(loadInitialUserInboxFromStorage(storage));
+        logic = new LogicManager(model, storage);
+        ui.setLogic(logic);
     }
 
     public static void main(String[] args) {

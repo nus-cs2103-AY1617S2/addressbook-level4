@@ -99,6 +99,10 @@ public class UiManager extends ComponentManager implements Ui {
         System.exit(1);
     }
 
+    @Override
+    public void setLogic(Logic newLogic) {
+        this.logic = newLogic;
+    }
     //==================== Event Handling Code ===============================================================
 
     @Subscribe

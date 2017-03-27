@@ -29,6 +29,7 @@ public interface Storage extends UserInboxStorage, UserPrefsStorage {
     @Override
     void saveUserInbox(ReadOnlyUserInbox addressBook) throws IOException;
 
+    void loadNewStorageWith(String storageFilename);
     /**
      * Saves the current version of the Address Book to the hard disk.
      *   Creates the data file if it is missing.
