@@ -11,7 +11,9 @@ public class ListCommand extends Command {
         COMPLETE,
         INCOMPLETE,
         ID,
-        DUE
+        DUE,
+        START,
+        END
     };
 
     public static final String COMMAND_WORD = "list";
@@ -45,6 +47,12 @@ public class ListCommand extends Command {
             break;
         case DUE:
             model.updateFilteredListToSortByDue();
+            break;
+        case START:
+            model.updateFilteredListToSortByStart();
+            break;
+        case END:
+            model.updateFilteredListToSortByEnd();
             break;
         }
         return new CommandResult(MESSAGE_SUCCESS);

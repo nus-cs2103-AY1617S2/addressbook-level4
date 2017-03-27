@@ -5,6 +5,8 @@ import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_COMPLETE;
 import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_INCOMPLETE;
 import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_ADDED;
 import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_DUE;
+import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_START;
+import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_END;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -35,6 +37,12 @@ public class ListCommandParser {
             break;
         case LIST_COMMAND_DUE:
             commandOption = ListCommandOption.DUE;
+            break;
+        case LIST_COMMAND_START:
+            commandOption = ListCommandOption.START;
+            break;
+        case LIST_COMMAND_END:
+            commandOption = ListCommandOption.END;
             break;
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));

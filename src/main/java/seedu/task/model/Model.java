@@ -50,10 +50,15 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by given completion */
     void updateFilteredListToShowCompletion(boolean isComplete);
 
-    /** Updates the filter of the filtered task list to sort by id */
+    /** Updates the sorting of the filtered task list to sort by id */
     void updateFilteredListToSortById();
 
-    /** Updates the filter of the filtered task list to sort by due */
+    /** Updates the sorting of the filtered task list to sort by due */
     void updateFilteredListToSortByDue();
 
+    /** Updates the sorting of the filtered task list to sort by start */
+    void updateFilteredListToSortByStart();
+
+    /** Updates the sorting of the filtered task list to sort by end */
+    void updateFilteredListToSortByEnd();
 }

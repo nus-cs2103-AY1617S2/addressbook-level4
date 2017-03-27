@@ -24,4 +24,6 @@ public class CliSyntax {
     public static final String LIST_COMMAND_INCOMPLETE = "incomplete";
     public static final String LIST_COMMAND_ADDED = "by added";
     public static final String LIST_COMMAND_DUE = "by due";
+    public static final String LIST_COMMAND_START = "by starts";
+    public static final String LIST_COMMAND_END = "by ends";
 }

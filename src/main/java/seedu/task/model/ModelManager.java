@@ -2,7 +2,6 @@ package seedu.task.model;
 
 import java.util.Comparator;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -15,6 +14,7 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.DueDate;
+import seedu.task.model.task.Duration;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskId;
@@ -32,9 +32,6 @@ public class ModelManager extends ComponentManager implements Model {
     private FilteredList<ReadOnlyTask> filteredTasks;
     private SortedList<ReadOnlyTask> sortedTasks;
 
-    private final TaskIdComparator idComparator = new TaskIdComparator();
-    private final TaskDueComparator dueComparator = new TaskDueComparator();
-
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
      */
@@ -46,7 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskList = new TaskList(taskList);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
-        sortedTasks = new SortedList<>(this.filteredTasks, idComparator);
+        sortedTasks = new SortedList<>(this.filteredTasks, new TaskIdComparator());
     }
 
     public ModelManager() {
@@ -126,12 +123,26 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(isComplete)));
     }
 
-    @Override public void updateFilteredListToSortById() {
-        sortedTasks.setComparator(idComparator);
+    //=========== Sorted Task List Accessors =============================================================
+
+    @Override
+    public void updateFilteredListToSortById() {
+        sortedTasks.setComparator(new TaskIdComparator());
     }
 
-    @Override public void updateFilteredListToSortByDue() {
-        sortedTasks.setComparator(dueComparator);
+    @Override
+    public void updateFilteredListToSortByDue() {
+        sortedTasks.setComparator(new TaskDueComparator());
+    }
+
+    @Override
+    public void updateFilteredListToSortByStart() {
+        sortedTasks.setComparator(new TaskStartComparator());
+    }
+
+    @Override
+    public void updateFilteredListToSortByEnd() {
+        sortedTasks.setComparator(new TaskEndComparator());
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -257,6 +268,59 @@ public class ModelManager extends ComponentManager implements Model {
             }
             return dueDate1.dueDate.compareTo(dueDate2.dueDate);
         }
+    }
 
+    private class TaskStartComparator implements Comparator<ReadOnlyTask> {
+
+        /**
+         * Compares the start of {@code task1} to {@code task2}.
+         * If the start of {@code task1} is before the start of {@code task2}, a value less than 0
+         * is returned. If the start of {@code task1} is after the start of {@code task2}, a
+         * value greater than 0 is returned. If the starts are equal, 0 is returned. Note that a
+         * null start is considered to be infinity.
+         */
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            Duration duration1 = task1.getDuration();
+            Duration duration2 = task2.getDuration();
+
+            if ((duration1 == null ? duration2 == null : duration1.equals(duration2))) {
+                return 0;
+            }
+            if (duration1 == null) {
+                return 1;
+            }
+            if (duration2 == null) {
+                return -1;
+            }
+            return duration1.start.compareTo(duration2.start);
+        }
+    }
+
+    private class TaskEndComparator implements Comparator<ReadOnlyTask> {
+
+        /**
+         * Compares the end of {@code task1} to {@code task2}.
+         * If the end of {@code task1} is before the end of {@code task2}, a value less than 0
+         * is returned. If the end of {@code task1} is after the end of {@code task2}, a
+         * value greater than 0 is returned. If the ends are equal, 0 is returned. Note that a
+         * null end is considered to be infinity.
+         */
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            Duration duration1 = task1.getDuration();
+            Duration duration2 = task2.getDuration();
+
+            if ((duration1 == null ? duration2 == null : duration1.equals(duration2))) {
+                return 0;
+            }
+            if (duration1 == null) {
+                return 1;
+            }
+            if (duration2 == null) {
+                return -1;
+            }
+            return duration1.end.compareTo(duration2.end);
+        }
     }
 }
