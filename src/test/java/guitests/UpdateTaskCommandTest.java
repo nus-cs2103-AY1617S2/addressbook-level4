@@ -519,4 +519,34 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         assertTrue(isTaskShown(task));
         assertResultMessage("Input contains both recurring and stop recurring arguments at the same time.");
     }
+
+    @Test
+    public void updateTaskWithMultipleParameters_testResultMessage() {
+        int index = 1;
+
+        LocalDateTime from = DateTimeUtil.parseDateString("5 May 2017, 9pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("5 May 2017, 10pm");
+        LocalDateTime recurUntil = DateTimeUtil.parseDateString("5 May 2019, 10pm");
+        String command = UPDATE + index + " write code" + FROM + from + TO + to + PRIORITY + "high"
+                + TAGS + "hello world" + REPEAT + "weekly" + REPEAT_UNTIL + recurUntil;
+        commandBox.runCommand(command);
+        assertResultMessage("Updated task at index 1:\n" +
+            "- Task type: \"TASK\" to \"EVENT\"\n" +
+            "- Description: \"clean the house while Lewis is gone\" to \"write code\"\n" +
+            "- Start date: \"\" to \"Fri, 05 May 2017 09:00 PM\"\n" +
+            "- End date: \"\" to \"Fri, 05 May 2017 10:00 PM\"\n" +
+            "- Priority: \"LOW\" to \"HIGH\"\n" +
+            "- Repeat: \"\" to \"WEEKLY\"\n" +
+            "- Repeat until: \"\" to \"Sun, 05 May 2019 10:00 PM\"\n" +
+            "- Tags: \"lewis work\" to \"hello world\"");
+
+        command = UPDATE + index + FLOATING + TAGS + STOP_REPEATING;
+        commandBox.runCommand(command);
+        assertResultMessage("Updated task at index 1:\n" +
+                "- Task type: \"EVENT\" to \"TASK\"\n" +
+                "- Start date: \"Fri, 05 May 2017 09:00 PM\" to \"\"\n" +
+                "- End date: \"Fri, 05 May 2017 10:00 PM\" to \"\"\n" +
+                "- Repeat: \"WEEKLY\" to \"\"\n" +
+                "- Repeat until: \"Sun, 05 May 2019 10:00 PM\" to \"\"");
+    }
 }

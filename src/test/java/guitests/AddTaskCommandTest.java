@@ -312,10 +312,17 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
 
     @Test
     public void addEventWithMultipleParameters_testResultMessage() {
+        String command = ADD + "get a life";
+        commandBox.runCommand(command);
+        assertResultMessage("Updated task at index 3:\n" +
+                "- Task type: \"TASK\"\n" +
+                "- Description: \"get a life\"\n" +
+                "- Priority: \"LOW\"");
+
         LocalDateTime from = DateTimeUtil.parseDateString("5 May 2017, 9pm");
         LocalDateTime to = DateTimeUtil.parseDateString("5 May 2017, 10pm");
         LocalDateTime recurUntil = DateTimeUtil.parseDateString("5 May 2019, 10pm");
-        String command = ADD + "write code" + FROM + from + TO + to + PRIORITY + "high" + TAGS + "hello world"
+        command = ADD + "write code" + FROM + from + TO + to + PRIORITY + "high" + TAGS + "hello world"
                 + REPEAT + "weekly" + REPEAT_UNTIL + recurUntil;
         commandBox.runCommand(command);
         assertResultMessage("Updated task at index 1:\n" +

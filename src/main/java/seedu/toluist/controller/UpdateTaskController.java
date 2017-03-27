@@ -79,7 +79,7 @@ public class UpdateTaskController extends Controller {
         commandResult = update(task, description, eventStartDateTime, eventEndDateTime,
                 taskDeadline, isFloating, taskPriority, tags,
                 recurringFrequency, recurringUntilEndDate, isStopRecurring);
-        System.out.println(commandResult.getFeedbackToUser());
+
         uiStore.setCommandResult(commandResult);
     }
 
