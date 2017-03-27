@@ -7,6 +7,7 @@ import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -44,16 +45,30 @@ public class FindCommandParser implements CommandParser {
         String namesToMatch = argsTokenizer.getPreamble().orElse("");
         String[] splitNames = namesToMatch.split("\\s+");
 
+        ArrayList<Object> listToCompare = new ArrayList<Object>();
         Optional<Priority> findPriority;
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
         Set<String> findTags;
+        boolean searchByStartDate = false;
+        boolean searchByDueDate = false;
 
         try {
 
             boolean isFind = true;
-            Optional<String> optionalStartDate = parseByDate(getOptionalValue(argsTokenizer, PREFIX_STARTDATE));
-            Optional<String> optionalDueDate = parseByDate(getOptionalValue(argsTokenizer, PREFIX_DUEDATE));
+            Optional<String> optionalStartDate = getOptionalValue(argsTokenizer, PREFIX_STARTDATE);
+            Optional<String> optionalDueDate = getOptionalValue(argsTokenizer, PREFIX_DUEDATE);
+
+            if (isFindBy(optionalStartDate)) {
+                optionalStartDate = parseFindBy(optionalStartDate);
+                searchByStartDate = true;
+            }
+
+            if (isFindBy(optionalDueDate)) {
+                optionalDueDate = parseFindBy(optionalDueDate);
+                searchByDueDate = true;
+            }
+
             findStartDate = ParserUtil.parseStartDate(optionalStartDate, isFind);
             findDueDate = ParserUtil.parseDueDate(optionalDueDate, isFind);
             findTags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
@@ -64,7 +79,12 @@ public class FindCommandParser implements CommandParser {
         }
 
         Set<String> keywords = new HashSet<String>(Arrays.asList(splitNames));
-        return new FindCommand(keywords, findPriority, findStartDate, findDueDate, findTags);
+        listToCompare.add(keywords);
+        listToCompare.add(findPriority);
+        listToCompare.add(findStartDate);
+        listToCompare.add(findDueDate);
+        listToCompare.add(findTags);
+        return new FindCommand(listToCompare, searchByStartDate, searchByDueDate);
     }
 
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
@@ -77,26 +97,31 @@ public class FindCommandParser implements CommandParser {
         return optionalString;
     }
 
-    private Optional<String> parseByDate(Optional<String> taskDate) {
+    private Optional<String> parseFindBy (Optional<String> taskDate) {
+        Optional<String> optionalDate;
+        String taskDateString = taskDate.get();
+        String commandString = taskDateString.substring(3, taskDateString.length()).trim();
+        optionalDate = Optional.of(commandString);
+        return optionalDate;
+    }
+
+    private boolean isFindBy(Optional<String> taskDate) {
         if (!taskDate.isPresent()) {
-            return taskDate;
+            return false;
         } else {
             String taskDateString = taskDate.get();
             if (taskDateString.length() < 3) {
-                return taskDate;
+                return false;
             } else {
+                String PrefixToCompare = "by/";
                 String byPrefix = taskDateString.substring(0, 3);
-                System.out.println(byPrefix);
-                if (byPrefix.equals("by/")) {
-                    Optional<String> optionalDate;
-                    String commandString = taskDateString.substring(3, taskDateString.length()).trim();
-                    optionalDate = Optional.of(commandString);
-                    System.out.println(optionalDate.get());
-                    return optionalDate;
+                if (byPrefix.equals(PrefixToCompare)) {
+                    return true;
                 } else {
-                    return taskDate;
+                    return false;
                 }
             }
         }
     }
+
 }
