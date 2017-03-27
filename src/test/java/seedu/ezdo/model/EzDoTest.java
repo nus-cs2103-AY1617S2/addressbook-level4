@@ -70,6 +70,13 @@ public class EzDoTest {
         ezDo.resetData(newData);
     }
 
+    @Test
+    public void hashCode_works() {
+        EzDo typicalEzDo = new TypicalTestTasks().getTypicalEzDo();
+        EzDo typicalEzDo2 = new TypicalTestTasks().getTypicalEzDo();
+        assertEquals(typicalEzDo.hashCode(), typicalEzDo2.hashCode());
+    }
+
     /**
      * A stub ReadOnlyEzDo whose tasks and tags lists can violate interface constraints.
      */
