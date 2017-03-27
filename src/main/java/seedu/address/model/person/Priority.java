@@ -20,18 +20,15 @@ public class Priority {
      * @throws IllegalValueException if given priority level is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-    	if (priority == null) {
-            this.value = null;
-            this.integerLevel = 0;
-        } else if (priority.equals("high")) {
+    	if (priority.equals("high")) {
         	this.value = priority;
-        	this.integerLevel = 3;
+        	this.integerLevel = 1;
         } else if (priority.equals("medium")) {
         	this.value = priority;
         	this.integerLevel = 2;
         } else if (priority.equals("low")) {
         	this.value = priority;
-        	this.integerLevel = 1;
+        	this.integerLevel = 3;
         } else {
         	throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }

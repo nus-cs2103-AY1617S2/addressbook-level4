@@ -12,8 +12,8 @@ public class Task implements ReadOnlyTask {
 
     private Description description;
     private Priority priority;
-    private ByDate byDate;
     private ByTime byTime;
+    private ByDate byDate;
     private Location location;
     private boolean status;
 
@@ -22,7 +22,6 @@ public class Task implements ReadOnlyTask {
     /**
      * Description and Priority must be present.
      */
-
     public Task(Description description, Priority priority, ByTime byTime, ByDate byDate,
             Location location, UniqueTagList tags, boolean status) {
 
@@ -103,6 +102,14 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
     
+    public boolean hasDeadline() {
+    	if (getByDate() != null) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
     @Override
     public boolean getStatus() {
         return status;
@@ -159,4 +166,5 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+    
 }

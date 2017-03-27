@@ -42,16 +42,7 @@ public interface Model {
      * @throws DuplicateTimeClashException */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
 
-    /**
-     * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
-     *
-     * @throws DuplicateTaskException if updating the Task's details causes the Task to be equivalent to
-     *      another existing Task in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
-     */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException;
-
+    //@@author A0148038A
     /**
      * Updates the Event located at {@code filteredEventListIndex} with {@code editedEvent}.
      *
@@ -60,8 +51,18 @@ public interface Model {
      * @throws DuplicateTimeClashException if the updating Event clashes in time with another Event.
      * @throws IndexOutOfBoundsException if {@code filteredEventListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
+    void updateEvent(Event eventToEdit, Event editedEvent)
             throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
+    
+    /**
+     * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     *
+     * @throws DuplicateTaskException if updating the Task's details causes the Task to be equivalent to
+     *      another existing Task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+     */
+    void updateTask(Task taskToEdit, Task editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered Task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

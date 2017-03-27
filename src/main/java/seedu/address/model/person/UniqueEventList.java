@@ -31,6 +31,10 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList.contains(toCheck);
     }
     
+    public ObservableList<Event> getInternalList() {
+    	return internalList;
+    }
+    
     //@@author A0110491U
     /**
      * 
@@ -48,13 +52,14 @@ public class UniqueEventList implements Iterable<Event> {
             enddatetime = check.getEndDate().getValue().atTime(check.getEndTime().getValue());  
             checkstartdatetime = toCheck.getStartDate().getValue().atTime(toCheck.getStartTime().getValue());
             checkenddatetime = toCheck.getEndDate().getValue().atTime(toCheck.getEndTime().getValue());    
-            if ((startdatetime.isBefore(checkenddatetime)) && (enddatetime.isAfter(checkstartdatetime))) {
+            if (check != toCheck && (startdatetime.isBefore(checkenddatetime)) && (enddatetime.isAfter(checkstartdatetime))) {
                 return true;
             }
         }
         return false;
     }
-    //@@author
+    
+    //@@author A0148038A
     /**
      * Adds an event to the list.
      *
@@ -73,36 +78,27 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.add(toAdd);
         internalList.sorted();
     }
-    //@@author A0110491U
+    
+    //@@author A0148038A
     /**
-     * Updates the event in the list at position {@code index} with {@code editedEvent}.
+     * Updates an event in WhatsLeft.
      *
-     * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
-     *      another existing event in the list.
-     * @throws DuplicateTimeClashException if the updating event's details clashes with another event
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     * @throws DuplicateEventException if the edited event is a duplicate of an existing event in the list.
+     * @throws DuplicateTimeClashException if the edited event clashes with any other event
      */
-    public void updateEvent(int index, ReadOnlyEvent editedEvent) throws DuplicateEventException, DuplicateTimeClashException {
-        assert editedEvent != null;
-
-        Event eventToUpdate = internalList.get(index);
-        if (!eventToUpdate.equals(editedEvent) && internalList.contains(editedEvent)) {
+    public void updateEvent(Event eventToEdit, Event editedEvent) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+        assert eventToEdit != null && editedEvent != null;
+        
+        if (!eventToEdit.equals(editedEvent) && internalList.contains(editedEvent)) {
             throw new DuplicateEventException();
         }
-        Event eventToUpdateKeep = internalList.get(index);
-        Event toStore = new Event(eventToUpdateKeep);
-        eventToUpdate.resetData(editedEvent);
-        internalList.remove(index);
-        if (containsTimeClash(eventToUpdate)) {
-            internalList.add(index, toStore);
-            throw new DuplicateTimeClashException();
+        if (containsTimeClash(eventToEdit)) {
+        	throw new DuplicateTimeClashException();
         }
-        // TODO: The code below is just a workaround to notify observers of the updated event.
-        // The right way is to implement observable properties in the Event class.
-        // Then, EventCard should then bind its text labels to those observable properties.
-        internalList.add(index, eventToUpdate);
+        int index = internalList.indexOf(eventToEdit);
+        internalList.set(index, editedEvent); 
+        internalList.sorted();
     }
-    //@@author
     
     /**
      * Removes the equivalent event from the list.

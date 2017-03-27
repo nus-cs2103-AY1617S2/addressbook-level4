@@ -84,7 +84,7 @@ public class XmlAdaptedTask {
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);
         final boolean status = this.status;
-        
+
         return new Task(description, priority, byTime, byDate, location, tags, status);
 
     }

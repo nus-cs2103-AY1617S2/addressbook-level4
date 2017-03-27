@@ -7,6 +7,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 
 /**
@@ -22,8 +23,9 @@ public class StringUtil {
     public static final int YEAR_CONVERSION_INDEX = 2000;
     
     public static final String DATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
-    
-    //@@author
+    //@@author A0124377A
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.

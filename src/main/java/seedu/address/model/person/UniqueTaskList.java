@@ -8,6 +8,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.person.UniqueEventList.DuplicateEventException;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
+import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 import seedu.address.commons.util.StringUtil;
 
 /**
@@ -44,39 +47,24 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
+    //@@author A0148038A
     /**
-     * Updates the task in the list at position {@code index} with {@code editedTask}.
+     * Updates an event in WhatsLeft.
      *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     * @throws DuplicateEventException if the edited event is a duplicate of an existing event in the list.
+     * @throws DuplicateTimeClashException if the edited event clashes with any other event
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
-        assert editedTask != null;
-
-        Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+    public void updateTask(Task taskToEdit, Task editedTask) throws UniqueTaskList.DuplicateTaskException {
+        assert taskToEdit != null && editedTask != null;
+        
+        if (!taskToEdit.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
-        if (editedTask.getByTime().getValue() != null && editedTask.getByDate().getValue() == null &&
-                taskToUpdate.getByDate().getValue() == null) {
-            editedTask = new Task(editedTask.getDescription(), editedTask.getPriority(), editedTask.getByTime()
-                    , new ByDate(StringUtil.parseStringToDate(StringUtil.getTodayDateInString())), editedTask.getLocation(), editedTask.getTags()
-                    , editedTask.getStatus());
-        }
-        
-        if (editedTask.getByDate() != null && editedTask.getByTime().getValue() == null &&
-                taskToUpdate.getByTime().getValue() == null) {
-            editedTask = new Task(editedTask.getDescription(), editedTask.getPriority(), new ByTime(StringUtil.parseStringToTime("2359"))
-                    , editedTask.getByDate(), editedTask.getLocation(), editedTask.getTags()
-                    , editedTask.getStatus());
-        }
 
-        taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated task.
-        // The right way is to implement observable properties in the Task class.
-        // Then, TaskCard should then bind its text labels to those observable properties.
-        internalList.set(index, taskToUpdate);
+        taskToEdit.resetData(editedTask);
+        int index = internalList.indexOf(taskToEdit);
+        internalList.set(index, editedTask); 
+        internalList.sorted();
     }
     
     //@@author A0121668A

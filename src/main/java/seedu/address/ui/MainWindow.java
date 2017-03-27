@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -20,8 +23,11 @@ import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.ui.CalendarPanel;
+import seedu.address.commons.core.CalendarLayout;
 
 //@@author A0148038A
+//@@author A0124377A
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -40,6 +46,7 @@ public class MainWindow extends UiPart<Region> {
     private EventListPanel eventListPanel;
     private TaskListPanel taskListPanel;
     private Config config;
+    private CalendarPanel calendarPanel;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -58,6 +65,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+    
+    @FXML
+    private AnchorPane calendarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -119,6 +129,7 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
         eventListPanel = new EventListPanel(getEventListPlaceholder(), logic.getFilteredEventList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        calendarPanel= new CalendarPanel(getCalendarPlaceholder(), logic.getFilteredEventList(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getWhatsLeftFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -143,6 +154,10 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
+    
+    private AnchorPane getCalendarPlaceholder() {
+		return calendarPlaceholder;
+	}
 
     void hide() {
         primaryStage.hide();
@@ -211,4 +226,16 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
+    public CalendarPanel getCalendarPanel() {
+        return this.calendarPanel;
+    }
+    
+	public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
+		this.calendarPanel.refresh(eventList,taskList);
+	}
+
+	public void updateCalendarView(LocalDateTime displayedDateTime, CalendarLayout calendarViewMode) {
+		this.calendarPanel.updateCalendarMode(calendarViewMode);
+		this.calendarPanel.updateCalendarShownPeriod(displayedDateTime);
+	}
 }
