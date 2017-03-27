@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             + "Parameters: n/NAME [p/YES_NO] sd/START_DATE] [ed/END_DATE] "
             + "[i/INFORMATION] [r/RECURRENCE] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
-            + " Submit report p/yes sd/today 5pm ed/next friday 11.59pm
+            + " Submit report p/yes sd/today 5pm ed/next friday 11.59pm"
             + " i/inform partner r/WEEKLY c/Work c/Project\n"
             + "Example: " + COMMAND_WORD_SHORT
             + " Watch movie sd/feb 19 c/Fun";
@@ -56,8 +56,8 @@ public class AddCommand extends Command {
      * @throws DefaultCategoryException
      */
     public AddCommand(String name, String priorityLevel, String startDateTime, String endDateTime,
-            String information, Set<String> categories) throws IllegalValueException, InvalidDatesException,
-                                                              DefaultCategoryException {
+            String information, String frequency, Set<String> categories)
+                    throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
         final Set<Category> categorySet = new HashSet<>();
 
         //@@author A0144904H

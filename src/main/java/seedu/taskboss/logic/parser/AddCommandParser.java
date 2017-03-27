@@ -40,7 +40,7 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    checkEmpty(argsTokenizer.getValue(PREFIX_PRIORITY)),
+                    checkInformationEmpty(argsTokenizer.getValue(PREFIX_PRIORITY)),
                     checkStartDateTimeEmpty(argsTokenizer.getValue(PREFIX_START_DATE)),
                     checkEndDateTimeEmpty(argsTokenizer.getValue(PREFIX_END_DATE)),
                     checkInformationEmpty(argsTokenizer.getValue(PREFIX_INFORMATION)),
