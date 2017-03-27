@@ -63,6 +63,9 @@ public class TaskCard extends UiPart<Region> {
             startTime.setText("");
             endTime.setText("");
         }
+        if (task.getDates().isPast()) {
+            setStyleToOverdue();
+        }
 
         // Finished
         checkbox.setDisable(true);
