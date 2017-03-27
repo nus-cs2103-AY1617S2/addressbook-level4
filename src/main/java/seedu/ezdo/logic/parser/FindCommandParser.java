@@ -50,8 +50,10 @@ public class FindCommandParser implements CommandParser {
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
         Set<String> findTags;
-        boolean searchByStartDate = false;
-        boolean searchByDueDate = false;
+        boolean searchBeforeStartDate = false;
+        boolean searchBeforeDueDate = false;
+        boolean searchAfterStartDate = false;
+        boolean searchAfterDueDate = false;
 
         try {
 
@@ -61,12 +63,22 @@ public class FindCommandParser implements CommandParser {
 
             if (isFindBefore(optionalStartDate)) {
                 optionalStartDate = parseFindBefore(optionalStartDate);
-                searchByStartDate = true;
+                searchBeforeStartDate = true;
             }
 
             if (isFindBefore(optionalDueDate)) {
                 optionalDueDate = parseFindBefore(optionalDueDate);
-                searchByDueDate = true;
+                searchBeforeDueDate = true;
+            }
+
+            if (isFindAfter(optionalStartDate)) {
+                optionalDueDate = parseFindAfter(optionalStartDate);
+                searchAfterDueDate = true;
+            }
+
+            if (isFindAfter(optionalDueDate)) {
+                optionalDueDate = parseFindAfter(optionalDueDate);
+                searchAfterDueDate = true;
             }
 
             findStartDate = ParserUtil.parseStartDate(optionalStartDate, isFind);
@@ -84,7 +96,8 @@ public class FindCommandParser implements CommandParser {
         listToCompare.add(findStartDate);
         listToCompare.add(findDueDate);
         listToCompare.add(findTags);
-        return new FindCommand(listToCompare, searchByStartDate, searchByDueDate);
+        return new FindCommand(listToCompare, searchBeforeStartDate, searchBeforeDueDate,
+                               searchAfterStartDate, searchAfterDueDate);
     }
 
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
@@ -100,7 +113,15 @@ public class FindCommandParser implements CommandParser {
     private Optional<String> parseFindBefore(Optional<String> taskDate) {
         Optional<String> optionalDate;
         String taskDateString = taskDate.get();
-        String commandString = taskDateString.substring(3, taskDateString.length()).trim();
+        String commandString = taskDateString.substring(7, taskDateString.length()).trim();
+        optionalDate = Optional.of(commandString);
+        return optionalDate;
+    }
+
+    private Optional<String> parseFindAfter(Optional<String> taskDate) {
+        Optional<String> optionalDate;
+        String taskDateString = taskDate.get();
+        String commandString = taskDateString.substring(6, taskDateString.length()).trim();
         optionalDate = Optional.of(commandString);
         return optionalDate;
     }
@@ -115,6 +136,21 @@ public class FindCommandParser implements CommandParser {
             } else {
                 String prefixToCompare = "before";
                 String byPrefix = taskDateString.substring(0, 6);
+                return byPrefix.equals(prefixToCompare);
+            }
+        }
+    }
+
+    private boolean isFindAfter(Optional<String> taskDate) {
+        if (!taskDate.isPresent()) {
+            return false;
+        } else {
+            String taskDateString = taskDate.get();
+            if (taskDateString.length() < 5) {
+                return false;
+            } else {
+                String prefixToCompare = "after";
+                String byPrefix = taskDateString.substring(0, 5);
                 return byPrefix.equals(prefixToCompare);
             }
         }
