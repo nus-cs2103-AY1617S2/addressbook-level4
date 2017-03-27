@@ -17,8 +17,9 @@
 	3.8. [Reverts the command: **`undo / u`**](#38-reverting-the-last-action-undo--u)<br>
 	3.9. [Clearing all entries: **`clear /c `**](#39-clearing-all-entries-clear--c)<br>
 	3.10. [Moving the save file: **`save`**](#310-moving-the-save-file-save)<br>
-	3.11. [Exiting the program: **`quit / q`**](#311-exiting-the-program-quit--q)<br>
-	3.12. [Viewing help: **`help / h`**](#312-viewing-help-help--h)<br>
+	3.11. [Aliasing a command: **`alias`**](#311-aliasing-a-command)<br>
+	3.12. [Exiting the program: **`quit / q`**](#312-exiting-the-program-quit--q)<br>
+	3.13. [Viewing help: **`help / h`**](#313-viewing-help-help--h)<br>
 4. [Frequently Asked Questions](#4-frequently-asked-questions)<br>
 5. [Command Summary](#5-command-summary)<br>
 
@@ -400,8 +401,31 @@ _**Moves the save file of ezDo to a specified directory.**_<br>
 
 <br>
 
+### 3.11 Aliasing a command: `alias`
+---
+_**Maps a command to the shortcut specified.**_<br>
 
-### 3.11 Exiting the program: `quit / q`
+#### Format:
+
+**`alias COMMAND SHORTCUT`**
+
+<br>
+
+> - `COMMAND` can only be a valid ezDo command.<br><br>
+> -	 `SHORTCUT` must not be an ezDo command.
+
+<br>
+
+#### Example:
+
+*  Map the **`quit`** command to the shortcut **`boom`**: <br> 
+**`alias quit boom`** <br><br>
+Now you can quit ezDo by entering **`boom`**<br>
+
+<br>
+
+
+### 3.12 Exiting the program: `quit / q`
 ---
 _**Exits the program.**_<br>
 
@@ -416,7 +440,7 @@ _**Exits the program.**_<br>
 <br>
 
 
-### 3.12 Viewing help: `help / h`
+### 3.13 Viewing help: `help / h`
 ---
 _**Brings up the help guide in a separate window.**_<br>
 
@@ -452,8 +476,9 @@ For your convenience, the parameters for every command available in ezDo are sum
 |[undo / u](#8-undoing-the-last-action-undo--u) |**`undo`** |
 |[clear / c](#9-clearing-all-entries-clear--c)  |**`clear`**       |
 |[save](#10-moving-the-save-file-save)      |**`save DIRECTORY`**    |
-|[quit / q](#11-exiting-the-program-quit--q)    |**`quit`**              |
-|[help / h](#12-viewing-help-help--h)           |**`help`**    |
+|[alias](#11-aliasing-a-command)      |**`alias COMMAND SHORTCUT`**    |
+|[quit / q](#12-exiting-the-program-quit--q)    |**`quit`**              |
+|[help / h](#13-viewing-help-help--h)           |**`help`**    |
 
 <h5 align="center">Table 3: Command Summary</h5>
 
