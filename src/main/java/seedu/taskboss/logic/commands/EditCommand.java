@@ -46,8 +46,9 @@ public class EditCommand extends Command {
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
 
     //@@author A0144904H
-    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot add Done category";
+    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot edit current catgeories to Done category";
     public static final String ERROR_CANNOT_EDIT_DONE_TASK = "Cannot edit Done tasks";
+    public static final String ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY = "Cannot edit current catgeories to AllTasks category";
 
     //@@author
     private final int filteredTaskListIndex;
@@ -91,6 +92,8 @@ public class EditCommand extends Command {
         } catch (DefaultCategoryException dce) {
             if (dce.getMessage().equals(ERROR_CANNOT_EDIT_DONE_TASK)) {
                 throw new CommandException(ERROR_CANNOT_EDIT_DONE_TASK);
+            } else if (dce.getMessage().equals(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY)) {
+                throw new CommandException(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY);
             } else {
                 throw new CommandException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
             }
@@ -169,13 +172,6 @@ public class EditCommand extends Command {
     private static UniqueCategoryList createUpdatedCategorySet(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
             throws IllegalValueException, DefaultCategoryException {
 
-        //check whether user input for editing task categories contains AllTasks category
-        //and remove it from user input
-        if (editTaskDescriptor.getCategories().isPresent() &&
-                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.DEFAULT_All_TASKS))) {
-            editTaskDescriptor.getCategories().get().remove(new Category(AddCommand.DEFAULT_All_TASKS));
-        }
-
         //check whether user input for editing task categories contains Done category
         //and throw DefaultCategoryException
         if (editTaskDescriptor.getCategories().isPresent() &&
@@ -183,8 +179,14 @@ public class EditCommand extends Command {
             throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
         }
 
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.DEFAULT_All_TASKS))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY);
+        }
+
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
                 .orElseGet(taskToEdit::getCategories);
+
         return updatedCategories;
     }
 
