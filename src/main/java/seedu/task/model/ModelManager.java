@@ -30,7 +30,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskList taskList;
     private FilteredList<ReadOnlyTask> filteredTasks;
+    //@@evanyeung A0163744B
     private SortedList<ReadOnlyTask> sortedTasks;
+    //@@evanyeung
 
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -118,6 +120,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    //@@evanyeung A0163744B
     @Override
     public void updateFilteredListToShowCompletion(boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(isComplete)));
@@ -144,6 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToSortByEnd() {
         sortedTasks.setComparator(new TaskEndComparator());
     }
+    //@@evanyeung
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -200,6 +204,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@evanyeung A0163744B
     private class CompletionQualifier implements Qualifier {
         private boolean isComplete;
 

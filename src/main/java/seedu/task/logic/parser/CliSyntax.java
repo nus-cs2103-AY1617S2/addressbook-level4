@@ -20,10 +20,12 @@ public class CliSyntax {
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
     /* List command definitions */
+    //@@evanyeung A0163744B
     public static final String LIST_COMMAND_COMPLETE = "complete";
     public static final String LIST_COMMAND_INCOMPLETE = "incomplete";
     public static final String LIST_COMMAND_ADDED = "by added";
     public static final String LIST_COMMAND_DUE = "by due";
     public static final String LIST_COMMAND_START = "by starts";
     public static final String LIST_COMMAND_END = "by ends";
+    //@@evanyeung
 }
