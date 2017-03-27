@@ -19,7 +19,7 @@ import seedu.address.model.todo.Todo;
 /**
  * An Immutable TodoList that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "todolist")
 public class XmlSerializableTodoList implements ReadOnlyTodoList {
 
     @XmlElement
