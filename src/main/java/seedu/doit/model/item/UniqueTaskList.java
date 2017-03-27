@@ -84,6 +84,20 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Marks the equivalent task in the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws DuplicateTaskException
+     */
+    public void unmark(int taskIndex, ReadOnlyTask toMark) throws TaskNotFoundException, DuplicateTaskException {
+        assert toMark != null;
+        Task markedTask = new Task(toMark);
+        markedTask.setIsDone(false);
+        updateTask(taskIndex, markedTask);
+        internalList.sort(taskComparator);
+    }
+
+    /**
      * Removes the equivalent task from the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.

@@ -27,6 +27,7 @@ import seedu.doit.model.predicates.NamePredicate;
 import seedu.doit.model.predicates.PriorityPredicate;
 import seedu.doit.model.predicates.TagPredicate;
 
+// @@author A0139399J
 /**
  * Represents the in-memory model of the task manager data. All changes to any
  * model should be synchronized.
@@ -62,7 +63,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.filteredTasks = new FilteredList<ReadOnlyTask>(this.taskManager.getTaskList());
     }
 
-    // @@author
+    // @@author A0139399J
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
@@ -82,7 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager.resetData(new TaskManager());
         indicateTaskManagerChanged();
     }
-    // @@author
+    // @@author A0139399J
 
     @Override
     public ReadOnlyItemManager getTaskManager() {
@@ -130,6 +131,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void unmarkTask(int filteredTaskListIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
+        logger.info("marked a task in model manager as done");
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
+        int taskManagerIndex = this.filteredTasks.getSourceIndex(filteredTaskListIndex);
+        this.taskManager.unmarkTask(taskManagerIndex, taskToDone);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
         logger.info("update task in model manager");
@@ -139,7 +152,6 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
-
     @Override
     public void sortBy(String sortType) {
         switch (sortType) {
@@ -160,7 +172,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
- // @@author A0138909R
+    // @@author A0138909R
     @Override
     public void undo() throws EmptyTaskManagerStackException {
         this.taskManager.resetData(taskManagerStack.loadOlderTaskManager(this.getTaskManager()));
@@ -175,8 +187,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    // @@author
-
+    // @@author A0139399J
     // =========== Filtered Task List Accessors
     // ============================================================
 

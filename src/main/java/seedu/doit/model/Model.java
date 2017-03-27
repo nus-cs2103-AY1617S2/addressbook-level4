@@ -8,7 +8,9 @@ import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
+import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0139399J
 /**
  * The API of the Model component.
  */
@@ -38,6 +40,12 @@ public interface Model {
      */
     void markTask(int taskIndex, ReadOnlyTask taskToDone)
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException;
+
+    /**
+     * Marks the given task as uncompleted
+     */
+    void unmarkTask(int filteredTaskListIndex, ReadOnlyTask taskToDone)
+            throws TaskNotFoundException, DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
@@ -99,5 +107,7 @@ public interface Model {
      */
     void clearData();
     // @@author
+
+
 
 }
