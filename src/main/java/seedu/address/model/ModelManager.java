@@ -99,17 +99,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0121668A
     @Override
-    public synchronized void MarkTaskAsComplete(int filteredTaskListIndex) throws TaskNotFoundException {
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        whatsLeft.completeTask(addressBookIndex);
+    public synchronized void MarkTaskAsComplete(ReadOnlyTask taskToMark) throws TaskNotFoundException {
+        whatsLeft.completeTask(taskToMark);
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }
     
     @Override
-    public synchronized void MarkTaskAsPending(int filteredTaskListIndex) throws TaskNotFoundException {
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        whatsLeft.RedoTask(addressBookIndex);
+    public synchronized void MarkTaskAsPending(ReadOnlyTask taskToMark) throws TaskNotFoundException {
+        whatsLeft.RedoTask(taskToMark);
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }

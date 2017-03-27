@@ -166,15 +166,15 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
     /**
      * Marks the task in the list at position {@code index} as complete.
      */
-    public void completeTask(int index) {
-        tasks.completeTask(index);
+    public void completeTask(ReadOnlyTask taskToMark) {
+        tasks.completeTask(taskToMark);
     }
     
     /**
      * Marks the task in the list at position {@code index} as pending.
      */
-    public void RedoTask(int index) {
-        tasks.RedoTask(index);
+    public void RedoTask(ReadOnlyTask taskToMark) {
+        tasks.RedoTask(taskToMark);
         
     }
     

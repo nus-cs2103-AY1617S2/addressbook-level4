@@ -42,7 +42,7 @@ public class FinishCommand extends Command {
         try {
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
-            model.MarkTaskAsComplete(filteredActivityListIndex-1);
+            model.MarkTaskAsComplete(taskToComplete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

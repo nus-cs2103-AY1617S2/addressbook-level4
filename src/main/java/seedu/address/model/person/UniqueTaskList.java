@@ -72,8 +72,9 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void completeTask(int index) {
-        Task taskToComplete = internalList.get(index);
+    public void completeTask(ReadOnlyTask taskToMark) {
+        Task taskToComplete = new Task(taskToMark);
+        int index = internalList.indexOf(taskToComplete);
         taskToComplete.completeTask();
         internalList.set(index, taskToComplete);
     }
@@ -83,8 +84,9 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void RedoTask(int index) {
-        Task taskToComplete = internalList.get(index);
+    public void RedoTask(ReadOnlyTask taskToMark) {
+        Task taskToComplete = new Task(taskToMark);
+        int index = internalList.indexOf(taskToComplete);
         taskToComplete.redoTask();
         internalList.set(index, taskToComplete);
     }

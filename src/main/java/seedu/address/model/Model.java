@@ -33,10 +33,10 @@ public interface Model {
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
     
     /** Mark the given Task as complete **/
-    void MarkTaskAsComplete(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException;
+    void MarkTaskAsComplete(ReadOnlyTask taskToComplete) throws UniqueTaskList.TaskNotFoundException;
     
     /** Mark the given Task as pending **/
-    void MarkTaskAsPending(int i) throws UniqueTaskList.TaskNotFoundException;
+    void MarkTaskAsPending(ReadOnlyTask taskToRedo) throws UniqueTaskList.TaskNotFoundException;
     
     /** Adds the given Event 
      * @throws DuplicateTimeClashException */
