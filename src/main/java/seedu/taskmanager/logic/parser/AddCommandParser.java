@@ -1,7 +1,7 @@
 package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-//import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
@@ -32,7 +32,7 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_DEADLINE, PREFIX_STARTTIME,
-                PREFIX_ENDTIME/* , PREFIX_CATEGORY */);
+                PREFIX_ENDTIME, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         try {
             String taskName = argsTokenizer.getPreamble().get();
@@ -215,9 +215,9 @@ public class AddCommandParser {
                 }
             }
 
-            return new AddCommand(taskName, startDate, startTime, endDate, endTime
-            // ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)
-            );
+            return new AddCommand(taskName, startDate, startTime, endDate, endTime,
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)));
+
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {

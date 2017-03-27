@@ -13,8 +13,8 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskName;
-//import seedu.taskmanager.model.category.Category;
-//import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * JAXB-friendly version of the Task.
@@ -55,10 +55,10 @@ public class XmlAdaptedTask {
         startTime = source.getStartTime().value;
         endDate = source.getEndDate().value;
         endTime = source.getEndTime().value;
-        // categorised = new ArrayList<>();
-        // for (Category category : source.getCategories()) {
-        // categorised.add(new XmlAdaptedCategory(category));
-        // }
+        categorised = new ArrayList<>();
+        for (Category category : source.getCategories()) {
+            categorised.add(new XmlAdaptedCategory(category));
+        }
     }
 
     /**
@@ -70,18 +70,16 @@ public class XmlAdaptedTask {
      *             task
      */
     public Task toModelType() throws IllegalValueException {
-        // final List<Category> taskCategories = new ArrayList<>();
-        // for (XmlAdaptedCategory category : categorised) {
-        // taskCategories.add(category.toModelType());
-        // }
+        final List<Category> taskCategories = new ArrayList<>();
+        for (XmlAdaptedCategory category : categorised) {
+            taskCategories.add(category.toModelType());
+        }
         final TaskName taskname = new TaskName(this.taskname);
         final StartDate startdate = new StartDate(this.startDate);
         final StartTime starttime = new StartTime(this.startTime);
         final EndDate enddate = new EndDate(this.endDate);
         final EndTime endtime = new EndTime(this.endTime);
-        // final UniqueCategoryList categories = new
-        // UniqueCategoryList(taskCategories);
-        return new Task(taskname, startdate, starttime, enddate,
-                endtime/* , categories */);
+        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
+        return new Task(taskname, startdate, starttime, enddate, endtime, categories);
     }
 }

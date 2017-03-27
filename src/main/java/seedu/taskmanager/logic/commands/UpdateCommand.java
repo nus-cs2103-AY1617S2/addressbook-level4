@@ -7,14 +7,15 @@ import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.util.CollectionUtil;
 //import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.UniqueTaskList;
-//import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 // @@author A0142418L
 /**
@@ -82,14 +83,15 @@ public class UpdateCommand extends Command {
         assert taskToUpdate != null;
 
         TaskName updatedTaskName = updateTaskDescriptor.getTaskName().orElseGet(taskToUpdate::getTaskName);
-        StartDate updatedDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getStartDate);
+        StartDate updatedStartDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getStartDate);
         StartTime updatedStartTime = updateTaskDescriptor.getStartTime().orElseGet(taskToUpdate::getStartTime);
+        EndDate updatedEndDate = updateTaskDescriptor.getEndDate().orElseGet(taskToUpdate::getEndDate);
         EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
-        // UniqueCategoryList updatedCategories =
-        // updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
+        UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories()
+                .orElseGet(taskToUpdate::getCategories);
 
-        return new Task(updatedTaskName, updatedDate, updatedStartTime,
-                updatedEndTime/* , updatedCategories */);
+        return new Task(updatedTaskName, updatedStartDate, updatedStartTime, updatedEndDate, updatedEndTime,
+                updatedCategories);
     }
 
     /**
@@ -99,9 +101,10 @@ public class UpdateCommand extends Command {
     public static class UpdateTaskDescriptor {
         private Optional<TaskName> taskname = Optional.empty();
         private Optional<StartDate> startDate = Optional.empty();
-        private Optional<StartTime> starttime = Optional.empty();
-        private Optional<EndTime> endtime = Optional.empty();
-        // private Optional<UniqueCategoryList> categories = Optional.empty();
+        private Optional<StartTime> startTime = Optional.empty();
+        private Optional<EndDate> endDate = Optional.empty();
+        private Optional<EndTime> endTime = Optional.empty();
+        private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public UpdateTaskDescriptor() {
         }
@@ -109,17 +112,18 @@ public class UpdateCommand extends Command {
         public UpdateTaskDescriptor(UpdateTaskDescriptor toCopy) {
             this.taskname = toCopy.getTaskName();
             this.startDate = toCopy.getDate();
-            this.starttime = toCopy.getStartTime();
-            this.endtime = toCopy.getEndTime();
-            // this.categories = toCopy.getCategories();
+            this.startTime = toCopy.getStartTime();
+            this.endDate = toCopy.getEndDate();
+            this.endTime = toCopy.getEndTime();
+            this.categories = toCopy.getCategories();
         }
 
         /**
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.startDate, this.starttime, this.endtime
-                    /*, this.categories*/);
+            return CollectionUtil.isAnyPresent(this.taskname, this.startDate, this.startTime, this.endDate,
+                    this.endTime, this.categories);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
@@ -140,30 +144,41 @@ public class UpdateCommand extends Command {
             return startDate;
         }
 
-        public void setStartTime(Optional<StartTime> starttime) {
-            assert starttime != null;
-            this.starttime = starttime;
+        public void setStartTime(Optional<StartTime> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
         }
 
         public Optional<StartTime> getStartTime() {
-            return starttime;
+            return startTime;
         }
 
-        public void setEndTime(Optional<EndTime> endtime) {
-            assert endtime != null;
-            this.endtime = endtime;
+        public void setEndDate(Optional<EndDate> endDate) {
+            assert endDate != null;
+            this.endDate = endDate;
+        }
+
+        public Optional<EndDate> getEndDate() {
+            return endDate;
+        }
+
+        public void setEndTime(Optional<EndTime> endTime) {
+            assert endTime != null;
+            this.endTime = endTime;
         }
 
         public Optional<EndTime> getEndTime() {
-            return endtime;
+            return endTime;
         }
 
-        /*
-         * public void setCategories(Optional<UniqueCategoryList> categories) {
-         * assert categories != null; this.categories = categories; }
-         *
-         * public Optional<UniqueCategoryList> getCategories() { return
-         * categories; }
-         */
+        public void setCategories(Optional<UniqueCategoryList> categories) {
+            assert categories != null;
+            this.categories = categories;
+        }
+
+        public Optional<UniqueCategoryList> getCategories() {
+            return categories;
+        }
+
     }
 }
