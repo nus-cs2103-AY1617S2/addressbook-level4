@@ -12,10 +12,10 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
-            "Date and time format should be in this format: DD-MM-YY HHMM";
+            "Date and time format should be in this format: DD-MM-YY [HHMM]";
     public static final String DATETIME_VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{2}(\\s{1}\\d{4})?";
     public static final String DATETIME_REGEX_WITHOUT_TIME = "\\d{2}-\\d{2}-\\d{2}";
-    public static final String DEFAULT_TIME = "0000";
+    public static final String DEFAULT_TIME = "2359";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yy HHmm");
 
     public final LocalDateTime dateTime;
