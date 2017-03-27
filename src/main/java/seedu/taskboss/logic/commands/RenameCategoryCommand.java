@@ -50,7 +50,7 @@ public class RenameCategoryCommand extends Command {
 
         //@@author A0144904H
         try {
-            if (oldCategory.equals(new Category(AddCommand.DEFAULT))) {
+            if (oldCategory.equals(new Category(AddCommand.DEFAULT_All_TASKS))) {
                 throw new DefaultCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
             } else if (oldCategory.equals(new Category("Done"))) {
                 throw new DefaultCategoryException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);

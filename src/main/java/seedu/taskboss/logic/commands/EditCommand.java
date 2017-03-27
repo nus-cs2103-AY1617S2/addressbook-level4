@@ -148,7 +148,7 @@ public class EditCommand extends Command {
         if (taskToEdit.getCategories().contains(new Category("Done"))) {
             throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
         } else {
-            updatedCategories.add(new Category(AddCommand.DEFAULT));
+            updatedCategories.add(new Category(AddCommand.DEFAULT_All_TASKS));
         }
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,

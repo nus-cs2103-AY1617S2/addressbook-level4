@@ -22,7 +22,7 @@ public class TypicalTestTasks {
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Mar 28, 2017 5pm")
                     .withRecurrence(Frequency.NONE)
-                    .withCategories(AddCommand.DEFAULT, "friends").build();
+                    .withCategories(AddCommand.DEFAULT_All_TASKS, "friends").build();
             taskB = new TaskBuilder().withName("Birthday party")
                     .withInformation("311, Clementi Ave 2, #02-25")
                     .withPriorityLevel("No")
@@ -62,25 +62,25 @@ public class TypicalTestTasks {
                     .withEndDateTime("Feb 28, 2018 5pm")
                     .withInformation("little india")
                     .withRecurrence(Frequency.NONE)
-                    .withCategories(AddCommand.DEFAULT).build();
+                    .withCategories(AddCommand.DEFAULT_All_TASKS).build();
             taskI = new TaskBuilder().withName("Invite friends home").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2019 5pm")
                     .withEndDateTime("Feb 28, 2019 5pm")
                     .withInformation("chicago ave")
                     .withRecurrence(Frequency.YEARLY)
-                    .withCategories(AddCommand.DEFAULT).build();
+                    .withCategories(AddCommand.DEFAULT_All_TASKS).build();
             taskJ = new TaskBuilder().withName("Join Leader Group").withPriorityLevel("Yes")
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
                     .withInformation("Silicon Valley")
                     .withRecurrence(Frequency.MONTHLY)
-                    .withCategories(AddCommand.DEFAULT).build();
+                    .withCategories(AddCommand.DEFAULT_All_TASKS).build();
             taskK = new TaskBuilder().withName("Kelvin Koo party").withPriorityLevel("Yes")
                     .withStartDateTime("Dec 20 2019")
                     .withEndDateTime("Dec 21 2019")
                     .withInformation("clementi ave 2")
                     .withRecurrence(Frequency.NONE)
-                    .withCategories(AddCommand.DEFAULT).build();
+                    .withCategories(AddCommand.DEFAULT_All_TASKS).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
