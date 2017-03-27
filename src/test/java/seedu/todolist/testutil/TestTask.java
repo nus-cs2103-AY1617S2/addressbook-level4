@@ -32,6 +32,7 @@ public class TestTask extends Task {
         this.tags = taskToCopy.getTags();
     }
 
+    @Override
     public void setName(Name name) {
         this.name = name;
     }
@@ -44,6 +45,7 @@ public class TestTask extends Task {
         this.endTime = endTime;
     }
 
+    @Override
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -53,10 +55,12 @@ public class TestTask extends Task {
         return name;
     }
 
+    @Override
     public StartTime getStartTime() {
         return startTime;
     }
 
+    @Override
     public EndTime getEndTime() {
         return endTime;
     }
@@ -113,5 +117,10 @@ public class TestTask extends Task {
         }
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public String getType() {
+        return "StartEndTask";
     }
 }

@@ -139,7 +139,7 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
-        allButton.getStyleClass().add(SELECTED);
+        incompleteButton.getStyleClass().add(SELECTED);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -205,31 +205,35 @@ public class MainWindow extends UiPart<Region> {
         helpWindow.show();
     }
 
+    //@@author A0144240W
     @FXML
     public void handleAllButton() throws CommandException {
         String command = LIST + " " + ListCommand.TYPE_ALL;
         logic.execute(command);
     }
 
+    //@@author A0144240W
     @FXML
     public void handleCompletedButton() throws CommandException {
         String command = LIST + " " + ListCommand.TYPE_COMPLETE;
         logic.execute(command);
     }
 
+    //@@author A0144240W
     @FXML
     public void handleIncompleteButton() throws CommandException {
         String command = LIST + " " + ListCommand.TYPE_INCOMPLETE;
         logic.execute(command);
     }
 
+    //@@author A0144240W
     @FXML
     public void handleOverdueButton() throws CommandException {
         String command = LIST + " " + ListCommand.TYPE_OVERDUE;
         logic.execute(command);
     }
 
-    //TODO not done yet
+    //@@author A0144240W
     @FXML
     public void handleUpcomingButton() throws CommandException {
         String command = LIST + " " + ListCommand.TYPE_UPCOMING;

@@ -60,16 +60,25 @@ public abstract class Task {
     /*
      * Return a Hash Code that is unique to this Task object.
      */
+    @Override
     public abstract int hashCode();
 
     /**
      * Returns true if both have the same Task type and the same details.
      * Tags are neglected.
      */
+    @Override
     public abstract boolean equals(Object other);
 
     /**
      * Formats the task as text, showing all details of the task.
      */
+    @Override
     public abstract String toString();
+
+    /**
+     * Returns the type of the task in a string.
+     *
+     */
+    public abstract String getType();
 }

@@ -7,7 +7,9 @@ import seedu.todolist.model.tag.UniqueTagList;
 
 public class EndTask extends Task {
 
+    private static final String TYPE = "EndTask";
     private EndTime endTime;
+
 
     /**
      * name, start time, end time and tags must be present and not null.
@@ -34,19 +36,23 @@ public class EndTask extends Task {
         this.completed = isComplete;
     }
 
+    @Override
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
 
+    @Override
     public Name getName() {
         return name;
     }
 
+    @Override
     public StartTime getStartTime() {
         return null;
     }
 
+    @Override
     public EndTime getEndTime() {
         return endTime;
     }
@@ -80,5 +86,10 @@ public class EndTask extends Task {
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 }

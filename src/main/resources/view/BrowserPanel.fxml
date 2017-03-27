@@ -10,7 +10,7 @@
 
 
 <AnchorPane fx:id="display" id="taskselectiondisplay"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox fx:id="taskDetails" prefHeight="50.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml" VBox.vgrow = "ALWAYS">
+    <VBox fx:id="taskDetails" prefHeight="50.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" VBox.vgrow = "ALWAYS">
          <padding>
              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
           </padding>

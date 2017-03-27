@@ -2,6 +2,8 @@ package seedu.todolist.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -25,6 +27,11 @@ public class TaskListCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label complete;
+    @FXML
+    private ImageView imageView;
+
 
     public TaskListCard(Task task, int displayedIndex) {
         super(FXML);
@@ -33,6 +40,14 @@ public class TaskListCard extends UiPart<Region> {
         startTime.setText(task.getStartTime() != null ? task.getStartTime().toString() : "");
         endTime.setText(task.getEndTime() != null ? task.getEndTime().toString() : "");
         description.setText(task.getDescription() == null ? "" : task.getDescription());
+        Image incompleteIcon = new Image("/images/incomplete-icon.png");
+        Image completeIcon = new Image("/images/complete-icon.png");
+        if (!task.isComplete()) {
+            imageView.setImage(incompleteIcon);
+        } else {
+            imageView.setImage(completeIcon);
+        }
+       
         initTags(task);
     }
 

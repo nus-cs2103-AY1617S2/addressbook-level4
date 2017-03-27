@@ -31,31 +31,26 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private VBox taskDetails;
 
+    //@@author A0144240W
+
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
     public BrowserPanel(AnchorPane placeholder) {
         super(FXML);
-        //resultDisplay.textProperty().bind(displayed);
-        //FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(display, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(display);
-
-        // resultDisplay.appendText("Task Display");
-        //placeholder.setOnKeyPressed(Event::consume); // To prevent triggering events for typing inside the
-        // loaded Web page.
-        // FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
-        //placeholder.getChildren().add(browser);
     }
 
+    //@@author A0144240W
     public void loadPersonPage(Task task) {
         tagsFlow.setHgap(10);
         nameLabel.setText(task.getName().toString());
         tagsheader.setText("Tags:");
-        //will need to fix this
         task.getTags().forEach(tag -> tagsFlow.getChildren().add(new Label(tag.tagName)));
     }
 
+    //@@author A0144240W
     public void freeResources() {
         tagsFlow.getChildren().clear();
     }

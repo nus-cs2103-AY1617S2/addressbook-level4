@@ -136,9 +136,12 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.indicateButtonChange(typeOfList);
     }
 
+    //@@author A0144240W
     @Subscribe
     private void handleToDoListEventChanged(ToDoListChangedEvent event) {
-        mainWindow.getTaskListPanel().scrollTo(event.index);
+        if (event.typeOfCommand.equals("update") || event.typeOfCommand.equals("add")) {
+            mainWindow.getTaskListPanel().scrollTo(event.index);
+        }
     }
 
 }
