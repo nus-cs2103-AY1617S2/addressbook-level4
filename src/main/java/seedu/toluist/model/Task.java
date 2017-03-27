@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.TreeSet;
 
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.commons.util.StringUtil;
 
 /**
  * Represents a Task
@@ -80,7 +81,7 @@ public class Task implements Comparable<Task>, Cloneable {
     }
 
     public boolean validateDescriptionMustNotBeEmpty() {
-        return description != null && !description.isEmpty();
+        return StringUtil.isPresent(description);
     }
 
     public boolean validateStartDateMustBeBeforeEndDate() {

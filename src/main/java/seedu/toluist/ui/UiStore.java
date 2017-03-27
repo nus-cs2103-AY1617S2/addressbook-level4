@@ -166,4 +166,13 @@ public class UiStore {
         shownTasks.setAll(allTasks.stream()
                 .filter(observableSwitchPredicate.getValue().getPredicate()).collect(Collectors.toList()));
     }
+
+    /**
+     * Find the corresponding index for the given task shown on the UI (starting from index 1)
+     * @param task
+     * @return the index if it is found, else 0
+     */
+    public int getTaskIndex(Task task) {
+        return shownTasks.indexOf(task) + 1;
+    }
 }

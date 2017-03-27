@@ -15,6 +15,7 @@ import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.ResultMessage;
 
 /**
  * AddTaskController is responsible for adding a task (and event)
@@ -27,7 +28,6 @@ public class AddTaskController extends Controller {
 
     private static final String COMMAND_ADD_TASK = "add";
 
-    private static final String RESULT_MESSAGE_ADD_TASK = "New %s added: \"%s\"";
     private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
             "The task cannot be classified as a floating task, deadline, or event.";
     private static final String RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE =
@@ -65,10 +65,6 @@ public class AddTaskController extends Controller {
         commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime,
                 taskDeadline, taskPriority, tags, recurringFrequency, recurringUntilEndDate);
 
-        if (todoList.save()) {
-            uiStore.setTasks(todoList.getTasks());
-        }
-
         uiStore.setCommandResult(commandResult);
     }
 
@@ -105,9 +101,12 @@ public class AddTaskController extends Controller {
                 }
             }
             task.replaceTags(tags);
+
             todoList.add(task);
-            String taskType = (task.isEvent()) ? "event" : "task";
-            return new CommandResult(String.format(RESULT_MESSAGE_ADD_TASK, taskType, description));
+            if (todoList.save()) {
+                uiStore.setTasks(todoList.getTasks());
+            }
+            return new CommandResult(ResultMessage.getAddCommandResultMessage(task, uiStore));
         } catch (IllegalArgumentException exception) {
             return new CommandResult(exception.getMessage());
         }

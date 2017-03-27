@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import com.google.common.base.Objects;
-
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.util.DateTimeFormatterUtil;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.IndexParser;
@@ -18,8 +15,8 @@ import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.ResultMessage;
 
 /**
  * UpdateTaskController is responsible for updating a task
@@ -45,7 +42,6 @@ public class UpdateTaskController extends Controller {
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
-        TodoList todoList = TodoList.getInstance();
         CommandResult commandResult;
 
         HashMap<String, String> tokens = tokenize(command);
@@ -82,10 +78,6 @@ public class UpdateTaskController extends Controller {
         commandResult = update(task, description, eventStartDateTime, eventEndDateTime,
                 taskDeadline, isFloating, taskPriority, tags,
                 recurringFrequency, recurringUntilEndDate, isStopRecurring);
-
-        if (todoList.save()) {
-            uiStore.setTasks(todoList.getTasks());
-        }
 
         uiStore.setCommandResult(commandResult);
     }
@@ -142,7 +134,12 @@ public class UpdateTaskController extends Controller {
             if (isStopRecurring) {
                 task.unsetRecurring();
             }
-            return new CommandResult(getSuccessUpdateMessage(taskCopy, task));
+
+            TodoList todoList = TodoList.getInstance();
+            if (todoList.save()) {
+                uiStore.setTasks(todoList.getTasks());
+            }
+            return new CommandResult(ResultMessage.getUpdateCommandResultMessage(taskCopy, task, uiStore));
         } catch (IllegalArgumentException illegalArgumentException) {
             return new CommandResult(illegalArgumentException.getMessage());
         } catch (CloneNotSupportedException cloneNotSupportedException) {
@@ -173,55 +170,6 @@ public class UpdateTaskController extends Controller {
             numberOfTaskTypes++;
         }
         return numberOfTaskTypes <= 1;
-    }
-
-    private String getSuccessUpdateMessage(Task oldTask, Task newTask) {
-        int index = UiStore.getInstance().getTasks().indexOf(newTask);
-        String result = String.format("Updated the following details at index %d:", index);
-        result = addMoreSuccessMessage(result, "Task type", oldTask.getTaskType(), newTask.getTaskType());
-        result = addMoreSuccessMessage(result, "Description", oldTask.getDescription(), newTask.getDescription());
-        result = addMoreSuccessMessage(result, "Start date", oldTask.getStartDateTime(), newTask.getStartDateTime());
-        result = addMoreSuccessMessage(result, "End date", oldTask.getEndDateTime(), newTask.getEndDateTime());
-        result = addMoreSuccessMessage(result, "Priority", oldTask.getTaskPriority(), newTask.getTaskPriority());
-        result = addMoreSuccessMessage(result, "Repeat",
-                oldTask.getRecurringFrequency(), newTask.getRecurringFrequency());
-        result = addMoreSuccessMessage(result, "Repeat until",
-                oldTask.getRecurringEndDateTime(), newTask.getRecurringEndDateTime());
-        result = addMoreSuccessMessage(result, "Tags", oldTask.getAllTags(), newTask.getAllTags());
-        return result;
-    }
-
-    private String addMoreSuccessMessage(String result, String category, Object oldObject, Object newObject) {
-        if (!Objects.equal(oldObject, newObject)) {
-            result = String.join("\n", result, String.format("- " + category + ": \"%s\" to \"%s\"",
-                    toStringCustomized(oldObject), toStringCustomized(newObject)));
-        }
-        return result;
-    }
-
-    /**
-     * Helper method to convert certain types of objects to string.
-     * @param object
-     * @return string representing the object in human-readable form
-     */
-    private String toStringCustomized(Object object) {
-        if (object == null) {
-            return "null";
-        } else if (object instanceof LocalDateTime) {
-            return String.join(" ", DateTimeFormatterUtil.formatDate((LocalDateTime) object),
-                    DateTimeFormatterUtil.formatTime((LocalDateTime) object));
-        } else if (object instanceof Set<?>) {
-            String result = "[";
-            for (Object oneObject : (Set<?>) object) {
-                if (oneObject instanceof Tag) {
-                    result = String.join(" ", result, ((Tag) oneObject).getTagName());
-                }
-            }
-            result = String.join(" ", result, "]");
-            return result;
-        } else {
-            return object.toString();
-        }
     }
 
     public boolean matchesCommand(String command) {
