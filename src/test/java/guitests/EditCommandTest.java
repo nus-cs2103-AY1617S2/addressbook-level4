@@ -1,17 +1,17 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.TodoCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.todo.Name;
-import seedu.address.testutil.TestTodo;
-import seedu.address.testutil.TodoBuilder;
+import seedu.todolist.commons.core.Messages;
+import seedu.todolist.logic.commands.EditCommand;
+import seedu.todolist.model.tag.Tag;
+import seedu.todolist.model.todo.Name;
+import seedu.todolist.testutil.TestTodo;
+import seedu.todolist.testutil.TodoBuilder;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TodoListGuiTest {

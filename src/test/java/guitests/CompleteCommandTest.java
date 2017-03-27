@@ -1,15 +1,15 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CompleteCommand.MESSAGE_COMPLETE_TODO_SUCCESS;
+import static seedu.todolist.logic.commands.CompleteCommand.MESSAGE_COMPLETE_TODO_SUCCESS;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.CompleteCommand;
-import seedu.address.testutil.TestTodo;
-import seedu.address.testutil.TestUtil;
+import seedu.todolist.commons.core.Messages;
+import seedu.todolist.logic.commands.CompleteCommand;
+import seedu.todolist.testutil.TestTodo;
+import seedu.todolist.testutil.TestUtil;
 
 public class CompleteCommandTest extends TodoListGuiTest {
     //@@author A0163786N

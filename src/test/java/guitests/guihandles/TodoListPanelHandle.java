@@ -11,10 +11,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.model.todo.ReadOnlyTodo;
-import seedu.address.model.todo.Todo;
-import seedu.address.testutil.TestUtil;
+import seedu.todolist.TestApp;
+import seedu.todolist.model.todo.ReadOnlyTodo;
+import seedu.todolist.model.todo.Todo;
+import seedu.todolist.testutil.TestUtil;
 
 /**
  * Provides a handle for the panel containing the todo list.

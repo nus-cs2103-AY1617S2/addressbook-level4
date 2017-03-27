@@ -4,11 +4,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.CliSyntax;
-import seedu.address.testutil.TestTodo;
+import seedu.todolist.commons.core.Messages;
+import seedu.todolist.logic.commands.DeleteCommand;
+import seedu.todolist.logic.commands.FindCommand;
+import seedu.todolist.logic.parser.CliSyntax;
+import seedu.todolist.testutil.TestTodo;
 
 public class FindCommandTest extends TodoListGuiTest {
     // This tag only tagged one item (td.cat) in the list of test todos
