@@ -48,8 +48,6 @@ public class ModelManager extends ComponentManager implements Model {
         this.userInbox = new UserInbox(userInbox);
         filteredTasks = new FilteredList<>(this.userInbox.getTaskList());
         filteredEvents = new FilteredList<>(this.userInbox.getEventList());
-        indicateIfEventListToShowIsEmpty();
-        indicateIfTaskListToShowIsEmpty();
     }
 
     public ModelManager() {
@@ -96,6 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         userInbox.removeTask(target);
         indicateUserInboxChanged();
+        prepareTaskListForUi();
     }
 
     @Override
@@ -113,6 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(taskListIndex, editedTask);
         indicateUserInboxChanged();
+        prepareTaskListForUi();
     }
 
     //=========== Event operations =========================================================================
@@ -137,6 +137,12 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addEvent(Event event) throws DuplicateEventException {
         userInbox.addEvent(event);
         updateFilteredEventListToShowAll();
+        indicateUserInboxChanged();
+    }
+
+    public synchronized void confirmEventTime(int filteredEventListIndex, int timeslotIndex) {
+        int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+        userInbox.confirmEventTime(eventListIndex, timeslotIndex);
         indicateUserInboxChanged();
     }
 
@@ -174,6 +180,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void sortFilteredTaskListByDeadline() {
+        logger.info("Sorting in effect");
         filteredTasks.sorted();
     }
 

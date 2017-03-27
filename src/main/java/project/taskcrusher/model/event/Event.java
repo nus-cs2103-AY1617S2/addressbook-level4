@@ -49,6 +49,13 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         return false;
     }
 
+    public boolean confirmTimeslot(int timeslotIndex) {
+        Timeslot confirmed = timeslots.get(timeslotIndex);
+        timeslots.clear();
+        timeslots.add(confirmed);
+        return true;
+    }
+
     public List<Timeslot> getTimeslots() {
         return this.timeslots;
     }
