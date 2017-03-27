@@ -26,14 +26,14 @@ public class TaskCardHandle extends GuiHandle {
     private static final String TEST_DEFAULT_PRIORITY_NUMBER = "";
     private static final String TEST_DEFAULT_PRIORITY_COLOR = "transparent";
 
-    private static final String TEST_LOW_PRIORITY_NUMBER = "1";
-    private static final String TEST_LOW_PRIORITY_COLOR = "red";
+    private static final String TEST_HIGH_PRIORITY_NUMBER = "1";
+    private static final String TEST_HIGH_PRIORITY_COLOR = "red";
 
     private static final String TEST_MEDIUM_PRIORITY_NUMBER = "2";
     private static final String TEST_MEDIUM_PRIORITY_COLOR = "orange";
 
-    private static final String TEST_HIGH_PRIORITY_NUMBER = "3";
-    private static final String TEST_HIGH_PRIORITY_COLOR = "green";
+    private static final String TEST_LOW_PRIORITY_NUMBER = "3";
+    private static final String TEST_LOW_PRIORITY_COLOR = "green";
 
     public static final HashMap<String, String> TEST_PRIORITY_COLOR_HASHMAP = new HashMap<>();
 
