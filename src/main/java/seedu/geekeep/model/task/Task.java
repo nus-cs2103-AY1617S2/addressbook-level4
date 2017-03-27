@@ -185,11 +185,11 @@ public class Task implements ReadOnlyTask  {
     }
 
     public void markDone() {
-        isDone = true;
+        setDone(true);
     }
 
     public void markUndone () {
-        isDone = false;
+        setDone(false);
     }
 
 }
