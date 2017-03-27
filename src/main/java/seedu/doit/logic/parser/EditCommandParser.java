@@ -3,6 +3,7 @@ package seedu.doit.logic.parser;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.doit.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_TAG;
@@ -32,8 +33,8 @@ public class EditCommandParser {
 
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-            new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_START, PREFIX_END,
+                PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -45,7 +46,7 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
         try {
-            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editTaskDescriptor.setName(ParserUtil.parseName(argsTokenizer.getValue(PREFIX_NAME)));
             editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
             editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_START)));
             editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_END)));

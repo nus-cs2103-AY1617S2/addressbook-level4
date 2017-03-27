@@ -4,6 +4,7 @@ import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.doit.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_TAG;
@@ -31,15 +32,17 @@ public class FindCommandParser {
 
     public Command parse(String args) {
 
-        ArgumentTokenizer argsTokenizer =
-            new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_START, PREFIX_END,
+                PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
 
+        Set<String> nameKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_NAME)
+                .orElse(Collections.emptyList()));
         Set<String> priorityKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_PRIORITY)
             .orElse(Collections.emptyList()));
         Set<String> startKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_START)
             .orElse(Collections.emptyList()));
-        Set<String> deadlineKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_END)
+        Set<String> endKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_END)
             .orElse(Collections.emptyList()));
         Set<String> tagsKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_TAG)
             .orElse(Collections.emptyList()));
@@ -56,7 +59,7 @@ public class FindCommandParser {
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet, startKeyWordSet, deadlineKeyWordSet,
+        return new FindCommand(nameKeyWordSet, startKeyWordSet, endKeyWordSet,
             priorityKeyWordSet, tagsKeyWordSet, descKeyWordSet);
 
     }
