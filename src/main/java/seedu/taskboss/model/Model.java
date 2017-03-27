@@ -1,5 +1,6 @@
 package seedu.taskboss.model;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Set;
 
@@ -78,5 +79,7 @@ public interface Model {
     /** Changes the name of a category of all tasks in the filtered task list
      * @throws CommandException */
     void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException;
+
+    void markDone(ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException;
 
 }

@@ -365,4 +365,22 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
+    public void markDone(ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        for (int index = 0; index < tasksToMarkDone.size(); index++) {
+            if (tasksToMarkDone.get(index).isRecurring()) {
+                Task newRecurredTask = new Task(tasksToMarkDone.get(index));
+                newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+                taskBoss.updateTask(index, newRecurredTask);
+            } else {
+                Task markedDone = new Task(tasksToMarkDone.get(index));
+                markedDone.getCategories().setCategories(new UniqueCategoryList("Done"));
+                taskBoss.updateTask(index, markedDone);
+            }
+        }
+
+        indicateTaskBossChanged();
+    }
+
 }

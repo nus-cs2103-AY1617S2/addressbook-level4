@@ -1,6 +1,9 @@
 package seedu.taskboss.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
@@ -27,40 +30,31 @@ public class MarkDoneCommand extends Command {
 
     public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done: %1$s";
 
-    private final int filteredTaskListIndex;
+    public final ArrayList<Integer> filteredTaskListIndices;
+    public final ArrayList<ReadOnlyTask> tasksToMarkDone;
 
-    public MarkDoneCommand(int index) {
-        this.filteredTaskListIndex = index - 1;
+    public MarkDoneCommand(Set<Integer> targetIndex) {
+        this.filteredTaskListIndices = new ArrayList<Integer>(targetIndex);
+        Collections.sort(this.filteredTaskListIndices);
+        this.tasksToMarkDone = new ArrayList<ReadOnlyTask>();
     }
 
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (this.filteredTaskListIndices.get(filteredTaskListIndices.size() - 1) > lastShownList.size()
+                || this.filteredTaskListIndices.get(0) < 1) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToMarkDone = lastShownList.get(filteredTaskListIndex);
-        //@@author A0143157J
-        if (taskToMarkDone.isRecurring()) {
-            Task newRecurredTask = new Task(taskToMarkDone);
-            newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
-            model.updateTask(filteredTaskListIndex, newRecurredTask);
-        } else {
-            Task taskMarked = new Task(taskToMarkDone.getName(), taskToMarkDone.getPriorityLevel(),
-                taskToMarkDone.getStartDateTime(), taskToMarkDone.getEndDateTime(),
-                taskToMarkDone.getInformation(), taskToMarkDone.getRecurrence(),
-                new UniqueCategoryList("Done"));
-            model.updateTask(filteredTaskListIndex, taskMarked);
+        for (int index : this.filteredTaskListIndices) {
+            this.tasksToMarkDone.add(lastShownList.get(index - 1));
         }
 
-        model.updateFilteredListToShowAll();
+        model.markDone(tasksToMarkDone);
 
-        UnmodifiableObservableList<ReadOnlyTask> latestShownList = model.getFilteredTaskList();
-        int targetIndex = latestShownList.indexOf(taskToMarkDone);
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkDone));
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, tasksToMarkDone));
     }
 
 }
