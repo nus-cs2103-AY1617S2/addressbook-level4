@@ -46,7 +46,8 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
      */
-    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs,
+                            boolean isTest) {
         super();
         assert !CollectionUtil.isAnyNull(todoList, aliasListMap, userPrefs);
 
@@ -57,13 +58,19 @@ public class ModelManager extends ComponentManager implements Model {
         this.aliasListMap = new AliasListMap(aliasListMap);
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
-        updateFilteredListToShowDefault();
-        sortTasksByDefault();
+        if (!isTest) {
+            updateFilteredListToShowDefault();
+            sortTasksByDefault();
+        }
         saveCurrentToHistory();
     }
 
     public ModelManager() {
-        this(new TodoList(), new AliasListMap(), new UserPrefs());
+        this(new TodoList(), new AliasListMap(), new UserPrefs(), false);
+    }
+
+    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs) {
+        this(todoList, aliasListMap, userPrefs, false);
     }
 
 

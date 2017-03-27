@@ -94,7 +94,6 @@ public class TaskListPanelHandle extends GuiHandle {
                 return false;
             }
         }
-
         return true;
     }
 

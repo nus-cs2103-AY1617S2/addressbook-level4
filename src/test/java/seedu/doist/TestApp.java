@@ -6,10 +6,17 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.doist.commons.core.Config;
 import seedu.doist.commons.core.GuiSettings;
+import seedu.doist.logic.LogicManager;
+import seedu.doist.model.Model;
+import seedu.doist.model.ModelManager;
+import seedu.doist.model.ReadOnlyAliasListMap;
 import seedu.doist.model.ReadOnlyTodoList;
 import seedu.doist.model.UserPrefs;
+import seedu.doist.storage.Storage;
+import seedu.doist.storage.StorageManager;
 import seedu.doist.storage.XmlSerializableTodoList;
 import seedu.doist.testutil.TestUtil;
+import seedu.doist.ui.UiManager;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for
@@ -39,6 +46,34 @@ public class TestApp extends MainApp {
                     new XmlSerializableTodoList(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
+    }
+    @Override
+    public void init() throws Exception {
+        LOGGER.info("=========================[ Initializing " + APP_TITLE + " ]=======================");
+        super.init();
+
+        config = initConfig(getApplicationParameter("config"));
+        storage = new StorageManager(config.getTodoListFilePath(), config.getAliasListMapFilePath(),
+                                        config.getUserPrefsFilePath());
+
+        userPrefs = initPrefs(config);
+
+        initLogging(config);
+
+        model = initModelManager(storage, userPrefs);
+
+        logic = new LogicManager(model, storage);
+
+        ui = new UiManager(logic, config, userPrefs);
+
+        initEventsCenter();
+    }
+
+    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+        ReadOnlyTodoList initialData = initTodoListData(storage);
+        ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
+
+        return new ModelManager(initialData, initialAliasData, userPrefs, true);
     }
 
     @Override
