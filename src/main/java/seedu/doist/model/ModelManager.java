@@ -193,6 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
         todoList.sortTasks(new ReadOnlyTaskCombinedComparator(comparatorList));
+        indicateTodoListChanged();
     }
 
     //@@author
