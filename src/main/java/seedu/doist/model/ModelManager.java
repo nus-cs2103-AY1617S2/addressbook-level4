@@ -57,8 +57,9 @@ public class ModelManager extends ComponentManager implements Model {
         this.aliasListMap = new AliasListMap(aliasListMap);
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
-        saveCurrentToHistory();
         updateFilteredListToShowDefault();
+        sortTasksByDefault();
+        saveCurrentToHistory();
     }
 
     public ModelManager() {
@@ -176,6 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         int todoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         todoList.updateTask(todoListIndex, editedTask);
+        updateFilteredListToShowDefault();
         indicateTodoListChanged();
     }
 
@@ -193,7 +195,14 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
         todoList.sortTasks(new ReadOnlyTaskCombinedComparator(comparatorList));
-        indicateTodoListChanged();
+    }
+
+    public void sortTasksByDefault() {
+        List<SortType> sortTypes = new ArrayList<SortType>();
+        sortTypes.add(SortType.TIME);
+        sortTypes.add(SortType.PRIORITY);
+        sortTypes.add(SortType.ALPHA);
+        sortTasks(sortTypes);
     }
 
     //@@author

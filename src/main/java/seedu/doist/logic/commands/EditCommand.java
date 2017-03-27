@@ -70,8 +70,6 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        model.updateFilteredListToShowDefault();
-
         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), true);
     }
