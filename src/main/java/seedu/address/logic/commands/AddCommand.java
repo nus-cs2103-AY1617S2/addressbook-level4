@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,67 +32,61 @@ public class AddCommand extends Command {
     public static final String MESSAGE_INVALID_STARTTIME = "Invalid start time entered";
     public static final String MESSAGE_INVALID_ENDTIME = "Invalid end time entered";
     public static final String DATE_FORMAT = "h:mma dd/MM/yy";
+    public static final String MESSAGE_INVALID_PARAMETERS = "Error parsing through parameters";
 
     private final Todo toAdd;
 
     //@@author A0163720M
     /**
      * Creates an AddCommand using raw values.
-     * * Only adds floating task for now
+     * Adds an event todo
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String todo,
-                      String startTime,
-                      String endTime,
-                      Set<String> tags)
-            throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+    public AddCommand(String todo, String startTime, String endTime, Set<String> tags) throws IllegalValueException {
+        try {
+            // Parse through the set of tags
+            final Set<Tag> tagSet = new HashSet<>();
+            for (String tagName : tags) {
+                tagSet.add(new Tag(tagName));
+            }
+            
+            // Check for existence of each of the fields
+            Name name = (todo == null) ? new Name(todo) : null;
+            Date start = (startTime == null) ? StringUtil.parseDate(startTime, DATE_FORMAT) : null;
+            Date end = (endTime == null) ? StringUtil.parseDate(endTime, DATE_FORMAT) : null;
+            UniqueTagList tagList = new UniqueTagList(tagSet);
+            
+            this.toAdd = new Todo(name, start, end, tagList);
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(MESSAGE_INVALID_PARAMETERS);
         }
-
-        this.toAdd = new Todo(
-                new Name(todo),
-                StringUtil.parseDate(startTime, DATE_FORMAT),
-                StringUtil.parseDate(endTime, DATE_FORMAT),
-                new UniqueTagList(tagSet));
     }
 
     //@@author A0163720M
     /**
      * Creates an AddCommand using raw values.
-     * * Only adds floating task for now
+     * Adds a deadline todo
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String todo,
-                      String endTime,
-                      Set<String> tags)
-            throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-
-        this.toAdd = new Todo(
-                new Name(todo),
-                StringUtil.parseDate(endTime, DATE_FORMAT),
-                new UniqueTagList(tagSet));
+    public AddCommand(String todo, String endTime, Set<String> tags) throws IllegalValueException {
+        // Cannot throw an exception since there's only one line in the constructor and the first line cannot be try{}
+        this(todo, null, endTime, tags);
     }
-
+    
+    //@@author A0163720M
+    /**
+     * Creates an AddCommand using raw values.
+     * Adds a floating todo
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
     public AddCommand(String todo, Set<String> tags) throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-
-        this.toAdd = new Todo(
-                new Name(todo),
-                new UniqueTagList(tagSet)
-        );
+        // Cannot throw an exception since there's only one line in the constructor and the first line cannot be try{}
+        this(todo, null, null, tags);
     }
-
+    
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
@@ -101,6 +96,5 @@ public class AddCommand extends Command {
         } catch (UniqueTodoList.DuplicateTodoException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
-
     }
 }
