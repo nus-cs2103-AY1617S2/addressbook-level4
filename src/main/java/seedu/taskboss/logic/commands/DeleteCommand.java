@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
         this.targetIndex = new ArrayList<Integer>(targetIndex);
         Collections.sort(this.targetIndex);
         Collections.reverse(this.targetIndex);
-        this.tasksToDelete = new ArrayList<ReadOnlyTask>();       
+        this.tasksToDelete = new ArrayList<ReadOnlyTask>();
     }
 
 
@@ -47,14 +47,14 @@ public class DeleteCommand extends Command {
 
         for (int index: targetIndex) {
             ReadOnlyTask taskToDelete = lastShownList.get(index - 1);
-            
+
             if ((lastShownList.size() < index) || (index == 0)) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
-            
+
             tasksToDelete.add(taskToDelete);
         }
-        
+
         for (ReadOnlyTask taskToDelete: tasksToDelete) {
             try {
                 model.deleteTask(taskToDelete);
@@ -62,7 +62,7 @@ public class DeleteCommand extends Command {
                 assert false : "The target task cannot be missing";
             }
         }
-        
+
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
     }
 
