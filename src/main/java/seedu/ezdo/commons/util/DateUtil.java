@@ -22,6 +22,7 @@ public class DateUtil {
     }
 
 
+    //@@author A0138907W
     /**
      * Compares two dates strings. Both strings must be in the format dd/MM/yyyy hh:mm.
      * Empty strings are considered to be of lower value than non-empty strings.
