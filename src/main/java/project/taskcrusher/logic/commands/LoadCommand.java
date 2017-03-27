@@ -3,11 +3,14 @@ package project.taskcrusher.logic.commands;
 import java.io.File;
 import java.io.IOException;
 
+import project.taskcrusher.commons.core.EventsCenter;
+import project.taskcrusher.commons.events.BaseEvent;
+import project.taskcrusher.commons.events.storage.LoadNewStorageFileEvent;
 import project.taskcrusher.commons.util.FileUtil;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 
 /** loads a new xml storage file. If the file does not exist, create a new one and set it as the storage file
- *
+ *  This is achieved by posting LoadNewStorageFileEvent which is handled at the high-level MainApp instance.
  */
 public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
@@ -35,10 +38,15 @@ public class LoadCommand extends Command {
 
         try {
             FileUtil.createIfMissing(new File(filenameToLoad));
+            raise (new LoadNewStorageFileEvent(filenameToLoad));
             return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, filenameToLoad));
         } catch (IOException ioe) {
-            throw new CommandException(MESSAGE_INVALID_EXTENSION);
+            throw new CommandException(MESSAGE_INVALID_FILENAME);
         }
+    }
+
+    private void raise(BaseEvent e) {
+        EventsCenter.getInstance().post(e);
     }
 
 }

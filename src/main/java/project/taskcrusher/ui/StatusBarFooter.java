@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
+import project.taskcrusher.commons.events.storage.LoadNewStorageFileEvent;
 import project.taskcrusher.commons.util.FxViewUtil;
 
 /**
@@ -53,5 +54,11 @@ public class StatusBarFooter extends UiPart<Region> {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
+    }
+
+    @Subscribe
+    public void handleLoadNewStorageFileEvent(LoadNewStorageFileEvent lnsfe) {
+        //TODO: for now, even if an error occurs during switching to new storage, this would still be changed
+        this.saveLocationStatus.setText(lnsfe.filePathToLoad);
     }
 }

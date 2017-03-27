@@ -16,6 +16,7 @@ import project.taskcrusher.logic.commands.FindCommand;
 import project.taskcrusher.logic.commands.HelpCommand;
 import project.taskcrusher.logic.commands.IncorrectCommand;
 import project.taskcrusher.logic.commands.ListCommand;
+import project.taskcrusher.logic.commands.LoadCommand;
 import project.taskcrusher.logic.commands.SelectCommand;
 
 /**
@@ -57,6 +58,8 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommand(arguments.trim());
           //TODO remove this later on
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
