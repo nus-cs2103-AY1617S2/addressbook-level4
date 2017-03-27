@@ -18,7 +18,7 @@ public class ScheduleCommandTest extends TaskManagerGuiTest {
     @Test
     public void scheduleEventSuccess() throws Exception {
         String detailsToSchedule = "sunday 10pm to sunday 11pm";
-        int taskManagerIndex = 2;
+        int taskManagerIndex = 5;
 
         TestTask scheduledTask = new TaskBuilder().withName("Wash the dishes")
                 .withNote("They're in the sink").withStatus("incomplete").withPriority("mid")
@@ -31,7 +31,7 @@ public class ScheduleCommandTest extends TaskManagerGuiTest {
     @Test
     public void scheduleEndTimeSuccess() throws Exception {
         String detailsToSchedule = "12/12/2017 14:00";
-        int taskManagerIndex = 2;
+        int taskManagerIndex = 5;
 
         TestTask scheduledTask = new TaskBuilder().withName("Wash the dishes")
                 .withNote("They're in the sink").withStatus("incomplete").withPriority("mid")
