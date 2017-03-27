@@ -43,7 +43,7 @@ public class Task implements ReadOnlyTask {
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
 
-	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus) {
+	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus) throws IllegalValueException {
 
 	this.taskName = parseTaskName;
 	if (parseDate.isPresent()) {

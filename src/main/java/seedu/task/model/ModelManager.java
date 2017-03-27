@@ -188,24 +188,24 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void undo() throws Exception {
-		taskmanager.undo();
+		taskManager.undo();
 	}
 
 	@Override
 	public void updateBackup() throws DuplicateTaskException {
-		taskmanager.updateBackup();
+		taskManager.updateBackup();
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void sortByTime() {
-		taskmanager.sortTasksByTime();
+		taskManager.sortTasksByTime();
 		
 	}
 	public void sortByName() {
 		System.out.println("test");
-		taskmanager.sortTasksByName();
+		taskManager.sortTasksByName();
 	}
 
 }
