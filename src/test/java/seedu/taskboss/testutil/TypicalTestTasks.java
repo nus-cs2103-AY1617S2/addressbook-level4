@@ -20,7 +20,7 @@ public class TypicalTestTasks {
                     .withPriorityLevel("Yes")
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Mar 28, 2017 5pm")
-                    .withCategories("friends").build();
+                    .withCategories(AddCommand.DEFAULT, "friends").build();
             taskB = new TaskBuilder().withName("Birthday party")
                     .withInformation("311, Clementi Ave 2, #02-25")
                     .withPriorityLevel("No")
