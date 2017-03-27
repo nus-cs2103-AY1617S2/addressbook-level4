@@ -90,7 +90,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-
+    
+    //@author A0141872E
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
@@ -99,6 +100,13 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+    
+    @Override
+    public int updateFilteredTaskList(String parameter) {
+        updateFilteredTaskList(new PredicateExpression(new ParameterQualifier(parameter)));
+        return filteredTasks.size();
+    }
+    //@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -151,6 +159,40 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+    
+    private class ParameterQualifier implements Qualifier {
+        private String parameter;
+        
+        ParameterQualifier(String parameter) {
+            this.parameter=parameter;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            switch (parameter){
+                case "done":
+                    return task.isDone();
+                
+                case "undone":
+                    return !task.isDone();
+                    
+                case "overdue":
+                    return task.isOverdue() && !task.isDone();
+                
+                case "today":
+                    return !task.isDone() && task.getEnd().isDateEqualCurrentDate();
+            
+                default:
+                    return false;
+            }
+        }
+        
+        @Override
+        public String toString() {
+            return "parameter=" + String.join(", ", parameter);
+        }
+        
     }
 
 }
