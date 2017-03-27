@@ -59,13 +59,13 @@ public class FindCommandParser implements CommandParser {
             Optional<String> optionalStartDate = getOptionalValue(argsTokenizer, PREFIX_STARTDATE);
             Optional<String> optionalDueDate = getOptionalValue(argsTokenizer, PREFIX_DUEDATE);
 
-            if (isFindBy(optionalStartDate)) {
-                optionalStartDate = parseFindBy(optionalStartDate);
+            if (isFindBefore(optionalStartDate)) {
+                optionalStartDate = parseFindBefore(optionalStartDate);
                 searchByStartDate = true;
             }
 
-            if (isFindBy(optionalDueDate)) {
-                optionalDueDate = parseFindBy(optionalDueDate);
+            if (isFindBefore(optionalDueDate)) {
+                optionalDueDate = parseFindBefore(optionalDueDate);
                 searchByDueDate = true;
             }
 
@@ -97,7 +97,7 @@ public class FindCommandParser implements CommandParser {
         return optionalString;
     }
 
-    private Optional<String> parseFindBy (Optional<String> taskDate) {
+    private Optional<String> parseFindBefore(Optional<String> taskDate) {
         Optional<String> optionalDate;
         String taskDateString = taskDate.get();
         String commandString = taskDateString.substring(3, taskDateString.length()).trim();
@@ -105,7 +105,7 @@ public class FindCommandParser implements CommandParser {
         return optionalDate;
     }
 
-    private boolean isFindBy(Optional<String> taskDate) {
+    private boolean isFindBefore(Optional<String> taskDate) {
         if (!taskDate.isPresent()) {
             return false;
         } else {
