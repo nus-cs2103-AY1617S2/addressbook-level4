@@ -15,7 +15,7 @@ import seedu.address.model.tag.UniqueTagList;
 
 public class TaskTest {
     @Test
-    public void FloatingTaskTest() throws Exception {
+    public void floatingTaskTest() throws Exception {
         try {
             Task task = new FloatingTask(new Name("a floating task"),
                     new UniqueTagList("tag1", "tag2"), false, false);
@@ -36,7 +36,7 @@ public class TaskTest {
     }
 
     @Test
-    public void DeadlineTaskTest() throws Exception {
+    public void deadlineTaskTest() throws Exception {
         try {
             Date date = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
             Task task = new DeadlineTask(new Name("a deadline task"),
@@ -59,7 +59,7 @@ public class TaskTest {
     }
 
     @Test
-    public void EventTaskTest() throws Exception {
+    public void eventTaskTest() throws Exception {
         try {
             Date date = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
             Date date2 = DateUtils.addDays(date, 1);
