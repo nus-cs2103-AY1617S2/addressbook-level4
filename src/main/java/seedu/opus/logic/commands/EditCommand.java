@@ -66,9 +66,6 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            if (!Task.isValidEvent(editedTask)) {
-                throw new CommandException(MESSAGE_INVALID_EVENT);
-            }
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
