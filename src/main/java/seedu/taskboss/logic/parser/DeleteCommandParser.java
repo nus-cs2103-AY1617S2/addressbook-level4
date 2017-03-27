@@ -34,9 +34,10 @@ public class DeleteCommandParser {
         Set<Integer> taskIndex = new HashSet<Integer>();
         String trimmedList = indexList.trim();
         String[] indexes = trimmedList.split(" ");
-        
+
         for (String index : indexes) {
             taskIndex.add(Integer.parseInt(index));
+        }
 
         return taskIndex;
     }
