@@ -69,7 +69,6 @@ public class TaskCard extends UiPart<Region> {
         setImagestoIndicatePriorityOrComplete();
         //add endDate.setText(...);
         //add setImages...
-        
     }
 
     //@@author A0139154E
@@ -99,16 +98,16 @@ public class TaskCard extends UiPart<Region> {
             setImageToIndicateCompleted();
         }
     }
-    
+
     //@@author A0139154E
     private void setImageToIndicatePriority() {
         priorityOrDone.setImage(priority);
     }
-    
+
     //@@author A0139154E
     private void setImageToIndicateCompleted() {
         priorityOrDone.setImage(done);
     }
-    
+
 
 }
