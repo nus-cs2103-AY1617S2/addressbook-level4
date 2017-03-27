@@ -77,7 +77,6 @@ public class CalendarPanel extends UiPart<Region> {
         }
         String isActive = String.valueOf(task.getActiveStatus());
         return "add_event('" + title + "', '" + start + "', '" + end + "', '" + isActive + "')";
-
     }
 
     @Subscribe

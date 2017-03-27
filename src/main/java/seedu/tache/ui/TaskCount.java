@@ -43,11 +43,13 @@ public class TaskCount extends UiPart<Region> {
 
     //@@author A0142255M
     private void setTimedTaskCount(ObservableList<ReadOnlyTask> taskList) {
+        assert taskList != null;
         String count = getTimedTaskCount(taskList);
         this.timedTaskCount.setText(count);
     }
 
     private String getTimedTaskCount(ObservableList<ReadOnlyTask> taskList) {
+        assert taskList != null;
         int count = 0;
         for (ReadOnlyTask task : taskList) {
             if (task.getTimedStatus() == true) {
@@ -58,11 +60,13 @@ public class TaskCount extends UiPart<Region> {
     }
 
     private void setFloatingTaskCount(ObservableList<ReadOnlyTask> taskList) {
+        assert taskList != null;
         String count = getFloatingTaskCount(taskList);
         this.floatingTaskCount.setText(count);
     }
 
     private String getFloatingTaskCount(ObservableList<ReadOnlyTask> taskList) {
+        assert taskList != null;
         int count = 0;
         for (ReadOnlyTask task : taskList) {
             if (task.getTimedStatus() == false) {
@@ -74,6 +78,7 @@ public class TaskCount extends UiPart<Region> {
 
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
+        assert event != null;
         ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
         String oldTimedCount = this.timedTaskCount.getText();
         String newTimedCount = this.getTimedTaskCount(taskList);
