@@ -3,7 +3,9 @@ package seedu.onetwodo.logic.commands;
 import java.util.Optional;
 
 import javafx.collections.transformation.FilteredList;
+import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.Messages;
+import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.tag.UniqueTagList;
@@ -65,6 +67,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex - 1);
+        
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
         int internalIdx = model.getFilteredTaskList().indexOf(taskToEdit);
 
@@ -76,7 +79,13 @@ public class EditCommand extends Command {
             model.deleteTask(taskToEdit);
             model.addTask(internalIdx, editedTask);
             jumpToNewTask(editedTask);
+            EventsCenter.getInstance().post(new DeselectCardsEvent());
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
+        	try {
+            model.addTask(internalIdx, (Task) taskToEdit);
+        	} catch (UniqueTaskList.DuplicateTaskException dpe2) {
+        		throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        	}
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (UniqueTaskList.TaskNotFoundException tne) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
