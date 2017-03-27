@@ -1,6 +1,9 @@
 package seedu.doist.model.task;
 
 import java.util.Date;
+import java.util.List;
+
+import com.joestelmach.natty.DateGroup;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 
@@ -66,5 +69,25 @@ public class TaskDate {
         } else {
             return (startDate.compareTo(endDate) <= 0) ? true : false;
         }
+    }
+
+    /**
+     * Function to support natural language input for date and time, using a 3rd party library 'Natty'
+     * @param date
+     * @return extracte Date if parsing is succesful, or null if it fails
+     */
+    public static Date parseDate (String date) {
+        com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
+        List<DateGroup> groups = parser.parse(date);
+        Date extractDate = null;
+        boolean flag = false;
+        for (DateGroup group:groups) {
+            List<Date> dates = group.getDates();
+            if (!dates.isEmpty()) {
+                extractDate = dates.get(0);
+                flag = true;
+            }
+        }
+        return (flag ? extractDate : null);
     }
 }
