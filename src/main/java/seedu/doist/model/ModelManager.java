@@ -1,6 +1,7 @@
 package seedu.doist.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -15,10 +16,14 @@ import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.commons.util.History;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.commands.ListCommand.TaskType;
+import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskAlphabetComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskCombinedComparator;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskTimingComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
@@ -37,15 +42,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final History<TodoList> todoListHistory = new History<TodoList>();
     private final AliasListMap aliasListMap;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-
-    public enum SortType {
-        PRIORITY,
-        TIME,
-        ALPHA,
-    }
-    // Current sorting method won't change until sort command is run again
-    private List<SortType> currentSortTypes;
-    //private SortType currentSortType = SortTyoe
 
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
@@ -185,8 +181,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0140887W
     @Override
-    public void sortTasksByPriority() {
-        todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
+    public void sortTasks(List<SortType> sortTypes) {
+        List<Comparator<ReadOnlyTask>> comparatorList = new ArrayList<Comparator<ReadOnlyTask>>();
+        for (SortType type : sortTypes) {
+            if (type.equals(SortType.PRIORITY)) {
+                comparatorList.add(new ReadOnlyTaskPriorityComparator());
+            } else if (type.equals(SortType.TIME)) {
+                comparatorList.add(new ReadOnlyTaskTimingComparator());
+            } else if (type.equals(SortType.ALPHA)) {
+                comparatorList.add(new ReadOnlyTaskAlphabetComparator());
+            }
+        }
+        todoList.sortTasks(new ReadOnlyTaskCombinedComparator(comparatorList));
     }
 
     //@@author

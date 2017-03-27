@@ -1,6 +1,7 @@
 package seedu.doist.model.task;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import seedu.doist.model.tag.UniqueTagList;
@@ -55,7 +56,7 @@ public interface ReadOnlyTask {
     //@@author A0140887W
     /**
      * Compare the priority of two tasks
-     * @return: -1 task2 has a lower priority than task1
+     * @return: -1 if task2 has a lower priority than task1
      */
     public class ReadOnlyTaskPriorityComparator implements Comparator<ReadOnlyTask> {
         @Override
@@ -68,17 +69,51 @@ public interface ReadOnlyTask {
     }
 
     /**
+     * Compare the timing of two tasks
+     * @return: -1 if task1 is earlier than task2
+     */
+    public class ReadOnlyTaskTimingComparator implements Comparator<ReadOnlyTask> {
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            // Earliest to latest timing
+            Date date1 = task1.getDates().getStartDate();
+            Date date2 = task2.getDates().getStartDate();
+            // Floating tasks are put behind
+            if (date1 == null) {
+                return 1;
+            } else if (date2 == null) {
+                return -1;
+            }
+            return date1.compareTo(date2);
+        }
+    }
+
+    /**
+     * Compare the tasks by alphabetical order of their description
+     * @return: -1 if task1 is less than task2 (alphabetical order)
+     */
+    public class ReadOnlyTaskAlphabetComparator implements Comparator<ReadOnlyTask> {
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            // A to Z
+            String desc1 = task1.getDescription().desc;
+            String desc2 = task2.getDescription().desc;
+            return desc1.compareTo(desc2);
+        }
+    }
+
+    /**
      * Combines multiple comparators together to compare tasks.
      * For example if you want to sort by end time then by priority,
      * you create a list of comparators, adding the end time comparator first
      * then adding the priority comparator.
      * @return: -1 task1 is compared to be "less" than task2 based on multiple comparators
      */
-    public class CombinedComparator implements Comparator<ReadOnlyTask> {
+    public class ReadOnlyTaskCombinedComparator implements Comparator<ReadOnlyTask> {
 
         private List<Comparator<ReadOnlyTask>> comparators;
 
-        public CombinedComparator(List<Comparator<ReadOnlyTask>> comparators) {
+        public ReadOnlyTaskCombinedComparator(List<Comparator<ReadOnlyTask>> comparators) {
             this.comparators = comparators;
         }
 

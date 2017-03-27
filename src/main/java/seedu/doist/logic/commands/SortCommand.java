@@ -1,6 +1,7 @@
 package seedu.doist.logic.commands;
 
-import seedu.doist.model.ModelManager.SortType;
+import java.util.ArrayList;
+import java.util.List;
 
 //@@author A0140887W
 /**
@@ -8,34 +9,37 @@ import seedu.doist.model.ModelManager.SortType;
  */
 public class SortCommand extends Command {
 
-    public SortType sortType;
+    public enum SortType {
+        PRIORITY,
+        TIME,
+        ALPHA
+    }
+
+    public List<SortType> sortTypes = new ArrayList<SortType>();
 
     public static final String DEFAULT_COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ":\n" + "Sorts previously listed tasks." + "\n"
-            + "Can sort by priority for now. \n\t"
-            + "Parameters: SORTTYPE " + "\n\t"
+            + "You can sort by priority, alphabetical order or by time\n\t"
+            + "SORT_TYPE can be PRIORITY, TIME, or ALPHA\n"
+            + "Parameters: SORT_TYPE " + "\n\t"
             + "Example: " + DEFAULT_COMMAND_WORD
-            + " priority";
+            + "alpha";
 
     public static final String MESSAGE_SORT_CONSTRAINTS =
             "You can only " + DEFAULT_COMMAND_WORD + "\n"
-            + SortType.PRIORITY.toString();
+            + SortType.PRIORITY.toString() + " "
+            + SortType.ALPHA.toString() + " "
+            + SortType.TIME.toString();
 
-    public SortCommand(SortType type) {
-        this.sortType = type;
+    public SortCommand(List<SortType> list) {
+        this.sortTypes = list;
     }
 
     @Override
     public CommandResult execute() {
-        switch(sortType) {
-        case PRIORITY:
-            model.sortTasksByPriority();
-            return new CommandResult(getMessageForPersonListSortedSummary(sortType));
-        default:
-            model.sortTasksByPriority();
-            return new CommandResult(getMessageForPersonListSortedSummary(sortType));
-        }
+        model.sortTasks(sortTypes);
+        return new CommandResult(getMessageForPersonListSortedSummary(sortTypes));
     }
 }
