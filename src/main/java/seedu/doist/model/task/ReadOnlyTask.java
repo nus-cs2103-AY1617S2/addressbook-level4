@@ -69,7 +69,7 @@ public interface ReadOnlyTask {
      */
     public class CombinedComparator implements Comparator<ReadOnlyTask> {
 
-        List<Comparator<ReadOnlyTask>> comparators;
+        private List<Comparator<ReadOnlyTask>> comparators;
 
         public CombinedComparator(List<Comparator<ReadOnlyTask>> comparators) {
             this.comparators = comparators;

@@ -22,7 +22,7 @@ import seedu.doist.model.task.TaskDate;
  */
 public class XmlAdaptedTask {
 
-    static final String NULL_STRING = "null";
+    private static final String NULL_STRING = "null";
 
     @XmlElement(required = true)
     private String desc;
@@ -97,7 +97,7 @@ public class XmlAdaptedTask {
     }
 
     private Date getDate(String dateString) {
-        if (dateString != NULL_STRING) {
+        if (dateString.equals(NULL_STRING)) {
             return TaskDate.parseDate(dateString);
         } else {
             return null;
