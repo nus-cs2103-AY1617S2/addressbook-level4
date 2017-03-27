@@ -64,6 +64,19 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, editedTask);
     }
 
+    /**
+     * Updates the task in the list at position {@code index} with {@code editedTask}.
+     *
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void describeTask(int index, Task editedTask) {
+        assert editedTask != null;
+
+        internalList.set(index, editedTask);
+    }
+
     /*
      * Mark the targeted Task as completed.
      *

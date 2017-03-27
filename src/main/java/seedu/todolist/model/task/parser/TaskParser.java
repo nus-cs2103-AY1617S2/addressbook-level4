@@ -103,7 +103,8 @@ public class TaskParser {
      * @@author A0141647E
      */
     public static Task parseTask(Name name, StartTime startTime,
-            EndTime endTime, UniqueTagList uniqueTagList, boolean isComplete) {
+            EndTime endTime, UniqueTagList uniqueTagList,
+            boolean isComplete, String description) {
         assert name != null;
 
         if (startTime != null && endTime != null) {

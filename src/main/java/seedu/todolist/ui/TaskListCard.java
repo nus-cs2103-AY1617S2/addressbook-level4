@@ -39,8 +39,7 @@ public class TaskListCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         startTime.setText(task.getStartTime() != null ? task.getStartTime().toString() : "");
         endTime.setText(task.getEndTime() != null ? task.getEndTime().toString() : "");
-        description.setText("");
-        //File file = new File("/images/incomplete-icon.png");
+        description.setText(task.getDescription() == null ? "" : task.getDescription());
         Image incompleteIcon = new Image("/images/incomplete-icon.png");
         Image completeIcon = new Image("/images/complete-icon.png");
         if (!task.isComplete()) {
@@ -48,9 +47,7 @@ public class TaskListCard extends UiPart<Region> {
         } else {
             imageView.setImage(completeIcon);
         }
-
-
-
+       
         initTags(task);
     }
 

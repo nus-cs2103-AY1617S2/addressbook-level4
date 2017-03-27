@@ -31,10 +31,8 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private VBox taskDetails;
 
-
-
-
     //@@author A0144240W
+
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
@@ -56,6 +54,5 @@ public class BrowserPanel extends UiPart<Region> {
     public void freeResources() {
         tagsFlow.getChildren().clear();
     }
-
 
 }

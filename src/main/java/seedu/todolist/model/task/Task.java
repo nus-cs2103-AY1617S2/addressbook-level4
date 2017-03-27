@@ -4,12 +4,14 @@ import seedu.todolist.model.tag.UniqueTagList;
 
 /**
  * Represents a Task in the To-do list.
+ * @@author A0141647E.
  */
 public abstract class Task {
 
     protected Name name;
     protected UniqueTagList tags;
     protected boolean completed;
+    protected String description;
 
     public void setName(Name name) {
         assert name != null;
@@ -30,6 +32,14 @@ public abstract class Task {
 
     public void setAsIncomplete() {
         this.completed = false;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public UniqueTagList getTags() {
