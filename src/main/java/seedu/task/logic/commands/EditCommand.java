@@ -69,7 +69,7 @@ public class EditCommand extends Command {
         } catch (IllegalValueException ive) {
             throw new CommandException(Task.MESSAGE_TASK_CONSTRAINTS);
         }
-        model.updateFilteredListToShowAll();
+//        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
