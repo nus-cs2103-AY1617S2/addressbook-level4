@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.LogsCenter;
+import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
@@ -132,5 +133,12 @@ public class TaskCard extends UiPart<Region> {
         	PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
         	cardPane.pseudoClassStateChanged(selectedPseudoClass, true);
         }
+    }
+    
+    @Subscribe
+    private void handleDeselectCard(DeselectCardsEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    	PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
+        cardPane.pseudoClassStateChanged(selectedPseudoClass, false);
     }
 }

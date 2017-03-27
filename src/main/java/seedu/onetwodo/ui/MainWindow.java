@@ -19,7 +19,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.onetwodo.commons.core.Config;
+import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.GuiSettings;
+import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.logic.Logic;
 import seedu.onetwodo.logic.commands.ListCommand;
@@ -335,12 +337,17 @@ public class MainWindow extends UiPart<Region> {
             public void handle(KeyEvent ke) {
                 ke.consume();
                 closeDialog();
+                deselectTaskCards();
                 commandBox.removeKeyListeners();
             }
         });
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
     }
+
+	private void deselectTaskCards() {
+		EventsCenter.getInstance().post(new DeselectCardsEvent());		
+	}
 
     void closeDialog() {
         if (dialog == null) {
