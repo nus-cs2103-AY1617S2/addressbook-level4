@@ -20,8 +20,10 @@ import seedu.doist.commons.util.ConfigUtil;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.Logic;
 import seedu.doist.logic.LogicManager;
+import seedu.doist.model.AliasListMap;
 import seedu.doist.model.Model;
 import seedu.doist.model.ModelManager;
+import seedu.doist.model.ReadOnlyAliasListMap;
 import seedu.doist.model.ReadOnlyTodoList;
 import seedu.doist.model.TodoList;
 import seedu.doist.model.UserPrefs;
@@ -55,7 +57,8 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTodoListFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTodoListFilePath(), config.getAliasListMapFilePath(),
+                                        config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -76,6 +79,13 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+        ReadOnlyTodoList initialData = initTodoListData(storage);
+        ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
+
+        return new ModelManager(initialData, initialAliasData, userPrefs);
+    }
+
+    private static ReadOnlyTodoList initTodoListData(Storage storage) {
         Optional<ReadOnlyTodoList> todoListOptional;
         ReadOnlyTodoList initialData;
         try {
@@ -91,8 +101,28 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty To-do List");
             initialData = new TodoList();
         }
+        return initialData;
+    }
 
-        return new ModelManager(initialData, userPrefs);
+    private static ReadOnlyAliasListMap initAliasListMapData(Storage storage) {
+        Optional<ReadOnlyAliasListMap> aliasListMapOptional;
+        ReadOnlyAliasListMap initialAliasData;
+        try {
+            aliasListMapOptional = storage.readAliasListMap();
+            if (!aliasListMapOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with the default alias list map");
+                initialAliasData = new AliasListMap();
+            } else {
+                initialAliasData = aliasListMapOptional.get();
+            }
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with the default alias list map");
+            initialAliasData = new AliasListMap();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with the default alias list map");
+            initialAliasData = new AliasListMap();
+        }
+        return initialAliasData;
     }
 
     private void initLogging(Config config) {

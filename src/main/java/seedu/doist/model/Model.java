@@ -1,5 +1,6 @@
 package seedu.doist.model;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
@@ -32,7 +33,7 @@ public interface Model {
         UniqueTaskList.TaskAlreadyUnfinishedException;
 
     /** Adds the given task */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    int addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -56,5 +57,33 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given task type and tags*/
     void updateFilteredTaskList(TaskType type, UniqueTagList tags);
 
+    /** Sorts the tasks by Priority */
     void sortTasksByPriority();
+
+    //========== handle undo and redo operation =================================================
+    void saveCurrentToHistory();
+    void recoverPreviousTodoList();
+    void recoverNextTodoList();
+
+    ///// Alias List Map
+    /** Returns the AliasListMap */
+    ReadOnlyAliasListMap getAliasListMap();
+
+    /** Sets an alias in the AliasListMap */
+    void setAlias(String alias, String commandWord);
+
+    /** Get the alias list of a defaultCommandWord */
+    List<String> getAliasList(String defaultCommandWord);
+
+    /** Get the valid command list of a defaultCommandWord */
+    List<String> getValidCommandList(String defaultCommandWord);
+
+    /** Get the set of default command words */
+    Set<String> getDefaultCommandWordSet();
+
+    /** Resets alias list to default */
+    void resetToDefaultCommandWords();
+
+    /** Remove the alias if it exists, otherwise nothing happens */
+    public void removeAlias(String alias);
 }

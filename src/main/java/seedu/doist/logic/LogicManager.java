@@ -1,5 +1,8 @@
 package seedu.doist.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -24,7 +27,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
-        this.parser = new Parser();
+        this.parser = new Parser(model);
     }
 
     @Override
@@ -32,11 +35,26 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
-        return command.execute();
+
+        CommandResult result = command.execute();
+        if (result.isMutating) {
+            model.saveCurrentToHistory();
+        }
+        return result;
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredTaskList();
+    }
+
+    //@@author A0147980U
+    public List<String> getAllCommandWords() {
+        ArrayList<String> allCommandWords = new ArrayList<String>();
+        Set<String> allDefaultCommandWords = model.getDefaultCommandWordSet();
+        for (String defaultCommandWords : allDefaultCommandWords) {
+            allCommandWords.addAll(model.getValidCommandList(defaultCommandWords));
+        }
+        return allCommandWords;
     }
 }

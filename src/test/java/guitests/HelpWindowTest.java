@@ -18,14 +18,14 @@ public class HelpWindowTest extends DoistGUITest {
         resultDisplay.clickOnTextArea();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        personListPanel.clickOnListView();
+        taskListPanel.clickOnListView();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        browserPanel.clickOnWebView();
+//        browserPanel.clickOnWebView();
 //        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
 
         //use menu button
-//        assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
+        assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
 
         //use command
         assertHelpWindowOpen(commandBox.runHelpCommand());

@@ -3,7 +3,9 @@ package seedu.doist.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.core.Messages;
+import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.tag.UniqueTagList;
@@ -22,7 +24,7 @@ public class EditCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": Edits the details of the task identified " + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [\\as PRIORITY] [\\under TAG]...\n"
@@ -51,10 +53,6 @@ public class EditCommand extends Command {
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
-    public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
-    }
-
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -72,7 +70,9 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), true);
     }
 
     /**

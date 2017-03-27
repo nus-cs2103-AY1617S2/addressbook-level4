@@ -29,12 +29,17 @@ public class MainWindow extends UiPart<Region> {
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
 
+    private final String lightThemeUrl = getClass().getResource("/view/LightTheme.css").toExternalForm();
+    private final String darkThemeUrl = getClass().getResource("/view/DarkTheme.css").toExternalForm();
+
+    private final String[] themeUrls = {lightThemeUrl, darkThemeUrl};
+
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    //private BrowserPanel browserPanel;
+    private TaskListPanel personListPanel;
     private Config config;
 
     @FXML
@@ -71,6 +76,10 @@ public class MainWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
 
+        // Default stylesheet
+        if (!scene.getStylesheets().contains(lightThemeUrl)) {
+            scene.getStylesheets().add(lightThemeUrl);
+        }
         setAccelerators();
     }
 
@@ -113,8 +122,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     protected void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+       // browserPanel = new BrowserPanel(browserPlaceholder);
+        personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -195,16 +204,38 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
+    //@@author A0140887W
+    @FXML
+    private void handleDarkTheme() {
+        changeToTheme(darkThemeUrl);
+    }
+
+    @FXML
+    private void handleLightTheme() {
+        changeToTheme(lightThemeUrl);
+    }
+
+    private void changeToTheme(String themeUrl) {
+        Scene scene = primaryStage.getScene();
+        // Remove all existing stylesheets
+        scene.getStylesheets().removeAll(themeUrls);
+        // Add the new stylesheet
+        if (!scene.getStylesheets().contains(themeUrl)) {
+            scene.getStylesheets().add(themeUrl);
+        }
+    }
+
+    //@@author
+    public TaskListPanel getPersonListPanel() {
         return this.personListPanel;
     }
 
     protected void loadPersonPage(ReadOnlyTask person) {
-        browserPanel.loadTaskPage(person);
+      //  browserPanel.loadTaskPage(person);
     }
 
     protected void releaseResources() {
-        browserPanel.freeResources();
+      //  browserPanel.freeResources();
     }
 
 }

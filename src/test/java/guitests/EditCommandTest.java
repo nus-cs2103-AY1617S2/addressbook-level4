@@ -107,7 +107,7 @@ public class EditCommandTest extends DoistGUITest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Do laundry");
+        commandBox.runCommand("edit 3 Do laundry \\as normal");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -131,12 +131,12 @@ public class EditCommandTest extends DoistGUITest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getDescription().desc);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedPerson.getDescription().desc);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
-        assertTrue(personListPanel.isListMatching(expectedPersonsList));
+        assertTrue(taskListPanel.isListMatching(expectedPersonsList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
     }
 }

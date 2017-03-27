@@ -82,11 +82,6 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
-    public void setFinishedStatus(boolean isFinished) {
-        assert finishedStatus != null;
-        this.finishedStatus.setIsFinished(isFinished);
-    }
-
     public void setFinishedStatus(FinishedStatus status) {
         assert finishedStatus != null;
         this.finishedStatus = status;

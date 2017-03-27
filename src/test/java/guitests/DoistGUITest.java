@@ -3,6 +3,7 @@ package guitests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.After;
@@ -16,9 +17,9 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.doist.TestApp;
@@ -28,6 +29,7 @@ import seedu.doist.model.TodoList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.testutil.TestUtil;
 import seedu.doist.testutil.TypicalTestTasks;
+import seedu.doist.ui.util.CommandHighlightManager;
 
 /**
  * A GUI Test class for Doist
@@ -48,7 +50,7 @@ public abstract class DoistGUITest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected PersonListPanelHandle personListPanel;
+    protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -69,7 +71,7 @@ public abstract class DoistGUITest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            personListPanel = mainGui.getPersonListPanel();
+            taskListPanel = mainGui.getPersonListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             browserPanel = mainGui.getBrowserPanel();
@@ -105,19 +107,48 @@ public abstract class DoistGUITest {
     }
 
     /**
-     * Asserts the person shown in the card is same as the given person
+     * Asserts the person shown in the card is same as the given task
      */
     public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, task));
     }
 
     /**
-     * Asserts the size of the person list is equal to the given number.
+     * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = personListPanel.getNumberOfPeople();
+        int numberOfPeople = taskListPanel.getNumberOfTasks();
         assertEquals(size, numberOfPeople);
     }
+
+    //@@author A0147980U
+    protected void assertCorrectSuggestions(String lastWord) {
+        List<String> contentAssistItemTexts = commandBox.getContentAssistItemTexts();
+        if (contentAssistItemTexts.isEmpty()) {
+            assertTrue(!commandBox.getContentAssistWindow().isShowing());
+        } else {
+            for (String text : contentAssistItemTexts) {
+                assertTrue(text.contains((CharSequence) lastWord.subSequence(0, lastWord.length())));
+            }
+        }
+    }
+
+    protected void assertCorrectHighlight() {
+        List<String> wordsInKeyStyle =
+                commandBox.getWordListWithStyle(CommandHighlightManager.PARAMETER_KEY_STYLE);
+        for (String word : wordsInKeyStyle) {
+            assertTrue(word.startsWith("\\"));
+        }
+
+        List<String> wordsInCommandWordStyle =
+                commandBox.getWordListWithStyle(CommandHighlightManager.COMMAND_WORD_STYLE);
+        assertTrue(wordsInCommandWordStyle.size() <= 1);
+        if (wordsInCommandWordStyle.size() == 1) {
+            String firstWord = commandBox.getCommandInput().split(" +")[0];
+            assertTrue(wordsInCommandWordStyle.get(0).equals(firstWord));
+        }
+    }
+    //@@author
 
     /**
      * Asserts the message shown in the Result Display area is same as the given string.

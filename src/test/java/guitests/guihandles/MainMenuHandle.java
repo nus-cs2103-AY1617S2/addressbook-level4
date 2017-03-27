@@ -34,4 +34,11 @@ public class MainMenuHandle extends GuiHandle {
         guiRobot.push(KeyCode.F1);
         guiRobot.sleep(GuiHandleSetting.SLEEP_LENGTH);
     }
+
+    //@@author A0140887W
+    public Stage changeThemeUsingMenu(String themeName) {
+        clickOn("Theme", themeName);
+        guiRobot.sleep(GuiHandleSetting.SLEEP_LENGTH);
+        return primaryStage;
+    }
 }

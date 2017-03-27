@@ -1,16 +1,18 @@
 package seedu.doist.logic.commands;
 
+import seedu.doist.commons.core.EventsCenter;
+import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the to-do list.
  */
 public class AddCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords() + ": Adds a task to Doist\n"
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ": Adds a task to Doist\n"
             + "Parameters: TASK_DESCRIPTION  [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " Group meeting \\from 1600 \\to 1800 \\as IMPORTANT "
                     + "\\under school ";
@@ -29,14 +31,19 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            int index  = model.addTask(toAdd);
+            if (index >= 0) {
+                EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+            }
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true);
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
     }
-
-    public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
-    }
 }
+
+
+
+
+
+
