@@ -7,7 +7,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
-import seedu.doist.logic.parser.ParserUtil;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
@@ -99,7 +98,7 @@ public class XmlAdaptedTask {
 
     private Date getDate(String dateString) {
         if (dateString != NULL_STRING) {
-            return ParserUtil.parseDate(dateString);
+            return TaskDate.parseDate(dateString);
         } else {
             return null;
         }

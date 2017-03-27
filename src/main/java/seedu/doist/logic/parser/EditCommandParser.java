@@ -59,8 +59,8 @@ public class EditCommandParser {
                 if (deadline.isEmpty()) {
                     editTaskDescriptor.setDates(Optional.of(new TaskDate()));
                 } else {
-                    startDate = ParserUtil.parseDate(deadline);
-                    endDate = ParserUtil.parseDate(deadline);
+                    startDate = TaskDate.parseDate(deadline);
+                    endDate = TaskDate.parseDate(deadline);
                     boolean validDate = TaskDate.validateDate(startDate, endDate);
                     if (!validDate) {
                         throw new IllegalValueException("Incorrect Dates");
@@ -73,8 +73,8 @@ public class EditCommandParser {
                 if (start.isEmpty() && end.isEmpty()) {
                     editTaskDescriptor.setDates(Optional.of(new TaskDate()));
                 } else {
-                    startDate = ParserUtil.parseDate(start);
-                    endDate = ParserUtil.parseDate(end);
+                    startDate = TaskDate.parseDate(start);
+                    endDate = TaskDate.parseDate(end);
                     boolean validDate = TaskDate.validateDate(startDate, endDate);
                     if (!validDate) {
                         throw new IllegalValueException("Incorrect Dates");
