@@ -19,6 +19,16 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
+    public void findByTagSuccess() {
+        assertFindResult("find chores", td.laundry, td.dishes); // no results
+    }
+
+    @Test
+    public void findByNoteSuccess() {
+        assertFindResult("find Twice", td.laundry); // no results
+    }
+
+    @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); // no results
