@@ -2,16 +2,14 @@
 
 package seedu.taskit.model.task;
 
-import com.joestelmach.natty.*;
+import java.util.List;
+
+import org.apache.commons.lang.time.DateUtils;
+
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 import seedu.taskit.commons.exceptions.IllegalValueException;
-
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.util.List;
 
 /**
  * Represents a Task's start or end date and time in the task manager.
@@ -27,13 +25,10 @@ public class Date {
     public final String dateString;
     Parser parser = new Parser();
     
-    private final LocalTime localTime;
-    
 
     public Date() {
         this.date = null;
         this.dateString = null;
-        this.localTime = null;
     }
 
     /**
@@ -50,27 +45,16 @@ public class Date {
                 try {
                     DateGroup group = (DateGroup) groups.get(0);
                     this.date = group.getDates().get(0);
-                    localTime=convertToLocalTime();
                 } catch (Exception exception) {
                     throw new IllegalValueException(MESSAGE_DATE_FAIL);
                 }
             } else {
                 this.date = null;
-                this.localTime = null;
             }
         } else {
             this.date = null;
-            this.localTime = null;
         }
     }
-
-    //author A0141872E
-    private LocalTime convertToLocalTime() {
-        Instant instant = Instant.ofEpochMilli(date.getTime());
-        LocalTime localTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalTime();
-        return localTime;
-    }
-    //author
     
     @Override
     public String toString() {
@@ -111,7 +95,7 @@ public class Date {
                                                                    // check
     }
     
-    private boolean isBefore(Date other) {
+    public boolean isBefore(Date other) {
         if (!this.exists() || !other.exists()) {
             return false;
         }
@@ -130,15 +114,19 @@ public class Date {
     
     //author A0141872E
     public boolean isEndTimePassCurrentTime() {
-        
-        if(date!=null && localTime.isBefore(LocalTime.now())) {
+        Date currentDate = new Date();
+        if(date!= null && isBefore(currentDate)) {
             return true;
         }
         return false;
     }
     
     public boolean isDateEqualCurrentDate() {
-        return date.equals(LocalDate.now());
+        java.util.Date currentDate = new java.util.Date();
+        if(date!= null && DateUtils.isSameDay(date, currentDate)) {
+            return true;
+        }
+        return false;
     }
     //author
 

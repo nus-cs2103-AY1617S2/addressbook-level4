@@ -2,13 +2,6 @@ package seedu.taskit.logic.commands;
 
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import org.apache.commons.lang.ArrayUtils;
-
-import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.taskit.commons.exceptions.IllegalValueException;
-import seedu.taskit.logic.commands.exceptions.CommandException;
-import seedu.taskit.model.task.Title;
-
 //@author A0141872E
 /**
  * Lists all persons in the address book to the user.
