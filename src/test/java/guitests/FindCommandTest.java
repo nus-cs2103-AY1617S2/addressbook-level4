@@ -19,7 +19,9 @@ public class FindCommandTest extends EzDoGuiTest {
         assertFindResult("find Meier", td.benson, td.daniel); // multiple results
         assertFindResult("find p/1", td.alice, td.benson);
         assertFindResult("find s/11/11/2015", td.benson);
+        assertFindResult("find s/by/30/12/2012", td.daniel, td.elle, td.george);
         assertFindResult("find d/14/04/2016", td.daniel);
+        assertFindResult("find d/by/30/12/2014", td.carl);
         assertFindResult("find t/owesMoney", td.benson);
         assertFindResult("find Meier p/1", td.benson);
         assertFindResult("find Meier p/1 s/11/11/2015", td.benson);

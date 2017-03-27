@@ -177,10 +177,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority, Optional optionalStartDate,
-            Optional optionalDueDate, Set<String> findTag) {
-        updateFilteredTaskList(new PredicateExpression(
-                new NameQualifier(keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
+    public void updateFilteredTaskList(ArrayList<Object> listToCompare, boolean startBy, boolean dueBy) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(listToCompare, startBy, dueBy)));
     }
 
     @Override
@@ -276,14 +274,17 @@ public class ModelManager extends ComponentManager implements Model {
         private Optional<StartDate> startDate;
         private Optional<DueDate> dueDate;
         private Set<String> tags;
+        private boolean startBy;
+        private boolean dueBy;
 
-        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority, Optional<StartDate> startDate,
-                Optional<DueDate> dueDate, Set<String> tags) {
-            this.nameKeyWords = nameKeyWords;
-            this.priority = priority;
-            this.startDate = startDate;
-            this.dueDate = dueDate;
-            this.tags = tags;
+        NameQualifier(ArrayList<Object> listToCompare, boolean startBy, boolean dueBy) {
+            this.nameKeyWords = (Set<String>) listToCompare.get(0);
+            this.priority = (Optional<Priority>) listToCompare.get(1);
+            this.startDate = (Optional<StartDate>) listToCompare.get(2);
+            this.dueDate = (Optional<DueDate>) listToCompare.get(3);
+            this.tags = (Set<String>) listToCompare.get(4);
+            this.startBy = startBy;
+            this.dueBy = dueBy;
         }
 
         @Override
@@ -295,8 +296,9 @@ public class ModelManager extends ComponentManager implements Model {
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
                     && comparePriority(task.getPriority())
-                    && compareStartDate(task.getStartDate())
-                    && compareDueDate(task.getDueDate())
+                    && ((!startBy && compareStartDate(task.getStartDate()))
+                            || (startBy && compareByStart(task.getStartDate())))
+                    && ((!dueBy && compareDueDate(task.getDueDate())) || (dueBy && compareByDue(task.getDueDate())))
                     && (taskTagStringSet.containsAll(tags));
 
         }
@@ -332,8 +334,8 @@ public class ModelManager extends ComponentManager implements Model {
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
             return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
-                    || (taskStartDateExist
-                            && taskStartDateString.substring(0, 9).equals(startDate.get().toString().substring(0, 9))));
+                    || (taskStartDateExist && taskStartDateString.substring(0, 10).equals
+                       (startDate.get().toString().substring(0, 10))));
         }
 
         private boolean compareDueDate(TaskDate taskDueDate) {
@@ -342,9 +344,42 @@ public class ModelManager extends ComponentManager implements Model {
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
             return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
-                    || (taskDueDateExist
-                            && taskDueDateString.substring(0, 9).equals(dueDate.get().toString().substring(0, 9))));
+                    || (taskDueDateExist && taskDueDateString.substring(0, 10).equals
+                       (dueDate.get().toString().substring(0, 10))));
         }
+
+        private boolean compareByStart(TaskDate taskStartDate) {
+            String taskStartDateString = taskStartDate.toString();
+            boolean taskStartDateExist = (taskStartDateString.length() != 0);
+
+            return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+                    || (taskStartDateExist && comesBefore(startDate.get().toString(), taskStartDateString)));
+        }
+
+        private boolean compareByDue(TaskDate taskDueDate) {
+            String taskDueDateString = taskDueDate.toString();
+            boolean taskDueDateExist = (taskDueDateString.length() != 0);
+
+            return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+                    || (taskDueDateExist && comesBefore(dueDate.get().toString(), taskDueDateString)));
+        }
+
+        private boolean comesBefore(String givenDate, String taskDate) {
+
+            int givenDD = Integer.parseInt(givenDate.substring(0, 2));
+            int givenMM = Integer.parseInt(givenDate.substring(3, 5));
+            int givenYYYY = Integer.parseInt(givenDate.substring(6, 10));
+
+            int taskDD = Integer.parseInt(taskDate.substring(0, 2));
+            int taskMM = Integer.parseInt(taskDate.substring(3, 5));
+            int taskYYYY = Integer.parseInt(taskDate.substring(6, 10));
+
+            return (taskYYYY < givenYYYY)
+                   || ((taskYYYY == givenYYYY) && (taskMM < givenMM))
+                   || ((taskYYYY == givenYYYY) && (taskMM == givenMM) && (taskDD <= givenDD));
+
+        }
+
     }
 
     @Override
