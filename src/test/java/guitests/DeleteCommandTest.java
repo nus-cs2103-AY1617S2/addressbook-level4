@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.taskboss.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import java.util.ArrayList;
+
 import org.junit.Test;
 
 import seedu.taskboss.testutil.TestTask;
