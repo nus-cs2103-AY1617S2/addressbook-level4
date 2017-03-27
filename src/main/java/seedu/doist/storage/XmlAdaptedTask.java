@@ -98,9 +98,9 @@ public class XmlAdaptedTask {
 
     private Date getDate(String dateString) {
         if (dateString.equals(NULL_STRING)) {
-            return TaskDate.parseDate(dateString);
-        } else {
             return null;
+        } else {
+            return TaskDate.parseDate(dateString);
         }
     }
 }

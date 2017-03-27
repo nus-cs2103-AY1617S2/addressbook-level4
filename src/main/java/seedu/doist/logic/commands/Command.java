@@ -6,6 +6,7 @@ import seedu.doist.commons.core.Messages;
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.Model;
+import seedu.doist.model.ModelManager.SortType;
 import seedu.doist.model.task.ReadOnlyTask;
 
 /**
@@ -30,7 +31,7 @@ public abstract class Command {
      * @param displaySize used to generate summary
      * @return summary message for persons displayed
      */
-    public static String getMessageForPersonListSortedSummary(SortCommand.SortType sortType) {
+    public static String getMessageForPersonListSortedSummary(SortType sortType) {
         return String.format(Messages.MESSAGE_TASKS_SORTED_OVERVIEW, sortType.toString());
     }
 

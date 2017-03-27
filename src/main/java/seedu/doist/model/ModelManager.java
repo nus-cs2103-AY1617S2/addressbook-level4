@@ -38,6 +38,15 @@ public class ModelManager extends ComponentManager implements Model {
     private final AliasListMap aliasListMap;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
+    public enum SortType {
+        PRIORITY,
+        TIME,
+        ALPHA,
+    }
+    // Current sorting method won't change until sort command is run again
+    private List<SortType> currentSortTypes;
+    //private SortType currentSortType = SortTyoe
+
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
      */
@@ -53,6 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
         saveCurrentToHistory();
+        updateFilteredListToShowDefault();
     }
 
     public ModelManager() {
@@ -158,7 +168,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         int index = todoList.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredListToShowDefault();
         indicateTodoListChanged();
         return index;
     }
@@ -192,6 +202,15 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
     }
 
+    //@@author A0140887W
+    @Override
+    public void updateFilteredListToShowDefault() {
+        filteredTasks.setPredicate(null);
+        Qualifier[] qualifiers = {new TaskTypeQualifier(TaskType.NOT_FINISHED)};
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
+    }
+
+    //@@author
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};
@@ -252,8 +271,8 @@ public class ModelManager extends ComponentManager implements Model {
     private class DescriptionQualifier implements Qualifier {
         private Set<String> descriptionKeyWords;
 
-        DescriptionQualifier(Set<String> nameKeyWords) {
-            this.descriptionKeyWords = nameKeyWords;
+        DescriptionQualifier(Set<String> descKeyWords) {
+            this.descriptionKeyWords = descKeyWords;
         }
 
         @Override
@@ -266,7 +285,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", descriptionKeyWords);
+            return "desc=" + String.join(", ", descriptionKeyWords);
         }
     }
 
@@ -299,12 +318,14 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (type) {
-            case finished:
+            case FINISHED:
                 return task.getFinishedStatus().getIsFinished();
-            case pending:
-                return !task.getFinishedStatus().getIsFinished();
-            case overdue:
+            case PENDING:
+                return !task.getFinishedStatus().getIsFinished() && !task.isOverdue();
+            case OVERDUE:
                 return task.isOverdue();
+            case NOT_FINISHED:
+                return !task.getFinishedStatus().getIsFinished();
             default:
                 return true;
             }

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.SortCommand;
-import seedu.doist.logic.commands.SortCommand.SortType;
+import seedu.doist.model.ModelManager.SortType;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 

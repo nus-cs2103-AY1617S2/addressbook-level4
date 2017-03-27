@@ -3,7 +3,7 @@ package seedu.doist.logic.parser;
 import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.SortCommand;
-import seedu.doist.logic.commands.SortCommand.SortType;
+import seedu.doist.model.ModelManager.SortType;
 
 public class SortCommandParser {
     public Command parse(String argument) {

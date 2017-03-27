@@ -1,13 +1,12 @@
 package seedu.doist.logic.commands;
 
+import seedu.doist.model.ModelManager.SortType;
+
+//@@author A0140887W
 /**
  * Sorts all persons in the to-do list by the specified parameter and shows it to the user.
  */
 public class SortCommand extends Command {
-
-    public enum SortType {
-        PRIORITY
-    }
 
     public SortType sortType;
 
