@@ -91,6 +91,11 @@ public class TaskTest {
             assertTrue(task.isDone());
             task.setToday();
             assertTrue(task.isManualToday());
+            SimpleDateFormat dateFormat = new SimpleDateFormat(
+                    "dd/MM/yyyy HH:mm:ss");
+            assertTrue(task.getTaskAbsoluteDateTime()
+                    .equals("Begin: " + dateFormat.format(date) + "; Due: "
+                            + dateFormat.format(date2)));
         } catch (IllegalValueException e) {
             fail();
         }
