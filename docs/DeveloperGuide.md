@@ -183,7 +183,7 @@ _Figure 2.5 : Class Diagram of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/geekeep/logic/Logic.java)
 
-The `Logic` component: 
+The `Logic` component:
 
 * Parses the user command using each command's respective `Parser`.
 * Executes a `Command` object based on the command and user input.
@@ -505,6 +505,121 @@ Extensions:
 
 > 5a1. GeeKeep shows an error message.<br>
 > Use case ends.
+
+**Use case: UC03 - `Add a floating task`**
+
+MSS:
+
+1. User add a task without starting date or ending date.
+
+2. Geekeep adds the floating task to the respective panel.
+Use case ends.
+
+Extensions:
+
+2a. There is a duplicate task.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC04 - `Add a deadline`**
+
+MSS:
+
+1. User add a task without starting date but with an ending date.
+
+2. Geekeep adds the deadline to the respective panel.
+Use case ends.
+
+Extensions:
+
+2a. There is a duplicate task.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC05 - `Add an event`**
+
+MSS:
+
+1. User add a task with starting date and ending date.
+
+2. Geekeep adds the event to the respective panel.
+Use case ends.
+
+Extensions:
+
+2a. There is a duplicate task.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC06 - `Mark a task as done`**
+
+MSS:
+
+1. User mark a task as done with its index.
+
+2. Geekeep marks the task as done.
+Use case ends.
+
+Extensions:
+
+2a. The task associated with the index is not found.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC07 - `Mark a task as undone`**
+
+MSS:
+
+1. User mark a task as undone with its index.
+
+2. Geekeep marks the task as undone.
+Use case ends.
+
+Extensions:
+
+2a. The task associated with the index is not found.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC08 - `Display completed tasks`**
+
+MSS:
+
+1. User requests all the tasks that are already done.
+
+2. Geekeep refreshes the panels with completed tasks.
+Use case ends.
+
+**Use case: UC09 - `Display uncompleted tasks`**
+
+MSS:
+
+1. User requests all the tasks that are not already done.
+
+2. Geekeep refreshes the panels with completed tasks.
+Use case ends.
+
+**Use case UC10 - `Display tasks by tags`**
+
+MSS:
+
+1. User requests all the tasks associated with the given tags.
+
+2. Geekeep refreshes the panels with tasks associated with the given tags.
+Use case ends.
+
+Extensions:
+
+2a. There are no tasks associated with the given tags.
+
+> 2a1. The panel displays nothing. <br>
+> Use case ends.
+
 
 <h3 id="user-content-ac">Appendix C : Non Functional Requirements</h3>
 
