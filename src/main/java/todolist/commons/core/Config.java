@@ -13,8 +13,8 @@ public class Config {
     // Config values customizable through config file
     private String appTitle = "To-Do List App";
     private Level logLevel = Level.INFO;
-    private String userPrefsFilePath = "preferences.json";
-    private String todoListFilePath = "data/todolist.xml";
+    private static String userPrefsFilePath = "preferences.json";
+    private static String todoListFilePath = "data/todolist.xml";
     private String todoListName = "MyToDoList";
 
 
@@ -34,20 +34,20 @@ public class Config {
         this.logLevel = logLevel;
     }
 
-    public String getUserPrefsFilePath() {
+    public static String getUserPrefsFilePath() {
         return userPrefsFilePath;
     }
 
-    public void setUserPrefsFilePath(String userPrefsFilePath) {
-        this.userPrefsFilePath = userPrefsFilePath;
+    public static void setUserPrefsFilePath(String userPrefsFilePath) {
+        Config.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getToDoListFilePath() {
+    public static String getToDoListFilePath() {
         return todoListFilePath;
     }
 
-    public void setToDoListFilePath(String todoListFilePath) {
-        this.todoListFilePath = todoListFilePath;
+    public static void setToDoListFilePath(String todoListFilePath) {
+        Config.todoListFilePath = todoListFilePath;
     }
 
     public String getToDoListBookName() {
@@ -72,8 +72,8 @@ public class Config {
 
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
-                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(todoListFilePath, o.todoListFilePath)
+//              && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
+//              && Objects.equals(todoListFilePath, o.todoListFilePath)
                 && Objects.equals(todoListName, o.todoListName);
     }
 

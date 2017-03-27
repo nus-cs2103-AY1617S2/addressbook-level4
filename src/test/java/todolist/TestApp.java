@@ -45,8 +45,8 @@ public class TestApp extends MainApp {
     protected Config initConfig(String configFilePath) {
         Config config = super.initConfig(configFilePath);
         config.setAppTitle(APP_TITLE);
-        config.setToDoListFilePath(saveFileLocation);
-        config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
+        Config.setToDoListFilePath(saveFileLocation);
+        Config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
         config.setToDoListName(TODO_LIST_NAME);
         return config;
     }
