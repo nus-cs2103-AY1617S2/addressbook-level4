@@ -48,7 +48,7 @@ function add_event(title, start, end, isActive) {
 
 function remove_all() {
     $(document).ready(function() {
-        $('#calendar').fullCalendar( 'destroy' );
+        $('#calendar').fullCalendar('removeEvents');
     });
 }
 
