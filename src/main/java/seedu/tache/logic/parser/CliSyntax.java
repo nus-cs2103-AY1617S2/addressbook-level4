@@ -39,6 +39,8 @@ public class CliSyntax {
     public static final String TIMED_FILTER = "timed";
     public static final String FLOATING_FILTER = "floating";
     //@@author
+    //@@author A0139961U
+    public static final String DUE_TODAY_FILTER = "today";
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

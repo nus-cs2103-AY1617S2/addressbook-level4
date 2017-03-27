@@ -54,6 +54,10 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all uncompleted tasks */
     void updateFilteredListToShowTimed();
 
+    //@@author A0139961U
+    /** Updates the filter of the filtered task list to show all tasks due today */
+    void updateFilteredListToShowDueToday();
+
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowFloating();
 

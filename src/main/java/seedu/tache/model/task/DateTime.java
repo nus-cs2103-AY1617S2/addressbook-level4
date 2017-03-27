@@ -117,4 +117,10 @@ public class DateTime {
         return (startDate.hashCode() && endDate.hashCode());
     }*/
 
+    public boolean isToday() {
+        Date today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(today).equals(sdf.format(this.date));
+    }
+
 }

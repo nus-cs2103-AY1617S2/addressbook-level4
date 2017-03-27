@@ -30,6 +30,8 @@ public class ModelManager extends ComponentManager implements Model {
     public static final String TIMED_TASK_LIST_TYPE = "Timed Tasks";
     public static final String FLOATING_TASK_LIST_TYPE = "Floating Tasks";
     //@@author
+    //@@author A0139961U
+    public static final String DUE_TODAY_TASK_LIST_TYPE = "Due Today Tasks";
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
@@ -134,6 +136,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowFloating() {
         updateFilteredTaskList(new PredicateExpression(new TimedQualifier(false)));
         updateFilteredTaskListType(FLOATING_TASK_LIST_TYPE);
+    }
+    //@@author
+
+    //@@author A0139961U
+    @Override
+    public void updateFilteredListToShowDueToday() {
+        updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
+        updateFilteredTaskListType(DUE_TODAY_TASK_LIST_TYPE);
     }
     //@@author
 
@@ -266,6 +276,29 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "active=true";
+        }
+    }
+
+    //@@author A0139961U
+    private class DueTodayQualifier implements Qualifier {
+        private boolean isDueToday;
+
+        DueTodayQualifier(boolean isDueToday) {
+            this.isDueToday = isDueToday;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDateTime().isPresent() && isDueToday) {
+                return task.getEndDateTime().get().isToday();
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "dueToday=true";
         }
     }
 
