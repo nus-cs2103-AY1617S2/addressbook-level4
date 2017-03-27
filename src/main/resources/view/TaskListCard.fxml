@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" prefHeight="71.0" prefWidth="202.0" style="-fx-border-color: white white lightgray white; -fx-border-width: 0 0 1 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" fillHeight="false" maxHeight="120.0" prefWidth="202.0" style="-fx-border-color: white white lightgray white; -fx-border-width: 0 0 1 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane stylesheets="@PanelTheme.css" HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-            <HBox prefHeight="75.0" prefWidth="202.0">
+            <HBox prefHeight="35.0" prefWidth="202.0">
                <children>
                   <Label fx:id="id" alignment="CENTER" contentDisplay="CENTER" minHeight="33.0" minWidth="33.0" style="-fx-background-radius: 40; -fx-background-color: lightgray; -fx-text-fill: white;" styleClass="chip" stylesheets="@PanelTheme.css" text="E1" textAlignment="CENTER" HBox.hgrow="NEVER">
                      <HBox.margin>
