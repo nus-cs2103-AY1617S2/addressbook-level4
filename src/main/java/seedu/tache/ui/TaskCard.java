@@ -11,6 +11,9 @@ import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 
+/**
+ * Card containing details of task.
+ */
 public class TaskCard extends UiPart<Region> {
 
     //@@author A0142255M
@@ -38,12 +41,19 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    //@@author A0142255M
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         assert task != null;
         assert displayedIndex > 0;
         id.setText(Integer.toString(displayedIndex) + ". ");
         name.setText(task.getName().toString());
+        name.setWrapText(true); // spill over to next line if task name is too long
+        initDatesAndTimes(task);
+        initTags(task);
+    }
+
+    private void initDatesAndTimes(ReadOnlyTask task) {
         if (task.getStartDateTime().isPresent()) {
             DateTime start = task.getStartDateTime().get();
             Label startDateLabel = new Label(START_DATE_INDICATOR + start.getDateOnly());
@@ -64,7 +74,6 @@ public class TaskCard extends UiPart<Region> {
             datesAndTimes.getChildren().add(endTimeLabel);
             logger.fine("End date and time added in Labels for " + task.getName().toString());
         }
-        initTags(task);
     }
     //@@author
 
