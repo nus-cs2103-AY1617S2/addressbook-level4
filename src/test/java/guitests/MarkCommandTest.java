@@ -1,4 +1,4 @@
-//@@author A0139399J
+// @@author A0139399J
 package guitests;
 
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -13,9 +13,9 @@ import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
 
-public class DoneCommandTest extends TaskManagerGuiTest {
+public class MarkCommandTest extends TaskManagerGuiTest {
 
-    public static final String MESSAGE_MARK_COMMAND = "mark";
+    public static final String MESSAGE_MARK_COMMAND = "mark ";
     public static final String MESSAGE_TEST_FIND_COMMAND = "find Elle";
 
     public static final int INDEX_MARK_VALID = 2;
@@ -26,14 +26,13 @@ public class DoneCommandTest extends TaskManagerGuiTest {
     public static final int INDEX_FIND_INVALID_FILTERED = 5;
 
     // The list of tasks in the task list panel is expected to match this list.
-    // This list is updated with every successful call to assertEditSuccess().
     private TestTask[] expectedTasksList = this.td.getTypicalTasks();
 
     @Test
     public void mark_task_success() throws Exception {
         TestTask taskToMark = this.expectedTasksList[INDEX_MARK_VALID - 1];
         TestTask markedTask = new TaskBuilder(taskToMark).withIsDone(true).build();
-        assertDoneSuccess(INDEX_MARK_VALID, INDEX_MARK_VALID, markedTask);
+        assertMarkSuccess(INDEX_MARK_VALID, INDEX_MARK_VALID, markedTask);
     }
 
     @Test
@@ -43,22 +42,22 @@ public class DoneCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void edit_findThenEdit_success() throws Exception {
+    public void mark_findThenMark_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_FIND_COMMAND);
         TestTask taskToMark = this.expectedTasksList[INDEX_FIND_VALID - 1];
         TestTask markedTask = new TaskBuilder(taskToMark).withIsDone(true).build();
-        assertDoneSuccess(INDEX_FIND_VALID_FILTERED, INDEX_FIND_VALID, markedTask);
+        assertMarkSuccess(INDEX_FIND_VALID_FILTERED, INDEX_FIND_VALID, markedTask);
     }
 
     @Test
-    public void edit_findThenEdit_failure() throws Exception {
+    public void mark_findThenMark_failure() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_FIND_COMMAND);
         this.commandBox.runCommand(MESSAGE_MARK_COMMAND + INDEX_FIND_INVALID_FILTERED);
 
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-    private void assertDoneSuccess(int filteredTaskListIndex, int taskManagerIndex, TestTask markedTask) {
+    private void assertMarkSuccess(int filteredTaskListIndex, int taskManagerIndex, TestTask markedTask) {
 
         this.commandBox.runCommand(MESSAGE_MARK_COMMAND + filteredTaskListIndex);
 
