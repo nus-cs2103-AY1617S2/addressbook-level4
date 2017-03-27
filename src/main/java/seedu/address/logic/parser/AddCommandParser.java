@@ -134,7 +134,7 @@ public class AddCommandParser {
                             + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
                                     : CliSyntax.DEFAULT_DEADLINE));
 
-            if (group == null || group.size() > 1 || (!group.get(0).getText()
+            if (group == null || group.size() > 2 || (!group.get(0).getText()
                     .equals(datesString.get(i))
                     && (!group.get(0).getText().equals(
                             ParserUtil.correctDateFormat(datesString.get(i))

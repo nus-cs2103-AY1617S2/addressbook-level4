@@ -28,7 +28,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [NAME] [due DEADLINE] [tag TAGS]...\n"
             + "Example: " + COMMAND_WORD + " 1 CS2103 Finish Tutorial";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager.";
 
@@ -76,7 +76,7 @@ public class EditCommand extends Command {
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(
-                String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
+                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     // @@author A0093999Y
@@ -98,15 +98,12 @@ public class EditCommand extends Command {
         Optional<DateTime> updatedStartingTime;
         Optional<DateTime> updatedDeadline;
 
-        if (editTaskDescriptor.getStartingTime().isPresent()) {
-            updatedStartingTime = editTaskDescriptor.getStartingTime();
-        } else {
-            updatedStartingTime = taskToEdit.getStartingTime();
-        }
         if (editTaskDescriptor.getDeadline().isPresent()) {
+            updatedStartingTime = editTaskDescriptor.getStartingTime();
             updatedDeadline = editTaskDescriptor.getDeadline();
         } else {
-            updatedDeadline = taskToEdit.getDeadline();
+            updatedStartingTime = taskToEdit.getStartingTime();
+            updatedDeadline = editTaskDescriptor.getDeadline();
         }
 
         return Task.createTask(updatedName, updatedTags, updatedDeadline,
