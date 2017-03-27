@@ -41,12 +41,10 @@ public class SaveCommandTest extends EzDoGuiTest {
 
     @Test
     public void save_validDirectory_noAdminPermissions_failure() throws Exception {
-        new MockUp<FileUtil>()
-        {
+        new MockUp<FileUtil>() {
             @Mock
-            public void createIfMissing(File file) throws IOException // this method is static in SwingUtilities
-            {
-                throw new IOException(); // so that everything executes on this thread
+            public void createIfMissing(File file) throws IOException {
+                throw new IOException();
             }
         };
         commandBox.runCommand("save " + validDirectory);
