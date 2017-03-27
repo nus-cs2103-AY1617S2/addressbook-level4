@@ -44,10 +44,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss.";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
+
+    //@@author A0144904H
     public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot add Done category";
     public static final String ERROR_CANNOT_EDIT_DONE_TASK = "Cannot edit Done tasks";
 
-
+    //@@author
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
@@ -65,6 +67,7 @@ public class EditCommand extends Command {
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
+    //@@author A0144904H
     @Override
     public CommandResult execute() throws CommandException, InvalidDatesException,
                                         IllegalValueException, DefaultCategoryException {
@@ -97,6 +100,7 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
+    //@@author
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
@@ -122,21 +126,7 @@ public class EditCommand extends Command {
         Recurrence updatedRecurrence = editTaskDescriptor.getRecurrence()
                 .orElseGet(taskToEdit::getRecurrence);
 
-        //check whether user input for editing task categories contains AllTasks category
-        //and remove it from user input
-        if (editTaskDescriptor.getCategories().isPresent() &&
-                editTaskDescriptor.getCategories().get().contains(new Category("AllTasks"))) {
-            editTaskDescriptor.getCategories().get().remove(new Category("AllTasks"));
-        }
-
-        //check whether user input for editing task categories contains Done category
-        //and throw DefaultCategoryException
-        if (editTaskDescriptor.getCategories().isPresent() &&
-                editTaskDescriptor.getCategories().get().contains(new Category("Done"))) {
-            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
-        }
-        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
-                .orElseGet(taskToEdit::getCategories);
+        UniqueCategoryList updatedCategories = createUpdatedCategorySet(taskToEdit, editTaskDescriptor);
 
         if (updatedStartDateTime.getDate() != null &&
                 updatedEndDateTime.getDate() != null &&
@@ -145,7 +135,7 @@ public class EditCommand extends Command {
         }
 
         //@@author A0144904H
-        if (taskToEdit.getCategories().contains(new Category("Done"))) {
+        if (taskToEdit.getCategories().contains(new Category(AddCommand.DEFAULT_DONE))) {
             throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
         } else {
             updatedCategories.add(new Category(AddCommand.DEFAULT_All_TASKS));
@@ -155,6 +145,37 @@ public class EditCommand extends Command {
                 updatedInformation, updatedRecurrence, updatedCategories);
     }
 
+    //@@author A0144904H
+    /**
+     * @param editTaskDescriptor
+     * @param taskToEdit
+     * @return the new Category List of the to be edited task
+     * @throws IllegalValueException
+     * @throws DefaultCategoryException
+     */
+    private static UniqueCategoryList createUpdatedCategorySet(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException, DefaultCategoryException {
+
+        //check whether user input for editing task categories contains AllTasks category
+        //and remove it from user input
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.DEFAULT_All_TASKS))) {
+            editTaskDescriptor.getCategories().get().remove(new Category(AddCommand.DEFAULT_All_TASKS));
+        }
+
+        //check whether user input for editing task categories contains Done category
+        //and throw DefaultCategoryException
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.DEFAULT_DONE))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
+        }
+
+        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
+                .orElseGet(taskToEdit::getCategories);
+        return updatedCategories;
+    }
+
+    //@@author
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
