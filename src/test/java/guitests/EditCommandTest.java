@@ -162,6 +162,31 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertResultMessage(EditCommand.ERROR_INVALID_DATES);
     }
 
+    //author A0144904H
+    @Test
+    public void edit_To_DoneCategory_failure() {
+        commandBox.runCommand("edit 3 c/Done sd/next fri 5pm ed/tomorrow");
+
+        assertResultMessage(EditCommand.ERROR_CANNOT_EDIT_DONE_CATEGORY);
+    }
+
+    //author A0144904H
+    @Test
+    public void edit_DoneCategory_failure() throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("mark 1");
+        commandBox.runCommand("edit 1 c/Work");
+
+        assertResultMessage(EditCommand.ERROR_CANNOT_EDIT_DONE_TASK);
+    }
+
+    //author A0144904H
+    @Test
+    public void edit_To_AllTasks_Category_failure() {
+        commandBox.runCommand("edit 3 c/AllTasks sd/next fri 5pm ed/tomorrow");
+
+        assertResultMessage(EditCommand.ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY);
+    }
+
     //@@author
     /**
      * Checks whether the edited task has the correct updated details.
