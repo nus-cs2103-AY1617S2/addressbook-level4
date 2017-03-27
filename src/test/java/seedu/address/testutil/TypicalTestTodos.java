@@ -19,7 +19,7 @@ public class TypicalTestTodos {
                     .withTags("petcare").build();
             cat = new TodoBuilder().withName("Walk the cat")
                     .withTags("petcare", "cat").build();
-            math = new TodoBuilder().withName("Do math homework").build();
+            math = new TodoBuilder().withName("Do math homework").withTags("homework").build();
             english = new TodoBuilder().withName("Do english homework").build();
             dishes = new TodoBuilder().withName("Wash dishes").build();
             lawn = new TodoBuilder().withName("Mow the lawn").build();

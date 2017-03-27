@@ -28,12 +28,15 @@ import seedu.address.model.TodoList;
 import seedu.address.model.todo.ReadOnlyTodo;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestTodos;
+import java.util.logging.Logger;
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * A GUI Test class for TodoList.
  */
 public abstract class TodoListGuiTest {
-
+    private static final Logger logger = LogsCenter.getLogger(TodoListGuiTest.class);
+    
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
     public TestName name = new TestName();
@@ -117,6 +120,7 @@ public abstract class TodoListGuiTest {
      */
     protected void assertListSize(int size) {
         int numberOfTodos = todoListPanel.getNumberOfTodos();
+        logger.info("!!!!!Num todos: " + numberOfTodos + " size: " + size);
         assertEquals(size, numberOfTodos);
     }
 

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.Set;
 
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.tag.UniqueTagList;
 
 
@@ -16,9 +17,9 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all todos whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "To search by keyword: KEYWORD [MORE_KEYWORDS]...\n"
-            + "To search by tag: t/TAG\n"
+            + "To search by tag: " + CliSyntax.PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + "groceries\n"
-            + "Example2: " + COMMAND_WORD + "t/milk\n";
+            + "Example2: " + COMMAND_WORD + CliSyntax.PREFIX_TAG + "milk\n";
     public static final String MESSAGE_EMPTY_ERROR = "Cannot leave fields blank.";
 
     private Set<String> keywords;
