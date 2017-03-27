@@ -25,8 +25,8 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/ezDo_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 900;
-    private static final int MIN_WIDTH = 1200;
+    private static final int MIN_HEIGHT = 820;
+    private static final int MIN_WIDTH = 1400;
 
     private Stage primaryStage;
     private Logic logic;
@@ -43,6 +43,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane taskCardHeaderPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -109,6 +112,7 @@ public class MainWindow extends UiPart<Region> {
 
     protected void fillInnerParts() {
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        new TaskCardHeader(getTaskCardHeaderPlaceholder());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getEzDoFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -128,6 +132,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
+    }
+
+    private AnchorPane getTaskCardHeaderPlaceholder() {
+        return taskCardHeaderPlaceholder;
     }
 
     protected void hide() {

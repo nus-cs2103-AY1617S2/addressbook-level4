@@ -34,7 +34,7 @@ public class DateUtilTest {
         String dateString1 = "omg";
         String dateString2 = "asdf";
         when(mock.parse(dateString1)).thenThrow(new ParseException("parse exception", 1));
-        DateUtil.compareDateStrings(dateString1, dateString2);
+        DateUtil.compareDateStrings(dateString1, dateString2, true);
     }
 
     @Test
@@ -56,6 +56,14 @@ public class DateUtilTest {
     @Test
     public void noDueDate_pass() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3").withStartDate("02/02/2017")
+                .withDueDate("")
+                .withTags("guy").build();
+        assertTrue(DateUtil.isTaskDateValid(task));
+    }
+
+    @Test
+    public void noDates_pass() throws Exception {
+        TestTask task = new TaskBuilder().withName("Alson").withPriority("3").withStartDate("")
                 .withDueDate("")
                 .withTags("guy").build();
         assertTrue(DateUtil.isTaskDateValid(task));

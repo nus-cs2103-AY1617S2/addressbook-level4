@@ -13,6 +13,7 @@ import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
+import seedu.ezdo.commons.events.model.IsSortedAscendingChangedEvent;
 import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
@@ -42,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final UserPrefs userPrefs;
 
     private SortCriteria currentSortCriteria;
+    private Boolean currentIsSortedAscending;
 
     private final FixedStack<ReadOnlyEzDo> undoStack;
     private final FixedStack<ReadOnlyEzDo> redoStack;
@@ -59,6 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.userPrefs = userPrefs;
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
         currentSortCriteria = userPrefs.getSortCriteria();
+        currentIsSortedAscending = userPrefs.getIsSortedAscending();
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         redoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         updateFilteredListToShowAll();
@@ -103,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
         checkTaskDate(task);
         updateStacks();
         ezDo.addTask(task);
-        ezDo.sortTasks(currentSortCriteria);
+        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
@@ -124,7 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateStacks();
         int ezDoIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         ezDo.updateTask(ezDoIndex, editedTask);
-        ezDo.sortTasks(currentSortCriteria);
+        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         indicateEzDoChanged();
     }
 
@@ -380,16 +383,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void sortTasks(SortCriteria sortCriteria) {
+    public void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending) {
         if (!this.currentSortCriteria.equals(sortCriteria)) {
             this.currentSortCriteria = sortCriteria;
             indicateSortCriteriaChanged();
         }
-        ezDo.sortTasks(sortCriteria);
+        if (!this.currentIsSortedAscending.equals(isSortedAscending)) {
+            this.currentIsSortedAscending = isSortedAscending;
+            indicateIsSortedAscendingChanged();
+        }
+        ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
 
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
+    }
+
+    public void indicateIsSortedAscendingChanged() {
+        raise(new IsSortedAscendingChangedEvent(currentIsSortedAscending));
     }
 }

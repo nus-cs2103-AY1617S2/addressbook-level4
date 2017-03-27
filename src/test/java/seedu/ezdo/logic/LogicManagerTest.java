@@ -105,7 +105,7 @@ public class LogicManagerTest {
         targetedJumpIndex = -1; // non yet
 
         // sort by a field other than name so that it does not affect the tests
-        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
+        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY, true);
     }
 
     @After

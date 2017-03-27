@@ -16,6 +16,7 @@ public class UserPrefs {
 
     public GuiSettings guiSettings;
     public SortCriteria sortCriteria;
+    public Boolean isSortedAscending;
     public CommandAliases commandAliases;
 
     public GuiSettings getGuiSettings() {
@@ -29,6 +30,7 @@ public class UserPrefs {
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
         this.sortCriteria = UniqueTaskList.SortCriteria.NAME;
+        this.isSortedAscending = true;
         this.commandAliases = new CommandAliases();
     }
 
@@ -51,6 +53,14 @@ public class UserPrefs {
 
     public CommandAliases getCommandAliases() {
         return commandAliases;
+    }
+
+    public void updateLastUsedIsSortedAscending(Boolean isSortedAscending) {
+        this.isSortedAscending = isSortedAscending;
+    }
+
+    public boolean getIsSortedAscending() {
+        return isSortedAscending;
     }
 
     @Override
