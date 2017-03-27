@@ -1,3 +1,4 @@
+//@@author A0139399J
 package seedu.doit.model;
 
 import java.util.Set;
@@ -27,7 +28,6 @@ import seedu.doit.model.predicates.NamePredicate;
 import seedu.doit.model.predicates.PriorityPredicate;
 import seedu.doit.model.predicates.TagPredicate;
 
-// @@author A0139399J
 /**
  * Represents the in-memory model of the task manager data. All changes to any
  * model should be synchronized.
@@ -83,8 +83,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager.resetData(new TaskManager());
         indicateTaskManagerChanged();
     }
-    // @@author A0139399J
 
+    // @@author A0139399J
     @Override
     public ReadOnlyItemManager getTaskManager() {
         return this.taskManager;
@@ -236,10 +236,5 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         this.filteredTasks.setPredicate(combined);
-    }
-
-    public void showDoneTaskList(boolean showDone) {
-        this.filteredTasks.setPredicate(null);
-        this.filteredTasks.setPredicate(new DonePredicate(showDone));
     }
 }

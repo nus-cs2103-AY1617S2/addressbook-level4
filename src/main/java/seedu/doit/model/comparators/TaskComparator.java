@@ -1,10 +1,10 @@
+//@@author A0139399J
 package seedu.doit.model.comparators;
 
 import java.util.Comparator;
 
 import seedu.doit.model.item.ReadOnlyTask;
 
-//@@author A0139399J
 /**
  * Provides an interface for all TaskComparator classes to compare ReadOnlyTasks
  */

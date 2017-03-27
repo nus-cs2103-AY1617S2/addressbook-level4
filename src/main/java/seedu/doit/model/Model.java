@@ -1,3 +1,4 @@
+//@@author A0139399J
 package seedu.doit.model;
 
 import java.util.Set;
@@ -10,7 +11,6 @@ import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
-//@@author A0139399J
 /**
  * The API of the Model component.
  */

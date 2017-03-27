@@ -1,8 +1,7 @@
+// @@author A0139399J
 package seedu.doit.model.comparators;
 
 import seedu.doit.model.item.ReadOnlyTask;
-
-// @@author A0139399J
 
 /**
  * Compares ReadOnlyTasks by their endTime
