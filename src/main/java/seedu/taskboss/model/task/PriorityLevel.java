@@ -10,16 +10,15 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 public class PriorityLevel {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain"
-            + " the words Yes or No (case-sensitive)";
+            + " the words Yes and No (case-insensitive) or the letters y(Y) and n(N)";
 
     //@@author A0144904H
-    public static final String PRIORITY_HIGH = "Yes";
     public static final String PRIORITY_HIGH_VALUE = "High priority";
-    public static final String PRIORITY_NO = "No";
     public static final String PRIORITY_NO_VALUE = "No priority";
-    public static final String PRIORITY_REGEX = "^(?:Yes|No)$";
+    public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N)$";
 
     public final String value;
+    public final String input;
 
     /**
      * Validates given priority level.
@@ -28,19 +27,24 @@ public class PriorityLevel {
      */
     public PriorityLevel(String priorityLevel) throws IllegalValueException {
         assert priorityLevel != null;
+
         String trimmedPriorityLevel = priorityLevel.trim();
-        if (!isValidPriorityLevel(trimmedPriorityLevel)) {
-            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
-        }
 
-        //@@author A0144904H
-        if (trimmedPriorityLevel.equals(PRIORITY_HIGH)) {
-            trimmedPriorityLevel = PRIORITY_HIGH_VALUE;
+        if ("".equals(priorityLevel)) {
+            this.value = PRIORITY_NO_VALUE;
+            this.input = "No";
         } else {
-            trimmedPriorityLevel = PRIORITY_NO_VALUE;
+            if (!isValidPriorityLevel(trimmedPriorityLevel)) {
+                throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+            }
+            if (trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
+                this.value = PRIORITY_HIGH_VALUE;
+                this.input = "Yes";
+            } else {
+                this.value = PRIORITY_NO_VALUE;
+                this.input = "No";
+            }
         }
-
-        this.value = trimmedPriorityLevel;
     }
 
     /**

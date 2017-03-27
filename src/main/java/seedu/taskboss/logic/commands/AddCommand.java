@@ -29,10 +29,10 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Adds a task to TaskBoss. "
-            + "Parameters: NAME [sd/START_DATE] [ed/END_DATE] "
+            + "Parameters: NAME [p/YES_NO] [sd/START_DATE] [ed/END_DATE] "
             + "[i/INFORMATION] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
-            + " Submit report sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project\n"
+            + " Submit report p/yes sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project\n"
             + "Example: " + COMMAND_WORD_SHORT
             + " Watch movie sd/feb 19 c/Fun";
 
@@ -48,14 +48,15 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      * @throws InvalidDatesException
      */
-    public AddCommand(String name, String startDateTime, String endDateTime,
+    public AddCommand(String name, String priorityLevel, String startDateTime, String endDateTime,
             String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
         }
-        //@@author A0144904H
-        String priorityLevel = PriorityLevel.PRIORITY_NO;
+
+        Name taskName = new Name(name);
+        PriorityLevel priorityLvl = new PriorityLevel(priorityLevel);
         DateTime startDateTimeObj = new DateTime(startDateTime);
         DateTime endDateTimeObj = new DateTime(endDateTime);
 
@@ -64,18 +65,9 @@ public class AddCommand extends Command {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
-        //@@author A0144904H
-        String filteredName;
-        if (name.contains("!")) {
-            filteredName = name.replaceAll("!", "");
-            priorityLevel = PriorityLevel.PRIORITY_HIGH;
-        } else {
-            filteredName = name;
-        }
-
         this.toAdd = new Task(
-                new Name(filteredName),
-                new PriorityLevel(priorityLevel),
+                taskName,
+                priorityLvl,
                 startDateTimeObj,
                 endDateTimeObj,
                 new Information(information),
