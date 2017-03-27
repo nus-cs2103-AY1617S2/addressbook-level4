@@ -42,26 +42,25 @@ public class FindCommandParser {
             return new IncorrectCommand(NO_ARGUMENT_ERROR);
         }
         final Set<String> keywordSet;
-        final List<DateGroup> dates;
+        List<DateGroup> dates;
         switch (keywords[0].trim()) {
         case CliSyntax.FIND_NAME:
             keywordSet = new HashSet<>(Arrays.asList(keywords));
             return new FindCommand(keywordSet, null, null);
         case CliSyntax.FIND_DEADLINE:
-            dates = new PrettyTimeParser()
-                    .parseSyntax(ParserUtil.correctDateFormat(key));
+            dates = new PrettyTimeParser().parseSyntax(key);
             if (dates.get(0).getText().equals(keywords[1].trim())) {
                 return new FindCommand(null, dates, null);
             }
-            // if encounters wrong date time format, switch to default
+            break;
+        // if encounters wrong date time format, switch to default
         case CliSyntax.FIND_TAG:
             keywordSet = new HashSet<>(Arrays.asList(keywords));
             return new FindCommand(null, null, keywordSet);
-        default:
-            keywordSet = new HashSet<>(Arrays.asList(keywords));
-            dates = new PrettyTimeParser().parseSyntax(key);
-            return new FindCommand(keywordSet, dates, keywordSet);
         }
+        keywordSet = new HashSet<>(Arrays.asList(keywords));
+        dates = new PrettyTimeParser().parseSyntax(key);
+        return new FindCommand(keywordSet, dates, keywordSet);
     }
 
 }
