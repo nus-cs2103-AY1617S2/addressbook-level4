@@ -19,21 +19,21 @@ public class DeleteCommandParser {
      * and returns an DeleteCommand object for execution.
      */
     public Command parse(String args) {
-
+        
+        if (args.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+        
         Set<Integer> index = parseIndex(args);
-
+        
         return new DeleteCommand(index);
     }
 
     private Set<Integer> parseIndex(String indexList) {
         Set<Integer> taskIndex = new HashSet<Integer>();
         String trimmedList = indexList.trim();
-        String[] indexes = trimmedList.split(" ");
-
-        if(trimmedList.isEmpty()) {
-            return new IncorrectCommand(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }    
+        String[] indexes = trimmedList.split(" ");  
 
         for (String index : indexes) {
             taskIndex.add(Integer.parseInt(index));
