@@ -1,13 +1,13 @@
-# AddressBook Level 4 - User Guide
+# To-do List - User Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Quick Start](#1-quick-start)
+2. [Features](#2-features)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 
@@ -16,18 +16,18 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `todolist.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your ToDoList.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`list`** : lists all tasks
+   * **`add`**`Do tutorial /by 14.02.17` :
+     adds a deadline task describing `Do tutorial` to the todolist.
+   * **`delete`**` f3` : deletes the 3rd task shown in the float list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -37,7 +37,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
+> * Items in `SQUARE_BRACKETS` are can have multiples.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
@@ -45,105 +45,108 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> A new window will open showing the user guide webpage
+> e.g. `help`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the todolist
+Format: `add TITLE /venue /from /to /level /description #[TAG]`
 
-> Persons can have any number of tags (including 0)
+> * TITLE represent the task (complusory)
+> * /venue represents the location for the task
+> * /from represents the starting time of the event task
+> * /to represents the ending time of the event task
+> * /to without /from would change it to deadline task
+> * /level represents the urgency level of the task
+> * /description represents the description of the task*
+> * #[TAG] represents the tag**
 
-Examples:
+Note
+*Tasks can have 4 level of priority (0, 1, 2, 3 with 3 being the highest)
+**Tasks can have any number of tags (including 0)
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+### 2.3.1. Listing all tasks : `list`
 
-### 2.3. Listing all persons : `list`
-
-Shows a list of all persons in the address book.<br>
+Shows a list of all tasks in the todolist<br>
 Format: `list`
 
-### 2.4. Editing a person : `edit`
+### 2.3.2. Listing all tags : `listtag`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Shows a list of all tags in the todolist<br>
+Format: `listtags`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
+### 2.4. Editing a task : `edit`
+
+Edits an existing task in the todolist.<br>
+Format: `edit INDEX TITLE /venue /from /to /level /description [#TAG]...`
+
+> * Edits the task at the specified `INDEX`.
+    The index refers to the index number shown in the last task listing.
+    Index **must include the type of task**, e.g. f1 for 1st float task and **must be followed by a positive integer** 1, 2, 3, ... <br>
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `edit d1 Do tutorial /to 17.09.19`<br>
+  Edits the TITLE and deadline of the 1st float task to be `Do tutorial` and `17.09.19` respectively.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### 2.5. Finding all tasks containing any keyword in their title: `find`
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
-
-Finds persons whose names contain any of the given keywords.<br>
+Finds tasks whose description contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+> * The search is case sensitive. e.g `lunch` will not match `Lunch`
+> * The order of the keywords does not matter. e.g. `Lunch Plan` will match `Plan Lunch`
+> * Only the title is searched.
+> * Only full words will be matched e.g. `Lunch` will not match `Lunchie`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Lunch` will match `Lunch Plan`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find Lunch`<br>
+  Returns `Lunch Plan` but not `lunch`
+* `find Breakfast Lunch Dinner`<br>
+  Returns any task having names `Breakfast`, `Lunch`, or `Dinner`
 
-### 2.6. Deleting a person : `delete`
+### 2.6. Deleting a task : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
+Deletes the specified task from the todolist. <br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> Deletes the task at the specified `INDEX`. <br>
+    The index refers to the index number shown in the last task listing.
+    Index **must include the type of task**, e.g. f1 for 1st float task and **must be followed by a positive integer** 1, 2, 3, ... <br>
 
 Examples:
 
 * `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  `delete f2`<br>
+  Deletes the 2nd float task in the todolist.
 
-### 2.7. Select a person : `select`
+### 2.7. Select a tasks: `select`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Selects the tasks identified by the index number used in the last task listing.<br>
+Format: `select INDEX...`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
+> Selects the task at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+    The index refers to the index number shown in the last task listing.
+    Index **must include the type of task**, e.g. f1 for 1st float task and **must be followed by a positive integer** 1, 2, 3, ... <br>
 
 Examples:
 
 * `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+  `select e2`<br>
+  Selects the 2nd event task in the todolist.
 
-### 2.8. Clearing all entries : `clear`
+### 2.8. Undoing previous command : `undo`
 
-Clears all entries from the address book.<br>
-Format: `clear`
+Undo previous command
+Format: `undo`
 
 ### 2.9. Exiting the program : `exit`
 
@@ -159,28 +162,36 @@ There is no need to save manually.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous todolist folder.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-* **Clear** : `clear`
+* **Add**  `add TITLE /venue /from /to /level /description #[TAG]` <br>
+  e.g. `add Do Tutorial /venue CLB /from today 3pm /to today 5pm /level 2 /description for week13 #CS2103`
 
 * **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+   e.g. `delete f3`
+
+* **Edit** : `edit INDEX [TITLE] [/venue] [/from] [/to] [/level] [/description] [#TAG]...` <br>
+e.g. `edit f7 buy calculator`
+
+* **Exit** : `exit` <br>
+e.g.
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
-
-* **List** : `list` <br>
-  e.g.
+  e.g. `find tutorial quiz`
 
 * **Help** : `help` <br>
   e.g.
 
+* **List** : `list` <br>
+  e.g.
+
+* **ListTag** : `listtag` <br>
+e.g.
+
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
 
-
+* **Undo** : `undo` <br>
+e.g. 'undo'
