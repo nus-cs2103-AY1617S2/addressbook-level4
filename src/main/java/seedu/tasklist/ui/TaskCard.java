@@ -52,7 +52,7 @@ public class TaskCard extends UiPart<Region> {
         setName(task);
         setId(task, displayedIndex);
         setComment(task);
-        initTags(task);
+        setTags(task);
         setPriority(task);
         setDate(task);
 
@@ -90,7 +90,10 @@ public class TaskCard extends UiPart<Region> {
         comment.setText(task.getComment().value);
     }
 
-    private void initTags(ReadOnlyTask task) {
+    /*
+     * Set tags for tasks
+     */
+    private void setTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
