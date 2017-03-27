@@ -1,4 +1,4 @@
-package seedu.onetwodo.logic.parser;
+package seedu.onetwodo.model;
 
 public enum DoneStatus {
     DONE("done"),

@@ -6,7 +6,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
-import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskType;

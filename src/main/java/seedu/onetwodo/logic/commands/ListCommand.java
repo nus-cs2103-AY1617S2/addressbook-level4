@@ -1,6 +1,6 @@
 package seedu.onetwodo.logic.commands;
 
-import seedu.onetwodo.logic.parser.DoneStatus;
+import seedu.onetwodo.model.DoneStatus;
 
 /**
  * Lists all tasks in the todo list to the user.

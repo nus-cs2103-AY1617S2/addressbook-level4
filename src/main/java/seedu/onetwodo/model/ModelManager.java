@@ -13,7 +13,6 @@ import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.commons.util.StringUtil;
-import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskType;

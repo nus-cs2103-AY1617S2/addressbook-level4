@@ -6,7 +6,7 @@ import java.util.Set;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.logic.parser.DoneStatus;
+import seedu.onetwodo.model.DoneStatus;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
