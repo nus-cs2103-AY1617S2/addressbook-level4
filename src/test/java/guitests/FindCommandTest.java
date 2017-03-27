@@ -12,10 +12,10 @@ import seedu.todolist.testutil.TestTodo;
 
 public class FindCommandTest extends TodoListGuiTest {
     // This tag only tagged one item (td.cat) in the list of test todos
-    private final String SINGLE_TAG = "cat";
+    private static final String SINGLE_TAG = "cat";
 
     // This tag tagged multiple items (td.dog, td.cat) in the list of test todos
-    private final String MULTI_TAG = "petcare";
+    private static final String MULTI_TAG = "petcare";
 
     @Test
     public void find_nonEmptyList() {
