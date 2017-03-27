@@ -3,7 +3,6 @@ package seedu.taskboss.logic.parser;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.taskboss.logic.commands.Command;
