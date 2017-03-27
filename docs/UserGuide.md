@@ -54,53 +54,62 @@ Format: `help [COMMAND]`
 #### 2.2.1. Adding an event : `add`
 
 Adds an event to the event list. Undoable.<br>
-Format: `add DESCRIPTION [s/START_TIME] f/FROM_DATE [e/END_TIME] [u/TO_DATE] [t/COMMENTS]... [l/LOCATION]`
+Format: `add DESCRIPTION [s/START_TIME] f/FROM_DATE [e/END_TIME] [u/TO_DATE] [t/TAGS]... [l/LOCATION]`
 
 > * Events must be added with description.
 > * From date is required, while other fields are optional.
 > * From date and To date should have format `DDMMYY`, e.g. 230117.
-> * Start time and end time should have format `XXXX`, e.g. 2359.
-> * If end time is entered and end date is not entered, end date is set to be start date by default.
-> * Events can have any number of comments(including 0).
+> * Start time and end time should have format `MMHH`, e.g. 2359.
+> * Default value for end date is set to be the same as start date
+> * Default value for end time is set to be 23:59
+> * Default value for start time is set to be 00:01
+> * Events can have any number of tags(including 0).
 > * If description is not entered, help message for add will appear.
 
 Examples:
 
-* `add PhotoShop Workshop s/1900 f/13-02-17 t/take laptop l/CLB`
-* `add Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
+* `add PhotoShop Workshop sd/130217 st/1900 ed/130217 t/take laptop l/CLB`
+* `add Industrial Talk sd/030517 st/1800 ed/030517 et/2000 l/FoS`
 
-#### 2.2.2. Adding a deadline : `add`
-
-Adds a deadline to the deadline list. Undoable.<br>
-Format: `add DESCRIPTION b/BY_DATE [e/END_TIME] [t/COMMENTS]... [l/LOCATION]`
-
-> * Deadlines must be added with description.
-> * By date is required, while other fields are optional.
-> * By date should have format `DDMMYY`, e.g. 230117.
-> * End time should have format `XXXX`, e.g. 2359.
-> * Deadlines can have any number of comments(including 0).
-> * If description is not entered, help message for add will appear.
-
-Examples:
-
-* `add Home Assignment 1 b/21-03-17 t/submit hardcopy l/general office`
-* `add Project Report b/12-04-17 e/2359 t/submit softcopy c/online discussion`
-
-#### 2.2.3. Adding a task : `add`
+#### 2.2.2. Adding a task : `add`
 
 Adds a task to the task list. Undoable.<br>
-Format: `add DESCRIPTION [c/COMMENTS]... [l/LOCATION] p/PRIORITY`
+Tasks has completion status, which is set to [pending] by default. <br>
+User can mark a task as [Completed]. (See section 2.13) <br>
+Format: `add DESCRIPTION p/PRIORITY... [l/LOCATION] `
 
 > * Tasks must be added with description.
-> * Priority is required, and can only take on the values "high", "medium" or "low", while other fields are optional.
+> * Priority is required, and can only take on the values "high", "medium" or "lp/high.
 > * Other fields are optional.
 > * Tasks can have any number of comments(including 0).
 > * If description is not entered, help message for add will appear.
 
 Examples:
 
-* `add Review CS2103 c/watch webcast p/1`
-* `add Buy fruits l/FairPrice p/2`
+* `add Review CS2103 t/watch webcast p/high`
+* `add Buy fruits l/FairPrice p/medium`
+
+
+#### 2.2.3. Adding a deadline : `add`
+
+Adds a deadline equivalent to adding a task with by time and by date. Undoable.<br>
+Deadlines has completion status, which is set to [pending] by default. <br>
+User can mark a deadline as [Completed]. (See section 2.13) <br>
+Format: `add DESCRIPTION p/PRIORITY bd/BY_DATE [bt/BY_TIME]... [l/LOCATION]`
+
+> * Deadlines must be added with DESCRIPTION and PRIORITY.
+> * By date and By time is to be specified to make it a deadline, which would otherwise remains a task.
+> * By date should have format `DDMMYY`, e.g. 230117.
+> * End time should have format `XXXX`, e.g. 2359.
+> * If only BY_TIME is specified, BY_DATE would be set as current day by default.
+> * If only BY_DATE is specified, BY_TIME would be set as 23:59 by default.
+> * Deadlines can have any number of comments(including 0).
+> * If description is not entered, help message for add will appear.
+
+Examples:
+
+* `add Home Assignment 1 p/high bd/210317 t/submit hardcopy l/general office`
+* `add Project Report p/medium bd/120417 bt/2359 t/submit softcopy`
 
 ### 2.3. Listing all events/deadlines/tasks : `list`
 
@@ -323,12 +332,46 @@ Examples:
   `redo`<br>
   Reverses the previous undo command.
 
-### 2.13. Exiting the program : `exit`
+### 2.13 Finishing a task/deadline: `finish`
+
+Finishes the specified task/deadline from WhatsLeft. Undoable.<br>
+Format: `finish INDEX`
+
+> * Finishes the task/event at the specified `INDEX`.
+> * The index refers to the index number shown in the most recent task listing.
+> * The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `list`<br>
+  `finish 2`<br>
+  Deletes the 2nd event in the event list.
+* `find Assignment`<br>
+  `delete 1`<br>
+  Deletes the 1st event in the results of the `find` command.
+
+### 2.14. Task display preference: `show`
+
+  Sets the display preference of tasks in three categories.<br>
+  User is able to view all tasks, completed tasks or pending tasks.
+  Format: `show` [DISPLAY_PREFERENCE]
+
+  > * DISPLAY_PREFERENCE should be empty, `com` or `pend`,
+  > * representing all tasks, completed tasks and pending tasks respectively.
+
+Examples:
+
+* `show`<br>
+* `show com`<br>
+* `show pend`<br>
+
+
+### 2.15. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.14. Saving the data
+### 2.16. Saving the data
 
 Task list data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
