@@ -2,6 +2,7 @@ package seedu.address.model.todo;
 
 import java.util.Date;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -34,6 +35,7 @@ public interface ReadOnlyTodo {
                 //&& other.getCompleteTime().equals(this.getCompleteTime()));
     }
 
+    //@@author A0163720M
     /**
      * Formats the todo as text, showing all todo details.
      */
@@ -58,8 +60,24 @@ public interface ReadOnlyTodo {
         }
 
         builder.append(" Tags: ");
+        builder.append(getTagsAsString());
 
-        getTags().forEach(builder::append);
         return builder.toString();
     }
+    //@@author
+
+    //@@author A0163720M
+    /**
+     *  Formats the todo's tags as a string
+     */
+    default String getTagsAsString() {
+        final StringBuilder builder = new StringBuilder();
+
+        for (Tag tag:getTags()) {
+            builder.append(tag.tagName + " ");
+        }
+
+        return builder.toString();
+    }
+    //@@author
 }
