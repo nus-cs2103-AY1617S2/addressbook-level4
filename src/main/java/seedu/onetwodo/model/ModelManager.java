@@ -84,23 +84,26 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.removeTask(target);
+        history.saveAsPreviousToDoListAndClearRedoHistory(copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
     @Override
     public synchronized void doneTask(int filteredTaskListIndex) throws IllegalValueException {
-        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.doneTask(toDoListIndex);
+        history.saveAsPreviousToDoListAndClearRedoHistory(copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.addTask(task);
+        history.saveAsPreviousToDoListAndClearRedoHistory(copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 

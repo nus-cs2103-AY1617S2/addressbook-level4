@@ -26,8 +26,7 @@ public class ToDoListHistoryManager implements ToDoListHistory {
 
     @Override
     public void saveAsPreviousToDoListAndClearRedoHistory(ToDoList toDoList) {
-        ToDoList copiedCurrentToDoList = new ToDoList(toDoList);
-        previousToDoLists.push(copiedCurrentToDoList);
+        previousToDoLists.push(toDoList);
         nextToDoLists.clear();
     }
 

@@ -6,7 +6,6 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
-import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0135739W
 /**
@@ -43,8 +42,6 @@ public class DoneCommand extends Command {
 
         try {
             model.doneTask(internalIndex);
-        } catch (TaskNotFoundException tnfe) {
-            assert false : "The target task cannot be missing";
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
