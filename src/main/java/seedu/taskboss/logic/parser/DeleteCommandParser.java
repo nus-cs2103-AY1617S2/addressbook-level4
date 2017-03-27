@@ -30,7 +30,7 @@ public class DeleteCommandParser {
         return new DeleteCommand(index.get());
     }
 
-    public static String[] parseIndex(String indexList) {
+    private Set<Integer> parseIndex(String indexList) {
         String trimmedList = indexList.trim();
         String[] indexes = trimmedList.split(" ");
 
