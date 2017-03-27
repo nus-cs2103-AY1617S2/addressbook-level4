@@ -143,6 +143,10 @@ public class Task implements ReadOnlyTask  {
         this.location = location;
     }
 
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
     /**
      * Replaces this Task's tags with the tags in the argument tag list.
      */
