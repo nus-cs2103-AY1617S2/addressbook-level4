@@ -59,6 +59,19 @@ public class TaskCard extends UiPart<Region> {
         priority.setText(task.getPriority().value.toUpperCase());
         priority.setTranslateX(20);
         initTags(task);
+        setPriority(task);
+        setDate(task);
+
+    }
+
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /*
+     * Sets the priority level
+     */
+    private void setPriority(ReadOnlyTask task) {
         String priorityLevel = task.getPriority().value;
         switch(priorityLevel) {
         case Priority.PRIORITY_HIGH:
@@ -74,12 +87,6 @@ public class TaskCard extends UiPart<Region> {
         case Priority.PRIORITY_NIL:
             priority.setVisible(false);;
         }
-        setDate(task);
-
-    }
-
-    private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     /*
