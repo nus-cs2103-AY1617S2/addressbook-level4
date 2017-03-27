@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
+import seedu.tache.commons.events.storage.DataFileLocationChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
 
 /**
@@ -48,10 +49,29 @@ public class StatusBarFooter extends UiPart<Region> {
         this.syncStatus.setText(status);
     }
 
+    //@@author A0142255M
+    public String getSaveLocation() {
+        return this.saveLocationStatus.getText();
+    }
+
+    public String getSyncStatus() {
+        return this.syncStatus.getText();
+    }
+    //@@author
+
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
+    }
+
+    //@@author A0142255M
+    @Subscribe
+    public void handleDataFileLocationChangedEvent(DataFileLocationChangedEvent abce) {
+        assert abce != null;
+        String newLocation = abce.toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting new data file location to" + newLocation));
+        setSaveLocation("New Location: " + newLocation);
     }
 }

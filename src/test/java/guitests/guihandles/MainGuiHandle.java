@@ -33,6 +33,12 @@ public class MainGuiHandle extends GuiHandle {
         return new CalendarPanelHandle(guiRobot, primaryStage);
     }
 
+    //@@author A0142255M
+    public StatusBarFooterHandle getStatusBarFooter() {
+        return new StatusBarFooterHandle(guiRobot, primaryStage);
+    }
+    //@@author
+
     public AlertDialogHandle getAlertDialog(String title) {
         guiRobot.sleep(1000);
         return new AlertDialogHandle(guiRobot, primaryStage, title);
