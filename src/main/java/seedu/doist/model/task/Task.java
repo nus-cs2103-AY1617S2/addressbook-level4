@@ -22,7 +22,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Description name, Priority priority, FinishedStatus finishedStatus, TaskDate dates,
             UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, finishedStatus, tags);
+        assert !CollectionUtil.isAnyNull(name, priority, finishedStatus, dates, tags);
         this.desc = name;
         this.priority = priority;
         this.finishedStatus = finishedStatus;
@@ -31,7 +31,11 @@ public class Task implements ReadOnlyTask {
     }
 
     public Task(Description name, Priority priority, UniqueTagList tags) {
-        this(name, priority, new FinishedStatus(), null, tags);
+        this(name, priority, new FinishedStatus(), new TaskDate(), tags);
+    }
+
+    public Task(Description name, UniqueTagList tags) {
+        this(name, new Priority(), new FinishedStatus(), new TaskDate(), tags);
     }
 
     public Task(Description name, TaskDate dates, UniqueTagList tags) {
