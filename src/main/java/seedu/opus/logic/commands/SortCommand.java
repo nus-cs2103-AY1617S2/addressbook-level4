@@ -26,9 +26,10 @@ public class SortCommand extends Command {
     public CommandResult execute() {
         model.sortList(keyword);
         if (keyword.contains("all") || keyword.contains("status") || keyword.contains("priority")
-                || keyword.contains("start") || keyword.contains("end"))
+                || keyword.contains("start") || keyword.contains("end")) {
             return new CommandResult(MESSAGE_SUCCESS + keyword);
-        else
+        } else {
             return new CommandResult(MESSAGE_SORT_CONSTRAINTS);
+        }
     }
 }
