@@ -2,6 +2,7 @@ package seedu.tache.logic.commands;
 
 import static seedu.tache.logic.parser.CliSyntax.ALL_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.COMPLETED_FILTER;
+import static seedu.tache.logic.parser.CliSyntax.DUE_THIS_WEEK_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.DUE_TODAY_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.FLOATING_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.TIMED_FILTER;
@@ -19,7 +20,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "%1$s tasks listed";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists out all tasks based on type (default: all)\n"
-            + "Parameters (Optional): all, timed, floating, today, uncompleted or completed\n"
+            + "Parameters (Optional): all, timed, floating, today, this week, uncompleted or completed\n"
             + "Example: " + COMMAND_WORD + " completed";
 
 
@@ -51,6 +52,9 @@ public class ListCommand extends Command {
             break;
         case DUE_TODAY_FILTER:
             model.updateFilteredListToShowDueToday();
+            break;
+        case DUE_THIS_WEEK_FILTER:
+            model.updateFilteredListToShowDueThisWeek();
             break;
         case ALL_FILTER:
         default:

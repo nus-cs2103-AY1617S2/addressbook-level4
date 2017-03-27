@@ -32,6 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author
     //@@author A0139961U
     public static final String DUE_TODAY_TASK_LIST_TYPE = "Due Today Tasks";
+    public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Due This Week Tasks";
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
@@ -144,6 +145,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowDueToday() {
         updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
         updateFilteredTaskListType(DUE_TODAY_TASK_LIST_TYPE);
+    }
+
+    public void updateFilteredListToShowDueThisWeek() {
+        updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
+        updateFilteredTaskListType(DUE_THIS_WEEK_TASK_LIST_TYPE);
     }
     //@@author
 
@@ -299,6 +305,29 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "dueToday=true";
+        }
+    }
+
+    //@@author A0139961U
+    private class DueThisWeekQualifier implements Qualifier {
+        private boolean isDueThisWeek;
+
+        DueThisWeekQualifier(boolean isDueThisWeek) {
+            this.isDueThisWeek = isDueThisWeek;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDateTime().isPresent() && isDueThisWeek) {
+                return task.getEndDateTime().get().isSameWeek();
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "dueThisWeek=true";
         }
     }
 

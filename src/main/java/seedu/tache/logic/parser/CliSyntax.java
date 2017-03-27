@@ -41,6 +41,7 @@ public class CliSyntax {
     //@@author
     //@@author A0139961U
     public static final String DUE_TODAY_FILTER = "today";
+    public static final String DUE_THIS_WEEK_FILTER = "this week";
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

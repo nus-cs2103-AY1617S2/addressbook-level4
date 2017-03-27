@@ -4,6 +4,7 @@ package seedu.tache.logic.parser;
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tache.logic.parser.CliSyntax.ALL_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.COMPLETED_FILTER;
+import static seedu.tache.logic.parser.CliSyntax.DUE_THIS_WEEK_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.DUE_TODAY_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.FLOATING_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.TIMED_FILTER;
@@ -34,6 +35,7 @@ public class ListCommandParser {
             case TIMED_FILTER:
             case FLOATING_FILTER:
             case DUE_TODAY_FILTER:
+            case DUE_THIS_WEEK_FILTER:
             case ALL_FILTER:
                 return new ListCommand(trimmedArgs);
             default:
