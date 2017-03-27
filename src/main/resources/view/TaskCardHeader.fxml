@@ -24,6 +24,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Label>
+
                   <Label alignment="BOTTOM_LEFT" minWidth="400.0" prefWidth="400.0" styleClass="cell_small_label" text="Task" wrapText="true">
                      <HBox.margin>
                         <Insets right="80.0" />
