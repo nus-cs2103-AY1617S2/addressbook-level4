@@ -22,11 +22,6 @@ public class DeleteCommandParser {
 
         Set<Integer> index = parseIndex(args);
 
-        if (index.toArray()[0] == null) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
-
         return new DeleteCommand(index);
     }
 
@@ -34,6 +29,11 @@ public class DeleteCommandParser {
         Set<Integer> taskIndex = new HashSet<Integer>();
         String trimmedList = indexList.trim();
         String[] indexes = trimmedList.split(" ");
+
+        if(trimmedList.isEmpty()) {
+            return new IncorrectCommand(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }    
 
         for (String index : indexes) {
             taskIndex.add(Integer.parseInt(index));
