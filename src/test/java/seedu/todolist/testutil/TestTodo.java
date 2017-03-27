@@ -22,7 +22,7 @@ public class TestTodo implements ReadOnlyTodo {
     private Date endtime;
     private Date completeTime;
     private UniqueTagList tags;
-    
+
     //@@author A0163720M
     /**
      * Constructor for a empty floating task
@@ -31,7 +31,7 @@ public class TestTodo implements ReadOnlyTodo {
         this(null, null, null, null, new UniqueTagList());
     }
     //@@author
-    
+
     //@@author A0163720M
     /**
      * Constructor for a floating task
@@ -40,7 +40,7 @@ public class TestTodo implements ReadOnlyTodo {
         this(name, null, null, null, tags);
     }
     //@@author
-    
+
     //@@author A0163786N, A0163720M
     /**
      * Constructor for a deadline
