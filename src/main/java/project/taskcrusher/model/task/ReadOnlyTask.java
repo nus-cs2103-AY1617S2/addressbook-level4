@@ -1,25 +1,17 @@
 package project.taskcrusher.model.task;
 
-import project.taskcrusher.model.shared.Description;
-import project.taskcrusher.model.shared.UserToDo;
-import project.taskcrusher.model.tag.UniqueTagList;
+import project.taskcrusher.model.shared.ReadOnlyUserToDo;
 
 /**
  * A read-only immutable interface for an active task.
  * Implementations should guarantee: details are present and not null (just empty as Optional<>),
  * field values are validated.
  */
-public interface ReadOnlyTask extends UserToDo, Comparable<ReadOnlyTask> {
+public interface ReadOnlyTask extends ReadOnlyUserToDo, Comparable<ReadOnlyTask> {
 
-    Priority getPriority();
-    Description getDescription();
     Deadline getDeadline();
 
-    /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the task's internal tags.
-     */
-    UniqueTagList getTags();
+    public int compareTo(ReadOnlyTask another);
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals).
