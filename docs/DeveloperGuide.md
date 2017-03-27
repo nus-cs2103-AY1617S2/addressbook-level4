@@ -254,18 +254,18 @@ The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that 
 
 #### 2.4.1 Undo/Redo implementation
 
-The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `oringator` the component that generates the `momento` object and the `momento collector`. 
+The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `oringator` the component that generates the `momento` object and the `momento collector`.
 
 Whenever the data object is modified, the `originator` sends a copy of the current state of the data as a `memento` object to the `momento collector` to keep track of. When the undo command is given, the `momento collector` simply returns the `momento` object representing the previous state of the data.
 
 In Opus, we have:
 * `ModelManager` as the `originator`.
 * `TaskManagers` as `momento` objects.
-* `History` as the `momento collector`. 
+* `History` as the `momento collector`.
 
 `History` contains two list of `TaskManager`, one for the backward `undo` operation and another for the forward `redo` operation.
 
-Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplfies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command. 
+Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplfies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
 
 Futhermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
 
@@ -441,7 +441,7 @@ In Opus, Gradle is used to managed all dependencies and external libraries. The 
 * [TestFx](https://github.com/TestFX/TestFX) `4.0`
 * [Monocle](https://wiki.openjdk.java.net/display/OpenJFX/Monocle) `1.8.0_20`
 
-## 6. Version Control 
+## 6. Version Control
 
 ### 6.1. Git + GitHub
 
