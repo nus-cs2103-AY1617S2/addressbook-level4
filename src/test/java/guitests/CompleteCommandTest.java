@@ -8,24 +8,24 @@ public class CompleteCommandTest extends ToDoListGuiTest {
     @Test
     public void complete() {
         
-        TestActivity activityToComplete;
+        TestTask taskToComplete;
         // Runs complete command on a task.
-        activityToComplete = td.task;
+        taskToComplete = td.task;
         commandBox.runCommand("list all");
         commandBox.runCommand("clear");
-        commandBox.runCommand(activityToComplete.getAddCommand());
-        assertCompleteSuccess(activityToComplete, 1);
-        
+        commandBox.runCommand(taskToComplete.getAddCommand());
+        assertCompleteSuccess(taskToComplete, 1);
+       
         // Runs complete command on positive/negative/0 invalid indexes
         commandBox.runCommand("clear");
-        commandBox.runCommand(activityToComplete.getAddCommand());
-        assertInvalidIndex(activityToComplete, 2); // Only 1 activity in the list.
-        assertInvalidIndex(activityToComplete, 0);
-        assertInvalidIndex(activityToComplete, -1);
+        commandBox.runCommand(taskToComplete.getAddCommand());
+        assertInvalidIndex(taskToComplete, 2); // Only 1 activity in the list.
+        assertInvalidIndex(taskToComplete, 0);
+        assertInvalidIndex(taskToComplete, -1);
 
         // Runs complete command on empty list
         commandBox.runCommand("clear");
-        assertInvalidIndex(activityToComplete, 1);
+        assertInvalidIndex(taskToComplete, 1);
         
         //Runs complete command without index
         assertMissingIndex();
@@ -34,29 +34,29 @@ public class CompleteCommandTest extends ToDoListGuiTest {
     /**
      * checks whether a complete command correctly updates the UI
      */
-    private void assertCompleteSuccess(TestActivity activityToComplete, int index) {
+    private void assertCompleteSuccess(TestTask taskToComplete, int index) {
         
-        commandBox.runCommand(activityToComplete.getCompleteCommand(index));
+        commandBox.runCommand(taskToComplete.getCompleteCommand(index));
         boolean isTask = false;
         
         //Confirms new Activity card has correct Completed status.
-        if (activityToComplete.getActivityType().equals(Activity.TASK_TYPE)) {
+        if (taskToComplete.getTaskType().equals(Task.TASK_TYPE)) {
             isTask = true;
-            TaskCardHandle completedCard = activityListPanel.navigateToTask(activityToComplete);
-            assertTaskMatching(activityToComplete, completedCard);
+            TaskCardHandle completedCard = taskListPanel.navigateToTask(taskToComplete);
+            assertTaskMatching(taskToComplete, completedCard);
         }
         
         if (isTask) {
-            activityToComplete = activityListPanel.returnsUpdatedTask(activityToComplete.getActivityName().fullName);
+            taskToComplete = taskListPanel.returnsUpdatedTask(taskToComplete.getTaskName().fullName);
         }
 
         // Confirms the result message is correct
-        assertResultMessage(String.format(MESSAGE_COMPLETED_ACTIVITY_SUCCESS, activityToComplete));
+        assertResultMessage(String.format(MESSAGE_COMPLETED_ACTIVITY_SUCCESS, taskToComplete));
     }
     
-    private void assertInvalidIndex(TestActivity activityToComplete, int index) {
+    private void assertInvalidIndex(TestTask taskToComplete, int index) {
         
-        commandBox.runCommand(activityToComplete.getCompleteCommand(index));
+        commandBox.runCommand(taskToComplete.getCompleteCommand(index));
         assertResultMessage(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
     }
     
