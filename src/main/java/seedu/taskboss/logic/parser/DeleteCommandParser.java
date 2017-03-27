@@ -22,7 +22,7 @@ public class DeleteCommandParser {
 
         Set<Integer> index = parseIndex(args);
 
-        if (index.toArray()[0] == null)) {
+        if (index.toArray()[0] == null) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
