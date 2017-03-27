@@ -2,12 +2,16 @@
 package seedu.tache.logic.commands;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import seedu.tache.commons.core.Config;
+import seedu.tache.commons.exceptions.DataConversionException;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.ConfigUtil;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.ReadOnlyTaskManager;
+import seedu.tache.model.util.SampleDataUtil;
 
 /**
  * Adds a task to the task manager.
@@ -43,6 +47,8 @@ public class SaveCommand extends Command implements Undoable {
     public CommandResult execute() throws CommandException {
         assert storage != null;
         assert config != null;
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
         this.prevPath = storage.getTaskManagerFilePath()
                                .substring(0, storage.getTaskManagerFilePath().length() - FILE_NAME_LENGTH);
         config.setTaskManagerFilePath(newPath + "\\taskmanager.xml");
@@ -52,6 +58,17 @@ public class SaveCommand extends Command implements Undoable {
         } catch (IOException e) {
             return new CommandResult("Failed to save config file : " + StringUtil.getDetails(e));
         }
+        try {
+            taskManagerOptional = storage.readTaskManager();
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+        } catch (DataConversionException e) {
+            return new CommandResult(String.format("Data file not in the correct format."
+                                                    + " Will be starting with an empty TaskManager"));
+        } catch (IOException e) {
+            return new CommandResult(String.format("Problem while reading from the file."
+                                                    + " Will be starting with an empty TaskManager"));
+        }
+        model.resetData(initialData);
         commandSuccess = true;
         undoHistory.push(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, newPath));
