@@ -12,6 +12,8 @@ import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.commons.util.StringUtil;
+import seedu.doit.logic.commands.exceptions.CommandExistedException;
+import seedu.doit.logic.commands.exceptions.NoSuchCommandException;
 import seedu.doit.model.item.EndTimeComparator;
 import seedu.doit.model.item.PriorityComparator;
 import seedu.doit.model.item.ReadOnlyTask;
@@ -34,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private FilteredList<ReadOnlyTask> filteredTasks;
 
     private static final TaskManagerStack taskManagerStack = TaskManagerStack.getInstance();
+    private UserPrefs userPrefs;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -45,6 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
+        this.userPrefs = userPrefs;
         updateFilteredTasks();
 
     }
@@ -260,6 +264,12 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager.resetData(taskManagerStack.loadNewerTaskManager(this.getTaskManager()));
         updateFilteredTasks();
         indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void commandSet(String oldCommand, String newCommand)
+            throws NoSuchCommandException, CommandExistedException {
+        this.userPrefs.getCommandSettings().setCommand(oldCommand, newCommand);
     }
 
     // @@author

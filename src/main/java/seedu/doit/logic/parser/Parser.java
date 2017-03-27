@@ -3,9 +3,12 @@ package seedu.doit.logic.parser;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.doit.commons.core.CommandSettings;
+import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.logic.commands.AddCommand;
 import seedu.doit.logic.commands.ClearCommand;
 import seedu.doit.logic.commands.Command;
@@ -20,9 +23,9 @@ import seedu.doit.logic.commands.ListCommand;
 import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
+import seedu.doit.logic.commands.SetCommand;
 import seedu.doit.logic.commands.SortCommand;
 import seedu.doit.logic.commands.UndoCommand;
-
 
 /**
  * Parses user input.
@@ -33,7 +36,9 @@ public class Parser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Logger logger = LogsCenter.getLogger(Parser.class);
 
+    // @@author A0138909R
     /**
      * Parses user input into command for execution.
      *
@@ -49,51 +54,40 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+        CommandSettings commandSettings = CommandSettings.getInstance();
 
-        case AddCommand.COMMAND_WORD:
+        if (AddCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getAdd().equals(commandWord)) {
             return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
+        } else if (EditCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getEdit().equals(commandWord)) {
             return new EditCommandParser().parse(arguments);
-
-        case SelectCommand.COMMAND_WORD:
+        } else if (SelectCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSelect().equals(commandWord)) {
             return new SelectCommandParser().parse(arguments);
-
-        case DoneCommand.COMMAND_WORD:
+        } else if (DoneCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDone().equals(commandWord)) {
             return new DoneCommandParser().parse(arguments);
-
-        case SortCommand.COMMAND_WORD:
+        } else if (SortCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSort().equals(commandWord)) {
             return new SortCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
+        } else if (DeleteCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDelete().equals(commandWord)) {
             return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
+        } else if (ClearCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getClear().equals(commandWord)) {
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
+        } else if (FindCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getFind().equals(commandWord)) {
             return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
+        } else if (ListCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getList().equals(commandWord)) {
             return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
+        } else if (ExitCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getExit().equals(commandWord)) {
             return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
+        } else if (HelpCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getHelp().equals(commandWord)) {
             return new HelpCommand();
-
-        case SaveCommand.COMMAND_WORD:
+        } else if (SaveCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSave().equals(commandWord)) {
             return new SaveCommandParser().parse(arguments);
-
-        case UndoCommand.COMMAND_WORD:
+        } else if (UndoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUndo().equals(commandWord)) {
             return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
+        } else if (RedoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getRedo().equals(commandWord)) {
             return new RedoCommand();
-
-        default:
+        } else if (SetCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSet().equals(commandWord)) {
+            return new SetCommandParser().parse(arguments);
+        } else {
+            logger.info(commandWord + " add command in command settings is: " + commandSettings.getAdd());
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }

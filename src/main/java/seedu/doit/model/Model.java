@@ -4,6 +4,8 @@ import java.util.Set;
 
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
+import seedu.doit.logic.commands.exceptions.CommandExistedException;
+import seedu.doit.logic.commands.exceptions.NoSuchCommandException;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.item.UniqueTaskList;
@@ -98,6 +100,21 @@ public interface Model {
      * Clears all the data into a data with no tasks
      */
     void clearData();
+
+    /**
+     * Sets a default or old command word into a new command word
+     *
+     * @param oldCommand
+     *            default command or old command word
+     * @param newCommand
+     *            new command word
+     * @throws NoSuchCommandException
+     *             if oldCommand does not exists
+     * @throws CommandExistedException
+     *             if newCommand already exists
+     */
+
+    void commandSet(String oldCommand, String newCommand) throws NoSuchCommandException, CommandExistedException;
     // @@author
 
 }

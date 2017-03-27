@@ -1,7 +1,6 @@
 package seedu.doit.model;
 
-import java.util.Objects;
-
+import seedu.doit.commons.core.CommandSettings;
 import seedu.doit.commons.core.GuiSettings;
 
 /**
@@ -9,46 +8,91 @@ import seedu.doit.commons.core.GuiSettings;
  */
 public class UserPrefs {
 
-    public GuiSettings guiSettings;
+    private GuiSettings guiSettings;
+
+    private CommandSettings commandSettings;
 
     public UserPrefs() {
         this.setGuiSettings(1100, 650, 150, 40);
+        this.commandSettings = CommandSettings.getInstance();
     }
 
     public GuiSettings getGuiSettings() {
         return this.guiSettings == null ? new GuiSettings() : this.guiSettings;
     }
 
+    // @@author A0138909R
+    public CommandSettings getCommandSettings() {
+        if (this.commandSettings == null) {
+            this.commandSettings = CommandSettings.getInstance();
+        }
+        return this.commandSettings;
+    }
+
+    // @@author
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
         this.guiSettings = guiSettings;
     }
 
+    // @@author A0138909R
+    public void updateCommandSetting(CommandSettings commandSettings) {
+        this.commandSettings = commandSettings;
+    }
+
+    // @@author
     public void setGuiSettings(double width, double height, int x, int y) {
         this.guiSettings = new GuiSettings(width, height, x, y);
     }
 
+    // @@author A0138909R
+    public void setCommandSettings(String add, String delete, String edit, String done, String clear, String exit,
+            String find, String help, String list, String redo, String save, String select, String sort, String undo,
+            String set) {
+        CommandSettings.getInstance().setCommandSettings(add, delete, edit, done, clear, exit, find, help, list, redo,
+                save, select, sort, undo, set);
+    }
+
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (!(other instanceof UserPrefs)) { //this handles null as well.
+        if (obj == null) {
             return false;
         }
-
-        UserPrefs o = (UserPrefs) other;
-
-        return Objects.equals(this.guiSettings, o.guiSettings);
+        if (!(obj instanceof UserPrefs)) {
+            return false;
+        }
+        UserPrefs other = (UserPrefs) obj;
+        if (this.commandSettings == null) {
+            if (other.commandSettings != null) {
+                return false;
+            }
+        } else if (!this.commandSettings.equals(other.commandSettings)) {
+            return false;
+        }
+        if (this.guiSettings == null) {
+            if (other.guiSettings != null) {
+                return false;
+            }
+        } else if (!this.guiSettings.equals(other.guiSettings)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.guiSettings);
+        final int prime = 31;
+        int result = 1;
+        result = (prime * result) + ((this.commandSettings == null) ? 0 : this.commandSettings.hashCode());
+        result = (prime * result) + ((this.guiSettings == null) ? 0 : this.guiSettings.hashCode());
+        return result;
     }
 
     @Override
     public String toString() {
-        return this.guiSettings.toString();
+        return this.guiSettings.toString() + "\n" + this.getCommandSettings().toString();
     }
-
+    // @@author
 }
