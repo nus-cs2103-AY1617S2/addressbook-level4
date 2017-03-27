@@ -17,11 +17,13 @@ import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.IncorrectCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.MarkCommand;
 import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.SortCommand;
 import seedu.doit.logic.commands.UndoCommand;
+import seedu.doit.logic.commands.UnmarkCommand;
 
 
 /**
@@ -60,14 +62,20 @@ public class Parser {
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
-        case DoneCommand.COMMAND_WORD:
-            return new DoneCommandParser().parse(arguments);
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case UnmarkCommand.COMMAND_WORD:
+            return new UnmarkCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommand();
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

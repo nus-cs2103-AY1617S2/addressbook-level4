@@ -203,6 +203,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredListToShowDone() {
+        this.filteredTasks.setPredicate(null);
+        this.filteredTasks.setPredicate(new DonePredicate(true));
+    }
+
+
+    @Override
     public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
             Set<String> descriptionKeywords, Set<String> tagKeywords) {
         Predicate<ReadOnlyTask> combined = new AlwaysTruePredicate();
@@ -224,7 +231,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
         if (!tagKeywords.isEmpty()) {
             Predicate<ReadOnlyTask> tagPredicate = new TagPredicate(tagKeywords);
-            //Predicate donePredicate = new DonePredicate(true);
             combined = combined.and(tagPredicate);
             System.out.println("4");
         }

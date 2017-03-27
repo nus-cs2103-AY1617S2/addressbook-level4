@@ -67,9 +67,15 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     /**
-     * Updates the filter of the filtered task list to show all tasks
+     * Updates the filter of the filtered task list to show all undone tasks
      */
     void updateFilteredListToShowAll();
+
+    /**
+     * Updates the filter of the filtered task list to show all done tasks
+     */
+    void updateFilteredListToShowDone();
+
 
     /**
      * Updates the filter of the filtered task list to filter by the given
@@ -107,6 +113,7 @@ public interface Model {
      */
     void clearData();
     // @@author
+
 
 
 

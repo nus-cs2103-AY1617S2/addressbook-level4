@@ -7,7 +7,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import seedu.doit.commons.core.Messages;
-import seedu.doit.logic.commands.DoneCommand;
+import seedu.doit.logic.commands.MarkCommand;
 import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
@@ -34,7 +34,7 @@ public class DoneCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = -2;
         this.commandBox.runCommand("done " + taskManagerIndex);
 
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class DoneCommandTest extends TaskManagerGuiTest {
         Arrays.sort(this.expectedTasksList, new TaskNameComparator());
 
         assertAllPanelsMatch(this.expectedTasksList);
-        assertResultMessage(String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, markedTask));
+        assertResultMessage(String.format(MarkCommand.MESSAGE_MARK_TASK_SUCCESS, markedTask));
 
     }
 
