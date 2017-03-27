@@ -1,7 +1,6 @@
 package seedu.todolist.model.task;
 
 import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
