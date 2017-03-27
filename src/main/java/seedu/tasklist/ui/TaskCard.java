@@ -53,7 +53,6 @@ public class TaskCard extends UiPart<Region> {
         if (task.getStatus().value == false) {
             tickLogo.setVisible(false);
         }
-        String taskType = task.getType();
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         comment.setText(task.getComment().value);
@@ -75,6 +74,19 @@ public class TaskCard extends UiPart<Region> {
         case Priority.PRIORITY_NIL:
             priority.setVisible(false);;
         }
+        setDate(task);
+
+    }
+
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /*
+     * Sets the startDate and endDate or deadline depending on the type of task
+     */
+    private void setDate(ReadOnlyTask task) {
+        String taskType = task.getType();
         switch(taskType) {
         case DeadlineTask.TYPE:
             deadline.setText("Deadline: " + ((ReadOnlyDeadlineTask) task).getDeadlineString());
@@ -92,10 +104,5 @@ public class TaskCard extends UiPart<Region> {
             endDate.setVisible(false);
             break;
         }
-
-    }
-
-    private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
