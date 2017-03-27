@@ -59,7 +59,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         String detailsToEdit = "Presentation for CS2101";
         int filteredTaskListIndex = 1;
-        int taskManagerIndex = 5;
+        int taskManagerIndex = 4;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Presentation for CS2101").build();
