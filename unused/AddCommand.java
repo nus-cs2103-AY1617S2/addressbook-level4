@@ -16,6 +16,8 @@ import seedu.watodo.model.task.FloatingTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
 
+//@@author A0143076J-unused
+//not used because re-implemented the add function to give flexible ordering of the task description
 /**
  * Adds a task to the task manager.
  */
