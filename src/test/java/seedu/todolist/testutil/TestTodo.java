@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.logic.commands.AddCommand;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.todo.Name;
