@@ -23,11 +23,14 @@ public class RenameCategoryCommand extends Command {
             + " || " + COMMAND_WORD_SHORT + " Home HomeSweetHome";
 
     public static final String MESSAGE_SUCCESS = "Category successfully renamed!";
+
     //@@author A0144904H
     public static final String MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME = "All Tasks category cannot be renamed";
     public static final String MESSAGE_DONE_CATEGORY_CANNOT_RENAME = "Done category cannot be renamed";
     public static final String MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE = "Cannot rename a category to Done";
     public static final String MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS = "Cannot rename a category to AllTasks";
+
+    //@@author
     public static final String MESSAGE_DUPLICATE_CATEGORY = "This category already exists in TaskBoss.";
     public static final String MESSAGE_DOES_NOT_EXIST_CATEGORY = "This category does not exist in TaskBoss.";
 
@@ -40,6 +43,7 @@ public class RenameCategoryCommand extends Command {
         this.newCategory = newCategory;
     }
 
+    //@@author A0144904H
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException,
                                         InvalidDatesException, DefaultCategoryException {
@@ -48,15 +52,14 @@ public class RenameCategoryCommand extends Command {
         Category oldCategory = new Category(this.oldCategory);
         Category newCategory = new Category(this.newCategory);
 
-        //@@author A0144904H
         try {
             if (oldCategory.equals(new Category(AddCommand.DEFAULT_All_TASKS))) {
                 throw new DefaultCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
-            } else if (oldCategory.equals(new Category("Done"))) {
+            } else if (oldCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
                 throw new DefaultCategoryException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
-            } else if (newCategory.equals(new Category("Done"))) {
+            } else if (newCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
                 throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
-            } else if (newCategory.equals(new Category("AllTasks"))) {
+            } else if (newCategory.equals(new Category(AddCommand.DEFAULT_All_TASKS))) {
                 throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
             } else {
                 try {
