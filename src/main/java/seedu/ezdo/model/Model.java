@@ -72,7 +72,8 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by multiple fields*/
-    void updateFilteredTaskList(ArrayList<Object> listToCompare, boolean searchByStartDate, boolean searchByDueDate);
+    void updateFilteredTaskList(ArrayList<Object> listToCompare, boolean searchBeforeStartDate,
+            boolean searchBeforeDueDate, boolean searchAfterStartDate, boolean searchAfterDueDate);
 
     /** Updates the filter of the filtered task list to show done tasks*/
     void updateFilteredDoneList();

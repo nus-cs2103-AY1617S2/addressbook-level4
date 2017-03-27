@@ -50,8 +50,10 @@ public class FindCommandParser implements CommandParser {
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
         Set<String> findTags;
-        boolean searchByStartDate = false;
-        boolean searchByDueDate = false;
+        boolean searchBeforeStartDate = false;
+        boolean searchBeforeDueDate = false;
+        boolean searchAfterStartDate = false;
+        boolean searchAfterDueDate = false;
 
         try {
 
@@ -59,14 +61,24 @@ public class FindCommandParser implements CommandParser {
             Optional<String> optionalStartDate = getOptionalValue(argsTokenizer, PREFIX_STARTDATE);
             Optional<String> optionalDueDate = getOptionalValue(argsTokenizer, PREFIX_DUEDATE);
 
-            if (isFindBy(optionalStartDate)) {
-                optionalStartDate = parseFindBy(optionalStartDate);
-                searchByStartDate = true;
+            if (isFindBefore(optionalStartDate)) {
+                optionalStartDate = parseFindBefore(optionalStartDate);
+                searchBeforeStartDate = true;
             }
 
-            if (isFindBy(optionalDueDate)) {
-                optionalDueDate = parseFindBy(optionalDueDate);
-                searchByDueDate = true;
+            if (isFindBefore(optionalDueDate)) {
+                optionalDueDate = parseFindBefore(optionalDueDate);
+                searchBeforeDueDate = true;
+            }
+
+            if (isFindAfter(optionalStartDate)) {
+                optionalStartDate = parseFindAfter(optionalStartDate);
+                searchAfterStartDate = true;
+            }
+
+            if (isFindAfter(optionalDueDate)) {
+                optionalDueDate = parseFindAfter(optionalDueDate);
+                searchAfterDueDate = true;
             }
 
             findStartDate = ParserUtil.parseStartDate(optionalStartDate, isFind);
@@ -84,7 +96,8 @@ public class FindCommandParser implements CommandParser {
         listToCompare.add(findStartDate);
         listToCompare.add(findDueDate);
         listToCompare.add(findTags);
-        return new FindCommand(listToCompare, searchByStartDate, searchByDueDate);
+        return new FindCommand(listToCompare, searchBeforeStartDate, searchBeforeDueDate,
+                               searchAfterStartDate, searchAfterDueDate);
     }
 
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
@@ -97,24 +110,48 @@ public class FindCommandParser implements CommandParser {
         return optionalString;
     }
 
-    private Optional<String> parseFindBy (Optional<String> taskDate) {
+    private Optional<String> parseFindBefore(Optional<String> taskDate) {
         Optional<String> optionalDate;
         String taskDateString = taskDate.get();
-        String commandString = taskDateString.substring(3, taskDateString.length()).trim();
+        String commandString = taskDateString.substring(6, taskDateString.length()).trim();
         optionalDate = Optional.of(commandString);
         return optionalDate;
     }
 
-    private boolean isFindBy(Optional<String> taskDate) {
+    private Optional<String> parseFindAfter(Optional<String> taskDate) {
+        Optional<String> optionalDate;
+        String taskDateString = taskDate.get();
+        String commandString = taskDateString.substring(5, taskDateString.length()).trim();
+        System.out.println(commandString);
+        optionalDate = Optional.of(commandString);
+        return optionalDate;
+    }
+
+    private boolean isFindBefore(Optional<String> taskDate) {
         if (!taskDate.isPresent()) {
             return false;
         } else {
             String taskDateString = taskDate.get();
-            if (taskDateString.length() < 3) {
+            if (taskDateString.length() <= 6) {
                 return false;
             } else {
-                String prefixToCompare = "by/";
-                String byPrefix = taskDateString.substring(0, 3);
+                String prefixToCompare = "before";
+                String byPrefix = taskDateString.substring(0, 6);
+                return byPrefix.equals(prefixToCompare);
+            }
+        }
+    }
+
+    private boolean isFindAfter(Optional<String> taskDate) {
+        if (!taskDate.isPresent()) {
+            return false;
+        } else {
+            String taskDateString = taskDate.get();
+            if (taskDateString.length() <= 5) {
+                return false;
+            } else {
+                String prefixToCompare = "after";
+                String byPrefix = taskDateString.substring(0, 5);
                 return byPrefix.equals(prefixToCompare);
             }
         }
