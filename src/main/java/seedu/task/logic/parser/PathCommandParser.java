@@ -12,10 +12,8 @@ import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.PathCommand;
 
-/**
- * @author A0164061N
- *
- */
+
+ //@@author A0164061N
 
 public class PathCommandParser {
 	   /**

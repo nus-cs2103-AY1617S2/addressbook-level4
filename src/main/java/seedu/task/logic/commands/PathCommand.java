@@ -2,10 +2,7 @@ package seedu.task.logic.commands;
 
 import seedu.task.logic.commands.exceptions.CommandException;
 
-/**
- * @author A0164061N
- *
- */
+//@@author A0164061N
 
 public class PathCommand extends Command {
 	

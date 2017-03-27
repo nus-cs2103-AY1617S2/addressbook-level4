@@ -1,9 +1,6 @@
 package seedu.task.model.task;
 
-/**
- * @author A0164061N
- *
- */
+//@@author A0164061N
 public class TaskPath {
     public String path;
     
