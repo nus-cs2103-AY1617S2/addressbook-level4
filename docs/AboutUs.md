@@ -1,46 +1,40 @@
 # About Us
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are CS2103JAN2017-W15-B4 based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
-
------
-
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Liu Ziyang](http://github.com/VeryLazyBoy)
+<img src="images/verylazyboy.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
+                  Managing Issues
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [How Si Wei](http://github.com/howsiwei)
+<img src="images/howsiwei.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: Storage
+                  Tests
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Goh Yi Rui](http://github.com/yirui94)
+<img src="images/yirui94.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+Responsibilities: Logic
+                  Integration
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
+#### [Zhang Hanming](https://github.com/ZhangHanming)
+<img src="images/zhanghanming.png" width="150"><br>
  Role: Developer <br>
- Responsibilities: Threading
+ Responsibilities: Model
+                   Team Leader
+                   Coordination of Team
 
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
 
  -----
 

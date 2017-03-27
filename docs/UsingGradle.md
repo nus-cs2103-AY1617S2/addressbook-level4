@@ -35,7 +35,7 @@ Gradle commands look like this:
 ## Creating the JAR file
 
 * **`shadowJar`** <br>
-  Creates the `addressbook.jar` file in the `build/jar` folder, _if the current file is outdated_.<br>
+  Creates the `geekeep.jar` file in the `build/jar` folder, _if the current file is outdated_.<br>
   e.g. `./gradlew shadowJar`
 
   > To force Gradle to create the JAR file even if the current one is up-to-date, you can '`clean`' first. <br>
@@ -75,7 +75,7 @@ To enable _exceptions_ to code styles, add in the comment `//CODESTYLE.OFF: Rule
   Runs all tests in the `guitests` package
 
 * **`nonGuiTests`**<br>
-  Runs all non-GUI tests in the `seedu.address` package
+  Runs all non-GUI tests in the `seedu.geekeep` package
 
 * **`headless`**<br>
   Sets the test mode as _headless_.

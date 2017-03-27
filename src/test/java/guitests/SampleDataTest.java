@@ -2,16 +2,18 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.geekeep.model.GeeKeep;
+import seedu.geekeep.model.task.Task;
+import seedu.geekeep.model.util.SampleDataUtil;
+import seedu.geekeep.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends GeeKeepGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected GeeKeep getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -23,8 +25,9 @@ public class SampleDataTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertTrue(personListPanel.isListMatching(expectedList));
+    public void geeKeep_dataFileDoesNotExist_loadSampleData() throws Exception {
+        Task[] expectedList = SampleDataUtil.getSampleTasks();
+        Arrays.sort(expectedList, (thisTask, otherTask) -> thisTask.compareBothPriorityAndDate(otherTask));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

@@ -10,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import seedu.geekeep.TestApp;
+import seedu.geekeep.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -54,8 +54,8 @@ public class GuiHandle {
         return guiRobot.lookup(query).query();
     }
 
-    protected String getTextFieldText(String filedName) {
-        TextField textField = getNode(filedName);
+    protected String getTextFieldText(String fieldName) {
+        TextField textField = getNode(fieldName);
         return textField.getText();
     }
 
