@@ -11,7 +11,7 @@ public class EndTimeComparator implements Comparator<ReadOnlyTask> {
         if (bothHaveEnd) {
             boolean d1IsBefore = d1.getEndTime().get().dateTime.isBefore(d2.getEndTime().get().dateTime);
             boolean d1IsAfter = d1.getEndTime().get().dateTime.isAfter(d2.getEndTime().get().dateTime);
-        	if (d1IsBefore) {
+            if (d1IsBefore) {
                 return -1;
             } else if (d1IsAfter) {
                 return 1;
