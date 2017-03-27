@@ -423,11 +423,11 @@ Vbox, SplitPane {
 }
 
 #labelText {
-    -fx-padding: 0 0 20 5;
+    -fx-padding: 10 0 10 5;
 }
 
 #taskCountText {
-    -fx-padding: 0 20 0 0;
+    -fx-padding: 10 20 0 0;
     -fx-opacity: 0.54;
 }
 
