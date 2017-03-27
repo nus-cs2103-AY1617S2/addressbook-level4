@@ -203,4 +203,9 @@ public class CalendarViewPanel extends UiPart<Region> {
 		currentYear.setText(today.format(dateFormatter("uuuu")));
 	}
 
+	// ========== Inner Methods for calendarview ==========
+
+	private void populateMonth() {
+		LocalDate calendarDate = LocalDate.of(today.getYear(), today.getMonth(), today.getDayOfMonth());
+	}
 }
