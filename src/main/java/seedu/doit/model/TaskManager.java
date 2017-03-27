@@ -1,3 +1,4 @@
+// @@author A0139399J
 package seedu.doit.model;
 
 import java.util.Collection;
@@ -19,7 +20,6 @@ import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 
-// @@author A0139399J
 /**
  * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)

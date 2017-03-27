@@ -1,4 +1,4 @@
-//@@author A0139399J
+// @@author A0139399J
 package seedu.doit.model.comparators;
 
 import java.util.Comparator;

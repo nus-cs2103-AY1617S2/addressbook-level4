@@ -1,10 +1,10 @@
+// @@author A0139399J
 package seedu.doit.model.predicates;
 
 import java.util.function.Predicate;
 
 import seedu.doit.model.item.ReadOnlyTask;
 
-//@@author A0139399J
 /**
  * A predicate that will return true if the ReadOnlyTask isDone matches the
  * showDone boolean
