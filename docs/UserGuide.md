@@ -168,7 +168,7 @@ Format: `exit`
 ### 2.11. Saving the data in specified file/folder
 
 Puts all TaskIt storage in the given path to file.
-Format: 'save <PathToFile>'
+Format: 'save FILEPATH'
 
 Example:
 
@@ -205,4 +205,6 @@ Example:
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
 
+* **Save** : `save FILEPATH` <br>
+  e.g.`save taskIt.txt`
 
