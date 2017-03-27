@@ -134,8 +134,10 @@ public class CommandLibrary {
      * @param arguments
      * @return Returns the correct command with the correct arguments
      */
-    public Command getCorrectCommand(String commandWord, String arguments){
-        if(!commandParserTable.containsKey(commandWord))  {return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);}
+    public Command getCorrectCommand(String commandWord, String arguments) {
+        if (!commandParserTable.containsKey(commandWord)) {
+            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+        }
         return  commandParserTable.get(commandWord).parse(arguments);
     }
 //    protected class commandKeyParserPair{
