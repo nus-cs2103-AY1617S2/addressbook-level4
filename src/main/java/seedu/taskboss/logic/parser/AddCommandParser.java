@@ -4,8 +4,8 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_RECURRENCE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_RECURRENCE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
