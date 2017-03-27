@@ -544,12 +544,8 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             //@@author A0144904H
-            if (p.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
-                cmd.append(p.getName().toString());
-            } else {
-                cmd.append(p.getName().toString() + "!");
-            }
-
+            cmd.append(p.getName().toString());
+            cmd.append(" p/").append(p.getPriorityLevel().input);
             cmd.append(" sd/").append(p.getStartDateTime().toString());
             cmd.append(" ed/").append(p.getEndDateTime().toString());
             cmd.append(" i/").append(p.getInformation());
