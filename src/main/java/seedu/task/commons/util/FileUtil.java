@@ -25,23 +25,23 @@ public class FileUtil {
             createFile(file);
         }
     }
-    
+
     //@@author A0142939W
     public static boolean isFileDirectory(File file) {
-    	return file.isDirectory();
+        return file.isDirectory();
     }
-    
+
     //@@author A0142939W
     public static boolean isFileFormatCorrect(File file) {
-    	assert file != null;
-    	try {
-			XmlUtil.getDataFromFile(file, XmlSerializableTaskManager.class);
-			return true;
-		} catch (FileNotFoundException e) {
-			return false;
-		} catch (JAXBException e) {
-			return false;
-		}
+        assert file != null;
+        try {
+            XmlUtil.getDataFromFile(file, XmlSerializableTaskManager.class);
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (JAXBException e) {
+            return false;
+        }
     }
 
     /**

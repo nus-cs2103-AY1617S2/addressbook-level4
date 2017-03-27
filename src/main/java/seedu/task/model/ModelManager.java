@@ -227,13 +227,13 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             if (isExact) {
                 return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keyWords)
-                        ||StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords);
+                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords);
             } else {
                 return keyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
-                            ||StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
-                            ||StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
-                            ||StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword))
+                            || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
+                            || StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
+                            || StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword))
                     .findAny()
                     .isPresent();
             }

@@ -40,29 +40,31 @@ public class StringUtil {
         }
         return false;
     }
-    
+
     /**
-     * 
+     *
      * Returns true if the {@code sentence} contains the {@code word}
      * Ignores cases, does not have to be full word match
      * @param sentence
      * @param word
      * @return
      */
-    public static boolean containsSubstringIgnoreCase(String sentence,String word){
+    public static boolean containsSubstringIgnoreCase(String sentence, String word) {
         assert word != null : "Word parameter cannot be null";
         assert sentence != null : "Sentence parameter cannot be null";
-        
+
         String preppedWord = word.trim();
         assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
         assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
-        
+
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         for (String wordInSentence: wordsInPreppedSentence) {
-            for(int i = 0;i<wordInSentence.length();i++){
-                if(preppedWord.equalsIgnoreCase(wordInSentence.substring(i))) return true;
+            for (int i = 0; i < wordInSentence.length(); i++) {
+                if (preppedWord.equalsIgnoreCase(wordInSentence.substring(i))) {
+                    return true;
+                }
             }
         }
         return false;
@@ -75,7 +77,7 @@ public class StringUtil {
      * @param keywords cannot be null, cannot be empty, must a set of words
      */
     public static boolean containsExactWordsIgnoreCase(String sentence, Set<String> keywords) {
-        
+
         assert keywords != null : "Word parameter cannot be null";
         assert sentence != null : "Sentence parameter cannot be null";
         String lowerCaseSentence = sentence.toLowerCase();

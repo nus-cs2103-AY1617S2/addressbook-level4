@@ -3,7 +3,7 @@ package seedu.task.logic.parser;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.ListByDoneCommand;
 
-public class ListByDoneCommandParser extends CommandParser{
+public class ListByDoneCommandParser extends CommandParser {
 
     private boolean isDone = true;
     @Override

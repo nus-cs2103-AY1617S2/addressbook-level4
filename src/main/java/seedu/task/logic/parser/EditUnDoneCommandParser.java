@@ -9,7 +9,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.UnDoneCommand;
 
 
-public class EditUnDoneCommandParser extends CommandParser{
+public class EditUnDoneCommandParser extends CommandParser {
 
     public Command parse(String args) {
         Optional<Integer> index = ParserUtil.parseIndex(args);
