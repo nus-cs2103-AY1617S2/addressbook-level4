@@ -2,12 +2,12 @@
 package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_COMPLETE;
-import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_INCOMPLETE;
 import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_ADDED;
+import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_COMPLETE;
 import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_DUE;
-import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_START;
 import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_END;
+import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_INCOMPLETE;
+import static seedu.task.logic.parser.CliSyntax.LIST_COMMAND_START;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
