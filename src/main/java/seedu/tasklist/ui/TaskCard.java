@@ -48,18 +48,46 @@ public class TaskCard extends UiPart<Region> {
     //@@author A0143355J
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        setCompleted(task);
+        setName(task);
+        setId(task, displayedIndex);
+        setComment(task);
+        initTags(task);
+        setPriority(task);
+        setDate(task);
+
+    }
+
+    /*
+     * Set image for completed tasks
+     */
+    private void setCompleted(ReadOnlyTask task) {
         Image tickImage = AppUtil.getImage(tickSource);
         tickLogo.setImage(tickImage);
         if (task.getStatus().value == false) {
             tickLogo.setVisible(false);
         }
-        name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
-        comment.setText(task.getComment().value);
-        initTags(task);
-        setPriority(task);
-        setDate(task);
+    }
 
+    /*
+     * Set name for tasks
+     */
+    private void setName(ReadOnlyTask task) {
+        name.setText(task.getName().fullName);
+    }
+
+    /*
+     * Set ID for tasks
+     */
+    private void setId(ReadOnlyTask task, int displayedIndex) {
+        id.setText(displayedIndex + ". ");
+    }
+
+    /*
+     * Set comment for tasks
+     */
+    private void setComment(ReadOnlyTask task) {
+        comment.setText(task.getComment().value);
     }
 
     private void initTags(ReadOnlyTask task) {
@@ -67,7 +95,7 @@ public class TaskCard extends UiPart<Region> {
     }
 
     /*
-     * Sets the priority level
+     * Set the priority level
      */
     private void setPriority(ReadOnlyTask task) {
         String priorityLevel = task.getPriority().value;
@@ -90,7 +118,7 @@ public class TaskCard extends UiPart<Region> {
     }
 
     /*
-     * Sets the startDate and endDate or deadline depending on the type of task
+     * Set the startDate and endDate or deadline depending on the type of task
      */
     private void setDate(ReadOnlyTask task) {
         String taskType = task.getType();
