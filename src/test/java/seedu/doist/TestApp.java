@@ -64,6 +64,8 @@ public class TestApp extends MainApp {
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage);
+        // We need to show all tasks during testing, even finished ones
+        model.updateFilteredListToShowAll();
     }
 
     public static void main(String[] args) {
