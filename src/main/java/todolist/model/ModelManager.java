@@ -204,6 +204,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private boolean hasContainedKeyword(String searchMe, String findMe) {
+        searchMe = searchMe.toLowerCase();
+        findMe = findMe.toLowerCase();
         int searchMeLength = searchMe.length();
         int findMeLength = findMe.length();
         boolean foundIt = false;
