@@ -102,7 +102,8 @@
 }
 
 .cell_small_label {
-    -fx-font-size: 11px;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
     -fx-text-fill: #010504;
 }
 
