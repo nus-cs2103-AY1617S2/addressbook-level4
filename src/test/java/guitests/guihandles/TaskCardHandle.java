@@ -8,11 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.DateTime;
-import seedu.address.model.task.Note;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.opus.model.tag.UniqueTagList;
+import seedu.opus.model.task.DateTime;
+import seedu.opus.model.task.Note;
+import seedu.opus.model.task.Priority;
+import seedu.opus.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a task card in the task list panel.
@@ -88,7 +88,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
                 && getPriority().equals(task.getPriority().map(Priority::toString).map(String::toUpperCase).orElse(""))
-                && getStatus().equals(task.getStatus().value)
+                && getStatus().equals(task.getStatus().toString())
                 && getNote().equals(task.getNote().map(Note::toString).orElse(""))
                 && getStartTime().equals(task.getStartTime().map(DateTime::toString).map(s -> "Start: " + s).orElse(""))
                 && getEndTime().equals(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""))

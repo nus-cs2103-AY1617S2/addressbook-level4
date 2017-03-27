@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestTask;
+import seedu.opus.commons.core.Messages;
+import seedu.opus.testutil.TestTask;
 
 public class FindCommandTest extends TaskManagerGuiTest {
 
@@ -16,6 +16,16 @@ public class FindCommandTest extends TaskManagerGuiTest {
         //find after deleting one result
         commandBox.runCommand("delete 1");
         assertFindResult("find milk", td.grocery);
+    }
+
+    @Test
+    public void findByTagSuccess() {
+        assertFindResult("find chores", td.laundry, td.dishes); // no results
+    }
+
+    @Test
+    public void findByNoteSuccess() {
+        assertFindResult("find Twice", td.laundry); // no results
     }
 
     @Test

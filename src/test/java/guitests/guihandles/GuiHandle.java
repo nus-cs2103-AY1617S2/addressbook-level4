@@ -10,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import seedu.opus.TestApp;
+import seedu.opus.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -68,6 +68,14 @@ public class GuiHandle {
 
     public void pressEnter() {
         guiRobot.type(KeyCode.ENTER).sleep(500);
+    }
+
+    public void pressTab() {
+        guiRobot.type(KeyCode.TAB).sleep(500);
+    }
+
+    public void pressBackspace() {
+        guiRobot.type(KeyCode.BACK_SPACE).sleep(500);
     }
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {
