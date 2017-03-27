@@ -12,6 +12,7 @@ import seedu.todolist.logic.commands.ClearCommand;
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.CompleteCommand;
 import seedu.todolist.logic.commands.DeleteCommand;
+import seedu.todolist.logic.commands.DescribeCommand;
 import seedu.todolist.logic.commands.EditCommand;
 import seedu.todolist.logic.commands.ExitCommand;
 import seedu.todolist.logic.commands.FindCommand;
@@ -53,6 +54,9 @@ public class Parser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case DescribeCommand.COMMAND_WORD:
+            return new DescribeCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);

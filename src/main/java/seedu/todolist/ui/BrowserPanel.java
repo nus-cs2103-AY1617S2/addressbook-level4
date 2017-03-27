@@ -31,9 +31,6 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private VBox taskDetails;
 
-
-
-
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
@@ -44,10 +41,10 @@ public class BrowserPanel extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(display, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(display);
 
-       // resultDisplay.appendText("Task Display");
+        // resultDisplay.appendText("Task Display");
         //placeholder.setOnKeyPressed(Event::consume); // To prevent triggering events for typing inside the
-                                                     // loaded Web page.
-       // FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
+        // loaded Web page.
+        // FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         //placeholder.getChildren().add(browser);
     }
 
@@ -62,6 +59,5 @@ public class BrowserPanel extends UiPart<Region> {
     public void freeResources() {
         tagsFlow.getChildren().clear();
     }
-
 
 }

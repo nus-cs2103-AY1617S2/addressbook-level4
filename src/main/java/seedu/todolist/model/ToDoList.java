@@ -113,6 +113,11 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.updateTask(index, editedTask);
     }
 
+    public void describeTask(int index, Task editedTask) {
+        assert editedTask != null;
+        tasks.describeTask(index, editedTask);
+    }
+
     public void completeTask(int index, Task targetTask) throws UniqueTaskList.TaskNotFoundException {
         assert targetTask != null;
         assert index >= 0;

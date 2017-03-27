@@ -65,6 +65,7 @@ public class XmlAdaptedTask {
         }
 
         completed = source.isComplete();
+        description = (source.getDescription() == null ? "" : source.getDescription());
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -89,19 +90,27 @@ public class XmlAdaptedTask {
         StartTime startTime;
         EndTime endTime;
         boolean isComplete = this.completed;
+        String description;
 
         if (this.startTime.equals("")) {
             startTime = null;
         } else {
             startTime = new StartTime(this.startTime);
         }
+
         if (this.endTime.equals("")) {
             endTime = null;
         } else {
             endTime = new EndTime(this.endTime);
         }
 
+        if (this.description.equals("")) {
+            description = null;
+        } else {
+            description = this.description;
+        }
+
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return TaskParser.parseTask(name, startTime, endTime, tags, isComplete);
+        return TaskParser.parseTask(name, startTime, endTime, tags, isComplete, description);
     }
 }

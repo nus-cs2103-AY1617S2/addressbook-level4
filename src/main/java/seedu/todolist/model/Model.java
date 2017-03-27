@@ -37,6 +37,12 @@ public interface Model {
     void updateTask(int filteredTaskListIndex, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException;
 
+    /**
+     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+     */
+    void describeTask(int filteredTaskListIndex, Task editedTask);
+
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<Task> getFilteredTaskList();
 
