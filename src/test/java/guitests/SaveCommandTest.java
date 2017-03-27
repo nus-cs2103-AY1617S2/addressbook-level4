@@ -1,6 +1,5 @@
 package guitests;
 
-import static org.mockito.Matchers.any;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.io.File;
@@ -8,15 +7,14 @@ import java.io.IOException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
+import mockit.Mock;
+import mockit.MockUp;
+import mockit.integration.junit4.JMockit;
 import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.logic.commands.SaveCommand;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({FileUtil.class})
+@RunWith(JMockit.class)
 public class SaveCommandTest extends EzDoGuiTest {
 
     private final String validDirectory = "./";
@@ -43,9 +41,16 @@ public class SaveCommandTest extends EzDoGuiTest {
 
     @Test
     public void save_validDirectory_noAdminPermissions_failure() throws Exception {
-        PowerMockito.spy(FileUtil.class);
-        PowerMockito.doThrow(new IOException()).when(FileUtil.class, "createIfMissing", any(File.class));
+        new MockUp<FileUtil>()
+        {
+            @Mock
+            public void createIfMissing(File file) throws IOException // this method is static in SwingUtilities
+            {
+                throw new IOException(); // so that everything executes on this thread
+            }
+        };
         commandBox.runCommand("save " + validDirectory);
         assertResultMessage(String.format(SaveCommand.MESSAGE_DIRECTORY_PATH_INVALID));
     }
+
 }
