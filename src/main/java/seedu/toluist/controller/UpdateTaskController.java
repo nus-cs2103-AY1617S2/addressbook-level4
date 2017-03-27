@@ -18,6 +18,7 @@ import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -31,8 +32,8 @@ public class UpdateTaskController extends Controller {
 
     private static final String COMMAND_UPDATE_TASK = "update";
 
-    private static final String RESULT_MESSAGE_ERROR_DATE_INPUT =
-            "Something is wrong with the given dates input";
+    private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
+            "The task cannot be classified as a floating task, deadline, or event.";
     private static final String RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING =
             "Input contains both recurring and stop recurring arguments at the same time.";
     private static final String RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING =
@@ -98,7 +99,7 @@ public class UpdateTaskController extends Controller {
             boolean isFloating, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
+            return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
         }
         if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
@@ -175,7 +176,7 @@ public class UpdateTaskController extends Controller {
     }
 
     private String getSuccessUpdateMessage(Task oldTask, Task newTask) {
-        int index = TodoList.getInstance().find(newTask);
+        int index = UiStore.getInstance().getTasks().indexOf(newTask);
         String result = String.format("Updated the following details at index %d:", index);
         result = addMoreSuccessMessage(result, "Task type", oldTask.getTaskType(), newTask.getTaskType());
         result = addMoreSuccessMessage(result, "Description", oldTask.getDescription(), newTask.getDescription());
