@@ -15,13 +15,11 @@ public class UndoCommand extends Command {
             + ": Undo the most recent command that modifies any of the 3 lists.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Undo successful.";
-
     @Override
     public CommandResult execute() throws CommandException {
         try {
-            model.undo();
-            return new CommandResult(MESSAGE_SUCCESS);
+            String previousCounterCommand = model.undo();
+            return new CommandResult(COMMAND_WORD + " successfully.\n" + previousCounterCommand);
         } catch (EmptyHistoryException ehe) {
             throw new CommandException(ehe.getMessage());
         }

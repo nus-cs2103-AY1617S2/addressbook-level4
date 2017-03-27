@@ -76,7 +76,7 @@ public interface Model {
 
     int getTaskIndex(ReadOnlyTask task);
 
-    void undo() throws EmptyHistoryException;
+    String undo() throws EmptyHistoryException;
 
     void redo() throws EmptyHistoryException;
 

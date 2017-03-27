@@ -3,19 +3,31 @@ package seedu.onetwodo.model;
 import java.util.Stack;
 
 import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 
 //@@author A0135739W
 /**
  * Represents the saved history of ToDoLists.
  */
 public class ToDoListHistoryManager implements ToDoListHistory {
+    private static final String COMMAND_FORMATTER = " %1$s";
 
     private Stack<ToDoList> previousToDoLists;
     private Stack<ToDoList> nextToDoLists;
+    private Stack<String> counterCommandHistory;
 
     public ToDoListHistoryManager () {
         this.previousToDoLists = new Stack<ToDoList>();
         this.nextToDoLists = new Stack<ToDoList>();
+        this.counterCommandHistory = new Stack<String>();
+    }
+
+    public void saveUndoInformationAndClearRedoHistory(String counterCommandWord, ReadOnlyTask task,
+            ToDoList toDoList) {
+        String counterCommandWithFormatter = counterCommandWord.concat(COMMAND_FORMATTER);
+        counterCommandHistory.push(String.format(counterCommandWithFormatter, task));
+        previousToDoLists.push(toDoList);
+        nextToDoLists.clear();
     }
 
     @Override
@@ -52,6 +64,10 @@ public class ToDoListHistoryManager implements ToDoListHistory {
         } else {
             throw new EmptyHistoryException("OneTwoDo cannot be redone anymore");
         }
+    }
+
+    public String getPreviousCounterCommand() {
+        return counterCommandHistory.pop();
     }
 
     @Override

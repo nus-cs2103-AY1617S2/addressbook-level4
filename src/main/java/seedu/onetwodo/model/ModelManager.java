@@ -13,6 +13,8 @@ import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.commons.util.StringUtil;
+import seedu.onetwodo.logic.commands.AddCommand;
+import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskType;
@@ -86,7 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.removeTask(target);
-        history.saveAsPreviousToDoListAndClearRedoHistory(copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(AddCommand.COMMAND_WORD, target, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -103,7 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.addTask(task);
-        history.saveAsPreviousToDoListAndClearRedoHistory(copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(DeleteCommand.COMMAND_WORD, task, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -124,13 +126,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void undo() throws EmptyHistoryException {
+    public String undo() throws EmptyHistoryException {
         if (!history.isUndoHistoryEmpty()) {
             history.saveAsNextToDoList(this.toDoList);
             this.toDoList.resetData(history.getPreviousToDoList());
             indicateToDoListChanged();
+            return history.getPreviousCounterCommand();
         } else {
-            throw new EmptyHistoryException("OneTwoDo cannot be undone anymore");
+            throw new EmptyHistoryException("There is nothing to undo.");
         }
     }
 
@@ -141,7 +144,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.toDoList.resetData(history.getNextToDoList());
             indicateToDoListChanged();
         } else {
-            throw new EmptyHistoryException("OneTwoDo cannot be redone anymore");
+            throw new EmptyHistoryException("There is nothing to redo.");
         }
     }
 
