@@ -1,5 +1,6 @@
 package project.taskcrusher.model;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -18,7 +19,7 @@ import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList.DuplicateEventException;
 import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
-import project.taskcrusher.model.shared.UserItem;
+import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
@@ -168,6 +169,10 @@ public class ModelManager extends ComponentManager implements Model {
         indicateIfTaskListToShowIsEmpty();
     }
 
+    private void sortFilteredTaskList () {
+
+    }
+
     //=========== Filtered Event List Accessors =============================================================
 
     @Override
@@ -199,7 +204,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(UserItem item);
+        boolean satisfies(UserToDo item);
         String toString();
     }
 
@@ -212,7 +217,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(UserItem item) {
+        public boolean satisfies(UserToDo item) {
             return qualifier.run(item);
         }
 
@@ -223,7 +228,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(UserItem item);
+        boolean run(UserToDo item);
         String toString();
     }
 
@@ -235,7 +240,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(UserItem item) {
+        public boolean run(UserToDo item) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(item.getName().toString(), keyword))
                     .findAny()
@@ -257,7 +262,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(UserItem item) {
+        public boolean run(UserToDo item) {
             assert item instanceof ReadOnlyTask;
             ReadOnlyTask task = (ReadOnlyTask) item;
 
@@ -288,7 +293,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(UserItem item) {
+        public boolean run(UserToDo item) {
             assert item instanceof ReadOnlyEvent;
             ReadOnlyEvent event = (ReadOnlyEvent) item;
             if (event.hasOverlappingTimeslot(userInterestedTimeslot)) {
@@ -301,6 +306,33 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "user-interested timeslot is " + userInterestedTimeslot.toString();
+        }
+    }
+
+    //============== Comparator used for sorting
+    class DeadlineComparator implements Comparator<ReadOnlyTask> {
+        public int compare(ReadOnlyTask first, ReadOnlyTask second) {
+            if (!first.getDeadline().hasDeadline() && !second.getDeadline().hasDeadline()) {
+                return 0;
+            } else if (!first.getDeadline().hasDeadline() && second.getDeadline().hasDeadline()) {
+                return 1;
+            } else if (first.getDeadline().hasDeadline() && !second.getDeadline().hasDeadline()) {
+                return -1;
+            } else { //both has deadline
+                Date firstDate = first.getDeadline().getDate().get();
+                assert firstDate != null;
+                Date secondDate = second.getDeadline().getDate().get();
+                assert secondDate != null;
+                return firstDate.compareTo(secondDate);
+            }
+        }
+    }
+
+    public class PriorityComparator implements Comparator<ReadOnlyTask> {
+        public int compare(ReadOnlyTask first, ReadOnlyTask second) {
+            String firstPriority = first.getPriority().priority;
+            String secondPriority = second.getPriority().priority;
+            return firstPriority.compareTo(secondPriority);
         }
     }
 }

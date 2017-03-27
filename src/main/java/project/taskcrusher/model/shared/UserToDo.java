@@ -4,6 +4,6 @@ package project.taskcrusher.model.shared;
  * for run() method of Qualifier class inside ModelManager.
  */
 
-public interface UserItem {
+public interface UserToDo {
     Name getName();
 }

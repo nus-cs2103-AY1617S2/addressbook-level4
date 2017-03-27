@@ -4,14 +4,14 @@ import java.util.List;
 
 import project.taskcrusher.model.shared.Description;
 //import project.taskcrusher.model.shared.Name;
-import project.taskcrusher.model.shared.UserItem;
+import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 /**
  * A read-only immutable interface for an event in user inbox.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyEvent extends UserItem {
+public interface ReadOnlyEvent extends UserToDo {
 
     List<Timeslot> getTimeslots();
     Description getDescription();

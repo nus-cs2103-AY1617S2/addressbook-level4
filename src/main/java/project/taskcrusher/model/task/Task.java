@@ -1,5 +1,6 @@
 package project.taskcrusher.model.task;
 
+import java.util.Date;
 import java.util.Objects;
 
 import project.taskcrusher.commons.util.CollectionUtil;
@@ -125,6 +126,23 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask another) {
+        if (!this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
+            return 0;
+        } else if (!this.getDeadline().hasDeadline() && another.getDeadline().hasDeadline()) {
+            return 1;
+        } else if (this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
+            return -1;
+        } else { //both has deadline
+            Date firstDate = this.getDeadline().getDate().get();
+            assert firstDate != null;
+            Date secondDate = this.getDeadline().getDate().get();
+            assert secondDate != null;
+            return firstDate.compareTo(secondDate);
+        }
     }
 
 }

@@ -1,11 +1,7 @@
 package project.taskcrusher.model.task;
 
-import java.util.Comparator;
-import java.util.Date;
-
 import project.taskcrusher.model.shared.Description;
-//import project.taskcrusher.model.shared.Name;
-import project.taskcrusher.model.shared.UserItem;
+import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 /**
@@ -13,7 +9,7 @@ import project.taskcrusher.model.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null (just empty as Optional<>),
  * field values are validated.
  */
-public interface ReadOnlyTask extends UserItem {
+public interface ReadOnlyTask extends UserToDo, Comparable<ReadOnlyTask> {
 
     Priority getPriority();
     Description getDescription();
@@ -55,29 +51,4 @@ public interface ReadOnlyTask extends UserItem {
         return builder.toString();
     }
 
-    public class DeadlineComparator implements Comparator<ReadOnlyTask> {
-        public int compare(ReadOnlyTask first, ReadOnlyTask second) {
-            if (!first.getDeadline().hasDeadline() && !second.getDeadline().hasDeadline()) {
-                return 0;
-            } else if (!first.getDeadline().hasDeadline() && second.getDeadline().hasDeadline()) {
-                return 1;
-            } else if (first.getDeadline().hasDeadline() && !second.getDeadline().hasDeadline()) {
-                return -1;
-            } else { //both has deadline
-                Date firstDate = first.getDeadline().getDate().get();
-                assert firstDate != null;
-                Date secondDate = second.getDeadline().getDate().get();
-                assert secondDate != null;
-                return firstDate.compareTo(secondDate);
-            }
-        }
-    }
-
-    public class PriorityComparator implements Comparator<ReadOnlyTask> {
-        public int compare(ReadOnlyTask first, ReadOnlyTask second) {
-            String firstPriority = first.getPriority().priority;
-            String secondPriority = second.getPriority().priority;
-            return firstPriority.compareTo(secondPriority);
-        }
-    }
 }
