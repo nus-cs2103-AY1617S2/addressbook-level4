@@ -10,13 +10,13 @@ import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.commands.SaveCommand;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new SaveCommand object
  */
 public class SaveCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns an DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SaveCommand
+     * and returns an SaveCommand object for execution.
      */
     public Command parse(String args) {
         File f = new File(args.trim());

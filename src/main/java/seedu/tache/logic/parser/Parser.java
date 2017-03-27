@@ -17,6 +17,7 @@ import seedu.tache.logic.commands.FindCommand;
 import seedu.tache.logic.commands.HelpCommand;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.commands.ListCommand;
+import seedu.tache.logic.commands.LoadCommand;
 import seedu.tache.logic.commands.SaveCommand;
 import seedu.tache.logic.commands.SelectCommand;
 import seedu.tache.logic.commands.UndoCommand;
@@ -79,6 +80,9 @@ public class Parser {
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
