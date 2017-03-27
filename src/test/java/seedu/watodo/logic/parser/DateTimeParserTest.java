@@ -10,6 +10,7 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.parser.DateTimeParser.TaskType;
 import seedu.watodo.model.task.DateTime;
 
+//@@author A0143076J
 public class DateTimeParserTest {
 
     private DateTimeParser dateTimeParser = new DateTimeParser();
@@ -85,14 +86,18 @@ public class DateTimeParserTest {
 
     @Test
     public void trimArgsOfDates() throws IllegalValueException {
-        String arg = "task description from/ " + validStartDate + " more description to/ " + validEndDate;
+        String arg = "task description #tags from/ " + validStartDate + " more description to/ " + validEndDate;
         dateTimeParser.parse(arg);
-        // TODO fix this test assertEquals(dateTimeParser.trimArgsOfDates(arg), "task description more description");
+        assertEquals(dateTimeParser.trimArgsOfDates(arg), "task description #tags more description");
 
         // check that subset or same word as date elsewhere in the string is not trimmed off
-        arg = "buy fried chicken for friends on/ fri";
+        arg = "buy fri chicken for friends on/ fri";
         dateTimeParser.parse(arg);
-        assertEquals(dateTimeParser.trimArgsOfDates(arg), "buy fried chicken for friends");
+        assertEquals(dateTimeParser.trimArgsOfDates(arg), "buy fri chicken for friends");
+
+        arg = "go to 7-11 to collect pay by/ 7-11";
+        dateTimeParser.parse(arg);
+        assertEquals(dateTimeParser.trimArgsOfDates(arg), "go to 7-11 to collect pay");
     }
 
 }

@@ -43,7 +43,7 @@ public class TaskCard extends UiPart<Region> {
         } else {
             endDate.setText("");
         }
-        
+
         status.setText(task.getStatus().toString());
 
         initTags(task);
