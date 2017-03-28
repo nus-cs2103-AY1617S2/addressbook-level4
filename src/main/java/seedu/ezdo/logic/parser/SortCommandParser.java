@@ -57,12 +57,16 @@ public class SortCommandParser implements CommandParser {
         switch (sortCriteriaArgument) {
         case SORT_KEYWORD_NAME:
             sortCriteria = SortCriteria.NAME;
+            break;
         case SORT_KEYWORD_PRIORITY:
             sortCriteria = SortCriteria.PRIORITY;
+            break;
         case SORT_KEYWORD_START_DATE:
             sortCriteria = SortCriteria.START_DATE;
+            break;
         case SORT_KEYWORD_DUE_DATE:
             sortCriteria = SortCriteria.DUE_DATE;
+            break;
         default:
             sortCriteria = null;
         }
