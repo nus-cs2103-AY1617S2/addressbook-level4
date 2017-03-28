@@ -90,7 +90,6 @@ Format: `list e`
 Edits a Todo's title, start time and endtime.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-<<<<<<< HEAD
 Edits a Todo's name and deadline.<br>
 Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
 
@@ -106,7 +105,6 @@ Edits a deadline.<br>
 Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
 
 Edits a task.<br>
->>>>>>> 38691468cdfcc9582389a61fb2b8bcdb194d3dff
 Format: `edit INDEX [TASK] [t/TAG]`
 
 Adds a tag to a task.<br>
