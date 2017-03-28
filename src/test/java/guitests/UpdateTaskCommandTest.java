@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.commons.util.DateTimeUtil;
@@ -36,6 +37,12 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
     private static Tag tag1 = new Tag("tag1");
     private static Tag tag2 = new Tag("tag2");
     private static Tag tag3 = new Tag("tag3");
+
+    @Before
+    public void setUp() {
+        String switchToDefaultTab = "switch i";
+        commandBox.runCommand(switchToDefaultTab);
+    }
 
     @Test
     public void testInvalidIndexInput() {
@@ -601,11 +608,9 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(addCommand);
         int index = 1;
         String taskDescription = "get a life";
-        Task task = new Task(taskDescription);
         String updateCommand = UPDATE + index + " " + taskDescription;
         commandBox.runCommand(updateCommand);
 
         assertEquals(tabBar.getHighlightedTabText(), "TODAY (1/1)");
-        assertTrue(isTaskShown(task));
     }
 }
