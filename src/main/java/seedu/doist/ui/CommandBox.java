@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -23,6 +24,8 @@ import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.RedoCommand;
 import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.ui.util.CommandAutoCompleteManager;
+import seedu.doist.ui.util.CommandHighlightManager;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -36,6 +39,9 @@ public class CommandBox extends UiPart<Region> {
     private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
     private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
+    private CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
+    private CommandAutoCompleteManager autoCompleteManager = CommandAutoCompleteManager.getInstance();
+
     @FXML
     private InlineCssTextArea commandTextField;
 
@@ -45,7 +51,12 @@ public class CommandBox extends UiPart<Region> {
         addToPlaceholder(commandBoxPlaceholder);
 
         commandTextField.textProperty().addListener((observable, oldValue, newValue)
-            -> highlightSyntax(newValue));
+            -> highlightAndSuggestCompletion());
+    }
+
+    private void highlightAndSuggestCompletion() {
+        highlightManager.highlight(commandTextField);
+        autoCompleteManager.suggestCompletion(commandTextField, logic);
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -53,12 +64,6 @@ public class CommandBox extends UiPart<Region> {
         placeHolderPane.getChildren().add(commandTextField);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
-    }
-
-    private void highlightSyntax(String newValue) {
-        CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
-        String content = newValue;
-        highlightManager.highlight(commandTextField, content);
     }
 
     @FXML
@@ -74,16 +79,15 @@ public class CommandBox extends UiPart<Region> {
         } else if (event.getCode() == KeyCode.DOWN) {
             event.consume();
             handleDownKey();
-        } else {  // use control+z and control+y to execute undo and re-do operation
-            try {
-                if (undoKeys.match(event)) {
-                    event.consume();
-                    logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
-                } else if (redoKeys.match(event)) {
-                    event.consume();
-                    logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
-                }
-            } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
+        } else if (event.getCode() == KeyCode.TAB) {  // auto complete
+            event.consume();
+            completeWithSelectedSuggestion();
+        } else if (undoKeys.match(event)) {  // use control+z and control+y to execute undo and re-do operation
+            event.consume();
+            handleCtrlZKeyCombination();
+        } else if (redoKeys.match(event)) {
+            event.consume();
+            handleCtrlYKeyCombination();
         }
     }
 
@@ -126,6 +130,21 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0147980U
+    //Handle Control + z key combination
+    private void handleCtrlZKeyCombination() {
+        try {
+            logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
+        } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
+    }
+
+    //Handle Control + y key combination
+    private void handleCtrlYKeyCombination() {
+        try {
+            logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
+        } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
+    }
+
     //Restores the command history pointer
     //Throws exception is 'add' fails
     private void restoreCommandHistoryAndAppend(String userCommandText) {
@@ -135,12 +154,24 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-
     private void setCommandInput(String string) {
         commandTextField.replaceText(string);
 
         // move the cursor to the end of the input string
         commandTextField.positionCaret(string.length());
+    }
+
+    private void completeWithSelectedSuggestion() {
+        ContextMenu suggestionList = (ContextMenu) commandTextField.getPopupWindow();
+        if (suggestionList.isShowing() && !suggestionList.getItems().isEmpty()) {
+            int cursorPosition = commandTextField.getCaretPosition();
+            // -1 means trailing space will NOT be discarded
+            String[] words = commandTextField.getText(0, cursorPosition).split(" +", -1);
+            String lastWord = words[words.length - 1].replaceAll("\\\\", "\\\\\\\\");
+            String suggestion = suggestionList.getItems().get(0).getText();
+            String remainingString = suggestion.replaceAll(lastWord, "");
+            commandTextField.insertText(cursorPosition, remainingString);
+        }
     }
 
     //@@author A0140887W
@@ -165,5 +196,4 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
         }
     }
-
 }

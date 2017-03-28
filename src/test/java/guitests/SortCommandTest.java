@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,13 +14,16 @@ import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 
+//@@author A0140887W
 public class SortCommandTest extends DoistGUITest {
 
     @Test
     public void testSortByPriority() {
+        List<SortType> list = new ArrayList<SortType>();
+        list.add(SortType.PRIORITY);
         commandBox.runCommand("sort priority");
         assertSortedByPriority();
-        assertResultMessage(Command.getMessageForTaskListSortedSummary(SortType.PRIORITY));
+        assertResultMessage(Command.getMessageForTaskListSortedSummary(list));
     }
 
     @Test

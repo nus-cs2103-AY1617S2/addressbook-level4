@@ -18,7 +18,6 @@ public class ChangeThemeTest extends DoistGUITest {
     public void changeTheme() {
         //using menu button
         assertThemeIsChanged(mainMenu.changeThemeUsingMenu(DARK_THEME), DARK_THEME, darkThemeUrl);
-
         assertThemeIsChanged(mainMenu.changeThemeUsingMenu(LIGHT_THEME), LIGHT_THEME, lightThemeUrl);
         // TODO: use command
     }

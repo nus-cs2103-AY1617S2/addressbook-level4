@@ -3,6 +3,7 @@ package seedu.doist.model;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -20,10 +21,14 @@ import seedu.doist.commons.util.ConfigUtil;
 import seedu.doist.commons.util.History;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.commands.ListCommand.TaskType;
+import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskAlphabetComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskCombinedComparator;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskTimingComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
@@ -43,11 +48,12 @@ public class ModelManager extends ComponentManager implements Model {
     private final AliasListMap aliasListMap;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
+    //@@author A0140887W
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
      */
-    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap,
-            UserPrefs userPrefs, Config config) {
+    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs,
+                          Config config, boolean isTest) {
         super();
         assert !CollectionUtil.isAnyNull(todoList, aliasListMap, userPrefs, config);
 
@@ -59,15 +65,24 @@ public class ModelManager extends ComponentManager implements Model {
         this.config = config;
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
+        if (!isTest) {
+            updateFilteredListToShowDefault();
+            sortTasksByDefault();
+        }
         saveCurrentToHistory();
     }
 
     public ModelManager() {
-        this(new TodoList(), new AliasListMap(), new UserPrefs(), new Config());
+        this(new TodoList(), new AliasListMap(), new UserPrefs(), new Config(), false);
+    }
+
+    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs,
+                          Config config) {
+        this(todoList, aliasListMap, userPrefs, config, false);
     }
 
 
-    //@@author A0140887W
+
     //=========== AliasListMap =============================================================
     /** Raises an event to indicate the alias list model has changed */
 
@@ -79,6 +94,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void setAlias(String alias, String commandWord) {
         aliasListMap.setAlias(alias, commandWord);
+        indicateAliasListMapChanged();
+    }
+
+    @Override
+    public void removeAlias(String alias) {
+        aliasListMap.removeAlias(alias);
         indicateAliasListMapChanged();
     }
 
@@ -101,7 +122,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetToDefaultCommandWords() {
-        aliasListMap.setDefaultCommandWords();
+        aliasListMap.setDefaultAliasListMapping();
     }
 
     private void indicateAliasListMapChanged() {
@@ -161,7 +182,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         int index = todoList.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredListToShowDefault();
         indicateTodoListChanged();
         return index;
     }
@@ -173,13 +194,32 @@ public class ModelManager extends ComponentManager implements Model {
 
         int todoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         todoList.updateTask(todoListIndex, editedTask);
+        updateFilteredListToShowDefault();
         indicateTodoListChanged();
     }
 
     //@@author A0140887W
     @Override
-    public void sortTasksByPriority() {
-        todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
+    public void sortTasks(List<SortType> sortTypes) {
+        List<Comparator<ReadOnlyTask>> comparatorList = new ArrayList<Comparator<ReadOnlyTask>>();
+        for (SortType type : sortTypes) {
+            if (type.equals(SortType.PRIORITY)) {
+                comparatorList.add(new ReadOnlyTaskPriorityComparator());
+            } else if (type.equals(SortType.TIME)) {
+                comparatorList.add(new ReadOnlyTaskTimingComparator());
+            } else if (type.equals(SortType.ALPHA)) {
+                comparatorList.add(new ReadOnlyTaskAlphabetComparator());
+            }
+        }
+        todoList.sortTasks(new ReadOnlyTaskCombinedComparator(comparatorList));
+    }
+
+    public void sortTasksByDefault() {
+        List<SortType> sortTypes = new ArrayList<SortType>();
+        sortTypes.add(SortType.TIME);
+        sortTypes.add(SortType.PRIORITY);
+        sortTypes.add(SortType.ALPHA);
+        sortTasks(sortTypes);
     }
 
     //@@author
@@ -195,6 +235,15 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
     }
 
+    //@@author A0140887W
+    @Override
+    public void updateFilteredListToShowDefault() {
+        filteredTasks.setPredicate(null);
+        Qualifier[] qualifiers = {new TaskTypeQualifier(TaskType.NOT_FINISHED)};
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
+    }
+
+    //@@author
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};
@@ -255,8 +304,8 @@ public class ModelManager extends ComponentManager implements Model {
     private class DescriptionQualifier implements Qualifier {
         private Set<String> descriptionKeyWords;
 
-        DescriptionQualifier(Set<String> nameKeyWords) {
-            this.descriptionKeyWords = nameKeyWords;
+        DescriptionQualifier(Set<String> descKeyWords) {
+            this.descriptionKeyWords = descKeyWords;
         }
 
         @Override
@@ -269,7 +318,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", descriptionKeyWords);
+            return "desc=" + String.join(", ", descriptionKeyWords);
         }
     }
 
@@ -291,6 +340,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147980U
     private class TaskTypeQualifier implements Qualifier {
         private TaskType type;
 
@@ -301,9 +351,13 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (type) {
-            case finished:
+            case FINISHED:
                 return task.getFinishedStatus().getIsFinished();
-            case pending:
+            case PENDING:
+                return !task.getFinishedStatus().getIsFinished() && !task.isOverdue();
+            case OVERDUE:
+                return task.isOverdue();
+            case NOT_FINISHED:
                 return !task.getFinishedStatus().getIsFinished();
             default:
                 return true;
@@ -357,11 +411,3 @@ public class ModelManager extends ComponentManager implements Model {
                 config.getAbsoluteAliasListMapFilePath(), config.getAbsoluteUserPrefsFilePath()));
     }
 }
-
-
-
-
-
-
-
-

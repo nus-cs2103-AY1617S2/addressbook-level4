@@ -33,7 +33,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
     private AliasListMapStorage aliasListMapStorage;
 
-
     public StorageManager(TodoListStorage todoListStorage, AliasListMapStorage aliasListStorage,
                             UserPrefsStorage userPrefsStorage) {
         super();
@@ -106,7 +105,6 @@ public class StorageManager extends ComponentManager implements Storage {
         todoListStorage.setTodoListFilePath(path);
     }
 
-    //@@author A0140887W
     // ================ ArrayListMap methods ==============================
 
     @Override

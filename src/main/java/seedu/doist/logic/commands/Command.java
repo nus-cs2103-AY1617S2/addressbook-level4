@@ -1,9 +1,11 @@
 package seedu.doist.logic.commands;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import seedu.doist.commons.core.Messages;
 import seedu.doist.commons.core.UnmodifiableObservableList;
+import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.Model;
 import seedu.doist.model.task.ReadOnlyTask;
@@ -31,8 +33,8 @@ public abstract class Command {
      * @param sortType used in the command
      * @return summary message for tasks sorted
      */
-    public static String getMessageForTaskListSortedSummary(SortCommand.SortType sortType) {
-        return String.format(Messages.MESSAGE_TASKS_SORTED_OVERVIEW, sortType.toString());
+    public static String getMessageForTaskListSortedSummary(List<SortType> sortTypes) {
+        return String.format(Messages.MESSAGE_TASKS_SORTED_OVERVIEW, sortTypes.toString());
     }
 
     //@@author
@@ -44,7 +46,6 @@ public abstract class Command {
      */
     public abstract CommandResult execute() throws CommandException;
 
-    //@@author A0140887W
     /**
      * Provides any needed dependencies to the command.
      * Commands making use of any of these should override this method to gain
@@ -69,6 +70,3 @@ public abstract class Command {
         return relatedTasks;
     }
 }
-
-
-

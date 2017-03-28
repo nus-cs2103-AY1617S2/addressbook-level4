@@ -5,6 +5,7 @@ import org.junit.Test;
 import seedu.doist.logic.commands.AliasCommand;
 import seedu.doist.logic.parser.AliasCommandParser;
 
+//@@author A0147980U
 public class AliasCommandTest extends DoistGUITest {
 
     @Test
