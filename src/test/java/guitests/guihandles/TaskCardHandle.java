@@ -104,6 +104,7 @@ public class TaskCardHandle extends GuiHandle {
             isStartDateSame = true;
             isEndDateSame = true;
         }
+        System.out.println(getFullName() + getStatus() + " " + task.getName().fullName + task.getStatus().value);
         return getFullName().equals(task.getName().fullName)
                 && getComment().equals(task.getComment().value)
                 && TestUtil.isSameStringList(getTags(), getTags(task.getTags()))
@@ -136,16 +137,14 @@ public class TaskCardHandle extends GuiHandle {
         }
     }
 
+    //@@author A0143355J
     private boolean getStatus() {
-        if (getTextFromLabel(STATUS_FIELD_ID).equals("completed")) {
-            return true;
-        } else {
-            return false;
-        }
+        return getNodeVisibility(STATUS_FIELD_ID);
     }
 
+    //@@author
     private String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID).split(" ")[1];
+        return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
     @Override

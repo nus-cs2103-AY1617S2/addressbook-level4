@@ -127,6 +127,7 @@ public class TaskListPanelHandle extends GuiHandle {
             getListView().getSelectionModel().select(index);
         });
         guiRobot.sleep(100);
+
         return getTaskCardHandle(task);
     }
 
@@ -171,6 +172,7 @@ public class TaskListPanelHandle extends GuiHandle {
         Optional<Node> taskCardNode = nodes.stream()
                 .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
                 .findFirst();
+
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
