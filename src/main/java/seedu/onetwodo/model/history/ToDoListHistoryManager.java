@@ -66,7 +66,7 @@ public class ToDoListHistoryManager implements ToDoListHistory {
 
     @Override
     public String getUndoFeedbackMessageAndTransferToRedo() {
-        assert (hasUndoHistory());
+        assert (!previousCommandHistory.empty());
         CommandHistoryEntry previousCommand = previousCommandHistory.pop();
         String feedbackMessage = previousCommand.getFeedbackMessageInReverseCommand();
         nextCommandHistory.push(previousCommand);
@@ -75,7 +75,7 @@ public class ToDoListHistoryManager implements ToDoListHistory {
 
     @Override
     public String getRedoFeedbackMessageAndTransferToUndo() {
-        assert (hasRedoHistory());
+        assert (!nextCommandHistory.empty());
         CommandHistoryEntry nextCommand = nextCommandHistory.pop();
         String feedbackMessage = nextCommand.getFeedbackMessage();
         previousCommandHistory.push(nextCommand);
