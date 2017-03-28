@@ -2,9 +2,9 @@
 
 Author: Jacob Levy
 
-1. [Starting the Program](#Starting-the-Program)
+1. [Starting the Program](#Starting the Program)
 2. [Features](#Features)
-3. [Command Summary](#Command-Summary)
+3. [Command Summary](#Command Summary)
 
 ## Starting the Program
 
