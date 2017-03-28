@@ -19,6 +19,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_STATUS_COMPLETED = new Prefix("completed");
     public static final Prefix PREFIX_STATUS_INCOMPLETE = new Prefix("incomplete");
     public static final Prefix PREFIX_CLEAR_DATES = new Prefix("clear dates");
+    public static final Prefix PREFIX_RECURRENCE = new Prefix("repeat every ");
+    public static final Prefix PREFIX_REMOVE_RECURRENCE = new Prefix("stop repeat");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

@@ -17,6 +17,8 @@ public class Task implements ReadOnlyTask {
     private Optional<Deadline> deadline;
     private Optional<Deadline> startTime;
     private Boolean isCompleted;
+    private Optional<Recurrence> recurrence;
+    private Boolean isRecurring;
 
     private UniqueLabelList labels;
     private UniqueBookingList bookings;
@@ -25,12 +27,14 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(Title title, Optional<Deadline> startTime, Optional<Deadline> deadline,
-            boolean isCompleted, UniqueLabelList labels) {
-        assert !CollectionUtil.isAnyNull(title, isCompleted, labels);
+            boolean isCompleted, UniqueLabelList labels, boolean isRecurring, Optional<Recurrence> recurrence) {
+        assert !CollectionUtil.isAnyNull(title, isCompleted, labels, isRecurring);
         this.title = title;
         this.deadline = deadline;
         this.startTime = startTime;
         this.isCompleted = isCompleted;
+        this.isRecurring = isRecurring;
+        this.recurrence = recurrence;
         this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
         this.bookings = new UniqueBookingList();
     }
@@ -47,6 +51,8 @@ public class Task implements ReadOnlyTask {
         this.isCompleted = isCompleted;
         this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
         this.bookings = new UniqueBookingList(bookings);
+        this.isRecurring = false;
+        this.recurrence = Optional.empty();
     }
 
     /**
@@ -57,9 +63,9 @@ public class Task implements ReadOnlyTask {
                 , source.isCompleted(), source.getLabels(), source.getBookings());
     }
 
-    public void setName(Title name) {
-        assert name != null;
-        this.title = name;
+    public void setName(Title title) {
+        assert title != null;
+        this.title = title;
     }
 
     @Override
@@ -128,6 +134,8 @@ public class Task implements ReadOnlyTask {
         this.setLabels(replacement.getLabels());
         this.setIsCompleted(replacement.isCompleted());
         this.setBookings(replacement.getBookings());
+        this.setIsRecurring(replacement.isRecurring());
+        this.setRecurrence(replacement.getRecurrence());
     }
 
     @Override
@@ -156,5 +164,28 @@ public class Task implements ReadOnlyTask {
     public void setIsCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
+
+    @Override
+    public Boolean isRecurring() {
+        return isRecurring;
+    }
+
+    public void setIsRecurring(Boolean isRecurring) {
+        this.isRecurring = isRecurring;
+    }
+
+    @Override
+    public Optional<Recurrence> getRecurrence() {
+        return (recurrence == null) ? Optional.empty() : recurrence;
+    }
+
+    public void setRecurrence(Optional<Recurrence> recurrence) {
+        if (recurrence.isPresent()) {
+            this.recurrence = recurrence;
+        } else {
+            this.recurrence = Optional.empty();
+        }
+    }
+
 
 }

@@ -17,6 +17,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Title;
 
 /**
@@ -94,5 +95,11 @@ public class ParserUtil {
             labelSet.add(new Label(labelName));
         }
         return new UniqueLabelList(labelSet);
+    }
+
+    public static Optional<Recurrence> parseRecurrence(Optional<String> recurrence)
+            throws IllegalValueException {
+        assert recurrence != null;
+        return recurrence.isPresent() ? Optional.of(new Recurrence(recurrence.get())) : Optional.empty();
     }
 }

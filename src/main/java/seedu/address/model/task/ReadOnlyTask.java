@@ -2,6 +2,8 @@ package seedu.address.model.task;
 
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 
@@ -15,6 +17,8 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     Optional<Deadline> getDeadline();
     Optional<Deadline> getStartTime();
     Boolean isCompleted();
+    Boolean isRecurring();
+    Optional<Recurrence> getRecurrence();
 
     /**
      * The returned LabelList is a deep copy of the internal LabelList,
@@ -38,7 +42,9 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
                 && other.getDeadline().equals(this.getDeadline())
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getLabels().equals(this.getLabels()))
-                && other.isCompleted().equals(this.isCompleted());
+                && other.isCompleted().equals(this.isCompleted())
+                && other.isRecurring().equals(this.isRecurring())
+                && other.getRecurrence().equals(this.getRecurrence());
     }
 
     /**
@@ -69,11 +75,21 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
 
     //@@author A0105287E
     default int compareTo(ReadOnlyTask other) {
-        return compareCompletionStatus(other);
+        int value = 0;
+        try {
+            value = compareCompletionStatus(other);
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalDateTimeValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return value;
     }
 
     //@@author A0105287E
-    default int compareCompletionStatus(ReadOnlyTask other) {
+    default int compareCompletionStatus(ReadOnlyTask other) throws IllegalValueException, IllegalDateTimeValueException {
         if (this.isCompleted() && !other.isCompleted()) {
             return 1;
         } else if (!this.isCompleted() && other.isCompleted()) {
@@ -84,13 +100,15 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     }
 
     //@@author A0105287E
-    default int compareDates(ReadOnlyTask other) {
+    default int compareDates(ReadOnlyTask other) throws IllegalValueException, IllegalDateTimeValueException {
         Deadline dateToCompareForOther;
         Deadline dateToCompareForThis;
         if (other.getStartTime().isPresent()) {
             dateToCompareForOther = other.getStartTime().get();
         } else if (other.getDeadline().isPresent()) {
             dateToCompareForOther = other.getDeadline().get();
+        } else if (!other.getBookings().isEmpty()) {
+            dateToCompareForOther = new Deadline(other.getBookings().getEarliestStartTime().toString());
         } else {
             dateToCompareForOther = null;
         }
@@ -98,6 +116,8 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
             dateToCompareForThis = this.getStartTime().get();
         } else if (this.getDeadline().isPresent()) {
             dateToCompareForThis = this.getDeadline().get();
+        } else if (!this.getBookings().isEmpty()) {
+            dateToCompareForThis = new Deadline(this.getBookings().getEarliestStartTime().toString());
         } else {
             dateToCompareForThis = null;
         }
@@ -131,5 +151,7 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         System.out.println(builder.toString());
         return builder.toString();
     }
+
+
 
 }

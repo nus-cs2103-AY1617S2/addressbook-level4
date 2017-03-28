@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList;
@@ -28,6 +29,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    public static final Boolean DEFAULT_TASK_STATE = false;
+    public static final Boolean DEFAULT_TASK_RECURRENCE = false;
 
     private final Task toAdd;
 
@@ -47,8 +50,10 @@ public class AddCommand extends Command {
                 new Title(title),
                 Optional.empty(),
                 Optional.empty(),
-                false,
-                new UniqueLabelList(labelSet)
+                DEFAULT_TASK_STATE,
+                new UniqueLabelList(labelSet),
+                DEFAULT_TASK_RECURRENCE,
+                Optional.empty()
         );
     }
 
@@ -60,19 +65,24 @@ public class AddCommand extends Command {
      * @throws IllegalDateTimeValueException
      *             if deadline values are invalid
      */
-    public AddCommand(String title, String deadline, Set<String> labels)
-            throws IllegalValueException, IllegalDateTimeValueException {
+    public AddCommand(String title, String deadline, Set<String> labels, Boolean isRecurring,
+            Optional<Recurrence> recurrence) throws IllegalValueException, IllegalDateTimeValueException {
         final Set<Label> labelSet = new HashSet<>();
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
+        }
+        if (isRecurring) {
+            assert recurrence.isPresent();
         }
 
         this.toAdd = new Task(
                 new Title(title),
                 Optional.empty(),
                 Optional.ofNullable(new Deadline(deadline)),
-                false,
-                new UniqueLabelList(labelSet)
+                DEFAULT_TASK_STATE,
+                new UniqueLabelList(labelSet),
+                isRecurring,
+                recurrence
         );
     }
 
@@ -84,19 +94,24 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      * @throws IllegalDateTimeValueException if deadline values are invalid
      */
-    public AddCommand(String title, String startDate, String deadline, Set<String> labels)
-            throws IllegalValueException, IllegalDateTimeValueException {
+    public AddCommand(String title, String startDate, String deadline, Set<String> labels,
+            Boolean isRecurring, Optional<Recurrence> recurrence) throws IllegalValueException, IllegalDateTimeValueException {
         final Set<Label> labelSet = new HashSet<>();
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
+        }
+        if (isRecurring) {
+            assert recurrence.isPresent();
         }
 
         this.toAdd = new Task(
                 new Title(title),
                 Optional.ofNullable(new Deadline(startDate)),
                 Optional.ofNullable(new Deadline(deadline)),
-                false,
-                new UniqueLabelList(labelSet)
+                DEFAULT_TASK_STATE,
+                new UniqueLabelList(labelSet),
+                isRecurring,
+                recurrence
         );
     }
 

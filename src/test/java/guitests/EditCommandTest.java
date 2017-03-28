@@ -110,6 +110,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
+    //@@author A0105287E
     @Test
     public void edit_editStartAndEndDate_success() throws Exception {
         String detailsToEdit = "from today to next week";
@@ -122,6 +123,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
+    //@@author A0105287E
     @Test
     public void edit_clearDates_success() throws Exception {
         String detailsToEdit = "clear dates";
@@ -134,6 +136,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
+    //@@author A0105287E
     @Test
     public void edit_changeFromTwoToOneDate_success() throws Exception {
         String detailsToEdit = "by next week";
@@ -145,6 +148,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
+    //@@author A0105287E
     @Test
     public void edit_changeFromOneToTwoDates_success() throws Exception {
         String detailsToEdit = "from today to next week";

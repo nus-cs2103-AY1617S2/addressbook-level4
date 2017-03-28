@@ -68,6 +68,7 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(LABELS_FIELD_ID).query();
     }
 
+    //@@Author A0105287E
     public boolean isSameTask(ReadOnlyTask task) {
         assert(task != null);
         boolean result;
@@ -85,6 +86,15 @@ public class TaskCardHandle extends GuiHandle {
                     && isCompleted().equals(task.isCompleted()
                     && getStartTime() == null
                     && !task.getStartTime().isPresent());
+        } else if (!task.getBookings().isEmpty()) {
+            result = getTitle().equals(task.getTitle().title)
+                    && getLabels().equals(getLabels(task.getLabels()))
+                    && isCompleted().equals(task.isCompleted()
+                    && getDeadline() == null
+                    && !task.getDeadline().isPresent()
+                    && getStartTime() == null
+                    && !task.getStartTime().isPresent());
+            //TODO Add booking part here after consulting Zhi Yuan
         } else {
             result = getTitle().equals(task.getTitle().title)
                     && getLabels().equals(getLabels(task.getLabels()))
