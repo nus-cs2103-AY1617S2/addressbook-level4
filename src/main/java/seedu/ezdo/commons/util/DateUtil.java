@@ -5,11 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.ezdo.model.todo.ReadOnlyTask;
-
+//@@author A0139248X
 /*
  * Checks for dates
  */
 public class DateUtil {
+    /**
+     * Checks whether a task's dates are valid
+     * @return true if the start date is earlier than or equal to the due date OR if either date is empty
+     * @throws ParseException if any task date cannot be parsed
+     */
     public static boolean isTaskDateValid(ReadOnlyTask task) throws ParseException {
         assert task != null;
         if (task.getStartDate().toString().isEmpty() || task.getDueDate().toString().isEmpty()) {
@@ -20,8 +25,7 @@ public class DateUtil {
         Date dueDate = df.parse(task.getDueDate().toString());
         return (startDate.compareTo(dueDate) <= 0);
     }
-
-
+  //@@author
     /**
      * Compares two dates strings. Both strings must be in the format dd/MM/yyyy hh:mm.
      * Empty strings are considered to be of lower value than non-empty strings.

@@ -144,7 +144,7 @@ public class EzDo implements ReadOnlyEzDo {
     private void syncMasterTagListWith(UniqueTaskList tasks) {
         tasks.forEach(this::syncMasterTagListWith);
     }
-
+//@@author A0139248X
     public boolean removeTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException {
         for (int i = 0; i < tasksToKill.size(); i++) {
             tasks.remove(tasksToKill.get(i));
@@ -157,7 +157,7 @@ public class EzDo implements ReadOnlyEzDo {
             p.get(i).setDone();
         }
     }
-
+//@@author
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {

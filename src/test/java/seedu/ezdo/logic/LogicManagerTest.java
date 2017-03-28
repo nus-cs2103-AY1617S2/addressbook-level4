@@ -342,7 +342,7 @@ public class LogicManagerTest {
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
 
-
+  //@@author A0139248X
     @Test
     public void execute_killInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, KillCommand.MESSAGE_USAGE);
@@ -370,7 +370,7 @@ public class LogicManagerTest {
                 expectedEZ,
                 expectedEZ.getTaskList());
     }
-
+  //@@author A0139248X
 
     @Test
     public void execute_find_invalidArgsFormat() {
@@ -435,6 +435,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+  //@@author A0139248X
     @Test
     public void execute_save_successful() {
         String directory = "./";
@@ -442,7 +443,7 @@ public class LogicManagerTest {
         assertCommandSuccess("save " + directory, String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS,
                 directory + SaveCommand.DATA_FILE_NAME), new EzDo(), Collections.emptyList());
     }
-
+  //@@author
     /**
      * A utility class to generate test data.
      */

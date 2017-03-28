@@ -41,7 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final EzDo ezDo;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final UserPrefs userPrefs;
-
+  //@@author A0139248X
     private SortCriteria currentSortCriteria;
     private Boolean currentIsSortedAscending;
 
@@ -77,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.resetData(newData);
         indicateEzDoChanged();
     }
-
+  //@@author A0139248X
     @Override
     public ReadOnlyEzDo getEzDo() {
         return ezDo;
@@ -92,7 +92,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateEzDoChanged() {
         raise(new EzDoChangedEvent(ezDo));
     }
-
+  //@@author A0139248X
     @Override
     public synchronized void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws TaskNotFoundException {
         updateStacks();
@@ -110,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
-
+  //@@author A0139248X
     @Override
     public synchronized void doneTasks(ArrayList<Task> doneTasks) {
         updateStacks();
@@ -130,7 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         indicateEzDoChanged();
     }
-
+  //@@author A0139248X
     @Override
     public void undo() throws EmptyStackException {
         ReadOnlyEzDo currentState = new EzDo(this.getEzDo());
@@ -169,6 +169,7 @@ public class ModelManager extends ComponentManager implements Model {
             throw new DateException("Error parsing dates!");
         }
     }
+  //@@author A0139248X
     // =========== Filtered Task List Accessors
     // =============================================================
 
@@ -422,11 +423,11 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
-
+  //@@author A0139248X
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
     }
-
+  //@@author
     public void indicateIsSortedAscendingChanged() {
         raise(new IsSortedAscendingChangedEvent(currentIsSortedAscending));
     }

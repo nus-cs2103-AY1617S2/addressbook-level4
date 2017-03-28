@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
+//@@author A0139248X
 public class ConfigTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
