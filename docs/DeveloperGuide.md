@@ -68,11 +68,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `edit 1 [KEYWORDS]`.
 
+Author: Jacob Levy
+
 <img src="images\SDForEditTask2.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `edit 1 [KEYWORDS]` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
+
+Author: Daniel Mullen
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
@@ -110,7 +114,7 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Daniel
+Author: Daniel Mullen
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -146,7 +150,7 @@ The `Model`,
 
 ### 2.5. Storage component
 
-Author: Yun Chun
+Author: Yunchun
 
 <img src="images/TaskStorage.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -300,11 +304,12 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | search for a task | see detailed information about the task.
 `* * *` | user | update the status of a task | view completed or pending tasks. 
 `* * *` | user | see upcoming tasks | see what needs to be done soon.
+`* * *` | user | can undo last command | to fix mistakes.
+`* * *` | user | chnage where I save my data | organize my information
 `* *`   | user | categorize a task | organize the tasks.
 `* *`   | user | favorite tasks | keep track of important tasks.
 `* *`   | user | see alerts on upcoming tasks | complete time sensitive tasks.
 `* *`   | user | quickly add predefined tasks | to save time defining tasks
-`* *`   | user | can undo last command | to fix mistakes.
 `* *`   | user | be notified if two tasks have a time conflict | be aware of schedule conflicts
 `* *`   | user | can use multiple devices | have more opportunity to check task manager
 `* *`   | user | can undo last command | to fix mistakes.
@@ -418,7 +423,7 @@ Use case ends.
 
 **Couple**
 
-Author: Jacob
+Author: Jacob Levy
 
 Pros:
 
@@ -436,7 +441,7 @@ Cons:
 
 **Google Calendar**
 
-Author: Daniel
+Author: Daniel Mullen
 
 Pros:
 
@@ -453,7 +458,7 @@ Cons:
 
 **Begin**
 
-Author: Edwin
+Author: Edwin Yeap
 
 Pros:
 
