@@ -67,5 +67,4 @@ public class AddCommandTest extends TodoListGuiTest {
         TestTodo[] expectedList = TestUtil.addTodosToList(currentList, todoToAdd);
         assertTrue(todoListPanel.isListMatching(true, expectedList));
     }
-
 }

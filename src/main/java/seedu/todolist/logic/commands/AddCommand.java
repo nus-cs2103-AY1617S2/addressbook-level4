@@ -2,6 +2,7 @@ package seedu.todolist.logic.commands;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
@@ -33,15 +34,19 @@ public class AddCommand extends Command {
     public static final String MESSAGE_INVALID_ENDTIME = "Invalid end time entered";
     public static final String DATE_FORMAT = "h:mma dd/MM/yy";
 
+    public static final String DEFAULT_ADD_STARTTIME = "1:00PM 11/11/17";
+    public static final String DEFAULT_ADD_ENDTIME = "2:00PM 11/11/17";
+
     private final Todo toAdd;
 
-    //@@author A0163720M
+    //@@author A0163720M ,A0165043M
     /**
      * Creates an AddCommand using raw values to create a todo with start time and end time (event)
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String todo, String startTime, String endTime, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String todo, Optional<String> startTime,
+            Optional<String> endTime, Set<String> tags) throws IllegalValueException {
         try {
             // Parse through the set of tags
             final Set<Tag> tagSet = new HashSet<>();
@@ -51,8 +56,24 @@ public class AddCommand extends Command {
 
             // Check for existence of each of the fields
             Name name = (todo != null) ? new Name(todo) : null;
-            Date start = (startTime != null) ? StringUtil.parseDate(startTime, DATE_FORMAT) : null;
-            Date end = (endTime != null) ? StringUtil.parseDate(endTime, DATE_FORMAT) : null;
+            Date start;
+            if (startTime.isPresent()) {
+                start =  (!startTime.get().isEmpty()) ?
+                        StringUtil.parseDate(startTime.get() , DATE_FORMAT) :
+                            StringUtil.parseDate(DEFAULT_ADD_STARTTIME , DATE_FORMAT);
+            } else {
+                start = null;
+            }
+
+            Date end;
+            if (endTime.isPresent()) {
+                end =  (!endTime.get().isEmpty()) ?
+                        StringUtil.parseDate(endTime.get() , DATE_FORMAT) :
+                            StringUtil.parseDate(DEFAULT_ADD_ENDTIME , DATE_FORMAT);
+            } else {
+                end = null;
+            }
+
             UniqueTagList tagList = new UniqueTagList(tagSet);
 
             // Todo(name, start_time, end_time, complete_time, taglist)
@@ -69,10 +90,10 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String todo, String endTime, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String todo, Optional<String> endTime, Set<String> tags) throws IllegalValueException {
         // Cannot throw an exception since there's only one line in the constructor
         // and the first line must be the call to the constructor, not try{}
-        this(todo, null, endTime, tags);
+        this(todo, Optional.empty(), endTime, tags);
     }
     //@@author
 
@@ -84,7 +105,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(String todo, Set<String> tags) throws IllegalValueException {
         // Cannot throw an exception since there's only one line in the constructor and the first line cannot be try{}
-        this(todo, null, null, tags);
+        this(todo, Optional.empty(), Optional.empty(), tags);
     }
 
     @Override

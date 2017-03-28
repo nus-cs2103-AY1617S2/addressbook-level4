@@ -1,5 +1,9 @@
 package seedu.todolist.testutil;
 
+
+import static seedu.todolist.logic.commands.AddCommand.DEFAULT_ADD_ENDTIME;
+import static seedu.todolist.logic.commands.AddCommand.DEFAULT_ADD_STARTTIME;
+
 import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.logic.commands.AddCommand;
@@ -31,6 +35,9 @@ public class TodoBuilder {
     //@@author A0165043M
     public TodoBuilder withStartTime(String strDateTime) throws IllegalValueException {
         try {
+            if (strDateTime.equals("")) {
+                strDateTime = DEFAULT_ADD_STARTTIME;
+            }
             this.todo.setStartTime(StringUtil.parseDate(strDateTime,  AddCommand.DATE_FORMAT));
             return this;
         } catch (IllegalValueException e) {
@@ -40,6 +47,9 @@ public class TodoBuilder {
     }
     public TodoBuilder withEndTime(String strDateTime) throws IllegalValueException {
         try {
+            if (strDateTime.equals("")) {
+                strDateTime = DEFAULT_ADD_ENDTIME;
+            }
             this.todo.setEndTime(StringUtil.parseDate(strDateTime, AddCommand.DATE_FORMAT));
             return this;
         } catch (IllegalValueException e) {

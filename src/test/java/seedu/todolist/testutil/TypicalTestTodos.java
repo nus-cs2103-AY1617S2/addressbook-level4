@@ -10,7 +10,7 @@ import seedu.todolist.model.todo.UniqueTodoList;
  */
 public class TypicalTestTodos {
     public TestTodo dog, cat, math, english, dishes, lawn, dinner, essay, toilet,
-                    car, library, tennis, shopping, laundry, job, lunch;
+                    car, library, tennis, shopping, laundry, job, lunch, eventWithDefaultValue;
 
     //@@author A0163786N
     public TypicalTestTodos() {
@@ -38,6 +38,8 @@ public class TypicalTestTodos {
             job = new TodoBuilder().withName("Apply to job").withEndTime("6:00PM 11/11/17").build();
             lunch = new TodoBuilder().withName("lunch").withStartTime("12:00PM 11/11/17")
                     .withEndTime("1:00PM 11/11/17").build();
+            //eventWithDefaultValue = new TodoBuilder().withName("eventWithDefaultValue").withStartTime("")
+                    //.withEndTime("").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
