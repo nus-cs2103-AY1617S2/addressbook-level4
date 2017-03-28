@@ -82,8 +82,8 @@ public class ParserUtil {
         System.out.println(sortCriteria);
         String sortOrder = matcher.group("sortOrder");
         System.out.println(sortOrder);
-        String[] result = new String[] {sortCriteria, sortOrder};
-        return Optional.of(result);
+        String[] resultPair = new String[] {sortCriteria, sortOrder};
+        return Optional.of(resultPair);
     }
 
     /**
