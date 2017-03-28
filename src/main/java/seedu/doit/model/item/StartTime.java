@@ -14,7 +14,7 @@ import seedu.doit.logic.parser.DateTimeParser;
 public class StartTime implements Comparable<StartTime> {
 
     public static final String NO_START_TIME = null;
-    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be "
+    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be in "
         + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
     public static final String STARTTIME_VALIDATION_REGEX = "^([0-9]||0[0-9]||1[0-2])/([0-2][0-9]||3[0-1])"
         + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
