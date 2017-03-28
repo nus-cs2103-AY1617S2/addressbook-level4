@@ -1,7 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
@@ -70,6 +70,6 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
         // confirm the result message is correct
         assertResultMessage(
-                String.format(MESSAGE_DELETE_PERSON_SUCCESS, taskToDelete));
+                String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 }

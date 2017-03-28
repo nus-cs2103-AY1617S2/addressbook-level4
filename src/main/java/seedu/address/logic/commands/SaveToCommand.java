@@ -17,6 +17,7 @@ public class SaveToCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves to the specified directory.\n"
             + "Parameters: dir_location\n" + "Example: " + COMMAND_WORD + "to .\\example_folder";
     public static final String MESSAGE_SUCCESS = "Save location has been changed to: %1$s";
+    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Save location changed to: %1$s";
     public static final String MESSAGE_WRITE_FILE_ERROR = "Unable to write data to: %1$s";
 
     public static final String TASK_MANAGER_FILE_NAME = "taskmanager.xml";
@@ -39,7 +40,8 @@ public class SaveToCommand extends Command {
 
         if (FileUtil.isWritable(path)) {
             model.updateSaveLocation(path);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, path));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, path),
+                    String.format(MESSAGE_SUCCESS_SATAUS_BAR, path));
         } else {
             throw new CommandException(String.format(MESSAGE_WRITE_FILE_ERROR, path));
         }

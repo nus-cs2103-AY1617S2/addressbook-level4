@@ -23,6 +23,7 @@ public class TodayCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) \n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_TODAY_TASK_SUCCESS = "Task for Today: %1$s";
+    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Task for Today: %1$s";
 
     private final int filteredTaskListIndex;
 
@@ -49,7 +50,8 @@ public class TodayCommand extends Command {
             Task todayTask = createTodayTask(taskToToday);
             model.updateTask(filteredTaskListIndex, todayTask);
             model.updateFilteredListToShowAll();
-            return new CommandResult(String.format(MESSAGE_TODAY_TASK_SUCCESS, todayTask));
+            return new CommandResult(String.format(MESSAGE_TODAY_TASK_SUCCESS, todayTask),
+                    String.format(MESSAGE_TODAY_TASK_SUCCESS, todayTask.getID()));
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(EditCommand.MESSAGE_DUPLICATE_PERSON);
         } catch (IllegalValueException e) {

@@ -9,12 +9,13 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Listed all tasks.";
 
 
     @Override
     public CommandResult execute() {
         model.updateFilteredListToShowAll();
         model.hideCompletedTaskList();
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, MESSAGE_SUCCESS_SATAUS_BAR);
     }
 }

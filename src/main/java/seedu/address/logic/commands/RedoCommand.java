@@ -10,10 +10,11 @@ public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_NO_PREV_COMMAND = "No commands left to redo";
+    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Redo successfully.";
 
     @Override
     public CommandResult execute() {
-        return new CommandResult("Should not execute");
+        return new CommandResult("Should not execute", MESSAGE_SUCCESS_SATAUS_BAR);
     }
 
     public String getToRedo() throws CommandException {
