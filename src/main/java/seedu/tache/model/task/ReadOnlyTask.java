@@ -1,6 +1,7 @@
 //@@author A0139961U
 package seedu.tache.model.task;
 
+import java.util.Date;
 import java.util.Optional;
 
 import seedu.tache.model.tag.UniqueTagList;
@@ -19,6 +20,7 @@ public interface ReadOnlyTask {
     boolean getTimedStatus();
     boolean getRecurringStatus();
     RecurInterval getRecurInterval();
+    boolean isWithinDate(Date date);
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

@@ -1,5 +1,6 @@
 package seedu.tache.model;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -296,6 +297,9 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             if (task.getEndDateTime().isPresent() && isDueToday) {
+                if (task.getStartDateTime().isPresent()) {
+                    return task.isWithinDate(new Date());
+                }
                 return task.getEndDateTime().get().isToday();
             } else {
                 return false;

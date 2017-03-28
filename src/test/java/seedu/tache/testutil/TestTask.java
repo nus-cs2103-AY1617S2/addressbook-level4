@@ -1,5 +1,6 @@
 package seedu.tache.testutil;
 
+import java.util.Date;
 import java.util.Optional;
 
 import seedu.tache.model.tag.UniqueTagList;
@@ -119,6 +120,12 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public RecurInterval getRecurInterval() {
         return interval;
+    }
+
+    @Override
+    public boolean isWithinDate(Date date) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }
