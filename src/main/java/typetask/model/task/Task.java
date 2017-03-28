@@ -39,9 +39,11 @@ public class Task implements ReadOnlyTask {
         this.name = name;
     }
 
+    //@@author A0139926R
     public void setDate(DueDate date) {
         this.date = date;
     }
+    //@@author A0139926R
     public void setEndDate(DueDate endDate) {
         this.endDate = endDate;
     }
@@ -56,10 +58,12 @@ public class Task implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
+    //@@author A0139926R
     @Override
     public DueDate getDate() {
         return date;
     }
+    //@@author A0139926R
     @Override
     public DueDate getEndDate() {
         return endDate;
