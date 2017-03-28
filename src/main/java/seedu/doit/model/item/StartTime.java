@@ -15,17 +15,19 @@ public class StartTime implements Comparable<StartTime> {
 
     public static final String NO_START_TIME = null;
     public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be "
-        + "2 alphanumeric/period strings separated by '@'";
+        + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
     public static final String STARTTIME_VALIDATION_REGEX = "^([0-9]||0[0-9]||1[0-2])/([0-2][0-9]||3[0-1])"
         + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
 
     public final String value;
+    private final LocalDateTime dateObject;
 
     /**
      * Gives a NO_START_TIME which represents there is no start time.
      */
     public StartTime() {
         this.value = NO_START_TIME;
+        this.dateObject = null;
     }
 
     /**
@@ -36,13 +38,14 @@ public class StartTime implements Comparable<StartTime> {
     public StartTime(String startTime) throws IllegalValueException {
         if (startTime == NO_START_TIME) {
             this.value = NO_START_TIME;
+            this.dateObject = null;
         } else {
             String trimmedStartTime = startTime.trim();
 
-            LocalDateTime date = DateTimeParser.parseDateTime(trimmedStartTime)
+            dateObject = DateTimeParser.parseDateTime(trimmedStartTime)
                 .orElseThrow(() -> new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS));
 
-            String dateInString = formatDate(date);
+            String dateInString = formatDate(dateObject);
 
             if (!isValidStartTime(dateInString)) {
                 throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
@@ -73,8 +76,8 @@ public class StartTime implements Comparable<StartTime> {
     @Override
     public boolean equals(Object other) {
         return (other == this // short circuit if same object
-            ) || ((other instanceof StartTime// instanceof handles nulls
-            ) && this.value.equals(((StartTime) other).value)); // state check
+        ) || ((other instanceof StartTime// instanceof handles nulls
+        ) && this.value.equals(((StartTime) other).value)); // state check
     }
 
     @Override
@@ -85,6 +88,10 @@ public class StartTime implements Comparable<StartTime> {
     @Override
     public int compareTo(StartTime other) {
         return this.value.compareTo(other.value);
+    }
+
+    public LocalDateTime getDateTimeObject() {
+        return this.dateObject;
     }
 
 }

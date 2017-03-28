@@ -1,5 +1,6 @@
 package seedu.doit.logic.commands;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task Manager";
+    public static final String MESSAGE_INVALID_START_TIME = "Start Time not earlier then End Time!";
 
     private final Task toAdd;
 
@@ -62,8 +64,14 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new Name(name), new Priority(priority), new StartTime(startDate), new EndTime(dueDate),
-                new Description(text), new UniqueTagList(tagSet));
+        StartTime startTime;
+        EndTime endTime;
+        this.toAdd = new Task(new Name(name), new Priority(priority), startTime = new StartTime(startDate),
+            endTime = new EndTime(dueDate), new Description(text), new UniqueTagList(tagSet));
+
+        if(!isStartTimeEarlier(startTime.getDateTimeObject(), endTime.getDateTimeObject())){
+            throw new IllegalValueException(MESSAGE_INVALID_START_TIME);
+        }
     }
 
     /**
@@ -90,6 +98,17 @@ public class AddCommand extends Command {
         } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
+    }
+
+    /**
+     * Checks if the Start Time is Earlier or equal to End Time.
+     * @param  startTime Start Time of Event
+     * @param  endTime End Time of Event
+     * @return boolean return
+     *
+     */
+    private boolean isStartTimeEarlier(LocalDateTime startTime, LocalDateTime endTime) {
+        return startTime.isBefore(endTime);
     }
 
 }
