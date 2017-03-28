@@ -30,9 +30,19 @@ Component: User Interface
 
 #### [Xu Ruolan](https://github.com/fiomolv)
 <img src="images/fiomolv.jpg" width="150"><br>
-Role: Developer<br>
-Responsibilities: Code Quality and Integration<br>
-Component: Model
+
+* Components in charge of: [Model]
+* Aspects/tools in charge of: Code Quality, Integration
+* Features implemented:
+   * [List tasks by category]
+   * [find tasks by keywords]
+   * [find tasks by datetime]
+   * [clear tasks by category]
+* Code written: [[functional code](A0147990R.md)][[test code](A0147990R.md)]
+* Other major contributions:
+  * Check code quality
+  * Help debug and solve merge conflicts
+  * In charge of review amd merge pull requests
 
 -----
 
