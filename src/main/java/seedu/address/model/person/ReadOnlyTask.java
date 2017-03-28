@@ -23,7 +23,7 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the event's internal tags.
      */
     UniqueTagList getTags();
-
+    //@@author A0121668A
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
@@ -44,7 +44,7 @@ public interface ReadOnlyTask {
                 &&(other.getStatus()==this.getStatus())
                 );
     }
-
+    //@@author
     /**
      * Formats the activity as text, showing all details.
      */
@@ -63,6 +63,7 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+    
     
 //    //@@author A0148038A
 //    default int compareTo(ReadOnlyTask o) {

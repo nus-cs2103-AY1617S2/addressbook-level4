@@ -8,12 +8,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 
+//@@author A0121668A
 /**
  * Parses input arguments and creates a new RedoCommand object
  */
 
 public class RedoCommandParser {
-    //@@author A0121668A
     /**
      * Parses the given {@code String} of arguments in the context of the RedoCommand
      * and returns an RedoCommand object for execution.

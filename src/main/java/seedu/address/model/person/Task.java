@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
-
+//@@author A0121668A
 public class Task implements ReadOnlyTask {
     
     public static final boolean DEFAULT_TASK_STATUS = false;
@@ -34,6 +34,7 @@ public class Task implements ReadOnlyTask {
         this.status = status;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
+  //@@author
 
     /**
      * Creates a copy of the given ReadOnlyTask.

@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static String previousCommand;
     private static WhatsLeft previousState;
     private static String displayStatus;
-
+    //@@author A0121668A
     /**
      * Initializes a ModelManager with the given whatsLeft and userPrefs.
      */
@@ -54,7 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
         displayStatus = "Pending";
         updateFilteredListToShowAll();
     }
-
+    //@@author
     public ModelManager() {
         this(new WhatsLeft(), new UserPrefs());
     }
@@ -221,6 +221,7 @@ public class ModelManager extends ComponentManager implements Model {
     // StatusQualifier(true))::satisfies);
     // filteredEvents.setPredicate(null);
     // }
+    
     //@@author A0121668A
     @Override
     public void updateFilteredListToShowAll() {
@@ -262,7 +263,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     // ========== Inner classes/interfaces used for filtering
     // =================================================
-
+    //@@author A0121668A
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
 
@@ -302,7 +303,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         String toString();
     }
-
+    //@@author A0121668A
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private String displayStatus;
@@ -311,7 +312,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
             this.displayStatus = status;
         }
-        //@@author A0121668A
+        
         @Override
         public boolean run(ReadOnlyTask task) {
             if (displayStatus.equals("All")) {
@@ -391,7 +392,7 @@ public class ModelManager extends ComponentManager implements Model {
                 return !event.isOver();
             }
         }
-
+        //@@author
         @Override
         public String toString() {
             return "status =" + String.valueOf(statusKey);
