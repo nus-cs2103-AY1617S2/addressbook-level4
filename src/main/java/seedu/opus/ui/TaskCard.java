@@ -16,9 +16,11 @@ public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
 
+    //@@author A0124368A
     private static final String STYLE_PRIORITY_HIGH = "priority-high";
     private static final String STYLE_PRIORITY_MID = "priority-mid";
     private static final String STYLE_PRIORITY_LOW = "priority-low";
+    //@@author
 
     @FXML
     private HBox cardPane;
@@ -44,15 +46,18 @@ public class TaskCard extends UiPart<Region> {
 
         if (showIndex) id.setText(displayedIndex + ". ");
 
+        //@@author A0124368A
         name.setText(task.getName().fullName);
         setPriorityView(task);
         note.setText(task.getNote().map(Note::toString).orElse(""));
         status.setText(task.getStatus().toString());
         startTime.setText(task.getStartTime().map(DateTime::toString).map(s -> "Start: " + s).orElse(""));
         endTime.setText(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""));
+        //@@author
         initTags(task);
     }
 
+    //@@author A0124368A
     private void setPriorityView(ReadOnlyTask task) {
         String text = task.getPriority()
                 .map(Priority::toString)
@@ -87,6 +92,7 @@ public class TaskCard extends UiPart<Region> {
 
         return Optional.ofNullable(styleClass);
     }
+    //@@author
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
