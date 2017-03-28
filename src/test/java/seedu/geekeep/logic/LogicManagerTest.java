@@ -34,6 +34,8 @@ import seedu.geekeep.logic.commands.ExitCommand;
 import seedu.geekeep.logic.commands.FindCommand;
 import seedu.geekeep.logic.commands.HelpCommand;
 import seedu.geekeep.logic.commands.ListCommand;
+import seedu.geekeep.logic.commands.ListDoneCommand;
+import seedu.geekeep.logic.commands.ListUndoneCommand;
 import seedu.geekeep.logic.commands.UndoneCommand;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.GeeKeep;
@@ -381,12 +383,15 @@ public class LogicManagerTest {
         List<Task> threeTasks = helper.generateTaskList(3);
 
         GeeKeep expectedAB = helper.generateGeeKeep(threeTasks);
+        expectedAB.markTaskDone(1);
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("done 2",
                 String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB,
                 expectedAB.getTaskList());
+
+        expectedAB.markTaskUndone(1);
 
         assertCommandSuccess("undone 2",
                 String.format(UndoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, threeTasks.get(1)),
@@ -505,6 +510,36 @@ public class LogicManagerTest {
 
         assertCommandSuccess("list",
                 ListCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+    }
+
+    @Test
+    public void execute_listdone_listundone_showsTasksCorrectly() throws Exception {
+        // prepare expectations for list undone tasks
+        TestDataHelper helper = new TestDataHelper();
+        GeeKeep expectedAB = helper.generateGeeKeep(2);
+        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+
+        // prepare geekeep state
+        helper.addToModel(model, 2);
+
+        assertCommandSuccess("listundone",
+                ListUndoneCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+
+        // prepare expectations for list done tasks
+        expectedAB.markTaskDone(0);
+        expectedList = expectedAB.getTaskList().filtered(t -> t.isDone());
+
+        assertCommandSuccess("done 1",
+                String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, expectedList.get(0)),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        assertCommandSuccess("listdone",
+                ListDoneCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
     }
