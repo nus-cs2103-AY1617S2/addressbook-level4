@@ -21,9 +21,9 @@ Component: Logic
 -----
 
 #### [Tan Wei] [@tanwei0319](https://github.com/tanwei0319)
-<img src="http://www.comp.nus.edu.sg/~cs2103/AY1617S2/images/tanwei0319.png" width="150"><br>
+<img src="images/tanwei0319.jpg" width="150"><br>
 
-* Components in charge of: [UI](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#32-UI-component)
+* Components in charge of: [UI](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#32-ui-component)
 * Aspects/tools in charge of: Code Quality, Deliverables and Deadlines
 * Features implemented:
    * [Add dates using natural language](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
@@ -45,7 +45,7 @@ Component: Logic
 #### [Xu Ruolan](https://github.com/fiomolv)
 <img src="images/fiomolv.jpg" width="150"><br>
 
-* Components in charge of: [Model]
+* Components in charge of: [Model](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#34-model-component)
 * Aspects/tools in charge of: Code Quality, Integration
 * Features implemented:
    * [make add command fields optional](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
