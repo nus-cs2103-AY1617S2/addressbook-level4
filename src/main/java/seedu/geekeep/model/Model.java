@@ -29,6 +29,9 @@ public interface Model {
     /** Deletes the task */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
+    /** Returns the config */
+    Config getConfig();
+
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 

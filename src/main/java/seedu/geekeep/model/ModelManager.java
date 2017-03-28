@@ -55,6 +55,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public Config getConfig() {
+        return config;
+    }
+
+    @Override
     public void resetData(ReadOnlyGeeKeep newData) {
         pastGeeKeeps.add(new GeeKeep(geeKeep));
         futureGeeKeeps.clear();
