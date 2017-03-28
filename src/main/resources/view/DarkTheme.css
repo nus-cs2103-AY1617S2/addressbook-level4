@@ -87,10 +87,14 @@
 }
 
 .list-cell {
-    -fx-background-color: lightcyan;
+    -fx-background-color: transparent;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+}
+
+.list-cell:filled:focused {
+    -fx-background-color: cyan;
 }
 
 .list-cell .label {
@@ -127,6 +131,7 @@
 }
 
 .result-display {
+    -fx-background-color: grey;
     -fx-text-fill: blue;
     -fx-font-weight: bold;
     -fx-font-size: 20px;
