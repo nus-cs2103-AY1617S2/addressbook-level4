@@ -6,7 +6,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.Timing;
 
 public class PersonCard extends UiPart<Region> {
 
@@ -37,18 +36,21 @@ public class PersonCard extends UiPart<Region> {
         priority.setText("Priority: " + task.getPriority().value);
         priority.setStyle("-fx-background-color: " + task.getPriority().getPriorityColor() + ";");
 
-        if (task.getStartTiming().value.equals(Timing.NULL_TIMING)) {
+        if (task.getOccurrenceIndexList().size() == 0) {
             startTiming.setText("");
         } else {
-            startTiming.setText("Start Timing: " + task.getStartTiming().value);
+            int index = task.getOccurrenceIndexList().get(0);
+            startTiming.setText("Start Timing: " + task.getOccurrences().get(index).getStartTiming().value);
         }
 
-        if (task.getEndTiming().value.equals(Timing.NULL_TIMING)) {
+
+        if (task.getOccurrenceIndexList().size() == 0) {
             endTiming.setText("");
         } else {
-            endTiming.setText("End Timing: " + task.getEndTiming().value);
-
+            int index = task.getOccurrenceIndexList().get(0);
+            endTiming.setText("End Timing: " + task.getOccurrences().get(index).getEndTiming().value);
         }
+
         if (task.isRecurring()) {
             recurring.setText("Recurring Task: " + task.getFrequency().toString());
             recurring.setStyle("-fx-background-color: pink;");

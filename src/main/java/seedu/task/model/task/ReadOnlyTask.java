@@ -62,5 +62,11 @@ public interface ReadOnlyTask {
     void setStartTiming(Timing startTiming);
     void setEndTiming(Timing endTiming);
 
+    Timing getStartTiming(int i);
+
+    ArrayList<Integer> getOccurrenceIndexList();
+    void setOccurrenceIndexList(ArrayList<Integer> list);
+
+
 
 }
