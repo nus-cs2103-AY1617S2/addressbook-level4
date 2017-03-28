@@ -192,6 +192,7 @@ public class GeeKeep implements ReadOnlyGeeKeep {
         tasks.updateTask(index, updatedTask);
     }
 
+    //@@author A0121658E
     public void markTaskDone(int index) {
         tasks.markTaskDone(index);
     }

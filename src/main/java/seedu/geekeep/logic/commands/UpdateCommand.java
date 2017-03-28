@@ -76,6 +76,7 @@ public class UpdateCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
 
+    //@@author A0139438W
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToUpdate}
      * updated with {@code updateTaskDescriptor}.

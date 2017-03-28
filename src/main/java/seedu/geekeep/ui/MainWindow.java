@@ -31,6 +31,7 @@ public class MainWindow extends UiPart<Region> {
     private Stage primaryStage;
     private Logic logic;
 
+    //@@author A0148037E
     // Independent Ui parts residing in this Ui container
     private TaskListPanel floatingTaskListPanel;
     private TaskListPanel eventListPanel;
@@ -52,6 +53,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane deadlineListPanelPlaceholder;
 
+    //@@author
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
@@ -115,6 +117,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0148037E
     void fillInnerParts() {
         eventListPanel = new TaskListPanel("event",
                 getEventListPlaceholder(), logic.getFilteredEventList());
@@ -150,6 +153,8 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getDeadlineListPlaceholder() {
         return deadlineListPanelPlaceholder;
     }
+
+    //@@author
     void hide() {
         primaryStage.hide();
     }

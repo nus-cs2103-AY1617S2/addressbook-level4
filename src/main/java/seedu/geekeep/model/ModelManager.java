@@ -1,3 +1,4 @@
+//@@author A0121658E
 package seedu.geekeep.model;
 
 import java.util.Set;
@@ -28,6 +29,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final GeeKeep geeKeep;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    //@@author A0147622H
     private final Stack<GeeKeep> pastGeeKeeps;
     private final Stack<GeeKeep> futureGeeKeeps;
 
@@ -42,6 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.geeKeep = new GeeKeep(geeKeep);
         filteredTasks = new FilteredList<>(this.geeKeep.getTaskList());
+
         pastGeeKeeps = new Stack<>();
         futureGeeKeeps = new Stack<>();
 
@@ -51,6 +55,7 @@ public class ModelManager extends ComponentManager implements Model {
         this(new GeeKeep(), new UserPrefs());
     }
 
+    //@@author A0121658E
     @Override
     public void resetData(ReadOnlyGeeKeep newData) {
         pastGeeKeeps.add(new GeeKeep(geeKeep));
@@ -207,6 +212,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new SwitchTaskCategoryEvent(TaskCategory.UNDONE));
     }
 
+    //@@author A0147622H
     @Override
     public void undo() throws NothingToUndoException {
         if (pastGeeKeeps.empty()) {

@@ -1,3 +1,4 @@
+//@@author A0121658E
 package seedu.geekeep.model.task;
 
 import java.util.Objects;
@@ -92,6 +93,7 @@ public class Task implements ReadOnlyTask  {
         return Objects.hash(title, endDateTime, startDateTime, location, tags);
     }
 
+    //@@author A0148037E
     /**
      * Get the task's priority which determines the ordering of index
      * @return int value of Priority
@@ -107,6 +109,7 @@ public class Task implements ReadOnlyTask  {
         }
     }
 
+    //@@author A0139438W
     /**
      * Get the task's DateTime that is used to compare date time.
      * For events, the startDateTime is used for comparison.
@@ -169,6 +172,7 @@ public class Task implements ReadOnlyTask  {
         return this.getTitle().toString().compareTo(otherTask.getTitle().toString());
     }
 
+    //@@author A0121658E
     /**
      * Updates this task with the details of {@code replacement}.
      */

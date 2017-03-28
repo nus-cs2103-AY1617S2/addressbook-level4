@@ -83,6 +83,7 @@ public class LogicManagerTest {
             return new Task(title, startDateTime, endDateTime, location, tags, false);
         }
 
+        //@@author A0139438W
         public Task deadline() throws Exception {
             Title title = new Title("Deadline");
             DateTime endDateTime = new DateTime("01-05-17 1630");
@@ -113,6 +114,7 @@ public class LogicManagerTest {
             return new Task(title, null, null, location, tags, false);
         }
 
+        //@@author
         /**
          * Adds auto-generated Task objects to the given model
          * @param model The model to which the Tasks will be added
@@ -332,6 +334,7 @@ public class LogicManagerTest {
 
     }
 
+    //@@author A0139438W
     @Test
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 l/valid, location",
@@ -447,6 +450,7 @@ public class LogicManagerTest {
         assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
     }
 
+    //@@author A0147622H
     @Test
     public void execute_undo_redo_errorMessageShown() throws Exception {
         String expectedMessage = String.format(UndoCommand.MESSAGE_NOTHING_TO_UNDO);
@@ -487,6 +491,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
     }
 
+    //@@author A0139438W
     @Test
     public void execute_done_undone_CorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -524,7 +529,7 @@ public class LogicManagerTest {
         assertIncorrectIndexFormatBehaviorForCommand("undone", expectedUndoneMessage);
     }
 
-
+    //@@author
     @Test
     public void execute_exit() {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
@@ -624,6 +629,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    //@@author A0139438W
     @Test
     public void execute_listdone_listundone_showsTasksCorrectly() throws Exception {
         // prepare expectations for list undone tasks
@@ -654,6 +660,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    //@@author
     @Test
     public void execute_unknownCommandWord() {
         String unknownCommand = "uicfhmowqewca";

@@ -10,6 +10,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
+    //@@author A0148037E
     public TestTask dance, japan, exercise, spain, hackathon, fishing, song, meeting, spend;
 
     public TypicalTestTasks() {
@@ -43,6 +44,7 @@ public class TypicalTestTasks {
         }
     }
 
+    //@@author
     public static void loadGeeKeepWithSampleData(GeeKeep ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {

@@ -123,6 +123,7 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
 
+    //@@author A0148037E
     @Subscribe
     private void handleSwitchTaskCategoryEvent(SwitchTaskCategoryEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
