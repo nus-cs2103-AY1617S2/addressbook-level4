@@ -2,13 +2,15 @@ package seedu.address.model.person;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+//@@author A0121668A-unused
+//Unused because it was decided not to wrap taskStatus inside a class, 
+//but implement with a simple boolean attribute instead
 /**
  * Represents an Activity's TaskStatus in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class TaskStatus {
     
-    //@@author A0121668A
     public static final String COMPLETED_TASK_STATUS = "[Done]";
     public static final String UNCOMPLETED_TASK_STATUS = "[Pending]";
     public static final boolean COMPLETED = true;
