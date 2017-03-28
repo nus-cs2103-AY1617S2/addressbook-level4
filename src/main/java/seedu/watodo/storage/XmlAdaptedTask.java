@@ -80,8 +80,6 @@ public class XmlAdaptedTask {
             status = getStatusFromString(this.status);
         }
 
-
-
         final UniqueTagList tags = new UniqueTagList(taskTags);
         if (startDate == null && endDate == null) {
             return new Task(name, tags, status);
@@ -92,7 +90,6 @@ public class XmlAdaptedTask {
         } else if (startDate != null && endDate != null) {
             final DateTime sDate = new DateTime(startDate);
             final DateTime eDate = new DateTime(endDate);
-
 
             return new Task(name, sDate, eDate, tags, status);
         }

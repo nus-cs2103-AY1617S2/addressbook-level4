@@ -4,6 +4,9 @@ import java.util.Objects;
 
 import seedu.watodo.model.tag.UniqueTagList;
 
+//@@author A0143076J-unused
+//not used because realized that it was not very useful to split the task into 3 classes based on tasktype.
+//initially thought it would give better cohesion but after doing, realized only added a lot of repeated code.
 /** Represents a task that has to be done by a specific deadline in the task manager.
  * * Guarantees: details are present and not null, field values are validated.
  */

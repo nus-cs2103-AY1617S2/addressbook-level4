@@ -4,10 +4,10 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Quick Start](#1-quick-start)
+2. [Features](#2-features)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 
@@ -59,7 +59,7 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task : `	`
+### 2.2. Adding a task : `add`
 
 Adds a task to the task manager<br>
 > Task can have any number of tags (including 0)
@@ -144,7 +144,7 @@ Examples:
 ### 2.5. Editing a task : `edit`
 
 Edits an existing task in the task manager.<br>
-Format: `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...`
+Format: `edit INDEX <[TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...>`
 
 > * Edits the person at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
