@@ -64,7 +64,7 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(config, storage, userPrefs);
 
         logic = new LogicManager(model);
 
@@ -82,7 +82,7 @@ public class MainApp extends Application {
         }
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Config config, Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyGeeKeep> geeKeepOptional;
         ReadOnlyGeeKeep initialData;
         try {
@@ -99,7 +99,7 @@ public class MainApp extends Application {
             initialData = new GeeKeep();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(config, initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

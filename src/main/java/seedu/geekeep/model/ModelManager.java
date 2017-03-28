@@ -26,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private final Config config;
     private final GeeKeep geeKeep;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final Stack<GeeKeep> pastGeeKeeps;
@@ -34,12 +35,14 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given geekeep and userPrefs.
      */
-    public ModelManager(ReadOnlyGeeKeep geeKeep, UserPrefs userPrefs) {
+    public ModelManager(Config config, ReadOnlyGeeKeep geeKeep, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(geeKeep, userPrefs);
+        assert !CollectionUtil.isAnyNull(config, geeKeep, userPrefs);
 
-        logger.fine("Initializing with GeeKeep: " + geeKeep + " and user prefs " + userPrefs);
+        logger.fine(
+                "Initializing with" + " config " + config + " GeeKeep " + geeKeep + " and user prefs " + userPrefs);
 
+        this.config = config;
         this.geeKeep = new GeeKeep(geeKeep);
         filteredTasks = new FilteredList<>(this.geeKeep.getTaskList());
         pastGeeKeeps = new Stack<>();
@@ -48,7 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new GeeKeep(), new UserPrefs());
+        this(new Config(), new GeeKeep(), new UserPrefs());
     }
 
     @Override
