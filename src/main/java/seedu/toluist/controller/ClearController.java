@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -26,8 +25,7 @@ public class ClearController extends Controller {
         todoList.setTasks(new ArrayList<>());
         todoList.save();
 
-        UiStore.getInstance().setTasks(todoList.getTasks());
-
+        uiStore.setTasks(todoList.getTasks());
         uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE));
     }
 

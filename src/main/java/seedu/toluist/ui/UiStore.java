@@ -3,7 +3,6 @@ package seedu.toluist.ui;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,10 +31,9 @@ public class UiStore {
 
     private static UiStore instance;
 
-    private ArrayList<Task> allTasks = new ArrayList<>();
     private ObjectProperty<TaskSwitchPredicate> observableSwitchPredicate =
             new SimpleObjectProperty<>(TaskSwitchPredicate.SWITCH_PREDICATE_INCOMPLETE);
-    private ObservableList<Task> shownTasks = FXCollections.observableArrayList();
+    private ObservableList<Task> observableTasks = FXCollections.observableArrayList();
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));
     private ObjectProperty<CommandInput> observableCommandInput =
@@ -84,7 +82,6 @@ public class UiStore {
 
     public void setObservableSwitchPredicate(TaskSwitchPredicate switchPredicate) {
         observableSwitchPredicate.setValue(switchPredicate);
-        changeShownTasks();
     }
 
     public ObservableValue<TaskSwitchPredicate> getObservableSwitchPredicate() {
@@ -134,20 +131,20 @@ public class UiStore {
     }
 
     /**
-     * Overloaded method to setTasks and newTask at the same time
+     * Overloaded method to setTasks and last editted task at the same time
      * @params tasks tasks to replace current task
-     * @param newTask new task
+     * @param lastEditedTask last editted task
      */
     public void setTasks(ArrayList<Task> tasks, Task lastEditedTask) {
         // Sorted by default
         Collections.sort(tasks);
-        this.allTasks = tasks;
         this.lastEditedTask = lastEditedTask;
-        changeShownTasks();
+        observableTasks.clear();
+        observableTasks.setAll(tasks);
     }
 
     public ArrayList<Task> getTasks() {
-        return allTasks;
+        return observableTasks.stream().collect(Collectors.toCollection(ArrayList::new));
     }
 
     public Task getLastEditedTask() {
@@ -158,7 +155,8 @@ public class UiStore {
      * Returns list of tasks are currently shown on the Ui
      */
     public ArrayList<Task> getShownTasks() {
-        return new ArrayList(Arrays.asList(shownTasks.toArray()));
+        return getTasks().stream().filter(observableSwitchPredicate.get()
+                .getPredicate()).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Task> getShownTasks(List<Integer> indexes) {
@@ -174,12 +172,7 @@ public class UiStore {
     }
 
     public ObservableList<Task> getObservableTasks() {
-        return shownTasks;
-    }
-
-    private void changeShownTasks() {
-        shownTasks.setAll(allTasks.stream()
-                .filter(observableSwitchPredicate.getValue().getPredicate()).collect(Collectors.toList()));
+        return observableTasks;
     }
 
     /**
@@ -188,6 +181,6 @@ public class UiStore {
      * @return the index if it is found, else -1
      */
     public int getTaskIndex(Task task) {
-        return shownTasks.indexOf(task);
+        return getShownTasks().indexOf(task);
     }
 }

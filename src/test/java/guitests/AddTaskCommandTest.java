@@ -1,6 +1,7 @@
 //@@author A0127545A
 package guitests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -348,5 +349,20 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
                 "- Repeat: \"WEEKLY\"\n" +
                 "- Repeat until: \"Sun, 05 May 2019 10:00 PM\"\n" +
                 "- Tags: \"hello world\"");
+    }
+
+    @Test
+    public void addTaskAfterSwitching() {
+        String clearCommand = "clear";
+        commandBox.runCommand(clearCommand);
+        String switchCommand = "switch t";
+        commandBox.runCommand(switchCommand);
+        String taskDescription = "get a life";
+        String addCommand = ADD + taskDescription;
+        Task task = new Task(taskDescription);
+        commandBox.runCommand(addCommand);
+
+        assertEquals(tabBar.getHighlightedTabText(), "TODAY (0/1)");
+        assertFalse(isTaskShown(task));
     }
 }
