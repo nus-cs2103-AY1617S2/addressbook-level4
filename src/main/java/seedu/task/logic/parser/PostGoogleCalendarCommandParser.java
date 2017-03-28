@@ -15,7 +15,8 @@ public class PostGoogleCalendarCommandParser extends CommandParser {
     public Command parse(String args) {
         Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PostGoogleCalendarCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PostGoogleCalendarCommand.MESSAGE_USAGE));
         }
 
         return new PostGoogleCalendarCommand(index.get());
