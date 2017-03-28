@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <todolist>
     <todos>
-        <name>hi</name>
-        <startTime></startTime>
-        <endTime></endTime>
-        <completeTime>Tue Mar 28 00:26:54 HKT 2017</completeTime>
-    </todos>
-    <todos>
-        <name>thing</name>
+        <name>asdf</name>
         <startTime></startTime>
         <endTime></endTime>
         <completeTime></completeTime>
     </todos>
     <todos>
-        <name>todo</name>
-        <startTime>Sat Nov 11 16:00:00 HKT 2017</startTime>
-        <endTime>Sat Nov 11 17:00:00 HKT 2017</endTime>
-        <completeTime>Tue Mar 28 16:46:13 HKT 2017</completeTime>
+        <name>test</name>
+        <startTime>Tue Mar 28 09:00:00 HKT 2017</startTime>
+        <endTime>Wed Mar 29 09:00:00 HKT 2017</endTime>
+        <completeTime>Wed Mar 29 23:59:00 HKT 2017</completeTime>
     </todos>
     <tags>wwwww</tags>
 </todolist>

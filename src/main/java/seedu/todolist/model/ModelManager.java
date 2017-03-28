@@ -100,18 +100,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author A0163786N
     @Override
-    public synchronized void completeTodo(int filteredTodoListIndex, Date completeTime) {
+    public void completeTodo(int filteredTodoListIndex, Date completeTime) {
         TodoList tempTodoList = new TodoList(todoList);
-        todoList.completeTodo(filteredTodoListIndex, completeTime);
+        int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
+        todoList.completeTodo(todoListIndex, completeTime);
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
     //@@author
     //@@author A0163786N
     @Override
-    public synchronized void uncompleteTodo(int filteredTodoListIndex) {
+    public void uncompleteTodo(int filteredTodoListIndex) {
         TodoList tempTodoList = new TodoList(todoList);
-        todoList.uncompleteTodo(filteredTodoListIndex);
+        int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
+        todoList.uncompleteTodo(todoListIndex);
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }

@@ -99,22 +99,29 @@ Examples:
 * `edit 1 Play with dog e/5:00PM 11/11/11`<br>
   Edits the task description and deadline of the 1st todo to be listed
 
-### 2.5. Finding all todos containing any keyword in their description: `find`
+### 2.5. Finding all todos by multiple search parameters: `find`
 
 Finds todos whose descriptions contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [t/TAG] [t/MORE TAGS]`
 
 > * The search is case insensitive.
 > * The order of the keywords does not matter.
-> * Only the task description is searched.
-> * Only full words will be matched e.g.
+> * Only the task description is searched using the keywords.
+> * Only full words will be matched e.g. "grocer" will not match "groceries"
 > * Todos matching at least one keyword will be returned (i.e. `OR` search).
+> * Specifying start time, end time, and/or complete time will match todos that start, end, and/or were completed BEFORE the specified time.
+> * You may also enter "today" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of the current day.
+> * You may also enter "tomorrow" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of tomorrow.
+> * Todos that do not have specified parameters will not be included. e.g. if you specify start time, no floating todos will be included in the search results
 
 Examples:
 
 * `find Dog`<br>
 * `find dog math`<br>
-  Returns Any todo containing words `dog` or `math`
+  Returns Any todo containing words `dog` or `math`<br>
+* `find s/9:00am 11/11/17`<br>
+* `find s/9:00am 11/11/17 c/9:00am 12/11/17`<br>
+* `find s/today e/tomorrow`<br>
 
 ### 2.6. Deleting a todo : `delete`
 
