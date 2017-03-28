@@ -1,3 +1,4 @@
+//@@author A0138907W
 package seedu.ezdo.logic.commands;
 
 import seedu.ezdo.commons.core.EventsCenter;
@@ -20,9 +21,9 @@ public class SortCommand extends Command {
                                                        + "(a for ascending, d for descending)";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Sorts the task by the field specified.\n"
-        + "Parameters: FIELD [ORDER]\n"
-        + "Example: " + COMMAND_WORD + " d a";
+                                               + ": Sorts the task by the field specified.\n"
+                                               + "Parameters: FIELD [ORDER]\n"
+                                               + "Example: " + COMMAND_WORD + " d a";
 
     private SortCriteria sortCriteria;
     private Boolean isSortedAscending;
@@ -32,8 +33,12 @@ public class SortCommand extends Command {
         this.isSortedAscending = isSortedAscending;
     }
 
+    /**
+     * Executes the sort command.
+     */
     @Override
     public CommandResult execute() throws CommandException {
+        assert model != null;
         if (sortCriteria == null) {
             throw new CommandException(MESSAGE_INVALID_FIELD);
         }

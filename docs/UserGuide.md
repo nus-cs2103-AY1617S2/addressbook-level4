@@ -70,10 +70,10 @@ The results of your command executions will be shown here.<br><br>
 3. **Task Card**<br>
 Each task in ezDo is represented by a task card with the following properties:<br>
     * Each task card has an index on the left.<br>
-    * The color bar on the left indicates its priority.<br> 
+    * The color bar on the left indicates its priority.<br>
         * <font color="green">Green</font>: low priority <br>
         * <font color="orange">Orange</font>: medium priority <br>
-        * <font color="red">Red</font>: high priority 
+        * <font color="red">Red</font>: high priority
     * Task cards may have a start/end time.<br>
     * Task cards may have any number of tags associated with it.<br>
 
@@ -113,7 +113,7 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 > #### <u>Quick Tip:</u><br>
 > You can type the <u><b>first letter</b></u> of any command instead of typing in full (except **`save`**).
 > _For example, you can type **`u`** instead of **`undo`** to revert the last command._
- 
+
 <br>
 
 **Things to note:**
