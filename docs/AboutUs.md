@@ -11,9 +11,18 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: Model, Storage
 * Aspects/tools in charge of: Eclipse, Travis CI
 * Features implemented:
-    * TBA
+    * Alias Storage
+    * [Finish](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#36-marking-tasks-as-finished--finish)
+    * Unfinish
+    * [Save as](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#312-changing-the-storage-location--save_at)
+    * Sort
+    * List
+
 * Code written: [functional code]() [test code]() [docs]()
 * Other major contributions:
+    * Did initial refactoring from AddressBook [#5](https://github.com/CS2103JAN2017-W13-B4/main/pull/5)[#31](https://github.com/CS2103JAN2017-W13-B4/main/pull/31)
+    * Did UI revamp, responsible for UI [#83](https://github.com/CS2103JAN2017-W13-B4/main/pull/83)
+    * Set up Travis and Coveralls
 * Aspects responsible for:　     　　　　　
     * Ensuring tasks are done properly and on time
     * Integration: Versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole
@@ -30,6 +39,8 @@ We are a team based in the [School of Computing, National University of Singapor
     * TBA
 * Code written: [functional code]() [test code]() [docs]()
 * Other major contributions:
+    * Updating of project documents
+    * Refactoring of sample tasks
 * Aspects responsible for:
     * Quality of project documents
     * Scheduling and tracking
@@ -43,7 +54,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: Logic, UI
 * Aspects/tools in charge of: Git
 * Features implemented:
-    * TBA
+    * List
 * Code written: [functional code]() [test code]() [docs]()
 * Other major contributions:
 * Aspects responsible for:
