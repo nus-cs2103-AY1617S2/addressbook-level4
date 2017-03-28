@@ -14,8 +14,10 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.commons.util.StringUtil;
 import seedu.watodo.logic.commands.ListDeadlineCommand;
+import seedu.watodo.logic.commands.ListDoneCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
+import seedu.watodo.logic.commands.ListUndoneCommand;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
@@ -74,7 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredByTypesTaskList(ListDoneCommand.COMMAND_WORD);
         indicateTaskManagerChanged();
     }
 
@@ -174,7 +176,8 @@ public class ModelManager extends ComponentManager implements Model {
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(
                         task.getDescription().fullDescription, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent() &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
         }
 
         @Override
@@ -203,7 +206,8 @@ public class ModelManager extends ComponentManager implements Model {
             return tagKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(tags, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent() &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
         }
 
         @Override
@@ -230,10 +234,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null) {
+            if (task.getEndDate() == null &&
+                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
                 return true;
             } else {
-                return deadline.isLater(task.getEndDate());
+                return deadline.isLater(task.getEndDate()) &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
             }
         }
 
@@ -262,10 +268,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null) {
+            if (task.getEndDate() == null &&
+                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
                 return true;
             } else {
-                return deadline.isLater(task.getEndDate());
+                return deadline.isLater(task.getEndDate()) &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
             }
         }
 
@@ -286,20 +294,35 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (type) {
-            case ListFloatCommand.COMMAND_WORD:
-                if (task.getStartDate() == null && task.getEndDate() == null) {
+            case ListDoneCommand.COMMAND_WORD:
+                if (task.getStatus().toString().equalsIgnoreCase(type)) {
                     return true;
                 } else {
                     return false;
                 }
             case ListDeadlineCommand.COMMAND_WORD:
-                if (task.getStartDate() == null && task.getEndDate() != null) {
+                if (task.getStartDate() == null && task.getEndDate() != null &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
                     return true;
                 } else {
                     return false;
                 }
             case ListEventCommand.COMMAND_WORD:
-                if (task.getStartDate() != null && task.getEndDate() != null) {
+                if (task.getStartDate() != null && task.getEndDate() != null &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case ListFloatCommand.COMMAND_WORD:
+                if (task.getStartDate() == null && task.getEndDate() == null &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case ListUndoneCommand.COMMAND_WORD:
+                if (task.getStatus().toString().equalsIgnoreCase(type)) {
                     return true;
                 } else {
                     return false;

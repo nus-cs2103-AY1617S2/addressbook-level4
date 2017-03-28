@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B3/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B3/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T16-B3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T16-B3/main?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb4b6a8b7243478dbc8f6fa6b4dd1fe3)](https://www.codacy.com/app/HQching/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B3/main&amp;utm_campaign=Badge_Grade)
 
 <img src="docs/images/UiPrototype.png" width="600"><br>
 
