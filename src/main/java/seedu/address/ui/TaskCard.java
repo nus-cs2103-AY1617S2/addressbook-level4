@@ -32,27 +32,27 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         description.setText(task.getDescription().description);
         id.setText(displayedIndex + ". ");
-        
+
         if (task.getPriority().value != null) {
-        	priority.setText("Priority: " + task.getPriority().value.toUpperCase());
+            priority.setText("Priority: " + task.getPriority().value.toUpperCase());
         }
-        
+
         if (task.getByTime().value != null && task.getByDate() != null) {
-        	byTimeDate.setText("BY " + task.getByTime().value + " " + task.getByDate().value);
+            byTimeDate.setText("BY " + task.getByTime().value + " " + task.getByDate().value);
         } else if (task.getByTime().value != null && task.getByDate().value == null) {
             byTimeDate.setText("By " + task.getByTime().value);
         } else if (task.getByDate().value != null && task.getByTime().value == null) {
             byTimeDate.setText("By " + task.getByDate().value);
         } else {
-            byTimeDate.setText(" ");            
+            byTimeDate.setText(" ");
         }
 
         if (task.getLocation().value != null) {
-        	locations.setText("@" + task.getLocation().value);
+            locations.setText("@" + task.getLocation().value);
         } else {
-        	locations.setText(" ");
+            locations.setText(" ");
         }
-        
+
         initTags(task);
     }
 

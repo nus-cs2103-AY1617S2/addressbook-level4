@@ -36,9 +36,9 @@ public abstract class UiPart<T> {
             throw new AssertionError(e);
         }
     }
-    
+
     public UiPart(){
-    	
+
     }
 
     /**

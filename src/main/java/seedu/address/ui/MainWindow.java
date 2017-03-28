@@ -8,13 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.address.commons.core.CalendarLayout;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -23,8 +22,7 @@ import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.ui.CalendarPanel;
-import seedu.address.commons.core.CalendarLayout;
+
 
 //@@author A0148038A
 //@@author A0124377A
@@ -56,7 +54,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane eventListPanelPlaceholder;
-    
+
     @FXML
     private AnchorPane taskListPanelPlaceholder;
 
@@ -65,7 +63,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
-    
+
     @FXML
     private AnchorPane calendarPlaceholder;
 
@@ -129,7 +127,8 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
         eventListPanel = new EventListPanel(getEventListPlaceholder(), logic.getFilteredEventList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        calendarPanel= new CalendarPanel(getCalendarPlaceholder(), logic.getFilteredEventList(), logic.getFilteredTaskList());
+        calendarPanel = new CalendarPanel(getCalendarPlaceholder(),
+                logic.getFilteredEventList(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getWhatsLeftFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -150,14 +149,14 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getEventListPlaceholder() {
         return eventListPanelPlaceholder;
     }
-    
+
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
-    
+
     private AnchorPane getCalendarPlaceholder() {
-		return calendarPlaceholder;
-	}
+        return calendarPlaceholder;
+    }
 
     void hide() {
         primaryStage.hide();
@@ -221,7 +220,7 @@ public class MainWindow extends UiPart<Region> {
     public EventListPanel getEventListPanel() {
         return this.eventListPanel;
     }
-    
+
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
@@ -229,14 +228,14 @@ public class MainWindow extends UiPart<Region> {
     public CalendarPanel getCalendarPanel() {
         return this.calendarPanel;
     }
-    
-	public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
-		this.calendarPanel.refresh(eventList,taskList);
-	}
 
-	public void updateCalendarView(LocalDateTime displayedDateTime, CalendarLayout calendarViewMode) {
-		this.calendarPanel.updateCalendarMode(calendarViewMode);
-		this.calendarPanel.updateCalendarShownPeriod(displayedDateTime);
-	}
+    public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
+        this.calendarPanel.refresh(eventList, taskList);
+    }
+
+    public void updateCalendarView(LocalDateTime displayedDateTime, CalendarLayout calendarViewMode) {
+        this.calendarPanel.updateCalendarMode(calendarViewMode);
+        this.calendarPanel.updateCalendarShownPeriod(displayedDateTime);
+    }
 
 }
