@@ -2,19 +2,13 @@ package seedu.taskboss.logic.commands;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
-import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
-import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.ReadOnlyTask;
-import seedu.taskboss.model.task.Task;
-import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0144904H
 public class MarkDoneCommand extends Command {
@@ -41,7 +35,7 @@ public class MarkDoneCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, IllegalValueException, TaskNotFoundException {
+    public CommandResult execute() throws CommandException, IllegalValueException {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (this.filteredTaskListIndices.get(filteredTaskListIndices.size() - 1) > lastShownList.size()

@@ -80,6 +80,6 @@ public interface Model {
      * @throws CommandException */
     void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException;
 
-    void markDone(ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException;
+    void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException;
 
 }

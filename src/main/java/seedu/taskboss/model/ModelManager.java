@@ -23,7 +23,6 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList.SortBy;
 import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
-import seedu.taskboss.testutil.TaskBuilder;
 
 /**
  * Represents the in-memory model of the TaskBoss data.
@@ -367,7 +366,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException, TaskNotFoundException {
+    public void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException{
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         int index = 0;
         for (ReadOnlyTask task : tasksToMarkDone) {
