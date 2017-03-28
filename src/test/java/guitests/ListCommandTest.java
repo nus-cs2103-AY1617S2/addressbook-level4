@@ -60,14 +60,13 @@ public class ListCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void findInvalidCommandFail() {
+    public void listInvalidCommandFail() {
         commandBox.runCommand("listkkjksjkds");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     private void assertListResult(String command, String expectedMessage, TestTask... expectedHits) {
         commandBox.runCommand(command);
-        assertListSize(expectedHits.length);
         assertResultMessage(expectedMessage + " tasks listed");
         assertListSize(expectedHits.length);
         assertTrue(taskListPanel.isListMatching(expectedHits));
