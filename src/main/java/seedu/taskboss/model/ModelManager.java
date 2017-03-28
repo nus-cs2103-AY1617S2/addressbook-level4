@@ -86,7 +86,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
     }
-
+    //@@author A0138961W
     @Override
     public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
@@ -96,7 +96,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         indicateTaskBossChanged();
     }
-
+    //@@author
     @Override
     public synchronized void addTask(Task task) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
