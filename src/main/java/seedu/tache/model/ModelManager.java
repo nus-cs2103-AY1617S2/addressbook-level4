@@ -27,14 +27,14 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     //@@author A0139925U
     public static final int MARGIN_OF_ERROR = 1;
-    public static final String FIND_KEYWORD_TYPE = "\"%1$s\" results";
-    //@@author
     //@@author A0142255M
     public static final String ALL_TASK_LIST_TYPE = "All Tasks";
     public static final String COMPLETED_TASK_LIST_TYPE = "Completed Tasks";
     public static final String UNCOMPLETED_TASK_LIST_TYPE = "Uncompleted Tasks";
     public static final String TIMED_TASK_LIST_TYPE = "Timed Tasks";
     public static final String FLOATING_TASK_LIST_TYPE = "Floating Tasks";
+  //@@author A0139925U
+    public static final String FOUND_TASK_LIST_TYPE = "Found Tasks";
     //@@author A0139961U
     public static final String DUE_TODAY_TASK_LIST_TYPE = "Due Today Tasks";
     public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Due This Week Tasks";
@@ -43,6 +43,8 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139925U
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    private Set<String> latestKeywords;
     //@@author
     //@@author A0142255M
     private String filteredTaskListType = ALL_TASK_LIST_TYPE;
@@ -143,13 +145,13 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0142255M
     @Override
     public void updateFilteredListToShowTimed() {
-        updateFilteredTaskList(new PredicateExpression(new TimedQualifier(true)));
+        updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(true)));
         updateFilteredTaskListType(TIMED_TASK_LIST_TYPE);
     }
 
     @Override
     public void updateFilteredListToShowFloating() {
-        updateFilteredTaskList(new PredicateExpression(new TimedQualifier(false)));
+        updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(false)));
         updateFilteredTaskListType(FLOATING_TASK_LIST_TYPE);
     }
 
@@ -173,11 +175,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
-        updateFilteredTaskListType(String.format(FIND_KEYWORD_TYPE, StringUtil.generateStringFromKeywords(keywords)));
         ArrayList<String> keywordsList = new ArrayList<String>(keywords);
+        updateFilteredTaskListType(FOUND_TASK_LIST_TYPE);
+        retainLatestKeywords(keywords);
         raise(new TaskListTypeChangedEvent("Find \"" + keywordsList.get(0) + "\""));
     }
-    //@@author
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -194,6 +196,41 @@ public class ModelManager extends ComponentManager implements Model {
             raise(new TaskListTypeChangedEvent(newFilteredTaskListType));
         }
         filteredTaskListType = newFilteredTaskListType;
+    }
+    //@@author
+    //@@author A0139925U
+    private void retainLatestKeywords(Set<String> keywords) {
+        latestKeywords = keywords;
+    }
+
+    public void updateCurrentFilteredList() {
+        switch(filteredTaskListType) {
+        case ALL_TASK_LIST_TYPE:
+            updateFilteredListToShowAll();
+            break;
+        case COMPLETED_TASK_LIST_TYPE:
+            updateFilteredListToShowCompleted();
+            break;
+        case UNCOMPLETED_TASK_LIST_TYPE:
+            updateFilteredListToShowUncompleted();
+            break;
+        case TIMED_TASK_LIST_TYPE:
+            updateFilteredListToShowTimed();
+            break;
+        case FLOATING_TASK_LIST_TYPE:
+            updateFilteredListToShowFloating();
+            break;
+        case FOUND_TASK_LIST_TYPE:
+            updateFilteredTaskList(latestKeywords);
+            break;
+        case DUE_TODAY_TASK_LIST_TYPE:
+            updateFilteredListToShowDueToday();
+            break;
+        case DUE_THIS_WEEK_TASK_LIST_TYPE:
+            updateFilteredListToShowDueThisWeek();
+            break;
+        default:
+        }
     }
     //@@author
 
@@ -302,9 +339,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "active=true";
+            return "active=" + isActive;
         }
     }
+    //@@author
 
     //@@author A0139961U
     private class DueTodayQualifier implements Qualifier {
@@ -355,6 +393,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0139925U
     private class DateTimeQualifier implements Qualifier {
         private Set<String> dateTimeKeyWords;
 
@@ -394,21 +433,44 @@ public class ModelManager extends ComponentManager implements Model {
         private Set<String> multiKeyWords;
         private NameQualifier nameQualifier;
         private DateTimeQualifier dateTimeQualifier;
+        private ActiveQualifier activeQualifier;
 
         MultiQualifier(Set<String> multiKeyWords) {
             this.multiKeyWords = multiKeyWords;
             nameQualifier = new NameQualifier(multiKeyWords);
             dateTimeQualifier = new DateTimeQualifier(multiKeyWords);
+            activeQualifier = new ActiveQualifier(true);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameQualifier.run(task) || dateTimeQualifier.run(task);
+            return (nameQualifier.run(task) || dateTimeQualifier.run(task)) && activeQualifier.run(task);
         }
 
         @Override
         public String toString() {
             return "multi=" + String.join(", ", multiKeyWords);
+        }
+
+    }
+
+    private class ActiveTimedQualifier implements Qualifier {
+        private TimedQualifier timedQualifier;
+        private ActiveQualifier activeQualifier;
+
+        ActiveTimedQualifier(boolean isTimed) {
+            timedQualifier = new TimedQualifier(isTimed);
+            activeQualifier = new ActiveQualifier(true);
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return timedQualifier.run(task) && activeQualifier.run(task);
+        }
+
+        @Override
+        public String toString() {
+            return "activetimed";
         }
 
     }
@@ -438,5 +500,5 @@ public class ModelManager extends ComponentManager implements Model {
     private int minimum(int a, int b, int c) {
         return Math.min(Math.min(a, b), c);
     }
-
+    //@@author
 }
