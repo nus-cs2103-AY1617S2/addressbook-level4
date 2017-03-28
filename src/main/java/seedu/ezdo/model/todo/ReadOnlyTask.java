@@ -31,7 +31,7 @@ public interface ReadOnlyTask {
                 && other.getStartDate().equals(this.getStartDate()))
                 && other.getDueDate().equals(this.getDueDate());
     }
-
+  //@@author A0139248X
     /**
      * Formats the task as text, showing all contact details.
      */

@@ -187,13 +187,13 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
-
+  //@@author A0139248X
     @Subscribe
     public void handleSortCriteriaChangedEvent(SortCriteriaChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.userPrefs.updateLastUsedSortCriteria(event.getNewSortCriteria());
     }
-
+  //@@author
     @Subscribe
     public void handleIsSortedAscendingChangedEvent(IsSortedAscendingChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

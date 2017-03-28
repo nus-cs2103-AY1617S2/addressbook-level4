@@ -132,7 +132,7 @@ public class VersionTest {
         another = new  Version(100, 191, 275, true);
         assertTrue(one.equals(another));
     }
-
+  //@@author A0139248X
     @Test
     public void equalsMethod_null() {
         Version one = new Version(0, 0, 0, false);

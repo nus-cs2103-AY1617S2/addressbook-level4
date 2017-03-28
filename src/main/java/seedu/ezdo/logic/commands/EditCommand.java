@@ -52,7 +52,7 @@ public class EditCommand extends Command {
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
-
+  //@@author A0139248X-reused
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
-
+  //@@author
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
