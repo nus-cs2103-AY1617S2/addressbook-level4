@@ -57,7 +57,12 @@ public class TaskManager implements ReadOnlyTaskManager {
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
-
+    //@@author A0139161J
+    public void setCompletedTasks(List<? extends ReadOnlyTask> completedTasks)
+             throws UniqueTaskList.DuplicateTaskException {
+        this.completedTasks.setTasks(completedTasks);
+    }
+    //@@author
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
@@ -69,6 +74,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "Task Manager should not have duplicate tasks";
         }
+        //@@author A0139161J
+        try {
+            setCompletedTasks(newData.getCompletedTaskList());
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+            assert false : "Task Manager should not have duplicate tasks";
+        }
+        //@@author
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
@@ -107,7 +119,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     /**
      * Transfer a task from completed list to main list
-     * when user feels that he hasn't really completed the task
+     * when user feels that he hasn't completed the task
      *
      * @param t
      * @throws TaskNotFoundException
@@ -222,6 +234,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getCompletedTaskList() {
         return new UnmodifiableObservableList<>(completedTasks.asObservableList());
     }
+
     @Override
     public ObservableList<Tag> getTagList() {
         return new UnmodifiableObservableList<>(tags.asObservableList());

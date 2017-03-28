@@ -1,3 +1,4 @@
+//@@author A0139161J
 package seedu.task.logic;
 
 import java.util.NoSuchElementException;
@@ -7,7 +8,6 @@ import seedu.task.model.TaskManager;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 
-//@@author A0139161J
 public class GlobalStack {
 
     private static GlobalStack instance = null;

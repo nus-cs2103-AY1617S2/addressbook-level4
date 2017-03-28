@@ -22,5 +22,7 @@ public interface Logic {
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    //@@author A0139161J
+    /** Returns the filtered list of completed tasks */
     ObservableList<ReadOnlyTask> getCompletedTaskList();
 }

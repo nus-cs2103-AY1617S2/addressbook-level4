@@ -21,6 +21,11 @@ public interface ReadOnlyTaskManager {
      */
     ObservableList<Tag> getTagList();
 
+    //@@author A0139161J
+    /**
+     * Returns an unmodifiable view of the completed tasks list
+     * This list will not contain any duplicate tasks.
+     */
     ObservableList<ReadOnlyTask> getCompletedTaskList();
 
 }

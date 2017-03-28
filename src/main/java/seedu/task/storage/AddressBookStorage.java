@@ -34,11 +34,10 @@ public interface AddressBookStorage {
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException;
+    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
      * @see #saveAddressBook(ReadOnlyTaskManager)
      */
-    void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException;
-
+    void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException;
 }
