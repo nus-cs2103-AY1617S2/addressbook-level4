@@ -1,38 +1,42 @@
-# AddressBook Level 4 - User Guide
+[comment]: # (@@author A0162011A)
+# ToLuist - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Introduction](#1-introduction)
+2. [Quick Start](#2-quick-start)
+3. [Features](#3-features)
+4. [Command Summary](#4-command-summary)
 
-## 1. Quick Start
+## 1. Introduction
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+Have you ever felt overloaded with work? Don't know where to start?<br>
+Now you can use ToLuist, the answer to all of your problems!<br>
+ToLuist is an application which will help you to manage all your tasks, allowing you to sort out your life.<br>
+ToLuist is designed with you in mind, ensuring that you are able to focus on what is important to you.
 
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
+## 2. Quick Start
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+1. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+    <img src="images/Ui.png" width="600"><br>
+    **Figure 1.** Initial launch screen of ToLuist
+
+2. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+3. Try out some example commands:
+   * **`add`**` Try Out Todo List` :
+     adds a task named `Try Out Todo List` to the todo list.
+   * **`delete`**` 1` : deletes the 1st task shown in the current list.
+   * **`exit`** : exits the app.
+4. Refer to the [Features](#features) section below for details of each command.<br>
 
+## 3. Features
 
-## 2. Features
+ToLuist is focused towards users who like to type.<br>
+All the features of the application can be accessed through the use of a keyboard, by entering commands into the on-screen text field.<br>
 
 > **Command Format**
 >
@@ -40,147 +44,380 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
+> * Options with '/' allow either word to be used.
 
-### 2.1. Viewing help : `help`
+### 3.1. Switch Display Task Window : `switch`
 
+For when you want to view different sets of tasks.<br>
+Changes the displayed task list.<br>
+Format: `switch WINDOWIDENTIFIER`
+
+> * If a number is given for window identifier, that will be the number of the tab from the left which is selected.
+> * If a letter is given, it will be the underlined letter in the window list name.
+> * If a word is given, it will be the word with the underlined letter in the window list name.
+> * You can also use key combination <kbd>Ctrl</kbd> with an underlined letter to switch between different window.
+
+Example:
+* `switch 2` <br>
+  Switches the displayed view to 'Today'.
+* `switch T` <br>
+  Switches the displayed view to 'Today'.
+* Press <kbd>Ctrl</kbd> + <kbd>A</kbd> <br>
+  Switches the displayed view to 'All'.
+
+### 3.2. Viewing help : `help`
+
+For when you need assistance for inputting commands.<br>
+Shows commands which are in the system.<br>
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> * Help is also shown if you enter an incorrect command.
 
-### 2.2. Adding a person: `add`
+[comment]: # (@@author A0127545A)
+### 3.3. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+For when you have a task you need to remember.<br>
+Adds a task to the todo list<br>
+Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
 
-> Persons can have any number of tags (including 0)
+> * Both 'startdate' and 'enddate' use the same datetime format.
+> * 'startdate' requires a valid 'enddate' to be used in the same command.
+> * The values entered for 'startdate' and 'enddate' are very flexible:<br>
+    Standard dates are parsed, with the month being before the day. i.e. `MM/DD/YY`, `MM/DD/YYYY`, `YYYY/MM/DD`, `YYYY/MM/DD`<br>
+    Relaxed dates are parsed as logically as possible. i.e. `Jan 21, '97`, `Sun, Nov 21`, `The 31st of April in the year 2017`<br>
+    Relative dates are also allowed. i.e. `Yesterday`, `Today`, `Next Sunday`, `3 Days from now`<br>
+    Standard times are parsed in as well. i.e. `0600h`, `8pm`, `noon`, `4:30 p.m.`<br>
+    Similar to dates, relative times are also allowed. i.e. `5 minutes from now`, `in 10 minutes`, `5 hours ago`<br>
+    For more details, please visit http://natty.joestelmach.com/doc.jsp.
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add Do Homework` <br>
+  Adds a task called 'Do Homework'.
+* `add Meeting With Boss startdate/11-11-2011 17:30 enddate/11-11-2011 19:30` <br>
+  Adds a task called 'Meeting With Boss', with start date 11-11-2011 17:30, and end date to be 11-11-2011 19:30.
+* `add Check Email enddate/today` <br>
+  Adds a task called 'Check Email', and sets the deadline to be today's date.
 
-### 2.3. Listing all persons : `list`
+[comment]: # (@@author A0162011A)
+### 3.4. Viewing tasks
 
-Shows a list of all persons in the address book.<br>
+For when you need to see your tasks.<br>
+View all tasks in the todo list<br>
 Format: `list`
+> * A list of tasks will always be displayed.
+> * When starting the program, the list will show all tasks which are currently not completed.
+> * When performing `filter` operations, this list will be updated to show only the results searched for.
 
-### 2.4. Editing a person : `edit`
+[comment]: # (@@author A0127545A)
+### 3.5. Updating a task : `update`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+For when you need to update or fix a previously entered task.<br>
+Updates an existing task in the todo list.<br>
+Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * Updates the task at the specified `INDEX`. <br>
+    The index refers to the index number shown in the last task listing.
+> * Only fields entered will be updated.
+> * When editing tags, the existing tags of the task will be set to contain the new tags; the old tags will be removed.
+
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `update 2 Assignment 3`<br>
+  Updates the name of the 2nd task to be `Assignment 3`.
+* `update 3 startdate/today enddate/tomorrow` <br>
+  Updates the start date and end date of the 3rd task to today and tomorrow respectively.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+[comment]: # (@@author A0162011A)
+### 3.6. Filter all tasks for a given keyword: `filter`
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+Finds tasks whose names contain any of the given keywords.<br>
+Format: `filter/list/find [KEYWORDS] [tag/] [name/]`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `hans` will not match `Hans`
+> * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
+> * By default the name and tag is searched.
+> * Adding 'tag/' will search by only tag.
+> * Adding 'name/' will search by only name.
+> * If no keyword is entered, the list of all tasks is displayed.
+> * Partial words will be matched. e.g. `Han` will match `Hans`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find Assignment`<br>
+  Lists any task with `Assignment` in their names or tags.
+* `find Assignment Project Tutorial`<br>
+  Returns any task having `Assignment`, `Project`, or `Tutorial` in their names or tags.
+* `find school tag/` <br>
+  Returns any task with the word 'school' in the tag name.
 
-### 2.6. Deleting a person : `delete`
+[comment]: # (@@author A0127545A)
+### 3.7. Deleting a task : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+For when your task is no longer necessary.<br>
+Deletes the specified task from the todo list.<br>
+Format: `delete INDEX(ES)`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
-
-### 2.7. Select a person : `select`
-
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
-
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Deletes the task at the specified `INDEX`. <br>
+> * The index(es) refers to the index number shown in the most recent listing.<br>
+> * Supports deletion of multiple indexes in a single command.
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `delete 2`<br>
+  Deletes the 2nd task in the todo list.
+* `delete 3 - 6`<br>
+  Deletes the 3rd, 4th, 5th, and 6th task in the todo list.<br>
+* `delete 3 -`<br>
+  Deletes from 3rd to last in the todo list.
+* `delete - 5`<br>
+  Deletes from first to 5th task in the todo list.
+* `delete 5, - 3, 7-8 10, 12 -`<br>
+  Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
-### 2.8. Clearing all entries : `clear`
+[comment]: # (@@author A0131125Y)
+### 3.8. Complete or Make Incomplete a Task : `mark`
 
-Clears all entries from the address book.<br>
+For when you need to indicate that a task is finished or not.<br>
+Marks a task to be complete or incomplete. <br>
+Format: `mark [complete/incomplete] INDEX(ES)`
+
+> * Using complete as a parameter will mark the selected task(s) as complete.
+> * Using incomplete as a parameter will mark the selected task(s) as incomplete.
+> * Using neither will default the command to mark as complete.
+> * Supports marking of multiple indexes in a single command.
+
+Example:
+* `mark complete 1` <br>
+  Marks task 1 as complete.
+* `mark incomplete 2` <br>
+  Marks task 2 as incomplete.
+* `mark 3` <br>
+  Marks task 3 as complete.
+* `mark 3 -`<br>
+  Marks tasks from 3rd to last in the todo list as complete.
+* `mark incomplete - 5`<br>
+  Marks tasks from first to 5th task in the todo list as incomplete.
+* `mark 5, - 3, 7-8 10, 12 -`<br>
+  Marks tasks from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list as complete.
+
+[comment]: # (@@author A0162011A)
+### 3.9. Add a Tag to a Task : `tag`
+
+For when you want to differentiate your tasks by categories.<br>
+Adds a tag or multiple tags to an existing task. <br>
+Format: `tag INDEX TAG...`
+
+> * If the tag already exists, the command will notify you and do nothing.
+> * If multiple tags are used in the command, you will be notified of each one.
+
+Example:
+* `tag 1 school` <br>
+  Adds the tag 'school' to task 1.
+* `tag 2 work home` <br>
+  Adds the tags 'work' and 'home' to task 2.
+
+### 3.10. Remove a Tag from a Task : `untag`
+
+For when you want to remove a category from a task.<br>
+Removes a tag or multiple tags from an existing task. <br>
+Format: `untag INDEX TAG...`
+
+> * If the tag already does not exist, the command will notify you and do nothing.
+> * If multiple tags are used in the command, you will be notified of each one.
+
+Example:
+* `untag 1 school` <br>
+  Removes the tag 'school' from task 1.
+* `untag 2 work home` <br>
+  Removes the tags 'work' and 'home' from task 2.
+
+### 3.11. Clearing all entries : `clear`
+
+For when you want to start from a clean slate.<br>
+Clears all entries from the todo list.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+[comment]: # (@@author A0131125Y)
+### 3.12. Undo a command : `undo`
 
-Exits the program.<br>
-Format: `exit`
+For when you accidentally entered a wrong command.<br>
+Undoes previous commands by the user.<br>
+Format: `undo [NUMBER]`
 
-### 2.10. Saving the data
+> `Undo` allows reverting of modifications to the tasks in the todo list. This means that commands like 
+`add`, `update`, `delete`, `clear`, `tag`, `untag` and `mark` which modifies the tasks can be reversed with
+> `undo`. If loading a different data file with `load` cause the current tasks to be changed, you can go back
+> to the previous task using `undo` too (Using `undo`, however, won't revert the change of data storage 
+path. It's not considered modifications to the task).
+> Changes that are not modifications to the tasks in the todo list cannot be reversed with `undo`. However, 
+> you can still easily revert their effects:
+>   * Change of storage path location (due to `save` / `load` ) - You can change your storage path to the 
+previous location with `save`.
+>   * Setting of aliases (due to `alias`) - You can remove the alias with `unalias`.
+>   * Removal of aliases (due to `unalias`) - You can set back the alias with `alias`.
+>
+> Note that commands that commands that do not modifies the content of the todo list cannot be undone with 
+> `undo`. E.g
+> If a number is entered, undoes that amount of previous commands instead.
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Examples:
+
+* `add Test`<br>
+  `undo`<br>
+  Undo adding Test to the todo list.
+* `add Assignment` <br>
+  `add Project` <br>
+  `undo 2`<br>
+  Undo both commands.
+
+### 3.13. Redo a command : `redo`
+
+For when you accidentally undo a correct command.<br>
+Redo previously undone commands by the user.<br>
+Format: `redo [NUMBER]`
+
+> Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that 
+> you mistakenly revoked (using `undo`).<br>
+> If a number is entered, redo that amount of previous commands instead.<br>
+> The number must be less than or equal to the number of commands undone.
+
+Examples:
+
+* `add Test`<br>
+  `undo`<br>
+  `redo` <br>
+  Redo adding Test to the todo list.
+* `add Assignment` <br>
+  `add Project`<br>
+  `undo 2`<br>
+  `redo`<br>
+  Redo `add Assignment`.
+
+[comment]: # (@@author A0162011A)
+### 3.14. Viewing previous commands and accessing them : `history`
+
+For when you want to check what you have previously entered.<br>
+Shows previous commands entered. <br>
+Format: `history`
+
+> * Previous commands are listed in order from latest command to earlier command.
+> * Alternatively, pressing on the <kbd>up</kbd> and <kbd>down</kbd> arrow keys on the keyboard will cycle through the commands previously entered.
+
+Examples:
+* `add Test` <br>
+  `history` <br>
+  Shows `add Test` in the list.
+* `add Test` <br>
+  You press on the <kbd>up</kbd> arrow key. <br>
+  Shows `add Test` in your input text field.
+
+### 3.15. Add alias for any phrase: `alias`
+
+For when you want a shortcut for entering a command.<br>
+Adds an alias for a phrase. <br>
+Format: `alias ALIAS PHRASE`
+
+> * Once added, alias can be used instead of the phrase to perform operations.
+> * The phrase can be multiple words long.
+
+Example:
+* `alias hs history` <br>
+  `hs` <br>
+  Shows `alias hs history` in the list.
+* `alias addTaskNamedTest add Test` <br>
+  `addTaskNamedTest` <br>
+  Performs the command `add Test` which will add a new task called 'Test'.
+
+### 3.16. Delete alias for commands: `unalias`
+
+For when you want to remove a shortcut for entering a command.<br>
+Removes an alias for a command. <br>
+Format: `unalias ALIAS`
+
+Example:
+* `alias hs history` <br>
+  `unalias hs` <br>
+  Removes the alias 'hs'.
+
+### 3.17. View aliases for commands: `viewalias`
+
+For when you want to see all your shortcuts you entered.<br>
+Views aliases in the system. <br>
+Format: `viewalias`
+
+> * Lists aliases in the format `ALIAS:PHRASE`.
+
+Example:
+* `alias hs history` <br>
+  `viewalias` <br>
+  Shows `hs:history` in the list.
+
+### 3.18. Saving the data
+
+For you to be able to keep your list, even if you close and re-open the application.<br>
+Todo list data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-## 3. FAQ
+### 3.19. Change storage location for save data: `save`
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+For when you want to switch the save location of the application, such as if you are moving it to a Dropbox folder.<br>
+Changes the location for the storage file used in this system. <br>
+Warning: If a file with the requested name already exists, it will be overwritten. <br>
+Format: `save NEWFILELOCATION`
+
+> * All data will be moved to the new file location.
+> * If the file does not exist, the file will be created.
+> * The old file will be removed.
+
+Example:
+* `save data/savefile.txt` <br>
+  Sets the save storage location to `data/savefile.txt`.
+
+### 3.20. Change storage location for load data: `load`
+
+For when you want to switch the load location of the application, such as when you want to load the data from a file in Dropbox.<br>
+Changes the location for the storage file used in this system. <br>
+Format: `load NEWFILELOCATION`
+
+> * The new save location will be updated to the location.
+> * The program will replace the data in the program with data from the new file location.
+> * If the file does not exist, an error message will be displayed.
+> * Warning: The old data in the program will stay in the old save file, and will not be updated with new values.
+
+Example:
+* `load data/savefile.txt` <br>
+  Sets the load storage location to `data/savefile.txt`.
+
+### 3.21. Exiting the program : `exit`
+
+For when you are done with the application.<br>
+Exits the program.<br>
+Format: `exit/quit`
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
-
-* **List** : `list` <br>
-  e.g.
-
-* **Help** : `help` <br>
-  e.g.
-
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-
+**Command** | **Format** | **Examples**
+-------- | :-------- | :---------
+Add | `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `add Assigment 1 enddate/Friday tag/school`
+Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
+Add Alias | `alias ALIAS PHRASE` | `alias hs history`
+Change Load Storage Location | `load FILELOCATION` | `load data/savefile.txt`
+Change Save Storage Location | `save FILELOCATION` | `save data/savefile.txt`
+Clear | `clear`
+Delete | `delete INDEX(ES)` | `delete 3`
+Delete Alias | `unalias ALIAS` | `unalias hs`
+Exit | `exit/quit`
+Filter | `filter/list/find [KEYWORDS] [tag/] [name/]` | `find school tag/`
+Help | `help`
+History | `history`
+Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
+Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
+Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
+Update | `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `update 1 enddate/11/12/2011`
+Remove a Tag from a Task | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
+Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
+View Aliases | `viewalias`

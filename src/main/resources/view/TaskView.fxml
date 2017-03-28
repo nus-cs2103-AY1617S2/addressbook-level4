@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0127545A -->
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="taskPane" styleClass="task" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <HBox fx:id="statusBox" alignment="CENTER" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+         <stylesheets>
+            <URL value="@../stylesheet/DefaultTheme.css" />
+         </stylesheets>
+         <children>
+            <FlowPane fx:id="primaryTaskPane" alignment="CENTER_LEFT">
+               <children>
+                  <Label fx:id="id" styleClass="bold-text" text="Label">
+                     <FlowPane.margin>
+                        <Insets />
+                     </FlowPane.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="name" styleClass="status-text" text="Label" wrapText="true">
+                     <FlowPane.margin>
+                        <Insets left="5.0" />
+                     </FlowPane.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <FlowPane fx:id="tagsPane" alignment="CENTER_LEFT" columnHalignment="CENTER" hgap="5.0" vgap="5.0">
+                     <FlowPane.margin>
+                        <Insets left="5.0" />
+                     </FlowPane.margin>
+                  </FlowPane>
+               </children>
+            </FlowPane>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <ImageView fx:id="clockIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="date">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="status-text" />
+                        <String fx:value="meta-text" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <ImageView fx:id="recurringIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="recurringDate">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="status-text" />
+                        <String fx:value="meta-text" />
+                     </styleClass>
+                  </Label>
+                </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

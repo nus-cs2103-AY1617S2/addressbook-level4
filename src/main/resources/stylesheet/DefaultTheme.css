@@ -1,0 +1,172 @@
+/* @@author A0131125Y */
+@import "Colors.css";
+@import "Fonts.css";
+
+/* DEFAULT STYLING */
+
+.root {
+    -fx-background-color: theme-background;
+    -fx-control-inner-background: theme-background;
+    -fx-font-family: "Roboto Medium";
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: theme-primary-text;
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-padding: 0.5em 0.5em 0.5em 0.1em;
+    -fx-border-color: theme-primary;
+    -fx-border-width: 0 0 2 0;
+    -fx-prompt-text-fill: theme-secondary-text;
+    -fx-highlight-fill: theme-primary-text;
+    -fx-font-family: "Roboto Bold";
+}
+
+.text-field:focused {
+    -fx-border-color: theme-primary-dark;
+}
+
+.text-field.error {
+    -fx-border-color: theme-danger;
+}
+
+.text-area {
+    -fx-background-radius: 0;
+}
+
+.text-area .content {
+    -fx-background-radius: 0;
+    -fx-padding: 10;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-text-fill: theme-primary-text;
+}
+
+/* COMMON CLASSES */
+
+.dark {
+    -fx-background-color: theme-primary-text;
+    -fx-control-inner-background: theme-primary-text;
+    -fx-highlight-fill: theme-text;
+    -fx-text-fill: theme-text;
+}
+
+.meta-text {
+    -fx-text-fill: derive(theme-primary-text, 35%);
+    -fx-font-style: italic;
+}
+
+.bold-text {
+    -fx-font-family: "Roboto Bold";
+}
+
+/* TAB PANE */
+
+.tabs {
+    -fx-background-color: theme-primary-dark;
+    -fx-padding: 0 10 0 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.tabs .tab .label {
+    -fx-text-fill: theme-primary-light;
+}
+
+.tabs .tab .label.initial {
+    -fx-border-color: theme-primary-light;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-insets: -1;
+}
+
+.tabs .tab.selected {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: theme-accent;
+}
+
+.tabs .tab.selected .label {
+    -fx-text-fill: theme-text;
+}
+
+.tabs .tab.selected .label.initial {
+    -fx-border-color: theme-text;
+}
+
+/* TASK */
+
+.tasks .task {
+    -fx-border-color: theme-secondary-text;
+    -fx-border-width: 0 0 1 0;
+}
+
+.tasks .task.completed .status-text .text {
+    -fx-strikethrough: true;
+}
+
+.tasks .task.overdue .status-text.label {
+    -fx-text-fill: theme-danger;
+}
+
+.tasks .task.new .status-text.label {
+    -fx-text-fill: theme-primary;
+}
+
+/* TAG */
+
+.tag {
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 5;
+    -fx-font-size: 11;
+}
+
+.tag.event-tag {
+    -fx-font-size: 12;
+    -fx-background-color: theme-primary-dark;
+}
+
+.tag.task-tag {
+    -fx-font-size: 12;
+    -fx-background-color: derive(theme-accent, -10%);
+}
+
+/* COMMAND SUGGESTION */
+
+.command-suggestions {
+    -fx-background-color: theme-background;
+    -fx-background-radius: 5;
+}
+
+.command-suggestions .command-suggestion.selected {
+    -fx-text-fill: theme-primary-dark;
+}
+
+/* COMMAND INPUT */

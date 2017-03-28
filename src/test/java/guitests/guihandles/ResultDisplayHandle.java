@@ -3,10 +3,10 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import seedu.toluist.TestApp;
 
 /**
- * A handler for the ResultDisplay of the UI
+ * A handler for the ResultView of the UI
  */
 public class ResultDisplayHandle extends GuiHandle {
 

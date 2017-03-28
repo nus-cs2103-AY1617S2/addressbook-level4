@@ -10,13 +10,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import seedu.toluist.TestApp;
+import seedu.toluist.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
  */
 public class GuiHandle {
+    private static final Logger logger = LogsCenter.getLogger(GuiHandle.class);
+    private static final int RESPONSE_SLEEP_TIME = 500;
+
     protected final GuiRobot guiRobot;
     protected final Stage primaryStage;
     /**
@@ -24,8 +27,6 @@ public class GuiHandle {
      */
     protected Optional<Stage> intermediateStage = Optional.empty();
     protected final String stageTitle;
-
-    private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     public GuiHandle(GuiRobot guiRobot, Stage primaryStage, String stageTitle) {
         this.guiRobot = guiRobot;
@@ -63,11 +64,19 @@ public class GuiHandle {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
         textField.setText(newText);
-        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
+        guiRobot.sleep(RESPONSE_SLEEP_TIME); // so that the texts stays visible on the GUI for a short period
+    }
+
+    public void press(KeyCode... keyCodes) {
+        guiRobot.push(keyCodes).sleep(RESPONSE_SLEEP_TIME);
     }
 
     public void pressEnter() {
-        guiRobot.type(KeyCode.ENTER).sleep(500);
+        guiRobot.type(KeyCode.ENTER).sleep(RESPONSE_SLEEP_TIME);
+    }
+
+    public void focusOnView(String viewId) {
+        guiRobot.clickOn(viewId);
     }
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {

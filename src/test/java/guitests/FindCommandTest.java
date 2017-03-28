@@ -1,40 +1,91 @@
+//@@author A0131125Y
 package guitests;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestPerson;
+import seedu.toluist.model.Task;
+import seedu.toluist.testutil.TypicalTestTodoLists;
 
-public class FindCommandTest extends AddressBookGuiTest {
+/**
+ * Gui tests for find command
+ */
+public class FindCommandTest extends ToLuistGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+    public void findByName() {
+        Task[] sampleTasks = (new TypicalTestTodoLists()).getTypicalTasks();
 
-        //find after deleting one result
-        commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        // Find without argument
+        String commandNoArguments = "find";
+        testFindCommand(commandNoArguments, sampleTasks, new Task[0]);
+
+        // Find with only spaces
+        String commandOnlySpaces = "find  ";
+        testFindCommand(commandOnlySpaces, sampleTasks, new Task[0]);
+
+        // Find by complete word
+        String commandCompleteWord = "find clean  ";
+        testFindCommand(commandCompleteWord, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
+
+        // Find by partial word
+        String commandPartialWord = "find  clea";
+        testFindCommand(commandPartialWord, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
+
+        // Find with explicit parameter
+        String commandExplicitByName = "find  clean name/";
+        testFindCommand(commandExplicitByName, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
+
+        // Check that find is case-insensitive
+        String commandCaseInsensitive = "find CLEAn";
+        testFindCommand(commandCaseInsensitive, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
+
+        // Find with multiple words
+        String commandMultipleWords = "find clean assign";
+        testFindCommand(commandMultipleWords, sampleTasks, new Task[0]);
     }
 
     @Test
-    public void find_emptyList() {
-        commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+    public void findByTag() {
+        Task[] sampleTasks = (new TypicalTestTodoLists()).getTypicalTasks();
+
+        // Find with only spaces
+        String commandOnlySpaces = "find  tag/";
+        testFindCommand(commandOnlySpaces, sampleTasks, new Task[0]);
+
+        // Find by complete word
+        String commandCompleteWord = "find lewis  tag/";
+        testFindCommand(commandCompleteWord, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
+
+        // Find by partial word
+        String commandPartialWord = "find  lew tag/";
+        testFindCommand(commandPartialWord, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
+
+
+        // Check that find is case-insensitive
+        String commandCaseInsensitive = "find WORK tag/";
+        testFindCommand(commandCaseInsensitive, sampleTasks, new Task[0]);
+
+        // Find with multiple words
+        String commandMultipleWords = "find lewis  louis tag/";
+        testFindCommand(commandMultipleWords, sampleTasks, new Task[0]);
     }
 
-    @Test
-    public void find_invalidCommand_fail() {
-        commandBox.runCommand("findgeorge");
-        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
-    }
-
-    private void assertFindResult(String command, TestPerson... expectedHits) {
+    /**
+     * Helper method to run find command and check the result
+     * @param command find command
+     * @param tasksToBeShown all these tasks must be shown
+     * @param tasksNotToBeShown all these tasks must be hidden
+     */
+    private void testFindCommand(String command, Task[] tasksToBeShown, Task[] tasksNotToBeShown) {
         commandBox.runCommand(command);
-        assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
+
+        assertTrue(areTasksShown(tasksToBeShown));
+
+        for (Task task : tasksNotToBeShown) {
+            assertFalse(isTaskShown(task));
+        }
     }
 }

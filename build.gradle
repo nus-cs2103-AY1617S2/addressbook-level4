@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.toluist.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -63,6 +63,8 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile "com.joestelmach:natty:0.6"
+        compile group: 'org.atteo', name: 'evo-inflector', version: '1.2.2'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
@@ -71,6 +73,7 @@ allprojects {
             exclude group: "junit", module: "junit"
         }
         testCompile "org.testfx:openjfx-monocle:$monocleVersion"
+        testCompile "org.mockito:mockito-core:2.+"
     }
 
     sourceSets {
@@ -85,7 +88,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "toluist.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -120,8 +123,8 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class AddressBookTest extends Test {
-    public AddressBookTest() {
+class ToLuistTest extends Test {
+    public ToLuistTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
@@ -146,7 +149,7 @@ class AddressBookTest extends Test {
     }
 }
 
-task guiTests(type: AddressBookTest) {
+task guiTests(type: ToLuistTest) {
     include 'guitests/**'
 
     jacoco {
@@ -155,8 +158,8 @@ task guiTests(type: AddressBookTest) {
 }
 
 
-task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+task nonGuiTests(type: ToLuistTest) {
+    include 'seedu/toluist/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
@@ -164,7 +167,7 @@ task nonGuiTests(type: AddressBookTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: AddressBookTest) {
+task allTests(type: ToLuistTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }
@@ -177,9 +180,21 @@ task headless << {
     allTests.setHeadless()
 }
 
+task checkBuild << {
+    println "Checking build."
+}
+
+checkBuild.dependsOn clean
+checkBuild.dependsOn headless
+checkBuild.dependsOn check
+checkBuild.dependsOn allTests
+
 // Makes sure that headless properties are set before running tests
 nonGuiTests.mustRunAfter headless
 guiTests.mustRunAfter headless
 allTests.mustRunAfter headless
 
-defaultTasks 'clean', 'headless', 'allTests', 'coverage'
+headless.mustRunAfter clean
+check.mustRunAfter clean
+
+defaultTasks 'clean', 'checkStyleMain', 'checkStyleTest', 'headless', 'allTests', 'coverage'
