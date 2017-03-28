@@ -51,7 +51,8 @@ public class AddCommandParser extends Parser {
                         isRecurring = true;
                         return new AddCommand(title, startDT, endDT,
                                 ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_LABEL)), isRecurring,
-                                    Optional.ofNullable(new Recurrence(argsTokenizer.getValue(PREFIX_RECURRENCE).get())));
+                                    Optional.ofNullable(new Recurrence(argsTokenizer
+                                            .getValue(PREFIX_RECURRENCE).get())));
                     }
                 }
             }

@@ -108,7 +108,7 @@ public class MarkCommand extends Command {
 
 
     private static Task createRecurringTask(ReadOnlyTask task) throws IllegalValueException,
-                            IllegalDateTimeValueException{
+                            IllegalDateTimeValueException {
         Optional<Deadline> updatedStartTime;
         Optional<Deadline> updatedDeadline;
         if (task.getStartTime().isPresent()) {

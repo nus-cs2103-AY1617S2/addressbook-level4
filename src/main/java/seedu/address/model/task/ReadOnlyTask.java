@@ -89,7 +89,8 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     }
 
     //@@author A0105287E
-    default int compareCompletionStatus(ReadOnlyTask other) throws IllegalValueException, IllegalDateTimeValueException {
+    default int compareCompletionStatus(ReadOnlyTask other) throws IllegalValueException,
+                        IllegalDateTimeValueException {
         if (this.isCompleted() && !other.isCompleted()) {
             return 1;
         } else if (!this.isCompleted() && other.isCompleted()) {

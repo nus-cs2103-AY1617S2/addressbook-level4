@@ -26,26 +26,26 @@ public class RecurrenceManager implements RecurrenceParser {
     public int getInterval(String input) {
         int interval;
         switch (input) {
-            case "year": case "years":
-                interval = Calendar.YEAR;
-                break;
-            case "month": case "months":
-                interval = Calendar.MONTH;
-                break;
-            case "day": case "days":
-                interval = Calendar.DATE;
-                break;
-            case "hour": case "hours":
-                interval = Calendar.HOUR;
-                break;
-            case "minutes": case "minute":
-                interval = Calendar.MINUTE;
-                break;
-            case "seconds": case "second":
-                interval = Calendar.SECOND;
-                break;
-            default:
-                throw new IllegalArgumentException(MESSAGE_INVALID_INTERVAL);
+        case "year": case "years":
+            interval = Calendar.YEAR;
+            break;
+        case "month": case "months":
+            interval = Calendar.MONTH;
+            break;
+        case "day": case "days":
+            interval = Calendar.DATE;
+            break;
+        case "hour": case "hours":
+            interval = Calendar.HOUR;
+            break;
+        case "minutes": case "minute":
+            interval = Calendar.MINUTE;
+            break;
+        case "seconds": case "second":
+            interval = Calendar.SECOND;
+            break;
+        default:
+            throw new IllegalArgumentException(MESSAGE_INVALID_INTERVAL);
         }
         return interval;
     }

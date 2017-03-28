@@ -95,7 +95,8 @@ public class AddCommand extends Command {
      * @throws IllegalDateTimeValueException if deadline values are invalid
      */
     public AddCommand(String title, String startDate, String deadline, Set<String> labels,
-            Boolean isRecurring, Optional<Recurrence> recurrence) throws IllegalValueException, IllegalDateTimeValueException {
+            Boolean isRecurring, Optional<Recurrence> recurrence) throws IllegalValueException,
+                IllegalDateTimeValueException {
         final Set<Label> labelSet = new HashSet<>();
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
