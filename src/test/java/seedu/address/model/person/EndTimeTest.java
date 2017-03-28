@@ -6,12 +6,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class EndTimeTest {
-
+    //@@author A0110491U
     @Test
     public void isValidStartTime() {
         //above the threshold of 2400
-        assertFalse(EndTime.isValidEndTime("2400")); //2400 and above
-        assertFalse(EndTime.isValidEndTime("3401")); //2400 and above
+        assertFalse(EndTime.isValidEndTime("3401")); //above 2400
 
         //invalid start time because of non-digits present
         assertFalse(EndTime.isValidEndTime("a401")); //not all digits

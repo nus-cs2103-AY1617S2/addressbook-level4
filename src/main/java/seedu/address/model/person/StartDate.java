@@ -30,6 +30,21 @@ public class StartDate {
         	throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
     }
+    
+  //@@author A0110491U
+    /**
+     * Checks if given StartDate string is valid
+     * returns true if it is valid according to MESSAGE_STARTDATE_CONSTRAINTS
+     */
+    public static boolean isValidStartDate(String args) {
+        try{
+            StringUtil.parseStringToDate(args);            
+        } catch (DateTimeException ive) {
+            return false;
+        }
+        return true;
+    }
+    //@@author
 
     //@@author A0121668A
     /*

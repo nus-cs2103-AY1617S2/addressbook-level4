@@ -40,6 +40,20 @@ public class ByDate {
         }
     }
     
+    //@@author A0110491U
+    /**
+     * Checks if given ByDate string is valid
+     * returns true if it is valid according to MESSAGE_BYDATE_CONSTRAINTS
+     */
+    public static boolean isValidByDate(String args) {
+        try{
+            StringUtil.parseStringToDate(args);            
+        } catch (DateTimeException ive) {
+            return false;
+        }
+        return true;
+    }
+    
     //@@author A0121668A
     /*
      * For JAXB use

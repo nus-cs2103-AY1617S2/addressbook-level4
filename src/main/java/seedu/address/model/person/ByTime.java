@@ -36,6 +36,21 @@ public class ByTime {
                 }
             }
         }
+    
+    //@@author A0110491U
+    /**
+     * Checks if given ByTime string is valid
+     * returns true if it is valid according to MESSAGE_BYTIME_CONSTRAINTS
+     */
+    public static boolean isValidByTime(String args) {
+        try{
+            StringUtil.parseStringToTime(args);            
+        } catch (DateTimeException ive) {
+            return false;
+        }
+        return true;
+    }
+    //@@author
 
     //@@author A0121668A
     /**

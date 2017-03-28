@@ -33,6 +33,14 @@ public class Priority {
         	throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
     }
+    
+    public static boolean isValidPriority(String arg) {
+        if (arg.equals("high") || arg.equals("medium") || arg.equals("low")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public String toString() {
         return value;

@@ -36,6 +36,21 @@ public class EndTime {
             }
         }
     
+    //@@author A0110491U
+    /**
+     * Checks if given EndTime string is valid
+     * returns true if it is valid according to MESSAGE_ENDTIME_CONSTRAINTS
+     */
+    public static boolean isValidEndTime(String args) {
+        try{
+            StringUtil.parseStringToTime(args);            
+        } catch (DateTimeException ive) {
+            return false;
+        }
+        return true;
+    }
+    //@@author
+    
     /*
      * For JAXB use
      */

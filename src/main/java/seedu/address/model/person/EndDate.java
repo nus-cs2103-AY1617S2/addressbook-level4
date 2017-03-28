@@ -35,6 +35,21 @@ public class EndDate {
         }
     }
     
+    //@@author A0110491U
+    /**
+     * Checks if given EndDate string is valid
+     * returns true if it is valid according to MESSAGE_ENDDATE_CONSTRAINTS
+     */
+    public static boolean isValidEndDate(String args) {
+        try{
+            StringUtil.parseStringToDate(args);            
+        } catch (DateTimeException ive) {
+            return false;
+        }
+        return true;
+    }
+    //@@author
+    
     /*
      * for JAXB use
      */
