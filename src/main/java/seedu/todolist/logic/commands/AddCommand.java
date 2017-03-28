@@ -2,6 +2,7 @@ package seedu.todolist.logic.commands;
 
 import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,21 +41,25 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String todo,
-                      String startTime,
-                      String endTime,
-                      Set<String> tags)
-            throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
+    public AddCommand(String todo, String startTime, String endTime, Set<String> tags) throws IllegalValueException {
+        try {
+            // Parse through the set of tags
+            final Set<Tag> tagSet = new HashSet<>();
+            for (String tagName : tags) {
+                tagSet.add(new Tag(tagName));
+            }
 
-        this.toAdd = new Todo(
-                new Name(todo),
-                StringUtil.parseDate(startTime, DATE_FORMAT),
-                StringUtil.parseDate(endTime, DATE_FORMAT),
-                new UniqueTagList(tagSet));
+            // Check for existence of each of the fields
+            Name name = (todo != null) ? new Name(todo) : null;
+            Date start = (startTime != null) ? StringUtil.parseDate(startTime, DATE_FORMAT) : null;
+            Date end = (endTime != null) ? StringUtil.parseDate(endTime, DATE_FORMAT) : null;
+            UniqueTagList tagList = new UniqueTagList(tagSet);
+
+            // Todo(name, start_time, end_time, complete_time, taglist)
+            this.toAdd = new Todo(name, start, end, null, tagList);
+        } catch (IllegalValueException e) {
+            throw e;
+        }
     }
     //@@author
 
@@ -64,37 +69,22 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String todo,
-                      String endTime,
-                      Set<String> tags)
-            throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-
-        this.toAdd = new Todo(
-                new Name(todo),
-                StringUtil.parseDate(endTime, DATE_FORMAT),
-                new UniqueTagList(tagSet));
+    public AddCommand(String todo, String endTime, Set<String> tags) throws IllegalValueException {
+        // Cannot throw an exception since there's only one line in the constructor
+        // and the first line must be the call to the constructor, not try{}
+        this(todo, null, endTime, tags);
     }
     //@@author
 
+    //@@author A0163720M
     /**
      * Creates an AddCommand using raw values to create a floating task
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String todo, Set<String> tags) throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-
-        this.toAdd = new Todo(
-                new Name(todo),
-                new UniqueTagList(tagSet)
-        );
+        // Cannot throw an exception since there's only one line in the constructor and the first line cannot be try{}
+        this(todo, null, null, tags);
     }
 
     @Override
@@ -106,6 +96,5 @@ public class AddCommand extends Command {
         } catch (UniqueTodoList.DuplicateTodoException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
-
     }
 }

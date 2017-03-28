@@ -17,10 +17,20 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all todos whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "To search by keyword: KEYWORD [MORE_KEYWORDS]...\n"
-            + "To search by tag: " + CliSyntax.PREFIX_TAG + "TAG\n"
-            + "Example: " + COMMAND_WORD + "groceries\n"
-            + "Example 2: " + COMMAND_WORD + CliSyntax.PREFIX_TAG + "milk\n";
+            + "To search by keyword: keyword_1 keyword_2 \n"
+            + "To search by tag: " + CliSyntax.PREFIX_TAG.getPrefix() + "tag_1\n"
+            + "To search for todos that start before a particular time: "
+            + CliSyntax.PREFIX_START_TIME.getPrefix() + "START_TIME \n"
+            + "To search for todos that end before a particular time: "
+            + CliSyntax.PREFIX_END_TIME.getPrefix() + "END_TIME \n"
+            + "To search for todos that were completed before a particular time: "
+            + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "COMPLETE_TIME \n"
+            + "Example: " + COMMAND_WORD + " groceries\n"
+            + "Example2: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG.getPrefix() + "milk\n"
+            + "Example3: " + COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix() + "9:00AM 28/03/17 \n"
+            + "Example4: " + COMMAND_WORD + " " + CliSyntax.PREFIX_END_TIME.getPrefix() + "9:00AM 28/03/17 \n"
+            + "Example5: " + COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "9:00AM 28/03/17 \n";
+
     public static final String MESSAGE_EMPTY_ERROR = "Cannot leave fields blank.";
 
     private Set<String> keywords;
