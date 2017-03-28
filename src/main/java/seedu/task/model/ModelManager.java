@@ -130,7 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new TotalQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -190,24 +190,27 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    private class TotalQualifier implements Qualifier {
+        private Set<String> totalKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
+        TotalQualifier(Set<String> totalKeyWords) {
+            this.totalKeyWords = totalKeyWords;
         }
 
+        //@@author-A0139322L
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword))
+            return totalKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword)
+                            || StringUtil.containsWordIgnoreCase(task.getInfo().value, keyword))
                     .findAny()
                     .isPresent();
         }
+        //@@author
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "keywords =" + String.join(", ", totalKeyWords);
         }
     }
 
