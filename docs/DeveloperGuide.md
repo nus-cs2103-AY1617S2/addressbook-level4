@@ -111,7 +111,7 @@ During application launch, it intialises all components of Burdens in proper seq
 During application shutdown, it ceases all ongoing operations of Burdens and invokes cleanup when necessary.<br/>
 <br/>
 **`Commons`**<br/>
-['Commons'](#common-classes) represents a collection of classes used by multiple other components.<br/>
+['Commons'] represents a collection of classes used by multiple other components.<br/>
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : Written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained), this class
@@ -119,16 +119,16 @@ Two of those classes play important roles at the architecture level.
 * `LogsCenter` : Used by many classes to write log messages to Burdens' log file to record system information and events.
 
 **`UI`**<br/>
-The ['UI'](#ui-component) component handles display interactions on screen such as data and results of the task lists.<br/>
+The ['UI'](#22-ui-component) component handles display interactions on screen such as data and results of the task lists.<br/>
 <br/>
 **`Logic`**<br/>
-The ['Logic'](#logic-component) component handles the process and execution of user's commands.<br/>
+The ['Logic'](#23-logic-component) component handles the process and execution of user's commands.<br/>
 <br/>
 **`Model`**<br/>
-The ['Model'](#model-component) handles data representation and data structures of Burdens.<br/>
+The ['Model'](#24-model-component) handles data representation and data structures of Burdens.<br/>
 <br/>
 **`Storage`**<br/>
-The ['Storage'](#storage-component) handles the process of reading data from and writing data to the hard disk.<br/>
+The ['Storage'](#25-storage-component) handles the process of reading data from and writing data to the hard disk.<br/>
 <br/>
 Each of the ** `UI` , `Logic`, `Model`, `Storage`** components:
 
@@ -241,7 +241,7 @@ Burdens further separates the packages into sub-packages - `core`, `events`, `ex
 * `Events` -This package consists of the different type of events that can occur; these are used mainly by EventManager and EventBus.
 * `Exceptions` - This package consists of exceptions that may occur with the use of Burdens.
 * `Util` - This package consists of additional utilities for the different components.
- 
+
 ## 3. Implementation
 
 ### 3.1 Logging
@@ -250,7 +250,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](#32-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.

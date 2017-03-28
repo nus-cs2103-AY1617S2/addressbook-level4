@@ -139,18 +139,19 @@ public class SampleDataUtil {
     }
 
     public static Task[] getSampleRandomisedTasks() {
-        int NUMBER_OF_SAMPLE_TASKS = 10;
-        Task[] sampleTasks = new Task[NUMBER_OF_SAMPLE_TASKS];
-        for(int i = 0; i < NUMBER_OF_SAMPLE_TASKS;i++) {
+        int numberOfTasks = 10;
+        Task[] sampleTasks = new Task[numberOfTasks];
+        for (int i = 0; i < numberOfTasks; i++) {
             try {
-                sampleTasks[i] = new Task(new Title("Tests and Exam" + i), new Deadline("next sunday"), new Priority("-5"),
-                    new Instruction("done"),
-                    new UniqueTagList("project", "school"));
-                } catch (IllegalValueException e) {
-                    throw new AssertionError("sample data cannot be invalid", e);
-            } 
+                sampleTasks[i] = new Task(new Title("Tests and Exam" + i), new Deadline("next sunday"),
+                        new Priority("-5"),
+                        new Instruction("done"),
+                        new UniqueTagList("project", "school"));
+            } catch (IllegalValueException e) {
+                throw new AssertionError("sample data cannot be invalid", e);
+            }
         }
-            return sampleTasks;
+        return sampleTasks;
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {

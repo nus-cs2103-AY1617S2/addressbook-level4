@@ -1,20 +1,11 @@
 package seedu.address.logic.commands;
 
 import java.util.List;
-//import java.util.Optional;
-
-//import seedu.address.commons.util.CollectionUtil;
-//import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
-//import seedu.address.model.tag.UniqueTagList;
-//import seedu.address.model.task.Deadline;
-//import seedu.address.model.task.Instruction;
-//import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-//import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList;
 
 

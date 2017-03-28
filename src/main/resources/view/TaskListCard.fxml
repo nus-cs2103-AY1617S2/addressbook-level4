@@ -29,8 +29,8 @@
                           <padding>
                               <Insets bottom="5" left="15" right="5" top="5" />
                           </padding>
-      
-                                      <children>
+
+                          <children>
                               <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                                   <children>
                                       <HBox style="-fx-background-color: transparent; -fx-border-color: transparent;" />
