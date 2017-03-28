@@ -25,8 +25,6 @@ public class AliasCommand extends Command {
 
     /**
      * Creates an AliasCommand using raw values.
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
      */
     public AliasCommand(String command, String alias) {
         this.command = command;
