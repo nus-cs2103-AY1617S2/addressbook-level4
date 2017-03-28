@@ -22,7 +22,7 @@ import seedu.tasklist.model.tag.UniqueTagList;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
-
+//@@author A0139221N
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -58,7 +58,7 @@ public class EditCommandParser {
         }
         return new EditCommand(index.get(), editTaskDescriptor);
     }
-
+//@@author
 
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.

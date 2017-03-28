@@ -9,7 +9,7 @@ import seedu.tasklist.model.task.Status;
 import seedu.tasklist.testutil.TestTask;
 
 public class FindCommandTest extends TaskListGuiTest {
-
+//@@author A0139221N
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); // no results

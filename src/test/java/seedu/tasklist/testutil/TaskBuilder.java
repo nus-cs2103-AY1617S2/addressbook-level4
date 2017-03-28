@@ -1,10 +1,8 @@
+//@@author A0139221N
 package seedu.tasklist.testutil;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
-/**
- *
- */
 public abstract class TaskBuilder {
 
     public abstract TaskBuilder withName(String name) throws IllegalValueException;

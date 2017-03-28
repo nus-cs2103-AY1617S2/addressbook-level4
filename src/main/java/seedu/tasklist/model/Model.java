@@ -65,12 +65,15 @@ public interface Model {
 
     /** Enables undo to work after a clear command, by pushing the existing state into UndoStack. */
     public void enableUndoForClear();
+
 //@@author A0141993X
     /**Sort tasks according to parameter specified by user */
     public void sortTaskList(String parameter);
 //@@author
+
     /** Updates the filter of the filered task list to filter by the given tag keywords*/
     void updateFilteredTaskListTag(Set<String> keyword);
+
 //@@author A0141993X
     /** Loads file from file path
      * @throws IOException
@@ -81,6 +84,7 @@ public interface Model {
      * @throws IOException
      * */
     void saveTaskList(String filePath) throws IOException;
+//@@author
 
     void updateFilteredTaskListStatus(Set<String> keywords);
 
