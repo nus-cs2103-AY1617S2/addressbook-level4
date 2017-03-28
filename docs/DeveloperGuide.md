@@ -402,8 +402,11 @@ Use case ends.
 2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. The executable .jar file should not be more than 5MB
+5. Should be able to connect to the internet as long as a stable internet connection is avaialble. 
+6. Should always save the Fast Task data without corruption to the data. 
+7. After the user enters a command, the response time should be no more than 1 second.
+8. The application should be available to download for anyone who has access to an internet connection and access to Github.
 
 ## Appendix D : Glossary
 

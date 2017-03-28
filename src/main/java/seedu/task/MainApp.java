@@ -12,8 +12,10 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.core.FileNameHandler;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
+import seedu.task.commons.events.ui.ChangePathNameEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
@@ -183,8 +185,20 @@ public class MainApp extends Application {
 
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
-	logger.info(LogsCenter.getEventHandlingLogMessage(event));
-	this.stop();
+    	logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    	this.stop();
+    }
+    
+    @Subscribe
+    public void handleChangePathNameEvent(ChangePathNameEvent event) {
+    	System.out.println("working");
+    	storage.setPathName(event.getPathName());
+    	FileNameHandler.setFileName(event.getPathName());
+    	try {
+			storage.saveTaskManager(model.getTaskManager());
+		} catch (IOException e) {
+			System.out.println("Unexpected IOE in main app");
+		}
     }
     
 

@@ -35,4 +35,6 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * if there was an error during saving.
      */
     void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+
+	void setPathName(String pathName);
 }
