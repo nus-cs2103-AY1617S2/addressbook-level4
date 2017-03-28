@@ -111,6 +111,7 @@ public class DoneCommandTest extends TaskListGuiTest {
 
         //Confirms the new card is marked as done
         TaskCardHandle doneCard = taskListPanel.navigateToTask(doneTask.getName().fullName);
+
         assertMatching(doneTask, doneCard);
 
         TestTask[] expectedTasksList = td.getTypicalTasks();

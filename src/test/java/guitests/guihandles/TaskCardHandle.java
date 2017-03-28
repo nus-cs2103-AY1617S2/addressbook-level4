@@ -26,7 +26,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String COMMENT_FIELD_ID = "#comment";
     private static final String TAGS_FIELD_ID = "#tags";
     private static final String PRIORITY_FIELD_ID = "#priority";
-    private static final String STATUS_FIELD_ID = "#status";
+    private static final String STATUS_FIELD_ID = "#tickLogo";
     private static final String DEADLINE_FIELD_ID = "#deadline";
     private static final String STARTDATE_FIELD_ID = "#startDate";
     private static final String ENDDATE_FIELD_ID = "#endDate";
@@ -40,6 +40,10 @@ public class TaskCardHandle extends GuiHandle {
 
     protected String getTextFromLabel(String fieldId) {
         return getTextFromLabel(fieldId, node);
+    }
+
+    protected boolean getNodeVisibility(String fieldId) {
+        return getNodeVisibility(fieldId, node);
     }
 
     private String getFullName() {
@@ -132,16 +136,14 @@ public class TaskCardHandle extends GuiHandle {
         }
     }
 
+    //@@author A0143355J
     private boolean getStatus() {
-        if (getTextFromLabel(STATUS_FIELD_ID).equals("completed")) {
-            return true;
-        } else {
-            return false;
-        }
+        return getNodeVisibility(STATUS_FIELD_ID);
     }
 
+    //@@author
     private String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID).split(" ")[1];
+        return getTextFromLabel(PRIORITY_FIELD_ID).toLowerCase();
     }
 
     @Override

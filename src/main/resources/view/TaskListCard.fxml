@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -34,16 +35,17 @@
                                     <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
                                 </HBox>
                             </children>
+                            <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <Label fx:id="status" styleClass="cell_small_label" text='\$status' />
                         <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" />
-                        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
+
                         <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
                         <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
                         <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
                      </children>
                 </VBox>
+                <ImageView fx:id="tickLogo" disable="false" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true"/>
             </children>
         </GridPane>
     </children>
