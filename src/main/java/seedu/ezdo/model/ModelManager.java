@@ -413,6 +413,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0138907W
     /**
      * Sorts the task in ezDo by the given sort criteria.
+     *
      * @param sortCriteria      The field to sort by.
      * @param isSortedAscending If true, sorts in ascending order. Otherwise, sorts in descending order.
      */
