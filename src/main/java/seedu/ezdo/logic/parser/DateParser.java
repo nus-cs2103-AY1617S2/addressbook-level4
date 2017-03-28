@@ -39,7 +39,7 @@ public class DateParser {
         Pattern dayMonthYearPattern = Pattern.compile(DAY_MONTH_YEAR_FORMAT);
         Matcher matcher = dayMonthYearPattern.matcher(input);
 
-        matcher.matches();
+        assert matcher.matches();
         return matcher.group(2) + matcher.group(1) + matcher.group(3);
     }
 

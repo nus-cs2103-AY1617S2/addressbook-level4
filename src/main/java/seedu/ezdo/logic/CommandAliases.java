@@ -72,6 +72,7 @@ public class CommandAliases implements Serializable {
      * Checks if the given string is an alias for a command in ezDo.
      */
     public boolean checkIfAlias(String alias) {
+        assert alias != null;
         return commandAliasesMap.get(alias) != null;
     }
 
@@ -79,6 +80,7 @@ public class CommandAliases implements Serializable {
      * Gets the command that is aliased by the given alias.
      */
     public String getCommandFromAlias(String alias) {
+        assert alias != null;
         return commandAliasesMap.get(alias);
     }
 
