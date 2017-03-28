@@ -17,7 +17,7 @@ public class ConfirmCommand extends Command {
             + "Parameters: FLAG (must be e) INDEX SLOT (last 2 must be positive integers)\n" + "Example: "
             + COMMAND_WORD + " e 1 1";
 
-    public static final String MESSAGE_CONFIRM_TASK_SUCCESS = "Confirmed timeslot for event: %1$s";
+    public static final String MESSAGE_CONFIRM_TASK_SUCCESS = "Confirmed timeslot for: %1$s";
 
     public final int targetIndex;
     public final int targetSlot;
