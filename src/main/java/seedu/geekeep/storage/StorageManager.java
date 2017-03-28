@@ -42,7 +42,7 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ Config methods ==============================
 
     @Override
-    public Optional<Config> readConfig() throws DataConversionException, IOException {
+    public Optional<Config> readConfig() throws DataConversionException {
         return configStorage.readConfig();
     }
 

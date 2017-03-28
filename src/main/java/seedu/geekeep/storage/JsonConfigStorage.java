@@ -19,7 +19,7 @@ public class JsonConfigStorage implements ConfigStorage {
     }
 
     @Override
-    public Optional<Config> readConfig() throws DataConversionException, IOException {
+    public Optional<Config> readConfig() throws DataConversionException {
         return readConfig(filePath);
     }
 

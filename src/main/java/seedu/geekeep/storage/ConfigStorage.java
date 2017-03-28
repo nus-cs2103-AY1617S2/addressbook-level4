@@ -15,9 +15,8 @@ public interface ConfigStorage {
      * Returns Config data from storage.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<Config> readConfig() throws DataConversionException, IOException;
+    Optional<Config> readConfig() throws DataConversionException;
 
     /**
      * Saves the given {@link seedu.geekeep.model.Config} to the storage.

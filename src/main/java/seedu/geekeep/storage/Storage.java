@@ -16,7 +16,7 @@ import seedu.geekeep.model.UserPrefs;
 public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage {
 
     @Override
-    Optional<Config> readConfig() throws DataConversionException, IOException;
+    Optional<Config> readConfig() throws DataConversionException;
 
     @Override
     void saveConfig(Config config) throws IOException;
