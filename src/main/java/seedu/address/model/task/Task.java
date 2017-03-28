@@ -49,6 +49,7 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
+    //@@author A0140023E
     @Override
     public Optional<Deadline> getDeadline() {
         return deadline;
@@ -75,6 +76,7 @@ public class Task implements ReadOnlyTask {
         this.startEndDateTime = Optional.of(dateTime);
     }
 
+    //@@author
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -87,30 +89,29 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    //@@author A0140023E
     /**
-     * Updates this task with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement} using a "shallow copy" of the data. Refer to
+     * {@link Object#clone()} for more information about shallow copy.
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
-        // TODO to use or not to use a new Optional to wrap the Deadline
-        // replacement Deadline is currently reused
-        if (replacement.getDeadline().isPresent()) {
-            this.deadline = Optional.of(replacement.getDeadline().get());
-        } else {
-            this.deadline = Optional.empty();
-        }
-        // TODO to use or not to use a new Optional to wrap the startEndDateTime
-        // replacement startEndDateTime is currently reused
-        if (replacement.getStartEndDateTime().isPresent()) {
-            this.startEndDateTime = Optional.of(replacement.getStartEndDateTime().get());
-        } else {
-            this.startEndDateTime = Optional.empty();
-        }
-        this.setTags(replacement.getTags());
+        // Note that we are shallow copying data replacement's data so replacement should not be
+        // reused anymore. Otherwise modify this method to do a deep copy
+
+        setName(replacement.getName());
+
+        // Note that we are reusing the same Optional from replacement directly
+        // Hence we are not using the setter method which only accepts Deadline
+        deadline = replacement.getDeadline();
+        // Similarly for startEndDateTime we are reusing same Optional
+        startEndDateTime = replacement.getStartEndDateTime();
+
+        setTags(replacement.getTags());
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
