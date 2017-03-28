@@ -3,5 +3,5 @@ require 'coveralls'
 
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start do
-   add_filter 'collated'
+   add_filter '/collated/'
 end
