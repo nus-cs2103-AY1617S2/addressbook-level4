@@ -51,7 +51,7 @@ Format: `help`, `?`
 ### 2.2. Adding a task : `add`, `+`
 
 Adds a task to the list<br>
-Format: `add TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]`, `+ TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]`
+Format: `add TASK_DESCRIPTION [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]`, `+ TASK_DESCRIPTION [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]`
 
 Examples:
 
@@ -204,8 +204,8 @@ Example:
 `?` <br>
   e.g. `help`, `?`
 
-* **Add**  `add TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]` <br>
-`+ TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]` <br>
+* **Add**  `add TASK_DESCRIPTION [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]` <br>
+`+ TASK_DESCRIPTION [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]` <br>
   e.g. `add CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`, `+ CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`
 
 * **List All**: `list all` <br>
@@ -219,7 +219,7 @@ Example:
   e.g. `sort by due`
 
 * **Edit**  `edit INDEX PARAMETER NEW_VALUE` <br>
-  e.g. `edit 2 due 23/03/2017 1200`
+  e.g. `edit 2 due/23/03/2017 1200`
 
 * **Complete** `complete INDEX` <br>
   e.g. `complete 2`
@@ -228,8 +228,8 @@ Example:
 `- INDEX` <br>
   e.g. `delete 3`, `- 3`
 
-* **Delete all: `deleteall` <br>
-  e.g. `deleteall`
+* **Delete all: `clear` <br>
+  e.g. `clear`
 
 * **Find**: `find KEYWORD [MORE_KEYWORDS]` <br>
 `/ KEYWORD [MORE_KEYWORDS]` <br>
