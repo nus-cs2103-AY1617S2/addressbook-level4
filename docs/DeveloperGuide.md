@@ -144,7 +144,7 @@ Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-log
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given below) defines it's Application Programming Interface (API) in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br><br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.1.2 : Class Diagram of the Logic Component_
@@ -223,17 +223,18 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+1. `Logic` uses the `Parser` class to process the input provided by the user.
+2. This creates a `Command` object according to the command word input (eg. `add` will cause the AddCommand to create an AddCommand object).
+3. This is then executed by the `LogicManager`, which will process the command accordingly.
+4. The command execution will interact with the `Model` component (eg. adding a task), to create a new task.
+4. The result of the command execution is encapsulated as a `CommandResult` object which will be handed back to the `Ui` component and display the relevant results to the user.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-In this diagram, the `Logic Manager` receives an event to delete the task at index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is pass back to the `UI` component through `CommandResult`.
+In this diagram, the `Logic Manager` receives an event to delete the task at index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is passed back to the `UI` component through `CommandResult`.
 
 ### 2.4. Model component
 
@@ -254,7 +255,7 @@ The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that 
 
 #### 2.4.1 Undo/Redo implementation
 
-The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `oringator` the component that generates the `momento` object and the `momento collector`.
+The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `originator` the component that generates the `momento` object and the `momento collector`.
 
 Whenever the data object is modified, the `originator` sends a copy of the current state of the data as a `memento` object to the `momento collector` to keep track of. When the undo command is given, the `momento collector` simply returns the `momento` object representing the previous state of the data.
 
