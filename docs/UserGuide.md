@@ -24,7 +24,7 @@ Unlike other software, *DoMe!* is simple and intuitive. All you need is your key
 2. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your Address Book.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-> <img src="images/UISketch.jpg" width="600">
+> <img src="images/UI1.jpg" width="600">
 
 ## 3. Features
 
@@ -56,16 +56,12 @@ _Example:_
 
 ## 3.1.3 Edit task: `edit`
 You can update the details of your task by editing it, for instance:
-You can organise your tasks by adding tags to your them
-> Add tags to the task at the specified index. The index refers to the index number shown in the last person listing.
 
 _Format:_
-`tag [Task-Number] [t/Tag-1] (t/Tag-2) ...`
+`edit [Task-Number] [New-Name-of-Task] (s/New-Start-Time) (e/New-End-Time) (t/New-Tag-1) (t/New-Tag-2)`
 
 _Example:_
-`tag 1 t/urgent t/for mom` 
-Returns the task name with the changed tags
-
+`edit 1 buy groceries for Bill s/22-03-2017 e/23-03-2017 t/drinks t/vegetables`
 
 ## 3.1.4 Complete task: `complete`
 You can mark a task as completed to update its progress
@@ -112,22 +108,8 @@ _Example:_
 `search report t/report`
 Returns a list of tasks (if any) with the phrase report in its name or tag
 
-## 3.1.8 View tasks by deadline: `due`
 
-Keep track of which are the tasks with upcoming deadlines to stay one step ahead and prioritise your work
-
-> You can type in the actual date after the command word due or you relative dates like today, tomorrow  and this week.
-
-_Format:_
-`due 23/1`
-`due today`
-`due this week`
-
-_Example:_
-`due tomorrow`
-Returns a list of tasks due by tomorrow
-
-## 3.1.9 Undo previous command: `undo`
+## 3.1.8 Undo previous command: `undo`
 
 You can easily undo your last command given
 
@@ -140,7 +122,7 @@ _Example:_
 `undo`
 Returns the undoing of the previous command that mutated the data, e.g. Undone: add send TPS report to Bill by Friday 6pm.
 
-## 3.1.10 Select a task: `select`
+## 3.1.9 Select a task: `select`
 You can select a task to view more details about it
 
 _Format:_
@@ -149,7 +131,7 @@ _Format:_
 _Example:_
 `select 1`
 
-## 3.1.11 Repeat tasks: `repeat`
+## 3.1.10 Repeat tasks: `repeat`
 
 You can also put a task on repeat, by setting a task at a fixed periodic time
 > Add tags to the task at the specified index. The index refers to the index number shown in the last person listing.
@@ -163,7 +145,7 @@ _Example:_
 Returns the task name that was put on repeat
 
 
-## 3.1.12 Attach links: `addlink`
+## 3.1.11 Attach links: `addlink`
 You can attach relevant link(s) to your task so you can retrieve the link easily and can immediately start on your task!
 
 > The Task-Number refers to the index number shown in the most recent listing of the task.
@@ -179,19 +161,29 @@ Attach the link `https://www.google.com/drive/presentation-to-boss` to task numb
 `addlink https://mail.google.com/my-mail-box/important-email 10`
 Attach the link `https://mail.google.com/my-mail-box/important-email` to task number 10 in the list of tasks.
 
-## 3.1.13 Progress report: `report`
+## 3.1.12 Progress report: `report`
 You can see all your completed tasks and overdue tasks in the past week, and incomplete tasks for the coming week
 
 _Format:_
 `report`
 
 
-## 3.1.14 Clear the data : `clear`
+## 3.1.13 Clear the data : `clear`
 You can clear your entire to-do list
 
 _Format:_
 `clear`
 
+## 3.1.14 Add tags to task : `tag`
+You can organise your tasks by adding tags to your them
+> Add tags to the task at the specified index. The index refers to the index number shown in the last person listing.
+
+_Format:_
+`tag [Task-Number] [t/Tag-1] (t/Tag-2) ...`
+
+_Example:_
+`tag 1 t/urgent t/for mom` 
+Returns the task name with the changed tags
 
 ## 3.1.15 Customize file storing: `store`
 You can change the storage location of the data to transfer your current todo list to your own storage system with ease
@@ -259,7 +251,7 @@ The task manager will store its data in AnotherStorage.txt located under Storage
   
 ## 6. Appendix
   
-| Word | Definition |
+  | Word | Definition |
 |-----|-----|
 |[GUI](#GUI)|Graphic User Interface. The interface presented to users to interact with *DoMe!*.|
 |[Storage Path](#storage-path)|This is the directory where your data will be saved.|
