@@ -202,7 +202,10 @@ The `Model`,
 
 **Handling Undo Command**
 
-The second TodoList object stored by the Model makes undoing commands very simple. When the Logic component instructs the Model to undo the last command, the Model simply copies the previous state into the TodoList data and sets the previous state to null. Of course, as with other modifying commands, a TodoListEventChanged event is raised.
+The second TodoList object stored by the Model makes undoing commands very simple. When the Logic component instructs the Model to undo the last command, the Model simply copies the previous state into the TodoList data and sets the previous state to null. Of course, as with other modifying commands, a TodoListEventChanged event is raised. The Sequence Diagram below shows how the components interact when the user enters the "undo" command.
+
+<img src="images/SDforUndoCommand.png" width="800"><br>
+_Figure 2.4.1 : Sequence Diagram for Undo Command_
 
 ### 2.5. Storage component
 

@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.TodoList;
-import seedu.address.model.todo.Todo;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.todolist.model.TodoList;
+import seedu.todolist.model.todo.Todo;
+import seedu.todolist.model.util.SampleDataUtil;
+import seedu.todolist.testutil.TestUtil;
 
 public class SampleDataTest extends TodoListGuiTest {
     @Override

@@ -11,10 +11,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CompleteCommand;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.todolist.logic.commands.AddCommand;
+import seedu.todolist.logic.commands.CompleteCommand;
+import seedu.todolist.model.tag.UniqueTagList;
+import seedu.todolist.model.todo.ReadOnlyTodo;
 
 /**
  * Provides a handle to a todo card in the todo list panel.
@@ -76,6 +76,7 @@ public class TodoCardHandle extends GuiHandle {
     private String getCompleteTime() {
         return getTextFromLabel(COMPLETETIME_FIELD_ID);
     }
+    //@@author
     //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo, boolean checkCompleteTime) {
         if (checkCompleteTime) {
@@ -87,6 +88,7 @@ public class TodoCardHandle extends GuiHandle {
         }
         return isSameTodo(todo);
     }
+    //@@author
     //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo) {
         DateFormat addCommandDateFormat = new SimpleDateFormat(AddCommand.DATE_FORMAT);
@@ -104,7 +106,7 @@ public class TodoCardHandle extends GuiHandle {
         return getFullName().equals(todo.getName().fullName) &&
                 equalLists(getTags(), getTags(todo.getTags()));
     }
-
+    //@@author
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TodoCardHandle) {
