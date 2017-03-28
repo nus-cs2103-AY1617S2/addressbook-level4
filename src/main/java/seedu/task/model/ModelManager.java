@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -20,6 +21,7 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -113,6 +115,21 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTaskToFront(task);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged(history.getBackupFilePath());
+    }
+
+    //@@author A0140063X
+    @Override
+    public void addMultipleTasks(ArrayList<Task> tasks) {
+        for (Task task : tasks) {
+            try {
+                taskManager.addTaskToFront(task);
+            } catch (DuplicateTaskException e) {
+                logger.info("Duplicate task from google calendar not added.");
+            }
+        }
+
         updateFilteredListToShowAll();
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
@@ -291,6 +308,5 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(event.readOnlyTaskManager);
         logger.info("Resetting data from new load location.");
     }
-
 
 }

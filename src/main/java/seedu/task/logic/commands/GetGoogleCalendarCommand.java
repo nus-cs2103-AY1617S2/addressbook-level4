@@ -1,6 +1,7 @@
 package seedu.task.logic.commands;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,45 +34,58 @@ public class GetGoogleCalendarCommand extends Command {
     public static final String MESSAGE_FAIL = "Unable to retrieve from Google.";
     public static final String MESSAGE_USAGE = COMMAND_WORD_1
             + ": Gets your events from your Google Calendar and add them to KIT."
-            + " Please note that this will only get upcoming events.\n"
-            + "Example: " + COMMAND_WORD_2;
+            + " Please note that this will only get upcoming events.\n" + "Example: " + COMMAND_WORD_2;
 
+    //@@author A0140063X
     @Override
     public CommandResult execute() {
+        ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
-            Events events = service.events().list("primary").setSingleEvents(true).execute();
-            List<Event> items = events.getItems();
-            if (items.size() == 0) {
-                return new CommandResult("No events found");
-            } else {
-                logger.info("Events retrieved from Google Calendar. Attempting to add.");
-                for (Event event : items) {
+            List<Event> events = getEventsFromGoogle();
 
-                    try {
-                        Name name = new Name(event.getSummary());
-                        Date startDate = new Date(event.getStart());
-                        Date endDate = new Date(event.getEnd());
-                        Remark remark = new Remark(event.getDescription());
-                        Location location = new Location(event.getLocation());
-                        final Set<Tag> tagSet = new HashSet<>(); //No tags
-                        Task toAdd = new Task(name, startDate, endDate, remark, location,
-                                new UniqueTagList(tagSet), false);
-                        assert model != null;
-                        model.addTask(toAdd);
-                        logger.info("Event added.");
-                    } catch (IllegalValueException ive) {
-                        logger.info(ive.getMessage());
-                    }
+            if (events.size() == 0) {
+                return new CommandResult("No events found");
+            }
+            logger.info("Events retrieved from Google Calendar. Attempting to add.");
+
+            for (Event event : events) {
+                try {
+                    tasks.add(createTaskFromEvent(event));
+                    logger.info("New event from google calendar sucessfully added.");
+                } catch (IllegalValueException ive) {
+                    logger.info(ive.getMessage());
                 }
             }
+
         } catch (IOException e) {
             return new CommandResult(MESSAGE_FAIL);
         }
 
+        assert model != null;
+        model.addMultipleTasks(tasks);
         model.sortTaskList();
         model.updateFilteredListToShowAll();
+
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    //@@author A0140063X
+    private List<Event> getEventsFromGoogle() throws IOException {
+        com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
+        Events events = service.events().list("primary").setSingleEvents(true).execute();
+        return events.getItems();
+    }
+
+    //@@author A0140063X
+    private Task createTaskFromEvent(Event event) throws IllegalValueException {
+
+        Name name = new Name(event.getSummary());
+        Date startDate = new Date(event.getStart());
+        Date endDate = new Date(event.getEnd());
+        Remark remark = new Remark(event.getDescription());
+        Location location = new Location(event.getLocation());
+        final Set<Tag> tagSet = new HashSet<>(); // No tags
+        return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false);
     }
 }
