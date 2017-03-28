@@ -14,7 +14,7 @@ import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.IncorrectCommand;
 
 //@@author A0143076J-unused
-//not used because decided to try to instead implement flexible ordering of the task description. 
+//not used because decided to try to instead implement flexible ordering of the task description.
 //Using this code makes it necessary for the task description to immediately follow the add command word.
 /**
  * Parses input arguments and creates a new AddCommand object

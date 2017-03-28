@@ -16,8 +16,8 @@ public class AlternativeCommand {
         altCommands.put("l", ListCommand.COMMAND_WORD);
         altCommands.put("m", MarkCommand.COMMAND_WORD);
         altCommands.put("check", MarkCommand.COMMAND_WORD);
-        //altCommands.put("um", UnmarkCommand.COMMAND_WORD);
-        //altCommands.put("uncheck", MarkCommand.COMMAND_WORD);
+        altCommands.put("um", UnmarkCommand.COMMAND_WORD);
+        altCommands.put("uncheck", MarkCommand.COMMAND_WORD);
         altCommands.put("f", FindCommand.COMMAND_WORD);
         altCommands.put("search", FindCommand.COMMAND_WORD);
         //altCommands.put("r", RedoCommand.COMMAND_WORD);
