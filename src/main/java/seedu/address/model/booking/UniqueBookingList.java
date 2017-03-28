@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -45,6 +46,7 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
         for (String label : bookings) {
             bookingList.add(new Booking(label));
         }
+        sortBooklingList(bookingList);
         setBookings(bookingList);
     }
 
@@ -58,6 +60,7 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
         if (!CollectionUtil.elementsAreUnique(initialBookings)) {
             throw new DuplicateBookingException();
         }
+        sortBooklingList(initialBookings);
         internalList.addAll(initialBookings);
     }
 
@@ -76,7 +79,9 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
      */
     public UniqueBookingList(Set<Booking> bookings) {
         assert !CollectionUtil.isAnyNull(bookings);
-        internalList.addAll(bookings);
+        final List<Booking> bookingList = new ArrayList<Booking>(bookings);
+        sortBooklingList(bookingList);
+        internalList.addAll(bookingList);
     }
 
     /**
@@ -92,6 +97,14 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
      */
     public Set<Booking> toSet() {
         return new HashSet<>(internalList);
+    }
+
+    /**
+     * Returns all bookings in this list as a List. This set is mutable and
+     * change-insulated against the internal list.
+     */
+    public ArrayList<Booking> toList() {
+        return new ArrayList<Booking>(internalList);
     }
 
     /**
@@ -203,6 +216,10 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
 
     public boolean isEmpty() {
         return internalList.isEmpty();
+    }
+
+    private void sortBooklingList(List<Booking> bookingList) {
+        Collections.sort(bookingList);
     }
 
     /**

@@ -12,15 +12,19 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
-import seedu.address.commons.events.ui.LeftPanelSelecttionChangedEvent;
+import seedu.address.commons.events.ui.LeftPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.LeftPanelTodaySelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
@@ -65,6 +69,12 @@ public class LeftPanel extends UiPart<Region> {
     @FXML
     private ListView<Label> labelListView;
 
+    @FXML
+    private HBox todayHeader;
+
+    @FXML
+    private HBox calendarHeader;
+
     public LeftPanel(AnchorPane leftListPlaceholder,
             ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
@@ -98,23 +108,36 @@ public class LeftPanel extends UiPart<Region> {
         labelArrow.setIcon(FontAwesomeIcon.ANGLE_UP);
     }
 
+    @SuppressWarnings("deprecation")
     public void setTodayListView(ObservableList<ReadOnlyTask> taskList) {
         todayLabel.setText("Today");
         int count = 0;
-        Date nowStart = new Date();
-        nowStart.setHours(23);
-        nowStart.setMinutes(59);
-        nowStart.setSeconds(59);
+        Date endTime = new Date(2222, 1, 1);
+        Date startDate = new Date();
+        endTime.setHours(23);
+        endTime.setMinutes(59);
+        endTime.setSeconds(59);
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
 
-        //Add all tasks that is not completed and deadline is after today
+        // Add all tasks that is not completed and deadline is after today
         for (ReadOnlyTask task : taskList) {
-            if (task.getDeadline().isPresent() &&
-                    !task.isCompleted() &&
-                    task.getDeadline().get().getDateTime().after(nowStart)) {
-                count++;
+            if (task.getDeadline().isPresent() && task.getStartTime().isPresent()) {
+                if ((task.getDeadline().get().getDateTime().before(endTime)
+                        && task.getDeadline().get().getDateTime().after(startDate))
+                        || task.getDeadline().get().getDateTime().equals(endTime)) {
+                    count++;
+                }
+            } else if (task.getDeadline().isPresent()) {
+                if (task.getDeadline().get().getDateTime().before(endTime)
+                        || task.getDeadline().get().getDateTime().equals(endTime)) {
+                    count++;
+                }
             }
         }
         todayCounterLabel.setText(Integer.toString(count));
+        setEventHandlerForTodaySelectionChangeEvent();
     }
 
     public void setCalendarListView(ObservableList<ReadOnlyTask> taskList) {
@@ -162,7 +185,17 @@ public class LeftPanel extends UiPart<Region> {
         labelListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 logger.fine("Selection in label left list panel changed to : '" + newValue + "'");
-                raise(new LeftPanelSelecttionChangedEvent());
+                raise(new LeftPanelSelectionChangedEvent(newValue));
+            }
+        });
+    }
+
+    private void setEventHandlerForTodaySelectionChangeEvent() {
+        todayHeader.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                logger.fine("Selection in label left list panel changed to : 'Today'");
+                raise(new LeftPanelTodaySelectionChangedEvent());
             }
         });
     }

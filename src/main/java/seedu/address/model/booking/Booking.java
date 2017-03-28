@@ -15,7 +15,7 @@ import seedu.address.logic.dateparser.DateTimeParser;
  * Represents a booking in DoOrDie Task Manager Application
  * Guarantees: immutable; dates are valid as declared in {@link #isDateParsable(String)}
  */
-public class Booking {
+public class Booking implements Comparable {
 
     public static final String MESSAGE_BOOKING_CONSTRAINTS =
             "Input dates are in the wrong format, please try again!";
@@ -62,6 +62,14 @@ public class Booking {
     public String toString() {
         SimpleDateFormat df = new SimpleDateFormat("EEE dd MMM yyyy h:mm a");
         return df.format(startTime).toString() + " to " + df.format(endTime).toString() + " ";
+    }
+
+    @Override
+    public int compareTo(Object compareObj) {
+        if (compareObj instanceof Booking) {
+            return this.getBookingStartDate().compareTo(((Booking) compareObj).getBookingStartDate());
+        }
+        return 0;
     }
 
 }

@@ -435,6 +435,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | iterate through my command history | re-execute a command that I have previously executed before
 `* *` | user | have words that I am typing to be autocompleted by the system | execute a command at a faster rate
 `* *` | user | delete a label | remove that label from all tasks that has that label
+`* *` | user | remove a booking | remove a booking time slot that I am no longer free
+`* *` | user | change a booking | change a booking time slot that fits better in my schedule
+`* *` | user | add booking time slots | have more time slots available for me to choose from
 `*` | user | launch application using shortcut | not need to find the execution file to run the application
 `*` | user | generate a printable format schedule | refer to the tasks when I have no access to a laptop
 
@@ -924,6 +927,70 @@ Use case ends
 1a. The file path specified is invalid/does not end with .xml/not a file
 
 > 1a1. System notifies the user that the file is invalid/does not end with .xml/not a file<br />
+  Use case ends
+
+#### Use case: Remove a booking
+Use case ID: UC28 Remove a booking<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User requests to remove a specific time slot for booking
+2. System removes the time slot and display the updated list of tasks and bookings<br />
+Use case ends
+
+**Extensions**
+
+2a. Booking is invalid or does not exist
+
+> 2a1. System notifies the user that such a booking is invalid/does not exist<br />
+  Use case ends
+
+#### Use case: Change a booking
+Use case ID: UC29 Change a booking<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User requests to change a specific time slot for specific booking
+2. System replaces the time slot with the updated time slot specified by user and display the updated list of tasks and bookings<br />
+Use case ends
+
+**Extensions**
+
+2a. Booking is invalid or does not exist
+
+> 2a1. System notifies the user that such a booking is invalid/does not exist<br />
+  Use case ends
+  
+2b. Date specified by user is invalid
+
+> 2b1. System notifies the user that the date specified is invalid<br />
+  Use case ends
+
+#### Use case: Add booking time slots
+Use case ID: UC30 Add booking time slots<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User requests to add more time slot for specific booking
+2. System adds the time slot specified by user to the booking and display the updated list of tasks and bookings<br />
+Use case ends
+
+**Extensions**
+
+2a. Booking is invalid or does not exist
+
+> 2a1. System notifies the user that such a booking is invalid/does not exist<br />
+  Use case ends
+  
+2b. Date specified by user is invalid
+
+> 2b1. System notifies the user that the date specified is invalid<br />
   Use case ends
 
 ## Appendix C : Non Functional Requirements

@@ -12,6 +12,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ConfirmCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditBookingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditLabelCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -95,6 +96,9 @@ public class Parser {
 
         case BookCommand.COMMAND_WORD:
             return new BookCommandParser().parse(arguments);
+
+        case EditBookingCommand.COMMAND_WORD:
+            return new EditBookingCommandParser().parse(arguments);
 
         case ConfirmCommand.COMMAND_WORD:
             return new ConfirmCommandParser().parse(arguments);
