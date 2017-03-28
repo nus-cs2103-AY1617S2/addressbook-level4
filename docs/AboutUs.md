@@ -15,11 +15,10 @@ Component: Storage
 #### [Melvin Soh](https://github.com/InfinityFrost) <br>
 <img src="images/infinityfrost.png" width="150"><br>
 
-* Components in charge of: [Logic](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
+* Components in charge of: [Storage](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#35-storage-component)
 * Aspects/tools in charge of: Testing and Documentation
 * Features implemented:
-   * [Save to existing file path](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#314-exporting-the-data--save)
-   * [Save to new file path](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#314-exporting-the-data--save)
+   * [Save data](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#314-exporting-the-data--save)
    * [undo](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#311-undoing-a-command--undo)
    * [Delete multiple tasks ](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#36-deleting-a-task--delete)
 * Code written: [[functional code](A0138961W.md)][[test code](A0138961W.md)]
@@ -64,7 +63,7 @@ Component: Storage
    * [Clear tasks by category](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#37-clearing-tasks-by-category--clear)
 * Code written: [[functional code](A0147990R.md)][[test code](A0147990R.md)]
 * Other major contributions:
-  * In charge of review amd merge pull requests
+  * In charge of review and merge pull requests
   * Help debug and solve merge conflicts [[#152](https://github.com/CS2103JAN2017-W14-B2/main/pull/152), [#146](https://github.com/CS2103JAN2017-W14-B2/main/pull/146)]
   * Documentation [[#80](https://github.com/CS2103JAN2017-W14-B2/main/pull/80)] [[#1](https://github.com/CS2103JAN2017-W14-B2/main/pull/1)] 
 
