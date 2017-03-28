@@ -1,5 +1,7 @@
 package seedu.geekeep.ui;
 
+import com.jfoenix.controls.JFXCheckBox;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -14,7 +16,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label title;
+    private JFXCheckBox title;
     @FXML
     private Label id;
     @FXML

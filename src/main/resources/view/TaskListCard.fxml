@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
@@ -28,21 +29,30 @@
                     </padding>
 
                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
+                        <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="138.0">
                             <children>
-                                <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label">
-                                        <minWidth>
-                                            <Region fx:constant="USE_PREF_SIZE" />
-                                        </minWidth>
-                                    </Label>
-                                    <Label fx:id="title" styleClass="cell_big_label" text="\$title" />
-                                </HBox>
+                                 <Label fx:id="id" styleClass="cell_big_label">
+                                     <minWidth>
+                                         <Region fx:constant="USE_PREF_SIZE" />
+                                     </minWidth>
+                                 </Label>
+                        <JFXCheckBox fx:id="title" mouseTransparent="true" prefHeight="17.0" prefWidth="226.0" text="\$title" />
                             </children>
                         </HBox>
-                        <FlowPane fx:id="tags" />
-                        <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-                        <Label fx:id="locationOfTask" styleClass="cell_small_label" text="\$locationOfTask" />
+                        <FlowPane fx:id="tags">
+                     <VBox.margin>
+                        <Insets left="60.0" top="5.0" />
+                     </VBox.margin></FlowPane>
+                        <Label fx:id="date" prefHeight="14.0" prefWidth="70.0" styleClass="cell_small_label" text="\$date">
+                     <VBox.margin>
+                        <Insets left="60.0" />
+                     </VBox.margin>
+                  </Label>
+                        <Label fx:id="locationOfTask" prefHeight="14.0" prefWidth="234.0" styleClass="cell_small_label" text="\$locationOfTask">
+                     <VBox.margin>
+                        <Insets left="60.0" />
+                     </VBox.margin>
+                  </Label>
                     </children>
                 </VBox>
             </children>
