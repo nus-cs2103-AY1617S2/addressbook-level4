@@ -5,12 +5,27 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 ---
 
 1. [Setting Up](#1-setting-up)
+    1. [Prerequisites](#11-prerequisites)
+    2. [Installing Checkstyle manually](#12-installing-checkstyle-manually)
 2. [Design](#2-design)
+    1. [Architecture](#21-architecture)
+    2. [UI Component](#22-ui-component)
+    3. [Logic Component](#23-logic-component)
+    4. [Model Component](#24-model-component)
+    5. [Storage Component](#25-storage-component)
 3. [Implementation](#3-implementation)
 4. [Code Quality and Testing](#4-code-quality-and-testing)
+    1. [Code Quality](#41-code-quality)
+    2. [Testing](#42-testing)
+    3. [Improving test coverage using Coveralls](#43-improving-test-coverage-using-coveralls)
+    4. [Troubleshooting tests](#44-troubleshooting-tests)
 5. [Dev Ops](#5-dev-ops)
 6. [Version Control](#6-version-control)
+    1. [Git + GitHub](#61-git--github)
+    2. [Branching and Workflow](#62-branching-and-workflow)
+    3. [Commit Messages](#63-commit-messages)
 
+<br/>
 * [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
 * [Appendix B: Glossary](#appendix-b--glossary)
 * [Appendix C : Product Survey](#appendix-c--product-survey)
@@ -555,4 +570,3 @@ Cons:
 * Specific to technical tasks
 * Tasks have to be small enough to be broken down into cards
 * Gets really messy when the project scales up
-
