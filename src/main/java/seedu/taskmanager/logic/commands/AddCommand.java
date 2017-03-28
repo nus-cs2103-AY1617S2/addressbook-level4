@@ -39,7 +39,8 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, Optional<String> startDate, Optional<String> endDate, Optional<String> description, Set<String> tags)
+    public AddCommand(String title, Optional<String> startDate, Optional<String> endDate,
+            Optional<String> description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -52,9 +53,12 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
-                startDate.isPresent() && !startDate.get().trim().equals("") ? Optional.of(new StartDate(startDate.get())) : Optional.empty(),
-                endDate.isPresent() && !endDate.get().trim().equals("") ? Optional.of(new EndDate(endDate.get())) : Optional.empty(),
-                description.isPresent() && !description.get().trim().equals("") ? Optional.of(new Description(description.get())) : Optional.empty(),
+                startDate.isPresent() && !startDate.get().trim().equals("") ?
+                        Optional.of(new StartDate(startDate.get())) : Optional.empty(),
+                endDate.isPresent() && !endDate.get().trim().equals("") ?
+                        Optional.of(new EndDate(endDate.get())) : Optional.empty(),
+                description.isPresent() && !description.get().trim().equals("") ?
+                        Optional.of(new Description(description.get())) : Optional.empty(),
                 new UniqueTagList(tagSet)
         );
         // @@author

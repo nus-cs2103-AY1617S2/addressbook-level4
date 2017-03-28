@@ -25,7 +25,8 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     // @@author A0140032E
-    public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate, Optional<Description> description, UniqueTagList tags) {
+    public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate,
+            Optional<Description> description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
         this.title = title;
         this.startDate = startDate;

@@ -72,7 +72,8 @@ public class XmlAdaptedTask {
         final EndDate endDate = this.endDate == null ? null : new EndDate(this.endDate);
         final Description description = this.description == null ? null : new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, Optional.ofNullable(startDate), Optional.ofNullable(endDate), Optional.ofNullable(description), tags);
+        return new Task(title, Optional.ofNullable(startDate), Optional.ofNullable(endDate),
+                Optional.ofNullable(description), tags);
     }
     // @@author
 }

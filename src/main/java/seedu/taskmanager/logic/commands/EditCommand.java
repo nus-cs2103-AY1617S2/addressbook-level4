@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
-import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
@@ -92,9 +91,12 @@ public class EditCommand extends Command {
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
         // @@author A0140032E
-        Optional <StartDate> updatedStartDate = editTaskDescriptor.isStartDateChanged() ? editTaskDescriptor.getStartDate() : taskToEdit.getStartDate();
-        Optional <EndDate> updatedEndDate = editTaskDescriptor.isEndDateChanged() ? editTaskDescriptor.getEndDate() : taskToEdit.getEndDate();
-        Optional <Description> updatedDescription = editTaskDescriptor.isDescriptionChanged() ? editTaskDescriptor.getDescription() : taskToEdit.getDescription();
+        Optional <StartDate> updatedStartDate = editTaskDescriptor.isStartDateChanged() ?
+                editTaskDescriptor.getStartDate() : taskToEdit.getStartDate();
+        Optional <EndDate> updatedEndDate = editTaskDescriptor.isEndDateChanged() ?
+                editTaskDescriptor.getEndDate() : taskToEdit.getEndDate();
+        Optional <Description> updatedDescription = editTaskDescriptor.isDescriptionChanged() ?
+                editTaskDescriptor.getDescription() : taskToEdit.getDescription();
         // @@author
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
@@ -162,7 +164,7 @@ public class EditCommand extends Command {
             startDateChanged = true;
             anyChangesMade = true;
         }
-        
+
         public boolean isStartDateChanged() {
             return startDateChanged;
         }

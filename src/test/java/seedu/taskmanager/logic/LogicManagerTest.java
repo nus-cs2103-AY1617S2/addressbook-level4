@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -211,10 +212,6 @@ public class LogicManagerTest {
                 + "description.butNoDescriptionPrefix", EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
         // @@author A0140032E
         assertCommandFailure("add Valid Title s/02/01/2017 e/01/01/2017 d/valid, description",
-                AddCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
-        assertCommandFailure("add Valid Title e/01/01/1970 d/valid, description",
-                AddCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01/01/2099 d/valid, description",
                 AddCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
         // @@author
     }
@@ -530,7 +527,11 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, privateStartDate, endDate, privateDescription, tags);
+            return new Task(title,
+                    Optional.ofNullable(privateStartDate),
+                    Optional.ofNullable(endDate),
+                    Optional.ofNullable(privateDescription),
+                    tags);
         }
 
         /**
@@ -542,8 +543,9 @@ public class LogicManagerTest {
          *            used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(new Title("Task " + seed), new StartDate("01/01/2017"), new EndDate("01/01/2017"),
-                    new Description("House of " + seed),
+            return new Task(new Title("Task " + seed), Optional.of(new StartDate("01/01/2017")),
+                    Optional.of(new EndDate("01/01/2017")),
+                    Optional.of(new Description("House of " + seed)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
@@ -554,9 +556,11 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getTitle().toString());
-            cmd.append(" e/").append(p.getEndDate());
-            cmd.append(" s/").append(p.getStartDate());
-            cmd.append(" d/").append(p.getDescription());
+            // @@author A0140032E
+            cmd.append(" s/").append(p.getStartDate().isPresent() ? p.getStartDate().get() : "");
+            cmd.append(" e/").append(p.getEndDate().isPresent() ? p.getEndDate().get() : "");
+            cmd.append(" d/").append(p.getDescription().isPresent() ? p.getDescription().get() : "");
+            // @@author
 
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
@@ -642,8 +646,11 @@ public class LogicManagerTest {
          * dummy values.
          */
         Task generateTaskWithTitle(String title) throws Exception {
-            return new Task(new Title(title), new StartDate("12/03/2017"), new EndDate("15/03/2017"),
-                    new Description("Buy house for 1"), new UniqueTagList(new Tag("tag")));
+            return new Task(new Title(title),
+                    Optional.of(new StartDate("12/03/2017")),
+                    Optional.of(new EndDate("15/03/2017")),
+                    Optional.of(new Description("Buy house for 1")),
+                    new UniqueTagList(new Tag("tag")));
         }
 
         // @@author A0131278H
@@ -655,8 +662,11 @@ public class LogicManagerTest {
          * @throws DuplicateTagException
          */
         public Task generateTaskWithStartDate(String startDate) throws DuplicateTagException, IllegalValueException {
-            return new Task(new Title("Watch Clockwork Orange"), new StartDate(startDate), new EndDate("15/03/2017"),
-                    new Description("Just do it"), new UniqueTagList(new Tag("tag")));
+            return new Task(new Title("Watch Clockwork Orange"),
+                    Optional.of(new StartDate(startDate)),
+                    Optional.of(new EndDate("15/03/2017")),
+                    Optional.of(new Description("Just do it")),
+                    new UniqueTagList(new Tag("tag")));
         }
 
         /**
@@ -667,8 +677,11 @@ public class LogicManagerTest {
          * @throws DuplicateTagException
          */
         public Task generateTaskWithEndDate(String endDate) throws DuplicateTagException, IllegalValueException {
-            return new Task(new Title("Watch Halestorm concert"), new StartDate("01/04/2017"), new EndDate(endDate),
-                    new Description("Just do it"), new UniqueTagList(new Tag("tag")));
+            return new Task(new Title("Watch Halestorm concert"),
+                    Optional.of(new StartDate("01/04/2017")),
+                    Optional.of(new EndDate(endDate)),
+                    Optional.of(new Description("Just do it")),
+                    new UniqueTagList(new Tag("tag")));
         }
         // @@author
     }
