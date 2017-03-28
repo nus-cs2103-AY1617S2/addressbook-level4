@@ -436,7 +436,7 @@ public class LogicManagerTest {
 
     // @@author: A0144422R
     @Test
-    public void execute_edit_name_and_tag_successful() throws Exception {
+    public void execute_editNameAndTag_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -456,7 +456,7 @@ public class LogicManagerTest {
 
     // @@author: A0144422R
     @Test
-    public void execute_edit_event_name_and_tag_successful() throws Exception {
+    public void execute_editEventNameAndTag_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -481,7 +481,7 @@ public class LogicManagerTest {
 
     // @@author: A0144422R
     @Test
-    public void execute_edit_deadline_task_tag_successful() throws Exception {
+    public void execute_editDeadlineTaskTag_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -503,7 +503,7 @@ public class LogicManagerTest {
 
     // @@author: A0144422R
     @Test
-    public void execute_edit_confusing_name_successful() throws Exception {
+    public void execute_editConfusingName_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -521,6 +521,32 @@ public class LogicManagerTest {
                 "edit C1 from today uihasduhas to tomorrow uhaius #tag1 #tag2",
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, backup),
                 expectedAB, expectedAB.getTaskList());
+    }
+
+    // @@author: A0144422R
+    @Test
+    public void execute_editDuplicateTask_notAllowed() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+        helper.addToModel(model, threeTasks);
+        model.prepareTaskList(FXCollections.observableArrayList(),
+                FXCollections.observableArrayList(),
+                FXCollections.observableArrayList());
+        assertCommandFailure("edit C1 Task 3 #tag3 #tag4",
+                EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    // @@author: A0144422R
+    @Test
+    public void execute_editIndexNotFound_notAllowed() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+        helper.addToModel(model, threeTasks);
+        model.prepareTaskList(FXCollections.observableArrayList(),
+                FXCollections.observableArrayList(),
+                FXCollections.observableArrayList());
+        assertCommandFailure("edit C100 Task 3 #tag3 #tag4",
+                Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     // ----------------------Today----------------------
