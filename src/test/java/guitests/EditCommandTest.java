@@ -11,7 +11,6 @@ import seedu.address.testutil.TestTask;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
-import seedu.task.model.task.Deadline;
 import seedu.task.model.task.PriorityLevel;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.

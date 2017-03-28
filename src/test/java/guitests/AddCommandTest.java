@@ -10,7 +10,6 @@ import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.AddCommand;
-import seedu.task.model.task.Deadline;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
