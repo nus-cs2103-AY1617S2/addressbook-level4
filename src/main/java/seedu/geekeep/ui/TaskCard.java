@@ -35,17 +35,17 @@ public class TaskCard extends UiPart<Region> {
         id.setText("#" + displayedIndex + " ");
         done.setSelected(task.isDone());
         if (task.getEndDateTime() != null && task.getStartDateTime() != null) {
-            date.setText(task.getStartDateTime() + " until " + task.getEndDateTime());
+            date.setText("From: " + task.getStartDateTime() + " until " + task.getEndDateTime());
         } else if (task.getEndDateTime() != null && task.getStartDateTime() == null) {
-            date.setText(task.getEndDateTime().value);
+            date.setText("By: " + task.getEndDateTime().value);
         } else {
-            date.setText(null);
+            date.setText("-");
         }
 
         if (task.getLocation() == null) {
-            locationOfTask.setText("");
+            locationOfTask.setText("Details: -");
         } else {
-            locationOfTask.setText(task.getLocation().value);
+            locationOfTask.setText("Details: " + task.getLocation().value);
         }
 
         initTags(task);
