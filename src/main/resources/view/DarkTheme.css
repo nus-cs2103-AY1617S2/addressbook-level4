@@ -28,6 +28,10 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
+.text-field.error {
+    -fx-background-color: #EA4858;
+}
+
 .tab-pane {
     -fx-padding: 0 0 0 1;
 }
@@ -280,7 +284,7 @@
 
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #F70D1A;
+    -fx-text-fill: #D8683E;
 }
 
 #filterField, #personListPanel, #personWebpage {
