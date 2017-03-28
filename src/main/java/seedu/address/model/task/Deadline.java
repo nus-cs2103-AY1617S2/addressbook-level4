@@ -11,11 +11,34 @@ public class Deadline {
 
     private ZonedDateTime dateTime;
 
+    /**
+     * Constructs a new Deadline with the given DateTime.
+     *
+     * @param dateTime the DateTime to specify for the deadline
+     * @throws PastDateTimeException if {@code dateTime} is before the current DateTime
+     */
     public Deadline(ZonedDateTime dateTime) throws PastDateTimeException {
+        this(dateTime, false);
+    }
+
+    /**
+     * Constructs a new Deadline with the given DateTime. Ignores checking for dates in the past if
+     * {@code ignorePast} is true.
+     *
+     * @param dateTime the DateTime to specify for the deadline
+     * @param allowPastDateTime ignore checking if {@code dateTime} is in the past. Avoid setting
+     *        to true except for cases such as loading from storage
+     * @throws PastDateTimeException if {@code dateTime} is before the current DateTime and
+     *         {@code allowPastDateTime} is {@code false}
+     */
+    public Deadline(ZonedDateTime dateTime, boolean allowPastDateTime) throws PastDateTimeException {
         assert dateTime != null;
 
-        if (dateTime.isBefore(ZonedDateTime.now())) {
-            throw new PastDateTimeException(MESSAGE_DEADLINE_CONSTRAINTS);
+        // TODO
+        if (!allowPastDateTime) {
+            if (dateTime.isBefore(ZonedDateTime.now())) {
+                throw new PastDateTimeException(MESSAGE_DEADLINE_CONSTRAINTS);
+            }
         }
 
         this.dateTime = dateTime;

@@ -16,7 +16,7 @@ public class StartEndDateTime {
     private ZonedDateTime endDateTime;
 
     /**
-     * Constructs a new StartDateTime with the given start and end time.
+     * Constructs a new StartDateTime with the given start and end DateTime.
      *
      * @param startDateTime the start DateTime
      * @param endDateTime the end DateTime
@@ -29,14 +29,15 @@ public class StartEndDateTime {
     }
 
     /**
-     * Constructs a new StartEndDateTime with the given start and end time. Ignores checking for
+     * Constructs a new StartEndDateTime with the given start and end DateTime. Ignores checking for
      * dates in the past if {@code ignorePast} is true.
      *
      * @param startDateTime the start DateTime
      * @param endDateTime the end DateTime
-     * @param allowPastDateTime ignore checking if DateTimes are in the past. Avoid setting to true except for cases
-     *        such as loading from storage
-     * @throws PastDateTimeException if any of the DateTimes are before the current DateTime
+     * @param allowPastDateTime ignore checking if DateTimes are in the past. Avoid setting to true
+     *        except for special cases such as loading from storage
+     * @throws PastDateTimeException if any of the DateTimes are before the current DateTime and
+     *         {@code allowPastDateTime} is {@code false}
      * @throws InvalidDurationException if the end DateTime is before or same as the start DateTime
      */
     public StartEndDateTime(ZonedDateTime startDateTime, ZonedDateTime endDateTime, boolean allowPastDateTime)

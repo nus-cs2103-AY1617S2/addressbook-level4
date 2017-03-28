@@ -11,31 +11,35 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartEndDateTime;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.exceptions.InvalidDurationException;
+import seedu.address.model.task.exceptions.PastDateTimeException;
 
+// @@author A0140023E
 /**
  * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
 
-    @XmlElement(required = true)
-    private String name;
+    @XmlElement(name = "name", required = true)
+    private String nameElement;
 
-    @XmlElement
-    private String deadline;
+    @XmlElement(name = "deadline")
+    private String deadlineElement;
 
-    @XmlElement
-    private String eventStartDate;
+    @XmlElement(name = "startDate")
+    private String startDateTimeElement;
 
-    @XmlElement
-    private String eventEndDate;
+    @XmlElement(name = "endDate")
+    private String endDateTimeElement;
 
-    @XmlElement
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElement(name = "tag")
+    private List<XmlAdaptedTag> tagElements = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -50,54 +54,121 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().value;
+        setNameElement(source.getName().value);
 
-        if (source.getDeadline().isPresent()) {
-            deadline = source.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT);
+        setDeadlineElementIfPresent(source.getDeadline());
+        // the start and end date elements must be set together because they cannot exist separately
+        setStartEndDateElementsIfPresent(source.getStartEndDateTime());
+
+        // TODO do I need to check if Deadline exists then StartEndDateTime cannot exists and vice versa
+
+        setTagElement(source.getTags());
+    }
+
+    /**
+     * Sets the XmlElement name to the source task's name
+     */
+    private void setNameElement(String sourceName) {
+        nameElement = sourceName;
+    }
+
+    /**
+     * Sets the XmlElement name to the source task's deadline if it is present
+     */
+    private void setDeadlineElementIfPresent(Optional<Deadline> sourceDeadline) {
+        if (sourceDeadline.isPresent()) {
+            Deadline deadline = sourceDeadline.get();
+            deadlineElement = deadline.getValue().format(ParserUtil.DATE_TIME_FORMAT);
         }
+    }
 
-        if (source.getStartEndDateTime().isPresent()) {
-            StartEndDateTime startEndDateTime = source.getStartEndDateTime().get();
-            eventStartDate = startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT);
-            eventEndDate = startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT);
+    /**
+     * Sets the XmlElement startDate and endDate to the source task's start and dates if they are present
+     */
+    private void setStartEndDateElementsIfPresent(Optional<StartEndDateTime> sourceStartEndDateTime) {
+        if (sourceStartEndDateTime.isPresent()) {
+            StartEndDateTime startEndDateTime = sourceStartEndDateTime.get();
+            startDateTimeElement = startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT);
+            endDateTimeElement = startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT);
         }
+    }
 
-        tagged = new ArrayList<>();
-        for (Tag tag : source.getTags()) {
-            tagged.add(new XmlAdaptedTag(tag));
+    /**
+     * Sets each tag XmlElement to the source task's tags from its unique tag list
+     */
+    private void setTagElement(UniqueTagList sourceTagList) {
+        tagElements = new ArrayList<>();
+        for (Tag tag : sourceTagList) {
+            tagElements.add(new XmlAdaptedTag(tag));
         }
     }
 
     /**
      * Converts this jaxb-friendly adapted task object into the model's Task object.
-     *
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> taskTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            taskTags.add(tag.toModelType());
+        // TODO get seems to not be a good name, as it is usually used for getters
+        final Name name = getNameFromXmlElement();
+        final Optional<Deadline> deadline = getDeadlineFromXmlElement();
+        final Optional<StartEndDateTime> startEndDateTime = getStartEndDateTimeFromXmlElement();
+        final UniqueTagList tagList = getTagListFromXmlElement();
+
+        return new Task(name, deadline, startEndDateTime, tagList);
+    }
+
+    /**
+     * Returns a Name created from the XmlElement.
+     * @throws IllegalValueException if the name does not fulfill the name's constraints
+     */
+    private Name getNameFromXmlElement() throws IllegalValueException {
+        return new Name(nameElement);
+    }
+
+    /**
+     * Returns an {@link Optional} wrapping the {@link Deadline} created from the XmlElement.
+     * If the XmlElement for deadline does not exist, returns an empty {@link Optional}.
+     * @throws PastDateTimeException should never be thrown because dates in the past are allowed
+     */
+    private Optional<Deadline> getDeadlineFromXmlElement() throws PastDateTimeException {
+        // return empty if xml element does not exist
+        if (deadlineElement == null) {
+            return Optional.empty();
         }
+        // construct Deadline with allowPastDateTime set to true because this is loaded from storage
+        Deadline deadline = new Deadline(ZonedDateTime.parse(deadlineElement, ParserUtil.DATE_TIME_FORMAT), true);
+        return Optional.of(deadline);
+    }
 
-        final Name name = new Name(this.name);
-
-        Optional<Deadline> deadline = Optional.empty();
-        Optional<StartEndDateTime> startEndDateTime = Optional.empty();
-
-        if (this.deadline != null) {
-            deadline = Optional.of(new Deadline(ZonedDateTime.parse(this.deadline, ParserUtil.DATE_TIME_FORMAT)));
+    /**
+     * Returns an {@link Optional} wrapping the {@link StartEndDateTime} created from the two XmlElements.
+     * If any of the two XmlElements for StartEndDateTime does not exist, returns an empty {@link Optional}.
+     * @throws PastDateTimeException should never be thrown because dates in the past are allowed
+     * @throws InvalidDurationException if the end DateTime is before or same as the start DateTime
+     */
+    private Optional<StartEndDateTime> getStartEndDateTimeFromXmlElement()
+            throws PastDateTimeException, InvalidDurationException {
+        // return empty if either xml element does not exist
+        if (startDateTimeElement == null || endDateTimeElement == null) {
+            return Optional.empty();
         }
+        ZonedDateTime startDateTime = ZonedDateTime.parse(startDateTimeElement, ParserUtil.DATE_TIME_FORMAT);
+        ZonedDateTime endDateTime = ZonedDateTime.parse(endDateTimeElement, ParserUtil.DATE_TIME_FORMAT);
+        // construct StartEndDateTime with allowPastDateTime set to true because this is loaded from storage
+        StartEndDateTime startEndDateTime = new StartEndDateTime(startDateTime, endDateTime, true);
+        return Optional.of(startEndDateTime);
+    }
 
-        if (this.eventStartDate != null && this.eventEndDate != null) {
-            // to make further checks because file may be corrupted ane field is missing
-            ZonedDateTime startDateTime = ZonedDateTime.parse(eventStartDate, ParserUtil.DATE_TIME_FORMAT);
-            ZonedDateTime endDateTime = ZonedDateTime.parse(eventEndDate, ParserUtil.DATE_TIME_FORMAT);
-            // construct StartEndDateTime with allowPastDateTime set to true because this is loaded from storage
-            startEndDateTime = Optional.of(new StartEndDateTime(startDateTime, endDateTime, true));
+    /**
+     * Returns a UniqueTagList of the tags created from every tag XmlElement for the Task
+     * @throws IllegalValueException if any of the tags from the XML is invalid
+     * @throws DuplicateTagException if any of the tags are duplicates
+     */
+    private UniqueTagList getTagListFromXmlElement() throws IllegalValueException, DuplicateTagException {
+        final List<Tag> tags = new ArrayList<>();
+        for (XmlAdaptedTag adaptedTag : tagElements) {
+            tags.add(adaptedTag.toModelType());
         }
-
-
-        final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, deadline, startEndDateTime, tags);
+        return new UniqueTagList(tags);
     }
 }
