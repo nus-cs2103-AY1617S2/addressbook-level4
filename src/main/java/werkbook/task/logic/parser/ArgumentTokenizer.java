@@ -142,6 +142,8 @@ public class ArgumentTokenizer {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
             positions.add(extendedPrefix);
             argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
+            System.out.println("Looking at prefix");
+            System.out.println(extendedPrefix.getPrefix().getPrefix());
         }
 
         return positions;
@@ -178,6 +180,8 @@ public class ArgumentTokenizer {
         PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
         prefixPositions.add(endPositionMarker);
 
+        //System.out.println("argsString is: " + argsString);
+
         // Extract the prefixed arguments and preamble (if any)
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
             Prefix prefix = prefixPositions.get(i).getPrefix();
@@ -185,8 +189,8 @@ public class ArgumentTokenizer {
             int valueStartPos = prefixPositions.get(i).getStartPosition() + prefix.getPrefix().length();
             String value = argsString.substring(valueStartPos, prefixPositions.get(i + 1).getStartPosition());
 
-            // If it is a date, but text following it is not value, continue
-            if (prefix.isDateTime() && !DateTimeParser.isValidDate(value)) {
+            // If it is a date, text following is not empty and is not valid date, continue
+            if (prefix.isDateTime() && !value.isEmpty() && !DateTimeParser.isValidDate(value)) {
                 PrefixPosition another = new PrefixPosition(new Prefix(""),
                         prefixPositions.get(i + 1).getStartPosition());
                 filteredList.add(another);
