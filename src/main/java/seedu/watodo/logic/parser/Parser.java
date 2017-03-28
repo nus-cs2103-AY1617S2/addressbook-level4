@@ -28,6 +28,7 @@ import seedu.watodo.logic.commands.ListMonthCommand;
 import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.MarkCommand;
 import seedu.watodo.logic.commands.SelectCommand;
+import seedu.watodo.logic.commands.UnmarkCommand;
 
 /**
  * Parses user input.
@@ -116,6 +117,9 @@ public class Parser {
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
+
+        case UnmarkCommand.COMMAND_WORD:
+            return new UnmarkCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

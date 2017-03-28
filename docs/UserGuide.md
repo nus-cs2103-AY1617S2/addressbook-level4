@@ -25,7 +25,7 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list all`** : lists all tasks
-   * **`add `**` send budget proposal by next Thurs noon to boss #project A` :
+   * **`add `**` send budget proposal by next Thurs noon to boss #project` :
      adds a task to the task manager.
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -80,7 +80,7 @@ Format: `add TASK by/ DATETIME [#TAG]...` <br>
 Examples:
 
 * `add prepare meeting slides by/ tomorrow 9am #impt #work`
-* `add send budget proposal on/ Thurs noon to boss #project A`
+* `add send budget proposal on/ Thurs noon to boss #project`
 
 ### 2.2.3. Adding an event
 
@@ -90,7 +90,7 @@ Format: `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...` <br>
 Examples:
 
 * `add attend skills upgrading workshop from/next mon to/ 05/16`
-* `add meeting at board room 4 from/ 10am to/ 11am #project A #meetings`
+* `add meeting at board room 4 from/ 10am to/ 11am #project #meetings`
 
 ### 2.3. Listing tasks by type : `list LIST_TYPE`
 
@@ -127,7 +127,7 @@ Shows a list of all tasks that have been marked as completed.<br>
 ### 2.4. Finding all tasks containing any keyword in their description: `find`
 
 Finds tasks which contain any of the given keywords in their description.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 > * Only the task description is searched.
 > * The search is case insensitive. e.g `Report` will match `report`
@@ -169,7 +169,7 @@ Examples:
 ### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the task manager. <br>
-Format: `delete INDEX`
+Format: `delete INDEX [MORE_INDICES]...`
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -178,13 +178,13 @@ Format: `delete INDEX`
 Examples:
 
 * `list all`<br>
-  `delete 2`<br>
-  Deletes the 2nd task in the list of all tasks.
+  `delete 2 3`<br>
+  Deletes the 2nd and 3rd task in the list of all tasks.
 
 ### 2.7. Mark a task : `mark`
 
 Marks the task identified by the index number used in the last task listing.<br>
-Format: `mark INDEX`
+Format: `mark INDEX [MORE_INDICES]...`
 
 _**Alternative keyword: check, finish**_
 
@@ -196,13 +196,13 @@ _**Alternative keyword: check, finish**_
 Examples:
 
 * `list today`<br>
-  `mark 2`<br>
-  Marks the 2nd task in the list of task today.
+  `mark 2 3`<br>
+  Marks the 2nd and 3rd task in the list of task today.
 
 ### 2.8. Unmark a task : `unmark`
 
 Unmarks the task identified by the index number used in the marked task listing.<br>
-Format: `unmark INDEX`
+Format: `unmark INDEX [MORE_INDICES]...`
 
 _**Alternative keyword: uncheck, unfinish**_
 
@@ -213,8 +213,8 @@ _**Alternative keyword: uncheck, unfinish**_
 Examples:
 
 * `list marked`<br>
-  `unmark 2`<br>
-  Unmarks the 2nd task in the list.
+  `unmark 2 3`<br>
+  Unmarks the 2nd and 3rd task in the list.
 
 ### 2.9. Undoing previous step : `undo`
 
@@ -261,19 +261,17 @@ There is no need to save manually.
 > * `list #TAG`<br>
 > * `list marked`<br>
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+* **Find** : `find KEYWORD [MORE_KEYWORDS]...` <br>
 
-* **Edit** :
-> `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...`
+* **Edit** : `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...` <br>
 
-* **Mark** : `mark INDEX` <br>
+* **Mark** : `mark INDEX [MORE_INDICES]...` <br>
 
-* **Unmark** : `unmark INDEX` <br>
+* **Unmark** : `unmark INDEX [MORE_INDICES]...` <br>
 
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+* **Delete** : `delete INDEX [MORE_INDICES]...` <br>
 
-* **Clear** : `clear`
+* **Clear** : `clear` <br>
 
 * **Undo** : `undo` <br>
 
