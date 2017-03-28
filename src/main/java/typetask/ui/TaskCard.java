@@ -73,6 +73,7 @@ public class TaskCard extends UiPart<Region> {
         //add setImages...
     }
     //@@author A0139926R
+    //Checks event task status. Uses endDate to check
     private void setStatusForEventTask(ReadOnlyTask task) {
         if (!task.getEndDate().value.equals("")) {
             List<Date> dates = DateParser.parse(task.getEndDate().value);
@@ -87,6 +88,7 @@ public class TaskCard extends UiPart<Region> {
         }
     }
     //@@author A0139926R
+    //Checks deadline task status. Uses date to check
     private void setStatusForDeadlineTask(ReadOnlyTask task) {
         if (!task.getDate().value.equals("")) {
             List<Date> dates = DateParser.parse(task.getDate().value);

@@ -19,7 +19,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
 
-        //add another person
+        //add another task
         taskToAdd = td.ida;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
