@@ -166,7 +166,7 @@ public class ArgumentTokenizer {
      * e.g. '/t' in 'add James /t friend'
      */
     public static class Prefix {
-        final public String prefix;
+        final String prefix;
 
         Prefix(String prefix) {
             this.prefix = prefix;
