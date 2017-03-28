@@ -1,13 +1,15 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
 import static seedu.todolist.logic.commands.CompleteCommand.MESSAGE_COMPLETE_TODO_SUCCESS;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import seedu.todolist.commons.core.Messages;
-import seedu.todolist.logic.commands.CompleteCommand;
 import seedu.todolist.testutil.TestTodo;
 import seedu.todolist.testutil.TestUtil;
 
@@ -76,7 +78,7 @@ public class CompleteCommandTest extends TodoListGuiTest {
     @Test
     public void complete_invalidTime_failure() {
         commandBox.runCommand("complete 1 invalidDateString");
-        assertResultMessage("Date must be entered as: " + CompleteCommand.COMPLETE_TIME_FORMAT);
+        assertResultMessage("Date must be entered as: " + DATE_FORMAT);
     }
 
     @Test

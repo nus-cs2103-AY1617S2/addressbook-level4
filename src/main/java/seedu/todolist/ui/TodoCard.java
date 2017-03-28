@@ -1,5 +1,7 @@
 package seedu.todolist.ui;
 
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
 import java.text.SimpleDateFormat;
 
 import javafx.fxml.FXML;
@@ -36,15 +38,15 @@ public class TodoCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         if (todo.getStartTime() != null) {
             start.setText(String.format("Start: %1$s",
-                    new SimpleDateFormat(AddCommand.DATE_FORMAT).format(todo.getStartTime())));
+                    new SimpleDateFormat(DATE_FORMAT).format(todo.getStartTime())));
         }
         if (todo.getEndTime() != null) {
             end.setText(String.format("End: %1$s",
-                    new SimpleDateFormat(AddCommand.DATE_FORMAT).format(todo.getEndTime())));
+                    new SimpleDateFormat(DATE_FORMAT).format(todo.getEndTime())));
         }
         if (todo.getCompleteTime() != null) {
             complete.setText(String.format("Completed at %1$s",
-                    new SimpleDateFormat(CompleteCommand.COMPLETE_TIME_FORMAT).format(todo.getCompleteTime())));
+                    new SimpleDateFormat(DATE_FORMAT).format(todo.getCompleteTime())));
             complete.setStyle("-fx-text-fill: #00ad36;");
         } else {
             complete.setText("Not Complete");

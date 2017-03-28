@@ -23,12 +23,6 @@ public class FindCommand extends Command {
             + "Example 2: " + COMMAND_WORD + CliSyntax.PREFIX_TAG + "milk\n";
     public static final String MESSAGE_EMPTY_ERROR = "Cannot leave fields blank.";
 
-    public static enum FindTime {
-        START_TIME,
-        END_TIME,
-        COMPLETE_TIME
-    }
-
     private Set<String> keywords;
     private UniqueTagList tags;
     private Date startTime;
@@ -38,45 +32,18 @@ public class FindCommand extends Command {
     /**
      * Creates a FindCommand with keywords as parameters
      */
-    public FindCommand(Set<String> keywords) {
+    public FindCommand(Set<String> keywords, Date startTime, Date endTime, Date completeTime, UniqueTagList tags) {
         this.keywords = keywords;
-    }
-
-    //@@author A0163720M
-    /**
-     * Creates a FindCommand with tags as parameters
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
-    public FindCommand(UniqueTagList tags) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.completeTime = completeTime;
         this.tags = tags;
     }
-    //@@author
 
-    public FindCommand(Date date, FindTime timeToFind) {
-        if (timeToFind == FindTime.START_TIME) {
-            this.startTime = date;
-        } else if (timeToFind == FindTime.END_TIME) {
-            this.endTime = date;
-        } else if (timeToFind == FindTime.COMPLETE_TIME) {
-            this.completeTime = date;
-        }
-    }
     //@@author A0163720M
     @Override
     public CommandResult execute() {
-        if (tags != null) {
-            model.updateFilteredTodoList(tags);
-        } else if (startTime != null) {
-            model.filterByStartTime(startTime);
-        } else if (endTime != null) {
-            model.filterByEndTime(endTime);
-        } else if (completeTime != null) {
-            model.filterByCompleteTime(completeTime);
-        } else {
-            model.updateFilteredTodoList(keywords);
-        }
-
+        model.updateFilteredTodoList(keywords, startTime, endTime, completeTime, tags);
         return new CommandResult(getMessageForTodoListShownSummary(model.getFilteredTodoList().size()));
     }
     //@@author
