@@ -34,7 +34,7 @@ Component: Logic
    * [Short commands]
 * Code written: [[functional code](A0143157J.md)][[test code](A0143157J.md)]
 * Other major contributions:
-  * Did the initial refactoring from AddressBook to TaskBoss [[#50](https://github.com/CS2103JAN2017-W14-B2/main/pull/50), [#51](https://github.com/CS2103JAN2017-W14-B2/main/pull/51), [#53]https://github.com/CS2103JAN2017-W14-B2/main/pull/53, [#54](https://github.com/CS2103JAN2017-W14-B2/main/pull/54)]
+  * Did the initial refactoring from AddressBook to TaskBoss [[#50](https://github.com/CS2103JAN2017-W14-B2/main/pull/50), [#51](https://github.com/CS2103JAN2017-W14-B2/main/pull/51), [#53](https://github.com/CS2103JAN2017-W14-B2/main/pull/53), [#54](https://github.com/CS2103JAN2017-W14-B2/main/pull/54)]
   * Set up Travis, Appveyor and Coveralls
   * Scroll to tasks after updates [[#137](https://github.com/CS2103JAN2017-W14-B2/main/pull/137)]
   * Designed TaskBoss prototype
