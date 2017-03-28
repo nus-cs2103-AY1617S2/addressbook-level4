@@ -160,26 +160,34 @@ public class UniqueTaskList implements Iterable<Task> {
         if (keyword.equals(SORT_KEYWORD_STARTDATE)) {
             internalList.sort(new Comparator<Task>() {
                 @Override
-                // @@author A0140032E
                 public int compare(Task t1, Task t2) {
                     if (t1.getStartDate().isPresent() && t2.getStartDate().isPresent()) {
                         return t1.getStartDate().get().compareTo(t2.getStartDate().get());
                     }
-                    return 0;
+                    // @@author A0140032E
+                    if (t2.getStartDate().isPresent()) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                    // @@author A0131278H
                 }
-                // @@author A0131278H
             });
         } else if (keyword.equals(SORT_KEYWORD_ENDDATE)) {
             internalList.sort(new Comparator<Task>() {
                 @Override
-                // @@author A0140032E
                 public int compare(Task t1, Task t2) {
                     if (t1.getEndDate().isPresent() && t2.getEndDate().isPresent()) {
                         return t1.getEndDate().get().compareTo(t2.getEndDate().get());
                     }
-                    return 0;
+                    // @@author A0140032E
+                    if (t2.getEndDate().isPresent()) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                    // @@author A0131278H
                 }
-             // @@author A0131278H
             });
         } else {
             return; // Error message will be thrown by SortCommand
