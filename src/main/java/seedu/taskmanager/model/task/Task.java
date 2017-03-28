@@ -13,9 +13,11 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Title title;
+    // @@author A0140032E
     private Optional<StartDate> startDate;
-    private EndDate endDate;
-    private Description description;
+    private Optional<EndDate> endDate;
+    private Optional<Description> description;
+    // @@author
 
     private UniqueTagList tags;
 
@@ -23,7 +25,7 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     // @@author A0140032E
-    public Task(Title title, Optional<StartDate> startDate, EndDate endDate, Description description, UniqueTagList tags) {
+    public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate, Optional<Description> description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
         this.title = title;
         this.startDate = startDate;
@@ -51,6 +53,7 @@ public class Task implements ReadOnlyTask {
         return title;
     }
 
+    // @@author A0140032E
     public void setStartDate(Optional<StartDate> startDate) {
         this.startDate = startDate;
     }
@@ -60,25 +63,26 @@ public class Task implements ReadOnlyTask {
         return startDate;
     }
 
-    public void setEndDate(EndDate endDate) {
+    public void setEndDate(Optional<EndDate> endDate) {
         assert endDate != null;
         this.endDate = endDate;
     }
 
     @Override
-    public EndDate getEndDate() {
+    public Optional<EndDate> getEndDate() {
         return endDate;
     }
 
-    public void setDescription(Description description) {
+    public void setDescription(Optional<Description> description) {
         assert description != null;
         this.description = description;
     }
 
     @Override
-    public Description getDescription() {
+    public Optional<Description> getDescription() {
         return description;
     }
+    // @@author
 
     @Override
     public UniqueTagList getTags() {

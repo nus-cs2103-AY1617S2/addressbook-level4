@@ -18,20 +18,20 @@ public class SampleDataUtil {
         try {
             // @@author A0140032E
             return new Task[] {
-                new Task(new Title("Visit Alex Yeoh"), Optional.ofNullable(new StartDate("01/11/2017")), new EndDate("02/11/2017"),
-                    new Description("His address is Blk 30 Geylang Street 29, #06-40"),
+                new Task(new Title("Visit Alex Yeoh"), Optional.ofNullable(new StartDate("01/11/2017")), Optional.ofNullable(new EndDate("02/11/2017")),
+                        Optional.ofNullable(new Description("His address is Blk 30 Geylang Street 29, #06-40")),
                     new UniqueTagList("social")),
-                new Task(new Title("Collect files from boss"), Optional.ofNullable(new StartDate("05/11/2017")), new EndDate("08/11/2017"),
-                    new Description("Important business files"),
+                new Task(new Title("Collect files from boss"), Optional.ofNullable(new StartDate("05/11/2017")), Optional.ofNullable(new EndDate("08/11/2017")),
+                        Optional.ofNullable(new Description("Important business files")),
                     new UniqueTagList("colleagues", "business")),
-                new Task(new Title("Visit Charlotte Oliveiro"), Optional.ofNullable(new StartDate("20/12/2017")), new EndDate("20/12/2017"),
-                    new Description("Her address is Blk 11 Ang Mo Kio Street 74, #11-04"),
+                new Task(new Title("Visit Charlotte Oliveiro"), Optional.ofNullable(new StartDate("20/12/2017")), Optional.ofNullable(new EndDate("20/12/2017")),
+                        Optional.ofNullable(new Description("Her address is Blk 11 Ang Mo Kio Street 74, #11-04")),
                     new UniqueTagList("social")),
-                new Task(new Title("Call David Li"), Optional.ofNullable(new StartDate("08/08/2017")), new EndDate("10/08/2017"),
-                    new Description("his number is 12345678"),
+                new Task(new Title("Call David Li"), Optional.ofNullable(new StartDate("08/08/2017")), Optional.ofNullable(new EndDate("10/08/2017")),
+                        Optional.ofNullable(new Description("his number is 12345678")),
                     new UniqueTagList("schoolwork")),
-                new Task(new Title("Submit project report"), Optional.ofNullable(new StartDate("20/07/2017")), new EndDate("21/07/2017"),
-                    new Description("Submit to tutor in class"),
+                new Task(new Title("Submit project report"), Optional.ofNullable(new StartDate("20/07/2017")), Optional.ofNullable(new EndDate("21/07/2017")),
+                        Optional.ofNullable(new Description("Submit to tutor in class")),
                     new UniqueTagList("schoolwork"))
             };
             // @@author

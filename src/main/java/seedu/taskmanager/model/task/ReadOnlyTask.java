@@ -12,8 +12,8 @@ public interface ReadOnlyTask {
 
     Title getTitle();
     Optional<StartDate> getStartDate();
-    EndDate getEndDate();
-    Description getDescription();
+    Optional<EndDate> getEndDate();
+    Optional<Description> getDescription();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -40,12 +40,9 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         // @@author A0140032E
         builder.append(getTitle())
-                .append(" StartDate: ")
-                .append(getStartDate().isPresent() ? getStartDate().get() : "")
-                .append(" EndDate: ")
-                .append(getEndDate())
-                .append(" Description: ")
-                .append(getDescription())
+                .append(getStartDate().isPresent() ? " Start Date: " + getStartDate().get() : "")
+                .append(getEndDate().isPresent() ? " End Date: " + getEndDate().get() : "")
+                .append(getDescription().isPresent() ? " Description: " + getDescription().get() : "")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         // @@author

@@ -82,7 +82,6 @@ public class ParserUtil {
         assert startDate != null;
         return startDate.isPresent() && !startDate.get().trim().equals("") ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
-    // @@author
 
     /**
      * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
@@ -90,7 +89,7 @@ public class ParserUtil {
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
-        return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
+        return description.isPresent() && !description.get().trim().equals("") ? Optional.of(new Description(description.get())) : Optional.empty();
     }
 
     /**
@@ -98,8 +97,9 @@ public class ParserUtil {
      */
     public static Optional<EndDate> parseEndDate(Optional<String> endDate) throws IllegalValueException {
         assert endDate != null;
-        return endDate.isPresent() ? Optional.of(new EndDate(endDate.get())) : Optional.empty();
+        return endDate.isPresent() && !endDate.get().trim().equals("") ? Optional.of(new EndDate(endDate.get())) : Optional.empty();
     }
+    // @@author
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.

@@ -172,9 +172,14 @@ public class UniqueTaskList implements Iterable<Task> {
         } else if (keyword.equals(SORT_KEYWORD_ENDDATE)) {
             internalList.sort(new Comparator<Task>() {
                 @Override
+                // @@author A0140032E
                 public int compare(Task t1, Task t2) {
-                    return t1.getEndDate().compareTo(t2.getEndDate());
+                    if (t1.getEndDate().isPresent() && t2.getEndDate().isPresent()) {
+                        return t1.getEndDate().get().compareTo(t2.getEndDate().get());
+                    }
+                    return 0;
                 }
+             // @@author A0131278H
             });
         } else {
             return; // Error message will be thrown by SortCommand
