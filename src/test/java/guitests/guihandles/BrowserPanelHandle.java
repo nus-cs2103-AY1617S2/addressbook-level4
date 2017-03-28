@@ -2,14 +2,14 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import seedu.todolist.TestApp;
 
 /**
  * A handler for the BrowserPanel of the UI
  */
 public class BrowserPanelHandle extends GuiHandle {
 
-    private static final String BROWSER_ID = "#browser";
+    private static final String TASKDETAILS_ID = "#taskDetails";
 
     public BrowserPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
@@ -19,7 +19,7 @@ public class BrowserPanelHandle extends GuiHandle {
      * Clicks on the WebView.
      */
     public void clickOnWebView() {
-        guiRobot.clickOn(BROWSER_ID);
+        guiRobot.clickOn(TASKDETAILS_ID);
     }
 
 }

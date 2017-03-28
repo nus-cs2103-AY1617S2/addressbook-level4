@@ -36,15 +36,24 @@
        </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="personList" minWidth="340" prefWidth="340">
+            <VBox fx:id="personList" minWidth="570" prefWidth="570">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
                <children>
-                  <AnchorPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+               <HBox>
+               <children>
+               <Button fx:id="incompleteButton" onAction="#handleIncompleteButton" text="Incomplete"/>
+               <Button fx:id="completedButton"  onAction="#handleCompletedButton" text="Completed"/>
+               <Button fx:id="upcomingButton"  onAction="#handleUpcomingButton" text="Upcoming"/>
+               <Button fx:id="overdueButton"  onAction="#handleOverdueButton" text="Overdue"/>
+               <Button fx:id="allButton"  onAction="#handleAllButton" text="All"/>
+               </children>
+               </HBox>
+                  <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
             </VBox>
-            <AnchorPane fx:id="browserPlaceholder" prefWidth="340" >
+            <AnchorPane fx:id="browserPlaceholder" styleClass="anchor-pane-with-border" prefWidth="250" >
                 <padding>
                     <Insets top="10" bottom="10" left="10" right="10"/>
                 </padding>
