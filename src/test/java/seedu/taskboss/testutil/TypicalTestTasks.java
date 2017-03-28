@@ -12,7 +12,7 @@ import seedu.taskboss.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI, taskJ, taskK;
+    public TestTask taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI, taskJ, taskK, taskL;
 
     public TypicalTestTasks() {
         try {
@@ -79,6 +79,12 @@ public class TypicalTestTasks {
                     .withStartDateTime("Dec 20 2019")
                     .withEndDateTime("Dec 21 2019")
                     .withInformation("clementi ave 2")
+                    .withRecurrence(Frequency.NONE)
+                    .withCategories(AddCommand.DEFAULT_ALL_TASKS).build();
+            taskL = new TaskBuilder().withName("Lower costs of product").withPriorityLevel("Yes")
+                    .withStartDateTime("Dec 30 2019")
+                    .withEndDateTime("Jan 2 2020")
+                    .withInformation("update John on new price")
                     .withRecurrence(Frequency.NONE)
                     .withCategories(AddCommand.DEFAULT_ALL_TASKS).build();
         } catch (IllegalValueException e) {

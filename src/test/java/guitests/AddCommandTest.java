@@ -20,17 +20,22 @@ public class AddCommandTest extends TaskBossGuiTest {
         //add one task
         TestTask taskToAdd = td.taskH;
 
-        assertAddSuccess(false, taskToAdd, currentList);
+        assertAddSuccess(false, false, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
         taskToAdd = td.taskI;
-        assertAddSuccess(false, taskToAdd, currentList);
+        assertAddSuccess(false, false, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task using short command
         taskToAdd = td.taskK;
-        assertAddSuccess(true, taskToAdd, currentList);
+        assertAddSuccess(false, true, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
+        //add another task using short command '+'
+        taskToAdd = td.taskL;
+        assertAddSuccess(true, false, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
@@ -45,19 +50,23 @@ public class AddCommandTest extends TaskBossGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(false, td.taskA);
+        assertAddSuccess(false, false, td.taskA);
 
         //invalid command
         commandBox.runCommand("adds new task");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(boolean isShortCommand, TestTask taskToAdd, TestTask... currentList)
+    private void assertAddSuccess(boolean isPlusSign, boolean isShortCommand, TestTask taskToAdd, TestTask... currentList)
             throws DuplicateCategoryException, IllegalValueException {
         if (isShortCommand) {
             commandBox.runCommand(taskToAdd.getShortAddCommand());
         } else {
-            commandBox.runCommand(taskToAdd.getAddCommand());
+            if (isPlusSign) {
+                commandBox.runCommand(taskToAdd.getAddCommandPlus());
+            } else {
+                commandBox.runCommand(taskToAdd.getAddCommand());
+            }
         }
 
         //confirm the new card contains the right data
