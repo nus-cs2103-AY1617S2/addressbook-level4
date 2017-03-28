@@ -10,6 +10,7 @@ import seedu.task.model.task.Description;
 import seedu.task.model.task.EditTaskDescriptor;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
@@ -74,8 +75,10 @@ public class PrioritizeCommand extends Command {
         Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToPrioritize::getStartTiming);
         Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToPrioritize::getEndTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToPrioritize::getTags);
+        boolean updatedRecurring = editTaskDescriptor.isRecurring().orElseGet(taskToPrioritize::isRecurring);
+        RecurringFrequency updatedFrequency = editTaskDescriptor.getFrequency().orElseGet(taskToPrioritize::getFrequency);
 
 
-        return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags);
+        return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
     }
 }

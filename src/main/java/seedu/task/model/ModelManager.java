@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -138,6 +139,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -162,6 +164,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -172,26 +175,53 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        //@@author A0164212U
+        /**
+         * @param task
+         * @return list of Indices for occurrences that match keywords for task
+         */
+        public ArrayList<Integer> searchList(ReadOnlyTask task) {
+            ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
+            for (int i = 0; i < task.getOccurrences().size(); i++) {
+                final int finalIndex = i;
+                if (
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getOccurrences().get(finalIndex).getStartTiming().value, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getOccurrences().get(finalIndex).getEndTiming().value, keyword))
+                                .findAny()
+                                .isPresent())) {
+                    occurrenceIndexList.add(i);
+                }
+            }
+
+            return occurrenceIndexList;
+        }
+
+
         @Override
         public boolean run(ReadOnlyTask task) {
-            return
-                (nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
-                    .findAny()
-                    .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
-                        .findAny()
-                        .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTiming().value, keyword))
-                        .findAny()
-                        .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTiming().value, keyword))
-                        .findAny()
-                        .isPresent());
+            boolean isPresent = false;
+            ArrayList<Integer> occurrenceIndexList = searchList(task);
+            if (occurrenceIndexList.size() > 0) {
+                isPresent = true;
+                //                task.setStartTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getStartTiming());
+                //                task.setEndTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getEndTiming());
+            }
+            return isPresent;
         }
+
+        //@@author
 
         @Override
         public String toString() {

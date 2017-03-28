@@ -5,26 +5,28 @@ import java.util.Comparator;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's description in the ToDo list.
+ * Represents a Task's frequency in the ToDo list.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description implements Comparable<Description> {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "Task descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task descriptions cannot start with a space, "
+                    + "should only contain alphanumeric characters and spaces, "
+                    + "and it should not be blank";
 
     /*
      * The first character of the task must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String DESCRIPTION_VALIDATION_REGEX = "^[A-Za-z, ]++$";
+    public static final String DESCRIPTION_VALIDATION_REGEX = "^[^ ][A-Za-z0-9!@#$%^&*, ]++$";
 
     public final String description;
 
     /**
-     * Validates given description.
+     * Validates given frequency.
      *
-     * @throws IllegalValueException if given description string is invalid.
+     * @throws IllegalValueException if given frequency string is invalid.
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;
@@ -36,7 +38,7 @@ public class Description implements Comparable<Description> {
     }
 
     /**
-     * Returns true if a given string is a valid description.
+     * Returns true if a given string is a valid frequency.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);

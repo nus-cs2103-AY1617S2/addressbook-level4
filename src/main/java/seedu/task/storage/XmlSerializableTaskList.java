@@ -26,7 +26,6 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
-
     /**
      * Creates an empty XmlSerializableTaskList.
      * This empty constructor is required for marshalling.
@@ -71,6 +70,12 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tags);
+    }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getRecurringTaskList() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

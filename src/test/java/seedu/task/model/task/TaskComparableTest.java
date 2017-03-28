@@ -14,7 +14,7 @@ public class TaskComparableTest {
 
     @Test
     public void sortByComplete() {
-        // String description = "task description";
+        // String frequency = "task frequency";
         String priority = "2";
         String timing = "03/03/2017";
         String tag1 = "friendship";

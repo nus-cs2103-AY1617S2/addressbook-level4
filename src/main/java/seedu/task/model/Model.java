@@ -13,6 +13,8 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
+    /** Stores list of tasks that are recurring */
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyTaskList newData);
 
@@ -23,7 +25,7 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException; //remove this exception??
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /** Undo the last change */
     void undo();

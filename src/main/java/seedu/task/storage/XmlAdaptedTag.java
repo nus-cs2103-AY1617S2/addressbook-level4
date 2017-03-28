@@ -28,6 +28,7 @@ public class XmlAdaptedTag {
         tagName = source.tagName;
     }
 
+
     /**
      * Converts this jaxb-friendly adapted tag object into the model's Tag object.
      *

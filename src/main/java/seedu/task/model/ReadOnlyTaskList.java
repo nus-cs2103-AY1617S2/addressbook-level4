@@ -21,4 +21,6 @@ public interface ReadOnlyTaskList {
      */
     ObservableList<Tag> getTagList();
 
+    ObservableList<ReadOnlyTask> getRecurringTaskList();
+
 }
