@@ -58,20 +58,19 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a person to the task manager.<br>
-Format: `add NAME [n/NOTES] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
+Adds a task to the task manager.<br>
+Format: `add NAME [n/NOTES] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
 
-> * Task can be an event
-> * Task can have notes
-> * Task can have a a status
-> * Task can have a deadline
-> * Task can have a priority ranking of hi, mid, low
-> * Task can have any number of tags (including 0)
+> * NOTES : Can contain any alphanumeric inputs, or left empty.
+> * STARTTIME : In the format of mm/dd/yyyy hh:mm, eg. 12/31/2017 23:59, or left empty.
+> * ENDTIME : Format same as STARTTIME, but input has to be later than that of STARTTIME's, or left empty.
+> * PRIORITY : Can have a ranking of hi, mid, low, or left empty.
+> * TAG: Can have any number of tags, or left empty.
 
 Examples:
 
 * `add Do laundry`
-* `add Finish v0.0 documentation n/Urgent s/incomplete b/28/02/2017 12:00 e/29/02/2017 23:59 p/hi t/CS2103T`
+* `add Finish v0.0 documentation n/Urgent b/02/28/2017 12:00 e/02/29/2017 23:59 p/hi t/CS2103T t/CS2101`
 
 ### 2.3. Sort tasks : `sort`
 
@@ -79,7 +78,6 @@ Sorts the list of tasks currently being shown according to the keyword.<br>
 Format: `sort KEYWORD`
 
 > Keywords
-
 > * `status` : Sorts the list according to status, with incomplete tasks at the top.
 > * `start` : Sorts the list according to start dates, with the earlier start dates at the top.
 > * `end` : Sorts the list according to end dates, with the earlier end dates at the top.
@@ -109,7 +107,7 @@ Examples:
 * `edit 1 Finish tutorial exercises`<br>
 Edits the name of the 1st task to `Finish tutorial exercises`.
 
-### 2.5. Mark task
+### 2.5. Mark task : `mark`
 
 Marks task as complete.<br>
 Format: `mark [INDEX]...`
@@ -137,7 +135,7 @@ Examples:
 * `unmark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as incomplete.
 
-### 2.7. Schedule (Work in progress)
+### 2.7. Schedule (Work in progress) : `schedule`
 
 Set an event or a deadline.<br>
 Format: `schedule INDEX [STARTIME] ENDTIME`
@@ -151,21 +149,21 @@ Examples:
 * `schedule 6 12/05/2017-13:00 12/05/2017-15:00`<br>
 Set the start time as 1pm on May 12, 2017 and the end time as 3pm on May 12, 2017.
 
-### 2.8. Undo
+### 2.8. Undo : `undo`
 
 Undo the latest command.<br>
 Format: `undo`
 
 > * Reverts the change done by the previous command.
 
-### 2.9. Redo
+### 2.9. Redo : `redo`
 
 Reverts the previous undo action.<br>
 Format: `redo`
 
 > * Reverts the change done by the previous undo action.
 
-### 2.10. Find
+### 2.10. Find : `find`
 
 Displays a list of tasks based on keywords and/or tags.<br>
 Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
