@@ -58,7 +58,7 @@ public class FindCommandParser {
             Set<String> keywordsSet = new HashSet<>();
             Date startTimeSet = null;
             Date endTimeSet = null;
-            Date completeTimeSet = null;
+            Object completeTimeSet = null;
             final Set<Tag> tagsSet = new HashSet<>();
 
             if (keywordsString.isPresent()) {
@@ -73,7 +73,11 @@ public class FindCommandParser {
                 endTimeSet = parseDateParameter(endTime.get());
             }
             if (completeTime.isPresent()) {
-                completeTimeSet = parseDateParameter(completeTime.get());
+                if (completeTime.get().equals("") || completeTime.get().equals("not")) {
+                    completeTimeSet = completeTime.get();
+                } else {
+                    completeTimeSet = parseDateParameter(completeTime.get());
+                }
             }
             if (tags.isPresent()) {
                 // Store the individual tag strings in a set

@@ -193,6 +193,20 @@ public class FindCommandTest extends TodoListGuiTest {
         }
     }
     //@@author
+    //@@author A0163786N
+    @Test
+    public void find_allCompleted() {
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix(),
+                td.car, td.library, td.tennis);
+    }
+    //@@author
+  //@@author A0163786N
+    @Test
+    public void find_allUncompleted() {
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "not",
+                td.dog, td.cat, td.math, td.english, td.dishes, td.lawn, td.dinner, td.essay, td.toilet);
+    }
+    //@@author
     private void assertFindResult(String command, TestTodo... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);

@@ -28,6 +28,7 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    * **`edit`**` 3 take the cat for a walk e/6:00am 11/11/17` : edits the 3rd Todo's title and end time shown in the current list.
    * **`complete`**` 3`: marks the 3rd Todo shown in the current list as complete
    * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
+   * **`undo`** : undoes last command that modified the todo list
    * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -110,9 +111,11 @@ Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [t/TAG] [t/M
 > * Only full words will be matched e.g. "grocer" will not match "groceries"
 > * Todos matching at least one keyword will be returned (i.e. `OR` search).
 > * Specifying start time, end time, and/or complete time will match todos that start, end, and/or were completed BEFORE the specified time.
-> * You may also enter "today" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of the current day.
-> * You may also enter "tomorrow" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of tomorrow.
-> * Todos that do not have specified parameters will not be included. e.g. if you specify start time, no floating todos will be included in the search results
+> * You may enter "today" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of the current day.
+> * You may enter "tomorrow" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of tomorrow.
+* You may enter nothing for complete time to find all completed tasks (i.e. `find c/`)
+* You may enter "not" for complete time to find all uncompleted tasks (i.e. `find c/not`);
+> * Todos that do not have the specified parameters will not be included. e.g. if you specify start time, no floating todos will be included in the search results.
 
 Examples:
 
@@ -122,6 +125,8 @@ Examples:
 * `find s/9:00am 11/11/17`<br>
 * `find s/9:00am 11/11/17 c/9:00am 12/11/17`<br>
 * `find s/today e/tomorrow`<br>
+* `find c/`<br>
+* `find c/not`<br>
 
 ### 2.6. Deleting a todo : `delete`
 

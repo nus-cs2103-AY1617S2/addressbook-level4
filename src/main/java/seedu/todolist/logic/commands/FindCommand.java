@@ -25,11 +25,15 @@ public class FindCommand extends Command {
             + CliSyntax.PREFIX_END_TIME.getPrefix() + "END_TIME \n"
             + "To search for todos that were completed before a particular time: "
             + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "COMPLETE_TIME \n"
+            + "To search for all uncompleted todos: "
+            + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "\n"
+            + "To search for all completed todos: "
+            + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "not \n"
             + "Example: " + COMMAND_WORD + " groceries\n"
-            + "Example2: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG.getPrefix() + "milk\n"
-            + "Example3: " + COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix() + "9:00AM 28/03/17 \n"
-            + "Example4: " + COMMAND_WORD + " " + CliSyntax.PREFIX_END_TIME.getPrefix() + "9:00AM 28/03/17 \n"
-            + "Example5: " + COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "9:00AM 28/03/17 \n";
+            + "Example 2: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG.getPrefix() + "milk\n"
+            + "Example 3: " + COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix() + "9:00AM 28/03/17 \n"
+            + "Example 4: " + COMMAND_WORD + " " + CliSyntax.PREFIX_END_TIME.getPrefix() + "9:00AM 28/03/17 \n"
+            + "Example 5: " + COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "9:00AM 28/03/17 \n";
 
     public static final String MESSAGE_EMPTY_ERROR = "Cannot leave fields blank.";
 
@@ -37,12 +41,12 @@ public class FindCommand extends Command {
     private UniqueTagList tags;
     private Date startTime;
     private Date endTime;
-    private Date completeTime;
+    private Object completeTime;
 
     /**
      * Creates a FindCommand with keywords as parameters
      */
-    public FindCommand(Set<String> keywords, Date startTime, Date endTime, Date completeTime, UniqueTagList tags) {
+    public FindCommand(Set<String> keywords, Date startTime, Date endTime, Object completeTime, UniqueTagList tags) {
         this.keywords = keywords;
         this.startTime = startTime;
         this.endTime = endTime;

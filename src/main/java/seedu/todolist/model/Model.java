@@ -55,7 +55,7 @@ public interface Model {
     //@@author A0163786N
     /** Updates the filter of the filtered todo list*/
     public void updateFilteredTodoList(Set<String> keywords, Date startTime,
-            Date endTime, Date completeTime, UniqueTagList tags);
+            Date endTime, Object completeTime, UniqueTagList tags);
     //@@author
     /** Loads the previous state of the todo list*/
     void loadPreviousState() throws NoPreviousStateException;

@@ -141,7 +141,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0163786N
     @Override
     public void updateFilteredTodoList(Set<String> keywords, Date startTime,
-        Date endTime, Date completeTime, UniqueTagList tags) {
+        Date endTime, Object completeTime, UniqueTagList tags) {
         updateFilteredTodoList(new PredicateExpression(
                 new NameQualifier(keywords, startTime, endTime, completeTime, tags)));
     }
@@ -188,9 +188,9 @@ public class ModelManager extends ComponentManager implements Model {
         private Set<String> tagKeyWords;
         private Date startTime;
         private Date endTime;
-        private Date completeTime;
+        private Object completeTime;
 
-        NameQualifier(Set<String> nameKeyWords, Date startTime, Date endTime, Date completeTime, UniqueTagList tags) {
+        NameQualifier(Set<String> nameKeyWords, Date startTime, Date endTime, Object completeTime, UniqueTagList tags) {
             this.nameKeyWords = nameKeyWords;
             this.startTime = startTime;
             this.endTime = endTime;
@@ -229,11 +229,8 @@ public class ModelManager extends ComponentManager implements Model {
                     return false;
                 }
             }
-            if (completeTime != null) {
-                Date todoCompleteTime = todo.getCompleteTime();
-                if (todoCompleteTime == null || todoCompleteTime.after(completeTime)) {
-                    return false;
-                }
+            if (completeTime != null && !checkCompleteTime(todo)) {
+                return false;
             }
             if (!tags.isEmpty()) {
                 String todoTags = todo.getTagsAsString();
@@ -263,13 +260,39 @@ public class ModelManager extends ComponentManager implements Model {
                 sb.append("\nend time=" + new SimpleDateFormat(DATE_FORMAT).format(endTime));
             }
             if (completeTime != null) {
-                sb.append("\ncomplete time=" + new SimpleDateFormat(DATE_FORMAT).format(completeTime));
+                if (completeTime instanceof Date) {
+                    sb.append("\ncomplete time=" + new SimpleDateFormat(DATE_FORMAT).format(completeTime));
+                } else {
+                    sb.append("\ncomplete time=any");
+                }
             }
             if (!tags.isEmpty()) {
                 sb.append("\ntag=" + String.join(", ", tagKeyWords));
             }
             return sb.toString();
         }
+        //@@author A0163786N
+        /**
+         * Helper function to simplify run function. Checks complete time
+         * and returns true if todo should be shown in filtered list
+         */
+        private boolean checkCompleteTime(ReadOnlyTodo todo) {
+            Date todoCompleteTime = todo.getCompleteTime();
+            if (completeTime instanceof Date) {
+                if (todoCompleteTime == null || todoCompleteTime.after((Date) completeTime)) {
+                    return false;
+                }
+            } else if (completeTime.equals("")) {
+                if (todoCompleteTime == null) {
+                    return false;
+                }
+            } else if (completeTime.equals("not")) {
+                if (todoCompleteTime != null) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        //@@author
     }
-    //@@author
 }
