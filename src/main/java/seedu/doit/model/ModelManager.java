@@ -13,7 +13,6 @@ import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 import seedu.doit.commons.util.CollectionUtil;
-import seedu.doit.commons.util.StringUtil;
 import seedu.doit.logic.commands.exceptions.CommandExistedException;
 import seedu.doit.logic.commands.exceptions.NoSuchCommandException;
 import seedu.doit.model.comparators.EndTimeComparator;
@@ -198,7 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
         CommandSettings.getInstance().setCommand(oldCommand, newCommand);
         logger.info(CommandSettings.getInstance().toString());
     }
-  
+
     // @@author A0139399J
     // =========== Filtered Task List Accessors
     // ============================================================

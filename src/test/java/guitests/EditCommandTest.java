@@ -57,7 +57,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        this.commandBox.runCommand("find Elle");
+        this.commandBox.runCommand("find n/Elle");
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
