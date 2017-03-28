@@ -24,6 +24,7 @@ import seedu.todolist.model.task.Task;
 
 /*
  * Parse input into a suitable type of Task
+ * @@author A0141647E
  */
 public class TaskParser {
 
@@ -32,6 +33,7 @@ public class TaskParser {
     /**
      * Parses the given {@code String} of input that contains parameters
      * of a Task object and calls the suitable TaskParser based on the parameters.
+     * @@author A0141647E
      */
     public static Task parseTask(String taskInput) throws IllegalValueException {
         ArgumentTokenizer argsTokenizer =
@@ -107,15 +109,19 @@ public class TaskParser {
             boolean isComplete, String description) {
         assert name != null;
 
+        Task resultTask;
+
         if (startTime != null && endTime != null) {
-            return new StartEndTask(name, startTime, endTime, uniqueTagList, isComplete);
+            resultTask = new StartEndTask(name, startTime, endTime, uniqueTagList, isComplete);
         } else if (startTime != null && endTime == null) {
-            return new StartTask(name, startTime, uniqueTagList, isComplete);
+            resultTask = new StartTask(name, startTime, uniqueTagList, isComplete);
         } else if (startTime == null && endTime != null) {
-            return new EndTask(name, endTime, uniqueTagList, isComplete);
+            resultTask = new EndTask(name, endTime, uniqueTagList, isComplete);
         } else {
-            return new FloatingTask(name, uniqueTagList, isComplete);
+            resultTask = new FloatingTask(name, uniqueTagList, isComplete);
         }
+        resultTask.setDescription(description);
+        return resultTask;
     }
 
     /*
