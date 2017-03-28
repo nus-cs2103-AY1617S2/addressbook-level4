@@ -88,6 +88,7 @@ public class EditCommand extends Command {
 
         TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getTaskName);
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDate);
+        //modify this according to Natty
         PriorityLevel updatedPriorityLevel = editTaskDescriptor.getPriorityLevel().orElseGet(taskToEdit::getPriority);
         Information updatedInformation = editTaskDescriptor.getInfo().orElseGet(taskToEdit::getInfo);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
