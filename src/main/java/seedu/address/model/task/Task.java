@@ -71,9 +71,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Only allow changing the {@link StartEndDateTime} if there is actually a value (not {@link Optional}).
      */
-    public void setStartEndDateTime(StartEndDateTime dateTime) {
-        assert dateTime != null;
-        this.startEndDateTime = Optional.of(dateTime);
+    public void setStartEndDateTime(StartEndDateTime startEndDateTime) {
+        assert startEndDateTime != null;
+        this.startEndDateTime = Optional.of(startEndDateTime);
     }
 
     //@@author
