@@ -23,6 +23,7 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList.SortBy;
 import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.taskboss.testutil.TaskBuilder;
 
 /**
  * Represents the in-memory model of the TaskBoss data.
@@ -366,19 +367,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void markDone(ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException {
+    public void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException, TaskNotFoundException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
-        for (int index = 0; index < tasksToMarkDone.size(); index++) {
-            if (tasksToMarkDone.get(index).isRecurring()) {
-                Task newRecurredTask = new Task(tasksToMarkDone.get(index));
-                newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
-                taskBoss.updateTask(index, newRecurredTask);
+        int index = 0;
+        for (ReadOnlyTask task : tasksToMarkDone) {
+            int targetIndex = indices.get(index) - 1;
+            if (!task.isRecurring()) {
+                Task newTask = new Task(task.getName(),task.getPriorityLevel(), task.getStartDateTime(), task.getEndDateTime(),
+                    task.getInformation(), task.getRecurrence(), new UniqueCategoryList("Done"));
+                this.taskBoss.updateTask(targetIndex, newTask);
             } else {
-                Task markedDone = new Task(tasksToMarkDone.get(index));
-                markedDone.getCategories().setCategories(new UniqueCategoryList("Done"));
-                taskBoss.updateTask(index, markedDone);
+
+                Task copy = new Task(task);
+                Task newTask = new Task(copy);
+                newTask.getRecurrence().updateTaskDates(newTask);
+                this.taskBoss.updateTask(targetIndex, newTask);
             }
+
+            index++;
         }
+
 
         indicateTaskBossChanged();
     }

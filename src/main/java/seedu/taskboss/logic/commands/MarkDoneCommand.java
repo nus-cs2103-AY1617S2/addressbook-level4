@@ -14,6 +14,7 @@ import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
+import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0144904H
 public class MarkDoneCommand extends Command {
@@ -22,11 +23,11 @@ public class MarkDoneCommand extends Command {
     public static final String COMMAND_WORD_SHORT = "m";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
-            + ": Marks the task identified by the index"
-            + " number used in the last listing as done. "
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Marks the tasks identified by the indexes"
+            + " numbers provided that are used in the last listing as done. "
+            + "Parameters: LIST OF INDEXES (must be a positive integers)\n"
             + "Example: " + COMMAND_WORD
-            + " 1" +  " || " + COMMAND_WORD_SHORT + " 1";
+            + " 1 2 3" +  " || " + COMMAND_WORD_SHORT + " 1";
 
     public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done: %1$s";
 
@@ -40,7 +41,7 @@ public class MarkDoneCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, IllegalValueException {
+    public CommandResult execute() throws CommandException, IllegalValueException, TaskNotFoundException {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (this.filteredTaskListIndices.get(filteredTaskListIndices.size() - 1) > lastShownList.size()
@@ -52,7 +53,7 @@ public class MarkDoneCommand extends Command {
             this.tasksToMarkDone.add(lastShownList.get(index - 1));
         }
 
-        model.markDone(tasksToMarkDone);
+        model.markDone(this.filteredTaskListIndices, tasksToMarkDone);
 
         return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, tasksToMarkDone));
     }
