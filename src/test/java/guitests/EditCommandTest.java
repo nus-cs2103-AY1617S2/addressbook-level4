@@ -108,7 +108,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Paul d/12.12 e/a@gmail.com "
+        commandBox.runCommand("edit 3 Alice Paul d/12.12 e/a@gml.com "
                                 + "g/group1 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }

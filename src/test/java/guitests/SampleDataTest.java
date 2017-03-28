@@ -1,12 +1,12 @@
 package guitests;
 
-//import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import seedu.address.model.AddressBook;
-//import seedu.address.model.person.Person;
-//import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
@@ -24,7 +24,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        //Person[] expectedList = SampleDataUtil.getSamplePersons();
-        //assertTrue(personListPanel.isListMatching(expectedList));
+        Person[] expectedList = SampleDataUtil.getSamplePersons();
+        assertTrue(personListPanel.isListMatching(expectedList));
     }
 }
