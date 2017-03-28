@@ -19,7 +19,7 @@ By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
 3. [Implementation](#3-implementation)
 4. [Testing](#4-testing)
    > 4.1 [Troubleshooting Tests](#41-troubleshooting-tests)
-5. [Dev Ops](#dev-ops)
+5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -233,7 +233,7 @@ The `Model`component:
 
 ### 2.6 Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.taskmanager.commons` package.
 
 Burdens further separates the packages into sub-packages - `core`, `events`, `exceptions` and `util`.
 
@@ -352,7 +352,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/burdens/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -375,14 +375,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | user | add task | add task
+`* * *` | user | add task | view and manage my tasks using the application
 `* * *` | user | delete task | remove tasks that I have completed
 `* * *` | user | edit task | update my tasks accordingly
 `* * *` | user | view task | recall the details of the task that I have input earlier
 `* * *` | user | be able to mark completed tasks | differentiate between completed and uncompleted tasks
 `* * *` | user | be able to undo action | undo unwanted command
 `* * *` | user | be able to redo action | restore previous command
-`* * *` | user | set alarms and reminders | remember tasks on hand
 `* * *` | user | have a list of commands to show | see all commands
 `* *` | user working in teams | be able to import task files | add multiple tasks given by team mates
 `* *` | user working in teams | be able to export task files | transfer multiple tasks to team mates
@@ -390,28 +389,23 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user with many tasks | list all urgent tasks | recall all the important tasks to be completed
 `* *` | user with many tasks | list all tasks by alphabetical order | recall all the tasks by alphabetical order
 `* *` | user with many tasks | list all tasks by date | recall all tasks by date
-`* *` | user with many tasks | list all tasks by priority | recall all the tasks by priority
+`* *` | user with many tasks | list all tasks by priority | recall all the tasks by priority level
 `* *` | user with many tasks | list all tasks by tag | recall all the tasks with a particular tag
-`* *` | user | have shortcuts | set up a reminder quicker
-`*` | user who works with complex tasks | create subtasks | break a task into smaller tasks for easier management
-`*` | user who also use other task managing applications | synchronize my task list across all my applications | manage the same tasks from different applications
-`*` | user | be able to customize the colours | make it look more appealing
-`*` | user | have UI dark mode | ease the stress on my eyes
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Burden` application and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Mark task as complete
 
 **MSS**
 
 1. User requests to list tasks
-2. KoolToDoManager shows a list of tasks
+2. Burdens shows a list of tasks
 3. User requests to mark a specific task in the list as complete
-4. KoolToDoManager updates the task <br>
+4. Burdens updates the task <br>
 Use case ends.
 
 **Extensions**
@@ -422,7 +416,7 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. KoolToDoManager shows an error message <br>
+> 3a1. Burdens shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Export task files
@@ -430,11 +424,11 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks
-2. KoolToDoManager shows a list of tasks
+2. Burdens shows a list of tasks
 3. User requests to export specific tasks in the list to file
-4. KoolToDoManager requests for the desired file name and path
+4. Burdens requests for the desired file name and path
 5. User inputs file name and path
-6. KoolToDoManager outputs task file to the specified path <br>
+6. Burdens outputs task file to the specified path <br>
 Use case ends.
 
 **Extensions**
@@ -445,7 +439,7 @@ Use case ends.
 
 5a. The given file name or path is invalid
 
-> 5a1. KoolToDoManager shows an error message <br>
+> 5a1. Burdens shows an error message <br>
   Use case resumes at step 4
 
 #### Use case: Create subtasks
@@ -453,11 +447,11 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks
-2. KoolToDoManager shows a list of tasks
+2. Burdens shows a list of tasks
 3. User requests to specify a task as a subtask of another task
-4. KoolToDoManager requests for the index of the subtask and the parent task
+4. Burdens requests for the index of the subtask and the parent task
 5. User inputs the indexes of subtask and parent task
-6. KoolToDoManager updates task list <br>
+6. Burdens updates task list <br>
 Use case ends.
 
 **Extensions**
@@ -468,7 +462,7 @@ Use case ends.
 
 5a. The given indexes are invalid
 
-> 5a1. KoolToDoManager shows an error message <br>
+> 5a1. Burdens shows an error message <br>
   Use case resumes at step 4
 
 #### Use case: Adding a new task
@@ -476,9 +470,9 @@ Use case ends.
 **MSS**
 
 1. User requests to add tasks
-2. KoolToDoManager prompts user for name of task
+2. Burdens prompts user for name of task
 3. User inputs name of task
-4. KoolToDoManager adds the task <br>
+4. Burdens adds the task <br>
 Use case ends.
 
 **Extensions**
@@ -493,9 +487,9 @@ Use case ends.
 **MSS**
 
 1. User requests to delete tasks
-2. KoolToDoManager prompts user for name of task
+2. Burdens prompts user for name of task
 3. User inputs name of task
-4. KoolToDoManager deletes the task <br>
+4. Burdens deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -508,11 +502,11 @@ Use case ends.
 **MSS**
 
 1. User requests to edit a task
-2. KoolToDoManager prompts user for name of task
+2. Burdens prompts user for name of task
 3. User inputs name of task
-4. KoolToDoManager prompts user for new details of task
+4. Burdens prompts user for new details of task
 5. User inputs new details of task
-6. KoolToDoManager edits the task <br>
+6. Burdens edits the task <br>
 Use case ends.
 
 **Extensions**
@@ -528,9 +522,9 @@ Use case ends.
 **MSS**
 
 1. User requests to view a task
-2. KoolToDoManager prompts for name of task
+2. Burdens prompts for name of task
 3. User inputs name of task
-4. KoolToDoManager brings up details of task <br>
+4. Burdens brings up details of task <br>
 Use case ends.
 
 **Extensions**
@@ -543,42 +537,42 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks
-2. KoolToDoManager lists all tasks <br>
+2. Burdens lists all tasks <br>
 Use case ends.
 
 **Extensions**
 
 1a. No tasks exist
-> KoolToDoManager shows an error message <br>
+> Burdens shows an error message <br>
 
 #### Use case: List all urgent tasks
 
 **MSS**
 
 1. User requests to list all urgent tasks
-2. KoolToDoManager lists all urgent tasks <br>
+2. Burdens lists all urgent tasks <br>
 Use case ends.
 
 **Extensions**
 
 1a. No urgent tasks exist
-> KoolToDoManager shows an error message
+> Burdens shows an error message
 
 #### Use case: Create alarms and reminders
 
 **MSS**
 
 1. User requests to create alarm
-2. KoolToDoManager prompts for date and time
+2. Burdens prompts for date and time
 3. User inputs date and time
-4. KoolToDoManager creates alarm <br>
+4. Burdens creates alarm <br>
 Use case ends.
 
 **Extensions**
 
 2a. Date or time does not exist
 
-> KoolToDoManager shows an error message <br>
+> Burdens shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: List commands
@@ -586,7 +580,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list commands
-2. KoolToDoManager shows a list of commands <br>
+2. Burdens shows a list of commands <br>
 Use case ends.
 
 **Extensions**
@@ -595,27 +589,14 @@ Use case ends.
 
 > Use case ends
 
-#### Use case: Use shortcuts
-
-1. KoolToDoManager requests for a shortcut
-2. User keys in a shortcut
-3. KoolToDoManager executes shortcut <br>
-Use case ends.
-
-**Extensions**
-
-3a. Shortcut does not exist
-
-> Use case resumes at step 1
-
 #### Use case: Undo action
 
 **MSS**
 
 1. User requests to undo action
-2. KoolToDoManager prompts for confirmation
+2. Burdens prompts for confirmation
 3. User inputs "yes"
-4. KoolToDoManager undo action <br>
+4. Burdens undo action <br>
 Use case ends.
 
 **Extensions**
@@ -633,9 +614,9 @@ Use case ends.
 **MSS**
 
 1. User requests to redo action
-2. KoolToDoManager prompts for confirmation
+2. Burdens prompts for confirmation
 3. User inputs "yes"
-4. KoolToDoManager redo action <br>
+4. Burdens redo action <br>
 Use case ends.
 
 **Extensions**
@@ -653,7 +634,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks by alphabetical order
-2. KoolToDoManager executes command <br>
+2. Burdens executes command <br>
 Use case ends.
 
 **Extensions**
@@ -667,7 +648,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks by date
-2. KoolToDoManager executes command <br>
+2. Burdens executes command <br>
 Use case ends.
 
 **Extensions**
@@ -681,7 +662,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks by priority
-2. KoolToDoManager executes command <br>
+2. Burdens executes command <br>
 Use case ends.
 
 **Extensions**
@@ -695,16 +676,16 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks by tag
-2. KoolToDoManager prompts for name of tag
+2. Burdens prompts for name of tag
 3. User inputs name of tag
-4. KoolToDoManager executes command <br>
+4. Burdens executes command <br>
 Use case ends.
 
 **Extensions**
 
 3a. Name of tag does not exist
 
-> KoolToDoManager shows an error message <br>
+> Burdens shows an error message <br>
   Use case resumes at step 2
 
 {More to be added}
