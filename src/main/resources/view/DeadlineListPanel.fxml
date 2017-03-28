@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import java.net.URL?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-      <TabPane fx:id="tabPanePlaceHolder" tabClosingPolicy="UNAVAILABLE">
+      <JFXTabPane fx:id="tabPanePlaceHolder" styleClass="deadlineTab" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
             <Tab text="All">
                <content>
@@ -60,6 +60,6 @@
                </content>
             </Tab>
         </tabs>
-      </TabPane>
+      </JFXTabPane>
     </children>
 </VBox>

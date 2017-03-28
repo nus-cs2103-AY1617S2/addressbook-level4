@@ -1,5 +1,7 @@
 package seedu.geekeep.ui;
 
+import com.jfoenix.controls.JFXCheckBox;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -16,6 +18,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label title;
     @FXML
+    private JFXCheckBox done;
+    @FXML
     private Label id;
     @FXML
     private Label date;
@@ -28,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         title.setText(task.getTitle().title);
         id.setText("#" + displayedIndex + " ");
-
+        done.setSelected(task.isDone());
         if (task.getEndDateTime() != null && task.getStartDateTime() != null) {
             date.setText(task.getStartDateTime() + " until " + task.getEndDateTime());
         } else if (task.getEndDateTime() != null && task.getStartDateTime() == null) {
