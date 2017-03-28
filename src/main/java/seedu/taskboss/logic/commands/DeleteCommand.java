@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
     public final ArrayList<Integer> targetIndex;
 
     public final ArrayList<ReadOnlyTask> tasksToDelete;
-
+    //@@author A0138961W
     /**
     * Set will automatically remove duplicate indexes
     */
