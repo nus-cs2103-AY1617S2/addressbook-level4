@@ -13,6 +13,8 @@ import seedu.toluist.ui.UiStore;
  */
 public class NavigateHistoryCommandTest extends ToLuistGuiTest {
     UiStore uiStore = UiStore.getInstance();
+    String command1 = "history";
+    String command2 = "hi";
 
     @Test
     public void viewPreviousWithoutDoingAnything() {
@@ -28,25 +30,21 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
 
     @Test
     public void viewPreviousAfterACommand() {
-        String command = "history";
-        commandBox.runCommand(command);
+        commandBox.runCommand(command1);
         mainGui.press(KeyCode.UP);
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command);
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
     }
 
     @Test
     public void viewNextAfterACommand() {
-        String command = "history";
-        commandBox.runCommand(command);
+        commandBox.runCommand(command1);
         mainGui.press(KeyCode.DOWN);
         assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), "");
     }
 
     @Test
     public void viewPreviousThenCurrentAfterACommandAndAHalf() {
-        String command1 = "history";
         commandBox.runCommand(command1);
-        String command2 = "hi";
         commandBox.enterCommand(command2);
         mainGui.press(KeyCode.UP);
         mainGui.press(KeyCode.DOWN);
@@ -55,12 +53,8 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
 
     @Test
     public void viewPreviousTooManyTimes() {
-        String command1 = "history";
         commandBox.runCommand(command1);
-        String command2 = "asdf";
         commandBox.enterCommand(command2);
-        String command3 = "hi";
-        commandBox.enterCommand(command3);
         for (int i = 0; i < 10; i++) {
             mainGui.press(KeyCode.UP);
         }
@@ -69,9 +63,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
 
     @Test
     public void viewNextTooManyTimes() {
-        String command1 = "history";
         commandBox.runCommand(command1);
-        String command2 = "hi";
         commandBox.enterCommand(command2);
         mainGui.press(KeyCode.UP);
         assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
@@ -83,9 +75,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
 
     @Test
     public void viewEverythingTooManyTimes() {
-        String command1 = "history";
         commandBox.runCommand(command1);
-        String command2 = "hi";
         commandBox.enterCommand(command2);
         for (int i = 0; i < 10; i++) {
             mainGui.press(KeyCode.UP);
