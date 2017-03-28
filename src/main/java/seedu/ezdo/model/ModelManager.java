@@ -407,8 +407,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
+    //@@author A0138907W
+    /**
+     * Sorts the task in ezDo by the given sort criteria.
+     *
+     * @param sortCriteria      The field to sort by.
+     * @param isSortedAscending If true, sorts in ascending order. Otherwise, sorts in descending order.
+     */
     @Override
     public void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending) {
+        assert sortCriteria != null;
+        assert isSortedAscending != null;
         if (!this.currentSortCriteria.equals(sortCriteria)) {
             this.currentSortCriteria = sortCriteria;
             indicateSortCriteriaChanged();
@@ -420,11 +429,18 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
-  //@@author A0139248X
+    //@@author A0139248X
+    /**
+     * Raises a {@code SortCriteriaChangedEvent}.
+     */
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
     }
-  //@@author
+
+    //@@author A0138907W
+    /**
+     * Raises a {@code IsSortedAscendingChangedEvent}.
+     */
     public void indicateIsSortedAscendingChanged() {
         raise(new IsSortedAscendingChangedEvent(currentIsSortedAscending));
     }

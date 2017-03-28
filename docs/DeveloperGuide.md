@@ -176,7 +176,7 @@ The **`UI`** component:
 * Binds itself to some data in **`Model`** so that the UI can auto-update when data in **`Model`** changes.
 
 * Responds to events raised from various parts of ezDo and updates the UI accordingly.
- 
+
 <br><br>
 
 
@@ -231,9 +231,9 @@ ezDo supports undo/redo commands. We saw two ways of doing it:
 
 After consideration, we decided to go with saving history states. In a task manager, tasks can be deleted and cleared. We can specify a 'de-clear' action, but since data is already lost, we can never actually return to the original state.
 
-As such, our undo/redo functionality is designed similar to the Memento pattern. The `ModelManager` class that implements **`Model`** holds two custom fixed-capacity array-based stacks of size 5. One stack holds history states for the undo command, while the other is for the redo command. We decided to limit the size of the stack in order to prevent stack overflow. This is a real possibility when the task manager holds a lot of data, and the user inputs many commands that keep accumulating history states in the undo stack. We felt that 5 is a good number of history states to save, in that users can undo up to 5 undo-able commands. If the stack is full, the newest history state overwrites the oldest one in the stack, thereby maintaining its size of 5. 
+As such, our undo/redo functionality is designed similar to the Memento pattern. The `ModelManager` class that implements **`Model`** holds two custom fixed-capacity array-based stacks of size 5. One stack holds history states for the undo command, while the other is for the redo command. We decided to limit the size of the stack in order to prevent stack overflow. This is a real possibility when the task manager holds a lot of data, and the user inputs many commands that keep accumulating history states in the undo stack. We felt that 5 is a good number of history states to save, in that users can undo up to 5 undo-able commands. If the stack is full, the newest history state overwrites the oldest one in the stack, thereby maintaining its size of 5.
 
-Before any undo-able command is fully executed, a copy of the current history state is saved onto the undo stack and the redo stack is cleared. 
+Before any undo-able command is fully executed, a copy of the current history state is saved onto the undo stack and the redo stack is cleared.
 
 If a user executes the undo command, the current state would be saved onto the redo stack, and the previous state in the undo stack popped off so that `ModelManager` can rollback to it.
 <br><br>
@@ -367,7 +367,7 @@ A project often depends on third-party libraries. For example, ezDo depends on t
 Table 1 describes the user stories relevant to ezDo.
 <br>
 
-> **Priorities:** 
+> **Priorities:**
 > * High (must have) - `* * *`
 > * Medium (nice to have)  - `* *`
 > * Low (unlikely to have) - `*`
@@ -575,7 +575,7 @@ Trello requires most of the work to be done with a mouse (moving of tasks by mou
 #### Pros
 - Free with every Microsoft PC.
 - Simple to use, like its real-world counterpart - Post-it notes.
-- Rearrangeable notes. 
+- Rearrangeable notes.
 - Resizeable notes for better visibility.
 - Colorful - different note colors.
 - Customizeable - font, font size, and other text options.
@@ -614,7 +614,7 @@ Though it supports basic task creation with the keyboard alone, it does not allo
 ### 11.4 Nirvana for GTD
 ---
 #### Pros
-- Compatible with Android and iOS 
+- Compatible with Android and iOS
 - Simple and clean layout
 - Simple to add tasks by command prompt entry
 - Customizable view to view tasks or projects that require immediate attention
