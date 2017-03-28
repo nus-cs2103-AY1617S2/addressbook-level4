@@ -21,7 +21,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("200517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
             benson = new ActivityBuilder().withDescription("CS2104 TUT 1")
                     .withStartDate("210517")
@@ -29,7 +28,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("210517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
             carl = new ActivityBuilder().withDescription("CS2105 TUT 1")
                     .withStartDate("220517")
@@ -37,7 +35,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("220517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
             daniel = new ActivityBuilder().withDescription("CS2106 TUT 1")
                     .withStartDate("230517")
@@ -45,7 +42,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("230517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
             elle = new ActivityBuilder().withDescription("CS2107 TUT 1")
                     .withStartDate("240517")
@@ -53,7 +49,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("240517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
             fiona = new ActivityBuilder().withDescription("CS2108 TUT 1")
                     .withStartDate("250517")
@@ -61,7 +56,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("250517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
             george = new ActivityBuilder().withDescription("CS2109 TUT 1")
                     .withStartDate("260517")
@@ -69,7 +63,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("260517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
 
             // Manually added
@@ -79,7 +72,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("270517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
             ida = new ActivityBuilder().withDescription("CS2111 TUT 1")
                     .withStartDate("280517")
@@ -87,7 +79,6 @@ public class TypicalTestActivities {
                     .withEndTime("1000")
                     .withEndDate("280517")
                     .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withStartTime("high")
                     .withTags("friends").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
