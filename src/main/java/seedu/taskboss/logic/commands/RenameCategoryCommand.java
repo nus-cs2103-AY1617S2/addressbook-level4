@@ -46,7 +46,7 @@ public class RenameCategoryCommand extends Command {
     //@@author A0144904H
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException,
-    InvalidDatesException, DefaultCategoryException {
+                                              InvalidDatesException, DefaultCategoryException {
         assert model != null;
 
         Category oldCategory = new Category(this.oldCategory);
