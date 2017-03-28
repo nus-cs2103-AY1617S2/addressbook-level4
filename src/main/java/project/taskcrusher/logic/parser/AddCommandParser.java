@@ -7,10 +7,7 @@ import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +27,7 @@ import project.taskcrusher.model.task.Priority;
  */
 public class AddCommandParser {
 
-    private static final Pattern ADD_COMMAND_FORMAT = Pattern.compile("(?<flag>[te])(?<name>.+)");
+    private static final Pattern ADD_COMMAND_PREAMBLE_FORMAT = Pattern.compile("(?<flag>[te])(?<name>.+)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -41,13 +38,12 @@ public class AddCommandParser {
                 PREFIX_LOCATION, PREFIX_DESCRIPTION);
         argsTokenizer.tokenize(args);
 
-        Matcher matcher;
-
-        try {
-            matcher = ADD_COMMAND_FORMAT.matcher(argsTokenizer.getPreamble().get());
-        } catch (NoSuchElementException nsee) {
+        // extract flag and name from preamble
+        if (!argsTokenizer.getPreamble().isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
+        Matcher matcher = ADD_COMMAND_PREAMBLE_FORMAT.matcher(argsTokenizer.getPreamble().get());
 
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -56,79 +52,26 @@ public class AddCommandParser {
         final String flag = matcher.group("flag");
         final String name = matcher.group("name");
 
-        String date = Deadline.NO_DEADLINE;
-        Optional<String> rawDate = argsTokenizer.getValue(PREFIX_DATE);
-        if (rawDate.isPresent()) {
-            date = rawDate.get();
-        }
+        // set all remaining properties
+        final String date = ParserUtil.setValue(argsTokenizer, PREFIX_DATE, Deadline.NO_DEADLINE);
+        final String priority = ParserUtil.setValue(argsTokenizer, PREFIX_PRIORITY, Priority.NO_PRIORITY);
+        final String location = ParserUtil.setValue(argsTokenizer, PREFIX_LOCATION, Location.NO_LOCATION);
+        final String description = ParserUtil.setValue(argsTokenizer, PREFIX_DESCRIPTION, Description.NO_DESCRIPTION);
+        final Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
 
-        String description = Description.NO_DESCRIPTION;
-        Optional<String> rawDescription = argsTokenizer.getValue(PREFIX_DESCRIPTION);
-        if (rawDescription.isPresent()) {
-            description = rawDescription.get();
-        }
-
-        Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
-
-        switch (flag) {
-        case AddCommand.EVENT_FLAG:
-            String location = Location.NO_LOCATION;
-            Optional<String> rawLocation = argsTokenizer.getValue(PREFIX_LOCATION);
-            if (rawLocation.isPresent()) {
-                location = rawLocation.get();
-            }
-
-            return addEvent(name, date, location, description, tags);
-        case AddCommand.TASK_FLAG:
-            String priority = Priority.NO_PRIORITY;
-            Optional<String> rawPriority = argsTokenizer.getValue(PREFIX_PRIORITY);
-            if (rawPriority.isPresent()) {
-                priority = rawPriority.get();
-            }
-
-            return addTask(name, date, priority, description, tags);
-        default:
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
-    }
-
-    private Command addTask(String name, String deadline, String priority, String description, Set<String> tags) {
         try {
-            return new AddCommand(name, deadline, priority, description, tags);
-        } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            switch (flag) {
+            case AddCommand.EVENT_FLAG:
+                List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
+                return new AddCommand(name, timeslots, location, description, tags);
+            case AddCommand.TASK_FLAG:
+                return new AddCommand(name, date, priority, description, tags);
+            default:
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+
     }
-
-    private Command addEvent(String name, String timesToParse, String location, String description, Set<String> tags) {
-
-        try {
-
-            if (timesToParse.equals(Deadline.NO_DEADLINE)) {
-                throw new IllegalValueException("No deadline provided");
-            }
-
-            String[] timeslotsAsStrings = timesToParse.split("\\s+or\\s+");
-            List<Timeslot> timeslots = new ArrayList<>();
-            for (String t : timeslotsAsStrings) {
-                String[] dates = t.split("\\s+to\\s+");
-
-                if (dates.length != 2) {
-                    throw new IllegalValueException("Each timeslot must have start and end date");
-                }
-
-                timeslots.add(new Timeslot(dates[0], dates[1]));
-            }
-
-            return new AddCommand(name, timeslots, location, description, tags);
-        } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
 }
