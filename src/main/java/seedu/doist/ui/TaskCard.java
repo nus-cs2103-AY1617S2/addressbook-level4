@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.doist.model.task.ReadOnlyTask;
 
+//@@author A0140887W
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -43,7 +44,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    //@@author A0140887W
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         setStyleToNormal();

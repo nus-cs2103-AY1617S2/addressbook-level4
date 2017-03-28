@@ -12,7 +12,7 @@ import seedu.doist.commons.util.FileUtil;
 import seedu.doist.model.AliasListMap;
 import seedu.doist.model.ReadOnlyAliasListMap;
 
-//@@author A0140887W
+//@@author A0140887W-reused
 /**
  * A class to access AliasListMap data stored as an xml file on the hard disk.
  */

@@ -12,6 +12,8 @@ public class SaveAtCommandParser {
     public Command parse(String argument) {
         // Remove trailing whitespace
         String processedArgument = argument.trim();
+        // remove all leading spaces, new line characters etc
+        processedArgument = processedArgument.replaceAll("^\\s+", "");
         File f = new File(processedArgument);
         try {
             String path = f.getCanonicalPath();
