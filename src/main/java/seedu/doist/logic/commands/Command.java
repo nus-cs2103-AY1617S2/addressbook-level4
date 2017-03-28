@@ -17,25 +17,27 @@ public abstract class Command {
     protected Model model;
 
     /**
-     * Constructs a feedback message to summarise an operation that displayed a listing of persons.
+     * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
      *
      * @param displaySize used to generate summary
-     * @return summary message for persons displayed
+     * @return summary message for tasks displayed
      */
     public static String getMessageForTaskListShownSummary(int displaySize) {
         return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
     }
 
+    //@@author A0140887W
     /**
      * Constructs a feedback message to summarise an operation that sorted a listing of tasks.
      *
-     * @param displaySize used to generate summary
-     * @return summary message for persons displayed
+     * @param sortType used in the command
+     * @return summary message for tasks sorted
      */
-    public static String getMessageForPersonListSortedSummary(List<SortType> sortTypes) {
+    public static String getMessageForTaskListSortedSummary(List<SortType> sortTypes) {
         return String.format(Messages.MESSAGE_TASKS_SORTED_OVERVIEW, sortTypes.toString());
     }
 
+    //@@author
     /**
      * Executes the command and returns the result message.
      *
@@ -53,6 +55,7 @@ public abstract class Command {
         this.model = model;
     }
 
+    //@@author A0147980U
     public ArrayList<ReadOnlyTask> getMultipleTasksFromIndices(int[] targetIndices) throws CommandException {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         ArrayList<ReadOnlyTask> relatedTasks = new ArrayList<ReadOnlyTask>();
@@ -67,6 +70,3 @@ public abstract class Command {
         return relatedTasks;
     }
 }
-
-
-

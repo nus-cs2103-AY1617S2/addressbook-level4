@@ -57,14 +57,14 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTodoListFilePath(), config.getAliasListMapFilePath(),
-                                        config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getAbsoluteTodoListFilePath(), config.getAbsoluteAliasListMapFilePath(),
+                                        config.getAbsoluteUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, config);
 
         logic = new LogicManager(model, storage);
 
@@ -78,11 +78,11 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, Config config) {
         ReadOnlyTodoList initialData = initTodoListData(storage);
         ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
 
-        return new ModelManager(initialData, initialAliasData, userPrefs);
+        return new ModelManager(initialData, initialAliasData, userPrefs, config);
     }
 
     protected static ReadOnlyTodoList initTodoListData(Storage storage) {

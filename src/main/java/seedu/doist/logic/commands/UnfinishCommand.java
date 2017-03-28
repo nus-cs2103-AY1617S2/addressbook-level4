@@ -7,6 +7,7 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0140887W
 /**
  * Marks the task as 'unfinished' identified using it's last displayed index from the to-do list.
  */
@@ -30,6 +31,7 @@ public class UnfinishCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        assert model != null;
         String outputMessage = "";
 
         ArrayList<ReadOnlyTask> tasksToUnfinish = getMultipleTasksFromIndices(targetIndices);

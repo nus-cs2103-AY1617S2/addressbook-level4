@@ -15,6 +15,7 @@ public class AliasListMap implements ReadOnlyAliasListMap {
 
     private HashMap<String, ArrayList<String>> commandAliases;
 
+    //@@author A0147980U
     /**
      * Initializes the entire HashMap for all aliases, resets to default
      */
@@ -37,6 +38,7 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         aliasMap.put("finish",  new ArrayList<>(Arrays.asList("fin")));
         aliasMap.put("help",  new ArrayList<>());
         aliasMap.put("list",  new ArrayList<>(Arrays.asList("ls")));
+        aliasMap.put("save_at", new ArrayList<>(Arrays.asList("save")));
         aliasMap.put("select",  new ArrayList<>());
         aliasMap.put("sort",  new ArrayList<>(Arrays.asList("sort_by")));
         aliasMap.put("unfinish",  new ArrayList<>(Arrays.asList("unfin")));
@@ -49,6 +51,7 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         return aliasMap;
     }
 
+    //@@author A0140887W
     /**
      * @return a set of strings which are the default command words
      */

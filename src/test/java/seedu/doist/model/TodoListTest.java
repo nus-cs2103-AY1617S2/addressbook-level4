@@ -71,7 +71,7 @@ public class TodoListTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyTodoList whose persons and tags lists can violate interface constraints.
      */
     private static class TodoListStub implements ReadOnlyTodoList {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();

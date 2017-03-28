@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+//@@author A0140887W
 /**
  * A class to serve as an XML adapter to convert between Java HashMap to
  * XML Serializable Key Values

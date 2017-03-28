@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.doist.commons.core.LogsCenter;
+import seedu.doist.commons.events.config.AbsoluteStoragePathChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.FxViewUtil;
 
@@ -31,7 +32,7 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
+        setSaveLocation(saveLocation);
         registerAsAnEventHandler(this);
     }
 
@@ -49,9 +50,17 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     @Subscribe
-    public void handleTodoListChangedEvent(TodoListChangedEvent abce) {
+    public void handleTodoListChangedEvent(TodoListChangedEvent tlce) {
         String lastUpdated = (new Date()).toString();
-        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        logger.info(LogsCenter.getEventHandlingLogMessage(tlce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
+    }
+
+    //@@author A0140887W
+    @Subscribe
+    public void handleStoragePathChangedEvent(AbsoluteStoragePathChangedEvent aspce) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(aspce, "Setting storage path display to "
+                + aspce.todoListPath));
+        setSaveLocation(aspce.todoListPath);
     }
 }

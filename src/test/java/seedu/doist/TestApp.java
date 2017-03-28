@@ -60,7 +60,7 @@ public class TestApp extends MainApp {
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, config);
 
         logic = new LogicManager(model, storage);
 
@@ -69,11 +69,11 @@ public class TestApp extends MainApp {
         initEventsCenter();
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, Config config) {
         ReadOnlyTodoList initialData = initTodoListData(storage);
         ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
 
-        return new ModelManager(initialData, initialAliasData, userPrefs, true);
+        return new ModelManager(initialData, initialAliasData, userPrefs, config, true);
     }
 
     @Override

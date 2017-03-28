@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import seedu.doist.model.ReadOnlyAliasListMap;
 import seedu.doist.storage.util.XMLHashMapAdapter;
 
+//@@author A0140887W
 /**
  * An Immutable AliasListMap that is serializable to XML format
  */

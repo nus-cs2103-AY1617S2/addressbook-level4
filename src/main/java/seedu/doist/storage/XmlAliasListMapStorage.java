@@ -11,6 +11,7 @@ import seedu.doist.commons.exceptions.DataConversionException;
 import seedu.doist.commons.util.FileUtil;
 import seedu.doist.model.ReadOnlyAliasListMap;
 
+//@@author A0140887W-reused
 /**
  * A class to access AliasListMap data stored as an xml file on the hard disk.
  */
@@ -71,6 +72,11 @@ public class XmlAliasListMapStorage implements AliasListMapStorage {
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableAliasListMap(aliasListMap));
+    }
+
+    @Override
+    public void setAliasListMapFilePath(String path) {
+        this.filePath = path;
     }
 
 }

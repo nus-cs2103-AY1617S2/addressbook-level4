@@ -1,5 +1,6 @@
 package seedu.doist.model.task;
 
+//@@author A0140887W
 /**
  * Represents the finished status of a task in the to-do list
  * Default value is "not finished".

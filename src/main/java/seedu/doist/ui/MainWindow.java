@@ -125,7 +125,7 @@ public class MainWindow extends UiPart<Region> {
        // browserPanel = new BrowserPanel(browserPlaceholder);
         personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getAbsoluteTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 

@@ -79,7 +79,9 @@ public interface ReadOnlyTask {
             Date date1 = task1.getDates().getStartDate();
             Date date2 = task2.getDates().getStartDate();
             // Floating tasks are put behind
-            if (date1 == null) {
+            if (date1 == null && date2 == null) {
+                return 0;
+            } else if (date1 == null) {
                 return 1;
             } else if (date2 == null) {
                 return -1;

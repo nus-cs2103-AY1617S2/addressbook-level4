@@ -50,10 +50,6 @@ public class XmlAliasListMapStorageTest {
 
         thrown.expect(DataConversionException.class);
         readAliasListMap("NotXmlFormatAliasListMap.xml");
-
-        /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
-         * That means you should not have more than one exception test in one method
-         */
     }
 
     @Test
@@ -82,19 +78,19 @@ public class XmlAliasListMapStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_assertionFailure() throws IOException {
+    public void saveAliasListMap_nullAddressBook_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveAliasListMap(null, "SomeFile.xml");
     }
 
-    private void saveAddressBook(ReadOnlyAliasListMap addressBook, String filePath) throws IOException {
-        new XmlAliasListMapStorage(filePath).saveAliasListMap(addressBook, addToTestDataPathIfNotNull(filePath));
+    private void saveAliasListMap(ReadOnlyAliasListMap aliasListMap, String filePath) throws IOException {
+        new XmlAliasListMapStorage(filePath).saveAliasListMap(aliasListMap, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
+    public void saveAliasListMap_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(new AliasListMap(), null);
+        saveAliasListMap(new AliasListMap(), null);
     }
 
 

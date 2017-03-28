@@ -66,14 +66,19 @@ public class FileUtil {
         return new String(Files.readAllBytes(file.toPath()), CHARSET);
     }
 
+    //@@author A0140887W
     /**
      * Writes given string to a file.
      * Will create the file if it does not exist yet.
      */
     public static void writeToFile(File file, String content) throws IOException {
+        // Make sure that dirs is made first before writing
+        File newFile = new File(file.getAbsolutePath());
+        newFile.getParentFile().mkdirs();
+        // Write the file now
         Files.write(file.toPath(), content.getBytes(CHARSET));
     }
-
+    //@@author
     /**
      * Converts a string to a platform-specific file path
      * @param pathWithForwardSlash A String representing a file path but using '/' as the separator

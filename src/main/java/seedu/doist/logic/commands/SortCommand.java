@@ -39,7 +39,8 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        assert model != null;
         model.sortTasks(sortTypes);
-        return new CommandResult(getMessageForPersonListSortedSummary(sortTypes));
+        return new CommandResult(getMessageForTaskListSortedSummary(sortTypes));
     }
 }

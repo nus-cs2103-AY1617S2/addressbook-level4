@@ -26,4 +26,14 @@ public interface UserPrefsStorage {
      */
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
+    /**
+     * Sets the file path of the data file.
+     */
+    void setUserPrefsFilePath(String path);
+
+    /**
+     * Gets the file path of the data file.
+     */
+    String getUserPrefsFilePath();
+
 }

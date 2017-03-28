@@ -14,6 +14,7 @@ import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 
+//@@author A0140887W
 public class SortCommandTest extends DoistGUITest {
 
     @Test
@@ -22,7 +23,7 @@ public class SortCommandTest extends DoistGUITest {
         list.add(SortType.PRIORITY);
         commandBox.runCommand("sort priority");
         assertSortedByPriority();
-        assertResultMessage(Command.getMessageForPersonListSortedSummary(list));
+        assertResultMessage(Command.getMessageForTaskListSortedSummary(list));
     }
 
     @Test
