@@ -1,6 +1,8 @@
 //@@author A0131125Y
 package seedu.toluist.ui.view;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -21,19 +23,23 @@ public class TaskListUiView extends UiView {
 
     public TaskListUiView () {
         super(FXML);
+        FxViewUtil.makeFullWidth(getRoot());
+        configureBindings();
     }
 
     @Override
     protected void viewDidMount () {
         UiStore store = UiStore.getInstance();
-        ObservableList<Task> taskList = store.getObservableTasks();
-        setConnections(taskList);
-        FxViewUtil.makeFullWidth(getRoot());
+        // So taskListView won't get refreshed another time
+        taskListView.setItems(FXCollections.observableArrayList(store.getShownTasks()));
+        Platform.runLater(() -> taskListView.scrollTo(store.getNewTask()));
     }
 
-    private void setConnections(ObservableList<Task> taskList) {
-        taskListView.setItems(taskList);
+    private void configureBindings() {
+        UiStore store = UiStore.getInstance();
+        ObservableList<Task> taskList = store.getObservableTasks();
         taskListView.setCellFactory(listView -> new TaskListViewCell());
+        store.bind(this, taskList);
     }
 
     class TaskListViewCell extends ListCell<Task> {

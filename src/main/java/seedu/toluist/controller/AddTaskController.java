@@ -113,7 +113,7 @@ public class AddTaskController extends Controller {
             }
             todoList.add(task);
             if (todoList.save()) {
-                uiStore.setTasks(todoList.getTasks());
+                uiStore.setTasks(todoList.getTasks(), task);
             }
             return new CommandResult(ResultMessage.getAddCommandResultMessage(task, uiStore));
         } catch (IllegalArgumentException exception) {

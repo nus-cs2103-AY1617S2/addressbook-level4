@@ -12,6 +12,7 @@ import seedu.toluist.commons.util.DateTimeFormatterUtil;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
+import seedu.toluist.ui.UiStore;
 
 /**
  * View to display task row
@@ -25,6 +26,7 @@ public class TaskUiView extends UiView {
     private static final String IMAGE_PATH_RECURRING_ICON = "/images/recurring_icon.png";
     private static final String STYLE_CLASS_COMPLETED = "completed";
     private static final String STYLE_CLASS_OVERDUE = "overdue";
+    private static final String STYLE_CLASS_NEW = "new";
     private static final double STATUS_BOX_SPACING_VALUE = 10.0;
 
     @FXML
@@ -67,6 +69,7 @@ public class TaskUiView extends UiView {
         handleTaskWithDates(task.isTaskWithDeadline() || task.isEvent());
         handleRecurringTask(task.isRecurring());
         handleCompletedTask();
+        handleNewTask(task.equals(UiStore.getInstance().getNewTask()));
     }
 
     private void initializeView() {
@@ -180,6 +183,12 @@ public class TaskUiView extends UiView {
     private void handleCompletedTask() {
         if (task.isCompleted()) {
             FxViewUtil.addStyleClass(taskPane, STYLE_CLASS_COMPLETED);
+        }
+    }
+
+    private void handleNewTask(boolean isNew) {
+        if (isNew) {
+            FxViewUtil.addStyleClass(taskPane, STYLE_CLASS_NEW);
         }
     }
 }
