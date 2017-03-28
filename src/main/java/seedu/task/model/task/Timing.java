@@ -177,7 +177,7 @@ public class Timing implements Comparable<Timing> {
             return -1;
         }
 
-        int compareToResult = this.timing.getYear() - compareTiming.timing.getYear() + 3800;
+        int compareToResult = this.timing.getYear() - compareTiming.timing.getYear();
 
         if (compareToResult == 0) {
             compareToResult = this.timing.getMonth() - compareTiming.timing.getMonth();
