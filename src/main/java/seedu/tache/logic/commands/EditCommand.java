@@ -66,23 +66,7 @@ public class EditCommand extends Command implements Undoable {
         }
 
         taskToEdit = lastShownList.get(filteredTaskListIndex);
-        //Workaround as Java could not deep copy taskToEdit for some fields
-        DateTime workAroundStartDateTime = null;
-        DateTime workAroundEndDateTime = null;
-        try {
-            if (taskToEdit.getStartDateTime().isPresent()) {
-                workAroundStartDateTime = new DateTime(taskToEdit.getStartDateTime().get().getAmericanDateTime());
-            }
-            if (taskToEdit.getEndDateTime().isPresent()) {
-                workAroundEndDateTime = new DateTime(taskToEdit.getEndDateTime().get().getAmericanDateTime());
-            }
-        } catch (IllegalValueException e1) {
-            e1.printStackTrace();
-        }
-        originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
-                                        Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
-               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
-               taskToEdit.getRecurInterval());
+        cloneOriginalTask(taskToEdit);
         Task editedTask;
         try {
             editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
@@ -91,7 +75,7 @@ public class EditCommand extends Command implements Undoable {
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
-            model.updateFilteredListToShowAll();
+            model.updateCurrentFilteredList();
             commandSuccess = true;
             undoHistory.push(this);
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
@@ -238,6 +222,26 @@ public class EditCommand extends Command implements Undoable {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
+    }
+
+    private void cloneOriginalTask(ReadOnlyTask taskToEdit) {
+        //Workaround as Java could not deep copy taskToEdit for some fields
+        DateTime workAroundStartDateTime = null;
+        DateTime workAroundEndDateTime = null;
+        try {
+            if (taskToEdit.getStartDateTime().isPresent()) {
+                workAroundStartDateTime = new DateTime(taskToEdit.getStartDateTime().get().getAmericanDateTime());
+            }
+            if (taskToEdit.getEndDateTime().isPresent()) {
+                workAroundEndDateTime = new DateTime(taskToEdit.getEndDateTime().get().getAmericanDateTime());
+            }
+        } catch (IllegalValueException e1) {
+            e1.printStackTrace();
+        }
+        originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
+                                        Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
+               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
+               taskToEdit.getRecurInterval());
     }
 
     //@@author A0150120H

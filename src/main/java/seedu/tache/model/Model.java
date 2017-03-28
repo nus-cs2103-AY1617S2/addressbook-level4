@@ -68,4 +68,7 @@ public interface Model {
     /** Returns the filtered task list type as a {@code String} */
     String getFilteredTaskListType();
 
+    //@@author A0139925U
+    /** Updates the filter of the current filtered task list to reflect changes */
+    void updateCurrentFilteredList();
 }
