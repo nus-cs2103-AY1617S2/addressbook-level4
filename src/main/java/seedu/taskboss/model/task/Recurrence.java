@@ -7,7 +7,6 @@ import java.util.Date;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
-import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 
 //@@author A0143157J
 public class Recurrence {
