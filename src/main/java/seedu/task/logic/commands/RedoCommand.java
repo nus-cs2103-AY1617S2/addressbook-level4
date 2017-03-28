@@ -1,3 +1,4 @@
+//@@author A0139161J
 package seedu.task.logic.commands;
 
 import seedu.task.logic.GlobalStack;
@@ -8,7 +9,6 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
-//@@author A0139161J
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
@@ -48,9 +48,11 @@ public class RedoCommand extends Command {
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
             }
         } catch (DuplicateTaskException e) {
-            throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);
+            assert false : "not possible";
         } catch (TaskNotFoundException e) {
-            return new CommandResult(MESSAGE_FAIL);
+            assert false : "not possible";
         }
+        assert false : "not possible";
+        return null;
     }
 }
