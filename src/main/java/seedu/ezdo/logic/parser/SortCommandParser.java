@@ -16,16 +16,16 @@ import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
  */
 public class SortCommandParser implements CommandParser {
 
-    private static final String NAME_SORT_KEYWORD = "n";
-    private static final String PRIORITY_SORT_KEYWORD = "p";
-    private static final String START_DATE_SORT_KEYWORD = "s";
-    private static final String DUE_DATE_SORT_KEYWORD = "d";
+    private static final String SORT_KEYWORD_NAME = "n";
+    private static final String SORT_KEYWORD_PRIORITY = "p";
+    private static final String SORT_KEYWORD_START_DATE = "s";
+    private static final String SORT_KEYWORD_DUE_DATE = "d";
 
-    private static final String ASCENDING_KEYWORD = "a";
-    private static final String DESCENDING_KEYWORD = "d";
+    private static final String KEYWORD_ASCENDING = "a";
+    private static final String KEYWORD_DESCENDING = "d";
 
-    private static final int SORT_CRITERIA_INDEX = 0;
-    private static final int SORT_ORDER_INDEX = 1;
+    private static final int INDEX_OF_SORT_CRITERIA = 0;
+    private static final int INDEX_OF_SORT_ORDER = 1;
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
@@ -39,8 +39,8 @@ public class SortCommandParser implements CommandParser {
         }
 
         String[] sortArguments = sortArgumentsField.get();
-        String sortCriteria = sortArguments[SORT_CRITERIA_INDEX];
-        String sortOrder = sortArguments[SORT_ORDER_INDEX];
+        String sortCriteria = sortArguments[INDEX_OF_SORT_CRITERIA];
+        String sortOrder = sortArguments[INDEX_OF_SORT_ORDER];
 
         Boolean isSortedAscending;
 
@@ -55,13 +55,13 @@ public class SortCommandParser implements CommandParser {
         }
 
         switch (sortCriteria) {
-        case NAME_SORT_KEYWORD:
+        case SORT_KEYWORD_NAME:
             return new SortCommand(SortCriteria.NAME, isSortedAscending);
-        case PRIORITY_SORT_KEYWORD:
+        case SORT_KEYWORD_PRIORITY:
             return new SortCommand(SortCriteria.PRIORITY, isSortedAscending);
-        case START_DATE_SORT_KEYWORD:
+        case SORT_KEYWORD_START_DATE:
             return new SortCommand(SortCriteria.START_DATE, isSortedAscending);
-        case DUE_DATE_SORT_KEYWORD:
+        case SORT_KEYWORD_DUE_DATE:
             return new SortCommand(SortCriteria.DUE_DATE, isSortedAscending);
         default:
             return new SortCommand(null, isSortedAscending);
@@ -71,10 +71,10 @@ public class SortCommandParser implements CommandParser {
     private boolean determineIfIsSortedAscending(String sortOrder) throws InvalidSortOrderException {
         Boolean isSortedAscending;
         switch(sortOrder) {
-        case ASCENDING_KEYWORD:
+        case KEYWORD_ASCENDING:
             isSortedAscending = true;
             break;
-        case DESCENDING_KEYWORD:
+        case KEYWORD_DESCENDING:
             isSortedAscending = false;
             break;
         default:
