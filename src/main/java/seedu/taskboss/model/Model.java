@@ -19,13 +19,14 @@ import seedu.taskboss.model.task.UniqueTaskList.SortBy;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyTaskBoss newData);
+    void resetData(ReadOnlyTaskBoss newData) throws IllegalValueException;
 
     /** Returns the TaskBoss */
     ReadOnlyTaskBoss getTaskBoss();
 
     /** Deletes the given task. */
-    void deleteTask(List<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException;
+
+    void deleteTask(List<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException, IllegalValueException;
 
     /** Adds the given task
      * @throws IllegalValueException */
@@ -64,14 +65,15 @@ public interface Model {
     void updateFilteredTaskListByCategory(Category category);
 
     /** clear all tasks in the filtered task list by the given keywords as category*/
-    void clearTasksByCategory(Category category);
+    void clearTasksByCategory(Category category) throws IllegalValueException;
 
+    //@@author A0138961W
     /** Undoes previous command of TaskBoss*/
-    void undoTaskboss() throws EmptyStackException;
+    void undoTaskboss() throws EmptyStackException, IllegalValueException;
 
     /** Save current state of TaskBoss*/
     void saveTaskboss();
-
+    //@@author
     /** Sorts the task list according to the provided sort type
      * @throws IllegalValueException */
     void sortTasks(SortBy sortType) throws IllegalValueException;

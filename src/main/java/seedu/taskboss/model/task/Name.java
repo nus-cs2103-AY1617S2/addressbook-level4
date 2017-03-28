@@ -9,16 +9,18 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task names should only contain alphanumeric characters,"
+            + " special characters and spaces, and it should not be blank";
+    public static final String EMPTY_STRING = "";
 
     /*
      * The first character of the information must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullName;
 
+    //@author A0144904H
     /**
      * Validates given name.
      *
@@ -34,13 +36,13 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid task name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+        return !test.equals(EMPTY_STRING);
     }
 
-
+    //@@author A0144904H
     @Override
     public String toString() {
         return fullName;

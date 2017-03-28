@@ -44,8 +44,9 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
     /**
      * Creates a TaskBoss using the Tasks and Categories in the {@code toBeCopied}
+     * @throws IllegalValueException
      */
-    public TaskBoss(ReadOnlyTaskBoss toBeCopied) {
+    public TaskBoss(ReadOnlyTaskBoss toBeCopied) throws IllegalValueException {
         this();
         resetData(toBeCopied);
     }
@@ -61,7 +62,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         this.categories.setCategories(categories);
     }
 
-    public void resetData(ReadOnlyTaskBoss newData) {
+    public void resetData(ReadOnlyTaskBoss newData) throws IllegalValueException {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
@@ -161,7 +162,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
 //// category-level operations
 
-    public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
+    public void addCategory(Category t) throws IllegalValueException {
         categories.add(t);
     }
 
@@ -180,6 +181,10 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
+        return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+
+    public ObservableList<Task> getEditableTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 

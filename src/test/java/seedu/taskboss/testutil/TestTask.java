@@ -7,9 +7,10 @@ import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Recurrence;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
@@ -18,6 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private PriorityLevel priorityLevel;
     private DateTime startDateTime;
     private DateTime endDateTime;
+    private Recurrence recurrence;
     private UniqueCategoryList categories;
 
     public TestTask() {
@@ -33,6 +35,7 @@ public class TestTask implements ReadOnlyTask {
         this.startDateTime = taskToCopy.getStartDateTime();
         this.endDateTime = taskToCopy.getEndDateTime();
         this.information = taskToCopy.getInformation();
+        this.recurrence = taskToCopy.getRecurrence();
         this.categories = taskToCopy.getCategories();
     }
 
@@ -42,6 +45,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setInformation(Information information) {
         this.information = information;
+    }
+
+    public void setRecurrence(Recurrence recurrence) {
+        this.recurrence = recurrence;
     }
 
     public void setPriorityLevel(PriorityLevel priorityLevel) {
@@ -93,6 +100,16 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Recurrence getRecurrence() {
+        return recurrence;
+    }
+
+    @Override
+    public boolean isRecurring() {
+        return recurrence.isRecurring();
+    }
+
+    @Override
     public String toString() {
         return getAsText();
     }
@@ -100,14 +117,14 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         //@@author A0144904H
-        if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
-            sb.append("add " + this.getName().fullName + " ");
-        } else {
-            sb.append("add " + this.getName().fullName + "! ");
-        }
+        sb.append("add ");
+        sb.append(this.getName().toString());
+        sb.append(" p/" + this.getPriorityLevel().input);
+        //@@author
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");
+        sb.append("r/" + this.getRecurrence().toString() + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
     }
@@ -116,15 +133,16 @@ public class TestTask implements ReadOnlyTask {
     public String getShortAddCommand() {
         StringBuilder sb = new StringBuilder();
         //@@author A0144904H
-        if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
-            sb.append("add " + this.getName().fullName + " ");
-        } else {
-            sb.append("add " + this.getName().fullName + "! ");
-        }
+        sb.append("a ");
+        sb.append(this.getName().toString());
+        sb.append(" p/" + this.getPriorityLevel().input);
+        //@@author
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");
+        sb.append("r/" + this.getRecurrence().toString() + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
     }
+
 }

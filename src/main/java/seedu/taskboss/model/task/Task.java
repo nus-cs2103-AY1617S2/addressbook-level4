@@ -16,6 +16,7 @@ public class Task implements ReadOnlyTask {
     private Information information;
     private DateTime startDateTime;
     private DateTime endDateTime;
+    private Recurrence recurrence;
 
     private UniqueCategoryList categories;
 
@@ -23,15 +24,17 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(Name name, PriorityLevel priorityLevel, DateTime startDateTime,
-            DateTime endDateTime, Information information, UniqueCategoryList categories) {
+            DateTime endDateTime, Information information, Recurrence recurrence,
+            UniqueCategoryList categories) {
         assert !CollectionUtil.isAnyNull(name, priorityLevel, startDateTime,
-                endDateTime, information, categories);
+                endDateTime, information, recurrence, categories);
 
         this.name = name;
         this.priorityLevel = priorityLevel;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.information = information;
+        this.recurrence = recurrence;
         // protect internal categories from changes in the arg list
         this.categories = new UniqueCategoryList(categories);
     }
@@ -41,29 +44,35 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriorityLevel(), source.getStartDateTime(),
-                source.getEndDateTime(), source.getInformation(), source.getCategories());
+                source.getEndDateTime(), source.getInformation(), source.getRecurrence(),
+                source.getCategories());
     }
 
+    //@@author A0144904H
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
 
+    //@@author A0144904H
     @Override
     public Name getName() {
         return name;
     }
 
+    //@@author A0144904H
     public void setPriorityLevel(PriorityLevel priorityLevel) {
         assert priorityLevel != null;
         this.priorityLevel = priorityLevel;
     }
 
+    //@@author A0144904H
     @Override
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
     }
 
+    //@@author A0143157J
     public void setStartDateTime(DateTime startDateTime) {
         assert startDateTime != null;
         this.startDateTime = startDateTime;
@@ -84,6 +93,7 @@ public class Task implements ReadOnlyTask {
         return endDateTime;
     }
 
+    //@@author
     public void setInformation(Information information) {
         assert information != null;
         this.information = information;
@@ -94,6 +104,23 @@ public class Task implements ReadOnlyTask {
         return information;
     }
 
+    //@@author A0143157J
+    public void setRecurrence(Recurrence recurrence) {
+        assert recurrence != null;
+        this.recurrence = recurrence;
+    }
+
+    @Override
+    public Recurrence getRecurrence() {
+        return this.recurrence;
+    }
+
+    @Override
+    public boolean isRecurring() {
+        return this.recurrence.isRecurring();
+    }
+
+    //@@author
     @Override
     public UniqueCategoryList getCategories() {
         return new UniqueCategoryList(categories);
@@ -117,6 +144,7 @@ public class Task implements ReadOnlyTask {
         this.setStartDateTime(replacement.getStartDateTime());
         this.setEndDateTime(replacement.getEndDateTime());
         this.setInformation(replacement.getInformation());
+        this.setRecurrence(replacement.getRecurrence());
         this.setCategories(replacement.getCategories());
     }
 
@@ -130,7 +158,8 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priorityLevel, startDateTime, endDateTime, information, categories);
+        return Objects.hash(name, priorityLevel, startDateTime, endDateTime, information,
+                recurrence, categories);
     }
 
     @Override

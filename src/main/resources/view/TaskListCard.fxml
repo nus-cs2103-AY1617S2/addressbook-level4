@@ -40,6 +40,7 @@
                         <Label fx:id="startDateTime" styleClass="cell_small_label" text="\$startDateTime" />
                         <Label fx:id="endDateTime" styleClass="cell_small_label" text="\$endDateTime" />
                         <Label fx:id="information" styleClass="cell_small_label" text="\$information" />
+                        <Label fx:id="recurrence" styleClass="cell_small_label" text="\$recurrence" />
                     </children>
                 </VBox>
             </children>

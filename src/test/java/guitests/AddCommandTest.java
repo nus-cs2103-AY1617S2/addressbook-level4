@@ -6,17 +6,20 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.AddCommand;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.testutil.TestTask;
 import seedu.taskboss.testutil.TestUtil;
 
 public class AddCommandTest extends TaskBossGuiTest {
 
     @Test
-    public void add() {
-        //add one task
+    public void add() throws DuplicateCategoryException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
+        //add one task
         TestTask taskToAdd = td.taskH;
+
         assertAddSuccess(false, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
@@ -49,7 +52,8 @@ public class AddCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(boolean isShortCommand, TestTask taskToAdd, TestTask... currentList) {
+    private void assertAddSuccess(boolean isShortCommand, TestTask taskToAdd, TestTask... currentList)
+            throws DuplicateCategoryException, IllegalValueException {
         if (isShortCommand) {
             commandBox.runCommand(taskToAdd.getShortAddCommand());
         } else {

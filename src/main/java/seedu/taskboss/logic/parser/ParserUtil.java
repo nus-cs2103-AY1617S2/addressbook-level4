@@ -19,13 +19,15 @@ import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
+import seedu.taskboss.model.task.Recurrence;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
 public class ParserUtil {
 
-    private static final String WHITESPACE = " ";
+    private static final String ALL_WHITESPACE = "\\s+";
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern SORT_TYPE_ARGS_FORMAT = Pattern.compile("(?<sortType>.+)");
 
@@ -70,7 +72,7 @@ public class ParserUtil {
      */
     public static String[] parseRenameCategory(String command) {
         String trimmedCommand = command.trim();
-        String[] categories = trimmedCommand.split(WHITESPACE);
+        String[] categories = trimmedCommand.split(ALL_WHITESPACE);
         return categories;
     }
 
@@ -130,6 +132,17 @@ public class ParserUtil {
         } else {
             return Optional.empty();
         }
+    }
+
+    /**
+     * Parses a {@code Optional<String> frequency} into an {@code Optional<Recurrence>}
+     * if {@code recurrence} is present.
+     */
+    public static Optional<Recurrence> parseRecurrence(Optional<String> frequency) throws
+        IllegalValueException, IllegalArgumentException {
+        assert frequency != null;
+        return frequency.isPresent() ? Optional.of(new Recurrence(Frequency
+                .valueOf(frequency.get().toUpperCase().trim()))) : Optional.empty();
     }
 
     //@@author

@@ -20,6 +20,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String PRIORITY_FIELD_ID = "#priorityLevel";
     private static final String START_DATE_FIELD_ID = "#startDateTime";
     private static final String END_DATE_FIELD_ID = "#endDateTime";
+    private static final String RECURRENCE_FIELD_ID = "#recurrence";
     private static final String CATEGORIES_FIELD_ID = "#categories";
 
     private Node node;
@@ -53,6 +54,10 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(END_DATE_FIELD_ID);
     }
 
+    public String getRecurrence() {
+        return getTextFromLabel(RECURRENCE_FIELD_ID);
+    }
+
     public List<String> getCategories() {
         return getCategories(getCategoriesContainer());
     }
@@ -83,6 +88,7 @@ public class TaskCardHandle extends GuiHandle {
                 && getStartDateTime().equals(task.getStartDateTime().value)
                 && getEndDateTime().equals(task.getEndDateTime().value)
                 && getInformation().equals(task.getInformation().value)
+                && getRecurrence().equals(task.getRecurrence().toString())
                 && getCategories().equals(getCategories(task.getCategories()));
     }
 
@@ -95,6 +101,7 @@ public class TaskCardHandle extends GuiHandle {
                     && getStartDateTime().equals(handle.getStartDateTime())
                     && getEndDateTime().equals(handle.getEndDateTime())
                     && getInformation().equals(handle.getInformation())
+                    && getRecurrence().equals(handle.getRecurrence())
                     && getCategories().equals(handle.getCategories());
         }
         return super.equals(obj);

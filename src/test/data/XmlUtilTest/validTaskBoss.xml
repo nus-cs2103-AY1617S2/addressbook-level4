@@ -6,6 +6,7 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">4th street</information>
+        <recurrence>NONE</recurrence>
     </tasks>
     <tasks>
         <name>Ruth Mueller</name>
@@ -13,6 +14,7 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">81th street</information>
+        <recurrence>NONE</recurrence>
     </tasks>
     <tasks>
         <name>Heinz Kurz</name>
@@ -20,6 +22,7 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">wall street</information>
+        <recurrence>NONE</recurrence>
     </tasks>
     <tasks>
         <name>Cornelia Meier</name>
@@ -27,6 +30,7 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">10th street</information>
+        <recurrence>NONE</recurrence>
     </tasks>
     <tasks>
         <name>Werner Meyer</name>
@@ -34,6 +38,7 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">michegan ave</information>
+        <recurrence>NONE</recurrence>
     </tasks>
     <tasks>
         <name>Lydia Kunz</name>
@@ -41,6 +46,7 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">little tokyo</information>
+        <recurrence>NONE</recurrence>
     </tasks>
     <tasks>
         <name>Anna Best</name>
@@ -48,6 +54,7 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">4th street</information>
+        <recurrence>NONE</recurrence>
     </tasks>
     <tasks>
         <name>Stefan Meier</name>
@@ -55,6 +62,7 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">little india</information>
+        <recurrence>NONE</recurrence>
     </tasks>
     <tasks>
         <name>Martin Mueller</name>
@@ -62,5 +70,6 @@
         <startDateTime>Feb 19, 2017 5pm</startDateTime>
         <endDateTime>Feb 29, 2017 5pm</endDateTime>
         <information isPrivate="false">chicago ave</information>
+        <recurrence>NONE</recurrence>
     </tasks>
 </taskboss>

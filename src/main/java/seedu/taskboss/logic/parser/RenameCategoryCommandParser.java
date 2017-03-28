@@ -24,13 +24,14 @@ public class RenameCategoryCommandParser {
 
     public Command parse(String args) {
         String[] categories = ParserUtil.parseRenameCategory(args);
+        if (categories.length != NUM_CATEGORIES_PARAM || categories.length == 0) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameCategoryCommand.MESSAGE_USAGE));
+        }
         String oldCategory = categories[INDEX_OLD_CATEGORY];
         String newCategory = categories[INDEX_NEW_CATEGORY];
 
-        if (categories.length != NUM_CATEGORIES_PARAM) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameCategoryCommand.MESSAGE_USAGE));
-        } else if (!oldCategory.matches(FORMAT_ALPHANUMERIC) ||
+        if (!oldCategory.matches(FORMAT_ALPHANUMERIC) ||
             !newCategory.matches(FORMAT_ALPHANUMERIC)) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ERROR_NON_ALPHANUMERIC));

@@ -126,12 +126,11 @@ public class UniqueCategoryList implements Iterable<Category> {
 
     /**
      * Adds a Category to the list.
-     *
-     * @throws DuplicateCategoryException if the Category to add is a duplicate of an existing Category in the list.
+     * @throws IllegalValueException
      */
-    public void add(Category toAdd) throws DuplicateCategoryException {
+    public void add(Category toAdd) throws IllegalValueException {
         assert toAdd != null;
-        if (contains(toAdd)) {
+        if (contains(toAdd) && !toAdd.equals(new Category("AllTasks"))) {
             throw new DuplicateCategoryException();
         }
         internalList.add(toAdd);
@@ -148,6 +147,7 @@ public class UniqueCategoryList implements Iterable<Category> {
             internalList.remove(toRemove);
         }
     }
+
     @Override
     public Iterator<Category> iterator() {
         return internalList.iterator();

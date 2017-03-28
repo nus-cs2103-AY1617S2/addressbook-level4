@@ -10,8 +10,8 @@ import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.EditCommand;
 import seedu.taskboss.model.category.Category;
-import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
+import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
 import seedu.taskboss.testutil.TestTask;
 
@@ -22,15 +22,18 @@ public class EditCommandTest extends TaskBossGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
+    //edit all field of a task.
+    //Should not affect the default All Task Category
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Attend wedding tmr p/Yes sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
-                + " Jurong West Ave 6, #08-111 c/friends";
+                + " Jurong West Ave 6, #08-111 r/none c/friends";
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Attend wedding tmr").withPriorityLevel("Yes")
                .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
-               .withInformation("123, Jurong West Ave 6, #08-111").withCategories("friends").build();
+               .withInformation("123, Jurong West Ave 6, #08-111").withRecurrence(Frequency.NONE)
+               .withCategories("AllTasks", "friends").build();
 
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -39,13 +42,13 @@ public class EditCommandTest extends TaskBossGuiTest {
     // EP: edit all fields
     @Test
     public void edit_allFieldsWithShortCommand_success() throws Exception {
-
-        String detailsToEdit = "Amanda p/Yes sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax";
+        String detailsToEdit = "Amanda p/No sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax r/none";
         int taskBossIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("Yes")
+        TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("no")
                .withStartDateTime("feb 27 2016").withEndDateTime("feb 28 2016")
-               .withInformation("discuss about life").withCategories("relax").build();
+               .withInformation("discuss about life").withRecurrence(Frequency.NONE)
+               .withCategories("relax", "AllTasks").build();
 
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -57,7 +60,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("work", "fun").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("work", "AllTasks", "fun").build();
 
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -70,19 +73,32 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 1;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withStartDateTime("").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withStartDateTime("")
+                .withCategories("AllTasks").build();
+
+        assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_onlyInformation_success() throws Exception {
+        String detailsToEdit = "i/best friends!!";
+        int taskBossIndex = 2;
+
+        TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit)
+                .withInformation("best friends!!").withCategories("AllTasks").build();
 
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
     //@@author
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
+    public void edit_onlyCategories_success() throws Exception {
         String detailsToEdit = "c/sweetie c/bestie";
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie", "bestie").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie", "bestie", "AllTasks").build();
 
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -93,7 +109,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories().build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("AllTasks").build();
 
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -107,7 +123,9 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Code quality").build();
+
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Code quality")
+                .withCategories("AllTasks").build();
 
         assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -132,9 +150,6 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
-
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
 
@@ -145,7 +160,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 1 Attend wedding p/Yes sd/Feb 18, 2017 5pm 5pm ed/Mar 28, 2017 5pm"
-                                + "i/123, Jurong West Ave 6, #08-111 c/friends");
+                                + "i/123, Jurong West Ave 6, #08-111 r/none c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
@@ -157,6 +172,31 @@ public class EditCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("edit 3 sd/next fri 5pm ed/tomorrow");
 
         assertResultMessage(EditCommand.ERROR_INVALID_DATES);
+    }
+
+    //author A0144904H
+    @Test
+    public void edit_To_DoneCategory_failure() {
+        commandBox.runCommand("edit 3 c/Done sd/next fri 5pm ed/tomorrow");
+
+        assertResultMessage(EditCommand.ERROR_CANNOT_EDIT_DONE_CATEGORY);
+    }
+
+    //author A0144904H
+    @Test
+    public void edit_DoneCategory_failure() throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand("mark 1");
+        commandBox.runCommand("edit 1 c/Work");
+
+        assertResultMessage(EditCommand.ERROR_CANNOT_EDIT_DONE_TASK);
+    }
+
+    //author A0144904H
+    @Test
+    public void edit_To_AllTasks_Category_failure() {
+        commandBox.runCommand("edit 3 c/AllTasks sd/next fri 5pm ed/tomorrow");
+
+        assertResultMessage(EditCommand.ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY);
     }
 
     //@@author

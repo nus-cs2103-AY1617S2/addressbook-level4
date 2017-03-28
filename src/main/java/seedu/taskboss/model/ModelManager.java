@@ -60,7 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskBoss newData) {
+    public void resetData(ReadOnlyTaskBoss newData) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.resetData(newData);
         indicateTaskBossChanged();
@@ -70,9 +70,9 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyTaskBoss getTaskBoss() {
         return taskBoss;
     }
-
+    //@@author A0138961W
     @Override
-    public void undoTaskboss() throws EmptyStackException {
+    public void undoTaskboss() throws EmptyStackException, IllegalValueException {
         taskBoss.resetData(taskbossHistory.pop());
         indicateTaskBossChanged();
     }
@@ -81,14 +81,15 @@ public class ModelManager extends ComponentManager implements Model {
     public void saveTaskboss() {
         indicateTaskBossChanged();
     }
-
+    //@@author
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
     }
     //@@author A0138961W
     @Override
-    public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException {
+    public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException, IllegalValueException {
+
         taskbossHistory.push(new TaskBoss(this.taskBoss));
 
         for (ReadOnlyTask target: targets) {
@@ -176,13 +177,25 @@ public class ModelManager extends ComponentManager implements Model {
             taskBoss.updateTask(taskBossIndex, editedTask);
         }
 
+        errorDoesNotExistDetect(oldCategory, isFound);
+
+        removeCategoryFromTaskboss(oldCategory);
+        indicateTaskBossChanged();
+    }
+
+    //@@author A0144904H
+    /**
+     * detects the category does not exist error
+     * @param oldCategory
+     * @param isFound
+     * @throws CommandException
+     */
+    private void errorDoesNotExistDetect(Category oldCategory, boolean isFound) throws CommandException {
         if (!isFound) {
             updateFilteredListToShowAll();
             throw new CommandException(oldCategory.toString()
                     + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
         }
-        removeCategoryFromTaskboss(oldCategory);
-        indicateTaskBossChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -227,7 +240,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0147990R
     @Override
-    public void clearTasksByCategory(Category category) {
+    public void clearTasksByCategory(Category category) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         FilteredList<ReadOnlyTask> taskListWithCategory = filteredTasks;
         int listSize = taskListWithCategory.size();

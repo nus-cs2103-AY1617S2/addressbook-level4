@@ -1,6 +1,7 @@
 package seedu.taskboss.logic;
 
 import javafx.collections.ObservableList;
+import seedu.taskboss.commons.exceptions.DefaultCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.CommandResult;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
@@ -17,9 +18,10 @@ public interface Logic {
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
      * @throws IllegalValueException
+     * @throws DefaultCategoryException
      */
     CommandResult execute(String commandText) throws CommandException,
-        IllegalValueException, InvalidDatesException;
+        IllegalValueException, InvalidDatesException, DefaultCategoryException;
 
     /** Returns the filtered list of persons */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
