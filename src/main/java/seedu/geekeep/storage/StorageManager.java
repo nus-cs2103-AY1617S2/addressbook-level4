@@ -55,7 +55,7 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ UserPrefs methods ==============================
 
     @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
+    public Optional<UserPrefs> readUserPrefs() throws DataConversionException {
         return userPrefsStorage.readUserPrefs();
     }
 

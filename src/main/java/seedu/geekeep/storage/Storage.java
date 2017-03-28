@@ -22,7 +22,7 @@ public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage
     void saveConfig(Config config) throws IOException;
 
     @Override
-    Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
+    Optional<UserPrefs> readUserPrefs() throws DataConversionException;
 
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
