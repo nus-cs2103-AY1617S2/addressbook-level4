@@ -90,7 +90,7 @@ public class UpdateCommand extends Command {
         UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories()
                 .orElseGet(taskToUpdate::getCategories);
 
-        return new Task(updatedTaskName, updatedStartDate, updatedStartTime, updatedEndDate, updatedEndTime,
+        return new Task(updatedTaskName, updatedStartDate, updatedStartTime, updatedEndDate, updatedEndTime, false,
                 updatedCategories);
     }
 

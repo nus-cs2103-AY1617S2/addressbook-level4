@@ -1,4 +1,3 @@
-
 package seedu.taskmanager.model;
 
 import java.util.Set;
@@ -162,7 +161,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
         saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
@@ -172,7 +170,6 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0139520L
     @Override
     public void markTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
-
         saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTask(taskManagerIndex, true);
@@ -182,7 +179,6 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0139520L
     @Override
     public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
-
         saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTask(taskManagerIndex, false);
