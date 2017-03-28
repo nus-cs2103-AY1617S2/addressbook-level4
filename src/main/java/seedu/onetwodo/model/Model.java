@@ -80,7 +80,7 @@ public interface Model {
 
     String undo() throws EmptyHistoryException;
 
-    void redo() throws EmptyHistoryException;
+    String redo() throws EmptyHistoryException;
 
     void clear();
 

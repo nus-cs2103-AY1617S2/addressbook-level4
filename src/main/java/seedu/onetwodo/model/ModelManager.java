@@ -141,22 +141,25 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String undo() throws EmptyHistoryException {
-        if (!history.isUndoHistoryEmpty()) {
-            history.saveAsNextToDoList(this.toDoList);
+        if (history.hasUndoHistory()) {
+            history.saveRedoInformation(this.toDoList);
             this.toDoList.resetData(history.getPreviousToDoList());
+            String feedbackMessage = history.getUndoFeedbackMessageAndTransferToRedo();
             indicateToDoListChanged();
-            return history.getPreviousCounterCommand();
+            return feedbackMessage;
         } else {
             throw new EmptyHistoryException("There is nothing to undo.");
         }
     }
 
     @Override
-    public void redo() throws EmptyHistoryException {
-        if (!history.isRedoHistoryEmpty()) {
-            history.saveAsPreviousToDoList(this.toDoList);
+    public String redo() throws EmptyHistoryException {
+        if (history.hasRedoHistory()) {
+            history.saveUndoInformation(this.toDoList);
             this.toDoList.resetData(history.getNextToDoList());
+            String feedbackMessage = history.getRedoFeedbackMessageAndTransferToUndo();
             indicateToDoListChanged();
+            return feedbackMessage;
         } else {
             throw new EmptyHistoryException("There is nothing to redo.");
         }

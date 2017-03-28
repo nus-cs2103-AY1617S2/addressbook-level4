@@ -14,13 +14,11 @@ public class RedoCommand extends Command {
             + ": Redo the most recent undo command that modifies any of the 3 lists.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Redo successful.";
-
     @Override
     public CommandResult execute() throws CommandException {
         try {
-            model.redo();
-            return new CommandResult(MESSAGE_SUCCESS);
+            String feedbackMessage = model.redo();
+            return new CommandResult(COMMAND_WORD + " successfully.\n" + feedbackMessage);
         } catch (EmptyHistoryException ehe) {
             throw new CommandException(ehe.getMessage());
         }

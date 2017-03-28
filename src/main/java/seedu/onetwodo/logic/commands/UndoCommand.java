@@ -18,8 +18,8 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         try {
-            String previousCounterCommand = model.undo();
-            return new CommandResult(COMMAND_WORD + " successfully.\n" + previousCounterCommand);
+            String feedbackMessage = model.undo();
+            return new CommandResult(COMMAND_WORD + " successfully.\n" + feedbackMessage);
         } catch (EmptyHistoryException ehe) {
             throw new CommandException(ehe.getMessage());
         }
