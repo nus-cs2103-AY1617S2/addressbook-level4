@@ -27,13 +27,13 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_null_throwsAssertionError() {
+    public void resetDataNullThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         taskManager.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyTaskManager_replacesData() {
+    public void resetDataWithValidReadOnlyTaskManagerReplacesData() {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
         assertEquals(newData, taskManager);

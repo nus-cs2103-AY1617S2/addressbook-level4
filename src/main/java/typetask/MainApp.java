@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;

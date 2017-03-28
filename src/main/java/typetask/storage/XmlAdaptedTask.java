@@ -1,7 +1,5 @@
 package typetask.storage;
 
-
-
 import javax.xml.bind.annotation.XmlElement;
 
 import typetask.commons.exceptions.IllegalValueException;
