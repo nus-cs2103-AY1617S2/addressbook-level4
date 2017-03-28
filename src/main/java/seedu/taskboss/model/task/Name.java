@@ -42,7 +42,7 @@ public class Name {
         return !test.equals(EMPTY_STRING);
     }
 
-    //@@author A0144904H
+    //@@author
     @Override
     public String toString() {
         return fullName;

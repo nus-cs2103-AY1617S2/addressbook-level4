@@ -69,6 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyTaskBoss getTaskBoss() {
         return taskBoss;
     }
+
     //@@author A0138961W
     @Override
     public void undoTaskboss() throws EmptyStackException, IllegalValueException {
@@ -80,6 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void saveTaskboss() {
         indicateTaskBossChanged();
     }
+
     //@@author
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBossChanged() {
@@ -217,18 +219,17 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
     }
 
-    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByEndDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
     }
 
-    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByCategory(Category category) {
         updateFilteredTaskList(new PredicateExpression(new CategoryQualifier(category)));
     }
 
+    //@@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -253,15 +254,15 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
-    //@@author A0147990R
     /**
      * Removes the category from the UniqueCategoryList of Taskboss
      **/
     public void removeCategoryFromTaskboss(Category category) {
         taskBoss.removeCategory(category);
     }
-    //========== Inner classes/interfaces used for filtering =================================================
 
+    //========== Inner classes/interfaces used for filtering =================================================
+    //@@author
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
         String toString();
@@ -338,7 +339,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0147990R
     private class EndDatetimeQualifier implements Qualifier {
         private String endDateKeyWords;
 
@@ -358,7 +358,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0147990R
     private class CategoryQualifier implements Qualifier {
         private Category categoryKeyWords;
 

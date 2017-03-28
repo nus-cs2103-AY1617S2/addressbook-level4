@@ -30,6 +30,7 @@ public class EditCommandParser {
 
     private static final String EMPTY_STRING = "";
 
+    //@@author A0143157J
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -99,6 +100,7 @@ public class EditCommandParser {
         return new EditCommand(index.get(), editTaskDescriptor);
     }
 
+    //@@author
     /**
      * Parses {@code Collection<String> categories} into
      * an {@code Optional<UniqueCategoryList>} if {@code categories} is non-empty.

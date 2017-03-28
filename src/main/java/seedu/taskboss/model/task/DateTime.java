@@ -1,4 +1,3 @@
-//@@author A0143157J
 package seedu.taskboss.model.task;
 
 import java.text.SimpleDateFormat;
@@ -7,6 +6,7 @@ import java.util.Date;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.parser.DateTimeParser;
 
+//@@author A0143157J
 public class DateTime {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task dates format should be in dd-mm-yyyy,"

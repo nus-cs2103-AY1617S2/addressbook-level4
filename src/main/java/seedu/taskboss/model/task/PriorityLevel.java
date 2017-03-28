@@ -1,7 +1,7 @@
 package seedu.taskboss.model.task;
 
-
 import seedu.taskboss.commons.exceptions.IllegalValueException;
+
 //@@author A0144904H
 /**
  * Represents a Task's priority level in TaskBoss.
@@ -9,10 +9,14 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
  */
 public class PriorityLevel {
 
+    private static final String STRING_YES = "Yes";
+    private static final String STRING_NO = "No";
+
+    private static final String EMPTY_STRING = "";
+
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain"
             + " the words Yes and No (case-insensitive) or the letters y(Y) and n(N)";
 
-    //@@author A0144904H
     public static final String PRIORITY_HIGH_VALUE = "High priority";
     public static final String PRIORITY_NO_VALUE = "No priority";
     public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N)$";
@@ -30,19 +34,19 @@ public class PriorityLevel {
 
         String trimmedPriorityLevel = priorityLevel.trim();
 
-        if ("".equals(priorityLevel)) {
+        if (EMPTY_STRING.equals(priorityLevel)) {
             this.value = PRIORITY_NO_VALUE;
-            this.input = "No";
+            this.input = STRING_NO;
         } else {
             if (!isValidPriorityLevel(trimmedPriorityLevel)) {
                 throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
             }
             if (trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
                 this.value = PRIORITY_HIGH_VALUE;
-                this.input = "Yes";
+                this.input = STRING_YES;
             } else {
                 this.value = PRIORITY_NO_VALUE;
-                this.input = "No";
+                this.input = STRING_NO;
             }
         }
     }
@@ -52,7 +56,7 @@ public class PriorityLevel {
      */
     public static boolean isValidPriorityLevel(String test) {
         return test.matches(PRIORITY_REGEX) ||
-                "".equals(test);
+                EMPTY_STRING.equals(test);
     }
 
     @Override

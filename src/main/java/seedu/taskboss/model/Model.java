@@ -71,11 +71,13 @@ public interface Model {
 
     /** Save current state of TaskBoss*/
     void saveTaskboss();
+
     //@@author
     /** Sorts the task list according to the provided sort type
      * @throws IllegalValueException */
     void sortTasks(SortBy sortType) throws IllegalValueException;
 
+    //@@author A0143157J
     /** Changes the name of a category of all tasks in the filtered task list
      * @throws CommandException */
     void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException;

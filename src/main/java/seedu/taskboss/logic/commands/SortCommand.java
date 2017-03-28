@@ -37,11 +37,18 @@ public class SortCommand extends Command {
 
         try {
             model.sortTasks(sortType);
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(INDEX_FIRST_TASK));
+            scrollToFirstTask();
             return new CommandResult(String.format(MESSAGE_SUCCESS));
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
+    }
+
+    /**
+     * Scrolls to the position of the first task
+     */
+    private void scrollToFirstTask() {
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(INDEX_FIRST_TASK));
     }
 
 }

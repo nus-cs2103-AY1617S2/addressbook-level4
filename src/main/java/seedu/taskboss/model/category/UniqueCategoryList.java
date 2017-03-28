@@ -25,6 +25,7 @@ import seedu.taskboss.commons.util.CollectionUtil;
  */
 public class UniqueCategoryList implements Iterable<Category> {
 
+    private static final String CATEGORY_ALLTASKS = "AllTasks";
     private final ObservableList<Category> internalList = FXCollections.observableArrayList();
 
     /**
@@ -130,7 +131,7 @@ public class UniqueCategoryList implements Iterable<Category> {
      */
     public void add(Category toAdd) throws IllegalValueException {
         assert toAdd != null;
-        if (contains(toAdd) && !toAdd.equals(new Category("AllTasks"))) {
+        if (contains(toAdd) && !toAdd.equals(new Category(CATEGORY_ALLTASKS))) {
             throw new DuplicateCategoryException();
         }
         internalList.add(toAdd);
@@ -148,6 +149,7 @@ public class UniqueCategoryList implements Iterable<Category> {
         }
     }
 
+    //@@author
     @Override
     public Iterator<Category> iterator() {
         return internalList.iterator();

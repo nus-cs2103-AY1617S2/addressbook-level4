@@ -9,6 +9,10 @@ import java.io.IOException;
 
 public class SaveCommand extends Command {
 
+    private static final String SYMBOL_ASTERISK = "*";
+    private static final String SYMBOL_CARET = "^";
+    private static final String SYMBOL_HASH = "#";
+    private static final String SYMBOL_PLUS = "+";
     public static final String COMMAND_WORD = "save";
     public static final String COMMAND_WORD_SHORT = "sv";
 
@@ -31,8 +35,8 @@ public class SaveCommand extends Command {
     public CommandResult execute() {
         assert storage != null;
 
-        if (filepath.contains("+") || filepath.contains ("#") ||
-                filepath.contains ("^") || filepath.contains ("*")) {
+        if (filepath.contains(SYMBOL_PLUS) || filepath.contains (SYMBOL_HASH) ||
+                filepath.contains (SYMBOL_CARET) || filepath.contains (SYMBOL_ASTERISK)) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
         }
 

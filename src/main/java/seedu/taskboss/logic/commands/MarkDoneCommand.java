@@ -43,10 +43,9 @@ public class MarkDoneCommand extends Command {
         }
 
         ReadOnlyTask taskToMarkDone = lastShownList.get(filteredTaskListIndex);
-        //@@author A0143157J
+
         if (taskToMarkDone.isRecurring()) {
-            Task newRecurredTask = new Task(taskToMarkDone);
-            newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+            Task newRecurredTask = createRecurredTask(taskToMarkDone);
             model.updateTask(filteredTaskListIndex, newRecurredTask);
         } else {
             Task taskMarked = new Task(taskToMarkDone.getName(), taskToMarkDone.getPriorityLevel(),
@@ -58,10 +57,28 @@ public class MarkDoneCommand extends Command {
 
         model.updateFilteredListToShowAll();
 
+        scrollToTask(taskToMarkDone);
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkDone));
+    }
+
+    //@@author A0143157J
+    /**
+     * Returns a new recurred task with updated task dates according to the recurrence
+     * of the given task
+     */
+    private Task createRecurredTask(ReadOnlyTask taskToMarkDone) throws IllegalValueException {
+        Task newRecurredTask = new Task(taskToMarkDone);
+        newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+        return newRecurredTask;
+    }
+
+    /**
+     * Scrolls to the position of the task
+     */
+    private void scrollToTask(ReadOnlyTask taskToMarkDone) {
         UnmodifiableObservableList<ReadOnlyTask> latestShownList = model.getFilteredTaskList();
         int targetIndex = latestShownList.indexOf(taskToMarkDone);
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkDone));
     }
 
 }
