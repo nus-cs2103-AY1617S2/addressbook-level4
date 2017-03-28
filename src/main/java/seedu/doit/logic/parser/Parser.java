@@ -13,6 +13,7 @@ import seedu.doit.logic.commands.AddCommand;
 import seedu.doit.logic.commands.ClearCommand;
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.DeleteCommand;
+import seedu.doit.logic.commands.DoneCommand;
 import seedu.doit.logic.commands.EditCommand;
 import seedu.doit.logic.commands.ExitCommand;
 import seedu.doit.logic.commands.FindCommand;
@@ -63,6 +64,8 @@ public class Parser {
             return new EditCommandParser().parse(arguments);
         } else if (SelectCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSelect().equals(commandWord)) {
             return new SelectCommandParser().parse(arguments);
+        } else if (DoneCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDone().equals(commandWord)) {
+            return new DoneCommand();
         } else if (MarkCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getMark().equals(commandWord)) {
             return new MarkCommandParser().parse(arguments);
         } else if (UnmarkCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUnmark().equals(commandWord)) {

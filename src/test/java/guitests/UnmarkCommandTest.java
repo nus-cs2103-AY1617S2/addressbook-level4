@@ -13,14 +13,10 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
     public static final String MESSAGE_DONE_COMMAND = "done";
     public static final String MESSAGE_UNMARK_COMMAND = "unmark ";
 
-
     public static final int INDEX_UNMARK_VALID = 8;
     public static final int INDEX_UNMARK_VALID_DONE = 1;
 
     public static final int INDEX_UNMARK_INVALID = 14;
-
-
-
 
     // The list of tasks in the task list panel is expected to match this list.
     private TestTask[] expectedTasksList = this.td.getTypicalTasks();

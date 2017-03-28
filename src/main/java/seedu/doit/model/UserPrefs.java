@@ -47,11 +47,11 @@ public class UserPrefs {
     }
 
     // @@author A0138909R
-    public void setCommandSettings(String add, String delete, String edit, String mark, String clear, String exit,
-            String find, String help, String list, String redo, String save, String select, String sort, String undo,
-            String unmark, String set) {
-        CommandSettings.getInstance().setCommandSettings(add, delete, edit, mark, clear, exit, find, help, list, redo,
-                save, select, sort, undo, unmark, set);
+    public void setCommandSettings(String add, String delete, String done, String edit, String clear, String exit,
+            String find, String help, String list, String mark, String redo, String save, String select, String set,
+            String sort, String undo, String unmark) {
+        CommandSettings.getInstance().setCommandSettings(add, delete, done, edit, clear, exit, find, help, list, mark,
+                redo, save, select, set, sort, undo, unmark);
     }
 
     @Override

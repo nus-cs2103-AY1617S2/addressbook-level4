@@ -7,6 +7,7 @@ import java.io.Serializable;
 import seedu.doit.logic.commands.AddCommand;
 import seedu.doit.logic.commands.ClearCommand;
 import seedu.doit.logic.commands.DeleteCommand;
+import seedu.doit.logic.commands.DoneCommand;
 import seedu.doit.logic.commands.EditCommand;
 import seedu.doit.logic.commands.ExitCommand;
 import seedu.doit.logic.commands.FindCommand;
@@ -28,6 +29,7 @@ public class CommandSettings implements Serializable {
 
     private String add;
     private String delete;
+    private String done;
     private String edit;
     private String mark;
     private String clear;
@@ -56,12 +58,13 @@ public class CommandSettings implements Serializable {
         this.add = AddCommand.COMMAND_WORD;
         this.delete = DeleteCommand.COMMAND_WORD;
         this.edit = EditCommand.COMMAND_WORD;
-        this.mark = MarkCommand.COMMAND_WORD;
+        this.done = DoneCommand.COMMAND_WORD;
         this.clear = ClearCommand.COMMAND_WORD;
         this.exit = ExitCommand.COMMAND_WORD;
         this.find = FindCommand.COMMAND_WORD;
         this.help = HelpCommand.COMMAND_WORD;
         this.list = ListCommand.COMMAND_WORD;
+        this.mark = MarkCommand.COMMAND_WORD;
         this.redo = RedoCommand.COMMAND_WORD;
         this.save = SaveCommand.COMMAND_WORD;
         this.select = SelectCommand.COMMAND_WORD;
@@ -71,11 +74,12 @@ public class CommandSettings implements Serializable {
         this.set = SetCommand.COMMAND_WORD;
     }
 
-    public void setCommandSettings(String add, String delete, String edit, String mark, String clear, String exit,
-            String find, String help, String list, String redo, String save, String select, String sort, String undo,
-            String unmark, String set) {
+    public void setCommandSettings(String add, String delete, String done, String edit, String clear, String exit,
+            String find, String help, String list, String mark, String redo, String save, String select, String set,
+            String sort, String undo, String unmark) {
         this.add = add;
         this.delete = delete;
+        this.done = done;
         this.edit = edit;
         this.mark = mark;
         this.clear = clear;
@@ -99,6 +103,10 @@ public class CommandSettings implements Serializable {
 
     public String getDelete() {
         return this.delete;
+    }
+
+    public String getDone() {
+        return this.done;
     }
 
     public String getEdit() {
@@ -170,6 +178,10 @@ public class CommandSettings implements Serializable {
         this.delete = delete;
     }
 
+    public void setDone(String done) {
+        this.done = done;
+    }
+
     public void setEdit(String edit) {
         this.edit = edit;
     }
@@ -236,6 +248,8 @@ public class CommandSettings implements Serializable {
             setEdit(newCommand);
         } else if (SelectCommand.COMMAND_WORD.equals(oldCommand) || this.select.equals(oldCommand)) {
             setSelect(newCommand);
+        } else if (DoneCommand.COMMAND_WORD.equals(oldCommand) || this.done.equals(oldCommand)) {
+            setMark(newCommand);
         } else if (MarkCommand.COMMAND_WORD.equals(oldCommand) || this.mark.equals(oldCommand)) {
             setMark(newCommand);
         } else if (UnmarkCommand.COMMAND_WORD.equals(oldCommand) || this.unmark.equals(oldCommand)) {
@@ -273,6 +287,7 @@ public class CommandSettings implements Serializable {
         case AddCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD:
         case SelectCommand.COMMAND_WORD:
+        case DoneCommand.COMMAND_WORD:
         case MarkCommand.COMMAND_WORD:
         case UnmarkCommand.COMMAND_WORD:
         case SortCommand.COMMAND_WORD:
@@ -289,11 +304,11 @@ public class CommandSettings implements Serializable {
             return true;
         }
         if (this.add.equals(command) || this.delete.equals(command) || this.edit.equals(command)
-                || this.mark.equals(command) || this.clear.equals(command) || this.exit.equals(command)
+                || this.done.equals(command) || this.clear.equals(command) || this.exit.equals(command)
                 || this.find.equals(command) || this.help.equals(command) || this.list.equals(command)
-                || this.redo.equals(command) || this.save.equals(command) || this.select.equals(command)
-                || this.set.equals(command) || this.sort.equals(command) || this.undo.equals(command)
-                || this.unmark.equals(command)) {
+                || this.mark.equals(command) || this.redo.equals(command) || this.save.equals(command)
+                || this.select.equals(command) || this.set.equals(command) || this.sort.equals(command)
+                || this.undo.equals(command) || this.unmark.equals(command)) {
             return true;
         }
         return false;
@@ -306,12 +321,13 @@ public class CommandSettings implements Serializable {
         result = (prime * result) + ((this.add == null) ? 0 : this.add.hashCode());
         result = (prime * result) + ((this.clear == null) ? 0 : this.clear.hashCode());
         result = (prime * result) + ((this.delete == null) ? 0 : this.delete.hashCode());
-        result = (prime * result) + ((this.mark == null) ? 0 : this.mark.hashCode());
+        result = (prime * result) + ((this.done == null) ? 0 : this.done.hashCode());
         result = (prime * result) + ((this.edit == null) ? 0 : this.edit.hashCode());
         result = (prime * result) + ((this.exit == null) ? 0 : this.exit.hashCode());
         result = (prime * result) + ((this.find == null) ? 0 : this.find.hashCode());
         result = (prime * result) + ((this.help == null) ? 0 : this.help.hashCode());
         result = (prime * result) + ((this.list == null) ? 0 : this.list.hashCode());
+        result = (prime * result) + ((this.mark == null) ? 0 : this.mark.hashCode());
         result = (prime * result) + ((this.redo == null) ? 0 : this.redo.hashCode());
         result = (prime * result) + ((this.save == null) ? 0 : this.save.hashCode());
         result = (prime * result) + ((this.select == null) ? 0 : this.select.hashCode());
@@ -355,11 +371,11 @@ public class CommandSettings implements Serializable {
         } else if (!this.delete.equals(other.delete)) {
             return false;
         }
-        if (this.mark == null) {
-            if (other.mark != null) {
+        if (this.done == null) {
+            if (other.done != null) {
                 return false;
             }
-        } else if (!this.mark.equals(other.mark)) {
+        } else if (!this.done.equals(other.done)) {
             return false;
         }
         if (this.edit == null) {
@@ -395,6 +411,13 @@ public class CommandSettings implements Serializable {
                 return false;
             }
         } else if (!this.list.equals(other.list)) {
+            return false;
+        }
+        if (this.mark == null) {
+            if (other.mark != null) {
+                return false;
+            }
+        } else if (!this.mark.equals(other.mark)) {
             return false;
         }
         if (this.redo == null) {
@@ -455,18 +478,19 @@ public class CommandSettings implements Serializable {
         sb.append("Add : " + this.add + "\n");
         sb.append("Delete : " + this.delete + "\n");
         sb.append("Edit : " + this.edit + "\n");
-        sb.append("Mark : " + this.mark + "\n");
+        sb.append("Done : " + this.done + "\n");
         sb.append("Clear : " + this.clear + "\n");
         sb.append("Exit : " + this.exit + "\n");
         sb.append("Find : " + this.find + "\n");
         sb.append("Help : " + this.help + "\n");
         sb.append("List : " + this.list + "\n");
+        sb.append("Mark : " + this.mark + "\n");
         sb.append("Redo : " + this.redo + "\n");
         sb.append("Save : " + this.save + "\n");
         sb.append("Select : " + this.select + "\n");
         sb.append("Set : " + this.set + "\n");
         sb.append("Sort : " + this.sort + "\n");
-        sb.append("Undo : " + this.undo);
+        sb.append("Undo : " + this.undo + "\n");
         sb.append("Unmark : " + this.unmark);
         return sb.toString();
     }
