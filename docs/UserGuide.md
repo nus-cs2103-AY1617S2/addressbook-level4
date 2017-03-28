@@ -216,7 +216,7 @@ Example:
    Saves the data file of the task scheduler to /Users/main/Desktop/data/YATS.xml
 
 
-### 2.14. Undo : `undo`
+### 2.15. Undo : `undo`
 
 Undo the last command that was performed in the task scheduler
 Format: `undo`
@@ -230,7 +230,7 @@ Example:
 * `undo`
    Undoes the delete that was just done
 
-### 2.15. Redo : `redo`
+### 2.16. Redo : `redo`
 
 Redo an undone command in the task scheduler
 Format: `redo`
