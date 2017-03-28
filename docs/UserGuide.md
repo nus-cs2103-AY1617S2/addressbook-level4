@@ -1,8 +1,10 @@
 # User Guide
 
-1. [Starting the Program](#quick-start)
-2. [Features](#features)
-3. [Command Summary](#command-summary)
+Author: Jacob Levy
+
+1. [Starting the Program](#Starting-the-Program)
+2. [Features](#Features)
+3. [Command Summary](#Command-Summary)
 
 ## Starting the Program
 
@@ -79,8 +81,7 @@ Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 task number shown in the list. `INDEX` must be an exact match in order 
 for the function to work.
 
-Examples: 
-* `edit 2` m/Go to Ralph's
+Examples: `edit 2 m/Go to Ralph's`
 
 ## Editing a Task : `undo`
 Undos the most recent action. Irreversible.
@@ -93,15 +94,15 @@ Format: `sort name` or `sort time`
 > To return to the unsorted list of tasks, type and enter `list`.
 
 ## Googling a Task or Phrase: `google` 
-Format: `google [INDEX] [KEYWORDS]`
-> Googles the task name at the specified index or Googles the key words that the user enters. A user can additionally Google a task name by single clicking on a task.
+Format: `google [INDEX]`
+> Googles the task name at the specified index. A user can additionally Google a task name by single clicking on a task.
 
 ## Clearing All Entries : `clear`
 Clears all tasks from the task manager.<br>
 Format: `clear`  
 
 ## Change the Save Path: `path`
-Changes the save path for Fast Task data.<br>
+Changes the save path for Fast Task data. You must specify the name of the save file and mark it as a .xml file.<br>
 Format: `path PATHNAME`<br>
 Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
 Example for Unix: `path /Users/jlevy/Desktop/MyTasks.xml`
@@ -139,6 +140,7 @@ Tasks manager data are saved in a file called `TasksManagerData.xml` in the proj
 * **Sort** : `sort time` or `sort name`<br>
 
 * **Path** : `path PATHNAME` <br>
+ e.g. `path C:\Desktop\MyTasks.xml`
 
 * **Google** : `google INDEX` <br>
   e.g.`google 2`
