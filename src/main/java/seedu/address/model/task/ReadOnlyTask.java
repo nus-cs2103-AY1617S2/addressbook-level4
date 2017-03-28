@@ -80,11 +80,13 @@ public interface ReadOnlyTask {
     }
 
     default void buildDeadlineString(final StringBuilder builder) {
+        // TODO don't include milliseconds in toString output
         builder.append(" Deadline: ");
         builder.append(getDeadline().isPresent() ? getDeadline().get().toString() : "none");
     }
 
     default void buildStartEndDateTimeString(final StringBuilder builder) {
+        // TODO don't include milliseconds in toString output
         if (getStartEndDateTime().isPresent()) {
             builder.append(" ");
             builder.append(getStartEndDateTime().get().toString());
