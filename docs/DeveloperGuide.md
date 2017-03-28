@@ -30,7 +30,7 @@ This guide describes the design and implementation of *DoMe!*. Through this guid
 
 1. **JDK `1.8.0_60`**  or later<br>
 
-    > Having any Java 8 version is not enough. 
+    > Having any Java 8 version is not enough.
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
@@ -526,8 +526,8 @@ Use case resumes at step 2.
 #### Use case: Search
 ##### Main Success Scenario:
 1. User requests for a list of tasks that have matching keywords typed in.
-2. System shows a list of tasks that have the matching keywords. 
-3. Use case ends. 
+2. System shows a list of tasks that have the matching keywords.
+3. Use case ends.
 
 ---
 
@@ -559,8 +559,8 @@ Use case resumes at step 2.
 
 #### Use case: View Overdue Tasks
 ##### Main Success Scenario:
-1. User requests for a list of overdue tasks. 
-2. System shows a list of tasks that are overdue. 
+1. User requests for a list of overdue tasks.
+2. System shows a list of tasks that are overdue.
 3. Use case ends.
 
 ---
@@ -586,7 +586,7 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extension
-3a. Email address/Password provided by the user is incorrect 
+3a. Email address/Password provided by the user is incorrect
 > 3a1. System shows error message.
 > 3a2. Use case ends.
 
@@ -594,13 +594,13 @@ Use case resumes at step 2.
 
 #### Use case: Undo Previous Command
 ##### Main Success Scenario:
-1. User requests to undo a previous command that mutates the data. 
+1. User requests to undo a previous command that mutates the data.
 2. System returns the command that was undone.
 3. Use case ends.
 
 ##### Extensions
 2. There is nothing to undo.
-> 2a1. Use case ends. 
+> 2a1. Use case ends.
 
 ---
 
@@ -622,7 +622,7 @@ Use case resumes at step 2.
 4. Use case ends.
 
 ##### Extension
-1a. Specified file does not exist 
+1a. Specified file does not exist
 > 1a1. System shows error message that specified file does not exist.
 > 1a2. Use case ends.
 
@@ -710,8 +710,8 @@ Use case resumes at step 2.
 #### Use case: Repeat Task
 ##### Main Success Scenario:
 1. User requests to list persons.
-2. System shows a list of persons. 
-3. User requests to repeat a specific task in the list. 
+2. System shows a list of persons.
+3. User requests to repeat a specific task in the list.
 4. System puts the task that was put on repeat and displays the task.
 5. Use case ends.
 
@@ -728,8 +728,8 @@ Use case resumes at step 2.
 #### Use case: Customise 'Message of the Day'
 ##### Main Success Scenario:
 1. User requests set a Message of the Day.
-2. System shows current message if it exists. 
-3. User edits the Message of the Day. 
+2. System shows current message if it exists.
+3. User edits the Message of the Day.
 4. System saves the message and displays it on subsequent program launches.
 5. Use case ends.
 
@@ -841,7 +841,7 @@ Use case resumes at step 2.
 > * Unable to add subtasks
 
 **Remember The Milk** (surveyed by Le Minh Phuc)
-> Pros: 
+> Pros:
 > * Is essentially a CLI app modified to be more interactive using tags
 > * Has desktop version
 > * Has an email-like interface, which is familiar and easy to use
