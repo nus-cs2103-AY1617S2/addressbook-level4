@@ -43,7 +43,7 @@ public class MarkDoneCommand extends Command {
                 || this.filteredTaskListIndices.get(0) < 1) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-      
+
         for (int index : this.filteredTaskListIndices) {
             this.tasksToMarkDone.add(lastShownList.get(index - 1));
         }
