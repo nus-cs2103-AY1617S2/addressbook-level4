@@ -3,6 +3,10 @@ package seedu.opus.logic.commands;
 import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.logic.commands.exceptions.CommandException;
 
+//@@author A0148087W
+/**
+ * Rollback the most recent changes by user to TaskManager
+ */
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";

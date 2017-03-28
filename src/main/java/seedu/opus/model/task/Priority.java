@@ -30,6 +30,7 @@ public class Priority {
 
     }
 
+    //@@author A0148087W
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority can only take specific string "
             + "values hi, mid, low, none.";
     public static final String PRIORITY_VALIDATION_REGEX = "[^\\s].*";
@@ -104,6 +105,7 @@ public class Priority {
             return false;
         }
     }
+    //@@author
 
     /**
      * @return the current value of the priority

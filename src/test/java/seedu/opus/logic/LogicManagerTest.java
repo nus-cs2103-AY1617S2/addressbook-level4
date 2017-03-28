@@ -534,6 +534,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    //@@author A0148087W
     @Test
     public void executeUndoResetToPreviousState() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -642,6 +643,7 @@ public class LogicManagerTest {
         assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
         assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
     }
+    //@@author
 
     /**
      * A utility class to generate test data.

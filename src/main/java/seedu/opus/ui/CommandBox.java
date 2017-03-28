@@ -113,11 +113,6 @@ public class CommandBox extends UiPart<Region> {
         suggestions = Collections.emptyIterator();
     }
 
-    private void setCommandLineInput(String input) {
-        commandTextField.setText(input);
-        commandTextField.positionCaret(input.length());
-    }
-
     /**
      * Sets the command box style to indicate a successful command.
      */
@@ -125,6 +120,11 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
+    //@@author A0148087W
+    private void setCommandLineInput(String input) {
+        commandTextField.setText(input);
+        commandTextField.positionCaret(input.length());
+    }
     /**
      * Catch cursor key inputs from user to browse previous user input history
      */
@@ -161,6 +161,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.end();
     }
 
+    //@@author
      /** Custom Trie for autocomplete feature.
      *
      * @author xbili

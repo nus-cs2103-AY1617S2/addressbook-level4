@@ -93,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0148087W
     @Override
     public void resetToPreviousState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
@@ -104,6 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
         indicateTaskManagerChanged();
     }
+    //@@author
 
     //=========== Filtered Task List Accessors =============================================================
 
