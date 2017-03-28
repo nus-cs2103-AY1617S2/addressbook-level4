@@ -564,15 +564,23 @@ Use case ends
 4. Should come with automated unit tests and open source code.
 5. Should return to a functioning state when system restarts 
 6. Should function well offline
-7. Shuld have no unhandled exceptions from incorrect user input<br>
+7. Shuld have no unhandled exceptions from incorrect user input
+8. Should work well stand-alone and should not be a plug-in to another software
+9. Should use text files for data storage and not [relational databases] (#relational-databases)
+10. Should store the data locally in a human editable text file
+11. Should work without requiring an installer, just download jar and run
+12. Should follow the Object-Oriented paradigm<br>
 
-{More to be added}
 
 ## Appendix D : Glossary
 
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
+
+##### Relational databases
+
+> Collection of data items organized as a set of formally-described tables from which data can be accessed or reassembled in many different ways, such as SQL
 
 
 ## Appendix E : Product Survey
