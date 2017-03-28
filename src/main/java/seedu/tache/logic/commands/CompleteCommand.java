@@ -15,7 +15,7 @@ import seedu.tache.model.task.UniqueTaskList;
 /**
  * Edits the details of an existing task in the task manager.
  */
-public class CompleteCommand extends Command {
+public class CompleteCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "complete";
 
@@ -31,6 +31,9 @@ public class CompleteCommand extends Command {
 
     private final List<Integer> indexList;
 
+    private boolean commandSuccess;
+    private List<ReadOnlyTask> completedList;
+
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param completeTaskDescriptor details to edit the task with
@@ -44,16 +47,18 @@ public class CompleteCommand extends Command {
             this.indexList.set(i, indexList.get(i) - 1);
         }
         Collections.reverse(indexList);
+        commandSuccess = false;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = new ArrayList<ReadOnlyTask>(model.getFilteredTaskList());
-        List<ReadOnlyTask> completedList = new ArrayList<ReadOnlyTask>();
+        completedList = new ArrayList<ReadOnlyTask>();
 
         //Check all indexes are valid before proceeding
         for (int i = 0; i < indexList.size(); i++) {
             if (indexList.get(i) >= lastShownList.size()) {
+                commandSuccess = false;
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
         }
@@ -64,10 +69,13 @@ public class CompleteCommand extends Command {
             try {
                 model.updateTask(taskToEdit, completedTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                commandSuccess = false;
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
-            completedList.add(taskToEdit);
+            completedList.add(completedTask);
         }
+        commandSuccess = true;
+        undoHistory.push(this);
         model.updateFilteredListToShowUncompleted();
 
         return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, getSuccessMessage(completedList)));
@@ -86,6 +94,18 @@ public class CompleteCommand extends Command {
     }
 
     /**
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
+     * edited with {@code editTaskDescriptor}.
+     */
+    private static Task createUncompletedTask(ReadOnlyTask taskToEdit) {
+        assert taskToEdit != null;
+
+        return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
+                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), true, false, RecurInterval.NONE);
+
+    }
+
+    /**
      * Creates and returns a formatted String message with the details of {@code completedList}
      */
     private static String getSuccessMessage(List<ReadOnlyTask> completedList) {
@@ -95,5 +115,24 @@ public class CompleteCommand extends Command {
             successMessage += completedList.get(i).toString();
         }
         return successMessage;
+    }
+
+    @Override
+    public boolean isUndoable() {
+        return commandSuccess;
+    }
+
+    @Override
+    public String undo() throws CommandException {
+        for (int i = 0; i < completedList.size(); i++) {
+            try {
+                ReadOnlyTask original = completedList.get(i);
+                ReadOnlyTask revert = createUncompletedTask(completedList.get(i));
+                model.updateTask(original, revert);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+        }
+        return String.format(MESSAGE_COMPLETED_TASK_SUCCESS, completedList);
     }
 }
