@@ -98,6 +98,10 @@ public class UniqueEventList implements Iterable<Event> {
         setEvents(replacement);
     }
 
+    public void confirmEventTime(int eventListIndex, int timeslotIndex) {
+        internalList.get(eventListIndex).confirmTimeslot(timeslotIndex);
+    }
+
     public UnmodifiableObservableList<Event> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
@@ -134,5 +138,6 @@ public class UniqueEventList implements Iterable<Event> {
      * there is no such matching event in the list.
      */
     public static class EventNotFoundException extends Exception {}
+
 
 }

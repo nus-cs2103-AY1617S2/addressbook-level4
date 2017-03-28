@@ -1,39 +1,38 @@
 package project.taskcrusher.model.task;
 
+import java.util.Date;
 import java.util.Objects;
 
-import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
+import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 /**
  * Represents an active task. Guarantees: details are present and not null (just
  * empty in <Optional>), field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task extends UserToDo implements ReadOnlyTask {
 
     public static final String TASK_FLAG = "t";
 
     private Name name;
     private Deadline deadline;
-    private Priority priority;
-    private Description description;
-
-    private UniqueTagList tags;
+    private boolean isOverdue;
 
     /**
      * Modified for Task.
      */
     public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name);
-
-        this.name = name;
+        super(name, priority, description, tags);
+        assert deadline != null;
         this.deadline = deadline;
         this.priority = priority;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
+        this.isOverdue = false;
     }
 
     /**
@@ -41,26 +40,6 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getDeadline(), source.getPriority(), source.getDescription(), source.getTags());
-    }
-
-    public void setTaskName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
-
-    @Override
-    public Name getName() {
-        return name;
-    }
-
-    public void setPriority(Priority priority) {
-        assert priority != null;
-        this.priority = priority;
-    }
-
-    @Override
-    public Priority getPriority() {
-        return priority;
     }
 
     @Override
@@ -73,30 +52,18 @@ public class Task implements ReadOnlyTask {
         this.deadline = deadline;
     }
 
-    @Override
-    public Description getDescription() {
-        return description;
-    }
-
-    public void setDescription(Description description) {
-        assert description != null;
-        this.description = description;
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
-    }
-
     public boolean hasDeadline() {
         return this.deadline.hasDeadline();
     }
 
-    /**
-     * Replaces this person's tags with the tags in the argument tag list.
-     */
-    public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
+    public boolean isOverdue() {
+        return this.isOverdue;
+    }
+
+    @Override
+    public void markComplete() {
+        super.markComplete();
+        isOverdue = false;
     }
 
     /**
@@ -105,7 +72,7 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setTaskName(replacement.getName());
+        this.setName(replacement.getName());
         this.setPriority(replacement.getPriority());
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
@@ -127,6 +94,33 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask another) {
+        if (this.isComplete) {
+            if (another.isComplete()) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else if (another.isComplete()) {
+            return -1;
+        }
+
+        if (!this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
+            return this.getPriority().compareTo(another.getPriority());
+        } else if (!this.getDeadline().hasDeadline() && another.getDeadline().hasDeadline()) {
+            return 1;
+        } else if (this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
+            return -1;
+        } else { //both has deadline
+            Date thisDate = this.getDeadline().getDate().get();
+            assert thisDate != null;
+            Date anotherDate = another.getDeadline().getDate().get();
+            assert anotherDate != null;
+            return thisDate.compareTo(anotherDate);
+        }
     }
 
 }

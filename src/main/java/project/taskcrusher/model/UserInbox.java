@@ -240,6 +240,10 @@ public class UserInbox implements ReadOnlyUserInbox {
         }
     }
 
+    public void confirmEventTime(int eventListIndex, int timeslotIndex) {
+        events.confirmEventTime(eventListIndex, timeslotIndex);
+    }
+
     public ObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {
         return events.getEventsWithOverlapingTimeslots(candidate);
     }
@@ -288,4 +292,6 @@ public class UserInbox implements ReadOnlyUserInbox {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, events, tags);
     }
+
+
 }

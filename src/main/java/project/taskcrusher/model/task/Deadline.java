@@ -43,13 +43,13 @@ public class Deadline {
      * @param deadline
      * @throws IllegalValueException
      */
-    public Deadline(String deadline, boolean isNew) throws IllegalValueException {
+    public Deadline(String deadline, boolean filterOverdue) throws IllegalValueException {
         assert deadline != null;
 
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtilApache.dateAsString(DateUtilApache.parseDate(deadline, isNew));
+            this.deadline = DateUtilApache.dateAsString(DateUtilApache.parseDate(deadline, filterOverdue));
         }
 
     }
@@ -97,5 +97,4 @@ public class Deadline {
     public boolean hasDeadline() {
         return !deadline.equals(NO_DEADLINE);
     }
-
 }

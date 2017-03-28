@@ -10,9 +10,9 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-        <Label fx:id="taskLabel" text="Tasks" styleClass="cell_big_label" />
+        <Label fx:id="taskLabel" text="Tasks" styleClass="list_header" />
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
-        <Label fx:id="eventLabel" text="Events" styleClass="cell_big_label" />
+        <Label fx:id="eventLabel" text="Events" styleClass="list_header" />
         <ListView fx:id="eventListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>

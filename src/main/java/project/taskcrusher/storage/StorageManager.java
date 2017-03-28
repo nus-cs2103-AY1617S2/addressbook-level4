@@ -54,6 +54,11 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
+    public void loadNewStorageWith(String storageFilename) {
+        this.userInboxStorage = new XmlUserInboxStorage(storageFilename);
+    }
+
+    @Override
     public Optional<ReadOnlyUserInbox> readUserInbox() throws DataConversionException, IOException {
         return readUserInbox(userInboxStorage.getUserInboxFilePath());
     }

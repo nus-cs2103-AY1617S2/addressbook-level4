@@ -9,6 +9,8 @@ import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
+import project.taskcrusher.commons.events.model.EventListToShowUpdatedEvent;
+import project.taskcrusher.commons.events.model.TaskListToShowUpdatedEvent;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
 import project.taskcrusher.model.event.Event;
@@ -16,7 +18,7 @@ import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList.DuplicateEventException;
 import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
-import project.taskcrusher.model.shared.UserItem;
+import project.taskcrusher.model.shared.ReadOnlyUserToDo;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
@@ -32,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final UserInbox userInbox;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
+    private static final boolean LIST_EMPTY = true;
 
     /**
      * Initializes a ModelManager with the given userInbox and userPrefs.
@@ -67,12 +70,31 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
+    private void prepareEventListForUi() {
+        sortFilteredEventListByTimeslot();
+        if (filteredEvents.isEmpty()) {
+            raise(new EventListToShowUpdatedEvent(LIST_EMPTY));
+        } else {
+            raise(new EventListToShowUpdatedEvent(!LIST_EMPTY));
+        }
+    }
+
+    private void prepareTaskListForUi() {
+        sortFilteredTaskListByDeadline();
+        if (filteredTasks.isEmpty()) {
+            raise(new TaskListToShowUpdatedEvent(LIST_EMPTY));
+        } else {
+            raise(new TaskListToShowUpdatedEvent(!LIST_EMPTY));
+        }
+    }
+
     //=========== Task operations =========================================================================
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         userInbox.removeTask(target);
         indicateUserInboxChanged();
+        prepareTaskListForUi();
     }
 
     @Override
@@ -90,6 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(taskListIndex, editedTask);
         indicateUserInboxChanged();
+        prepareTaskListForUi();
     }
 
     //=========== Event operations =========================================================================
@@ -113,7 +136,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addEvent(Event event) throws DuplicateEventException {
         userInbox.addEvent(event);
-        updateFilteredTaskListToShowAll();
+        updateFilteredEventListToShowAll();
+        indicateUserInboxChanged();
+    }
+
+    public synchronized void confirmEventTime(int filteredEventListIndex, int timeslotIndex) {
+        int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+        userInbox.confirmEventTime(eventListIndex, timeslotIndex);
         indicateUserInboxChanged();
     }
 
@@ -125,12 +154,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        sortFilteredTaskListByDeadline();
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredTaskListToShowAll() {
         filteredTasks.setPredicate(null);
+        prepareTaskListForUi();
     }
 
     @Override
@@ -145,6 +176,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        prepareTaskListForUi();
+    }
+
+    private void sortFilteredTaskListByDeadline() {
+        logger.info("Sorting in effect");
+        filteredTasks.sorted();
     }
 
     //=========== Filtered Event List Accessors =============================================================
@@ -157,6 +194,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredEventListToShowAll() {
         filteredEvents.setPredicate(null);
+        prepareEventListForUi();
     }
 
     @Override
@@ -171,12 +209,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
+        prepareEventListForUi();
+    }
+
+    private void sortFilteredEventListByTimeslot() {
+        filteredEvents.sorted();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(UserItem item);
+        boolean satisfies(ReadOnlyUserToDo item);
         String toString();
     }
 
@@ -189,7 +232,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(UserItem item) {
+        public boolean satisfies(ReadOnlyUserToDo item) {
             return qualifier.run(item);
         }
 
@@ -200,7 +243,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(UserItem item);
+        boolean run(ReadOnlyUserToDo item);
         String toString();
     }
 
@@ -212,7 +255,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(UserItem item) {
+        public boolean run(ReadOnlyUserToDo item) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(item.getName().toString(), keyword))
                     .findAny()
@@ -234,7 +277,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(UserItem item) {
+        public boolean run(ReadOnlyUserToDo item) {
             assert item instanceof ReadOnlyTask;
             ReadOnlyTask task = (ReadOnlyTask) item;
 
@@ -265,7 +308,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(UserItem item) {
+        public boolean run(ReadOnlyUserToDo item) {
             assert item instanceof ReadOnlyEvent;
             ReadOnlyEvent event = (ReadOnlyEvent) item;
             if (event.hasOverlappingTimeslot(userInterestedTimeslot)) {

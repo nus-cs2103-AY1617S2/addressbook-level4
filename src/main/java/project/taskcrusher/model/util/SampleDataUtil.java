@@ -5,9 +5,9 @@ import project.taskcrusher.model.ReadOnlyUserInbox;
 import project.taskcrusher.model.UserInbox;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.Deadline;
-import project.taskcrusher.model.task.Priority;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
 
