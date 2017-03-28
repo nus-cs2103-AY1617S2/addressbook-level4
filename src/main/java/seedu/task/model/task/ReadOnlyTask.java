@@ -1,5 +1,7 @@
 package seedu.task.model.task;
 
+import java.util.ArrayList;
+
 import seedu.task.model.tag.UniqueTagList;
 
 /**
@@ -54,5 +56,7 @@ public interface ReadOnlyTask {
     }
 
     RecurringFrequency getFrequency();
+
+    ArrayList<RecurringTaskOccurrence> getOccurrences();
 
 }

@@ -184,4 +184,9 @@ public class TaskList implements ReadOnlyTaskList {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getRecurringTaskList() {
+        return null;
+    }
 }

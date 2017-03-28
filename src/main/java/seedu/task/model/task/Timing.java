@@ -47,6 +47,10 @@ public class Timing implements Comparable<Timing> {
         }
     }
 
+    public Timing() throws IllegalValueException {
+        this(null);
+    }
+
     /**
      * Returns if a given string is a valid timing.
      */

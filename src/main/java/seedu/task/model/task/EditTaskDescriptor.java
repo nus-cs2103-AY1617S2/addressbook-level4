@@ -17,6 +17,8 @@ public class EditTaskDescriptor {
     private Optional<Timing> endTiming = Optional.empty();
     private Optional<Boolean> recurring = Optional.empty();
     private Optional<UniqueTagList> tags = Optional.empty();
+    private Optional<RecurringFrequency> frequency = Optional.empty();
+
 
     public EditTaskDescriptor() {}
 
@@ -27,6 +29,7 @@ public class EditTaskDescriptor {
         this.endTiming = toCopy.getEndTiming();
         this.tags = toCopy.getTags();
         this.recurring = toCopy.isRecurring();
+        this.frequency = toCopy.getFrequency();
     }
 
     /**
@@ -90,5 +93,9 @@ public class EditTaskDescriptor {
 
     public Optional<Boolean> isRecurring() {
         return recurring;
+    }
+
+    public Optional<RecurringFrequency> getFrequency() {
+        return frequency;
     }
 }

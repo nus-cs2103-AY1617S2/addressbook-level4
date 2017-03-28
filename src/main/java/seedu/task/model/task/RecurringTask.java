@@ -86,6 +86,16 @@ public class RecurringTask implements ReadOnlyTask {
         return occurrences;
     }
 
+    public SimpleDateFormat retriveFormat(String s) {
+        SimpleDateFormat format;
+        if (s.length() <= 10) {
+            format = new SimpleDateFormat("dd/MM/yyyy");
+        } else {
+            format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        }
+        return format;
+    }
+
     /** If frequency is in hours - support up to 168 hours (1 week)
      * If frequency is in weeks - support up to 24 weeks
      * If frequency is in months - support up to 12 months
@@ -100,7 +110,8 @@ public class RecurringTask implements ReadOnlyTask {
         Calendar cal2 = Calendar.getInstance();
         cal1.setTime(initialStartTime.getTiming());
         cal2.setTime(initialEndTime.getTiming());
-        SimpleDateFormat format1 = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        SimpleDateFormat startTimeFormat = retriveFormat(initialStartTime.toString());
+        SimpleDateFormat endTimeFormat = retriveFormat(initialEndTime.toString());
         String tempStartTime, tempEndTime;
         Timing tempStart = null, tempEnd = null;
         RecurringTaskOccurrence occurenceToAdd;
@@ -110,8 +121,8 @@ public class RecurringTask implements ReadOnlyTask {
             for (int i = 0; i < RecurringFrequency.HOUR_LIMIT; i += freqNumber) {
                 cal1.add(Calendar.HOUR_OF_DAY, freqNumber);
                 cal2.add(Calendar.HOUR_OF_DAY, freqNumber);
-                tempStartTime = format1.format(cal1.getTime());
-                tempEndTime = format1.format(cal2.getTime());
+                tempStartTime = startTimeFormat.format(cal1.getTime());
+                tempEndTime = endTimeFormat.format(cal2.getTime());
                 try {
                     tempStart = new Timing(tempStartTime);
                 } catch (IllegalValueException e) {
@@ -132,8 +143,8 @@ public class RecurringTask implements ReadOnlyTask {
             for (int i = 0; i < RecurringFrequency.DAY_LIMIT; i += freqNumber) {
                 cal1.add(Calendar.DATE, freqNumber);
                 cal2.add(Calendar.DATE, freqNumber);
-                tempStartTime = format1.format(cal1.getTime());
-                tempEndTime = format1.format(cal2.getTime());
+                tempStartTime = startTimeFormat.format(cal1.getTime());
+                tempEndTime = endTimeFormat.format(cal2.getTime());
                 try {
                     tempStart = new Timing(tempStartTime);
                 } catch (IllegalValueException e) {
@@ -154,8 +165,8 @@ public class RecurringTask implements ReadOnlyTask {
             for (int i = 0; i < RecurringFrequency.MONTH_LIMIT; i += freqNumber) {
                 cal1.add(Calendar.MONTH, freqNumber);
                 cal2.add(Calendar.MONTH, freqNumber);
-                tempStartTime = format1.format(cal1.getTime());
-                tempEndTime = format1.format(cal2.getTime());
+                tempStartTime = startTimeFormat.format(cal1.getTime());
+                tempEndTime = endTimeFormat.format(cal2.getTime());
                 try {
                     tempStart = new Timing(tempStartTime);
                 } catch (IllegalValueException e) {

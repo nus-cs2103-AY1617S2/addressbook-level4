@@ -16,7 +16,6 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.RecurringTaskOccurrence;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
-import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -147,56 +146,56 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         //@@author A0164212U
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            if (task.isRecurring()) {
-                // find corresponding RecurringTask in recurringTaskList based on description
-                int taskIndex = -1;
-                int occurrenceIndex = -1;
-                Description description = task.getDescription();
-                for (int i = 0; i < Model.recurringTaskList.size(); i++) {
-                    if (Model.recurringTaskList.get(i).getDescription().equals(description)) {
-                        taskIndex = i;
-                        break;
-                    }
-                }
-                // find if any RecurringTaskOccurence exist for the dates corresponding to nameKeyWords in task.getOccurences
-                if (taskIndex != -1) {
-                    ArrayList<RecurringTaskOccurrence> taskOccurrenceList = Model.recurringTaskList.get(taskIndex).getOccurrences();
-
-                    boolean isPresent = false;
-                    for (int j = 0; j < taskOccurrenceList.size(); j++) {
-                        final int finalIndex = j;
-                        isPresent = (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(taskOccurrenceList.get(finalIndex).getStartTiming().value, keyword))
-                                .findAny()
-                                .isPresent()) ||
-                                (nameKeyWords.stream()
-                                        .filter(keyword -> StringUtil.containsWordIgnoreCase(taskOccurrenceList.get(finalIndex).getEndTiming().value, keyword))
-                                        .findAny()
-                                        .isPresent());
-                        if (isPresent) {
-                            occurrenceIndex = j;
-                        }
-                    }
-                }
-                // use the ReccurringTaskOccurence object in addition to the RecurringTask to create a Task object
-                // use model.addTask with this task
-                if (occurrenceIndex != -1) {
-                    Task toAdd = new Task(task.getDescription(), task.getPriority(),
-                            Model.recurringTaskList.get(taskIndex).getOccurrences().get(occurrenceIndex).getStartTiming(),
-                            Model.recurringTaskList.get(taskIndex).getOccurrences().get(occurrenceIndex).getEndTiming(),
-                            task.getTags(), task.isRecurring());
-                    //                    toAdd.setRecurring(task.isRecurring());
-                    try {
-                        addTask(toAdd);
-                    } catch (DuplicateTaskException e) {
-                        e.printStackTrace();
-                    }
+        public int findMatchingTaskIndex(ReadOnlyTask task) {
+            int taskIndex = 0;
+            Description description = task.getDescription();
+            for (int i = 0; i < Model.recurringTaskList.size(); i++) {
+                if (Model.recurringTaskList.get(i).getDescription().equals(description)) {
+                    taskIndex = i;
+                    break;
                 }
             }
+            return taskIndex;
+        }
 
-            return
+        /**
+         * @param taskOccurrenceList
+         * @return returns null if occurrence does not exist
+         */
+        public RecurringTaskOccurrence findOccurrence(ArrayList<RecurringTaskOccurrence> taskOccurrenceList) {
+            RecurringTaskOccurrence occurrence = null;
+            boolean isPresent = false;
+            for (int j = 0; j < taskOccurrenceList.size(); j++) {
+                final int finalIndex = j;
+                isPresent = (nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(taskOccurrenceList.get(finalIndex).getStartTiming().value, keyword))
+                        .findAny()
+                        .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(taskOccurrenceList.get(finalIndex).getEndTiming().value, keyword))
+                                .findAny()
+                                .isPresent());
+                if (isPresent) {
+                    occurrence = taskOccurrenceList.get(j);
+                    break;
+                }
+            }
+            return occurrence;
+        }
+        //
+        //        public Task createTaskToAdd(ReadOnlyTask task, RecurringTaskOccurrence occurrence) {
+        //            Task toAdd = new Task(task.getDescription(),
+        //                    task.getPriority(),
+        //                    occurrence.getStartTiming(),
+        //                    occurrence.getEndTiming(),
+        //                    task.getTags(),
+        //                    task.isRecurring());
+        //            return toAdd;
+        //        }
+
+        public boolean searchList(ReadOnlyTask task) {
+            boolean isPresent = false;
+            if (
                     (nameKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
                             .findAny()
@@ -212,7 +211,36 @@ public class ModelManager extends ComponentManager implements Model {
                     (nameKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTiming().value, keyword))
                             .findAny()
-                            .isPresent());
+                            .isPresent())) {
+                isPresent = true;
+            }
+            return isPresent;
+        }
+
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isPresent = searchList(task);
+            //            if (task.isRecurring() && isPresent == false) {
+            //                // find corresponding RecurringTask in recurringTaskList based on description
+            //                // find if any RecurringTaskOccurence exist for the dates corresponding to nameKeyWords in task.getOccurences
+            //                // use the ReccurringTaskOccurence object in addition to the RecurringTask to create a Task object
+            //                // use model.addTask with this task
+            //                int taskIndex = findMatchingTaskIndex(task);
+            //                ArrayList<RecurringTaskOccurrence> taskOccurrenceList = new ArrayList<RecurringTaskOccurrence>();
+            //                taskOccurrenceList = Model.recurringTaskList.get(taskIndex).getOccurrences();
+            //                RecurringTaskOccurrence occurrence = findOccurrence(taskOccurrenceList);
+            //                if (occurrence != null) {
+            //                    Task toAdd = createTaskToAdd(task, occurrence);
+            //                    try {
+            //                        addTask(toAdd);
+            //                    } catch (DuplicateTaskException e) {
+            //                        e.printStackTrace();
+            //                    }
+            //                }
+            //            }
+            //            isPresent = searchList(task);
+            return isPresent;
         }
 
         //@@author

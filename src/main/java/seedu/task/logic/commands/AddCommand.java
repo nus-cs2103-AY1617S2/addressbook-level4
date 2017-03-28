@@ -8,7 +8,6 @@ import java.util.Set;
 import seedu.task.commons.exceptions.IllegalTimingOrderException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
-import seedu.task.model.Model;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
@@ -61,19 +60,20 @@ public class AddCommand extends Command {
                 startTime,
                 endTime,
                 tagList,
-                recurring
+                recurring,
+                new RecurringFrequency(recurFreq)
                 );
 
-        if (recurFreq != null) {
-            this.toAddRecur = new RecurringTask(
-                    description,
-                    pri,
-                    startTime,
-                    endTime,
-                    tagList,
-                    new RecurringFrequency(recurFreq)
-                    );
-        }
+        //        if (recurFreq != null) {
+        //            this.toAddRecur = new RecurringTask(
+        //                    description,
+        //                    pri,
+        //                    startTime,
+        //                    endTime,
+        //                    tagList,
+        //                    new RecurringFrequency(recurFreq)
+        //                    );
+        //    }
 
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
@@ -85,9 +85,9 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            if (toAddRecur != null) {
-                Model.recurringTaskList.add(toAddRecur);
-            }
+            //            if (toAddRecur != null) {
+            //                Model.recurringTaskList.add(toAddRecur);
+            //            }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

@@ -26,6 +26,10 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
+    //    @XmlElement
+    //    private List<XmlAdaptedTask> recurringTasks;
+    //    @XmlElement
+    //    private List<XmlAdaptedTag> recurringTags;
 
     /**
      * Creates an empty XmlSerializableTaskList.
@@ -34,6 +38,8 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     public XmlSerializableTaskList() {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
+        //        recurringTasks = new ArrayList<>();
+        //        recurringTags = new ArrayList<>();
     }
 
     /**
@@ -43,6 +49,8 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        //        recurringTasks.addAll(recurringSrc.getRecurringTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        //        recurringTags.addAll(recurringSrc.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
@@ -71,6 +79,12 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tags);
+    }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getRecurringTaskList() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
