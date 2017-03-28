@@ -191,36 +191,33 @@ The sections below give more details of each component.
 
 Author: [Xu Bili](http://github.com/xbili)
 
-The `UI` component allows users to enter commands and receive the results through its graphical interfaces. It is responsible for handling the user interactions and ensuring the commands are passed to `Logic` correctly.
+The `UI` component allows users to enter commands and receive the results through its graphical interface. This component is the first point of contact with the user. It is responsible for passing the correct input from the user to the `Logic` component.
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` which contains multiple parts e.g.`CommandBox`, `ResultDisplay`, `MainPanel`,
-`SidePanel`, `StatusBarFooter` etc.
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` which contains `CommandBox`, `ResultDisplay`, `MainPanel`, `SidePanel`, and a `StatusBarFooter`.
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class. Below is a table describing each UI component's responsibility.
 
-The `CommandBox` allows users to enter the commands which will later be executed in `Logic`.
-
-The `ResultDisplay` panel shows the feedback of the commands.
-
-The `MainPanel` shows all the tasks and the results of the executed commands are displayed here as well.
-
-The `SidePanel` shows all incomplete tasks that are due within a week.
-
-The `StatusBarFooter` shows when the app has been last updated and storage file path.
+| Component         | Description                                                                  |
+| ----------------- |------------------------------------------------------------------------------|
+| `CommandBox`      | Allows users to enter the commands for `Logic` component to execute          |
+| `ResultDisplay`   | Shows feedback from command execution                                        |
+| `MainPanel`       | Displays tasks that are the result of command execution                      |
+| `SidePanel`       | Displays tasks that are due, or events that are starting in the current week |
+| `StatusBarFooter` | Displays the time when the app has be last updated and the storage file path |
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 * Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Binds itself to some data in the `Model` that updates the UI when the data changes.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
 ### 2.3. Logic component
