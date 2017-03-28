@@ -20,7 +20,7 @@ public class SampleDataUtil {
                     new UniqueTagList("undone")),
                 new Person(new Name("watch Beauty and Beast"), new Date("01.01"), new Email("berniceyu@gmail.com"),
                     new Group("relax"),
-                    new UniqueTagList("undone", "important")),
+                    new UniqueTagList("undone")),
                 new Person(new Name("do tutorial"), new Date("03.11"), new Email("charlotte@yahoo.com"),
                     new Group("learning"),
                     new UniqueTagList("undone")),
