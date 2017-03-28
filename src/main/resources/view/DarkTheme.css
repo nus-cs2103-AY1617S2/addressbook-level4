@@ -87,9 +87,14 @@
 }
 
 .list-cell {
+    -fx-background-color: transparent;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+}
+
+.list-cell:filled:focused {
+    -fx-background-color: cyan;
 }
 
 .list-cell .label {
@@ -108,7 +113,6 @@
 }
 
 .anchor-pane {
-     -fx-background-color: white;
      -fx-font-size: 12px;
 }
 
@@ -127,13 +131,14 @@
 }
 
 .result-display {
-    -fx-background-color: #ffffff;
+    -fx-background-color: grey;
     -fx-text-fill: blue;
     -fx-font-weight: bold;
     -fx-font-size: 20px;
 }
 
 .result-display .label {
+    -fx-background-color: lightcyan;
     -fx-text-fill: black !important;
 }
 
@@ -260,7 +265,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: white;
+    -fx-background-color: grey;
     -fx-background-insets: 3;
 }
 
