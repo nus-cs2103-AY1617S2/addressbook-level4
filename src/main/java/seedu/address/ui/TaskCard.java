@@ -33,7 +33,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         
         if (task.getPriority().value != null) {
-        	priority.setText("Priority: " + task.getPriority().value);
+        	priority.setText("Priority: " + task.getPriority().value.toUpperCase());
         }
         
         if (task.getByTime().value != null) {
