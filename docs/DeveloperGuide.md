@@ -111,7 +111,7 @@ During application launch, it intialises all components of Burdens in proper seq
 During application shutdown, it ceases all ongoing operations of Burdens and invokes cleanup when necessary.<br/>
 <br/>
 **`Commons`**<br/>
-['Commons'] represents a collection of classes used by multiple other components.<br/>
+`Commons` represents a collection of classes used by multiple other components.<br/>
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : Written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained), this class
@@ -268,6 +268,11 @@ Burdens has 4 logging levels: `SEVERE`, `WARNING`, `INFO` and `FINE`.
 
 Certain properties of Burdens can be controlled (e.g logging level) through the configuration file
 (default: `config.json`):
+
+### 3.3 Undo/Redo Mechanisms
+
+We use an ArrayList object to store the states of the internal task list. Each time a command is issued that incurs
+a change in the task list such as Add, Delete, Edit, the new state of the task list is recorded to the ArrayList object, and its current state index corresponds to the index element of the ArrayList is incremented by 1. The Undo/Redo function thus increments/decrements the current state index by 1, and the `reset` method of the current task list object is called with parameter being the element at the current state index of the ArrayList.
 
 
 ## 4. Testing
