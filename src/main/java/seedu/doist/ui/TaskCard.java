@@ -15,6 +15,7 @@ public class TaskCard extends UiPart<Region> {
     private static final String FXML = "TaskListCard.fxml";
     private static final String START_TIME_TEXT = "Start: ";
     private static final String END_TIME_TEXT = "End: ";
+    private static final String BY_TIME_TEXT = "By: ";
     public static final String NORMAL_STYLE_CLASS = "normal";
     public static final String OVERDUE_STYLE_CLASS = "overdue";
     public static final String FINISHED_STYLE_CLASS = "finished";
@@ -51,15 +52,19 @@ public class TaskCard extends UiPart<Region> {
         priority.setText(task.getPriority().toString());
 
         // Times
-        if (task.getStartDate() == null) {
-            startTime.setText("");
-        } else {
-            startTime.setText(START_TIME_TEXT + task.getStartDate().toString());
-        }
-        if (task.getEndDate() == null) {
+        if (task.getDates().isDeadline()) {
+            startTime.setText(BY_TIME_TEXT + task.getDates().getStartDate());
             endTime.setText("");
+        } else if (task.getDates().isEvent()) {
+            startTime.setText(START_TIME_TEXT + task.getDates().getStartDate().toString());
+            endTime.setText(END_TIME_TEXT + task.getDates().getEndDate().toString());
         } else {
-            endTime.setText(END_TIME_TEXT + task.getEndDate().toString());
+            // floating task
+            startTime.setText("");
+            endTime.setText("");
+        }
+        if (task.getDates().isPast()) {
+            setStyleToOverdue();
         }
 
         // Finished

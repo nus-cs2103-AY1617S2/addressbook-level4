@@ -1,5 +1,7 @@
 package seedu.doist.logic.commands;
 
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,49 +16,112 @@ import seedu.doist.model.tag.UniqueTagList;
  */
 public class ListCommand extends Command {
 
+    public enum TaskType {
+        PENDING,
+        FINISHED,
+        OVERDUE,
+        NOT_FINISHED
+    }
+
     public static final String DEFAULT_COMMAND_WORD = "list";
+    public static final String PREAMBLE_ALL = "ALL";
 
     public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
-            + ": List tasks satisfying the requirements specified by the parameters\n"
-            + "TYPE could be pending, overdue, finished\n"
+            + ": List tasks as specified by the parameters\n"
+            + "TYPE could be all, pending, overdue or finished\n"
             + "Parameters: TYPE [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " pending \\under school ";
-    public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    public static final String MESSAGE_INVALID_PREAMBLE = "Invalid list type! Type should be all, pending,"
+                                                            + " overdue or finished";
+    public static final String MESSAGE_SUCCESS = "Listed %1$s tasks";
+    public static final String MESSAGE_PENDING = String.format(MESSAGE_SUCCESS, "pending");
+    public static final String MESSAGE_FINISHED = String.format(MESSAGE_SUCCESS, "finished");
+    public static final String MESSAGE_NOTFINISHED = String.format(MESSAGE_SUCCESS, "not finished");
+    public static final String MESSAGE_OVERDUE = String.format(MESSAGE_SUCCESS, "overdue");
+    public static final String MESSAGE_ALL = String.format(MESSAGE_SUCCESS, "all");
 
     private UniqueTagList tagList = new UniqueTagList();
     private TaskType type = null;
 
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
-        try {
-            type = TaskType.valueOf(preamble.trim());
-        } catch (IllegalArgumentException e) { }
+        if (!preamble.trim().isEmpty()) {
+            String processedPreamble = processListPreamble(preamble);
+            if (processedPreamble.equals(PREAMBLE_ALL)) {
+                listAll();
+            } else {
+                // pending, overdue or finished
+                try {
+                    type = TaskType.valueOf(processedPreamble);
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                        MESSAGE_INVALID_PREAMBLE));
+                }
+            }
+        } else {
+            listDefault();
+        }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
         }
     }
 
+    //@@author A0140887W
+    private String processListPreamble(String preamble) {
+     // remove all trailing spaces, new line characters etc
+        String processedPreamble = preamble.trim();
+
+        // remove all leading spaces, new line characters etc
+        processedPreamble = processedPreamble.replaceAll("^\\s+", "");
+
+        // replace in-between spaces, new line characters etc with _
+        processedPreamble = processedPreamble.replaceAll("\\s+", "_");
+
+        // change to uppercase
+        processedPreamble = processedPreamble.toUpperCase();
+        return processedPreamble;
+    }
+
+    private void listAll() {
+        type = null;
+    }
+
+    /** Default list type if there is no preamble */
+    private void listDefault() {
+        type = TaskType.NOT_FINISHED;
+    }
+
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(type, tagList);
+        String message = "";
+        if (type != null) {
+            if (type.equals(TaskType.PENDING)) {
+                message = MESSAGE_PENDING;
+            } else if (type.equals(TaskType.FINISHED)) {
+                message = MESSAGE_FINISHED;
+            } else if (type.equals(TaskType.NOT_FINISHED)) {
+                message = MESSAGE_NOTFINISHED;
+            } else if (type.equals(TaskType.OVERDUE)) {
+                message = MESSAGE_OVERDUE;
+            } else {
+                message = "";
+            }
+        } else {
+            message = MESSAGE_ALL;
+        }
         CommandResult commandResult = tagList.isEmpty() ?
-                                      new CommandResult(MESSAGE_SUCCESS) :
-                                      new CommandResult(getSuccessMessageListUnder(tagList));
+                                      new CommandResult(message) :
+                                      new CommandResult(getSuccessMessageListUnder(message, tagList));
         return commandResult;
     }
 
-    public static String getSuccessMessageListUnder(UniqueTagList tagList) {
-        String message = MESSAGE_SUCCESS + " under: ";
+    public static String getSuccessMessageListUnder(String messageSuccess, UniqueTagList tagList) {
+        String message = messageSuccess + " under: ";
         for (Tag tag : tagList) {
             message += tag.tagName + " ";
         }
         message = message.trim();
         return message;
-    }
-
-    public enum TaskType {
-        pending,
-        finished,
-        overdue
     }
 }

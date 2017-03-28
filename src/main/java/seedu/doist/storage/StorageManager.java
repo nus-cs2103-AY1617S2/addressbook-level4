@@ -26,7 +26,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
     private AliasListMapStorage aliasListMapStorage;
 
-
     public StorageManager(TodoListStorage todoListStorage, AliasListMapStorage aliasListStorage,
                             UserPrefsStorage userPrefsStorage) {
         super();
@@ -51,7 +50,6 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-
 
     // ================ TodoList methods ==============================
 

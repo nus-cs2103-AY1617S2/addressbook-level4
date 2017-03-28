@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.ListCommand.TaskType;
+import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
@@ -51,14 +52,17 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
+    /** Updates the filter of the filtered task list to show the default listing of tasks */
+    void updateFilteredListToShowDefault();
+
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
     /** Updates the filter of the filtered task list to filter by the given task type and tags*/
     void updateFilteredTaskList(TaskType type, UniqueTagList tags);
 
-    /** Sorts the tasks by Priority */
-    void sortTasksByPriority();
+    /** Sorts the tasks according to the comparators defined in the list*/
+    void sortTasks(List<SortType> sortTypes);
 
     //========== handle undo and redo operation =================================================
     void saveCurrentToHistory();

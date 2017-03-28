@@ -9,7 +9,7 @@ import seedu.doist.model.task.Priority.PriorityLevel;
 
 /**
  * A read-only immutable interface for a Task in the to-do list.
- * Implementations should guarantee: details are present and not null (use Optional instead),
+ * Implementations should guarantee: details are present and not null,
  * field values are validated.
  */
 public interface ReadOnlyTask {
@@ -17,13 +17,16 @@ public interface ReadOnlyTask {
     Description getDescription();
     Priority getPriority();
     FinishedStatus getFinishedStatus();
-    Date getStartDate();
-    Date getEndDate();
+    TaskDate getDates();
+
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
      */
     UniqueTagList getTags();
+
+    /** Function to check if task is Overdue or not **/
+    public boolean isOverdue();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -34,24 +37,7 @@ public interface ReadOnlyTask {
                 && other.getDescription().equals(this.getDescription())  // state checks here onwards
                 && other.getFinishedStatus().equals(this.getFinishedStatus())
                 && other.getPriority().equals(this.getPriority())
-                && areEqualDates(other.getStartDate(), this.getStartDate())
-                && areEqualDates(other.getEndDate(), this.getEndDate()));
-    }
-
-    /**
-     * Check whether 2 Date objects are equal or not
-     * @return: true if both are null, or, both are not null with the same value. false otherwise.
-     */
-    default boolean areEqualDates(Date date1, Date date2) {
-        // case 1: both are null, considered as equal
-        if (date1 == null && date2 == null) {
-            return true;
-        }
-        // case 2: both are not null and the values are equal
-        if (date1 != null && date2 != null) {
-            return date1.equals(date2);
-        }
-        return false;
+                && other.getDates().equals(this.getDates()));
     }
 
     /**
@@ -70,7 +56,7 @@ public interface ReadOnlyTask {
     //@@author A0140887W
     /**
      * Compare the priority of two tasks
-     * @return: -1 task2 has a lower priority than task1
+     * @return: -1 if task2 has a lower priority than task1
      */
     public class ReadOnlyTaskPriorityComparator implements Comparator<ReadOnlyTask> {
         @Override
@@ -83,17 +69,51 @@ public interface ReadOnlyTask {
     }
 
     /**
+     * Compare the timing of two tasks
+     * @return: -1 if task1 is earlier than task2
+     */
+    public class ReadOnlyTaskTimingComparator implements Comparator<ReadOnlyTask> {
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            // Earliest to latest timing
+            Date date1 = task1.getDates().getStartDate();
+            Date date2 = task2.getDates().getStartDate();
+            // Floating tasks are put behind
+            if (date1 == null) {
+                return 1;
+            } else if (date2 == null) {
+                return -1;
+            }
+            return date1.compareTo(date2);
+        }
+    }
+
+    /**
+     * Compare the tasks by alphabetical order of their description
+     * @return: -1 if task1 is less than task2 (alphabetical order)
+     */
+    public class ReadOnlyTaskAlphabetComparator implements Comparator<ReadOnlyTask> {
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            // A to Z
+            String desc1 = task1.getDescription().desc;
+            String desc2 = task2.getDescription().desc;
+            return desc1.compareTo(desc2);
+        }
+    }
+
+    /**
      * Combines multiple comparators together to compare tasks.
      * For example if you want to sort by end time then by priority,
      * you create a list of comparators, adding the end time comparator first
      * then adding the priority comparator.
      * @return: -1 task1 is compared to be "less" than task2 based on multiple comparators
      */
-    public class CombinedComparator implements Comparator<ReadOnlyTask> {
+    public class ReadOnlyTaskCombinedComparator implements Comparator<ReadOnlyTask> {
 
-        List<Comparator<ReadOnlyTask>> comparators;
+        private List<Comparator<ReadOnlyTask>> comparators;
 
-        public CombinedComparator(List<Comparator<ReadOnlyTask>> comparators) {
+        public ReadOnlyTaskCombinedComparator(List<Comparator<ReadOnlyTask>> comparators) {
             this.comparators = comparators;
         }
 

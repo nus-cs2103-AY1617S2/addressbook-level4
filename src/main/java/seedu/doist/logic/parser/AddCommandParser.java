@@ -23,6 +23,7 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.Task;
+import seedu.doist.model.task.TaskDate;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -85,18 +86,22 @@ public class AddCommandParser {
 
         Date startDate = null;
         Date endDate = null;
+        boolean validDate = true;
         int dateFormat = tokenizer.getDateFormat();
         switch (dateFormat) {
         case ArgumentTokenizer.DATE_NIL : break;
-        case ArgumentTokenizer.DATE_BY : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get());
-                                         endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get()); break;
-        case ArgumentTokenizer.DATE_FROM : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_FROM).get());
-                                           endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_TO).get());
-                                           break;
+        case ArgumentTokenizer.DATE_BY : startDate = TaskDate.parseDate(tokenizer.getValue(PREFIX_BY).get());
+                                         endDate = TaskDate.parseDate(tokenizer.getValue(PREFIX_BY).get());
+                                         validDate = TaskDate.validateDate(startDate, endDate); break;
+        case ArgumentTokenizer.DATE_FROM : startDate = TaskDate.parseDate(tokenizer.getValue(PREFIX_FROM).get());
+                                           endDate = TaskDate.parseDate(tokenizer.getValue(PREFIX_TO).get());
+                                           validDate = TaskDate.validateDate(startDate, endDate); break;
         default : break;
         }
-
-        Task toAdd = new Task(new Description(preamble), tagList, startDate, endDate);
+        if (!validDate) {
+            throw new IllegalValueException("Incorrect Dates");
+        }
+        Task toAdd = new Task(new Description(preamble), new TaskDate(startDate, endDate), tagList);
         // set priority
         Optional<Priority> priority = ParserUtil.parsePriority(tokenizer.getValue(PREFIX_AS));
         if (priority.isPresent()) {
