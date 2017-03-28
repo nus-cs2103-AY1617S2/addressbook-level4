@@ -192,7 +192,7 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping ToDoList ] =============================");
         MainApp.getInstance().ui.stop();
         try {
-            MainApp.getInstance().storage.saveUserPrefs(userPrefs);
+            MainApp.getInstance().storage.saveUserPrefs(MainApp.getInstance().userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
