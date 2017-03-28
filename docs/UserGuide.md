@@ -121,7 +121,7 @@ Shows a list of deadlines and events scheduled for the month.<br>
 Format: `list #TAG`<br>
 Shows a list of tasks labeled with the given TAG.<br>
 
-Format: `list marked`<br>
+Format: `list done`<br>
 Shows a list of all tasks that have been marked as completed.<br>
 
 ### 2.4. Finding all tasks containing any keyword in their description: `find`
@@ -152,8 +152,8 @@ Format: `edit INDEX <[TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] 
 > * At least one of the optional fields must be provided.
 > * If changing the DATETIME, format must match the chosen task type (either deadline or event)
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the tasks will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `#` without specifying any tags after it.
+> * When editing tags, inputting tags of the task that already exist will removed them from the task i.e adding of tags is not cumulative.
+    Inputting tags of the task that do not already exist will add them to the task.
 
 Examples:
 
@@ -189,7 +189,7 @@ Format: `mark INDEX [MORE_INDICES]...`
 _**Alternative keyword: check, finish**_
 
 > Marks the task as completed and hides it from view.
-> Task is added to a list of completed tasks that can be viewed by calling `list marked`.<br>
+> Task is added to a list of completed tasks that can be viewed by calling `list done`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -215,6 +215,7 @@ Examples:
 * `list marked`<br>
   `unmark 2 3`<br>
   Unmarks the 2nd and 3rd task in the list.
+
 
 ### 2.9. Undoing previous step : `undo`
 
@@ -259,7 +260,7 @@ There is no need to save manually.
 > * `list week`<br>
 > * `list month`<br>
 > * `list #TAG`<br>
-> * `list marked`<br>
+> * `list done`<br>
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]...` <br>
 
