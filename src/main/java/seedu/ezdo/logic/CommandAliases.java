@@ -50,6 +50,14 @@ public class CommandAliases implements Serializable {
         commandAliasesMap = new HashMap<>();
     }
 
+    /**
+     * Adds a new alias for a command.
+     *
+     * @param command An existing command in ezDo to be aliased.
+     * @param alias   The new alias for the given command.
+     * @throws AliasAlreadyInUseException   If the alias is already in use by an existing ezDo command.
+     * @throws CommandDoesNotExistException If the command to be aliased does not exist in ezDo.
+     */
     public void addAlias(String command, String alias) throws AliasAlreadyInUseException, CommandDoesNotExistException {
         if (Arrays.asList(EXISTING_COMMAND_WORDS).contains(alias)) {
             throw new AliasAlreadyInUseException();
@@ -60,10 +68,16 @@ public class CommandAliases implements Serializable {
         commandAliasesMap.put(alias, command);
     }
 
+    /**
+     * Checks if the given string is an alias for a command in ezDo.
+     */
     public boolean checkIfAlias(String alias) {
         return commandAliasesMap.get(alias) != null;
     }
 
+    /**
+     * Gets the command that is aliased by the given alias.
+     */
     public String getCommandFromAlias(String alias) {
         return commandAliasesMap.get(alias);
     }

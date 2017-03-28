@@ -26,9 +26,9 @@ public class DateUtil {
     //@@author A0138907W
     /**
      * Compares two dates strings. Both strings must be in the format dd/MM/yyyy hh:mm.
-     * Empty strings are considered to be of lower value than non-empty strings.
+     * Empty strings are always considered to be of lower value than non-empty strings.
      *
-     * @return an int representing the comparison result of the two date strings.
+     * @return An int representing the comparison result of the two date strings.
      * @throws ParseException if any of the date strings cannot be parsed.
      */
     public static int compareDateStrings(String dateString1, String dateString2, Boolean isSortedAscending) {
@@ -36,7 +36,7 @@ public class DateUtil {
         Date date1 = null;
         Date date2 = null;
 
-        // empty dates are always considered lower in value so that they show at the bottom of the list
+        // Empty dates are always considered lower in value so that they show at the bottom of the list
         if (dateString1.isEmpty() && dateString2.isEmpty()) {
             return 0;
         } else if (dateString1.isEmpty()) {
@@ -52,6 +52,8 @@ public class DateUtil {
             assert false : "The date format should not be invalid.";
         }
         int result = date1.compareTo(date2);
+
+        // If the sort order is descending, return a negative value to invert the order.
         return isSortedAscending ? result : -result;
     }
 

@@ -33,6 +33,9 @@ public class AliasCommand extends Command {
         this.alias = alias;
     }
 
+    /**
+     * Executes the alias command.
+     */
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

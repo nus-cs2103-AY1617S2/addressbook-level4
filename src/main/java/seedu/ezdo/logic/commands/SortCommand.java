@@ -33,6 +33,9 @@ public class SortCommand extends Command {
         this.isSortedAscending = isSortedAscending;
     }
 
+    /**
+     * Executes the sort command.
+     */
     @Override
     public CommandResult execute() throws CommandException {
         if (sortCriteria == null) {

@@ -33,7 +33,7 @@ public class DateParser {
      * Swaps the day and month of a date in DD/MM/YYYY format for natty to parse.
      *
      * @param input A string representing a date in the DD/MM/YYYY format.
-     * @return A string equal to the input date but in MM/DD/YYYY format.
+     * @return      A string equal to the input date but in MM/DD/YYYY format.
      */
     private String swapDayAndMonth(String input) {
         Pattern dayMonthYearPattern = Pattern.compile(DAY_MONTH_YEAR_FORMAT);
