@@ -132,6 +132,10 @@ public class MainWindow extends UiPart<Region> {
         FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
     }
 
+  //@@author A0162011A
+    /**
+     * Configure Up/Down for history navigation
+     */
     private void configureHistoryNavigationKeyPresses() {
         Arrays.stream(KEYCODES_NAVIGATEHISTORY).forEach(keyName -> {
             KeyCode keycode = getKeyCode(keyName);
@@ -141,6 +145,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+  //@@author A0131125Y
     /**
      * Get matching key code for a string
      * @param s string
