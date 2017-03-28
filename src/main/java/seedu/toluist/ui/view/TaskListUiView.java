@@ -24,22 +24,22 @@ public class TaskListUiView extends UiView {
     public TaskListUiView () {
         super(FXML);
         FxViewUtil.makeFullWidth(getRoot());
+        taskListView.setCellFactory(listView -> new TaskListViewCell());
         configureBindings();
     }
 
     @Override
     protected void viewDidMount () {
         UiStore store = UiStore.getInstance();
-        // So taskListView won't get refreshed another time
         taskListView.setItems(FXCollections.observableArrayList(store.getShownTasks()));
-        Platform.runLater(() -> taskListView.scrollTo(store.getNewTask()));
+        Platform.runLater(() -> taskListView.scrollTo(store.getLastEditedTask()));
     }
 
     private void configureBindings() {
         UiStore store = UiStore.getInstance();
         ObservableList<Task> taskList = store.getObservableTasks();
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
         store.bind(this, taskList);
+        store.bind(this, store.getObservableSwitchPredicate());
     }
 
     class TaskListViewCell extends ListCell<Task> {

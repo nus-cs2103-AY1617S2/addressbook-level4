@@ -69,7 +69,7 @@ public class TaskUiView extends UiView {
         handleTaskWithDates(task.isTaskWithDeadline() || task.isEvent());
         handleRecurringTask(task.isRecurring());
         handleCompletedTask();
-        handleNewTask(task.equals(UiStore.getInstance().getNewTask()));
+        handleNewTask(task.equals(UiStore.getInstance().getLastEditedTask()));
     }
 
     private void initializeView() {

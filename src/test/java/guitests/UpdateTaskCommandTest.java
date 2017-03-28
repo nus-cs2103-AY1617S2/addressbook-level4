@@ -1,6 +1,7 @@
 //@@author A0127545A
 package guitests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.commons.util.DateTimeUtil;
@@ -35,6 +37,12 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
     private static Tag tag1 = new Tag("tag1");
     private static Tag tag2 = new Tag("tag2");
     private static Tag tag3 = new Tag("tag3");
+
+    @Before
+    public void setUp() {
+        String switchToDefaultTab = "switch i";
+        commandBox.runCommand(switchToDefaultTab);
+    }
 
     @Test
     public void testInvalidIndexInput() {
@@ -587,5 +595,22 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
                 "- End date: \"Fri, 05 May 2017 10:00 PM\" to \"\"\n" +
                 "- Repeat: \"WEEKLY\" to \"\"\n" +
                 "- Repeat until: \"Sun, 05 May 2019 10:00 PM\" to \"\"");
+    }
+
+
+    @Test
+    public void updateTaskAfterSwitching() {
+        String clearCommand = "clear";
+        commandBox.runCommand(clearCommand);
+        String switchCommand = "switch t";
+        commandBox.runCommand(switchCommand);
+        String addCommand = ADD + "sth sth" + BY + "today";
+        commandBox.runCommand(addCommand);
+        int index = 1;
+        String taskDescription = "get a life";
+        String updateCommand = UPDATE + index + " " + taskDescription;
+        commandBox.runCommand(updateCommand);
+
+        assertEquals(tabBar.getHighlightedTabText(), "TODAY (1/1)");
     }
 }

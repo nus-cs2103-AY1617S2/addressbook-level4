@@ -163,6 +163,9 @@
 .command-suggestions {
     -fx-background-color: theme-background;
     -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-border-color: theme-primary;
 }
 
 .command-suggestions .command-suggestion.selected {

@@ -1,0 +1,592 @@
+{
+  "allTasks" : [ {
+    "allTags" : [ ],
+    "description" : "read a book",
+    "startDateTime" : null,
+    "endDateTime" : "2017-02-28T15:41:04.055",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "MONTHLY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "get a haircut",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-13T18:19:22.064",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "buy groceries",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-19T18:22:33.697",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "WEEKLY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "pc1221"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "last lab session",
+    "startDateTime" : "2017-03-22T14:00:00",
+    "endDateTime" : "2017-03-22T17:00:00",
+    "completionDateTime" : "2017-03-28T15:55:51.293",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "eat vitamins",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-27T09:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "DAILY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "pc1221"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "watch pc1221 webcast",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-27T16:54:39.75",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "buy food for lunch tomorrow",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-27T19:23:39.904",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "buy milk",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-28T18:46:09.53",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ {
+      "tagName" : "pc1221"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "hand in lab assignment",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-29T17:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ {
+      "tagName" : "get1018"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "get1018 tutorial 6",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-31T16:53:58.694",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2101"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "practice the demo",
+    "startDateTime" : null,
+    "endDateTime" : "2017-04-01T16:40:13.335",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2101"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "set up commands for cs2101 demo",
+    "startDateTime" : null,
+    "endDateTime" : "2017-04-01T19:08:30.644",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cca"
+    } ],
+    "description" : "bridge league",
+    "startDateTime" : "2017-04-02T02:30:00",
+    "endDateTime" : "2017-04-02T06:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cca"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "monday bridge session",
+    "startDateTime" : "2017-04-03T19:00:00",
+    "endDateTime" : "2017-04-03T22:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "WEEKLY",
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2103"
+    }, {
+      "tagName" : "shool"
+    } ],
+    "description" : "add more tasks",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : "2017-03-27T16:49:28.209",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ ],
+    "description" : "fix home desktop",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "watch anime",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "HIGH"
+  }, {
+    "allTags" : [ ],
+    "description" : "lallapalooza",
+    "startDateTime" : "2017-03-11T09:00:00",
+    "endDateTime" : "2017-03-11T22:00:00",
+    "completionDateTime" : "2017-03-28T15:55:47.99",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "watch logan with poly friends",
+    "startDateTime" : "2017-03-13T19:00:41.803",
+    "endDateTime" : "2017-03-13T20:00:00",
+    "completionDateTime" : "2017-03-27T19:01:27.206",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "one for one at starbucks",
+    "startDateTime" : "2017-03-20T10:00:00",
+    "endDateTime" : "2017-03-21T20:00:00",
+    "completionDateTime" : "2017-03-27T19:19:26.088",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "clean out my room",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-25T18:52:32.677",
+    "completionDateTime" : "2017-03-27T18:52:36.946",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "school"
+    } ],
+    "description" : "revise for test",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-26T18:18:38.164",
+    "completionDateTime" : "2017-03-27T18:18:56.505",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "get1018"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "watch get1018 lecture",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-28T16:53:40.1",
+    "completionDateTime" : "2017-03-27T18:13:44.774",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "buy tomatoes",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-28T18:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "practice coding",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-28T23:59:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "DAILY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "lunch with extended family",
+    "startDateTime" : "2017-03-29T13:00:00",
+    "endDateTime" : "2017-03-29T15:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "clean house",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-29T16:50:54.28",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "DAILY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2106"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "meetup with assignment 3 lab partner",
+    "startDateTime" : "2017-03-30T10:00:00",
+    "endDateTime" : "2017-03-30T12:00:00",
+    "completionDateTime" : "2017-03-27T18:13:16.6",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2103"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "group meeting",
+    "startDateTime" : "2017-03-30T15:00:00",
+    "endDateTime" : "2017-03-30T16:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2106"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "work on tutorial 7",
+    "startDateTime" : null,
+    "endDateTime" : "2017-03-31T16:39:12.872",
+    "completionDateTime" : "2017-03-27T16:49:10.998",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cca"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "board games cca",
+    "startDateTime" : "2017-03-31T18:00:00",
+    "endDateTime" : "2017-03-31T22:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "WEEKLY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "go to the gym",
+    "startDateTime" : "2017-04-01T19:00:00",
+    "endDateTime" : "2017-04-01T21:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "WEEKLY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "dinner with former classmates",
+    "startDateTime" : "2017-04-02T18:00:00",
+    "endDateTime" : "2017-04-02T22:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "send car for mainenance",
+    "startDateTime" : null,
+    "endDateTime" : "2017-04-03T18:47:55.024",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "do laundry",
+    "startDateTime" : null,
+    "endDateTime" : "2017-04-04T18:12:50.004",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "WEEKLY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "go to supermarket for discounts",
+    "startDateTime" : "2017-04-03T14:00:00",
+    "endDateTime" : "2017-04-04T22:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cca"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "thursday bridge session",
+    "startDateTime" : "2017-04-06T19:00:00",
+    "endDateTime" : "2017-04-06T22:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "WEEKLY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2106"
+    }, {
+      "tagName" : "exam"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "cs2106 exam",
+    "startDateTime" : "2017-04-24T09:00:00",
+    "endDateTime" : "2017-04-24T11:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2103"
+    }, {
+      "tagName" : "exam"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "cs2103 exam",
+    "startDateTime" : "2017-04-25T13:00:00",
+    "endDateTime" : "2017-04-25T15:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "exam"
+    }, {
+      "tagName" : "pc1221"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "pc1221 exam",
+    "startDateTime" : "2017-04-27T17:00:00",
+    "endDateTime" : "2017-04-27T19:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "exam"
+    }, {
+      "tagName" : "ges1000"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "ges1000 exam",
+    "startDateTime" : "2017-05-03T09:00:00",
+    "endDateTime" : "2017-05-03T11:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "exam"
+    }, {
+      "tagName" : "get1018"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "get1018 exam",
+    "startDateTime" : "2017-05-03T13:00:00",
+    "endDateTime" : "2017-05-03T15:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "doujima",
+    "startDateTime" : "2017-05-06T12:00:00",
+    "endDateTime" : "2017-05-07T19:00:00",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "pay water bill",
+    "startDateTime" : null,
+    "endDateTime" : "2017-05-10T11:10:33.051",
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "MONTHLY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2103"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "add more documentation",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2103"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "add more test cases",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cca"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "practice bridge hands on bbo",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cca"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "prepare board games for session",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "cs2101"
+    }, {
+      "tagName" : "cs2103"
+    }, {
+      "tagName" : "school"
+    } ],
+    "description" : "revise script for demo",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : "2017-03-27T18:33:05.701",
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ {
+      "tagName" : "home"
+    } ],
+    "description" : "walk the dog",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : "WEEKLY",
+    "priority" : "LOW"
+  }, {
+    "allTags" : [ ],
+    "description" : "watch boku no pico",
+    "startDateTime" : null,
+    "endDateTime" : null,
+    "completionDateTime" : null,
+    "recurringEndDateTime" : null,
+    "recurringFrequency" : null,
+    "priority" : "LOW"
+  } ]
+}
