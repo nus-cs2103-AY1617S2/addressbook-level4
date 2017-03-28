@@ -130,7 +130,7 @@ _Figure 2: Class Diagram of the Logic Component_
 Figure 3 below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images/SDforDeleteTask.png" width="800">
+<img src="images/SDforDeleteTask.png" width="600">
 _Figure 3: Component Interactions for `delete 1` Command (Part 1)_
 
 >Note how the `Model` simply raises a `TaskListChangedEvent` when FlexiTask data are changed,
@@ -244,7 +244,7 @@ and logging destinations.
   
 > The log messages are currently output through: `Console` and to a `.log` file.
 
-####3.1.1. **Logging Levels**
+<br>
 
 Currently, FlexiTask has 4 logging levels: `SEVERE`, `WARNING`, `INFO` and `FINE`. They record information pertaining to: 
 
@@ -257,7 +257,7 @@ Currently, FlexiTask has 4 logging levels: `SEVERE`, `WARNING`, `INFO` and `FINE
 ### 3.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
-(default: `config.json`):
+(default: `config.json`).
 
 
 ## 4. Testing
@@ -421,7 +421,7 @@ Use case ends
 Use case ends
 
 3a. The list is empty
-> "No task found" is displayed
+> FlexiTask displays "No task found" message
 > Use case ends
 
 4a. The list contains no matching entries
@@ -524,7 +524,7 @@ Use case ends
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+#### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
 
