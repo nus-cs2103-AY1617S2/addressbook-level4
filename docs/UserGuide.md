@@ -133,9 +133,10 @@ Examples:
 * `unmark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as incomplete.
 
-### 2.7. Schedule (Work in progress)
+### 2.7. Schedule
 
-Set an event or a deadline.<br>
+Schedule command can be used in two ways. One is to set the task as an event or set a deadline to the task.
+Another way is to reschedule the event time or the deadline of the task.<br>
 Format: `schedule INDEX [STARTIME] ENDTIME`
 
 > * Set the start time and the end time of the task.
@@ -144,8 +145,11 @@ Format: `schedule INDEX [STARTIME] ENDTIME`
 
 Examples:
 
-* `schedule 6 12/05/2017-13:00 12/05/2017-15:00`<br>
+* `schedule 6 05/12/2017-13:00 05/12/2017-15:00`<br>
 Set the start time as 1pm on May 12, 2017 and the end time as 3pm on May 12, 2017.
+
+* `schedule 6 next friday 11am to next friday 1pm`<br>
+Set the start time as 11am on next Friday and the end time as 1pm of the same day.
 
 ### 2.8. Undo
 
@@ -163,11 +167,16 @@ Format: `redo`
 
 ### 2.10. Find
 
-Displays a list of tasks based on keywords and/or tags.<br>
-Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
+Displays a list of tasks based on the input keywords.<br>
+Format: `find [NAME/TAG/NOTE]`
 
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
+
+Examples:
+
+* `find school`<br>
+Displays tasks that contain `school` in either of the fields; names, notes or tags.
 
 ### 2.11. Autocomplete (Work in progress)
 
