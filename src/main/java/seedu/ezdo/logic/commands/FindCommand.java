@@ -16,24 +16,16 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n" + "Example: " + COMMAND_WORD + " buy milk clean p/3";
 
     private final ArrayList<Object> listToCompare;
-    private final boolean searchBeforeStartDate;
-    private final boolean searchBeforeDueDate;
-    private final boolean searchAfterStartDate;
-    private final boolean searchAfterDueDate;
+    private final ArrayList<Boolean> searchIndicatorList;
 
-    public FindCommand(ArrayList<Object> listToCompare, boolean searchBeforeStartDate, boolean searchBeforeDueDate,
-                       boolean searchAfterStartDate, boolean searchAfterDueDate) {
+    public FindCommand(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
         this.listToCompare = listToCompare;
-        this.searchBeforeStartDate = searchBeforeStartDate;
-        this.searchBeforeDueDate = searchBeforeDueDate;
-        this.searchAfterStartDate = searchAfterStartDate;
-        this.searchAfterDueDate = searchAfterDueDate;
+        this.searchIndicatorList = searchIndicatorList;
     }
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(listToCompare, searchBeforeStartDate,
-                searchBeforeDueDate, searchAfterStartDate, searchAfterDueDate);
+        model.updateFilteredTaskList(listToCompare, searchIndicatorList);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

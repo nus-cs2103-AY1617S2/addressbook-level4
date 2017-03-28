@@ -46,6 +46,7 @@ public class FindCommandParser implements CommandParser {
         String[] splitNames = namesToMatch.split("\\s+");
 
         ArrayList<Object> listToCompare = new ArrayList<Object>();
+        ArrayList<Boolean> searchIndicatorList = new ArrayList<Boolean>();
         Optional<Priority> findPriority;
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
@@ -96,8 +97,12 @@ public class FindCommandParser implements CommandParser {
         listToCompare.add(findStartDate);
         listToCompare.add(findDueDate);
         listToCompare.add(findTags);
-        return new FindCommand(listToCompare, searchBeforeStartDate, searchBeforeDueDate,
-                               searchAfterStartDate, searchAfterDueDate);
+        searchIndicatorList.add(searchBeforeStartDate);
+        searchIndicatorList.add(searchBeforeDueDate);
+        searchIndicatorList.add(searchAfterStartDate);
+        searchIndicatorList.add(searchAfterDueDate);
+
+        return new FindCommand(listToCompare, searchIndicatorList);
     }
 
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
