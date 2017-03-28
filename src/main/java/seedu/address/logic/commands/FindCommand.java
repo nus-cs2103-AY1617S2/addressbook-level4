@@ -1,9 +1,12 @@
 
 package seedu.address.logic.commands;
 
+import java.util.Date;
 import java.util.Set
 
 ;
+
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -18,15 +21,27 @@ public class FindCommand extends Command {
             + "Parameters: find [KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " groceries or groc";
 
-    private final Set<String> keywords;
+    private Set<String> keywords;
+    private UniqueTagList tagList;
+    private Date date;
 
     public FindCommand(Set<String> keywords) {
         this.keywords = keywords;
     }
 
+    public FindCommand(UniqueTagList tagList) {
+        this.tagList = tagList;
+    }
+
+    public FindCommand(Date date) {
+        this.date = date;
+    }
+
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskListToShowFilteredTasks(keywords);
+        if (!keywords.isEmpty()) {
+            model.updateFilteredTaskListToShowFilteredTasks(keywords);
+        }
         return new CommandResult(getMessageForTaskListShownSummary(
                 model.getNonFloatingTaskList().size()
                 + model.getFloatingTaskList().size()
