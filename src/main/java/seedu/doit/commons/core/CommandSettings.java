@@ -150,6 +150,10 @@ public class CommandSettings implements Serializable {
     }
 
     // Setter
+    public static void setInstance(CommandSettings commandSettings) {
+        instance = commandSettings;
+    }
+
     public void setAdd(String add) {
         this.add = add;
     }
@@ -322,7 +326,4 @@ public class CommandSettings implements Serializable {
         return sb.toString();
     }
 
-    public static void setInstance(CommandSettings commandSettings) {
-        instance = commandSettings;
-    }
 }
