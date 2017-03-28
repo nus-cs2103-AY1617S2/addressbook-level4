@@ -31,12 +31,12 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Let's have a look at how Jim, an avid Opus fan, utilises the task manager:
    * **`add`**` Do laundry p/low b/31/12/2017 12:00` : Jim wants to do laundry at noon, so he adds it to the task manager.
+   * **`list`** : Jim wants to get back to the overview of his list of tasks.
    * **`sort`**` priority` : Jim wants to see the most urgent tasks at the top of his list.
    * **`mark`**` 1 2` : Jim realises he has completed the 1st and 2nd task so he marks them as completed.
    * **`delete`**` 3` : Jim realises he does not have to complete the 3rd task so he deletes it from his current list.
    * **`find`**` laundry` : Jim gets a call from his mum that the laundry must be completed by 3pm so he does a search for it.
    * **`edit`**` 1 p/hi` : Jim updates the priority of the found laundry task to high.
-   * **`list`** : Jim wants to get back to the overview of his list of tasks.
    * **`exit`** : Jim is done for the day so he decides to exit the application!
 6. Refer to the [Features](#2-features) section below for details of each command.<br>
 
@@ -71,6 +71,10 @@ Examples:
 
 * `add Do laundry`
 * `add Finish v0.0 documentation n/Urgent b/02/28/2017 12:00 e/02/29/2017 23:59 p/hi t/CS2103T t/CS2101`
+
+### 2.3 List tasks: `list`
+
+Lists all tasks that are currently in storage.
 
 ### 2.3. Sort tasks : `sort`
 
@@ -212,7 +216,7 @@ Autocomplete the user's command on the CLI.
 
 > * Example:
     User enters `f` and presses `TAB`, `find` command will appear in the input box.
-    
+
 ### 2.16. Exit : `exit`
 
 Closes Opus.
@@ -239,7 +243,7 @@ Closes Opus.
 
 * **Edit**  `edit INDEX NAME [n/NOTES] [p/PRIORITY] [b/STARTIME] [e/ENDTIME] [t/TAG]...` <br>
   e.g. `edit 2 Prepare dinner n/for 4 pax p/hi b/23/4/2017 12:00 e/23/3/2018 13:00 t/friend t/colleague`
-  
+
 * **Exit** `exit`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
@@ -264,7 +268,7 @@ Closes Opus.
 
 * **Sort** : `sort KEYWORD` <br>
   e.g. `sort priority`
-  
+
 * **Unmark** : `unmark [INDEX]` <br>
   e.g. `unmark 1`
 
