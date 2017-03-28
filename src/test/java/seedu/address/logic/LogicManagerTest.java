@@ -361,7 +361,7 @@ public class LogicManagerTest {
                 FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
         assertCommandSuccess("delete C1",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
                         threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }

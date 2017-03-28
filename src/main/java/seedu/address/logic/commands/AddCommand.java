@@ -26,6 +26,7 @@ public class AddCommand extends Command {
             + "Parameters: NAME [t/TAG]...\n" + "Example: " + COMMAND_WORD + " CS2103 Refactoring Task t/CS2103";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "New task added successfully.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager";
 
     private final Task toAdd;
@@ -79,7 +80,7 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             model.updateFilteredListToShowAll();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), MESSAGE_SUCCESS_SATAUS_BAR);
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }

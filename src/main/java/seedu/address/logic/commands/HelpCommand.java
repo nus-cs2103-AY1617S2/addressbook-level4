@@ -15,9 +15,11 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Opened help window.";
+
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ShowHelpRequestEvent());
-        return new CommandResult(SHOWING_HELP_MESSAGE);
+        return new CommandResult(SHOWING_HELP_MESSAGE, MESSAGE_SUCCESS_SATAUS_BAR);
     }
 }

@@ -118,12 +118,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged(String message) {
-        raise(new TaskManagerChangedEvent(taskManager, message));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     /** Raises an event to indicate the path needs to be changed */
     private void indicateTaskManagerPathChanged(String message, String path) {
-        raise(new TaskManagerPathChangedEvent(taskManager, message, path));
+        raise(new TaskManagerPathChangedEvent(taskManager, path));
     }
 
     @Override

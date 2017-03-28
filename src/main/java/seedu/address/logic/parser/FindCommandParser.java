@@ -53,7 +53,6 @@ public class FindCommandParser {
                 return new FindCommand(null, dates, null);
             }
             break;
-        // if encounters wrong date time format, switch to default
         case CliSyntax.FIND_TAG:
             keywordSet = new HashSet<>(Arrays.asList(keywords));
             return new FindCommand(null, null, keywordSet);

@@ -31,6 +31,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager.";
+    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Task edited successfully.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -63,20 +64,22 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask;
-        try {
-            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-        } catch (IllegalValueException e) {
-            throw new CommandException(e.getMessage());
-        }
+        if (editTaskDescriptor.isAnyFieldEdited()) {
+            try {
+                editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            } catch (IllegalValueException e) {
+                throw new CommandException(e.getMessage());
+            }
 
-        try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            try {
+                model.updateTask(filteredTaskListIndex, editedTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+            model.updateFilteredListToShowAll();
         }
-        model.updateFilteredListToShowAll();
         return new CommandResult(
-                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), MESSAGE_SUCCESS_SATAUS_BAR);
     }
 
     // @@author A0093999Y
