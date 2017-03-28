@@ -154,9 +154,9 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.resetData(redoTaskManager.pop());
 		indicateTaskManagerChanged();
 	}
-	
-	// @@author 
-	
+
+	// @@author
+
 	/*
 	 * @Override public synchronized void getNextState() { saveImage();
 	 * taskManager.resetData(redoTaskManager.pop()); }
@@ -178,6 +178,10 @@ public class ModelManager extends ComponentManager implements Model {
 	/** Raises an event to indicate the model has changed */
 	private void indicateTaskManagerChanged() {
 		raise(new TaskManagerChangedEvent(taskManager));
+	}
+
+	public void saveTaskManager() {
+		indicateTaskManagerChanged();
 	}
 
 	@Override
