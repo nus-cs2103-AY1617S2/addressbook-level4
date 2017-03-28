@@ -23,6 +23,7 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     public static final int MARGIN_OF_ERROR = 1;
+    public static final String FIND_KEYWORD_TYPE = "\"%1$s\" results";
     //@@author A0142255M
     public static final String ALL_TASK_LIST_TYPE = "All Tasks";
     public static final String COMPLETED_TASK_LIST_TYPE = "Completed Tasks";
@@ -153,11 +154,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
+    //@@author A0139925U
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
+        updateFilteredTaskListType(String.format(FIND_KEYWORD_TYPE, StringUtil.generateStringFromKeywords(keywords)));
     }
-
+    //@@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
