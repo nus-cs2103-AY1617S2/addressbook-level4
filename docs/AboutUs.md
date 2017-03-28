@@ -14,9 +14,18 @@ Component: Storage
 
 #### [Melvin Soh](https://github.com/InfinityFrost) <br>
 <img src="images/infinityfrost.png" width="150"><br>
-Role: Developer<br>
-Responsibilities: Documentation and Testing<br>
-Component: Logic
+
+* Components in charge of: [Logic](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
+* Aspects/tools in charge of: Testing and Documentation
+* Features implemented:
+   * [Save to existing file path](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#314-exporting-the-data--save)
+   * [Save to new file path](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#314-exporting-the-data--save)
+   * [undo](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#311-undoing-a-command--undo)
+   * [Delete multiple tasks ](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#36-deleting-a-task--delete)
+* Code written: [[functional code](A0138961W.md)][[test code](A0138961W.md)]
+* Other major contributions:
+  * Documentation  [[#5](https://github.com/CS2103JAN2017-W14-B2/main/pull/5), [#6](https://github.com/CS2103JAN2017-W14-B2/main/pull/6), [#55](https://github.com/CS2103JAN2017-W14-B2/main/pull/55), [#72](https://github.com/CS2103JAN2017-W14-B2/main/pull/72), [#73](https://github.com/CS2103JAN2017-W14-B2/main/pull/73)]
+  * Minor aesthetic changes to UI status footer bar [#139](https://github.com/CS2103JAN2017-W14-B2/main/pull/139)
 
 -----
 
@@ -56,8 +65,8 @@ Component: Logic
 * Code written: [[functional code](A0147990R.md)][[test code](A0147990R.md)]
 * Other major contributions:
   * In charge of review amd merge pull requests
-  * Help debug and solve merge conflicts [[#152](https://github.com/CS2103JAN2017-W14-B2/main/pull/152)]
-  * Help in documentation [[#80](https://github.com/CS2103JAN2017-W14-B2/main/pull/80)] [[#1](https://github.com/CS2103JAN2017-W14-B2/main/pull/1)] 
+  * Help debug and solve merge conflicts [[#152](https://github.com/CS2103JAN2017-W14-B2/main/pull/152), [#146](https://github.com/CS2103JAN2017-W14-B2/main/pull/146)]
+  * Documentation [[#80](https://github.com/CS2103JAN2017-W14-B2/main/pull/80)] [[#1](https://github.com/CS2103JAN2017-W14-B2/main/pull/1)] 
 
 -----
 
