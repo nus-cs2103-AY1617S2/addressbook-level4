@@ -26,7 +26,7 @@ public class DateParser {
         if (input.matches(DAY_MONTH_YEAR_FORMAT)) {
             input = swapDayAndMonth(input);
         }
-        this.value = nattyManipulation(input);
+        value = nattyManipulation(input);
     }
 
     /**
