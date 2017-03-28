@@ -55,12 +55,10 @@ public class DeleteCommand extends Command {
             tasksToDelete.add(taskToDelete);
         }
 
-        for (ReadOnlyTask taskToDelete: tasksToDelete) {
-            try {
-                model.deleteTask(taskToDelete);
-            } catch (TaskNotFoundException pnfe) {
-                assert false : "The target task cannot be missing";
-            }
+        try {
+            model.deleteTask(tasksToDelete);
+        } catch (TaskNotFoundException pnfe) {
+            assert false : "The target task cannot be missing";
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
