@@ -152,8 +152,8 @@ Format: `edit INDEX <[TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] 
 > * At least one of the optional fields must be provided.
 > * If changing the DATETIME, format must match the chosen task type (either deadline or event)
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the tasks will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `#` without specifying any tags after it.
+> * When editing tags, inputting tags of the task that already exist will removed them from the task i.e adding of tags is not cumulative.
+    Inputting tags of the task that do not already exist will add them to the task.
 
 Examples:
 
