@@ -10,7 +10,7 @@ import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 /*
- * Manipulates a given date from user's input for Natty dependency. 
+ * Manipulates a given date from user's input for Natty dependency.
  * The output after Natty dependency is done is converted back to the date format by the user.
  */
 public class DateParser {
@@ -20,7 +20,7 @@ public class DateParser {
     public final SimpleDateFormat userOutputDateFormat = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
 
     public String value;
-    
+
     /*
      * Converts the date format from from user's input for Natty dependency.
      */
