@@ -1,5 +1,9 @@
 package seedu.doit.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -46,10 +50,34 @@ public class TaskCard extends UiPart<Region> {
 
         if (task.hasStartTime()) {
             this.deadline.setText(task.getStartTime().value + " - " + task.getDeadline().value);
+            if (ifOverdue(task.getDeadline().value)) {
+                this.cardPane.setStyle("-fx-background-color: #a52a2a;");
+            }
         } else if (task.hasEndTime()) {
             this.deadline.setText(task.getDeadline().value);
+            if (ifOverdue(task.getDeadline().value)) {
+                this.cardPane.setStyle("-fx-background-color: #a52a2a;");
+            }
         } else {
             this.deadline.setText("");
+        }
+    }
+
+    public boolean ifOverdue(String dateTime) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        if (dateTime.equals("")) {
+            return false;
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
+            LocalDateTime dateTimeToCompare = LocalDateTime.parse(dateTime, formatter);
+            if (currentDateTime.isBefore(dateTimeToCompare)) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (DateTimeParseException exc) {
+            throw exc;
         }
     }
 
