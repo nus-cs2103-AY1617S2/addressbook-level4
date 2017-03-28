@@ -2,6 +2,7 @@
 package seedu.toluist.model;
 
 import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import org.junit.Test;
