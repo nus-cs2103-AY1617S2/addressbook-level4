@@ -56,6 +56,10 @@ public class EventListPanel extends UiPart<Region> {
             });
     }
 
+    protected void clearSelection() {
+        this.eventListView.getSelectionModel().clearSelection();
+    }
+
     public void scrollTo(int index) {
         Platform.runLater(() -> {
             this.eventListView.scrollTo(index);

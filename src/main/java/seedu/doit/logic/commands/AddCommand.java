@@ -3,6 +3,8 @@ package seedu.doit.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.doit.commons.core.EventsCenter;
+import seedu.doit.commons.events.ui.JumpToListRequestEvent;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.item.Description;
@@ -13,7 +15,6 @@ import seedu.doit.model.item.StartTime;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-
 /**
  * Adds a task to the task manager.
  */
@@ -47,6 +48,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(new Name(name), new Priority(priority), new EndTime(dueDate), new Description(text),
                 new UniqueTagList(tagSet));
+
     }
 
     /**
@@ -86,6 +88,8 @@ public class AddCommand extends Command {
         assert this.model != null;
         try {
             this.model.addTask(this.toAdd);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(
+                    this.model.getFilteredTaskList().indexOf(this.toAdd)));
             return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd));
         } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

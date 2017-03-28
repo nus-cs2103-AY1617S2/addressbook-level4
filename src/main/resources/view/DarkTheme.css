@@ -95,6 +95,7 @@
     -fx-padding: 0 0 0 0;
 }
 
+
 .list-cell .label {
     -fx-text-fill: #010504;
     -fx-padding: 0 0 0 0;
@@ -247,7 +248,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#0002c54, 25%);
+    -fx-background-color: derive(#002c54, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
