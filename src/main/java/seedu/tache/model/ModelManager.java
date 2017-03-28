@@ -22,8 +22,10 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+    //@@author A0139925U
     public static final int MARGIN_OF_ERROR = 1;
     public static final String FIND_KEYWORD_TYPE = "\"%1$s\" results";
+    //@@author
     //@@author A0142255M
     public static final String ALL_TASK_LIST_TYPE = "All Tasks";
     public static final String COMPLETED_TASK_LIST_TYPE = "Completed Tasks";
@@ -34,11 +36,12 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139961U
     public static final String DUE_TODAY_TASK_LIST_TYPE = "Due Today Tasks";
     public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Due This Week Tasks";
-
+    //@@author
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
+    //@@author A0139925U
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    //@@author
     //@@author A0142255M
     private String filteredTaskListType = ALL_TASK_LIST_TYPE;
     //@@author

@@ -41,9 +41,6 @@ public class ListCommand extends Command {
         case COMPLETED_FILTER:
             model.updateFilteredListToShowCompleted();
             break;
-        case UNCOMPLETED_FILTER:
-            model.updateFilteredListToShowUncompleted();
-            break;
         case TIMED_FILTER:
             model.updateFilteredListToShowTimed();
             break;
@@ -57,8 +54,11 @@ public class ListCommand extends Command {
             model.updateFilteredListToShowDueThisWeek();
             break;
         case ALL_FILTER:
-        default:
             model.updateFilteredListToShowAll();
+            break;
+        case UNCOMPLETED_FILTER:
+        default:
+            model.updateFilteredListToShowUncompleted();
             return new CommandResult(String.format(MESSAGE_SUCCESS, StringUtil.capitalizeFirstCharacter(filter)));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, StringUtil.capitalizeFirstCharacter(filter)));
