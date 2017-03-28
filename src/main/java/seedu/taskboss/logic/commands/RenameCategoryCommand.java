@@ -46,7 +46,7 @@ public class RenameCategoryCommand extends Command {
     //@@author A0144904H
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException,
-                                        InvalidDatesException, DefaultCategoryException {
+    InvalidDatesException, DefaultCategoryException {
         assert model != null;
 
         Category oldCategory = new Category(this.oldCategory);
@@ -54,13 +54,13 @@ public class RenameCategoryCommand extends Command {
 
         try {
             detectErrors(oldCategory, newCategory);
-                try {
-                    model.renameCategory(oldCategory, newCategory);
-                    model.updateFilteredTaskListByCategory(newCategory);
-                    return new CommandResult(MESSAGE_SUCCESS);
-                } catch (UniqueCategoryList.DuplicateCategoryException e) {
-                    return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
-                }
+            try {
+                model.renameCategory(oldCategory, newCategory);
+                model.updateFilteredTaskListByCategory(newCategory);
+                return new CommandResult(MESSAGE_SUCCESS);
+            } catch (UniqueCategoryList.DuplicateCategoryException e) {
+                return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
+            }
 
         } catch (DefaultCategoryException dce) {
             if (dce.getMessage().equals(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME)) {
@@ -85,7 +85,8 @@ public class RenameCategoryCommand extends Command {
      * @throws DefaultCategoryException
      */
     private void detectErrors(Category oldCategory, Category newCategory)
-            throws IllegalValueException, DefaultCategoryException {
+                                            throws IllegalValueException, DefaultCategoryException {
+
         if (oldCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
             throw new DefaultCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
         } else if (oldCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
