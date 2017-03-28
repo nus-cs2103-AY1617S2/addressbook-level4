@@ -18,7 +18,8 @@ public class AutocompleteManager {
             , "pull", "export", "exit", "to", "from", "on"
             , "hourly", "daily", "weekly", "monthly", "yearly"
             , "overdue", "outstanding", "completed", "today", "yesterday"
-            , "tomorrow", "bookings", "incomplete", "confirm", "load", "saveas"};
+            , "tomorrow", "bookings", "incomplete", "confirm", "load", "saveas"
+            , "remove", "change", "editbooking"};
 
     private AutocompleteDataStructure data;
 
