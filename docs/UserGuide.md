@@ -134,7 +134,7 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 
 > - Add as many tags as you want to a task, if required.<br><br>
 > - Add a **`STARTDATE`** or **`DUEDATE`** if required. Refer to Table 2 for examples of **`STARTDATE`** and **`DUEDATE`**.<br><br>
-> - Mark tasks with **`PRIORITY`** level 1, 2 or 3, with 1 the lowest priority and 3 the highest, if required.<br>
+> - Mark tasks with **`PRIORITY`** level 1, 2 or 3, with 1 the highest priority and 3 the lowest, if required.<br>
 
 <br>
 
