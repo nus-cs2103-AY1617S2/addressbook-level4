@@ -55,7 +55,7 @@ public class EditCommandParser {
             if (startTime.isPresent() && endTime.isPresent()) { //for event
                 setEditTodoDescriptroForEvent(editTodoDescriptor, startTime, endTime);
             } else if (endTime.isPresent() && !startTime.isPresent()) { //for deadLine
-                setEditTodoDescriptroForDeadLine(editTodoDescriptor, startTime, endTime);
+                setEditTodoDescriptroForDeadLine(editTodoDescriptor, endTime);
             }
 
             editTodoDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
@@ -99,7 +99,7 @@ public class EditCommandParser {
     }
 
     private void setEditTodoDescriptroForDeadLine(EditTodoDescriptor editTodoDescriptor,
-            Optional<String> startTime, Optional<String> endTime) {
+            Optional<String> endTime) {
         try {
             DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
             if (!endTime.get().equals("")) {
