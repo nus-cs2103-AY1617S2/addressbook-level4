@@ -39,6 +39,7 @@ public class StatusBarFooter extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    //@@author A0140042A
     /**
      * Creates and add a label to the saveLocationStatus bar for right alignment
      */
@@ -57,6 +58,7 @@ public class StatusBarFooter extends UiPart<Region> {
     public void setSaveLocation(String location) {
         this.saveLocationLabel.setText(location);
     }
+    //@@author
 
     private void setSyncStatus(String status) {
         this.syncStatus.setText(status);

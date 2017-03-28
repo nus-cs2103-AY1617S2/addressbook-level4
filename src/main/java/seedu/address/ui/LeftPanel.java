@@ -75,6 +75,7 @@ public class LeftPanel extends UiPart<Region> {
     @FXML
     private HBox calendarHeader;
 
+    //@@author A0162877N
     public LeftPanel(AnchorPane leftListPlaceholder,
             ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
@@ -88,6 +89,7 @@ public class LeftPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
+    //@@author A0140042A
     public void updateLabelCount() {
         labelCount = new HashMap<Label, Integer>();
 
@@ -108,6 +110,7 @@ public class LeftPanel extends UiPart<Region> {
         labelArrow.setIcon(FontAwesomeIcon.ANGLE_UP);
     }
 
+    //@@author A0162877N
     @SuppressWarnings("deprecation")
     public void setTodayListView(ObservableList<ReadOnlyTask> taskList) {
         todayLabel.setText("Today");
@@ -140,6 +143,7 @@ public class LeftPanel extends UiPart<Region> {
         setEventHandlerForTodaySelectionChangeEvent();
     }
 
+    //@@author A0140042A
     public void setCalendarListView(ObservableList<ReadOnlyTask> taskList) {
         calendarLabel.setText("Calendar");
     }
@@ -181,6 +185,7 @@ public class LeftPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
+    //@@author A0162877N
     private void setEventHandlerForSelectionChangeEvent() {
         labelListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -215,6 +220,7 @@ public class LeftPanel extends UiPart<Region> {
                 "Updating label list count and total number of tasks for today"));
     }
 
+    //@@author A0140042A
     class LabelListViewCell extends ListCell<Label> {
 
         @Override
