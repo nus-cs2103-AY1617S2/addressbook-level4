@@ -125,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0144904H
     @Override
     public void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
-                                                                        throws IllegalValueException{
+                                                                        throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         int index = 0;
         for (ReadOnlyTask task : tasksToMarkDone) {
