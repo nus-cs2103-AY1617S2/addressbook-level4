@@ -41,6 +41,15 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    //@@author A0143355J
+    /** Returns today's task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getTodayTaskList();
+
+    //@@author A0143355J
+    /** Returns tomorrow's task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getTomorrowTaskList();
+
+    //@@author
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
@@ -74,4 +83,8 @@ public interface Model {
     void saveTaskList(String filePath) throws IOException;
 
     void updateFilteredTaskListStatus(Set<String> keywords);
+
+    void updateTodaysTaskList();
+
+    void updateTomorrowsTaskList();
 }

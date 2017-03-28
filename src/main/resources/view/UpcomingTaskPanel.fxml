@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @@author A0143355J -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" spacing="5.0">
+    <stylesheets>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+    </stylesheets>
+    <children>
+        <Label text="Today" style="-fx-text-fill: #1874CD; -fx-font-size: 20px"/>
+        <ListView fx:id="todayTaskListView" VBox.vgrow="ALWAYS" />
+    </children>
+    <children>
+        <Label text="Tomorrow" style="-fx-text-fill: #1874CD; -fx-font-size: 20px"/>
+        <ListView fx:id="tomorrowTaskListView" VBox.vgrow="ALWAYS" />
+    </children>
+</VBox>
+

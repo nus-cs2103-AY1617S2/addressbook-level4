@@ -34,9 +34,10 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
     private Config config;
+    private UpcomingTaskPanel upcomingTaskPanel;
 
     @FXML
-    private AnchorPane browserPlaceholder;
+    private AnchorPane upcomingTaskPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -110,13 +111,17 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0143355J
     void fillInnerParts() {
+        upcomingTaskPanel = new UpcomingTaskPanel(getUpcomingTaskListPlaceholder(), logic.getTodayTaskList(),
+                logic.getTomorrowTaskList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
+    //@@author
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
@@ -129,10 +134,17 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
+    //@@author A0143355J
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
 
+    //@@author A0143355J
+    private AnchorPane getUpcomingTaskListPlaceholder() {
+        return upcomingTaskPlaceholder;
+    }
+
+    //@@author
     void hide() {
         primaryStage.hide();
     }
@@ -194,6 +206,11 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+
+    //@@author A0143355J
+    public UpcomingTaskPanel getUpcomingTaskPanel() {
+        return this.upcomingTaskPanel;
     }
 
 }

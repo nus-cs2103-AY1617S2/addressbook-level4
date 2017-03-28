@@ -273,4 +273,5 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return dateFormat.format(this.endDate);
     }
+
 }
