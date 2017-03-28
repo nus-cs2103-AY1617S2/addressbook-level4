@@ -672,7 +672,6 @@ public class LogicManagerTest {
             );
         }
 
-        //@@author A0147990R
         /**
          * Generates a Task object with given endDatetime. Other fields will have some
          * dummy values.
