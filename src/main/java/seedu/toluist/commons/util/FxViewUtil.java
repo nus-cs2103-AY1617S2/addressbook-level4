@@ -3,9 +3,11 @@ package seedu.toluist.commons.util;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 /**
@@ -71,5 +73,16 @@ public class FxViewUtil {
             }
         });
     }
+
+    public static void setKeyCode(Node node, KeyCode keycode,
+                                  EventHandler<ActionEvent> handler) {
+        node.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (keycode.equals(event.getCode())) {
+                handler.handle(new ActionEvent());
+                event.consume();
+            }
+        });
+    }
+
 
 }
