@@ -13,21 +13,49 @@ import seedu.task.model.tag.UniqueTagList;
 //@@author A0163559U
 public class TaskComparableTest {
 
-    String description = "task description";
+    String description = "task description ";
     String priority = "2";
     String timing = "03/03/2017";
     String tag1 = "friendship";
     String tag2 = "love";
 
     @Test
+    public void sortDescriptions() {
+        try {
+            Description a = new Description(description + "a");
+            Description b = new Description(description + "b");
+            Description c = new Description(description + "c");
+            int ab = a.compareTo(b);
+            assertEquals(ab,-1);
+            int ac = a.compareTo(c);
+            assertEquals(ac,-2);
+
+            int ba = b.compareTo(a);
+            assertEquals(ba, 1);
+
+            assertEquals(0, a.compareTo(a));
+
+            ArrayList<Description> actual = new ArrayList<Description>(Arrays.asList(b,c,a));
+            Collections.sort(actual);
+
+            ArrayList<Description> expected = new ArrayList<Description>(Arrays.asList(a,b,c));
+
+            assertEquals(actual, expected);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
     public void sortByComplete() {
 
         try {
-            Task t1 = new Task(new Description(description + " a"), new Priority(priority),
+            Task t1 = new Task(new Description(description + "a"), new Priority(priority),
                     new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
-            Task t2 = new Task(new Description(description + " b"), new Priority(priority),
+            Task t2 = new Task(new Description(description + "b"), new Priority(priority),
                     new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
-            Task t3 = new Task(new Description(description + " c"), new Priority(priority),
+            Task t3 = new Task(new Description(description + "c"), new Priority(priority),
                     new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
 
             //add two near identical tasks
