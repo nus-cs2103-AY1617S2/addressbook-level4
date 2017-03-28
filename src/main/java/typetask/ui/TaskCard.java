@@ -3,6 +3,9 @@ package typetask.ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import typetask.logic.parser.DateParser;
 import typetask.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -61,16 +65,41 @@ public class TaskCard extends UiPart<Region> {
         date.setText(task.getDate().value);
         endDate.setText(task.getEndDate().value);
         completed = task.getIsCompleted();
-//        if (!task.getDate().value.equals("")) {
-//            parsedDateFlag = true;
-//            parsedDate = LocalDate.parse(task.getDate().value, dtf);
-//        }
+        setStatusForEventTask(task);
+        setStatusForDeadlineTask(task);
         setColourCode();
         setImagestoIndicatePriorityOrComplete();
         //add endDate.setText(...);
         //add setImages...
     }
-
+    //@@author A0139926R
+    private void setStatusForEventTask(ReadOnlyTask task) {
+        if (!task.getEndDate().value.equals("")) {
+            List<Date> dates = DateParser.parse(task.getEndDate().value);
+            Date taskDeadline = dates.get(0);
+            Calendar calendar = Calendar.getInstance();
+            Date nowDate = calendar.getTime();
+            if (nowDate.after(taskDeadline)) {
+                setStyleToIndicateOverdue();
+            } else {
+                setStyleToIndicatePending();
+            }
+        }
+    }
+    //@@author A0139926R
+    private void setStatusForDeadlineTask(ReadOnlyTask task) {
+        if (!task.getDate().value.equals("")) {
+            List<Date> dates = DateParser.parse(task.getDate().value);
+            Date taskDeadline = dates.get(0);
+            Calendar calendar = Calendar.getInstance();
+            Date nowDate = calendar.getTime();
+            if (nowDate.after(taskDeadline)) {
+                setStyleToIndicateOverdue();
+            } else {
+                setStyleToIndicatePending();
+            }
+        }
+    }
     //@@author A0139154E
     private void setColourCode() {
         if (parsedDateFlag == true) {
