@@ -14,10 +14,10 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Mark Done command and shortcut(support multiple Done)](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#310-marking-a-task-done--done)
    * [Edit category name](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#34-editing-a-task--edit)
    * [Edit priority of a task](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#34-editing-a-task--edit)
-   * [Default categories]
-* Code written: [[functional code](A0147990R.md)][[test code](A0147990R.md)]
+   * Default categories
+* Code written: [[functional code](A0144904H.md)][[test code](A0144904H.md)]
 * Other major contributions:
-  * Romove email in Addressbook level 4 [#52](https://github.com/CS2103JAN2017-W14-B2/main/pull/52)
+  * Romove Email in Addressbook level 4 [[#52](https://github.com/CS2103JAN2017-W14-B2/main/pull/52)]
   * Refactor command word for mark done [[#103](https://github.com/CS2103JAN2017-W14-B2/main/pull/103)]
   * Refactor select command to view [[#107](https://github.com/CS2103JAN2017-W14-B2/main/pull/107)]
   * Make name accept special characters [[#146](https://github.com/CS2103JAN2017-W14-B2/main/pull/146)]
@@ -54,7 +54,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Sort tasks](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#312-sorting-tasks--sort)
    * [Add task recurrence](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
    * [Rename a category](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#39-modifying-a-category-name--name)
-   * [Short commands]
+   * Short commands
 * Code written: [[functional code](A0143157J.md)][[test code](A0143157J.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskBoss [[#50](https://github.com/CS2103JAN2017-W14-B2/main/pull/50), [#51](https://github.com/CS2103JAN2017-W14-B2/main/pull/51), [#53](https://github.com/CS2103JAN2017-W14-B2/main/pull/53), [#54](https://github.com/CS2103JAN2017-W14-B2/main/pull/54)]
