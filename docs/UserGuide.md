@@ -210,9 +210,20 @@ Example:
 * `save C:/Users/Documents`
 Saves data into the specified directory.
 
-### 2.16. Autocomplete (Work in progress)
+### 2.16. Autocomplete
 
-Autocomplete the user's command on the CLI.
+Autocomplete the user's command on the CLI. This applies to the following commands:
+
+* `add`
+* `delete`
+* `edit`
+* `mark`
+* `schedule`
+* `list`
+* `help`
+* `undo`
+* `redo`
+* `clear`
 
 > * Example:
     User enters `f` and presses `TAB`, `find` command will appear in the input box.
