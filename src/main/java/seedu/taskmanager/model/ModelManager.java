@@ -101,26 +101,36 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0142418L
+    /** Deletes tasks by their date. 
+     *  Returns the number of tasks deleted.
+     * */
     @Override
-    public synchronized void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
+    public synchronized int deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
             throws TaskNotFoundException {
+        int numDeletedTasks = 0;
         saveInstance();
         while (targets.size() != 0) {
             try {
                 ReadOnlyTask taskToDelete = targets.get(0);
                 saveInstance();
                 taskManager.removeTask(taskToDelete);
+                numDeletedTasks++;
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
             }
         }
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        return numDeletedTasks;
     }
 
+    /** Deletes the task by its name. 
+     *  Returns the number of tasks deleted.
+     * */
     @Override
-    public synchronized void deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
+    public synchronized int deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws TaskNotFoundException {
+        int numDeletedTasks = 0;
         saveInstance();
         for (int index = 0; targets.size() != index; index++) {
             try {
@@ -128,6 +138,7 @@ public class ModelManager extends ComponentManager implements Model {
                 if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
                     taskManager.removeTask(taskToDelete);
                     index--;
+                    numDeletedTasks++;
                 }
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
@@ -135,6 +146,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        return numDeletedTasks;
     }
 
     // @@author
