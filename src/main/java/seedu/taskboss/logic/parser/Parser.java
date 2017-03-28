@@ -56,6 +56,7 @@ public class Parser {
 
         case AddCommand.COMMAND_WORD:
         case AddCommand.COMMAND_WORD_SHORT:
+        case AddCommand.COMMAND_WORD_2ND_SHORT:
             return new AddCommandParser().parse(arguments);
 
         case MarkDoneCommand.COMMAND_WORD:
@@ -72,6 +73,7 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_WORD_SHORT:
+        case DeleteCommand.COMMAND_WORD_2ND_SHORT:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:

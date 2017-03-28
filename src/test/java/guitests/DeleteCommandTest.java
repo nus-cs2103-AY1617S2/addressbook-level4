@@ -18,22 +18,28 @@ public class DeleteCommandTest extends TaskBossGuiTest {
         //delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
-        assertDeleteSuccess(false, targetIndex, currentList);
+        assertDeleteSuccess(false, false, targetIndex, currentList);
+
+        //repeat of previous test with '-' shortcut
+        commandBox.runCommand("u");
+        currentList = td.getTypicalTasks();
+        targetIndex = 1;
+        assertDeleteSuccess(true, false, targetIndex, currentList);
 
         //delete the last in the list
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length;
-        assertDeleteSuccess(false, targetIndex, currentList);
+        assertDeleteSuccess(false, false, targetIndex, currentList);
 
         //delete from the middle of the list
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
-        assertDeleteSuccess(false, targetIndex, currentList);
+        assertDeleteSuccess(false, false, targetIndex, currentList);
 
         //delete the first in the list using short command
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = 1;
-        assertDeleteSuccess(true, targetIndex, currentList);
+        assertDeleteSuccess(false, true, targetIndex, currentList);
 
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
@@ -46,14 +52,19 @@ public class DeleteCommandTest extends TaskBossGuiTest {
      * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
      * @param currentList A copy of the current list of tasks (before deletion).
      */
-    private void assertDeleteSuccess(boolean isShortCommand, int targetIndexOneIndexed, final TestTask[] currentList) {
+    private void assertDeleteSuccess(boolean isMinusSign, boolean isShortCommand, int targetIndexOneIndexed,
+                      final TestTask[] currentList) {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         if (isShortCommand) {
             commandBox.runCommand("d " + targetIndexOneIndexed);
         } else {
-            commandBox.runCommand("delete " + targetIndexOneIndexed);
+            if (isMinusSign) {
+                commandBox.runCommand("- " + targetIndexOneIndexed);
+            } else {
+                commandBox.runCommand("delete " + targetIndexOneIndexed);
+            }
         }
 
         //confirm the list now contains all previous tasks except the deleted task
