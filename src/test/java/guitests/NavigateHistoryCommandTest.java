@@ -1,7 +1,7 @@
 //@@author A0162011A
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -17,13 +17,13 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
     @Test
     public void viewPreviousWithoutDoingAnything() {
         mainGui.press(KeyCode.UP);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == "");
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), "");
     }
 
     @Test
     public void viewNextWithoutDoingAnything() {
         mainGui.press(KeyCode.DOWN);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == "");
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), "");
     }
 
     @Test
@@ -31,7 +31,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         String command = "history";
         commandBox.runCommand(command);
         mainGui.press(KeyCode.UP);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command);
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         String command = "history";
         commandBox.runCommand(command);
         mainGui.press(KeyCode.DOWN);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == "");
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), "");
     }
 
     @Test
@@ -50,7 +50,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         commandBox.enterCommand(command2);
         mainGui.press(KeyCode.UP);
         mainGui.press(KeyCode.DOWN);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command2);
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command2);
     }
 
     @Test
@@ -61,12 +61,10 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         commandBox.enterCommand(command2);
         String command3 = "hi";
         commandBox.enterCommand(command3);
-        mainGui.press(KeyCode.UP);
-        mainGui.press(KeyCode.UP);
-        mainGui.press(KeyCode.UP);
-        mainGui.press(KeyCode.UP);
-        mainGui.press(KeyCode.UP);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command1);
+        for (int i = 0; i < 10; i++) {
+            mainGui.press(KeyCode.UP);
+        }
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
     }
 
     @Test
@@ -76,12 +74,11 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         String command2 = "hi";
         commandBox.enterCommand(command2);
         mainGui.press(KeyCode.UP);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command1);
-        mainGui.press(KeyCode.DOWN);
-        mainGui.press(KeyCode.DOWN);
-        mainGui.press(KeyCode.DOWN);
-        mainGui.press(KeyCode.DOWN);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command2);
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
+        for (int i = 0; i < 10; i++) {
+            mainGui.press(KeyCode.DOWN);
+        }
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command2);
     }
 
     @Test
@@ -90,20 +87,15 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command1);
         String command2 = "hi";
         commandBox.enterCommand(command2);
+        for (int i = 0; i < 10; i++) {
+            mainGui.press(KeyCode.UP);
+        }
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
+        for (int i = 0; i < 10; i++) {
+            mainGui.press(KeyCode.DOWN);
+        }
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command2);
         mainGui.press(KeyCode.UP);
-        mainGui.press(KeyCode.UP);
-        mainGui.press(KeyCode.UP);
-        mainGui.press(KeyCode.UP);
-        mainGui.press(KeyCode.UP);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command1);
-        mainGui.press(KeyCode.DOWN);
-        mainGui.press(KeyCode.DOWN);
-        mainGui.press(KeyCode.DOWN);
-        mainGui.press(KeyCode.DOWN);
-        mainGui.press(KeyCode.DOWN);
-        mainGui.press(KeyCode.DOWN);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command2);
-        mainGui.press(KeyCode.UP);
-        assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command1);
+        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
     }
 }
