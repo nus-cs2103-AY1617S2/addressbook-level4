@@ -172,7 +172,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Returns the current size and the position of the main Window.
      */
-    GuiSettings getCurrentGuiSetting() {
+    public GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    void loadTaskPage(ReadOnlyTask task) {
+    public void loadTaskPage(ReadOnlyTask task) {
 //        browserPanel.loadTaskPage(person);
     }
 

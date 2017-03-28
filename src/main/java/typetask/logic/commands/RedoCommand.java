@@ -15,10 +15,6 @@ public class RedoCommand extends Command {
     private static final int STATUS_EMPTY_HISTORY = 0;
     private static final int STATUS_ERROR_HISTORY = -1;
 
-    public RedoCommand() {
-
-    }
-
     @Override
     public CommandResult execute() {
         switch (model.revertTaskManager()) {

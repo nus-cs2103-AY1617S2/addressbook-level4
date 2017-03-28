@@ -18,7 +18,7 @@ public class SaveCommand extends Command {
             + " c:\\desktop\\ ";
     public static final String MESSAGE_SUCCESS = "A copy of the file is saved.";
 
-    String path;
+    private String path;
 
     public SaveCommand (String filePath) {
         this.path = FileUtil.getPath(filePath) + "/taskManager.xml";

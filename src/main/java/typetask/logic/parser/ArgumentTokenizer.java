@@ -172,7 +172,7 @@ public class ArgumentTokenizer {
             this.prefix = prefix;
         }
 
-        String getPrefix() {
+        public String getPrefix() {
             return this.prefix;
         }
 
@@ -211,7 +211,7 @@ public class ArgumentTokenizer {
             return this.startPosition;
         }
 
-        Prefix getPrefix() {
+        public Prefix getPrefix() {
             return this.prefix;
         }
     }
