@@ -1,29 +1,46 @@
 package guitests;
 
+import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
-//import java.util.Arrays;
-
 import org.junit.Test;
 
-import seedu.doit.model.item.EndTimeComparator;
-import seedu.doit.model.item.PriorityComparator;
+import seedu.doit.logic.commands.SortCommand;
+import seedu.doit.model.comparators.EndTimeComparator;
+import seedu.doit.model.comparators.PriorityComparator;
+import seedu.doit.model.comparators.StartTimeComparator;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.model.item.ReadOnlyTask;
-import seedu.doit.model.item.StartTimeComparator;
-import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.testutil.TestTask;
 
 public class SortCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void sort() {
+
         // check default sorting by name
         TestTask[] currentList = td.getTypicalTasks();
         assertSortSuccess("name", currentList);
         assertSortSuccess("priority", currentList);
         assertSortSuccess("start time", currentList);
         assertSortSuccess("end time", currentList);
+        assertSortSuccess("end time", currentList);
+
+        // invalid sort command
+        this.commandBox.runCommand("sort invalid");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+
+        // check sort with done tasks
+
+
+        assertSortSuccess("name", currentList);
+        assertSortSuccess("priority", currentList);
+        assertSortSuccess("start time", currentList);
+        assertSortSuccess("end time", currentList);
+        assertSortSuccess("end time", currentList);
+
 
     }
 

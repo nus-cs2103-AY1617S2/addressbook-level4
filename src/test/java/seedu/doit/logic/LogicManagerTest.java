@@ -45,13 +45,13 @@ import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
 import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
-import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 import seedu.doit.storage.Storage;
@@ -381,7 +381,7 @@ public class LogicManagerTest {
         Collections.sort(expectedList, new TaskNameComparator());
         helper.addToModel(this.model, fourTasks);
 
-        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
 
@@ -416,7 +416,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(this.model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+        assertCommandSuccess("find n/key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 

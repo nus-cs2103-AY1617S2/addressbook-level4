@@ -20,12 +20,14 @@ import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.IncorrectCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.MarkCommand;
 import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.SetCommand;
 import seedu.doit.logic.commands.SortCommand;
 import seedu.doit.logic.commands.UndoCommand;
+import seedu.doit.logic.commands.UnmarkCommand;
 
 /**
  * Parses user input.

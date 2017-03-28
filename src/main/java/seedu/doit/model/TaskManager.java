@@ -1,3 +1,4 @@
+// @@author A0139399J
 package seedu.doit.model;
 
 import java.util.Collection;
@@ -124,6 +125,18 @@ public class TaskManager implements ReadOnlyItemManager {
     public void markTask(int taskIndex, ReadOnlyTask taskToDone)
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
         tasks.mark(taskIndex, taskToDone);
+    }
+
+
+    /**
+     * Marks an existing task in the to-do list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws DuplicateTaskException
+     */
+    public void unmarkTask(int taskIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
+        tasks.unmark(taskIndex, taskToDone);
     }
 
     /**

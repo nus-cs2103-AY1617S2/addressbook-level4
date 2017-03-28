@@ -11,7 +11,7 @@ import seedu.doit.logic.commands.SaveCommand;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class SaveCommandParser {
+public class SaveCommandParser implements CommandParser {
     private static final Logger logger = LogsCenter.getLogger(SaveCommandParser.class);
 
     /**
@@ -21,6 +21,7 @@ public class SaveCommandParser {
      * @throws IllegalValueException
      *             if not xml file type
      */
+    @Override
     public Command parse(String args) {
         assert args != null;
         String filePath = args.trim();

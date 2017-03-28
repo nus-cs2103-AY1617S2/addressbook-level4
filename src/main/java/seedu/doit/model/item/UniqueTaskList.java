@@ -1,3 +1,4 @@
+// @@author A0139399J
 package seedu.doit.model.item;
 
 import java.util.Comparator;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.exceptions.DuplicateDataException;
 import seedu.doit.commons.util.CollectionUtil;
+import seedu.doit.model.comparators.TaskNameComparator;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -78,6 +80,20 @@ public class UniqueTaskList implements Iterable<Task> {
         assert toMark != null;
         Task markedTask = new Task(toMark);
         markedTask.setIsDone(true);
+        updateTask(taskIndex, markedTask);
+        internalList.sort(taskComparator);
+    }
+
+    /**
+     * Marks the equivalent task in the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws DuplicateTaskException
+     */
+    public void unmark(int taskIndex, ReadOnlyTask toMark) throws TaskNotFoundException, DuplicateTaskException {
+        assert toMark != null;
+        Task markedTask = new Task(toMark);
+        markedTask.setIsDone(false);
         updateTask(taskIndex, markedTask);
         internalList.sort(taskComparator);
     }

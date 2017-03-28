@@ -1,5 +1,11 @@
-package seedu.doit.model.item;
+// @@author A0139399J
+package seedu.doit.model.comparators;
 
+import seedu.doit.model.item.ReadOnlyTask;
+
+/**
+ * Compares ReadOnlyTasks by their endTime
+ */
 public class EndTimeComparator implements TaskComparator {
 
     @Override
@@ -26,7 +32,7 @@ public class EndTimeComparator implements TaskComparator {
      * item is greater than current item return 0 is both items are equal return
      * 1 if other item is smaller than current item The ranking are as follows
      * from highest: 1) tasks 2) events 3) floating tasks If both have same
-     * rankings, then compare names
+     * rankings, then compare endTime or name if endTime == null
      */
     private int compareItems(ReadOnlyTask curr, ReadOnlyTask other) {
         Integer currType = curr.getItemType();

@@ -1,3 +1,4 @@
+//@@author A0139399J
 package seedu.doit.model;
 
 import java.util.Set;
@@ -10,6 +11,7 @@ import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
+import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -42,6 +44,12 @@ public interface Model {
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException;
 
     /**
+     * Marks the given task as uncompleted
+     */
+    void unmarkTask(int filteredTaskListIndex, ReadOnlyTask taskToDone)
+            throws TaskNotFoundException, DuplicateTaskException;
+
+    /**
      * Updates the task located at {@code filteredTaskListIndex} with
      * {@code editedTask}.
      *
@@ -61,9 +69,15 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     /**
-     * Updates the filter of the filtered task list to show all tasks
+     * Updates the filter of the filtered task list to show all undone tasks
      */
     void updateFilteredListToShowAll();
+
+    /**
+     * Updates the filter of the filtered task list to show all done tasks
+     */
+    void updateFilteredListToShowDone();
+
 
     /**
      * Updates the filter of the filtered task list to filter by the given
@@ -116,5 +130,8 @@ public interface Model {
 
     void commandSet(String oldCommand, String newCommand) throws NoSuchCommandException, CommandExistedException;
     // @@author
+
+
+
 
 }
