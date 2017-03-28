@@ -3,26 +3,22 @@
 By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
-0. [Introduction](#introduction)
-1. [Setting Up](#setting-up)
-   > 1.1 Prerequisites<br/>
-     1.2 Importing the project into Eclipse<br/>
-     1.3 Configuring Checkstyle<br/>
-     1.4 Troubleshooting project setup<br/>
-2. [Design](#design)
-   > 2.1 Architecture<br/>
-     2.2 UI component<br/>
-     2.3 Logic component<br/>
-     2.4 Model component<br/>
-     2.5 Storage component<br/>
-     2.6 Common classes<br/>
-3. [Implementation](#implementation)
-0. [Introduction](#introduction)
-1. [Setting Up](#setting-up)
-   > 1.1 Prerequisites<br/>
-     1.2 Importing the project into Eclipse<br/>
-4. [Testing](#testing)
-   > 4.1 Troubleshooting Tests
+0. [Introduction]#0-introduction)
+1. [Setting Up](#1-setting-up)
+   > 1.1 [Prerequisites](#11-prerequisites)<br/>
+     1.2 [Importing the project into Eclipse](#12-importing-project-burdens-into-eclipse)<br/>
+     1.3 [Configuring Checkstyle](#13-configuring-checkstyle)<br/>
+     1.4 [Troubleshooting project setup](#14-troubleshooting-project-setup)<br/>
+2. [Design](#2-design)
+   > 2.1 [Architecture](#21-architecture)<br/>
+     2.2 [UI component](#22-ui-component)<br/>
+     2.3 [Logic component](#23-logic-component)<br/>
+     2.4 [Model component](#24-model-component)<br/>
+     2.5 [Storage component](#25-storage-component)<br/>
+     2.6 [Common classes](#26-common-classes)<br/>
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+   > 4.1 [Troubleshooting Tests](#41-troubleshooting-tests)
 5. [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
@@ -43,7 +39,7 @@ This guide will aid current and future developers like you in understanding and 
 <br/>
 You are welcome to contribute in any way!
 
-## 1. Getting Started
+## 1. Setting Up
 
 ### 1.1 Prerequisites
 
