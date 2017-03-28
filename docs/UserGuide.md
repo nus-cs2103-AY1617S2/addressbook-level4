@@ -86,19 +86,22 @@ Format: `list e`
 Edits an event.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-Edits an deadline.<br>
+Edits a deadline.<br>
 Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
 
-Edits an task.<br>
+Edits a task.<br>
 Format: `edit INDEX [TASK] [t/TAG]`
 
+Adds a tag to a task.<br>
+Format: `edit [ta/TAG]`
 
 > * Edits the todo at the specified `INDEX`.
     The index refers to the index number shown in the last todo listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
->
+> * Edit with "t/" may remove the existing tags and replace them with the tags in command line.
+> * Edit with "s/" "e/" may update the task with default Datetime.
 
 Examples:
 
