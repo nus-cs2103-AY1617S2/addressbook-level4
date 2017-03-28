@@ -108,6 +108,7 @@ public class XmlAdaptedTask {
             description = null;
         } else {
             description = this.description;
+            System.out.println(description);
         }
 
         final UniqueTagList tags = new UniqueTagList(taskTags);
