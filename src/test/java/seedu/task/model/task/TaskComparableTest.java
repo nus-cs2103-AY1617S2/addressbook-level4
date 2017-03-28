@@ -27,20 +27,20 @@ public class TaskComparableTest {
             Description c = new Description(description + "c");
 
             int ab = a.compareTo(b);
-            assertEquals(ab,-1);
+            assertEquals(ab, -1);
 
             int ac = a.compareTo(c);
-            assertEquals(ac,-2);
+            assertEquals(ac, -2);
 
             int ba = b.compareTo(a);
             assertEquals(ba, 1);
 
             assertEquals(0, a.compareTo(a));
 
-            ArrayList<Description> actual = new ArrayList<Description>(Arrays.asList(b,c,a));
+            ArrayList<Description> actual = new ArrayList<Description>(Arrays.asList(b, c, a));
             Collections.sort(actual);
 
-            ArrayList<Description> expected = new ArrayList<Description>(Arrays.asList(a,b,c));
+            ArrayList<Description> expected = new ArrayList<Description>(Arrays.asList(a, b, c));
 
             assertEquals(actual, expected);
 
@@ -58,20 +58,20 @@ public class TaskComparableTest {
             Priority c = new Priority("3");
 
             int ab = a.compareTo(b);
-            assertEquals(ab,-1);
+            assertEquals(ab, -1);
 
             int ac = a.compareTo(c);
-            assertEquals(ac,-2);
+            assertEquals(ac, -2);
 
             int ba = b.compareTo(a);
             assertEquals(ba, 1);
 
             assertEquals(0, a.compareTo(a));
 
-            ArrayList<Priority> actual = new ArrayList<Priority>(Arrays.asList(b,c,a));
+            ArrayList<Priority> actual = new ArrayList<Priority>(Arrays.asList(b, c, a));
             Collections.sort(actual);
 
-            ArrayList<Priority> expected = new ArrayList<Priority>(Arrays.asList(a,b,c));
+            ArrayList<Priority> expected = new ArrayList<Priority>(Arrays.asList(a, b, c));
 
             assertEquals(actual, expected);
 
