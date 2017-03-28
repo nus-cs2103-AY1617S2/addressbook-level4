@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Region> {
         EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(undoCommand);
         FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
     }
-    
+
     private void configureHistoryNavigationKeyPresses() {
         String[] keyNames = new String[] { "up", "down"};
         Arrays.stream(keyNames).forEach(keyName -> {
