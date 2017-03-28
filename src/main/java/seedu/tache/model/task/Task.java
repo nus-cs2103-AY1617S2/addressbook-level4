@@ -1,6 +1,7 @@
 //@@author A0139961U
 package seedu.tache.model.task;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -176,5 +177,24 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+
+    //@@author A0139961U
+    /**
+     * Returns true if this task is within the given date
+     * (StartDate is before @code date and EndDate is after @code date)
+     */
+    public boolean isWithinDate(Date date) {
+        if (this.startDateTime.isPresent() && this.endDateTime.isPresent()) {
+            if (this.startDateTime.get().getDate().before(date) &&
+                    this.endDateTime.get().getDate().after(date)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    //@@author
 
 }
