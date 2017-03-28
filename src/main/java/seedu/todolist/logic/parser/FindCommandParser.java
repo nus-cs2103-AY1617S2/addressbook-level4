@@ -29,7 +29,7 @@ import seedu.todolist.model.tag.UniqueTagList;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser {
-    //@@author A0163720M, A0163786N
+    //@@author A0163720M
     // Format used to parse Date with zero time
     private static final String NO_TIME_FORMAT = "dd/MM/yyyy";
     /**
@@ -68,6 +68,7 @@ public class FindCommandParser {
             if (startTime.isPresent()) {
                 startTimeSet = parseDateParameter(startTime.get());
             }
+            //@@author A0163786N
             if (endTime.isPresent()) {
                 endTimeSet = parseDateParameter(endTime.get());
             }

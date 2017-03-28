@@ -84,7 +84,7 @@ public class StorageManager extends ComponentManager implements Storage {
         todoListStorage.saveTodoList(todoList, filePath);
     }
 
-    //@@author A0163720M, A0163786N
+    //@@author A0163720M
     public void updateSaveFilePath(String saveFilePath) throws DataConversionException, IOException {
         logger.fine("Attempting to update save file: " + saveFilePath);
 
@@ -92,9 +92,9 @@ public class StorageManager extends ComponentManager implements Storage {
         // handle on that specific one
         Config config = ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
         config.setTodoListFilePath(saveFilePath);
-
         // Update config file in case it was missing to begin with or there
         // are new/unused fields
+        //@@author A0163786N
         ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
         indicateSaveFilePathChanged(saveFilePath);
     }

@@ -138,14 +138,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTodos.setPredicate(null);
     }
-
+    //@@author A0163786N
     @Override
     public void updateFilteredTodoList(Set<String> keywords, Date startTime,
         Date endTime, Date completeTime, UniqueTagList tags) {
         updateFilteredTodoList(new PredicateExpression(
                 new NameQualifier(keywords, startTime, endTime, completeTime, tags)));
     }
-
+    //@@author
     private void updateFilteredTodoList(Expression expression) {
         filteredTodos.setPredicate(expression::satisfies);
     }
@@ -205,7 +205,7 @@ public class ModelManager extends ComponentManager implements Model {
                 this.tagKeyWords.add(tag.tagName);
             }
         }
-
+        //@@author A0163786N
         @Override
         public boolean run(ReadOnlyTodo todo) {
             if (!nameKeyWords.isEmpty()) {
@@ -246,7 +246,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
             return true;
         }
-
+        //@@author A0163720M
         /**
          * Returns the tags or the name of the todo depending on which field is present
          */
