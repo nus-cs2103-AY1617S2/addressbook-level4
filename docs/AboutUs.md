@@ -28,7 +28,7 @@ Component: Storage
 
 -----
 
-#### [Tan Wei] [@tanwei0319](https://github.com/tanwei0319)
+#### [Tan Wei](https://github.com/tanwei0319)
 <img src="images/tanwei0319.jpg" width="150"><br>
 
 * Components in charge of: [UI](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#32-ui-component)
