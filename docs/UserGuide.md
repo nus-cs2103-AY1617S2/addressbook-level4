@@ -19,8 +19,8 @@ By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
      3.11. [Select tasks](#311-selecting-a-task--select)<br/>
      3.12. [Reset](#312-clearing-all-tasks--reset)<br/>
      3.13. [Exit](#313-exiting-the-program--exit)<br/>
-     3.14. [Import](#314-importing-files-into-the-program)<br/>
-     3.15. [Export](#315-exporting-files-from-the-program)<br/>
+     3.14. [Import](#314-importing-files-into-the-program--import)<br/>
+     3.15. [Export](#315-exporting-files-from-the-program--export)<br/>
      3.16. [Save](#316-saving-the-data)<br/>
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
