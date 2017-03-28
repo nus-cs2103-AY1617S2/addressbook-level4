@@ -104,7 +104,6 @@ public class TaskCardHandle extends GuiHandle {
             isStartDateSame = true;
             isEndDateSame = true;
         }
-        System.out.println(getFullName() + getStatus() + " " + task.getName().fullName + task.getStatus().value);
         return getFullName().equals(task.getName().fullName)
                 && getComment().equals(task.getComment().value)
                 && TestUtil.isSameStringList(getTags(), getTags(task.getTags()))

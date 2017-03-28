@@ -25,7 +25,7 @@ public class DoneCommandTest extends TaskListGuiTest {
 
         TestTask doneTask = new FloatingTaskBuilder().
                 withName("Buy groceries").
-                withComment("go NTUC").
+                withComment("NIL").
                 withPriority("low").
                 withStatus(true).
                 build();
