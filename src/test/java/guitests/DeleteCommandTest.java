@@ -3,6 +3,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskboss.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import seedu.taskboss.testutil.TestTask;
@@ -56,9 +58,11 @@ public class DeleteCommandTest extends TaskBossGuiTest {
 
         //confirm the list now contains all previous tasks except the deleted task
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
-
+        //@@author A0138961W
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        ArrayList<TestTask> deletedTasks = new ArrayList<TestTask>();
+        deletedTasks.add(taskToDelete);
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTasks));
     }
 
 }

@@ -2,6 +2,7 @@ package seedu.taskboss.model;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -87,14 +88,19 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
     }
-
+    //@@author A0138961W
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException, IllegalValueException {
+    public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException,
+            IllegalValueException {
+
         taskbossHistory.push(new TaskBoss(this.taskBoss));
-        taskBoss.removeTask(target);
+
+        for (ReadOnlyTask target: targets) {
+            taskBoss.removeTask(target);
+        }
         indicateTaskBossChanged();
     }
-
+    //@@author
     @Override
     public synchronized void addTask(Task task) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));

@@ -1,6 +1,7 @@
 package seedu.taskboss.model;
 
 import java.util.EmptyStackException;
+import java.util.List;
 import java.util.Set;
 
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
@@ -25,7 +26,8 @@ public interface Model {
     ReadOnlyTaskBoss getTaskBoss();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException, IllegalValueException;
+
+    void deleteTask(List<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException, IllegalValueException;
 
     /** Adds the given task
      * @throws IllegalValueException */
