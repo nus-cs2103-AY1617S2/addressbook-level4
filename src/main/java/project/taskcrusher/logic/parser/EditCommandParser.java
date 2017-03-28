@@ -14,20 +14,22 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
-import project.taskcrusher.logic.commands.AddCommand;
 import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.EditCommand;
 import project.taskcrusher.logic.commands.EditCommand.EditTaskDescriptor;
 import project.taskcrusher.logic.commands.EditEventCommand;
 import project.taskcrusher.logic.commands.EditEventCommand.EditEventDescriptor;
 import project.taskcrusher.logic.commands.IncorrectCommand;
+import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.tag.UniqueTagList;
+import project.taskcrusher.model.task.Task;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
     private static final Pattern EDIT_COMMAND_FORMAT = Pattern.compile("(?<flag>[te])(?<name>.+)");
+
     /**
      * Parses the given {@code String} of arguments in the context of the
      * EditCommand and returns an EditCommand object for execution.
@@ -40,7 +42,7 @@ public class EditCommandParser {
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 3);
 
         try {
-            if (preambleFields.get(0).get().equals(AddCommand.TASK_FLAG)) {
+            if (preambleFields.get(0).get().equals(Task.TASK_FLAG)) {
 
                 Optional<Integer> index = preambleFields.get(1).flatMap(ParserUtil::parseIndex);
                 if (!index.isPresent()) {
@@ -67,7 +69,7 @@ public class EditCommandParser {
 
                 return new EditCommand(index.get(), editTaskDescriptor);
 
-            } else if (preambleFields.get(0).get().equals(AddCommand.EVENT_FLAG)) {
+            } else if (preambleFields.get(0).get().equals(Event.EVENT_FLAG)) {
 
                 Optional<Integer> index = preambleFields.get(1).flatMap(ParserUtil::parseIndex);
                 if (!index.isPresent()) {

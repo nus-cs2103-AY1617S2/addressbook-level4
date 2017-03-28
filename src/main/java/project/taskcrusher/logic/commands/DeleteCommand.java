@@ -3,9 +3,11 @@ package project.taskcrusher.logic.commands;
 import project.taskcrusher.commons.core.Messages;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
+import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
 import project.taskcrusher.model.task.ReadOnlyTask;
+import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -35,10 +37,9 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        // TODO define these flags in a central place sometime perhaps
-        assert (this.flag.equals(AddCommand.EVENT_FLAG) || this.flag.equals(AddCommand.TASK_FLAG));
+        assert (this.flag.equals(Event.EVENT_FLAG) || this.flag.equals(Task.TASK_FLAG));
 
-        if (this.flag.equals(AddCommand.TASK_FLAG)) {
+        if (this.flag.equals(Task.TASK_FLAG)) {
             UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
             if (lastShownList.size() < targetIndex) {
@@ -49,8 +50,8 @@ public class DeleteCommand extends Command {
 
             try {
                 model.deleteTask(taskToDelete);
-            } catch (TaskNotFoundException pnfe) {
-                assert false : "The target person cannot be missing";
+            } catch (TaskNotFoundException tnfe) {
+                assert false : "The target task cannot be missing";
             }
 
             return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
@@ -65,8 +66,8 @@ public class DeleteCommand extends Command {
 
             try {
                 model.deleteEvent(eventToDelete);
-            } catch (EventNotFoundException pnfe) {
-                assert false : "The target person cannot be missing";
+            } catch (EventNotFoundException enfe) {
+                assert false : "The target event cannot be missing";
             }
 
             return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, eventToDelete));

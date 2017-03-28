@@ -1,12 +1,10 @@
 package project.taskcrusher.logic.commands;
 
-import java.util.Date;
 import java.util.List;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.logic.parser.ParserUtil;
 import project.taskcrusher.model.event.Timeslot;
-import project.taskcrusher.model.shared.DateUtilApache;
 import project.taskcrusher.model.task.Deadline;
 
 /**
@@ -25,7 +23,7 @@ public class ListCommand extends Command {
             + "list d/DEADLINE: lists all tasks whose deadline is set before DEADLINE"
             + "list d/TIMESLOT: lists all events whose timeslot overlaps with TIMESLOT";
 
-    // TODO fix this message
+    // TODO fix this message eventually
     public static final String MESSAGE_SUCCESS = "Listed all relevant events/tasks";
 
     private Timeslot dateRange;
@@ -38,7 +36,6 @@ public class ListCommand extends Command {
         } else {
             this.dateRange = parseDateRange(date);
         }
-
         this.showOverdueOnly = showOverdueOnly;
         this.showCompleteOnly = showCompleteOnly;
     }
@@ -52,20 +49,11 @@ public class ListCommand extends Command {
             model.updateFilteredTaskListToShowAll();
             model.updateFilteredEventListToShowAll();
         } else {
-            //model.updateFilteredTaskList(until);
+            // model.updateFilteredTaskList(until);
             model.updateFilteredEventList(dateRange);
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
-    }
-
-    /**
-     *
-     * @return
-     * @throws IllegalValueException
-     */
-    private Timeslot generateOverdueDateRange() throws IllegalValueException {
-        return new Timeslot(DateUtilApache.dateAsString(new Date()));
     }
 
     /**

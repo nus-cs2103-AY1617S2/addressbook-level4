@@ -14,7 +14,9 @@ public class UserToDo implements ReadOnlyUserToDo {
     protected boolean isComplete;
 
     public UserToDo (Name name, Priority priority, Description description,  UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, description, priority, tags);
+        //assert !CollectionUtil.isAnyNull(name, description, priority, tags);
+        //priority is null in event constructor so removed for now
+        assert !CollectionUtil.isAnyNull(name, description, tags);
         this.name = name;
         this.priority = priority;
         this.description = description;

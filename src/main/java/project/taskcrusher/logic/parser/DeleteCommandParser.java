@@ -7,6 +7,8 @@ import java.util.Optional;
 import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.DeleteCommand;
 import project.taskcrusher.logic.commands.IncorrectCommand;
+import project.taskcrusher.model.event.Event;
+import project.taskcrusher.model.task.Task;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -23,9 +25,7 @@ public class DeleteCommandParser {
 
         if (preamble.length != 2) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-
-            // TODO also place this somewhere central perhaps
-        } else if (!preamble[0].matches(ListCommandParser.FLAG_TASK_OR_EVENT_VALIDATION_REGEX)) {
+        } else if (!preamble[0].matches("[" + Task.TASK_FLAG + Event.EVENT_FLAG + "]")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } else if (!preamble[1].matches("\\d+")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

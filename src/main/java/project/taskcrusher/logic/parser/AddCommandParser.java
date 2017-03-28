@@ -16,11 +16,13 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.logic.commands.AddCommand;
 import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.IncorrectCommand;
+import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.Location;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.task.Deadline;
+import project.taskcrusher.model.task.Task;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -61,10 +63,10 @@ public class AddCommandParser {
 
         try {
             switch (flag) {
-            case AddCommand.EVENT_FLAG:
+            case Event.EVENT_FLAG:
                 List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
                 return new AddCommand(name, timeslots, location, description, tags);
-            case AddCommand.TASK_FLAG:
+            case Task.TASK_FLAG:
                 return new AddCommand(name, date, priority, description, tags);
             default:
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

@@ -26,13 +26,11 @@ import project.taskcrusher.model.task.UniqueTaskList;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    public static final String TASK_FLAG = "t";
-    public static final String EVENT_FLAG = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task or an event to the active list.\n "
-                                    + "For events: " + COMMAND_WORD + " " + EVENT_FLAG
+                                    + "For events: " + COMMAND_WORD + " " + Event.EVENT_FLAG
                                     + " NAME d/START_DATE to END_DATE [l/LOCATION] [//DESCRIPTION] [t/TAG]\n"
-                                    + " For tasks: " + COMMAND_WORD + " " + TASK_FLAG
+                                    + " For tasks: " + COMMAND_WORD + " " + Task.TASK_FLAG
                                     + " NAME [d/DEADLINE] [p/PRIORITY] [//DESCRIPTION] [t/TAG]";
 
     public static final String MESSAGE_TASK_SUCCESS = "New task added: %1$s";

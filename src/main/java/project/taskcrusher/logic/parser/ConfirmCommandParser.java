@@ -8,10 +8,11 @@ import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.ConfirmCommand;
 import project.taskcrusher.logic.commands.IncorrectCommand;
 import project.taskcrusher.logic.commands.ListCommand;
+import project.taskcrusher.model.event.Event;
 
 public class ConfirmCommandParser {
 
-    public static final String FLAG_EVENT_VALIDATION_REGEX = "[" + ListCommand.EVENT_FLAG + "]";
+    public static final String FLAG_EVENT_VALIDATION_REGEX = "[" + Event.EVENT_FLAG + "]";
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -23,8 +24,6 @@ public class ConfirmCommandParser {
 
         if (preamble.length != 3) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-
-            // TODO also place this somewhere central perhaps
         } else if (!preamble[0].matches(ConfirmCommandParser.FLAG_EVENT_VALIDATION_REGEX)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         } else if (!preamble[1].matches("\\d+") && !preamble[2].matches("\\d+")) {
