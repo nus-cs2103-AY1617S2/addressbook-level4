@@ -38,32 +38,40 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     public static final Version VERSION = new Version(1, 0, 0, true);
+    private static MainApp instance;
 
     protected Ui ui;
     protected Logic logic;
-    protected static Storage storage;
-    protected static Model model;
-    protected static Config config;
+    protected  Storage storage;
+    protected  Model model;
+    protected  Config config;
     protected UserPrefs userPrefs;
 
-
+    public static MainApp getInstance() {
+        if(instance == null) {
+            instance = new MainApp();
+        }
+        return instance;
+    }
+    
     @Override
     public void init() throws Exception {
+        MainApp instance = MainApp.getInstance();
         logger.info("=============================[ Initializing ToDoList ]===========================");
         super.init();
 
-        config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getToDoListFilePath(), config.getUserPrefsFilePath());
+        instance.config = initConfig(getApplicationParameter("config"));
+        instance.storage = new StorageManager(instance.config.getToDoListFilePath(), instance.config.getUserPrefsFilePath());
 
-        userPrefs = initPrefs(config);
+        instance.userPrefs = initPrefs(instance.config);
 
-        initLogging(config);
+        initLogging(instance.config);
 
-        model = initModelManager(storage, userPrefs);
+        instance.model = initModelManager(instance.storage, instance.userPrefs);
 
-        logic = new LogicManager(model, storage);
+        instance.logic = new LogicManager(instance.model, instance.storage);
 
-        ui = new UiManager(logic, config, userPrefs);
+        instance.ui = new UiManager(instance.logic, instance.config, instance.userPrefs);
 
         initEventsCenter();
     }
@@ -73,15 +81,15 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    public static Config getConfig() {
+    public  Config getConfig() {
         return config;
     }
 
-    public static Storage getStorage() {
+    public  Storage getStorage() {
         return storage;
     }
 
-    public static Model getModel() {
+    public  Model getModel() {
         return model;
     }
 
@@ -89,7 +97,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyToDoList> toDoOptional;
         ReadOnlyToDoList initialData;
         try {
-            toDoOptional = storage.readToDoList();
+            toDoOptional = MainApp.getInstance().storage.readToDoList();
             if (!toDoOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ToDoList");
             }
@@ -141,13 +149,13 @@ public class MainApp extends Application {
     }
 
     protected UserPrefs initPrefs(Config config) {
-        assert config != null;
+        assert MainApp.getInstance().config != null;
 
-        String prefsFilePath = config.getUserPrefsFilePath();
+        String prefsFilePath = MainApp.getInstance().config.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
         UserPrefs initializedPrefs;
         try {
-            Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
+            Optional<UserPrefs> prefsOptional = MainApp.getInstance().storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
@@ -160,7 +168,7 @@ public class MainApp extends Application {
 
         //Update prefs file in case it was missing to begin with or there are new/unused fields
         try {
-            storage.saveUserPrefs(initializedPrefs);
+            MainApp.getInstance().storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
@@ -175,15 +183,15 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting ToDoList " + MainApp.VERSION);
-        ui.start(primaryStage);
+        MainApp.getInstance().ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping ToDoList ] =============================");
-        ui.stop();
+        MainApp.getInstance().ui.stop();
         try {
-            storage.saveUserPrefs(userPrefs);
+            MainApp.getInstance().storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
@@ -198,6 +206,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
+        MainApp.getInstance();
         launch(args);
     }
 }

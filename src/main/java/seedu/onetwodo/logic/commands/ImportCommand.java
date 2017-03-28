@@ -51,9 +51,9 @@ public class ImportCommand extends Command {
                         + String.format(MESSAGE_IMPORT_FAILURE, filePath).toString();
                 throw new CommandException(result);
             } else {
-                Config config = MainApp.getConfig();
-                Model model = MainApp.getModel();
-                StorageManager storageManager = (StorageManager) MainApp.getStorage();
+                Config config = MainApp.getInstance().getConfig();
+                Model model = MainApp.getInstance().getModel();
+                StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
 
                 config.setToDoListFilePath(filePath);
                 ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);

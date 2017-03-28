@@ -53,8 +53,8 @@ public class ExportCommand extends Command {
                 throw new CommandException(result);
             } else {
 
-                Config config = MainApp.getConfig();
-                StorageManager storageManager = (StorageManager) MainApp.getStorage();
+                Config config = MainApp.getInstance().getConfig();
+                StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
                 ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
 
                 // set new file path

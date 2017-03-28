@@ -55,8 +55,8 @@ public class SaveToCommand extends Command {
                 throw new CommandException(result);
             } else {
 
-                Config config = MainApp.getConfig();
-                StorageManager storageManager = (StorageManager) MainApp.getStorage();
+                Config config = MainApp.getInstance().getConfig();
+                StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
                 ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
 
                 // set to new path
@@ -72,7 +72,6 @@ public class SaveToCommand extends Command {
                 toDoListStorage.saveToDoList(toDoList);
 
                 MainWindow.getStatusBarFooter().setSaveLocation(updatedFilePath);
-                //EventsCenter.getInstance().post(new ToDoListChangedEvent(toDoList));
             }
         } catch (IOException ioe) {
             return new CommandResult(MESSAGE_SAVETO_FAILURE + StringUtil.getDetails(ioe));
