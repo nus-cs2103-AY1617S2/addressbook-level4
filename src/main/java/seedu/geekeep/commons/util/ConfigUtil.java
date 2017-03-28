@@ -3,8 +3,8 @@ package seedu.geekeep.commons.util;
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.exceptions.DataConversionException;
+import seedu.geekeep.model.Config;
 
 /**
  * A class for accessing the Config File.

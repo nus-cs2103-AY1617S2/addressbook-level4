@@ -10,11 +10,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.core.GuiSettings;
 import seedu.geekeep.commons.events.ui.ExitAppRequestEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
 import seedu.geekeep.logic.Logic;
+import seedu.geekeep.model.Config;
 import seedu.geekeep.model.UserPrefs;
 
 /**

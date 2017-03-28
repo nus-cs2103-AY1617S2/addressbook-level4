@@ -1,4 +1,4 @@
-package seedu.geekeep.commons.core;
+package seedu.geekeep.model;
 
 import java.util.Objects;
 import java.util.logging.Level;
