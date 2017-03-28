@@ -2,6 +2,7 @@ package seedu.taskboss.model;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -87,9 +88,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException {
+        for (ReadOnlyTask target: targets) {
+            taskBoss.removeTask(target);
+        }
         taskbossHistory.push(new TaskBoss(this.taskBoss));
-        taskBoss.removeTask(target);
         indicateTaskBossChanged();
     }
 
