@@ -3,6 +3,7 @@ package seedu.task.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -34,9 +35,16 @@ public class TaskCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private FlowPane tags;
+    @FXML
+    private TitledPane plane;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        plane.setText(displayedIndex + ". " + "\n" + task.getName().fullName);
+        //plane.setCollapsible(true);
+      //prohibit animating
+     // plane.setAnimated(false);
+        plane.setExpanded(false);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().toString());
@@ -63,5 +71,9 @@ public class TaskCard extends UiPart<Region> {
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+    
+    public  void setExpend(boolean value ){
+        plane.setExpanded(value);
     }
 }
