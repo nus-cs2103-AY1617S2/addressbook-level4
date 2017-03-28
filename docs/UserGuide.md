@@ -8,17 +8,19 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)
-> 3.1. [Viewing Help](#31-viewing-help--help)<br>
-> 3.2. [Adding a task](#32-adding-a-task--add)<br>
+> 3.1. [Viewing Help](#31-viewing-help-help)<br>
+> 3.2. [Adding a task](#32-adding-a-task-add)<br>
 > 3.3. [Listing the tasks](#33-listing-the-tasks-list)<br>
 > 3.4. [Editing a task](#34-editing-a-task-edit)<br>
 > 3.5. [Deleting a task](#35-deleting-a-task-delete)<br>
 > 3.6. [Completing a task](#36-completing-a-task-complete)<br>
 > 3.7. [Uncompleting a task](#37-uncompleting-a-task-uncomplete)<br>
 > 3.8. [Searching for tasks](#38-searching-for-tasks-find)<br>
-> 3.9. [Undo-ing previous action](#39-undo-ing-previous-action--undo)<br>
-> 3.10. [Redo-ing previous action](#310-redo-ing-previous-action--redo)<br>
-> 3.11. [Saving the task manager](#312-saving-the-task-manager)<br>
+> 3.9. [Undo-ing previous action](#39-undo-ing-previous-action-undo)<br>
+> 3.10. [Redo-ing previous action](#310-redo-ing-previous-action-redo)<br>
+> 3.11. [Get previous command](#311-get-previous-command-)<br>
+> 3.12. [Get next command](#312-get-next-command-)<br>
+> 3.13. [Saving the task manager](#313-saving-the-task-manager)<br>
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -50,11 +52,11 @@ up doTASK, as well as guide you on how to use it to make you more efficient in p
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-### 3.1. Viewing help : `help`
+### 3.1. Viewing help: `help`
 Allows you to view the list of commands available in doTASK via the user guide. <br>
 Format: `help`
 
-### 3.2. Adding a task : `add`
+### 3.2. Adding a task: `add`
 There are a total of 5 parameters : `TASK_NAME` , `PRIORITY_LEVEL` , `DEADLINE` , `INFORMATION`, `TAGS`.<br>
 > `taskname` is mandatory. The rest of the parameters are optional.<br>
 > User can add a task with any of the optional parameters, mentioned from [3.2.2](#322-adds-a-task-with-priority-level-) - [3.2.5](#325-adds-a-task-with-tags).
@@ -193,20 +195,32 @@ Format: `find KEYWORD`
 Examples:
 * `find potato`
 
-### 3.9. Undo-ing previous action : `undo`
+### 3.9. Undo-ing previous action: `undo`
 
 Reverses previous action that you've made.<br>
-Format : `undo`
+Format: `undo`
 > The command last executed will be reversed.
 > Only 1 command will be reversed at a time.
 
-### 3.10. Redo-ing previous action : `redo`
+### 3.10. Redo-ing previous action: `redo`
 
 Reverses previous `undo` that you've made.<br>
-Format : `redo`
+Format: `redo`
 > Any previous `undo` will be reversed, in successive order.
 
-### 3.11. Saving the task manager
+### 3.11. Get previous command: <kbd>↑</kbd>
+
+Retrieve the previous command entered, and replaces your text field with the previous command.<br>
+Format: Up arrow key
+> You can retrieve earlier commands from your use session by pressing <kbd>↑</kbd> again and again.
+
+### 3.12. Get next command: <kbd>↓</kbd>
+
+Retrieve the next command entered, and replaces your text field with the next command.<br>
+Format: Down arrow key
+> You can retrieve later commands from your use session by pressing <kbd>↓</kbd> again and again.
+
+### 3.13. Saving the task manager
 
 Upon creation of tasks, the tasks will be automatically saved in the folder where the program is stored in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
@@ -215,9 +229,6 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
-
-**Q**: How do I clear all the tasks under a certain tag?<br>
-**A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so. Click to confirm that you want to clear the tasks with that tag.
 
 **Q**: Will I get reminded if the deadlines of tasks are nearing?<br>
 **A**: For tasks that are due in 24 hours, there will be a notification in the system tray reminding you of the task.
@@ -264,3 +275,7 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 * **Undo previous action** : `undo`<br>
 
 * **Redo previous action** : `redo`<br>
+
+* **Get previous command** : <kbd>↑</kbd><br>
+
+* **Get next command** : <kbd>↓</kbd><br>
