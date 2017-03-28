@@ -60,14 +60,15 @@ public class LogicManagerTest {
 		Event adam() throws Exception {
 			Title name = new Title("sleep");
 			Location location = new Location("bed");
-			Schedule startTime = new Schedule("12:00am");
-			Schedule endTime = new Schedule("8:00am");
+			Schedule startTime = new Schedule("11:59PM 08/04/2017");
+			Schedule endTime = new Schedule("11:59PM 08/04/2017");
+			Schedule deadline = new Schedule("");
 			Description description = new Description("oh no can't sleep i'm tired");
 			Tag tag1 = new Tag("tag1");
 			Tag tag2 = new Tag("longertag2");
 			UniqueTagList tags = new UniqueTagList(tag1, tag2);
 			IsDone isDone = new IsDone("Yes");
-			return new Event(name, location, startTime, endTime, description, tags, isDone);
+			return new Event(name, location, startTime, endTime, deadline, description, tags, isDone);
 		}
 
 		/**
@@ -157,7 +158,7 @@ public class LogicManagerTest {
 		 */
 		Event generatePerson(int seed) throws Exception {
 			return new Event(new Title("person" + seed), new Location("bed" + seed),
-					new Schedule("12:00am"), new Schedule("8:00am"),
+					new Schedule("11:59PM 08/04/2017"), new Schedule("11:59PM 08/04/2017"),new Schedule(""),
 					new Description("oh no can't sleep i'm tired" + seed),
 					new UniqueTagList(new Tag("tag" + Math.abs(seed))),new IsDone("Yes"));
 		}
@@ -182,8 +183,8 @@ public class LogicManagerTest {
 		 * some dummy values.
 		 */
 		Event generatePersonWithName(String name) throws Exception {
-			return new Event(new Title(name), new Location("home"), new Schedule("7:00am"),
-					new Schedule("9:00am"), new Description("House of 1"), new UniqueTagList(new Tag("tag")), new IsDone("No"));
+			return new Event(new Title(name), new Location("home"), new Schedule(""),
+					new Schedule(""), new Schedule("11:59PM 08/04/2017"), new Description("House of 1"), new UniqueTagList(new Tag("tag")), new IsDone("No"));
 		}
 	}
 
