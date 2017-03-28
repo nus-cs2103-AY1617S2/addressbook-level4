@@ -25,8 +25,10 @@ public class TaskComparableTest {
             Description a = new Description(description + "a");
             Description b = new Description(description + "b");
             Description c = new Description(description + "c");
+
             int ab = a.compareTo(b);
             assertEquals(ab,-1);
+
             int ac = a.compareTo(c);
             assertEquals(ac,-2);
 
@@ -41,6 +43,7 @@ public class TaskComparableTest {
             ArrayList<Description> expected = new ArrayList<Description>(Arrays.asList(a,b,c));
 
             assertEquals(actual, expected);
+
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -48,7 +51,38 @@ public class TaskComparableTest {
     }
 
     @Test
-    public void sortByComplete() {
+    public void sortPriorities() {
+        try {
+            Priority a = new Priority("1");
+            Priority b = new Priority("2");
+            Priority c = new Priority("3");
+
+            int ab = a.compareTo(b);
+            assertEquals(ab,-1);
+
+            int ac = a.compareTo(c);
+            assertEquals(ac,-2);
+
+            int ba = b.compareTo(a);
+            assertEquals(ba, 1);
+
+            assertEquals(0, a.compareTo(a));
+
+            ArrayList<Priority> actual = new ArrayList<Priority>(Arrays.asList(b,c,a));
+            Collections.sort(actual);
+
+            ArrayList<Priority> expected = new ArrayList<Priority>(Arrays.asList(a,b,c));
+
+            assertEquals(actual, expected);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void sortTasksByCompleteness() {
 
         try {
             Task t1 = new Task(new Description(description + "a"), new Priority(priority),
