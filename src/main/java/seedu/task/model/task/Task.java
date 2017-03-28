@@ -134,7 +134,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public String toString() {
         return getAsText();
     }
-
+    //@@author A0163559U
     /**
      * Results in Tasks sorted by completed state, followed by priority, endTiming, startTiming
      * and lastly by description.
@@ -180,5 +180,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
 
     };
+    //@@author
 
 }
