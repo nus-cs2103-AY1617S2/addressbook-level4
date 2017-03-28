@@ -85,11 +85,8 @@ public class Parser {
 	case SortCommand.COMMAND_WORD:
 		return new SortCommandParser().parse(arguments);
 		
-<<<<<<< HEAD
-=======
 	case PathCommand.COMMAND_WORD:
 		return new PathCommandParser().parse(arguments);
->>>>>>> 8c6d8a8afdc0ba69202e3f9b8a6a0d1535a0f56a
 
 	default:
 	    return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
