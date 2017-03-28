@@ -8,6 +8,7 @@ import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.commons.util.CollectionUtil;
 import seedu.opus.model.tag.UniqueTagList;
 
+//@@author A0126345J
 /**
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.

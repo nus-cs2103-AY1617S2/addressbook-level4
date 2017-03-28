@@ -139,6 +139,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean satisfies(ReadOnlyTask task);
     }
 
+    //@@author A0126345J
     private class PredicateExpression implements Expression {
 
         private final List<Qualifier> qualifiers;
