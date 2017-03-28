@@ -1,6 +1,7 @@
-package seedu.onetwodo.model;
+package seedu.onetwodo.model.history;
 
 import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
+import seedu.onetwodo.model.ToDoList;
 
 //@@author A0135739W
 /**

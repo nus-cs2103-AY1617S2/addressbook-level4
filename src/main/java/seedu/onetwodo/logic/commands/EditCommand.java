@@ -75,8 +75,8 @@ public class EditCommand extends Command {
         try {
             // Not using model.updateTask as it does not trigger observers
             // model.updateTask(filteredTaskListIndex, editedTask);
-            model.deleteTask(taskToEdit);
-            model.addTask(internalIdx, editedTask);
+            model.deleteTaskForEdit(taskToEdit);
+            model.addTaskForEdit(internalIdx, editedTask);
             jumpToNewTask(editedTask);
             EventsCenter.getInstance().post(new DeselectCardsEvent());
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
@@ -90,7 +90,7 @@ public class EditCommand extends Command {
 
     private void reverseAdd(ReadOnlyTask taskToEdit, int internalIdx) throws CommandException {
         try {
-            model.addTask(internalIdx, (Task) taskToEdit);
+            model.addTaskForEdit(internalIdx, (Task) taskToEdit);
         } catch (UniqueTaskList.DuplicateTaskException dpe2) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

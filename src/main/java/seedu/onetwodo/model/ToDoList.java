@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
-import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.ReadOnlyTask;
@@ -153,7 +152,7 @@ public class ToDoList implements ReadOnlyToDoList {
         }
     }
 
-    public void doneTask(ReadOnlyTask taskToComplete) throws IllegalValueException {
+    public void doneTask(ReadOnlyTask taskToComplete) {
         tasks.done(taskToComplete);
     }
 

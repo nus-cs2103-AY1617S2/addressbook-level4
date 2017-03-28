@@ -11,6 +11,7 @@ import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
 import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -24,6 +25,7 @@ public interface Model {
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTaskForEdit(ReadOnlyTask target) throws TaskNotFoundException;
 
     /** Mark the given tasks completed.
      * @throws IllegalValueException */
@@ -31,7 +33,7 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    void addTask(int internalIdx, Task task) throws UniqueTaskList.DuplicateTaskException;
+    void addTaskForEdit(int internalIdx, Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -81,4 +83,5 @@ public interface Model {
     void redo() throws EmptyHistoryException;
 
     void clear();
+
 }
