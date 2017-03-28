@@ -8,6 +8,7 @@ import seedu.tache.commons.core.ComponentManager;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
+import seedu.tache.commons.events.ui.FilteredTaskListUpdatedEvent;
 import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
@@ -29,7 +30,6 @@ public class ModelManager extends ComponentManager implements Model {
     public static final String UNCOMPLETED_TASK_LIST_TYPE = "Uncompleted Tasks";
     public static final String TIMED_TASK_LIST_TYPE = "Timed Tasks";
     public static final String FLOATING_TASK_LIST_TYPE = "Floating Tasks";
-    //@@author
     //@@author A0139961U
     public static final String DUE_TODAY_TASK_LIST_TYPE = "Due Today Tasks";
     public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Due This Week Tasks";
@@ -85,7 +85,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
         indicateTaskManagerChanged();
     }
     //@@author
@@ -94,7 +93,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(ReadOnlyTask taskToUpdate, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
         taskManager.updateTask(taskToUpdate, editedTask);
         indicateTaskManagerChanged();
     }
@@ -106,11 +104,14 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    //@@author A0142255M
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
         updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
     }
+    //@@author
 
     //@@author A0139925U
     @Override
@@ -138,7 +139,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TimedQualifier(false)));
         updateFilteredTaskListType(FLOATING_TASK_LIST_TYPE);
     }
-    //@@author
 
     //@@author A0139961U
     @Override
@@ -158,11 +158,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
     }
 
+    //@@author A0142255M
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
     }
 
-    //@@author A0142255M
     @Override
     public String getFilteredTaskListType() {
         return filteredTaskListType;
