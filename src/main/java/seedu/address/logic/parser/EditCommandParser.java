@@ -15,6 +15,7 @@ import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.Command;
@@ -87,6 +88,9 @@ public class EditCommandParser {
                 return new IncorrectCommand(e.getMessage());
             }
         }
+        if (!logic.isValidUIIndex(index.get()))
+            return new IncorrectCommand(
+                    Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         return new EditCommand(logic.parseUIIndex(index.get()),
                 editTaskDescriptor);
     }

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -57,10 +56,7 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(
-                    Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
+        assert filteredTaskListIndex < lastShownList.size();
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask;
@@ -79,7 +75,8 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
         }
         return new CommandResult(
-                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), MESSAGE_SUCCESS_SATAUS_BAR);
+                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit),
+                MESSAGE_SUCCESS_SATAUS_BAR);
     }
 
     // @@author A0093999Y
