@@ -121,7 +121,7 @@ Shows a list of deadlines and events scheduled for the month.<br>
 Format: `list #TAG`<br>
 Shows a list of tasks labeled with the given TAG.<br>
 
-Format: `list marked`<br>
+Format: `list done`<br>
 Shows a list of all tasks that have been marked as completed.<br>
 
 ### 2.4. Finding all tasks containing any keyword in their description: `find`
@@ -189,7 +189,7 @@ Format: `mark INDEX`
 _**Alternative keyword: check, finish**_
 
 > Marks the task as completed and hides it from view.
-> Task is added to a list of completed tasks that can be viewed by calling `list marked`.<br>
+> Task is added to a list of completed tasks that can be viewed by calling `list done`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -212,7 +212,7 @@ _**Alternative keyword: uncheck, unfinish**_
 
 Examples:
 
-* `list marked`<br>
+* `list done`<br>
   `unmark 2`<br>
   Unmarks the 2nd task in the list.
 
@@ -259,7 +259,7 @@ There is no need to save manually.
 > * `list week`<br>
 > * `list month`<br>
 > * `list #TAG`<br>
-> * `list marked`<br>
+> * `list done`<br>
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
 

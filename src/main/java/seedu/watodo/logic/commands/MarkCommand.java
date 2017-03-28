@@ -58,7 +58,7 @@ public class MarkCommand extends Command {
 
         // TODO: TaskNotFoundException?
         // TODO: Remove from list and update list
-        model.updateFilteredListToShowAll();
+        model.updateFilteredByTypesTaskList(ListDoneCommand.COMMAND_WORD);
 
         return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark));
     }

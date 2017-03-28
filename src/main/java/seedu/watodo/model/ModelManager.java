@@ -76,7 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredByTypesTaskList(ListDoneCommand.COMMAND_WORD);
         indicateTaskManagerChanged();
     }
 
@@ -176,7 +176,8 @@ public class ModelManager extends ComponentManager implements Model {
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(
                         task.getDescription().fullDescription, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent() &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
         }
 
         @Override
@@ -205,7 +206,8 @@ public class ModelManager extends ComponentManager implements Model {
             return tagKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(tags, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent() &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
         }
 
         @Override
@@ -232,10 +234,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null) {
+            if (task.getEndDate() == null &&
+                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
                 return true;
             } else {
-                return deadline.isLater(task.getEndDate());
+                return deadline.isLater(task.getEndDate()) &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
             }
         }
 
@@ -264,10 +268,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null) {
+            if (task.getEndDate() == null &&
+                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
                 return true;
             } else {
-                return deadline.isLater(task.getEndDate());
+                return deadline.isLater(task.getEndDate()) &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
             }
         }
 
@@ -295,25 +301,28 @@ public class ModelManager extends ComponentManager implements Model {
                     return false;
                 }
             case ListDeadlineCommand.COMMAND_WORD:
-                if (task.getStartDate() == null && task.getEndDate() != null) {
+                if (task.getStartDate() == null && task.getEndDate() != null &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
                     return true;
                 } else {
                     return false;
                 }
             case ListEventCommand.COMMAND_WORD:
-                if (task.getStartDate() != null && task.getEndDate() != null) {
+                if (task.getStartDate() != null && task.getEndDate() != null &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
                     return true;
                 } else {
                     return false;
                 }
             case ListFloatCommand.COMMAND_WORD:
-                if (task.getStartDate() == null && task.getEndDate() == null) {
+                if (task.getStartDate() == null && task.getEndDate() == null &&
+                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
                     return true;
                 } else {
                     return false;
                 }
             case ListUndoneCommand.COMMAND_WORD:
-                if (StringUtil.containsWordIgnoreCase(task.getStatus().toString(), type)) {
+                if (task.getStatus().toString().equalsIgnoreCase(type)) {
                     return true;
                 } else {
                     return false;

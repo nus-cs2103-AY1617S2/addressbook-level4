@@ -2,13 +2,13 @@ package seedu.watodo.logic.commands;
 
 
 /**
- * Lists all tasks that are completed in the task manager to the user.
+ * Lists all tasks that are marked as completed in the task manager to the user.
  */
 public class ListDoneCommand extends ListCommand {
 
     public static final String COMMAND_WORD = "done";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks that are completed";
+    public static final String MESSAGE_SUCCESS = "Listed all tasks that are marked as completed";
 
     @Override
     public CommandResult execute() {
