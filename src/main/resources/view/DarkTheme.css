@@ -97,34 +97,13 @@
 }
 
 .cell_big_label {
-	-fx-font-family: Arial;
-    -fx-font-size: 24px;
+    -fx-font-size: 16px;
     -fx-text-fill: #010504;
-    -fx-font-weight: bold;
 }
 
 .cell_small_label {
-	-fx-font-family: Arial;
-    -fx-font-size: 14px;
+    -fx-font-size: 11px;
     -fx-text-fill: #010504;
-}
-
-.cell_small_label_date {
-	-fx-font-family: Arial;
-    -fx-font-size: 14px;
-    -fx-text-fill: #010504;
-    -fx-font-style: italic;
-}
-.cell_small_label_instruction {
-	-fx-font-family: Times New Roman;
-    -fx-font-size: 18px;
-    -fx-text-fill: #010504;
-}
-.cell_small_label_priority {
-	-fx-font-family: Arial;
-    -fx-font-size: 14px;
-    -fx-text-fill: #010504;
-    -fx-underline: true;
 }
 
 .anchor-pane {
@@ -143,7 +122,7 @@
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: #ffffff;
 }
 
 .result-display .label {
@@ -320,56 +299,4 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
-}
-
-.list-cell { /* <=== changed to even */
-    -fx-background-color: transparent;
-}
-
-.list-cell:filled:selected:focused {
-    -fx-background-color: #b7b7b7;
-    -fx-text-fill: white;
-}
-
-.text-area {
-    -fx-background-insets: 0;
-    -fx-background-color: transparent, white, transparent, white;
-}
-
-.text-area .content {
-    -fx-background-color: transparent, white, transparent, white;
-}
-
-.text-area:focused .content {
-    -fx-background-color: transparent, white, transparent, white;
-}
-
-.text-area:focused {
-    -fx-highlight-fill: #7ecfff;
-}
-
-.text-area .content {
-    -fx-padding: 10px;
-    -fx-text-fill: gray;
-    -fx-highlight-fill: #7ecfff;
-}
-
-.titled-pane * {
-    -fx-background-color: transparent;
-}
-
-.titled-pane > *.content {
-    -fx-border-color: transparent;
-}
-.titled-pane:pressed {
-    -fx-text-fill: red;
-}
-.titled-pane .title{
-    -fx-background-color: transparent;
-}
-.titled-pane .title:hover {
-    -fx-background-color: #b7b7b7;
-}
-.titled-pane .title:pressed {
-    -fx-background-color: #DDDDDD;
 }

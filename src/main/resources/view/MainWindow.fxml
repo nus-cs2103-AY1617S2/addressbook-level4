@@ -2,12 +2,12 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
@@ -15,87 +15,54 @@
       <URL value="@Extensions.css" />
    </stylesheets>
    <children>
-      <SplitPane id="splitPane" fx:id="splitPane1" dividerPositions="0.5" layoutX="10.0" layoutY="155.0" minHeight="520.0">
+      <MenuBar VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </AnchorPane>
+       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+           <padding>
+               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+           </padding>
+       </AnchorPane>
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="nonFloatingTaskList" minWidth="330.0" prefHeight="20.0" prefWidth="330.0" style="-fx-background-color: #33cc66;">
+            <VBox fx:id="nonFloatingTaskList" minWidth="340" prefWidth="340">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
-                  <TextFlow maxWidth="90.0" minHeight="40.0" prefWidth="191.0" style="-fx-background-color: #333333;" translateX="-10.0" translateY="-10.0">
-                     <children>
-                        <Text fill="#33cc66" strokeType="OUTSIDE" strokeWidth="0.0" text="Ongoing" translateX="10.0" translateY="10.0">
-                           <font>
-                              <Font name="Arial Bold" size="18.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </TextFlow>
                   <AnchorPane fx:id="nonFloatingTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <VBox fx:id="completedTaskList" minWidth="330.0" prefWidth="330.0" style="-fx-background-color: #ff6666;">
+            <VBox fx:id="floatingTaskList" minWidth="330" prefWidth="330">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
-                  <TextFlow maxWidth="110.0" minHeight="40.0" style="-fx-background-color: #333333;" translateX="-10.0" translateY="-10.0">
-                     <children>
-                        <Text fill="#ff6666" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" translateX="10.0" translateY="10.0">
-                           <font>
-                              <Font name="Arial Bold" size="18.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </TextFlow>
-                  <AnchorPane fx:id="completedTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-               </children>
-            </VBox>
-         </items>
-      </SplitPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
-         <items>
-            <VBox fx:id="floatingTaskList" minWidth="330.0" prefWidth="330.0" style="-fx-background-color: #ffcc66;">
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                </padding>
-               <children>
-                  <TextFlow maxHeight="50.0" maxWidth="90.0" minHeight="41.0" prefHeight="41.0" prefWidth="91.0" style="-fx-background-color: #333333;" translateX="-10.0" translateY="-10.0">
-                     <children>
-                        <Text fill="#ffcc66" strokeType="OUTSIDE" strokeWidth="0.0" text="Floating" translateX="10.0" translateY="10.0">
-                           <font>
-                              <Font name="Arial Bold" size="18.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </TextFlow>
                   <AnchorPane fx:id="floatingTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <VBox minWidth="7.0" style="-fx-background-color: #6699cc;">
+            <VBox fx:id="completedTaskList" minWidth="330" prefWidth="330">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
                <children>
-                  <TextFlow maxWidth="110.0" prefHeight="41.0" prefWidth="119.0" style="-fx-background-color: #333333;">
-                     <children>
-                        <Text fill="#6699cc" strokeType="OUTSIDE" strokeWidth="0.0" text="Command">
-                           <font>
-                              <Font name="Arial Bold" size="18.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </TextFlow>
-                   <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="460.0" maxWidth="330.0" minWidth="700.0" prefHeight="460.0" prefWidth="330.0" style="-fx-background-color: transparent;" VBox.vgrow="NEVER">
-                     <padding>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                   </AnchorPane>
-                  <AnchorPane fx:id="commandBoxPlaceholder">
-                     <padding>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </padding>
-                  </AnchorPane>
+                  <AnchorPane fx:id="completedTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <!--

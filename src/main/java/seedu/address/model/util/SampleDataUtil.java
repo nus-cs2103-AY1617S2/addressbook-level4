@@ -131,7 +131,10 @@ public class SampleDataUtil {
                     new UniqueTagList("project", "school")),
                 new Task(new Title("Buy Longans"), new Deadline("floating"), new Priority("4"),
                     new Instruction("done"),
-                    new UniqueTagList("project", "school"))
+                    new UniqueTagList("project", "school")),
+                new Task(new Title("Prepare for dry run"), new Deadline("floating"), new Priority("3"),
+                        new Instruction("demo of software"),
+                        new UniqueTagList("project", "school"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
