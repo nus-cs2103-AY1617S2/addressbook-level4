@@ -15,6 +15,7 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 //@@author A0144904H
 public class MarkDoneCommand extends Command {
 
+    private static final int INDEX_ZERO = 0;
     public static final String COMMAND_WORD = "mark";
     public static final String COMMAND_WORD_SHORT = "m";
 
@@ -42,7 +43,7 @@ public class MarkDoneCommand extends Command {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (this.filteredTaskListIndices.get(filteredTaskListIndices.size() - 1) > lastShownList.size()
-                || this.filteredTaskListIndices.get(0) < 1) {
+                || this.filteredTaskListIndices.get(INDEX_ZERO) < 1) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -52,15 +53,16 @@ public class MarkDoneCommand extends Command {
 
         model.markDone(this.filteredTaskListIndices, tasksToMarkDone);
 
-        scrollToFirstTask(tasksToMarkDone);
+        scrollToTask(tasksToMarkDone);
         return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, tasksToMarkDone));
     }
 
     /**
-     * Scrolls to the position of the task
+     * Scrolls to the position of the task with the lowest index
+     * in the mark done list
      */
-    private void scrollToFirstTask(ArrayList<ReadOnlyTask> tasksToMarkDone) {
-        ReadOnlyTask taskToMarkDone = tasksToMarkDone.get(0);
+    private void scrollToTask(ArrayList<ReadOnlyTask> tasksToMarkDone) {
+        ReadOnlyTask taskToMarkDone = tasksToMarkDone.get(INDEX_ZERO);
         UnmodifiableObservableList<ReadOnlyTask> latestShownList = model.getFilteredTaskList();
         int targetIndex = latestShownList.indexOf(taskToMarkDone);
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
