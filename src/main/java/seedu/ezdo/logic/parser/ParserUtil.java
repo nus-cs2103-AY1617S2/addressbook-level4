@@ -77,11 +77,8 @@ public class ParserUtil {
         if (!matcher.matches()) {
             return Optional.empty();
         }
-
         String sortCriteria = matcher.group("sortCriteria");
-        System.out.println(sortCriteria);
         String sortOrder = matcher.group("sortOrder");
-        System.out.println(sortOrder);
         String[] resultPair = new String[] {sortCriteria, sortOrder};
         return Optional.of(resultPair);
     }
