@@ -22,24 +22,24 @@ public class UndoCommandTest extends AddressBookGuiTest {
         //undo delete command
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
-        TestTask personToDelete = currentList[targetIndex - 1]; // -1 as array uses zero indexing
+        TestTask taskToDelete = currentList[targetIndex - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndex);
         commandBox.runCommand("delete " + targetIndex);
-        //confirm the list now contains all previous persons except the deleted person
+        //confirm the list now contains all previous tasks except the deleted person
         assertTrue(personListPanel.isListMatching(expectedRemainder));
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, personToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
         assertUndoSuccess();
 
         //undo add command
-        //add one person
-        TestTask personToAdd = td.hoon;
-        commandBox.runCommand(personToAdd.getAddCommand());
+        //add one task
+        TestTask taskToAdd = td.hoon;
+        commandBox.runCommand(taskToAdd.getAddCommand());
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
-        assertMatching(personToAdd, addedCard);
-        //confirm the list now contains all previous persons plus the new person
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
+        PersonCardHandle addedCard = personListPanel.navigateToPerson(taskToAdd.getName().fullName);
+        assertMatching(taskToAdd, addedCard);
+        //confirm the list now contains all previous tasks plus the new task
+        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, taskToAdd);
         assertTrue(personListPanel.isListMatching(expectedList));
         assertUndoSuccess();
 
