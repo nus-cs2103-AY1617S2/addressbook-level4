@@ -97,7 +97,8 @@ public class UpdateCommand extends Command {
         Location updatedLocation = updateTaskDescriptor.getLocation().orElseGet(taskToUpdate::getLocation);
         UniqueTagList updatedTags = updateTaskDescriptor.getTags().orElseGet(taskToUpdate::getTags);
 
-        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags);
+        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags,
+                taskToUpdate.isDone());
     }
 
     /**

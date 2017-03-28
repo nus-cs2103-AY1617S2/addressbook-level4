@@ -44,17 +44,20 @@ public interface ReadOnlyTask {
                         && other.isEvent()
                         && this.isEvent() // this is first to avoid NPE below
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                        && other.getStartDateTime().equals(this.getStartDateTime())
                         && other.getEndDateTime().equals(this.getEndDateTime())
-                        && other.getStartDateTime().equals(this.getStartDateTime()))
+                        && this.isDone() == other.isDone())
                 || (other != null
                         && other.isDeadline()
                         && this.isDeadline()
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getEndDateTime().equals(this.getEndDateTime()))
+                        && other.getEndDateTime().equals(this.getEndDateTime())
+                        && this.isDone() == other.isDone())
                 || (other != null
                         && other.isFloatingTask()
                         && this.isFloatingTask()
-                        && other.getTitle().equals(this.getTitle())); // state checks here onwards
+                        && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                        && this.isDone() == other.isDone());
     }
 
 

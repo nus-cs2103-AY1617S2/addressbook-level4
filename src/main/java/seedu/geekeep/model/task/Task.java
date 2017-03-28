@@ -31,16 +31,7 @@ public class Task implements ReadOnlyTask  {
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getTitle(), source.getStartDateTime(),
-             source.getEndDateTime(), source.getLocation(), source.getTags());
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location,
-                UniqueTagList tags) throws IllegalValueException {
-        this(title, startDateTime, endDateTime, location, tags, false);
+                source.getEndDateTime(), source.getLocation(), source.getTags(), source.isDone());
     }
 
     public Task(Title title, DateTime startDateTime,
@@ -126,6 +117,7 @@ public class Task implements ReadOnlyTask  {
         this.setStartDateTime(replacement.getStartDateTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
+        this.setDone(replacement.isDone());
     }
 
     public void setStartDateTime(DateTime startDateTime) {
@@ -141,6 +133,10 @@ public class Task implements ReadOnlyTask  {
     public void setLocation(Location location) {
         assert location != null;
         this.location = location;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -181,11 +177,11 @@ public class Task implements ReadOnlyTask  {
     }
 
     public void markDone() {
-        isDone = true;
+        setDone(true);
     }
 
     public void markUndone () {
-        isDone = false;
+        setDone(false);
     }
 
 }
