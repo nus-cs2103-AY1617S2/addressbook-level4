@@ -355,12 +355,12 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithDescription("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithDescription("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithDescription("KE Y");
+        Task p1 = helper.generateTaskWithDescription("should not Match");
         Task p2 = helper.generateTaskWithDescription("KEYKEYKEY sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         TodoList expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, p2, pTarget2);
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",

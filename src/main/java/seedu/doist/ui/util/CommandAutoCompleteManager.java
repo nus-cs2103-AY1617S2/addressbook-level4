@@ -87,7 +87,7 @@ public class CommandAutoCompleteManager {
 
     private void isFindCommand(String[] words) {
         if (words.length > 0) {
-            isFind = words[0].equals(new String("find"));
+            isFind = "find".equals(words[0]);
         } else {
             isFind = false;
         }
