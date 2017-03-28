@@ -29,7 +29,10 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_WORD_SHORT = "a";
+    //@@author A0144904H
+    public static final String COMMAND_WORD_2ND_SHORT = "+";
 
+    //@@author
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Adds a task to TaskBoss. "
             + "Parameters: NAME [p/YES_NO] sd/START_DATE] [ed/END_DATE] "
@@ -38,7 +41,9 @@ public class AddCommand extends Command {
             + " Submit report p/yes sd/today 5pm ed/next friday 11.59pm"
             + " i/inform partner r/WEEKLY c/Work c/Project\n"
             + "Example: " + COMMAND_WORD_SHORT
-            + " Watch movie sd/feb 19 c/Fun";
+            + " Watch movie sd/feb 19 c/Fun\n"
+            + "Example : " + COMMAND_WORD_2ND_SHORT + "Call David sd/tomorrow i/inform"
+            + " David of the new updates c/Project";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
