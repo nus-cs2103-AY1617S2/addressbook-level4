@@ -59,21 +59,28 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
+    //@@author A0142255M
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
         taskManager.resetData(newData);
+        updateFilteredListToShowAll();
+        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
+    //@@author A0142255M
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
+        raise(new FilteredTaskListUpdatedEvent(filteredTasks));
     }
+    //@@author
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
