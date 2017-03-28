@@ -116,11 +116,13 @@ public class TodoCardHandle extends GuiHandle {
         }
         return super.equals(obj);
     }
+    //@@author A0165043M
     private boolean equalLists (List<String> str1, List<String> str2) {
         Collections.sort(str1);
         Collections.sort(str2);
         return str1.equals(str2);
     }
+    //@@author
     @Override
     public String toString() {
         return getFullName();

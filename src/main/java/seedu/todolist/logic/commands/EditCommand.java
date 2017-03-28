@@ -68,7 +68,7 @@ public class EditCommand extends Command {
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TODO_SUCCESS, todoToEdit));
     }
-
+    //@@author A0165043M
     /**
      * Creates and returns a {@code Todo} with the details of {@code todoToEdit}
      * edited with {@code editTodoDescriptor}.
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
             return new Todo(updatedName, updatedTags);
         }
     }
-
+    //@@author
     /**
      * Stores the details to edit the todo with. Each non-empty field value will replace the
      * corresponding field value of the todo.
@@ -142,10 +142,12 @@ public class EditCommand extends Command {
             assert tags != null;
             this.tags = tags;
         }
+        //@@author A0165043M
         public void setAddTags(Optional<UniqueTagList> addTags) {
             assert addTags != null;
             this.addTags = addTags;
         }
+      //@@author
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
