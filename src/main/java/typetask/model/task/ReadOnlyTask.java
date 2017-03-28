@@ -10,8 +10,6 @@ public interface ReadOnlyTask {
     Name getName();
     DueDate getDate();
     DueDate getEndDate();
-    Time getTime();
-    Time getEndTime();
     boolean getIsCompleted();
 
     /**
@@ -31,8 +29,6 @@ public interface ReadOnlyTask {
         builder.append(getName())
                .append(" DueDate: ")
                .append(getDate())
-               .append(" Time: ")
-               .append(getTime())
                .append(" Completed: ")
                .append(getIsCompleted());
         return builder.toString();

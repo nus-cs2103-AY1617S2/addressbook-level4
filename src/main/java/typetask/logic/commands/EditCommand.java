@@ -10,7 +10,6 @@ import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
-import typetask.model.task.Time;
 
 /**
  * Edits the details of an existing task in the TaskManager.
@@ -22,7 +21,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [by:DATE] [@TIME] \n"
+            + "Parameters: INDEX [NAME] [by:DATE] [@TIME] \n"
             + "Example: " + COMMAND_WORD + " 1 by:9/11/2017 @11:25pm ";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited TASK: %1$s";
@@ -52,7 +51,7 @@ public class EditCommand extends Command {
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
+      //@@author A0139926R
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
         model.storeTaskManager(COMMAND_WORD);
@@ -60,7 +59,7 @@ public class EditCommand extends Command {
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
-
+  //@@author A0139926R
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
@@ -71,13 +70,11 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         DueDate updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
-        Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
         DueDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
-        Time updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
 
-        return new Task(updatedName, updatedDate, updatedEndDate, updatedTime, updatedEndTime, false);
+        return new Task(updatedName, updatedDate, updatedEndDate, false);
     }
-
+  //@@author A0139926R
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
@@ -85,26 +82,22 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<DueDate> date = Optional.empty();
-        private Optional<Time> time = Optional.empty();
         private Optional<DueDate> endDate = Optional.empty();
-        private Optional<Time> endTime = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.date = toCopy.getDate();
-            this.time = toCopy.getTime();
             this.endDate = toCopy.getEndDate();
-            this.endTime = toCopy.getEndTime();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.date, this.time,
-                    this.endDate, this.endTime);
+            return CollectionUtil.isAnyPresent(this.name, this.date,
+                    this.endDate);
         }
 
         public void setName(Optional<Name> name) {
@@ -116,21 +109,6 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public Optional<Time> getTime() {
-            return time;
-        }
-        public Optional<Time> getEndTime() {
-            return endTime;
-        }
-
-        public void setTime(Optional<Time> time) {
-            assert time != null;
-            this.time = time;
-        }
-        public void setEndTime(Optional<Time> endTime) {
-            assert endTime != null;
-            this.endTime = endTime;
-        }
         public void setDate(Optional<DueDate> date) {
             assert date != null;
             this.date = date;

@@ -3,7 +3,6 @@ package typetask.testutil;
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
-import typetask.model.task.Time;
 
 /**
  *
@@ -29,15 +28,6 @@ public class TaskBuilder {
     }
     public TaskBuilder withCompleted(boolean isCompleted) {
         this.task.setIsCompleted(isCompleted);
-        return this;
-    }
-
-    public TaskBuilder withTime(String time) throws IllegalValueException {
-        this.task.setTime(new Time(time));
-        return this;
-    }
-    public TaskBuilder withEndTime(String time) throws IllegalValueException {
-        this.task.setEndTime(new Time(time));
         return this;
     }
 
