@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import seedu.address.model.person.Description;
 import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
@@ -118,5 +121,23 @@ public class TestActivity implements ReadOnlyEvent {
         sb.append("l/" + this.getLocation().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("ta/" + s.tagName + " "));
         return sb.toString();
+    }
+    
+    @Override
+    public boolean isOver() {
+        if (LocalDate.now().isAfter(this.getEndDate().getValue())) {
+            return true;
+        }
+        else if (LocalDate.now().isBefore(this.getEndDate().getValue())) {
+            return false;
+        }
+        else {
+            if (LocalTime.now().isAfter(this.getEndTime().getValue())) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 }

@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.UniqueTagList;
 
 //@@author A0148038A
@@ -29,13 +28,11 @@ public class Event implements ReadOnlyEvent{
      * @throws IllegalValueException 
      */
     public Event(Description description, StartTime startTime, StartDate startDate,
-    		EndTime endTime, EndDate endDate, Location location, UniqueTagList tags) throws IllegalValueException {
+    		EndTime endTime, EndDate endDate, Location location, UniqueTagList tags){
     	
     	//check description and start date are present
         assert !CollectionUtil.isAnyNull(description, startDate);
-        if (!isValideEndDateTime(endTime, endDate, startTime, startDate)) {
-            throw new IllegalValueException(EditCommand.MESSAGE_ILLEGAL_EVENT_END_DATETIME);
-        }
+        assert isValideEndDateTime(endTime, endDate, startTime, startDate);
        
         this.description = description;
         this.startTime = startTime;
@@ -50,7 +47,7 @@ public class Event implements ReadOnlyEvent{
      * Creates a copy of the given ReadOnlyEvent.
      * @throws IllegalValueException 
      */
-    public Event(ReadOnlyEvent source) throws IllegalValueException {
+    public Event(ReadOnlyEvent source) {
         this(source.getDescription(), source.getStartTime(), source.getStartDate(),
         		source.getEndTime(), source.getEndDate(), source.getLocation(), source.getTags());
     }
