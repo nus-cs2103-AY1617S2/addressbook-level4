@@ -37,11 +37,13 @@ public class CommandHistoryList {
         if (historyPointer == commandHistory.size()) {
             this.currentCommand = currentCommand;
         }
+        if (commandHistory.size() == 0) {
+            return this.currentCommand;
+        }
 
         if (historyPointer != 0) {
             historyPointer--;
         }
-
         return commandHistory.get(historyPointer);
     }
 }
