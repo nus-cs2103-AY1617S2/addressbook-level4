@@ -50,7 +50,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         setCompleted(task);
         setName(task);
-        setId(task, displayedIndex);
+        setId(displayedIndex);
         setComment(task);
         setTags(task);
         setPriority(task);
@@ -64,10 +64,10 @@ public class TaskCard extends UiPart<Region> {
     private void setCompleted(ReadOnlyTask task) {
         Image tickImage = AppUtil.getImage(tickSource);
         tickLogo.setTranslateX(400);
-        if (task.getStatus().value == false) {
-            tickLogo.setVisible(false);
-        } else {
+        if (task.getStatus().value) {
             tickLogo.setImage(tickImage);
+        } else {
+            tickLogo.setVisible(false);
         }
     }
 
@@ -81,7 +81,7 @@ public class TaskCard extends UiPart<Region> {
     /*
      * Set ID for tasks
      */
-    private void setId(ReadOnlyTask task, int displayedIndex) {
+    private void setId(int displayedIndex) {
         id.setText(displayedIndex + ". ");
     }
 
@@ -90,7 +90,7 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setComment(ReadOnlyTask task) {
         String taskComment = task.getComment().value;
-        if (taskComment.equals("NIL")) {
+        if ("NIL".equals(taskComment)) {
             comment.setVisible(false);
         } else {
             comment.setText(task.getComment().value);
@@ -122,6 +122,8 @@ public class TaskCard extends UiPart<Region> {
         case Priority.PRIORITY_NIL:
             priority.setVisible(false);
             break;
+        default:
+            priority.setVisible(false);
         }
         priority.setText(priorityLevel.toUpperCase());
         priority.setTranslateX(20);
@@ -148,6 +150,10 @@ public class TaskCard extends UiPart<Region> {
             startDate.setVisible(false);
             endDate.setVisible(false);
             break;
+        default:
+            deadline.setVisible(false);
+            startDate.setVisible(false);
+            endDate.setVisible(false);
         }
     }
 }
