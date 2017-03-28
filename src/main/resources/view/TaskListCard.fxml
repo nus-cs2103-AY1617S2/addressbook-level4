@@ -36,19 +36,20 @@
                                          <Region fx:constant="USE_PREF_SIZE" />
                                      </minWidth>
                                  </Label>
-                        <JFXCheckBox fx:id="title" mouseTransparent="true" prefHeight="17.0" prefWidth="226.0" text="\$title" />
+                        <JFXCheckBox fx:id="done" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="17.0" prefWidth="33.0" />
+                        <Label fx:id="title" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="389.0" styleClass="cell_small_label" text="\$title" wrapText="true" />
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags">
                      <VBox.margin>
                         <Insets left="60.0" top="5.0" />
                      </VBox.margin></FlowPane>
-                        <Label fx:id="date" prefHeight="14.0" prefWidth="70.0" styleClass="cell_small_label" text="\$date">
+                        <Label fx:id="date" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="14.0" prefWidth="250.0" styleClass="cell_small_label" text="\$date">
                      <VBox.margin>
                         <Insets left="60.0" />
                      </VBox.margin>
                   </Label>
-                        <Label fx:id="locationOfTask" prefHeight="14.0" prefWidth="234.0" styleClass="cell_small_label" text="\$locationOfTask">
+                        <Label fx:id="locationOfTask" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="14.0" prefWidth="227.0" styleClass="cell_small_label" text="\$locationOfTask" wrapText="true">
                      <VBox.margin>
                         <Insets left="60.0" />
                      </VBox.margin>

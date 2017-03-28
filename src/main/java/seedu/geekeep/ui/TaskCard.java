@@ -16,7 +16,9 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private JFXCheckBox title;
+    private Label title;
+    @FXML
+    private JFXCheckBox done;
     @FXML
     private Label id;
     @FXML
@@ -30,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         title.setText(task.getTitle().title);
         id.setText("#" + displayedIndex + " ");
-
+        done.setSelected(task.isDone());
         if (task.getEndDateTime() != null && task.getStartDateTime() != null) {
             date.setText(task.getStartDateTime() + " until " + task.getEndDateTime());
         } else if (task.getEndDateTime() != null && task.getStartDateTime() == null) {
