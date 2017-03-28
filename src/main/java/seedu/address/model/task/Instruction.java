@@ -3,7 +3,6 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * @author ryuus
  * Represents a Task's instruction in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  *

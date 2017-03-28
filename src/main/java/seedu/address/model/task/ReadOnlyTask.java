@@ -2,10 +2,6 @@ package seedu.address.model.task;
 
 import seedu.address.model.tag.UniqueTagList;
 
-/**
- * @author ryuus
- *
- */
 public interface ReadOnlyTask {
 
     Title getTitle();

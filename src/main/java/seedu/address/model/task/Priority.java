@@ -5,7 +5,6 @@ import java.util.HashMap;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * @author ryuus
  * Represents a Task's priority in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  *

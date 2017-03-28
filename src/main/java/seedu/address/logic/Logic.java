@@ -17,6 +17,7 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException;
 
+  //@@author A0144813J
     /** Returns the filtered list of non-floating tasks */
     ObservableList<ReadOnlyTask> getFilteredNonFloatingTaskList();
 

@@ -8,7 +8,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * @author ryuus
  * Represents a Task in the Instruction book.
  * Guarantees: details are present and not null, field values are validated.
  *

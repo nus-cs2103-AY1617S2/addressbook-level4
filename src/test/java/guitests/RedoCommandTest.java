@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.testutil.TestTask;
+import seedu.address.testutil.TestUtil;
 
 public class RedoCommandTest extends AddressBookGuiTest {
 
@@ -29,60 +30,70 @@ public class RedoCommandTest extends AddressBookGuiTest {
     public void redo_addThenRedo_success() throws Exception {
         TestTask taskToAdd = td.hoon;
         commandBox.runCommand(taskToAdd.getAddCommand());
+        TestTask[] expectedList = td.getTypicalTasks();
+        expectedList = TestUtil.addTasksToList(expectedList, td.hoon);
 
-        assertRedoSuccess();
+        assertRedoSuccess(expectedList);
     }
 
     @Test
     public void redo_clearThenRedo_success() throws Exception {
         commandBox.runCommand("reset");
+        TestTask[] expectedList = new TestTask[0];
 
-        assertRedoSuccess();
+        assertRedoSuccess(expectedList);
     }
 
     @Test
     public void redo_deleteThenRedo_success() throws Exception {
         commandBox.runCommand("delete 1");
+        TestTask[] expectedList = td.getTypicalTasks();
+        expectedList = TestUtil.removeTasksFromList(expectedList, td.alice);
 
-        assertRedoSuccess();
+        assertRedoSuccess(expectedList);
     }
 
     @Test
     public void redo_editThenRedo_success() throws Exception {
-        String detailsToEdit = "Bobby for: 91234567 priority:1 note:Block 123, Bobby Street 3 #husband";
+        String detailsToEdit = "Bobby for: floating priority:1 note:Block 123, Bobby Street 3 #husband";
         int taskListIndex = 1;
 
         commandBox.runCommand("edit " + taskListIndex + " " + detailsToEdit);
+        TestTask[] expectedList = td.getTypicalTasks();
+        expectedList = TestUtil.removeTasksFromList(expectedList, td.alice);
 
-        assertRedoSuccess();
+        assertRedoSuccess(expectedList);
     }
 
     @Test
     public void undo_markCompleteThenRedo_success() throws Exception {
         commandBox.runCommand("complete 1");
+        TestTask[] expectedList = td.getTypicalTasks();
+        expectedList = TestUtil.removeTasksFromList(expectedList, td.alice);
 
-        assertRedoSuccess();
+        assertRedoSuccess(expectedList);
 
-        commandBox.runCommand("edit 1 d/floating");
+        commandBox.runCommand("edit 1 for: floating");
         commandBox.runCommand("complete floating 1");
 
-        assertRedoSuccess();
+        assertRedoSuccess(expectedList);
     }
 
     @Test
     public void undo_markIncompleteThenRedo_success() throws Exception {
         commandBox.runCommand("complete 1");
         commandBox.runCommand("incomplete 1");
+        TestTask[] expectedList = td.getTypicalTasks();
 
-        assertRedoSuccess();
+        assertRedoSuccess(expectedList);
     }
 
     /**
-     * Runs the undo command to undo the previously executed command and confirms the result is correct.
+     * Runs the redo command to redo the previously undone command and confirms the result is correct.
      * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
      * @param currentList A copy of the current list of persons (before deletion).
      */
-    private void assertRedoSuccess() {
+    private void assertRedoSuccess(TestTask[] expectedList) {
         commandBox.runCommand("undo");
         commandBox.runCommand("redo");
 
