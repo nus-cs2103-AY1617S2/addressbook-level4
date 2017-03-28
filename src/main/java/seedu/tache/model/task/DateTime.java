@@ -118,6 +118,11 @@ public class DateTime {
     }*/
 
     //@@author A0139961U
+    public boolean isDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date).equals(sdf.format(this.date));
+    }
+
     public boolean isToday() {
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
