@@ -52,13 +52,11 @@ public interface Model {
 
     /** Updates the filter of the filtered todo list to show all todos */
     void updateFilteredListToShowAll();
-
-    /** Updates the filter of the filtered todo list to filter by the given keywords*/
-    void updateFilteredTodoList(Set<String> keywords);
-
-    /** Updates the filter of the filtered todo list to filter by the given tags*/
-    void updateFilteredTodoList(UniqueTagList tags);
-
+    //@@author A0163786N
+    /** Updates the filter of the filtered todo list*/
+    public void updateFilteredTodoList(Set<String> keywords, Date startTime,
+            Date endTime, Object completeTime, UniqueTagList tags);
+    //@@author
     /** Loads the previous state of the todo list*/
     void loadPreviousState() throws NoPreviousStateException;
 

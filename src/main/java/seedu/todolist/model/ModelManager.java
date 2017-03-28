@@ -1,5 +1,8 @@
 package seedu.todolist.model;
 
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -97,18 +100,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author A0163786N
     @Override
-    public synchronized void completeTodo(int filteredTodoListIndex, Date completeTime) {
+    public void completeTodo(int filteredTodoListIndex, Date completeTime) {
         TodoList tempTodoList = new TodoList(todoList);
-        todoList.completeTodo(filteredTodoListIndex, completeTime);
+        int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
+        todoList.completeTodo(todoListIndex, completeTime);
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
     //@@author
     //@@author A0163786N
     @Override
-    public synchronized void uncompleteTodo(int filteredTodoListIndex) {
+    public void uncompleteTodo(int filteredTodoListIndex) {
         TodoList tempTodoList = new TodoList(todoList);
-        todoList.uncompleteTodo(filteredTodoListIndex);
+        int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
+        todoList.uncompleteTodo(todoListIndex);
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
@@ -133,19 +138,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTodos.setPredicate(null);
     }
-
+    //@@author A0163786N
     @Override
-    public void updateFilteredTodoList(Set<String> keywords) {
-        updateFilteredTodoList(new PredicateExpression(new NameQualifier(keywords)));
-    }
-
-    //@@author A0163720M
-    @Override
-    public void updateFilteredTodoList(UniqueTagList tags) {
-        updateFilteredTodoList(new PredicateExpression(new NameQualifier(tags)));
+    public void updateFilteredTodoList(Set<String> keywords, Date startTime,
+        Date endTime, Object completeTime, UniqueTagList tags) {
+        updateFilteredTodoList(new PredicateExpression(
+                new NameQualifier(keywords, startTime, endTime, completeTime, tags)));
     }
     //@@author
-
     private void updateFilteredTodoList(Expression expression) {
         filteredTodos.setPredicate(expression::satisfies);
     }
@@ -186,14 +186,15 @@ public class ModelManager extends ComponentManager implements Model {
         private Set<String> nameKeyWords;
         private Set<Tag> tags;
         private Set<String> tagKeyWords;
+        private Date startTime;
+        private Date endTime;
+        private Object completeTime;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameQualifier(Set<String> nameKeyWords, Date startTime, Date endTime, Object completeTime, UniqueTagList tags) {
             this.nameKeyWords = nameKeyWords;
-        }
-
-        // In order for Java to overload the NameQualifier constructor
-        // the parameter cannot be of type Set so use UniqueTagList instead
-        NameQualifier(UniqueTagList tags) {
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.completeTime = completeTime;
             this.tags = tags.toSet();
 
             // for simplicity sake, convert the Set<Tag> into Set<String> so that it can easily be filtered out
@@ -204,35 +205,94 @@ public class ModelManager extends ComponentManager implements Model {
                 this.tagKeyWords.add(tag.tagName);
             }
         }
-
+        //@@author A0163786N
         @Override
         public boolean run(ReadOnlyTodo todo) {
-            if (nameKeyWords != null) {
+            if (!nameKeyWords.isEmpty()) {
                 String name = todo.getName().fullName;
-                return nameKeyWords.stream()
+                if (!(nameKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(name, keyword))
                         .findAny()
-                        .isPresent();
-            } else {
+                        .isPresent())) {
+                    return false;
+                }
+            }
+            if (startTime != null) {
+                Date todoStartTime = todo.getStartTime();
+                if (todoStartTime == null || todoStartTime.after(startTime)) {
+                    return false;
+                }
+            }
+            if (endTime != null) {
+                Date todoEndTime = todo.getEndTime();
+                if (todoEndTime == null || todoEndTime.after(endTime)) {
+                    return false;
+                }
+            }
+            if (completeTime != null && !checkCompleteTime(todo)) {
+                return false;
+            }
+            if (!tags.isEmpty()) {
                 String todoTags = todo.getTagsAsString();
-                return tagKeyWords.stream()
+                if (!(tagKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(todoTags, keyword))
                         .findAny()
-                        .isPresent();
+                        .isPresent())) {
+                    return false;
+                }
             }
+            return true;
         }
-
+        //@@author A0163720M
         /**
          * Returns the tags or the name of the todo depending on which field is present
          */
         @Override
         public String toString() {
-            if (!tags.isEmpty()) {
-                return "tag=" + String.join(", ", tagKeyWords);
-            } else {
-                return "name=" + String.join(", ", nameKeyWords);
+            StringBuilder sb = new StringBuilder();
+            if (!nameKeyWords.isEmpty()) {
+                sb.append("name=" + String.join(", ", nameKeyWords));
             }
+            if (startTime != null) {
+                sb.append("\nstart time=" + new SimpleDateFormat(DATE_FORMAT).format(startTime));
+            }
+            if (endTime != null) {
+                sb.append("\nend time=" + new SimpleDateFormat(DATE_FORMAT).format(endTime));
+            }
+            if (completeTime != null) {
+                if (completeTime instanceof Date) {
+                    sb.append("\ncomplete time=" + new SimpleDateFormat(DATE_FORMAT).format(completeTime));
+                } else {
+                    sb.append("\ncomplete time=any");
+                }
+            }
+            if (!tags.isEmpty()) {
+                sb.append("\ntag=" + String.join(", ", tagKeyWords));
+            }
+            return sb.toString();
         }
+        //@@author A0163786N
+        /**
+         * Helper function to simplify run function. Checks complete time
+         * and returns true if todo should be shown in filtered list
+         */
+        private boolean checkCompleteTime(ReadOnlyTodo todo) {
+            Date todoCompleteTime = todo.getCompleteTime();
+            if (completeTime instanceof Date) {
+                if (todoCompleteTime == null || todoCompleteTime.after((Date) completeTime)) {
+                    return false;
+                }
+            } else if (completeTime.equals("")) {
+                if (todoCompleteTime == null) {
+                    return false;
+                }
+            } else if (completeTime.equals("not")) {
+                if (todoCompleteTime != null) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        //@@author
     }
-    //@@author
 }

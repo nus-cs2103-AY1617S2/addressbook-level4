@@ -1,8 +1,9 @@
 package seedu.todolist.testutil;
 
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
 import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.commons.util.StringUtil;
-import seedu.todolist.logic.commands.AddCommand;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.todo.Name;
@@ -31,7 +32,7 @@ public class TodoBuilder {
 
     public TodoBuilder withStartTime(String strDateTime) throws IllegalValueException {
         try {
-            this.todo.setStartTime(StringUtil.parseDate(strDateTime,  AddCommand.DATE_FORMAT));
+            this.todo.setStartTime(StringUtil.parseDate(strDateTime, DATE_FORMAT));
             return this;
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -40,7 +41,7 @@ public class TodoBuilder {
     }
     public TodoBuilder withEndTime(String strDateTime) throws IllegalValueException {
         try {
-            this.todo.setEndTime(StringUtil.parseDate(strDateTime, AddCommand.DATE_FORMAT));
+            this.todo.setEndTime(StringUtil.parseDate(strDateTime, DATE_FORMAT));
             return this;
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -50,7 +51,7 @@ public class TodoBuilder {
     //@@author A0163786N
     public TodoBuilder withCompleteTime(String strDateTime) throws IllegalValueException {
         try {
-            this.todo.setCompleteTime(StringUtil.parseDate(strDateTime, AddCommand.DATE_FORMAT));
+            this.todo.setCompleteTime(StringUtil.parseDate(strDateTime, DATE_FORMAT));
             return this;
         } catch (IllegalValueException e) {
             e.printStackTrace();

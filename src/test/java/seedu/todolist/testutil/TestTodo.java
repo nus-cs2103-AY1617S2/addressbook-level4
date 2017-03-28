@@ -1,11 +1,12 @@
 package seedu.todolist.testutil;
 
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-import seedu.todolist.logic.commands.AddCommand;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.todo.Name;
 import seedu.todolist.model.todo.ReadOnlyTodo;
@@ -162,7 +163,7 @@ public class TestTodo implements ReadOnlyTodo {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName);
         if (this.getEndTime() != null) {
-            DateFormat dateFormat = new SimpleDateFormat(AddCommand.DATE_FORMAT);
+            DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
             sb.append(" e/" + dateFormat.format(this.getEndTime()));
             if (this.getStartTime() != null) {
                 sb.append(" s/" + dateFormat.format(this.getStartTime()));

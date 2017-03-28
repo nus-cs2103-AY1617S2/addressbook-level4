@@ -88,21 +88,15 @@ public class StorageManager extends ComponentManager implements Storage {
     public void updateSaveFilePath(String saveFilePath) throws DataConversionException, IOException {
         logger.fine("Attempting to update save file: " + saveFilePath);
 
-        try {
-            // There should only be one instance of config each session - grab a
-            // handle on that specific one
-            Config config = ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
-            config.setTodoListFilePath(saveFilePath);
-
-            // Update config file in case it was missing to begin with or there
-            // are new/unused fields
-            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-            indicateSaveFilePathChanged(saveFilePath);
-        } catch (DataConversionException e) {
-            throw new DataConversionException(e);
-        } catch (IOException e) {
-            throw new IOException(e);
-        }
+        // There should only be one instance of config each session - grab a
+        // handle on that specific one
+        Config config = ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
+        config.setTodoListFilePath(saveFilePath);
+        // Update config file in case it was missing to begin with or there
+        // are new/unused fields
+        //@@author A0163786N
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        indicateSaveFilePathChanged(saveFilePath);
     }
     //@@author
 

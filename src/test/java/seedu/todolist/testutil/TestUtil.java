@@ -1,5 +1,7 @@
 package seedu.todolist.testutil;
 
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -31,7 +33,6 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.commons.util.FileUtil;
 import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.commons.util.XmlUtil;
-import seedu.todolist.logic.commands.CompleteCommand;
 import seedu.todolist.logic.commands.SaveFileCommand;
 import seedu.todolist.model.TodoList;
 import seedu.todolist.model.tag.Tag;
@@ -347,7 +348,7 @@ public class TestUtil {
             String completeTime) {
         Date completeDate = null;
         try {
-            completeDate = StringUtil.parseDate(completeTime, CompleteCommand.COMPLETE_TIME_FORMAT);
+            completeDate = StringUtil.parseDate(completeTime, DATE_FORMAT);
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "invalid complete time format";

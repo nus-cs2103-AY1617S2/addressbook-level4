@@ -17,7 +17,6 @@ public class Config {
     private String todoListFilePath = "data/todolist.xml";
     private String todoListName = "MyTodoList";
 
-
     public String getAppTitle() {
         return appTitle;
     }
@@ -57,7 +56,6 @@ public class Config {
     public void setTodoListName(String todoListName) {
         this.todoListName = todoListName;
     }
-
 
     @Override
     public boolean equals(Object other) {
