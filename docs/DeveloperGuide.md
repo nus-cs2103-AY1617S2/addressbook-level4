@@ -30,7 +30,7 @@ This guide describes the design and implementation of *DoMe!*. Through this guid
 
 1. **JDK `1.8.0_60`**  or later<br>
 
-    > Having any Java 8 version is not enough. 
+    > Having any Java 8 version is not enough.
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
@@ -413,7 +413,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 ##### Extensions
 
 1a. User entered an invalid command.
-
 > 1a1. System displays help messages.
 > 1a2. Use case ends.
 
@@ -495,6 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 #### Use Case: Complete Task
 ##### Main Success Scenario:
+
 1. User requests to list tasks.
 2. System displays tasks.
 3. User selects a task based on its task number and marks it as completed.
@@ -561,8 +561,7 @@ Use case resumes at step 2.
 
 #### Use case: View Overdue Tasks
 ##### Main Success Scenario:
-1. User requests for a list of overdue tasks. 
-2. System shows a list of tasks that are overdue. 
+1. User requests for a list of overdue tasks.2. System shows a list of tasks that are overdue.
 3. Use case ends.
 
 ---
@@ -581,6 +580,7 @@ Use case resumes at step 2.
 
 #### Use case: Search
 ##### Main Success Scenario:
+
 1. User requests for a list of tasks that have matching keywords typed in.
 2. System shows a list of tasks that have the matching keywords. 
 3. Use case ends. 
@@ -594,9 +594,10 @@ Use case resumes at step 2.
 3. System prints the command that was undone on the feedback box.
 4. Use case ends.
 
+
 ##### Extensions
 2. There is nothing to undo.
-> 2a1. Use case ends. 
+> 2a1. Use case ends.
 
 ---
 
@@ -621,7 +622,7 @@ Use case resumes at step 2.
 4. Use case ends.
 
 ##### Extension
-1a. Specified file does not exist 
+1a. Specified file does not exist
 > 1a1. System shows error message that specified file does not exist.
 > 1a2. Use case ends.
 
@@ -755,7 +756,7 @@ Use case resumes at step 2.
 > * Unable to add subtasks
 
 **Remember The Milk** (surveyed by Le Minh Phuc)
-> Pros: 
+> Pros:
 > * Is essentially a CLI app modified to be more interactive using tags
 > * Has desktop version
 > * Has an email-like interface, which is familiar and easy to use
