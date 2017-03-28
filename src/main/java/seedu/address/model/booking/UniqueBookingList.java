@@ -100,6 +100,14 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
     }
 
     /**
+     * Returns all bookings in this list as a List. This set is mutable and
+     * change-insulated against the internal list.
+     */
+    public ArrayList<Booking> toList() {
+        return new ArrayList<Booking>(internalList);
+    }
+
+    /**
      * Replaces the Tags in this list with those in the argument booking list.
      */
     public void setBookings(UniqueBookingList replacement) {
