@@ -14,6 +14,7 @@ import java.util.Set;
  */
 public class FindCommand extends Command {
 
+    private static final String ALL_WHITESPACE = "\\s+";
     public static final String COMMAND_WORD = "find";
     public static final String COMMAND_WORD_SHORT = "f";
 
@@ -29,6 +30,7 @@ public class FindCommand extends Command {
     private final String keywords;
     private final String prefix;
 
+    //@@author A0147990R
     public FindCommand(String pre, String keywords) {
         this.prefix = pre;
         this.keywords = keywords;
@@ -37,7 +39,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         if (prefix.equals(PREFIX_KEYWORD.toString())) {
-            String[] keywordsList = keywords.split("\\s+");
+            String[] keywordsList = keywords.split(ALL_WHITESPACE);
             final Set<String> keywordSet = new HashSet<String>(Arrays.asList(keywordsList));
             model.updateFilteredTaskListByKeywords(keywordSet);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));

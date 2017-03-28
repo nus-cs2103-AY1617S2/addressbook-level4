@@ -24,7 +24,6 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
         assertClearSuccess(isShortedCommand, categoryDetails, expectedTaskList);
     }
 
-    //@@author A0147990R
     // EP: use short command to clear by an existing category
     @Test
     public void clearByCategory_existingCategoryWithShortcut() {
@@ -35,7 +34,6 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
         assertClearSuccess(isShortedCommand, categoryDetails, expectedTaskList);
     }
 
-    //@@author A0147990R
     // EP: invalid command word
     @Test
     public void clearByCategory_invalidCommand_fail() {
@@ -43,7 +41,6 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    //@@author A0147990R
     // EP: invalid command format
     @Test
     public void clearByCategory_invalidCommandFormat_fail() {
@@ -52,7 +49,6 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
                 ClearByCategoryCommand.MESSAGE_USAGE));
     }
 
-    //@@author A0147990R
     // EP: clear by an inexistent category
     @Test
     public void clearByCategory_nonExistingCategory() {
@@ -60,7 +56,6 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
         assertResultMessage(String.format(ClearByCategoryCommand.MESSAGE_CATEGORY_NOT_FOUND));
     }
 
-    //@@author A0147990R
     /**
      * Checks whether the edited task has the correct updated details.
      * @param isShortCommand
