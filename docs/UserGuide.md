@@ -15,7 +15,7 @@
 	3.6. [Finding tasks: **`find / f`**](#36-finding-tasks-find--f)<br>
 	3.7. [Listing all tasks: **`list / l`**](#37-listing-all-tasks-list--l)<br>
 	3.8. [Reverts the command: **`undo / u`**](#38-reverting-the-last-action-undo--u)<br>
-	3.9. [Redoing the last undone command: **`redo / r`**](#39-redoing-the-last-undone-action--r)<br>
+	3.9. [Redoing the last undone command: **`redo / r`**](#39-redoing-the-last-undone-action-redo--r)<br>
 	3.10. [Clearing all entries: **`clear /c `**](#310-clearing-all-entries-clear--c)<br>
 	3.11. [Moving the save file: **`save`**](#311-moving-the-save-file-save)<br>
 	3.12. [Aliasing a command: **`alias`**](#312-aliasing-a-command-alias)<br>
@@ -498,11 +498,11 @@ For your convenience, the parameters for every command available in ezDo are sum
 |[sort / s](#35-sorting-a-list-of-tasks-sort--s) |**`sort FIELD [ORDER]`** |
 |[find / f](#36-finding-tasks-find--f)           |**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**      |
 |[list / l](#37-listing-all-tasks-list--l)       |**`list`**         |
-|[undo / u](#38-undoing-the-last-action-undo--u) |**`undo`** |
+|[undo / u](#38-reverting-the-last-action-undo--u) |**`undo`** |
 |[redo / r](#39-redoing-the-last-undone-action-redo--r)|**`redo`**|
 |[clear / c](#310-clearing-all-entries-clear--c)  |**`clear`**       |
 |[save](#311-moving-the-save-file-save)      |**`save DIRECTORY`**    |
-|[alias](#312-aliasing-a-command)      |**`alias COMMAND SHORTCUT`**    |
+|[alias](#312-aliasing-a-command-alias)      |**`alias COMMAND SHORTCUT`**    |
 |[quit / q](#313-exiting-the-program-quit--q)    |**`quit`**              |
 |[help / h](#314-viewing-help-help--h)           |**`help`**    |
 
