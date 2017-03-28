@@ -93,10 +93,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void deleteTaskForEdit(ReadOnlyTask target) throws TaskNotFoundException {
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        toDoList.removeTask(target);
+        history.saveUndoInformationAndClearRedoHistory("Reset task", target, copiedCurrentToDoList);
+        indicateToDoListChanged();
+    }
+
+    @Override
     public synchronized void doneTask(ReadOnlyTask taskToComplete) throws IllegalValueException {
+        if (taskToComplete.getDoneStatus() == true) {
+            throw new IllegalValueException("This task has been done");
+        }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.doneTask(taskToComplete);
-        history.saveAsPreviousToDoListAndClearRedoHistory(copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory("Undone", taskToComplete, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -109,7 +120,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(int internalIdx, Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTaskForEdit(int internalIdx, Task task) throws UniqueTaskList.DuplicateTaskException {
         toDoList.addTask(internalIdx, task);
         indicateToDoListChanged();
     };
@@ -149,7 +160,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void clear() {
-        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        history.saveUndoInformationAndClearRedoHistory(copiedCurrentToDoList);
         resetData(new ToDoList());
     }
 

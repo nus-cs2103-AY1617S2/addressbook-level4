@@ -30,6 +30,13 @@ public class ToDoListHistoryManager implements ToDoListHistory {
         nextToDoLists.clear();
     }
 
+    //This overloaded method is specially for clear command.
+    public void saveUndoInformationAndClearRedoHistory(ToDoList toDoList) {
+        counterCommandHistory.push("Restore OneTwoDo");
+        previousToDoLists.push(toDoList);
+        nextToDoLists.clear();
+    }
+
     @Override
     public void saveAsPreviousToDoList(ToDoList toDoList) {
         ToDoList copiedCurrentToDoList = new ToDoList(toDoList);
