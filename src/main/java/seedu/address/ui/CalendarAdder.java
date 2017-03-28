@@ -52,8 +52,10 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
 		item.setSummary(task.getDescription().toString());
 		LocalDate byDate= task.getByDate().getValue();
 		LocalTime byTime= task.getByTime().getValue();
-		item.setEndLocalDateTime(LocalDateTime.of(byDate,byTime));
-		item.setStartLocalDateTime(item.getEndLocalDateTime().minusHours(DEFAULT_DURATION));
+		if (byDate!= null && byTime!=null){
+			item.setEndLocalDateTime(LocalDateTime.of(byDate,byTime));
+			item.setStartLocalDateTime(item.getEndLocalDateTime().minusHours(DEFAULT_DURATION));
+		}
 		item.setLocation(task.getLocation().toString());
 		item.setAppointmentGroup(groupMap.get(TASK_GROUP));
 		return item;

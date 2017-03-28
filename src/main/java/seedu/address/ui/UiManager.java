@@ -13,6 +13,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
@@ -101,7 +102,7 @@ public class UiManager extends ComponentManager implements Ui {
 		Platform.exit();
 		System.exit(1);
 	}
-
+	//@@author A0124377A
 	// ==================== Event Handling Code
 	// ===============================================================
 
@@ -129,5 +130,16 @@ public class UiManager extends ComponentManager implements Ui {
 		logger.info(LogsCenter.getEventHandlingLogMessage(task));
 		mainWindow.getTaskListPanel().scrollTo(task.targetIndex);
 	}
-
+	// @@author A0124377A
+	@Subscribe
+	private void handleEventListUpdatedEvent(WhatsLeftChangedEvent event) {
+		logger.info(LogsCenter.getEventHandlingLogMessage(event));
+		mainWindow.updateCalendar(event.data.getEventList(), event.data.getTaskList());
+	}
+	
+	@Subscribe 
+	private void handleCalendarViewUpdatedEvent(UpdateCalendarEvent event){
+		logger.info(LogsCenter.getEventHandlingLogMessage(event));
+		mainWindow.updateCalendarView(event.getDisplayedDateTime(), event.getCalendarLayoutMode());
+	}
 }

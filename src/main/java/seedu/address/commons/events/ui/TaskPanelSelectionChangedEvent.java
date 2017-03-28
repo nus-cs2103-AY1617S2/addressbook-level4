@@ -5,7 +5,7 @@ import seedu.address.model.person.ReadOnlyTask;
 
 //@@author A0148038A
 /**
- * Represents a selection change in the Person List Panel
+ * Represents a selection change in the Task List Panel
  */
 public class TaskPanelSelectionChangedEvent extends BaseEvent {
 

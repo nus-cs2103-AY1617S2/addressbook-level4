@@ -17,13 +17,13 @@ public interface ReadOnlyWhatsLeft {
      * Returns an unmodifiable view of the tasks list.
      * This list will not contain any duplicate tasks.
      */
-    List<? extends ReadOnlyTask> getTaskList();
+    List<ReadOnlyTask> getTaskList();
     
     /**
      * Returns an unmodifiable view of the event list.
      * This list will not contain any duplicate events.
      */
-    List<? extends ReadOnlyEvent> getEventList();
+    List<ReadOnlyEvent> getEventList();
     
     /**
      * Returns an unmodifiable view of the tags list.
