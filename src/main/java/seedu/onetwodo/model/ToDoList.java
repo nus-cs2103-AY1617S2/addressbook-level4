@@ -153,8 +153,8 @@ public class ToDoList implements ReadOnlyToDoList {
         }
     }
 
-    public void doneTask(int index) throws IllegalValueException {
-        tasks.done(index);
+    public void doneTask(ReadOnlyTask taskToComplete) throws IllegalValueException {
+        tasks.done(taskToComplete);
     }
 
 //// tag-level operations

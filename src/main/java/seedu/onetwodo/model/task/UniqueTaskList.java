@@ -92,13 +92,15 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      *
      */
-    public void done(int index) throws IllegalValueException {
-        Task taskToComplete = internalList.get(index);
+    public void done(ReadOnlyTask taskToComplete) throws IllegalValueException {
+        int index = internalList.indexOf(taskToComplete);
+        assert index >= 0;
         if (taskToComplete.getDoneStatus() == true) {
             throw new IllegalValueException("This task has been done");
         }
-        taskToComplete.setDone();
-        internalList.set(index, taskToComplete);
+        Task targetTask = (Task) taskToComplete;
+        targetTask.setDone();
+        internalList.set(index, targetTask);
     }
 
 

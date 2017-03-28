@@ -93,10 +93,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void doneTask(int filteredTaskListIndex) throws IllegalValueException {
+    public synchronized void doneTask(ReadOnlyTask taskToComplete) throws IllegalValueException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        toDoList.doneTask(toDoListIndex);
+        toDoList.doneTask(taskToComplete);
         history.saveAsPreviousToDoListAndClearRedoHistory(copiedCurrentToDoList);
         indicateToDoListChanged();
     }

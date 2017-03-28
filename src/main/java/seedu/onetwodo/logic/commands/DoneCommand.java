@@ -38,10 +38,9 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex - 1);
-        int internalIndex = model.getFilteredTaskList().indexOf(taskToComplete);
 
         try {
-            model.doneTask(internalIndex);
+            model.doneTask(taskToComplete);
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }

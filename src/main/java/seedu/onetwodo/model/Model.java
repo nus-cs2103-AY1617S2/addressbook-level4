@@ -27,7 +27,7 @@ public interface Model {
 
     /** Mark the given tasks completed.
      * @throws IllegalValueException */
-    void doneTask(int filteredTaskListIndex) throws IllegalValueException;
+    void doneTask(ReadOnlyTask taskToComplete) throws IllegalValueException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
