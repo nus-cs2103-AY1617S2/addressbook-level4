@@ -20,7 +20,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command1);
         String command2 = "history";
         commandBox.runCommand(command2);
-        assertResultMessage(command1 + "\n1 commands displayed.");
+        assertResultMessage(command1 + "\n1 command displayed.");
     }
 
     @Test
@@ -29,7 +29,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command1);
         String command2 = "history";
         commandBox.runCommand(command2);
-        assertResultMessage(command1 + "\n1 commands displayed.");
+        assertResultMessage(command1 + "\n1 command displayed.");
     }
 
     @Test

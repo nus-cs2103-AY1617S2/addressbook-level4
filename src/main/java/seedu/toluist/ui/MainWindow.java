@@ -46,7 +46,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String COMMAND_SWITCH = "switch ";
     private static final String COMMAND_NAVIGATEHISTORY = "navigatehistory ";
     private static final String[] KEYCODES_NAVIGATEHISTORY = new String[] { "up", "down"};
-    private static final String[] KEYCODES_SWITCH = new String[] { "up", "down"};
+    private static final String[] KEYCODES_SWITCH = new String[] { "i", "t", "n", "c", "a"};
 
     private Stage primaryStage;
     private Dispatcher dispatcher;

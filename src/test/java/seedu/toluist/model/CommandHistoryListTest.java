@@ -20,9 +20,9 @@ public class CommandHistoryListTest {
         CommandHistoryList commandHistoryList = new CommandHistoryList();
         ArrayList<String> commandHistory = commandHistoryList.getCommandHistory();
         assertEquals(commandHistory.size(), 0);
-        assertEquals(commandHistoryList.movePointerDown(), unfinishedCommand);
-        assertEquals(commandHistoryList.movePointerUp(unfinishedCommand), unfinishedCommand);
-        assertEquals(commandHistoryList.movePointerDown(), unfinishedCommand);
+        assertEquals(commandHistoryList.movePointerDown(), "");
+        assertEquals(commandHistoryList.movePointerUp(""), "");
+        assertEquals(commandHistoryList.movePointerDown(), "");
 
     }
 
