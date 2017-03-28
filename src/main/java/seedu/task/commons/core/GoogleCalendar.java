@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -19,6 +20,9 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
 
 public class GoogleCalendar {
+    public static final String calendarId = "primary";
+    private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
+
     private static final String APPLICATION_NAME =
         "Keep It Tidy";
 
@@ -42,7 +46,7 @@ public class GoogleCalendar {
      * at ~/.credentials/calendar-java-quickstart
      */
     private static final List<String> SCOPES =
-        Arrays.asList(CalendarScopes.CALENDAR_READONLY);
+        Arrays.asList(CalendarScopes.CALENDAR);
 
     static {
         try {
@@ -75,8 +79,7 @@ public class GoogleCalendar {
                 .build();
         Credential credential = new AuthorizationCodeInstalledApp(
             flow, new LocalServerReceiver()).authorize("user");
-        System.out.println(
-                "Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
+        logger.info("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
         return credential;
     }
 

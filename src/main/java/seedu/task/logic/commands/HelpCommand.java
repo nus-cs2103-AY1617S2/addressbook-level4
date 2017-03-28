@@ -27,7 +27,6 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute() {
         if (commandToShowUser != null) {
-            System.out.println(commandToShowUser);
             switch (commandToShowUser.trim()) {
             case AddCommand.COMMAND_WORD_1:
                 return new CommandResult(AddCommand.MESSAGE_USAGE);
@@ -36,9 +35,9 @@ public class HelpCommand extends Command {
             case DoneCommand.COMMAND_WORD_2:
                 return new CommandResult(DoneCommand.MESSAGE_USAGE);
 
-            case UnDoneCommand.COMMAND_WORD_1:
-            case UnDoneCommand.COMMAND_WORD_2:
-                return new CommandResult(UnDoneCommand.MESSAGE_USAGE);
+            case UndoneCommand.COMMAND_WORD_1:
+            case UndoneCommand.COMMAND_WORD_2:
+                return new CommandResult(UndoneCommand.MESSAGE_USAGE);
 
             case EditCommand.COMMAND_WORD_1:
                 return new CommandResult(EditCommand.MESSAGE_USAGE);
@@ -95,6 +94,14 @@ public class HelpCommand extends Command {
 
             case SaveCommand.COMMAND_WORD_1:
                 return new CommandResult(SaveCommand.MESSAGE_USAGE);
+
+            case GetGoogleCalendarCommand.COMMAND_WORD_1:
+            case GetGoogleCalendarCommand.COMMAND_WORD_2:
+                return new CommandResult(GetGoogleCalendarCommand.MESSAGE_USAGE);
+
+            case PostGoogleCalendarCommand.COMMAND_WORD_1:
+            case PostGoogleCalendarCommand.COMMAND_WORD_2:
+                return new CommandResult(PostGoogleCalendarCommand.MESSAGE_USAGE);
 
             default:
                 EventsCenter.getInstance().post(new ShowHelpRequestEvent());

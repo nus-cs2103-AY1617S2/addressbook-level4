@@ -17,7 +17,6 @@ import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpFormatRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
-import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
@@ -127,10 +126,10 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
-    @Subscribe
-    public void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
-    }
+//    @Subscribe
+//    public void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+//        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+//        mainWindow.loadTaskPage(event.getNewSelection());
+//    }
 
 }
