@@ -66,7 +66,7 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task event() throws Exception {
+        public Task event() throws Exception {
             Title title = new Title("Event");
             DateTime endDateTime = new DateTime("01-05-17 1630");
             DateTime startDateTime = new DateTime("01-04-17 1630");
@@ -77,7 +77,7 @@ public class LogicManagerTest {
             return new Task(title, startDateTime, endDateTime, location, tags, false);
         }
 
-        Task deadline() throws Exception {
+        public Task deadline() throws Exception {
             Title title = new Title("Deadline");
             DateTime endDateTime = new DateTime("01-05-17 1630");
             Location location = new Location("222, beta street");
@@ -87,7 +87,7 @@ public class LogicManagerTest {
             return new Task(title, null, endDateTime, location, tags, false);
         }
 
-        Task eventWithoutTime() throws Exception {
+        public Task eventWithoutTime() throws Exception {
             Title title = new Title("Event Without Time");
             DateTime endDateTime = new DateTime("01-05-17");
             DateTime startDateTime = new DateTime("01-04-17");
@@ -98,7 +98,7 @@ public class LogicManagerTest {
             return new Task(title, startDateTime, endDateTime, location, tags, false);
         }
 
-        Task floatingTask() throws Exception {
+        public Task floatingTask() throws Exception {
             Title title = new Title("Floating Task");
             Location location = new Location("333, charlie street");
             Tag tag1 = new Tag("tag1");

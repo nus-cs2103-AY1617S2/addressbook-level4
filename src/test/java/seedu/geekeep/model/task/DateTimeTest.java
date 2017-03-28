@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class StartDateTimeTest {
+public class DateTimeTest {
 
     @Test
-    public void isValidStartDateTime() {
+    public void isValidDateTime() {
         // invalid start date time
         assertFalse(DateTime.isValidDateTime("")); // empty string
         assertFalse(DateTime.isValidDateTime(" ")); // spaces only
@@ -20,4 +20,5 @@ public class StartDateTimeTest {
         assertTrue(DateTime.isValidDateTime("01-04-17 1630"));
         assertTrue(DateTime.isValidDateTime("01-04-17"));
     }
+
 }
