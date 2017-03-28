@@ -1,5 +1,7 @@
 package seedu.taskmanager.model.task;
 
+import java.util.Optional;
+
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 /**
@@ -9,7 +11,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Title getTitle();
-    StartDate getStartDate();
+    Optional<StartDate> getStartDate();
     EndDate getEndDate();
     Description getDescription();
 
@@ -36,15 +38,17 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
+        // @@author A0140032E
         builder.append(getTitle())
                 .append(" StartDate: ")
-                .append(getStartDate())
+                .append(getStartDate().isPresent() ? getStartDate() : "")
                 .append(" EndDate: ")
                 .append(getEndDate())
                 .append(" Description: ")
                 .append(getDescription())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        // @@author
         return builder.toString();
     }
 

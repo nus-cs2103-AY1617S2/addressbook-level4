@@ -68,7 +68,8 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         // @@author A0140032E
-        if (editedTask.getStartDate().after(editedTask.getEndDate())) {
+        if (editedTask.getStartDate().isPresent() && 
+                editedTask.getStartDate().get().after(editedTask.getEndDate())) {
             throw new CommandException(MESSAGE_DATE_ORDER_CONSTRAINTS);
         }
         // @@author
@@ -90,7 +91,9 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
+        // @@author A0140032E
+        Optional <StartDate> updatedStartDate = editTaskDescriptor.getStartDate().isPresent() ? editTaskDescriptor.getStartDate() : taskToEdit.getStartDate();
+        // @@author
         EndDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);

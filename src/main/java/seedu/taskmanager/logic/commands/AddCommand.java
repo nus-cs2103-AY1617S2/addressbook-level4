@@ -1,6 +1,7 @@
 package seedu.taskmanager.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
@@ -38,24 +39,24 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, String startDate, String endDate, String description, Set<String> tags)
+    public AddCommand(String title, Optional<String> startDate, String endDate, String description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         // @@author A0140032E
-        if (new StartDate(startDate).after(new EndDate(endDate))) {
+        if (startDate.isPresent() && new StartDate(startDate.get()).after(new EndDate(endDate))) {
             throw new IllegalValueException(MESSAGE_DATE_ORDER_CONSTRAINTS);
         }
-        // @@author
         this.toAdd = new Task(
                 new Title(title),
-                new StartDate(startDate),
+                startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty(),
                 new EndDate(endDate),
                 new Description(description),
                 new UniqueTagList(tagSet)
         );
+        // @@author
     }
 
     @Override

@@ -2,6 +2,7 @@ package seedu.taskmanager.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -46,7 +47,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().value;
-        startDate = source.getStartDate().toString();
+        startDate = source.getStartDate().isPresent() ? source.getStartDate().toString() : "";
         endDate = source.getEndDate().toString();
         description = source.getDescription().value;
         tagged = new ArrayList<>();
@@ -70,6 +71,6 @@ public class XmlAdaptedTask {
         final EndDate endDate = new EndDate(this.endDate);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, startDate, endDate, description, tags);
+        return new Task(title, Optional.of(startDate), endDate, description, tags);
     }
 }

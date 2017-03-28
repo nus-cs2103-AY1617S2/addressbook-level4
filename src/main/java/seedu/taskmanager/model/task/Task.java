@@ -1,6 +1,7 @@
 package seedu.taskmanager.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.model.tag.UniqueTagList;
@@ -12,7 +13,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Title title;
-    private StartDate startDate;
+    private Optional<StartDate> startDate;
     private EndDate endDate;
     private Description description;
 
@@ -21,8 +22,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, StartDate startDate, EndDate endDate, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(title, startDate, endDate, description, tags);
+    // @@author A0140032E
+    public Task(Title title, Optional<StartDate> startDate, EndDate endDate, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -30,6 +32,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
     }
+    // @@author
 
     /**
      * Creates a copy of the given ReadOnlyTask.
@@ -48,13 +51,12 @@ public class Task implements ReadOnlyTask {
         return title;
     }
 
-    public void setStartDate(StartDate startDate) {
-        assert startDate != null;
+    public void setStartDate(Optional<StartDate> startDate) {
         this.startDate = startDate;
     }
 
     @Override
-    public StartDate getStartDate() {
+    public Optional<StartDate> getStartDate() {
         return startDate;
     }
 

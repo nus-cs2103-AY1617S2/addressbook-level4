@@ -7,6 +7,7 @@ import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.AddCommand;
@@ -29,7 +30,7 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_STARTDATE).orElse(""),
+                    argsTokenizer.getValue(PREFIX_STARTDATE),
                     argsTokenizer.getValue(PREFIX_ENDDATE).orElse(""),
                     argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
