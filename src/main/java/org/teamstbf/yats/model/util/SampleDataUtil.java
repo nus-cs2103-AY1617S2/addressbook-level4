@@ -20,16 +20,16 @@ public class SampleDataUtil {
 			return new Event[] {
 					new Event(new Title("Vascular Medicine Research"),
 							new Location("Hospital"),
-							new Schedule("6:00pm"),
-							new Schedule("8:00pm"),
+							new Schedule("4:05PM 07/4/2017"),
+							new Schedule("5:05PM 07/4/2017"),
 							new Schedule(""),
 							new Description("Research to be extended and continued to "
 									+ "alleviate carcinogenic vascularity"),
 							new UniqueTagList("research"), new IsDone()),
 					new Event(new Title("Grocery Shopping"),
 							new Location("FoodCourt"),
-							new Schedule("10:00pm"),
-							new Schedule("2:00pm"),
+							new Schedule("8:05PM 07/4/2017"),
+							new Schedule("9:05PM 07/4/2017"),
 	                         new Schedule(""),
 							new Description("Buy some food"),
 							new UniqueTagList("necessitires"), new IsDone()),
@@ -44,7 +44,7 @@ public class SampleDataUtil {
 							new Location("School"),
                             new Schedule(""),
                             new Schedule(""),
-							new Schedule("5:00pm"),
+							new Schedule("11:59PM 08/04/2017"),
 							new Description("prepare project doucments"),
 							new UniqueTagList("school","learn"), new IsDone())
 			};
