@@ -25,7 +25,7 @@ public class CommandHistoryList {
         if (historyPointer != commandHistory.size()) {
             historyPointer++;
         }
-        
+
         if (historyPointer == commandHistory.size()) {
             return currentCommand;
         }

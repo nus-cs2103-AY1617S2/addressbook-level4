@@ -24,7 +24,7 @@ public class NavigateHistoryController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
 
         String direction = tokens.get(DIRECTION_PARAMETER);
-        
+
         if (direction.equals("up")) {
             showPreviousCommand(uiStore.getObservableCommandInput().getValue().getCommand());
         } else if (direction.equals("down")) {
