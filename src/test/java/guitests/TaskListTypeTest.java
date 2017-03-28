@@ -50,4 +50,10 @@ public class TaskListTypeTest extends TaskManagerGuiTest {
         commandBox.runCommand("add Go Running");
         assertEquals(taskListType.getTaskListType().getText(), ALL_TASK_LIST_TYPE);
     }
+
+    @Test
+    public void showAllTaskListTypeAfterFindCommand() {
+        commandBox.runCommand("find visit");
+        assertEquals(taskListType.getTaskListType().getText(), "Find \"visit\"");
+    }
 }

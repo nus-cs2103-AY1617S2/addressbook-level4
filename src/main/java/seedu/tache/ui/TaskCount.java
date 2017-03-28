@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.tache.commons.core.LogsCenter;
-import seedu.tache.commons.events.model.TaskManagerChangedEvent;
+import seedu.tache.commons.events.ui.FilteredTaskListUpdatedEvent;
 import seedu.tache.commons.util.FxViewUtil;
 import seedu.tache.logic.Logic;
 import seedu.tache.model.task.ReadOnlyTask;
@@ -77,17 +77,17 @@ public class TaskCount extends UiPart<Region> {
     }
 
     @Subscribe
-    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
+    public void handleFilteredTaskListUpdatedEvent(FilteredTaskListUpdatedEvent event) {
         assert event != null;
-        ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
+        ObservableList<ReadOnlyTask> taskList = event.getFilteredTaskList();
         String oldTimedCount = this.timedTaskCount.getText();
-        String newTimedCount = this.getTimedTaskCount(taskList);
+        String newTimedCount = getTimedTaskCount(taskList);
         if (oldTimedCount != newTimedCount) {
             this.timedTaskCount.setText(newTimedCount);
             logger.fine("Timed task list count changed to : '" + newTimedCount + "'");
         }
         String oldFloatingCount = this.floatingTaskCount.getText();
-        String newFloatingCount = this.getFloatingTaskCount(taskList);
+        String newFloatingCount = getFloatingTaskCount(taskList);
         if (oldFloatingCount != newFloatingCount) {
             this.floatingTaskCount.setText(newFloatingCount);
             logger.fine("Floating task list count changed to : '" + newFloatingCount + "'");

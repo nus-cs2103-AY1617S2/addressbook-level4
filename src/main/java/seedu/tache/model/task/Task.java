@@ -195,6 +195,5 @@ public class Task implements ReadOnlyTask {
             return false;
         }
     }
-    //@@author
 
 }
