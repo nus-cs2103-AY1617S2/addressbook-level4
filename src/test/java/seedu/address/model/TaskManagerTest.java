@@ -82,7 +82,8 @@ public class TaskManagerTest {
         private final ObservableList<ReadOnlyTask> completedTasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends ReadOnlyTask> completedTasks, Collection<? extends Tag> tags) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks,
+                Collection<? extends ReadOnlyTask> completedTasks, Collection<? extends Tag> tags) {
             this.tasks.setAll(tasks);
             this.tags.setAll(tags);
             this.completedTasks.setAll(completedTasks);
