@@ -9,7 +9,7 @@ We are CS2103JAN2017-W15-B4 based in the [School of Computing, National Universi
 Role: Developer <br>
 Responsibilities: UI, 
                   Managing Issues <br>
-Code Written: [[functional code] (./collated/main/A0148037E.md)][[test code] (./collated/test/A0148037E.md)]
+Code Written: [[functional code](./collated/main/A0148037E.md)][[test code](./collated/test/A0148037E.md)]
 
 -----
 
