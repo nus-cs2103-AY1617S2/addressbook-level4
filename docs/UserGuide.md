@@ -236,27 +236,23 @@ Format: `book TASKNAME [#LABEL...] on DATE, DATE, [MORE_DATES]...`
 
 Examples:
 
-* `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`<br />
-  Reserves time slots on the 1st January 2017 4pm and 2nd January 8pm for CS2103 Meeting
+* `book CS2103 Meeting on 1/1/2017 4pm to 6pm, 2/1/2017 8pm to 10pm`<br />
+  Reserves time slots on the 1st January 2017 4pm to 6pm and 2nd January 8pm to 10pm for CS2103 Meeting
 
 ### 2.10. Confirm a booking : `confirm`
 
 Confirm booking of a task and releases other bookings for the confirmed task.<br />
-Format: `confirm TASK_ID (SLOT_NUMBER|DATE)`
+Format: `confirm TASK_ID SLOT_NUMBER`
 
-> * DATE specified should be one of the bookings that has been made
 > * SLOT_NUMBER will be respective to the dates added in that order
 > * The index refers to the id of the task.<br />
 > * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`<br />
-  `confirm 1 1/1/2017 4pm`<br />
-  Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
-* `book CS2103 Meeting on 1/1/2017 4pm to 5pm, 2/1/2017 8pm to 9pm`<br />
+* `book CS2103 Meeting on 1/1/2017 4pm to 5pm, 2/1/2017 8pm to 10pm`<br />
   `confirm 1 1`<br />
-  Confirms the task CS2103 Meeting for 1st January 2017 4pm to 5pm and releases 2nd January 2017 8pm to 9pm slot
+  Confirms the task CS2103 Meeting for 1st January 2017 4pm to 5pm and releases 2nd January 2017 8pm to 10pm time slot for other tasks
 
 ### 2.11. Edit a label : `editlabel`
 
@@ -343,6 +339,25 @@ Pressing the UP or DOWN key will allow you to iterate through previous commands 
 ### 2.22. Autocompletion of commands and reserved keywords
 Pressing the TAB key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
 
+### 2.23. Edit booking time slots : `editbooking`
+Edits booking time slots.<br />
+Format: `editbooking INDEX (remove SLOT_NUMBER | change SLOT_NUMBER NEW_DATE | add DATE, MORE DATES)`
+
+> * SLOT_NUMBER will be respective to the dates added in that order
+> * The index refers to the id of the task in the task list currently displayed.<br />
+> * The index **must be a positive integer** 1, 2, 3, ...
+> * The slot number **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `book CS2103 Meeting on 1/1/2017 4pm to 5pm, 2/1/2017 8pm to 9pm`<br />
+  `editbooking 1 add 3/1/2017 4pm to 5pm, 4/1/2017 8pm to 9pm`<br />
+  Adds 3/1/2017 4pm to 5pm and 4/1/2017 8pm to 9pm to the booking CS2103 Meeting
+* `editbooking 1 change 1 5/1/2017 3pm to 5pm`<br />
+  Changes the time slot from `1/1/2017 4pm to 5pm` to `5/1/2017 3pm to 5pm` for booking CS2103 Meeting.
+* `editbooking 1 remove 2`<br />
+  Removes the time slot `2/1/2017 8pm to 9pm` from the booking CS2103 Meeting.
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br />
@@ -361,10 +376,11 @@ Command Description | Command Format | Example
 | Delete | `delete [TASK_ID|LABEL]` | `delete 1`
 | Select | `select TASK_ID` | `select 2`
 | Book | `book TASKNAME [#LABEL...] on DATE, [MORE_DATES]...` | `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`
-| Confirm | `confirm TASK_ID (SLOT_NUMBER|DATE)` | `confirm 1 1`
+| Confirm | `confirm TASK_ID SLOT_NUMBER` | `confirm 1 1`
+| Edit Booking | `editbooking TASK_ID (remove SLOT_NUMBER | change SLOT_NUMBER NEW_DATE | add DATE, MORE DATES)` | `editbooking 1 add 3/1/2017 4pm to 5pm, 4/1/2017 8pm to 9pm`<br />`editbooking 1 change 1 5/1/2017 3pm to 5pm`<br /> `editbooking 1 remove 2`
 | Edit Label | `editlabel OLD_LABEL NEW_LABEL` | `editlabel friends oldFriends`
-| Undo | `undo` |
-| Clear | `clear` |
+| Undo | `undo` | `undo`
+| Clear | `clear` | `clear`
 | Save to a certain location | `saveas FILEPATH_RELATIVE_TO_JAR` | `saveas data/taskmanager2.xml`
 | Load data from a different file | `load FILEPATH_RELATIVE_TO_JAR` | `load data/taskmanager2.xml`
 | Push | `push` |
