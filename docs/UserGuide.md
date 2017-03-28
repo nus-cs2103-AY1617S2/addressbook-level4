@@ -90,6 +90,7 @@ Format: `list e`
 Edits a Todo's title, start time and endtime.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
+<<<<<<< HEAD
 Edits a Todo's name and deadline.<br>
 Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
 
@@ -100,15 +101,24 @@ Adds a start time and endtime.<br>
 Format: `edit INDEX [s/STARTTIME] [e/ENDTIME]`
 
 Edits a todo title.<br>
+=======
+Edits a deadline.<br>
+Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
+
+Edits a task.<br>
+>>>>>>> 38691468cdfcc9582389a61fb2b8bcdb194d3dff
 Format: `edit INDEX [TASK] [t/TAG]`
 
+Adds a tag to a task.<br>
+Format: `edit [ta/TAG]`
 
 > * Edits the todo at the specified `INDEX`.
     The index refers to the index number shown in the last todo listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
->
+> * Edit with "t/" may remove the existing tags and replace them with the tags in command line.
+> * Edit with "s/" "e/" may update the task with default Datetime.
 
 Examples:
 
