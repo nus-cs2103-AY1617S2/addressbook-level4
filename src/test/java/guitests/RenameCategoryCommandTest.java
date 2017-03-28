@@ -37,7 +37,7 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Feb 18, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.NONE)
-                .withCategories("Project", AddCommand.DEFAULT).build();
+                .withCategories("Project", AddCommand.DEFAULT_ALL_TASKS).build();
         sampleB = new TaskBuilder().withName("Birthday party")
                 .withInformation("311, Clementi Ave 2, #02-25")
                 .withPriorityLevel("No")

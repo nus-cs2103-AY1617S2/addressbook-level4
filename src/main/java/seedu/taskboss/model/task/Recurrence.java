@@ -7,7 +7,6 @@ import java.util.Date;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
-import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 
 //@@author A0143157J
 public class Recurrence {
@@ -185,8 +184,9 @@ public class Recurrence {
 
     /**
      * Marks a task as undone (i.e removing it from "Done" category)
+     * @throws IllegalValueException
      */
-    private void markTaskUndone(Task task) throws DuplicateCategoryException {
+    private void markTaskUndone(Task task) throws IllegalValueException {
         UniqueCategoryList newCategoryList = new UniqueCategoryList();
         for (Category category : task.getCategories()) {
             if (!category.equals(CATEGORY_DONE)) {

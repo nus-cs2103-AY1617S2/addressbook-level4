@@ -11,7 +11,11 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
+
+    //@@author A0144904H
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
+
+    //@@author
     public static final Prefix PREFIX_START_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_END_DATE = new Prefix("ed/");
     public static final Prefix PREFIX_INFORMATION = new Prefix("i/");

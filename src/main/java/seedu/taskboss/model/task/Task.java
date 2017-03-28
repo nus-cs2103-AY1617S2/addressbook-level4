@@ -48,21 +48,25 @@ public class Task implements ReadOnlyTask {
                 source.getCategories());
     }
 
+    //@@author A0144904H
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
 
+    //@@author A0144904H
     @Override
     public Name getName() {
         return name;
     }
 
+    //@@author A0144904H
     public void setPriorityLevel(PriorityLevel priorityLevel) {
         assert priorityLevel != null;
         this.priorityLevel = priorityLevel;
     }
 
+    //@@author A0144904H
     @Override
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;

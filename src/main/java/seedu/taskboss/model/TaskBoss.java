@@ -162,7 +162,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
 //// category-level operations
 
-    public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
+    public void addCategory(Category t) throws IllegalValueException {
         categories.add(t);
     }
 

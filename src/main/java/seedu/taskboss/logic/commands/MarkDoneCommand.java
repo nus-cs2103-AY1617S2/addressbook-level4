@@ -24,6 +24,7 @@ public class MarkDoneCommand extends Command {
             + " 1 2 3" +  " || " + COMMAND_WORD_SHORT + " 1";
 
     public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done: %1$s";
+    public static final String DONE = "Done";
 
     public final ArrayList<Integer> filteredTaskListIndices;
     public final ArrayList<ReadOnlyTask> tasksToMarkDone;
@@ -42,7 +43,7 @@ public class MarkDoneCommand extends Command {
                 || this.filteredTaskListIndices.get(0) < 1) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
+      
         for (int index : this.filteredTaskListIndices) {
             this.tasksToMarkDone.add(lastShownList.get(index - 1));
         }

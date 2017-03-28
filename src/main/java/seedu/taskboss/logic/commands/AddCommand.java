@@ -32,7 +32,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Adds a task to TaskBoss. "
-            + "Parameters: n/NAME [p/YES_NO] sd/START_DATE] [ed/END_DATE] "
+            + "Parameters: NAME [p/YES_NO] sd/START_DATE] [ed/END_DATE] "
             + "[i/INFORMATION] [r/RECURRENCE] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
             + " Submit report p/yes sd/today 5pm ed/next friday 11.59pm"
@@ -43,9 +43,12 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
-    public static final String DEFAULT = "AllTasks";
+    //@@author A0144904H
+    public static final String DEFAULT_ALL_TASKS = "AllTasks";
+    public static final String DEFAULT_DONE = "Done";
     public static final String ERROR_CANNOT_ADD_DONE_CATEGORY = "Cannot add Done category";
 
+    //@@author
     private final Task toAdd;
 
     /**
@@ -60,16 +63,7 @@ public class AddCommand extends Command {
                     throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
         final Set<Category> categorySet = new HashSet<>();
 
-        //@@author A0144904H
-        //default Category "All Tasks" assigned to all tasks automatically
-        categorySet.add(new Category(DEFAULT));
-        if (categories.contains("Done")) {
-            throw new DefaultCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
-        }
-
-        for (String categoryName : categories) {
-            categorySet.add(new Category(categoryName));
-        }
+        categoriesSetUp(categories, categorySet);
 
         //@@author A0143157J
         String updatedFreq;
@@ -101,6 +95,28 @@ public class AddCommand extends Command {
         );
     }
 
+    //@@author A0144904H
+    /**
+     * Sets up the set of categories a task is supposed to have
+     * default Category "All Tasks" will be assigned to all tasks automatically
+     * @param categories the set of categories being assigned to a task
+     * @param categorySet the set of categories that is being added after modification occurs
+     * @throws IllegalValueException
+     * @throws DefaultCategoryException
+     */
+    private void categoriesSetUp(Set<String> categories, final Set<Category> categorySet)
+            throws IllegalValueException, DefaultCategoryException {
+        categorySet.add(new Category(DEFAULT_ALL_TASKS));
+        if (categories.contains(DEFAULT_DONE)) {
+            throw new DefaultCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
+        }
+
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
+        }
+    }
+
+    //@@author A0144904h
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException {
         assert model != null;

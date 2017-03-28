@@ -202,13 +202,25 @@ public class ModelManager extends ComponentManager implements Model {
             taskBoss.updateTask(taskBossIndex, editedTask);
         }
 
+        errorDoesNotExistDetect(oldCategory, isFound);
+
+        removeCategoryFromTaskboss(oldCategory);
+        indicateTaskBossChanged();
+    }
+
+    //@@author A0144904H
+    /**
+     * detects the category does not exist error
+     * @param oldCategory
+     * @param isFound
+     * @throws CommandException
+     */
+    private void errorDoesNotExistDetect(Category oldCategory, boolean isFound) throws CommandException {
         if (!isFound) {
             updateFilteredListToShowAll();
             throw new CommandException(oldCategory.toString()
                     + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
         }
-        removeCategoryFromTaskboss(oldCategory);
-        indicateTaskBossChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================

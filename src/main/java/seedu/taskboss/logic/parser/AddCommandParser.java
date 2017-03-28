@@ -40,11 +40,11 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    checkInformationEmpty(argsTokenizer.getValue(PREFIX_PRIORITY)),
-                    checkStartDateTimeEmpty(argsTokenizer.getValue(PREFIX_START_DATE)),
-                    checkEndDateTimeEmpty(argsTokenizer.getValue(PREFIX_END_DATE)),
-                    checkInformationEmpty(argsTokenizer.getValue(PREFIX_INFORMATION)),
-                    checkRecurrenceEmpty(argsTokenizer.getValue(PREFIX_RECURRENCE)),
+                    checkEmpty(argsTokenizer.getValue(PREFIX_PRIORITY)),
+                    checkEmpty(argsTokenizer.getValue(PREFIX_START_DATE)),
+                    checkEmpty(argsTokenizer.getValue(PREFIX_END_DATE)),
+                    checkEmpty(argsTokenizer.getValue(PREFIX_INFORMATION)),
+                    checkEmpty(argsTokenizer.getValue(PREFIX_RECURRENCE)),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))
             );
         } catch (NoSuchElementException nsee) {
@@ -61,31 +61,7 @@ public class AddCommandParser {
     }
 
     //@@author A0147990R
-    private String checkInformationEmpty(Optional<String> test) {
-        try {
-            return test.get();
-        } catch (NoSuchElementException nsee) {
-            return EMPTY_STRING;
-        }
-    }
-
-    private String checkStartDateTimeEmpty(Optional<String> test) throws IllegalValueException {
-        try {
-            return test.get();
-        } catch (NoSuchElementException nsee) {
-            return EMPTY_STRING;
-        }
-    }
-
-    private String checkEndDateTimeEmpty(Optional<String> test) throws IllegalValueException {
-        try {
-            return test.get();
-        } catch (NoSuchElementException nsee) {
-            return EMPTY_STRING;
-        }
-    }
-
-    private String checkRecurrenceEmpty(Optional<String> test) throws IllegalValueException {
+    private String checkEmpty(Optional<String> test) throws IllegalValueException {
         try {
             return test.get();
         } catch (NoSuchElementException nsee) {
