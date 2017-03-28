@@ -94,7 +94,7 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
-        internalList.sort((thisTask, otherTask) -> thisTask.getPriority() - otherTask.getPriority());
+        internalList.sort((thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
         return taskFoundAndDeleted;
     }
 
@@ -133,7 +133,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
-        internalList.sort((thisTask, otherTask) -> thisTask.getPriority() - otherTask.getPriority());
+        internalList.sort((thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
     }
 
     public void markTaskDone(int index) {
