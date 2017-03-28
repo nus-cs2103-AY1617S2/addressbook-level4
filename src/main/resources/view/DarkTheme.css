@@ -90,25 +90,28 @@
 }
 
 .list-cell {
+	-fx-background-color: transparent;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
 }
 
-
+.list-cell:selected {
+	-fx-background-color: rgba(128, 128, 128, .6);
+}
 .list-cell .label {
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
     -fx-padding: 0 0 0 0;
 }
 
 .cell_big_label {
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .cell_small_label {
     -fx-font-size: 11px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .anchor-pane {
@@ -129,7 +132,7 @@
 }
 
 .result-display {
-    -fx-background-color: #ffccbb;
+    -fx-background-color: white;
 }
 
 .result-display .label {
@@ -153,7 +156,7 @@
 
 .grid-pane {
     -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-border-color: white;
     -fx-border-width: 0px;
 }
 
@@ -282,7 +285,7 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: #6eb5c0;
+    -fx-border-color: white;
     -fx-border-width: 0 0 1 0;
 }
 
