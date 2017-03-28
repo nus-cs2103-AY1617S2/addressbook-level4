@@ -27,6 +27,7 @@ public class DateUtil {
     /**
      * Compares two dates strings. Both strings must be in the format dd/MM/yyyy hh:mm.
      * Empty strings are considered to be of lower value than non-empty strings.
+     *
      * @return an int representing the comparison result of the two date strings.
      * @throws ParseException if any of the date strings cannot be parsed.
      */

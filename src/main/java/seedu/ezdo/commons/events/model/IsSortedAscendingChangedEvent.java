@@ -3,7 +3,9 @@ package seedu.ezdo.commons.events.model;
 
 import seedu.ezdo.commons.events.BaseEvent;
 
-/** Indicates that the IsSortedAscending variable in the model has changed */
+/**
+ * Indicates that the IsSortedAscending variable in the model has changed.
+ */
 public class IsSortedAscendingChangedEvent extends BaseEvent {
 
     private final Boolean isSortedAscending;

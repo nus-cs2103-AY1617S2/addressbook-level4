@@ -12,7 +12,7 @@ import seedu.ezdo.logic.commands.SortCommand;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
 /**
- * Parses input arguments and creates a new SortCommand object
+ * Parses input arguments and creates a new SortCommand object.
  */
 public class SortCommandParser implements CommandParser {
 

@@ -3,7 +3,9 @@ package seedu.ezdo.commons.events.model;
 import seedu.ezdo.commons.events.BaseEvent;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
-/** Indicates that the SortCriteria in the model has changed */
+/**
+ * Indicates that the SortCriteria in the model has changed.
+ */
 public class SortCriteriaChangedEvent extends BaseEvent {
 
     private final SortCriteria sortCriteria;
