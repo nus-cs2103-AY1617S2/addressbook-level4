@@ -108,11 +108,11 @@ More information about using Gradle can be found [here](https://github.com/CS210
 
 #### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git.
     This is because Eclipse failed to recognize the new files that are pulled from Git.
-1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
+<br>1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
 
 #### 1.5.2.  Eclipse reports missing libraries.
     Eclipse has failed to retrieve all required dependencies during the project import.
-1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
+<br>1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
 
 ## 2. Design
 
@@ -159,7 +159,7 @@ Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-log
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given below) defines it's Application Programming Interface (API) in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br><br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.1.2 : Class Diagram of the Logic Component_
@@ -234,12 +234,14 @@ to display the final output.
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)<br>
+This section will elaborate on the functions of the `Logic` component; i.e how an input is received from the user and passed through as a command before the final product is ready to be stored and displayed on the UI.
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+1. `Logic` uses the `Parser` class to process the input provided by the user.
+2. This creates a `Command` object according to the command word input (eg. `add` will cause the AddCommand to create an AddCommand object).
+3. This is then executed by the `LogicManager`, which will process the command accordingly.
+4. The command execution will interact with the `Model` component (eg. adding a task), to create a new task.
+4. The result of the command execution is encapsulated as a `CommandResult` object which will be handed back to the `Ui` component and display the relevant results to the user.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
@@ -267,7 +269,7 @@ The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that 
 
 #### 2.4.1 Undo/Redo implementation
 
-The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `oringator` the component that generates the `momento` object and the `momento collector`.
+The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `originator` the component that generates the `momento` object and the `momento collector`.
 
 Whenever the data object is modified, the `originator` sends a copy of the current state of the data as a `memento` object to the `momento collector` to keep track of. When the undo command is given, the `momento collector` simply returns the `momento` object representing the previous state of the data.
 
@@ -397,8 +399,8 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 ### 4.4. Troubleshooting tests
 
 #### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
-    This is because Assertions are not enabled for JUnit tests. <br>
-1. Enable assertions in JUnit tests as described
+    This is because Assertions are not enabled for JUnit tests.
+<br>1. Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
 2. Delete run configurations created when you ran tests earlier.
 
