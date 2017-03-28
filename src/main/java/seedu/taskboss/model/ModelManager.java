@@ -122,6 +122,36 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
+    //@@author A0144904H
+    @Override
+    public void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
+                                                                        throws IllegalValueException{
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        int index = 0;
+        for (ReadOnlyTask task : tasksToMarkDone) {
+            int targetIndex = indices.get(index) - 1;
+            if (!task.isRecurring()) {
+                Task newTask = new Task(task.getName(), task.getPriorityLevel(),
+                        task.getStartDateTime(), task.getEndDateTime(),
+                        task.getInformation(), task.getRecurrence(),
+                        new UniqueCategoryList("Done"));
+                this.taskBoss.updateTask(targetIndex, newTask);
+            } else {
+
+                Task copy = new Task(task);
+                Task newTask = new Task(copy);
+                newTask.getRecurrence().updateTaskDates(newTask);
+                this.taskBoss.updateTask(targetIndex, newTask);
+            }
+
+            index++;
+        }
+
+
+        indicateTaskBossChanged();
+    }
+
+    //@@author
     @Override
     public void renameCategory(Category oldCategory, Category newCategory)
             throws IllegalValueException, CommandException {
@@ -364,33 +394,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "category=" + categoryKeyWords.categoryName;
         }
     }
-
-    @Override
-    public void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
-                                                                        throws IllegalValueException{
-        taskbossHistory.push(new TaskBoss(this.taskBoss));
-        int index = 0;
-        for (ReadOnlyTask task : tasksToMarkDone) {
-            int targetIndex = indices.get(index) - 1;
-            if (!task.isRecurring()) {
-                Task newTask = new Task(task.getName(), task.getPriorityLevel(),
-                        task.getStartDateTime(), task.getEndDateTime(),
-                        task.getInformation(), task.getRecurrence(),
-                        new UniqueCategoryList("Done"));
-                this.taskBoss.updateTask(targetIndex, newTask);
-            } else {
-
-                Task copy = new Task(task);
-                Task newTask = new Task(copy);
-                newTask.getRecurrence().updateTaskDates(newTask);
-                this.taskBoss.updateTask(targetIndex, newTask);
-            }
-
-            index++;
-        }
-
-
-        indicateTaskBossChanged();
-    }
-
 }
