@@ -90,9 +90,11 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().value + " ");
-        sb.append("s/" + this.getStartDate().toString() + " ");
-        sb.append("e/" + this.getEndDate().toString() + " ");
-        sb.append("d/" + this.getDescription().get().value + " ");
+        // @@author A0140032E
+        this.getStartDate().ifPresent(x -> sb.append("s/" + x.toString()));
+        this.getEndDate().ifPresent(x -> sb.append("e/" + x.toString()));
+        this.getDescription().ifPresent(x -> sb.append("d/" + x.toString()));
+        // @@author
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
