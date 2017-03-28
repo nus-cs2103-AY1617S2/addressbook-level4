@@ -58,7 +58,7 @@ public class DeleteCommandTest extends TaskBossGuiTest {
 
         //confirm the list now contains all previous tasks except the deleted task
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
-
+        //@@author A0138961W
         //confirm the result message is correct
         ArrayList<TestTask> deletedTasks = new ArrayList<TestTask>();
         deletedTasks.add(taskToDelete);
