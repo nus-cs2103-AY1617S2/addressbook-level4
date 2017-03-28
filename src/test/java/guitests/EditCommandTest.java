@@ -18,7 +18,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedTaskList = td.getTypicalPersons();
+    TestTask[] expectedTaskList = td.getTypicalTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
@@ -54,14 +54,14 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Fish");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Walk the fishies";
         int filteredTaskListIndex = 1;
         int taskListIndex = 5;
 
         TestTask taskToEdit = expectedTaskList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withDescription("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withDescription("Walk the fishies").build();
 
         assertEditSuccess(filteredTaskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
@@ -96,7 +96,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline t/friends");
+        commandBox.runCommand("edit 3 Walk the bear t/urgent");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

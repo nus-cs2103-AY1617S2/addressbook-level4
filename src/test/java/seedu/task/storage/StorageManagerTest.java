@@ -18,7 +18,7 @@ import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.TaskList;
 import seedu.task.model.UserPrefs;
 import seedu.task.testutil.EventsCollector;
-import seedu.task.testutil.TypicalTestPersons;
+import seedu.task.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 
@@ -60,7 +60,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        TaskList original = new TypicalTestPersons().getTypicalAddressBook();
+        TaskList original = new TypicalTestTasks().getTypicalAddressBook();
         storageManager.saveTaskList(original);
         ReadOnlyTaskList retrieved = storageManager.readTaskList().get();
         assertEquals(original, new TaskList(retrieved));

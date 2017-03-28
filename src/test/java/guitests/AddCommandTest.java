@@ -15,24 +15,24 @@ public class AddCommandTest extends TaskListGuiTest {
     @Test
     public void add() {
         //add one person
-        TestTask[] currentList = td.getTypicalPersons();
-        TestTask personToAdd = td.hoon;
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask personToAdd = td.iguana;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
 
         //add another person
-        personToAdd = td.ida;
+        personToAdd = td.jaguar;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
 
         //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.iguana.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(personListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.bear);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
