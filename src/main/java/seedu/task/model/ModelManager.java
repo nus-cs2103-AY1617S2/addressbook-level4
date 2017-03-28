@@ -180,8 +180,11 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             boolean isPresent = false;
-            if (searchList(task).size() > 0) {
+            ArrayList<Integer> occurrenceIndexList = searchList(task);
+            if (occurrenceIndexList.size() > 0) {
                 isPresent = true;
+                //                task.setStartTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getStartTiming());
+                //                task.setEndTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getEndTiming());
             }
             return isPresent;
         }

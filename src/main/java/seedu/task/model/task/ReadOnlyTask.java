@@ -59,4 +59,8 @@ public interface ReadOnlyTask {
 
     ArrayList<RecurringTaskOccurrence> getOccurrences();
 
+    void setStartTiming(Timing startTiming);
+    void setEndTiming(Timing endTiming);
+
+
 }

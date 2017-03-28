@@ -42,11 +42,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.recurring = recurring;
         this.frequency = frequency;
         setOccurrences(startTiming, endTiming);
-
-
-        //        this.startTiming = startTiming;
-        //        this.endTiming = endTiming;
-        //        this.complete = false;
     }
 
     public Task(Description description, Priority priority, ArrayList<RecurringTaskOccurrence> occurrences,
@@ -89,6 +84,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return priority;
     }
 
+    @Override
     public void setStartTiming(Timing startTiming) {
         assert startTiming != null;
         this.occurrences.get(0).setStartTiming(startTiming);
@@ -99,6 +95,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return this.occurrences.get(0).getStartTiming();
     }
 
+    @Override
     public void setEndTiming(Timing endTiming) { //add parameter to index into correct endTime
         assert endTiming != null;
         this.occurrences.get(0).setEndTiming(endTiming);
@@ -204,15 +201,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * @param endTime
      */
     public void setOccurrences(Timing initialStartTime, Timing initialEndTime) {
-        if (!isRecurring()) {
-            RecurringTaskOccurrence occurrenceToAdd = new RecurringTaskOccurrence(initialStartTime, initialEndTime);
-            this.occurrences.add(occurrenceToAdd);
-        } else {
+        RecurringTaskOccurrence occurrenceToAdd = new RecurringTaskOccurrence(initialStartTime, initialEndTime);
+        this.occurrences.add(occurrenceToAdd);
+        if (isRecurring()) {
             int freqNumber = frequency.getFrequencyNumber();
             String freqCharacter = frequency.getFrequencyCharacter();
             Calendar cal1 = Calendar.getInstance();
             Calendar cal2 = Calendar.getInstance();
-            System.out.println(initialStartTime.getTiming());
             cal1.setTime(initialStartTime.getTiming());
             cal2.setTime(initialEndTime.getTiming());
             SimpleDateFormat startTimeFormat = retriveFormat(initialStartTime.toString());
@@ -220,10 +215,9 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
             String tempStartTime, tempEndTime;
             Timing tempStart = null, tempEnd = null;
             RecurringTaskOccurrence occurenceToAdd;
-
             switch (freqCharacter) {
             case "h":
-                for (int i = 0; i < RecurringFrequency.HOUR_LIMIT; i += freqNumber) {
+                for (int i = 1; i < RecurringFrequency.HOUR_LIMIT; i += freqNumber) {
                     cal1.add(Calendar.HOUR_OF_DAY, freqNumber);
                     cal2.add(Calendar.HOUR_OF_DAY, freqNumber);
                     tempStartTime = startTimeFormat.format(cal1.getTime());
@@ -245,7 +239,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                 }
                 break;
             case "d":
-                for (int i = 0; i < RecurringFrequency.DAY_LIMIT; i += freqNumber) {
+                for (int i = 1; i < RecurringFrequency.DAY_LIMIT; i += freqNumber) {
                     cal1.add(Calendar.DATE, freqNumber);
                     cal2.add(Calendar.DATE, freqNumber);
                     tempStartTime = startTimeFormat.format(cal1.getTime());
@@ -267,7 +261,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                 }
                 break;
             case "m":
-                for (int i = 0; i < RecurringFrequency.MONTH_LIMIT; i += freqNumber) {
+                for (int i = 1; i < RecurringFrequency.MONTH_LIMIT; i += freqNumber) {
                     cal1.add(Calendar.MONTH, freqNumber);
                     cal2.add(Calendar.MONTH, freqNumber);
                     tempStartTime = startTimeFormat.format(cal1.getTime());
