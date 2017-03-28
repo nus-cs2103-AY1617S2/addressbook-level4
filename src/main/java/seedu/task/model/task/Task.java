@@ -26,7 +26,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     private boolean recurring;
     private UniqueTagList tags;
     private RecurringFrequency frequency;
-
+    public ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
 
     /**
      * Every field must be present and not null.
@@ -42,6 +42,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.recurring = recurring;
         this.frequency = frequency;
         setOccurrences(startTiming, endTiming);
+        occurrenceIndexList.add(0);
     }
 
     public Task(Description description, Priority priority, ArrayList<RecurringTaskOccurrence> occurrences,
@@ -63,6 +64,16 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this(source.getDescription(), source.getPriority(), source.getOccurrences(),
                 source.getTags(), source.isRecurring(), source.getFrequency());
     }
+
+    @Override
+    public ArrayList<Integer> getOccurrenceIndexList() {
+        return occurrenceIndexList;
+    };
+
+    @Override
+    public void setOccurrenceIndexList(ArrayList<Integer> list) {
+        occurrenceIndexList = list;
+    };
 
     public void setDescription(Description description) {
         assert description != null;
@@ -91,8 +102,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     @Override
-    public Timing getStartTiming() { //add parameter to index into correct endTime
-        return this.occurrences.get(0).getStartTiming();
+    public Timing getStartTiming(int i) { //add parameter to index into correct endTime
+        return this.occurrences.get(i).getStartTiming();
+    }
+
+    @Override
+    public Timing getStartTiming() {
+        return getStartTiming(0);
     }
 
     @Override

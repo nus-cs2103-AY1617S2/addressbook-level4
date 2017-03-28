@@ -180,7 +180,8 @@ public class ModelManager extends ComponentManager implements Model {
          * @param task
          * @return list of Indices for occurrences that match keywords for task
          */
-        public ArrayList<Integer> searchList(ReadOnlyTask task) {
+        public boolean searchList(ReadOnlyTask task) {
+            boolean isValid = false;
             ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
             for (int i = 0; i < task.getOccurrences().size(); i++) {
                 final int finalIndex = i;
@@ -202,23 +203,24 @@ public class ModelManager extends ComponentManager implements Model {
                                 .findAny()
                                 .isPresent())) {
                     occurrenceIndexList.add(i);
+                    isValid = true;
                 }
             }
-
-            return occurrenceIndexList;
+            task.setOccurrenceIndexList(occurrenceIndexList);
+            return isValid;
         }
 
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            boolean isPresent = false;
-            ArrayList<Integer> occurrenceIndexList = searchList(task);
-            if (occurrenceIndexList.size() > 0) {
-                isPresent = true;
-                //                task.setStartTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getStartTiming());
-                //                task.setEndTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getEndTiming());
-            }
-            return isPresent;
+            return searchList(task);
+            //            boolean isPresent = searchList(task);
+            //            if (task.getOccurrenceIndexList().size() > 0) {
+            //                isPresent = true;
+            //                //                task.setStartTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getStartTiming());
+            //                //                task.setEndTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getEndTiming());
+            //            }
+            //            return isPresent;
         }
 
         //@@author
