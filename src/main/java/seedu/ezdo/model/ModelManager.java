@@ -172,7 +172,7 @@ public class ModelManager extends ComponentManager implements Model {
   //@@author A0139248X
     // =========== Filtered Task List Accessors
     // =============================================================
-
+  //@@author A0141010L
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -423,6 +423,7 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
+  //@@author  
   //@@author A0139248X
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
