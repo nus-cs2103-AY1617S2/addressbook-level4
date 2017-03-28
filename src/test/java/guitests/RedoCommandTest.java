@@ -38,7 +38,7 @@ public class RedoCommandTest extends AddressBookGuiTest {
         assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
         TestTask[] emptyList = {};
         assertRedoSuccess(emptyList);
-            }
+    }
     private void assertRedoSuccess(TestTask[] expectedList) {
         commandBox.runCommand("redo");
         assertTrue(personListPanel.isListMatching(expectedList));
