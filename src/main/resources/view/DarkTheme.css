@@ -87,6 +87,7 @@
 }
 
 .list-cell {
+    -fx-background-color: lightcyan;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
@@ -108,7 +109,6 @@
 }
 
 .anchor-pane {
-     -fx-background-color: white;
      -fx-font-size: 12px;
 }
 
@@ -127,13 +127,13 @@
 }
 
 .result-display {
-    -fx-background-color: #ffffff;
     -fx-text-fill: blue;
     -fx-font-weight: bold;
     -fx-font-size: 20px;
 }
 
 .result-display .label {
+    -fx-background-color: lightcyan;
     -fx-text-fill: black !important;
 }
 
