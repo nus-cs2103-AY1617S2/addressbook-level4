@@ -8,9 +8,10 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/leeyh20.jpg" width="150"><br><br>
 **Role**: Team Lead <br>
 
-* Components in charge of: Model, Storage
+* Components in charge of: Model, UI, Storage
 * Aspects/tools in charge of: Eclipse, Travis CI
 * Features implemented:
+    * Add priority to a task
     * Alias Storage
     * [Finish](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#36-marking-tasks-as-finished--finish)
     * Unfinish
@@ -33,14 +34,16 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="" width="150"><br>
 **Role**: Developer <br>
 
-* Components in charge of: Logic, UI
-* Aspects/tools in charge of: JavaFX
+* Components in charge of: Logic, Model
+* Aspects/tools in charge of: JavaFX, Natty
 * Features implemented:
-    * Add task
+    * Add task with time
     * Command History
     * Power Search
+
 * Code written: [functional code]() [test code]() [docs]()
 * Other major contributions:
+    * Revamp parsing to allow flexible commands
     * Updating of project documents
     * Refactoring of sample tasks
 * Aspects responsible for:
@@ -53,7 +56,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="" width="150"><br>
 **Role**: Developer <br>
 
-* Components in charge of: Logic, UI
+* Components in charge of: Logic, Model
 * Aspects/tools in charge of: Git
 * Features implemented:
     * List
