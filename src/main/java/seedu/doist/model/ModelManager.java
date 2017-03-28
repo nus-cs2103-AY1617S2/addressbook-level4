@@ -212,6 +212,8 @@ public class ModelManager extends ComponentManager implements Model {
         sortTypes.add(SortType.ALPHA);
         sortTasks(sortTypes);
     }
+    //@@author
+
 
     //@@author A0147620L
     public ArrayList<String> getAllNames() {
@@ -219,7 +221,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-    //@@author
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -306,6 +307,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.descriptionKeyWords = descKeyWords;
         }
 
+        //@@author A0147620L
         @Override
         public boolean run(ReadOnlyTask task) {
             return descriptionKeyWords.stream()

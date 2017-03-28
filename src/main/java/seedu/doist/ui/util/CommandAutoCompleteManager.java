@@ -67,6 +67,13 @@ public class CommandAutoCompleteManager {
         return suggestions;
     }
 
+    //@@author A0147620L
+    /**
+     * Method to provide auto-complete suggestions for search
+     * @param words
+     * @param logic
+     * @return list of strings that represent possible autocomplete matches
+     */
     private ArrayList<String> getSuggestionsForSearch(String[] words, Logic logic) {
         int count = 0;
         StringBuilder s = new StringBuilder();
@@ -92,6 +99,8 @@ public class CommandAutoCompleteManager {
             isFind = false;
         }
     }
+    //@@author
+
     /**
      * display the suggested text in a ContextMenu pop-up window
      */
