@@ -26,7 +26,7 @@ public interface Model {
     UserPrefs getUserPrefs();
 
     void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending);
-
+  //@@author A0139248X
     /** Deletes the given task. */
     void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException;
 
@@ -54,6 +54,7 @@ public interface Model {
     /** Update stack when new command is executed
      * @throws EmptyStackException */
     void updateStacks() throws EmptyStackException;
+  //@@author A0139248X
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.

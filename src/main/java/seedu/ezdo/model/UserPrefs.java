@@ -37,7 +37,7 @@ public class UserPrefs {
     public void setGuiSettings(double width, double height, int x, int y) {
         guiSettings = new GuiSettings(width, height, x, y);
     }
-
+  //@@author A0139248X
     public void updateLastUsedSortCriteria(SortCriteria sortCriteria) {
         this.sortCriteria = sortCriteria;
     }
@@ -45,7 +45,7 @@ public class UserPrefs {
     public SortCriteria getSortCriteria() {
         return sortCriteria;
     }
-
+  //@@author
     public void addCommandAlias(String command, String alias) throws AliasAlreadyInUseException,
         CommandDoesNotExistException {
         commandAliases.addAlias(command, alias);

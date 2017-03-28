@@ -55,7 +55,7 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(ezce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
-
+  //@@author A0139248X
     @Subscribe
     public void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent ezce) {
         String lastUpdated = (new Date()).toString();
