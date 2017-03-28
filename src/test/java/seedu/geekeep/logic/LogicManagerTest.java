@@ -66,15 +66,45 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            Title title = new Title("Adam Brown");
-            DateTime privateEndDateTime = new DateTime("01-05-17 1630");
+        Task event() throws Exception {
+            Title title = new Title("Event");
+            DateTime endDateTime = new DateTime("01-05-17 1630");
             DateTime startDateTime = new DateTime("01-04-17 1630");
-            Location privateLocation = new Location("111, alpha street");
+            Location location = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, startDateTime, privateEndDateTime, privateLocation, tags, false);
+            return new Task(title, startDateTime, endDateTime, location, tags, false);
+        }
+
+        Task deadline() throws Exception {
+            Title title = new Title("Deadline");
+            DateTime endDateTime = new DateTime("01-05-17 1630");
+            Location location = new Location("222, beta street");
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("longertag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(title, null, endDateTime, location, tags, false);
+        }
+
+        Task eventWithoutTime() throws Exception {
+            Title title = new Title("Event Without Time");
+            DateTime endDateTime = new DateTime("01-05-17");
+            DateTime startDateTime = new DateTime("01-04-17");
+            Location location = new Location("111, alpha street");
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("longertag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(title, startDateTime, endDateTime, location, tags, false);
+        }
+
+        Task floatingTask() throws Exception {
+            Title title = new Title("Floating Task");
+            Location location = new Location("333, charlie street");
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("longertag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(title, null, null, location, tags, false);
         }
 
         /**
@@ -118,8 +148,12 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getTitle().toString());
-            cmd.append(" s/").append(p.getStartDateTime());
-            cmd.append(" e/").append(p.getEndDateTime());
+            if (!p.isFloatingTask()) { 
+                if (p.isEvent()) {
+                    cmd.append(" s/").append(p.getStartDateTime());
+                }
+                cmd.append(" e/").append(p.getEndDateTime());
+            }
             cmd.append(" l/").append(p.getLocation());
 
             UniqueTagList tags = p.getTags();
@@ -300,17 +334,22 @@ public class LogicManagerTest {
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/01-04-17 1630 e/not_numbers l/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Title s/01-05-17 1630 e/01-04-17 1630 l/valid, location",
+                Task.MESSAGE_ENDDATETIME_LATER_CONSTRAINTS);
+        assertCommandFailure("add Valid Title s/01-05-17 1630 l/valid, location",
+                Task.MESSAGE_DATETIME_MATCH_CONSTRAINTS);
         assertCommandFailure(
                 "add Valid Title s/01-04-17 1630 e/01-05-17 1630 l/valid, location t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
-
     }
 
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+
+        // add a new event
+        Task toBeAdded = helper.event();
         GeeKeep expectedAB = new GeeKeep();
         expectedAB.addTask(toBeAdded);
 
@@ -320,13 +359,42 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedAB.getTaskList());
 
+        // add a new event without time field
+        toBeAdded = helper.eventWithoutTime();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        // add a new deadline
+        toBeAdded = helper.deadline();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        // add a new floating task
+        toBeAdded = helper.floatingTask();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
     }
 
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.event();
 
         // setup starting state
         model.addTask(toBeAdded); // task already in internal geekeep
