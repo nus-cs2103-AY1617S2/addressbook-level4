@@ -15,8 +15,8 @@ public class UndoCommandTest extends TaskListGuiTest {
         assertResultMessage(UndoCommand.MESSAGE_NO_HISTORY);
 
         //undo add
-        TestTask[] originalList = td.getTypicalPersons();
-        commandBox.runCommand(td.hoon.getAddCommand());
+        TestTask[] originalList = td.getTypicalTasks();
+        commandBox.runCommand(td.iguana.getAddCommand());
         commandBox.runCommand("undo");
         assertTrue(personListPanel.isListMatching(originalList));
 
