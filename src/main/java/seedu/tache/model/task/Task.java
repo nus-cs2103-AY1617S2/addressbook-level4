@@ -178,6 +178,7 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0139961U
     /**
      * Returns true if this task is within the given date
      * (StartDate is before @code date and EndDate is after @code date)
