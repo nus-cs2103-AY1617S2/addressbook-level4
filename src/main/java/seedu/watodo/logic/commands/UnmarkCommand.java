@@ -18,7 +18,7 @@ public class UnmarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of the task identified to undone "
             + "by the index number used in the last task listing as completed.\n"
-            + "Parameters: INDEX (must be a positive integer) [INDEX] [INDEX]...\n" + "Example: " + COMMAND_WORD
+            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]\n" + "Example: " + COMMAND_WORD
             + " 1 2";
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Task undone: %1$s";
