@@ -14,6 +14,7 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.commons.util.StringUtil;
 import seedu.watodo.logic.commands.ListDeadlineCommand;
+import seedu.watodo.logic.commands.ListDoneCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
 import seedu.watodo.logic.commands.ListUndoneCommand;
@@ -287,6 +288,12 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (type) {
+            case ListDoneCommand.COMMAND_WORD:
+                if (task.getStatus().toString().equalsIgnoreCase(type)) {
+                    return true;
+                } else {
+                    return false;
+                }
             case ListDeadlineCommand.COMMAND_WORD:
                 if (task.getStartDate() == null && task.getEndDate() != null) {
                     return true;

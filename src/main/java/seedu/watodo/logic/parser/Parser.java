@@ -21,6 +21,7 @@ import seedu.watodo.logic.commands.ListAllCommand;
 import seedu.watodo.logic.commands.ListCommand;
 import seedu.watodo.logic.commands.ListDayCommand;
 import seedu.watodo.logic.commands.ListDeadlineCommand;
+import seedu.watodo.logic.commands.ListDoneCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
 import seedu.watodo.logic.commands.ListMarkedCommand;
@@ -96,8 +97,8 @@ public class Parser {
             case ListDeadlineCommand.COMMAND_WORD:
                 return new ListDeadlineCommand();
 
-            case ListUndoneCommand.COMMAND_WORD:
-                return new ListUndoneCommand();
+            case ListDoneCommand.COMMAND_WORD:
+                return new ListDoneCommand();
 
             case ListEventCommand.COMMAND_WORD:
                 return new ListEventCommand();
@@ -110,6 +111,9 @@ public class Parser {
 
             case ListMonthCommand.COMMAND_WORD:
                 return new ListMonthCommand();
+
+            case ListUndoneCommand.COMMAND_WORD:
+                return new ListUndoneCommand();
 
             case ListWeekCommand.COMMAND_WORD:
                 return new ListWeekCommand();
