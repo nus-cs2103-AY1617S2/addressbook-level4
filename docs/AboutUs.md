@@ -6,9 +6,24 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Haya Alsharef](https://github.com/hayaz3)
 <img src="images/hayaz3.png" width="150"><br>
-Role: Developer<br>
-Responsibilities: Team Lead, Scheduling and Tracking<br>
-Component: Storage
+
+* Components in charge of: [Logicl](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
+* Aspects/tools in charge of: Team Lead, Scheduling
+* Features implemented:
+   * [Add priority to a task](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
+   * [Mark Done command and shortcut(support multiple Done)](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#310-marking-a-task-done--done)
+   * [Edit category name](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#34-editing-a-task--edit)
+   * [Edit priority of a task](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#34-editing-a-task--edit)
+   * [Default categories]
+* Code written: [[functional code](A0147990R.md)][[test code](A0147990R.md)]
+* Other major contributions:
+  * Romove email in Addressbook level 4 [#52](https://github.com/CS2103JAN2017-W14-B2/main/pull/52)
+  * Refactor command word for mark done [[#103](https://github.com/CS2103JAN2017-W14-B2/main/pull/103)]
+  * Refactor select command to view [[#107](https://github.com/CS2103JAN2017-W14-B2/main/pull/107)]
+  * Make name accept special characters [[#146](https://github.com/CS2103JAN2017-W14-B2/main/pull/146)]
+  * Make priority be added using prefix [[#146](https://github.com/CS2103JAN2017-W14-B2/main/pull/146)]
+  * Implement new exception class for default category [[#152](https://github.com/CS2103JAN2017-W14-B2/main/pull/152)]
+  * Improve and add test cases for features and changes within features [[#76](https://github.com/CS2103JAN2017-W14-B2/main/pull/76), [#102](https://github.com/CS2103JAN2017-W14-B2/main/pull/102), [#103](https://github.com/CS2103JAN2017-W14-B2/main/pull/103), [#114](https://github.com/CS2103JAN2017-W14-B2/main/pull/114), [#146](https://github.com/CS2103JAN2017-W14-B2/main/pull/146)]
 
 -----
 
@@ -65,7 +80,7 @@ Component: Storage
 * Other major contributions:
   * In charge of review and merge pull requests
   * Help debug and solve merge conflicts [[#152](https://github.com/CS2103JAN2017-W14-B2/main/pull/152), [#146](https://github.com/CS2103JAN2017-W14-B2/main/pull/146)]
-  * Documentation [[#80](https://github.com/CS2103JAN2017-W14-B2/main/pull/80)] [[#1](https://github.com/CS2103JAN2017-W14-B2/main/pull/1)] 
+  * Documentation [[#80](https://github.com/CS2103JAN2017-W14-B2/main/pull/80), [#1](https://github.com/CS2103JAN2017-W14-B2/main/pull/1)] 
 
 -----
 
