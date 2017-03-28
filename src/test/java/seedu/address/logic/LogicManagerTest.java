@@ -464,7 +464,7 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
-
+        //@@author A0110491U
         /** Generates the correct add command based on the event given */
         String generateAddCommand(Event p) {
             StringBuffer cmd = new StringBuffer();
@@ -484,7 +484,7 @@ public class LogicManagerTest {
 
             return cmd.toString();
         }
-
+        //@@author
         /**
          * Generates an WhatsLeft with auto-generated activities.
          */

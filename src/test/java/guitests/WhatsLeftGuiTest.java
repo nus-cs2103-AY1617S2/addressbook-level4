@@ -72,7 +72,6 @@ public abstract class WhatsLeftGuiTest {
             activityListPanel = mainGui.getActivityListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
-            browserPanel = mainGui.getBrowserPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();

@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.person.Description;
 import seedu.address.model.person.EndDate;
@@ -110,19 +111,19 @@ public class TestActivity implements ReadOnlyEvent {
     public String toString() {
         return getAsText();
     }
-
+    //@@author A0110491U
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("sd/" + this.getStartDate().value + " ");
-        sb.append("st/" + this.getStartTime().value + " ");
-        sb.append("ed/" + this.getEndDate().value + " ");
-        sb.append("et/" + this.getEndTime().value + " ");
+        sb.append("sd/" + this.getStartDate().getValue().format(DateTimeFormatter.ofPattern("ddMMyy")));
+        sb.append("st/" + this.getStartTime().getValue().format(DateTimeFormatter.ofPattern("HHmm")));
+        sb.append("ed/" + this.getEndDate().getValue().format(DateTimeFormatter.ofPattern("ddMMyy")));
+        sb.append("et/" + this.getEndTime().getValue().format(DateTimeFormatter.ofPattern("HHmm")));
         sb.append("l/" + this.getLocation().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("ta/" + s.tagName + " "));
         return sb.toString();
     }
-    
+    //@@author
     @Override
     public boolean isOver() {
         if (LocalDate.now().isAfter(this.getEndDate().getValue())) {
