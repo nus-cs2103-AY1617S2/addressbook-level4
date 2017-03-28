@@ -40,7 +40,7 @@ public class TestTodo implements ReadOnlyTodo {
     }
     //@@author
 
-    //@@author A0163786N, A0163720M
+    //@@author A0163786N, A0163720M, A0165043M
     /**
      * Constructor for a deadline
      */
@@ -56,7 +56,7 @@ public class TestTodo implements ReadOnlyTodo {
         this(name, starttime, endtime, null, tags);
     }
 
-    //@@author A0163786N, A0163720M
+    //@@author A0163786N, A0163720M, A0165043M
     /**
      * General todo constructor
      */
