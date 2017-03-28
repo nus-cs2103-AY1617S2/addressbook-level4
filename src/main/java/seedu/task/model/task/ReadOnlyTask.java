@@ -20,6 +20,8 @@ public interface ReadOnlyTask {
     String getTaskDescription();
     
     TaskStatus getTaskStatus();
+    
+    String getTaskPath();
 
 
     /**

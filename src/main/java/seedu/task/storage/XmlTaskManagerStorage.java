@@ -10,6 +10,10 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
 import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.logic.commands.PathCommand;
+import seedu.task.model.task.TaskPath;
+import seedu.task.logic.parser.PathCommandParser;
+
 
 /**
  * A class to access TaskManager data stored as an xml file on the hard disk.
@@ -71,6 +75,10 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
 	assert taskManager != null;
 	assert filePath != null;
+	
+//	if(TaskPath.getPath() != null){
+//	  filePath = TaskPath.getPath();
+//    }
 
 	File file = new File(filePath);
 	FileUtil.createIfMissing(file);
