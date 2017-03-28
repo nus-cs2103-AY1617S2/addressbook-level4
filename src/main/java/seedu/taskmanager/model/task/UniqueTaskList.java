@@ -154,7 +154,8 @@ public class UniqueTaskList implements Iterable<Task> {
 
     // @@author A0131278H
     /**
-     * Sorts task list based on keywords (StartDate or EndDate). Tasks without start StartDate or EndDate are ranked higher.
+     * Sorts task list based on keywords (StartDate or EndDate). Tasks without start StartDate or
+     * EndDate are ranked higher.
      */
     public void sortByDate(String keyword) {
         if (keyword.equals(SORT_KEYWORD_STARTDATE)) {
