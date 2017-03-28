@@ -44,7 +44,7 @@
                                          </minWidth>
                                      </Label>
                                      <Label fx:id="description" styleClass="cell_big_label" text="\$first" />
-                                    
+
                            <Pane prefHeight="0.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />
                                 </HBox>
                             </children>
