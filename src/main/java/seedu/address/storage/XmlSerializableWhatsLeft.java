@@ -64,7 +64,7 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(taskList);
     }
-    
+
     @Override
     public ObservableList<ReadOnlyEvent> getEventList() {
         final ObservableList<Event> eventList = this.events.stream().map(p -> {

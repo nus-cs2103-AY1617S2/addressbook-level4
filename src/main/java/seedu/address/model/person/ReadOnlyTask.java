@@ -30,18 +30,19 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && (other.getDescription().toString() == null? this.getDescription().toString() == null :
-                    other.getDescription().toString().equals(this.getDescription().toString())) // state checks here onwards
-                && (other.getPriority().toString() == null? this.getPriority().toString() == null :
+                && (other.getDescription().toString() == null ? this.getDescription().toString() == null :
+                    other.getDescription().toString().equals(this.getDescription().
+                            toString())) // state checks here onwards
+                && (other.getPriority().toString() == null ? this.getPriority().toString() == null :
                     other.getPriority().toString().equals(this.getPriority().toString()))
-                && (other.getByDate().toString() == null? this.getByDate().toString() == null :
+                && (other.getByDate().toString() == null ? this.getByDate().toString() == null :
                     other.getByDate().toString().equals(this.getByDate().toString()))
-                && (other.getByTime().toString() == null? this.getByTime().toString() == null :
+                && (other.getByTime().toString() == null ? this.getByTime().toString() == null :
                     other.getByTime().toString().equals(this.getByTime().toString()))
-                && (other.getLocation().toString() == null? this.getLocation().toString() == null :
+                && (other.getLocation().toString() == null ? this.getLocation().toString() == null :
                     other.getLocation().toString().equals(this.getLocation().toString()))
                 && (other.getTags().equals(this.getTags()))
-                &&(other.getStatus()==this.getStatus())
+                && (other.getStatus() == this.getStatus())
                 );
     }
     //@@author
@@ -63,34 +64,34 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-    
-    
+
+
 //    //@@author A0148038A
 //    default int compareTo(ReadOnlyTask o) {
-//    	if (!this.hasDeadline() && !o.hasDeadline()) {
-//    		return this.getPriority().compareTo(o.getPriority());
-//    	} else if (this.hasDeadline() && !o.hasDeadline()) {
-//    		return 1;
-//    	} else if (!this.hasDeadline() && o.hasDeadline()) {
-//    		return -1;
-//    	} else {
-//    		if (!this.getByDate().equals(o.getByDate())) {
-//    			return getByDate().compareTo(o.getByDate());
-//    		} else if (!this.getByTime().equals(o.getByTime())) {
-//    			return getByTime().compareTo(o.getByTime());
-//    		} else {
-//    			return this.getPriority().compareTo(o.getPriority());
-//    		}
-//    	}
+//      if (!this.hasDeadline() && !o.hasDeadline()) {
+//          return this.getPriority().compareTo(o.getPriority());
+//      } else if (this.hasDeadline() && !o.hasDeadline()) {
+//          return 1;
+//      } else if (!this.hasDeadline() && o.hasDeadline()) {
+//          return -1;
+//      } else {
+//          if (!this.getByDate().equals(o.getByDate())) {
+//              return getByDate().compareTo(o.getByDate());
+//          } else if (!this.getByTime().equals(o.getByTime())) {
+//              return getByTime().compareTo(o.getByTime());
+//          } else {
+//              return this.getPriority().compareTo(o.getPriority());
+//          }
+//      }
 //    }
-//    
+//
 //    //@@author A0148038A
-//	static Comparator<? super ReadOnlyTask> getComparator() {
-//		Comparator<ReadOnlyTask> byTask = (t1, t2) -> t1.compareTo(t2);
-//		return byTask;
-//	}
+//  static Comparator<? super ReadOnlyTask> getComparator() {
+//      Comparator<ReadOnlyTask> byTask = (t1, t2) -> t1.compareTo(t2);
+//      return byTask;
+//  }
     static Comparator<? super ReadOnlyTask> getComparator() {
-		Comparator<ReadOnlyTask> byPriority = (t1, t2) -> t1.getPriority().compareTo(t2.getPriority());
-		return byPriority;
-	}
+        Comparator<ReadOnlyTask> byPriority = (t1, t2) -> t1.getPriority().compareTo(t2.getPriority());
+        return byPriority;
+    }
 }

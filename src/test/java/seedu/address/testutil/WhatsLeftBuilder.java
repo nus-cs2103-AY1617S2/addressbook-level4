@@ -20,7 +20,8 @@ public class WhatsLeftBuilder {
         this.whatsLeft = whatsLeft;
     }
 
-    public WhatsLeftBuilder withEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+    public WhatsLeftBuilder withEvent(Event event) throws UniqueEventList.DuplicateEventException,
+         DuplicateTimeClashException {
         whatsLeft.addEvent(event);
         return this;
     }

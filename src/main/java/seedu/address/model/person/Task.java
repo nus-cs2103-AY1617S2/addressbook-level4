@@ -6,7 +6,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 //@@author A0121668A
 public class Task implements ReadOnlyTask {
-    
+
     public static final boolean DEFAULT_TASK_STATUS = false;
     public static final boolean COMPLETED_TASK_STATUS = true;
 
@@ -70,7 +70,7 @@ public class Task implements ReadOnlyTask {
     public ByTime getByTime() {
         return byTime;
     }
-    
+
     public void setByDate(ByDate byDate) {
         assert byDate != null;
         this.byDate = byDate;
@@ -102,15 +102,15 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-    
+
     public boolean hasDeadline() {
-    	if (getByDate() != null) {
-    		return true;
-    	} else {
-    		return false;
-    	}
+        if (getByDate() != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
+
     @Override
     public boolean getStatus() {
         return status;
@@ -132,22 +132,22 @@ public class Task implements ReadOnlyTask {
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
-    
+
     //@@author A0121668A
     /**
      * Mark a task as complete
      */
-    
-    public void completeTask(){
+
+    public void completeTask() {
         this.status = true;
     }
-    
+
     /**
      * Mark a task as pending
      */
     public void redoTask() {
         this.status = false;
-        
+
     }
     //@@author A0121668A
     @Override
@@ -167,5 +167,5 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
-    
+
 }

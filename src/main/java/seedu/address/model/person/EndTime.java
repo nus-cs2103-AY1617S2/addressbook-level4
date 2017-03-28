@@ -12,7 +12,7 @@ import seedu.address.commons.util.StringUtil;
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
 public class EndTime {
-    
+
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
             "Event end time can only be in this format: hhmm, e.g. 1300";
 
@@ -26,31 +26,30 @@ public class EndTime {
     public EndTime(String endTimeArg) throws IllegalValueException {
         if (endTimeArg == null) {
             this.value = null;
-        } 
-        else {
+        } else {
             try {
                 this.value = StringUtil.parseStringToTime(endTimeArg);
             } catch (DateTimeException illegalValueException) {
                 throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
-                }
             }
         }
-    
+    }
+
     //@@author A0110491U
     /**
      * Checks if given EndTime string is valid
      * returns true if it is valid according to MESSAGE_ENDTIME_CONSTRAINTS
      */
     public static boolean isValidEndTime(String args) {
-        try{
-            StringUtil.parseStringToTime(args);            
+        try {
+            StringUtil.parseStringToTime(args);
         } catch (DateTimeException ive) {
             return false;
         }
         return true;
     }
     //@@author
-    
+
     /*
      * For JAXB use
      */
@@ -81,8 +80,8 @@ public class EndTime {
     public int hashCode() {
         return value.hashCode();
     }
-    
-  	public int compareTo(EndTime o) {
-      	return this.getValue().compareTo(o.getValue());
-  	}
+
+    public int compareTo(EndTime o) {
+        return this.getValue().compareTo(o.getValue());
+    }
 }

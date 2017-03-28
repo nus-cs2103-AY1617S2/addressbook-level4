@@ -1,6 +1,6 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_ACTIVITY_SUCCESS;
 
 import org.junit.Test;

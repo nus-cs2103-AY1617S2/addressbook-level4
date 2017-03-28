@@ -11,8 +11,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
 import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
+
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -57,17 +56,17 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void updateTask(Task taskToEdit, Task editedTask) throws UniqueTaskList.DuplicateTaskException {
         assert taskToEdit != null && editedTask != null;
-        
+
         if (!taskToEdit.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
         int index = internalList.indexOf(taskToEdit);
         taskToEdit.resetData(editedTask);
-        internalList.set(index, editedTask); 
+        internalList.set(index, editedTask);
         internalList.sorted();
     }
-    
+
     //@@author A0121668A
     /**
      * Marks the task in the list at position {@code index} as complete.
@@ -93,7 +92,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskToComplete);
     }
   //@@author
-    
+
     /**
      * Removes the equivalent Task from the list.
      *

@@ -8,25 +8,25 @@ import seedu.address.commons.util.StringUtil;
 
 //@@author A0124377A
 public class UpdateCalendarEvent extends BaseEvent {
-	private LocalDateTime displayedDateTime;
-	private CalendarLayout calendarLayoutMode;
-	
-	public UpdateCalendarEvent(LocalDateTime displayedDateTime, CalendarLayout calendarLayoutMode) {
-		this.displayedDateTime = displayedDateTime;
-		this.calendarLayoutMode = calendarLayoutMode;
-	}	
+    private LocalDateTime displayedDateTime;
+    private CalendarLayout calendarLayoutMode;
 
-	@Override
-	public String toString() {
-		return "Setting displayed time " + this.displayedDateTime.format(StringUtil.DATE_FORMATTER)
-		+" With mode: " + calendarLayoutMode; 
-	}
+    public UpdateCalendarEvent(LocalDateTime displayedDateTime, CalendarLayout calendarLayoutMode) {
+        this.displayedDateTime = displayedDateTime;
+        this.calendarLayoutMode = calendarLayoutMode;
+    }
 
-	public LocalDateTime getDisplayedDateTime() {
-		return displayedDateTime;
-	}
+    @Override
+    public String toString() {
+        return "Setting displayed time " + this.displayedDateTime.format(StringUtil.DATE_FORMATTER)
+            + " With mode: " + calendarLayoutMode;
+    }
 
-	public CalendarLayout getCalendarLayoutMode() {
-		return calendarLayoutMode;
-	}
+    public LocalDateTime getDisplayedDateTime() {
+        return displayedDateTime;
+    }
+
+    public CalendarLayout getCalendarLayoutMode() {
+        return calendarLayoutMode;
+    }
 }

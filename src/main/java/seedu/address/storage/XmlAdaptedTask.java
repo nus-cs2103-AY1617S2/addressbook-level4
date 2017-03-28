@@ -9,13 +9,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Task;
 import seedu.address.model.person.ByDate;
 import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -32,7 +32,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     private LocalTime byTime;
-    @XmlElement(required = true) 
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate byDate;
     @XmlElement(required = true)

@@ -8,7 +8,6 @@ import seedu.address.model.person.ReadOnlyEvent;
 
 public class SelectCommandTest extends WhatsLeftGuiTest {
 
-    
     @Test
     public void selectActivity_nonEmptyList() {
         /*

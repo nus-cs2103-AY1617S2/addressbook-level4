@@ -62,19 +62,19 @@ public class Parser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-        
+
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
-        
+
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-        
+
         case FinishCommand.COMMAND_WORD:
             return new FinishCommandParser().parse(arguments);
-        
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
-            
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -83,7 +83,7 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 

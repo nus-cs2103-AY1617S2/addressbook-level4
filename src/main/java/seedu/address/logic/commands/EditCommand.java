@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,13 +60,13 @@ public class EditCommand extends Command {
     private final EditEventDescriptor editEventDescriptor;
     private final EditTaskDescriptor editTaskDescriptor;
     private final String type;
-    
+
     //@@author A0110491U
     /**
      * @param filteredActivityListIndex the index of the activity in the filtered activity list to edit
      * @param editEventDescriptor details to edit the event with
      * @param editTaskDescriptor details to edit the task with
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public EditCommand(int filteredActivityListIndex, EditEventDescriptor editEventDescriptor,
             EditTaskDescriptor editTaskDescriptor, String type) throws IllegalValueException {
@@ -76,12 +74,12 @@ public class EditCommand extends Command {
         assert editEventDescriptor != null;
         assert editTaskDescriptor != null;
         assert type != null;
-        
+
         // converts filteredActivityListIndex from one-based to zero-based.
         this.filteredActivityListIndex = filteredActivityListIndex - 1;
         this.type = type;
         this.editEventDescriptor = new EditEventDescriptor(editEventDescriptor);
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor); 
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
@@ -94,26 +92,26 @@ public class EditCommand extends Command {
 
             Event eventToEdit = (Event) lastShownEventList.get(filteredActivityListIndex);
             try {
-                if(!isValidEndDateTime()) {
+                if (!isValidEndDateTime()) {
                     throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
                 }
                 Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
-            try {
+                try {
                 //store for undo operation
-                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
-                ModelManager.setPreviousState(currState);
-                model.updateEvent(eventToEdit, editedEvent);
-            } catch (UniqueEventList.DuplicateEventException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_EVENT);
-            } catch (DuplicateTimeClashException e) {
-                throw new CommandException(MESSAGE_EDIT_CLASH_TIME);
-            }
-            model.updateFilteredListToShowAll();
-            model.storePreviousCommand("edit");
-            
-            UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
-            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
-            return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
+                    ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+                    ModelManager.setPreviousState(currState);
+                    model.updateEvent(eventToEdit, editedEvent);
+                } catch (UniqueEventList.DuplicateEventException dpe) {
+                    throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+                } catch (DuplicateTimeClashException e) {
+                    throw new CommandException(MESSAGE_EDIT_CLASH_TIME);
+                }
+                model.updateFilteredListToShowAll();
+                model.storePreviousCommand("edit");
+
+                UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
+                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
+                return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
             } catch (IllegalValueException e) {
                 throw new CommandException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
             }
@@ -125,7 +123,7 @@ public class EditCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
-            Task taskToEdit = (Task)lastShownTaskList.get(filteredActivityListIndex);
+            Task taskToEdit = (Task) lastShownTaskList.get(filteredActivityListIndex);
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             try {
                 //store for undo operation
@@ -137,7 +135,7 @@ public class EditCommand extends Command {
             }
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
-            
+
             UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
             EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(editedTask)));
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
@@ -169,7 +167,7 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Activity} with the details of {@code activityToEdit}
      * edited with {@code editActivityDescriptor}.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     private static Event createEditedEvent(ReadOnlyEvent eventToEdit,
                                              EditEventDescriptor editEventDescriptor) throws IllegalValueException {
@@ -185,7 +183,7 @@ public class EditCommand extends Command {
         UniqueTagList updatedTags = editEventDescriptor.getTags().orElseGet(eventToEdit::getTags);
 
         return new Event(updatedDescription, updatedStartTime, updatedStartDate,
-        		updatedEndTime, updatedEndDate, updatedLocation, updatedTags);
+                updatedEndTime, updatedEndDate, updatedLocation, updatedTags);
     }
     /**
      * Stores the details to edit the activity with. Each non-empty field value will replace the
@@ -278,43 +276,43 @@ public class EditCommand extends Command {
             return tags;
         }
     }
-    
+
     //@@author A0121668A
     /**
      * Checks if input values violates time/date constraint
      */
     private boolean isValidEndDateTime() {
-        
+
         EndDate endDateToCompare;
         EndTime endTimeToCompare;
         StartDate startDateToCompare;
         StartTime startTimeToCompare;
         ReadOnlyEvent eventToEdit = model.getFilteredEventList().get(filteredActivityListIndex);
-        
-        if(editEventDescriptor.getEndDate().isPresent()){
+
+        if (editEventDescriptor.getEndDate().isPresent()) {
             endDateToCompare = editEventDescriptor.getEndDate().get();
         } else {
             endDateToCompare = eventToEdit.getEndDate();
         }
-        
-        if(editEventDescriptor.getStartDate().isPresent()){
+
+        if (editEventDescriptor.getStartDate().isPresent()) {
             startDateToCompare = editEventDescriptor.getStartDate().get();
         } else {
             startDateToCompare = eventToEdit.getStartDate();
         }
-        
-        if(editEventDescriptor.getEndTime().isPresent()){
+
+        if (editEventDescriptor.getEndTime().isPresent()) {
             endTimeToCompare = editEventDescriptor.getEndTime().get();
         } else {
             endTimeToCompare = eventToEdit.getEndTime();
         }
-        
-        if(editEventDescriptor.getStartTime().isPresent()){
+
+        if (editEventDescriptor.getStartTime().isPresent()) {
             startTimeToCompare = editEventDescriptor.getStartTime().get();
         } else {
             startTimeToCompare = eventToEdit.getStartTime();
         }
-        
+
         return Event.isValideEndDateTime(endTimeToCompare, endDateToCompare, startTimeToCompare, startDateToCompare);
     }
     /**

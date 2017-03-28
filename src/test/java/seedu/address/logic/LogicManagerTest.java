@@ -3,8 +3,8 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.time.format.DateTimeFormatter;
@@ -28,7 +28,7 @@ import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
+//import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -46,7 +46,7 @@ import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Priority;
+//import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
@@ -86,10 +86,10 @@ public class LogicManagerTest {
     private void handleJumpToEventListRequestEvent(JumpToEventListRequestEvent je) {
         targetedEventJumpIndex = je.targetIndex;
     }
-    
+
     @Subscribe
     private void handleJumpToTaskListRequestEvent(JumpToTaskListRequestEvent jt) {
-        targetedTaskJumpIndex = jt.targetIndex; 
+        targetedTaskJumpIndex = jt.targetIndex;
     }
 
     @Before
@@ -392,7 +392,7 @@ public class LogicManagerTest {
         System.out.println(a2.getAsText());
         System.out.println(a3.getAsText());
         System.out.println(a4.getAsText());
-        
+
         List<Event> fourActivities = helper.generateEventList(a3, a1, a4, a2);
         WhatsLeft expectedAB = helper.generateWhatsLeft(fourActivities);
         List<Event> expectedList = fourActivities;
@@ -468,9 +468,9 @@ public class LogicManagerTest {
         /** Generates the correct add command based on the event given */
         String generateAddCommand(Event p) {
             StringBuffer cmd = new StringBuffer();
-            
+
             cmd.append("add ");
-            
+
             cmd.append(p.getDescription().toString());
             cmd.append(" sd/").append(p.getStartDate().getValue().format(DateTimeFormatter.ofPattern("ddMMyy")));
             cmd.append(" st/").append(p.getStartTime().getValue().format(DateTimeFormatter.ofPattern("HHmm")));

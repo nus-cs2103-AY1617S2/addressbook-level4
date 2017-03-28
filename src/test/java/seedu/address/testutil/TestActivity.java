@@ -54,15 +54,15 @@ public class TestActivity implements ReadOnlyEvent {
     public void setStartTime(StartTime starttime) {
         this.starttime = starttime;
     }
-    
+
     public void setStartDate(StartDate startdate) {
         this.startdate = startdate;
     }
-    
+
     public void setEndTime(EndTime endtime) {
         this.endtime = endtime;
     }
-    
+
     public void setEndDate(EndDate enddate) {
         this.enddate = enddate;
     }
@@ -80,22 +80,22 @@ public class TestActivity implements ReadOnlyEvent {
     public StartTime getStartTime() {
         return starttime;
     }
-    
+
     @Override
     public StartDate getStartDate() {
         return startdate;
     }
-    
+
     @Override
     public EndTime getEndTime() {
         return endtime;
     }
-    
+
     @Override
     public EndDate getEndDate() {
         return enddate;
     }
-   
+
 
     @Override
     public Location getLocation() {
@@ -128,15 +128,12 @@ public class TestActivity implements ReadOnlyEvent {
     public boolean isOver() {
         if (LocalDate.now().isAfter(this.getEndDate().getValue())) {
             return true;
-        }
-        else if (LocalDate.now().isBefore(this.getEndDate().getValue())) {
+        } else if (LocalDate.now().isBefore(this.getEndDate().getValue())) {
             return false;
-        }
-        else {
+        } else {
             if (LocalTime.now().isAfter(this.getEndTime().getValue())) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
