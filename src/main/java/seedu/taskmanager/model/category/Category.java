@@ -1,11 +1,10 @@
 package seedu.taskmanager.model.category;
 
-
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Category in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidCategoryName(String)}
+ * Represents a Category in the address book. Guarantees: immutable; name is
+ * valid as declared in {@link #isValidCategoryName(String)}
  */
 public class Category {
 
@@ -17,7 +16,8 @@ public class Category {
     /**
      * Validates given category name.
      *
-     * @throws IllegalValueException if the given category name string is invalid.
+     * @throws IllegalValueException
+     *             if the given category name string is invalid.
      */
     public Category(String name) throws IllegalValueException {
         assert name != null;
@@ -39,12 +39,17 @@ public class Category {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Category // instanceof handles nulls
-                && this.categoryName.equals(((Category) other).categoryName)); // state check
+                        && this.categoryName.equals(((Category) other).categoryName)); // state
+                                                                                       // check
     }
 
     @Override
     public int hashCode() {
         return categoryName.hashCode();
+    }
+
+    public String toCategory() {
+        return categoryName;
     }
 
     /**

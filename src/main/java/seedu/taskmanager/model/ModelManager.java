@@ -10,7 +10,6 @@ import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
-import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
@@ -159,8 +158,9 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
     }
-    
-    @Override 
+
+    // @@author A0141102H
+    @Override
     public void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new ListQualifier(keywords, isComplete)));
     }
@@ -232,6 +232,9 @@ public class ModelManager extends ComponentManager implements Model {
                             .findAny().isPresent())
                     || (taskKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTime().value, keyword))
+                            .findAny().isPresent())
+                    || (taskKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getCategories(), keyword))
                             .findAny().isPresent());
         }
 
@@ -259,6 +262,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    // @@author A0141102H
     private class ListQualifier implements Qualifier {
         private boolean isComplete;
         private Set<String> taskKeyWords;
@@ -270,13 +274,15 @@ public class ModelManager extends ComponentManager implements Model {
 
         public boolean run(ReadOnlyTask task) {
             return (task.getIsMarkedAsComplete().equals(isComplete)) && (taskKeyWords.stream()
-                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword))
-                            .findAny().isPresent());
-//                    && (taskKeyWords.stream()
-//                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
-//                            .findAny().isPresent());
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword)).findAny()
+                    .isPresent());
+            // && (taskKeyWords.stream()
+            // .filter(keyword ->
+            // StringUtil.containsWordIgnoreCase(task.getEndDate().value,
+            // keyword))
+            // .findAny().isPresent());
         }
-        
+
         @Override
         public String toString() {
             return "task name=" + String.join(", ", taskKeyWords);
