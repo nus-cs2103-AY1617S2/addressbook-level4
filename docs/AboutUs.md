@@ -50,9 +50,9 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Code Quality, Deliverables and Deadlines
 * Features implemented:
    * [Add dates using natural language](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
-   * [Search for dates using natural language](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#35-finding-all-tasks-by-keywords-or-by-datetime--find)
-   * [Sort tasks](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#312-sorting-tasks--sort)
-   * [Add task recurrence](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
+   * [Find dates using natural language](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#35-finding-all-tasks-by-keywords-or-by-datetime--find)
+   * [Sort tasks by start date/end date/priority](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#312-sorting-tasks--sort)
+   * [Add recurring tasks](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
    * [Rename a category](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#39-modifying-a-category-name--name)
    * Short commands
 * Code written: [[functional code](A0143157J.md)][[test code](A0143157J.md)]
