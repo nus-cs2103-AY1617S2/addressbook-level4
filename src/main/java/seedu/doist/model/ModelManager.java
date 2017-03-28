@@ -21,6 +21,7 @@ import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.commons.util.ConfigUtil;
 import seedu.doist.commons.util.History;
+import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.tag.Tag;
