@@ -222,6 +222,7 @@ to display the final output.
 _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+This section will elaborate on the functions of the `Logic` component; i.e how an input is received from the user and passed through as a command before the final product is ready to be stored and displayed on the UI.
 
 1. `Logic` uses the `Parser` class to process the input provided by the user.
 2. This creates a `Command` object according to the command word input (eg. `add` will cause the AddCommand to create an AddCommand object).
