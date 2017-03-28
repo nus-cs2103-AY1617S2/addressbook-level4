@@ -32,11 +32,18 @@ public class DateParserTest {
         assertFalse(DateParser.isValidDateString("10/123/2000 2000"));
         assertFalse(DateParser.isValidDateString("10/123/20010 2000"));
 
+        assertFalse(DateParser.isValidDateString("a 2000"));
+        assertFalse(DateParser.isValidDateString("aaaaaaaaaa 2000"));
+
         // valid date
         assertTrue(DateParser.isValidDateString("01/01/2000 0000"));
         assertTrue(DateParser.isValidDateString("01/01/2000 1200"));
         assertTrue(DateParser.isValidDateString("01/01/0000 1200"));
         assertTrue(DateParser.isValidDateString("10/03/2017 0317"));
+        assertTrue(DateParser.isValidDateString("Mon 0317"));
+        assertTrue(DateParser.isValidDateString("Monday 0317"));
+        assertTrue(DateParser.isValidDateString("Wednesday 0000"));
+        assertTrue(DateParser.isValidDateString("foo 0317"));
     }
 
     @Test

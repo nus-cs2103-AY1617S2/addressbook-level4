@@ -12,7 +12,8 @@ public class DateParser {
 
     private static final int DEFAULT_SECONDS = 0;
     private static final int DEFAULT_MILLISECONDS = 0;
-    private static final String DATE_STRING_VALIDATION_REGEX = ".*";
+    private static final String DATE_STRING_VALIDATION_REGEX =
+            "^([A-Za-z]{3,9}|[0-3][0-9]/[0-1][0-9]/[0-9]{4}) [0-2][0-9][0-5][0-9]$";
     private static final String EMPTY_DATE_STRING = "";
     private static final int MONTH_OFFSET = 1;
     //@@evanyeung
