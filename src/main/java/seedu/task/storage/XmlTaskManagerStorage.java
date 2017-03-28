@@ -79,8 +79,8 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 //	if(PathCommand.getPath() != null){
 //	  filePath = PathCommand.getPath();
 //    }
-	//filePath = "/Users/jlevy";
-
+	filePath = "/Users/jlevy/";
+	
 	File file = new File(filePath);
 	FileUtil.createIfMissing(file);
 	XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
