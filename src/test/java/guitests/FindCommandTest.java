@@ -3,7 +3,6 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,7 +11,6 @@ import org.junit.Test;
 
 import seedu.todolist.commons.core.Messages;
 import seedu.todolist.commons.exceptions.IllegalValueException;
-import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.logic.commands.DeleteCommand;
 import seedu.todolist.logic.commands.FindCommand;
 import seedu.todolist.logic.parser.CliSyntax;
