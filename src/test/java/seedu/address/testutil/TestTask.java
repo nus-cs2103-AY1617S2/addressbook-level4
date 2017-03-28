@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.Optional;
 
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
@@ -18,32 +19,42 @@ public class TestTask implements ReadOnlyTask {
     private Optional<StartEndDateTime> startEndDateTime;
     private UniqueTagList tags;
 
+    //@@author A0140023E
     public TestTask() {
-        // TODO perhaps a better idea for each of the test tasks to always have their dates
-        // this is a temporary hack
+        // Initialize TestTask with empty deadlines, startEndDateTime and tags because they are optional.
+        // this will allow us to conveniently create TestTasks through TaskBuilder without being forced
+        // to specify the optional fields
         deadline = Optional.empty();
         startEndDateTime = Optional.empty();
-
         tags = new UniqueTagList();
     }
 
     /**
-     * Creates a copy of {@code taskToCopy}.
+     * Creates a copy of {@code taskToCopy} by shallow copying only the data.
+     * Shallow copying reduces the overhead of copying the data.
      */
     public TestTask(TestTask taskToCopy) {
-        // TODO perhaps a better idea for each of the test tasks to always have their dates
-        // this is a temporary hack
-        deadline = Optional.empty();
-        startEndDateTime = Optional.empty();
-
         name = taskToCopy.getName();
+        deadline = taskToCopy.getDeadline();
+        startEndDateTime = taskToCopy.getStartEndDateTime();
         tags = taskToCopy.getTags();
     }
 
+    //@@author
     public void setName(Name name) {
         this.name = name;
     }
 
+    //@@author A0140023E
+    public void setDeadline(Deadline dateTime) {
+        this.deadline = Optional.of(dateTime);
+    }
+
+    public void setStartEndDateTime(StartEndDateTime startEndDateTime) {
+        this.startEndDateTime = Optional.of(startEndDateTime);
+    }
+
+    //@@author
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -53,6 +64,7 @@ public class TestTask implements ReadOnlyTask {
         return name;
     }
 
+    //@@author A0140023E
     @Override
     public Optional<Deadline> getDeadline() {
         return deadline;
@@ -63,6 +75,7 @@ public class TestTask implements ReadOnlyTask {
         return startEndDateTime;
     }
 
+    //@@author
     @Override
     public UniqueTagList getTags() {
         return tags;
@@ -73,11 +86,27 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0140023E
     public String getAddCommand() {
-        // TODO add the new fields
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        sb.append("add " + getName().value + " ");
+
+        if (getDeadline().isPresent()) {
+            sb.append(" by ");
+            // TODO change the format
+            sb.append(getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
+        }
+
+        if (getStartEndDateTime().isPresent()) {
+            // TODO change the format
+            StartEndDateTime startEndDateTime = getStartEndDateTime().get();
+            sb.append(" from ");
+            sb.append(startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            sb.append(" to ");
+            sb.append(startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+        }
+
+        getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 }
