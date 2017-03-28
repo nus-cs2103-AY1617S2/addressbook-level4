@@ -63,6 +63,7 @@ public class SortCommandParser implements CommandParser {
             break;
         default:
             sortCriteria = null;
+            break;
         }
         return sortCriteria;
     }
@@ -82,6 +83,7 @@ public class SortCommandParser implements CommandParser {
                 break;
             default:
                 isSortedAscending = null;
+                break;
             }
         }
         return isSortedAscending;
