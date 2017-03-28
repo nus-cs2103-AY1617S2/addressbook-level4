@@ -1,12 +1,7 @@
 package seedu.doist.logic.parser;
 
-
-
-import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.File;
+import java.io.IOException;
 
 import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.IncorrectCommand;
@@ -17,12 +12,14 @@ public class SaveAtCommandParser {
     public Command parse(String argument) {
         // Remove trailing whitespace
         String processedArgument = argument.trim();
-        Path path = null;
+        File f = new File(processedArgument);
         try {
-            path = Paths.get(processedArgument);
-        } catch (InvalidPathException e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveAtCommand.MESSAGE_USAGE));
+            String path = f.getCanonicalPath();
+            return new SaveAtCommand(new File(path));
+        } catch (IOException e) {
+            return new IncorrectCommand(String.format(SaveAtCommand.MESSAGE_INVALID_PATH, SaveAtCommand.MESSAGE_USAGE));
+        } catch (SecurityException e) {
+            return new IncorrectCommand(String.format(SaveAtCommand.MESSAGE_INVALID_PATH, SaveAtCommand.MESSAGE_USAGE));
         }
-        return new SaveAtCommand(path.toAbsolutePath());
     }
 }
