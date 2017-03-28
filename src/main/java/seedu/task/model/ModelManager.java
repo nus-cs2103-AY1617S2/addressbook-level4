@@ -10,6 +10,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskListChangedEvent;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskId;
@@ -152,7 +153,10 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword)
+                            //@@joshuaching A0163673Y
+                            || UniqueTagList.containsWordIgnoreCase(task.getTags(), keyword))
+                            //@@author
                     .findAny()
                     .isPresent();
         }

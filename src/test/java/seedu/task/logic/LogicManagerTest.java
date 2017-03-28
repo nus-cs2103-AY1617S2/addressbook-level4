@@ -321,16 +321,16 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_find_onlyContainsWordsInDescriptions() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
         Task pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generatePersonWithName("KE Y");
-        Task p2 = helper.generatePersonWithName("KEYKEYKEY sduauo");
+        Task p3 = helper.generatePersonWithName("KE Y");
+        Task pTarget4 = helper.generatePersonWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
+        List<Task> fourPersons = helper.generatePersonList(p3, pTarget1, pTarget4, pTarget2);
         TaskList expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generatePersonList(pTarget1, pTarget2);
+        List<Task> expectedList = helper.generatePersonList(pTarget1, pTarget4, pTarget2);
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
