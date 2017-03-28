@@ -26,12 +26,12 @@ public class StorageManager extends ComponentManager implements Storage {
     private Config config;
     private TaskBossStorage taskBossStorage;
     private UserPrefsStorage userPrefsStorage;
-
+    //@@author A0138961W
     public StorageManager(Config config) {
         this(config.getTaskBossFilePath(), config.getUserPrefsFilePath());
         this.config = config;
     }
-
+    //@@author
     public StorageManager(TaskBossStorage taskBossStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.taskBossStorage = taskBossStorage;
