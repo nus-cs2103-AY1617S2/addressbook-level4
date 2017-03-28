@@ -1,8 +1,9 @@
-package seedu.onetwodo.model;
+package seedu.onetwodo.model.history;
 
 import java.util.Stack;
 
 import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
+import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 
 //@@author A0135739W
@@ -35,6 +36,14 @@ public class ToDoListHistoryManager implements ToDoListHistory {
         counterCommandHistory.push("Restore OneTwoDo");
         previousToDoLists.push(toDoList);
         nextToDoLists.clear();
+    }
+
+
+    public void saveRedoInformation(String counterCommandWord, ReadOnlyTask task,
+            ToDoList toDoList) {
+        String counterCommandWithFormatter = counterCommandWord.concat(COMMAND_FORMATTER);
+        counterCommandHistory.push(String.format(counterCommandWithFormatter, task));
+        nextToDoLists.push(toDoList);
     }
 
     @Override
