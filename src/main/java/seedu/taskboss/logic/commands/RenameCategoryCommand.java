@@ -5,7 +5,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.model.category.Category;
-import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 
 //@@author A0143157J
 /**
@@ -46,7 +46,7 @@ public class RenameCategoryCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException,
-                                        InvalidDatesException, DefaultCategoryException {
+                                        InvalidDatesException {
         assert model != null;
 
         Category oldCategory = new Category(this.oldCategory);
@@ -54,16 +54,14 @@ public class RenameCategoryCommand extends Command {
 
         try {
             checkDefaultCategoryViolation(oldCategory, newCategory);
-            try {
-                model.renameCategory(oldCategory, newCategory);
-                model.updateFilteredTaskListByCategory(newCategory);
-                return new CommandResult(MESSAGE_SUCCESS);
-            } catch (UniqueCategoryList.DuplicateCategoryException e) {
-                return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
-            }
+            model.renameCategory(oldCategory, newCategory);
+            model.updateFilteredTaskListByCategory(newCategory);
+            return new CommandResult(MESSAGE_SUCCESS);
         } catch (DefaultCategoryException dce) {
             throwCommandExceptionForDefaultCategory(dce);
             return new CommandResult(EMPTY_STRING); // will never reach this statement
+        } catch (DuplicateCategoryException e) {
+            return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
         }
     }
 

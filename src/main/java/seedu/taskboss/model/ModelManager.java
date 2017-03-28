@@ -126,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void renameCategory(Category oldCategory, Category newCategory)
-            throws IllegalValueException, CommandException {
+            throws IllegalValueException, CommandException, DuplicateCategoryException {
         assert oldCategory != null;
 
         boolean isFound = false;
@@ -165,7 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
                     }
                 }
             } catch (DuplicateCategoryException dce) {
-                dce.printStackTrace();
+                throw new DuplicateCategoryException();
             }
 
             Task editedTask = new Task(target);

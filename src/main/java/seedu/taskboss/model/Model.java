@@ -7,6 +7,7 @@ import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
@@ -80,6 +81,7 @@ public interface Model {
     //@@author A0143157J
     /** Changes the name of a category of all tasks in the filtered task list
      * @throws CommandException */
-    void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException;
+    void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException,
+        DuplicateCategoryException;
 
 }

@@ -129,7 +129,7 @@ public class UniqueCategoryList implements Iterable<Category> {
      * Adds a Category to the list.
      * @throws IllegalValueException
      */
-    public void add(Category toAdd) throws IllegalValueException {
+    public void add(Category toAdd) throws IllegalValueException, DuplicateCategoryException {
         assert toAdd != null;
         if (contains(toAdd) && !toAdd.equals(new Category(CATEGORY_ALLTASKS))) {
             throw new DuplicateCategoryException();
@@ -180,7 +180,7 @@ public class UniqueCategoryList implements Iterable<Category> {
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
     public static class DuplicateCategoryException extends DuplicateDataException {
-        protected DuplicateCategoryException() {
+        public DuplicateCategoryException() {
             super("Operation would result in duplicate categories");
         }
     }
