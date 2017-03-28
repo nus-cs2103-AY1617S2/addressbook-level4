@@ -169,8 +169,25 @@ public class CommandBox extends UiPart<Region> {
             String[] words = commandTextField.getText(0, cursorPosition).split(" +", -1);
             String lastWord = words[words.length - 1].replaceAll("\\\\", "\\\\\\\\");
             String suggestion = suggestionList.getItems().get(0).getText();
-            String remainingString = suggestion.replaceAll(lastWord, "");
-            commandTextField.insertText(cursorPosition, remainingString);
+            if ("find".equals(words[0])) {
+                handleFindTab(cursorPosition, words, suggestion);
+            } else {
+                String remainingString = suggestion.replaceAll(lastWord, "");
+                commandTextField.insertText(cursorPosition, remainingString);
+            }
+        }
+    }
+
+    /** Method to special handle text-completion for 'Find' command */
+    private void handleFindTab(int cursorPosition, String[] words, String suggestion) {
+        String lastWord = words[words.length - 1];
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < words.length; i++) {
+            s.append(words[i]).append(" ");
+        }
+        if (!(s.toString().contains(suggestion))) {
+            commandTextField.deleteText(cursorPosition - lastWord.length(), cursorPosition);
+            commandTextField.insertText(commandTextField.getCaretPosition(), suggestion);
         }
     }
 

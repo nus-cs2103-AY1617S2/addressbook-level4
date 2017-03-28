@@ -1,5 +1,6 @@
 package seedu.doist.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -170,7 +171,15 @@ public class TodoList implements ReadOnlyTodoList {
         return tasks.changeFinishStatus(taskToFinish, isToFinish);
     }
 
-    //@@author
+    //@@author A0147620L
+    public ArrayList<String> getTaskNames() {
+        ArrayList<String> names = new ArrayList<>();
+        for (ReadOnlyTask task: this.getTaskList()) {
+            names.add(task.getDescription().toString());
+        }
+        return names;
+    }
+
 //// tag-level operations
 
     public void addTag(

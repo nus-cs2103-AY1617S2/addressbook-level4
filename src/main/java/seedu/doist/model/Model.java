@@ -1,6 +1,7 @@
 package seedu.doist.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -64,6 +65,9 @@ public interface Model {
 
     /** Sorts the tasks according to the comparators defined in the list*/
     void sortTasks(List<SortType> sortTypes);
+
+    /** Returns a list of task descriptions */
+    ArrayList<String> getAllNames();
 
     //========== handle undo and redo operation =================================================
     void saveCurrentToHistory();

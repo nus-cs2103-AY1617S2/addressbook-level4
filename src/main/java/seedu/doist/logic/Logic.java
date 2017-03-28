@@ -1,5 +1,6 @@
 package seedu.doist.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -29,4 +30,11 @@ public interface Logic {
      * @return all the command words, including the default command words and aliases specified by the user
      */
     List<String> getAllCommandWords();
+
+    /**
+     * Method used to retrieve all the names of the tasks store
+     * This is used for the autoComplete Feature in 'Search'
+     * @return all the task descriptions as an ArrayList
+     */
+    ArrayList<String> getAllNames();
 }
