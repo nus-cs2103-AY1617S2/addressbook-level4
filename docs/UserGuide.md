@@ -212,6 +212,11 @@ Autocomplete the user's command on the CLI.
 
 > * Example:
     User enters `f` and presses `TAB`, `find` command will appear in the input box.
+    
+### 2.16. Exit : `exit`
+
+Closes Opus.
+> * All data is automatically saved by Opus upon quitting.
 
 ## 3. FAQ
 
@@ -234,6 +239,8 @@ Autocomplete the user's command on the CLI.
 
 * **Edit**  `edit INDEX NAME [n/NOTES] [p/PRIORITY] [b/STARTIME] [e/ENDTIME] [t/TAG]...` <br>
   e.g. `edit 2 Prepare dinner n/for 4 pax p/hi b/23/4/2017 12:00 e/23/3/2018 13:00 t/friend t/colleague`
+  
+* **Exit** `exit`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find Wash dishes`
