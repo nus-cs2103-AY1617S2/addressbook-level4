@@ -104,6 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
             throws TaskNotFoundException {
+        saveInstance();
         while (targets.size() != 0) {
             try {
                 ReadOnlyTask taskToDelete = targets.get(0);
@@ -120,13 +121,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws TaskNotFoundException {
-        while (targets.size() != 0) {
+        saveInstance();
+        for (int index = 0; targets.size() != index; index++) {
             try {
-                ReadOnlyTask taskToDelete = targets.get(0);
+                ReadOnlyTask taskToDelete = targets.get(index);
                 if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
-                    saveInstance();
                     taskManager.removeTask(taskToDelete);
-                    break;
+                    index--;
                 }
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
