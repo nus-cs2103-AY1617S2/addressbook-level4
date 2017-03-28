@@ -5,7 +5,8 @@ package typetask.logic.commands;
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
     public static final String COMMAND_WORD_SHORT = "r";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo a command that was previously undone." + "Example: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Redo a command that was previously undone." + "Example: "
             + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Redo previous command.";
     public static final String MESSAGE_FAILURE = "An error occured when running redo command.";
