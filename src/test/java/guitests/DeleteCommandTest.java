@@ -50,7 +50,8 @@ public class DeleteCommandTest extends TaskBossGuiTest {
      * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
      * @param currentList A copy of the current list of tasks (before deletion).
      */
-    private void assertDeleteSuccess(boolean isMinusSign, boolean isShortCommand, int targetIndexOneIndexed, final TestTask[] currentList) {
+    private void assertDeleteSuccess(boolean isMinusSign, boolean isShortCommand, int targetIndexOneIndexed,
+                      final TestTask[] currentList) {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
