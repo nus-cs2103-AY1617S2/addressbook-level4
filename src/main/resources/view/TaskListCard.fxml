@@ -31,12 +31,12 @@
                         <HBox spacing="1" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Circle fx:id="labelBullet" styleClass="taglist-item-bullet" radius="5">
+                                 <Circle fx:id="labelBullet" styleClass="taglist-item-bullet" radius="5">
                                         <HBox.margin>
                                             <Insets left="5.0" right="5.0" top="8.0" />
                                         </HBox.margin>
                                     </Circle>
+                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
                                     <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
                                 </HBox>
                             </children>
