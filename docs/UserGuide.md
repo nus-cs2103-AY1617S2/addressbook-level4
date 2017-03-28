@@ -99,8 +99,6 @@ Format: `edit INDEX [e/DEADLINE]`
 Adds a start time and endtime.<br>
 Format: `edit INDEX [s/STARTTIME] [e/ENDTIME]`
 
-Edits a todo title.<br>
-=======
 Edits a deadline.<br>
 Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
 
