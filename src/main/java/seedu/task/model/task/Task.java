@@ -69,9 +69,11 @@ public class Task implements ReadOnlyTask {
         return description;
     }
 
+    //@@joshuaching A0163673Y
     public void setDueDate(DueDate dueDate) {
         this.dueDate = dueDate;
     }
+    //@@author
 
     @Override
     public DueDate getDueDate() {
@@ -124,7 +126,9 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
+        //@@joshuaching A0163673Y
         this.setDuration(replacement.getDuration());
+        //@@author
         this.setDueDate(replacement.getDueDate());
         if (replacement.getComplete().getCompletion()) {
             this.setComplete();
@@ -152,6 +156,7 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@joshuaching A0163673Y
     @Override
     public String getDurationStart() {
         return duration == null ? null : duration.getStartString();
@@ -161,4 +166,5 @@ public class Task implements ReadOnlyTask {
     public String getDurationEnd() {
         return duration == null ? null : duration.getEndString();
     }
+    //@@author
 }

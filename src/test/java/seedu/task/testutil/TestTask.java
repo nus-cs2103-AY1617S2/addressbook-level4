@@ -101,6 +101,7 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    //@@joshuaching A0163673Y
     @Override
     public String getDurationStart() {
         return duration == null ? null : duration.getStartString();
@@ -110,6 +111,7 @@ public class TestTask implements ReadOnlyTask {
     public String getDurationEnd() {
         return duration == null ? null : duration.getEndString();
     }
+    //@@author
 
     @Override
     public Complete getComplete() {
