@@ -22,7 +22,7 @@ public class ByDate {
         return value;
     }
 
-    //@@author A0110491U A0121668A
+    //@@author A0121668A
     /**
      * Validates given by date.
      *

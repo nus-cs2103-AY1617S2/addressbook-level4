@@ -18,7 +18,7 @@ public class ByTime {
 
     public final LocalTime value;
 
-    //@@author A0110491U A0121668A
+    //@@author A0121668A
     /**
      * Validates given start time.
      *
