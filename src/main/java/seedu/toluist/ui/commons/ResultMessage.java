@@ -16,8 +16,11 @@ import seedu.toluist.ui.UiStore;
  * Represents the result message of a command execution.
  */
 public class ResultMessage {
-    private static final String RESULT_MESSAGE_ADDED_TASK_HEADER = "Added task at index %d:";
-    private static final String RESULT_MESSAGE_UPDATED_TASK_HEADER = "Updated task at index %d:";
+    private static final int INDEX_INVALID = -1;
+    private static final String RESULT_MESSAGE_ADDED_TASK_HEADER_WITH_INDEX = "Added task at index %d:";
+    private static final String RESULT_MESSAGE_ADDED_TASK_HEADER_WITHOUT_INDEX = "Added task in another tab";
+    private static final String RESULT_MESSAGE_UPDATED_TASK_HEADER_WITH_INDEX = "Updated task at index %d:";
+    private static final String RESULT_MESSAGE_UPDATED_TASK_HEADER_WITHOUT_INDEX = "Updated task in another tab";
     private static final String RESULT_MESSAGE_PARAMETER_INDENTATION = "- ";
     private static final String RESULT_MESSAGE_ADD_PARAMETER_FORMAT = ": \"%s\"";
     private static final String RESULT_MESSAGE_UPDATE_PARAMETER_FORMAT = ": \"%s\" to \"%s\"";
@@ -35,7 +38,8 @@ public class ResultMessage {
 
     public static String getAddCommandResultMessage(Task newTask, UiStore uiStore) {
         int index = uiStore.getTaskIndex(newTask);
-        String result = String.format(RESULT_MESSAGE_ADDED_TASK_HEADER, index);
+        String result = (index == INDEX_INVALID) ? RESULT_MESSAGE_ADDED_TASK_HEADER_WITHOUT_INDEX
+                                   : String.format(RESULT_MESSAGE_ADDED_TASK_HEADER_WITH_INDEX, index + 1);
         result = appendAddedParameterMessage(result, TASK_TYPE, newTask.getTaskType());
         result = appendAddedParameterMessage(result, TASK_DESCRIPTION, newTask.getDescription());
         result = appendAddedParameterMessage(result, TASK_START_DATE, newTask.getStartDateTime());
@@ -60,7 +64,8 @@ public class ResultMessage {
 
     public static String getUpdateCommandResultMessage(Task oldTask, Task newTask, UiStore uiStore) {
         int index = uiStore.getTaskIndex(newTask);
-        String result = String.format(RESULT_MESSAGE_UPDATED_TASK_HEADER, index);
+        String result = (index == INDEX_INVALID) ? RESULT_MESSAGE_UPDATED_TASK_HEADER_WITHOUT_INDEX
+                                   : String.format(RESULT_MESSAGE_UPDATED_TASK_HEADER_WITH_INDEX, index + 1);
         result = appendUpdatedParameterMessage(result, TASK_TYPE,
                 oldTask.getTaskType(), newTask.getTaskType());
         result = appendUpdatedParameterMessage(result, TASK_DESCRIPTION,

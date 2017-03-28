@@ -160,7 +160,7 @@ public class UpdateTaskController extends Controller {
             Task oldTask = (Task) task.clone();
             task.setTask(taskCopy);
             if (todoList.save()) {
-                uiStore.setTasks(todoList.getTasks());
+                uiStore.setTasks(todoList.getTasks(), task);
             }
             return new CommandResult(ResultMessage.getUpdateCommandResultMessage(oldTask, task, uiStore));
         } catch (IllegalArgumentException illegalArgumentException) {
