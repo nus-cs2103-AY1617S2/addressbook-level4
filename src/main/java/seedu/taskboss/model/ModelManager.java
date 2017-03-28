@@ -89,10 +89,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+
         for (ReadOnlyTask target: targets) {
             taskBoss.removeTask(target);
         }
-        taskbossHistory.push(new TaskBoss(this.taskBoss));
         indicateTaskBossChanged();
     }
 
