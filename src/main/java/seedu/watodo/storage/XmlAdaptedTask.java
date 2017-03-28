@@ -1,7 +1,6 @@
 package seedu.watodo.storage;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -11,9 +10,9 @@ import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
+import seedu.watodo.model.task.TaskStatus;
 
 /**
  * JAXB-friendly version of the Task.
@@ -26,7 +25,7 @@ public class XmlAdaptedTask {
     private String startDate;
     @XmlElement(required = false)
     private String endDate;
-    
+
     @XmlElement(required = true)
     private String status;
 
@@ -54,7 +53,7 @@ public class XmlAdaptedTask {
         if (source.getEndDate() != null) {
             endDate = source.getEndDate().toString();
         }
-        
+
         status = source.getStatus().toString();
 
         tagged = new ArrayList<>();
@@ -74,14 +73,14 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Description name = new Description(this.name);
-        
+
         TaskStatus status = TaskStatus.UNDONE;
-        
+
         if (this.status != null) {
             status = getStatusFromString(this.status);
         }
-        
-        
+
+
 
         final UniqueTagList tags = new UniqueTagList(taskTags);
         if (startDate == null && endDate == null) {
@@ -100,7 +99,7 @@ public class XmlAdaptedTask {
 
         return new Task(name, tags, status);
     }
-    
+
     private TaskStatus getStatusFromString(String string) {
         switch (string) {
         case "Undone":

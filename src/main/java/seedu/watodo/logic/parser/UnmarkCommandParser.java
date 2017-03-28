@@ -11,17 +11,17 @@ import com.google.common.primitives.Ints;
 import edu.emory.mathcs.backport.java.util.Collections;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.IncorrectCommand;
-import seedu.watodo.logic.commands.MarkCommand;
+import seedu.watodo.logic.commands.UnmarkCommand;
 
 /**
- * Parses input arguments and creates a new MarkCommand object
+ * Parses input arguments and creates a new UnmarkCommand object
  */
-public class MarkCommandParser {
+public class UnmarkCommandParser {
     int[] filteredTaskListIndices;
 
     /**
-     * Parses the given {@code String} of arguments in the context of the MarkCommand
-     * and returns an MarkCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UnmarkCommand
+     * and returns an UnmarkCommand object for execution.
      */
     public Command parse(String args) {
         String[] indicesInString = args.split("\\s+");
@@ -32,14 +32,14 @@ public class MarkCommandParser {
             try {
                 filteredTaskListIndices[i] = Integer.parseInt(indicesInString[i]);
             } catch (NumberFormatException nfe) {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
             }
 
             // To check if indices are valid
             Optional<Integer> index = ParserUtil.parseIndex(indicesInString[i]);
             if (!index.isPresent()) {
                 return new IncorrectCommand(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
             }
         }
 
@@ -48,7 +48,7 @@ public class MarkCommandParser {
         Collections.sort(list, comparator);
         filteredTaskListIndices = Ints.toArray(list);
 
-        return new MarkCommand(filteredTaskListIndices);
+        return new UnmarkCommand(filteredTaskListIndices);
     }
 
     // Comparator to sort list in descending order
