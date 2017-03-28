@@ -69,7 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyTaskBoss getTaskBoss() {
         return taskBoss;
     }
-
+    //@@author A0138961W
     @Override
     public void undoTaskboss() throws EmptyStackException, IllegalValueException {
         taskBoss.resetData(taskbossHistory.pop());
@@ -80,7 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void saveTaskboss() {
         indicateTaskBossChanged();
     }
-
+    //@@author
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
