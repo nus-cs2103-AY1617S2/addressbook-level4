@@ -25,6 +25,7 @@
             </menus>
         </MenuBar>
 
+        <!-- @@author A0124368A -->
         <VBox minWidth="340" prefWidth="340"
             VBox.vgrow="ALWAYS" styleClass="background">
             <padding>
@@ -56,5 +57,7 @@
             </padding>
         </AnchorPane>
         <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+        <!-- @@author -->
     </children>
 </VBox>
+

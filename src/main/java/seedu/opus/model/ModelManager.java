@@ -114,10 +114,12 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    //@author A0148081H
     @Override
     public void sortList(String keyword) {
         filteredTasks = new FilteredList<>(this.taskManager.getSortedList(keyword));
     }
+    //@author
 
     @Override
     public void updateFilteredListToShowAll() {

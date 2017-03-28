@@ -46,7 +46,8 @@ public class DateTime {
                 .orElseThrow(() -> new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS));
     }
 
-    //@@author
+
+    //@@author A0124368A
     /**
      * Checks if the DateTime is in the current week.
      *
@@ -67,6 +68,7 @@ public class DateTime {
 
         return dateTime.isAfter(startOfWeek) && dateTime.isBefore(endOfWeek);
     }
+    //@@author
 
     //@@author A0126345J
     /**

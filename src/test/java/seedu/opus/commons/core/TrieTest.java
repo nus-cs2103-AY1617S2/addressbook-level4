@@ -10,6 +10,7 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
+//@@author A0124368A
 /**
  * Test cases for Trie prefix tree.
  * @author xbili (Credits to Marcus McCurdy)
@@ -75,3 +76,4 @@ public class TrieTest {
     }
 
 }
+// @@author

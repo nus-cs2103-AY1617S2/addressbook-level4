@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+//@@author A0124368A
 public class AutocompleteTest extends TaskManagerGuiTest {
 
     private static final String[] COMMANDS_ONE_TAB = { "add", "delete", "edit", "mark", "schedule", "list",
@@ -39,3 +40,4 @@ public class AutocompleteTest extends TaskManagerGuiTest {
     }
 
 }
+//@@author

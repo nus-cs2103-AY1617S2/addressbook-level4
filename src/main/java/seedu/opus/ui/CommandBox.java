@@ -27,7 +27,9 @@ public class CommandBox extends UiPart<Region> {
 
     private final Logic logic;
     private final UserInputHistory history;
+    //@@author A0124368A
     private final AutocompleteTrie autocompleteTrie;
+    //@@author
     private Iterator<String> suggestions;
 
     @FXML
@@ -40,15 +42,20 @@ public class CommandBox extends UiPart<Region> {
         this.autocompleteTrie.init();
         this.suggestions = Collections.emptyIterator();
         addToPlaceholder(commandBoxPlaceholder);
+        //@@author A0148087W
         history = new UserInputHistory();
         registerCursorKeyEventFilter();
+        //@@author A0124368A
         listenForTab();
         focusCommandBox();
+        //@@author
     }
 
+    //@@author A0124368A
     private void focusCommandBox() {
         commandTextField.requestFocus();
     }
+    //@@author
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
@@ -77,6 +84,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0124368A
     private void listenForTab() {
         commandTextField.setOnKeyPressed(e -> {
             if (!e.getCode().equals(KeyCode.TAB)) {
@@ -161,7 +169,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.end();
     }
 
-    //@@author
+    //@@author A0124368A
      /** Custom Trie for autocomplete feature.
      *
      * @author xbili
@@ -185,4 +193,5 @@ public class CommandBox extends UiPart<Region> {
             return !autoComplete(prefix).isEmpty();
         }
     }
+    //@@author
 }

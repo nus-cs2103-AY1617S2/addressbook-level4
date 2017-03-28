@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import seedu.opus.model.task.ReadOnlyTask;
 
+//@author A0148081H
 public class TaskComparator implements Comparator<ReadOnlyTask> {
     public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
         int c;

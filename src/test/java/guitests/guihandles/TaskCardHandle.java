@@ -85,6 +85,7 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
+    //@@author A0124368A
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
                 && getPriority().equals(task.getPriority().map(Priority::toString).map(String::toUpperCase).orElse(""))
@@ -94,6 +95,7 @@ public class TaskCardHandle extends GuiHandle {
                 && getEndTime().equals(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""))
                 && getTags().equals(getTags(task.getTags()));
     }
+    //@@author
 
     @Override
     public boolean equals(Object obj) {
