@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 
@@ -88,6 +89,22 @@ public class Deadline {
             return formatter.format(date);
         }
         return "";
+    }
+
+    /**
+     * Returns true if the given date coincides with this Deadline.
+     */
+    public boolean isSameDate(Date date) {
+        if (isFloating()) {
+            return false;
+        }
+        if (isFromTo()) {
+            return DateUtils.truncatedCompareTo(fromDeadline(), date, 5)
+                    * DateUtils.truncatedCompareTo(date, toDeadline(), 5)
+                    >= 0;
+        } else {
+            return DateUtils.truncatedEquals(date, nextDeadline(), 5);
+        }
     }
 
     /**

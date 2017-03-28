@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.io.IOException;
+import java.util.Date;
 //import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import net.fortuna.ical4j.validate.ValidationException;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model.StateLimitReachedException;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -78,6 +80,12 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskListToShowFilteredTasks(Set<String> keywords);
+
+    /** Updates the filter of the filtered task list to filter by the given tag list*/
+    void updateFilteredTaskListToShowFilteredTasks(UniqueTagList tagList);
+
+    /** Updates the filter of the filtered task list to filter by the given date*/
+    void updateFilteredTaskListToShowFilteredTasks(Date date);
 
     /**
      * Overwrites AddressBook state to 1 step forwards.
