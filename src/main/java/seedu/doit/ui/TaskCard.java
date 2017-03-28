@@ -47,12 +47,13 @@ public class TaskCard extends UiPart<Region> {
         if (task.hasStartTime()) {
             this.deadline.setText(task.getStartTime().value + " - " + task.getDeadline().value);
             if (ifOverdue(task.getDeadline().value)) {
-                this.cardPane.setStyle("-fx-background-color: #a52a2a;");
+                this.cardPane.setStyle("-fx-border-color:#8B0000; "
+                        + "-fx-border-width:1 1 1 30;");
             }
         } else if (task.hasEndTime()) {
             this.deadline.setText(task.getDeadline().value);
             if (ifOverdue(task.getDeadline().value)) {
-                this.cardPane.setStyle("-fx-background-color: #a52a2a;");
+                this.cardPane.setStyle("-fx-border-color:#8B0000; -fx-border-width:1 1 1 30");
             }
         } else {
             this.deadline.setText("");
