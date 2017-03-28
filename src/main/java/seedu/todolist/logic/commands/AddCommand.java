@@ -1,5 +1,7 @@
 package seedu.todolist.logic.commands;
 
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
@@ -13,7 +15,6 @@ import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.todo.Name;
 import seedu.todolist.model.todo.Todo;
 import seedu.todolist.model.todo.UniqueTodoList;
-
 
 /**
  * Adds a todo to the todo list.
@@ -32,7 +33,6 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the todo list";
     public static final String MESSAGE_INVALID_STARTTIME = "Invalid start time entered";
     public static final String MESSAGE_INVALID_ENDTIME = "Invalid end time entered";
-    public static final String DATE_FORMAT = "h:mma dd/MM/yy";
 
     public static final String DEFAULT_ADD_STARTTIME = "1:00PM 11/11/17";
     public static final String DEFAULT_ADD_ENDTIME = "2:00PM 11/11/17";

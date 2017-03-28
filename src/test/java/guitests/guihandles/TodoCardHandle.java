@@ -1,5 +1,7 @@
 package guitests.guihandles;
 
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -11,8 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.todolist.logic.commands.AddCommand;
-import seedu.todolist.logic.commands.CompleteCommand;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.todo.ReadOnlyTodo;
 
@@ -80,7 +80,7 @@ public class TodoCardHandle extends GuiHandle {
     //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo, boolean checkCompleteTime) {
         if (checkCompleteTime) {
-            DateFormat completeCommandDateFormat = new SimpleDateFormat(CompleteCommand.COMPLETE_TIME_FORMAT);
+            DateFormat completeCommandDateFormat = new SimpleDateFormat(DATE_FORMAT);
             if (todo.getCompleteTime() != null && !getCompleteTime().equals("Completed at "
                 + completeCommandDateFormat.format(todo.getCompleteTime()))) {
                 return false;
@@ -91,7 +91,7 @@ public class TodoCardHandle extends GuiHandle {
     //@@author
     //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo) {
-        DateFormat addCommandDateFormat = new SimpleDateFormat(AddCommand.DATE_FORMAT);
+        DateFormat addCommandDateFormat = new SimpleDateFormat(DATE_FORMAT);
         if (todo.getStartTime() != null
                 && !getStartTime().equals("Start: " + addCommandDateFormat.format(todo.getStartTime()))) {
             return false;

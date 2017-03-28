@@ -28,6 +28,7 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    * **`edit`**` 3 take the cat for a walk e/6:00am 11/11/17` : edits the 3rd Todo's title and end time shown in the current list.
    * **`complete`**` 3`: marks the 3rd Todo shown in the current list as complete
    * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
+   * **`undo`** : undoes last command that modified the todo list
    * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -70,21 +71,6 @@ Examples:
 Shows a list of all todos.<br>
 Format: `list`
 
-Shows a list of all uncompleted todos.<br>
-Format: `list u`
-
-Shows a list of all completed todos.<br>
-Format: `list c`
-
-Shows a list of all floating tasks.<br>
-Format: `list f`
-
-Shows a list of all deadlines.<br>
-Format: `list d`
-
-Shows a list of all events.<br>
-Format: `list e`
-
 ### 2.4. Editing a todo : `edit`
 
 Edits a Todo's title, start time and endtime.<br>
@@ -99,44 +85,48 @@ Format: `edit INDEX [e/DEADLINE]`
 Adds a start time and endtime.<br>
 Format: `edit INDEX [s/STARTTIME] [e/ENDTIME]`
 
-Edits a deadline.<br>
-Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
-
-Edits a task.<br>
+Edits a todo title.<br>
 Format: `edit INDEX [TASK] [t/TAG]`
 
-Adds a tag to a task.<br>
-Format: `edit [ta/TAG]`
 
 > * Edits the todo at the specified `INDEX`.
     The index refers to the index number shown in the last todo listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * Edit with "t/" may remove the existing tags and replace them with the tags in command line.
-> * Edit with "s/" "e/" may update the task with default Datetime.
 
 Examples:
 
 * `edit 1 Play with dog e/5:00PM 11/11/11`<br>
   Edits the task description and deadline of the 1st todo to be listed
 
-### 2.5. Finding all todos containing any keyword in their description: `find`
+### 2.5. Finding all todos by multiple search parameters: `find`
 
 Finds todos whose descriptions contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [t/TAG] [t/MORE TAGS]`
 
-> * The search is case sensitive.
+> * The search is case insensitive.
 > * The order of the keywords does not matter.
-> * Only the task description is searched.
-> * Only full words will be matched e.g.
+> * Only the task description is searched using the keywords.
+> * Only full words will be matched e.g. "grocer" will not match "groceries"
 > * Todos matching at least one keyword will be returned (i.e. `OR` search).
+> * Specifying start time, end time, and/or complete time will match todos that start, end, and/or were completed BEFORE the specified time.
+> * You may enter "today" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of the current day.
+> * You may enter "tomorrow" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of tomorrow.
+* You may enter nothing for complete time to find all completed tasks (i.e. `find c/`)
+* You may enter "not" for complete time to find all uncompleted tasks (i.e. `find c/not`);
+> * Todos that do not have the specified parameters will not be included. e.g. if you specify start time, no floating todos will be included in the search results.
 
 Examples:
 
 * `find Dog`<br>
 * `find dog math`<br>
-  Returns Any todo containing words `dog` or `math`
+  Returns Any todo containing words `dog` or `math`<br>
+* `find s/9:00am 11/11/17`<br>
+* `find s/9:00am 11/11/17 c/9:00am 12/11/17`<br>
+* `find s/today e/tomorrow`<br>
+* `find c/`<br>
+* `find c/not`<br>
 
 ### 2.6. Deleting a todo : `delete`
 

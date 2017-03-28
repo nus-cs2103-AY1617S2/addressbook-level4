@@ -1,5 +1,7 @@
 package seedu.todolist.logic.commands;
 
+import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+
 import java.util.Date;
 
 import seedu.todolist.commons.core.Messages;
@@ -25,8 +27,6 @@ public class CompleteCommand extends Command {
 
     public static final String MESSAGE_TODO_ALREADY_COMPLETE = "This todo is already complete";
 
-    public static final String COMPLETE_TIME_FORMAT = "h:mma dd/MM/yy";
-
     public final int filteredTodoListIndex;
     public final Date completeTime;
 
@@ -39,7 +39,7 @@ public class CompleteCommand extends Command {
     public CompleteCommand(int targetIndex, String completeTime) throws IllegalValueException {
      // convert index from 1 based to 0 based
         this.filteredTodoListIndex = targetIndex - 1;
-        this.completeTime = StringUtil.parseDate(completeTime, COMPLETE_TIME_FORMAT);
+        this.completeTime = StringUtil.parseDate(completeTime, DATE_FORMAT);
     }
 
     @Override

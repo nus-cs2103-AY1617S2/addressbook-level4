@@ -26,17 +26,17 @@ public class TypicalTestTodos {
             dinner = new TodoBuilder().withName("Cook dinner").build();
             essay = new TodoBuilder().withName("Write essay").withEndTime("6:00PM 11/11/17").build();
             toilet = new TodoBuilder().withName("Go to the bathroom").withStartTime("12:00PM 11/11/17")
-                    .withEndTime("1:00PM 11/11/17").build();
+                    .withEndTime("1:00PM 11/11/17").withTags("personal").build();
             car = new TodoBuilder().withName("Wash car").withCompleteTime("6:00PM 11/11/17").build();
             library = new TodoBuilder().withName("Return library book").withEndTime("6:00PM 11/11/17")
                     .withCompleteTime("6:00PM 11/11/17").build();
             tennis = new TodoBuilder().withName("Play tennis").withStartTime("12:00PM 11/11/17")
-                    .withEndTime("1:00PM 11/11/17").withCompleteTime("6:00PM 11/11/17").build();
+                    .withEndTime("1:00PM 11/11/17").withCompleteTime("4:00PM 11/11/17").withTags("sports").build();
             // Manually added
             shopping = new TodoBuilder().withName("Go shopping").build();
             laundry = new TodoBuilder().withName("Do laundry").build();
             job = new TodoBuilder().withName("Apply to job").withEndTime("6:00PM 11/11/17").build();
-            lunch = new TodoBuilder().withName("lunch").withStartTime("12:00PM 11/11/17")
+            lunch = new TodoBuilder().withName("lunch").withStartTime("9:00AM 11/11/17")
                     .withEndTime("1:00PM 11/11/17").build();
             //eventWithDefaultValue = new TodoBuilder().withName("eventWithDefaultValue").withStartTime("")
                     //.withEndTime("").build();
