@@ -22,7 +22,7 @@ public class Task implements ReadOnlyTask {
     public Task(Description description, UniqueTagList tags) {
         this(description, null, null, tags, TaskStatus.UNDONE);
     }
-    
+
     /* Constructs a Floating Task object from a given description. With Status */
     public Task(Description description, UniqueTagList tags, TaskStatus newStatus) {
         this(description, null, null, tags, newStatus);
@@ -32,7 +32,7 @@ public class Task implements ReadOnlyTask {
     public Task(Description description, DateTime deadline, UniqueTagList tags) {
         this(description, null, deadline, tags, TaskStatus.UNDONE);
     }
-    
+
     /* Constructs a Deadline Task object from a given description. With status. */
     public Task(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
         this(description, null, deadline, tags, newStatus);
@@ -47,7 +47,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = TaskStatus.UNDONE;
     }
-    
+
     /* Constructs an Event Task object from a given description. With status */
     public Task(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags, TaskStatus status) {
         assert !CollectionUtil.isAnyNull(description, tags);
