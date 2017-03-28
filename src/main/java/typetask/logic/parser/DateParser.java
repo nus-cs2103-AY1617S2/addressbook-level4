@@ -28,7 +28,6 @@ public class DateParser {
      * an array of date time that we are interested in capturing.
      * Usually start and end dates or just deadline date.
      * If no dates are found, empty list is returned.
-     * 
      * @param dateTimeString String containing date and time to be parsed.
      * @return A list of Dates found in String.
      */
@@ -56,7 +55,6 @@ public class DateParser {
 
     /**
      * Resets the time fields in the list of dates to zeroes.
-     * 
      * @param dates List of dates to be reset.
      */
     private static void resetTime(List<Date> dates) {

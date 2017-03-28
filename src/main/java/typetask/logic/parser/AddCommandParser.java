@@ -79,7 +79,7 @@ public class AddCommandParser {
         List<Date> dates = DateParser.parse(date);
         String nattyDate = dates.get(0).toString();
         String[] splitDate = nattyDate.split(" ");
-        String finalizedDate = splitDate[0] + " " + splitDate[1] + " " + splitDate[2]+
+        String finalizedDate = splitDate[0] + " " + splitDate[1] + " " + splitDate[2] +
                 " " + splitDate[3];
         return finalizedDate;
     }
