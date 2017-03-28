@@ -4,6 +4,10 @@ import java.util.EmptyStackException;
 
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 
+//@@author A0142418L
+/**
+ * Redo the previous action in task manager.
+ */
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "REDO";

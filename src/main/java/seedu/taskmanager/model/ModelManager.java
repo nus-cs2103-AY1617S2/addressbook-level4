@@ -65,6 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
+    // @@author A0142418L
     /** Re-save data when save location has changed */
     public void saveTaskManager() {
         indicateTaskManagerChanged();
@@ -92,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
         undoTaskManager.push(currentTaskManager);
     }
 
+    // @@author
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);

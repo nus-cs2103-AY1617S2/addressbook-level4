@@ -23,7 +23,7 @@ public class SampleDataUtil {
                             new EndDate("23/11/17"), new EndTime("1600"),
                             new UniqueCategoryList("essential", "friends")),
                     new Task(new TaskName("eat some more"), new StartDate("13/01/17"), new StartTime("2100"),
-                            new EndDate("14/01/17"), new EndTime("2200"), new UniqueCategoryList("to do")),
+                            new EndDate("14/01/17"), new EndTime("2200"), new UniqueCategoryList("todo")),
                     new Task(new TaskName("omg stop eating"), new StartDate("03/02/17"), new StartTime("1400"),
                             new EndDate("03/02/50"), new EndTime("1600"), new UniqueCategoryList("important")),
                     new Task(new TaskName("i cant stop eating"), new StartDate("06/03/17"), new StartTime("1200"),

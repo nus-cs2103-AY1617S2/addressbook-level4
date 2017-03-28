@@ -3,8 +3,8 @@ package seedu.taskmanager.logic.commands;
 import java.util.EmptyStackException;
 
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.TaskManager;
 
+//@@author A0142418L
 /**
  * Undo the previous action in task manager.
  */
