@@ -47,7 +47,7 @@ public class CommandAliases implements Serializable {
     private HashMap<String, String> commandAliasesMap;
 
     public CommandAliases() {
-        this.commandAliasesMap = new HashMap<>();
+        commandAliasesMap = new HashMap<>();
     }
 
     public void addAlias(String command, String alias) throws AliasAlreadyInUseException, CommandDoesNotExistException {
