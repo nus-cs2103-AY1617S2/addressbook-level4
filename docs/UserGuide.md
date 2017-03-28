@@ -86,6 +86,12 @@ Examples:
 Undos the most recent action. Irreversible.
 Format: `undo`
 
+## Sorting the Tasks : `sort`
+Sorts the tasks by date or by alphabet. 
+Format: `sort name` or `sort time`
+> Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date. 
+> To return to the unsorted list of tasks, type and enter `list`.
+
 ## Googling a Task or Phrase: `google` 
 Format: `google [INDEX] [KEYWORDS]`
 > Googles the task name at the specified index or Googles the key words that the user enters. A user can additionally Google a task name by single clicking on a task.
@@ -93,6 +99,12 @@ Format: `google [INDEX] [KEYWORDS]`
 ## Clearing All Entries : `clear`
 Clears all tasks from the task manager.<br>
 Format: `clear`  
+
+## Change the Save Path: `path`
+Changes the save path for Fast Task data.<br>
+Format: `path PATHNAME`<br>
+Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
+Example for Unix: `path /Users/jlevy/Desktop/MyTasks.xml`
 
 ## Exiting the Program : `exit`
 Exits the program.<br>
@@ -123,6 +135,10 @@ Tasks manager data are saved in a file called `TasksManagerData.xml` in the proj
 * **Help** : `help` <br>
 
 * **Undo** : `undo` <br>
+
+* **Sort** : `sort time` or `sort name`<br>
+
+* **Path** : `path PATHNAME` <br>
 
 * **Google** : `google INDEX` <br>
   e.g.`google 2`
