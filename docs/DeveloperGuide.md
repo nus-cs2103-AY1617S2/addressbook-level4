@@ -242,6 +242,8 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 ### 3.3 Undo/Redo
 
+Author: Evan Yeung
+
 The undo and redo commands are implemented as commands in the Logic component. The command logic itself is in the `history` package of `Logic`. Within `history`, there are classes `TaskMemento` and `TaskMementos` that are data structures used by the undo/redo commands.
 
 #### 3.3.1 Memento Pattern

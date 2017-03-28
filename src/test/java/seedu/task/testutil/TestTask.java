@@ -41,7 +41,7 @@ public class TestTask implements ReadOnlyTask {
         this.description = description;
     }
 
-    //@@author evanyeung A0163744B
+    //@@author A0163744B
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
@@ -61,7 +61,7 @@ public class TestTask implements ReadOnlyTask {
     }
     //@@author
 
-    //@@author evanyeung A0163744B
+    //@@author A0163744B
     public void setCompletion(Complete completion) {
         this.complete = completion;
     }
@@ -84,7 +84,7 @@ public class TestTask implements ReadOnlyTask {
     }
     //@@author
 
-    //@@author evanyeung A0163744B
+    //@@author A0163744B
     @Override
     public Duration getDuration() {
         return duration;

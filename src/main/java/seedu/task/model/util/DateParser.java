@@ -1,4 +1,4 @@
-//@@author evanyeung A0163744B
+//@@author A0163744B
 package seedu.task.model.util;
 
 import java.util.Calendar;
@@ -30,7 +30,7 @@ public class DateParser {
     private static final int FRI_INDEX = 6;
     private static final int SAT_INDEX = 7;
 
-    //@@author evanyeung A0163744B
+    //@@author A0163744B
     public static Calendar parse(String date) throws IllegalValueException {
         if (!isValidDateString(date)) {
             throw new IllegalValueException(DATE_STRING_ILLEGAL_FORMAT);
@@ -158,7 +158,7 @@ public class DateParser {
                 day2 - day1;
     }
 
-    //@@author evanyeung A0163744B
+    //@@author A0163744B
     private static int getHour(String date) {
         String time = date.substring(date.indexOf(" ") + 1);
         return Integer.parseInt(time.substring(0, 2));
