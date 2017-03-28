@@ -52,8 +52,9 @@ public class TaskManagerTest {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.task1), new Task(td.task1));
+        List<Task> completedTasks = Arrays.asList(new Task(td.task3));
         List<Tag> newTags = td.task1.getTags().asObservableList();
-        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, completedTasks, newTags);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
@@ -63,10 +64,11 @@ public class TaskManagerTest {
     public void resetData_withDuplicateTags_throwsAssertionError() {
         TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalTaskManger();
         List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
+        List<ReadOnlyTask> completedTasks = typicalAddressBook.getCompletedTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, completedTasks, newTags);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
@@ -77,11 +79,13 @@ public class TaskManagerTest {
      */
     private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> completedTasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends ReadOnlyTask> completedTasks, Collection<? extends Tag> tags) {
             this.tasks.setAll(tasks);
             this.tags.setAll(tags);
+            this.completedTasks.setAll(completedTasks);
         }
 
         @Override
@@ -96,8 +100,7 @@ public class TaskManagerTest {
 
         @Override
         public ObservableList<ReadOnlyTask> getCompletedTaskList() {
-            //requires implementation @ dylan
-            return null;
+            return completedTasks;
         }
     }
 
