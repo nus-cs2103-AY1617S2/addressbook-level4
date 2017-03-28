@@ -1,7 +1,6 @@
 //@@author A0127545A
 package seedu.toluist.ui.view;
 
-import com.sun.javafx.scene.control.skin.FXVKSkin;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
