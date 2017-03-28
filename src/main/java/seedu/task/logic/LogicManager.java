@@ -25,9 +25,9 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Parser parser;
 
     public LogicManager(Model model, Storage storage) {
-	this.model = model;
-	this.parser = new Parser();
-    }
+		this.model = model;
+		this.parser = new Parser();
+		}
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
@@ -38,10 +38,8 @@ public class LogicManager extends ComponentManager implements Logic {
 			UpdateBackupCommand ubc = new UpdateBackupCommand();
 			ubc.setData(model);
 			ubc.execute();
-			return command.execute();
-		} else {
-			return command.execute();
 		}
+		return command.execute();
     }
 
     @Override

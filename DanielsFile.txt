@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <taskName>abc</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>bravo</taskName>
+        <taskDate>101010</taskDate>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>task</taskName>
+        <taskDate>100910</taskDate>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>task 3</taskName>
+        <taskStatus>Completed</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>task2</taskName>
+        <taskStatus>Completed</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>task4</taskName>
+        <taskStatus>Completed</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>task</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+</taskmanager>

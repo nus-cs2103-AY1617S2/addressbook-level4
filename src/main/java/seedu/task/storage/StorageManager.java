@@ -85,4 +85,9 @@ public class StorageManager extends ComponentManager implements Storage {
 	}
     }
 
+	@Override
+	public void setPathName(String pathName) {
+		taskManagerStorage.setPathName(pathName);
+	}
+
 }

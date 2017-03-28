@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import seedu.task.commons.core.FileNameHandler;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
@@ -29,7 +30,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     public String getTaskManagerFilePath() {
-	return filePath;
+	return FileNameHandler.getFileName();
     }
 
     @Override
@@ -84,5 +85,10 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 	FileUtil.createIfMissing(file);
 	XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
+
+	@Override
+	public void setPathName(String pathName) {
+		filePath = pathName;
+	}
 
 }

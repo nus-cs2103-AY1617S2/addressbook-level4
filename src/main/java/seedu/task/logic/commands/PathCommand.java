@@ -1,5 +1,8 @@
 package seedu.task.logic.commands;
 
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.events.ui.ChangePathNameEvent;
+import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.logic.commands.exceptions.CommandException;
 
 //@@author A0164061N
@@ -20,12 +23,10 @@ public class PathCommand extends Command {
 		this.path = path;
 	}
     
-    public String getPath(){
-    	return path;
-    }
 	
 	@Override
 	public CommandResult execute() throws CommandException {
+		EventsCenter.getInstance().post(new ChangePathNameEvent(path));
 		return new CommandResult(MESSAGE_SUCCESS);
 	}
 }
