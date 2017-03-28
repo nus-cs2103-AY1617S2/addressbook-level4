@@ -93,9 +93,10 @@ public class Task implements ReadOnlyTask  {
     }
 
     /**
-     * Computes task's priority which determines the ordering of index
+     * Get the task's priority which determines the ordering of index
+     * @return int value of Priority
      */
-    public int computePriority() {
+    public int getPriority() {
         if (isEvent()) {
             return EVENT_PRIORITY;
         } else if (isFloatingTask()) {
@@ -104,6 +105,68 @@ public class Task implements ReadOnlyTask  {
             assert isDeadline();
             return DEADLINE_PRIORITY;
         }
+    }
+
+    /**
+     * Get the task's DateTime that is used to compare date time.
+     * For events, the startDateTime is used for comparison.
+     * For deadlines, the endDateTime is used for comparison.
+     * @return DateTime object
+     */
+    public DateTime getReferenceDateTime() {
+        if (isEvent()) {
+            return this.startDateTime;
+        } else if (isDeadline()) {
+            return this.endDateTime;
+        } else {
+            assert isFloatingTask();
+            return null;
+        }
+    }
+
+    /**
+     * Compares this task's type priority with another.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
+    public int comparePriority(Task otherTask) {
+        return this.getPriority() - otherTask.getPriority();
+    }
+
+    /**
+     * Compares this task's reference datetime with another in chronological order.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
+    public int compareDate(Task otherTask) {
+        assert !isFloatingTask() && !otherTask.isFloatingTask();
+        return this.getReferenceDateTime().dateTime.compareTo(otherTask.getReferenceDateTime().dateTime);
+    }
+
+    /**
+     * Compares this task's type priority and reference datetime with another.
+     * Compares this task's title with another in lexicographic order if both are floating tasks.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
+    public int comparePriorityAndDatetimeAndTitle(Task otherTask) {
+        int comparePriorityResult = this.comparePriority(otherTask);
+        if (comparePriorityResult != 0) {
+            return comparePriorityResult;
+        } else if (this.isFloatingTask() || otherTask.isFloatingTask()) {
+            return this.compareTitle(otherTask);
+        } else {
+            return this.compareDate(otherTask);
+        }
+    }
+
+    /**
+     * Compares this task's title with another in lexicographic order.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
+    public int compareTitle(Task otherTask) {
+        return this.getTitle().toString().compareTo(otherTask.getTitle().toString());
     }
 
     /**

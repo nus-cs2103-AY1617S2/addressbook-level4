@@ -2,6 +2,8 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import seedu.geekeep.model.GeeKeep;
@@ -25,6 +27,7 @@ public class SampleDataTest extends GeeKeepGuiTest {
     @Test
     public void geeKeep_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
+        Arrays.sort(expectedList, (thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }
