@@ -103,7 +103,8 @@ public class TaskCardHandle extends GuiHandle {
             isDeadlineSame = true;
             isStartDateSame = true;
             isEndDateSame = true;
-        }      
+        }
+        System.out.println(getFullName() + getStatus() + " " + task.getName().fullName + task.getStatus().value);
         return getFullName().equals(task.getName().fullName)
                 && getComment().equals(task.getComment().value)
                 && TestUtil.isSameStringList(getTags(), getTags(task.getTags()))
@@ -143,7 +144,7 @@ public class TaskCardHandle extends GuiHandle {
 
     //@@author
     private String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID);
+        return getTextFromLabel(PRIORITY_FIELD_ID).toLowerCase();
     }
 
     @Override
