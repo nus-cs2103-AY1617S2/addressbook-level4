@@ -389,6 +389,37 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_undo_redo_Success() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        GeeKeep expectedAB = helper.generateGeeKeep(threeTasks);
+        expectedAB.removeTask(threeTasks.get(2));
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("delete 3",
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(2)),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        // Add deleted task back to expected Geekeep
+        expectedAB.addTask(threeTasks.get(2));
+
+        assertCommandSuccess("undo",
+                String.format(UndoCommand.MESSAGE_SUCCESS),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        // Deleted task from expected Geekeep again
+        expectedAB.removeTask(threeTasks.get(2));
+
+        assertCommandSuccess("redo",
+                String.format(RedoCommand.MESSAGE_SUCCESS),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+
+    @Test
     public void execute_done_undone_CorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
