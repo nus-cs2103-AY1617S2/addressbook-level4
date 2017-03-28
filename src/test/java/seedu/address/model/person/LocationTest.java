@@ -5,13 +5,15 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+//@@author A0148038A
+
 public class LocationTest {
 
     @Test
     public void isValidLocation() {
         // invalid location
-        assertFalse(Location.isValidLocation("")); // empty string
         assertFalse(Location.isValidLocation(" ")); // spaces only
+        assertFalse(Location.isValidLocation("")); //empty
 
         // valid location
         assertTrue(Location.isValidLocation("Blk 456, Den Road, #01-355"));
