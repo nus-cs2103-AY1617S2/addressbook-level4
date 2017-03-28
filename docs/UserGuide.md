@@ -54,7 +54,7 @@ Format: `help [COMMAND]`
 
 #### 2.2.1. Adding an event : `add`
 
-Adds an event to the event list.<br>
+Adds an event to the event list. Undoable.<br>
 Format: `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...`
 
 > * Events must be added with description.
@@ -75,7 +75,7 @@ Examples:
 
 #### 2.2.2. Adding a task : `add`
 
-Adds a task to the task list.<br>
+Adds a task to the task list. Undoable.<br>
 Tasks have completion status, which is set to [pending] by default. <br>
 User can mark a task as [Completed]. (See section 2.13) <br>
 Format: `add DESCRIPTION p/PRIORITY [l/LOCATION] [ta/TAG]...`
@@ -94,7 +94,7 @@ Examples:
 
 #### 2.2.3. Adding a deadline : `add`
 
-Adds a deadline equivalent to adding a task with by time and by date.<br>
+Adds a deadline equivalent to adding a task with by time and by date. Undoable. <br>
 Deadlines have completion status, which is set to [pending] by default. <br>
 User can mark a deadline as [Completed]. (See section 2.13) <br>
 Format: `add DESCRIPTION p/PRIORITY [bt/BYTIME] bd/BY_DATE [l/LOCATION] [ta/TAG]...`
@@ -335,10 +335,10 @@ There is no need to save manually.
 
 * **Add Event** : `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...`<br>
   e.g. `add Industrial Talk st/1800 sd/030517 et/2000 l/FoS`
-  
+
 * **Add Task** : `add DESCRIPTION p/PRIORITY [l/LOCATION] [ta/TAG]...`<br>
   e.g. `add Buy groceries p/medium l/FairPrice`
-  
+
 * **Add Deadline** : `add DESCRIPTION p/PRIORITY [bt/BY_TIME] [bd/BY_DATE] [l/LOCATION] [ta/TAG]...`<br>
   e.g. `add Home Assignment 1 bd/210317 l/general office ta/hardcopy`
 
@@ -365,7 +365,7 @@ There is no need to save manually.
 
 * **Finish Task** : `finish INDEX`<br>
   e.g. `finish 2`
-  
+
 * **Show Tasks** : `show [DISPLAY_PREFERENCE]`<br>
   e.g. `show com`
 
