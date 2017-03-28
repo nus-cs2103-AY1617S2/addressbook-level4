@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import seedu.doit.commons.core.CommandSettings;
 import seedu.doit.commons.core.ComponentManager;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.core.UnmodifiableObservableList;
@@ -36,7 +37,6 @@ public class ModelManager extends ComponentManager implements Model {
     private FilteredList<ReadOnlyTask> filteredTasks;
 
     private static final TaskManagerStack taskManagerStack = TaskManagerStack.getInstance();
-    private UserPrefs userPrefs;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -48,7 +48,6 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        this.userPrefs = userPrefs;
         updateFilteredTasks();
 
     }
@@ -269,7 +268,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commandSet(String oldCommand, String newCommand)
             throws NoSuchCommandException, CommandExistedException {
-        this.userPrefs.getCommandSettings().setCommand(oldCommand, newCommand);
+        CommandSettings.getInstance().setCommand(oldCommand, newCommand);
+        logger.info(CommandSettings.getInstance().toString());
     }
 
     // @@author

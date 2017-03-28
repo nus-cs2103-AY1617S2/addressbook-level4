@@ -26,6 +26,7 @@ public class UserPrefs {
         if (this.commandSettings == null) {
             this.commandSettings = CommandSettings.getInstance();
         }
+        CommandSettings.setInstance(this.commandSettings);
         return this.commandSettings;
     }
 

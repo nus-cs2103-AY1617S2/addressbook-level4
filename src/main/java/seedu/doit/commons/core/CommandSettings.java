@@ -321,4 +321,8 @@ public class CommandSettings implements Serializable {
         sb.append("Undo :" + this.undo);
         return sb.toString();
     }
+
+    public static void setInstance(CommandSettings commandSettings) {
+        instance = commandSettings;
+    }
 }

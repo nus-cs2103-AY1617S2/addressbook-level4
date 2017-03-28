@@ -87,7 +87,7 @@ public class Parser {
         } else if (SetCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSet().equals(commandWord)) {
             return new SetCommandParser().parse(arguments);
         } else {
-            logger.info(commandWord + " add command in command settings is: " + commandSettings.getAdd());
+            logger.info(commandWord + " add command in command settings is: " + commandSettings.toString());
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
