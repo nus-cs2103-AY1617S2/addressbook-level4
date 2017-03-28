@@ -1,10 +1,17 @@
 package seedu.address.ui;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import com.google.common.eventbus.Subscribe;
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -15,8 +22,12 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.commons.events.ui.UpdateStatusBarEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -45,13 +56,16 @@ public class MainWindow extends UiPart<Region> {
     private ObservableList<ReadOnlyTask> taskListCompleted;
 
     @FXML
-    private AnchorPane commandBoxPlaceholder;
+    private Label titleDate;
+
+    @FXML
+    private Label titleDay;
+
+    // @FXML
+    // private AnchorPane commandBoxPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
-
-    @FXML
-    private MenuItem helpMenuItem;
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
@@ -62,6 +76,12 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane completedTaskListPlaceholder;
 
+    @FXML
+    private JFXTextField commandTextField;
+
+    @FXML
+    private Label commandResult;
+
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
 
@@ -70,6 +90,13 @@ public class MainWindow extends UiPart<Region> {
         this.logic = logic;
         this.config = config;
 
+        // Set date
+        Calendar cal = Calendar.getInstance();
+        this.titleDate.setText(new SimpleDateFormat("dd MMM").format(cal.getTime()));
+        this.titleDay.setText(new SimpleDateFormat("EE").format(cal.getTime()));
+        this.commandTextField.setLabelFloat(true);
+        this.commandResult.setText("");
+
         // Configure the UI
         setTitle(config.getAppTitle());
         setIcon(ICON);
@@ -77,17 +104,22 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-
         setAccelerators();
+        registerAsAnEventHandler(this);
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        /*
+         * Legacy code, for reference only setAccelerator(helpMenuItem,
+         * KeyCombination.valueOf("F1"));
+         */
     }
+
 
     /**
      * Sets the accelerator of a MenuItem.
@@ -128,7 +160,7 @@ public class MainWindow extends UiPart<Region> {
         prepareTaskList();
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), taskListToday, taskListFuture);
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+        // new CommandBox(getCommandBoxPlaceholder(), logic);
         // TODO: show completedTaskPanel when show completed command is
         // implemented
         new ResultDisplay(getResultDisplayPlaceholder());
@@ -148,9 +180,10 @@ public class MainWindow extends UiPart<Region> {
         logic.prepareTaskList(taskListToday, taskListFuture, taskListCompleted);
     }
 
-    private AnchorPane getCommandBoxPlaceholder() {
-        return commandBoxPlaceholder;
-    }
+    /*
+     * private AnchorPane getCommandBoxPlaceholder() { return
+     * commandBoxPlaceholder; }
+     */
 
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
@@ -233,4 +266,23 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
+    @FXML
+    private void handleCommandInputChanged() {
+        try {
+            CommandResult commandResult = logic.execute(commandTextField.getText());
+            // process result of the command
+            commandTextField.setText("");
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            raise(new UpdateStatusBarEvent(commandResult.statusBarMessage));
+        } catch (CommandException e) {
+            // handle command failure
+            raise(new NewResultAvailableEvent(e.getMessage()));
+            raise(new UpdateStatusBarEvent("Invalid command. Type \"Help\" to see format."));
+        }
+    }
+
+    @Subscribe
+    public void handleUpdateStatusBarEvent(UpdateStatusBarEvent event) {
+        this.commandResult.setText(event.getMessage());
+    }
 }
