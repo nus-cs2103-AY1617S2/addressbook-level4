@@ -15,7 +15,7 @@ public class SaveAtCommandParser {
         // remove all leading spaces, new line characters etc
         processedArgument = processedArgument.replaceAll("^\\s+", "");
         // cannot be empty path
-        if (processedArgument.equals("")) {
+        if (processedArgument.isEmpty()) {
             return new IncorrectCommand(String.format(SaveAtCommand.MESSAGE_INVALID_PATH, SaveAtCommand.MESSAGE_USAGE));
         }
         File f = new File(processedArgument);

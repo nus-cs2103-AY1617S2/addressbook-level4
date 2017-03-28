@@ -22,7 +22,7 @@ public class ConfigUtil {
 
     //@@author A0140887W
     public static String getConfigPath() throws IOException {
-        if (!Config.lastUsedFile.equals("")) {
+        if (!Config.lastUsedFile.isEmpty()) {
             return Config.lastUsedFile;
         } else {
             return Config.DEFAULT_CONFIG_FILE;

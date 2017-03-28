@@ -3,8 +3,6 @@ package seedu.doist.storage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -166,12 +164,12 @@ public class StorageManager extends ComponentManager implements Storage {
 
     private void moveFileToNewLocation(String oldPath, String newPath) {
         try {
-            Path oldFile = Paths.get(oldPath);
-            if (Files.exists(oldFile)) {
-                Path newFile = Paths.get(newPath);
+            File oldFile = new File(oldPath);
+            if (oldFile.exists() && !oldFile.isDirectory()) {
+                File newFile = new File(newPath);
                 // Ensure that the new directory exists before moving if not there will be an I/O exception
-                boolean doMkDir = new File(newPath).mkdirs();
-                Files.move(oldFile, newFile, StandardCopyOption.REPLACE_EXISTING);
+                newFile.getParentFile().mkdirs();
+                Files.move(oldFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (IOException e) {
             logger.info("Tried to move any existing files but failed" + StringUtil.getDetails(e));
