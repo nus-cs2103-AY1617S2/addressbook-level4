@@ -51,7 +51,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
-                startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty(),
+                startDate.isPresent() && !startDate.get().trim().equals("") ? Optional.of(new StartDate(startDate.get())) : Optional.empty(),
                 new EndDate(endDate),
                 new Description(description),
                 new UniqueTagList(tagSet)

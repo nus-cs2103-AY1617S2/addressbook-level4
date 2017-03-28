@@ -41,7 +41,7 @@ public interface ReadOnlyTask {
         // @@author A0140032E
         builder.append(getTitle())
                 .append(" StartDate: ")
-                .append(getStartDate().isPresent() ? getStartDate() : "")
+                .append(getStartDate().isPresent() ? getStartDate().get() : "")
                 .append(" EndDate: ")
                 .append(getEndDate())
                 .append(" Description: ")

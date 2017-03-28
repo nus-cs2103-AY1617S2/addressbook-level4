@@ -77,10 +77,12 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> startDate} into an {@code Optional<StartDate>} if {@code startDate} is present.
      */
+    // @@author A0140032E
     public static Optional<StartDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
         assert startDate != null;
-        return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
+        return startDate.isPresent() && !startDate.get().trim().equals("") ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
+    // @@author
 
     /**
      * Parses a {@code Optional<String> description} into an {@code Optional<Description>}

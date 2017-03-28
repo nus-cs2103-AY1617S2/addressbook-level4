@@ -92,7 +92,7 @@ public class EditCommand extends Command {
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
         // @@author A0140032E
-        Optional <StartDate> updatedStartDate = editTaskDescriptor.getStartDate().isPresent() ? editTaskDescriptor.getStartDate() : taskToEdit.getStartDate();
+        Optional <StartDate> updatedStartDate = editTaskDescriptor.isStartDateChanged() ? editTaskDescriptor.getStartDate() : taskToEdit.getStartDate();
         // @@author
         EndDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
@@ -111,65 +111,92 @@ public class EditCommand extends Command {
         private Optional<EndDate> endDate = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        // @@author A0140032E
+        private boolean anyChangesMade = false;
+        private boolean startDateChanged = false;
+        // @@author
 
         public EditTaskDescriptor() {
         }
 
+        // @@author A0140032E
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
             this.startDate = toCopy.getStartDate();
             this.endDate = toCopy.getEndDate();
             this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
+            this.anyChangesMade = toCopy.isAnyFieldEdited();
+            this.startDateChanged = toCopy.isStartDateChanged();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.startDate, this.endDate, this.description, this.tags);
+            return anyChangesMade;
+            //return CollectionUtil.isAnyPresent(this.title, this.startDate, this.endDate, this.description, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {
             assert title != null;
             this.title = title;
+            anyChangesMade = true;
         }
+        // @@author
 
         public Optional<Title> getTitle() {
             return title;
         }
 
+        // @@author A0140032E
         public void setStartDate(Optional<StartDate> startDate) {
             assert startDate != null;
             this.startDate = startDate;
+            startDateChanged = true;
+            anyChangesMade = true;
         }
+        
+        public boolean isStartDateChanged() {
+            return startDateChanged;
+        }
+        // @@author
 
         public Optional<StartDate> getStartDate() {
             return startDate;
         }
 
+        // @@author A0140032E
         public void setEndDate(Optional<EndDate> endDate) {
             assert endDate != null;
             this.endDate = endDate;
+            anyChangesMade = true;
         }
+        // @@author
 
         public Optional<EndDate> getEndDate() {
             return endDate;
         }
 
+        // @@author A0140032E
         public void setDescription(Optional<Description> description) {
             assert description != null;
             this.description = description;
+            anyChangesMade = true;
         }
+        // @@author
 
         public Optional<Description> getDescription() {
             return description;
         }
 
+        // @@author A0140032E
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
+            anyChangesMade = true;
         }
+        // @@author
 
         public Optional<UniqueTagList> getTags() {
             return tags;

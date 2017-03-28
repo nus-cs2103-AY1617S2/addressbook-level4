@@ -41,11 +41,21 @@ public class EditCommandParser {
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
-            editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_STARTDATE)));
-            editTaskDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_ENDDATE)));
-            editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
-            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            if (ParserUtil.parseTitle(preambleFields.get(1)).isPresent()) {
+                editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
+            }
+            if (argsTokenizer.getValue(PREFIX_STARTDATE).isPresent()) {
+                editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_STARTDATE)));
+            }
+            if (argsTokenizer.getValue(PREFIX_ENDDATE).isPresent()) {
+                editTaskDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_ENDDATE)));
+            }
+            if (argsTokenizer.getValue(PREFIX_DESCRIPTION).isPresent()) {
+                editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            }
+            if (argsTokenizer.getAllValues(PREFIX_TAG).isPresent()) {
+                editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
