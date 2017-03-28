@@ -22,6 +22,7 @@ import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.SaveCommand;
+import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UnDoneCommand;
 import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.parser.AddCommandParser;
@@ -42,6 +43,7 @@ import seedu.task.logic.parser.ListByTagCommandParser;
 import seedu.task.logic.parser.ListCommandParser;
 import seedu.task.logic.parser.LoadCommandParser;
 import seedu.task.logic.parser.SaveCommandParser;
+import seedu.task.logic.parser.SelectCommandParser;
 import seedu.task.logic.parser.UndoCommandParser;
 
 public class CommandLibrary {
@@ -117,6 +119,9 @@ public class CommandLibrary {
         commandParserTable.put(LoadCommand.COMMAND_WORD_1, new LoadCommandParser());
 
         commandParserTable.put(SaveCommand.COMMAND_WORD_1, new SaveCommandParser());
+
+        commandParserTable.put(SelectCommand.COMMAND_WORD_1, new SelectCommandParser());
+        commandParserTable.put(SelectCommand.COMMAND_WORD_2, new SelectCommandParser());
 
         commandParserTable.put(UndoCommand.COMMAND_WORD_1, new UndoCommandParser());
         commandParserTable.put(UndoCommand.COMMAND_WORD_2, new UndoCommandParser());

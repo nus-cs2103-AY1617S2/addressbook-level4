@@ -11,7 +11,7 @@ import seedu.task.logic.commands.SelectCommand;
 /**
  * Parses input arguments and creates a new SelectCommand object
  */
-public class SelectCommandParser {
+public class SelectCommandParser extends CommandParser{
 
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
