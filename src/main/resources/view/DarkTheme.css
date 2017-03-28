@@ -21,6 +21,7 @@
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: #002c54;
     -fx-opacity: 1;
+    -fx-font-weight: bold;
 
 }
 
@@ -84,7 +85,7 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 .split-pane {
-    -fx-border-radius: 1;
+    -fx-border-radius: 0;
     -fx-border-width: 0;
     -fx-background-color: #e2e8e4;
 }
@@ -286,7 +287,7 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: white;
-    -fx-border-width: 0 0 1 0;
+    -fx-border-width: 1 1 1 1;
 }
 
 #commandTypeLabel {
