@@ -139,7 +139,7 @@ public class SampleDataUtil {
     }
 
     public static Task[] getSampleRandomisedTasks() {
-        int NUMBER_OF_SAMPLE_TASKS = 60;
+        int NUMBER_OF_SAMPLE_TASKS = 10;
         Task[] sampleTasks = new Task[NUMBER_OF_SAMPLE_TASKS];
         for(int i = 0; i < NUMBER_OF_SAMPLE_TASKS;i++) {
             try {
