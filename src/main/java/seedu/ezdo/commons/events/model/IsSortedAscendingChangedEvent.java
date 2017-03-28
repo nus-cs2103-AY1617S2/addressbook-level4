@@ -20,4 +20,5 @@ public class IsSortedAscendingChangedEvent extends BaseEvent {
     public Boolean getNewIsSortedAscending() {
         return isSortedAscending;
     }
+
 }

@@ -116,7 +116,7 @@ public class Parser {
             return new AliasCommandParser().parse(arguments);
 
         default:
-            if (commandAliases.isAlias(commandWord)) {
+            if (commandAliases.checkIfAlias(commandWord)) {
                 String mappedCommand = commandAliases.getCommandFromAlias(commandWord);
                 String properInput = mappedCommand + arguments; // change the alias to the default command word
                 return parseCommand(properInput); // parse the command again

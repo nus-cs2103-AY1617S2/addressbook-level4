@@ -60,7 +60,7 @@ public class CommandAliases implements Serializable {
         commandAliasesMap.put(alias, command);
     }
 
-    public boolean isAlias(String alias) {
+    public boolean checkIfAlias(String alias) {
         return commandAliasesMap.get(alias) != null;
     }
 
