@@ -148,7 +148,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getTitle().toString());
-            if (!p.isFloatingTask()) { 
+            if (!p.isFloatingTask()) {
                 if (p.isEvent()) {
                     cmd.append(" s/").append(p.getStartDateTime());
                 }
