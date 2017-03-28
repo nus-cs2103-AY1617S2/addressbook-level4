@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.todolist.logic.commands.CompleteCommand;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.todo.ReadOnlyTodo;
 

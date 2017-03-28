@@ -17,10 +17,10 @@ public class FindCommandTest extends TodoListGuiTest {
     // This tag tagged multiple items (td.dog, td.cat) in the list of test todos
     private static final String MULTI_TAG = "petcare";
 
-//    private static final String START_TIME_AFTER = ;
-//    private static final String START_TIME_BEFORE = ;
-//    private static final String END_TIME_AFTER = ;
-//    private static final String END_TIME_BEFORE = ;
+//    private static final String START_TIME_AFTER = "1:00PM 11/11/17";
+//    private static final String START_TIME_BEFORE = "11:00AM 11/11/17";
+//    private static final String END_TIME_AFTER = "7:00PM 11/11/17";
+//    private static final String END_TIME_BEFORE = "5:00PM 11/11/17";
 //    private static final String COMPLETE_TIME_AFTER = ;
 //    private static final String COMPLETE_TIME_BEFORE = ;
 
