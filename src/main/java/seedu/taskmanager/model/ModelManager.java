@@ -1,3 +1,4 @@
+
 package seedu.taskmanager.model;
 
 import java.util.Set;
@@ -9,6 +10,7 @@ import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
+import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
@@ -130,6 +132,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    // @@author A0139520L
     @Override
     public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
 
@@ -137,7 +140,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.markTask(taskManagerIndex, false);
         indicateTaskManagerChanged();
     }
-    // =========== Filtered Person List Accessors
+    // =========== Filtered Task List Accessors
     // =============================================================
 
     // @@author
@@ -148,13 +151,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowAll() {
-        // filteredTasks.setPredicate(null);
+        filteredTasks.setPredicate(null);
         updateFilteredTaskListToShowByCompletion(false);
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
+    }
+    
+    @Override 
+    public void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete) {
+        updateFilteredTaskList(new PredicateExpression(new ListQualifier(keywords, isComplete)));
     }
 
     // @@author A0139520L
@@ -232,7 +240,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "task name=" + String.join(", ", taskKeyWords);
         }
     }
-    
+
     // @@author A0139520L
     private class CompletedQualifier implements Qualifier {
         private boolean isComplete;
@@ -251,4 +259,27 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    private class ListQualifier implements Qualifier {
+        private boolean isComplete;
+        private Set<String> taskKeyWords;
+
+        ListQualifier(Set<String> taskKeyWords, boolean isComplete) {
+            this.taskKeyWords = taskKeyWords;
+            this.isComplete = isComplete;
+        }
+
+        public boolean run(ReadOnlyTask task) {
+            return (task.getIsMarkedAsComplete().equals(isComplete)) && (taskKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword))
+                            .findAny().isPresent());
+//                    && (taskKeyWords.stream()
+//                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
+//                            .findAny().isPresent());
+        }
+        
+        @Override
+        public String toString() {
+            return "task name=" + String.join(", ", taskKeyWords);
+        }
+    }
 }

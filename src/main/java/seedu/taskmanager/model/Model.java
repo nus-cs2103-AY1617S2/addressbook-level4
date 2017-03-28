@@ -69,6 +69,8 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
+    
+    void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete);
 
     // @@author A0139520L
     /**

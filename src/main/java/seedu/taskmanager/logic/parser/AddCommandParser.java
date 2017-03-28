@@ -24,7 +24,7 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
 public class AddCommandParser {
 
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
-    public static final String INVALID_TIME = "Invalid input for time\nTime must be between 0000 and 2359";
+    public static final String INVALID_TIME = "Invalid input for time\n" + "Time must be between 0000 and 2359";
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -40,6 +40,7 @@ public class AddCommandParser {
             String byPrefixInput = argsTokenizer.getValue(PREFIX_DEADLINE).orElse(EMPTY_FIELD);
             String fromPrefixInput = argsTokenizer.getValue(PREFIX_STARTTIME).orElse(EMPTY_FIELD);
             String toPrefixInput = argsTokenizer.getValue(PREFIX_ENDTIME).orElse(EMPTY_FIELD);
+            String category = argsTokenizer.getValue(PREFIX_CATEGORY).orElse(EMPTY_FIELD);
             String startDate = EMPTY_FIELD;
             String startTime = EMPTY_FIELD;
             String endDate = EMPTY_FIELD;

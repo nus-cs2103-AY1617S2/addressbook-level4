@@ -239,6 +239,9 @@ public class CurrentDate {
         int year = calendar.get(Calendar.YEAR);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
+        LocalDate testdate = LocalDate.of(year, month, day);
+        int testdays = testdate.lengthOfMonth();
+        
         int diffInDays = dayOfWeek - inputDay;
 
         if (diffInDays == 0) {
@@ -250,9 +253,6 @@ public class CurrentDate {
         if (diffInDays < 0) {
             day -= diffInDays;
         }
-
-        LocalDate testdate = LocalDate.of(year, month, day);
-        int testdays = testdate.lengthOfMonth();
 
         if (day > testdays) {
             month += 1;
