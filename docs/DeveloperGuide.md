@@ -3,7 +3,7 @@
 By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
-0. [Introduction]#0-introduction)
+0. [Introduction](#0-introduction)
 1. [Setting Up](#1-setting-up)
    > 1.1 [Prerequisites](#11-prerequisites)<br/>
      1.2 [Importing the project into Eclipse](#12-importing-project-burdens-into-eclipse)<br/>
