@@ -44,12 +44,12 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskList taskList;
     private final Storage storage;
 
-
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyTask> todaysTasks;
     private final FilteredList<ReadOnlyTask> tomorrowsTasks;
-    private Stack<ReadOnlyTaskList> undoStack;
-    private Stack<ReadOnlyTaskList> redoStack;
+    private Stack<Pair> undoStack;
+    private Stack<Pair> redoStack;
+    public String userInput;
 //@@author A0141993X
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -69,8 +69,8 @@ public class ModelManager extends ComponentManager implements Model {
         tomorrowsTasks = new FilteredList<>(this.taskList.getTaskList());
         updateTomorrowsTaskList();
 
-        this.undoStack = new Stack<ReadOnlyTaskList>();
-        this.redoStack = new Stack<ReadOnlyTaskList>();
+        this.undoStack = new Stack<Pair>();
+        this.redoStack = new Stack<Pair>();
     }
 
     public ModelManager(Storage storage) {
@@ -95,14 +95,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        undoStack.push(new TaskList(taskList));
+        TaskList taskListToPush = new TaskList(taskList);
+        undoStack.push(new Pair(taskListToPush, userInput));
         taskList.removeTask(target);
         indicateTaskListChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        undoStack.push(new TaskList(taskList));
+        TaskList taskListToPush = new TaskList(taskList);
+        undoStack.push(new Pair(taskListToPush, userInput));
         taskList.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskListChanged();
@@ -112,7 +114,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-        undoStack.push(new TaskList(taskList));
+        TaskList taskListToPush = new TaskList(taskList);
+        undoStack.push(new Pair(taskListToPush, userInput));
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
         indicateTaskListChanged();
@@ -120,30 +123,49 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0139747N
     @Override
-    public void setPreviousState() throws EmptyStackException {
+    public String setPreviousState() throws EmptyStackException {
         if (undoStack.empty()) {
             throw new EmptyStackException();
         }
-        redoStack.push(new TaskList(taskList));
-        ReadOnlyTaskList previousState = undoStack.pop();
-        taskList.resetData(previousState);
+
+
+        Pair previousState = undoStack.pop();
+
+        redoStack.push(new Pair(new TaskList(taskList), previousState.getUserInput()));
+
+        taskList.resetData(previousState.getList());
         updateFilteredListToShowAll();
+
+        return previousState.getUserInput();
     }
 
     @Override
-    public void setNextState() throws EmptyStackException {
+    public String setNextState() throws EmptyStackException {
         if (redoStack.empty()) {
             throw new EmptyStackException();
         }
-        undoStack.push(new TaskList(taskList));
-        ReadOnlyTaskList nextState = redoStack.pop();
-        taskList.resetData(nextState);
+        Pair nextState = redoStack.pop();
+
+        undoStack.push(new Pair(new TaskList(taskList), nextState.getUserInput()));
+
+        taskList.resetData(nextState.getList());
         updateFilteredListToShowAll();
+
+        return nextState.getUserInput();
     }
 
     @Override
+    public void setUserInput(String input) {
+        userInput = input;
+    }
+
+    @Override
+    /**
+     * Generates a Pair object with the task list, and a null task, since clear command does not involve a certain task.
+     */
     public void enableUndoForClear() {
-        undoStack.push(new TaskList(taskList));
+        Pair current = new Pair(new TaskList(taskList), userInput);
+        undoStack.push(current);
     }
 
 //@@author A0141993X
@@ -308,10 +330,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+            return StringUtil.containsStartingLettersIgnoreCase(task.getName().fullName, nameKeyWords);
         }
 
         @Override

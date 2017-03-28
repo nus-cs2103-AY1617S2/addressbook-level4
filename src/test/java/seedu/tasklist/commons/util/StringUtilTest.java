@@ -6,6 +6,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,44 +50,51 @@ public class StringUtilTest {
         assertTrue(StringUtil.isUnsignedInteger("10"));
     }
 
-
-    //---------------- Tests for containsWordIgnoreCase --------------------------------------
+//@@author A0139221N
+    //---------------- Tests for containsStartingLettersIgnoreCase --------------------------------------
 
     /*
-     * Invalid equivalence partitions for word: null, empty, multiple words
+     * Invalid equivalence partitions for word: null, empty
      * Invalid equivalence partitions for sentence: null
      * The four test cases below test one invalid input at a time.
      */
 
     @Test
-    public void containsWordIgnoreCase_nullWord_exceptionThrown() {
-        assertExceptionThrown("typical sentence", null, "Word parameter cannot be null");
+    public void containsStartingLettersIgnoreCase_nullWord_exceptionThrown() {
+        assertExceptionThrown("typical sentence", null, "WordSet parameter cannot be null");
     }
 
-    private void assertExceptionThrown(String sentence, String word, String errorMessage) {
+    private void assertExceptionThrown(String sentence, Set<String> wordSet, String errorMessage) {
         thrown.expect(AssertionError.class);
         thrown.expectMessage(errorMessage);
-        StringUtil.containsWordIgnoreCase(sentence, word);
+        StringUtil.containsStartingLettersIgnoreCase(sentence, wordSet);
     }
 
     @Test
     public void containsWordIgnoreCase_emptyWord_exceptionThrown() {
-        assertExceptionThrown("typical sentence", "  ", "Word parameter cannot be empty");
+        Set<String> wordSet = new HashSet<>();
+        assertExceptionThrown("typical sentence", wordSet, "WordSet parameter cannot be empty");
     }
 
     @Test
     public void containsWordIgnoreCase_multipleWords_exceptionThrown() {
-        assertExceptionThrown("typical sentence", "aaa BBB", "Word parameter should be a single word");
+        Set<String> wordSet = new HashSet<>();
+        wordSet.add("not typical word");
+        assertExceptionThrown("typical sentence", wordSet, "Word in wordSet should be a single word");
     }
 
     @Test
     public void containsWordIgnoreCase_nullSentence_exceptionThrown() {
-        assertExceptionThrown(null, "abc", "Sentence parameter cannot be null");
+        Set<String> wordSet = new HashSet<>();
+        wordSet.add("typical");
+        wordSet.add("word");
+        assertExceptionThrown(null, wordSet, "Sentence parameter cannot be null");
     }
 
     /*
-     * Valid equivalence partitions for word:
+     * Valid equivalence partitions for wordSet:
      *   - any word
+     *   - any number of words
      *   - word containing symbols/numbers
      *   - word with leading/trailing spaces
      *
@@ -102,7 +111,7 @@ public class StringUtilTest {
      *   - matches multiple words
      *
      * Possible scenarios returning false:
-     *   - query word matches part of a sentence word
+     *   - sentence words only match some of the query words
      *   - sentence word matches part of the query word
      *
      * The test method below tries to verify all above with a reasonably low number of test cases.
@@ -110,25 +119,69 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_validInputs_correctResult() {
+        Set<String> wordSet = new HashSet<>();
+        wordSet.add("abc");
 
         // Empty sentence
-        assertFalse(StringUtil.containsWordIgnoreCase("", "abc")); // Boundary case
-        assertFalse(StringUtil.containsWordIgnoreCase("    ", "123"));
+        assertFalse(StringUtil.containsStartingLettersIgnoreCase("", wordSet)); // Boundary case
+        assertFalse(StringUtil.containsStartingLettersIgnoreCase("    ", wordSet));
 
         // Matches a partial word only
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+        wordSet = new HashSet<>();
+        wordSet.add("bbbb");
+        // Query word bigger than sentence word
+        assertFalse(StringUtil.containsStartingLettersIgnoreCase("aaa bbb ccc", wordSet));
+
+        wordSet.add("aaa");
+        wordSet.add("ddd");
+        // Matches only some of the words in the set
+        assertFalse(StringUtil.containsStartingLettersIgnoreCase("aaa bbbb ccc", wordSet));
+
+        wordSet = new HashSet<>();
+        wordSet.add("bc");
+        // Matches other parts of the word other than the staring letters
+        assertFalse(StringUtil.containsStartingLettersIgnoreCase("abc dsd", wordSet));
 
         // Matches word in the sentence, different upper/lower case letters
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
-        assertTrue(StringUtil.containsWordIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+        wordSet = new HashSet<>();
+        wordSet.add("Bbb");
+        // First word (boundary case)
+        assertTrue(StringUtil.containsStartingLettersIgnoreCase("aaa bBb ccc", wordSet));
 
+        wordSet = new HashSet<>();
+        wordSet.add("CCc@1");
+        // Last word (boundary case)
+        assertTrue(StringUtil.containsStartingLettersIgnoreCase("aaa bBb ccc@1", wordSet));
+
+        wordSet = new HashSet<>();
+        wordSet.add("aaa");
+        // Sentence has extra spaces
+        assertTrue(StringUtil.containsStartingLettersIgnoreCase("  AAA   bBb   ccc  ", wordSet));
+        // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsStartingLettersIgnoreCase("Aaa", wordSet));
+
+        wordSet = new HashSet<>();
+        wordSet.add("  ccc  ");
+        // Leading/trailing spaces
+        assertTrue(StringUtil.containsStartingLettersIgnoreCase("aaa bbb ccc", wordSet));
+
+        wordSet = new HashSet<>();
+        wordSet.add("bbB");
         // Matches multiple words in sentence
-        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+        assertTrue(StringUtil.containsStartingLettersIgnoreCase("AAA bBb ccc  bbb", wordSet));
+
+        wordSet.add("aaa");
+        // Matches multiple words in wordSet
+        assertTrue(StringUtil.containsStartingLettersIgnoreCase("AAA bBb ccc", wordSet));
+
+        wordSet = new HashSet<>();
+        wordSet.add("ab");
+        wordSet.add("b");
+        wordSet.add("c1");
+        // Matches starting letter of the word in sentence
+        assertTrue(StringUtil.containsStartingLettersIgnoreCase("abc bbb c1", wordSet));
     }
+//@@author
 
     //---------------- Tests for getDetails --------------------------------------
 

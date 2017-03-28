@@ -8,8 +8,8 @@ import seedu.tasklist.commons.exceptions.IllegalValueException;
  */
 public class Tag {
 
-    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names can contain anything except slash '/'.";
+    public static final String TAG_VALIDATION_REGEX = "[^/]+";
 
     public final String tagName;
 

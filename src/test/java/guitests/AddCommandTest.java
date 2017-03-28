@@ -27,6 +27,12 @@ public class AddCommandTest extends TaskListGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
+        //add task that contains symbols in the content
+        taskToAdd = td.exam;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(currentList));
+
         //add duplicate task
         commandBox.runCommand(td.internship.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -35,6 +41,7 @@ public class AddCommandTest extends TaskListGuiTest {
         //add to empty list
         commandBox.runCommand("clear");
         assertAddSuccess(td.tutorial);
+
 
         //invalid command
         commandBox.runCommand("adding newTask");

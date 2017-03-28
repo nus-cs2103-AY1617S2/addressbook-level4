@@ -2,39 +2,48 @@ package seedu.tasklist.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Set;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
 
+//@@author A0139221N
     /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     * Returns true if the {@code sentence} contains {@code wordSet}.
+     *   Ignores case, but starting letters must match the wordSet.
      *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsWordIgnoreCase("ABc def", ["ab"]) == true
+     *       containsWordIgnoreCase("ABc def", ["ABC", "DEF"]) == true
+     *       containsWordIgnoreCase("ABc def", ["AB", "g"]) == false //must contain all in the set
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param wordSet cannot be null, cannot be empty
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
-        assert word != null : "Word parameter cannot be null";
+    public static boolean containsStartingLettersIgnoreCase(String sentence, Set<String> wordSet) {
+        assert wordSet != null : "WordSet parameter cannot be null";
         assert sentence != null : "Sentence parameter cannot be null";
-
-        String preppedWord = word.trim();
-        assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
-        assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
+        assert !wordSet.isEmpty() : "WordSet parameter cannot be empty";
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-        for (String wordInSentence: wordsInPreppedSentence) {
-            if (wordInSentence.equalsIgnoreCase(preppedWord)) return true;
+        boolean isAllWordsPresent = true;
+        for (String word : wordSet) {
+            word = word.trim();
+            assert word.split("\\s+").length == 1 : "Word in wordSet should be a single word";
+            boolean isCurrentPresent = false;
+            for (String wordInSentence: wordsInPreppedSentence) {
+                if (wordInSentence.toLowerCase().trim().startsWith(word.toLowerCase())) {
+                    isCurrentPresent = true;
+                }
+            }
+            isAllWordsPresent = isCurrentPresent && isAllWordsPresent;
         }
-        return false;
+        return isAllWordsPresent;
     }
+//@@author
 
     /**
      * Returns a detailed message of the t, including the stack trace.

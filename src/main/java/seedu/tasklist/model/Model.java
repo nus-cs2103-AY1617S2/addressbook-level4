@@ -20,6 +20,8 @@ public interface Model {
     /** Returns the TaskList */
     ReadOnlyTaskList getTaskList();
 
+    void setUserInput(String userInput);
+
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
@@ -56,10 +58,10 @@ public interface Model {
 
     //@@author A0139747N
     /** Get the previous state (undo) of the task list */
-    public void setPreviousState() throws EmptyStackException;
+    public String setPreviousState() throws EmptyStackException;
 
     /** Get the next state (redo) of the task list */
-    public void setNextState() throws EmptyStackException;
+    public String setNextState() throws EmptyStackException;
 
     /** Enables undo to work after a clear command, by pushing the existing state into UndoStack. */
     public void enableUndoForClear();

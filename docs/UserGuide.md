@@ -67,7 +67,7 @@ Try FlexiTask now and benefit from its convenient features.
 > * Items with `...` after them can have multiple instances
 > * Parameters can be in any order
 > * Commands can be case-insensitive (Both "Add" and "add" are acceptable)
-> * Commands entered must be alphanumeric (only contains letters and words)
+> * <span style="color:red;">Contents entered can contain any character except slash '/'. Please use backslash '\' instead.</span>
 > * Commands support ***flexible commands:*** Common alternatives for the keywords will be accepted. These will be listed in the respective sections below.
 
 `Entering in dates`: Flexitask supports flexible date formats that can be entered in the formats specified below:
@@ -389,7 +389,8 @@ Format: `exit`
 ## 4. FAQ
 
 **Q**: How do I save my data in FlexiTask? <br>
-**A**: FlexiTask saves your data automatically, whenever the task list is updated. Data is saved to ‘data/tasklist.xml’.
+**A**: FlexiTask saves your data automatically, whenever the task list is updated. Data is saved to ‘data/tasklist.xml’. You can specify the path using the save command.
+
 
 **Q**: How do I transfer my data to another Computer? <br>
 **A**: Install FlexiTask in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlexiTask folder.
