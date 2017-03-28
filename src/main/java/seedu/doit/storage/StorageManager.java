@@ -11,6 +11,7 @@ import seedu.doit.commons.core.Config;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.events.storage.DataSavingExceptionEvent;
+import seedu.doit.commons.events.storage.TaskManagerLoadChangedEvent;
 import seedu.doit.commons.events.storage.TaskManagerSaveChangedEvent;
 import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.commons.util.ConfigUtil;
@@ -123,6 +124,24 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
 
+    }
+
+    @Override
+    @Subscribe
+    public void handleTaskManagerLoadChangedEvent(TaskManagerLoadChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Directory changed, saving to new directory at: " + event.getFilePath()));
+        String oldPath = this.config.getTaskManagerFilePath();
+        this.config.setTaskManagerFilePath(event.getFilePath());
+        setTaskManagerFilePath(event.getFilePath());
+        try {
+            ConfigUtil.saveConfig(this.config, Config.DEFAULT_CONFIG_FILE);
+        } catch (IOException ioe) {
+            logger.warning("IOException thrown in Load Changed Event.");
+            this.config.setTaskManagerFilePath(oldPath);
+            setTaskManagerFilePath(oldPath);
+            ioe.printStackTrace();
+        }
     }
 
     @Override
