@@ -83,8 +83,8 @@ public class CommandDispatcherTests {
     @Test
     public void getPredictedCommand_withWhiteSpaces() {
         SortedSet<String> expected = new TreeSet<>();
-        expected.add(" add");
-        expected.add(" alias");
+        expected.add("add");
+        expected.add("alias");
         assertEquals(dispatcher.getPredictedCommands(" a"), expected);
     }
 
