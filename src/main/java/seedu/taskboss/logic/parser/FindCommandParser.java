@@ -145,7 +145,7 @@ public class FindCommandParser {
         oneWordDays.put("tmr", "tomorrow");
         oneWordDays.put("yesterday", "yesterday");
         oneWordDays.put("ytd", "yesterday");
-        oneWordDays.put("now", "today");       
+        oneWordDays.put("now", "today");
     }
 
     //@@author A0147990R
