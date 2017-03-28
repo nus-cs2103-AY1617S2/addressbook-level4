@@ -96,6 +96,7 @@ public class MainWindow extends UiPart<Region> {
     private void configureKeyCombinations() {
         configureSwitchTabKeyCombinations();
         configureUndoKeyCombination();
+        configureHistoryNavigationKeyPresses();
     }
 
     void hide() {
@@ -125,11 +126,21 @@ public class MainWindow extends UiPart<Region> {
         EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(undoCommand);
         FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
     }
+    
+    private void configureHistoryNavigationKeyPresses() {
+        String[] keyNames = new String[] { "up", "down"};
+        Arrays.stream(keyNames).forEach(keyName -> {
+            KeyCode keycode = getKeyCode(keyName);
+            String navigateCommand = "navigatehistory " + keyName;
+            EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(navigateCommand);
+            FxViewUtil.setKeyCode(getRoot(), keycode, handler);
+        });
+    }
 
     /**
      * Get matching key code for a string
      * @param s string
-     * @returna key code
+     * @return a key code
      */
     private KeyCode getKeyCode(String s) {
         switch (s) {
@@ -138,6 +149,8 @@ public class MainWindow extends UiPart<Region> {
         case "n": return KeyCode.N;
         case "c": return KeyCode.C;
         case "a": return KeyCode.A;
+        case "up": return KeyCode.UP;
+        case "down": return KeyCode.DOWN;
         default: return KeyCode.ESCAPE;
         }
     }
