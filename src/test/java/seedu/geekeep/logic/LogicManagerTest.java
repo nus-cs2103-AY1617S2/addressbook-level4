@@ -29,10 +29,16 @@ import seedu.geekeep.logic.commands.ClearCommand;
 import seedu.geekeep.logic.commands.Command;
 import seedu.geekeep.logic.commands.CommandResult;
 import seedu.geekeep.logic.commands.DeleteCommand;
+import seedu.geekeep.logic.commands.DoneCommand;
 import seedu.geekeep.logic.commands.ExitCommand;
 import seedu.geekeep.logic.commands.FindCommand;
 import seedu.geekeep.logic.commands.HelpCommand;
 import seedu.geekeep.logic.commands.ListCommand;
+import seedu.geekeep.logic.commands.ListDoneCommand;
+import seedu.geekeep.logic.commands.ListUndoneCommand;
+import seedu.geekeep.logic.commands.RedoCommand;
+import seedu.geekeep.logic.commands.UndoCommand;
+import seedu.geekeep.logic.commands.UndoneCommand;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.Model;
@@ -442,6 +448,84 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_undo_redo_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(UndoCommand.MESSAGE_NOTHING_TO_UNDO);
+        assertCommandFailure("undo", expectedMessage);
+
+        expectedMessage = String.format(RedoCommand.MESSAGE_NOTHING_TO_REDO);
+        assertCommandFailure("redo", expectedMessage);
+    }
+
+    @Test
+    public void execute_undo_redo_Success() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        GeeKeep expectedAB = helper.generateGeeKeep(threeTasks);
+        expectedAB.removeTask(threeTasks.get(2));
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("delete 3",
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(2)),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        // Add deleted task back to expected Geekeep
+        expectedAB.addTask(threeTasks.get(2));
+
+        assertCommandSuccess("undo",
+                String.format(UndoCommand.MESSAGE_SUCCESS),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        // Deleted task from expected Geekeep again
+        expectedAB.removeTask(threeTasks.get(2));
+
+        assertCommandSuccess("redo",
+                String.format(RedoCommand.MESSAGE_SUCCESS),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+
+    @Test
+    public void execute_done_undone_CorrectTask() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        GeeKeep expectedAB = helper.generateGeeKeep(threeTasks);
+        expectedAB.markTaskDone(1);
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("done 2",
+                String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, threeTasks.get(1)),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        expectedAB.markTaskUndone(1);
+
+        assertCommandSuccess("undone 2",
+                String.format(UndoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, threeTasks.get(1)),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+
+    @Test
+    public void execute_done_undone_IndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("done");
+        assertIndexNotFoundBehaviorForCommand("undone");
+    }
+
+
+    @Test
+    public void execute_done_undone_InvalidArgsFormat_errorMessageShown() throws Exception {
+        String expectedDoneMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("done", expectedDoneMessage);
+        String expectedUndoneMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("undone", expectedUndoneMessage);
+    }
+
+
+    @Test
     public void execute_exit() {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new GeeKeep(), Collections.emptyList());
@@ -536,6 +620,36 @@ public class LogicManagerTest {
 
         assertCommandSuccess("list",
                 ListCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+    }
+
+    @Test
+    public void execute_listdone_listundone_showsTasksCorrectly() throws Exception {
+        // prepare expectations for list undone tasks
+        TestDataHelper helper = new TestDataHelper();
+        GeeKeep expectedAB = helper.generateGeeKeep(2);
+        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+
+        // prepare geekeep state
+        helper.addToModel(model, 2);
+
+        assertCommandSuccess("listundone",
+                ListUndoneCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+
+        // prepare expectations for list done tasks
+        expectedAB.markTaskDone(0);
+        expectedList = expectedAB.getTaskList().filtered(t -> t.isDone());
+
+        assertCommandSuccess("done 1",
+                String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, expectedList.get(0)),
+                expectedAB,
+                expectedAB.getTaskList());
+
+        assertCommandSuccess("listdone",
+                ListDoneCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
     }
