@@ -144,11 +144,9 @@ public class MainWindow extends UiPart<Region> {
         }
 
         if (leftPanel == null) {
-            leftPanel = new LeftPanel(getleftPanelPlaceholder(),
-                                logic.getFilteredTaskList(),
-                                model.getTaskManager().getLabelList());
+            leftPanel = new LeftPanel(getleftPanelPlaceholder(), logic.getFilteredTaskList());
         } else {
-            leftPanel.setConnections(model.getTaskManager().getLabelList());
+            leftPanel.updateLabelCount();
         }
 
         if (resultDisplay == null) {

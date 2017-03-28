@@ -8,6 +8,10 @@ import org.junit.Test;
 import seedu.address.logic.commandhistory.CommandHistory;
 import seedu.address.logic.commandhistory.CommandHistoryManager;
 
+//@@author A0140042A
+/**
+ * Test cases to check if command history iteration through pressing UP and DOWN key works
+ */
 public class CommandHistoryTest {
     private CommandHistory history;
 

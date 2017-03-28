@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a Label in DoOrDie Task Manager Application
  * Guarantees: immutable; name is valid as declared in {@link #isValidLabelName(String)}
  */
-public class Label {
+public class Label implements Comparable<Label> {
 
     public static final String MESSAGE_LABEL_CONSTRAINTS =
             "Label names should be alphanumeric, first character of label should be alphabetical";
@@ -61,6 +61,11 @@ public class Label {
      */
     public String toString() {
         return '[' + labelName + ']';
+    }
+
+    @Override
+    public int compareTo(Label o) {
+        return this.labelName.compareTo(o.labelName);
     }
 
 }
