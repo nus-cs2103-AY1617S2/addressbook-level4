@@ -69,26 +69,11 @@ public class ArgumentTokenizer {
         return Optional.of(values);
     }
 
+    // @@author A0139903B
     /**
-     * Returns the preamble (text before the first valid prefix), if any.
-     * Leading/trailing spaces will be trimmed. If the string before the first
-     * prefix is empty, Optional.empty() will be returned.
-     */
-    public Optional<String> getPreamble() {
-        Optional<String> storedPreamble = getValue(new Prefix(""));
-
-        /* An empty preamble is considered 'no preamble present' */
-        if (storedPreamble.isPresent() && !storedPreamble.get().isEmpty()) {
-            return storedPreamble;
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    //@@author A0139903B
-    /**
-     * Returns the full text, only excludes date times
-     * @return Full preamble without date times
+     * Returns the full preamble (text before and after the first valid prefix),
+     * if any. Leading/trailing spaces will be trimmed. If the string before the
+     * first prefix is empty, Optional.empty() will be returned.
      */
     public Optional<String> getFullPreamble() {
         Optional<List<String>> storedPreamble = getAllValues(new Prefix(""));
@@ -106,7 +91,7 @@ public class ArgumentTokenizer {
             return Optional.empty();
         }
     }
-    //@@author
+    // @@author
 
     private void resetTokenizerState() {
         this.tokenizedArguments.clear();
@@ -142,14 +127,12 @@ public class ArgumentTokenizer {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
             positions.add(extendedPrefix);
             argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
-            System.out.println("Looking at prefix");
-            System.out.println(extendedPrefix.getPrefix().getPrefix());
         }
 
         return positions;
     }
 
-    //@@author A0139903B
+    // @@author A0139903B
     /**
      * Extracts the preamble/arguments and stores them in local variables.
      *
@@ -165,6 +148,17 @@ public class ArgumentTokenizer {
         }
     }
 
+    /**
+     * Filters a list of prefix positions for dates, it will check for dates
+     * between any two prefixes and extract their positions if so. If there
+     * isn't a valid date behind a prefix, it will simply treat the prefix as a
+     * text
+     *
+     * @param argsString Argument string
+     * @param prefixPositions List of prefix positions to be passed in
+     * @return Returns a list of prefix positions with the non-date prefixes
+     *         filtered out
+     */
     private List<PrefixPosition> filterPositionsForDate(String argsString,
             List<PrefixPosition> prefixPositions) {
         List<PrefixPosition> filteredList = new ArrayList<PrefixPosition>();
@@ -180,8 +174,6 @@ public class ArgumentTokenizer {
         PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
         prefixPositions.add(endPositionMarker);
 
-        //System.out.println("argsString is: " + argsString);
-
         // Extract the prefixed arguments and preamble (if any)
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
             Prefix prefix = prefixPositions.get(i).getPrefix();
@@ -189,25 +181,28 @@ public class ArgumentTokenizer {
             int valueStartPos = prefixPositions.get(i).getStartPosition() + prefix.getPrefix().length();
             String value = argsString.substring(valueStartPos, prefixPositions.get(i + 1).getStartPosition());
 
-            // If it is a date, text following is not empty and is not valid date, continue
-            if (prefix.isDateTime() && !value.isEmpty() && !DateTimeParser.isValidDate(value)) {
+            boolean isValidDate = DateTimeParser.isValidDate(value);
+
+            System.out.println("Prefix " + prefix.getPrefix() + " value: " + value);
+
+            // If it is a date, text following is not empty and is not valid
+            // date, continue
+            if (prefix.isDateTime() && !value.isEmpty() && !isValidDate) {
                 PrefixPosition another = new PrefixPosition(new Prefix(""),
                         prefixPositions.get(i + 1).getStartPosition());
                 filteredList.add(another);
                 continue;
             }
 
-            // Add it in the filtered list
+            // Add the normal prefix here
             filteredList.add(prefixPositions.get(i));
-            // Empty preamble to continue after the date
             PrefixPosition another = new PrefixPosition(new Prefix(""),
                     prefixPositions.get(i + 1).getStartPosition());
             filteredList.add(another);
         }
-
         return filteredList;
     }
-    //@@author
+    // @@author
 
     /**
      * Returns the trimmed value of the argument specified by
@@ -221,12 +216,13 @@ public class ArgumentTokenizer {
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
-        //@@author A0139903B
-        // Should already be filtered by now, time to convert to fit date time format
+        // @@author A0139903B
+        // Should already be filtered by now, time to convert to fit date time
+        // format
         if (prefix.isDateTime()) {
             value = DateTimeParser.parse(value);
         }
-        //@@author
+        // @@author
         return value.trim();
     }
 

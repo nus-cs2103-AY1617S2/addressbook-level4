@@ -25,6 +25,16 @@ public class DateTimeParser {
     }
 
     /**
+     * Parses any string to check if any dates can be found
+     * @param date Any string to be parsed
+     * @return Returns a Date if a date was found, an empty object otherwise
+     */
+    public static Date parseAsDate(String date) {
+        List<Date> dateList = p.parse(date);
+        return dateList.size() == 0 ? null : dateList.get(0);
+    }
+
+    /**
      * Checks if the string is a valid date
      * @param date String to be checked
      * @return Returns true if the date is valid
