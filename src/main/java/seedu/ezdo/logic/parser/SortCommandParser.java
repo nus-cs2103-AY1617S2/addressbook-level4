@@ -9,6 +9,7 @@ import seedu.ezdo.commons.exceptions.InvalidSortOrderException;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.SortCommand;
+import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
 /**
@@ -39,46 +40,56 @@ public class SortCommandParser implements CommandParser {
         }
 
         String[] sortArguments = sortArgumentsField.get();
-        String sortCriteria = sortArguments[INDEX_OF_SORT_CRITERIA];
-        String sortOrder = sortArguments[INDEX_OF_SORT_ORDER];
+        String sortCriteriaArgument = sortArguments[INDEX_OF_SORT_CRITERIA];
+        String sortOrderArgument = sortArguments[INDEX_OF_SORT_ORDER];
 
+        SortCriteria sortCriteria;
         Boolean isSortedAscending;
 
-        if (sortOrder == null) {
+        sortCriteria = getSortCriteria(sortCriteriaArgument);
+        isSortedAscending = checkIfSortedAscending(sortOrderArgument);
+
+        return new SortCommand(sortCriteria, isSortedAscending);
+
+    }
+
+    private SortCriteria getSortCriteria(String sortCriteriaArgument) {
+        SortCriteria sortCriteria;
+        switch (sortCriteriaArgument) {
+        case SORT_KEYWORD_NAME:
+            sortCriteria = SortCriteria.NAME;
+        case SORT_KEYWORD_PRIORITY:
+            sortCriteria = SortCriteria.PRIORITY;
+        case SORT_KEYWORD_START_DATE:
+            sortCriteria = SortCriteria.START_DATE;
+        case SORT_KEYWORD_DUE_DATE:
+            sortCriteria = SortCriteria.DUE_DATE;
+        default:
+            sortCriteria = null;
+        }
+        return sortCriteria;
+    }
+
+    private Boolean checkIfSortedAscending(String sortOrderArgument) {
+        Boolean isSortedAscending;
+        if (sortOrderArgument == null) {
+            // If no sort order was specified, default to ascending sort order.
             isSortedAscending = true;
         } else {
             try {
-                isSortedAscending = determineIfIsSortedAscending(sortOrder);
+                switch(sortOrderArgument) {
+                case KEYWORD_ASCENDING:
+                    isSortedAscending = true;
+                    break;
+                case KEYWORD_DESCENDING:
+                    isSortedAscending = false;
+                    break;
+                default:
+                    throw new InvalidSortOrderException();
+                }
             } catch (InvalidSortOrderException isoe) {
                 isSortedAscending = null;
             }
-        }
-
-        switch (sortCriteria) {
-        case SORT_KEYWORD_NAME:
-            return new SortCommand(SortCriteria.NAME, isSortedAscending);
-        case SORT_KEYWORD_PRIORITY:
-            return new SortCommand(SortCriteria.PRIORITY, isSortedAscending);
-        case SORT_KEYWORD_START_DATE:
-            return new SortCommand(SortCriteria.START_DATE, isSortedAscending);
-        case SORT_KEYWORD_DUE_DATE:
-            return new SortCommand(SortCriteria.DUE_DATE, isSortedAscending);
-        default:
-            return new SortCommand(null, isSortedAscending);
-        }
-    }
-
-    private boolean determineIfIsSortedAscending(String sortOrder) throws InvalidSortOrderException {
-        Boolean isSortedAscending;
-        switch(sortOrder) {
-        case KEYWORD_ASCENDING:
-            isSortedAscending = true;
-            break;
-        case KEYWORD_DESCENDING:
-            isSortedAscending = false;
-            break;
-        default:
-            throw new InvalidSortOrderException();
         }
         return isSortedAscending;
     }
