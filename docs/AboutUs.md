@@ -7,11 +7,11 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Haya Alsharef](https://github.com/hayaz3)
 <img src="images/hayaz3.png" width="150"><br>
 
-* Components in charge of: [Logicl](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
+* Components in charge of: [Logic](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
 * Aspects/tools in charge of: Team Lead, Scheduling
 * Features implemented:
    * [Add priority to a task](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
-   * [Mark Done command and shortcut(support multiple Done)](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#310-marking-a-task-done--done)
+   * [Mark Done command and shortcut (support multiple Done)](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#310-marking-a-task-done--done)
    * [Edit category name](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#34-editing-a-task--edit)
    * [Edit priority of a task](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#34-editing-a-task--edit)
    * Default categories
