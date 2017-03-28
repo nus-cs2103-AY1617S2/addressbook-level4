@@ -126,7 +126,7 @@ public class UniqueCategoryList implements Iterable<Category> {
 
     /**
      * Adds a Category to the list.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public void add(Category toAdd) throws IllegalValueException {
         assert toAdd != null;
