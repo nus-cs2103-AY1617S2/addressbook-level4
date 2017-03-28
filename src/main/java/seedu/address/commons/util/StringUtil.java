@@ -36,6 +36,7 @@ public class StringUtil {
         return false;
     }
 
+    //@@author A0144885R
     /**
      * Trims leading, trailing and continuous spaces in a string
      *
@@ -45,6 +46,7 @@ public class StringUtil {
         assert text != null;
         return text.trim().replace(" +", " ");
     }
+    //@@author
 
     /**
      * Returns a detailed message of the t, including the stack trace.

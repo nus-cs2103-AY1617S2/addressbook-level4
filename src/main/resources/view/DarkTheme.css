@@ -1,3 +1,4 @@
+//@@author A0144885R
 @font-face {
 	font-family: 'Open Sans';
 	src: url('OpenSans-Regular.ttf');
@@ -100,6 +101,7 @@
 	-fx-font-family: "Open Sans";
 	-fx-font-size: 17px;
 }
+//@@author
 
 .label {
     -fx-font-size: 11pt;

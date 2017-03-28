@@ -191,6 +191,7 @@ public class MainApp extends Application {
         }
     }
 
+//@@author A0144885R
     public void reload() {
         ui.stop();
         EventsCenter.clearSubscribers();
@@ -204,6 +205,7 @@ public class MainApp extends Application {
 
         ui.start(new Stage());
     }
+//@@author
 
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
@@ -211,6 +213,7 @@ public class MainApp extends Application {
         this.stop();
     }
 
+//@@author A0144885R
     @Subscribe
     public void handleStorageFileChangeEvent(StorageFileChangeEvent event) {
         logger.info("============================ [ Restarting Address Book ] =============================");
@@ -219,6 +222,7 @@ public class MainApp extends Application {
         saveConfig();
         reload();
     }
+//@@author
 
     public static void main(String[] args) {
         launch(args);
