@@ -94,7 +94,7 @@ Format: `help`
 
 Adds a task to the list.
 
-Format: `add TITLE [for: DEADLINE] priority: PRIORITY note: INSTRUCTION [t/TAG]...`
+Format: `add TITLE [for: DEADLINE] [priority: PRIORITY] [note: INSTRUCTION] [t/TAG]...`
 
 > The deadline parameter can be entered in natural language, e.g. &quot;today&quot;, &quot;tomorrow at noon&quot;, &quot;this Sunday&quot;, &quot;every Tuesday&quot;. If deadline is not specified, it is assumed that the task is floating, which means the task can be performed earlier or later in the schedule without any form of urgency.<br><br>
 The priority parameter only accepts levels 1 - 5.<br><br>
@@ -103,7 +103,7 @@ Tasks can have any number of tags, including 0.
 Examples:
 
 - `add Buy groceries priority: 3 note: eggs x10, milk x2, bread x2 #home #errand`
-- `add Watch webcast i/CS2103 t/school p/5 d/07032017`
+- `add Watch webcast #CS2103 #school`
 
 ### 3.3. Listing all tasks : `list`
 
@@ -270,7 +270,7 @@ A: No prior command line knowledge is required to use **Burdens**. Instead, just
 # 5. Command Summary
 
 - Help : `help`
-- Add : `add TITLE for: DATE priority: PRIORITY note: INSTRUCTION [#TAG]...`
+- Add : `add TITLE [for: DEADLINE] [priority: PRIORITY] [note: INSTRUCTION] [t/TAG]...`
   - e.g. add Buy groceries for: the first Thursday of May priority: 5 note: eggs x10, milk x2, bread x2 #home #errand
 - List : `list`
 - Edit : `edit INDEX [TITLE] [for: DATE] [priority: PRIORITY] [note: INSTRUCTION] [#TAG]…`
