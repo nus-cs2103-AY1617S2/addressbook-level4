@@ -69,7 +69,7 @@ public class ParserUtil {
      * @return a list of Optional Integers in the range
      */
     public static List<Optional<Integer>> parseIndexRange(String[] twoEnds) {
-        assert twoEnds.length == 2 && twoEnds[0] != "" && twoEnds[1] != "";
+        assert twoEnds.length == 2 && !"".equals(twoEnds[0]) && !"".equals(twoEnds[1]);
         ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
         int start = parseIndex(twoEnds[0]).get();
         int end = parseIndex(twoEnds[1]).get();
