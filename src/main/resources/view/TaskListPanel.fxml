@@ -10,7 +10,6 @@
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
-	//@@author A0144885R
 	<children>
 		<VBox fx:id="taskListView" VBox.vgrow="NEVER">
 		</VBox>
