@@ -5,9 +5,9 @@ import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
-import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
     public static final String MESSAGE_CLASH_TIMING = "This event clashes with another event";
     public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date!";
-    
+
     private final Event toAddEvent;
     private final Task toAddTask;
     //@@author A0110491U
@@ -89,7 +89,7 @@ public class AddCommand extends Command {
                     new Location(location),
                     new UniqueTagList(tagSet));
             this.toAddTask = null;
-            if(!Event.isValideEndDateTime(toAddEvent.getEndTime(), toAddEvent.getEndDate(), 
+            if (!Event.isValideEndDateTime(toAddEvent.getEndTime(), toAddEvent.getEndDate(),
                     toAddEvent.getStartTime(), toAddEvent.getStartDate())) {
                 throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
             }

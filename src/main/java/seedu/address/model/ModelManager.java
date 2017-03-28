@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.util.Comparator;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -13,13 +12,13 @@ import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Event;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
 import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueEventList.EventNotFoundException;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.Event;
-import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
@@ -99,15 +98,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0121668A
     @Override
-    public synchronized void MarkTaskAsComplete(ReadOnlyTask taskToMark) throws TaskNotFoundException {
+    public synchronized void markTaskAsComplete(ReadOnlyTask taskToMark) throws TaskNotFoundException {
         whatsLeft.completeTask(taskToMark);
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }
-    
+
     @Override
-    public synchronized void MarkTaskAsPending(ReadOnlyTask taskToMark) throws TaskNotFoundException {
-        whatsLeft.RedoTask(taskToMark);
+    public synchronized void markTaskAsPending(ReadOnlyTask taskToMark) throws TaskNotFoundException {
+        whatsLeft.redoTask(taskToMark);
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }
@@ -121,19 +120,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }
-    
+
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         whatsLeft.addTask(task);
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }
-    
+
     @Override
-    public void updateEvent(Event eventToEdit, Event editedEvent) 
-    		throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+    public void updateEvent(Event eventToEdit, Event editedEvent)
+            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
         assert editedEvent != null;
-        
+
         whatsLeft.updateEvent(eventToEdit, editedEvent);
         indicateWhatsLeftChanged();
     }
@@ -163,7 +162,7 @@ public class ModelManager extends ComponentManager implements Model {
     public static void setPreviousState(ReadOnlyWhatsLeft state) {
         previousState = new WhatsLeft(state);
     }
-    
+
     @Override
     public int findEventIndex(Event event) {
         int currIndex = 0;
@@ -176,7 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return currIndex;
     }
-    
+
     @Override
     public int findTaskIndex(Task task) {
         int currIndex = 0;
@@ -192,20 +191,20 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author
 
     // =========== Filtered List Accessors
-    
+
     // @@author A0148038A
     @Override
     public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
-    	SortedList<ReadOnlyEvent> sortedEvents = new SortedList<ReadOnlyEvent>(filteredEvents);
-    	sortedEvents.setComparator(ReadOnlyEvent.getComparator());
-    	return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
+        SortedList<ReadOnlyEvent> sortedEvents = new SortedList<ReadOnlyEvent>(filteredEvents);
+        sortedEvents.setComparator(ReadOnlyEvent.getComparator());
+        return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-    	SortedList<ReadOnlyTask> sortedTasks = new SortedList<ReadOnlyTask>(filteredTasks);
-    	sortedTasks.setComparator(ReadOnlyTask.getComparator());
-    	return new UnmodifiableObservableList<ReadOnlyTask>(sortedTasks);
+        SortedList<ReadOnlyTask> sortedTasks = new SortedList<ReadOnlyTask>(filteredTasks);
+        sortedTasks.setComparator(ReadOnlyTask.getComparator());
+        return new UnmodifiableObservableList<ReadOnlyTask>(sortedTasks);
     }
 
     // @Override
@@ -221,7 +220,7 @@ public class ModelManager extends ComponentManager implements Model {
     // StatusQualifier(true))::satisfies);
     // filteredEvents.setPredicate(null);
     // }
-    
+
     //@@author A0121668A
     @Override
     public void updateFilteredListToShowAll() {
@@ -247,14 +246,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, displayStatus)));
     }
+    //@@author A0121668A
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
+    }
 
     @Override
     public void updateFilteredEventList(Set<String> keywords) {
         updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords, displayStatus)));
-    }
-    //@@author A0121668A
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
     }
 
     private void updateFilteredEventList(Expression expression) {
@@ -312,12 +311,12 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
             this.displayStatus = status;
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
             if (displayStatus.equals("All")) {
                 return nameKeyWords.stream().filter(
-                        keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
+                    keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
                         .findAny().isPresent();
             } else if (displayStatus.equals("Completed")) {
                 return nameKeyWords.stream()
@@ -343,16 +342,16 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyEvent event) {
             if (displayStatus.equals("All")) {
                 return nameKeyWords.stream().filter(
-                        keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword))
+                    keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword))
                         .findAny().isPresent();
             } else if (displayStatus.equals("Completed")) {
                 return nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
                                 && event.isOver())
                         .findAny().isPresent();
             } else if (displayStatus.equals("Pending")) {
                 return nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
                                 && !event.isOver())
                         .findAny().isPresent();
             } else {
@@ -362,7 +361,7 @@ public class ModelManager extends ComponentManager implements Model {
                     e.printStackTrace();
                 }
                 return false;
-                }
+            }
         }
 
         @Override
@@ -387,8 +386,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyEvent event) {
             if (statusKey) {
                 return event.isOver();
-            }
-            else {
+            } else {
                 return !event.isOver();
             }
         }

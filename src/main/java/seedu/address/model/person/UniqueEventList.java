@@ -10,7 +10,6 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -31,14 +30,14 @@ public class UniqueEventList implements Iterable<Event> {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
-    
+
     public ObservableList<Event> getInternalList() {
-    	return internalList;
+        return internalList;
     }
-    
+
     //@@author A0110491U
     /**
-     * 
+     *
      * @param toCheck
      * @return true if the list contains an event that clashes in time with the given argument
      */
@@ -50,36 +49,37 @@ public class UniqueEventList implements Iterable<Event> {
             LocalDateTime checkstartdatetime;
             LocalDateTime checkenddatetime;
             startdatetime = check.getStartDate().getValue().atTime(check.getStartTime().getValue());
-            enddatetime = check.getEndDate().getValue().atTime(check.getEndTime().getValue());  
+            enddatetime = check.getEndDate().getValue().atTime(check.getEndTime().getValue());
             checkstartdatetime = toCheck.getStartDate().getValue().atTime(toCheck.getStartTime().getValue());
-            checkenddatetime = toCheck.getEndDate().getValue().atTime(toCheck.getEndTime().getValue());    
-            if (check != toCheck && (startdatetime.isBefore(checkenddatetime)) && (enddatetime.isAfter(checkstartdatetime))) {
+            checkenddatetime = toCheck.getEndDate().getValue().atTime(toCheck.getEndTime().getValue());
+            if (check != toCheck && (startdatetime.isBefore(checkenddatetime)) && (enddatetime.
+                    isAfter(checkstartdatetime))) {
                 return true;
             }
         }
         return false;
     }
-    
+
     //@@author A0148038A
     /**
      * Adds an event to the list.
      *
      * @throws DuplicateEventException if the event to add is a duplicate of an existing event in the list.
-     * @throws DuplicateTimeClashException 
+     * @throws DuplicateTimeClashException
      */
     public void add(Event toAdd) throws DuplicateEventException, DuplicateTimeClashException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateEventException();
         }
-        
+
         if (containsTimeClash(toAdd)) {
             throw new DuplicateTimeClashException();
         }
         internalList.add(toAdd);
         internalList.sorted();
     }
-    
+
     //@@author A0148038A
     /**
      * Updates an event in WhatsLeft.
@@ -87,20 +87,21 @@ public class UniqueEventList implements Iterable<Event> {
      * @throws DuplicateEventException if the edited event is a duplicate of an existing event in the list.
      * @throws DuplicateTimeClashException if the edited event clashes with any other event
      */
-    public void updateEvent(Event eventToEdit, Event editedEvent) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+    public void updateEvent(Event eventToEdit, Event editedEvent) throws UniqueEventList.
+        DuplicateEventException, DuplicateTimeClashException {
         assert eventToEdit != null && editedEvent != null;
-        
+
         if (!eventToEdit.equals(editedEvent) && internalList.contains(editedEvent)) {
             throw new DuplicateEventException();
         }
         if (containsTimeClash(eventToEdit)) {
-        	throw new DuplicateTimeClashException();
+            throw new DuplicateTimeClashException();
         }
         int index = internalList.indexOf(eventToEdit);
-        internalList.set(index, editedEvent); 
+        internalList.set(index, editedEvent);
         internalList.sorted();
     }
-    
+
     /**
      * Removes the equivalent event from the list.
      *
@@ -157,7 +158,7 @@ public class UniqueEventList implements Iterable<Event> {
             super("Operation would result in duplicate events");
         }
     }
-    
+
     //@@author A0110491U
     /**
      * Signals that an operation would violate the "no clashing time" property of this list

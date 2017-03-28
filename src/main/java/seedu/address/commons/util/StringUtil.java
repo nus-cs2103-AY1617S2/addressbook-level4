@@ -15,16 +15,17 @@ import java.util.Date;
  */
 public class StringUtil {
 
-	//@@author  A0121668A
+    //@@author  A0121668A
     public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments can only be in this format: "
                             + "HHMM format, e.g. 1200";
     public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments can take only 6 digits, "
                             + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417";
     public static final int YEAR_CONVERSION_INDEX = 2000;
-    
+
     public static final String DATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
     //@@author A0124377A
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.
+            MEDIUM, FormatStyle.SHORT);
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -76,7 +77,7 @@ public class StringUtil {
         if (timeString == null) throw new DateTimeException(TIME_FORMAT_CONSTRAINTS);
         return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHmm"));
     }
-    
+
 //    //@@author A0148038A
 //    /**
 //     * Parse a String argument into date format.
@@ -102,9 +103,9 @@ public class StringUtil {
         //empty start date
         if (dateString == null) throw new DateTimeException(DATE_FORMAT_CONSTRAINTS);
         return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("ddMMyy"));
-            
+
     }
-    
+
     //@@author
     /**
      * Returns true if s represents an unsigned integer e.g. 1, 2, 3, ... <br>
@@ -115,9 +116,9 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
-    
+
     //@@author A0110491U
-    /** 
+    /**
      * returns today's date in DDMMYY format in string
      */
     public static String getTodayDateInString() {
@@ -125,5 +126,5 @@ public class StringUtil {
         return todaydate;
     }
     //@@author
-    
+
 }

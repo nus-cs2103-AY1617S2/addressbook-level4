@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 /**
  * Represents an event in WhatsLeft
  */
-public class Event implements ReadOnlyEvent{
+public class Event implements ReadOnlyEvent {
 
     private Description description;
     private StartTime startTime;
@@ -25,15 +25,15 @@ public class Event implements ReadOnlyEvent{
 
     /**
      * Description and start date must be present and not null.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public Event(Description description, StartTime startTime, StartDate startDate,
-    		EndTime endTime, EndDate endDate, Location location, UniqueTagList tags){
-    	
-    	//check description and start date are present
+            EndTime endTime, EndDate endDate, Location location, UniqueTagList tags) {
+
+        //check description and start date are present
         assert !CollectionUtil.isAnyNull(description, startDate);
         assert isValideEndDateTime(endTime, endDate, startTime, startDate);
-       
+
         this.description = description;
         this.startTime = startTime;
         this.startDate = startDate;
@@ -45,11 +45,11 @@ public class Event implements ReadOnlyEvent{
 
     /**
      * Creates a copy of the given ReadOnlyEvent.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public Event(ReadOnlyEvent source) {
         this(source.getDescription(), source.getStartTime(), source.getStartDate(),
-        		source.getEndTime(), source.getEndDate(), source.getLocation(), source.getTags());
+                source.getEndTime(), source.getEndDate(), source.getLocation(), source.getTags());
     }
 
     public void setDescription(Description description) {
@@ -61,7 +61,7 @@ public class Event implements ReadOnlyEvent{
     public Description getDescription() {
         return description;
     }
-    
+
     public void setStartTime(StartTime startTime) {
         this.startTime = startTime;
     }
@@ -80,7 +80,7 @@ public class Event implements ReadOnlyEvent{
     public StartDate getStartDate() {
         return startDate;
     }
-    
+
     public void setEndTime(EndTime endTime) {
         this.endTime = endTime;
     }
@@ -113,7 +113,7 @@ public class Event implements ReadOnlyEvent{
         return new UniqueTagList(tags);
     }
     //@@author A0121668A
-    
+
     /**
      * Checks if start Date/Time is before end Date/Time
      */
@@ -121,7 +121,7 @@ public class Event implements ReadOnlyEvent{
         if (sd.getValue().isAfter(ed.getValue())) {
             return false;
         }
-        if (sd.getValue().equals(ed.getValue())&&st.getValue().isAfter(et.getValue())) {
+        if (sd.getValue().equals(ed.getValue()) && st.getValue().isAfter(et.getValue())) {
             return false;
         }
         return true;
@@ -149,21 +149,18 @@ public class Event implements ReadOnlyEvent{
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
-    
+
     //@@author A0121668A
     @Override
     public boolean isOver() {
         if (LocalDate.now().isAfter(this.getEndDate().getValue())) {
             return true;
-        }
-        else if (LocalDate.now().isBefore(this.getEndDate().getValue())) {
+        } else if (LocalDate.now().isBefore(this.getEndDate().getValue())) {
             return false;
-        }
-        else {
+        } else {
             if (LocalTime.now().isAfter(this.getEndTime().getValue())) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }

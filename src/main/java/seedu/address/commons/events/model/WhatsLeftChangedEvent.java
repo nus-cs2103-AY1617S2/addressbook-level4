@@ -14,7 +14,7 @@ public class WhatsLeftChangedEvent extends BaseEvent {
 //@@author A0121668A
     @Override
     public String toString() {
-        return "number of tasks " + data.getTaskList().size() 
+        return "number of tasks " + data.getTaskList().size()
                 + "," + " number of events " + data.getEventList().size() + ", "
                 + "number of tags " + data.getTagList().size();
     }

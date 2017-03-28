@@ -26,8 +26,7 @@ public class StartTime {
     public StartTime(String startTimeArg) throws IllegalValueException {
         if (startTimeArg == null) {
             this.value = null;
-        }
-        else {
+        } else {
             try {
                 this.value = StringUtil.parseStringToTime(startTimeArg);
             } catch (DateTimeException dateTimeException) {
@@ -35,22 +34,22 @@ public class StartTime {
             }
         }
     }
-    
+
     //@@author A0110491U
     /**
      * Checks if given StartTime string is valid
      * returns true if it is valid according to MESSAGE_STARTTIME_CONSTRAINTS
      */
     public static boolean isValidStartTime(String args) {
-        try{
-            StringUtil.parseStringToTime(args);            
+        try {
+            StringUtil.parseStringToTime(args);
         } catch (DateTimeException ive) {
             return false;
         }
         return true;
     }
     //@@author
-    
+
     /*
      * For JAXB use
      */
@@ -82,7 +81,7 @@ public class StartTime {
         return value.hashCode();
     }
 
-	public int compareTo(StartTime o) {
-    	return this.getValue().compareTo(o.getValue());
-	}
+    public int compareTo(StartTime o) {
+        return this.getValue().compareTo(o.getValue());
+    }
 }

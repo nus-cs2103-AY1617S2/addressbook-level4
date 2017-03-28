@@ -5,7 +5,6 @@ import seedu.address.model.person.Description;
 import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Priority;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.tag.Tag;
@@ -51,12 +50,12 @@ public class ActivityBuilder {
         this.event.setStartTime(new StartTime(starttime));
         return this;
     }
-    
+
     public ActivityBuilder withStartDate(String startdate) throws IllegalValueException {
         this.event.setStartDate(new StartDate(startdate));
         return this;
     }
-    
+
     public ActivityBuilder withEndTime(String endtime) throws IllegalValueException {
         this.event.setEndTime(new EndTime(endtime));
         return this;
@@ -66,7 +65,7 @@ public class ActivityBuilder {
         this.event.setEndDate(new EndDate(enddate));
         return this;
     }
-    
+
     public TestActivity build() {
         return this.event;
     }

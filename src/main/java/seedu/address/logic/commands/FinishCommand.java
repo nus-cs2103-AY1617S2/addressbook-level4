@@ -37,11 +37,11 @@ public class FinishCommand extends Command {
         if (filteredActivityListIndex > lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        ReadOnlyTask taskToComplete = lastShownTaskList.get(filteredActivityListIndex-1);
+        ReadOnlyTask taskToComplete = lastShownTaskList.get(filteredActivityListIndex - 1);
         try {
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
-            model.MarkTaskAsComplete(taskToComplete);
+            model.markTaskAsComplete(taskToComplete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

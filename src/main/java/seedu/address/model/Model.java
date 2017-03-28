@@ -31,14 +31,14 @@ public interface Model {
 
     /** Adds the given Task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    
+
     /** Mark the given Task as complete **/
-    void MarkTaskAsComplete(ReadOnlyTask taskToComplete) throws UniqueTaskList.TaskNotFoundException;
-    
+    void markTaskAsComplete(ReadOnlyTask taskToComplete) throws UniqueTaskList.TaskNotFoundException;
+
     /** Mark the given Task as pending **/
-    void MarkTaskAsPending(ReadOnlyTask taskToRedo) throws UniqueTaskList.TaskNotFoundException;
-    
-    /** Adds the given Event 
+    void markTaskAsPending(ReadOnlyTask taskToRedo) throws UniqueTaskList.TaskNotFoundException;
+
+    /** Adds the given Event
      * @throws DuplicateTimeClashException */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
 
@@ -53,7 +53,7 @@ public interface Model {
      */
     void updateEvent(Event eventToEdit, Event editedEvent)
             throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
-    
+
     /**
      * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -69,7 +69,7 @@ public interface Model {
 
     /** Returns the filtered Event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
     UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
-    
+
     /** Updates the filters of the filtered Task list and filtered Event list to show all activities */
     public void updateFilteredListToShowAll();
 
@@ -78,14 +78,14 @@ public interface Model {
 
     /** Updates the filter of the filtered Event list to filter by the given keywords*/
     void updateFilteredEventList(Set<String> keywords);
-    
+
     /** Empties the previousCommand list and adds the newest one in, always keeping only 1*/
     void storePreviousCommand(String command);
     /** Updates the filter of the filtered Event list to show completed task*/
     //void updateFilteredListToShowComplete();
     /** Updates the filter of the filtered Event list to show unfinished task*/
     //void updateFilteredListToShowIncomplete();
-    
+
     void setDisplayStatus(String status);
 
 

@@ -1,15 +1,16 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-import guitests.guihandles.ActivityCardHandle;
+//import guitests.guihandles.ActivityCardHandle;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Priority;
+//import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ActivityBuilder;
 import seedu.address.testutil.TestActivity;

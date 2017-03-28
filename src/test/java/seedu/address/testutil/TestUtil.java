@@ -75,7 +75,7 @@ public class TestUtil {
 
     private static Event[] getSampleEventData() {
         try {
-            //CHECKSTYLE.OFF: LineLength 
+            //CHECKSTYLE.OFF: LineLength
             return new Event[]{
                 new Event(new Description("CS2103 TUT 1"), new StartTime("0900"), new StartDate("200517"), new EndTime("1000"), new EndDate("200517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2104 TUT 1"), new StartTime("0900"), new StartDate("210517"), new EndTime("1000"), new EndDate("210517"), new Location("NUS"), new UniqueTagList()),

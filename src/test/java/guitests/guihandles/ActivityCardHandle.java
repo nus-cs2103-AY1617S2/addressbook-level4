@@ -69,8 +69,8 @@ public class ActivityCardHandle extends GuiHandle {
 
     public boolean isSameEvent(ReadOnlyEvent event) {
         return getDescription().equals(event.getDescription().description)
-                && getDuration().equals(event.getStartTime().toString() 
-                        + " " + event.getStartDate().toString() 
+                && getDuration().equals(event.getStartTime().toString()
+                        + " " + event.getStartDate().toString()
                         + " ~ " + event.getEndTime().toString()
                         + " " + event.getEndDate().toString())
                 && getLocation().equals(event.getLocation().value)
@@ -91,6 +91,6 @@ public class ActivityCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getDescription() + " " + getDuration() + " " +getLocation();
+        return getDescription() + " " + getDuration() + " " + getLocation();
     }
 }

@@ -16,7 +16,7 @@ public class ShowCommandParser {
      * Parses the given {@code String} of arguments in the context of the ShowCommand
      * and returns an ShowCommand object for execution.
      */
-    
+
     public Command parse(String args) {
 
         String status = ParserUtil.parseStatus(args);

@@ -9,10 +9,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Event;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.StartDate;
@@ -31,7 +31,7 @@ public class XmlAdaptedEvent {
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     private LocalTime startTime;
-    @XmlElement(required = true) 
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate startDate;
     @XmlElement(required = true)
