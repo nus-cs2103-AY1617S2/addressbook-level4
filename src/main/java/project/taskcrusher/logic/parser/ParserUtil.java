@@ -45,7 +45,7 @@ public class ParserUtil {
         if (!StringUtil.isUnsignedInteger(index)) {
             return Optional.empty();
         }
-        //TODO: take care of number format exception
+        // TODO: take care of number format exception
         return Optional.of(Integer.parseInt(index));
 
     }
@@ -151,5 +151,61 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+    /**
+     *
+     * @param argsTokenizer
+     * @param prefix
+     * @param defaultValue
+     * @return
+     */
+    public static String setValue(ArgumentTokenizer argsTokenizer, ArgumentTokenizer.Prefix prefix,
+            String defaultValue) {
+        String value = defaultValue;
+        Optional<String> rawValue = argsTokenizer.getValue(prefix);
+        if (rawValue.isPresent()) {
+            value = rawValue.get();
+        }
+        return value;
+    }
+
+    /**
+     *
+     * @param preamble
+     * @param defaultValue
+     * @return
+     */
+    public static String setValue(Optional<String> preamble, String defaultValue) {
+        String value = defaultValue;
+        if (preamble.isPresent()) {
+            value = preamble.get();
+        }
+        return value;
+    }
+
+    /**
+     *
+     * @param datesToParse
+     * @return
+     * @throws IllegalValueException
+     */
+    public static List<Timeslot> parseAsTimeslots(String datesToParse) throws IllegalValueException {
+
+        if (datesToParse.equals(Timeslot.NO_TIMESLOT)) {
+            throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_DNE);
+        }
+        String[] timeslotsAsStrings = datesToParse.split("\\s+or\\s+");
+        List<Timeslot> timeslots = new ArrayList<>();
+        for (String t : timeslotsAsStrings) {
+            String[] dates = t.split("\\s+to\\s+");
+            if (dates.length != 2) {
+                throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_PAIRS);
+            }
+            timeslots.add(new Timeslot(dates[0], dates[1]));
+        }
+
+        return timeslots;
+
     }
 }
