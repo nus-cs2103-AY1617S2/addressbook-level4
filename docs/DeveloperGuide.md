@@ -354,33 +354,27 @@ b. Require developers to download those libraries manually (this creates extra w
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
+| Priority | As a ... | I want to ... | So that I can...|
+| :-------- | :-------- | :--------- | :-----------|
 |`***`|New User|view instructions|read documentation on how to use the program|
 |`***`|User|add task|keep track of things to do|
-|`***`|User|delete a task|remove tasks I no longer want to keep track of|
-|`***`|User|complete task|update my progress|
 |`***`|User|edit task|correct or revise the task name and its details|
+|`***`|User|write a description about a task|keep track of my progress|
 |`***`|User|add tags to task|be able to group tasks under a category|
-|`***`|User|search for keyword|search for a task by keywords|
+|`***`|User|complete task|update my progress|
+|`***`|User|delete a task|remove tasks I no longer want to keep track of|
 |`***`|User|view incomplete tasks|keep track of what I still need to do|
 |`***`|User|view complete tasks|keep track of tasks I have completed|
+|`***`|User|view upcoming deadlines|keep track of my deadlines|
 |`***`|User|view overdue tasks|know which tasks to prioritise finishing|
 |`***`|User|view task progress|keep track of my progress|
-|`***`|User|sync list with Google Calendar|view my todo list across different platforms|
+|`***`|User|search for keyword|search for a task by keywords|
 |`***`|User|undo previous command|revert accidental changes|
-|`***`|User|change UI theme|customise the application|
+|`***`|User|redo command|execute previously undone commands|
 |`***`|User|choose location to store save data|adjust application according to my needs|
-|`**`|User|list upcoming deadlines|keep track of my deadlines|
+|`**`|User|change UI theme|customise the application|
 |`**`|User|be alerted of conflicting tasks|avoid duplicates|
 |`**`|User|have a relevant link for my task|keep track of the task details|
-|`**`|User|snooze my tasks|adjust application according to my needs|
-|`**`|User|be reminded of my tasks x minutes before deadline|get reminder to do my task|
-|`**`|User|repeat tasks|add a repeating task just once|
-|`**`|User|add notes about a task|keep track of my progress|
-|`*`|User|add a message of the day|customise the application|
-|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|
-|`*`|User|view my tasks in calendar form|have a visual representation of my schedule|
 
 ### Appendix B : Use Cases
 
@@ -390,28 +384,22 @@ Priority | As a ... | I want to ... | So that I can...
 |-----|-----|
 |[Display help](#use-case-display-help)|Displays a list of possible instructions|
 |[Add task](#use-case-add-task)|Adds a task to the todo list. The task may have a concrete or floating time. Including tags at the end of the task is optional|
-|[Delete task](#use-case-delete-task)|Removes a task from the todo list|
-|[Mark task as complete](#use-case-complete-task)|Marks a task done by its name|
 |[Edit task](#use-case-edit-task)|Access a particular task and make changes|
+|[Describe task](#use-case-describe-task)|Write a description for a particular task|
 |[Add tags to created task](#use-case-add-tags-to-created-task)|Adds one or more tags to a task to label it|
-|[Search](#use-case-search)|Displays a list of tasks with matching keywords as queried|
-|[List uncompleted tasks](#use-case-list-uncompleted-tasks)| Lists all uncompleted tasks|
-|[List completed tasks](#use-case-list-completed-tasks)| Lists all completed tasks|
+|[Mark task as complete](#use-case-complete-task)|Marks a task done by its name|
+|[Delete task](#use-case-delete-task)|Removes a task from the todo list|
+|[View incomplete tasks](#use-case-list-uncompleted-tasks)| Lists all uncompleted tasks|
+|[View completed tasks](#use-case-list-completed-tasks)| Lists all completed tasks|
 |[View overdue tasks](#use-case-view-overdue-tasks)|Displays a list of tasks that are overdue|
-|[Show progress report](#use-case-show-task-progress-report)|Displays the current statistics on how many tasks have been added, completed, and pending completion|
-|[Sync with Google Calendar](#use-case-sync-with-google-calendar)|Synchronises the todo list with a Google Calendar|
+|[View progress](#use-case-show-task-progress-report)|Displays the current statistics on how many tasks have been added, completed, and pending completion|
+|[Search](#use-case-search)|Displays a list of tasks with matching keywords as queried|
 |[Undo previous command](#use-case-undo-previous-command)|Undoes the previous command|
-|[Change UI theme](#use-case-change-ui-theme)|Changes the theme of user interface|
+|[Redo previous command](#use-case-redo-previous-command)|Redo the previously undone command|
 |[Customize file storing](#use-case-customize-file-storing)|Sets a custom location for where to save the data|
-|[List upcoming deadlines](#use-case-list-upcoming-deadlines)|Lists the tasks with upcoming deadlines within the next 2 weeks|
-|[Same name detection](#use-case-same-name-detection)|Detects same name and send warning|
+|[Change UI theme](#use-case-change-ui-theme)|Changes the theme of user interface|
+|[Duplicates detection](#use-case-duplicates-detection)|Detects same name and send warning|
 |[Attach links](#use-case-attach-links)|Attaches links to a task|
-|[Snooze task](#use-case-snooze-task)|Snoozes task to a later time|
-|[Reminder mode](#use-case-reminder-mode)|Sets whether the application will send a reminder as a task's deadline draws near|
-|[Repeat task](#use-case-repeat-task)|Repeats the task every week|
-|[Customise 'Message of the Day'](#use-case-customise-message-of-the-day)|Adds a message of the day that is displayed each time the program starts up|
-|[Scroll through previous commands](#use-case-scroll-through-previous-commands)|Iterates through previously executed commands|
-|[Calendar view](#use-case-calendar-view)|Views the todo list as a calendar|
 
 ---
 
@@ -425,7 +413,6 @@ Priority | As a ... | I want to ... | So that I can...
 ##### Extensions
 
 1a. User entered an invalid command.
-
 > 1a1. System displays help messages.
 > 1a2. Use case ends.
 
@@ -447,46 +434,6 @@ Priority | As a ... | I want to ... | So that I can...
 
 ---
 
-#### Use case: Delete Task
-##### Main Success Scenario:
-1. User requests to list tasks.
-2. System displays tasks.
-3. User deletes a task by its index.
-4. System displays new list without the deleted task.
-5. Use case ends.
-
-##### Extensions
-2a. There is no list.
-> Use case ends.
-
-3a. The given index is invalid.
-> 3a1. System gives an error message.
-Use case resumes at step 2.
-
----
-
-#### Use Case: Complete Task
-##### Main Success Scenario:
-1. User requests to list tasks.
-2. System displays tasks.
-3. User selects a task based on its task number and marks it as completed.
-4. System marks the task as completed.
-5. Use case ends.
-
-##### Extension
-2a. There is no list.
-> Use case ends.
-
-3a. The task has already been completed.
-> 3a1. System shows error message that the task has already been completed.
-> 3a2. Use case ends.
-
-3b. The provided task number does not exist.
-> 3b1. System shows error message that the task number does not exist.
-> 3b2. Use case ends.
-
----
-
 #### Use case: Edit Task
 ##### Main Success Scenario:
 1. User requests to list uncompleted tasks.
@@ -502,6 +449,28 @@ Use case resumes at step 2.
 3a. The given index is invalid.
 > 3a1. System gives an error message.
 > 3a2. Use case resumes at step 2.
+
+---
+
+#### Use case: Describe Task
+##### Main Success Scenario:
+1. User requests to list tasks.
+2. System displays tasks and their details.
+3. User write description for a task.
+4. System saves the new description.
+5. System updates the UI accordingly.
+6. Use case ends.
+
+##### Extensions
+2a. There is no list.
+> 2a1. Use case ends.
+
+3a. The given index is invalid.
+> 3a1. System gives an error message.
+> 3a2. Use case resumes at step 2.
+
+3b. The description given by the user is blank
+> 3b1. Use case ends.
 
 ---
 
@@ -523,15 +492,48 @@ Use case resumes at step 2.
 
 ---
 
-#### Use case: Search
+#### Use Case: Complete Task
 ##### Main Success Scenario:
-1. User requests for a list of tasks that have matching keywords typed in.
-2. System shows a list of tasks that have the matching keywords.
-3. Use case ends.
+
+1. User requests to list tasks.
+2. System displays tasks.
+3. User selects a task based on its task number and marks it as completed.
+4. System marks the task as completed.
+5. Use case ends.
+
+##### Extension
+2a. There is no list.
+> Use case ends.
+
+3a. The task has already been completed.
+> 3a1. System shows error message that the task has already been completed.
+> 3a2. Use case ends.
+
+3b. The provided task number does not exist.
+> 3b1. System shows error message that the task number does not exist.
+> 3b2. Use case ends.
 
 ---
 
-#### Use case: List Uncompleted Tasks
+#### Use case: Delete Task
+##### Main Success Scenario:
+1. User requests to list tasks.
+2. System displays tasks.
+3. User deletes a task by its index.
+4. System displays new list without the deleted task.
+5. Use case ends.
+
+##### Extensions
+2a. There is no list.
+> Use case ends.
+
+3a. The given index is invalid.
+> 3a1. System gives an error message.
+Use case resumes at step 2.
+
+---
+
+#### Use case: View Incomplete Tasks
 ##### Main Success Scenario:
 1. User requests for list of uncompleted tasks.
 2. System display list of uncompleted task.
@@ -544,7 +546,7 @@ Use case resumes at step 2.
 
 ---
 
-#### Use case: List Completed Tasks
+#### Use case: View Completed Tasks
 ##### Main Success Scenario:
 1. User requests for list of completed tasks.
 2. System display list of completed task.
@@ -559,13 +561,12 @@ Use case resumes at step 2.
 
 #### Use case: View Overdue Tasks
 ##### Main Success Scenario:
-1. User requests for a list of overdue tasks.
-2. System shows a list of tasks that are overdue.
+1. User requests for a list of overdue tasks.2. System shows a list of tasks that are overdue.
 3. Use case ends.
 
 ---
 
-#### Use case: Show Task Progress Report
+#### Use case: View progress
 ##### Main Success Scenario:
 1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
 2. System shows a report of the user's completed tasks, overdue tasks and upcoming tasks.
@@ -577,26 +578,22 @@ Use case resumes at step 2.
 
 ---
 
-#### Use case: Sync with Google Calendar
+#### Use case: Search
 ##### Main Success Scenario:
-1. User requests to sync his/her to-do list by giving his/her email address.
-2. System requests password of the email account from user.
-3. User enter the password.
-4. System shows success message to the user.
-5. Use case ends.
 
-##### Extension
-3a. Email address/Password provided by the user is incorrect
-> 3a1. System shows error message.
-> 3a2. Use case ends.
+1. User requests for a list of tasks that have matching keywords typed in.
+2. System shows a list of tasks that have the matching keywords. 
+3. Use case ends. 
 
 ---
 
 #### Use case: Undo Previous Command
 ##### Main Success Scenario:
 1. User requests to undo a previous command that mutates the data.
-2. System returns the command that was undone.
-3. Use case ends.
+2. System undo the last command that mutates the data. 
+3. System prints the command that was undone on the feedback box.
+4. Use case ends.
+
 
 ##### Extensions
 2. There is nothing to undo.
@@ -604,13 +601,16 @@ Use case resumes at step 2.
 
 ---
 
-#### Use case: Change UI Theme
+#### Use case: Redo Previous Command
 ##### Main Success Scenario:
-1. User requests to change theme.
-2. System prompts user to select a new theme from list.
-3. User selects theme from list.
-4. System changes the theme.
-5. Use case ends.
+1. User requests to execute a previous command that was undone.
+2. System execute the last command that was undone. 
+3. System prints the command that was redone on the feedback box.
+4. Use case ends.
+
+##### Extensions
+2. There is no command to redo.
+> 2a1. Use case ends. 
 
 ---
 
@@ -632,15 +632,17 @@ Use case resumes at step 2.
 
 ---
 
-#### Use Case: List Upcoming Deadlines
+#### Use case: Change UI Theme
 ##### Main Success Scenario:
-1. User requests to view all upcoming deadlines.
-2. System displays all tasks that have yet to be marked as complete.
-3. Use case ends.
+1. User requests to change theme.
+2. System prompts user to select a new theme from list.
+3. User selects theme from list.
+4. System changes the theme.
+5. Use case ends.
 
 ---
 
-#### Use case: Same Name Detection
+#### Use case: Duplicates Detection
 ##### Main Success Scenario:
 1. User requests to add a new task.
 2. System detects same name and display message.
@@ -649,8 +651,9 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extensions
-3. Same name detected again.
+3. Same name, start time and end time detected again.
 > 3a1. Go back to 2.
+
 ---
 
 #### Use case: Attach Links
@@ -671,94 +674,6 @@ Use case resumes at step 2.
 
 ---
 
-#### Use case: Snooze Tasks
-##### Main Success Scenario:
-1. User requests to list tasks.
-2. System displays tasks.
-3. User snoozes a task.
-4. System saves the edits.
-5. Use case ends.
-
-##### Extensions
-3a. There is no such task.
-> 3a1. Use case ends.
-
-3b. Task not completed.
-> 3b2. Use case ends.
-
----
-
-#### Use case: Reminder mode
-##### Main Success Scenario:
-1. User requests to turn on/off reminder mode for the specified task(s).
-2. System start/stop tracking the specified tasks for reminder.
-3. System shows success message.
-4. Use case ends.
-
-##### Extension
-1a. Some of the specified task(s) do not exist/are completed/are overdue.
-> 1a1. System shows the list of task numbers previously input by the user that are invalid.
-> 1a2. Use case ends.
-
-1b. Some of the specified task(s) are already tracked/untracked.
-> 1b1. System execute step 2 for untracked/tracked tasks.
-> 1b2. System continue with step 3.
-> 1b3. Use case ends.
-
----
-
-#### Use case: Repeat Task
-##### Main Success Scenario:
-1. User requests to list persons.
-2. System shows a list of persons.
-3. User requests to repeat a specific task in the list.
-4. System puts the task that was put on repeat and displays the task.
-5. Use case ends.
-
-##### Extensions
-2a. There is no list.
-> Use case ends.
-
-3a. The given index is invalid.
-> 3a1. System gives an error message.
-Use case resumes at step 2.
-
----
-
-#### Use case: Customise 'Message of the Day'
-##### Main Success Scenario:
-1. User requests set a Message of the Day.
-2. System shows current message if it exists.
-3. User edits the Message of the Day.
-4. System saves the message and displays it on subsequent program launches.
-5. Use case ends.
-
----
-
-#### Use case: Scroll Through Previous Commands
-##### Main Success Scenario:
-1. User presses the arrow keys to retype the previously typed commands.
-2. System shows previous command if it exists.
-3. Use case ends.
-
-##### Extensions
-1a. User presses the up arrow key more than once. > 1a1. System shows the previously submitted command in reverse order.
-> 1a2. Use case ends.
-
-1b. User presses the down arrow key.
-> 1b1. System shows the subsequent command.
-> 1b2. Use case ends.
-
----
-
-#### Use case: Calendar View
-##### Main Success Scenario:
-1. User requests to view todo list in the form of a calendar.
-2. System displays the current and next month as a calendar.
-3. System populates the days with dots for incomplete tasks' due dates.
-4. Use case ends.
-
----
 ### Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
