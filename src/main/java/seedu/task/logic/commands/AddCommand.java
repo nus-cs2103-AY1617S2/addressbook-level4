@@ -25,7 +25,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Task Manager. "
             + "Parameters: TASK_NAME [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Buy Milk d/17-Mar-2017 p/4 i/For home t/chore";
+            + "Buy Milk d/17-Mar-2017 p/4 i/For home t/chore";
 
     public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the Task Manager";
@@ -43,6 +43,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+
         this.toAdd = new Task(
                 new TaskName(taskName),
                 new Deadline(deadline),
