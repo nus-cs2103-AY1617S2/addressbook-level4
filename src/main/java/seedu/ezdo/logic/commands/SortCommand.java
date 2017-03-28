@@ -21,9 +21,9 @@ public class SortCommand extends Command {
                                                        + "(a for ascending, d for descending)";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Sorts the task by the field specified.\n"
-        + "Parameters: FIELD [ORDER]\n"
-        + "Example: " + COMMAND_WORD + " d a";
+                                               + ": Sorts the task by the field specified.\n"
+                                               + "Parameters: FIELD [ORDER]\n"
+                                               + "Example: " + COMMAND_WORD + " d a";
 
     private SortCriteria sortCriteria;
     private Boolean isSortedAscending;
