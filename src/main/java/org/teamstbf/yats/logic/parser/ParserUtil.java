@@ -18,7 +18,6 @@ import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -31,132 +30,134 @@ import com.joestelmach.natty.DateGroup;
  */
 public class ParserUtil {
 
-	private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-	/**
-	 * Returns the specified index in the {@code command} if it is a positive
-	 * unsigned integer Returns an {@code Optional.empty()} otherwise.
-	 */
-	public static Optional<Integer> parseIndex(String command) {
-		final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
-		if (!matcher.matches()) {
-			return Optional.empty();
-		}
-
-		String index = matcher.group("targetIndex");
-		if (!StringUtil.isUnsignedInteger(index)) {
-			return Optional.empty();
-		}
-		return Optional.of(Integer.parseInt(index));
-
+    /**
+     * Returns the specified index in the {@code command} if it is a positive
+     * unsigned integer Returns an {@code Optional.empty()} otherwise.
+     */
+    public static Optional<Integer> parseIndex(String command) {
+	final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+	if (!matcher.matches()) {
+	    return Optional.empty();
 	}
 
-	/**
-	 * Returns a new Set populated by all elements in the given list of strings
-	 * Returns an empty set if the given {@code Optional} is empty, or if the
-	 * list contained in the {@code Optional} is empty
-	 */
-	public static Set<String> toSet(Optional<List<String>> list) {
-		List<String> elements = list.orElse(Collections.emptyList());
-		return new HashSet<>(elements);
+	String index = matcher.group("targetIndex");
+	if (!StringUtil.isUnsignedInteger(index)) {
+	    return Optional.empty();
 	}
+	return Optional.of(Integer.parseInt(index));
 
-	/**
-	 * Splits a preamble string into ordered fields.
-	 *
-	 * @return A list of size {@code numFields} where the ith element is the ith
-	 *         field value if specified in the input, {@code Optional.empty()}
-	 *         otherwise.
-	 */
-	public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
-		return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields)).map(Optional::ofNullable)
-				.collect(Collectors.toList());
-	}
+    }
 
-	/**
-	 * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if
-	 * {@code name} is present.
-	 */
-	public static Optional<Title> parseName(Optional<String> name) throws IllegalValueException {
-		assert name != null;
-		return name.isPresent() ? Optional.of(new Title(name.get())) : Optional.empty();
-	}
+    /**
+     * Returns a new Set populated by all elements in the given list of strings
+     * Returns an empty set if the given {@code Optional} is empty, or if the
+     * list contained in the {@code Optional} is empty
+     */
+    public static Set<String> toSet(Optional<List<String>> list) {
+	List<String> elements = list.orElse(Collections.emptyList());
+	return new HashSet<>(elements);
+    }
 
-	/**
-	 * Parses a {@code Optional<String> location} into an
-	 * {@code Optional<Location>} if {@code location} is present.
-	 */
-	public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
-		assert location != null;
-		return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
-	}
+    /**
+     * Splits a preamble string into ordered fields.
+     *
+     * @return A list of size {@code numFields} where the ith element is the ith
+     *         field value if specified in the input, {@code Optional.empty()}
+     *         otherwise.
+     */
+    public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
+	return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields)).map(Optional::ofNullable)
+		.collect(Collectors.toList());
+    }
 
-	/**
-	 * Parses a {@code Optional<String> periodic} into an
-	 * {@code Optional<Periodic>} if {@code periodic} is present.
-	 */
-	public static Optional<Periodic> parsePeriodic(Optional<String> periodic) throws IllegalValueException {
-		assert periodic != null;
-		return periodic.isPresent() ? Optional.of(new Periodic(periodic.get())) : Optional.empty();
-	}
+    /**
+     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if
+     * {@code name} is present.
+     */
+    public static Optional<Title> parseName(Optional<String> name) throws IllegalValueException {
+	assert name != null;
+	return name.isPresent() ? Optional.of(new Title(name.get())) : Optional.empty();
+    }
 
-	/**
-	 * Parses a {@code Optional<String> description} into an
-	 * {@code Optional<Description>} if {@code description} is present.
-	 */
-	public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
-		assert description != null;
-		return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
-	}
+    /**
+     * Parses a {@code Optional<String> location} into an
+     * {@code Optional<Location>} if {@code location} is present.
+     */
+    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
+	assert location != null;
+	return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
+    }
 
-	/**
-	 * Parses a {@code Optional<String> schedule} into an
-	 * {@code Optional<List<Date>>} if {@code schedule} is present.
-	 */
-	public static Optional<List<Date>> parseSchedule(Optional<String> schedule) throws IllegalValueException {
-		// String -> DateList -> Optional
-	    assert schedule != null;
-		if (schedule.isPresent()) {
-		    return Optional.of(parseDateTime(schedule.get()));
-		} else {
-		    return Optional.empty();
-		}
-	}
+    /**
+     * Parses a {@code Optional<String> periodic} into an
+     * {@code Optional<Periodic>} if {@code periodic} is present.
+     */
+    public static Optional<Periodic> parsePeriodic(Optional<String> periodic) throws IllegalValueException {
+	assert periodic != null;
+	return periodic.isPresent() ? Optional.of(new Periodic(periodic.get())) : Optional.empty();
+    }
 
-	/**
-	 * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
-	 */
-	public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
-		assert tags != null;
-		final Set<Tag> tagSet = new HashSet<>();
-		for (String tagName : tags) {
-			tagSet.add(new Tag(tagName));
-		}
-		return new UniqueTagList(tagSet);
+    /**
+     * Parses a {@code Optional<String> description} into an
+     * {@code Optional<Description>} if {@code description} is present.
+     */
+    public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
+	assert description != null;
+	return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> schedule} into an
+     * {@code Optional<List<Date>>} if {@code schedule} is present.
+     */
+    public static Optional<List<Date>> parseSchedule(Optional<String> schedule) throws IllegalValueException {
+	// String -> DateList -> Optional
+	assert schedule != null;
+	if (schedule.isPresent()) {
+	    return Optional.of(parseDateTime(schedule.get()));
+	} else {
+	    return Optional.empty();
 	}
-	
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
+     */
+    public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
+	assert tags != null;
+	final Set<Tag> tagSet = new HashSet<>();
+	for (String tagName : tags) {
+	    tagSet.add(new Tag(tagName));
+	}
+	return new UniqueTagList(tagSet);
+    }
+
     /**
      * Parses {@code String words} to a {@code List<Date>}, using natty library
-     * 
-     * @param a string containing date and time information
+     *
+     * @param a
+     *            string containing date and time information
      * @return a list of Date objects
      * @throws IllegalValueException
      */
     public static List<Date> parseDateTime(String words) throws IllegalValueException {
-        //Date referenceDate = new Date();
-        if (words == null) {
-            return null;
-        }
-        com.joestelmach.natty.Parser dateParser = new com.joestelmach.natty.Parser();
-        //dateGroup contains isRecurring() and getRecursUntil() methods that can be used later
-        List<DateGroup> dateGroup = dateParser.parse(words);
-        List<Date> dateList = dateGroup.isEmpty() ? new ArrayList<Date>() : dateGroup.get(0).getDates();
-        return dateList;
+	// Date referenceDate = new Date();
+	if (words == null) {
+	    return null;
+	}
+	com.joestelmach.natty.Parser dateParser = new com.joestelmach.natty.Parser();
+	// dateGroup contains isRecurring() and getRecursUntil() methods that
+	// can be used later
+	List<DateGroup> dateGroup = dateParser.parse(words);
+	List<Date> dateList = dateGroup.isEmpty() ? new ArrayList<Date>() : dateGroup.get(0).getDates();
+	return dateList;
     }
-    
+
     public static Date parseSingleDate(String words) throws IllegalValueException {
-        List<Date> dates = parseDateTime(words);
-        //Assert.assertEquals(1, dates.size());
-        return dates.get(0);
+	List<Date> dates = parseDateTime(words);
+	// Assert.assertEquals(1, dates.size());
+	return dates.get(0);
     }
 }
