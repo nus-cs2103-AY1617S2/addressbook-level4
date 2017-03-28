@@ -16,6 +16,29 @@ public class BrowserPanel extends UiPart<Region> {
 
     private static final String FXML = "BrowserPanel.fxml";
 
+    private static final String DOG =
+            "\n─────────▄──────────────▄────" +
+            "\n────────▌▒█───────────▄▀▒▌───" +
+            "\n────────▌▒▒▀▄───────▄▀▒▒▒▐───" +
+            "\n───────▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐───" +
+            "\n─────▄▄▀▒▒▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐───" +
+            "\n───▄▀▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀██▀▒▌───" +
+            "\n──▐▒▒▒▄▄▄▒▒▒▒▒▒▒▒▒▒▒▒▒▀▄▒▒▌──" +
+            "\n──▌▒▒▐▄█▀▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐──" +
+            "\n─▐▒▒▒▒▒▒▒▒▒▒▒▌██▀▒▒▒▒▒▒▒▒▀▄▌─" +
+            "\n─▌▒▀▄██▄▒▒▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▌─" +
+            "\n─▌▀▐▄█▄█▌▄▒▀▒▒▒▒▒▒░░░░░░▒▒▒▐─" +
+            "\n▐▒▀▐▀▐▀▒▒▄▄▒▄▒▒▒▒▒░░░░░░▒▒▒▒▌" +
+            "\n▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒░░░░░░▒▒▒▐─" +
+            "\n─▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒▒▒░░░░▒▒▒▒▌─" +
+            "\n─▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▐──" +
+            "\n──▀▄▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▄▒▒▒▒▌──" +
+            "\n────▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀───" +
+            "\n───▐▀▒▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀─────" +
+            "\n──▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀▀────────";
+
+    private static final String MOTD = "Welcome back, Jim!" + DOG;
+
     @FXML
     private AnchorPane browser;
     @FXML
@@ -44,19 +67,51 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    void loadTaskPage(ReadOnlyTask task) {
+    //@@author A0139930B
+    /**
+     * Initializes the task panel with welcome message
+     */
+    void initTaskPanel() {
+        name.setText(MOTD);
+        description.setText("");
+        startDateTime.setText("");
+        endDateTime.setText("");
+        clearTags();
+    }
 
+    /**
+     * Loads the task panel with {@code task}
+     * @param task
+     */
+    void loadTaskPanel(ReadOnlyTask task) {
         name.setText(task.getName().taskName);
-        // id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().toString());
         startDateTime.setText(task.getStartDateTime().toString());
         endDateTime.setText(task.getEndDateTime().toString());
         initTags(task);
     }
 
+    /**
+     * Clears the task panel
+     */
+    void clearTaskPanel() {
+        name.setText("Great job for getting things done! A doge is pleased." + DOG);
+        description.setText("");
+        startDateTime.setText("");
+        endDateTime.setText("");
+        clearTags();
+    }
+
+    /**
+     * Clears the tags in the task panel
+     */
+    private void clearTags() {
+        tags.getChildren().clear();
+    }
+    //@@author
+
     private void initTags(ReadOnlyTask task) {
         tags.getChildren().clear();
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
-
 }

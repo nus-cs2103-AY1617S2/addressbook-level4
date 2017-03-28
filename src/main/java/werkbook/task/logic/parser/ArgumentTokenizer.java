@@ -183,8 +183,6 @@ public class ArgumentTokenizer {
 
             boolean isValidDate = DateTimeParser.isValidDate(value);
 
-            System.out.println("Prefix " + prefix.getPrefix() + " value: " + value);
-
             // If it is a date, text following is not empty and is not valid
             // date, continue
             if (prefix.isDateTime() && !value.isEmpty() && !isValidDate) {

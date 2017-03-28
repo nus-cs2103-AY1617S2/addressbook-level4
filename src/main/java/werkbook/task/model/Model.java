@@ -55,4 +55,9 @@ public interface Model {
     //@@author A0139903B
     /** Raises an event to indicate a task has changed */
     void indicateTaskChanged(ReadOnlyTask editedTask);
+
+    /** Raises an event to indicate the task list is empty */
+    void indicateTaskListEmpty();
+    //@@author
+
 }
