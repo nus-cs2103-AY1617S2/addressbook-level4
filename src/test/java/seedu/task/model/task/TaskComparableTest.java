@@ -59,7 +59,7 @@ public class TaskComparableTest {
                     new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
 
             //add two near identical tasks
-            ArrayList<Task> al = new ArrayList<Task>(Arrays.asList(t1,t2));
+            ArrayList<Task> al = new ArrayList<Task>(Arrays.asList(t1, t2));
 
             //complete one of them and expect completed task to move to end of list
             t1.setComplete();
@@ -85,7 +85,7 @@ public class TaskComparableTest {
 
     private void sort_and_assertEquals(ArrayList<Task> actual, ArrayList<Task> expected) {
         Collections.sort(actual);
-        assertEquals(actual,expected);
+        assertEquals(actual, expected);
     }
 
     @SuppressWarnings("unused")
