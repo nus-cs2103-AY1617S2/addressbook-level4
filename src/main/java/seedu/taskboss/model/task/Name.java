@@ -17,11 +17,10 @@ public class Name {
      * The first character of the information must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-//    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}|\\s|!|"
-//            + "|_|-|+|$|#|@|%|^|*|?+/||<|>|`|~|&]*";
 
     public final String fullName;
 
+    //@author A0144904H
     /**
      * Validates given name.
      *
@@ -43,7 +42,7 @@ public class Name {
         return !test.equals(EMPTY_STRING);
     }
 
-
+    //@@author A0144904H
     @Override
     public String toString() {
         return fullName;

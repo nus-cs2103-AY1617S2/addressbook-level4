@@ -26,6 +26,7 @@ public class MarkDoneCommand extends Command {
             + " 1" +  " || " + COMMAND_WORD_SHORT + " 1";
 
     public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done: %1$s";
+    public static final String DONE = "Done";
 
     private final int filteredTaskListIndex;
 
@@ -51,7 +52,7 @@ public class MarkDoneCommand extends Command {
             Task taskMarked = new Task(taskToMarkDone.getName(), taskToMarkDone.getPriorityLevel(),
                 taskToMarkDone.getStartDateTime(), taskToMarkDone.getEndDateTime(),
                 taskToMarkDone.getInformation(), taskToMarkDone.getRecurrence(),
-                new UniqueCategoryList("Done"));
+                new UniqueCategoryList(DONE));
             model.updateTask(filteredTaskListIndex, taskMarked);
         }
 

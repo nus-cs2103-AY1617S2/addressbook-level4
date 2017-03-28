@@ -44,10 +44,14 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss.";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
-    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot add Done category";
+
+    //@@author A0144904H
+    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot edit current catgeories to Done category";
     public static final String ERROR_CANNOT_EDIT_DONE_TASK = "Cannot edit Done tasks";
+    public static final String ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY = "Cannot edit current catgeories"
+            + " to AllTasks category";
 
-
+    //@@author
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
@@ -65,6 +69,7 @@ public class EditCommand extends Command {
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
+    //@@author A0144904H
     @Override
     public CommandResult execute() throws CommandException, InvalidDatesException,
                                         IllegalValueException, DefaultCategoryException {
@@ -88,6 +93,8 @@ public class EditCommand extends Command {
         } catch (DefaultCategoryException dce) {
             if (dce.getMessage().equals(ERROR_CANNOT_EDIT_DONE_TASK)) {
                 throw new CommandException(ERROR_CANNOT_EDIT_DONE_TASK);
+            } else if (dce.getMessage().equals(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY)) {
+                throw new CommandException(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY);
             } else {
                 throw new CommandException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
             }
@@ -97,6 +104,7 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
+    //@@author
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
@@ -122,21 +130,7 @@ public class EditCommand extends Command {
         Recurrence updatedRecurrence = editTaskDescriptor.getRecurrence()
                 .orElseGet(taskToEdit::getRecurrence);
 
-        //check whether user input for editing task categories contains AllTasks category
-        //and remove it from user input
-        if (editTaskDescriptor.getCategories().isPresent() &&
-                editTaskDescriptor.getCategories().get().contains(new Category("AllTasks"))) {
-            editTaskDescriptor.getCategories().get().remove(new Category("AllTasks"));
-        }
-
-        //check whether user input for editing task categories contains Done category
-        //and throw DefaultCategoryException
-        if (editTaskDescriptor.getCategories().isPresent() &&
-                editTaskDescriptor.getCategories().get().contains(new Category("Done"))) {
-            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
-        }
-        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
-                .orElseGet(taskToEdit::getCategories);
+        UniqueCategoryList updatedCategories = createUpdatedCategorySet(taskToEdit, editTaskDescriptor);
 
         if (updatedStartDateTime.getDate() != null &&
                 updatedEndDateTime.getDate() != null &&
@@ -145,16 +139,60 @@ public class EditCommand extends Command {
         }
 
         //@@author A0144904H
-        if (taskToEdit.getCategories().contains(new Category("Done"))) {
-            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
-        } else {
-            updatedCategories.add(new Category(AddCommand.DEFAULT));
-        }
+        errorDetect(taskToEdit, updatedCategories);
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
                 updatedInformation, updatedRecurrence, updatedCategories);
     }
 
+    //@@author A014490H
+    /**
+     * @param taskToEdit
+     * @param updatedCategories
+     * @throws IllegalValueException
+     * @throws DefaultCategoryException
+     * @throws DuplicateCategoryException
+     */
+    private static void errorDetect(ReadOnlyTask taskToEdit, UniqueCategoryList updatedCategories)
+            throws IllegalValueException, DefaultCategoryException, DuplicateCategoryException {
+        if (taskToEdit.getCategories().contains(new Category(AddCommand.DEFAULT_DONE))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
+        } else {
+            updatedCategories.add(new Category(AddCommand.DEFAULT_ALL_TASKS));
+        }
+    }
+
+    //@@author A0144904H
+    /**
+     * @param editTaskDescriptor
+     * @param taskToEdit
+     * @return the new Category List of the to be edited task
+     * @throws IllegalValueException
+     * @throws DefaultCategoryException
+     */
+    private static UniqueCategoryList createUpdatedCategorySet(ReadOnlyTask taskToEdit,
+                    EditTaskDescriptor editTaskDescriptor) throws IllegalValueException,
+                                                                DefaultCategoryException {
+
+        //check whether user input for editing task categories contains Done category
+        //and throw DefaultCategoryException
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.DEFAULT_DONE))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
+        }
+
+        if (editTaskDescriptor.getCategories().isPresent() &&
+                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
+            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY);
+        }
+
+        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
+                .orElseGet(taskToEdit::getCategories);
+
+        return updatedCategories;
+    }
+
+    //@@author
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
