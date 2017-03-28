@@ -3,6 +3,10 @@ package seedu.doist.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -30,7 +34,15 @@ public class SaveAsParserTest {
         assertCorrectPath("e@_()()2h2jnuxjdjFso");
 
         //existing file
-        assertFileExists("README.md");
+        File file = null;
+        try {
+            file = File.createTempFile("hello", "");
+            file.deleteOnExit();
+            assertFileExists(file.getAbsolutePath());
+        } catch (IOException e) {
+            fail();
+        }
+
         //illegal characters
         assertIncorrectPath("***");
         // spaces and new line
