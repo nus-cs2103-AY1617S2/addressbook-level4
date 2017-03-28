@@ -17,6 +17,13 @@ public class FindCommandTest extends TodoListGuiTest {
     // This tag tagged multiple items (td.dog, td.cat) in the list of test todos
     private static final String MULTI_TAG = "petcare";
 
+//    private static final String START_TIME_AFTER = ;
+//    private static final String START_TIME_BEFORE = ;
+//    private static final String END_TIME_AFTER = ;
+//    private static final String END_TIME_BEFORE = ;
+//    private static final String COMPLETE_TIME_AFTER = ;
+//    private static final String COMPLETE_TIME_BEFORE = ;
+
     @Test
     public void find_nonEmptyList() {
         assertFindResult(FindCommand.COMMAND_WORD + " supper"); // no results

@@ -9,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.todolist.logic.commands.AddCommand;
-import seedu.todolist.logic.commands.CompleteCommand;
 import seedu.todolist.model.todo.ReadOnlyTodo;
 
 public class TodoCard extends UiPart<Region> {
