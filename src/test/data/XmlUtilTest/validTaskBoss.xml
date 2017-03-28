@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskboss>
+    <tasks>
+        <name>Hans Muster</name>
+        <priorityLevel isPrivate="false">2</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">4th street</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+    <tasks>
+        <name>Ruth Mueller</name>
+        <priorityLevel isPrivate="false">2</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">81th street</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+    <tasks>
+        <name>Heinz Kurz</name>
+        <priorityLevel isPrivate="false">3</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">wall street</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+    <tasks>
+        <name>Cornelia Meier</name>
+        <priorityLevel isPrivate="false">2</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">10th street</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+    <tasks>
+        <name>Werner Meyer</name>
+        <priorityLevel isPrivate="false">2</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">michegan ave</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+    <tasks>
+        <name>Lydia Kunz</name>
+        <priorityLevel isPrivate="false">2</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">little tokyo</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+    <tasks>
+        <name>Anna Best</name>
+        <priorityLevel isPrivate="false">2</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">4th street</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+    <tasks>
+        <name>Stefan Meier</name>
+        <priorityLevel isPrivate="false">2</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">little india</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+    <tasks>
+        <name>Martin Mueller</name>
+        <priorityLevel isPrivate="false">2</priorityLevel>
+        <startDateTime>Feb 19, 2017 5pm</startDateTime>
+        <endDateTime>Feb 29, 2017 5pm</endDateTime>
+        <information isPrivate="false">chicago ave</information>
+        <recurrence>NONE</recurrence>
+    </tasks>
+</taskboss>
