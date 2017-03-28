@@ -19,8 +19,9 @@ By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
      3.11. [Select tasks](#311-selecting-a-task--select)<br/>
      3.12. [Reset](#312-clearing-all-tasks--reset)<br/>
      3.13. [Exit](#313-exiting-the-program--exit)<br/>
-     3.14. [Import](#314-importing-files-into-the-program--exit)<br/>
-     3.15. [Export](#315-saving-the-data)<br/>
+     3.14. [Import](#314-importing-files-into-the-program)<br/>
+     3.15. [Export](#315-exporting-files-from-the-program)<br/>
+     3.16. [Save](#316-saving-the-data)<br/>
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -45,7 +46,6 @@ No more **burdens**.
 Ensure you have Java version `1.8.0_60` or later installed.
 
 1. Download the latest Burdens.jar from the [releases](https://github.com/CS2103JAN2017-W09-B1/main/releases) tab.
-   > <img src="images/release.png" width="600">
 2. Copy the jar file to the folder you want to use as the home folder for Burdens.
 **Launch**
 To start Burdens, double click on **Burdens.jar**. Hello!<br/>
@@ -241,11 +241,17 @@ Format: `exit`
 
 ### 3.14. Importing files into the program : `import`
 
-Exits the program.
+Import an ICal-formatted file into the program.
 
-Format: `exit`
+Format: `import path/to/file.ics`
 
-### 3.15. Saving the data
+### 3.15. Exporting files from the program : `export`
+
+Export the current task list into an ICal-formatted file.
+
+Format: `export path/to/file.ics`
+
+### 3.16. Saving the data
 
 All data are saved in the hard disk automatically after any command that changes the data.
 
