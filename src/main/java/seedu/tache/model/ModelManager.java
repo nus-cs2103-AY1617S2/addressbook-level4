@@ -170,7 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
         ArrayList<String> keywordsList = new ArrayList<String>(keywords);
-        raise(new TaskListTypeChangedEvent("Find " + "\"" + keywordsList.get(0) + "\""));
+        raise(new TaskListTypeChangedEvent("Find \"" + keywordsList.get(0) + "\""));
     }
 
     private void updateFilteredTaskList(Expression expression) {
