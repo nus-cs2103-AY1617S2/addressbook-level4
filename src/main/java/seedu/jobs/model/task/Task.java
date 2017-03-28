@@ -11,17 +11,20 @@ public class Task implements ReadOnlyTask {
     private Time startTime;
     private Time endTime;
     private Description description;
+    private Period period;
     private boolean isCompleted;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
+     * @param period TODO
      */
-    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags) {
+    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags, Period period) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.period = period;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
@@ -32,7 +35,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(), source.getTags(), source.getPeriod());
         this.isCompleted = source.isCompleted();
     }
 
@@ -87,7 +90,15 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-
+    
+    public Period getPeriod(){
+    	return period;
+    }
+    
+    public void setPeriod(Period period){
+    	this.period = period;
+    }
+    
     /**
      * Updates this task with the details of {@code replacement}.
      */

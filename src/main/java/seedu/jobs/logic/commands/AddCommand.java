@@ -10,6 +10,7 @@ import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
 import seedu.jobs.model.task.UniqueTaskList;
@@ -37,7 +38,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(Optional<String> name, Optional<String> starttime, Optional<String> endtime, Optional<String> description, Set<String> tags)
+    public AddCommand(Optional<String> name, Optional<String> starttime, Optional<String> endtime, Optional<String> description, Set<String> tags,Optional<String>period)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -48,7 +49,7 @@ public class AddCommand extends Command {
                 new Time(starttime), 
                 new Time(endtime),
                 new Description(description), 
-                new UniqueTagList(tagSet));
+                new UniqueTagList(tagSet), new Period(period));
     }
 
     @Override

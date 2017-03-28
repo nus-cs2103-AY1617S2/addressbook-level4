@@ -9,7 +9,9 @@ public interface ReadOnlyTask {
     Time getStartTime();
 
     Time getEndTime();
-
+    
+	Period getPeriod();
+	
     Description getDescription();
 
     UniqueTagList getTags();
