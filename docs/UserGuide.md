@@ -200,6 +200,22 @@ Task Scheduler data are saved in the hard disk automatically after any command t
 
 There is no need to save manually.
 
+### 2.14. Changing save location : `save`
+
+Changes the file directory of the save location to a file directory specified by the user.<br>
+Format: `save`
+
+> File directory specified must be exisiting file directory in disk
+> File directory specified cannot be same as current save location file directory
+
+Example:
+
+* `save default`
+   Changes save location to the default file directory 
+* `save /Users/main/Desktop/data`
+   Saves the data file of the task scheduler to /Users/main/Desktop/data/YATS.xml
+
+
 ### 2.14. Undo : `undo`
 
 Undo the last command that was performed in the task scheduler
@@ -262,6 +278,10 @@ Example:
 
 * **List** : `list` <br>
    e.g. `list`
+   
+* **Change Save Location** : `save` <br>
+   e.g. `save default`
+   e.g. `save /Users/main/Desktop/data`
 
 * **Help** : `help` <br>
    e.g. `help`
