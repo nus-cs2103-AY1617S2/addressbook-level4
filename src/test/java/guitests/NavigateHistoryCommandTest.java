@@ -39,7 +39,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         mainGui.press(KeyCode.DOWN);
         assertTrue(UiStore.getInstance().getObservableCommandInput().getValue().getCommand() == "");
     }
-    
+
     @Test
     public void viewPreviousThenCurrentAfterACommandAndAHalf() {
         String command1 = "history";
