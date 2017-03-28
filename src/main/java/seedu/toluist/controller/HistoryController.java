@@ -10,10 +10,10 @@ import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
- * ListController is responsible for rendering the initial UI
+ * HistoryController is responsible for showing past commands entered
  */
 public class HistoryController extends Controller {
-    private static final Logger logger = LogsCenter.getLogger(ClearController.class);
+    private static final Logger logger = LogsCenter.getLogger(HistoryController.class);
     private static final String RESULT_MESSAGE = "%s\n%s displayed.";
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "(?iu)^\\s*history\\s*";

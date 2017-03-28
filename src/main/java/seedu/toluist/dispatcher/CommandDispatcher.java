@@ -26,6 +26,7 @@ import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.DeleteTaskController;
 import seedu.toluist.controller.ExitController;
 import seedu.toluist.controller.FindController;
+import seedu.toluist.controller.HelpController;
 import seedu.toluist.controller.HistoryController;
 import seedu.toluist.controller.LoadController;
 import seedu.toluist.controller.MarkController;
@@ -134,6 +135,7 @@ public class CommandDispatcher extends Dispatcher {
                 HistoryController.class,
                 LoadController.class,
                 UndoController.class,
+                HelpController.class,
                 RedoController.class,
                 ExitController.class,
                 AliasController.class,
