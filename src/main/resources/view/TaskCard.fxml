@@ -46,6 +46,7 @@
 							</children>
 						</HBox>
 						<FlowPane fx:id="categories" />
+						<Label fx:id="markedCompleted" styleClass="cell_small_label_special" text="\$markedCompleted" />
 					</children>
 				</VBox>
 			</children>

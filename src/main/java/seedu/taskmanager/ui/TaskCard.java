@@ -31,9 +31,12 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label toLabel;
     @FXML
+    private Label markedCompleted;
+    @FXML
     private FlowPane categories;
 
     private final StringProperty empty = new SimpleStringProperty("");
+    private final StringProperty completed = new SimpleStringProperty("Completed");
     private final StringProperty to = new SimpleStringProperty("to");
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -62,6 +65,11 @@ public class TaskCard extends UiPart<Region> {
             } else {
                 toLabel.textProperty().bind(to);
             }
+        }
+        if (task.getIsMarkedAsComplete()) {
+            markedCompleted.textProperty().bind(completed);
+        } else {
+            markedCompleted.textProperty().bind(empty);
         }
         initCategory(task);
     }
