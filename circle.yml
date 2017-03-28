@@ -4,4 +4,4 @@ machine:
 test:
   override:
     - ./gradlew clean checkstyleMain checkstyleTest headless allTests coverage coveralls:
-	  parallel: true
+      parallel: true
