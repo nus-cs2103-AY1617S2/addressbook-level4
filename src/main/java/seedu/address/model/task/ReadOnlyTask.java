@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 public interface ReadOnlyTask {
@@ -38,6 +39,19 @@ public interface ReadOnlyTask {
      * Mark this task as incompleted.
      */
     public void setAsIncompleted();
+
+    /**
+     * Returns true if the given TagList coincides with this task's TagList.
+     */
+    default boolean isTagListCoincided(UniqueTagList tags) {
+        UniqueTagList tagList = getTags();
+        for (Tag tag : tags) {
+            if (tagList.contains(tag)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)

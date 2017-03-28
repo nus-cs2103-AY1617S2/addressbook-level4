@@ -43,9 +43,14 @@ public class FindCommandParser {
             tagList = parseTagsForFind(
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
                     );
-             = parseDateForFind(argsTokenizer.getValue(PREFIX_DATE));
+            date = parseDateForFind(argsTokenizer.getValue(PREFIX_DATE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        }
+        if (tagList.isPresent()) {
+            return new FindCommand(tagList.get());
+        } else if (date != null) {
+            return new FindCommand(date);
         }
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
@@ -59,6 +64,7 @@ public class FindCommandParser {
         return new FindCommand(keywordSet);
     }
 
+  //@@author A0144813J
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
      */

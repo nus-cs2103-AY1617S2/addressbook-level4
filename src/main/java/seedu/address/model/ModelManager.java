@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -18,6 +19,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -279,6 +281,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredTaskListToShowFilteredTasks(UniqueTagList tagList) {
+        currentNonFloatingTasksExpression = new PredicateExpression(new TagNonFloatingTaskQualifier(tagList));
+        currentFloatingTasksExpression = new PredicateExpression(new TagFloatingTaskQualifier(tagList));
+        currentCompletedTasksExpression = new PredicateExpression(new TagCompletedTaskQualifier(tagList));
+        updateTaskListPredicate();
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowFilteredTasks(Date date) {
+        currentNonFloatingTasksExpression = new PredicateExpression(new DateNonFloatingTaskQualifier(date));
+        currentFloatingTasksExpression = new PredicateExpression(new DateFloatingTaskQualifier(date));
+        currentCompletedTasksExpression = new PredicateExpression(new DateCompletedTaskQualifier(date));
+        updateTaskListPredicate();
+    }
+
+    @Override
     public void updateFilteredTaskListToShowAllTasks() {
         setCurrentPredicateToShowAllTasks();
         updateTaskListPredicate();
@@ -314,6 +332,98 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
+  //@@author A0144813J
+    private class TagFloatingTaskQualifier implements Qualifier {
+        private UniqueTagList tagList;
+
+        TagFloatingTaskQualifier(UniqueTagList tagList) {
+            this.tagList = tagList;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isCoincided = task.isTagListCoincided(tagList);
+            boolean isFloatingTask = !task.isCompleted() && task.isFloating();
+            return isFloatingTask && isCoincided;
+        }
+    }
+
+    private class TagNonFloatingTaskQualifier implements Qualifier {
+        private UniqueTagList tagList;
+
+        TagNonFloatingTaskQualifier(UniqueTagList tagList) {
+            this.tagList = tagList;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isCoincided = task.isTagListCoincided(tagList);
+            boolean isNonFloatingTask = !task.isCompleted() && !task.isFloating();
+            return isNonFloatingTask && isCoincided;
+        }
+    }
+
+    private class TagCompletedTaskQualifier implements Qualifier {
+        private UniqueTagList tagList;
+
+        TagCompletedTaskQualifier(UniqueTagList tagList) {
+            this.tagList = tagList;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isCoincided = task.isTagListCoincided(tagList);
+            boolean isCompletedTask = task.isCompleted();
+            return isCompletedTask && isCoincided;
+        }
+    }
+
+    private class DateFloatingTaskQualifier implements Qualifier {
+        private Date date;
+
+        DateFloatingTaskQualifier(Date date) {
+            this.date = date;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isSameDate = task.getDeadline().isSameDate(date);
+            boolean isFloatingTask = !task.isCompleted() && task.isFloating();
+            return isFloatingTask && isSameDate;
+        }
+    }
+
+    private class DateNonFloatingTaskQualifier implements Qualifier {
+        private Date date;
+
+        DateNonFloatingTaskQualifier(Date date) {
+            this.date = date;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isSameDate = task.getDeadline().isSameDate(date);
+            boolean isNonFloatingTask = !task.isCompleted() && !task.isFloating();
+            return isNonFloatingTask && isSameDate;
+        }
+    }
+
+    private class DateCompletedTaskQualifier implements Qualifier {
+        private Date date;
+
+        DateCompletedTaskQualifier(Date date) {
+            this.date = date;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isSameDate = task.getDeadline().isSameDate(date);
+            boolean isCompletedTask = task.isCompleted();
+            return isCompletedTask && isSameDate;
+        }
+    }
+
+  //@@author
     //@@author A0139539R
     private class NameFloatingTaskQualifier implements Qualifier {
         private Set<String> nameKeyWords;
