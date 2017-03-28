@@ -59,6 +59,17 @@ public interface Model {
     /** Updates the filter of the filtered todo list to filter by the given tags*/
     void updateFilteredTodoList(UniqueTagList tags);
 
+    /** Updates the filter of the filtered todo list to show only todos that start before the given start time */
+    void filterByStartTime(Date startTime);
+
+    /** Updates the filter of the filtered todo list to show only todos that end before the given end time */
+    void filterByEndTime(Date endTime);
+
+    /** Updates the filter of the filtered todo list to show only todos
+     * that were completed before the given complete time
+     */
+    void filterByCompleteTime(Date completeTime);
+
     /** Loads the previous state of the todo list*/
     void loadPreviousState() throws NoPreviousStateException;
 

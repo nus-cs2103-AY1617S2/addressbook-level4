@@ -1,5 +1,6 @@
 package seedu.todolist.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -150,6 +151,28 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTodos.setPredicate(expression::satisfies);
     }
 
+    @Override
+    public void filterByStartTime(Date startTime) {
+        NameQualifier nq = new NameQualifier();
+        nq.setStartTime(startTime);
+        updateFilteredTodoList(new PredicateExpression(nq));
+    }
+
+    @Override
+    public void filterByEndTime(Date endTime) {
+        NameQualifier nq = new NameQualifier();
+        nq.setEndTime(endTime);
+        updateFilteredTodoList(new PredicateExpression(nq));
+    }
+
+    @Override
+    public void filterByCompleteTime(Date completeTime) {
+        NameQualifier nq = new NameQualifier();
+        nq.setCompleteTime(completeTime);
+        updateFilteredTodoList(new PredicateExpression(nq));
+    }
+
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -186,6 +209,11 @@ public class ModelManager extends ComponentManager implements Model {
         private Set<String> nameKeyWords;
         private Set<Tag> tags;
         private Set<String> tagKeyWords;
+        private Date startTime;
+        private Date endTime;
+        private Date completeTime;
+
+        NameQualifier() {}
 
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
@@ -213,6 +241,24 @@ public class ModelManager extends ComponentManager implements Model {
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(name, keyword))
                         .findAny()
                         .isPresent();
+            } else if (startTime != null) {
+                Date todoStartTime = todo.getStartTime();
+                if (todoStartTime != null) {
+                    return todoStartTime.before(startTime);
+                }
+                return false;
+            } else if (endTime != null) {
+                Date todoEndTime = todo.getEndTime();
+                if (todoEndTime != null) {
+                    return todoEndTime.before(endTime);
+                }
+                return false;
+            } else if (completeTime != null) {
+                Date todoCompleteTime = todo.getCompleteTime();
+                if (todoCompleteTime != null) {
+                    return todoCompleteTime.before(completeTime);
+                }
+                return false;
             } else {
                 String todoTags = todo.getTagsAsString();
                 return tagKeyWords.stream()
@@ -229,9 +275,27 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             if (!tags.isEmpty()) {
                 return "tag=" + String.join(", ", tagKeyWords);
+            } else if (startTime != null) {
+                return "start time=" + new SimpleDateFormat("h:mma dd/MM/yy").format(startTime);
+            } else if (endTime != null) {
+                return "end time=" + new SimpleDateFormat("h:mma dd/MM/yy").format(endTime);
+            } else if (completeTime != null) {
+                return "complete time=" + new SimpleDateFormat("h:mma dd/MM/yy").format(completeTime);
             } else {
                 return "name=" + String.join(", ", nameKeyWords);
             }
+        }
+
+        public void setStartTime(Date startTime) {
+            this.startTime = startTime;
+        }
+
+        public void setEndTime(Date endTime) {
+            this.endTime = endTime;
+        }
+
+        public void setCompleteTime(Date completeTime) {
+            this.completeTime = completeTime;
         }
     }
     //@@author

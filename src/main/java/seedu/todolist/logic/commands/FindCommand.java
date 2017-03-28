@@ -1,5 +1,6 @@
 package seedu.todolist.logic.commands;
 
+import java.util.Date;
 import java.util.Set;
 
 import seedu.todolist.logic.parser.CliSyntax;
@@ -19,11 +20,20 @@ public class FindCommand extends Command {
             + "To search by keyword: KEYWORD [MORE_KEYWORDS]...\n"
             + "To search by tag: " + CliSyntax.PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + "groceries\n"
-            + "Example2: " + COMMAND_WORD + CliSyntax.PREFIX_TAG + "milk\n";
+            + "Example 2: " + COMMAND_WORD + CliSyntax.PREFIX_TAG + "milk\n";
     public static final String MESSAGE_EMPTY_ERROR = "Cannot leave fields blank.";
+
+    public static enum FindTime {
+        START_TIME,
+        END_TIME,
+        COMPLETE_TIME
+    }
 
     private Set<String> keywords;
     private UniqueTagList tags;
+    private Date startTime;
+    private Date endTime;
+    private Date completeTime;
 
     /**
      * Creates a FindCommand with keywords as parameters
@@ -43,11 +53,26 @@ public class FindCommand extends Command {
     }
     //@@author
 
+    public FindCommand(Date date, FindTime timeToFind) {
+        if (timeToFind == FindTime.START_TIME) {
+            this.startTime = date;
+        } else if (timeToFind == FindTime.END_TIME) {
+            this.endTime = date;
+        } else if (timeToFind == FindTime.COMPLETE_TIME) {
+            this.completeTime = date;
+        }
+    }
     //@@author A0163720M
     @Override
     public CommandResult execute() {
-        if (this.tags != null) {
+        if (tags != null) {
             model.updateFilteredTodoList(tags);
+        } else if (startTime != null) {
+            model.filterByStartTime(startTime);
+        } else if (endTime != null) {
+            model.filterByEndTime(endTime);
+        } else if (completeTime != null) {
+            model.filterByCompleteTime(completeTime);
         } else {
             model.updateFilteredTodoList(keywords);
         }
