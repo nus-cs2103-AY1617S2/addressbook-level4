@@ -36,7 +36,7 @@ public class StartEndDateTime {
      * @param endDateTime the end DateTime
      * @param allowPastDateTime ignore checking if DateTimes are in the past. Avoid setting to true
      *        except for special cases such as loading from storage
-     * @throws PastDateTimeException if any of the DateTimes are before the current DateTime if
+     * @throws PastDateTimeException if any of the DateTimes are before the current DateTime and
      *         {@code allowPastDateTime} is {@code false}
      * @throws InvalidDurationException if the end DateTime is before or same as the start DateTime
      */
