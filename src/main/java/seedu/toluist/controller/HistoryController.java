@@ -1,6 +1,7 @@
 //@@author A0162011A
 package seedu.toluist.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -18,19 +19,18 @@ public class HistoryController extends Controller {
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "(?iu)^\\s*history\\s*";
 
-    private CommandHistoryList commandHistory;
+    private CommandHistoryList commandHistoryList;
 
-    public void setCommandHistory(CommandHistoryList commandHistory) {
-        this.commandHistory = commandHistory;
+    public void setCommandHistory(CommandHistoryList commandHistoryList) {
+        this.commandHistoryList = commandHistoryList;
     }
 
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
-
-        String result = String.join("\n", commandHistory.getAsArrayList());
-
+        ArrayList<String> commandHistory = commandHistoryList.getCommandHistory();
+        String result = String.join("\n", commandHistory);
         uiStore.setCommandResult(new CommandResult(String.format(
-                RESULT_MESSAGE, result, StringUtil.nounWithCount("command", commandHistory.getAsArrayList().size()))));
+                RESULT_MESSAGE, result, StringUtil.nounWithCount("command", commandHistory.size()))));
     }
 
     public HashMap<String, String> tokenize(String command) {

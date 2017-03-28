@@ -12,7 +12,7 @@ public class CommandHistoryList {
         currentCommand = "";
     }
 
-    public ArrayList<String> getAsArrayList() {
+    public ArrayList<String> getCommandHistory() {
         return commandHistory;
     }
 
@@ -42,9 +42,5 @@ public class CommandHistoryList {
         }
 
         return commandHistory.get(historyPointer);
-    }
-
-    public int size() {
-        return commandHistory.size();
     }
 }
