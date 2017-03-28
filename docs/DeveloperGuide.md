@@ -554,6 +554,11 @@ Extensions:
 > 2a1. Geekeep shows an error message. <br>
 > Use case ends.
 
+2b. The starting date of the event is after the ending date.
+
+> 2b1. Geekeep shows an error message. <br>
+> Use case ends.
+
 **Use case: UC06 - `Mark a task as done`**
 
 MSS:
@@ -595,6 +600,13 @@ MSS:
 2. Geekeep refreshes the panels with completed tasks.
 Use case ends.
 
+Extensions:
+
+2a. There are no completed tasks.
+
+> 2a1. Geekeep displays nothing in the panels. <br>
+> Use case ends.
+
 **Use case: UC09 - `Display uncompleted tasks`**
 
 MSS:
@@ -603,6 +615,13 @@ MSS:
 
 2. Geekeep refreshes the panels with completed tasks.
 Use case ends.
+
+Extensions:
+
+2a. There are no uncompleted tasks.
+
+> 2a1. Geekeep displays nothing in the panels. <br>
+> Use case ends.
 
 **Use case UC10 - `Display tasks by tags`**
 
@@ -617,7 +636,57 @@ Extensions:
 
 2a. There are no tasks associated with the given tags.
 
-> 2a1. The panel displays nothing. <br>
+> 2a1. The panels display nothing. <br>
+> Use case ends.
+
+**Use case UC11 - `Find a task with name`**
+
+MSS:
+
+1. User request tasks with given name.
+
+2. Geekeep returns all the tasks with names that contains the given word.
+Use case ends.
+
+Extensions:
+
+2a. There are no matching tasks.
+
+> 2a1. The panals display nothing <br>
+> Use case ends.
+
+**Use case UC12 - `Undo the preview command`**
+
+MSS:
+
+1. User requests to undo the previous command.
+
+2. Geekeep retrieve the previous state of the task manager.
+
+3. Geekeep replaces the current state with the previous state and refresh task cards.
+Use case ends.
+
+Extensions:
+
+2a. There is no command to undo.
+
+> 2a1. Geekeep ignores the undo command. <br>
+> Use case ends.
+
+**Use case UC13 - `Redo the previous command`**
+
+MSS:
+
+1. User requests to redo the previous undo command.
+
+2. Geekeep retrieves the saved state before the undo command.
+
+3. Geekeep replaces the current state with the retreived state and refresh task cards.
+Use case ends.
+
+2a. There is no command to redo.
+
+> 2a1. Geekeep ignores the redo command. <br>
 > Use case ends.
 
 
