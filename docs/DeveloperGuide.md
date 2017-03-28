@@ -16,7 +16,7 @@
 
 ### Prerequisites
 
-1. **JDK `1.8.0_60`**  or later<br>
+1. **JDK `1.8.0_121`**  or later<br>
     > Having any Java 8 version is not enough.
     This app will not work with earlier versions of Java 8.
 
@@ -80,7 +80,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/description/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -112,17 +112,16 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
-
-<img src="images\SDforDeleteTask.png" width="800"><br>
+command `delete 1`.<br>
+<img src="images/SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
+being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.<br>
+<img src="images/SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -138,14 +137,14 @@ Author: Ye Huan Hui
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/description/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/doit/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/description/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/doit/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -156,12 +155,12 @@ The `UI` component,
 
 ### Logic component
 
-Author: Bernard Choo
+Author: Lee Jin Shun
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/description/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
@@ -175,12 +174,12 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### Model component
 
-Author: Cynthia Dharman
+Author: Hon Kean Wai
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/description/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
 The `Model`,
 
@@ -192,12 +191,12 @@ The `Model`,
 
 ### Storage component
 
-Author: Darius Foong
+Author: Chew Chia Sin
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/description/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/doit/storage/Storage.java)
 
 The `Storage` component,
 
@@ -257,13 +256,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.description.commons.UrlUtilTest`
+      e.g. `seedu.doit.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.description.storage.StorageManagerTest`
+      e.g. `seedu.doit.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.description.logic.LogicManagerTest`
+      e.g. `seedu.doit.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -356,8 +355,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | set task as completed | see past tasks
 `* * *` | user | set floating task as completed | see past floating tasks
 `* * *` | user | set event as completed | see past events
-`* * *` | forgetful user | set reminders for tasks | be reminded for events
-`* * *` | forgetful user | set reminders for event | be reminded for events
 `* * *` | user | be able to undo the most recent action | revert changes made
 `* * *` | user | block multiple timeslots when the timing is uncertain | know which times are available for me to add new tasks
 `* * *` | user | be able set priority to a task | know which is the highest priority that I should do 1st.
@@ -366,25 +363,16 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | be able tag/categorise a task | know what to do when I am in the current context
 `* * *` | user | be able tag/categorise a floating task | know what to do when I am in the current context
 `* * *` | user | be able tag/categorise an event | know what to do when I am in the current context
-`* * *` | user | set tasks as recurring | dont need to keep adding for repeating tasks
-`* * *` | user | set events as recurring | don't need to keep adding for repeating events
 `* * *` | user | sort tasks by date, priority, deadline, recurrence, tags | view important tasks first
 `* * *` | user | sort floating tasks by priority and tags | view important floating tasks first
 `* * *` | user | sort events by date, priority, deadline, recurrence, tags | view important events first
-`* * *` | user | see a list of done tasks and to-do tasks when I enter a command | have a overview of tasks to be done
 `* *` | user | be able know what should he do today | so they can plan what task to do first
 `* *` | user | select task/events by index | to reduce typing of full name
-`* *` | paranoid user | require a password to use the task manager | prevent others from accessing my task, floating tasks and events
-`* *` | user | be able to filter items by date | so that you can see all items and free slots only on that date
-`* *` | user | automatically delete events after they have passed | so that they do not clutter the space
-`* *` | user | be able to repeat the command Eg. by pressing up | easy typing if command similar
-`*` | user | launch the program with a keyboard shortcut | start the program
+`*` | user | set events as recurring | don't need to keep adding for repeating events
 `*` | user | color scheme of priority | to make it obvious
-`*` | user | color scheme of overdue tasks | to make it obvious
-`*` | user | I want to import task data from a file | sync
-`*` | user | be able to sync tasks with deadline | add task automatically
-`*` | user | be able to delete all items based on date/category at one go | so that I do not need to delete one by one when there are changes to the plan of the whole day
-`*` | user | be able to set progress of task. Eg pending, postpone, waiting for reply etc.
+
+
+
 
 
 ## Appendix B : Use Cases
@@ -460,6 +448,50 @@ Use case ends.
 > System adds the deleted task back and shows feedback to user
 > Use case ends
 
+### User Case : Undoing a command
+
+**MSS**
+1. User enters command to undo prev undoable command
+2. System undo previous undoable command shows feedback to user
+3. Use case ends
+
+**Extensions**
+1a. The user enters undo but there is no previous undoable command
+> System shows an error message
+> Use case ends
+
+3a. User redo undone command
+> System redo the undone command and shows feedback to user
+> Use case ends
+
+### User Case : Redoing a command
+
+**MSS**
+1. User enters command to redo the previously undone command
+2. System redo previously undone command and shows feedback to user
+3. Use case ends
+
+**Extensions**
+1a. The user enters redo but there is no undone command
+> System shows an error message
+> Use case ends
+
+3a. User undo redone command
+> System undo the redone command and shows feedback to user
+> Use case ends
+
+### User Case : Sorting the displayed tasks
+
+**MSS**
+1. User enters command to sort that tasks displayed
+2. System marks sorts the task by what the user wants and shows feedback to user
+3. Use case ends
+
+**Extensions**
+1a. The user enters an invalid sort
+> System shows an error message
+> Use case ends
+
 
 ### User Case : Marking a task as done
 
@@ -486,6 +518,30 @@ Use case ends.
 
 **Extensions**
 1a. The user enters an invalid date
+> System shows an error message
+> Use case ends
+
+## Use Case : Save to new location
+
+**MSS**
+1. User enters command to save data to specified location
+2. System saves the data and feedback to user the success
+3. Use case ends
+
+**Extensions**
+1a. User enters an invalid location to save
+> System shows an error message
+> Use case ends
+
+1b. User enters the current save location to save
+> System shows an error message
+> Use case ends
+
+1c. User enters a duplicated save location to save
+> System shows an error message
+> Use case ends
+
+1d. User enters invalid file name to save
 > System shows an error message
 > Use case ends
 
@@ -572,6 +628,7 @@ Use case ends.
 3. Use case ends
 
 
+
 ## Use Case : Clear by date/category
 
 **MSS**
@@ -583,6 +640,7 @@ Use case ends.
 1a. User enters an invalid date
 > System shows an error message
 > Use case ends
+
 
 ## Appendix C : Non Functional Requirements
 
@@ -658,7 +716,7 @@ Use case ends.
 * Works offline
 * Comes preinstalled on windows so no need for special IT permissions
 ### Disadvantages:
-* Unable to sync with deadline
+* Unable to sync with email
 * Lack of functionality (No reminders, calendar view, etc.)
 * Requires windows to be installed
 

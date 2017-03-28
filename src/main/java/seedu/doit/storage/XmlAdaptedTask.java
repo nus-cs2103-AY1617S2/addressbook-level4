@@ -44,6 +44,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask() {
     }
 
+    // @@author A0138909R
     /**
      * Converts a given Task into this class for JAXB use.
      *
@@ -93,4 +94,5 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priority, startTime, deadline, description, tags, this.isDone);
     }
+    // @@author
 }

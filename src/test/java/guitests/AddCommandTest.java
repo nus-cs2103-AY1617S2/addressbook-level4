@@ -68,7 +68,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         this.commandBox.runCommand("add invalid4 p/dfjkhd d/sss");
         assertResultMessage(MESSAGE_PRIORITY_CONSTRAINTS);
         //missing description
-       // this.commandBox.runCommand("add invalid5 e/today p/high");
+        // this.commandBox.runCommand("add invalid5 e/today p/high");
         //assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
 
@@ -79,8 +79,6 @@ public class AddCommandTest extends TaskManagerGuiTest {
         this.commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-
-
         if (!taskToAdd.getIsDone() && taskToAdd.isFloatingTask()) {
             TaskCardHandle addedCard = this.floatingTaskListPanel.navigateToTask(taskToAdd.getName().fullName);
             assertMatching(taskToAdd, addedCard);
@@ -91,8 +89,6 @@ public class AddCommandTest extends TaskManagerGuiTest {
             TaskCardHandle addedCard = this.taskListPanel.navigateToTask(taskToAdd.getName().fullName);
             assertMatching(taskToAdd, addedCard);
         }
-
-
         //confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertAllPanelsMatch(expectedList);

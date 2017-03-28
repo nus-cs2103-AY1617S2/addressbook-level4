@@ -79,9 +79,7 @@ public class EditCommand extends Command {
 
         if (filteredTaskListIndex >= lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        if (filteredTaskListIndex < lastShownTaskList.size()) {
+        } else {
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredTaskListIndex);
             assert taskToEdit != null;
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
@@ -94,9 +92,6 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 
-        } else {
-            return null;
-            // should not happen
         }
     }
 

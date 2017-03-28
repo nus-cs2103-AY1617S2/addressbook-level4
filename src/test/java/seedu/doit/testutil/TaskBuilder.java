@@ -60,6 +60,11 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder withIsDone(boolean isDone) throws IllegalValueException {
+        this.task.setIsDone(isDone);
+        return this;
+    }
+
     public TestTask build() {
         return this.task;
     }

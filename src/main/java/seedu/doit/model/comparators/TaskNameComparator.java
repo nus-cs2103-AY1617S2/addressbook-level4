@@ -1,6 +1,12 @@
-package seedu.doit.model.item;
+// @@author A0139399J
+package seedu.doit.model.comparators;
 
-public class PriorityComparator implements TaskComparator {
+import seedu.doit.model.item.ReadOnlyTask;
+
+/**
+ * Compares ReadOnlyTasks by their names in lexicographical order
+ */
+public class TaskNameComparator implements TaskComparator {
 
     @Override
     public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
@@ -34,13 +40,12 @@ public class PriorityComparator implements TaskComparator {
         int compareInt = currType.compareTo(otherType);
 
         if (compareInt == 0) {
-            return comparePriority(curr, other);
+            return compareName(curr, other);
         }
         return compareInt;
     }
 
-    private int comparePriority(ReadOnlyTask curr, ReadOnlyTask other) {
-        return curr.getPriority().compareTo(other.getPriority());
+    private int compareName(ReadOnlyTask curr, ReadOnlyTask other) {
+        return curr.getName().toString().compareToIgnoreCase(other.getName().toString());
     }
-
 }

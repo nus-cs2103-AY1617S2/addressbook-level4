@@ -9,9 +9,9 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.logic.commands.EditCommand;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
-import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
@@ -57,7 +57,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        this.commandBox.runCommand("find Elle");
+        this.commandBox.runCommand("find n/Elle");
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;

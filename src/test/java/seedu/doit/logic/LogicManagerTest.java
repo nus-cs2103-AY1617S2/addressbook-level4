@@ -45,13 +45,13 @@ import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
 import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
-import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 import seedu.doit.storage.Storage;
@@ -209,16 +209,15 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args s/gg" +
-            "", expectedMessage);
+        assertCommandFailure("add wrong args wrong args s/gg" + "", expectedMessage);
         assertCommandFailure("add Valid Name 5 s/valid,deadline.butNoPriorityPrefix d/valid,description",
                 expectedMessage);
         assertCommandFailure("add d/valid", expectedMessage);
         assertCommandFailure("add e/valid", expectedMessage);
-        assertCommandFailure("add Valid Task p/1",  MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Task e/invalid time" , MESSAGE_ENDTIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Task s/invalid e/tomorrow ",  MESSAGE_STARTTIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name e/gogo ",  MESSAGE_ENDTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Task p/1", MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Task e/invalid time", MESSAGE_ENDTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Task s/invalid e/tomorrow ", MESSAGE_STARTTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name e/gogo ", MESSAGE_ENDTIME_CONSTRAINTS);
     }
 
     @Test
@@ -382,7 +381,7 @@ public class LogicManagerTest {
         Collections.sort(expectedList, new TaskNameComparator());
         helper.addToModel(this.model, fourTasks);
 
-        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
 
@@ -408,19 +407,20 @@ public class LogicManagerTest {
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
+        Task pTarget2 = helper.generateTaskWithName("key rAnDoM bla bceofeia");
         Task pTarget3 = helper.generateTaskWithName("key key");
         Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+        List<Task> expectedList = helper.generateTaskList(pTarget2);
         helper.addToModel(this.model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+        assertCommandSuccess("find n/key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 
+    // @@author A0138909R
     @Test
     public void execute_save_successful() throws Exception {
         String filePath = "data/testfile1.xml";
@@ -458,6 +458,7 @@ public class LogicManagerTest {
         assertCommandFailure("save " + filePath, filePath + SaveCommand.MESSAGE_USING_SAME_FILE);
     }
 
+    // @@author
     /**
      * A utility class to generate test data.
      */

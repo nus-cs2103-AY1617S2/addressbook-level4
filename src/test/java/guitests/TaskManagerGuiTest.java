@@ -117,11 +117,15 @@ public abstract class TaskManagerGuiTest {
         assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 
+
+    //@@author A0139399J
     /**
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
         int numberOfPeople = this.taskListPanel.getNumberOfTasks();
+        numberOfPeople += this.eventListPanel.getNumberOfTasks();
+        numberOfPeople += this.floatingTaskListPanel.getNumberOfTasks();
         assertEquals(size, numberOfPeople);
     }
 

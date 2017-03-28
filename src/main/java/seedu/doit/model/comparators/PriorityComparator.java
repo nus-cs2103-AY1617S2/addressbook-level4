@@ -1,6 +1,12 @@
-package seedu.doit.model.item;
+// @@author A0139399J
+package seedu.doit.model.comparators;
 
-public class TaskNameComparator implements TaskComparator {
+import seedu.doit.model.item.ReadOnlyTask;
+
+/**
+ * Compares ReadOnlyTasks by their priority
+ */
+public class PriorityComparator implements TaskComparator {
 
     @Override
     public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
@@ -26,7 +32,7 @@ public class TaskNameComparator implements TaskComparator {
      * item is greater than current item return 0 is both items are equal return
      * 1 if other item is smaller than current item The ranking are as follows
      * from highest: 1) tasks 2) events 3) floating tasks If both have same
-     * rankings, then compare names
+     * rankings, then compare priority
      */
     private int compareItems(ReadOnlyTask curr, ReadOnlyTask other) {
         Integer currType = curr.getItemType();
@@ -34,12 +40,13 @@ public class TaskNameComparator implements TaskComparator {
         int compareInt = currType.compareTo(otherType);
 
         if (compareInt == 0) {
-            return compareName(curr, other);
+            return comparePriority(curr, other);
         }
         return compareInt;
     }
 
-    private int compareName(ReadOnlyTask curr, ReadOnlyTask other) {
-        return curr.getName().toString().compareToIgnoreCase(other.getName().toString());
+    private int comparePriority(ReadOnlyTask curr, ReadOnlyTask other) {
+        return curr.getPriority().compareTo(other.getPriority());
     }
+
 }
