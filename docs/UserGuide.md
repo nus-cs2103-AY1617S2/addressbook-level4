@@ -284,8 +284,8 @@ A: No prior command line knowledge is required to use **Burdens**. Instead, just
 - Select : `select INDEX`
   - e.g select 2
 - Clear : `reset`
-   - reset
+   - e.g reset
 - Exit : `exit`
-   - exit
+   - e.g exit
 - List : `list`
-   - list
+   - e.g list
