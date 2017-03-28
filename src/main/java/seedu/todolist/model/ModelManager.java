@@ -188,8 +188,11 @@ public class ModelManager extends ComponentManager implements Model {
         private Date endTime;
         private Date completeTime;
 
-        NameQualifier(Set<String> nameKeyWords, UniqueTagList tags, Date startTime, Date endTime, Date completeTime) {
+        NameQualifier(Set<String> nameKeyWords, Date startTime, Date endTime, Date completeTime, UniqueTagList tags) {
             this.nameKeyWords = nameKeyWords;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.completeTime = completeTime;
             this.tags = tags.toSet();
 
             // for simplicity sake, convert the Set<Tag> into Set<String> so that it can easily be filtered out
@@ -199,9 +202,6 @@ public class ModelManager extends ComponentManager implements Model {
             for (Tag tag:tags) {
                 this.tagKeyWords.add(tag.tagName);
             }
-            this.startTime = startTime;
-            this.endTime = endTime;
-            this.completeTime = completeTime;
         }
 
         @Override
@@ -221,15 +221,15 @@ public class ModelManager extends ComponentManager implements Model {
                     return false;
                 }
             }
-            if (startTime != null) {
-                Date todoStartTime = todo.getStartTime();
-                if (todoStartTime == null || todoStartTime.after(startTime)) {
+            if (endTime != null) {
+                Date todoEndTime = todo.getEndTime();
+                if (todoEndTime == null || todoEndTime.after(endTime)) {
                     return false;
                 }
             }
-            if (startTime != null) {
-                Date todoStartTime = todo.getStartTime();
-                if (todoStartTime == null || todoStartTime.after(startTime)) {
+            if (completeTime != null) {
+                Date todoCompleteTime = todo.getCompleteTime();
+                if (todoCompleteTime == null || todoCompleteTime.after(completeTime)) {
                     return false;
                 }
             }
