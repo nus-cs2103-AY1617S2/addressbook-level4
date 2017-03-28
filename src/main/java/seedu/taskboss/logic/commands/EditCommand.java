@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.DefaultCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
@@ -101,6 +102,9 @@ public class EditCommand extends Command {
         }
 
         model.updateFilteredListToShowAll();
+        UnmodifiableObservableList<ReadOnlyTask> latestShownList = model.getFilteredTaskList();
+        int targetIndex = latestShownList.indexOf(taskToEdit);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 

@@ -79,9 +79,21 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
+    @Test
+    public void edit_onlyInformation_success() throws Exception {
+        String detailsToEdit = "i/best friends!!";
+        int taskBossIndex = 2;
+
+        TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit)
+                .withInformation("best friends!!").withCategories("AllTasks").build();
+
+        assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
+    }
+
     //@@author
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
+    public void edit_onlyCategories_success() throws Exception {
         String detailsToEdit = "c/sweetie c/bestie";
         int taskBossIndex = 2;
 
