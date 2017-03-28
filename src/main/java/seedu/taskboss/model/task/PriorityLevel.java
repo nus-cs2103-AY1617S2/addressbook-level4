@@ -15,7 +15,8 @@ public class PriorityLevel {
     //@@author A0144904H
     public static final String PRIORITY_HIGH_VALUE = "High priority";
     public static final String PRIORITY_NO_VALUE = "No priority";
-    public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N)$";
+    public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N|yEs"
+            + "|yeS|nO|YEs|yES|YeS)$";
 
     public final String value;
     public final String input;
