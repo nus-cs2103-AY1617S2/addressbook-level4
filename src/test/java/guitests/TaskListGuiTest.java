@@ -85,7 +85,7 @@ public abstract class TaskListGuiTest {
      */
     protected TaskList getInitialData() {
         TaskList ab = new TaskList();
-        TypicalTestTasks.loadAddressBookWithSampleData(ab);
+        TypicalTestTasks.loadAddressBookWithSampleData(ab, new TypicalTestTasks().getTypicalTasks());
         return ab;
     }
 

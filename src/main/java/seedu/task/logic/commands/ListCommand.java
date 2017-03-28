@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the tasks"
-            + "Parameters: [complete | incomplete | by added | by due]\n"
+            + "Parameters: [complete | incomplete | by added | by due | by starts | by ends]\n"
             + "Example: " + COMMAND_WORD + " complete";
 
     public static final String MESSAGE_SUCCESS = "Listed tasks";

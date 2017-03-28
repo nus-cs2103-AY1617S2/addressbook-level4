@@ -13,6 +13,9 @@ public class TypicalTestTasks {
     //@@joshuaching A0163673Y
     public TestTask bear, cat, dog, elephant, fish, goose, horse, iguana, jaguar;
     //@@author
+    //@@author A0163744B
+    public TestTask junk, kale, letOutDog;
+    //@@author
 
     public TypicalTestTasks() {
         try {
@@ -39,14 +42,33 @@ public class TypicalTestTasks {
             jaguar = new TaskBuilder().withDescription("Walk the jaguar")
                     .withTaskId(208).build();
             //@@author
+            junk = new TaskBuilder()
+                    .withDescription("Junk to give away")
+                    .withCompletion(true)
+                    .withDuration("01/01/2017 0000", "01/01/2017 0100")
+                    .withDueDate("01/01/2017 0100")
+                    .withTaskId(300)
+                    .build();
+            kale = new TaskBuilder()
+                    .withDescription("Kale for salad")
+                    .withDuration("01/03/2017 0800", "01/03/2017 1200")
+                    .withDueDate("01/03/2017 1800")
+                    .withTaskId(301)
+                    .build();
+            letOutDog = new TaskBuilder()
+                    .withDescription("Let out dog")
+                    .withDuration("01/02/2017 0600", "01/02/2017 0630")
+                    .withDueDate("01/02/2017 1100")
+                    .withTaskId(302)
+                    .build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskList ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
+    public static void loadAddressBookWithSampleData(TaskList ab, TestTask[] data) {
+        for (TestTask person : data) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -54,6 +76,18 @@ public class TypicalTestTasks {
             }
         }
     }
+
+    //@@author A0163744B
+    public TestTask[] getTypicalTasksWithDates() {
+        return new TestTask[]{junk, kale, letOutDog};
+    }
+
+    public TaskList getTypicalAddressBookWithDates() {
+        TaskList ab = new TaskList();
+        loadAddressBookWithSampleData(ab, getTypicalTasksWithDates());
+        return ab;
+    }
+    //@@author
 
     //@@joshuaching A0163673Y
     public TestTask[] getTypicalTasks() {
@@ -63,7 +97,7 @@ public class TypicalTestTasks {
 
     public TaskList getTypicalAddressBook() {
         TaskList ab = new TaskList();
-        loadAddressBookWithSampleData(ab);
+        loadAddressBookWithSampleData(ab, new TypicalTestTasks().getTypicalTasks());
         return ab;
     }
 }

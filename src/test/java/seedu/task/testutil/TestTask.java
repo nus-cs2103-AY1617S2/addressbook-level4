@@ -41,6 +41,7 @@ public class TestTask implements ReadOnlyTask {
         this.description = description;
     }
 
+    //@@author evanyeung A0163744B
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
@@ -48,6 +49,7 @@ public class TestTask implements ReadOnlyTask {
     public void setTaskId(TaskId id) {
         this.id = id;
     }
+    //@@author
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
@@ -58,10 +60,17 @@ public class TestTask implements ReadOnlyTask {
         this.dueDate = dueDate;
     }
     //@@author
+
+    //@@author evanyeung A0163744B
+    public void setCompletion(Complete completion) {
+        this.complete = completion;
+    }
+
     @Override
     public TaskId getTaskId() {
         return this.id;
     }
+    //@@author
 
     @Override
     public Description getDescription() {
@@ -75,10 +84,12 @@ public class TestTask implements ReadOnlyTask {
     }
     //@@author
 
+    //@@author evanyeung A0163744B
     @Override
     public Duration getDuration() {
         return duration;
     }
+    //@@author
 
     @Override
     public UniqueTagList getTags() {
