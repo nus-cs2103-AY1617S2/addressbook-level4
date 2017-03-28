@@ -3,7 +3,6 @@ package seedu.ezdo.logic.commands;
 
 import seedu.ezdo.commons.exceptions.AliasAlreadyInUseException;
 import seedu.ezdo.commons.exceptions.CommandDoesNotExistException;
-import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 
 /**
