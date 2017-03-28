@@ -188,7 +188,7 @@ Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
 
-### 2.13. Saving and Loading data
+### 2.13. Saving and loading data
 
 Opus automatically saves all data that you have created. Every single change that you have made is tracked by Opus and you do not have to do anything to enable auto-saving. Your data will be loaded upon launching Opus, so you do not have to go through the saving-and-loading loop as with a normal text document.
 
@@ -196,7 +196,7 @@ By default, your user data is saved as `opus.xml` in the `/data` directory where
 
 Should you wish to, you can specify the directory of the saved data using the following command below.
 
-### 2.14. Specify Data File Directory : `save`
+### 2.14. Specify data file directory : `save`
 
 Saves all user data into a file in the specifed directory.
 Format: `save DIRECTORY`
@@ -246,6 +246,8 @@ Autocomplete the user's command on the CLI.
   e.g. `mark 1`
 
 * **Redo** : `redo` <br>
+
+* **Save** : `save DIRECTORY` <br>
 
 * **Schedule** : `schedule INDEX ENDTIME` <br>
   e.g. `schedule 6 30/3/2017`
