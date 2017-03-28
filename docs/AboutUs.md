@@ -48,11 +48,11 @@ Component: Logic
 * Components in charge of: [Model](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/DeveloperGuide.md#34-model-component)
 * Aspects/tools in charge of: Code Quality, Integration
 * Features implemented:
-   * [make add command fields optional](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
+   * [Make add command fields optional](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)
    * [List tasks by category](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#33listing-all-tasks--list)
-   * [find tasks by keywords](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#35-finding-all-tasks-by-keywords-or-by-datetime--find)
-   * [find tasks by datetime](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#35-finding-all-tasks-by-keywords-or-by-datetime--find)
-   * [clear tasks by category](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#37-clearing-tasks-by-category--clear)
+   * [Find tasks by keywords](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#35-finding-all-tasks-by-keywords-or-by-datetime--find)
+   * [Find tasks by datetime](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#35-finding-all-tasks-by-keywords-or-by-datetime--find)
+   * [Clear tasks by category](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#37-clearing-tasks-by-category--clear)
 * Code written: [[functional code](A0147990R.md)][[test code](A0147990R.md)]
 * Other major contributions:
   * In charge of review amd merge pull requests
