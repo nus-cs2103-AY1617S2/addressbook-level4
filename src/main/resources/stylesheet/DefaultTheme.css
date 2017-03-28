@@ -136,6 +136,10 @@
     -fx-text-fill: theme-danger;
 }
 
+.tasks .task.new .status-text.label {
+    -fx-text-fill: theme-primary;
+}
+
 /* TAG */
 
 .tag {

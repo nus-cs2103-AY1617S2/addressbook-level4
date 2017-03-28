@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javafx.beans.property.ObjectProperty;
@@ -43,6 +44,7 @@ public class UiStore {
     private ObservableList<String> observableSuggestedCommands = FXCollections.observableArrayList();
     private SimpleIntegerProperty observableSuggestedCommandIndex =
             new SimpleIntegerProperty(INDEX_INVALID_SUGGESTION);
+    private Task newTask;
 
     public static UiStore getInstance() {
         if (instance == null) {
@@ -129,14 +131,28 @@ public class UiStore {
     }
 
     public void setTasks(ArrayList<Task> tasks) {
+        setTasks(tasks, null);
+    }
+
+    /**
+     * Overloaded method to setTasks and newTask at the same time
+     * @params tasks tasks to replace current task
+     * @param newTask new task
+     */
+    public void setTasks(ArrayList<Task> tasks, Task newTask) {
         // Sorted by default
         Collections.sort(tasks);
         this.allTasks = tasks;
+        this.newTask = newTask;
         changeShownTasks();
     }
 
     public ArrayList<Task> getTasks() {
         return allTasks;
+    }
+
+    public Task getNewTask() {
+        return newTask;
     }
 
     /**
