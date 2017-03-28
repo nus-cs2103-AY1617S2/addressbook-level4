@@ -41,12 +41,13 @@ Responsibilities: Code Quality, Integration
 * Features implemented:
    * [Save command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#310-moving-the-save-file-save)
    * [Undo command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#38-reverting-the-last-action-undo--u)
-   * [Redo command]()
+   * [Redo command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#39-redoing-the-last-undone-action-redo--r)
    * [Kill command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#34-deleting-a-task-kill--k)
-* Code written: [[functional code](A0139248X.md)][[test code](A123456.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/main/A0139248X.md)][[test code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/test/A0139248X.md)]
 * Other major contributions:
-   * Did the initial refactoring from AddressBook to EzDo
+   * Did the initial refactoring from AddressBook to ezDo
    * Set up Travis, Appveyor, Codacy, Coveralls and CircleCI
+   * Code reviews
    
    
    
