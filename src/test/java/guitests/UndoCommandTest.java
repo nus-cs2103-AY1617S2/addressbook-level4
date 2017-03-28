@@ -4,9 +4,9 @@ package guitests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import javafx.scene.input.KeyCode;
 import org.junit.Test;
 
+import javafx.scene.input.KeyCode;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.testutil.TypicalTestTodoLists;

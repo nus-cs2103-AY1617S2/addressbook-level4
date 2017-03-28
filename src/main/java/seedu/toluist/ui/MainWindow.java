@@ -20,7 +20,6 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import seedu.toluist.commons.core.Config;
-import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.GuiSettings;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
@@ -121,10 +120,10 @@ public class MainWindow extends UiPart<Region> {
      * Configure CTRL+Z for quick undo
      */
     private void configureUndoKeyCombination() {
-       KeyCombination keyCombination = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
-       String undoCommand = "undo";
-       EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(undoCommand);
-       FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
+        KeyCombination keyCombination = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
+        String undoCommand = "undo";
+        EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(undoCommand);
+        FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
     }
 
     /**
