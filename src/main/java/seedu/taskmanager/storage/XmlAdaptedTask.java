@@ -24,14 +24,13 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String taskname;
     @XmlElement(required = true)
-    private String startDate;
+    private String startdate;
     @XmlElement(required = true)
-    private String startTime;
+    private String starttime;
     @XmlElement(required = true)
-    private String endDate;
+    private String enddate;
     @XmlElement(required = true)
-    private String endTime;
-
+    private String endtime;
     @XmlElement
     private List<XmlAdaptedCategory> categorised = new ArrayList<>();
 
@@ -51,10 +50,10 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         taskname = source.getTaskName().fullTaskName;
-        startDate = source.getStartDate().value;
-        startTime = source.getStartTime().value;
-        endDate = source.getEndDate().value;
-        endTime = source.getEndTime().value;
+        startdate = source.getStartDate().value;
+        starttime = source.getStartTime().value;
+        enddate = source.getEndDate().value;
+        endtime = source.getEndTime().value;
         categorised = new ArrayList<>();
         for (Category category : source.getCategories()) {
             categorised.add(new XmlAdaptedCategory(category));
@@ -74,12 +73,13 @@ public class XmlAdaptedTask {
         for (XmlAdaptedCategory category : categorised) {
             taskCategories.add(category.toModelType());
         }
-        final TaskName taskname = new TaskName(this.taskname);
-        final StartDate startdate = new StartDate(this.startDate);
-        final StartTime starttime = new StartTime(this.startTime);
-        final EndDate enddate = new EndDate(this.endDate);
-        final EndTime endtime = new EndTime(this.endTime);
+        
+        final TaskName taskName = new TaskName(this.taskname);
+        final StartDate startDate = new StartDate(this.startdate);
+        final StartTime startTime = new StartTime(this.starttime);
+        final EndDate endDate = new EndDate(this.enddate);
+        final EndTime endTime = new EndTime(this.endtime);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(taskname, startdate, starttime, enddate, endtime, categories);
+        return new Task(taskName, startDate, startTime, endDate, endTime, categories);
     }
 }

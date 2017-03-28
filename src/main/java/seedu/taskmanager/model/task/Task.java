@@ -31,8 +31,8 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
         this.endTime = endTime;
         this.isMarkedAsComplete = false;
-        this.categories = new UniqueCategoryList(categories); // protect
-        // internal tags from changes in the arg list
+        this.categories = new UniqueCategoryList(categories);
+        // protect internal tags from changes in the arg list
     }
 
     /**

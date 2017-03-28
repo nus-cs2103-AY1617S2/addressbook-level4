@@ -12,7 +12,7 @@ public class ListCompletedCommand extends Command {
 
     @Override
     public CommandResult execute() {
-	model.updateFilteredTaskListToShowByCompletion(true);
-	return new CommandResult(MESSAGE_SUCCESS);
+        model.updateFilteredTaskListToShowByCompletion(true);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

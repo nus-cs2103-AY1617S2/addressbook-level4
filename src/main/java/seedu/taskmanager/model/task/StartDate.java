@@ -25,19 +25,19 @@ public class StartDate {
      * @throws IllegalValueException
      *             if given date string is invalid.
      */
-    public StartDate(String date) throws IllegalValueException {
-        assert date != null;
-        String trimmedDate = date.trim();
-        if (!isValidDate(trimmedDate)) {
+    public StartDate(String startDate) throws IllegalValueException {
+        assert startDate != null;
+        String trimmedStartDate = startDate.trim();
+        if (!isValidStartDate(trimmedStartDate)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = trimmedDate;
+        this.value = trimmedStartDate;
     }
 
     /**
      * Returns if a given string is a valid task date.
      */
-    public static boolean isValidDate(String test) {
+    public static boolean isValidStartDate(String test) {
         return test.matches(STARTDATE_VALIDATION_REGEX1) || test.matches(STARTDATE_VALIDATION_REGEX2)
                 || test.matches(EMPTY_FIELD);
     }

@@ -39,12 +39,12 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String taskName, String startDate, String startTime, String endDate,
-            String endTime ,Set<String> categories) throws IllegalValueException {
-         final Set<Category> categorySet = new HashSet<>();
-         for (String categoryName : categories) {
-         categorySet.add(new Category(categoryName));
-         }
+    public AddCommand(String taskName, String startDate, String startTime, String endDate, String endTime,
+            Set<String> categories) throws IllegalValueException {
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
+        }
         this.toAdd = new Task(new TaskName(taskName), new StartDate(startDate), new StartTime(startTime),
                 new EndDate(endDate), new EndTime(endTime), new UniqueCategoryList(categorySet));
     }
