@@ -15,7 +15,6 @@ import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.Version;
 import seedu.geekeep.commons.events.ui.ExitAppRequestEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
-import seedu.geekeep.commons.util.ConfigUtil;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.logic.Logic;
 import seedu.geekeep.logic.LogicManager;
@@ -26,6 +25,8 @@ import seedu.geekeep.model.ModelManager;
 import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.model.util.SampleDataUtil;
+import seedu.geekeep.storage.ConfigStorage;
+import seedu.geekeep.storage.JsonConfigStorage;
 import seedu.geekeep.storage.Storage;
 import seedu.geekeep.storage.StorageManager;
 import seedu.geekeep.ui.Ui;
@@ -118,8 +119,9 @@ public class MainApp extends Application {
 
         logger.info("Using config file : " + configFilePathUsed);
 
+        ConfigStorage configStorage = new JsonConfigStorage(configFilePathUsed);
         try {
-            Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
+            Optional<Config> configOptional = configStorage.readConfig();
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
             logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
@@ -129,7 +131,7 @@ public class MainApp extends Application {
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
-            ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
+            configStorage.saveConfig(initializedConfig);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
