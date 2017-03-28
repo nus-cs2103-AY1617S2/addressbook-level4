@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.time.DateTimeException;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -147,6 +148,22 @@ public class StringUtilTest {
         thrown.expect(AssertionError.class);
         StringUtil.getDetails(null);
     }
+    
+    //@@author A0121668A
+    //---------------- Tests for parseStringToTime --------------------------------------
 
-
+    /*
+     * Invalid equivalence partitions for word: null
+     * The four test cases below test one invalid input at a time.
+     */
+    
+    private void assertDateTimeExceptionThrown(String timeString, String errorMessage) {
+        thrown.expect(DateTimeException.class);
+        StringUtil.parseStringToTime(timeString);
+    }
+    
+    @Test
+    public void parseStringToTime_nullTimeString_exceptionThrown() {
+        assertDateTimeExceptionThrown(null, StringUtil.TIME_FORMAT_CONSTRAINTS);
+        }
 }
