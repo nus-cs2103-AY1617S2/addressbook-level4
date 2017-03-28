@@ -21,7 +21,7 @@ public class TagPredicate implements Predicate<ReadOnlyTask> {
 
     @Override
     public boolean test(ReadOnlyTask task) {
-        return this.tagKeywords.stream().anyMatch(keyword -> {
+        return this.tagKeywords.stream().allMatch(keyword -> {
             try {
                 return (task.getTags().contains(new Tag(keyword)));
             } catch (IllegalValueException e) {

@@ -21,6 +21,6 @@ public class DescriptionPredicate implements Predicate<ReadOnlyTask> {
     @Override
     public boolean test(ReadOnlyTask task) {
         return this.descriptionKeyWords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword));
     }
 }

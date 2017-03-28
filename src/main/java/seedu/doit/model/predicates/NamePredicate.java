@@ -21,6 +21,6 @@ public class NamePredicate implements Predicate<ReadOnlyTask> {
     @Override
     public boolean test(ReadOnlyTask task) {
         return this.nameKeyWords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
     }
 }

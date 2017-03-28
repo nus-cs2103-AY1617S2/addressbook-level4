@@ -228,22 +228,18 @@ public class ModelManager extends ComponentManager implements Model {
         if (!nameKeywords.isEmpty()) {
             Predicate<ReadOnlyTask> namePredicate = new NamePredicate(nameKeywords);
             combined = combined.and(namePredicate);
-            System.out.println("start" + nameKeywords + "end");
         }
         if (!priorityKeywords.isEmpty()) {
             Predicate<ReadOnlyTask> priorityPredicate = new PriorityPredicate(priorityKeywords);
             combined = combined.and(priorityPredicate);
-            System.out.println("2");
         }
         if (!descriptionKeywords.isEmpty()) {
             Predicate<ReadOnlyTask> descriptionPredicate = new DescriptionPredicate(descriptionKeywords);
             combined = combined.and(descriptionPredicate);
-            System.out.println("3");
         }
         if (!tagKeywords.isEmpty()) {
             Predicate<ReadOnlyTask> tagPredicate = new TagPredicate(tagKeywords);
             combined = combined.and(tagPredicate);
-            System.out.println("4");
         }
 
         this.filteredTasks.setPredicate(combined);

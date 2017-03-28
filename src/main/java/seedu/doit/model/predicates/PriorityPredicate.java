@@ -21,6 +21,6 @@ public class PriorityPredicate implements Predicate<ReadOnlyTask> {
     @Override
     public boolean test(ReadOnlyTask task) {
         return this.priorityKeyWords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword));
     }
 }
