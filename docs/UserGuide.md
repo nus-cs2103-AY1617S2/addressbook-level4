@@ -73,19 +73,23 @@ Examples:
 * `add Do laundry`
 * `add Finish v0.0 documentation n/Urgent s/incomplete b/28/02/2017 12:00 e/29/02/2017 23:59 p/hi t/CS2103T`
 
-### 2.3. Sort tasks : `sort` (Work in progress)
+### 2.3. Sort tasks : `sort`
 
-Sorts the list of tasks currently being shown according to the parameters.<br>
-Format: `sort [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY]...`
+Sorts the list of tasks currently being shown according to the keyword.<br>
+Format: `sort KEYWORD`
 
-> * At least one of the optional fields must be provided.
+> Keywords
+
+> * `status` : Sorts the list according to status, with incomplete tasks at the top.
+> * `start` : Sorts the list according to start dates, with the earlier start dates at the top.
+> * `end` : Sorts the list according to end dates, with the earlier end dates at the top.
+> * `priority` : Sorts the list according to priorities, with the highest priorities at the top
+> * `all` : Sorts the list firstly according to status, then start date, then end date, then priority.
 
 Examples:
 
 * `sort status` <br>
 Sorts the list of tasks according to status
-* `sort status priority`<br>
-Sorts the list of tasks according to status, followed by priority.
 
 ### 2.4. Editing a task : `edit`
 
@@ -216,6 +220,9 @@ Autocomplete the user's command on the CLI.
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
 
+* **Sort** : `sort KEYWORD` <br>
+  e.g. `sort priority`
+  
 * **Unmark** : `unmark [INDEX]` <br>
   e.g. `unmark 1`
 
