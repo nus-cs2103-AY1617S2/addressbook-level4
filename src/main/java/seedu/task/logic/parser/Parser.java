@@ -13,7 +13,6 @@ import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
-import seedu.task.logic.commands.FilepathCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -85,8 +84,6 @@ public class Parser {
 	case SortCommand.COMMAND_WORD:
 		return new SortCommandParser().parse(arguments);
 		
-	/*case FilepathCommand.COMMAND_WORD:
-		return new FilepathCommandParser().parse(arguments);*/
 
 	default:
 	    return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
