@@ -30,7 +30,6 @@ public class Task implements ReadOnlyTask {
      */
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
 	    String taskDescription, TaskStatus taskStatus, UniqueTagList tags) {
-	assert !CollectionUtil.isAnyNull(taskName, taskDate, taskStartTime, taskEndTime, tags);
 	this.taskName = taskName;
 	this.taskDate = taskDate;
 	this.taskStartTime = taskStartTime;

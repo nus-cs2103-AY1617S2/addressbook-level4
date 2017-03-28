@@ -56,6 +56,10 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 	return false;
     }
+    
+//    public static String getPath(String path){
+//    	return path;
+//    }
 
     public ModelManager() {
 	this(new TaskManager(), new UserPrefs());
