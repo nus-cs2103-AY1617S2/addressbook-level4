@@ -205,13 +205,29 @@ public class ModelManager extends ComponentManager implements Model {
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-
+        //@@author A0139926R
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
+            boolean result = false;
+            boolean date = false;
+            boolean endDate = false;
+            boolean name = false;
+            date = nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDate().value, keyword))
+                    .findAny()
+                    .isPresent();
+            endDate = nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
+                    .findAny()
+                    .isPresent();
+            name = nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
                     .isPresent();
+            if (date || endDate || name) {
+                result = true;
+            }
+            return result;
         }
 
         @Override
