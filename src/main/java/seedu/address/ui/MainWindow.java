@@ -97,7 +97,8 @@ public class MainWindow extends UiPart<Region> {
         this.titleDate.setText(new SimpleDateFormat("dd MMM").format(cal.getTime()));
         this.titleDay.setText(new SimpleDateFormat("EE").format(cal.getTime()));
         this.commandTextField.setLabelFloat(true);
-        TextFields.bindAutoCompletion(commandTextField, "Add", "Add Test", "Add Test2");
+        TextFields.bindAutoCompletion(commandTextField, "add", "clear", "delete", "deletetag", "done", "edit", "exit",
+                "find", "help", "list", "listcompleted", "notdone", "redo", "renametag", "undo", "saveto", "today");
         this.commandResult.setText("");
 
         // Configure the UI
