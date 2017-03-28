@@ -11,40 +11,37 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
  * Represents the saved history of ToDoLists.
  */
 public class ToDoListHistoryManager implements ToDoListHistory {
-    private static final String COMMAND_FORMATTER = " %1$s";
 
     private Stack<ToDoList> previousToDoLists;
     private Stack<ToDoList> nextToDoLists;
-    private Stack<String> counterCommandHistory;
+    private Stack<CommandHistoryEntry> commandHistory;
 
     public ToDoListHistoryManager () {
         this.previousToDoLists = new Stack<ToDoList>();
         this.nextToDoLists = new Stack<ToDoList>();
-        this.counterCommandHistory = new Stack<String>();
+        this.commandHistory = new Stack<CommandHistoryEntry>();
     }
 
-    public void saveUndoInformationAndClearRedoHistory(String counterCommandWord, ReadOnlyTask task,
+    public void saveUndoInformationAndClearRedoHistory(String commandWord, ReadOnlyTask task,
             ToDoList toDoList) {
-        String counterCommandWithFormatter = counterCommandWord.concat(COMMAND_FORMATTER);
-        counterCommandHistory.push(String.format(counterCommandWithFormatter, task));
+        commandHistory.push(new CommandHistoryEntry(commandWord, task));
         previousToDoLists.push(toDoList);
         nextToDoLists.clear();
     }
 
-    //This overloaded method is specially for clear command.
-    public void saveUndoInformationAndClearRedoHistory(ToDoList toDoList) {
-        counterCommandHistory.push("Restore OneTwoDo");
+    public void saveUndoInformationAndClearRedoHistory(String commandWord, ToDoList toDoList) {
+        commandHistory.push(new CommandHistoryEntry(commandWord));
         previousToDoLists.push(toDoList);
         nextToDoLists.clear();
     }
 
 
-    public void saveRedoInformation(String counterCommandWord, ReadOnlyTask task,
-            ToDoList toDoList) {
-        String counterCommandWithFormatter = counterCommandWord.concat(COMMAND_FORMATTER);
-        counterCommandHistory.push(String.format(counterCommandWithFormatter, task));
-        nextToDoLists.push(toDoList);
-    }
+//    public void saveRedoInformation(String counterCommandWord, ReadOnlyTask task,
+//            ToDoList toDoList) {
+//        String counterCommandWithFormatter = counterCommandWord.concat(COMMAND_FORMATTER);
+//        counterCommandHistory.push(String.format(counterCommandWithFormatter, task));
+//        nextToDoLists.push(toDoList);
+//    }
 
     @Override
     public void saveAsPreviousToDoList(ToDoList toDoList) {
@@ -83,7 +80,7 @@ public class ToDoListHistoryManager implements ToDoListHistory {
     }
 
     public String getPreviousCounterCommand() {
-        return counterCommandHistory.pop();
+        return commandHistory.pop().getFeedbackMessageInReverseCommand();
     }
 
     @Override

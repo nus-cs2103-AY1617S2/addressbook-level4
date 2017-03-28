@@ -14,7 +14,10 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.commands.AddCommand;
+import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
+import seedu.onetwodo.logic.commands.DoneCommand;
+import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.model.history.ToDoListHistoryManager;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
@@ -89,7 +92,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.removeTask(target);
-        history.saveUndoInformationAndClearRedoHistory(AddCommand.COMMAND_WORD, target, copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(DeleteCommand.COMMAND_WORD, target, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -97,7 +100,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTaskForEdit(ReadOnlyTask target) throws TaskNotFoundException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.removeTask(target);
-        history.saveUndoInformationAndClearRedoHistory("Reset task", target, copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, target, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -108,7 +111,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.doneTask(taskToComplete);
-        history.saveUndoInformationAndClearRedoHistory("Undone", taskToComplete, copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(DoneCommand.COMMAND_WORD, taskToComplete, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -116,7 +119,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.addTask(task);
-        history.saveUndoInformationAndClearRedoHistory(DeleteCommand.COMMAND_WORD, task, copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(AddCommand.COMMAND_WORD, task, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -162,7 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void clear() {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        history.saveUndoInformationAndClearRedoHistory(copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_WORD, copiedCurrentToDoList);
         resetData(new ToDoList());
     }
 
