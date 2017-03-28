@@ -96,6 +96,6 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
 
         //duplicate category
         commandBox.runCommand("name owesMoney friends");
-        assertResultMessage(RenameCategoryCommand.MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
+        assertResultMessage(RenameCategoryCommand.MESSAGE_DUPLICATE_CATEGORY);
     }
 }
