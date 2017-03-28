@@ -48,12 +48,12 @@ public class MainApp extends Application {
     protected UserPrefs userPrefs;
 
     public static MainApp getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new MainApp();
         }
         return instance;
     }
-    
+
     @Override
     public void init() throws Exception {
         MainApp instance = MainApp.getInstance();
@@ -61,7 +61,8 @@ public class MainApp extends Application {
         super.init();
 
         instance.config = initConfig(getApplicationParameter("config"));
-        instance.storage = new StorageManager(instance.config.getToDoListFilePath(), instance.config.getUserPrefsFilePath());
+        instance.storage = new StorageManager(instance.config.getToDoListFilePath(),
+                instance.config.getUserPrefsFilePath());
 
         instance.userPrefs = initPrefs(instance.config);
 
