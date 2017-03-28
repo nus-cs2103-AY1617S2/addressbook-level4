@@ -27,8 +27,7 @@ public class MarkCommandParser {
         String[] indicesInString = args.split("\\s+");
         this.filteredTaskListIndices = new int[indicesInString.length];
 
-        for (int i=0; i < filteredTaskListIndices.length; i++) {
-
+        for (int i = 0; i < filteredTaskListIndices.length; i++) {
             // To convert string array to int array
             try {
                 filteredTaskListIndices[i] = Integer.parseInt(indicesInString[i]);
@@ -51,7 +50,6 @@ public class MarkCommandParser {
 
         return new MarkCommand(filteredTaskListIndices);
     }
-
 
     // Comparator to sort list in descending order
     Comparator<Integer> comparator = new Comparator<Integer>() {

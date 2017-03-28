@@ -29,9 +29,8 @@ public class MarkCommand extends Command {
 
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
-        // this.filteredTaskListIndices = Arrays.copyOf(args, args.length);
 
-        for (int i=0; i < filteredTaskListIndices.length; i++) {
+        for (int i = 0; i < filteredTaskListIndices.length; i++) {
             assert filteredTaskListIndices != null;
             assert filteredTaskListIndices.length > 0;
             assert filteredTaskListIndices[i] > 0;
@@ -45,7 +44,7 @@ public class MarkCommand extends Command {
     public CommandResult execute() throws CommandException {
         final StringBuilder tasksMarkedMessage = new StringBuilder();
 
-        for (int i=0; i < filteredTaskListIndices.length; i++) {
+        for (int i = 0; i < filteredTaskListIndices.length; i++) {
             UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
             if (filteredTaskListIndices[i] >= lastShownList.size()) {
@@ -62,7 +61,6 @@ public class MarkCommand extends Command {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
 
             } catch (CommandException ce) {
-                //TODO Check if repeat statement?
                 throw new CommandException(MESSAGE_STATUS_DONE);
             }
 
@@ -86,7 +84,6 @@ public class MarkCommand extends Command {
 
         Task markedTask = new Task(taskToMark.getDescription(), taskToMark.getStartDate(), taskToMark.getEndDate(),
                 taskToMark.getTags());
-
         markedTask.setStatus(TaskStatus.DONE);
 
         return markedTask;
