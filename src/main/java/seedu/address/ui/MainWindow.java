@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTextField;
 
@@ -95,6 +97,7 @@ public class MainWindow extends UiPart<Region> {
         this.titleDate.setText(new SimpleDateFormat("dd MMM").format(cal.getTime()));
         this.titleDay.setText(new SimpleDateFormat("EE").format(cal.getTime()));
         this.commandTextField.setLabelFloat(true);
+        TextFields.bindAutoCompletion(commandTextField, "Add", "Add Test", "Add Test2");
         this.commandResult.setText("");
 
         // Configure the UI
