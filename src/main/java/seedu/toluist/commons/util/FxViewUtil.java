@@ -73,6 +73,12 @@ public class FxViewUtil {
         });
     }
 
+    /**
+     * Sets the key event on node.
+     * @param node the fx object which the handler will be placed on
+     * @param keycode the Keycode value of the accelerator
+     * @param handler the event handler
+     */
     public static void setKeyCode(Node node, KeyCode keycode,
                                   EventHandler<ActionEvent> handler) {
         node.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
@@ -82,6 +88,4 @@ public class FxViewUtil {
             }
         });
     }
-
-
 }

@@ -83,8 +83,8 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize();
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-        configureKeyCombinations();
         configureChildrenViews();
+        configureKeyCombinations();
     }
 
     public Stage getPrimaryStage() {
@@ -137,7 +137,7 @@ public class MainWindow extends UiPart<Region> {
             KeyCode keycode = getKeyCode(keyName);
             String navigateCommand = COMMAND_NAVIGATEHISTORY + keyName;
             EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(navigateCommand);
-            FxViewUtil.setKeyCode(getRoot(), keycode, handler);
+            FxViewUtil.setKeyCode(commandBox.getRoot(), keycode, handler);
         });
     }
 
