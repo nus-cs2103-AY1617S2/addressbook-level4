@@ -20,13 +20,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String date;
     @XmlElement(required = true)
-    private String time;
-    @XmlElement(required = true)
     private Boolean isCompleted;
     @XmlElement(required = true)
     private String endDate;
-    @XmlElement(required = true)
-    private String endTime;
 
 
     /**
@@ -44,16 +40,10 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         date = source.getDate().value;
-        time = source.getTime().value;
         if (source.getEndDate() != null) {
             endDate = source.getEndDate().value;
         } else {
             endDate = "";
-        }
-        if (source.getEndTime() != null) {
-            endTime = source.getEndTime().value;
-        } else {
-            endTime = "";
         }
 
         isCompleted = source.getIsCompleted();
@@ -67,13 +57,11 @@ public class XmlAdaptedTask {
     public Task toModelType() throws IllegalValueException {
         final Name name = new Name(this.name);
         final DueDate date = new DueDate(this.date);
-        final Time time = new Time(this.time);
         final DueDate endDate = new DueDate(this.endDate);
-        final Time endTime = new Time(this.endTime);
         boolean isCompleted = false;
         if (this.isCompleted != null) {
             isCompleted = this.isCompleted;
         }
-        return new Task(name, date, endDate, time, endTime, isCompleted);
+        return new Task(name, date, endDate, isCompleted);
     }
 }

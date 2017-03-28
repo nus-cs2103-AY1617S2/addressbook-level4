@@ -8,7 +8,7 @@ import typetask.model.task.Name;
 import typetask.model.task.Task;
 import typetask.model.task.Time;
 
-
+//@@author A0139926R
 /**
  * Adds a task to the TaskManager.
  */
@@ -19,8 +19,8 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD3 = "+";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a task with and without date to the task list. \n"
-            + " Does not allow time without date. \n"
-            + "Parameters: NAME by:DATE @TIME\n"
+            + "<> means compulsory [] means optional"
+            + "Parameters: <NAME> by:[DATE][TIME]\n"
             + "Example: " + COMMAND_WORD
             + " Read Harry Potter book 1 ";
 
@@ -36,39 +36,19 @@ public class AddCommand extends Command {
     //Floating Task
     public AddCommand(String name)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""),
-                new Time(""), new Time(""), false);
+        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""), false);
     }
-    //Task with date and time
-    public AddCommand(String name, String date, String time)
+    //Deadline Task
+    public AddCommand(String name, String dateTime)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(""),
-                new Time(time), new Time(""), false);
+        this.toAdd = new Task(new Name(name), new DueDate(dateTime), new DueDate(""), false);
     }
-    //Task with date
-    public AddCommand(String name, String date)
+    //Event Task
+    public AddCommand(String name, String date, String endDate)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(""),
-                new Time(""), new Time(""), false);
+        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(endDate), false);
     }
-    //Task with time
-    public AddCommand(String name, String time, int noDate)
-            throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""),
-                new Time(time), new Time(""), false);
-    }
-    //Event Task with no time
-    public AddCommand(String name, String date, String endDate, int noTime)
-            throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(endDate),
-                new Time(""), new Time(""), false);
-    }
-    //Event Task with time
-    public AddCommand(String name, String date, String endDate, String time, String endTime)
-            throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(endDate),
-                new Time(time), new Time(endTime), false);
-    }
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

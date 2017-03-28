@@ -7,6 +7,7 @@ import static typetask.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static typetask.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,24 +39,25 @@ public class EditCommandParser {
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-
+      //@@author A0139926R
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
-                editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+                Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_DATE).get()));
+                editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
             }
             if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
-                editTaskDescriptor.setTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_TIME)));
-            }
-            if (argsTokenizer.getValue(PREFIX_END_TIME).isPresent()) {
-                editTaskDescriptor.setEndTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_END_TIME)));
+                Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_TIME).get()));
+                editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
             }
             if (argsTokenizer.getValue(PREFIX_END_DATE).isPresent()) {
-                editTaskDescriptor.setEndDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_END_DATE)));
+                Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_END_DATE).get()));
+                editTaskDescriptor.setEndDate(ParserUtil.parseDate(parseDate));
             }
             if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent()) {
-                editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_START_DATE)));
+                Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_START_DATE).get()));
+                editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
             }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -67,6 +69,17 @@ public class EditCommandParser {
 
         return new EditCommand(index.get(), editTaskDescriptor);
     }
-
+  //@@author A0139926R
+    public String getDate(String date) {
+        if (date.isEmpty()) {
+            return "";
+        }
+        List<Date> dates = DateParser.parse(date);
+        String nattyDate = dates.get(0).toString();
+        String[] splitDate = nattyDate.split(" ");
+        String finalizedDate = splitDate[0] + " " + splitDate[1] + " " + splitDate[2]+
+                " " + splitDate[3];
+        return finalizedDate;
+    }
 
 }

@@ -3,7 +3,6 @@ package typetask.testutil;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
-import typetask.model.task.Time;
 
 /**
  * A mutable person object. For testing only.
@@ -12,9 +11,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private DueDate date;
-    private Time time;
     private DueDate endDate;
-    private Time endTime;
     private boolean isCompleted;
 
     public TestTask() {
@@ -31,12 +28,6 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
-    }
-    public void setEndTime(Time endTime) {
-        this.endTime = endTime;
-    }
     public void setEndDate(DueDate endDate) {
         this.endDate = endDate;
     }
@@ -60,14 +51,6 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public DueDate getEndDate() {
         return endDate;
-    }
-    @Override
-    public Time getTime() {
-        return time;
-    }
-    @Override
-    public Time getEndTime() {
-        return endTime;
     }
     @Override
     public boolean getIsCompleted() {
