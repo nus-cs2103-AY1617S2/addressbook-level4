@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
- * Tests for Tag model
+ * Tests for CommandHistoryList model
  */
 public class CommandHistoryListTest {
     String command1 = "history";
