@@ -93,11 +93,11 @@ More information about using Gradle can be found [here](https://github.com/CS210
 
 #### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git.
     This is because Eclipse failed to recognize the new files that are pulled from Git.
-1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
+<br>1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
 
 #### 1.5.2.  Eclipse reports missing libraries.
     Eclipse has failed to retrieve all required dependencies during the project import.
-1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
+<br>1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
 
 ## 2. Design
 
@@ -384,8 +384,8 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 ### 4.4. Troubleshooting tests
 
 #### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
-    This is because Assertions are not enabled for JUnit tests. <br>
-1. Enable assertions in JUnit tests as described
+    This is because Assertions are not enabled for JUnit tests. 
+<br>1. Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
 2. Delete run configurations created when you ran tests earlier.
 
