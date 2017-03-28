@@ -310,19 +310,19 @@ public class CommandSettings implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("Add : " + this.add + "\n");
         sb.append("Delete : " + this.delete + "\n");
-        sb.append("Edit :" + this.edit + "\n");
-        sb.append("Done :" + this.done + "\n");
-        sb.append("Clear :" + this.clear + "\n");
-        sb.append("Exit :" + this.exit + "\n");
-        sb.append("Find :" + this.find + "\n");
-        sb.append("Help :" + this.help + "\n");
-        sb.append("List :" + this.list + "\n");
-        sb.append("Redo :" + this.redo + "\n");
-        sb.append("Save :" + this.save + "\n");
-        sb.append("Select :" + this.select + "\n");
-        sb.append("Set :" + this.set + "\n");
-        sb.append("Sort :" + this.sort + "\n");
-        sb.append("Undo :" + this.undo);
+        sb.append("Edit : " + this.edit + "\n");
+        sb.append("Done : " + this.done + "\n");
+        sb.append("Clear : " + this.clear + "\n");
+        sb.append("Exit : " + this.exit + "\n");
+        sb.append("Find : " + this.find + "\n");
+        sb.append("Help : " + this.help + "\n");
+        sb.append("List : " + this.list + "\n");
+        sb.append("Redo : " + this.redo + "\n");
+        sb.append("Save : " + this.save + "\n");
+        sb.append("Select : " + this.select + "\n");
+        sb.append("Set : " + this.set + "\n");
+        sb.append("Sort : " + this.sort + "\n");
+        sb.append("Undo : " + this.undo);
         return sb.toString();
     }
 
