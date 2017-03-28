@@ -1,5 +1,7 @@
 package seedu.tache.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -158,14 +160,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
         updateFilteredTaskListType(DUE_THIS_WEEK_TASK_LIST_TYPE);
     }
-    //@@author
 
+    //@@author A0142255M
+    /**
+     * Provides functionality for find command and raises TaskListTypeChangedEvent to update UI.
+     * Set<String> is converted to ArrayList<String> so that String can be retrieved.
+     */
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
+        ArrayList<String> keywordsList = new ArrayList<String>(keywords);
+        raise(new TaskListTypeChangedEvent("Find " + "\"" + keywordsList.get(0) + "\""));
     }
 
-    //@@author A0142255M
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
