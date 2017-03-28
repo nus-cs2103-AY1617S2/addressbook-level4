@@ -19,7 +19,7 @@ public class GuiSettings implements Serializable {
     private Point windowCoordinates;
 
     private String styleSheet;
-    
+
     public GuiSettings() {
         this.windowWidth = DEFAULT_WIDTH;
         this.windowHeight = DEFAULT_HEIGHT;
@@ -47,13 +47,13 @@ public class GuiSettings implements Serializable {
     }
 
     public String getStyleSheet() {
-    	return styleSheet;
+        return styleSheet;
     }
-    
+
     public void setStyleSheet(String path) {
-    	this.styleSheet = path;
+        this.styleSheet = path;
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

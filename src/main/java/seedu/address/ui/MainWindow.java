@@ -21,13 +21,13 @@ import seedu.address.model.person.ReadOnlyPerson;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends Window {
-	
-	protected static final String ICON = "/images/address_book_32.png";
-	protected static final String FXML = "MainWindow.fxml";
-	private static final int MIN_HEIGHT = 600;
-	private static final int MIN_WIDTH = 450;
 
-	private Logic logic;
+    protected static final String ICON = "/images/address_book_32.png";
+    protected static final String FXML = "MainWindow.fxml";
+    private static final int MIN_HEIGHT = 600;
+    private static final int MIN_WIDTH = 450;
+
+    private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -43,7 +43,7 @@ public class MainWindow extends Window {
 
     @FXML
     private MenuItem helpMenuItem;
-    
+
     @FXML
     private MenuItem themeMenuItem;
 
@@ -147,12 +147,12 @@ public class MainWindow extends Window {
         HelpWindow helpWindow = new HelpWindow();
         helpWindow.show();
     }
-    
+
     @FXML
     public void handleTheme() {
-    	ThemeWindow themeWindow = new ThemeWindow(getRoot(), prefs);
-    	themeWindow.fillInnerParts();
-    	themeWindow.show();
+        ThemeWindow themeWindow = new ThemeWindow(getRoot(), prefs);
+        themeWindow.fillInnerParts();
+        themeWindow.show();
     }
 
     /**

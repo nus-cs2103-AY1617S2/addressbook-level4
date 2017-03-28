@@ -12,34 +12,34 @@ import seedu.address.model.UserPrefs;
  * The chosen configuration option is saved.
  */
 public class ThemeWindow extends Window {
-	
-	protected static final String ICON = "/images/theme_icon.png";
-	protected static final String FXML = "ThemeWindow.fxml";
-	private static final String TITLE = "Theme Manager";
-	
-	@FXML
-	private AnchorPane themeManagerPlaceholder;
-	
-	@FXML
-	Parent fxmlToApply;
-	
-	UserPrefs prefs;
-	
+
+    protected static final String ICON = "/images/theme_icon.png";
+    protected static final String FXML = "ThemeWindow.fxml";
+    private static final String TITLE = "Theme Manager";
+
+    @FXML
+    private AnchorPane themeManagerPlaceholder;
+
+    @FXML
+    Parent fxmlToApply;
+
+    UserPrefs prefs;
+
     public ThemeWindow(Parent fxmlToApply, UserPrefs prefs) {
-    	super(FXML);
-    	
+        super(FXML);
+
         setTitle(TITLE);
         FxViewUtil.setStageIcon(stage, ICON);
         this.fxmlToApply = fxmlToApply;
         this.prefs = prefs;
     }
-    
+
     private AnchorPane getThemeManagerPlaceholder() {
-    	return themeManagerPlaceholder;
+        return themeManagerPlaceholder;
     }
 
-	public void fillInnerParts() {
-		new ThemeManager(getThemeManagerPlaceholder(), fxmlToApply, prefs);
-	}
-    
+    public void fillInnerParts() {
+        new ThemeManager(getThemeManagerPlaceholder(), fxmlToApply, prefs);
+    }
+
 }
