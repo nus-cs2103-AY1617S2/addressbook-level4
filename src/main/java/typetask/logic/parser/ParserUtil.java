@@ -14,7 +14,6 @@ import typetask.commons.exceptions.IllegalValueException;
 import typetask.commons.util.StringUtil;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
-import typetask.model.task.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -71,31 +70,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Date>} if {@code phone} is present.
-     */
-    public static Optional<DueDate> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new DueDate(phone.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
     public static Optional<DueDate> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
         return date.isPresent() ? Optional.of(new DueDate(date.get())) : Optional.empty();
     }
-
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     */
-    public static Optional<Time> parseTime(Optional<String> time) throws IllegalValueException {
-        assert time != null;
-        return time.isPresent() ? Optional.of(new Time(time.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
-     */
 
 }
