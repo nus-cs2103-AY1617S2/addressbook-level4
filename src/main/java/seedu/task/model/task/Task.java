@@ -201,8 +201,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * @param endTime
      */
     public void setOccurrences(Timing initialStartTime, Timing initialEndTime) {
-        RecurringTaskOccurrence occurrenceToAdd = new RecurringTaskOccurrence(initialStartTime, initialEndTime);
-        this.occurrences.add(occurrenceToAdd);
+        this.occurrences.add(new RecurringTaskOccurrence(initialStartTime, initialEndTime));
         if (isRecurring()) {
             int freqNumber = frequency.getFrequencyNumber();
             String freqCharacter = frequency.getFrequencyCharacter();
@@ -214,7 +213,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
             SimpleDateFormat endTimeFormat = retriveFormat(initialEndTime.toString());
             String tempStartTime, tempEndTime;
             Timing tempStart = null, tempEnd = null;
-            RecurringTaskOccurrence occurenceToAdd;
+            RecurringTaskOccurrence occurrenceToAdd;
             switch (freqCharacter) {
             case "h":
                 for (int i = 1; i < RecurringFrequency.HOUR_LIMIT; i += freqNumber) {
@@ -234,8 +233,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    occurenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
-                    occurrences.add(occurenceToAdd);
+                    occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
+                    occurrences.add(occurrenceToAdd);
                 }
                 break;
             case "d":
@@ -256,8 +255,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    occurenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
-                    occurrences.add(occurenceToAdd);
+                    occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
+                    occurrences.add(occurrenceToAdd);
                 }
                 break;
             case "m":
@@ -278,8 +277,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    occurenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
-                    occurrences.add(occurenceToAdd);
+                    occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
+                    occurrences.add(occurrenceToAdd);
                 }
                 break;
             }

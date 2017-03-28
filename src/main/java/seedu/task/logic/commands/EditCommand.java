@@ -94,6 +94,8 @@ public class EditCommand extends Command {
         boolean updatedRecurring = editTaskDescriptor.isRecurring().orElseGet(taskToEdit::isRecurring);
         RecurringFrequency updatedFrequency = editTaskDescriptor.getFrequency().orElseGet(taskToEdit::getFrequency);
 
+        updatedStartDate.setTiming(updatedStartDate.toString());
+        updatedEndDate.setTiming(updatedEndDate.toString());
 
         if (!Timing.checkTimingOrder(updatedStartDate, updatedEndDate)) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
