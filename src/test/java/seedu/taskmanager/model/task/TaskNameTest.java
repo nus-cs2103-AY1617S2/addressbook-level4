@@ -12,17 +12,17 @@ public class TaskNameTest {
     // @@author A0141102H
     @Test
     public void isValidName() {
-        // invalid name
+        // invalid task name
         assertFalse(TaskName.isValidName("")); // empty string
         assertFalse(TaskName.isValidName(" ")); // spaces only
         assertFalse(TaskName.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(TaskName.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(TaskName.isValidName("food*")); // contains non-alphanumeric characters
 
-        // valid name
-        assertTrue(TaskName.isValidName("peter jack")); // alphabets only
-        assertTrue(TaskName.isValidName("12345")); // numbers only
-        assertTrue(TaskName.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(TaskName.isValidName("Capital Tan")); // with capital letters
-        assertTrue(TaskName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        // valid task name
+        assertTrue(TaskName.isValidName("eat food")); // alphabets only
+        assertTrue(TaskName.isValidName("1 22 333 4444 55555")); // numbers only
+        assertTrue(TaskName.isValidName("hungry b0i")); // alphanumeric characters
+        assertTrue(TaskName.isValidName("EAT FOOD")); // with capital letters
+        assertTrue(TaskName.isValidName("This is a run on sentence created solely to prove a point")); // long task names
     }
 }

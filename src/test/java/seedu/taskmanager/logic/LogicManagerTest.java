@@ -24,32 +24,30 @@ import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
-import seedu.taskmanager.logic.Logic;
-import seedu.taskmanager.logic.LogicManager;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.DeleteCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
-import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
+import seedu.taskmanager.model.TaskManager;
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.task.ReadOnlyTask;
-import seedu.taskmanager.model.category.Category;
-import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -258,7 +256,7 @@ public class LogicManagerTest {
         // prepare task manager state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("LIST", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
+        assertCommandSuccess("LIST", ListCommand.MESSAGE_SUCCESS_ALL_TASK, expectedAB, expectedList);
     }
 
     /**
