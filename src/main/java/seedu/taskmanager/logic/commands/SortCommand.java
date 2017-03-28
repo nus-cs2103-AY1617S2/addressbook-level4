@@ -19,7 +19,8 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_START = "Tasks sorted by start dates.";
     public static final String MESSAGE_SUCCESS_END = "Tasks sorted by end dates.";
-    public static final String MESSAGE_SUCCESS_INVALID_KEYWORD = "Input keyword is invalid. Tasks sorted by end dates by default.";
+    public static final String MESSAGE_SUCCESS_INVALID_KEYWORD = "Input keyword is invalid. "
+            + "Tasks sorted by end dates by default.";
 
     private final String sortCriterion;
 

@@ -56,7 +56,6 @@ public class UniqueTaskList implements Iterable<Task> {
             sortByDate(sortCriterion);
         }
         // @@author
-        
     }
 
     /**
