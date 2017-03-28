@@ -554,6 +554,7 @@ Use case ends
 
 {More to be added}
 
+[//]: # "@@author A0141872E"
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
@@ -561,7 +562,9 @@ Use case ends
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should come with automated unit tests and open source code.
-5. Should return to a functioning state when system restarts <br>
+5. Should return to a functioning state when system restarts 
+6. Should function well offline
+7. Shuld have no unhandled exceptions from incorrect user input<br>
 
 {More to be added}
 
