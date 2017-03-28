@@ -8,6 +8,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -421,17 +422,22 @@ public class LogicManagerTest {
     class TestDataHelper {
         //@@author A0140023E
         // TODO should this be done in another way?
-        // Starting Test Date Time is set to one day after today so that we would not generate dates in the past
-        // otherwise a PastDateTimeException might be generated
-        private ZonedDateTime startTestDateTime = ZonedDateTime.now().plusDays(1);
+        // Starting Test Date Time is set to one day after today so that dates in the past is not
+        // generated to prevent a PastDateTimeException from occuring. Furthermore the precision
+        // is truncated to seconds as Natty does not parse milliseconds
+        private ZonedDateTime startTestDateTime = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS).plusDays(1);
 
         Task accept() throws Exception {
             Name name = new Name("Accept Changes");
+            StartEndDateTime startEndDateTime =
+                    new StartEndDateTime(startTestDateTime.plusDays(2), startTestDateTime.plusDays(4));
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            // TODO improve maybe not to use just Optionals
-            return new Task(name, Optional.empty(), Optional.empty(), tags);
+            // Note that a task is generated with a StartEndDateTime as that would be more complex
+            // than a task with Deadline or a Task with no Deadline and StartEndDateTime, thus
+            // making test cases more likely to fail
+            return new Task(name, Optional.empty(), Optional.of(startEndDateTime), tags);
         }
 
         /**
@@ -462,12 +468,12 @@ public class LogicManagerTest {
 
             if (task.getDeadline().isPresent()) {
                 cmd.append(" by ");
-                // TODO double check
+                // TODO change the format
                 cmd.append(task.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
             }
 
             if (task.getStartEndDateTime().isPresent()) {
-                // TODO double check
+                // TODO change the format
                 StartEndDateTime startEndDateTime = task.getStartEndDateTime().get();
                 cmd.append(" from ");
                 cmd.append(startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
@@ -556,8 +562,9 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            // Note that we are generating tasks with a StartEndDateTime as that would be more complex
-            // than a task with Deadline or a Task with no Deadline and StartEndDateTime, thus more likely to fail
+            // Note that a task is generated with a StartEndDateTime as that would be more complex
+            // than a task with Deadline or a Task with no Deadline and StartEndDateTime, thus
+            // making test cases more likely to fail
             return new Task(
                     new Name(name),
                     Optional.empty(),
