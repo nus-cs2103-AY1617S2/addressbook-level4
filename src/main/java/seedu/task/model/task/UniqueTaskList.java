@@ -104,12 +104,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
     
-    public void complete(int index) throws TaskNotFoundException {
+    public void complete(int index) {
+    	System.out.println(index);
     	Task temp = internalList.get(index);
     	temp.setTaskStatus(new TaskStatus(TaskStatus.DONE));
         internalList.remove(index);
         internalList.add(temp);
-        System.out.println("true");
     }
     
     public void setTasks(UniqueTaskList replacement) {
