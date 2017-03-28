@@ -289,7 +289,6 @@ public class EditCommand extends Command {
         EndTime endTimeToCompare;
         StartDate startDateToCompare;
         StartTime startTimeToCompare;
-        System.out.println(filteredActivityListIndex);
         ReadOnlyEvent eventToEdit = model.getFilteredEventList().get(filteredActivityListIndex);
         
         if(editEventDescriptor.getEndDate().isPresent()){

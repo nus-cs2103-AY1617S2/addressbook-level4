@@ -95,7 +95,7 @@ public class WhatsLeftTest {
         }
 
         @Override
-        public List<? extends ReadOnlyTask> getTaskList() {
+        public List<ReadOnlyTask> getTaskList() {
             return tasks;
         }
     }
