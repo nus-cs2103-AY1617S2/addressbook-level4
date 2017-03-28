@@ -20,6 +20,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.GuiSettings;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
@@ -95,12 +96,16 @@ public class MainWindow extends UiPart<Region> {
 
     private void configureKeyCombinations() {
         configureSwitchTabKeyCombinations();
+        configureUndoKeyCombination();
     }
 
     void hide() {
         primaryStage.hide();
     }
 
+    /**
+     * Configure switch tab hotkey, using underlined letters
+     */
     private void configureSwitchTabKeyCombinations() {
         String[] tabNames = new String[] { "i", "t", "n", "c", "a" };
         Arrays.stream(tabNames).forEach(tabName -> {
@@ -110,6 +115,16 @@ public class MainWindow extends UiPart<Region> {
             EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(switchCommand);
             FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
         });
+    }
+
+    /**
+     * Configure CTRL+Z for quick undo
+     */
+    private void configureUndoKeyCombination() {
+       KeyCombination keyCombination = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
+       String undoCommand = "undo";
+       EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(undoCommand);
+       FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
     }
 
     /**

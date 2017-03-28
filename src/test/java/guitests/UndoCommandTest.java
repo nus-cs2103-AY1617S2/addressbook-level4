@@ -4,10 +4,12 @@ package guitests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import javafx.scene.input.KeyCode;
 import org.junit.Test;
 
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
  * Gui tests for undo command
@@ -49,5 +51,17 @@ public class UndoCommandTest extends ToLuistGuiTest {
 
         assertFalse(TodoList.getInstance().getTasks().contains(task));
         assertFalse(TodoList.getInstance().getTasks().contains(task2));
+    }
+
+    @Test
+    public void undoWithHotkey() {
+        String command = "delete -";
+        commandBox.runCommand(command);
+        for (Task task : new TypicalTestTodoLists().getTypicalTasks()) {
+            assertFalse(isTaskShown(task));
+        }
+
+        mainGui.press(KeyCode.CONTROL, KeyCode.Z);
+        assertTrue(areTasksShown(new TypicalTestTodoLists().getTypicalTasks()));
     }
 }
