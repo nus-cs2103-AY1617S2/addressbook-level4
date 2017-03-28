@@ -17,7 +17,7 @@ By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
      3.9. [Undo](#39-undo-the-previous-command--undo)<br/>
      3.10. [Redo](#310-redo-a-command--redo)<br/>
      3.11. [Select tasks](#311-selecting-a-task--select)<br/>
-     3.12. [Reset](#312-clearing-all-tasks--clear)<br/>
+     3.12. [Reset](#312-clearing-all-tasks--reset)<br/>
      3.13. [Exit](#313-exiting-the-program--exit)<br/>
      3.14. [Import](#314-importing-files-into-the-program--exit)<br/>
      3.15. [Export](#315-saving-the-data)<br/>
@@ -67,7 +67,7 @@ e.g. typing `help` and pressing <kbd>Enter</kbd> will open the Help window.
 Here are some example commands you can try:
 
   - `list` : lists all tasks.
-  - `add Buy groceries d/tomorrow p/5 i/eggs x10, milk x2, bread x2 t/home t/errand` : adds a task titled Buy groceries to the list.
+  - `add Buy groceries for: tomorrow priority: 5 note: eggs x10, milk x2, bread x2 #home #errand` : adds a task titled Buy groceries to the list.
   - `delete 3` : deletes the 3rd task shown in the current list.
   - `exit` : exits the app.
 
@@ -94,7 +94,7 @@ Format: `help`
 
 Adds a task to the list.
 
-Format: `add TITLE [d/DEADLINE] p/PRIORITY i/INSTRUCTION [t/TAG]...`
+Format: `add TITLE [for: DEADLINE] priority: PRIORITY note: INSTRUCTION [t/TAG]...`
 
 > The deadline parameter can be entered in natural language, e.g. &quot;today&quot;, &quot;tomorrow at noon&quot;, &quot;this Sunday&quot;, &quot;every Tuesday&quot;. If deadline is not specified, it is assumed that the task is floating, which means the task can be performed earlier or later in the schedule without any form of urgency.<br><br>
 The priority parameter only accepts levels 1 - 5.<br><br>
@@ -102,7 +102,7 @@ Tasks can have any number of tags, including 0.
 
 Examples:
 
-- `add Buy groceries p/3 i/eggs x10, milk x2, bread x2 t/home t/errand`
+- `add Buy groceries priority: 3 note: eggs x10, milk x2, bread x2 #home #errand`
 - `add Watch webcast i/CS2103 t/school p/5 d/07032017`
 
 ### 3.3. Listing all tasks : `list`
@@ -115,7 +115,7 @@ Format: `list`
 
 Edits an existing task in the list.
 
-Format: `edit [TASK_LIST] INDEX [TITLE] [d/DATE] [p/PRIORITY] [i/INSTRUCTION] [t/TAG]...`
+Format: `edit [TASK_LIST] INDEX [TITLE] [for: DATE] [priority: PRIORITY] [note: INSTRUCTION] [#TAG]...`
 
 > Edits the task at the specified TASK\_LIST and INDEX. The task list refers to the name of the task list e.g. &quot;floating&quot;, &quot;ongoing&quot; and &quot;completed&quot;. If no task list name specified, it is assumed to be &quot;ongoing&quot;. The index refers to the index number shown in the last task listing.<br><br>
 The index must be a positive integer 1, 2, 3, ...<br><br>
@@ -126,9 +126,9 @@ You can remove all the task&#39;s tags by typing t/ without specifying any tags 
 
 Examples:
 
-- `edit 1 p/1 d/07032017`
+- `edit 1 priority: 1 for: 07032017`
    - Edits the priority and date of the 1st task to be 1 and 07032017 respectively.
-- `edit floating 2 Drink Coffee t/`
+- `edit floating 2 Drink Coffee #`
    - Edits the title of the 2nd task in the floating task list to be Drink Coffee and clears all existing tags.
 
 ### 3.5. Finding all tasks containing any keyword in their title : `find`
@@ -239,7 +239,7 @@ Exits the program.
 
 Format: `exit`
 
-### 3.14. Importing files into the program : `exit`
+### 3.14. Importing files into the program : `import`
 
 Exits the program.
 
@@ -264,10 +264,11 @@ A: No prior command line knowledge is required to use **Burdens**. Instead, just
 # 5. Command Summary
 
 - Help : `help`
-- Add : `add TITLE d/DATE p/PRIORITY i/INSTRUCTION [t/TAG]...`
-  - e.g. add Buy groceries d/the first Thursday of May p/5 i/eggs x10, milk x2, bread x2 t/home t/errand
+- Add : `add TITLE for: DATE priority: PRIORITY note: INSTRUCTION [#TAG]...`
+  - e.g. add Buy groceries for: the first Thursday of May priority: 5 note: eggs x10, milk x2, bread x2 #home #errand
 - List : `list`
-- Edit : `edit INDEX [TITLE] [d/DATE] [p/PRIORITY] [i/INSTRUCTION] [t/TAG]…`
+- Edit : `edit INDEX [TITLE] [for: DATE] [priority: PRIORITY] [note: INSTRUCTION] [#TAG]…`
+   - e.g. edit Buy dinner for: everyday  p/5 note: Chicken Rice #home #food
 - Find : `find KEYWORD [MORE_KEYWORDS]`
   - e.g. find Play basketball
 - Delete : `delete INDEX`
@@ -277,9 +278,14 @@ A: No prior command line knowledge is required to use **Burdens**. Instead, just
 - Incomplete : `incomplete INDEX`
   - e.g incomplete 3
 - Undo : `undo`
+   - e.g undo
 - Redo : `redo`
+   - e.g redo
 - Select : `select INDEX`
   - e.g select 2
-- Clear : `clear`
+- Clear : `reset`
+   - reset
 - Exit : `exit`
+   - exit
 - List : `list`
+   - list
