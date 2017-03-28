@@ -33,7 +33,7 @@
                                 <HBox>
                                  <Circle fx:id="labelBullet" styleClass="taglist-item-bullet" radius="5">
                                         <HBox.margin>
-                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                            <Insets left="5.0" right="5.0" top="6.0" />
                                         </HBox.margin>
                                     </Circle>
                                     <Label fx:id="id" styleClass="cell_big_label"></Label>
