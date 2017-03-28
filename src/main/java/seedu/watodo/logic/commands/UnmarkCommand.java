@@ -64,8 +64,6 @@ public class UnmarkCommand extends Command {
                 throw new CommandException(MESSAGE_STATUS_UNDONE);
             }
 
-            model.updateFilteredListToShowAll();
-
             tasksUnmarkedMessage.append(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToUnmark) + "\n");
         }
 

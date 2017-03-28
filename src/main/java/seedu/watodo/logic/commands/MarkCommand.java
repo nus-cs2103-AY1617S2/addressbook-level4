@@ -64,8 +64,6 @@ public class MarkCommand extends Command {
                 throw new CommandException(MESSAGE_STATUS_DONE);
             }
 
-            model.updateFilteredListToShowAll();
-
             tasksMarkedMessage.append(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark) + "\n");
         }
 
