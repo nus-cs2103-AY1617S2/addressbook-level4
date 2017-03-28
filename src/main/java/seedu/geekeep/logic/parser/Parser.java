@@ -58,18 +58,21 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        //@@author A0139438W
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
 
         case UndoneCommand.COMMAND_WORD:
             return new UndoneCommandParser().parse(arguments);
 
+        //@@author A0147622H
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
+        //@@author
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -79,12 +82,14 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        //@@author A0139438W
         case ListUndoneCommand.COMMAND_WORD:
             return new ListUndoneCommand();
 
         case ListDoneCommand.COMMAND_WORD:
             return new ListDoneCommand();
 
+        //@@author
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

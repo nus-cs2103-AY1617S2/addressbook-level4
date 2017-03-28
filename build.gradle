@@ -63,6 +63,7 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile 'com.jfoenix:jfoenix:1.2.0'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
@@ -85,7 +86,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "geekeep.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -120,8 +121,8 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class AddressBookTest extends Test {
-    public AddressBookTest() {
+class GeeKeepTest extends Test {
+    public GeeKeepTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
@@ -146,7 +147,7 @@ class AddressBookTest extends Test {
     }
 }
 
-task guiTests(type: AddressBookTest) {
+task guiTests(type: GeeKeepTest) {
     include 'guitests/**'
 
     jacoco {
@@ -155,8 +156,8 @@ task guiTests(type: AddressBookTest) {
 }
 
 
-task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+task nonGuiTests(type: GeeKeepTest) {
+    include 'seedu/geekeep/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
@@ -164,7 +165,7 @@ task nonGuiTests(type: AddressBookTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: AddressBookTest) {
+task allTests(type: GeeKeepTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }

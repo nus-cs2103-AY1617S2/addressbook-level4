@@ -1,3 +1,4 @@
+//@@author A0139438W
 package seedu.geekeep.logic.commands;
 
 import seedu.geekeep.commons.core.Messages;
@@ -6,7 +7,7 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
- * Marks 'undone' for task identified using it's last displayed index from the address book.
+ * Marks 'undone' for task identified using it's last displayed index from GeeKeep.
  */
 public class UndoneCommand extends Command {
     public static final String COMMAND_WORD = "undone";

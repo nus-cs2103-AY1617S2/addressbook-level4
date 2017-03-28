@@ -27,10 +27,11 @@ public class AddCommand extends Command {
             + " Meeting 1 s/01-04-17 1630 e/01-04-17 1730 l/311, Clementi Ave 2, #02-25 t/friends";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in GeeKeep";
 
     private final Task toAdd;
 
+    //@@author A0139438W
     /**
      * Creates an AddCommand using raw values.
      *
@@ -44,7 +45,8 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
 
-        DateTime start = null, end = null;
+        DateTime start = null;
+        DateTime end = null;
         Location loc = null;
 
         if (startDateTime.isPresent()) {
@@ -62,7 +64,8 @@ public class AddCommand extends Command {
                 start,
                 end,
                 loc,
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                false
         );
     }
 

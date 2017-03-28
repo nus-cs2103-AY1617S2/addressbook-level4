@@ -1,9 +1,11 @@
+//@@author A0148037E
 package seedu.geekeep.ui;
 
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -13,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.TaskCategory;
-import seedu.geekeep.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.geekeep.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
@@ -40,38 +42,34 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> completedListView;
 
-
-    //TODO only works for v0.2 checks
-    public TaskListPanel(String type, AnchorPane taskListPlaceholder) {
-        super(getFxmlFromType(type));
-        addToPlaceholder(taskListPlaceholder);
-    }
-
-    //TODO  only works for v0.2 checks
-    public TaskListPanel(String type, AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> allList) {
+    public TaskListPanel(String type, AnchorPane taskListPlaceholder,
+            ObservableList<ReadOnlyTask> filteredList) {
         super(getFxmlFromType(type));
         this.type = type;
         currentListView = allListView;
-        setConnections(allList, allListView);
-        setConnections(allList.filtered(t -> t.isDone()), completedListView);
-        setConnections(allList.filtered(t -> !t.isDone()), upcomingListView);
+        setConnections(filteredList, allListView);
+        setConnections(filteredList, completedListView);
+        setConnections(filteredList, upcomingListView);
         addToPlaceholder(taskListPlaceholder);
+        selectTab(0);
     }
 
-    //TODO this method should not be there. After v0.2 it is to remove
+    //TODO to remove
     private static String getFxmlFromType(String type) {
-        if (type.equals("deadline")) {
+        if ("deadline".equals(type)) {
             return DEADLINEFXML;
-        } else if (type.equals("floatingTask")) {
+        } else if ("floatingTask".equals(type)) {
             return FTASKFXML;
         } else {
+            assert "event".equals(type);
             return EVENTFXML;
         }
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList, ListView<ReadOnlyTask> taskListView) {
+    private void setConnections(ObservableList<ReadOnlyTask> taskList,
+            ListView<ReadOnlyTask> taskListView) {
         taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new PersonListViewCell());
+        taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
@@ -85,8 +83,8 @@ public class TaskListPanel extends UiPart<Region> {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                        raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -102,34 +100,44 @@ public class TaskListPanel extends UiPart<Region> {
     public void switchListView(TaskCategory category) {
         switch (category) {
         case UNDONE:
-            tabPanePlaceHolder.getSelectionModel().select(1);
+            selectTab(1);
             break;
         case DONE:
-            tabPanePlaceHolder.getSelectionModel().select(2);
+            selectTab(2);
             break;
         default:
-            tabPanePlaceHolder.getSelectionModel().select(0);
+            selectTab(0);
             break;
         }
         logger.info("Switched to " + category + " in " + type);
     }
 
-/*  //TODO scrollTo should works for all the ListView
-    public void scrollToVersion2() {
+    public void selectTab(int tab) {
+        tabPanePlaceHolder.getTabs().get(tab).setDisable(false);
+        tabPanePlaceHolder.getSelectionModel().select(tab);
+        for (int i = 0; i < 3; i++) {
+            if (i != tab) {
+                tabPanePlaceHolder.getTabs().get(i).setDisable(true);
+            }
+        }
+    }
 
-    }*/
+    class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
-    class PersonListViewCell extends ListCell<ReadOnlyTask> {
+        protected int getSourceIndex() {
+            FilteredList<ReadOnlyTask> filteredList = (FilteredList<ReadOnlyTask>) getListView().getItems();
+            return filteredList.getSourceIndex(getIndex());
+        }
 
         @Override
-        protected void updateItem(ReadOnlyTask person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(ReadOnlyTask task, boolean empty) {
+            super.updateItem(task, empty);
 
-            if (empty || person == null) {
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(person, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, getSourceIndex() + 1).getRoot());
             }
         }
     }

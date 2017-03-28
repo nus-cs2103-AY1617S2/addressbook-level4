@@ -272,6 +272,14 @@
     -fx-padding: 8 1 8 1;
 }
 
+.deadlineTab:top .tab-header-area .tab-header-background {
+    -fx-background-color: #FF6F6F;
+}
+
+.ftaskTab:top .tab-header-area .tab-header-background {
+    -fx-background-color: #FC993C;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: #d6d6d6;
@@ -283,7 +291,7 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #taskListPanel, #personWebpage {
+#filterField, #taskListPanel, #taskWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

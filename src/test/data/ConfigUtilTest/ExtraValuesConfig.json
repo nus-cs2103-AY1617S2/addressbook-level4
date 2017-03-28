@@ -3,6 +3,6 @@
   "logLevel" : "INFO",
   "userPrefsFilePath" : "C:\\preferences.json",
   "geeKeepFilePath" : "geekeep.xml",
-  "geeKeepName" : "TypicalTaskManagerName",
+  "geeKeepName" : "TypicalGeeKeepName",
   "extra" : "extra value"
 }

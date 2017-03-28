@@ -11,16 +11,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
-import seedu.geekeep.model.ReadOnlyTaskManager;
+import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 
 /**
- * An Immutable TaskManager that is serializable to XML format
+ * An Immutable GeeKeep that is serializable to XML format
  */
-@XmlRootElement(name = "taskmanager")
-public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
+@XmlRootElement(name = "geekeep")
+public class XmlSerializableGeeKeep implements ReadOnlyGeeKeep {
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
@@ -28,10 +28,10 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableTaskManager.
+     * Creates an empty XmlSerializableGeeKeep.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableTaskManager() {
+    public XmlSerializableGeeKeep() {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
@@ -39,7 +39,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     /**
      * Conversion
      */
-    public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
+    public XmlSerializableGeeKeep(ReadOnlyGeeKeep src) {
         this();
 
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));

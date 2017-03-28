@@ -138,15 +138,15 @@ interface and exposes its functionality using the `LogicManager.java` class.
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
+>Note how the `Model` simply raises a `GeeKeepChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -162,7 +162,7 @@ _Figure 2.4 : Class Diagram of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/geekeep/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
 and they can be loaded using the `UiPartLoader`.
 
@@ -183,7 +183,7 @@ _Figure 2.5 : Class Diagram of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/geekeep/logic/Logic.java)
 
-The `Logic` component: 
+The `Logic` component:
 
 * Parses the user command using each command's respective `Parser`.
 * Executes a `Command` object based on the command and user input.
@@ -200,7 +200,7 @@ For example, the following is what happens when the API `execute("delete 1")` is
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.6 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 <h3 id="user-content-model">Model Component</h3>
@@ -505,6 +505,190 @@ Extensions:
 
 > 5a1. GeeKeep shows an error message.<br>
 > Use case ends.
+
+**Use case: UC03 - `Add a floating task`**
+
+MSS:
+
+1. User add a task without starting date or ending date.
+
+2. Geekeep adds the floating task to the respective panel.
+Use case ends.
+
+Extensions:
+
+2a. There is a duplicate task.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC04 - `Add a deadline`**
+
+MSS:
+
+1. User add a task without starting date but with an ending date.
+
+2. Geekeep adds the deadline to the respective panel.
+Use case ends.
+
+Extensions:
+
+2a. There is a duplicate task.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC05 - `Add an event`**
+
+MSS:
+
+1. User add a task with starting date and ending date.
+
+2. Geekeep adds the event to the respective panel.
+Use case ends.
+
+Extensions:
+
+2a. There is a duplicate task.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+2b. The starting date of the event is after the ending date.
+
+> 2b1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC06 - `Mark a task as done`**
+
+MSS:
+
+1. User mark a task as done with its index.
+
+2. Geekeep marks the task as done.
+Use case ends.
+
+Extensions:
+
+2a. The task associated with the index is not found.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC07 - `Mark a task as undone`**
+
+MSS:
+
+1. User mark a task as undone with its index.
+
+2. Geekeep marks the task as undone.
+Use case ends.
+
+Extensions:
+
+2a. The task associated with the index is not found.
+
+> 2a1. Geekeep shows an error message. <br>
+> Use case ends.
+
+**Use case: UC08 - `Display completed tasks`**
+
+MSS:
+
+1. User requests all the tasks that are already done.
+
+2. Geekeep refreshes the panels with completed tasks.
+Use case ends.
+
+Extensions:
+
+2a. There are no completed tasks.
+
+> 2a1. Geekeep displays nothing in the panels. <br>
+> Use case ends.
+
+**Use case: UC09 - `Display uncompleted tasks`**
+
+MSS:
+
+1. User requests all the tasks that are not already done.
+
+2. Geekeep refreshes the panels with completed tasks.
+Use case ends.
+
+Extensions:
+
+2a. There are no uncompleted tasks.
+
+> 2a1. Geekeep displays nothing in the panels. <br>
+> Use case ends.
+
+**Use case UC10 - `Display tasks by tags`**
+
+MSS:
+
+1. User requests all the tasks associated with the given tags.
+
+2. Geekeep refreshes the panels with tasks associated with the given tags.
+Use case ends.
+
+Extensions:
+
+2a. There are no tasks associated with the given tags.
+
+> 2a1. The panels display nothing. <br>
+> Use case ends.
+
+**Use case UC11 - `Find a task with name`**
+
+MSS:
+
+1. User request tasks with given name.
+
+2. Geekeep returns all the tasks with names that contains the given word.
+Use case ends.
+
+Extensions:
+
+2a. There are no matching tasks.
+
+> 2a1. The panals display nothing <br>
+> Use case ends.
+
+**Use case UC12 - `Undo the preview command`**
+
+MSS:
+
+1. User requests to undo the previous command.
+
+2. Geekeep retrieve the previous state of the task manager.
+
+3. Geekeep replaces the current state with the previous state and refresh task cards.
+Use case ends.
+
+Extensions:
+
+2a. There is no command to undo.
+
+> 2a1. Geekeep ignores the undo command. <br>
+> Use case ends.
+
+**Use case UC13 - `Redo the previous command`**
+
+MSS:
+
+1. User requests to redo the previous undo command.
+
+2. Geekeep retrieves the saved state before the undo command.
+
+3. Geekeep replaces the current state with the retreived state and refresh task cards.
+Use case ends.
+
+2a. There is no command to redo.
+
+> 2a1. Geekeep ignores the redo command. <br>
+> Use case ends.
+
 
 <h3 id="user-content-ac">Appendix C : Non Functional Requirements</h3>
 

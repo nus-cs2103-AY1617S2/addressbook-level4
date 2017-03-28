@@ -1,3 +1,4 @@
+//@@author A0121658E
 package seedu.geekeep.model.task;
 
 import seedu.geekeep.model.tag.UniqueTagList;
@@ -29,7 +30,7 @@ public interface ReadOnlyTask {
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the
-     * person's internal tags.
+     * task's internal tags.
      */
     UniqueTagList getTags();
 
@@ -44,17 +45,20 @@ public interface ReadOnlyTask {
                         && other.isEvent()
                         && this.isEvent() // this is first to avoid NPE below
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                        && other.getStartDateTime().equals(this.getStartDateTime())
                         && other.getEndDateTime().equals(this.getEndDateTime())
-                        && other.getStartDateTime().equals(this.getStartDateTime()))
+                        && this.isDone() == other.isDone())
                 || (other != null
                         && other.isDeadline()
                         && this.isDeadline()
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getEndDateTime().equals(this.getEndDateTime()))
+                        && other.getEndDateTime().equals(this.getEndDateTime())
+                        && this.isDone() == other.isDone())
                 || (other != null
                         && other.isFloatingTask()
                         && this.isFloatingTask()
-                        && other.getTitle().equals(this.getTitle())); // state checks here onwards
+                        && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                        && this.isDone() == other.isDone());
     }
 
 

@@ -39,7 +39,8 @@
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4, 0.5" VBox.vgrow="ALWAYS">
+       <!-- @@author A0148037E -->
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.1, 0.4, 0.7" VBox.vgrow="ALWAYS">
          <items>
             <VBox fx:id="eventList">
                 <padding>
@@ -67,6 +68,7 @@
             </VBox>
          </items>
       </SplitPane>
+      <!-- @@author -->
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
    </children>
 </VBox>

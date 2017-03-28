@@ -1,3 +1,4 @@
+//@@author A0121658E
 package seedu.geekeep.model.task;
 
 import java.util.Iterator;
@@ -20,6 +21,8 @@ import seedu.geekeep.commons.util.CollectionUtil;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -36,8 +39,6 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
     }
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
-
     /**
      * Adds a task to the list.
      *
@@ -50,6 +51,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        internalList.sort((thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {
@@ -93,6 +95,7 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
+        internalList.sort((thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
         return taskFoundAndDeleted;
     }
 
@@ -110,7 +113,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedPerson}.
+     * Updates the task in the list at position {@code index} with {@code updatedTask}.
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be equivalent to another existing task in the
@@ -118,19 +121,20 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
-        assert editedTask != null;
+    public void updateTask(int index, ReadOnlyTask updatedTask) throws DuplicateTaskException {
+        assert updatedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        if (!taskToUpdate.equals(updatedTask) && internalList.contains(updatedTask)) {
             throw new DuplicateTaskException();
         }
 
-        taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
-        // The right way is to implement observable properties in the Person class.
-        // Then, PersonCard should then bind its text labels to those observable properties.
+        taskToUpdate.resetData(updatedTask);
+        // TODO: The code below is just a workaround to notify observers of the updated task.
+        // The right way is to implement observable properties in the Task class.
+        // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+        internalList.sort((thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
     }
 
     public void markTaskDone(int index) {

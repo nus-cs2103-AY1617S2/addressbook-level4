@@ -1,3 +1,4 @@
+//@@author A0147622H
 package seedu.geekeep.storage;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        title = source.getTitle().fullTitle;
+        title = source.getTitle().title;
         endDateTime = source.getEndDateTime() == null ? "" : source.getEndDateTime().value;
         startDateTime = source.getStartDateTime() == null ? "" : source.getStartDateTime().value;
         location = source.getLocation() == null ? "" : source.getLocation().value;
@@ -67,11 +68,19 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.title);
-        final DateTime endDateTime = this.endDateTime.isEmpty() ? null : new DateTime(this.endDateTime);
-        final DateTime startDateTime = this.startDateTime.isEmpty() ? null : new DateTime(this.startDateTime);
-        final Location location = this.location.isEmpty() ? null : new Location(this.location);
+        final DateTime endDateTime = convertStringToDateTime(this.endDateTime);
+        final DateTime startDateTime = convertStringToDateTime(this.startDateTime);
+        final Location location = convertStringToLocation(this.location);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final boolean isDone = this.isDone.equals("True");
         return new Task(title, startDateTime, endDateTime, location, tags, isDone);
+    }
+
+    private DateTime convertStringToDateTime(String date) throws IllegalValueException {
+        return date.isEmpty() ? null : new DateTime(date);
+    }
+
+    private Location convertStringToLocation(String location) throws IllegalValueException {
+        return location.isEmpty() ? null : new Location(location);
     }
 }

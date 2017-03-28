@@ -11,7 +11,6 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.logic.parser.Parser;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.task.ReadOnlyTask;
-import seedu.geekeep.storage.Storage;
 
 /**
  * The main LogicManager of the app.
@@ -22,7 +21,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final Parser parser;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model) {
         this.model = model;
         this.parser = new Parser();
     }
@@ -40,6 +39,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredTaskList();
     }
 
+    //@@author A0139438W
     @Override
     public ObservableList<ReadOnlyTask> getFilteredFloatingTaskList() {
         return model.getFilteredTaskList().filtered(t -> t.isFloatingTask());
