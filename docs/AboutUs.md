@@ -36,7 +36,9 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: Logic, UI
 * Aspects/tools in charge of: JavaFX
 * Features implemented:
-    * TBA
+    * Add task
+    * Command History
+    * Power Search
 * Code written: [functional code]() [test code]() [docs]()
 * Other major contributions:
     * Updating of project documents
