@@ -13,7 +13,7 @@ import seedu.toluist.ui.UiStore;
  */
 public class NavigateHistoryCommandTest extends ToLuistGuiTest {
     UiStore uiStore = UiStore.getInstance();
-    
+
     @Test
     public void viewPreviousWithoutDoingAnything() {
         mainGui.press(KeyCode.UP);
@@ -52,7 +52,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         mainGui.press(KeyCode.DOWN);
         assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command2);
     }
-    
+
     @Test
     public void viewPreviousTooManyTimes() {
         String command1 = "history";
@@ -68,7 +68,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         mainGui.press(KeyCode.UP);
         assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command1);
     }
-    
+
     @Test
     public void viewNextTooManyTimes() {
         String command1 = "history";
@@ -83,7 +83,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         mainGui.press(KeyCode.DOWN);
         assertTrue(uiStore.getObservableCommandInput().getValue().getCommand() == command2);
     }
-    
+
     @Test
     public void viewEverythingTooManyTimes() {
         String command1 = "history";
