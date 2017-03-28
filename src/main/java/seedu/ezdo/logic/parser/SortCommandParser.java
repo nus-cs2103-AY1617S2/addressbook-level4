@@ -9,7 +9,6 @@ import seedu.ezdo.commons.exceptions.InvalidSortOrderException;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.SortCommand;
-import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
 /**
