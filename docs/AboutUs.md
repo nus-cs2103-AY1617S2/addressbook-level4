@@ -17,7 +17,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * Default categories
 * Code written: [[functional code](A0144904H.md)][[test code](A0144904H.md)]
 * Other major contributions:
-  * Romove Email in Addressbook level 4 [[#52](https://github.com/CS2103JAN2017-W14-B2/main/pull/52)]
+  * Remove Email in Addressbook level 4 [[#52](https://github.com/CS2103JAN2017-W14-B2/main/pull/52)]
   * Refactor command word for mark done [[#103](https://github.com/CS2103JAN2017-W14-B2/main/pull/103)]
   * Refactor select command to view [[#107](https://github.com/CS2103JAN2017-W14-B2/main/pull/107)]
   * Make name accept special characters [[#146](https://github.com/CS2103JAN2017-W14-B2/main/pull/146)]
@@ -34,7 +34,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Testing and Documentation
 * Features implemented:
    * [Save data](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#314-exporting-the-data--save)
-   * [undo](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#311-undoing-a-command--undo)
+   * [Undo](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#311-undoing-a-command--undo)
    * [Delete multiple tasks ](https://github.com/CS2103JAN2017-W14-B2/main/blob/master/docs/UserGuide.md#36-deleting-a-task--delete)
 * Code written: [[functional code](A0138961W.md)][[test code](A0138961W.md)]
 * Other major contributions:
@@ -61,6 +61,7 @@ We are a team based in the [School of Computing, National University of Singapor
   * Set up Travis, Appveyor and Coveralls
   * Scroll to tasks after updates [[#137](https://github.com/CS2103JAN2017-W14-B2/main/pull/137)]
   * Designed TaskBoss prototype
+  * Documentation [[#2](https://github.com/CS2103JAN2017-W14-B2/main/pull/2), [#3](https://github.com/CS2103JAN2017-W14-B2/main/pull/3), [#79](https://github.com/CS2103JAN2017-W14-B2/main/pull/79), [#81](https://github.com/CS2103JAN2017-W14-B2/main/pull/81), [#95](https://github.com/CS2103JAN2017-W14-B2/main/pull/95)]
 
 
 -----
