@@ -2,12 +2,14 @@ package seedu.taskboss.model;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 import java.util.Set;
 
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
@@ -25,7 +27,8 @@ public interface Model {
     ReadOnlyTaskBoss getTaskBoss();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException, IllegalValueException;
+
+    void deleteTask(List<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException, IllegalValueException;
 
     /** Adds the given task
      * @throws IllegalValueException */
@@ -66,19 +69,23 @@ public interface Model {
     /** clear all tasks in the filtered task list by the given keywords as category*/
     void clearTasksByCategory(Category category) throws IllegalValueException;
 
+    //@@author A0138961W
     /** Undoes previous command of TaskBoss*/
     void undoTaskboss() throws EmptyStackException, IllegalValueException;
 
     /** Save current state of TaskBoss*/
     void saveTaskboss();
 
+    //@@author
     /** Sorts the task list according to the provided sort type
      * @throws IllegalValueException */
     void sortTasks(SortBy sortType) throws IllegalValueException;
 
+    //@@author A0143157J
     /** Changes the name of a category of all tasks in the filtered task list
      * @throws CommandException */
-    void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException;
+    void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException,
+        DuplicateCategoryException;
 
     void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException;
 

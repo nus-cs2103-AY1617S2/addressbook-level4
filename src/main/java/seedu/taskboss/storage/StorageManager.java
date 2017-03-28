@@ -26,12 +26,12 @@ public class StorageManager extends ComponentManager implements Storage {
     private Config config;
     private TaskBossStorage taskBossStorage;
     private UserPrefsStorage userPrefsStorage;
-
+    //@@author A0138961W
     public StorageManager(Config config) {
         this(config.getTaskBossFilePath(), config.getUserPrefsFilePath());
         this.config = config;
     }
-
+    //@@author
     public StorageManager(TaskBossStorage taskBossStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.taskBossStorage = taskBossStorage;
@@ -56,7 +56,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
 
     // ================ TaskBoss methods ==============================
-
+    //@@author A0138961W
     @Override
     public void setFilePath(String filepath) throws IOException {
         String actualFilePath = filepath + "/taskboss.xml";
@@ -70,7 +70,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public String getTaskBossFilePath() {
         return taskBossStorage.getTaskBossFilePath();
     }
-
+    //@@author
     @Override
     public Optional<ReadOnlyTaskBoss> readTaskBoss() throws DataConversionException, IOException {
         return readTaskBoss(taskBossStorage.getTaskBossFilePath());
@@ -81,7 +81,7 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.fine("Attempting to read data from file: " + filePath);
         return taskBossStorage.readTaskBoss(filePath);
     }
-
+    //@@author A0138961W
     @Override
     public void saveTaskBoss(ReadOnlyTaskBoss taskBoss) throws IOException {
         saveTaskBoss(taskBoss, taskBossStorage.getTaskBossFilePath());
@@ -92,7 +92,7 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         taskBossStorage.saveTaskBoss(taskBoss, filePath);
     }
-
+    //@@author
 
     @Override
     @Subscribe

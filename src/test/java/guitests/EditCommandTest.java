@@ -65,7 +65,6 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
-    //@@author A0143157J
     // EP: edit to remove start date
     @Test
     public void edit_removeDate_sucess() throws IllegalValueException {
@@ -79,6 +78,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
+    // EP: edit only information
     @Test
     public void edit_onlyInformation_success() throws Exception {
         String detailsToEdit = "i/best friends!!";
@@ -182,7 +182,6 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertResultMessage(EditCommand.ERROR_CANNOT_EDIT_DONE_CATEGORY);
     }
 
-    //author A0144904H
     @Test
     public void edit_DoneCategory_failure() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("mark 1");
@@ -191,7 +190,6 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertResultMessage(EditCommand.ERROR_CANNOT_EDIT_DONE_TASK);
     }
 
-    //author A0144904H
     @Test
     public void edit_To_AllTasks_Category_failure() {
         commandBox.runCommand("edit 3 c/AllTasks sd/next fri 5pm ed/tomorrow");

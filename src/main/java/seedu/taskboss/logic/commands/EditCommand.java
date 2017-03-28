@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
-import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.DefaultCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
@@ -84,9 +83,7 @@ public class EditCommand extends Command {
         try {
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             model.updateTask(filteredTaskListIndex, editedTask);
-            lastShownList = model.getFilteredTaskList();
-            int targetIndex = lastShownList.indexOf(editedTask);
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+            scrollToTask(editedTask);
         } catch (InvalidDatesException ide) {
             throw new CommandException(ERROR_INVALID_DATES);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
@@ -102,10 +99,18 @@ public class EditCommand extends Command {
         }
 
         model.updateFilteredListToShowAll();
-        UnmodifiableObservableList<ReadOnlyTask> latestShownList = model.getFilteredTaskList();
-        int targetIndex = latestShownList.indexOf(taskToEdit);
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+        scrollToTask(taskToEdit);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+    }
+
+    //@@author A0143157J
+    /**
+     * Scrolls to the position of the task
+     */
+    private void scrollToTask(ReadOnlyTask task) {
+        List<ReadOnlyTask> lastShownList =  model.getFilteredTaskList();
+        int targetIndex = lastShownList.indexOf(task);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
     }
 
     //@@author
@@ -142,14 +147,13 @@ public class EditCommand extends Command {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
-        //@@author A0144904H
         errorDetect(taskToEdit, updatedCategories);
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
                 updatedInformation, updatedRecurrence, updatedCategories);
     }
 
-    //@@author A014490H
+    //@@author A0144904H
     /**
      * @param taskToEdit
      * @param updatedCategories
@@ -166,7 +170,6 @@ public class EditCommand extends Command {
         }
     }
 
-    //@@author A0144904H
     /**
      * @param editTaskDescriptor
      * @param taskToEdit

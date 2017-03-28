@@ -2,6 +2,7 @@ package seedu.taskboss.model;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -70,6 +71,7 @@ public class ModelManager extends ComponentManager implements Model {
         return taskBoss;
     }
 
+    //@@author A0138961W
     @Override
     public void undoTaskboss() throws EmptyStackException, IllegalValueException {
         taskBoss.resetData(taskbossHistory.pop());
@@ -81,18 +83,24 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
+    //@@author
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
     }
-
+    //@@author A0138961W
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException, IllegalValueException {
+    public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException,
+            IllegalValueException {
+
         taskbossHistory.push(new TaskBoss(this.taskBoss));
-        taskBoss.removeTask(target);
+
+        for (ReadOnlyTask target: targets) {
+            taskBoss.removeTask(target);
+        }
         indicateTaskBossChanged();
     }
-
+    //@@author
     @Override
     public synchronized void addTask(Task task) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
@@ -137,24 +145,20 @@ public class ModelManager extends ComponentManager implements Model {
                         new UniqueCategoryList("Done"));
                 this.taskBoss.updateTask(targetIndex, newTask);
             } else {
-
-                Task copy = new Task(task);
-                Task newTask = new Task(copy);
-                newTask.getRecurrence().updateTaskDates(newTask);
-                this.taskBoss.updateTask(targetIndex, newTask);
+                Task newRecurredTask = createRecurredTask(task);
+                newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+                this.taskBoss.updateTask(targetIndex, newRecurredTask);
             }
-
             index++;
         }
-
 
         indicateTaskBossChanged();
     }
 
-    //@@author
+    //@@author A0143157J
     @Override
     public void renameCategory(Category oldCategory, Category newCategory)
-            throws IllegalValueException, CommandException {
+            throws IllegalValueException, CommandException, DuplicateCategoryException {
         assert oldCategory != null;
 
         boolean isFound = false;
@@ -193,7 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
                     }
                 }
             } catch (DuplicateCategoryException dce) {
-                dce.printStackTrace();
+                throw new DuplicateCategoryException();
             }
 
             Task editedTask = new Task(target);
@@ -206,6 +210,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         removeCategoryFromTaskboss(oldCategory);
         indicateTaskBossChanged();
+    }
+
+    /**
+     * Returns a new recurred task with updated task dates according to the recurrence
+     * of the given task
+     */
+    private Task createRecurredTask(ReadOnlyTask taskToMarkDone) throws IllegalValueException {
+        Task newRecurredTask = new Task(taskToMarkDone);
+        newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+        return newRecurredTask;
     }
 
     //@@author A0144904H
@@ -247,18 +261,17 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
     }
 
-    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByEndDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
     }
 
-    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByCategory(Category category) {
         updateFilteredTaskList(new PredicateExpression(new CategoryQualifier(category)));
     }
 
+    //@@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -283,15 +296,15 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
-    //@@author A0147990R
     /**
      * Removes the category from the UniqueCategoryList of Taskboss
      **/
     public void removeCategoryFromTaskboss(Category category) {
         taskBoss.removeCategory(category);
     }
-    //========== Inner classes/interfaces used for filtering =================================================
 
+    //========== Inner classes/interfaces used for filtering =================================================
+    //@@author
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
         String toString();
@@ -368,7 +381,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0147990R
     private class EndDatetimeQualifier implements Qualifier {
         private String endDateKeyWords;
 
@@ -388,7 +400,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0147990R
     private class CategoryQualifier implements Qualifier {
         private Category categoryKeyWords;
 

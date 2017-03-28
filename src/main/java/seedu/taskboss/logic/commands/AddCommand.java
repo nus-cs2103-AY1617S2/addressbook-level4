@@ -29,16 +29,21 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_WORD_SHORT = "a";
+    //@@author A0144904H
+    public static final String COMMAND_WORD_2ND_SHORT = "+";
 
+    //@@author
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Adds a task to TaskBoss. "
-            + "Parameters: NAME [p/YES_NO] sd/START_DATE] [ed/END_DATE] "
+            + "Parameters: NAME [p/YES_NO] [sd/START_DATE] [ed/END_DATE] "
             + "[i/INFORMATION] [r/RECURRENCE] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
             + " Submit report p/yes sd/today 5pm ed/next friday 11.59pm"
             + " i/inform partner r/WEEKLY c/Work c/Project\n"
             + "Example: " + COMMAND_WORD_SHORT
-            + " Watch movie sd/feb 19 c/Fun";
+            + " Watch movie sd/feb 19 c/Fun\n"
+            + "Example : " + COMMAND_WORD_2ND_SHORT + "Call David sd/tomorrow i/inform"
+            + " David of the new updates c/Project";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
@@ -48,7 +53,7 @@ public class AddCommand extends Command {
     public static final String DEFAULT_DONE = "Done";
     public static final String ERROR_CANNOT_ADD_DONE_CATEGORY = "Cannot add Done category";
 
-    //@@author
+    //@@author A0143157J
     private final Task toAdd;
 
     /**
@@ -65,7 +70,6 @@ public class AddCommand extends Command {
 
         categoriesSetUp(categories, categorySet);
 
-        //@@author A0143157J
         String updatedFreq;
         if (frequency.isEmpty()) {
             updatedFreq = Frequency.NONE.toString();
@@ -83,7 +87,6 @@ public class AddCommand extends Command {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
-        //@@author
         this.toAdd = new Task(
                 taskName,
                 priorityLvl,
@@ -116,15 +119,13 @@ public class AddCommand extends Command {
         }
     }
 
-    //@@author A0144904h
+    //@@author A0143157J
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException {
         assert model != null;
         try {
             model.addTask(toAdd);
-            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-            int targetIndex = lastShownList.indexOf(toAdd);
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+            scrollToTask();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -132,6 +133,15 @@ public class AddCommand extends Command {
             throw new CommandException(Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
         }
 
+    }
+
+    /**
+     * Scrolls to the position of the added task
+     */
+    private void scrollToTask() {
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        int targetIndex = lastShownList.indexOf(toAdd);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
     }
 
 }

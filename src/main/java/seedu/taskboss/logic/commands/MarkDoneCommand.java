@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
 
+import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
+import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -50,7 +52,18 @@ public class MarkDoneCommand extends Command {
 
         model.markDone(this.filteredTaskListIndices, tasksToMarkDone);
 
+        scrollToFirstTask(tasksToMarkDone);
         return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, tasksToMarkDone));
+    }
+
+    /**
+     * Scrolls to the position of the task
+     */
+    private void scrollToFirstTask(ArrayList<ReadOnlyTask> tasksToMarkDone) {
+        ReadOnlyTask taskToMarkDone = tasksToMarkDone.get(0);
+        UnmodifiableObservableList<ReadOnlyTask> latestShownList = model.getFilteredTaskList();
+        int targetIndex = latestShownList.indexOf(taskToMarkDone);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
     }
 
 }

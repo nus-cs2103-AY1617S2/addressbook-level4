@@ -9,6 +9,8 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
  */
 public class Information {
 
+    private static final String EMPTY_STRING = "";
+
     public static final String MESSAGE_INFORMATION_CONSTRAINTS =
             "Task information can take any values, and it can be blank";
 
@@ -38,7 +40,7 @@ public class Information {
      */
     public static boolean isValidInformation(String test) {
         return test.matches(INFORMATION_VALIDATION_REGEX) ||
-                "".equals(test);
+                EMPTY_STRING.equals(test);
 
     }
 

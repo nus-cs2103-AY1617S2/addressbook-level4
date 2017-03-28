@@ -79,13 +79,23 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         assertResultMessage("[superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
 
         //category name is AllTasks
-        //@@author A0144904H
         commandBox.runCommand("name AllTasks batman");
         assertResultMessage(RenameCategoryCommand.MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
 
         //category name is Done
-        //@@author A0144904H
         commandBox.runCommand("name Done batman");
         assertResultMessage(RenameCategoryCommand.MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
+
+        //rename category to Done
+        commandBox.runCommand("name owesMoney Done");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
+
+        //rename category to AllTasks
+        commandBox.runCommand("name owesMoney AllTasks");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
+
+        //duplicate category
+        commandBox.runCommand("name owesMoney friends");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_DUPLICATE_CATEGORY);
     }
 }

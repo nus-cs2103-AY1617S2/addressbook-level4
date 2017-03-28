@@ -40,20 +40,20 @@ public class StatusBarFooter extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolder.getChildren().add(getRoot());
     }
-
+    //@@author A0138961W
     private void setSaveLocation(String location) {
         this.saveLocationStatus.setText(location);
     }
-
+    //@@author
     private void setSyncStatus(String status) {
         this.syncStatus.setText(status);
     }
-
+    //@@author A0138961W
     @Subscribe
     public void handleTaskBossStorageChangedEvent(TaskBossStorageChangedEvent newFilePath) {
         setSaveLocation(newFilePath.newPath);
     }
-
+    //@@author
     @Subscribe
     public void handleAddressBookChangedEvent(TaskBossChangedEvent abce) {
         String lastUpdated = (new Date()).toString();

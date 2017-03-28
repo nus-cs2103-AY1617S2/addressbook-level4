@@ -1,5 +1,9 @@
 package seedu.taskboss.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
+
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
@@ -14,18 +18,28 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_WORD_SHORT = "d";
+    public static final String COMMAND_WORD_2ND_SHORT = "-";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Deletes the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1" + " || " + COMMAND_WORD_SHORT + " 1";
+            + "Example: " + COMMAND_WORD + " 1" + " || " + COMMAND_WORD_SHORT + " 1"
+            + " || "  + COMMAND_WORD_2ND_SHORT + "1 2 3";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
-    public final int targetIndex;
+    public final ArrayList<Integer> targetIndex;
 
-    public DeleteCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+    public final ArrayList<ReadOnlyTask> tasksToDelete;
+    //@@author A0138961W
+    /**
+    * Set will automatically remove duplicate indexes
+    */
+    public DeleteCommand(Set<Integer> targetIndex) {
+        this.targetIndex = new ArrayList<Integer>(targetIndex);
+        Collections.sort(this.targetIndex);
+        Collections.reverse(this.targetIndex);
+        this.tasksToDelete = new ArrayList<ReadOnlyTask>();
     }
 
 
@@ -34,14 +48,18 @@ public class DeleteCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (lastShownList.size() < targetIndex) {
+        if ((lastShownList.size() < targetIndex.get(0)) || (targetIndex.get(targetIndex.size() - 1) == 0)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        for (int index: targetIndex) {
+            ReadOnlyTask taskToDelete = lastShownList.get(index - 1);
+
+            tasksToDelete.add(taskToDelete);
+        }
 
         try {
-            model.deleteTask(taskToDelete);
+            model.deleteTask(tasksToDelete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         } catch (IllegalValueException e) {
@@ -49,7 +67,7 @@ public class DeleteCommand extends Command {
             e.printStackTrace();
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
     }
-
+    //@@author
 }
