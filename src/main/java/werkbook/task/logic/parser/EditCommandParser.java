@@ -1,6 +1,7 @@
 package werkbook.task.logic.parser;
 
 import static werkbook.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static werkbook.task.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static werkbook.task.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static werkbook.task.logic.parser.CliSyntax.PREFIX_ENDDATETIME;
 import static werkbook.task.logic.parser.CliSyntax.PREFIX_STARTDATETIME;
@@ -30,14 +31,15 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DESCRIPTION, PREFIX_STARTDATETIME,
-                PREFIX_ENDDATETIME, PREFIX_TAG);
+                PREFIX_ENDDATETIME, PREFIX_DEADLINE, PREFIX_TAG);
         try {
             argsTokenizer.tokenize(args);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+
         List<Optional<String>> preambleFields = ParserUtil
-                .splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+                .splitPreamble(argsTokenizer.getFullPreamble().orElse(""), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
@@ -46,16 +48,21 @@ public class EditCommandParser {
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+
         try {
+            //@@author A0139903B
+            Optional<String> endDatePrefix = argsTokenizer.getValue(PREFIX_ENDDATETIME).isPresent()
+                    ? argsTokenizer.getValue(PREFIX_ENDDATETIME) : argsTokenizer.getValue(PREFIX_DEADLINE);
+
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor
                     .setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setStartDateTime(
-                    ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_STARTDATETIME)));
-            editTaskDescriptor
-                    .setEndDateTime(ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_ENDDATETIME)));
+                    ParserUtil.createStartDateTime(argsTokenizer.getValue(PREFIX_STARTDATETIME)));
+            editTaskDescriptor.setEndDateTime(ParserUtil.createEndDateTime(endDatePrefix));
             editTaskDescriptor
                     .setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            //@@author
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }

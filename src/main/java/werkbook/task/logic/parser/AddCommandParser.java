@@ -29,9 +29,8 @@ public class AddCommandParser {
                 PREFIX_ENDDATETIME, PREFIX_DEADLINE, PREFIX_TAG);
         try {
             argsTokenizer.tokenize(args);
-            String test = argsTokenizer.getPreamble().get();
 
-            return new AddCommand(argsTokenizer.getPreamble().get(),
+            return new AddCommand(argsTokenizer.getFullPreamble().get(),
                     argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
                     argsTokenizer.getValue(PREFIX_STARTDATETIME).orElse(""),
                     argsTokenizer.getValue(PREFIX_ENDDATETIME)

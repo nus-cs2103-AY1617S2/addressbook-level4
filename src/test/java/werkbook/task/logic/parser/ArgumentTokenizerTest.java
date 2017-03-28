@@ -15,6 +15,7 @@ public class ArgumentTokenizerTest {
     private final Prefix slashP = new Prefix("/p");
     private final Prefix dashT = new Prefix("-t");
     private final Prefix hatQ = new Prefix("^Q");
+    private final Prefix wordBy = new Prefix("by", true);
 
     @Test
     public void accessors_notTokenizedYet() {
@@ -39,11 +40,11 @@ public class ArgumentTokenizerTest {
     }
 
     private void assertPreamblePresent(ArgumentTokenizer argsTokenizer, String expectedPreamble) {
-        assertEquals(expectedPreamble, argsTokenizer.getPreamble().get());
+        assertEquals(expectedPreamble, argsTokenizer.getFullPreamble().get());
     }
 
     private void assertPreambleAbsent(ArgumentTokenizer argsTokenizer) {
-        assertFalse(argsTokenizer.getPreamble().isPresent());
+        assertFalse(argsTokenizer.getFullPreamble().isPresent());
     }
 
     private void assertArgumentPresent(ArgumentTokenizer argsTokenizer, Prefix prefix, String... expectedValues) {
@@ -101,7 +102,8 @@ public class ArgumentTokenizerTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        assertPreambleAbsent(tokenizer);
+        // Actually present now
+        // assertPreambleAbsent(tokenizer);
         assertArgumentPresent(tokenizer, slashP, "Argument value");
 
     }
@@ -179,6 +181,33 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(tokenizer, dashT, "dashT-Value", "another dashT value", "");
         assertArgumentPresent(tokenizer, hatQ, "", "");
     }
+
+    //@@author A0139930B
+    @Test
+    public void tokenize_datePrefix() {
+        ArgumentTokenizer tokenizer = new ArgumentTokenizer(wordBy);
+
+        // A prefix with a valid date
+        try {
+            tokenizer.tokenize("SomePreamble by 10/10/2017 1000");
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+        assertPreamblePresent(tokenizer, "SomePreamble");
+        assertArgumentPresent(tokenizer, wordBy, "10/10/2017 1000");
+
+        // A prefix with an invalid date
+        try {
+            tokenizer.tokenize("SomePreambleString by invalidDate");
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+        assertPreamblePresent(tokenizer, "SomePreambleString by invalidDate");
+        assertArgumentAbsent(tokenizer, wordBy);
+    }
+    //@@author
 
     @Test
     public void equalsMethod() {
