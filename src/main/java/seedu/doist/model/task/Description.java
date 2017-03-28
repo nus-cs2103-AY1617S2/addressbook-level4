@@ -57,5 +57,4 @@ public class Description {
     public int hashCode() {
         return desc.hashCode();
     }
-
 }

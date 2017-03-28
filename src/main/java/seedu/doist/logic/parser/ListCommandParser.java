@@ -40,6 +40,7 @@ public class ListCommandParser {
         try {
             return new ListCommand(argument, argsTokenizer.getTokenizedArguments());
         } catch (IllegalValueException ive) {
+            System.out.println("hit");
             return new IncorrectCommand(ive.getMessage());
         }
     }

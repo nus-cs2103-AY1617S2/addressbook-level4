@@ -29,7 +29,7 @@ public class LogsCenter {
     /**
      * Initializes with a custom log level (specified in the {@code config} object)
      * Loggers obtained *AFTER* this initialization will have their logging level changed<br>
-     * Logging levels for existing loggers will only be updated if the logger with the same name
+     * Logging levels for existing loggers will only be updated if the LOGGER with the same name
      * is requested again from the LogsCenter.
      */
     public static void init(Config config) {
@@ -38,7 +38,7 @@ public class LogsCenter {
     }
 
     /**
-     * Creates a logger with the given name the given name.
+     * Creates a LOGGER with the given name the given name.
      */
     public static Logger getLogger(String name) {
         Logger logger = Logger.getLogger(name);
@@ -76,7 +76,7 @@ public class LogsCenter {
             if (fileHandler == null) fileHandler = createFileHandler();
             logger.addHandler(fileHandler);
         } catch (IOException e) {
-            logger.warning("Error adding file handler for logger.");
+            logger.warning("Error adding file handler for LOGGER.");
         }
     }
 

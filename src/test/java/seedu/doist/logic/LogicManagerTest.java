@@ -245,8 +245,8 @@ public class LogicManagerTest {
         // prepare address book state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list",
-                ListCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess("list all",
+                ListCommand.MESSAGE_ALL,
                 expectedAB,
                 expectedList);
     }
@@ -431,12 +431,11 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the person data field values
          */
+
+        // TODO: MAKE IT EASIER TO GENERATE RANDOM DATES
         protected Task generateTask(int seed) throws Exception {
             return new Task(
                     new Description("Person " + seed),
-                    //new Phone("" + Math.abs(seed)),
-                    //new Email(seed + "@email"),
-                    //new Address("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -532,6 +531,7 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given description. Other fields will have some dummy values.
          */
+        // TODO: REFACTOR THIS
         protected Task generateTaskWithDescription(String name) throws Exception {
             return new Task(
                     new Description(name),
