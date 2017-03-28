@@ -88,7 +88,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author A0138961W
     @Override
-    public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException, IllegalValueException {
+    public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException,
+            IllegalValueException {
 
         taskbossHistory.push(new TaskBoss(this.taskBoss));
 
