@@ -51,6 +51,13 @@ public class TaskParser {
             for (String tagName : tags) {
                 tagSet.add(new Tag(tagName));
             }
+            
+            StartTime myStartTime = new StartTime(startTime);
+            EndTime myEndTime = new EndTime(endTime);
+            if (startTime.getStartTime() >= endTime.getEndTime()) {
+            	throw new IllegalValueException("Start time must be less than end time");
+            }
+      
 
             if (startTime != null && endTime != null) {
                 return new StartEndTask(new Name(name),
@@ -103,10 +110,15 @@ public class TaskParser {
      * @@author A0141647E
      */
     public static Task parseTask(Name name, StartTime startTime,
-            EndTime endTime, UniqueTagList uniqueTagList, boolean isComplete) {
+            EndTime endTime, UniqueTagList uniqueTagList,
+            boolean isComplete, String description) {
         assert name != null;
 
         if (startTime != null && endTime != null) {
+        	// Convert startTime endTime (dd-mm-yyyy) into unix timestamp, then can do:
+        	// if (startTime >= endTime) {
+        	//     raise Exception
+        	// }
             return new StartEndTask(name, startTime, endTime, uniqueTagList, isComplete);
         } else if (startTime != null && endTime == null) {
             return new StartTask(name, startTime, uniqueTagList, isComplete);
