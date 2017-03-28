@@ -2,10 +2,10 @@ package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTTIME;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ON;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_BY;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_FROM;
 //import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX1;
 import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX2;
 
@@ -31,15 +31,15 @@ public class AddCommandParser {
      * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_DEADLINE, PREFIX_STARTTIME,
-                PREFIX_ENDTIME, PREFIX_CATEGORY);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_ON, PREFIX_BY, PREFIX_FROM,
+                PREFIX_TO, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         try {
             String taskName = argsTokenizer.getPreamble().get();
-            String onPrefixInput = argsTokenizer.getValue(PREFIX_DATE).orElse(EMPTY_FIELD);
-            String byPrefixInput = argsTokenizer.getValue(PREFIX_DEADLINE).orElse(EMPTY_FIELD);
-            String fromPrefixInput = argsTokenizer.getValue(PREFIX_STARTTIME).orElse(EMPTY_FIELD);
-            String toPrefixInput = argsTokenizer.getValue(PREFIX_ENDTIME).orElse(EMPTY_FIELD);
+            String onPrefixInput = argsTokenizer.getValue(PREFIX_ON).orElse(EMPTY_FIELD);
+            String byPrefixInput = argsTokenizer.getValue(PREFIX_BY).orElse(EMPTY_FIELD);
+            String fromPrefixInput = argsTokenizer.getValue(PREFIX_FROM).orElse(EMPTY_FIELD);
+            String toPrefixInput = argsTokenizer.getValue(PREFIX_TO).orElse(EMPTY_FIELD);
             String category = argsTokenizer.getValue(PREFIX_CATEGORY).orElse(EMPTY_FIELD);
             String startDate = EMPTY_FIELD;
             String startTime = EMPTY_FIELD;

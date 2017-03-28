@@ -135,7 +135,7 @@ public class UpdateCommand extends Command {
             return taskname;
         }
 
-        public void setDate(Optional<StartDate> startDate) {
+        public void setStartDate(Optional<StartDate> startDate) {
             assert startDate != null;
             this.startDate = startDate;
         }
