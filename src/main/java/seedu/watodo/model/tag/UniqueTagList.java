@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -135,6 +136,19 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Removes a Tag from the list.
+     *
+     * @throws NoSuchElementException if the Tag to delete is not an existing Tag in the list.
+     */
+    public void remove(Tag toRemove) throws NoSuchElementException {
+      assert toRemove != null;
+        if (!contains(toRemove)) {
+            throw new NoSuchElementException();
+        }
+        internalList.remove(toRemove);
     }
 
     @Override

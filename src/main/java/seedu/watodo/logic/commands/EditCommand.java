@@ -1,12 +1,15 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
@@ -82,6 +85,28 @@ public class EditCommand extends Command {
 
         Description updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        if (!updatedTags.equalsOrderInsensitive(taskToEdit.getTags())) {
+            UniqueTagList existingTags = taskToEdit.getTags();
+            for (Iterator<Tag> iterator = existingTags.iterator(); iterator.hasNext();) {
+                Tag tags = iterator.next();
+                if (updatedTags.contains(tags)) {
+                    iterator.remove();
+                }
+            }
+            updatedTags.mergeFrom(existingTags);
+        }
+
+        for (Tag tag : updatedTags) {
+            if (updatedTags.contains(tag)) {
+                updatedTags.remove(tag);
+            } else {
+                try {
+                    updatedTags.add(tag);
+                } catch (DuplicateTagException dte) {
+                    dte.printStackTrace();
+                }
+            }
+        }
         if (hasRemoveDate) {
             return new Task(updatedName, null, null, updatedTags);
         }
