@@ -36,6 +36,8 @@ import seedu.geekeep.logic.commands.HelpCommand;
 import seedu.geekeep.logic.commands.ListCommand;
 import seedu.geekeep.logic.commands.ListDoneCommand;
 import seedu.geekeep.logic.commands.ListUndoneCommand;
+import seedu.geekeep.logic.commands.RedoCommand;
+import seedu.geekeep.logic.commands.UndoCommand;
 import seedu.geekeep.logic.commands.UndoneCommand;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.GeeKeep;
@@ -375,6 +377,15 @@ public class LogicManagerTest {
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
         assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
+    }
+
+    @Test
+    public void execute_undo_redo_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(UndoCommand.MESSAGE_NOTHING_TO_UNDO);
+        assertCommandFailure("undo", expectedMessage);
+
+        expectedMessage = String.format(RedoCommand.MESSAGE_NOTHING_TO_REDO);
+        assertCommandFailure("redo", expectedMessage);
     }
 
     @Test
