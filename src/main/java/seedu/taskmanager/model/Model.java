@@ -20,8 +20,14 @@ public interface Model {
     /** Returns the TaskManager */
     ReadOnlyTaskManager getTaskManager();
 
-    /** Re-save data when save location has changed */
-    public void saveTaskManager();
+    /** Re-save data when save location has changed. */
+    void saveTaskManager();
+
+    /** Redo previous action of task manager. */
+    public void redoTaskManager();
+
+    /** Undo previous action of task manager. */
+    void undoTaskManager();
 
     /** Deletes the task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;

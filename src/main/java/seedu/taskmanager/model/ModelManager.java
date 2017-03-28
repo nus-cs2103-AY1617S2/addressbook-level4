@@ -2,6 +2,7 @@
 package seedu.taskmanager.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -10,7 +11,6 @@ import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
-import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
@@ -24,7 +24,9 @@ import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager taskManager;
+    private TaskManager taskManager;
+    private Stack<TaskManager> undoTaskManager;
+    private Stack<TaskManager> redoTaskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
@@ -38,6 +40,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        undoTaskManager = new Stack<TaskManager>();
+        redoTaskManager = new Stack<TaskManager>();
     }
 
     public ModelManager() {
@@ -46,6 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
+        saveInstance();
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
@@ -65,6 +70,28 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    /** Save a copy of task manager before data is changed. */
+    private void saveInstance() {
+        undoTaskManager.push(new TaskManager(taskManager));
+        redoTaskManager.clear();
+    }
+
+    /** Undo previous action of task manager. */
+    public void undoTaskManager() {
+        TaskManager currentTaskManager = new TaskManager(taskManager);
+        taskManager.resetData(undoTaskManager.peek());
+        undoTaskManager.pop();
+        redoTaskManager.push(currentTaskManager);
+    }
+
+    /** Undo previous action of task manager. */
+    public void redoTaskManager() {
+        TaskManager currentTaskManager = new TaskManager(taskManager);
+        taskManager.resetData(redoTaskManager.peek());
+        redoTaskManager.pop();
+        undoTaskManager.push(currentTaskManager);
+    }
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
@@ -78,6 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
         while (targets.size() != 0) {
             try {
                 ReadOnlyTask taskToDelete = targets.get(0);
+                saveInstance();
                 taskManager.removeTask(taskToDelete);
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
@@ -94,6 +122,7 @@ public class ModelManager extends ComponentManager implements Model {
             try {
                 ReadOnlyTask taskToDelete = targets.get(0);
                 if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
+                    saveInstance();
                     taskManager.removeTask(taskToDelete);
                     break;
                 }
@@ -108,6 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        saveInstance();
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -118,6 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
+        saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
@@ -127,6 +158,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void markTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
 
+        saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTask(taskManagerIndex, true);
         indicateTaskManagerChanged();
@@ -136,6 +168,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
 
+        saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTask(taskManagerIndex, false);
         indicateTaskManagerChanged();
@@ -159,8 +192,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
     }
-    
-    @Override 
+
+    @Override
     public void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new ListQualifier(keywords, isComplete)));
     }
@@ -270,13 +303,15 @@ public class ModelManager extends ComponentManager implements Model {
 
         public boolean run(ReadOnlyTask task) {
             return (task.getIsMarkedAsComplete().equals(isComplete)) && (taskKeyWords.stream()
-                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword))
-                            .findAny().isPresent());
-//                    && (taskKeyWords.stream()
-//                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
-//                            .findAny().isPresent());
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword)).findAny()
+                    .isPresent());
+            // && (taskKeyWords.stream()
+            // .filter(keyword ->
+            // StringUtil.containsWordIgnoreCase(task.getEndDate().value,
+            // keyword))
+            // .findAny().isPresent());
         }
-        
+
         @Override
         public String toString() {
             return "task name=" + String.join(", ", taskKeyWords);
