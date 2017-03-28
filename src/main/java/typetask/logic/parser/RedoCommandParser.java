@@ -1,11 +1,12 @@
 package typetask.logic.parser;
 
 import typetask.logic.commands.Command;
-import typetask.logic.commands.UndoCommand;
+import typetask.logic.commands.RedoCommand;
 //@@author A0139926R
-public class UndoCommandParser {
+
+public class RedoCommandParser {
 
     public Command parse(String args) {
-        return new UndoCommand();
+        return new RedoCommand();
     }
 }
