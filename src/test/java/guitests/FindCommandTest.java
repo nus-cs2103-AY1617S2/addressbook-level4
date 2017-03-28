@@ -31,6 +31,18 @@ public class FindCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    @Test
+    public void find_byDate_success() {
+        assertFindResult("find for: today", td.alice, td.benson, td.carl, td.daniel, td.elle, td.fiona, td.george);
+        assertFindResult("find for: tomorrow");
+    }
+
+    @Test
+    public void find_byTags_success() {
+        assertFindResult("find #friends", td.alice, td.benson);
+        assertFindResult("find #starWars");
+    }
+
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
