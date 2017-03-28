@@ -69,7 +69,7 @@ public class EditCommandTest extends TodoListGuiTest {
         int todoListIndex = 9;
 
         TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom")
-                .withStartTime(EDIT_DEFAULT_START_TIME).withEndTime(EDIT_DEFAULT_END_TIME).build();
+                .withStartTime(EDIT_DEFAULT_START_TIME).withEndTime(EDIT_DEFAULT_END_TIME).withTags("personal").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
@@ -101,7 +101,8 @@ public class EditCommandTest extends TodoListGuiTest {
         String detailsToEdit = "s/ e/1:00PM 11/11/2017";
         int todoListIndex = 9;
 
-        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").withEndTime("1:00PM 11/11/2017").build();
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").withEndTime("1:00PM 11/11/2017").
+                withTags("personal").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }

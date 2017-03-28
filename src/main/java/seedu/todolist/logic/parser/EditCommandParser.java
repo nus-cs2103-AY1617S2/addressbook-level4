@@ -34,8 +34,8 @@ public class EditCommandParser {
      * and returns an EditCommand object for execution.
      */
 
-    public static final String EDIT_DEFAULT_START_TIME = "6:00AM 17/11/2011";
-    public static final String EDIT_DEFAULT_END_TIME = "7:00AM 17/11/2011";
+    public static final String EDIT_DEFAULT_START_TIME = "12:00PM 11/11/2017";
+    public static final String EDIT_DEFAULT_END_TIME = "1:00PM 11/11/2017";
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =

@@ -92,12 +92,14 @@ public class TodoCardHandle extends GuiHandle {
     //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo) {
         DateFormat addCommandDateFormat = new SimpleDateFormat(DATE_FORMAT);
-        if (todo.getStartTime() != null
-                && !getStartTime().equals("Start: " + addCommandDateFormat.format(todo.getStartTime()))) {
+
+        if (todo.getEndTime() != null
+                && !getEndTime().equals("End: " + addCommandDateFormat.format(todo.getEndTime()))) {
             return false;
         }
-        if (todo.getEndTime() != null
-            && !getEndTime().equals("End: " + addCommandDateFormat.format(todo.getEndTime()))) {
+
+        if (todo.getStartTime() != null
+                && !getStartTime().equals("Start: " + addCommandDateFormat.format(todo.getStartTime()))) {
             return false;
         }
         if (todo.getCompleteTime() != null && getCompleteTime().equals("Not Complete")) {
