@@ -19,6 +19,8 @@ Role: Developer <br>
 Responsibilities: Storage, 
                   Tests
 
+Code Written: [[functional code](./collated/main/A0147622H.md)][[test code](./collated/test/A0147622H.md)]
+
 -----
 
 #### [Goh Yi Rui](http://github.com/yirui94)
@@ -26,6 +28,8 @@ Responsibilities: Storage,
 Role: Developer <br>
 Responsibilities: Logic, 
                   Integration
+
+Code Written: [[functional code](./collated/main/A0139438W.md)][[test code](./collated/test/A0139438W.md)]
 
 -----
 
@@ -36,6 +40,7 @@ Responsibilities: Logic,
                    Team Leader, 
                    Coordination of Team
 
+Code Written: [[functional code](./collated/main/A0121658E.md)][[test code](./collated/test/A0121658E.md)]
 
  -----
 
