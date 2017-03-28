@@ -50,8 +50,7 @@ Try FlexiTask now and benefit from its convenient features.
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**` Meet mother for dinner ` :
-     adds a task named `Meet mother for dinner` to FlexiTask
+   * **`add`** : adds a task named `Meet mother for dinner` to FlexiTask
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#2-features) section below for details of each command.<br>
@@ -208,7 +207,7 @@ Shows a list of all tasks or groups of tasks<br>
 Format: `list`
 
 > `list` shows uncompleted tasks first before completed tasks<br>
-> Tasks are displayed in the left panel of the GUI as shown in Figure 4
+> Tasks are displayed in the left panel of the GUI
 
 <br>
 
@@ -270,7 +269,7 @@ Format: `edit INDEX TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...] [d/
 
 Example:
 * find homework<br>
-    edit 2 cs3243 homework due 3 March 11.59pm p/ high
+    edit 2 cs3243 homework due 3 March 11.59pm p/high
 
 <br>
 
@@ -356,6 +355,7 @@ Format: `save FILE_PATH/FILE_NAME.xml`
 
 > File extension must be xml<br>
 > If specified file does not exists, FlexiTask will create the file
+> If the program is closed and re-opened, the last file specified by the user will be loaded
 
 Example:
 
@@ -364,7 +364,6 @@ Example:
 
 <br>
 
-//@@author A0141993X
 <a name="load"></a>
 ### 3.13. Loading the program data from a specified path: load
 
@@ -401,5 +400,5 @@ Format: `exit`
 
 ## 5. Command Summary
 
-<img src="images/commandSummary_21Mar.png">
+<img src="images/command_summary_with_flexi.png">
 
