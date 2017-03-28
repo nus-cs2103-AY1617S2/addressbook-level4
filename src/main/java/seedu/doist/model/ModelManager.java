@@ -199,6 +199,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
     }
 
+    //This method is specifically for the find command
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};

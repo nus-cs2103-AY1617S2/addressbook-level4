@@ -24,7 +24,6 @@ import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.RedoCommand;
 import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
-import seedu.doist.model.Model;
 import seedu.doist.ui.util.CommandAutoCompleteManager;
 import seedu.doist.ui.util.CommandHighlightManager;
 
@@ -35,7 +34,6 @@ public class CommandBox extends UiPart<Region> {
     public static final String SUCCESS_STYLE_CLASS = "white";
 
     private final Logic logic;
-    private final Model model;
     private final History<String> commandHistory = new History<String>();
 
     private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
@@ -47,10 +45,9 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private InlineCssTextArea commandTextField;
 
-    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, Model model) {
+    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
-        this.model = model;
         addToPlaceholder(commandBoxPlaceholder);
 
         commandTextField.textProperty().addListener((observable, oldValue, newValue)
@@ -59,7 +56,7 @@ public class CommandBox extends UiPart<Region> {
 
     private void highlightAndSuggestCompletion() {
         highlightManager.highlight(commandTextField);
-        autoCompleteManager.suggestCompletion(commandTextField, logic, model);
+        autoCompleteManager.suggestCompletion(commandTextField, logic);
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {

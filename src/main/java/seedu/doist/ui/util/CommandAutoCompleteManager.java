@@ -8,7 +8,6 @@ import javafx.geometry.Point2D;
 import seedu.doist.logic.Logic;
 import seedu.doist.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.doist.logic.parser.CliSyntax;
-import seedu.doist.model.Model;
 
 
 //@@author A0147980U
@@ -29,7 +28,7 @@ public class CommandAutoCompleteManager {
     }
 
     // main function method
-    public void suggestCompletion(InlineCssTextArea commandTextField, Logic logic, Model model) {
+    public void suggestCompletion(InlineCssTextArea commandTextField, Logic logic) {
         attachSuggestionWindowIfNecessary(commandTextField);
 
         int cursorPosition = commandTextField.getCaretPosition();
@@ -38,7 +37,7 @@ public class CommandAutoCompleteManager {
         isFindCommand(words);
         if (!"".equals(lastWord)) {
             if (isFind) {
-                displaySuggestions(commandTextField, getSuggestionsForSearch(words, model));
+                displaySuggestions(commandTextField, getSuggestionsForSearch(words, logic));
             } else {
                 displaySuggestions(commandTextField, getSuggestions(lastWord, logic));
             }
@@ -68,14 +67,14 @@ public class CommandAutoCompleteManager {
         return suggestions;
     }
 
-    private ArrayList<String> getSuggestionsForSearch(String[] words, Model model) {
+    private ArrayList<String> getSuggestionsForSearch(String[] words, Logic logic) {
         int count = 0;
         StringBuilder s = new StringBuilder();
         for (int i = 1; i < words.length; i++) {
             s.append(words[i]).append(" ");
         }
         ArrayList<String> suggestions = new ArrayList<>();
-        for (String desc : model.getAllNames()) {
+        for (String desc : logic.getAllNames()) {
             if ((Double.compare(org.apache.commons.lang3.StringUtils.
                     getJaroWinklerDistance(desc, s.toString()), 0.60) >= 0) && count < maxItemNu) {
                 suggestions.add(desc);

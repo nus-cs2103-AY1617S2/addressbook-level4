@@ -57,4 +57,9 @@ public class LogicManager extends ComponentManager implements Logic {
         }
         return allCommandWords;
     }
+
+    //@@author A0147620L
+    public ArrayList<String> getAllNames() {
+        return model.getAllNames();
+    }
 }
