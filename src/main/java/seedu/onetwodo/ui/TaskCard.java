@@ -116,6 +116,7 @@ public class TaskCard extends UiPart<Region> {
         if (descriptionText.length() > 0) {
             description.setText(descriptionText);
         } else {
+            description.setText("");
             descriptionBox.setMaxHeight(0);
             description.setMaxHeight(0);
         }
