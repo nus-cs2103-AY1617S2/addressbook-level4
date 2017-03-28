@@ -19,7 +19,7 @@ public class Timing implements Comparable<Timing> {
             "Task timing should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy " +
                     "Use only HH:mm if today is the default date";
     public static final String[] TIMING_FORMAT = {"HH:mm dd/MM/yyyy", "dd/MM/yyyy"};
-    public static final String NULL_TIMING = "n/a";
+    public static final String NULL_TIMING = "floating";
     public final String value;
     private Date timing;
 

@@ -42,6 +42,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.recurring = recurring;
         this.frequency = frequency;
         setOccurrences(startTiming, endTiming);
+        occurrenceIndexList.add(0);
     }
 
     public Task(Description description, Priority priority, ArrayList<RecurringTaskOccurrence> occurrences,
