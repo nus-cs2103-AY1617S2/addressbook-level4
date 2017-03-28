@@ -123,7 +123,7 @@ public class TaskCard extends UiPart<Region> {
             priority.setVisible(false);
             break;
         default:
-            priority.setVisible(false);
+            assert false;
         }
         priority.setText(priorityLevel.toUpperCase());
         priority.setTranslateX(20);
@@ -151,9 +151,7 @@ public class TaskCard extends UiPart<Region> {
             endDate.setVisible(false);
             break;
         default:
-            deadline.setVisible(false);
-            startDate.setVisible(false);
-            endDate.setVisible(false);
+            assert false;
         }
     }
 }
