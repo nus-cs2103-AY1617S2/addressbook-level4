@@ -7,23 +7,39 @@ import seedu.task.commons.exceptions.IllegalValueException;
 
 public class DateParser {
     public static final String DATE_STRING_ILLEGAL_FORMAT =
-            "String must be of the form DD/MM/YYYY HHMM";
+            "String must be of the form DD/MM/YYYY HHMM, or day_of_week|today|tomorrow HHMM";
     public static final String DATE_ILLEGAL_DATE = "The given date is not valid";
 
     private static final int DEFAULT_SECONDS = 0;
     private static final int DEFAULT_MILLISECONDS = 0;
-    private static final String DATE_STRING_VALIDATION_REGEX = "[0-3][0-9]/[0-1][0-9]/[0-9]{4} [0-2][0-9][0-5][0-9]";
+    private static final String DATE_STRING_VALIDATION_REGEX = ".*";
     private static final String EMPTY_DATE_STRING = "";
     private static final int MONTH_OFFSET = 1;
+    //@@evanyeung
 
+    //@@changli A160004845
+    private static int parsedDate[] = new int[3];
+    private static final int DAY_INDEX = 0;
+    private static final int MONTH_INDEX = 1;
+    private static final int YEAR_INDEX = 2;
+    private static final int SUN_INDEX = 1;
+    private static final int MON_INDEX = 2;
+    private static final int TUE_INDEX = 3;
+    private static final int WED_INDEX = 4;
+    private static final int THU_INDEX = 5;
+    private static final int FRI_INDEX = 6;
+    private static final int SAT_INDEX = 7;
+    //@@changli
+
+    //@@evanyeung A0163744B
     public static Calendar parse(String date) throws IllegalValueException {
         if (!isValidDateString(date)) {
             throw new IllegalValueException(DATE_STRING_ILLEGAL_FORMAT);
         }
         Calendar cal = Calendar.getInstance();
-        int year = getYear(date);
-        int month = getMonth(date);
-        int day = getDay(date);
+        int year = getDate(date)[YEAR_INDEX];
+        int month = getDate(date)[MONTH_INDEX];
+        int day = getDate(date)[DAY_INDEX];
         int hour = getHour(date);
         int minute = getMinute(date);
         if (!isValidDate(year, month, day, hour, minute)) {
@@ -33,7 +49,6 @@ public class DateParser {
         cal.set(Calendar.MILLISECOND, DEFAULT_MILLISECONDS);
         return cal;
     }
-    //@@evanyeung
 
     public static String toString(Calendar date) {
         String dateString;
@@ -53,7 +68,6 @@ public class DateParser {
         return dateString;
     }
 
-    //@@evanyeung A0163744B
     public static boolean isValidDateString(String test) {
         return test.matches(DATE_STRING_VALIDATION_REGEX);
     }
@@ -73,24 +87,89 @@ public class DateParser {
         }
         return true;
     }
+    //@@evanyeung
 
-    private static int getYear(String date) {
-        return Integer.parseInt(date.substring(6, 10));
+    //@@changli A160004845
+    private static int[] getDate(String date) throws IllegalValueException {
+        Calendar calDate = Calendar.getInstance();
+        int dayOfWeek = calDate.get(Calendar.DAY_OF_WEEK);
+
+        if (date.substring(0, 1).matches("[0-9]")) {
+            parsedDate[DAY_INDEX] = Integer.parseInt(date.substring(0, 2));
+            parsedDate[MONTH_INDEX] = Integer.parseInt(date.substring(3, 5)) - MONTH_OFFSET;
+            parsedDate[YEAR_INDEX] = Integer.parseInt(date.substring(6, 10));
+        } else {
+            String firstWord = date.substring(0, date.indexOf(" "));
+            switch (firstWord) {
+            case "today" : {
+                break;
+            }
+            case "tomorrow" : {
+                calDate.add(Calendar.DATE, 1);
+                break;
+            }
+            case "Monday" :
+            case "Mon": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, MON_INDEX));
+                break;
+            }
+            case "Tuesday" :
+            case "Tue": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, TUE_INDEX));
+                break;
+            }
+            case "Wednesday" :
+            case "Wed": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, WED_INDEX));
+                break;
+            }
+            case "Thursday" :
+            case "Thu": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, THU_INDEX));
+                break;
+            }
+            case "Friday" :
+            case "Fri": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, FRI_INDEX));
+                break;
+            }
+            case "Saturday" :
+            case "Sat": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, SAT_INDEX));
+                break;
+            }
+            case "Sunday" :
+            case "Sun": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, SUN_INDEX));
+                break;
+            }
+            default:
+                throw new IllegalValueException(DATE_STRING_ILLEGAL_FORMAT);
+            }
+            parsedDate[DAY_INDEX] = calDate.get(Calendar.DAY_OF_MONTH);
+            parsedDate[MONTH_INDEX] = calDate.get(Calendar.MONTH);
+            parsedDate[YEAR_INDEX] = calDate.get(Calendar.YEAR);
+        }
+
+        return parsedDate;
     }
 
-    private static int getMonth(String date) {
-        return Integer.parseInt(date.substring(3, 5)) - MONTH_OFFSET;
+    private static int compareDayOfWeek(int day1, int day2) {
+        return day2 - day1 < 0 ?
+                day2 - day1 + 7 :
+                day2 - day1;
     }
+    //@@changli
 
-    private static int getDay(String date) {
-        return Integer.parseInt(date.substring(0, 2));
-    }
-
+    //@@evanyeung A0163744B
     private static int getHour(String date) {
-        return Integer.parseInt(date.substring(11, 13));
+        String time = date.substring(date.indexOf(" ") + 1);
+        return Integer.parseInt(time.substring(0, 2));
     }
 
     private static int getMinute(String date) {
-        return Integer.parseInt(date.substring(13));
+        String time = date.substring(date.indexOf(" ") + 1);
+        return Integer.parseInt(time.substring(3));
     }
 }
+//@@evanyeung
