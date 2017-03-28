@@ -62,14 +62,23 @@ Examples:
 
 > Tasks can have any number of tags (including 0)
 
-
-### 2.3. Listing all tasks : `list`
+[//]: # "@@author A0141872E"
+### 2.3. Listing all tasks based on given parameters: `list`
 
 List all the existing tasks in TaskIt.<br>
-Format: `list`
+Format: `list all`
 
 List only the undone tasks in TaskIt.<br>
 Format: `list undone`
+
+List only the completed tasks in TaskIt.<br>
+Format: `list done`
+
+List only the overdued tasks in TaskIt.<br>
+Format: `list overdue`
+
+List all the tasks dued today in TaskIt.<br>
+Format: `list today`
 
 ### 2.4. Editing an existing task : `edit`
 
@@ -96,8 +105,26 @@ Examples:
   
 * `edit 1 tag null`<br>
   Remove all the tags of first task.
+  
+### 2.5. Marks a task as done or undone: `mark`
 
-### 2.5. Searching all tasks containing any keyword in their name: `find`
+Mark an existing task as done or undone based on a given valid index.<br>
+Format: `mark <INDEX> <undone|done>`
+
+> Marks the task at the specified `INDEX`.<br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `list all`<br>
+  `mark 2 done`<br>
+  Marks the 2nd task in the task manager as done.
+* `find do HW` <br>
+  `mark 1 undone`<br>
+  Marks the 1st task in the results of the `find` command as undone.
+
+### 2.6. Searching all tasks containing any keyword in their name: `find`
 
 Finds tasks which matched name/deadline/tag.<br>
 Format: ` find <[NAME]|[DATE]|[TAG]>`
@@ -114,7 +141,7 @@ Examples:
   Returns tasks with 'do' or 'HW' or both
 
 
-### 2.6. Deleting a task : `delete`
+### 2.7. Deleting a task : `delete`
 
 Deletes the specified task from the TaskIt. 
 Format: `delete INDEX`
@@ -125,14 +152,14 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list`<br>
+* `list all`<br>
   `delete 2`<br>
   Deletes the 2nd task in the task manager.
 * `find do HW`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-### 2.7. Select a task : `select`
+### 2.8. Select a task : `select`
 
 Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
@@ -143,29 +170,29 @@ Format: `select INDEX`
 
 Examples:
 
-* `list`<br>
+* `list all`<br>
   `select 2`<br>
   Selects the 2nd task in the task manager.
 * `find do HW` <br>
   `select 1`<br>
   Selects the 1st task in the results of the `find` command.
 
-### 2.8. Clearing all entries : `clear`
+### 2.9. Clearing all entries : `clear`
 
 Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.9 Undo previous action: `undo`
+### 2.10. Undo previous action: `undo`
 
 Undo the prevous actions.<br>
 Format: `undo`
 
-### 2.10. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.11. Saving the data in specified file/folder
+### 2.12. Saving the data in specified file/folder
 
 Puts all TaskIt storage in the given path to file.
 Format: `save FILEPATH`
@@ -179,24 +206,40 @@ Example:
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous TaskIt folder.
-
+	
+[//]: # "@@author A0141872E"
 ## 4. Command Summary
 
-* **Add**  `add TITLE [tag TAG]...` <br>
+* **Add**  `add <TITLE> [tag TAG|by DATE|from DATE to DATE]` <br>
   e.g. `add Lunch with Bob tag friend tag leisure`
+  e.g. `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`
 
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Edit**  `edit INDEX [TAG|TITLE|DATE] <new>` <br>
+* **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[tag]> <NEW>` <br>
   e.g. `edit 1 title Movie at 3pm`
+  e.g. `edit 1 start this Friday 3 pm`
+  e.g. `edit 1 tag School`
+  e.g. `edit 1 tag null`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find do HW SWE`
 
 * **List** : `list` <br>
+  e.g. `list all`
+  e.g. `list done`
+  e.g. `list undone`
+  e.g. `list overdue`
+  e.g. `list today`
+
+* **Mark** : `mark` <br>
+  e.g. `mark 1 undone`
+  e.g. `mark 3 done` 
+  
+* **Undo** : `undo` <br>
   e.g.
 
 * **Help** : `help` <br>
