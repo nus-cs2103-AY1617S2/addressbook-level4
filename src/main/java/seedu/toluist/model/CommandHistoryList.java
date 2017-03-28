@@ -1,3 +1,4 @@
+//@@author A0162011A
 package seedu.toluist.model;
 
 import java.util.ArrayList;
