@@ -151,7 +151,7 @@ The [**`Logic`**](#23-logic-component) accepts commands sent from the user pass 
 The [**`Model`**](#24-model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
 
 #### Storage
-The [**`Storage`**](#25-storage-component) Reads data from, and writes data to, the hard disk.
+The [**`Storage`**](#25-storage-component) Reads data from and writes data to, the hard disk.
 
 Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-logic-component),
 [**`Model`**](#24-model-component) and [**`Storage`**](#25-storage-component)
@@ -191,26 +191,24 @@ The sections below give more details of each component.
 
 Author: [Xu Bili](http://github.com/xbili)
 
-The `UI` component allows users to enter commands and receive the results through its graphical interfaces. It is responsible to handle the user interactions and ensure the commands are passed to `Logic` correctly.
+The `UI` component allows users to enter commands and receive the results through its graphical interfaces. It is responsible for handling the user interactions and ensuring the commands are passed to `Logic` correctly.
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` consists of multiple parts e.g.`CommandBox`, `ResultDisplay`, `TodayTaskListPanel`,
-`WeekTaskListPanel`, `FloatingTaskListPanel`,`StatusBarFooter` etc.
+The UI consists of a `MainWindow` which contains multiple parts e.g.`CommandBox`, `ResultDisplay`, `MainPanel`,
+`SidePanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `CommandBox` allows users to enter the commands which will later be executed in `Logic`.
 
 The `ResultDisplay` panel shows the feedback of the commands.
 
-The `TodayTaskListPanel` shows all incomplete tasks that are due today and completed tasks that have been done today.
+The `MainPanel` shows all the tasks and the results of the executed commands are displayed here as well.
 
-The `WeekTaskListPanel` shows all incomplete tasks that are due within a week.
-
-The `FloatingTaskListPanel` shows all the incomplete tasks that do not have deadlines.
+The `SidePanel` shows all incomplete tasks that are due within a week.
 
 The `StatusBarFooter` shows when the app has been last updated and storage file path.
 
@@ -240,7 +238,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -248,22 +246,22 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-In this diagram, the `Logic Manager` receives an event to delete the task at index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is pass back to the `UI` component through `CommandResult`.
+In this diagram, the `Logic Manager` receives an event to delete the task from index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is passed back to the `UI` component through `CommandResult`.
 
 ### 2.4. Model component
 
 Author: [Han Lynn](http://github.com/hlynn93)
 
-The `Model` component handles the data related logic and defines the structure of the data. It reacts to the `Logic` requests and changes its and its attributes' states accordingly.
+The `Model` component handles the data related logic and defines the structure of the data. It reacts to the `Logic` requests and changes its own state and its attributes' states accordingly.
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-The `Model` component does not depends on other three components and consists of three main objects: `Task`, `Tag` and `UserPref`.
+The `Model` component does not depend on other three components and consists of three main objects: `Task`, `Tag` and `UserPref`.
 * The `UserPref` object represents the user's preferences.
-* The `Task` object stores the attributes of task which consist of `Name`, `Priority`, `Status`, `Note`, `StartTime` and `EndTime`. It is also linked to the `Tag` object that categorises the existing tasks.
+* The `Task` object stores the attributes of a task which consist of `Name`, `Priority`, `Status`, `Note`, `StartTime` and `EndTime`. It is also linked to the `Tag` object that categorises the existing tasks.
 
 The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
@@ -278,11 +276,11 @@ In Opus, we have:
 * `TaskManagers` as `momento` objects.
 * `History` as the `momento collector`.
 
-`History` contains two list of `TaskManager`, one for the backward `undo` operation and another for the forward `redo` operation.
+`History` contains two lists of `TaskManager`, one for the backwards `undo` operation and another for the forward `redo` operation.
 
-Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplfies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
+Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplifies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
 
-Futhermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
+Furthermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
 
 ### 2.5. Storage component
 
@@ -298,12 +296,12 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component listens the `TaskManagerChangedEvent` and
 whenever there is a change to the task manager data, the component updates the storage files accordingly. It
 
-* saves `UserPref` objects in json format and read it back.
-* saves the Task Manager data in xml format and read it back.
+* saves `UserPref` objects in JSON format and read it back.
+* saves the Task Manager data in XML format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.opus.commons` package.
 
 ## 3. Implementation
 
