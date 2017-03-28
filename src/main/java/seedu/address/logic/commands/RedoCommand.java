@@ -24,7 +24,6 @@ public class RedoCommand extends Command {
 
     private final int filteredActivityListIndex;
 
-    // @@author A0121668A
     public RedoCommand(int filteredActivityListIndex) {
         assert filteredActivityListIndex > 0;
         this.filteredActivityListIndex = filteredActivityListIndex;
@@ -49,4 +48,5 @@ public class RedoCommand extends Command {
         model.storePreviousCommand("redo");
         return new CommandResult(String.format(MESSAGE_REDO_TASK_SUCCESS, taskToRedo));
     }
+    //@@author
 }

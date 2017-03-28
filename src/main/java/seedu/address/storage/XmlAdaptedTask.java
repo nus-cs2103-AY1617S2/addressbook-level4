@@ -19,7 +19,7 @@ import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
-//@@author A0148038A
+//@@author A0121668A
 /**
  * JAXB-friendly version of the Task.
  */
@@ -48,7 +48,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask() {}
 
-
+  //@@author A0148038A
     /**
      * Converts a given Task into this class for JAXB use.
      *

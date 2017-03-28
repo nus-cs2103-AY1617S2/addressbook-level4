@@ -92,6 +92,7 @@ public class UniqueTaskList implements Iterable<Task> {
         taskToComplete.redoTask();
         internalList.set(index, taskToComplete);
     }
+  //@@author
     
     /**
      * Removes the equivalent Task from the list.

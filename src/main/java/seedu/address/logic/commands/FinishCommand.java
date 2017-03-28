@@ -24,7 +24,6 @@ public class FinishCommand extends Command {
 
     private final int filteredActivityListIndex;
 
-    // @@author A0121668A
     public FinishCommand(int filteredActivityListIndex) {
         assert filteredActivityListIndex > 0;
         this.filteredActivityListIndex = filteredActivityListIndex;
@@ -49,4 +48,5 @@ public class FinishCommand extends Command {
         model.storePreviousCommand("finish");
         return new CommandResult(String.format(MESSAGE_FINISH_TASK_SUCCESS, taskToComplete));
     }
+    //@@author
 }

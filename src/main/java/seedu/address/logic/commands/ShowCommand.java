@@ -29,7 +29,7 @@ public class ShowCommand extends Command{
         
         this.displayPreference = displayPreference;
     }
-    //@@author A0121668A
+    
     @Override
     public CommandResult execute() throws CommandException {
         String preference;
@@ -49,4 +49,5 @@ public class ShowCommand extends Command{
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_DISPLAY_PREFERENCE_SUCCESS, preference));
     }
+    //@@author
 }
