@@ -34,7 +34,6 @@ import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
-import typetask.model.task.Time;
 import typetask.storage.XmlSerializableTaskManager;
 
 /**

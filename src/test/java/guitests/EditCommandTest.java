@@ -8,9 +8,6 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import typetask.commons.core.Messages;
 import typetask.logic.commands.EditCommand;
-import typetask.model.task.DueDate;
-import typetask.model.task.Name;
-import typetask.model.task.Time;
 import typetask.testutil.TaskBuilder;
 import typetask.testutil.TestTask;
 
