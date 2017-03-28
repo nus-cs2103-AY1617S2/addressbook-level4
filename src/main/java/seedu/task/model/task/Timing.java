@@ -157,27 +157,29 @@ public class Timing implements Comparable<Timing> {
     public int compareTo(Timing compareTiming) {
         boolean thisNull = this.timing == null;
         boolean otherNull = compareTiming.timing == null;
-
+        int compareToResult = 0;
         if (thisNull && otherNull) {
-            return 0;
+            compareToResult = 0;
         } else if (thisNull) {
-            return 1;
+            compareToResult = 1;
         } else if (otherNull) {
-            return -1;
+            compareToResult = -1;
         }
 
-        boolean thisNullTiming = this.timing.equals(NULL_TIMING);
-        boolean otherNullTiming = compareTiming.timing.equals(NULL_TIMING);
+        if (compareToResult == 0) {
+            boolean thisNullTiming = this.timing.equals(NULL_TIMING);
+            boolean otherNullTiming = compareTiming.timing.equals(NULL_TIMING);
 
-        if (thisNullTiming && otherNullTiming) {
-            return 0;
-        } else if (thisNullTiming) {
-            return 1;
-        } else if (otherNullTiming) {
-            return -1;
+            if (thisNullTiming && otherNullTiming) {
+                compareToResult = 0;
+            } else if (thisNullTiming) {
+                compareToResult = 1;
+            } else if (otherNullTiming) {
+                compareToResult = -1;
+            }
         }
 
-        int compareToResult = this.timing.getYear() - compareTiming.timing.getYear();
+        compareToResult = this.timing.getYear() - compareTiming.timing.getYear();
 
         if (compareToResult == 0) {
             compareToResult = this.timing.getMonth() - compareTiming.timing.getMonth();
