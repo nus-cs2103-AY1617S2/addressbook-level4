@@ -49,7 +49,17 @@ public abstract class Command {
      */
     public void jumpToNewTask(ReadOnlyTask task) {
         int filteredIndex = model.getTaskIndex(task);
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredIndex, task.getTaskType()));
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        EventsCenter.getInstance().post(
+                                new JumpToListRequestEvent(filteredIndex, task.getTaskType())
+                        );
+                    }
+                },
+                300
+        );
     }
 
 }

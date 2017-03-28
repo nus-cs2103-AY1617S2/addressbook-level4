@@ -2,6 +2,9 @@ package seedu.onetwodo.ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
 
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
@@ -9,16 +12,25 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.onetwodo.commons.core.EventsCenter;
+import seedu.onetwodo.commons.core.LogsCenter;
+import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
+import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
-    private static final String DONE_PSUEDO_CLASS = "done";
+    private static final String DONE_PSEUDO_CLASS = "done";
+    private static final String SELECTED_PSEUDO_CLASS = "selected";
     public static final String DATE_SPACING = "  -  ";
     public static final String DEADLINE_PREFIX = "by: ";
     public static final DateTimeFormatter INFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public static final DateTimeFormatter OUTFORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
+    private static final Logger logger = LogsCenter.getLogger(TaskCard.class);
+
+    private String prefixId;
 
     @FXML
     private HBox cardPane;
@@ -37,26 +49,48 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
+    private HBox descriptionBox;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex, char indexPrefix) {
         super(FXML);
+        prefixId = Character.toString(indexPrefix) + displayedIndex;
+        registerCard();
         name.setText(task.getName().fullName);
-        id.setText(Character.toString(indexPrefix) + displayedIndex);
+        id.setText(prefixId);
         setPriority(task);
         setDate(task);
         setDescription(task);
         initTags(task);
         if (task.getDoneStatus()) {
-            PseudoClass donePseudoClass = PseudoClass.getPseudoClass(DONE_PSUEDO_CLASS);
+            PseudoClass donePseudoClass = PseudoClass.getPseudoClass(DONE_PSEUDO_CLASS);
             name.pseudoClassStateChanged(donePseudoClass, true);
             cardPane.pseudoClassStateChanged(donePseudoClass, true);
         }
     }
 
+    private void registerCard() {
+        EventsCenter.getInstance().registerHandler(this);
+    }
+
     private void setPriority(ReadOnlyTask task) {
         String priorityText = task.getPriority().value;
         priority.setText(priorityText);
+        switch (priorityText) {
+        case Priority.HIGH_LABEL:
+            PseudoClass donePseudoClass = PseudoClass.getPseudoClass(Priority.HIGH_LABEL);
+            priority.pseudoClassStateChanged(donePseudoClass, true);
+            break;
+        case Priority.MEDIUM_LABEL:
+            PseudoClass mediumPseudoClass = PseudoClass.getPseudoClass(Priority.MEDIUM_LABEL);
+            priority.pseudoClassStateChanged(mediumPseudoClass, true);
+            break;
+        case Priority.LOW_LABEL:
+            PseudoClass lowPseudoClass = PseudoClass.getPseudoClass(Priority.LOW_LABEL);
+            priority.pseudoClassStateChanged(lowPseudoClass, true);
+            break;
+        }
     }
 
     private void setDate(ReadOnlyTask task) {
@@ -83,10 +117,30 @@ public class TaskCard extends UiPart<Region> {
             description.setText(descriptionText);
         } else {
             description.setText("");
+            descriptionBox.setMaxHeight(0);
+            description.setMaxHeight(0);
         }
     }
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    @Subscribe
+    private void handleSelectTaskEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        String prefix = event.taskType.toString();
+        String cardPrefixId = prefix + (event.targetIndex + 1);
+        if (prefixId.equals(cardPrefixId)) {
+            PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
+            cardPane.pseudoClassStateChanged(selectedPseudoClass, true);
+        }
+    }
+
+    @Subscribe
+    private void handleDeselectCard(DeselectCardsEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
+        cardPane.pseudoClassStateChanged(selectedPseudoClass, false);
     }
 }

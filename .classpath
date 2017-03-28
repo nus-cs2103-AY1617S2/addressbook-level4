@@ -20,9 +20,7 @@
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="/Users/liheng/.gradle/caches/modules-2/files-2.1/com.joestelmach/natty/0.12/dd404d4e27fe087c07d29acb8f7050371ad5eb4e/natty-0.12.jar" sourcepath="/Users/liheng/.gradle/caches/modules-2/files-2.1/com.joestelmach/natty/0.12/3a03d3ebce619aa03147af0da9605eacd6155905/natty-0.12-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/liheng/.gradle/caches/modules-2/files-2.1/backport-util-concurrent/backport-util-concurrent/3.1/682f7ac17fed79e92f8e87d8455192b63376347b/backport-util-concurrent-3.1.jar" sourcepath="/Users/liheng/.gradle/caches/modules-2/files-2.1/backport-util-concurrent/backport-util-concurrent/3.1/eff8366924cf1a666dd20aa632febf1c2c05b8cb/backport-util-concurrent-3.1-sources.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

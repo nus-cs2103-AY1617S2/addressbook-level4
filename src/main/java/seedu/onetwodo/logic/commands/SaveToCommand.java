@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import seedu.onetwodo.MainApp;
 import seedu.onetwodo.commons.core.Config;
-import seedu.onetwodo.commons.core.EventsCenter;
-import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
 import seedu.onetwodo.commons.util.ConfigUtil;
 import seedu.onetwodo.commons.util.FileUtil;

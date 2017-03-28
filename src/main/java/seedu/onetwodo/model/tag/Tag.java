@@ -1,6 +1,5 @@
 package seedu.onetwodo.model.tag;
 
-
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
 /**

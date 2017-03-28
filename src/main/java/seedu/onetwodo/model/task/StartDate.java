@@ -1,6 +1,5 @@
 package seedu.onetwodo.model.task;
 
-
 import java.time.LocalDateTime;
 import java.util.Optional;
 
