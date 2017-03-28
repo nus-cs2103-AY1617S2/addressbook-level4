@@ -78,7 +78,7 @@ Format: `sort by SORTCRITERIA`
 ### 2.6. Editing a task : `edit`
 
 Edits an existing task in the list.<br>
-Format: `edit INDEX NEWDESCRIPTION PARAMETER1/VALUE1 PARAMETER2/VALUE2 ...` <br>
+Format: `edit INDEX [NEW_TASK_DESCRIPTION] [PARAMETER1/VALUE1] [PARAMETER2/VALUE2] ...` <br>
 
 > * Edits the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
 > * New description must follow index if necessary
@@ -86,6 +86,9 @@ Format: `edit INDEX NEWDESCRIPTION PARAMETER1/VALUE1 PARAMETER2/VALUE2 ...` <br>
 > * Existing value will be updated to the input value.
 > * Existing value removed if no value follow parameter
 > * Can update multiple parameters in one command (see examples below)
+> * New values must be different from existing value
+> * At least one propertiy (task description, due date, start date, etc) must be specified
+> * If a task does not have a start and end time, both start and end times must be edited at the same time
 
 Examples:
 
@@ -146,10 +149,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find milk`<br>
+  Returns `Buy milk` but not `Milk`
+* `find home school hipri`<br>
+  Returns Any task having description or tag `home`, `school`, or `hipri`
 
 ### 2.11. Undo : `undo`
 
