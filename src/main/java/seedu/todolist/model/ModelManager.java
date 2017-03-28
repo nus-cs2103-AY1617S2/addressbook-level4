@@ -93,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    //@@author A0141647E
     public synchronized void completeTask(int filteredTaskListIndex, Task target) throws TaskNotFoundException {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.completeTask(toDoListIndex, target);
@@ -200,11 +201,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate((Predicate<? super Task>) task -> {
             return isUpcoming(task);
         });
-        System.out.println(filteredTasks);
-        SortedList<Task> sortedList = new SortedList<Task>(filteredTasks, dateComparator);
-        System.out.println(sortedList);
         indicateViewListChanged(ListCommand.TYPE_UPCOMING);
-        return new UnmodifiableObservableList<>(sortedList);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     private boolean isUpcoming(Task task) {
@@ -224,25 +222,6 @@ public class ModelManager extends ComponentManager implements Model {
             return false;
         }
     }
-
-    //Comparator for Date
-    //@@author A0139633B
-    Comparator<? super Task> dateComparator = new Comparator<Task>() {
-        @Override
-        public int compare(Task firstTask, Task secondTask) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy h.mm a");
-            String firstTaskDueDateString = firstTask.getEndTime().toString();
-            String secondTaskDueDateString = secondTask.getEndTime().toString();
-            try {
-                Date firstTaskDueDate = dateFormat.parse(firstTaskDueDateString);
-                Date secondTaskDueDate = dateFormat.parse(secondTaskDueDateString);
-                return firstTaskDueDate.compareTo(secondTaskDueDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                return 0; //dummy value
-            }
-        }
-    };
 
     @Override
     public void updateFilteredListToShowAll() {

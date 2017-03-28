@@ -64,12 +64,9 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, editedTask);
     }
 
+    //@@author A0141647E
     /**
-     * Updates the task in the list at position {@code index} with {@code editedTask}.
-     *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     * Add a description to the task in the list at position {@code index} using {@code editedTask}.
      */
     public void describeTask(int index, Task editedTask) {
         assert editedTask != null;
@@ -77,6 +74,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, editedTask);
     }
 
+    //@@author A0141647E
     /*
      * Mark the targeted Task as completed.
      *

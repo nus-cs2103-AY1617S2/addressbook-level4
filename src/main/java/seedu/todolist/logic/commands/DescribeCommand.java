@@ -7,8 +7,10 @@ import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.parser.TaskParser;
 
+//@@author A0141647E
 /*
  * Add/modify the description of a task in the to-do list.
+ * @@author A0141647E
  */
 public class DescribeCommand extends Command {
     public static final String COMMAND_WORD = "describe";

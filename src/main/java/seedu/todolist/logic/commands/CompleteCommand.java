@@ -7,6 +7,7 @@ import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0141647E
 /**
  * Mark a Task as completed using its last displayed index from the ToDoList
  */

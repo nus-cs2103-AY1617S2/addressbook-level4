@@ -22,18 +22,18 @@ import seedu.todolist.model.task.StartTask;
 import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
 
+//@@author A0141647E
 /*
- * Parse input into a suitable type of Task
- * @@author A0141647E
+ * Parse input into a suitable type of Task.
  */
 public class TaskParser {
 
     public static final String MESSAGE_INVALID_TASK = "Name must be present";
 
+    //@@author A0141647E
     /**
      * Parses the given {@code String} of input that contains parameters
      * of a Task object and calls the suitable TaskParser based on the parameters.
-     * @@author A0141647E
      */
     public static Task parseTask(String taskInput) throws IllegalValueException {
         ArgumentTokenizer argsTokenizer =
@@ -76,11 +76,11 @@ public class TaskParser {
         }
     }
 
+    //@@author A0141647E
     /*
      * An overloaded method that takes in a Name object,
      * a StartTime object, an EndTime object and a set of Tags
      * and create a suitable Task object.
-     * @@author A0141647E
      */
     public static Task parseTask(Name name, StartTime startTime,
             EndTime endTime, UniqueTagList uniqueTagList) {
@@ -97,12 +97,12 @@ public class TaskParser {
         }
     }
 
+    //@@author A0141647E
     /*
      * An overloaded method that takes in a Name object,
      * a StartTime object, an EndTime object, a set of Tags
      * and a completion status
      * and create a suitable Task object.
-     * @@author A0141647E
      */
     public static Task parseTask(Name name, StartTime startTime,
             EndTime endTime, UniqueTagList uniqueTagList,
@@ -124,10 +124,10 @@ public class TaskParser {
         return resultTask;
     }
 
+    //@@author A0141647E
     /*
      * Another overloaded method that takes in a Task object
      * and create a copy of it.
-     * @@author A0141647E
      */
     public static Task parseTask(Task taskToCopy) {
         assert taskToCopy != null;

@@ -2,9 +2,9 @@ package seedu.todolist.model.task;
 
 import seedu.todolist.model.tag.UniqueTagList;
 
+//@@author A0141647E
 /**
  * Represents a Task in the To-do list.
- * @@author A0141647E.
  */
 public abstract class Task {
 

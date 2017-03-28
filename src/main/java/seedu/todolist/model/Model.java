@@ -24,6 +24,7 @@ public interface Model {
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /** Mark the given task as completed */
+    //@@author A0141647E
     void completeTask(int filteredTaskListIndex, Task targetTask)
             throws UniqueTaskList.TaskNotFoundException;
 
@@ -41,6 +42,7 @@ public interface Model {
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
+    //@@author A0141647E
     void describeTask(int filteredTaskListIndex, Task editedTask);
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */

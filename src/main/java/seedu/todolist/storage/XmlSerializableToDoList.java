@@ -27,7 +27,7 @@ public class XmlSerializableToDoList implements ReadOnlyToDoList {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableToDoList.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableToDoList() {
@@ -46,16 +46,16 @@ public class XmlSerializableToDoList implements ReadOnlyToDoList {
 
     @Override
     public ObservableList<Task> getTaskList() {
-        final ObservableList<Task> persons = this.tasks.stream().map(p -> {
+        final ObservableList<Task> tasks = this.tasks.stream().map(task -> {
             try {
-                return p.toModelType();
+                return task.toModelType();
             } catch (IllegalValueException e) {
                 e.printStackTrace();
                 //TODO: better error handling
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(persons);
+        return new UnmodifiableObservableList<>(tasks);
     }
 
     @Override

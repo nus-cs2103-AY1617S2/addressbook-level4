@@ -5,6 +5,10 @@ import java.util.Objects;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.model.tag.UniqueTagList;
 
+//@@author A0141647E
+/*
+ * Represent a Task with an EndTime but no specified StartTime
+ */
 public class EndTask extends Task {
 
     private static final String TYPE = "EndTask";

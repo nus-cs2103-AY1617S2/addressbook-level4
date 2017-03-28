@@ -5,6 +5,10 @@ import java.util.Objects;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.model.tag.UniqueTagList;
 
+//@@author A0141647E
+/*
+ * Represent a Task with no specified StartTime and EndTime.
+ */
 public class FloatingTask extends Task {
 
     private static final String TYPE = "FloatingTask";

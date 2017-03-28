@@ -9,9 +9,9 @@ import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.DescribeCommand;
 import seedu.todolist.logic.commands.IncorrectCommand;
 
+//@@author A0141647E
 /*
  * Parse input arguments and return a new DescribeCommand object.
- * @@author A0141647E
  */
 public class DescribeCommandParser {
 

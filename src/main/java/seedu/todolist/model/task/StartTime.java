@@ -7,10 +7,10 @@ import java.util.Date;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
 
+//@@author A0141647E
 /**
  * Represents a Task's start time in the to-do list.
  */
-
 public class StartTime implements Comparable<StartTime> {
 
     public static final String MESSAGE_STARTTIME_CONSTRAINTS =

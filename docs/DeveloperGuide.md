@@ -12,11 +12,11 @@ By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbs
 6. [Dev Ops](#6-dev-ops)
 7. [Appendices](#7-appendices)
 
-* [Appendix A : User Stories](#appendix-a--user-stories)
-* [Appendix B : Use Cases](#appendix-b--use-cases)
-* [Appendix C : Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D : Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A : User Stories](#appendix-a-:-user-stories)
+* [Appendix B : Use Cases](#appendix-b-:-use-cases)
+* [Appendix C : Non Functional Requirements](#appendix-c-:-non-functional-requirements)
+* [Appendix D : Glossary](#appendix-d-:-glossary)
+* [Appendix E : Product Survey](#appendix-e-:-product-survey)
 
 ## 1. Introduction
 

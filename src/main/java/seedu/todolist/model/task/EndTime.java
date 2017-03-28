@@ -7,10 +7,10 @@ import java.util.Date;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
 
+//@@author A0141647E
 /**
  * Represents a Task's end time in the to-do list.
  */
-
 public class EndTime implements Comparable<EndTime> {
 
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
