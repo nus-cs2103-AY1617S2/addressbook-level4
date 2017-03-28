@@ -27,6 +27,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+//@@author A0124377A
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         description.setText(task.getDescription().description);
@@ -39,7 +40,7 @@ public class TaskCard extends UiPart<Region> {
         if (task.getByTime().value != null) {
         	byTimeDate.setText("BY " + task.getByTime().value + " " + task.getByDate().value);
         } else {
-            byTimeDate.setText("BY " + task.getByDate().value);
+        	byTimeDate.setText(" ");
         }
 
         if (task.getLocation().value != null) {

@@ -140,7 +140,7 @@ public class CalendarPanel extends UiPart<Region>{
 	
 	private void setConnectionTask(List<ReadOnlyTask> taskList) {
 		taskList.stream()
-			.filter(task -> task.getByDate()!=null && !task.getStatus())
+			.filter(task -> task.getByDate().value!=null && !task.getStatus())
 			.collect(Collectors.toList())
 			.forEach(task -> agenda.appointments().add(calAdder.convertFromTask(task)));
 	}
