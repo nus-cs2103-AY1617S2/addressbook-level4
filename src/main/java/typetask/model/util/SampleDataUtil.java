@@ -12,12 +12,18 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Eat Breakfast"), new DueDate(""), new Time("")),
-                new Task(new Name("Eat Lunch"), new DueDate(""), new Time("")),
-                new Task(new Name("Eat Dinner"), new DueDate(""), new Time("")),
-                new Task(new Name("Read Harry Potter book 3"), new DueDate(""), new Time("")),
-                new Task(new Name("Wash shoe"), new DueDate(""), new Time("")),
-                new Task(new Name("Sweep floor"), new DueDate(""), new Time("")),
+                new Task(new Name("Eat Breakfast"), new DueDate(""), new DueDate(""),
+                        new Time(""), new Time(""), false),
+                new Task(new Name("Eat Lunch"), new DueDate(""), new DueDate(""),
+                        new Time(""), new Time(""), false),
+                new Task(new Name("Eat Dinner"), new DueDate(""), new DueDate(""),
+                        new Time(""), new Time(""), false),
+                new Task(new Name("Read Harry Potter book 3"), new DueDate(""), new DueDate(""),
+                        new Time(""), new Time(""), false),
+                new Task(new Name("Wash shoe"), new DueDate(""), new DueDate(""),
+                        new Time(""), new Time(""), false),
+                new Task(new Name("Sweep floor"), new DueDate(""), new DueDate(""),
+                        new Time(""), new Time(""), false),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

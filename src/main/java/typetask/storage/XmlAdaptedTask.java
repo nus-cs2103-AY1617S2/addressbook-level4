@@ -45,8 +45,17 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         date = source.getDate().value;
         time = source.getTime().value;
-        endDate = source.getEndDate().value;
-        endTime = source.getEndTime().value;
+        if (source.getEndDate() != null) {
+            endDate = source.getEndDate().value;
+        } else {
+            endDate = "";
+        }
+        if (source.getEndTime() != null) {
+            endTime = source.getEndTime().value;
+        } else {
+            endTime = "";
+        }
+
         isCompleted = source.getIsCompleted();
     }
 
