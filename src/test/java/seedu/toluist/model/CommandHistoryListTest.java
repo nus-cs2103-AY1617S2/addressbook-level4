@@ -47,7 +47,7 @@ public class CommandHistoryListTest {
         assertEquals(commandHistoryList.movePointerDown(), "");
         assertEquals(commandHistory.size(), 1);
     }
-    
+
     @Test
     public void testAddOneWithUnfinishedCommand() {
         CommandHistoryList commandHistoryList = new CommandHistoryList();
