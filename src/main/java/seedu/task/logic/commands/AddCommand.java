@@ -13,7 +13,6 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.RecurringFrequency;
-import seedu.task.model.task.RecurringTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
@@ -34,7 +33,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
-    private RecurringTask toAddRecur = null;
+    //    private RecurringTask toAddRecur = null;
 
     /**
      * Creates an AddCommand using raw values.
@@ -64,17 +63,6 @@ public class AddCommand extends Command {
                 new RecurringFrequency(recurFreq)
                 );
 
-        //        if (recurFreq != null) {
-        //            this.toAddRecur = new RecurringTask(
-        //                    description,
-        //                    pri,
-        //                    startTime,
-        //                    endTime,
-        //                    tagList,
-        //                    new RecurringFrequency(recurFreq)
-        //                    );
-        //    }
-
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
@@ -85,9 +73,6 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            //            if (toAddRecur != null) {
-            //                Model.recurringTaskList.add(toAddRecur);
-            //            }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

@@ -50,7 +50,7 @@ public class PersonCard extends UiPart<Region> {
 
         }
         if (task.isRecurring()) {
-            recurring.setText("Recurring Task");
+            recurring.setText("Recurring Task: " + task.getFrequency().toString());
             recurring.setStyle("-fx-background-color: pink;");
         } else {
             recurring.setText("");

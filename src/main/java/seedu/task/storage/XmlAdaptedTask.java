@@ -24,10 +24,6 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String priority;
-    //    @XmlElement(required = true)
-    //    private String startDate;
-    //    @XmlElement(required = true)
-    //    private String endDate;
     @XmlElement(required = true)
     private boolean recurring;
     @XmlElement(required = true)
@@ -54,8 +50,6 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
         priority = source.getPriority().value;
-        //        startDate = source.getStartTiming().value;
-        //        endDate = source.getEndTiming().value;
         recurring = source.isRecurring();
         frequency = source.getFrequency().toString();
         tagged = new ArrayList<>();
@@ -63,9 +57,6 @@ public class XmlAdaptedTask {
             tagged.add(new XmlAdaptedTag(tag));
         }
         occurrences = source.getOccurrences();
-        //        for (RecurringTaskOccurrence occurrence : source.getOccurrences()) {
-        //            occurrences.add(new XmlAdaptedOccurrence(occurrence));
-        //        }
     }
 
     /**
@@ -78,14 +69,8 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        //        final ArrayList<RecurringTaskOccurrence> taskOccurrences = new ArrayList<>();
-        //        for (XmlAdaptedOccurrence occurrence : occurrences) {
-        //            taskOccurrences.add(occurrence.toModelTypeOccurrence());
-        //        }
         final Description description = new Description(this.description);
         final Priority priority = new Priority(this.priority);
-        //        final Timing startDate = new Timing(this.startDate);
-        //        final Timing endDate = new Timing(this.endDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final RecurringFrequency frequency = new RecurringFrequency(this.frequency);
         return new Task(description, priority, occurrences, tags, recurring, frequency);

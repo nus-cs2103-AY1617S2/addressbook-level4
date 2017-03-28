@@ -8,17 +8,15 @@ public class RecurringTaskOccurrence {
     private Timing endTiming;
     private boolean complete;
 
-    public RecurringTaskOccurrence() {
-        this.startTiming = null;
-        this.endTiming = null;
-        this.complete = false;
-    }
-
     public RecurringTaskOccurrence(Timing startTime, Timing endTime){
         assert !CollectionUtil.isAnyNull(startTime, endTime);
         this.startTiming = startTime;
         this.endTiming = endTime;
         this.complete = false;
+    }
+
+    public RecurringTaskOccurrence() {
+        this(null, null);
     }
 
     public Timing getStartTiming() {

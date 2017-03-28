@@ -26,11 +26,6 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
-    //    @XmlElement
-    //    private List<XmlAdaptedTask> recurringTasks;
-    //    @XmlElement
-    //    private List<XmlAdaptedTag> recurringTags;
-
     /**
      * Creates an empty XmlSerializableTaskList.
      * This empty constructor is required for marshalling.
@@ -38,8 +33,6 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     public XmlSerializableTaskList() {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
-        //        recurringTasks = new ArrayList<>();
-        //        recurringTags = new ArrayList<>();
     }
 
     /**
@@ -49,8 +42,6 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
-        //        recurringTasks.addAll(recurringSrc.getRecurringTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
-        //        recurringTags.addAll(recurringSrc.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
