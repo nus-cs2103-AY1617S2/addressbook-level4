@@ -8,10 +8,12 @@ import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 /**
- * Represents an active task.
- * Guarantees: details are present and not null (just empty in <Optional>), field values are validated.
+ * Represents an active task. Guarantees: details are present and not null (just
+ * empty in <Optional>), field values are validated.
  */
 public class Task implements ReadOnlyTask {
+
+    public static final String TASK_FLAG = "t";
 
     private Name name;
     private Deadline deadline;
@@ -30,15 +32,15 @@ public class Task implements ReadOnlyTask {
         this.deadline = deadline;
         this.priority = priority;
         this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getPriority(),
-                source.getDescription(), source.getTags());
+        this(source.getName(), source.getDeadline(), source.getPriority(), source.getDescription(), source.getTags());
     }
 
     public void setTaskName(Name name) {
@@ -114,7 +116,7 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override

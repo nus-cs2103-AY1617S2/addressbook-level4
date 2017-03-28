@@ -10,13 +10,27 @@ import project.taskcrusher.model.shared.DateUtilApache;
  */
 public class Timeslot {
 
-    public static final String MESSAGE_TIMESLOT_CONSTRAINTS = "Start date must be before end date";
+    public static final String MESSAGE_TIMESLOT_RANGE = "Start date must be before end date";
     public static final String MESSAGE_TIMESLOT_CLASH = "Timeslot clashes with one or more pre-existing events";
+    public static final String MESSAGE_TIMESLOT_DNE = "One or more timeslots must be provided";
+    public static final String MESSAGE_TIMESLOT_PAIRS = "Timeslot must contain pair of dates";
 
     public static final boolean IS_LOADING_FROM_STORAGE = false;
+    public static final String NO_TIMESLOT = "";
 
     public final Date start;
     public final Date end;
+
+    public Timeslot(String end) throws IllegalValueException {
+        assert end != null;
+
+        this.start = new Date();
+        this.end = DateUtilApache.parseDate(end, true);
+
+        if (!isValidTimeslot(this.start, this.end)) {
+            throw new IllegalValueException(MESSAGE_TIMESLOT_RANGE);
+        }
+    }
 
     public Timeslot(String start, String end) throws IllegalValueException {
         assert start != null;
@@ -26,7 +40,7 @@ public class Timeslot {
         this.end = DateUtilApache.parseDate(end, true);
 
         if (!isValidTimeslot(this.start, this.end)) {
-            throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_TIMESLOT_RANGE);
         }
     }
 
@@ -38,15 +52,18 @@ public class Timeslot {
         this.end = DateUtilApache.parseDate(end, isNew);
 
         if (!isValidTimeslot(this.start, this.end, isNew)) {
-            throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_TIMESLOT_RANGE);
         }
     }
 
-    /**Checks if {@code another} has overlapping timeslot with this Timeslot object.
+    /**
+     * Checks if {@code another} has overlapping timeslot with this Timeslot
+     * object.
+     *
      * @param another
      * @return true if overlapping, false otherwise.
      */
-    public boolean isOverlapping (Timeslot another) {
+    public boolean isOverlapping(Timeslot another) {
         assert another != null;
         if (start.before(another.start) && end.after(another.start)) {
             return true;
@@ -87,8 +104,8 @@ public class Timeslot {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Timeslot // instanceof handles nulls
-                && this.start.equals(((Timeslot) other).start)
-                && this.end.equals(((Timeslot) other).end)); // state check
+                        && this.start.equals(((Timeslot) other).start)
+                        && this.end.equals(((Timeslot) other).end)); // state check
     }
 
 }

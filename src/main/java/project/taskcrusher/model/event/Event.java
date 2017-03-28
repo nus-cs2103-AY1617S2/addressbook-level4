@@ -9,6 +9,9 @@ import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 public class Event implements ReadOnlyEvent {
+
+    public static final String EVENT_FLAG = "e";
+
     private Name name;
     private List<Timeslot> timeslots;
     private Location location;
@@ -16,8 +19,7 @@ public class Event implements ReadOnlyEvent {
     private UniqueTagList tags;
     private boolean isPast;
 
-    public Event(Name name, List<Timeslot> timeslots, Location location,
-            Description description, UniqueTagList tags) {
+    public Event(Name name, List<Timeslot> timeslots, Location location, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, timeslots, location, description, tags);
 
         this.name = name;
@@ -28,8 +30,10 @@ public class Event implements ReadOnlyEvent {
         this.tags = new UniqueTagList(tags);
     }
 
-    /**Checks if any of the Timeslot object in the timeslots list has overlapping start and end date with
-     * {@code another}
+    /**
+     * Checks if any of the Timeslot object in the timeslots list has
+     * overlapping start and end date with {@code another}
+     *
      * @param another
      * @return true if overlapping, false otherwise
      */
@@ -47,8 +51,7 @@ public class Event implements ReadOnlyEvent {
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getName(), source.getTimeslots(), source.getLocation(),
-                source.getDescription(), source.getTags());
+        this(source.getName(), source.getTimeslots(), source.getLocation(), source.getDescription(), source.getTags());
     }
 
     public UniqueTagList getTags() {
@@ -73,9 +76,10 @@ public class Event implements ReadOnlyEvent {
     }
 
     public boolean isPast() {
-        //TODO: make this method take in a date object, and compare on the spot
+        // TODO: make this method take in a date object, and compare on the spot
         return this.isPast;
     }
+
     public void setEventName(Name name) {
         assert name != null;
         this.name = name;
@@ -97,7 +101,8 @@ public class Event implements ReadOnlyEvent {
     }
 
     public void setTags(UniqueTagList tags) {
-        this.tags.setTags(tags);;
+        this.tags.setTags(tags);
+        ;
     }
 
     public boolean isOverdue() {
@@ -107,7 +112,6 @@ public class Event implements ReadOnlyEvent {
     public void setOverdue(boolean toSet) {
         isPast = toSet;
     }
-
 
     public void resetData(ReadOnlyEvent replacement) {
         assert replacement != null;
@@ -123,12 +127,13 @@ public class Event implements ReadOnlyEvent {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyEvent // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyEvent) other));
+                        && this.isSameStateAs((ReadOnlyEvent) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(name, timeslots, location, description, tags);
     }
 
