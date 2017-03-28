@@ -1,3 +1,4 @@
+//@@author A0162011A
 package seedu.toluist.controller;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import seedu.toluist.model.CommandHistoryList;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
- * UnknownCommandController is responsible for rendering the initial UI
+ * NavigateHistoryController is responsible for handling cycling through previous commands
  */
 public class NavigateHistoryController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(NavigateHistoryController.class);
