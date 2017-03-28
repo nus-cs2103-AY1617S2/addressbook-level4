@@ -3,27 +3,26 @@
 
 By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp;
 
-1. [Introduction](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#introduction)
-2. [Quick Start](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#quick-start)
-3. [Features](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#features)
-   > 3.1. Help<br/>
-     3.2. Add tasks<br/>
-     3.3. List tasks<br/>
-     3.4. Find tasks<br/>
-     3.5. Edit tasks<br/>
-     3.6. Delete tasks<br/>
-     3.7. Mark tasks as complete<br/>
-     3.8. Mark tasks as incomplete<br/>
-     3.9. Undo<br/>
-     3.10. Redo<br/>
-     3.11. Select tasks<br/>
-     3.12. Reset<br/>
-     3.13. Save<br/>
-     3.14. Import<br/>
-     3.15. Export<br/>
-     3.16. Exit<br/>
-4. [FAQ](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#faq)
-5. [Command Summary](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#command-summary)
+1. [Introduction](#1-introduction)
+2. [Quick Start](#2-quick-start)
+3. [Features](#3-features)
+   > 3.1. [Help](#31-viewing-help--help)<br/>
+     3.2. [Add tasks](#32-adding-a-task--add)<br/>
+     3.3. [List tasks](#33-listing-all-tasks--list)<br/>
+     3.4. [Edit tasks](#34-editing-a-task--edit)<br/>
+     3.5. [Find tasks](#35-finding-all-tasks-containing-any-keyword-in-their-title--find)<br/>
+     3.6. [Delete tasks](#36-deleting-a-task--delete)<br/>
+     3.7. [Mark tasks as complete](#37-marking-a-task-as-complete--complete)<br/>
+     3.8. [Mark tasks as incomplete](#38-marking-a-task-as-incomplete--incomplete)<br/>
+     3.9. [Undo](#39-undo-the-previous-command--undo)<br/>
+     3.10. [Redo](#310-redo-a-command--redo)<br/>
+     3.11. [Select tasks](#311-selecting-a-task--select)<br/>
+     3.12. [Reset](#312-clearing-all-tasks--clear)<br/>
+     3.13. [Exit](#313-exiting-the-program--exit)<br/>
+     3.14. [Import](#314-importing-files-into-the-program--exit)<br/>
+     3.15. [Export](#315-saving-the-data)<br/>
+4. [FAQ](#4-faq)
+5. [Command Summary](#5-command-summary)
 
 # 1. Introduction
 
@@ -228,7 +227,7 @@ Examples:
 - `select 1`
    - Selects the 1st task in the results of the find command.
 
-### 3.12. Clearing all tasks : `clear`
+### 3.12. Clearing all tasks : `reset`
 
 Clears all tasks from the list.
 
@@ -252,11 +251,6 @@ All data are saved in the hard disk automatically after any command that changes
 
 There is no need to save manually.
 
-### 3.16. Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 # 4. FAQ
 
 Q: How do I transfer my data to another Computer?
