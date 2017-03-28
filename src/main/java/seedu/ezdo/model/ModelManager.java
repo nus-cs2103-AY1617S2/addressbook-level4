@@ -423,7 +423,7 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
-  //@@author  
+  //@@author
   //@@author A0139248X
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
