@@ -76,7 +76,7 @@ Examples:
 
 Lists all tasks that are currently in storage.
 
-### 2.3. Sort tasks : `sort`
+### 2.4. Sort tasks : `sort`
 
 Sorts the list of tasks currently being shown according to the keyword.<br>
 Format: `sort KEYWORD`
@@ -93,7 +93,7 @@ Examples:
 * `sort status` <br>
 Sorts the list of tasks according to status
 
-### 2.4. Editing a task : `edit`
+### 2.5. Editing a task : `edit`
 
 Edits an existing task in Opus.<br>
 Format: `edit INDEX [NAME] [n/NOTES] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
@@ -111,7 +111,7 @@ Examples:
 * `edit 1 Finish tutorial exercises`<br>
 Edits the name of the 1st task to `Finish tutorial exercises`.
 
-### 2.5. Mark task : `mark`
+### 2.6. Mark task : `mark`
 
 Marks task as complete.<br>
 Format: `mark [INDEX]...`
@@ -125,7 +125,7 @@ Examples:
 * `mark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as complete.
 
-### 2.6. Unmark task
+### 2.7. Unmark task
 
 Marks task as incomplete.<br>
 Format: `unmark INDEX...`
@@ -139,7 +139,7 @@ Examples:
 * `unmark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as incomplete.
 
-### 2.7. Schedule (Work in progress) : `schedule`
+### 2.8. Schedule (Work in progress) : `schedule`
 
 Set an event or a deadline.<br>
 Format: `schedule INDEX [STARTIME] ENDTIME`
@@ -153,7 +153,7 @@ Examples:
 * `schedule 6 12/05/2017-13:00 12/05/2017-15:00`<br>
 Set the start time as 1pm on May 12, 2017 and the end time as 3pm on May 12, 2017.
 
-### 2.8. Delete : `delete`
+### 2.9. Delete : `delete`
 
 Deletes an event or task.<br>
 Format: `delete INDEX`
@@ -163,28 +163,28 @@ Examples:
 * `delete 3`<br>
 Deletes task or event at index 3.
 
-### 2.9. Clear : `clear`
+### 2.10. Clear : `clear`
 
 Erases all data from Opus.<br>
 Format: `clear`
 
 > * Clears the entire user data including all tasks, events and user-defined tags.
 
-### 2.10. Undo : `undo`
+### 2.11. Undo : `undo`
 
 Undo the latest command.<br>
 Format: `undo`
 
 > * Reverts the change done by the previous command.
 
-### 2.11. Redo : `redo`
+### 2.12. Redo : `redo`
 
 Reverts the previous undo action.<br>
 Format: `redo`
 
 > * Reverts the change done by the previous undo action.
 
-### 2.12. Find : `find`
+### 2.13. Find : `find`
 
 Displays a list of tasks based on keywords and/or tags.<br>
 Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
@@ -192,7 +192,7 @@ Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
 
-### 2.13. Saving and loading data
+### 2.14. Saving and loading data
 
 Opus automatically saves all data that you have created. Every single change that you have made is tracked by Opus and you do not have to do anything to enable auto-saving. Your data will be loaded upon launching Opus, so you do not have to go through the saving-and-loading loop as with a normal text document.
 
@@ -200,7 +200,7 @@ By default, your user data is saved as `opus.xml` in the `/data` directory where
 
 Should you wish to, you can specify the directory of the saved data using the following command below.
 
-### 2.14. Specify data file directory : `save`
+### 2.15. Specify data file directory : `save`
 
 Saves all user data into a file in the specifed directory.
 Format: `save DIRECTORY`
@@ -210,14 +210,14 @@ Example:
 * `save C:/Users/Documents`
 Saves data into the specified directory.
 
-### 2.15. Autocomplete (Work in progress)
+### 2.16. Autocomplete (Work in progress)
 
 Autocomplete the user's command on the CLI.
 
 > * Example:
     User enters `f` and presses `TAB`, `find` command will appear in the input box.
 
-### 2.16. Exit : `exit`
+### 2.17. Exit : `exit`
 
 Closes Opus.
 > * All data is automatically saved by Opus upon quitting.
