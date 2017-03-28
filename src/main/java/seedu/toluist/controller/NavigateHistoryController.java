@@ -13,6 +13,8 @@ import seedu.toluist.ui.commons.CommandResult;
 public class NavigateHistoryController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(NavigateHistoryController.class);
     private static final String COMMAND_WORD = "navigatehistory";
+    private static final String UP_PARAMETER = "up";
+    private static final String DOWN_PARAMETER = "down";
     private static final String DIRECTION_PARAMETER = "direction";
     private static final String ERROR_MESSAGE = "Invalid Parameters for Navigate History command."
                                                  + "\nnavigatehistory (up/down)";
@@ -25,9 +27,9 @@ public class NavigateHistoryController extends Controller {
 
         String direction = tokens.get(DIRECTION_PARAMETER);
 
-        if (direction.equals("up")) {
+        if (direction.equals(UP_PARAMETER)) {
             showPreviousCommand(uiStore.getObservableCommandInput().getValue().getCommand());
-        } else if (direction.equals("down")) {
+        } else if (direction.equals(DOWN_PARAMETER)) {
             showNextCommand();
         } else { //error
             uiStore.setCommandResult(new CommandResult(ERROR_MESSAGE));
