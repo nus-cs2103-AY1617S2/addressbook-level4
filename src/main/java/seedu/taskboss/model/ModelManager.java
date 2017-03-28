@@ -30,6 +30,8 @@ import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+    private static final String CATEGORY_DONE = "Done";
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskBoss taskBoss;
@@ -130,6 +132,31 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
+    //@@author A0144904H
+    @Override
+    public void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
+                                                                        throws IllegalValueException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        int index = 0;
+        for (ReadOnlyTask task : tasksToMarkDone) {
+            int targetIndex = indices.get(index) - 1;
+            if (!task.isRecurring()) {
+                Task newTask = new Task(task.getName(), task.getPriorityLevel(),
+                        task.getStartDateTime(), task.getEndDateTime(),
+                        task.getInformation(), task.getRecurrence(),
+                        new UniqueCategoryList(CATEGORY_DONE));
+                this.taskBoss.updateTask(targetIndex, newTask);
+            } else {
+                Task newRecurredTask = createRecurredTask(task);
+                this.taskBoss.updateTask(targetIndex, newRecurredTask);
+            }
+            index++;
+        }
+
+        indicateTaskBossChanged();
+    }
+
+    //@@author A0143157J
     @Override
     public void renameCategory(Category oldCategory, Category newCategory)
             throws IllegalValueException, CommandException, DuplicateCategoryException {
@@ -184,6 +211,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         removeCategoryFromTaskboss(oldCategory);
         indicateTaskBossChanged();
+    }
+
+    /**
+     * Returns a new recurred task with updated task dates according to the recurrence
+     * of the given task
+     */
+    private Task createRecurredTask(ReadOnlyTask taskToMarkDone) throws IllegalValueException {
+        Task newRecurredTask = new Task(taskToMarkDone);
+        newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+        return newRecurredTask;
     }
 
     //@@author A0144904H
@@ -381,5 +418,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "category=" + categoryKeyWords.categoryName;
         }
     }
-
 }

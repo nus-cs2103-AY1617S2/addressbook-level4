@@ -1,5 +1,6 @@
 package seedu.taskboss.model;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Set;
@@ -85,5 +86,7 @@ public interface Model {
      * @throws CommandException */
     void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException,
         DuplicateCategoryException;
+
+    void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException;
 
 }
