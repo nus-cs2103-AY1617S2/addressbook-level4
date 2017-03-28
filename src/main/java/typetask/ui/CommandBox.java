@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import typetask.commons.core.LogsCenter;
 import typetask.commons.events.ui.NewResultAvailableEvent;
+import typetask.commons.exceptions.DataConversionException;
 import typetask.commons.util.FxViewUtil;
 import typetask.logic.Logic;
 import typetask.logic.commands.CommandResult;
@@ -39,7 +40,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     @FXML
-    private void handleCommandInputChanged() throws IOException {
+    private void handleCommandInputChanged() throws IOException, DataConversionException {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 

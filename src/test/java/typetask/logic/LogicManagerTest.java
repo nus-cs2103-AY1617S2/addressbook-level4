@@ -26,6 +26,7 @@ import typetask.commons.core.EventsCenter;
 import typetask.commons.events.model.TaskManagerChangedEvent;
 import typetask.commons.events.ui.JumpToListRequestEvent;
 import typetask.commons.events.ui.ShowHelpRequestEvent;
+import typetask.commons.exceptions.DataConversionException;
 import typetask.logic.commands.AddCommand;
 import typetask.logic.commands.ClearCommand;
 import typetask.logic.commands.Command;
@@ -100,7 +101,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalid() throws IOException {
+    public void execute_invalid() throws IOException, DataConversionException {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
@@ -109,11 +110,13 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
      * Also confirms that both the 'task manager' and the 'last shown list' are as specified.
      * @throws IOException
+     * @throws DataConversionException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
                                       ReadOnlyTaskManager expectedTaskManager,
-                                      List<? extends ReadOnlyTask> expectedShownList) throws IOException {
+                                      List<? extends ReadOnlyTask> expectedShownList) throws IOException,
+                                                                                             DataConversionException {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
@@ -121,9 +124,11 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'task manager' and the 'last shown list' are verified to be unchanged.
      * @throws IOException
+     * @throws DataConversionException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IOException {
+    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IOException,
+                                                                                          DataConversionException {
         TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
@@ -137,10 +142,12 @@ public class LogicManagerTest {
      *      - the backing list shown by UI matches the {@code shownList} <br>
      *      - {@code expectedTaskManager} was saved to the storage file. <br>
      * @throws IOException
+     * @throws DataConversionException
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyTaskManager expectedTaskManager,
-                                       List<? extends ReadOnlyTask> expectedShownList) throws IOException {
+                                       List<? extends ReadOnlyTask> expectedShownList) throws IOException,
+                                                                                              DataConversionException {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -160,19 +167,19 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unknownCommandWord() throws IOException {
+    public void execute_unknownCommandWord() throws IOException, DataConversionException {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_help() throws IOException {
+    public void execute_help() throws IOException, DataConversionException {
         assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
-    public void execute_exit() throws IOException {
+    public void execute_exit() throws IOException, DataConversionException {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskManager(), Collections.emptyList());
     }
@@ -334,7 +341,7 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_find_invalidArgsFormat() throws IOException {
+    public void execute_find_invalidArgsFormat() throws IOException, DataConversionException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }
