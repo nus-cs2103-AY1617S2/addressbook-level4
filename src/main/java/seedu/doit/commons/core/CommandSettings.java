@@ -7,18 +7,19 @@ import java.io.Serializable;
 import seedu.doit.logic.commands.AddCommand;
 import seedu.doit.logic.commands.ClearCommand;
 import seedu.doit.logic.commands.DeleteCommand;
-import seedu.doit.logic.commands.DoneCommand;
 import seedu.doit.logic.commands.EditCommand;
 import seedu.doit.logic.commands.ExitCommand;
 import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.MarkCommand;
 import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.SetCommand;
 import seedu.doit.logic.commands.SortCommand;
 import seedu.doit.logic.commands.UndoCommand;
+import seedu.doit.logic.commands.UnmarkCommand;
 import seedu.doit.logic.commands.exceptions.CommandExistedException;
 import seedu.doit.logic.commands.exceptions.NoSuchCommandException;
 
@@ -28,7 +29,7 @@ public class CommandSettings implements Serializable {
     private String add;
     private String delete;
     private String edit;
-    private String done;
+    private String mark;
     private String clear;
     private String exit;
     private String find;
@@ -39,6 +40,7 @@ public class CommandSettings implements Serializable {
     private String select;
     private String sort;
     private String undo;
+    private String unmark;
     private String set;
 
     private static CommandSettings instance = null;
@@ -54,7 +56,7 @@ public class CommandSettings implements Serializable {
         this.add = AddCommand.COMMAND_WORD;
         this.delete = DeleteCommand.COMMAND_WORD;
         this.edit = EditCommand.COMMAND_WORD;
-        this.done = DoneCommand.COMMAND_WORD;
+        this.mark = MarkCommand.COMMAND_WORD;
         this.clear = ClearCommand.COMMAND_WORD;
         this.exit = ExitCommand.COMMAND_WORD;
         this.find = FindCommand.COMMAND_WORD;
@@ -65,16 +67,17 @@ public class CommandSettings implements Serializable {
         this.select = SelectCommand.COMMAND_WORD;
         this.sort = SortCommand.COMMAND_WORD;
         this.undo = UndoCommand.COMMAND_WORD;
+        this.unmark = UnmarkCommand.COMMAND_WORD;
         this.set = SetCommand.COMMAND_WORD;
     }
 
-    public void setCommandSettings(String add, String delete, String edit, String done, String clear, String exit,
+    public void setCommandSettings(String add, String delete, String edit, String mark, String clear, String exit,
             String find, String help, String list, String redo, String save, String select, String sort, String undo,
-            String set) {
+            String unmark, String set) {
         this.add = add;
         this.delete = delete;
         this.edit = edit;
-        this.done = done;
+        this.mark = mark;
         this.clear = clear;
         this.exit = exit;
         this.find = find;
@@ -85,6 +88,7 @@ public class CommandSettings implements Serializable {
         this.select = select;
         this.sort = sort;
         this.undo = undo;
+        this.unmark = unmark;
         this.set = set;
     }
 
@@ -101,8 +105,12 @@ public class CommandSettings implements Serializable {
         return this.edit;
     }
 
-    public String getDone() {
-        return this.done;
+    public String getMark() {
+        return this.mark;
+    }
+
+    public String getUnmark() {
+        return this.unmark;
     }
 
     public String getClear() {
@@ -166,8 +174,12 @@ public class CommandSettings implements Serializable {
         this.edit = edit;
     }
 
-    public void setDone(String done) {
-        this.done = done;
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
+    public void setUnmark(String unmark) {
+        this.unmark = unmark;
     }
 
     public void setClear(String clear) {
@@ -224,8 +236,10 @@ public class CommandSettings implements Serializable {
             setEdit(newCommand);
         } else if (SelectCommand.COMMAND_WORD.equals(oldCommand) || this.select.equals(oldCommand)) {
             setSelect(newCommand);
-        } else if (DoneCommand.COMMAND_WORD.equals(oldCommand) || this.done.equals(oldCommand)) {
-            setDone(newCommand);
+        } else if (MarkCommand.COMMAND_WORD.equals(oldCommand) || this.mark.equals(oldCommand)) {
+            setMark(newCommand);
+        } else if (UnmarkCommand.COMMAND_WORD.equals(oldCommand) || this.unmark.equals(oldCommand)) {
+            setUnmark(newCommand);
         } else if (SortCommand.COMMAND_WORD.equals(oldCommand) || this.sort.equals(oldCommand)) {
             setSort(newCommand);
         } else if (DeleteCommand.COMMAND_WORD.equals(oldCommand) || this.delete.equals(oldCommand)) {
@@ -259,7 +273,8 @@ public class CommandSettings implements Serializable {
         case AddCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD:
         case SelectCommand.COMMAND_WORD:
-        case DoneCommand.COMMAND_WORD:
+        case MarkCommand.COMMAND_WORD:
+        case UnmarkCommand.COMMAND_WORD:
         case SortCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_WORD:
@@ -274,10 +289,11 @@ public class CommandSettings implements Serializable {
             return true;
         }
         if (this.add.equals(command) || this.delete.equals(command) || this.edit.equals(command)
-                || this.done.equals(command) || this.clear.equals(command) || this.exit.equals(command)
+                || this.mark.equals(command) || this.clear.equals(command) || this.exit.equals(command)
                 || this.find.equals(command) || this.help.equals(command) || this.list.equals(command)
                 || this.redo.equals(command) || this.save.equals(command) || this.select.equals(command)
-                || this.set.equals(command) || this.sort.equals(command) || this.undo.equals(command)) {
+                || this.set.equals(command) || this.sort.equals(command) || this.undo.equals(command)
+                || this.unmark.equals(command)) {
             return true;
         }
         return false;
@@ -290,7 +306,7 @@ public class CommandSettings implements Serializable {
         result = (prime * result) + ((this.add == null) ? 0 : this.add.hashCode());
         result = (prime * result) + ((this.clear == null) ? 0 : this.clear.hashCode());
         result = (prime * result) + ((this.delete == null) ? 0 : this.delete.hashCode());
-        result = (prime * result) + ((this.done == null) ? 0 : this.done.hashCode());
+        result = (prime * result) + ((this.mark == null) ? 0 : this.mark.hashCode());
         result = (prime * result) + ((this.edit == null) ? 0 : this.edit.hashCode());
         result = (prime * result) + ((this.exit == null) ? 0 : this.exit.hashCode());
         result = (prime * result) + ((this.find == null) ? 0 : this.find.hashCode());
@@ -302,6 +318,7 @@ public class CommandSettings implements Serializable {
         result = (prime * result) + ((this.set == null) ? 0 : this.set.hashCode());
         result = (prime * result) + ((this.sort == null) ? 0 : this.sort.hashCode());
         result = (prime * result) + ((this.undo == null) ? 0 : this.undo.hashCode());
+        result = (prime * result) + ((this.unmark == null) ? 0 : this.unmark.hashCode());
         return result;
     }
 
@@ -338,11 +355,11 @@ public class CommandSettings implements Serializable {
         } else if (!this.delete.equals(other.delete)) {
             return false;
         }
-        if (this.done == null) {
-            if (other.done != null) {
+        if (this.mark == null) {
+            if (other.mark != null) {
                 return false;
             }
-        } else if (!this.done.equals(other.done)) {
+        } else if (!this.mark.equals(other.mark)) {
             return false;
         }
         if (this.edit == null) {
@@ -422,6 +439,13 @@ public class CommandSettings implements Serializable {
         } else if (!this.undo.equals(other.undo)) {
             return false;
         }
+        if (this.unmark == null) {
+            if (other.unmark != null) {
+                return false;
+            }
+        } else if (!this.unmark.equals(other.unmark)) {
+            return false;
+        }
         return true;
     }
 
@@ -431,7 +455,7 @@ public class CommandSettings implements Serializable {
         sb.append("Add : " + this.add + "\n");
         sb.append("Delete : " + this.delete + "\n");
         sb.append("Edit : " + this.edit + "\n");
-        sb.append("Done : " + this.done + "\n");
+        sb.append("Mark : " + this.mark + "\n");
         sb.append("Clear : " + this.clear + "\n");
         sb.append("Exit : " + this.exit + "\n");
         sb.append("Find : " + this.find + "\n");
@@ -443,6 +467,7 @@ public class CommandSettings implements Serializable {
         sb.append("Set : " + this.set + "\n");
         sb.append("Sort : " + this.sort + "\n");
         sb.append("Undo : " + this.undo);
+        sb.append("Unmark : " + this.unmark);
         return sb.toString();
     }
 
