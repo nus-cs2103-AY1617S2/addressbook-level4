@@ -156,15 +156,29 @@ Examples:
 Undoes the previous action. This command will return the program to the state it was in before the previous action was executed<br>
 Format: `undo`
 
-### 2.12. Exiting the program : `exit`
+### 2.12. Redo : `redo`
+
+Re-executes the previously undo action. This command will return the program to the state it was in before the previous undo was executed<br>
+Format: `redo`
+
+### 2.13. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.13. Saving the data
+### 2.14. Saving the data
 
 DoTomorrow data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.15. Changing storage file path: `setstorage`
+
+Change storage path to user speciifed path<br>
+Format: `setstorage PATH`
+
+Example:
+
+* `setstorage /Users/Jim/Documents` will store the to-do list file to `/Users/Jim/Documents`
 
 ## 3. FAQ
 
@@ -220,6 +234,12 @@ There is no need to save manually.
 
 * **Undo**: `undo` <br>
   e.g. `undo`
+
+* **Redo**: `redo` <br>
+  e.g. `redo`
+
+* **Set storage path**: `setstorage PATH` <br>
+  e.g. `setstorage /Users/Jim/Documents`
 
 * **Exit**: `exit` <br>
   e.g. `exit`
