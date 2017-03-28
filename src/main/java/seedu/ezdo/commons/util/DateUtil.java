@@ -10,6 +10,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
  * Checks for dates
  */
 public class DateUtil {
+
     public static boolean isTaskDateValid(ReadOnlyTask task) throws ParseException {
         assert task != null;
         if (task.getStartDate().toString().isEmpty() || task.getDueDate().toString().isEmpty()) {
@@ -33,7 +34,7 @@ public class DateUtil {
         Date date1 = null;
         Date date2 = null;
 
-        // empty dates are considered lower in value so that they show at the bottom of the list
+        // empty dates are always considered lower in value so that they show at the bottom of the list
         if (dateString1.isEmpty() && dateString2.isEmpty()) {
             return 0;
         } else if (dateString1.isEmpty()) {
@@ -51,4 +52,5 @@ public class DateUtil {
         int result = date1.compareTo(date2);
         return isSortedAscending ? result : -result;
     }
+
 }
