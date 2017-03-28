@@ -5,7 +5,6 @@ import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Optional;
 
-import seedu.ezdo.commons.exceptions.InvalidSortOrderException;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.SortCommand;
@@ -37,19 +36,14 @@ public class SortCommandParser implements CommandParser {
             return new IncorrectCommand(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
-
         String[] sortArguments = sortArgumentsField.get();
         String sortCriteriaArgument = sortArguments[INDEX_OF_SORT_CRITERIA];
         String sortOrderArgument = sortArguments[INDEX_OF_SORT_ORDER];
 
-        SortCriteria sortCriteria;
-        Boolean isSortedAscending;
-
-        sortCriteria = getSortCriteria(sortCriteriaArgument);
-        isSortedAscending = checkIfSortedAscending(sortOrderArgument);
+        SortCriteria sortCriteria = getSortCriteria(sortCriteriaArgument);
+        Boolean isSortedAscending = checkIfSortedAscending(sortOrderArgument);
 
         return new SortCommand(sortCriteria, isSortedAscending);
-
     }
 
     private SortCriteria getSortCriteria(String sortCriteriaArgument) {
@@ -76,21 +70,17 @@ public class SortCommandParser implements CommandParser {
     private Boolean checkIfSortedAscending(String sortOrderArgument) {
         Boolean isSortedAscending;
         if (sortOrderArgument == null) {
-            // If no sort order was specified, default to ascending sort order.
+            // If no sort order was specified, then default to ascending sort order.
             isSortedAscending = true;
         } else {
-            try {
-                switch(sortOrderArgument) {
-                case KEYWORD_ASCENDING:
-                    isSortedAscending = true;
-                    break;
-                case KEYWORD_DESCENDING:
-                    isSortedAscending = false;
-                    break;
-                default:
-                    throw new InvalidSortOrderException();
-                }
-            } catch (InvalidSortOrderException isoe) {
+            switch(sortOrderArgument) {
+            case KEYWORD_ASCENDING:
+                isSortedAscending = true;
+                break;
+            case KEYWORD_DESCENDING:
+                isSortedAscending = false;
+                break;
+            default:
                 isSortedAscending = null;
             }
         }
