@@ -177,10 +177,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(ArrayList<Object> listToCompare, boolean startBefore,
-            boolean dueBefore, boolean startAfter, boolean dueAfter) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(listToCompare,
-                startBefore, dueBefore, startAfter, dueAfter)));
+    public void updateFilteredTaskList(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(listToCompare, searchIndicatorList)));
     }
 
     @Override
@@ -281,17 +279,16 @@ public class ModelManager extends ComponentManager implements Model {
         private boolean startAfter;
         private boolean dueAfter;
 
-        NameQualifier(ArrayList<Object> listToCompare, boolean startBefore,
-                boolean dueBefore, boolean startAfter, boolean dueAfter) {
+        NameQualifier(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
             this.nameKeyWords = (Set<String>) listToCompare.get(0);
             this.priority = (Optional<Priority>) listToCompare.get(1);
             this.startDate = (Optional<StartDate>) listToCompare.get(2);
             this.dueDate = (Optional<DueDate>) listToCompare.get(3);
             this.tags = (Set<String>) listToCompare.get(4);
-            this.startBefore = startBefore;
-            this.dueBefore = dueBefore;
-            this.startAfter = startAfter;
-            this.dueAfter = dueAfter;
+            this.startBefore = searchIndicatorList.get(0);
+            this.dueBefore = searchIndicatorList.get(1);
+            this.startAfter = searchIndicatorList.get(2);
+            this.dueAfter = searchIndicatorList.get(3);
 
         }
 
