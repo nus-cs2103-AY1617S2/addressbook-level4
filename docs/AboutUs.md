@@ -6,9 +6,17 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Joseph Tang](http://www.comp.nus.edu.sg/~damithch) <br>
 <img src="images/JTLX.png" width="150"><br>
-Role: Developer <br>
-Responsibilities: Team Lead, Version Control
 
+* Components in charge of: [Logic](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/DeveloperGuide.md#33-logic)
+* Aspects/tools in charge of: Team Lead, Version Control
+* Features implemented:
+   * [Sort command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#35-sorting-a-list-of-tasks-sort--s)
+   * [Alias command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#312-aliasing-a-command-alias)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/main/A0138907W.md)][[test code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/test/A0138907W.md)]
+* Other major contributions:
+   * Taking care of administrative tasks (e.g. milestones, issues, and tagging).
+   * Doing regular reviews of teammates' pull requests.
+   
 -----
 
 #### [Loh Zi Bin, Robin](http://github.com/robinloh)
