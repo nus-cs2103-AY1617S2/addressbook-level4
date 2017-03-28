@@ -53,15 +53,7 @@ public class RenameCategoryCommand extends Command {
         Category newCategory = new Category(this.newCategory);
 
         try {
-            if (oldCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
-                throw new DefaultCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
-            } else if (oldCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
-                throw new DefaultCategoryException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
-            } else if (newCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
-                throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
-            } else if (newCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
-                throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
-            } else {
+            detectErrors(oldCategory, newCategory);
                 try {
                     model.renameCategory(oldCategory, newCategory);
                     model.updateFilteredTaskListByCategory(newCategory);
@@ -69,7 +61,7 @@ public class RenameCategoryCommand extends Command {
                 } catch (UniqueCategoryList.DuplicateCategoryException e) {
                     return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
                 }
-            }
+
         } catch (DefaultCategoryException dce) {
             if (dce.getMessage().equals(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME)) {
                 throw new CommandException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
@@ -83,6 +75,26 @@ public class RenameCategoryCommand extends Command {
         }
 
 
+    }
+
+    //@@author A0144904H
+    /**
+     * @param oldCategory
+     * @param newCategory
+     * @throws IllegalValueException
+     * @throws DefaultCategoryException
+     */
+    private void detectErrors(Category oldCategory, Category newCategory)
+            throws IllegalValueException, DefaultCategoryException {
+        if (oldCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
+            throw new DefaultCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
+        } else if (oldCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
+            throw new DefaultCategoryException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
+        } else if (newCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
+            throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
+        } else if (newCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
+            throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
+        }
     }
 
 }
