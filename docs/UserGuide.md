@@ -93,7 +93,6 @@ _Format:_
 
 `list overdue`
 > Lists incomplete tasks with deadlines that have already passed
-> 
 
 ## 3.1.7 Search: `search`
 
@@ -182,7 +181,7 @@ _Format:_
 `tag [Task-Number] [t/Tag-1] (t/Tag-2) ...`
 
 _Example:_
-`tag 1 t/urgent t/for mom` 
+`tag 1 t/urgent t/for mom`
 Returns the task name with the changed tags
 
 ## 3.1.15 Customize file storing: `store`
@@ -213,24 +212,24 @@ The task manager will store its data in AnotherStorage.txt located under Storage
 
 ## 5. Command Summary
 
-* **Help** : `help` 
+* **Help** : `help`
 
-* **Add**  `add [Name-of-Task] s/(Start-Time) e/(End-Time) t/[Tag]...` 
+* **Add**  `add [Name-of-Task] s/(Start-Time) e/(End-Time) t/[Tag]...`
   e.g. `add attend seminar s/21-03-2017 9.00 AM e/23-03-2017 9.00 PM t/work`
   
 * **Edit** : `edit [Task-Number] [Edited-Details] (t/Edited-Tag)`
 
 * **Delete** : `delete [Task-Number]`
    e.g. `delete 3`
-   
+
 * **Undo** : `undo`
-   
+
 * **Search** : `search [Keyword] (t/TagKeyword)...`
   e.g. `find email t/urgent`
-  
+
 * **List** : `list`,`list incomplete`,`list complete`,`list overdue`
 
-* **Select** : `select [Task-Number]` 
+* **Select** : `select [Task-Number]`
   e.g.`select 2`
 
 * **Tag** : `tag [Task-Number] [t/newTag]`
@@ -238,7 +237,7 @@ The task manager will store its data in AnotherStorage.txt located under Storage
 
 * **Repeat** : `repeat [Task-Number] [periodic-time]`
  e.g. `repeat 1 every friday`
- 
+
 * **Report** : `report`
 
 * **Clear** : `clear`
@@ -246,12 +245,11 @@ The task manager will store its data in AnotherStorage.txt located under Storage
 * **Store** : `store [PATH_TO_STORAGE_FILE]`
  e.g. `store StorageFile/StoreHereInstead/MyStorage.txt`
 
-
 ---
-  
+
 ## 6. Appendix
-  
-  | Word | Definition |
+
+| Word | Definition |
 |-----|-----|
 |[GUI](#GUI)|Graphic User Interface. The interface presented to users to interact with *DoMe!*.|
 |[Storage Path](#storage-path)|This is the directory where your data will be saved.|
