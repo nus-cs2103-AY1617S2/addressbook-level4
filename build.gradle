@@ -64,6 +64,7 @@ allprojects {
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
         compile "org.ocpsoft.prettytime:prettytime:4.0.1.Final"
+        compile group: 'com.joestelmach', name: 'natty', version: '0.13'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
