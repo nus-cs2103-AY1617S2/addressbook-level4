@@ -43,7 +43,7 @@ public class UiStore {
     private ObservableList<String> observableSuggestedCommands = FXCollections.observableArrayList();
     private SimpleIntegerProperty observableSuggestedCommandIndex =
             new SimpleIntegerProperty(INDEX_INVALID_SUGGESTION);
-    private Task newTask;
+    private Task lastEditedTask;
 
     public static UiStore getInstance() {
         if (instance == null) {
@@ -138,11 +138,11 @@ public class UiStore {
      * @params tasks tasks to replace current task
      * @param newTask new task
      */
-    public void setTasks(ArrayList<Task> tasks, Task newTask) {
+    public void setTasks(ArrayList<Task> tasks, Task lastEditedTask) {
         // Sorted by default
         Collections.sort(tasks);
         this.allTasks = tasks;
-        this.newTask = newTask;
+        this.lastEditedTask = lastEditedTask;
         changeShownTasks();
     }
 
@@ -150,8 +150,8 @@ public class UiStore {
         return allTasks;
     }
 
-    public Task getNewTask() {
-        return newTask;
+    public Task getLastEditedTask() {
+        return lastEditedTask;
     }
 
     /**
@@ -183,11 +183,11 @@ public class UiStore {
     }
 
     /**
-     * Find the corresponding index for the given task shown on the UI (starting from index 1)
+     * Find the index of the task in shownTasks
      * @param task
-     * @return the index if it is found, else 0
+     * @return the index if it is found, else -1
      */
     public int getTaskIndex(Task task) {
-        return shownTasks.indexOf(task) + 1;
+        return shownTasks.indexOf(task);
     }
 }
