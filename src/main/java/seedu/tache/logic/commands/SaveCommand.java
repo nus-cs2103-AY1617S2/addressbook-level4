@@ -84,7 +84,7 @@ public class SaveCommand extends Command implements Undoable {
         try {
             this.newPath = prevPath;
             this.execute();
-            return String.format(MESSAGE_SUCCESS, prevPath);
+            return String.format(MESSAGE_SUCCESS, newPath);
         } catch (CommandException e) {
             throw new CommandException(String.format(MESSAGE_FAILURE, prevPath));
         }

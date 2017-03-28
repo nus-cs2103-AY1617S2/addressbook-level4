@@ -2,7 +2,7 @@
 package seedu.tache.model.task;
 
 import java.text.SimpleDateFormat;
-
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -116,5 +116,22 @@ public class DateTime {
     public int hashCode() {
         return (startDate.hashCode() && endDate.hashCode());
     }*/
+
+    //@@author A0139961U
+    public boolean isToday() {
+        Date today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(today).equals(sdf.format(this.date));
+    }
+
+    public boolean isSameWeek() {
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int thisWeekNo = cal.get(Calendar.WEEK_OF_YEAR);
+        cal.setTime(this.date);
+        return (thisWeekNo == cal.get(Calendar.WEEK_OF_YEAR));
+    }
+    //@@author
 
 }
