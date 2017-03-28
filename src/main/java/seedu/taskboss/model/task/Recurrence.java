@@ -185,8 +185,9 @@ public class Recurrence {
 
     /**
      * Marks a task as undone (i.e removing it from "Done" category)
+     * @throws IllegalValueException 
      */
-    private void markTaskUndone(Task task) throws DuplicateCategoryException {
+    private void markTaskUndone(Task task) throws IllegalValueException {
         UniqueCategoryList newCategoryList = new UniqueCategoryList();
         for (Category category : task.getCategories()) {
             if (!category.equals(CATEGORY_DONE)) {
