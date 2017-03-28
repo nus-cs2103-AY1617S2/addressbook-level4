@@ -83,7 +83,7 @@ Refer to the [Features](https://github.com/CS2103JAN2017-W09-B1/main/blob/master
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-**3.1. Viewing help : `help`**
+### 3.1. Viewing help : `help`
 
 Prompts a help page with all the existing commands.
 
@@ -91,7 +91,7 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. abcd
 
-**3.2. Adding a task : `add`**
+### 3.2. Adding a task : `add`
 
 Adds a task to the list.
 
@@ -106,13 +106,13 @@ Examples:
 - `add Buy groceries p/3 i/eggs x10, milk x2, bread x2 t/home t/errand`
 - `add Watch webcast i/CS2103 t/school p/5 d/07032017`
 
-**3.3. Listing all tasks : `list`**
+### 3.3. Listing all tasks : `list`
 
 Shows a list of all tasks.
 
 Format: `list`
 
-**3.4. Editing a task : `edit`**
+### 3.4. Editing a task : `edit`
 
 Edits an existing task in the list.
 
@@ -132,7 +132,7 @@ Examples:
 - `edit floating 2 Drink Coffee t/`
    - Edits the title of the 2nd task in the floating task list to be Drink Coffee and clears all existing tags.
 
-**3.5. Finding all tasks containing any keyword in their title : `find`**
+### 3.5. Finding all tasks containing any keyword in their title : `find`
 
 Finds tasks with titles containing any of the given keywords. This command requires at least 3 letters e.g. `find Han` will be accepted, but `find Ha` is an invalid command format.
 
@@ -153,7 +153,7 @@ Examples:
 - `find buy webcast`
    - Returns any tasks having titles buy or webcast
 
-**3.6. Deleting a task : `delete`**
+### 3.6. Deleting a task : `delete`
 
 Deletes the task identified by the index number used in the last task listing.
 
@@ -172,7 +172,7 @@ Examples:
 - `delete 1`
    - Deletes the 1st task in the results of the `find` command.
 
-**3.7. Marking a task as complete : `complete`**
+### 3.7. Marking a task as complete : `complete`
 
 Marks a task as completed and moves it to the list of completed tasks.
 
@@ -182,7 +182,7 @@ Format: `complete [TASK_LIST] INDEX`
 The index refers to the index number shown in the most recent listing.<br><br>
 The index must be a positive integer 1, 2, 3, …
 
-**3.8. Marking a task as incomplete : `incomplete`**
+### 3.8. Marking a task as incomplete : `incomplete`
 
 Marks a task as incomplete and moves it back to the list of either floating or ongoing tasks.
 
@@ -192,7 +192,7 @@ Format: `incomplete INDEX`
 The index refers to the index number shown in the most recent listing of the completed tasks.<br><br>
 The index must be a positive integer 1, 2, 3, ...
 
-**3.9. Undo the previous command : `undo`**
+### 3.9. Undo the previous command : `undo`
 
 Undo the command previously entered.
 
@@ -200,7 +200,7 @@ Format: `undo`
 
 > If there&#39;s a previous command that changed the state of any of the task lists e.g. add, edit or delete, it is undone and the respective task list is reverted to its prior state before the add, edit or delete command was entered.
 
-**3.10. Redo a command : `redo`**
+### 3.10. Redo a command : `redo`
 
 Redo the command previously undone.
 
@@ -209,7 +209,7 @@ Format: `redo`
 > If there&#39;s a previous command that changed the state of any of the task lists e.g. add, edit or delete, and was undone by the undo command afterwards, it is redone and the respective task list is reverted to its prior state after the add, edit or delete command was entered.<br><br>
 If the undo command was followed by another state-changing command, the command that was previously undone would not be redone.
 
-**3.11. Selecting a task : `select`**
+### 3.11. Selecting a task : `select`
 
 Selects the task identified by the index number used in the last task listing.
 
@@ -228,31 +228,31 @@ Examples:
 - `select 1`
    - Selects the 1st task in the results of the find command.
 
-**3.12. Clearing all tasks : `clear`**
+### 3.12. Clearing all tasks : `clear`
 
 Clears all tasks from the list.
 
 Format: `clear`
 
-**3.13. Exiting the program : `exit`**
+### 3.13. Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-**3.14. Importing files into the program : `exit`**
+### 3.14. Importing files into the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-**3.15. Saving the data**
+### 3.15. Saving the data
 
 All data are saved in the hard disk automatically after any command that changes the data.
 
 There is no need to save manually.
 
-**3.16. Exiting the program : `exit`**
+### 3.16. Exiting the program : `exit`
 
 Exits the program.
 

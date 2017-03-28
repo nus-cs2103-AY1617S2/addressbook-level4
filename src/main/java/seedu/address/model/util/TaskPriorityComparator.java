@@ -14,6 +14,6 @@ public class TaskPriorityComparator implements Comparator<ReadOnlyTask> {
             String secondTitle = secondTask.getTitle().title;
             return firstTitle.compareTo(secondTitle);
         }
-        return firstPriority.compareTo(secondPriority);
+        return secondPriority.compareTo(firstPriority);
     }
 }

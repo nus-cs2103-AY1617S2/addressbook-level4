@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.ReadOnlyTask;
@@ -44,6 +46,16 @@ public abstract class Command {
             break;
         }
         return lastShownList;
+    }
+
+    /**
+     * Highlights the given task in the displayed windows.
+     * @param task
+     */
+    protected void highlight(ReadOnlyTask task) {
+        int displayedIndex = model.getDisplayedIndex(task);
+        String displayedListName = task.getDisplayListName();
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(displayedListName, displayedIndex));
     }
 
     /**

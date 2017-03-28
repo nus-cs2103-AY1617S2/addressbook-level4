@@ -30,6 +30,9 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    /** Returns the index of given task in its displayed task list. */
+    int getDisplayedIndex(ReadOnlyTask task);
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      * @param targetList

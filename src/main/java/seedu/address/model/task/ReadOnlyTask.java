@@ -56,7 +56,7 @@ public interface ReadOnlyTask {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the task as text, showing all details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
@@ -70,5 +70,19 @@ public interface ReadOnlyTask {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Returns a string representing the task's displayed task list.
+     */
+    default String getDisplayListName() {
+        String listName = TASK_NAME_NON_FLOATING;
+        if (isFloating()) {
+            listName = TASK_NAME_FLOATING;
+        }
+        if (isCompleted()) {
+            listName = TASK_NAME_COMPLETED;
+        }
+        return listName;
     }
 }

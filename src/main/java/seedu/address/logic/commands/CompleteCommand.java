@@ -63,9 +63,10 @@ public class CompleteCommand extends Command {
         editedTask.setAsCompleted();
         try {
             model.updateTask(targetList, filteredTaskListIndex, editedTask);
+            highlight(editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        return new CommandResult(String.format(MESSAGE_MARK_COMPLETE_TASK_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_MARK_COMPLETE_TASK_SUCCESS, editedTask));
     }
 }
