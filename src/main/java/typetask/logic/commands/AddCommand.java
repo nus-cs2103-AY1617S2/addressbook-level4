@@ -33,24 +33,41 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
+    //Floating Task
     public AddCommand(String name)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(""), new Time(""));
+        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""),
+                new Time(""), new Time(""), false);
     }
-
+    //Task with date and time
     public AddCommand(String name, String date, String time)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(date), new Time(time));
+        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(""),
+                new Time(time), new Time(""), false);
     }
-
+    //Task with date
     public AddCommand(String name, String date)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(date), new Time(""));
+        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(""),
+                new Time(""), new Time(""), false);
     }
-
+    //Task with time
     public AddCommand(String name, String time, int noDate)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(""), new Time(time));
+        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""),
+                new Time(time), new Time(""), false);
+    }
+    //Event Task with no time
+    public AddCommand(String name, String date, String endDate, int noTime)
+            throws IllegalValueException {
+        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(endDate),
+                new Time(""), new Time(""), false);
+    }
+    //Event Task with time
+    public AddCommand(String name, String date, String endDate, String time, String endTime)
+            throws IllegalValueException {
+        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(endDate),
+                new Time(time), new Time(endTime), false);
     }
     @Override
     public CommandResult execute() throws CommandException {

@@ -14,6 +14,8 @@ public class Task implements ReadOnlyTask {
     private DueDate date;
     private Time time;
     private boolean isCompleted;
+    private DueDate endDate;
+    private Time endTime;
 
     /**
      * Every field must be present and not null.
@@ -30,11 +32,14 @@ public class Task implements ReadOnlyTask {
         this.time = time;
     }
 
-    //@@author A0144902L
-    public Task(Name name, DueDate date, Time time, boolean isCompleted) {
+
+    public Task(Name name, DueDate date, DueDate endDate,
+            Time time, Time endTime, boolean isCompleted) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.date = date;
+        this.endDate = endDate;
+        this.endTime = endTime;
         this.time = time;
         this.isCompleted = isCompleted;
     }
@@ -43,7 +48,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-       this(source.getName(), source.getDate(), source.getTime(), source.getIsCompleted());
+       this(source.getName(), source.getDate(), source.getEndDate(),
+               source.getTime(), source.getEndTime(), source.getIsCompleted());
     }
 
     public void setName(Name name) {
@@ -54,9 +60,15 @@ public class Task implements ReadOnlyTask {
     public void setDate(DueDate date) {
         this.date = date;
     }
+    public void setEndDate(DueDate endDate) {
+        this.endDate = endDate;
+    }
 
     public void setTime(Time time) {
         this.time = time;
+    }
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
     }
 
     //@@author A0144902L
@@ -73,8 +85,16 @@ public class Task implements ReadOnlyTask {
         return date;
     }
     @Override
+    public DueDate getEndDate() {
+        return endDate;
+    }
+    @Override
     public Time getTime() {
         return time;
+    }
+    @Override
+    public Time getEndTime() {
+        return endTime;
     }
 
     //@@author A0144902L
@@ -90,7 +110,9 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
         this.setName(replacement.getName());
         this.setDate(replacement.getDate());
+        this.setEndDate(replacement.getEndDate());
         this.setTime(replacement.getTime());
+        this.setEndTime(replacement.getEndTime());
     }
 
     /**

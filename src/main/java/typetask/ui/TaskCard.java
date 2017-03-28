@@ -59,7 +59,9 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         date.setText(task.getDate().value);
+        endDate.setText(task.getEndDate().value);
         time.setText(task.getTime().value);
+        endTime.setText(task.getEndTime().value);
         completed = task.getIsCompleted();
         if (!task.getDate().value.equals("")) {
             parsedDateFlag = true;
