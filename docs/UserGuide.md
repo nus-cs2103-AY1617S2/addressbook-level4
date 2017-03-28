@@ -70,21 +70,6 @@ Examples:
 Shows a list of all todos.<br>
 Format: `list`
 
-Shows a list of all uncompleted todos.<br>
-Format: `list u`
-
-Shows a list of all completed todos.<br>
-Format: `list c`
-
-Shows a list of all floating tasks.<br>
-Format: `list f`
-
-Shows a list of all deadlines.<br>
-Format: `list d`
-
-Shows a list of all events.<br>
-Format: `list e`
-
 ### 2.4. Editing a todo : `edit`
 
 Edits a Todo's title, start time and endtime.<br>
@@ -108,7 +93,6 @@ Format: `edit INDEX [TASK] [t/TAG]`
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
->
 
 Examples:
 
@@ -120,7 +104,7 @@ Examples:
 Finds todos whose descriptions contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive.
+> * The search is case insensitive.
 > * The order of the keywords does not matter.
 > * Only the task description is searched.
 > * Only full words will be matched e.g.

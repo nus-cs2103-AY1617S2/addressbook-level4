@@ -70,25 +70,24 @@ public class FindCommandTest extends TodoListGuiTest {
     @Test
     public void find_startTimeAfter() {
         assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix() + START_TIME_AFTER,
-            td.toilet, td.tennis, td.lunch);
+            td.toilet, td.tennis);
     }
 
     @Test
     public void find_startTimeBefore() {
-        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix() + START_TIME_BEFORE,
-            td.lunch);
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix() + START_TIME_BEFORE);
     }
 
     @Test
     public void find_endTimeAfter() {
         assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_END_TIME.getPrefix() + END_TIME_AFTER,
-            td.essay, td.library, td.tennis, td.job, td.lunch);
+            td.essay, td.toilet, td.library, td.tennis);
     }
 
     @Test
     public void find_endTimeBefore() {
         assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_END_TIME.getPrefix() + END_TIME_BEFORE,
-            td.tennis, td.lunch);
+            td.toilet, td.tennis);
     }
 
     @Test
@@ -103,6 +102,46 @@ public class FindCommandTest extends TodoListGuiTest {
         assertFindResult(FindCommand.COMMAND_WORD + " "
             + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + COMPLETE_TIME_BEFORE,
             td.tennis);
+    }
+
+    @Test
+    public void find_startTimeCompleteTime() {
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix()
+            + START_TIME_AFTER + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + COMPLETE_TIME_AFTER, td.tennis);
+    }
+
+    @Test
+    public void find_startTimeEndTime() {
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix()
+            + START_TIME_AFTER + " " + CliSyntax.PREFIX_END_TIME.getPrefix() + END_TIME_AFTER,
+            td.toilet, td.tennis);
+    }
+
+    @Test public void find_endTimeCompleteTime() {
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_END_TIME.getPrefix()
+            + END_TIME_AFTER + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + COMPLETE_TIME_AFTER,
+            td.library, td.tennis);
+    }
+
+    @Test
+    public void find_nameStartTime() {
+        assertFindResult(FindCommand.COMMAND_WORD + " Go to the bathroom "
+            + CliSyntax.PREFIX_START_TIME.getPrefix() + START_TIME_AFTER, td.toilet);
+    }
+
+    @Test
+    public void find_startTimeTag() {
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix()
+            + START_TIME_AFTER + " " + CliSyntax.PREFIX_TAG.getPrefix() + "personal", td.toilet);
+    }
+
+    @Test
+    public void find_allParams() {
+        assertFindResult(FindCommand.COMMAND_WORD + " tennis "
+            + CliSyntax.PREFIX_END_TIME.getPrefix() + END_TIME_AFTER + " "
+            + CliSyntax.PREFIX_START_TIME.getPrefix() + START_TIME_AFTER + " "
+            + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + COMPLETE_TIME_AFTER + " "
+            + CliSyntax.PREFIX_TAG.getPrefix() + "sports", td.tennis);
     }
 
     private void assertFindResult(String command, TestTodo... expectedHits) {
