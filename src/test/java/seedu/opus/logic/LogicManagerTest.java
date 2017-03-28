@@ -257,6 +257,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    //@author A0148081H
     @Test
     public void executeSortTasksByStartTime() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -352,6 +353,7 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
         assertCommandFailure("sort ", expectedMessage);
     }
+    //@author
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
@@ -795,8 +797,9 @@ public class LogicManagerTest {
             );
         }
 
+        //@author A0148081H-reused
         /**
-         * Generates a Task object with given end time. Other fields will have some dummy values.
+         * Generates a Task object with given start time. Other fields will have some dummy values.
          */
         private Task generateTaskWithStartTime(String startTime) throws Exception {
             return new Task(
@@ -854,6 +857,7 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag"))
             );
         }
+        //@author
 
         private Priority generatePriorityWithSeed(int seed) {
             switch(seed) {
