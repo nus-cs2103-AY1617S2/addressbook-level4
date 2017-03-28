@@ -6,13 +6,20 @@ import java.util.Optional;
 import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
+import seedu.geekeep.model.Config;
 import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends GeeKeepStorage, UserPrefsStorage {
+public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage {
+
+    @Override
+    Optional<Config> readConfig() throws DataConversionException, IOException;
+
+    @Override
+    void saveConfig(Config config) throws IOException;
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;

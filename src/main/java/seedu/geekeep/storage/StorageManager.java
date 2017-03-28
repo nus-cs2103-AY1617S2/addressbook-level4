@@ -11,6 +11,7 @@ import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
+import seedu.geekeep.model.Config;
 import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
 
@@ -20,19 +21,36 @@ import seedu.geekeep.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private ConfigStorage configStorage;
     private GeeKeepStorage geeKeepStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(GeeKeepStorage geeKeepStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(ConfigStorage configStorage, GeeKeepStorage geeKeepStorage,
+            UserPrefsStorage userPrefsStorage) {
         super();
+        this.configStorage = configStorage;
         this.geeKeepStorage = geeKeepStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String geeKeepFilePath, String userPrefsFilePath) {
-        this(new XmlGeeKeepStorage(geeKeepFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String configFilePath, String geeKeepFilePath, String userPrefsFilePath) {
+        this(new JsonConfigStorage(configFilePath), new XmlGeeKeepStorage(geeKeepFilePath),
+                new JsonUserPrefsStorage(userPrefsFilePath));
     }
+
+    // ================ Config methods ==============================
+
+    @Override
+    public Optional<Config> readConfig() throws DataConversionException, IOException {
+        return configStorage.readConfig();
+    }
+
+    @Override
+    public void saveConfig(Config config) throws IOException {
+        configStorage.saveConfig(config);
+    }
+
 
     // ================ UserPrefs methods ==============================
 

@@ -52,8 +52,12 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing GeeKeep ]===========================");
         super.init();
 
-        config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getGeekeepFilePath(), config.getUserPrefsFilePath());
+        String configFilePath = getApplicationParameter("config");
+        config = initConfig(configFilePath);
+        if (configFilePath == null) {
+            configFilePath = Config.DEFAULT_CONFIG_FILE;
+        }
+        storage = new StorageManager(configFilePath, config.getGeekeepFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
