@@ -145,7 +145,7 @@ public class UpdateCommand extends Command {
      * Checks if only the category field has been identified by user to be
      * updated To ensure that other task details like startTime startDate
      * endTime endDate are not lost
-     * 
+     *
      * @return true if only categories are identified by user to be updated
      */
     private boolean isOnlyCategoriesUpdate() {
