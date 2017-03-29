@@ -39,24 +39,21 @@ public class PersonCard extends UiPart<Region> {
 
         if (task.getStartTiming().value.equals(Timing.NULL_TIMING)) {
             startTiming.setText("");
-        } else if (task.getOccurrenceIndexList().size() == 0){
+        } else if (task.getOccurrenceIndexList().size() == 0) {
             startTiming.setText("Start Timing: " + task.getOccurrences().get(0).getStartTiming().value);
-        } else{
+        } else {
             int index = task.getOccurrenceIndexList().get(0);
             startTiming.setText("Start Timing: " + task.getOccurrences().get(index).getStartTiming().value);
         }
 
         if (task.getEndTiming().value.equals(Timing.NULL_TIMING)) {
             endTiming.setText("");
-        } else if (task.getOccurrenceIndexList().size() == 0){
+        } else if (task.getOccurrenceIndexList().size() == 0) {
             endTiming.setText("End Timing: " + task.getOccurrences().get(0).getEndTiming().value);
-        } else{
+        } else {
             int index = task.getOccurrenceIndexList().get(0);
             endTiming.setText("End Timing: " + task.getOccurrences().get(index).getEndTiming().value);
         }
-
-
-
 
         if (task.isRecurring()) {
             recurring.setText("Recurring Task: " + task.getFrequency().toString());

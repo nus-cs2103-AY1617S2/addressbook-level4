@@ -54,6 +54,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         //start date > end date (start time < end time)
         commandBox.runCommand("add timeOrderTest sd/8:45 05/06/2012 ed/9:45 02/05/2012");
         assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
+
         //@@author
     }
 

@@ -1,6 +1,7 @@
 //@@author A0164212U
 package seedu.task.model.task;
 
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 
 public class RecurringTaskOccurrence {
@@ -8,15 +9,15 @@ public class RecurringTaskOccurrence {
     private Timing endTiming;
     private boolean complete;
 
-    public RecurringTaskOccurrence(Timing startTime, Timing endTime){
+    public RecurringTaskOccurrence(Timing startTime, Timing endTime) {
         assert !CollectionUtil.isAnyNull(startTime, endTime);
         this.startTiming = startTime;
         this.endTiming = endTime;
         this.complete = false;
     }
 
-    public RecurringTaskOccurrence() {
-        this(null, null);
+    public RecurringTaskOccurrence() throws IllegalValueException {
+        this(new Timing(Timing.getTodayDate()), new Timing(Timing.getTodayDate()));
     }
 
     public Timing getStartTiming() {

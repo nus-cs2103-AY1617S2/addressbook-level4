@@ -26,6 +26,7 @@ public class PersonListPanel extends UiPart<Region> {
     private ListView<ReadOnlyTask> personListView;
 
     public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
+
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(personListPlaceholder);
@@ -44,8 +45,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
-        .addListener((observable, oldValue, newValue) -> {
+        personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 logger.fine("Selection in person list panel changed to : '" + newValue + "'");
                 raise(new PersonPanelSelectionChangedEvent(newValue));

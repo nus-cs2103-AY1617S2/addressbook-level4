@@ -74,15 +74,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Description("Ali Muster"), new Priority("1"), new Timing("02/02/2017"), new Timing("02/02/2017"),  new UniqueTagList()),
-                new Task(new Description("Boris Mueller"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList()),
-                new Task(new Description("Carl Kurz"), new Priority("3"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList()),
-                new Task(new Description("Daniel Meier"), new Priority("1"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList()),
-                new Task(new Description("Elle Meyer"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList()),
-                new Task(new Description("Fiona Kunz"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList()),
-                new Task(new Description("George Best"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList()),
-                new Task(new Description("Hoon Meier"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList()),
-                new Task(new Description("Ida Mueller"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList())
+                new Task(new Description("Ali Muster"), new Priority("1"), new Timing("02/02/2017"), new Timing("02/02/2017"),  new UniqueTagList(), false, null),
+                new Task(new Description("Boris Mueller"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
+                new Task(new Description("Carl Kurz"), new Priority("3"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
+                new Task(new Description("Daniel Meier"), new Priority("1"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
+                new Task(new Description("Elle Meyer"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
+                new Task(new Description("Fiona Kunz"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
+                new Task(new Description("George Best"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
+                new Task(new Description("Hoon Meier"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
+                new Task(new Description("Ida Mueller"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null)
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -191,7 +191,7 @@ public class TestUtil {
     }
 
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+        IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");

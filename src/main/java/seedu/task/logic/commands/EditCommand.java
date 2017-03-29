@@ -101,6 +101,7 @@ public class EditCommand extends Command {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
 
-        return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
+        return new Task(updatedDescription, updatedPriority, updatedStartDate,
+                updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
     }
 }

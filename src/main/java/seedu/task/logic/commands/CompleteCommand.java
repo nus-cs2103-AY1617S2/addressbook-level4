@@ -94,7 +94,8 @@ public class CompleteCommand extends Command {
         RecurringFrequency updatedFrequency = editTaskDescriptor.getFrequency().orElseGet(taskToComplete::getFrequency);
 
 
-        return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
+        return new Task(updatedDescription, updatedPriority, updatedStartDate,
+                updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
     }
 
     /**
