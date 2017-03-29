@@ -10,7 +10,11 @@ import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.UniqueEventList;
 
-//@@author A0138952W
+/**
+ * Batch marks existing tasks as done in the task scheduler.
+ *
+ */
+// @@author A0138952W
 public class BatchMarkDoneCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
