@@ -23,7 +23,7 @@ public class ThemeWindow extends Window {
     @FXML
     Parent fxmlToApply;
 
-    UserPrefs prefs;
+    private UserPrefs prefs;
 
     public ThemeWindow(Parent fxmlToApply, UserPrefs prefs) {
         super(FXML);

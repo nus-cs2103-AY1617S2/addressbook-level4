@@ -6,7 +6,6 @@
 <?import java.net.URL?>
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
-      <URL value="@BaseTheme.css" />
       <URL value="@Extensions.css" />
    </stylesheets>
    <children>

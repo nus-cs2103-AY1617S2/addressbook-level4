@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
+import java.nio.file.Paths;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -9,6 +12,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -139,7 +143,8 @@ public class MainWindow extends Window {
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(stage.getWidth(), stage.getHeight(),
-                (int) stage.getX(), (int) stage.getY(), getRoot().getStylesheets().get(0));
+                (int) stage.getX(), (int) stage.getY(),
+                Paths.get(getRoot().getStylesheets().get(0)).getFileName().toString());
     }
 
     @FXML

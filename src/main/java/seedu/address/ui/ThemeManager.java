@@ -20,10 +20,10 @@ import seedu.address.model.UserPrefs;
  */
 public class ThemeManager extends UiPart<Region> {
 
-    private static final String FXML = "ThemeManager.fxml";
-    private static final String THEME_FILE_FOLDER = "/themes/";
-
+    public static final String THEME_FILE_FOLDER = "/themes/";
     public static final String DEFAULT_STYLESHEET = "DarkTheme.css";
+    
+    private static final String FXML = "ThemeManager.fxml";
 
     @FXML
     private Parent fxmlToApply;
@@ -38,7 +38,7 @@ public class ThemeManager extends UiPart<Region> {
      */
     public ThemeManager(AnchorPane placeholder, Parent fxmlToApply, UserPrefs prefs) {
         super(FXML);
-        setStyleSheet(DEFAULT_STYLESHEET);
+        //setStyleSheet(DEFAULT_STYLESHEET);
 
         this.fxmlToApply = fxmlToApply;
         this.prefs = prefs;
@@ -50,8 +50,7 @@ public class ThemeManager extends UiPart<Region> {
 
     public static void changeTheme(Parent root, String theme) {
         root.getStylesheets().clear();
-        root.getStylesheets().add(MainApp.class.getResource(THEME_FILE_FOLDER +
-            Paths.get(theme).getFileName()).toString());
+        root.getStylesheets().add(MainApp.class.getResource(THEME_FILE_FOLDER + theme).toString());
     }
 
     private void setConnections(String path) {
