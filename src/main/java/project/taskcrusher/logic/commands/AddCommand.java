@@ -9,6 +9,7 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.Location;
+import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList;
 import project.taskcrusher.model.shared.Description;
@@ -28,13 +29,14 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task or an event to the active list.\n "
-                                    + "For events: " + COMMAND_WORD + " " + Event.EVENT_FLAG
-                                    + " NAME d/START_DATE to END_DATE [l/LOCATION] [//DESCRIPTION] [t/TAG]\n"
-                                    + " For tasks: " + COMMAND_WORD + " " + Task.TASK_FLAG
-                                    + " NAME [d/DEADLINE] [p/PRIORITY] [//DESCRIPTION] [t/TAG]";
+            + "For events: " + COMMAND_WORD + " " + Event.EVENT_FLAG
+            + " NAME d/START_DATE to END_DATE [l/LOCATION] [//DESCRIPTION] [t/TAG]\n" + " For tasks: " + COMMAND_WORD
+            + " " + Task.TASK_FLAG + " NAME [d/DEADLINE] [p/PRIORITY] [//DESCRIPTION] [t/TAG]";
 
     public static final String MESSAGE_TASK_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_EVENT_SUCCESS = "New event added: %1$s";
+
+    public static final String MESSAGE_EVENT_CLASHES = "This event clashes with a preexisting event";
 
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the active list";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the active list";
@@ -82,6 +84,12 @@ public class AddCommand extends Command {
         assert !(eventToAdd == null && taskToAdd == null);
         try {
             if (eventToAdd != null) {
+
+                List<? extends ReadOnlyEvent> preexistingEvents = model.getUserInbox().getEventList();
+                if (eventToAdd.hasOverlappingEvent(preexistingEvents)) {
+                    throw new CommandException(MESSAGE_EVENT_CLASHES);
+                }
+
                 model.addEvent(eventToAdd);
                 return new CommandResult(String.format(MESSAGE_EVENT_SUCCESS, eventToAdd));
             } else {

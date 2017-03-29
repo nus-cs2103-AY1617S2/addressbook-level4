@@ -18,9 +18,9 @@ public class Event extends UserToDo implements ReadOnlyEvent {
     private Location location;
     private boolean isOverdue;
 
-    public Event(Name name, List<Timeslot> timeslots, Location location,
-            Description description, UniqueTagList tags) {
-        super(name, null, description, tags); //TODO: remove this stub priority later
+    public Event(Name name, List<Timeslot> timeslots, Location location, Description description, UniqueTagList tags) {
+        super(name, null, description, tags); // TODO: remove this stub priority
+                                              // later
 
         assert !CollectionUtil.isAnyNull(timeslots, location);
 
@@ -33,12 +33,13 @@ public class Event extends UserToDo implements ReadOnlyEvent {
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getName(), source.getTimeslots(), source.getLocation(),
-                source.getDescription(), source.getTags());
+        this(source.getName(), source.getTimeslots(), source.getLocation(), source.getDescription(), source.getTags());
     }
 
-    /**Checks if any of the Timeslot object in the timeslots list has overlapping start and end date with
-     * {@code another}
+    /**
+     * Checks if any of the Timeslot object in the timeslots list has
+     * overlapping start and end date with {@code another}
+     *
      * @param another
      * @return true if overlapping, false otherwise
      */
@@ -104,7 +105,8 @@ public class Event extends UserToDo implements ReadOnlyEvent {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(name, timeslots, location, description, tags);
     }
 
@@ -124,11 +126,24 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         } else if (another.isComplete()) {
             return -1;
         }
-        //TODO: just for now
+        // TODO: just for now
         Date thisEarliestSlot = this.timeslots.get(0).start;
         Date anotherEarliestSlot = another.getTimeslots().get(0).start;
 
         return thisEarliestSlot.compareTo(anotherEarliestSlot);
+    }
+
+    public boolean hasOverlappingEvent(List<? extends ReadOnlyEvent> preexistingEvents) {
+
+        boolean isOverlapping = false;
+        for (ReadOnlyEvent roe : preexistingEvents) {
+            for (Timeslot roet : roe.getTimeslots()) {
+                if (this.hasOverlappingTimeslot(roet)) {
+                    isOverlapping = true;
+                }
+            }
+        }
+        return isOverlapping;
     }
 
 }

@@ -248,6 +248,8 @@ public class LogicManagerTest {
                 DateUtilApache.MESSAGE_DATE_PASSED);
         assertCommandFailure("add e validname l/validlocation d/ewrio232 to 54rthg //validdescription",
                 DateUtilApache.MESSAGE_DATE_NOT_FOUND);
+        assertCommandFailure("add e validname l/validlocation d/2017-11-11 to 2017-99-99 //validdescription",
+                DateUtilApache.MESSAGE_DATE_NOT_FOUND);
         assertCommandFailure("add e validname l/validlocation d/2020-11-11 03:00PM to 2020-11-11 05:00PM"
                 + " //validdescription t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
@@ -304,17 +306,15 @@ public class LogicManagerTest {
 
     }
 
-    // @Test
-    // public void execute_addOverlapping_notAllowed() throws Exception {
-    // // setup expectations
-    // TestDataHelper helper = new TestDataHelper();
-    //
-    // Event toBeAdded = helper.reviewSession();
-    // model.addEvent(toBeAdded);
-    // Event toBeAdded2 = helper.reviewSessionTentative(); //will clash
-    // assertCommandFailure(helper.generateAddEventCommand(toBeAdded2), );
-    //
-    // }
+    @Test
+    public void execute_addOverlapping_notAllowed() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Event toBeAdded = helper.reviewSession();
+        model.addEvent(toBeAdded);
+        Event toBeAdded2 = helper.reviewSessionClash(); // will clash
+        assertCommandFailure(helper.generateAddEventCommand(toBeAdded2), AddCommand.MESSAGE_EVENT_CLASHES);
+    }
 
     @Test
     public void execute_confirm_slotIndexNotFound() throws Exception {
@@ -397,14 +397,14 @@ public class LogicManagerTest {
             throws Exception {
         assertCommandFailure(commandWord, expectedMessage); // index missing
         assertCommandFailure(commandWord + " +1", expectedMessage); // index
-                                                                    // should be
-                                                                    // unsigned
+        // should be
+        // unsigned
         assertCommandFailure(commandWord + " -1", expectedMessage); // index
-                                                                    // should be
-                                                                    // unsigned
+        // should be
+        // unsigned
         assertCommandFailure(commandWord + " 0", expectedMessage); // index
-                                                                   // cannot be
-                                                                   // 0
+        // cannot be
+        // 0
         assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
@@ -662,6 +662,21 @@ public class LogicManagerTest {
             Timeslot timeslot1 = new Timeslot("2020-09-23 03:00PM", "2020-09-23 05:00PM");
             List<Timeslot> timeslots = new ArrayList<>();
             timeslots.add(timeslot1);
+            Location location = new Location("i3 Aud");
+            Description description = new Description("makes life easier");
+            Tag tag3 = new Tag("sometag3");
+            Tag tag4 = new Tag("sometag4");
+            UniqueTagList tags = new UniqueTagList(tag3, tag4);
+            return new Event(name, timeslots, location, description, tags);
+        }
+
+        Event reviewSessionClash() throws Exception {
+            Name name = new Name("CS2103 review session probably");
+            Timeslot timeslot1 = new Timeslot("2017-09-23 02:00PM", "2017-09-23 04:00PM");
+            Timeslot timeslot2 = new Timeslot("2021-09-23 06:00PM", "2021-09-23 08:00PM");
+            List<Timeslot> timeslots = new ArrayList<>();
+            timeslots.add(timeslot1);
+            timeslots.add(timeslot2);
             Location location = new Location("i3 Aud");
             Description description = new Description("makes life easier");
             Tag tag3 = new Tag("sometag3");
