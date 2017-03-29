@@ -1,4 +1,4 @@
-//@@evanyeung A0163744B
+//@@author A0163744B
 package seedu.test.logic.history;
 
 import static org.junit.Assert.assertEquals;

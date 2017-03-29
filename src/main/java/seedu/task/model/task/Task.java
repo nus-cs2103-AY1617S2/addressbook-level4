@@ -80,7 +80,7 @@ public class Task implements ReadOnlyTask {
         return dueDate;
     }
 
-    //@@evanyeung A0163744B
+    //@@author A0163744B
     @Override
     public Duration getDuration() {
         return duration;
@@ -94,7 +94,7 @@ public class Task implements ReadOnlyTask {
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
-    //@@evanyeung
+    //@@author
 
     public void setComplete() {
         this.complete.setComplete();

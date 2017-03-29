@@ -32,12 +32,12 @@ public class TaskBuilder {
         return this;
     }
 
-    //@@evanyeung A0163744B
+    //@@author A0163744B
     public TaskBuilder withDuration(String startDate, String endDate) throws IllegalValueException {
         this.task.setDuration(new Duration(startDate, endDate));
         return this;
     }
-    //@@evanyeung
+    //@@author
 
     public TaskBuilder withDueDate(String dueDate) throws IllegalValueException {
         this.task.setDueDate(new DueDate(dueDate));
@@ -61,7 +61,7 @@ public class TaskBuilder {
         return this.task;
     }
 
-    //@@evanyeung A0163744B
+    //@@author A0163744B
     public TaskBuilder withCompletion(boolean isComplete) {
         this.task.setCompletion(new Complete(isComplete));
         return this;

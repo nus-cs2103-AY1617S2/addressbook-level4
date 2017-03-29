@@ -47,7 +47,7 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    //@@evanyeung A0163744B
+    //@@author A0163744B
     /** Updates the filter of the filtered task list to filter by given completion */
     void updateFilteredListToShowCompletion(boolean isComplete);
 
@@ -62,5 +62,5 @@ public interface Model {
 
     /** Updates the sorting of the filtered task list to sort by end */
     void updateFilteredListToSortByEnd();
-    //@@evanyeung
+    //@@author
 }
