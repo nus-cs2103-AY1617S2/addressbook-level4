@@ -62,7 +62,7 @@ Example:
   Switches the displayed view to 'Today'.
 * `switch T` <br>
   Switches the displayed view to 'Today'.
-* Press <kbd>Ctrl</kbd> + <kbd>A</kbd> <br>
+* `Press <kbd>Ctrl</kbd> + <kbd>A</kbd>` <br>
   Switches the displayed view to 'All'.
 
 ### 3.2. Viewing help : `help`
@@ -248,7 +248,7 @@ For when you accidentally entered a wrong command.<br>
 Undoes previous commands by the user.<br>
 Format: `undo [NUMBER]`
 
-> `Undo` allows reverting of modifications to the tasks in the todo list. This means that commands like 
+> * `Undo` allows reverting of modifications to the tasks in the todo list. This means that commands like 
 `add`, `update`, `delete`, `clear`, `tag`, `untag` and `mark` which modifies the tasks can be reversed with
 > `undo`. If loading a different data file with `load` cause the current tasks to be changed, you can go back
 > to the previous task using `undo` too (Using `undo`, however, won't revert the change of data storage 
@@ -260,9 +260,10 @@ previous location with `save`.
 >   * Setting of aliases (due to `alias`) - You can remove the alias with `unalias`.
 >   * Removal of aliases (due to `unalias`) - You can set back the alias with `alias`.
 >
-> Note that commands that commands that do not modifies the content of the todo list cannot be undone with 
+> * Note that commands that commands that do not modifies the content of the todo list cannot be undone with 
 > `undo`. E.g
-> If a number is entered, undoes that amount of previous commands instead.
+> * If a number is entered, undoes that amount of previous commands instead.
+> * You can also use key combination <kbd>Ctrl</kbd> + <kbd>Z</kbd> to quickly undo one time.
 
 Examples:
 
@@ -273,6 +274,9 @@ Examples:
   `add Project` <br>
   `undo 2`<br>
   Undo both commands.
+* `add Test`<br>
+  `Press <kbd>Ctrl</kbd> + <kbd>Z</kbd>` <br>
+  Undo adding Test to the todo list.
 
 ### 3.13. Redo a command : `redo`
 
@@ -280,10 +284,11 @@ For when you accidentally undo a correct command.<br>
 Redo previously undone commands by the user.<br>
 Format: `redo [NUMBER]`
 
-> Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that 
-> you mistakenly revoked (using `undo`).<br>
-> If a number is entered, redo that amount of previous commands instead.<br>
-> The number must be less than or equal to the number of commands undone.
+> * Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that 
+> * you mistakenly revoked (using `undo`).<br>
+> * If a number is entered, redo that amount of previous commands instead.<br>
+> * The number must be less than or equal to the number of commands undone.
+> * You can also use key combination <kbd>Ctrl</kbd> + <kbd>Y</kbd> to quickly redo one time.
 
 Examples:
 
@@ -296,6 +301,10 @@ Examples:
   `undo 2`<br>
   `redo`<br>
   Redo `add Assignment`.
+* `add Test`<br>
+  `undo`<br>
+  `Press <kbd>Ctrl</kbd> + <kbd>Y</kbd>` <br>
+  Redo adding Test to the todo list.
 
 [comment]: # (@@author A0162011A)
 ### 3.14. Viewing previous commands and accessing them : `history`

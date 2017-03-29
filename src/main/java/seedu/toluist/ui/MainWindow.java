@@ -42,11 +42,12 @@ public class MainWindow extends UiPart<Region> {
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 800;
 
-    private static final String COMMAND_UNDO = "undo ";
+    private static final String COMMAND_UNDO = "undo";
+    private static final String COMMAND_REDO = "redo";
     private static final String COMMAND_SWITCH = "switch ";
     private static final String COMMAND_NAVIGATEHISTORY = "navigatehistory ";
-    private static final String[] KEYCODES_NAVIGATEHISTORY = new String[] { "up", "down"};
-    private static final String[] KEYCODES_SWITCH = new String[] { "i", "t", "n", "c", "a"};
+    private static final String[] KEYCODES_NAVIGATEHISTORY = new String[] { "up", "down" };
+    private static final String[] KEYCODES_SWITCH = new String[] { "i", "t", "n", "c", "a" };
 
     private Stage primaryStage;
     private Dispatcher dispatcher;
@@ -59,7 +60,6 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane resultDisplayPlaceholder;
     @FXML
     private AnchorPane tabPanePlaceholder;
-
     @FXML
     private AnchorPane commandAutoCompletePlaceholder;
 
@@ -102,6 +102,7 @@ public class MainWindow extends UiPart<Region> {
     private void configureKeyCombinations() {
         configureSwitchTabKeyCombinations();
         configureUndoKeyCombination();
+        configureRedoKeyCombination();
         configureHistoryNavigationKeyPresses();
     }
 
@@ -132,7 +133,17 @@ public class MainWindow extends UiPart<Region> {
         FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
     }
 
-  //@@author A0162011A
+    /**
+     * Configure CTRL+Y for quick redo
+     */
+    private void configureRedoKeyCombination() {
+        KeyCombination keyCombination = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+        String redoCommand = COMMAND_REDO;
+        EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(redoCommand);
+        FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
+    }
+
+    //@@author A0162011A
     /**
      * Configure Up/Down for history navigation
      */
@@ -145,7 +156,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-  //@@author A0131125Y
+    //@@author A0131125Y
     /**
      * Get matching key code for a string
      * @param s string
