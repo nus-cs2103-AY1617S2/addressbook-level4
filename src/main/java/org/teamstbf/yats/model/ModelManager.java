@@ -128,7 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
 		indicateTaskManagerChanged();
 	}
 
-	//@@author A0102778B
+	// @@author A0102778B
 
 	@Override
 	public boolean checkEmptyUndoStack() {
@@ -216,7 +216,6 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateFilteredEventList(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
 	}
-
 
 	@Override
 	public void updateFilteredListToShowAll() {
@@ -343,8 +342,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 		@Override
 		public boolean run(ReadOnlyEvent event) {
-			return dateKeyWords.stream().filter(
-					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
+			return dateKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDeadline().toString(), keyword))
 					.findAny().isPresent();
 		}
 
@@ -364,8 +363,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 		@Override
 		public boolean run(ReadOnlyEvent event) {
-			return startTimeKeyWords.stream().filter(
-					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
+			return startTimeKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
 					.findAny().isPresent();
 		}
 
@@ -386,8 +385,8 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return doneKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().getValue(), keyword)).findAny()
-					.isPresent();
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().getValue(), keyword))
+					.findAny().isPresent();
 		}
 
 		@Override

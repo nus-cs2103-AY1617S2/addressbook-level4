@@ -25,6 +25,7 @@ public class ListCommandParser {
 	private final String COMMAND_EXTENSION_DONE = "done";
 	private final String COMMAND_EXTENSION_TAG = "by tag";
 	private final String KEYWORD_REPLACE_DONE = "Yes";
+
 	/**
 	 * Parses the given {@code String} of arguments in the context of the
 	 * ListCommand and returns a ListCommand object that is according to the
@@ -50,23 +51,21 @@ public class ListCommandParser {
 		}
 		return new ListCommand();
 	}
-	return new ListCommand();
-    }
 
-    /**
-     * Parses a {@code String} to remove the Command Extensions
-     *
-     * @param args
-     *            String to parse
-     * @param toReplace
-     *            Command Extension to replace
-     * @return {@code Set<String>} for the ListCommand variants to process
-     */
-    private Set<String> internalParser(String args, String toReplace) {
-	String[] keywords = args.replaceFirst(toReplace, " ").trim().split(" ");
-	Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-	return keywordSet;
-    }
+	/**
+	 * Parses a {@code String} to remove the Command Extensions
+	 *
+	 * @param args
+	 *            String to parse
+	 * @param toReplace
+	 *            Command Extension to replace
+	 * @return {@code Set<String>} for the ListCommand variants to process
+	 */
+	private Set<String> internalParser(String args, String toReplace) {
+		String[] keywords = args.replaceFirst(toReplace, " ").trim().split(" ");
+		Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+		return keywordSet;
+	}
 
 	private Set<String> doneInternalParser(String args, String toReplace) {
 		String[] keywords = args.replaceFirst(toReplace, KEYWORD_REPLACE_DONE).trim().split(" ");
@@ -78,12 +77,12 @@ public class ListCommandParser {
 	// for the case of wrong command
 	// for the case of repeating events, only need to list one
 
-    /**
-     * Returns a {@code String[]} of the command text tokens
-     *
-     * @param commandText
-     */
-    private String[] stringTokenizer(String commandText) {
-	return commandText.split(" ");
-    }
+	/**
+	 * Returns a {@code String[]} of the command text tokens
+	 *
+	 * @param commandText
+	 */
+	private String[] stringTokenizer(String commandText) {
+		return commandText.split(" ");
+	}
 }
