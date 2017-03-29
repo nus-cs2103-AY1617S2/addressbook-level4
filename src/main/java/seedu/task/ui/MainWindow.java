@@ -1,5 +1,6 @@
 package seedu.task.ui;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -75,7 +77,9 @@ public class MainWindow extends UiPart<Region> {
 
         setAccelerators();
     }
-
+    public void updateCalender(ObservableList<ReadOnlyTask> taskList) {
+        calenderPanel = new CalenderPanel(calenderPlaceholder, taskList);
+    }
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -115,11 +119,11 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        calenderPanel = new CalenderPanel(calenderPlaceholder);
+        calenderPanel = new CalenderPanel(calenderPlaceholder, logic.getFilteredPersonList());
         personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+        new CommandBox(getCommandBoxPlaceholder(), logic , this);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

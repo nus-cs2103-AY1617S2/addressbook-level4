@@ -1,3 +1,4 @@
+//@@author A0163935X
 package seedu.task.ui;
 
 import java.text.DateFormat;
@@ -7,12 +8,14 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.task.commons.util.FxViewUtil;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * The Calender Panel of the App.
@@ -24,6 +27,8 @@ public class CalenderPanel extends UiPart<Region> {
     private static final DateFormat MONTH = new SimpleDateFormat("MM");
     private static final DateFormat DATE = new SimpleDateFormat("dd");
     private static final DateFormat DAY = new SimpleDateFormat("EEEE");
+    private HashMap<String, Label> dayHashMap = new HashMap<String, Label>();
+    private HashMap<String, ListView<String>> TaskListHashMap = new HashMap<String, ListView<String>>();
     // private static final DateTimeFormatter dtf =
     // DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     // private HashMap<String, Label> dayHashMap;
@@ -31,7 +36,60 @@ public class CalenderPanel extends UiPart<Region> {
     // https://www.mkyong.com/java/java-how-to-get-current-date-time-date-and-calender/
     @FXML
     private ListView<String> listview1;
-
+    @FXML
+    private ListView<String> listview2;
+    @FXML
+    private ListView<String> listview3;
+    @FXML
+    private ListView<String> listview4;
+    @FXML
+    private ListView<String> listview5;
+    @FXML
+    private ListView<String> listview6;
+    @FXML
+    private ListView<String> listview7;
+    @FXML
+    private ListView<String> listview8;
+    @FXML
+    private ListView<String> listview9;
+    @FXML
+    private ListView<String> listview10;
+    @FXML
+    private ListView<String> listview11;
+    @FXML
+    private ListView<String> listview12;
+    @FXML
+    private ListView<String> listview13;
+    @FXML
+    private ListView<String> listview14;
+    @FXML
+    private ListView<String> listview15;
+    @FXML
+    private ListView<String> listview16;
+    @FXML
+    private ListView<String> listview17;
+    @FXML
+    private ListView<String> listview18;
+    @FXML
+    private ListView<String> listview19;
+    @FXML
+    private ListView<String> listview20;
+    @FXML
+    private ListView<String> listview21;
+    @FXML
+    private ListView<String> listview22;
+    @FXML
+    private ListView<String> listview23;
+    @FXML
+    private ListView<String> listview24;
+    @FXML
+    private ListView<String> listview25;
+    @FXML
+    private ListView<String> listview26;
+    @FXML
+    private ListView<String> listview27;
+    @FXML
+    private ListView<String> listview28;
     @FXML
     private Label label1;
 
@@ -92,15 +150,75 @@ public class CalenderPanel extends UiPart<Region> {
     @FXML
     private Label day28;
 
-    public CalenderPanel(AnchorPane calendertPlaceholder) {
+    public CalenderPanel(AnchorPane calendertPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         /* ObservableList<String> data = */ FXCollections.observableArrayList("hey", "you");
-        label1.setText("v0.1");
+        //      label1.setText("v0.1");
         setDate();
-        listview1.getItems().addAll("eat pizza", "go to gym");
+        setTasks(taskList);
+        //      listview1.getItems().addAll("eat pizza", "go to gym");
         calendertPlaceholder.getChildren().add(getRoot());
 
+    }
+    private void initTaskListHashMap(HashMap<String, ListView<String>> taskListHashMap) {
+        taskListHashMap.put("day1TaskList", listview1);
+        taskListHashMap.put("day2TaskList", listview2);
+        taskListHashMap.put("day3TaskList", listview3);
+        taskListHashMap.put("day4TaskList", listview4);
+        taskListHashMap.put("day5TaskList", listview5);
+        taskListHashMap.put("day6TaskList", listview6);
+        taskListHashMap.put("day7TaskList", listview7);
+        taskListHashMap.put("day8TaskList", listview8);
+        taskListHashMap.put("day9TaskList", listview9);
+        taskListHashMap.put("day10TaskList", listview10);
+        taskListHashMap.put("day11TaskList", listview11);
+        taskListHashMap.put("day12TaskList", listview12);
+        taskListHashMap.put("day13TaskList", listview13);
+        taskListHashMap.put("day14TaskList", listview14);
+        taskListHashMap.put("day15TaskList", listview15);
+        taskListHashMap.put("day16TaskList", listview16);
+        taskListHashMap.put("day17TaskList", listview17);
+        taskListHashMap.put("day18TaskList", listview18);
+        taskListHashMap.put("day19TaskList", listview19);
+        taskListHashMap.put("day20TaskList", listview20);
+        taskListHashMap.put("day21TaskList", listview21);
+        taskListHashMap.put("day22TaskList", listview22);
+        taskListHashMap.put("day23TaskList", listview23);
+        taskListHashMap.put("day24TaskList", listview24);
+        taskListHashMap.put("day25TaskList", listview25);
+        taskListHashMap.put("day26TaskList", listview26);
+        taskListHashMap.put("day27TaskList", listview27);
+        taskListHashMap.put("day28TaskList", listview28);
+    }
+    private void setTasks(ObservableList<ReadOnlyTask> taskList) {
+        initTaskListHashMap(TaskListHashMap);
+        for (int i = 0; i < taskList.size(); i++) {
+
+            for (int j = 0; j < 28; j++) {
+                Label DateLabel = dayHashMap.get("day" + (j + 1));
+                ListView<String> TaskList = TaskListHashMap.get("day" + (j + 1) + "TaskList");
+                ReadOnlyTask CurrentTask = taskList.get(i);
+                String labelDate = dayHashMap.get("day" + (j + 1)).getText().toString();
+                String taskDate = taskList.get(i).getEndTiming().toString();
+                String[] taskListDateData = taskDate.toString().split("/");
+                String taskDateMonth = taskListDateData[1];
+                String taskDateDate = taskListDateData[0];
+                boolean  DateEqual = false;
+
+                if (taskDateMonth.substring(0, 1).equals("0")) {
+                    if ((taskDateMonth + "/" + taskDateDate).equals("0" + labelDate)) {
+                        TaskList.getItems().addAll(taskList.get(i).getDescription().toString());
+
+                    }
+                } else {
+                    if ((taskDateMonth + "/" + taskDateDate).equals(labelDate)) {
+                        System.out.println(labelDate);
+                    }
+                }
+
+            }
+        }
     }
 
     private void initDayHashMap(HashMap<String, Label> dayHash) {
@@ -135,7 +253,7 @@ public class CalenderPanel extends UiPart<Region> {
     }
 
     private void setDate() {
-        HashMap<String, Label> dayHashMap = new HashMap<String, Label>();
+
         initDayHashMap(dayHashMap);
 
         Date date = new Date();
@@ -164,8 +282,8 @@ public class CalenderPanel extends UiPart<Region> {
         int firstDateDate = Integer.valueOf(DATE.format(firstDate));
 
         for (int count = 1; count <= 28; count++) {
-            dayHashMap.get("day" + count)
-                    .setText(Integer.toString(firstDateMonth) + "/" + Integer.toString(firstDateDate));
+            dayHashMap.get("day" + count).setText(Integer.toString(firstDateMonth)
+                + "/" + Integer.toString(firstDateDate));
             firstDateDate++;
             if (firstDateMonth == 2 && firstDateDate > 28) {
                 firstDateMonth += 1;
