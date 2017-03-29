@@ -6,8 +6,17 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Jay Gajendra Kabra](https://github.com/jay500s)
 <img src="images/jay500s.PNG" width="150"><br>
-**Role**: Developer <br>
-Responsibilities: Model and Code Quality
+*Components in Charge of: [Model](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#model-component) <br>
+* Aspects/tools in charge of: Code Quality
+* Features implemented:
+	* [Reccurring Tasks]()
+	* [Find on any parameter](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.5. Finding all tasks containing any keyword in their name: find)
+	* [Prioritize Command Worked with Heyang to implement logic and model functionality](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#Allocate priority to a task: prioritize)
+* Code written: [[functional code](A0164212U.md)][[test code](A0164212U.md)]
+* Other major contributions:
+	* Did initial refactoring from AddressBook to TaskList
+	* Created Description, Priority, and Timing classes and added respective functionality to validate respective parameters
+	* Colored Priorities for better UI experience
 
 -----
 
