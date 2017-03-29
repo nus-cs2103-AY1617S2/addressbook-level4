@@ -68,7 +68,7 @@ public class XmlAdaptedTask {
         isCompleted = source.isCompleted();
         isRecurring = source.isRecurring();
         if (source.getRecurrence().isPresent()) {
-            deadline = source.getRecurrence().get().toString();
+            recurrence = source.getRecurrence().get().toString();
         }
         labeled = new ArrayList<>();
         bookingSlots = new ArrayList<>();
