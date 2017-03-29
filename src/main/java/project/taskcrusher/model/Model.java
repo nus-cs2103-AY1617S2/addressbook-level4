@@ -24,6 +24,7 @@ public interface Model {
     /** Returns the UserInbox */
     ReadOnlyUserInbox getUserInbox();
 
+    void prepareListsForUi();
     // ========== for tasks =================================================
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;

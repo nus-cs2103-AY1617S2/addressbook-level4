@@ -68,7 +68,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
-    private void prepareListsForUi() {
+    public void prepareListsForUi() {
         boolean taskListToShowEmpty = false, eventListToShowEmpty = false;
         if (filteredEvents.isEmpty()) {
             eventListToShowEmpty = LIST_EMPTY;
@@ -112,6 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
         userInbox.removeEvent(target);
         indicateUserInboxChanged();
+        prepareListsForUi();
     }
 
     @Override
@@ -122,6 +123,7 @@ public class ModelManager extends ComponentManager implements Model {
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.updateEvent(eventListIndex, editedEvent);
         indicateUserInboxChanged();
+        prepareListsForUi();
     }
 
     @Override
