@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
-import javafx.scene.input.KeyCode;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.scene.input.KeyCode;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.testutil.TypicalTestTodoLists;
