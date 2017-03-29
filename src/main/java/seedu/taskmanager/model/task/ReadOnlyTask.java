@@ -55,7 +55,7 @@ public interface ReadOnlyTask {
         builder.append(getTaskName());
 
         if (getStartDate().toString() != "EMPTY_FIELD") {
-            builder.append(" Date: ").append(getStartDate());
+            builder.append(" Start Date: ").append(getStartDate());
         }
 
         if (getStartTime().toString() != "EMPTY_FIELD") {

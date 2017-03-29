@@ -46,25 +46,35 @@ public class TaskCard extends UiPart<Region> {
         if ((task.getStartDate().value).equals("EMPTY_FIELD")) {
             startDate.textProperty().bind(empty);
         } else {
-            startDate.setText(task.getStartDate().value);
+            if ((task.getStartDate().value).equals(task.getEndDate().value)) {
+                startDate.setText("Date: " + task.getStartDate().value);
+            } else {
+                startDate.setText("Start Date: " + task.getStartDate().value);
+            }
         }
         if ((task.getStartTime().value).equals("EMPTY_FIELD")) {
             startTime.textProperty().bind(empty);
         } else {
-            startTime.setText(task.getStartTime().value);
+            startTime.setText("Start Time: " + task.getStartTime().value);
         }
-        if ((task.getEndTime().value).equals("EMPTY_FIELD") || (task.getEndDate().value).equals("EMPTY_FIELD")) {
-            endTime.textProperty().bind(empty);
+        if ((task.getEndDate().value).equals("EMPTY_FIELD")) {
             endDate.textProperty().bind(empty);
-            toLabel.textProperty().bind(empty);
         } else {
-            endTime.setText(task.getEndTime().value);
-            endDate.setText(task.getEndDate().value);
-            if ((task.getStartTime().value).equals("EMPTY_FIELD") || (task.getStartDate().value).equals("EMPTY_FIELD")) {
-                toLabel.textProperty().bind(empty);
+            if ((task.getStartDate().value).equals(task.getEndDate().value)) {
+                endDate.textProperty().bind(empty);
             } else {
-                toLabel.textProperty().bind(to);
+                endDate.setText("End Date: " + task.getEndDate().value);
             }
+        }
+        if ((task.getEndTime().value).equals("EMPTY_FIELD")) {
+            endTime.textProperty().bind(empty);
+        } else {
+            endTime.setText("End Time: " + task.getEndTime().value);
+        }
+
+        toLabel.textProperty().bind(empty);
+        if (!(task.getEndTime().value).equals("EMPTY_FIELD") && !(task.getStartTime().value).equals("EMPTY_FIELD")) {
+            toLabel.textProperty().bind(to);
         }
         if (task.getIsMarkedAsComplete()) {
             markedCompleted.textProperty().bind(completed);
