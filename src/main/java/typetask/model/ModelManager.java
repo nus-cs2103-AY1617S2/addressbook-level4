@@ -42,7 +42,8 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with Task Manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.taskManager.getIncompleteList());
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        updateFilteredTaskList(false);
     }
 
     public ModelManager() {
@@ -74,7 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) {
         taskManager.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredTaskList(false);
         indicateTaskManagerChanged();
     }
 
@@ -88,6 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0144902L
+    /** Updates the completeTask in storage*/
     @Override
     public synchronized void completeTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         assert target != null;
@@ -157,17 +159,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
-    }
-
-    @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+    }
+    //@@author A0144902L
+    @Override
+    public void updateFilteredTaskList(boolean showComplete) {
+        updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(showComplete)));
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -235,6 +237,26 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+
+    //@@author A0144902L
+    /** Examines if the task is qualified to be in list of completed tasks*/
+    private class CompleteQualifier implements Qualifier {
+        private boolean showComplete;
+
+        CompleteQualifier(boolean showComplete) {
+            this.showComplete = showComplete;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return (task.getIsCompleted() == showComplete);
+        }
+
+        @Override
+        public String toString() {
+            return "showComplete=" + String.valueOf(showComplete);
         }
     }
 

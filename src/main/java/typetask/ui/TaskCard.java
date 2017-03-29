@@ -64,7 +64,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(task.getDate().value);
         endDate.setText(task.getEndDate().value);
-        completed = task.getIsCompleted();
+//        completed = task.getIsCompleted();
         setStatusForEventTask(task);
         setStatusForDeadlineTask(task);
         setColourCode();
