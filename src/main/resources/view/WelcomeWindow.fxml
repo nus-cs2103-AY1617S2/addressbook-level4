@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1">
-	<Label>
-		<text>Hey there! Here are your tasks for the day!</text>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0"
+	xmlns:fx="http://javafx.com/fxml">
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+	<Label style="-fx-font: NORMAL 20 Tahoma;" text="Hey there! Here are your tasks for the day!"
+		GridPane.columnIndex="0" GridPane.rowIndex="0">
 	</Label>
-</AnchorPane>
+	<AnchorPane fx:id="todayTaskListPanelPlaceholder"
+		styleClass="anchor-pane-with-border" GridPane.columnIndex="0"
+		GridPane.rowIndex="1">
+		<padding>
+			<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+		</padding>
+	</AnchorPane>
+</GridPane>

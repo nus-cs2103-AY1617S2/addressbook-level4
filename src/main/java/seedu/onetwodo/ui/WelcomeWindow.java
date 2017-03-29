@@ -8,6 +8,8 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import seedu.onetwodo.commons.core.GuiSettings;
+import seedu.onetwodo.logic.Logic;
+import seedu.onetwodo.model.task.TaskType;
 
 public class WelcomeWindow extends UiPart<Region> {
 
@@ -16,21 +18,32 @@ public class WelcomeWindow extends UiPart<Region> {
     private static final int MIN_WIDTH = 550;
 
     private Stage secondaryStage;
+    private TodayTaskList todayTaskListPanel;
+    Logic logic;
 
     @FXML
     private AnchorPane todayTaskListPanelPlaceholder;
 
-    public WelcomeWindow(Stage secondaryStage) {
+    public WelcomeWindow(Stage secondaryStage, Logic logic) {
         super(FXML);
 
         // Set dependencies
         this.secondaryStage = secondaryStage;
+        this.logic = logic;
 
         // Configure the UI
         setTitle("Welcome screen");
         setWindowSize();
         Scene scene = new Scene(getRoot());
         secondaryStage.setScene(scene);
+    }
+
+    void fillInnerParts() {
+        todayTaskListPanel = new TodayTaskList(getTodayListPlaceholder(), logic.getFilteredTaskList());
+    }
+
+    private AnchorPane getTodayListPlaceholder() {
+        return todayTaskListPanelPlaceholder;
     }
 
     private void setTitle(String appTitle) {

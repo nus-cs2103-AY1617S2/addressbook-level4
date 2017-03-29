@@ -55,8 +55,9 @@ public class UiManager extends ComponentManager implements Ui {
                                // parts
             mainWindow.fillInnerParts();
 
-            welcomeWindow = new WelcomeWindow(secondaryStage);
+            welcomeWindow = new WelcomeWindow(secondaryStage, logic);
             welcomeWindow.show();
+            welcomeWindow.fillInnerParts();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
