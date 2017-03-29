@@ -46,6 +46,7 @@ public interface ReadOnlyTask {
                         && other.getIsMarkedAsComplete().equals(this.getIsMarkedAsComplete()));
     }
 
+    //@@author A0142418L
     /**
      * Formats the task as text, showing all contact details.
      */
@@ -54,7 +55,7 @@ public interface ReadOnlyTask {
         builder.append(getTaskName());
 
         if (getStartDate().toString() != "EMPTY_FIELD") {
-            builder.append(" Date: ").append(getStartDate());
+            builder.append(" Start Date: ").append(getStartDate());
         }
 
         if (getStartTime().toString() != "EMPTY_FIELD") {
@@ -69,7 +70,7 @@ public interface ReadOnlyTask {
             builder.append(" End Time: ").append(getEndTime());
         }
 
-        if (getCategories().toString() != "EMPTY_FIELD") {
+        if (/*getCategories().toString() != "EMPTY_FIELD"*/!getCategories().isEmptyCategoryList()) {
             builder.append(" Categories: ");
             getCategories().forEach(builder::append);
         }

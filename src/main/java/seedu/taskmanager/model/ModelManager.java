@@ -1,4 +1,3 @@
-
 package seedu.taskmanager.model;
 
 import java.util.Set;
@@ -101,32 +100,44 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0142418L
+    /** Deletes tasks by their date. 
+     *  Returns the number of tasks deleted.
+     * */
     @Override
-    public synchronized void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
+    public synchronized int deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
             throws TaskNotFoundException {
+        int numDeletedTasks = 0;
+        saveInstance();
         while (targets.size() != 0) {
             try {
                 ReadOnlyTask taskToDelete = targets.get(0);
                 saveInstance();
                 taskManager.removeTask(taskToDelete);
+                numDeletedTasks++;
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
             }
         }
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        return numDeletedTasks;
     }
 
+    /** Deletes the task by its name. 
+     *  Returns the number of tasks deleted.
+     * */
     @Override
-    public synchronized void deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
+    public synchronized int deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws TaskNotFoundException {
-        while (targets.size() != 0) {
+        int numDeletedTasks = 0;
+        saveInstance();
+        for (int index = 0; targets.size() != index; index++) {
             try {
-                ReadOnlyTask taskToDelete = targets.get(0);
+                ReadOnlyTask taskToDelete = targets.get(index);
                 if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
-                    saveInstance();
                     taskManager.removeTask(taskToDelete);
-                    break;
+                    index--;
+                    numDeletedTasks++;
                 }
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
@@ -134,6 +145,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        return numDeletedTasks;
     }
 
     // @@author
@@ -149,7 +161,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
         saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
@@ -159,7 +170,6 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0139520L
     @Override
     public void markTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
-
         saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTask(taskManagerIndex, true);
@@ -169,7 +179,6 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0139520L
     @Override
     public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
-
         saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTask(taskManagerIndex, false);

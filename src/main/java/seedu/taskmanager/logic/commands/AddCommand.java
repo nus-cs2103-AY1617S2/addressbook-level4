@@ -46,7 +46,7 @@ public class AddCommand extends Command {
             categorySet.add(new Category(categoryName));
         }
         this.toAdd = new Task(new TaskName(taskName), new StartDate(startDate), new StartTime(startTime),
-                new EndDate(endDate), new EndTime(endTime), new UniqueCategoryList(categorySet));
+                new EndDate(endDate), new EndTime(endTime) , new Boolean(false), new UniqueCategoryList(categorySet));
     }
 
     @Override

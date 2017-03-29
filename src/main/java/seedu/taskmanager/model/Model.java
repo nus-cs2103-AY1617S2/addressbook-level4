@@ -33,11 +33,15 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     // @@author A0142418L
-    /** Deletes tasks by their date. */
-    void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException;
+    /** Deletes tasks by their date. 
+     *  Returns the number of tasks deleted.
+     * */
+    int deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Deletes the task by its name. */
-    void deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
+    /** Deletes the task by its name. 
+     *  Returns the number of tasks deleted.
+     * */
+    int deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws UniqueTaskList.TaskNotFoundException;
 
     // @@author

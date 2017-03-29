@@ -21,14 +21,17 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task(s) identified by the index number or task name or task date used "
-            + "in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1\n"
-            + "Parameters: TASK NAME (must be a valid task name)\n" + "Example: " + COMMAND_WORD
+            + "in the last task listing.\n" + "Parameters: INDEX (must be a positive integer)\n" + "Example: "
+            + COMMAND_WORD + " 1\n" + "Parameters: TASK NAME (must be a valid task name)\n" + "Example: " + COMMAND_WORD
             + " Eat lunch with mum\n" + "Parameters: TASK DATE (must be a valid task date)\n" + "Example: "
             + COMMAND_WORD + " 15/07/17";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
-    public static final String MESSAGE_DELETE_TASKS_DATE_SUCCESS = "Deleted tasks on: ";
+    public static final String MESSAGE_DELETE_TASKS_DATE_SUCCESS_1 = "Deleted tasks on: ";
+    public static final String MESSAGE_DELETE_TASKS_DATE_SUCCESS_2 = "\nTotal number of task(s) deleted: ";
+
+    public static final String MESSAGE_DELETE_TASKS_NAME_SUCCESS_1 = "Deleted task all tasks with name '";
+    public static final String MESSAGE_DELETE_TASKS_NAME_SUCCESS_2 = "' .\nTotal number of task(s) deleted: ";
 
     public static final String DELETE_COMMAND_VALIDATION_REGEX_1 = "\\d+";
     public static final String DELETE_COMMAND_VALIDATION_REGEX_2 = "[a-zA-Z]+";
@@ -65,6 +68,8 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
+        int numDeletedTasks = 0;
+
         if (targetIndex != DELETE_INDEX_NOT_PRESENT_TOKEN) {
 
             UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -99,12 +104,13 @@ public class DeleteCommand extends Command {
                 }
 
                 try {
-                    model.deleteTasksDate(lastShownList);
+                    numDeletedTasks = model.deleteTasksDate(lastShownList);
                 } catch (TaskNotFoundException e) {
                     assert false : "The target tasks cannot be missing";
                 }
 
-                return new CommandResult(String.format(MESSAGE_DELETE_TASKS_DATE_SUCCESS, targetDate));
+                return new CommandResult(MESSAGE_DELETE_TASKS_DATE_SUCCESS_1 + targetDate +
+                        MESSAGE_DELETE_TASKS_DATE_SUCCESS_2 + Integer.toString(numDeletedTasks));
             } else {
 
                 final String[] keywords = { "" };
@@ -122,12 +128,13 @@ public class DeleteCommand extends Command {
                 }
 
                 try {
-                    model.deleteTasksName(lastShownList, targetTaskName);
+                    numDeletedTasks = model.deleteTasksName(lastShownList, targetTaskName);
                 } catch (TaskNotFoundException e) {
                     assert false : "The target tasks cannot be missing";
                 }
 
-                return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, targetTaskName));
+                return new CommandResult(MESSAGE_DELETE_TASKS_NAME_SUCCESS_1 + targetTaskName +
+                        MESSAGE_DELETE_TASKS_NAME_SUCCESS_2 + Integer.toString(numDeletedTasks));
             }
         }
     }

@@ -31,6 +31,8 @@ public class XmlAdaptedTask {
     private String enddate;
     @XmlElement(required = true)
     private String endtime;
+    @XmlElement(required = true)
+    private String markedCompleted;
     @XmlElement
     private List<XmlAdaptedCategory> categorised = new ArrayList<>();
 
@@ -54,6 +56,7 @@ public class XmlAdaptedTask {
         starttime = source.getStartTime().value;
         enddate = source.getEndDate().value;
         endtime = source.getEndTime().value;
+        markedCompleted = source.getIsMarkedAsComplete().toString();
         categorised = new ArrayList<>();
         for (Category category : source.getCategories()) {
             categorised.add(new XmlAdaptedCategory(category));
@@ -79,7 +82,8 @@ public class XmlAdaptedTask {
         final StartTime startTime = new StartTime(this.starttime);
         final EndDate endDate = new EndDate(this.enddate);
         final EndTime endTime = new EndTime(this.endtime);
+        final Boolean markedCompleted = new Boolean(this.markedCompleted);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(taskName, startDate, startTime, endDate, endTime, categories);
+        return new Task(taskName, startDate, startTime, endDate, endTime, markedCompleted, categories);
     }
 }
