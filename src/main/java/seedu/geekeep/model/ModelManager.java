@@ -236,6 +236,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateGeeKeepChanged();
     }
 
+    @Override
+    public void setGeekeepFilePath(String filePath) {
+        config.setGeeKeepFilePath(filePath);
+        indicateGeekeepFilePathChanged(filePath);
+    }
+
     /** Raises an event to indicate the geeKeepFilePath has changed */
     private void indicateGeekeepFilePathChanged(String filePath) {
         raise(new GeekeepFilePathChangedEvent(filePath, geeKeep));

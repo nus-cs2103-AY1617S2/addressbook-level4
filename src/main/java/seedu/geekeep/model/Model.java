@@ -77,5 +77,7 @@ public interface Model {
 
     void redo() throws NothingToRedoException;
 
+    void setGeekeepFilePath(String filePath);
+
 }
 
