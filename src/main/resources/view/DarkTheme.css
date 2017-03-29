@@ -12,8 +12,8 @@
   -fx-background-color: #777777;
 }
 
-.check-box > .box > .mark {
-    -fx-background-color: white;
+.check-box:selected>.box>.mark {
+  -fx-background-color: white;
 }
 
 .label {
