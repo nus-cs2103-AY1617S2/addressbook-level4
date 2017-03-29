@@ -82,6 +82,13 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager.resetData(newData);
     }
 
+    @Override
+    public void loadData(ReadOnlyItemManager newData) {
+        this.resetDataWithoutSaving(newData);
+        taskManagerStack.clearRedoStack();
+        taskManagerStack.clearUndoStack();
+    }
+
     // @@author A0138909R
     @Override
     public void clearData() {

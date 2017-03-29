@@ -4,6 +4,7 @@ package guitests;
 import org.junit.Test;
 
 import seedu.doit.logic.commands.UndoCommand;
+import seedu.doit.model.TaskManagerStack;
 import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TypicalTestTasks;
 
@@ -14,6 +15,8 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     public static final String MESSAGE_TEST_EDIT_COMMAND = "edit 2 t/hi";
     public static final String MESSAGE_TEST_MARK_COMMAND = "mark 5";
     public static final String MESSAGE_TEST_DELETE_COMMAND = "delete 7";
+
+    TaskManagerStack stack = TaskManagerStack.getInstance();
 
     // The list of tasks in the task list panel is expected to match this list.
     private TestTask[] expectedTasksList = this.td.getTypicalTasks();
@@ -51,13 +54,14 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void undo_emptyStack_failure() {
+        this.stack.clearUndoStack();
         this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
         assertResultMessage(UndoCommand.MESSAGE_FAILURE);
     }
 
     private void assertUndoSuccess() {
         // confirm the list now contains all previous tasks plus the new task
-        assertAllPanelsMatch(expectedTasksList);
+        assertAllPanelsMatch(this.expectedTasksList);
     }
 
 }

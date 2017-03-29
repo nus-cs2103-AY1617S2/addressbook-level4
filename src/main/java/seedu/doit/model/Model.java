@@ -135,6 +135,12 @@ public interface Model {
      */
     void resetDataWithoutSaving(ReadOnlyItemManager newData);
 
+    /**
+     * Clears existing backing model and replaces with the provided new data
+     * without saving for loading and updates the redo and undo stack.
+     */
+    void loadData(ReadOnlyItemManager newData);
+
     // @@author
 
 }

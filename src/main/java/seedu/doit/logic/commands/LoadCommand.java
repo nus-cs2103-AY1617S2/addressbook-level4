@@ -57,7 +57,7 @@ public class LoadCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_FILE_NAME);
         }
         TaskManagerLoadChangedEvent event = new TaskManagerLoadChangedEvent(newData, this.loadFilePath);
-        this.model.resetDataWithoutSaving(newData.orElseGet(SampleDataUtil::getSampleTaskManager));
+        this.model.loadData(newData.orElseGet(SampleDataUtil::getSampleTaskManager));
         logger.info("Created event : " + event.toString());
         EventsCenter.getInstance().post(event);
         logger.info("---------------------------------------HANDLED event : " + event.toString());
