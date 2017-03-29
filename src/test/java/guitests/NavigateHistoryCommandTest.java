@@ -71,11 +71,11 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
     public void viewEverythingTooManyTimes() {
         commandBox.runCommand(command1);
         commandBox.enterCommand(command2);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             mainGui.getCommandBox().press(KeyCode.UP);
         }
         assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             mainGui.getCommandBox().press(KeyCode.DOWN);
         }
         assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command2);
