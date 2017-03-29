@@ -14,7 +14,7 @@ public class SampleDataUtilTest {
     public void getSampleTasksTest() {
         Task[] sampleTasks = SampleDataUtil.getSampleTasks();
         assertNotNull(sampleTasks);
-        assertTrue(sampleTasks.length == 40);
+        assertTrue(sampleTasks.length == 50);
     }
 
     @Test
