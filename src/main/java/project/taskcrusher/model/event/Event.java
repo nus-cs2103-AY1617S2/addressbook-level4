@@ -131,10 +131,10 @@ public class Event extends UserToDo implements ReadOnlyEvent {
             return -1;
         }
         // TODO: just for now
-        Date thisEarliestSlot = this.timeslots.get(0).start;
-        Date anotherEarliestSlot = another.getTimeslots().get(0).start;
+        Date thisEarliest = this.timeslots.get(0).start;
+        Date anotherEarliest = another.getTimeslots().get(0).start;
 
-        return thisEarliestSlot.compareTo(anotherEarliestSlot);
+        return thisEarliest.compareTo(anotherEarliest);
     }
 
     public boolean hasOverlappingEvent(List<? extends ReadOnlyEvent> preexistingEvents) {
