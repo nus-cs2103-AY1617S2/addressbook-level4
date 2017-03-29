@@ -167,7 +167,6 @@ Examples:
   `delete 1 2`<br>
   Deletes the first and second task in the TaskBoss.
   
-  
 * `find n/Meeting`<br>
   `delete 1`<br>
   Deletes the first task in the results of the `find` command.
@@ -211,7 +210,7 @@ Format: `mark INDEX`
 Examples:
  
  * `list`<br>
-  `done 1 2`<br>
+  `mark 1 2`<br>
   Marks the first and second task as done in the TaskBoss.
 
 ### 3.11. Undoing a command : `undo / u`
