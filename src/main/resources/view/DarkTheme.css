@@ -373,3 +373,6 @@
 .titled-pane .title:pressed {
     -fx-background-color: #DDDDDD;
 }
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 0 0 0;
+}
