@@ -18,11 +18,12 @@ public class TestTask implements ReadOnlyTask {
 
     private Description description;
     private Priority priority;
-    private Timing startDate;
-    private Timing endDate;
-    private boolean complete;
-
+    private ArrayList<RecurringTaskOccurrence> occurrences;
+    private boolean recurring;
     private UniqueTagList tags;
+    private RecurringFrequency frequency;
+    private ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
+
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -34,34 +35,39 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.description = taskToCopy.getDescription();
         this.priority = taskToCopy.getPriority();
-        this.complete = taskToCopy.isComplete();
-        this.startDate = taskToCopy.getStartTiming();
-        this.endDate = taskToCopy.getEndTiming();
+        this.occurrences = taskToCopy.getOccurrences();
+        this.recurring = taskToCopy.isRecurring();
         this.tags = taskToCopy.getTags();
+        this.frequency = taskToCopy.getFrequency();
+        this.occurrenceIndexList = taskToCopy.getOccurrenceIndexList();
     }
 
     public void setDescription(Description description) {
         this.description = description;
     }
 
-    public void setStartDate(Timing startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Timing endDate) {
-        this.endDate = endDate;
-    }
-
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    public void setComplete(boolean complete) {
-        this.complete = complete;
-    }
-
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
+    }
+
+    @Override
+    public void setStartTiming(Timing startTiming) {
+        assert startTiming != null;
+        this.occurrences.get(0).setStartTiming(startTiming);
+    }
+
+    @Override
+    public void setEndTiming(Timing endTiming) {
+        assert endTiming != null;
+        this.occurrences.get(0).setEndTiming(endTiming);
+    }
+
+    public void setComplete(boolean complete) {
+        this.occurrences.get(0).setComplete(true);
     }
 
     @Override
@@ -75,18 +81,23 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Timing getStartTiming(int i) {
+        return this.occurrences.get(i).getStartTiming();
+    }
+
+    @Override
     public Timing getStartTiming() {
-        return startDate;
+        return getStartTiming(0);
     }
 
     @Override
     public Timing getEndTiming() {
-        return endDate;
+        return this.occurrences.get(0).getEndTiming();
     }
 
     @Override
     public boolean isComplete() {
-        return complete;
+        return this.occurrences.get(0).isComplete();
     }
 
     @Override
@@ -106,62 +117,34 @@ public class TestTask implements ReadOnlyTask {
         sb.append("p/" + this.getPriority().value + " ");
         sb.append("sd/" + this.getStartTiming().value + " ");
         sb.append("ed/" + this.getEndTiming().value + " ");
+        sb.append("r/" + this.getFrequency().frequency + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 
     @Override
     public boolean isRecurring() {
-        // TODO Auto-generated method stub
-        return false;
+        return recurring;
     }
 
     @Override
     public RecurringFrequency getFrequency() {
-        // TODO Auto-generated method stub
-        return null;
+        return frequency;
     }
 
     @Override
     public ArrayList<RecurringTaskOccurrence> getOccurrences() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setStartTiming(Timing startTiming) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setEndTiming(Timing endTiming) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Timing getStartTiming(int i) {
-        // TODO Auto-generated method stub
-        return null;
+        return occurrences;
     }
 
     @Override
     public ArrayList<Integer> getOccurrenceIndexList() {
-        // TODO Auto-generated method stub
-        return null;
+        return occurrenceIndexList;
     }
 
     @Override
     public void setOccurrenceIndexList(ArrayList<Integer> list) {
-        // TODO Auto-generated method stub
-
+        occurrenceIndexList = list;
     }
 
-    //    public void setFrequency(Timing timing) {
-    //        // TODO Auto-generated method stub
-    //
-    //    }
-
 }
-// @@author
