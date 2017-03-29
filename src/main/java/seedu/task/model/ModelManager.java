@@ -64,7 +64,6 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskListChangedEvent(taskList));
     }
 
-    //@@author A0113795Y
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         TaskList update = new TaskList(this.taskList);
@@ -114,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
     public Stack<TaskList> getUndoStack() {
         return this.undoStack;
     }
-    //@@author
+
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
