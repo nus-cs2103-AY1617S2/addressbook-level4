@@ -159,7 +159,8 @@ public class UniqueTaskList implements Iterable<Task> {
 
     // @@author A0131278H
     /**
-     * Sorts task list based on keywords (startdate or enddate).
+     * Sorts task list based on keywords (StartDate or EndDate). Tasks without start StartDate or
+     * EndDate are ranked higher.
      */
     public void sortByDate(String keyword) {
         if (keyword.equals(SORT_KEYWORD_STARTDATE)) {
@@ -167,7 +168,16 @@ public class UniqueTaskList implements Iterable<Task> {
             internalList.sort(new Comparator<Task>() {
                 @Override
                 public int compare(Task t1, Task t2) {
-                    return t1.getStartDate().compareTo(t2.getStartDate());
+                    if (t1.getStartDate().isPresent() && t2.getStartDate().isPresent()) {
+                        return t1.getStartDate().get().compareTo(t2.getStartDate().get());
+                    }
+                    // @@author A0140032E
+                    if (t2.getStartDate().isPresent()) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                    // @@author A0131278H
                 }
             });
         } else if (keyword.equals(SORT_KEYWORD_ENDDATE)) {
@@ -175,7 +185,16 @@ public class UniqueTaskList implements Iterable<Task> {
             internalList.sort(new Comparator<Task>() {
                 @Override
                 public int compare(Task t1, Task t2) {
-                    return t1.getEndDate().compareTo(t2.getEndDate());
+                    if (t1.getEndDate().isPresent() && t2.getEndDate().isPresent()) {
+                        return t1.getEndDate().get().compareTo(t2.getEndDate().get());
+                    }
+                    // @@author A0140032E
+                    if (t2.getEndDate().isPresent()) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                    // @@author A0131278H
                 }
             });
         } else {
