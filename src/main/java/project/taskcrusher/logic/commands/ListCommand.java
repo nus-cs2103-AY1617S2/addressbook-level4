@@ -43,7 +43,6 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        System.out.println("in execute");
         assert model != null;
         assert !(showOverdueOnly && showCompleteOnly);
 

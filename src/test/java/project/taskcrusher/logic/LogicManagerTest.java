@@ -112,7 +112,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_invalid() {
-        String invalidCommand = "       ";
+        String invalidCommand = " ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
 
@@ -493,17 +493,60 @@ public class LogicManagerTest {
         assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedInbox, expectedTaskList, expectedEventList);
     }
 
-    // @Test
-    // public void execute_list_filtersCorrectly() throws Exception {
-    // // prepare expectations
-    // TestDataHelper helper = new TestDataHelper();
-    // UserInbox expectedInbox1 = new UserInbox();
-    // List<Event> expectedEventList1 = new ArrayList<>();
-    // List<Event> expectedTaskList1 = new ArrayList<>();
-    //
-    // assertCommandSuccess("list d/", ListCommand.MESSAGE_SUCCESS,
-    // expectedInbox1, expectedTaskList1, expectedEventList1);
-    // }
+    @Test
+    public void execute_list_filtersCorrectly() throws Exception {
+        // set up model
+        execute_add_successful();
+
+        // add a task with deadline to use for test
+        TestDataHelper helper = new TestDataHelper();
+        model.addTask(helper.homeworkWithDeadline());
+
+        // set up expected user inbox (won't change even if filtered lists
+        // change)
+        UserInbox expectedInbox = new UserInbox();
+        List<Event> fullEventList = new ArrayList<>();
+        List<Task> fullTaskList = new ArrayList<>();
+        fullTaskList.add(helper.homework());
+        fullTaskList.add(helper.homeworkWithDeadline());
+        fullEventList.add(helper.reviewSession());
+        fullEventList.add(helper.reviewSessionTentative());
+        helper.addToUserInbox(expectedInbox, fullTaskList, fullEventList);
+
+        // all overlap
+        List<Event> expectedEventList1 = new ArrayList<>();
+        List<Task> expectedTaskList1 = new ArrayList<>();
+        expectedTaskList1.add(helper.homeworkWithDeadline());
+        expectedEventList1.add(helper.reviewSession());
+        expectedEventList1.add(helper.reviewSessionTentative());
+
+        assertCommandSuccess("list d/2017-05-20 to 2025-04-28", ListCommand.MESSAGE_SUCCESS, expectedInbox,
+                expectedTaskList1, expectedEventList1);
+
+        // no overlap
+        List<Event> expectedEventList2 = new ArrayList<>();
+        List<Task> expectedTaskList2 = new ArrayList<>();
+
+        assertCommandSuccess("list d/2017-05-19", ListCommand.MESSAGE_SUCCESS, expectedInbox, expectedTaskList2,
+                expectedEventList2);
+
+        // partial overlaps
+        List<Event> expectedEventList3 = new ArrayList<>();
+        List<Task> expectedTaskList3 = new ArrayList<>();
+        expectedEventList3.add(helper.reviewSession());
+        expectedEventList3.add(helper.reviewSessionTentative());
+
+        assertCommandSuccess("list d/2017-09-23 04:00PM to 2020-09-23 04:00PM", ListCommand.MESSAGE_SUCCESS,
+                expectedInbox, expectedTaskList3, expectedEventList3);
+    }
+
+    @Test
+    public void execute_list_invalidArgs() throws Exception {
+
+        assertCommandFailure("list d/2019-11-11 to 2020-11-11 or 2018-11-11 to 2019-11-11",
+                ListCommand.MESSAGE_MULTIPLE_DATERANGES);
+
+    }
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
@@ -741,6 +784,17 @@ public class LogicManagerTest {
         Task homework() throws Exception {
             Name name = new Name("CS2103 homework");
             Deadline deadline = new Deadline("");
+            Priority priority = new Priority("3");
+            Description description = new Description("do or die");
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("longertag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(name, deadline, priority, description, tags);
+        }
+
+        Task homeworkWithDeadline() throws Exception {
+            Name name = new Name("CS2103 homework");
+            Deadline deadline = new Deadline("2017-08-23");
             Priority priority = new Priority("3");
             Description description = new Description("do or die");
             Tag tag1 = new Tag("tag1");
