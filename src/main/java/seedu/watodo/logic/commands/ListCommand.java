@@ -14,7 +14,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists tasks that fit the specified keyword as a filter to the user. "
-            + "Parameters: KEYWORD\n" + "Example: " + COMMAND_WORD + " all";
+            + "Parameters: LIST_TYPE\n" + "Example: " + COMMAND_WORD + " all";
 
     public static final int DEADLINE = 1;
 
