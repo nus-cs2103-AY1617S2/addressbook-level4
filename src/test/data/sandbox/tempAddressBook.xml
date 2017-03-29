@@ -3,8 +3,9 @@
     <tasks>
         <title>Ali Muster</title>
         <location>School</location>
-        <startTime></startTime>
-        <endTime></endTime>
+        <startTime>11:59PM 08/04/2017</startTime>
+        <endTime>11:59PM 08/04/2017</endTime>
+        <deadline></deadline>
         <description>lame</description>
         <completed>No</completed>
     </tasks>

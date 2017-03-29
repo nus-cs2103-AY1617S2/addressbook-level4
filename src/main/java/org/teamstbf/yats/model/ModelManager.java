@@ -233,7 +233,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void updateFilteredListToShowDate(Set<String> keywords) {
-		updateFilteredEventList(new PredicateExpression(new DateQualifier(keywords)));
+		updateFilteredEventList(new PredicateExpression(new EndTimeQualifier(keywords)));
 	}
 
 	@Override
@@ -332,18 +332,18 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 	}
 
-	private class DateQualifier implements Qualifier {
+	private class EndTimeQualifier implements Qualifier {
 
 		private Set<String> dateKeyWords;
 
-		DateQualifier(Set<String> dateKeyWords) {
+		EndTimeQualifier(Set<String> dateKeyWords) {
 			this.dateKeyWords = dateKeyWords;
 		}
 
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return dateKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDeadline().toString(), keyword))
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getEndTime().toString(), keyword))
 					.findAny().isPresent();
 		}
 
