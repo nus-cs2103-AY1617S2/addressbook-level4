@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.dateparser.DateTimeManager;
 import seedu.address.logic.dateparser.DateTimeParser;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.undo.Undo;
 import seedu.address.logic.undo.UndoManager;
 import seedu.address.model.Model;
 import seedu.address.model.task.ReadOnlyTask;
@@ -25,7 +26,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final Parser parser;
     private final DateTimeParser dtParser;
-    public static UndoManager undoCommandHistory;
+    public static Undo undoCommandHistory;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -34,6 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
         undoCommandHistory = UndoManager.getInstance();
     }
 
+    //@@author A0162877N
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");

@@ -1,14 +1,20 @@
 package seedu.address.logic.commands;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.recurrenceparser.RecurrenceManager;
+import seedu.address.logic.recurrenceparser.RecurrenceParser;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList;
@@ -26,6 +32,8 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s";
     public static final String MESSAGE_NOT_MARKED = "Status must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_TYPE_BOOKING = "Booking type of tasks cannot be marked as completed.";
+    private static final RecurrenceParser recurrenceParser = new RecurrenceManager();
 
     private final int filteredTaskListIndex;
     private final Boolean isCompleted;
@@ -53,13 +61,23 @@ public class MarkCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, isCompleted);
+
+        if (!taskToEdit.getBookings().isEmpty()) {
+            throw new CommandException(MESSAGE_TYPE_BOOKING);
+        }
 
         try {
+            if (taskToEdit.isRecurring()) {
+                Task newTask = createRecurringTask(taskToEdit);
+                model.addTask(newTask);
+            }
+            Task editedTask = createEditedTask(taskToEdit, isCompleted);
             saveCurrentState();
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (Exception e) {
+            throw new CommandException(e.getMessage());
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToEdit));
@@ -68,17 +86,61 @@ public class MarkCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws CommandException
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             Boolean isCompleted) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, Boolean isCompleted)
+                             throws IllegalValueException, IllegalDateTimeValueException, CommandException {
         assert taskToEdit != null;
+        Optional<Deadline> updatedStartTime;
+        Optional<Deadline> updatedDeadline;
+
 
         Title updatedTitle = taskToEdit.getTitle();
-        Optional<Deadline> updatedStartTime = taskToEdit.getStartTime();
-        Optional<Deadline> updatedDeadline = taskToEdit.getDeadline();
+        updatedStartTime = taskToEdit.getStartTime();
+        updatedDeadline = taskToEdit.getDeadline();
         UniqueLabelList updatedLabels = taskToEdit.getLabels();
+        Boolean isRecurring = taskToEdit.isRecurring();
+        Optional<Recurrence> updatedRecurrence = taskToEdit.getRecurrence();
 
-        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels);
+        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted,
+                updatedLabels, isRecurring, updatedRecurrence);
+    }
+
+
+    private static Task createRecurringTask(ReadOnlyTask task) throws IllegalValueException,
+                            IllegalDateTimeValueException {
+        Optional<Deadline> updatedStartTime;
+        Optional<Deadline> updatedDeadline;
+        if (task.getStartTime().isPresent()) {
+            updatedStartTime = Optional.ofNullable(getRecurringDate(task.getStartTime().get(),
+                task.getRecurrence().get()));
+            updatedDeadline = Optional.ofNullable(getRecurringDate(task.getDeadline().get(),
+                task.getRecurrence().get()));
+        } else {
+            updatedStartTime = task.getStartTime();
+            updatedDeadline = Optional.ofNullable(getRecurringDate(task.getDeadline().get(),
+                    task.getRecurrence().get()));
+        }
+        Title updatedTitle = task.getTitle();
+        UniqueLabelList updatedLabels = task.getLabels();
+        Boolean isRecurring = task.isRecurring();
+        Optional<Recurrence> updatedRecurrence = task.getRecurrence();
+        Boolean isCompleted = AddCommand.DEFAULT_TASK_STATE;
+
+        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted,
+                updatedLabels, isRecurring, updatedRecurrence);
+    }
+
+    private static Deadline getRecurringDate(Deadline date, Recurrence recurrence)
+            throws IllegalValueException, IllegalDateTimeValueException {
+        try {
+            Date oldDate = date.getDateTime();
+            return new Deadline (recurrenceParser.getNextDate(oldDate, recurrence).toString());
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(e.getMessage());
+        } catch (IllegalDateTimeValueException e) {
+            throw new IllegalDateTimeValueException();
+        }
     }
 
 

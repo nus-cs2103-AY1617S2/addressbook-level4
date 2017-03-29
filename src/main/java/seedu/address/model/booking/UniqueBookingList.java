@@ -3,11 +3,13 @@ package seedu.address.model.booking;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -15,8 +17,6 @@ import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.label.UniqueLabelList;
-import seedu.address.model.label.UniqueLabelList.DuplicateLabelException;
 
 //@@author A0162877N
 /**
@@ -40,11 +40,12 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
      * @throws CommandException
      */
     public UniqueBookingList(String... bookings)
-            throws DuplicateLabelException, IllegalValueException, CommandException {
+            throws DuplicateBookingException, IllegalValueException, CommandException {
         final List<Booking> bookingList = new ArrayList<Booking>();
-        for (String label : bookings) {
-            bookingList.add(new Booking(label));
+        for (String booking : bookings) {
+            bookingList.add(new Booking(booking));
         }
+        sortBooklingList(bookingList);
         setBookings(bookingList);
     }
 
@@ -58,6 +59,7 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
         if (!CollectionUtil.elementsAreUnique(initialBookings)) {
             throw new DuplicateBookingException();
         }
+        sortBooklingList(initialBookings);
         internalList.addAll(initialBookings);
     }
 
@@ -76,7 +78,9 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
      */
     public UniqueBookingList(Set<Booking> bookings) {
         assert !CollectionUtil.isAnyNull(bookings);
-        internalList.addAll(bookings);
+        final List<Booking> bookingList = new ArrayList<Booking>(bookings);
+        sortBooklingList(bookingList);
+        internalList.addAll(bookingList);
     }
 
     /**
@@ -92,6 +96,14 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
      */
     public Set<Booking> toSet() {
         return new HashSet<>(internalList);
+    }
+
+    /**
+     * Returns all bookings in this list as a List. This set is mutable and
+     * change-insulated against the internal list.
+     */
+    public ArrayList<Booking> toList() {
+        return new ArrayList<Booking>(internalList);
     }
 
     /**
@@ -138,7 +150,7 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
     }
 
     /**
-     * Returns true if the list contains an equivalent Label as the given
+     * Returns true if the list contains an equivalent Booking as the given
      * argument.
      */
     public boolean contains(Booking toCheck) {
@@ -164,7 +176,7 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
     /**
      * Adds a booking to the list.
      *
-     * @throws DuplicateLabelException
+     * @throws DuplicateBookingException
      *             if the booking to add is a duplicate of an existing booking in
      *             the list.
      */
@@ -188,7 +200,7 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueLabelList // instanceof handles nulls
+                || (other instanceof UniqueBookingList // instanceof handles nulls
                         && this.internalList.equals(((UniqueBookingList) other).internalList));
     }
 
@@ -205,6 +217,10 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
         return internalList.isEmpty();
     }
 
+    private void sortBooklingList(List<Booking> bookingList) {
+        Collections.sort(bookingList);
+    }
+
     /**
      * Signals that an operation would have violated the 'no duplicates'
      * property of the list.
@@ -213,5 +229,20 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
         protected DuplicateBookingException() {
             super("Operation would result in duplicate bookings");
         }
+    }
+
+    //@@author A0105287E
+    /**
+     * Returns the earliest startDate in the whole list. To be used for sorting.
+     *
+     */
+    public Date getEarliestStartTime() {
+        Date earliest = internalList.get(0).getBookingStartDate();
+        for (Booking booking : internalList) {
+            if (booking.getBookingStartDate().before(earliest)) {
+                earliest = booking.getBookingStartDate();
+            }
+        }
+        return earliest;
     }
 }

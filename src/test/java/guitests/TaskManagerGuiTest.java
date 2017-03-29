@@ -14,6 +14,7 @@ import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.LeftPanelHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.ResultDisplayHandle;
@@ -52,6 +53,7 @@ public abstract class TaskManagerGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
+    protected LeftPanelHandle leftPanel;
     private Stage stage;
 
     @BeforeClass
@@ -73,6 +75,7 @@ public abstract class TaskManagerGuiTest {
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             browserPanel = mainGui.getBrowserPanel();
+            leftPanel = mainGui.getLeftPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();

@@ -6,10 +6,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.BookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ConfirmCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -29,7 +27,7 @@ public class ConfirmCommandParser extends Parser {
         try {
             String[] arguments = argsTokenizer.getPreamble().get().trim().split(DELIMITER);
             if (arguments.length != ARGUMENT_LENGTH) {
-                throw new CommandException(DeleteCommand.MESSAGE_USAGE);
+                throw new CommandException(ConfirmCommand.MESSAGE_USAGE);
             }
 
             if (arguments[0].matches(REGEX_INDEX)
@@ -47,7 +45,7 @@ public class ConfirmCommandParser extends Parser {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfirmCommand.MESSAGE_USAGE));
             }
         } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BookCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfirmCommand.MESSAGE_USAGE));
         } catch (Exception e) {
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASKS_DISPLAYED_INDEX);
         }

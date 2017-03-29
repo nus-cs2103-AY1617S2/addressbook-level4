@@ -6,6 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 
+//@@author A0162877N
+/**
+ * LabelCard controller for each individual label on the Left Panel
+ */
 public class LabelCard extends UiPart<Region> {
 
     private static final String FXML = "LabelCard.fxml";
@@ -24,6 +28,7 @@ public class LabelCard extends UiPart<Region> {
         initLabel(labels, count);
     }
 
+    //@@author A0140042A
     private void initLabel(seedu.address.model.label.Label labelToSet, int count) {
         icon.setIcon(FontAwesomeIcon.TAG);
         labelText.setText(labelToSet.getLabelName());

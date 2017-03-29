@@ -3,10 +3,10 @@ package seedu.address.model.datastructure;
 import java.util.HashSet;
 import java.util.Set;
 
+//@@author A0162877N
 /**
  * This class will handle the partial search algorithm and the search function itself
  */
-//@@author A0162877N
 public class PartialSearch {
 
     private final Set<String> infixes = new HashSet<>();

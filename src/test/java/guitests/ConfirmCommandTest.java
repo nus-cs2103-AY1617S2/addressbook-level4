@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ConfirmCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
+//@@author A0162877N
 public class ConfirmCommandTest extends TaskManagerGuiTest {
 
     public static final String COMMAND_WORD = "confirm";
@@ -30,6 +31,12 @@ public class ConfirmCommandTest extends TaskManagerGuiTest {
             IllegalValueException, CommandException {
         ConfirmCommand cc = new ConfirmCommand(1, 1);
         assertTrue(cc.isMutating());
+    }
+
+    @Test
+    public void confirm_invalidCommand_ReturnTrue() {
+        commandBox.runCommand("confirm ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfirmCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -58,7 +65,7 @@ public class ConfirmCommandTest extends TaskManagerGuiTest {
         assertTrue(addedCard.getTitle().equals("Complete booking"));
         System.out.println(taskListPanel.getNumberOfTasks());
 
-        commandBox.runCommand("confirm 8 2");
+        commandBox.runCommand("confirm 1 2");
         TaskCardHandle confirmedCard = taskListPanel.navigateToTask("Complete booking");
         System.out.println(confirmedCard.getStartTime());
         System.out.println(confirmedCard.getDeadline());

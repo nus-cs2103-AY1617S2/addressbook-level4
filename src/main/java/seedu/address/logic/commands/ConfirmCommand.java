@@ -36,6 +36,7 @@ public class ConfirmCommand extends Command {
 
     public ConfirmCommand(int filteredTaskListIndex, int bookingSlotIndex) {
         assert filteredTaskListIndex > 0;
+        assert bookingSlotIndex > 0;
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
         this.bookingSlotIndex = bookingSlotIndex - 1;
     }

@@ -1,5 +1,11 @@
+/* @@author A0140042A */
 .background {
     -fx-background-color: #fafafa;
+}
+
+MenuBar {
+    -fx-accent: #c03231;
+    -fx-focus-color: #c03231;
 }
 
 Vbox, SplitPane {
@@ -83,7 +89,7 @@ Vbox, SplitPane {
 
 .split-pane:horizontal .split-pane-divider {
     -fx-border-width: 0 1 0 0;
-    -fx-border-color: #bdbdbd;
+    -fx-border-color: derive(#bdbdbd, 70%);
     -fx-background-color: transparent;
     -fx-cursor: default;
 }
@@ -169,7 +175,7 @@ Vbox, SplitPane {
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .context-menu .label {
@@ -372,7 +378,7 @@ Vbox, SplitPane {
     -fx-font-family: "Roboto";
 }
 
-#commandTextField {
+#commandTextFieldContainer {
     /* Up Right Down Left */
     -fx-border-width: 0 0 2 0;
     -fx-border-color: #FFFFFF;
@@ -407,24 +413,33 @@ Vbox, SplitPane {
     -fx-opacity: 0.54;
 }
 
-#labelListView {
-    -fx-background-color: transparent;
-    -fx-padding: 0 0 0 45;
-}
-
-#labelListView .list-cell {
+#labelListView, #labelListView .list-cell {
     -fx-background-color: transparent;
 }
 
 #labelListCard {
     -fx-opacity: 0.75;
+    -fx-padding: 0 0 0 45;
 }
 
 #labelText {
-    -fx-padding: 0 0 20 5;
+    -fx-padding: 10 0 10 5;
 }
 
 #taskCountText {
-    -fx-padding: 0 20 0 0;
+    -fx-padding: 10 20 0 0;
     -fx-opacity: 0.54;
+}
+
+.sidePanel:hover, #labelListCard:hover {
+    -fx-background-color: #ffebee;
+}
+
+#saveLocationStatus {
+    -fx-text-alignment: right;
+    -fx-alignment: center-right;
+}
+
+#syncStatus, #saveLocationLabel {
+    -fx-font-family: "Roboto";
 }

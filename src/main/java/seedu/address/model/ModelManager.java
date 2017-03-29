@@ -208,6 +208,9 @@ public class ModelManager extends ComponentManager implements Model {
                 return (task.getDeadline().get().getDateTime().before(endTime)
                         && task.getDeadline().get().getDateTime().after(startTime))
                         || task.getDeadline().get().getDateTime().equals(endTime);
+            } else if (task.getDeadline().isPresent()) {
+                return task.getDeadline().get().getDateTime().before(endTime)
+                        || task.getDeadline().get().getDateTime().equals(endTime);
             }
             return false;
         }
