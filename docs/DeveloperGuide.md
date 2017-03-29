@@ -1,14 +1,14 @@
-# AddressBook Level 4 - Developer Guide
+# TaskList - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `NUS`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. tasklist
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -86,12 +86,12 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/task/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -100,10 +100,10 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](ui-component) : The UI of the App.
+* [**`Logic`**](logic-component) : The command executor.
+* [**`Model`**](model-component) : Holds the data of the App in-memory.
+* [**`Storage`**](storage-component) : Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -120,15 +120,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskListChangedEvent` when the Task List data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -139,19 +139,19 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Yu Cheng-Liang
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/task/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -162,57 +162,57 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Wu Heyang
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Jay Kabra
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the Task List data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Tyler Rocha
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task List data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.task.commons` package.
 
 ## 3. Implementation
 
@@ -222,7 +222,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
@@ -263,13 +263,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.task.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -323,7 +323,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/main/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -332,7 +332,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task List depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -346,27 +346,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a new task | record tasks that need to be done ‘some day’.
+`* * *` | user | view upcoming tasks | see what needs to be done soon.
+`* * *` | user | delete a task | remove tasks that I no longer care to track.
+`* * *` | new user | view more information about a particular command | learn how to use various commands.
+`* * *` | user | add task deadlines | prioritize what is most urgent.
+`* * *` | user | mark a task as completed | view old tasks.
+`* * *` | user | undo last command | revert my last action if I make a mistake.
+`* * *` | user | add task notes | keep relevant information nearby.
+`* * *` | user | confirm a delete action | avoid accidently delete a task.
+`* * *` | user | view tasks by day | view relevant tasks.
+`* * *` | user | add notification timings | see a popup for high priority tasks prior to the deadline.
+`* * *` | user | assign task prioritize | view tasks by importance.
+`* * *` | user | close the application | save CPU resources.
+`* * *` | user | schedule time to work on a task | plan my time.
+`* * *` | user | modify task details | update tasks.
+`* *` | advanced user | use command shortcuts | save time.
+`* *` | user | backup my data | protect against data loss.
+`* *` | user | create subtasks | break up large tasks.
+`* *` | user | choose custom background | have a pleasant viewing experience.
+`* *` | user | hear nice sounds | further enjoy completing tasks.
+`* *` | user | get reminders | know to start doing something.
+`* *` | user | change calendar view between month/week/day | see my schedule for that time frame.
+`* *` | user | add recurring tasks | avoid repetitive task input.
+`* *` | user | estimate task length | know how much effort is required.
+`* *` | user | add collaborators | know who I have to work with.
+`* *` | user | see error messages for invalid commands | know how to fix my mistake.
+`* *` | user | sort tasks by priority | choose most urgent tasks.
+`* *` | new user | see user guide in a sidebar | have it for easy reference.
+`* *` | user | search tasks by keyword | find tasks.
+`* *` | user | see today's tasks on startup | get started immediately.
+`* *` | user | categorize tasks | organize more effectively.
+`* *` | user | have task manager open on bootup | get started immediately.
+`*` | user | view my command history | review my progress.
+`*` | user | enter distraction-free mode | be stopped from opening games or social websites before tasks are completed
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskList` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Create task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to create a task with a name
+2. TaskManager create the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The taske with the name given by the user already exist
+> Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to delete a specific task in the list
+4. TaskManager deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,17 +416,115 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. TaskManager shows an error message <br>
   Use case resumes at step 2
 
+#### Use case: Edit/Update task
+
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+3. User type in the change
+4. User requests to update/edit the task
+5. TaskManager change the content of the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
+4a. The given index is invalid
+
+> 3a1. TaskList shows an error message <br>
+  Use case resumes at step 3
+
+#### Use case: Read task
+
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
+#### Use case: Complete a task
+
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+3. User type in the index of the task he/she wants to mark as complete
+3. User request to complete a task
+4. TaskManager marks the task as completed
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+  Use case resumes at step 3
+
+#### Use case: List all task
+
+**MSS**
+
+1. User requests to list all tasks
+2. TaskManager shows all the tasks
+Use case ends.
+
+**Extensions**
+
+2a. no tasks exist
+>  2a1. TaskManager shows an error message
+   Use case ends
+
+#### Use case: List a task
+
+**MSS**
+
+1. User type in the index of the task
+2. User request to see the content of the task
+3. TaskManager shows the content of the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+> 2a1. TaskManager shows an error message
+  Use case resumes at step 1
 {More to be added}
+
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be open source.
+6. Should open the app in less than 5 sec.
+7. The GUI should not be overcrowded.
+8. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
+9. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
+10. The level of security will be minimal for this product since it is only accessed by a single user.
+11. To extend the software, proper security measures can be put into place in <100 hours.
+12. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
+13. Should be scalable so that a user can change the layout of the GUI based on personal preference.
+14. Should not overload the CPU so that other running process start to lag.
+15. Should not have seperate administrative functions as there is one user who is the Admin by default.
 
 {More to be added}
 
@@ -403,17 +540,36 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
 
-Author: ...
+**Google Calendar**
+
+Author: Jay Kabra
 
 Pros:
-
-* ...
-* ...
+* Syncs with your phone so that the calendar is viewable from gmail on your laptop as well as on your phone
+* Allows you to add reminder notifications for events at a customized amount of time
+* Can customize tasks by color
+* Can easily perform CRUD operations on events
+* Can add recurring events and edit them individually if there are exceptions for a particular day
+* More GUI based rather than command line
+* Relatively intuitive for new users
 
 Cons:
+* No way to prioritize tasks
+* Need connection to the internet to view on laptop - not a desktop application
+* Since it is more GUI based, takes more clicks to add a task rather than typing the task in a command line and having the task added
+* appropriately
 
-* ...
-* ...
+**Google Tasks**
+
+Author:Google
+Pros:
+* easy to use
+* have all the basic functions a normal user would use.
+* easy to install
+
+Cons:
+* cannot change the color of tasks based on priority
+* alert would not pop out automatically
+* everytime I boot up my computer, I have to open the app manually
 

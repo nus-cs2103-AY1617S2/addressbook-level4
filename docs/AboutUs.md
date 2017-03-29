@@ -4,49 +4,43 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Jay Gajendra Kabra](https://github.com/jay500s)
+<img src="images/jay500s.PNG" width="150"><br>
+*Components in Charge of: [Model](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#model-component) <br>
+* Aspects/tools in charge of: Code Quality
+* Features implemented:
+	* [Reccurring Tasks]()
+	* [Find on any parameter](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.5. Finding all tasks containing any keyword in their name: find)
+	* [Prioritize Command Worked with Heyang to implement logic and model functionality](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#Allocate priority to a task: prioritize)
+* Code written: [[functional code](A0164212U.md)][[test code](A0164212U.md)]
+* Other major contributions:
+	* Did initial refactoring from AddressBook to TaskList
+	* Created Description, Priority, and Timing classes and added respective functionality to validate respective parameters
+	* Colored Priorities for better UI experience
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Tyler Austin Rocha](https://github.com/tylerrocha)
+<img src="images/tylerrocha.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+Responsibilities: Storage, Git Expert
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Wu Heyang](https://github.com/whyCaiJi)
+<img src="images/whycaiji.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: Logic and Scheduling and Tracking
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Yu Cheng-Liang](https://github.com/nuslarry)
+<img src="images/chengliang.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+Responsibilities: UI, Testing and Integeration
 
 -----
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
 
 # Contributors
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
