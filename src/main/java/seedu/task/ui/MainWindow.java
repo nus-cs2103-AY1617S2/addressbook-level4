@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel taskListPanel;
     private Config config;
     private CommandBox commandBox;
+    private Scroll scroll;
 
     @FXML
     private AnchorPane browserPlaceholder;
@@ -87,6 +88,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setScene(scene);
 
         setAccelerators();
+        setScroll();
     }
 
     public Stage getPrimaryStage() {
@@ -100,6 +102,10 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(quickUndoMenuItem, KeyCombination.valueOf("Ctrl+Alt+Z"));
         setAccelerator(quickScrollDownMenuItem, KeyCombination.valueOf("Shift+DOWN"));
         setAccelerator(quickScrollUpMenuItem, KeyCombination.valueOf("SHIFT+UP"));
+    }
+    
+    private void setScroll() {
+    	scroll = new Scroll();
     }
 
     /**
@@ -225,12 +231,12 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     public void handleScrollDown() {
-        taskListPanel.scrollDown();
+        taskListPanel.scrollDown(scroll);
     }
 
     @FXML
     public void handleScrollUp() {
-        taskListPanel.scrollUp();
+        taskListPanel.scrollUp(scroll);
     }
 
     void show() {
