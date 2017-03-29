@@ -140,6 +140,10 @@ public class TestTask implements ReadOnlyTask {
         return bookings;
     }
 
+    public void setBookings(UniqueBookingList uniqueBookingList) {
+        bookings = uniqueBookingList;
+    }
+
     @Override
     public Boolean isRecurring() {
         return isRecurring == null ? Boolean.FALSE : isRecurring;

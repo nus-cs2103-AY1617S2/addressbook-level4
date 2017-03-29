@@ -8,6 +8,9 @@ import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
 
 //@@author A0162877N
+/**
+ * A singleton UndoManager that implements a linkedlist of undoPair objects which essentially stores the data
+ */
 public class UndoManager implements Undo {
 
     private static UndoManager instance = null;

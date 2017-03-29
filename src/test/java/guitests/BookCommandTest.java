@@ -14,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.BookCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
+//@@author A0162877N
 public class BookCommandTest extends TaskManagerGuiTest {
 
     public static final String COMMAND_WORD = "book";
