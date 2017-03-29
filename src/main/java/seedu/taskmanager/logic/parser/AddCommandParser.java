@@ -40,7 +40,6 @@ public class AddCommandParser {
             String byPrefixInput = argsTokenizer.getValue(PREFIX_BY).orElse(EMPTY_FIELD);
             String fromPrefixInput = argsTokenizer.getValue(PREFIX_FROM).orElse(EMPTY_FIELD);
             String toPrefixInput = argsTokenizer.getValue(PREFIX_TO).orElse(EMPTY_FIELD);
-            String category = argsTokenizer.getValue(PREFIX_CATEGORY).orElse(EMPTY_FIELD);
             String startDate = EMPTY_FIELD;
             String startTime = EMPTY_FIELD;
             String endDate = EMPTY_FIELD;

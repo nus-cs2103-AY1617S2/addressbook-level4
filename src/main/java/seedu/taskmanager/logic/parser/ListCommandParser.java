@@ -15,6 +15,10 @@ import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 
+//@@author A0141102H
+/**
+ * Parses input arguments and creates a new ListCommand object
+ */
 public class ListCommandParser {
 
     public Command parse(String args) {
@@ -22,6 +26,10 @@ public class ListCommandParser {
         Set<String> keyWordSet = Collections.emptySet();
         String[] keyWordArray = null;
 
+        /**
+         * If the command "LIST" is used without any arguments, return an empty
+         * set.
+         */
         if (args.trim().isEmpty()) {
             return new ListCommand(keyWordSet);
         }

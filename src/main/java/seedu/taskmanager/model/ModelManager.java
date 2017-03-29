@@ -204,6 +204,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
     }
 
+    // @@author A0141102H
     @Override
     public void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new ListQualifier(keywords, isComplete)));
@@ -276,6 +277,9 @@ public class ModelManager extends ComponentManager implements Model {
                             .findAny().isPresent())
                     || (taskKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTime().value, keyword))
+                            .findAny().isPresent())
+                    || (taskKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getCategories(), keyword))
                             .findAny().isPresent());
         }
 
@@ -303,6 +307,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    // @@author A0141102H
     private class ListQualifier implements Qualifier {
         private boolean isComplete;
         private Set<String> taskKeyWords;

@@ -32,12 +32,13 @@ import seedu.taskmanager.commons.util.XmlUtil;
 import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
-import seedu.taskmanager.model.task.StartDate;
-import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.storage.XmlSerializableTaskManager;
 
 // @@author A0141102H
@@ -77,7 +78,7 @@ public class TestUtil {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
                     new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"),
-                            new EndTime("1100")),
+                            new EndDate("03/03/17"), new EndTime("1100"), new UniqueCategoryList("friend")),
                     new Task(new TaskName("Eat lunch at techno"), new StartDate("04/03/17"),
                             new StartTime("EMPTY_FIELD"), new EndTime("1400")),
                     new Task(new TaskName("Eat dinner with my only 2 friends"), new StartDate("09/03/17"),
