@@ -138,14 +138,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 > * Only the task description is searched.
 > * The search is case insensitive. e.g `Report` will match `report`
 > * The order of the keywords does not matter. e.g. `proposal for boss` will match `for boss proposal`
-> * Partial words will be matched e.g. `meet` will match `meeting`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `lunch` will match `lunch appointment`
 
 Examples:
 
-* `find file filing`<br>
-  Returns any tasks with `file`, `files`, `filing` etc. as part of its description
+* `find write test case`<br>
+  Returns any tasks with `write`, `test`, `case`, 'case test`, `write test` and any combination of the individual words
+  as part of its description (case insensitive)
 
 ### 2.5. Editing a task : `edit`
 
