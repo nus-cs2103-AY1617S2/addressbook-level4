@@ -53,13 +53,10 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
         priority = source.getPriority().value;
-<<<<<<< HEAD
-        startTiming = source.getStartTiming().value;
-        endTiming = source.getEndTiming().value;
-=======
+        // startTiming = source.getStartTiming().value;
+        // endTiming = source.getEndTiming().value;
         recurring = source.isRecurring();
         frequency = source.getFrequency().toString();
->>>>>>> 24afc29ff53f8b411771b3d4dadefcc9d662c4ef
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -79,15 +76,10 @@ public class XmlAdaptedTask {
         }
         final Description description = new Description(this.description);
         final Priority priority = new Priority(this.priority);
-<<<<<<< HEAD
-        final Timing startTiming = new Timing(this.startTiming);
-        final Timing endTiming = new Timing(this.endTiming);
-        final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(description, priority, startTiming, endTiming, tags);
-=======
+        // final Timing startTiming = new Timing(this.startTiming);
+        // final Timing endTiming = new Timing(this.endTiming);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final RecurringFrequency frequency = new RecurringFrequency(this.frequency);
         return new Task(description, priority, occurrences, tags, recurring, frequency);
->>>>>>> 24afc29ff53f8b411771b3d4dadefcc9d662c4ef
     }
 }
