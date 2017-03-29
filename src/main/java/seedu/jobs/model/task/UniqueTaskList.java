@@ -14,7 +14,7 @@ import seedu.jobs.commons.util.CollectionUtil;
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#equals(Object)
+ * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task> {
@@ -22,7 +22,7 @@ public class UniqueTaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent task as the given argument.
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
@@ -30,7 +30,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a person to the list.
+     * Adds a task to the list.
      *
      * @throws DuplicateTaskException if the person to add is a duplicate of an existing person in the list.
      */
@@ -43,9 +43,9 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedPerson}.
      *
-     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
@@ -65,9 +65,9 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such person could be found in the list.
+     * @throws TaskNotFoundException if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
@@ -77,7 +77,27 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return taskFoundAndDeleted;
     }
-
+    
+    /**
+     * Completes the equivalent task from the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean complete(ReadOnlyTask toComplete) throws TaskNotFoundException {
+        assert toComplete != null;
+        boolean taskFoundAndCompleted = false;
+        for(Task task:internalList){
+        	if(task.equals(toComplete)){
+        		task.markComplete();
+        		taskFoundAndCompleted = true;
+        	}
+        }
+        if (!taskFoundAndCompleted) {
+            throw new TaskNotFoundException();
+        }
+        return taskFoundAndCompleted;
+    }
+    
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
@@ -98,7 +118,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public Iterator<Task> iterator() {
         return internalList.iterator();
     }
-
+    
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

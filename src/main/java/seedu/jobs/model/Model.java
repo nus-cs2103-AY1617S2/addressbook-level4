@@ -7,6 +7,7 @@ import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -16,15 +17,18 @@ public interface Model {
      * @throws IllegalTimeException */
     void resetData(ReadOnlyTaskBook newData);
 
-    /** Returns the AddressBook */
+    /** Returns the TaskBook */
     ReadOnlyTaskBook getTaskBook();
 
-    /** Deletes the given person. */
+    /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given person */
+    /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-
+    
+    /** Completes the given task */
+    void completeTask(ReadOnlyTask task) throws  UniqueTaskList.TaskNotFoundException;
+    
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *
@@ -43,5 +47,6 @@ public interface Model {
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+
 
 }
