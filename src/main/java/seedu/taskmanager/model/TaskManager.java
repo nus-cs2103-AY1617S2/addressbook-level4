@@ -16,7 +16,6 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
-import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by

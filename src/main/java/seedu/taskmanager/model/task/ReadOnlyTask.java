@@ -46,7 +46,7 @@ public interface ReadOnlyTask {
                         && other.getIsMarkedAsComplete().equals(this.getIsMarkedAsComplete()));
     }
 
-    //@@author A0142418L
+    // @@author A0142418L
     /**
      * Formats the task as text, showing all contact details.
      */
@@ -54,23 +54,23 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTaskName());
 
-        if (getStartDate().toString() != "EMPTY_FIELD") {
+        if (!getStartDate().toString().equals("EMPTY_FIELD")) {
             builder.append(" Start Date: ").append(getStartDate());
         }
 
-        if (getStartTime().toString() != "EMPTY_FIELD") {
+        if (!getStartTime().toString().equals("EMPTY_FIELD")) {
             builder.append(" Start Time: ").append(getStartTime());
         }
 
-        if (getEndDate().toString() != "EMPTY_FIELD") {
+        if (!getEndDate().toString().equals("EMPTY_FIELD")) {
             builder.append(" End Date: ").append(getEndDate());
         }
 
-        if (getEndTime().toString() != "EMPTY_FIELD") {
+        if (!getEndTime().toString().equals("EMPTY_FIELD")) {
             builder.append(" End Time: ").append(getEndTime());
         }
 
-        if (/*getCategories().toString() != "EMPTY_FIELD"*/!getCategories().isEmptyCategoryList()) {
+        if (/* getCategories().toString() != "EMPTY_FIELD" */!getCategories().isEmptyCategoryList()) {
             builder.append(" Categories: ");
             getCategories().forEach(builder::append);
         }

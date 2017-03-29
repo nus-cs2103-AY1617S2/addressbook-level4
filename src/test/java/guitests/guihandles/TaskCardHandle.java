@@ -47,7 +47,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getEndDate() {
-        return getTextFromLabel(ENDTIME_FIELD_ID);
+        return getTextFromLabel(ENDDATE_FIELD_ID);
     }
 
     public String getEndTime() {
