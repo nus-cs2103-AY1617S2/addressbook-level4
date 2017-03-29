@@ -108,7 +108,9 @@ public class UniqueTaskList implements Iterable<Task>, Cloneable {
                         task.getDeadline(),
                         task.isCompleted(),
                         labelList,
-                        bookingList));
+                        bookingList,
+                        task.isRecurring(),
+                        task.getRecurrence()));
             }
         } catch (Exception e) {
             e.printStackTrace();

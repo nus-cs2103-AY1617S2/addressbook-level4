@@ -91,7 +91,9 @@ public class ConfirmCommand extends Command {
                     updatedEndTime,
                     taskToEdit.isCompleted(),
                     taskToEdit.getLabels(),
-                    new UniqueBookingList());
+                    new UniqueBookingList(),
+                    false,
+                    Optional.empty());
         } else {
             throw new CommandException(MESSAGE_TASK_NO_BOOKING);
         }

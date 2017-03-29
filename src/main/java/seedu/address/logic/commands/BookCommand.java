@@ -47,7 +47,9 @@ public class BookCommand extends Command {
                 Optional.empty(),
                 false,
                 new UniqueLabelList(labelSet),
-                new UniqueBookingList(bookingSet)
+                new UniqueBookingList(bookingSet),
+                false,
+                Optional.empty()
         );
     }
 

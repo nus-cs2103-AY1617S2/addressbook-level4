@@ -15,6 +15,7 @@ import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 
@@ -31,6 +32,10 @@ public class XmlAdaptedTask {
     private String startTime;
     @XmlElement(required = true)
     private boolean isCompleted;
+    @XmlElement(required = true)
+    private boolean isRecurring;
+    @XmlElement(required = false)
+    private String recurrence;
 
     @XmlElement
     private List<XmlAdaptedLabel> labeled = new ArrayList<>();
@@ -61,6 +66,10 @@ public class XmlAdaptedTask {
             deadline = source.getDeadline().get().toString();
         }
         isCompleted = source.isCompleted();
+        isRecurring = source.isRecurring();
+        if (source.getRecurrence().isPresent()) {
+            deadline = source.getRecurrence().get().toString();
+        }
         labeled = new ArrayList<>();
         bookingSlots = new ArrayList<>();
         for (Label label : source.getLabels()) {
@@ -81,6 +90,7 @@ public class XmlAdaptedTask {
         final List<Label> taskLabels = new ArrayList<>();
         final Optional<Deadline> startTime;
         final Optional<Deadline> deadline;
+        final Optional<Recurrence> recurrence;
         final List<Booking> taskBookings = new ArrayList<>();
         for (XmlAdaptedLabel label : labeled) {
             taskLabels.add(label.toModelType());
@@ -99,8 +109,13 @@ public class XmlAdaptedTask {
         } else {
             deadline = Optional.empty();
         }
+        if (this.recurrence != null) {
+            recurrence = Optional.ofNullable(new Recurrence(this.recurrence));
+        } else {
+            recurrence = Optional.empty();
+        }
         final UniqueLabelList labels = new UniqueLabelList(taskLabels);
         final UniqueBookingList bookings = new UniqueBookingList(taskBookings);
-        return new Task(title, startTime, deadline, isCompleted, labels, bookings);
+        return new Task(title, startTime, deadline, isCompleted, labels, isRecurring, recurrence);
     }
 }
