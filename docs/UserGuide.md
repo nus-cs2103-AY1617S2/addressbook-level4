@@ -242,15 +242,17 @@ Format: `getgoogle`, `gg`
 
 > This command will only grab upcoming Events and ignore duplicate Events.
 
-### 2.10.2 Post Event to Google Calendar: `pg`
+### 2.10.2 Post Task to Google Calendar: `pg`
 
-Other than getting events from Google Calendar, you are also able to add a task to your calendar.
+Other than getting events from Google Calendar, you are also able to add a task from KIT as an Event to your calendar.
 
-Description: Post the specified task to your Google Calendar. <br>
+Description: Add the specified task to your Google Calendar. <br>
 
-Format: `postgoogle INDEX`, `pg INDEX`
+Format: `postgoogle [INDEX]`, `pg [INDEX]`
 
-> Note that start date and end date must not be empty to post your event to the calendar.
+> If INDEX is specified and correct, adds the selected task to calendar.
+> If INDEX is not specified, adds **all** displayed task to calendar.
+> Note that start date and end date must not be empty to add your event to the calendar.
 
 ### 2.11 Clearing all task: `clear`
 
