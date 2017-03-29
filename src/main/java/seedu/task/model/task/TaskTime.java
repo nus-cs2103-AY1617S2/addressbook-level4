@@ -33,7 +33,7 @@ public class TaskTime {
 	time = dates.get(0);
 	
 	value = input.trim();
-	int[] timeArray = timeFormatConverter(input);
+	//int[] timeArray = timeFormatConverter(input);
 	setMinute(time.getMinutes());
 	setHour(time.getHours());
     }

@@ -61,19 +61,22 @@ public class TaskDate {
 
 	input = input.trim();
 	value = input;
-	int[] dateArray = dateFormatConverter(input);
-	if (input.length() == 6) {
-	    setDay(dateArray[DAY_ARRAY_INDEX]);
-	    setMonth(dateArray[MONTH_ARRAY_INDEX]);
-	    setYear(dateArray[YEAR_ARRAY_INDEX]);
+	//int[] dateArray = dateFormatConverter(input);
+	if (dates.size() == 1) {
+		Date date = dates.get(0);
+	    setDay(date.getDate());
+	    setMonth(date.getMonth());
+	    setYear(date.getYear());
 	}
-	if (input.length() == 13) {
-	    setDay(dateArray[DAY_ARRAY_INDEX]);
-	    setMonth(dateArray[MONTH_ARRAY_INDEX]);
-	    setYear(dateArray[YEAR_ARRAY_INDEX]);
-	    setDay2(dateArray[DAY2_ARRAY_INDEX]);
-	    setMonth2(dateArray[MONTH2_ARRAY_INDEX]);
-	    setYear2(dateArray[YEAR2_ARRAY_INDEX]);
+	if (dates.size() == 2) {
+		Date date1 = dates.get(0);
+		Date date2 = dates.get(1);
+	    setDay(date1.getDate());
+	    setMonth(date1.getMonth());
+	    setYear(date1.getYear());
+	    setDay2(date2.getDate());
+	    setMonth2(date2.getMonth());
+	    setYear2(date2.getYear());
 	}
 
     }
