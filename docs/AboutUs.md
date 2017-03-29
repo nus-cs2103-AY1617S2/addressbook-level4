@@ -26,7 +26,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Deliverables and Deadlines, Scheduling and Tracking
 * Features implemented:
    * [Natty Implementation](https://github.com/CS2103JAN2017-W14-B4/main/pull/75)
-* Code written: [[functional code](A0139177W.md)][[test code](A0139177W.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/main/A0139177W.md)][[test code](ttps://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/test/A0139177W.md)]
 * Other major contributions:
   * Did the initial refactoring of Person's Address to Task's DueDate
   * Update other documentations other than User Guide and Developer Guide
@@ -41,7 +41,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
    * [Done task index](https://github.com/CS2103JAN2017-W14-B4/main/blob/master/docs/UserGuide.md#3-marking-a-task-as-done-done--d)
    * [Delete person](https://github.com/CS2103JAN2017-W14-B4/main/blob/master/docs/UserGuide.md#6-finding-tasks-find--f)
-* Code written: [[functional code](A0141010L.md)][[test code](A0141010L.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/main/A0141010L.md)][[test code](ttps://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/main/A0141010L.md)]
 * Other major contributions:
   * Did the initial refactoring of Person's Email to Task's Priority
   * In charge of debugging and brainstorming of ideas
