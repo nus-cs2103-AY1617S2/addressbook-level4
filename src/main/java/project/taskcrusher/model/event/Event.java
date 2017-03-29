@@ -7,6 +7,7 @@ import java.util.Objects;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.tag.UniqueTagList;
 
@@ -78,8 +79,12 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.location = location;
     }
 
-    public void setOverdue(boolean toSet) {
-        isOverdue = toSet;
+    public void markOverdue() {
+        isOverdue = true;
+    }
+
+    public void unmarkOverdue() {
+        isOverdue = false;
     }
 
     public boolean isOverdue() {

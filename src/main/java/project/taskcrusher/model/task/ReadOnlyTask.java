@@ -10,6 +10,7 @@ import project.taskcrusher.model.shared.ReadOnlyUserToDo;
 public interface ReadOnlyTask extends ReadOnlyUserToDo, Comparable<ReadOnlyTask> {
 
     Deadline getDeadline();
+    boolean isOverdue();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals).

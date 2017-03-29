@@ -20,17 +20,23 @@ import project.taskcrusher.model.task.Task;
  */
 public class XmlAdaptedTask {
 
+    /* Inherited attributes from UserToDo*/
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
-    private String deadline;
-    @XmlElement(required = true)
     private String description;
-
+    @XmlElement(required = true)
+    private boolean isComplete;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    /* Task-specific attributes */
+    @XmlElement(required = true)
+    private String deadline;
+    @XmlElement(required = true)
+    private boolean isOverdue;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -47,13 +53,16 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().name;
         priority = source.getPriority().priority;
-        deadline = source.getDeadline().deadline;
         description = source.getDescription().description;
+        isComplete = source.isComplete();
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
+
+        deadline = source.getDeadline().deadline;
+        isOverdue = source.isOverdue();
     }
 
     /**
@@ -68,9 +77,19 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
-        final Deadline deadline = new Deadline(this.deadline, Deadline.IS_LOADING_FROM_STORAGE);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, deadline, priority, description, tags);
+
+        final Deadline deadline = new Deadline(this.deadline, Deadline.IS_LOADING_FROM_STORAGE);
+        Task thisTask = new Task(name, deadline, priority, description, tags);
+
+        if (isOverdue) {
+            thisTask.markOverdue();
+        }
+
+        if (isComplete) {
+            thisTask.markComplete();
+        }
+        return thisTask;
     }
 }

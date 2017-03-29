@@ -17,7 +17,6 @@ public class Task extends UserToDo implements ReadOnlyTask {
 
     public static final String TASK_FLAG = "t";
 
-    private Name name;
     private Deadline deadline;
     private boolean isOverdue;
 
@@ -27,11 +26,8 @@ public class Task extends UserToDo implements ReadOnlyTask {
     public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags) {
         super(name, priority, description, tags);
         assert deadline != null;
+
         this.deadline = deadline;
-        this.priority = priority;
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
         this.isOverdue = false;
     }
 
@@ -58,6 +54,14 @@ public class Task extends UserToDo implements ReadOnlyTask {
 
     public boolean isOverdue() {
         return this.isOverdue;
+    }
+
+    public void markOverdue() {
+        this.isOverdue = true;
+    }
+
+    public void unmarkOverdue() {
+        this.isOverdue = false;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package project.taskcrusher.model.shared;
 
+import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.tag.UniqueTagList;
 
@@ -17,35 +18,50 @@ public class UserToDo implements ReadOnlyUserToDo {
         //assert !CollectionUtil.isAnyNull(name, description, priority, tags);
         //priority is null in event constructor so removed for now
         assert !CollectionUtil.isAnyNull(name, description, tags);
+        if (priority == null) {
+            try {
+                this.priority = new Priority("1");
+            } catch (IllegalValueException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } else {
+            this.priority = priority;
+        }
+
         this.name = name;
-        this.priority = priority;
         this.description = description;
         this.tags = new UniqueTagList(tags);
         this.isComplete = false;
     }
 
-    public Description getDescription() {
-        return description;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public UniqueTagList getTags() {
-        return tags;
+    @Override
+    public Name getName() {
+        return name;
     }
 
     public void setName(Name name) {
         this.name = name;
     }
 
+    public Description getDescription() {
+        return description;
+    }
+
     public void setDescription(Description description) {
         this.description = description;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public UniqueTagList getTags() {
+        return tags;
     }
 
     public void setTags(UniqueTagList replacement) {
@@ -64,9 +80,5 @@ public class UserToDo implements ReadOnlyUserToDo {
         return this.isComplete;
     }
 
-    @Override
-    public Name getName() {
-        return name;
-    }
 
 }
