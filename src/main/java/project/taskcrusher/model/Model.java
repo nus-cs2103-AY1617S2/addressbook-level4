@@ -1,6 +1,5 @@
 package project.taskcrusher.model;
 
-import java.util.Date;
 import java.util.Set;
 
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
@@ -60,11 +59,7 @@ public interface Model {
      */
     void updateFilteredTaskList(Set<String> keywords);
 
-    /**
-     * Updates the filter of the filtered task list to filter by the given up-to
-     * Date
-     */
-    void updateFilteredTaskList(Date upToDate);
+    void updateFilteredTaskList(Timeslot userInterestedTimeSlot);
 
     // ========== for events =================================================
 

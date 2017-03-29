@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
+import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.DateUtilApache;
 
 /**
@@ -54,22 +55,6 @@ public class Deadline {
 
     }
 
-    @Override
-    public String toString() {
-        if (this.hasDeadline()) {
-            return DateUtilApache.dateAsString(this.getDate().get());
-        } else {
-            return Deadline.NO_DEADLINE;
-        }
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Deadline // instanceof handles nulls
-                        && this.deadline.equals(((Deadline) other).deadline));
-    }
-
     /**
      * Returns Deadline in the form of Optional<Date>
      *
@@ -97,4 +82,36 @@ public class Deadline {
     public boolean hasDeadline() {
         return !deadline.equals(NO_DEADLINE);
     }
+
+    public boolean isWithin(Timeslot timeslot) {
+        assert timeslot != null;
+        if (!hasDeadline()) {
+            return false;
+        }
+
+        Date deadlineInDate = getDate().get();
+        if ((deadlineInDate.after(timeslot.start) || deadlineInDate.equals(timeslot.start)
+                && (deadlineInDate.before(timeslot.end) || deadlineInDate.equals(timeslot.end)))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (this.hasDeadline()) {
+            return DateUtilApache.dateAsString(this.getDate().get());
+        } else {
+            return Deadline.NO_DEADLINE;
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Deadline // instanceof handles nulls
+                        && this.deadline.equals(((Deadline) other).deadline));
+    }
+
 }
