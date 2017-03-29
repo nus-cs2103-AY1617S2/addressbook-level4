@@ -67,6 +67,7 @@ public class CompleteCommand extends Command {
 
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex);
         Task completedTask = createCompletedTask(taskToComplete, completeTaskDescriptor);
+        completedTask.setComplete();
 
         try {
             model.updateTask(targetIndex, completedTask);
