@@ -152,7 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
             indicateToDoListChanged();
             return feedbackMessage;
         } else {
-            throw new EmptyHistoryException("There is nothing to undo.");
+            throw new EmptyHistoryException(ToDoListHistoryManager.MESSAGE_EMPTYUNDOHISTORY);
         }
     }
 
@@ -165,7 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
             indicateToDoListChanged();
             return feedbackMessage;
         } else {
-            throw new EmptyHistoryException("There is nothing to redo.");
+            throw new EmptyHistoryException(ToDoListHistoryManager.MESSAGE_EMPTYREDOHISTORY);
         }
     }
 

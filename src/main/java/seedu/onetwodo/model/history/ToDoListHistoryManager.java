@@ -11,6 +11,9 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
  */
 public class ToDoListHistoryManager implements ToDoListHistory {
 
+    public static final String MESSAGE_EMPTYUNDOHISTORY = "There is nothing to undo.";
+    public static final String MESSAGE_EMPTYREDOHISTORY = "There is nothing to redo.";
+
     private Stack<ToDoList> previousToDoLists;
     private Stack<ToDoList> nextToDoLists;
     private Stack<CommandHistoryEntry> previousCommandHistory;

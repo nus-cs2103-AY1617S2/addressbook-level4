@@ -14,7 +14,7 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
  * Represents an entry of command history.
  */
 public class CommandHistoryEntry implements CommandHistoryEntryInterface {
-    private static final String COMMAND_FORMATTER = " %1$s";
+    public static final String COMMAND_FORMATTER = " %1$s";
 
     private ArrayList<String> entry;
 
