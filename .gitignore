@@ -16,3 +16,5 @@ preferences.json
 classes/
 /data/
 /bin/
+.*.md.html
+.project

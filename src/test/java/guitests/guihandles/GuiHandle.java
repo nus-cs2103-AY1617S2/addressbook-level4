@@ -5,13 +5,13 @@ import java.util.logging.Logger;
 
 import guitests.GuiRobot;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import werkbook.task.TestApp;
+import werkbook.task.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -55,14 +55,14 @@ public class GuiHandle {
     }
 
     protected String getTextFieldText(String filedName) {
-        TextField textField = getNode(filedName);
-        return textField.getText();
+        ComboBox<String> textField = getNode(filedName);
+        return textField.getValue();
     }
 
     protected void setTextField(String textFieldId, String newText) {
         guiRobot.clickOn(textFieldId);
-        TextField textField = getNode(textFieldId);
-        textField.setText(newText);
+        ComboBox<String> textField = getNode(textFieldId);
+        textField.setValue(newText);
         guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
     }
 
