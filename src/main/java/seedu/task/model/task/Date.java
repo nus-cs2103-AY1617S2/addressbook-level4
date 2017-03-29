@@ -34,8 +34,15 @@ public class Date {
     public Date(EventDateTime eventDateTime) {
         if (eventDateTime == null) {
             this.value = null;
+            return;
+        } 
+        
+        if (eventDateTime.getDateTime() != null) {
+            this.value = new java.util.Date(eventDateTime.getDateTime().getValue());
+        } else if (eventDateTime.getDate() != null) {
+            this.value = new java.util.Date(eventDateTime.getDate().getValue());            
         } else {
-            this.value = new java.util.Date(eventDateTime.getDate().getValue());
+            this.value = null;
         }
     }
 
@@ -108,6 +115,20 @@ public class Date {
                         && this.value.equals(((Date) other).value)); // state
                                                                      // check
     }
+    
+    @SuppressWarnings("deprecation")
+    public boolean equalsIgnoreTime(Date otherDate){
+        if (otherDate.value == null && this.value == null) {
+            return true;
+        } else if (otherDate.value == null || this.value == null) {
+            return false;
+        }
+        return otherDate == this // short circuit if same object
+                ||(this.value.getDate()==otherDate.value.getDate() && this.value.getMonth()==otherDate.value.getMonth() && this.value.getYear()==otherDate.value.getYear() );
+        
+    }
+    
+    
 
     @Override
     public int hashCode() {

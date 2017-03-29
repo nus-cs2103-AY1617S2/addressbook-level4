@@ -6,7 +6,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.task.commons.util.FxViewUtil;
-import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * The Browser Panel of the App.
@@ -29,6 +28,7 @@ public class BrowserPanel extends UiPart<Region> {
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
+        loadPage();
     }
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
@@ -41,12 +41,12 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadTaskPage(ReadOnlyTask task) {
-        loadPage("https://www.google.com.sg/maps/place/" + task.getLocation().value.replaceAll(" ", "+"));
-    }
+//    public void loadTaskPage(ReadOnlyTask task) {
+//        loadPage("https://www.google.com.sg/maps/place/" + task.getLocation().value.replaceAll(" ", "+"));
+//    }
 
-    public void loadPage(String url) {
-        browser.getEngine().load(url);
+    public void loadPage() {
+        browser.getEngine().load("https://calendar.google.com/calendar/render#main_7%7Cmonth");
     }
 
     /**

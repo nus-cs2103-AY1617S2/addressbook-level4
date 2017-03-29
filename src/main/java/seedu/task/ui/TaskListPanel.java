@@ -24,12 +24,16 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanelDefault.fxml";
     protected static final String FXML_Light = "TaskListPanelLight.fxml";
     protected static final String FXML_Dark = "TaskListPanelDark.fxml";
+    
+    private TaskCard [] cardlist = new TaskCard [1000];
+    
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
+        //System.out.println("print");
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
@@ -44,7 +48,10 @@ public class TaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
+        //System.out.println("when pass");
+        //cardlist = new ArrayList<TaskCard>();
         taskListView.setCellFactory(listView -> new TaskListViewCell());
+        
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -67,21 +74,23 @@ public class TaskListPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
+            if(cardlist[index+1].expendStatus()) {
+                cardlist[index+1].setExpend(false);
+            } else {
+                cardlist[index+1].setExpend(true); 
+            }
         });
     }
 
-    // @@author A0142939W
-    public void scrollDown() {
-        int currentIdx = taskListView.getSelectionModel().getSelectedIndex();
-        taskListView.scrollTo(currentIdx + 3);
-        taskListView.getSelectionModel().clearAndSelect(currentIdx + 3);
+
+    //@@author A0142939W
+    public void scrollDown(Scroll scroll) {
+    	scroll.scrollDown(taskListView);
     }
 
-    // @@author A0142939W
-    public void scrollUp() {
-        int currentIdx = taskListView.getSelectionModel().getSelectedIndex();
-        taskListView.scrollTo(currentIdx - 3);
-        taskListView.getSelectionModel().clearAndSelect(currentIdx - 3);
+    //@@author A0142939W
+    public void scrollUp(Scroll scroll) {
+    	scroll.scrollUp(taskListView);
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
@@ -104,6 +113,10 @@ public class TaskListPanel extends UiPart<Region> {
                 default:
                     setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
                 }
+                TaskCard taskcard = new TaskCard(task, getIndex() + 1);
+                setGraphic(taskcard.getRoot());
+              cardlist[getIndex()+1]=(taskcard);  
+               
             }
         }
     }
