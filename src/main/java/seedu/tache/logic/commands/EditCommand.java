@@ -29,7 +29,11 @@ public class EditCommand extends Command implements Undoable {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer); <parameter1> <new_value1>;"
             + "<parameter2> <new_value2>...\n"
-            + "Example: " + COMMAND_WORD + " 1; start_date 10/11/2017; start_time 3.30pm;";
+            + "Example: " + COMMAND_WORD + " 1; start_date 10/11/2017; start_time 3.30pm;"
+            + "Or alternatively you can use the following format\n"
+            + "Parameters: INDEX (must be a positive integer) change <parameter1> to <new_value1> and "
+            + "<parameter2> to <new_value2>...\n"
+            + "Example: " + COMMAND_WORD + " 1 change startdate to 10/11/2017 and change starttime to 3.30pm;";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -66,7 +70,7 @@ public class EditCommand extends Command implements Undoable {
         }
 
         taskToEdit = lastShownList.get(filteredTaskListIndex);
-        originalTask = new Task(taskToEdit);
+        cloneOriginalTask(taskToEdit);
         Task editedTask;
         try {
             editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
@@ -75,12 +79,12 @@ public class EditCommand extends Command implements Undoable {
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
-            model.updateFilteredListToShowAll();
+            model.updateCurrentFilteredList();
             commandSuccess = true;
             undoHistory.push(this);
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         } catch (IllegalValueException e) {
-            return new CommandResult(e.getMessage());
+            return new IncorrectCommand(e.getMessage()).execute();
         }
     }
 
@@ -101,7 +105,7 @@ public class EditCommand extends Command implements Undoable {
                 updatedStartDateTime.get().setDateOnly(editTaskDescriptor.getStartDate().get());
             } else {
                 updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
-                updatedStartDateTime.get().setTimeOnly("00:00:00");
+                updatedStartDateTime.get().setDefaultTime();
             }
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
@@ -109,7 +113,7 @@ public class EditCommand extends Command implements Undoable {
                 updatedEndDateTime.get().setDateOnly(editTaskDescriptor.getEndDate().get());
             } else {
                 updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndDate().get()));
-                updatedEndDateTime.get().setTimeOnly("00:00:00");
+                updatedEndDateTime.get().setDefaultTime();
             }
         }
         if (editTaskDescriptor.getStartTime().isPresent()) {
@@ -222,6 +226,26 @@ public class EditCommand extends Command implements Undoable {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
+    }
+
+    private void cloneOriginalTask(ReadOnlyTask taskToEdit) {
+        //Workaround as Java could not deep copy taskToEdit for some fields
+        DateTime workAroundStartDateTime = null;
+        DateTime workAroundEndDateTime = null;
+        try {
+            if (taskToEdit.getStartDateTime().isPresent()) {
+                workAroundStartDateTime = new DateTime(taskToEdit.getStartDateTime().get().getAmericanDateTime());
+            }
+            if (taskToEdit.getEndDateTime().isPresent()) {
+                workAroundEndDateTime = new DateTime(taskToEdit.getEndDateTime().get().getAmericanDateTime());
+            }
+        } catch (IllegalValueException e1) {
+            e1.printStackTrace();
+        }
+        originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
+                                        Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
+               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
+               taskToEdit.getRecurInterval());
     }
 
     //@@author A0150120H

@@ -72,4 +72,14 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
         return new UnmodifiableObservableList<>(tags);
     }
 
+    //@@author A0142255M
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        for (ReadOnlyTask task : getTaskList()) {
+            builder.append(task.toString() + "\n");
+        }
+        return builder.toString();
+    }
+
 }

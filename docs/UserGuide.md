@@ -15,12 +15,13 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 	3.4. [Finding Tasks](#34-find-a-task--find) <br>
 	3.5. [Listing Tasks](#35-list-all-tasks--list) <br>
     3.6. [Selecting Tasks](#36-select-a-task--select) <br>
-    3.7. [Updating Tasks](#37-update-a-task--update) <br>
+    3.7. [Editing Tasks](#37-edit-a-task--edit) <br>
     3.8. [Completing Tasks](#38-complete-a-task--complete) <br>
 	3.9. [Getting Help](#39-get-help--help) <br>
 	3.10. [Change Data File Location](#310-change-data-file-location) <br>
-	3.11. [Undo a change](#311-undo-a-change--undo) <br>
-	3.12. [Exit](#312-exit-the-program--exit)
+	3.11. [Load Data File From Location](#311-load-data-file-from-location) <br>
+	3.12. [Undo a Change](#312-undo-a-change--undo) <br>
+	3.13. [Exit](#313-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 6. [Glossary](#6-glossary)
@@ -65,7 +66,7 @@ Ready? Let's begin!
 
    * **`add`** `Finish Progress Report; 030217 1159PM` <br>
 
-     > Adds a task with the following [parameters](#parameter) into your task list: <br>
+     > Adds a task with the following [task details](#task-detail) into your task list: <br>
      > Name: `Finish Progress Report` <br>
      > Due Date: `3 Feb 2017` <br>
      > Due Time: `11.59 p.m.`
@@ -98,7 +99,7 @@ When typing in your commands, do take note of the following specifications: <br>
 
 * Times must be specified in _am_ and/or _pm_.
 * Dates must be specified in _DDMMYY_ format.
-* Either date or time but not both can be left out in the <... date and time> parameters.
+* Either date or time but not both can be left out in the <... date and time> task details.
 
   > i.e.
   > * `<start date and time>` <br>
@@ -109,7 +110,7 @@ When typing in your commands, do take note of the following specifications: <br>
 
 * `<task_index>` refers to the task's index number.
 
-* [Parameters](#parameter) for your tasks include the following:
+* [Task details](#task detail) for your tasks include the following:
 
   > * Name
   > * Start_Date
@@ -117,17 +118,21 @@ When typing in your commands, do take note of the following specifications: <br>
   > * End_Date
   > * End_Time
 
+* The default delimiter between different task details is ";".
+
 * [Filters](#filter) for your tasks include the following:
 
   > * All
   > * Completed
   > * Uncompleted
+  > * Floating
+  > * Timed
 
 ### 3.2. Add a task : `add`
 
 Adds a task to your task list. <br>
 
-> Type your [parameters](#parameter) in their respective orders. <br>
+> Type your [task details](#task-detail) in their respective orders. <br>
 E.g. If you are adding a task with a deadline as in **`add`** `<task>; <due date and time>`,
 make sure that you indicate `<task>` before `<due date and time>`, not the other way round!
 
@@ -166,27 +171,16 @@ Format: **`add`** `<task>` <br>
 <img src="images/UiAddCommand.png" width="600"><br>
 _Figure 3.2.1. Add Command_
 
-Here are other formats to follow when adding tasks that _have specific dates / times_:
+#### Add a _timed_ task:
 
-#### Add a task with a _deadline_:
+A timed task is a task that _is associated to specific dates and times_. <br>
+It can be a task with a deadline or an event. <br>
 
 Format: **`add`** `<task>; <due date and time>` <br>
-E.g. **`add`** `project proposal; 041216 2pm`
-
-#### Add an _event_:
+E.g. **`add`** `project proposal; 041216 2pm`<br>
 
 Format: **`add`** `<task>; <start date and time>; <end date and time>` <br>
-E.g. **`add`** `sushi restaurant promotion; 040117 10am; 110117 9pm`
-
-OR
-
-Format: **`add`** `<task>; <start date and time>; <duration>` <br>
-E.g. **`add`** `committee meeting; 150617 1pm; 2.5hr`
-
-#### Add a task with a _duration_ only:
-
-Format: **`add`** `<task>; <duration>` <br>
-E.g. **`add`** `watch tv with the children; 1hr`
+E.g. **`add`** `sushi restaurant promotion; 040117 10am; 110117 9pm`<br>
 
 ### 3.3. Delete a task : `delete`
 
@@ -221,14 +215,14 @@ Finds your task(s) whose name(s) contain the keyword or sequence of keywords `<t
 
 Here are some reasons why you might want to _find_ a task or some tasks:
 
-* **You want to know the [parameters](#parameter) of a task** <br>
+* **You want to know the [task details](#task-detail) of a task** <br>
 
-  > Such parameters include the duration of a task, the deadline of a task etc.
+  > Such task details include the duration of a task, the deadline of a task etc.
 
   E.g. **Finding out when your _project proposal_ is due** <br>
   You want to plan your schedule for the week, taking into account the proposal deadline.
 
-* **You want to obtain a list of tasks that fall under some category** <br>
+* **You want to obtain a list of common tasks** <br>
 
   > Some tasks might have overlapping words / phrases in their names.
 
@@ -262,22 +256,28 @@ Here are some reasons why you might want to _list_ your tasks:
   > You want to have an overview of all your tasks based on how urgent they are, then
   manually select some of these tasks to focus on.
 
-* **You want to view completed your tasks** <br>
+* **You want to track the tasks that you have already completed** <br>
 
-  > You want to have an overview of all your tasks you completed to help track what you have already done.
+* **You want to plan your time to get your remaining tasks done** <br>
 
-* **You want to view uncompleted your tasks** <br>
+* **You want to schedule some of your uncompleted [floating tasks](#add-a-floating-task)** <br>
 
-  > You want to have an overview of all your tasks so that you can better plan your time to get them done.
+  > Converting your floating tasks into [timed tasks](#add-a-timed-task) will allow me to keep track of
+  them more effectively (e.g. by alerting you when they are overdue).
+  > Fun fact: you can know the _no. of floating and timed tasks_ you have instantly through my
+  [GUI](#graphical-user-interface-gui)!
 
-> * **`list`** <br>
+	<img src="images/TaskCount.png" width="600"><br>
+	_Figure 3.5.2. Task Count_
+
+Format: **`list`** <br>
 This lists all tasks. Navigate through the panels and tasks using the arrow keys on your keyboard. <br>
 
-> * **`list`** `<filter>`<br>
-E.g. **`list`** `uncompleted`, **`list`** `floating` <br>
+Format: **`list`** `<filter>`<br>
+E.g. **`list`** `uncompleted`, **`list`** `completed`, **`list`** `floating`, **`list`** `timed` <br>
 
 <img src="images/UiListCommand.png" width="600"><br>
-_Figure 3.5.1. List Command_
+_Figure 3.5.2. List Command_
 
 ### 3.6. Select a task : `select`
 
@@ -285,11 +285,11 @@ Selects a task for you to view its details. <br>
 
 Here are some reasons why you might want to _select_ a task:
 
-* **You want to know the [parameters](#parameter) of a certain task** <br>
+* **You want to know the [task details](#task-detail) of a certain task** <br>
 
   > You can refer to the earlier section on the [find](#34-find-a-task--find) command.
 
-* **You want to edit the [parameters](#parameter) of a certain task** <br>
+* **You want to edit the [task details](#task-detail) of a certain task** <br>
 
   > You can refer to the later section on the [update](#37-update-a-task--update) command.
 
@@ -302,16 +302,9 @@ _Figure 3.6.1. Select Command_
 those tasks for you. You will then have to choose one of those displayed tasks manually by navigating
 to your desired task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
 
-Format: **`unselect`** <br>
-This command _cancels your previous selection_ so that you can select another one of your
-tasks instead. <br>
-
-<img src="images/UiUnselectCommand.png" width="600"><br>
-_Figure 3.6.2. Unselect Command_
-
 ### 3.7. Edit a task : `edit`
 
-Edits 1 or more [parameters](#parameter) of a task. <br>
+Edits 1 or more [task details](#task-detail) of a task. <br>
 
 Here are some examples of tasks which you might want to _edit_: <br>
 
@@ -325,36 +318,40 @@ Here are some examples of tasks which you might want to _edit_: <br>
 
 * **[Floating tasks](#floating-task) that now have known dates / times**
 
-  > You can now add in additional parameters for these tasks that were previously floating tasks.
+  > You can now add in additional task details for these tasks that were previously floating tasks.
 
   **_E.g. Schedule meet-up with Jamie_** <br>
   Your friend Jamie has come back from her overseas trip, and has finally arranged a meet-up with
   you!
 
-> * **`edit`** `<task_index>; <parameter> <new_value>` <br>
+Format: **`edit`** `<task_index>; <task_detail> <new_value>` <br>
 This command will direct me to make the specified update to a task with `<task_index>`. <br>
-> * **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`<br>
-You can edit more parameters for your task concurrently using the following format<br>
+Format: **`edit`** `<task_index>; <task_detail_1> <new_value1>; <task_detail_2> <new_value2>; ...`<br>
+You can edit more task details for your task concurrently using the following format<br>
 E.g. **`edit`** `1; start_time 3pm; end_time 8pm;` <br>
 
-<img src="images/UiUpdateCommand.png" width="600"><br>
+<img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.7.1. Edit Command_
 
 ### 3.8. Complete a task : `complete`
 
 Set a task as completed. <br>
+I will keep your completed tasks hidden until you need to refer to them again. <br>
 
-Here are some reasons why you might want to _completed_ a task:
+Here is a reason why you might want to _complete_ a task:
 
 * **Tasks have already been completed** <br>
 
   > You finished a task and do not want it to show up in the default task list anymore.
 
-> * **`complete`** `<task_index>`<br>
+Format: **`complete`** `<task_index>`<br>
 E.g. **`complete`** `1` <br>
-> * **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
+Format: **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
 You can complete multiple tasks simultaneously using the following format<br>
 E.g. **`complete`** `1,3,4` <br>
+
+<img src="images/UiCompleteCommand.png" width="600"><br>
+_Figure 3.8.1. Complete Command_
 
 ### 3.9. Get help : `help`
 
@@ -362,9 +359,6 @@ Shows a list of all commands I can execute and their usage instructions. <br>
 
 Format: **`help`** `<command>` <br>
 This command will instruct me to provide you specific information on how to use `<command>`.
-
-<img src="images/UiHelpCommand.png" width="600"><br>
-_Figure 3.9.1. Help Command_
 
 Format: **`help /all`** <br>
 This command will help to direct you back to this user guide.
@@ -382,9 +376,6 @@ Here is a reason why you might want to _change my data file location_:
   > You can choose to store my data file in a local folder controlled by a cloud
   syncing device (e.g. Dropbox) so that you can access my data from multiple computers.
 
-Format: **`save`** <br>
-This command directs me to save all my data into the data file.
-
 Format: **`save`** `<new_save_location_directory>` <br>
 This command directs me to set my new data file in a `<new_save_location_directory>`,
 then save all my data in that file.
@@ -392,26 +383,43 @@ then save all my data in that file.
 <img src="images/UiSaveCommand.png" width="600"><br>
 _Figure 3.10.1. Save Command_
 
-### 3.11. Undo a change : `undo`
+### 3.11. Load data file from location
+
+Loads the specified data file in Tache. <br>
+
+The current data file became corrupted out of the blue. Luckily, you've made a backup copy previously.
+Now you'll need me to load from that backup copy instead.
+
+Format: **`load`** `<file_path>` <br>
+This command loads the data from the specified file in the `<file_path>`.
+
+### 3.12. Undo a change : `undo`
 
 Undoes the last change made to my data. <br>
 
-Accidentally deleted that all-important task, or edited the wrong details? <br>
-Don't worry! Undo is here to save the day!
+Here are some reasons why you might want to _undo_ a previous command:
+
+* **You accidentally deleted a very important task** <br>
+
+  > You might not be able to add the task back if you do not remember its details.
+
+* **You edited the wrong details of a task by mistake** <br>
+
+  > It is a hassle for you to manually correct the details of this task again.
 
 Format: **`undo`** <br>
 I'll undo the last change you made to your tasks. <br>
 I can't remember anything before a **`delete /all`** though.
 
-### 3.12. Exit the program : `exit`
+<img src="images/UiUndoCommand.png" width="600"><br>
+_Figure 3.12.1. Undo Command_
+
+### 3.13. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
 
 Format: **`exit`** <br>
-
-<img src="images/UiExitCommand.png" width="600"><br>
-_Figure 3.12.1. Exit Command_
 
 
 ## 4. Command Summary
@@ -426,10 +434,11 @@ Your wish is my command!
 |Find         |**`find`** `<task>`                          |**`find`** `project`                                |
 |List         |**`list`** `<optional filter>`               |**`list`** `uncompleted`                            |
 |Select       |**`select`** `<task>`                        |**`select`** `presentation`                         |
-|Edit         |**`edit`** `<task_index>; <parameter> <new_value>;` |**`edit`** `1; name buy white bread;`        |
+|Edit         |**`edit`** `<task_index>; <task_detail> <new_value>;` |**`edit`** `1; name buy white bread;`        |
 |Complete     |**`complete`** `<task_index>`                |**`complete`** `1`                                  |
 |Help         |**`help`**                                   |                                                    |
 |Save         |**`save`** `<directory>`                     |**`save`** `C:\Users\Jim\Desktop`                   |
+|Load         |**`load`** `<file_path>`                     |**`load`** `C:\Users\Jim\Desktop\taskmanager.xml`   |
 |Exit         |**`exit`**                                   |                                                    |
 
 
@@ -439,7 +448,8 @@ Here are some questions that you might want to ask me:
 
 **Q**: How do I _transfer my data_ to another computer? <br>
 **A**: Install me in the other computer and _overwrite the empty data file_ I create with
-       the file that contains the data of your previous Task Manager folder.
+       the file that contains the data of your previous Task Manager folder. Alternatively,
+       you can type in **`load`** `<file_path>`, to load your data file.
 
 **Q**: How do I add an _event_? <br>
 **A**: Type in **`add`** `<task>; <start date and time>; <end date and time>` as mentioned
@@ -451,7 +461,7 @@ Here are some questions that you might want to ask me:
 
 > The graphical interface that allows the you to interact with me through graphical icons and visual indicators
 
-#### Parameter:
+#### Task Detail:
 
 > Detail associated with a task of yours (e.g. duration, name, start time)
 

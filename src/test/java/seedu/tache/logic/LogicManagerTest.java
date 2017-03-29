@@ -111,7 +111,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'task amanger' and the 'last shown list' are verified to be unchanged.
+     * Both the 'task manager' and the 'last shown list' are verified to be unchanged.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
@@ -235,7 +235,7 @@ public class LogicManagerTest {
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
-                String.format(ListCommand.MESSAGE_SUCCESS, "All"),
+                String.format(ListCommand.MESSAGE_SUCCESS, "Uncompleted"),
                 expectedAB,
                 expectedList);
     }

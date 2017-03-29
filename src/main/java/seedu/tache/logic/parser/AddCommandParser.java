@@ -33,9 +33,10 @@ public class AddCommandParser {
             for (int i = 1; i < taskFields.length; i++) {
                 String currentChunk = taskFields[i];
                 if (ParserUtil.hasDate(currentChunk) || ParserUtil.hasTime(currentChunk)) {
-                    if (!startDateTime.isPresent()) {
-                        startDateTime = Optional.of(taskFields[i]);
-                    } else if (!endDateTime.isPresent()) {
+                    if (!endDateTime.isPresent()) {
+                        endDateTime = Optional.of(taskFields[i]);
+                    } else if (!startDateTime.isPresent()) {
+                        startDateTime = endDateTime;
                         endDateTime = Optional.of(taskFields[i]);
                     } else {
                         return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

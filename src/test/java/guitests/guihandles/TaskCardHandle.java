@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import guitests.GuiRobot;
@@ -16,6 +17,12 @@ import seedu.tache.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
+    //@@author A0142255M
+    private static final String START_DATE_FIELD_ID = "#startdate";
+    private static final String START_TIME_FIELD_ID = "#starttime";
+    private static final String END_DATE_FIELD_ID = "#enddate";
+    private static final String END_TIME_FIELD_ID = "#endtime";
+    //@@author
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -32,6 +39,63 @@ public class TaskCardHandle extends GuiHandle {
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
+    //@@author A0142255M
+    public String getStartDate() {
+        String displayed = getTextFromLabel(START_DATE_FIELD_ID);
+        return displayed.substring(12);
+    }
+
+    public String getStartTime() {
+        String displayed = getTextFromLabel(START_TIME_FIELD_ID);
+        return displayed.substring(12);
+    }
+
+    public String getEndDate() {
+        String displayed = getTextFromLabel(END_DATE_FIELD_ID);
+        return displayed.substring(10);
+    }
+
+    public String getEndTime() {
+        String displayed = getTextFromLabel(END_TIME_FIELD_ID);
+        return displayed.substring(10);
+    }
+
+    public boolean hasStartDate() {
+        try {
+            getStartDate();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public boolean hasStartTime() {
+        try {
+            getStartTime();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public boolean hasEndDate() {
+        try {
+            getEndDate();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public boolean hasEndTime() {
+        try {
+            getEndTime();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+    //@@author
 
     public List<String> getTags() {
         return getTags(getTagsContainer());
@@ -57,8 +121,20 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
+    //@@author A0142255M
     public boolean isSameTask(ReadOnlyTask task) {
+        boolean start = true;
+        boolean end = true;
+        if ((hasStartDate() && hasStartTime()) && (task.getStartDateTime().isPresent())) {
+            start = getStartDate().equals(task.getStartDateTime().get().getDateOnly()) &&
+                    getStartTime().equals(task.getStartDateTime().get().getTimeOnly());
+        }
+        if ((hasEndDate() && hasEndTime()) && (task.getEndDateTime().isPresent())) {
+            end = getEndDate().equals(task.getEndDateTime().get().getDateOnly()) &&
+                  getEndTime().equals(task.getEndDateTime().get().getTimeOnly());
+        }
         return getFullName().equals(task.getName().fullName)
+                && start && end
                 && getTags().equals(getTags(task.getTags()));
     }
 
@@ -67,10 +143,15 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
+                    && getStartDate().equals(handle.getStartDate())
+                    && getStartTime().equals(handle.getStartTime())
+                    && getEndDate().equals(handle.getEndDate())
+                    && getEndTime().equals(handle.getEndTime())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
     }
+    //@@author
 
     @Override
     public String toString() {

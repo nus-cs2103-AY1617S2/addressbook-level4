@@ -21,10 +21,14 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             eggsAndBread = new TaskBuilder().withName("Buy Eggs and Bread")
+                    .withStartDateTime("01-04-17 19:55:12")
                     .withTags("HighPriority").build();
             readBook = new TaskBuilder().withName("Read Book about Software Engineering")
+                    .withEndDateTime("21-04-17 23:59:59")
                     .withTags("LowPriority").build();
-            visitGrandma = new TaskBuilder().withName("Visit Grandma").build();
+            visitGrandma = new TaskBuilder().withName("Visit Grandma")
+                    .withStartDateTime("15-04-17 16:00:00")
+                    .withEndDateTime("21-04-17 19:00:00").build();
             payDavid = new TaskBuilder().withName("Pay David 20 for cab").build();
             visitSarah = new TaskBuilder().withName("Visit Sarah")
                                           .withTags("MediumPriority").build();

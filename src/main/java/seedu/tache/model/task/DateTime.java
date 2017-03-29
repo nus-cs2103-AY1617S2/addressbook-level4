@@ -2,7 +2,7 @@
 package seedu.tache.model.task;
 
 import java.text.SimpleDateFormat;
-
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +19,8 @@ public class DateTime {
     public static final String MESSAGE_DATE_CONSTRAINTS = "Unknown date format. It is recommended to "
                                         + "interchangeably use the following few formats:"
                                         + "\nMM-DD-YY hh:mm:ss or MM/DD/YY 10.30pm";
+
+    public static final String DEFAULT_TIME_STRING = "00:00:00";
 
     private final Date date;
 
@@ -79,6 +81,10 @@ public class DateTime {
         this.date.setSeconds(parsedTime.getSeconds());
     }
 
+    public void setDefaultTime() throws IllegalValueException {
+        setTimeOnly(DEFAULT_TIME_STRING);
+    }
+
     public String getTimeOnly() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         return sdf.format(date);
@@ -100,12 +106,43 @@ public class DateTime {
         return sdf.format(date);
     }
 
-   /* @Override
+    public Date getDate() {
+        return date;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && this.time.equals(((Date) other).time)); // state check
-    }*/
+                || (other instanceof DateTime // instanceof handles nulls
+                && this.date.equals(((DateTime) other).getDate())); // state check
+    }
+
+    public boolean hasPassed() {
+        Date today = new Date();
+        return this.date.before(today);
+    }
+
+    //@@author A0139961U
+    public boolean isSameDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date).equals(sdf.format(this.date));
+    }
+
+    public boolean isToday() {
+        Date today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(today).equals(sdf.format(this.date));
+    }
+
+    public boolean isSameWeek() {
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int thisWeekNo = cal.get(Calendar.WEEK_OF_YEAR);
+        cal.setTime(this.date);
+        return (thisWeekNo == cal.get(Calendar.WEEK_OF_YEAR));
+    }
+    //@@author
 
     /*@Override
     public int hashCode() {

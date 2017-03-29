@@ -154,11 +154,16 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 //// util methods
 
+    //@@author A0142255M
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() +  " tags";
-        // TODO: refine later
+        final StringBuilder builder = new StringBuilder();
+        for (Task task : tasks) {
+            builder.append(task.toString() + "\n");
+        }
+        return builder.toString();
     }
+    //@@author
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
