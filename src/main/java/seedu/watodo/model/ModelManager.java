@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.Stack;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.watodo.commons.core.ComponentManager;
@@ -18,6 +19,7 @@ import seedu.watodo.logic.commands.ListDoneCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
 import seedu.watodo.logic.commands.ListUndoneCommand;
+import seedu.watodo.logic.commands.Command;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
@@ -33,6 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private Stack< Command > commandHistory;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -43,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
+        this.commandHistory = new Stack< Command >();
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
@@ -345,5 +349,22 @@ public class ModelManager extends ComponentManager implements Model {
             return "type=" + type;
         }
     }
+
+    //@@author A0139845R
+    @Override
+    public Command getPreviousCommand() {
+        if (!commandHistory.isEmpty()) {
+            return commandHistory.pop();
+        }
+        return null;
+    }
+
+    @Override
+    public void addCommandToHistory(Command command) {
+        commandHistory.push(command);
+        
+    }
+    
+    //@@author
 
 }

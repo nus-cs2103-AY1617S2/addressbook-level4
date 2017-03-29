@@ -7,6 +7,7 @@ import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Marks a task identified using it's last displayed index from the task manager
@@ -26,6 +27,8 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_STATUS_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
+    private int undoMarkInt;
+    private Task undoMark;
 
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -52,10 +55,12 @@ public class MarkCommand extends Command {
             }
 
             ReadOnlyTask taskToMark = lastShownList.get(filteredTaskListIndices[i]);
+            this.undoMark = new Task(taskToMark);
 
             try {
                 Task markedTask = createMarkedTask(taskToMark);
                 model.updateTask(filteredTaskListIndices[i], markedTask);
+                this.undoMarkInt = filteredTaskListIndices[i];
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -65,6 +70,15 @@ public class MarkCommand extends Command {
         }
 
         return new CommandResult(tasksMarkedMessage.toString());
+    }
+    
+    @Override
+    public void unexecute() {
+        try {
+            model.updateTask(undoMarkInt, undoMark);
+        } catch (DuplicateTaskException e) {
+            
+        }
     }
 
     /**
