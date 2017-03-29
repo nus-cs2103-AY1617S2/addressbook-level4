@@ -40,6 +40,7 @@ import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -865,9 +866,9 @@ public class LogicManagerTest {
                 String.format(ExportCommand.MESSAGE_WRITE_FILE_ERROR, invalidFileNameFile.getAbsolutePath()));
     }
 
-    // End ExportCommand tests
-    
-    // UseThisCommand tests
+    // End ExportCommand Tests
+
+    // UseThisCommand Tests
 
     @Test
     public void execute_useThis_absoluteSubDirectory() throws Exception {
@@ -888,7 +889,7 @@ public class LogicManagerTest {
     }
 
     // End UseThisCommand tests
-    
+
     // UndoCommand tests
 
     @Test
@@ -916,6 +917,21 @@ public class LogicManagerTest {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         String commandText = "saveto " + tmFile.getParentFile().getAbsolutePath();
         assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
+                new TaskManager(), Collections.emptyList());
+        assertTrue(FileUtil.isFileExists(tmFile));
+
+        // undo command
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), new TaskManager(),
+                Collections.emptyList());
+        assertFalse(FileUtil.isFileExists(tmFile));
+    }
+
+    @Test
+    public void execute_undoExport_successful() throws Exception {
+        // save to same directory
+        File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        String commandText = "export " + tmFile.getParentFile().getAbsolutePath();
+        assertCommandSuccess(commandText, String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
                 new TaskManager(), Collections.emptyList());
         assertTrue(FileUtil.isFileExists(tmFile));
 

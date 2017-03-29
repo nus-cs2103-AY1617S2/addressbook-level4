@@ -17,12 +17,14 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.TaskManagerExportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
 import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.model.exceptions.NoPreviousCommandException;
@@ -45,7 +47,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private Stack<String> commandHistory;
     private Stack<TaskManager> taskHistory;
-    private Stack<Predicate> predicateHistory;
+    private Stack<Predicate<? super ReadOnlyTask>> predicateHistory;
     private Stack<String> redoCommandHistory;
     private Stack<Boolean> completedViewHistory;
 
@@ -90,7 +92,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         commandHistory = new Stack<String>();
         taskHistory = new Stack<TaskManager>();
-        predicateHistory = new Stack<Predicate>();
+        predicateHistory = new Stack<Predicate<? super ReadOnlyTask>>();
         redoCommandHistory = new Stack<String>();
         completedViewHistory = new Stack<Boolean>();
         completedViewOpen = false;
@@ -137,6 +139,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the path needs to be changed */
     private void indicateTaskManagerExport(String message, String path) {
+        logger.fine(message);
         raise(new TaskManagerExportEvent(taskManager, path));
     }
 
@@ -182,7 +185,8 @@ public class ModelManager extends ComponentManager implements Model {
         assert path != null;
         indicateTaskManagerExport(MESSAGE_ON_EXPORT + path, path);
     }
-    
+
+    @Override
     public void useNewSaveLocation(String path) {
         assert path != null;
         indicateTaskManagerUseNewPath(MESSAGE_ON_USETHIS + path, path);
@@ -192,7 +196,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void saveCurrentState(String commandText) {
         TaskManager copiedTaskManager = new TaskManager(taskManager);
         taskHistory.add(copiedTaskManager);
-        predicateHistory.add(filteredTasks.getPredicate());
+        Predicate<? super ReadOnlyTask> predicate = filteredTasks.getPredicate();
+        predicateHistory.add(predicate);
         commandHistory.add(commandText);
         completedViewHistory.add(completedViewOpen);
     }
@@ -202,7 +207,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
         if (!commandHistory.isEmpty()) {
-            String toUndo = commandHistory.pop();
+            commandHistory.pop();
             taskHistory.pop();
             predicateHistory.pop();
             completedViewHistory.pop();
@@ -237,6 +242,8 @@ public class ModelManager extends ComponentManager implements Model {
             indicateTaskManagerPathChanged(MESSAGE_ON_UNDO, null);
         } else if (toUndo.startsWith(UseThisCommand.COMMAND_WORD)) {
             indicateTaskManagerUseNewPath(MESSAGE_ON_UNDO, null);
+        } else if (toUndo.startsWith(ExportCommand.COMMAND_WORD)) {
+            indicateTaskManagerExport(MESSAGE_ON_UNDO, null);
         } else {
             indicateTaskManagerChanged(MESSAGE_ON_UNDO);
         }

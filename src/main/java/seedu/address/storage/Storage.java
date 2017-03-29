@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.TaskManagerExportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -50,4 +51,9 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * Read from new storage file path.
      */
     void handleTaskManagerUseNewPathEvent(TaskManagerUseNewPathEvent event);
+
+    /**
+     * Export to specified file path.
+     */
+    void handleTaskManagerExportEvent(TaskManagerExportEvent event);
 }
