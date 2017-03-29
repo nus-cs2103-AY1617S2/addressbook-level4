@@ -25,6 +25,8 @@ public class TaskCard extends UiPart<Region> {
     private Label priority;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane recurringTag;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -34,6 +36,17 @@ public class TaskCard extends UiPart<Region> {
         instruction.setText(task.getInstruction().value);
         priority.setText(task.getPriority().toString());
         initTags(task);
+        
+        if(task.getDeadline().isRecurring()) {
+            initRecurTag();
+        }
+    }
+
+    private void initRecurTag() {
+        //recurringTag.getChildren().add(new Label("Recurring"));
+        recurringTag.setStyle("-fx-background-color: #1b98b7; -fx-blend-mode: multipy;");
+        //recurringTag.setStyle("-fx-background-blend-mode: multiply;");
+        
     }
 
     private void initTags(ReadOnlyTask task) {

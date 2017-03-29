@@ -11,53 +11,56 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <HBox id="cardPane" fx:id="cardPane" style="-fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <TitledPane expanded="false" style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css" HBox.hgrow="ALWAYS">
-         <content>
-              <GridPane>
-                  <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-                  </columnConstraints>
-                  <children>
-                      <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
-                          <stylesheets>
-                              <URL value="@DarkTheme.css" />
-                              <URL value="@Extensions.css" />
-                          </stylesheets>
-                          <padding>
-                              <Insets bottom="5" left="15" right="5" top="5" />
-                          </padding>
-      
-                                      <children>
-                              <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-background-color: transparent; -fx-border-color: transparent;">
-                                  <children>
-                                      <HBox style="-fx-background-color: transparent; -fx-border-color: transparent;" />
-                                  </children>
-                              </HBox>
-                              <FlowPane fx:id="tags" />
-                              <Label fx:id="instruction" styleClass="cell_small_label_instruction" text="\$instruction" />
-                              <Label fx:id="priority" styleClass="cell_small_label_priority" text="\$priority" />
-                          </children>
-                      </VBox>
-                  </children>
-               <rowConstraints>
-                  <RowConstraints />
-               </rowConstraints>
-              </GridPane>
-         </content>
-         <graphic>
-                  <Label fx:id="date" styleClass="cell_small_label_date" text="\$date">
+      <FlowPane fx:id="recurringTag" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+         <children>
+            <TitledPane style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css">
+               <content>
+                    <GridPane prefHeight="56.0" prefWidth="435.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                        </columnConstraints>
+                        <children>
+                            <VBox alignment="CENTER_LEFT" minHeight="50.0" prefHeight="63.0" prefWidth="415.0" translateY="-10.0">
+                                <stylesheets>
+                                    <URL value="@DarkTheme.css" />
+                                    <URL value="@Extensions.css" />
+                                </stylesheets>
+                                <padding>
+                                    <Insets bottom="5" left="15" right="5" top="5" />
+                                </padding>
+            
+                                            <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                                        <children>
+                                            <HBox style="-fx-background-color: transparent; -fx-border-color: transparent;" />
+                                        </children>
+                                    </HBox>
+                                    <Label fx:id="date" styleClass="cell_small_label_date" text="\$date" />
+                                    <Label fx:id="instruction" styleClass="cell_small_label_instruction" text="\$instruction" />
+                                    <Label fx:id="priority" styleClass="cell_small_label_priority" text="\$priority" />
+                                </children>
+                            </VBox>
+                        </children>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+                    </GridPane>
+               </content>
                <graphic>
-                           <Label fx:id="title" styleClass="cell_big_label" text="\$first">
-                     <graphic>
-                                 <Label fx:id="id" styleClass="cell_big_label" />
-                     </graphic>
-                  </Label>
+                        <FlowPane fx:id="tags" minWidth="600.0">
+                     <children>
+                                 <Label fx:id="title" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-size: 24; -fx-font-family: Arial; -fx-font-weight: bold;" styleClass="cell_big_label" text="\$first">
+                           <graphic>
+                                       <Label fx:id="id" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-family: Arial; -fx-font-size: 24; -fx-font-weight: bold;" styleClass="cell_big_label" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </FlowPane>
                </graphic>
-            </Label>
-         </graphic>
-      </TitledPane>
+            </TitledPane>
+         </children>
+      </FlowPane>
     </children>
 </HBox>
