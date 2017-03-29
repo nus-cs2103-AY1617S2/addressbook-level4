@@ -64,12 +64,7 @@ public class TaskCard extends UiPart<Region> {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
         LocalDateTime dateTimeToCompare = LocalDateTime.parse(dateTime, formatter);
-        if (currentDateTime.isBefore(dateTimeToCompare)) {
-            return false;
-        } else {
-            return true;
-        }
-
+        return !currentDateTime.isBefore(dateTimeToCompare);
     }
 
     private void initTags(ReadOnlyTask task) {
