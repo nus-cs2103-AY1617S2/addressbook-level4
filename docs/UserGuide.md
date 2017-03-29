@@ -92,18 +92,20 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 
 | Command |Description                                                      |
 |:-------:|---------------------------------------------------------------- |
-|[add / a](#1-adding-a-task-add--a)               |Adds a task              |
-|[edit / e](#2-editing-a-task-edit--e)            |Edits a task             |
-|[done / d](#3-marking-a-task-as-done-done--d)    |Marks a task as done     |
-|[kill / k](#4-deleting-a-task-kill--k)           |Deletes a task           |
-|[sort / s](#5-sorting-a-list-of-tasks-sort--s)   |Sorts the list of tasks  |
-|[find / f](#6-finding-tasks-find--f)             |Searches for a task      |
-|[list / l](#7-listing-all-tasks-list--l)         |Lists the tasks          |
-|[undo / u](#8-reverting-the-last-action-undo--u) |Reverts the last action  |
-|[clear / c](#9-clearing-all-entries-clear--c)    |Deletes all tasks        |
-|[save](#10-moving-the-save-file-save)            |Saves ezDo to a directory|
-|[quit / q](#11-exiting-the-program-quit--q)      |Quits ezDo               |
-|[help / h](#12-viewing-help-help--h)             |Shows the user guide     |
+|[add / a](#31-adding-a-task-add--a)            |Adds a task              |
+|[edit / e](#32-editing-a-task-edit--e)            |Edits a task             |
+|[done / d](#33-marking-a-task-as-done-done--d)    |Marks a task as done     |
+|[kill / k](#34-deleting-a-task-kill--k)           |Deletes a task           |
+|[sort / s](#35-sorting-a-list-of-tasks-sort--s)   |Sorts the list of tasks  |
+|[find / f](#36-finding-tasks-find--f)             |Searches for a task      |
+|[list / l](#37-listing-all-tasks-list--l)         |Lists the tasks          |
+|[undo / u](#38-reverting-the-last-action-undo--u) |Reverts the last action  |
+|[redo / r](#39-redoing-the-last-undone-action-redo--r)| Redoes the last undo|
+|[clear / c](#310-clearing-all-entries-clear--c)    |Deletes all tasks        |
+|[save](#311-moving-the-save-file-save)            |Saves ezDo to a directory|
+|[alias](#312-aliasing-a-command-alias)           | Aliases a command       |
+|[quit / q](#313-exiting-the-program-quit--q)      |Quits ezDo               |
+|[help / h](#314-viewing-help-help--h)             |Shows the user guide     |
 
 
 <h5 align="center">Table 1: Summary of Commands in ezDo</h5>
