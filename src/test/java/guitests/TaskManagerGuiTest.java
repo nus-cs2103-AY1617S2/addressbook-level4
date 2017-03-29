@@ -21,6 +21,7 @@ import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TodayTaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
@@ -56,8 +57,9 @@ public abstract class TaskManagerGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
+    protected TodayTaskListPanelHandle todayTaskListPanel;
     protected FutureTaskListPanelHandle futureTaskListPanel;
-    protected CompletedTaskListHandle completedTaskList;
+    protected CompletedTaskListHandle completedTaskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -80,7 +82,8 @@ public abstract class TaskManagerGuiTest {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
             futureTaskListPanel = mainGui.getFutureTaskListPanel();
-            completedTaskList = mainGui.getCompletedTaskList();
+            todayTaskListPanel = mainGui.getTodayTaskListPanel();
+            completedTaskListPanel = mainGui.getCompletedTaskList();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             browserPanel = mainGui.getBrowserPanel();
@@ -127,7 +130,7 @@ public abstract class TaskManagerGuiTest {
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = futureTaskListPanel.getNumberOfPeople();
+        int numberOfPeople = futureTaskListPanel.getNumberOfTasks();
         assertEquals(size, numberOfPeople);
     }
 

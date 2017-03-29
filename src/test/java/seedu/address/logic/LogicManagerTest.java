@@ -315,11 +315,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
-    }
-
-    @Test
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("delete");
     }
@@ -475,11 +470,9 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
         helper.addToModel(model, threeTasks);
-        model.prepareTaskList(FXCollections.observableArrayList(),
-                FXCollections.observableArrayList(),
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandFailure("edit C1 Task 3 #tag3 #tag4",
-                EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure("edit C1 Task 3 #tag3 #tag4", EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     // @@author: A0144422R
@@ -488,11 +481,9 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
         helper.addToModel(model, threeTasks);
-        model.prepareTaskList(FXCollections.observableArrayList(),
-                FXCollections.observableArrayList(),
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandFailure("edit C100 Task 3 #tag3 #tag4",
-                Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        assertCommandFailure("edit C100 Task 3 #tag3 #tag4", Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     // ----------------------Today----------------------

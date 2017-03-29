@@ -28,11 +28,14 @@ public class EventTask extends Task {
         validateDateTime();
     }
 
-    public EventTask(ReadOnlyTask source) throws IllegalValueException {
-        this(source.getName(), source.getTags(), source.getDeadline().get().getDate(),
-                source.getStartingTime().get().getDate(), source.isDone(), source.isManualToday());
-        validateDateTime();
-    }
+    // (Obsolete)
+    // public EventTask(ReadOnlyTask source) throws IllegalValueException {
+    // this(source.getName(), source.getTags(),
+    // source.getDeadline().get().getDate(),
+    // source.getStartingTime().get().getDate(), source.isDone(),
+    // source.isManualToday());
+    // validateDateTime();
+    // }
 
     /**
      * validates deadline and starting time

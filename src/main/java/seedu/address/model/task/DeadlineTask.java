@@ -22,10 +22,12 @@ public class DeadlineTask extends Task {
         this.deadline = new DateTime(date);
     }
 
-    public DeadlineTask(ReadOnlyTask source) throws IllegalValueException {
-        this(source.getName(), source.getTags(), source.getDeadline().get().getDate(), source.isDone(),
-                source.isManualToday());
-    }
+    // (Obsolete)
+    // public DeadlineTask(ReadOnlyTask source) throws IllegalValueException {
+    // this(source.getName(), source.getTags(),
+    // source.getDeadline().get().getDate(), source.isDone(),
+    // source.isManualToday());
+    // }
 
     /**
      * return the overdue status of the task
