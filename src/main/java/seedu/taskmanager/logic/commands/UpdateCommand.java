@@ -126,7 +126,7 @@ public class UpdateCommand extends Command {
      * Checks if only the task name field has been identified by user to be
      * updated To ensure that other task details like startTime startDate
      * endTime endDate are not lost
-     * 
+     *
      * @return true if only task name has been identified by user to be updated
      */
     private boolean isOnlyTaskNameUpdated() {

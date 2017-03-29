@@ -109,10 +109,13 @@ public class ArgumentTokenizer {
         List<PrefixPosition> positions = new ArrayList<>();
 
         int argumentStart = argsString.lastIndexOf(prefix.getPrefix());
+        //int argumentStart = argsString.indexOf(prefix.getPrefix());
 
+        //while (argumentStart != -1) {
         if (argumentStart != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
             positions.add(extendedPrefix);
+            //argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
         }
 
         /*
