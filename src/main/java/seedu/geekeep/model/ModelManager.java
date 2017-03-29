@@ -10,6 +10,7 @@ import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.TaskCategory;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
+import seedu.geekeep.commons.events.model.GeekeepFilePathChangedEvent;
 import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
@@ -233,6 +234,11 @@ public class ModelManager extends ComponentManager implements Model {
         pastGeeKeeps.push(new GeeKeep(geeKeep));
         geeKeep.resetData(futureGeeKeeps.pop());
         indicateGeeKeepChanged();
+    }
+
+    /** Raises an event to indicate the geeKeepFilePath has changed */
+    private void indicateGeekeepFilePathChanged(String filePath) {
+        raise(new GeekeepFilePathChangedEvent(filePath, geeKeep));
     }
 
 }
