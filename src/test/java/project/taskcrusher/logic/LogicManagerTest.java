@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
+import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_EVENT_SLOT_DISPLAYED_INDEX;
 import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static project.taskcrusher.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -29,6 +31,7 @@ import project.taskcrusher.logic.commands.AddCommand;
 import project.taskcrusher.logic.commands.ClearCommand;
 import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.CommandResult;
+import project.taskcrusher.logic.commands.ConfirmCommand;
 import project.taskcrusher.logic.commands.DeleteCommand;
 import project.taskcrusher.logic.commands.ExitCommand;
 import project.taskcrusher.logic.commands.FindCommand;
@@ -301,6 +304,73 @@ public class LogicManagerTest {
 
     }
 
+    // @Test
+    // public void execute_addOverlapping_notAllowed() throws Exception {
+    // // setup expectations
+    // TestDataHelper helper = new TestDataHelper();
+    //
+    // Event toBeAdded = helper.reviewSession();
+    // model.addEvent(toBeAdded);
+    // Event toBeAdded2 = helper.reviewSessionTentative(); //will clash
+    // assertCommandFailure(helper.generateAddEventCommand(toBeAdded2), );
+    //
+    // }
+
+    @Test
+    public void execute_confirm_slotIndexNotFound() throws Exception {
+        execute_add_successful();
+        assertCommandFailure("confirm e 2 3", MESSAGE_INVALID_EVENT_SLOT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_confirm_successful() throws Exception {
+        execute_add_successful();
+
+        UserInbox expectedInbox = new UserInbox();
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.homework();
+        expectedInbox.addTask(toBeAdded);
+        Event toBeAdded2 = helper.reviewSession();
+        expectedInbox.addEvent(toBeAdded2);
+        Event confirmed = helper.reviewSessionConfirmed();
+        expectedInbox.addEvent(confirmed);
+
+        assertCommandSuccess("confirm e 2 1", String.format(ConfirmCommand.MESSAGE_CONFIRM_EVENT_SUCCESS, confirmed),
+                expectedInbox, expectedInbox.getTaskList(), expectedInbox.getEventList());
+    }
+
+    @Test
+    public void execute_confirm_invalidArgsFormat() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfirmCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("confirm e 1", expectedMessage);
+        assertCommandFailure("confirm z 1 1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfirmCommand.MESSAGE_USAGE));
+        assertCommandFailure("confirm e m 1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfirmCommand.MESSAGE_USAGE));
+        assertCommandFailure("confirm e 1 m",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfirmCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_confirm_eventIndexNotFound() throws Exception {
+        String expectedMessage = MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> taskList = helper.generateTaskList(2);
+        List<Event> eventList = new ArrayList<>();
+        eventList.add(helper.reviewSession());
+
+        model.resetData(new UserInbox());
+        for (Task t : taskList) {
+            model.addTask(t);
+        }
+
+        for (Event e : eventList) {
+            model.addEvent(e);
+        }
+
+        assertCommandFailure("confirm e 2 1", expectedMessage);
+    }
+
     @Test
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
@@ -346,20 +416,45 @@ public class LogicManagerTest {
      *            to test assuming it targets a single person in the last shown
      *            list based on visible index.
      */
-    private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
+    private void assertTaskIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
+        List<Event> eventList = helper.generateEventList(2);
 
         // set UserInbox state to 2 tasks
         model.resetData(new UserInbox());
-        for (Task p : taskList) {
-            model.addTask(p);
+        for (Task t : taskList) {
+            model.addTask(t);
+        }
+
+        for (Event e : eventList) {
+            model.addEvent(e);
         }
 
         assertCommandFailure(commandWord + " 3", expectedMessage);
     }
 
+    private void assertEventIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
+        String expectedMessage = MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> taskList = helper.generateTaskList(2);
+        List<Event> eventList = helper.generateEventList(2);
+
+        // set UserInbox state to 2 tasks
+        model.resetData(new UserInbox());
+        for (Task t : taskList) {
+            model.addTask(t);
+        }
+
+        for (Event e : eventList) {
+            model.addEvent(e);
+        }
+
+        assertCommandFailure(commandWord + " 3", expectedMessage);
+    }
+
+    // TODO CAN WE GET RID OF THIS USELESS COMMAND
     @Test
     public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
@@ -368,10 +463,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
+        assertTaskIndexNotFoundBehaviorForCommand("select");
     }
 
-    // TODO CAN WE GET RID OF THIS USELESS COMMAND
     @Test
     public void execute_select_jumpsToCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -391,11 +485,19 @@ public class LogicManagerTest {
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
         assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
+
+        assertCommandFailure("delete z 1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertCommandFailure("delete e e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("delete t");
+    public void execute_deleteTaskIndexNotFound_errorMessageShown() throws Exception {
+        assertTaskIndexNotFoundBehaviorForCommand("delete t");
+    }
+
+    @Test
+    public void execute_deleteEventIndexNotFound_errorMessageShown() throws Exception {
+        assertEventIndexNotFoundBehaviorForCommand("delete e");
     }
 
     @Test
@@ -547,6 +649,19 @@ public class LogicManagerTest {
             List<Timeslot> timeslots = new ArrayList<>();
             timeslots.add(timeslot1);
             timeslots.add(timeslot2);
+            Location location = new Location("i3 Aud");
+            Description description = new Description("makes life easier");
+            Tag tag3 = new Tag("sometag3");
+            Tag tag4 = new Tag("sometag4");
+            UniqueTagList tags = new UniqueTagList(tag3, tag4);
+            return new Event(name, timeslots, location, description, tags);
+        }
+
+        Event reviewSessionConfirmed() throws Exception {
+            Name name = new Name("CS2103 review session probably");
+            Timeslot timeslot1 = new Timeslot("2020-09-23 03:00PM", "2020-09-23 05:00PM");
+            List<Timeslot> timeslots = new ArrayList<>();
+            timeslots.add(timeslot1);
             Location location = new Location("i3 Aud");
             Description description = new Description("makes life easier");
             Tag tag3 = new Tag("sometag3");
