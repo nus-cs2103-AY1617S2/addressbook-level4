@@ -70,7 +70,7 @@ public interface ReadOnlyTask {
             builder.append(" End Time: ").append(getEndTime());
         }
 
-        if (/* getCategories().toString() != "EMPTY_FIELD" */!getCategories().isEmptyCategoryList()) {
+        if (!getCategories().isEmptyCategoryList()) {
             builder.append(" Categories: ");
             getCategories().forEach(builder::append);
         }
