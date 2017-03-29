@@ -30,19 +30,66 @@ public class FindCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         
+      //@@author A0097141H
+        String keywords = matcher.group("keywords");
+        final String[] groupedKeywords = parseKeywords(keywords);
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(groupedKeywords));
         
-        //@@author A0097141H
-        // keywords delimited by whitespace
-        // if keywords are wrapped with double inverted commas, consider whole string as 1 keyword
-        // assume only 1 set of wrapped keywords are allowed.
-        String[] keywords = {"keyword"};
-        final Set<String> keywordSet;
+        return new FindCommand(keywordSet);
+    }
+
+
+    //@@author A0097141H
+    /**
+     * Method to separate keywords by whitespace or double inverted commas
+     * Assume only 1 set of wrapped keywords are allowed.
+     * @param matcher
+     * @return String[] keywords of 
+     */
+    private String[] parseKeywords(String str){
+    	String[] keywords = {"keyword"}; //will eventually be overridden
+
+    	String keywordsStr = str;
+    	
+    	int[] invCommaIdx = findInvCommasIndexes(keywordsStr);
+    	int idxOpenInvComma =	 invCommaIdx[0];
+    	int idxCloseInvComma = 	 invCommaIdx[1];
+
+    	if(idxOpenInvComma < idxCloseInvComma){ //found a pair of inverted commas!
+    		//extract inverted commas
+    		keywords[0] = keywordsStr.substring(idxOpenInvComma+1, idxCloseInvComma);
+
+    		//create new substring by removing keywords in inverted commas
+    		String subStrKeywords = keywordsStr.replace(keywordsStr.substring(idxOpenInvComma,idxCloseInvComma+1), "");
+
+    		//if subStrKeywords is not empty string
+    		if(!subStrKeywords.trim().equals("")){
+    			String[] keywordsToAdd = subStrKeywords.trim().split("\\s+");    		
+    			keywords = concatStringArrays(keywords, keywordsToAdd);
+    		}
+    	} else{//invalid or don't have inverted commas, just split normally
+    		keywords = keywordsStr.split("\\s+");
+    	}
+    	return keywords;
+    }
+    
+  //@@author A0097141H
+    /**
+     * returns indexes of occurrences of '\"' 
+     * @param str
+     * @return int[] {openInvCommaIndex,closeInvCommaIndex,invCommaCount}
+     * invCommaCount not in use for now, but future releases maybe
+     */
+    private int[] findInvCommasIndexes(String str){
+
+    	int[] idx = {0,0,0};
+    	
         int idxOpenInvComma = 0;
         int idxCloseInvComma = 0;
         boolean foundInvComma = false;
-        String keywordsStr = matcher.group("keywords");
-        for (int i=0;i<keywordsStr.length();i++){
-        	if (keywordsStr.charAt(i) == '\"'){
+        
+        for (int i=0;i<str.length();i++){
+        	if (str.charAt(i) == '\"'){
         		if(!foundInvComma){
         			idxOpenInvComma = i;
         			foundInvComma = true;
@@ -51,38 +98,27 @@ public class FindCommandParser {
         			idxCloseInvComma = i;
         			foundInvComma = false;
         		}
+        		idx[2]++;
         	}
         }
-        if(idxOpenInvComma < idxCloseInvComma && !foundInvComma){ //found a pair of inverted commas!
-        	//extract inverted commas
-        	keywords[0] = keywordsStr.substring(idxOpenInvComma+1, idxCloseInvComma);
-        	String subStrKeywords = keywordsStr.replace(keywordsStr.substring(idxOpenInvComma,idxCloseInvComma+1), "");
-        	System.out.println(subStrKeywords);
-        	if(!subStrKeywords.trim().equals("")){
-        		String[] keywordsToAdd = subStrKeywords.trim().split("\\s+");
-        		System.out.println("subStrKeywords: " + keywordsToAdd[0]);
-        		Object[] objArr = ArrayUtils.addAll(keywords, keywordsToAdd);
-        		keywords = Arrays.copyOf(objArr, objArr.length, String[].class);
-        		for(String str: keywords){
-        			System.out.println("String is: " + str);
-        		}
-        	}
-        } else{
-        	keywords = keywordsStr.split("\\s+");
-        }
-        
-//        if(matcher.group("keywords").charAt(0) == '"' && matcher.group("keywords").charAt(matcher.group("keywords").length()-1) == '"')
-//        {
-//        	keywords[0] = matcher.group("keywords").replaceAll("\"", "");
-//        }
-//        else{
-//        	
-//        	
-//        }
-        keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet);
+    	idx[0] = idxOpenInvComma;
+    	idx[1] = idxCloseInvComma;
+    	return idx;
     }
     
+  //@@author A0097141H
+    /**
+     * simple method to return a String[] array based on 2 String[] arrays
+     * @param strArr1
+     * @param strArr2
+     * @return
+     */
+    private String[] concatStringArrays(String[] strArr1, String[] strArr2){
 
+    	Object[] objArr = ArrayUtils.addAll(strArr1, strArr2);
+		String[] keywords = Arrays.copyOf(objArr, objArr.length, String[].class);
+		
+    	return keywords;
+    }
 
 }
