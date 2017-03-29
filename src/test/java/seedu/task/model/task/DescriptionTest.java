@@ -16,7 +16,7 @@ public class DescriptionTest {
         // valid name
         assertTrue(Description.isValidDescription("finish homework")); // alphabets only
         assertTrue(Description.isValidDescription("this is a very long task that must be finished soon"));
-        // long description
+        // long frequency
         assertTrue(Description.isValidDescription("Capitalize The Description")); // with capital letters
         assertTrue(Description.isValidDescription("2564")); // numbers only
         assertTrue(Description.isValidDescription("task1")); // contains numbers characters at end

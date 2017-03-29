@@ -14,16 +14,16 @@ public class TaskComparableTest {
 
     @Test
     public void sortByComplete() {
-        // String description = "task description";
+        // String frequency = "task frequency";
         String priority = "2";
         String timing = "03/03/2017";
         String tag1 = "friendship";
         String tag2 = "love";
         try {
             Task t1 = new Task(new Description("one"), new Priority(priority),
-                    new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
+                    new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2), false, null);
             Task t2 = new Task(new Description("two"), new Priority(priority),
-                    new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
+                    new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2), false, null);
 
             ArrayList<Task> al = new ArrayList<Task>();
             al.add(t1);

@@ -12,6 +12,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
+import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
@@ -32,29 +33,37 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
-
+    //    private RecurringTask toAddRecur = null;
+    //@@author A0164212U
     /**
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String startTiming, String endTiming, Set<String> tags)
-            throws IllegalValueException, IllegalTimingOrderException {
+    public AddCommand(String name, String priority, String startTiming, String endTiming,
+            String recurFreq, Set<String> tags)
+                    throws IllegalValueException, IllegalTimingOrderException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+        boolean recurring = (recurFreq != null);
+
         this.toAdd = new Task(
                 new Description(name),
                 new Priority(priority),
                 new Timing(startTiming),
                 new Timing(endTiming),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                recurring,
+                new RecurringFrequency(recurFreq)
                 );
+
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
     }
+    //@@author
 
     @Override
     public CommandResult execute() throws CommandException {

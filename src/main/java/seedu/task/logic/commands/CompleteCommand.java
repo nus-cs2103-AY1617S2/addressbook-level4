@@ -16,6 +16,7 @@ import seedu.task.model.task.Description;
 import seedu.task.model.task.EditTaskDescriptor;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
@@ -89,9 +90,12 @@ public class CompleteCommand extends Command {
         Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToComplete::getStartTiming);
         Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToComplete::getStartTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToComplete::getTags);
+        boolean updatedRecurring = editTaskDescriptor.isRecurring().orElseGet(taskToComplete::isRecurring);
+        RecurringFrequency updatedFrequency = editTaskDescriptor.getFrequency().orElseGet(taskToComplete::getFrequency);
 
 
-        return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags);
+        return new Task(updatedDescription, updatedPriority, updatedStartDate,
+                updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
     }
 
     /**
