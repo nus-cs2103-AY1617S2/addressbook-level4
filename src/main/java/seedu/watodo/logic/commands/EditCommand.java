@@ -25,9 +25,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TASK_DESCRIPTION] [by DATETIME] "
-            + "[from START_DATETIME to END_DATETIME] [#TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 by today 3pm #urgent";
+            + "Parameters: INDEX (must be a positive integer) [TASK_DESCRIPTION] [by/ DATETIME] "
+            + "[from/ START_DATETIME to/ END_DATETIME] [on/ DATETIME] [REMOVEDATES] [#TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 by/ today 3pm #urgent";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
