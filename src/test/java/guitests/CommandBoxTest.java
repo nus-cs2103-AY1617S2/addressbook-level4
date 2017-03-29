@@ -29,7 +29,6 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
     }
 
-    @Test
     public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
@@ -37,7 +36,6 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
-    @Test
     public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 

@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import com.jfoenix.controls.JFXListView;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,17 +25,36 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyTask> todayTaskListView;
+    private JFXListView<JFXListView<ReadOnlyTask>> uilist;
 
     @FXML
-    private ListView<ReadOnlyTask> futureTaskListView;
+    private JFXListView<ReadOnlyTask> todayTaskListView;
+
+    @FXML
+    private JFXListView<ReadOnlyTask> futureTaskListView;
+
+    // height of a row should be the same as the height of a TaskCard
+    final int ROW_HEIGHT = 24;
+    // height of paddings after each TaskListView
+    final int ROW_PADDING = 80;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday,
             ObservableList<ReadOnlyTask> taskListFuture) {
         super(FXML);
+        /*
+         * Test for (int i = 0; i < 10; i++) {
+         * todayTaskListView.getItems().add(new Label("" + i)); }
+         */
         setConnections(todayTaskListView, taskListToday);
         setConnections(futureTaskListView, taskListFuture);
+        uilist.setDepth(0);
+        uilist.setExpanded(true);
+        // todayTaskListView.depthProperty().set(1);
+        // todayTaskListView.setExpanded(true);
         addToPlaceholder(taskListPlaceholder);
+        // set ListView height, add 2 extra px to show border
+        todayTaskListView.setPrefHeight(taskListToday.size() * ROW_HEIGHT + ROW_PADDING);
+        futureTaskListView.setPrefHeight(taskListFuture.size() * ROW_HEIGHT + ROW_PADDING);
     }
 
     private void setConnections(ListView<ReadOnlyTask> taskListView, ObservableList<ReadOnlyTask> taskList) {
