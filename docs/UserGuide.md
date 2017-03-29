@@ -1,13 +1,13 @@
-# AddressBook Level 4 - User Guide
+# Task Manager - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Quick Start](#1-quick-start)
+2. [Features](#2-features)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 
@@ -16,18 +16,17 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+   > <img src="images/UiPrototype.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`list all`** : lists all tasks
+   * **`add `**` send budget proposal by next Thurs noon to boss #project` :
+     adds a task to the task manager.
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -41,146 +40,293 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
+> **DATETIME Format**
+>
+> Watodo uses the external library Natty Date Parser to parse date and time options.
+> Some examples of the acceptable formats are:
+> * `2017-02-23` (yyyy-mm-dd) <br>
+> * `04/05` (mm/dd) <br>
+> * `today` <br>
+> * `tomorrow` or `tmr` <br>
+> * `next tues` <br>
+> * `3 weeks from now` <br>
+> * `9pm` or `21:00` <br>
+> * `noon` <br>
+
+> * if only the date/day is provided, the time will be default set as the current time
+> * if only the time is provided, the date/day will be default set as the current date/day
+
 ### 2.1. Viewing help : `help`
 
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task : `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the task manager. Three types of tasks are supported.<br>
+> Task description need not be continuous, i.e. a tag can be placed in between two chunks of the description
+> Task can have any number of tags (including 0)
+> Spacing after the dateTime prefixes (eg. by/) is not necessary
 
-> Persons can have any number of tags (including 0)
+### a) Floating task
+
+Format: `add DESCRIPTION [#TAG]...`
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add read Lord of The Rings #personal`
+* `add #noTime cut hair
 
-### 2.3. Listing all persons : `list`
+### b) Deadline task
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+Format: `add DESCRIPTION by/ DATETIME [#TAG]...` <br>
+     OR `add DESCRIPTION on/ DATETIME [#TAG]...`
 
-### 2.4. Editing a person : `edit`
+Examples:
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+* `add prepare meeting slides by/ tomorrow 9am #impt #work`
+* `add send budget proposal on/ Thurs noon to boss #project`
+
+### c) Event task
+
+Format: `add DESCRIPTION from/ START_DATETIME to/ END_DATETIME [#TAG]...` <br>
+     OR `add DESCRIPTION on/ START_DATETIME to/ END_DATE_TIME [#TAG]...`
+
+Examples:
+
+* `add  from/next mon to/ 05/16 attend skills upgrading workshop`
+* `add meeting at board room 4 from/ 10am to/ 11am #project #meetings`
+
+### 2.3. Listing tasks by type : `list LIST_TYPE`
+
+Format: `list`<br>
+Shows a list of all overdue tasks and upcoming tasks set for the next day.<br>
+
+Format: `list all`<br>
+Shows a list of all tasks.<br>
+
+Format: `list float`<br>
+Shows a list of all floating tasks.<br>
+
+Format: `list deadline`<br>
+Shows a list of all tasks with deadlines.<br>
+
+Format: `list event`<br>
+Shows a list of all events.<br>
+
+Format: `list day`<br>
+Shows a list of deadlines and events scheduled on the current day.<br>
+
+Format: `list week`<br>
+Shows a list of deadlines and events scheduled for the week.<br>
+
+Format: `list month`<br>
+Shows a list of deadlines and events scheduled for the month.<br>
+
+Format: `list #TAG`<br>
+Shows a list of tasks labeled with the given TAG.<br>
+
+Format: `list done`<br>
+Shows a list of all tasks that have been marked as completed.<br>
+
+### 2.4. Finding all tasks containing any keyword in their description: `find`
+
+Finds tasks which contain any of the given keywords in their description.<br>
+Format: `find KEYWORD [MORE_KEYWORDS]...`
+
+> * Only the task description is searched.
+> * The search is case insensitive. e.g `Report` will match `report`
+> * The order of the keywords does not matter. e.g. `proposal for boss` will match `for boss proposal`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `lunch` will match `lunch appointment`
+
+Examples:
+
+* `find write test case`<br>
+  Returns any tasks with `write`, `test`, `case`, 'case test`, `write test` and any combination of the individual words
+  as part of its description (case insensitive)
+
+### 2.5. Editing a task : `edit`
+
+Edits an existing task in the task manager.<br>
+Format: `edit INDEX <[DESCRIPTION] [EDIT DATETIME FORMAT] [#TAG]...>`
 
 > * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
+    The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
+> * At least one of the optional fields within the <> must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * When editing tags, inputting tags of the task that already exist will removed them from the task i.e adding of tags is not cumulative.
+    Inputting tags of the task that do not already exist will add them to the task.
+    
+EDIT DATETIME FORMAT
+> * Task can be changed from one task type to any other task type
+> * DATETIME FORMAT must be one of the following four:
+>   a. by/ DATETIME
+>   b. on/ DATETIME
+>   c. from/ DATETIME to/ DATETIME
+>   d. on/ DATETIME to/ DATETIME
+> * All existing DATETIME of the task to be edited will be removed.
+
+> * To remove DATETIMEs of a task, the format is:
+`edit INDEX REMOVEDATES`
+> * No other field is allowed
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `list`
+  `edit 5 meeting at board room`<br>
+  Edits the task description of the 5th task today to be `meeting at board room`.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+  `edit 2 by/ mon `<br>
+  Edits the deadline of the 2nd task listed to be `mon`
+  
+  `edit 3 REMOVEDATES` <br>
+  removes all existing start and end dateTimes in the 3rd task
+  
+  `edit 4 #newTag`
+  adds the tag newTag to the 4th task in the list, given that the task does not already have that tag
+  
+  `edit 1 #existingTag`
+  removes the existingTag from the 1st task, given that the task already has that tag
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+### 2.6. Deleting a task : `delete`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Deletes the specified task from the task manager. <br>
+Format: `delete INDEX [MORE_INDICES]...`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
-
-Examples:
-
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
-
-### 2.6. Deleting a person : `delete`
-
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
-
-> Deletes the person at the specified `INDEX`. <br>
+> Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `list all`<br>
+  `delete 2 3`<br>
+  Deletes the 2nd and 3rd task in the list of all tasks.
 
-### 2.7. Select a person : `select`
+### 2.7. Mark a task : `mark`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Marks the task identified by the index number used in the last task listing.<br>
+Format: `mark INDEX [MORE_INDICES]...`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
+> Marks the task as completed and hides it from view.
+> Task is added to a list of completed tasks that can be viewed by calling `list done`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `list today`<br>
+  `mark 2 3`<br>
+  Marks the 2nd and 3rd task in the list of task today.
 
-### 2.8. Clearing all entries : `clear`
+### 2.8. Unmark a task : `unmark`
 
-Clears all entries from the address book.<br>
+Unmarks the task identified by the index number used in the marked task listing.<br>
+Format: `unmark INDEX [MORE_INDICES]...`
+
+> Unmarks a previously marked task and restores it back into its original location and view.
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `list marked`<br>
+  `unmark 2 3`<br>
+  Unmarks the 2nd and 3rd task in the list.
+
+
+### 2.9. Undoing previous step : `undo`
+
+Undo the previous command and restore the data to one step before.<br>
+Format: `undo`
+
+### 2.10 Redoing previous step : `redo`
+
+Redo the previous command and restore the data to one step before. <br>
+
+### 2.11. Clearing all entries : `clear`
+
+Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.13. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.14 Alternative commands
+
+Below is a list of shortcut keys for some of the above commands:
+
+> * add: `a`
+> * edit: `e`
+> * list: `l`
+> * delete: `d`
+> * mark: `m`, `check`
+> * unmark: `um`, `uncheck`
+> * find: `f`, `search`
+
+### 2.15 Customize alternative commands: `shortcut`
+
+You can add and delete your own personal shortcut keys to the various commands.
+Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature)
+        `shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY)
+        
+> SHORTCUT_KEY can be any character except whitespace. 
+> Unfortunately, special keys (eg. F1, SHIFT, CTRL etc) are not supported. :(
+
+Examples: 
+* shortcut + add @@
+* shortcut + undo z
+* shortcut - undo z
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous Task Manager folder.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+* **Add**
+> * `add TASK [#TAG]...` <br>
+> * `add TASK by/ DATETIME [#TAG]...`
+> * `add TASK on/ DATETIME [#TAG]...`
+> * `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...`
+> * `add TASK on/ START_DATETIME to/ END_DATETIME [#TAG]...`
 
 * **List** : `list` <br>
-  e.g.
+> * `list`<br>
+> * `list all`<br>
+> * `list float`<br>
+> * `list deadline`<br>
+> * `list event`<br>
+> * `list day`<br>
+> * `list week`<br>
+> * `list month`<br>
+> * `list #TAG`<br>
+> * `list done`<br>
+
+* **Find** : `find KEYWORD [MORE_KEYWORDS]...` <br>
+
+* **Edit** : `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...` <br>
+
+* **Mark** : `mark INDEX [MORE_INDICES]...` <br>
+
+* **Unmark** : `unmark INDEX [MORE_INDICES]...` <br>
+
+* **Delete** : `delete INDEX [MORE_INDICES]...` <br>
+
+* **Clear** : `clear` <br>
+
+* **Undo** : `undo` <br>
 
 * **Help** : `help` <br>
-  e.g.
-
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-
