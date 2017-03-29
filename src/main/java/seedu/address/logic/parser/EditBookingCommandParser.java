@@ -13,6 +13,10 @@ import seedu.address.logic.commands.EditBookingCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
+//@@author A0162877N
+/**
+* Parses input arguments and creates a new EditBookingCommand object
+*/
 public class EditBookingCommandParser {
 
     private static final String DATE_DELIMITER = ",";
@@ -30,7 +34,7 @@ public class EditBookingCommandParser {
         try {
             String[] arguments = argsTokenizer.getPreamble().get().trim().split(DELIMITER);
             if (arguments.length < ARGUMENT_LENGTH) {
-                throw new CommandException(ConfirmCommand.MESSAGE_USAGE); // need change here!
+                throw new CommandException(ConfirmCommand.MESSAGE_USAGE);
             }
 
             if (arguments[0].matches(REGEX_INDEX)) {

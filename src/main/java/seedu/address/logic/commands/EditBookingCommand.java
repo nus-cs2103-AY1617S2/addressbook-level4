@@ -16,6 +16,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
+//@@author A0162877N
 public class EditBookingCommand extends Command {
 
     public static final String COMMAND_WORD = "editbooking";
