@@ -11,13 +11,15 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Description implements Comparable<Description> {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "Task descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task descriptions cannot start with a space, "
+                    + "should only contain alphanumeric characters and spaces, "
+                    + "and it should not be blank";
 
     /*
      * The first character of the task must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String DESCRIPTION_VALIDATION_REGEX = "^[A-Za-z, ]++$";
+    public static final String DESCRIPTION_VALIDATION_REGEX = "^[^ ][A-Za-z0-9!@#$%^&*, ]++$";
 
     public final String description;
 
