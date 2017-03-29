@@ -1,10 +1,12 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
+//@@author A0148038A
 /**
  * Represents an Event's StartTime in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidStartTime(String)}
@@ -12,7 +14,7 @@ import seedu.address.commons.util.StringUtil;
 public class StartTime {
 
     public static final String MESSAGE_STARTTIME_CONSTRAINTS =
-            "Event start time should be in HH:MM format e.g. 00:00 represents midnight";
+            "Event start time can only be in this format: hhmm, e.g. 1300";
 
     public final LocalTime value;
 
@@ -25,16 +27,45 @@ public class StartTime {
         if (startTimeArg == null) {
             this.value = null;
         } else {
-        	try {
-        		this.value = StringUtil.parseStringToTime(startTimeArg);
-        	} catch (IllegalValueException illegalValueException) {
-        		throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
-        	}
+            try {
+                this.value = StringUtil.parseStringToTime(startTimeArg);
+            } catch (DateTimeException dateTimeException) {
+                throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
+            }
         }
+    }
+
+    //@@author A0110491U
+    /**
+     * Checks if given StartTime string is valid
+     * returns true if it is valid according to MESSAGE_STARTTIME_CONSTRAINTS
+     */
+    public static boolean isValidStartTime(String args) {
+        try {
+            StringUtil.parseStringToTime(args);
+        } catch (DateTimeException ive) {
+            return false;
+        }
+        return true;
+    }
+    //@@author
+
+    /*
+     * For JAXB use
+     */
+    public StartTime(LocalTime startTime) {
+        value = startTime;
+    }
+
+    public LocalTime getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
+        if (value == null) {
+            return null;
+        }
         return value.toString();
     }
 
@@ -50,4 +81,7 @@ public class StartTime {
         return value.hashCode();
     }
 
+    public int compareTo(StartTime o) {
+        return this.getValue().compareTo(o.getValue());
+    }
 }

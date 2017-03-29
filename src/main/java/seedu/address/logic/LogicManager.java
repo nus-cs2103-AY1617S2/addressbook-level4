@@ -10,7 +10,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.storage.Storage;
 
 /**
@@ -36,22 +37,12 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyActivity> getFilteredActivityList() {
-        return model.getFilteredActivityList();
-    }
-
-    @Override
-    public ObservableList<ReadOnlyActivity> getFilteredEventList() {
+    public ObservableList<ReadOnlyEvent> getFilteredEventList() {
         return model.getFilteredEventList();
     }
 
     @Override
-    public ObservableList<ReadOnlyActivity> getFilteredDeadlineList() {
-        return model.getFilteredDeadlineList();
-    }
-
-    @Override
-    public ObservableList<ReadOnlyActivity> getFilteredTaskList() {
-        return model.getFilteredUnscheduledActivityList();
+    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 }

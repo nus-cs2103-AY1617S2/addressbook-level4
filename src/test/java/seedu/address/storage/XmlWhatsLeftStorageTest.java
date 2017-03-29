@@ -15,7 +15,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.WhatsLeft;
-import seedu.address.model.person.Activity;
+import seedu.address.model.person.Event;
 import seedu.address.testutil.TypicalTestActivities;
 
 public class XmlWhatsLeftStorageTest {
@@ -72,14 +72,14 @@ public class XmlWhatsLeftStorageTest {
         assertEquals(original, new WhatsLeft(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addActivity(new Activity(td.hoon));
-        original.removeActivity(new Activity(td.alice));
+        original.addEvent(new Event(td.hoon));
+        original.removeEvent(new Event(td.alice));
         xmlWhatsLeftStorage.saveWhatsLeft(original, filePath);
         readBack = xmlWhatsLeftStorage.readWhatsLeft(filePath).get();
         assertEquals(original, new WhatsLeft(readBack));
 
         //Save and read without specifying file path
-        original.addActivity(new Activity(td.ida));
+        original.addEvent(new Event(td.ida));
         xmlWhatsLeftStorage.saveWhatsLeft(original); //file path not specified
         readBack = xmlWhatsLeftStorage.readWhatsLeft().get(); //file path not specified
         assertEquals(original, new WhatsLeft(readBack));

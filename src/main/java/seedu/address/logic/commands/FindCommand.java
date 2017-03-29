@@ -20,11 +20,13 @@ public class FindCommand extends Command {
     public FindCommand(Set<String> keywords) {
         this.keywords = keywords;
     }
+
     //@@author A0110491U
     @Override
     public CommandResult execute() {
         model.updateFilteredEventList(keywords);
         model.updateFilteredTaskList(keywords);
+        model.storePreviousCommand("");
         return new CommandResult(getMessageForActivityListShownSummary(model.getFilteredEventList().size() +
                 model.getFilteredTaskList().size()));
     }

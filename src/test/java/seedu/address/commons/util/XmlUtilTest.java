@@ -54,8 +54,8 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         XmlSerializableWhatsLeft dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableWhatsLeft.class);
-        assertEquals(9, dataFromFile.getActivityList().size());
-        assertEquals(0, dataFromFile.getTagList().size());
+        assertEquals(9, dataFromFile.getEventList().size());
+        assertEquals(25, dataFromFile.getTagList().size());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class XmlUtilTest {
 
         WhatsLeftBuilder builder = new WhatsLeftBuilder(new WhatsLeft());
         dataToWrite = new XmlSerializableWhatsLeft(
-                builder.withActivity(TestUtil.generateSampleActivityData().get(0)).withTag("Friends").build());
+                builder.withEvent(TestUtil.generateSampleEventData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableWhatsLeft.class);

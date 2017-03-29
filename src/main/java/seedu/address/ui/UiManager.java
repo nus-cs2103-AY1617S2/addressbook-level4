@@ -13,20 +13,23 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.commons.events.ui.ActivityPanelSelectionChangedEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
+import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.UpdateCalendarEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
+//@@author A0148038A
 /**
  * The manager of the UI component.
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/WhatsLeft.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -46,12 +49,12 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info("Starting UI...");
         primaryStage.setTitle(config.getAppTitle());
 
-        //Set the application icon.
+        // Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
+            mainWindow.show(); // This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
@@ -64,7 +67,6 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -81,7 +83,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
-                                               String contentText) {
+            String contentText) {
         final Alert alert = new Alert(type);
         alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
         alert.initOwner(owner);
@@ -99,7 +101,9 @@ public class UiManager extends ComponentManager implements Ui {
         System.exit(1);
     }
 
-    //==================== Event Handling Code ===============================================================
+    //@@author A0124377A
+    // ==================== Event Handling Code
+    // ===============================================================
 
     @Subscribe
     private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
@@ -113,16 +117,29 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
 
+    // @@author A0110491U
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    private void handleJumpToEventListRequestEvent(JumpToEventListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getActivityListPanel().scrollTo(event.targetIndex);
+        mainWindow.getEventListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handleActivityPanelSelectionChangedEvent(ActivityPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadActivityPage(event.getNewSelection());
+    private void handleJumpToTaskListRequestEvent(JumpToTaskListRequestEvent task) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(task));
+        mainWindow.getTaskListPanel().scrollTo(task.targetIndex);
     }
 
+    // @@author A0124377A
+    @Subscribe
+    private void handleEventListUpdatedEvent(WhatsLeftChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.updateCalendar(event.data.getEventList(), event.data.getTaskList());
+    }
+
+    @Subscribe
+    private void handleCalendarViewUpdatedEvent(UpdateCalendarEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.updateCalendarView(event.getDisplayedDateTime(), event.getCalendarLayoutMode());
+    }
 }

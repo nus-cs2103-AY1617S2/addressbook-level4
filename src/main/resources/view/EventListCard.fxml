@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<!-- @@author A0148038A -->
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
@@ -19,11 +20,11 @@
             <children>
                 <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
                     <stylesheets>
-                        <URL value="@DarkTheme.css" />
+                        <URL value="@WhiteTheme.css" />
                         <URL value="@Extensions.css" />
                     </stylesheets>
                     <padding>
-                        <Insets bottom="5" left="15" right="5" top="5" />
+                        <Insets bottom="1" left="15" right="5" top="1" />
                     </padding>
 
                     <children>
@@ -36,10 +37,11 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <Label fx:id="fromDate" styleClass="cell_small_label" text="\$fromDate" />
-                        <Label fx:id="toDate" styleClass="cell_small_label" text="\$toDate" />                       
-                        <Label fx:id="startTime" styleClass="cell_small_label" text="\$startTime" />
+                        <Label fx:id="duration" styleClass="cell_small_label" text="\$duration" /> 
+                        <!-- <Label fx:id="startTime" styleClass="cell_small_label" text="\$startTime" />
+                        <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />                       
                         <Label fx:id="endTime" styleClass="cell_small_label" text="\$endTime" />
+                        <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" /> -->
                         <Label fx:id="locations" styleClass="cell_medium_label" text="\$location" />                       
                     </children>
                 </VBox>

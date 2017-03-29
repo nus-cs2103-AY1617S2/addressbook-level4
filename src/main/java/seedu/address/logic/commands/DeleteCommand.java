@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.UniqueEventList.EventNotFoundException;
@@ -42,7 +44,11 @@ public class DeleteCommand extends Command {
             }
             ReadOnlyEvent eventToDelete = lastShownEventList.get(targetIndex - 1);
             try {
+                //store for undo operation
+                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+                ModelManager.setPreviousState(currState);
                 model.deleteEvent(eventToDelete);
+                model.storePreviousCommand("delete");
             } catch (EventNotFoundException pnfe) {
                 assert false : "The target event cannot be missing";
             }
@@ -55,12 +61,17 @@ public class DeleteCommand extends Command {
             }
             ReadOnlyTask taskToDelete = lastShownTaskList.get(targetIndex - 1);
             try {
+                //store for undo operation
+                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+                ModelManager.setPreviousState(currState);
                 model.deleteTask(taskToDelete);
+                model.storePreviousCommand("delete");
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
             }
             return new CommandResult(String.format(MESSAGE_DELETE_ACTIVITY_SUCCESS, taskToDelete));
         }
+        return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
     }
 

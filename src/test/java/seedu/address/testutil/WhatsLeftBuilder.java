@@ -2,8 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.WhatsLeft;
-import seedu.address.model.person.Activity;
-import seedu.address.model.person.UniqueActivityList;
+import seedu.address.model.person.Event;
+import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,8 +20,9 @@ public class WhatsLeftBuilder {
         this.whatsLeft = whatsLeft;
     }
 
-    public WhatsLeftBuilder withActivity(Activity activity) throws UniqueActivityList.DuplicateActivityException {
-        whatsLeft.addActivity(activity);
+    public WhatsLeftBuilder withEvent(Event event) throws UniqueEventList.DuplicateEventException,
+         DuplicateTimeClashException {
+        whatsLeft.addEvent(event);
         return this;
     }
 

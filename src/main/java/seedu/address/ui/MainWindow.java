@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -10,14 +13,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.address.commons.core.CalendarLayout;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 
+
+//@@author A0148038A
+//@@author A0124377A
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -26,19 +34,17 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/WhatsLeft.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
+    private static final int MIN_HEIGHT = 500;
     private static final int MIN_WIDTH = 450;
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private ActivityListPanel activityListPanel;
+    private EventListPanel eventListPanel;
+    private TaskListPanel taskListPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
+    private CalendarPanel calendarPanel;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -47,13 +53,19 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane activityListPanelPlaceholder;
+    private AnchorPane eventListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane taskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane calendarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -113,8 +125,10 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        activityListPanel = new ActivityListPanel(getActivityListPlaceholder(), logic.getFilteredActivityList());
+        eventListPanel = new EventListPanel(getEventListPlaceholder(), logic.getFilteredEventList());
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        calendarPanel = new CalendarPanel(getCalendarPlaceholder(),
+                logic.getFilteredEventList(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getWhatsLeftFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -132,8 +146,16 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getActivityListPlaceholder() {
-        return activityListPanelPlaceholder;
+    private AnchorPane getEventListPlaceholder() {
+        return eventListPanelPlaceholder;
+    }
+
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
+    }
+
+    private AnchorPane getCalendarPlaceholder() {
+        return calendarPlaceholder;
     }
 
     void hide() {
@@ -195,16 +217,25 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public ActivityListPanel getActivityListPanel() {
-        return this.activityListPanel;
+    public EventListPanel getEventListPanel() {
+        return this.eventListPanel;
     }
 
-    void loadActivityPage(ReadOnlyActivity activity) {
-        browserPanel.loadActivityPage(activity);
+    public TaskListPanel getTaskListPanel() {
+        return this.taskListPanel;
     }
 
-    void releaseResources() {
-        browserPanel.freeResources();
+    public CalendarPanel getCalendarPanel() {
+        return this.calendarPanel;
+    }
+
+    public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
+        this.calendarPanel.refresh(eventList, taskList);
+    }
+
+    public void updateCalendarView(LocalDateTime displayedDateTime, CalendarLayout calendarViewMode) {
+        this.calendarPanel.updateCalendarMode(calendarViewMode);
+        this.calendarPanel.updateCalendarShownPeriod(displayedDateTime);
     }
 
 }

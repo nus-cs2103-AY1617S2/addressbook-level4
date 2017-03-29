@@ -1,46 +1,59 @@
 package seedu.address.model.person;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0148038A
+/**
+ * Represents an event in WhatsLeft
+ */
 public class Event implements ReadOnlyEvent {
 
     private Description description;
-    private StartDate startdate;
-    private EndDate enddate;
-    private StartTime starttime;
-    private EndTime endtime;
+    private StartTime startTime;
+    private StartDate startDate;
+    private EndTime endTime;
+    private EndDate endDate;
     private Location location;
 
     private UniqueTagList tags;
 
     /**
-     * Description must be present, StartDate must be present.
+     * Description and start date must be present and not null.
+     * @throws IllegalValueException
      */
-    public Event(Description description, StartDate startdate, EndDate enddate,
-            StartTime starttime, EndTime endtime, Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, startdate);
+    public Event(Description description, StartTime startTime, StartDate startDate,
+            EndTime endTime, EndDate endDate, Location location, UniqueTagList tags) {
+
+        //check description and start date are present
+        assert !CollectionUtil.isAnyNull(description, startDate);
+        assert isValideEndDateTime(endTime, endDate, startTime, startDate);
+
         this.description = description;
-        this.startdate = startdate;
-        this.enddate = enddate;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.startTime = startTime;
+        this.startDate = startDate;
+        this.endTime = endTime;
+        this.endDate = endDate;
         this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyEvent.
+     * @throws IllegalValueException
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getDescription(), source.getStartDate(), source.getEndDate(), source.getStartTime(),
-                source.getEndTime(), source.getLocation(), source.getTags());
+        this(source.getDescription(), source.getStartTime(), source.getStartDate(),
+                source.getEndTime(), source.getEndDate(), source.getLocation(), source.getTags());
     }
 
     public void setDescription(Description description) {
-        assert description != null;
+        assert description != null; // description must be present
         this.description = description;
     }
 
@@ -49,46 +62,44 @@ public class Event implements ReadOnlyEvent {
         return description;
     }
 
-    public void setStartDate(StartDate startdate) {
-        assert startdate != null;
-        this.startdate = startdate;
-    }
-
-    @Override
-    public StartDate getStartDate() {
-        return startdate;
-    }
-
-    public void setEndDate(EndDate enddate) {
-        this.enddate = enddate;
-    }
-
-    @Override
-    public EndDate getEndDate() {
-        return enddate;
-    }
-
-    public void setStartTime(StartTime starttime) {
-        //can be null
-        this.starttime = starttime;
+    public void setStartTime(StartTime startTime) {
+        this.startTime = startTime;
     }
 
     @Override
     public StartTime getStartTime() {
-        return starttime;
+        return startTime;
     }
 
-    public void setEndTime(EndTime endtime) {
-        //can be null
-        this.endtime = endtime;
+    public void setStartDate(StartDate startDate) {
+        assert startDate != null; // start date must be present
+        this.startDate = startDate;
+    }
+
+    @Override
+    public StartDate getStartDate() {
+        return startDate;
+    }
+
+    public void setEndTime(EndTime endTime) {
+        this.endTime = endTime;
     }
 
     @Override
     public EndTime getEndTime() {
-        return endtime;
+        return endTime;
     }
+
+    public void setEndDate(EndDate endDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public EndDate getEndDate() {
+        return endDate;
+    }
+
     public void setLocation(Location location) {
-        //can be null
         this.location = location;
     }
 
@@ -101,7 +112,22 @@ public class Event implements ReadOnlyEvent {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
+    //@@author A0121668A
 
+    /**
+     * Checks if start Date/Time is before end Date/Time
+     */
+    public static boolean isValideEndDateTime(EndTime et, EndDate ed, StartTime st, StartDate sd) {
+        if (sd.getValue().isAfter(ed.getValue())) {
+            return false;
+        }
+        if (sd.getValue().equals(ed.getValue()) && st.getValue().isAfter(et.getValue())) {
+            return false;
+        }
+        return true;
+    }
+
+    //@@author A0121668A
     /**
      * Replaces this event's tags with the tags in the argument tag list.
      */
@@ -116,13 +142,30 @@ public class Event implements ReadOnlyEvent {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
-        this.setStartDate(replacement.getStartDate());
-        this.setEndDate(replacement.getEndDate());
         this.setStartTime(replacement.getStartTime());
+        this.setStartDate(replacement.getStartDate());
         this.setEndTime(replacement.getEndTime());
+        this.setEndDate(replacement.getEndDate());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
+
+    //@@author A0121668A
+    @Override
+    public boolean isOver() {
+        if (LocalDate.now().isAfter(this.getEndDate().getValue())) {
+            return true;
+        } else if (LocalDate.now().isBefore(this.getEndDate().getValue())) {
+            return false;
+        } else {
+            if (LocalTime.now().isAfter(this.getEndTime().getValue())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    //@@author A0121668A
 
     @Override
     public boolean equals(Object other) {
@@ -134,12 +177,11 @@ public class Event implements ReadOnlyEvent {
     @Override
     public int hashCode() {
         // use this method for custend fields hashing instead of implementing your own
-        return Objects.hash(description, startdate, enddate, starttime, endtime, location, tags);
+        return Objects.hash(description, startTime, startDate, endTime, endDate, location, tags);
     }
 
     @Override
     public String toString() {
         return getAsText();
     }
-
 }
