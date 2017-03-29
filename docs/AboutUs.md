@@ -49,12 +49,11 @@ Responsibilities:
 * In charge of Testing
 * In charge of Model Component
 * Features implemented:
-   * [Save](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Load](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Undo](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Redo](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Set](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-* Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0138909R.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0138909R.md)]
+   * [Find](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Mark](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Unmark](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Sort](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0139399J.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0139399J.md)]
 * Other major contributions:
 
 -----
@@ -66,12 +65,9 @@ Responsibilities:
 * In charge of Code Quality
 * In charge of UI
 * Features implemented:
-   * [Save](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Load](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Undo](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Redo](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Set](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-* Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0138909R.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0138909R.md)]
+   * [UI](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Overdue Highlighting](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0160076L.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0160076L.md)]
 * Other major contributions:
 
 -----
