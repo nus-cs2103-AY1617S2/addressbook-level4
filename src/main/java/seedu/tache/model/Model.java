@@ -24,6 +24,9 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    /** Adds the given task to the specified index */
+    void addTask(int index, Task task) throws UniqueTaskList.DuplicateTaskException;
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
