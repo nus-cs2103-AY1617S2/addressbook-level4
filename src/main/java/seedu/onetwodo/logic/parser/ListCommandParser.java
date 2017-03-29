@@ -20,6 +20,10 @@ import seedu.onetwodo.model.DoneStatus;
  */
 public class ListCommandParser {
 
+    private static final String TODAY = "today";
+    private static final String NOW = "now";
+    private static final String TOMORROW = "tomorrow";
+
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
      * and returns an ListCommand object for execution.
@@ -38,7 +42,7 @@ public class ListCommandParser {
             if (!preamble.isPresent()) {
                 return new ListCommand(DoneStatus.UNDONE_STRING, beforeDate, afterDate, priority, tags);
             }
-            switch (preamble.get()) {
+            switch (preamble.get().toLowerCase()) {
             case DoneStatus.DONE_STRING:
                 return new ListCommand(DoneStatus.DONE_STRING, beforeDate, afterDate, priority, tags);
             case DoneStatus.ALL_STRING:
@@ -46,6 +50,8 @@ public class ListCommandParser {
             case DoneStatus.UNDONE_STRING:
             case "":
                 return new ListCommand(DoneStatus.UNDONE_STRING, beforeDate, afterDate, priority, tags);
+            case TODAY:
+                return new ListCommand(DoneStatus.UNDONE_STRING, TOMORROW, NOW, priority, tags);
             default:
                 return new IncorrectCommand("Invalid list command");
             }

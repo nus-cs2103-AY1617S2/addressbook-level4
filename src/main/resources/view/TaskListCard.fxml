@@ -38,7 +38,7 @@
                                   <children>
                                        <Label fx:id="name" styleClass="cell_big_label" stylesheets="@PanelTheme.css" text="\$first">
                                  <HBox.margin>
-                                    <Insets top="6.0" />
+                                    <Insets top="9.0" />
                                  </HBox.margin>
                                  <padding>
                                     <Insets right="6.0" />
@@ -65,7 +65,7 @@
                       </VBox>
                   <Label fx:id="priority" alignment="CENTER" contentDisplay="CENTER" minWidth="40.0" style="-fx-padding: 3;" styleClass="label-priority" stylesheets="@PanelTheme.css" text="\$p">
                      <HBox.margin>
-                        <Insets left="3.0" right="10.0" top="30.0" />
+                        <Insets left="3.0" right="10.0" top="21.0" />
                      </HBox.margin>
                      <opaqueInsets>
                         <Insets />

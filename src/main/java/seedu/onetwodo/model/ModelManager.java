@@ -221,18 +221,18 @@ public class ModelManager extends ComponentManager implements Model {
                 && (hasBefore ? isTaskBefore(task, before) : true)
                 && (hasAfter ? isTaskAfter(task, after) : true)
                 && (priority.hasPriority() ? isPrioritySame(task, priority) : true)
-                && (tags.isEmpty() ? containsAnyTag(task, tags) : true)
+                && (!tags.isEmpty() ? containsAnyTag(task, tags) : true)
         ));
     }
 
     private boolean containsAnyTag(ReadOnlyTask task, Set<Tag> tags) {
         Set<Tag> tagsRemoved = task.getTags().toSet();
         tagsRemoved.removeAll(tags);
-        return !tagsRemoved.equals(task.getTags());
+        return tagsRemoved.size() != task.getTags().toSet().size();
     }
 
     private boolean isPrioritySame(ReadOnlyTask task, Priority p) {
-        return task.getPriority() == p;
+        return task.getPriority().value.equals(p.value);
     }
 
     private boolean isTaskSameDoneStatus(ReadOnlyTask task, DoneStatus doneStatus) {

@@ -15,6 +15,7 @@ import seedu.onetwodo.model.task.StartDate;
  */
 public class ListCommand extends Command {
 
+    private static final String DATES_ARE_INVALID = "Dates are invalid";
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_SUCCESS = "Listed tasks";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List tasks by done status"
@@ -42,6 +43,9 @@ public class ListCommand extends Command {
         }
         before = new EndDate(beforeDate);
         after = new StartDate(afterDate);
+        if (before.hasDate() && after.hasDate() && before.getLocalDateTime().isBefore(after.getLocalDateTime())) {
+            throw new IllegalValueException(DATES_ARE_INVALID);
+        }
         priority = new Priority(priorityString);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -64,7 +68,6 @@ public class ListCommand extends Command {
             model.setDoneStatus(DoneStatus.UNDONE);
         }
         model.resetSearchStrings();
-//        model.updateByDoneStatus();
         model.updateByDoneDatePriorityTags(before, after, priority, tagSet);
         return new CommandResult(MESSAGE_SUCCESS);
     }
