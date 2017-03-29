@@ -525,7 +525,7 @@ Use case ends
 > 2b1. TaskBoss creates a new filepath <br>
 Use case ends
 
-#### Use case: Export tasks to a new file
+#### Use case: Export tasks to a new filepath
 
 **MSS**
 
