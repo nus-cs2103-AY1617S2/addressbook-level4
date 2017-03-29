@@ -160,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .findAny()
                     .isPresent();
             boolean hasDescription = nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().get().value, keyword))
                     .findAny()
                     .isPresent();
             boolean hasTag = false;

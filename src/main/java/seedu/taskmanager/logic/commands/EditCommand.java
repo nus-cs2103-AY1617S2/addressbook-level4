@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
-import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
@@ -68,7 +67,8 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         // @@author A0140032E
-        if (editedTask.getStartDate().after(editedTask.getEndDate())) {
+        if (editedTask.getStartDate().isPresent() && editedTask.getEndDate().isPresent() &&
+                editedTask.getStartDate().get().after(editedTask.getEndDate().get())) {
             throw new CommandException(MESSAGE_DATE_ORDER_CONSTRAINTS);
         }
         // @@author
@@ -90,9 +90,14 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
-        EndDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        // @@author A0140032E
+        Optional <StartDate> updatedStartDate = editTaskDescriptor.isStartDateChanged() ?
+                editTaskDescriptor.getStartDate() : taskToEdit.getStartDate();
+        Optional <EndDate> updatedEndDate = editTaskDescriptor.isEndDateChanged() ?
+                editTaskDescriptor.getEndDate() : taskToEdit.getEndDate();
+        Optional <Description> updatedDescription = editTaskDescriptor.isDescriptionChanged() ?
+                editTaskDescriptor.getDescription() : taskToEdit.getDescription();
+        // @@author
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
@@ -108,9 +113,19 @@ public class EditCommand extends Command {
         private Optional<EndDate> endDate = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        // @@author A0140032E
+        private boolean anyChangesMade;
+        private boolean startDateChanged;
+        private boolean endDateChanged;
+        private boolean descriptionChanged;
 
         public EditTaskDescriptor() {
+            anyChangesMade = false;
+            startDateChanged = false;
+            endDateChanged = false;
+            descriptionChanged = false;
         }
+
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
@@ -118,55 +133,88 @@ public class EditCommand extends Command {
             this.endDate = toCopy.getEndDate();
             this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
+            this.anyChangesMade = toCopy.isAnyFieldEdited();
+            this.startDateChanged = toCopy.isStartDateChanged();
+            this.endDateChanged = toCopy.isEndDateChanged();
+            this.descriptionChanged = toCopy.isDescriptionChanged();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.startDate, this.endDate, this.description, this.tags);
+            return anyChangesMade;
         }
 
         public void setTitle(Optional<Title> title) {
             assert title != null;
             this.title = title;
+            anyChangesMade = true;
         }
+        // @@author
 
         public Optional<Title> getTitle() {
             return title;
         }
 
+        // @@author A0140032E
         public void setStartDate(Optional<StartDate> startDate) {
             assert startDate != null;
             this.startDate = startDate;
+            startDateChanged = true;
+            anyChangesMade = true;
         }
+
+        public boolean isStartDateChanged() {
+            return startDateChanged;
+        }
+        // @@author
 
         public Optional<StartDate> getStartDate() {
             return startDate;
         }
 
+        // @@author A0140032E
         public void setEndDate(Optional<EndDate> endDate) {
             assert endDate != null;
             this.endDate = endDate;
+            anyChangesMade = true;
+            endDateChanged = true;
         }
+
+        public boolean isEndDateChanged() {
+            return endDateChanged;
+        }
+        // @@author
 
         public Optional<EndDate> getEndDate() {
             return endDate;
         }
 
+        // @@author A0140032E
         public void setDescription(Optional<Description> description) {
             assert description != null;
             this.description = description;
+            anyChangesMade = true;
+            descriptionChanged = true;
         }
+
+        public boolean isDescriptionChanged() {
+            return descriptionChanged;
+        }
+        // @@author
 
         public Optional<Description> getDescription() {
             return description;
         }
 
+        // @@author A0140032E
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
+            anyChangesMade = true;
         }
+        // @@author
 
         public Optional<UniqueTagList> getTags() {
             return tags;

@@ -2,8 +2,11 @@ package seedu.taskmanager.model.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
@@ -18,6 +21,7 @@ public class EndDate extends Date {
     public static final String ENDDATE_VALIDATION_REGEX = "(^$)|(^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$)";
 
     // @@author A0140032E
+    private static final SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy h:mm a");
     private static final SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
@@ -31,18 +35,16 @@ public class EndDate extends Date {
     }
 
     private static long endDateConstructor(String endDate) throws IllegalValueException {
-        assert endDate != null;
         try {
-            if (!isValidEndDate(endDate)) {
+            return sdfInput.parse(endDate).getTime();
+        } catch (ParseException e) {
+            try {
+                Parser parser = new Parser();
+                List<DateGroup> dateGroups = parser.parse(endDate);
+                return dateGroups.get(0).getDates().get(0).getTime();
+            } catch (IndexOutOfBoundsException f) {
                 throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
             }
-            if (endDate.trim().equals("")) {
-                Calendar cal = Calendar.getInstance();
-                return cal.getTimeInMillis();
-            }
-            return sdfInput.parse(endDate).getTime();
-        } catch (IllegalValueException | ParseException e) {
-            throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
         }
     }
     // @@author
@@ -51,13 +53,19 @@ public class EndDate extends Date {
      * Returns if a given string is a valid task end date.
      */
     public static boolean isValidEndDate(String test) {
-        return test.matches(ENDDATE_VALIDATION_REGEX);
+        Parser parser = new Parser();
+        List<DateGroup> dateGroups = parser.parse(test);
+        return !(dateGroups.isEmpty()) && !(dateGroups.get(0).getDates().isEmpty());
     }
 
     // @@author A0140032E
     @Override
     public String toString() {
-        return sdfInput.format(this);
+        return sdfOutput.format(this);
+    }
+
+    public String toFullDateString() {
+        return super.toString();
     }
     // @@author
 
