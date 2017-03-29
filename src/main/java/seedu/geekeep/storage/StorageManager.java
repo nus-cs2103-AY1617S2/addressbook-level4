@@ -116,7 +116,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "GeeKeep file path changed, saving to file"));
-        setGeeKeepFilePath(event.filePath);
+        setGeeKeepFilePath(event.config.getGeekeepFilePath());
         try {
             saveGeeKeep(event.geekeep);
         } catch (IOException e) {
