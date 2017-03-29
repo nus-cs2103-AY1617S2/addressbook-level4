@@ -18,14 +18,14 @@ public class UndoCommandTest extends TaskListGuiTest {
         TestTask[] originalList = td.getTypicalTasks();
         commandBox.runCommand(td.iguana.getAddCommand());
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(originalList));
+        assertTrue(taskListPanel.isListMatching(originalList));
 
         //undo edit
         String detailsToEdit = "Bobby t/husband";
         int taskListIndex = 1;
         commandBox.runCommand("edit " + taskListIndex + " " + detailsToEdit);
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(originalList));
+        assertTrue(taskListPanel.isListMatching(originalList));
     }
 
 }

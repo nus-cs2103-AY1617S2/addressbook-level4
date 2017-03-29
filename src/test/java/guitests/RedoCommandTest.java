@@ -23,7 +23,7 @@ public class RedoCommandTest extends TaskListGuiTest {
         list = TestUtil.addPersonsToList(list, personToAdd);
         commandBox.runCommand("undo");
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(list));
+        assertTrue(taskListPanel.isListMatching(list));
 
         //redo while no more commands are present
         commandBox.runCommand("redo");
