@@ -17,7 +17,6 @@ public class Task extends UserToDo implements ReadOnlyTask {
 
     public static final String TASK_FLAG = "t";
 
-    private Name name;
     private Deadline deadline;
     private boolean isOverdue;
 
@@ -27,11 +26,8 @@ public class Task extends UserToDo implements ReadOnlyTask {
     public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags) {
         super(name, priority, description, tags);
         assert deadline != null;
+
         this.deadline = deadline;
-        this.priority = priority;
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
         this.isOverdue = false;
     }
 
@@ -58,6 +54,14 @@ public class Task extends UserToDo implements ReadOnlyTask {
 
     public boolean isOverdue() {
         return this.isOverdue;
+    }
+
+    public void markOverdue() {
+        this.isOverdue = true;
+    }
+
+    public void unmarkOverdue() {
+        this.isOverdue = false;
     }
 
     @Override
@@ -107,14 +111,15 @@ public class Task extends UserToDo implements ReadOnlyTask {
         } else if (another.isComplete()) {
             return -1;
         }
-
+        //neither is complete
         if (!this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
             return this.getPriority().compareTo(another.getPriority());
         } else if (!this.getDeadline().hasDeadline() && another.getDeadline().hasDeadline()) {
             return 1;
         } else if (this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
             return -1;
-        } else { //both has deadline
+        } else {
+            //both has deadline
             Date thisDate = this.getDeadline().getDate().get();
             assert thisDate != null;
             Date anotherDate = another.getDeadline().getDate().get();

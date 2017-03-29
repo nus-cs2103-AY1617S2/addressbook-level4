@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import project.taskcrusher.model.event.ReadOnlyEvent;
+import project.taskcrusher.model.shared.DateUtilApache;
 
 public class EventListCard extends UiPart<Region> {
 
@@ -52,7 +53,8 @@ public class EventListCard extends UiPart<Region> {
     }
 
     private void showEventTimeSlots(ReadOnlyEvent event) {
-        event.getTimeslots().forEach(timeslot -> timeslots.getChildren().add(new Label(timeslot.toString())));
+        event.getTimeslots().forEach(timeslot -> timeslots.getChildren().add(new Label(
+                DateUtilApache.timeslotAsStringForUi(timeslot))));
     }
 
     private void initTags(ReadOnlyEvent event) {

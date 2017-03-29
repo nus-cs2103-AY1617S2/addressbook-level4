@@ -27,8 +27,8 @@ public class XmlAdaptedTimeslot {
     public XmlAdaptedTimeslot(Timeslot timeslot) {
 //        startDate = timeslot.start.toString();
 //        endDate = timeslot.end.toString();
-        startDate = DateUtilApache.dateAsString(timeslot.start);
-        endDate = DateUtilApache.dateAsString(timeslot.end);
+        startDate = DateUtilApache.dateAsStringForStorage(timeslot.start);
+        endDate = DateUtilApache.dateAsStringForStorage(timeslot.end);
     }
 
     /**

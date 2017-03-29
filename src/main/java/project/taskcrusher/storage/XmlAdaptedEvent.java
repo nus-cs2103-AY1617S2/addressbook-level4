@@ -12,23 +12,31 @@ import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 public class XmlAdaptedEvent {
 
+    /* Inherited attributes from UserToDo*/
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String location;
+    private String priority;
     @XmlElement(required = true)
     private String description;
-
     @XmlElement(required = true)
-    private List<XmlAdaptedTimeslot> timeslots = new ArrayList<>();
-
+    private boolean isComplete;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    /* Event-specific attributes */
+    @XmlElement(required = true)
+    private List<XmlAdaptedTimeslot> timeslots = new ArrayList<>();
+    @XmlElement(required = true)
+    private boolean isOverdue;
+    @XmlElement(required = true)
+    private String location;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -44,8 +52,9 @@ public class XmlAdaptedEvent {
      */
     public XmlAdaptedEvent(ReadOnlyEvent source) {
         name = source.getName().name;
-        location = source.getLocation().location;
+        priority = source.getPriority().priority;
         description = source.getDescription().description;
+        isComplete = source.isComplete();
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -56,6 +65,9 @@ public class XmlAdaptedEvent {
         for (Timeslot timeslot: source.getTimeslots()) {
             timeslots.add(new XmlAdaptedTimeslot(timeslot));
         }
+
+        location = source.getLocation().location;
+        isOverdue = source.isOverdue();
     }
 
     /**
@@ -75,10 +87,23 @@ public class XmlAdaptedEvent {
         }
 
         final Name name = new Name(this.name);
-        final Location location = new Location(this.location);
+        final Priority priority = new Priority(this.priority);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(eventTags);
-        return new Event(name, eventTimeslots, location, description, tags);
+
+        final Location location = new Location(this.location);
+
+        Event thisEvent = new Event(name, eventTimeslots, location, description, tags);
+
+        if (isOverdue) {
+            thisEvent.markOverdue();
+        }
+
+        if (isComplete) {
+            thisEvent.markComplete();
+        }
+
+        return thisEvent;
     }
 
 }

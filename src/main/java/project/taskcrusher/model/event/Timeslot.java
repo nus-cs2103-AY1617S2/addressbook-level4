@@ -101,7 +101,7 @@ public class Timeslot {
 
     @Override
     public String toString() {
-        return DateUtilApache.dateAsString(start) + " to " + DateUtilApache.dateAsString(end);
+        return DateUtilApache.dateAsStringForStorage(start) + " to " + DateUtilApache.dateAsStringForStorage(end);
     }
 
     @Override

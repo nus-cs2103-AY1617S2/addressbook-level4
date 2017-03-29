@@ -12,6 +12,9 @@ public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 
+    public void sortEventsByEarliestTimeslot() {
+        internalList.sort(null);
+    }
     /**
      * Returns true if the list contains an equivalent event as the given argument.
      */
@@ -48,6 +51,7 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+        sortEventsByEarliestTimeslot();
     }
 
     /**
@@ -70,6 +74,7 @@ public class UniqueEventList implements Iterable<Event> {
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, eventToUpdate);
+        sortEventsByEarliestTimeslot();
     }
 
     /**
@@ -83,11 +88,13 @@ public class UniqueEventList implements Iterable<Event> {
         if (!eventFoundAndDeleted) {
             throw new EventNotFoundException();
         }
+        sortEventsByEarliestTimeslot();
         return eventFoundAndDeleted;
     }
 
     public void setEvents(UniqueEventList replacement) {
         this.internalList.setAll(replacement.internalList);
+        sortEventsByEarliestTimeslot();
     }
 
     public void setEvents(List<? extends ReadOnlyEvent> events) throws DuplicateEventException {
@@ -100,6 +107,7 @@ public class UniqueEventList implements Iterable<Event> {
 
     public void confirmEventTime(int eventListIndex, int timeslotIndex) {
         internalList.get(eventListIndex).confirmTimeslot(timeslotIndex);
+        sortEventsByEarliestTimeslot();
     }
 
     public UnmodifiableObservableList<Event> asObservableList() {

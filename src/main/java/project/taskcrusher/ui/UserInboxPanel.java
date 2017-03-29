@@ -13,8 +13,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import project.taskcrusher.commons.core.LogsCenter;
-import project.taskcrusher.commons.events.model.EventListToShowUpdatedEvent;
-import project.taskcrusher.commons.events.model.TaskListToShowUpdatedEvent;
+import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
 import project.taskcrusher.commons.events.ui.PersonPanelSelectionChangedEvent;
 import project.taskcrusher.commons.util.FxViewUtil;
 import project.taskcrusher.model.event.ReadOnlyEvent;
@@ -106,7 +105,7 @@ public class UserInboxPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    public void handleEventListToShowUpdatedEvent(EventListToShowUpdatedEvent event) {
+    public void handleListsToShowUpdatedEvent(ListsToShowUpdatedEvent event) {
         if (event.eventListToShowEmpty) {
             eventListView.setManaged(SET_LIST_HIDDEN);
             eventListView.setVisible(SET_LIST_HIDDEN);
@@ -114,10 +113,7 @@ public class UserInboxPanel extends UiPart<Region> {
             eventListView.setManaged(SET_LIST_VISIBLE);
             eventListView.setVisible(SET_LIST_VISIBLE);
         }
-    }
 
-    @Subscribe
-    public void handleTaskListToShowUpdatedEvent(TaskListToShowUpdatedEvent event) {
         if (event.taskListToShowEmpty) {
             taskListView.setManaged(SET_LIST_HIDDEN);
             taskListView.setVisible(SET_LIST_HIDDEN);
