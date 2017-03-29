@@ -85,13 +85,7 @@ public class UiManager extends ComponentManager implements Ui {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
-        try {
-            initTasksWithNotificationTimer(logic.getFilteredTaskList());
-            //showSystemTrayNotification();
-            //showUpdateNotification();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        initTasksWithNotificationTimer(logic.getFilteredTaskList());
     }
 
     @Override
@@ -104,17 +98,20 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     //@@author A0139961U
+    /**
+     * Sets a notification timer to tasks that are due tomorrow. The notification timer
+     * will then call showSystemTrayNotification method.
+     * @param taskList: Lists of tasks from user's data storage file.
+     */
     private void initTasksWithNotificationTimer(ObservableList<ReadOnlyTask> taskList) {
         Date tomorrow = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(tomorrow);
-        c.add(Calendar.DATE, 1);
-        tomorrow = c.getTime();
-        System.out.println(tomorrow.toString());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(tomorrow);
+        calendar.add(Calendar.DATE, 1);
+        tomorrow = calendar.getTime();
         for (ReadOnlyTask task : taskList) {
             if (task.getEndDateTime().isPresent()) {
-                if (task.getEndDateTime().get().isDate(tomorrow)) {
-                    //if (!task.getEndDateTime().get().getTimeOnly().isEmpty()) {
+                if (task.getEndDateTime().get().isSameDate(tomorrow)) {
                     notificationTimer.schedule(new TimerTask() {
                         @Override
                         public void run() {
@@ -126,9 +123,7 @@ public class UiManager extends ComponentManager implements Ui {
                                 e.printStackTrace();
                             }
                         }
-                    }, 0);
-                    //}, task.getEndDateTime().get().getDate());
-                    //} else {
+                    }, 0); //0 indicate that it will only be scheduled once
                 }
             }
         }
@@ -170,13 +165,13 @@ public class UiManager extends ComponentManager implements Ui {
     /**
      * Shows a notification from the javafx UI
      */
-    /*private void showUpdateNotification() {
+    /*private void showUpdateNotification(ReadOnlyTask task) {
         ImageView icon = new ImageView(this.getClass().getResource("/images/info_icon.png").toString());
         icon.setFitWidth(64);
         icon.setFitHeight(64);
         Notifications.create()
-           .title("New version available")
-           .text("MetaStone '" + "' is ready for download")
+           .title(task.getName().fullName + " is due tomorrow.")
+           .text("This task is due tomorrow.")
            .graphic(icon)
            .position(Pos.BOTTOM_RIGHT)
            .hideAfter(Duration.seconds(5))
