@@ -13,17 +13,17 @@ import seedu.address.MainApp;
  * A container for resource-specific utility functions
  */
 public class ResourceUtil {
-	public static List<String> getResourceFiles(String path) throws IOException {
-		List<String> files = new ArrayList<>();
-		
-		InputStream in = MainApp.class.getResourceAsStream(path);
-		BufferedReader br = new BufferedReader(new InputStreamReader(in));
-		
-		String file;
-		while ((file = br.readLine()) != null) {
-			files.add(file);
-		}
-		
-		return files;
-	}
+    public static List<String> getResourceFiles(String path) throws IOException {
+        List<String> files = new ArrayList<>();
+
+        InputStream in = MainApp.class.getResourceAsStream(path);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+        String file;
+        while ((file = br.readLine()) != null) {
+            files.add(file);
+        }
+
+        return files;
+    }
 }

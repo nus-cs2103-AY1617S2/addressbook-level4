@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.net.URL;
-
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -10,60 +8,60 @@ import seedu.address.model.UserPrefs;
 
 public abstract class Window extends UiPart<Region> {
 
-	protected Stage stage;
+    protected Stage stage;
 
-	public Window(String fxmlFileUrl, Stage stage) {
-		super(fxmlFileUrl);
-		
-		this.stage = stage;
-	}
+    public Window(String fxmlFileUrl, Stage stage) {
+        super(fxmlFileUrl);
 
-	public Window(String fxmlFileName) {
-		super(fxmlFileName);
-		
-		stage = createDialogStage("New Window", null, new Scene(getRoot()));
-	}
+        this.stage = stage;
+    }
 
-	public Stage getStage() {
-	    return stage;
-	}
+    public Window(String fxmlFileName) {
+        super(fxmlFileName);
 
-	protected void setTitle(String appTitle) {
-	    stage.setTitle(appTitle);
-	}
+        stage = createDialogStage("New Window", null, new Scene(getRoot()));
+    }
 
-	/**
-	 * Sets the given image as the icon of the main window.
-	 * @param iconSource e.g. {@code "/images/help_icon.png"}
-	 */
-	protected void setIcon(String iconSource) {
-	    FxViewUtil.setStageIcon(stage, iconSource);
-	}
+    public Stage getStage() {
+        return stage;
+    }
 
-	/**
-	 * Sets the default size based on user preferences.
-	 */
-	protected void setWindowDefaultSize(UserPrefs prefs) {
-	    stage.setHeight(prefs.getGuiSettings().getWindowHeight());
-	    stage.setWidth(prefs.getGuiSettings().getWindowWidth());
-	    if (prefs.getGuiSettings().getWindowCoordinates() != null) {
-	        stage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
-	        stage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
-	    }
-	}
+    protected void setTitle(String appTitle) {
+        stage.setTitle(appTitle);
+    }
 
-	protected void setWindowMinSize(int height, int width) {
-	    stage.setMinHeight(height);
-	    stage.setMinWidth(width);
-	}
-	
-	protected void show() {
-		logger.fine("Showing " + stage.getTitle());
-	    stage.show();
-	}
+    /**
+     * Sets the given image as the icon of the main window.
+     * @param iconSource e.g. {@code "/images/help_icon.png"}
+     */
+    protected void setIcon(String iconSource) {
+        FxViewUtil.setStageIcon(stage, iconSource);
+    }
 
-	protected void hide() {
-	    stage.hide();
-	}
+    /**
+     * Sets the default size based on user preferences.
+     */
+    protected void setWindowDefaultSize(UserPrefs prefs) {
+        stage.setHeight(prefs.getGuiSettings().getWindowHeight());
+        stage.setWidth(prefs.getGuiSettings().getWindowWidth());
+        if (prefs.getGuiSettings().getWindowCoordinates() != null) {
+            stage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
+            stage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
+        }
+    }
+
+    protected void setWindowMinSize(int height, int width) {
+        stage.setMinHeight(height);
+        stage.setMinWidth(width);
+    }
+
+    protected void show() {
+        logger.fine("Showing " + stage.getTitle());
+        stage.show();
+    }
+
+    protected void hide() {
+        stage.hide();
+    }
 
 }
