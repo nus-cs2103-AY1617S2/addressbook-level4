@@ -31,8 +31,8 @@ public class AddCommandParser {
      * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_ON, PREFIX_BY, PREFIX_FROM,
-                PREFIX_TO, PREFIX_CATEGORY);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_ON, PREFIX_BY, PREFIX_FROM, PREFIX_TO,
+                PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         try {
             String taskName = argsTokenizer.getPreamble().get();
@@ -44,6 +44,7 @@ public class AddCommandParser {
             String startTime = EMPTY_FIELD;
             String endDate = EMPTY_FIELD;
             String endTime = EMPTY_FIELD;
+
             /*
              * Checks to ensure correct combinations of arguments are added by
              * user when adding tasks to the task manager
@@ -57,7 +58,7 @@ public class AddCommandParser {
                     try {
                         if (splitedFromPrefixInput[0].matches(STARTDATE_VALIDATION_REGEX2)) {
                             startDate = CurrentDate.getNewDate(splitedFromPrefixInput[0]);
-                            startDate = convertDateForm(startDate);
+                            // startDate = convertDateForm(startDate);
                         } else {
                             startDate = splitedFromPrefixInput[0];
                         }
@@ -79,7 +80,7 @@ public class AddCommandParser {
                     try {
                         if (splitedToPrefixInput[0].matches(STARTDATE_VALIDATION_REGEX2)) {
                             endDate = CurrentDate.getNewDate(splitedToPrefixInput[0]);
-                            endDate = convertDateForm(endDate);
+                            // endDate = convertDateForm(endDate);
                         } else {
                             endDate = splitedToPrefixInput[0];
                         }
@@ -117,20 +118,7 @@ public class AddCommandParser {
                             // endDate = nextDay(due to +1hr > 2400hrs)
                             endTime = Integer.toString(Integer.parseInt(endTime) - 2400);
 
-                            if (Integer.parseInt(endTime) >= 10) {
-                                StringBuilder stringBuilderTime = new StringBuilder();
-
-                                stringBuilderTime.append("00");
-                                stringBuilderTime.append(endTime);
-                                endTime = stringBuilderTime.toString();
-
-                            } else {
-                                StringBuilder stringBuilderTime = new StringBuilder();
-
-                                stringBuilderTime.append("000");
-                                stringBuilderTime.append(endTime);
-                                endTime = stringBuilderTime.toString();
-                            }
+                            endTime = fourDigitTimeFormat(endTime);
 
                         }
 
@@ -229,6 +217,24 @@ public class AddCommandParser {
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+    }
+
+    private String fourDigitTimeFormat(String endTime) {
+        if (Integer.parseInt(endTime) >= 10) {
+            StringBuilder stringBuilderTime = new StringBuilder();
+
+            stringBuilderTime.append("00");
+            stringBuilderTime.append(endTime);
+            endTime = stringBuilderTime.toString();
+
+        } else {
+            StringBuilder stringBuilderTime = new StringBuilder();
+
+            stringBuilderTime.append("000");
+            stringBuilderTime.append(endTime);
+            endTime = stringBuilderTime.toString();
+        }
+        return endTime;
     }
 
     private void compareStartEndTime(String startTime, String endTime) throws IllegalValueException {
