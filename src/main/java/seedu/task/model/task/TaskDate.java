@@ -13,7 +13,7 @@ import java.util.List;
 public class TaskDate {
 	
 	private List<Date> dates;
-    public final SimpleDateFormat formatter;
+    private SimpleDateFormat formatter;
     public final String OUTPUT_FORMAT = " MMM dd (EEE) ";
 	
     private int day;
@@ -46,38 +46,36 @@ public class TaskDate {
     private static final int YEAR2_START_INDEX = 11;
     private static final int YEAR2_END_INDEX = 13;
 
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invaid date information, try again.";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invaid date, try ddmmyy-ddmmyy ";
 
     
     public TaskDate(String input) throws IllegalValueException {
-    
-    formatter = new SimpleDateFormat (OUTPUT_FORMAT);
-    NattyParser natty = new NattyParser();
-    dates = natty.parse(input);
-    	
-    if(dates == null)
-    	throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
-    	
 
-	input = input.trim();
-	value = input;
-	//int[] dateArray = dateFormatConverter(input);
-	if (dates.size() == 1) {
-		Date date = dates.get(0);
-	    setDay(date.getDate());
-	    setMonth(date.getMonth());
-	    setYear(date.getYear());
+	value = input.trim();
+	try{
+		int[] dateArray = dateFormatConverter(input);
+		if (input.length() == 6) {
+		    setDay(dateArray[DAY_ARRAY_INDEX]);
+		    setMonth(dateArray[MONTH_ARRAY_INDEX]);
+		    setYear(dateArray[YEAR_ARRAY_INDEX]);
+		}
+		if (input.length() == 13) {
+		    setDay(dateArray[DAY_ARRAY_INDEX]);
+		    setMonth(dateArray[MONTH_ARRAY_INDEX]);
+		    setYear(dateArray[YEAR_ARRAY_INDEX]);
+		    setDay2(dateArray[DAY2_ARRAY_INDEX]);
+		    setMonth2(dateArray[MONTH2_ARRAY_INDEX]);
+		    setYear2(dateArray[YEAR2_ARRAY_INDEX]);
+		}
+	}catch(Exception e){
+	    formatter = new SimpleDateFormat (OUTPUT_FORMAT);
+	    NattyParser natty = new NattyParser();
+	    dates = natty.parse(input);
+	    	
+	    if(dates == null)
+	    	throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
 	}
-	if (dates.size() == 2) {
-		Date date1 = dates.get(0);
-		Date date2 = dates.get(1);
-	    setDay(date1.getDate());
-	    setMonth(date1.getMonth());
-	    setYear(date1.getYear());
-	    setDay2(date2.getDate());
-	    setMonth2(date2.getMonth());
-	    setYear2(date2.getYear());
-	}
+	
 
     }
 
@@ -130,10 +128,19 @@ public class TaskDate {
     }
 
     public String toString() {
-	if(dates.size() == 1)
-    	return formatter.format(dates.get(0));
-	else
-		return formatter.format(dates.get(0)) +" - "+ formatter.format(dates.get(1));
+    if(dates == null){
+    	if (day2 == 0 && month2 == 0 && year2 == 0) {
+    	    return day + DATE_DELIMITER + month + DATE_DELIMITER + year;
+    	}
+    	return day + DATE_DELIMITER + month + DATE_DELIMITER + year + " " + DATE_DELIMITER2 + " " + day2
+    		+ DATE_DELIMITER + month2 + DATE_DELIMITER + year2;
+    }else{
+    	if(dates.size() == 1)
+        	return formatter.format(dates.get(0));
+    	else
+    		return formatter.format(dates.get(0)) +" - "+ formatter.format(dates.get(1));
+    	
+    }
     }
 
     public static int[] dateFormatConverter(String date) {

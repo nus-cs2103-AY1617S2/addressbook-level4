@@ -9,8 +9,8 @@ public class TaskTime {
 	
 	private List<Date> dates;
 	private Date time;
-    public final SimpleDateFormat formatter;
-    public final String OUTPUT_FORMAT = " hh:mm a ";
+    private SimpleDateFormat formatter;
+    private final String OUTPUT_FORMAT = " hh:mm a ";
     
     public final String value;
 	private int hour;
@@ -21,25 +21,35 @@ public class TaskTime {
     public final int MINUTE_ARRAY_INDEX = 0;
     public final int HOUR_ARRAY_INDEX = 1;
 
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time information, try again.";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format, be more prcise or try hhmm, hh:mm, or h:mm";
 
     public TaskTime(String input) throws IllegalValueException {
     
-    formatter = new SimpleDateFormat (OUTPUT_FORMAT);
-    NattyParser natty = new NattyParser();
-	dates = natty.parse(input);
-	if(dates == null)
-		throw new IllegalValueException(MESSAGE_INVALID_TIME_FORMAT);
-	time = dates.get(0);
-	
 	value = input.trim();
-	//int[] timeArray = timeFormatConverter(input);
-	setMinute(time.getMinutes());
-	setHour(time.getHours());
+	
+	try{
+		int[] timeArray = timeFormatConverter(input);
+		setMinute(timeArray[MINUTE_ARRAY_INDEX]);
+		setHour(timeArray[HOUR_ARRAY_INDEX]);
+		time = null;
+	}catch(Exception e){
+		formatter = new SimpleDateFormat (OUTPUT_FORMAT);
+	    NattyParser natty = new NattyParser();
+		dates = natty.parse(input);
+		if(dates == null)
+			throw new IllegalValueException(MESSAGE_INVALID_TIME_FORMAT);
+		time = dates.get(0);
+	}
+	
+
     }
 
     public String toString() {
-    	return formatter.format(dates.get(0));
+    	if(time == null)
+    		return hourStr + TIME_DELIMITER + minuteStr;
+    	else
+    		return formatter.format(dates.get(0));
+    	
     }
 
     public void setHour(int hour) throws IllegalValueException {
