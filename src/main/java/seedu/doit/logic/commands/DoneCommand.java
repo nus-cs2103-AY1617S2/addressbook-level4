@@ -1,6 +1,6 @@
 package seedu.doit.logic.commands;
 
-
+//@@author A0146809W
 /**
  * Lists all completed tasks in the task manager to the user.
  */
