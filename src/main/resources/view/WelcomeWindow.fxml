@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Label?>
-<Label>
-	<text>Hey there!</text>
-</Label>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<Label>
+		<text>Hey there! Here are your tasks for the day!</text>
+	</Label>
+</AnchorPane>

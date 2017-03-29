@@ -31,12 +31,12 @@ public class TaskListPanel extends UiPart<Region> {
     public static final String DEADLINE_PANEL_ID = "deadline-panel";
     public static final String EVENT_PANEL_ID = "event-panel";
     public static final String TODO_PANEL_ID = "todo-panel";
+    public static final String TODAY_PANEL_ID = "today-panel";
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList,
-            TaskType taskType) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, TaskType taskType) {
         super(FXML);
         this.taskType = taskType;
         setId(taskType);
@@ -75,7 +75,7 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.setOnMouseClicked(new EventHandler<MouseEvent> () {
+        taskListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent click) {
                 ReadOnlyTask selectedValue = taskListView.getSelectionModel().getSelectedItem();

@@ -26,8 +26,8 @@ import seedu.onetwodo.model.task.UniqueTaskList;
 import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the todo list data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the todo list data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -45,7 +45,6 @@ public class ModelManager extends ComponentManager implements Model {
     private DoneStatus doneStatus;
 
     private ToDoListHistoryManager history;
-
 
     /**
      * Initializes a ModelManager with the given toDoList and userPrefs.
@@ -116,6 +115,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void todayTask(ReadOnlyTask taskForToday) throws IllegalValueException {
+        if (taskForToday.getTodayStatus() == false) {
+            throw new IllegalValueException("This task is not for today");
+        }
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        toDoList.todayTask(taskForToday);
+        history.saveUndoInformationAndClearRedoHistory(AddCommand.COMMAND_WORD, taskForToday, copiedCurrentToDoList);
+        indicateToDoListChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.addTask(task);
@@ -172,7 +182,8 @@ public class ModelManager extends ComponentManager implements Model {
         resetData(new ToDoList());
     }
 
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -202,6 +213,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredDoneTaskList() {
         updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == true));
+    }
+
+    @Override
+    public void updateFilteredTodayTaskList() {
+        updateFilteredTaskList(new PredicateExpression(p -> p.getTodayStatus() == true));
     }
 
     @Override
@@ -255,7 +271,8 @@ public class ModelManager extends ComponentManager implements Model {
         return filtered.indexOf(task);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     @Override
     public DoneStatus getDoneStatus() {
@@ -269,6 +286,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -293,6 +311,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -306,8 +325,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)).findAny()
                     .isPresent();
         }
 

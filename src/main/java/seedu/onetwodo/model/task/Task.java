@@ -1,5 +1,6 @@
 package seedu.onetwodo.model.task;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.onetwodo.model.tag.UniqueTagList;
@@ -19,6 +20,7 @@ public class Task implements ReadOnlyTask {
 
     private TaskType type;
     private boolean isDone;
+    private boolean isToday;
 
     // @@author A0141138N
     /**
@@ -35,6 +37,7 @@ public class Task implements ReadOnlyTask {
                                              // changes in the arg list
         this.isDone = false;
         checkTaskType(startDate, endDate);
+        isToday(startDate, endDate);
     }
 
     // @@ author A0141138N
@@ -47,6 +50,27 @@ public class Task implements ReadOnlyTask {
             this.type = TaskType.EVENT;
         } else {
             this.type = null;
+        }
+    }
+
+    // @@author A0141138N
+    private void isToday(StartDate startDate, EndDate endDate) {
+        LocalDate dateEnd = LocalDate.now();
+        LocalDate dateStart = LocalDate.now();
+        if (endDate.hasDate()) {
+            dateEnd = endDate.getLocalDateTime().toLocalDate();
+        }
+        if (startDate.hasDate()) {
+            dateStart = startDate.getLocalDateTime().toLocalDate();
+        }
+
+        if ((type.equals(TaskType.DEADLINE)) && (dateEnd.isEqual(LocalDate.now()))) {
+            this.isToday = true;
+        } else if ((type.equals(TaskType.EVENT)) && (dateStart.isBefore(LocalDate.now()))
+                && (dateEnd.isAfter(LocalDate.now()))) {
+            this.isToday = true;
+        } else {
+            this.isToday = false;
         }
     }
 
@@ -96,6 +120,11 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
+    public boolean getTodayStatus() {
+        return isToday;
+    }
+
+    @Override
     public TaskType getTaskType() {
         return type;
     }
@@ -134,6 +163,11 @@ public class Task implements ReadOnlyTask {
     public void setDone() {
         assert isDone == false;
         isDone = true;
+    }
+
+    public void setToday() {
+        assert isToday == false;
+        isToday = true;
     }
 
     public void setTaskType(TaskType type) {
