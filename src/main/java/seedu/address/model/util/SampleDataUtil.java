@@ -15,21 +15,21 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
 
-    private static String[] sampleItems = new String[] {"apples","bananas","coconuts","durians",
-            "elderberries","figs","grapes","honeydews","imbes","jackfruits","kiwis","lemons",
-            "mangoes","nectarines","oranges","pineapples","quinces","rambutans","strawberries",
-            "tangerines","ugnis","vanilla beans","watermelons","xango mangosteens","yangmeis",
-            "zuchinnis","almonds","bonbons","cupcakes","donuts","eclairs","froyos","gingerbreads",
-            "honeycombs","ice cream sandwiches","jellybeans","kitkats","lollipops","marshmellows",
-            "nougats","orange tarts","petit fours","red velvet cakes","swiss rolls","tiramisus",
-            "unsalted popcorns","waffles","xtremes","yule logs","zeppoles"};
+    private static String[] sampleItems = new String[] {"apples", "bananas", "coconuts", "durians",
+        "elderberries", "figs", "grapes", "honeydews", "imbes", "jackfruits", "kiwis", "lemons",
+        "mangoes", "nectarines", "oranges", "pineapples", "quinces", "rambutans", "strawberries",
+        "tangerines", "ugnis", "vanilla beans", "watermelons", "xango mangosteens", "yangmeis",
+        "zuchinnis", "almonds", "bonbons", "cupcakes", "donuts", "eclairs", "froyos", "gingerbreads",
+        "honeycombs", "ice cream sandwiches", "jellybeans", "kitkats", "lollipops", "marshmellows",
+        "nougats", "orange tarts", "petit fours", "red velvet cakes", "swiss rolls", "tiramisus",
+        "unsalted popcorns", "waffles", "xtremes", "yule logs", "zeppoles"};
 
-    private static String[] sampleVerbs = new String[] {"Buy ","Eat ","Taste ", "Get "};
+    private static String[] sampleVerbs = new String[] {"Buy ", "Eat ", "Taste ", "Get "};
 
-    private static String[] sampleDays = new String[] {"Monday","Tuesday","Wednesday","Thursday",
-            "Friday","Saturday","Sunday", "floating"};
+    private static String[] sampleDays = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday",
+        "Friday", "Saturday", "Sunday", "floating"};
 
-    private static String[] samplePriorities = new String[] {"1","2","3","4","5","-1"};
+    private static String[] samplePriorities = new String[] {"1", "2", "3", "4", "5", "-1"};
 
     public static Task[] getSampleTasks() {
         int numberOfTasks = 50;
