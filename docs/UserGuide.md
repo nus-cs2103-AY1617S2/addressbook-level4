@@ -448,7 +448,8 @@ Here are some questions that you might want to ask me:
 
 **Q**: How do I _transfer my data_ to another computer? <br>
 **A**: Install me in the other computer and _overwrite the empty data file_ I create with
-       the file that contains the data of your previous Task Manager folder.
+       the file that contains the data of your previous Task Manager folder. Alternatively,
+       you can type in **`load`** `<file_path>`, to load your data file.
 
 **Q**: How do I add an _event_? <br>
 **A**: Type in **`add`** `<task>; <start date and time>; <end date and time>` as mentioned

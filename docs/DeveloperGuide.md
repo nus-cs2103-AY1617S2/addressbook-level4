@@ -430,43 +430,42 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
-| Priority | As a ...                                    | I want to ...                                                                                                        | So that I can...                                                                      |
-|----------|---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| `* * *`  | user                                        | obtain a list of tasks due <br/> today / this week                                                                         | plan my time to complete these urgent tasks before they are due                       |
-| `* * *`  | user                                        | view tasks planned to be completed within a certain time range                                                       | easily decide on tasks I should work on during that period                            |
-| `* * *`  | user                                        | indicate a starting and ending time for my tasks                                                                     | keep track of events I need to attend                                                 |
-| `* * *`  | user                                        | display my tasks in a calendar view                                                                                  | obtain a general overview of the tasks I need to complete                             |
-| `* * *`  | user                                        | set tasks as [recurring](#recurring-tasks) at certain intervals                                                      | save time having to add the task repeatedly for different times                       |
-| `* * *`  | user                                        | add [subtasks](#subtask) to existing tasks                                                                           | keep track of and manage subtasks to be completed as part of bigger tasks             |
-| `* * *`  | user                                        | mark a task as completed and filter tasks that are not completed                                                     | keep tracks of tasks that I have to complete                                          |
-| `* * *`  | user                                        | view completed tasks                                                                                                 | avoid working on tasks that are already completed                                     |
-| `* * *`  | user                                        | set notifications to go off when certain tasks are nearing their deadline                                            | avoid missing those deadlines                                                         |
-| `* * *`  | user                                        | set notifications to go off when I have planned to work on certain tasks                                             | remind myself to work on those tasks that need to be completed                        |
-| `* * *`  | user                                        | undo previous commands                                                                                               | revert back to previous states in case of wrongly entered commands                    |
-| `* * *`  | user                                        | activate the application quickly using a keyboard shortcut                                                           | access my task manager conveniently and efficiently                                   |
-| `* * *`  | advanced user                               | [autocomplete](#autocomplete) my command by pressing a key (e.g. enter)                                              | type my commands faster                                                               |
-| `* * *`  | user                                        | specify a particular location I want to save the data file of my task manager                                        | [sync](#sync) my task list and access it from other devices                           |
-| `* * *`  | user                                        | search for names of particular tasks                                                                                 | update or view specific tasks efficiently                                             |
-| `* * *`  | user                                        | add new tasks                                                                                                        | track what i need to do                                                               |
-| `* * *`  | user                                        | delete tasks                                                                                                         | delete task that was inaccurately entered                                             |
-| `* *`    | advanced user                               | use shorter versions of commands                                                                                     | type my commands faster                                                               |
-| `* *`    | new user                                    | view additional usage information for particular commands                                                            | learn how to use specific commands effectively                                        |
-| `* *`    | user                                        | secure my task list                                                                                                  | prevent other people from viewing my task list                                        |
-| `* *`    | user                                        | [sync](#sync) my task list to Google or Microsoft                                                                    | view my tasks through their respective calendars                                      |
-| `* *`    | user                                        | retrieve previously typed commands using the UP and DOWN keys and execute them directly                              | save time having to retype similar commands repeatedly                                |
-| `* *`    | user                                        | postpone an existing task via a specific command                                                                     | save time having to specifically enter the new deadline                               |
-| `* *`    | user                                        | attach related documents and links to my tasks                                                                       | conveniently access documents needed for me to work on the tasks                      |
-| `* *`    | new user                                    | view command hints when typing commands                                                                              | ensure my commands are correct                                                        |
-| `* *`    | user                                        | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to multiple potential time slots |
-| `* *`    | user                                        | view the slots at which I have not planned for any task to be completed                                              | find a suitable slot for new tasks easily                                             |
-| `*`      | user sharing this computer with other users | switch between different accounts on this task manager                                                               | share this application with the other users of this computer                          |
-| `*`      | user                                        | backup my entire task list to the cloud or external storage via export                                               | have extra redundancy against system failures                                         |
-| `*`      | user                                        | create shared tasks across different users                                                                           | track the progress of other users for shared tasks                                    |
-| `*`      | user                                        | import previously exported data back                                                                                 | continue from where I left off                                                        |
-| `*`      | user                                        | receive a daily email at a preferred time that contains tasks due that day                                           | plan my schedule for that day effectively                                             |
 
-{More to be added}
+Priority | As a ... | I want to ... | So that I can...
+:----------- | :----------- | :--------- | :-----------
+`* * *` | user | obtain a list of tasks due today / this week | plan my time to complete these urgent tasks before they are due
+`* * *` | user | view tasks planned to be completed within a certain time range | easily decide on tasks I should work on during that period
+`* * *` | user | indicate a starting and ending time for my tasks | keep track of events I need to attend
+`* * *` | user | display my tasks in a calendar view | obtain a general overview of the tasks I need to complete
+`* * *` | user | set tasks as [recurring](#recurring-tasks) at certain intervals | save time having to add the task repeatedly for different times
+`* * *` | user | add [subtasks](#subtask) to existing tasks | keep track of and manage subtasks to be completed as part of bigger tasks
+`* * *` | user | mark a task as completed and filter tasks that are not completed | keep tracks of tasks that I have to complete
+`* * *` | user | view completed tasks | avoid working on tasks that are already completed
+`* * *` | user | set notifications to go off when certain tasks are nearing their deadline | avoid missing those deadlines
+`* * *` | user | set notifications to go off when I have planned to work on certain tasks | remind myself to work on those tasks that need to be completed
+`* * *` | user | undo previous commands | revert back to previous states in case of wrongly entered commands
+`* * *` | user  | activate the application quickly using a keyboard shortcut | access my task manager conveniently and efficiently
+`* * *` | advanced user | [autocomplete](#autocomplete) my command by pressing a key (e.g. enter) | type my commands faster
+`* * *` | user | specify a particular location I want to save the data file of my task manager | [sync](#sync) my task list and access it from other devices
+`* * *` | user | search for names of particular tasks | update or view specific tasks efficiently
+`* * *` | user | add new tasks | track what i need to do
+`* * *` | user | delete tasks | delete task that was inaccurately entered
+&nbsp;&nbsp;`* *` | advanced user | use shorter versions of commands | type my commands faster
+&nbsp;&nbsp;`* *` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
+&nbsp;&nbsp;`* *` | user | secure my task list | prevent other people from viewing my task list
+&nbsp;&nbsp;`* *` | user | [sync](#sync) my task list to Google or Microsoft | view my tasks through their respective calendars
+&nbsp;&nbsp;`* *` | user | retrieve previously typed commands using the UP and DOWN keys and execute them directly | save time having to retype similar commands repeatedly
+&nbsp;&nbsp;`* *` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
+&nbsp;&nbsp;`* *` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
+&nbsp;&nbsp;`* *` | new user | view command hints when typing commands | ensure my commands are correct
+&nbsp;&nbsp;`* *` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to multiple potential time slots
+&nbsp;&nbsp;`* *` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user sharing<br/> this computer<br/> with other users | switch between different accounts on this task manager | share this application with the other users of this computer
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | backup my entire task list to the cloud or external storage via export | have extra redundancy against system failures
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | create shared tasks across different users | track the progress of other users for shared tasks
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | import previously exported data back | continue from where I left off
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | receive a daily email at a preferred time that contains tasks due that day | plan my schedule for that day effectively
+
 
 ## Appendix B : Use Cases
 
