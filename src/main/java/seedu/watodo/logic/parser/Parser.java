@@ -29,6 +29,7 @@ import seedu.watodo.logic.commands.ListUndoneCommand;
 import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.MarkCommand;
 import seedu.watodo.logic.commands.SelectCommand;
+import seedu.watodo.logic.commands.ShortcutCommand;
 import seedu.watodo.logic.commands.UnmarkCommand;
 
 /**
@@ -57,9 +58,8 @@ public class Parser {
         String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
 
-        AlternativeCommand alt = new AlternativeCommand();
-        if (alt.containsAlternative(commandWord)) {
-            commandWord = alt.getStandardCommandWord(commandWord);
+        if (AlternativeCommand.containsAlternative(commandWord)) {
+            commandWord = AlternativeCommand.getStandardCommandWord(commandWord);
         }
 
         switch (commandWord) {
@@ -129,6 +129,9 @@ public class Parser {
 
         case UnmarkCommand.COMMAND_WORD:
             return new UnmarkCommandParser().parse(arguments);
+
+        case ShortcutCommand.COMMAND_WORD:
+            return new ShortcutCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
