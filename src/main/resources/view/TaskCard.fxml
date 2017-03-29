@@ -30,7 +30,6 @@
 					<padding>
 						<Insets bottom="5" left="15" right="5" top="5" />
 					</padding>
-
 					<children>
 						<HBox alignment="CENTER_LEFT" spacing="5">
 							<children>

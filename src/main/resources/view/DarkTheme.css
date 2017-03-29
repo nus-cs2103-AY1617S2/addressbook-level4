@@ -126,6 +126,11 @@
     -fx-text-fill: #010504;
 }
 
+.anchor_pane_white {
+	 -fx-background-color: white;
+}
+
+
 .anchor-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

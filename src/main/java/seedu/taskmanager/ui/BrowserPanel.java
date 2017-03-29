@@ -14,10 +14,13 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 public class BrowserPanel extends UiPart<Region> {
 
     private static final String FXML = "BrowserPanel.fxml";
-
+/*
     @FXML
     private WebView browser;
-
+*/
+    @FXML
+    private AnchorPane browser;
+    
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
@@ -30,18 +33,19 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadTaskPage(ReadOnlyTask task) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + task.getTaskName().fullTaskName.replaceAll(" ", "+"));
+        //loadPage("https://www.google.com.sg/#safe=off&q=" + task.getTaskName().fullTaskName.replaceAll(" ", "+"));
+        
     }
-
+/*
     public void loadPage(String url) {
         browser.getEngine().load(url);
     }
-
+*/
     /**
      * Frees resources allocated to the browser.
      */
-    public void freeResources() {
-        browser = null;
-    }
+//    public void freeResources() {
+//        browser = null;
+//    }
 
 }
