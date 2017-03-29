@@ -255,14 +255,14 @@ Here are some reasons why you might want to _list_ your tasks:
 * **You want to track the tasks that you have already completed** <br>
 
 * **You want to plan your time to get your remaining tasks done** <br>
-  
+
 * **You want to schedule some of your uncompleted [floating tasks](#add-a-floating-task)** <br>
 
   > Converting your floating tasks into [timed tasks](#add-a-timed-task) will allow me to keep track of
   them more effectively (e.g. by alerting you when they are overdue).
   > Fun fact: you can know the _no. of floating and timed tasks_ you have instantly through my
   [GUI](#graphical-user-interface-gui)!
-  
+
 	<img src="images/TaskCount.png" width="600"><br>
 	_Figure 3.5.2. Task Count_
 
