@@ -22,7 +22,7 @@ public class NotDoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) \n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_NOTDONE_TASK_SUCCESS = "Task Not Done: %1$s";
-    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Task notdone successfully.";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Task notdone successfully.";
 
     private final int filteredTaskListIndex;
 
@@ -51,7 +51,7 @@ public class NotDoneCommand extends Command {
             model.updateTask(filteredTaskListIndex, notDoneTask);
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
-                    MESSAGE_SUCCESS_SATAUS_BAR);
+                    MESSAGE_SUCCESS_STATUS_BAR);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(EditCommand.MESSAGE_DUPLICATE_PERSON);
         } catch (IllegalValueException e) {

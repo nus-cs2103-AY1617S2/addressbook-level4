@@ -56,10 +56,9 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
-            raise(new UpdateStatusBarEvent("Invalid command. Type \"Help\" to see format."));
+            raise(new UpdateStatusBarEvent(e.getMessage()));
         }
     }
-
 
     /**
      * Sets the command box style to indicate a successful command.

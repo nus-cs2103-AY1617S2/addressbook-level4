@@ -30,7 +30,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager.";
-    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Task edited successfully.";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Task edited successfully.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -75,8 +75,9 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
         }
         return new CommandResult(
-                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit),
-                MESSAGE_SUCCESS_SATAUS_BAR);
+          
+                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), MESSAGE_SUCCESS_STATUS_BAR);
+
     }
 
     // @@author A0093999Y
