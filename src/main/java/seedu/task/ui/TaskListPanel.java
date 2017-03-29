@@ -1,5 +1,6 @@
 package seedu.task.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -22,19 +23,25 @@ import seedu.task.model.task.ReadOnlyTask;
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
+    private TaskCard [] cardlist = new TaskCard [1000];
+    
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
+        //System.out.println("print");
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
+        //System.out.println("when pass");
+        //cardlist = new ArrayList<TaskCard>();
         taskListView.setCellFactory(listView -> new TaskListViewCell());
+        
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -58,6 +65,15 @@ public class TaskListPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
+            if(cardlist[index+1].expendStatus()) {
+                cardlist[index+1].setExpend(false);
+            } else {
+                cardlist[index+1].setExpend(true); 
+            }
+            
+            
+         
+            
         });
     }
 
@@ -81,7 +97,11 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                System.out.println("pass");
+                TaskCard taskcard = new TaskCard(task, getIndex() + 1);
+                setGraphic(taskcard.getRoot());
+              cardlist[getIndex()+1]=(taskcard);  
+               
             }
         }
     }

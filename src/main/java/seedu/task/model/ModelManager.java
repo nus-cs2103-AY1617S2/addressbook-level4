@@ -18,6 +18,7 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.model.task.Date;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -193,6 +194,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
+    
+    @Override
+    public void updateFilteredTaskList(Date date) {
+        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+        
+    }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -205,6 +212,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         String toString();
     }
+    
 
     private class PredicateExpression implements Expression {
 
@@ -231,6 +239,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    
     private class NameQualifier implements Qualifier {
         private boolean isExact = false;
         private Set<String> keyWords;
@@ -281,6 +290,28 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    private class DateQualifier implements Qualifier {
+        
+        private Date date;
+        
+        DateQualifier(Date date) {
+            this.date = date;
+        }
+        
+        @Override 
+        public boolean run(ReadOnlyTask task) {
+            System.out.println(date.toString());
+            System.out.println(task.getEndDate().toString());
+            System.out.println(task.getStartDate().toString());
+           if(task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date)) {
+               return true;
+           }
+           else {
+               return false;
+           }
+        }
+    }
+    
     private class DoneQualifier implements Qualifier {
 
         private boolean value;
@@ -308,5 +339,6 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(event.readOnlyTaskManager);
         logger.info("Resetting data from new load location.");
     }
+
 
 }
