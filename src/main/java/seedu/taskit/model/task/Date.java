@@ -2,11 +2,14 @@
 
 package seedu.taskit.model.task;
 
-import com.joestelmach.natty.*;
+import java.util.List;
+
+import org.apache.commons.lang.time.DateUtils;
+
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 import seedu.taskit.commons.exceptions.IllegalValueException;
-
-import java.util.List;
 
 /**
  * Represents a Task's start or end date and time in the task manager.
@@ -21,6 +24,7 @@ public class Date {
     public final java.util.Date date;
     public final String dateString;
     Parser parser = new Parser();
+    
 
     /**
      * Default constructor for Date
@@ -54,7 +58,7 @@ public class Date {
             this.date = null;
         }
     }
-
+    
     @Override
     public String toString() {
         if (date != null) {
@@ -94,7 +98,7 @@ public class Date {
                                                                    // check
     }
     
-    private boolean isBefore(Date other) {
+    public boolean isBefore(Date other) {
         if (!this.exists() || !other.exists()) {
             return false;
         }
@@ -110,6 +114,24 @@ public class Date {
         }
         return true;
     }
+    
+    //@@author A0141872E
+    public boolean isEndTimePassCurrentTime() {
+        java.util.Date currentDate = new java.util.Date();
+        if(date!= null && date.before(currentDate)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isDateEqualCurrentDate() {
+        java.util.Date currentDate = new java.util.Date();
+        if(date!= null && DateUtils.isSameDay(date, currentDate)) {
+            return true;
+        }
+        return false;
+    }
+    //@@author
 
     @Override
     public int hashCode() {

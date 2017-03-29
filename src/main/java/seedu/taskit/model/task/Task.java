@@ -18,6 +18,9 @@ public class Task implements ReadOnlyTask{
     protected Priority priority;
     
     protected UniqueTagList tags;
+    
+    private boolean isDone;
+    private boolean isOverdue;
 
     /**
      * Constructor for tasks
@@ -36,8 +39,10 @@ public class Task implements ReadOnlyTask{
         this.end = end;
         this.priority = priority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isDone = false;
+        this.isOverdue = checkOverdue();
     }
-    
+
     /**
      * Creates a copy of the given Task.
      */
@@ -47,6 +52,8 @@ public class Task implements ReadOnlyTask{
         this.end = source.getEnd();
         this.priority = source.getPriority();
         this.tags = new UniqueTagList(source.getTags());
+        this.isDone = source.isDone();
+        this.isOverdue = source.isOverdue();
     }
     
     public void setTitle(Title title) {
@@ -162,4 +169,31 @@ public class Task implements ReadOnlyTask{
         return builder.toString();
 
     }
+    
+    //@@author A0141872E
+    @Override
+    public Boolean isDone() {
+        return isDone;
+    }
+    
+    public void setDone(Boolean status) {
+        this.isDone = status;
+    }
+    
+    public void setOverdue() {
+        this.isOverdue=checkOverdue();
+    }
+
+    @Override
+    public Boolean isOverdue() {
+        return isOverdue;
+    }
+    
+    private boolean checkOverdue() {
+        if (this.end.isEndTimePassCurrentTime()) {
+            return true;
+        } else {
+            return false;
+        }
+    }//@@author
 }
