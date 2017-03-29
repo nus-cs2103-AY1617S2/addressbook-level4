@@ -54,8 +54,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Coordinate inter-component APIs
 * Make architecture decisions<br>
 * Features implemented:
-   * [Find tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
-   * [Schedule tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#deleting-a-person--delete)
+   * [Find tasks]
+   * [Schedule tasks]
 * Code written: [[functional code](A0126345J.md)][[test code](A0126345J.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
