@@ -200,7 +200,7 @@ The sections below give more details for each component.
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/tache/ui/Ui.java)
 
 The [User Interface](#user-interface-ui) (UI) consists of a `MainWindow` that is made up of several parts.
 (e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`) <br>
@@ -225,7 +225,7 @@ Functions of `UI`:
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 3.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/tache/logic/Logic.java)
 
 Function of `Logic`:
 
@@ -247,7 +247,7 @@ _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Comma
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 3.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/tache/model/Model.java)
 
 Functions of `Model`:
 
@@ -267,7 +267,7 @@ updates when this list is modified. <br>
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 3.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/tache/storage/Storage.java)
 
 Functions of `Storage`:
 
@@ -662,8 +662,7 @@ functionality.
 #### 9. Should conform to the Java coding standard
 #### 10. Should process and respond to user commands within 1s
 #### 11. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 1.8.0_60 or higher installed
-#### 12. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-should be able to accomplish most of the tasks faster by typing commands as compared to using the mouse.
+#### 12. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster by typing commands as compared to using the mouse.
 
 
 ## Appendix D : Glossary
