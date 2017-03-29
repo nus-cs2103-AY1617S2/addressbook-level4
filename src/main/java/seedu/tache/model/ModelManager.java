@@ -104,6 +104,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
+    //@@author A0150120H
+    @Override
+    public synchronized void addTask(int index, Task task) throws DuplicateTaskException {
+        taskManager.addTask(index, task);
+        indicateTaskManagerChanged();
+    }
+    //@@author
+
     @Override
     public void updateTask(ReadOnlyTask taskToUpdate, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {

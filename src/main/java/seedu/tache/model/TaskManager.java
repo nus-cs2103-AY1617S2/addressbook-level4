@@ -87,6 +87,20 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.add(p);
     }
 
+    //@@author A0150120H
+    /**
+     * Adds a task to the task manager at the specified index.
+     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
+     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     *
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
+     */
+    public void addTask(int index, Task p) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(p);
+        tasks.add(index, p);
+    }
+    //@@author
+
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
      * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
