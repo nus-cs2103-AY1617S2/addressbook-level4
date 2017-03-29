@@ -3,7 +3,9 @@ package seedu.tache.logic.parser;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -36,6 +38,13 @@ public class ParserUtil {
     public static final int TYPE_TASK = 0;
     public static final int TYPE_DETAILED_TASK = 1;
     //@@author
+
+    //@@author A0150120H
+    static enum DateTimeType { START, END, UNKNOWN };
+    public static final String[] START_DATE_IDENTIFIER = {"from"};
+    public static final String[] END_DATE_IDENTIFIER = {"to", "on", "by", "before"};
+    //@@author
+
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -181,6 +190,65 @@ public class ParserUtil {
             }
         }
         throw new IllegalValueException("Invalid Input");
+    }
+
+    public static boolean isStartDateIdentifier(String s) {
+        for (String identifier: START_DATE_IDENTIFIER) {
+            if (s.equalsIgnoreCase(identifier)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isEndDateIdentifier(String s) {
+        for (String identifier: END_DATE_IDENTIFIER) {
+            if (s.equalsIgnoreCase(identifier)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Deque<PossibleDateTime> findDateTime(String input) {
+        String[] inputs = input.split(" ");
+        Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
+        PossibleDateTime current = new PossibleDateTime(PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+        for (int i = 0; i < inputs.length; i++) {
+            String word = inputs[i];
+            if (isStartDateIdentifier(word)) {
+                result.push(current);
+                current = new PossibleDateTime(i, DateTimeType.START);
+            } else if (isEndDateIdentifier(word)) {
+                result.push(current);
+                current = new PossibleDateTime(i, DateTimeType.END);
+            } else {
+                current.appendDateTime(i, word);
+            }
+        }
+        result.push(current);
+        return result;
+    }
+
+    static class PossibleDateTime {
+        int startIndex;
+        int endIndex;
+        String data;
+        DateTimeType type;
+
+        static final int INVALID_INDEX = -1;
+
+        PossibleDateTime(int index, DateTimeType type) {
+            this.startIndex = index;
+            this.endIndex = index;
+            this.type = type;
+            this.data = new String();
+        }
+
+        void appendDateTime(int index, String data) {
+            this.data += " " + data;
+            this.endIndex = index;
+        }
     }
 
 }
