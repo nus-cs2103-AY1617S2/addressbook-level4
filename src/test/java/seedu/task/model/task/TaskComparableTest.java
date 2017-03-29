@@ -1,3 +1,4 @@
+//@@author A0163559U
 package seedu.task.model.task;
 
 import static org.junit.Assert.assertEquals;
@@ -11,12 +12,13 @@ import org.junit.Test;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
-//@@author A0163559U
+
 public class TaskComparableTest {
 
     String description = "task description ";
     String priority = "2";
     String timing = "03/03/2017";
+
     String tag1 = "friendship";
     String tag2 = "love";
 
@@ -120,13 +122,15 @@ public class TaskComparableTest {
 
     @Test
     public void sortTasksByCompleteness() throws DuplicateTagException, IllegalValueException {
+        Timing time = new Timing(timing);
+        UniqueTagList utl = new UniqueTagList(tag2, tag2);
 
         Task t1 = new Task(new Description(description + "a"), new Priority(priority),
-                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2), false, null);
+                time, time, utl, false, null);
         Task t2 = new Task(new Description(description + "b"), new Priority(priority),
-                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2), false, null);
+                time, time, utl, false, null);
         Task t3 = new Task(new Description(description + "c"), new Priority(priority),
-                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2), false, null);
+                time, time, utl, false, null);
 
         //add two near identical tasks
         ArrayList<Task> al = new ArrayList<Task>(Arrays.asList(t1, t2));
@@ -148,16 +152,74 @@ public class TaskComparableTest {
         sort_and_assertEquals(al, new ArrayList<Task>(Arrays.asList(t1, t2, t3)));
     }
 
+    @Test
+    public void sortTasksByCompletenessAndPriority() throws DuplicateTagException, IllegalValueException {
+        Timing time = new Timing(null);
+        UniqueTagList utl = new UniqueTagList(tag1, tag2);
+
+        Task t1 = new Task(new Description(description + "a t1"), new Priority("1"),
+                time, time, utl, false, null);
+        Task t2 = new Task(new Description(description + "b t2"), new Priority("1"),
+                time, time, utl, false, null);
+        Task t3 = new Task(new Description(description + "c t3"), new Priority("1"),
+                time, time, utl, false, null);
+        Task t4 = new Task(new Description(description + "a t4"), new Priority("2"),
+                time, time, utl, false, null);
+        Task t5 = new Task(new Description(description + "b t5"), new Priority("2"),
+                time, time, utl, false, null);
+        Task t6 = new Task(new Description(description + "c t6"), new Priority("2"),
+                time, time, utl, false, null);
+        Task t7 = new Task(new Description(description + "a t7"), new Priority("3"),
+                time, time, utl, false, null);
+        Task t8 = new Task(new Description(description + "b t8"), new Priority("3"),
+                time, time, utl, false, null);
+        Task t9 = new Task(new Description(description + "c t9"), new Priority("3"),
+                time, time, utl, false, null);
+
+        //expect tasks to sort by priority, then by description
+        ArrayList<Task> actual = new ArrayList<Task>(Arrays.asList(t9, t8, t7, t6, t5, t4, t3, t2, t1));
+        ArrayList<Task> expected = new ArrayList<Task>(Arrays.asList(t1, t2, t3, t4, t5, t6, t7, t8, t9));
+        sort_and_assertEquals(actual, expected);
+
+        t1.setComplete();
+        t4.setComplete();
+        t7.setComplete();
+
+        //expect tasks to sort by complete, then priority, then description
+        expected = new ArrayList<Task>(Arrays.asList(t2, t3, t5, t6, t8, t9, t1, t4, t7));
+        sort_and_assertEquals(actual, expected);
+        Task t2_et = new Task(new Description(description + "b t2et"), new Priority("1"),
+                time, new Timing("01/01/2017"), utl, false, null);
+        Task t5_et = new Task(new Description(description + "b t5et"), new Priority("2"),
+                time, new Timing("01/02/2017"), utl, false, null);
+        Task t8_et = new Task(new Description(description + "b t8et"), new Priority("3"),
+                time, new Timing("01/03/2017"), utl, false, null);
+
+        actual.add(t2_et);
+        actual.add(t5_et);
+        actual.add(t8_et);
+
+        //expect tasks to sort by complete, then end timing, priority, description
+        expected = new ArrayList<Task>(Arrays.asList(t2_et, t2, t3, t5_et, t5, t6, t8_et,
+                t8, t9, t1, t4, t7));
+        sort_and_assertEquals(actual, expected);
+
+    }
+
     private void sort_and_assertEquals(ArrayList<Task> actual, ArrayList<Task> expected) {
         Collections.sort(actual);
+        printDescriptions(actual);
         assertEquals(actual, expected);
     }
 
-    @SuppressWarnings("unused")
     private void printDescriptions(ArrayList<Task> al) {
         System.out.println("Starting print...");
         for (Task t : al) {
-            System.out.println(t.getDescription());
+            System.out.print(t.getPriority() + " " + t.getDescription() +
+                    " " + t.getEndTiming());
+            if (t.isComplete())
+                System.out.print(" complete");
+            System.out.println();
         }
         System.out.println("Ending print.");
 
