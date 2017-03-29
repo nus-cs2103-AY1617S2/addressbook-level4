@@ -3,6 +3,7 @@ package seedu.onetwodo.commons.util;
 import java.io.IOException;
 import java.util.Optional;
 
+import seedu.onetwodo.TestApp;
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
 
@@ -14,9 +15,11 @@ public class ConfigUtil {
     public static Optional<Config> readConfig(String configFilePath) throws DataConversionException {
         return JsonUtil.readJsonFile(configFilePath, Config.class);
     }
-
+//@@author A0139343E
     public static void saveConfig(Config config, String configFilePath) throws IOException {
-        JsonUtil.saveJsonFile(config, configFilePath);
+        if (!config.getAppTitle().equals(TestApp.APP_TITLE)) {
+            JsonUtil.saveJsonFile(config, configFilePath);
+        }
     }
 
 }

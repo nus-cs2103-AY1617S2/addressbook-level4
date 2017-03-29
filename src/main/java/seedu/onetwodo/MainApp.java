@@ -42,9 +42,9 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
-    protected  Storage storage;
-    protected  Model model;
-    protected  Config config;
+    protected Storage storage;
+    protected Model model;
+    protected Config config;
     protected UserPrefs userPrefs;
 
     public static MainApp getInstance() {
@@ -60,6 +60,7 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing ToDoList ]===========================");
         super.init();
 
+        
         instance.config = initConfig(getApplicationParameter("config"));
         instance.storage = new StorageManager(instance.config.getToDoListFilePath(),
                 instance.config.getUserPrefsFilePath());
@@ -82,16 +83,16 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    public  Config getConfig() {
-        return config;
+    public Config getConfig() {
+        return MainApp.getInstance().config;
     }
 
-    public  Storage getStorage() {
-        return storage;
+    public Storage getStorage() {
+        return MainApp.getInstance().storage;
     }
 
-    public  Model getModel() {
-        return model;
+    public Model getModel() {
+        return MainApp.getInstance().model;
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {

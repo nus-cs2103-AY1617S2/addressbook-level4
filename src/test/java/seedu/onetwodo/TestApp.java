@@ -67,6 +67,7 @@ public class TestApp extends MainApp {
     }
 
     public static void main(String[] args) {
+        MainApp.getInstance();
         launch(args);
     }
 }
