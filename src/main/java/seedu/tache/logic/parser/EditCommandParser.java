@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.Command;
@@ -43,12 +45,37 @@ public class EditCommandParser {
     public static final String MESSAGE_INVALID_PARAMETER = "Invalid parameter given. Valid parameters" +
                                                    " include name, start_date, start_time, end_date, end_time and tags";
 
+    private static final Pattern NATURAL_LANGUAGE_ARGS_FORMAT =
+                Pattern.compile("^(?<index>\\d+)\\s"
+                        + "change\\s(?<updateParameter>\\D+)\\sto\\s(?<updateValue>.+)");
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
     public Command parse(String args) {
         assert args != null;
+        if (args.contains(PARAMETER_DELIMITER)) {
+            return processStructuredArguments(args);
+        } else {
+            return processNaturalLanguageArguments(args);
+        }
+    }
+
+    private Command processNaturalLanguageArguments(String args) {
+        final Matcher matcher = NATURAL_LANGUAGE_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                            EditCommand.NATURAL_MESSAGE_USAGE));
+        }
+
+        String index = matcher.group("updateParameter");
+        String index2 = matcher.group("updateParameter2");
+        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.NATURAL_MESSAGE_USAGE));
+    }
+
+    private Command processStructuredArguments(String args) {
         String[] preambleFields = args.split(PARAMETER_DELIMITER);
         Optional<Integer> index = ParserUtil.parseIndex(preambleFields[0]);
 
@@ -101,7 +128,6 @@ public class EditCommandParser {
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
-
         }
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
