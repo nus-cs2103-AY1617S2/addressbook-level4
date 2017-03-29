@@ -99,7 +99,7 @@ public class ToDoList implements ReadOnlyToDoList {
      * Updates the task in the list at position {@code index} with
      * {@code editedReadOnlyTask}. {@code ToDoList}'s tag list will be updated
      * with the tags of {@code editedReadOnlyTask}.
-     * 
+     *
      * @see #syncMasterTagListWith(Task)
      *
      * @throws DuplicateTaskException
@@ -144,7 +144,7 @@ public class ToDoList implements ReadOnlyToDoList {
     /**
      * Ensures that every tag in these tasks: - exists in the master list
      * {@link #tags} - points to a Tag object in the master list
-     * 
+     *
      * @see #syncMasterTagListWith(Task)
      */
     private void syncMasterTagListWith(UniqueTaskList tasks) {

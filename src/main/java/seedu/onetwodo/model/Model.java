@@ -36,14 +36,14 @@ public interface Model {
 
     /**
      * Mark the given tasks completed.
-     * 
+     *
      * @throws IllegalValueException
      */
     void doneTask(ReadOnlyTask taskToComplete) throws IllegalValueException;
 
     /**
      * Mark the given tasks for today.
-     * 
+     *
      * @throws IllegalValueException
      */
     void todayTask(ReadOnlyTask taskForToday) throws IllegalValueException;
