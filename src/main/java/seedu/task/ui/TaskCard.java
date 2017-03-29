@@ -10,6 +10,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import seedu.task.MainApp;
 import seedu.task.model.task.ReadOnlyTask;
 
@@ -19,8 +21,8 @@ public class TaskCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
-    @FXML
-    private Label name;
+    //@FXML
+    //private Label name;
     @FXML
     private Label id;
     @FXML
@@ -37,25 +39,29 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private TitledPane plane;
+    
+   private boolean status;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        plane.setText(displayedIndex + ". " + "\n" + task.getName().fullName);
+        plane.setText(displayedIndex + ". " + task.getName().fullName);
+        plane.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         //plane.setCollapsible(true);
       //prohibit animating
      // plane.setAnimated(false);
         plane.setExpanded(false);
-        name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
+        this.status = false;
+        //name.setText(task.getName().fullName);
+        //id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().toString());
         endDate.setText(task.getEndDate().toString());
         loc.setText(task.getLocation().value);
         if (task.isDone()) {
             //done.setText("Done");
-            name.setTextFill(Color.GREEN);
+            plane.setTextFill(Color.GREEN);
             Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
-            name.setGraphic(new ImageView(image));
-            name.setContentDisplay(ContentDisplay.RIGHT);
+            plane.setGraphic(new ImageView(image));
+            plane.setContentDisplay(ContentDisplay.RIGHT);
             //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         } else {
             //done.setText("Not Done");
@@ -74,6 +80,10 @@ public class TaskCard extends UiPart<Region> {
     }
     
     public  void setExpend(boolean value ){
+        this.status=value;
         plane.setExpanded(value);
+    }
+    public boolean expendStatus(){
+        return this.status;
     }
 }

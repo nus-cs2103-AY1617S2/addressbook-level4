@@ -65,7 +65,12 @@ public class TaskListPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
-            cardlist[index+1].setExpend(true);
+            if(cardlist[index+1].expendStatus()) {
+                cardlist[index+1].setExpend(false);
+            } else {
+                cardlist[index+1].setExpend(true); 
+            }
+            
             
          
             
