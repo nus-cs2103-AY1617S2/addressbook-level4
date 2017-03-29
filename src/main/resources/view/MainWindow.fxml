@@ -9,15 +9,15 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox minHeight="700.0" minWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="500.0" minWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@DarkTheme.css" />
       <URL value="@Extensions.css" />
    </stylesheets>
    <children>
-      <SplitPane id="splitPane" fx:id="splitPane1" dividerPositions="0.5" layoutX="10.0" layoutY="155.0" minHeight="350.0" minWidth="700.0" styleClass="split-pane-divider">
+      <SplitPane id="splitPane" fx:id="splitPane1" dividerPositions="0.5" layoutX="10.0" layoutY="155.0" minHeight="250.0" minWidth="500.0" styleClass="split-pane-divider">
          <items>
-            <VBox fx:id="nonFloatingTaskList" minHeight="350.0" minWidth="350.0" style="-fx-background-color: #ff6666;">
+            <VBox fx:id="nonFloatingTaskList" minHeight="250.0" minWidth="250.0" style="-fx-background-color: #ff6666;">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
@@ -31,10 +31,10 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <AnchorPane fx:id="nonFloatingTaskListPanelPlaceholder" minWidth="350.0" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="nonFloatingTaskListPanelPlaceholder" minWidth="250.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <VBox fx:id="completedTaskList" minHeight="350.0" minWidth="350.0" style="-fx-background-color: #ffcc66;">
+            <VBox fx:id="completedTaskList" minHeight="250.0" minWidth="250.0" style="-fx-background-color: #ffcc66;">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
@@ -48,14 +48,14 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <AnchorPane fx:id="completedTaskListPanelPlaceholder" minWidth="350.0" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="completedTaskListPanelPlaceholder" minWidth="250.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </items>
       </SplitPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" minHeight="350.0" minWidth="700.0" VBox.vgrow="ALWAYS">
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" minHeight="250.0" minWidth="500.0" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="floatingTaskList" minHeight="350.0" minWidth="350.0" style="-fx-background-color: #33cc66;">
+            <VBox fx:id="floatingTaskList" minHeight="250.0" minWidth="250.0" style="-fx-background-color: #33cc66;">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
@@ -69,10 +69,10 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <AnchorPane fx:id="floatingTaskListPanelPlaceholder" minWidth="350.0" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="floatingTaskListPanelPlaceholder" minWidth="250.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <VBox minHeight="350.0" minWidth="350.0" style="-fx-background-color: #6699cc;">
+            <VBox minHeight="250.0" minWidth="250.0" style="-fx-background-color: #6699cc;">
                <children>
                   <TextFlow maxWidth="110.0" minHeight="40.0" style="-fx-background-color: #333333;">
                      <children>
@@ -86,12 +86,12 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </TextFlow>
-                   <AnchorPane fx:id="resultDisplayPlaceholder" minHeight="260.0" minWidth="350.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                   <AnchorPane fx:id="resultDisplayPlaceholder" minHeight="160.0" minWidth="250.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                      <padding>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                    </AnchorPane>
-                  <AnchorPane fx:id="commandBoxPlaceholder" minHeight="50.0" minWidth="350.0" VBox.vgrow="NEVER">
+                  <AnchorPane fx:id="commandBoxPlaceholder" minHeight="50.0" minWidth="250.0" VBox.vgrow="NEVER">
                      <padding>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </padding>
