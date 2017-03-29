@@ -42,6 +42,7 @@ public class TaskBuilder {
 
     public TaskBuilder withOccurrences(ArrayList<RecurringTaskOccurrence> occurrences) throws IllegalValueException {
         this.task.setOccurrences(occurrences);
+        this.task.getOccurrences().add(new RecurringTaskOccurrence());
         return this;
     }
 
