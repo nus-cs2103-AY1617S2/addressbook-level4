@@ -8,8 +8,8 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/lwwenz.png" width="150"><br>
  * Role: Developer <br>
  * Responsibilities: Team Leader, Deliverables and deadlines, Integration <br>
- * Component: Storage
- * Features implemented:  
+ * Component: Storage <br>
+ * Features implemented: <br>
          * [Saving the Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
          * [Changing the Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br> 
          * [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer <br>
 * Responsibilities: Documentation and Scheduling and tracking <br>
 * Component: Model
-* Features implemented:
+* Features implemented:<br>
          * [Mark Task as Completed](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
          * [List Completed Tasks ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
 * Code written: [[functional code](../collated/main/A0144902L.md)][[test code](../collated/test/A0144902L.md)]  <br>
@@ -37,7 +37,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer <br>
 * Responsibilities: Code quality, Testing and Integration <br>
 * Component: Logic <br>
-* Features implemented:  
+* Features implemented: <br> 
         * [Add 3 Type of Task : floating, deadline, event](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
         * [Edit name, deadline for 3 Type of Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
         * [Remove Deadline](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
@@ -56,7 +56,7 @@ We are a team based in the [School of Computing, National University of Singapor
 Role: Developer <br>
 Responsibilities: Documentation and Code quality <br>
 Component: Ui
-* Features implemented:
+* Features implemented:<br>
         * [Differentiating your Tasks’ Urgency](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
 * Code written: [[functional code](../collated/main/A0139154E.md)][[test code](../collated/test/A0139154E.md)]  <br>
 * Other major contributions: <br>
