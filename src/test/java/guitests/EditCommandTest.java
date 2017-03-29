@@ -55,11 +55,13 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecifiedWithTagsOnly_success() throws Exception {
-        String detailsToEdit = "t/lose t/fail";
+        // TODO notice how tags have to be in alphabetical order because of the way tags are added
+        // and compared. See TestUtil::compareCardAndPerson using list compare instead of set compare
+        String detailsToEdit = "t/fail t/lose";
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("lose", "fail").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("fail", "lose").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
