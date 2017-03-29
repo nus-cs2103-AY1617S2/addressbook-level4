@@ -45,7 +45,7 @@
                         <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
                      </children>
                 </VBox>
-                <ImageView fx:id="tickLogo" disable="false" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true"/>
+                <ImageView fx:id="tickLogo" disable="false" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true"/>
             </children>
         </GridPane>
     </children>
