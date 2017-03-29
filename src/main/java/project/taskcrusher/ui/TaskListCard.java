@@ -60,7 +60,7 @@ public class TaskListCard extends UiPart<Region> {
     private void showDeadline(ReadOnlyTask task) {
         if (task.getDeadline().hasDeadline()) {
             deadline.setText(MESSAGE_DEADLINE_BY +
-                    DateUtilApache.dateAsStringForUi(task.getDeadline().getDate().get()));
+                    DateUtilApache.deadlineAsStringForUi(task.getDeadline().getDate().get()));
         } else {
             deadline.setText(MESSAGE_NO_DEADLINE);
         }
