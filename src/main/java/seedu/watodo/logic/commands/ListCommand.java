@@ -2,6 +2,7 @@ package seedu.watodo.logic.commands;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 
+//@@author A0139872R-reused
 /**
  * Lists all overdue tasks and upcoming tasks due the next day in the task manager to the user.
  */
@@ -10,6 +11,10 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all overdue tasks and tasks due tomorrow";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists tasks that fit the specified keyword as a filter to the user. "
+            + "Parameters: KEYWORD\n" + "Example: " + COMMAND_WORD + " all";
 
     public static final int DEADLINE = 1;
 

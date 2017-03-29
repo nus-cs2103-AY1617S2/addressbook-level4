@@ -1,6 +1,6 @@
 package seedu.watodo.logic.commands;
 
-
+//@@author A0139872R-reused
 /**
  * Lists all tasks that are marked as completed in the task manager to the user.
  */

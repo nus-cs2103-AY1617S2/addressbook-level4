@@ -186,6 +186,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0139872R-reused
     private class TagQualifier implements Qualifier {
         private Set<String> tagKeyWords;
         private String tags;
@@ -216,6 +217,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0139872R
     private class DateQualifier implements Qualifier {
         private int days;
         private Calendar temp;
