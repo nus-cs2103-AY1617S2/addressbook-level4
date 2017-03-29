@@ -1,5 +1,5 @@
 package seedu.doit.ui;
-
+//@@author: A0160076L
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -50,14 +50,14 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
-        String lastUpdated = (new Date()).toString();
+        String lastUpdated = new Date().toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
 
     @Subscribe
     public void handleTaskManagerSaveChangedEvent(TaskManagerSaveChangedEvent event) {
-        String lastUpdated = (new Date()).toString();
+        String lastUpdated = new Date().toString();
         String filePath = event.getFilePath();
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting last updated status to " + lastUpdated));
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting save location to " + filePath));
@@ -67,7 +67,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     public void handleTaskManagerLoadChangedEvent(TaskManagerLoadChangedEvent event) {
-        String lastUpdated = (new Date()).toString();
+        String lastUpdated = new Date().toString();
         String filePath = event.getFilePath();
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting last updated status to " + lastUpdated));
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting save location to " + filePath));

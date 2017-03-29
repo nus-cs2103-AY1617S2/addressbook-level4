@@ -1,5 +1,5 @@
 package seedu.doit.ui;
-
+//@@author: A0160076L
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -32,17 +32,17 @@ public class ResultDisplay extends UiPart<Region> {
 
     public ResultDisplay(AnchorPane placeHolder) {
         super(FXML);
-        resultDisplay.textProperty().bind(displayed);
-        FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
-        FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
-        placeHolder.getChildren().add(mainPane);
+        this.resultDisplay.textProperty().bind(this.displayed);
+        FxViewUtil.applyAnchorBoundaryParameters(this.resultDisplay, 0.0, 0.0, 0.0, 0.0);
+        FxViewUtil.applyAnchorBoundaryParameters(this.mainPane, 0.0, 0.0, 0.0, 0.0);
+        placeHolder.getChildren().add(this.mainPane);
         registerAsAnEventHandler(this);
     }
 
     @Subscribe
     private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        displayed.setValue(event.message);
+        this.displayed.setValue(event.message);
     }
 
 }
