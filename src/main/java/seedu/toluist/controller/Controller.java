@@ -46,4 +46,20 @@ public abstract class Controller {
     public static String[] getCommandWords() {
         return new String[] {};
     }
+
+    //@@author A0162011A
+    /**
+     * Returns basic help command(s) used by help controller
+     * Format is String[CommandWords, Details, Format]
+     */
+    public static String[] getBasicHelp() {
+        return new String[] {};
+    }
+
+    /**
+     * Returns detailed help command(s) used by help controller
+     */
+    public static String[] getDetailedHelp() {
+        return new String[] {};
+    }
 }

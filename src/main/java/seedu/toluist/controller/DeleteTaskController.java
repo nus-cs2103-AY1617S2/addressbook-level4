@@ -25,6 +25,9 @@ public class DeleteTaskController extends Controller {
     private static final String RESULT_MESSAGE_DELETE_TASK = "Deleted %s: %s";
     private static final String RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED = "No valid index found.";
 
+    private static final String HELP_DETAILS = "Deletes the specified task from the todo list.";
+    private static final String HELP_FORMAT = "delete INDEX(ES)";
+
     private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
     public void execute(String command) {
@@ -80,5 +83,14 @@ public class DeleteTaskController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_DELETE_TASK };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

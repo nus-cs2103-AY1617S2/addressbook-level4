@@ -18,8 +18,8 @@ public class HistoryController extends Controller {
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "(?iu)^\\s*history\\s*";
 
-    private static final String HELP_BASIC = "history";
-    private static final String HELP_ADVANCED = "history";
+    private static final String HELP_DETAILS = "Shows previous commands entered.";
+    private static final String HELP_FORMAT = "history";
 
     private ArrayList<String> commandHistory;
 
@@ -46,5 +46,13 @@ public class HistoryController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

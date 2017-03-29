@@ -37,6 +37,9 @@ public class AddTaskController extends Controller {
     private static final String RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE =
             "An event must have both a start date (from/) and an end date (to/).";
 
+    private static final String HELP_DETAILS = "Adds a task to the todo list.";
+    private static final String HELP_FORMAT = "add NAME [from/STARTDATE to/ENDDATE] [by/ENDDATE] [repeat/PERIOD(daily/weekly/monthly)] [priority/PRIORITY(hgih/low)] [tags/TAGS]";
+
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
@@ -149,5 +152,14 @@ public class AddTaskController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_ADD_TASK };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

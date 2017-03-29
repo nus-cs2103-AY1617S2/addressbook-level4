@@ -41,6 +41,9 @@ public class FindController extends Controller {
     private static final String MESSAGE_NAME_AND_TAG = "name and tag";
     private static final String MESSAGE_STRING_JOINING = "\", \"";
 
+    private static final String HELP_DETAILS = "Finds tasks whose names contain any of the given keywords.";
+    private static final String HELP_FORMAT = "filter/list/find [KEYWORDS] [tag/] [name/]";
+
     private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
     public void execute(String command) {
@@ -130,5 +133,13 @@ public class FindController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD_FILTER, COMMAND_WORD_FIND, COMMAND_WORD_LIST };
+    }
+
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

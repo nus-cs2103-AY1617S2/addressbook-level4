@@ -22,6 +22,10 @@ public class AliasController extends Controller {
     public static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
     private static final String COMMAND_TEMPLATE = "(?iu)\\s*alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
 
+
+    private static final String HELP_DETAILS = "Adds an alias for a phrase. The alias can be used to represent that phrase in the command box.";
+    private static final String HELP_FORMAT = "alias ALIAS PHRASE";
+
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public void execute(String command) {
@@ -60,5 +64,14 @@ public class AliasController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

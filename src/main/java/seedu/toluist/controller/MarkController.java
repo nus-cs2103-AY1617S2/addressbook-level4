@@ -36,6 +36,9 @@ public class MarkController extends Controller {
     private static final String PARAMETER_MARK_INCOMPLETE = "incomplete";
     private static final Logger logger = LogsCenter.getLogger(MarkController.class);
 
+    private static final String HELP_DETAILS = "Marks a task to be complete or incomplete.";
+    private static final String HELP_FORMAT = "mark [complete/incomplete] INDEX(ES)";
+
     public void execute(String command) {
         logger.info(getClass().toString() + " will handle command");
 
@@ -98,5 +101,14 @@ public class MarkController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

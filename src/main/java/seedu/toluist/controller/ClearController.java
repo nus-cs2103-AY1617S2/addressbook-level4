@@ -18,6 +18,9 @@ public class ClearController extends Controller {
     private static final String COMMAND_WORD = "clear";
     private static final String COMMAND_REGEX = "(?iu)^\\s*clear\\s*";
 
+    private static final String HELP_DETAILS = "Clears all entries from the todo list.";
+    private static final String HELP_FORMAT = "clear";
+
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
@@ -39,5 +42,13 @@ public class ClearController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

@@ -14,6 +14,9 @@ public class ExitController extends Controller {
     public static final String COMMAND_WORD_QUIT = "quit";
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*(exit|quit)\\s*";
 
+    private static final String HELP_DETAILS = "Exits the program.";
+    private static final String HELP_FORMAT = "exit/quit";
+
     public void execute(String command) {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
     }
@@ -28,5 +31,14 @@ public class ExitController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD_EXIT, COMMAND_WORD_QUIT };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

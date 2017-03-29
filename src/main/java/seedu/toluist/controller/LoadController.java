@@ -23,6 +23,9 @@ public class LoadController extends Controller {
     public static final String COMMAND_WORD = "load";
     public static final String PARAMETER_STORE_DIRECTORY = "directory";
 
+    private static final String HELP_DETAILS = "Changes the location for the storage file used in this system.";
+    private static final String HELP_FORMAT = "load NEWFILELOCATION";
+
     public void execute(String command) {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
@@ -68,5 +71,14 @@ public class LoadController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }
