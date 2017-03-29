@@ -2,15 +2,17 @@ package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+import java.util.List;
+
+import com.wanasit.chrono.Chrono;
+
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Date {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Person date's format should be mm.dd";
-    //set date to mm.dd(e.g.01.01)
-    public static final String DATE_VALIDATION_REGEX = "\\d\\d\\.\\d\\d";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Person date's format should resemble a date";
 
     public final String value;
 
@@ -22,19 +24,18 @@ public class Date {
     public Date(String date) throws IllegalValueException {
         assert date != null;
         String trimmedDate = date.trim();
-        if (!isValidDate(trimmedDate)) {
+        
+        this.value = parse(trimmedDate);
+    }
+
+    private String parse(String rawDate) throws IllegalValueException {
+        try {
+            return Chrono.ParseDate(rawDate).toString();
+        } catch (Exception e) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = trimmedDate;
     }
-
-    /**
-     * Returns true if a given string is a valid person phone number.
-     */
-    public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
-    }
-
+    
     @Override
     public String toString() {
         return value;
