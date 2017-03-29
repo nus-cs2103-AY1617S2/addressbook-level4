@@ -46,9 +46,9 @@ public class EditCommand extends Command {
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
 
     //@@author A0144904H
-    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot edit current catgeories to Done category";
+    public static final String ERROR_CANNOT_EDIT_DONE_CATEGORY = "Cannot edit current categories to Done category";
     public static final String ERROR_CANNOT_EDIT_DONE_TASK = "Cannot edit Done tasks";
-    public static final String ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY = "Cannot edit current catgeories"
+    public static final String ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY = "Cannot edit current categories"
             + " to AllTasks category";
 
     //@@author
