@@ -71,8 +71,6 @@ public class MarkCommand extends Command {
             saveCurrentState();
             model.updateTask(filteredTaskListIndex, editedTask);
 
-            taskToEdit = lastShownList.get(filteredTaskListIndex); //should be same
-
             if (taskToEdit.isRecurring()) {
                 Task newTask = createRecurringTask(taskToEdit);
                 model.addTask(newTask);
