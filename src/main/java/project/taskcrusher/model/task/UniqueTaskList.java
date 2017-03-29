@@ -21,6 +21,9 @@ public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
+    public void sortTasksByDeadline () {
+        internalList.sort(null);
+    }
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
@@ -40,6 +43,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        sortTasksByDeadline();
     }
 
     /**
@@ -62,6 +66,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+        sortTasksByDeadline();
     }
 
     /**
@@ -75,11 +80,14 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
+        sortTasksByDeadline();
         return taskFoundAndDeleted;
+
     }
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
+        sortTasksByDeadline();
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
@@ -88,6 +96,7 @@ public class UniqueTaskList implements Iterable<Task> {
             replacement.add(new Task(task));
         }
         setTasks(replacement);
+        sortTasksByDeadline();
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {

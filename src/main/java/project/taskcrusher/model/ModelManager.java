@@ -71,8 +71,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void prepareListsForUi() {
         boolean taskListToShowEmpty = false, eventListToShowEmpty = false;
-        sortFilteredEventListByTimeslot();
-        sortFilteredTaskListByDeadline();
         if (filteredEvents.isEmpty()) {
             eventListToShowEmpty = LIST_EMPTY;
         }
@@ -148,7 +146,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        sortFilteredTaskListByDeadline();
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -171,11 +168,6 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
         prepareListsForUi();
-    }
-
-    private void sortFilteredTaskListByDeadline() {
-        logger.info("Sorting in effect");
-        filteredTasks.sorted();
     }
 
     //=========== Filtered Event List Accessors =============================================================
