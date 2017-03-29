@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.exceptions.DuplicateDataException;
+import project.taskcrusher.logic.commands.MarkCommand;
 
 public class UniqueEventList implements Iterable<Event> {
 
@@ -51,6 +52,16 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+        sortEventsByEarliestTimeslot();
+    }
+
+    public void markEvent(int targetIndex, int markFlag) {
+        Event target = internalList.get(targetIndex);
+        if (markFlag == MarkCommand.MARK_COMPLETE) {
+            target.markComplete();
+        } else {
+            target.markIncomplete();
+        }
         sortEventsByEarliestTimeslot();
     }
 

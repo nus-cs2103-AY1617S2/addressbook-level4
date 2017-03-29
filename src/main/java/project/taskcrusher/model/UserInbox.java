@@ -137,6 +137,14 @@ public class UserInbox implements ReadOnlyUserInbox {
         }
     }
 
+    public void markTask(int index, int markFlag) {
+        tasks.markTask(index, markFlag);
+    }
+
+    public void markEvent(int index, int markFlag) {
+        events.markEvent(index, markFlag);
+    }
+
     /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}

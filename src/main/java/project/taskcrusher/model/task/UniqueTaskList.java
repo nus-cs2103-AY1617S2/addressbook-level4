@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.exceptions.DuplicateDataException;
 import project.taskcrusher.commons.util.CollectionUtil;
+import project.taskcrusher.logic.commands.MarkCommand;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -43,6 +44,16 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        sortTasksByDeadline();
+    }
+
+    public void markTask(int targetIndex, int markFlag) {
+        Task target = internalList.get(targetIndex);
+        if (markFlag == MarkCommand.MARK_COMPLETE) {
+            target.markComplete();
+        } else {
+            target.markIncomplete();
+        }
         sortTasksByDeadline();
     }
 

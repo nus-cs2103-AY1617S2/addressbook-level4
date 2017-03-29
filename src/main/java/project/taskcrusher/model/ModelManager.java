@@ -106,6 +106,16 @@ public class ModelManager extends ComponentManager implements Model {
         prepareListsForUi();
     }
 
+    @Override
+    public synchronized void markTask(int filteredTaskListIndex, int markFlag) {
+        userInbox.markTask(filteredTaskListIndex, markFlag);
+    }
+
+    @Override
+    public synchronized void markEvent(int filteredEventListIndex, int markFlag) {
+        userInbox.markEvent(filteredEventListIndex, markFlag);
+    }
+
     //=========== Event operations =========================================================================
 
     @Override

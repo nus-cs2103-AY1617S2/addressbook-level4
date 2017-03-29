@@ -45,6 +45,7 @@ public interface Model {
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
 
+    void markTask(int filteredListIndex, int markFlag);
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
@@ -104,6 +105,8 @@ public interface Model {
      * timeslot
      */
     void updateFilteredEventList(Timeslot userInterestedTimeSlot);
+
+    void markEvent(int filteredListIndex, int markFlag);
 
     /**
      * TODO this javadoc
