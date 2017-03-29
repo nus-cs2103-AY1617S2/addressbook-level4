@@ -9,6 +9,7 @@ import seedu.taskit.commons.util.CollectionUtil;
 import seedu.taskit.logic.commands.exceptions.CommandException;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
+import seedu.taskit.model.task.Priority;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
@@ -24,7 +25,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [title|deadline|tag] NEW.\n"
+            + "Parameters: INDEX (must be a positive integer) [title|deadline|tag|priority] NEW.\n"
             + "Example: " + COMMAND_WORD + " 2 title finish SWE HW";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -85,9 +86,10 @@ public class EditCommand extends Command {
         Title updatedTask = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
         Date updatedStart = editTaskDescriptor.getStart().orElseGet(taskToEdit::getStart);
         Date updatedEnd = editTaskDescriptor.getEnd().orElseGet(taskToEdit::getEnd);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTask, updatedStart, updatedEnd, updatedTags);
+        return new Task(updatedTask, updatedStart, updatedEnd, updatedPriority, updatedTags);
     }
 
     /**
@@ -98,6 +100,7 @@ public class EditCommand extends Command {
         private Optional<Title> title = Optional.empty();
         private Optional<Date> start = Optional.empty();
         private Optional<Date> end = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -106,6 +109,7 @@ public class EditCommand extends Command {
             this.title = toCopy.getTitle();
             this.start = toCopy.getStart();
             this.end = toCopy.getEnd();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
         }
 
@@ -113,7 +117,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.start, this.end, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.start, this.end, this.priority, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {
@@ -136,12 +140,19 @@ public class EditCommand extends Command {
         }
         
         public void setEnd(Optional<Date> end) {
-            assert title != null;
             this.end = end;
         }
 
         private Optional<Date> getEnd() {
             return end;
+        }
+        
+        public void setPriority(Optional<Priority> priority) {
+            this.priority = priority; 
+        }
+        
+        private Optional<Priority> getPriority() {
+            return priority;
         }
         
         // @@ author

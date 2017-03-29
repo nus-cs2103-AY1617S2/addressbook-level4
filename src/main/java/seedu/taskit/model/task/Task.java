@@ -15,6 +15,7 @@ public class Task implements ReadOnlyTask{
     protected Title title;
     protected Date start;
     protected Date end;
+    protected Priority priority;
     
     protected UniqueTagList tags;
 
@@ -26,13 +27,14 @@ public class Task implements ReadOnlyTask{
      * @param tags
      * @throws IllegalValueException 
      */
-    public Task(Title title, Date start, Date end, UniqueTagList tags) throws IllegalValueException {
+    public Task(Title title, Date start, Date end, Priority priority, UniqueTagList tags) throws IllegalValueException {
         this.title = title;
         if (!start.isStartValidComparedToEnd(end)) {
             throw new IllegalValueException("Start Date must occur before End Date");
         }
         this.start = start;
         this.end = end;
+        this.priority = priority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     
@@ -43,6 +45,7 @@ public class Task implements ReadOnlyTask{
         this.title = source.getTitle();
         this.start = source.getStart();
         this.end = source.getEnd();
+        this.priority = source.getPriority();
         this.tags = new UniqueTagList(source.getTags());
     }
     
@@ -77,6 +80,14 @@ public class Task implements ReadOnlyTask{
         return end;
     }
     
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+    
+    public Priority getPriority() {
+        return priority;
+    }
+    
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
@@ -101,6 +112,7 @@ public class Task implements ReadOnlyTask{
         this.setTitle(replacement.getTitle());
         this.setStart(replacement.getStart());
         this.setEnd(replacement.getEnd());
+        this.setPriority(replacement.getPriority());
         this.setTags(replacement.getTags());
     }
     
@@ -119,6 +131,7 @@ public class Task implements ReadOnlyTask{
                 && other.getTitle().equals(this.getTitle())
                 && other.getStart().equals(this.getStart())
                 && other.getEnd().equals(this.getEnd())
+                && other.getPriority().equals(this.getPriority())
                 && other.getTags().equals(this.getTags()));
     }
 
@@ -142,6 +155,8 @@ public class Task implements ReadOnlyTask{
         	   	.append(getStart())
         	   	.append("End: ")
         	   	.append(getEnd())
+        	   	.append("Priority: ")
+        	   	.append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

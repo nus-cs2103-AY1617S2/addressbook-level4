@@ -12,6 +12,7 @@ public interface ReadOnlyTask {
     Title getTitle();
     Date getStart();
     Date getEnd();
+    Priority getPriority();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
