@@ -1,5 +1,7 @@
 package seedu.geekeep.ui;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -11,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.geekeep.commons.core.GuiSettings;
+import seedu.geekeep.commons.events.model.GeekeepFilePathChangedEvent;
 import seedu.geekeep.commons.events.ui.ExitAppRequestEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
 import seedu.geekeep.logic.Logic;
@@ -191,6 +194,10 @@ public class MainWindow extends UiPart<Region> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
+    public void setConfig(Config config) {
+        this.config = config;
+    }
+
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
@@ -219,6 +226,11 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getDeadlineListPanel() {
         return this.deadlineListPanel;
+    }
+
+    @Subscribe
+    private void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) {
+        setConfig(event.config);
     }
 
 }
