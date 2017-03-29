@@ -1,5 +1,5 @@
 package guitests;
-
+// @@author: A0160076L
 import static seedu.doit.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
