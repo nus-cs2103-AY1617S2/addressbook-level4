@@ -20,7 +20,11 @@ public class DateUtilApache {
     public static final String MESSAGE_DATE_NOT_FOUND = "Input provided cannot be parsed as Date"
             + "Please provide one date in a supported format";;
 
-    public static final String[] PARSE_PATTERNS = { "yyyy-MM-dd hh:mma", "yyyy-MM-dd" };
+    public static final String[] PARSE_PATTERNS = { "yyyy-MM-dd hh:mma", "yyyy-MM-dd", "MM-dd hh:mma",
+                                                    "hh:mma"};
+    public static final int FORMAT_DATE_ABSOLUTE = 1;
+    public static final int FORMAT_THIS_YEAR = 2;
+    public static final int FORMAT_DATE_RELATIVE = 3;
 
     public static Date parseDate(String toParse, boolean isNew) throws IllegalValueException {
 
@@ -50,10 +54,31 @@ public class DateUtilApache {
         }
     }
 
-    public static String dateAsString(Date date) {
+    public static String dateAsStringForUi(Date date) {
         assert date != null;
-        SimpleDateFormat sdf = new SimpleDateFormat(PARSE_PATTERNS[0]);
-        return sdf.format(date);
+        SimpleDateFormat formatter;
+        String prepend = "";
+        if (isToday(date)) {
+            formatter = new SimpleDateFormat(PARSE_PATTERNS[FORMAT_DATE_RELATIVE]);
+            prepend = "Today ";
+        } else if (isThisYear(date)) {
+            formatter = new SimpleDateFormat(PARSE_PATTERNS[FORMAT_THIS_YEAR]);
+        } else {
+            formatter = new SimpleDateFormat(PARSE_PATTERNS[0]);
+        }
+        return prepend + formatter.format(date);
+    }
+
+    private static boolean isThisYear(Date d) {
+        Date now = new Date();
+        SimpleDateFormat yearChecker = new SimpleDateFormat("yyyy");
+        return yearChecker.format(now).equals(yearChecker.format(d));
+    }
+
+    private static boolean isToday(Date d) {
+        Date now = new Date();
+        SimpleDateFormat dateChecker = new SimpleDateFormat("yyyyMMdd");
+        return dateChecker.format(now).equals(dateChecker.format(d));
     }
 }
 

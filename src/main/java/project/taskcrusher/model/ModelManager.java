@@ -197,10 +197,6 @@ public class ModelManager extends ComponentManager implements Model {
         prepareListsForUi();
     }
 
-    private void sortFilteredEventListByTimeslot() {
-        filteredEvents.sorted();
-    }
-
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {

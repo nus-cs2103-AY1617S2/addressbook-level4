@@ -31,7 +31,7 @@ public class Deadline {
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtilApache.dateAsString(DateUtilApache.parseDate(deadline, true));
+            this.deadline = DateUtilApache.dateAsStringForUi(DateUtilApache.parseDate(deadline, true));
         }
     }
 
@@ -50,7 +50,7 @@ public class Deadline {
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtilApache.dateAsString(DateUtilApache.parseDate(deadline, filterOverdue));
+            this.deadline = DateUtilApache.dateAsStringForUi(DateUtilApache.parseDate(deadline, filterOverdue));
         }
 
     }
@@ -101,7 +101,7 @@ public class Deadline {
     @Override
     public String toString() {
         if (this.hasDeadline()) {
-            return DateUtilApache.dateAsString(this.getDate().get());
+            return DateUtilApache.dateAsStringForUi(this.getDate().get());
         } else {
             return Deadline.NO_DEADLINE;
         }
