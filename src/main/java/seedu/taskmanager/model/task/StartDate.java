@@ -15,7 +15,6 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  */
 
 public class StartDate extends Date {
-    private static final SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
     public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Start date should be of dd/mm/yyyy format "
             + "or can be empty";
@@ -23,6 +22,7 @@ public class StartDate extends Date {
             + "/[0-9]{4}$)";
 
     // @@author A0140032E
+    private static final SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy h:mm a");
     /**
      * Validates given start date.
      *
@@ -38,7 +38,7 @@ public class StartDate extends Date {
             Parser parser = new Parser();
             List<DateGroup> dateGroups = parser.parse(startDate);
             return dateGroups.get(0).getDates().get(0).getTime();
-        } catch (NullPointerException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
     }
@@ -57,6 +57,10 @@ public class StartDate extends Date {
     @Override
     public String toString() {
         return sdfOutput.format(this);
+    }
+
+    public String toFullDateString() {
+        return super.toString();
     }
     // @@author
 
