@@ -171,4 +171,5 @@ public class FloatingTaskListPanelHandle extends GuiHandle {
     public int getNumberOfTasks() {
         return getListView().getItems().size();
     }
+  //@@author
 }

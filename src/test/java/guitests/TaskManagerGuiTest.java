@@ -140,7 +140,9 @@ public abstract class TaskManagerGuiTest {
         //JUnit doesn't run its test cases on the UI thread. Platform.runLater is used to post event on the UI thread.
         Platform.runLater(() -> EventsCenter.getInstance().post(e));
     }
+    //@@author
 
+    //@@author A0160076L
     /**
      * Asserts the tasks shown in each panel will match
      */
@@ -166,4 +168,5 @@ public abstract class TaskManagerGuiTest {
         assertTrue(this.taskListPanel.isListMatching(expectedTasks));
         assertTrue(this.floatingTaskListPanel.isListMatching(expectedFloatingTasks));
     }
+    //@@author
 }

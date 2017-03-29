@@ -1,5 +1,5 @@
 package guitests;
-// @@author: A0160076L
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -17,6 +17,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
     public static final String MESSAGE_ENDTIME_CONSTRAINTS  = "Item End Time should be in "
         + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
+    // @@author A0160076L
     @Test
     public void add() throws IllegalValueException {
         //add one floating task
@@ -70,10 +71,8 @@ public class AddCommandTest extends TaskManagerGuiTest {
         //missing description
         // this.commandBox.runCommand("add invalid5 e/today p/high");
         //assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
-
-
     }
+  //@@author
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         this.commandBox.runCommand(taskToAdd.getAddCommand());

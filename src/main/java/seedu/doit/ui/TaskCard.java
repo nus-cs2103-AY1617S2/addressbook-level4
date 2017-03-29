@@ -59,7 +59,7 @@ public class TaskCard extends UiPart<Region> {
             this.deadline.setText("");
         }
     }
-  //@@author: A0160076L
+
     public boolean ifOverdue(String dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
@@ -70,4 +70,5 @@ public class TaskCard extends UiPart<Region> {
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> this.tags.getChildren().add(new Label(tag.tagName)));
     }
+    //@@author
 }
