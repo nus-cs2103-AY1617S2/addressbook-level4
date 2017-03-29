@@ -194,18 +194,14 @@ public class CalenderPanel extends UiPart<Region> {
     private void setTasks(ObservableList<ReadOnlyTask> taskList) {
         initTaskListHashMap(TaskListHashMap);
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(taskList.get(i).getEndTiming().toString());
             if (!taskList.get(i).getEndTiming().isFloating()) {
                 for (int j = 0; j < 28; j++) {
-                    Label DateLabel = dayHashMap.get("day" + (j + 1));
                     ListView<String> TaskList = TaskListHashMap.get("day" + (j + 1) + "TaskList");
-                    ReadOnlyTask CurrentTask = taskList.get(i);
                     String labelDate = dayHashMap.get("day" + (j + 1)).getText().toString();
                     String taskDate = taskList.get(i).getEndTiming().toString();
                     String[] taskListDateData = taskDate.toString().split("/");
                     String taskDateMonth = taskListDateData[1];
                     String taskDateDate = taskListDateData[0];
-                    boolean  DateEqual = false;
 
                     if (taskDateMonth.substring(0, 1).equals("0")) {
                         if ((taskDateMonth + "/" + taskDateDate).equals("0" + labelDate)) {
@@ -214,7 +210,6 @@ public class CalenderPanel extends UiPart<Region> {
                         }
                     } else {
                         if ((taskDateMonth + "/" + taskDateDate).equals(labelDate)) {
-                            System.out.println(labelDate);
                         }
                     }
 
