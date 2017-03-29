@@ -24,10 +24,10 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Babby for:91234567 priority:1 note:Block 123, Bobby Street 3 #husband";
+        String detailsToEdit = "Babby for:140317 priority:1 note:Block 123, Bobby Street 3 #husband";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withTitle("Babby").withDate("91234567")
+        TestTask editedTask = new TaskBuilder().withTitle("Babby").withDate("140317")
                 .withPriority("1").withInstruction("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 

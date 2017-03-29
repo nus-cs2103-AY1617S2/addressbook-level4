@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Comparator;
+import java.util.Date;
 
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -10,9 +11,13 @@ public class TaskPriorityComparator implements Comparator<ReadOnlyTask> {
         String firstPriority = firstTask.getPriority().value;
         String secondPriority = secondTask.getPriority().value;
         if (firstPriority.compareTo(secondPriority) == 0) {
-            String firstTitle = firstTask.getTitle().title;
-            String secondTitle = secondTask.getTitle().title;
-            return firstTitle.compareTo(secondTitle);
+            Date firstDate = firstTask.getDeadline().toDeadline();
+            Date secondDate = secondTask.getDeadline().toDeadline();
+            if (firstDate.compareTo(secondDate) == 0) {
+                String firstTitle = firstTask.getTitle().title;
+                String secondTitle = secondTask.getTitle().title;
+                return firstTitle.compareTo(secondTitle);
+            }
         }
         return secondPriority.compareTo(firstPriority);
     }
