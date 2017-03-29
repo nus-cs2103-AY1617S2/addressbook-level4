@@ -108,7 +108,7 @@ public class Task implements ReadOnlyTask {
      * Mark this task as completed
      */
     public void markComplete(){
-    	this.isCompleted = true;
+    	this.isCompleted = (period.value == 0);
     	this.startTime.addDays(period.value);
     	this.endTime.addDays(period.value);
     }
