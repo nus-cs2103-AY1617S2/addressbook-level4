@@ -1,5 +1,6 @@
 package seedu.onetwodo.logic.parser;
 
+import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_AFTER;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_BEFORE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -53,7 +54,7 @@ public class ListCommandParser {
             case TODAY:
                 return new ListCommand(DoneStatus.UNDONE_STRING, TOMORROW, NOW, priority, tags);
             default:
-                return new IncorrectCommand("Invalid list command");
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

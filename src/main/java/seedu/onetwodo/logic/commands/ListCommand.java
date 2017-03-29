@@ -17,7 +17,9 @@ public class ListCommand extends Command {
 
     private static final String DATES_ARE_INVALID = "Dates are invalid";
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_SUCCESS = "Listed tasks";
+    public static final String MESSAGE_LIST_DONE_SUCCESS = "Listed completed tasks";
+    public static final String MESSAGE_LIST_UNDONE_SUCCESS = "Listed incompleted tasks";
+    public static final String MESSAGE_LIST_ALL_SUCCESS = "Listed all tasks";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List tasks by done status"
             + "Parameters: DONE_STATUS [DATE] [PRIORITY] [t/TAG]...\n";
 
@@ -56,19 +58,23 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        String feecbackMessageToReturn;
         switch (doneStatus) {
         case ALL:
             model.setDoneStatus(DoneStatus.ALL);
+            feecbackMessageToReturn = MESSAGE_LIST_ALL_SUCCESS;
             break;
         case DONE:
             model.setDoneStatus(DoneStatus.DONE);
+            feecbackMessageToReturn = MESSAGE_LIST_DONE_SUCCESS;
             break;
         case UNDONE:
         default:
             model.setDoneStatus(DoneStatus.UNDONE);
+            feecbackMessageToReturn = MESSAGE_LIST_UNDONE_SUCCESS;
         }
         model.resetSearchStrings();
         model.updateByDoneDatePriorityTags(before, after, priority, tagSet);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(feecbackMessageToReturn);
     }
 }
