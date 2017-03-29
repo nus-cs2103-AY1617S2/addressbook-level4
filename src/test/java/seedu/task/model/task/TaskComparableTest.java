@@ -123,7 +123,7 @@ public class TaskComparableTest {
     @Test
     public void sortTasksByCompleteness() throws DuplicateTagException, IllegalValueException {
         Timing time = new Timing(timing);
-        UniqueTagList utl = new UniqueTagList(tag2, tag2);
+        UniqueTagList utl = new UniqueTagList(tag1, tag2);
 
         Task t1 = new Task(new Description(description + "a"), new Priority(priority),
                 time, time, utl, false, null);
