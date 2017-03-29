@@ -11,7 +11,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
 	* [Reccurring Tasks]()
 	* [Find on any parameter](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.5. Finding all tasks containing any keyword in their name: find)
-	* 
+	* [Prioritize Command Worked with Heyang to implement logic and model functionality](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#Allocate priority to a task: prioritize)
 * Code written: [[functional code](A0164212U.md)][[test code](A0164212U.md)]
 * Other major contributions:
 	* Did initial refactoring from AddressBook to TaskList
