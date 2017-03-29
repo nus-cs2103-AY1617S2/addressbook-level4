@@ -69,7 +69,7 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        return new ModelManager(storage.getInitialData(), userPrefs);
+        return new ModelManager(storage.getInitialData(null), userPrefs);
     }
 
     private void initLogging(Config config) {

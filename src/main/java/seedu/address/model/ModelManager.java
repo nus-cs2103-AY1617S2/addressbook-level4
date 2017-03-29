@@ -18,8 +18,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.model.TaskManagerExportEvent;
+import seedu.address.commons.events.model.TaskManagerImportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
+import seedu.address.commons.events.storage.ImportEvent;
 import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.address.commons.util.CollectionUtil;
@@ -58,6 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String MESSAGE_ON_SAVETO = "Save location changed to ";
     private static final String MESSAGE_ON_EXPORT = "Data to be exported to ";
     private static final String MESSAGE_ON_USETHIS = "Reading data from ";
+    private static final String MESSAGE_ON_IMPORT = "Importing data from ";
 
     // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
@@ -115,8 +118,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
-        taskManager.resetData(newData);
+    public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks) {
+        taskManager.setData(newData, clearPrevTasks);
         indicateTaskManagerChanged(MESSAGE_ON_RESET);
     }
 
@@ -141,6 +144,15 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskManagerExport(String message, String path) {
         logger.fine(message);
         raise(new TaskManagerExportEvent(taskManager, path));
+    }
+
+    /**
+     * Raises an event to indicate that the task manager should import data from
+     * specified path
+     */
+    private void indicateTaskManagerImport(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerImportEvent(path));
     }
 
     /**
@@ -187,6 +199,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void importFromLocation(String path) {
+        assert path != null;
+        indicateTaskManagerImport(MESSAGE_ON_IMPORT + path, path);
+    }
+
+    @Override
     public void useNewSaveLocation(String path) {
         assert path != null;
         indicateTaskManagerUseNewPath(MESSAGE_ON_USETHIS + path, path);
@@ -225,7 +243,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // Get previous command, taskManager and view
         String toUndo = commandHistory.pop();
-        taskManager.resetData(taskHistory.pop());
+        taskManager.setData(taskHistory.pop(), true);
         filteredTasks.setPredicate(predicateHistory.pop());
 
         // Set completed tasks view
@@ -270,7 +288,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Subscribe
     public void handleReadFromNewFileEvent(ReadFromNewFileEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "New file data loaded into model"));
-        resetData(event.data);
+        setData(event.data, true);
+    }
+
+    @Override
+    @Subscribe
+    public void handleImportEvent(ImportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Add file data into model"));
+        setData(event.data, false);
     }
 
     // =========== Filtered Task List Accessors

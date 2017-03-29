@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.model.TaskManagerExportEvent;
+import seedu.address.commons.events.model.TaskManagerImportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -30,7 +31,7 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
     /** Returns the initial data read from file **/
-    public ReadOnlyTaskManager getInitialData();
+    public ReadOnlyTaskManager getInitialData(String path);
 
     @Override
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
@@ -56,4 +57,9 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * Export to specified file path.
      */
     void handleTaskManagerExportEvent(TaskManagerExportEvent event);
+
+    /**
+     * Import from specified file path.
+     */
+    void handleTaskManagerImportEvent(TaskManagerImportEvent event);
 }

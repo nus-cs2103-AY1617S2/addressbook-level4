@@ -43,6 +43,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.RenameTagCommand;
@@ -307,7 +308,7 @@ public class LogicManagerTest {
         List<Task> taskList = helper.generateTaskList(2);
 
         // set AB state to 2 tasks
-        model.resetData(new TaskManager());
+        model.setData(new TaskManager(), true);
         for (Task p : taskList) {
             model.addTask(p);
         }
@@ -872,7 +873,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_useThis_absoluteSubDirectory() throws Exception {
-        File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        File tmFile = new File("testSubDir", UseThisCommand.TASK_MANAGER_FILE_NAME);
         FileUtil.createFile(tmFile);
         assertCommandSuccess("usethis " + tmFile.getParentFile().getAbsolutePath(),
                 String.format(UseThisCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
@@ -883,12 +884,49 @@ public class LogicManagerTest {
 
     @Test
     public void execute_useThis_invalidFolderName() throws Exception {
-        File invalidFolderNameFile = new File("////?!", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        File invalidFolderNameFile = new File("////?!", UseThisCommand.TASK_MANAGER_FILE_NAME);
         assertCommandFailure("usethis " + invalidFolderNameFile.getParentFile().getAbsolutePath(),
                 String.format(UseThisCommand.MESSAGE_FILE_MISSING_ERROR, invalidFolderNameFile.getAbsolutePath()));
     }
 
     // End UseThisCommand tests
+
+    // ImportCommand Tests
+
+    @Test
+    public void execute_import_absoluteSubDirectory() throws Exception {
+        File tmFile = new File("testSubDir", ImportCommand.TASK_MANAGER_FILE_NAME);
+
+        // add adam to list
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.adam();
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // verify added
+        String addCommand = helper.generateAddCommand(toBeAdded);
+        assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB,
+                expectedAB.getTaskList());
+
+        // no difference after importing empty file
+        FileUtil.createFile(tmFile);
+        assertCommandSuccess("import " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(ImportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
+
+        // cleanup
+        tmFile.delete();
+        tmFile.getParentFile().delete();
+    }
+
+    @Test
+    public void execute_import_invalidFolderName() throws Exception {
+        File invalidFolderNameFile = new File("////?!", ImportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandFailure("import " + invalidFolderNameFile.getParentFile().getAbsolutePath(),
+                String.format(UseThisCommand.MESSAGE_FILE_MISSING_ERROR, invalidFolderNameFile.getAbsolutePath()));
+    }
+
+    // End ImportCommand tests
 
     // UndoCommand tests
 

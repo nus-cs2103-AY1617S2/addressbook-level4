@@ -13,9 +13,11 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.model.TaskManagerExportEvent;
+import seedu.address.commons.events.model.TaskManagerImportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.ImportEvent;
 import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
@@ -69,7 +71,8 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-        return readTaskManager(taskManagerStorage.getTaskManagerFilePath());
+        logger.fine("Attempting to read data from file: " + taskManagerStorage.getTaskManagerFilePath());
+        return taskManagerStorage.readTaskManager(taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
@@ -180,6 +183,13 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
+    public void handleTaskManagerImportEvent(TaskManagerImportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Importing from file"));
+        indicateImportFile(event.path);
+    }
+
+    @Override
+    @Subscribe
     public void handleTaskManagerUseNewPathEvent(TaskManagerUseNewPathEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data path changed, reading from file"));
 
@@ -197,19 +207,30 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     /**
+     * Raises an event to indicate that a new data file is to be imported.
+     */
+    private void indicateImportFile(String path) {
+        ReadOnlyTaskManager taskManager = getInitialData(path);
+        raise(new ImportEvent(taskManager));
+    }
+
+    /**
      * Raises an event to indicate that a new data file has been read.
      */
     private void indicateReadFromNewFile() {
-        ReadOnlyTaskManager taskManager = getInitialData();
+        ReadOnlyTaskManager taskManager = getInitialData(taskManagerStorage.getTaskManagerFilePath());
         raise(new ReadFromNewFileEvent(taskManager));
     }
 
     @Override
-    public ReadOnlyTaskManager getInitialData() {
+    public ReadOnlyTaskManager getInitialData(String path) {
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
         try {
-            taskManagerOptional = readTaskManager();
+            if (path == null) {
+                path = taskManagerStorage.getTaskManagerFilePath();
+            }
+            taskManagerOptional = readTaskManager(path);
             if (!taskManagerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskManager");
             }

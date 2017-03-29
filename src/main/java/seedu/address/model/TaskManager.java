@@ -49,7 +49,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Creates an TaskManager using the Tasks and Tags in the {@code toBeCopied}
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
-        resetData(toBeCopied);
+        setData(toBeCopied, true);
     }
 
     //// list overwrite operations
@@ -62,14 +62,20 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks) {
         assert newData != null;
         try {
-            ArrayList<Task> tasks = new ArrayList<Task>();
-            for (ReadOnlyTask readOnlyTask : newData.getTaskList()) {
-                tasks.add(Task.createTask(readOnlyTask));
+            if (clearPrevTasks) {
+                ArrayList<Task> tempTasks = new ArrayList<Task>();
+                for (ReadOnlyTask readOnlyTask : newData.getTaskList()) {
+                    tempTasks.add(Task.createTask(readOnlyTask));
+                }
+                setTasks(tempTasks);
+            } else {
+                for (ReadOnlyTask readOnlyTask : newData.getTaskList()) {
+                    tasks.add(Task.createTask(readOnlyTask));
+                }
             }
-            setTasks(tasks);
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskManagers should not have duplicate tasks";
         } catch (IllegalValueException e) {

@@ -36,13 +36,13 @@ public class TaskManagerTest {
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        taskManager.resetData(null);
+        taskManager.setData(null, true);
     }
 
     @Test
     public void resetData_withValidReadOnlyTaskManager_replacesData() {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
-        taskManager.resetData(newData);
+        taskManager.setData(newData, true);
         assertEquals(newData, taskManager);
     }
 
@@ -55,7 +55,7 @@ public class TaskManagerTest {
         TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
+        taskManager.setData(newData, true);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class TaskManagerTest {
         TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
+        taskManager.setData(newData, true);
     }
 
     /**
