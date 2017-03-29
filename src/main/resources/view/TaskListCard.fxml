@@ -49,7 +49,7 @@
                     </GridPane>
                </content>
                <graphic>
-                        <FlowPane fx:id="tags" minWidth="600.0">
+                        <FlowPane fx:id="tags">
                      <children>
                                  <Label fx:id="title" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-size: 24; -fx-font-family: Arial; -fx-font-weight: bold;" styleClass="cell_big_label" text="\$first">
                            <graphic>
