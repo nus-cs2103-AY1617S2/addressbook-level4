@@ -15,17 +15,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import seedu.taskmanager.commons.core.Messages;
-import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.model.category.UniqueCategoryList;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand.UpdateTaskDescriptor;
-import seedu.taskmanager.logic.commands.exceptions.CommandException;
 
 //@@author A0142418L
 /**
@@ -53,6 +49,9 @@ public class UpdateCommandParser {
         }
 
         UpdateTaskDescriptor updateTaskDescriptor = new UpdateTaskDescriptor();
+        
+        Boolean isUpdateToDeadlineTask = false;
+
         try {
             Optional<String> taskName = preambleFields.get(1);
             Optional<String> onPrefixInput = argsTokenizer.getValue(PREFIX_ON);
@@ -73,20 +72,34 @@ public class UpdateCommandParser {
                         || (toPrefixInput.isPresent()))) {
                     throw new NoSuchElementException("");
                 }
-                if (((fromPrefixInput.isPresent())
-                        && (!onPrefixInput.isPresent() && !byPrefixInput.isPresent() && !toPrefixInput.isPresent()))
-                        || ((fromPrefixInput.isPresent())
-                                && ((onPrefixInput.isPresent()) || (byPrefixInput.isPresent())))) {
-                    throw new NoSuchElementException("");
-                }
-                if ((toPrefixInput.isPresent()) && (!onPrefixInput.isPresent() && !fromPrefixInput.isPresent())) {
+                if (((fromPrefixInput.isPresent()) && ((onPrefixInput.isPresent()) || (byPrefixInput.isPresent())))) {
                     throw new NoSuchElementException("");
                 }
             }
 
+            if (byPrefixInput.isPresent()) {
+                isUpdateToDeadlineTask = true;
+            }
+
             String stringStartDate = "";
             String stringStartTime = "";
+            if (fromPrefixInput.isPresent() && fromPrefixInput.get().matches("\\d+")) {
+                if (isValidTime(fromPrefixInput.get())) {
+                    stringStartTime = fromPrefixInput.get();
+                }
+            } else {
+                if (onPrefixInput.isPresent() && onPrefixInput.get().matches("\\d+")) {
+                    if (isValidTime(onPrefixInput.get())) {
+                        stringStartTime = onPrefixInput.get();
+                    }
+                }
+            }
             String stringEndTime = "";
+            if (toPrefixInput.isPresent() && toPrefixInput.get().matches("\\d+")) {
+                if (isValidTime(toPrefixInput.get())) {
+                    stringEndTime = toPrefixInput.get();
+                }
+            }
             String stringEndDate = "";
 
             /*
@@ -98,7 +111,7 @@ public class UpdateCommandParser {
                 stringStartDate = splited[0];
                 try {
                     stringStartTime = splited[1];
-                    if (Integer.parseInt(stringStartTime) >= 2400) {
+                    if (!isValidTime(stringStartTime)) {
                         throw new IllegalValueException(INVALID_TIME);
                     }
                     if (!toPrefixInput.isPresent()) {
@@ -113,7 +126,7 @@ public class UpdateCommandParser {
                             }
                         } catch (ArrayIndexOutOfBoundsException aioobe) {
                             stringEndTime = splitedEndTime[0];
-                            if (Integer.parseInt(stringEndTime) >= 2400) {
+                            if (!isValidTime(stringEndTime)) {
                                 throw new IllegalValueException(INVALID_TIME);
                             }
                         }
@@ -132,7 +145,7 @@ public class UpdateCommandParser {
                             }
                         } catch (ArrayIndexOutOfBoundsException aiobe) {
                             stringEndTime = splitedEndTime[0];
-                            if (Integer.parseInt(stringEndTime) >= 2400) {
+                            if (!isValidTime(stringEndTime)) {
                                 throw new IllegalValueException(INVALID_TIME);
                             }
                         }
@@ -203,7 +216,7 @@ public class UpdateCommandParser {
                 stringEndDate = splited[0];
                 try {
                     stringEndTime = splited[1];
-                    if (Integer.parseInt(stringEndTime) >= 2400) {
+                    if (!isValidTime(stringEndTime)) {
                         throw new IllegalValueException(INVALID_TIME);
                     }
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
@@ -283,7 +296,15 @@ public class UpdateCommandParser {
         if (!updateTaskDescriptor.isAnyFieldUpdated()) {
             return new IncorrectCommand(UpdateCommand.MESSAGE_NOT_UPDATED);
         }
-        return new UpdateCommand(index.get(), updateTaskDescriptor);
+        return new UpdateCommand(index.get(), updateTaskDescriptor, isUpdateToDeadlineTask);
+    }
+
+    private boolean isValidTime(String string) {
+        if (Integer.parseInt(string) > 2400) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
