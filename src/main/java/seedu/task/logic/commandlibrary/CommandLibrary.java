@@ -14,6 +14,7 @@ import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.FindDateCommand;
 import seedu.task.logic.commands.FindExactCommand;
+import seedu.task.logic.commands.GetGoogleCalendarCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -22,21 +23,23 @@ import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
+import seedu.task.logic.commands.PostGoogleCalendarCommand;
+import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
-import seedu.task.logic.commands.UnDoneCommand;
 import seedu.task.logic.commands.UndoCommand;
+import seedu.task.logic.commands.UndoneCommand;
 import seedu.task.logic.parser.AddCommandParser;
 import seedu.task.logic.parser.ClearCommandParser;
 import seedu.task.logic.parser.CommandParser;
 import seedu.task.logic.parser.DeleteCommandParser;
+import seedu.task.logic.parser.DoneCommandParser;
 import seedu.task.logic.parser.EditCommandParser;
-import seedu.task.logic.parser.EditIsDoneCommandParser;
-import seedu.task.logic.parser.EditUnDoneCommandParser;
 import seedu.task.logic.parser.ExitCommandParser;
 import seedu.task.logic.parser.FindCommandParser;
 import seedu.task.logic.parser.FindDateParser;
 import seedu.task.logic.parser.FindExactCommandParser;
+import seedu.task.logic.parser.GetGoogleCalendarCommandParser;
 import seedu.task.logic.parser.HelpCommandParser;
 import seedu.task.logic.parser.HelpFormatCommandParser;
 import seedu.task.logic.parser.ListByDoneCommandParser;
@@ -44,9 +47,12 @@ import seedu.task.logic.parser.ListByNotDoneCommandParser;
 import seedu.task.logic.parser.ListByTagCommandParser;
 import seedu.task.logic.parser.ListCommandParser;
 import seedu.task.logic.parser.LoadCommandParser;
+import seedu.task.logic.parser.PostGoogleCalendarCommandParser;
+import seedu.task.logic.parser.RedoCommandParser;
 import seedu.task.logic.parser.SaveCommandParser;
 import seedu.task.logic.parser.SelectCommandParser;
 import seedu.task.logic.parser.UndoCommandParser;
+import seedu.task.logic.parser.UndoneCommandParser;
 
 public class CommandLibrary {
 
@@ -77,8 +83,8 @@ public class CommandLibrary {
 
         commandParserTable.put(DeleteCommand.COMMAND_WORD_1, new DeleteCommandParser());
 
-        commandParserTable.put(DoneCommand.COMMAND_WORD_1, new EditIsDoneCommandParser());
-        commandParserTable.put(DoneCommand.COMMAND_WORD_2, new EditIsDoneCommandParser());
+        commandParserTable.put(DoneCommand.COMMAND_WORD_1, new DoneCommandParser());
+        commandParserTable.put(DoneCommand.COMMAND_WORD_2, new DoneCommandParser());
 
         commandParserTable.put(EditCommand.COMMAND_WORD_1, new EditCommandParser());
 
@@ -93,6 +99,9 @@ public class CommandLibrary {
         commandParserTable.put(FindExactCommand.COMMAND_WORD_2, new FindExactCommandParser());
         commandParserTable.put(FindExactCommand.COMMAND_WORD_3, new FindExactCommandParser());
         commandParserTable.put(FindExactCommand.COMMAND_WORD_4, new FindExactCommandParser());
+
+        commandParserTable.put(GetGoogleCalendarCommand.COMMAND_WORD_1, new GetGoogleCalendarCommandParser());
+        commandParserTable.put(GetGoogleCalendarCommand.COMMAND_WORD_2, new GetGoogleCalendarCommandParser());
 
         commandParserTable.put(HelpCommand.COMMAND_WORD_1, new HelpCommandParser());
         commandParserTable.put(HelpCommand.COMMAND_WORD_2, new HelpCommandParser());
@@ -122,6 +131,11 @@ public class CommandLibrary {
 
         commandParserTable.put(LoadCommand.COMMAND_WORD_1, new LoadCommandParser());
 
+        commandParserTable.put(PostGoogleCalendarCommand.COMMAND_WORD_1, new PostGoogleCalendarCommandParser());
+        commandParserTable.put(PostGoogleCalendarCommand.COMMAND_WORD_2, new PostGoogleCalendarCommandParser());
+
+        commandParserTable.put(RedoCommand.COMMAND_WORD_1, new RedoCommandParser());
+
         commandParserTable.put(SaveCommand.COMMAND_WORD_1, new SaveCommandParser());
 
         commandParserTable.put(SelectCommand.COMMAND_WORD_1, new SelectCommandParser());
@@ -130,8 +144,8 @@ public class CommandLibrary {
         commandParserTable.put(UndoCommand.COMMAND_WORD_1, new UndoCommandParser());
         commandParserTable.put(UndoCommand.COMMAND_WORD_2, new UndoCommandParser());
 
-        commandParserTable.put(UnDoneCommand.COMMAND_WORD_1, new EditUnDoneCommandParser());
-        commandParserTable.put(UnDoneCommand.COMMAND_WORD_2, new EditUnDoneCommandParser());
+        commandParserTable.put(UndoneCommand.COMMAND_WORD_1, new UndoneCommandParser());
+        commandParserTable.put(UndoneCommand.COMMAND_WORD_2, new UndoneCommandParser());
 
 //        for(commandKeyParserPair pair: commandKeyParserPairs){
 //            commandParserTable.put(pair.getKey(), pair.getParser());

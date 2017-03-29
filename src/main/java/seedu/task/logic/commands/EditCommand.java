@@ -72,6 +72,7 @@ public class EditCommand extends Command {
             throw new CommandException(Task.MESSAGE_TASK_CONSTRAINTS);
         }
 //        model.updateFilteredListToShowAll();
+
         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }

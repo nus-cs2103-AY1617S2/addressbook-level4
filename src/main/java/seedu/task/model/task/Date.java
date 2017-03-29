@@ -34,8 +34,15 @@ public class Date {
     public Date(EventDateTime eventDateTime) {
         if (eventDateTime == null) {
             this.value = null;
+            return;
+        } 
+        
+        if (eventDateTime.getDateTime() != null) {
+            this.value = new java.util.Date(eventDateTime.getDateTime().getValue());
+        } else if (eventDateTime.getDate() != null) {
+            this.value = new java.util.Date(eventDateTime.getDate().getValue());            
         } else {
-            this.value = new java.util.Date(eventDateTime.getDate().getValue());
+            this.value = null;
         }
     }
 

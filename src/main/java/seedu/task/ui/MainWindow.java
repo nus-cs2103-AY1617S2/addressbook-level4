@@ -16,7 +16,6 @@ import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
-import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -37,6 +36,7 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel taskListPanel;
     private Config config;
     private CommandBox commandBox;
+    private Scroll scroll;
 
     @FXML
     private AnchorPane browserPlaceholder;
@@ -88,6 +88,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setScene(scene);
 
         setAccelerators();
+        setScroll();
     }
 
     public Stage getPrimaryStage() {
@@ -101,6 +102,10 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(quickUndoMenuItem, KeyCombination.valueOf("Ctrl+Alt+Z"));
         setAccelerator(quickScrollDownMenuItem, KeyCombination.valueOf("Shift+DOWN"));
         setAccelerator(quickScrollUpMenuItem, KeyCombination.valueOf("SHIFT+UP"));
+    }
+    
+    private void setScroll() {
+    	scroll = new Scroll();
     }
 
     /**
@@ -226,12 +231,12 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     public void handleScrollDown() {
-        taskListPanel.scrollDown();
+        taskListPanel.scrollDown(scroll);
     }
 
     @FXML
     public void handleScrollUp() {
-        taskListPanel.scrollUp();
+        taskListPanel.scrollUp(scroll);
     }
 
     void show() {
@@ -250,9 +255,13 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
+    public void setFocus() {
+        commandBox.requestFocus();
     }
+    
+//    void loadTaskPage(ReadOnlyTask task) {
+//        browserPanel.loadTaskPage(task);
+//    }
 
     void releaseResources() {
         browserPanel.freeResources();

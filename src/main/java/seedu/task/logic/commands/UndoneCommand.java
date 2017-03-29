@@ -6,7 +6,7 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
-public class UnDoneCommand extends Command {
+public class UndoneCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "undone";
     public static final String COMMAND_WORD_2 = "ud";
@@ -20,7 +20,7 @@ public class UnDoneCommand extends Command {
 
     public final int targetIndex;
 
-    public UnDoneCommand(int targetIndex) {
+    public UndoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 

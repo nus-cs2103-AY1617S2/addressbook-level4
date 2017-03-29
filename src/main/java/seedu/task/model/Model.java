@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
@@ -38,6 +39,9 @@ public interface Model {
     /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    //@@author A0140063X
+    /** Adds all the given Tasks. */
+    void addMultipleTasks(ArrayList<Task> tasks);
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *

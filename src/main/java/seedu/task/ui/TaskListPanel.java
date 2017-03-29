@@ -78,17 +78,13 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     //@@author A0142939W
-    public void scrollDown() {
-        int currentIdx = taskListView.getSelectionModel().getSelectedIndex();
-        taskListView.scrollTo(currentIdx + 3);
-        taskListView.getSelectionModel().clearAndSelect(currentIdx + 3);
+    public void scrollDown(Scroll scroll) {
+    	scroll.scrollDown(taskListView);
     }
 
     //@@author A0142939W
-    public void scrollUp() {
-        int currentIdx = taskListView.getSelectionModel().getSelectedIndex();
-        taskListView.scrollTo(currentIdx - 3);
-        taskListView.getSelectionModel().clearAndSelect(currentIdx - 3);
+    public void scrollUp(Scroll scroll) {
+    	scroll.scrollUp(taskListView);
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
