@@ -4,9 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.tache.MainApp;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
@@ -36,10 +39,13 @@ public class TaskCard extends UiPart<Region> {
     private Label name;
 
     @FXML
-    private FlowPane datesAndTimes;
+    private ImageView tickOrCross;
 
     @FXML
     private FlowPane tags;
+
+    @FXML
+    private FlowPane datesAndTimes;
 
     //@@author A0142255M
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -49,8 +55,20 @@ public class TaskCard extends UiPart<Region> {
         id.setText(Integer.toString(displayedIndex) + ". ");
         name.setText(task.getName().toString());
         name.setWrapText(true); // spill over to next line if task name is too long
+        setTickOrCross(task);
         initDatesAndTimes(task);
         initTags(task);
+    }
+
+    private void setTickOrCross(ReadOnlyTask task) {
+        if (task.getActiveStatus() == false) { // task is completed
+            tickOrCross.setImage(new Image(MainApp.class.getResource("/images/tick.png").toExternalForm()));
+        } else if (task.getEndDateTime().isPresent()) {
+            DateTime taskDate = task.getEndDateTime().get();
+            if (taskDate.hasPassed()) { // task is overdue
+                tickOrCross.setImage(new Image(MainApp.class.getResource("/images/cross.png").toExternalForm()));
+            }
+        }
     }
 
     private void initDatesAndTimes(ReadOnlyTask task) {
