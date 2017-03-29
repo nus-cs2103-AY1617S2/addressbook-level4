@@ -1,4 +1,4 @@
-//@@evanyeung A0163744B
+//@@author evanyeung A0163744B
 package seedu.task.model.util;
 
 import java.util.Calendar;
@@ -16,9 +16,8 @@ public class DateParser {
             "^([A-Za-z]{3,9}|[0-3][0-9]/[0-1][0-9]/[0-9]{4}) [0-2][0-9][0-5][0-9]$";
     private static final String EMPTY_DATE_STRING = "";
     private static final int MONTH_OFFSET = 1;
-    //@@evanyeung
 
-    //@@changli A160004845
+    //@@author changli A160004845
     private static int parsedDate[] = new int[3];
     private static final int DAY_INDEX = 0;
     private static final int MONTH_INDEX = 1;
@@ -30,9 +29,8 @@ public class DateParser {
     private static final int THU_INDEX = 5;
     private static final int FRI_INDEX = 6;
     private static final int SAT_INDEX = 7;
-    //@@changli
 
-    //@@evanyeung A0163744B
+    //@@author evanyeung A0163744B
     public static Calendar parse(String date) throws IllegalValueException {
         if (!isValidDateString(date)) {
             throw new IllegalValueException(DATE_STRING_ILLEGAL_FORMAT);
@@ -88,9 +86,8 @@ public class DateParser {
         }
         return true;
     }
-    //@@evanyeung
 
-    //@@changli A160004845
+    //@@author changli A160004845
     private static int[] getDate(String date) throws IllegalValueException {
         Calendar calDate = Calendar.getInstance();
         int dayOfWeek = calDate.get(Calendar.DAY_OF_WEEK);
@@ -160,9 +157,8 @@ public class DateParser {
                 day2 - day1 + 7 :
                 day2 - day1;
     }
-    //@@changli
 
-    //@@evanyeung A0163744B
+    //@@author evanyeung A0163744B
     private static int getHour(String date) {
         String time = date.substring(date.indexOf(" ") + 1);
         return Integer.parseInt(time.substring(0, 2));
@@ -173,4 +169,3 @@ public class DateParser {
         return Integer.parseInt(time.substring(3));
     }
 }
-//@@evanyeung
