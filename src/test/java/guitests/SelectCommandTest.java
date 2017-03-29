@@ -1,5 +1,5 @@
 package guitests;
-// @@author: A0160076L
+// @@author A0160076L
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -56,5 +56,6 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     private void assertNoTaskSelected() {
         assertEquals(this.taskListPanel.getSelectedTasks().size(), 0);
     }
+    //@@author
 
 }

@@ -1,5 +1,5 @@
 package seedu.doit.ui;
-//@@author: A0160076L
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
