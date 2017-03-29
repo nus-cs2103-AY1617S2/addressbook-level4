@@ -18,6 +18,9 @@ public class HistoryController extends Controller {
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "(?iu)^\\s*history\\s*";
 
+    private static final String HELP_BASIC = "history";
+    private static final String HELP_ADVANCED = "history";
+
     private ArrayList<String> commandHistory;
 
     public void setCommandHistory(ArrayList<String> commandHistory) {

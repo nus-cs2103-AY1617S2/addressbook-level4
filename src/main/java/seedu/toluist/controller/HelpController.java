@@ -8,14 +8,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.AddTaskController;
 import seedu.toluist.controller.AliasController;
 import seedu.toluist.controller.ClearController;
@@ -61,12 +60,30 @@ public class HelpController extends Controller {
 
         String commandWord = tokens.get(PARAMETER_COMMAND);
         if (commandWord.equals("")) {
+            showGeneralHelp();
             uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT));
         } else if (getControllerKeywords().contains(commandWord)) {
+            showSpecificHelp(commandWord);
             uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT));
         } else {
             uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR));
         }        
+    }
+
+    private void showSpecificHelp(String commandWord) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    private void showGeneralHelp() {
+        Iterator<Class<? extends Controller>> controllerIterator = getHelpControllerClasses().iterator(); 
+        Class <? extends Controller> controller;
+        ArrayList<String> helpArray = new ArrayList<String>();
+        while (controllerIterator.hasNext()) {
+            controller = (Class<? extends Controller>) controllerIterator.next();
+            helpArray.add(controller.)
+        }
+        
     }
 
     public HashMap<String, String> tokenize(String command) {
@@ -88,7 +105,7 @@ public class HelpController extends Controller {
         return command.matches(COMMAND_REGEX);
     }
 
-    private Collection<Class <? extends Controller>> getAllControllerClasses() {
+    private Collection<Class <? extends Controller>> getHelpControllerClasses() {
         return new ArrayList<>(Arrays.asList(
                 AddTaskController.class,
                 ClearController.class,
@@ -108,13 +125,12 @@ public class HelpController extends Controller {
                 FindController.class,
                 TagController.class,
                 MarkController.class,
-                SwitchController.class,
-                UnknownCommandController.class
+                SwitchController.class
         ));
     }
 
     private Set<String> getControllerKeywords() {
-        List<String> keywordList = getAllControllerClasses()
+        List<String> keywordList = getHelpControllerClasses()
                 .stream()
                 .map((Class<? extends Controller> klass) -> {
                     try {
