@@ -32,5 +32,7 @@
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+  
+* This application uses [Natty](https://github.com/joestelmach/natty) by *joestelmach*.
 
 #### Licence : [MIT](LICENSE)
