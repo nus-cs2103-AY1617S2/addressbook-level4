@@ -27,6 +27,7 @@ import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.MarkCommand;
 import seedu.watodo.logic.commands.SaveAsCommand;
 import seedu.watodo.logic.commands.SelectCommand;
+import seedu.watodo.logic.commands.ShortcutCommand;
 import seedu.watodo.logic.commands.UnmarkCommand;
 import seedu.watodo.logic.commands.ViewFileCommand;
 
@@ -55,12 +56,11 @@ public class Parser {
 
         String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
-        /*
-        AlternativeCommand alt = new AlternativeCommand();
-        if (alt.containsAlternative(commandWord)) {
-            commandWord = alt.getStandardCommandWord(commandWord);
+
+        if (AlternativeCommand.containsAlternative(commandWord)) {
+            commandWord = AlternativeCommand.getStandardCommandWord(commandWord);
         }
-         */
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -95,10 +95,10 @@ public class Parser {
 
             case ListDeadlineCommand.COMMAND_WORD:
                 return new ListDeadlineCommand();
-                /*
+
             case ListDoneCommand.COMMAND_WORD:
                 return new ListDoneCommand();
-                 */
+
             case ListEventCommand.COMMAND_WORD:
                 return new ListEventCommand();
 
@@ -107,14 +107,20 @@ public class Parser {
 
             case ListMonthCommand.COMMAND_WORD:
                 return new ListMonthCommand();
-                /*
+
             case ListUndoneCommand.COMMAND_WORD:
                 return new ListUndoneCommand();
-                 */
+
             case ListWeekCommand.COMMAND_WORD:
                 return new ListWeekCommand();
+
             default:
-                return new ListCommand();
+                if (arguments.equals("")) {
+                    return new ListCommand();
+                } else {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListCommand.MESSAGE_USAGE));
+                }
             }
 
         case MarkCommand.COMMAND_WORD:
@@ -122,6 +128,9 @@ public class Parser {
 
         case UnmarkCommand.COMMAND_WORD:
             return new UnmarkCommandParser().parse(arguments);
+
+        case ShortcutCommand.COMMAND_WORD:
+            return new ShortcutCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

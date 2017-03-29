@@ -8,8 +8,9 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/azraelos.png" width="150"><br>
 * **Role:** UI <br>
 * **Responsibilities:** Code quality <br>
-* **Features implemented:** <br>
-* **Code written:** <br>
+* **Features implemented: <br>
+ > [List tasks](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#listing-tasks-by-type--list LIST_TYPE) <br>
+* **Code written:[[functional code](A123456.md)] <br>
 * **Other major contributions:** <br>
 
 -----
