@@ -17,12 +17,16 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.TaskManagerExportEvent;
+import seedu.address.commons.events.model.TaskManagerImportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
+import seedu.address.commons.events.storage.ImportEvent;
 import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.model.exceptions.NoPreviousCommandException;
@@ -38,15 +42,14 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
  * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
-    private static final Logger logger = LogsCenter
-            .getLogger(ModelManager.class);
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     private Stack<String> commandHistory;
     private Stack<TaskManager> taskHistory;
-    private Stack<Predicate> predicateHistory;
+    private Stack<Predicate<? super ReadOnlyTask>> predicateHistory;
     private Stack<String> redoCommandHistory;
     private Stack<Boolean> completedViewHistory;
 
@@ -55,7 +58,9 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String MESSAGE_ON_RESET = "Task list loaded";
     private static final String MESSAGE_ON_UPDATE = "Task updated";
     private static final String MESSAGE_ON_SAVETO = "Save location changed to ";
+    private static final String MESSAGE_ON_EXPORT = "Data to be exported to ";
     private static final String MESSAGE_ON_USETHIS = "Reading data from ";
+    private static final String MESSAGE_ON_IMPORT = "Importing data from ";
 
     // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
@@ -83,15 +88,14 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with task manager: " + taskManager
-                + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
         this.indexMap = new HashMap<String, Integer>();
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         commandHistory = new Stack<String>();
         taskHistory = new Stack<TaskManager>();
-        predicateHistory = new Stack<Predicate>();
+        predicateHistory = new Stack<Predicate<? super ReadOnlyTask>>();
         redoCommandHistory = new Stack<String>();
         completedViewHistory = new Stack<Boolean>();
         completedViewOpen = false;
@@ -114,8 +118,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
-        taskManager.resetData(newData);
+    public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks) {
+        taskManager.setData(newData, clearPrevTasks);
         indicateTaskManagerChanged(MESSAGE_ON_RESET);
     }
 
@@ -136,6 +140,21 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerPathChangedEvent(taskManager, path));
     }
 
+    /** Raises an event to indicate the path needs to be changed */
+    private void indicateTaskManagerExport(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerExportEvent(taskManager, path));
+    }
+
+    /**
+     * Raises an event to indicate that the task manager should import data from
+     * specified path
+     */
+    private void indicateTaskManagerImport(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerImportEvent(path));
+    }
+
     /**
      * Raises an event to indicate that the task manager should read from a
      * different path
@@ -146,27 +165,23 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target)
-            throws TaskNotFoundException {
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
         indicateTaskManagerChanged(MESSAGE_ON_DELETE);
     }
 
     @Override
-    public synchronized void addTask(Task task)
-            throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged(MESSAGE_ON_ADD);
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, Task editedTask)
-            throws DuplicateTaskException {
+    public void updateTask(int filteredTaskListIndex, Task editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
-        int taskManagerIndex = filteredTasks
-                .getSourceIndex(filteredTaskListIndex);
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged(MESSAGE_ON_UPDATE);
     }
@@ -175,6 +190,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateSaveLocation(String path) {
         assert path != null;
         indicateTaskManagerPathChanged(MESSAGE_ON_SAVETO + path, path);
+    }
+
+    @Override
+    public void exportToLocation(String path) {
+        assert path != null;
+        indicateTaskManagerExport(MESSAGE_ON_EXPORT + path, path);
+    }
+
+    @Override
+    public void importFromLocation(String path) {
+        assert path != null;
+        indicateTaskManagerImport(MESSAGE_ON_IMPORT + path, path);
     }
 
     @Override
@@ -187,18 +214,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void saveCurrentState(String commandText) {
         TaskManager copiedTaskManager = new TaskManager(taskManager);
         taskHistory.add(copiedTaskManager);
-        predicateHistory.add(filteredTasks.getPredicate());
+        Predicate<? super ReadOnlyTask> predicate = filteredTasks.getPredicate();
+        predicateHistory.add(predicate);
         commandHistory.add(commandText);
         completedViewHistory.add(completedViewOpen);
     }
 
     @Override
     public void discardCurrentState() {
-        assert commandHistory.size() == taskHistory.size()
-                && taskHistory.size() == predicateHistory.size()
+        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
         if (!commandHistory.isEmpty()) {
-            String toUndo = commandHistory.pop();
+            commandHistory.pop();
             taskHistory.pop();
             predicateHistory.pop();
             completedViewHistory.pop();
@@ -207,18 +234,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String undoLastCommand() throws NoPreviousCommandException {
-        assert commandHistory.size() == taskHistory.size()
-                && taskHistory.size() == predicateHistory.size()
+        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
 
         if (commandHistory.isEmpty()) {
-            throw new NoPreviousCommandException(
-                    "No previous commands were found.");
+            throw new NoPreviousCommandException("No previous commands were found.");
         }
 
         // Get previous command, taskManager and view
         String toUndo = commandHistory.pop();
-        taskManager.resetData(taskHistory.pop());
+        taskManager.setData(taskHistory.pop(), true);
         filteredTasks.setPredicate(predicateHistory.pop());
 
         // Set completed tasks view
@@ -235,6 +260,8 @@ public class ModelManager extends ComponentManager implements Model {
             indicateTaskManagerPathChanged(MESSAGE_ON_UNDO, null);
         } else if (toUndo.startsWith(UseThisCommand.COMMAND_WORD)) {
             indicateTaskManagerUseNewPath(MESSAGE_ON_UNDO, null);
+        } else if (toUndo.startsWith(ExportCommand.COMMAND_WORD)) {
+            indicateTaskManagerExport(MESSAGE_ON_UNDO, null);
         } else {
             indicateTaskManagerChanged(MESSAGE_ON_UNDO);
         }
@@ -246,8 +273,7 @@ public class ModelManager extends ComponentManager implements Model {
     public String getRedoCommand() throws NoPreviousCommandException {
 
         if (redoCommandHistory.isEmpty()) {
-            throw new NoPreviousCommandException(
-                    "No previous commands were found.");
+            throw new NoPreviousCommandException("No previous commands were found.");
         }
 
         return redoCommandHistory.pop();
@@ -262,7 +288,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Subscribe
     public void handleReadFromNewFileEvent(ReadFromNewFileEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "New file data loaded into model"));
-        resetData(event.data);
+        setData(event.data, true);
+    }
+
+    @Override
+    @Subscribe
+    public void handleImportEvent(ImportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Add file data into model"));
+        setData(event.data, false);
     }
 
     // =========== Filtered Task List Accessors
@@ -280,8 +313,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords, Date date,
-            Set<String> tagKeys) {
+    public void updateFilteredTaskList(Set<String> keywords, Date date, Set<String> tagKeys) {
         Predicate<ReadOnlyTask> predicate = t -> false;
         if (keywords != null) {
             predicate = predicate.or(isTitleContainsKeyword(keywords));
@@ -299,14 +331,10 @@ public class ModelManager extends ComponentManager implements Model {
     // ========== Inner classes/interfaces used for filtering
     // =================================================
 
-    public Predicate<ReadOnlyTask> isTitleContainsKeyword(
-            Set<String> keywords) {
-        assert !keywords
-                .isEmpty() : "no keywords provided for a keyword search";
+    public Predicate<ReadOnlyTask> isTitleContainsKeyword(Set<String> keywords) {
+        assert !keywords.isEmpty() : "no keywords provided for a keyword search";
         return t -> {
-            return keywords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
-                            t.getName().fullName, keyword))
+            return keywords.stream().filter(keyword -> StringUtil.containsWordIgnoreCase(t.getName().fullName, keyword))
                     .findAny().isPresent();
         };
     }
@@ -317,8 +345,7 @@ public class ModelManager extends ComponentManager implements Model {
             return keywords.stream().filter(keyword -> {
                 boolean f = false;
                 for (Tag tag : t.getTags()) {
-                    f = f || StringUtil.containsWordIgnoreCase(tag.getTagName(),
-                            keyword);
+                    f = f || StringUtil.containsWordIgnoreCase(tag.getTagName(), keyword);
                 }
                 return f;
             }).findAny().isPresent();
@@ -326,16 +353,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday,
-            ObservableList<ReadOnlyTask> taskListFuture,
+    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
         splitTaskList(taskListToday, taskListFuture, taskListCompleted);
         sortTaskList(taskListToday, taskListFuture, taskListCompleted);
         assignUiIndex(taskListToday, taskListFuture, taskListCompleted);
     }
 
-    private void splitTaskList(ObservableList<ReadOnlyTask> taskListToday,
-            ObservableList<ReadOnlyTask> taskListFuture,
+    private void splitTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
         ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
         taskListToday.clear();
@@ -360,16 +385,14 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private void sortTaskList(ObservableList<ReadOnlyTask> taskListToday,
-            ObservableList<ReadOnlyTask> taskListFuture,
+    private void sortTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
         taskListToday.sort(TaskDatetimeComparator);
         taskListFuture.sort(TaskDatetimeComparator);
         taskListCompleted.sort(TaskDatetimeComparator);
     }
 
-    private void assignUiIndex(ObservableList<ReadOnlyTask> taskListToday,
-            ObservableList<ReadOnlyTask> taskListFuture,
+    private void assignUiIndex(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
         // TODO potential performance bottleneck here
         indexMap.clear();
@@ -379,31 +402,27 @@ public class ModelManager extends ComponentManager implements Model {
         int completedID = 1;
         ListIterator<ReadOnlyTask> iterToday = taskListToday.listIterator();
         ListIterator<ReadOnlyTask> iterFuture = taskListFuture.listIterator();
-        ListIterator<ReadOnlyTask> iterCompleted = taskListCompleted
-                .listIterator();
+        ListIterator<ReadOnlyTask> iterCompleted = taskListCompleted.listIterator();
         while (iterToday.hasNext()) {
             ReadOnlyTask tmpTask = iterToday.next();
             indexMap.put("T" + todayID, Integer.valueOf(tmpTask.getID()));
             tmpTask.setID("T" + todayID);
             todayID++;
-            logger.info(
-                    tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
         }
         while (iterFuture.hasNext()) {
             ReadOnlyTask tmpTask = iterFuture.next();
             indexMap.put("F" + futureID, Integer.valueOf(tmpTask.getID()));
             tmpTask.setID("F" + futureID);
             futureID++;
-            logger.info(
-                    tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
         }
         while (iterCompleted.hasNext()) {
             ReadOnlyTask tmpTask = iterCompleted.next();
             indexMap.put("C" + completedID, Integer.valueOf(tmpTask.getID()));
             tmpTask.setID("C" + completedID);
             completedID++;
-            logger.info(
-                    tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
         }
     }
 
@@ -422,8 +441,7 @@ public class ModelManager extends ComponentManager implements Model {
         uiIndex = uiIndex.toUpperCase();
         assert isValidUIIndex(uiIndex);
         logger.info(">>>>>>>>>>>>query UI index:" + uiIndex);
-        logger.info(
-                ">>>>>>>>>>>>Absolute index:" + (indexMap.get(uiIndex) + 1));
+        logger.info(">>>>>>>>>>>>Absolute index:" + (indexMap.get(uiIndex) + 1));
         assert uiIndex != null;
         assert indexMap.containsKey(uiIndex);
         // plus one since all current commands take index as 1-based

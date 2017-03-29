@@ -12,9 +12,12 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.TaskManagerExportEvent;
+import seedu.address.commons.events.model.TaskManagerImportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.ImportEvent;
 import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
@@ -68,7 +71,8 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-        return readTaskManager(taskManagerStorage.getTaskManagerFilePath());
+        logger.fine("Attempting to read data from file: " + taskManagerStorage.getTaskManagerFilePath());
+        return taskManagerStorage.readTaskManager(taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
@@ -126,12 +130,42 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    private String getFromBackupIfNull(String path, String oldPath) {
+    @Override
+    @Subscribe
+    public void handleTaskManagerExportEvent(TaskManagerExportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Exporting data to file"));
+
+        String path = event.path;
+        path = getFromBackupIfNull(path, path);
+
+        try {
+            if (event.path != null) {
+                saveTaskManager(event.data, path);
+            } else {
+                deleteExtraCopy(path);
+            }
+
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    /**
+     * If path is null, it sets it to the last seen value. Otherwise, it saves
+     * currPath.
+     *
+     * @param path
+     *            is set to last seen path if null
+     * @param currPath
+     *            is saved to history for future use
+     * @return
+     */
+    private String getFromBackupIfNull(String path, String currPath) {
         if (path == null) {
             assert !taskManagerStorageHistory.isEmpty();
             path = taskManagerStorageHistory.pop();
         } else {
-            taskManagerStorageHistory.add(oldPath);
+            taskManagerStorageHistory.add(currPath);
         }
         return path;
     }
@@ -141,10 +175,17 @@ public class StorageManager extends ComponentManager implements Storage {
         config.save();
     }
 
-    private void deleteExtraCopy(String oldPath) throws IOException {
-        if (!FileUtil.deleteFile(new File(oldPath))) {
-            throw new IOException("File at " + oldPath + " cannot be deleted");
+    private void deleteExtraCopy(String path) throws IOException {
+        if (!FileUtil.deleteFile(new File(path))) {
+            throw new IOException("File at " + path + " cannot be deleted");
         }
+    }
+
+    @Override
+    @Subscribe
+    public void handleTaskManagerImportEvent(TaskManagerImportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Importing from file"));
+        indicateImportFile(event.path);
     }
 
     @Override
@@ -166,19 +207,30 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     /**
+     * Raises an event to indicate that a new data file is to be imported.
+     */
+    private void indicateImportFile(String path) {
+        ReadOnlyTaskManager taskManager = getInitialData(path);
+        raise(new ImportEvent(taskManager));
+    }
+
+    /**
      * Raises an event to indicate that a new data file has been read.
      */
     private void indicateReadFromNewFile() {
-        ReadOnlyTaskManager taskManager = getInitialData();
+        ReadOnlyTaskManager taskManager = getInitialData(taskManagerStorage.getTaskManagerFilePath());
         raise(new ReadFromNewFileEvent(taskManager));
     }
 
     @Override
-    public ReadOnlyTaskManager getInitialData() {
+    public ReadOnlyTaskManager getInitialData(String path) {
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
         try {
-            taskManagerOptional = readTaskManager();
+            if (path == null) {
+                path = taskManagerStorage.getTaskManagerFilePath();
+            }
+            taskManagerOptional = readTaskManager(path);
             if (!taskManagerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskManager");
             }

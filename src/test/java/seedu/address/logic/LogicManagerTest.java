@@ -40,8 +40,10 @@ import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.RenameTagCommand;
@@ -306,7 +308,7 @@ public class LogicManagerTest {
         List<Task> taskList = helper.generateTaskList(2);
 
         // set AB state to 2 tasks
-        model.resetData(new TaskManager());
+        model.setData(new TaskManager(), true);
         for (Task p : taskList) {
             model.addTask(p);
         }
@@ -475,11 +477,9 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
         helper.addToModel(model, threeTasks);
-        model.prepareTaskList(FXCollections.observableArrayList(),
-                FXCollections.observableArrayList(),
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandFailure("edit C1 Task 3 #tag3 #tag4",
-                EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure("edit C1 Task 3 #tag3 #tag4", EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     // @@author: A0144422R
@@ -488,11 +488,9 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
         helper.addToModel(model, threeTasks);
-        model.prepareTaskList(FXCollections.observableArrayList(),
-                FXCollections.observableArrayList(),
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandFailure("edit C100 Task 3 #tag3 #tag4",
-                Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        assertCommandFailure("edit C100 Task 3 #tag3 #tag4", Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     // ----------------------Today----------------------
@@ -796,11 +794,86 @@ public class LogicManagerTest {
 
     // End SaveToCommand tests
 
-    // UseThisCommand tests
+    // ExportCommand Tests
+
+    @Test
+    public void execute_export_canonicalSameDirectory() throws Exception {
+        File tmFile = new File(".", ExportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("export .", String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
+                new TaskManager(), Collections.emptyList());
+        tmFile.delete();
+    }
+
+    @Test
+    public void execute_export_canonicalParentDirectory() throws Exception {
+        File tmFile = new File("..", ExportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("export ..", String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
+                new TaskManager(), Collections.emptyList());
+        tmFile.delete();
+    }
+
+    @Test
+    public void execute_export_canonicalSubDirectory() throws Exception {
+        File tmFile = new File("testSubDir", ExportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("export testSubDir",
+                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
+                Collections.emptyList());
+        tmFile.delete();
+        tmFile.getParentFile().delete();
+    }
+
+    @Test
+    public void execute_export_absoluteSameDirectory() throws Exception {
+        File tmFile = new File(".", ExportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("export " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
+                Collections.emptyList());
+        tmFile.delete();
+    }
+
+    @Test
+    public void execute_export_absoluteParentDirectory() throws Exception {
+        File tmFile = new File("..", ExportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("export " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
+                Collections.emptyList());
+        tmFile.delete();
+    }
+
+    @Test
+    public void execute_export_absoluteSubDirectory() throws Exception {
+        File tmFile = new File("testSubDir", ExportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("export " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
+                Collections.emptyList());
+        tmFile.delete();
+        tmFile.getParentFile().delete();
+    }
+
+    @Test
+    public void execute_export_noWritePermissions() throws Exception {
+        File noWritePermissionsFile = new File("noPermissions", ExportCommand.TASK_MANAGER_FILE_NAME);
+        if (noWritePermissionsFile.setReadOnly()) {
+            assertCommandFailure("export " + noWritePermissionsFile.getParentFile().getAbsolutePath(),
+                    String.format(ExportCommand.MESSAGE_WRITE_FILE_ERROR, noWritePermissionsFile.getAbsolutePath()));
+            noWritePermissionsFile.getParentFile().delete();
+        }
+    }
+
+    @Test
+    public void execute_export_invalidFileName() throws Exception {
+        File invalidFileNameFile = new File("////?!", ExportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandFailure("export " + invalidFileNameFile.getParentFile().getAbsolutePath(),
+                String.format(ExportCommand.MESSAGE_WRITE_FILE_ERROR, invalidFileNameFile.getAbsolutePath()));
+    }
+
+    // End ExportCommand Tests
+
+    // UseThisCommand Tests
 
     @Test
     public void execute_useThis_absoluteSubDirectory() throws Exception {
-        File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        File tmFile = new File("testSubDir", UseThisCommand.TASK_MANAGER_FILE_NAME);
         FileUtil.createFile(tmFile);
         assertCommandSuccess("usethis " + tmFile.getParentFile().getAbsolutePath(),
                 String.format(UseThisCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
@@ -811,10 +884,49 @@ public class LogicManagerTest {
 
     @Test
     public void execute_useThis_invalidFolderName() throws Exception {
-        File invalidFolderNameFile = new File("////?!", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        File invalidFolderNameFile = new File("////?!", UseThisCommand.TASK_MANAGER_FILE_NAME);
         assertCommandFailure("usethis " + invalidFolderNameFile.getParentFile().getAbsolutePath(),
                 String.format(UseThisCommand.MESSAGE_FILE_MISSING_ERROR, invalidFolderNameFile.getAbsolutePath()));
     }
+
+    // End UseThisCommand tests
+
+    // ImportCommand Tests
+
+    @Test
+    public void execute_import_absoluteSubDirectory() throws Exception {
+        File tmFile = new File("testSubDir", ImportCommand.TASK_MANAGER_FILE_NAME);
+
+        // add adam to list
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.adam();
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // verify added
+        String addCommand = helper.generateAddCommand(toBeAdded);
+        assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB,
+                expectedAB.getTaskList());
+
+        // no difference after importing empty file
+        FileUtil.createFile(tmFile);
+        assertCommandSuccess("import " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(ImportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
+
+        // cleanup
+        tmFile.delete();
+        tmFile.getParentFile().delete();
+    }
+
+    @Test
+    public void execute_import_invalidFolderName() throws Exception {
+        File invalidFolderNameFile = new File("////?!", ImportCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandFailure("import " + invalidFolderNameFile.getParentFile().getAbsolutePath(),
+                String.format(UseThisCommand.MESSAGE_FILE_MISSING_ERROR, invalidFolderNameFile.getAbsolutePath()));
+    }
+
+    // End ImportCommand tests
 
     // UndoCommand tests
 
@@ -843,6 +955,21 @@ public class LogicManagerTest {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         String commandText = "saveto " + tmFile.getParentFile().getAbsolutePath();
         assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
+                new TaskManager(), Collections.emptyList());
+        assertTrue(FileUtil.isFileExists(tmFile));
+
+        // undo command
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), new TaskManager(),
+                Collections.emptyList());
+        assertFalse(FileUtil.isFileExists(tmFile));
+    }
+
+    @Test
+    public void execute_undoExport_successful() throws Exception {
+        // save to same directory
+        File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        String commandText = "export " + tmFile.getParentFile().getAbsolutePath();
+        assertCommandSuccess(commandText, String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
                 new TaskManager(), Collections.emptyList());
         assertTrue(FileUtil.isFileExists(tmFile));
 
