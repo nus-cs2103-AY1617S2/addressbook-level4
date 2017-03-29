@@ -3,6 +3,11 @@ package seedu.tache.logic.commands;
 import seedu.tache.logic.commands.exceptions.CommandException;
 
 //@@author A0150120H
+/**
+ * Represents a Command that can be undone
+ * Commands that have been executed successfully and can be undone should be pushed onto the
+ * undoHistory Stack in the Command class
+ */
 public interface Undoable {
 
 
