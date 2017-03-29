@@ -37,7 +37,7 @@ public class PersonCard extends UiPart<Region> {
         priority.setText("Priority: " + task.getPriority().value);
         priority.setStyle("-fx-background-color: " + task.getPriority().getPriorityColor() + ";");
 
-        if (task.getStartTiming().value.equals(Timing.NULL_TIMING)) {
+        if (task.getStartTiming().value.equals(Timing.TIMING_NOT_SPECIFIED)) {
             startTiming.setText("");
         } else if (task.getOccurrenceIndexList().size() == 0) {
             startTiming.setText("Start Timing: " + task.getOccurrences().get(0).getStartTiming().value);
@@ -46,7 +46,7 @@ public class PersonCard extends UiPart<Region> {
             startTiming.setText("Start Timing: " + task.getOccurrences().get(index).getStartTiming().value);
         }
 
-        if (task.getEndTiming().value.equals(Timing.NULL_TIMING)) {
+        if (task.getEndTiming().value.equals(Timing.TIMING_NOT_SPECIFIED)) {
             endTiming.setText("");
         } else if (task.getOccurrenceIndexList().size() == 0) {
             endTiming.setText("End Timing: " + task.getOccurrences().get(0).getEndTiming().value);
