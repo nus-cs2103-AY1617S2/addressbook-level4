@@ -1,6 +1,12 @@
 package seedu.jobs.model.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
@@ -12,8 +18,8 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
 public class Time {
 
     public static final String MESSAGE_TIME_CONSTRAINT = "Time should always follow the dd/mm/yy hh:mm format";
-    public static final String TIME_VALIDATION_REGEX = "^[0-3]*[0-9]/[0-3]*[0-9]/(?:[0-9][0-9])?[0-9][0-9]\\s+(0*[1-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9])";
-
+    public static final String DATE_VALIDATION_REGEX = "^([0-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/([0-9][0-9][0-9][0-9])";
+    public static final String TIME_VALIDATION_REGEX = "(0[1-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9])";
     public static final String DEFAULT_TIME = "";
     public String value;
 
@@ -44,9 +50,51 @@ public class Time {
      * Returns true if a given string is in valid time format
      */
     public static boolean isValidTime(String test) {
-        return test.matches(TIME_VALIDATION_REGEX);
+    	String time = extractTime(test);
+    	String date = extractDate(test);
+        try{
+        	LocalDate.parse(date,DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT));
+        }
+        catch(DateTimeParseException e){
+        	return false;
+        }
+        return time.length()>0;
+    }	
+    
+    /**
+     * Extract date (dd/mm/yyyy) from an input string
+     */
+    public static String extractDate(String date){
+		Pattern datePattern = Pattern.compile(DATE_VALIDATION_REGEX);
+		Matcher dateMatcher = datePattern.matcher(date);
+		String value = "";
+		while (dateMatcher.find()) {
+			value+=(dateMatcher.group());
+		}
+		return value;
     }
-
+    
+    /**
+     * extract time (HH:mm) from an input string
+     */
+    public static String extractTime(String time){
+		Pattern timePattern = Pattern.compile(TIME_VALIDATION_REGEX);
+		Matcher timeMatcher = timePattern.matcher(time);
+		String value = "";
+		while (timeMatcher.find()) {
+			value+=(timeMatcher.group());
+		}
+		return value;
+    }
+    
+    public void addDays(int days){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+		String oldDate = extractDate(this.value);
+		String time = extractTime(this.value);
+		LocalDate date = LocalDate.parse(oldDate,formatter);
+		this.value = date.plusDays(days).format(formatter) + " " + time;
+    }
+    
     @Override
     public String toString() {
         return this.value;
