@@ -95,16 +95,21 @@
 .list-cell .label {
     -fx-text-fill: #010504;
 }
-
+/* @@author A0139154E */
 .cell_big_label {
     -fx-font-size: 34px;
+    -fx-font-family: "Helvetica";
+    -fx-font-variant: small-caps;
+    -fx-font-weight: bold;
     -fx-text-fill: #010504;
 }
-
+/* @@author A0139154E */
 .cell_small_label {
     -fx-font-size: 23px;
+    -fx-font-family: "Helvetica";
     -fx-text-fill: #010504;
 }
+/*@@author */
 
 .anchor-pane {
      -fx-background-color: derive(#09005e, 20%);
@@ -122,6 +127,8 @@
 }
 
 .result-display {
+	-fx-font-family: "Helvetica";
+	-fx-font-weight: 100;
     -fx-background-color: #ffffff;
 }
 
