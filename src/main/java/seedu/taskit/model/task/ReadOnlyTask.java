@@ -39,13 +39,11 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle())
+        builder.append(getTitle() + " ")
         		.append("Start: ")
         		.append(getStart() + " ")
         		.append("End: ")
         		.append(getEnd() + " ")
-        		.append("Priority: ")
-        		.append(getPriority() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
@@ -62,10 +60,9 @@ public interface ReadOnlyTask {
     	String titleTagAndDateString = getTitle().title + " ";
     	final StringBuilder builder = new StringBuilder();
     	builder.append(getTitle()).append(" ");
-    	//builder.append(getStart()).append(" ");
-    	//builder.append(getEnd()).append(" ");
+    	builder.append(getStart()).append(" ");
+    	builder.append(getEnd()).append(" ");
     	getTags().iterator().forEachRemaining(builder::append);
-    	//System.out.println("Date is: " + getEnd().toString());
     	
     	titleTagAndDateString = builder.toString();
     	titleTagAndDateString = titleTagAndDateString.replace('[', ' ').replace(']', ' ');

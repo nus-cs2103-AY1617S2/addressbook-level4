@@ -64,11 +64,17 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Date getStart() {
+        if (start == null) {
+            return new Date();
+        }
         return start;
     }
     
     @Override
     public Date getEnd() {
+        if (end == null) {
+            return new Date();
+        }
         return end;
     }
     
