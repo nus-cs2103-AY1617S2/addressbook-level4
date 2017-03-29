@@ -44,7 +44,7 @@ public class RemoveDeadlineCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit);
         model.storeTaskManager(COMMAND_WORD);
         model.updateTask(filteredTaskListIndex, editedTask);
-        model.updateFilteredListToShowAll();
+        model.updateFilteredTaskList(false);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 

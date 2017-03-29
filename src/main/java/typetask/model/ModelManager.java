@@ -42,7 +42,8 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with Task Manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.taskManager.getIncompleteList());
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        updateFilteredTaskList(false);
     }
 
     public ModelManager() {
@@ -74,7 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) {
         taskManager.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredTaskList(false);
         indicateTaskManagerChanged();
     }
 
@@ -157,17 +158,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
-    }
-
-    @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+    }
+    @Override
+    public void updateFilteredTaskList(boolean showComplete) {
+        updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(showComplete)));
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -235,6 +235,24 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class CompleteQualifier implements Qualifier {
+        private boolean showComplete;
+
+        CompleteQualifier(boolean showComplete) {
+            this.showComplete = showComplete;
+        }
+        //@@author A0139926R
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return (task.getIsCompleted() == showComplete);
+        }
+
+        @Override
+        public String toString() {
+            return "showComplete=" + String.valueOf(showComplete);
         }
     }
 
