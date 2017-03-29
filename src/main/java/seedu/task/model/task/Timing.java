@@ -152,6 +152,10 @@ public class Timing implements Comparable<Timing> {
         return isOrdered;
     }
 
+    public boolean isFloating() {
+        return this.value.equals(NULL_TIMING);
+    }
+
     //@@author A0163559U
     /**
      * Results in Timing sorted in ascending order.

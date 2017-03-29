@@ -16,6 +16,7 @@ public interface ReadOnlyTask {
     Priority getPriority();
 
     Timing getStartTiming();
+
     Timing getStartTiming(int i);
 
     Timing getEndTiming();
@@ -23,6 +24,20 @@ public interface ReadOnlyTask {
     boolean isComplete();
 
     boolean isRecurring();
+
+    RecurringFrequency getFrequency();
+
+    void setFrequency(RecurringFrequency frequency);
+
+    ArrayList<RecurringTaskOccurrence> getOccurrences();
+
+    void setStartTiming(Timing startTiming);
+
+    void setEndTiming(Timing endTiming);
+
+    ArrayList<Integer> getOccurrenceIndexList();
+    void setOccurrenceIndexList(ArrayList<Integer> list);
+
 
 
     /**
@@ -55,17 +70,6 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
-    RecurringFrequency getFrequency();
-
-    ArrayList<RecurringTaskOccurrence> getOccurrences();
-
-    void setStartTiming(Timing startTiming);
-    void setEndTiming(Timing endTiming);
-
-    ArrayList<Integer> getOccurrenceIndexList();
-    void setOccurrenceIndexList(ArrayList<Integer> list);
-
 
 
 }
