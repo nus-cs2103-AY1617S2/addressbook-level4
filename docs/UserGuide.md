@@ -140,10 +140,9 @@ Format: `clear`
 Finds tasks whose descriptions contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `milk` will not match `Milk`
 > * The order of the keywords does not matter. e.g. `buy milk` will match `milk buy`
 > * The description and tags will be searched.
-> * Only full words will be matched e.g. `day` will not match `monday`
+> * Partial words will be matched e.g. `day` will match `monday`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `milk` will match `buy milk`
 
