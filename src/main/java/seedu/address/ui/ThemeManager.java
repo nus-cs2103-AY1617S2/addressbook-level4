@@ -38,6 +38,7 @@ public class ThemeManager extends UiPart<Region> {
      */
     public ThemeManager(AnchorPane placeholder, Parent fxmlToApply, UserPrefs prefs) {
         super(FXML);
+        setStyleSheet(DEFAULT_STYLESHEET);
 
         this.fxmlToApply = fxmlToApply;
         this.prefs = prefs;

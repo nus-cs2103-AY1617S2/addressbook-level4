@@ -16,7 +16,7 @@ public class TypicalTestPersons {
         try {
             alice = new PersonBuilder().withName("Alice Paul").withGroup("group1")
                     .withEmail("a@gml.com").withDate("12.12")
-                    .withTags("friends").build();
+                    .withTags("incomplete").build();
             benson = new PersonBuilder().withName("Benson Meier").withGroup("311")
                     .withEmail("johnd@gmail.com").withDate("12.11")
                     .withTags("owesMoney", "friends").build();
@@ -33,9 +33,11 @@ public class TypicalTestPersons {
 
             // Manually added
             hoon = new PersonBuilder().withName("Hoon Meier").withDate("05.05")
-                    .withEmail("stefan@mail.com").withGroup("little india").build();
+                    .withEmail("stefan@mail.com").withGroup("little india")
+                    .withTags("incomplete").build();
             ida = new PersonBuilder().withName("Ida Mueller").withDate("08.08")
-                    .withEmail("hans@google.com").withGroup("chicago").build();
+                    .withEmail("hans@google.com").withGroup("chicago")
+                    .withTags("incomplete").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

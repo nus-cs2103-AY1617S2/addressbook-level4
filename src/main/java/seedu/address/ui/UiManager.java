@@ -78,7 +78,7 @@ public class UiManager extends ComponentManager implements Ui {
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
         //TODO
-        //showAlertDialogAndWait(mainWindow.getStage(), type, title, headerText, contentText);
+        showAlertDialogAndWait(mainWindow.getStage(), type, title, headerText, contentText);
     }
 
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,

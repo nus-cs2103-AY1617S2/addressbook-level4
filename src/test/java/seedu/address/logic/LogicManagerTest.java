@@ -425,7 +425,8 @@ public class LogicManagerTest {
             Group privateGroup = new Group("leisure time");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            Tag tag3 = new Tag("incomplete");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2, tag3);
             return new Person(name, privateDate, email, privateGroup, tags);
         }
 
