@@ -44,14 +44,37 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
     }
 
+    //@@author A0147980U
     /**
      * Returns an list of integers separated using space in the input string
+     * hyphen can be used to represent a range of indices
      */
     public static List<Optional<Integer>> parseIndices(String command) {
         ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
         String[] commandStringComponents = command.trim().split(" +");
         for (String component : commandStringComponents) {
-            indices.add(parseIndex(component));
+            String[] ends = component.split("-+");
+            if (ends.length == 2 && !"".equals(ends[0]) && !"".equals(ends[1])) {
+                indices.addAll(parseIndexRange(ends));
+            } else {
+                indices.add(parseIndex(component));
+            }
+        }
+        return indices;
+    }
+
+    /**
+     * @param twoEnds : A String array containing 2 elements,
+     *                  representing the start and the end of the range (both included)
+     * @return a list of Optional Integers in the range
+     */
+    public static List<Optional<Integer>> parseIndexRange(String[] twoEnds) {
+        assert twoEnds.length == 2 && !"".equals(twoEnds[0]) && !"".equals(twoEnds[1]);
+        ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
+        int start = parseIndex(twoEnds[0]).get();
+        int end = parseIndex(twoEnds[1]).get();
+        for (int i = start; i <= end; i++) {
+            indices.add(Optional.of(i));
         }
         return indices;
     }
@@ -72,6 +95,7 @@ public class ParserUtil {
         }
         return indices;
     }
+    //@@author
 
     /**
      * Returns a new Set populated by all elements in the given list of strings
