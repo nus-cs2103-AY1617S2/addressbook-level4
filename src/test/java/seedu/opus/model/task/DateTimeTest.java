@@ -16,6 +16,7 @@ import seedu.opus.commons.exceptions.IllegalValueException;
 
 public class DateTimeTest {
 
+    //@@author A0126345J
     @Test
     public void isValidDateTime() {
         // invalid dateTime
@@ -24,7 +25,9 @@ public class DateTimeTest {
         // valid dateTime
         assertTrue(DateTime.isValidDateTime("03/12/2217 12:00")); // inputs a valid date string
     }
+    //@@author
 
+    //@@author A0124368A
     @Test
     public void isInCurrentWeek() {
         // Stub the time now to be 10:30AM on 2017-03-22, Wednesday.
@@ -64,4 +67,5 @@ public class DateTimeTest {
             fail("Exception should not be thrown.");
         }
     }
+    //@@author
 }

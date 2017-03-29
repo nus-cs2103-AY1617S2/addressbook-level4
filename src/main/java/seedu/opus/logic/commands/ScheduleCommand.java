@@ -3,6 +3,7 @@ package seedu.opus.logic.commands;
 import seedu.opus.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.opus.logic.commands.exceptions.CommandException;
 
+//@@author A0126345J
 public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 

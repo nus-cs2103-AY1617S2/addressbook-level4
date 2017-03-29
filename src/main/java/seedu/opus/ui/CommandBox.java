@@ -27,7 +27,9 @@ public class CommandBox extends UiPart<Region> {
 
     private final Logic logic;
     private final UserInputHistory history;
+    //@@author A0124368A
     private final AutocompleteTrie autocompleteTrie;
+    //@@author
     private Iterator<String> suggestions;
 
     @FXML
@@ -40,15 +42,20 @@ public class CommandBox extends UiPart<Region> {
         this.autocompleteTrie.init();
         this.suggestions = Collections.emptyIterator();
         addToPlaceholder(commandBoxPlaceholder);
+        //@@author A0148087W
         history = new UserInputHistory();
         registerCursorKeyEventFilter();
+        //@@author A0124368A
         listenForTab();
         focusCommandBox();
+        //@@author
     }
 
+    //@@author A0124368A
     private void focusCommandBox() {
         commandTextField.requestFocus();
     }
+    //@@author
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
@@ -77,6 +84,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0124368A
     private void listenForTab() {
         commandTextField.setOnKeyPressed(e -> {
             if (!e.getCode().equals(KeyCode.TAB)) {
@@ -113,11 +121,6 @@ public class CommandBox extends UiPart<Region> {
         suggestions = Collections.emptyIterator();
     }
 
-    private void setCommandLineInput(String input) {
-        commandTextField.setText(input);
-        commandTextField.positionCaret(input.length());
-    }
-
     /**
      * Sets the command box style to indicate a successful command.
      */
@@ -125,6 +128,11 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
+    //@@author A0148087W
+    private void setCommandLineInput(String input) {
+        commandTextField.setText(input);
+        commandTextField.positionCaret(input.length());
+    }
     /**
      * Catch cursor key inputs from user to browse previous user input history
      */
@@ -161,6 +169,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.end();
     }
 
+    //@@author A0124368A
      /** Custom Trie for autocomplete feature.
      *
      * @author xbili
@@ -184,4 +193,5 @@ public class CommandBox extends UiPart<Region> {
             return !autoComplete(prefix).isEmpty();
         }
     }
+    //@@author
 }

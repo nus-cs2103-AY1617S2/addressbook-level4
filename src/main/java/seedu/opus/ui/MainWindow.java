@@ -50,8 +50,10 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane taskListPanelPlaceholder;
 
+    //@@author A0124368A
     @FXML
     private AnchorPane sidePanelPlaceholder;
+    //@@author
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -128,6 +130,7 @@ public class MainWindow extends UiPart<Region> {
         return logic.getFilteredTaskList();
     }
 
+    //@@author A0124368A
     private ObservableList<ReadOnlyTask> getCurrentWeekTasks() {
         return logic.getFilteredTaskList().filtered(t -> isCurrentWeek(t));
     }
@@ -143,6 +146,7 @@ public class MainWindow extends UiPart<Region> {
 
         return task.getEndTime().get().isCurrentWeek();
     }
+    //@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -160,9 +164,11 @@ public class MainWindow extends UiPart<Region> {
         return taskListPanelPlaceholder;
     }
 
+    //@@author A0124368A
     private AnchorPane getSidePanelPlaceholder() {
         return sidePanelPlaceholder;
     }
+    //@@author
 
     void hide() {
         primaryStage.hide();

@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import seedu.opus.model.task.ReadOnlyTask;
 
+//@@author A0148081H
 public class TaskComparator implements Comparator<ReadOnlyTask> {
     public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
         int c;
@@ -14,15 +15,15 @@ public class TaskComparator implements Comparator<ReadOnlyTask> {
         if (c != 0) {
             return c;
         } else {
-            EndTimeComparator etc = new EndTimeComparator();
-            c = etc.compare(t1, t2);
+            StartTimeComparator stc = new StartTimeComparator();
+            c = stc.compare(t1, t2);
         }
 
         if (c != 0) {
             return c;
         } else {
-            StartTimeComparator stc = new StartTimeComparator();
-            c = stc.compare(t1, t2);
+            EndTimeComparator etc = new EndTimeComparator();
+            c = etc.compare(t1, t2);
         }
 
         if (c != 0) {

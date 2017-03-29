@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+//@@author A0124368A
 /**
  * Java implementation of Trie prefix tree for autocompletion.
  *
@@ -89,3 +90,4 @@ public class Trie {
     }
 
 }
+//@@author

@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import seedu.opus.model.task.ReadOnlyTask;
 
+//@@author A0148081H
 public class PriorityComparator implements Comparator<ReadOnlyTask> {
     public int compare(ReadOnlyTask p1, ReadOnlyTask p2) {
         boolean bothHavePriority = p1.getPriority().isPresent() && p2.getPriority().isPresent();
@@ -11,7 +12,11 @@ public class PriorityComparator implements Comparator<ReadOnlyTask> {
         if (bothHavePriority) {
             return p1.getPriority().get().getValue().compareTo(p2.getPriority().get().getValue());
         } else if (oneHasPriority) {
-            return -1;
+            if (p1.getPriority().isPresent()) {
+                return -1;
+            } else {
+                return 1;
+            }
         } else {
             return 1;
         }

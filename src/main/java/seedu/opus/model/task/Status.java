@@ -8,6 +8,7 @@ import seedu.opus.commons.exceptions.IllegalValueException;
  */
 public class Status {
 
+    //@@author A0124368A
     public static enum Flag {
 
         COMPLETE,
@@ -26,12 +27,15 @@ public class Status {
         }
 
     }
+    //@@author
 
     public static final String MESSAGE_STATUS_CONSTRAINTS = "Status can only be 'complete' or 'incomplete";
+    //@@author A0124368A
     public static final String STATUS_COMPLETE = "complete";
     public static final String STATUS_INCOMPLETE = "incomplete";
 
     public final Flag value;
+    //@@author
 
     /**
      * Validates given status.
@@ -47,6 +51,7 @@ public class Status {
         this.value = Flag.valueOf(trimmedStatus.toUpperCase());
     }
 
+    //@@author A0124368A
     /**
      * Initialise a Status with value of incomplete
      */
@@ -72,6 +77,7 @@ public class Status {
     public String toString() {
         return value.toString();
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

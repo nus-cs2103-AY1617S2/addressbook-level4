@@ -101,6 +101,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return new UnmodifiableObservableList<>(internalList);
     }
 
+    //@@author A0148081H
     public UnmodifiableObservableList<Task> asSortedList(String keyword) {
         switch (keyword) {
         case SortCommand.ALL:
@@ -123,6 +124,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return new UnmodifiableObservableList<>(internalList);
     }
+    //@@author
 
     @Override
     public Iterator<Task> iterator() {

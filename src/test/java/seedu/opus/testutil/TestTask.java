@@ -10,6 +10,7 @@ import seedu.opus.model.task.Priority;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Status;
 
+//@@author A0126345J
 /**
  * A mutable task object. For testing only.
  */
@@ -31,6 +32,7 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
+        //@@author A0124368A
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority().orElse(null);
         this.status = taskToCopy.getStatus();
@@ -38,6 +40,7 @@ public class TestTask implements ReadOnlyTask {
         this.startTime = taskToCopy.getStartTime().orElse(null);
         this.endTime = taskToCopy.getEndTime().orElse(null);
         this.tags = taskToCopy.getTags();
+        //@@author A0124368A
     }
 
     public void setName(Name name) {
@@ -73,16 +76,19 @@ public class TestTask implements ReadOnlyTask {
         return name;
     }
 
+    //@@author A0124368A
     @Override
     public Optional<Priority> getPriority() {
         return Optional.ofNullable(priority);
     }
+    //@@author
 
     @Override
     public Status getStatus() {
         return status;
     }
 
+    //@@author A0124368A
     @Override
     public Optional<Note> getNote() {
         return Optional.ofNullable(note);
@@ -97,6 +103,7 @@ public class TestTask implements ReadOnlyTask {
     public Optional<DateTime> getEndTime() {
         return Optional.ofNullable(endTime);
     }
+    //@@author
 
     @Override
     public UniqueTagList getTags() {
@@ -108,6 +115,7 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0124368A
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
@@ -133,4 +141,5 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+    //@@author
 }

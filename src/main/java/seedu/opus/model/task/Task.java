@@ -8,6 +8,7 @@ import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.commons.util.CollectionUtil;
 import seedu.opus.model.tag.UniqueTagList;
 
+//@@author A0126345J
 /**
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
@@ -34,10 +35,12 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Name name, Priority priority, Status status,
             Note note, DateTime startTime, DateTime endTime, UniqueTagList tags) {
+        //@@author A0124368A
         // Name should never be null because it is required for each task.
         // Status should never be null because every created task should be marked as incomplete.
         // Tags should never be null because zero tags is represented as an empty list.
         assert !CollectionUtil.isAnyNull(name, status, tags);
+        //@@author
 
         this.name = name;
         this.priority = priority;
@@ -52,9 +55,11 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
+        //@@author A0124368A
         this(source.getName(), source.getPriority().orElse(null), source.getStatus(),
                 source.getNote().orElse(null), source.getStartTime().orElse(null),
                 source.getEndTime().orElse(null), source.getTags());
+        //@@author
     }
 
     public void setName(Name name) {
@@ -72,10 +77,12 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
+    //@@author A0124368A
     @Override
     public Optional<Priority> getPriority() {
         return Optional.ofNullable(priority);
     }
+    //@@author
 
     public void setStatus(Status status) {
         assert status != null;
@@ -92,6 +99,7 @@ public class Task implements ReadOnlyTask {
         this.note = note;
     }
 
+    //@@author A0124368A
     @Override
     public Optional<Note> getNote() {
         return Optional.ofNullable(note);
@@ -101,15 +109,18 @@ public class Task implements ReadOnlyTask {
     public Optional<DateTime> getStartTime() {
         return Optional.ofNullable(startTime);
     }
+    //@@author
 
     public void setStartTime(DateTime dateTime) {
         this.startTime = dateTime;
     }
 
+    //@@author A0124368A
     @Override
     public Optional<DateTime> getEndTime() {
         return Optional.ofNullable(endTime);
     }
+    //@@author
 
     public void setEndTime(DateTime endTime) {
         this.endTime = endTime;

@@ -2,6 +2,7 @@ package seedu.opus.model.task;
 
 import seedu.opus.commons.exceptions.IllegalValueException;
 
+//@@author A0126345J
 /**
  * Represents a Task note in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}

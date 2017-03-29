@@ -9,6 +9,7 @@ import seedu.opus.logic.commands.EditCommand;
 import seedu.opus.testutil.TaskBuilder;
 import seedu.opus.testutil.TestTask;
 
+//@@author A0124368A
 public class MarkCommandTest extends TaskManagerGuiTest {
 
     private TestTask[] expectedTasksList = td.getTypicalTasks();
@@ -47,3 +48,4 @@ public class MarkCommandTest extends TaskManagerGuiTest {
     }
 
 }
+//@@author
