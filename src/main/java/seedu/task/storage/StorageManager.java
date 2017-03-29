@@ -10,6 +10,7 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.TaskListChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.commons.events.storage.TaskListStoragePathChangedEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.UserPrefs;
@@ -87,5 +88,18 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+
+    //@@author A0163673Y
+    @Override
+    public void setTaskListStorageFilePath(String filePath) {
+        taskListStorage.setTaskListStorageFilePath(filePath);
+        indicateTaskListStoragePathChanged(filePath);
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateTaskListStoragePathChanged(String filePath) {
+        raise(new TaskListStoragePathChangedEvent(filePath));
+    }
+    //@@author
 
 }
