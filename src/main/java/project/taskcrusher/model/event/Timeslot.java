@@ -109,8 +109,8 @@ public class Timeslot {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Timeslot // instanceof handles nulls
-                        && this.start.equals(((Timeslot) other).start) && this.end.equals(((Timeslot) other).end)); // state
-                                                                                                                    // check
+                        && this.start.equals(((Timeslot) other).start)
+                        && this.end.equals(((Timeslot) other).end)); // state check
     }
 
 }
