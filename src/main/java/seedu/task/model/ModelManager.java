@@ -123,8 +123,19 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowAll() {
+        updateListWithRecurringTime();
         filteredTasks.setPredicate(null);
     }
+
+    //@@author A0164212U
+    public void updateListWithRecurringTime() {
+        for (ReadOnlyTask task: filteredTasks) {
+            if (task.isRecurring()) {
+
+            }
+        }
+    }
+    //@@author
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {

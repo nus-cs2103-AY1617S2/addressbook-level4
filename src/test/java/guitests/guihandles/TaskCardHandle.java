@@ -15,7 +15,7 @@ import seedu.task.model.task.ReadOnlyTask;
  * Provides a handle to a person card in the person list panel.
  */
 public class TaskCardHandle extends GuiHandle {
-    private static final String DESC_FIELD_ID = "#frequency";
+    private static final String DESC_FIELD_ID = "#description";
     private static final String STARTING_TIMING_FIELD_ID = "#startTiming";
     private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String END_TIMING_FIELD_ID = "#endTiming";
@@ -81,6 +81,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask person) {
+        System.out.println(getDescription());
         return getDescription().equals(person.getDescription().description)
                 && getPriority().equals("Priority: " + person.getPriority().value)
                 && getStartingTiming().equals("Start Timing: " + person.getStartTiming().value)

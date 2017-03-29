@@ -202,6 +202,7 @@ public class CalenderPanel extends UiPart<Region> {
                 String labelDate = dayHashMap.get("day" + (j + 1)).getText().toString();
                 String taskDate = taskList.get(i).getEndTiming().toString();
                 String[] taskListDateData = taskDate.toString().split("/");
+                System.out.println(taskDate.toString().split("/"));
                 String taskDateMonth = taskListDateData[1];
                 String taskDateDate = taskListDateData[0];
                 boolean  DateEqual = false;
@@ -283,7 +284,7 @@ public class CalenderPanel extends UiPart<Region> {
 
         for (int count = 1; count <= 28; count++) {
             dayHashMap.get("day" + count).setText(Integer.toString(firstDateMonth)
-                + "/" + Integer.toString(firstDateDate));
+                    + "/" + Integer.toString(firstDateDate));
             firstDateDate++;
             if (firstDateMonth == 2 && firstDateDate > 28) {
                 firstDateMonth += 1;
