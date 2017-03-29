@@ -107,7 +107,7 @@ public class EditCommand extends Command implements Undoable {
                 updatedStartDateTime.get().setDateOnly(editTaskDescriptor.getStartDate().get());
             } else {
                 updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
-                updatedStartDateTime.get().setTimeOnly("00:00:00");
+                updatedStartDateTime.get().setDefaultTime();
             }
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
@@ -115,7 +115,7 @@ public class EditCommand extends Command implements Undoable {
                 updatedEndDateTime.get().setDateOnly(editTaskDescriptor.getEndDate().get());
             } else {
                 updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndDate().get()));
-                updatedEndDateTime.get().setTimeOnly("00:00:00");
+                updatedEndDateTime.get().setDefaultTime();
             }
         }
         if (editTaskDescriptor.getStartTime().isPresent()) {

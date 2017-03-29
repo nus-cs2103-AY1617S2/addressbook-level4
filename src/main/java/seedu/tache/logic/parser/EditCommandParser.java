@@ -2,7 +2,11 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tache.logic.parser.CliSyntax.EDIT_MULTI_PARAMETER_KEYWORD;
+import static seedu.tache.logic.parser.CliSyntax.EDIT_MULTI_PARAMETER_KEYWORDS;
 import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_DELIMITER;
+import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_KEYWORD;
+import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_VALUE_KEYWORD;
 import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER_2;
 import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER_3;
@@ -67,15 +71,16 @@ public class EditCommandParser {
             argsInProcess = argsInProcess.substring(indexOfIndex + new String("" +  index.get()).length());
 
             //Process Other Arguments
-            int indexOfFirstAndChange = argsInProcess.indexOf(" and change ");
+            int indexOfFirstAndChange = argsInProcess.indexOf(EDIT_MULTI_PARAMETER_KEYWORDS);
             if (indexOfFirstAndChange == -1) {
                 //Single parameter edit
-                int indexOfFirstChange = argsInProcess.indexOf(" change ");
-                int indexOfFirstTo = argsInProcess.indexOf(" to ");
+                int indexOfFirstChange = argsInProcess.indexOf(EDIT_PARAMETER_KEYWORD);
+                int indexOfFirstTo = argsInProcess.indexOf(EDIT_PARAMETER_VALUE_KEYWORD);
                 if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
                     String updateParameter = argsInProcess.substring(indexOfFirstChange
-                            + new String(" change ").length(), indexOfFirstTo);
-                    String updateValue = argsInProcess.substring(indexOfFirstTo + new String(" to ").length());
+                            + new String(EDIT_PARAMETER_KEYWORD).length(), indexOfFirstTo);
+                    String updateValue = argsInProcess.substring(indexOfFirstTo
+                                                + new String(EDIT_PARAMETER_VALUE_KEYWORD).length());
                     return processStructuredArguments(index.get() + PARAMETER_DELIMITER + updateParameter
                                                         + EDIT_PARAMETER_DELIMITER + updateValue);
                 } else {
@@ -87,20 +92,21 @@ public class EditCommandParser {
                 ArrayList<String> updateParameterList = new ArrayList<String>();
                 ArrayList<String> updateValueList = new ArrayList<String>();
                 while (argsInProcess.length() > 0) {
-                    int indexOfFirstChange = argsInProcess.indexOf(" change ");
-                    int indexOfFirstTo = argsInProcess.indexOf(" to ");
+                    int indexOfFirstChange = argsInProcess.indexOf(EDIT_PARAMETER_KEYWORD);
+                    int indexOfFirstTo = argsInProcess.indexOf(EDIT_PARAMETER_VALUE_KEYWORD);
                     if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
                         String updateParameter = argsInProcess.substring(indexOfFirstChange
-                                + new String(" change ").length(), indexOfFirstTo);
+                                + new String(EDIT_PARAMETER_KEYWORD).length(), indexOfFirstTo);
                         String updateValue = "";
                         if (indexOfFirstAndChange != -1) {
-                            updateValue = argsInProcess.substring(indexOfFirstTo + new String(" to ").length(),
-                                                                            indexOfFirstAndChange);
+                            updateValue = argsInProcess.substring(indexOfFirstTo
+                                    + new String(EDIT_PARAMETER_VALUE_KEYWORD).length(), indexOfFirstAndChange);
                             argsInProcess = argsInProcess.substring(indexOfFirstAndChange
-                                    + new String(" and ").length() - 1);
-                            indexOfFirstAndChange = argsInProcess.indexOf(" and change ");
+                                    + new String(EDIT_MULTI_PARAMETER_KEYWORD).length() - 1);
+                            indexOfFirstAndChange = argsInProcess.indexOf(EDIT_MULTI_PARAMETER_KEYWORDS);
                         } else {
-                            updateValue = argsInProcess.substring(indexOfFirstTo + new String(" to ").length());
+                            updateValue = argsInProcess.substring(indexOfFirstTo
+                                            + new String(EDIT_PARAMETER_VALUE_KEYWORD).length());
                             argsInProcess = "";
                         }
                         updateParameterList.add(updateParameter);
