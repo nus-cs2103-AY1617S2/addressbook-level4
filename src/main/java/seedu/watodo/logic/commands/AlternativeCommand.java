@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+//@@author A0143076J
 /**
  * Stores a map of alternatives command words, and their corresponding default
  * command word. Also stores a list of all the default command words of Watodo.
