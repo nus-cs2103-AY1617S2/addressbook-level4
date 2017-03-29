@@ -253,7 +253,7 @@ Here are some example design patterns used in the code base.
   * The 'View' part of the application is mostly in the `.fxml` files in the `src/main/resources/view`
   folder.
   * `Model` component contains the 'Model'.
-  * Sub classes of [`UiPart`](../src/main/java/seedu/address/ui/UiPart.java) (e.g. `PersonListPanel` )
+  * Sub classes of [`UiPart`](../src/main/java/seedu/address/ui/UiPart.java) (e.g. `TaskListPanel` )
   act as 'Controllers', each controlling some part of the UI and communicating with the 'Model' via a `Logic`
   component which sits between the 'Controller' and the 'Model'.
 * **Abstraction Occurrence Pattern** : Not currently used in the app.

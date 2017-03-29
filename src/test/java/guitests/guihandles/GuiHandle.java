@@ -7,11 +7,12 @@ import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import seedu.tasklist.TestApp;
+import seedu.tasklist.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -74,6 +75,12 @@ public class GuiHandle {
         return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
     }
 
+    //@@author A0143355J
+    protected boolean getNodeVisibility(String fieldId, Node parentNode) {
+        return ((ImageView) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).visibleProperty().get();
+    }
+
+    //@@author
     public void focusOnSelf() {
         if (stageTitle != null) {
             focusOnWindow(stageTitle);
