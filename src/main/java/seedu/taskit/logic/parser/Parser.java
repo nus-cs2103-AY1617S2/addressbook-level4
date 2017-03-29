@@ -18,7 +18,9 @@ import seedu.taskit.logic.commands.IncorrectCommand;
 import seedu.taskit.logic.commands.ListCommand;
 import seedu.taskit.logic.commands.MarkCommand;
 import seedu.taskit.logic.commands.SaveCommand;
+import seedu.taskit.logic.commands.RedoCommand;
 import seedu.taskit.logic.commands.SelectCommand;
+import seedu.taskit.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -78,6 +80,13 @@ public class Parser {
             
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+ 
+        //@@author A0141011J    
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+        
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

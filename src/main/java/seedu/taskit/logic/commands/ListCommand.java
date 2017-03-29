@@ -49,4 +49,10 @@ public class ListCommand extends Command {
         }
     }
 
+    
+    //@@author A0141011J
+    @Override
+    public boolean isUndoable() {
+        return true;
+    }
 }
