@@ -85,13 +85,13 @@ Example:
 
 ### Exit the program : `exit`
 Exits the program.
-Format: `exit`  
+Format: `exit`
 
-### Save the data 
+### Save the data
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Command Summary
-Command | Format  
+Command | Format
 -------- | :--------
 help | `help`
 add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`

@@ -52,7 +52,7 @@ public class TypicalTestTasks {
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
-            
+
         }
     }
 
