@@ -355,23 +355,22 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new event | know when my events are
 `* * *` | user | mark a task as done or undone | know what tasks still need to be completed
 `* * *` | user | delete an existing task | get rid of tasks that no longer matter to me
-`* * *` | user | search tasks based on name | find all tasks with the same name
-`* * *` | user | search tasks based on keywords | find all similar tasks
-`* * *` | user | search tasks based on tags | find all tasks in a group
+`* * *` | user | search tasks based on keywords in title or tag | find all similar tasks
 `* * *` | user | search tasks based on date | find all tasks near a certain time
-`* * *` | user | modify an existing task's name | change the name of the task
-`* * *` | user | modify an existing task's description | edit the task's requirements
+`* * *` | user | modify an existing task's title | change the name of the task
 `* * *` | user | modify an existing task's start and end date | keep up with changing deadlines
 `* * *` | user | undo an action | undo any mistakes I make
 `* * *` | user | view all tasks | see all the tasks I've ever added
-`* * *` | user | view all undone tasks | see what tasks I still need to work on
+`* * *` | user | view all undone or done tasks | see what tasks I still need to work on
+`* * *` | user | view all tasks due today | see what tasks I will need to finish by today
+`* * *` | user | view all overdued tasks | see what tasks I can delete
 `* * *` | user | Save all the tasks in specified local folder/file | Store everything in local file that is controlled by a cloud syncing service (e.g. dropbox) to synchronise across multiple computers
 `* *` | user | categorize tasks into work, study, leisure etc | group my tasks together
 `* *` | user | view all floating tasks | see which tasks do not have a deadline
 `* *` | user | view all events | see what my events are
 `* *` | user | sort tasks by date | see which tasks will be coming up soon
 `* *` | user | Assign priority to each task | rank my tasks depending on what has to get done first
-`* *` | user | sort tasks by priority | see which tasks will need my attention the most
+`* *` | user | list tasks by priority | see which tasks will need my attention the most
 `*` | user | Add recurring tasks | so that I can easily add a task that occurs regularly
 `*` | user |Sync with other calendars (e.g. Google calendar) | I can add functionality that TaskIt may not have
 `*` | user | See today’s most important task when opening the app | so that I immediately know what I need to work on
@@ -534,6 +533,7 @@ Use case ends.
 > 1c2. User specifies task to mark based on index <br>
 Use case ends.
 
+Author: Peng Chong
 #### Use case 7: View all tasks
 
 **MSS**
@@ -552,10 +552,70 @@ Use case ends.
 > 1b1. TaskIt lists all aforementioned tasks <br>
 Use case ends
 
+#### Use case 8: View all undone or done tasks
+
+**MSS**
+
+1. User requests to view all undone or done tasks
+2. TaskIt lists all undone or done tasks <br>
+Use case ends.
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+#### Use case 9: View all overdued tasks
+
+**MSS**
+
+1. User requests to view all overdued tasks
+2. TaskIt lists all overdued tasks <br>
+Use case ends.
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+#### Use case 10: Save all the tasks in specified local folder/file
+
+**MSS**
+
+1. User requests to save all the tasks in specified local folder/file
+2. TaskIt saves all the tasks in the specified local folder/file <br>
+Use case ends.
+
+**Extensions**
+1a. The given local folder/file is invalid
+> 1a1. TaskIt requests a valid local folder/file
+> Use case resumes at step 1 <br>
+Use case ends.
+
+#### Use case 11: Search tasks by a given date
+
+**MSS**
+
+1. User requests to search all the tasks by a given deadline
+2. TaskIt sort all the tasks which deadline matches the given deadline and show the result to the user <br>
+Use case ends.
+
+**Extensions**
+1a. All tasks are floating task without deadline
+> 1a1. TaskIt returns all the existing tasks<br>
+
+1b. The given date command is invalid
+> 1b1. TaskIt requests a valid date command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
 {More to be added}
 
-[//]: # "@@author A0141872E"
 ## Appendix C : Non Functional Requirements
+
+Author: Peng Chong
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.

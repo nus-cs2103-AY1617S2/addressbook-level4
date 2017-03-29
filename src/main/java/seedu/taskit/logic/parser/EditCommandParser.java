@@ -3,6 +3,7 @@ package seedu.taskit.logic.parser;
 //@author A0141872E
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskit.logic.parser.CliSyntax.FIELDWORD_END;
+import static seedu.taskit.logic.parser.CliSyntax.FIELDWORD_PRIORITY;
 import static seedu.taskit.logic.parser.CliSyntax.FIELDWORD_START;
 import static seedu.taskit.logic.parser.CliSyntax.FIELDWORD_TAG;
 import static seedu.taskit.logic.parser.CliSyntax.FIELDWORD_TITLE;
@@ -32,34 +33,6 @@ public class EditCommandParser {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
-    //public Command parse(String args) {
-        //assert args != null;
-        //ArgumentTokenizer argsTokenizer =
-        //        new ArgumentTokenizer(PREFIX_TITLE, PREFIX_DESCRIPTION, PREFIX_TAG);
-        //argsTokenizer.tokenize(args);
-        
-        //List<Optional<String>> preambleFields = ParserUtil.splitPreamble(prepareArgument(args).orElse(""), 2);
-
-        //Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-        //if (!index.isPresent()) {
-        //   return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        //}
-
-        //EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
-        //try {
-        //    editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
-        //    editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-        //} catch (IllegalValueException ive) {
-        //    return new IncorrectCommand(ive.getMessage());
-        //}
-
-        //if (!editTaskDescriptor.isAnyFieldEdited()) {
-        //   return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
-        //}
-
-        //return new EditCommand(index.get(), editTaskDescriptor);
-    //}
-    
     public Command parse(String args) {
         assert args != null;
         List<Optional<String>> editInformation = ParserUtil.splitArgument(args.trim(),3);
@@ -96,7 +69,10 @@ public class EditCommandParser {
             }
             if (FIELDWORD_END.equals(fieldWordName)) {
             	editTaskDescriptor.setEnd(ParserUtil.parseDate(updateInformation));
-            }            
+            }   
+            if (FIELDWORD_PRIORITY.equals(fieldWordName)) {
+                editTaskDescriptor.setPriority(ParserUtil.parsePriority(updateInformation));
+            }
         }catch (IllegalValueException ive) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }

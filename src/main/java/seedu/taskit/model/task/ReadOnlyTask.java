@@ -12,6 +12,7 @@ public interface ReadOnlyTask {
     Title getTitle();
     Date getStart();
     Date getEnd();
+    Priority getPriority();
     
     Boolean isDone();
     Boolean isOverdue();

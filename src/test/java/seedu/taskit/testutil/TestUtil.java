@@ -33,6 +33,7 @@ import seedu.taskit.model.AddressBook;
 import seedu.taskit.model.tag.Tag;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
+import seedu.taskit.model.task.Priority;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
@@ -73,9 +74,9 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("SE Project"), new Date(), new Date(), new UniqueTagList()),
-                new Task(new Title("DB Homework"), new Date(), new Date("next monday"), new UniqueTagList()),
-                new Task(new Title("Carl's Birthday Party"), new Date("this friday at 2 pm"), new Date("this friday at 7 pm"), new UniqueTagList())   
+                new Task(new Title("SE Project"), new Date(), new Date(), new Priority(), new UniqueTagList()),
+                new Task(new Title("DB Homework"), new Date(), new Date("next monday"), new Priority("high"), new UniqueTagList()),
+                new Task(new Title("Carl's Birthday Party"), new Date("this friday at 2 pm"), new Date("this friday at 7 pm"), new Priority(), new UniqueTagList())   
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

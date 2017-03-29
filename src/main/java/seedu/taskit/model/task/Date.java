@@ -27,6 +27,9 @@ public class Date {
     Parser parser = new Parser();
     
 
+    /**
+     * Default constructor for Date
+     */
     public Date() {
         this.date = null;
         this.dateString = null;

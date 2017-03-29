@@ -16,6 +16,7 @@ import seedu.taskit.commons.util.StringUtil;
 import seedu.taskit.model.tag.Tag;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
+import seedu.taskit.model.task.Priority;
 import seedu.taskit.model.task.Title;
 
 /**
@@ -105,7 +106,25 @@ public class ParserUtil {
      */
     public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+        if (date.isPresent()) {
+            if (date.get().equals("none") || date.get().equals("null")) {
+                return Optional.of(new Date());
+            }
+            else {
+                return Optional.of(new Date(date.get()));
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+    
+    // @@author A0163996J
+    /**
+     * Parses a {@code Optional<String> Priority} into an {@code Optional<Priority>} if {@code priority} is present.
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
     // @@author

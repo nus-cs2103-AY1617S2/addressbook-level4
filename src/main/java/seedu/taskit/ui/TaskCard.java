@@ -22,6 +22,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label priority;
+    @FXML
     private FlowPane tags;
 
     // @@author A0163996J
@@ -30,6 +32,13 @@ public class TaskCard extends UiPart<Region> {
         title.setText(task.getTitle().title);
         start.setText(task.getStart().toString());
         end.setText(task.getEnd().toString());
+        if (task.getPriority().toString().equals("high")) {
+            cardPane.setStyle("-fx-background-color: #fcafa6;");
+        }
+        else if (task.getPriority().toString().equals("medium")) {
+            cardPane.setStyle("-fx-background-color: #fafc85;");
+        }
+        
         if (start.getText().length() > 0) {
         	start.setText("Start Time: " + start.getText());
         	end.setText("End Time: " + end.getText());
