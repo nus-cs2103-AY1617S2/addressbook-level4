@@ -26,12 +26,12 @@ Role: Developer <br>
 Responsibilities: Code quality, Testing and Integration <br>
 Component: Logic <br>
 Features implemented: <br>
-   [Add 3 Type of Task : floating, deadline, event]<br>
-   [Edit name,deadline for 3 Type of Task]<br>
-   [Remove deadline]<br>
-   [Undo Command] <br>
-   [Redo Command] <br>
-   [Flexibility in command]<br>
+   *[Add 3 Type of Task : floating, deadline, event]<br>
+   *[Edit name,deadline for 3 Type of Task]<br>
+   *[Remove deadline]<br>
+   *[Undo Command] <br>
+   *[Redo Command] <br>
+   *[Flexibility in command]<br>
 Code written: [[functional code](../collated/main/A0139926R.md)][[test code](../collated/test/A0139926R.md)] <br>
 Other major contributions: <br>
   Did the initial refactoring from AddressBook to TaskManager in main <br>
