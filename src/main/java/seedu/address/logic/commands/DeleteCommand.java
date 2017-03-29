@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
-    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Task deleted successfully.";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Task deleted successfully.";
 
     public final int targetIndex;
 
@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
             assert false : "The target task cannot be missing";
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete), MESSAGE_SUCCESS_SATAUS_BAR);
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete), MESSAGE_SUCCESS_STATUS_BAR);
     }
 
 }

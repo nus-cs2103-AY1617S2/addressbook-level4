@@ -70,6 +70,9 @@ public interface Model {
     /** Informs eventbus about the change in save location */
     void updateSaveLocation(String path);
 
+    /** Informs eventbus about the need to export data to specified path **/
+    void exportToLocation(String path);
+
     /**
      * Divides task lists by categories into three separate ObservableList which
      * will be provided by UI

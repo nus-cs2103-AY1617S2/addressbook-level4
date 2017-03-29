@@ -20,7 +20,7 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n" + "Example: "
             + COMMAND_WORD + " alice bob charlie";
 
-    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "%1$s task(s) found.";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "%1$s task(s) found.";
 
     private final Set<String> keywords;
     private final Date date;
@@ -42,7 +42,7 @@ public class FindCommand extends Command {
         model.updateFilteredTaskList(keywords, date, tagKeys);
         return new CommandResult(getMessageForTaskListShownSummary(
                 model.getFilteredTaskList().size()),
-                String.format(MESSAGE_SUCCESS_SATAUS_BAR, model.getFilteredTaskList().size()));
+                String.format(MESSAGE_SUCCESS_STATUS_BAR, model.getFilteredTaskList().size()));
     }
 
 }
