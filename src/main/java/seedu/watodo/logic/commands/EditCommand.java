@@ -1,11 +1,13 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
@@ -69,7 +71,6 @@ public class EditCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
@@ -83,6 +84,17 @@ public class EditCommand extends Command {
 
         Description updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        if (!updatedTags.equalsOrderInsensitive(taskToEdit.getTags())) {
+            UniqueTagList existingTags = taskToEdit.getTags();
+            for (Iterator<Tag> iterator = updatedTags.iterator(); iterator.hasNext();) {
+                Tag tags = iterator.next();
+                if (existingTags.contains(tags)) {
+                    iterator.remove();
+                    existingTags.remove(tags);
+                }
+            }
+            updatedTags.mergeFrom(existingTags);
+        }
         if (hasRemoveDate) {
             return new Task(updatedName, null, null, updatedTags);
         }
