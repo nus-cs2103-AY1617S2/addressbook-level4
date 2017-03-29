@@ -79,6 +79,7 @@ public class Priority implements Comparable<Priority> {
             break;
         }
     }
+
     //@@author A0163559U
     /**
      * Results in Priority sorted in ascending order.

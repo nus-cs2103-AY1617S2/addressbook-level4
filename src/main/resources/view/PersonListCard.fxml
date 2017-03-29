@@ -40,6 +40,7 @@
                         <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
                         <Label fx:id="startTiming" styleClass="cell_small_label" text="\$startTiming" />
 						<Label fx:id="endTiming" styleClass="cell_small_label" text="\$endTiming" />
+						<Label fx:id="recurring" styleClass="cell_small_label" text="\$recurring" />
 				<!-- //@@author A0164212U -->
                     </children>
                 </VBox>

@@ -12,6 +12,7 @@ import seedu.task.model.task.Description;
 import seedu.task.model.task.EditTaskDescriptor;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
@@ -90,11 +91,17 @@ public class EditCommand extends Command {
         Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToEdit::getStartTiming);
         Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToEdit::getEndTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        boolean updatedRecurring = editTaskDescriptor.isRecurring().orElseGet(taskToEdit::isRecurring);
+        RecurringFrequency updatedFrequency = editTaskDescriptor.getFrequency().orElseGet(taskToEdit::getFrequency);
+
+        updatedStartDate.setTiming(updatedStartDate.toString());
+        updatedEndDate.setTiming(updatedEndDate.toString());
 
         if (!Timing.checkTimingOrder(updatedStartDate, updatedEndDate)) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
 
-        return new Task(updatedDescription, updatedPriority, updatedStartDate, updatedEndDate, updatedTags);
+        return new Task(updatedDescription, updatedPriority, updatedStartDate,
+                updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
     }
 }

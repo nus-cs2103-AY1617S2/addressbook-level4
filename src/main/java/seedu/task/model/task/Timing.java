@@ -20,6 +20,7 @@ public class Timing implements Comparable<Timing> {
                     "Use only HH:mm if today is the default date";
     public static final String[] TIMING_FORMAT = {"HH:mm dd/MM/yyyy", "dd/MM/yyyy"};
     public static final String TIMING_NOT_SPECIFIED = "No date specified.";
+
     public final String value;
     private Date timing;
 
@@ -45,6 +46,10 @@ public class Timing implements Comparable<Timing> {
             this.value = TIMING_NOT_SPECIFIED;
             this.timing = null;
         }
+    }
+
+    public Timing() throws IllegalValueException {
+        this(null);
     }
 
     /**

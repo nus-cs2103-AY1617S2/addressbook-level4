@@ -100,7 +100,6 @@ public class TaskComparableTest {
         //complete a task and expect it to move to the middle
         t2.setComplete();
         sort_and_assertEquals(al, new ArrayList<Task>(Arrays.asList(t1, t2, t3)));
-
     }
 
     private void sort_and_assertEquals(ArrayList<Task> actual, ArrayList<Task> expected) {

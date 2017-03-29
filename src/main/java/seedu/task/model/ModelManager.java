@@ -1,6 +1,8 @@
 package seedu.task.model;
 
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -24,6 +26,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskList taskList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final Stack<TaskList> undoStack;
+    private final Stack<TaskList> redoStack;
 
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -36,6 +40,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskList = new TaskList(taskList);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
+        this.undoStack = new Stack<TaskList>();
+        this.redoStack = new Stack<TaskList>();
     }
 
     public ModelManager() {
@@ -60,13 +66,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        taskList.removeTask(target);
+        TaskList update = new TaskList(this.taskList);
+        undoStack.push(update);
+        this.taskList.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskList.addTask(task);
+        TaskList update = new TaskList(this.taskList);
+        undoStack.push(update);
+        this.taskList.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -77,8 +87,31 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         int addressBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
-        taskList.updateTask(addressBookIndex, editedTask);
+        TaskList update = new TaskList(this.taskList);
+        undoStack.push(update);
+        this.taskList.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void undo() {
+        TaskList temp = undoStack.peek();
+        redoStack.push(new TaskList(this.taskList));
+        this.taskList.resetData(temp);
+        undoStack.pop();
+    }
+
+    @Override
+    public void redo() {
+        TaskList temp = redoStack.peek();
+        undoStack.push(new TaskList(this.taskList));
+        this.taskList.resetData(temp);
+        redoStack.pop();
+    }
+
+    @Override
+    public Stack<TaskList> getUndoStack() {
+        return this.undoStack;
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -90,8 +123,19 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowAll() {
+        //        updateListWithRecurringTime();
         filteredTasks.setPredicate(null);
     }
+
+    //    //@@author A0164212U
+    //    public void updateListWithRecurringTime() {
+    //        for (ReadOnlyTask task: filteredTasks) {
+    //            if (task.isRecurring()) {
+    //
+    //            }
+    //        }
+    //    }
+    //    //@@author
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
@@ -106,6 +150,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -130,6 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -140,26 +186,47 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        //@@author A0164212U
+        /**
+         * @param task
+         * internally sets task.occurrenceIndexList for occurrences that match given keywords for task
+         * @return true if keywords are present in the given task
+         */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return
-                (nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
-                    .findAny()
-                    .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
-                        .findAny()
-                        .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTiming().value, keyword))
-                        .findAny()
-                        .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTiming().value, keyword))
-                        .findAny()
-                        .isPresent());
+            boolean isValid = false;
+            ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
+            for (int i = 0; i < task.getOccurrences().size(); i++) {
+                final int finalIndex = i;
+                if (
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getDescription().description, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getPriority().value, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getOccurrences().get(finalIndex).getStartTiming().value, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getOccurrences().get(finalIndex).getEndTiming().value, keyword))
+                                .findAny()
+                                .isPresent())) {
+                    occurrenceIndexList.add(i);
+                    isValid = true;
+                }
+            }
+            task.setOccurrenceIndexList(occurrenceIndexList);
+            return isValid;
         }
+        //@@author
 
         @Override
         public String toString() {

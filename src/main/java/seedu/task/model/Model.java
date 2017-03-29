@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import java.util.Set;
+import java.util.Stack;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.ReadOnlyTask;
@@ -12,6 +13,8 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
+    /** Stores list of tasks that are recurring */
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyTaskList newData);
 
@@ -22,7 +25,16 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException; //remove this exception??
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+
+    /** Undo the last change */
+    void undo();
+
+    /** Redo the last undo */
+    void redo();
+
+    /** Returns the undoStack */
+    Stack<TaskList> getUndoStack();
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
