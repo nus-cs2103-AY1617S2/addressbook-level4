@@ -62,6 +62,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
+        System.out.println("Attempting to read data from file: " + filePath);
         return taskListStorage.readTaskList(filePath);
     }
 

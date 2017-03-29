@@ -25,9 +25,6 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
-    private String startTiming;
-    @XmlElement(required = true)
-    private String endTiming;
     private boolean recurring;
     @XmlElement(required = true)
     private String frequency;

@@ -76,11 +76,11 @@ public class TaskComparableTest {
     public void sortTasksByCompleteness() throws DuplicateTagException, IllegalValueException {
 
         Task t1 = new Task(new Description(description + "a"), new Priority(priority),
-                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
+                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2), false, null);
         Task t2 = new Task(new Description(description + "b"), new Priority(priority),
-                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
+                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2), false, null);
         Task t3 = new Task(new Description(description + "c"), new Priority(priority),
-                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2));
+                new Timing(timing), new Timing(timing), new UniqueTagList(tag1, tag2), false, null);
 
         //add two near identical tasks
         ArrayList<Task> al = new ArrayList<Task>(Arrays.asList(t1, t2));

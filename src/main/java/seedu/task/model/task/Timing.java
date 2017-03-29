@@ -19,7 +19,7 @@ public class Timing implements Comparable<Timing> {
             "Task timing should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy " +
                     "Use only HH:mm if today is the default date";
     public static final String[] TIMING_FORMAT = {"HH:mm dd/MM/yyyy", "dd/MM/yyyy"};
-    public static final String TIMING_NOT_SPECIFIED = "No date specified.";
+    public static final String TIMING_NOT_SPECIFIED = "floating";
 
     public final String value;
     private Date timing;
@@ -34,10 +34,11 @@ public class Timing implements Comparable<Timing> {
     public Timing(String time) throws IllegalValueException {
         if (time != null) {
             String trimmedTiming = time.trim();
-            if (!trimmedTiming.equals(TIMING_NOT_SPECIFIED) && trimmedTiming.length() <= 5) {
+            if (trimmedTiming.length() <= 5) {
                 trimmedTiming = trimmedTiming + " " + Timing.getTodayDate();
             }
-            if (!isValidTiming(trimmedTiming)) {
+            if (!trimmedTiming.equals(TIMING_NOT_SPECIFIED) && !isValidTiming(trimmedTiming)) {
+                System.out.println("INVALID TIMING IS " + time);
                 throw new IllegalValueException(MESSAGE_TIMING_CONSTRAINTS);
             }
             this.value = trimmedTiming;
@@ -154,21 +155,18 @@ public class Timing implements Comparable<Timing> {
     }
 
     public boolean isFloating() {
-        return this.value.equals(NULL_TIMING);
+        return this.value.equals(TIMING_NOT_SPECIFIED);
     }
 
     //@@author A0163559U
-    /**
-     * Results in Timing sorted in ascending order.
-     */
-    @SuppressWarnings("deprecation")
     @Override
     public int compareTo(Timing compareTiming) {
-        boolean thisNull = this.timing == null;
-        boolean otherNull = compareTiming.timing == null;
+        boolean thisNull = this.getTiming() == null;
+        boolean otherNull = compareTiming.getTiming() == null;
         int compareToResult = 0;
+
         if (thisNull && otherNull) {
-            compareToResult = 0;
+            return compareToResult;
         } else if (thisNull) {
             compareToResult = 1;
         } else if (otherNull) {
@@ -176,11 +174,11 @@ public class Timing implements Comparable<Timing> {
         }
 
         if (compareToResult == 0) {
-            boolean thisTimingSpecified = this.timing.equals(TIMING_NOT_SPECIFIED);
-            boolean otherTimingSpecified = compareTiming.timing.equals(TIMING_NOT_SPECIFIED);
+            boolean thisTimingSpecified = this.getTiming().equals(TIMING_NOT_SPECIFIED);
+            boolean otherTimingSpecified = compareTiming.getTiming().equals(TIMING_NOT_SPECIFIED);
 
             if (thisTimingSpecified && otherTimingSpecified) {
-                compareToResult = 0;
+                return compareToResult;
             } else if (thisTimingSpecified) {
                 compareToResult = 1;
             } else if (otherTimingSpecified) {

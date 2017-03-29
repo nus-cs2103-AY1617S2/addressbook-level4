@@ -334,15 +334,19 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
 
         if (compareToResult == 0) {
-            compareToResult =
-                    this.occurrences.get(0).getEndTiming()
-                    .compareTo(compareTask.occurrences.get(0).getEndTiming());
+            if (this.getEndTiming() == null) {
+                System.out.println("found null timing: description is " + this.getDescription());
+                System.out.println("\tpriority is " + this.getPriority());
+            }
+            if (compareTask.getEndTiming() == null) {
+                System.out.println("found null timing: description is " + compareTask.getDescription());
+                System.out.println("\tpriority is " + compareTask.getPriority());
+            }
+            compareToResult = this.getEndTiming().compareTo(compareTask.getEndTiming());
         }
 
         if (compareToResult == 0) {
-            compareToResult =
-                    this.occurrences.get(0).getStartTiming()
-                    .compareTo(compareTask.occurrences.get(0).getStartTiming());
+            compareToResult = this.getStartTiming().compareTo(compareTask.getStartTiming());
         }
 
         if (compareToResult == 0) {
