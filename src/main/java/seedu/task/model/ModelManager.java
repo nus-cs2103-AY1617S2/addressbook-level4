@@ -52,7 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
-
+    
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
@@ -144,6 +144,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void loadFromLocation(String loadPath) {
         indicateLoadChanged(loadPath);
     }
+    
+    
 
     //=========== Filtered Task List Accessors =============================================================
 

@@ -19,13 +19,15 @@ import seedu.task.model.UserPrefs;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar
+ * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/capital-K icon.png";
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "MainWindowDefault.fxml";
+    protected static final String FXML_Light = "MainWindowLight.fxml";
+    protected static final String FXML_Dark = "MainWindowDark.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
 
@@ -37,6 +39,7 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel taskListPanel;
     private Config config;
     private CommandBox commandBox;
+    private UserPrefs userPrefs;
 
     @FXML
     private AnchorPane browserPlaceholder;
@@ -78,6 +81,27 @@ public class MainWindow extends UiPart<Region> {
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.config = config;
+        this.userPrefs = prefs;
+
+        // Configure the UI
+        setTitle(config.getAppTitle());
+        setIcon(ICON);
+        setWindowMinSize();
+        setWindowDefaultSize(prefs);
+        Scene scene = new Scene(getRoot());
+        primaryStage.setScene(scene);
+
+        setAccelerators();
+    }
+
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String fxml) {
+        super(fxml);
+
+        // Set dependencies
+        this.primaryStage = primaryStage;
+        this.logic = logic;
+        this.config = config;
+        this.userPrefs = prefs;
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -105,25 +129,27 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * 
+     * @param keyCombination
+     *            the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later
+         * version of SDK.
          *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
+         * According to the bug report, TextInputControl (TextField, TextArea)
+         * will consume function-key events. Because CommandBox contains a
+         * TextField, and ResultDisplay contains a TextArea, thus some
+         * accelerators (e.g F1) will not work when the focus is in them because
+         * the key event is consumed by the TextInputControl(s).
          *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * For now, we add following event filter to capture such key events and
+         * open help window purposely so to support accelerators even when focus
+         * is in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -134,11 +160,27 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
+        switch (this.userPrefs.getTheme()) {
+        case Dark:
+            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList(),
+                    TaskListPanel.FXML_Dark, this.userPrefs.getTheme());
+            new ResultDisplay(getResultDisplayPlaceholder(), ResultDisplay.FXML_Dark);
+            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic, CommandBox.FXML_Dark);
+            break;
+        case Light:
+            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList(),
+                    TaskListPanel.FXML_Light, this.userPrefs.getTheme());
+            new ResultDisplay(getResultDisplayPlaceholder(), ResultDisplay.FXML_Light);
+            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic, CommandBox.FXML_Light);
+            break;
+        default:
+            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+            new ResultDisplay(getResultDisplayPlaceholder());
+            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+            break;
+        }
         browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -167,7 +209,9 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
+     * 
+     * @param iconSource
+     *            e.g. {@code "/images/help_icon.png"}
      */
     private void setIcon(String iconSource) {
         FxViewUtil.setStageIcon(primaryStage, iconSource);
@@ -194,8 +238,8 @@ public class MainWindow extends UiPart<Region> {
      * Returns the current size and the position of the main Window.
      */
     GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
+                (int) primaryStage.getY());
     }
 
     @FXML

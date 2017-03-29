@@ -15,19 +15,29 @@ import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.model.task.ReadOnlyTask;
 
-
 /**
  * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
+    protected Theme theme = Theme.Default;
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML = "TaskListPanel.fxml";
+    private static final String FXML = "TaskListPanelDefault.fxml";
+    protected static final String FXML_Light = "TaskListPanelLight.fxml";
+    protected static final String FXML_Dark = "TaskListPanelDark.fxml";
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
+        setConnections(taskList);
+        addToPlaceholder(taskListPlaceholder);
+    }
+
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, String fxml,
+            Theme theme) {
+        super(fxml);
+        this.theme = theme;
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
@@ -45,13 +55,12 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new TaskPanelSelectionChangedEvent(newValue));
-                    }
-                });
+        taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                raise(new TaskPanelSelectionChangedEvent(newValue));
+            }
+        });
     }
 
     public void scrollTo(int index) {
@@ -61,14 +70,14 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    //@@author A0142939W
+    // @@author A0142939W
     public void scrollDown() {
         int currentIdx = taskListView.getSelectionModel().getSelectedIndex();
         taskListView.scrollTo(currentIdx + 3);
         taskListView.getSelectionModel().clearAndSelect(currentIdx + 3);
     }
 
-    //@@author A0142939W
+    // @@author A0142939W
     public void scrollUp() {
         int currentIdx = taskListView.getSelectionModel().getSelectedIndex();
         taskListView.scrollTo(currentIdx - 3);
@@ -85,7 +94,16 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                switch (TaskListPanel.this.theme) {
+                case Dark:
+                    setGraphic(new TaskCard(task, getIndex() + 1, TaskCard.FXML_Dark).getRoot());
+                    break;
+                case Light:
+                    setGraphic(new TaskCard(task, getIndex() + 1, TaskCard.FXML_Light).getRoot());
+                    break;
+                default:
+                    setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                }
             }
         }
     }

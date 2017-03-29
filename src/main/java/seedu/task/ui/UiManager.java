@@ -50,8 +50,19 @@ public class UiManager extends ComponentManager implements Ui {
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
+        
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+            switch(prefs.getTheme()){
+            case Dark:
+                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_Dark);
+                break;
+            case Light:
+                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_Light);
+                break;
+            default:
+                mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+                break;
+            }
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

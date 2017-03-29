@@ -1,6 +1,7 @@
 package seedu.task;
 
 import java.io.IOException;
+import java.util.EventListener;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import seedu.task.commons.core.History;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.events.storage.UpdateUserPrefsEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
@@ -199,6 +201,12 @@ public class MainApp extends Application {
         }
         Platform.exit();
         System.exit(0);
+    }
+    
+    @Subscribe
+    public void handleUpdateUserPrefsEvent(UpdateUserPrefsEvent event){
+        userPrefs = event.getUserPrefs();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "New user preference handled, saving to file"));
     }
 
     @Subscribe

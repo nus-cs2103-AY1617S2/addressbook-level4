@@ -9,7 +9,7 @@
         <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display" />
     </AnchorPane>
    <stylesheets>
-      <URL value="@DarkTheme.css" />
       <URL value="@Extensions.css" />
+      <URL value="@DefaultTheme.css" />
    </stylesheets>
 </AnchorPane>

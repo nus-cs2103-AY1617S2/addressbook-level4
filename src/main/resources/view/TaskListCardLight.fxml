@@ -41,7 +41,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                        <FlowPane fx:id="tags" />
+                        <FlowPane fx:id="tags" opacity="0.87" />
                         <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
                         <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
                         <Label fx:id="loc" styleClass="cell_small_label" text="\$loc" />

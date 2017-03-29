@@ -16,7 +16,9 @@ import seedu.task.logic.commands.exceptions.CommandException;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
-    private static final String FXML = "CommandBox.fxml";
+    private static final String FXML = "CommandBoxDefault.fxml";
+    protected static final String FXML_Light = "CommandBoxLight.fxml";
+    protected static final String FXML_Dark= "CommandBoxDark.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
 
     private final Logic logic;
@@ -26,6 +28,12 @@ public class CommandBox extends UiPart<Region> {
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
+        this.logic = logic;
+        addToPlaceholder(commandBoxPlaceholder);
+    }
+    
+    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, String fxml) {
+        super(fxml);
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }

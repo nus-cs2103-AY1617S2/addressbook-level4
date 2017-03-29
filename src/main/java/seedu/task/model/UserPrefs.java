@@ -3,6 +3,7 @@ package seedu.task.model;
 import java.util.Objects;
 
 import seedu.task.commons.core.GuiSettings;
+import seedu.task.ui.Theme;
 
 /**
  * Represents User's preferences.
@@ -10,6 +11,7 @@ import seedu.task.commons.core.GuiSettings;
 public class UserPrefs {
 
     public GuiSettings guiSettings;
+    public Theme theme;
 
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
@@ -18,7 +20,13 @@ public class UserPrefs {
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
         this.guiSettings = guiSettings;
     }
+    
+    public void updateLastUsedGuiSetting(GuiSettings guiSettings, Theme theme) {
+        this.guiSettings = guiSettings;
+        this.theme = theme;
+    }
 
+    //Default theme is Default
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
     }
@@ -27,6 +35,13 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
+    public void setTheme(String themeName){
+        this.theme = Theme.getTheme(themeName);
+    }
+    
+    public Theme getTheme(){
+        return this.theme;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -48,7 +63,10 @@ public class UserPrefs {
 
     @Override
     public String toString() {
-        return guiSettings.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(guiSettings.toString());
+        sb.append(theme.toString());
+        return sb.toString();
     }
 
 }

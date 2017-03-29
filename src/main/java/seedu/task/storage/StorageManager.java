@@ -15,8 +15,10 @@ import seedu.task.commons.events.model.LoadNewFileEvent;
 import seedu.task.commons.events.model.LoadNewFileSuccessEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.commons.events.storage.UpdateUserPrefsEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
+import seedu.task.commons.util.StringUtil;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
 
@@ -55,6 +57,30 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
+    }
+    
+    @Override
+    public void setThemeTo(String themeName) {
+        // TODO Auto-generated method stub
+        Optional<UserPrefs> optionalUserPrefs = null;
+        try {
+            optionalUserPrefs = this.readUserPrefs();
+        } catch (DataConversionException  e) {
+            // TODO Auto-generated catch block
+            logger.warning("Failed to load the user preference file : " + StringUtil.getDetails(e));
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Theme of KIT will not be changed");
+        }
+        UserPrefs userPrefs = optionalUserPrefs.get();
+        userPrefs.setTheme(themeName);
+        try {
+            this.saveUserPrefs(userPrefs);
+            raise(new UpdateUserPrefsEvent(userPrefs));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            logger.warning("Failed to save new theme to user preference file : " + StringUtil.getDetails(e));
+        }
+        
     }
 
 
@@ -117,7 +143,6 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
-
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             if (!event.backupFilePath.trim().equals("")) {
@@ -147,5 +172,7 @@ public class StorageManager extends ComponentManager implements Storage {
             e.printStackTrace();
         }
     }
+
+   
 
 }

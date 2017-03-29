@@ -14,7 +14,9 @@ import seedu.task.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "TaskListCard.fxml";
+    private static final String FXML = "TaskListCardDefault.fxml";
+    protected static final String FXML_Light = "TaskListCardLight.fxml";
+    protected static final String FXML_Dark = "TaskListCardDark.fxml";
 
     @FXML
     private HBox cardPane;
@@ -37,6 +39,32 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        name.setText(task.getName().fullName);
+        id.setText(displayedIndex + ". ");
+        startDate.setText(task.getStartDate().toString());
+        endDate.setText(task.getEndDate().toString());
+        loc.setText(task.getLocation().value);
+        if (task.isDone()) {
+            //done.setText("Done");
+            name.setTextFill(Color.GREEN);
+            Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
+            name.setGraphic(new ImageView(image));
+            name.setContentDisplay(ContentDisplay.RIGHT);
+            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
+        } else {
+            //done.setText("Not Done");
+            //done.setTextFill(Color.RED);
+            //Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
+            //name.setGraphic(new ImageView(image));
+            //name.setContentDisplay(ContentDisplay.RIGHT);
+            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
+        }
+        remark.setText(task.getRemark().value);
+        initTags(task);
+    }
+    
+    public TaskCard(ReadOnlyTask task, int displayedIndex, String fxml) {
+        super(fxml);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().toString());

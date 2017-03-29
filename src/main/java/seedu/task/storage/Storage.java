@@ -46,4 +46,7 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      */
     void handleTaskManagerChangedEvent(TaskManagerChangedEvent tmce);
 
+    /** Change the theme of KIT to the required one */
+    void setThemeTo(String themeName);
+
 }
