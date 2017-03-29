@@ -18,7 +18,7 @@ public class SaveToCommandParser extends FileTransferCommandParser {
      */
     public Command parse(String argument) {
         assert argument != null;
-        String args = argument.trim().toLowerCase();
+        String args = argument.trim();
         SaveToCommand command;
         if (args.isEmpty()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -53,7 +53,7 @@ public class SaveToCommandParser extends FileTransferCommandParser {
 
         // checks if path is valid
         if (!isValidPath(pathInput)) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            return new IncorrectCommand(String.format(SaveToCommand.MESSAGE_SAVETO_SHOULD_BE_XML,
                     SaveToCommand.MESSAGE_USAGE));
         } else {
             return command;

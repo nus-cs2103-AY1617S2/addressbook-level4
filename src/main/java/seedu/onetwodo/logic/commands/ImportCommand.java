@@ -33,6 +33,8 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported storage file from location: %1$s";
     public static final String MESSAGE_IMPORT_FAILURE = "Failed to import data from %1$s";
     public static final String MESSAGE_IMPORT_FILE_MISSING = "File does not exist!\n";
+    public static final String MESSAGE_IMPORT_SHOULD_BE_XML = "File should have a NAME with .xml behind.\n";
+
 
     public final String filePath;
     public boolean isOverWriting;
@@ -46,10 +48,10 @@ public class ImportCommand extends Command {
 
         try {
             File file = new File(filePath);
-            if (!FileUtil.isFileExists(file)) {
+            if (!FileUtil.isValidPathName(filePath)) {
                 String result = MESSAGE_IMPORT_FILE_MISSING
                         + String.format(MESSAGE_IMPORT_FAILURE, filePath).toString();
-                throw new CommandException(result);
+                return new CommandResult(result);
             } else {
                 Config config = MainApp.getInstance().getConfig();
                 Model model = MainApp.getInstance().getModel();

@@ -18,7 +18,7 @@ public class ImportCommandParser extends FileTransferCommandParser {
      */
     public Command parse(String argument) {
         assert argument != null;
-        String args = argument.trim().toLowerCase();
+        String args = argument.trim();
         ImportCommand command;
         if (args.isEmpty()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -40,7 +40,7 @@ public class ImportCommandParser extends FileTransferCommandParser {
 
         // checks if path is valid
         if (!isValidPath(pathInput)) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            return new IncorrectCommand(String.format(ImportCommand.MESSAGE_IMPORT_SHOULD_BE_XML,
                     ImportCommand.MESSAGE_USAGE));
         } else {
             return command;

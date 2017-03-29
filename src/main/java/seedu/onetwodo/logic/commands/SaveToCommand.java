@@ -36,6 +36,10 @@ public class SaveToCommand extends Command {
             + MESSAGE_EXAMPLE + "%1$s";
     public static final String MESSAGE_SAVETO_SUCCESS = "Change saving location to: %1$s";
     public static final String MESSAGE_SAVETO_FAILURE = "Failed to save data to %1$s";
+    public static final String MESSAGE_SAVETO_SHOULD_BE_XML = "File should have a NAME with .xml behind.\n";
+    public static final String MESSAGE_SAVETO_MAKE_FILE_FAIL = "Failed to create file. Make sure "
+            + "the input does not contain invalid character.\n";
+
 
     public final String filePath;
     public boolean isOverWriting;
@@ -50,9 +54,12 @@ public class SaveToCommand extends Command {
 
         try {
             File file = new File(filePath);
-            if (FileUtil.isFileExists(file) && !isOverWriting) {
+            if (!FileUtil.isValidPathName(filePath)) {
+                return new CommandResult(MESSAGE_SAVETO_MAKE_FILE_FAIL);
+
+            } else if (FileUtil.isFileExists(file) && !isOverWriting) {
                 String result = String.format(MESSAGE_OVERWRITE_WARNING, filePath).toString();
-                throw new CommandException(result);
+                return new CommandResult(result);
             } else {
 
                 Config config = MainApp.getInstance().getConfig();
