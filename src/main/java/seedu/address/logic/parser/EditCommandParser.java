@@ -17,12 +17,15 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.exceptions.InvalidDurationException;
+import seedu.address.model.task.exceptions.PastDateTimeException;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
 
+    //@@author A0140023E
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -48,6 +51,10 @@ public class EditCommandParser {
                     ParserUtil.parseStartEndDateTime(argsTokenizer.getValue(PREFIX_START_DATETIME),
                                                      argsTokenizer.getValue(PREFIX_END_DATETIME)));
             editTaskDescriptor.setTagList(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+        } catch (PastDateTimeException e) {
+            return new IncorrectCommand(e.getMessage());
+        } catch (InvalidDurationException e) {
+            return new IncorrectCommand(e.getMessage());
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -59,6 +66,7 @@ public class EditCommandParser {
         return new EditCommand(index.get(), editTaskDescriptor);
     }
 
+    //@@author
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a

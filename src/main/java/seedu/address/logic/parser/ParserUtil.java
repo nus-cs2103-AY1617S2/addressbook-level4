@@ -27,6 +27,8 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartEndDateTime;
+import seedu.address.model.task.exceptions.InvalidDurationException;
+import seedu.address.model.task.exceptions.PastDateTimeException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -99,13 +101,15 @@ public class ParserUtil {
         return new UniqueTagList(tagSet);
     }
 
-    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
+    public static Optional<Deadline> parseDeadline(Optional<String> deadline)
+            throws PastDateTimeException, IllegalValueException {
         assert deadline != null;
         return deadline.isPresent() ? Optional.of(new Deadline(parseDateTimeString(deadline.get()))) : Optional.empty();
     }
 
     public static Optional<StartEndDateTime> parseStartEndDateTime(Optional<String> startDateTime,
-            Optional<String> endDateTime) throws IllegalValueException {
+            Optional<String> endDateTime)
+            throws PastDateTimeException, InvalidDurationException, IllegalValueException {
         assert startDateTime != null && endDateTime != null;
 
         if (!startDateTime.isPresent() || !endDateTime.isPresent()) {

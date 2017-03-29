@@ -191,6 +191,9 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         // TODO no way to have invalid arguments currently
+        // is this test case appropriate?
+        String expectedMessage = Deadline.MESSAGE_DEADLINE_CONSTRAINTS;
+        assertCommandFailure("add past date by yesterday", expectedMessage);
         // ArgumentTokenizer to understand, along with execute_add_invalidArgsFormat in LogicManagerTest why should fail
         //String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         //assertCommandFailure("add wrong args wrong args", expectedMessage);
@@ -209,7 +212,7 @@ public class LogicManagerTest {
         //        Phone.MESSAGE_PHONE_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
         //        Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name from 2 days later to 3 days later t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS); //TODO only fails because of _-[
 
     }
