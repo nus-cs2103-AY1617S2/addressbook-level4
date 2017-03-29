@@ -26,6 +26,7 @@ public class PersonListPanel extends UiPart<Region> {
     private ListView<ReadOnlyTask> personListView;
 
     public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
+
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(personListPlaceholder);
