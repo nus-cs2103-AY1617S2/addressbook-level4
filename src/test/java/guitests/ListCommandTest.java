@@ -38,7 +38,7 @@ public class ListCommandTest extends TaskListGuiTest {
     public void listTest() {
         commandBox.runCommand("list");
         TestTask[] currentList = td.getTypicalTasksWithDates();
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class ListCommandTest extends TaskListGuiTest {
         commandBox.runCommand("list by due");
         TestTask[] currentList = td.getTypicalTasksWithDates();
         swapTestTasks(currentList, 1, 2);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ListCommandTest extends TaskListGuiTest {
         commandBox.runCommand("list by starts");
         TestTask[] currentList = td.getTypicalTasksWithDates();
         swapTestTasks(currentList, 1, 2);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class ListCommandTest extends TaskListGuiTest {
         commandBox.runCommand("list by ends");
         TestTask[] currentList = td.getTypicalTasksWithDates();
         swapTestTasks(currentList, 1, 2);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ListCommandTest extends TaskListGuiTest {
         TestTask[] currentList = td.getTypicalTasksWithDates();
         commandBox.runCommand("list by due");
         commandBox.runCommand("list by added");
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class ListCommandTest extends TaskListGuiTest {
         TestTask[] currentList = td.getTypicalTasksWithDates();
         TestTask[] completeList = new TestTask[] {currentList[0]};
         commandBox.runCommand("list complete");
-        assertTrue(personListPanel.isListMatching(completeList));
+        assertTrue(taskListPanel.isListMatching(completeList));
     }
 
     @Test
@@ -86,6 +86,6 @@ public class ListCommandTest extends TaskListGuiTest {
         TestTask[] currentList = td.getTypicalTasksWithDates();
         TestTask[] uncompleteList = new TestTask[] {currentList[1], currentList[2]};
         commandBox.runCommand("list incomplete");
-        assertTrue(personListPanel.isListMatching(uncompleteList));
+        assertTrue(taskListPanel.isListMatching(uncompleteList));
     }
 }
