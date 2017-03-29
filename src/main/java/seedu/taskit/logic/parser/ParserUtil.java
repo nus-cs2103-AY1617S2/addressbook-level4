@@ -91,7 +91,16 @@ public class ParserUtil {
      */
     public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+        if (date.isPresent()) {
+            if (date.get().equals("none") || date.get().equals("null")) {
+                return Optional.of(new Date());
+            }
+            else {
+                return Optional.of(new Date(date.get()));
+            }
+        } else {
+            return Optional.empty();
+        }
     }
     
     // @@author A0163996J
