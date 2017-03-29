@@ -144,7 +144,7 @@ public class MainWindow extends UiPart<Region> {
         }
 
         if (leftPanel == null) {
-            leftPanel = new LeftPanel(getleftPanelPlaceholder(), logic.getFilteredTaskList());
+            leftPanel = new LeftPanel(getleftPanelPlaceholder(), model.getTaskManager().getTaskList());
         } else {
             leftPanel.updateLabelCount();
         }
