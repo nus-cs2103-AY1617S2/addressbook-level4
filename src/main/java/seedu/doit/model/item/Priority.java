@@ -14,7 +14,6 @@ public class Priority implements Comparable<Priority> {
     public static final String PRIORITY_LOW = "low";
     public static final String PRIORITY_MED = "med";
 
-
     public final String value;
 
     /**
