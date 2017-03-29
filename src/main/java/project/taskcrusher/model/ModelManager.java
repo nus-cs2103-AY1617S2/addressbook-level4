@@ -9,8 +9,7 @@ import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
-import project.taskcrusher.commons.events.model.EventListToShowUpdatedEvent;
-import project.taskcrusher.commons.events.model.TaskListToShowUpdatedEvent;
+import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
 import project.taskcrusher.model.event.Event;
@@ -70,22 +69,17 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
-    private void prepareEventListForUi() {
+    private void prepareListsForUi() {
+        boolean taskListToShowEmpty = false, eventListToShowEmpty = false;
         sortFilteredEventListByTimeslot();
-        if (filteredEvents.isEmpty()) {
-            raise(new EventListToShowUpdatedEvent(LIST_EMPTY));
-        } else {
-            raise(new EventListToShowUpdatedEvent(!LIST_EMPTY));
-        }
-    }
-
-    private void prepareTaskListForUi() {
         sortFilteredTaskListByDeadline();
-        if (filteredTasks.isEmpty()) {
-            raise(new TaskListToShowUpdatedEvent(LIST_EMPTY));
-        } else {
-            raise(new TaskListToShowUpdatedEvent(!LIST_EMPTY));
+        if (filteredEvents.isEmpty()) {
+            eventListToShowEmpty = LIST_EMPTY;
         }
+        if (filteredTasks.isEmpty()) {
+            taskListToShowEmpty = LIST_EMPTY;
+        }
+        raise(new ListsToShowUpdatedEvent(eventListToShowEmpty, taskListToShowEmpty));
     }
 
     //=========== Task operations =========================================================================
@@ -94,7 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         userInbox.removeTask(target);
         indicateUserInboxChanged();
-        prepareTaskListForUi();
+        prepareListsForUi();
     }
 
     @Override
@@ -112,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(taskListIndex, editedTask);
         indicateUserInboxChanged();
-        prepareTaskListForUi();
+        prepareListsForUi();
     }
 
     //=========== Event operations =========================================================================
@@ -161,7 +155,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowAll() {
         filteredTasks.setPredicate(null);
-        prepareTaskListForUi();
+        prepareListsForUi();
     }
 
     @Override
@@ -176,7 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
-        prepareTaskListForUi();
+        prepareListsForUi();
     }
 
     private void sortFilteredTaskListByDeadline() {
@@ -194,7 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredEventListToShowAll() {
         filteredEvents.setPredicate(null);
-        prepareEventListForUi();
+        prepareListsForUi();
     }
 
     @Override
@@ -209,7 +203,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
-        prepareEventListForUi();
+        prepareListsForUi();
     }
 
     private void sortFilteredEventListByTimeslot() {
