@@ -1,5 +1,6 @@
 package seedu.taskmanager.model.task;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,8 @@ public class StartDate extends Date {
 
     // @@author A0140032E
     private static final SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy h:mm a");
+    private static final SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
+
     /**
      * Validates given start date.
      *
@@ -35,17 +38,22 @@ public class StartDate extends Date {
 
     private static long startDateConstructor(String startDate) throws IllegalValueException {
         try {
-            Parser parser = new Parser();
-            List<DateGroup> dateGroups = parser.parse(startDate);
-            return dateGroups.get(0).getDates().get(0).getTime();
-        } catch (IndexOutOfBoundsException e) {
-            throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
+            return sdfInput.parse(startDate).getTime();
+        } catch (ParseException e) {
+            try {
+                Parser parser = new Parser();
+                List<DateGroup> dateGroups = parser.parse(startDate);
+                return dateGroups.get(0).getDates().get(0).getTime();
+            } catch (IndexOutOfBoundsException f) {
+                throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
+            }
         }
     }
     // @@author
 
     /**
-     * Returns true if a given string is a valid task start date.
+     * Returns true if a given string is a valid task start date with the natty
+     * parser.
      */
     public static boolean isValidStartDate(String test) {
         Parser parser = new Parser();

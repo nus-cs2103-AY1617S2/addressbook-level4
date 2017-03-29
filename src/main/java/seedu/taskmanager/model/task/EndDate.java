@@ -1,5 +1,6 @@
 package seedu.taskmanager.model.task;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,7 @@ public class EndDate extends Date {
 
     // @@author A0140032E
     private static final SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy h:mm a");
+    private static final SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Validates given end date.
@@ -34,11 +36,15 @@ public class EndDate extends Date {
 
     private static long endDateConstructor(String endDate) throws IllegalValueException {
         try {
-            Parser parser = new Parser();
-            List<DateGroup> dateGroups = parser.parse(endDate);
-            return dateGroups.get(0).getDates().get(0).getTime();
-        } catch (IndexOutOfBoundsException e) {
-            throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
+            return sdfInput.parse(endDate).getTime();
+        } catch (ParseException e) {
+            try {
+                Parser parser = new Parser();
+                List<DateGroup> dateGroups = parser.parse(endDate);
+                return dateGroups.get(0).getDates().get(0).getTime();
+            } catch (IndexOutOfBoundsException f) {
+                throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
+            }
         }
     }
     // @@author
@@ -47,7 +53,9 @@ public class EndDate extends Date {
      * Returns if a given string is a valid task end date.
      */
     public static boolean isValidEndDate(String test) {
-        return test.matches(ENDDATE_VALIDATION_REGEX);
+        Parser parser = new Parser();
+        List<DateGroup> dateGroups = parser.parse(test);
+        return !(dateGroups.isEmpty()) && !(dateGroups.get(0).getDates().isEmpty());
     }
 
     // @@author A0140032E
