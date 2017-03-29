@@ -116,6 +116,6 @@ public class XmlAdaptedTask {
         }
         final UniqueLabelList labels = new UniqueLabelList(taskLabels);
         final UniqueBookingList bookings = new UniqueBookingList(taskBookings);
-        return new Task(title, startTime, deadline, isCompleted, labels, isRecurring, recurrence);
+        return new Task(title, startTime, deadline, isCompleted, labels, bookings, isRecurring, recurrence);
     }
 }

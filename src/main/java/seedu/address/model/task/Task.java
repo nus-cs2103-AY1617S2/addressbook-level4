@@ -46,7 +46,6 @@ public class Task implements ReadOnlyTask {
             boolean isCompleted, UniqueLabelList labels, UniqueBookingList bookings, boolean isRecurring,
             Optional<Recurrence> recurrence) {
         assert !CollectionUtil.isAnyNull(title, isCompleted, labels);
-        System.out.println("Why the fuck was I loaded");
         this.title = title;
         this.deadline = deadline;
         this.startTime = startTime;
@@ -54,7 +53,7 @@ public class Task implements ReadOnlyTask {
         this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
         this.bookings = new UniqueBookingList(bookings);
         this.isRecurring = isRecurring;
-        this.recurrence = Optional.empty();
+        this.recurrence = recurrence;
     }
 
     /**
