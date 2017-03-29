@@ -31,7 +31,7 @@ public class IcsUtil {
 
         assert path != null;
 
-        FileInputStream fin = new FileInputStream(FileUtil.getPath(path));
+        FileInputStream fin = new FileInputStream(path);
         CalendarBuilder builder = new CalendarBuilder();
         Calendar calendar = builder.build(fin);
         fin.close();
