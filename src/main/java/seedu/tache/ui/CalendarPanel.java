@@ -75,9 +75,13 @@ public class CalendarPanel extends UiPart<Region> {
 
     private String getLoadTaskExecuteScript(ReadOnlyTask task) {
         String title = task.getName().toString();
-        String start = task.getStartDateTime().get().getDateTimeForFullCalendar();
+        String start = "0";
         String end = "0"; // invalid format of datetime
+        Optional<DateTime> startDateTime = task.getStartDateTime();
         Optional<DateTime> endDateTime = task.getEndDateTime();
+        if (task.getStartDateTime().isPresent()) {
+            start = startDateTime.get().getDateTimeForFullCalendar();
+        }
         if (task.getEndDateTime().isPresent()) {
             end = endDateTime.get().getDateTimeForFullCalendar();
         }
@@ -176,13 +180,15 @@ public class CalendarPanel extends UiPart<Region> {
      */
     private void addAllEvents(ObservableList<ReadOnlyTask> taskList) {
         for (ReadOnlyTask task : taskList) {
-            if (!task.getStartDateTime().isPresent()) {
-                Task newTask = new Task(task);
-                newTask.setStartDateTime(newTask.getEndDateTime());
-                newTask.setEndDateTime(Optional.empty());
-                task = newTask;
+            if (task.getTimedStatus()) {
+                if (!task.getStartDateTime().isPresent()) {
+                    Task newTask = new Task(task);
+                    newTask.setStartDateTime(newTask.getEndDateTime());
+                    newTask.setEndDateTime(Optional.empty());
+                    task = newTask;
+                }
+                addCurrentEvent(task);
             }
-            addCurrentEvent(task);
         }
     }
 
