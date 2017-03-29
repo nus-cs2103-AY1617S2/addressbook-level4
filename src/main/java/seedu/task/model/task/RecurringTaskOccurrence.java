@@ -9,7 +9,7 @@ public class RecurringTaskOccurrence {
     private Timing endTiming;
     private boolean complete;
 
-    public RecurringTaskOccurrence(Timing startTime, Timing endTime){
+    public RecurringTaskOccurrence(Timing startTime, Timing endTime) {
         assert !CollectionUtil.isAnyNull(startTime, endTime);
         this.startTiming = startTime;
         this.endTiming = endTime;

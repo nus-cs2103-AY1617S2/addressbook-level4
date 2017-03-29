@@ -40,8 +40,9 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String startTiming, String endTiming, String recurFreq, Set<String> tags)
-            throws IllegalValueException, IllegalTimingOrderException {
+    public AddCommand(String name, String priority, String startTiming, String endTiming,
+            String recurFreq, Set<String> tags)
+                    throws IllegalValueException, IllegalTimingOrderException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));

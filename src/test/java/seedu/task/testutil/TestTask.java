@@ -140,6 +140,7 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public boolean isComplete() {
         return this.occurrences.get(0).isComplete();
+
     }
 
     @Override

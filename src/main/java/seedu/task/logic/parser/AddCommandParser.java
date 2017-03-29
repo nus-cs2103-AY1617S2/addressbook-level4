@@ -27,9 +27,13 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_TAG, PREFIX_RECURRING);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE,
+                        PREFIX_END_DATE, PREFIX_TAG, PREFIX_RECURRING);
         argsTokenizer.tokenize(args);
-        String priority, startDate, endDate, recur;
+        String priority;
+        String startDate;
+        String endDate;
+        String recur;
 
         try {
             priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();

@@ -23,7 +23,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     private boolean recurring;
     private UniqueTagList tags;
     private RecurringFrequency frequency;
-    public ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
+    private ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
 
     /**
      * Every field must be present and not null.
@@ -165,7 +165,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing
         // your own
-        return Objects.hash(description, priority, occurrences.get(0).getStartTiming(), occurrences.get(0).getEndTiming(),
+        return Objects.hash(description, priority,
+                occurrences.get(0).getStartTiming(), occurrences.get(0).getEndTiming(),
                 tags, recurring, frequency);
     }
 
@@ -224,8 +225,10 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
             cal2.setTime(initialEndTime.getTiming());
             SimpleDateFormat startTimeFormat = retriveFormat(initialStartTime.toString());
             SimpleDateFormat endTimeFormat = retriveFormat(initialEndTime.toString());
-            String tempStartTime, tempEndTime;
-            Timing tempStart = null, tempEnd = null;
+            String tempStartTime;
+            String tempEndTime;
+            Timing tempStart = null;
+            Timing tempEnd = null;
             RecurringTaskOccurrence occurrenceToAdd;
             switch (freqCharacter) {
             case "h":
@@ -294,6 +297,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                     occurrences.add(occurrenceToAdd);
                 }
                 break;
+            default:
+                break;
             }
         }
     }
@@ -324,11 +329,15 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
 
         if (compareToResult == 0) {
-            compareToResult = this.occurrences.get(0).getEndTiming().compareTo(compareTask.occurrences.get(0).getEndTiming());
+            compareToResult =
+                    this.occurrences.get(0).getEndTiming()
+                    .compareTo(compareTask.occurrences.get(0).getEndTiming());
         }
 
         if (compareToResult == 0) {
-            compareToResult = this.occurrences.get(0).getStartTiming().compareTo(compareTask.occurrences.get(0).getStartTiming());
+            compareToResult =
+                    this.occurrences.get(0).getStartTiming()
+                    .compareTo(compareTask.occurrences.get(0).getStartTiming());
         }
 
         if (compareToResult == 0) {
