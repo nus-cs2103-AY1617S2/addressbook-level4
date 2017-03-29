@@ -20,6 +20,8 @@ public class DateTime {
                                         + "interchangeably use the following few formats:"
                                         + "\nMM-DD-YY hh:mm:ss or MM/DD/YY 10.30pm";
 
+    public static final String DEFAULT_TIME_STRING = "00:00:00";
+
     private final Date date;
 
     /**
@@ -77,6 +79,10 @@ public class DateTime {
         this.date.setHours(parsedTime.getHours());
         this.date.setMinutes(parsedTime.getMinutes());
         this.date.setSeconds(parsedTime.getSeconds());
+    }
+
+    public void setDefaultTime() throws IllegalValueException {
+        setTimeOnly(DEFAULT_TIME_STRING);
     }
 
     public String getTimeOnly() {
