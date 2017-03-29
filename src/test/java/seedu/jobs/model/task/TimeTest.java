@@ -1,11 +1,15 @@
 package seedu.jobs.model.task;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.Test;
 
-
+import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.task.Time;
 
 public class TimeTest {
@@ -27,5 +31,16 @@ public class TimeTest {
         // valid Time
         assertTrue(Time.isValidTime("09/12/1993 15:00")); //preceding zero in the date
         
+    }
+    
+    @Test
+    public void timeEquality() throws IllegalValueException{
+    	 // testing for time addition
+        Time oldTime = new Time(Optional.of("09/12/1993 12:00"));
+        assertEquals(oldTime,new Time(Optional.of("09/12/1993 12:00")));
+        assertNotEquals(oldTime,new Time(Optional.of("09/12/1993 16:00")));
+        oldTime.addDays(7);
+        assertNotEquals(oldTime,new Time(Optional.of("09/12/1993 12:00")));
+        assertEquals(oldTime,new Time(Optional.of("16/12/1993 12:00")));
     }
 }
