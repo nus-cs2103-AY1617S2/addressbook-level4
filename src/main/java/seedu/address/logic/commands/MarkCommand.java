@@ -67,13 +67,13 @@ public class MarkCommand extends Command {
         }
 
         try {
+            Task editedTask = createEditedTask(taskToEdit, isCompleted);
+            saveCurrentState();
+            model.updateTask(filteredTaskListIndex, editedTask);
             if (taskToEdit.isRecurring()) {
                 Task newTask = createRecurringTask(taskToEdit);
                 model.addTask(newTask);
             }
-            Task editedTask = createEditedTask(taskToEdit, isCompleted);
-            saveCurrentState();
-            model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (Exception e) {

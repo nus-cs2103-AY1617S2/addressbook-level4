@@ -19,6 +19,7 @@ public class Recurrence {
 
     public final int value;
     public final int interval;
+    public final String intervalString;
 
     /**
      * Validates given name.
@@ -31,7 +32,9 @@ public class Recurrence {
         if (isValidRecurrence(trimmedRecurrence)) {
             StringTokenizer st = new StringTokenizer(trimmedRecurrence);
             this.value = Integer.parseInt(st.nextToken());
-            this.interval = intervalParser.getInterval(st.nextToken());
+
+            this.intervalString = st.nextToken();
+            this.interval = intervalParser.getInterval(intervalString);
         } else {
             throw new IllegalValueException(MESSAGE_RECURRENCE_CONSTRAINTS);
         }
@@ -47,7 +50,7 @@ public class Recurrence {
 
     @Override
     public String toString() {
-        return value + " " + interval;
+        return value + " " + intervalString;
     }
 
     @Override
