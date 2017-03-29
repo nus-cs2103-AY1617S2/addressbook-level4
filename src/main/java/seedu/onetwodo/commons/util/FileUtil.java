@@ -3,6 +3,8 @@ package seedu.onetwodo.commons.util;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
 
 /**
  * Writes and reads files
@@ -83,6 +85,20 @@ public class FileUtil {
         assert pathWithForwardSlash != null;
         assert pathWithForwardSlash.contains("/");
         return pathWithForwardSlash.replace("/", File.separator);
+    }
+
+    //@@author A0139343E
+    /**
+     * Checks of the given path name is a valid one.
+     * @param pathName path name to be checked.
+     */
+    public static boolean isValidPathName(String pathName) {
+        try {
+            Paths.get(pathName);
+        } catch (InvalidPathException |  NullPointerException ex) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -19,7 +19,7 @@ public class DoneCommandTest extends ToDoListGuiTest {
      * @param currentList A copy of the current list of tasks (before marking done).
      */
     private void assertDoneSuccess(TaskType taskType, int targetIndexOneIndexed, final TestTask[] currentList) {
-        
+
     }
 
 }
