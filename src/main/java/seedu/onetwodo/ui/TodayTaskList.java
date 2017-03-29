@@ -16,7 +16,7 @@ import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 
 public class TodayTaskList extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(TodayTaskList.class);
     private static final String FXML = "TaskListPanel.fxml";
 
     // For tests robot.lookup(#{ID})
