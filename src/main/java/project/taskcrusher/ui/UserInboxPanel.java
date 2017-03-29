@@ -7,6 +7,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
@@ -30,9 +31,12 @@ public class UserInboxPanel extends UiPart<Region> {
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
-
+    @FXML
+    private Label taskHeader;
     @FXML
     private ListView<ReadOnlyEvent> eventListView;
+    @FXML
+    private Label eventHeader;
 
     public UserInboxPanel(AnchorPane userInboxPlaceholder, ObservableList<ReadOnlyTask> taskList,
             ObservableList<ReadOnlyEvent> eventList) {
@@ -106,20 +110,25 @@ public class UserInboxPanel extends UiPart<Region> {
 
     @Subscribe
     public void handleListsToShowUpdatedEvent(ListsToShowUpdatedEvent event) {
+        logger.info("Handling ListstoShowUpdatedEvent");
         if (event.eventListToShowEmpty) {
             eventListView.setManaged(SET_LIST_HIDDEN);
             eventListView.setVisible(SET_LIST_HIDDEN);
+            eventHeader.setText("Events: Nothing to Show!");
         } else {
             eventListView.setManaged(SET_LIST_VISIBLE);
             eventListView.setVisible(SET_LIST_VISIBLE);
+            eventHeader.setText("Events: ");
         }
 
         if (event.taskListToShowEmpty) {
             taskListView.setManaged(SET_LIST_HIDDEN);
             taskListView.setVisible(SET_LIST_HIDDEN);
+            taskHeader.setText("Tasks: Nothing to Show!");
         } else {
             taskListView.setManaged(SET_LIST_VISIBLE);
             taskListView.setVisible(SET_LIST_VISIBLE);
+            taskHeader.setText("Tasks: ");
         }
     }
 

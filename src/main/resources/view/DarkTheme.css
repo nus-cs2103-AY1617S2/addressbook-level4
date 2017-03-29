@@ -312,13 +312,13 @@
 }
 /*for the header labels */
 .list_header {
-	-fx-text-fill: white;
+	-fx-text-fill: black;
 	-fx-padding: 10 10 10 10;
 	-fx-font-size: 16px;
 }
 /*To cut down the padding at the top */
-#taskLabel {
-	-fx-padding: -8 10 10 10;
+#taskHeader {
+	-fx-padding: -3 10 10 10;
 }
 
 #name {
