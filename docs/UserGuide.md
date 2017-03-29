@@ -60,6 +60,12 @@ Format: `add EVENT s/STARTTIME e/ENDTIME [t/tag]`
 Adds a deadline<br>
 Format: `add DEADLINE e/DEADLINE [t/tag]`
 
+Adds a deadline with default date<br>
+Format: `add DEADLINE e/ [t/tag]`
+
+Adds a event with default date<br>
+Format: `add EVENT s/ e/ [t/tag]`
+
 Examples:
 
 * `add Finish math homework t/school`
@@ -82,18 +88,27 @@ Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
 Adds a deadline.<br>
 Format: `edit INDEX [e/DEADLINE]`
 
+Adds a deadline with default date.<br>
+Format: `edit INDEX [e/]`
+
 Adds a start time and endtime.<br>
 Format: `edit INDEX [s/STARTTIME] [e/ENDTIME]`
+
+Adds a event and with default date.<br>
+Format: `edit INDEX [s/] [e/]`
 
 Edits a todo title.<br>
 Format: `edit INDEX [TASK] [t/TAG]`
 
+Add a tag.<br>
+Format: `edit INDEX [ta/TAG]`
 
 > * Edits the todo at the specified `INDEX`.
     The index refers to the index number shown in the last todo listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
+> * Edit with `t/` may replacce all the previous tags with new assigned tags.
 
 Examples:
 
