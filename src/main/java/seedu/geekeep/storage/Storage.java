@@ -47,5 +47,5 @@ public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage
      */
     void handleGeeKeepChangedEvent(GeeKeepChangedEvent abce);
 
-    void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event);
+    void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) throws IOException;
 }
