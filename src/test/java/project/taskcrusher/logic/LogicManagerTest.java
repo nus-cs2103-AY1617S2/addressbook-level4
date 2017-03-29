@@ -493,6 +493,18 @@ public class LogicManagerTest {
         assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedInbox, expectedTaskList, expectedEventList);
     }
 
+    // @Test
+    // public void execute_list_filtersCorrectly() throws Exception {
+    // // prepare expectations
+    // TestDataHelper helper = new TestDataHelper();
+    // UserInbox expectedInbox1 = new UserInbox();
+    // List<Event> expectedEventList1 = new ArrayList<>();
+    // List<Event> expectedTaskList1 = new ArrayList<>();
+    //
+    // assertCommandSuccess("list d/", ListCommand.MESSAGE_SUCCESS,
+    // expectedInbox1, expectedTaskList1, expectedEventList1);
+    // }
+
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single person in the shown list, using visible index.

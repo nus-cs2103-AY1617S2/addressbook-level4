@@ -49,7 +49,7 @@ public class ListCommand extends Command {
             model.updateFilteredTaskListToShowAll();
             model.updateFilteredEventListToShowAll();
         } else {
-            // model.updateFilteredTaskList(until);
+            model.updateFilteredTaskList(dateRange);
             model.updateFilteredEventList(dateRange);
         }
 

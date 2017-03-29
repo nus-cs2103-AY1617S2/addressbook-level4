@@ -25,7 +25,7 @@ public class Timeslot {
         return new Timeslot(end);
     }
 
-    public Timeslot(String end) throws IllegalValueException {
+    private Timeslot(String end) throws IllegalValueException {
         assert end != null;
 
         this.start = new Date();
