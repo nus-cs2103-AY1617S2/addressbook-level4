@@ -102,6 +102,17 @@ public class Task implements ReadOnlyTask {
     /**
      * Updates this task with the details of {@code replacement}.
      */
+    
+    @Override
+    /**
+     * Mark this task as completed
+     */
+    public void markComplete(){
+    	this.isCompleted = true;
+    	this.startTime.addDays(period.value);
+    	this.endTime.addDays(period.value);
+    }
+    
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
@@ -111,7 +122,8 @@ public class Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
-
+    
+    
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
