@@ -15,12 +15,12 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 	3.4. [Finding Tasks](#34-find-a-task--find) <br>
 	3.5. [Listing Tasks](#35-list-all-tasks--list) <br>
     3.6. [Selecting Tasks](#36-select-a-task--select) <br>
-    3.7. [Updating Tasks](#37-update-a-task--update) <br>
+    3.7. [Editing Tasks](#37-edit-a-task--edit) <br>
     3.8. [Completing Tasks](#38-complete-a-task--complete) <br>
 	3.9. [Getting Help](#39-get-help--help) <br>
 	3.10. [Change Data File Location](#310-change-data-file-location) <br>
 	3.11. [Load Data File From Location](#311-load-data-file-from-location) <br>
-	3.12. [Undo a change](#312-undo-a-change--undo) <br>
+	3.12. [Undo a Change](#312-undo-a-change--undo) <br>
 	3.13. [Exit](#313-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
@@ -167,27 +167,16 @@ Format: **`add`** `<task>` <br>
 <img src="images/UiAddCommand.png" width="600"><br>
 _Figure 3.2.1. Add Command_
 
-Here are other formats to follow when adding tasks that _have specific dates / times_:
+#### Add a _timed_ task:
 
-#### Add a task with a _deadline_:
+A timed task is a task that _is associated to specific dates and times_. <br>
+It can be a task with a deadline or an event. <br>
 
 Format: **`add`** `<task>; <due date and time>` <br>
-E.g. **`add`** `project proposal; 041216 2pm`
-
-#### Add an _event_:
+E.g. **`add`** `project proposal; 041216 2pm`<br>
 
 Format: **`add`** `<task>; <start date and time>; <end date and time>` <br>
-E.g. **`add`** `sushi restaurant promotion; 040117 10am; 110117 9pm`
-
-OR
-
-Format: **`add`** `<task>; <start date and time>; <duration>` <br>
-E.g. **`add`** `committee meeting; 150617 1pm; 2.5hr`
-
-#### Add a task with a _duration_ only:
-
-Format: **`add`** `<task>; <duration>` <br>
-E.g. **`add`** `watch tv with the children; 1hr`
+E.g. **`add`** `sushi restaurant promotion; 040117 10am; 110117 9pm`<br>
 
 ### 3.3. Delete a task : `delete`
 
@@ -263,22 +252,28 @@ Here are some reasons why you might want to _list_ your tasks:
   > You want to have an overview of all your tasks based on how urgent they are, then
   manually select some of these tasks to focus on.
 
-* **You want to view completed your tasks** <br>
+* **You want to track the tasks that you have already completed** <br>
 
-  > You want to have an overview of all your tasks you completed to help track what you have already done.
+* **You want to plan your time to get your remaining tasks done** <br>
 
-* **You want to view uncompleted your tasks** <br>
+* **You want to schedule some of your uncompleted [floating tasks](#add-a-floating-task)** <br>
 
-  > You want to have an overview of all your tasks so that you can better plan your time to get them done.
+  > Converting your floating tasks into [timed tasks](#add-a-timed-task) will allow me to keep track of
+  them more effectively (e.g. by alerting you when they are overdue).
+  > Fun fact: you can know the _no. of floating and timed tasks_ you have instantly through my
+  [GUI](#graphical-user-interface-gui)!
 
-> * **`list`** <br>
+	<img src="images/TaskCount.png" width="600"><br>
+	_Figure 3.5.2. Task Count_
+
+Format: **`list`** <br>
 This lists all tasks. Navigate through the panels and tasks using the arrow keys on your keyboard. <br>
 
-> * **`list`** `<filter>`<br>
-E.g. **`list`** `uncompleted`, **`list`** `floating` <br>
+Format: **`list`** `<filter>`<br>
+E.g. **`list`** `uncompleted`, **`list`** `completed`, **`list`** `floating`, **`list`** `timed` <br>
 
 <img src="images/UiListCommand.png" width="600"><br>
-_Figure 3.5.1. List Command_
+_Figure 3.5.2. List Command_
 
 ### 3.6. Select a task : `select`
 
@@ -303,13 +298,6 @@ _Figure 3.6.1. Select Command_
 those tasks for you. You will then have to choose one of those displayed tasks manually by navigating
 to your desired task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
 
-Format: **`unselect`** <br>
-This command _cancels your previous selection_ so that you can select another one of your
-tasks instead. <br>
-
-<img src="images/UiUnselectCommand.png" width="600"><br>
-_Figure 3.6.2. Unselect Command_
-
 ### 3.7. Edit a task : `edit`
 
 Edits 1 or more [parameters](#parameter) of a task. <br>
@@ -332,13 +320,13 @@ Here are some examples of tasks which you might want to _edit_: <br>
   Your friend Jamie has come back from her overseas trip, and has finally arranged a meet-up with
   you!
 
-> * **`edit`** `<task_index>; <parameter> <new_value>` <br>
+Format: **`edit`** `<task_index>; <parameter> <new_value>` <br>
 This command will direct me to make the specified update to a task with `<task_index>`. <br>
-> * **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`<br>
+Format: **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`<br>
 You can edit more parameters for your task concurrently using the following format<br>
 E.g. **`edit`** `1; start_time 3pm; end_time 8pm;` <br>
 
-<img src="images/UiUpdateCommand.png" width="600"><br>
+<img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.7.1. Edit Command_
 
 ### 3.8. Complete a task : `complete`
@@ -351,11 +339,14 @@ Here are some reasons why you might want to _completed_ a task:
 
   > You finished a task and do not want it to show up in the default task list anymore.
 
-> * **`complete`** `<task_index>`<br>
+Format: **`complete`** `<task_index>`<br>
 E.g. **`complete`** `1` <br>
-> * **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
+Format: **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
 You can complete multiple tasks simultaneously using the following format<br>
 E.g. **`complete`** `1,3,4` <br>
+
+<img src="images/UiCompleteCommand.png" width="600"><br>
+_Figure 3.8.1. Complete Command_
 
 ### 3.9. Get help : `help`
 
@@ -363,9 +354,6 @@ Shows a list of all commands I can execute and their usage instructions. <br>
 
 Format: **`help`** `<command>` <br>
 This command will instruct me to provide you specific information on how to use `<command>`.
-
-<img src="images/UiHelpCommand.png" width="600"><br>
-_Figure 3.9.1. Help Command_
 
 Format: **`help /all`** <br>
 This command will help to direct you back to this user guide.
@@ -411,15 +399,15 @@ Format: **`undo`** <br>
 I'll undo the last change you made to your tasks. <br>
 I can't remember anything before a **`delete /all`** though.
 
+<img src="images/UiUndoCommand.png" width="600"><br>
+_Figure 3.12.1. Undo Command_
+
 ### 3.13. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
 
 Format: **`exit`** <br>
-
-<img src="images/UiExitCommand.png" width="600"><br>
-_Figure 3.12.1. Exit Command_
 
 
 ## 4. Command Summary

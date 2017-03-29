@@ -15,9 +15,9 @@ public class TaskListTypeTest extends TaskManagerGuiTest {
     public static final String FLOATING_TASK_LIST_TYPE = "Floating Tasks";
 
     @Test
-    public void defaultTaskListTypeShouldBeAll() {
-        // get task list type at app startup: show all tasks
-        assertEquals(taskListType.getTaskListType().getText(), ALL_TASK_LIST_TYPE);
+    public void defaultTaskListTypeShouldBeUncompleted() {
+        // get task list type at app startup: show uncompleted tasks
+        assertEquals(taskListType.getTaskListType().getText(), UNCOMPLETED_TASK_LIST_TYPE);
     }
 
     @Test
@@ -37,18 +37,6 @@ public class TaskListTypeTest extends TaskManagerGuiTest {
         // floating tasks
         commandBox.runCommand("list floating");
         assertEquals(taskListType.getTaskListType().getText(), FLOATING_TASK_LIST_TYPE);
-    }
-
-    @Test
-    public void showUnchangedAllTaskListTypeAfterCompleteCommand() {
-        commandBox.runCommand("complete 1");
-        assertEquals(taskListType.getTaskListType().getText(), ALL_TASK_LIST_TYPE);
-    }
-
-    @Test
-    public void showAllTaskListTypeAfterAddCommand() {
-        commandBox.runCommand("add Go Running");
-        assertEquals(taskListType.getTaskListType().getText(), ALL_TASK_LIST_TYPE);
     }
 
     @Test
