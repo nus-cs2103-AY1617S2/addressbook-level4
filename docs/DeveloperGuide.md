@@ -505,12 +505,12 @@ Use case ends
 > 2a1. TaskBoss shows an error message <br>
 Use case ends
 
-### Use case: Export tasks to an existing file
+### Use case: Export tasks to an existing filepath
 
 **MSS**
 
-1. User requests to export tasks to an existing file for data storage
-2. TaskBoss changes the storage location, and saves all existing data into the specified file <br>
+1. User requests to export tasks to an existing filepath for data storage
+2. TaskBoss changes the storage location, and saves all existing data into the specified filepath <br>
 Use case ends
 
 **Extensions**
@@ -522,14 +522,14 @@ Use case ends
 
 2b. TaskBoss cannot find the given file path
 
-> 2b1. TaskBoss shows an error message <br>
+> 2b1. TaskBoss creates a new filepath <br>
 Use case ends
 
 #### Use case: Export tasks to a new file
 
 **MSS**
 
-1. User requests to export tasks to a new file for data storage, specifying the file path and the new file name
+1. User requests to export tasks to a new file for data storage, specifying the new filepath <br>
 2. TaskBoss saves all existing data into the new file <br>
 Use case ends
 
