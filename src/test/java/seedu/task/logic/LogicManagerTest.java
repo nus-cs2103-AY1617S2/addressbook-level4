@@ -328,9 +328,9 @@ public class LogicManagerTest {
         Task p3 = helper.generatePersonWithName("KE Y");
         Task pTarget4 = helper.generatePersonWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourPersons = helper.generateListOfTasks(p3, pTarget1, pTarget4, pTarget2);
+        List<Task> fourPersons = helper.generateListOfTasks(pTarget1, pTarget2, p3, pTarget4);
         TaskList expectedAB = helper.generateTaskList(fourPersons);
-        List<Task> expectedList = helper.generateListOfTasks(pTarget1, pTarget4, pTarget2);
+        List<Task> expectedList = helper.generateListOfTasks(pTarget1, pTarget2, pTarget4);
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
