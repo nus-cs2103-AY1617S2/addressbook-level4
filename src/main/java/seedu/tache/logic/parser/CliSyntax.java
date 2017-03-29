@@ -14,10 +14,10 @@ public class CliSyntax {
     public static final String EDIT_PARAMETER_DELIMITER = new String(" ");
 
     /* Natural Language Processing definitions */
-    public static final String EDIT_PARAMETER_KEYWORD = new String(" change ");
-    public static final String EDIT_PARAMETER_VALUE_KEYWORD = new String(" to ");
-    public static final String EDIT_MULTI_PARAMETER_KEYWORD = new String(" and ");
-    public static final String EDIT_MULTI_PARAMETER_KEYWORDS = new String(" and change ");
+    public static final String EDIT_PARAMETER_KEYWORD = " change ";
+    public static final String EDIT_PARAMETER_VALUE_KEYWORD = " to ";
+    public static final String EDIT_MULTI_PARAMETER_KEYWORD = " and ";
+    public static final String EDIT_MULTI_PARAMETER_KEYWORDS = " and change ";
 
     /* Parameter names definitions */
     public static final String NAME_PARAMETER = "name";

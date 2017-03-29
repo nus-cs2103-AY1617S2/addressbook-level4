@@ -78,7 +78,7 @@ public class EditCommandParser {
                 int indexOfFirstTo = argsInProcess.indexOf(EDIT_PARAMETER_VALUE_KEYWORD);
                 if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
                     String updateParameter = argsInProcess.substring(indexOfFirstChange
-                            + new String(EDIT_PARAMETER_KEYWORD).length(), indexOfFirstTo);
+                                                + new String(EDIT_PARAMETER_KEYWORD).length(), indexOfFirstTo);
                     String updateValue = argsInProcess.substring(indexOfFirstTo
                                                 + new String(EDIT_PARAMETER_VALUE_KEYWORD).length());
                     return processStructuredArguments(index.get() + PARAMETER_DELIMITER + updateParameter
