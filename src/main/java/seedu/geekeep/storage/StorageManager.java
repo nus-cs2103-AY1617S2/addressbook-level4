@@ -73,6 +73,11 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
+    public void setGeeKeepFilePath(String filePath) {
+        geeKeepStorage.setGeeKeepFilePath(filePath);
+    }
+
+    @Override
     public Optional<ReadOnlyGeeKeep> readGeeKeep() throws DataConversionException, IOException {
         return readGeeKeep(geeKeepStorage.getGeeKeepFilePath());
     }

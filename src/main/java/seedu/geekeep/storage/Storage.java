@@ -31,6 +31,9 @@ public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage
     String getGeeKeepFilePath();
 
     @Override
+    void setGeeKeepFilePath(String filePath);
+
+    @Override
     Optional<ReadOnlyGeeKeep> readGeeKeep() throws DataConversionException, IOException;
 
     @Override
@@ -42,4 +45,5 @@ public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleGeeKeepChangedEvent(GeeKeepChangedEvent abce);
+
 }
