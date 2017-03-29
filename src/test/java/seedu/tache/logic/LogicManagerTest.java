@@ -416,7 +416,7 @@ public class LogicManagerTest {
                 cmd.append("t/");
             }
             for (Tag t: tags) {
-                cmd.append(t.tagName+" ");
+                cmd.append(t.tagName + " ");
             }
 
             return cmd.toString();
