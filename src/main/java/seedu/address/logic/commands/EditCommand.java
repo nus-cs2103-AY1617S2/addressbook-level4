@@ -20,12 +20,11 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [due DEADLINE] [tag TAGS]...\n"
-            + "Example: " + COMMAND_WORD + " 1 CS2103 Finish Tutorial";
+            + "Parameters: INDEX (must be a positive integer) [NAME] [due DEADLINE] [tag TAGS]...\n" + "Example: "
+            + COMMAND_WORD + " 1 CS2103 Finish Tutorial";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -41,8 +40,7 @@ public class EditCommand extends Command {
      * @param editTaskDescriptor
      *            details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex,
-            EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
@@ -74,10 +72,7 @@ public class EditCommand extends Command {
             }
             model.updateFilteredListToShowAll();
         }
-        return new CommandResult(
-          
-                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), MESSAGE_SUCCESS_STATUS_BAR);
-
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), MESSAGE_SUCCESS_STATUS_BAR);
     }
 
     // @@author A0093999Y
@@ -87,15 +82,12 @@ public class EditCommand extends Command {
      *
      * @throws IllegalValueException
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-            EditTaskDescriptor editTaskDescriptor)
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
             throws IllegalValueException {
         assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName()
-                .orElseGet(taskToEdit::getName);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags()
-                .orElseGet(taskToEdit::getTags);
+        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         Optional<DateTime> updatedStartingTime;
         Optional<DateTime> updatedDeadline;
 
@@ -107,8 +99,7 @@ public class EditCommand extends Command {
             updatedDeadline = editTaskDescriptor.getDeadline();
         }
 
-        return Task.createTask(updatedName, updatedTags, updatedDeadline,
-                updatedStartingTime, taskToEdit.isDone(),
+        return Task.createTask(updatedName, updatedTags, updatedDeadline, updatedStartingTime, taskToEdit.isDone(),
                 taskToEdit.isManualToday());
     }
 
@@ -136,8 +127,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.tags,
-                    this.deadline, this.startingTime);
+            return CollectionUtil.isAnyPresent(this.name, this.tags, this.deadline, this.startingTime);
         }
 
         public void setName(Optional<Name> name) {
