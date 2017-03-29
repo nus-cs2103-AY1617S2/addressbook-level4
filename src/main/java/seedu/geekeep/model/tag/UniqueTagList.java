@@ -55,6 +55,7 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.addAll(initialTags);
+        sortByName();
     }
 
     /**
@@ -73,6 +74,7 @@ public class UniqueTagList implements Iterable<Tag> {
     public UniqueTagList(Set<Tag> tags) {
         assert !CollectionUtil.isAnyNull(tags);
         internalList.addAll(tags);
+        sortByName();
     }
 
     /**
@@ -96,6 +98,7 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public void setTags(UniqueTagList replacement) {
         this.internalList.setAll(replacement.internalList);
+        sortByName();
     }
 
     public void setTags(Collection<Tag> tags) throws DuplicateTagException {
@@ -104,6 +107,7 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.setAll(tags);
+        sortByName();
     }
 
     /**
@@ -114,6 +118,7 @@ public class UniqueTagList implements Iterable<Tag> {
         from.internalList.stream()
                 .filter(tag -> !alreadyInside.contains(tag))
                 .forEach(internalList::add);
+        sortByName();
     }
 
     /**
@@ -135,6 +140,11 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.add(toAdd);
+        sortByName();
+    }
+
+    public void sortByName() {
+        internalList.sort((tag, otherTag) -> tag.tagName.compareToIgnoreCase(otherTag.tagName));
     }
 
     @Override
