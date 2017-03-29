@@ -73,9 +73,11 @@ Examples:
 * `add PhotoShop Workshop st/1900 sd/130217 ed/130217 l/CLB ta/take laptop`
 * `add Industrial Talk st/1800 sd/030517 et/2000 ed/030517 l/FoS`
 
-#### 2.2.2. Adding a task : `add`
+#### 2.2.2. Adding a [task] : `add`
 
-Adds a task to the task list. Undoable.<br>
+##### 2.2.2.1. Adding a floating task: `add`
+
+Adds a floating task to the task list. Undoable.<br>
 Tasks have completion status, which is set to [pending] by default. <br>
 User can mark a task as [Completed]. (See section 2.13) <br>
 Format: `add DESCRIPTION p/PRIORITY [l/LOCATION] [ta/TAG]...`
@@ -92,7 +94,7 @@ Examples:
 * `add Review CS2103 p/high ta/review`
 * `add Buy groceries p/medium`
 
-#### 2.2.3. Adding a deadline : `add`
+##### 2.2.2.2. Adding a deadline: `add`
 
 Adds a deadline equivalent to adding a task with by time and by date. Undoable. <br>
 Deadlines have completion status, which is set to [pending] by default. <br>
@@ -275,8 +277,7 @@ Examples:
   User is able to view all tasks, completed tasks or pending tasks.
   Format: `show [DISPLAY_PREFERENCE]`
 
-  > * DISPLAY_PREFERENCE should be empty, `com` or `pend`,
-  > * representing all tasks, completed tasks and pending tasks respectively.
+  > * Display preference should be empty, `com` or `pend` representing all tasks, completed tasks and pending tasks respectively.
 
 Examples:
 
@@ -298,30 +299,35 @@ Examples:
   `undo`<br>
   Undoes finishing task 4.
 
-### 2.12. Redoing the previous undo command : `redo`
+### 2.12. Redoing the completed task : `redo`
 
-Redoes the previous undo command.<br>
-Format: `redo`
+Redoes the completed task.<br>
+Format: `redo INDEX`
 
-> * Recovers if the latest command is `undo`.
-> * Cannot redo more than once consecutively.
+> * Changes the status of a task from completed to pending after `finish`.
 
 Examples:
 
-* `edit ts 2 bd/230417`<br>
-  `undo`<br>
-  `redo`<br>
-  Reverses the previous undo command.
+* `finish 2`<br>
+  `show com`<br>
+  `redo 1`<br>
+  Changes the status of a completed task to pending.
 
-### 2.13. Exiting the program : `exit`
+### 2.13. Changing file location: `save`
+Changes the location of storage file.<br>
+Format: `save DIRECTORY`
+
+> * Directory should be valid and exist.
+
+Examples:
+
+* `save Documents/Private data`
+  Changes the location of storage file to Documents/Private data.
+
+### 2.14. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
-
-### 2.14. Saving the data
-
-WhatsLeft data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
 
 ## 3. FAQ
 
@@ -369,8 +375,11 @@ There is no need to save manually.
 * **Show Tasks** : `show [DISPLAY_PREFERENCE]`<br>
   e.g. `show com`
 
+* **Redo** : `redo INDEX`<br>
+
 * **Undo** : `undo`<br>
 
-* **Redo** : `redo`<br>
+* **Save** : `save DIRECTORY`<br>
+  e.g. `save Desktop/Data`
 
 * **Exit** : `exit`<br>
