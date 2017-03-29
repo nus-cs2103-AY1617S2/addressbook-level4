@@ -176,6 +176,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     @Override
+    public void setFrequency(RecurringFrequency frequency) {
+        this.frequency = frequency;
+    }
+
+    @Override
     public String toString() {
         return getAsText();
     }

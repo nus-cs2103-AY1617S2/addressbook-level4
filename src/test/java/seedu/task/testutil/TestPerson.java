@@ -21,6 +21,7 @@ public class TestPerson implements ReadOnlyTask {
     private Priority priority;
     private boolean complete;
     private UniqueTagList tags;
+    private RecurringFrequency frequency;
 
     public TestPerson() {
         tags = new UniqueTagList();
@@ -36,6 +37,7 @@ public class TestPerson implements ReadOnlyTask {
         this.endDate = personToCopy.getEndTiming();
         this.tags = personToCopy.getTags();
         this.complete = false;
+        this.frequency = personToCopy.getFrequency();
     }
 
     public void setDescription(Description description) {
@@ -117,8 +119,12 @@ public class TestPerson implements ReadOnlyTask {
 
     @Override
     public RecurringFrequency getFrequency() {
-        // TODO Auto-generated method stub
-        return null;
+        return frequency;
+    }
+
+    @Override
+    public void setFrequency(RecurringFrequency frequency) {
+        this.frequency = frequency;
     }
 
     @Override
@@ -150,4 +156,5 @@ public class TestPerson implements ReadOnlyTask {
         // TODO Auto-generated method stub
 
     }
+
 }
