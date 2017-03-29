@@ -54,8 +54,8 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableTaskManager.class);
-        assertEquals(9, dataFromFile.getTaskList().size());
-//        assertEquals(0, dataFromFile.getCategoryList().size());
+        assertEquals(10, dataFromFile.getTaskList().size());
+        assertEquals(5, dataFromFile.getCategoryList().size());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class XmlUtilTest {
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
         assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
-        //TODO: use equality instead of string comparisons
+        // TODO: use equality instead of string comparisons
 
         TaskManagerBuilder builder = new TaskManagerBuilder(new TaskManager());
         dataToWrite = new XmlSerializableTaskManager(

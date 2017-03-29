@@ -8,10 +8,10 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UpdateCommand;
-import seedu.taskmanager.model.task.StartDate;
-import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.EndTime;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.TaskName;
 // import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.testutil.TaskBuilder;
 import seedu.taskmanager.testutil.TestTask;
@@ -27,42 +27,42 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     // @@author A0141102H
     @Test
     public void update_allFieldsSpecified_success() throws Exception {
-        String detailsToUpdate = "take a snack break ON thursday 1500 TO 1600";
+        String detailsToUpdate = "take a snack break ON 03/03/17 1500 TO 1600 CATEGORY";
         int taskManagerIndex = 1;
 
-        updatedTask = new TaskBuilder().withTaskName("take a snack break").withDate("thursday")
-               .withStartTime("1500").withEndTime("1600").build();//.withCategories("husband").build();
+        updatedTask = new TaskBuilder().withTaskName("take a snack break").withStartDate("03/03/17")
+                .withStartTime("1500").withEndDate("03/03/17").withEndTime("1600").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
     }
 
     @Test
     public void update_notAllFieldsSpecified_success() throws Exception {
-        String detailsToUpdate = "ON friday";
+        String detailsToUpdate = "ON 31/03/17";
         int taskManagerIndex = 2;
 
         TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
-        TestTask updatedTask = new TaskBuilder(taskToUpdate).withDate("friday").build();
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withStartDate("31/03/17").withStartTime("0000")
+                .withEndDate("31/03/17").withEndTime("2359").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
     }
-/*
-    @Test
-    public void update_clearCategories_success() throws Exception {
-        String detailsToUpdate = "t/";
-        int taskManagerIndex = 2;
-
-        TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
-        TestTask updatedTask = new TaskBuilder(taskToUpdate).withCategories().build();
-
-        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
-    } */
+    /*
+     * @Test public void update_clearCategories_success() throws Exception {
+     * String detailsToUpdate = "t/"; int taskManagerIndex = 2;
+     *
+     * TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1]; TestTask
+     * updatedTask = new TaskBuilder(taskToUpdate).withCategories().build();
+     *
+     * assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate,
+     * updatedTask); }
+     */
 
     @Test
     public void update_searchThenUpdate_success() throws Exception {
         commandBox.runCommand("SEARCH lunch");
 
-        String detailsToUpdate = "Lunch";
+        String detailsToUpdate = "Lunch BY 04/03/17 1400";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 2;
 
@@ -84,11 +84,11 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void update_noFieldsSpecified_failure() {
-        commandBox.runCommand("UPDATE 1");
-        assertResultMessage(UpdateCommand.MESSAGE_NOT_UPDATED);
-    }
+    // @Test
+    // public void update_noFieldsSpecified_failure() {
+    // commandBox.runCommand("UPDATE 1");
+    // assertResultMessage(UpdateCommand.MESSAGE_NOT_UPDATED);
+    // }
 
     @Test
     public void update_invalidValues_failure() {
@@ -98,14 +98,14 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("UPDATE 1 ON 030317");
         assertResultMessage(StartDate.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("UPDATE 1 FROM 1200hrs TO 1400");
+        commandBox.runCommand("UPDATE 1 FROM thursday 1200hrs TO friday 1400");
         assertResultMessage(StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
 
-        commandBox.runCommand("UPDATE 1 FROM 1200 TO 1300hrs");
+        commandBox.runCommand("UPDATE 1 FROM thursday 1200 TO friday 1300hrs");
         assertResultMessage(EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
 
-//        commandBox.runCommand("UPDATE 1 t/*&");
-//        assertResultMessage(Category.MESSAGE_TAG_CONSTRAINTS);
+        // commandBox.runCommand("UPDATE 1 t/*&");
+        // assertResultMessage(Category.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
@@ -117,21 +117,26 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     /**
      * Checks whether the updated task has the correct updated details.
      *
-     * @param filteredTaskListIndex index of task to update in filtered list
-     * @param taskManagerIndex index of task to update in the task manager.
-     *      Must refer to the same task as {@code filteredTaskListIndex}
-     * @param detailsToUpdate details to update the task with as input to the update command
-     * @param updatedTask the expected task after updating the task's details
+     * @param filteredTaskListIndex
+     *            index of task to update in filtered list
+     * @param taskManagerIndex
+     *            index of task to update in the task manager. Must refer to the
+     *            same task as {@code filteredTaskListIndex}
+     * @param detailsToUpdate
+     *            details to update the task with as input to the update command
+     * @param updatedTask
+     *            the expected task after updating the task's details
      */
-    private void assertUpdateSuccess(int filteredTaskListIndex, int taskManagerIndex,
-                                    String detailsToUpdate, TestTask updatedTask) {
+    private void assertUpdateSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToUpdate,
+            TestTask updatedTask) {
         commandBox.runCommand("UPDATE " + filteredTaskListIndex + " " + detailsToUpdate);
 
         // confirm the new card contains the right data
         TaskCardHandle updatedCard = taskListPanel.navigateToTask(updatedTask.getTaskName().fullTaskName);
         assertMatching(updatedTask, updatedCard);
 
-        // confirm the list now contains all previous tasks plus the task with updated details
+        // confirm the list now contains all previous tasks plus the task with
+        // updated details
         expectedTasksList[taskManagerIndex - 1] = updatedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask));

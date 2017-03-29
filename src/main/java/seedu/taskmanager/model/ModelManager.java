@@ -100,9 +100,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0142418L
-    /** Deletes tasks by their date. 
-     *  Returns the number of tasks deleted.
-     * */
+    /**
+     * Deletes tasks by their date. Returns the number of tasks deleted.
+     */
     @Override
     public synchronized int deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
             throws TaskNotFoundException {
@@ -123,9 +123,9 @@ public class ModelManager extends ComponentManager implements Model {
         return numDeletedTasks;
     }
 
-    /** Deletes the task by its name. 
-     *  Returns the number of tasks deleted.
-     * */
+    /**
+     * Deletes the task by its name. Returns the number of tasks deleted.
+     */
     @Override
     public synchronized int deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws TaskNotFoundException {
@@ -199,6 +199,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskListToShowByCompletion(false);
     }
 
+    // @@author
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
@@ -214,11 +219,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowByCompletion(boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompletedQualifier(isComplete)));
-    }
-
-    // @@author
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
     }
 
     // ========== Inner classes/interfaces used for filtering

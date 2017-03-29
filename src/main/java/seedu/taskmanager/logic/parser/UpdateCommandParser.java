@@ -1,27 +1,26 @@
 package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_BY;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ON;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX2;
 
 import java.util.Collection;
 import java.util.Collections;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CurrentDate;
-import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand.UpdateTaskDescriptor;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 //@@author A0142418L
 /**
@@ -49,7 +48,7 @@ public class UpdateCommandParser {
         }
 
         UpdateTaskDescriptor updateTaskDescriptor = new UpdateTaskDescriptor();
-        
+
         Boolean isUpdateToDeadlineTask = false;
 
         try {

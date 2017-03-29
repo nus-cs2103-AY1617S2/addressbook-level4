@@ -12,7 +12,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     @Test
     public void selectTask_nonEmptyList() {
 
-        assertSelectionInvalid(10); // invalid index
+        assertSelectionInvalid(20); // invalid index
         assertNoTaskSelected();
 
         assertSelectionSuccess(1); // first task in the list
@@ -24,7 +24,10 @@ public class SelectCommandTest extends TaskManagerGuiTest {
         assertSelectionInvalid(taskCount + 1); // invalid index
         assertTaskSelected(middleIndex); // assert previous selection remains
 
-        /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
+        /*
+         * Testing other invalid indexes such as -1 should be done when testing
+         * the SelectCommand
+         */
     }
 
     @Test
@@ -49,7 +52,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
         assertEquals(taskListPanel.getSelectedTasks().size(), 1);
         ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
         assertEquals(taskListPanel.getTask(index - 1), selectedTask);
-        //TODO: confirm the correct page is loaded in the Browser Panel
+        // TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoTaskSelected() {

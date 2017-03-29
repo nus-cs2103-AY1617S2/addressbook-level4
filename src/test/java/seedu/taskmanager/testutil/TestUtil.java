@@ -77,26 +77,36 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                    new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"),
-                            new EndDate("03/03/17"), new EndTime("1100"), new UniqueCategoryList("friend")),
-                    new Task(new TaskName("Eat lunch at techno"), new StartDate("04/03/17"),
-                            new StartTime("EMPTY_FIELD"), new EndTime("1400")),
-                    new Task(new TaskName("Eat dinner with my only 2 friends"), new StartDate("09/03/17"),
-                            new StartTime("1800"), new EndTime("2000")),
-                    new Task(new TaskName("Start on the CS2103 project"), new StartDate("EMPTY_FIELD"),
-                            new StartTime("03/03/17 1400"), new EndTime("03/04/17 1800")),
-                    new Task(new TaskName("Give up on CS2103 project"), new StartDate("04/04/17"),
-                            new StartTime("1400"), new EndTime("1500")),
-                    new Task(new TaskName("Try again for CS2103"), new StartDate("EMPTY_FIELD"),
-                            new StartTime("05/04/17 1400"), new EndTime("05/05/17 1500")),
-                    new Task(new TaskName("Endless cycles of regret"), new StartDate("EMPTY_FIELD"),
-                            new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
-                    new Task(new TaskName("Time to relax a little"), new StartDate("06/05/17"), new StartTime("1400"),
-                            new EndTime("1800")),
-                    new Task(new TaskName("Chiong all day everyday"), new StartDate("EMPTY_FIELD"),
-                            new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
-                    new Task(new TaskName("Get it done"), new StartDate("06/05/17"), new StartTime("EMPTY_FIELD"),
-                            new EndTime("1700")) };
+                new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"),
+                        new EndDate("03/03/17"), new EndTime("1100"), new Boolean(false),
+                        new UniqueCategoryList("just", "friends")),
+                new Task(new TaskName("Eat lunch at techno"), new StartDate("EMPTY_FIELD"),
+                        new StartTime("EMPTY_FIELD"), new EndDate("04/03/17"), new EndTime("1400"),
+                        new Boolean(false), new UniqueCategoryList("no", "friends")),
+                new Task(new TaskName("Eat dinner with my only 2 friends"), new StartDate("09/03/17"),
+                        new StartTime("1800"), new EndDate("09/03/17"), new EndTime("2000"), new Boolean(true),
+                        new UniqueCategoryList()),
+                new Task(new TaskName("Start on the CS2103 project"), new StartDate("03/03/17"),
+                        new StartTime("1400"), new EndDate("03/04/17"), new EndTime("1800"), new Boolean(true),
+                        new UniqueCategoryList("work")),
+                new Task(new TaskName("Give up on CS2103 project"), new StartDate("04/04/17"),
+                        new StartTime("1400"), new EndDate("05/04/17"), new EndTime("1500"), new Boolean(false),
+                        new UniqueCategoryList("lepak")),
+                new Task(new TaskName("Try again for CS2103"), new StartDate("05/04/17"), new StartTime("1500"),
+                        new EndDate("05/05/17"), new EndTime("1600"), new Boolean(false),
+                        new UniqueCategoryList("work")),
+                new Task(new TaskName("Endless cycles of regret"), new StartDate("EMPTY_FIELD"),
+                        new StartTime("EMPTY_FIELD"), new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"),
+                        new Boolean(false), new UniqueCategoryList("lepak")),
+                new Task(new TaskName("Time to relax a little"), new StartDate("06/05/17"), new StartTime("1400"),
+                        new EndDate("06/05/17"), new EndTime("1800"), new Boolean(false),
+                        new UniqueCategoryList("lepak")),
+                new Task(new TaskName("Chiong all day everyday"), new StartDate("EMPTY_FIELD"),
+                        new StartTime("EMPTY_FIELD"), new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"),
+                        new Boolean(false), new UniqueCategoryList("work")),
+                new Task(new TaskName("Get it done"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
+                        new EndDate("06/05/17"), new EndTime("1700"), new Boolean(true),
+                        new UniqueCategoryList("work")) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
@@ -122,7 +132,7 @@ public class TestUtil {
     /**
      * Appends the file TaskName to the sandbox folder path. Creates the sandbox
      * folder if it doesn't exist.
-     * 
+     *
      * @param fileName
      * @return
      */
@@ -243,7 +253,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
-     * 
+     *
      * @param node
      * @return
      */
@@ -255,7 +265,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
-     * 
+     *
      * @param node
      * @return
      */
@@ -267,7 +277,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
-     * 
+     *
      * @param node
      * @return
      */
@@ -293,7 +303,7 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * 
+     *
      * @param tasks
      *            The list of tasks
      * @param tasksToRemove
@@ -308,7 +318,7 @@ public class TestUtil {
 
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * 
+     *
      * @param list
      *            original list to copy from
      * @param targetIndexInOneIndexedFormat
@@ -320,7 +330,7 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
-     * 
+     *
      * @param tasks
      *            The array of tasks.
      * @param task
@@ -336,7 +346,7 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
-     * 
+     *
      * @param tasks
      *            A array of tasks.
      * @param tasksToAdd

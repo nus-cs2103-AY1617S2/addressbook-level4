@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-import seedu.taskmanager.logic.parser.ArgumentTokenizer;
 import seedu.taskmanager.logic.parser.ArgumentTokenizer.Prefix;
 
 public class ArgumentTokenizerTest {
@@ -66,7 +65,8 @@ public class ArgumentTokenizerTest {
         String argsString = "  some random string /t tag with leading and trailing spaces ";
         tokenizer.tokenize(argsString);
 
-        // Same string expected as preamble, but leading/trailing spaces should be trimmed
+        // Same string expected as preamble, but leading/trailing spaces should
+        // be trimmed
         assertPreamblePresent(tokenizer, argsString.trim());
 
     }
@@ -98,7 +98,10 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(tokenizer, dashT, "dashT-Value");
         assertArgumentAbsent(tokenizer, hatQ);
 
-        /* Also covers: Cases where the prefix doesn't have a space before/after it */
+        /*
+         * Also covers: Cases where the prefix doesn't have a space before/after
+         * it
+         */
 
         // All three arguments are present, no spaces before the prefixes
         tokenizer.tokenize("Different Preamble String^Q 111-t dashT-Value/p slashP value");
@@ -110,18 +113,24 @@ public class ArgumentTokenizerTest {
         /* Also covers: Reusing of the tokenizer multiple times */
 
         // Reuse tokenizer on an empty string to ensure state is correctly reset
-        //   (i.e. no stale values from the previous tokenizing remain in the state)
+        // (i.e. no stale values from the previous tokenizing remain in the
+        // state)
         tokenizer.tokenize("");
         assertPreambleAbsent(tokenizer);
         assertArgumentAbsent(tokenizer, slashP);
 
         /** Also covers: testing for prefixes not specified as a prefix **/
 
-        // Prefixes not previously given to the tokenizer should not return any values
+        // Prefixes not previously given to the tokenizer should not return any
+        // values
         String stringWithUnknownPrefix = unknownPrefix.getPrefix() + "some value";
         tokenizer.tokenize(stringWithUnknownPrefix);
         assertArgumentAbsent(tokenizer, unknownPrefix);
-        assertPreamblePresent(tokenizer, stringWithUnknownPrefix); // Unknown prefix is taken as part of preamble
+        assertPreamblePresent(tokenizer, stringWithUnknownPrefix); // Unknown
+                                                                   // prefix is
+                                                                   // taken as
+                                                                   // part of
+                                                                   // preamble
     }
 
     @Test

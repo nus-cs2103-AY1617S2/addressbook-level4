@@ -24,7 +24,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(TaskName taskName, StartDate startDate, StartTime startTime, EndDate endDate, EndTime endTime,
             Boolean markedCompleted, UniqueCategoryList categories) {
-        assert !CollectionUtil.isAnyNull(taskName, startDate, startTime, endTime, categories);
+        assert !CollectionUtil.isAnyNull(taskName, startDate, startTime, endDate, endTime, markedCompleted, categories);
         this.taskName = taskName;
         this.startDate = startDate;
         this.startTime = startTime;

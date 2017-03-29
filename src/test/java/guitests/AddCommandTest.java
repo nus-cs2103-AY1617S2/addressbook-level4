@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.testutil.TestTask;
 import seedu.taskmanager.testutil.TestUtil;
-import seedu.taskmanager.logic.commands.AddCommand;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 

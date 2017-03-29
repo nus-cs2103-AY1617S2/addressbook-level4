@@ -2,7 +2,6 @@ package seedu.taskmanager.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,11 +13,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.taskmanager.model.TaskManager;
-import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.category.Category;
-import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -69,7 +66,7 @@ public class TaskManagerTest {
      * ArrayList<>(typicalTaskManager.getCategoryList()); // Repeat the first
      * category twice newCategories.add(newCategories.get(0)); TaskManagerStub
      * newData = new TaskManagerStub(newTasks, newCategories);
-     * 
+     *
      * thrown.expect(AssertionError.class); taskManager.resetData(newData); }
      */
     /**

@@ -1,11 +1,11 @@
 package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_BY;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ON;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TO;
 //import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX1;
 import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX2;
 
@@ -150,9 +150,9 @@ public class AddCommandParser {
                         String[] splitedToPrefixInput = toPrefixInput.split("\\s+");
                         try {
                             if (!(splitedToPrefixInput[1].isEmpty())) {
-                                throw new IllegalValueException(
-                                        "When using prefix ON and TO, input after prefix TO should only include time (e.g. 1400)\n"
-                                                + "Enter HELP for user guide with detailed explanations of all commands");
+                                throw new IllegalValueException("When using prefix ON and TO, input after prefix"
+                                        + "TO should only include time (e.g. 1400)\n"
+                                        + "Enter HELP for user guide with detailed explanations of all commands");
                             }
                         } catch (ArrayIndexOutOfBoundsException aiobe) {
                             endTime = splitedToPrefixInput[0];
