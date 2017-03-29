@@ -50,8 +50,60 @@ public class TestTask implements ReadOnlyTask {
         this.priority = priority;
     }
 
+    public void setOccurrences(ArrayList<RecurringTaskOccurrence> occurrences) {
+        this.occurrences = occurrences;
+    }
+
+    public void setRecurring(boolean isRecurring) {
+        this.recurring = isRecurring;
+    }
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
+    }
+
+    public void setFrequency(RecurringFrequency recurringFrequency) {
+        this.frequency = recurringFrequency;
+    }
+
+    @Override
+    public void setOccurrenceIndexList(ArrayList<Integer> list) {
+        occurrenceIndexList = list;
+    }
+
+    @Override
+    public Description getDescription() {
+        return description;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
+    @Override
+    public ArrayList<RecurringTaskOccurrence> getOccurrences() {
+        return occurrences;
+    }
+
+    @Override
+    public boolean isRecurring() {
+        return recurring;
+    }
+
+    @Override
+    public UniqueTagList getTags() {
+        return tags;
+    }
+
+    @Override
+    public RecurringFrequency getFrequency() {
+        return frequency;
+    }
+
+    @Override
+    public ArrayList<Integer> getOccurrenceIndexList() {
+        return occurrenceIndexList;
     }
 
     @Override
@@ -71,23 +123,13 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Description getDescription() {
-        return description;
-    }
-
-    @Override
-    public Priority getPriority() {
-        return priority;
+    public Timing getStartTiming() {
+        return getStartTiming(0);
     }
 
     @Override
     public Timing getStartTiming(int i) {
         return this.occurrences.get(i).getStartTiming();
-    }
-
-    @Override
-    public Timing getStartTiming() {
-        return getStartTiming(0);
     }
 
     @Override
@@ -98,11 +140,6 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public boolean isComplete() {
         return this.occurrences.get(0).isComplete();
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return tags;
     }
 
     @Override
@@ -122,29 +159,6 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
-    @Override
-    public boolean isRecurring() {
-        return recurring;
-    }
 
-    @Override
-    public RecurringFrequency getFrequency() {
-        return frequency;
-    }
-
-    @Override
-    public ArrayList<RecurringTaskOccurrence> getOccurrences() {
-        return occurrences;
-    }
-
-    @Override
-    public ArrayList<Integer> getOccurrenceIndexList() {
-        return occurrenceIndexList;
-    }
-
-    @Override
-    public void setOccurrenceIndexList(ArrayList<Integer> list) {
-        occurrenceIndexList = list;
-    }
 
 }
