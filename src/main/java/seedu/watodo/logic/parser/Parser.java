@@ -114,8 +114,14 @@ public class Parser {
 
             case ListWeekCommand.COMMAND_WORD:
                 return new ListWeekCommand();
+
             default:
-                return new ListCommand();
+                if (arguments.equals("")) {
+                    return new ListCommand();
+                } else {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListCommand.MESSAGE_USAGE));
+                }
             }
 
         case MarkCommand.COMMAND_WORD:
