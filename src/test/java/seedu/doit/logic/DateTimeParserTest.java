@@ -1,3 +1,4 @@
+//@@author A0146809W
 package seedu.doit.logic;
 
 import static org.junit.Assert.assertEquals;
@@ -11,7 +12,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.doit.logic.parser.DateTimeParser;
-
 /**
  * Tests if DateTimeParser is parsing the date correctly
  **/

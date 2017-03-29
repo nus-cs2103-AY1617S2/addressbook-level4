@@ -12,7 +12,7 @@ import seedu.doit.model.tag.Tag;
 * A predicate that will return true if any of the ReadOnlyTask tags matches the
 * tagKeywords
 */
-public class TagPredicate implements Predicate<ReadOnlyTask> {
+public class    TagPredicate implements Predicate<ReadOnlyTask> {
     private Set<String> tagKeywords;
 
     public TagPredicate(Set<String> tagKeywords) {
