@@ -15,6 +15,7 @@ public interface ReadOnlyTask {
     boolean getIsCompleted();
     //@@author A0139154E
     String getIsCompletedToString();
+    //@@author
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -41,5 +42,6 @@ public interface ReadOnlyTask {
                .append(getIsCompletedToString());
         return builder.toString();
     }
+    //@@author
 
 }

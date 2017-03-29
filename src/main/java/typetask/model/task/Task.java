@@ -83,6 +83,7 @@ public class Task implements ReadOnlyTask {
             return "No";
         }
     }
+    //@@author
 
     /**
      * Updates this task with the details of {@code replacement}.
