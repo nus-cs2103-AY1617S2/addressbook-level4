@@ -35,6 +35,7 @@ public class ListCommand extends Command {
             this.dateRange = null;
         } else {
             this.dateRange = parseDateRange(date);
+            System.out.println(dateRange);
         }
         this.showOverdueOnly = showOverdueOnly;
         this.showCompleteOnly = showCompleteOnly;
@@ -42,6 +43,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        System.out.println("in execute");
         assert model != null;
         assert !(showOverdueOnly && showCompleteOnly);
 
