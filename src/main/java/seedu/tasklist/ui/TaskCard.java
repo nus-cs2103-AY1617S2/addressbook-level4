@@ -111,13 +111,16 @@ public class TaskCard extends UiPart<Region> {
         String priorityLevel = task.getPriority().value;
         switch(priorityLevel) {
         case Priority.PRIORITY_HIGH:
-            priority.setStyle("-fx-text-fill: #ff5050; -fx-border-color: #ff5050; -fx-padding: 2px");
+            priority.setStyle("-fx-background-color: #ff5050; -fx-text-fill: black;"
+                    + " -fx-border-color: #ff5050; -fx-padding:2px");
             break;
         case Priority.PRIORITY_MEDIUM:
-            priority.setStyle("-fx-text-fill: #ff9900; -fx-border-color: #ff9900; -fx-padding: 2px");
+            priority.setStyle("-fx-background-color: #ff9900; -fx-text-fill: black;"
+                    + " -fx-border-color: #ff9900; -fx-padding:2px");
             break;
         case Priority.PRIORITY_LOW:
-            priority.setStyle("-fx-text-fill: #33cc33; -fx-border-color: #33cc33; -fx-padding: 2px");
+            priority.setStyle("-fx-background-color: #22d64a; -fx-text-fill: black;"
+                    + " -fx-border-color: #22d64a; -fx-padding:2px");
             break;
         case Priority.PRIORITY_NIL:
             priority.setVisible(false);
