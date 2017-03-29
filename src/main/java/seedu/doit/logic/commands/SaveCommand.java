@@ -35,7 +35,7 @@ public class SaveCommand extends Command {
     public final String saveFilePath;
 
     /**
-     * Creates an SaveCommand using raw values.
+     * Creates an SaveCommand.
      */
     public SaveCommand(String newFilePath) {
         assert newFilePath != null;

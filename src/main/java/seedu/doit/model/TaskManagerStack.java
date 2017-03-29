@@ -76,4 +76,11 @@ public class TaskManagerStack {
         redoStack.clear();
     }
 
+    /**
+     * Clears undo stack
+     */
+    public void clearUndoStack() {
+        undoStack.clear();
+    }
+
 }

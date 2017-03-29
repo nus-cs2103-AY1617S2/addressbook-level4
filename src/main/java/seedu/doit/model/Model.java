@@ -78,7 +78,6 @@ public interface Model {
      */
     void updateFilteredListToShowDone();
 
-
     /**
      * Updates the filter of the filtered task list to filter by the given
      * keywords
@@ -129,9 +128,19 @@ public interface Model {
      */
 
     void commandSet(String oldCommand, String newCommand) throws NoSuchCommandException, CommandExistedException;
+
+    /**
+     * Clears existing backing model and replaces with the provided new data
+     * without saving.
+     */
+    void resetDataWithoutSaving(ReadOnlyItemManager newData);
+
+    /**
+     * Clears existing backing model and replaces with the provided new data
+     * without saving for loading and updates the redo and undo stack.
+     */
+    void loadData(ReadOnlyItemManager newData);
+
     // @@author
-
-
-
 
 }

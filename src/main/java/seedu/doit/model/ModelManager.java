@@ -77,6 +77,18 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    @Override
+    public void resetDataWithoutSaving(ReadOnlyItemManager newData) {
+        this.taskManager.resetData(newData);
+    }
+
+    @Override
+    public void loadData(ReadOnlyItemManager newData) {
+        this.resetDataWithoutSaving(newData);
+        taskManagerStack.clearRedoStack();
+        taskManagerStack.clearUndoStack();
+    }
+
     // @@author A0138909R
     @Override
     public void clearData() {
@@ -155,6 +167,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
+
     @Override
     public void sortBy(String sortType) {
         switch (sortType) {
@@ -190,7 +203,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-
     @Override
     public void commandSet(String oldCommand, String newCommand)
             throws NoSuchCommandException, CommandExistedException {
@@ -218,7 +230,6 @@ public class ModelManager extends ComponentManager implements Model {
         this.filteredTasks.setPredicate(null);
         this.filteredTasks.setPredicate(new DonePredicate(true));
     }
-
 
     @Override
     public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,

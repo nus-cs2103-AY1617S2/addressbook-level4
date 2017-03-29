@@ -20,6 +20,7 @@ import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.IncorrectCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.LoadCommand;
 import seedu.doit.logic.commands.MarkCommand;
 import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.SaveCommand;
@@ -86,6 +87,8 @@ public class Parser {
             return new HelpCommand();
         } else if (SaveCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSave().equals(commandWord)) {
             return new SaveCommandParser().parse(arguments);
+        } else if (LoadCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getLoad().equals(commandWord)) {
+            return new LoadCommandParser().parse(arguments);
         } else if (UndoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUndo().equals(commandWord)) {
             return new UndoCommand();
         } else if (RedoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getRedo().equals(commandWord)) {

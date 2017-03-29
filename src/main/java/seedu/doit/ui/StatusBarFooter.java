@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
+import seedu.doit.commons.events.storage.TaskManagerLoadChangedEvent;
 import seedu.doit.commons.events.storage.TaskManagerSaveChangedEvent;
 import seedu.doit.commons.util.FxViewUtil;
 
@@ -56,6 +57,16 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     public void handleTaskManagerSaveChangedEvent(TaskManagerSaveChangedEvent event) {
+        String lastUpdated = (new Date()).toString();
+        String filePath = event.getFilePath();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting last updated status to " + lastUpdated));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting save location to " + filePath));
+        setSyncStatus("Last Updated: " + lastUpdated);
+        setSaveLocation(filePath);
+    }
+
+    @Subscribe
+    public void handleTaskManagerLoadChangedEvent(TaskManagerLoadChangedEvent event) {
         String lastUpdated = (new Date()).toString();
         String filePath = event.getFilePath();
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting last updated status to " + lastUpdated));

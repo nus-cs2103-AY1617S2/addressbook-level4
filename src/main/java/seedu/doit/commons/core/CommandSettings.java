@@ -13,6 +13,7 @@ import seedu.doit.logic.commands.ExitCommand;
 import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.LoadCommand;
 import seedu.doit.logic.commands.MarkCommand;
 import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.SaveCommand;
@@ -37,13 +38,14 @@ public class CommandSettings implements Serializable {
     private String find;
     private String help;
     private String list;
+    private String load;
     private String redo;
     private String save;
     private String select;
+    private String set;
     private String sort;
     private String undo;
     private String unmark;
-    private String set;
 
     private static CommandSettings instance = null;
 
@@ -64,19 +66,20 @@ public class CommandSettings implements Serializable {
         this.find = FindCommand.COMMAND_WORD;
         this.help = HelpCommand.COMMAND_WORD;
         this.list = ListCommand.COMMAND_WORD;
+        this.load = LoadCommand.COMMAND_WORD;
         this.mark = MarkCommand.COMMAND_WORD;
         this.redo = RedoCommand.COMMAND_WORD;
         this.save = SaveCommand.COMMAND_WORD;
         this.select = SelectCommand.COMMAND_WORD;
+        this.set = SetCommand.COMMAND_WORD;
         this.sort = SortCommand.COMMAND_WORD;
         this.undo = UndoCommand.COMMAND_WORD;
         this.unmark = UnmarkCommand.COMMAND_WORD;
-        this.set = SetCommand.COMMAND_WORD;
     }
 
     public void setCommandSettings(String add, String delete, String done, String edit, String clear, String exit,
-            String find, String help, String list, String mark, String redo, String save, String select, String set,
-            String sort, String undo, String unmark) {
+            String find, String help, String list, String load, String mark, String redo, String save, String select,
+            String set, String sort, String undo, String unmark) {
         this.add = add;
         this.delete = delete;
         this.done = done;
@@ -87,6 +90,7 @@ public class CommandSettings implements Serializable {
         this.find = find;
         this.help = help;
         this.list = list;
+        this.load = load;
         this.redo = redo;
         this.save = save;
         this.select = select;
@@ -139,6 +143,10 @@ public class CommandSettings implements Serializable {
 
     public String getList() {
         return this.list;
+    }
+
+    public String getLoad() {
+        return this.load;
     }
 
     public String getRedo() {
@@ -214,6 +222,10 @@ public class CommandSettings implements Serializable {
         this.list = list;
     }
 
+    public void setLoad(String load) {
+        this.load = load;
+    }
+
     public void setRedo(String redo) {
         this.redo = redo;
     }
@@ -264,6 +276,8 @@ public class CommandSettings implements Serializable {
             setFind(newCommand);
         } else if (ListCommand.COMMAND_WORD.equals(oldCommand) || this.list.equals(oldCommand)) {
             setList(newCommand);
+        } else if (LoadCommand.COMMAND_WORD.equals(oldCommand) || this.load.equals(oldCommand)) {
+            setLoad(newCommand);
         } else if (ExitCommand.COMMAND_WORD.equals(oldCommand) || this.exit.equals(oldCommand)) {
             setExit(newCommand);
         } else if (HelpCommand.COMMAND_WORD.equals(oldCommand) || this.help.equals(oldCommand)) {
@@ -295,6 +309,7 @@ public class CommandSettings implements Serializable {
         case ClearCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD:
+        case LoadCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
         case HelpCommand.COMMAND_WORD:
         case SaveCommand.COMMAND_WORD:
@@ -306,9 +321,9 @@ public class CommandSettings implements Serializable {
         if (this.add.equals(command) || this.delete.equals(command) || this.edit.equals(command)
                 || this.done.equals(command) || this.clear.equals(command) || this.exit.equals(command)
                 || this.find.equals(command) || this.help.equals(command) || this.list.equals(command)
-                || this.mark.equals(command) || this.redo.equals(command) || this.save.equals(command)
-                || this.select.equals(command) || this.set.equals(command) || this.sort.equals(command)
-                || this.undo.equals(command) || this.unmark.equals(command)) {
+                || this.load.equals(command) || this.mark.equals(command) || this.redo.equals(command)
+                || this.save.equals(command) || this.select.equals(command) || this.set.equals(command)
+                || this.sort.equals(command) || this.undo.equals(command) || this.unmark.equals(command)) {
             return true;
         }
         return false;
@@ -327,6 +342,7 @@ public class CommandSettings implements Serializable {
         result = (prime * result) + ((this.find == null) ? 0 : this.find.hashCode());
         result = (prime * result) + ((this.help == null) ? 0 : this.help.hashCode());
         result = (prime * result) + ((this.list == null) ? 0 : this.list.hashCode());
+        result = (prime * result) + ((this.load == null) ? 0 : this.load.hashCode());
         result = (prime * result) + ((this.mark == null) ? 0 : this.mark.hashCode());
         result = (prime * result) + ((this.redo == null) ? 0 : this.redo.hashCode());
         result = (prime * result) + ((this.save == null) ? 0 : this.save.hashCode());
@@ -413,6 +429,13 @@ public class CommandSettings implements Serializable {
         } else if (!this.list.equals(other.list)) {
             return false;
         }
+        if (this.load == null) {
+            if (other.load != null) {
+                return false;
+            }
+        } else if (!this.load.equals(other.load)) {
+            return false;
+        }
         if (this.mark == null) {
             if (other.mark != null) {
                 return false;
@@ -484,6 +507,7 @@ public class CommandSettings implements Serializable {
         sb.append("Find : " + this.find + "\n");
         sb.append("Help : " + this.help + "\n");
         sb.append("List : " + this.list + "\n");
+        sb.append("Load : " + this.load + "\n");
         sb.append("Mark : " + this.mark + "\n");
         sb.append("Redo : " + this.redo + "\n");
         sb.append("Save : " + this.save + "\n");
