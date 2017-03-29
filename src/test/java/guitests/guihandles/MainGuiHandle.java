@@ -37,4 +37,8 @@ public class MainGuiHandle extends GuiHandle {
         guiRobot.sleep(300);
         return new AlertDialogHandle(guiRobot, primaryStage, title);
     }
+
+    public LeftPanelHandle getLeftPanel() {
+        return new LeftPanelHandle(guiRobot, primaryStage);
+    }
 }

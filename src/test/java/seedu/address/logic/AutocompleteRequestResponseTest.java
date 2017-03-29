@@ -10,6 +10,10 @@ import org.junit.Test;
 import seedu.address.logic.autocomplete.AutocompleteRequest;
 import seedu.address.logic.autocomplete.AutocompleteResponse;
 
+//@@author A0140042A
+/**
+ * Test cases to check if autocomplete works at the cursor position
+ */
 public class AutocompleteRequestResponseTest {
 
     @Test

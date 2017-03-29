@@ -3,6 +3,7 @@ package seedu.address.model.booking;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -228,5 +229,20 @@ public class UniqueBookingList implements Iterable<Booking>, Cloneable {
         protected DuplicateBookingException() {
             super("Operation would result in duplicate bookings");
         }
+    }
+
+    //@@author A0105287E
+    /**
+     * Returns the earliest startDate in the whole list. To be used for sorting.
+     *
+     */
+    public Date getEarliestStartTime() {
+        Date earliest = internalList.get(0).getBookingStartDate();
+        for (Booking booking : internalList) {
+            if (booking.getBookingStartDate().before(earliest)) {
+                earliest = booking.getBookingStartDate();
+            }
+        }
+        return earliest;
     }
 }

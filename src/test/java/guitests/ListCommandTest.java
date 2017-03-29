@@ -68,6 +68,34 @@ public class ListCommandTest extends TaskManagerGuiTest {
 
     }
 
+    //@@author A0105287E
+    @Test
+    public void list_listCompletedTasks_success() {
+        commandBox.runCommand("mark 1 completed"); //mark some tasks completed from the default list
+        commandBox.runCommand("mark 3 completed");
+        commandBox.runCommand("mark 5 completed");
+
+        td.task1.setIsCompleted(true);
+        td.task4.setIsCompleted(true);
+        td.task7.setIsCompleted(true);
+
+        commandBox.runCommand("list completed");
+
+        assertTrue(taskListPanel.isListMatching(new TestTask[]{td.task7, td.task4, td.task1}));
+    }
+
+  //@@author A0105287E
+    @Test
+    public void list_listIncompleteTasks_success() {
+        commandBox.runCommand("mark 1 completed"); //mark some tasks completed from the default list
+        commandBox.runCommand("mark 3 completed");
+        commandBox.runCommand("mark 5 completed");
+
+        commandBox.runCommand("list incomplete");
+
+        assertTrue(taskListPanel.isListMatching(new TestTask[]{td.task2, td.task3, td.task5, td.task6}));
+    }
+
     private void assertListResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);

@@ -10,6 +10,7 @@ import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Title;
 
 /**
@@ -77,6 +78,20 @@ public class TaskBuilder {
 
     public TestTask build() {
         return this.task;
+    }
+
+    public TaskBuilder withRecurrenceStatus(boolean isRecurring) {
+        this.task.setIsRecurring(isRecurring);
+        return this;
+    }
+
+    public TaskBuilder withRecurrence(String recurrence) throws IllegalValueException {
+        if (recurrence != null) {
+            this.task.setRecurrence(Optional.ofNullable(new Recurrence(recurrence)));
+        } else {
+            this.task.setRecurrence(Optional.empty());
+        }
+        return this;
     }
 
 }

@@ -46,7 +46,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to DoOrDie<br />
-Format: `add TASKNAME [# LABEL...] ([by DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
+Format: `add TASKNAME [# LABEL...] ([by DEADLINE] | [from START_DATE to END_DATE]) [repeat every [number](hour(s)|day(s)|month(s)|year(s))]`
 
 > * Tasks can have a deadline, or can do without one as well.
 >   * Tasks added without specifying a deadline will be displayed under "No Deadline".
@@ -57,7 +57,7 @@ Format: `add TASKNAME [# LABEL...] ([by DEADLINE] | [from START_DATE to END_DATE
 >   * If time is not specified, it will default to the current time of the particular date.
 >   * Time formats are flexible as well. The application supports 24 hour format and AM/PM format.
 >     * e.g. `Monday 3pm`, `today 1930`, `5:30pm`, `10.00 am`
-> * Recurring task will have the same deadline if `daily/weekly/monthly/yearly` is used
+> * Recurring task will display the first set of dates, a new task with next of dates is completed when you complete the previous task
 > * Tasks can have any number of label name. (including 0).
 > * The `add` command adds task without specifying `deadline`.
 > * Tasks can be created for a date that is already passed.
@@ -67,7 +67,7 @@ Examples:
  * `add CS2106 Mid terms`
  * `add CS2103 V0.0 by tmr #module`
  * `add Make baby by next wednesday 11pm`
- * `add go to school repeat daily`
+ * `add do laundry by today repeat every 6 days`
 
 ### 2.3 Listing all tasks : `list`
 
@@ -112,7 +112,7 @@ Examples:
 
 Edits the specified task's details.
 
-Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE] | [clear dates]) [COMPLETED | INCOMPLETE]`
+Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE] | (clear dates) | [COMPLETED | INCOMPLETE] | (stop repeat)
 
 > * Edits the task with the `TASK_ID`
     The index refers to the id of the task.<br />
@@ -123,6 +123,7 @@ Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE 
 > * You can remove all the task's tags by typing `#` without specifying any tags after it.
 > * You can mark a task completed or incomplete by specifying 'completed' or 'incomplete' respective.
 > * Using 'clear dates' allows the user to remove the existing dates associated with the task.
+> * Using 'stop repeat' allows the user to remove the recurrence of the recurring task.
 
 
 Examples:
@@ -367,9 +368,9 @@ Examples:
 Command Description | Command Format | Example
 -------- | :-------- | :---------
 | Help | `help` |
-| Add | `add TASKNAME [#LABEL...] [by DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]` | `add CS2106 Mid terms by tmr 13:00 #school`
+| Add | `add TASKNAME [#LABEL...] [by DEADLINE] [repeat every [NUMBER](hours|days|months|years)]` | `add CS2106 Mid terms by tmr 13:00 #school`
 | List | `list [TYPE]`| `list outstanding tasks`
-| Edit | `edit [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE] | clear dates) [completed|incomplete]` | `update 1 #label tedious work by thursday #work`
+| Edit | `edit [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE] | clear dates | stop repeat) [completed|incomplete]` | `update 1 #label tedious work by thursday #work`
 | Mark | `mark [TASK_ID] [completed|incomplete]` | `mark 1 completed`
 | Find | `find [TYPE] KEYWORD [MORE_KEYWORDS]...` | `find CS2103`
 | Delete | `delete [TASK_ID|LABEL]` | `delete 1`

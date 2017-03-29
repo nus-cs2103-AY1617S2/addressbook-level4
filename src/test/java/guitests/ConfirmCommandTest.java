@@ -65,7 +65,7 @@ public class ConfirmCommandTest extends TaskManagerGuiTest {
         assertTrue(addedCard.getTitle().equals("Complete booking"));
         System.out.println(taskListPanel.getNumberOfTasks());
 
-        commandBox.runCommand("confirm 8 2");
+        commandBox.runCommand("confirm 1 2");
         TaskCardHandle confirmedCard = taskListPanel.navigateToTask("Complete booking");
         System.out.println(confirmedCard.getStartTime());
         System.out.println(confirmedCard.getDeadline());

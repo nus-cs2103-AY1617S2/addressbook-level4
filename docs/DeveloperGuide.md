@@ -1024,6 +1024,15 @@ Use case ends
 
 > Windows, Linux, Unix, OS-X
 
+##### Floating Tasks
+
+> Tasks without any deadline associated with them.
+
+##### Bookings
+
+> Tasks with multiple time slots selected due to the lack of a confirmed slot.
+
+
 ## Appendix E : Product Survey
 
 **Todoist**
