@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,6 +40,11 @@ import project.taskcrusher.model.Model;
 import project.taskcrusher.model.ModelManager;
 import project.taskcrusher.model.ReadOnlyUserInbox;
 import project.taskcrusher.model.UserInbox;
+import project.taskcrusher.model.event.Event;
+import project.taskcrusher.model.event.Location;
+import project.taskcrusher.model.event.ReadOnlyEvent;
+import project.taskcrusher.model.event.Timeslot;
+import project.taskcrusher.model.shared.DateUtilApache;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.shared.Priority;
@@ -114,8 +120,9 @@ public class LogicManagerTest {
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage, ReadOnlyUserInbox expectedUserInbox,
-            List<? extends ReadOnlyTask> expectedShownList) {
-        assertCommandBehavior(false, inputCommand, expectedMessage, expectedUserInbox, expectedShownList);
+            List<? extends ReadOnlyTask> expectedShownTaskList, List<? extends ReadOnlyEvent> expectedShownEventList) {
+        assertCommandBehavior(false, inputCommand, expectedMessage, expectedUserInbox, expectedShownTaskList,
+                expectedShownEventList);
     }
 
     /**
@@ -128,8 +135,10 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         UserInbox expectedUserInbox = new UserInbox(model.getUserInbox());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-        assertCommandBehavior(true, inputCommand, expectedMessage, expectedUserInbox, expectedShownList);
+        List<ReadOnlyTask> expectedShownTaskList = new ArrayList<>(model.getFilteredTaskList());
+        List<ReadOnlyEvent> expectedShownEventList = new ArrayList<>(model.getFilteredEventList());
+        assertCommandBehavior(true, inputCommand, expectedMessage, expectedUserInbox, expectedShownTaskList,
+                expectedShownEventList);
     }
 
     /**
@@ -143,7 +152,8 @@ public class LogicManagerTest {
      * - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-            ReadOnlyUserInbox expectedAddressBook, List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyUserInbox expectedAddressBook, List<? extends ReadOnlyTask> expectedShownTaskList,
+            List<? extends ReadOnlyEvent> expectedShownEventList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -155,7 +165,8 @@ public class LogicManagerTest {
         }
 
         // Confirm the ui display elements should contain the right data
-        assertEquals(expectedShownList, model.getFilteredTaskList());
+        assertEquals(expectedShownTaskList, model.getFilteredTaskList());
+        assertEquals(expectedShownEventList, model.getFilteredEventList());
 
         // Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedAddressBook, model.getUserInbox());
@@ -170,13 +181,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new UserInbox(), Collections.emptyList());
+        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new UserInbox(), Collections.emptyList(),
+                Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
     public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, new UserInbox(),
+        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, new UserInbox(), Collections.emptyList(),
                 Collections.emptyList());
     }
 
@@ -186,42 +198,84 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(1));
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
+        model.addEvent(helper.generateEvent(1));
+        model.addEvent(helper.generateEvent(2));
+        model.addEvent(helper.generateEvent(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new UserInbox(), Collections.emptyList());
+        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new UserInbox(), Collections.emptyList(),
+                Collections.emptyList());
     }
 
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        assertCommandFailure("add ", expectedMessage);
         assertCommandFailure("add noflag", expectedMessage);
         assertCommandFailure("add z Valid Name p/3 //valid description", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add t d/today p/1 //validdescription",
+        assertCommandFailure("add t d/2017-11-11 p/1 //validdescription",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        assertCommandFailure("add t validname p/not_numbers d/tomorrow //validdescription",
+        assertCommandFailure("add t validname p/not_numbers d/2017-11-11 //validdescription",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-//        assertCommandFailure("add t validname p/1 d/yesterday //validdescription",
-//                Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
-        assertCommandFailure("add t validname p/1 d/tomorrow //validdescription t/invalid_-[.tag",
+        assertCommandFailure("add t validname p/111111 d/2017-11-11 //validdescription",
+                Priority.MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add t validname p/-1 d/2017-11-11 //validdescription",
+                Priority.MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add t validname p/2 d/2016-11-11 //validdescription", DateUtilApache.MESSAGE_DATE_PASSED);
+        assertCommandFailure("add t validname p/2 d/ewrio232 //validdescription",
+                DateUtilApache.MESSAGE_DATE_NOT_FOUND);
+        assertCommandFailure("add t validname p/1 d/2017-11-11 //validdescription t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
+    }
 
+    @Test
+    public void execute_add_invalidEventData() {
+        assertCommandFailure("add e d/2017-11-11 p/1 //validdescription",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure("add e validname l/validlocation d/ //validdescription", Timeslot.MESSAGE_TIMESLOT_DNE);
+        assertCommandFailure("add e validname l/validlocation d/2020-11-11 03:00PM to 2020-11-11 05:00PM"
+                + " or 2021-11-11 03:00PM //validdescription", Timeslot.MESSAGE_TIMESLOT_PAIRS);
+        assertCommandFailure(
+                "add e validname l/validlocation d/2020-11-11 11:00PM to 2020-11-11 05:00PM //validdescription",
+                Timeslot.MESSAGE_TIMESLOT_RANGE);
+        assertCommandFailure("add e validname l/validlocation d/2016-11-11 to 2017-11-11 //validdescription",
+                DateUtilApache.MESSAGE_DATE_PASSED);
+        assertCommandFailure("add e validname l/validlocation d/ewrio232 to 54rthg //validdescription",
+                DateUtilApache.MESSAGE_DATE_NOT_FOUND);
+        assertCommandFailure("add e validname l/validlocation d/2020-11-11 03:00PM to 2020-11-11 05:00PM"
+                + " //validdescription t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void execute_add_successful() throws Exception {
+        // add valid task
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.homework();
-        UserInbox expectedAB = new UserInbox();
-        expectedAB.addTask(toBeAdded);
+        UserInbox expectedInbox = new UserInbox();
+        expectedInbox.addTask(toBeAdded);
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-                String.format(AddCommand.MESSAGE_TASK_SUCCESS, toBeAdded),
-                expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess(helper.generateAddTaskCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_TASK_SUCCESS, toBeAdded), expectedInbox, expectedInbox.getTaskList(),
+                expectedInbox.getEventList());
+
+        // add event
+        Event toBeAdded2 = helper.reviewSession();
+        expectedInbox.addEvent(toBeAdded2);
+        assertCommandSuccess(helper.generateAddEventCommand(toBeAdded2),
+                String.format(AddCommand.MESSAGE_EVENT_SUCCESS, toBeAdded2), expectedInbox, expectedInbox.getTaskList(),
+                expectedInbox.getEventList());
+
+        // add tentative event
+        Event toBeAdded3 = helper.reviewSessionTentative();
+        expectedInbox.addEvent(toBeAdded3);
+        assertCommandSuccess(helper.generateAddEventCommand(toBeAdded3),
+                String.format(AddCommand.MESSAGE_EVENT_SUCCESS, toBeAdded3), expectedInbox, expectedInbox.getTaskList(),
+                expectedInbox.getEventList());
 
     }
 
@@ -232,10 +286,18 @@ public class LogicManagerTest {
         Task toBeAdded = helper.homework();
 
         // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
+        model.addTask(toBeAdded); // task already in internal user inbox
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertCommandFailure(helper.generateAddTaskCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
+
+        Event toBeAdded2 = helper.reviewSession();
+        model.addEvent(toBeAdded2); // event already in internal user inbox
+        assertCommandFailure(helper.generateAddEventCommand(toBeAdded2), AddCommand.MESSAGE_DUPLICATE_EVENT);
+
+        Event toBeAdded3 = helper.reviewSessionTentative();
+        model.addEvent(toBeAdded3); // event already in internal user inbox
+        assertCommandFailure(helper.generateAddEventCommand(toBeAdded3), AddCommand.MESSAGE_DUPLICATE_EVENT);
 
     }
 
@@ -243,13 +305,14 @@ public class LogicManagerTest {
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        UserInbox expectedAB = helper.generateUserInbox(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+        UserInbox expectedInbox = helper.generateUserInbox(2);
+        List<? extends ReadOnlyTask> expectedTaskList = expectedInbox.getTaskList();
+        List<? extends ReadOnlyEvent> expectedEventList = expectedInbox.getEventList();
 
         // prepare address book state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
+        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedInbox, expectedTaskList, expectedEventList);
     }
 
     /**
@@ -308,18 +371,20 @@ public class LogicManagerTest {
         assertIndexNotFoundBehaviorForCommand("select");
     }
 
+    // TODO CAN WE GET RID OF THIS USELESS COMMAND
     @Test
     public void execute_select_jumpsToCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generateTaskList(3);
+        List<Task> threeTasks = helper.generateTaskList(3);
+        List<Event> fiveEvents = helper.generateEventList(5);
 
-        UserInbox expectedAB = helper.generateUserInbox(threePersons);
-        helper.addToModel(model, threePersons);
+        UserInbox expectedInbox = helper.generateUserInbox(threeTasks, fiveEvents);
+        helper.addToModel(model, threeTasks, fiveEvents);
 
-        assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2), expectedAB,
-                expectedAB.getTaskList());
+        assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2), expectedInbox,
+                expectedInbox.getTaskList(), expectedInbox.getEventList());
         assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredTaskList().get(1), threePersons.get(1));
+        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
 
     @Test
@@ -334,17 +399,32 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_delete_removesCorrectPerson() throws Exception {
+    public void execute_delete_removesCorrectUserToDo() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generateTaskList(3);
+        List<Task> threeTasks = helper.generateTaskList(3);
+        List<Event> fiveEvents = helper.generateEventList(5);
 
-        UserInbox expectedAB = helper.generateUserInbox(threePersons);
-        expectedAB.removeTask(threePersons.get(1));
-        helper.addToModel(model, threePersons);
+        UserInbox expectedInbox = helper.generateUserInbox(threeTasks, fiveEvents);
+        expectedInbox.removeTask(threeTasks.get(1));
+        helper.addToModel(model, threeTasks, fiveEvents);
 
-        assertCommandSuccess("delete t 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
-                threePersons.get(1)),
-                expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess("delete t 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+                expectedInbox, expectedInbox.getTaskList(), expectedInbox.getEventList());
+
+        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new UserInbox(), Collections.emptyList(),
+                Collections.emptyList());
+
+        List<Task> oneTask = new ArrayList<>();
+        oneTask.add(helper.generateTaskWithName("28t5j3"));
+        List<Event> oneEvent = new ArrayList<>();
+        oneEvent.add(helper.generateEventWithName("elkrtewlr225"));
+
+        UserInbox expectedInbox2 = helper.generateUserInbox(oneTask, oneEvent);
+        expectedInbox2.removeEvent(oneEvent.get(0));
+        helper.addToModel(model, oneTask, oneEvent);
+
+        assertCommandSuccess("delete e 1", String.format(DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS, oneEvent.get(0)),
+                expectedInbox2, expectedInbox2.getTaskList(), expectedInbox2.getEventList());
     }
 
     @Test
@@ -356,52 +436,79 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task tTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task t1 = helper.generateTaskWithName("KE Y");
+        Task t2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        UserInbox expectedAB = helper.generateUserInbox(fourPersons);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
-        helper.addToModel(model, fourPersons);
+        Event eTarget1 = helper.generateEventWithName("bla bla KEY bla");
+        Event eTarget2 = helper.generateEventWithName("bla KEY bla bceofeia");
+        Event e1 = helper.generateEventWithName("KE Y");
+        Event e2 = helper.generateEventWithName("KEYKEYKEY sduauo");
 
-        assertCommandSuccess("find KEY", Command.getMessageForPersonListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
+        List<Event> fiveEvents = helper.generateEventList(e1, eTarget1, e2, eTarget2);
+
+        UserInbox expectedInbox = helper.generateUserInbox(fourTasks, fiveEvents);
+
+        List<Task> expectedTaskList = helper.generateTaskList(tTarget1, tTarget2);
+        List<Event> expectedEventList = helper.generateEventList(eTarget1, eTarget2);
+
+        helper.addToModel(model, fourTasks, fiveEvents);
+
+        assertCommandSuccess("find KEY",
+                Command.getMessageForPersonListShownSummary(expectedTaskList.size(), expectedEventList.size()),
+                expectedInbox, expectedTaskList, expectedEventList);
     }
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithName("key key");
-        Task p4 = helper.generateTaskWithName("KEy sduauo");
+        Task t1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task t2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task t3 = helper.generateTaskWithName("key key");
+        Task t4 = helper.generateTaskWithName("KEy sduauo");
 
-        List<Task> fourPersons = helper.generateTaskList(p3, p1, p4, p2);
-        UserInbox expectedAB = helper.generateUserInbox(fourPersons);
-        List<Task> expectedList = fourPersons;
-        helper.addToModel(model, fourPersons);
+        Event e1 = helper.generateEventWithName("bla bla KEY bla");
+        Event e2 = helper.generateEventWithName("bla KEY bla bceofeia");
+        Event e3 = helper.generateEventWithName("key key");
 
-        assertCommandSuccess("find KEY", Command.getMessageForPersonListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        List<Task> fourTasks = helper.generateTaskList(t3, t1, t4, t2);
+        List<Event> threeEvents = helper.generateEventList(e3, e1, e2);
+        UserInbox expectedInbox = helper.generateUserInbox(fourTasks, threeEvents);
+        List<Task> expectedTaskList = fourTasks;
+        List<Event> expectedEventList = threeEvents;
+
+        helper.addToModel(model, fourTasks, threeEvents);
+
+        assertCommandSuccess("find KEY",
+                Command.getMessageForPersonListShownSummary(expectedTaskList.size(), expectedEventList.size()),
+                expectedInbox, expectedTaskList, expectedEventList);
     }
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
-        Task p1 = helper.generateTaskWithName("sduauo");
+        Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task tTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
+        Task tTarget3 = helper.generateTaskWithName("key key");
+        Task t1 = helper.generateTaskWithName("sduauo");
 
-        List<Task> fourPersons = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        UserInbox expectedAB = helper.generateUserInbox(fourPersons);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
-        helper.addToModel(model, fourPersons);
+        Event eTarget1 = helper.generateEventWithName("bla bla KEY bla");
+        Event eTarget2 = helper.generateEventWithName("bla rAnDoM bla bceofeia");
+        Event eTarget3 = helper.generateEventWithName("key key");
+        Event e1 = helper.generateEventWithName("sduauo");
 
-        assertCommandSuccess("find key rAnDoM", Command.getMessageForPersonListShownSummary(expectedList.size()),
-                expectedAB, expectedList);
+        List<Task> fourTasks = helper.generateTaskList(tTarget1, t1, tTarget2, tTarget3);
+        List<Event> fourEvents = helper.generateEventList(eTarget1, e1, eTarget2, eTarget3);
+        UserInbox expectedInbox = helper.generateUserInbox(fourTasks, fourEvents);
+        List<Task> expectedTaskList = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Event> expectedEventList = helper.generateEventList(eTarget1, eTarget2, eTarget3);
+        helper.addToModel(model, fourTasks, fourEvents);
+
+        assertCommandSuccess("find key rAnDoM",
+                Command.getMessageForPersonListShownSummary(expectedTaskList.size(), expectedEventList.size()),
+                expectedInbox, expectedTaskList, expectedEventList);
     }
 
     /**
@@ -420,6 +527,34 @@ public class LogicManagerTest {
             return new Task(name, deadline, priority, description, tags);
         }
 
+        Event reviewSession() throws Exception {
+            Name name = new Name("CS2103 review session");
+            Timeslot timeslot = new Timeslot("2017-09-23 03:00PM", "2017-09-23 05:00PM");
+            List<Timeslot> timeslots = new ArrayList<>();
+            timeslots.add(timeslot);
+            Location location = new Location("i3 Aud");
+            Description description = new Description("makes life easier");
+            Tag tag3 = new Tag("sometag3");
+            Tag tag4 = new Tag("sometag4");
+            UniqueTagList tags = new UniqueTagList(tag3, tag4);
+            return new Event(name, timeslots, location, description, tags);
+        }
+
+        Event reviewSessionTentative() throws Exception {
+            Name name = new Name("CS2103 review session probably");
+            Timeslot timeslot1 = new Timeslot("2020-09-23 03:00PM", "2020-09-23 05:00PM");
+            Timeslot timeslot2 = new Timeslot("2021-09-23 06:00PM", "2021-09-23 08:00PM");
+            List<Timeslot> timeslots = new ArrayList<>();
+            timeslots.add(timeslot1);
+            timeslots.add(timeslot2);
+            Location location = new Location("i3 Aud");
+            Description description = new Description("makes life easier");
+            Tag tag3 = new Tag("sometag3");
+            Tag tag4 = new Tag("sometag4");
+            UniqueTagList tags = new UniqueTagList(tag3, tag4);
+            return new Event(name, timeslots, location, description, tags);
+        }
+
         /**
          * Generates a valid person using the given seed. Running this function
          * with the same parameter values guarantees the returned person will
@@ -435,8 +570,19 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
+        Event generateEvent(int seed) throws Exception {
+            Timeslot timeslot = new Timeslot("2020-09-23 03:00PM", "2020-9-23 05:00PM");
+            DateUtils.addHours(timeslot.start, seed);
+            DateUtils.addHours(timeslot.end, seed);
+            List<Timeslot> timeslots = new ArrayList<Timeslot>();
+            timeslots.add(timeslot);
+            return new Event(new Name("Event " + seed), timeslots, new Location("Location" + seed),
+                    new Description("description is " + seed),
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
+        }
+
         /** Generates the correct add command based on the person given */
-        String generateAddCommand(Task task) {
+        String generateAddTaskCommand(Task task) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
@@ -448,6 +594,36 @@ public class LogicManagerTest {
             cmd.append(" //").append(task.getDescription());
 
             UniqueTagList tags = task.getTags();
+            for (Tag t : tags) {
+                cmd.append(" t/").append(t.tagName);
+            }
+
+            return cmd.toString();
+        }
+
+        String generateAddEventCommand(Event event) {
+            StringBuffer cmd = new StringBuffer();
+
+            cmd.append("add ");
+            cmd.append("e ");
+
+            cmd.append(event.getName().toString());
+
+            List<Timeslot> timeslots = event.getTimeslots();
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < timeslots.size(); i++) {
+                sb.append(timeslots.get(i));
+                if (i < timeslots.size() - 1) {
+                    sb.append(" or ");
+                }
+            }
+
+            cmd.append(" d/").append(sb.toString());
+            cmd.append(" l/").append(event.getLocation());
+            cmd.append(" //").append(event.getDescription());
+
+            UniqueTagList tags = event.getTags();
             for (Tag t : tags) {
                 cmd.append(" t/").append(t.tagName);
             }
@@ -467,9 +643,9 @@ public class LogicManagerTest {
         /**
          * Generates an AddressBook based on the list of Persons given.
          */
-        UserInbox generateUserInbox(List<Task> tasks) throws Exception {
+        UserInbox generateUserInbox(List<Task> tasks, List<Event> events) throws Exception {
             UserInbox userInbox = new UserInbox();
-            addToUserInbox(userInbox, tasks);
+            addToUserInbox(userInbox, tasks, events);
             return userInbox;
         }
 
@@ -480,15 +656,19 @@ public class LogicManagerTest {
          *            The UserInbox to which the Tasks will be added
          */
         void addToUserInbox(UserInbox userInbox, int numGenerated) throws Exception {
-            addToUserInbox(userInbox, generateTaskList(numGenerated));
+            addToUserInbox(userInbox, generateTaskList(numGenerated), generateEventList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given UserInbox
          */
-        void addToUserInbox(UserInbox userInbox, List<Task> tasks) throws Exception {
+        void addToUserInbox(UserInbox userInbox, List<Task> tasks, List<Event> events) throws Exception {
             for (Task t : tasks) {
                 userInbox.addTask(t);
+            }
+
+            for (Event e : events) {
+                userInbox.addEvent(e);
             }
         }
 
@@ -499,15 +679,19 @@ public class LogicManagerTest {
          *            The model to which the Persons will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {
-            addToModel(model, generateTaskList(numGenerated));
+            addToModel(model, generateTaskList(numGenerated), generateEventList(numGenerated));
         }
 
         /**
          * Adds the given list of Persons to the given model
          */
-        void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+        void addToModel(Model model, List<Task> tasksToAdd, List<Event> eventsToAdd) throws Exception {
             for (Task t : tasksToAdd) {
                 model.addTask(t);
+            }
+
+            for (Event e : eventsToAdd) {
+                model.addEvent(e);
             }
         }
 
@@ -526,6 +710,18 @@ public class LogicManagerTest {
             return Arrays.asList(tasks);
         }
 
+        List<Event> generateEventList(int numGenerated) throws Exception {
+            List<Event> events = new ArrayList<>();
+            for (int i = 1; i <= numGenerated; i++) {
+                events.add(generateEvent(i));
+            }
+            return events;
+        }
+
+        List<Event> generateEventList(Event... events) {
+            return Arrays.asList(events);
+        }
+
         /**
          * Generates a Task object with given name. Other fields will have some
          * dummy values.
@@ -533,6 +729,13 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name), new Deadline(""), new Priority("1"), new Description("sample description"),
                     new UniqueTagList(new Tag("tag")));
+        }
+
+        Event generateEventWithName(String name) throws Exception {
+            List<Timeslot> timeslots = new ArrayList<>();
+            timeslots.add(new Timeslot("2020-09-23 03:00PM", "2020-9-23 05:00PM"));
+            return new Event(new Name(name), timeslots, new Location("somewhere"),
+                    new Description("sample description"), new UniqueTagList(new Tag("tag")));
         }
     }
 }
