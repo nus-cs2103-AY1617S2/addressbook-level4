@@ -25,8 +25,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.Command;
@@ -45,10 +43,6 @@ public class EditCommandParser {
     public static final String MESSAGE_INVALID_PARAMETER = "Invalid parameter given. Valid parameters" +
                                                    " include name, start_date, start_time, end_date, end_time and tags";
 
-    private static final Pattern NATURAL_LANGUAGE_ARGS_FORMAT =
-                Pattern.compile("^(?<index>\\d+)\\s"
-                        + "change\\s(?<updateParameter>\\D+)\\sto\\s(?<updateValue>.+)");
-
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -63,14 +57,37 @@ public class EditCommandParser {
     }
 
     private Command processNaturalLanguageArguments(String args) {
-        final Matcher matcher = NATURAL_LANGUAGE_ARGS_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                            EditCommand.NATURAL_MESSAGE_USAGE));
-        }
+        String argsInProcess = args;
+        //Maunal expression matching due to regex matching criteria being too broad
+        Optional<Integer> index = ParserUtil.parseIndex(argsInProcess.trim().split(" ")[0]);
+        if (index.isPresent()) {
+            //Remove index
+            int indexOfIndex = argsInProcess.indexOf(new String("" +  index.get()));
+            argsInProcess = argsInProcess.substring(indexOfIndex + new String("" +  index.get()).length());
 
-        String index = matcher.group("updateParameter");
-        String index2 = matcher.group("updateParameter2");
+            //Process Other Arguments
+            while (argsInProcess.length() > 0) {
+                int indexOfFirstAndChange = argsInProcess.indexOf("and change");
+                if (indexOfFirstAndChange == -1) {
+                    //Single parameter change
+                    int indexOfFirstChange = argsInProcess.indexOf("change ");
+                    int indexOfFirstTo = argsInProcess.indexOf(" to ");
+                    if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
+                        String updateParameter = argsInProcess.substring(indexOfFirstChange
+                                + new String("change ").length(), indexOfFirstTo);
+                        String updateValue = argsInProcess.substring(indexOfFirstTo + new String(" to ").length());
+                        return processStructuredArguments(index.get() + PARAMETER_DELIMITER + updateParameter
+                                                            + EDIT_PARAMETER_DELIMITER + updateValue);
+                    } else {
+                        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                EditCommand.NATURAL_MESSAGE_USAGE));
+                    }
+                }
+            }
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.NATURAL_MESSAGE_USAGE));
+        }
         return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.NATURAL_MESSAGE_USAGE));
     }
