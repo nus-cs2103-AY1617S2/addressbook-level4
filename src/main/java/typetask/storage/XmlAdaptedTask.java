@@ -11,7 +11,7 @@ import typetask.model.task.Task;
  * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
-
+  //@@author A0139926R
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
@@ -28,7 +28,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask() {}
 
-
+  //@@author A0139926R
     /**
      * Converts a given Task into this class for JAXB use.
      *
@@ -45,7 +45,7 @@ public class XmlAdaptedTask {
 
         isCompleted = source.getIsCompleted();
     }
-
+  //@@author A0139926R
     /**
      * Converts this jaxb-friendly adapted task object into the model's Task object.
      *
