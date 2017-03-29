@@ -205,10 +205,10 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
 
-        assertCommandFailure("add Valid Title s/01/03/2017 05/03/2017 d/valid, "
-                + "description.butNoEndDatePrefix", StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01/03/2017 e/05/03/2017 valid, "
-                + "description.butNoDescriptionPrefix", EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Title s/01/03/2017 05/03/2017 d/valid, " + "description.butNoEndDatePrefix",
+                StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Title s/01/03/2017 e/05/03/2017 valid, " + "description.butNoDescriptionPrefix",
+                EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
         // @@author A0140032E
         assertCommandFailure("add Valid Title s/02/01/2017 e/01/01/2017 d/valid, description",
                 AddCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
@@ -452,13 +452,13 @@ public class LogicManagerTest {
                 String.format(Messages.MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
     }
 
-/*    @Test
-    public void execute_cd_invalidXmlFile() throws Exception {
-        assertCommandFailure("cd src/test/data/cd_test/empty.xml",
-                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
-        assertCommandFailure("cd src/test/data/cd_test/invalid.xml",
-                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
-    }*/
+    /*
+     * @Test public void execute_cd_invalidXmlFile() throws Exception {
+     * assertCommandFailure("cd src/test/data/cd_test/empty.xml",
+     * ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+     * assertCommandFailure("cd src/test/data/cd_test/invalid.xml",
+     * ChangeDirectoryCommand.MESSAGE_INVALID_DATA); }
+     */
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
@@ -670,6 +670,6 @@ public class LogicManagerTest {
             return new Task(new Title("Watch Halestorm concert"), new StartDate("01/04/2017"), new EndDate(endDate),
                     new Description("Just do it"), new UniqueTagList(new Tag("tag")));
         }
-        // @@author
+        // @@author A0131278H
     }
 }
