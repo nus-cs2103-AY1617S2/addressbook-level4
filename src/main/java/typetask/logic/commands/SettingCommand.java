@@ -15,7 +15,7 @@ public class SettingCommand extends Command {
             + "Parameters: FilePath"
             + "Example: " + COMMAND_WORD
             + " c:\\desktop\\ ";
-    public static final String MESSAGE_SUCCESS = "Defaut saving location is updated";
+    public static final String MESSAGE_SUCCESS = "Default saving location is updated";
 
     String path;
 

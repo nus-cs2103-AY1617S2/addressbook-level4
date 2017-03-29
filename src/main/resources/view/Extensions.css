@@ -2,7 +2,7 @@
 .error {
     -fx-background-color: red;
 }
-
+/* @@author A0139154E */
 .overdue {
 	-fx-background-color: red;
 }
@@ -14,7 +14,7 @@
 .priority {
 	-fx-background-color: yellow;
 }
-
+/* @@author */
 .tag-selector {
     -fx-border-width: 1;
     -fx-border-color: white;
