@@ -41,16 +41,16 @@ If you are not sure where to start, take a sneakpeek at the help sheet!
 
 Format: `help [COMMANDNAME]`, `h [COMMANDNAME]`, `man [COMMANDNAME]`, `manual [COMMANDNAME]`
 
-> If COMMANDNAME is entered, displays the help message for that specific command
-> If COMMANDNAME is not entered, displays user guide in another window.
-> Tips: You can also bring up the help window by pressing F1.
+> * If COMMANDNAME is entered, displays the help message for that specific command
+> * If COMMANDNAME is not entered, displays user guide in another window.
+> * Tips: You can also bring up the help window by pressing F1.
 
 ### 2.1.2 Viewing quick overview of command formats : `helpf`
 
 Format: `helpformat`, `helpf`, `summary`, `hf`
 
-> Helpf shows a quick summary of command formats.
-> Tips: You can also bring up the help window by pressing F3.
+> * Helpf shows a quick summary of command formats.
+> * Tips: You can also bring up the help window by pressing F3.
 
 ### 2.2 Adding a task: `add`
 
@@ -228,9 +228,9 @@ e.g `do project` will match `do School project` but not `do homework`
 If you are using Google Calendar, we support some Google Calendar operations too.
 To use Google Calendar with KIT, we first require your permission to read and add event to your Google Calendar.
 
-> The request will open in your default browser.
-> Log in to your Google account and approve the request to use this feature. 
-> You only need to do this for the first time.
+> * The request will open in your default browser.
+> * Log in to your Google account and approve the request to use this feature. 
+> * You only need to do this for the first time.
 
 ### 2.10.1 Get Events from Google Calendar: `gg`
 
