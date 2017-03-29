@@ -102,8 +102,11 @@ public class CalendarPanel extends UiPart<Region> {
     @Subscribe
     public void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         Optional<DateTime> startDateTime = event.getNewSelection().getStartDateTime();
+        Optional<DateTime> endDateTime = event.getNewSelection().getEndDateTime();
         if (startDateTime.isPresent()) {
             changeReferenceDate(startDateTime.get().getDateTimeForFullCalendar());
+        } else if (endDateTime.isPresent()) {
+            changeReferenceDate(endDateTime.get().getDateTimeForFullCalendar());
         }
     }
 

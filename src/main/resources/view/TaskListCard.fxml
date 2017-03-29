@@ -16,7 +16,7 @@
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="170.0" />
             </columnConstraints>
             <children>
                 <VBox alignment="CENTER_LEFT" minHeight="50.0" GridPane.columnIndex="0">
@@ -32,12 +32,12 @@
                             <children>
                                 <HBox>
                                     <Label fx:id="id" minWidth="28.0" />
-                                    <AnchorPane prefWidth="170.0" minWidth="170.0">
+                                    <AnchorPane prefWidth="200.0" minWidth="200.0">
                                        <children>
-                                         <Label fx:id="name" maxWidth="155.0" text="\$first" />
+                                         <Label fx:id="name" maxWidth="170.0" text="\$first" />
                                          <AnchorPane minHeight="15.0" minWidth="15.0" prefHeight="20.0" prefWidth="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                         <ImageView fx:id="tickOrCross" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                         <ImageView fx:id="tickOrCross" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
                                     </children>
                                  </AnchorPane>
                               </children>
@@ -46,7 +46,7 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <FlowPane fx:id="datesAndTimes" styleClass="task-card-date-time" />
+                        <FlowPane fx:id="datesAndTimes" styleClass="task-card-date-time" maxWidth = "100.0"/>
                         <!-- @@author -->
                     </children>
                 </VBox>
