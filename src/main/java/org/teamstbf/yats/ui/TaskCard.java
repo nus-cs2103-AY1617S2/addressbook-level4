@@ -6,8 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 //@@author A0102778B
 
@@ -20,15 +18,17 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label loc;
     @FXML
-    private Label address;
+    private Label description;
     @FXML
-    private Label email;
+    private Label startTime;
     @FXML
     private Label hypen;
     @FXML
     private Label endTime;
+    @FXML
+    private Label deadline;
     @FXML
     private FlowPane tags;
 
@@ -36,10 +36,20 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(person.getTitle().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getLocation().value);
-        address.setText(person.getDescription().value);
-        email.setText(person.getStartTime().value);
-        endTime.setText(person.getEndTime().value);
+        loc.setText(person.getLocation().value);
+        description.setText(person.getDescription().value);
+        if (person.hasStartEndTime()){
+            startTime.setText(person.getStartTime().toString() + " - ");
+            endTime.setText(person.getEndTime().toString());
+        } else {
+            startTime.setText("");
+            endTime.setText("");
+        }
+        if (person.hasDeadline()) {
+            deadline.setText(" by " +person.getDeadline().toString());
+        } else {
+            deadline.setText("");
+        }
         initTags(person);
     }
 

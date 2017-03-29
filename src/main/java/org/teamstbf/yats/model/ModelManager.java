@@ -1,5 +1,6 @@
 package org.teamstbf.yats.model;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager extends ComponentManager implements Model {
 
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+	private static final String UNDONE_TASK_IDENTIFIER = "No";
 
 	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 5;
 
@@ -54,6 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 		this.taskManager = new TaskManager(taskManager);
 		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
+		updateFilteredListToShowAll();
 		undoTaskManager = new Stack<TaskManager>();
 		redoTaskManager = new Stack<TaskManager>();
 	}
@@ -76,7 +79,7 @@ public class ModelManager extends ComponentManager implements Model {
 	 * remove half of the earlier saved states and only keep the later half.
 	 */
 	private void saveImageOfCurrentTaskManager() {
-		checkIfUndoStackSizeTooLarge();
+		removeUndoEntriesIfUndoStackSizeTooLarge();
 		TaskManager tempManager = new TaskManager();
 		tempManager.resetData(taskManager);
 		undoTaskManager.push(tempManager);
@@ -95,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
 	 * This method checks if the undo stack size is above the maximum allowed
 	 * size
 	 */
-	private void checkIfUndoStackSizeTooLarge() {
+	private void removeUndoEntriesIfUndoStackSizeTooLarge() {
 		if (undoTaskManager.size() >= MAXIMUM_SIZE_OF_UNDO_STACK) {
 			removeHalfOfUndoStack(undoTaskManager);
 		}
@@ -125,7 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
 		indicateTaskManagerChanged();
 	}
 
-	// @@author A0102778B
+	//@@author A0102778B
 
 	@Override
 	public boolean checkEmptyUndoStack() {
@@ -155,6 +158,8 @@ public class ModelManager extends ComponentManager implements Model {
 		indicateTaskManagerChanged();
 	}
 
+	// @@author
+
 	/*
 	 * @Override public synchronized void getNextState() { saveImage();
 	 * taskManager.resetData(redoTaskManager.pop()); }
@@ -176,6 +181,11 @@ public class ModelManager extends ComponentManager implements Model {
 	/** Raises an event to indicate the model has changed */
 	private void indicateTaskManagerChanged() {
 		raise(new TaskManagerChangedEvent(taskManager));
+	}
+
+	@Override
+	public void saveTaskManager() {
+		indicateTaskManagerChanged();
 	}
 
 	@Override
@@ -207,9 +217,13 @@ public class ModelManager extends ComponentManager implements Model {
 		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
 	}
 
+
 	@Override
 	public void updateFilteredListToShowAll() {
-		filteredEvents.setPredicate(null);
+		Set<String> undoneTaskIdentifier = new HashSet<String>();
+		undoneTaskIdentifier.add(UNDONE_TASK_IDENTIFIER);
+		updateFilteredListToShowDone(undoneTaskIdentifier);
+		// filteredEvents.setPredicate(null);
 	}
 
 	// @@author A0138952W
@@ -330,7 +344,7 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return dateKeyWords.stream().filter(
-					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().getDate().toString(), keyword))
+					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
 					.findAny().isPresent();
 		}
 
@@ -351,7 +365,7 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return startTimeKeyWords.stream().filter(
-					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().getTime().toString(), keyword))
+					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
 					.findAny().isPresent();
 		}
 
@@ -372,7 +386,7 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return doneKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().value, keyword)).findAny()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().getValue(), keyword)).findAny()
 					.isPresent();
 		}
 

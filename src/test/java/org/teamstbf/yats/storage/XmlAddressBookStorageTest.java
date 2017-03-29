@@ -15,7 +15,6 @@ import org.teamstbf.yats.commons.util.FileUtil;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Event;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.storage.XmlTaskManagerStorage;
 import org.teamstbf.yats.testutil.TypicalTestEvents;
 

@@ -70,6 +70,7 @@ public class MainApp extends Application {
     }
 
     private String getApplicationParameter(String parameterName) {
+
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
     }
@@ -119,7 +120,6 @@ public class MainApp extends Application {
                     "Using default config properties");
             initializedConfig = new Config();
         }
-
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);

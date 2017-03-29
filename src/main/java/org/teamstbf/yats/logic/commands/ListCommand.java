@@ -1,5 +1,6 @@
 package org.teamstbf.yats.logic.commands;
 
+//@@author A0138952W
 /**
  * Lists all persons in the task manager to the user.
  */

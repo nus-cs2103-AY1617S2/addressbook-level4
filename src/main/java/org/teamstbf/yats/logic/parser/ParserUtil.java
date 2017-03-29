@@ -1,8 +1,10 @@
 package org.teamstbf.yats.logic.parser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,8 @@ import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
+
+import com.joestelmach.natty.DateGroup;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -107,11 +111,16 @@ public class ParserUtil {
 
 	/**
 	 * Parses a {@code Optional<String> schedule} into an
-	 * {@code Optional<Schedule>} if {@code schedule} is present.
+	 * {@code Optional<List<Date>>} if {@code schedule} is present.
 	 */
-	public static Optional<Schedule> parseSchedule(Optional<String> schedule) throws IllegalValueException {
-		assert schedule != null;
-		return schedule.isPresent() ? Optional.of(new Schedule(schedule.get())) : Optional.empty();
+	public static Optional<List<Date>> parseSchedule(Optional<String> schedule) throws IllegalValueException {
+		// String -> DateList -> Optional
+	    assert schedule != null;
+		if (schedule.isPresent()) {
+		    return Optional.of(parseDateTime(schedule.get()));
+		} else {
+		    return Optional.empty();
+		}
 	}
 
 	/**
@@ -125,4 +134,29 @@ public class ParserUtil {
 		}
 		return new UniqueTagList(tagSet);
 	}
+	
+    /**
+     * Parses {@code String words} to a {@code List<Date>}, using natty library
+     * 
+     * @param a string containing date and time information
+     * @return a list of Date objects
+     * @throws IllegalValueException
+     */
+    public static List<Date> parseDateTime(String words) throws IllegalValueException {
+        //Date referenceDate = new Date();
+        if (words == null) {
+            return null;
+        }
+        com.joestelmach.natty.Parser dateParser = new com.joestelmach.natty.Parser();
+        //dateGroup contains isRecurring() and getRecursUntil() methods that can be used later
+        List<DateGroup> dateGroup = dateParser.parse(words);
+        List<Date> dateList = dateGroup.isEmpty() ? new ArrayList<Date>() : dateGroup.get(0).getDates();
+        return dateList;
+    }
+    
+    public static Date parseSingleDate(String words) throws IllegalValueException {
+        List<Date> dates = parseDateTime(words);
+        //Assert.assertEquals(1, dates.size());
+        return dates.get(0);
+    }
 }
