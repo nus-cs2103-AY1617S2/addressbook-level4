@@ -114,6 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    // @@author A0141138N
     @Override
     public synchronized void todayTask(ReadOnlyTask taskForToday) throws IllegalValueException {
         if (taskForToday.getTodayStatus() == false) {
