@@ -1,13 +1,18 @@
 package seedu.task.testutil;
 
+import java.util.ArrayList;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
+import seedu.task.model.task.RecurringFrequency;
+import seedu.task.model.task.RecurringTaskOccurrence;
 
+//@@author A0163559U
 /**
- *
+ * A class for building mutable task objects. For testing only.
  */
 public class TaskBuilder {
 
@@ -34,16 +39,31 @@ public class TaskBuilder {
         return this;
     }
 
-    //    public TaskBuilder withFrequency(String frequency) throws IllegalValueException {
-    //        this.task.setFrequency(new Timing(frequency));
-    //        return this;
-    //    }
+    public TaskBuilder withOccurrences(ArrayList<RecurringTaskOccurrence> occurrences) throws IllegalValueException {
+        this.task.setOccurrences(occurrences);
+        return this;
+    }
+
+    public TaskBuilder withRecurring(boolean isRecurring) throws IllegalValueException {
+        this.task.setRecurring(isRecurring);
+        return this;
+    }
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
         for (String tag: tags) {
             task.getTags().add(new Tag(tag));
         }
+        return this;
+    }
+
+    public TaskBuilder withFrequency(String frequency) throws IllegalValueException {
+        this.task.setFrequency(new RecurringFrequency(frequency));
+        return this;
+    }
+
+    public TaskBuilder withOccurrenceIndexList(ArrayList<Integer> occurrenceIndexList) throws IllegalValueException {
+        this.task.setOccurrenceIndexList(occurrenceIndexList);
         return this;
     }
 
