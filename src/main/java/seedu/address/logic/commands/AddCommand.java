@@ -35,7 +35,6 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand using raw values. This case is only have the
      * deadline
-     * 
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */

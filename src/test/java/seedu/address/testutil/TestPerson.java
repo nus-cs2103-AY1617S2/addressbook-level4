@@ -44,13 +44,10 @@ public class TestPerson implements ReadOnlyPerson {
         this.name = name;
     }
 
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
-
     public void setGroup(Group group) {
         this.group = group;
     }
+
     public void setEmail(Email email) {
         this.email = email;
     }
@@ -58,7 +55,7 @@ public class TestPerson implements ReadOnlyPerson {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+
     public void setStartDate(StartDate sdate) {
         this.sdate = sdate;
     }
@@ -81,7 +78,7 @@ public class TestPerson implements ReadOnlyPerson {
     public Date getDate() {
         return date;
     }
-    
+
     @Override
     public StartDate getStartDate() {
         return sdate;

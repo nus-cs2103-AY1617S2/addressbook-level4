@@ -438,7 +438,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Person(name, privateDate,strDate, email, privateGroup, tags);
+            return new Person(name, privateDate, strDate, email, privateGroup, tags);
         }
 
         /**
