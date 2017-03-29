@@ -28,8 +28,7 @@ public class MarkCommandParser {
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
-        System.out.println("preamble[2] = " + preamble[2]);
-        int markFlag = preamble[2] == "ic" ? MarkCommand.MARK_INCOMPLETE : MarkCommand.MARK_INCOMPLETE;
+        int markFlag = preamble[2].equals("ic") ? MarkCommand.MARK_INCOMPLETE : MarkCommand.MARK_COMPLETE;
 
         return new MarkCommand(preamble[0], index.get(), markFlag);
     }

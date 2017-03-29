@@ -29,6 +29,8 @@ public class TaskListCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label completeFlag;
 
     public TaskListCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -37,8 +39,17 @@ public class TaskListCard extends UiPart<Region> {
         showDeadline(task);
         showPriority(task);
         showDescription(task);
+        displayComplete(task);
 
         initTags(task);
+    }
+
+    private void displayComplete(ReadOnlyTask task) {
+        if (task.isComplete()) {
+            completeFlag.setText("COMPLETE");
+        } else {
+            completeFlag.setText("INCOMPLETE");
+        }
     }
 
     private void showDescription(ReadOnlyTask task) {

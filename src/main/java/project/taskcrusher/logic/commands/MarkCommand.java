@@ -52,6 +52,7 @@ public class MarkCommand extends Command {
             ReadOnlyTask taskToMark = lastShownList.get(filteredTargetIndex);
 
             model.markTask(filteredTargetIndex, markFlag);
+            model.updateFilteredTaskListToShowAll();
             return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark));
 
         } else {
@@ -64,6 +65,7 @@ public class MarkCommand extends Command {
             ReadOnlyEvent eventToMark = lastShownList.get(filteredTargetIndex);
 
             model.markEvent(filteredTargetIndex, markFlag);
+            model.updateFilteredEventListToShowAll();
             return new CommandResult(String.format(MESSAGE_MARK_EVENT_SUCCESS, eventToMark));
         }
     }

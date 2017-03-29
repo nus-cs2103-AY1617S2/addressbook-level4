@@ -28,7 +28,8 @@ public class EventListCard extends UiPart<Region> {
     private FlowPane timeslots;
     @FXML
     private FlowPane tags;
-
+    @FXML
+    private Label completeFlag;
     public EventListCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
         name.setText(event.getName().name);
@@ -36,10 +37,18 @@ public class EventListCard extends UiPart<Region> {
         showLocation(event);
         showDescription(event);
         showEventTimeSlots(event);
+        displayComplete(event);
 
         initTags(event);
     }
 
+    private void displayComplete(ReadOnlyEvent event) {
+        if (event.isComplete()) {
+            completeFlag.setText("COMPLETE");
+        } else {
+            completeFlag.setText("INCOMPLETE");
+        }
+    }
     private void showDescription(ReadOnlyEvent event) {
         description.setText(event.getDescription().toString());
     }

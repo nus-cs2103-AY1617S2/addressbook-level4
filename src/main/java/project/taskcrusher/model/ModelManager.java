@@ -109,6 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void markTask(int filteredTaskListIndex, int markFlag) {
         userInbox.markTask(filteredTaskListIndex, markFlag);
+        indicateUserInboxChanged();
     }
 
     @Override

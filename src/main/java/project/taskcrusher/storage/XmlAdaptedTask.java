@@ -89,6 +89,7 @@ public class XmlAdaptedTask {
 
         if (isComplete) {
             thisTask.markComplete();
+            System.out.println("marked as complete during storage: "  + thisTask.isComplete());
         }
         return thisTask;
     }

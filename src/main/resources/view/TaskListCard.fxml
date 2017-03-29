@@ -34,6 +34,7 @@
                                     <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
                                     <Label fx:id="priority" text="\$priority" styleClass="cell_big_label"/>
                                     <FlowPane fx:id="tags" />
+                                    <Label fx:id="completeFlag" text="\$completeFlag" styleClass="cell_big_label"/>
                                 </HBox>
                             </children>
                         </HBox>

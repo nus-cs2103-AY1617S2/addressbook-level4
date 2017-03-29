@@ -39,6 +39,7 @@
                         <FlowPane fx:id="timeslots" />
                         <Label fx:id="eventLocation" styleClass="cell_small_label" text="\$location" />
                         <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                        <Label fx:id="completeFlag" text="\$completeFlag" styleClass="cell_big_label"/>
                     </children>
                 </VBox>
             </children>
