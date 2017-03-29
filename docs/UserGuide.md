@@ -51,12 +51,12 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Add a new task to TaskIt<br>
-Format: `add <TITLE> [tag TAG|by DATE|from DATE to DATE]`
+Format: `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]`
 
 Examples:
 
 * `add finish hw tag study tag school by April 5th`
-* `add Interview tag work`
+* `add Interview tag work priority high`
 * `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`
 
 
@@ -83,12 +83,13 @@ Format: `list today`
 ### 2.4. Editing an existing task : `edit`
 
 Edits an existing task in TaskIt.<br>
-Format: `edit <INDEX>  <[title]|[start]|[end]|[tag]> <NEW>`
+Format: `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * Existing values will be updated to the input values.
+> * Can remove start or end dates by typing `null` or `none`
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 > * You can remove all the task's tags by typing `null`. 
 
@@ -102,6 +103,12 @@ Examples:
 
 * `edit 5 end April 5th at 4 pm`<br>
   Edit the fifth task end time to April 5th at 4pm.
+  
+* `edit 5 end none`<br>
+  Edit the fifth task to have no end time.
+  
+* `edit 2 priority high`<br>
+  Edit the second task prioirty to high.
   
 * `edit 1 tag null`<br>
   Remove all the tags of first task.
@@ -210,8 +217,8 @@ Example:
 [//]: # "@@author A0141872E"
 ## 4. Command Summary
 
-* **Add**  `add <TITLE> [tag TAG|by DATE|from DATE to DATE]` <br>
-  e.g. `add Lunch with Bob tag friend tag leisure`
+* **Add**  `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]` <br>
+  e.g. `add Lunch with Bob tag friend priority low tag leisure`
   e.g. `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`
 
 * **Clear** : `clear`
@@ -219,7 +226,7 @@ Example:
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[tag]> <NEW>` <br>
+* **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
   e.g. `edit 1 title Movie at 3pm`
   e.g. `edit 1 start this Friday 3 pm`
   e.g. `edit 1 tag School`
