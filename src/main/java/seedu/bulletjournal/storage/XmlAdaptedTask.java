@@ -1,3 +1,4 @@
+//@@author A0105748B
 package seedu.bulletjournal.storage;
 
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String phone;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String email;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String address;
 
     @XmlElement
@@ -46,9 +47,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getTaskName().fullName;
-        phone = source.getPhone().value;
-        email = source.getStatus().value;
-        address = source.getAddress().value;
+        phone = source.getPhone() == null ? null : source.getPhone().value;
+        email = source.getStatus() == null ? null : source.getStatus().value;
+        address = source.getAddress() == null ? null : source.getAddress().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -66,9 +67,9 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final TaskName taskName = new TaskName(this.name);
-        final DueDate dueDate = new DueDate(this.phone);
-        final Status status = new Status(this.email);
-        final BeginDate beginDate = new BeginDate(this.address);
+        final DueDate dueDate = this.phone == null ? null : new DueDate(this.phone);
+        final Status status = this.email == null ? null : new Status(this.email);
+        final BeginDate beginDate = this.address == null ? null : new BeginDate(this.address);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(taskName, dueDate, status, beginDate, tags);
     }
