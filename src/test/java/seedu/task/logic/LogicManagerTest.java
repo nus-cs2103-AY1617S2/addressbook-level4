@@ -343,10 +343,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_containsWordsInDescriptionsAndTags() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task t1 = helper.generateTaskWithNameAndTags("a", "bcd", "efg", "jj");
-        Task t2 = helper.generateTaskWithNameAndTags("aa", "bcd");
-        Task t3 = helper.generateTaskWithNameAndTags("h");
-        Task t4 = helper.generateTaskWithNameAndTags("hhh", "efg");
+        Task t1 = helper.generateTaskWithDescriptionAndTags("a", "bcd", "efg", "jj");
+        Task t2 = helper.generateTaskWithDescriptionAndTags("aa", "bcd");
+        Task t3 = helper.generateTaskWithDescriptionAndTags("h");
+        Task t4 = helper.generateTaskWithDescriptionAndTags("hhh", "efg");
 
         // search by tag only
         List<Task> fourTasks = helper.generateListOfTasks(t1, t2, t3, t4);
@@ -539,7 +539,7 @@ public class LogicManagerTest {
          * Generates a Task object with given description and tags.
          * Other fields will have some dummy values.
          */
-        Task generateTaskWithNameAndTags(String description, String... tags) throws Exception {
+        Task generateTaskWithDescriptionAndTags(String description, String... tags) throws Exception {
             UniqueTagList uniqueTagList = new UniqueTagList();
             for (String tag: tags) {
                 uniqueTagList.add(new Tag(tag));
