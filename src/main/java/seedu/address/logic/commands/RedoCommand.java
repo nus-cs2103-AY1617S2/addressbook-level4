@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
  */
 public class RedoCommand extends Command {
 
-    public static final String COMMAND_WORD = "undo";
+    public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Undoes the changes made by the last command.\n";
     public static final String REDO_SUCCESS = "Undo!";
