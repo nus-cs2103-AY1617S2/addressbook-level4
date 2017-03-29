@@ -26,8 +26,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Ensure test cases covers all edge cases
 * Review test cases for each PR<br>
 * Features implemented:
-   * [Redo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#212-redo--redo)
    * [Undo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#211-undo--undo)
+   * [Redo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#212-redo--redo)
 * Code written: [[functional code](A0148087W.md)][[test code](A0148087W.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
