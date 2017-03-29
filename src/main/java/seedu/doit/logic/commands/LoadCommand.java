@@ -44,6 +44,7 @@ public class LoadCommand extends Command {
         Optional<ReadOnlyItemManager> newData;
         try {
             newData = this.storage.readTaskManager(this.loadFilePath);
+            logger.info("IN LOADCOMMAND loading from : " + this.loadFilePath);
         } catch (DataConversionException dce) {
             dce.printStackTrace();
             throw new CommandException(MESSAGE_INVALID_FILE_NAME);
@@ -55,8 +56,8 @@ public class LoadCommand extends Command {
             logger.info("Invalid File Name: " + this.loadFilePath);
             throw new CommandException(MESSAGE_INVALID_FILE_NAME);
         }
-        this.model.resetData(newData.orElseGet(SampleDataUtil::getSampleTaskManager));
         TaskManagerLoadChangedEvent event = new TaskManagerLoadChangedEvent(newData, this.loadFilePath);
+        this.model.resetDataWithoutSaving(newData.orElseGet(SampleDataUtil::getSampleTaskManager));
         logger.info("Created event : " + event.toString());
         EventsCenter.getInstance().post(event);
         logger.info("---------------------------------------HANDLED event : " + event.toString());

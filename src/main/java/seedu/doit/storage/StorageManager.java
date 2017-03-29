@@ -105,13 +105,14 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleTaskManagerSaveChangedEvent(TaskManagerSaveChangedEvent event) {
+        String newPath = event.getFilePath();
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
-                "Directory changed, saving to new directory at: " + event.getFilePath()));
+                "Directory changed, saving to new directory at: " + newPath));
         String oldPath = this.config.getTaskManagerFilePath();
-        this.config.setTaskManagerFilePath(event.getFilePath());
-        setTaskManagerFilePath(event.getFilePath());
+        this.config.setTaskManagerFilePath(newPath);
+        setTaskManagerFilePath(newPath);
         try {
-            copyTaskManager(oldPath, event.getFilePath());
+            copyTaskManager(oldPath, newPath);
             ConfigUtil.saveConfig(this.config, Config.DEFAULT_CONFIG_FILE);
         } catch (IOException ioe) {
             this.config.setTaskManagerFilePath(oldPath);
@@ -129,11 +130,12 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleTaskManagerLoadChangedEvent(TaskManagerLoadChangedEvent event) {
+        String newPath = event.getFilePath();
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
-                "Directory changed, saving to new directory at: " + event.getFilePath()));
+                "Directory changed, saving to new directory at: " + newPath));
         String oldPath = this.config.getTaskManagerFilePath();
-        this.config.setTaskManagerFilePath(event.getFilePath());
-        setTaskManagerFilePath(event.getFilePath());
+        this.config.setTaskManagerFilePath(newPath);
+        setTaskManagerFilePath(newPath);
         try {
             ConfigUtil.saveConfig(this.config, Config.DEFAULT_CONFIG_FILE);
         } catch (IOException ioe) {
