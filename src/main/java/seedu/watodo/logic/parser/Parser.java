@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.AddCommand;
-import seedu.watodo.logic.commands.AlternativeCommand;
 import seedu.watodo.logic.commands.ClearCommand;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.DeleteCommand;
@@ -21,15 +20,15 @@ import seedu.watodo.logic.commands.ListAllCommand;
 import seedu.watodo.logic.commands.ListCommand;
 import seedu.watodo.logic.commands.ListDayCommand;
 import seedu.watodo.logic.commands.ListDeadlineCommand;
-import seedu.watodo.logic.commands.ListDoneCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
 import seedu.watodo.logic.commands.ListMonthCommand;
-import seedu.watodo.logic.commands.ListUndoneCommand;
 import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.MarkCommand;
+import seedu.watodo.logic.commands.SaveAsCommand;
 import seedu.watodo.logic.commands.SelectCommand;
 import seedu.watodo.logic.commands.UnmarkCommand;
+import seedu.watodo.logic.commands.ViewFileCommand;
 
 /**
  * Parses user input.
@@ -56,12 +55,12 @@ public class Parser {
 
         String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
-
+        /*
         AlternativeCommand alt = new AlternativeCommand();
         if (alt.containsAlternative(commandWord)) {
             commandWord = alt.getStandardCommandWord(commandWord);
         }
-
+         */
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -96,10 +95,10 @@ public class Parser {
 
             case ListDeadlineCommand.COMMAND_WORD:
                 return new ListDeadlineCommand();
-
+                /*
             case ListDoneCommand.COMMAND_WORD:
                 return new ListDoneCommand();
-
+                 */
             case ListEventCommand.COMMAND_WORD:
                 return new ListEventCommand();
 
@@ -108,10 +107,10 @@ public class Parser {
 
             case ListMonthCommand.COMMAND_WORD:
                 return new ListMonthCommand();
-
+                /*
             case ListUndoneCommand.COMMAND_WORD:
                 return new ListUndoneCommand();
-
+                 */
             case ListWeekCommand.COMMAND_WORD:
                 return new ListWeekCommand();
             default:
@@ -129,6 +128,12 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SaveAsCommand.COMMAND_WORD:
+            return new SaveAsCommandParser().parse(arguments);
+
+        case ViewFileCommand.COMMAND_WORD:
+            return new ViewFileCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
