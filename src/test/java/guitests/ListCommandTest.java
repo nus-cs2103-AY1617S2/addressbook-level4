@@ -14,8 +14,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void listAllTasks() {
-        assertListResult("list", "All", td.getTypicalTasks()); // no results
-        assertListResult("list all", "All", td.getTypicalTasks()); // multiple results
+        assertListResult("list all", "All", td.getTypicalTasks());
 
         //list after deleting one result
         commandBox.runCommand("delete 1");
@@ -24,12 +23,12 @@ public class ListCommandTest extends TaskManagerGuiTest {
         for (int i = 0; i < tempTasksList.length - 1; i++) {
             expectedTasksList.add(tempTasksList[i + 1]);
         }
-        assertListResult("list", "All", expectedTasksList.toArray(new TestTask[0]));
+        assertListResult("list all", "All", expectedTasksList.toArray(new TestTask[0]));
     }
 
     @Test
     public void listUncompletedTasks() {
-        assertListResult("list uncompleted", "Uncompleted", td.getTypicalTasks()); // no results
+        assertListResult("list uncompleted", "Uncompleted", td.getTypicalTasks());
         commandBox.runCommand("list");
         commandBox.runCommand("complete 1");
         TestTask[] tempTasksList = td.getTypicalTasks();
@@ -42,7 +41,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void listCompletedTasks() {
-        assertListResult("list completed", "Completed"); // no results
+        assertListResult("list completed", "Completed");
         commandBox.runCommand("list");
         commandBox.runCommand("complete 1,2,3");
         TestTask[] tempTasksList = td.getTypicalTasks();
@@ -56,7 +55,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     @Test
     public void listNoEvent() {
         commandBox.runCommand("clear");
-        assertListResult("list", "All"); // no results
+        assertListResult("list", "Uncompleted");
     }
 
     @Test

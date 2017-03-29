@@ -83,7 +83,7 @@ public class EditCommandParser {
             }
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditCommand.NATURAL_MESSAGE_USAGE));
+                    EditCommand.MESSAGE_USAGE));
         }
     }
 
@@ -166,8 +166,11 @@ public class EditCommandParser {
             return parseStructuredArguments(index.get() + PARAMETER_DELIMITER + updateParameter
                                                 + EDIT_PARAMETER_DELIMITER + updateValue);
         } else {
+            if (indexOfFirstChange == -1 && indexOfFirstTo == -1) {
+                return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
+            }
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditCommand.NATURAL_MESSAGE_USAGE));
+                    EditCommand.MESSAGE_USAGE));
         }
     }
 
@@ -202,7 +205,7 @@ public class EditCommandParser {
                 updateValueList.add(updateValue);
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditCommand.NATURAL_MESSAGE_USAGE));
+                        EditCommand.MESSAGE_USAGE));
             }
         }
         String structuredArgument = index.get() + PARAMETER_DELIMITER;

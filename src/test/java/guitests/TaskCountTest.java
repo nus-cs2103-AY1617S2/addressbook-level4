@@ -51,11 +51,11 @@ public class TaskCountTest extends TaskManagerGuiTest {
         // list timed
         commandBox.runCommand("list timed");
         assertEquals(taskCount.getFloatingTaskCount().getText(), "0");
-        assertEquals(taskCount.getTimedTaskCount().getText(), "3");
+        assertEquals(taskCount.getTimedTaskCount().getText(), "1");
 
         // list floating
         commandBox.runCommand("list floating");
-        assertEquals(taskCount.getFloatingTaskCount().getText(), "2");
+        assertEquals(taskCount.getFloatingTaskCount().getText(), "1");
         assertEquals(taskCount.getTimedTaskCount().getText(), "0");
     }
 
