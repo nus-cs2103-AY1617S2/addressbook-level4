@@ -36,9 +36,7 @@ public class TaskCard extends UiPart<Region> {
 	    taskName.setText(task.getTaskName().toString());
 	}
 	if (task.getTaskDate() != null) {
-
-	    taskDate.setText("Date : " + task.getTaskDate().toString());
-
+	    taskDate.setText("Date : " + task.getTaskDate().toStringWithDelimiter());
 	} else
 	    taskDate.setText("Date: -");
 	if (task.getTaskStartTime() != null && task.getTaskEndTime() != null) {

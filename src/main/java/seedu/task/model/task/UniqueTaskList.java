@@ -107,7 +107,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void complete(int index) {
     	System.out.println(index);
     	Task temp = internalList.get(index);
-    	temp.setTaskStatus(new TaskStatus(TaskStatus.DONE));
+    	temp.setTaskStatus(new TaskStatus(TaskStatus.MESSAGE_DONE));
         internalList.remove(index);
         internalList.add(temp);
     }

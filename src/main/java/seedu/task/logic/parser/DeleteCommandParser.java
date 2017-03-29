@@ -23,13 +23,16 @@ public class DeleteCommandParser {
 
 	final Matcher matcher = DELETE_ARGS_FORMAT.matcher(args.trim());
 	if (!matcher.matches()) {
-	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
 	}
 	final String[] index = matcher.group("index").split("\\s+");
 	final int[] targetIndex = new int[index.length];
-	for (int i = 0; i < index.length; i++)
+	for (int i = 0; i < index.length; i++) {
+	    if (Integer.parseInt(index[i]) < 1) {
+		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+	    }
 	    targetIndex[i] = Integer.parseInt(index[i]);
-
+	}
 	return new DeleteCommand(targetIndex);
     }
 

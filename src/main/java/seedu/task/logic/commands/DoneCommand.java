@@ -49,7 +49,7 @@ public class DoneCommand extends Command {
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex[i] - 1 - i);
 
         targetStatus= taskToComplete.getTaskStatus().status;
-        if (targetStatus.equals(TaskStatus.DONE)) {
+        if (targetStatus.equals(TaskStatus.MESSAGE_DONE)) {
         	return new CommandResult(MESSAGE_ALREADY_COMPLETED);
         }
         

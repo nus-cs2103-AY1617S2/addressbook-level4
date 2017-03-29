@@ -106,12 +106,16 @@ public class TaskDate {
 	}
     }
 
-    public String toString() {
+    public String toStringWithDelimiter(){
 	if (day2 == 0 && month2 == 0 && year2 == 0) {
 	    return day + DATE_DELIMITER + month + DATE_DELIMITER + year;
 	}
 	return day + DATE_DELIMITER + month + DATE_DELIMITER + year + " " + DATE_DELIMITER2 + " " + day2
 		+ DATE_DELIMITER + month2 + DATE_DELIMITER + year2;
+    }
+    public String toString() {
+	
+	return value;
     }
 
     public static int[] dateFormatConverter(String date) {
@@ -136,22 +140,23 @@ public class TaskDate {
 	}
 
     }
+
     public int compareTo(TaskDate other) {
-    	if (this.year > other.year) {
-    		return 1;
-    	} else if (this.year < other.year) {
-    		return -1;
-    	}
-    	if (this.month > other.month) {
-    		return 1;
-    	} else if (this.month < other.month){
-    		return -1;
-    	}
-    	if (this.day > other.day) {
-    		return 1;
-    	} else if (this.day < other.day){
-    		return -1;
-    	}
-    	return 0;
+	if (this.year > other.year) {
+	    return 1;
+	} else if (this.year < other.year) {
+	    return -1;
+	}
+	if (this.month > other.month) {
+	    return 1;
+	} else if (this.month < other.month) {
+	    return -1;
+	}
+	if (this.day > other.day) {
+	    return 1;
+	} else if (this.day < other.day) {
+	    return -1;
+	}
+	return 0;
     }
 }
