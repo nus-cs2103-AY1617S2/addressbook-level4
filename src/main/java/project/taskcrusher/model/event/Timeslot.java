@@ -21,6 +21,10 @@ public class Timeslot {
     public final Date start;
     public final Date end;
 
+    public static Timeslot constructTimeslotFromEndDate(String end) throws IllegalValueException {
+        return new Timeslot(end);
+    }
+
     public Timeslot(String end) throws IllegalValueException {
         assert end != null;
 

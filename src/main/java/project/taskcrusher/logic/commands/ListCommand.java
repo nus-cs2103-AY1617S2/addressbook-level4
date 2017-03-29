@@ -66,7 +66,7 @@ public class ListCommand extends Command {
         Timeslot dateRange;
 
         try {
-            dateRange = new Timeslot(date);
+            dateRange = Timeslot.constructTimeslotFromEndDate(date);
             return dateRange;
         } catch (IllegalValueException ive) {
             List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);

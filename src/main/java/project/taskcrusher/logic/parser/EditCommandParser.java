@@ -97,7 +97,8 @@ public class EditCommandParser {
                 return new EditEventCommand(index.get(), editEventDescriptor);
 
             } else {
-                throw new IllegalValueException("Flag can only be t or e");
+                throw new IllegalValueException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

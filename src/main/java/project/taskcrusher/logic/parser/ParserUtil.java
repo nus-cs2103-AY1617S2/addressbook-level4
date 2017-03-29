@@ -126,11 +126,18 @@ public class ParserUtil {
 
         if (timeslots.isPresent()) {
 
+            if (timeslots.get().equals(Timeslot.NO_TIMESLOT)) {
+                throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_DNE);
+            }
+
             // TODO again, could refactor this somewhere
             String[] timeslotsAsStrings = timeslots.get().split("\\s+or\\s+");
             List<Timeslot> timeslotsParsed = new ArrayList<>();
             for (String t : timeslotsAsStrings) {
                 String[] dates = t.split("\\s+to\\s+");
+                if (dates.length != 2) {
+                    throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_PAIRS);
+                }
                 timeslotsParsed.add(new Timeslot(dates[0], dates[1]));
             }
 

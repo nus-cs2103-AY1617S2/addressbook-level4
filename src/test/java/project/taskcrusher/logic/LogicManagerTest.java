@@ -33,6 +33,8 @@ import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.CommandResult;
 import project.taskcrusher.logic.commands.ConfirmCommand;
 import project.taskcrusher.logic.commands.DeleteCommand;
+import project.taskcrusher.logic.commands.EditCommand;
+import project.taskcrusher.logic.commands.EditEventCommand;
 import project.taskcrusher.logic.commands.ExitCommand;
 import project.taskcrusher.logic.commands.FindCommand;
 import project.taskcrusher.logic.commands.HelpCommand;
@@ -369,6 +371,112 @@ public class LogicManagerTest {
         }
 
         assertCommandFailure("confirm e 2 1", expectedMessage);
+    }
+
+    @Test
+    public void execute_editTask_successful() throws Exception {
+        // set up
+        execute_add_successful();
+
+        // create identical userInbox, except for first event
+        TestDataHelper helper = new TestDataHelper();
+        List<ReadOnlyEvent> preexistingEvents = model.getUserInbox().getEventList();
+        List<ReadOnlyTask> preexistingTasks = model.getUserInbox().getTaskList();
+
+        List<Event> unchangedEvents = new ArrayList<>();
+        List<Task> changedTasks = new ArrayList<>();
+
+        // keep if want to add more tests
+        // Event editedEvent = new Event(preexistingEvents.get(0).getName(),
+        // preexistingEvents.get(0).getTimeslots(),
+        // preexistingEvents.get(0).getLocation(),
+        // preexistingEvents.get(0).getDescription(),
+        // preexistingEvents.get(0).getTags());
+
+        Task editedTask = new Task(new Name("editedName"), new Deadline(""), new Priority(Priority.NO_PRIORITY),
+                new Description("editedDescription"), preexistingTasks.get(0).getTags());
+
+        changedTasks.add(editedTask);
+
+        for (int i = 0; i < preexistingEvents.size(); i++) {
+            unchangedEvents.add(new Event(preexistingEvents.get(i).getName(), preexistingEvents.get(i).getTimeslots(),
+                    preexistingEvents.get(i).getLocation(), preexistingEvents.get(i).getDescription(),
+                    preexistingEvents.get(i).getTags()));
+        }
+
+        for (int i = 1; i < preexistingTasks.size(); i++) {
+            changedTasks.add(new Task(preexistingTasks.get(i).getName(), preexistingTasks.get(i).getDeadline(),
+                    preexistingTasks.get(i).getPriority(), preexistingTasks.get(i).getDescription(),
+                    preexistingTasks.get(i).getTags()));
+        }
+
+        UserInbox expectedInbox = new UserInbox();
+        helper.addToUserInbox(expectedInbox, changedTasks, unchangedEvents);
+
+        assertCommandSuccess("edit t 1 editedName d/ p/0 //editedDescription",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask), expectedInbox, changedTasks,
+                unchangedEvents);
+    }
+
+    @Test
+    public void execute_editEvent_successful() throws Exception {
+        // set up
+        execute_add_successful();
+
+        // create identical userInbox, except for first event
+        TestDataHelper helper = new TestDataHelper();
+        List<ReadOnlyEvent> preexistingEvents = model.getUserInbox().getEventList();
+        List<ReadOnlyTask> preexistingTasks = model.getUserInbox().getTaskList();
+
+        List<Event> changedEvents = new ArrayList<>();
+        List<Task> unchangedTasks = new ArrayList<>();
+
+        // keep if want to add more tests
+        // Event editedEvent = new Event(preexistingEvents.get(0).getName(),
+        // preexistingEvents.get(0).getTimeslots(),
+        // preexistingEvents.get(0).getLocation(),
+        // preexistingEvents.get(0).getDescription(),
+        // preexistingEvents.get(0).getTags());
+
+        List<Timeslot> changedTimeslot = new ArrayList<>();
+        changedTimeslot.add(new Timeslot("2019-11-11", "2019-12-11"));
+
+        Event editedEvent = new Event(new Name("editedName"), changedTimeslot, new Location("editedLocation"),
+                new Description("editedDescription"), preexistingEvents.get(0).getTags());
+
+        changedEvents.add(editedEvent);
+
+        for (int i = 1; i < preexistingEvents.size(); i++) {
+            changedEvents.add(new Event(preexistingEvents.get(i).getName(), preexistingEvents.get(i).getTimeslots(),
+                    preexistingEvents.get(i).getLocation(), preexistingEvents.get(i).getDescription(),
+                    preexistingEvents.get(i).getTags()));
+        }
+
+        for (int i = 0; i < preexistingTasks.size(); i++) {
+            unchangedTasks.add(new Task(preexistingTasks.get(i).getName(), preexistingTasks.get(i).getDeadline(),
+                    preexistingTasks.get(i).getPriority(), preexistingTasks.get(i).getDescription(),
+                    preexistingTasks.get(i).getTags()));
+        }
+
+        UserInbox expectedInbox = new UserInbox();
+        helper.addToUserInbox(expectedInbox, unchangedTasks, changedEvents);
+
+        assertCommandSuccess("edit e 1 editedName d/2019-11-11 to 2019-12-11 l/editedLocation //editedDescription",
+                String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent), expectedInbox, unchangedTasks,
+                changedEvents);
+
+    }
+
+    @Test
+    public void execute_edit_invalidArgs() throws Exception {
+        execute_add_successful();
+
+        assertCommandFailure("edit", String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertCommandFailure("edit t 1", EditCommand.MESSAGE_NOT_EDITED);
+        assertCommandFailure("edit t 1 p/999", Priority.MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("edit t 1 p/", Priority.MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("edit t 1 d/2016-01-01", DateUtilApache.MESSAGE_DATE_PASSED);
+        assertCommandFailure("edit e 1 d/", Timeslot.MESSAGE_TIMESLOT_DNE);
     }
 
     @Test
