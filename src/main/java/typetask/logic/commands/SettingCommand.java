@@ -6,6 +6,7 @@ import typetask.commons.util.FileUtil;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.storage.ModifyConfigData;
 
+//@@author A0140010M
 public class SettingCommand extends Command {
 
     public static final String COMMAND_WORD = "setting";

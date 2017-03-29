@@ -1,5 +1,6 @@
 package typetask.model.task;
 
+//@@author A0140010M
 public class Priority {
 
     private boolean priority;

@@ -6,6 +6,7 @@ import typetask.logic.commands.Command;
 import typetask.logic.commands.IncorrectCommand;
 import typetask.logic.commands.SettingCommand;
 
+//@@author A0140010M
 public class SettingCommandParser {
     public Command parse(String args) {
 
