@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
+        <name>Buy dinner</name>
+        <priority>LOW</priority>
+        <status>incomplete</status>
+        <startTime>03/28/2017 21:21</startTime>
+    </tasks>
+    <tasks>
         <name>Prepare for CS2103T</name>
         <priority>HIGH</priority>
         <status>incomplete</status>
@@ -45,6 +51,18 @@
         <endTime>03/30/2017 17:30</endTime>
     </tasks>
     <tasks>
+        <name>Pay the bill</name>
+        <priority>LOW</priority>
+        <status>incomplete</status>
+        <startTime>03/30/2017 21:03</startTime>
+    </tasks>
+    <tasks>
+        <name>Attend lecture</name>
+        <priority>MEDIUM</priority>
+        <status>incomplete</status>
+        <startTime>03/30/2017 21:04</startTime>
+    </tasks>
+    <tasks>
         <name>Study for CS2010 Written Quiz</name>
         <priority>HIGH</priority>
         <status>incomplete</status>
@@ -62,18 +80,25 @@
         <tagged>5%</tagged>
     </tasks>
     <tasks>
-        <name>Find girlfriend in Japan</name>
-        <priority>HIGH</priority>
+        <name>Go swimming</name>
         <status>incomplete</status>
-        <note>Can't wait</note>
-        <startTime>05/25/2017 21:00</startTime>
-        <endTime>06/13/2017 21:00</endTime>
+        <note>Needa exercise manz</note>
+        <startTime>04/01/2017 17:00</startTime>
+        <tagged>Ask Michael</tagged>
     </tasks>
     <tasks>
-        <name>Buy dinner</name>
-        <priority>LOW</priority>
+        <name>UTW2001J Consultation</name>
+        <priority>MEDIUM</priority>
         <status>incomplete</status>
-        <startTime>03/28/2017 21:21</startTime>
+        <startTime>04/02/2017 08:00</startTime>
+        <endTime>04/02/2017 09:00</endTime>
+    </tasks>
+    <tasks>
+        <name>Do tutorial</name>
+        <priority>MEDIUM</priority>
+        <status>incomplete</status>
+        <startTime>04/02/2017 10:00</startTime>
+        <tagged>CS2010</tagged>
     </tasks>
     <tasks>
         <name>Attend award ceremony</name>
@@ -83,24 +108,20 @@
         <startTime>05/01/2017 10:00</startTime>
     </tasks>
     <tasks>
-        <name>Change bedsheet</name>
+        <name>Find girlfriend in Japan</name>
+        <priority>HIGH</priority>
+        <status>incomplete</status>
+        <note>Can't wait</note>
+        <startTime>05/25/2017 21:00</startTime>
+        <endTime>06/13/2017 21:00</endTime>
+    </tasks>
+    <tasks>
+        <name>test</name>
         <status>incomplete</status>
     </tasks>
     <tasks>
         <name>Wash my clothes</name>
         <status>incomplete</status>
-    </tasks>
-    <tasks>
-        <name>Attend lecture</name>
-        <priority>MEDIUM</priority>
-        <status>incomplete</status>
-        <startTime>03/30/2017 21:04</startTime>
-    </tasks>
-    <tasks>
-        <name>Pay the bill</name>
-        <priority>LOW</priority>
-        <status>incomplete</status>
-        <startTime>03/30/2017 21:03</startTime>
     </tasks>
     <tasks>
         <name>Feed the dog</name>
@@ -111,106 +132,18 @@
         <status>incomplete</status>
     </tasks>
     <tasks>
-        <name>Go swimming</name>
+        <name>Change bedsheet</name>
         <status>incomplete</status>
-        <note>Needa exercise manz</note>
-        <startTime>04/01/2017 17:00</startTime>
-        <tagged>Ask Michael</tagged>
-    </tasks>
-    <tasks>
-        <name>Do tutorial</name>
-        <priority>MEDIUM</priority>
-        <status>incomplete</status>
-        <startTime>04/02/2017 10:00</startTime>
-        <tagged>CS2010</tagged>
-    </tasks>
-    <tasks>
-        <name>UTW2001J Consultation</name>
-        <priority>MEDIUM</priority>
-        <status>incomplete</status>
-        <startTime>04/02/2017 08:00</startTime>
-        <endTime>04/02/2017 09:00</endTime>
-    </tasks>
-    <tasks>
-        <name>Prepare breakfast for Dad</name>
-        <priority>MEDIUM</priority>
-        <status>complete</status>
-        <startTime>03/26/2017 21:26</startTime>
-    </tasks>
-    <tasks>
-        <name>Prepare breakfast for Dad</name>
-        <priority>MEDIUM</priority>
-        <status>complete</status>
-        <startTime>03/24/2017 21:25</startTime>
-    </tasks>
-    <tasks>
-        <name>Cook dinner</name>
-        <priority>HIGH</priority>
-        <status>complete</status>
-        <startTime>03/19/2017 19:00</startTime>
-    </tasks>
-    <tasks>
-        <name>Cook dinner</name>
-        <priority>HIGH</priority>
-        <status>complete</status>
-        <startTime>03/25/2017 19:00</startTime>
-    </tasks>
-    <tasks>
-        <name>Cook dinner</name>
-        <priority>HIGH</priority>
-        <status>complete</status>
-        <startTime>03/23/2017 19:00</startTime>
-    </tasks>
-    <tasks>
-        <name>Buy breakfast</name>
-        <priority>LOW</priority>
-        <status>complete</status>
-        <startTime>03/28/2017 21:19</startTime>
-    </tasks>
-    <tasks>
-        <name>Buy lunch</name>
-        <priority>LOW</priority>
-        <status>complete</status>
-        <startTime>03/20/2017 12:00</startTime>
-    </tasks>
-    <tasks>
-        <name>Water the plants</name>
-        <priority>LOW</priority>
-        <status>complete</status>
-        <startTime>03/24/2017 21:08</startTime>
-    </tasks>
-    <tasks>
-        <name>Water the plants</name>
-        <priority>LOW</priority>
-        <status>complete</status>
-        <startTime>03/20/2017 21:08</startTime>
-    </tasks>
-    <tasks>
-        <name>Wash the car</name>
-        <priority>MEDIUM</priority>
-        <status>complete</status>
-        <startTime>03/27/2017 21:00</startTime>
     </tasks>
     <tasks>
         <name>Badminton</name>
         <status>complete</status>
-        <startTime>03/25/2017 14:00</startTime>
+        <startTime>03/11/2017 14:00</startTime>
     </tasks>
     <tasks>
         <name>Church</name>
         <status>complete</status>
-        <startTime>03/19/2017 10:00</startTime>
-    </tasks>
-    <tasks>
-        <name>Church</name>
-        <status>complete</status>
-        <startTime>03/26/2017 10:00</startTime>
-    </tasks>
-    <tasks>
-        <name>Wash the car</name>
-        <priority>MEDIUM</priority>
-        <status>complete</status>
-        <startTime>03/20/2017 21:00</startTime>
+        <startTime>03/12/2017 10:00</startTime>
     </tasks>
     <tasks>
         <name>Do laundry</name>
@@ -220,28 +153,10 @@
         <tagged>Family's</tagged>
     </tasks>
     <tasks>
-        <name>Water the plants</name>
-        <priority>LOW</priority>
+        <name>Wash the car</name>
+        <priority>MEDIUM</priority>
         <status>complete</status>
-        <startTime>03/23/2017 21:08</startTime>
-    </tasks>
-    <tasks>
-        <name>Buy breakfast</name>
-        <priority>LOW</priority>
-        <status>complete</status>
-        <startTime>03/20/2017 21:16</startTime>
-    </tasks>
-    <tasks>
-        <name>Water the plants</name>
-        <priority>LOW</priority>
-        <status>complete</status>
-        <startTime>03/25/2017 21:08</startTime>
-    </tasks>
-    <tasks>
-        <name>Water the plants</name>
-        <priority>LOW</priority>
-        <status>complete</status>
-        <startTime>03/21/2017 21:08</startTime>
+        <startTime>03/13/2017 21:00</startTime>
     </tasks>
     <tasks>
         <name>Do laundry</name>
@@ -259,29 +174,137 @@
     <tasks>
         <name>Church</name>
         <status>complete</status>
-        <startTime>03/12/2017 10:00</startTime>
+        <startTime>03/19/2017 10:00</startTime>
     </tasks>
     <tasks>
-        <name>Badminton</name>
+        <name>Cook dinner</name>
+        <priority>HIGH</priority>
         <status>complete</status>
-        <startTime>03/11/2017 14:00</startTime>
+        <startTime>03/19/2017 19:00</startTime>
+    </tasks>
+    <tasks>
+        <name>Buy lunch</name>
+        <priority>LOW</priority>
+        <status>complete</status>
+        <startTime>03/20/2017 12:00</startTime>
     </tasks>
     <tasks>
         <name>Wash the car</name>
         <priority>MEDIUM</priority>
         <status>complete</status>
-        <startTime>03/13/2017 21:00</startTime>
+        <startTime>03/20/2017 21:00</startTime>
     </tasks>
     <tasks>
-        <name>Buy groceries for Mum</name>
+        <name>Water the plants</name>
         <priority>LOW</priority>
         <status>complete</status>
+        <startTime>03/20/2017 21:08</startTime>
+    </tasks>
+    <tasks>
+        <name>Buy breakfast</name>
+        <priority>LOW</priority>
+        <status>complete</status>
+        <startTime>03/20/2017 21:16</startTime>
+    </tasks>
+    <tasks>
+        <name>Water the plants</name>
+        <priority>LOW</priority>
+        <status>complete</status>
+        <startTime>03/21/2017 21:08</startTime>
+    </tasks>
+    <tasks>
+        <name>Cook dinner</name>
+        <priority>HIGH</priority>
+        <status>complete</status>
+        <startTime>03/22/2017 19:00</startTime>
     </tasks>
     <tasks>
         <name>Water the plants</name>
         <priority>LOW</priority>
         <status>complete</status>
         <startTime>03/22/2017 21:08</startTime>
+    </tasks>
+    <tasks>
+        <name>Cook dinner</name>
+        <priority>HIGH</priority>
+        <status>complete</status>
+        <startTime>03/23/2017 19:00</startTime>
+    </tasks>
+    <tasks>
+        <name>Water the plants</name>
+        <priority>LOW</priority>
+        <status>complete</status>
+        <startTime>03/23/2017 21:08</startTime>
+    </tasks>
+    <tasks>
+        <name>Prepare breakfast for Dad</name>
+        <priority>MEDIUM</priority>
+        <status>complete</status>
+        <startTime>03/23/2017 21:25</startTime>
+    </tasks>
+    <tasks>
+        <name>Cook dinner</name>
+        <priority>HIGH</priority>
+        <status>complete</status>
+        <startTime>03/24/2017 19:00</startTime>
+    </tasks>
+    <tasks>
+        <name>Water the plants</name>
+        <priority>LOW</priority>
+        <status>complete</status>
+        <startTime>03/24/2017 21:08</startTime>
+    </tasks>
+    <tasks>
+        <name>Prepare breakfast for Dad</name>
+        <priority>MEDIUM</priority>
+        <status>complete</status>
+        <startTime>03/24/2017 21:25</startTime>
+    </tasks>
+    <tasks>
+        <name>Badminton</name>
+        <status>complete</status>
+        <startTime>03/25/2017 14:00</startTime>
+    </tasks>
+    <tasks>
+        <name>Cook dinner</name>
+        <priority>HIGH</priority>
+        <status>complete</status>
+        <startTime>03/25/2017 19:00</startTime>
+    </tasks>
+    <tasks>
+        <name>Water the plants</name>
+        <priority>LOW</priority>
+        <status>complete</status>
+        <startTime>03/25/2017 21:08</startTime>
+    </tasks>
+    <tasks>
+        <name>Prepare breakfast for Dad</name>
+        <priority>MEDIUM</priority>
+        <status>complete</status>
+        <startTime>03/25/2017 21:25</startTime>
+    </tasks>
+    <tasks>
+        <name>Church</name>
+        <status>complete</status>
+        <startTime>03/26/2017 10:00</startTime>
+    </tasks>
+    <tasks>
+        <name>Cook dinner</name>
+        <priority>HIGH</priority>
+        <status>complete</status>
+        <startTime>03/26/2017 19:00</startTime>
+    </tasks>
+    <tasks>
+        <name>Prepare breakfast for Dad</name>
+        <priority>MEDIUM</priority>
+        <status>complete</status>
+        <startTime>03/26/2017 21:26</startTime>
+    </tasks>
+    <tasks>
+        <name>Wash the car</name>
+        <priority>MEDIUM</priority>
+        <status>complete</status>
+        <startTime>03/27/2017 21:00</startTime>
     </tasks>
     <tasks>
         <name>Buy dinner</name>
@@ -296,34 +319,15 @@
         <startTime>03/28/2017 12:00</startTime>
     </tasks>
     <tasks>
-        <name>Cook dinner</name>
-        <priority>HIGH</priority>
+        <name>Buy breakfast</name>
+        <priority>LOW</priority>
         <status>complete</status>
-        <startTime>03/22/2017 19:00</startTime>
+        <startTime>03/28/2017 21:19</startTime>
     </tasks>
     <tasks>
-        <name>Cook dinner</name>
-        <priority>HIGH</priority>
+        <name>Buy groceries for Mum</name>
+        <priority>LOW</priority>
         <status>complete</status>
-        <startTime>03/24/2017 19:00</startTime>
-    </tasks>
-    <tasks>
-        <name>Cook dinner</name>
-        <priority>HIGH</priority>
-        <status>complete</status>
-        <startTime>03/26/2017 19:00</startTime>
-    </tasks>
-    <tasks>
-        <name>Prepare breakfast for Dad</name>
-        <priority>MEDIUM</priority>
-        <status>complete</status>
-        <startTime>03/23/2017 21:25</startTime>
-    </tasks>
-    <tasks>
-        <name>Prepare breakfast for Dad</name>
-        <priority>MEDIUM</priority>
-        <status>complete</status>
-        <startTime>03/25/2017 21:25</startTime>
     </tasks>
     <tags>Family's</tags>
     <tags>6%</tags>

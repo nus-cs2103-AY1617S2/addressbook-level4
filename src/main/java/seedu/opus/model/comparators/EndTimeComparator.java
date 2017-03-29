@@ -20,7 +20,11 @@ public class EndTimeComparator implements Comparator<ReadOnlyTask> {
                 return 0;
             }
         } else if (oneHasEnd) {
-            return -1;
+            if (d1.getEndTime().isPresent()) {
+                return -1;
+            } else {
+                return 1;
+            }
         } else {
             return 1;
         }

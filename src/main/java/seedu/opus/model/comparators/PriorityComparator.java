@@ -12,7 +12,11 @@ public class PriorityComparator implements Comparator<ReadOnlyTask> {
         if (bothHavePriority) {
             return p1.getPriority().get().getValue().compareTo(p2.getPriority().get().getValue());
         } else if (oneHasPriority) {
-            return -1;
+            if (p1.getPriority().isPresent()) {
+                return -1;
+            } else {
+                return 1;
+            }
         } else {
             return 1;
         }
