@@ -17,12 +17,12 @@ public class RemoveDeadlineCommand extends Command {
     public static final String COMMAND_WORD = "removedeadline";
     public static final String COMMAND_WORD_SHORT = "rd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove the deadline of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the deadline of the task identified "
             + "by the index number used in the last task listing. "
             + "Parameters: INDEX \n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited TASK: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     private final int filteredTaskListIndex;
 
     public RemoveDeadlineCommand(int filteredTaskListIndex) {

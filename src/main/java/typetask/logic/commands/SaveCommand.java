@@ -13,7 +13,7 @@ public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
-            + ": Saves/Create a copy of the file to a specify location\n"
+            + ": Saves/Creates a copy of the file to a specified location\n"
             + "Parameters: FilePath\n"
             + "Example: " + COMMAND_WORD
             + " c:\\desktop\\ ";
