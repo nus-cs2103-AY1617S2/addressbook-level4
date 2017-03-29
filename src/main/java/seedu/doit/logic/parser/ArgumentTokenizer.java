@@ -74,10 +74,11 @@ public class ArgumentTokenizer {
         return Optional.of(values);
     }
 
+    //@@author A0146809W
     /**
      * Returns all values of given prefix after the prefix.
      */
-    public Optional<List<String>> getAllValuesWithoutPrefixAndSpaces(Prefix prefix) {
+    public Optional<List<String>> getAllValuesAfterPrefixAndSpaces(Prefix prefix) {
         if (!this.tokenizedArguments.containsKey(prefix)) {
             return Optional.empty();
         }
@@ -89,6 +90,7 @@ public class ArgumentTokenizer {
         }
         return Optional.of(values);
     }
+    //@@author
 
     /**
      * Returns the preamble (text before the first valid prefix), if any. Leading/trailing spaces will be trimmed.

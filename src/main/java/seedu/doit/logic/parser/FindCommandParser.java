@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.IncorrectCommand;
-
+//@@author A0146809W
 /**
  * Parses input arguments and creates a new FindCommand object
  */
@@ -35,17 +35,17 @@ public class FindCommandParser implements CommandParser {
                 PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         Set<String> nameKeyWordSet = new HashSet<>(
-                argsTokenizer.getAllValuesWithoutPrefixAndSpaces(PREFIX_NAME).orElse(Collections.emptyList()));
+                argsTokenizer.getAllValuesAfterPrefixAndSpaces(PREFIX_NAME).orElse(Collections.emptyList()));
         Set<String> priorityKeyWordSet = new HashSet<>(
-                argsTokenizer.getAllValuesWithoutPrefixAndSpaces(PREFIX_PRIORITY).orElse(Collections.emptyList()));
+                argsTokenizer.getAllValuesAfterPrefixAndSpaces(PREFIX_PRIORITY).orElse(Collections.emptyList()));
         Set<String> startKeyWordSet = new HashSet<>(
-                argsTokenizer.getAllValuesWithoutPrefixAndSpaces(PREFIX_START).orElse(Collections.emptyList()));
+                argsTokenizer.getAllValuesAfterPrefixAndSpaces(PREFIX_START).orElse(Collections.emptyList()));
         Set<String> deadlineKeyWordSet = new HashSet<>(
-                argsTokenizer.getAllValuesWithoutPrefixAndSpaces(PREFIX_END).orElse(Collections.emptyList()));
+                argsTokenizer.getAllValuesAfterPrefixAndSpaces(PREFIX_END).orElse(Collections.emptyList()));
         Set<String> tagsKeyWordSet = new HashSet<>(
-                argsTokenizer.getAllValuesWithoutPrefixAndSpaces(PREFIX_TAG).orElse(Collections.emptyList()));
+                argsTokenizer.getAllValuesAfterPrefixAndSpaces(PREFIX_TAG).orElse(Collections.emptyList()));
         Set<String> descKeyWordSet = new HashSet<>(
-                argsTokenizer.getAllValuesWithoutPrefixAndSpaces(PREFIX_DESCRIPTION).orElse(Collections.emptyList()));
+                argsTokenizer.getAllValuesAfterPrefixAndSpaces(PREFIX_DESCRIPTION).orElse(Collections.emptyList()));
 
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
