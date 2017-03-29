@@ -11,6 +11,7 @@ import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.recurrenceparser.RecurrenceManager;
 import seedu.address.logic.recurrenceparser.RecurrenceParser;
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
@@ -71,8 +72,6 @@ public class MarkCommand extends Command {
             saveCurrentState();
             model.updateTask(filteredTaskListIndex, editedTask);
 
-            taskToEdit = lastShownList.get(filteredTaskListIndex); //should be same
-
             if (taskToEdit.isRecurring()) {
                 Task newTask = createRecurringTask(taskToEdit);
                 model.addTask(newTask);
@@ -97,15 +96,16 @@ public class MarkCommand extends Command {
         Optional<Deadline> updatedDeadline;
 
 
-        Title updatedTitle = taskToEdit.getTitle();
+        Title updatedTitle = new Title(taskToEdit.getTitle().toString());
         updatedStartTime = taskToEdit.getStartTime();
         updatedDeadline = taskToEdit.getDeadline();
-        UniqueLabelList updatedLabels = taskToEdit.getLabels();
+        UniqueLabelList updatedLabels = taskToEdit.getLabels().clone();
+        UniqueBookingList bookingList = taskToEdit.getBookings().clone();
         Boolean isRecurring = taskToEdit.isRecurring();
         Optional<Recurrence> updatedRecurrence = taskToEdit.getRecurrence();
 
         return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted,
-                updatedLabels, isRecurring, updatedRecurrence);
+                updatedLabels, bookingList, isRecurring, updatedRecurrence);
     }
 
 
@@ -125,12 +125,13 @@ public class MarkCommand extends Command {
         }
         Title updatedTitle = task.getTitle();
         UniqueLabelList updatedLabels = task.getLabels();
+        UniqueBookingList updatedBookings = task.getBookings().clone();
         Boolean isRecurring = task.isRecurring();
         Optional<Recurrence> updatedRecurrence = task.getRecurrence();
         Boolean isCompleted = AddCommand.DEFAULT_TASK_STATE;
 
         return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted,
-                updatedLabels, isRecurring, updatedRecurrence);
+                updatedLabels, updatedBookings, isRecurring, updatedRecurrence);
     }
 
     private static Deadline getRecurringDate(Deadline date, Recurrence recurrence)
