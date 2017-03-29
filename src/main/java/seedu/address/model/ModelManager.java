@@ -83,7 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
-  //@@author A0138377U
+  //@@author A0143504R
     public TaskManager getCopy() {
         return taskManagerCopy;
     }
