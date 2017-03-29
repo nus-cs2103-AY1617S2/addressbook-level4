@@ -2,7 +2,9 @@
  * 
  */
 package seedu.task.model.task;
-
+import java.util.Date;
+import java.text.*;
+import com.joestelmach.natty.*;
 /**
  * @author Daniel Mullen and Jacob Levy
  *
@@ -39,6 +41,8 @@ public class TaskDate {
     private static final int YEAR2_END_INDEX = 13;
 
     public TaskDate(String date) {
+    	
+
 	date = date.trim();
 	value = date;
 	int[] dateArray = dateFormatConverter(date);

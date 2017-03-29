@@ -1,13 +1,21 @@
 package seedu.task.model.task;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class TaskTime {
-    private int hour;
+	
+	private List<Date> dates;
+    public final SimpleDateFormat formatter;
+    public final String OUTPUT_FORMAT = " hh:mm a ";
+    public final String value;
+	private int hour;
     private int minute;
     private String hourStr;
     private String minuteStr;
-    public final String value;
     public final String TIME_DELIMITER = ":";
     public final int MINUTE_ARRAY_INDEX = 0;
     public final int HOUR_ARRAY_INDEX = 1;
@@ -15,15 +23,22 @@ public class TaskTime {
     public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format, you can use hhmm, hh:mm, or h:mm";
 
     public TaskTime(String time) throws IllegalValueException {
-	time = time.trim();
-	value = time;
+    
+    formatter = new SimpleDateFormat (OUTPUT_FORMAT);
+    NattyParser natty = new NattyParser();
+	dates = natty.parse(time);
+	
+	if(dates == null)
+		throw new IllegalValueException(MESSAGE_INVALID_TIME_FORMAT);
+	
+	value = time.trim();
 	int[] timeArray = timeFormatConverter(time);
 	setMinute(timeArray[MINUTE_ARRAY_INDEX]);
 	setHour(timeArray[HOUR_ARRAY_INDEX]);
     }
 
     public String toString() {
-	return hourStr + TIME_DELIMITER + minuteStr;
+    	return formatter.format(dates.get(0));
     }
 
     public void setHour(int hour) throws IllegalValueException {
