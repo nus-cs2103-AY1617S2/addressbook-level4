@@ -41,7 +41,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Ensures project's code quality
 * Only person who can merge PRs after code review<br>
 * Features implemented:
-   * [Sort tasks]
+   * [Sort tasks](https://github.com/CS2103JAN2017-W15-B3/main/edit/update-docs/docs/AboutUs.md#24-sort-tasks--sort)
 * Code written: [[functional code](A0148081H.md)][[test code](A0148081H.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
