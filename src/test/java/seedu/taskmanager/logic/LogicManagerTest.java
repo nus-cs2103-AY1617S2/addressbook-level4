@@ -210,8 +210,10 @@ public class LogicManagerTest {
     public void execute_add_invalidTaskData() {
         assertCommandFailure("ADD []\\[;] ON 03/03/17 1400 TO 1600", TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
         assertCommandFailure("ADD Valid TaskName ON wrongdateformat 1400 TO 1600", StartDate.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("ADD Valid TaskName ON thursday 1400hrs TO 1600", StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
-        assertCommandFailure("ADD Valid Name ON thursday 1400 TO 1600hrs", EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
+        // assertCommandFailure("ADD Valid TaskName ON thursday 1400hrs TO
+        // 1600", StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
+        // assertCommandFailure("ADD Valid Name ON thursday 1400 TO 1600hrs",
+        // EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
         // assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid,
         // address t/invalid_-[.tag",
         // Category.MESSAGE_TAG_CONSTRAINTS);
@@ -417,12 +419,14 @@ public class LogicManagerTest {
             TaskName taskName = new TaskName("Travis the bro is assisting");
             StartDate privateStartDate = new StartDate("03/03/17");
             StartTime privateStartTime = new StartTime("1200");
-            EndDate privateEndDate = new EndDate("03/03/17");
+            EndDate privateEndDate = new EndDate("04/03/17");
             EndTime privateEndTime = new EndTime("1400");
+            Boolean isCompleted = false;
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
-            UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            return new Task(taskName, privateStartDate, privateStartTime, privateEndDate, privateEndTime, categories);
+            UniqueCategoryList privateCategories = new UniqueCategoryList(category1, category2);
+            return new Task(taskName, privateStartDate, privateStartTime, privateEndDate, privateEndTime, isCompleted,
+                    privateCategories);
         }
 
         /**
@@ -437,7 +441,7 @@ public class LogicManagerTest {
             seed = seed % 10;
             return new Task(new TaskName("Task " + seed), new StartDate("0" + seed + "/02/17"),
                     new StartTime("140" + seed), new EndDate("0" + seed + "/03/17"), new EndTime("160" + seed),
-                    new UniqueCategoryList(new Category("category" + Math.abs(seed)),
+                    new Boolean(false), new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                             new Category("category" + Math.abs(seed + 1))));
         }
 
@@ -448,19 +452,20 @@ public class LogicManagerTest {
             cmd.append("ADD ");
 
             cmd.append(p.getTaskName().toString());
-            cmd.append(" ON");
+            cmd.append(" FROM ");
             cmd.append(p.getStartDate().toString());
             cmd.append(" ");
             cmd.append(p.getStartTime().toString());
             // cmd.append(" FROM").append(p.getStartTime());
-            cmd.append(" TO");
+            cmd.append(" TO ");
+            cmd.append(p.getEndDate().toString());
+            cmd.append(" ");
             cmd.append(p.getEndTime().toString());
 
-            /*
-             * UniqueCategoryList categories = p.getCategories(); for (Category
-             * t: categories) { cmd.append(" CATEGORY").append(t.categoryName);
-             * }
-             */
+            UniqueCategoryList categories = p.getCategories();
+            for (Category t : categories) {
+                cmd.append(" CATEGORY ").append(t.categoryName);
+            }
 
             return cmd.toString();
         }
@@ -542,7 +547,8 @@ public class LogicManagerTest {
          */
         Task generateTaskWithName(String taskname) throws Exception {
             return new Task(new TaskName(taskname), new StartDate("03/03/17"), new StartTime("1400"),
-                    new EndDate("03/03/17"), new EndTime("1600"), new UniqueCategoryList(new Category("category")));
+                    new EndDate("03/03/17"), new EndTime("1600"), new Boolean(false),
+                    new UniqueCategoryList(new Category("category")));
         }
     }
 }

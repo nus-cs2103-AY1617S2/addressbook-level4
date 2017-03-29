@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <taskname>Eat breakfast with mom</taskname>
+        <startdate>03/03/17</startdate>
+        <starttime>1000</starttime>
+        <enddate>03/03/17</enddate>
+        <endtime>1100</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>just</categorised>
+        <categorised>friends</categorised>
+    </tasks>
+    <categories>just</categories>
+    <categories>friends</categories>
+</taskmanager>

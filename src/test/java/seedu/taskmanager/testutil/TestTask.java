@@ -20,8 +20,8 @@ public class TestTask implements ReadOnlyTask {
     private StartTime startTime;
     private EndDate endDate;
     private EndTime endTime;
+    private boolean completed;
     private UniqueCategoryList categories;
-    private boolean isMarkedAsComplete;
 
     public TestTask() {
         categories = new UniqueCategoryList();
@@ -36,27 +36,32 @@ public class TestTask implements ReadOnlyTask {
         this.startTime = taskToCopy.getStartTime();
         this.endDate = taskToCopy.getEndDate();
         this.endTime = taskToCopy.getEndTime();
+        this.completed = taskToCopy.getIsMarkedAsComplete();
         this.categories = taskToCopy.getCategories();
     }
 
-    public void setTaskName(TaskName taskName) {
-        this.taskName = taskName;
+    public void setTaskName(TaskName taskname) {
+        this.taskName = taskname;
     }
 
-    public void setDate(StartDate startDate) {
-        this.startDate = startDate;
+    public void setStartDate(StartDate startdate) {
+        this.startDate = startdate;
     }
 
-    public void setStartTime(StartTime startTime) {
-        this.startTime = startTime;
+    public void setStartTime(StartTime starttime) {
+        this.startTime = starttime;
     }
 
-    public void setEndDate(EndDate endDate) {
-        this.endDate = endDate;
+    public void setEndDate(EndDate enddate) {
+        this.endDate = enddate;
     }
 
-    public void setEndTime(EndTime endTime) {
-        this.endTime = endTime;
+    public void setEndTime(EndTime endtime) {
+        this.endTime = endtime;
+    }
+
+    public void setCompleted(Boolean isCompleted) {
+        this.completed = isCompleted;
     }
 
     public void setCategories(UniqueCategoryList categories) {
@@ -95,7 +100,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Boolean getIsMarkedAsComplete() {
-        return isMarkedAsComplete;
+        return completed;
     }
 
     @Override
@@ -106,12 +111,11 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("ADD " + this.getTaskName().fullTaskName + " ");
-        sb.append("ON " + this.getStartDate().value + " ");
+        sb.append("FROM " + this.getStartDate().value + " ");
         sb.append(this.getStartTime().value + " ");
         sb.append("TO " + this.getEndDate().value + " ");
-        sb.append(this.getEndTime().value);
-        // this.getCategories().asObservableList().stream().forEach(s ->
-        // sb.append("t/" + s.categoryTaskName + " "));
+        sb.append(this.getEndTime().value + " ");
+        this.getCategories().asObservableList().stream().forEach(s -> sb.append("CATEGORY" + s.categoryName + " "));
         return sb.toString();
     }
 

@@ -1,6 +1,5 @@
 package seedu.taskmanager.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -13,8 +12,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.commons.util.FileUtil;
-import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
+import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.testutil.TypicalTestTasks;
 
@@ -38,9 +37,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
-                : null;
+        return prefsFileInTestDataFolder != null ? TEST_DATA_FOLDER + prefsFileInTestDataFolder : null;
     }
 
     @Test
@@ -54,8 +51,10 @@ public class XmlTaskManagerStorageTest {
         thrown.expect(DataConversionException.class);
         readTaskManager("NotXmlFormatTaskManager.xml");
 
-        /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
-         * That means you should not have more than one exception test in one method
+        /*
+         * IMPORTANT: Any code below an exception-throwing line (like the one
+         * above) will be ignored. That means you should not have more than one
+         * exception test in one method
          */
     }
 
@@ -66,22 +65,25 @@ public class XmlTaskManagerStorageTest {
         TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
 
-        //Save in new file and read back
+        // Save in new file and read back
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         ReadOnlyTaskManager readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
-        //Modify data, overwrite exiting file, and read back
+        // Modify data, overwrite exiting file, and read back
         original.addTask(new Task(td.sampleFloatingTask));
-        original.removeTask(new Task(td.eatbreakfast));
+        original.removeTask(new Task(td.sampleFloatingTask));
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
-        //Save and read without specifying file path
+        // Save and read without specifying file path
         original.addTask(new Task(td.sampleDeadline));
-        xmlTaskManagerStorage.saveTaskManager(original); //file path not specified
-        readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
+        xmlTaskManagerStorage.saveTaskManager(original); // file path not
+                                                         // specified
+        readBack = xmlTaskManagerStorage.readTaskManager().get(); // file path
+                                                                  // not
+                                                                  // specified
         assertEquals(original, new TaskManager(readBack));
 
     }
@@ -101,6 +103,5 @@ public class XmlTaskManagerStorageTest {
         thrown.expect(AssertionError.class);
         saveTaskManager(new TaskManager(), null);
     }
-
 
 }
