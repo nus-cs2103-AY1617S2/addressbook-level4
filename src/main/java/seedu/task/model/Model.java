@@ -5,6 +5,7 @@ import java.util.Set;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.LoadNewFileSuccessEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.task.Date;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -62,6 +63,9 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keyword of tags */
     void updateFilteredTaskList(String keyword);
+    
+    /** Updates the filter of the filtered task list to filter by the given date */
+    void updateFilteredTaskList(Date value);
 
     /** Updates the filer of the filtered task list to filter by done or undone task */
     void updateFilteredTaskList(boolean value);
@@ -77,5 +81,7 @@ public interface Model {
 
     /** Sorts the task list */
     void sortTaskList();
+
+    
 
 }
