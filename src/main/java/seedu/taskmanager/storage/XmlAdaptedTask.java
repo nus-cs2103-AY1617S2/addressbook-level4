@@ -47,8 +47,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().value;
-        startDate = source.getStartDate().isPresent() ? source.getStartDate().get().toString() : null;
-        endDate = source.getEndDate().isPresent() ? source.getEndDate().get().toString() : null;
+        startDate = source.getStartDate().isPresent() ? source.getStartDate().get().toFullDateString() : null;
+        endDate = source.getEndDate().isPresent() ? source.getEndDate().get().toFullDateString() : null;
         description = source.getDescription().isPresent() ? source.getDescription().get().value : null;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
