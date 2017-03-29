@@ -79,7 +79,6 @@ public class MarkCommand extends Command {
         } catch (Exception e) {
             throw new CommandException(e.getMessage());
         }
-        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToEdit));
     }
 

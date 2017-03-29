@@ -62,7 +62,6 @@ public class ConfirmCommand extends Command {
         } catch (IllegalDateTimeValueException e) {
             e.printStackTrace();
         }
-        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
