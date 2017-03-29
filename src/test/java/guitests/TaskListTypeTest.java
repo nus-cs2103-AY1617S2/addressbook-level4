@@ -42,7 +42,7 @@ public class TaskListTypeTest extends TaskManagerGuiTest {
     @Test
     public void showUncompletedTaskListTypeAfterCompleteCommand() {
         commandBox.runCommand("complete 1");
-        assertEquals(taskListType.getTaskListType().getText(), UNCOMPLETED_TASK_LIST_TYPE);
+        assertEquals(taskListType.getTaskListType().getText(), ALL_TASK_LIST_TYPE);
     }
 
     @Test

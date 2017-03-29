@@ -23,6 +23,7 @@ import seedu.tache.model.task.Name;
 public class ParserUtil {
     //@@author A0139925U
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
     private static final Pattern NAME_FORMAT = Pattern.compile("^\".+\"");
     private static final Pattern DATE_FORMAT = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"
                                                                + "|^[0-3]?[0-9]-[0-1]?[0-9]-(?:[0-9]{2})?[0-9]{2}$"
