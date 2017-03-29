@@ -31,6 +31,7 @@ import seedu.watodo.logic.commands.MarkCommand;
 import seedu.watodo.logic.commands.SelectCommand;
 import seedu.watodo.logic.commands.ShortcutCommand;
 import seedu.watodo.logic.commands.UnmarkCommand;
+import seedu.watodo.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -81,6 +82,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+            
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         case ListCommand.COMMAND_WORD:
             if (arguments.contains("" + "#")) {
@@ -114,6 +118,7 @@ public class Parser {
 
             case ListWeekCommand.COMMAND_WORD:
                 return new ListWeekCommand();
+
 
             default:
                 if (arguments.equals("")) {
