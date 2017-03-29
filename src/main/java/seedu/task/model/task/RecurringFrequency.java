@@ -63,13 +63,13 @@ public class RecurringFrequency {
     }
 
     public int getFrequencyNumber() {
-        String numberOnlyString = frequency.toString().replaceAll("[^0-9]", "");
+        String numberOnlyString = frequency.replaceAll("[^0-9]", "");
         int numberOnly = Integer.parseInt(numberOnlyString);
         return numberOnly;
     }
 
     public String getFrequencyCharacter() {
-        String characterOnly = frequency.toString().replaceAll("[^A-Za-z]", "");
+        String characterOnly = frequency.replaceAll("[^A-Za-z]", "");
         return characterOnly;
     }
 }

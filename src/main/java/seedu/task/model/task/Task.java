@@ -228,8 +228,10 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
             cal2.setTime(initialEndTime.getTiming());
             SimpleDateFormat startTimeFormat = retriveFormat(initialStartTime.toString());
             SimpleDateFormat endTimeFormat = retriveFormat(initialEndTime.toString());
-            String tempStartTime, tempEndTime;
-            Timing tempStart = null, tempEnd = null;
+            String tempStartTime;
+            String tempEndTime;
+            Timing tempStart = null;
+            Timing tempEnd = null;
             RecurringTaskOccurrence occurrenceToAdd;
             switch (freqCharacter) {
             case "h":
@@ -297,6 +299,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                     occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
                     occurrences.add(occurrenceToAdd);
                 }
+                break;
+            default:
                 break;
             }
         }
