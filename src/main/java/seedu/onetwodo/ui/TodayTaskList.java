@@ -21,6 +21,7 @@ public class TodayTaskList extends UiPart<Region> {
 
     // For tests robot.lookup(#{ID})
     public static final String TODAY_PANEL_ID = "today-panel";
+    boolean isEmpty = false;
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
@@ -38,6 +39,9 @@ public class TodayTaskList extends UiPart<Region> {
     }
 
     private FilteredList<ReadOnlyTask> getFilteredTasks(ObservableList<ReadOnlyTask> taskList) {
+        if (taskList.isEmpty()) {
+            isEmpty = true;
+        }
         return new FilteredList<ReadOnlyTask>(taskList, t -> t.getTodayStatus() == true);
     }
 
