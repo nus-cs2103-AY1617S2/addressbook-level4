@@ -7,11 +7,11 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Tan Yu Wei] [@loveandbejoyful](http://github.com/loveandbejoyful)
 <img src="images/loveandbejoyful.png" width="150"><br>
 
-* Components in charge of: [UI](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/DeveloperGuide.md#32-user-interface-ui-component)
+* Components in charge of: [UI](https://cs2103jan2017-t09-b4.github.io/main/docs/DeveloperGuide.html#32-user-interface-ui-component)
 * Aspects/tools in charge of: Team Lead, Testing, Deliverables and Deadlines, Scheduling and Tracking
 * Features implemented:
-    * [Task count](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#35-list-all-tasks--list)
-    * [List timed/floating tasks](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#35-list-all-tasks--list)
+    * [Task count](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#35-list-all-tasks--list)
+    * [List timed/floating tasks](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#35-list-all-tasks--list)
     * [Autocomplete function]
 * Code written: [[functional code](A0142255M.md)][[test code](A0142255M.md)]
 * Other major contributions:
