@@ -65,8 +65,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
-        taskBook.completeTask(target);
+    public synchronized void completeTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        taskBook.completeTask(index, target);
         indicateTaskBookChanged();
     }
 
@@ -78,11 +78,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredPersonListIndex, ReadOnlyTask editedTask)
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int taskBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
+        int taskBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBook.updateTask(taskBookIndex, editedTask);
         indicateTaskBookChanged();
     }

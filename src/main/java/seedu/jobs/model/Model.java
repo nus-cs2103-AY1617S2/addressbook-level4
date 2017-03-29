@@ -3,10 +3,12 @@ package seedu.jobs.model;
 import java.util.Set;
 
 import seedu.jobs.commons.core.UnmodifiableObservableList;
+import seedu.jobs.commons.exceptions.DuplicateDataException;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -25,8 +27,10 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
-    /** Completes the given task */
-    void completeTask(ReadOnlyTask task) throws  UniqueTaskList.TaskNotFoundException;
+    /** Completes the given task
+     * @throws TaskNotFoundException
+     * @throws DuplicateDataException */
+    void completeTask(int index, ReadOnlyTask task) throws TaskNotFoundException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.

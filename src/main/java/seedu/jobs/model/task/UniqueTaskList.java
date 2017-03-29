@@ -83,19 +83,13 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public boolean complete(ReadOnlyTask toComplete) throws TaskNotFoundException {
+    public boolean complete(int index, ReadOnlyTask toComplete) {
         assert toComplete != null;
-        boolean taskFoundAndCompleted = false;
-        for (Task task:internalList) {
-            if (task.equals(toComplete)) {
-                task.markComplete();
-                taskFoundAndCompleted = true;
-            }
-        }
-        if (!taskFoundAndCompleted) {
-            throw new TaskNotFoundException();
-        }
-        return taskFoundAndCompleted;
+
+        Task taskToComplete = internalList.get(index);
+        taskToComplete.markComplete();
+        internalList.set(index, taskToComplete);
+        return true;
     }
 
     public void setTasks(UniqueTaskList replacement) {

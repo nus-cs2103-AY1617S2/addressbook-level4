@@ -16,7 +16,7 @@ public class CompleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed Task: %1$s";
-
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the description book.";
     public final int targetIndex;
 
     public CompleteCommand(int targetIndex) {
@@ -35,7 +35,7 @@ public class CompleteCommand extends Command {
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.completeTask(taskToComplete);
+            model.completeTask(targetIndex - 1, taskToComplete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

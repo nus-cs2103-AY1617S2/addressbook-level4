@@ -16,6 +16,7 @@ import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -149,8 +150,8 @@ public class TaskBook implements ReadOnlyTaskBook {
         }
     }
 
-    public boolean completeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-        if (tasks.complete(key)) {
+    public boolean completeTask(int index, ReadOnlyTask taskToComplete) throws TaskNotFoundException {
+        if (tasks.complete(index, taskToComplete)) {
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
