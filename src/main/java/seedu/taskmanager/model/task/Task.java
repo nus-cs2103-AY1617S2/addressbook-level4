@@ -23,14 +23,14 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(TaskName taskName, StartDate startDate, StartTime startTime, EndDate endDate, EndTime endTime,
-            UniqueCategoryList categories) {
-        assert !CollectionUtil.isAnyNull(taskName, startDate, startTime, endDate, endTime, categories);
+            Boolean markedCompleted, UniqueCategoryList categories) {
+        assert !CollectionUtil.isAnyNull(taskName, startDate, startTime, endTime, categories);
         this.taskName = taskName;
         this.startDate = startDate;
         this.startTime = startTime;
         this.endDate = endDate;
         this.endTime = endTime;
-        this.isMarkedAsComplete = false;
+        this.isMarkedAsComplete = markedCompleted;
         this.categories = new UniqueCategoryList(categories);
         // protect internal tags from changes in the arg list
     }
@@ -40,7 +40,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getTaskName(), source.getStartDate(), source.getStartTime(), source.getEndDate(),
-                source.getEndTime(), source.getCategories());
+                source.getEndTime(), source.getIsMarkedAsComplete(), source.getCategories());
     }
 
     public void setTaskName(TaskName taskName) {
@@ -141,7 +141,7 @@ public class Task implements ReadOnlyTask {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing
         // your own
-        return Objects.hash(taskName, startDate, startTime, endDate, endTime, categories);
+        return Objects.hash(taskName, startDate, startTime, endDate, endTime, isMarkedAsComplete, categories);
     }
 
     @Override

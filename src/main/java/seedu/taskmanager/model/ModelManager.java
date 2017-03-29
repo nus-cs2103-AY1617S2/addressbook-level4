@@ -1,7 +1,7 @@
-
 package seedu.taskmanager.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -23,7 +23,9 @@ import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager taskManager;
+    private TaskManager taskManager;
+    private Stack<TaskManager> undoTaskManager;
+    private Stack<TaskManager> redoTaskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
@@ -37,6 +39,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        undoTaskManager = new Stack<TaskManager>();
+        redoTaskManager = new Stack<TaskManager>();
     }
 
     public ModelManager() {
@@ -45,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
+        saveInstance();
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
@@ -59,11 +64,35 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
+    // @@author A0142418L
     /** Re-save data when save location has changed */
     public void saveTaskManager() {
         indicateTaskManagerChanged();
     }
 
+    /** Save a copy of task manager before data is changed. */
+    private void saveInstance() {
+        undoTaskManager.push(new TaskManager(taskManager));
+        redoTaskManager.clear();
+    }
+
+    /** Undo previous action of task manager. */
+    public void undoTaskManager() {
+        TaskManager currentTaskManager = new TaskManager(taskManager);
+        taskManager.resetData(undoTaskManager.peek());
+        undoTaskManager.pop();
+        redoTaskManager.push(currentTaskManager);
+    }
+
+    /** Undo previous action of task manager. */
+    public void redoTaskManager() {
+        TaskManager currentTaskManager = new TaskManager(taskManager);
+        taskManager.resetData(redoTaskManager.peek());
+        redoTaskManager.pop();
+        undoTaskManager.push(currentTaskManager);
+    }
+
+    // @@author
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
@@ -71,30 +100,44 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0142418L
+    /** Deletes tasks by their date. 
+     *  Returns the number of tasks deleted.
+     * */
     @Override
-    public synchronized void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
+    public synchronized int deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
             throws TaskNotFoundException {
+        int numDeletedTasks = 0;
+        saveInstance();
         while (targets.size() != 0) {
             try {
                 ReadOnlyTask taskToDelete = targets.get(0);
+                saveInstance();
                 taskManager.removeTask(taskToDelete);
+                numDeletedTasks++;
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
             }
         }
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        return numDeletedTasks;
     }
 
+    /** Deletes the task by its name. 
+     *  Returns the number of tasks deleted.
+     * */
     @Override
-    public synchronized void deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
+    public synchronized int deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws TaskNotFoundException {
-        while (targets.size() != 0) {
+        int numDeletedTasks = 0;
+        saveInstance();
+        for (int index = 0; targets.size() != index; index++) {
             try {
-                ReadOnlyTask taskToDelete = targets.get(0);
+                ReadOnlyTask taskToDelete = targets.get(index);
                 if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
                     taskManager.removeTask(taskToDelete);
-                    break;
+                    index--;
+                    numDeletedTasks++;
                 }
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
@@ -102,11 +145,13 @@ public class ModelManager extends ComponentManager implements Model {
         }
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        return numDeletedTasks;
     }
 
     // @@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        saveInstance();
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -116,7 +161,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
+        saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
@@ -125,7 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0139520L
     @Override
     public void markTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
-
+        saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTask(taskManagerIndex, true);
         indicateTaskManagerChanged();
@@ -134,7 +179,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0139520L
     @Override
     public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
-
+        saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTask(taskManagerIndex, false);
         indicateTaskManagerChanged();

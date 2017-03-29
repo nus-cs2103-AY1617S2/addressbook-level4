@@ -11,10 +11,10 @@ import seedu.taskmanager.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_STARTTIME = new Prefix("FROM");
-    public static final Prefix PREFIX_ENDTIME = new Prefix("TO");
-    public static final Prefix PREFIX_DATE = new Prefix("ON");
-    public static final Prefix PREFIX_DEADLINE = new Prefix("BY");
+    public static final Prefix PREFIX_FROM = new Prefix("FROM");
+    public static final Prefix PREFIX_TO = new Prefix("TO");
+    public static final Prefix PREFIX_ON = new Prefix("ON");
+    public static final Prefix PREFIX_BY = new Prefix("BY");
     public static final Prefix PREFIX_CATEGORY = new Prefix("CATEGORY");
 
     /* Patterns definitions */

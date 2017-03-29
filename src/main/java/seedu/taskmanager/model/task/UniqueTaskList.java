@@ -90,7 +90,8 @@ public class UniqueTaskList implements Iterable<Task> {
 
             Task taskToMark = new Task(internalList.get(index).getTaskName(), internalList.get(index).getStartDate(),
                     internalList.get(index).getStartTime(), internalList.get(index).getEndDate(),
-                    internalList.get(index).getEndTime(), internalList.get(index).getCategories());
+                    internalList.get(index).getEndTime(), internalList.get(index).getIsMarkedAsComplete(),
+                    internalList.get(index).getCategories());
 
             taskToMark.setIsMarkedAsComplete(isComplete);
 
