@@ -244,7 +244,7 @@ _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 3.4. Model component
 
-<img src="images/ModelClassDiagram.png" width="800"><br>
+<img src="images/ModelClassDiagram2.png" width="800"><br>
 
 _Figure 3.4.1 : Structure of the Model Component_
 
