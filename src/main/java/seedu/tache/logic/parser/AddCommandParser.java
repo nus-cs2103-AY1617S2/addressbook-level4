@@ -43,6 +43,7 @@ public class AddCommandParser {
         PossibleDateTime endDateTime = null;
         while (!possibleDateTimes.isEmpty()) {
             PossibleDateTime current = possibleDateTimes.pop();
+
             if (current.type == DateTimeType.END && endDateTime == null) {
                 endDateTime = current;
             } else if (current.type == DateTimeType.START && startDateTime == null) {
@@ -62,7 +63,12 @@ public class AddCommandParser {
             if (startDateTime != null) {
                 startOfDateTimeIndex = Math.min(startOfDateTimeIndex, startDateTime.startIndex);
             }
-            String taskName = taskWithoutTags.substring(0, startOfDateTimeIndex);
+            StringBuilder sb = new StringBuilder();
+            String[] taskNameSegments = taskWithoutTags.split(" ");
+            for (int i = 0; i < startOfDateTimeIndex; i++) {
+                sb.append(taskNameSegments[i]).append(" ");
+            }
+            String taskName = sb.toString();
             Optional<String> endDateTimeStr = Optional.of(endDateTime.data);
             Optional<String> startDateTimeStr;
             if (startDateTime != null) {
