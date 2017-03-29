@@ -52,7 +52,7 @@ public class Task implements ReadOnlyTask {
         this.isCompleted = isCompleted;
         this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
         this.bookings = new UniqueBookingList(bookings);
-        this.isRecurring = false;
+        this.isRecurring = isRecurring;
         this.recurrence = recurrence;
     }
 
