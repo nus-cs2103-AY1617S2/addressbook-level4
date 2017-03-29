@@ -1,5 +1,5 @@
 //@@author A0163744B
-package seedu.test.logic.history;
+package seedu.task.logic.history;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,10 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.logic.history.TaskMemento;
-import seedu.task.logic.history.TaskMementos;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
@@ -26,7 +23,7 @@ public class TaskMementosTest {
     private TaskMemento memento3;
 
     @Before
-    public void setup() throws DuplicateTagException, IllegalValueException {
+    public void setup() throws IllegalValueException {
         memento1 = new TaskMemento(
                 new Task(
                     new Description("Task 1"),
