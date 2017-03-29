@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
+import seedu.geekeep.commons.events.model.GeekeepFilePathChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
 import seedu.geekeep.model.Config;
@@ -46,4 +47,5 @@ public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage
      */
     void handleGeeKeepChangedEvent(GeeKeepChangedEvent abce);
 
+    void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event);
 }

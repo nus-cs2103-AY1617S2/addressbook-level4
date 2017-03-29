@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
+import seedu.geekeep.commons.events.model.GeekeepFilePathChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
 import seedu.geekeep.model.Config;
@@ -106,6 +107,18 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveGeeKeep(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "GeeKeep file path changed, saving to file"));
+        setGeeKeepFilePath(event.filePath);
+        try {
+            saveGeeKeep(event.geekeep);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
