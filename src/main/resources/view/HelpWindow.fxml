@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
- // @@author: A0160076L
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.web.WebView?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="helpWindowRoot" stylesheets="@DarkTheme.css"
