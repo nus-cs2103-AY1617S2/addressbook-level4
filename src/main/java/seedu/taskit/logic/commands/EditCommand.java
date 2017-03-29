@@ -155,4 +155,9 @@ public class EditCommand extends Command {
             return tags;
         }
     }
+    
+    //@@author A0141011J
+    public boolean isUndoable() {
+        return true;
+    }
 }

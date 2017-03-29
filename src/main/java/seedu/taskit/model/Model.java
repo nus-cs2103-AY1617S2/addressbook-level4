@@ -3,6 +3,7 @@ package seedu.taskit.model;
 import java.util.Set;
 
 import seedu.taskit.commons.core.UnmodifiableObservableList;
+import seedu.taskit.commons.exceptions.NoValidStateException;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
@@ -37,10 +38,19 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<Task>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Updates the filter of the filtered person list to show all tasks */
+    /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords*/
+    /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
-
+    
+    //@@author A0141011J
+    /** Reverts to the previous state*/
+    void revert() throws NoValidStateException;
+    
+    /** Redo the last undone command*/
+    void redo() throws NoValidStateException;
+    
+    /** Records the current state of the model */
+    void save();
 }

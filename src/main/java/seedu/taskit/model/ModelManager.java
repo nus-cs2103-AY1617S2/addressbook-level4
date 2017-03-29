@@ -1,6 +1,8 @@
 package seedu.taskit.model;
 
 import java.util.Set;
+import java.util.Stack;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -8,6 +10,7 @@ import seedu.taskit.commons.core.ComponentManager;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.core.UnmodifiableObservableList;
 import seedu.taskit.commons.events.model.AddressBookChangedEvent;
+import seedu.taskit.commons.exceptions.NoValidStateException;
 import seedu.taskit.commons.util.CollectionUtil;
 import seedu.taskit.commons.util.StringUtil;
 import seedu.taskit.model.task.ReadOnlyTask;
@@ -23,6 +26,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    
+    
+    
+    //@A0141011J
+    private final Stack<State> prevStates = new Stack<State>();
+    private final Stack<State> nextStates = new Stack<State>();
+    //@@author
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -152,5 +162,47 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
+    
+    //@@author A0141011J
+    //========== Inner classes/functions used for filtering =================================================
+    
+    private static class State {
+        final ReadOnlyAddressBook data;
+        final Predicate<? super ReadOnlyTask> filterPredicate;
+        
+        public State(ModelManager mm) {
+            data = new AddressBook(mm.getAddressBook());
+            filterPredicate = mm.filteredTasks.getPredicate();
+        }   
+    }
+    
+    public void revert() throws NoValidStateException {
+        if (prevStates.isEmpty()) {
+            throw new NoValidStateException();
+        } else {
+            nextStates.push(new State(this));
+            load(prevStates.pop());
+            indicateAddressBookChanged();
+        }
+    }
+    
+    public void redo() throws NoValidStateException {
+        if (nextStates.isEmpty()) {
+            throw new NoValidStateException();
+        } else {
+            prevStates.push(new State(this));
+            load(nextStates.pop());
+            indicateAddressBookChanged();
+        }
+    }
+    
+    public void save() {
+        prevStates.push(new State(this));
+        nextStates.clear();
+    }
+    
+    private void load(State state) {
+        resetData(state.data);
+        filteredTasks.setPredicate(state.filterPredicate);
+    }
 }
