@@ -3,6 +3,8 @@ package seedu.address.commons.util;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
 
 /**
  * Writes and reads files
@@ -10,6 +12,11 @@ import java.nio.file.Files;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+
+    public static boolean isFileExists(String filePath) {
+        File file = new File(filePath);
+        return isFileExists(file);
+    }
 
     public static boolean isFileExists(File file) {
         return file.exists() && file.isFile();
@@ -19,6 +26,15 @@ public class FileUtil {
         if (!isFileExists(file)) {
             createFile(file);
         }
+    }
+
+    public static boolean isValidFilePath(String path) {
+        try {
+            Paths.get(getPath(path));
+        } catch (InvalidPathException | NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
     /**

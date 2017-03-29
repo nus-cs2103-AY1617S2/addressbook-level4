@@ -42,6 +42,11 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
+    public Optional<UserPrefs> readUserPrefs(String filePath) throws DataConversionException, IOException {
+        return userPrefsStorage.readUserPrefs(filePath);
+    }
+
+    @Override
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
@@ -52,6 +57,11 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public String getAddressBookFilePath() {
         return addressBookStorage.getAddressBookFilePath();
+    }
+
+    @Override
+    public void setAddressBookFilePath(String newFilePath) {
+        addressBookStorage.setAddressBookFilePath(newFilePath);
     }
 
     @Override
@@ -86,6 +96,11 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    @Override
+    public void setUserPrefsStorageFilePath(String filePath) {
+        userPrefsStorage.setUserPrefsStorageFilePath(filePath);
     }
 
 }

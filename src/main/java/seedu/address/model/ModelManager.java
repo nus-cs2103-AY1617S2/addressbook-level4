@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -15,7 +16,10 @@ import net.fortuna.ical4j.validate.ValidationException;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.StorageFilePathChangedEvent;
+import seedu.address.commons.events.UserPrefsFilePathChangedEvent;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.ListCommand;
@@ -27,7 +31,9 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.model.util.TaskDeadlineComparator;
 import seedu.address.model.util.TaskPriorityComparator;
 import seedu.address.model.util.TaskTitleComparator;
+import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.IcsFileStorage;
+import seedu.address.storage.XmlAddressBookStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -60,14 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBookStates = new ArrayList<AddressBook>();
-        this.addressBookStates.add(new AddressBook(addressBook));
-        this.currentAddressBookStateIndex = 0;
-        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
-        setCurrentPredicateToShowAllTasks();
-        initializeTaskLists();
-        updateTaskListPredicate();
-        setCurrentComparator(ListCommand.COMPARATOR_NAME_PRIORITY);
+        initModel(addressBook);
     }
 
     public ModelManager() {
@@ -84,6 +83,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0144813J
+    private void initModel(ReadOnlyAddressBook addressBook) {
+        this.addressBookStates = new ArrayList<AddressBook>();
+        this.addressBookStates.add(new AddressBook(addressBook));
+        this.currentAddressBookStateIndex = 0;
+        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        setCurrentPredicateToShowAllTasks();
+        initializeTaskLists();
+        updateTaskListPredicate();
+        setCurrentComparator(ListCommand.COMPARATOR_NAME_PRIORITY);
+    }
+
     private void initializeTaskLists() {
         this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
@@ -145,7 +155,24 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(this.currentAddressBook));
     }
 
-    //@@author A0144813J
+  //@@author A0144813J
+    @Override
+    public void indicateAddressBookFilePathChanged(String filePath) throws DataConversionException, IOException {
+        raise(new StorageFilePathChangedEvent(filePath));
+        AddressBookStorage storage = new XmlAddressBookStorage(filePath);
+        Optional<ReadOnlyAddressBook> tempAddressBook = storage.readAddressBook();
+        if (tempAddressBook.isPresent()) {
+            this.currentAddressBook.resetData(tempAddressBook.get());
+            initModel(this.currentAddressBook);
+        }
+        raise(new AddressBookChangedEvent(this.currentAddressBook));
+    }
+
+    @Override
+    public void indicateUserPrefsFilePathChanged(String filePath) {
+        raise(new UserPrefsFilePathChangedEvent(filePath));
+    }
+
     @Override
     public void saveTasksToIcsFile(String filePath) throws ValidationException, IOException {
         IcsFileStorage.saveDataToFile(filePath, this.currentAddressBook.getTaskList());

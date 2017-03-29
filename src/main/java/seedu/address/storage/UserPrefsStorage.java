@@ -19,11 +19,18 @@ public interface UserPrefsStorage {
      */
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
+    Optional<UserPrefs> readUserPrefs(String filePath) throws DataConversionException, IOException;
+
     /**
      * Saves the given {@link seedu.address.model.UserPrefs} to the storage.
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
+
+    /**
+     * Set the file path of the user prefs.
+     */
+    void setUserPrefsStorageFilePath(String filePath);
 
 }

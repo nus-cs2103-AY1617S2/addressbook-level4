@@ -8,6 +8,7 @@ import java.util.Set;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.validate.ValidationException;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model.StateLimitReachedException;
 import seedu.address.model.tag.UniqueTagList;
@@ -20,6 +21,12 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
+    /** Raises an event to indicate the storage file path has changed */
+    void indicateAddressBookFilePathChanged(String filePath) throws DataConversionException, IOException;
+
+    /** Raises an event to indicate the user prefs file path has changed */
+    void indicateUserPrefsFilePathChanged(String filePath);
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 

@@ -14,6 +14,8 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.StorageFilePathChangedEvent;
+import seedu.address.commons.events.UserPrefsFilePathChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
@@ -120,12 +122,16 @@ public class MainApp extends Application {
         }
 
         //Update config file in case it was missing to begin with or there are new/unused fields
+        saveConfigToFile(initializedConfig, configFilePathUsed);
+        return initializedConfig;
+    }
+
+    protected void saveConfigToFile(Config config, String configFilePath) {
         try {
-            ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
+            ConfigUtil.saveConfig(config, configFilePath);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
-        return initializedConfig;
     }
 
     protected UserPrefs initPrefs(Config config) {
@@ -148,13 +154,17 @@ public class MainApp extends Application {
         }
 
         //Update prefs file in case it was missing to begin with or there are new/unused fields
+        saveUserPrefsToFile(initializedPrefs);
+
+        return initializedPrefs;
+    }
+
+    protected void saveUserPrefsToFile(UserPrefs userPrefs) {
         try {
-            storage.saveUserPrefs(initializedPrefs);
+            storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
-
-        return initializedPrefs;
     }
 
     private void initEventsCenter() {
@@ -186,7 +196,44 @@ public class MainApp extends Application {
         this.stop();
     }
 
+  //@@author A0144813J
+    @Subscribe
+    public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
+        config.setAddressBookFilePath(event.newStorageFilePath);
+        storage.setAddressBookFilePath(event.newStorageFilePath);
+        updateConfigFile();
+    }
+
+    @Subscribe
+    public void handleUserPrefsFilePathChangedEvent(UserPrefsFilePathChangedEvent event) {
+        config.setUserPrefsFilePath(event.newStorageFilePath);
+        storage.setUserPrefsStorageFilePath(event.newStorageFilePath);
+        updateConfigFile();
+        try {
+            Optional<UserPrefs> tempUserPrefs = storage.readUserPrefs(event.newStorageFilePath);
+            if (tempUserPrefs.isPresent()) {
+                userPrefs.updateLastUsedGuiSetting(tempUserPrefs.get().getGuiSettings());
+            }
+        } catch (DataConversionException e) {
+            logger.warning("UserPrefs file at " + event.newStorageFilePath + " is not in the correct format. "
+                    + "Aborting..");
+        } catch (IOException e) {
+            logger.warning("Failed to read prefs file : " + StringUtil.getDetails(e));
+        }
+        saveUserPrefsToFile(userPrefs);
+    }
+
+    private void updateConfigFile() {
+        String configFilePath = getApplicationParameter("config");
+        if (configFilePath == null) {
+            configFilePath = Config.DEFAULT_CONFIG_FILE;
+        }
+        saveConfigToFile(config, configFilePath);
+    }
+  //@@author
+
     public static void main(String[] args) {
         launch(args);
     }
+
 }
