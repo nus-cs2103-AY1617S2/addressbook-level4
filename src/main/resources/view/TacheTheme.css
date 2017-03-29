@@ -1,6 +1,6 @@
 /* @@author A0142255M */
 .text-field {
-    -fx-background-color: #1bbf73;
+    -fx-background-color: #5f77bd;
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-prompt-text-fill: black;
@@ -25,7 +25,7 @@
 }
 
 .result-display {
-    -fx-text-fill: #1bbf73;
+    -fx-text-fill: #5f77bd;
     -fx-font-family: Segoe UI Light;
     -fx-font-size: 15px;
 }
@@ -35,7 +35,7 @@
 }
 
 .status-bar .label {
-    -fx-text-fill: #1bbf73;
+    -fx-text-fill: #5f77bd;
     -fx-font-size: 15px;
 }
 
@@ -46,7 +46,7 @@
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #1bbf73;
+    -fx-text-fill: #5f77bd;
 }
 
 .task-list-header {
@@ -56,12 +56,12 @@
 .task-list-header .label {
     -fx-font-size: 15pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #1bbf73;
+    -fx-text-fill: #5f77bd;
     -fx-alignment: center;
 }
 
 .task-card-id-and-name .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #5f77bd;
     -fx-font-size: 12pt;
 }
 
@@ -72,9 +72,7 @@
 }
 
 #cardPane {
-    -fx-background-color: #1bbf73;
-    -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
+    -fx-border-width: 3 3 3 3;
 }
 
 #tags {
@@ -84,7 +82,7 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #1ccfd8;
+    -fx-background-color: #5f77bd;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
