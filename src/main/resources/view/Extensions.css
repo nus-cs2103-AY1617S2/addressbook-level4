@@ -1,8 +1,7 @@
 
 .error {
-    -fx-background-color: red;
+    -fx-background-color: #EA4858;
 }
-
 
 .tag-selector {
     -fx-border-width: 1;
@@ -13,4 +12,18 @@
 
 .tooltip-text {
     -fx-text-fill: white;
+}
+
+#startDate {
+	-fx-font-size: 9pt;
+	-fx-text-fill: derive(midnightblue, 50%);
+}
+
+#endDate {
+	-fx-font-size: 9pt;
+	-fx-text-fill: derive(midnightblue, 50%);
+}
+
+#description {
+	-fx-font-size: 10pt;
 }
