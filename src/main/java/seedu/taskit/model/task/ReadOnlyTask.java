@@ -47,7 +47,7 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
     
-    
+    	
     //@@author A0097141H
     /**
      * Stringifies title and tags
