@@ -37,7 +37,7 @@ public class EditTaskDescriptor {
      */
     public boolean isAnyFieldEdited() {
         return CollectionUtil.isAnyPresent(this.description, this.priority,
-                this.startTiming, this.endTiming, this.tags);
+                this.startTiming, this.endTiming, this.tags, this.frequency);
     }
 
     public void setDescription(Optional<Description> description) {
@@ -97,5 +97,9 @@ public class EditTaskDescriptor {
 
     public Optional<RecurringFrequency> getFrequency() {
         return frequency;
+    }
+
+    public void setFrequency(Optional<RecurringFrequency> frequency) {
+        this.frequency = frequency;
     }
 }
