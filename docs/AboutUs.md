@@ -4,7 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Joseph Tang](http://www.comp.nus.edu.sg/~damithch) <br>
+#### [Joseph Tang](http://www.comp.nus.edu.sg/~josepht/) <br>
 <img src="images/JTLX.png" width="150"><br>
 
 * Components in charge of: [Logic](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/DeveloperGuide.md#33-logic)
@@ -50,7 +50,7 @@ Responsibilities: Algorithm related code, Integration
 * Components in charge of: [Storage](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/DeveloperGuide.md#35-storage)
 * Aspects/tools in charge of: Testing, Documentation
 * Features implemented:
-   * [Save command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#310-moving-the-save-file-save)
+   * [Save command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#311-moving-the-save-file-save)
    * [Undo command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#38-reverting-the-last-action-undo--u)
    * [Redo command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#39-redoing-the-last-undone-action-redo--r)
    * [Kill command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#34-deleting-a-task-kill--k)
