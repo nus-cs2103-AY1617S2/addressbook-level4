@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
@@ -191,9 +191,6 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-//        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-//        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-//        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
         assertCommandFailure("add Valid Name 12.12 e/valid@email.butNoDatePrefix g/valid,group", expectedMessage);
         assertCommandFailure("add Valid Name d/12.12 valid@email.butNoPrefix g/valid, group", expectedMessage);
         assertCommandFailure("add Valid Name d/12.12 e/valid@email.butNoGroupPrefix valid, address", expectedMessage);
@@ -201,18 +198,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidPersonData() {
-//        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-//                Name.MESSAGE_NAME_CONSTRAINTS);
-//        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-//                Phone.MESSAGE_PHONE_CONSTRAINTS);
-//        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-//                Email.MESSAGE_EMAIL_CONSTRAINTS);
-//        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-//                Tag.MESSAGE_TAG_CONSTRAINTS);
-    	assertCommandFailure("add []\\[;] d/12.12 e/valid@e.mail g/valid, group",
-                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/not_numbers e/valid@e.mail g/valid, group",
                 Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add []\\[;] d/12.12 e/valid@e.mail g/valid, group",
+                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12.12 e/notAnEmail g/valid, group",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12.12 e/valid@e.mail g/valid, group t/invalid_-[.tag",
@@ -246,7 +235,7 @@ public class LogicManagerTest {
         model.addPerson(toBeAdded); // person already in internal address book
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
 
@@ -290,7 +279,7 @@ public class LogicManagerTest {
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Person> personList = helper.generatePersonList(2);
 
@@ -323,7 +312,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
                 expectedAB,
                 expectedAB.getPersonList());
         assertEquals(1, targetedJumpIndex);
@@ -352,7 +341,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threePersons.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threePersons.get(1)),
                 expectedAB,
                 expectedAB.getPersonList());
     }
@@ -436,7 +425,8 @@ public class LogicManagerTest {
             Group privateGroup = new Group("leisure time");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            Tag tag3 = new Tag("incomplete");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2, tag3);
             return new Person(name, privateDate, email, privateGroup, tags);
         }
 
@@ -451,7 +441,7 @@ public class LogicManagerTest {
             return new Person(
                     new Name("Person " + seed),
                     //new Phone("" + Math.abs(seed)),
-                    new Date("" + Math.abs(seed)),
+                    new Date("0" + Math.abs(seed) + ".0" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     //new Address("House of " + seed),
                     new Group("list of " + seed),

@@ -56,7 +56,7 @@ public class EditCommand extends Command {
         List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);

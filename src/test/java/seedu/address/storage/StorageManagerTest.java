@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -19,6 +18,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.EventsCollector;
 import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.ui.ThemeManager;
 
 public class StorageManagerTest {
 
@@ -47,7 +47,7 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(300, 600, 4, 6);
+        original.setGuiSettings(300, 600, 4, 6, ThemeManager.DEFAULT_STYLESHEET);
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);

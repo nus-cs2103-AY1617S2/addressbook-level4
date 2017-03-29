@@ -82,10 +82,8 @@ public class PersonCardHandle extends GuiHandle {
 
     public boolean isSamePerson(ReadOnlyPerson person) {
         return getFullName().equals(person.getName().fullName)
-                //&& getPhone().equals(person.getPhone().value)
-        		&& getDate().equals(person.getDate().value)
                 && getEmail().equals(person.getEmail().value)
-                //&& getAddress().equals(person.getAddress().value)
+                && getDate().equals(person.getDate().value)
                 && getGroup().equals(person.getGroup().value)
                 && getTags().equals(getTags(person.getTags()));
     }
@@ -95,10 +93,8 @@ public class PersonCardHandle extends GuiHandle {
         if (obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    //&& getPhone().equals(handle.getPhone())
-            		&& getDate().equals(handle.getDate())
+                    && getDate().equals(handle.getDate())
                     && getEmail().equals(handle.getEmail())
-                    //&& getAddress().equals(handle.getAddress())
                     && getGroup().equals(handle.getGroup())
                     && getTags().equals(handle.getTags());
         }
@@ -107,7 +103,6 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        //return getFullName() + " " + getAddress();
-    	return getFullName() + " " + getGroup();
+        return getFullName() + " " + getGroup();
     }
 }
