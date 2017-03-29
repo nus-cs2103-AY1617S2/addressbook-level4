@@ -9,10 +9,10 @@ We are a team based in the [School of Computing, National University of Singapor
  * Role: Developer <br>
  * Responsibilities: Team Leader, Deliverables and deadlines, Integration <br>
  * Component: Storage
- * Features implemented: <br>  
-         * [Saving the Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
-         * [Changing the Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) 
-         * [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
+ * Features implemented:  
+         * [Saving the Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
+         * [Changing the Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br> 
+         * [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
  * Code written: [[functional code](../collated/main/A0140010M.md)][[test code](../collated/test/A0140010M.md)]
  * Other major contributions: <br>
  
@@ -23,10 +23,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer <br>
 * Responsibilities: Documentation and Scheduling and tracking <br>
 * Component: Model
-* Features implemented: <br>  
-         * [Mark Task as Completed](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) 
-         * [List Completed Tasks ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) 
-* Code written: [[functional code](../collated/main/A0144902L.md)][[test code](../collated/test/A0144902L.md)] 
+* Features implemented:
+         * [Mark Task as Completed](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
+         * [List Completed Tasks ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
+* Code written: [[functional code](../collated/main/A0144902L.md)][[test code](../collated/test/A0144902L.md)]  <br>
 * Other major contributions: <br>
             * Set up Travis <br>
 
@@ -37,14 +37,14 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer <br>
 * Responsibilities: Code quality, Testing and Integration <br>
 * Component: Logic <br>
-* Features implemented: <br>  
+* Features implemented:  
         * [Add 3 Type of Task : floating, deadline, event](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
-        * [Edit name,deadline for 3 Type of Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
-        * [Remove deadline](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
-        * [Undo Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
-        * [Redo Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
-        * [Flexibility in command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) 
-* Code written: [[functional code](../collated/main/A0139926R.md)][[test code](../collated/test/A0139926R.md)] 
+        * [Edit name, deadline for 3 Type of Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
+        * [Remove Deadline](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
+        * [Undo Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
+        * [Redo Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
+        * [Flexibility in Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
+* Code written: [[functional code](../collated/main/A0139926R.md)][[test code](../collated/test/A0139926R.md)]  <br>
 * Other major contributions:
            * Did the initial refactoring from AddressBook to TaskManager in main <br>
            * Did refractoring from Person to Task in main
@@ -56,9 +56,9 @@ We are a team based in the [School of Computing, National University of Singapor
 Role: Developer <br>
 Responsibilities: Documentation and Code quality <br>
 Component: Ui
-* Features implemented: <br>  
-        * [Differentiating your Tasks’ Urgency](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
-* Code written: [[functional code](../collated/main/A0139154E.md)][[test code](../collated/test/A0139154E.md)] 
+* Features implemented:
+        * [Differentiating your Tasks’ Urgency](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
+* Code written: [[functional code](../collated/main/A0139154E.md)][[test code](../collated/test/A0139154E.md)]  <br>
 * Other major contributions: <br>
            * Did the main UI Updates <br>
 -----
