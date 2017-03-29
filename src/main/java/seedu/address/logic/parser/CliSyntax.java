@@ -16,7 +16,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_BOOK_DATE_DELIMITER = new Prefix(",");
     public static final Prefix PREFIX_BOOK_REMOVE_DATE = new Prefix("remove");
     public static final Prefix PREFIX_DEADLINE = new Prefix("by ");
-    public static final Prefix PREFIX_TIMEINTERVAL_END = new Prefix(" to ");
+    public static final Prefix PREFIX_TIMEINTERVAL_END = new Prefix("to ");
     public static final Prefix PREFIX_TIMEINTERVAL_START = new Prefix("from ");
     public static final Prefix PREFIX_LABEL = new Prefix("#");
     public static final Prefix PREFIX_STATUS_COMPLETED = new Prefix("completed");
