@@ -119,7 +119,7 @@ public class MainWindow extends UiPart<Region> {
 
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 

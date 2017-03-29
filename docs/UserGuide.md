@@ -4,14 +4,14 @@ This product is a tool to accept natural language commands via keyboards to mana
 
 * [Start the program](#start-the-program)
 * [Commands](#commands)
-	* [help](#view-help--help)
-	* [add](#add-a-task-add)
-	* [delete](#delete-a-task-delete)
-	* [find](#find-a-task-find)
-	* [list](#list-tasks--list)
-	* [update](#update-a-task-update)
-	* [exit](#exit-the-program--exit)
-	* [save](#save-the-data)
+    * [help](#view-help--help)
+    * [add](#add-a-task-add)
+    * [delete](#delete-a-task-delete)
+    * [find](#find-a-task-find)
+    * [list](#list-tasks--list)
+    * [update](#update-a-task-update)
+    * [exit](#exit-the-program--exit)
+    * [save](#save-the-data)
 * [Command Summary](#command-summary)
 
 
@@ -75,7 +75,7 @@ Example:
 
 ### Update a task: `update`
 Update is the command word to edit a specific tasks
-Format : `update index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
+Format : `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 1. The commands inside square bracket are optional.
 >User updates a specific task by specifying the new entry they wish to be reflected on the existing task list
 
@@ -98,5 +98,5 @@ add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCR
 delete | `delete index\INDEX`
 find | `find name/Name`
 list | `list * | completed | pending | overdue`
-update | `update index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
+update | `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 exit | `exit`

@@ -30,7 +30,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This person already exists in the description book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the description book.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;

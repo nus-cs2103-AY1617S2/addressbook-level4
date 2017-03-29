@@ -25,7 +25,7 @@ public interface TaskBookStorage {
     Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getTaskBookFilePath()
      */
     Optional<ReadOnlyTaskBook> readTaskBook(String filePath) throws DataConversionException, IOException;
 
