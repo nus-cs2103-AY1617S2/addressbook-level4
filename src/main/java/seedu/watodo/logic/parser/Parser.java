@@ -28,9 +28,11 @@ import seedu.watodo.logic.commands.ListMonthCommand;
 import seedu.watodo.logic.commands.ListUndoneCommand;
 import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.MarkCommand;
+import seedu.watodo.logic.commands.SaveAsCommand;
 import seedu.watodo.logic.commands.SelectCommand;
 import seedu.watodo.logic.commands.ShortcutCommand;
 import seedu.watodo.logic.commands.UnmarkCommand;
+import seedu.watodo.logic.commands.ViewFileCommand;
 
 /**
  * Parses user input.
@@ -138,6 +140,12 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SaveAsCommand.COMMAND_WORD:
+            return new SaveAsCommandParser().parse(arguments);
+
+        case ViewFileCommand.COMMAND_WORD:
+            return new ViewFileCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
