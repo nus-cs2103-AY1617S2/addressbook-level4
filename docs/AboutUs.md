@@ -32,9 +32,9 @@ Features implemented: <br>
    [Undo Command] <br>
    [Redo Command] <br>
    [Flexibility in command]<br>
-Code written: [[functional code](../collated/main/A0139926R.md)][[test code](../collated/test/A0139926R.md]
-Other major contributions:
-  Did the initial refactoring from AddressBook to TaskManager in main
+Code written: [[functional code](../collated/main/A0139926R.md)][[test code](../collated/test/A0139926R.md)] <br>
+Other major contributions: <br>
+  Did the initial refactoring from AddressBook to TaskManager in main <br>
   Did refractoring from Person to Task in main
 
 -----
