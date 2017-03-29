@@ -189,7 +189,7 @@ public class UiManager extends ComponentManager implements Ui {
         String displayMsg = "This task is due tomorrow";
         if (!task.getEndDateTime().get().getTimeOnly().isEmpty()) {
             String time = task.getEndDateTime().get().getTimeOnly();
-            displayMsg += " at " + time.substring(0, time.length()-3) + ".";
+            displayMsg += " at " + time.substring(0, time.length() - 3) + ".";
         } else {
             displayMsg += ".";
         }
