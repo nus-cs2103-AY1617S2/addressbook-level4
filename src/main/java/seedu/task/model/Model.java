@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import java.util.Set;
+import java.util.Stack;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.ReadOnlyTask;
@@ -23,6 +24,15 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException; //remove this exception??
+
+    /** Undo the last change */
+    void undo();
+
+    /** Redo the last undo */
+    void redo();
+
+    /** Returns the undoStack */
+    Stack<TaskList> getUndoStack();
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
