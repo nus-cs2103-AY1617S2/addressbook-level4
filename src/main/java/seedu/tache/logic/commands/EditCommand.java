@@ -86,7 +86,7 @@ public class EditCommand extends Command implements Undoable {
             undoHistory.push(this);
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         } catch (IllegalValueException e) {
-            return new CommandResult(e.getMessage());
+            return new IncorrectCommand(e.getMessage()).execute();
         }
     }
 
