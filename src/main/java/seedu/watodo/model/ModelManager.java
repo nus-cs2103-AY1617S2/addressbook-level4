@@ -234,9 +234,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null &&
-                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
-                return true;
+            if (task.getEndDate() == null) {
+                if (task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return deadline.isLater(task.getEndDate()) &&
                     task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
@@ -268,12 +271,15 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null &&
-                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
-                return true;
+            if (task.getEndDate() == null) {
+                if (task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return deadline.isLater(task.getEndDate()) &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
+                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
             }
         }
 
