@@ -102,6 +102,13 @@ public class UpdateCommand extends Command {
                 }
             }
         }
+        
+        if (isOnlyCategoriesUpdate() || isOnlyTaskNameUpdated()) {
+            updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
+            updateTaskDescriptor.setStartTime(Optional.of(taskToUpdate.getStartTime()));
+            updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+            updateTaskDescriptor.setEndTime(Optional.of(taskToUpdate.getEndTime()));
+        }
 
         Task updatedTask = createUpdatedTask(taskToUpdate, updateTaskDescriptor);
 
@@ -113,6 +120,40 @@ public class UpdateCommand extends Command {
 
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
+    }
+
+    /**
+     * Checks if only the task name field has been identified by user to be updated
+     * To ensure that other task details like startTime startDate endTime endDate are not lost
+     * @return true if only task name has been identified by user to be updated
+     */
+    private boolean isOnlyTaskNameUpdated() {
+        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getTaskName().isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if only the category field has been identified by user to be updated
+     * To ensure that other task details like startTime startDate endTime endDate are not lost
+     * @return true if only categories are identified by user to be updated
+     */
+    private boolean isOnlyCategoriesUpdate() {
+        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getCategories().isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private boolean isDeadlineTaskToUpdate(ReadOnlyTask taskToUpdate) {

@@ -301,7 +301,7 @@ public class UpdateCommandParser {
     }
 
     private boolean isValidTime(String string) {
-        if (Integer.parseInt(string) > 2400) {
+        if (Integer.parseInt(string) >= 2400 || Integer.parseInt(string.substring(string.length()-2)) >= 60) {
             return false;
         } else {
             return true;
