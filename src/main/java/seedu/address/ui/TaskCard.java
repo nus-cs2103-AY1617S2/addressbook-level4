@@ -44,7 +44,7 @@ public class TaskCard extends UiPart<Region> {
 
     private void initRecurTag() {
         //recurringTag.getChildren().add(new Label("Recurring"));
-        recurringTag.setStyle("-fx-background-color: #1b98b7; -fx-blend-mode: multipy;");
+        recurringTag.setStyle("-fx-background-color: #ff884c; -fx-blend-mode: multipy;");
         //recurringTag.setStyle("-fx-background-blend-mode: multiply;");
         
     }
