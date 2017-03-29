@@ -10,6 +10,7 @@ import seedu.address.model.task.Recurrence;
  * Parses string into interval and returns the next date for a task
  *
  */
+//@@author A0105287E
 public class RecurrenceManager implements RecurrenceParser {
 
     public static final String MESSAGE_INVALID_INTERVAL = "Invalid interval entered.";
