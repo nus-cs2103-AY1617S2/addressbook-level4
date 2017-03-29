@@ -2,8 +2,11 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.todolist.logic.parser.EditCommandParser.EDIT_DEFAULT_END_TIME;
-import static seedu.todolist.logic.parser.EditCommandParser.EDIT_DEFAULT_START_TIME;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -58,7 +61,7 @@ public class EditCommandTest extends TodoListGuiTest {
         String detailsToEdit = "e/";
         int todoListIndex = 8;
 
-        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withEndTime(EDIT_DEFAULT_END_TIME).build();
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withEndTime(getTomorrow()).build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
@@ -69,7 +72,7 @@ public class EditCommandTest extends TodoListGuiTest {
         int todoListIndex = 9;
 
         TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom")
-                .withStartTime(EDIT_DEFAULT_START_TIME).withEndTime(EDIT_DEFAULT_END_TIME).withTags("personal").build();
+                .withStartTime(getToday()).withEndTime(getTomorrow()).withTags("personal").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
@@ -284,5 +287,24 @@ public class EditCommandTest extends TodoListGuiTest {
         assertTrue(todoListPanel.isListMatching(true, expectedTodosList));
 
         //assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));
+    }
+
+    private String getTomorrow() {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, 1);
+        dt = c.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+        return dateFormat.format(dt);
+    }
+
+    private String getToday() {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        dt = c.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+        return dateFormat.format(dt);
     }
 }

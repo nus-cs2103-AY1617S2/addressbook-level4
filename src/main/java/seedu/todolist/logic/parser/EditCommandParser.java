@@ -10,8 +10,10 @@ import static seedu.todolist.logic.parser.CliSyntax.PREFIX_TAG_ADD;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -34,8 +36,7 @@ public class EditCommandParser {
      * and returns an EditCommand object for execution.
      */
 
-    public static final String EDIT_DEFAULT_START_TIME = "12:00PM 11/11/2017";
-    public static final String EDIT_DEFAULT_END_TIME = "1:00PM 11/11/2017";
+
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
@@ -86,12 +87,12 @@ public class EditCommandParser {
             if (!startTime.get().equals("")) {
                 editTodoDescriptor.setStartTime(dateFormat.parse(startTime.get()));
             } else {
-                editTodoDescriptor.setStartTime(dateFormat.parse(EDIT_DEFAULT_START_TIME));
+                editTodoDescriptor.setStartTime(getToday());
             }
             if (!endTime.get().equals("")) {
                 editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
             } else {
-                editTodoDescriptor.setEndTime(dateFormat.parse(EDIT_DEFAULT_END_TIME));
+                editTodoDescriptor.setEndTime(getTomorrow());
             }
         } catch (NoSuchElementException | ParseException e) {
 
@@ -105,11 +106,32 @@ public class EditCommandParser {
             if (!endTime.get().equals("")) {
                 editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
             } else {
-                editTodoDescriptor.setEndTime(dateFormat.parse(EDIT_DEFAULT_END_TIME));
+                editTodoDescriptor.setEndTime(getTomorrow());
             }
         } catch (NoSuchElementException | ParseException e) {
 
         }
+    }
+
+    private Date getTomorrow() {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, 1);
+        dt = c.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+        dateFormat.format(dt);
+        return dt;
+    }
+
+    private Date getToday() {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        dt = c.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+        dateFormat.format(dt);
+        return dt;
     }
     //@@author
     /**
