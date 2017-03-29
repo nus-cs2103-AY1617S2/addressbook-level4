@@ -108,6 +108,14 @@ public class EventTask extends Task implements ReadOnlyEventTask {
         return dateFormat.format(startDate);
     }
 
+    //@@author A0143355J
+    @Override
+    public String getStartDateStringForUpcomingTask() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+        return dateFormat.format(startDate);
+    }
+
+    //@@author A0141993X
     @Override
     public Date getEndDate() {
         return endDate;
@@ -119,6 +127,14 @@ public class EventTask extends Task implements ReadOnlyEventTask {
         return dateFormat.format(endDate);
     }
 
+    //@@author A0143355J
+    @Override
+    public String getEndDateStringForUpcomingTask() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+        return dateFormat.format(endDate);
+    }
+
+    //@@author A0141993X
     @Override
     public UniqueTagList getTags() {
         return tags;

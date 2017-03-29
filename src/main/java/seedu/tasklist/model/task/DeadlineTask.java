@@ -60,6 +60,14 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
         return dateFormat.format(deadline);
     }
 
+    //@@author A0143355J
+    @Override
+    public String getDeadlineStringForUpcomingTask() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+        return dateFormat.format(deadline);
+    }
+
+    //@@author A0141993X
     public void setName(Name name) {
         assert name != null;
         this.name = name;

@@ -13,6 +13,8 @@ public interface ReadOnlyEventTask extends ReadOnlyTask {
     Date getEndDate();
     String getStartDateString();
     String getEndDateString();
+    String getStartDateStringForUpcomingTask();
+    String getEndDateStringForUpcomingTask();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
