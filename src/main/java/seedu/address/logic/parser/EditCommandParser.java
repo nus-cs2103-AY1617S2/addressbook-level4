@@ -66,6 +66,8 @@ public class EditCommandParser {
             }
             if (args.trim().contains(PREFIX_REMOVE_RECURRENCE.getPrefix())) {
                 editTaskDescriptor.setRemoveRecurrence(Optional.ofNullable(true));
+                editTaskDescriptor.setIsRecurring(Optional.ofNullable(false));
+                editTaskDescriptor.setRecurrence(Optional.empty());
             }
             if (args.trim().contains(PREFIX_RECURRENCE.getPrefix())) {
                 editTaskDescriptor.setIsRecurring(Optional.ofNullable(true));
