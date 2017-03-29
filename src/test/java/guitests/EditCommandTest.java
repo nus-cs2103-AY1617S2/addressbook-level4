@@ -1,5 +1,5 @@
 package guitests;
-// @@author: A0160076L
+
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
@@ -23,6 +23,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     private TestTask[] expectedTasksList = this.td.getTypicalTasks();
 
+    // @@author: A0160076L
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Bobby p/low e/tomorrow d/Block 123, Bobby Street 3 t/husband";
@@ -106,7 +107,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
-
+    // @@author: A0160076L
     /**
      * Checks whether the edited task has the correct updated details.
      *

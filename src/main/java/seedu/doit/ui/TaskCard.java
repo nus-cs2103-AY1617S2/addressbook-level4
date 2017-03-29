@@ -1,5 +1,5 @@
 package seedu.doit.ui;
-// @@author: A0160076L
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Circle labelBullet;
 
-
+  //@@author: A0160076L
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         this.name.setText(task.getName().fullName);
@@ -59,7 +59,7 @@ public class TaskCard extends UiPart<Region> {
             this.deadline.setText("");
         }
     }
-
+  //@@author: A0160076L
     public boolean ifOverdue(String dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");

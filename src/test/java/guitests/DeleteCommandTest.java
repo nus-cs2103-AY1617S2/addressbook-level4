@@ -1,5 +1,5 @@
 package guitests;
-// @@author: A0160076L
+
 import static seedu.doit.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
@@ -8,7 +8,7 @@ import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TestUtil;
 
 public class DeleteCommandTest extends TaskManagerGuiTest {
-
+    // @@author: A0160076L
     @Test
     public void delete() {
 

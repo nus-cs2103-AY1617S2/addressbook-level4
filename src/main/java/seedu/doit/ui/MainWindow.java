@@ -1,5 +1,5 @@
 package seedu.doit.ui;
-//@@author: A0160076L
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Region> {
             }
         });
     }
-
+  //@@author: A0160076L
     protected void fillInnerParts() {
         this.taskListPanel = new TaskListPanel(getTaskListPlaceholder(), this.logic.getFilteredTaskList());
         this.eventListPanel = new EventListPanel(getEventListPlaceholder(), this.logic.getFilteredTaskList());
@@ -142,11 +142,11 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return this.taskListPanelPlaceholder;
     }
-
+    //@@author: A0160076L
     private AnchorPane getEventListPlaceholder() {
         return this.eventListPanelPlaceholder;
     }
-
+    //@@author: A0160076L
     private AnchorPane getFListPlaceholder() {
 
         return this.floatingListPanelPlaceholder;
@@ -216,15 +216,15 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-
+    //@@author: A0160076L
     public EventListPanel getEventListPanel() {
         return this.eventListPanel;
     }
-
+    //@@author: A0160076L
     public FloatingTaskListPanel getFloatingListPanel() {
         return this.fListPanel;
     }
-
+    //@@author: A0160076L
     /**
      *
      * Handle scrollTo in different lists

@@ -1,5 +1,5 @@
 package seedu.doit.ui;
-//@@author: A0160076L
+
 import java.util.Date;
 import java.util.logging.Logger;
 
