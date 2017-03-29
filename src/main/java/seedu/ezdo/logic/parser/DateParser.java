@@ -24,25 +24,27 @@ public class DateParser {
     /*
      * Converts the date format from from user's input for Natty dependency.
      */
+    //@@author A0138907W
+
     public DateParser(String input) {
         // swap day and month as natty only accepts the MM/DD/YYYY format
         if (input.matches(DAY_MONTH_YEAR_FORMAT)) {
             input = swapDayAndMonth(input);
         }
-        this.value = nattyManipulation(input);
+        value = nattyManipulation(input);
     }
 
     /**
      * Swaps the day and month of a date in DD/MM/YYYY format for natty to parse.
      *
      * @param input A string representing a date in the DD/MM/YYYY format.
-     * @return A string equal to the input date but in MM/DD/YYYY format.
+     * @return      A string equal to the input date but in MM/DD/YYYY format.
      */
     private String swapDayAndMonth(String input) {
         Pattern dayMonthYearPattern = Pattern.compile(DAY_MONTH_YEAR_FORMAT);
         Matcher matcher = dayMonthYearPattern.matcher(input);
 
-        matcher.matches();
+        assert matcher.matches();
         return matcher.group(2) + matcher.group(1) + matcher.group(3);
     }
 

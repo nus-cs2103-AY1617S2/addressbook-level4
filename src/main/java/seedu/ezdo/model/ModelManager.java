@@ -77,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.resetData(newData);
         indicateEzDoChanged();
     }
-  //@@author A0139248X
+  //@@author
     @Override
     public ReadOnlyEzDo getEzDo() {
         return ezDo;
@@ -110,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
-  //@@author A0139248X
+  //@@author
     @Override
     public synchronized void doneTasks(ArrayList<Task> doneTasks) {
         updateStacks();
@@ -169,7 +169,7 @@ public class ModelManager extends ComponentManager implements Model {
             throw new DateException("Error parsing dates!");
         }
     }
-  //@@author A0139248X
+  //@@author
     // =========== Filtered Task List Accessors
     // =============================================================
 
@@ -178,10 +178,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(ArrayList<Object> listToCompare, boolean startBefore,
-            boolean dueBefore, boolean startAfter, boolean dueAfter) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(listToCompare,
-                startBefore, dueBefore, startAfter, dueAfter)));
+    public void updateFilteredTaskList(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(listToCompare, searchIndicatorList)));
     }
 
     @Override
@@ -282,17 +280,16 @@ public class ModelManager extends ComponentManager implements Model {
         private boolean startAfter;
         private boolean dueAfter;
 
-        NameQualifier(ArrayList<Object> listToCompare, boolean startBefore,
-                boolean dueBefore, boolean startAfter, boolean dueAfter) {
+        NameQualifier(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
             this.nameKeyWords = (Set<String>) listToCompare.get(0);
             this.priority = (Optional<Priority>) listToCompare.get(1);
             this.startDate = (Optional<StartDate>) listToCompare.get(2);
             this.dueDate = (Optional<DueDate>) listToCompare.get(3);
             this.tags = (Set<String>) listToCompare.get(4);
-            this.startBefore = startBefore;
-            this.dueBefore = dueBefore;
-            this.startAfter = startAfter;
-            this.dueAfter = dueAfter;
+            this.startBefore = searchIndicatorList.get(0);
+            this.dueBefore = searchIndicatorList.get(1);
+            this.startAfter = searchIndicatorList.get(2);
+            this.dueAfter = searchIndicatorList.get(3);
 
         }
 
@@ -410,8 +407,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
+    //@@author A0138907W
+    /**
+     * Sorts the task in ezDo by the given sort criteria.
+     *
+     * @param sortCriteria      The field to sort by.
+     * @param isSortedAscending If true, sorts in ascending order. Otherwise, sorts in descending order.
+     */
     @Override
     public void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending) {
+        assert sortCriteria != null;
+        assert isSortedAscending != null;
         if (!this.currentSortCriteria.equals(sortCriteria)) {
             this.currentSortCriteria = sortCriteria;
             indicateSortCriteriaChanged();
@@ -423,11 +429,18 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
-  //@@author A0139248X
+    //@@author A0139248X
+    /**
+     * Raises a {@code SortCriteriaChangedEvent}.
+     */
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
     }
-  //@@author
+
+    //@@author A0138907W
+    /**
+     * Raises a {@code IsSortedAscendingChangedEvent}.
+     */
     public void indicateIsSortedAscendingChanged() {
         raise(new IsSortedAscendingChangedEvent(currentIsSortedAscending));
     }
