@@ -3,7 +3,6 @@ package seedu.onetwodo.commons.util;
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.onetwodo.TestApp;
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
 
@@ -17,7 +16,7 @@ public class ConfigUtil {
     }
 //@@author A0139343E
     public static void saveConfig(Config config, String configFilePath) throws IOException {
-        if (!config.getAppTitle().equals(TestApp.APP_TITLE)) {
+        if (!config.getAppTitle().equals("Test App")) {
             JsonUtil.saveJsonFile(config, configFilePath);
         }
     }

@@ -14,6 +14,7 @@ import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.core.Version;
+import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
 import seedu.onetwodo.commons.util.ConfigUtil;
@@ -47,6 +48,7 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
 
+    //@@author A0139343E
     public static MainApp getInstance() {
         if (instance == null) {
             instance = new MainApp();
@@ -76,6 +78,8 @@ public class MainApp extends Application {
         instance.ui = new UiManager(instance.logic, instance.config, instance.userPrefs);
 
         initEventsCenter();
+        EventsCenter.getInstance().post(new ToDoListChangedEvent(instance.model.getToDoList()));
+
     }
 
     private String getApplicationParameter(String parameterName) {
@@ -94,7 +98,8 @@ public class MainApp extends Application {
     public Model getModel() {
         return MainApp.getInstance().model;
     }
-
+    
+    //@@author
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyToDoList> toDoOptional;
         ReadOnlyToDoList initialData;
