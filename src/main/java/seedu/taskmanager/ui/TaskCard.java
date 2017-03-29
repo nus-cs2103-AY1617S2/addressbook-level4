@@ -37,7 +37,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane categories;
 
-
     private final StringProperty empty = new SimpleStringProperty("");
     private final StringProperty completed = new SimpleStringProperty("Completed");
 
@@ -64,21 +63,21 @@ public class TaskCard extends UiPart<Region> {
             endTime.setText("End Time: " + task.getEndTime().value);
             endTime.setStyle("-fx-font-size: 11px");
             botLabels.add(endTime);
-            
+
             topRow.setItems(topLabels);
             botRow.setItems(botLabels);
-            
+
             topRow.setOrientation(Orientation.HORIZONTAL);
             botRow.setOrientation(Orientation.HORIZONTAL);
-            
+
             topRow.prefHeightProperty().bind(Bindings.size(topLabels).multiply(14));
             botRow.prefHeightProperty().bind(Bindings.size(botLabels).multiply(14));
-            
+
             listRows.add(topRow);
             listRows.add(botRow);
-            
+
             detailsList.setItems(listRows);
-            }
+        }
 
         if (isSameDateEvent(task)) {
             Label date = new Label();
@@ -93,19 +92,19 @@ public class TaskCard extends UiPart<Region> {
             endTime.setText("End Time: " + task.getEndTime().value);
             endTime.setStyle("-fx-font-size: 11px");
             botLabels.add(endTime);
-            
+
             topRow.setItems(topLabels);
             botRow.setItems(botLabels);
 
             topRow.setOrientation(Orientation.HORIZONTAL);
             botRow.setOrientation(Orientation.HORIZONTAL);
-            
+
             topRow.prefHeightProperty().bind(Bindings.size(topLabels).multiply(14));
             botRow.prefHeightProperty().bind(Bindings.size(botLabels).multiply(14));
 
             listRows.add(topRow);
             listRows.add(botRow);
-            
+
             detailsList.setItems(listRows);
         }
 
@@ -138,9 +137,10 @@ public class TaskCard extends UiPart<Region> {
         }
         initCategory(task);
     }
-    
+
     private boolean isMultipleDateEvent(ReadOnlyTask task) {
-        if (!task.getStartDate().value.equals(task.getEndDate().value) && !task.getStartDate().value.equals("EMPTY_FIELD")) {
+        if (!task.getStartDate().value.equals(task.getEndDate().value)
+                && !task.getStartDate().value.equals("EMPTY_FIELD")) {
             return true;
         } else {
             return false;
@@ -162,7 +162,7 @@ public class TaskCard extends UiPart<Region> {
             return false;
         }
     }
-    
+
     private boolean isStartTimeEmpty(ReadOnlyTask task) {
         if ((task.getStartTime().value).equals("EMPTY_FIELD")) {
             return true;
@@ -188,7 +188,8 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private boolean isSameDateEvent(ReadOnlyTask task) {
-        if ((task.getStartDate().value).equals(task.getEndDate().value) && (!task.getStartDate().value.equals("EMPTY_FIELD"))) {
+        if ((task.getStartDate().value).equals(task.getEndDate().value)
+                && (!task.getStartDate().value.equals("EMPTY_FIELD"))) {
             return true;
         } else {
             return false;

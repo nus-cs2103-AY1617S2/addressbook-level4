@@ -138,11 +138,11 @@ public class ArgumentTokenizerTest {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP, dashT, hatQ);
 
         // Two arguments repeated, some have empty values
-        tokenizer.tokenize("SomePreambleString -t dashT-Value ^Q ^Q-t another dashT value /p slashP value -t");
-        assertPreamblePresent(tokenizer, "SomePreambleString");
+        tokenizer.tokenize("SomePreambleString -t dashT-Value ^Q asd ^Q sdr -t another dashT value /p slashP value -t");
+        assertPreamblePresent(tokenizer, "SomePreambleString -t dashT-Value ^Q asd");
         assertArgumentPresent(tokenizer, slashP, "slashP value");
-        assertArgumentPresent(tokenizer, dashT, "dashT-Value", "another dashT value", "");
-        assertArgumentPresent(tokenizer, hatQ, "", "");
+        assertArgumentPresent(tokenizer, dashT, "");
+        assertArgumentPresent(tokenizer, hatQ, "sdr -t another dashT value");
     }
 
     @Test

@@ -102,7 +102,7 @@ public class UpdateCommand extends Command {
                 }
             }
         }
-        
+
         if (isOnlyCategoriesUpdate() || isOnlyTaskNameUpdated()) {
             updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
             updateTaskDescriptor.setStartTime(Optional.of(taskToUpdate.getStartTime()));
@@ -123,8 +123,10 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Checks if only the task name field has been identified by user to be updated
-     * To ensure that other task details like startTime startDate endTime endDate are not lost
+     * Checks if only the task name field has been identified by user to be
+     * updated To ensure that other task details like startTime startDate
+     * endTime endDate are not lost
+     * 
      * @return true if only task name has been identified by user to be updated
      */
     private boolean isOnlyTaskNameUpdated() {
@@ -140,8 +142,10 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Checks if only the category field has been identified by user to be updated
-     * To ensure that other task details like startTime startDate endTime endDate are not lost
+     * Checks if only the category field has been identified by user to be
+     * updated To ensure that other task details like startTime startDate
+     * endTime endDate are not lost
+     * 
      * @return true if only categories are identified by user to be updated
      */
     private boolean isOnlyCategoriesUpdate() {
