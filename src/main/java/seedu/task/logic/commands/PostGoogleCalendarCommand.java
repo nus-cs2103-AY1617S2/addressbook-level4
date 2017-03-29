@@ -11,7 +11,6 @@ import com.google.api.services.calendar.model.EventDateTime;
 import seedu.task.commons.core.GoogleCalendar;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
-import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 
@@ -28,7 +27,7 @@ public class PostGoogleCalendarCommand extends Command {
     public static final String MESSAGE_MISSING_DATE = "Both start and end dates are required"
             + " to post to Google Calendar";
     public static final String MESSAGE_USAGE = COMMAND_WORD_2
-            + ": Posts the selected event to your Google Calendar.\n"
+            + " 1 : Posts the first event to your Google Calendar.\n"
             + "Example: " + COMMAND_WORD_2;
 
     private final int filteredTaskListIndex;
@@ -48,11 +47,11 @@ public class PostGoogleCalendarCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         ReadOnlyTask taskToPost = getTaskToPost();
-        
+
         if (taskToPost.getStartDate().isNull() || taskToPost.getEndDate().isNull()) {
             return new CommandResult(MESSAGE_MISSING_DATE);
         }
-        
+
         Event event = createEventFromTask(taskToPost);
 
         try {
@@ -83,7 +82,7 @@ public class PostGoogleCalendarCommand extends Command {
         assert taskToPost != null;
         assert taskToPost.getStartDate() != null;
         assert taskToPost.getEndDate() != null;
-        
+
         Event event = new Event()
                 .setSummary(taskToPost.getName().fullName)
                 .setLocation(taskToPost.getLocation().value)
@@ -93,14 +92,14 @@ public class PostGoogleCalendarCommand extends Command {
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
                 .setTimeZone("Asia/Singapore");
-        event.setStart(start);       
+        event.setStart(start);
 
         DateTime endDateTime = new DateTime(taskToPost.getEndDate().getDateValue());
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
                 .setTimeZone("Asia/Singapore");
         event.setEnd(end);
-        
+
         return event;
     }
 
