@@ -9,6 +9,7 @@ import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.RecurringTaskOccurrence;
+import seedu.task.model.task.Timing;
 
 //@@author A0163559U
 /**
@@ -67,6 +68,15 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder withStartTiming(String string) throws IllegalValueException {
+        this.task.setStartTiming(new Timing(string));
+        return this;
+    }
+
+    public TaskBuilder withEndTiming(String string) throws IllegalValueException {
+        this.task.setEndTiming(new Timing(string));
+        return this;
+    }
     public TestTask build() {
         return this.task;
     }
