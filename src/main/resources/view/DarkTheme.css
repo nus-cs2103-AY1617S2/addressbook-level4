@@ -28,10 +28,6 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
-.text-field.error {
-    -fx-background-color: #EA4858;
-}
-
 .tab-pane {
     -fx-padding: 0 0 0 1;
 }
