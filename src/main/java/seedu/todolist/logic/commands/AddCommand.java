@@ -116,7 +116,6 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
     }
-    
     private Date getTomorrow() {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
