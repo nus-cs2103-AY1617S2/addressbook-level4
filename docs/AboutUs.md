@@ -25,10 +25,9 @@ Component: Model
 Role: Developer <br>
 Responsibilities: Code quality, Testing and Integration <br>
 Component: Logic <br>
-Features implemented: <br>
-         
-   <br>  [Add 3 Type of Task : floating, deadline, event]<br>
-         [Edit name,deadline for 3 Type of Task]<br>
+Features implemented: <br>  
+         [Add 3 Type of Task : floating, deadline, event] <br>
+         [Edit name,deadline for 3 Type of Task] <br>
          [Remove deadline]<br>
          [Undo Command] <br>
          [Redo Command] <br>
