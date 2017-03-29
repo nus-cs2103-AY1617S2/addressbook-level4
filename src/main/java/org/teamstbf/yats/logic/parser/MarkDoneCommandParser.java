@@ -2,7 +2,6 @@ package org.teamstbf.yats.logic.parser;
 
 import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Stack;
 
@@ -26,15 +25,15 @@ public class MarkDoneCommandParser {
      */
     public Command parse(String args) {
 
-	String[] markIndexArr = stringTokenizer(args);
+	String[] markIndexArr = ParserUtil.stringTokenizer(args);
 	if (markIndexArr.length > 1) {
-	    if (isAllIntegers(markIndexArr)) {
-		markIndexArr = sortIndexArr(markIndexArr);
+	    if (ParserUtil.isAllIntegers(markIndexArr)) {
+		markIndexArr = ParserUtil.sortIndexArr(markIndexArr);
 		for (String element : markIndexArr) {
 		    markStack.push(Integer.valueOf(element) - 1);
 		}
 		return new BatchMarkDoneCommand(markStack);
-	    } else if (!isAllIntegers(markIndexArr)) {
+	    } else if (!ParserUtil.isAllIntegers(markIndexArr)) {
 		return new IncorrectCommand(
 			String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
 	    }
@@ -48,41 +47,4 @@ public class MarkDoneCommandParser {
 	return new MarkDoneCommand(index.get());
     }
 
-    private String[] stringTokenizer(String commandText) {
-	String[] splitText = commandText.trim().split(" ");
-	for (String element : splitText) {
-	    element.trim();
-	}
-	return splitText;
-    }
-
-    private String[] sortIndexArr(String[] stringArray) {
-	int[] intArray = new int[stringArray.length];
-	for (int i = 0; i < stringArray.length; i++) {
-	    intArray[i] = Integer.parseInt(stringArray[i]);
-	}
-	Arrays.sort(intArray);
-	for (int i = 0; i < intArray.length; i++) {
-	    stringArray[i] = Integer.toString(intArray[i]);
-	}
-	return stringArray;
-    }
-
-    private boolean isAllIntegers(String[] stringArray) {
-	for (int i = 0; i < stringArray.length; i++) {
-	    if (!isInteger(stringArray[i])) {
-		return false;
-	    }
-	}
-	return true;
-    }
-
-    private boolean isInteger(String toCheck) {
-	try {
-	    Integer.parseInt(toCheck);
-	} catch (NumberFormatException e) {
-	    return false;
-	}
-	return true;
-    }
 }

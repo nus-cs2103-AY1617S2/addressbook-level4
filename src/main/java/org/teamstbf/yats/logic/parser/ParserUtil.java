@@ -160,4 +160,49 @@ public class ParserUtil {
 	// Assert.assertEquals(1, dates.size());
 	return dates.get(0);
     }
+
+    /**
+     * Parses a {@code String} and splits it to its tokens
+     * 
+     * @param commandText
+     * @return
+     */
+    public static String[] stringTokenizer(String commandText) {
+	String[] splitText = commandText.trim().split(" ");
+	for (String element : splitText) {
+	    element.trim();
+	}
+	return splitText;
+    }
+
+    public static String[] sortIndexArr(String[] stringArray) {
+	int[] intArray = new int[stringArray.length];
+	for (int i = 0; i < stringArray.length; i++) {
+	    intArray[i] = Integer.parseInt(stringArray[i]);
+	}
+	Arrays.sort(intArray);
+	for (int i = 0; i < intArray.length; i++) {
+	    stringArray[i] = Integer.toString(intArray[i]);
+	}
+	return stringArray;
+    }
+
+    public static boolean isAllIntegers(String[] stringArray) {
+	for (int i = 0; i < stringArray.length; i++) {
+	    if (!isInteger(stringArray[i])) {
+		return false;
+	    }
+	}
+	return true;
+    }
+
+    public static boolean isInteger(String toCheck) {
+	try {
+	    Integer.parseInt(toCheck);
+	} catch (NumberFormatException e) {
+	    return false;
+	}
+	return true;
+    }
+
 }
