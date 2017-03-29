@@ -21,7 +21,7 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]\n" + "Example: " + COMMAND_WORD
             + " 1 2";
 
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Task undone: %1$s";
+    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Task undone: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_STATUS_UNDONE = "The task status is already set to Undone.";
 
@@ -59,12 +59,9 @@ public class UnmarkCommand extends Command {
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
-
-            } catch (CommandException ce) {
-                throw new CommandException(MESSAGE_STATUS_UNDONE);
             }
 
-            tasksUnmarkedMessage.append(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToUnmark) + "\n");
+            tasksUnmarkedMessage.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, taskToUnmark) + "\n");
         }
 
         return new CommandResult(tasksUnmarkedMessage.toString());
