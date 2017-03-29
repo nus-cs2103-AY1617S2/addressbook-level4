@@ -21,7 +21,7 @@ public class FileUtilTest {
         assertEquals("folder" + File.separator + "sub-folder", FileUtil.getPath("folder/sub-folder"));
 
         // null parameter -> assertion failure
-        thrown.expect(NullPointerException.class);
+        thrown.expect(AssertionError.class);
         FileUtil.getPath(null);
 
         // no forwards slash -> assertion failure

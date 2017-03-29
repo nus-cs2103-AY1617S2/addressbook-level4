@@ -34,7 +34,7 @@ public class TaskBookTest {
 
     @Test
     public void resetData_null_throwsAssertionError() {
-        thrown.expect(NullPointerException.class);
+        thrown.expect(AssertionError.class);
         taskBook.resetData(null);
     }
 
