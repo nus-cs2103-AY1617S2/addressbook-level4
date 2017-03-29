@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.taskmanager.model.task.TaskName;
-
 public class TaskNameTest {
 
     // @@author A0141102H
@@ -15,14 +13,19 @@ public class TaskNameTest {
         // invalid task name
         assertFalse(TaskName.isValidName("")); // empty string
         assertFalse(TaskName.isValidName(" ")); // spaces only
-        assertFalse(TaskName.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(TaskName.isValidName("food*")); // contains non-alphanumeric characters
+        assertFalse(TaskName.isValidName("^")); // only non-alphanumeric
+                                                // characters
+        assertFalse(TaskName.isValidName("food*")); // contains non-alphanumeric
+                                                    // characters
 
         // valid task name
         assertTrue(TaskName.isValidName("eat food")); // alphabets only
         assertTrue(TaskName.isValidName("1 22 333 4444 55555")); // numbers only
-        assertTrue(TaskName.isValidName("hungry b0i")); // alphanumeric characters
+        assertTrue(TaskName.isValidName("hungry b0i")); // alphanumeric
+                                                        // characters
         assertTrue(TaskName.isValidName("EAT FOOD")); // with capital letters
-        assertTrue(TaskName.isValidName("This is a run on sentence created solely to prove a point")); // long task names
+        assertTrue(TaskName.isValidName("This is a run on sentence created" + "solely to prove a point")); // long
+                                                                                                           // task
+                                                                                                           // names
     }
 }
