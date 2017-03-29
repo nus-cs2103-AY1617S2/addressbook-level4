@@ -3,7 +3,7 @@ package typetask.logic.commands;
 public class ListDoneCommand extends Command {
     public static final String COMMAND_WORD = "listdone";
 
-    public static final String MESSAGE_SUCCESS = "Listed all completed tasks";
+    public static final String MESSAGE_SUCCESS = "All completed task(s) listed!";
 
 
     @Override

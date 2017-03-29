@@ -75,6 +75,14 @@ public class Task implements ReadOnlyTask {
     public boolean getIsCompleted() {
         return isCompleted;
     }
+    //@@author A0139154E
+    public String getIsCompletedToString() {
+        if (isCompleted == true) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
 
     /**
      * Updates this task with the details of {@code replacement}.

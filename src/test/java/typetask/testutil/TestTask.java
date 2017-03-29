@@ -56,6 +56,14 @@ public class TestTask implements ReadOnlyTask {
     public boolean getIsCompleted() {
         return isCompleted;
     }
+    //@@author A0139154E
+    public String getIsCompletedToString() {
+        if (isCompleted == true) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
     @Override
     public String toString() {
         return getAsText();
