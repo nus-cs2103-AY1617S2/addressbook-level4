@@ -161,29 +161,17 @@ public class Timing implements Comparable<Timing> {
     //@@author A0163559U
     @Override
     public int compareTo(Timing compareTiming) {
-        boolean thisNull = this.getTiming() == null;
-        boolean otherNull = compareTiming.getTiming() == null;
         int compareToResult = 0;
 
-        if (thisNull && otherNull) {
+        boolean thisTimingSpecified = this.value.equals(TIMING_NOT_SPECIFIED);
+        boolean otherTimingSpecified = compareTiming.value.equals(TIMING_NOT_SPECIFIED);
+
+        if (thisTimingSpecified && otherTimingSpecified) {
             return compareToResult;
-        } else if (thisNull) {
+        } else if (thisTimingSpecified) {
             compareToResult = 1;
-        } else if (otherNull) {
+        } else if (otherTimingSpecified) {
             compareToResult = -1;
-        }
-
-        if (compareToResult == 0) {
-            boolean thisTimingSpecified = this.getTiming().equals(TIMING_NOT_SPECIFIED);
-            boolean otherTimingSpecified = compareTiming.getTiming().equals(TIMING_NOT_SPECIFIED);
-
-            if (thisTimingSpecified && otherTimingSpecified) {
-                return compareToResult;
-            } else if (thisTimingSpecified) {
-                compareToResult = 1;
-            } else if (otherTimingSpecified) {
-                compareToResult = -1;
-            }
         }
 
         if (compareToResult == 0) {
