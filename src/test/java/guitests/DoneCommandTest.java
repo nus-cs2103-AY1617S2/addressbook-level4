@@ -48,8 +48,8 @@ public class DoneCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void done_event_success() {
-        assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+    public void done_success() {
+        assertDoneSuccess(TaskType.EVENT, "e3", currentList);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class DoneCommandTest extends ToDoListGuiTest {
         currentList[testTaskIndex].setIsDone(true);
 
         //Assert taskListPanel correctly shows tasks left undone
-        TestTask[] filteredUndoneList = filterByDoneStatus(currentList, false);
+        TestTask[] filteredUndoneList = TestUtil.getTasksByDoneStatus(currentList, false);
         assertTrue(taskListPanel.isListMatching(taskType, filteredUndoneList));
 
         //confirm the result message is correct
@@ -80,26 +80,7 @@ public class DoneCommandTest extends ToDoListGuiTest {
 
         //Assert taskListPanel correctly shows tasks that are undone
         commandBox.runCommand(ListCommand.COMMAND_WORD + " done");
-        TestTask[] filteredDoneList = filterByDoneStatus(currentList, true);
+        TestTask[] filteredDoneList = TestUtil.getTasksByDoneStatus(currentList, true);
         assertTrue(taskListPanel.isListMatching(taskType, filteredDoneList));
-    }
-
-    private TestTask[] filterByDoneStatus(TestTask[] currentList, boolean isDone) {
-        int numberOfTargetTasks = 0;
-        for (int i = 0; i < currentList.length; i++) {
-            if (currentList[i].getDoneStatus() == isDone) {
-                numberOfTargetTasks++;
-            }
-        }
-
-        TestTask[] filteredList = new TestTask [numberOfTargetTasks];
-        int filteredListIndex = 0;
-        for (int i = 0; i < currentList.length; i++) {
-            if (currentList[i].getDoneStatus() == isDone) {
-                filteredList[filteredListIndex] = currentList[i];
-                filteredListIndex++;
-            }
-        }
-        return filteredList;
     }
 }
