@@ -59,9 +59,6 @@ public class UnmarkCommand extends Command {
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
-
-            } catch (CommandException ce) {
-                throw new CommandException(MESSAGE_STATUS_UNDONE);
             }
 
             tasksUnmarkedMessage.append(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToUnmark) + "\n");
