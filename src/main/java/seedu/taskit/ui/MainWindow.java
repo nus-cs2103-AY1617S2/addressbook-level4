@@ -1,5 +1,8 @@
 package seedu.taskit.ui;
 
+import java.util.List;
+
+import edu.emory.mathcs.backport.java.util.Arrays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -24,10 +27,19 @@ import seedu.taskit.model.task.ReadOnlyTask;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/taskit_icon.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+    
+    private static final short INDEX_HOME = 0;
+    private static final short INDEX_TASK = 1;
+    private static final short INDEX_DEADLINE = 2;
+    private static final short INDEX_EVENT = 3;
+    private static final short INDEX_RECURRING = 4;
+    private static final short INDEX_HELP = 5;
+    
+    private static final List<String> TABS = Arrays.asList(new String[]{ "Home", "Task", "Event", "Deadline", "Recurring"});
 
     private Stage primaryStage;
     private Logic logic;
