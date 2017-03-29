@@ -3,6 +3,9 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
@@ -10,6 +13,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.StartEndDateTime;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
@@ -20,27 +24,49 @@ public class EditCommandTest extends TaskListGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
+    //author A0140023E
+    //TODO not all fields are specified because they cannot
+    // GUI tests are slow, so just check StartEndDateTime here and check Deadline and floating task elsewhere
+    /**
+     * This method tests if editing all fields will be successful. However, StartEndDateTime
+     * cannot exist with Deadline, so Deadline cannot be edited here
+     * @throws Exception
+     */
     @Test
-    public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "CHANGE ME AGAIN t/RMB";
+    public void edit_allFieldsSpecifiedWithStartEndDateTime_success() throws Exception {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Task with start and end date");
+        // A date after today is created so as to not generate a PastDateTimeException.
+        // Date is also truncated to seconds precision as Natty does not parse milliseconds
+        ZonedDateTime startDateTime = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS).plusDays(3);
+        ZonedDateTime endDateTime = startDateTime.plusDays(1);
+        sb.append(" from " + startDateTime);
+        sb.append(" to " + endDateTime);
+        sb.append(" t/IMPT");
+        String detailsToEdit = sb.toString();
+
         int taskListIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("CHANGE ME AGAIN").withTags("RMB").build(); // TODO
+        TestTask editedTask = new TaskBuilder().withName("Task with start and end date")
+                .withStartEndDateTime(new StartEndDateTime(startDateTime, endDateTime)).withTags("IMPT").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+    public void edit_notAllFieldsSpecifiedWithTagsOnly_success() throws Exception {
+        // TODO notice how tags have to be in alphabetical order because of the way tags are added
+        // and compared. See TestUtil::compareCardAndPerson using list compare instead of set compare
+        String detailsToEdit = "t/fail t/lose";
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("fail", "lose").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
+    //@@author
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
