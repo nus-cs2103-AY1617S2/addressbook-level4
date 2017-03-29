@@ -20,9 +20,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     private Description description;
     private Priority priority;
     private ArrayList<RecurringTaskOccurrence> occurrences;
-    //    private Timing startTiming;
-    //    private Timing endTiming;
-    //        private boolean complete;
     private boolean recurring;
     private UniqueTagList tags;
     private RecurringFrequency frequency;
