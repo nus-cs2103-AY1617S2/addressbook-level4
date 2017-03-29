@@ -84,26 +84,15 @@ public class Deadline {
     }
 
     public boolean isWithin(Timeslot timeslot) {
-        System.out.println("In within");
         assert timeslot != null;
         if (!hasDeadline()) {
             return false;
         }
-        System.out.println("=====\n" + timeslot);
-        System.out.println(deadline);
         Date deadlineInDate = getDate().get();
-        if ((deadlineInDate.after(timeslot.start))) {
-            System.out.println("after " + timeslot.start);
-        }
-        if (deadlineInDate.before(timeslot.end)) {
-            System.out.println("before " + timeslot.end);
-        }
         if ((deadlineInDate.after(timeslot.start))
                 && (deadlineInDate.before(timeslot.end))) {
-            System.out.println("true");
             return true;
         } else {
-            System.out.println("false");
             return false;
         }
     }
