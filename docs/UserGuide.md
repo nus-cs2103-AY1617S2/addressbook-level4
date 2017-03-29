@@ -274,6 +274,19 @@ Below is a list of shortcut keys for some of the above commands:
 > * unmark: `um`, `uncheck`
 > * find: `f`, `search`
 
+### 2.15 Customize alternative commands: `shortcut`
+
+You can add and delete your own personal shortcut keys to the various commands.
+Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature)
+        `shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY)
+        
+> SHORTCUT_KEY can be any character except whitespace. 
+> Unfortunately, special keys (eg. F1, SHIFT, CTRL etc) are not supported. :(
+
+Examples: 
+* shortcut + add @@
+* shortcut + undo z
+* shortcut - undo z
 
 ## 3. FAQ
 
