@@ -48,7 +48,6 @@ public class EditLabelCommand extends Command {
             throw new CommandException(MESSAGE_LABEL_NOT_EXIST);
         }
 
-        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, labelToChange, newLabel));
     }
 

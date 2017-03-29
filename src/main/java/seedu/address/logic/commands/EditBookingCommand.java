@@ -81,7 +81,6 @@ public class EditBookingCommand extends Command {
                 throw new CommandException(MESSAGE_NO_SUCH_BOOKING);
             }
 
-            model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, filteredTaskListIndex + 1));
         } catch (DuplicateBookingException e) {
             throw new CommandException(e.getMessage());
