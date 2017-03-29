@@ -255,6 +255,10 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
+    public void setFocus() {
+        commandBox.requestFocus();
+    }
+    
 //    void loadTaskPage(ReadOnlyTask task) {
 //        browserPanel.loadTaskPage(task);
 //    }

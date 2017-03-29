@@ -58,13 +58,15 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Eat");
+        expectedTasksList = new TestTask[1];
+        expectedTasksList[0] = td.eat;
 
-        String detailsToEdit = "Buy";
+        String detailsToEdit = "Eat lunch with Bob";
         int filteredTaskListIndex = 1; // index of the task in the list returned by the find command
-        int taskManagerIndex = 2; // index of the task in the original list
+        int taskManagerIndex = 1; // index of the task in the original list
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Buy").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Eat lunch with Bob").build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }

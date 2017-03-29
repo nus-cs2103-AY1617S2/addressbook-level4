@@ -3,7 +3,9 @@ package seedu.task.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.Messages;
+import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
@@ -70,6 +72,8 @@ public class EditCommand extends Command {
             throw new CommandException(Task.MESSAGE_TASK_CONSTRAINTS);
         }
 //        model.updateFilteredListToShowAll();
+
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
