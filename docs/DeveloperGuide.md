@@ -68,7 +68,7 @@
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/jobs/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connect them up with each other.
 * At shut down: Shuts down the components and invoke cleanup method where necessary.
 
@@ -99,7 +99,7 @@ command `delete 1`.
 
 <img src="images\SDforDeletePerson.png" width="800">
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskBookChangedEvent` when the JOBS data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -116,15 +116,15 @@ The sections below give more details of each component.
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/jobs/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
+`StatusBarFooter`, `CalendarPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
 and they can be loaded using the `UiPartLoader`.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/jobs/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -136,11 +136,11 @@ The `UI` component,
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/jobs/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -151,12 +151,12 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/jobs/model/Model.java)
 
 The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the JOBS data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -164,7 +164,7 @@ The `Model`,
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/jobs/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
@@ -172,7 +172,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.jobs.commons` package.
 
 ## Implementation
 
@@ -221,13 +221,13 @@ We have two types of tests:
   
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.jobs.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units 
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.jobs.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as 
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.jobs.logic.LogicManagerTest`
   
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -266,7 +266,7 @@ Here are the steps to create a new release.
    
 ### Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, JOBS depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -310,7 +310,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `BucketList` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `JOBS` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: 
 
@@ -319,13 +319,13 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User types in the task that he/she wishes to be included in the task reminder
-2. BucketList informs the user that the task has been included in the task reminder
+2. System informs the user that the task has been included in the task reminder
 Use case ends.  
  
 **Extensions**
 User enters the wrong task format
-BucketList shows the expected task format
-BucketList prompts user to re-enter the task 
+JOBS shows the expected task format
+JOBS prompts user to re-enter the task 
 
 
 > Use case ends
@@ -335,14 +335,14 @@ BucketList prompts user to re-enter the task
 **MSS**
 
 1. User types in the kind of task that he wants to list
-2. BucketList outputs all the information with regards to the task the user queries
+2. System outputs all the information with regards to the task the user queries
 
 **Extensions**
 User enters the wrong task format
-BucketList shows the expected task format
-BucketList prompts user to re-enter the task
+System shows the expected task format
+System prompts user to re-enter the task
 The specific task name or filter cannot be found
-BucketList informs the user that the specific task/filter cannot be found
+System informs the user that the specific task/filter cannot be found
 
 
 >Use case ends.  
@@ -352,31 +352,31 @@ BucketList informs the user that the specific task/filter cannot be found
 **MSS**
 
 1. User chooses to update a task
-2. BucketList requests for task selection.
+2. System requests for task selection.
 3. User selects the task.
-4. BucketList requests for details of the update.
+4. System requests for details of the update.
 5. User enters the requested details.
-6. BucketList requests for confirmation.
+6. System requests for confirmation.
 7. User confirms update.
-8. BucketList update the selected task and displays the updated task’s information.
+8. System updates the selected task and displays the updated task’s information.
 Use case ends.  
 
 **Extensions**  
 3a. The input task cannot be found.
-	3a1. BucketList requests for creating new task.
-	3a2. BucketList confirms creating new task.
-	3a3. BucketList creates a new task. (UC01)
+	3a1. System requests for creating new task.
+	3a2. System confirms creating new task.
+	3a3. System creates a new task. (UC01)
 
-5a. BucketList detects an error in the entered data.
-	5a1. BucketList requests for the correct data.
+5a. System detects an error in the entered data.
+	5a1. System requests for the correct data.
 	5a2. User enters new data.
 Step 5a1-5a2 are repeated until the data entered are correct.
 Use case resumes from step 6.
 
 * a. At  any time, user chooses to cancel the update
-	*a1. BucketList requests to confirm the cancellation.
+	*a1. System requests to confirm the cancellation.
 	*a2. User confirms the cancellation.
-	*a3. BucketList discards all the changes.
+	*a3. System discards all the changes.
 
 >Use case ends.
 
@@ -387,15 +387,15 @@ Use case resumes from step 6.
 **MSS**
 
 1. User chooses to delete a specified task.
-2. BucketList requests for confirmation.
+2. System requests for confirmation.
 3. User confirms deletion
-4. BucketList delete the selected task and displays the updated list of task.
+4. System delete the selected task and displays the updated list of task.
 Use case ends.  
 
 **Extensions**
 
 1a. The specified task cannot be found.
-	1a1. BucketList shows an error message.
+	1a1. System shows an error message.
 	Use case ends
 
 
