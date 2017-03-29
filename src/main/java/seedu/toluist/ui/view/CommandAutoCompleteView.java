@@ -36,12 +36,10 @@ public class CommandAutoCompleteView extends UiView {
 
     @Override
     protected void viewDidMount() {
-
         suggestedCommandList.getChildren().clear();
-
         UiStore store = UiStore.getInstance();
         ObservableList<String> observableSuggestedCommands = store.getObservableSuggestedCommands();
-
+        getRoot().setVisible(!observableSuggestedCommands.isEmpty());
         for (int i = 0; i < observableSuggestedCommands.size(); i++) {
             addCommandSuggestion(observableSuggestedCommands.get(i), i);
         }
