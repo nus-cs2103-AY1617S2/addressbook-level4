@@ -12,6 +12,7 @@ import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
+import seedu.task.logic.commands.FindDateCommand;
 import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.GetGoogleCalendarCommand;
 import seedu.task.logic.commands.HelpCommand;
@@ -36,6 +37,7 @@ import seedu.task.logic.parser.DoneCommandParser;
 import seedu.task.logic.parser.EditCommandParser;
 import seedu.task.logic.parser.ExitCommandParser;
 import seedu.task.logic.parser.FindCommandParser;
+import seedu.task.logic.parser.FindDateParser;
 import seedu.task.logic.parser.FindExactCommandParser;
 import seedu.task.logic.parser.GetGoogleCalendarCommandParser;
 import seedu.task.logic.parser.HelpCommandParser;
@@ -76,7 +78,7 @@ public class CommandLibrary {
         commandParserTable =  new HashMap<>();
         // TODO Auto-generated method stub
         commandParserTable.put(AddCommand.COMMAND_WORD_1, new AddCommandParser());
-
+        
         commandParserTable.put(ClearCommand.COMMAND_WORD_1, new ClearCommandParser());
 
         commandParserTable.put(DeleteCommand.COMMAND_WORD_1, new DeleteCommandParser());
@@ -90,6 +92,8 @@ public class CommandLibrary {
 
         commandParserTable.put(FindCommand.COMMAND_WORD_1, new FindCommandParser());
         commandParserTable.put(FindCommand.COMMAND_WORD_2, new FindCommandParser());
+
+        commandParserTable.put(FindDateCommand.COMMAND_WORD_1, new FindDateParser());
 
         commandParserTable.put(FindExactCommand.COMMAND_WORD_1, new FindExactCommandParser());
         commandParserTable.put(FindExactCommand.COMMAND_WORD_2, new FindExactCommandParser());
