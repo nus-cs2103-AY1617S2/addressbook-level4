@@ -2,6 +2,7 @@
 
 package seedu.taskit.model.task;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang.time.DateUtils;
@@ -128,7 +129,21 @@ public class Date {
         }
         return false;
     }
-    //@@author
+    
+    //@@author A0097141H
+    public boolean isDateEqualsDate(Date other) {
+    	
+    	return date != null && DateUtils.isSameDay(date, other.date);
+    }
+    
+    public boolean isMonthEqualsMonth(Date other) {
+    	Calendar c1 = Calendar.getInstance();
+    	c1.setTime(date);
+    	Calendar c2 = Calendar.getInstance();
+    	c2.setTime(other.date);
+    	
+    	return date != null && c1.get(Calendar.MONTH)==c2.get(Calendar.MONTH);
+    }
 
     @Override
     public int hashCode() {

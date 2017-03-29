@@ -53,16 +53,20 @@ public interface ReadOnlyTask {
      * Stringifies title and tags
      * @return lowercase String with title and tags for easy string matching
      */
-    default String toStringTitleAndTagList() {
-    	String titleAndTagString = getTitle().title + " ";
+
+    default String toStringTitleTagAndDateList() {
+    	String titleTagAndDateString = getTitle().title + " ";
     	final StringBuilder builder = new StringBuilder();
     	builder.append(getTitle()).append(" ");
+    	//builder.append(getStart()).append(" ");
+    	//builder.append(getEnd()).append(" ");
     	getTags().iterator().forEachRemaining(builder::append);
+    	//System.out.println("Date is: " + getEnd().toString());
     	
-    	titleAndTagString = builder.toString();
-    	titleAndTagString = titleAndTagString.replace('[', ' ').replace(']', ' ');
-    	
-    	return titleAndTagString.toLowerCase();
+    	titleTagAndDateString = builder.toString();
+    	titleTagAndDateString = titleTagAndDateString.replace('[', ' ').replace(']', ' ');
+
+    	return titleTagAndDateString.toLowerCase();
     }
     
 

@@ -3,13 +3,23 @@ package seedu.taskit.model;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.time.DateUtils;
+
+import edu.emory.mathcs.backport.java.util.Arrays;
+import edu.emory.mathcs.backport.java.util.Collections;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Calendar;
 import javafx.collections.transformation.FilteredList;
 import seedu.taskit.commons.core.ComponentManager;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.core.UnmodifiableObservableList;
 import seedu.taskit.commons.events.model.AddressBookChangedEvent;
+import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.commons.util.CollectionUtil;
 import seedu.taskit.commons.util.StringUtil;
+import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
@@ -149,15 +159,57 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-        			// might not need this first boolean
-        	return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.toStringTitleAndTagList(), keyword.toLowerCase()))
+        	
+        	
+        	String[] monthsArr = {"january", "jan", "february", "feb", "march", "mar", "april", "apr", "may", "june", "jun",
+        							"july", "jul", "august", "aug", "september", "sept", "sep", "october", "oct", 
+        							"november", "nov", "december", "dec"};
+        	ArrayList<String> months = new ArrayList<String>() ;
+        	Collections.addAll(months, monthsArr);
+        	//filter by date to see if searching for date
+        	
+        	
+        	
+        	return 
+        			nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.toStringTitleTagAndDateList(), keyword.toLowerCase()))
                     .findAny()
                     .isPresent() |                    
                     nameKeyWords.stream()
-                    .filter(keyword -> task.toStringTitleAndTagList().contains(keyword.toLowerCase()))
+                    .filter(keyword -> task.toStringTitleTagAndDateList().contains(keyword.toLowerCase()))
                     .findAny()
-                    .isPresent();
+                   .isPresent() |
+                   
+                    //this is to find if keywords match dates
+        			
+        			 nameKeyWords.stream()
+        	        	.filter(k -> months.contains(k.toLowerCase()))
+        	        	.filter(k -> {
+        					try {
+        						return (new Date(k)).isMonthEqualsMonth(task.getEnd());
+        					} catch (IllegalValueException | NullPointerException e1) {
+        						//e1.printStackTrace();
+        						return false;
+        					}
+        				})
+        	        	.findAny()
+        	        	.isPresent() |
+        			
+                    nameKeyWords.stream()
+                    .filter(keyword -> {
+						try {
+							System.out.println("taskDate is: " + task.getEnd().toString());
+							System.out.println("date is " + (new Date(keyword)).toString() + " " + task.getEnd().isDateEqualsDate(new Date(keyword)));
+							return task.getEnd().isDateEqualsDate(new Date(keyword)) | task.getStart().isDateEqualsDate(new Date(keyword));
+						} catch (IllegalValueException e) {
+							//e.printStackTrace();
+							System.out.println("Illegal value thrown");
+							return false;
+						}
+					})
+                    .findAny()
+                    .isPresent()
+                    ;
         }
 
         @Override
