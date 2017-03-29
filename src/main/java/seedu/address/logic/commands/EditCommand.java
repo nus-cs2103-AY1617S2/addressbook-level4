@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
@@ -13,6 +15,8 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartEndDateTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.exceptions.InvalidDurationException;
+import seedu.address.model.task.exceptions.PastDateTimeException;
 
 /**
  * Edits the details of an existing task in the task list.
@@ -47,8 +51,11 @@ public class EditCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        // TODO if we don't know which index, we don't know if date is past date, and if we don't know if date
+        // is past date we can't construct it
     }
 
+    //@@author A0140023E
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -58,7 +65,29 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        //Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        try {
+            editTaskDescriptor.processFields(taskToEdit);
+        } catch (PastDateTimeException e) {
+            throw new CommandException(e.getMessage());
+        } catch (InvalidDurationException e) {
+            throw new CommandException(e.getMessage());
+        } catch (IllegalValueException e) {
+            throw new CommandException(e.getMessage());
+        }
+
+        // TODO convert to exception like a NoFieldEditedException
+        if (!this.editTaskDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        Name updatedName = editTaskDescriptor.getUpdatedName();
+        Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline(); // getUpdatedDeadline
+        // getUpdatedStartEndDateTime
+        Optional<StartEndDateTime> updatedStartEndDateTime = editTaskDescriptor.getStartEndDateTime();
+        UniqueTagList updatedTagList = editTaskDescriptor.getUpdatedTagList();
+
+        Task editedTask = new Task(updatedName, updatedDeadline, updatedStartEndDateTime, updatedTagList);
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -69,7 +98,6 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
-    //@@author A0140023E
     /**
      * Creates and returns a {@link Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
@@ -105,6 +133,23 @@ public class EditCommand extends Command {
     private static Optional<Deadline> getUpdatedDeadline(ReadOnlyTask taskToEdit,
                                                          EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null && editTaskDescriptor != null;
+
+        Optional<Deadline> deadline = taskToEdit.getDeadline();
+
+        if (deadline.isPresent()) {
+            try {
+                return ParserUtil.parseEditedDeadline(editTaskDescriptor.getRawDeadline(), deadline.get());
+            } catch (PastDateTimeException e) {
+                System.out.println("We need to rehandle past date");
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalValueException e) {
+                System.out.println("We need to rehandle illegal date");
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
 
         if (editTaskDescriptor.getDeadline().isPresent()) {
             // Wrap the deadline from editTaskDescriptor with a new Optional
@@ -143,7 +188,6 @@ public class EditCommand extends Command {
         return editTaskDescriptor.getTagList().orElseGet(taskToEdit::getTags);
     }
 
-    //@@author
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
@@ -154,19 +198,63 @@ public class EditCommand extends Command {
         private Optional<StartEndDateTime> startEndDateTime = Optional.empty();
         private Optional<UniqueTagList> tagList = Optional.empty();
 
+        private Optional<String> rawDeadline;
+        private Optional<String> rawStartDateTime;
+        private Optional<String> rawEndDateTime;
+
+        private Name updatedName;
+        private UniqueTagList updatedTagList;
+
         public EditTaskDescriptor() {}
+
+        public void processFields(ReadOnlyTask taskToEdit)
+                throws PastDateTimeException, InvalidDurationException, IllegalValueException {
+
+            updatedName = getName().orElseGet(taskToEdit::getName);
+
+            if (getRawDeadline().isPresent()) {
+                if (taskToEdit.getDeadline().isPresent()) {
+                    // Bubble up the exception
+                    deadline = ParserUtil.parseEditedDeadline(getRawDeadline(), taskToEdit.getDeadline().get());
+                } else {
+                    deadline = ParserUtil.parseNewDeadline(getRawDeadline());
+                }
+            } else {
+                deadline = taskToEdit.getDeadline();
+            }
+
+            if (getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent()) {
+                if (taskToEdit.getStartEndDateTime().isPresent()) {
+                    startEndDateTime =
+                            ParserUtil.parseEditedStartEndDateTime(getRawStartDateTime(), getRawEndDateTime(),
+                                    taskToEdit.getStartEndDateTime().get());
+                } else {
+                    startEndDateTime =
+                            ParserUtil.parseNewStartEndDateTime(getRawStartDateTime(), getRawEndDateTime());
+                }
+            } else {
+                startEndDateTime = taskToEdit.getStartEndDateTime();
+            }
+            updatedTagList = getTagList().orElseGet(taskToEdit::getTags);
+
+        }
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             name = toCopy.getName();
             deadline = toCopy.getDeadline();
             startEndDateTime = toCopy.getStartEndDateTime();
             tagList = toCopy.getTagList();
+
+            rawDeadline = toCopy.getRawDeadline();
+            rawStartDateTime = toCopy.getRawStartDateTime();
+            rawEndDateTime = toCopy.getRawEndDateTime();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
+            // TODO note that we ignore raw fields because they are not important
             return CollectionUtil.isAnyPresent(name, deadline, startEndDateTime, tagList);
         }
 
@@ -179,22 +267,49 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setDeadline(Optional<Deadline> deadline) {
-            assert deadline != null;
-            this.deadline = deadline;
-        }
-
+        // get updated
         public Optional<Deadline> getDeadline() {
             return deadline;
         }
-
-        public void setStartEndDateTime(Optional<StartEndDateTime> startEndDateTime) {
-            assert startEndDateTime != null;
-            this.startEndDateTime = startEndDateTime;
-        }
-
+        // get updated
         public Optional<StartEndDateTime> getStartEndDateTime() {
             return startEndDateTime;
+        }
+
+
+        public void setRawDeadline(Optional<String> rawDeadline) {
+            this.rawDeadline = rawDeadline;
+            // TODO Auto-generated method stub
+
+        }
+
+        public void setRawStartDateTime(Optional<String> value) {
+            rawStartDateTime = value;
+            // TODO Auto-generated method stub
+
+        }
+
+        public void setRawEndDateTime(Optional<String> value) {
+            rawEndDateTime = value;
+            // TODO Auto-generated method stub
+
+        }
+
+        public Optional<String> getRawDeadline() {
+            return rawDeadline;
+        }
+
+        public Optional<String> getRawStartDateTime() {
+            return rawStartDateTime;
+        }
+
+        public Optional<String> getRawEndDateTime() {
+            return rawEndDateTime;
+        }
+
+
+        public Optional<UniqueTagList> getTagList() {
+            return tagList;
         }
 
         public void setTagList(Optional<UniqueTagList> tags) {
@@ -202,8 +317,13 @@ public class EditCommand extends Command {
             this.tagList = tags;
         }
 
-        public Optional<UniqueTagList> getTagList() {
-            return tagList;
+        public Name getUpdatedName() {
+            return updatedName;
         }
+
+        public UniqueTagList getUpdatedTagList() {
+            return updatedTagList;
+        }
+
     }
 }
