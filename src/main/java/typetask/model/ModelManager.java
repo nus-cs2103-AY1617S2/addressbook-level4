@@ -237,7 +237,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class CompleteQualifier implements Qualifier {
         private boolean showComplete;
 
