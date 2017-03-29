@@ -19,21 +19,17 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
 public class AddCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_DESCRIPTION, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_DESCRIPTION,
+                PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
-            return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_STARTDATE).orElse(""),
-                    argsTokenizer.getValue(PREFIX_ENDDATE).orElse(""),
-                    argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-            );
+            return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_STARTDATE),
+                    argsTokenizer.getValue(PREFIX_ENDDATE), argsTokenizer.getValue(PREFIX_DESCRIPTION),
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {

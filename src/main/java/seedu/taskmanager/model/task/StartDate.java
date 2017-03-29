@@ -32,7 +32,6 @@ public class StartDate extends Date {
     }
 
     private static long startDateConstructor(String startDate) throws IllegalValueException {
-        assert startDate != null;
         try {
             if (!isValidStartDate(startDate)) {
                 throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
