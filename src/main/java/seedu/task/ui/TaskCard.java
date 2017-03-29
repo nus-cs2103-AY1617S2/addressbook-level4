@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.task.MainApp;
+import seedu.task.model.tag.TagColorMap;
 import seedu.task.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -62,6 +63,12 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        task.getTags().forEach(tag -> tags.getChildren().add(createLabel(tag.tagName, TagColorMap.getColor(tag.tagName))));
+    }
+    
+    private Label createLabel(String tagName, String color) {
+    	Label tag = new Label(tagName);
+    	tag.setStyle("-fx-background-color: " + color);
+    	return tag;
     }
 }
