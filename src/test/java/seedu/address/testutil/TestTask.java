@@ -127,4 +127,8 @@ public class TestTask implements ReadOnlyTask {
     public UniqueBookingList getBookings() {
         return bookings;
     }
+
+    public void setBookings(UniqueBookingList uniqueBookingList) {
+        bookings = uniqueBookingList;
+    }
 }
