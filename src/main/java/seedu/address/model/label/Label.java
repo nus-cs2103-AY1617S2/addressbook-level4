@@ -1,6 +1,5 @@
 package seedu.address.model.label;
 
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 //@@author A0140042A
