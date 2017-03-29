@@ -27,8 +27,7 @@ Responsibilities: Storage, Model
 
 #### [Brandon Tan Jian Sin](http://github.com/BrandonTJS)
 <img src="images/brandontjs.jpg" width="150"><br>
-Role: Code Quality, Integration, Git Expert <br>
-Responsibilities: Logic
+
 * Components in charge of: [Logic](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
 * Aspects/tools in charge of: Git, Code Quality, Integration
 * Features implemented:
