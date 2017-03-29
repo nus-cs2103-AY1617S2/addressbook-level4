@@ -25,6 +25,9 @@ public class StoreController extends Controller {
 
     public static final String RESULT_MESSAGE_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
 
+    private static final String HELP_DETAILS = "Changes the location for the storage file used in this system.";
+    private static final String HELP_FORMAT = "save NEWFILELOCATION";
+
     public void execute(String command) {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
@@ -71,5 +74,14 @@ public class StoreController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

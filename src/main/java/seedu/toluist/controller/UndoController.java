@@ -21,6 +21,9 @@ public class UndoController extends Controller {
     private static final String PARAMETER_UNDO_TIMES = "number";
     private static final String RESULT_MESSAGE_TEMPLATE = "Your last %s to the data %s undone.";
 
+    private static final String HELP_DETAILS = "Undoes previous commands by the user.";
+    private static final String HELP_FORMAT = "undo [NUMBER]";
+
     private static final Logger logger = LogsCenter.getLogger(UndoController.class);
 
     public void execute(String command) {
@@ -57,5 +60,14 @@ public class UndoController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

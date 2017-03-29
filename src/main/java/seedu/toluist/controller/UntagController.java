@@ -33,6 +33,9 @@ public class UntagController extends Controller {
     private static final String MESSAGE_TEMPLATE_FAIL = "Failed to remove \"%s\".\n";
     private static final String MESSAGE_TEMPLATE_RESULT = "%s%s successfully removed.";
 
+    private static final String HELP_DETAILS = "Removes a tag or multiple tags from an existing task.";
+    private static final String HELP_FORMAT = "untag INDEX TAG(S)";
+
     private static final Logger logger = LogsCenter.getLogger(UntagController.class);
 
     public void execute(String command) {
@@ -117,5 +120,13 @@ public class UntagController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_UNTAG_WORD };
+    }
+
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

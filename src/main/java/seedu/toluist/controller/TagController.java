@@ -33,6 +33,9 @@ public class TagController extends Controller {
     private static final String MESSAGE_TEMPLATE_FAIL = "Failed to add \"%s\".\n";
     private static final String MESSAGE_TEMPLATE_RESULT = "%s%s successfully added.";
 
+    private static final String HELP_DETAILS = "Adds a tag(s) to an existing task.";
+    private static final String HELP_FORMAT = "tag INDEX TAG(S)";
+
     private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
     public void execute(String command) {
@@ -101,5 +104,13 @@ public class TagController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_TAG_WORD };
+    }
+
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

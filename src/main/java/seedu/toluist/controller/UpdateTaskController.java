@@ -42,6 +42,9 @@ public class UpdateTaskController extends Controller {
     private static final String RESULT_MESSAGE_ERROR_CLONING_ERROR =
             "Bad things happened and we have no idea why! Please contact the administrators.";
 
+    private static final String HELP_DETAILS = "Updates an existing task in the todo list.";
+    private static final String HELP_FORMAT = "update INDEX [NAME] [from/STARTDATE to/ENDDATE] [by/ENDDATE] [repeat/PERIOD(daily/weekly/monthly)] [priority/PRIORITY(high/low)] [tags/TAGS]";
+
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
     public void execute(String command) {
@@ -201,5 +204,14 @@ public class UpdateTaskController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_UPDATE_TASK };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }

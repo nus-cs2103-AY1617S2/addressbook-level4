@@ -27,6 +27,9 @@ public class SwitchController extends Controller {
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*switch(\\s+(?<tab>\\S+))?\\s*";
     private SwitchConfig switchConfig = SwitchConfig.getDefaultSwitchConfig();
 
+    private static final String HELP_DETAILS = "Changes the displayed task list.";
+    private static final String HELP_FORMAT = "switch WINDOWIDENTIFIER";
+
     public void execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
         String keyword = tokens.get(PARAMETER_TAB);
@@ -72,5 +75,14 @@ public class SwitchController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[] getDetailedHelp() {
+        return getBasicHelp();
     }
 }
