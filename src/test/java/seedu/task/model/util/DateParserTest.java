@@ -48,7 +48,6 @@ public class DateParserTest {
         assertFalse(DateParser.isValidDate(2017, 0, 0, 0, 0));
         assertFalse(DateParser.isValidDate(2017, 0, 32, 0, 0));
         assertFalse(DateParser.isValidDate(2017, 5, 31, 0, 0));
-        assertFalse(DateParser.isValidDate(2017, 1, 29, 0, 0));
         assertFalse(DateParser.isValidDate(2017, 0, 1, -1, 0));
         assertFalse(DateParser.isValidDate(2017, 0, 1, 24, 0));
         assertFalse(DateParser.isValidDate(2017, 0, 1, 0, -1));
