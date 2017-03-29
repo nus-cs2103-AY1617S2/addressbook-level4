@@ -186,9 +186,9 @@ public class LogicManagerTest {
 
     @Test
     public void executeAddInvalidTaskData() {
-        assertCommandFailure("add [!*^]\\[] ;HighPriority",
+        assertCommandFailure("add [!*^]\\[] t/HighPriority",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Task ;invalid_-[.tag",
+        assertCommandFailure("add Valid Task t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -412,8 +412,11 @@ public class LogicManagerTest {
             cmd.append(p.getName().toString());
 
             UniqueTagList tags = p.getTags();
+            if (tags.iterator().hasNext()) {
+                cmd.append("t/");
+            }
             for (Tag t: tags) {
-                cmd.append(" ;").append(t.tagName);
+                cmd.append(t.tagName+" ");
             }
 
             return cmd.toString();

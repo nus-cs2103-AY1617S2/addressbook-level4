@@ -1,5 +1,6 @@
 package seedu.tache.testutil;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
@@ -91,13 +92,17 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         if (this.getStartDateTime().isPresent()) {
-            sb.append("; " + this.getStartDateTime().get().getDate());
+            sb.append(" from " + sdf.format(this.getStartDateTime().get().getDate()));
         }
         if (this.getEndDateTime().isPresent()) {
-            sb.append("; " + this.getEndDateTime().get().getDate());
+            sb.append(" to " + sdf.format(this.getEndDateTime().get().getDate()));
         }
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("; " + s.tagName + " "));
+        if (this.getTags().iterator().hasNext()) {
+            sb.append(" t/");
+        }
+        this.getTags().asObservableList().stream().forEach(s -> sb.append(s.tagName + " "));
         return sb.toString();
     }
 
