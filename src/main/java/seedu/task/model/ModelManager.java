@@ -157,19 +157,23 @@ public class ModelManager extends ComponentManager implements Model {
                 final int finalIndex = i;
                 if (
                         (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getDescription().description, keyword))
                                 .findAny()
                                 .isPresent()) ||
                         (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getPriority().value, keyword))
                                 .findAny()
                                 .isPresent()) ||
                         (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getOccurrences().get(finalIndex).getStartTiming().value, keyword))
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getOccurrences().get(finalIndex).getStartTiming().value, keyword))
                                 .findAny()
                                 .isPresent()) ||
                         (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getOccurrences().get(finalIndex).getEndTiming().value, keyword))
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getOccurrences().get(finalIndex).getEndTiming().value, keyword))
                                 .findAny()
                                 .isPresent())) {
                     occurrenceIndexList.add(i);

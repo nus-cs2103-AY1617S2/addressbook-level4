@@ -158,7 +158,8 @@
 //
 //    @Override
 //    public String toString() {
-//        return recurringTasks.asObservableList().size() + " recurringTasks, " + tags.asObservableList().size() +  " tags";
+//        return recurringTasks.asObservableList().size() + " recurringTasks, " +
+//  tags.asObservableList().size() +  " tags";
 //        // TODO: refine later
 //    }
 //

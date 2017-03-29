@@ -74,6 +74,12 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
+    public Timing getStartTiming(int i) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public Timing getEndTiming() {
         return endDate;
     }
@@ -131,12 +137,6 @@ public class TestPerson implements ReadOnlyTask {
     public void setEndTiming(Timing endTiming) {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public Timing getStartTiming(int i) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override

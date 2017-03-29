@@ -33,8 +33,7 @@ public class RecurringFrequency {
                 throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
             }
             this.frequency = trimmedFrequency;
-        }
-        else {
+        } else {
             this.frequency = NULL_FREQUENCY;
         }
     }

@@ -26,7 +26,8 @@
 //    /**
 //     * Every field must be present and not null.
 //     */
-//    public RecurringTask(Description description, Priority priority, Timing startTiming, Timing endTiming, UniqueTagList tags, RecurringFrequency frequency) {
+//    public RecurringTask(Description description, Priority priority, Timing startTiming,
+//                          Timing endTiming, UniqueTagList tags, RecurringFrequency frequency) {
 //        assert !CollectionUtil.isAnyNull(description, priority, startTiming, tags, frequency);
 //        this.description = description;
 //        this.priority = priority;
