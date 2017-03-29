@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import seedu.opus.model.task.ReadOnlyTask;
 
-//@author A0148081H
+//@@author A0148081H
 public class PriorityComparator implements Comparator<ReadOnlyTask> {
     public int compare(ReadOnlyTask p1, ReadOnlyTask p2) {
         boolean bothHavePriority = p1.getPriority().isPresent() && p2.getPriority().isPresent();

@@ -9,7 +9,7 @@ import seedu.opus.logic.commands.Command;
 import seedu.opus.logic.commands.IncorrectCommand;
 import seedu.opus.logic.commands.SortCommand;
 
-//@author A0148081H-reused
+//@@author A0148081H-reused
 /**
  * Parses input arguments and creates a new SortCommand object
  */

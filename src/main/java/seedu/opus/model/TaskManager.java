@@ -166,12 +166,12 @@ public class TaskManager implements ReadOnlyTaskManager {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
-    //@author A0148081H
+    //@@author A0148081H
     @Override
     public ObservableList<ReadOnlyTask> getSortedList(String keyword) {
         return new UnmodifiableObservableList<>(tasks.asSortedList(keyword));
     }
-    //@author
+    //@@author
 
     @Override
     public ObservableList<Tag> getTagList() {

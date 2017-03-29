@@ -124,7 +124,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return new UnmodifiableObservableList<>(internalList);
     }
-    //@author
+    //@@author
 
     @Override
     public Iterator<Task> iterator() {
