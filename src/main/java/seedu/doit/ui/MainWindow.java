@@ -225,4 +225,29 @@ public class MainWindow extends UiPart<Region> {
         return this.fListPanel;
     }
 
+    /**
+     *
+     * Handle scrollTo in different lists
+     */
+    public void scrollTo(int index) {
+        if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
+                && task.hasEndTime() /*&& !task.getIsDone()*/).size()) {
+            this.taskListPanel.scrollTo(index);
+            this.eventListPanel.clearSelection();
+            this.fListPanel.clearSelection();
+        } else if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
+                && task.hasEndTime()).size() + this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
+                && task.hasEndTime() /*&& !task.getIsDone()*/).size()) {
+            this.eventListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
+                    && task.hasEndTime() /*&& !task.getIsDone()*/).size());
+            this.taskListPanel.clearSelection();
+            this.fListPanel.clearSelection();
+        } else {
+            this.fListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
+                    && task.hasEndTime()).size() - this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
+                            && task.hasEndTime() /*&& !task.getIsDone()*/).size());
+            this.eventListPanel.clearSelection();
+            this.taskListPanel.clearSelection();
+        }
+    }
 }

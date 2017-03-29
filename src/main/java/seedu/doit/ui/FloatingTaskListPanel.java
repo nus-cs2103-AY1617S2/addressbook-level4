@@ -57,6 +57,10 @@ public class FloatingTaskListPanel extends UiPart<Region> {
             });
     }
 
+    protected void clearSelection() {
+        this.floatingTaskListView.getSelectionModel().clearSelection();
+    }
+
     public void scrollTo(int index) {
         Platform.runLater(() -> {
             this.floatingTaskListView.scrollTo(index);

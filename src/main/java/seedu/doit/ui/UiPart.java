@@ -30,10 +30,10 @@ public abstract class UiPart<T> {
      */
     public UiPart(URL fxmlFileUrl) {
         assert fxmlFileUrl != null;
-        fxmlLoader = new FXMLLoader(fxmlFileUrl);
-        fxmlLoader.setController(this);
+        this.fxmlLoader = new FXMLLoader(fxmlFileUrl);
+        this.fxmlLoader.setController(this);
         try {
-            fxmlLoader.load();
+            this.fxmlLoader.load();
         } catch (IOException e) {
             throw new AssertionError(e);
         }
@@ -52,7 +52,7 @@ public abstract class UiPart<T> {
      * Returns the root object of the scene graph of this UiPart.
      */
     public T getRoot() {
-        return fxmlLoader.getRoot();
+        return this.fxmlLoader.getRoot();
     }
 
     /**
