@@ -47,7 +47,7 @@ public class Recurrence {
 
     @Override
     public String toString() {
-        return "Every " + interval;
+        return value + " " + interval;
     }
 
     @Override
