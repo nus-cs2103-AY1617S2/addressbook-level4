@@ -53,8 +53,6 @@
                      <children>
                         <Label fx:id="date" styleClass="cell_small_label" text="\$date" GridPane.rowIndex="1" />
                         <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="time" styleClass="cell_small_label" text="\$time" GridPane.rowIndex="2" />
-                        <Label fx:id="endTime" styleClass="cell_small_label" text="\$endTime" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <padding>
                         <Insets left="500.0" />
