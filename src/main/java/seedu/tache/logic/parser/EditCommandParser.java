@@ -21,6 +21,7 @@ import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER_2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -66,30 +67,60 @@ public class EditCommandParser {
             argsInProcess = argsInProcess.substring(indexOfIndex + new String("" +  index.get()).length());
 
             //Process Other Arguments
-            while (argsInProcess.length() > 0) {
-                int indexOfFirstAndChange = argsInProcess.indexOf("and change");
-                if (indexOfFirstAndChange == -1) {
-                    //Single parameter change
-                    int indexOfFirstChange = argsInProcess.indexOf("change ");
+            int indexOfFirstAndChange = argsInProcess.indexOf(" and change ");
+            if (indexOfFirstAndChange == -1) {
+                //Single parameter edit
+                int indexOfFirstChange = argsInProcess.indexOf(" change ");
+                int indexOfFirstTo = argsInProcess.indexOf(" to ");
+                if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
+                    String updateParameter = argsInProcess.substring(indexOfFirstChange
+                            + new String(" change ").length(), indexOfFirstTo);
+                    String updateValue = argsInProcess.substring(indexOfFirstTo + new String(" to ").length());
+                    return processStructuredArguments(index.get() + PARAMETER_DELIMITER + updateParameter
+                                                        + EDIT_PARAMETER_DELIMITER + updateValue);
+                } else {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            EditCommand.NATURAL_MESSAGE_USAGE));
+                }
+            } else {
+                //Multi parameter edit
+                ArrayList<String> updateParameterList = new ArrayList<String>();
+                ArrayList<String> updateValueList = new ArrayList<String>();
+                while (argsInProcess.length() > 0) {
+                    int indexOfFirstChange = argsInProcess.indexOf(" change ");
                     int indexOfFirstTo = argsInProcess.indexOf(" to ");
                     if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
                         String updateParameter = argsInProcess.substring(indexOfFirstChange
-                                + new String("change ").length(), indexOfFirstTo);
-                        String updateValue = argsInProcess.substring(indexOfFirstTo + new String(" to ").length());
-                        return processStructuredArguments(index.get() + PARAMETER_DELIMITER + updateParameter
-                                                            + EDIT_PARAMETER_DELIMITER + updateValue);
+                                + new String(" change ").length(), indexOfFirstTo);
+                        String updateValue = "";
+                        if (indexOfFirstAndChange != -1) {
+                            updateValue = argsInProcess.substring(indexOfFirstTo + new String(" to ").length(),
+                                                                            indexOfFirstAndChange);
+                            argsInProcess = argsInProcess.substring(indexOfFirstAndChange
+                                    + new String(" and ").length() - 1);
+                            indexOfFirstAndChange = argsInProcess.indexOf(" and change ");
+                        } else {
+                            updateValue = argsInProcess.substring(indexOfFirstTo + new String(" to ").length());
+                            argsInProcess = "";
+                        }
+                        updateParameterList.add(updateParameter);
+                        updateValueList.add(updateValue);
                     } else {
                         return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                 EditCommand.NATURAL_MESSAGE_USAGE));
                     }
                 }
+                String structuredArgument = index.get() + PARAMETER_DELIMITER;
+                for (int i = 0; i < updateParameterList.size(); i++) {
+                    structuredArgument += updateParameterList.get(i) + EDIT_PARAMETER_DELIMITER
+                                        + updateValueList.get(i) + EDIT_PARAMETER_DELIMITER + PARAMETER_DELIMITER;
+                }
+                return processStructuredArguments(structuredArgument);
             }
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditCommand.NATURAL_MESSAGE_USAGE));
         }
-        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditCommand.NATURAL_MESSAGE_USAGE));
     }
 
     private Command processStructuredArguments(String args) {
