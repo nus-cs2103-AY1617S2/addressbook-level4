@@ -21,7 +21,7 @@ public class StartTimeComparator implements Comparator<ReadOnlyTask> {
             }
         } else if (oneHasStart) {
             if (d1.getStartTime().isPresent()) {
-        	    return -1;
+                return -1;
             } else {
                 return 1;
             }
