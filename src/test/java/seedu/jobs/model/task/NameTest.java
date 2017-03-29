@@ -5,15 +5,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.jobs.model.task.Name;
-
 public class NameTest {
 
     @Test
     public void isValidName() {
         // invalid name
         assertFalse(Name.isValidName(ModelConstant.getLongString(150))); //name is too long
-        
+
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only

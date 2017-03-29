@@ -1,4 +1,4 @@
-////package guitests.guihandles;
+//package guitests.guihandles;
 //
 //import guitests.GuiRobot;
 //import javafx.scene.control.DialogPane;
@@ -23,4 +23,3 @@
 //        return isMatching;
 //    }
 //}
-////

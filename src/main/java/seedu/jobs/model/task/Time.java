@@ -33,17 +33,14 @@ public class Time {
     public Time(Optional<String> startTime) throws IllegalValueException {
         if (!startTime.isPresent()) {
             this.value = DEFAULT_TIME;
-        }
-        else {
-        	if(startTime.get().equals("")){
-        		this.value = DEFAULT_TIME;
-        	}
-        	else if (!isValidTime(startTime.get())) {
+        } else {
+            if (startTime.get().equals("")) {
+                this.value = DEFAULT_TIME;
+            }  else if (!isValidTime(startTime.get())) {
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINT);
-            }
-        	else{
+            }   else {
                 this.value = startTime.get();
-        	}
+            }
         }
     }
 
@@ -51,56 +48,57 @@ public class Time {
      * Returns true if a given string is in valid time format
      */
     public static boolean isValidTime(String test) {
-    	String time = extractTime(test);
-    	String date = extractDate(test);
-        try{
-        	LocalDate.parse(date,DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT));
+        String time = extractTime(test);
+        String date = extractDate(test);
+        try {
+            LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/uuuu").
+                    withResolverStyle(ResolverStyle.STRICT));
         }
-        catch(DateTimeParseException e){
-        	return false;
+        catch (DateTimeParseException e) {
+            return false;
         }
-        return time.length()>0; 
-        
-    }	
-    
+        return time.length() > 0;
+
+    }
+
     /**
      * Extract date (dd/mm/yyyy) from an input string
      */
-    public static String extractDate(String date){
-		Pattern datePattern = Pattern.compile(DATE_VALIDATION_REGEX);
-		Matcher dateMatcher = datePattern.matcher(date);
-		String value = "";
-		while (dateMatcher.find()) {
-			value+=(dateMatcher.group());
-		}
-		return value;
+    public static String extractDate(String date) {
+        Pattern datePattern = Pattern.compile(DATE_VALIDATION_REGEX);
+        Matcher dateMatcher = datePattern.matcher(date);
+        String value = "";
+        while (dateMatcher.find()) {
+            value += (dateMatcher.group());
+        }
+        return value;
     }
-    
+
     /**
      * extract time (HH:mm) from an input string
      */
-    public static String extractTime(String time){
-		Pattern timePattern = Pattern.compile(TIME_VALIDATION_REGEX);
-		Matcher timeMatcher = timePattern.matcher(time);
-		String value = "";
-		while (timeMatcher.find()) {
-			value+=(timeMatcher.group());
-		}
-		return value;
+    public static String extractTime(String time) {
+        Pattern timePattern = Pattern.compile(TIME_VALIDATION_REGEX);
+        Matcher timeMatcher = timePattern.matcher(time);
+        String value = "";
+        while (timeMatcher.find()) {
+            value += (timeMatcher.group());
+        }
+        return value;
     }
-    
+
     /**
      * Increment the time value by the specified number of days
      *
      */
-    public void addDays(int days){
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-		String oldDate = extractDate(this.value);
-		String time = extractTime(this.value);
-		LocalDate date = LocalDate.parse(oldDate,formatter);
-		this.value = date.plusDays(days).format(formatter) + " " + time;
+    public void addDays(int days) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        String oldDate = extractDate(this.value);
+        String time = extractTime(this.value);
+        LocalDate date = LocalDate.parse(oldDate, formatter);
+        this.value = date.plusDays(days).format(formatter) + " " + time;
     }
-    
+
     @Override
     public String toString() {
         return this.value;
@@ -118,5 +116,5 @@ public class Time {
     public int hashCode() {
         return value.hashCode();
     }
-    
+
 }

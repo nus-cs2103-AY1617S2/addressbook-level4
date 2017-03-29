@@ -9,15 +9,15 @@ public interface ReadOnlyTask {
     Time getStartTime();
 
     Time getEndTime();
-    
-	Period getPeriod();
-	
+
+    Period getPeriod();
+
     Description getDescription();
 
     UniqueTagList getTags();
 
     boolean isCompleted();
-    
+
     void markComplete();
 
     /**
@@ -38,7 +38,8 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName()).append("\n").append("From: ").append(getStartTime())
-                .append(" To: ").append(getEndTime()).append("\n").append("Status : ").append((!isCompleted())?"Not Completed" : "Completed")
+                .append(" To: ").append(getEndTime()).append("\n").append("Status : ")
+                .append((!isCompleted()) ? "Not Completed" : "Completed")
                 .append("\n").append("Description: ").append(getDescription());
         return builder.toString();
     }

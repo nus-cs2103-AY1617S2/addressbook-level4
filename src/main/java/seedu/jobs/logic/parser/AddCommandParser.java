@@ -3,8 +3,8 @@ package seedu.jobs.logic.parser;
 import static seedu.jobs.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_END;
-import static seedu.jobs.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_RECUR;
+import static seedu.jobs.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;

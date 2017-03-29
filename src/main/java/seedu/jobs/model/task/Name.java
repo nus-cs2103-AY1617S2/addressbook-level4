@@ -41,9 +41,9 @@ public class Name {
     public static boolean isValidName(String test) {
         return test.length() <= NAME_LENGTH_CONSTRAINTS;
     }
-    
-    public String getName(){
-    	return fullName;
+
+    public String getName() {
+        return fullName;
     }
 
     @Override

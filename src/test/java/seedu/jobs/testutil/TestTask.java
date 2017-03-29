@@ -19,7 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private UniqueTagList tags;
     private boolean status;
     private Period period;
-    
+
     public TestTask() {
         tags = new UniqueTagList();
     }
@@ -52,11 +52,11 @@ public class TestTask implements ReadOnlyTask {
     public void setDescription(Description description) {
         this.description = description;
     }
-    
-    public void setStatus(boolean status){
-    	this.status = status;
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
-    
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -70,12 +70,12 @@ public class TestTask implements ReadOnlyTask {
     public Time getStartTime() {
         return startTime;
     }
-    
+
     @Override
     public Time getEndTime() {
         return endTime;
     }
-    
+
     @Override
     public Description getDescription() {
         return description;
@@ -106,10 +106,10 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
-	@Override
-	public void markComplete() {
-		this.status = true;
-	}
+    @Override
+    public void markComplete() {
+        this.status = true;
+    }
 
     @Override
     public Period getPeriod() {

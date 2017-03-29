@@ -192,7 +192,8 @@ public class LogicManagerTest {
         //TODO
 //        assertCommandFailure("add wrong start/args wrong args", expectedMessage);
 //        assertCommandFailure("add task start/01/01/01 00:00 01/01/01 00:00", expectedMessage);
-//        assertCommandFailure("add task start/01/01/01 00:00 end/01/01/01 00:00 desciption/invalid prefix", expectedMessage);
+//        assertCommandFailure("add task start/01/01/01 00:00 end/01/01/01 00:00
+//          desciption/invalid prefix", expectedMessage);
     }
 
     @Test
@@ -207,7 +208,7 @@ public class LogicManagerTest {
                 Time.MESSAGE_TIME_CONSTRAINT);
         //TODO
         //recur constraint
-        
+
         assertCommandFailure("add valid desc/A123456789A123456789A123456789A123456789A123456789A123456789A123456789"
                 + "A123456789A123456789A123456789A123456789A123456789A123456789A123456789A1234567891",
                 Description.MESSAGE_DESCRIPTION_CONSTRAINT);
@@ -432,7 +433,7 @@ public class LogicManagerTest {
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             Period period = new Period(Optional.of("0"));
-            return new Task(name, start, end, desc, tags,period);
+            return new Task(name, start, end, desc, tags, period);
         }
 
         /**
@@ -448,7 +449,7 @@ public class LogicManagerTest {
                     new Time(Optional.of("03/11/2017 15:00")),
                     new Time(Optional.of("03/11/2017 16:00")),
                     new Description(Optional.of("House of " + seed)),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), 
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)),
                     new Tag("tag" + Math.abs(seed + 1))),
                     new Period(Optional.of("0"))
             );

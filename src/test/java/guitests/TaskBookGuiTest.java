@@ -73,7 +73,8 @@
 //            this.stage = stage;
 //        });
 //        EventsCenter.clearSubscribers();
-//        testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
+//        testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData,
+//getDataFileLocation()));
 //        FxToolkit.showStage();
 //        while (!stage.isShowing());
 //        mainGui.focusOnMainApp();

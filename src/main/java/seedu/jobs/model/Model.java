@@ -7,13 +7,12 @@ import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
-import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** Clears existing backing model and replaces with the provided new data. 
+    /** Clears existing backing model and replaces with the provided new data.
      * @throws IllegalTimeException */
     void resetData(ReadOnlyTaskBook newData);
 
@@ -25,10 +24,10 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    
+
     /** Completes the given task */
     void completeTask(ReadOnlyTask task) throws  UniqueTaskList.TaskNotFoundException;
-    
+
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *
@@ -37,7 +36,7 @@ public interface Model {
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(int filteredPersonListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException; 
+         throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

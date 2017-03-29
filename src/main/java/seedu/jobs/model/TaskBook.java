@@ -42,9 +42,9 @@ public class TaskBook implements ReadOnlyTaskBook {
 
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
-     * @throws IllegalTimeException 
+     * @throws IllegalTimeException
      */
-    public TaskBook(ReadOnlyTaskBook toBeCopied){
+    public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -52,7 +52,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws UniqueTaskList.DuplicateTaskException{
+            throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
 
@@ -60,7 +60,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyTaskBook newData){
+    public void resetData(ReadOnlyTaskBook newData) {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
@@ -96,11 +96,11 @@ public class TaskBook implements ReadOnlyTaskBook {
      *
      * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
-     * @throws IllegalTimeException 
+     * @throws IllegalTimeException
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicateTaskException{
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
@@ -148,7 +148,7 @@ public class TaskBook implements ReadOnlyTaskBook {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-    
+
     public boolean completeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.complete(key)) {
             return true;

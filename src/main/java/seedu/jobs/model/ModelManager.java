@@ -28,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs){
+    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(taskBook, userPrefs);
 
@@ -38,12 +38,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
     }
 
-    public ModelManager(){
+    public ModelManager() {
         this(new TaskBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskBook newData){
+    public void resetData(ReadOnlyTaskBook newData) {
         taskBook.resetData(newData);
         indicateTaskBookChanged();
     }
@@ -63,13 +63,13 @@ public class ModelManager extends ComponentManager implements Model {
         taskBook.removeTask(target);
         indicateTaskBookChanged();
     }
-    
+
     @Override
     public synchronized void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskBook.completeTask(target);
         indicateTaskBookChanged();
     }
-    
+
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskBook.addTask(task);
@@ -79,7 +79,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredPersonListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException{
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
         int taskBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);

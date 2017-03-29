@@ -74,22 +74,22 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-            		new Task(new Name(Optional.of("CS2101")), new Time(Optional.of("16/03/2017 15:00")), 
-                    		new Time(Optional.of("16/03/2017 16:00")),
-                            new Description(Optional.of("Effetive Communication For Computing Professionlas")),
-                            new UniqueTagList("lectures"), new Period(Optional.of("0"))),
-                    new Task(new Name(Optional.of("CS2102")), new Time(Optional.of("17/03/2017 08:00")), 
-                    		new Time(Optional.of("17/03/2017 09:00")),
-                            new Description(Optional.of("Database")),
-                            new UniqueTagList("tutorials"), new Period(Optional.of("0"))),
-                    new Task(new Name(Optional.of("CS2103")), new Time(Optional.of("01/02/2017 11:00")), 
-                    		new Time(Optional.of("01/02/2017 12:00")),
-                            new Description(Optional.of("Software Engineering")),
-                            new UniqueTagList("tutorials"), new Period(Optional.of("0"))),
-                    new Task(new Name(Optional.of("Meeting")),new Time(Optional.of("18/03/2017 12:00"))
-                    		,new Time(Optional.of("16/03/2017 17:00")),
-                            new Description(Optional.of("Meet with group members at UTown")),
-                            new UniqueTagList("meetings"), new Period(Optional.of("0")))
+                new Task(new Name(Optional.of("CS2101")), new Time(Optional.of("16/03/2017 15:00")),
+                new Time(Optional.of("16/03/2017 16:00")),
+                new Description(Optional.of("Effetive Communication For Computing Professionlas")),
+                new UniqueTagList("lectures"), new Period(Optional.of("0"))),
+                new Task(new Name(Optional.of("CS2102")), new Time(Optional.of("17/03/2017 08:00")),
+                new Time(Optional.of("17/03/2017 09:00")),
+                new Description(Optional.of("Database")),
+                new UniqueTagList("tutorials"), new Period(Optional.of("0"))),
+                new Task(new Name(Optional.of("CS2103")), new Time(Optional.of("01/02/2017 11:00")),
+                new Time(Optional.of("01/02/2017 12:00")),
+                new Description(Optional.of("Software Engineering")),
+                new UniqueTagList("tutorials"), new Period(Optional.of("0"))),
+                new Task(new Name(Optional.of("Meeting")), new Time(Optional.of("18/03/2017 12:00")),
+                new Time(Optional.of("16/03/2017 17:00")),
+                new Description(Optional.of("Meet with group members at UTown")),
+                new UniqueTagList("meetings"), new Period(Optional.of("0")))
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

@@ -77,7 +77,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return taskFoundAndDeleted;
     }
-    
+
     /**
      * Completes the equivalent task from the list.
      *
@@ -86,18 +86,18 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean complete(ReadOnlyTask toComplete) throws TaskNotFoundException {
         assert toComplete != null;
         boolean taskFoundAndCompleted = false;
-        for(Task task:internalList){
-        	if(task.equals(toComplete)){
-        		task.markComplete();
-        		taskFoundAndCompleted = true;
-        	}
+        for (Task task:internalList) {
+            if (task.equals(toComplete)) {
+                task.markComplete();
+                taskFoundAndCompleted = true;
+            }
         }
         if (!taskFoundAndCompleted) {
             throw new TaskNotFoundException();
         }
         return taskFoundAndCompleted;
     }
-    
+
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
@@ -118,7 +118,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public Iterator<Task> iterator() {
         return internalList.iterator();
     }
-    
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

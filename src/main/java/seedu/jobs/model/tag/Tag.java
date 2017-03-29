@@ -1,6 +1,5 @@
 package seedu.jobs.model.tag;
 
-
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
 /**

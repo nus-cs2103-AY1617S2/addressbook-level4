@@ -1,6 +1,5 @@
 package seedu.jobs.logic.commands;
 
-
 import seedu.jobs.commons.core.EventsCenter;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
 

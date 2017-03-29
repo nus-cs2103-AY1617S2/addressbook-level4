@@ -10,7 +10,6 @@ import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Period;
-import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
@@ -76,18 +75,19 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of
      * {@code personToEdit} edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask TaskToEdit, EditTaskDescriptor editTaskDescriptor) {
-        assert TaskToEdit != null;
+    private static Task createEditedTask(ReadOnlyTask taskToEditaskToEdit, EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEditaskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName().orElseGet(TaskToEdit::getName);
-        Time updatedStartTime = editTaskDescriptor.getStart().orElseGet(TaskToEdit::getStartTime);
-        Time updatedEndTime = editTaskDescriptor.getEnd().orElseGet(TaskToEdit::getEndTime);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(TaskToEdit::getDescription);
+        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEditaskToEdit::getName);
+        Time updatedStartTime = editTaskDescriptor.getStart().orElseGet(taskToEditaskToEdit::getStartTime);
+        Time updatedEndTime = editTaskDescriptor.getEnd().orElseGet(taskToEditaskToEdit::getEndTime);
+        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet
+            (taskToEditaskToEdit::getDescription);
 //        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(TaskToEdit::getPhone);
 //        Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(TaskToEdit::getEmail);
 //        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(TaskToEdit::getAddress);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(TaskToEdit::getTags);
-        Period updatedPeriod = editTaskDescriptor.getPeriod().orElseGet(TaskToEdit::getPeriod);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEditaskToEdit::getTags);
+        Period updatedPeriod = editTaskDescriptor.getPeriod().orElseGet(taskToEditaskToEdit::getPeriod);
         return new Task(updatedName, updatedStartTime, updatedEndTime, updatedDescription, updatedTags, updatedPeriod);
     }
 
@@ -102,7 +102,7 @@ public class EditCommand extends Command {
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
         private Optional<Period> period = Optional.empty();
-        
+
         public EditTaskDescriptor() {
         }
 
@@ -147,7 +147,7 @@ public class EditCommand extends Command {
         public Optional<Time> getEnd() {
             return endTime;
         }
-        
+
         public void setDescription(Optional<Description> description) {
             assert description != null;
             this.description = description;
@@ -161,13 +161,13 @@ public class EditCommand extends Command {
             assert tags != null;
             this.tags = tags;
         }
-        
+
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
-        
-        public Optional<Period> getPeriod(){
-        	return period;
+
+        public Optional<Period> getPeriod() {
+            return period;
         }
     }
 }
