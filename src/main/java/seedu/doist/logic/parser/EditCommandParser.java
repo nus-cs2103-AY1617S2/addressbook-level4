@@ -81,7 +81,7 @@ public class EditCommandParser {
         Date endDate = null;
         boolean validDate = true;
         switch (dateFormat) {
-        case ArgumentTokenizer.DATE_NIL : break;
+        case ArgumentTokenizer.DATE_NIL : return editTaskDescriptor;
         case ArgumentTokenizer.DATE_BY :  String deadline = argsTokenizer.getValue(PREFIX_BY).get();
             if (deadline.isEmpty()) {
                 editTaskDescriptor.setDates(Optional.of(new TaskDate()));
