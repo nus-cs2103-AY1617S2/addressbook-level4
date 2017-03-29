@@ -25,6 +25,7 @@ import seedu.address.logic.commands.RevertCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnrevertCommand;
+import seedu.address.logic.commands.UseCommand;
 
 /**
  * Parses user input.
@@ -108,6 +109,9 @@ public class Parser {
 
         case UnrevertCommand.COMMAND_WORD:
             return new UnrevertCommand();
+
+        case UseCommand.COMMAND_WORD:
+            return new UseCommand(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

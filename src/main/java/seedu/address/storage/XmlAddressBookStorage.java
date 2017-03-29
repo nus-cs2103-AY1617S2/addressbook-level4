@@ -28,6 +28,10 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         return filePath;
     }
 
+    public void setAddressBookFilePath(String newFilePath) {
+        filePath = newFilePath;
+    }
+
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(filePath);
