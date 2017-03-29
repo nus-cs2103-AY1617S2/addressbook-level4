@@ -36,6 +36,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
         setConnections(taskList);
         addToPlaceholder(completedTaskListPlaceholder);
         registerAsAnEventHandler(this);
+        completedTaskListView.toFront();
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {

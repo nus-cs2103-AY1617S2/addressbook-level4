@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@Extensions.css">
+<VBox stylesheets="@Extensions.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
     	<JFXListView fx:id="uilist" minHeight="550.0" prefHeight="550.0">
 			<JFXListView fx:id="todayTaskListView" prefHeight="1000.0" prefWidth="500.0">
