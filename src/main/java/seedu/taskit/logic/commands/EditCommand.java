@@ -126,6 +126,15 @@ public class EditCommand extends Command {
             return title;
         }
         
+        public void setTags(Optional<UniqueTagList> tags) {
+            assert tags != null;
+            this.tags = tags;
+        }
+
+        public Optional<UniqueTagList> getTags() {
+            return tags;
+        }
+        
         // @@author A0163996J
         
         public void setStart(Optional<Date> start) {
@@ -146,14 +155,5 @@ public class EditCommand extends Command {
         }
         
         // @@ author
-
-        public void setTags(Optional<UniqueTagList> tags) {
-            assert tags != null;
-            this.tags = tags;
-        }
-
-        public Optional<UniqueTagList> getTags() {
-            return tags;
-        }
     }
 }

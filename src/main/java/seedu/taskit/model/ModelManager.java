@@ -91,7 +91,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
     }
     
-    //@author A0141872E
+    //@@author A0141872E
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
@@ -106,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new ParameterQualifier(parameter)));
         return filteredTasks.size();
     }
-    //@author
+    //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -167,6 +167,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
     
+    //@@author A0141872E
     private class ParameterQualifier implements Qualifier {
         private String parameter;
         

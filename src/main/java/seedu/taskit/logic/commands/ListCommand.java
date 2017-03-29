@@ -1,7 +1,5 @@
 package seedu.taskit.logic.commands;
 
-import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 //@@author A0141872E
 /**
  * Lists all tasks in TaskIt to the user based on given parameters.
@@ -37,18 +35,6 @@ public class ListCommand extends Command {
                   model.updateFilteredListToShowAll();
                   return new CommandResult(MESSAGE_SUCCESS_ALL);
           
-              case "done":
-                  model.updateFilteredTaskList("done");
-                  return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, "done"));
-          
-              case "undone":
-                  model.updateFilteredTaskList("undone");
-                  return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, "undone"));
-          
-              case "overdue":
-                  model.updateFilteredTaskList("overdue");
-                  return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, "overdue"));
-          
               case "today":
                   taskListSize=model.updateFilteredTaskList("today");
                   assert(taskListSize>=0);
@@ -58,7 +44,8 @@ public class ListCommand extends Command {
                   return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, "today"));
             
               default:
-                  return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+                  model.updateFilteredTaskList(parameter);
+                  return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
         }
     }
 
