@@ -31,7 +31,6 @@ public class SortCommandParser implements CommandParser {
      * and returns an SortCommand object for execution.
      */
     public Command parse(String args) {
-        assert args != null;
         Optional<String[]> sortArgumentsField = ParserUtil.parseSortCriteria(args);
         if (!sortArgumentsField.isPresent()) {
             return new IncorrectCommand(

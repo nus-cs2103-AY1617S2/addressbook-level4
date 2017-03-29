@@ -49,7 +49,6 @@ public class AddCommandParser implements CommandParser {
      * If no value was given, an empty String is returned.
      */
     private static String getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
-        assert tokenizer != null;
         if (!tokenizer.getValue(prefix).isPresent()) {
             return "";
         } else {
