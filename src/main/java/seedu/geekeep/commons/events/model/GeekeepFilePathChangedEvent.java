@@ -17,7 +17,8 @@ public class GeekeepFilePathChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "geekeepFilePath = " + config.getGeekeepFilePath() + "\nnumber of tasks " + geekeep.getTaskList().size()
+        return "GeeKeep file path = " + config.getGeekeepFilePath() + "\nnumber of tasks "
+                + geekeep.getTaskList().size()
                 + ", number of tags " + geekeep.getTagList().size();
     }
 }
