@@ -12,8 +12,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Assign tasks
 * Faciliate feature discussions<br>
 * Features implemented:
-   * [Mark tasks]
-   * [Autocomplete]
+   * [Mark tasks](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#26-mark-task--mark)
+   * [Autocomplete](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#216-autocomplete)
 * Code written: [[functional code](A0124368A.md)][[test code](A0124368A.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
@@ -26,9 +26,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Ensure test cases covers all edge cases
 * Review test cases for each PR<br>
 * Features implemented:
-   * [Redo command]
-   * [Undo command]
-   * [Command history]
+   * [Redo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#212-redo--redo)
+   * [Undo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#211-undo--undo)
 * Code written: [[functional code](A0148087W.md)][[test code](A0148087W.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
@@ -54,8 +53,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Coordinate inter-component APIs
 * Make architecture decisions<br>
 * Features implemented:
-   * [Find tasks]
-   * [Schedule tasks]
+   * [Find tasks](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#213-find--find)
+   * [Schedule tasks](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#28-schedule-work-in-progress--schedule)
 * Code written: [[functional code](A0126345J.md)][[test code](A0126345J.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
