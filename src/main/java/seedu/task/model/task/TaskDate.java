@@ -14,7 +14,7 @@ public class TaskDate {
 	
 	private List<Date> dates;
     private SimpleDateFormat formatter;
-    public final String OUTPUT_FORMAT = " MMM dd (EEE) ";
+    public final String OUTPUT_FORMAT = " dd/mm/yy";
 	
     private int day;
     private int month;
@@ -142,10 +142,6 @@ public class TaskDate {
     		return formatter.format(dates.get(0)) +" - "+ formatter.format(dates.get(1));
     	
     }
-    }
-    public String toString() {
-	
-	return value;
     }
 
     public static int[] dateFormatConverter(String date) {

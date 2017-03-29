@@ -1,7 +1,6 @@
 package seedu.task.model.task;
-/*
-@author Yun-Chun, Liu
-*/
+
+//@@author A0152855Y
 
 import java.util.ArrayList;
 import java.util.Date;
