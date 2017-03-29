@@ -188,7 +188,8 @@ public class UiManager extends ComponentManager implements Ui {
     private void showSystemTrayNotification(ReadOnlyTask task) throws AWTException, java.net.MalformedURLException {
         String displayMsg = "This task is due tomorrow";
         if (!task.getEndDateTime().get().getTimeOnly().isEmpty()) {
-            displayMsg += " at " + task.getEndDateTime().get().getTimeOnly() + ".";
+            String time = task.getEndDateTime().get().getTimeOnly();
+            displayMsg += " at " + time.substring(0, time.length()-3) + ".";
         } else {
             displayMsg += ".";
         }
