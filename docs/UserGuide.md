@@ -160,14 +160,14 @@ Deletes the specified task<br>
 Format: `delete INDEX`
 
 > * Deletes the task at the specified `INDEX`. <br>
-> * The index refers to the index number shown in the most recent listing. <br>
+> * The index refers to the index numbers shown in the most recent listing. <br>
 > * The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
 Examples:
 
 * `list`<br>
-  `delete 2`<br>
-  Deletes the second task in the TaskBoss.
+  `delete 1 2`<br>
+  Deletes the first and second task in the TaskBoss.
   
 * `find n/Meeting`<br>
   `delete 1`<br>
@@ -205,8 +205,14 @@ Marks a task as done<br>
 Format: `done INDEX`
 
 > * Marks the task at the specified `INDEX`. <br>
-> * The index refers to the index number shown in the most recent listing.<br>
+> * The index refers to the index numbers shown in the most recent listing.<br>
 > * The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
+
+Examples:
+
+* `list`<br>
+  `done 1 2`<br>
+  Marks the first and second task as done in the TaskBoss.
 
 ### 3.11. Undoing a command : `undo`
 
