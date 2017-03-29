@@ -199,6 +199,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskListToShowByCompletion(false);
     }
 
+    // @@author
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
@@ -214,11 +219,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowByCompletion(boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompletedQualifier(isComplete)));
-    }
-
-    // @@author
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
     }
 
     // ========== Inner classes/interfaces used for filtering
