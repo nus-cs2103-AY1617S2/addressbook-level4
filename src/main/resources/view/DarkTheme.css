@@ -98,7 +98,7 @@
     -fx-text-fill: white;
 }
 .list-cell {
-	-fx-background-color: derive(black, 20%);
+    -fx-background-color: derive(black, 20%);
 }
 
 .list-cell:filled {
@@ -313,7 +313,7 @@
 
 #taskListView {
 	-fx-background-color: derive(black, 20%);
-	-fx-border-color: derive(black, 20%); 
+	-fx-border-color: derive(black, 20%);
 }
 
 #commandTextField {
@@ -324,7 +324,7 @@
 #commandTextField, #resultDisplay {
 	-fx-control-inner-background: derive(black, 25%);
 	-fx-text-fill: derive(white, -25%);
-	-fx-border-color: derive(white, -25%); 
+	-fx-border-color: derive(white, -25%);
 }
 
 #tags {
@@ -340,3 +340,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+

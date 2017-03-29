@@ -8,7 +8,7 @@
 <img src="docs/images/Ui.png" width="600"><br>
 
 * This is a desktop task manager application called JOBS. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is **written in OOP fashion** using **Java 8**. 
+* It is **written in OOP fashion** using **Java 8**.
 
 
 #### Site Map
