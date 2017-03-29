@@ -150,7 +150,10 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
         	return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.toStringTitleAndTagList(), keyword))
-
+                    .findAny()
+                    .isPresent() |                    
+                    nameKeyWords.stream()
+                    .filter(keyword -> task.toStringTitleAndTagList().contains(keyword))
                     .findAny()
                     .isPresent();
         }
