@@ -139,7 +139,6 @@ public class TaskCard extends UiPart<Region> {
 
     @Subscribe
     private void handleDeselectCard(DeselectCardsEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         PseudoClass selectedPseudoClass = PseudoClass.getPseudoClass(SELECTED_PSEUDO_CLASS);
         cardPane.pseudoClassStateChanged(selectedPseudoClass, false);
     }

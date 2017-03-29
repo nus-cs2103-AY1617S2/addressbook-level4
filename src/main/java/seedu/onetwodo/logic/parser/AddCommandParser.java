@@ -8,6 +8,7 @@ import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.AddCommand;
@@ -25,21 +26,21 @@ public class AddCommandParser {
      * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_PRIORITY,
-                PREFIX_DESCRIPTION, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(
+                PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_PRIORITY, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
+            String preamble = argsTokenizer.getPreamble().get();
             String startDate = argsTokenizer.getValue(PREFIX_START_DATE).orElse("");
             String endDate = argsTokenizer.getValue(PREFIX_END_DATE).orElse("");
-            return new AddCommand(argsTokenizer.getPreamble().get(), startDate, endDate,
-                    argsTokenizer.getValue(PREFIX_PRIORITY).orElse(""),
-                    argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+            String priority = argsTokenizer.getValue(PREFIX_PRIORITY).orElse("");
+            String description = argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse("");
+            Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
+            return new AddCommand(preamble, startDate, endDate, priority, description, tags);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
 }

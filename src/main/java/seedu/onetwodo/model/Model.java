@@ -6,7 +6,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
+import seedu.onetwodo.model.tag.Tag;
+import seedu.onetwodo.model.task.EndDate;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
@@ -83,5 +87,7 @@ public interface Model {
     String redo() throws EmptyHistoryException;
 
     void clear();
+
+    void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags);
 
 }
