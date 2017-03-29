@@ -22,7 +22,7 @@ public class SelectCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s";
-    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Selected Task: %1$s";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Selected Task: %1$s";
 
     public SelectCommand(int targetIndex) {
         this.targetIndex = targetIndex;
@@ -39,7 +39,7 @@ public class SelectCommand extends Command {
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex),
-                String.format(MESSAGE_SUCCESS_SATAUS_BAR, targetIndex));
+                String.format(MESSAGE_SUCCESS_STATUS_BAR, targetIndex));
 
     }
 

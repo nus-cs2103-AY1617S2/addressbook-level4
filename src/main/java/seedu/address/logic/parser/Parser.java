@@ -27,6 +27,7 @@ import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -98,6 +99,9 @@ public class Parser {
 
         case SaveToCommand.COMMAND_WORD:
             return new SaveToCommandParser().parse(arguments);
+
+        case UseThisCommand.COMMAND_WORD:
+            return new UseThisCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();

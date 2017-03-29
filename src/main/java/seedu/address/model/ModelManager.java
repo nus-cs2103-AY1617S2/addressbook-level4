@@ -9,6 +9,8 @@ import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
@@ -16,10 +18,13 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
+import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
+import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.SaveToCommand;
+import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
@@ -50,6 +55,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String MESSAGE_ON_RESET = "Task list loaded";
     private static final String MESSAGE_ON_UPDATE = "Task updated";
     private static final String MESSAGE_ON_SAVETO = "Save location changed to ";
+    private static final String MESSAGE_ON_USETHIS = "Reading data from ";
 
     // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
@@ -120,12 +126,23 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged(String message) {
+        logger.fine(message);
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
     /** Raises an event to indicate the path needs to be changed */
     private void indicateTaskManagerPathChanged(String message, String path) {
+        logger.fine(message);
         raise(new TaskManagerPathChangedEvent(taskManager, path));
+    }
+
+    /**
+     * Raises an event to indicate that the task manager should read from a
+     * different path
+     */
+    private void indicateTaskManagerUseNewPath(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerUseNewPathEvent(path));
     }
 
     @Override
@@ -158,6 +175,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateSaveLocation(String path) {
         assert path != null;
         indicateTaskManagerPathChanged(MESSAGE_ON_SAVETO + path, path);
+    }
+
+    @Override
+    public void useNewSaveLocation(String path) {
+        assert path != null;
+        indicateTaskManagerUseNewPath(MESSAGE_ON_USETHIS + path, path);
     }
 
     @Override
@@ -210,6 +233,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         if (toUndo.startsWith(SaveToCommand.COMMAND_WORD)) {
             indicateTaskManagerPathChanged(MESSAGE_ON_UNDO, null);
+        } else if (toUndo.startsWith(UseThisCommand.COMMAND_WORD)) {
+            indicateTaskManagerUseNewPath(MESSAGE_ON_UNDO, null);
         } else {
             indicateTaskManagerChanged(MESSAGE_ON_UNDO);
         }
@@ -231,6 +256,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void clearRedoCommandHistory() {
         redoCommandHistory.clear();
+    }
+
+    @Override
+    @Subscribe
+    public void handleReadFromNewFileEvent(ReadFromNewFileEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "New file data loaded into model"));
+        resetData(event.data);
     }
 
     // =========== Filtered Task List Accessors

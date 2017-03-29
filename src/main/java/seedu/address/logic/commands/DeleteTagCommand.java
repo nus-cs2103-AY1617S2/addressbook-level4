@@ -24,7 +24,7 @@ public class DeleteTagCommand extends Command {
             + "Parameters: <tag_name>\n" + "Example: " + COMMAND_WORD + " work";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s";
-    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Tag deleted successfully.";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Tag deleted successfully.";
 
     private final Tag oldTag;
 
@@ -73,6 +73,6 @@ public class DeleteTagCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, oldTag.getTagName()),
-                MESSAGE_SUCCESS_SATAUS_BAR);
+                MESSAGE_SUCCESS_STATUS_BAR);
     }
 }

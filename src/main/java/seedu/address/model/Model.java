@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -70,6 +71,9 @@ public interface Model {
     /** Informs eventbus about the change in save location */
     void updateSaveLocation(String path);
 
+    /** Informs eventbus to read from new save location */
+    void useNewSaveLocation(String path);
+
     /**
      * Divides task lists by categories into three separate ObservableList which
      * will be provided by UI
@@ -127,4 +131,9 @@ public interface Model {
      * Clears the commands that were undone by the user
      */
     void clearRedoCommandHistory();
+
+    /**
+     * Resets data to the new set of read data
+     */
+    void handleReadFromNewFileEvent(ReadFromNewFileEvent event);
 }

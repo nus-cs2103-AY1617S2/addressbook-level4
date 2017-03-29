@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
+import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyTaskManager;
@@ -27,6 +28,9 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     @Override
     Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
+    /** Returns the initial data read from file **/
+    public ReadOnlyTaskManager getInitialData();
+
     @Override
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
@@ -41,4 +45,9 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * Updates the storage file path.
      */
     void handleTaskManagerPathChangedEvent(TaskManagerPathChangedEvent event);
+
+    /**
+     * Read from new storage file path.
+     */
+    void handleTaskManagerUseNewPathEvent(TaskManagerUseNewPathEvent event);
 }
