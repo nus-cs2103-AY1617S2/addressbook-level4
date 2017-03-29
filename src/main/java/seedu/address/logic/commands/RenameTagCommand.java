@@ -24,7 +24,7 @@ public class RenameTagCommand extends Command {
             + "Parameters: <tag_name> <new_tag_name>\n" + "Example: " + COMMAND_WORD + " parttime fulltime";
 
     public static final String MESSAGE_RENAME_TAG_SUCCESS = "Renamed Tag: %1$s to %2$s";
-    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Tag renamed successfully.";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Tag renamed successfully.";
 
     private final Tag oldTag;
     private final Tag newTag;
@@ -79,6 +79,6 @@ public class RenameTagCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, oldTag.getTagName(), newTag.getTagName()),
-                MESSAGE_SUCCESS_SATAUS_BAR);
+                MESSAGE_SUCCESS_STATUS_BAR);
     }
 }

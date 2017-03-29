@@ -22,10 +22,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.TaskManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.ui.Ui;
@@ -48,8 +45,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info(
-                "=============================[ Initializing TaskManager ]===========================");
+        logger.info("=============================[ Initializing TaskManager ]===========================");
         super.init();
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config);
@@ -73,27 +69,7 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManager> taskManagerOptional;
-        ReadOnlyTaskManager initialData;
-        try {
-            taskManagerOptional = storage.readTaskManager();
-            if (!taskManagerOptional.isPresent()) {
-                logger.info(
-                        "Data file not found. Will be starting with a sample TaskManager");
-            }
-            initialData = taskManagerOptional
-                    .orElseGet(SampleDataUtil::getSampleTaskManager);
-        } catch (DataConversionException e) {
-            logger.warning(
-                    "Data file not in the correct format. Will be starting with an empty TaskManager");
-            initialData = new TaskManager();
-        } catch (IOException e) {
-            logger.warning(
-                    "Problem while reading from the file. Will be starting with an empty TaskManager");
-            initialData = new TaskManager();
-        }
-
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(storage.getInitialData(null), userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -114,12 +90,10 @@ public class MainApp extends Application {
         logger.info("Using config file : " + configFilePathUsed);
 
         try {
-            Optional<Config> configOptional = ConfigUtil
-                    .readConfig(configFilePathUsed);
+            Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed
-                    + " is not in the correct format. "
+            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
                     + "Using default config properties");
             initializedConfig = new Config();
         }
@@ -129,8 +103,7 @@ public class MainApp extends Application {
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
-            logger.warning(
-                    "Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
         return initializedConfig;
     }
@@ -146,13 +119,11 @@ public class MainApp extends Application {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
-            logger.warning("UserPrefs file at " + prefsFilePath
-                    + " is not in the correct format. "
+            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning(
-                    "Problem while reading from the file. Will be starting with an empty TaskManager");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
 
@@ -161,8 +132,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
-            logger.warning(
-                    "Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
 
         return initializedPrefs;
@@ -180,14 +150,12 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info(
-                "============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Address Book ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
-            logger.severe(
-                    "Failed to save preferences " + StringUtil.getDetails(e));
+            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
         Platform.exit();
         System.exit(0);

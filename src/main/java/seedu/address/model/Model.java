@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.storage.ImportEvent;
+import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -27,8 +29,9 @@ public interface Model {
 
     /**
      * Clears existing backing model and replaces with the provided new data.
+     * @param clearPrevTasks TODO
      */
-    void resetData(ReadOnlyTaskManager newData);
+    void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks);
 
     /** Returns the TaskManager */
     ReadOnlyTaskManager getTaskManager();
@@ -69,6 +72,12 @@ public interface Model {
 
     /** Informs eventbus about the change in save location */
     void updateSaveLocation(String path);
+
+    /** Informs eventbus about the need to export data to specified path **/
+    void exportToLocation(String path);
+
+    /** Informs eventbus to read from new save location */
+    void useNewSaveLocation(String path);
 
     /**
      * Divides task lists by categories into three separate ObservableList which
@@ -127,4 +136,19 @@ public interface Model {
      * Clears the commands that were undone by the user
      */
     void clearRedoCommandHistory();
+
+    /**
+     * Resets data to the new set of read data
+     */
+    void handleReadFromNewFileEvent(ReadFromNewFileEvent event);
+
+    /**
+     * Prepare to import data and adds to existing set of tasks
+     */
+    void importFromLocation(String path);
+
+    /**
+     * Imports data and adds to existing set of tasks
+     */
+    void handleImportEvent(ImportEvent event);
 }

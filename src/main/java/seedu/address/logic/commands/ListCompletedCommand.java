@@ -9,11 +9,11 @@ public class ListCompletedCommand extends Command {
     public static final String COMMAND_WORD = "listcompleted";
 
     public static final String MESSAGE_SUCCESS = "Listed all completed tasks";
-    public static final String MESSAGE_SUCCESS_SATAUS_BAR = "Listed all completed tasks";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Listed all completed tasks";
 
     @Override
     public CommandResult execute() {
         model.showCompletedTaskList();
-        return new CommandResult(MESSAGE_SUCCESS, MESSAGE_SUCCESS_SATAUS_BAR);
+        return new CommandResult(MESSAGE_SUCCESS, MESSAGE_SUCCESS_STATUS_BAR);
     }
 }

@@ -7,13 +7,13 @@ import seedu.address.TestApp;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle for the Future panel containing the task list.
+ * Provides a handle for the Today panel containing the task list.
  */
-public class FutureTaskListPanelHandle extends MainListGuiHandle {
+public class TodayTaskListPanelHandle extends MainListGuiHandle {
 
-    private static final String FUTURE_TASK_LIST_VIEW_ID = "#futureTaskListView";
+    private static final String FUTURE_TASK_LIST_VIEW_ID = "#todayTaskListView";
 
-    public FutureTaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
+    public TodayTaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 

@@ -17,10 +17,13 @@ public interface TaskManagerStorage {
     String getTaskManagerFilePath();
 
     /**
-     * Returns TaskManager data as a {@link ReadOnlyTaskManager}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     * Returns TaskManager data as a {@link ReadOnlyTaskManager}. Returns
+     * {@code Optional.empty()} if storage file is not found.
+     *
+     * @throws DataConversionException
+     *             if the data in storage is not in the expected format.
+     * @throws IOException
+     *             if there was any problem when reading from the storage.
      */
     Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
@@ -31,8 +34,11 @@ public interface TaskManagerStorage {
 
     /**
      * Saves the given {@link ReadOnlyTaskManager} to the storage.
-     * @param taskManager cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     *
+     * @param taskManager
+     *            cannot be null.
+     * @throws IOException
+     *             if there was any problem writing to the file.
      */
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 

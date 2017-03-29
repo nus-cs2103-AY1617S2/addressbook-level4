@@ -9,17 +9,26 @@ import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.TaskManagerExportEvent;
+import seedu.address.commons.events.model.TaskManagerImportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
+import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
+import seedu.address.commons.events.storage.ImportEvent;
+import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.SaveToCommand;
+import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
@@ -40,7 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private Stack<String> commandHistory;
     private Stack<TaskManager> taskHistory;
-    private Stack<Predicate> predicateHistory;
+    private Stack<Predicate<? super ReadOnlyTask>> predicateHistory;
     private Stack<String> redoCommandHistory;
     private Stack<Boolean> completedViewHistory;
 
@@ -49,6 +58,9 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String MESSAGE_ON_RESET = "Task list loaded";
     private static final String MESSAGE_ON_UPDATE = "Task updated";
     private static final String MESSAGE_ON_SAVETO = "Save location changed to ";
+    private static final String MESSAGE_ON_EXPORT = "Data to be exported to ";
+    private static final String MESSAGE_ON_USETHIS = "Reading data from ";
+    private static final String MESSAGE_ON_IMPORT = "Importing data from ";
 
     // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
@@ -83,7 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         commandHistory = new Stack<String>();
         taskHistory = new Stack<TaskManager>();
-        predicateHistory = new Stack<Predicate>();
+        predicateHistory = new Stack<Predicate<? super ReadOnlyTask>>();
         redoCommandHistory = new Stack<String>();
         completedViewHistory = new Stack<Boolean>();
         completedViewOpen = false;
@@ -106,8 +118,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
-        taskManager.resetData(newData);
+    public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks) {
+        taskManager.setData(newData, clearPrevTasks);
         indicateTaskManagerChanged(MESSAGE_ON_RESET);
     }
 
@@ -118,12 +130,38 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged(String message) {
+        logger.fine(message);
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
     /** Raises an event to indicate the path needs to be changed */
     private void indicateTaskManagerPathChanged(String message, String path) {
+        logger.fine(message);
         raise(new TaskManagerPathChangedEvent(taskManager, path));
+    }
+
+    /** Raises an event to indicate the path needs to be changed */
+    private void indicateTaskManagerExport(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerExportEvent(taskManager, path));
+    }
+
+    /**
+     * Raises an event to indicate that the task manager should import data from
+     * specified path
+     */
+    private void indicateTaskManagerImport(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerImportEvent(path));
+    }
+
+    /**
+     * Raises an event to indicate that the task manager should read from a
+     * different path
+     */
+    private void indicateTaskManagerUseNewPath(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerUseNewPathEvent(path));
     }
 
     @Override
@@ -155,10 +193,29 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void exportToLocation(String path) {
+        assert path != null;
+        indicateTaskManagerExport(MESSAGE_ON_EXPORT + path, path);
+    }
+
+    @Override
+    public void importFromLocation(String path) {
+        assert path != null;
+        indicateTaskManagerImport(MESSAGE_ON_IMPORT + path, path);
+    }
+
+    @Override
+    public void useNewSaveLocation(String path) {
+        assert path != null;
+        indicateTaskManagerUseNewPath(MESSAGE_ON_USETHIS + path, path);
+    }
+
+    @Override
     public void saveCurrentState(String commandText) {
         TaskManager copiedTaskManager = new TaskManager(taskManager);
         taskHistory.add(copiedTaskManager);
-        predicateHistory.add(filteredTasks.getPredicate());
+        Predicate<? super ReadOnlyTask> predicate = filteredTasks.getPredicate();
+        predicateHistory.add(predicate);
         commandHistory.add(commandText);
         completedViewHistory.add(completedViewOpen);
     }
@@ -168,7 +225,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
         if (!commandHistory.isEmpty()) {
-            String toUndo = commandHistory.pop();
+            commandHistory.pop();
             taskHistory.pop();
             predicateHistory.pop();
             completedViewHistory.pop();
@@ -186,7 +243,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // Get previous command, taskManager and view
         String toUndo = commandHistory.pop();
-        taskManager.resetData(taskHistory.pop());
+        taskManager.setData(taskHistory.pop(), true);
         filteredTasks.setPredicate(predicateHistory.pop());
 
         // Set completed tasks view
@@ -201,6 +258,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         if (toUndo.startsWith(SaveToCommand.COMMAND_WORD)) {
             indicateTaskManagerPathChanged(MESSAGE_ON_UNDO, null);
+        } else if (toUndo.startsWith(UseThisCommand.COMMAND_WORD)) {
+            indicateTaskManagerUseNewPath(MESSAGE_ON_UNDO, null);
+        } else if (toUndo.startsWith(ExportCommand.COMMAND_WORD)) {
+            indicateTaskManagerExport(MESSAGE_ON_UNDO, null);
         } else {
             indicateTaskManagerChanged(MESSAGE_ON_UNDO);
         }
@@ -221,6 +282,20 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void clearRedoCommandHistory() {
         redoCommandHistory.clear();
+    }
+
+    @Override
+    @Subscribe
+    public void handleReadFromNewFileEvent(ReadFromNewFileEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "New file data loaded into model"));
+        setData(event.data, true);
+    }
+
+    @Override
+    @Subscribe
+    public void handleImportEvent(ImportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Add file data into model"));
+        setData(event.data, false);
     }
 
     // =========== Filtered Task List Accessors
@@ -364,6 +439,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public int parseUIIndex(String uiIndex) {
         uiIndex = uiIndex.toUpperCase();
+        assert isValidUIIndex(uiIndex);
         logger.info(">>>>>>>>>>>>query UI index:" + uiIndex);
         logger.info(">>>>>>>>>>>>Absolute index:" + (indexMap.get(uiIndex) + 1));
         assert uiIndex != null;
@@ -374,6 +450,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isValidUIIndex(String uiIndex) {
+        uiIndex = uiIndex.toUpperCase();
         return indexMap.containsKey(uiIndex);
     }
 
