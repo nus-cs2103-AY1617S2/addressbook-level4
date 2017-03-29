@@ -8,8 +8,10 @@ package typetask.model.task;
 public interface ReadOnlyTask {
 
     Name getName();
+    //@@author A0139926R
     DueDate getDate();
     DueDate getEndDate();
+    //@@author
     boolean getIsCompleted();
 
     /**
