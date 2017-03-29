@@ -59,15 +59,10 @@ public class MarkCommand extends Command {
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
-
-            } catch (CommandException ce) {
-                throw new CommandException(MESSAGE_STATUS_DONE);
             }
-
 
             tasksMarkedMessage.append(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark) + "\n");
         }
-
 
         return new CommandResult(tasksMarkedMessage.toString());
     }
