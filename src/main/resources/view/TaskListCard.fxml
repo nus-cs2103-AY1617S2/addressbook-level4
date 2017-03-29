@@ -31,7 +31,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="5" styleClass="task-card-id-and-name">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" minWidth="25.0" />
+                                    <Label fx:id="id" minWidth="28.0" />
                                     <AnchorPane prefWidth="170.0" minWidth="170.0">
                                        <children>
                                          <Label fx:id="name" maxWidth="155.0" text="\$first" />

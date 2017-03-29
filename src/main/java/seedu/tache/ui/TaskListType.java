@@ -26,6 +26,7 @@ public class TaskListType extends UiPart<Region> {
     public TaskListType(AnchorPane taskListTypePlaceholder, String typeOfTasks) {
         super(FXML);
         taskListType.setText(typeOfTasks);
+        taskListType.setWrapText(true);
         addToPlaceholder(taskListTypePlaceholder);
         registerAsAnEventHandler(this);
     }

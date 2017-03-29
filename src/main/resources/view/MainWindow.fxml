@@ -45,12 +45,12 @@
               <items>
                 <AnchorPane maxHeight="90.0">
                      <children>
-                      <AnchorPane fx:id="taskListTypePlaceholder" minWidth="180.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <AnchorPane fx:id="taskListTypePlaceholder" minWidth="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <padding>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </padding>
                         </AnchorPane>
-                      <AnchorPane fx:id="taskCountPlaceholder" minHeight="90.0" maxWidth="80.0" prefWidth="80.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <AnchorPane fx:id="taskCountPlaceholder" minHeight="90.0" maxWidth="80.0" prefWidth="80.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <padding>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </padding>

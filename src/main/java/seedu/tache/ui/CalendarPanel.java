@@ -1,5 +1,7 @@
 package seedu.tache.ui;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -19,9 +21,12 @@ import javafx.scene.web.WebView;
 import seedu.tache.MainApp;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
+import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
+import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
 
 /**
  * The Calendar Panel of the App.
@@ -76,14 +81,60 @@ public class CalendarPanel extends UiPart<Region> {
         if (task.getEndDateTime().isPresent()) {
             end = endDateTime.get().getDateTimeForFullCalendar();
         }
-        String isActive = String.valueOf(task.getActiveStatus());
-        return "add_event('" + title + "', '" + start + "', '" + end + "', '" + isActive + "')";
+        String status = "uncompleted";
+        if (task.getActiveStatus() == false) {
+            status = "completed";
+        } else if (task.getEndDateTime().isPresent()) {
+            DateTime taskDate = task.getEndDateTime().get();
+            if (taskDate.hasPassed()) {
+                status = "overdue";
+            }
+        }
+        return "add_event('" + title + "', '" + start + "', '" + end + "', '" + status + "')";
     }
 
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
         refreshCalendar(taskList);
+    }
+
+    @Subscribe
+    public void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+        Optional<DateTime> startDateTime = event.getNewSelection().getStartDateTime();
+        if (startDateTime.isPresent()) {
+            changeReferenceDate(startDateTime.get().getDateTimeForFullCalendar());
+        }
+    }
+
+    @Subscribe
+    public void handleTaskListTypeChangedEvent(TaskListTypeChangedEvent event) {
+        String taskListType = event.getTaskListType();
+        if (taskListType.equals("Tasks Due Today") || taskListType.equals("Tasks Due This Week")) {
+            Date today = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            String referenceDate = sdf.format(today);
+            changeReferenceDate(referenceDate);
+        }
+    }
+
+    private void changeReferenceDate(String referenceDate) {
+        WebEngine engine = calendar.getEngine();
+        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
+        if (webViewState.get() == Worker.State.SUCCEEDED) {
+            engine.executeScript("change_reference_date('" + referenceDate + "')");
+        } else {
+            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable,
+                        Worker.State oldValue, Worker.State newValue) {
+                    if (newValue != Worker.State.SUCCEEDED) {
+                        return;
+                    }
+                    engine.executeScript("change_reference_date('" + referenceDate + "')");
+                }
+            });
+        }
     }
 
     private String getRemoveAllTaskScript() {
@@ -116,16 +167,42 @@ public class CalendarPanel extends UiPart<Region> {
         engine.executeScript(getRemoveAllTaskScript());
     }
 
+    /**
+     * Inputs all timed events in task list to calendar.
+     * For deadline tasks (only have end but no start date/time), convert end date/time to start date/time.
+     */
     private void addAllEvents(ObservableList<ReadOnlyTask> taskList) {
-        WebEngine engine = calendar.getEngine();
         for (ReadOnlyTask task : taskList) {
             if (!task.getStartDateTime().isPresent()) {
-                continue;
+                Task newTask = new Task(task);
+                newTask.setStartDateTime(newTask.getEndDateTime());
+                newTask.setEndDateTime(Optional.empty());
+                task = newTask;
             }
+            addCurrentEvent(task);
+        }
+    }
+
+    private void addCurrentEvent(ReadOnlyTask task) {
+        WebEngine engine = calendar.getEngine();
+        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
+        if (webViewState.get() == Worker.State.SUCCEEDED) {
             engine.executeScript(getLoadTaskExecuteScript(task));
+        } else {
+            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable,
+                        Worker.State oldValue, Worker.State newValue) {
+                    if (newValue != Worker.State.SUCCEEDED) {
+                        return;
+                    }
+                    engine.executeScript(getLoadTaskExecuteScript(task));
+                }
+            });
         }
     }
     //@@author
+
     /**
      * Frees resources allocated to the calendar.
      */

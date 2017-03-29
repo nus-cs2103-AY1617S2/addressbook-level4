@@ -75,18 +75,6 @@
     -fx-border-width: 3 3 3 3;
 }
 
-.completed-task-card {
-    -fx-border-color: transparent;
-}
-
-.uncompleted-task-card {
-    -fx-border-color: #5f77bd;
-}
-
-.overdue-task-card {
-    -fx-border-color: #ef044b;
-}
-
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;

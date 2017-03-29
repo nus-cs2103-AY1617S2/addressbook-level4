@@ -28,11 +28,13 @@ $(document).ready(function() {
     $('#calendar').fullCalendar('render');
 });
 
-function add_event(title, start, end, isActive) {
+function add_event(title, start, end, status) {
     $(document).ready(function() {
         var color = 'white';
-        if (isActive === "true") {
-            color = 'light blue';
+        if (status === "uncompleted") {
+            color = #5f77bd;
+        } else if (status === "overdue") {
+            color = #ef044b;
         }
         var event = {
             title: title,
@@ -48,7 +50,13 @@ function add_event(title, start, end, isActive) {
 
 function remove_all() {
     $(document).ready(function() {
-        $('#calendar').fullCalendar('removeEvents');
+        $('#calendar').fullCalendar( 'removeEvents' );
+    });
+}
+
+function change_reference_date(date) {
+    $(document).ready(function() {
+        $('#calendar').fullCalendar( 'gotoDate', date);
     });
 }
 

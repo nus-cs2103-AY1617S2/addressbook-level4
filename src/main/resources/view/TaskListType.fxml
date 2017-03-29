@@ -11,5 +11,5 @@
     <stylesheets>
         <URL value="@TacheTheme.css" />
     </stylesheets>
-    <Label fx:id="taskListType" maxWidth="180" prefWidth="180" minHeight="80"/>
+    <Label fx:id="taskListType" maxWidth="160" prefWidth="160" minHeight="80"/>
 </AnchorPane>
