@@ -53,7 +53,7 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
-     * 
+     *
      * @param startPosition
      *            The starting position of the sub list.
      * @param persons
