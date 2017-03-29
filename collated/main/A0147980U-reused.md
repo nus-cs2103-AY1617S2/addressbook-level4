@@ -1,18 +1,6 @@
-package seedu.doist.logic.parser;
-
-import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
-
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import seedu.doist.commons.exceptions.IllegalValueException;
-import seedu.doist.logic.commands.Command;
-import seedu.doist.logic.commands.IncorrectCommand;
-import seedu.doist.logic.commands.ListCommand;
-
-//@@author A0147980U-reused
+# A0147980U-reused
+###### \java\seedu\doist\logic\parser\ListCommandParser.java
+``` java
 public class ListCommandParser {
     private static final Pattern LIST_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                       "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
@@ -45,3 +33,4 @@ public class ListCommandParser {
         }
     }
 }
+```

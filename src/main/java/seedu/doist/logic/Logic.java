@@ -23,6 +23,7 @@ public interface Logic {
     /** Returns the filtered list of persons */
     ObservableList<ReadOnlyTask> getFilteredPersonList();
 
+    //@@author A0147980U
     /**
      * This method is used for auto completion in UI component
      * It is defined in Logic component rather than in Model component to
@@ -31,6 +32,7 @@ public interface Logic {
      */
     List<String> getAllCommandWords();
 
+    //@@author A0147620L
     /**
      * Method used to retrieve all the names of the tasks store
      * This is used for the autoComplete Feature in 'Search'

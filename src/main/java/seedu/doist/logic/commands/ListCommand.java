@@ -16,12 +16,14 @@ import seedu.doist.model.tag.UniqueTagList;
  */
 public class ListCommand extends Command {
 
+    //@@author A0147980U
     public enum TaskType {
         PENDING,
         FINISHED,
         OVERDUE,
         NOT_FINISHED
     }
+    //@@author
 
     public static final String DEFAULT_COMMAND_WORD = "list";
     public static final String PREAMBLE_ALL = "ALL";
@@ -40,6 +42,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_OVERDUE = String.format(MESSAGE_SUCCESS, "overdue");
     public static final String MESSAGE_ALL = String.format(MESSAGE_SUCCESS, "all");
 
+    //@@author A0147980U
     private UniqueTagList tagList = new UniqueTagList();
     private TaskType type = null;
 
