@@ -72,6 +72,8 @@ public class Schedule {
     public String toString() {
         if (this.scheduleDate == null) {
             return STRING_EMPTY;
+        } else if (this.scheduleDate.equals("")){
+            return STRING_EMPTY;
         }
         String dateString = FORMATTER_DATE.format(this.scheduleDate);
         return dateString;

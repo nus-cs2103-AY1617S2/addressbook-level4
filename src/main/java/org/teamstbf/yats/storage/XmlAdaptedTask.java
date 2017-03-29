@@ -32,6 +32,8 @@ public class XmlAdaptedTask {
 	@XmlElement(required = true)
 	private String endTime;
 	@XmlElement(required = true)
+	private String deadline;
+	@XmlElement(required = true)
 	private String description;
 	@XmlElement(required = true)
 	private String completed;
@@ -61,6 +63,7 @@ public class XmlAdaptedTask {
 		location = source.getLocation().value;
 		startTime = source.getStartTime().toString();
 		endTime = source.getEndTime().toString();
+		deadline = source.getDeadline().toString();
 		description = source.getDescription().value;
 		completed = source.getIsDone().getValue();
 		tagged = new ArrayList<>();
@@ -83,9 +86,10 @@ public class XmlAdaptedTask {
 		final Location location = new Location(this.location);
 		final Schedule startTime = new Schedule(this.startTime);
 		final Schedule endTime = new Schedule(this.endTime);
+		final Schedule deadline = new Schedule(this.deadline);
 		final Description description = new Description(this.description);
 		final UniqueTagList tags = new UniqueTagList(personTags);
 		final IsDone isDone = new IsDone(this.completed);
-		return new Event(title, location, startTime, endTime, description, tags, isDone);
+		return new Event(title, location, startTime, endTime, deadline, description, tags, isDone);
 	}
 }

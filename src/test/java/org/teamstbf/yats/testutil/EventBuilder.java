@@ -67,5 +67,10 @@ public class EventBuilder {
     public EventBuilder withIsDone(String email) throws IllegalValueException {
         this.task.setIsDone(new IsDone(email));
         return this;
+    }
+
+    public EventBuilder withDeadline(String string) {
+        this.task.setDeadline(new Schedule(string));
+        return this;
     }	
 }

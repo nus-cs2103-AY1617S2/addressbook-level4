@@ -55,6 +55,13 @@ public interface Model {
 	/** Updates the filter of the filtered event list to show all events */
 	void updateFilteredListToShowAll();
 
+	// @@author A0139448U
+	/*
+	 * force saves the current state of the taskmanager
+	 * for use in changing save location to create a file in new location
+	 */
+	void saveTaskManager();
+
 	// @@author A0138952W
 	/**
 	 * Updates the filter of the filtered event list to show specified location
@@ -94,13 +101,13 @@ public interface Model {
 	void getNextState();
 
 	/**
-     * Method to check if the undo stack is empty - nothing to undo
-     */
+	 * Method to check if the undo stack is empty - nothing to undo
+	 */
 	boolean checkEmptyUndoStack();
-	
-    /**
-     * Method to check if the redo stack is empty - nothing to redo
-     */
+
+	/**
+	 * Method to check if the redo stack is empty - nothing to redo
+	 */
 	boolean checkEmptyRedoStack();
 
 }

@@ -16,6 +16,7 @@ public class TestEvent implements ReadOnlyEvent {
 	private Title name;
 	private Schedule startTime;
 	private Schedule endTime;
+	private Schedule deadline;
 	private Description description;
 	private IsDone isDone;
 	private Location location;
@@ -33,6 +34,7 @@ public class TestEvent implements ReadOnlyEvent {
 		this.location = eventToCopy.getLocation();
 		this.startTime = eventToCopy.getStartTime();
 		this.endTime = eventToCopy.getEndTime();
+		this.deadline = eventToCopy.getEndTime();
 		this.description = eventToCopy.getDescription();
 		this.tags = eventToCopy.getTags();
 		this.isDone = eventToCopy.getIsDone();
@@ -44,6 +46,7 @@ public class TestEvent implements ReadOnlyEvent {
 		sb.append("l/" + this.getLocation().value + " ");
 		sb.append("s/" + this.getStartTime().toString() + " ");
 		sb.append("e/" + this.getEndTime().toString() + " ");
+		sb.append("d/" + this.getDeadline().toString() + " ");
 		sb.append("d/" + this.getDescription().value + " ");
 		this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
 		return sb.toString();
@@ -122,4 +125,28 @@ public class TestEvent implements ReadOnlyEvent {
 		isDone.markDone();
 	}
 
+    @Override
+    public Schedule getDeadline() {
+        return deadline;
+    }
+
+    @Override
+    public boolean hasDeadline() {
+        if (this.deadline.toString().equals("")) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean hasStartEndTime() {
+        if (this.startTime.toString().equals("") || this.startTime.toString().equals("")) {
+            return false;
+        }
+        return true;
+    }
+
+    public void setDeadline(Schedule schedule) {
+        this.deadline = schedule;
+    }
 }

@@ -3,8 +3,9 @@
     <tasks>
         <title>Abdicate the British Throne</title>
         <location>Buckingham Palace</location>
-        <startTime></startTime>
-        <endTime></endTime>
+        <startTime>11:59PM 08/04/2017</startTime>
+        <endTime>11:59PM 08/04/2017</endTime>
+        <deadline></deadline>
         <description>caught having a mistress</description>
         <completed>Yes</completed>
         <tagged>KingGeorgeVI</tagged>
@@ -14,6 +15,7 @@
         <location>King's Row</location>
         <startTime></startTime>
         <endTime></endTime>
+        <deadline>11:59PM 08/04/2017</deadline>
         <description>Boop that nose</description>
         <completed>Yes</completed>
         <tagged>reaper</tagged>
@@ -21,8 +23,9 @@
     <tasks>
         <title>Oxygen not Included</title>
         <location>Klei Entertainment</location>
-        <startTime></startTime>
-        <endTime></endTime>
+        <startTime>11:59PM 08/04/2017</startTime>
+        <endTime>11:59PM 08/04/2017</endTime>
+        <deadline></deadline>
         <description>Don't starve together</description>
         <completed>Yes</completed>
         <tagged>ONN</tagged>
@@ -30,8 +33,9 @@
     <tasks>
         <title>Act like a craven</title>
         <location>The Wall</location>
-        <startTime></startTime>
-        <endTime></endTime>
+        <startTime>11:59PM 08/04/2017</startTime>
+        <endTime>11:59PM 08/04/2017</endTime>
+        <deadline></deadline>
         <description>fighting the wildings, but extremely scared</description>
         <completed>Yes</completed>
         <tagged>LordCommanderJonSnow</tagged>
@@ -41,6 +45,7 @@
         <location>AHHH</location>
         <startTime></startTime>
         <endTime></endTime>
+        <deadline>11:59PM 08/04/2017</deadline>
         <description>AHHHHHHHHH</description>
         <completed>Yes</completed>
         <tagged>AHHHHHHHHHHHHHH</tagged>

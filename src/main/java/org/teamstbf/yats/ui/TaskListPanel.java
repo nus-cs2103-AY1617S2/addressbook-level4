@@ -77,7 +77,7 @@ public class TaskListPanel extends UiPart<Region> {
 				if (person.getIsDone().getValue().equals("Yes")) {
                     setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSONDONE).getRoot());
                 } else { 
-				setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSON).getRoot());
+                    setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSON).getRoot());
                 }
 			}
 		}

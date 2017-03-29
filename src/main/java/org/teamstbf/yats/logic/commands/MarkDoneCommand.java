@@ -46,13 +46,14 @@ public class MarkDoneCommand extends Command {
 	if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
 	    return new CommandResult(MESSAGE_ALR_MARKED);
 	}
-
-	markedTask.getIsDone().markDone();
-
-	try {
-	    model.updateEvent(targetIndex, markedTask);
-	} catch (UniqueEventList.DuplicateEventException dpe) {
-	    throw new CommandException(MESSAGE_DUPLICATE_TASK);
+		try {
+			model.updateEvent(targetIndex, markedTask);
+		} catch (UniqueEventList.DuplicateEventException dpe) {
+			throw new CommandException(MESSAGE_DUPLICATE_TASK);
+		}
+		model.updateFilteredListToShowAll();
+        markedTask.setPriority(0);
+		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));
 	}
 
 	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));

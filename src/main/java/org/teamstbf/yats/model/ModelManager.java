@@ -1,5 +1,6 @@
 package org.teamstbf.yats.model;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager extends ComponentManager implements Model {
 
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+	private static final String UNDONE_TASK_IDENTIFIER = "No";
 
 	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 5;
 
@@ -54,6 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 		this.taskManager = new TaskManager(taskManager);
 		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
+		updateFilteredListToShowAll();
 		undoTaskManager = new Stack<TaskManager>();
 		redoTaskManager = new Stack<TaskManager>();
 	}
@@ -154,9 +157,9 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.resetData(redoTaskManager.pop());
 		indicateTaskManagerChanged();
 	}
-	
-	// @@author 
-	
+
+	// @@author
+
 	/*
 	 * @Override public synchronized void getNextState() { saveImage();
 	 * taskManager.resetData(redoTaskManager.pop()); }
@@ -178,6 +181,11 @@ public class ModelManager extends ComponentManager implements Model {
 	/** Raises an event to indicate the model has changed */
 	private void indicateTaskManagerChanged() {
 		raise(new TaskManagerChangedEvent(taskManager));
+	}
+
+	@Override
+	public void saveTaskManager() {
+		indicateTaskManagerChanged();
 	}
 
 	@Override
@@ -209,9 +217,13 @@ public class ModelManager extends ComponentManager implements Model {
 		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
 	}
 
+
 	@Override
 	public void updateFilteredListToShowAll() {
-		filteredEvents.setPredicate(null);
+		Set<String> undoneTaskIdentifier = new HashSet<String>();
+		undoneTaskIdentifier.add(UNDONE_TASK_IDENTIFIER);
+		updateFilteredListToShowDone(undoneTaskIdentifier);
+		// filteredEvents.setPredicate(null);
 	}
 
 	// @@author A0138952W
