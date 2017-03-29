@@ -105,9 +105,11 @@ public class XmlAdaptedTask {
 
     /**
      * Converts this jaxb-friendly adapted task object into the model's Task object.
+     * @throws PastDateTimeException should never be thrown because dates in the past are allowed
+     * @throws InvalidDurationException if the end DateTime is before or same as the start DateTime
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
-    public Task toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException, PastDateTimeException, InvalidDurationException {
         // TODO get seems to not be a good name, as it is usually used for getters
         final Name name = getNameFromXmlElement();
         final Optional<Deadline> deadline = getDeadlineFromXmlElement();
