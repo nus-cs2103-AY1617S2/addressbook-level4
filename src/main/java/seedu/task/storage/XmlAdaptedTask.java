@@ -24,9 +24,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
-    private String startDate;
+    private String startTiming;
     @XmlElement(required = true)
-    private String endDate;
+    private String endTiming;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -46,8 +46,8 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
         priority = source.getPriority().value;
-        startDate = source.getStartTiming().value;
-        endDate = source.getEndTiming().value;
+        startTiming = source.getStartTiming().value;
+        endTiming = source.getEndTiming().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -66,9 +66,9 @@ public class XmlAdaptedTask {
         }
         final Description description = new Description(this.description);
         final Priority priority = new Priority(this.priority);
-        final Timing startDate = new Timing(this.startDate);
-        final Timing endDate = new Timing(this.endDate);
+        final Timing startTiming = new Timing(this.startTiming);
+        final Timing endTiming = new Timing(this.endTiming);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(description, priority, startDate, endDate, tags);
+        return new Task(description, priority, startTiming, endTiming, tags);
     }
 }
