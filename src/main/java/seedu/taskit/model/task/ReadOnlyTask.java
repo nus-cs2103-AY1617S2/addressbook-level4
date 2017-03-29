@@ -48,9 +48,10 @@ public interface ReadOnlyTask {
     }
     
     
+    //@@author A0097141H
     /**
      * Stringifies title and tags
-     * @return String with title and tags
+     * @return lowercase String with title and tags for easy string matching
      */
     default String toStringTitleAndTagList() {
     	String titleAndTagString = getTitle().title + " ";
@@ -61,8 +62,9 @@ public interface ReadOnlyTask {
     	titleAndTagString = builder.toString();
     	titleAndTagString = titleAndTagString.replace('[', ' ').replace(']', ' ');
     	
-    	return titleAndTagString;
+    	return titleAndTagString.toLowerCase();
     }
+    
 
 }
 

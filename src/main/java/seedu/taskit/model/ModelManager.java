@@ -139,6 +139,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    //@@author A0097141H
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
@@ -148,12 +149,13 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
+        			// might not need this first boolean
         	return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.toStringTitleAndTagList(), keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.toStringTitleAndTagList(), keyword.toLowerCase()))
                     .findAny()
                     .isPresent() |                    
                     nameKeyWords.stream()
-                    .filter(keyword -> task.toStringTitleAndTagList().contains(keyword))
+                    .filter(keyword -> task.toStringTitleAndTagList().contains(keyword.toLowerCase()))
                     .findAny()
                     .isPresent();
         }
@@ -163,6 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+    //@@author
     
     private class ParameterQualifier implements Qualifier {
         private String parameter;
