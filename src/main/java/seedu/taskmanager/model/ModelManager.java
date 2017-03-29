@@ -100,9 +100,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0142418L
-    /** Deletes tasks by their date. 
-     *  Returns the number of tasks deleted.
-     * */
+    /**
+     * Deletes tasks by their date. Returns the number of tasks deleted.
+     */
     @Override
     public synchronized int deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
             throws TaskNotFoundException {
@@ -123,9 +123,9 @@ public class ModelManager extends ComponentManager implements Model {
         return numDeletedTasks;
     }
 
-    /** Deletes the task by its name. 
-     *  Returns the number of tasks deleted.
-     * */
+    /**
+     * Deletes the task by its name. Returns the number of tasks deleted.
+     */
     @Override
     public synchronized int deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws TaskNotFoundException {

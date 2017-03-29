@@ -241,7 +241,7 @@ public class CurrentDate {
 
         LocalDate testdate = LocalDate.of(year, month, day);
         int testdays = testdate.lengthOfMonth();
-        
+
         int diffInDays = dayOfWeek - inputDay;
 
         if (diffInDays == 0) {

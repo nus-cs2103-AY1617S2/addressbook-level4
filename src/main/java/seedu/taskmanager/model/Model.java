@@ -33,14 +33,14 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     // @@author A0142418L
-    /** Deletes tasks by their date. 
-     *  Returns the number of tasks deleted.
-     * */
+    /**
+     * Deletes tasks by their date. Returns the number of tasks deleted.
+     */
     int deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Deletes the task by its name. 
-     *  Returns the number of tasks deleted.
-     * */
+    /**
+     * Deletes the task by its name. Returns the number of tasks deleted.
+     */
     int deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws UniqueTaskList.TaskNotFoundException;
 
@@ -79,7 +79,7 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
-    
+
     void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete);
 
     // @@author A0139520L

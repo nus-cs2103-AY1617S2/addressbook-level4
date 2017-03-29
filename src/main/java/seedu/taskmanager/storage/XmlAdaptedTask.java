@@ -6,15 +6,15 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.category.Category;
-import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * JAXB-friendly version of the Task.
@@ -76,7 +76,7 @@ public class XmlAdaptedTask {
         for (XmlAdaptedCategory category : categorised) {
             taskCategories.add(category.toModelType());
         }
-        
+
         final TaskName taskName = new TaskName(this.taskname);
         final StartDate startDate = new StartDate(this.startdate);
         final StartTime startTime = new StartTime(this.starttime);
