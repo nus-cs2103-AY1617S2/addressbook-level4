@@ -2,14 +2,20 @@
  * 
  */
 package seedu.task.model.task;
+import seedu.task.commons.exceptions.IllegalValueException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.text.*;
-import com.joestelmach.natty.*;
+import java.util.List;
 /**
  * @author Daniel Mullen and Jacob Levy
  *
  */
 public class TaskDate {
+	
+	private List<Date> dates;
+    public final SimpleDateFormat formatter;
+    public final String OUTPUT_FORMAT = " MMM dd (EEE) ";
+	
     private int day;
     private int month;
     private int year;
@@ -40,18 +46,28 @@ public class TaskDate {
     private static final int YEAR2_START_INDEX = 11;
     private static final int YEAR2_END_INDEX = 13;
 
-    public TaskDate(String date) {
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invaid date information, try again.";
+
+    
+    public TaskDate(String input) throws IllegalValueException {
+    
+    formatter = new SimpleDateFormat (OUTPUT_FORMAT);
+    NattyParser natty = new NattyParser();
+    dates = natty.parse(input);
+    	
+    if(dates == null)
+    	throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
     	
 
-	date = date.trim();
-	value = date;
-	int[] dateArray = dateFormatConverter(date);
-	if (date.length() == 6) {
+	input = input.trim();
+	value = input;
+	int[] dateArray = dateFormatConverter(input);
+	if (input.length() == 6) {
 	    setDay(dateArray[DAY_ARRAY_INDEX]);
 	    setMonth(dateArray[MONTH_ARRAY_INDEX]);
 	    setYear(dateArray[YEAR_ARRAY_INDEX]);
 	}
-	if (date.length() == 13) {
+	if (input.length() == 13) {
 	    setDay(dateArray[DAY_ARRAY_INDEX]);
 	    setMonth(dateArray[MONTH_ARRAY_INDEX]);
 	    setYear(dateArray[YEAR_ARRAY_INDEX]);
@@ -111,11 +127,10 @@ public class TaskDate {
     }
 
     public String toString() {
-	if (day2 == 0 && month2 == 0 && year2 == 0) {
-	    return day + DATE_DELIMITER + month + DATE_DELIMITER + year;
-	}
-	return day + DATE_DELIMITER + month + DATE_DELIMITER + year + " " + DATE_DELIMITER2 + " " + day2
-		+ DATE_DELIMITER + month2 + DATE_DELIMITER + year2;
+	if(dates.size() == 1)
+    	return formatter.format(dates.get(0));
+	else
+		return formatter.format(dates.get(0)) +" - "+ formatter.format(dates.get(1));
     }
 
     public static int[] dateFormatConverter(String date) {

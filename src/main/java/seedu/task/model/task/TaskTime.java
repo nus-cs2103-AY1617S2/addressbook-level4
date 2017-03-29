@@ -1,7 +1,6 @@
 package seedu.task.model.task;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -9,8 +8,10 @@ import java.util.List;
 public class TaskTime {
 	
 	private List<Date> dates;
+	private Date time;
     public final SimpleDateFormat formatter;
     public final String OUTPUT_FORMAT = " hh:mm a ";
+    
     public final String value;
 	private int hour;
     private int minute;
@@ -20,21 +21,21 @@ public class TaskTime {
     public final int MINUTE_ARRAY_INDEX = 0;
     public final int HOUR_ARRAY_INDEX = 1;
 
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format, you can use hhmm, hh:mm, or h:mm";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time information, try again.";
 
-    public TaskTime(String time) throws IllegalValueException {
+    public TaskTime(String input) throws IllegalValueException {
     
     formatter = new SimpleDateFormat (OUTPUT_FORMAT);
     NattyParser natty = new NattyParser();
-	dates = natty.parse(time);
-	
+	dates = natty.parse(input);
 	if(dates == null)
 		throw new IllegalValueException(MESSAGE_INVALID_TIME_FORMAT);
+	time = dates.get(0);
 	
-	value = time.trim();
-	int[] timeArray = timeFormatConverter(time);
-	setMinute(timeArray[MINUTE_ARRAY_INDEX]);
-	setHour(timeArray[HOUR_ARRAY_INDEX]);
+	value = input.trim();
+	int[] timeArray = timeFormatConverter(input);
+	setMinute(time.getMinutes());
+	setHour(time.getHours());
     }
 
     public String toString() {
