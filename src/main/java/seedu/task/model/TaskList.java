@@ -18,7 +18,7 @@ import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task-list level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskList implements ReadOnlyTaskList {
