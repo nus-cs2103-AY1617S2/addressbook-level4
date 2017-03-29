@@ -3,6 +3,7 @@ package seedu.taskit.testutil;
 
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
+import seedu.taskit.model.task.Priority;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
@@ -11,7 +12,8 @@ public class TestTask implements ReadOnlyTask {
     private Title title;
     private Date start;
     private Date end;
-
+    private Priority priority;
+    
     private UniqueTagList tags;
 
     public TestTask() {
@@ -57,6 +59,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Date getEnd() {
         return end;
+    }
+    
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override

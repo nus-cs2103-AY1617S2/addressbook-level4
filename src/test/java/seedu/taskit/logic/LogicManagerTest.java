@@ -44,6 +44,7 @@ import seedu.taskit.model.ReadOnlyAddressBook;
 import seedu.taskit.model.tag.Tag;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
+import seedu.taskit.model.task.Priority;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
@@ -414,7 +415,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, new Date(), new Date(), tags);
+            return new Task(title, new Date(), new Date(), new Priority(), tags);
         }
 
         /**
@@ -424,12 +425,12 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the task data field values
          */
-        //TODO do more for dates?
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
                     new Date("friday at 2pm"),
                     new Date("friday at 3pm"),
+                    new Priority(),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -525,6 +526,7 @@ public class LogicManagerTest {
                     new Title(title),
                     new Date(),
                     new Date(),
+                    new Priority(),
                     new UniqueTagList(new Tag("tag"))
             );
         }
