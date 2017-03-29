@@ -1,10 +1,13 @@
 package seedu.task.testutil;
 
+import java.util.ArrayList;
+
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.RecurringFrequency;
+import seedu.task.model.task.RecurringTaskOccurrence;
 import seedu.task.model.task.Timing;
 
 /**
@@ -110,5 +113,41 @@ public class TestPerson implements ReadOnlyTask {
     public RecurringFrequency getFrequency() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public ArrayList<RecurringTaskOccurrence> getOccurrences() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setStartTiming(Timing startTiming) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setEndTiming(Timing endTiming) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public Timing getStartTiming(int i) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ArrayList<Integer> getOccurrenceIndexList() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setOccurrenceIndexList(ArrayList<Integer> list) {
+        // TODO Auto-generated method stub
+
     }
 }

@@ -45,6 +45,11 @@ public class TaskBuilder {
         return this;
     }
 
+    //    public TaskBuilder withFrequency(String frequency) throws IllegalValueException {
+    //        this.task.setFrequency(new Timing(frequency));
+    //        return this;
+    //    }
+
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
         for (String tag: tags) {

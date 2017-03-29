@@ -301,9 +301,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-
-
     //@@author
+
     /**
      * Results in Tasks sorted by completed state, followed by priority, endTiming, startTiming
      * and lastly by frequency.

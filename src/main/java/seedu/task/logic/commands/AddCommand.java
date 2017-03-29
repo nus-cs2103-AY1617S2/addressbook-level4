@@ -34,7 +34,7 @@ public class AddCommand extends Command {
 
     private final Task toAdd;
     //    private RecurringTask toAddRecur = null;
-
+    //@@author A0164212U
     /**
      * Creates an AddCommand using raw values.
      *
@@ -46,19 +46,14 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        Description description = new Description(name);
-        Priority pri = new Priority(priority);
-        Timing startTime = new Timing(startTiming);
-        Timing endTime = new Timing(endTiming);
-        UniqueTagList tagList = new UniqueTagList(tagSet);
         boolean recurring = (recurFreq != null);
 
         this.toAdd = new Task(
-                description,
-                pri,
-                startTime,
-                endTime,
-                tagList,
+                new Description(name),
+                new Priority(priority),
+                new Timing(startTiming),
+                new Timing(endTiming),
+                new UniqueTagList(tagSet),
                 recurring,
                 new RecurringFrequency(recurFreq)
                 );
@@ -67,6 +62,7 @@ public class AddCommand extends Command {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
     }
+    //@@author
 
     @Override
     public CommandResult execute() throws CommandException {

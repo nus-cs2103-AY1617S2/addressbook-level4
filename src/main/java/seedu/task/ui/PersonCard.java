@@ -55,9 +55,6 @@ public class PersonCard extends UiPart<Region> {
             endTiming.setText("End Timing: " + task.getOccurrences().get(index).getEndTiming().value);
         }
 
-
-
-
         if (task.isRecurring()) {
             recurring.setText("Recurring Task: " + task.getFrequency().toString());
             recurring.setStyle("-fx-background-color: pink;");

@@ -146,9 +146,11 @@ public class ModelManager extends ComponentManager implements Model {
         //@@author A0164212U
         /**
          * @param task
-         * @return list of Indices for occurrences that match keywords for task
+         * internally sets task.occurrenceIndexList for occurrences that match given keywords for task
+         * @return true if keywords are present in the given task
          */
-        public boolean searchList(ReadOnlyTask task) {
+        @Override
+        public boolean run(ReadOnlyTask task) {
             boolean isValid = false;
             ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
             for (int i = 0; i < task.getOccurrences().size(); i++) {
@@ -177,20 +179,6 @@ public class ModelManager extends ComponentManager implements Model {
             task.setOccurrenceIndexList(occurrenceIndexList);
             return isValid;
         }
-
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return searchList(task);
-            //            boolean isPresent = searchList(task);
-            //            if (task.getOccurrenceIndexList().size() > 0) {
-            //                isPresent = true;
-            //                //                task.setStartTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getStartTiming());
-            //                //                task.setEndTiming(task.getOccurrences().get(occurrenceIndexList.get(0)).getEndTiming());
-            //            }
-            //            return isPresent;
-        }
-
         //@@author
 
         @Override
