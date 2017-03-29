@@ -50,6 +50,7 @@ public class CommandLibrary {
 
     private static CommandLibrary instance = null;
     private static HashMap<String, CommandParser> commandParserTable;
+    private static HashMap<String, Command> commandTable;
 //    private static commandKeyParserPair[] commandKeyParserPairs;
 
     protected CommandLibrary() {
@@ -68,6 +69,7 @@ public class CommandLibrary {
      */
     private static void init() {
         commandParserTable =  new HashMap<>();
+        commandTable = new HashMap<>();
         // TODO Auto-generated method stub
         commandParserTable.put(AddCommand.COMMAND_WORD_1, new AddCommandParser());
 
@@ -128,7 +130,8 @@ public class CommandLibrary {
 
         commandParserTable.put(UnDoneCommand.COMMAND_WORD_1, new EditUnDoneCommandParser());
         commandParserTable.put(UnDoneCommand.COMMAND_WORD_2, new EditUnDoneCommandParser());
-
+        
+        
 //        for(commandKeyParserPair pair: commandKeyParserPairs){
 //            commandParserTable.put(pair.getKey(), pair.getParser());
 //        }

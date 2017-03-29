@@ -31,10 +31,5 @@ public class ThemeChangeCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, themeName));
     }
 
-    @Override
-    public String getCommandUsage() {
-        // TODO Auto-generated method stub
-        return MESSAGE_USAGE;
-    }
 
 }
