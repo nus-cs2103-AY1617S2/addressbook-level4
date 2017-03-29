@@ -3,6 +3,7 @@ package seedu.toluist.commons.util;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -72,4 +73,20 @@ public class FxViewUtil {
         });
     }
 
+  //@@author A0162011A
+    /**
+     * Sets the key event on node.
+     * @param node the fx object which the handler will be placed on
+     * @param keycode the Keycode value of the accelerator
+     * @param handler the event handler
+     */
+    public static void setKeyCode(Node node, KeyCode keycode,
+                                  EventHandler<ActionEvent> handler) {
+        node.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (keycode.equals(event.getCode())) {
+                handler.handle(new ActionEvent());
+                event.consume();
+            }
+        });
+    }
 }

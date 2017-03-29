@@ -56,7 +56,9 @@ public class CommandBox extends UiView {
 
     private void handleCommandInputChanged(String newCommand) {
         List<String> suggestedCommands = new ArrayList(dispatcher.getPredictedCommands(newCommand));
-        UiStore.getInstance().setSuggestedCommands(suggestedCommands);
+        UiStore uiStore = UiStore.getInstance();
+        uiStore.setCommandInput(newCommand);
+        uiStore.setSuggestedCommands(suggestedCommands);
         if (!newCommand.isEmpty() && suggestedCommands.isEmpty()) {
             FxViewUtil.addStyleClass(commandTextField, STYLE_CLASS_ERROR);
         } else {

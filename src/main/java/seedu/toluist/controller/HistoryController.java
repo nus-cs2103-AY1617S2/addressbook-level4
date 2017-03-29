@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
+import seedu.toluist.model.CommandHistoryList;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -18,17 +19,16 @@ public class HistoryController extends Controller {
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "(?iu)^\\s*history\\s*";
 
-    private ArrayList<String> commandHistory;
+    private CommandHistoryList commandHistoryList;
 
-    public void setCommandHistory(ArrayList<String> commandHistory) {
-        this.commandHistory = commandHistory;
+    public void setCommandHistory(CommandHistoryList commandHistoryList) {
+        this.commandHistoryList = commandHistoryList;
     }
 
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
-
+        ArrayList<String> commandHistory = commandHistoryList.getCommandHistory();
         String result = String.join("\n", commandHistory);
-
         uiStore.setCommandResult(new CommandResult(String.format(
                 RESULT_MESSAGE, result, StringUtil.nounWithCount("command", commandHistory.size()))));
     }

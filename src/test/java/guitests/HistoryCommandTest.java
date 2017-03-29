@@ -11,7 +11,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
     public void viewHistoryWithoutAnythingElse() {
         String command = "history";
         commandBox.runCommand(command);
-        assertResultMessage(command + "\n1 command displayed.");
+        assertResultMessage("\n0 commands displayed.");
     }
 
     @Test
@@ -20,7 +20,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command1);
         String command2 = "history";
         commandBox.runCommand(command2);
-        assertResultMessage(command1 + "\n" + command2 + "\n2 commands displayed.");
+        assertResultMessage(command1 + "\n1 command displayed.");
     }
 
     @Test
@@ -29,7 +29,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command1);
         String command2 = "history";
         commandBox.runCommand(command2);
-        assertResultMessage(command1 + "\n" + command2 + "\n2 commands displayed.");
+        assertResultMessage(command1 + "\n1 command displayed.");
     }
 
     @Test
@@ -40,7 +40,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command2);
         String command3 = "history";
         commandBox.runCommand(command3);
-        assertResultMessage(command1 + "\n" + command2 + "\n" + command3 + "\n3 commands displayed.");
+        assertResultMessage(command1 + "\n" + command2 + "\n2 commands displayed.");
     }
 
     @Test
@@ -51,7 +51,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command2);
         String command3 = "history";
         commandBox.runCommand(command3);
-        assertResultMessage(command1 + "\n" + command2 + "\n" + command3 + "\n3 commands displayed.");
+        assertResultMessage(command1 + "\n" + command2 + "\n2 commands displayed.");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command2);
         String command3 = "history";
         commandBox.runCommand(command3);
-        assertResultMessage(command1 + "\n" + command2 + "\n" + command3 + "\n3 commands displayed.");
+        assertResultMessage(command1 + "\n" + command2 + "\n2 commands displayed.");
     }
 
     @Test
@@ -73,6 +73,6 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command2);
         String command3 = "history";
         commandBox.runCommand(command3);
-        assertResultMessage(command1 + "\n" + command2 + "\n" + command3 + "\n3 commands displayed.");
+        assertResultMessage(command1 + "\n" + command2 + "\n2 commands displayed.");
     }
 }
