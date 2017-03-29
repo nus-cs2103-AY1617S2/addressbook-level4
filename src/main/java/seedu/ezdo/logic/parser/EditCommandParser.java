@@ -81,7 +81,6 @@ public class EditCommandParser implements CommandParser {
      * If no value was given, an empty String is returned.
      */
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
-        assert tokenizer != null;
         Optional<String> optionalString;
         if (!tokenizer.getValue(prefix).isPresent()) {
             optionalString = Optional.empty();

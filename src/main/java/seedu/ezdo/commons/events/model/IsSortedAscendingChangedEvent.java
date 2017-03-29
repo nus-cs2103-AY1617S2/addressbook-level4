@@ -11,7 +11,6 @@ public class IsSortedAscendingChangedEvent extends BaseEvent {
     private final Boolean isSortedAscending;
 
     public IsSortedAscendingChangedEvent(Boolean isSortedAscending) {
-        assert isSortedAscending != null;
         this.isSortedAscending = isSortedAscending;
     }
 

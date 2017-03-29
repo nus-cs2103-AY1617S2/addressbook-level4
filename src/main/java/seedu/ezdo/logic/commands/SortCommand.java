@@ -38,7 +38,6 @@ public class SortCommand extends Command {
      */
     @Override
     public CommandResult execute() throws CommandException {
-        assert model != null;
         if (sortCriteria == null) {
             throw new CommandException(MESSAGE_INVALID_FIELD);
         }
