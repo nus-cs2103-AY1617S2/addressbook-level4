@@ -11,6 +11,7 @@ import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
@@ -70,6 +71,6 @@ public class XmlAdaptedTask {
         final Time endTime = new Time(Optional.of(this.endTime));
         final Description description = new Description(Optional.of(this.description));
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startTime, endTime, description, tags);
+        return new Task(name, startTime, endTime, description, tags, new Period(Optional.of("0")));
     }
 }

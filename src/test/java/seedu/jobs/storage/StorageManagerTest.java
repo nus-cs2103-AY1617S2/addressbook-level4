@@ -58,7 +58,7 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlTaskBookStorageTest} class.
          */
         TaskBook original = new TypicalTestTasks().getTypicalTaskBook();
         storageManager.saveTaskBook(original);

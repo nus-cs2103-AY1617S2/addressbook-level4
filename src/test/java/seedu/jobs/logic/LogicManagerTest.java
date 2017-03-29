@@ -22,7 +22,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.jobs.commons.core.EventsCenter;
-import seedu.jobs.commons.events.model.AddressBookChangedEvent;
+import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
 import seedu.jobs.logic.commands.AddCommand;
@@ -44,6 +44,7 @@ import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
@@ -67,7 +68,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(AddressBookChangedEvent abce) {
+    private void handleLocalModelChangedEvent(TaskBookChangedEvent abce) {
         latestSavedAddressBook = new TaskBook(abce.data);
     }
 
@@ -89,7 +90,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskBook(model.getAddressBook()); // last saved assumed to be up to date
+        latestSavedAddressBook = new TaskBook(model.getTaskBook()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -122,7 +123,7 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBook, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskBook expectedAddressBook = new TaskBook(model.getAddressBook());
+        TaskBook expectedAddressBook = new TaskBook(model.getTaskBook());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
@@ -152,7 +153,7 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getAddressBook());
+        assertEquals(expectedAddressBook, model.getTaskBook());
         assertEquals(expectedAddressBook, latestSavedAddressBook);
     }
 
@@ -430,7 +431,8 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, start, end, desc, tags);
+            Period period = new Period(Optional.of("0"));
+            return new Task(name, start, end, desc, tags,period);
         }
 
         /**
@@ -447,7 +449,8 @@ public class LogicManagerTest {
                     new Time(Optional.of("03/11/2017 16:00")),
                     new Description(Optional.of("House of " + seed)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), 
-                    new Tag("tag" + Math.abs(seed + 1)))
+                    new Tag("tag" + Math.abs(seed + 1))),
+                    new Period(Optional.of("0"))
             );
         }
 
@@ -546,7 +549,8 @@ public class LogicManagerTest {
                     new Time(Optional.of("03/11/2017 15:00")),
                     new Time(Optional.of("03/11/2017 16:00")),
                     new Description(Optional.of("Valid task")),
-                    new UniqueTagList(new Tag("tag"))
+                    new UniqueTagList(new Tag("tag")),
+                    new Period(Optional.of("0"))
             );
         }
     }

@@ -3,6 +3,7 @@ package seedu.jobs.testutil;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Time;
 
@@ -17,6 +18,7 @@ public class TestTask implements ReadOnlyTask {
     private Description description;
     private UniqueTagList tags;
     private boolean status;
+    private Period period;
     
     public TestTask() {
         tags = new UniqueTagList();
@@ -32,6 +34,7 @@ public class TestTask implements ReadOnlyTask {
         this.description = taskToCopy.getDescription();
         this.status = taskToCopy.isCompleted();
         this.tags = taskToCopy.getTags();
+        this.period = taskToCopy.getPeriod();
     }
 
     public void setName(Name name) {
@@ -107,5 +110,10 @@ public class TestTask implements ReadOnlyTask {
 	public void markComplete() {
 		this.status = true;
 	}
+
+    @Override
+    public Period getPeriod() {
+        return period;
+    }
 
 }

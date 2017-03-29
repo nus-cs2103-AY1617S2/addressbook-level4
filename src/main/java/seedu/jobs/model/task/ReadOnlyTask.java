@@ -9,7 +9,9 @@ public interface ReadOnlyTask {
     Time getStartTime();
 
     Time getEndTime();
-
+    
+	Period getPeriod();
+	
     Description getDescription();
 
     UniqueTagList getTags();
@@ -17,6 +19,7 @@ public interface ReadOnlyTask {
     boolean isCompleted();
     
     void markComplete();
+
     /**
      * Returns true if both have the same state. (interfaces cannot override
      * .equals)

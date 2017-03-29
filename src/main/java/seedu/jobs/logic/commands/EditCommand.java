@@ -9,6 +9,7 @@ import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
@@ -86,8 +87,8 @@ public class EditCommand extends Command {
 //        Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(TaskToEdit::getEmail);
 //        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(TaskToEdit::getAddress);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(TaskToEdit::getTags);
-
-        return new Task(updatedName, updatedStartTime, updatedEndTime, updatedDescription, updatedTags);
+        Period updatedPeriod = editTaskDescriptor.getPeriod().orElseGet(TaskToEdit::getPeriod);
+        return new Task(updatedName, updatedStartTime, updatedEndTime, updatedDescription, updatedTags, updatedPeriod);
     }
 
     /**
@@ -100,7 +101,8 @@ public class EditCommand extends Command {
         private Optional<Time> endTime = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
-
+        private Optional<Period> period = Optional.empty();
+        
         public EditTaskDescriptor() {
         }
 
@@ -145,7 +147,7 @@ public class EditCommand extends Command {
         public Optional<Time> getEnd() {
             return endTime;
         }
-
+        
         public void setDescription(Optional<Description> description) {
             assert description != null;
             this.description = description;
@@ -159,9 +161,13 @@ public class EditCommand extends Command {
             assert tags != null;
             this.tags = tags;
         }
-
+        
         public Optional<UniqueTagList> getTags() {
             return tags;
+        }
+        
+        public Optional<Period> getPeriod(){
+        	return period;
         }
     }
 }

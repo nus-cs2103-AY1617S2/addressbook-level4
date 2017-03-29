@@ -1,31 +1,32 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color:  derive(#ffffff, -10%);
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-font-family: "LiSong Pro";
+    -fx-text-fill: black;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "LiSong Pro";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "LiSong Pro";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "LiSong Pro";
+    -fx-text-fill: white;
 }
 
 .tab-pane {
@@ -39,9 +40,9 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
+    -fx-base: #000000;
+    -fx-control-inner-background: #000000;
+    -fx-background-color: #000000;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -65,7 +66,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "LiSong Pro";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -76,14 +77,15 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-border-color: transparent  derive(#ffffff, -20%) transparent derive(#ffffff, -20%);
+    -fx-background-color: transparent,  derive(#ffffff, -30%);
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(black, 20%);
+    -fx-border-color: derive(black, 20%);
 }
 
 .list-cell {
@@ -93,7 +95,18 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
+}
+.list-cell {
+	-fx-background-color: derive(black, 20%);
+}
+
+.list-cell:filled {
+	-fx-border-color: derive(black, 20%);
+}
+
+.list-cell:selected {
+	-fx-background-color: derive(black, 35%);
 }
 
 .cell_big_label {
@@ -107,26 +120,26 @@
 }
 
 .anchor-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: derive(#000000, 20%);
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(#000000, 20%);
+     -fx-border-color: derive(#000000, 20%);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#000000, 20%);
     -fx-text-fill: black;
 }
 
 .result-display {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #000000;
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: white !important;
 }
 
 .status-bar .label {
@@ -134,8 +147,8 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#000000, 30%);
+    -fx-border-color: derive(#000000, 25%);
     -fx-border-width: 1px;
 }
 
@@ -144,32 +157,44 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#000000, 30%);
+    -fx-border-color: derive(#000000, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#000000, 30%);
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(white, 0%);
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#000000, 20%);
+}
+
+.menu-bar :hover{
+    -fx-background-color: transparent;
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font-size: 12pt;
+    -fx-font-family: "LiSong Pro";
+    -fx-text-fill: black;
     -fx-opacity: 0.9;
+}
+
+.menu-bar :hover {
+	-fx-background-color: derive(white, -5%);
+}
+
+.menu-bar :selected {
+	-fx-background-color: derive(white, -5%);
 }
 
 .menu .left-container {
@@ -183,11 +208,11 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: derive(#ffffff, -10%);
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-background-color: derive(#ffffff, -10%);
+    -fx-font-family: "LiSong Pro", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -199,7 +224,7 @@
 
 .button:pressed, .button:default:hover:pressed {
   -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+  -fx-text-fill: #d8d8d8;
 }
 
 .button:focused {
@@ -226,11 +251,11 @@
 }
 
 .dialog-pane {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #000000;
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #000000;
 }
 
 .dialog-pane > *.label.content {
@@ -240,7 +265,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#000000, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -251,7 +276,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#1d1d1d, 10%);
     -fx-background-insets: 3;
 }
 
@@ -274,7 +299,6 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
     -fx-border-width: 1 1 1 1;
 }
 
@@ -283,8 +307,24 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+}
+
+#taskListView {
+	-fx-background-color: derive(black, 20%);
+	-fx-border-color: derive(black, 20%); 
+}
+
+#commandTextField {
+	-fx-control-inner-background: derive(black, 15%);
+	-fx-prompt-text-fill: derive(white, -10%);
+}
+
+#commandTextField, #resultDisplay {
+	-fx-control-inner-background: derive(black, 25%);
+	-fx-text-fill: derive(white, -25%);
+	-fx-border-color: derive(white, -25%); 
 }
 
 #tags {

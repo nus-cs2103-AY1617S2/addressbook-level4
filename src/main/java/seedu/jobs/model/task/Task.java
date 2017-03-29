@@ -7,21 +7,24 @@ import seedu.jobs.model.tag.UniqueTagList;
 
 public class Task implements ReadOnlyTask {
 
-    protected Name name;
-    protected Time startTime;
-    protected Time endTime;
-    protected Description description;
-    protected boolean isCompleted;
-    protected UniqueTagList tags;
+    private Name name;
+    private Time startTime;
+    private Time endTime;
+    private Description description;
+    private Period period;
+    private boolean isCompleted;
+    private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
+     * @param period TODO
      */
-    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags) {
+    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags, Period period) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.period = period;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
@@ -32,7 +35,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(), source.getTags(), source.getPeriod());
         this.isCompleted = source.isCompleted();
     }
 
@@ -87,10 +90,29 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-
+    
+    public Period getPeriod(){
+    	return period;
+    }
+    
+    public void setPeriod(Period period){
+    	this.period = period;
+    }
+    
     /**
      * Updates this task with the details of {@code replacement}.
      */
+    
+    @Override
+    /**
+     * Mark this task as completed
+     */
+    public void markComplete(){
+    	this.isCompleted = true;
+    	this.startTime.addDays(period.value);
+    	this.endTime.addDays(period.value);
+    }
+    
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
@@ -100,7 +122,8 @@ public class Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
-
+    
+    
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -125,8 +148,4 @@ public class Task implements ReadOnlyTask {
         return isCompleted;
     }
 
-	@Override
-	public void markComplete() {
-		this.isCompleted = true;
-	}
 }

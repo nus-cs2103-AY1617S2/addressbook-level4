@@ -18,8 +18,8 @@ import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.testutil.TypicalTestTasks;
 
-public class XmlAddressBookStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+public class XmlTaskBookStorageTest {
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskBookStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -64,7 +64,7 @@ public class XmlAddressBookStorageTest {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskBook original = td.getTypicalTaskBook();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        XmlTaskBookStorage xmlAddressBookStorage = new XmlTaskBookStorage(filePath);
 
         //Save in new file and read back
         xmlAddressBookStorage.saveTaskBook(original, filePath);
@@ -80,7 +80,7 @@ public class XmlAddressBookStorageTest {
 
         //Save and read without specifying file path
         original.addTask(new Task(td.CS4102));
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
+        xmlAddressBookStorage.saveTaskBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readTaskBook().get(); //file path not specified
         assertEquals(original, new TaskBook(readBack));
 
