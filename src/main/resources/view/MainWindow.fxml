@@ -33,11 +33,6 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
             </AnchorPane>
-            <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" styleClass="anchor-pane-with-border">
-           		<padding>
-               		<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-           		</padding>
-       		</AnchorPane>
             <AnchorPane fx:id="statusbarPlaceholder" />
          </children>
       </VBox>
@@ -56,6 +51,11 @@
                      </children>
                   </VBox>
                   <AnchorPane fx:id="completedTaskListPlaceholder" prefHeight="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="0.0" minHeight="0.0" opacity="0.0" prefHeight="0.0" styleClass="anchor-pane-with-border">
+                 		<padding>
+                     		<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                 		</padding>
+             		</AnchorPane>
                </children>
             </AnchorPane>
          </children>
