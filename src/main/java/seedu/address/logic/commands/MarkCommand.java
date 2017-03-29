@@ -77,7 +77,6 @@ public class MarkCommand extends Command {
                 Task newTask = createRecurringTask(taskToEdit);
                 model.addTask(newTask);
             }
-
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (Exception e) {
