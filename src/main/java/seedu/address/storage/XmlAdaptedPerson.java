@@ -6,16 +6,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-//import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Group;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-//import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Group;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyPerson;
 
 /**
  * JAXB-friendly version of the Person.
@@ -68,7 +66,7 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -80,6 +78,6 @@ public class XmlAdaptedPerson {
         //final Address address = new Address(this.address);
         final Group group = new Group(this.group);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, date, email, group, tags);
+        return new Task(name, date, email, group, tags);
     }
 }

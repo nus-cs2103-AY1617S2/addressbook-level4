@@ -29,17 +29,15 @@ import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
-//import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Group;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-//import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.YTomorrow;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Group;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 /**
@@ -54,7 +52,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Person[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -73,10 +71,10 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Person[] getSamplePersonData() {
+    private static Task[] getSamplePersonData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Person[]{
+            return new Task[]{
 //                new Person(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
 //                new Person(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
 //                new Person(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
@@ -86,15 +84,15 @@ public class TestUtil {
 //                new Person(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
 //                new Person(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
 //                new Person(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
-                new Person(new Name("study SE"), new Date("12.12"), new Email("hans@google.com"), new Group("learning"), new UniqueTagList()),
-                new Person(new Name("watch movie"), new Date("12.12"), new Email("ruth@google.com"), new Group("learning"), new UniqueTagList()),
-                new Person(new Name("do tutorial"), new Date("12.12"), new Email("heinz@yahoo.com"), new Group("learning"), new UniqueTagList()),
-                new Person(new Name("review the lesson"), new Date("12.12"), new Email("cornelia@google.com"), new Group("learning"), new UniqueTagList()),
-                new Person(new Name("read books"), new Date("12.12"), new Email("werner@gmail.com"), new Group("learning"), new UniqueTagList()),
-                new Person(new Name("painting"), new Date("12.12"), new Email("lydia@gmail.com"), new Group("learning"), new UniqueTagList()),
-                new Person(new Name("skiing"), new Date("12.12"), new Email("anna@google.com"), new Group("learning"), new UniqueTagList()),
-                new Person(new Name("buy CD"), new Date("12.12"), new Email("stefan@mail.com"), new Group("learning"), new UniqueTagList()),
-                new Person(new Name("go shopping"), new Date("12.12"), new Email("hans@google.com"), new Group("learning"), new UniqueTagList())
+                new Task(new Name("study SE"), new Date("12.12"), new Email("hans@google.com"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("watch movie"), new Date("12.12"), new Email("ruth@google.com"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("do tutorial"), new Date("12.12"), new Email("heinz@yahoo.com"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("review the lesson"), new Date("12.12"), new Email("cornelia@google.com"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("read books"), new Date("12.12"), new Email("werner@gmail.com"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("painting"), new Date("12.12"), new Email("lydia@gmail.com"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("skiing"), new Date("12.12"), new Email("anna@google.com"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("buy CD"), new Date("12.12"), new Email("stefan@mail.com"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("go shopping"), new Date("12.12"), new Email("hans@google.com"), new Group("learning"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -118,7 +116,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Person> generateSamplePersonData() {
+    public static List<Task> generateSamplePersonData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 
@@ -156,7 +154,7 @@ public class TestUtil {
     }
 
     public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new AddressBook());
+        return new XmlSerializableAddressBook(new YTomorrow());
     }
 
     /**

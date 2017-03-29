@@ -5,12 +5,12 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.UniquePersonList;
 
 public class MarkCommand extends Command {
 	
@@ -42,11 +42,11 @@ public class MarkCommand extends Command {
         List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createMarkedPerson(personToEdit);
+        Task editedPerson = createMarkedPerson(personToEdit);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -61,7 +61,7 @@ public class MarkCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited to be complete.
      */
-    private static Person createMarkedPerson(ReadOnlyPerson personToEdit) {
+    private static Task createMarkedPerson(ReadOnlyPerson personToEdit) {
         assert personToEdit != null;
     	
     	UniqueTagList updatedTags =
@@ -79,7 +79,7 @@ public class MarkCommand extends Command {
 			e.printStackTrace();
 		}
 
-        return new Person(personToEdit.getName(),
+        return new Task(personToEdit.getName(),
         		personToEdit.getDate(), personToEdit.getEmail(), personToEdit.getGroup(), updatedTags);
     }
 }

@@ -5,14 +5,14 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Group;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Group;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniquePersonList;
 
 /**
  * Adds a person to the address book.
@@ -29,7 +29,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
-    private final Person toAdd;
+    private final Task toAdd;
 
     /**
      * Creates an AddCommand using raw values.
@@ -43,7 +43,7 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
-        this.toAdd = new Person(
+        this.toAdd = new Task(
                 new Name(name),
                 new Date(date),
                 new Email(email),
