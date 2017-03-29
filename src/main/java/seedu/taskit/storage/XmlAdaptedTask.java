@@ -74,8 +74,4 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(title, start, end, priority, tags);
     }
-    
-    public String getEnd() {
-    	return this.end;
-    }
 }

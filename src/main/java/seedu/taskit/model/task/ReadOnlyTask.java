@@ -32,7 +32,8 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getTitle().equals(this.getTitle())); // state checks here onwards
     }
-
+    
+    // @@author A0163996J
     /**
      * Formats the task as text, showing all details.
      */
@@ -43,6 +44,8 @@ public interface ReadOnlyTask {
         		.append(getStart() + " ")
         		.append("End: ")
         		.append(getEnd() + " ")
+        		.append("Priority: ")
+        		.append(getPriority() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

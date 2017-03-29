@@ -27,6 +27,7 @@ public class Task implements ReadOnlyTask{
      * @param title
      * @param start
      * @param end
+     * @param priority
      * @param tags
      * @throws IllegalValueException 
      */
@@ -115,7 +116,7 @@ public class Task implements ReadOnlyTask{
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
-
+        
         this.setTitle(replacement.getTitle());
         this.setStart(replacement.getStart());
         this.setEnd(replacement.getEnd());
@@ -128,7 +129,7 @@ public class Task implements ReadOnlyTask{
                 || (other instanceof Task // instanceof handles nulls
                 && this.isSameStateAs((Task) other));
     }
-    
+   
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
@@ -157,13 +158,13 @@ public class Task implements ReadOnlyTask{
      */
     public String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle())
+        builder.append(getTitle() + " ")
         		.append("Start: ")
-        	   	.append(getStart())
+        	   	.append(getStart() + " ")
         	   	.append("End: ")
-        	   	.append(getEnd())
+        	   	.append(getEnd() + " ")
         	   	.append("Priority: ")
-        	   	.append(getPriority())
+        	   	.append(getPriority() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

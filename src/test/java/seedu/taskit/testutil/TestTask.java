@@ -1,5 +1,6 @@
-package seedu.taskit.testutil;
+// @@author A0163996J
 
+package seedu.taskit.testutil;
 
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
@@ -31,6 +32,7 @@ public class TestTask implements ReadOnlyTask {
         this.tags = taskToCopy.getTags();
         this.start = taskToCopy.getStart();
         this.end = taskToCopy.getEnd();
+        this.priority = taskToCopy.getPriority();
         this.isDone = false;
         this.isOverdue = false;
     }
@@ -45,6 +47,10 @@ public class TestTask implements ReadOnlyTask {
     
     public void setEnd(Date end) {
         this.end = end;
+    }
+    
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -84,9 +90,11 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("tag " + s.tagName + " "));
         return sb.toString();
     }
+    
+    // @@author
 
     @Override
     public Boolean isDone() {
