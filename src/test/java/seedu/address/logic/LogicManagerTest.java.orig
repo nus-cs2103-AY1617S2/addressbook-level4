@@ -784,14 +784,22 @@ public class LogicManagerTest {
     }
 
     @Test
+<<<<<<< HEAD
+    public void execute_saveTo_invalidFileName() throws Exception {
+        File invalidFileNameFile = new File("////?!", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandFailure("saveto " + invalidFileNameFile.getParentFile().getAbsolutePath(),
+                String.format(SaveToCommand.MESSAGE_WRITE_FILE_ERROR, invalidFileNameFile.getAbsolutePath()));
+=======
     public void execute_saveTo_invalidFolderName() throws Exception {
         File invalidFolderNameFile = new File("////?!", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandFailure("saveto " + invalidFolderNameFile.getParentFile().getAbsolutePath(),
                 String.format(SaveToCommand.MESSAGE_WRITE_FILE_ERROR, invalidFolderNameFile.getAbsolutePath()));
+>>>>>>> develop
     }
 
     // End SaveToCommand tests
 
+<<<<<<< HEAD
     // ExportCommand Tests
 
     @Test
@@ -843,12 +851,23 @@ public class LogicManagerTest {
         File tmFile = new File("testSubDir", ExportCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("export " + tmFile.getParentFile().getAbsolutePath(),
                 String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
+=======
+    // UseThisCommand tests
+
+    @Test
+    public void execute_useThis_absoluteSubDirectory() throws Exception {
+        File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        FileUtil.createFile(tmFile);
+        assertCommandSuccess("usethis " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(UseThisCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
+>>>>>>> develop
                 Collections.emptyList());
         tmFile.delete();
         tmFile.getParentFile().delete();
     }
 
     @Test
+<<<<<<< HEAD
     public void execute_export_noWritePermissions() throws Exception {
         File noWritePermissionsFile = new File("noPermissions", ExportCommand.TASK_MANAGER_FILE_NAME);
         if (noWritePermissionsFile.setReadOnly()) {
@@ -866,29 +885,15 @@ public class LogicManagerTest {
     }
 
     // End ExportCommand tests
-    
-    // UseThisCommand tests
 
-    @Test
-    public void execute_useThis_absoluteSubDirectory() throws Exception {
-        File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
-        FileUtil.createFile(tmFile);
-        assertCommandSuccess("usethis " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(UseThisCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
-        tmFile.delete();
-        tmFile.getParentFile().delete();
-    }
-
-    @Test
+=======
     public void execute_useThis_invalidFolderName() throws Exception {
         File invalidFolderNameFile = new File("////?!", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandFailure("usethis " + invalidFolderNameFile.getParentFile().getAbsolutePath(),
                 String.format(UseThisCommand.MESSAGE_FILE_MISSING_ERROR, invalidFolderNameFile.getAbsolutePath()));
     }
 
-    // End UseThisCommand tests
-    
+>>>>>>> develop
     // UndoCommand tests
 
     @Test
@@ -1061,14 +1066,22 @@ public class LogicManagerTest {
          * @param taskManager
          *            The TaskManager to which the Tasks will be added
          */
+<<<<<<< HEAD
+        void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
+=======
         private void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
+>>>>>>> develop
             addToTaskManager(taskManager, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given TaskManager
          */
+<<<<<<< HEAD
+        void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+=======
         private void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+>>>>>>> develop
             for (Task p : tasksToAdd) {
                 taskManager.addTask(p);
             }

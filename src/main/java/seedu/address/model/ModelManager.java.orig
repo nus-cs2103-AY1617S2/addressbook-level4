@@ -54,8 +54,11 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String MESSAGE_ON_RESET = "Task list loaded";
     private static final String MESSAGE_ON_UPDATE = "Task updated";
     private static final String MESSAGE_ON_SAVETO = "Save location changed to ";
+<<<<<<< HEAD
     private static final String MESSAGE_ON_EXPORT = "Data to be exported to ";
+=======
     private static final String MESSAGE_ON_USETHIS = "Reading data from ";
+>>>>>>> develop
 
     // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
@@ -135,11 +138,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerPathChangedEvent(taskManager, path));
     }
 
+<<<<<<< HEAD
     /** Raises an event to indicate the path needs to be changed */
     private void indicateTaskManagerExport(String message, String path) {
         raise(new TaskManagerExportEvent(taskManager, path));
-    }
-
+=======
     /**
      * Raises an event to indicate that the task manager should read from a
      * different path
@@ -147,6 +150,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskManagerUseNewPath(String message, String path) {
         logger.fine(message);
         raise(new TaskManagerUseNewPathEvent(path));
+>>>>>>> develop
     }
 
     @Override
@@ -178,14 +182,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+<<<<<<< HEAD
     public void exportToLocation(String path) {
         assert path != null;
         indicateTaskManagerExport(MESSAGE_ON_EXPORT + path, path);
-    }
-    
+=======
     public void useNewSaveLocation(String path) {
         assert path != null;
         indicateTaskManagerUseNewPath(MESSAGE_ON_USETHIS + path, path);
+>>>>>>> develop
     }
 
     @Override

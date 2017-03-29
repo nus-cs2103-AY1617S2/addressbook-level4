@@ -75,9 +75,14 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
         }
         return new CommandResult(
+<<<<<<< HEAD
+                String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit),
+                MESSAGE_SUCCESS_STATUS_BAR);
+=======
           
                 String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), MESSAGE_SUCCESS_STATUS_BAR);
 
+>>>>>>> develop
     }
 
     // @@author A0093999Y

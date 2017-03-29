@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import java.io.File;
 import java.io.IOException;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -26,9 +25,6 @@ public class SaveToCommand extends Command {
 
     /**
      * Creates an SaveToCommand using raw values.
-     *
-     * @throws IllegalValueException
-     *             if any of the raw values are invalid
      */
     public SaveToCommand(String dirLocation) {
         this.saveToDir = dirLocation;

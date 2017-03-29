@@ -13,11 +13,15 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
+import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.TaskManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Manages storage of TaskManager data in local storage.
@@ -108,26 +112,85 @@ public class StorageManager extends ComponentManager implements Storage {
 
         String path = event.path;
         String oldPath = getTaskManagerFilePath();
+        path = getFromBackupIfNull(path, oldPath);
+
+        try {
+            setTaskManagerFilePath(path);
+            saveTaskManager(event.data);
+            setAndSaveConfig(path);
+
+            deleteExtraCopy(oldPath);
+
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    private String getFromBackupIfNull(String path, String oldPath) {
         if (path == null) {
             assert !taskManagerStorageHistory.isEmpty();
             path = taskManagerStorageHistory.pop();
         } else {
             taskManagerStorageHistory.add(oldPath);
         }
+        return path;
+    }
+
+    private void setAndSaveConfig(String path) throws IOException {
+        config.setTaskManagerFilePath(path);
+        config.save();
+    }
+
+    private void deleteExtraCopy(String oldPath) throws IOException {
+        if (!FileUtil.deleteFile(new File(oldPath))) {
+            throw new IOException("File at " + oldPath + " cannot be deleted");
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleTaskManagerUseNewPathEvent(TaskManagerUseNewPathEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data path changed, reading from file"));
+
+        String path = event.path;
+        String oldPath = getTaskManagerFilePath();
+        path = getFromBackupIfNull(path, oldPath);
 
         try {
             setTaskManagerFilePath(path);
-            saveTaskManager(event.data);
-            config.setTaskManagerFilePath(path);
-            config.save();
-
-            if (!FileUtil.deleteFile(new File(oldPath))) {
-                throw new IOException("File at " + oldPath + " cannot be deleted");
-            }
-
+            setAndSaveConfig(path);
+            indicateReadFromNewFile();
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    /**
+     * Raises an event to indicate that a new data file has been read.
+     */
+    private void indicateReadFromNewFile() {
+        ReadOnlyTaskManager taskManager = getInitialData();
+        raise(new ReadFromNewFileEvent(taskManager));
+    }
+
+    @Override
+    public ReadOnlyTaskManager getInitialData() {
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
+        try {
+            taskManagerOptional = readTaskManager();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskManager");
+            }
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
+            initialData = new TaskManager();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            initialData = new TaskManager();
+        }
+        return initialData;
     }
 
 }
