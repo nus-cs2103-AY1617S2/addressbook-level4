@@ -9,12 +9,12 @@
 
 <HBox id="cardPane" fx:id="cardPane" prefHeight="40.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-               <Label fx:id="id" prefHeight="35.0" prefWidth="43.0" styleClass="cell_big_label" text="ID" textFill="#389ba4" HBox.hgrow="NEVER">
+               <Label fx:id="id" prefHeight="35.0" prefWidth="44.0" styleClass="cell_big_label" text="ID" textFill="#389ba4" HBox.hgrow="NEVER">
          <font>
             <Font name="Helvetica Light" size="22.0" />
          </font>
          <HBox.margin>
-            <Insets left="20.0" top="-4.0" />
+            <Insets left="15.0" top="-4.0" />
          </HBox.margin></Label>
       <VBox prefHeight="36.0" prefWidth="198.0" HBox.hgrow="ALWAYS">
          <children>
@@ -23,19 +23,22 @@
                   <Font name="Helvetica" size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets />
+                  <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="taskDate" prefHeight="11.0" prefWidth="251.0" text="taskDate" textFill="#6b6868">
-               <font>
-                  <Font name="Helvetica" size="9.0" />
-               </font>
+                  <FlowPane fx:id="tags" prefHeight="11.0" prefWidth="200.0">
                <VBox.margin>
-                  <Insets left="2.0" />
-               </VBox.margin>
-            </Label>
+                  <Insets left="12.0" />
+               </VBox.margin></FlowPane>
          </children>
       </VBox>
-            <FlowPane fx:id="tags" prefWidth="200.0" />
+      <Label fx:id="taskDate" prefHeight="40.0" prefWidth="158.0" text="taskDate" textAlignment="RIGHT" textFill="#757575">
+         <font>
+            <Font name="Helvetica" size="12.0" />
+         </font>
+         <HBox.margin>
+            <Insets top="-3.0" />
+         </HBox.margin>
+      </Label>
     </children>
 </HBox>

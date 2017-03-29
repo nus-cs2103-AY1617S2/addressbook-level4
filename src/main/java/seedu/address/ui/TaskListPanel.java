@@ -34,9 +34,9 @@ public class TaskListPanel extends UiPart<Region> {
     private JFXListView<ReadOnlyTask> futureTaskListView;
 
     // height of a row should be the same as the height of a TaskCard
-    final int ROW_HEIGHT = 42;
+    final int ROW_HEIGHT = 45;
     // height of paddings after each TaskListView
-    final int ROW_PADDING = 50;
+    final int ROW_PADDING = 80;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday,
             ObservableList<ReadOnlyTask> taskListFuture) {

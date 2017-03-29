@@ -90,7 +90,7 @@ public class EventTask extends Task {
     @Override
     public String getTaskAbsoluteDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return "Begin: " + dateFormat.format(startingTime.getDate()) + "; Due: "
+        return "Begin: " + dateFormat.format(startingTime.getDate()) + "\n   Due: "
                 + dateFormat.format(deadline.getDate());
     }
 

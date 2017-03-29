@@ -29,7 +29,8 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + "");
         taskDate.setText(task.getTaskAbsoluteDateTime());
         initTags(task);
-        tags.setAlignment(Pos.CENTER_RIGHT);
+        tags.setAlignment(Pos.CENTER_LEFT);
+        taskDate.setAlignment(Pos.BASELINE_RIGHT);
     }
 
     private void initTags(ReadOnlyTask task) {

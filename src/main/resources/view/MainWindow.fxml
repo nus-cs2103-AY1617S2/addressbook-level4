@@ -50,7 +50,7 @@
                <children>
                   <Label fx:id="titleDate" text="Date" textFill="#105b63">
                      <VBox.margin>
-                        <Insets left="15.0" top="40.0" />
+                        <Insets top="38.0" />
                      </VBox.margin>
                      <font>
                         <Font name="Helvetica Light" size="13.0" />
@@ -58,7 +58,7 @@
                   </Label>
                   <Label fx:id="titleDay" text="Day" textFill="#105b63">
                      <VBox.margin>
-                        <Insets left="15.0" />
+                        <Insets />
                      </VBox.margin>
                      <font>
                         <Font name="Helvetica Light" size="13.0" />
@@ -68,7 +68,7 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="279.0" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXTextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="&gt; Enter Command">
+                  <JFXTextField fx:id="commandTextField" onAction="#handleCommandInputChanged" prefHeight="40.0" prefWidth="244.0" promptText="&gt; Enter Command">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
