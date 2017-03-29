@@ -4,10 +4,19 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Tan Yu Wei](http://github.com/loveandbejoyful) <br>
+#### [Tan Yu Wei] [@loveandbejoyful](http://github.com/loveandbejoyful)
 <img src="images/loveandbejoyful.png" width="150"><br>
-Role: Team Lead, Testing, Deliverables and Deadlines, Scheduling and Tracking <br>
-Responsibilities: UI
+
+* Components in charge of: [UI](https://cs2103jan2017-t09-b4.github.io/main/docs/DeveloperGuide.html#32-user-interface-ui-component)
+* Aspects/tools in charge of: Team Lead, Testing, Deliverables and Deadlines, Scheduling and Tracking
+* Features implemented:
+    * [Task count](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#35-list-all-tasks--list)
+    * [List timed/floating tasks](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#35-list-all-tasks--list)
+    * [Autocomplete function]
+* Code written: [[functional code](A0142255M.md)][[test code](A0142255M.md)]
+* Other major contributions:
+	* Did initial morph, formatting and restructuring of documentation from AddressBook to Tache
+	* Set up Travis CI, AppVeyor, GithubPages, Coveralls, Codacy and Collate
 
 -----
 
@@ -20,13 +29,37 @@ Responsibilities: Logic
 
 #### [Lim Shun Xian](http://github.com/Crsytral)
 <img src="images/crsytral.jpg" width="150"><br>
-Role: Documentation, Markdown Expert <br>
-Responsibilities: Storage, Model
+
+* Components in charge of:
+* [Model](https://cs2103jan2017-t09-b4.github.io/main/docs/DeveloperGuide.html#34-model-component)
+* [Storage](https://cs2103jan2017-t09-b4.github.io/main/docs/DeveloperGuide.html#35-storage-component)
+* Aspects/tools in charge of: Documentation, Markdown
+* Features implemented:
+   * [Save command](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#310-change-data-file-location)
+   * [Load command](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#311-load-data-file-from-location)
+* Code written: [[functional code](A0139961U.md)][[test code](A0139961U.md)]
+* Other major contributions:
+  * Did parts of refactoring from AddressBook to Taskmanager [[link](https://github.com/CS2103JAN2017-T09-B4/main/pull/65)]
+  * Refine code quality to improve Codacy from 'B' to 'A' [[link](https://github.com/CS2103JAN2017-T09-B4/main/commit/72b13ca729c4f0c643ae5355e0490c41408d8ca1)]
+  * Implement Set Notification For Tasks Due Tomorrow [[link](https://github.com/CS2103JAN2017-T09-B4/main/pull/171)]
 
 -----
 
 #### [Brandon Tan Jian Sin](http://github.com/BrandonTJS)
 <img src="images/brandontjs.jpg" width="150"><br>
-Role: Code Quality, Integration, Git Expert <br>
-Responsibilities: Logic
+
+* Components in charge of: [Logic](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
+* Aspects/tools in charge of: Git, Code Quality, Integration
+* Features implemented:
+   * [Edit tasks](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#37-edit-a-task--edit)
+   * [List tasks](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#35-list-all-tasks--list)
+   * [Find tasks](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#34-find-a-task--find)
+   * [Complete tasks](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#38-complete-a-task--complete)
+   * [Toggle Hotkey](https://github.com/CS2103JAN2017-T09-B4/main/pull/94)
+* Code written: [[functional code](A0139925U.md)][[test code](A0139925U.md)]
+* Other major contributions:
+  * Did partial initial refactoring from AddressBook to Tache [[#10](https://github.com/CS2103JAN2017-T09-B4/main/pull/10) ]
+  * Set up the foundation for the Calendar View + bug fixes occasionally [[#82](https://github.com/CS2103JAN2017-T09-B4/main/pull/82)]
+  * Created the DateTime structure[[#90](https://github.com/CS2103JAN2017-T09-B4/main/pull/90)]
+  * Many bug fixes
 

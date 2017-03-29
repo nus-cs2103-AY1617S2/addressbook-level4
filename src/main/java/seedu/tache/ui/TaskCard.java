@@ -4,9 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.tache.MainApp;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
@@ -23,7 +26,13 @@ public class TaskCard extends UiPart<Region> {
     private static final String END_TIME_INDICATOR = "End Time: ";
     private static final String FXML = "TaskListCard.fxml";
 
+    private static final String COMPLETED_INDICATOR = "completed";
+    private static final String OVERDUE_INDICATOR = "overdue";
+    private static final String UNCOMPLETED_INDICATOR = "uncompleted";
+
     private final Logger logger = LogsCenter.getLogger(TaskCard.class);
+
+    private String statusOfTask = UNCOMPLETED_INDICATOR;
     //@@author
 
     @FXML
@@ -36,10 +45,13 @@ public class TaskCard extends UiPart<Region> {
     private Label name;
 
     @FXML
-    private FlowPane datesAndTimes;
+    private ImageView tickOrCross;
 
     @FXML
     private FlowPane tags;
+
+    @FXML
+    private FlowPane datesAndTimes;
 
     //@@author A0142255M
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -49,8 +61,38 @@ public class TaskCard extends UiPart<Region> {
         id.setText(Integer.toString(displayedIndex) + ". ");
         name.setText(task.getName().toString());
         name.setWrapText(true); // spill over to next line if task name is too long
+        setStatusOfTask(task);
+        setTickOrCross();
+        setBorderColour();
         initDatesAndTimes(task);
         initTags(task);
+    }
+
+    private void setStatusOfTask(ReadOnlyTask task) {
+        if (task.getActiveStatus() == false) {
+            statusOfTask = COMPLETED_INDICATOR;
+        } else if (task.getEndDateTime().isPresent()) {
+            DateTime taskDate = task.getEndDateTime().get();
+            if (taskDate.hasPassed()) {
+                statusOfTask = OVERDUE_INDICATOR;
+            }
+        }
+    }
+
+    private void setBorderColour() {
+        if (statusOfTask.equals(UNCOMPLETED_INDICATOR)) {
+            cardPane.setStyle("-fx-border-color: #5f77bd");
+        } else if (statusOfTask.equals(OVERDUE_INDICATOR)) {
+            cardPane.setStyle("-fx-border-color: #ef044b");
+        }
+    }
+
+    private void setTickOrCross() {
+        if (statusOfTask.equals(COMPLETED_INDICATOR)) {
+            tickOrCross.setImage(new Image(MainApp.class.getResource("/images/tick.png").toExternalForm()));
+        } else if (statusOfTask.equals(OVERDUE_INDICATOR)) {
+            tickOrCross.setImage(new Image(MainApp.class.getResource("/images/cross.png").toExternalForm()));
+        }
     }
 
     private void initDatesAndTimes(ReadOnlyTask task) {

@@ -116,14 +116,18 @@ public class DateTime {
                 || (other instanceof DateTime // instanceof handles nulls
                 && this.date.equals(((DateTime) other).getDate())); // state check
     }
-    //@@author
 
-    /*@Override
-    public int hashCode() {
-        return (startDate.hashCode() && endDate.hashCode());
-    }*/
+    public boolean hasPassed() {
+        Date today = new Date();
+        return this.date.before(today);
+    }
 
     //@@author A0139961U
+    public boolean isSameDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date).equals(sdf.format(this.date));
+    }
+
     public boolean isToday() {
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -139,5 +143,10 @@ public class DateTime {
         return (thisWeekNo == cal.get(Calendar.WEEK_OF_YEAR));
     }
     //@@author
+
+    /*@Override
+    public int hashCode() {
+        return (startDate.hashCode() && endDate.hashCode());
+    }*/
 
 }

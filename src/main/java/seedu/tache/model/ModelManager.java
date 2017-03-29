@@ -36,8 +36,8 @@ public class ModelManager extends ComponentManager implements Model {
   //@@author A0139925U
     public static final String FOUND_TASK_LIST_TYPE = "Found Tasks";
     //@@author A0139961U
-    public static final String DUE_TODAY_TASK_LIST_TYPE = "Due Today Tasks";
-    public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Due This Week Tasks";
+    public static final String DUE_TODAY_TASK_LIST_TYPE = "Tasks Due Today";
+    public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Tasks Due This Week";
     //@@author
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     //@@author A0139925U
