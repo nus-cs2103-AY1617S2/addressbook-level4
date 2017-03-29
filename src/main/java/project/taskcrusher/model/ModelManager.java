@@ -161,7 +161,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Timeslot userInterestedTimeslot) {
-        System.out.println("For tasks");
         updateFilteredTaskList(new PredicateExpression(new TimeslotQualifier(userInterestedTimeslot)));
     }
 
@@ -259,7 +258,6 @@ public class ModelManager extends ComponentManager implements Model {
         private Timeslot userInterestedTimeslot;
 
         TimeslotQualifier(Timeslot timeslot) {
-            System.out.println("In timeslot qualifier");
             assert timeslot != null;
             this.userInterestedTimeslot = timeslot;
         }
@@ -276,7 +274,6 @@ public class ModelManager extends ComponentManager implements Model {
                     return false;
                 }
             } else if (item instanceof ReadOnlyTask) {
-                System.out.println("In run for tasks");
                 ReadOnlyTask task = (ReadOnlyTask) item;
                 if (task.isComplete()) {
                     return false;

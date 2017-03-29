@@ -35,7 +35,6 @@ public class ListCommand extends Command {
             this.dateRange = null;
         } else {
             this.dateRange = parseDateRange(date);
-            System.out.println(dateRange);
         }
         this.showOverdueOnly = showOverdueOnly;
         this.showCompleteOnly = showCompleteOnly;

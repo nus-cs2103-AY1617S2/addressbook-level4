@@ -13,7 +13,8 @@ public class Timeslot {
     public static final String MESSAGE_TIMESLOT_RANGE = "Start date must be before end date";
     public static final String MESSAGE_TIMESLOT_CLASH = "Timeslot clashes with one or more pre-existing events";
     public static final String MESSAGE_TIMESLOT_DNE = "One or more timeslots must be provided";
-    public static final String MESSAGE_TIMESLOT_PAIRS = "Timeslot must contain pair of dates";
+    public static final String MESSAGE_TIMESLOT_PAIRS = "Timeslot must contain pair of dates, "
+            + "or if you intended to input a single date, it is invalid";
 
     public static final boolean IS_LOADING_FROM_STORAGE = false;
     public static final String NO_TIMESLOT = "";
@@ -108,8 +109,8 @@ public class Timeslot {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Timeslot // instanceof handles nulls
-                        && this.start.equals(((Timeslot) other).start)
-                        && this.end.equals(((Timeslot) other).end)); // state check
+                        && this.start.equals(((Timeslot) other).start) && this.end.equals(((Timeslot) other).end)); // state
+                                                                                                                    // check
     }
 
 }
