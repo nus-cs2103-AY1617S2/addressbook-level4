@@ -187,16 +187,16 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        //@@author A0163673Y-reused
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword)
-                            //@@joshuaching A0163673Y
                             || UniqueTagList.containsWordIgnoreCase(task.getTags(), keyword))
-                            //@@author
                     .findAny()
                     .isPresent();
         }
+        //@@author
 
         @Override
         public String toString() {

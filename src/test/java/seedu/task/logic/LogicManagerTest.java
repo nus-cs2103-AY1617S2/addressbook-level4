@@ -339,7 +339,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-    //@@joshuaching A0163673Y
+    //@@author A0163673Y
     @Test
     public void execute_find_containsWordsInDescriptionsAndTags() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -536,7 +536,7 @@ public class LogicManagerTest {
             );
         }
 
-        //@@joshuaching A0163673Y
+        //@@author A0163673Y
         /**
          * Generates a Task object with given description and tags.
          * Other fields will have some dummy values.

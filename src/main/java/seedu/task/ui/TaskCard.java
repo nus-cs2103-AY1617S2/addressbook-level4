@@ -7,13 +7,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.task.model.task.ReadOnlyTask;
 
+//@@author A0163673Y
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
-    //@@joshuaching A0163673Y
     private static final String EMPTY_STRING = "";
     private static final String CHECKMARK_STRING = "✓";
-    //@@author
 
     @FXML
     private HBox cardPane;
@@ -21,7 +20,6 @@ public class TaskCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
-    //@@joshuaching A0163673Y
     @FXML
     private Label due;
     @FXML
@@ -32,17 +30,14 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label complete;
-    //@@author
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getDescription().description);
         id.setText(Integer.toString(displayedIndex));
-        //@@joshuaching A0163673Y
         updateDueLabel(task);
         updateDurationLabel(task);
         updateCompleteLabel(task);
-        //@@author
         initTags(task);
     }
 
@@ -50,7 +45,6 @@ public class TaskCard extends UiPart<Region> {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    //@@joshuaching A0163673Y
     private void updateDueLabel(ReadOnlyTask task) {
         if (task.getDueDate() == null) {
             due.setVisible(false);
@@ -78,5 +72,4 @@ public class TaskCard extends UiPart<Region> {
         }
         complete.setText(task.getComplete().getCompletion() ? CHECKMARK_STRING : EMPTY_STRING);
     }
-    //@@author
 }

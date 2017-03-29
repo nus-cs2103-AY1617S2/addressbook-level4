@@ -31,9 +31,7 @@ public class StringUtil {
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         for (String wordInSentence: wordsInPreppedSentence) {
-            //@@joshuaching A0163673Y
             if (wordInSentence.toLowerCase().contains(preppedWord.toLowerCase())) return true;
-            //@@author
         }
         return false;
     }

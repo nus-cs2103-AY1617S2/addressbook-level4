@@ -23,16 +23,15 @@ import seedu.task.model.tag.UniqueTagList;
  */
 public class EditCommandParser {
 
+    //@@author A0163673Y-reused
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
     public Command parse(String args) {
         assert args != null;
-        //@@joshuaching A0163673Y
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_TAG, PREFIX_START, PREFIX_END, PREFIX_DUEDATE);
-        //@@author
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -45,11 +44,9 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(1)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-            //@@joshuaching A0163673Y
             editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(argsTokenizer.getValue(PREFIX_DUEDATE)));
             editTaskDescriptor.setDurationStart(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_START)));
             editTaskDescriptor.setDurationEnd(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_END)));
-            //@@author
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -60,6 +57,7 @@ public class EditCommandParser {
 
         return new EditCommand(index.get(), editTaskDescriptor);
     }
+    //@@author
 
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
