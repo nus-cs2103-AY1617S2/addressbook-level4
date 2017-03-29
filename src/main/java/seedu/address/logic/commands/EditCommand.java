@@ -11,6 +11,7 @@ import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList;
@@ -80,6 +81,7 @@ public class EditCommand extends Command {
 
         Optional<Deadline> updatedStartTime;
         Optional<Deadline> updatedDeadline;
+        Optional<Recurrence> updatedRecurrence;
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
         if ((editTaskDescriptor.getClearDates().isPresent() && editTaskDescriptor.getClearDates().get() == true)
                 || editTaskDescriptor.isDateEdited()) {
@@ -91,8 +93,17 @@ public class EditCommand extends Command {
         }
         Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
+        Boolean isRecurring = editTaskDescriptor.getIsRecurring().orElseGet(taskToEdit::isRecurring);
+        if (editTaskDescriptor.isRecurrenceEdited()) {
+            updatedRecurrence = editTaskDescriptor.getRecurrence();
+        } else {
+            updatedRecurrence = taskToEdit.getRecurrence();
+        }
         UniqueBookingList updatedBookings = editTaskDescriptor.getBookings().orElseGet(taskToEdit::getBookings);
-        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels, updatedBookings);
+        Task newTask = new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels,
+                            isRecurring, updatedRecurrence);
+        newTask.setBookings(updatedBookings);
+        return newTask;
     }
 
     /**
@@ -106,6 +117,9 @@ public class EditCommand extends Command {
         private Optional<UniqueLabelList> labels = Optional.empty();
         private Optional<Boolean> isCompleted = Optional.empty();
         private Optional<Boolean> clearDates = Optional.empty();
+        private Optional<Boolean> isRecurring = Optional.empty();
+        private Optional<Boolean> removeRecurrence = Optional.empty();
+        private Optional<Recurrence> recurrence = Optional.empty();
 
         private Optional<UniqueBookingList> bookings = Optional.empty();
         public EditTaskDescriptor() {}
@@ -119,7 +133,9 @@ public class EditCommand extends Command {
             this.labels = toCopy.getLabels();
             this.clearDates = toCopy.getClearDates();
             this.bookings = toCopy.getBookings();
-
+            this.isRecurring = toCopy.getIsRecurring();
+            this.recurrence = toCopy.getRecurrence();
+            this.removeRecurrence = toCopy.getRemoveRecurrence();
         }
 
         /**
@@ -127,7 +143,8 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.title, this.startTime,
-                    this.isCompleted, this.deadline, this.labels, this.clearDates);
+                    this.isCompleted, this.deadline, this.labels, this.clearDates,
+                    this.isRecurring, this.recurrence, this.removeRecurrence);
         }
 
         /**
@@ -135,6 +152,10 @@ public class EditCommand extends Command {
          */
         public boolean isDateEdited() {
             return CollectionUtil.isAnyPresent(this.startTime, this.deadline);
+        }
+
+        public boolean isRecurrenceEdited() {
+            return CollectionUtil.isAnyPresent(this.recurrence);
         }
 
         public void setName(Optional<Title> title) {
@@ -192,6 +213,31 @@ public class EditCommand extends Command {
         public Optional<Boolean> getClearDates() {
             return clearDates;
         }
+
+        public void setIsRecurring(Optional<Boolean> isRecurring) {
+            this.isRecurring = isRecurring;
+        }
+
+        public Optional<Boolean> getIsRecurring() {
+            return isRecurring;
+        }
+
+        public void setRemoveRecurrence(Optional<Boolean> removeRecurrence) {
+            this.removeRecurrence = removeRecurrence;
+        }
+
+        public Optional<Boolean> getRemoveRecurrence() {
+            return removeRecurrence;
+        }
+
+        public void setRecurrence(Optional<Recurrence> recurrence) {
+            this.recurrence = recurrence;
+        }
+
+        public Optional<Recurrence> getRecurrence() {
+            return recurrence;
+        }
+
     }
 
     /**

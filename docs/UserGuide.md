@@ -46,7 +46,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to DoOrDie<br />
-Format: `add TASKNAME [# LABEL...] ([by DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
+Format: `add TASKNAME [# LABEL...] ([by DEADLINE] | [from START_DATE to END_DATE]) [repeat every [number](hour(s)|day(s)|month(s)|year(s))]`
 
 > * Tasks can have a deadline, or can do without one as well.
 >   * Tasks added without specifying a deadline will be displayed under "No Deadline".
@@ -57,7 +57,7 @@ Format: `add TASKNAME [# LABEL...] ([by DEADLINE] | [from START_DATE to END_DATE
 >   * If time is not specified, it will default to the current time of the particular date.
 >   * Time formats are flexible as well. The application supports 24 hour format and AM/PM format.
 >     * e.g. `Monday 3pm`, `today 1930`, `5:30pm`, `10.00 am`
-> * Recurring task will have the same deadline if `daily/weekly/monthly/yearly` is used
+> * Recurring task will display the first set of dates, a new task with next of dates is completed when you complete the previous task
 > * Tasks can have any number of label name. (including 0).
 > * The `add` command adds task without specifying `deadline`.
 > * Tasks can be created for a date that is already passed.
@@ -67,7 +67,7 @@ Examples:
  * `add CS2106 Mid terms`
  * `add CS2103 V0.0 by tmr #module`
  * `add Make baby by next wednesday 11pm`
- * `add go to school repeat daily`
+ * `add do laundry by today repeat every 6 days`
 
 ### 2.3 Listing all tasks : `list`
 
@@ -112,7 +112,7 @@ Examples:
 
 Edits the specified task's details.
 
-Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE] | [clear dates]) [COMPLETED | INCOMPLETE]`
+Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE] | (clear dates) | [COMPLETED | INCOMPLETE] | (stop repeat)
 
 > * Edits the task with the `TASK_ID`
     The index refers to the id of the task.<br />
@@ -123,6 +123,7 @@ Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE 
 > * You can remove all the task's tags by typing `#` without specifying any tags after it.
 > * You can mark a task completed or incomplete by specifying 'completed' or 'incomplete' respective.
 > * Using 'clear dates' allows the user to remove the existing dates associated with the task.
+> * Using 'stop repeat' allows the user to remove the recurrence of the recurring task.
 
 
 Examples:
@@ -235,27 +236,23 @@ Format: `book TASKNAME [#LABEL...] on DATE, DATE, [MORE_DATES]...`
 
 Examples:
 
-* `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`<br />
-  Reserves time slots on the 1st January 2017 4pm and 2nd January 8pm for CS2103 Meeting
+* `book CS2103 Meeting on 1/1/2017 4pm to 6pm, 2/1/2017 8pm to 10pm`<br />
+  Reserves time slots on the 1st January 2017 4pm to 6pm and 2nd January 8pm to 10pm for CS2103 Meeting
 
 ### 2.10. Confirm a booking : `confirm`
 
 Confirm booking of a task and releases other bookings for the confirmed task.<br />
-Format: `confirm TASK_ID (SLOT_NUMBER|DATE)`
+Format: `confirm TASK_ID SLOT_NUMBER`
 
-> * DATE specified should be one of the bookings that has been made
 > * SLOT_NUMBER will be respective to the dates added in that order
 > * The index refers to the id of the task.<br />
 > * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`<br />
-  `confirm 1 1/1/2017 4pm`<br />
-  Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
-* `book CS2103 Meeting on 1/1/2017 4pm to 5pm, 2/1/2017 8pm to 9pm`<br />
+* `book CS2103 Meeting on 1/1/2017 4pm to 5pm, 2/1/2017 8pm to 10pm`<br />
   `confirm 1 1`<br />
-  Confirms the task CS2103 Meeting for 1st January 2017 4pm to 5pm and releases 2nd January 2017 8pm to 9pm slot
+  Confirms the task CS2103 Meeting for 1st January 2017 4pm to 5pm and releases 2nd January 2017 8pm to 10pm time slot for other tasks
 
 ### 2.11. Edit a label : `editlabel`
 
@@ -342,6 +339,25 @@ Pressing the UP or DOWN key will allow you to iterate through previous commands 
 ### 2.22. Autocompletion of commands and reserved keywords
 Pressing the TAB key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
 
+### 2.23. Edit booking time slots : `editbooking`
+Edits booking time slots.<br />
+Format: `editbooking INDEX (remove SLOT_NUMBER | change SLOT_NUMBER NEW_DATE | add DATE, MORE DATES)`
+
+> * SLOT_NUMBER will be respective to the dates added in that order
+> * The index refers to the id of the task in the task list currently displayed.<br />
+> * The index **must be a positive integer** 1, 2, 3, ...
+> * The slot number **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `book CS2103 Meeting on 1/1/2017 4pm to 5pm, 2/1/2017 8pm to 9pm`<br />
+  `editbooking 1 add 3/1/2017 4pm to 5pm, 4/1/2017 8pm to 9pm`<br />
+  Adds 3/1/2017 4pm to 5pm and 4/1/2017 8pm to 9pm to the booking CS2103 Meeting
+* `editbooking 1 change 1 5/1/2017 3pm to 5pm`<br />
+  Changes the time slot from `1/1/2017 4pm to 5pm` to `5/1/2017 3pm to 5pm` for booking CS2103 Meeting.
+* `editbooking 1 remove 2`<br />
+  Removes the time slot `2/1/2017 8pm to 9pm` from the booking CS2103 Meeting.
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br />
@@ -352,18 +368,19 @@ Pressing the TAB key will auto complete the word at the current cursor if there 
 Command Description | Command Format | Example
 -------- | :-------- | :---------
 | Help | `help` |
-| Add | `add TASKNAME [#LABEL...] [by DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]` | `add CS2106 Mid terms by tmr 13:00 #school`
+| Add | `add TASKNAME [#LABEL...] [by DEADLINE] [repeat every [NUMBER](hours|days|months|years)]` | `add CS2106 Mid terms by tmr 13:00 #school`
 | List | `list [TYPE]`| `list outstanding tasks`
-| Edit | `edit [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE] | clear dates) [completed|incomplete]` | `update 1 #label tedious work by thursday #work`
+| Edit | `edit [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE] | clear dates | stop repeat) [completed|incomplete]` | `update 1 #label tedious work by thursday #work`
 | Mark | `mark [TASK_ID] [completed|incomplete]` | `mark 1 completed`
 | Find | `find [TYPE] KEYWORD [MORE_KEYWORDS]...` | `find CS2103`
 | Delete | `delete [TASK_ID|LABEL]` | `delete 1`
 | Select | `select TASK_ID` | `select 2`
 | Book | `book TASKNAME [#LABEL...] on DATE, [MORE_DATES]...` | `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`
-| Confirm | `confirm TASK_ID (SLOT_NUMBER|DATE)` | `confirm 1 1`
+| Confirm | `confirm TASK_ID SLOT_NUMBER` | `confirm 1 1`
+| Edit Booking | `editbooking TASK_ID (remove SLOT_NUMBER | change SLOT_NUMBER NEW_DATE | add DATE, MORE DATES)` | `editbooking 1 add 3/1/2017 4pm to 5pm, 4/1/2017 8pm to 9pm`<br />`editbooking 1 change 1 5/1/2017 3pm to 5pm`<br /> `editbooking 1 remove 2`
 | Edit Label | `editlabel OLD_LABEL NEW_LABEL` | `editlabel friends oldFriends`
-| Undo | `undo` |
-| Clear | `clear` |
+| Undo | `undo` | `undo`
+| Clear | `clear` | `clear`
 | Save to a certain location | `saveas FILEPATH_RELATIVE_TO_JAR` | `saveas data/taskmanager2.xml`
 | Load data from a different file | `load FILEPATH_RELATIVE_TO_JAR` | `load data/taskmanager2.xml`
 | Push | `push` |

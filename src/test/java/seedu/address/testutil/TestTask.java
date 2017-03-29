@@ -6,6 +6,7 @@ import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Title;
 
 /**
@@ -19,6 +20,8 @@ public class TestTask implements ReadOnlyTask {
     private UniqueLabelList labels;
     private Boolean isCompleted;
     private UniqueBookingList bookings;
+    private Boolean isRecurring;
+    private Optional<Recurrence> recurrence;
 
     public TestTask() {
         labels = new UniqueLabelList();
@@ -35,6 +38,8 @@ public class TestTask implements ReadOnlyTask {
         this.labels = taskToCopy.getLabels();
         this.isCompleted = taskToCopy.isCompleted();
         this.bookings = taskToCopy.getBookings();
+        this.isRecurring = taskToCopy.isRecurring();
+        this.recurrence = taskToCopy.getRecurrence();
     }
 
     public void setTitle(Title name) {
@@ -69,6 +74,10 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@Author A0105287E
+    /**
+     * Returns an AddCommand that can be used to create this task.
+     */
     public String getAddCommand() {
         String addCommand;
         if (this.getStartTime().isPresent() && this.getDeadline().isPresent()) {
@@ -81,6 +90,7 @@ public class TestTask implements ReadOnlyTask {
         return addCommand;
     }
 
+    //@@Author A0105287E
     private String getAddCommandWithoutDate() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
@@ -88,6 +98,7 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    //@@Author A0105287E
     private String getAddCommandWithDeadline() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
@@ -96,6 +107,7 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+  //@@Author A0105287E
     private String getAddCommandWithInterval() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
@@ -126,5 +138,23 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public UniqueBookingList getBookings() {
         return bookings;
+    }
+
+    @Override
+    public Boolean isRecurring() {
+        return isRecurring == null ? Boolean.FALSE : isRecurring;
+    }
+
+    @Override
+    public Optional<Recurrence> getRecurrence() {
+        return recurrence == null ? Optional.empty() : recurrence;
+    }
+
+    public void setIsRecurring(Boolean isRecurring) {
+        this.isRecurring = isRecurring;
+    }
+
+    public void setRecurrence (Optional<Recurrence> recurrence) {
+        this.recurrence = recurrence;
     }
 }

@@ -1,5 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -17,6 +22,7 @@ import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -138,11 +144,9 @@ public class MainWindow extends UiPart<Region> {
         }
 
         if (leftPanel == null) {
-            leftPanel = new LeftPanel(getleftPanelPlaceholder(),
-                                logic.getFilteredTaskList(),
-                                model.getTaskManager().getLabelList());
+            leftPanel = new LeftPanel(getleftPanelPlaceholder(), logic.getFilteredTaskList());
         } else {
-            leftPanel.setConnections(model.getTaskManager().getLabelList());
+            leftPanel.updateLabelCount();
         }
 
         if (resultDisplay == null) {
@@ -240,6 +244,23 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
+    }
+
+    public void loadLabelSelection(Label label) {
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(label.toString()));
+        model.updateFilteredTaskList(keywordSet);
+    }
+
+    public void loadTodaySelection() {
+        Date endDate = new Date(2222, 1, 1);
+        Date startDate = new Date();
+        endDate.setHours(23);
+        endDate.setMinutes(59);
+        endDate.setSeconds(59);
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+        model.updateFilteredTaskList(startDate, endDate);
     }
 
     public TaskListPanel getTaskListPanel() {

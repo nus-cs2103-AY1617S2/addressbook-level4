@@ -9,7 +9,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.BookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ConfirmCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -29,7 +28,7 @@ public class ConfirmCommandParser extends Parser {
         try {
             String[] arguments = argsTokenizer.getPreamble().get().trim().split(DELIMITER);
             if (arguments.length != ARGUMENT_LENGTH) {
-                throw new CommandException(DeleteCommand.MESSAGE_USAGE);
+                throw new CommandException(ConfirmCommand.MESSAGE_USAGE);
             }
 
             if (arguments[0].matches(REGEX_INDEX)

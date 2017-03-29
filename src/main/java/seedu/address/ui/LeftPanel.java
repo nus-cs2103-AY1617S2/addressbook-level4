@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -9,16 +10,21 @@ import com.google.common.eventbus.Subscribe;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
-import seedu.address.commons.events.ui.LeftPanelSelecttionChangedEvent;
+import seedu.address.commons.events.ui.LeftPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.LeftPanelTodaySelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
@@ -29,7 +35,6 @@ public class LeftPanel extends UiPart<Region> {
     private static final String FXML = "LeftPanel.fxml";
     private HashMap<Label, Integer> labelCount;
     private ObservableList<ReadOnlyTask> taskList;
-    private ObservableList<Label> labelList;
 
     @FXML
     private javafx.scene.control.Label appTitleLabel;
@@ -64,34 +69,38 @@ public class LeftPanel extends UiPart<Region> {
     @FXML
     private ListView<Label> labelListView;
 
+    @FXML
+    private HBox todayHeader;
+
+    @FXML
+    private HBox calendarHeader;
+
+    //@@author A0162877N
     public LeftPanel(AnchorPane leftListPlaceholder,
-            ObservableList<ReadOnlyTask> taskList,
-            ObservableList<Label> labelList) {
+            ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         this.taskList = taskList;
-        this.labelList = labelList;
         initIcons();
         updateLabelCount();
         setTodayListView(taskList);
         setCalendarListView(taskList);
         addToPlaceholder(leftListPlaceholder);
         registerAsAnEventHandler(this);
+        setEventHandlerForSelectionChangeEvent();
     }
 
+    //@@author A0140042A
     public void updateLabelCount() {
         labelCount = new HashMap<Label, Integer>();
-        //Set all to 0
-        for (Label label : labelList) {
-            labelCount.put(label, 0);
-        }
 
         for (ReadOnlyTask task : taskList) {
             for (Label label : task.getLabels()) {
-                labelCount.put(label, labelCount.get(label) + 1);
+                int currentCount = labelCount.get(label) == null ? 0 : labelCount.get(label);
+                labelCount.put(label, currentCount + 1);
             }
         }
 
-        setConnections(labelList);
+        setConnections(labelCount);
     }
 
     private void initIcons() {
@@ -101,34 +110,73 @@ public class LeftPanel extends UiPart<Region> {
         labelArrow.setIcon(FontAwesomeIcon.ANGLE_UP);
     }
 
+    //@@author A0162877N
+    @SuppressWarnings("deprecation")
     public void setTodayListView(ObservableList<ReadOnlyTask> taskList) {
         todayLabel.setText("Today");
         int count = 0;
-        Date nowStart = new Date();
-        nowStart.setHours(23);
-        nowStart.setMinutes(59);
-        nowStart.setSeconds(59);
+        Date endTime = new Date(2222, 1, 1);
+        Date startDate = new Date();
+        endTime.setHours(23);
+        endTime.setMinutes(59);
+        endTime.setSeconds(59);
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
 
-        //Add all tasks that is not completed and deadline is after today
+        // Add all tasks that is not completed and deadline is after today
         for (ReadOnlyTask task : taskList) {
-            if (task.getDeadline().isPresent() &&
-                    !task.isCompleted() &&
-                    task.getDeadline().get().getDateTime().after(nowStart)) {
-                count++;
+            if (task.getDeadline().isPresent() && task.getStartTime().isPresent()) {
+                if ((task.getDeadline().get().getDateTime().before(endTime)
+                        && task.getDeadline().get().getDateTime().after(startDate))
+                        || task.getDeadline().get().getDateTime().equals(endTime)) {
+                    count++;
+                }
+            } else if (task.getDeadline().isPresent()) {
+                if (task.getDeadline().get().getDateTime().before(endTime)
+                        || task.getDeadline().get().getDateTime().equals(endTime)) {
+                    count++;
+                }
             }
         }
         todayCounterLabel.setText(Integer.toString(count));
+        setEventHandlerForTodaySelectionChangeEvent();
     }
 
+    //@@author A0140042A
     public void setCalendarListView(ObservableList<ReadOnlyTask> taskList) {
         calendarLabel.setText("Calendar");
     }
 
-    public void setConnections(ObservableList<Label> labelList) {
+    public void setConnections(HashMap<Label, Integer> labelList) {
+        ObservableList<Label> labels = getLabelsWithCount(labelList);
         labelCounterLabel.setText(Integer.toString(labelList.size()));
-        labelListView.setItems(labelList);
+        labelListView.setItems(labels);
         labelListView.setCellFactory(listView -> new LabelListViewCell());
-        setEventHandlerForSelectionChangeEvent();
+    }
+
+    /**
+     * Returns labels with count more than 0, ignoring all empty labels
+     */
+    private ObservableList<Label> getLabelsWithCount(HashMap<Label, Integer> labelList) {
+        ObservableList<Label> labels = FXCollections.observableArrayList();
+        for (Entry<Label, Integer> entry : labelList.entrySet()) {
+            if (entry.getValue() > 0) {
+                labels.add(entry.getKey());
+            }
+        }
+        FXCollections.sort(labels);
+        return labels;
+    }
+
+    @FXML
+    private void toggleLabelList() {
+        labelListView.setVisible(!labelListView.isVisible());
+        if (labelListView.isVisible()) {
+            labelArrow.setIcon(FontAwesomeIcon.ANGLE_UP);
+        } else {
+            labelArrow.setIcon(FontAwesomeIcon.ANGLE_DOWN);
+        }
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -137,11 +185,22 @@ public class LeftPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
+    //@@author A0162877N
     private void setEventHandlerForSelectionChangeEvent() {
         labelListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 logger.fine("Selection in label left list panel changed to : '" + newValue + "'");
-                raise(new LeftPanelSelecttionChangedEvent());
+                raise(new LeftPanelSelectionChangedEvent(newValue));
+            }
+        });
+    }
+
+    private void setEventHandlerForTodaySelectionChangeEvent() {
+        todayHeader.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                logger.fine("Selection in label left list panel changed to : 'Today'");
+                raise(new LeftPanelTodaySelectionChangedEvent());
             }
         });
     }
@@ -161,6 +220,7 @@ public class LeftPanel extends UiPart<Region> {
                 "Updating label list count and total number of tasks for today"));
     }
 
+    //@@author A0140042A
     class LabelListViewCell extends ListCell<Label> {
 
         @Override

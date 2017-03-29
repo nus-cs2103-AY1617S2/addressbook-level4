@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.MarkCommand.MESSAGE_TYPE_BOOKING;
 
 import org.junit.Test;
 
@@ -11,6 +12,7 @@ import seedu.address.logic.commands.MarkCommand;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
+//@@author A0105287E
 public class MarkCommandTest extends TaskManagerGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
@@ -40,6 +42,15 @@ public class MarkCommandTest extends TaskManagerGuiTest {
     public void mark_missingStatus_failure() {
         commandBox.runCommand("mark 1");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void mark_completeBooking_failure() {
+        //add a booking
+        commandBox.runCommand("book Complete booking #friends on 10-10-2017 2pm to 5pm,"
+                + " 11-10-2017 2pm to 5pm, 12-10-2017 2pm to 5pm");
+        commandBox.runCommand("mark 8 completed");
+        assertResultMessage(MESSAGE_TYPE_BOOKING);
     }
 
 
