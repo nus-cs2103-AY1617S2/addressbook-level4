@@ -83,6 +83,9 @@ public class UpdateCommandParser {
 
             String stringStartDate = "";
             String stringStartTime = "";
+            String stringEndTime = "";
+            String stringEndDate = "";
+
             if (fromPrefixInput.isPresent() && fromPrefixInput.get().matches("\\d+")) {
                 if (isValidTime(fromPrefixInput.get())) {
                     stringStartTime = fromPrefixInput.get();
@@ -94,13 +97,11 @@ public class UpdateCommandParser {
                     }
                 }
             }
-            String stringEndTime = "";
             if (toPrefixInput.isPresent() && toPrefixInput.get().matches("\\d+")) {
                 if (isValidTime(toPrefixInput.get())) {
                     stringEndTime = toPrefixInput.get();
                 }
             }
-            String stringEndDate = "";
 
             /*
              * To parse date input if required and throws exceptions if
@@ -109,6 +110,7 @@ public class UpdateCommandParser {
             if (onPrefixInput.isPresent()) {
                 String[] splited = onPrefixInput.get().split("\\s+");
                 stringStartDate = splited[0];
+                stringEndDate = splited[0];
                 try {
                     stringStartTime = splited[1];
                     if (!isValidTime(stringStartTime)) {
