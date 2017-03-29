@@ -109,6 +109,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    // @@author A0139388M
     @Override
     @Subscribe
     public void handleTaskManagerPathChangedEvent(TaskManagerPathChangedEvent event) {
@@ -221,6 +222,8 @@ public class StorageManager extends ComponentManager implements Storage {
         ReadOnlyTaskManager taskManager = getInitialData(taskManagerStorage.getTaskManagerFilePath());
         raise(new ReadFromNewFileEvent(taskManager));
     }
+
+    // @@author
 
     @Override
     public ReadOnlyTaskManager getInitialData(String path) {

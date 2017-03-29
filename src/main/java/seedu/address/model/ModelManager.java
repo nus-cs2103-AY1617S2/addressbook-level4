@@ -128,6 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
+    // @@author A0139388M
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged(String message) {
         logger.fine(message);
@@ -163,6 +164,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine(message);
         raise(new TaskManagerUseNewPathEvent(path));
     }
+    // @@author
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -186,6 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(MESSAGE_ON_UPDATE);
     }
 
+    // @@author A0139388M
     @Override
     public void updateSaveLocation(String path) {
         assert path != null;
@@ -297,6 +300,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Add file data into model"));
         setData(event.data, false);
     }
+    // @@author
 
     // =========== Filtered Task List Accessors
     // =============================================================
