@@ -5,7 +5,6 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
-import seedu.task.model.task.Timing;
 
 /**
  *
@@ -32,16 +31,6 @@ public class TaskBuilder {
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
         this.task.setPriority(new Priority(priority));
-        return this;
-    }
-
-    public TaskBuilder withStartDate(String startDate) throws IllegalValueException {
-        this.task.setStartDate(new Timing(startDate));
-        return this;
-    }
-
-    public TaskBuilder withEndDate(String endDate) throws IllegalValueException {
-        this.task.setEndDate(new Timing(endDate));
         return this;
     }
 
