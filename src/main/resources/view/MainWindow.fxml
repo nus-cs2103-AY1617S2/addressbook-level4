@@ -46,7 +46,7 @@
             </VBox>
             <AnchorPane fx:id="upcomingTaskPlaceholder" prefWidth="340" >
                 <padding>
-                    <Insets top="10" bottom="10" left="10" right="10"/>
+                    <Insets top="0.0" bottom="5.0" left="10.0" right="10.0"/>
                 </padding>
             </AnchorPane>
          </items>

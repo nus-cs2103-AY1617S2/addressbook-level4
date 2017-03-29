@@ -30,7 +30,10 @@
                         <HBox spacing="5" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
-                                    <Label fx:id="name" text="\$first" styleClass="cell_small_label"/>
+                                    <Label fx:id="startDate" prefWidth="63.0" styleClass="cell_small_label"/>
+                                    <Label fx:id="connector" prefWidth="3.0" styleClass="cell_small_label"/>
+                                    <Label fx:id="endDate" prefWidth="63.0" styleClass="cell_small_label"/>
+                                    <Label fx:id="name" prefWidth="200.0" text="\$first" styleClass="cell_small_label"/>
                                 </HBox>
                             </children>
                         </HBox>
