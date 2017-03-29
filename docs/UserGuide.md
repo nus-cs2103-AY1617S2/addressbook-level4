@@ -150,20 +150,23 @@ Examples:
 * `find ed/february`<br>
   Returns all tasks with end date in February.
   
-### 3.6. Deleting a task : `delete / d`
+### 3.6. Deleting task(s) : `delete / d`
 
 Deletes the specified task<br>
 Format: `delete INDEX`
 
-> * Deletes the task at the specified `INDEX`. <br>
-> * The index refers to the index number shown in the most recent listing. <br>
-> * The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
+> * Deletes the task(s) at the specified `INDEX`. <br>
+> * The index numbers refers to the index numbers shown in the most recent listing. <br>
+> * The index numbers **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
 Examples:
 
 * `list`<br>
   `delete 2`<br>
   Deletes the second task in the TaskBoss.
+  `delete 1 2`<br>
+  Deletes the first and second task in the TaskBoss.
+  
   
 * `find n/Meeting`<br>
   `delete 1`<br>
@@ -187,23 +190,29 @@ Format: `view INDEX`
 > * The index refers to the index number shown in the most recent listing.<br>
 > * The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
-### 3.9. Modifying a category name : `name / n`
+### 3.9. Renaming a category : `name / n`
 
-Modifies a category name<br>
+Renames a category <br>
 Format: `name EXISTING_CATEGORY NEW_CATEGORY`
 
 Example:
 
 * `name School ModuleStudy`<br>
 
-### 3.10. Marking a task done : `mark / m`
+### 3.10. Marking task(s) done : `mark / m`
 
-Marks a task as done<br>
+Marks task(s) as done<br>
 Format: `mark INDEX`
 
-> * Marks the task at the specified `INDEX`. <br>
-> * The index refers to the index number shown in the most recent listing.<br>
-> * The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
+> * Marks the task(s) at the specified `INDEX`. <br>
+> * The index numbers refers to the index numbers shown in the most recent listing.<br>
+> * The index numbers **must be a positive integer** (*e.g. 1, 2, 3, ...*).
+
+Examples:
+ 
+ * `list`<br>
+  `done 1 2`<br>
+  Marks the first and second task as done in the TaskBoss.
 
 ### 3.11. Undoing a command : `undo / u`
 
