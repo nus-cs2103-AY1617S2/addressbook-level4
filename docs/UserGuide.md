@@ -53,6 +53,9 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 > * `9pm` or `21:00` <br>
 > * `noon` <br>
 
+> * if only the date/day is provided, the time will be default set as the current time
+> * if only the time is provided, the date/day will be default set as the current date/day
+
 ### 2.1. Viewing help : `help`
 
 Format: `help`
@@ -135,14 +138,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 > * Only the task description is searched.
 > * The search is case insensitive. e.g `Report` will match `report`
 > * The order of the keywords does not matter. e.g. `proposal for boss` will match `for boss proposal`
-> * Partial words will be matched e.g. `meet` will match `meeting`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `lunch` will match `lunch appointment`
 
 Examples:
 
-* `find file filing`<br>
-  Returns any tasks with `file`, `files`, `filing` etc. as part of its description
+* `find write test case`<br>
+  Returns any tasks with `write`, `test`, `case`, 'case test`, `write test` and any combination of the individual words
+  as part of its description (case insensitive)
 
 ### 2.5. Editing a task : `edit`
 
