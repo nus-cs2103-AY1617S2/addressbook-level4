@@ -21,7 +21,8 @@ public class DateTimeParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     private void assertSameDate(LocalDateTime time1, LocalDateTime time2) {
-        LocalDateTime diff = time1.minusHours(time2.getHour()).minusMinutes(time2.getMinute()).minusSeconds(time2.getSecond());
+        LocalDateTime diff = time1.minusHours(time2.getHour()).minusMinutes(time2.getMinute())
+            .minusSeconds(time2.getSecond());
         assertEquals(time1, diff);
     }
 
