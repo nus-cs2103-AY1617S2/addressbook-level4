@@ -53,7 +53,7 @@ public class TodayCommand extends Command {
             return new CommandResult(String.format(MESSAGE_TODAY_TASK_SUCCESS, todayTask),
                     String.format(MESSAGE_TODAY_TASK_SUCCESS, todayTask.getID()));
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(EditCommand.MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException e) {
             // Should not Happen
             throw new CommandException(e.getMessage());

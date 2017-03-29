@@ -394,6 +394,47 @@ public class LogicManagerTest {
 
     }
 
+    // @@author A0093999Y
+    @Test
+    public void execute_editOnlyIndex_invalid() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertCommandFailure("edit F1", expectedMessage);
+    }
+
+    @Test
+    public void execute_editNoIndex_invalid() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertCommandFailure("edit task2 #well", expectedMessage);
+    }
+
+    @Test
+    public void execute_editInvalidTag_errorMessageShown() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertCommandFailure("edit F1 #@!89", expectedMessage);
+    }
+
+    @Test
+    public void execute_editInvalidName_errorMessageShown() {
+        String expectedMessage = String.format(Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("edit F1 abc$%%^% from 2pm to 3pm", expectedMessage);
+    }
+
+    @Test
+    public void execute_editNameOnly_successful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        Task taskToEdit = threeTasks.get(1);
+        Task backup = new FloatingTask(taskToEdit);
+        taskToEdit = new FloatingTask(new Name("new name"), new UniqueTagList(), false, false);
+        expectedAB.updateTask(1, taskToEdit);
+        helper.addToModel(model, threeTasks);
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
+                FXCollections.observableArrayList());
+        assertCommandSuccess("edit C1 new name", String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, backup),
+                expectedAB, expectedAB.getTaskList());
+    }
+
     // @@author: A0144422R
     @Test
     public void execute_editNameAndTag_successful() throws Exception {
@@ -474,7 +515,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandFailure("edit C1 Task 3 #tag3 #tag4", EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure("edit C1 Task 3 #tag3 #tag4", EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     // @@author: A0144422R

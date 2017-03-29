@@ -28,7 +28,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_SUCCESS_STATUS_BAR = "Task edited successfully.";
 
     private final int filteredTaskListIndex;
@@ -68,7 +68,7 @@ public class EditCommand extends Command {
             try {
                 model.updateTask(filteredTaskListIndex, editedTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
             model.updateFilteredListToShowAll();
         }

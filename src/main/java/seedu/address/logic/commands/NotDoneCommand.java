@@ -53,7 +53,7 @@ public class NotDoneCommand extends Command {
             return new CommandResult(String.format(MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
                     MESSAGE_SUCCESS_STATUS_BAR);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(EditCommand.MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException e) {
             // Should not Happen
             throw new CommandException(e.getMessage());

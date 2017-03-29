@@ -63,7 +63,7 @@ public class DeleteTagCommand extends Command {
                             taskToEdit.isManualToday());
                     model.updateTask(index, newTask);
                 } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                    throw new CommandException(EditCommand.MESSAGE_DUPLICATE_PERSON);
+                    throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
                 } catch (IllegalValueException e) {
                     // Should not happen
                     throw new CommandException(e.getMessage());
