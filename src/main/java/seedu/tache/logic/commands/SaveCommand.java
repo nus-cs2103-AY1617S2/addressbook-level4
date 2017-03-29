@@ -49,15 +49,6 @@ public class SaveCommand extends Command implements Undoable {
         assert config != null;
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
-        this.prevPath = storage.getTaskManagerFilePath()
-                               .substring(0, storage.getTaskManagerFilePath().length() - FILE_NAME_LENGTH);
-        config.setTaskManagerFilePath(newPath + "\\taskmanager.xml");
-        storage.setTaskManagerFilePath(newPath + "\\taskmanager.xml");
-        try {
-            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-        } catch (IOException e) {
-            return new CommandResult("Failed to save config file : " + StringUtil.getDetails(e));
-        }
         try {
             taskManagerOptional = storage.readTaskManager();
             initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
@@ -67,6 +58,17 @@ public class SaveCommand extends Command implements Undoable {
         } catch (IOException e) {
             return new CommandResult(String.format("Problem while reading from the file."
                                                     + " Will be starting with an empty TaskManager"));
+        }
+
+        this.prevPath = storage.getTaskManagerFilePath()
+                               .substring(0, storage.getTaskManagerFilePath().length() - FILE_NAME_LENGTH);
+        config.setTaskManagerFilePath(newPath + "\\taskmanager.xml");
+        storage.setTaskManagerFilePath(newPath + "\\taskmanager.xml");
+
+        try {
+            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        } catch (IOException e) {
+            return new CommandResult("Failed to save config file : " + StringUtil.getDetails(e));
         }
         model.resetData(initialData);
         commandSuccess = true;
