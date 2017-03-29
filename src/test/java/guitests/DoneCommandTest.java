@@ -1,6 +1,8 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 import org.junit.Test;
 
@@ -16,8 +18,46 @@ public class DoneCommandTest extends ToDoListGuiTest {
     TestTask[] currentList = td.getTypicalTasks();
 
     @Test
-    public void done() {
+    public void done_emptyParameter_failure() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD);
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void done_noIndex_failure() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " d");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void done_noType_failure() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " 1");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void done_wrongType_failure() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " a1");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void done_invalidIndex_failure() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t9999");
+        assertResultMessage(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void done_event_success() {
         assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+    }
+
+    @Test
+    public void done_doneTask_failure() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " d1");
+        commandBox.runCommand(ListCommand.COMMAND_WORD + " done");
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " d1");
+        assertResultMessage("This task has been done");
     }
 
     /**
