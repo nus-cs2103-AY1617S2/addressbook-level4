@@ -26,7 +26,13 @@ public class TaskCard extends UiPart<Region> {
     private static final String END_TIME_INDICATOR = "End Time: ";
     private static final String FXML = "TaskListCard.fxml";
 
+    private static final String COMPLETED_INDICATOR = "completed";
+    private static final String OVERDUE_INDICATOR = "overdue";
+    private static final String UNCOMPLETED_INDICATOR = "uncompleted";
+
     private final Logger logger = LogsCenter.getLogger(TaskCard.class);
+
+    private String statusOfTask = UNCOMPLETED_INDICATOR;
     //@@author
 
     @FXML
@@ -55,19 +61,37 @@ public class TaskCard extends UiPart<Region> {
         id.setText(Integer.toString(displayedIndex) + ". ");
         name.setText(task.getName().toString());
         name.setWrapText(true); // spill over to next line if task name is too long
-        setTickOrCross(task);
+        setStatusOfTask(task);
+        setTickOrCross();
+        setBorderColour();
         initDatesAndTimes(task);
         initTags(task);
     }
 
-    private void setTickOrCross(ReadOnlyTask task) {
-        if (task.getActiveStatus() == false) { // task is completed
-            tickOrCross.setImage(new Image(MainApp.class.getResource("/images/tick.png").toExternalForm()));
+    private void setStatusOfTask(ReadOnlyTask task) {
+        if (task.getActiveStatus() == false) {
+            statusOfTask = COMPLETED_INDICATOR;
         } else if (task.getEndDateTime().isPresent()) {
             DateTime taskDate = task.getEndDateTime().get();
-            if (taskDate.hasPassed()) { // task is overdue
-                tickOrCross.setImage(new Image(MainApp.class.getResource("/images/cross.png").toExternalForm()));
+            if (taskDate.hasPassed()) {
+                statusOfTask = OVERDUE_INDICATOR;
             }
+        }
+    }
+
+    private void setBorderColour() {
+        if (statusOfTask.equals(UNCOMPLETED_INDICATOR)) {
+            cardPane.setStyle("-fx-border-color: #5f77bd");
+        } else if (statusOfTask.equals(OVERDUE_INDICATOR)) {
+            cardPane.setStyle("-fx-border-color: #ef044b");
+        }
+    }
+
+    private void setTickOrCross() {
+        if (statusOfTask.equals(COMPLETED_INDICATOR)) {
+            tickOrCross.setImage(new Image(MainApp.class.getResource("/images/tick.png").toExternalForm()));
+        } else if (statusOfTask.equals(OVERDUE_INDICATOR)) {
+            tickOrCross.setImage(new Image(MainApp.class.getResource("/images/cross.png").toExternalForm()));
         }
     }
 
