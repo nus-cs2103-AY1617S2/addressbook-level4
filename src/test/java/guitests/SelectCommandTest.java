@@ -37,7 +37,7 @@ public class SelectCommandTest extends TaskListGuiTest {
     }
 
     private void assertNoPersonSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0);
+        assertEquals(taskListPanel.getSelectedPersons().size(), 0);
     }
 
 }
