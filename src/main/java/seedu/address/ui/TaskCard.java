@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -25,9 +26,10 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(ReadOnlyTask task, String displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ".");
+        id.setText(displayedIndex + "");
         taskDate.setText(task.getTaskAbsoluteDateTime());
         initTags(task);
+        tags.setAlignment(Pos.CENTER_RIGHT);
     }
 
     private void initTags(ReadOnlyTask task) {
