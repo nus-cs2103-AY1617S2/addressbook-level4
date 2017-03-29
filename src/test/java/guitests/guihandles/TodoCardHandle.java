@@ -4,6 +4,7 @@ import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,18 +92,21 @@ public class TodoCardHandle extends GuiHandle {
     //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo) {
         DateFormat addCommandDateFormat = new SimpleDateFormat(DATE_FORMAT);
-        if (todo.getStartTime() != null
-                && !getStartTime().equals("Start: " + addCommandDateFormat.format(todo.getStartTime()))) {
+
+        if (todo.getEndTime() != null
+                && !getEndTime().equals("End: " + addCommandDateFormat.format(todo.getEndTime()))) {
             return false;
         }
-        if (todo.getEndTime() != null
-            && !getEndTime().equals("End: " + addCommandDateFormat.format(todo.getEndTime()))) {
+
+        if (todo.getStartTime() != null
+                && !getStartTime().equals("Start: " + addCommandDateFormat.format(todo.getStartTime()))) {
             return false;
         }
         if (todo.getCompleteTime() != null && getCompleteTime().equals("Not Complete")) {
             return false;
         }
-        return getFullName().equals(todo.getName().fullName) && getTags().equals(getTags(todo.getTags()));
+        return getFullName().equals(todo.getName().fullName) &&
+                equalLists(getTags(), getTags(todo.getTags()));
     }
     //@@author
     @Override
@@ -110,11 +114,17 @@ public class TodoCardHandle extends GuiHandle {
         if (obj instanceof TodoCardHandle) {
             TodoCardHandle handle = (TodoCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getTags().equals(handle.getTags());
+                    && equalLists(getTags(), handle.getTags());
         }
         return super.equals(obj);
     }
-
+    //@@author A0165043M
+    private boolean equalLists (List<String> str1, List<String> str2) {
+        Collections.sort(str1);
+        Collections.sort(str2);
+        return str1.equals(str2);
+    }
+    //@@author
     @Override
     public String toString() {
         return getFullName();

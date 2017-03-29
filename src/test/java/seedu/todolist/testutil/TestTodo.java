@@ -41,7 +41,7 @@ public class TestTodo implements ReadOnlyTodo {
     }
     //@@author
 
-    //@@author A0163786N, A0163720M
+    //@@author A0163786N, A0163720M, A0165043M
     /**
      * Constructor for a deadline
      */
@@ -57,7 +57,7 @@ public class TestTodo implements ReadOnlyTodo {
         this(name, starttime, endtime, null, tags);
     }
 
-    //@@author A0163786N, A0163720M
+    //@@author A0163786N, A0163720M, A0165043M
     /**
      * General todo constructor
      */
@@ -86,7 +86,7 @@ public class TestTodo implements ReadOnlyTodo {
     public Name getName() {
         return name;
     }
-
+    //@@author A0165043M
     public void setStartTime(Date starttime) {
         assert starttime != null;
         this.starttime = starttime;
@@ -106,6 +106,7 @@ public class TestTodo implements ReadOnlyTodo {
     public Date getEndTime() {
         return endtime;
     }
+    //@@author
     //@@author A0163786N
     public void setCompleteTime(Date completeTime) {
         this.completeTime = completeTime;

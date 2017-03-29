@@ -71,6 +71,11 @@ public class ParserUtil {
         return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
     }
 
+    public static Optional<String> parseStartTime (Optional<String> startTime) throws IllegalValueException {
+        assert startTime != null;
+        return startTime.isPresent() ? Optional.of(new String(startTime.get())) : Optional.empty();
+    }
+
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */

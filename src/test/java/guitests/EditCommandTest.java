@@ -2,6 +2,8 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.todolist.logic.parser.EditCommandParser.EDIT_DEFAULT_END_TIME;
+import static seedu.todolist.logic.parser.EditCommandParser.EDIT_DEFAULT_START_TIME;
 
 import org.junit.Test;
 
@@ -13,7 +15,6 @@ import seedu.todolist.model.todo.Name;
 import seedu.todolist.testutil.TestTodo;
 import seedu.todolist.testutil.TodoBuilder;
 
-// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TodoListGuiTest {
 
     // The list of todos in the todo list panel is expected to match this list.
@@ -23,105 +24,193 @@ public class EditCommandTest extends TodoListGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Bobby t/husband";
-        int addressBookIndex = 1;
+        int todoListIndex = 1;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
-
+    //@@author A0165043M
     @Test
     public void editTaskToEventSuccess() throws Exception {
         String detailsToEdit = "Bobby s/3:00AM 17/10/11 e/6:00AM 17/11/11 t/husband";
-        int addressBookIndex = 1;
+        int todoListIndex = 1;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withStartTime("3:00AM 17/10/11").
                 withEndTime("6:00AM 17/11/11").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editTaskToDeadLineWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "e/6:00AM 17/11/2011";
+        int todoListIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Walk the dog").
+                withEndTime("6:00AM 17/11/2011").withTags("petcare").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editDeadLineWithDefaultSuccess() throws Exception {
+        String detailsToEdit = "e/";
+        int todoListIndex = 8;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withEndTime(EDIT_DEFAULT_END_TIME).build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editEventToWithDefaultSuccess() throws Exception {
+        String detailsToEdit = "s/ e/";
+        int todoListIndex = 9;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom")
+                .withStartTime(EDIT_DEFAULT_START_TIME).withEndTime(EDIT_DEFAULT_END_TIME).withTags("personal").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editTaskToEventWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "s/6:00AM 18/11/2011 e/6:00AM 17/11/2011";
+        int todoListIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Walk the dog").withStartTime("6:00AM 18/11/2011").
+                withEndTime("6:00AM 17/11/2011").withTags("petcare").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editDeadLineToEventWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "s/6:00AM 18/11/2011 e/6:00AM 17/11/2011";
+        int todoListIndex = 8;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withStartTime("6:00AM 18/11/2011").
+                withEndTime("6:00AM 17/11/2011").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editEventToDeadLineWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "s/ e/1:00PM 11/11/2017";
+        int todoListIndex = 9;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").withEndTime("1:00PM 11/11/2017").
+                withTags("personal").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
     public void editTaskToDeadLineSuccess() throws Exception {
         String detailsToEdit = "Bobby e/6:00AM 17/11/11 t/husband";
-        int addressBookIndex = 1;
+        int todoListIndex = 1;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").
                 withEndTime("6:00AM 17/11/11").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
     public void editDeadLineToEventSuccess() throws Exception {
         String detailsToEdit = "Bobby s/3:00AM 17/10/11 e/6:00AM 17/11/11 t/husband";
-        int addressBookIndex = 8;
+        int todoListIndex = 8;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withStartTime("3:00AM 17/10/11").
                 withEndTime("6:00AM 17/11/11").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
     public void editDeadLineToTaskSuccess() throws Exception {
         String detailsToEdit = "Bobby  t/husband";
-        int addressBookIndex = 8;
+        int todoListIndex = 8;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
     public void editEventToTaskSuccess() throws Exception {
         String detailsToEdit = "Bobby t/husband";
-        int addressBookIndex = 9;
+        int todoListIndex = 9;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
     public void editEventToDeadLineSuccess() throws Exception {
-        String detailsToEdit = "Bobbye/6:00AM 17/11/11 t/husband";
-        int addressBookIndex = 9;
+        String detailsToEdit = "Bobby e/6:00AM 17/11/2011 t/husband";
+        int todoListIndex = 9;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").
                 withEndTime("6:00AM 17/11/11").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
+
+    @Test
+    public void editWithAddTagsSuccess() throws Exception {
+        String detailsToEdit = " ta/husband";
+        int todoListIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Walk the dog").withTags("petcare", "husband").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editWithTwoAddTagsSuccess() throws Exception {
+        String detailsToEdit = "ta/husband ta/twoAddTags";
+        int todoListIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Walk the dog").
+                withTags("petcare", "husband", "twoAddTags").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+    //@@author
     @Test
     public void editAllFieldsSpecifiedEventSuccess() throws Exception {
         String detailsToEdit = "Bobby t/husband";
-        int addressBookIndex = 1;
+        int todoListIndex = 1;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
+
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int addressBookIndex = 2;
+        int todoListIndex = 2;
 
-        TestTodo todoToEdit = expectedTodosList[addressBookIndex - 1];
+        TestTodo todoToEdit = expectedTodosList[todoListIndex - 1];
         TestTodo editedTodo = new TodoBuilder(todoToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int addressBookIndex = 2;
+        int todoListIndex = 2;
         //commandBox.runCommand("edit " + "1" + " t/aaa" );
-        TestTodo todoToEdit = expectedTodosList[addressBookIndex - 1];
+        TestTodo todoToEdit = expectedTodosList[todoListIndex - 1];
         TestTodo editedTodo = new TodoBuilder(todoToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
@@ -176,12 +265,12 @@ public class EditCommandTest extends TodoListGuiTest {
      * Checks whether the edited todo has the correct updated details.
      *
      * @param filteredTodoListIndex index of todo to edit in filtered list
-     * @param addressBookIndex index of todo to edit in the address book.
+     * @param todoListIndex index of todo to edit in the todoList.
      *      Must refer to the same todo as {@code filteredTodoListIndex}
      * @param detailsToEdit details to edit the todo with as input to the edit command
      * @param editedTodo the expected todo after editing the todo's details
      */
-    private void assertEditSuccess(int filteredTodoListIndex, int addressBookIndex,
+    private void assertEditSuccess(int filteredTodoListIndex, int todoListIndex,
                                     String detailsToEdit, TestTodo editedTodo) {
 
         commandBox.runCommand("edit " + filteredTodoListIndex + " " + detailsToEdit);
@@ -191,10 +280,9 @@ public class EditCommandTest extends TodoListGuiTest {
         assertMatching(editedTodo, editedCard);
 
         // confirm the list now contains all previous todos plus the todo with updated details
-        expectedTodosList[addressBookIndex - 1] = editedTodo;
+        expectedTodosList[todoListIndex - 1] = editedTodo;
         assertTrue(todoListPanel.isListMatching(true, expectedTodosList));
 
-        //edit result didn't show in display
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));
+        //assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));
     }
 }

@@ -3,6 +3,7 @@ package seedu.todolist.model.tag;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -157,7 +158,9 @@ public class UniqueTagList implements Iterable<Tag> {
     public boolean equalsOrderInsensitive(UniqueTagList other) {
         return this == other || new HashSet<>(this.internalList).equals(new HashSet<>(other.internalList));
     }
-
+    public void reverseOrder() {
+        Collections.reverse(this.internalList);
+    }
     @Override
     public int hashCode() {
         return internalList.hashCode();
