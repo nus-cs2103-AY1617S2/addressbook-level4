@@ -5,11 +5,11 @@ import static junit.framework.TestCase.assertTrue;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.teamstbf.yats.commons.events.storage.DataSavingExceptionEvent;
 
 import guitests.guihandles.AlertDialogHandle;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 
-public class ErrorDialogGuiTest extends AddressBookGuiTest {
+public class ErrorDialogGuiTest extends TaskManagerGuiTest {
 
     @Test
     public void showErrorDialogs() throws InterruptedException {

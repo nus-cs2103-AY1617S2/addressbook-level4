@@ -1,57 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
-    <persons>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
-        <email isPrivate="false">ruth@google.com</email>
-        <address isPrivate="false">81th street</address>
-    </persons>
-    <persons>
-        <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
-        <email isPrivate="false">heinz@yahoo.com</email>
-        <address isPrivate="false">wall street</address>
-    </persons>
-    <persons>
-        <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
-        <email isPrivate="false">cornelia@google.com</email>
-        <address isPrivate="false">10th street</address>
-    </persons>
-    <persons>
-        <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
-        <email isPrivate="false">werner@gmail.com</email>
-        <address isPrivate="false">michegan ave</address>
-    </persons>
-    <persons>
-        <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
-        <email isPrivate="false">lydia@gmail.com</email>
-        <address isPrivate="false">little tokyo</address>
-    </persons>
-    <persons>
-        <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
-        <email isPrivate="false">anna@google.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
-        <email isPrivate="false">stefan@mail.com</email>
-        <address isPrivate="false">little india</address>
-    </persons>
-    <persons>
-        <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">chicago ave</address>
-    </persons>
-</addressbook>
+<YATS>
+    <tasks>
+        <title>Vascular Medicine Research</title>
+        <location>Hospital</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description>Research to be extended and continued to alleviate carcinogenic vascularity</description>
+        <completed>No</completed>
+        <tagged>research</tagged>
+    </tasks>
+    <tasks>
+        <title>Grocery Shopping</title>
+        <location>FoodCourt</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description>Buy some food</description>
+        <completed>No</completed>
+        <tagged>necessitires</tagged>
+    </tasks>
+    <tasks>
+        <title>Vscan Access Mid Term</title>
+        <location>School</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description>To revise on p value mathematical induction</description>
+        <completed>No</completed>
+        <tagged>school</tagged>
+        <tagged>learn</tagged>
+    </tasks>
+    <tasks>
+        <title>Project Milestone Documentation</title>
+        <location>School</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description>prepare project doucments</description>
+        <completed>No</completed>
+        <tagged>school</tagged>
+        <tagged>learn</tagged>
+    </tasks>
+    <tasks>
+        <title>one</title>
+        <location></location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description> </description>
+        <completed>No</completed>
+    </tasks>
+    <tasks>
+        <title>two</title>
+        <location></location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description> </description>
+        <completed>No</completed>
+    </tasks>
+    <tags>research</tags>
+    <tags>necessitires</tags>
+    <tags>school</tags>
+    <tags>learn</tags>
+</YATS>

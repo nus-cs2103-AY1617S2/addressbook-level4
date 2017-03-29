@@ -3,15 +3,14 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.util.SampleDataUtil;
+import org.teamstbf.yats.testutil.TestUtil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
-
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TaskManagerGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected TaskManager getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -24,7 +23,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertTrue(personListPanel.isListMatching(expectedList));
+        Event[] expectedList = SampleDataUtil.getSampleEvents();
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

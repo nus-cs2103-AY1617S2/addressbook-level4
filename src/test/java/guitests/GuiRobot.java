@@ -1,9 +1,9 @@
 package guitests;
 
+import org.teamstbf.yats.testutil.TestUtil;
 import org.testfx.api.FxRobot;
 
 import javafx.scene.input.KeyCodeCombination;
-import seedu.address.testutil.TestUtil;
 
 /**
  * Robot used to simulate user actions on the GUI.
