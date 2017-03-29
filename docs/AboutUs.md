@@ -4,7 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Tan Yu Wei] [@loveandbejoyful](http://github.com/loveandbejoyful)
+#### [Tan Yu Wei](http://github.com/loveandbejoyful)
 <img src="images/loveandbejoyful.png" width="150"><br>
 
 * Components in charge of: [UI](https://cs2103jan2017-t09-b4.github.io/main/docs/DeveloperGuide.html#32-user-interface-ui-component)
@@ -22,9 +22,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Ang Zhi Yuan](http://github.com/ang-zy)
 <img src="images/ang-zy.jpg" width="150"><br>
-Role: Documentation, Markdown Expert <br>
-Responsibilities: Logic
-
+* Components in charge of:
+* [Logic](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
+* Aspects/tools in charge of: Documentation, Markdown Expert <br>
+* Features implemented:
+   * [Add command](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#32-add-a-task--add)
+   * [Undo command](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#312-undo-a-change--undo)
+* Code written: [[functional code](A0150120H.md)][[test code](A0150120H.md)]
+* Other major contributions:
+  * Change Edit Command to edit based on Task object rather than index [[#104](https://github.com/CS2103JAN2017-T09-B4/main/pull/104)]
 -----
 
 #### [Lim Shun Xian](http://github.com/Crsytral)
