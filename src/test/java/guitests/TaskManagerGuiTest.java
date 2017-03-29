@@ -117,11 +117,15 @@ public abstract class TaskManagerGuiTest {
         assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 
+
+    //@@author A0139399J
     /**
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
         int numberOfPeople = this.taskListPanel.getNumberOfTasks();
+        numberOfPeople += this.eventListPanel.getNumberOfTasks();
+        numberOfPeople += this.floatingTaskListPanel.getNumberOfTasks();
         assertEquals(size, numberOfPeople);
     }
 
@@ -136,7 +140,9 @@ public abstract class TaskManagerGuiTest {
         //JUnit doesn't run its test cases on the UI thread. Platform.runLater is used to post event on the UI thread.
         Platform.runLater(() -> EventsCenter.getInstance().post(e));
     }
+    //@@author
 
+    //@@author A0160076L
     /**
      * Asserts the tasks shown in each panel will match
      */
@@ -162,4 +168,5 @@ public abstract class TaskManagerGuiTest {
         assertTrue(this.taskListPanel.isListMatching(expectedTasks));
         assertTrue(this.floatingTaskListPanel.isListMatching(expectedFloatingTasks));
     }
+    //@@author
 }

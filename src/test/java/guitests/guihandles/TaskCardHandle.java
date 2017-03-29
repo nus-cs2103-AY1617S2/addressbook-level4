@@ -1,5 +1,5 @@
 package guitests.guihandles;
-
+// @@author: A0160076L
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,4 +91,5 @@ public class TaskCardHandle extends GuiHandle {
     public String toString() {
         return getFullName() + " " + getDescription();
     }
+  //@@author
 }

@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 
+//@@author A0138909R
 public class TaskManagerStack {
     public static final String NOTHING_TO_REDO = "There is nothing to redo!";
     public static final String NOTHING_TO_UNDO = "There is nothing to undo!";
@@ -25,7 +26,7 @@ public class TaskManagerStack {
         return instance;
     }
 
-    public static void addToUndoStack(ReadOnlyItemManager readOnlyItemManager) {
+    public void addToUndoStack(ReadOnlyItemManager readOnlyItemManager) {
         ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
         undoStack.push(oldReadOnlyTaskManager);
     }
@@ -66,6 +67,20 @@ public class TaskManagerStack {
         undoStack.push(oldReadOnlyTaskManager);
         ReadOnlyItemManager redidTaskManager = redoStack.pop();
         return redidTaskManager;
+    }
+
+    /**
+     * Clears redo stack
+     */
+    public void clearRedoStack() {
+        redoStack.clear();
+    }
+
+    /**
+     * Clears undo stack
+     */
+    public void clearUndoStack() {
+        undoStack.clear();
     }
 
 }

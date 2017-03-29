@@ -88,6 +88,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
 
+    // @@author A0138909R
     @Override
     public void copyTaskManager(String oldPath, String newPath) throws IOException {
         assert oldPath != null;
@@ -100,5 +101,5 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
             throw new IOException("Error when copying file.");
         }
     }
-
+    // @@author
 }

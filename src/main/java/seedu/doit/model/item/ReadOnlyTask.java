@@ -1,3 +1,4 @@
+// @@author A0139399J
 package seedu.doit.model.item;
 
 import seedu.doit.model.tag.UniqueTagList;
@@ -34,7 +35,8 @@ public interface ReadOnlyTask {
             || (other != null // this is first to avoid NPE below
             && other.getName().equals(this.getName()) // state checks here onwards
             && other.getPriority().equals(this.getPriority())
-            && other.getDescription().equals(this.getDescription()));
+            && other.getDescription().equals(this.getDescription())
+            && (other.getIsDone() == this.getIsDone()));
     }
 
     /**

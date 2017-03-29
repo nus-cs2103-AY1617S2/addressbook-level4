@@ -32,7 +32,6 @@ public class HelpWindow extends UiPart<Region> {
         this.dialogStage = createDialogStage(TITLE, null, scene);
         this.dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
         FxViewUtil.setStageIcon(this.dialogStage, ICON);
-
         this.browser.getEngine().load(USERGUIDE_URL);
         FxViewUtil.applyAnchorBoundaryParameters(this.browser, 0.0, 0.0, 0.0, 0.0);
     }

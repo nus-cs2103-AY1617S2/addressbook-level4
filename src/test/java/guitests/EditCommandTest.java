@@ -9,9 +9,9 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.logic.commands.EditCommand;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
-import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
@@ -23,6 +23,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     private TestTask[] expectedTasksList = this.td.getTypicalTasks();
 
+    // @@author A0160076L
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Bobby p/low e/tomorrow d/Block 123, Bobby Street 3 t/husband";
@@ -33,6 +34,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
+    //@@author
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
@@ -57,7 +59,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        this.commandBox.runCommand("find Elle");
+        this.commandBox.runCommand("find n/Elle");
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
@@ -106,7 +108,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
-
+    // @@author A0160076L
     /**
      * Checks whether the edited task has the correct updated details.
      *
@@ -137,4 +139,5 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertAllPanelsMatch(this.expectedTasksList);
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
+    //@@author
 }

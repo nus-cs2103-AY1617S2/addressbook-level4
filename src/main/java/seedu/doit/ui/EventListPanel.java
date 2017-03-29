@@ -1,5 +1,5 @@
 package seedu.doit.ui;
-
+//@@author: A0160076L
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -35,7 +35,7 @@ public class EventListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<ReadOnlyTask> eventList) {
         mainTaskList = eventList;
         this.eventListView.setItems(eventList.filtered(task -> task.hasStartTime()
-                                   && task.hasEndTime() && !task.getIsDone()));
+                                   && task.hasEndTime() /*&& !task.getIsDone()*/));
         this.eventListView.setCellFactory(listView -> new EventListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -54,6 +54,10 @@ public class EventListPanel extends UiPart<Region> {
                     raise(new TaskPanelSelectionChangedEvent(newValue));
                 }
             });
+    }
+
+    protected void clearSelection() {
+        this.eventListView.getSelectionModel().clearSelection();
     }
 
     public void scrollTo(int index) {

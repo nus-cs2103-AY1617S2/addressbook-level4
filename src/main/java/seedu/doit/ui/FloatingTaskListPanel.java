@@ -1,5 +1,5 @@
 package seedu.doit.ui;
-
+//@@author: A0160076L
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -36,7 +36,7 @@ public class FloatingTaskListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<ReadOnlyTask> floatingTaskList) {
         mainTaskList = floatingTaskList;
         this.floatingTaskListView.setItems(floatingTaskList.filtered(task -> !task.hasStartTime()
-                                   && !task.hasEndTime() && !task.getIsDone()));
+                                   && !task.hasEndTime() /*&& !task.getIsDone()*/));
         this.floatingTaskListView.setCellFactory(listView -> new FloatingTaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -55,6 +55,10 @@ public class FloatingTaskListPanel extends UiPart<Region> {
                     raise(new TaskPanelSelectionChangedEvent(newValue));
                 }
             });
+    }
+
+    protected void clearSelection() {
+        this.floatingTaskListView.getSelectionModel().clearSelection();
     }
 
     public void scrollTo(int index) {

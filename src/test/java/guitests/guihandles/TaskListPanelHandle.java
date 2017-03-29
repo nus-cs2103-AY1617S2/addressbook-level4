@@ -78,7 +78,7 @@ public class TaskListPanelHandle extends GuiHandle {
         Point2D point = TestUtil.getScreenMidPoint(getListView());
         this.guiRobot.clickOn(point.getX(), point.getY());
     }
-
+    // @@author: A0160076L
     /**
      * Returns true if the {@code tasks} appear as the sub list (in that order) at position {@code startPosition}.
      */

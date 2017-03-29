@@ -36,9 +36,9 @@ public class TaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         mainTaskList = taskList;
-        taskListView.setItems(taskList.filtered(task -> !task.hasStartTime()
-                              && task.hasEndTime() && !task.getIsDone()));
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
+        this.taskListView.setItems(taskList.filtered(task -> !task.hasStartTime()
+                              && task.hasEndTime() /*&& !task.getIsDone()*/));
+        this.taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -49,19 +49,23 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty()
+        this.taskListView.getSelectionModel().selectedItemProperty()
             .addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
-                    logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                    this.logger.fine("Selection in task list panel changed to : '" + newValue + "'");
                     raise(new TaskPanelSelectionChangedEvent(newValue));
                 }
             });
     }
 
+    protected void clearSelection() {
+        this.taskListView.getSelectionModel().clearSelection();
+    }
+
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            taskListView.scrollTo(index);
-            taskListView.getSelectionModel().clearAndSelect(index);
+            this.taskListView.scrollTo(index);
+            this.taskListView.getSelectionModel().clearAndSelect(index);
         });
     }
 

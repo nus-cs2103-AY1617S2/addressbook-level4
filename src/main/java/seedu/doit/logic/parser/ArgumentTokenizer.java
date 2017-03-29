@@ -74,6 +74,24 @@ public class ArgumentTokenizer {
         return Optional.of(values);
     }
 
+    //@@author A0146809W
+    /**
+     * Returns all values of given prefix after the prefix.
+     */
+    public Optional<List<String>> getAllValuesAfterPrefixAndSpaces(Prefix prefix) {
+        if (!this.tokenizedArguments.containsKey(prefix)) {
+            return Optional.empty();
+        }
+        List<String> values = new ArrayList<>(this.tokenizedArguments.get(prefix));
+        values.set(0, values.get(0).replaceFirst(prefix.toString(), ""));
+        String[] allArguments = values.remove(0).split(" ");
+        for (int i = 0; i < allArguments.length; i++) {
+            values.add(allArguments[i]);
+        }
+        return Optional.of(values);
+    }
+    //@@author
+
     /**
      * Returns the preamble (text before the first valid prefix), if any. Leading/trailing spaces will be trimmed.
      * If the string before the first prefix is empty, Optional.empty() will be returned.

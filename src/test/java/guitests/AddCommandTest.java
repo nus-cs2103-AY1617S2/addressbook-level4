@@ -13,10 +13,11 @@ import seedu.doit.testutil.TypicalTestTasks;
 
 public class AddCommandTest extends TaskManagerGuiTest {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be low med high";
-    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be "
-            + "2 alphanumeric/period strings separated by '@'";
-    public static final String MESSAGE_ENDTIME_CONSTRAINTS = "Item End Time should be 2 alphanumeric"
-            + "/period strings separated by '@'";
+    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be in "
+        + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS  = "Item End Time should be in "
+        + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
+    // @@author A0160076L
     @Test
     public void add() throws IllegalValueException {
         //add one floating task
@@ -68,19 +69,15 @@ public class AddCommandTest extends TaskManagerGuiTest {
         this.commandBox.runCommand("add invalid4 p/dfjkhd d/sss");
         assertResultMessage(MESSAGE_PRIORITY_CONSTRAINTS);
         //missing description
-       // this.commandBox.runCommand("add invalid5 e/today p/high");
+        // this.commandBox.runCommand("add invalid5 e/today p/high");
         //assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
-
-
     }
+  //@@author
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         this.commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-
-
         if (!taskToAdd.getIsDone() && taskToAdd.isFloatingTask()) {
             TaskCardHandle addedCard = this.floatingTaskListPanel.navigateToTask(taskToAdd.getName().fullName);
             assertMatching(taskToAdd, addedCard);
@@ -91,8 +88,6 @@ public class AddCommandTest extends TaskManagerGuiTest {
             TaskCardHandle addedCard = this.taskListPanel.navigateToTask(taskToAdd.getName().fullName);
             assertMatching(taskToAdd, addedCard);
         }
-
-
         //confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertAllPanelsMatch(expectedList);

@@ -3,7 +3,9 @@ package seedu.doit.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.core.Messages;
+import seedu.doit.commons.events.ui.JumpToListRequestEvent;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.item.Description;
@@ -15,6 +17,8 @@ import seedu.doit.model.item.StartTime;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.tag.UniqueTagList;
+
+//@@author A0146809W
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -74,29 +78,26 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownTaskList = this.model.getFilteredTaskList();
 
 
-        if (filteredTaskListIndex >= lastShownTaskList.size()) {
+        if (this.filteredTaskListIndex >= lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        if (filteredTaskListIndex < lastShownTaskList.size()) {
-            ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredTaskListIndex);
+        } else {
+            ReadOnlyTask taskToEdit = lastShownTaskList.get(this.filteredTaskListIndex);
             assert taskToEdit != null;
-            Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            Task editedTask = createEditedTask(taskToEdit, this.editTaskDescriptor);
 
             try {
-                model.updateTask(filteredTaskListIndex, editedTask);
+                this.model.updateTask(this.filteredTaskListIndex, editedTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
-            model.updateFilteredListToShowAll();
+            this.model.updateFilteredListToShowAll();
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(
+                    this.model.getFilteredTaskList().indexOf(editedTask)));
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 
-        } else {
-            return null;
-            // should not happen
         }
     }
 
@@ -133,7 +134,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Name> getName() {
-            return name;
+            return this.name;
         }
 
         public void setName(Optional<Name> name) {
@@ -142,7 +143,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Priority> getPriority() {
-            return priority;
+            return this.priority;
         }
 
         public void setPriority(Optional<Priority> priority) {
@@ -151,7 +152,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Description> getDescription() {
-            return description;
+            return this.description;
         }
 
         public void setDescription(Optional<Description> description) {
@@ -160,7 +161,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<UniqueTagList> getTags() {
-            return tags;
+            return this.tags;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
@@ -169,7 +170,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<StartTime> getStartTime() {
-            return startTime;
+            return this.startTime;
         }
 
         public void setStartTime(Optional<StartTime> startTime) {
@@ -178,7 +179,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<EndTime> getDeadline() {
-            return deadline;
+            return this.deadline;
         }
 
         public void setDeadline(Optional<EndTime> deadline) {

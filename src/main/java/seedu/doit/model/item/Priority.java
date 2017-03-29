@@ -1,3 +1,4 @@
+// @@author A0139399J
 package seedu.doit.model.item;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
@@ -12,7 +13,6 @@ public class Priority implements Comparable<Priority> {
     public static final String PRIORITY_VALIDATION_REGEX = "(low)|(med)|(high)";
     public static final String PRIORITY_LOW = "low";
     public static final String PRIORITY_MED = "med";
-
 
     public final String value;
 

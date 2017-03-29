@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Region> {
             }
         });
     }
-
+  //@@author A0160076L
     protected void fillInnerParts() {
         this.taskListPanel = new TaskListPanel(getTaskListPlaceholder(), this.logic.getFilteredTaskList());
         this.eventListPanel = new EventListPanel(getEventListPlaceholder(), this.logic.getFilteredTaskList());
@@ -126,6 +126,7 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), this.config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), this.logic);
     }
+    //@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return this.commandBoxPlaceholder;
@@ -142,7 +143,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return this.taskListPanelPlaceholder;
     }
-
+    //@@author: A0160076L
     private AnchorPane getEventListPlaceholder() {
         return this.eventListPanelPlaceholder;
     }
@@ -151,7 +152,7 @@ public class MainWindow extends UiPart<Region> {
 
         return this.floatingListPanelPlaceholder;
     }
-
+    //@@author
     protected void hide() {
         this.primaryStage.hide();
     }
@@ -216,13 +217,38 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-
+    //@@author A0160076L
     public EventListPanel getEventListPanel() {
         return this.eventListPanel;
     }
-
     public FloatingTaskListPanel getFloatingListPanel() {
         return this.fListPanel;
     }
 
+    /**
+     *
+     * Handle scrollTo in different lists
+     */
+    public void scrollTo(int index) {
+        if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
+                && task.hasEndTime() /*&& !task.getIsDone()*/).size()) {
+            this.taskListPanel.scrollTo(index);
+            this.eventListPanel.clearSelection();
+            this.fListPanel.clearSelection();
+        } else if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
+                && task.hasEndTime()).size() + this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
+                && task.hasEndTime() /*&& !task.getIsDone()*/).size()) {
+            this.eventListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
+                    && task.hasEndTime() /*&& !task.getIsDone()*/).size());
+            this.taskListPanel.clearSelection();
+            this.fListPanel.clearSelection();
+        } else {
+            this.fListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
+                    && task.hasEndTime()).size() - this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
+                            && task.hasEndTime() /*&& !task.getIsDone()*/).size());
+            this.eventListPanel.clearSelection();
+            this.taskListPanel.clearSelection();
+        }
+    }
+    //@@author
 }

@@ -1,27 +1,35 @@
+//@@author A0139399J
 package seedu.doit.model;
 
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import seedu.doit.commons.core.CommandSettings;
 import seedu.doit.commons.core.ComponentManager;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
-import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.CollectionUtil;
-import seedu.doit.commons.util.StringUtil;
-import seedu.doit.model.item.EndTimeComparator;
-import seedu.doit.model.item.PriorityComparator;
+import seedu.doit.logic.commands.exceptions.CommandExistedException;
+import seedu.doit.logic.commands.exceptions.NoSuchCommandException;
+import seedu.doit.model.comparators.EndTimeComparator;
+import seedu.doit.model.comparators.PriorityComparator;
+import seedu.doit.model.comparators.StartTimeComparator;
+import seedu.doit.model.comparators.TaskNameComparator;
 import seedu.doit.model.item.ReadOnlyTask;
-import seedu.doit.model.item.StartTimeComparator;
 import seedu.doit.model.item.Task;
-import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
-import seedu.doit.model.tag.Tag;
+import seedu.doit.model.predicates.AlwaysTruePredicate;
+import seedu.doit.model.predicates.DescriptionPredicate;
+import seedu.doit.model.predicates.DonePredicate;
+import seedu.doit.model.predicates.NamePredicate;
+import seedu.doit.model.predicates.PriorityPredicate;
+import seedu.doit.model.predicates.TagPredicate;
 
 /**
  * Represents the in-memory model of the task manager data. All changes to any
@@ -46,9 +54,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         updateFilteredTasks();
+        updateFilteredListToShowAll();
 
     }
 
+    // @@author A0138909R
     /**
      * Updates the filteredTasks after the taskmanager have changed
      */
@@ -56,6 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.filteredTasks = new FilteredList<ReadOnlyTask>(this.taskManager.getTaskList());
     }
 
+    // @@author A0139399J
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
@@ -66,6 +77,29 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    @Override
+    public void resetDataWithoutSaving(ReadOnlyItemManager newData) {
+        this.taskManager.resetData(newData);
+    }
+
+    @Override
+    public void loadData(ReadOnlyItemManager newData) {
+        this.resetDataWithoutSaving(newData);
+        taskManagerStack.clearRedoStack();
+        taskManagerStack.clearUndoStack();
+    }
+
+    // @@author A0138909R
+    @Override
+    public void clearData() {
+        logger.info("clears all tasks in model manager");
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
+        this.taskManager.resetData(new TaskManager());
+        indicateTaskManagerChanged();
+    }
+
+    // @@author A0139399J
     @Override
     public ReadOnlyItemManager getTaskManager() {
         return this.taskManager;
@@ -81,7 +115,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         logger.info("delete task in model manager");
-        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
         this.taskManager.removeTask(target);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -91,18 +126,34 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         logger.info("add task in model manager");
-        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
         this.taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void markTask(int taskIndex, ReadOnlyTask taskToDone)
+    public synchronized void markTask(int filteredTaskListIndex, ReadOnlyTask taskToDone)
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
         logger.info("marked a task in model manager as done");
-        TaskManagerStack.addToUndoStack(this.getTaskManager());
-        this.taskManager.markTask(taskIndex, taskToDone);
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
+        int taskManagerIndex = this.filteredTasks.getSourceIndex(filteredTaskListIndex);
+        this.taskManager.markTask(taskManagerIndex, taskToDone);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void unmarkTask(int filteredTaskListIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
+        logger.info("marked a task in model manager as done");
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
+        int taskManagerIndex = this.filteredTasks.getSourceIndex(filteredTaskListIndex);
+        this.taskManager.unmarkTask(taskManagerIndex, taskToDone);
+        updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
@@ -110,7 +161,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
         logger.info("update task in model manager");
-        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
         int taskManagerIndex = this.filteredTasks.getSourceIndex(filteredTaskListIndex);
         this.taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
@@ -120,115 +172,23 @@ public class ModelManager extends ComponentManager implements Model {
     public void sortBy(String sortType) {
         switch (sortType) {
         case "start time":
-            taskManager.setTaskComparator(new StartTimeComparator());
+            this.taskManager.setTaskComparator(new StartTimeComparator());
             break;
         case "end time":
-            taskManager.setTaskComparator(new EndTimeComparator());
+            this.taskManager.setTaskComparator(new EndTimeComparator());
             break;
         case "priority":
-            taskManager.setTaskComparator(new PriorityComparator());
+            this.taskManager.setTaskComparator(new PriorityComparator());
             break;
         case "name":
-            //fallthrough
+            // fallthrough
         default:
-            taskManager.setTaskComparator(new TaskNameComparator());
+            this.taskManager.setTaskComparator(new TaskNameComparator());
             break;
         }
     }
 
-    //=========== Filtered Task List Accessors ============================================================
-
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(this.filteredTasks);
-    }
-
-    @Override
-    public void updateFilteredListToShowAll() {
-        this.filteredTasks.setPredicate(null);
-    }
-
-    @Override
-    public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
-            Set<String> descriptionKeywords, Set<String> tagKeywords) {
-        if (!nameKeywords.isEmpty()) {
-            updateFilteredTaskList(new PredicateExpression(new NameQualifier(nameKeywords)));
-        }
-
-        if (!priorityKeywords.isEmpty()) {
-            updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(priorityKeywords)));
-        }
-
-        if (!descriptionKeywords.isEmpty()) {
-            updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(descriptionKeywords)));
-        }
-
-        if (!tagKeywords.isEmpty()) {
-            updateFilteredTaskList(new PredicateExpression(new TagQualifier(tagKeywords)));
-        }
-
-    }
-
-    private void updateFilteredTaskList(Expression expression) {
-        this.filteredTasks.setPredicate(expression::satisfies);
-    }
-
-    // ========== Inner classes/interfaces used for filtering
-    // =================================================
-
-    interface Expression {
-        boolean satisfies(ReadOnlyTask task);
-
-        @Override
-        String toString();
-    }
-
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-
-        @Override
-        String toString();
-    }
-
-    private class PredicateExpression implements Expression {
-
-        private final Qualifier qualifier;
-
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
-        }
-
-        @Override
-        public boolean satisfies(ReadOnlyTask task) {
-            return this.qualifier.run(task);
-        }
-
-        @Override
-        public String toString() {
-            return this.qualifier.toString();
-        }
-    }
-
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
-
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
-        }
-
-        @Override
-
-        public boolean run(ReadOnlyTask task) {
-            return this.nameKeyWords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
-        }
-
-        @Override
-        public String toString() {
-            return "name=" + String.join(", ", this.nameKeyWords);
-        }
-    }
-
+    // @@author A0138909R
     @Override
     public void undo() throws EmptyTaskManagerStackException {
         this.taskManager.resetData(taskManagerStack.loadOlderTaskManager(this.getTaskManager()));
@@ -243,68 +203,56 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    private class PriorityQualifier implements Qualifier {
-        private Set<String> priorityKeywords;
-
-        PriorityQualifier(Set<String> priorityKeywords) {
-            this.priorityKeywords = priorityKeywords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return priorityKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword));
-        }
-
-        @Override
-        public String toString() {
-            return "priority=" + String.join(", ", this.priorityKeywords);
-        }
+    @Override
+    public void commandSet(String oldCommand, String newCommand)
+            throws NoSuchCommandException, CommandExistedException {
+        CommandSettings.getInstance().setCommand(oldCommand, newCommand);
+        logger.info(CommandSettings.getInstance().toString());
     }
 
-    private class DescriptionQualifier implements Qualifier {
-        private Set<String> descriptionKeywords;
+    // @@author A0139399J
+    // =========== Filtered Task List Accessors
+    // ============================================================
 
-        DescriptionQualifier(Set<String> descriptionKeywords) {
-            this.descriptionKeywords = descriptionKeywords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return descriptionKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword));
-        }
-
-        @Override
-        public String toString() {
-            return "description=" + String.join(", ", this.descriptionKeywords);
-        }
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return new UnmodifiableObservableList<>(this.filteredTasks);
     }
 
-    private class TagQualifier implements Qualifier {
-        private Set<String> tagKeywords;
-
-        TagQualifier(Set<String> tagKeywords) {
-            this.tagKeywords = tagKeywords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return tagKeywords.stream().anyMatch(keyword -> {
-                try {
-                    return (task.getTags().contains(new Tag(keyword)));
-                } catch (IllegalValueException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return false;
-                }
-            });
-        }
-
-        @Override
-        public String toString() {
-            return "tag=" + String.join(", ", tagKeywords);
-        }
+    @Override
+    public void updateFilteredListToShowAll() {
+        this.filteredTasks.setPredicate(null);
+        this.filteredTasks.setPredicate(new DonePredicate(false));
     }
 
+    @Override
+    public void updateFilteredListToShowDone() {
+        this.filteredTasks.setPredicate(null);
+        this.filteredTasks.setPredicate(new DonePredicate(true));
+    }
+
+    @Override
+    public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
+            Set<String> descriptionKeywords, Set<String> tagKeywords) {
+        Predicate<ReadOnlyTask> combined = new AlwaysTruePredicate();
+
+        if (!nameKeywords.isEmpty()) {
+            Predicate<ReadOnlyTask> namePredicate = new NamePredicate(nameKeywords);
+            combined = combined.and(namePredicate);
+        }
+        if (!priorityKeywords.isEmpty()) {
+            Predicate<ReadOnlyTask> priorityPredicate = new PriorityPredicate(priorityKeywords);
+            combined = combined.and(priorityPredicate);
+        }
+        if (!descriptionKeywords.isEmpty()) {
+            Predicate<ReadOnlyTask> descriptionPredicate = new DescriptionPredicate(descriptionKeywords);
+            combined = combined.and(descriptionPredicate);
+        }
+        if (!tagKeywords.isEmpty()) {
+            Predicate<ReadOnlyTask> tagPredicate = new TagPredicate(tagKeywords);
+            combined = combined.and(tagPredicate);
+        }
+
+        this.filteredTasks.setPredicate(combined);
+    }
 }

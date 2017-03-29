@@ -3,6 +3,7 @@ package seedu.doit.logic.commands;
 import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 import seedu.doit.logic.commands.exceptions.CommandException;
 
+//@@author A0138909R
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
@@ -11,7 +12,7 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Task undone.";
     public static final String MESSAGE_FAILURE = "Unable to undo. There is nothing to undo.\n"
-            + "You cannot undo a save, find and list";
+            + "You cannot undo a save, load, find, set and list";
 
     // public static Command toUndo;
 

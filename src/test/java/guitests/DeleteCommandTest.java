@@ -8,7 +8,7 @@ import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TestUtil;
 
 public class DeleteCommandTest extends TaskManagerGuiTest {
-
+    // @@author A0160076L
     @Test
     public void delete() {
 
@@ -26,8 +26,8 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
-
     }
+   //@@author
 
     /**
      * Runs the delete command to delete the task at specified index and confirms the result is correct.

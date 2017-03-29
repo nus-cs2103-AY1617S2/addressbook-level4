@@ -1,3 +1,4 @@
+//@@author A0146809W
 package seedu.doit.testutil;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
@@ -6,10 +7,9 @@ import seedu.doit.model.item.Task;
 import seedu.doit.model.item.UniqueTaskList;
 
 /**
- *
+ * Typical Test Tasks
  */
 public class TypicalTestTasks {
-
     public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, aF, bF, cF, aE, bE, cE;
 
     public TypicalTestTasks() {
@@ -66,7 +66,7 @@ public class TypicalTestTasks {
 
     public TestTask[] getTypicalTasks() {
         return new TestTask[] {this.alice, this.benson, this.carl, this.daniel,
-            this.elle, this.fiona, this.george, this.aF, this.bF, this.cF, this.aE, this.bE, this.cE};
+            this.elle, this.fiona, this.george, this.aE, this.bE, this.cE, this.aF, this.bF, this.cF};
     }
 
     public static TestTask getEventTestTask() throws IllegalValueException {
