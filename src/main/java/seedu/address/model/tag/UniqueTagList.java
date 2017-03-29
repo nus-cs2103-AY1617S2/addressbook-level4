@@ -14,6 +14,7 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements.
@@ -84,6 +85,27 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
+     * Creates copy of this tag list containing all tags except those in the passed tag list
+     */
+    public UniqueTagList except(UniqueTagList except) {
+        UniqueTagList remaining = new UniqueTagList();
+        
+        for (Tag tag : except) {
+            if (except.contains(tag)) continue;
+            
+            try {
+                remaining.add(new Tag(tag.tagName));
+            } catch (DuplicateTagException e) {
+                e.printStackTrace();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return remaining;
+    }
+    
+    /**
      * Returns all tags in this list as a Set.
      * This set is mutable and change-insulated against the internal list.
      */
@@ -136,6 +158,13 @@ public class UniqueTagList implements Iterable<Tag> {
         }
         internalList.add(toAdd);
     }
+    
+    /**
+     * Returns number of tags contained.
+     */
+    public int size() {
+        return internalList.size();
+    }
 
     @Override
     public Iterator<Tag> iterator() {
@@ -170,6 +199,26 @@ public class UniqueTagList implements Iterable<Tag> {
         protected DuplicateTagException() {
             super("Operation would result in duplicate tags");
         }
+    }
+    
+    
+    /**
+     * Constructs a tag list from a variadic parameter list of strings
+     */
+    public static UniqueTagList constructUniqueTagList(String ... tagNames) {
+        UniqueTagList tags = new UniqueTagList();
+        
+        try {
+            for (String tagName : tagNames) {
+                tags.add(new Tag(tagName));
+            }
+        } catch (DuplicateTagException e) {
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+            
+        return tags;
     }
 
 }

@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyPerson;
 
 public class PersonCard extends UiPart<Region> {
 
@@ -18,9 +18,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label date;
     @FXML
-    private Label address;
+    private Label group;
     @FXML
     private Label email;
     @FXML
@@ -30,8 +30,8 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        date.setText(person.getDate().value);
+        group.setText(person.getGroup().value);
         email.setText(person.getEmail().value);
         initTags(person);
     }

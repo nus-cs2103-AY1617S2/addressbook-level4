@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.ui.ThemeManager;
 
 /**
  * Represents User's preferences.
@@ -20,11 +21,11 @@ public class UserPrefs {
     }
 
     public UserPrefs() {
-        this.setGuiSettings(500, 500, 0, 0);
+        this.setGuiSettings(500, 500, 0, 0, ThemeManager.DEFAULT_STYLESHEET);
     }
 
-    public void setGuiSettings(double width, double height, int x, int y) {
-        guiSettings = new GuiSettings(width, height, x, y);
+    public void setGuiSettings(double width, double height, int x, int y, String styleSheet) {
+        guiSettings = new GuiSettings(width, height, x, y, styleSheet);
     }
 
     @Override
