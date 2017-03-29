@@ -334,14 +334,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
 
         if (compareToResult == 0) {
-            if (this.getEndTiming() == null) {
-                System.out.println("found null timing: description is " + this.getDescription());
-                System.out.println("\tpriority is " + this.getPriority());
-            }
-            if (compareTask.getEndTiming() == null) {
-                System.out.println("found null timing: description is " + compareTask.getDescription());
-                System.out.println("\tpriority is " + compareTask.getPriority());
-            }
             compareToResult = this.getEndTiming().compareTo(compareTask.getEndTiming());
         }
 

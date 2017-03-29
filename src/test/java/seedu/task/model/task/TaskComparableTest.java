@@ -73,6 +73,52 @@ public class TaskComparableTest {
     }
 
     @Test
+    public void sortTimings() throws IllegalValueException {
+        Timing a = new Timing("01/01/2017");
+        Timing b = new Timing("01/02/2017");
+        Timing c = new Timing("01/03/2017");
+        Timing floatTime = new Timing(null);
+
+        //compare normal Timings
+        int ab = a.compareTo(b);
+        assertEquals(ab, -1);
+
+        int ac = a.compareTo(c);
+        assertEquals(ac, -1);
+
+        int ba = b.compareTo(a);
+        assertEquals(ba, 1);
+
+        assertEquals(0, a.compareTo(a));
+
+        ArrayList<Timing> actual = new ArrayList<Timing>(Arrays.asList(b, c, a));
+        Collections.sort(actual);
+
+        ArrayList<Timing> expected = new ArrayList<Timing>(Arrays.asList(a, b, c));
+
+        assertEquals(actual, expected);
+
+        //compare null Timings
+
+        int fa = floatTime.compareTo(a);
+        assertEquals(fa, 1);
+
+        int fb = floatTime.compareTo(floatTime);
+        assertEquals(fb, 0);
+
+        int fc = c.compareTo(floatTime);
+        assertEquals(fc, -1);
+
+        //expect null Timing to sort to end of list
+        actual.add(0, floatTime);
+        expected.add(floatTime);
+
+        Collections.sort(actual);
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
     public void sortTasksByCompleteness() throws DuplicateTagException, IllegalValueException {
 
         Task t1 = new Task(new Description(description + "a"), new Priority(priority),
