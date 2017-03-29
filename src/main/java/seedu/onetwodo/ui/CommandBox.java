@@ -42,11 +42,15 @@ public class CommandBox extends UiPart<Region> {
             @Override
             public void handle(KeyEvent ke) {
                 setStyleToIndicateCommandSuccess();
-                if (commandTextField.getText().length() == 0) {
-                    raise(new DeselectCardsEvent());
-                }
+                deselectCards();
             }
         });
+    }
+
+    protected void deselectCards() {
+        if (commandTextField.getText().length() == 1) {
+            raise(new DeselectCardsEvent());
+        }
     }
 
     @FXML

@@ -9,7 +9,6 @@ import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.IncorrectCommand;
 import seedu.onetwodo.model.task.TaskType;
 
-//@@author A0135739W
 /**
  * Parses input arguments and creates a new DoneCommand object
  */

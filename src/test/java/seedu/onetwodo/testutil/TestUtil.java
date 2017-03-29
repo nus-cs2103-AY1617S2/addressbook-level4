@@ -342,6 +342,10 @@ public class TestUtil {
         return Arrays.stream(tasks).filter(task -> task.getTaskType() == type).toArray(TestTask[]::new);
     }
 
+    public static TestTask[] getTasksByDoneStatus(ReadOnlyTask[] tasks, boolean isDone) {
+        return Arrays.stream(tasks).filter(task -> task.getDoneStatus() == isDone).toArray(TestTask[]::new);
+    }
+
     /**
      * Appends tasks to the array of tasks
      *

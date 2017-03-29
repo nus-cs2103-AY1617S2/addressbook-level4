@@ -19,7 +19,11 @@ import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.model.history.ToDoListHistoryManager;
+import seedu.onetwodo.model.tag.Tag;
+import seedu.onetwodo.model.task.EndDate;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
@@ -207,6 +211,63 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateByTaskType(TaskType taskType) {
         updateFilteredTaskList(new PredicateExpression(p -> p.getTaskType() == taskType));
+    }
+
+    @Override
+    public void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags) {
+        boolean hasBefore = before.hasDate();
+        boolean hasAfter = after.hasDate();
+        updateFilteredTaskList(new PredicateExpression(task -> isTaskSameDoneStatus(task, doneStatus)
+                && (hasBefore ? isTaskBefore(task, before) : true)
+                && (hasAfter ? isTaskAfter(task, after) : true)
+                && (priority.hasPriority() ? isPrioritySame(task, priority) : true)
+                && (!tags.isEmpty() ? containsAnyTag(task, tags) : true)
+        ));
+    }
+
+    private boolean containsAnyTag(ReadOnlyTask task, Set<Tag> tags) {
+        Set<Tag> tagsRemoved = task.getTags().toSet();
+        tagsRemoved.removeAll(tags);
+        return tagsRemoved.size() != task.getTags().toSet().size();
+    }
+
+    private boolean isPrioritySame(ReadOnlyTask task, Priority p) {
+        return task.getPriority().value.equals(p.value);
+    }
+
+    private boolean isTaskSameDoneStatus(ReadOnlyTask task, DoneStatus doneStatus) {
+        switch (doneStatus) {
+        case DONE:
+            return task.getDoneStatus() == true;
+        case UNDONE:
+            return task.getDoneStatus() == false;
+        case ALL:
+        default:
+            return true;
+        }
+    }
+
+    private boolean isTaskBefore(ReadOnlyTask task, EndDate endDate) {
+        switch (task.getTaskType()) {
+        case DEADLINE:
+            return task.getEndDate().getLocalDateTime().isBefore(endDate.getLocalDateTime());
+        case EVENT:
+            return task.getStartDate().getLocalDateTime().isBefore(endDate.getLocalDateTime());
+        case TODO:
+        default:
+            return true;
+        }
+    }
+
+    private boolean isTaskAfter(ReadOnlyTask task, StartDate startDate) {
+        switch (task.getTaskType()) {
+        case DEADLINE:
+        case EVENT:
+            return task.getEndDate().getLocalDateTime().isAfter(startDate.getLocalDateTime());
+        case TODO:
+        default:
+            return true;
+        }
     }
 
     @Override
