@@ -64,16 +64,12 @@ public class UnmarkCommand extends Command {
     private static Person createUnmarkedPerson(ReadOnlyPerson personToEdit) {
         assert personToEdit != null;
     	
-    	UniqueTagList updatedTags = new UniqueTagList();
-        for (Tag tag : personToEdit.getTags()) {
-        	if (tag.tagName != tag.TAG_COMPLETE) {
-        		try {
-        			updatedTags.add(tag);
-        		} catch (DuplicateTagException e) {
-        			e.printStackTrace();
-        		}
-        	}
-        }
+        UniqueTagList updatedTags =
+                personToEdit
+                .getTags()
+                .except(UniqueTagList.constructUniqueTagList(
+                                Tag.TAG_COMPLETE,
+                                Tag.TAG_INCOMPLETE));
         
         try {
 			updatedTags.add(new Tag(Tag.TAG_INCOMPLETE));
