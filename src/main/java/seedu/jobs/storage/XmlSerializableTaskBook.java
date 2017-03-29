@@ -17,7 +17,7 @@ import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable TaskBook that is serializable to XML format
  */
 @XmlRootElement(name = "taskbook")
 public class XmlSerializableTaskBook implements ReadOnlyTaskBook {
