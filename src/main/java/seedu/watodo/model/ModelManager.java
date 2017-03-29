@@ -76,7 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredByTypesTaskList(ListDoneCommand.COMMAND_WORD);
+        updateFilteredByTypesTaskList(ListUndoneCommand.COMMAND_WORD);
         indicateTaskManagerChanged();
     }
 
@@ -186,6 +186,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0139872R-reused
     private class TagQualifier implements Qualifier {
         private Set<String> tagKeyWords;
         private String tags;
@@ -216,6 +217,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0139872R
     private class DateQualifier implements Qualifier {
         private int days;
         private Calendar temp;
@@ -234,9 +236,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null &&
-                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
-                return true;
+            if (task.getEndDate() == null) {
+                if (task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return deadline.isLater(task.getEndDate()) &&
                     task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
@@ -268,12 +273,15 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null &&
-                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
-                return true;
+            if (task.getEndDate() == null) {
+                if (task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return deadline.isLater(task.getEndDate()) &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
+                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
             }
         }
 
