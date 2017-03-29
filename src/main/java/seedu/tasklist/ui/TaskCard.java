@@ -1,10 +1,12 @@
 package seedu.tasklist.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.tasklist.commons.util.AppUtil;
@@ -63,7 +65,8 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setCompleted(ReadOnlyTask task) {
         Image tickImage = AppUtil.getImage(tickSource);
-        tickLogo.setTranslateX(400);
+        GridPane.setHalignment(tickLogo, HPos.RIGHT);
+        tickLogo.setTranslateX(-50);
         if (task.getStatus().value) {
             tickLogo.setImage(tickImage);
         } else {
