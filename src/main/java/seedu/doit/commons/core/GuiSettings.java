@@ -1,5 +1,5 @@
 package seedu.doit.commons.core;
-
+//@@author: A0160076L
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
