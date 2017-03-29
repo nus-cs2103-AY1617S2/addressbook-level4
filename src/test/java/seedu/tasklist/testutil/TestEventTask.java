@@ -274,4 +274,15 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
         return dateFormat.format(this.endDate);
     }
 
+    //@@author A0143355J
+    @Override
+    public String getStartDateStringForUpcomingTask() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+        return dateFormat.format(startDate);
+    }
+
+    public String getEndDateStringForUpcomingTask() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+        return dateFormat.format(endDate);
+    }
 }
