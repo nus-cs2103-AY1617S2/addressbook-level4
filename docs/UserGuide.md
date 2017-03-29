@@ -66,7 +66,7 @@ Ready? Let's begin!
 
    * **`add`** `Finish Progress Report; 030217 1159PM` <br>
 
-     > Adds a task with the following [parameters](#parameter) into your task list: <br>
+     > Adds a task with the following [task details](#task-detail) into your task list: <br>
      > Name: `Finish Progress Report` <br>
      > Due Date: `3 Feb 2017` <br>
      > Due Time: `11.59 p.m.`
@@ -99,7 +99,7 @@ When typing in your commands, do take note of the following specifications: <br>
 
 * Times must be specified in _am_ and/or _pm_.
 * Dates must be specified in _DDMMYY_ format.
-* Either date or time but not both can be left out in the <... date and time> parameters.
+* Either date or time but not both can be left out in the <... date and time> task details.
 
   > i.e.
   > * `<start date and time>` <br>
@@ -110,7 +110,7 @@ When typing in your commands, do take note of the following specifications: <br>
 
 * `<task_index>` refers to the task's index number.
 
-* [Parameters](#parameter) for your tasks include the following:
+* [Task details](#task detail) for your tasks include the following:
 
   > * Name
   > * Start_Date
@@ -118,17 +118,21 @@ When typing in your commands, do take note of the following specifications: <br>
   > * End_Date
   > * End_Time
 
+* The default delimiter between different task details is ";".
+
 * [Filters](#filter) for your tasks include the following:
 
   > * All
   > * Completed
   > * Uncompleted
+  > * Floating
+  > * Timed
 
 ### 3.2. Add a task : `add`
 
 Adds a task to your task list. <br>
 
-> Type your [parameters](#parameter) in their respective orders. <br>
+> Type your [task details](#task-detail) in their respective orders. <br>
 E.g. If you are adding a task with a deadline as in **`add`** `<task>; <due date and time>`,
 make sure that you indicate `<task>` before `<due date and time>`, not the other way round!
 
@@ -211,14 +215,14 @@ Finds your task(s) whose name(s) contain the keyword or sequence of keywords `<t
 
 Here are some reasons why you might want to _find_ a task or some tasks:
 
-* **You want to know the [parameters](#parameter) of a task** <br>
+* **You want to know the [task details](#task-detail) of a task** <br>
 
-  > Such parameters include the duration of a task, the deadline of a task etc.
+  > Such task details include the duration of a task, the deadline of a task etc.
 
   E.g. **Finding out when your _project proposal_ is due** <br>
   You want to plan your schedule for the week, taking into account the proposal deadline.
 
-* **You want to obtain a list of tasks that fall under some category** <br>
+* **You want to obtain a list of common tasks** <br>
 
   > Some tasks might have overlapping words / phrases in their names.
 
@@ -281,11 +285,11 @@ Selects a task for you to view its details. <br>
 
 Here are some reasons why you might want to _select_ a task:
 
-* **You want to know the [parameters](#parameter) of a certain task** <br>
+* **You want to know the [task details](#task-detail) of a certain task** <br>
 
   > You can refer to the earlier section on the [find](#34-find-a-task--find) command.
 
-* **You want to edit the [parameters](#parameter) of a certain task** <br>
+* **You want to edit the [task details](#task-detail) of a certain task** <br>
 
   > You can refer to the later section on the [update](#37-update-a-task--update) command.
 
@@ -300,7 +304,7 @@ to your desired task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
 
 ### 3.7. Edit a task : `edit`
 
-Edits 1 or more [parameters](#parameter) of a task. <br>
+Edits 1 or more [task details](#task-detail) of a task. <br>
 
 Here are some examples of tasks which you might want to _edit_: <br>
 
@@ -314,16 +318,16 @@ Here are some examples of tasks which you might want to _edit_: <br>
 
 * **[Floating tasks](#floating-task) that now have known dates / times**
 
-  > You can now add in additional parameters for these tasks that were previously floating tasks.
+  > You can now add in additional task details for these tasks that were previously floating tasks.
 
   **_E.g. Schedule meet-up with Jamie_** <br>
   Your friend Jamie has come back from her overseas trip, and has finally arranged a meet-up with
   you!
 
-Format: **`edit`** `<task_index>; <parameter> <new_value>` <br>
+Format: **`edit`** `<task_index>; <task_detail> <new_value>` <br>
 This command will direct me to make the specified update to a task with `<task_index>`. <br>
-Format: **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`<br>
-You can edit more parameters for your task concurrently using the following format<br>
+Format: **`edit`** `<task_index>; <task_detail_1> <new_value1>; <task_detail_2> <new_value2>; ...`<br>
+You can edit more task details for your task concurrently using the following format<br>
 E.g. **`edit`** `1; start_time 3pm; end_time 8pm;` <br>
 
 <img src="images/UiEditCommand.png" width="600"><br>
@@ -332,8 +336,9 @@ _Figure 3.7.1. Edit Command_
 ### 3.8. Complete a task : `complete`
 
 Set a task as completed. <br>
+I will keep your completed tasks hidden until you need to refer to them again. <br>
 
-Here are some reasons why you might want to _completed_ a task:
+Here is a reason why you might want to _complete_ a task:
 
 * **Tasks have already been completed** <br>
 
@@ -383,7 +388,7 @@ _Figure 3.10.1. Save Command_
 Loads the specified data file in Tache. <br>
 
 The current data file became corrupted out of the blue. Luckily, you've made a backup copy previously.
-Now you'll need Tache to load from that backup copy instead.
+Now you'll need me to load from that backup copy instead.
 
 Format: **`load`** `<file_path>` <br>
 This command loads the data from the specified file in the `<file_path>`.
@@ -392,8 +397,15 @@ This command loads the data from the specified file in the `<file_path>`.
 
 Undoes the last change made to my data. <br>
 
-Accidentally deleted that all-important task, or edited the wrong details? <br>
-Don't worry! Undo is here to save the day!
+Here are some reasons why you might want to _undo_ a previous command:
+
+* **You accidentally deleted a very important task** <br>
+
+  > You might not be able to add the task back if you do not remember its details.
+
+* **You edited the wrong details of a task by mistake** <br>
+
+  > It is a hassle for you to manually correct the details of this task again.
 
 Format: **`undo`** <br>
 I'll undo the last change you made to your tasks. <br>
@@ -422,7 +434,7 @@ Your wish is my command!
 |Find         |**`find`** `<task>`                          |**`find`** `project`                                |
 |List         |**`list`** `<optional filter>`               |**`list`** `uncompleted`                            |
 |Select       |**`select`** `<task>`                        |**`select`** `presentation`                         |
-|Edit         |**`edit`** `<task_index>; <parameter> <new_value>;` |**`edit`** `1; name buy white bread;`        |
+|Edit         |**`edit`** `<task_index>; <task_detail> <new_value>;` |**`edit`** `1; name buy white bread;`        |
 |Complete     |**`complete`** `<task_index>`                |**`complete`** `1`                                  |
 |Help         |**`help`**                                   |                                                    |
 |Save         |**`save`** `<directory>`                     |**`save`** `C:\Users\Jim\Desktop`                   |
@@ -449,7 +461,7 @@ Here are some questions that you might want to ask me:
 
 > The graphical interface that allows the you to interact with me through graphical icons and visual indicators
 
-#### Parameter:
+#### Task Detail:
 
 > Detail associated with a task of yours (e.g. duration, name, start time)
 

@@ -35,11 +35,13 @@ function add_event(title, start, end, status) {
             color = '#5f77bd';
         } else if (status === "overdue") {
             color = '#ef044b';
+        } else {
+            color = 'grey';
         }
         var event = {
             title: title,
             start: start,
-            eventColor: color
+            color: color
         };
         if (end !== "'0'") {
             event.end = end;
