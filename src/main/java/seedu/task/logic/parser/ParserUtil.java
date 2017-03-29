@@ -82,7 +82,7 @@ public class ParserUtil {
         return string.isPresent() ? Optional.of(new String(string.get())) : Optional.empty();
     }
 
-    //@@joshuaching A0163673Y
+    //@@author A0163673Y
     /**
      * Parses a {@code Optional<String> dueDate} into an {@code Optional<DueDate>}
      * if {@code dueDate} is present.

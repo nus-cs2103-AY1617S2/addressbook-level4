@@ -115,7 +115,7 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
-    //@@joshuaching A0163673Y
+    //@@author A0163673Y
     @Override
     public String getDurationStart() {
         return duration == null ? null : duration.getStartString();

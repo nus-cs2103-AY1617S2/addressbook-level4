@@ -172,7 +172,7 @@ public class UniqueTagList implements Iterable<Tag> {
         }
     }
 
-    //@@joshuaching A0163673Y
+    //@@author A0163673Y
     /**
      *
      * Checks if a keyword exists within a {@link #UniqueTagList()}.

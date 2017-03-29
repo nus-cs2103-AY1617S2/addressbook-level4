@@ -10,16 +10,16 @@ import seedu.task.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    //@@joshuaching A0163673Y
+    //@@author A0163673Y
     public TestTask bear, cat, dog, elephant, fish, goose, horse, iguana, jaguar;
     //@@author
     //@@author A0163744B
     public TestTask junk, kale, letOutDog;
     //@@author
 
+    //@@author A0163673Y
     public TypicalTestTasks() {
         try {
-            //@@joshuaching A0163673Y
             bear = new TaskBuilder().withDescription("Walk the bear")
                     .withTags("urgent").withTaskId(200).build();
             cat = new TaskBuilder().withDescription("Walk the cat at zoo")
@@ -41,7 +41,6 @@ public class TypicalTestTasks {
                     .build();
             jaguar = new TaskBuilder().withDescription("Walk the jaguar")
                     .withTaskId(208).build();
-            //@@author
             junk = new TaskBuilder()
                     .withDescription("Junk to give away")
                     .withCompletion(true)
@@ -66,6 +65,7 @@ public class TypicalTestTasks {
             assert false : "not possible";
         }
     }
+    //@@author
 
     public static void loadAddressBookWithSampleData(TaskList ab, TestTask[] data) {
         for (TestTask person : data) {
@@ -89,7 +89,7 @@ public class TypicalTestTasks {
     }
     //@@author
 
-    //@@joshuaching A0163673Y
+    //@@author A0163673Y
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{bear, cat, dog, elephant, fish, goose, horse};
     }
