@@ -1,6 +1,7 @@
 package seedu.jobs.model;
 
 import java.util.Collection;
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -159,20 +160,12 @@ public class TaskBook implements ReadOnlyTaskBook {
     }
 
 
-    public boolean undoTask() throws TaskNotFoundException {
-        if (tasks.undo()) {
-            return true;
-        } else {
-            throw new UniqueTaskList.TaskNotFoundException();
-        }
+    public void undoTask() throws EmptyStackException {
+        tasks.undo();
     }
 
-    public boolean redoTask() throws TaskNotFoundException {
-        if (tasks.redo()) {
-            return true;
-        } else {
-            throw new UniqueTaskList.TaskNotFoundException();
-        }
+    public void redoTask() throws EmptyStackException {
+        tasks.redo();
     }
 //// tag-level operations
 

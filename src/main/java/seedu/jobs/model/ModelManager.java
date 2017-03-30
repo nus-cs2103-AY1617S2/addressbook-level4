@@ -1,5 +1,6 @@
 package seedu.jobs.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -110,13 +111,13 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo & redo commands =======================================================================
 
     @Override
-    public synchronized void undoCommand() throws TaskNotFoundException {
+    public synchronized void undoCommand() throws EmptyStackException {
         taskBook.undoTask();
         indicateTaskBookChanged();
     }
 
     @Override
-    public void redoCommand() throws TaskNotFoundException {
+    public void redoCommand() throws EmptyStackException {
         taskBook.redoTask();
         indicateTaskBookChanged();
     }

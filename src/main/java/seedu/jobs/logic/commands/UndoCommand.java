@@ -1,6 +1,8 @@
 package seedu.jobs.logic.commands;
 
-import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
+import java.util.EmptyStackException;
+
+import seedu.jobs.logic.commands.exceptions.CommandException;
 
 /**
  * Undo last commands which has modified the data.
@@ -10,15 +12,16 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_SUCCESS = "Undo last command";
+    public static final String MESSAGE_FAILUIRE = "No more commands to undo";
 
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
         try {
             model.undoCommand();
-        } catch (TaskNotFoundException e) {
-            assert false : "The target task cannot be missing";
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (EmptyStackException e) {
+            throw new CommandException(MESSAGE_FAILUIRE);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

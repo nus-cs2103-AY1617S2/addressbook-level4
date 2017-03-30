@@ -1,5 +1,6 @@
 package seedu.jobs.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 
 import seedu.jobs.commons.core.UnmodifiableObservableList;
@@ -55,9 +56,9 @@ public interface Model {
      * Undo the last command which has modified tasks or tags
      */
 
-    void undoCommand() throws TaskNotFoundException;
+    void undoCommand() throws EmptyStackException;
 
-    void redoCommand() throws TaskNotFoundException;
+    void redoCommand() throws EmptyStackException;
 
 
 }
