@@ -165,7 +165,7 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * 
+     *
      * @param keyCombination
      *            the KeyCombination value of the accelerator
      */
