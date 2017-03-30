@@ -88,7 +88,7 @@ public class ConfigUtilTest {
 
     @Test
     public void save_nullConfig_assertionFailure() throws IOException {
-        thrown.expect(AssertionError.class);
+        thrown.expect(NullPointerException.class);
         save(null, "SomeFile.json");
     }
 
