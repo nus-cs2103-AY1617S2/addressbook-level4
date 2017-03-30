@@ -154,13 +154,15 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
+        // @@author A0140032E
         public boolean run(ReadOnlyTask task) {
             boolean hasName = nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().value, keyword))
                     .findAny()
                     .isPresent();
             boolean hasDescription = nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().isPresent() ?
+                            task.getDescription().get().value : "", keyword))
                     .findAny()
                     .isPresent();
             boolean hasTag = false;
@@ -173,6 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
             return hasName || hasDescription || hasTag;
         }
+        // @@author
 
         @Override
         public String toString() {

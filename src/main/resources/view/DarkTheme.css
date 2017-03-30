@@ -1,3 +1,7 @@
+.root {
+	-fx-focus-color: #B0E0E6;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -91,6 +95,17 @@
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
 }
+
+/*
+ * @@author A0131278H
+ */
+.list-cell:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+/*
+ * @@author A0131278H
+ */
 
 .list-cell .label {
     -fx-text-fill: #010504;
@@ -278,9 +293,13 @@
     -fx-border-width: 1 1 1 1;
 }
 
+#cardPane:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #F70D1A;
+    -fx-text-fill: #D8683E;
 }
 
 #filterField, #personListPanel, #personWebpage {
