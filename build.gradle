@@ -85,7 +85,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "main.jar"
+        archiveName = "bulletjournal.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
