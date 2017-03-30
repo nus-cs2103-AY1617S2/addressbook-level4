@@ -7,6 +7,7 @@ import org.teamstbf.yats.commons.util.FxViewUtil;
 import org.teamstbf.yats.logic.Logic;
 import org.teamstbf.yats.model.UserPrefs;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -19,8 +20,8 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar
+ * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
 
@@ -56,135 +57,139 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane statusbarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
-        super(FXML);
+	super(FXML);
 
-        // Set dependencies
-        this.primaryStage = primaryStage;
-        this.logic = logic;
-        this.config = config;
+	// Set dependencies
+	this.primaryStage = primaryStage;
+	this.logic = logic;
+	this.config = config;
 
-        // Configure the UI
-        setTitle(config.getAppTitle());
-        setIcon(ICON);
-        setWindowMinSize();
-        setWindowDefaultSize(prefs);
-        Scene scene = new Scene(getRoot());
-        primaryStage.setScene(scene);
+	// Configure the UI
+	setTitle(config.getAppTitle());
+	setIcon(ICON);
+	setWindowMinSize();
+	setWindowDefaultSize(prefs);
+	Scene scene = new Scene(getRoot());
+	primaryStage.setScene(scene);
 
-        setAccelerators();
+	setAccelerators();
     }
 
     public Stage getPrimaryStage() {
-        return primaryStage;
+	return primaryStage;
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+	setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination
+     *            the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
+	menuItem.setAccelerator(keyCombination);
 
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
+	/*
+	 * TODO: the code below can be removed once the bug reported here
+	 * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later
+	 * version of SDK.
+	 *
+	 * According to the bug report, TextInputControl (TextField, TextArea)
+	 * will consume function-key events. Because CommandBox contains a
+	 * TextField, and ResultDisplay contains a TextArea, thus some
+	 * accelerators (e.g F1) will not work when the focus is in them because
+	 * the key event is consumed by the TextInputControl(s).
+	 *
+	 * For now, we add following event filter to capture such key events and
+	 * open help window purposely so to support accelerators even when focus
+	 * is in CommandBox or ResultDisplay.
+	 */
+	getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+	    if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+		menuItem.getOnAction().handle(new ActionEvent());
+		event.consume();
+	    }
+	});
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+	browserPanel = new BrowserPanel(browserPlaceholder);
+	taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+	new ResultDisplay(getResultDisplayPlaceholder());
+	new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
+	new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
-        return commandBoxPlaceholder;
+	return commandBoxPlaceholder;
     }
 
     private AnchorPane getStatusbarPlaceholder() {
-        return statusbarPlaceholder;
+	return statusbarPlaceholder;
     }
 
     private AnchorPane getResultDisplayPlaceholder() {
-        return resultDisplayPlaceholder;
+	return resultDisplayPlaceholder;
     }
 
     private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+	return taskListPanelPlaceholder;
     }
 
     void hide() {
-        primaryStage.hide();
+	primaryStage.hide();
     }
 
     private void setTitle(String appTitle) {
-        primaryStage.setTitle(appTitle);
+	primaryStage.setTitle(appTitle);
     }
 
     /**
      * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
+     *
+     * @param iconSource
+     *            e.g. {@code "/images/help_icon.png"}
      */
     private void setIcon(String iconSource) {
-        FxViewUtil.setStageIcon(primaryStage, iconSource);
+	FxViewUtil.setStageIcon(primaryStage, iconSource);
     }
 
     /**
      * Sets the default size based on user preferences.
      */
     private void setWindowDefaultSize(UserPrefs prefs) {
-        primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
-        primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
-        if (prefs.getGuiSettings().getWindowCoordinates() != null) {
-            primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
-            primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
-        }
+	primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
+	primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
+	if (prefs.getGuiSettings().getWindowCoordinates() != null) {
+	    primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
+	    primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
+	}
     }
 
     private void setWindowMinSize() {
-        primaryStage.setMinHeight(MIN_HEIGHT);
-        primaryStage.setMinWidth(MIN_WIDTH);
+	primaryStage.setMinHeight(MIN_HEIGHT);
+	primaryStage.setMinWidth(MIN_WIDTH);
     }
 
     /**
      * Returns the current size and the position of the main Window.
      */
     GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+	return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
+		(int) primaryStage.getY());
     }
 
     @FXML
     public void handleHelp() {
-        HelpWindow helpWindow = new HelpWindow();
-        helpWindow.show();
+	HelpWindow helpWindow = new HelpWindow();
+	helpWindow.show();
     }
 
     void show() {
-        primaryStage.show();
+	primaryStage.show();
     }
 
     /**
@@ -192,19 +197,19 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleExit() {
-        raise(new ExitAppRequestEvent());
+	raise(new ExitAppRequestEvent());
     }
 
     public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+	return this.taskListPanel;
     }
 
     void loadPersonPage(ReadOnlyEvent person) {
-        browserPanel.loadPersonPage(person);
+	browserPanel.loadPersonPage(person);
     }
 
     void releaseResources() {
-        browserPanel.freeResources();
+	browserPanel.freeResources();
     }
 
 }
