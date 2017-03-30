@@ -62,7 +62,6 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing ToDoList ]===========================");
         super.init();
 
-        
         instance.config = initConfig(getApplicationParameter("config"));
         instance.storage = new StorageManager(instance.config.getToDoListFilePath(),
                 instance.config.getUserPrefsFilePath());
@@ -98,7 +97,7 @@ public class MainApp extends Application {
     public Model getModel() {
         return MainApp.getInstance().model;
     }
-    
+
     //@@author
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyToDoList> toDoOptional;

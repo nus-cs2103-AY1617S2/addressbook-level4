@@ -48,7 +48,7 @@ public class ImportCommand extends Command {
 
         try {
             File file = new File(filePath);
-            if (!FileUtil.isValidPathName(filePath)) {
+            if (!FileUtil.isFileExists(file)) {
                 String result = MESSAGE_IMPORT_FILE_MISSING
                         + String.format(MESSAGE_IMPORT_FAILURE, filePath).toString();
                 return new CommandResult(result);

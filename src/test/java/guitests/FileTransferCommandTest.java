@@ -133,7 +133,7 @@ public class FileTransferCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void import_invalidFileName_exceptionThrown() throws Exception {
+    public void import_fileNotExist_exceptionThrown() throws Exception {
         resetStorages();
 
         commandBox.runCommand("import " + TEST_INVALID_NAME_FOLDER);

@@ -201,8 +201,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateByNameDescriptionTag(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new MainKeywordsQualifier(keywords)));
         searchStrings = keywords;
     }
 
@@ -305,7 +305,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateBySearchStrings() {
         if (searchStrings.size() > 0) {
-            updateFilteredTaskList(searchStrings);
+            updateByNameDescriptionTag(searchStrings);
         }
     }
 
@@ -377,23 +377,38 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    //@@author A0139343E
+    /**
+     * A qualifier that look for a task's main keywords.
+     * The main keywords that define a task is by its name, description and tags.
+     *
+     */
+    private class MainKeywordsQualifier implements Qualifier {
+        private Set<String> keyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
+        MainKeywordsQualifier(Set<String> keyWords) {
+            this.keyWords = keyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)).findAny()
-                    .isPresent();
+            String taskName = task.getName().fullName;
+            String taskDescription = task.getDescription().value;
+            String taskTagNames = task.getTags().combineTagString();
+            StringBuilder sb = new StringBuilder();
+            sb.append(taskName);
+            sb.append(" " + taskDescription);
+            sb.append(" " + taskTagNames);
+            String combinedString = sb.toString();
+
+            return keyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(combinedString, keyword))
+                    .findAny().isPresent();
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "name=" + String.join(", ", keyWords);
         }
     }
 

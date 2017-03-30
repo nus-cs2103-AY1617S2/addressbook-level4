@@ -1,19 +1,20 @@
 package seedu.onetwodo.logic.commands;
 
 import java.util.Set;
-
+//@@author A0139343E
 /**
- * Finds and lists all tasks in todo list whose name contains any of the argument keywords.
- * Keyword matching is case sensitive.
+ * Finds and lists all tasks in todo list whose name, description or tag
+ * contains any of the argument keywords.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names,"
+            + " descriptions or tags contain any of "
+            + "the specified keywords and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " taskA bob charlie";
+            + "Example: " + COMMAND_WORD + " assignment tutorial lecture";
 
     private final Set<String> keywords;
 
@@ -23,7 +24,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords);
+        model.updateByNameDescriptionTag(keywords);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

@@ -188,4 +188,16 @@ public class UniqueTagList implements Iterable<Tag> {
         Collections.sort(internalList);
         return this;
     }
+
+    //@@author A0139343E
+    /**
+     * Return a string of tags combined together
+     */
+    public String combineTagString() {
+        StringBuilder sb = new StringBuilder();
+        for (Tag tag : internalList) {
+            sb.append(tag.tagName + " ");
+        }
+        return sb.toString().trim();
+    }
 }
