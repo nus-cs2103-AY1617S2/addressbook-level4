@@ -1,7 +1,7 @@
 # Fast Task
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-F11-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F11-B2/main)
-[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F11-B2/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F11-B2/main?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F11-B2/main/badge.png?branch=master)](https://coveralls.io/github/CS2103JAN2017-F11-B2/main?branch=master)
 
 #### UI Mockup
 <img src="docs/images/UIFinal.png" width="600"><br>

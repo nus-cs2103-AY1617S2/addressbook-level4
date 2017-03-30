@@ -122,7 +122,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 	// in the task list.
 	tasks.updateTask(index, editedTask);
     }
-
+//@@author A0146757R
     //Mark a task as completed
     public void completeTask(int index) throws UniqueTaskList.TaskNotFoundException {
         try {
@@ -131,7 +131,7 @@ public class TaskManager implements ReadOnlyTaskManager {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-    
+//@@author    
     /**
      * Ensures that every tag in this task: - exists in the master list
      * {@link #tags} - points to a Tag object in the master list

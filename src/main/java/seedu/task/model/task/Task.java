@@ -20,7 +20,7 @@ public class Task implements ReadOnlyTask {
     private TaskTime taskEndTime;
     private String taskDescription;
     private TaskStatus taskStatus;
-    private TaskPath taskPath;
+    // private TaskPath taskPath;
 
     public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time.";
 
@@ -44,7 +44,8 @@ public class Task implements ReadOnlyTask {
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
 
-	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus) throws IllegalValueException {
+	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus)
+	    throws IllegalValueException {
 
 	this.taskName = parseTaskName;
 	if (parseDate.isPresent()) {
@@ -54,48 +55,49 @@ public class Task implements ReadOnlyTask {
 	    this.taskStartTime = parseTime.get();
 	}
 	if (parseTime2.isPresent()) {
-		if (this.taskStartTime != null && this.taskStartTime.compareTo(parseTime2.get()) < 0) {
-			this.taskEndTime = parseTime2.get();
-		} else {
-			throw new IllegalValueException(MESSAGE_INVALID_TIME);
-		}
+	    if (this.taskStartTime != null && this.taskStartTime.compareTo(parseTime2.get()) < 0) {
+		this.taskEndTime = parseTime2.get();
+	    } else {
+		throw new IllegalValueException(MESSAGE_INVALID_TIME);
+	    }
 	}
 	if (parseString.isPresent()) {
 	    this.taskDescription = parseString.get();
 	}
-	this.taskStatus = new TaskStatus(TaskStatus.INCOMPLETE);
+	this.taskStatus = new TaskStatus(TaskStatus.MESSAGE_INCOMPLETE);
 	this.tags = new UniqueTagList();
 
     }
-    
-    public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
-    	    Optional<TaskTime> parseTime2, Optional<String> parseString, Optional<TaskStatus> parseTaskStatus, UniqueTagList tags) throws IllegalValueException {
-    	this.taskName = parseTaskName;
-    	if (parseDate.isPresent()) {
-    	    this.taskDate = parseDate.get();
-    	}
-    	if (parseTime.isPresent()) {
-    	    this.taskStartTime = parseTime.get();
-    	}
-    	if (parseTime2.isPresent()) {
-    		if (this.taskStartTime != null && this.taskStartTime.compareTo(parseTime2.get()) < 0) {
-    			this.taskEndTime = parseTime2.get();
-    		} else {
-    			throw new IllegalValueException(MESSAGE_INVALID_TIME);
-    		}
-    	}
-    	if (parseString.isPresent()) {
-    	    this.taskDescription = parseString.get();
-    	}
-    	if (parseTaskStatus.isPresent()) {
-    		this.taskStatus = parseTaskStatus.get();
-    	}
-    	this.tags = tags;
 
-        }
+    public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
+	    Optional<TaskTime> parseTime2, Optional<String> parseString, Optional<TaskStatus> parseTaskStatus,
+	    UniqueTagList tags) throws IllegalValueException {
+	this.taskName = parseTaskName;
+	if (parseDate.isPresent()) {
+	    this.taskDate = parseDate.get();
+	}
+	if (parseTime.isPresent()) {
+	    this.taskStartTime = parseTime.get();
+	}
+	if (parseTime2.isPresent()) {
+	    if (this.taskStartTime != null && this.taskStartTime.compareTo(parseTime2.get()) < 0) {
+		this.taskEndTime = parseTime2.get();
+	    } else {
+		throw new IllegalValueException(MESSAGE_INVALID_TIME);
+	    }
+	}
+	if (parseString.isPresent()) {
+	    this.taskDescription = parseString.get();
+	}
+	if (parseTaskStatus.isPresent()) {
+	    this.taskStatus = parseTaskStatus.get();
+	}
+	this.tags = tags;
+
+    }
 
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
-	    String taskDescription,TaskStatus taskStatus ) {
+	    String taskDescription, TaskStatus taskStatus) {
 	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, taskStatus, new UniqueTagList());
 
     }
@@ -108,8 +110,7 @@ public class Task implements ReadOnlyTask {
 		source.getTaskDescription(), source.getTaskStatus(), source.getTags());
     }
 
-
-	@Override
+    @Override
     public UniqueTagList getTags() {
 	return new UniqueTagList(tags);
     }
@@ -135,7 +136,7 @@ public class Task implements ReadOnlyTask {
 	    this.setTaskDescription(replacement.getTaskDescription());
 	    this.setTaskStatus(replacement.getTaskStatus());
 	    this.setTags(replacement.getTags());
-	    
+
 	} catch (IllegalValueException ive) {
 	    System.out.println("error resetting data in read only task"); // phrase
 									  // better
@@ -178,21 +179,19 @@ public class Task implements ReadOnlyTask {
     public TaskTime getTaskEndTime() {
 	return taskEndTime;
     }
-
+//@@author A0146757R
     public TaskStatus getTaskStatus() {
-   	return taskStatus;
-       }
-
-    
+	return taskStatus;
+    }
+//@@author
     public String getTaskDescription() {
 	return taskDescription;
     }
-
-    public void setTaskStatus(TaskStatus taskStatus){
+//@@author A0146757R
+    public void setTaskStatus(TaskStatus taskStatus) {
 	this.taskStatus = taskStatus;
     }
-    
-
+//@@author
     public void setTaskDescription(String description) {
 	this.taskDescription = description;
     }
@@ -206,29 +205,22 @@ public class Task implements ReadOnlyTask {
     }
 
     public void setTaskStartTime(TaskTime taskStartTime) throws IllegalValueException {
-    	if (taskStartTime == null) {
-    		
-    	} else if  (this.taskEndTime == null || this.taskEndTime.compareTo(taskStartTime) >= 0) {
-    		this.taskStartTime = taskStartTime;
-    	} else {
-    		throw new IllegalValueException(MESSAGE_INVALID_TIME);
-    	}
+	if (taskStartTime == null) {
+
+	} else if (this.taskEndTime == null || this.taskEndTime.compareTo(taskStartTime) >= 0) {
+	    this.taskStartTime = taskStartTime;
+	} else {
+	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
+	}
     }
 
     public void setTaskEndTime(TaskTime taskEndTime) throws IllegalValueException {
-	    if (taskEndTime == null) {
-	    	
-	    } else if (this.taskStartTime == null || taskEndTime.compareTo(taskStartTime) >= 0) {
-		    this.taskEndTime = taskEndTime;
-		} else {
-		    throw new IllegalValueException(MESSAGE_INVALID_TIME);
-		}
-    }
+	if (taskEndTime == null) {
 
-	@Override
-	public String getTaskPath() {
-		// TODO Auto-generated method stub
-		return null;
+	} else if (this.taskStartTime == null || taskEndTime.compareTo(taskStartTime) >= 0) {
+	    this.taskEndTime = taskEndTime;
+	} else {
+	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
 	}
-
+    }
 }

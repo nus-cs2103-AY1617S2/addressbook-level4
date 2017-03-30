@@ -13,7 +13,7 @@ public class TaskDate {
 	
 	private List<Date> dates;
     private SimpleDateFormat formatter;
-    public final String OUTPUT_FORMAT = " MMM dd (EEE) ";
+    public final String OUTPUT_FORMAT = " dd/mm/yy";
 	
     private int day;
     private int month;
@@ -126,6 +126,7 @@ public class TaskDate {
 	}
     }
 
+
     public String toString() {
     if(dates == null){
     	if (day2 == 0 && month2 == 0 && year2 == 0) {
@@ -164,22 +165,23 @@ public class TaskDate {
 	}
 
     }
+
     public int compareTo(TaskDate other) {
-    	if (this.year > other.year) {
-    		return 1;
-    	} else if (this.year < other.year) {
-    		return -1;
-    	}
-    	if (this.month > other.month) {
-    		return 1;
-    	} else if (this.month < other.month){
-    		return -1;
-    	}
-    	if (this.day > other.day) {
-    		return 1;
-    	} else if (this.day < other.day){
-    		return -1;
-    	}
-    	return 0;
+	if (this.year > other.year) {
+	    return 1;
+	} else if (this.year < other.year) {
+	    return -1;
+	}
+	if (this.month > other.month) {
+	    return 1;
+	} else if (this.month < other.month) {
+	    return -1;
+	}
+	if (this.day > other.day) {
+	    return 1;
+	} else if (this.day < other.day) {
+	    return -1;
+	}
+	return 0;
     }
 }

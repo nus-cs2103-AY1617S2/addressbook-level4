@@ -11,6 +11,7 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
+//@@author A0146757R
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
 	try {
@@ -48,3 +49,4 @@ public class SampleDataUtil {
 	}
     }
 }
+//@@author

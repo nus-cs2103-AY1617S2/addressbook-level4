@@ -21,12 +21,15 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 
+
 /**
  * The manager of the UI component.
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
+//@@author A0146757R
     private static final String ICON_APPLICATION = "/images/task_manager.png";
+//@@author
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -128,3 +131,4 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
 }
+

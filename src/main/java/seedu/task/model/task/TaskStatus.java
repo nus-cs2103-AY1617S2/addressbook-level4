@@ -6,13 +6,13 @@ public class TaskStatus {
 
     public String status;
     
-    public static final String INCOMPLETE = "Ongoing";
-    public static final String DONE = "Completed";
+    public static final String MESSAGE_INCOMPLETE = "Ongoing";
+    public static final String MESSAGE_DONE = "Completed";
     
     public TaskStatus(String status) {
         this.status = status;
     }
-    
+ 
     @Override
     public String toString() {
         return status;

@@ -6,14 +6,9 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskName;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.TaskDate;
-/*
-import seedu.task.model.task.Phone;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
-*/
-/**
- *
- */
+import seedu.task.model.task.TaskStatus;
+
+//@@author A0146757R
 public class TaskBuilder {
 
     private TestTask task;
@@ -23,7 +18,7 @@ public class TaskBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
     public TaskBuilder(TestTask taskToCopy) {
         this.task = new TestTask(taskToCopy);
@@ -54,6 +49,11 @@ public class TaskBuilder {
         return this;
     }
     
+    public TaskBuilder withTaskStatus(String taskStatus) throws IllegalValueException {
+        this.task.setTaskStatus(new TaskStatus(taskStatus));
+        return this;
+    }
+    
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
         for (String tag: tags) {
@@ -67,3 +67,4 @@ public class TaskBuilder {
     }
 
 }
+//@@author

@@ -10,6 +10,7 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0146757R
 /**
  * Mark a task as completed which is identified using it's last displayed index
  * from the task manager.
@@ -49,7 +50,7 @@ public class DoneCommand extends Command {
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex[i] - 1 - i);
 
         targetStatus= taskToComplete.getTaskStatus().status;
-        if (targetStatus.equals(TaskStatus.DONE)) {
+        if (targetStatus.equals(TaskStatus.MESSAGE_DONE)) {
         	return new CommandResult(MESSAGE_ALREADY_COMPLETED);
         }
         
@@ -72,3 +73,4 @@ public class DoneCommand extends Command {
     	return true;
     }
 }
+//@@author

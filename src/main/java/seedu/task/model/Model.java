@@ -25,10 +25,10 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-
+//@@author A0146757R
     /** Complete the given task. */
     void completeTask(int index) throws UniqueTaskList.TaskNotFoundException;
-    
+//@@author    
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
      * {@code editedTask}.

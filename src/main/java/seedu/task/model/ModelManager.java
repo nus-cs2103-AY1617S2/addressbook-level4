@@ -86,13 +86,13 @@ public class ModelManager extends ComponentManager implements Model {
 	taskManager.removeTask(target);
 	indicateTaskManagerChanged();
     }
-
+//@@author A0146757R
     @Override
 	public synchronized void completeTask(int index) throws TaskNotFoundException {
 		taskManager.completeTask(index);
 		indicateTaskManagerChanged();
 	}
-    
+//@@author    
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
 	taskManager.addJobTask(task);
@@ -211,7 +211,6 @@ public class ModelManager extends ComponentManager implements Model {
 		
 	}
 	public void sortByName() {
-		System.out.println("test");
 		taskManager.sortTasksByName();
 		indicateTaskManagerChanged();
 	}

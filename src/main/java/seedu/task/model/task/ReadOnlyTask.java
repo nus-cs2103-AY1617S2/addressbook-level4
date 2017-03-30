@@ -18,11 +18,10 @@ public interface ReadOnlyTask {
     TaskTime getTaskEndTime();
 
     String getTaskDescription();
-    
-    TaskStatus getTaskStatus();
-    
-    String getTaskPath();
 
+    TaskStatus getTaskStatus();
+
+    // String getTaskPath();
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -45,22 +44,21 @@ public interface ReadOnlyTask {
 			&& other.getTaskStartTime() != null && other.getTaskStartTime().equals(this.getTaskStartTime())
 			&& other.getTaskEndTime() != null && other.getTaskEndTime().equals(this.getTaskEndTime()))
 			&& other.getTaskDescription() != null
-			&& other.getTaskDescription().equals(this.getTaskDescription())
-	&& other.getTaskStatus() != null
-		&& other.getTaskStatus().equals(this.getTaskStatus());
+			&& other.getTaskDescription().equals(this.getTaskDescription()) && other.getTaskStatus() != null
+			&& other.getTaskStatus().equals(this.getTaskStatus());
     }
-
+//@@author A0146757R
     /**
      * Formats the task as text, showing all task details.
      */
     default String getAsText() {
 	final StringBuilder builder = new StringBuilder();
-	builder.append(getTaskName()).append(" Date: ").append(getTaskDate())
-		.append(" Start Time: ").append(getTaskStartTime()).append(" End Time: ").append(getTaskEndTime())
+	builder.append(getTaskName()).append(" Date: ").append(getTaskDate().toString()).append(" Start Time: ")
+		.append(getTaskStartTime()).append(" End Time: ").append(getTaskEndTime())
 		.append(" Description: " + getTaskDescription()).append(" Status: ").append(getTaskStatus());
 
 	getTags().forEach(builder::append);
 	return builder.toString();
     }
-
+//@@author
 }
