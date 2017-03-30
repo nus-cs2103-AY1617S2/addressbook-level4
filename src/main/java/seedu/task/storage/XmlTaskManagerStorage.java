@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import seedu.task.commons.core.FileNameHandler;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
@@ -29,7 +30,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     public String getTaskManagerFilePath() {
-	return filePath;
+	return FileNameHandler.getFileName();
     }
 
     @Override
@@ -76,13 +77,19 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 	assert taskManager != null;
 	assert filePath != null;
 	
-//	if(TaskPath.getPath() != null){
-//	  filePath = TaskPath.getPath();
+//	if(PathCommand.getPath() != null){
+//	  filePath = PathCommand.getPath();
 //    }
-
+	filePath = "/Users/jlevy/";
+	
 	File file = new File(filePath);
 	FileUtil.createIfMissing(file);
 	XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
+
+	@Override
+	public void setPathName(String pathName) {
+		filePath = pathName;
+	}
 
 }

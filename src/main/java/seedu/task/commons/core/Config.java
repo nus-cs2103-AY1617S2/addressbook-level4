@@ -14,7 +14,7 @@ public class Config {
     private String appTitle = "Fast Task";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskManagerFilePath = "data/TaskManagerData.xml";
+    private String taskManagerFilePath = FileNameHandler.getFileName();
     private String taskManagerName = "MyTaskManager";
 
     public String getAppTitle() {

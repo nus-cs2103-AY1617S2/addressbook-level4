@@ -64,5 +64,7 @@ public interface Model {
 	void sortByTime();
 
 	void sortByName();
+	
+	//void getPath(String path);
 
 }

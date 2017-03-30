@@ -1,8 +1,10 @@
 # User Guide
 
-1. [Starting the Program](#quick-start)
-2. [Features](#features)
-3. [Command Summary](#command-summary)
+Author: Jacob Levy
+
+1. [Starting the Program](#Starting-the-Program)
+2. [Features](#Features)
+3. [Command Summary](#Command-Summary)
 
 ## Starting the Program
 
@@ -14,12 +16,12 @@
 1. Download the latest `fasttask.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+   > <img src="images/UIFinal.png" width="600">
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**`add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk` :
+   * **`add`**`add Groceries Shopping d/030117 s/09:00 e/12:00 m/Go to Cold Storage, Buy Extra milk` :
      adds a task called `Groceries Shopping` to the Task Manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -79,20 +81,31 @@ Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 task number shown in the list. `INDEX` must be an exact match in order 
 for the function to work.
 
-Examples: 
-* `edit 2` m/Go to Ralph's
+Examples: `edit 2 m/Go to Ralph's`
 
 ## Editing a Task : `undo`
 Undos the most recent action. Irreversible.
 Format: `undo`
 
+## Sorting the Tasks : `sort`
+Sorts the tasks by date or by alphabet. 
+Format: `sort name` or `sort time`
+> Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date. 
+> To return to the unsorted list of tasks, type and enter `list`.
+
 ## Googling a Task or Phrase: `google` 
-Format: `google [INDEX] [KEYWORDS]`
-> Googles the task name at the specified index or Googles the key words that the user enters. A user can additionally Google a task name by single clicking on a task.
+Format: `google [INDEX]`
+> Googles the task name at the specified index. A user can additionally Google a task name by single clicking on a task.
 
 ## Clearing All Entries : `clear`
 Clears all tasks from the task manager.<br>
 Format: `clear`  
+
+## Change the Save Path: `path`
+Changes the save path for Fast Task data. You must specify the name of the save file and mark it as a .xml file.<br>
+Format: `path PATHNAME`<br>
+Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
+Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
 
 ## Exiting the Program : `exit`
 Exits the program.<br>
@@ -108,7 +121,7 @@ Tasks manager data are saved in a file called `TasksManagerData.xml` in the proj
 ## 4. Command Summary
 
 * **Add**  `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]` <br>
-  e.g. `add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk`
+  e.g. `add Groceries Shopping d/030117 s/09:00 e/12:00 m/Go to Cold Storage, buy extra milk`
 
 * **Clear** : `clear`
 
@@ -123,6 +136,11 @@ Tasks manager data are saved in a file called `TasksManagerData.xml` in the proj
 * **Help** : `help` <br>
 
 * **Undo** : `undo` <br>
+
+* **Sort** : `sort time` or `sort name`<br>
+
+* **Path** : `path PATHNAME` <br>
+ e.g. `path C:\Desktop\MyTasks.xml`
 
 * **Google** : `google INDEX` <br>
   e.g.`google 2`

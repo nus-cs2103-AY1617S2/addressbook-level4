@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F11-B2/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F11-B2/main?branch=master)
 
 #### UI Mockup
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/UIFinal.png" width="600"><br>
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).

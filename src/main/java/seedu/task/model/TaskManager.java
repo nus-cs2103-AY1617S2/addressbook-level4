@@ -126,9 +126,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     //Mark a task as completed
     public void completeTask(int index) throws UniqueTaskList.TaskNotFoundException {
         try {
-        	//System.out.println("reached3");
         	tasks.complete(index);
-        	//System.out.println("reached4");
         } catch (Exception e) {
             throw new UniqueTaskList.TaskNotFoundException();
         }
