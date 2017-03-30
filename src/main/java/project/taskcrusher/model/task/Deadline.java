@@ -13,8 +13,8 @@ import project.taskcrusher.model.shared.DateUtilApache;
  */
 public class Deadline {
 
-    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Deadline provided must be a relative" +
-        " or absolute date, and must not have passed";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Deadline provided must be a relative"
+            + " or absolute date, and must not have passed";
     public static final String NO_DEADLINE = "";
     public static final boolean IS_LOADING_FROM_STORAGE = false;
 
@@ -71,7 +71,8 @@ public class Deadline {
             try {
                 return Optional.of(DateUtilApache.parseDate(this.deadline, false));
             } catch (IllegalValueException e) {
-                // TODO this should not occur by default, provided that this object was instantiated successfully.
+                // TODO this should not occur by default, provided that this
+                // object was instantiated successfully.
                 e.printStackTrace();
                 return deadlineAsDate;
             }
@@ -89,9 +90,10 @@ public class Deadline {
         if (!hasDeadline()) {
             return false;
         }
+
         Date deadlineInDate = getDate().get();
-        if ((deadlineInDate.after(timeslot.start))
-                && (deadlineInDate.before(timeslot.end))) {
+
+        if ((deadlineInDate.after(timeslot.start)) && (deadlineInDate.before(timeslot.end))) {
             return true;
         } else {
             return false;

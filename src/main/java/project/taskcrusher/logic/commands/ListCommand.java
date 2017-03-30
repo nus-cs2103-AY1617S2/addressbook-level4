@@ -35,7 +35,6 @@ public class ListCommand extends Command {
             this.dateRange = null;
         } else {
             this.dateRange = parseDateRange(date);
-            System.out.println(dateRange);
         }
         this.showOverdueOnly = showOverdueOnly;
         this.showCompleteOnly = showCompleteOnly;
@@ -67,7 +66,7 @@ public class ListCommand extends Command {
         Timeslot dateRange;
 
         try {
-            dateRange = new Timeslot(date);
+            dateRange = Timeslot.constructTimeslotFromEndDate(date);
             return dateRange;
         } catch (IllegalValueException ive) {
             List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
