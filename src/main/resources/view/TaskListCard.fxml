@@ -17,7 +17,7 @@
          <children>
             <TitledPane style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css">
                <content>
-                    <GridPane maxHeight="60.0" minHeight="60.0" translateX="25.0">
+                    <GridPane maxHeight="60.0" minHeight="60.0" translateX="40.0">
                         <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
                         </columnConstraints>
