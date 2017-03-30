@@ -83,18 +83,25 @@ public class TaskManager implements ReadOnlyTaskManager {
      * updates {@link #tags} with any new tags found, and updates the Tag
      * objects in the task to point to those in {@link #tags}.
      *
+     * @return index of new task if list is sorted
+     *              or size-1 if list in unsorted
+     *
      * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent task already exists.
      */
-    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+    public int addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
-        tasks.add(p);
+        int index = tasks.add(p);
+        return index;
     }
 
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedReadOnlyTask}. {@code TaskManager}'s tag list will be
      * updated with the tags of {@code editedReadOnlyTask}.
+     *
+     * @return updatedIndex if the internal list is sorted
+     *              or input index if list is unsorted
      *
      * @see #syncMasterTagListWith(Task)
      *
@@ -104,7 +111,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
+    public int updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
@@ -114,7 +121,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         // This can cause the tags master list to have additional tags that are
         // not tagged to any task
         // in the task list.
-        tasks.updateTask(index, editedTask);
+        int updatedIndex = tasks.updateTask(index, editedTask);
+        return updatedIndex;
     }
 
     // @@author A0131278H

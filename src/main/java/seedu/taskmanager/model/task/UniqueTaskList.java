@@ -38,14 +38,18 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.contains(toCheck);
     }
 
+    // @@author A0131278H
     /**
      * Adds a task to the list. Resort the list if it was already sorted.
+     *
+     * @return index of new task if list is sorted
+     *              or size-1 if list in unsorted
      *
      * @throws DuplicateTaskException
      *             if the task to add is a duplicate of an existing task in the
      *             list.
      */
-    public void add(Task toAdd) throws DuplicateTaskException {
+    public int add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
@@ -54,14 +58,19 @@ public class UniqueTaskList implements Iterable<Task> {
         // @@author A0131278H
         if (!sortCriterion.equals(KEYWORD_UNDEFINED)) {
             sortByDate(sortCriterion);
+            int index = internalList.indexOf(toAdd);
+            return index;
         }
         // @@author
+        return internalList.size() - 1;
     }
 
     /**
      * Updates the task in the list at position {@code index} with
-     * {@code editedTask}.
-     * Resort the list if it was already sorted.
+     * {@code editedTask}. Resort the list if it was already sorted.
+     *
+     * @return updatedIndex if the internal list is sorted
+     *              or input index if list is unsorted
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
@@ -69,7 +78,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public int updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
@@ -88,9 +97,14 @@ public class UniqueTaskList implements Iterable<Task> {
         // @@author A0131278H
         if (!sortCriterion.equals(KEYWORD_UNDEFINED)) {
             sortByDate(sortCriterion);
+            int updatedIndex = internalList.indexOf(editedTask);
+            return updatedIndex;
         }
         // @@author
+        return index;
     }
+
+    // @@author
 
     /**
      * Removes the equivalent task from the list.
@@ -159,8 +173,8 @@ public class UniqueTaskList implements Iterable<Task> {
 
     // @@author A0131278H
     /**
-     * Sorts task list based on keywords (StartDate or EndDate). Tasks without start StartDate or
-     * EndDate are ranked higher.
+     * Sorts task list based on keywords (StartDate or EndDate). Tasks without
+     * start StartDate or EndDate are ranked higher.
      */
     public void sortByDate(String keyword) {
         if (keyword.equals(SORT_KEYWORD_STARTDATE)) {
