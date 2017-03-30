@@ -5,12 +5,12 @@ matrix:
 
 script: >-
     ./config/travis/run-checks.sh &&
+    ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V &&
     travis_retry ./gradlew clean headless allTests coverage coveralls
 
 before_install:
           - "export DISPLAY=:99.0"
           - "sh -e /etc/init.d/xvfb start"
-          - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 addons:
   apt:
