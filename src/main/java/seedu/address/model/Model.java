@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -7,6 +9,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -46,5 +49,19 @@ public interface Model {
     /** Updates the status
      * @throws DuplicateTaskException */
     void markTask(int index, Task editedTask) throws UniqueTaskList.DuplicateTaskException;
+    
+    //@@author A0119505J
+    void addTaskUndo(Task task) throws DuplicateTaskException;
+
+    // void updateTaskUndo(Task taskToUpdate, TaskDetails taskDetails, StartTime startTime, EndTime endTime,
+    //         Priority priority, String frequency) throws IllegalValueException;
+
+    void deleteTaskUndo(ReadOnlyTask target) throws TaskNotFoundException;
+
+    void clearTaskUndo(ArrayList<Task> tasks) throws TaskNotFoundException;
+
+    LinkedList<UndoInfo> getUndoStack();
+    
+    void addToUndoStack(int strCmdId, String currentFilePath, Task... tasks);
 
 }

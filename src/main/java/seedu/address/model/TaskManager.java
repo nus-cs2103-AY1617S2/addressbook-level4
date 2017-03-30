@@ -178,6 +178,11 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<Tag> getTagList() {
         return new UnmodifiableObservableList<>(tags.asObservableList());
     }
+    
+    //@@author A0119505J
+	public boolean isEmpty(){
+		return tasks.isEmpty();
+	}
 
     @Override
     public boolean equals(Object other) {

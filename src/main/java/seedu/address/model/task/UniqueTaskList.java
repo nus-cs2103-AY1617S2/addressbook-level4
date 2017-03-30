@@ -94,7 +94,12 @@ public class UniqueTaskList implements Iterable<Task> {
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
-
+    
+    //@@author A0119505J
+	public boolean isEmpty(){
+		return internalList.isEmpty();
+	}
+	
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();

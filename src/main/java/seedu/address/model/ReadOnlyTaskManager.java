@@ -21,5 +21,7 @@ public interface ReadOnlyTaskManager {
      * This list will not contain any duplicate tags.
      */
     ObservableList<Tag> getTagList();
+    
+    boolean isEmpty();
 
 }
