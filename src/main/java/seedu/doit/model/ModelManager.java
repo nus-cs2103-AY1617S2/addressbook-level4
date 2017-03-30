@@ -27,8 +27,10 @@ import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 import seedu.doit.model.predicates.AlwaysTruePredicate;
 import seedu.doit.model.predicates.DescriptionPredicate;
 import seedu.doit.model.predicates.DonePredicate;
+import seedu.doit.model.predicates.EndTimePredicate;
 import seedu.doit.model.predicates.NamePredicate;
 import seedu.doit.model.predicates.PriorityPredicate;
+import seedu.doit.model.predicates.StartTimePredicate;
 import seedu.doit.model.predicates.TagPredicate;
 
 /**
@@ -233,7 +235,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
-            Set<String> descriptionKeywords, Set<String> tagKeywords) {
+            Set<String> descriptionKeywords, Set<String> tagKeywords, Set<String> startTimekeywords,
+            Set<String> endTimekeywords) {
         Predicate<ReadOnlyTask> combined = new AlwaysTruePredicate();
 
         if (!nameKeywords.isEmpty()) {
@@ -251,6 +254,14 @@ public class ModelManager extends ComponentManager implements Model {
         if (!tagKeywords.isEmpty()) {
             Predicate<ReadOnlyTask> tagPredicate = new TagPredicate(tagKeywords);
             combined = combined.and(tagPredicate);
+        }
+        if (!startTimekeywords.isEmpty()) {
+            Predicate<ReadOnlyTask> startTimePredicate = new StartTimePredicate(startTimekeywords);
+            combined = combined.and(startTimePredicate);
+        }
+        if (!endTimekeywords.isEmpty()) {
+            Predicate<ReadOnlyTask> endTimePredicate = new EndTimePredicate(endTimekeywords);
+            combined = combined.and(endTimePredicate);
         }
 
         this.filteredTasks.setPredicate(combined);

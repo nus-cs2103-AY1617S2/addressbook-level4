@@ -83,7 +83,7 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords, Set<String> descriptionKeywords,
-            Set<String> tagKeywords);
+            Set<String> tagKeywords, Set<String> startTimekeywords, Set<String> endTimekeywords);
 
     /**
      * Set how the tasks are sorted
