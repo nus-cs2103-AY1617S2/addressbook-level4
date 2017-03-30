@@ -3,6 +3,7 @@ package seedu.taskit.model.task;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 
+//@@author A0141011J
 /**
  * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.

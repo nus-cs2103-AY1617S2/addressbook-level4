@@ -1,7 +1,7 @@
 //@@author A0141011J
 
 package seedu.taskit.logic.commands;
-import seedu.taskit.commons.exceptions.CommandNotFoundException;
+
 import seedu.taskit.commons.exceptions.NoValidStateException;
 
 public class UndoCommand extends Command{

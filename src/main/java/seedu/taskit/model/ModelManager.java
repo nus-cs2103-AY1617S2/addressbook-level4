@@ -227,7 +227,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-<<<<<<< HEAD
+
     //@@author
     
     //@@author A0141872E
@@ -274,9 +274,6 @@ public class ModelManager extends ComponentManager implements Model {
         
     }
 
-||||||| merged common ancestors
-
-=======
     
     //@@author A0141011J
     //========== Inner classes/functions used for filtering =================================================
@@ -320,5 +317,4 @@ public class ModelManager extends ComponentManager implements Model {
         resetData(state.data);
         filteredTasks.setPredicate(state.filterPredicate);
     }
->>>>>>> undo
 }

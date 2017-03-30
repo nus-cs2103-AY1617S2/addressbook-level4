@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class ClearCommandTest extends AddressBookGuiTest {
-
+    //@@author A0141011J
     @Test
     public void clear() {
 
