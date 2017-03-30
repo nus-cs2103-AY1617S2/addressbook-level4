@@ -14,12 +14,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 
 import com.google.common.eventbus.Subscribe;
 

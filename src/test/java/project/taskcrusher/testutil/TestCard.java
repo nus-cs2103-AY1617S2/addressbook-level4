@@ -100,4 +100,33 @@ public class TestCard implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+    @Override
+    public int compareTo(ReadOnlyTask task) {
+        return 0;
+    }
+
+    @Override
+    public void markComplete() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void markIncomplete() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isComplete() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isOverdue() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
