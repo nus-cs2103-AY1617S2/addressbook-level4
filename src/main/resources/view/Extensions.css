@@ -14,16 +14,34 @@
     -fx-text-fill: white;
 }
 
-#startDate {
-	-fx-font-size: 9pt;
-	-fx-text-fill: derive(midnightblue, 50%);
+/*
+ * @@author A0131278H
+ */
+.menu:hover, .menu-item:hover {
+	-fx-background-color: #9ec9cf;
 }
 
-#endDate {
-	-fx-font-size: 9pt;
-	-fx-text-fill: derive(midnightblue, 50%);
+.menu:selected:focused:showing, .menu-item:selected:focused {
+	-fx-background-color: #8cb3b8;
+}
+
+.menu-item:focused {
+	-fx-background-color: #8cb3b8;
+}
+
+.menu:showing {
+	-fx-background-color: #8cb3b8;
+}
+
+#startDate, #endDate {
+	-fx-font-size: 8pt;
+	-fx-text-fill: derive(#1d1d1d, 30%);
 }
 
 #description {
 	-fx-font-size: 10pt;
 }
+
+/*
+ * @@author A0131278H
+ */
