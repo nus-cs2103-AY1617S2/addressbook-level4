@@ -520,6 +520,7 @@ public class LogicManagerTest {
             return Arrays.asList(persons);
         }
 
+        //@@author A0163744B
         private int nextGeneratePersonWithNameId = 0;
         /**
          * Generates a Person object with given name. Other fields will have some dummy values.
@@ -536,6 +537,8 @@ public class LogicManagerTest {
             );
         }
 
+        private int nextGenerateTaskWithDescriptionAndTagsId = 0;
+        //@@author
         //@@author A0163673Y
         /**
          * Generates a Task object with given description and tags.
@@ -546,13 +549,14 @@ public class LogicManagerTest {
             for (String tag: tags) {
                 uniqueTagList.add(new Tag(tag));
             }
+            nextGenerateTaskWithDescriptionAndTagsId++;
             return new Task(
                     new Description(description),
                     null,
                     null,
                     uniqueTagList,
                     new Complete(false),
-                    new TaskId(System.currentTimeMillis())
+                    new TaskId(nextGenerateTaskWithDescriptionAndTagsId)
             );
         }
         //@@author
