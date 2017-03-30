@@ -1,7 +1,6 @@
 package seedu.watodo.logic.commands;
 
 import seedu.watodo.model.TaskManager;
-import seedu.watodo.model.ReadOnlyTaskManager;
 
 /**
  * Clears the task manager.
@@ -22,11 +21,11 @@ public class ClearCommand extends Command {
         model.resetData(new TaskManager());
         return new CommandResult(MESSAGE_SUCCESS);
     }
-    
+
     @Override
     public void unexecute() {
         assert model != null;
         model.resetData(dataToClear);
-        
+
     }
 }

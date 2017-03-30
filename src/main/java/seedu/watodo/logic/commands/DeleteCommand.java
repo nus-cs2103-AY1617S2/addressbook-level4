@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
 
 
     private int[] filteredTaskListIndices;
-    
+
     private ReadOnlyTask taskToDelete;
 
     public DeleteCommand(int[] args) {
@@ -67,15 +67,15 @@ public class DeleteCommand extends Command {
 
         return new CommandResult(tasksDeletedMessage.toString());
     }
-    
+
     @Override
     public void unexecute() {
         assert model != null;
-        
+
         try {
             model.addTask(new Task(taskToDelete));
         } catch (DuplicateTaskException e) {
-            
+
         }
     }
 

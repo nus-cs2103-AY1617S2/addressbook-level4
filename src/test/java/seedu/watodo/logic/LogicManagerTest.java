@@ -6,9 +6,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.watodo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_BY;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_FROM;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -268,7 +265,7 @@ public class LogicManagerTest {
     private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
             throws Exception {
         assertCommandFailure(commandWord, expectedMessage); // index missing
-        assertCommandFailure(commandWord + " +1", expectedMessage); // index should be unsigned 
+        assertCommandFailure(commandWord + " +1", expectedMessage); // index should be unsigned
         assertCommandFailure(commandWord + " -1", expectedMessage); // index should be unsigned
         assertCommandFailure(commandWord + " 0", expectedMessage); // index cannot be 0
         assertCommandFailure(commandWord + " not_a_number", expectedMessage);
