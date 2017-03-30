@@ -171,7 +171,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     //@@author A0143157J
     /**
-     * Renames a certain category in tasks to another specified name.
+     * Renames a certain category for all tasks in this category.
      * @throws IllegalValueException
      * @throws CommandException
      */

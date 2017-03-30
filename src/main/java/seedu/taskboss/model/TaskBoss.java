@@ -173,6 +173,12 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         categories.remove(t);
     }
 
+    //@@authour A0143157J
+    /**
+     * Renames a category in TaskBoss.
+     * @throws IllegalValueException
+     * @throws CommandException
+     */
     public void renameCategory(Category newCategory, Category oldCategory) throws IllegalValueException,
         CommandException {
         categories.replace(newCategory, oldCategory);
@@ -181,6 +187,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
 //// util methods
 
+    //@@author
     @Override
     public String toString() {
         return tasks.asObservableList().size() + " tasks, " + categories.asObservableList().size() +  " categories";
