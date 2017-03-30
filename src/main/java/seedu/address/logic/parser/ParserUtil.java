@@ -44,6 +44,11 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
 
     }
+    
+    public static String parsePath(String path) {
+        assert path != null;
+        return path.trim();
+    }
 
     /**
      * Returns a new Set populated by all elements in the given list of strings
