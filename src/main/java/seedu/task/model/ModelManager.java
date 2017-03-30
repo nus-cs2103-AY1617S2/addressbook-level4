@@ -308,15 +308,11 @@ public class ModelManager extends ComponentManager implements Model {
         //@@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-           // System.out.println(date.toString());
-            //System.out.println(task.getEndDate().toString());
-           // System.out.println(task.getStartDate().toString());
-           if(task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date)) {
-               return true;
-           }
-           else {
-               return false;
-           }
+            if (task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

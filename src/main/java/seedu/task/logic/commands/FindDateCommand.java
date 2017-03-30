@@ -1,15 +1,14 @@
 package seedu.task.logic.commands;
 
-
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.Date;
 
 
 
-public class FindDateCommand extends Command{
-    
+public class FindDateCommand extends Command {
+
     public static final String COMMAND_WORD_1 = "finddate";
-    
+
     public static final String MESSAGE_LISTBYDONE_SUCCESS = "Listed all tasks with specified date";
     public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Lists all tasks with specified date in KIT.\n"
             + "Example: " + COMMAND_WORD_1;
@@ -18,7 +17,7 @@ public class FindDateCommand extends Command{
     private final Date date;
     //@@author A0139975J
     public FindDateCommand(String date) throws IllegalValueException {
-       this.date = new Date(date);
+        this.date = new Date(date);
     }
     //@@author A0139975J
     @Override
@@ -27,7 +26,5 @@ public class FindDateCommand extends Command{
         model.updateFilteredTaskList(this.date);
         return new CommandResult(getMessageForDoneTaskListShownSummary(model.getFilteredTaskList().size()));
     }
-    
-    
 
 }

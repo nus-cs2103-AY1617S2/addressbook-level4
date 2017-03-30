@@ -76,10 +76,10 @@ public class TaskListPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
-            if(cardlist[index+1].expendStatus()) {
-                cardlist[index+1].setExpend(false);
+            if (cardlist[index + 1].expendStatus()) {
+                cardlist[index + 1].setExpend(false);
             } else {
-                cardlist[index+1].setExpend(true);
+                cardlist[index + 1].setExpend(true);
             }
         });
     }
@@ -87,12 +87,12 @@ public class TaskListPanel extends UiPart<Region> {
 
     //@@author A0142939W
     public void scrollDown(Scroll scroll) {
-    	scroll.scrollDown(taskListView);
+        scroll.scrollDown(taskListView);
     }
 
     //@@author A0142939W
     public void scrollUp(Scroll scroll) {
-    	scroll.scrollUp(taskListView);
+        scroll.scrollUp(taskListView);
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
@@ -117,7 +117,7 @@ public class TaskListPanel extends UiPart<Region> {
                     taskcard = new TaskCard(task, getIndex() + 1);
                 }
                 setGraphic(taskcard.getRoot());
-              cardlist[getIndex()+1]=(taskcard);
+                cardlist[getIndex() + 1] = (taskcard);
 
             }
         }

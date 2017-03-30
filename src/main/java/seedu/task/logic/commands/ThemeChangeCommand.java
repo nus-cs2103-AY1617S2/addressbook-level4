@@ -14,8 +14,9 @@ public class ThemeChangeCommand extends Command {
             + "Parameters: Theme Name \n"
             + "Example: " + COMMAND_WORD_1
             + " Dark";
-    
-    public static final String MESSAGE_SUCCESS = "Theme is successfully changed to %1$s. Restart KIT to view the changes.";
+
+    public static final String MESSAGE_SUCCESS = "Theme is successfully changed to %1$s."
+            + "Restart KIT to view the changes.";
 
     private String themeName;
 

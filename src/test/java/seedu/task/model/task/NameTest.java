@@ -12,7 +12,7 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        
+
         // valid name
         assertTrue(Name.isValidName("^")); // only non-alphanumeric characters
         assertTrue(Name.isValidName("peter*")); // contains non-alphanumeric characters

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 //@@author A0140063X-unused
-//this code uses multiple SimpleDateFormat to validate date input. 
+//this code uses multiple SimpleDateFormat to validate date input.
 //this code is Working but decided to use pretty time parser instead which allows natural language parsing.
 /**
  * Represents a Task's date in KIT. Guarantees: immutable; is valid as declared

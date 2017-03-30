@@ -128,7 +128,7 @@ public class TaskCard extends UiPart<Region> {
         this.status = value;
         plane.setExpanded(value);
     }
-    //@@author A0139975J    
+    //@@author A0139975J
     public boolean expendStatus() {
         return this.status;
     }

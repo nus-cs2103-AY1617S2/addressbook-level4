@@ -18,7 +18,7 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBoxDefault.fxml";
     protected static final String FXML_Light = "CommandBoxLight.fxml";
-    protected static final String FXML_Dark= "CommandBoxDark.fxml";
+    protected static final String FXML_Dark = "CommandBoxDark.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
 
     private final Logic logic;
@@ -109,9 +109,9 @@ public class CommandBox extends UiPart<Region> {
      * Types the given text in the commandbox and sets focus there
      */
     public void type(String text) {
-    	setText(text);
-    	requestFocus();
-    	end();
+        setText(text);
+        requestFocus();
+        end();
     }
 
 }
