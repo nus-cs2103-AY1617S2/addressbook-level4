@@ -1,4 +1,4 @@
-//@@author changli A0164103W
+//@@author A0164103W
 package seedu.task.logic.commands;
 
 import java.util.Optional;

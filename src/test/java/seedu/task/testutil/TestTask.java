@@ -55,7 +55,7 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
-    //@@author changli A160004845
+    //@@author A160004845
     public void setDueDate(DueDate dueDate) {
         this.dueDate = dueDate;
     }
@@ -77,7 +77,7 @@ public class TestTask implements ReadOnlyTask {
         return description;
     }
 
-    //@@author changli A160004845
+    //@@author A160004845
     @Override
     public DueDate getDueDate() {
         return this.dueDate;
