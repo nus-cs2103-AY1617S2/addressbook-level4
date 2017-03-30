@@ -184,7 +184,11 @@ public class Task implements ReadOnlyTask {
 
     public void setDone() {
         assert isDone == false;
-        isDone = true;
+        if (!this.hasRecur()) {
+            isDone = true;
+        } else {
+            updateTaskRecurDate();
+        }
     }
 
     public void setToday() {
@@ -218,6 +222,46 @@ public class Task implements ReadOnlyTask {
         this.setTags(replacement.getTags());
     }
 
+    //@@author A0139343E
+    private void updateTaskRecurDate() {
+        assert this.getTaskType() != TaskType.TODO;
+        StartDate tempStartDate;
+        EndDate tempEndDate = getEndDate();
+        switch(this.getRecur().value) {
+        case Recurring.RECUR_DAILY:
+            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().plusDays(1));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusDays(1));
+            }
+            break;
+        case Recurring.RECUR_WEEKLY:
+            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().plusWeeks(1));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusWeeks(1));
+            }
+            break;
+        case Recurring.RECUR_MONTHLY:
+            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().plusMonths(1));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusMonths(1));
+            }
+            break;
+        case Recurring.RECUR_YEARLY:
+            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().plusYears(1));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusYears(1));
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    //@@author
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

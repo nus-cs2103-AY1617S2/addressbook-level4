@@ -23,8 +23,8 @@ public class Recurring {
      */
     public Recurring(String recur) throws IllegalValueException {
         assert recur != null;
-        recur = recur.trim();
-        String lowerCaseRecur = recur.toLowerCase();
+        if(recur == null) System.out.println("null LA!");
+        String lowerCaseRecur = recur.toLowerCase().trim();
         if (!isValidRecurring(lowerCaseRecur)) {
             throw new IllegalValueException(RECURRING_CONSTRAINTS);
         } else {

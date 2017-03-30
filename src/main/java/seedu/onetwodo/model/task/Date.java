@@ -78,4 +78,8 @@ public class Date {
         return localDateTime.get();
     }
 
+    public void setLocalDateTime(LocalDateTime newLocalDateTime) throws NoSuchElementException {
+        this.localDateTime = Optional.of(newLocalDateTime);
+    }
+
 }

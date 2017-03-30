@@ -71,6 +71,14 @@
                         <Insets />
                      </opaqueInsets>
                   </Label>
+                  <Label fx:id="recur" alignment="CENTER" contentDisplay="CENTER" minWidth="40.0" style="-fx-padding: 3;" styleClass="label-recur" stylesheets="@PanelTheme.css" text="\$r">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="3.0" top="21.0" />
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
             </children>
