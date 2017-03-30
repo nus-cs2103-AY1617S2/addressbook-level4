@@ -48,9 +48,10 @@ public class CollectionUtil {
      * Returns true if the given string is found in the given collection
      */
     public static boolean doesAnyStringMatch(Collection<String> words, String keyword) {
-        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase((String) s, (String) keyword));
+        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase(s, keyword));
     }
 
+    // @@author
     /**
      * Returns true if every element in a collection are unique by
      * {@link Object#equals(Object)}.

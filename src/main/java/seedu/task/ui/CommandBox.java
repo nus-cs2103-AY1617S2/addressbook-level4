@@ -38,6 +38,7 @@ public class CommandBox extends UiPart<Region> {
         addToPlaceholder(commandBoxPlaceholder);
     }
 
+    //@@author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         placeHolderPane.getChildren().add(commandTextField);
@@ -102,7 +103,7 @@ public class CommandBox extends UiPart<Region> {
     public void end() {
         commandTextField.end();
     }
-    
+
     //@@author A0142939W
     /**
      * Types the given text in the commandbox and sets focus there

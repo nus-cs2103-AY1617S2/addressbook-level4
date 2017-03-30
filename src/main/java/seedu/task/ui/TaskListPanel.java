@@ -24,9 +24,9 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanelDefault.fxml";
     protected static final String FXML_Light = "TaskListPanelLight.fxml";
     protected static final String FXML_Dark = "TaskListPanelDark.fxml";
-    
+
     private TaskCard [] cardlist = new TaskCard [1000];
-    
+
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
@@ -46,12 +46,13 @@ public class TaskListPanel extends UiPart<Region> {
         addToPlaceholder(taskListPlaceholder);
     }
 
+    //@@author
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         //System.out.println("when pass");
         //cardlist = new ArrayList<TaskCard>();
         taskListView.setCellFactory(listView -> new TaskListViewCell());
-        
+
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -78,7 +79,7 @@ public class TaskListPanel extends UiPart<Region> {
             if(cardlist[index+1].expendStatus()) {
                 cardlist[index+1].setExpend(false);
             } else {
-                cardlist[index+1].setExpend(true); 
+                cardlist[index+1].setExpend(true);
             }
         });
     }
@@ -116,8 +117,8 @@ public class TaskListPanel extends UiPart<Region> {
                     taskcard = new TaskCard(task, getIndex() + 1);
                 }
                 setGraphic(taskcard.getRoot());
-              cardlist[getIndex()+1]=(taskcard);  
-               
+              cardlist[getIndex()+1]=(taskcard);
+
             }
         }
     }

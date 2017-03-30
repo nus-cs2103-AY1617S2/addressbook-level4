@@ -58,19 +58,19 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem quickUndoMenuItem;
-    
+
     @FXML
     private MenuItem quickDoneMenuItem;
-    
+
     @FXML
     private MenuItem quickEditMenuItem;
-    
+
     @FXML
     private MenuItem quickSelectMenuItem;
-    
+
     @FXML
     private MenuItem quickSaveMenuItem;
-    
+
     @FXML
     private MenuItem quickLoadMenuItem;
 
@@ -130,6 +130,7 @@ public class MainWindow extends UiPart<Region> {
         setScroll();
     }
 
+    //@@author
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -147,14 +148,14 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(quickScrollDownMenuItem, KeyCombination.valueOf("Shift+DOWN"));
         setAccelerator(quickScrollUpMenuItem, KeyCombination.valueOf("SHIFT+UP"));
     }
-    
+
     private void setScroll() {
     	scroll = new Scroll();
     }
 
     /**
      * Sets the accelerator of a MenuItem.
-     * 
+     *
      * @param keyCombination
      *            the KeyCombination value of the accelerator
      */
@@ -208,6 +209,7 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
     }
 
+    //@@author
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
@@ -234,7 +236,7 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the given image as the icon of the main window.
-     * 
+     *
      * @param iconSource
      *            e.g. {@code "/images/help_icon.png"}
      */
@@ -288,23 +290,23 @@ public class MainWindow extends UiPart<Region> {
     public void handleUndo() {
         commandBox.type("undo");
     }
-    
+
     public void handleDone() {
     	commandBox.type("done ");
     }
-    
+
     public void handleEdit() {
     	commandBox.type("edit ");
     }
-    
+
     public void handleSelect() {
     	commandBox.type("select ");
     }
-    
+
     public void handleSave() {
     	commandBox.type("save");
     }
-    
+
     public void handleLoad() {
     	commandBox.type("load ");
     }
@@ -338,7 +340,7 @@ public class MainWindow extends UiPart<Region> {
     public void setFocus() {
         commandBox.requestFocus();
     }
-    
+
 //    void loadTaskPage(ReadOnlyTask task) {
 //        browserPanel.loadTaskPage(task);
 //    }
