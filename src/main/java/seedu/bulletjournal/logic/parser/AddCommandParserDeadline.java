@@ -1,3 +1,5 @@
+//@@author A0146738U
+
 package seedu.bulletjournal.logic.parser;
 
 import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -18,24 +20,19 @@ import seedu.bulletjournal.logic.commands.IncorrectCommand;
 public class AddCommandParserDeadline {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
-            return new AddCommandDeadline(
-                    argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
-                    argsTokenizer.getValue(PREFIX_STATUS).get(),
-                    ("-"),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-            );
+            return new AddCommandDeadline(argsTokenizer.getPreamble().get(),
+                    argsTokenizer.getValue(PREFIX_DEADLINE).get(), argsTokenizer.getValue(PREFIX_STATUS).get(), ("-"),
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddCommandDeadline.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommandDeadline.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
