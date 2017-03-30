@@ -30,19 +30,22 @@ public class FindCommand extends Command {
             Set<String> tagKeys) {
         this.keywords = keywords;
         if (dates != null && dates.size() > 0
-                && dates.get(0).getDates().size() > 0)
+                && dates.get(0).getDates().size() > 0) {
             this.date = dates.get(0).getDates().get(0);
-        else
+        } else {
             this.date = null;
+        }
         this.tagKeys = tagKeys;
     }
 
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords, date, tagKeys);
-        return new CommandResult(getMessageForTaskListShownSummary(
-                model.getFilteredTaskList().size()),
-                String.format(MESSAGE_SUCCESS_STATUS_BAR, model.getFilteredTaskList().size()));
+        return new CommandResult(
+                getMessageForTaskListShownSummary(
+                        model.getFilteredTaskList().size()),
+                String.format(MESSAGE_SUCCESS_STATUS_BAR,
+                        model.getFilteredTaskList().size()));
     }
 
 }
