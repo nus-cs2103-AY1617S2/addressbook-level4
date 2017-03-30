@@ -59,8 +59,17 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        date.setText(task.getDate().value);
-        endDate.setText(task.getEndDate().value);
+        if (task.getDate().value.equals("")) {
+            date.setText("-           " + "          to");
+        } else {
+            date.setText(task.getDate().value + "                to           ");
+        }
+
+        if (task.getEndDate().value.equals("")) {
+            endDate.setText("-");
+        } else {
+            endDate.setText(task.getEndDate().value);
+        }
         setStatusForEventTask(task);
         setStatusForDeadlineTask(task);
         setColourCode();
