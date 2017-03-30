@@ -9,7 +9,7 @@ import java.io.IOException;
 //@@author A016385X
 public class FileNameHandler {
 	private static String filePath = "fileName.txt";
-	private static final String DEFAULT_FILEPATH = "data/TaskManagerData.xml";
+	public static final String DEFAULT_FILEPATH = "data/TaskManagerData.xml";
 	public static String getFileName() {
 		try {
 			FileInputStream fis = new FileInputStream(filePath);

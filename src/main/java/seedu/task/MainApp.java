@@ -198,6 +198,8 @@ public class MainApp extends Application {
 			storage.saveTaskManager(model.getTaskManager());
 		} catch (IOException e) {
 			System.out.println("Unexpected IOE in main app");
+			storage.setPathName(FileNameHandler.DEFAULT_FILEPATH);
+	    	FileNameHandler.setFileName(FileNameHandler.DEFAULT_FILEPATH);
 		}
     }
     

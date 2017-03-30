@@ -1,5 +1,8 @@
 package seedu.task.model.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import seedu.task.model.tag.UniqueTagList;
 
 /**
@@ -20,6 +23,10 @@ public interface ReadOnlyTask {
     String getTaskDescription();
 
     TaskStatus getTaskStatus();
+    
+    LocalTime getLocalTime();
+    
+    LocalDate getLocalDate();
 
     // String getTaskPath();
 

@@ -42,7 +42,9 @@ public class Task implements ReadOnlyTask {
 	this.taskStatus = taskStatus;
 	this.tags = new UniqueTagList(tags); // protect internal tags from
 					     // changes in the arg list
-	setCreationTime();
+	if (localTime == null) {
+		setCreationTime();
+	}
     }
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
@@ -69,6 +71,9 @@ public class Task implements ReadOnlyTask {
 	}
 	this.taskStatus = new TaskStatus(TaskStatus.MESSAGE_INCOMPLETE);
 	this.tags = new UniqueTagList();
+	if (localTime == null) {
+		setCreationTime();
+	}
 
     }
 
@@ -96,7 +101,9 @@ public class Task implements ReadOnlyTask {
 	    this.taskStatus = parseTaskStatus.get();
 	}
 	this.tags = tags;
-
+	if (localTime == null) {
+		setCreationTime();
+	}
     }
 
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
@@ -111,6 +118,8 @@ public class Task implements ReadOnlyTask {
     public Task(ReadOnlyTask source) {
 	this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(),
 		source.getTaskDescription(), source.getTaskStatus(), source.getTags());
+		this.setLocalDate(source.getLocalDate());
+		this.setLocalTime(source.getLocalTime());
     }
 
     @Override
@@ -244,5 +253,13 @@ public class Task implements ReadOnlyTask {
     		setCreationTime();
     	}
     	return localTime;
+    }
+  //@@author A0163845X
+    private void setLocalDate(LocalDate localDate) {
+    	this.localDate = localDate;
+    }
+  //@@author A0163845X
+    private void setLocalTime(LocalTime localTime) {
+    	this.localTime = localTime;
     }
 }
