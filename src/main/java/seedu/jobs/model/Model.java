@@ -51,5 +51,11 @@ public interface Model {
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    /**
+     * Undo the last command which has modified tasks or tags
+     */
+
+    void undoCommand() throws TaskNotFoundException;
+
 
 }

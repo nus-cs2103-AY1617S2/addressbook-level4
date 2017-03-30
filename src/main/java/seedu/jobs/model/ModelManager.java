@@ -108,6 +108,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    //=========== Undo & redo commands =======================================================================
+
+    @Override
+    public synchronized void undoCommand() throws TaskNotFoundException {
+        taskBook.undoCommand();
+        indicateTaskBookChanged();
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
