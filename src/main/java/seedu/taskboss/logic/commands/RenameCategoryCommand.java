@@ -1,5 +1,8 @@
 package seedu.taskboss.logic.commands;
 
+import java.util.logging.Logger;
+
+import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.exceptions.DefaultCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
@@ -13,9 +16,11 @@ import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryExcepti
  */
 public class RenameCategoryCommand extends Command {
 
+    private final Logger logger = LogsCenter.getLogger(RenameCategoryCommand.class);
+
     private static final String EMPTY_STRING = "";
-    public static final String COMMAND_WORD = "name";
-    public static final String COMMAND_WORD_SHORT = "n";
+    public static final String COMMAND_WORD = "rename";
+    public static final String COMMAND_WORD_SHORT = "r";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Renames an existing category.\n"
@@ -35,7 +40,6 @@ public class RenameCategoryCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CATEGORY = "This category already exists in TaskBoss.";
     public static final String MESSAGE_DOES_NOT_EXIST_CATEGORY = "This category does not exist in TaskBoss.";
 
-
     public final String oldCategory;
     public final String newCategory;
 
@@ -53,14 +57,17 @@ public class RenameCategoryCommand extends Command {
         Category newCategory = new Category(this.newCategory);
 
         try {
+            logger.info("Attempting to rename category");
             checkDefaultCategoryViolation(oldCategory, newCategory);
             model.renameCategory(oldCategory, newCategory);
             model.updateFilteredTaskListByCategory(newCategory);
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (DefaultCategoryException dce) {
+            logger.info("User attempted to modify built-in categories' names. Throwing CommandException");
             throwCommandExceptionForDefaultCategory(dce);
             return new CommandResult(EMPTY_STRING); // will never reach this statement
         } catch (DuplicateCategoryException e) {
+            logger.info("User attempted to create duplicate categories. Returning user feedback");
             return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
         }
     }

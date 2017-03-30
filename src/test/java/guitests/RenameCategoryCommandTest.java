@@ -20,12 +20,12 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
 
     @Test
     public void renameCategory_Long_Command_success() throws IllegalValueException {
-        assertRenameCategoryResult("name friends Project");
+        assertRenameCategoryResult("rename friends Project");
     }
 
     @Test
     public void renameCategory_Short_Command_success() throws IllegalValueException {
-        assertRenameCategoryResult("n friends Project");
+        assertRenameCategoryResult("r friends Project");
     }
 
     private void assertRenameCategoryResult(String command) throws IllegalValueException {
@@ -57,45 +57,45 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
     public void rename_unsuccessful() {
 
         //old category name == new category name
-        commandBox.runCommand("name friends friends");
+        commandBox.runCommand("rename friends friends");
         assertResultMessage(RenameCategoryCommandParser.ERROR_SAME_FIELDS);
 
         //invalid number of fields
-        commandBox.runCommand("name friends bestfriends forever");
+        commandBox.runCommand("rename friends bestfriends forever");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameCategoryCommand.MESSAGE_USAGE));
 
         //category name with a single non-alphanumerical character
-        commandBox.runCommand("name owesMoney myMoney!");
+        commandBox.runCommand("rename owesMoney myMoney!");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RenameCategoryCommandParser.ERROR_NON_ALPHANUMERIC));
 
         //category name with all non-alphanumerical characters
-        commandBox.runCommand("name owesMoney !!!");
+        commandBox.runCommand("rename owesMoney !!!");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RenameCategoryCommandParser.ERROR_NON_ALPHANUMERIC));
 
         //category name does not exist
-        commandBox.runCommand("name superman batman");
+        commandBox.runCommand("rename superman batman");
         assertResultMessage("[superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
 
         //category name is AllTasks
-        commandBox.runCommand("name AllTasks batman");
+        commandBox.runCommand("rename AllTasks batman");
         assertResultMessage(RenameCategoryCommand.MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
 
         //category name is Done
-        commandBox.runCommand("name Done batman");
+        commandBox.runCommand("rename Done batman");
         assertResultMessage(RenameCategoryCommand.MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
 
         //rename category to Done
-        commandBox.runCommand("name owesMoney Done");
+        commandBox.runCommand("rename owesMoney Done");
         assertResultMessage(RenameCategoryCommand.MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
 
         //rename category to AllTasks
-        commandBox.runCommand("name owesMoney AllTasks");
+        commandBox.runCommand("rename owesMoney AllTasks");
         assertResultMessage(RenameCategoryCommand.MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
 
         //duplicate category
-        commandBox.runCommand("name owesMoney friends");
+        commandBox.runCommand("rename owesMoney friends");
         assertResultMessage(RenameCategoryCommand.MESSAGE_DUPLICATE_CATEGORY);
     }
 }
