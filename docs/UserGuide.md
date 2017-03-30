@@ -16,8 +16,8 @@ By : `Team F12-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `bulletjournal.jar` from the [releases](https://github.com/CS2103JAN2017-F12-B4/main/releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your BulletJournal.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
@@ -49,8 +49,10 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a task to the address book<br>
+Adds a task to the todolist of BulletJournal<br>
 Format: `add TASK...`
+
+Alternative commands: "a", "create", "new"
 
 > Tasks can have any number of tags (including 0)
 
@@ -64,10 +66,14 @@ Examples:
 Shows a list of all tasks in the Task List.<br>
 Format: `list`
 
+Alternative commands: "ls", "display"
+
 ### 2.4. Editing a task : `edit`
 
-Edits an existing task in the address book.<br>
+Edits an existing task in the todo list.<br>
 Format: `edit INDEX [TASK] [t/TAG]...`
+
+Alternative commands: "e", "change"
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -89,6 +95,8 @@ Examples:
 
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
+
+Alternative commands: "f", "search", "lookup"
 
 > * The search is case sensitive. e.g `pick` will not match `Pick`
 > * The order of the keywords does not matter. e.g. `Pick Up` will match `Up Pick`
@@ -122,8 +130,10 @@ Examples:
 
 ### 2.7. Deleting a task : `delete`
 
-Deletes the specified task from the address book. Irreversible.<br>
+Deletes the specified task from the todo list. Irreversible.<br>
 Format: `delete INDEX`
+
+Alternative commands: "del", "d", "remove", "rm"
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -133,7 +143,7 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd task in the address book.
+  Deletes the 2nd task in the todo list.
 * `find Pick`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
@@ -142,6 +152,8 @@ Examples:
 
 Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
+
+Alternative commands: "choose"
 
 > Selects the task and loads the Google search page the task at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -161,10 +173,14 @@ Examples:
 Clears all entries from the Task List.<br>
 Format: `clear`
 
+Alternative commands: "clr", "empty"
+
 ### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
+
+Alternative commands: "logout"
 
 ### 2.11. Saving the data
 
@@ -191,8 +207,11 @@ There is no need to save manually.
   e.g. `find Pick Do`
 
 * **List** : `list` <br>
-  e.g.
-
+  e.g. `list`
+  
+* **Show** : `show done/undone` <br>
+  e.g. `show done`
+  
 * **Help** : `help` <br>
   e.g.
 
