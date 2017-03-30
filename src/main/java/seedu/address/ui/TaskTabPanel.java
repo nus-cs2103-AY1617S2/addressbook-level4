@@ -7,7 +7,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewCommand;
 
 /**
  * The Browser Panel of the App.
@@ -62,19 +62,19 @@ public class TaskTabPanel extends UiPart<Region> {
 
     public void switchTabPanel(String typeOfList) {
         switch(typeOfList) {
-        case ListCommand.TYPE_DONE :
+        case ViewCommand.TYPE_DONE :
             taskTabPanel.getSelectionModel().select(doneTasksTab);
             break;
-        case ListCommand.TYPE_FLOATING :
+        case ViewCommand.TYPE_FLOATING :
             taskTabPanel.getSelectionModel().select(floatingTasksTab);
             break;
-        case ListCommand.TYPE_OVERDUE :
+        case ViewCommand.TYPE_OVERDUE :
             taskTabPanel.getSelectionModel().select(overdueTasksTab);
             break;
-        case ListCommand.TYPE_PENDING :
+        case ViewCommand.TYPE_PENDING :
             taskTabPanel.getSelectionModel().select(pendingTasksTab);
             break;
-        case ListCommand.TYPE_TODAY :
+        case ViewCommand.TYPE_TODAY :
             taskTabPanel.getSelectionModel().select(todayTasksTab);
             break;
         default :

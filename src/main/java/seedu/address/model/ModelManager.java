@@ -11,7 +11,7 @@ import seedu.address.commons.events.model.TaskListChangedEvent;
 import seedu.address.commons.events.model.ViewListChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -98,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowAll() {
-        indicateViewListChanged(ListCommand.TYPE_ALL);
+        indicateViewListChanged(ViewCommand.TYPE_ALL);
         filteredTasks.setPredicate(null);
     }
 

@@ -1,13 +1,11 @@
 package seedu.address.logic.commands;
 
-
-
 /**
- * Lists all persons in the address book to the user.
+ * View all tasks in the view list to the user.
  */
-public class ListCommand extends Command {
+public class ViewCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "view";
 
     public static final String TYPE_ALL = "all";
     public static final String TYPE_DONE = "done";
@@ -17,7 +15,7 @@ public class ListCommand extends Command {
     public static final String TYPE_TODAY = "today";
 
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Viewed all tasks";
 
 
     @Override
