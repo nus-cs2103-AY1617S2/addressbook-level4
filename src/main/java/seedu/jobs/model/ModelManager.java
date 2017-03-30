@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void undoCommand() throws TaskNotFoundException {
-        taskBook.undoCommand();
+        taskBook.undoTask();
         indicateTaskBookChanged();
     }
 

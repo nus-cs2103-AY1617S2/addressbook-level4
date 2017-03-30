@@ -159,7 +159,12 @@ public class TaskBook implements ReadOnlyTaskBook {
     }
 
 
-    public void undoCommand() {
+    public boolean undoTask() throws TaskNotFoundException {
+        if (tasks.pop()) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
     }
 //// tag-level operations
 

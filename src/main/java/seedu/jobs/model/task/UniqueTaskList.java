@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.exceptions.DuplicateDataException;
 import seedu.jobs.commons.util.CollectionUtil;
+import seedu.jobs.model.FixedStack;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -20,6 +21,7 @@ import seedu.jobs.commons.util.CollectionUtil;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final FixedStack<ObservableList<Task>> taskStack = new FixedStack<ObservableList<Task>>();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -39,6 +41,7 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
+        taskStack.push(internalList);
         internalList.add(toAdd);
     }
 
@@ -61,6 +64,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
+        taskStack.push(internalList);
         internalList.set(index, taskToUpdate);
     }
 
@@ -71,6 +75,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
+        taskStack.push(internalList);
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
@@ -86,9 +91,20 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean complete(int index, ReadOnlyTask toComplete) {
         assert toComplete != null;
 
+        taskStack.push(internalList);
         Task taskToComplete = internalList.get(index);
         taskToComplete.markComplete();
         internalList.set(index, taskToComplete);
+        return true;
+    }
+
+    /**
+     *
+     * @param replacement
+     */
+
+    public boolean pop() {
+        this.internalList.setAll(taskStack.pop());
         return true;
     }
 
