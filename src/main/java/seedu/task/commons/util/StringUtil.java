@@ -57,17 +57,7 @@ public class StringUtil {
         assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
         assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
-
-        for (String wordInSentence: wordsInPreppedSentence) {
-            for (int i = 0; i < wordInSentence.length(); i++) {
-                if (preppedWord.equalsIgnoreCase(wordInSentence.substring(i))) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return sentence.toLowerCase().contains(word.toLowerCase());
     }
 
     /**
