@@ -1,0 +1,436 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"is",
+				"isInt"
+			],
+			[
+				"ba",
+				"babyProc"
+			],
+			[
+				"dic",
+				"dictGiant"
+			],
+			[
+				"k",
+				"k"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"PdfLaTeX"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 144.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"activ",
+				"Boxy Theme: Activation"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 414.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"show console",
+			"view",
+			"View -> Show Console"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/F/AddressBook 4/src/main/java/seedu/bulletjournal"
+	],
+	"file_history":
+	[
+		"/H/Google Drive/NUS/_MA4261/Homework Assignments/HW2/HW2.tex",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW9/HW9.tex",
+		"/H/Google Drive/NUS/_SSA2209/Essay/Essay.bib",
+		"/C/Users/houru/Desktop/comp.java",
+		"/C/Users/houru/Desktop/24perm",
+		"/C/Users/houru/Desktop/8temp",
+		"/H/Google Drive/NUS/_MA4207/HelpSheet/HS.tex",
+		"/H/Google Drive/快速文档/Liuyi_on_evangelism",
+		"/H/Google Drive/NUS/MOY/script",
+		"/H/Google Drive/NUS/_CP3208/Special Chained Puzzle/puzzle.tex",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW8/HW8.tex",
+		"/H/Google Drive/NUS/_CP3208/Lit Review/Literature_Review.tex",
+		"/H/Google Drive/NUS/_SSA2209/Essay/Essay.tex",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW7/HW.tex",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW8/HW.tex",
+		"/H/Google Drive/NUS/_CP3208/Lit Review/Literature_Review.bib",
+		"/H/Google Drive/NUS/_CP3208/Special Chained Puzzle/Writeup.tex",
+		"/H/Google Drive/NUS/_CP3208/Writeup/Chain Algo/Chain.tex",
+		"/H/Google Drive/NUS/_CS3236/midterm/midterm.tex",
+		"/C/Users/houru/Documents/python/try.py",
+		"/H/Google Drive/NUS/distAlgo/write/write-up.tex",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW6/HW6.tex",
+		"/H/Google Drive/NUS/_CP3208/Writeup/Writeup.tex",
+		"/H/Google Drive/NUS/_CS3236/midterm/HW.tex",
+		"/H/Google Drive/NUS/_CP3208/Lit Review/bib.bib",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW.tex",
+		"/C/Users/houru/Documents/python/gcd_proc.py",
+		"/C/Users/houru/AppData/Local/Temp/Rar$DIa0.384/README",
+		"/C/Users/houru/Desktop/HashPass.class",
+		"/C/Users/houru/Desktop/MANIFEST.MF",
+		"/H/gopro/batch.bat",
+		"/H/Google Drive/NUS/_MA4261/factorization.js",
+		"/H/Google Drive/resume/some answers",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/H/Google Drive/NUS/_MA4261/Homework Assignments/HW1/HW1.tex",
+		"/H/gopro/2017-02-17/HERO5 Black 1/batch.bat",
+		"/H/Google Drive/NUS/_MA4261/Homework Assignments/HW1/q1.js",
+		"/H/Google Drive/NUS/_CS2020/workplace/PS4/CS2020/TreeNode.java",
+		"/H/Google Drive/NUS/_CS2020/workplace/PS4/CS2020/QuestionTreeBase.java",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW4/HW4.tex",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW5/HW5.tex",
+		"/H/Google Drive/NUS/_CS2020/workplace/PS4/CS2020/QuestionTree.java",
+		"/H/Google Drive/NUS/_CS2020/workplace/PS5/8.out",
+		"/H/Google Drive/NUS/_SSA2209/Presentation/handout.tex",
+		"/H/Google Drive/NUS/_CS2020/workplace/PS5/src/cs2020/RuomuPS5.java",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW5/HW4.tex",
+		"/H/Google Drive/NUS/_CS2020/workplace/MultiThreading/src/Runner.java",
+		"/H/Google Drive/NUS/_CS2020/problem sets/ps1/ImageEncode.java",
+		"/H/Google Drive/NUS/_CS2020/workplace/PS4/CS2020/Query.java",
+		"/H/Google Drive/NUS/_MA4261/exponent.js",
+		"/H/Google Drive/NUS/_MA2202/gcd.js",
+		"/H/Google Drive/NUS/_CS2020/problem sets/ps1/EvenBetterVectorTextFile.java",
+		"/H/Google Drive/NUS/_CS2020/problem sets/ps1/ILFShiftRegister.java",
+		"/H/Google Drive/NUS/_CS4236/report/report.tex",
+		"/C/Users/houru/Desktop/test.js",
+		"/H/Google Drive/NUS/_CS3236/Submissions/HW3/HW3.tex",
+		"/C/Users/houru/Desktop/example.js",
+		"/C/Users/houru/Desktop/abc.html",
+		"/C/Users/houru/Desktop/Apple.java",
+		"/H/Google Drive/NUS/distAlgo/write/3rd Draft/write-up.tex",
+		"/C/Program Files (x86)/MiKTeX 2.9/tex/xelatex/xunicode/xunicode.sty",
+		"/C/Program Files (x86)/MiKTeX 2.9/tex/latex/fontspec/fontspec.sty",
+		"/H/Google Drive/resume/cv.tex",
+		"/H/Google Drive/NUS/_CS3236/Submission/HW2/HW2.tex",
+		"/H/Google Drive/NUS/_CS3236/Submission/HW1/HW1.tex",
+		"/H/Google Drive/NUS/_CS3236/Submission/HW0/HW0.tex",
+		"/H/Google Drive/NUS/_CP3208/Design and difficulties of the time capsule algorithm.txt",
+		"/H/Google Drive/NUS/distAlgo/write/put_together.java",
+		"/H/Google Drive/HW1.tex",
+		"/H/Google Drive/paper.tex",
+		"/H/Google Drive/NUS/distAlgo/write/leader.java",
+		"/H/Temp/做种/trackers",
+		"/C/Users/houru/Desktop/新建文件夹/rep.tex"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"</li>",
+			"<li>",
+			"</li>",
+			"<li>",
+			"Z",
+			"Y",
+			"X",
+			"Z",
+			"Y",
+			"X",
+			"S",
+			"p_1",
+			"\u0006",
+			"{l}",
+			"{th}",
+			"{c}",
+			"{t}",
+			"2",
+			"subsubsection",
+			"subsection",
+			"all the participants so far get their deposit and their duely return, all the remaining money goes back to the initiator, and terminate.",
+			"\\varepsilon/2",
+			"X",
+			"N^2",
+			"combinedChallenge",
+			" ",
+			"udp://",
+			"http://"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"\\n",
+			"/n",
+			"",
+			"\\n",
+			"",
+			"Y",
+			"X",
+			"Z",
+			"Y",
+			"X",
+			"Z",
+			"s",
+			"(1-p_0)",
+			"$\\Sigma$",
+			"{lem}",
+			"{thm}",
+			"{cor}",
+			"{th}",
+			"subsection",
+			"all the participants so far get their deposit and their duely return, and all the remaining money goes back to the initiator, and terminate.",
+			"\\varepsilon/3",
+			"m",
+			"merkelChallenge",
+			"\n",
+			" udp://",
+			" http://"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 148.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.latextools":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "",
+	"project": "project.sublime-project",
+	"replace":
+	{
+		"height": 90.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

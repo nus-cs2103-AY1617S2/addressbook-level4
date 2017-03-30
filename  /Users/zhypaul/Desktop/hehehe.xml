@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <tasks>
+        <name>Assignment for CS</name>
+        <phone>87438807</phone>
+        <email>undone</email>
+        <address>Blk 30 Geylang Street 29, #06-40</address>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <name>Burn homework</name>
+        <phone>99272758</phone>
+        <email>undone</email>
+        <address>Blk 30 Lorong 3 Serangoon Gardens, #07-18</address>
+        <tagged>colleagues</tagged>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <name>Carry burdens</name>
+        <phone>93210283</phone>
+        <email>undone</email>
+        <address>Blk 11 Ang Mo Kio Street 74, #11-04</address>
+        <tagged>neighbours</tagged>
+    </tasks>
+    <tasks>
+        <name>Destroy homework</name>
+        <phone>91031282</phone>
+        <email>undone</email>
+        <address>Blk 436 Serangoon Gardens Street 26, #16-43</address>
+        <tagged>family</tagged>
+    </tasks>
+    <tasks>
+        <name>Irrigate fields</name>
+        <phone>92492021</phone>
+        <email>undone</email>
+        <address>Blk 47 Tampines Street 20, #17-35</address>
+        <tagged>classmates</tagged>
+    </tasks>
+    <tasks>
+        <name>Return bicycle</name>
+        <phone>92624417</phone>
+        <email>undone</email>
+        <address>Blk 45 Aljunied Street 85, #11-31</address>
+        <tagged>colleagues</tagged>
+    </tasks>
+    <tasks>
+        <name>Join555 groups</name>
+        <phone>98765432</phone>
+        <email>undone</email>
+        <address>311, Clementi Ave 2, #02-25</address>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+    </tasks>
+    <tags>friends</tags>
+    <tags>colleagues</tags>
+    <tags>neighbours</tags>
+    <tags>family</tags>
+    <tags>classmates</tags>
+    <tags>owesMoney</tags>
+</addressbook>
