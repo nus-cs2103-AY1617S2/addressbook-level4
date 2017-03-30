@@ -63,13 +63,13 @@ public class LogicManagerTest {
     private Logic logic;
 
     //These are for checking the correctness of the events raised
-    private ReadOnlyTaskBook latestSavedAddressBook;
+    private ReadOnlyTaskBook latestTaskAddressBook;
     private boolean helpShown;
     private int targetedJumpIndex;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskBookChangedEvent abce) {
-        latestSavedAddressBook = new TaskBook(abce.data);
+        latestTaskAddressBook = new TaskBook(abce.data);
     }
 
     @Subscribe
@@ -90,7 +90,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskBook(model.getTaskBook()); // last saved assumed to be up to date
+        latestTaskAddressBook = new TaskBook(model.getTaskBook()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -123,9 +123,9 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBook, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskBook expectedAddressBook = new TaskBook(model.getTaskBook());
+        TaskBook expectedTaskBook = new TaskBook(model.getTaskBook());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-        assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+        assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskBook, expectedShownList);
     }
 
     /**
@@ -137,7 +137,7 @@ public class LogicManagerTest {
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskBook expectedAddressBook,
+                                       ReadOnlyTaskBook expectedTaskBook,
                                        List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
@@ -153,8 +153,8 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getTaskBook());
-        assertEquals(expectedAddressBook, latestSavedAddressBook);
+        assertEquals(expectedTaskBook, model.getTaskBook());
+        assertEquals(expectedTaskBook, latestTaskAddressBook);
     }
 
     @Test
@@ -252,7 +252,7 @@ public class LogicManagerTest {
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskBook expectedAB = helper.generateAddressBook(2);
+        TaskBook expectedAB = helper.generateTaskBook(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
@@ -477,10 +477,10 @@ public class LogicManagerTest {
         /**
          * Generates an AddressBook with auto-generated tasks.
          */
-        TaskBook generateAddressBook(int numGenerated) throws Exception {
-            TaskBook addressBook = new TaskBook();
-            addToAddressBook(addressBook, numGenerated);
-            return addressBook;
+        TaskBook generateTaskBook(int numGenerated) throws Exception {
+            TaskBook taskBook = new TaskBook();
+            addToTaskBook(taskBook, numGenerated);
+            return taskBook;
         }
 
         /**
@@ -488,24 +488,24 @@ public class LogicManagerTest {
          */
         TaskBook generateAddressBook(List<Task> tasks) throws Exception {
             TaskBook addressBook = new TaskBook();
-            addToAddressBook(addressBook, tasks);
+            addToTaskBook(addressBook, tasks);
             return addressBook;
         }
 
         /**
          * Adds auto-generated Task objects to the given AddressBook
-         * @param addressBook The AddressBook to which the Tasks will be added
+         * @param taskBook The AddressBook to which the Tasks will be added
          */
-        void addToAddressBook(TaskBook addressBook, int numGenerated) throws Exception {
-            addToAddressBook(addressBook, generateTaskList(numGenerated));
+        void addToTaskBook(TaskBook taskBook, int numGenerated) throws Exception {
+            addToTaskBook(taskBook, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given AddressBook
          */
-        void addToAddressBook(TaskBook addressBook, List<Task> tasksToAdd) throws Exception {
+        void addToTaskBook(TaskBook taskBook, List<Task> tasksToAdd) throws Exception {
             for (Task t: tasksToAdd) {
-                addressBook.addTask(t);
+                taskBook.addTask(t);
             }
         }
 
