@@ -153,11 +153,6 @@ public class TodoList implements ReadOnlyTodoList {
     }
 
 //// util methods
-    
-    //@@author A0105748B
-    public ObservableList<ReadOnlyTask> getUndoneTaskList() {
-        return new UnmodifiableObservableList<>(tasks.getUndoneTasks());
-    }
 
     @Override
     public String toString() {

@@ -119,6 +119,15 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), config.getBulletJournalFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
+    
+    //@@author A0105748B
+    void fillInnerPartsAtStart() {
+        browserPanel = new BrowserPanel(browserPlaceholder);
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getUndoneTaskList());
+        new ResultDisplay(getResultDisplayPlaceholder());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getBulletJournalFilePath());
+        new CommandBox(getCommandBoxPlaceholder(), logic);
+    }
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;

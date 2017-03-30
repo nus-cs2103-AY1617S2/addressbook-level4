@@ -1,5 +1,7 @@
 package seedu.bulletjournal.model;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -67,7 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
 
@@ -88,11 +90,25 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
     
+    //@@author A0105748B
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getUndoneTaskList() {
-        return new UnmodifiableObservableList<>(this.todoList.getUndoneTaskList());
+        String[] keywords = new String[2];
+        keywords[0] = "undone";
+        keywords[1] = "";
+        Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        updateMatchedTaskList(keywordSet);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    @Override
+    public void updateFilteredListToShowUndone() {
+        String[] keywords = new String[2];
+        keywords[0] = "undone";
+        keywords[1] = "";
+        Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        updateMatchedTaskList(keywordSet);
+    }
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);

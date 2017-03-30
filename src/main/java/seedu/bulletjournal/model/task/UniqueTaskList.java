@@ -93,17 +93,6 @@ public class UniqueTaskList implements Iterable<Task> {
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
-    
-    //@@author A0105748B
-    public UnmodifiableObservableList<Task> getUndoneTasks() {
-        ObservableList<Task> undoneTasks = FXCollections.observableArrayList();
-        for(Task task: this.internalList) {
-            if (task.getStatus() == null || task.getStatus().value.equals("undone")) {
-                undoneTasks.add(task);
-            }
-        }
-        return new UnmodifiableObservableList<>(undoneTasks);
-    }
 
     @Override
     public Iterator<Task> iterator() {
