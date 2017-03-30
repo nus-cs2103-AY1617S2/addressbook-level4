@@ -1,18 +1,18 @@
-//package guitests;
-//
-//import org.testfx.api.FxRobot;
-//
-//import javafx.scene.input.KeyCodeCombination;
-//import seedu.jobs.testutil.TestUtil;
-//
-///**
-// * Robot used to simulate user actions on the GUI.
-// * Extends {@link FxRobot} by adding some customized functionality and workarounds.
-// */
-//public class GuiRobot extends FxRobot {
-//
-//    public GuiRobot push(KeyCodeCombination keyCodeCombination) {
-//        return (GuiRobot) super.push(TestUtil.scrub(keyCodeCombination));
-//    }
-//
-//}
+package guitests;
+
+import org.testfx.api.FxRobot;
+
+import javafx.scene.input.KeyCodeCombination;
+import seedu.jobs.testutil.TestUtil;
+
+/**
+ * Robot used to simulate user actions on the GUI.
+ * Extends {@link FxRobot} by adding some customized functionality and workarounds.
+ */
+public class GuiRobot extends FxRobot {
+
+    public GuiRobot push(KeyCodeCombination keyCodeCombination) {
+        return (GuiRobot) super.push(TestUtil.scrub(keyCodeCombination));
+    }
+
+}

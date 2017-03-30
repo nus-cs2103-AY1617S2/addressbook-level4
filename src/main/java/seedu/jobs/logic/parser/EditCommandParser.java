@@ -3,6 +3,7 @@ package seedu.jobs.logic.parser;
 import static seedu.jobs.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.jobs.logic.parser.CliSyntax.PREFIX_RECUR;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -30,7 +31,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_RECUR, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -45,6 +46,7 @@ public class EditCommandParser {
             editTaskDescriptor.setStart(ParserUtil.parseStart(argsTokenizer.getValue(PREFIX_START)));
             editTaskDescriptor.setEnd(ParserUtil.parseEnd(argsTokenizer.getValue(PREFIX_END)));
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            editTaskDescriptor.setPeriod(ParserUtil.parsePeriod(argsTokenizer.getValue(PREFIX_RECUR)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

@@ -3,8 +3,8 @@ package seedu.jobs.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.jobs.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -12,7 +12,7 @@ public class TaskCard extends UiPart<Region> {
     private static final String FXML = "TaskListCard.fxml";
 
     @FXML
-    private HBox cardPane;
+    private VBox cardPane;
     @FXML
     private Label name;
     @FXML
