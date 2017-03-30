@@ -23,16 +23,10 @@ import seedu.taskmanager.commons.util.CollectionUtil;
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task> {
-
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
-
     // @@author A0131278H
-    /**
-     * Returns the internalList of tasks
-     */
-    public ObservableList<Task> getInternalList() {
-        return internalList;
-    }
+    public static final String KEYWORD_UNDEFINED = "undefined";
+    private String sortCriterion = KEYWORD_UNDEFINED;
     // @@author
 
     /**
@@ -45,7 +39,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a task to the list.
+     * Adds a task to the list. Resort the list if it was already sorted.
      *
      * @throws DuplicateTaskException
      *             if the task to add is a duplicate of an existing task in the
@@ -57,11 +51,17 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        // @@author A0131278H
+        if (!sortCriterion.equals(KEYWORD_UNDEFINED)) {
+            sortByDate(sortCriterion);
+        }
+        // @@author
     }
 
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}.
+     * Resort the list if it was already sorted.
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
@@ -85,6 +85,11 @@ public class UniqueTaskList implements Iterable<Task> {
         // Then, TaskCard should then bind its text labels to those observable
         // properties.
         internalList.set(index, taskToUpdate);
+        // @@author A0131278H
+        if (!sortCriterion.equals(KEYWORD_UNDEFINED)) {
+            sortByDate(sortCriterion);
+        }
+        // @@author
     }
 
     /**
@@ -154,25 +159,47 @@ public class UniqueTaskList implements Iterable<Task> {
 
     // @@author A0131278H
     /**
-     * Sorts task list based on keywords (startdate or enddate).
+     * Sorts task list based on keywords (StartDate or EndDate). Tasks without start StartDate or
+     * EndDate are ranked higher.
      */
     public void sortByDate(String keyword) {
         if (keyword.equals(SORT_KEYWORD_STARTDATE)) {
+            this.sortCriterion = SORT_KEYWORD_STARTDATE;
             internalList.sort(new Comparator<Task>() {
                 @Override
                 public int compare(Task t1, Task t2) {
-                    return t1.getStartDate().compareTo(t2.getStartDate());
+                    if (t1.getStartDate().isPresent() && t2.getStartDate().isPresent()) {
+                        return t1.getStartDate().get().compareTo(t2.getStartDate().get());
+                    }
+                    // @@author A0140032E
+                    if (t2.getStartDate().isPresent()) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                    // @@author A0131278H
                 }
             });
         } else if (keyword.equals(SORT_KEYWORD_ENDDATE)) {
+            this.sortCriterion = SORT_KEYWORD_ENDDATE;
             internalList.sort(new Comparator<Task>() {
                 @Override
                 public int compare(Task t1, Task t2) {
-                    return t1.getEndDate().compareTo(t2.getEndDate());
+                    if (t1.getEndDate().isPresent() && t2.getEndDate().isPresent()) {
+                        return t1.getEndDate().get().compareTo(t2.getEndDate().get());
+                    }
+                    // @@author A0140032E
+                    if (t2.getEndDate().isPresent()) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                    // @@author A0131278H
                 }
             });
         } else {
             return; // Error message will be thrown by SortCommand
         }
     }
+    // @@author
 }

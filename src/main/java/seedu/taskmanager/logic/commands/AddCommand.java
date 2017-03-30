@@ -1,6 +1,7 @@
 package seedu.taskmanager.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
@@ -38,24 +39,29 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, String startDate, String endDate, String description, Set<String> tags)
+    public AddCommand(String title, Optional<String> startDate, Optional<String> endDate,
+            Optional<String> description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         // @@author A0140032E
-        if (new StartDate(startDate).after(new EndDate(endDate))) {
+        if (startDate.isPresent() && endDate.isPresent() &&
+                new StartDate(startDate.get()).after(new EndDate(endDate.get()))) {
             throw new IllegalValueException(MESSAGE_DATE_ORDER_CONSTRAINTS);
         }
-        // @@author
         this.toAdd = new Task(
                 new Title(title),
-                new StartDate(startDate),
-                new EndDate(endDate),
-                new Description(description),
+                startDate.isPresent() && !startDate.get().trim().equals("") ?
+                        Optional.of(new StartDate(startDate.get())) : Optional.empty(),
+                endDate.isPresent() && !endDate.get().trim().equals("") ?
+                        Optional.of(new EndDate(endDate.get())) : Optional.empty(),
+                description.isPresent() && !description.get().trim().equals("") ?
+                        Optional.of(new Description(description.get())) : Optional.empty(),
                 new UniqueTagList(tagSet)
         );
+        // @@author
     }
 
     @Override
