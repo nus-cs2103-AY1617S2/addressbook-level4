@@ -53,7 +53,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     private void saveFilePathInConfig(String filePath) throws DataConversionException, IOException {
         Config thisConfig = configStorage.readConfig();
-        thisConfig.setAddressBookFilePath(filePath);
+        thisConfig.setTaskListFilePath(filePath);
         configStorage.saveConfig(thisConfig);
     }
 
@@ -99,8 +99,8 @@ public class StorageManager extends ComponentManager implements Storage {
         taskListStorage.saveTaskList(taskList, filePath);
     }
 
-    public void setFilePath(String filePath) {
-        taskListStorage.setFilePath(filePath);
+    public void setTaskListFilePath(String filePath) {
+        taskListStorage.setTaskListFilePath(filePath);
     }
 
 
@@ -118,7 +118,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleFileLocationChangedEvent(FileLocationChangedEvent event) throws
         DataConversionException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "File Location is changed."));
-        setFilePath(event.getFilePath());
+        setTaskListFilePath(event.getFilePath());
         try {
             saveTaskList(event.getData());
             saveFilePathInConfig(event.getFilePath());

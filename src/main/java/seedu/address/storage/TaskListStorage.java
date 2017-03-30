@@ -45,6 +45,6 @@ public interface TaskListStorage {
      *Set saving file path
      *@param filePath
      */
-    void setFilePath(String filePath);
+    void setTaskListFilePath(String filePath);
 
 }
