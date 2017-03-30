@@ -11,10 +11,10 @@ import org.teamstbf.yats.commons.exceptions.DataConversionException;
 import org.teamstbf.yats.commons.util.ConfigUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.storage.XmlTaskManagerStorage;
+// @@author A0139448U
 /*
  * Changes the location files are saved to
  */
-// @@author A0139448U
 public class ChangeSaveLocationCommand extends Command {
 
 	public final static String COMMAND_WORD = "save";

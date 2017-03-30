@@ -8,12 +8,11 @@ import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.UniqueEventList;
-
+// @@author A0139448U
 /**
  *
  * Marks an existing task as not done in the task scheduler.
  */
-// @@author A0139448U
 public class MarkUndoneCommand extends Command {
 
 	public final int targetIndex;
@@ -53,7 +52,7 @@ public class MarkUndoneCommand extends Command {
 			throw new CommandException(MESSAGE_DUPLICATE_TASK);
 		}
 		model.updateFilteredListToShowAll();
-        markedTask.setPriority(1);
+		markedTask.setPriority(1);
 		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));
 	}
 

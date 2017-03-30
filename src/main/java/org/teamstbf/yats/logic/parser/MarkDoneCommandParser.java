@@ -10,11 +10,10 @@ import org.teamstbf.yats.logic.commands.BatchMarkDoneCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.IncorrectCommand;
 import org.teamstbf.yats.logic.commands.MarkDoneCommand;
-
+// @@author A0139448U
 /**
  * Parses input arguments and creates a new MarkDoneCommand object
  */
-// @@author A0139448U
 public class MarkDoneCommandParser {
 
 	private Stack<Integer> markStack = new Stack<Integer>();

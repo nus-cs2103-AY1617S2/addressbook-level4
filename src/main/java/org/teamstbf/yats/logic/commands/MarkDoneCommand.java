@@ -8,12 +8,11 @@ import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.UniqueEventList;
-
+// @@author A0139448U
 /**
  *
  * Marks an existing task as done in the task scheduler.
  */
-// @@author A0139448U
 public class MarkDoneCommand extends Command {
 
 	public final int targetIndex;

@@ -4,11 +4,10 @@ import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
-
+// @@author A0139448U
 /**
  * Clears the done tasks in the task manager.
  */
-// @@author A0139448U
 public class ClearDoneCommand extends Command {
 
 	public static final String COMMAND_WORD = "clear";
