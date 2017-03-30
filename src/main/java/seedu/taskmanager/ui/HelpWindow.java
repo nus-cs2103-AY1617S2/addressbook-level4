@@ -2,16 +2,13 @@ package seedu.taskmanager.ui;
 
 import java.util.logging.Logger;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.util.FxViewUtil;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * Controller for a help page
@@ -29,10 +26,9 @@ public class HelpWindow extends UiPart<Region> {
     private WebView browser;
 
     private final Stage dialogStage;
-
-    
+   
     public HelpWindow() {
-    	super(FXML);
+        super(FXML);
         Scene scene = new Scene(getRoot());
         //Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
