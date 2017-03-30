@@ -24,9 +24,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     private UniqueTagList tags;
 
     /**
-     * Every field must be present and not null.
-     * @param startDate TODO
-     * @param isDone TODO
+     * Name field must be present and not null.
      * @throws IllegalValueException
      */
     public Task(Name name, Date startDate, Date endDate, Remark remark,
@@ -77,26 +75,29 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         return name;
     }
 
+    //@@author A0140063X
     public void setStartDate(Date startDate) {
-        assert startDate != null;
         this.startDate = startDate;
     }
 
+    //@@author A0140063X
     @Override
     public Date getStartDate() {
         return startDate;
     }
 
+    //@@author A0140063X
     public void setEndDate(Date endDate) {
-        assert endDate != null;
         this.endDate = endDate;
     }
 
+    //@@author A0140063X
     @Override
     public Date getEndDate() {
         return endDate;
     }
 
+    //@@author
     public void setRemark(Remark remark) {
         assert remark != null;
         this.remark = remark;
@@ -168,7 +169,8 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public String toString() {
         return getAsText();
     }
-  //@@author A0142487Y
+
+    //@@author A0142487Y
     @Override
     public int compareTo(ReadOnlyTask o) {
         //Same end date then compare according to names lexicographically

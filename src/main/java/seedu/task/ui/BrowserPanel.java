@@ -30,7 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
         loadPage();
     }
-    
+
   //@@author A0142487Y-reused
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
@@ -47,10 +47,12 @@ public class BrowserPanel extends UiPart<Region> {
 //        loadPage("https://www.google.com.sg/maps/place/" + task.getLocation().value.replaceAll(" ", "+"));
 //    }
 
+    //@@author A0140063X
     public void loadPage() {
         browser.getEngine().load("https://calendar.google.com/calendar/render#main_7%7Cmonth");
     }
 
+    //@@author
     /**
      * Frees resources allocated to the browser.
      */

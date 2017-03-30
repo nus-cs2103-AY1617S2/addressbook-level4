@@ -55,27 +55,28 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
-    
+
+    //@@author A0140063X
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    /**
-     * undo should not update kit.xml
-     */
+    //@@author A0140063X
     @Override
-    public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
+    public void loadData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
+    //@@author A0140063X
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
+    //@@author A0140063X
     /** Raises an event to indicate the model has changed
      * @param backupFilePath */
     private void indicateTaskManagerChanged(String backupFilePath) {
@@ -83,6 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager, backupFilePath));
     }
 
+    //@@author
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
         raise(new FilePathChangedEvent(newPath, taskManager));
@@ -127,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
             try {
                 taskManager.addTaskToFront(task);
             } catch (DuplicateTaskException e) {
-                logger.info("Duplicate task from google calendar not added.");
+                logger.info("Duplicate task " + task.getName() + " from google calendar not added.");
             }
         }
 
@@ -135,6 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
+    //@@author
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws IllegalValueException {
@@ -151,7 +154,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged("");
     }
 
-
     @Override
     public void changeFilePath(String newPath) {
         indicateFilePathChanged(newPath);
@@ -162,8 +164,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void loadFromLocation(String loadPath) {
         indicateLoadChanged(loadPath);
     }
-    
-    
+
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -196,11 +197,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
-    
+
     @Override
     public void updateFilteredTaskList(Date date) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
-        
+
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -214,7 +215,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         String toString();
     }
-    
+
 
     private class PredicateExpression implements Expression {
 
@@ -272,6 +273,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", keyWords);
         }
     }
+
   //@@author A0142487Y-reused
     private class TagQualifier implements Qualifier {
 
@@ -292,15 +294,16 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author
     private class DateQualifier implements Qualifier {
-        
+
         private Date date;
-        
+
         DateQualifier(Date date) {
             this.date = date;
         }
-        
-        @Override 
+
+        @Override
         public boolean run(ReadOnlyTask task) {
             System.out.println(date.toString());
             System.out.println(task.getEndDate().toString());
@@ -313,7 +316,7 @@ public class ModelManager extends ComponentManager implements Model {
            }
         }
     }
-    
+
     private class DoneQualifier implements Qualifier {
 
         private boolean value;

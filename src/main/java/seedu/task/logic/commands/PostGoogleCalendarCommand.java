@@ -15,8 +15,9 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 
+//@@author A0140063X
 /**
- * Post selected task to GoogleCalendar.
+ * Post either selected or all task to Google Calendar.
  */
 public class PostGoogleCalendarCommand extends Command {
 
@@ -25,7 +26,7 @@ public class PostGoogleCalendarCommand extends Command {
     public static final String COMMAND_WORD_1 = "postgoogle";
     public static final String COMMAND_WORD_2 = "pg";
     public static final String MESSAGE_SUCCESS = "task posted: %1$s\n";
-    public static final String MESSAGE_SUCCESS_MULTIPLE = "All task in current listing posted.";
+    public static final String MESSAGE_SUCCESS_MULTIPLE = "All eligible task in current listing posted.";
     public static final String MESSAGE_FAIL = "Unable to post to Google Calendar.";
     public static final String MESSAGE_MISSING_DATE = "Both start and end dates are required"
             + " to post to Google Calendar";
@@ -35,7 +36,6 @@ public class PostGoogleCalendarCommand extends Command {
 
     private final int filteredTaskListIndex;
 
-    //@@author A0140063X-reused
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      */
@@ -43,20 +43,16 @@ public class PostGoogleCalendarCommand extends Command {
         if (filteredTaskListIndex == NO_INDEX) {
             this.filteredTaskListIndex = NO_INDEX;
         } else {
-            // converts filteredTaskListIndex from one-based to zero-based.
             this.filteredTaskListIndex = filteredTaskListIndex - 1;
         }
     }
 
-    //@@author A0140063X
     @Override
     public CommandResult execute() throws CommandException {
-
         if (filteredTaskListIndex == NO_INDEX) {
             try {
                 postMultipleEvents();
             } catch (IOException ioe) {
-                logger.info("Failure due to " + ioe.getMessage());
                 return new CommandResult(ioe.getMessage());
             }
 
@@ -65,14 +61,10 @@ public class PostGoogleCalendarCommand extends Command {
             ReadOnlyTask taskToPost;
             try {
                 taskToPost = postEvent(filteredTaskListIndex);
-                //posting single event throws commandException for wrong index.
-
+                //CommandException is thrown if wrong index
             } catch (IllegalValueException ive) {
-                logger.info("Failure due to one of the dates missing");
                 return new CommandResult(ive.getMessage());
-
             } catch (IOException ioe) {
-                logger.info("Failure due to " + ioe.getMessage());
                 return new CommandResult(ioe.getMessage());
             }
 
@@ -80,26 +72,23 @@ public class PostGoogleCalendarCommand extends Command {
         }
     }
 
-    //@@author A0140063X
     private void postMultipleEvents() throws IOException {
-        try {
-            assert model != null;
-            int max = model.getFilteredTaskList().size();
+        assert model != null;
+        int max = model.getFilteredTaskList().size();
 
-            for (int i = 0; i < max; i++) {
+        for (int i = 0; i < max; i++) {
+            try {
                 postEvent(i);
+
+            } catch (CommandException ce) {
+                logger.warning("Invalid index when posting multiple events to calendar. This should not happen!");
+            } catch (IllegalValueException ive) {
+                logger.info("Failure due to one of the dates missing");
             }
-
-        } catch (CommandException ce) {
-            logger.warning("Invalid index when posting multiple events to calendar. This should not happen!");
-
-        } catch (IllegalValueException ive) {
-            logger.info("Failure due to one of the dates missing");
-
+            //continue to post next event even if one event fails
         }
     }
 
-    //@@author A0140063X
     private ReadOnlyTask postEvent(int index) throws CommandException, IllegalValueException, IOException {
         ReadOnlyTask taskToPost = getTaskToPost(index);
 
@@ -113,7 +102,8 @@ public class PostGoogleCalendarCommand extends Command {
             com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
             event = service.events().insert(GoogleCalendar.calendarId, event).execute();
 
-        } catch (IOException e) {
+        } catch (IOException ioe) {
+            logger.info("Failure due to " + ioe.getMessage());
             throw new IOException(MESSAGE_FAIL);
         }
 
@@ -121,7 +111,6 @@ public class PostGoogleCalendarCommand extends Command {
         return taskToPost;
     }
 
-    //@@author A0140063X
     private ReadOnlyTask getTaskToPost(int index) throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
@@ -131,7 +120,6 @@ public class PostGoogleCalendarCommand extends Command {
         return lastShownList.get(index);
     }
 
-    //@@author A0140063X
     private Event createEventFromTask(ReadOnlyTask taskToPost) {
         assert taskToPost != null;
         assert taskToPost.getStartDate() != null;

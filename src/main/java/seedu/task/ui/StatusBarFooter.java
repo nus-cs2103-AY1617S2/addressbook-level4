@@ -67,6 +67,7 @@ public class StatusBarFooter extends UiPart<Region> {
         setSaveLocation("./" + fpce.path);
     }
 
+    //@@author A0140063X
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
         PrettyTime pretty = new PrettyTime();

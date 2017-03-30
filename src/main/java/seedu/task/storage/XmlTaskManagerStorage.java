@@ -81,8 +81,9 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
 
+    //@@author A0140063X
     /**
-     * Reads from kit.xml and creates backup.
+     * Reads from data and creates backup.
      * @throws IOException
      * @throws FileNotFoundException
      */

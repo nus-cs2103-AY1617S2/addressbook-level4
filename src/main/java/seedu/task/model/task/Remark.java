@@ -9,7 +9,6 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Remark {
 
     public static final String MESSAGE_REMARK_CONSTRAINTS = "Task remarks can contain any character";
-    // to be changed to fit remarks constraints
     public static final String REMARK_VALIDATION_REGEX = ".*";
     public static final String DEFAULT_REMARK = "DEFAULT_REMARK";
     public final String value;

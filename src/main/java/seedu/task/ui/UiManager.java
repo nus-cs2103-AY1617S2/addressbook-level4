@@ -72,6 +72,7 @@ public class UiManager extends ComponentManager implements Ui {
         }
     }
 
+    //@@author
     @Override
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
@@ -133,6 +134,7 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelpFormat();
     }
 
+    //@@author
     @Subscribe
     public void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

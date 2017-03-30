@@ -2,6 +2,7 @@ package seedu.task.commons.core;
 
 import java.util.logging.Logger;
 
+// @@author A0140063X
 public class History {
 
     public static final int MAX_NUM_UNDO = 10;
@@ -94,6 +95,7 @@ public class History {
         }
     }
 
+    //returns path to load from for redo
     public String getRedoFilePath() {
         assert redoCount != 0;
         if (currentFileIndex < MAX_NUM_UNDO) {

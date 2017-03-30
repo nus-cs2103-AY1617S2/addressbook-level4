@@ -137,6 +137,7 @@ public class EditCommand extends Command {
             return name;
         }
 
+        // @@author A0140063X-reused
         public void setStartDate(Optional<Date> startDate) {
             assert startDate != null;
             this.startDate = startDate;
@@ -155,6 +156,7 @@ public class EditCommand extends Command {
             return endDate;
         }
 
+        // @@author
         public void setRemark(Optional<Remark> remark) {
             assert remark != null;
             this.remark = remark;
