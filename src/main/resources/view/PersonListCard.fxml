@@ -35,6 +35,7 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
+                  <Label fx:id="sdate" layoutX="25.0" layoutY="51.0" styleClass="cell_small_label" text="\$sdate" />
                         <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
                         <Label fx:id="group" styleClass="cell_small_label" text="\$group" />
                         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />

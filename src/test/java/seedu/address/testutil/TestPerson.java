@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
+
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.StartDate;
 import seedu.address.model.task.ReadOnlyPerson;
 
 /**
@@ -16,6 +18,7 @@ public class TestPerson implements ReadOnlyPerson {
     private Group group;
     private Email email;
     private Date date;
+    private StartDate sdate;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -27,6 +30,7 @@ public class TestPerson implements ReadOnlyPerson {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getName();
+        this.sdate = personToCopy.getStartDate();
         this.date = personToCopy.getDate();
         this.email = personToCopy.getEmail();
         this.group = personToCopy.getGroup();
@@ -49,6 +53,10 @@ public class TestPerson implements ReadOnlyPerson {
         this.date = date;
     }
 
+    public void setStartDate(StartDate sdate) {
+        this.sdate = sdate;
+    }
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -61,6 +69,11 @@ public class TestPerson implements ReadOnlyPerson {
     @Override
     public Date getDate() {
         return date;
+    }
+
+    @Override
+    public StartDate getStartDate() {
+        return sdate;
     }
 
     @Override
@@ -87,6 +100,7 @@ public class TestPerson implements ReadOnlyPerson {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("g/" + this.getGroup().value + " ");
+        sb.append("s/" + this.getStartDate().value + " ");
         sb.append("d/" + this.getDate().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
