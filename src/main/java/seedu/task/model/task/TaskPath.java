@@ -17,12 +17,12 @@ public class TaskPath {
         return path;
     }
     
-//    @Override
-//    public boolean equals(Object other) {
-//        return other == this // short circuit if same object
-//                || (other instanceof TaskPath // instanceof handles nulls
-//                && this.path.equals(((TaskPath) other).path)); // state check
-//    }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TaskPath // instanceof handles nulls
+                && this.path.equals(((TaskPath) other).path)); // state check
+    }
 
     @Override
     public int hashCode() {

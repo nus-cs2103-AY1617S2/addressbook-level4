@@ -28,7 +28,6 @@ public class PathCommandParser {
 
 	// keywords delimited by whitespace
 	final String path = matcher.group("keyword");
-	//final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
 	return new PathCommand(path);
     }
 

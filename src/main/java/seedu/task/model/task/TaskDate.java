@@ -3,10 +3,8 @@
  */
 package seedu.task.model.task;
 
-/**
- * @author Daniel Mullen and Jacob Levy
- *
- */
+//@@author Daniel Mullen
+
 public class TaskDate {
     private int day;
     private int month;
