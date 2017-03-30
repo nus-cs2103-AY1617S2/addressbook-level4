@@ -5,9 +5,7 @@ import seedu.task.model.TaskManager;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
-/**
- *
- */
+//@@author A0146757R
 public class TypicalTestTasks {
 
 	public TestTask apples, cereals, yam, zoo;
@@ -42,8 +40,6 @@ public class TypicalTestTasks {
 
 	public TestTask[] getTypicalTasks() {
 		return new TestTask[] { apples, cereals, yam, zoo };
-		// return new TestTask[]{alice, benson, carl, daniel, elle, fiona,
-		// george};
 	}
 
 	public TaskManager getTypicalTaskManager() {
@@ -52,3 +48,4 @@ public class TypicalTestTasks {
 		return ab;
 	}
 }
+//@@author
