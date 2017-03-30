@@ -21,13 +21,13 @@ public class UserPrefs {
         this.guiSettings = guiSettings;
         this.theme = Theme.Default;
     }
-    
+
     public void updateLastUsedGuiSetting(GuiSettings guiSettings, Theme theme) {
         this.guiSettings = guiSettings;
         this.theme = theme;
     }
 
-    //Default UserPrefs has the Theme.Default.
+    // Default UserPrefs has the Theme.Default.
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
         this.theme = Theme.Default;
@@ -37,19 +37,22 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public void setTheme(String themeName){
+    // @@author A0142487Y
+    public void setTheme(String themeName) {
         this.theme = Theme.getTheme(themeName);
     }
-    
-    public Theme getTheme(){
+
+    // @@author A0142487Y
+    public Theme getTheme() {
         return this.theme;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof UserPrefs)) { //this handles null as well.
+        if (!(other instanceof UserPrefs)) { // this handles null as well.
             return false;
         }
 

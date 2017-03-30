@@ -241,7 +241,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    
+  //@@author A0142487Y
     private class NameQualifier implements Qualifier {
         private boolean isExact = false;
         private Set<String> keyWords;
@@ -272,7 +272,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", keyWords);
         }
     }
-
+  //@@author A0142487Y-reused
     private class TagQualifier implements Qualifier {
 
         private String tagKeyWord;

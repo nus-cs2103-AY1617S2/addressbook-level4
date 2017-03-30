@@ -129,12 +129,13 @@ public class MainApp extends Application {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
-                    "Using default config properties");
+            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
+                    + "Using default config properties");
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -151,6 +152,7 @@ public class MainApp extends Application {
         }
     }
 
+    // @@author A0142487Y-reused
     protected UserPrefs initPrefs(Config config) {
         assert config != null;
 
@@ -162,15 +164,16 @@ public class MainApp extends Application {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
-            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
-                    "Using default user prefs");
+            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
@@ -202,9 +205,10 @@ public class MainApp extends Application {
         Platform.exit();
         System.exit(0);
     }
-    
+
+    // @@author A0142487Y
     @Subscribe
-    public void handleUpdateUserPrefsEvent(UpdateUserPrefsEvent event){
+    public void handleUpdateUserPrefsEvent(UpdateUserPrefsEvent event) {
         userPrefs = event.getUserPrefs();
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "New user preference handled, saving to file"));
     }

@@ -30,6 +30,8 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
         loadPage();
     }
+    
+  //@@author A0142487Y-reused
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */

@@ -77,7 +77,7 @@ public class TaskCard extends UiPart<Region> {
         remark.setText(task.getRemark().value);
         initTags(task);
     }
-    
+  //@@author A0142487Y-reused
     public TaskCard(ReadOnlyTask task, int displayedIndex, String fxml) {
         super(fxml);
 //        plane.setText(displayedIndex + ". " + task.getName().fullName);

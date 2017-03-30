@@ -38,7 +38,7 @@ public class StatusBarFooter extends UiPart<Region> {
         setSaveLocation("./" + saveLocation);
         registerAsAnEventHandler(this);
     }
-    
+  //@@author A0142487Y-reused
     public StatusBarFooter(AnchorPane placeHolder, String saveLocation, String fxml) {
         super(fxml);
         addToPlaceholder(placeHolder);

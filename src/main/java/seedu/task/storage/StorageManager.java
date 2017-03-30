@@ -58,14 +58,15 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-    
+
+    // @@author A0142487Y
     @Override
     public void setThemeTo(String themeName) {
         // TODO Auto-generated method stub
         Optional<UserPrefs> optionalUserPrefs = null;
         try {
             optionalUserPrefs = this.readUserPrefs();
-        } catch (DataConversionException  e) {
+        } catch (DataConversionException e) {
             // TODO Auto-generated catch block
             logger.warning("Failed to load the user preference file : " + StringUtil.getDetails(e));
         } catch (IOException e) {
@@ -80,9 +81,8 @@ public class StorageManager extends ComponentManager implements Storage {
             // TODO Auto-generated catch block
             logger.warning("Failed to save new theme to user preference file : " + StringUtil.getDetails(e));
         }
-        
-    }
 
+    }
 
     // ================ TaskManager methods ==============================
 
@@ -139,7 +139,6 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-
     @Override
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
@@ -172,7 +171,5 @@ public class StorageManager extends ComponentManager implements Storage {
             e.printStackTrace();
         }
     }
-
-   
 
 }

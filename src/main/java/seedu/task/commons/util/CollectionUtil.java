@@ -34,14 +34,16 @@ public class CollectionUtil {
         return Stream.of(items).anyMatch(Optional::isPresent);
     }
 
+    // @@author A0142487Y
     /**
      * Returns true if the given item is found in the given collection
      *
      */
     public static boolean doesAnyMatch(Collection<?> items, Object item) {
-        return items.stream().anyMatch(s ->  s.equals(item));
+        return items.stream().anyMatch(s -> s.equals(item));
     }
 
+    // @@author A0142487Y
     /*
      * Returns true if the given string is found in the given collection
      */

@@ -31,7 +31,7 @@ public class CommandBox extends UiPart<Region> {
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }
-    
+  //@@author A0142487Y-reused
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, String fxml) {
         super(fxml);
         this.logic = logic;

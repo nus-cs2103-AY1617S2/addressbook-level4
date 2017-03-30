@@ -40,6 +40,7 @@ public class ResultDisplay extends UiPart<Region> {
         placeHolder.getChildren().add(mainPane);
         registerAsAnEventHandler(this);
     }
+  //@@author A0142487Y-reused
     public ResultDisplay(AnchorPane placeHolder, String fxml) {
         super(fxml);
         resultDisplay.textProperty().bind(displayed);

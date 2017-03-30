@@ -56,12 +56,13 @@ import seedu.task.logic.parser.ThemeChangeCommandParser;
 import seedu.task.logic.parser.UndoCommandParser;
 import seedu.task.logic.parser.UndoneCommandParser;
 
+//@@author A0142487Y
 public class CommandLibrary {
 
     private static CommandLibrary instance = null;
     private static HashMap<String, CommandParser> commandParserTable;
     private static HashMap<String, Command> commandTable;
-//    private static commandKeyParserPair[] commandKeyParserPairs;
+    // private static commandKeyParserPair[] commandKeyParserPairs;
 
     protected CommandLibrary() {
         init();
@@ -78,13 +79,13 @@ public class CommandLibrary {
      * To initialize the hashmap and necessary variables
      */
     private static void init() {
-        commandParserTable =  new HashMap<>();
+        commandParserTable = new HashMap<>();
         commandTable = new HashMap<>();
         // TODO Auto-generated method stub
         commandParserTable.put(AddCommand.COMMAND_WORD_1, new AddCommandParser());
-        
+
         commandParserTable.put(ClearCommand.COMMAND_WORD_1, new ClearCommandParser());
-        
+
         commandParserTable.put(DeleteCommand.COMMAND_WORD_1, new DeleteCommandParser());
 
         commandParserTable.put(DoneCommand.COMMAND_WORD_1, new DoneCommandParser());
@@ -144,7 +145,7 @@ public class CommandLibrary {
 
         commandParserTable.put(SelectCommand.COMMAND_WORD_1, new SelectCommandParser());
         commandParserTable.put(SelectCommand.COMMAND_WORD_2, new SelectCommandParser());
-        
+
         commandParserTable.put(ThemeChangeCommand.COMMAND_WORD_1, new ThemeChangeCommandParser());
 
         commandParserTable.put(UndoCommand.COMMAND_WORD_1, new UndoCommandParser());
@@ -153,10 +154,11 @@ public class CommandLibrary {
         commandParserTable.put(UndoneCommand.COMMAND_WORD_1, new UndoneCommandParser());
         commandParserTable.put(UndoneCommand.COMMAND_WORD_2, new UndoneCommandParser());
 
-//        for(commandKeyParserPair pair: commandKeyParserPairs){
-//            commandParserTable.put(pair.getKey(), pair.getParser());
-//        }
+        // for(commandKeyParserPair pair: commandKeyParserPairs){
+        // commandParserTable.put(pair.getKey(), pair.getParser());
+        // }
     }
+
     /**
      *
      * @param commandWord
@@ -167,22 +169,23 @@ public class CommandLibrary {
         if (!commandParserTable.containsKey(commandWord)) {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
-        return  commandParserTable.get(commandWord).parse(arguments);
+        return commandParserTable.get(commandWord).parse(arguments);
     }
-//    protected class commandKeyParserPair{
-//        private String commandKey;
-//        private CommandParser commandParser;
-//
-//        protected commandKeyParserPair(String commandKey, CommandParser commandParser){
-//            this.commandKey = commandKey;
-//            this.commandParser =(CommandParser) commandParser;
-//        }
-//
-//        public String getKey(){
-//            return this.commandKey;
-//        }
-//        public CommandParser getParser(){
-//            return this.commandParser;
-//        }
-//    }
+    // protected class commandKeyParserPair{
+    // private String commandKey;
+    // private CommandParser commandParser;
+    //
+    // protected commandKeyParserPair(String commandKey, CommandParser
+    // commandParser){
+    // this.commandKey = commandKey;
+    // this.commandParser =(CommandParser) commandParser;
+    // }
+    //
+    // public String getKey(){
+    // return this.commandKey;
+    // }
+    // public CommandParser getParser(){
+    // return this.commandParser;
+    // }
+    // }
 }

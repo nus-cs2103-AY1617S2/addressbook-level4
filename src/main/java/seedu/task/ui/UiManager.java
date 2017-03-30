@@ -41,17 +41,17 @@ public class UiManager extends ComponentManager implements Ui {
         this.prefs = prefs;
     }
 
+    // @@author A0142487Y
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
         primaryStage.setTitle(config.getAppTitle());
 
-        //Set the application icon.
+        // Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
-        
         try {
-            switch(prefs.getTheme()){
+            switch (prefs.getTheme()) {
             case Dark:
                 mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_Dark);
                 break;
@@ -62,7 +62,8 @@ public class UiManager extends ComponentManager implements Ui {
                 mainWindow = new MainWindow(primaryStage, config, prefs, logic);
                 break;
             }
-            mainWindow.show(); //This should be called before creating other UI parts
+            mainWindow.show(); // This should be called before creating other UI
+                               // parts
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
@@ -92,7 +93,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
-                                               String contentText) {
+            String contentText) {
         final Alert alert = new Alert(type);
         alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
         alert.initOwner(owner);
@@ -110,7 +111,8 @@ public class UiManager extends ComponentManager implements Ui {
         System.exit(1);
     }
 
-    //==================== Event Handling Code ===============================================================
+    // ==================== Event Handling Code
+    // ===============================================================
 
     @Subscribe
     public void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
@@ -124,7 +126,7 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
 
-    //@@author A0142939W
+    // @@author A0142939W
     @Subscribe
     public void handleShowHelpFormatEvent(ShowHelpFormatRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -137,10 +139,12 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
-//    @Subscribe
-//    public void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
-//        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-//        mainWindow.loadTaskPage(event.getNewSelection());
-//    }
+    // @Subscribe
+    // public void
+    // handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent
+    // event) {
+    // logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    // mainWindow.loadTaskPage(event.getNewSelection());
+    // }
 
 }
