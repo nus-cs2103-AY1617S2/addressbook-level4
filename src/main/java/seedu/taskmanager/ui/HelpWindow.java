@@ -26,7 +26,7 @@ public class HelpWindow extends UiPart<Region> {
     private WebView browser;
 
     private final Stage dialogStage;
-   
+
     public HelpWindow() {
         super(FXML);
         Scene scene = new Scene(getRoot());
@@ -38,7 +38,7 @@ public class HelpWindow extends UiPart<Region> {
         browser.getEngine().load(USERGUIDE_URL);
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
     }
-    
+
     public void show() {
         logger.fine("Showing help page about the application.");
         dialogStage.showAndWait();
