@@ -6,6 +6,7 @@ import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.Deadline;
 import project.taskcrusher.model.task.ReadOnlyTask;
+
 /**
  * A mutable task object. For testing only.
  */
@@ -102,11 +103,6 @@ public class TestCard implements ReadOnlyTask {
     }
 
     @Override
-    public int compareTo(ReadOnlyTask task) {
-        return 0;
-    }
-
-    @Override
     public void markComplete() {
         // TODO Auto-generated method stub
 
@@ -122,6 +118,12 @@ public class TestCard implements ReadOnlyTask {
     public boolean isComplete() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask o) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
