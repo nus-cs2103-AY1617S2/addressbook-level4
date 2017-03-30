@@ -98,14 +98,14 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.removeTask(target);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
-
+    //@@author A0139975J
     @Override
     public synchronized void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
         taskManager.updateDone(taskManagerIndex, target);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
-
+    //@@author A0139975J
     @Override
     public synchronized void unDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
@@ -191,12 +191,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(String keyword) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keyword)));
     }
-
+    //@@author A0139975J-reused
     @Override
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
-    
+    //@@author A0139975J-reused
     @Override
     public void updateFilteredTaskList(Date date) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
@@ -295,16 +295,16 @@ public class ModelManager extends ComponentManager implements Model {
     private class DateQualifier implements Qualifier {
         
         private Date date;
-        
+        //@@author A0139975J
         DateQualifier(Date date) {
             this.date = date;
         }
-        
+        //@@author A0139975J
         @Override 
         public boolean run(ReadOnlyTask task) {
-            System.out.println(date.toString());
-            System.out.println(task.getEndDate().toString());
-            System.out.println(task.getStartDate().toString());
+           // System.out.println(date.toString());
+            //System.out.println(task.getEndDate().toString());
+           // System.out.println(task.getStartDate().toString());
            if(task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date)) {
                return true;
            }
@@ -317,11 +317,11 @@ public class ModelManager extends ComponentManager implements Model {
     private class DoneQualifier implements Qualifier {
 
         private boolean value;
-
+        //@@author A0139975J
         DoneQualifier(boolean value) {
             this.value = value;
         }
-
+        //@@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
             if (this.value  & task.isDone()) {

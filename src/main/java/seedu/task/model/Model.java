@@ -29,10 +29,10 @@ public interface Model {
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-
+    //@@author A0139975J
     /** Updates the task to done. */
     void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-
+    //@@author A0139975J
     /** Updates the task from done to undone */
     void unDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
@@ -67,10 +67,10 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keyword of tags */
     void updateFilteredTaskList(String keyword);
-    
+    //@@author A0139975J
     /** Updates the filter of the filtered task list to filter by the given date */
     void updateFilteredTaskList(Date value);
-
+  //@@author A0139975J
     /** Updates the filer of the filtered task list to filter by done or undone task */
     void updateFilteredTaskList(boolean value);
 

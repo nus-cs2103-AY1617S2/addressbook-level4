@@ -70,6 +70,7 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
+    //@@author A0139975J
     public void scrollTo(int index) {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
@@ -94,7 +95,7 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
-
+        //@@author A0139975J-reused
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);

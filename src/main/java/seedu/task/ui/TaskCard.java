@@ -44,7 +44,7 @@ public class TaskCard extends UiPart<Region> {
     private TitledPane plane;
 
     private boolean status;
-
+    //@@author A0139975J
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         //plane.setText(displayedIndex + ". " + task.getName().fullName);
@@ -123,11 +123,12 @@ public class TaskCard extends UiPart<Region> {
         tag.setStyle("-fx-background-color: " + color);
         return tag;
     }
-
+    //@@author A0139975J
     public  void setExpend(boolean value) {
         this.status = value;
         plane.setExpanded(value);
     }
+    //@@author A0139975J    
     public boolean expendStatus() {
         return this.status;
     }
