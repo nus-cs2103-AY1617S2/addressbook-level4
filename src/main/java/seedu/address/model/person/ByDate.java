@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateTimeNLUtil;
 import seedu.address.commons.util.StringUtil;
 
 //@@author A0121668A
@@ -16,13 +17,13 @@ public class ByDate {
     public static final String MESSAGE_BYDATE_CONSTRAINTS =
             "Deadline ByDate can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
 
-    public final LocalDate value;
+    public LocalDate value;
 
     public LocalDate getValue() {
         return value;
     }
 
-    //@@author A0121668A
+    //@@author A0110491U
     /**
      * Validates given by date.
      *
@@ -32,10 +33,16 @@ public class ByDate {
         if (byDateArg == null) {
             this.value = null;
         } else {
-            try {
-                this.value = StringUtil.parseStringToDate(byDateArg);
-            } catch (DateTimeException illegalValueException) {
-                throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
+            if (byDateArg.matches("\\d+")) {
+                try {
+                    this.value = StringUtil.parseStringToDate(byDateArg);
+                } catch (DateTimeException illegalValueException) {
+                    throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
+                }
+            } else {
+                DateTimeNLUtil dt = new DateTimeNLUtil();
+                String nldate = dt.getDate(byDateArg);
+                this.value = StringUtil.parseStringToDate(nldate);
             }
         }
     }
