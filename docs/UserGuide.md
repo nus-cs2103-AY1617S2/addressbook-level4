@@ -222,10 +222,10 @@ There is no need to save manually.
 * **Add**  `add TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry t/chores`
   
-* **Add**  `addf TASK [t/TAG]...` <br>
+* **Addf**  `addf TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry s/undone t/chores`
   
-* **Add**  `addd TASK [t/TAG]...` <br>
+* **Addd**  `addd TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry s/undone d/210317 t/chores`
 
 * **Clear** : `clear`
