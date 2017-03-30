@@ -84,8 +84,22 @@ public class EditCommand extends Command {
     @Override
     public void unexecute() {
         try {
+            model.updateFilteredListToShowAll();
             model.deleteTask(newTask);
             model.addTask(oldTask);
+        } catch (TaskNotFoundException e) {
+
+        } catch (DuplicateTaskException e) {
+
+        }
+    }
+    
+    @Override
+    public void redo() {
+        try {
+            model.updateFilteredListToShowAll();
+            model.deleteTask(oldTask);
+            model.addTask(newTask);
         } catch (TaskNotFoundException e) {
 
         } catch (DuplicateTaskException e) {
