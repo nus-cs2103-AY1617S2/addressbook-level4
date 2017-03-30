@@ -19,8 +19,8 @@ public class RenameCategoryCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(RenameCategoryCommand.class);
 
     private static final String EMPTY_STRING = "";
-    public static final String COMMAND_WORD = "rename";
-    public static final String COMMAND_WORD_SHORT = "r";
+    public static final String COMMAND_WORD = "name";
+    public static final String COMMAND_WORD_SHORT = "n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Renames an existing category.\n"
