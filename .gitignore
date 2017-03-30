@@ -8,6 +8,7 @@ lib/*
 *.log
 *.log.*
 *.csv
+.*
 config.json
 src/test/data/sandbox/
 preferences.json
@@ -16,3 +17,9 @@ preferences.json
 classes/
 /data/
 /bin/
+runtests.sh
+/src/.*
+.project
+/config/checkstyle/awesometodoformat.xml
+Collate-GUI.jar
+Collate-TUI.jar
