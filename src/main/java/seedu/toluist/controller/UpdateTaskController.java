@@ -42,9 +42,22 @@ public class UpdateTaskController extends Controller {
     private static final String RESULT_MESSAGE_ERROR_CLONING_ERROR =
             "Bad things happened and we have no idea why! Please contact the administrators.";
 
+  //@@author A0162011A
     private static final String HELP_DETAILS = "Updates an existing task in the todo list.";
     private static final String HELP_FORMAT = "update INDEX [NAME] [from/STARTDATE to/ENDDATE] [by/ENDDATE] [repeat/PERIOD(daily/weekly/monthly)] [priority/PRIORITY(high/low)] [tags/TAGS]";
+    private static final String[] HELP_COMMENTS = { "Related commands: `add`, `delete`",
+                                                    "Only fields entered will be updated.",
+                                                    "When editing tags, the existing tags will be replaced with the new tags.",
+                                                    "Events can be changed to deadlines by using `by/`",
+                                                    "Deadlines can be changed to events by using `from/` and `to/`" };
+    private static final String[] HELP_EXAMPLES = { "`update 1 new name`\nUpdates the name for the floating task at index 1 to `new name`.",
+                                                    "`update 2 from/today to/tomorrow`\nUpdates the start and end time of the event at index 2.",
+                                                    "`update 3 by/sunday`\nUpdates the end time of the deadline at index 3.",
+                                                    "`update 4 repeat/daily by/9pm`\nUpdates the task of index 4 to repeat every day with a deadline of 9pm.",
+                                                    "`update 5 priority/high`\nUpdates the priority of the task at index 5 to high.",
+                                                    "`update 6 tags/newtag`\nUpdates the tags for the task at index 6 to `newtag`." };
 
+    //@@author A0127545A
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
     public void execute(String command) {
@@ -211,7 +224,7 @@ public class UpdateTaskController extends Controller {
         return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
     }
 
-    public static String[] getDetailedHelp() {
-        return getBasicHelp();
+    public static String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }
