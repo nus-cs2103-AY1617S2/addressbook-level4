@@ -2,18 +2,15 @@
 package seedu.onetwodo.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
-import javafx.stage.Stage;
-
-import seedu.onetwodo.commons.core.GuiSettings;
 import seedu.onetwodo.logic.Logic;
 
 public class WelcomeWindow extends UiPart<Region> {
 
     private static final String FXML = "WelcomeWindow.fxml";
+    public static final String WELCOME = "Hey there! Here are your tasks for the day!";
 
     public TodayTaskList todayTaskListPanel;
     public Logic logic;

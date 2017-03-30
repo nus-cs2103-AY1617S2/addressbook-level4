@@ -9,6 +9,7 @@ build/
 *.csv
 config.json
 src/test/data/sandbox/
+src/test/data/savetotest.xml
 preferences.json
 .DS_Store
 ./screenshot*.png

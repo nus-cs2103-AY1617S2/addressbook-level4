@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -27,8 +28,10 @@ import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.GuiSettings;
 import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
+import seedu.onetwodo.commons.events.ui.NewResultAvailableEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.logic.Logic;
+import seedu.onetwodo.logic.commands.HelpCommand;
 import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.logic.commands.RedoCommand;
 import seedu.onetwodo.logic.commands.UndoCommand;
@@ -58,7 +61,6 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     private WelcomeWindow welcomeWindow;
-    private Stage secondaryStage;
 
     // Independent Ui parts residing in this Ui container
     private static StatusBarFooter statusBarFooter;
@@ -152,13 +154,13 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private void setAccelerators() {
-        setAccelerator(exitMenuItem, KeyCombination.valueOf("Ctrl + E"));
+        setAccelerator(exitMenuItem, KeyCombination.valueOf("Shortcut + E"));
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-        setAccelerator(undoMenuItem, KeyCombination.valueOf("Ctrl + Z"));
-        setAccelerator(redoMenuItem, KeyCombination.valueOf("Ctrl + R"));
-        setAccelerator(listDoneMenuItem, KeyCombination.valueOf("Ctrl + Shift + D"));
-        setAccelerator(listUndoneMenuItem, KeyCombination.valueOf("Ctrl + Shift + U"));
-        setAccelerator(listAllMenuItem, KeyCombination.valueOf("Ctrl + Shift + A"));
+        setAccelerator(undoMenuItem, KeyCombination.valueOf("Shortcut + Z"));
+        setAccelerator(redoMenuItem, KeyCombination.valueOf("Shortcut + R"));
+        setAccelerator(listDoneMenuItem, KeyCombination.valueOf("Shortcut + Shift + D"));
+        setAccelerator(listUndoneMenuItem, KeyCombination.valueOf("Shortcut + Shift + U"));
+        setAccelerator(listAllMenuItem, KeyCombination.valueOf("Shortcut + Shift + A"));
     }
 
     /**
@@ -272,6 +274,8 @@ public class MainWindow extends UiPart<Region> {
         browser.getEngine().load(help.toString());
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         content.setBody(browser);
+        closeDialog();
+        EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE));
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
         closeDialogOnNextKeyPress();
@@ -350,9 +354,9 @@ public class MainWindow extends UiPart<Region> {
         descriptionText.setWrappingWidth(MIN_WIDTH);
         content.setHeading(nameText);
         content.setBody(descriptionText);
+        closeDialog();
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
-
         commandBox.setKeyListener(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
@@ -383,7 +387,11 @@ public class MainWindow extends UiPart<Region> {
     public void showWelcomeDialog() {
         welcomeWindow = new WelcomeWindow(logic);
         JFXDialogLayout content = new JFXDialogLayout();
-        content.setBody(welcomeWindow.todayTaskListPanel.getRoot());
+        Region root = welcomeWindow.todayTaskListPanel.getRoot();
+        Label header = new Label();
+        header.setText(WelcomeWindow.WELCOME);
+        content.setHeading(header);
+        content.setBody(root);
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
         closeDialogOnNextKeyPress();
