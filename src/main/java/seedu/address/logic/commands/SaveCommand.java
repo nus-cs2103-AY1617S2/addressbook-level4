@@ -43,7 +43,7 @@ public class SaveCommand extends Command {
                 File file = new File(filePath);
                 FileUtil.createIfMissing(file);
                 message = String.format(MESSAGE_SUCCESS, filePath);
-                EventsCenter.getInstance().post(new FileLocationChangedEvent(filePath));
+                EventsCenter.getInstance().post(new FileLocationChangedEvent(filePath, model.getTaskList()));
                 EventsCenter.getInstance().post(new TaskListChangedEvent(model.getTaskList()));
                 return new CommandResult(message);
             } catch (IOException e) {
