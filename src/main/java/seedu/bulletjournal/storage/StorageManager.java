@@ -50,13 +50,13 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return todoListStorage.getAddressBookFilePath();
+    public String getBulletJournalFilePath() {
+        return todoListStorage.getBulletJournalFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTodoList> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(todoListStorage.getAddressBookFilePath());
+        return readAddressBook(todoListStorage.getBulletJournalFilePath());
     }
 
     @Override
@@ -67,7 +67,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyTodoList addressBook) throws IOException {
-        saveAddressBook(addressBook, todoListStorage.getAddressBookFilePath());
+        saveAddressBook(addressBook, todoListStorage.getBulletJournalFilePath());
     }
 
     @Override

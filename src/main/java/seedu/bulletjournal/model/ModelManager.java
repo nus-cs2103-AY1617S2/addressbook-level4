@@ -26,17 +26,16 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given bulletJournal and userPrefs.
      */
-    public ModelManager(ReadOnlyTodoList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTodoList bulletJournal, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(bulletJournal, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with bullet journal: " + bulletJournal + " and user prefs " + userPrefs);
 
-        this.todoList = new TodoList(addressBook);
+        this.todoList = new TodoList(bulletJournal);
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
-
     }
 
     public ModelManager() {
@@ -87,6 +86,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
+    }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getUndoneTaskList() {
+        return new UnmodifiableObservableList<>(this.todoList.getUndoneTaskList());
     }
 
     @Override
