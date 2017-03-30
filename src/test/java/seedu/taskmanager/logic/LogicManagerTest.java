@@ -205,10 +205,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        assertCommandFailure("add Valid Title s/maybe later d/valid, "
-                + "description", StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01/03/2017 e/maybe later d/valid, "
-                + "description", EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Title s/maybe later d/valid, " + "description",
+                StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Title s/01/03/2017 e/maybe later d/valid, " + "description",
+                EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
         // @@author A0140032E
         assertCommandFailure("add Valid Title s/02/01/2017 e/01/01/2017 d/valid, description",
                 AddCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
@@ -394,6 +394,63 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void executeEditIndexNotFoundErrorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("edit 100000");
+    }
+
+    // @Test
+    // public void executeEditNotEditedMessageShown() throws Exception {
+    // TestDataHelper helper = new TestDataHelper();
+    // Task tTarget1 = helper.generateTaskWithStartDate("01/03/2017");
+    // Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
+    // Task tTarget3 = helper.generateTaskWithStartDate("03/03/2017");
+    // Task tTarget4 = helper.generateTaskWithStartDate("03/03/2017");
+    //
+    // List<Task> uneditedTasks = helper.generateTaskList(tTarget1, tTarget2,
+    // tTarget3);
+    // List<Task> editedTasks = helper.generateTaskList(tTarget1, tTarget2,
+    // tTarget4);
+    // TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+    // List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2,
+    // tTarget4);
+    // helper.addToModel(model, uneditedTasks);
+    //
+    // assertCommandSuccess("edit 3 s/03/03/2017",
+    // String.format(EditCommand.MESSAGE_NOT_EDITED), expectedTM, expectedList);
+    // }
+
+    @Test
+    public void executeEditDuplicateTaskMessageShown() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = helper.generateTaskWithStartDate("01/03/2017");
+        Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
+        Task tTarget3 = helper.generateTaskWithStartDate("03/03/2017");
+
+        List<Task> uneditedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        helper.addToModel(model, uneditedTasks);
+
+        assertCommandFailure("edit 1 s/03/03/2017", String.format(EditCommand.MESSAGE_DUPLICATE_TASK));
+    }
+
+    @Test
+    public void executeEditSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = helper.generateTaskWithTitle("a");
+        Task tTarget2 = helper.generateTaskWithTitle("b");
+        Task tTarget3 = helper.generateTaskWithTitle("c");
+        Task tTarget4 = helper.generateTaskWithTitle("d");
+
+        List<Task> uneditedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> editedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        helper.addToModel(model, uneditedTasks);
+
+        assertCommandSuccess("edit 3 d", String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget4), expectedTM,
+                expectedList);
+    }
+
+    @Test
     public void executeChangeInvalidArgsFormatErrorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertIncorrectIndexFormatBehaviorForCommand("change", expectedMessage);
@@ -409,34 +466,34 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithTitle("KE Y");
-        Task p2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
+        Task tTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task tTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task t1 = helper.generateTaskWithTitle("KE Y");
+        Task t2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithTitle("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithTitle("key key");
-        Task p4 = helper.generateTaskWithTitle("KEy sduauo");
+        Task t1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task t2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task t3 = helper.generateTaskWithTitle("key key");
+        Task t4 = helper.generateTaskWithTitle("KEy sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        List<Task> fourTasks = helper.generateTaskList(t3, t1, t4, t2);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
 
@@ -459,18 +516,18 @@ public class LogicManagerTest {
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithTitle("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithTitle("key key");
-        Task p1 = helper.generateTaskWithTitle("sduauo");
+        Task tTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task tTarget2 = helper.generateTaskWithTitle("bla rAnDoM bla bceofeia");
+        Task tTarget3 = helper.generateTaskWithTitle("key key");
+        Task t1 = helper.generateTaskWithTitle("sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+        List<Task> fourTasks = helper.generateTaskList(tTarget1, t1, tTarget2, tTarget3);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB, expectedList);
+                expectedTM, expectedList);
     }
 
     // @@author A0131278H
@@ -483,14 +540,14 @@ public class LogicManagerTest {
     @Test
     public void executeSortByStartDateCorrectOrderofTasks() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithStartDate("03/03/2017");
-        Task pTarget2 = helper.generateTaskWithStartDate("02/03/2017");
-        Task pTarget3 = helper.generateTaskWithStartDate("01/03/2017");
+        Task tTarget1 = helper.generateTaskWithStartDate("03/03/2017");
+        Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
+        Task tTarget3 = helper.generateTaskWithStartDate("01/03/2017");
 
-        List<Task> sortedTasks = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
-        List<Task> unsortedTasks = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
+        List<Task> unsortedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
         TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
+        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
         helper.addToModel(model, unsortedTasks);
 
         assertCommandSuccess("sort s/", String.format(SortCommand.MESSAGE_SUCCESS_START), expectedTM, expectedList);
@@ -499,14 +556,14 @@ public class LogicManagerTest {
     @Test
     public void executeSortByEndDateCorrectOrderofTasks() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithEndDate("04/04/2017");
-        Task pTarget2 = helper.generateTaskWithEndDate("03/04/2017");
-        Task pTarget3 = helper.generateTaskWithEndDate("02/04/2017");
+        Task tTarget1 = helper.generateTaskWithEndDate("04/04/2017");
+        Task tTarget2 = helper.generateTaskWithEndDate("03/04/2017");
+        Task tTarget3 = helper.generateTaskWithEndDate("02/04/2017");
 
-        List<Task> sortedTasks = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
-        List<Task> unsortedTasks = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
+        List<Task> unsortedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
         TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
+        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
         helper.addToModel(model, unsortedTasks);
 
         assertCommandSuccess("sort e/", String.format(SortCommand.MESSAGE_SUCCESS_END), expectedTM, expectedList);
@@ -526,11 +583,8 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title,
-                    Optional.ofNullable(privateStartDate),
-                    Optional.ofNullable(endDate),
-                    Optional.ofNullable(privateDescription),
-                    tags);
+            return new Task(title, Optional.ofNullable(privateStartDate), Optional.ofNullable(endDate),
+                    Optional.ofNullable(privateDescription), tags);
         }
 
         /**
@@ -543,8 +597,7 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(new Title("Task " + seed), Optional.of(new StartDate("01/01/2017")),
-                    Optional.of(new EndDate("01/01/2017")),
-                    Optional.of(new Description("House of " + seed)),
+                    Optional.of(new EndDate("01/01/2017")), Optional.of(new Description("House of " + seed)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
@@ -645,10 +698,8 @@ public class LogicManagerTest {
          * dummy values.
          */
         Task generateTaskWithTitle(String title) throws Exception {
-            return new Task(new Title(title),
-                    Optional.of(new StartDate("12/03/2017")),
-                    Optional.of(new EndDate("15/03/2017")),
-                    Optional.of(new Description("Buy house for 1")),
+            return new Task(new Title(title), Optional.of(new StartDate("12/03/2017")),
+                    Optional.of(new EndDate("15/03/2017")), Optional.of(new Description("Buy house for 1")),
                     new UniqueTagList(new Tag("tag")));
         }
 
@@ -661,10 +712,8 @@ public class LogicManagerTest {
          * @throws DuplicateTagException
          */
         public Task generateTaskWithStartDate(String startDate) throws DuplicateTagException, IllegalValueException {
-            return new Task(new Title("Watch Clockwork Orange"),
-                    Optional.of(new StartDate(startDate)),
-                    Optional.of(new EndDate("15/03/2017")),
-                    Optional.of(new Description("Just do it")),
+            return new Task(new Title("Watch Clockwork Orange"), Optional.of(new StartDate(startDate)),
+                    Optional.of(new EndDate("15/03/2017")), Optional.of(new Description("Just do it")),
                     new UniqueTagList(new Tag("tag")));
         }
 
@@ -676,10 +725,8 @@ public class LogicManagerTest {
          * @throws DuplicateTagException
          */
         public Task generateTaskWithEndDate(String endDate) throws DuplicateTagException, IllegalValueException {
-            return new Task(new Title("Watch Halestorm concert"),
-                    Optional.of(new StartDate("01/04/2017")),
-                    Optional.of(new EndDate(endDate)),
-                    Optional.of(new Description("Just do it")),
+            return new Task(new Title("Watch Halestorm concert"), Optional.of(new StartDate("01/04/2017")),
+                    Optional.of(new EndDate(endDate)), Optional.of(new Description("Just do it")),
                     new UniqueTagList(new Tag("tag")));
         }
         // @@author A0131278H
