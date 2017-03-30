@@ -12,8 +12,10 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
-//mainClassName = 'seedu.task.MainApp'
+//Comment this out to make jar
+//mainClassName = 'seedu.address.MainApp' 
+//comment this out to run program in Eclipse
+mainClassName = 'seedu.task.MainApp'
 
 allprojects {
     apply plugin: 'idea'

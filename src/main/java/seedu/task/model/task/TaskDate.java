@@ -6,10 +6,9 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-/**
- * @author Daniel Mullen and Jacob Levy
- *
- */
+
+//@@author A0164061N
+
 public class TaskDate {
 	
 	private List<Date> dates;
