@@ -13,7 +13,7 @@ Role: Team lead <br>
    * [Add floating tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
    * [Add deadline tasks]
 (https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
-* Code written: [[functional code](A0146738U.md)][[test code](A0146738U.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/collated/main/A0146738U.md)][[test code](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/collated/test/A0146738U.md)]
 * Other major contributions:
    * Set up Travis, Appveyor, Coveralls and Codacy
    * Set up Travis, Appveyor, Coveralls and Codacy
