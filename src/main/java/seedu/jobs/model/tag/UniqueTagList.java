@@ -171,5 +171,13 @@ public class UniqueTagList implements Iterable<Tag> {
             super("Operation would result in duplicate tags");
         }
     }
+    
+    public String toString(){
+        String res = "";
+        for(Tag tag:internalList){
+            res+=tag.toString();
+        }
+        return res;
+    }
 
 }

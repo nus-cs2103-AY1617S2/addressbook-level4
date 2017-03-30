@@ -31,7 +31,7 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String period;
-    @XmlElement
+    @XmlElement(required = true)
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
