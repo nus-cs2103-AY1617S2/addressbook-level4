@@ -9,6 +9,8 @@ import org.junit.Test;
 import javafx.scene.Node;
 import javafx.scene.control.TitledPane;
 
+import seedu.address.logic.commands.ViewCommand;
+
 public class ViewCommandTest extends TaskManagerGuiTest {
 
     protected final String TASK_LIST_FXML_ID = "#taskListView";
@@ -22,12 +24,21 @@ public class ViewCommandTest extends TaskManagerGuiTest {
     public void viewCalendar() {
         commandBox.runCommand("view calendar");
         assertGroupsDisplay("Floating", "Overdue", "Today", "Tomorrow", "Future");
+        assertResultMessage(String.format(ViewCommand.MESSAGE_SUCCESS, "Calendar"));
     }
 
     @Test
     public void viewGroups() {
         commandBox.runCommand("view done today tomorrow");
         assertGroupsDisplay("Done", "Today", "Tomorrow");
+        assertResultMessage(String.format(ViewCommand.MESSAGE_SUCCESS, "Done|Today|Tomorrow"));
+    }
+
+    @Test
+    public void viewWrongInput() {
+        commandBox.runCommand("view randomstring");
+        assertGroupsDisplay("All");
+        assertResultMessage(ViewCommand.MESSAGE_ERROR);
     }
 
     protected void assertGroupsDisplay(String... groupTitles) {
