@@ -138,10 +138,10 @@ public class ModelManager extends ComponentManager implements Model {
         
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.removeTask(taskToEdit);
-        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, taskToEdit, copiedCurrentToDoList);
         indicateToDoListChanged();
         
         addTaskForEdit(internalIdx, editedTask);
+        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, taskToEdit, editedTask, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
     

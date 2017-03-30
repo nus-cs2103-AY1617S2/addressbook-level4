@@ -23,7 +23,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
 
     TestTask[] currentList = td.getTypicalTasks();
 
-//    @Test
+    @Test
     public void redo_noCommand_failure () {
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e2");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
@@ -32,7 +32,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         assertResultMessage(MESSAGE_EMPTYREDOHISTORY);
     }
 
-//    @Test
+    @Test
     public void undo_change_redo_failure () {
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e2");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
@@ -41,7 +41,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         assertResultMessage(MESSAGE_EMPTYREDOHISTORY);
     }
 
-//    @Test
+    @Test
     public void redo_undo_add_success () {
         TestTask taskToAdd = td.task1;
         commandBox.runCommand(taskToAdd.getAddCommand());
@@ -55,7 +55,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
 
-//    @Test
+    @Test
     public void redo_undo_delete_success () {
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e2");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
@@ -85,7 +85,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
 
-//    @Test
+    @Test
     public void redo_undo_done_success() {
         commandBox.runCommand(DoneCommand.COMMAND_WORD + " d2");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
@@ -95,9 +95,12 @@ public class RedoCommandTest extends ToDoListGuiTest {
         filteredTaskList[1].setIsDone(true);
         TestTask[] filteredUndoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, false);
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, filteredUndoneList));
+        
+        String feedbackMessage = String.format(DoneCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), filteredTaskList[1]);
+        assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
 
-//    @Test
+    @Test
     public void redo_undo_clear_success() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
@@ -107,5 +110,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, emptyList));
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, emptyList));
         assertTrue(taskListPanel.isListMatching(TaskType.TODO, emptyList));
+        
+        assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + ClearCommand.MESSAGE_SUCCESS);
     }
 }

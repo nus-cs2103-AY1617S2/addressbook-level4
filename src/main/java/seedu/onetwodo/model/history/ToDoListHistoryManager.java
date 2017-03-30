@@ -27,9 +27,12 @@ public class ToDoListHistoryManager implements ToDoListHistory {
     }
 
     
-    public void saveUndoInformationAndClearRedoHistory(String commandWord, ReadOnlyTask taskBefore, 
-            ReadOnlyTask task, ToDoList toDoList) {
-        
+    public void saveUndoInformationAndClearRedoHistory(String commandWord, ReadOnlyTask taskBeforeEdit, 
+            ReadOnlyTask taskAfterEdit, ToDoList toDoList) {
+        previousCommandHistory.push(new CommandHistoryEntry(commandWord, taskBeforeEdit, taskAfterEdit));
+        previousToDoLists.push(toDoList);
+        nextToDoLists.clear();
+        nextCommandHistory.clear();
     }
     
     
