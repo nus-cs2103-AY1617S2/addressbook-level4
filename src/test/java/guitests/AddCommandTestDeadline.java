@@ -17,7 +17,7 @@ public class AddCommandTestDeadline extends TodoListGuiTest {
     @Test
     public void add() {
         //add one deadline task
-        TestTask[] currentList = td.getTypicalTasks();
+        TestTask[] currentList = td.getUndoneTasks();
         TestTask taskToAdd = td.deadone;
         assertAddSuccessDeadline(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);

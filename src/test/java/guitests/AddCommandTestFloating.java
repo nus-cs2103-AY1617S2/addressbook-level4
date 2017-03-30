@@ -17,7 +17,7 @@ public class AddCommandTestFloating extends TodoListGuiTest {
     @Test
     public void add() {
         //add one floating task
-        TestTask[] currentList = td.getTypicalTasks();
+        TestTask[] currentList = td.getUndoneTasks();
         TestTask taskToAdd = td.floatone;
         assertAddSuccessFloating(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
