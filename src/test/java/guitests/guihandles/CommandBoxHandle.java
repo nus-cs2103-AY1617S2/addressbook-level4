@@ -4,9 +4,6 @@ import guitests.GuiRobot;
 import javafx.collections.ObservableList;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import seedu.onetwodo.commons.core.EventsCenter;
-import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
-import seedu.onetwodo.logic.commands.SelectCommand;
 
 /**
  * A handle to the Command Box in the GUI.
