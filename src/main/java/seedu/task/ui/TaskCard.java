@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.task.model.task.ReadOnlyTask;
 
+//@@author A0146757R
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -56,7 +57,7 @@ public class TaskCard extends UiPart<Region> {
 
 	initTags(task);
     }
-
+//@@author
     private void initTags(ReadOnlyTask task) {
 	task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
