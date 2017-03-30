@@ -18,13 +18,13 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"),
-                        new EndDate("03/03/17"), new EndTime("1100"), new Boolean(true),
+                        new EndDate("03/03/17"), new EndTime("1100"), new Boolean(false),
                         new UniqueCategoryList("family")),
                 new Task(new TaskName("Eat lunch at techno"), new StartDate("EMPTY_FIELD"),
                         new StartTime("EMPTY_FIELD"), new EndDate("04/03/17"), new EndTime("1400"),
-                        new Boolean(true), new UniqueCategoryList("no", "friends")),
+                        new Boolean(false), new UniqueCategoryList("no", "friends")),
                 new Task(new TaskName("Eat dinner with my girl friend"), new StartDate("09/03/17"),
-                        new StartTime("1800"), new EndDate("09/03/17"), new EndTime("2000"), new Boolean(true),
+                        new StartTime("1800"), new EndDate("09/03/17"), new EndTime("2000"), new Boolean(false),
                         new UniqueCategoryList("just", "friends")),
                 new Task(new TaskName("Start on the CS2103 project"), new StartDate("03/03/17"),
                         new StartTime("1400"), new EndDate("03/04/17"), new EndTime("1800"), new Boolean(false),
@@ -57,7 +57,7 @@ public class SampleDataUtil {
                         new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
                         new UniqueCategoryList("family")),
                 new Task(new TaskName("Task2"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                        new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(true),
+                        new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("Task3"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
                         new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
@@ -66,7 +66,7 @@ public class SampleDataUtil {
                         new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("Task5"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                        new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(true),
+                        new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
                         new UniqueCategoryList("school")),
                 new Task(new TaskName("Task6"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
                         new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
@@ -78,7 +78,7 @@ public class SampleDataUtil {
                         new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("Task9"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                        new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(true),
+                        new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
                         new UniqueCategoryList("work", "school")),
                 new Task(new TaskName("Task10"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
                         new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
@@ -129,13 +129,13 @@ public class SampleDataUtil {
                         new EndDate("03/04/17"), new EndTime("1400"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("Deadline6"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                        new EndDate("29/03/17"), new EndTime("1400"), new Boolean(true),
+                        new EndDate("29/03/17"), new EndTime("1400"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("Deadline7"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                        new EndDate("28/03/17"), new EndTime("1400"), new Boolean(true),
+                        new EndDate("28/03/17"), new EndTime("1400"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("Deadline8"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                        new EndDate("27/03/17"), new EndTime("1400"), new Boolean(true),
+                        new EndDate("27/03/17"), new EndTime("1400"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("Deadline9"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
                         new EndDate("30/03/17"), new EndTime("1400"), new Boolean(false),
@@ -147,7 +147,7 @@ public class SampleDataUtil {
                         new EndDate("30/03/17"), new EndTime("1100"), new Boolean(false),
                         new UniqueCategoryList("joke")),
                 new Task(new TaskName("MoreTask1"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                        new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(true),
+                        new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("MoreTask2"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
                         new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"), new Boolean(false),
@@ -159,7 +159,7 @@ public class SampleDataUtil {
                         new EndDate("06/05/17"), new EndTime("2359"), new Boolean(false),
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("MoreEvent2"), new StartDate("07/05/17"), new StartTime("0000"),
-                        new EndDate("08/05/17"), new EndTime("2359"), new Boolean(true),
+                        new EndDate("08/05/17"), new EndTime("2359"), new Boolean(false),
                         new UniqueCategoryList("family")),
                 new Task(new TaskName("MoreEvent3"), new StartDate("09/05/17"), new StartTime("0000"),
                         new EndDate("10/05/17"), new EndTime("2359"), new Boolean(false),
@@ -171,7 +171,7 @@ public class SampleDataUtil {
                         new EndDate("07/07/17"), new EndTime("2357"), new Boolean(false),
                         new UniqueCategoryList("family")),
                 new Task(new TaskName("MoreDeadline3"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                        new EndDate("07/08/20"), new EndTime("2356"), new Boolean(true),
+                        new EndDate("07/08/20"), new EndTime("2356"), new Boolean(false),
                         new UniqueCategoryList("friends")), };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -204,17 +204,17 @@ public class SampleDataUtil {
 // new Task(new TaskName("eat some more"), new
 // StartDate("13/01/17"), new StartTime("2100"),
 // new EndDate("14/01/17"), new EndTime("2200"), new
-// Boolean(true),
+// Boolean(false),
 // new UniqueCategoryList("todo")), // event
 // new Task(new TaskName("omg stop eating"), new
 // StartDate("03/02/17"), new StartTime("1400"),
 // new EndDate("03/02/50"), new EndTime("1600"), new
-// Boolean(true),
+// Boolean(false),
 // new UniqueCategoryList("important")), // event
 // new Task(new TaskName("i cant stop eating"), new
 // StartDate("06/03/17"), new StartTime("1200"),
 // new EndDate("06/03/17"), new EndTime("2300"), new
-// Boolean(true),
+// Boolean(false),
 // new UniqueCategoryList("problem", "important")), // event
 // new Task(new TaskName("ded"), new
 // StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
