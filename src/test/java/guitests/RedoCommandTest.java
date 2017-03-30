@@ -24,10 +24,18 @@ public class RedoCommandTest extends ToDoListGuiTest {
     TestTask[] currentList = td.getTypicalTasks();
 
     @Test
-    public void redo_noCommand_failure () {
+    public void redo_noMoreUndo_failure () {
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e2");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         commandBox.runCommand(RedoCommand.COMMAND_WORD);
+        commandBox.runCommand(RedoCommand.COMMAND_WORD);
+        assertResultMessage(MESSAGE_EMPTYREDOHISTORY);
+    }
+    
+    @Test
+    public void redo_failedUndoDueToFailedCommand_failure () {
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e999");
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
         commandBox.runCommand(RedoCommand.COMMAND_WORD);
         assertResultMessage(MESSAGE_EMPTYREDOHISTORY);
     }
