@@ -2,12 +2,11 @@ package seedu.task.commons.core;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+//@@author A016385X
 public class FileNameHandler {
 	private static String filePath = "fileName.txt";
 	private static final String DEFAULT_FILEPATH = "data/TaskManagerData.xml";
@@ -18,7 +17,12 @@ public class FileNameHandler {
 			byte[] data = new byte[256];
 			bis.read(data);
 			String retString = new String(data).trim();
-			return retString;
+			if (isValid(retString)) {
+				System.out.println("isValid");
+				return retString;
+			} else {
+				return DEFAULT_FILEPATH;
+			}
 		} catch (IOException ioe) {
 			System.out.println("IOException");
 			return DEFAULT_FILEPATH;
@@ -35,5 +39,14 @@ public class FileNameHandler {
 		} catch (IOException ioe) {
 			System.out.println("IOException");
 		}
+	}
+	public static boolean isValid(String str) {
+		if (str.length() <= 4) {
+			return false;
+		}
+		if (str.substring(str.length() - 4, str.length()).equals(".xml")) {
+			return true;
+		}
+		return false;
 	}
 }
