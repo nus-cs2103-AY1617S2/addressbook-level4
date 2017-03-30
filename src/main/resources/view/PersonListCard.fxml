@@ -18,8 +18,7 @@
             </columnConstraints>
             <children>
                 <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
-                    <stylesheets>
-                        <URL value="@DarkTheme.css" />
+                    <stylesheets>]
                         <URL value="@Extensions.css" />
                     </stylesheets>
                     <padding>

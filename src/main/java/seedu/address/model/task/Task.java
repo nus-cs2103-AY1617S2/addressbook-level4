@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Person in the address book. Guarantees: details are present and
  * not null, field values are validated.
  */
-public class Person implements ReadOnlyPerson {
+public class Task implements ReadOnlyPerson {
 
     private Name name;
     private Date date;
@@ -22,7 +22,10 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Date date, StartDate sdate, Email email, Group group, UniqueTagList tags) {
+
+
+    public Task(Name name, Date date,StartDate sdate, Email email, Group group, UniqueTagList tags) {
+
         assert !CollectionUtil.isAnyNull(name, date, email, group, tags);
         this.name = name;
         this.date = date;
@@ -36,9 +39,10 @@ public class Person implements ReadOnlyPerson {
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
-    public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getDate(), source.getStartDate(), source.getEmail(), source.getGroup(),
-                source.getTags());
+
+    public Task(ReadOnlyPerson source) {
+        this(source.getName(), source.getDate(), source.getStartDate(),source.getEmail(), source.getGroup(), source.getTags());
+
     }
 
     public void setName(Name name) {

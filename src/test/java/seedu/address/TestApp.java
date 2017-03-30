@@ -10,6 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
+import seedu.address.ui.ThemeManager;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for
@@ -56,7 +57,8 @@ public class TestApp extends MainApp {
         UserPrefs userPrefs = super.initPrefs(config);
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
-        userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
+        userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y,
+                ThemeManager.DEFAULT_STYLESHEET));
         return userPrefs;
     }
 

@@ -6,14 +6,15 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Group;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.StartDate;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Group;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.StartDate;
+import seedu.address.model.task.UniquePersonList;
+
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -57,11 +58,11 @@ public class EditCommand extends Command {
         List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -76,19 +77,22 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of
      * {@code personToEdit} edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit, EditPersonDescriptor editPersonDescriptor) {
+
+    private static Task createEditedPerson(ReadOnlyPerson personToEdit,
+                                             EditPersonDescriptor editPersonDescriptor) {
+
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Date updatedDate = editPersonDescriptor.getDate().orElseGet(personToEdit::getDate);
         StartDate updatedStartDate = editPersonDescriptor.getStartDate().orElseGet(personToEdit::getStartDate);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        // Address updatedAddress =
-        // editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         Group updatedGroup = editPersonDescriptor.getGroup().orElseGet(personToEdit::getGroup);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedDate, updatedStartDate, updatedEmail, updatedGroup, updatedTags);
+
+        return new Task(updatedName, updatedDate, updatedStartDate, updatedEmail, updatedGroup, updatedTags);
+
     }
 
     /**
@@ -100,7 +104,6 @@ public class EditCommand extends Command {
         private Optional<Date> date = Optional.empty();
         private Optional<StartDate> sdate = Optional.empty();
         private Optional<Email> email = Optional.empty();
-        // private Optional<Address> address = Optional.empty();
         private Optional<Group> group = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -159,18 +162,11 @@ public class EditCommand extends Command {
             return email;
         }
 
-        // public void setAddress(Optional<Address> address) {
-        // assert address != null;
-        // this.address = address;
-        // }
         public void setGroup(Optional<Group> group) {
             assert group != null;
             this.group = group;
         }
 
-        // public Optional<Address> getAddress() {
-        // return address;
-        // }
         public Optional<Group> getGroup() {
             return group;
         }

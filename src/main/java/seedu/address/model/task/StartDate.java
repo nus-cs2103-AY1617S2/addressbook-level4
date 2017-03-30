@@ -1,14 +1,18 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+
+import java.util.List;
+
+import com.wanasit.chrono.Chrono;
 
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Date {
+public class StartDate {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Person date's format should be mm.dd";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "A task StartDate's format should be mm.dd";
     //set date to mm.dd(e.g.01.01)
     public static final String DATE_VALIDATION_REGEX = "\\d\\d\\.\\d\\d";
 
@@ -19,9 +23,9 @@ public class Date {
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-    public Date(String date) throws IllegalValueException {
-        assert date != null;
-        String trimmedDate = date.trim();
+    public StartDate(String sdate) throws IllegalValueException {
+        assert sdate != null;
+        String trimmedDate = sdate.trim();
         if (!isValidDate(trimmedDate)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
@@ -43,8 +47,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && this.value.equals(((Date) other).value)); // state check
+                || (other instanceof StartDate // instanceof handles nulls
+                && this.value.equals(((StartDate) other).value)); // state check
     }
 
     @Override

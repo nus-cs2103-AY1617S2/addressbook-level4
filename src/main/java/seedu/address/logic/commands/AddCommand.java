@@ -5,15 +5,16 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Group;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StartDate;
-import seedu.address.model.person.UniquePersonList;
+
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Group;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.StartDate;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniquePersonList;
 
 /**
  * Adds a person to the address book.
@@ -28,9 +29,9 @@ public class AddCommand extends Command {
             + " study english s/01.01 d/03.21 e/johnd@gmail.com g/learning t/everyday t/undone";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the todo list";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
-    private final Person toAdd;
+    private final Task toAdd;
 
     /**
      * Creates an AddCommand using raw values. This case is only have the
@@ -41,11 +42,16 @@ public class AddCommand extends Command {
     public AddCommand(String name, String date, String email, String group, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(new Name(name), new Date(date), new StartDate("00.00"), new Email(email),
-                new Group(group), new UniqueTagList(tagSet));
+        this.toAdd = new Task(new Name(name),
+                new Date(date),
+                new StartDate("00.00"),
+                new Email(email),
+                new Group(group),
+                new UniqueTagList(tagSet));
     }
 
     /*
@@ -53,21 +59,33 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name, String email, String group, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(new Name(name), new Date("00.00"), new StartDate("00.00"), new Email(email),
-                new Group(group), new UniqueTagList(tagSet));
+        this.toAdd = new Task(new Name(name),
+                new Date("00.00"),
+                new StartDate("00.00"),
+                new Email(email),
+                new Group(group),
+                new UniqueTagList(tagSet));
     }
 
     public AddCommand(String name, String date, String sdate, String email, String group, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(new Name(name), new Date(date), new StartDate(sdate), new Email(email),
-                new Group(group), new UniqueTagList(tagSet));
+        this.toAdd = new Task(
+                new Name(name),
+                new Date(date),
+                new StartDate(sdate),
+                new Email(email),
+                new Group(group),
+                new UniqueTagList(tagSet)
+        );
     }
 
     @Override
@@ -77,7 +95,7 @@ public class AddCommand extends Command {
             model.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }

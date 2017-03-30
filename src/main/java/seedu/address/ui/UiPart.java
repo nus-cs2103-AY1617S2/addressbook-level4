@@ -2,13 +2,16 @@ package seedu.address.ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.BaseEvent;
 
 /**
@@ -19,6 +22,8 @@ public abstract class UiPart<T> {
 
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
+    public static final String DEFAULT_STYLESHEET = "/themes/DarkTheme.css";
+    protected static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
 
     private FXMLLoader fxmlLoader;
 
@@ -35,6 +40,7 @@ public abstract class UiPart<T> {
         } catch (IOException e) {
             throw new AssertionError(e);
         }
+        setStyleSheet(DEFAULT_STYLESHEET);
     }
 
     /**
@@ -43,6 +49,13 @@ public abstract class UiPart<T> {
      */
     public UiPart(String fxmlFileName) {
         this(fxmlFileName != null ? MainApp.class.getResource(FXML_FILE_FOLDER + fxmlFileName) : null);
+    }
+
+    /**
+     * Sets the css file used for the UIPart's FXML.
+     */
+    public void setStyleSheet(String path) {
+        ((Parent) fxmlLoader.getRoot()).getStylesheets().add(path);
     }
 
     /**
