@@ -8,6 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.ConfigChangedEvent;
 import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -22,7 +23,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private WhatsLeftStorage whatsLeftStorage;
     private UserPrefsStorage userPrefsStorage;
-
 
     public StorageManager(WhatsLeftStorage whatsLeftStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -46,12 +46,16 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
     // ================ WhatsLeft methods ==============================
 
     @Override
     public String getWhatsLeftFilePath() {
         return whatsLeftStorage.getWhatsLeftFilePath();
+    }
+
+    @Override
+    public void setWhatsLeftFilePath(String filepath) {
+        whatsLeftStorage.setWhatsLeftFilePath(filepath);
     }
 
     @Override
@@ -76,7 +80,6 @@ public class StorageManager extends ComponentManager implements Storage {
         whatsLeftStorage.saveWhatsLeft(whatsLeft, filePath);
     }
 
-
     @Override
     @Subscribe
     public void handleWhatsLeftChangedEvent(WhatsLeftChangedEvent event) {
@@ -88,4 +91,10 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    @Subscribe
+    public void handleConfigChangedEvent(ConfigChangedEvent cce) {
+        String newLocation = cce.data.getWhatsLeftFilePath();
+        logger.info(LogsCenter.getEventHandlingLogMessage(cce, "Setting save location to " + newLocation));
+        setWhatsLeftFilePath(newLocation);
+    }
 }

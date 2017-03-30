@@ -32,7 +32,7 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
+        setSaveLocation(saveLocation);
         registerAsAnEventHandler(this);
     }
 

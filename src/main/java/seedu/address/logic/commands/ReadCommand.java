@@ -73,8 +73,9 @@ public class ReadCommand extends Command {
     }
 
     /**
-     * Update the model with new WhatsLeft data
-     * Start a new WhatsLeft record, if there is no whatLeft file found in the specified location.
+     * Update the model with new WhatsLeft data Start a new WhatsLeft record, if
+     * there is no whatLeft file found in the specified location.
+     *
      * @param whatsleftToRead
      * @throws IOException
      */
@@ -96,6 +97,7 @@ public class ReadCommand extends Command {
 
     /**
      * Update configuration file with new configuration
+     *
      * @throws CommandException
      */
     private void saveConfig() throws CommandException {
