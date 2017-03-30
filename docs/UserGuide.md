@@ -194,12 +194,17 @@ Format: `clear`
 Undo the prevous actions.<br>
 Format: `undo`
 
-### 2.11. Exiting the program : `exit`
+### 2.11. Redo previous undo: `redo`
+
+Redo the prevous undone action.<br>
+Format: `redo`
+
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data in specified file/folder
+### 2.13. Saving the data in specified file/folder
 
 Puts all TaskIt storage in the given path to file.
 Format: `save FILEPATH`
