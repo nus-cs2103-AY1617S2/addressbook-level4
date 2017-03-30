@@ -177,7 +177,6 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         CommandException {
         categories.replace(newCategory, oldCategory);
         tasks.renameCategory(oldCategory, newCategory);
-      
     }
 
 //// util methods

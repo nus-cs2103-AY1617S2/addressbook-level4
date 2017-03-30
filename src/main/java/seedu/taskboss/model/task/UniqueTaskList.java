@@ -173,7 +173,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Renames a certain category in tasks to another specified name.
      * @throws IllegalValueException
-     * @throws CommandException 
+     * @throws CommandException
      */
     public void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException,
         CommandException {
