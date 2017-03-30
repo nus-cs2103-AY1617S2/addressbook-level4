@@ -5,6 +5,7 @@ import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskType;
 
 //@@author A0135739W
@@ -40,7 +41,14 @@ public class DoneCommand extends Command {
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.doneTask(taskToComplete);
+            if(!taskToComplete.hasRecur()) {
+                model.doneTask(taskToComplete);
+            } else {
+                Task newTask = new Task(taskToComplete);
+                newTask.forwardTaskRecurDate();
+                model.doneTask(taskToComplete);
+                model.addTask(newTask);
+            }
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
