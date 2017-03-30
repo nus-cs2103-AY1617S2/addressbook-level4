@@ -13,20 +13,21 @@
    * 4.1 [Getting Help](#)
    * 4.2 [Adding an Task](#)
    * 4.3 [Undoing a Command](#)
-   * 4.4 [Editing an Task](#)
-   * 4.5 [Finding an Task](#)
-   * 4.6 [Viewing All Uncompleted Tasks](#)
-   * 4.7 [Marking Task as Done](#)
-   * 4.8 [Viewing Completed Tasks](#)
-   * 4.9 [Marking Tasks as Uncompleted](#)
-   * 4.10 [Delete an Task](#)
-   * 4.11 [Clear All Tasks](#)
-   * 4.12 [Sorting The Tasks](#)
-   * 4.13 [Setting a Customized Command Word](#)
-   * 4.14 [Saving to New Location](#)
-   * 4.15 [Loading of Existing data](#)
-   * 4.16 [Exiting The Program](#)
-   * 4.17 [Saving at Local file](#)
+   * 4.4 [Redoing an Undone Command](#)
+   * 4.5 [Editing an Task](#)
+   * 4.6 [Finding an Task](#)
+   * 4.7 [Viewing All Uncompleted Tasks](#)
+   * 4.8 [Marking Task as Done](#)
+   * 4.9 [Viewing Completed Tasks](#)
+   * 4.10 [Marking Tasks as Uncompleted](#)
+   * 4.11 [Delete an Task](#)
+   * 4.12 [Clear All Tasks](#)
+   * 4.13 [Sorting The Tasks](#)
+   * 4.14 [Setting a Customized Command Word](#)
+   * 4.15 [Saving to New Location](#)
+   * 4.16 [Loading of Existing data](#)
+   * 4.17 [Exiting The Program](#)
+   * 4.18 [Saving at Local file](#)
 5. [FAQ](#faq)
 6. [Command Summary](#command-summary)
 
@@ -362,13 +363,13 @@ Examples:
 * To load a file named savefile.xml in the DoIt Application folder:<br>
     * **`load`**`savefile.xml`<br>
 
-### 4.16 Exiting the program : `exit`
+### 4.17 Exiting the program : `exit`
 
 Want to exit the program? Type **`exit`** into the command box.<br>
 Format:  **`exit`**
 
 
-### 4.17 Saving local data
+### 4.18 Saving local data
 
 Program data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.<br>
