@@ -4,7 +4,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 import java.util.List;
 
-import com.wanasit.chrono.Chrono;
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -29,11 +30,10 @@ public class Date {
     }
 
     private String parse(String rawDate) throws IllegalValueException {
-        try {
-            return Chrono.ParseDate(rawDate).toString();
-        } catch (Exception e) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
-        }
+        Parser parser = new Parser();
+        List<DateGroup> groups = parser.parse(rawDate);
+        String dateText = groups.get(0).getDates().get(0).toString();
+        return dateText;
     }
     
     @Override
