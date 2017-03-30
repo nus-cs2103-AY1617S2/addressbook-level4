@@ -17,8 +17,8 @@ public class TaskCardTest extends TaskManagerGuiTest {
         TestTask taskToShow = td.eggsAndBread;
         commandBox.runCommand(taskToShow.getAddCommand());
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToShow.getName().fullName);
-        assertEquals(addedCard.getStartDate(), taskToShow.getStartDateTime().get().getDateOnly());
-        assertEquals(addedCard.getStartTime(), taskToShow.getStartDateTime().get().getTimeOnly());
+        assertEquals(addedCard.getEndDate(), taskToShow.getEndDateTime().get().getDateOnly());
+        assertEquals(addedCard.getEndTime(), taskToShow.getEndDateTime().get().getTimeOnly());
 
         // task with end date and time only
         taskToShow = td.readBook;

@@ -27,7 +27,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         String detailsToEdit = "name Buy Eggs and Bread; tag HighPriority;";
         int taskManagerIndex = 1;
         TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread")
-                              .withStartDateTime("01-04-17 19:55:12")
+                              .withEndDateTime("01-04-17 19:55:12")
                               .withTags("HighPriority").build();
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }

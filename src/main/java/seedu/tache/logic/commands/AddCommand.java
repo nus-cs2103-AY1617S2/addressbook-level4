@@ -21,11 +21,12 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 public class AddCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "add";
+    public static final String TAG_SEPARATOR = "t/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [;START DATE & TIME] [;END DATE & TIME] [;TAG...]\n"
+            + "Parameters: NAME [from <START DATE & TIME>] [to <END DATE & TIME>] [t/TAG1 TAG2...]\n"
             + "Example: " + COMMAND_WORD
-            + " Orientation week camp; 25/7/16 0800; 28/7/2016 0900; HighPriority; Events";
+            + " Orientation week camp from 25/7/16 0800 to 28/7/2016 0900 t/ HighPriority Events";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
