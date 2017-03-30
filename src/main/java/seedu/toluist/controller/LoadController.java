@@ -23,9 +23,19 @@ public class LoadController extends Controller {
     public static final String COMMAND_WORD = "load";
     public static final String PARAMETER_STORE_DIRECTORY = "directory";
 
+    //@@author A0162011A
     private static final String HELP_DETAILS = "Changes the location for the storage file used in this system.";
     private static final String HELP_FORMAT = "load NEWFILELOCATION";
+    private static final String[] HELP_COMMENTS = { "Related commands: `save`",
+                                                    "The displayed data will be updated to the data from the new file.",
+                                                    "The old file will remain in your computer.",
+                                                    "The file location entered is relative to the location of the program.",
+                                                    "Warning: If a file with the requested name already exists, it will be overwritten." };
+    private static final String[] HELP_EXAMPLES = { "`load newfile.json`\nLoads ToLuist data from `newfile.json`.",
+                                                    "`load newfolder/newfile.json`\nLoads ToLuist data from `newfile.json` in the folder `newfolder`.",
+                                                    "`load ../newfile.json`\nLoads ToLuist data from `newfile.json` in the parent folder"};
 
+  //@@author A0131125Y
     public void execute(String command) {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
@@ -78,7 +88,7 @@ public class LoadController extends Controller {
         return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
     }
 
-    public static String[] getDetailedHelp() {
-        return getBasicHelp();
+    public static String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

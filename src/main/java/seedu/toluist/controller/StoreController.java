@@ -32,10 +32,11 @@ public class StoreController extends Controller {
                                                     "All data will be moved to the new file location.",
                                                     "If the file does not exist, the file will be created.",
                                                     "The old file will be removed.",
-                                                    "The file location entered is relative to the location of the program." };
-    private static final String[] HELP_EXAMPLES = { "`save newfile.json`\nSaves ToLuist data to newfile.json.",
-                                                    "`save`\nAdds `1` as an alias for the phrase `mark complete 1`.",
-                                                    "`save`\nUpdates `a` to be an alias for the word `alias` instead of `add`."};
+                                                    "The file location entered is relative to the location of the program.",
+                                                    "Warning: If a file with the requested name already exists, it will be overwritten." };
+    private static final String[] HELP_EXAMPLES = { "`save newfile.json`\nSaves ToLuist data to `newfile.json`.",
+                                                    "`save newfolder/newfile.json`\nSaves ToLuist data to `newfile.json` in the folder `newfolder`.",
+                                                    "`save ../newfile.json`\nSaves ToLuist data to `newfile.json` in the parent folder"};
 
 
     //@@author A0131125Y
