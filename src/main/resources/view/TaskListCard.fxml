@@ -31,8 +31,7 @@
                     <padding>
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
-      
-                                                  <children>
+                    <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="459.0" spacing="5">
                             <children>
                                 <HBox prefHeight="66.0" prefWidth="447.0">
