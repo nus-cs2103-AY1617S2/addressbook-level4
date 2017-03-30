@@ -286,27 +286,18 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a recurring task | record task that will recur at certain frequency
 `* * *` | user | list all task filtered by task types/completion/date/tags| view a specific section of the tasks that have to completed
 `* * *` | user | edit my task | ensure that the task is still relevant
-`* * *` | user | delay my task |automatically postpone deadlines
-`* * *` | user | delete my task | conveniently remove task that is no longer relevant
+`* * *` | user | delete my task | conveniently remove task that regardless of status
 `* * *` | user  | delete all my task | clear my data
-`* * *` | user | delete my task | conveniently remove task that is no longer relevant
-`* * *` | new user | have some flexibility in inputting my command | conveniently remove task that is no longer relevant
 `* * *` | advanced user | utilize text search | find specific tasks with specificied tags or keywords
 `* * *` | user | load my data from any specified location | have ease of access in using the application
 `* * *` | user | export my data to any specified location | share my task list with other local machines
 `* * *` | user | set a deadline reminder | been notified at some time before deadline
 `* * *` | new user | view command lists or more information about a particular command | learn how to use various command
 `* * ` | user | add several tags for a task | search tasks based on tags
-`* * ` | user | sort listed task based on deadline | prioritize the completion of task
 `* * ` | user | find recently deleted tasks | retrieve accidentally deleted tasks and monitor past activities
 `* * ` | user | support for undo/redo operation | flexibly manage the changes made on the list of task
 `*` | user | upload todo items to Google Calendar | synchronize with Google Calendar
-`*` | user | customize applicationâ€™s background | personalize the appearance of the task manager
-`*` | user | view different task types in different areas on GUI | view different task types easier
 `*` | advanced user | type commands with auto-complete | type a command faster
-`*` | advanced user | alias a particular command with some arguments | type a command faster
-
-{More to be added}
 
 ## Appendix B : Use Cases
 
@@ -328,7 +319,6 @@ User enters the wrong task format
 JOBS shows the expected task format
 JOBS prompts user to re-enter the task 
 
-
 > Use case ends
 
 **Use case: UC02 â€� Task Listing **
@@ -337,14 +327,16 @@ JOBS prompts user to re-enter the task
 
 1. User types in the kind of task that he wants to list
 2. System outputs all the information with regards to the task the user queries
+Use case ends.
 
 **Extensions**
-User enters the wrong task format
-System shows the expected task format
-System prompts user to re-enter the task
-The specific task name or filter cannot be found
-System informs the user that the specific task/filter cannot be found
+1a. User enters the wrong task format.
+    1a1. System shows the expected task format.
+    1a2. System prompts user to re-enter the task.
+Use case resumes from step 1.
 
+1b. The specific task name or filter cannot be found.
+    1b1. System informs the user that the specific task/filter cannot be found.
 
 >Use case ends.
 
@@ -397,10 +389,9 @@ Use case ends.
 
 1a. The specified task cannot be found.
     1a1. System shows an error message.
-    Use case ends
 
+>Use case ends
 
-{More to be added}
 
 ## Appendix C : Non Functional Requirements
 
@@ -412,7 +403,6 @@ Use case ends.
 6. Should be able to add plugins.
 7. Should be free to use.
 
-{More to be added}
 
 ## Appendix D : Glossary
 
