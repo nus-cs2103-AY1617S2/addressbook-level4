@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Do math assignment</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>math</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy Meier stove</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>appliance</tagged>
+        <tagged>stove</tagged>
+    </tasks>
+    <tasks>
+        <name>Write english essay</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Buy Meier rice cooker</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Complete CS2106 Lab Assignment</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Mark CS1010S</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Go for a night run</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tags>math</tags>
+    <tags>appliance</tags>
+    <tags>stove</tags>
+</taskmanager>
