@@ -305,7 +305,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 #### Use case:
 
-**UC01 Create a task**
+### UC01 Create a task
 
 **MSS**
 
@@ -321,7 +321,7 @@ JOBS prompts user to re-enter the task
 
 > Use case ends
 
-**UC02 Task Listing **
+### UC02 Task Listing
 
 **MSS**
 
@@ -340,7 +340,7 @@ Use case resumes from step 1.
 
 >Use case ends.
 
-**UC03 Update a task**
+### UC03 Update a task
 
 **MSS**
 
@@ -373,9 +373,7 @@ Use case resumes from step 6.
 
 >Use case ends.
 
-
-
-**UC04 Delete a task**
+### UC04 Delete a task
 
 **MSS**
 
