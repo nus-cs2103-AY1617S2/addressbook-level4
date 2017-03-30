@@ -1,21 +1,20 @@
 package org.teamstbf.yats.logic.commands;
 
+import static org.teamstbf.yats.model.item.Event.INDEX_FIRST_DATE;
+import static org.teamstbf.yats.model.item.Event.INDEX_SECOND_DATE;
+import static org.teamstbf.yats.model.item.Event.MESSAGE_TOO_MANY_TIME;
+import static org.teamstbf.yats.model.item.Event.SIZE_DEADLINE_TASK;
+import static org.teamstbf.yats.model.item.Event.SIZE_EVENT_TASK;
+import static org.teamstbf.yats.model.item.Event.SIZE_FLOATING_TASK;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import static org.teamstbf.yats.model.item.Event.MESSAGE_TOO_MANY_TIME;
-import static org.teamstbf.yats.model.item.Event.SIZE_EVENT_TASK;
-import static org.teamstbf.yats.model.item.Event.SIZE_DEADLINE_TASK;
-import static org.teamstbf.yats.model.item.Event.SIZE_FLOATING_TASK;
-import static org.teamstbf.yats.model.item.Event.INDEX_FIRST_DATE;
-import static org.teamstbf.yats.model.item.Event.INDEX_SECOND_DATE;
 
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
-import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
@@ -26,7 +25,6 @@ import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
-
 
 /**
  * Edits the details of an existing task in the task scheduler.
@@ -108,8 +106,8 @@ public class EditCommand extends Command {
 	}
 
 	/**
-	 * Stores the details to edit the task with. Each non-empty field value
-	 * will replace the corresponding field value of the task.
+	 * Stores the details to edit the task with. Each non-empty field value will
+	 * replace the corresponding field value of the task.
 	 */
 	public static class EditTaskDescriptor {
 		private Optional<Title> name = Optional.empty();
@@ -164,37 +162,38 @@ public class EditCommand extends Command {
 		}
 
 		/*
-		 * Sets start and end time together
-		 * for event, both start and end time must present, i.e.times.get().size() is 2
+		 * Sets start and end time together for event, both start and end time
+		 * must present, i.e.times.get().size() is 2
 		 */
 		public void setTime(Optional<List<Date>> timeList) throws IllegalValueException {
 			assert timeList != null;
-			// Optional is not necessary, natty always returns a List, even when it is empty
+			// Optional is not necessary, natty always returns a List, even when
+			// it is empty
 
-            if (!timeList.isPresent()) {
-                this.startTime = Optional.empty();
-                this.endTime = Optional.empty();
-                return;
-            }
+			if (!timeList.isPresent()) {
+				this.startTime = Optional.empty();
+				this.endTime = Optional.empty();
+				return;
+			}
 
-            List<Date> times = timeList.get();
-            
-            if (times.size() > SIZE_EVENT_TASK) {
-			    throw new IllegalValueException(MESSAGE_TOO_MANY_TIME);
+			List<Date> times = timeList.get();
+
+			if (times.size() > SIZE_EVENT_TASK) {
+				throw new IllegalValueException(MESSAGE_TOO_MANY_TIME);
 			} else if (times.size() == SIZE_EVENT_TASK) {
-			    this.startTime = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
-			    this.endTime = Optional.of(new Schedule(timeList.get().get(INDEX_SECOND_DATE)));
-			    this.deadline = Optional.empty();
+				this.startTime = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
+				this.endTime = Optional.of(new Schedule(timeList.get().get(INDEX_SECOND_DATE)));
+				this.deadline = Optional.empty();
 			} else if (times.size() == SIZE_DEADLINE_TASK) {
-			    this.startTime = Optional.empty();
-			    this.endTime =  Optional.empty();
-			    this.deadline = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
+				this.startTime = Optional.empty();
+				this.endTime = Optional.empty();
+				this.deadline = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
 			} else if (times.size() == SIZE_FLOATING_TASK) {
-			    this.startTime = Optional.empty();
-			    this.endTime = Optional.empty();
-			    this.deadline = Optional.empty();
+				this.startTime = Optional.empty();
+				this.endTime = Optional.empty();
+				this.deadline = Optional.empty();
 			} else {
-			    throw new IllegalValueException(null);
+				throw new IllegalValueException(null);
 			}
 		}
 

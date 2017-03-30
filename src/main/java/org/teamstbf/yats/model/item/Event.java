@@ -29,7 +29,7 @@ public class Event implements ReadOnlyEvent {
 	private Location location;
 	private UniqueTagList tags;
 	private Integer priority;
-	
+
 	/**
 	 * Creates an Event object using map of parameters, only name is compulsory,
 	 * others are optional
@@ -56,23 +56,23 @@ public class Event implements ReadOnlyEvent {
 		}
 		this.isDone = new IsDone();
 		this.tags = new UniqueTagList(tags);
-		this.setPriority(1);        
+		this.setPriority(1);
 		fillStartEndDateAndDeadline(parameters);
 	}
 
-    private void fillStartEndDateAndDeadline(HashMap<String, Object> parameters) throws IllegalValueException {
-        //check number of time group, if>2, throws exception
+	private void fillStartEndDateAndDeadline(HashMap<String, Object> parameters) throws IllegalValueException {
+		// check number of time group, if>2, throws exception
 		if (parameters.get("time") != null) {
 			List<Date> dateList = (List<Date>) parameters.get("time");
 			if (dateList.size() > SIZE_EVENT_TASK) {
 				throw new IllegalValueException(MESSAGE_TOO_MANY_TIME);
 			} else if (dateList.size() == SIZE_EVENT_TASK) {
-				//event task with start and end time
+				// event task with start and end time
 				this.startTime = new Schedule(dateList.get(INDEX_FIRST_DATE));
 				this.endTime = new Schedule(dateList.get(INDEX_SECOND_DATE));
 				this.deadline = new Schedule("");
 			} else if (dateList.size() == SIZE_DEADLINE_TASK) {
-				//deadline task with only end time
+				// deadline task with only end time
 				this.startTime = new Schedule("");
 				this.endTime = new Schedule("");
 				this.deadline = new Schedule(dateList.get(INDEX_FIRST_DATE));
@@ -80,16 +80,16 @@ public class Event implements ReadOnlyEvent {
 				throw new IllegalValueException(MESSAGE_INVALID_TIME);
 			}
 		} else {
-			//floating task with no time
+			// floating task with no time
 			this.startTime = new Schedule("");
 			this.endTime = new Schedule("");
 			this.deadline = new Schedule("");
 		}
-    }
+	}
 
 	public Event(ReadOnlyEvent editedReadOnlyEvent) {
-		this(editedReadOnlyEvent.getTitle(), editedReadOnlyEvent.getLocation(),
-				editedReadOnlyEvent.getStartTime(), editedReadOnlyEvent.getEndTime(),editedReadOnlyEvent.getDeadline(),
+		this(editedReadOnlyEvent.getTitle(), editedReadOnlyEvent.getLocation(), editedReadOnlyEvent.getStartTime(),
+				editedReadOnlyEvent.getEndTime(), editedReadOnlyEvent.getDeadline(),
 				editedReadOnlyEvent.getDescription(), editedReadOnlyEvent.getTags(), editedReadOnlyEvent.getIsDone());
 	}
 
@@ -120,7 +120,6 @@ public class Event implements ReadOnlyEvent {
 						&& this.isSameStateAs((ReadOnlyEvent) other));
 	}
 
-
 	@Override
 
 	public Description getDescription() {
@@ -138,7 +137,6 @@ public class Event implements ReadOnlyEvent {
 	public Location getLocation() {
 		return location;
 	}
-
 
 	@Override
 
@@ -202,17 +200,16 @@ public class Event implements ReadOnlyEvent {
 		this.location = location;
 	}
 
-
 	public void setStartTime(Schedule schedule) {
 		assert schedule != null;
 		this.startTime = schedule;
 	}
 
-    public void setDeadline(Schedule schedule) {
-        assert schedule != null;
-        this.deadline = schedule;
-    }
-	
+	public void setDeadline(Schedule schedule) {
+		assert schedule != null;
+		this.deadline = schedule;
+	}
+
 	/**
 	 *
 	 * Replaces this person's tags with the tags in the argument tag list.
@@ -244,32 +241,32 @@ public class Event implements ReadOnlyEvent {
 		this.isDone.markDone();
 	}
 
-    @Override
-    public Schedule getDeadline() {
-        return this.deadline;
-    }
+	@Override
+	public Schedule getDeadline() {
+		return this.deadline;
+	}
 
-    public Integer getPriority() {
-        return priority;
-    }
+	public Integer getPriority() {
+		return priority;
+	}
 
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-    
-    @Override
-    public boolean hasDeadline() {
-        if (this.deadline.toString().equals("")) {
-            return false;
-        }
-        return true;
-    }
-    
-    @Override
-    public boolean hasStartEndTime() {
-        if (this.startTime.toString().equals("") || this.startTime.toString().equals("")) {
-            return false;
-        }
-        return true;
-    }
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+
+	@Override
+	public boolean hasDeadline() {
+		if (this.deadline.toString().equals("")) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean hasStartEndTime() {
+		if (this.startTime.toString().equals("") || this.startTime.toString().equals("")) {
+			return false;
+		}
+		return true;
+	}
 }
