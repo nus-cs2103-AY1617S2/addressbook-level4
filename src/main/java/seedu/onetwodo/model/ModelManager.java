@@ -105,14 +105,17 @@ public class ModelManager extends ComponentManager implements Model {
             throw new IllegalValueException("This task has been done");
         }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-       /* if(!taskToComplete.hasRecur()) {
+        if(!taskToComplete.hasRecur()) {
             toDoList.doneTask(taskToComplete);
         } else {
             Task newTask = new Task(taskToComplete);
+            Task doneTask = new Task(taskToComplete);
+
             newTask.forwardTaskRecurDate();
-            toDoList.doneTask(taskToComplete);
+            toDoList.doneTask(doneTask);
             toDoList.addTask(newTask);
-        }*/
+        }
+
         toDoList.doneTask(taskToComplete);
         history.saveUndoInformationAndClearRedoHistory(DoneCommand.COMMAND_WORD, taskToComplete, copiedCurrentToDoList);
         indicateToDoListChanged();

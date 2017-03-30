@@ -231,31 +231,31 @@ public class Task implements ReadOnlyTask {
         EndDate tempEndDate = getEndDate();
         switch(this.getRecur().value) {
         case Recurring.RECUR_DAILY:
-            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().plusDays(1));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusDays(1)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusDays(1));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusDays(1)));
             }
             break;
         case Recurring.RECUR_WEEKLY:
-            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().plusWeeks(1));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusWeeks(1)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusWeeks(1));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusWeeks(1)));
             }
             break;
         case Recurring.RECUR_MONTHLY:
-            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().plusMonths(1));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusMonths(1)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusMonths(1));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusMonths(1)));
             }
             break;
         case Recurring.RECUR_YEARLY:
-            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().plusYears(1));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusYears(1)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusYears(1));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusYears(1)));
             }
             break;
         default:

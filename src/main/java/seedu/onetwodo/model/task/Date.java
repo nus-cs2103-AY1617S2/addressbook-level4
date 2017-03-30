@@ -29,7 +29,10 @@ public class Date {
      */
     public Date(String input) throws IllegalValueException {
         assert input != null;
-        this.value = input;
+    }
+
+    public Date(LocalDateTime localDateTime) {
+        this.localDateTime = Optional.of(localDateTime);
     }
 
     /**
