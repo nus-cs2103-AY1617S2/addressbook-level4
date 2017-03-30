@@ -1,6 +1,7 @@
 package seedu.jobs.logic.commands;
 
 import seedu.jobs.model.TaskBook;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 /**
  * Clears the address book.
@@ -12,7 +13,7 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws IllegalTimeException {
         assert model != null;
         model.resetData(new TaskBook());
         return new CommandResult(MESSAGE_SUCCESS);

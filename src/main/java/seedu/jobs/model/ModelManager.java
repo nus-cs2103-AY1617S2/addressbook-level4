@@ -12,6 +12,7 @@ import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -26,8 +27,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     * @throws IllegalTimeException
      */
-    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs) throws IllegalTimeException {
         super();
         assert !CollectionUtil.isAnyNull(taskBook, userPrefs);
 
@@ -37,12 +39,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
     }
 
-    public ModelManager() {
+    public ModelManager() throws IllegalTimeException {
         this(new TaskBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskBook newData) {
+    public void resetData(ReadOnlyTaskBook newData) throws IllegalTimeException {
         taskBook.resetData(newData);
         indicateTaskBookChanged();
     }
@@ -78,7 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalTimeException {
         assert editedTask != null;
 
         int taskBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);

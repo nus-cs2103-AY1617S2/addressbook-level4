@@ -13,6 +13,7 @@ import seedu.jobs.model.task.ModelConstant;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.Time;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.testutil.TaskBuilder;
 import seedu.jobs.testutil.TestTask;
 
@@ -121,9 +122,12 @@ public class EditCommandTest extends TaskBookGuiTest {
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
+     * @throws IllegalTimeException
+     * @throws IllegalArgumentException
      */
     private void assertEditSuccess(int filteredTaskListIndex, int taskBookIndex,
-                                    String detailsToEdit, TestTask editedTask) {
+                                    String detailsToEdit, TestTask editedTask)
+                                            throws IllegalArgumentException, IllegalTimeException {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data

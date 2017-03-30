@@ -14,6 +14,7 @@ import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
 import seedu.jobs.model.task.UniqueTaskList;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 /**
  * Adds a task to the JOBS.
@@ -37,10 +38,11 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException
      *             if any of the raw values are invalid
+     * @throws IllegalTimeException
      */
     public AddCommand(Optional<String> name, Optional<String> starttime, Optional<String> endtime,
             Optional<String> description, Set<String> tags, Optional<String>period)
-            throws IllegalValueException {
+            throws IllegalValueException, IllegalTimeException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));

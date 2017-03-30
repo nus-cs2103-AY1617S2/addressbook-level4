@@ -25,6 +25,7 @@ import seedu.jobs.commons.core.EventsCenter;
 import seedu.jobs.commons.events.BaseEvent;
 import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.task.ReadOnlyTask;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.testutil.TestUtil;
 import seedu.jobs.testutil.TypicalTestTasks;
 
@@ -83,11 +84,18 @@ getDataFileLocation()));
     /**
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
+     * @throws IllegalTimeException
      */
     protected TaskBook getInitialData() {
-        TaskBook ab = new TaskBook();
-        TypicalTestTasks.loadTaskBookWithSampleData(ab);
-        return ab;
+        try {
+            TaskBook ab = new TaskBook();
+            TypicalTestTasks.loadTaskBookWithSampleData(ab);
+            return ab;
+        } catch (IllegalTimeException e) {
+            assert false;
+            //not possible
+            return null;
+        }
     }
 
     /**

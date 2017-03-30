@@ -7,6 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.logic.commands.AddCommand;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.testutil.TestTask;
 import seedu.jobs.testutil.TestUtil;
 
@@ -14,7 +15,7 @@ import seedu.jobs.testutil.TestUtil;
 public class AddCommandTest extends TaskBookGuiTest {
 
     @Test
-    public void add() {
+    public void add() throws IllegalArgumentException, IllegalTimeException {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.CS4101;
@@ -40,7 +41,8 @@ public class AddCommandTest extends TaskBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList)
+            throws IllegalArgumentException, IllegalTimeException {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data

@@ -1,6 +1,7 @@
 package seedu.jobs.model.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
@@ -16,7 +17,7 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
  */
 
 
-public class Time {
+public class Time implements Comparable<Time> {
 
     public static final String MESSAGE_TIME_CONSTRAINT = "Time should always follow the dd/mm/yy hh:mm format";
     public static final String DATE_VALIDATION_REGEX = "^([0-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/([0-9][0-9][0-9][0-9])";
@@ -53,8 +54,7 @@ public class Time {
         try {
             LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/uuuu").
                     withResolverStyle(ResolverStyle.STRICT));
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
         return time.length() > 0;
@@ -97,6 +97,14 @@ public class Time {
         String time = extractTime(this.value);
         LocalDate date = LocalDate.parse(oldDate, formatter);
         this.value = date.plusDays(days).format(formatter) + " " + time;
+    }
+
+    @Override
+    public int compareTo(Time time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm");
+        LocalDateTime thisDate = LocalDateTime.parse(this.value, formatter);
+        LocalDateTime otherDate = LocalDateTime.parse(time.value, formatter);
+        return thisDate.compareTo(otherDate);
     }
 
     @Override
