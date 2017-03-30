@@ -363,7 +363,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | view all tasks | see all the tasks I've ever added
 `* * *` | user | view all undone or done tasks | see what tasks I still need to work on
 `* * *` | user | view all tasks due today | see what tasks I will need to finish by today
-`* * *` | user | view all overdued tasks | see what tasks I can delete
+`* * *` | user | view all overdue tasks | see what tasks I can delete
 `* * *` | user | Save all the tasks in specified local folder/file | Store everything in local file that is controlled by a cloud syncing service (e.g. dropbox) to synchronise across multiple computers
 `* *` | user | categorize tasks into work, study, leisure etc | group my tasks together
 `* *` | user | view all floating tasks | see which tasks do not have a deadline
@@ -509,7 +509,7 @@ Use case ends.
 > 1b2. User specifies task to delete based on index <br>
 Use case ends.
 
-#### Use case 6: Mark a task as completed or incompleted
+#### Use case 6: Mark a task as done or undone
 
 **MSS**
 
@@ -566,7 +566,7 @@ Use case ends.
 > Use case resumes at step 1 <br>
 Use case ends.
 
-#### Use case 9: View all overdued tasks
+#### Use case 9: View all overdue tasks
 
 **MSS**
 
