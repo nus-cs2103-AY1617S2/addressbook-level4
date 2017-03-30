@@ -18,10 +18,12 @@ import seedu.onetwodo.commons.util.FxViewUtil;
 public class HelpWindow extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
     private static final String TITLE = "Cheatsheet";
     private static final String HELPWINDOW_URL = "/view/help.html";
+    public static final String HELP_WINDOW_ROOT_FIELD_ID = "#helpWindowRoot";
 
     @FXML
     private WebView browser;
@@ -35,7 +37,7 @@ public class HelpWindow extends UiPart<Region> {
         // Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
         dialogStage.setMaximized(false); // TODO: set a more appropriate initial
-                                         // size
+        // size
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
         URL help = MainApp.class.getResource(HELPWINDOW_URL);

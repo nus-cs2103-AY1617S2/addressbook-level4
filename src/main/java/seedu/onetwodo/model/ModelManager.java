@@ -132,21 +132,23 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void updateTask(ReadOnlyTask taskToEdit, int internalIdx, Task editedTask)
-            throws TaskNotFoundException, UniqueTaskList.DuplicateTaskException{
+            throws TaskNotFoundException, UniqueTaskList.DuplicateTaskException {
         assert taskToEdit != null;
         assert editedTask != null;
-        
+
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.removeTask(taskToEdit);
         indicateToDoListChanged();
-        
+
         addTaskForEdit(internalIdx, editedTask);
-        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, taskToEdit, editedTask, copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(
+                EditCommand.COMMAND_WORD, taskToEdit, editedTask, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
-    
+
     @Override
-    public synchronized void addTaskForEdit(int internalIdx, Task editedTask) throws UniqueTaskList.DuplicateTaskException{
+    public synchronized void addTaskForEdit(int internalIdx, Task editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
         toDoList.addTask(internalIdx, editedTask);
         indicateToDoListChanged();
     }
@@ -236,7 +238,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && (hasAfter ? isTaskAfter(task, after) : true)
                 && (priority.hasPriority() ? isPrioritySame(task, priority) : true)
                 && (!tags.isEmpty() ? containsAnyTag(task, tags) : true)
-        ));
+                ));
     }
 
     private boolean containsAnyTag(ReadOnlyTask task, Set<Tag> tags) {
@@ -306,6 +308,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
     public FilteredList<ReadOnlyTask> getFilteredByDoneFindType(TaskType type) {
         // update by find before getting
         updateBySearchStrings();
@@ -325,6 +328,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
     public int getTaskIndex(ReadOnlyTask task) {
         FilteredList<ReadOnlyTask> filtered = getFilteredByDoneFindType(task.getTaskType());
         return filtered.indexOf(task);
@@ -346,6 +350,7 @@ public class ModelManager extends ComponentManager implements Model {
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
 
+        @Override
         String toString();
     }
 
@@ -371,6 +376,7 @@ public class ModelManager extends ComponentManager implements Model {
     interface Qualifier {
         boolean run(ReadOnlyTask task);
 
+        @Override
         String toString();
     }
 

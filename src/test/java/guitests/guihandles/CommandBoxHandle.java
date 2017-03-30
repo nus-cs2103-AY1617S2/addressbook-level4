@@ -2,8 +2,8 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import seedu.onetwodo.logic.commands.SelectCommand;
 
 /**
  * A handle to the Command Box in the GUI.
@@ -35,16 +35,19 @@ public class CommandBoxHandle extends GuiHandle {
      * Enters the given command in the Command Box and presses enter.
      */
     public void runCommand(String command) {
+        removeDialog();
         enterCommand(command);
         pressEnter();
-        if (command.length() > 5 && command.substring(0, 6).equals(SelectCommand.COMMAND_WORD)) {
-            pressEnter();
-        }
         guiRobot.sleep(200); //Give time for the command to take effect
+    }
+
+    private void removeDialog() {
+        guiRobot.type(KeyCode.DELETE).sleep(200);
     }
 
     public HelpWindowHandle runHelpCommand() {
         enterCommand("help");
+        pressEnter();
         pressEnter();
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
