@@ -19,6 +19,7 @@ public class UserPrefs {
 
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
         this.guiSettings = guiSettings;
+        this.theme = Theme.Default;
     }
     
     public void updateLastUsedGuiSetting(GuiSettings guiSettings, Theme theme) {
@@ -26,9 +27,10 @@ public class UserPrefs {
         this.theme = theme;
     }
 
-    //Default theme is Default
+    //Default UserPrefs has the Theme.Default.
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
+        this.theme = Theme.Default;
     }
 
     public void setGuiSettings(double width, double height, int x, int y) {

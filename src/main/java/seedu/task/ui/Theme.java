@@ -25,7 +25,9 @@ public enum Theme {
     
     @Override
     public String toString(){
-        return themeDescription;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Theme is : ").append(themeDescription).append(".");
+        return sb.toString();
     }
     
 }
