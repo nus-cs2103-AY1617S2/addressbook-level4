@@ -70,8 +70,8 @@ public class TaskCard extends UiPart<Region> {
             topRow.setOrientation(Orientation.HORIZONTAL);
             botRow.setOrientation(Orientation.HORIZONTAL);
 
-            topRow.prefHeightProperty().bind(Bindings.size(topLabels).multiply(14));
-            botRow.prefHeightProperty().bind(Bindings.size(botLabels).multiply(14));
+            topRow.prefHeightProperty().bind(Bindings.size(topLabels).multiply(10));
+            botRow.prefHeightProperty().bind(Bindings.size(botLabels).multiply(10));
 
             listRows.add(topRow);
             listRows.add(botRow);
@@ -99,8 +99,8 @@ public class TaskCard extends UiPart<Region> {
             topRow.setOrientation(Orientation.HORIZONTAL);
             botRow.setOrientation(Orientation.HORIZONTAL);
 
-            topRow.prefHeightProperty().bind(Bindings.size(topLabels).multiply(14));
-            botRow.prefHeightProperty().bind(Bindings.size(botLabels).multiply(14));
+            topRow.prefHeightProperty().bind(Bindings.size(topLabels).multiply(10));
+            botRow.prefHeightProperty().bind(Bindings.size(botLabels).multiply(10));
 
             listRows.add(topRow);
             listRows.add(botRow);
@@ -123,7 +123,7 @@ public class TaskCard extends UiPart<Region> {
 
             topRow.setOrientation(Orientation.HORIZONTAL);
 
-            topRow.prefHeightProperty().bind(Bindings.size(topLabels).multiply(14));
+            topRow.prefHeightProperty().bind(Bindings.size(topLabels).multiply(12));
 
             listRows.add(topRow);
 
