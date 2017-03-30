@@ -118,7 +118,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
-    //@@author A0141138N
+    //@@author
+    @Override
+    public synchronized void sortBy(SortOrder sortOrder) {
+        toDoList.sortTasks(sortOrder);
+        indicateToDoListChanged();
+    }
+
+    // @@author A0141138N
     @Override
     public synchronized void todayTask(ReadOnlyTask taskForToday) throws IllegalValueException {
         if (taskForToday.getTodayStatus() == false) {
@@ -247,7 +254,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && (hasAfter ? isTaskAfter(task, after) : true)
                 && (priority.hasPriority() ? isPrioritySame(task, priority) : true)
                 && (!tags.isEmpty() ? containsAnyTag(task, tags) : true)
-        ));
+                ));
     }
 
     private boolean containsAnyTag(ReadOnlyTask task, Set<Tag> tags) {

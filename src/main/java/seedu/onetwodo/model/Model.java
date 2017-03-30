@@ -123,4 +123,6 @@ public interface Model {
 
     void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags);
 
+    void sortBy(SortOrder sortOrder);
+
 }

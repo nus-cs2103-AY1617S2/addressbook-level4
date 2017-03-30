@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.DoneStatus;
+import seedu.onetwodo.model.SortOrder;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Priority;
@@ -28,9 +29,10 @@ public class ListCommand extends Command {
     private StartDate after;
     private Priority priority;
     private Set<Tag> tagSet;
+    private SortOrder sortOrder;
 
     public ListCommand(String doneString, String beforeDate, String afterDate,
-            String priorityString, Set<String> tags) throws IllegalValueException {
+            String priorityString, Set<String> tags, String order) throws IllegalValueException {
         assert doneString != null;
         switch (doneString) {
         case DoneStatus.DONE_STRING: // view done tasks
@@ -43,6 +45,7 @@ public class ListCommand extends Command {
             doneStatus = DoneStatus.ALL;
             break;
         }
+        sortOrder = SortOrder.getSortOrder(order);
         before = new EndDate(beforeDate);
         after = new StartDate(afterDate);
         if (before.hasDate() && after.hasDate() && before.getLocalDateTime().isBefore(after.getLocalDateTime())) {
@@ -72,6 +75,9 @@ public class ListCommand extends Command {
         default:
             model.setDoneStatus(DoneStatus.UNDONE);
             feecbackMessageToReturn = MESSAGE_LIST_UNDONE_SUCCESS;
+        }
+        if (sortOrder != SortOrder.NONE) {
+            model.sortBy(sortOrder);
         }
         model.resetSearchStrings();
         model.updateByDoneDatePriorityTags(before, after, priority, tagSet);

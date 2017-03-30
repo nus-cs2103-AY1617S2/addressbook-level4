@@ -2,9 +2,9 @@ package seedu.onetwodo.model.task;
 
 //@@author A0141138N
 public enum TaskType {
-    TODO('T'),
     DEADLINE('D'),
-    EVENT('E');
+    EVENT('E'),
+    TODO('T');
 
     private final char prefix;
 
@@ -16,6 +16,7 @@ public enum TaskType {
         return prefix;
     }
 
+    @Override
     public String toString() {
         return String.valueOf(prefix);
     }

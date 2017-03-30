@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.DuplicateDataException;
 import seedu.onetwodo.commons.util.CollectionUtil;
+import seedu.onetwodo.model.SortOrder;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
@@ -121,6 +122,21 @@ public class UniqueTaskList implements Iterable<Task> {
         Task targetTask = (Task) taskForToday;
         targetTask.setToday();
         internalList.set(index, targetTask);
+    }
+
+    public void sortTasks(SortOrder sortOrder) {
+        switch (sortOrder) {
+        case ALPHANUMERIC:
+            FXCollections.sort(internalList, (Task t1, Task t2) -> t1.getName().compareTo(t2.getName()));
+            break;
+        case PRIORITY:
+            FXCollections.sort(internalList, (Task t1, Task t2) -> t1.getPriority().compareTo(t2.getPriority()));
+            break;
+        case DATETIME:
+            FXCollections.sort(internalList, (Task t1, Task t2) -> t1.compareTo(t2));
+            break;
+        default:
+        }
     }
 
     public void setTasks(UniqueTaskList replacement) {

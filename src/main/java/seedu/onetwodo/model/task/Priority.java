@@ -7,11 +7,14 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
  * Represents a Task's priority in the toDo list. Guarantees: immutable; is
  * valid as declared in {@link #isValidPriority(Char)}
  */
-public class Priority {
+public class Priority implements Comparable<Priority> {
     public static final String PRIORITY_CONSTRAINTS = "Priority can only be high, medium or low";
     public static final String HIGH_LABEL = "HIGH";
     public static final String MEDIUM_LABEL = "MEDIUM";
     public static final String LOW_LABEL = "LOW";
+    private static final char HIGH_CHAR = 'H';
+    private static final char MEDIUM_CHAR = 'M';
+    private static final char LOW_CHAR = 'L';
 
     public String value;
 
@@ -25,30 +28,48 @@ public class Priority {
         assert priority != null;
         priority = priority.trim();
         String upperPriority = priority.toUpperCase();
-        if (upperPriority.length() > 0) {
+        if (priority.isEmpty()) {
+            value = priority;
+        } else if (upperPriority.length() > 1) {
+            switch (upperPriority) {
+            case HIGH_LABEL:
+                this.value = HIGH_LABEL;
+                break;
+            case MEDIUM_LABEL:
+                this.value = MEDIUM_LABEL;
+                break;
+            case LOW_LABEL:
+                this.value = LOW_LABEL;
+                break;
+            default:
+                throw new IllegalValueException(PRIORITY_CONSTRAINTS);
+            }
+        } else {
             char firstLetter = upperPriority.charAt(0);
             if (!isValidPriority(firstLetter)) {
                 throw new IllegalValueException(PRIORITY_CONSTRAINTS);
-            } else {
-                if (firstLetter == 'H') {
-                    this.value = HIGH_LABEL;
-                } else if (firstLetter == 'M') {
-                    this.value = MEDIUM_LABEL;
-                } else {
-                    this.value = LOW_LABEL;
-                }
             }
-        } else {
-            this.value = priority;
+            switch (firstLetter) {
+            case HIGH_CHAR:
+                this.value = HIGH_LABEL;
+                break;
+            case MEDIUM_CHAR:
+                this.value = MEDIUM_LABEL;
+                break;
+            case LOW_CHAR:
+                this.value = LOW_LABEL;
+                break;
+            default:
+                throw new IllegalValueException(PRIORITY_CONSTRAINTS);
+            }
         }
-
     }
 
     /**
      * Returns true if a given string is a valid task priority.
      */
     public static boolean isValidPriority(char test) {
-        return ((test == 'H') || (test == 'M') || (test == 'L'));
+        return ((test == HIGH_CHAR) || (test == MEDIUM_CHAR) || (test == LOW_CHAR));
     }
 
     public boolean hasPriority() {
@@ -64,8 +85,7 @@ public class Priority {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                        && this.value.equals(((Priority) other).value)); // state
-                                                                         // check
+                        && this.value.equals(((Priority) other).value)); // state check
     }
 
     @Override
@@ -73,4 +93,22 @@ public class Priority {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Priority p) {
+        if (!hasPriority()) {
+            return -1;
+        }
+        if (!p.hasPriority()) {
+            return 1;
+        }
+        if (p.value.equals(value)) {
+            return 0;
+        }
+        switch(value) {
+        case HIGH_LABEL: return 1;
+        case MEDIUM_LABEL: return p.value.equals(LOW_LABEL) ? 1 : -1;
+        case LOW_LABEL: return -1;
+        default: return -1;
+        }
+    }
 }

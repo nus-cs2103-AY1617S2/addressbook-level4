@@ -10,7 +10,7 @@ import seedu.onetwodo.model.tag.UniqueTagList;
  * Represents a Task in the toDo list. Guarantees: details are present and not
  * null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask, Comparable<Task> {
 
     private Name name;
     private StartDate startDate;
@@ -293,6 +293,20 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public int compareTo(Task taskB) {
+        int i = type.compareTo(taskB.type);
+        if (i != 0) {
+            return i;
+        }
+        switch (type) {
+        case DEADLINE:
+        case EVENT:
+            return endDate.getLocalDateTime().compareTo(taskB.endDate.getLocalDateTime());
+        default: return 0;
+        }
     }
 
 }
