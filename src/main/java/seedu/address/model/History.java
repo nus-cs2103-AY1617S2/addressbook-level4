@@ -1,15 +1,15 @@
 package seedu.address.model;
 
-public class UndoStack {
+public class History<T> {
     
-    private Node current = null;
+    private Node<T> current = null;
     
-    public YTomorrow undo() {
+    public T undo() {
         if (current == null) {
             return null;
             }
         
-        Node prev = current.getPrevious();
+        Node<T> prev = current.getPrevious();
         if (prev == null) {
             return null;
         } else {
@@ -18,12 +18,12 @@ public class UndoStack {
         }
     }
     
-    public YTomorrow redo() {
+    public T redo() {
         if (current == null) {
             return null;
         }
         
-        Node next = current.getNext();
+        Node<T> next = current.getNext();
         if (next == null) {
             return null;
         } else {
@@ -32,7 +32,7 @@ public class UndoStack {
         }
     }
     
-    public YTomorrow at() {
+    public T at() {
         if (current != null) {
             return current.getElement();
         } else {
@@ -40,8 +40,8 @@ public class UndoStack {
         }
     }
     
-    public void push(YTomorrow next) {
-        Node nextNode = new Node(next);
+    public void push(T next) {
+        Node<T> nextNode = new Node<T>(next);
         
         if (current != null) {
             nextNode.setPrevious(current);
@@ -63,34 +63,34 @@ public class UndoStack {
         return source.getNext() == null ? 0 : 1 + sizePrev(source.getNext());
     }
     
-    private class Node {
+    private class Node<T> {
         
-        private YTomorrow element;
+        private T element;
         
-        private Node prev = null;
-        private Node next = null;
+        private Node<T> prev = null;
+        private Node<T> next = null;
         
-        public Node(YTomorrow element) {
+        public Node(T element) {
             this.element = element;
         }
         
-        public YTomorrow getElement() {
+        public T getElement() {
             return element;
         }
         
-        public Node getPrevious() {
+        public Node<T> getPrevious() {
             return prev;
         }
         
-        public Node getNext() {
+        public Node<T> getNext() {
             return next;
         }
         
-        public void setNext(Node next) {
+        public void setNext(Node<T> next) {
             this.next = next;
         }
         
-        public void setPrevious(Node prev) {
+        public void setPrevious(Node<T> prev) {
             this.prev = prev;
         }
         

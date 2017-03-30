@@ -23,6 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final YTomorrow addressBook;
+    private final History<ReadOnlyAddressBook> history;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
 
     /**
@@ -35,6 +36,8 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new YTomorrow(addressBook);
+        this.history = new History<ReadOnlyAddressBook>();
+        history.push(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -55,6 +58,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
+        addToHistory(new YTomorrow(addressBook));
         raise(new AddressBookChangedEvent(addressBook));
     }
 
@@ -79,6 +83,31 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
         addressBook.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
+    }
+    
+    @Override
+    public boolean undoLastModification() {
+        ReadOnlyAddressBook undone = history.undo();
+        if (undone != null) {
+            addressBook.resetData(undone);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean redoLastModification() {
+        ReadOnlyAddressBook redone = history.redo();
+        if (redone != null) {
+            addressBook.resetData(redone);
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public void addToHistory(ReadOnlyAddressBook state) {
+        history.push(state);
     }
 
     //=========== Filtered Person List Accessors =============================================================

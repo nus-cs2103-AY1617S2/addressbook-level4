@@ -42,5 +42,14 @@ public interface Model {
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredPersonList(Set<String> keywords);
+    
+    /** Undoes the last modification made to the AddressBook. Returns if there is anything to undo. */
+    boolean undoLastModification();
 
+    /** Redoes thr last modification made to the AddressBook. Returns if there is anything to redo. */
+    boolean redoLastModification();
+    
+    /** Adds the current AddressBook state to the undo/redo history */
+    void addToHistory(ReadOnlyAddressBook state);
+    
 }

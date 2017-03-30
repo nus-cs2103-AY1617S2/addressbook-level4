@@ -18,7 +18,9 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        return new CommandResult(UNDO_SUCCESS);
+        boolean result = model.undoLastModification();
+        
+        return new CommandResult(result ? UNDO_SUCCESS : UNDO_FAILURE);
     }
 
 }
