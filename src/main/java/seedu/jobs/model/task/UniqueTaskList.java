@@ -21,7 +21,7 @@ import seedu.jobs.model.FixedStack;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
-    private final FixedStack<ObservableList<Task>> taskStack = new FixedStack<ObservableList<Task>>();
+    private final FixedStack<ObservableList<Task>> taskStack = new FixedStack();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -41,7 +41,11 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        taskStack.push(internalList);
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        taskStack.push(stackList);
         internalList.add(toAdd);
     }
 
@@ -64,7 +68,11 @@ public class UniqueTaskList implements Iterable<Task> {
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
-        taskStack.push(internalList);
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        taskStack.push(stackList);
         internalList.set(index, taskToUpdate);
     }
 
@@ -75,7 +83,11 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
-        taskStack.push(internalList);
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        taskStack.push(stackList);
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
@@ -91,7 +103,11 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean complete(int index, ReadOnlyTask toComplete) {
         assert toComplete != null;
 
-        taskStack.push(internalList);
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        taskStack.push(stackList);
         Task taskToComplete = internalList.get(index);
         taskToComplete.markComplete();
         internalList.set(index, taskToComplete);
@@ -104,7 +120,9 @@ public class UniqueTaskList implements Iterable<Task> {
      */
 
     public boolean pop() {
-        this.internalList.setAll(taskStack.pop());
+//        System.out.println(taskStack.toString());
+        ObservableList<Task> replacement = taskStack.pop();
+        this.internalList.setAll(replacement);
         return true;
     }
 
