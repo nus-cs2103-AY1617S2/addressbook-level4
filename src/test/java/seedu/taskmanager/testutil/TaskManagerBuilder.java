@@ -7,9 +7,9 @@ import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.UniqueTaskList;
 
 /**
- * A utility class to help with building Taskmanager objects.
- * Example usage: <br>
- *     {@code TaskManager ab = new TaskManagerBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ * A utility class to help with building Taskmanager objects. Example usage:
+ * <br>
+ * {@code TaskManager ab = new TaskManagerBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
 public class TaskManagerBuilder {
 
@@ -24,10 +24,10 @@ public class TaskManagerBuilder {
         return this;
     }
 
-/*    public TaskManagerBuilder withCategory(String categoryName) throws IllegalValueException {
+    public TaskManagerBuilder withCategory(String categoryName) throws IllegalValueException {
         taskManager.addCategory(new Category(categoryName));
         return this;
-    } */
+    }
 
     public TaskManager build() {
         return taskManager;

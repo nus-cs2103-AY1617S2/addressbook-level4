@@ -5,16 +5,16 @@ import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.util.CollectionUtil;
-//import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.UniqueTaskList;
-//import seedu.taskmanager.model.category.UniqueCategoryList;
 
 // @@author A0142418L
 /**
@@ -33,9 +33,11 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String EMPTY_FIELD = "EMPTY_FIELD";
 
     private final int filteredTaskListIndex;
-    private final UpdateTaskDescriptor updateTaskDescriptor;
+    private UpdateTaskDescriptor updateTaskDescriptor;
+    private final Boolean isUpdateToDeadlineTask;
 
     /**
      * @param filteredTaskListIndex
@@ -43,7 +45,8 @@ public class UpdateCommand extends Command {
      * @param updateTaskDescriptor
      *            details to update the task with
      */
-    public UpdateCommand(int filteredTaskListIndex, UpdateTaskDescriptor updateTaskDescriptor) {
+    public UpdateCommand(int filteredTaskListIndex, UpdateTaskDescriptor updateTaskDescriptor,
+            Boolean isUpdateToDeadlineTask) {
         assert filteredTaskListIndex > 0;
         assert updateTaskDescriptor != null;
 
@@ -51,10 +54,15 @@ public class UpdateCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.updateTaskDescriptor = new UpdateTaskDescriptor(updateTaskDescriptor);
+
+        this.isUpdateToDeadlineTask = isUpdateToDeadlineTask;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
+        // UpdateTaskDescriptor newUpdateTaskDescriptor = new
+        // UpdateTaskDescriptor();
+
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -62,6 +70,46 @@ public class UpdateCommand extends Command {
         }
 
         ReadOnlyTask taskToUpdate = lastShownList.get(filteredTaskListIndex);
+
+        if (!isUpdateToDeadlineTask) {
+            if ((isOnlyStartUpdated() || isOnlyEndUpdated()) && isToUpdateFloatingTask(taskToUpdate)) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            } else {
+                if (isOnlyStartUpdated()) {
+                    updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+                    updateTaskDescriptor.setEndTime(Optional.of(taskToUpdate.getEndTime()));
+                } else {
+                    if (isOnlyEndUpdated()) {
+                        updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
+                        updateTaskDescriptor.setStartTime(Optional.of(taskToUpdate.getStartTime()));
+                    }
+                }
+            }
+            if ((isOnlyStartTimeUpdated() || isOnlyEndTimeUpdated())
+                    && (isToUpdateFloatingTask(taskToUpdate) || isDeadlineTaskToUpdate(taskToUpdate))) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            } else {
+                if (isOnlyEndTimeUpdated()) {
+                    updateTaskDescriptor.setStartTime(Optional.of(taskToUpdate.getStartTime()));
+                    updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
+                    updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+                } else {
+                    if (isOnlyStartTimeUpdated()) {
+                        updateTaskDescriptor.setEndTime(Optional.of(taskToUpdate.getEndTime()));
+                        updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
+                        updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+                    }
+                }
+            }
+        }
+
+        if (isOnlyCategoriesUpdate() || isOnlyTaskNameUpdated()) {
+            updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
+            updateTaskDescriptor.setStartTime(Optional.of(taskToUpdate.getStartTime()));
+            updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+            updateTaskDescriptor.setEndTime(Optional.of(taskToUpdate.getEndTime()));
+        }
+
         Task updatedTask = createUpdatedTask(taskToUpdate, updateTaskDescriptor);
 
         try {
@@ -75,6 +123,110 @@ public class UpdateCommand extends Command {
     }
 
     /**
+     * Checks if only the task name field has been identified by user to be
+     * updated To ensure that other task details like startTime startDate
+     * endTime endDate are not lost
+     *
+     * @return true if only task name has been identified by user to be updated
+     */
+    private boolean isOnlyTaskNameUpdated() {
+        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getTaskName().isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if only the category field has been identified by user to be
+     * updated To ensure that other task details like startTime startDate
+     * endTime endDate are not lost
+     *
+     * @return true if only categories are identified by user to be updated
+     */
+    private boolean isOnlyCategoriesUpdate() {
+        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getCategories().isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isDeadlineTaskToUpdate(ReadOnlyTask taskToUpdate) {
+        if (taskToUpdate.getStartDate().value.equals(EMPTY_FIELD)
+                && taskToUpdate.getStartTime().value.equals(EMPTY_FIELD)
+                && !taskToUpdate.getEndDate().value.equals(EMPTY_FIELD)
+                && !taskToUpdate.getEndTime().value.equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isOnlyStartTimeUpdated() {
+        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isOnlyEndTimeUpdated() {
+        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isToUpdateFloatingTask(ReadOnlyTask taskToUpdate) {
+        if (taskToUpdate.getStartDate().value.equals(EMPTY_FIELD)
+                && taskToUpdate.getStartTime().value.equals(EMPTY_FIELD)
+                && taskToUpdate.getEndDate().value.equals(EMPTY_FIELD)
+                && taskToUpdate.getEndTime().value.equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isOnlyStartUpdated() {
+        if (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isOnlyEndUpdated() {
+        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
@@ -82,14 +234,15 @@ public class UpdateCommand extends Command {
         assert taskToUpdate != null;
 
         TaskName updatedTaskName = updateTaskDescriptor.getTaskName().orElseGet(taskToUpdate::getTaskName);
-        Date updatedDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getDate);
+        StartDate updatedStartDate = updateTaskDescriptor.getStartDate().orElseGet(taskToUpdate::getStartDate);
         StartTime updatedStartTime = updateTaskDescriptor.getStartTime().orElseGet(taskToUpdate::getStartTime);
+        EndDate updatedEndDate = updateTaskDescriptor.getEndDate().orElseGet(taskToUpdate::getEndDate);
         EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
-        // UniqueCategoryList updatedCategories =
-        // updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
+        UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories()
+                .orElseGet(taskToUpdate::getCategories);
 
-        return new Task(updatedTaskName, updatedDate, updatedStartTime,
-                updatedEndTime/* , updatedCategories */);
+        return new Task(updatedTaskName, updatedStartDate, updatedStartTime, updatedEndDate, updatedEndTime, false,
+                updatedCategories);
     }
 
     /**
@@ -98,28 +251,30 @@ public class UpdateCommand extends Command {
      */
     public static class UpdateTaskDescriptor {
         private Optional<TaskName> taskname = Optional.empty();
-        private Optional<Date> date = Optional.empty();
-        private Optional<StartTime> starttime = Optional.empty();
-        private Optional<EndTime> endtime = Optional.empty();
-        // private Optional<UniqueCategoryList> categories = Optional.empty();
+        private Optional<StartDate> startDate = Optional.empty();
+        private Optional<StartTime> startTime = Optional.empty();
+        private Optional<EndDate> endDate = Optional.empty();
+        private Optional<EndTime> endTime = Optional.empty();
+        private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public UpdateTaskDescriptor() {
         }
 
         public UpdateTaskDescriptor(UpdateTaskDescriptor toCopy) {
             this.taskname = toCopy.getTaskName();
-            this.date = toCopy.getDate();
-            this.starttime = toCopy.getStartTime();
-            this.endtime = toCopy.getEndTime();
-            // this.categories = toCopy.getCategories();
+            this.startDate = toCopy.getStartDate();
+            this.startTime = toCopy.getStartTime();
+            this.endDate = toCopy.getEndDate();
+            this.endTime = toCopy.getEndTime();
+            this.categories = toCopy.getCategories();
         }
 
         /**
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.date, this.starttime, this.endtime
-                    /*, this.categories*/);
+            return CollectionUtil.isAnyPresent(this.taskname, this.startDate, this.startTime, this.endDate,
+                    this.endTime, this.categories);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
@@ -131,39 +286,50 @@ public class UpdateCommand extends Command {
             return taskname;
         }
 
-        public void setDate(Optional<Date> date) {
-            assert date != null;
-            this.date = date;
+        public void setStartDate(Optional<StartDate> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
         }
 
-        public Optional<Date> getDate() {
-            return date;
+        public Optional<StartDate> getStartDate() {
+            return startDate;
         }
 
-        public void setStartTime(Optional<StartTime> starttime) {
-            assert starttime != null;
-            this.starttime = starttime;
+        public void setStartTime(Optional<StartTime> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
         }
 
         public Optional<StartTime> getStartTime() {
-            return starttime;
+            return startTime;
         }
 
-        public void setEndTime(Optional<EndTime> endtime) {
-            assert endtime != null;
-            this.endtime = endtime;
+        public void setEndDate(Optional<EndDate> endDate) {
+            assert endDate != null;
+            this.endDate = endDate;
+        }
+
+        public Optional<EndDate> getEndDate() {
+            return endDate;
+        }
+
+        public void setEndTime(Optional<EndTime> endTime) {
+            assert endTime != null;
+            this.endTime = endTime;
         }
 
         public Optional<EndTime> getEndTime() {
-            return endtime;
+            return endTime;
         }
 
-        /*
-         * public void setCategories(Optional<UniqueCategoryList> categories) {
-         * assert categories != null; this.categories = categories; }
-         *
-         * public Optional<UniqueCategoryList> getCategories() { return
-         * categories; }
-         */
+        public void setCategories(Optional<UniqueCategoryList> categories) {
+            assert categories != null;
+            this.categories = categories;
+        }
+
+        public Optional<UniqueCategoryList> getCategories() {
+            return categories;
+        }
+
     }
 }

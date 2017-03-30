@@ -1,12 +1,13 @@
 package seedu.taskmanager.testutil;
 
 import seedu.taskmanager.model.category.UniqueCategoryList;
-// import seedu.taskmanager.model.category.UniqueCategoryList;
-import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+// import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.TaskName;
 
 // @@author A0141102H
 /**
@@ -14,72 +15,94 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private TaskName taskname;
-    private Date date;
-    private StartTime starttime;
-    private EndTime endtime;
+    private TaskName taskName;
+    private StartDate startDate;
+    private StartTime startTime;
+    private EndDate endDate;
+    private EndTime endTime;
+    private boolean completed;
     private UniqueCategoryList categories;
 
     public TestTask() {
-//        categories = new UniqueCategoryList();
+        categories = new UniqueCategoryList();
     }
 
     /**
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.taskname = taskToCopy.getTaskName();
-        this.date = taskToCopy.getDate();
-        this.starttime = taskToCopy.getStartTime();
-        this.endtime = taskToCopy.getEndTime();
-//        this.categories = taskToCopy.getCategories();
+        this.taskName = taskToCopy.getTaskName();
+        this.startDate = taskToCopy.getStartDate();
+        this.startTime = taskToCopy.getStartTime();
+        this.endDate = taskToCopy.getEndDate();
+        this.endTime = taskToCopy.getEndTime();
+        this.completed = taskToCopy.getIsMarkedAsComplete();
+        this.categories = taskToCopy.getCategories();
     }
 
     public void setTaskName(TaskName taskname) {
-        this.taskname = taskname;
+        this.taskName = taskname;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(StartDate startdate) {
+        this.startDate = startdate;
     }
 
     public void setStartTime(StartTime starttime) {
-        this.starttime = starttime;
+        this.startTime = starttime;
+    }
+
+    public void setEndDate(EndDate enddate) {
+        this.endDate = enddate;
     }
 
     public void setEndTime(EndTime endtime) {
-    	this.endtime = endtime;
+        this.endTime = endtime;
     }
 
-/*    public void setCategories(UniqueCategoryList categories) {
+    public void setCompleted(Boolean isCompleted) {
+        this.completed = isCompleted;
+    }
+
+    public void setCategories(UniqueCategoryList categories) {
         this.categories = categories;
-    } */
+    }
 
     @Override
     public TaskName getTaskName() {
-        return taskname;
+        return taskName;
     }
 
     @Override
-    public Date getDate() {
-        return date;
+    public StartDate getStartDate() {
+        return startDate;
     }
 
     @Override
     public StartTime getStartTime() {
-        return starttime;
+        return startTime;
+    }
+
+    @Override
+    public EndDate getEndDate() {
+        return endDate;
     }
 
     @Override
     public EndTime getEndTime() {
-    	return endtime;
+        return endTime;
     }
-/*
+
     @Override
     public UniqueCategoryList getCategories() {
         return categories;
     }
-*/
+
+    @Override
+    public Boolean getIsMarkedAsComplete() {
+        return completed;
+    }
+
     @Override
     public String toString() {
         return getAsText();
@@ -88,10 +111,12 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("ADD " + this.getTaskName().fullTaskName + " ");
-        sb.append("ON " + this.getDate().value + " ");
+        sb.append("FROM " + this.getStartDate().value + " ");
         sb.append(this.getStartTime().value + " ");
-        sb.append("TO " + this.getEndTime().value + " ");
-//        this.getCategories().asObservableList().stream().forEach(s -> sb.append("t/" + s.categoryTaskName + " "));
+        sb.append("TO " + this.getEndDate().value + " ");
+        sb.append(this.getEndTime().value + " ");
+        this.getCategories().asObservableList().stream().forEach(s -> sb.append("CATEGORY" + s.categoryName + " "));
         return sb.toString();
     }
+
 }

@@ -14,7 +14,7 @@ import seedu.taskmanager.logic.commands.SearchCommand;
 
 //@@author A0141102H
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new SearchCommand object
  */
 public class SearchCommandParser {
 

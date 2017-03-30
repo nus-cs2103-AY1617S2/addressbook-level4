@@ -1,6 +1,6 @@
 package seedu.taskmanager.model.task;
 
-//import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * A read-only immutable interface for a Task in ProcrastiNomore.
@@ -11,9 +11,11 @@ public interface ReadOnlyTask {
 
     TaskName getTaskName();
 
-    Date getDate();
+    StartDate getStartDate();
 
     StartTime getStartTime();
+
+    EndDate getEndDate();
 
     EndTime getEndTime();
 
@@ -24,7 +26,7 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the task's internal
      * categories.
      */
-    // UniqueCategoryList getCategories();
+    UniqueCategoryList getCategories();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override
@@ -38,10 +40,13 @@ public interface ReadOnlyTask {
                         // here
                         // onwards
                         && other.getStartTime().equals(this.getStartTime())
-                        && other.getEndTime().equals(this.getEndTime()) && other.getDate().equals(this.getDate())
+                        && other.getEndTime().equals(this.getEndTime())
+                        && other.getStartDate().equals(this.getStartDate())
+                        && other.getEndDate().equals(this.getEndDate())
                         && other.getIsMarkedAsComplete().equals(this.getIsMarkedAsComplete()));
     }
 
+    // @@author A0142418L
     /**
      * Formats the task as text, showing all contact details.
      */
@@ -49,19 +54,27 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTaskName());
 
-        if (getDate().toString() != "EMPTY_FIELD") {
-            builder.append(" Date: ").append(getDate());
+        if (!getStartDate().toString().equals("EMPTY_FIELD")) {
+            builder.append(" Start Date: ").append(getStartDate());
         }
 
-        if (getStartTime().toString() != "EMPTY_FIELD") {
+        if (!getStartTime().toString().equals("EMPTY_FIELD")) {
             builder.append(" Start Time: ").append(getStartTime());
         }
 
-        if (getEndTime().toString() != "EMPTY_FIELD") {
+        if (!getEndDate().toString().equals("EMPTY_FIELD")) {
+            builder.append(" End Date: ").append(getEndDate());
+        }
+
+        if (!getEndTime().toString().equals("EMPTY_FIELD")) {
             builder.append(" End Time: ").append(getEndTime());
         }
-        // .append(" Categories: ");
-        // getCategories().forEach(builder::append);
+
+        if (!getCategories().isEmptyCategoryList()) {
+            builder.append(" Categories: ");
+            getCategories().forEach(builder::append);
+        }
+
         return builder.toString();
     }
 }

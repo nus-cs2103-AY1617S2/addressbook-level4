@@ -3,7 +3,7 @@ package seedu.taskmanager.model.task;
 import java.util.Objects;
 
 import seedu.taskmanager.commons.util.CollectionUtil;
-//import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * Represents a Task in the address book. Guarantees: details are present and
@@ -12,32 +12,35 @@ import seedu.taskmanager.commons.util.CollectionUtil;
 public class Task implements ReadOnlyTask {
 
     private TaskName taskName;
-    private Date date;
+    private StartDate startDate;
     private StartTime startTime;
+    private EndDate endDate;
     private EndTime endTime;
     private boolean isMarkedAsComplete;
-    // private UniqueCategoryList categories;
+    private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Date date, StartTime startTime, EndTime endTime /* ,UniqueCategoryList categories */) {
-        assert !CollectionUtil.isAnyNull(taskName, date, startTime, endTime/* , categories */);
+    public Task(TaskName taskName, StartDate startDate, StartTime startTime, EndDate endDate, EndTime endTime,
+            Boolean markedCompleted, UniqueCategoryList categories) {
+        assert !CollectionUtil.isAnyNull(taskName, startDate, startTime, endDate, endTime, markedCompleted, categories);
         this.taskName = taskName;
-        this.date = date;
+        this.startDate = startDate;
         this.startTime = startTime;
+        this.endDate = endDate;
         this.endTime = endTime;
-        this.isMarkedAsComplete = false;
-        // this.categories = new UniqueCategoryList(categories); // protect
-        // internal tags from changes in the arg list
+        this.isMarkedAsComplete = markedCompleted;
+        this.categories = new UniqueCategoryList(categories);
+        // protect internal tags from changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getDate(), source.getStartTime(),
-                source.getEndTime() /* ,source.getCategories() */);
+        this(source.getTaskName(), source.getStartDate(), source.getStartTime(), source.getEndDate(),
+                source.getEndTime(), source.getIsMarkedAsComplete(), source.getCategories());
     }
 
     public void setTaskName(TaskName taskName) {
@@ -50,14 +53,14 @@ public class Task implements ReadOnlyTask {
         return taskName;
     }
 
-    public void setDate(Date date) {
-        assert date != null;
-        this.date = date;
+    public void setStartDate(StartDate startDate) {
+        assert startDate != null;
+        this.startDate = startDate;
     }
 
     @Override
-    public Date getDate() {
-        return date;
+    public StartDate getStartDate() {
+        return startDate;
     }
 
     public void setStartTime(StartTime startTime) {
@@ -70,6 +73,16 @@ public class Task implements ReadOnlyTask {
         return startTime;
     }
 
+    public void setEndDate(EndDate endDate) {
+        assert startTime != null;
+        this.endDate = endDate;
+    }
+
+    @Override
+    public EndDate getEndDate() {
+        return endDate;
+    }
+
     public void setEndTime(EndTime endTime) {
         assert endTime != null;
         this.endTime = endTime;
@@ -79,7 +92,7 @@ public class Task implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endTime;
     }
-    
+
     public void setIsMarkedAsComplete(boolean isMarkedAsComplete) {
         this.isMarkedAsComplete = isMarkedAsComplete;
     }
@@ -89,17 +102,19 @@ public class Task implements ReadOnlyTask {
         return isMarkedAsComplete;
     }
 
-    /*
-     * @Override public UniqueCategoryList getCategories() { return new
-     * UniqueCategoryList(categories); }
-     */
+    @Override
+    public UniqueCategoryList getCategories() {
+        return new UniqueCategoryList(categories);
+    }
+
     /**
      * Replaces this task's categories with the categories in the argument
      * category list.
-     *
-     * public void setCategories(UniqueCategoryList replacement) {
-     * categories.setCategories(replacement); }
      */
+    public void setCategories(UniqueCategoryList replacement) {
+        categories.setCategories(replacement);
+    }
+
     /**
      * Updates this person with the details of {@code replacement}.
      */
@@ -107,11 +122,12 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setTaskName(replacement.getTaskName());
-        this.setDate(replacement.getDate());
+        this.setStartDate(replacement.getStartDate());
         this.setStartTime(replacement.getStartTime());
+        this.setEndDate(replacement.getEndDate());
         this.setEndTime(replacement.getEndTime());
         this.setIsMarkedAsComplete(replacement.getIsMarkedAsComplete());
-        // this.setCategories(replacement.getCategories());
+        this.setCategories(replacement.getCategories());
     }
 
     @Override
@@ -125,7 +141,7 @@ public class Task implements ReadOnlyTask {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing
         // your own
-        return Objects.hash(taskName, date, startTime, endTime/* , categories */);
+        return Objects.hash(taskName, startDate, startTime, endDate, endTime, isMarkedAsComplete, categories);
     }
 
     @Override

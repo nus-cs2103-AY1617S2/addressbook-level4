@@ -2,7 +2,6 @@ package seedu.taskmanager.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,11 +13,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.taskmanager.model.TaskManager;
-import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.category.Category;
-import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -32,7 +29,7 @@ public class TaskManagerTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), taskManager.getTaskList());
-//        assertEquals(Collections.emptyList(), taskManager.getCategoryList());
+        // assertEquals(Collections.emptyList(), taskManager.getCategoryList());
     }
 
     @Test
@@ -53,36 +50,36 @@ public class TaskManagerTest {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.eatbreakfast twice
         List<Task> newTasks = Arrays.asList(new Task(td.eatbreakfast), new Task(td.eatbreakfast));
-//        List<Category> newCategories = td.alice.getCategories().asObservableList();
-        TaskManagerStub newData = new TaskManagerStub(newTasks/*, newCategories*/);
-
-        thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
-    }
-
-/*    @Test
-    public void resetData_withDuplicateCategories_throwsAssertionError() {
-        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
-        List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
-        List<Category> newCategories = new ArrayList<>(typicalTaskManager.getCategoryList());
-        // Repeat the first category twice
-        newCategories.add(newCategories.get(0));
+        List<Category> newCategories = td.eatbreakfast.getCategories().asObservableList();
         TaskManagerStub newData = new TaskManagerStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
     }
-*/
+
+    /*
+     * @Test public void
+     * resetData_withDuplicateCategories_throwsAssertionError() { TaskManager
+     * typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
+     * List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
+     * List<Category> newCategories = new
+     * ArrayList<>(typicalTaskManager.getCategoryList()); // Repeat the first
+     * category twice newCategories.add(newCategories.get(0)); TaskManagerStub
+     * newData = new TaskManagerStub(newTasks, newCategories);
+     *
+     * thrown.expect(AssertionError.class); taskManager.resetData(newData); }
+     */
     /**
-     * A stub ReadOnlyTaskManager whose tasks and categories lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose tasks and categories lists can violate
+     * interface constraints.
      */
     private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
-//        private final ObservableList<Category> categories = FXCollections.observableArrayList();
+        private final ObservableList<Category> categories = FXCollections.observableArrayList();
 
-        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks/*, Collection<? extends Category> categories*/) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Category> categories) {
             this.tasks.setAll(tasks);
-//            this.categories.setAll(categories);
+            this.categories.setAll(categories);
         }
 
         @Override
@@ -90,8 +87,9 @@ public class TaskManagerTest {
             return tasks;
         }
 
-//        @Override
-//        public ObservableList<Category> getCategoryList() {
-//            return categories;
+        @Override
+        public ObservableList<Category> getCategoryList() {
+            return categories;
         }
     }
+}

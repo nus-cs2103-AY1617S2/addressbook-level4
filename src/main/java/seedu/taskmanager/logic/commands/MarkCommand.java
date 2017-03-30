@@ -2,20 +2,11 @@ package seedu.taskmanager.logic.commands;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
-import seedu.taskmanager.commons.util.CollectionUtil;
-//import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
-import seedu.taskmanager.model.task.StartTime;
-import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.UniqueTaskList;
-//import seedu.taskmanager.model.category.UniqueCategoryList;
 
 //@@author A0139520L
 /**
@@ -30,7 +21,7 @@ public class MarkCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s";
+    public static final String MESSAGE_MARK_TASK_SUCCESS = "Task is marked as completed! : %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task has already been completed.";
     public static final String MESSAGE_ALREADY_MARKED = "This task is already marked as complete.";
 

@@ -55,7 +55,7 @@ public class Config {
             this.taskManagerFilePath = taskManagerFilePath;
         }
     }
-    
+
     // @@author
     public String getTaskManagerName() {
         return taskManagerName;
@@ -74,7 +74,7 @@ public class Config {
             super("Operation would result in duplicate tasks");
         }
     }
-    
+
     // @@author
     @Override
     public boolean equals(Object other) {

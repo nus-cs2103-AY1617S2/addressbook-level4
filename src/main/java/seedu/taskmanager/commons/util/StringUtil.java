@@ -3,21 +3,29 @@ package seedu.taskmanager.commons.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
+
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
-     *   <br>examples:<pre>
+     * Returns true if the {@code sentence} contains the {@code word}. Ignores
+     * case, but a full word match is required. <br>
+     * examples:
+     *
+     * <pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
      *       containsWordIgnoreCase("ABc def", "DEF") == true
      *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
-     *       </pre>
-     * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * </pre>
+     *
+     * @param sentence
+     *            cannot be null
+     * @param word
+     *            cannot be null, cannot be empty, must be a single word
      */
     public static boolean containsWordIgnoreCase(String sentence, String word) {
         assert word != null : "Word parameter cannot be null";
@@ -30,8 +38,31 @@ public class StringUtil {
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-        for (String wordInSentence: wordsInPreppedSentence) {
-            if (wordInSentence.equalsIgnoreCase(preppedWord)) return true;
+        for (String wordInSentence : wordsInPreppedSentence) {
+            if (wordInSentence.equalsIgnoreCase(preppedWord)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean containsWordIgnoreCase(UniqueCategoryList uniqueCategoryList, String word) {
+        assert word != null : "Word parameter cannot be null";
+        assert uniqueCategoryList != null : "Category parameter cannot be null";
+
+        String preppedWord = word.trim();
+        assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
+        assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
+
+        for (Category category : uniqueCategoryList) {
+            String preppedSentence = category.toCategory();
+            String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+            for (String wordInSentence : wordsInPreppedSentence) {
+                if (wordInSentence.equalsIgnoreCase(preppedWord)) {
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -48,9 +79,11 @@ public class StringUtil {
 
     /**
      * Returns true if s represents an unsigned integer e.g. 1, 2, 3, ... <br>
-     * Will return false if the string is:
-     * null, empty string, "-1", "0", "+1", and " 2 " (untrimmed) "3 0" (contains whitespace).
-     * @param s Should be trimmed.
+     * Will return false if the string is: null, empty string, "-1", "0", "+1",
+     * and " 2 " (untrimmed) "3 0" (contains whitespace).
+     *
+     * @param s
+     *            Should be trimmed.
      */
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");

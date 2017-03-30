@@ -232,7 +232,7 @@ In the event that you with to change the save location of the task manager, you 
 
 Format: `SAVE [File Location]`
 
-Examples: 
+Examples:
 * `SAVE C:\Users\<ACCOUNT NAME>\Desktop\` <br>
   Changes the save location of the task manager to your desktop.
 * `SAVE data\` <br>
@@ -243,7 +243,7 @@ Examples:
 Exits the program.<br>
 
 Format: `EXIT`
-  
+
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>

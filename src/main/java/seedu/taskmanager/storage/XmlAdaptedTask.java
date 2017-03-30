@@ -6,14 +6,15 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
+import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskName;
-//import seedu.taskmanager.model.category.Category;
-//import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * JAXB-friendly version of the Task.
@@ -23,12 +24,15 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String taskname;
     @XmlElement(required = true)
-    private String endTime;
+    private String startdate;
     @XmlElement(required = true)
-    private String startTime;
+    private String starttime;
     @XmlElement(required = true)
-    private String date;
-
+    private String enddate;
+    @XmlElement(required = true)
+    private String endtime;
+    @XmlElement(required = true)
+    private String markedCompleted;
     @XmlElement
     private List<XmlAdaptedCategory> categorised = new ArrayList<>();
 
@@ -48,13 +52,15 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         taskname = source.getTaskName().fullTaskName;
-        date = source.getDate().value;
-        startTime = source.getStartTime().value;
-        endTime = source.getEndTime().value;
-        // categorised = new ArrayList<>();
-        // for (Category category : source.getCategories()) {
-        // categorised.add(new XmlAdaptedCategory(category));
-        // }
+        startdate = source.getStartDate().value;
+        starttime = source.getStartTime().value;
+        enddate = source.getEndDate().value;
+        endtime = source.getEndTime().value;
+        markedCompleted = source.getIsMarkedAsComplete().toString();
+        categorised = new ArrayList<>();
+        for (Category category : source.getCategories()) {
+            categorised.add(new XmlAdaptedCategory(category));
+        }
     }
 
     /**
@@ -66,16 +72,18 @@ public class XmlAdaptedTask {
      *             task
      */
     public Task toModelType() throws IllegalValueException {
-        // final List<Category> taskCategories = new ArrayList<>();
-        // for (XmlAdaptedCategory category : categorised) {
-        // taskCategories.add(category.toModelType());
-        // }
-        final TaskName taskname = new TaskName(this.taskname);
-        final Date date = new Date(this.date);
-        final StartTime starttime = new StartTime(this.startTime);
-        final EndTime endtime = new EndTime(this.endTime);
-        // final UniqueCategoryList categories = new
-        // UniqueCategoryList(taskCategories);
-        return new Task(taskname, date, starttime, endtime/* , categories */);
+        final List<Category> taskCategories = new ArrayList<>();
+        for (XmlAdaptedCategory category : categorised) {
+            taskCategories.add(category.toModelType());
+        }
+
+        final TaskName taskName = new TaskName(this.taskname);
+        final StartDate startDate = new StartDate(this.startdate);
+        final StartTime startTime = new StartTime(this.starttime);
+        final EndDate endDate = new EndDate(this.enddate);
+        final EndTime endTime = new EndTime(this.endtime);
+        final Boolean markedCompleted = new Boolean(this.markedCompleted);
+        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
+        return new Task(taskName, startDate, startTime, endDate, endTime, markedCompleted, categories);
     }
 }
