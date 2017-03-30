@@ -114,19 +114,21 @@ public class AddCommandTest extends TodoListGuiTest {
     }
 
     private String getTomorrowtoString(Date dt) {
+        Date dtAssign = dt;
         Calendar c = Calendar.getInstance();
-        c.setTime(dt);
+        c.setTime(dtAssign);
         c.add(Calendar.DATE, 1);
-        dt = c.getTime();
+        dtAssign = c.getTime();
         DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        return dateFormat.format(dt);
+        return dateFormat.format(dtAssign);
     }
 
     private String getTodaytoString(Date dt) {
+        Date dtAssign = dt;
         Calendar c = Calendar.getInstance();
-        c.setTime(dt);
-        dt = c.getTime();
+        c.setTime(dtAssign);
+        dtAssign = c.getTime();
         DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        return dateFormat.format(dt);
+        return dateFormat.format(dtAssign);
     }
 }
