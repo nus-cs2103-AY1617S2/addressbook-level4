@@ -20,67 +20,66 @@ import javafx.scene.layout.Region;
  * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML = "PersonListPanel.fxml";
+	private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
+	private static final String FXML = "PersonListPanel.fxml";
 
-    private static final String FXMLPERSON = "PersonListCard.fxml";
-    private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
+	private static final String FXMLPERSON = "PersonListCard.fxml";
+	private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
 
-    @FXML
-    private ListView<ReadOnlyEvent> personListView;
+	@FXML
+	private ListView<ReadOnlyEvent> personListView;
 
-    public TaskListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyEvent> observableList) {
-        super(FXML);
-        setConnections(observableList);
-        addToPlaceholder(eventListPlaceholder);
-    }
+	public TaskListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyEvent> observableList) {
+		super(FXML);
+		setConnections(observableList);
+		addToPlaceholder(eventListPlaceholder);
+	}
 
-    private void setConnections(ObservableList<ReadOnlyEvent> observableList) {
-        personListView.setItems(observableList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
-        setEventHandlerForSelectionChangeEvent();
-    }
+	private void setConnections(ObservableList<ReadOnlyEvent> observableList) {
+		personListView.setItems(observableList);
+		personListView.setCellFactory(listView -> new PersonListViewCell());
+		setEventHandlerForSelectionChangeEvent();
+	}
 
-    private void addToPlaceholder(AnchorPane placeHolderPane) {
-        SplitPane.setResizableWithParent(placeHolderPane, false);
-        FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
-        placeHolderPane.getChildren().add(getRoot());
-    }
+	private void addToPlaceholder(AnchorPane placeHolderPane) {
+		SplitPane.setResizableWithParent(placeHolderPane, false);
+		FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
+		placeHolderPane.getChildren().add(getRoot());
+	}
 
-    private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new EventPanelSelectionChangedEvent(newValue));
-                    }
-                });
-    }
+	private void setEventHandlerForSelectionChangeEvent() {
+		personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+				raise(new EventPanelSelectionChangedEvent(newValue));
+			}
+		});
+	}
 
-    public void scrollTo(int index) {
-        Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
-        });
-    }
+	public void scrollTo(int index) {
+		Platform.runLater(() -> {
+			personListView.scrollTo(index);
+			personListView.getSelectionModel().clearAndSelect(index);
+		});
+	}
 
-    class PersonListViewCell extends ListCell<ReadOnlyEvent> {
+	class PersonListViewCell extends ListCell<ReadOnlyEvent> {
 
-        @Override
-        protected void updateItem(ReadOnlyEvent person, boolean empty) {
-            super.updateItem(person, empty);
+		@Override
+		protected void updateItem(ReadOnlyEvent person, boolean empty) {
+			super.updateItem(person, empty);
 
-            if (empty || person == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                if (person.getIsDone().getIsDone()) {
-                    setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSONDONE).getRoot());
-                } else {
-                    setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSON).getRoot());
-                }
-            }
-        }
-    }
+			if (empty || person == null) {
+				setGraphic(null);
+				setText(null);
+			} else {
+				if (person.getIsDone().getValue().equals("Yes")) {
+					setGraphic(new TaskCard(person, getIndex() + 1, FXMLPERSONDONE).getRoot());
+				} else {
+					setGraphic(new TaskCard(person, getIndex() + 1, FXMLPERSON).getRoot());
+				}
+			}
+		}
+	}
 
 }

@@ -20,7 +20,7 @@ public interface ReadOnlyEvent {
 		builder.append(getTitle()).append(MESSAGE_NEWLINE).append("Location: ").append(getLocation())
 				.append(MESSAGE_NEWLINE).append("Description: ").append(getDescription()).append(MESSAGE_NEWLINE)
 				.append("Time: ").append(getStartTime()).append(MESSAGE_HYPEN).append(getEndTime())
-				.append(MESSAGE_NEWLINE).append("Completed: ").append(getIsDone().value) // String.valueOf(isTaskDone())
+				.append(MESSAGE_NEWLINE).append("Completed: ").append(getIsDone().getValue()) // String.valueOf(isTaskDone())
 				.append(MESSAGE_NEWLINE).append("Tags: ");
 		getTags().forEach(builder::append);
 		return builder.toString();
@@ -28,21 +28,21 @@ public interface ReadOnlyEvent {
 
 	Title getTitle();
 
-	Date getDeadline();
-
 	Description getDescription();
 
 	Location getLocation();
-
-	Periodic getPeriod();
 
 	Schedule getStartTime();
 
 	Schedule getEndTime();
 
-	IsDone getIsDone();
+	Schedule getDeadline();
 
-	public boolean isTaskDone();
+	boolean hasDeadline();
+
+	boolean hasStartEndTime();
+
+	IsDone getIsDone();
 
 	public void markDone();
 

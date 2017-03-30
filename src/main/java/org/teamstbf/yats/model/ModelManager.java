@@ -1,5 +1,6 @@
 package org.teamstbf.yats.model;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager extends ComponentManager implements Model {
 
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+	private static final String UNDONE_TASK_IDENTIFIER = "No";
 
 	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 5;
 
@@ -54,6 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 		this.taskManager = new TaskManager(taskManager);
 		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
+		updateFilteredListToShowAll();
 		undoTaskManager = new Stack<TaskManager>();
 		redoTaskManager = new Stack<TaskManager>();
 	}
@@ -76,7 +79,7 @@ public class ModelManager extends ComponentManager implements Model {
 	 * remove half of the earlier saved states and only keep the later half.
 	 */
 	private void saveImageOfCurrentTaskManager() {
-		checkIfUndoStackSizeTooLarge();
+		removeUndoEntriesIfUndoStackSizeTooLarge();
 		TaskManager tempManager = new TaskManager();
 		tempManager.resetData(taskManager);
 		undoTaskManager.push(tempManager);
@@ -95,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
 	 * This method checks if the undo stack size is above the maximum allowed
 	 * size
 	 */
-	private void checkIfUndoStackSizeTooLarge() {
+	private void removeUndoEntriesIfUndoStackSizeTooLarge() {
 		if (undoTaskManager.size() >= MAXIMUM_SIZE_OF_UNDO_STACK) {
 			removeHalfOfUndoStack(undoTaskManager);
 		}
@@ -155,6 +158,8 @@ public class ModelManager extends ComponentManager implements Model {
 		indicateTaskManagerChanged();
 	}
 
+	// @@author
+
 	/*
 	 * @Override public synchronized void getNextState() { saveImage();
 	 * taskManager.resetData(redoTaskManager.pop()); }
@@ -176,6 +181,11 @@ public class ModelManager extends ComponentManager implements Model {
 	/** Raises an event to indicate the model has changed */
 	private void indicateTaskManagerChanged() {
 		raise(new TaskManagerChangedEvent(taskManager));
+	}
+
+	@Override
+	public void saveTaskManager() {
+		indicateTaskManagerChanged();
 	}
 
 	@Override
@@ -209,7 +219,10 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void updateFilteredListToShowAll() {
-		filteredEvents.setPredicate(null);
+		Set<String> undoneTaskIdentifier = new HashSet<String>();
+		undoneTaskIdentifier.add(UNDONE_TASK_IDENTIFIER);
+		updateFilteredListToShowDone(undoneTaskIdentifier);
+		// filteredEvents.setPredicate(null);
 	}
 
 	// @@author A0138952W
@@ -219,13 +232,18 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updateFilteredListToShowDate(Set<String> keywords) {
-		updateFilteredEventList(new PredicateExpression(new DateQualifier(keywords)));
+	public void updateFilteredListToShowEndTime(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new EndTimeQualifier(keywords)));
 	}
 
 	@Override
 	public void updateFilteredListToShowStartTime(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywords)));
+	}
+
+	@Override
+	public void updateFilteredListToShowDeadline(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new DeadlineQualifier(keywords)));
 	}
 
 	@Override
@@ -319,18 +337,18 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 	}
 
-	private class DateQualifier implements Qualifier {
+	private class EndTimeQualifier implements Qualifier {
 
 		private Set<String> dateKeyWords;
 
-		DateQualifier(Set<String> dateKeyWords) {
+		EndTimeQualifier(Set<String> dateKeyWords) {
 			this.dateKeyWords = dateKeyWords;
 		}
 
 		@Override
 		public boolean run(ReadOnlyEvent event) {
-			return dateKeyWords.stream().filter(
-					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().getDate().toString(), keyword))
+			return dateKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getEndTime().toString(), keyword))
 					.findAny().isPresent();
 		}
 
@@ -350,8 +368,29 @@ public class ModelManager extends ComponentManager implements Model {
 
 		@Override
 		public boolean run(ReadOnlyEvent event) {
-			return startTimeKeyWords.stream().filter(
-					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().getTime().toString(), keyword))
+			return startTimeKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
+					.findAny().isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "startTime=" + String.join(", ", startTimeKeyWords);
+		}
+	}
+
+	private class DeadlineQualifier implements Qualifier {
+
+		private Set<String> startTimeKeyWords;
+
+		DeadlineQualifier(Set<String> startTimeKeyWords) {
+			this.startTimeKeyWords = startTimeKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return startTimeKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDeadline().toString(), keyword))
 					.findAny().isPresent();
 		}
 
@@ -372,8 +411,8 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return doneKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().value, keyword)).findAny()
-					.isPresent();
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().getValue(), keyword))
+					.findAny().isPresent();
 		}
 
 		@Override

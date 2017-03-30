@@ -95,7 +95,7 @@ Examples:
   Returns `School`, `My`
 * `list by tag date1 tag2 Task3`<br>
   Returns any task that has the tags of the keywords `date1` , `tag2`  or `Task3`
-  
+
 ### 2.6 Finding tasks containing any keyword in title and description: `find`
 
 Shows the tasks that are linked to a specific string. <br>
@@ -153,7 +153,7 @@ Examples:
 * `list Task2`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `list` command.
-  
+
 ### 2.9. Mark task as done : `mark`
 
 Marks the specified task from the task scheduler as done.
@@ -168,7 +168,7 @@ Examples:
 
 * `mark 1`<br>
   Marks the 1st task in the task scheduler as done.
-  
+
 ### 2.10. Mark task as not done : `unmark`
 
 Marks the specified task from the task scheduler as done.
@@ -211,7 +211,7 @@ Format: `save`
 Example:
 
 * `save default`
-   Changes save location to the default file directory 
+   Changes save location to the default file directory
 * `save /Users/main/Desktop/data`
    Saves the data file of the task scheduler to /Users/main/Desktop/data/YATS.xml
 
@@ -262,10 +262,10 @@ Example:
 
 * **Mark as Done** : `mark INDEX` <br>
    e.g. `mark 1`
-   
+
 * **Mark as Not Done** : `unmark INDEX` <br>
    e.g. `unmark 1`
-   
+
 * **Clear Done Task** : `clear` <br>
    e.g. `clear`
 
@@ -278,7 +278,7 @@ Example:
 
 * **List** : `list` <br>
    e.g. `list`
-   
+
 * **Change Save Location** : `save` <br>
    e.g. `save default`
    e.g. `save /Users/main/Desktop/data`

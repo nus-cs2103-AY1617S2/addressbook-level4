@@ -2,8 +2,8 @@ package org.teamstbf.yats.testutil;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
-import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
@@ -46,11 +46,6 @@ public class EventBuilder {
 		return this;
 	}
 
-	public EventBuilder withPeriodic(String email) throws IllegalValueException {
-		this.task.setPeriod(new Periodic(email));
-		return this;
-	}
-
 	public EventBuilder withStartTime(String timing) throws IllegalValueException {
 		this.task.setStartTime(new Schedule(timing));
 		return this;
@@ -69,4 +64,13 @@ public class EventBuilder {
 		return this;
 	}
 
+	public EventBuilder withIsDone(String email) throws IllegalValueException {
+		this.task.setIsDone(new IsDone(email));
+		return this;
+	}
+
+	public EventBuilder withDeadline(String string) {
+		this.task.setDeadline(new Schedule(string));
+		return this;
+	}
 }

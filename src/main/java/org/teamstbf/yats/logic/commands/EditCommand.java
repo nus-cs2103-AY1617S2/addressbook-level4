@@ -1,12 +1,20 @@
 package org.teamstbf.yats.logic.commands;
 
+import static org.teamstbf.yats.model.item.Event.INDEX_FIRST_DATE;
+import static org.teamstbf.yats.model.item.Event.INDEX_SECOND_DATE;
+import static org.teamstbf.yats.model.item.Event.MESSAGE_TOO_MANY_TIME;
+import static org.teamstbf.yats.model.item.Event.SIZE_DEADLINE_TASK;
+import static org.teamstbf.yats.model.item.Event.SIZE_EVENT_TASK;
+import static org.teamstbf.yats.model.item.Event.SIZE_FLOATING_TASK;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.teamstbf.yats.commons.core.Messages;
+import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
-import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
@@ -28,7 +36,7 @@ public class EditCommand extends Command {
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
 			+ "by the index number used in the last task listing. "
 			+ "Existing values will be overwritten by the input values.\n"
-			+ "Parameters: INDEX (must be a positive integer) [s/START_TIME] [e/END_TIME] [d/DESCRIPTION] [t/TAGS]...\n"
+			+ "Parameters: INDEX (must be a positive integer) [, START to END TIME] [//DESCRIPTION] [#TAGS]...\n"
 			+ "Example: " + COMMAND_WORD + " 1 s/10:00am,10/10/2017 e/5:00pm,10/10/2017 d/lots of work to do t/school";
 
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -85,26 +93,26 @@ public class EditCommand extends Command {
 		Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
 		Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
 		Schedule updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
+		Schedule updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
 		Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-		Periodic updatedPeriodic = editTaskDescriptor.getPeriodic().orElseGet(taskToEdit::getPeriod);
 		UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 		if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
 			updatedTags.removeAndMerge(taskToEdit.getTags());
 		}
 		IsDone isDone = taskToEdit.getIsDone();
 
-		return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime, updatedEndTime,
+		return new Event(updatedName, updatedLocation, updatedStartTime, updatedEndTime, updatedDeadline,
 				updatedDescription, updatedTags, isDone);
 	}
 
 	/**
-	 * Stores the details to edit the task with. Each non-empty field value
-	 * will replace the corresponding field value of the task.
+	 * Stores the details to edit the task with. Each non-empty field value will
+	 * replace the corresponding field value of the task.
 	 */
 	public static class EditTaskDescriptor {
 		private Optional<Title> name = Optional.empty();
 		private Optional<Location> location = Optional.empty();
-		private Optional<Date> deadline = Optional.empty();
+		private Optional<Schedule> deadline = Optional.empty();
 		private Optional<Schedule> startTime = Optional.empty();
 		private Optional<Schedule> endTime = Optional.empty();
 		private Optional<Description> description = Optional.empty();
@@ -153,18 +161,44 @@ public class EditCommand extends Command {
 			return location;
 		}
 
-		public void setStartTime(Optional<Schedule> schedule) {
-			assert schedule != null;
-			this.startTime = schedule;
+		/*
+		 * Sets start and end time together for event, both start and end time
+		 * must present, i.e.times.get().size() is 2
+		 */
+		public void setTime(Optional<List<Date>> timeList) throws IllegalValueException {
+			assert timeList != null;
+			// Optional is not necessary, natty always returns a List, even when
+			// it is empty
+
+			if (!timeList.isPresent()) {
+				this.startTime = Optional.empty();
+				this.endTime = Optional.empty();
+				return;
+			}
+
+			List<Date> times = timeList.get();
+
+			if (times.size() > SIZE_EVENT_TASK) {
+				throw new IllegalValueException(MESSAGE_TOO_MANY_TIME);
+			} else if (times.size() == SIZE_EVENT_TASK) {
+				this.startTime = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
+				this.endTime = Optional.of(new Schedule(timeList.get().get(INDEX_SECOND_DATE)));
+				this.deadline = Optional.empty();
+			} else if (times.size() == SIZE_DEADLINE_TASK) {
+				this.startTime = Optional.empty();
+				this.endTime = Optional.empty();
+				this.deadline = Optional.of(new Schedule(timeList.get().get(INDEX_FIRST_DATE)));
+			} else if (times.size() == SIZE_FLOATING_TASK) {
+				this.startTime = Optional.empty();
+				this.endTime = Optional.empty();
+				this.deadline = Optional.empty();
+			} else {
+				throw new IllegalValueException(null);
+			}
 		}
 
 		public Optional<Schedule> getStartTime() {
 			return startTime;
-		}
-
-		public void setEndTime(Optional<Schedule> schedule) {
-			assert schedule != null;
-			this.endTime = schedule;
 		}
 
 		public Optional<Schedule> getEndTime() {
@@ -189,7 +223,7 @@ public class EditCommand extends Command {
 			return description;
 		}
 
-		public Optional<Date> getDeadline() {
+		public Optional<Schedule> getDeadline() {
 			return deadline;
 		}
 

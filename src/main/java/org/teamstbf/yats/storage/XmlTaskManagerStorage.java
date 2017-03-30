@@ -16,60 +16,71 @@ import org.teamstbf.yats.model.ReadOnlyTaskManager;
  */
 public class XmlTaskManagerStorage implements TaskManagerStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlTaskManagerStorage.class);
+	private static final Logger logger = LogsCenter.getLogger(XmlTaskManagerStorage.class);
 
-    private String filePath;
+	private static String filePath;
 
-    public XmlTaskManagerStorage(String filePath) {
-        this.filePath = filePath;
-    }
+	public XmlTaskManagerStorage(String filePath) {
+		XmlTaskManagerStorage.filePath = filePath;
+	}
 
-    public String getTaskManagerFilePath() {
-        return filePath;
-    }
+	@Override
+	public String getTaskManagerFilePath() {
+		return filePath;
+	}
 
-    @Override
-    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-        return readTaskManager(filePath);
-    }
+	public static String getFilePath() {
+		return filePath;
+	}
 
-    /**
-     * Similar to {@link #readTaskManager()}
-     * @param filePath location of the data. Cannot be null
-     * @throws DataConversionException if the file is not in the correct format.
-     */
-    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
-        assert filePath != null;
+	public static void setTaskManagerFilePath(String newFilePath) {
+		XmlTaskManagerStorage.filePath = newFilePath;
+	}
 
-        File addressBookFile = new File(filePath);
+	@Override
+	public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
+		return readTaskManager(filePath);
+	}
 
-        if (!addressBookFile.exists()) {
-            logger.info("TaskManager file "  + addressBookFile + " not found");
-            return Optional.empty();
-        }
+	/**
+	 * Similar to {@link #readTaskManager()}
+	 * @param filePath location of the data. Cannot be null
+	 * @throws DataConversionException if the file is not in the correct format.
+	 */
+	@Override
+	public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException,
+	FileNotFoundException {
+		assert filePath != null;
 
-        ReadOnlyTaskManager addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+		File addressBookFile = new File(filePath);
 
-        return Optional.of(addressBookOptional);
-    }
+		if (!addressBookFile.exists()) {
+			logger.info("TaskManager file "  + addressBookFile + " not found");
+			return Optional.empty();
+		}
 
-    @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-        saveTaskManager(taskManager, filePath);
-    }
+		ReadOnlyTaskManager addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-    /**
-     * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
-     * @param filePath location of the data. Cannot be null
-     */
-    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
-        assert taskManager != null;
-        assert filePath != null;
+		return Optional.of(addressBookOptional);
+	}
 
-        File file = new File(filePath);
-        FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
-    }
+	@Override
+	public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+		saveTaskManager(taskManager, filePath);
+	}
+
+	/**
+	 * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
+	 * @param filePath location of the data. Cannot be null
+	 */
+	@Override
+	public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+		assert taskManager != null;
+		assert filePath != null;
+
+		File file = new File(filePath);
+		FileUtil.createIfMissing(file);
+		XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
+	}
 
 }

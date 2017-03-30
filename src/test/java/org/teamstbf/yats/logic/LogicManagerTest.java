@@ -40,10 +40,10 @@ import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
-import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
+import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 import org.teamstbf.yats.storage.StorageManager;
@@ -60,14 +60,15 @@ public class LogicManagerTest {
 		Event adam() throws Exception {
 			Title name = new Title("sleep");
 			Location location = new Location("bed");
-			Periodic period = new Periodic("none");
-			Schedule startTime = new Schedule("12:00am");
-			Schedule endTime = new Schedule("8:00am");
+			Schedule startTime = new Schedule("11:59PM 08/04/2017");
+			Schedule endTime = new Schedule("11:59PM 08/04/2017");
+			Schedule deadline = new Schedule("");
 			Description description = new Description("oh no can't sleep i'm tired");
 			Tag tag1 = new Tag("tag1");
 			Tag tag2 = new Tag("longertag2");
 			UniqueTagList tags = new UniqueTagList(tag1, tag2);
-			return new Event(name, location, period, startTime, endTime, description, tags);
+			IsDone isDone = new IsDone("Yes");
+			return new Event(name, location, startTime, endTime, deadline, description, tags, isDone);
 		}
 
 		/**
@@ -156,10 +157,10 @@ public class LogicManagerTest {
 		 *            used to generate the person data field values
 		 */
 		Event generatePerson(int seed) throws Exception {
-			return new Event(new Title("person" + seed), new Location("bed" + seed), new Periodic("none"),
-					new Schedule("12:00am"), new Schedule("8:00am"),
+			return new Event(new Title("person" + seed), new Location("bed" + seed),
+					new Schedule("11:59PM 08/04/2017"), new Schedule("11:59PM 08/04/2017"),new Schedule(""),
 					new Description("oh no can't sleep i'm tired" + seed),
-					new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
+					new UniqueTagList(new Tag("tag" + Math.abs(seed))),new IsDone("Yes"));
 		}
 
 		List<Event> generatePersonList(Event... persons) {
@@ -182,8 +183,8 @@ public class LogicManagerTest {
 		 * some dummy values.
 		 */
 		Event generatePersonWithName(String name) throws Exception {
-			return new Event(new Title(name), new Location("home"), new Periodic("daily"), new Schedule("7:00am"),
-					new Schedule("9:00am"), new Description("House of 1"), new UniqueTagList(new Tag("tag")));
+			return new Event(new Title(name), new Location("home"), new Schedule(""),
+					new Schedule(""), new Schedule("11:59PM 08/04/2017"), new Description("House of 1"), new UniqueTagList(new Tag("tag")), new IsDone("No"));
 		}
 	}
 

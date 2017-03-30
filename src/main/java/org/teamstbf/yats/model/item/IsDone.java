@@ -4,39 +4,43 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's completeness in the Task Manager.
- * is valid as declared in {@link #isValidPeriod(String)}
  */
-//@author A0139448U
+// @@author A0139448U
 public class IsDone {
+
+	public static final String MESSAGE_ISDONE_CONSTRAINTS = "IsDone must be Yes or No";
+	public static final String ISDONE_VALIDATION_REGEX = ".*(Yes|No).*";
 
 	public final static String ISDONE_NOTDONE = "No";
 	public final static String ISDONE_DONE = "Yes";
 
-	private boolean isDone;
-	public String value;
+	private String value;
 
 	public IsDone() {
-		this.isDone = false;
 		this.value = ISDONE_NOTDONE;
 	}
 
-	public IsDone(String done) throws IllegalValueException{
-		assert done != null;
-		this.value = done;
-		if (this.value == ISDONE_DONE) {
-			this.isDone = true;
+	public IsDone(String done) throws IllegalValueException {
+		String trimmedIsDone = done.trim();
+		if (!isValidIsDone(trimmedIsDone)) {
+			throw new IllegalValueException(MESSAGE_ISDONE_CONSTRAINTS);
 		}
-		if (this.value == ISDONE_NOTDONE) {
-			this.isDone = false;
-		}
+		this.value = trimmedIsDone;
 	}
 
-	public boolean getIsDone() {
-		return isDone;
+	public static boolean isValidIsDone(String test) {
+		return test.matches(ISDONE_VALIDATION_REGEX);
+	}
+
+	public String getValue() {
+		return value;
 	}
 
 	public void markDone() {
-		this.isDone = true;
 		this.value = ISDONE_DONE;
+	}
+
+	public void markUndone() {
+		this.value = ISDONE_NOTDONE;
 	}
 }

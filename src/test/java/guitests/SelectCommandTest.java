@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
 
 public class SelectCommandTest extends TaskManagerGuiTest {
 

@@ -119,7 +119,7 @@ public class UniqueTagList implements Iterable<Tag> {
 	 * Brings over all the additional tags from argument list but removes any
 	 * that is both in list and the argument list
 	 */
-	//@@author A0139448U
+	// @@author A0139448U
 	public void removeAndMerge(UniqueTagList from) {
 		final Set<Tag> alreadyInside = this.toSet();
 		from.internalList.stream().filter(tag -> alreadyInside.contains(tag)).forEach(internalList::remove);
