@@ -10,6 +10,10 @@ import project.taskcrusher.logic.commands.MarkCommand;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.task.Task;
 
+//@@author Anshul
+/**
+ * Parser for mark command. If successful, parses flag, index and mark-mode (c or ic)
+ */
 public class MarkCommandParser {
     public Command parse(String args) {
         String[] preamble = args.trim().split("\\s+");

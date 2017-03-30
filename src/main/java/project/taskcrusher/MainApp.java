@@ -191,6 +191,7 @@ public class MainApp extends Application {
         this.stop();
     }
 
+    //@@author A0127737X
     @Subscribe
     public void handleLoadNewStorageFileEvent(LoadNewStorageFileEvent lnsfe) {
         logger.info("Attempting to change storage file to  " + lnsfe.filePathToLoad);

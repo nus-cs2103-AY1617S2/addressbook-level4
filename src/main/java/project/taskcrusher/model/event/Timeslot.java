@@ -5,6 +5,7 @@ import java.util.Date;
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.shared.DateUtilApache;
 
+//@@author Brea
 /**
  * Represents a timeslot for an event from {@code start} to {@code end}
  */

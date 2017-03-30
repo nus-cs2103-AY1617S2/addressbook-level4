@@ -7,8 +7,9 @@ import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 
+//@@author Anshul
 /**
- * Mark an active task/event as done.
+ * Mark an active task/event as complete or incomplete.
  */
 public class MarkCommand extends Command {
 

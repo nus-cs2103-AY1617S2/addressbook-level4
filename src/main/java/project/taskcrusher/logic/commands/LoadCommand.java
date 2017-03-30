@@ -9,6 +9,7 @@ import project.taskcrusher.commons.events.storage.LoadNewStorageFileEvent;
 import project.taskcrusher.commons.util.FileUtil;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 
+//@@author A0127737X
 /** loads a new xml storage file. If the file does not exist, create a new one and set it as the storage file
  *  This is achieved by posting LoadNewStorageFileEvent which is handled at the high-level MainApp instance.
  */

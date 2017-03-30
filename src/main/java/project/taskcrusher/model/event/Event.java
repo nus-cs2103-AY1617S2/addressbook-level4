@@ -10,6 +10,10 @@ import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.tag.UniqueTagList;
 
+//@@author A0127737X
+/**
+ * Represents a user event that is bound to one or more specific timeslots
+ */
 public class Event extends UserToDo implements ReadOnlyEvent {
 
     public static final String EVENT_FLAG = "e";

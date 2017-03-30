@@ -9,6 +9,7 @@ import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.tag.UniqueTagList;
 
+//@@author A0127737X
 /**
  * Represents an active task. Guarantees: details are present and not null (just
  * empty in <Optional>), field values are validated.

@@ -9,6 +9,10 @@ import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.exceptions.DuplicateDataException;
 import project.taskcrusher.logic.commands.MarkCommand;
 
+/**
+ * stores a list of events that contain no duplicates. At any point in time, the list is sorted
+ * by the earliest timeslot.
+ */
 public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();

@@ -2,6 +2,7 @@ package project.taskcrusher.model.event;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 
+//@@author Brea
 /**
  * stores the location of an event. Location field is optional for an event.
  */

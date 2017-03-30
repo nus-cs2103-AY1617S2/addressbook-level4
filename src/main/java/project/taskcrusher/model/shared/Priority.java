@@ -2,6 +2,7 @@ package project.taskcrusher.model.shared;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 
+//@@author Brea
 /**
  * Represents a Task's priority. Can take on values from 1 to 3
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}

@@ -4,6 +4,7 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.tag.UniqueTagList;
 
+//@@author A0127737X
 /** Acts as a parent class of Event and Task. Represents some "thing" that user is going to do
  *  at "some point in time" i.e. no notion of time introduced yet.
  */
@@ -21,7 +22,7 @@ public class UserToDo implements ReadOnlyUserToDo {
             try {
                 this.priority = new Priority("1");
             } catch (IllegalValueException e) {
-                // TODO Auto-generated catch block
+                // TODO Auto-generated catch block. Used for events in the future that supports priority
                 e.printStackTrace();
             }
         } else {

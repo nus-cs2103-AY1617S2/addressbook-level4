@@ -15,8 +15,9 @@ import project.taskcrusher.model.task.Deadline;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 
+//@@author A0127737X
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of Task.
  */
 public class XmlAdaptedTask {
 
@@ -89,7 +90,7 @@ public class XmlAdaptedTask {
 
         if (isComplete) {
             thisTask.markComplete();
-            System.out.println("marked as complete during storage: "  + thisTask.isComplete());
+            //System.out.println("marked as complete during storage: "  + thisTask.isComplete());
         }
         return thisTask;
     }

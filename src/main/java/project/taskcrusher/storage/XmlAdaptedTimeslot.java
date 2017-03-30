@@ -6,6 +6,10 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.DateUtilApache;
 
+//@@author A0127737X
+/**
+ * JAXB-friendly version of Timeslot.
+ */
 public class XmlAdaptedTimeslot {
 
     @XmlElement(required = true)

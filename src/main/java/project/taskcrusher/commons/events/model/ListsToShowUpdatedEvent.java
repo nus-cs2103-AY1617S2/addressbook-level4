@@ -2,6 +2,10 @@ package project.taskcrusher.commons.events.model;
 
 import project.taskcrusher.commons.events.BaseEvent;
 
+//@@author A0127737X
+/**
+ * Used to signal UserInboxPanel when one or both of the lists to show is/are empty.
+ */
 public class ListsToShowUpdatedEvent extends BaseEvent {
 
     public final boolean eventListToShowEmpty;

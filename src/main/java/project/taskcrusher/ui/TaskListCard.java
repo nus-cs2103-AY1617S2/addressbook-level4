@@ -8,6 +8,10 @@ import javafx.scene.layout.Region;
 import project.taskcrusher.model.shared.DateUtilApache;
 import project.taskcrusher.model.task.ReadOnlyTask;
 
+//@@author A0127737X
+/**
+ * Controller for TaskListCard.fxml. Reads a ReadOnlyTask and create the layout accordingly.
+ */
 public class TaskListCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";

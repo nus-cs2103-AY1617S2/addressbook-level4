@@ -8,6 +8,10 @@ import javafx.scene.layout.Region;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.shared.DateUtilApache;
 
+//@@author A0127737X
+/**
+ * Controller for EventListCard.fxml. Reads a ReadOnlyEvent and create the layout accordingly.
+ */
 public class EventListCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";

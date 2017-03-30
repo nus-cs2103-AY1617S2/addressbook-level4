@@ -2,6 +2,7 @@ package project.taskcrusher.model.shared;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 
+//@@author Brea
 /**
  * Represents a Task's name in the user inbox.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}

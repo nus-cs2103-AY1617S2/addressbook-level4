@@ -77,7 +77,6 @@ public class UserInboxPanel extends UiPart<Region> {
         });
     }
 
-    ////what if both are empty => default window? maybe like 404 not found?
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
@@ -108,9 +107,10 @@ public class UserInboxPanel extends UiPart<Region> {
         }
     }
 
+    //@@author A0127737X
     @Subscribe
     public void handleListsToShowUpdatedEvent(ListsToShowUpdatedEvent event) {
-        logger.info("Handling ListstoShowUpdatedEvent");
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.eventListToShowEmpty) {
             eventListView.setManaged(SET_LIST_HIDDEN);
             eventListView.setVisible(SET_LIST_HIDDEN);

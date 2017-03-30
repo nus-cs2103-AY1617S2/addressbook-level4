@@ -55,6 +55,10 @@ public class DateUtilApache {
         }
     }
 
+    //@@author A0127737X
+    /**
+     * returns a string representation of the given Date in a user-friendly format
+     */
     public static String deadlineAsStringForUi(Date date) {
         assert date != null;
         SimpleDateFormat formatter;

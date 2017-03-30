@@ -16,6 +16,10 @@ import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.tag.UniqueTagList;
 
+//@@author A0127737X
+/**
+ * JAXB-friendly version of Event.
+ */
 public class XmlAdaptedEvent {
 
     /* Inherited attributes from UserToDo*/
