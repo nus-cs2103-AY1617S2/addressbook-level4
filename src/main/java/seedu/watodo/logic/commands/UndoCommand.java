@@ -1,8 +1,5 @@
 package seedu.watodo.logic.commands;
 
-import seedu.watodo.model.TaskManager;
-import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
-
 /**
  * Clears the task manager.
  */
@@ -20,13 +17,12 @@ public class UndoCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         Command previousCommand = model.getPreviousCommand();
-        
+
         if (previousCommand != null) {
-                previousCommand.unexecute();
-            
+            previousCommand.unexecute();
             return new CommandResult(MESSAGE_SUCCESS);
         }
-        
+
         return new CommandResult(MESSAGE_EMPTY);
     }
 }

@@ -9,6 +9,7 @@ import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
+//@@author A0141077L
 /**
  * Marks a task identified using it's last displayed index from the task manager
  * as completed.
@@ -71,13 +72,13 @@ public class MarkCommand extends Command {
 
         return new CommandResult(tasksMarkedMessage.toString());
     }
-    
+
     @Override
     public void unexecute() {
         try {
             model.updateTask(undoMarkInt, undoMark);
         } catch (DuplicateTaskException e) {
-            
+
         }
     }
 

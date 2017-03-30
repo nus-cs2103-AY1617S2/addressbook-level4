@@ -9,6 +9,7 @@ import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
+//@@author A0141077L-reused
 /**
  * Marks a task identified using it's last displayed index from the task manager
  * as undone.
@@ -27,7 +28,7 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_STATUS_UNDONE = "The task status is already set to Undone.";
 
     private int[] filteredTaskListIndices;
-    
+
     private Task undoUnmark;
     private int undoUnmarkInt;
 
@@ -72,13 +73,13 @@ public class UnmarkCommand extends Command {
 
         return new CommandResult(tasksUnmarkedMessage.toString());
     }
-    
+
     @Override
     public void unexecute() {
         try {
             model.updateTask(undoUnmarkInt, undoUnmark);
         } catch (DuplicateTaskException e) {
-        
+
         }
     }
 
