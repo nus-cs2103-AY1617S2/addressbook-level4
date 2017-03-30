@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.taskmanager.commons.util.FxViewUtil;
-import seedu.taskmanager.model.task.ReadOnlyTask;
+//import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * The Browser Panel of the App.
@@ -32,12 +32,12 @@ public class BrowserPanel extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
     }
-
+/*
     public void loadTaskPage(ReadOnlyTask task) {
         // loadPage("https://www.google.com.sg/#safe=off&q=" +
         // task.getTaskName().fullTaskName.replaceAll(" ", "+"));
 
-    }
+    }*/
     /*
      * public void loadPage(String url) { browser.getEngine().load(url); }
      */

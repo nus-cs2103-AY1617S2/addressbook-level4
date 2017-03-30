@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+//    private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private Config config;
 /*
@@ -198,11 +198,11 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-
+/*
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
     }
-/*
+
     void releaseResources() {
         browserPanel.freeResources();
     }
