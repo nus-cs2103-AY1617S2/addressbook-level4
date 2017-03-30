@@ -4,6 +4,7 @@
         <name>guard duty</name>
         <startDate>Start: 2017-03-30 15:00</startDate>
         <endDate>End: 2017-03-30 16:00</endDate>
+        <recur>monthly</recur>
         <priority>LOW</priority>
         <description>bring weapon</description>
         <isDone>false</isDone>
@@ -12,8 +13,9 @@
     </tasks>
     <tasks>
         <name>study at home</name>
-        <startDate>Start: 2018-03-10 01:49</startDate>
+        <startDate>Start: 2018-03-10 20:36</startDate>
         <endDate>End: 2018-03-13 23:59</endDate>
+        <recur>weekly</recur>
         <priority>LOW</priority>
         <description></description>
         <isDone>false</isDone>
@@ -24,6 +26,7 @@
         <name>meet boss</name>
         <startDate>Start: 2018-03-10 08:00</startDate>
         <endDate>End: 2018-03-10 12:00</endDate>
+        <recur></recur>
         <priority>HIGH</priority>
         <description></description>
         <isDone>false</isDone>
@@ -32,6 +35,7 @@
         <name>submit cs2101 reflection</name>
         <startDate></startDate>
         <endDate>End: 2017-03-30 02:00</endDate>
+        <recur></recur>
         <priority>LOW</priority>
         <description>use the 7 C</description>
         <isDone>false</isDone>
@@ -41,6 +45,7 @@
         <name>complete 2103 tutorial</name>
         <startDate></startDate>
         <endDate>End: 2017-03-31 23:59</endDate>
+        <recur>weekly</recur>
         <priority>LOW</priority>
         <description>bring laptop</description>
         <isDone>false</isDone>
@@ -51,6 +56,7 @@
         <name>finish assignments</name>
         <startDate></startDate>
         <endDate>End: 2017-03-30 23:00</endDate>
+        <recur>monthly</recur>
         <priority>LOW</priority>
         <description></description>
         <isDone>false</isDone>
@@ -59,6 +65,7 @@
         <name>buy new bag</name>
         <startDate></startDate>
         <endDate></endDate>
+        <recur></recur>
         <priority>LOW</priority>
         <description>find cheap ones</description>
         <isDone>false</isDone>
@@ -70,6 +77,7 @@
         <name>change shirt</name>
         <startDate></startDate>
         <endDate></endDate>
+        <recur></recur>
         <priority>LOW</priority>
         <description></description>
         <isDone>false</isDone>
@@ -81,6 +89,7 @@
         <name>change pants</name>
         <startDate></startDate>
         <endDate></endDate>
+        <recur></recur>
         <priority>LOW</priority>
         <description></description>
         <isDone>false</isDone>

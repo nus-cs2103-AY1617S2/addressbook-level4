@@ -124,7 +124,7 @@ public class TaskCard extends UiPart<Region> {
             description.setMaxHeight(0);
         }
     }
-    
+
     private void setRecur(ReadOnlyTask task) {
         String recurText = task.getRecur().value;
         recur.setText(recurText);

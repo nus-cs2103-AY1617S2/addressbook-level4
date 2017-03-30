@@ -105,7 +105,15 @@ public class ModelManager extends ComponentManager implements Model {
             throw new IllegalValueException("This task has been done");
         }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        toDoList.doneTask(taskToComplete);
+        if(!taskToComplete.hasRecur()) {
+            toDoList.doneTask(taskToComplete);
+        } else {
+            ReadOnlyTask newTask = new Task(taskToComplete);
+            Task newwTask = (Task)newTask;
+            newwTask.forwardTaskRecurDate();
+            toDoList.doneTask(taskToComplete);
+            toDoList.addTask(newwTask);
+        }
         history.saveUndoInformationAndClearRedoHistory(DoneCommand.COMMAND_WORD, taskToComplete, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
@@ -309,6 +317,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
     public FilteredList<ReadOnlyTask> getFilteredByDoneFindType(TaskType type) {
         // update by find before getting
         updateBySearchStrings();
@@ -328,6 +337,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
     public int getTaskIndex(ReadOnlyTask task) {
         FilteredList<ReadOnlyTask> filtered = getFilteredByDoneFindType(task.getTaskType());
         return filtered.indexOf(task);
@@ -349,6 +359,7 @@ public class ModelManager extends ComponentManager implements Model {
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
 
+        @Override
         String toString();
     }
 
@@ -374,6 +385,7 @@ public class ModelManager extends ComponentManager implements Model {
     interface Qualifier {
         boolean run(ReadOnlyTask task);
 
+        @Override
         String toString();
     }
 

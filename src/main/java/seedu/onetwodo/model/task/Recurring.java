@@ -23,7 +23,6 @@ public class Recurring {
      */
     public Recurring(String recur) throws IllegalValueException {
         assert recur != null;
-        if(recur == null) System.out.println("null LA!");
         String lowerCaseRecur = recur.toLowerCase().trim();
         if (!isValidRecurring(lowerCaseRecur)) {
             throw new IllegalValueException(RECURRING_CONSTRAINTS);
@@ -36,7 +35,8 @@ public class Recurring {
      * Checks if user input a valid recurring period.
      */
     public static boolean isValidRecurring(String userInput) {
-        return userInput.equals(RECUR_DAILY) ||
+        return userInput.isEmpty() ||
+               userInput.equals(RECUR_DAILY) ||
                userInput.equals(RECUR_WEEKLY) ||
                userInput.equals(RECUR_MONTHLY) ||
                userInput.equals(RECUR_YEARLY);

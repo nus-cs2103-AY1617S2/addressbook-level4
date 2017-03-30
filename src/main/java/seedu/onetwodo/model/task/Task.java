@@ -184,11 +184,12 @@ public class Task implements ReadOnlyTask {
 
     public void setDone() {
         assert isDone == false;
-        if (!this.hasRecur()) {
+/*        if (!this.hasRecur()) {
             isDone = true;
         } else {
-            updateTaskRecurDate();
-        }
+            forwardTaskRecurDate();
+        }*/
+        isDone = true;
     }
 
     public void setToday() {
@@ -223,7 +224,8 @@ public class Task implements ReadOnlyTask {
     }
 
     //@@author A0139343E
-    private void updateTaskRecurDate() {
+    public void forwardTaskRecurDate() {
+        System.out.println("run once");
         assert this.getTaskType() != TaskType.TODO;
         StartDate tempStartDate;
         EndDate tempEndDate = getEndDate();
@@ -254,6 +256,44 @@ public class Task implements ReadOnlyTask {
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
                 this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().plusYears(1));
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    public void reverseTaskRecurDate() {
+        assert this.getTaskType() != TaskType.TODO;
+        StartDate tempStartDate;
+        EndDate tempEndDate = getEndDate();
+        switch(this.getRecur().value) {
+        case Recurring.RECUR_DAILY:
+            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().minusDays(1));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().minusDays(1));
+            }
+            break;
+        case Recurring.RECUR_WEEKLY:
+            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().minusWeeks(1));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().minusWeeks(1));
+            }
+            break;
+        case Recurring.RECUR_MONTHLY:
+            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().minusMonths(1));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().minusMonths(1));
+            }
+            break;
+        case Recurring.RECUR_YEARLY:
+            this.getEndDate().setLocalDateTime(tempEndDate.localDateTime.get().minusYears(1));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.getStartDate().setLocalDateTime(tempStartDate.localDateTime.get().minusYears(1));
             }
             break;
         default:
