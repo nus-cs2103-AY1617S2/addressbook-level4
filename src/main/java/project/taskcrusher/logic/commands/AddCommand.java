@@ -21,6 +21,7 @@ import project.taskcrusher.model.task.Deadline;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
 
+//@@author A0163962X
 /**
  * Adds a task to user inbox.
  */
@@ -36,10 +37,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_TASK_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_EVENT_SUCCESS = "New event added: %1$s";
 
-    public static final String MESSAGE_EVENT_CLASHES = "This event clashes with a preexisting event";
-
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the active list";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the active list";
+
+    public static final String MESSAGE_EVENT_CLASHES = "This event clashes with a preexisting event";
 
     private final Task taskToAdd;
     private final Event eventToAdd;

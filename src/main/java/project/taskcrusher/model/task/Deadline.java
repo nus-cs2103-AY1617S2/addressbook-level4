@@ -7,7 +7,7 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.DateUtilApache;
 
-//@@author Brea
+//@@author A0163962X
 /**
  * Represents a deadline for a task. Empty deadline means no deadline.
  */
