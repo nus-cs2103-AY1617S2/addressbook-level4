@@ -2,6 +2,7 @@ package seedu.taskmanager.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -46,9 +47,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().value;
-        startDate = source.getStartDate().toString();
-        endDate = source.getEndDate().toString();
-        description = source.getDescription().value;
+        startDate = source.getStartDate().isPresent() ? source.getStartDate().get().toFullDateString() : null;
+        endDate = source.getEndDate().isPresent() ? source.getEndDate().get().toFullDateString() : null;
+        description = source.getDescription().isPresent() ? source.getDescription().get().value : null;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -60,16 +61,19 @@ public class XmlAdaptedTask {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
+    // @@author A0140032E
     public Task toModelType() throws IllegalValueException {
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.title);
-        final StartDate startDate = new StartDate(this.startDate);
-        final EndDate endDate = new EndDate(this.endDate);
-        final Description description = new Description(this.description);
+        final StartDate startDate = this.startDate == null ? null : new StartDate(this.startDate);
+        final EndDate endDate = this.endDate == null ? null : new EndDate(this.endDate);
+        final Description description = this.description == null ? null : new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, startDate, endDate, description, tags);
+        return new Task(title, Optional.ofNullable(startDate), Optional.ofNullable(endDate),
+                Optional.ofNullable(description), tags);
     }
+    // @@author
 }

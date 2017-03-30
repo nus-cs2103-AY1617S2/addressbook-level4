@@ -1,5 +1,7 @@
 package seedu.taskmanager.testutil;
 
+import java.util.Optional;
+
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
@@ -13,9 +15,11 @@ import seedu.taskmanager.model.task.Title;
 public class TestTask implements ReadOnlyTask {
 
     private Title title;
-    private Description description;
-    private EndDate endDate;
-    private StartDate startDate;
+    // @@author A0140032E
+    private Optional<Description> description;
+    private Optional<EndDate> endDate;
+    private Optional<StartDate> startDate;
+    // @@author
     private UniqueTagList tags;
 
     public TestTask() {
@@ -37,15 +41,15 @@ public class TestTask implements ReadOnlyTask {
         this.title = title;
     }
 
-    public void setDescription(Description description) {
+    public void setDescription(Optional<Description> description) {
         this.description = description;
     }
 
-    public void setEndDate(EndDate endDate) {
+    public void setEndDate(Optional<EndDate> endDate) {
         this.endDate = endDate;
     }
 
-    public void setStartDate(StartDate startDate) {
+    public void setStartDate(Optional<StartDate> startDate) {
         this.startDate = startDate;
     }
 
@@ -59,17 +63,17 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public StartDate getStartDate() {
+    public Optional<StartDate> getStartDate() {
         return startDate;
     }
 
     @Override
-    public EndDate getEndDate() {
+    public Optional<EndDate> getEndDate() {
         return endDate;
     }
 
     @Override
-    public Description getDescription() {
+    public Optional<Description> getDescription() {
         return description;
     }
 
@@ -86,9 +90,11 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().value + " ");
-        sb.append("s/" + this.getStartDate().toString() + " ");
-        sb.append("e/" + this.getEndDate().toString() + " ");
-        sb.append("d/" + this.getDescription().value + " ");
+        // @@author A0140032E
+        this.getStartDate().ifPresent(x -> sb.append("s/" + x.toString()));
+        this.getEndDate().ifPresent(x -> sb.append("e/" + x.toString()));
+        this.getDescription().ifPresent(x -> sb.append("d/" + x.toString()));
+        // @@author
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }

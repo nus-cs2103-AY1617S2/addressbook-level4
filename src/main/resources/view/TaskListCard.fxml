@@ -37,8 +37,8 @@
                         </HBox>
                         <FlowPane fx:id="tags" />
                         <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" wrapText="true" />
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
                         <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" wrapText="true" />
+                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
                     </children>
                 </VBox>
             </children>

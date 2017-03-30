@@ -3,11 +3,19 @@ package seedu.taskmanager.commons.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
 
+    // @@author A0140032E
+    private static final int TOLERANCE_SIMPLE_RATIO = 75;
+    private static final int TOLERANCE_PARTIAL_RATIO = 75;
+    private static final int TOLERANCE_TOKEN_SORT_PARTIAL_RATIO = 75;
+    private static final int TOLERANCE_TOKEN_SORT_RATIO = 75;
+    // @@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -31,8 +39,23 @@ public class StringUtil {
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         for (String wordInSentence: wordsInPreppedSentence) {
-            if (wordInSentence.equalsIgnoreCase(preppedWord)) return true;
+            if (wordInSentence.equalsIgnoreCase(preppedWord)) {
+                return true;
+            }
         }
+
+        // @@author A0140032E
+        int simpleRatio = FuzzySearch.ratio(preppedSentence, preppedWord);
+        int partialRatio = FuzzySearch.partialRatio(preppedSentence, preppedWord);
+        int tokenSortPartialRatio = FuzzySearch.tokenSortPartialRatio(preppedSentence, preppedWord);
+        int tokenSortRatio = FuzzySearch.tokenSortRatio(preppedSentence, preppedWord);
+        if (simpleRatio >= TOLERANCE_SIMPLE_RATIO ||
+                partialRatio >= TOLERANCE_PARTIAL_RATIO ||
+                tokenSortPartialRatio >= TOLERANCE_TOKEN_SORT_PARTIAL_RATIO ||
+                tokenSortRatio >= TOLERANCE_TOKEN_SORT_RATIO) {
+            return true;
+        }
+        // @@author
         return false;
     }
 

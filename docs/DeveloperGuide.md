@@ -245,6 +245,8 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 Tests can be found in the `./src/test/java` folder.
 
+Test
+
 **In Eclipse**:
 
 * To run all tests, right-click on the `src/test/java` folder and choose
@@ -390,7 +392,7 @@ Priority | As a ... | I want to ... | So that I can...
 1. User requests to list tasks
 2. TaskManager shows a list of tasks
 3. User requests to delete a specific task in the list
-4. TaskManager deletes the person <br>
+4. TaskManager deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -582,15 +584,14 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance (5 seconds lag for 
+   most modern PCs) for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The instructions for command format should be concise and intuitive enough for a new user to pick up.
 5. Commands should be processed within one second.
 6. User should always receive a feedback when a command is typed, even for invalid commands and unsuccessful processes.
 7. All functional methods should be documented properly.
-
-{More to be added}
 
 ## Appendix D : Glossary
 
