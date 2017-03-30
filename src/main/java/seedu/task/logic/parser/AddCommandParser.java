@@ -45,7 +45,7 @@ public class AddCommandParser extends CommandParser {
         LOCATION = tokenizedArguments.containsKey(PREFIX_LOCATION) ? argsTokenizer.getValue(PREFIX_LOCATION).get()
                 : Location.DEFAULT_LOCATION;
         try {
-            return new AddCommand(argsTokenizer.getPreamble().get(), START_DATE, END_DATE, REMARK, LOCATION,
+            return new AddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), START_DATE, END_DATE, REMARK.replace("\\", ""), LOCATION.replace("\\", ""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
