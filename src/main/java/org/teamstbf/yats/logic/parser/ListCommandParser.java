@@ -19,8 +19,8 @@ import org.teamstbf.yats.logic.commands.ListCommandTag;
 public class ListCommandParser {
 
 	private final int LIST_COMMAND_SUFFIX = 2;
-	private final String COMMAND_EXTENSION_DATE = "by date";
-	private final String COMMAND_EXTENSION_TIMING = "by timing";
+	private final String COMMAND_EXTENSION_END = "by end";
+	private final String COMMAND_EXTENSION_START = "by start";
 	private final String COMMAND_EXTENSION_LOCATION = "by location";
 	private final String COMMAND_EXTENSION_DONE = "done";
 	private final String COMMAND_EXTENSION_TAG = "by tag";
@@ -37,9 +37,9 @@ public class ListCommandParser {
 			String[] commandTextArray = stringTokenizer(args);
 			switch (commandTextArray[LIST_COMMAND_SUFFIX]) {
 			case (ListCommand.COMMAND_WORD_SUFFIX_END):
-				return new ListCommandEndTime(internalParser(args, COMMAND_EXTENSION_DATE, KEYWORD_PERIOD));
+				return new ListCommandEndTime(internalParser(args, COMMAND_EXTENSION_END, KEYWORD_PERIOD));
 			case (ListCommand.COMMAND_WORD_SUFFIX_START):
-				return new ListCommandStartTime(internalParser(args, COMMAND_EXTENSION_TIMING, KEYWORD_PERIOD));
+				return new ListCommandStartTime(internalParser(args, COMMAND_EXTENSION_START, KEYWORD_PERIOD));
 			case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION):
 				return new ListCommandLocation(internalParser(args, COMMAND_EXTENSION_LOCATION, KEYWORD_PERIOD));
 			case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
