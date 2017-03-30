@@ -2,10 +2,11 @@ package project.taskcrusher.testutil;
 
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.Deadline;
-import project.taskcrusher.model.task.Priority;
 import project.taskcrusher.model.task.ReadOnlyTask;
+
 /**
  * A mutable task object. For testing only.
  */
@@ -99,5 +100,35 @@ public class TestCard implements ReadOnlyTask {
 
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public void markComplete() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void markIncomplete() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isComplete() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask o) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public boolean isOverdue() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

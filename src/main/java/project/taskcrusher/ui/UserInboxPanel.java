@@ -2,15 +2,19 @@ package project.taskcrusher.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import project.taskcrusher.commons.core.LogsCenter;
+import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
 import project.taskcrusher.commons.events.ui.PersonPanelSelectionChangedEvent;
 import project.taskcrusher.commons.util.FxViewUtil;
 import project.taskcrusher.model.event.ReadOnlyEvent;
@@ -22,20 +26,24 @@ import project.taskcrusher.model.task.ReadOnlyTask;
 public class UserInboxPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(UserInboxPanel.class);
     private static final String FXML = "UserInboxPanel.fxml";
-    //TODO: define a custom XML element that contains the header (either "Tasks" or "Events")
-    //and the listView corresponding to that header.
+    private static final boolean SET_LIST_VISIBLE = true;
+    private static final boolean SET_LIST_HIDDEN = false;
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
-
+    @FXML
+    private Label taskHeader;
     @FXML
     private ListView<ReadOnlyEvent> eventListView;
+    @FXML
+    private Label eventHeader;
 
     public UserInboxPanel(AnchorPane userInboxPlaceholder, ObservableList<ReadOnlyTask> taskList,
             ObservableList<ReadOnlyEvent> eventList) {
         super(FXML);
         setConnections(taskList, eventList);
         addToPlaceholder(userInboxPlaceholder);
+        registerAsAnEventHandler(this);
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList, ObservableList<ReadOnlyEvent> eventList) {
@@ -69,8 +77,6 @@ public class UserInboxPanel extends UiPart<Region> {
         });
     }
 
-    ///////taskListViewEmptyEvent, eventListViewEmptyEvent to render the booleanProperty of visibleProperty
-    ////what if both are empty => default window? maybe like 404 not found?
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
@@ -98,6 +104,31 @@ public class UserInboxPanel extends UiPart<Region> {
             } else {
                 setGraphic(new EventListCard(event, getIndex() + 1).getRoot());
             }
+        }
+    }
+
+    //@@author A0127737X
+    @Subscribe
+    public void handleListsToShowUpdatedEvent(ListsToShowUpdatedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.eventListToShowEmpty) {
+            eventListView.setManaged(SET_LIST_HIDDEN);
+            eventListView.setVisible(SET_LIST_HIDDEN);
+            eventHeader.setText("Events: Nothing to Show!");
+        } else {
+            eventListView.setManaged(SET_LIST_VISIBLE);
+            eventListView.setVisible(SET_LIST_VISIBLE);
+            eventHeader.setText("Events: ");
+        }
+
+        if (event.taskListToShowEmpty) {
+            taskListView.setManaged(SET_LIST_HIDDEN);
+            taskListView.setVisible(SET_LIST_HIDDEN);
+            taskHeader.setText("Tasks: Nothing to Show!");
+        } else {
+            taskListView.setManaged(SET_LIST_VISIBLE);
+            taskListView.setVisible(SET_LIST_VISIBLE);
+            taskHeader.setText("Tasks: ");
         }
     }
 

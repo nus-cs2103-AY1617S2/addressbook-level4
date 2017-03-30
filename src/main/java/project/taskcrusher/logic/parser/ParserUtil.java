@@ -18,10 +18,10 @@ import project.taskcrusher.model.event.Location;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.Deadline;
-import project.taskcrusher.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -45,7 +45,7 @@ public class ParserUtil {
         if (!StringUtil.isUnsignedInteger(index)) {
             return Optional.empty();
         }
-        //TODO: take care of number format exception
+        // TODO: take care of number format exception
         return Optional.of(Integer.parseInt(index));
 
     }
@@ -117,6 +117,7 @@ public class ParserUtil {
         return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
     }
 
+    //@@author A0163962X
     /**
      * Parses a {@code Optional<String> deadline} into an
      * {@code Optional<Deadline>} if {@code deadline} is present.
@@ -126,11 +127,18 @@ public class ParserUtil {
 
         if (timeslots.isPresent()) {
 
+            if (timeslots.get().equals(Timeslot.NO_TIMESLOT)) {
+                throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_DNE);
+            }
+
             // TODO again, could refactor this somewhere
             String[] timeslotsAsStrings = timeslots.get().split("\\s+or\\s+");
             List<Timeslot> timeslotsParsed = new ArrayList<>();
             for (String t : timeslotsAsStrings) {
                 String[] dates = t.split("\\s+to\\s+");
+                if (dates.length != 2) {
+                    throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_PAIRS);
+                }
                 timeslotsParsed.add(new Timeslot(dates[0], dates[1]));
             }
 
@@ -141,6 +149,63 @@ public class ParserUtil {
         }
     }
 
+    /**
+     *
+     * @param argsTokenizer
+     * @param prefix
+     * @param defaultValue
+     * @return
+     */
+    public static String setValue(ArgumentTokenizer argsTokenizer, ArgumentTokenizer.Prefix prefix,
+            String defaultValue) {
+        String value = defaultValue;
+        Optional<String> rawValue = argsTokenizer.getValue(prefix);
+        if (rawValue.isPresent()) {
+            value = rawValue.get();
+        }
+        return value;
+    }
+
+    /**
+     *
+     * @param preamble
+     * @param defaultValue
+     * @return
+     */
+    public static String setValue(Optional<String> preamble, String defaultValue) {
+        String value = defaultValue;
+        if (preamble.isPresent()) {
+            value = preamble.get();
+        }
+        return value;
+    }
+
+    /**
+     *
+     * @param datesToParse
+     * @return
+     * @throws IllegalValueException
+     */
+    public static List<Timeslot> parseAsTimeslots(String datesToParse) throws IllegalValueException {
+
+        if (datesToParse.equals(Timeslot.NO_TIMESLOT)) {
+            throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_DNE);
+        }
+        String[] timeslotsAsStrings = datesToParse.split("\\s+or\\s+");
+        List<Timeslot> timeslots = new ArrayList<>();
+        for (String t : timeslotsAsStrings) {
+            String[] dates = t.split("\\s+to\\s+");
+            if (dates.length != 2) {
+                throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_PAIRS);
+            }
+            timeslots.add(new Timeslot(dates[0], dates[1]));
+        }
+
+        return timeslots;
+
+    }
+
+    //@@author
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */

@@ -16,4 +16,5 @@ classes/
 /bin/
 .classpath
 config.json
-
+Collate-TUI.jar
+*.bat

@@ -6,11 +6,17 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import project.taskcrusher.model.event.ReadOnlyEvent;
+import project.taskcrusher.model.shared.DateUtilApache;
 
+//@@author A0127737X
+/**
+ * Controller for EventListCard.fxml. Reads a ReadOnlyEvent and create the layout accordingly.
+ */
 public class EventListCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
-    private static final String MESSAGE_NO_LOCATION = "No location specified";
+    private static final String MESSAGE_NO_LOCATION = "No location";
+    private static final String LOCATION_AT = "@ ";
 
     @FXML
     private HBox cardPane;
@@ -23,10 +29,11 @@ public class EventListCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private FlowPane timeSlots;
+    private FlowPane timeslots;
     @FXML
     private FlowPane tags;
-
+    @FXML
+    private Label completeFlag;
     public EventListCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
         name.setText(event.getName().name);
@@ -34,24 +41,33 @@ public class EventListCard extends UiPart<Region> {
         showLocation(event);
         showDescription(event);
         showEventTimeSlots(event);
+        displayComplete(event);
 
         initTags(event);
     }
 
+    private void displayComplete(ReadOnlyEvent event) {
+        if (event.isComplete()) {
+            completeFlag.setText("COMPLETE");
+        } else {
+            completeFlag.setText("INCOMPLETE");
+        }
+    }
     private void showDescription(ReadOnlyEvent event) {
         description.setText(event.getDescription().toString());
     }
 
     private void showLocation(ReadOnlyEvent event) {
         if (event.getLocation().hasLocation()) {
-            eventLocation.setText(event.getLocation().location);
+            eventLocation.setText(LOCATION_AT + event.getLocation().location);
         } else {
             eventLocation.setText(MESSAGE_NO_LOCATION);
         }
     }
 
     private void showEventTimeSlots(ReadOnlyEvent event) {
-        event.getTimeslots().forEach(timeslot -> timeSlots.getChildren().add(new Label(timeslot.toString())));
+        event.getTimeslots().forEach(timeslot -> timeslots.getChildren().add(new Label(
+                DateUtilApache.timeslotAsStringForUi(timeslot))));
     }
 
     private void initTags(ReadOnlyEvent event) {

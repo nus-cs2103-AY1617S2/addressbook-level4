@@ -137,6 +137,14 @@ public class UserInbox implements ReadOnlyUserInbox {
         }
     }
 
+    public void markTask(int index, int markFlag) {
+        tasks.markTask(index, markFlag);
+    }
+
+    public void markEvent(int index, int markFlag) {
+        events.markEvent(index, markFlag);
+    }
+
     /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
@@ -240,6 +248,10 @@ public class UserInbox implements ReadOnlyUserInbox {
         }
     }
 
+    public void confirmEventTime(int eventListIndex, int timeslotIndex) {
+        events.confirmEventTime(eventListIndex, timeslotIndex);
+    }
+
     public ObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {
         return events.getEventsWithOverlapingTimeslots(candidate);
     }
@@ -288,4 +300,6 @@ public class UserInbox implements ReadOnlyUserInbox {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, events, tags);
     }
+
+
 }

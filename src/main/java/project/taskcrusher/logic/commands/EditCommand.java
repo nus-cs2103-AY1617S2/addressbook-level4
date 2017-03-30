@@ -8,9 +8,9 @@ import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.Deadline;
-import project.taskcrusher.model.task.Priority;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
@@ -25,7 +25,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TASK_NAME]"
+            + "Parameters: FLAG (t or e) INDEX (must be a positive integer) [TASK_NAME]"
             + " [d/DEADLINE] [p/PRIORITY] [//DESCRIPTION] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/2 //a description";
 

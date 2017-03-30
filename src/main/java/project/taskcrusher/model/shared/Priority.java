@@ -1,12 +1,13 @@
-package project.taskcrusher.model.task;
+package project.taskcrusher.model.shared;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 
+//@@author A0163962X
 /**
  * Represents a Task's priority. Can take on values from 1 to 3
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
-public class Priority {
+public class Priority implements Comparable<Priority> {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
             "Priority should only take the value from 1 to 3 when specified. Its default is 0";
@@ -60,6 +61,13 @@ public class Priority {
 
     public boolean hasPriority() {
         return !priority.equals(NO_PRIORITY);
+    }
+
+    @Override
+    public int compareTo(Priority another) {
+        int thisPriority = Integer.parseInt(this.priority);
+        int anotherPriority = Integer.parseInt(another.priority);
+        return thisPriority - anotherPriority;
     }
 
 }

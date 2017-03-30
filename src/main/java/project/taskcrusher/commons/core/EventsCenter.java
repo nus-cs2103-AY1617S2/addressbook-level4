@@ -34,6 +34,11 @@ public class EventsCenter {
         return this;
     }
 
+    public EventsCenter unregisterHandler(Object handler) {
+        eventBus.unregister(handler);
+        return this;
+    }
+
     /**
      * Posts an event to the event bus.
      */

@@ -1,18 +1,11 @@
-package project.taskcrusher.model.shared;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
-
-import project.taskcrusher.commons.exceptions.IllegalValueException;
-
+# A0163962X-unused
+###### \java\project\taskcrusher\model\shared\DateUtilPrettyTime.java
+``` java
 /**
  * Utility class for parsing Dates
  *
  */
-public class DateUtil {
+public class DateUtilPrettyTime {
 
     public static final String MESSAGE_DATE_PASSED = "Dates provided must not be in the past";
     public static final String MESSAGE_DATE_AMBIGUOUS = "Multiple dates provided." +
@@ -54,3 +47,4 @@ public class DateUtil {
         return sdf.format(date);
     }
 }
+```

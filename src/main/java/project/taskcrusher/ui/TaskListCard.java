@@ -5,9 +5,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import project.taskcrusher.model.shared.DateUtil;
+import project.taskcrusher.model.shared.DateUtilApache;
 import project.taskcrusher.model.task.ReadOnlyTask;
 
+//@@author A0127737X
+/**
+ * Controller for TaskListCard.fxml. Reads a ReadOnlyTask and create the layout accordingly.
+ */
 public class TaskListCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -29,6 +33,8 @@ public class TaskListCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label completeFlag;
 
     public TaskListCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -37,8 +43,17 @@ public class TaskListCard extends UiPart<Region> {
         showDeadline(task);
         showPriority(task);
         showDescription(task);
+        displayComplete(task);
 
         initTags(task);
+    }
+
+    private void displayComplete(ReadOnlyTask task) {
+        if (task.isComplete()) {
+            completeFlag.setText("COMPLETE");
+        } else {
+            completeFlag.setText("INCOMPLETE");
+        }
     }
 
     private void showDescription(ReadOnlyTask task) {
@@ -59,9 +74,8 @@ public class TaskListCard extends UiPart<Region> {
 
     private void showDeadline(ReadOnlyTask task) {
         if (task.getDeadline().hasDeadline()) {
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-//            deadline.setText(MESSAGE_DEADLINE_BY + sdf.format(task.getDeadline().getDate().get()));
-            deadline.setText(MESSAGE_DEADLINE_BY + DateUtil.dateAsString(task.getDeadline().getDate().get()));
+            deadline.setText(MESSAGE_DEADLINE_BY +
+                    DateUtilApache.deadlineAsStringForUi(task.getDeadline().getDate().get()));
         } else {
             deadline.setText(MESSAGE_NO_DEADLINE);
         }

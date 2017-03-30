@@ -1,6 +1,5 @@
 package project.taskcrusher.model;
 
-import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -9,6 +8,7 @@ import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
+import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
 import project.taskcrusher.model.event.Event;
@@ -16,14 +16,14 @@ import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList.DuplicateEventException;
 import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
-import project.taskcrusher.model.shared.UserItem;
+import project.taskcrusher.model.shared.ReadOnlyUserToDo;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the user inbox data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -32,6 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final UserInbox userInbox;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
+    private static final boolean LIST_EMPTY = true;
 
     /**
      * Initializes a ModelManager with the given userInbox and userPrefs.
@@ -67,12 +68,25 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
+    //@@author A0127737X
+    public void prepareListsForUi() {
+        boolean taskListToShowEmpty = false, eventListToShowEmpty = false;
+        if (filteredEvents.isEmpty()) {
+            eventListToShowEmpty = LIST_EMPTY;
+        }
+        if (filteredTasks.isEmpty()) {
+            taskListToShowEmpty = LIST_EMPTY;
+        }
+        raise(new ListsToShowUpdatedEvent(eventListToShowEmpty, taskListToShowEmpty));
+    }
+
     //=========== Task operations =========================================================================
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         userInbox.removeTask(target);
         indicateUserInboxChanged();
+        prepareListsForUi();
     }
 
     @Override
@@ -90,6 +104,18 @@ public class ModelManager extends ComponentManager implements Model {
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(taskListIndex, editedTask);
         indicateUserInboxChanged();
+        prepareListsForUi();
+    }
+
+    @Override
+    public synchronized void markTask(int filteredTaskListIndex, int markFlag) {
+        userInbox.markTask(filteredTaskListIndex, markFlag);
+        indicateUserInboxChanged();
+    }
+
+    @Override
+    public synchronized void markEvent(int filteredEventListIndex, int markFlag) {
+        userInbox.markEvent(filteredEventListIndex, markFlag);
     }
 
     //=========== Event operations =========================================================================
@@ -98,6 +124,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
         userInbox.removeEvent(target);
         indicateUserInboxChanged();
+        prepareListsForUi();
     }
 
     @Override
@@ -108,12 +135,19 @@ public class ModelManager extends ComponentManager implements Model {
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.updateEvent(eventListIndex, editedEvent);
         indicateUserInboxChanged();
+        prepareListsForUi();
     }
 
     @Override
     public synchronized void addEvent(Event event) throws DuplicateEventException {
         userInbox.addEvent(event);
-        updateFilteredTaskListToShowAll();
+        updateFilteredEventListToShowAll();
+        indicateUserInboxChanged();
+    }
+
+    public synchronized void confirmEventTime(int filteredEventListIndex, int timeslotIndex) {
+        int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+        userInbox.confirmEventTime(eventListIndex, timeslotIndex);
         indicateUserInboxChanged();
     }
 
@@ -131,6 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowAll() {
         filteredTasks.setPredicate(null);
+        prepareListsForUi();
     }
 
     @Override
@@ -139,12 +174,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Date dateUpTo) {
-        updateFilteredTaskList(new PredicateExpression(new DeadlineQualifier(dateUpTo)));
+    public void updateFilteredTaskList(Timeslot userInterestedTimeslot) {
+        updateFilteredTaskList(new PredicateExpression(new TimeslotQualifier(userInterestedTimeslot)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        prepareListsForUi();
     }
 
     //=========== Filtered Event List Accessors =============================================================
@@ -157,6 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredEventListToShowAll() {
         filteredEvents.setPredicate(null);
+        prepareListsForUi();
     }
 
     @Override
@@ -171,12 +208,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
+        prepareListsForUi();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(UserItem item);
+        boolean satisfies(ReadOnlyUserToDo item);
         String toString();
     }
 
@@ -189,7 +227,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(UserItem item) {
+        public boolean satisfies(ReadOnlyUserToDo item) {
             return qualifier.run(item);
         }
 
@@ -200,7 +238,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(UserItem item);
+        boolean run(ReadOnlyUserToDo item);
         String toString();
     }
 
@@ -212,7 +250,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(UserItem item) {
+        public boolean run(ReadOnlyUserToDo item) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(item.getName().toString(), keyword))
                     .findAny()
@@ -225,37 +263,11 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private class DeadlineQualifier implements Qualifier {
-        private Date dateUpTo;
-
-        DeadlineQualifier(Date date) {
-            assert date != null;
-            this.dateUpTo = date;
-        }
-
-        @Override
-        public boolean run(UserItem item) {
-            assert item instanceof ReadOnlyTask;
-            ReadOnlyTask task = (ReadOnlyTask) item;
-
-            //has no deadline
-            if (!task.getDeadline().getDate().isPresent()) {
-                return false;
-            }
-            Date deadline = task.getDeadline().getDate().get();
-            assert deadline != null;
-            if (deadline.before(dateUpTo)) {
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            return "date up to =" + dateUpTo.toString();
-        }
-    }
-
+    /**
+     * checks if:
+     * (1) if the ToDo item is an active task, its deadline falls within the given timeslot
+     * (2) if the ToDO item is an active event, its timeslots overlaps with the given timeslot
+     */
     private class TimeslotQualifier implements Qualifier {
         private Timeslot userInterestedTimeslot;
 
@@ -265,14 +277,28 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(UserItem item) {
-            assert item instanceof ReadOnlyEvent;
-            ReadOnlyEvent event = (ReadOnlyEvent) item;
-            if (event.hasOverlappingTimeslot(userInterestedTimeslot)) {
-                return true;
-            } else {
-                return false;
+        public boolean run(ReadOnlyUserToDo item) {
+            if (item instanceof ReadOnlyEvent) {
+                ReadOnlyEvent event = (ReadOnlyEvent) item;
+                if (event.isComplete()) {
+                    return false;
+                } else if (event.hasOverlappingTimeslot(userInterestedTimeslot)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else if (item instanceof ReadOnlyTask) {
+                ReadOnlyTask task = (ReadOnlyTask) item;
+                if (task.isComplete()) {
+                    return false;
+                } else if (task.getDeadline().isWithin(userInterestedTimeslot)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
+            assert false;
+            return false; //should not reach here
         }
 
         @Override

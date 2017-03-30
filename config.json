@@ -2,6 +2,6 @@
   "appTitle" : "TaskCrusher",
   "logLevel" : "INFO",
   "userPrefsFilePath" : "preferences.json",
-  "userInboxFilePath" : "data/userInbox.xml",
+  "userInboxFilePath" : "data/new.xml",
   "userInboxName" : "MyTaskCrusher"
 }

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.exceptions.DuplicateDataException;
 import project.taskcrusher.commons.util.CollectionUtil;
+import project.taskcrusher.logic.commands.MarkCommand;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -21,6 +22,9 @@ public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
+    public void sortTasksByDeadline () {
+        internalList.sort(null);
+    }
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
@@ -40,6 +44,17 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        sortTasksByDeadline();
+    }
+
+    public void markTask(int targetIndex, int markFlag) {
+        Task target = internalList.get(targetIndex);
+        if (markFlag == MarkCommand.MARK_COMPLETE) {
+            target.markComplete();
+        } else {
+            target.markIncomplete();
+        }
+        sortTasksByDeadline();
     }
 
     /**
@@ -62,6 +77,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+        sortTasksByDeadline();
     }
 
     /**
@@ -75,11 +91,14 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
+        sortTasksByDeadline();
         return taskFoundAndDeleted;
+
     }
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
+        sortTasksByDeadline();
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
@@ -88,6 +107,7 @@ public class UniqueTaskList implements Iterable<Task> {
             replacement.add(new Task(task));
         }
         setTasks(replacement);
+        sortTasksByDeadline();
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {
