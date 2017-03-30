@@ -2,10 +2,20 @@
  * 
  */
 package seedu.task.model.task;
-
-//@@author Daniel Mullen
-
+import seedu.task.commons.exceptions.IllegalValueException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+/**
+ * @author Daniel Mullen and Jacob Levy
+ *
+ */
 public class TaskDate {
+	
+	private List<Date> dates;
+    private SimpleDateFormat formatter;
+    public final String OUTPUT_FORMAT = " MMM dd (EEE) ";
+	
     private int day;
     private int month;
     private int year;
@@ -36,23 +46,36 @@ public class TaskDate {
     private static final int YEAR2_START_INDEX = 11;
     private static final int YEAR2_END_INDEX = 13;
 
-    public TaskDate(String date) {
-	date = date.trim();
-	value = date;
-	int[] dateArray = dateFormatConverter(date);
-	if (date.length() == 6) {
-	    setDay(dateArray[DAY_ARRAY_INDEX]);
-	    setMonth(dateArray[MONTH_ARRAY_INDEX]);
-	    setYear(dateArray[YEAR_ARRAY_INDEX]);
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invaid date, try ddmmyy-ddmmyy ";
+
+    
+    public TaskDate(String input) throws IllegalValueException {
+
+	value = input.trim();
+	try{
+		int[] dateArray = dateFormatConverter(input);
+		if (input.length() == 6) {
+		    setDay(dateArray[DAY_ARRAY_INDEX]);
+		    setMonth(dateArray[MONTH_ARRAY_INDEX]);
+		    setYear(dateArray[YEAR_ARRAY_INDEX]);
+		}
+		if (input.length() == 13) {
+		    setDay(dateArray[DAY_ARRAY_INDEX]);
+		    setMonth(dateArray[MONTH_ARRAY_INDEX]);
+		    setYear(dateArray[YEAR_ARRAY_INDEX]);
+		    setDay2(dateArray[DAY2_ARRAY_INDEX]);
+		    setMonth2(dateArray[MONTH2_ARRAY_INDEX]);
+		    setYear2(dateArray[YEAR2_ARRAY_INDEX]);
+		}
+	}catch(Exception e){
+	    formatter = new SimpleDateFormat (OUTPUT_FORMAT);
+	    NattyParser natty = new NattyParser();
+	    dates = natty.parse(input);
+	    	
+	    if(dates == null)
+	    	throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
 	}
-	if (date.length() == 13) {
-	    setDay(dateArray[DAY_ARRAY_INDEX]);
-	    setMonth(dateArray[MONTH_ARRAY_INDEX]);
-	    setYear(dateArray[YEAR_ARRAY_INDEX]);
-	    setDay2(dateArray[DAY2_ARRAY_INDEX]);
-	    setMonth2(dateArray[MONTH2_ARRAY_INDEX]);
-	    setYear2(dateArray[YEAR2_ARRAY_INDEX]);
-	}
+	
 
     }
 
@@ -105,11 +128,19 @@ public class TaskDate {
     }
 
     public String toString() {
-	if (day2 == 0 && month2 == 0 && year2 == 0) {
-	    return day + DATE_DELIMITER + month + DATE_DELIMITER + year;
-	}
-	return day + DATE_DELIMITER + month + DATE_DELIMITER + year + " " + DATE_DELIMITER2 + " " + day2
-		+ DATE_DELIMITER + month2 + DATE_DELIMITER + year2;
+    if(dates == null){
+    	if (day2 == 0 && month2 == 0 && year2 == 0) {
+    	    return day + DATE_DELIMITER + month + DATE_DELIMITER + year;
+    	}
+    	return day + DATE_DELIMITER + month + DATE_DELIMITER + year + " " + DATE_DELIMITER2 + " " + day2
+    		+ DATE_DELIMITER + month2 + DATE_DELIMITER + year2;
+    }else{
+    	if(dates.size() == 1)
+        	return formatter.format(dates.get(0));
+    	else
+    		return formatter.format(dates.get(0)) +" - "+ formatter.format(dates.get(1));
+    	
+    }
     }
 
     public static int[] dateFormatConverter(String date) {

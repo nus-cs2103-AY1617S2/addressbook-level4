@@ -40,14 +40,14 @@ public class DeleteCommand extends Command {
 	    }
 
 	    ReadOnlyTask taskToDelete = lastShownList.get(targetIndex[i] - 1 - i);
-
+	    String deletedTaskName = taskToDelete.getTaskName().toString();
 	    try {
 		model.deleteTask(taskToDelete);
 	    } catch (TaskNotFoundException pnfe) {
 		assert false : "The target task cannot be missing";
 	    }
 
-	    sb.append(String.format(MESSAGE_DELETE_TASK_SUCCESS, targetIndex[i]));
+	    sb.append(String.format(MESSAGE_DELETE_TASK_SUCCESS,  deletedTaskName));
 	    sb.append("\n");
 	}
 	return new CommandResult(sb.toString());
