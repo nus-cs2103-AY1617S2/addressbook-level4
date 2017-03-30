@@ -148,23 +148,17 @@ Examples:
 Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.10. Viewing history of task : `history`
-
-A list of history of tasks that have been completed will be shown in the column sorted in reverse-chronological order.<br>
-This history will be used in undo implementation.<br>
-Format: `history`
-
-### 2.11. Exiting the program : `exit`
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data
+### 2.11. Saving the data
 
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.13. Change the directory of the task manager : `load` or `cd`
+### 2.12. Change the directory of the task manager : `load` or `cd`
 
 Load Task Manager data from specified file path and continue using that directory for operations.<br>
 Create new file if no such file exists and cancel operations if given non-XML address or invalid XML file.<br>
@@ -178,7 +172,7 @@ Examples:
 * `cd data/new/cloudsync.xml`<br>
   Changes the Storage Directory to ./data/new/cloudsync.xml
 
-### 2.14. Move the directory of the task manager : `move` or  `movefile`
+### 2.13. Move the directory of the task manager : `move` or  `movefile`
 
 Save Task Manager data to specified file path and continue using that directory for operations.<br>
 If existing file with the same name exists, it will be overwritten with current Task Manager data.<br>
