@@ -14,6 +14,7 @@ import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
 import seedu.jobs.model.task.UniqueTaskList;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 /**
  * Edits the details of an existing person in the description book.
@@ -74,8 +75,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of
      * {@code personToEdit} edited with {@code editTaskDescriptor}.
+     * @throws IllegalTimeException
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEditaskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEditaskToEdit, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalTimeException {
         assert taskToEditaskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEditaskToEdit::getName);
@@ -83,9 +86,6 @@ public class EditCommand extends Command {
         Time updatedEndTime = editTaskDescriptor.getEnd().orElseGet(taskToEditaskToEdit::getEndTime);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet
             (taskToEditaskToEdit::getDescription);
-//        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(TaskToEdit::getPhone);
-//        Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(TaskToEdit::getEmail);
-//        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(TaskToEdit::getAddress);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEditaskToEdit::getTags);
         Period updatedPeriod = editTaskDescriptor.getPeriod().orElseGet(taskToEditaskToEdit::getPeriod);
         return new Task(updatedName, updatedStartTime, updatedEndTime, updatedDescription, updatedTags, updatedPeriod);

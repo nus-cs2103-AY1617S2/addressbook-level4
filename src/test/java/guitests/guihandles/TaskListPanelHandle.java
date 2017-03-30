@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import seedu.jobs.TestApp;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.testutil.TestUtil;
 
 /**
@@ -42,8 +43,10 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in correct order.
      * @param tasks A list of task in the correct order.
+     * @throws IllegalTimeException
+     * @throws IllegalArgumentException
      */
-    public boolean isListMatching(ReadOnlyTask... tasks) {
+    public boolean isListMatching(ReadOnlyTask... tasks) throws IllegalArgumentException, IllegalTimeException {
         return this.isListMatching(0, tasks);
     }
 
@@ -51,8 +54,10 @@ public class TaskListPanelHandle extends GuiHandle {
      * Returns true if the list is showing the task details correctly and in correct order.
      * @param startPosition The starting position of the sub list.
      * @param tasks A list of task in the correct order.
+     * @throws IllegalTimeException
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks)
+            throws IllegalArgumentException, IllegalTimeException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " tasks");
@@ -145,7 +150,7 @@ public class TaskListPanelHandle extends GuiHandle {
         return getListView().getItems().get(index);
     }
 
-    public TaskCardHandle getTaskCardHandle(int index) {
+    public TaskCardHandle getTaskCardHandle(int index) throws IllegalTimeException {
         return getTaskCardHandle(new Task(getListView().getItems().get(index)));
     }
 

@@ -13,6 +13,7 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.logic.commands.AddCommand;
 import seedu.jobs.logic.commands.Command;
 import seedu.jobs.logic.commands.IncorrectCommand;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -40,6 +41,8 @@ public class AddCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        } catch (IllegalTimeException ite) {
+            return new IncorrectCommand(ite.getMessage());
         }
     }
 

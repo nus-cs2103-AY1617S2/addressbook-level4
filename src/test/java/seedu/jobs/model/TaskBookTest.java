@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.testutil.TypicalTestTasks;
 
 public class TaskBookTest {
@@ -33,20 +34,20 @@ public class TaskBookTest {
     }
 
     @Test
-    public void resetData_null_throwsAssertionError() {
+    public void resetData_null_throwsAssertionError() throws IllegalTimeException {
         thrown.expect(AssertionError.class);
         taskBook.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyAddressBook_replacesData() throws IllegalTimeException {
         TaskBook newData = new TypicalTestTasks().getTypicalTaskBook();
         taskBook.resetData(newData);
         assertEquals(newData, taskBook);
     }
 
     @Test
-    public void resetData_withDuplicateTasks_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() throws IllegalTimeException {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.CS3101), new Task(td.CS3101));
@@ -58,7 +59,7 @@ public class TaskBookTest {
     }
 
     @Test
-    public void resetData_withDuplicateTags_throwsAssertionError() {
+    public void resetData_withDuplicateTags_throwsAssertionError() throws IllegalTimeException {
         TaskBook typicalTaskBook = new TypicalTestTasks().getTypicalTaskBook();
         ObservableList<ReadOnlyTask> newTask = typicalTaskBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskBook.getTagList());

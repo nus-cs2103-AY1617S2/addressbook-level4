@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.exceptions.DuplicateDataException;
 import seedu.jobs.commons.util.CollectionUtil;
+import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.FixedStack;
 
 /**
@@ -59,9 +60,10 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing person in the list.
+     * @throws IllegalTimeException
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException, IllegalTimeException {
         assert editedTask != null;
 
         //@@author A0164440M
@@ -169,7 +171,7 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException, IllegalTimeException {
         final UniqueTaskList replacement = new UniqueTaskList();
 
         for (final ReadOnlyTask task : tasks) {
@@ -214,5 +216,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching person in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+
+    public static class IllegalTimeException extends CommandException {
+
+        public IllegalTimeException(String message) {
+            super(message);
+        }
+    }
 
 }

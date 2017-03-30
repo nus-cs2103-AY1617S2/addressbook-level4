@@ -5,13 +5,14 @@ import static seedu.jobs.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCES
 
 import org.junit.Test;
 
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.testutil.TestTask;
 import seedu.jobs.testutil.TestUtil;
 
 public class DeleteCommandTest extends TaskBookGuiTest {
 
     @Test
-    public void delete() {
+    public void delete() throws IllegalArgumentException, IllegalTimeException {
 
         //delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
@@ -38,8 +39,11 @@ public class DeleteCommandTest extends TaskBookGuiTest {
      * Runs the delete command to delete the task at specified index and confirms the result is correct.
      * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
      * @param currentList A copy of the current list of tasks (before deletion).
+     * @throws IllegalTimeException
+     * @throws IllegalArgumentException
      */
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList)
+            throws IllegalArgumentException, IllegalTimeException {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 

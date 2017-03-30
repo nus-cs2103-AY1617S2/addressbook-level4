@@ -4,10 +4,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
+
 public class ClearCommandTest extends TaskBookGuiTest {
 
     @Test
-    public void clear() {
+    public void clear() throws IllegalArgumentException, IllegalTimeException {
 
         //verify a non-empty list can be cleared
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));

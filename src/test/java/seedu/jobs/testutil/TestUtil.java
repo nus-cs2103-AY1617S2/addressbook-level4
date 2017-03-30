@@ -39,6 +39,7 @@ import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.storage.XmlSerializableTaskBook;
 
 /**
@@ -88,8 +89,8 @@ public class TestUtil {
                 new Time(Optional.of("01/02/2017 12:00")),
                 new Description(Optional.of("Software Engineering")),
                 new UniqueTagList("tutorials"), new Period(Optional.of("0"))),
-                new Task(new Name(Optional.of("Meeting")), new Time(Optional.of("18/03/2017 12:00")),
-                new Time(Optional.of("16/03/2017 17:00")),
+                new Task(new Name(Optional.of("Meeting")), new Time(Optional.of("16/03/2017 12:00")),
+                new Time(Optional.of("18/03/2017 17:00")),
                 new Description(Optional.of("Meet with group members at UTown")),
                 new UniqueTagList("meetings"), new Period(Optional.of("0")))
             };
@@ -97,6 +98,10 @@ public class TestUtil {
         } catch (IllegalValueException e) {
             assert false;
             // not possible
+            return null;
+        } catch (IllegalTimeException e) {
+            assert false;
+            //not possible
             return null;
         }
     }

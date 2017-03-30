@@ -2,9 +2,12 @@ package seedu.jobs.model.task;
 
 import java.util.Objects;
 
+import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.tag.UniqueTagList;
 //@@author A0130979U
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
+
 public class Task implements ReadOnlyTask {
 
     private Name name;
@@ -18,8 +21,10 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      * @param period TODO
+     * @throws IllegalTimeException
      */
-    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags, Period period) {
+    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags, Period period)
+            throws IllegalTimeException {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.startTime = startTime;
@@ -29,12 +34,19 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.isCompleted = false;
+
+        if (!startTime.value.equals(Time.DEFAULT_TIME) && !endTime.value.equals(Time.DEFAULT_TIME)
+                && startTime.compareTo(endTime) > 0) {
+            throw new IllegalTimeException(Messages.MESSAGE_INVALID_START_END_TIME);
+        }
+
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
+     * @throws IllegalTimeException
      */
-    public Task(ReadOnlyTask source) {
+    public Task(ReadOnlyTask source) throws IllegalTimeException {
         this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(),
                 source.getTags(), source.getPeriod());
         this.isCompleted = source.isCompleted();

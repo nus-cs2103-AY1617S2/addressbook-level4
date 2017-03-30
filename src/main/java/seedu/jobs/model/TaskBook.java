@@ -17,6 +17,7 @@ import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -46,7 +47,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      * @throws IllegalTimeException
      */
-    public TaskBook(ReadOnlyTaskBook toBeCopied) {
+    public TaskBook(ReadOnlyTaskBook toBeCopied) throws IllegalTimeException {
         this();
         resetData(toBeCopied);
     }
@@ -54,7 +55,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalTimeException {
         this.tasks.setTasks(tasks);
     }
 
@@ -62,17 +63,17 @@ public class TaskBook implements ReadOnlyTaskBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyTaskBook newData) {
+    public void resetData(ReadOnlyTaskBook newData) throws IllegalTimeException {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "AddressBooks should not have duplicate tasks";
+            assert false : "TaskBook should not have duplicate tasks";
         }
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "AddressBooks should not have duplicate tags";
+            assert false : "TaskBook should not have duplicate tags";
         }
         syncMasterTagListWith(tasks);
     }
@@ -102,7 +103,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalTimeException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);

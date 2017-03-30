@@ -25,6 +25,7 @@ import seedu.jobs.model.ModelManager;
 import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.UserPrefs;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.model.util.SampleDataUtil;
 import seedu.jobs.storage.Storage;
 import seedu.jobs.storage.StorageManager;
@@ -73,7 +74,7 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs) throws IllegalTimeException {
         Optional<ReadOnlyTaskBook> taskBookOptional;
         ReadOnlyTaskBook initialData;
         try {
@@ -81,12 +82,12 @@ public class MainApp extends Application {
             if (!taskBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = taskBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = taskBookOptional.orElseGet(SampleDataUtil::getSampleTaskBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
             initialData = new TaskBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskBook");
             initialData = new TaskBook();
         }
 

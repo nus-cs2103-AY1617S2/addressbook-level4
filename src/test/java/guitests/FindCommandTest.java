@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.jobs.commons.core.Messages;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.testutil.TestTask;
 
 public class FindCommandTest extends TaskBookGuiTest {
@@ -20,7 +21,7 @@ public class FindCommandTest extends TaskBookGuiTest {
     }*/
 
     @Test
-    public void find_emptyList() {
+    public void find_emptyList() throws IllegalArgumentException, IllegalTimeException {
         commandBox.runCommand("clear");
         assertFindResult("find ST2131"); // no results
     }
@@ -31,7 +32,8 @@ public class FindCommandTest extends TaskBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestTask... expectedHits) {
+    private void assertFindResult(String command, TestTask... expectedHits)
+            throws IllegalArgumentException, IllegalTimeException {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " tasks listed!");
