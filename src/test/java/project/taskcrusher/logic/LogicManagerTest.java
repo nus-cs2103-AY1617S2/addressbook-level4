@@ -211,6 +211,7 @@ public class LogicManagerTest {
                 Collections.emptyList());
     }
 
+    //@@author A0163962X
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -479,6 +480,7 @@ public class LogicManagerTest {
         assertCommandFailure("edit e 1 d/", Timeslot.MESSAGE_TIMESLOT_DNE);
     }
 
+    //@@author
     @Test
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
@@ -493,6 +495,7 @@ public class LogicManagerTest {
         assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedInbox, expectedTaskList, expectedEventList);
     }
 
+    //@@author A0163962X
     @Test
     public void execute_list_filtersCorrectly() throws Exception {
         // set up model
@@ -548,6 +551,7 @@ public class LogicManagerTest {
 
     }
 
+    //@@author
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single person in the shown list, using visible index.
@@ -598,6 +602,7 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord + " 3", expectedMessage);
     }
 
+    //@@author A0163962X-reused
     private void assertEventIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
@@ -617,6 +622,7 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord + " 3", expectedMessage);
     }
 
+    //@@author
     // TODO CAN WE GET RID OF THIS USELESS COMMAND
     @Test
     public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
@@ -644,6 +650,7 @@ public class LogicManagerTest {
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
 
+    //@@author A0163962X
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -653,6 +660,7 @@ public class LogicManagerTest {
         assertCommandFailure("delete e e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
+    //@@author
     @Test
     public void execute_deleteTaskIndexNotFound_errorMessageShown() throws Exception {
         assertTaskIndexNotFoundBehaviorForCommand("delete t");
@@ -663,6 +671,7 @@ public class LogicManagerTest {
         assertEventIndexNotFoundBehaviorForCommand("delete e");
     }
 
+    //@@author A0163962X
     @Test
     public void execute_delete_removesCorrectUserToDo() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -692,6 +701,7 @@ public class LogicManagerTest {
                 expectedInbox2, expectedInbox2.getTaskList(), expectedInbox2.getEventList());
     }
 
+    //@@author
     @Test
     public void execute_find_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
@@ -726,6 +736,7 @@ public class LogicManagerTest {
                 expectedInbox, expectedTaskList, expectedEventList);
     }
 
+    //@@author A0163962X
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -776,6 +787,7 @@ public class LogicManagerTest {
                 expectedInbox, expectedTaskList, expectedEventList);
     }
 
+    //@@author
     /**
      * A utility class to generate test data.
      */
@@ -792,6 +804,7 @@ public class LogicManagerTest {
             return new Task(name, deadline, priority, description, tags);
         }
 
+        //@@author A0163962X
         Task homeworkWithDeadline() throws Exception {
             Name name = new Name("CS2103 homework");
             Deadline deadline = new Deadline("2017-08-23");
@@ -859,6 +872,7 @@ public class LogicManagerTest {
             return new Event(name, timeslots, location, description, tags);
         }
 
+        //@@author
         /**
          * Generates a valid person using the given seed. Running this function
          * with the same parameter values guarantees the returned person will
@@ -874,6 +888,7 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
+        //@@author A0163962X
         Event generateEvent(int seed) throws Exception {
             Timeslot timeslot = new Timeslot("2020-09-23 03:00PM", "2020-9-23 05:00PM");
             DateUtils.addHours(timeslot.start, seed);
@@ -885,6 +900,7 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
+        //@@author
         /** Generates the correct add command based on the person given */
         String generateAddTaskCommand(Task task) {
             StringBuffer cmd = new StringBuffer();
@@ -905,6 +921,7 @@ public class LogicManagerTest {
             return cmd.toString();
         }
 
+        //@@author A0163962X
         String generateAddEventCommand(Event event) {
             StringBuffer cmd = new StringBuffer();
 
@@ -935,6 +952,7 @@ public class LogicManagerTest {
             return cmd.toString();
         }
 
+        //@@author
         /**
          * Generates an AddressBook with auto-generated persons.
          */
@@ -1035,6 +1053,7 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag")));
         }
 
+        //@@author A0163962X
         Event generateEventWithName(String name) throws Exception {
             List<Timeslot> timeslots = new ArrayList<>();
             timeslots.add(new Timeslot("2020-09-23 03:00PM", "2020-9-23 05:00PM"));

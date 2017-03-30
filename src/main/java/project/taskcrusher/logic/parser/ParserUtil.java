@@ -117,6 +117,7 @@ public class ParserUtil {
         return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
     }
 
+    //@@author A0163962X
     /**
      * Parses a {@code Optional<String> deadline} into an
      * {@code Optional<Deadline>} if {@code deadline} is present.
@@ -146,18 +147,6 @@ public class ParserUtil {
         } else {
             return Optional.empty();
         }
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
-     */
-    public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        return new UniqueTagList(tagSet);
     }
 
     /**
@@ -214,5 +203,18 @@ public class ParserUtil {
 
         return timeslots;
 
+    }
+
+    //@@author
+    /**
+     * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
+     */
+    public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
+        assert tags != null;
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        return new UniqueTagList(tagSet);
     }
 }

@@ -10,6 +10,7 @@ import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0163962X
 /**
  * Deletes a person identified using it's last displayed index from the address
  * book.
