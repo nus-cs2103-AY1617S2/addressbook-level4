@@ -79,16 +79,38 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
 
+    //@@author A0142939W
+    /**
+     * Sets the text in command box.
+     */
     public void setText(String text) {
         commandTextField.setText(text);
     }
 
+    //@@author A0142939W
+    /**
+     * Sets the current focus to be the textbox
+     */
     public void requestFocus() {
         commandTextField.requestFocus();
     }
 
+    //@@author A0142939W
+    /**
+     * Sets the focus to be at the end of the textbox
+     */
     public void end() {
         commandTextField.end();
+    }
+    
+    //@@author A0142939W
+    /**
+     * Types the given text in the commandbox and sets focus there
+     */
+    public void type(String text) {
+    	setText(text);
+    	requestFocus();
+    	end();
     }
 
 }

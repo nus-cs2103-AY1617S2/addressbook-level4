@@ -261,16 +261,32 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     public void handleAdd() {
-        commandBox.setText("add ");
-        commandBox.requestFocus();
-        commandBox.end();
+        commandBox.type("add ");
     }
 
     @FXML
     public void handleUndo() {
-        commandBox.setText("undo");
-        commandBox.requestFocus();
-        commandBox.end();
+        commandBox.type("undo");
+    }
+    
+    public void handleDone() {
+    	commandBox.type("done ");
+    }
+    
+    public void handleEdit() {
+    	commandBox.type("edit ");
+    }
+    
+    public void handleSelect() {
+    	commandBox.type("select ");
+    }
+    
+    public void handleSave() {
+    	commandBox.type("save");
+    }
+    
+    public void handleLoad() {
+    	commandBox.type("load ");
     }
 
     @FXML

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -30,7 +31,6 @@
                           </padding>
       
                           <children>
-                              <FlowPane fx:id="tags" />
                               <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
                               <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
                               <Label fx:id="loc" styleClass="cell_small_label" text="\$loc" />
@@ -38,6 +38,22 @@
                           </children>
                       </VBox>
                </content>
+               <graphic>
+                  <HBox>
+                     <children>
+                        <Label fx:id="name" pickOnBounds="false" text="\$title" wrapText="true" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Verdana Bold" size="20.0" />
+                           </font>
+                        </Label>
+                              <FlowPane fx:id="tags">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </FlowPane>
+                     </children>
+                  </HBox>
+               </graphic>
             </TitledPane>
             </children>
          <rowConstraints>
