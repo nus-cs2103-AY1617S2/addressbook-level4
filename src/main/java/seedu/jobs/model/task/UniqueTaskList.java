@@ -146,11 +146,19 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     public void setTasks(UniqueTaskList replacement) {
+
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        undoStack.push(stackList);
+        
         this.internalList.setAll(replacement.internalList);
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
+        
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
         }
