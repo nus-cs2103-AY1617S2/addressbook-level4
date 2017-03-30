@@ -48,9 +48,9 @@ public class ListCommandParser {
 				return new ListCommandLocation(internalParser(args, COMMAND_EXTENSION_LOCATION, KEYWORD_PERIOD));
 			case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
 				return new ListCommandTag(internalParser(args, COMMAND_EXTENSION_TAG, KEYWORD_PERIOD));
-			case (ListCommand.COMMAND_WORD_SUFFIX_DONE):
-				return new ListCommandDone(internalParser(args, COMMAND_EXTENSION_DONE, KEYWORD_DONE));
 			}
+		} else if (args.contains(ListCommand.COMMAND_WORD_SUFFIX_DONE)) {
+			return new ListCommandDone(internalParser(args, COMMAND_EXTENSION_DONE, KEYWORD_DONE));
 		}
 		return new ListCommand();
 	}

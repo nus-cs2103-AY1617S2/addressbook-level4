@@ -47,6 +47,7 @@ public class MarkDoneCommand extends Command {
 			return new CommandResult(MESSAGE_ALR_MARKED);
 		}
 		try {
+			markedTask.getIsDone().markDone();
 			model.updateEvent(targetIndex, markedTask);
 		} catch (UniqueEventList.DuplicateEventException dpe) {
 			throw new CommandException(MESSAGE_DUPLICATE_TASK);
