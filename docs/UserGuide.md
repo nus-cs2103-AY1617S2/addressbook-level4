@@ -284,7 +284,7 @@ Below is a list of shortcut keys for some of the above commands:
 > * add: `a`
 > * edit: `e`
 > * list: `l`
-> * delete: `d`
+> * delete: `d`, `del`
 > * mark: `m`, `check`
 > * unmark: `um`, `uncheck`
 > * find: `f`, `search`

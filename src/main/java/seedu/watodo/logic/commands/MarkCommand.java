@@ -72,13 +72,13 @@ public class MarkCommand extends Command {
 
         return new CommandResult(tasksMarkedMessage.toString());
     }
-    
+
     @Override
     public void unexecute() {
         try {
             model.updateTask(undoMarkInt, undoMark);
         } catch (DuplicateTaskException e) {
-            
+
         }
     }
 
