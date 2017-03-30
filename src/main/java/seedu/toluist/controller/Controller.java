@@ -58,8 +58,10 @@ public abstract class Controller {
 
     /**
      * Returns detailed help command(s) used by help controller
+     * Format is String[String[BasicHelp], String[Comments], String[Examples]]
+     * Comments and Examples can be null, but at least one should be there to make this not pointless
      */
-    public static String[] getDetailedHelp() {
-        return new String[] {};
+    public static String[][] getDetailedHelp() {
+        return new String[][] {};
     }
 }

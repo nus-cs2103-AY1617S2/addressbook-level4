@@ -77,14 +77,14 @@ public class HelpController extends Controller {
 
     private void showGeneralHelp() {
         List<List<String>> commandsBasicHelp = getBasicHelpFromClasses();
-        List<String> resultText;
+        List<String> resultText = new ArrayList<String>();
 
 
         for ( List<String> commandHelpMessage : commandsBasicHelp) {
             resultText.add(String.join("\n", commandHelpMessage));
         }
 
-        uiStore.setTasks(resultText);
+        //uiStore.setTasks(resultText);
     }
 
     public HashMap<String, String> tokenize(String command) {
