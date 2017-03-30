@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -23,16 +24,37 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private TaskListStorage taskListStorage;
     private UserPrefsStorage userPrefsStorage;
+    private ConfigStorage configStorage;
 
-
-    public StorageManager(TaskListStorage taskListStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TaskListStorage taskListStorage, UserPrefsStorage userPrefsStorage,
+                          ConfigStorage configStorage) {
         super();
         this.taskListStorage = taskListStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.configStorage = configStorage;
     }
 
-    public StorageManager(String taskListFilePath, String userPrefsFilePath) {
-        this(new XmlTaskListStorage(taskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String taskListFilePath, String userPrefsFilePath, String configFilePath) {
+        this(new XmlTaskListStorage(taskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath),
+             new JsonConfigStorage(configFilePath));
+    }
+
+    // ================ Config methods ==============================
+
+    @Override
+    public Config readConfig() throws DataConversionException, IOException {
+        return configStorage.readConfig();
+    }
+
+    @Override
+    public void saveConfig(Config config) throws IOException {
+        configStorage.saveConfig(config);
+    }
+
+    private void saveFilePathInConfig(String filePath) throws DataConversionException, IOException {
+        Config thisConfig = configStorage.readConfig();
+        thisConfig.setAddressBookFilePath(filePath);
+        configStorage.saveConfig(thisConfig);
     }
 
     // ================ UserPrefs methods ==============================
@@ -93,9 +115,16 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    public void handleFileStorageLocationChangedEvent(FileLocationChangedEvent event) {
+    public void handleFileLocationChangedEvent(FileLocationChangedEvent event) throws
+        DataConversionException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "File Location is changed."));
         setFilePath(event.getFilePath());
+        try {
+            saveTaskList(event.getData());
+            saveFilePathInConfig(event.getFilePath());
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
     }
 
 }
