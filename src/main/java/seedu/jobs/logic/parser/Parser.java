@@ -18,6 +18,7 @@ import seedu.jobs.logic.commands.HelpCommand;
 import seedu.jobs.logic.commands.IncorrectCommand;
 import seedu.jobs.logic.commands.ListCommand;
 import seedu.jobs.logic.commands.SelectCommand;
+import seedu.jobs.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -74,6 +75,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
