@@ -29,7 +29,10 @@ public class Date {
      */
     public Date(String input) throws IllegalValueException {
         assert input != null;
-        this.value = input;
+    }
+
+    public Date(LocalDateTime localDateTime) {
+        this.localDateTime = Optional.of(localDateTime);
     }
 
     /**
@@ -76,6 +79,10 @@ public class Date {
 
     public LocalDateTime getLocalDateTime() throws NoSuchElementException {
         return localDateTime.get();
+    }
+
+    public void setLocalDateTime(LocalDateTime newLocalDateTime) throws NoSuchElementException {
+        this.localDateTime = Optional.of(newLocalDateTime);
     }
 
 }

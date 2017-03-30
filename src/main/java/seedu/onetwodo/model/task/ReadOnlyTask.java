@@ -15,6 +15,8 @@ public interface ReadOnlyTask {
 
     EndDate getEndDate();
 
+    Recurring getRecur();
+
     Priority getPriority();
 
     Description getDescription();
@@ -39,11 +41,17 @@ public interface ReadOnlyTask {
         return getEndDate().hasDate();
     }
 
-    // @@author A0141138N
+    //@@author A0139343E
+    default boolean hasRecur() {
+        return getRecur().hasRecur();
+    }
+
+    //@@author A0141138N
     default boolean hasPriority() {
         return getPriority().hasPriority();
     }
 
+    //@@author
     default boolean hasDescription() {
         return getDescription().hasDescription();
     }
@@ -78,6 +86,11 @@ public interface ReadOnlyTask {
         if (this.hasEndDate()) {
             builder.append("\n").append(getEndDate());
         }
+
+        if (this.hasRecur()) {
+            builder.append(" " + getRecur());
+        }
+
         if (this.hasPriority()) {
             builder.append("\n").append("Priority: ").append(getPriority());
         }

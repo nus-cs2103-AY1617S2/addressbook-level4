@@ -47,6 +47,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label endDate;
     @FXML
+    private Label recur;
+    @FXML
     private Label description;
     @FXML
     private HBox descriptionBox;
@@ -61,6 +63,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(prefixId);
         setPriority(task);
         setDate(task);
+        setRecur(task);
         setDescription(task);
         initTags(task);
         if (task.getDoneStatus()) {
@@ -120,6 +123,11 @@ public class TaskCard extends UiPart<Region> {
             descriptionBox.setMaxHeight(0);
             description.setMaxHeight(0);
         }
+    }
+
+    private void setRecur(ReadOnlyTask task) {
+        String recurText = task.getRecur().value;
+        recur.setText(recurText);
     }
 
     private void initTags(ReadOnlyTask task) {

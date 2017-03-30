@@ -15,6 +15,7 @@ public class Task implements ReadOnlyTask {
     private StartDate startDate;
     private EndDate endDate;
     private Priority priority;
+    private Recurring recur;
     private Description description;
     private UniqueTagList tags;
 
@@ -26,11 +27,12 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null. Event
      */
-    public Task(Name name, StartDate startDate, EndDate endDate, Priority priority, Description description,
-            UniqueTagList tags) {
+    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur,
+            Priority priority, Description description, UniqueTagList tags) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.recur = recur;
         this.priority = priority;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from
@@ -77,17 +79,18 @@ public class Task implements ReadOnlyTask {
         }
     }
 
+    //@@author
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getPriority(),
-                source.getDescription(), source.getTags(), source.getDoneStatus());
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRecur(),
+                source.getPriority(), source.getDescription(), source.getTags(), source.getDoneStatus());
     }
 
-    public Task(Name name, StartDate startDate, EndDate endDate, Priority priority, Description description,
-            UniqueTagList tags, boolean isDone) {
-        this(name, startDate, endDate, priority, description, tags);
+    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur,
+            Priority priority, Description description, UniqueTagList tags, boolean isDone) {
+        this(name, startDate, endDate, recur, priority, description, tags);
         this.isDone = isDone;
     }
 
@@ -107,11 +110,19 @@ public class Task implements ReadOnlyTask {
         return endDate;
     }
 
+    //@@author A0139343E
+    @Override
+    public Recurring getRecur() {
+        return recur;
+    }
+
+    //@@author A0141138N
     @Override
     public Priority getPriority() {
         return priority;
     }
 
+    //@@author
     @Override
     public Description getDescription() {
         return description;
@@ -153,11 +164,19 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
     }
 
+    //@@author A0139343E
+    public void setRecur(Recurring recur) {
+        assert recur != null;
+        this.recur = recur;
+    }
+
+    //@@author A0141138N
     public void setPriority(Priority priority) {
         assert priority != null;
         this.priority = priority;
     }
 
+    //@@author
     public void setDescription(Description description) {
         assert description != null;
         this.description = description;
@@ -165,6 +184,11 @@ public class Task implements ReadOnlyTask {
 
     public void setDone() {
         assert isDone == false;
+/*        if (!this.hasRecur()) {
+            isDone = true;
+        } else {
+            forwardTaskRecurDate();
+        }*/
         isDone = true;
     }
 
@@ -193,11 +217,52 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setStartDate(replacement.getStartDate());
         this.setEndDate(replacement.getEndDate());
+        this.setRecur(replacement.getRecur());
         this.setPriority(replacement.getPriority());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
 
+    //@@author A0139343E
+    public void forwardTaskRecurDate() {
+        assert this.getTaskType() != TaskType.TODO;
+        StartDate tempStartDate;
+        EndDate tempEndDate = getEndDate();
+        switch(this.getRecur().value) {
+        case Recurring.RECUR_DAILY:
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusDays(1)));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusDays(1)));
+            }
+            break;
+        case Recurring.RECUR_WEEKLY:
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusWeeks(1)));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusWeeks(1)));
+            }
+            break;
+        case Recurring.RECUR_MONTHLY:
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusMonths(1)));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusMonths(1)));
+            }
+            break;
+        case Recurring.RECUR_YEARLY:
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusYears(1)));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusYears(1)));
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    //@@author
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -209,7 +274,7 @@ public class Task implements ReadOnlyTask {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing
         // your own
-        return Objects.hash(name, startDate, endDate, priority, description, tags);
+        return Objects.hash(name, startDate, endDate, recur, priority, description, tags);
     }
 
     @Override

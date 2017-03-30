@@ -14,6 +14,7 @@ import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Recurring;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskAttributesChecker;
@@ -31,8 +32,8 @@ public class EditCommand extends Command {
             + "by the index used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive prefix integer) [NAME] "
-            + "[s/START_DATE] [e/END_DATE] [p/PRIORITY] [d/DESCRIPTION ] [t/TAG]...\n" + "Example: " + COMMAND_WORD
-            + " e1 s/tmr 9:00am d/beware of dogs";
+            + "[s/START_DATE] [e/END_DATE] [r/RECUR] [p/PRIORITY] [d/DESCRIPTION ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " e1 s/tmr 9:00am d/beware of dogs";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task Result: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -105,12 +106,13 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
         EndDate updatedEndDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getEndDate);
+        Recurring updatedRecur = editTaskDescriptor.getRecur().orElseGet(taskToEdit::getRecur);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         Task edited = new Task(updatedName, updatedStartDate, updatedEndDate,
-                updatedPriority, updatedDescription, updatedTags);
+                updatedRecur, updatedPriority, updatedDescription, updatedTags);
         if (taskToEdit.getDoneStatus()) {
             edited.setDone();
         }
@@ -125,6 +127,7 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<StartDate> startDate = Optional.empty();
         private Optional<EndDate> endDate = Optional.empty();
+        private Optional<Recurring> recur = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -136,6 +139,7 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.startDate = toCopy.getStartDate();
             this.endDate = toCopy.getDate();
+            this.recur = toCopy.getRecur();
             this.priority = toCopy.getPriority();
             this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
@@ -145,8 +149,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.priority, this.description,
-                    this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.recur,
+                    this.priority, this.description, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -174,6 +178,15 @@ public class EditCommand extends Command {
 
         public Optional<EndDate> getDate() {
             return endDate;
+        }
+
+        public void setRecur(Optional<Recurring> recur) {
+            assert recur != null;
+            this.recur = recur;
+        }
+
+        public Optional<Recurring> getRecur() {
+            return recur;
         }
 
         public void setPriority(Optional<Priority> priority) {

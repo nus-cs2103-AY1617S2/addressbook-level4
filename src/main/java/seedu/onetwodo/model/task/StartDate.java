@@ -26,6 +26,10 @@ public class StartDate extends Date {
         this.value = createDisplayValue(localDateTime);
     }
 
+    public StartDate(LocalDateTime localDateTime) {
+        super(localDateTime);
+        this.value = createDisplayValue(Optional.of(localDateTime));
+    }
     /**
      *
      * @param localDateTime input optional LocalDateTime

@@ -105,12 +105,20 @@ public class ModelManager extends ComponentManager implements Model {
             throw new IllegalValueException("This task has been done");
         }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        toDoList.doneTask(taskToComplete);
+        if(!taskToComplete.hasRecur()) {
+            toDoList.doneTask(taskToComplete);
+        } else {
+            Task newTask = new Task(taskToComplete);
+            newTask.forwardTaskRecurDate();
+            toDoList.doneTask(taskToComplete);
+            toDoList.addTask(newTask);
+        }
+
         history.saveUndoInformationAndClearRedoHistory(DoneCommand.COMMAND_WORD, taskToComplete, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @Override
     public synchronized void todayTask(ReadOnlyTask taskForToday) throws IllegalValueException {
         if (taskForToday.getTodayStatus() == false) {
@@ -122,6 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    //@@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
@@ -141,8 +150,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
 
         addTaskForEdit(internalIdx, editedTask);
-        history.saveUndoInformationAndClearRedoHistory(
-                EditCommand.COMMAND_WORD, taskToEdit, editedTask, copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, taskToEdit,
+                editedTask, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -238,7 +247,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && (hasAfter ? isTaskAfter(task, after) : true)
                 && (priority.hasPriority() ? isPrioritySame(task, priority) : true)
                 && (!tags.isEmpty() ? containsAnyTag(task, tags) : true)
-                ));
+        ));
     }
 
     private boolean containsAnyTag(ReadOnlyTask task, Set<Tag> tags) {
@@ -414,5 +423,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", keyWords);
         }
     }
+    //@@author
 
 }
