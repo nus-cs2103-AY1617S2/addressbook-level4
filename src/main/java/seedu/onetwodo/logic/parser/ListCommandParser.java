@@ -22,7 +22,7 @@ import seedu.onetwodo.model.DoneStatus;
 public class ListCommandParser {
 
     private static final String TODAY = "today";
-    private static final String NOW = "now";
+    private static final String TODAY_START = "0000h";
     private static final String TOMORROW = "tomorrow";
 
     /**
@@ -52,7 +52,7 @@ public class ListCommandParser {
             case "":
                 return new ListCommand(DoneStatus.UNDONE_STRING, beforeDate, afterDate, priority, tags);
             case TODAY:
-                return new ListCommand(DoneStatus.UNDONE_STRING, TOMORROW, NOW, priority, tags);
+                return new ListCommand(DoneStatus.UNDONE_STRING, TOMORROW, TODAY_START, priority, tags);
             default:
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }
