@@ -148,4 +148,10 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.setLogic(logic);
         mainWindow.fillInnerParts();
     }
+
+    @Override
+    public void setModel(Model model) {
+        this.model = model;
+        mainWindow.setModel(model);
+    }
 }

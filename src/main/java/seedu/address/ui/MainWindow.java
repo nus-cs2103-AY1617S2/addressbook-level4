@@ -146,7 +146,9 @@ public class MainWindow extends UiPart<Region> {
         if (leftPanel == null) {
             leftPanel = new LeftPanel(getleftPanelPlaceholder(), model.getTaskManager().getTaskList());
         } else {
+            leftPanel.setTaskList(model.getTaskManager().getTaskList());
             leftPanel.updateLabelCount();
+            leftPanel.setTodayListView(model.getTaskManager().getTaskList());
         }
 
         if (resultDisplay == null) {
@@ -279,4 +281,7 @@ public class MainWindow extends UiPart<Region> {
         this.logic = logic;
     }
 
+    public void setModel(Model model) {
+        this.model = model;
+    }
 }

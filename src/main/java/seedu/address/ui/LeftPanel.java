@@ -35,6 +35,7 @@ public class LeftPanel extends UiPart<Region> {
     private static final String FXML = "LeftPanel.fxml";
     private HashMap<Label, Integer> labelCount;
     private ObservableList<ReadOnlyTask> taskList;
+    private ObservableList<Label> labels;
 
     @FXML
     private javafx.scene.control.Label appTitleLabel;
@@ -149,7 +150,7 @@ public class LeftPanel extends UiPart<Region> {
     }
 
     public void setConnections(HashMap<Label, Integer> labelList) {
-        ObservableList<Label> labels = getLabelsWithCount(labelList);
+        labels = getLabelsWithCount(labelList);
         labelCounterLabel.setText(Integer.toString(labelList.size()));
         labelListView.setItems(labels);
         labelListView.setCellFactory(listView -> new LabelListViewCell());
@@ -159,7 +160,7 @@ public class LeftPanel extends UiPart<Region> {
      * Returns labels with count more than 0, ignoring all empty labels
      */
     private ObservableList<Label> getLabelsWithCount(HashMap<Label, Integer> labelList) {
-        ObservableList<Label> labels = FXCollections.observableArrayList();
+        labels = FXCollections.observableArrayList();
         for (Entry<Label, Integer> entry : labelList.entrySet()) {
             if (entry.getValue() > 0) {
                 labels.add(entry.getKey());
@@ -167,6 +168,13 @@ public class LeftPanel extends UiPart<Region> {
         }
         FXCollections.sort(labels);
         return labels;
+    }
+
+    /**
+     * Sets the task list to the given task list
+     */
+    public void setTaskList(ObservableList<ReadOnlyTask> taskList) {
+        this.taskList = taskList;
     }
 
     @FXML
