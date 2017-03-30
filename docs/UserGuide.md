@@ -43,7 +43,7 @@ A command guide will be shown in the window
 
 ### 2.2. Adding a task : `add`
 
-Adds a task to the task manager<br>
+Adds a task to the task manager.<br>
 Format: `add TASK s/STARTING_DATE_TIME e/ENDING_DATE_TIME d/Description #tags`
 
 > Only Task title is a compulsory field.<br>
@@ -63,7 +63,6 @@ Examples:
 
 Shows a list of all tasks in the task manager.<br>
 Format: `list`
-A list of tasks with index number will be shown in the column
 
 ### 2.4. Select a task : `select`
 
@@ -96,7 +95,7 @@ Examples:
 ### 2.6. Finding all tasks containing any keyword in their task title / description / tags: `find`
 
 Finds a task with the given keyword.<br>
-Supports partial matching and tolerance for misspelled keywords.
+Supports partial matching and tolerance for misspelled keywords.<br>
 Format: `find KEYWORD`
 
 Examples:
@@ -120,9 +119,10 @@ Format: `delete INDEX`
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* `delete 1`
+
+* `delete 1`<br>
    Delete the task with index 1 in the Task Manager
-* `remove 3`
+* `remove 3`<br>
    Delete the task with index 3 in the Task Manager
 
 ### 2.8. Sorting tasks : `sort`
@@ -131,9 +131,17 @@ Sorts all tasks by their start date or end date.<br>
 Format: `sort KEYWORD`
 
 > Sorts tasks according to the input `KEYWORD`.<br>
-> The keyword refers to start date or end date.<br>
-> The keyword can be `s/` for start date or `e/` for end date.<br>
+> The keyword refers to `s/` for start date or `e/` for end date.<br>
+> Invalid keyword will trigger sort by end date as default.<br>
+> New addition of tasks will follow the sort order. <br>
 > Any trailing symbols after a valid keyword will be ignored.
+
+Examples:
+
+* `sort s/`<br>
+   Sort the task by the start date
+* `sort e/`<br>
+   Sort the task by the end date
 
 ### 2.9. Clearing all entries : `clear`
 
@@ -143,7 +151,7 @@ Format: `clear`
 ### 2.10. Viewing history of task : `history`
 
 A list of history of tasks that have been completed will be shown in the column sorted in reverse-chronological order.<br>
-This history will be used in undo implementation.
+This history will be used in undo implementation.<br>
 Format: `history`
 
 ### 2.11. Exiting the program : `exit`
