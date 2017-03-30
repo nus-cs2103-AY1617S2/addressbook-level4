@@ -39,6 +39,13 @@ public class UndoCommandTest extends ToDoListGuiTest {
         String feedbackMessage = String.format(DeleteCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), taskToAdd);
         assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
+    
+    @Test
+    public void undo_failedAdd_failure() {
+        commandBox.runCommand(AddCommand.COMMAND_WORD + " " + td.taskA.getName());
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(MESSAGE_EMPTYUNDOHISTORY);
+    }
 
     @Test
     public void undo_delete_success() {
@@ -48,6 +55,13 @@ public class UndoCommandTest extends ToDoListGuiTest {
 
         String feedbackMessage = String.format(AddCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), td.taskB);
         assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+    }
+    
+    @Test
+    public void undo_failedDelete_failure() {
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e999");
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(MESSAGE_EMPTYUNDOHISTORY);
     }
 
     @Test
@@ -60,6 +74,20 @@ public class UndoCommandTest extends ToDoListGuiTest {
         String feedbackMessage = String.format("Restore Task".concat(COMMAND_FORMATTER), td.taskA);
         assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
+    
+    @Test
+    public void undo_failedEdit_invalidIndex_failure() {
+        commandBox.runCommand(EditCommand.COMMAND_WORD + " e999 hello");
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(MESSAGE_EMPTYUNDOHISTORY);
+    }
+    
+    @Test
+    public void undo_failedEdit_addRepeatedTask_failure() {
+        commandBox.runCommand(EditCommand.COMMAND_WORD + " e1 " + td.taskD.getName());
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(MESSAGE_EMPTYUNDOHISTORY);
+    }
 
     @Test
     public void undo_done_success() {
@@ -69,6 +97,13 @@ public class UndoCommandTest extends ToDoListGuiTest {
 
         String feedbackMessage = String.format("Undone".concat(COMMAND_FORMATTER), td.taskD);
         assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+    }
+    
+    @Test
+    public void undo_failedDone_failure() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " e999");
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(MESSAGE_EMPTYUNDOHISTORY);
     }
 
     @Test

@@ -32,8 +32,6 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    void deleteTaskForEdit(ReadOnlyTask target) throws TaskNotFoundException;
-
     /**
      * Mark the given tasks completed.
      *
@@ -51,8 +49,6 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
-    void addTaskForEdit(int internalIdx, Task task) throws UniqueTaskList.DuplicateTaskException;
-
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
      * {@code editedTask}.
@@ -64,8 +60,11 @@ public interface Model {
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the
      *             filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
+    void updateTask(ReadOnlyTask taskToEdit, int internalIdx, Task editedTask) throws TaskNotFoundException, UniqueTaskList.DuplicateTaskException;
 
+    void addTaskForEdit(int internalIdx, Task editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
+    
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}

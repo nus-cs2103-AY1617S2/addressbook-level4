@@ -28,13 +28,23 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
         entry.add(commandWord);
         entry.add(String.format(COMMAND_FORMATTER, task));
     }
+    
+    public CommandHistoryEntry (String commandWord, ReadOnlyTask taskBeforeEdit, ReadOnlyTask taskAfterEdit) {
+        entry = new ArrayList<String>();
+        entry.add(commandWord);
+        entry.add(String.format(COMMAND_FORMATTER, taskBeforeEdit));
+        entry.add(String.format(COMMAND_FORMATTER, taskAfterEdit));
+    }
 
     @Override
     public String getFeedbackMessage() {
         if (entry.size() == 1) {
-            return entry.get(0);
-        } else {
+            assert entry.get(0).equals(ClearCommand.COMMAND_WORD);
+            return ClearCommand.MESSAGE_SUCCESS;
+        } else if (entry.size() == 2){
             return entry.get(0).concat(entry.get(1));
+        } else {
+            return entry.get(0).concat(entry.get(2));
         }
     }
 
