@@ -17,17 +17,17 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                    new Task(new TaskName("Assignment for CS"), new DueDate("210317"), new Status("undone"),
+                new Task(new TaskName("Assignment for CS"), new DueDate("210317"), new Status("undone"),
                             new BeginDate("210217"), new UniqueTagList("friends")),
-                    new Task(new TaskName("Burn homework"), new DueDate("210317"), new Status("undone"),
+                new Task(new TaskName("Burn homework"), new DueDate("210317"), new Status("undone"),
                             new BeginDate("210217"), new UniqueTagList("colleagues", "friends")),
-                    new Task(new TaskName("Carry burdens"), new DueDate("210317"), new Status("undone"),
+                new Task(new TaskName("Carry burdens"), new DueDate("210317"), new Status("undone"),
                             new BeginDate("210217"), new UniqueTagList("neighbours")),
-                    new Task(new TaskName("Destroy homework"), new DueDate("210317"), new Status("undone"),
+                new Task(new TaskName("Destroy homework"), new DueDate("210317"), new Status("undone"),
                             new BeginDate("210217"), new UniqueTagList("family")),
-                    new Task(new TaskName("Irrigate fields"), new DueDate("210317"), new Status("undone"),
+                new Task(new TaskName("Irrigate fields"), new DueDate("210317"), new Status("undone"),
                             new BeginDate("210217"), new UniqueTagList("classmates")),
-                    new Task(new TaskName("Return bicycle"), new DueDate("210317"), new Status("undone"),
+                new Task(new TaskName("Return bicycle"), new DueDate("210317"), new Status("undone"),
                             new BeginDate("210217"), new UniqueTagList("colleagues")) };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
