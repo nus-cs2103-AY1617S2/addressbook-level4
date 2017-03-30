@@ -31,7 +31,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(RedoCommand.COMMAND_WORD);
         assertResultMessage(MESSAGE_EMPTYREDOHISTORY);
     }
-    
+
     @Test
     public void redo_failedUndoDueToFailedCommand_failure () {
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e999");
@@ -58,7 +58,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
 
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(taskToAdd.getTaskType(), expectedList));
-        
+
         String feedbackMessage = String.format(AddCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), taskToAdd);
         assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
@@ -72,7 +72,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         TestTask[] filteredTasks = TestUtil.getTasksByTaskType(currentList, TaskType.EVENT);
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(filteredTasks, 2);
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, expectedRemainder));
-        
+
         String feedbackMessage = String.format(DeleteCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), filteredTasks[1]);
         assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
@@ -88,7 +88,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         TestTask editedTask = new TaskBuilder(filteredTaskList[0]).withTags("interest", "hobby").build();
         filteredTaskList[0] = editedTask;
         assertTrue(taskListPanel.isListMatching(TaskType.TODO, filteredTaskList));
-        
+
         String feedbackMessage = String.format(EditCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), editedTask);
         assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
@@ -103,7 +103,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         filteredTaskList[1].setIsDone(true);
         TestTask[] filteredUndoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, false);
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, filteredUndoneList));
-        
+
         String feedbackMessage = String.format(DoneCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), filteredTaskList[1]);
         assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
@@ -118,7 +118,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, emptyList));
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, emptyList));
         assertTrue(taskListPanel.isListMatching(TaskType.TODO, emptyList));
-        
+
         assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + ClearCommand.MESSAGE_SUCCESS);
     }
 }

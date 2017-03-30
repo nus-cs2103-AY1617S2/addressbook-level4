@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
@@ -44,7 +45,7 @@ public class CommandBoxHandle extends GuiHandle {
     }
 
     private void removeDialog() {
-        EventsCenter.getInstance().post(new CloseDialogEvent());
+        guiRobot.type(KeyCode.DELETE).sleep(200);
     }
 
     public HelpWindowHandle runHelpCommand() {
