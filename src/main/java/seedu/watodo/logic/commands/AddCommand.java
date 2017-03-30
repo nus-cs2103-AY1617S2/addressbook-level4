@@ -93,7 +93,7 @@ public class AddCommand extends Command {
             System.out.println(undoAdd);
         }
     }
-    
+
     @Override
     public void redo() {
         assert model != null;

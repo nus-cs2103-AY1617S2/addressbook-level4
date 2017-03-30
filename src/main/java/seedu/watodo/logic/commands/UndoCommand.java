@@ -20,7 +20,7 @@ public class UndoCommand extends Command {
 
         if (previousCommand != null) {
             previousCommand.unexecute();
-            
+
             return new CommandResult(previousCommand + " " + MESSAGE_SUCCESS);
         }
 

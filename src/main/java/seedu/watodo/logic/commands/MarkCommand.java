@@ -73,7 +73,7 @@ public class MarkCommand extends Command {
 
         return new CommandResult(tasksMarkedMessage.toString());
     }
-    
+
     //@@author A0139845R
 
     @Override
@@ -85,7 +85,7 @@ public class MarkCommand extends Command {
 
         }
     }
-    
+
     @Override
     public void redo() {
         try {
@@ -94,7 +94,7 @@ public class MarkCommand extends Command {
         } catch (CommandException e) {
         }
     }
-    
+
     //@@author
 
     /**

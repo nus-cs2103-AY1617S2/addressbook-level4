@@ -159,7 +159,7 @@ Format: `edit INDEX <[DESCRIPTION] [EDIT DATETIME FORMAT] [#TAG]...>`
 > * Existing values will be updated to the input values.
 > * When editing tags, inputting tags of the task that already exist will removed them from the task i.e adding of tags is not cumulative.
     Inputting tags of the task that do not already exist will add them to the task.
-    
+
 EDIT DATETIME FORMAT
 > * Task can be changed from one task type to any other task type
 > * DATETIME FORMAT must be one of the following four:
@@ -181,13 +181,13 @@ Examples:
 
   `edit 2 by/ mon `<br>
   Edits the deadline of the 2nd task listed to be `mon`
-  
+
   `edit 3 REMOVEDATES` <br>
   removes all existing start and end dateTimes in the 3rd task
-  
+
   `edit 4 #newTag`
   adds the tag newTag to the 4th task in the list, given that the task does not already have that tag
-  
+
   `edit 1 #existingTag`
   removes the existingTag from the 1st task, given that the task already has that tag
 
@@ -294,11 +294,11 @@ Below is a list of shortcut keys for some of the above commands:
 You can add and delete your own personal shortcut keys to the various commands.
 Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature)
         `shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY)
-        
-> SHORTCUT_KEY can be any character except whitespace. 
+
+> SHORTCUT_KEY can be any character except whitespace.
 > Unfortunately, special keys (eg. F1, SHIFT, CTRL etc) are not supported. :(
 
-Examples: 
+Examples:
 * shortcut + add @@
 * shortcut + undo z
 * shortcut - undo z

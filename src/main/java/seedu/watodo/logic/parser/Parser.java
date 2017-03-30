@@ -28,14 +28,13 @@ import seedu.watodo.logic.commands.ListMonthCommand;
 import seedu.watodo.logic.commands.ListUndoneCommand;
 import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.MarkCommand;
+import seedu.watodo.logic.commands.RedoCommand;
 import seedu.watodo.logic.commands.SaveAsCommand;
 import seedu.watodo.logic.commands.SelectCommand;
 import seedu.watodo.logic.commands.ShortcutCommand;
 import seedu.watodo.logic.commands.UndoCommand;
 import seedu.watodo.logic.commands.UnmarkCommand;
 import seedu.watodo.logic.commands.ViewFileCommand;
-import seedu.watodo.logic.commands.UndoCommand;
-import seedu.watodo.logic.commands.RedoCommand;
 
 
 /**
@@ -90,7 +89,7 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-            
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 

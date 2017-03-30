@@ -42,6 +42,6 @@ public abstract class Command {
     }
 
     public void redo() {
-        
+
     }
 }

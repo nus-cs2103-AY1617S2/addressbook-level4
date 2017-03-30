@@ -1,9 +1,5 @@
 package seedu.watodo.logic.commands;
 
-import seedu.watodo.logic.commands.exceptions.CommandException;
-import seedu.watodo.model.TaskManager;
-import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
-
 /**
  * Clears the task manager.
  */
@@ -23,10 +19,10 @@ public class RedoCommand extends Command {
         Command undoneCommand = model.getUndoneCommand();
         if (undoneCommand != null) {
             undoneCommand.redo();
-            
+
             return new CommandResult(MESSAGE_SUCCESS);
         }
-        
+
         return new CommandResult(MESSAGE_EMPTY);
     }
 }
