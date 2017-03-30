@@ -33,6 +33,11 @@
               <items>
                 <MenuItem fx:id="quickAddMenuItem" mnemonicParsing="false" onAction="#handleAdd" text="Quick Add" />
                   <MenuItem fx:id="quickUndoMenuItem" mnemonicParsing="false" onAction="#handleUndo" text="Quick Undo" />
+                  <MenuItem fx:id="quickDoneMenuItem" mnemonicParsing="false" onAction="#handleDone" text="Quick Done" />
+                  <MenuItem fx:id="quickEditMenuItem" mnemonicParsing="false" onAction="#handleEdit" text="Quick Edit" />
+                  <MenuItem fx:id="quickSelectMenuItem" mnemonicParsing="false" onAction="#handleSelect" text="Quick Select" />
+                  <MenuItem fx:id="quickSaveMenuItem" mnemonicParsing="false" onAction="#handleSave" text="Quick Save" />
+                  <MenuItem fx:id="quickLoadMenuItem" mnemonicParsing="false" onAction="#handleLoad" text="Quick Load" />
                   <MenuItem fx:id="quickScrollDownMenuItem" mnemonicParsing="false" onAction="#handleScrollDown" text="Quick Scroll Down" />
                   <MenuItem fx:id="quickScrollUpMenuItem" mnemonicParsing="false" onAction="#handleScrollUp" text="Quick Scroll Up" />
               </items>

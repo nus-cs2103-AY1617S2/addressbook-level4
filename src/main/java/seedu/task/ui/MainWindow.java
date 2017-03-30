@@ -58,6 +58,21 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem quickUndoMenuItem;
+    
+    @FXML
+    private MenuItem quickDoneMenuItem;
+    
+    @FXML
+    private MenuItem quickEditMenuItem;
+    
+    @FXML
+    private MenuItem quickSelectMenuItem;
+    
+    @FXML
+    private MenuItem quickSaveMenuItem;
+    
+    @FXML
+    private MenuItem quickLoadMenuItem;
 
     @FXML
     private MenuItem quickScrollDownMenuItem;
@@ -124,6 +139,11 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(helpFormatMenuItem, KeyCombination.valueOf("F3"));
         setAccelerator(quickAddMenuItem, KeyCombination.valueOf("Ctrl+Alt+A"));
         setAccelerator(quickUndoMenuItem, KeyCombination.valueOf("Ctrl+Alt+Z"));
+        setAccelerator(quickDoneMenuItem, KeyCombination.valueOf("Ctrl+Alt+D"));
+        setAccelerator(quickEditMenuItem, KeyCombination.valueOf("Ctrl+Alt+E"));
+        setAccelerator(quickSelectMenuItem, KeyCombination.valueOf("Ctrl+Alt+S"));
+        setAccelerator(quickSaveMenuItem, KeyCombination.valueOf("Ctrl+S"));
+        setAccelerator(quickLoadMenuItem, KeyCombination.valueOf("Ctrl+Alt+L"));
         setAccelerator(quickScrollDownMenuItem, KeyCombination.valueOf("Shift+DOWN"));
         setAccelerator(quickScrollUpMenuItem, KeyCombination.valueOf("SHIFT+UP"));
     }
