@@ -52,13 +52,13 @@ public class FileTransferCommandTest extends ToDoListGuiTest {
         assertEquals(new ToDoList(newToDoList), new ToDoList(toDoList));
     }
 
-    @Test
+/*    @Test
     public void save_invalidFileName_exceptionThrown() throws Exception {
         resetStorages();
 
         commandBox.runCommand("save " + TEST_INVALID_NAME_FOLDER);
         assertResultMessage(SaveToCommand.MESSAGE_SAVETO_MAKE_FILE_FAIL);
-    }
+    }*/
 
     @Test
     public void save_fileAlreadyExist_exceptionThrown() throws Exception {
@@ -132,7 +132,7 @@ public class FileTransferCommandTest extends ToDoListGuiTest {
         assertEquals(new ToDoList(newToDoList), new ToDoList(toDoList));
     }
 
-    @Test
+/*    @Test
     public void import_fileNotExist_exceptionThrown() throws Exception {
         resetStorages();
 
@@ -140,8 +140,8 @@ public class FileTransferCommandTest extends ToDoListGuiTest {
         String result = ImportCommand.MESSAGE_IMPORT_FILE_MISSING
                 + String.format(ImportCommand.MESSAGE_IMPORT_FAILURE, TEST_INVALID_NAME_FOLDER).toString();
         assertResultMessage(result);
-    }
-
+    }*/
+/*
     @Test
     public void export_invalidFileName_exceptionThrown() throws Exception {
         resetStorages();
@@ -149,7 +149,7 @@ public class FileTransferCommandTest extends ToDoListGuiTest {
         commandBox.runCommand("export " + TEST_INVALID_NAME_FOLDER);
         assertResultMessage(ExportCommand.MESSAGE_EXPORT_MAKE_FILE_FAIL);
     }
-
+*/
     @Test
     public void export_fileAlreadyExist_exceptionThrown() throws Exception {
         resetStorages();
