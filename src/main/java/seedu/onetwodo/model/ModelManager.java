@@ -131,7 +131,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(ReadOnlyTask taskToEdit, int internalIdx, Task editedTask)
+    public synchronized void updateTask(ReadOnlyTask taskToEdit, int internalIdx, Task editedTask)
             throws TaskNotFoundException, UniqueTaskList.DuplicateTaskException{
         assert taskToEdit != null;
         assert editedTask != null;
@@ -146,13 +146,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public void addTaskForEdit(int internalIdx, Task editedTask) throws UniqueTaskList.DuplicateTaskException{
+    public synchronized void addTaskForEdit(int internalIdx, Task editedTask) throws UniqueTaskList.DuplicateTaskException{
         toDoList.addTask(internalIdx, editedTask);
         indicateToDoListChanged();
     }
 
     @Override
-    public String undo() throws EmptyHistoryException {
+    public synchronized String undo() throws EmptyHistoryException {
         if (history.hasUndoHistory()) {
             history.saveRedoInformation(this.toDoList);
             this.toDoList.resetData(history.getPreviousToDoList());
@@ -165,7 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public String redo() throws EmptyHistoryException {
+    public synchronized String redo() throws EmptyHistoryException {
         if (history.hasRedoHistory()) {
             history.saveUndoInformation(this.toDoList);
             this.toDoList.resetData(history.getNextToDoList());
