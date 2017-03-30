@@ -80,24 +80,25 @@ public class TaskCard extends UiPart<Region> {
     
     public TaskCard(ReadOnlyTask task, int displayedIndex, String fxml) {
         super(fxml);
-        plane.setText(displayedIndex + ". " + task.getName().fullName);
-        plane.setFont(Font.font("Verdana", FontWeight.BOLD,20));
+//        plane.setText(displayedIndex + ". " + task.getName().fullName);
+//        plane.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         //plane.setCollapsible(true);
       //prohibit animating
      // plane.setAnimated(false);
         plane.setExpanded(false);
         this.status = false;
-        //name.setText(task.getName().fullName);
+        name.setText(displayedIndex + ". " + task.getName().fullName);
+        name.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         //id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().toString());
         endDate.setText(task.getEndDate().toString());
         loc.setText(task.getLocation().value);
         if (task.isDone()) {
             //done.setText("Done");
-            plane.setTextFill(Color.GREEN);
+            name.setTextFill(Color.GREEN);
             Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
-            plane.setGraphic(new ImageView(image));
-            plane.setContentDisplay(ContentDisplay.RIGHT);
+            name.setGraphic(new ImageView(image));
+            name.setContentDisplay(ContentDisplay.RIGHT);
             //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         } else {
             //done.setText("Not Done");

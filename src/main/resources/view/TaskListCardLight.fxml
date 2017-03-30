@@ -26,7 +26,6 @@
                           </padding>
             
                                 <children>
-                              <FlowPane fx:id="tags" styleClass="content" />
                               <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
                               <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
                               <Label fx:id="loc" styleClass="cell_small_label" text="\$loc" />
@@ -34,6 +33,14 @@
                           </children>
                       </VBox>
                </content>
+               <graphic>
+                  <HBox>
+                     <children>
+                        <Label fx:id="name" text="\$title" />
+                              <FlowPane fx:id="tags" styleClass="content" />
+                     </children>
+                  </HBox>
+               </graphic>
             </TitledPane>
             </children>
          <rowConstraints>
