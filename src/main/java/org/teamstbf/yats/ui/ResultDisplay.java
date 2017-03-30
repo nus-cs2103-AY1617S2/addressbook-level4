@@ -32,18 +32,18 @@ public class ResultDisplay extends UiPart<Region> {
     private TextArea resultDisplay;
 
     public ResultDisplay(AnchorPane placeHolder) {
-        super(FXML);
-        resultDisplay.textProperty().bind(displayed);
-        FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
-        FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
-        placeHolder.getChildren().add(mainPane);
-        registerAsAnEventHandler(this);
+	super(FXML);
+	resultDisplay.textProperty().bind(displayed);
+	FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
+	FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
+	placeHolder.getChildren().add(mainPane);
+	registerAsAnEventHandler(this);
     }
 
     @Subscribe
     private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        displayed.setValue(event.message);
+	logger.info(LogsCenter.getEventHandlingLogMessage(event));
+	displayed.setValue(event.message);
     }
 
 }

@@ -6,6 +6,10 @@ import org.teamstbf.yats.commons.events.ui.ExitAppRequestEvent;
 import org.teamstbf.yats.commons.util.FxViewUtil;
 import org.teamstbf.yats.logic.Logic;
 import org.teamstbf.yats.model.UserPrefs;
+<<<<<<< HEAD
+=======
+import org.teamstbf.yats.model.item.ReadOnlyEvent;
+>>>>>>> refs/remotes/origin/master
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -201,5 +205,4 @@ public class MainWindow extends UiPart<Region> {
 	public TaskListPanel getTaskListPanel() {
 		return this.taskListPanel;
 	}
-
 }
