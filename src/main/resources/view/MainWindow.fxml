@@ -17,9 +17,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Help">
+            <Menu mnemonicParsing="false" text="User Guide">
                <items>
-                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="User Guide" />
                </items>
             </Menu>
          </menus>

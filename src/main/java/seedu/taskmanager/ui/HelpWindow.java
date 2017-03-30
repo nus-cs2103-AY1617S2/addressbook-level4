@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -28,7 +29,7 @@ public class HelpWindow extends UiPart<Region> {
     private WebView browser;
 
     private final Stage dialogStage;
-
+    
     public HelpWindow() {
     	super(FXML);
         Scene scene = new Scene(getRoot());
