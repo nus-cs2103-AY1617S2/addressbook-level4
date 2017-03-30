@@ -19,7 +19,7 @@ public class SerializableTestClass {
             + "    \"2\" : \"Two\",%n"
             + "    \"3\" : \"Three\"%n"
             + "  }%n"
-            + "}");
+            + "}\n");
 
     private static final String NAME_TEST_VALUE = "This is a test class";
 

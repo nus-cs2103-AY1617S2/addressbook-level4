@@ -168,11 +168,11 @@ public class ArgumentTokenizer {
     public static class Prefix {
         final String prefix;
 
-        Prefix(String prefix) {
+        public Prefix(String prefix) {
             this.prefix = prefix;
         }
 
-        String getPrefix() {
+        public String getPrefix() {
             return this.prefix;
         }
 
@@ -202,16 +202,16 @@ public class ArgumentTokenizer {
         private int startPosition;
         private final Prefix prefix;
 
-        PrefixPosition(Prefix prefix, int startPosition) {
+        private PrefixPosition(Prefix prefix, int startPosition) {
             this.prefix = prefix;
             this.startPosition = startPosition;
         }
 
-        int getStartPosition() {
+        private int getStartPosition() {
             return this.startPosition;
         }
 
-        Prefix getPrefix() {
+        private Prefix getPrefix() {
             return this.prefix;
         }
     }

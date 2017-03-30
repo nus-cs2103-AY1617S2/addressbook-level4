@@ -36,11 +36,11 @@ public class JsonUtil {
                     .addSerializer(Level.class, new ToStringSerializer())
                     .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
 
-    static <T> void serializeObjectToJsonFile(File jsonFile, T objectToSerialize) throws IOException {
+    public static <T> void serializeObjectToJsonFile(File jsonFile, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
     }
 
-    static <T> T deserializeObjectFromJsonFile(File jsonFile, Class<T> classOfObjectToDeserialize)
+    public static <T> T deserializeObjectFromJsonFile(File jsonFile, Class<T> classOfObjectToDeserialize)
             throws IOException {
         return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }

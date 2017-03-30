@@ -1,22 +1,18 @@
-# Address Book (Level 4)
+# <img src="docs/images/app_icon.png" width="25" height="25"> DoOrDie Task Manager
 
-[![Build Status](https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4)
-[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
-[![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://coveralls.io/github/se-edu/addressbook-level4?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B2/main)
+[![Build status](https://ci.appveyor.com/api/projects/status/qcfw2kpnoim4tkkp?svg=true)](https://ci.appveyor.com/project/BernardYip/main)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T16-B2/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T16-B2/main?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7358c2cf354244e6b53bc50d2aaf727b)](https://www.codacy.com/app/bernardyip/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B2/main/&amp;utm_campaign=Badge_Grade)<br><br>
+<img src="docs/images/Ui.png" width="600"><br><br>
+<img src="docs/images/Ui-Calendar.png" width="600"><br><br>
 
-<img src="docs/images/Ui.png" width="600"><br>
-
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
+* This is a desktop task manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as
-  the main programming language.
+* It is a Java application intended for users to manage and keep track of tasks on hand.
 * It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
-  **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from [level 3](https://github.com/se-edu/addressbook-level3):
-    * A more sophisticated GUI that includes a list panel and an in-built Browser.
-    * More test cases, including automated GUI testing.
-    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
+  **significantly bigger** (around 12 KLoC).
+* Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
 
 
 #### Site Map
@@ -29,8 +25,13 @@
 
 #### Acknowledgements
 
-* Some parts of this sample application were inspired by the excellent
-  [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+* Some parts of this sample application were inspired by the excellent [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+* The sample project created by [SE-EDU](https://github.com/se-edu/) initiative.
 
+#### External Libraries
+
+* [Natty](http://natty.joestelmach.com/) by joestelmach - A framework to parse relative dates into absolute dates
+* [itextPDF](http://itextpdf.com/) by iText Software - For exporting data to PDF files
+* [FontAwesomeFX](https://bintray.com/jerady/maven/FontAwesomeFX) by Jens Deters - For icons used in the GUI
 
 #### Licence : [MIT](LICENSE)

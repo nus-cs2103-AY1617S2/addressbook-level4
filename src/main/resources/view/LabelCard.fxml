@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0140042A -->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<AnchorPane fx:id="labelListCard" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox maxHeight="100.0" prefWidth="245">
+        <children>
+            <FontAwesomeIconView fx:id="icon" size="18" >
+                <HBox.margin>
+                    <Insets left="45" top="12.0" />
+                </HBox.margin>
+            </FontAwesomeIconView>
+            <Label fx:id="labelText" styleClass="cell_big_label" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Label fx:id="taskCountText" />
+        </children>
+    </HBox>
+</AnchorPane>
+

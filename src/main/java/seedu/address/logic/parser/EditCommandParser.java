@@ -1,22 +1,28 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLEAR_DATES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_RECURRENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_COMPLETED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_INCOMPLETE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_START;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.label.UniqueLabelList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -30,7 +36,9 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TIMEINTERVAL_START, PREFIX_TIMEINTERVAL_END, PREFIX_LABEL,
+                        PREFIX_STATUS_COMPLETED, PREFIX_STATUS_INCOMPLETE, PREFIX_CLEAR_DATES, PREFIX_REMOVE_RECURRENCE,
+                        PREFIX_RECURRENCE);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -39,37 +47,60 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editTaskDescriptor.setStartTime(ParserUtil.parseDeadline(
+                    argsTokenizer.getValue(PREFIX_TIMEINTERVAL_START)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_TIMEINTERVAL_END)));
+            if (!editTaskDescriptor.isDateEdited() && args.trim().contains(PREFIX_DEADLINE.getPrefix())) {
+                editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
+            }
+            if (args.trim().contains(PREFIX_CLEAR_DATES.getPrefix())) {
+                editTaskDescriptor.setClearDates(Optional.ofNullable(true));
+            }
+            if (args.trim().contains(PREFIX_STATUS_COMPLETED.getPrefix())) {
+                editTaskDescriptor.setIsCompleted(Optional.ofNullable(true));
+            } else if (args.trim().contains(PREFIX_STATUS_INCOMPLETE.getPrefix())) {
+                editTaskDescriptor.setIsCompleted(Optional.ofNullable(false));
+            }
+            if (args.trim().contains(PREFIX_REMOVE_RECURRENCE.getPrefix())) {
+                editTaskDescriptor.setRemoveRecurrence(Optional.ofNullable(true));
+                editTaskDescriptor.setIsRecurring(Optional.ofNullable(false));
+                editTaskDescriptor.setRecurrence(Optional.empty());
+            }
+            if (args.trim().contains(PREFIX_RECURRENCE.getPrefix())) {
+                editTaskDescriptor.setIsRecurring(Optional.ofNullable(true));
+                editTaskDescriptor.setRecurrence(ParserUtil.parseRecurrence(argsTokenizer.getValue(PREFIX_RECURRENCE)));
+            }
+            editTaskDescriptor.setLabels(parseLabelsForEdit(ParserUtil.toSet(
+                    argsTokenizer.getAllValues(PREFIX_LABEL))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        } catch (IllegalDateTimeValueException ipve) {
+            return new IncorrectCommand(ipve.getMessage());
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editPersonDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Optional<UniqueTagList>} containing zero tags.
+     * Parses {@code Collection<String> labels} into an {@code Optional<UniqueTagList>} if {@code labels} is non-empty.
+     * If {@code labels} contain only one element which is an empty string, it will be parsed into a
+     * {@code Optional<UniqueTagList>} containing zero labels.
      */
-    private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
+    private Optional<UniqueLabelList> parseLabelsForEdit(Collection<String> labels) throws IllegalValueException {
+        assert labels != null;
 
-        if (tags.isEmpty()) {
+        if (labels.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> labelSet = labels.size() == 1 && labels.contains("") ? Collections.emptySet() : labels;
+        return Optional.of(ParserUtil.parseLabels(labelSet));
     }
 
 }

@@ -15,10 +15,13 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.LeftPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.LeftPanelTodaySelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -26,19 +29,21 @@ import seedu.address.model.UserPrefs;
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/app_icon.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
+    private Model model;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs, Model model) {
         super();
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.model = model;
     }
 
     @Override
@@ -50,7 +55,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, model);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -76,7 +81,7 @@ public class UiManager extends ComponentManager implements Ui {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
-    void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
+    public void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }
 
@@ -116,13 +121,37 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
+    @Subscribe
+    private void handleLeftPanelSelectionChangedEvent(LeftPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.loadLabelSelection(event.getNewSelection());
+    }
+
+    @Subscribe
+    private void handleLeftPanelTodaySelectionChangedEvent(LeftPanelTodaySelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.loadTodaySelection();
+    }
+
+    @Override
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+        mainWindow.setLogic(logic);
+        mainWindow.fillInnerParts();
+    }
+
+    @Override
+    public void setModel(Model model) {
+        this.model = model;
+        mainWindow.setModel(model);
+    }
 }

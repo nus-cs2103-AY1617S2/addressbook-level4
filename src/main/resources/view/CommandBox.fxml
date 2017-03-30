@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.TextField?>
-<AnchorPane styleClass="anchor-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@DarkTheme.css">
-   <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..."/>
-</AnchorPane>
+<!-- @@author A0140042A -->
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane styleClass="anchor-pane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <HBox fx:id="commandTextFieldContainer" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <FontAwesomeIconView fx:id="commandTextFieldBeforeLabel" fill="WHITE" glyphName="ANGLE_RIGHT" size="26">
+            <HBox.margin>
+               <Insets left="10.0" top="3" />
+            </HBox.margin>
+         </FontAwesomeIconView>
+         <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" onKeyPressed="#handleOnKeyPressed" prefWidth="1920.0" promptText="Enter command here..." />
+      </children>
+   </HBox>
+</AnchorPane>

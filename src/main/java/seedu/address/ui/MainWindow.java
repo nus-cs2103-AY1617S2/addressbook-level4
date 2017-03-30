@@ -1,5 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -15,8 +20,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.label.Label;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,21 +31,26 @@ import seedu.address.model.person.ReadOnlyPerson;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/app_icon.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 500;
+    private static final int MIN_WIDTH = 800;
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
+    private CommandBox commandBox;
+    private ResultDisplay resultDisplay;
+    private StatusBarFooter statusBarFooter;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    //private BrowserPanel browserPanel;
+    private TaskListPanel taskListPanel;
+    private LeftPanel leftPanel;
     private Config config;
 
-    @FXML
-    private AnchorPane browserPlaceholder;
+    //@FXML
+    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -47,7 +59,7 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane taskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -55,13 +67,17 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    @FXML
+    private AnchorPane leftPanelPlaceholder;
+
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Model model) {
         super(FXML);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.config = config;
+        this.model = model;
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -112,13 +128,46 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
-        new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+    //@@author A0140042A
+    /**
+     * Fill up components in the main window,
+     * but only update appropriate components if already initialized
+     */
+    public void fillInnerParts() {
+        //browserPanel = new BrowserPanel(browserPlaceholder);
+
+        if (taskListPanel == null) {
+            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        } else {
+            //Update the logic only
+            taskListPanel.setConnections(logic.getFilteredTaskList());
+        }
+
+        if (leftPanel == null) {
+            leftPanel = new LeftPanel(getleftPanelPlaceholder(), model.getTaskManager().getTaskList());
+        } else {
+            leftPanel.setTaskList(model.getTaskManager().getTaskList());
+            leftPanel.updateLabelCount();
+            leftPanel.setTodayListView(model.getTaskManager().getTaskList());
+        }
+
+        if (resultDisplay == null) {
+            resultDisplay = new ResultDisplay(getResultDisplayPlaceholder());
+        }
+
+        if (statusBarFooter == null) {
+            statusBarFooter = new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
+        } else {
+            statusBarFooter.setSaveLocation(config.getTaskManagerFilePath());
+        }
+
+        if (commandBox == null) {
+            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+        } else {
+            commandBox.setLogic(logic);
+        }
     }
+    //@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -132,11 +181,15 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
     }
 
-    void hide() {
+    private AnchorPane getleftPanelPlaceholder() {
+        return leftPanelPlaceholder;
+    }
+
+    public void hide() {
         primaryStage.hide();
     }
 
@@ -172,7 +225,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Returns the current size and the position of the main Window.
      */
-    GuiSettings getCurrentGuiSetting() {
+    protected GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
@@ -183,7 +236,7 @@ public class MainWindow extends UiPart<Region> {
         helpWindow.show();
     }
 
-    void show() {
+    public void show() {
         primaryStage.show();
     }
 
@@ -195,16 +248,40 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
+    public void loadLabelSelection(Label label) {
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(label.toString()));
+        model.updateFilteredTaskList(keywordSet);
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
-        browserPanel.loadPersonPage(person);
+    public void loadTodaySelection() {
+        Date endDate = new Date(2222, 1, 1);
+        Date startDate = new Date();
+        endDate.setHours(23);
+        endDate.setMinutes(59);
+        endDate.setSeconds(59);
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+        model.updateFilteredTaskList(startDate, endDate);
     }
 
-    void releaseResources() {
-        browserPanel.freeResources();
+    public TaskListPanel getTaskListPanel() {
+        return this.taskListPanel;
     }
 
+    public void loadTaskPage(ReadOnlyTask task) {
+        //browserPanel.loadTaskPage(task);
+    }
+
+    public void releaseResources() {
+        //browserPanel.freeResources();
+    }
+
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
 }

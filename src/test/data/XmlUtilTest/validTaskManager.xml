@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <title>Hans Muster</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-01-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">4th street</label>
+    </tasks>
+    <tasks>
+        <title>Ruth Mueller</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-02-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">81th street</label>
+    </tasks>
+    <tasks>
+        <title>Heinz Kurz</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-03-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">wall street</label>
+    </tasks>
+    <tasks>
+        <title>Cornelia Meier</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-04-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">10th street</label>
+    </tasks>
+    <tasks>
+        <title>Werner Meyer</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-05-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">michegan ave</label>
+    </tasks>
+    <tasks>
+        <title>Lydia Kunz</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-06-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">little tokyo</label>
+    </tasks>
+    <tasks>
+        <title>Anna Best</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-07-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">4th street</label>
+    </tasks>
+    <tasks>
+        <title>Stefan Meier</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-08-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">little india</label>
+    </tasks>
+    <tasks>
+        <title>Martin Mueller</title>
+		<startTime>11-11-2017</startTime>
+        <deadline>01-09-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">chicago ave</label>
+    </tasks>
+</taskmanager>

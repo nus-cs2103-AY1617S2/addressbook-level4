@@ -1,31 +1,43 @@
+/* @@author A0140042A */
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #fafafa;
+}
+
+MenuBar {
+    -fx-accent: #c03231;
+    -fx-focus-color: #c03231;
+}
+
+Vbox, SplitPane {
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-padding: 0;
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Roboto";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Roboto";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Roboto";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Roboto";
 }
 
 .tab-pane {
@@ -39,9 +51,9 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
+    -fx-base: #fafafa;
+    -fx-control-inner-background: #fafafa;
+    -fx-background-color: #fafafa;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -76,20 +88,31 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: derive(#bdbdbd, 70%);
+    -fx-background-color: transparent;
+    -fx-cursor: default;
 }
 
 .split-pane {
     -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-width: 0;
+    -fx-background-color: derive(#fafafa, 20%);
+    -fx-text-box-border: none;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 0 0 0;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-border-width: 0;
+    -fx-background-color: #ffffff;
 }
 
 .list-cell .label {
@@ -111,18 +134,16 @@
 }
 
 .anchor-pane-with-border {
+    /*
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
+    */
 }
 
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-text-fill: black;
-}
-
-.result-display {
-    -fx-background-color: #ffffff;
 }
 
 .result-display .label {
@@ -154,7 +175,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .context-menu .label {
@@ -166,8 +187,8 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Roboto";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -246,7 +267,7 @@
 .dialog-pane:header *.header-panel *.label {
     -fx-font-size: 18px;
     -fx-font-style: italic;
-    -fx-fill: white;
+    -fx-fill: #FFFFFF;
     -fx-text-fill: white;
 }
 
@@ -262,20 +283,47 @@
 
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
     -fx-shape: " ";
+    -fx-padding: 0;
+    -fx-border-width: 0;
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
+    -fx-padding: 0 5 0 5;
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 5 0 5 0;
 }
 
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
+    -fx-border-width: 0 0 1 0;
+}
+
+#taskListView .track, #labelListView .track {
+    -fx-border-color: #fafafa;
+    -fx-background-color: #fafafa;
+}
+
+#taskListView, #taskList, #taskListPanelPlaceHolder, .list-cell {
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 1 0 0 0;
+}
+
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+
+#taskListView .list-cell:filled:selected:focused, #taskListView .list-cell:filled:selected {
+    -fx-background-color: #ffebee;
+    /* Up Right Down Left */
+    -fx-border-width: 0 0 0 5;
+    -fx-border-color: #a93a38;
 }
 
 #commandTypeLabel {
@@ -283,20 +331,115 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #taskListPanel, #taskWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-#tags {
+#labels {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #383838;
-    -fx-padding: 1 3 1 3;
+#labels .label {
+    -fx-text-fill: #000000;
+    -fx-background-color: #ffa8a1;
+    -fx-padding: 0 1 0 1;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #dd4b39;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 12;
+    -fx-text-alignment: center;
+    -fx-alignment: bottom-center;
+}
+
+#resultDisplayPlaceholder, #resultDisplay .content, #resultDisplay, #mainPane {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 16;
+    -fx-background-color: #dd4b39;
+    -fx-background-radius: 0 0 0 0;
+    -fx-focus-color: #dd4b39;
+    -fx-faint-focus-color: #dd4b39;
+    -fx-border-radius: 0 0 0 0;
+    -fx-border-width: 0 0 0 0;
+}
+
+#resultDisplay .track {
+    -fx-background-color: #dd4b39;
+}
+
+#resultDisplay .thumb {
+    -fx-background-color: #FFFFFF;
+}
+
+#commandTextField, #commandBoxPlaceholder {
+    -fx-background-color: #c03231;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Roboto";
+}
+
+#commandTextFieldContainer {
+    /* Up Right Down Left */
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #FFFFFF;
+}
+
+#taskListPanelPlaceholder {
+    -fx-border-width: 0 0 0 0;
+}
+
+#appTitleLabel {
+    -fx-text-fill: #831313;
+    -fx-font-family: "YouMurderer BB";
+    -fx-font-size: 68px;
+    -fx-text-alignment: center;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-pref-height: 50;
+    -fx-pref-width: 500;
+}
+
+#labelTitle, #calendarLabel, #todayLabel {
+    -fx-padding: 20 20 20 10;
+    -fx-font-family: "Roboto";
+    -fx-text-fill: #000000;
+}
+
+#todayCounterLabel, #labelCounterLabel {
+    -fx-font-family: "Roboto";
+    -fx-alignment: center-right;
+    -fx-text-alignment: right;
+    -fx-padding: 20 20 0 0;
+    -fx-opacity: 0.54;
+}
+
+#labelListView, #labelListView .list-cell {
+    -fx-background-color: transparent;
+}
+
+#labelListCard {
+    -fx-opacity: 0.75;
+    -fx-padding: 0 0 0 45;
+}
+
+#labelText {
+    -fx-padding: 10 0 10 5;
+}
+
+#taskCountText {
+    -fx-padding: 10 20 0 0;
+    -fx-opacity: 0.54;
+}
+
+.sidePanel:hover, #labelListCard:hover {
+    -fx-background-color: #ffebee;
+}
+
+#saveLocationStatus {
+    -fx-text-alignment: right;
+    -fx-alignment: center-right;
+}
+
+#syncStatus, #saveLocationLabel {
+    -fx-font-family: "Roboto";
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <title>Hans Muster</title>
+        <startTime></startTime>
+        <deadline isPrivate="false">01-01-2018</deadline>
+        <isCompleted>false</isCompleted>
+        <label isPrivate="false">4th street</label>
+    </tasks>
+    <labels>
+        <name>Friends</name>
+    </labels>
+</taskmanager>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0140042A -->
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+    </stylesheets>
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="appTitleLabel" text="Do Or Die" />
+            <HBox maxHeight="100.0" styleClass="sidePanel" fx:id="todayHeader">
+               <children>
+                   <FontAwesomeIconView fx:id="todayIconLabel" size="20">
+                     <HBox.margin>
+                        <Insets left="20.0" top="17.0" />
+                     </HBox.margin></FontAwesomeIconView>
+                  <Label fx:id="todayLabel" text="Today" />
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Label fx:id="todayCounterLabel" text="0" />
+               </children>
+            </HBox>
+            <HBox maxHeight="100.0" styleClass="sidePanel" fx:id="calendarHeader">
+               <children>
+                  <FontAwesomeIconView fx:id="calendarIconLabel" size="20">
+                     <HBox.margin>
+                        <Insets left="20.0" top="17.0" />
+                     </HBox.margin></FontAwesomeIconView>
+                  <Label fx:id="calendarLabel" text="Calendar" />
+               </children>
+            </HBox>
+            <HBox maxHeight="100.0" fx:id="labelListHeader" onMouseClicked="#toggleLabelList" styleClass="sidePanel">
+               <children>
+                  <FontAwesomeIconView fx:id="labelIconLabel" size="20">
+                     <HBox.margin>
+                        <Insets left="20.0" top="17.0" />
+                     </HBox.margin></FontAwesomeIconView>
+                  <Label fx:id="labelTitle" text="Labels" />
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Label fx:id="labelCounterLabel" text="0" />
+                  <FontAwesomeIconView fx:id="labelArrow" opacity="0.54" size="22">
+                     <HBox.margin>
+                        <Insets right="20" top="17.0" />
+                     </HBox.margin></FontAwesomeIconView>
+               </children>
+            </HBox>
+            <ListView fx:id="labelListView" maxHeight="1200.0" prefHeight="1200.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

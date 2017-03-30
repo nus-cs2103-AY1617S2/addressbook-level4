@@ -5,158 +5,258 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.booking.UniqueBookingList;
+import seedu.address.model.label.UniqueLabelList;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Recurrence;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing task in the task manager.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+            + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [#LABEL]...\n"
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [from START to END][#LABEL]...\n"
+            + "Example: " + COMMAND_WORD + " 1 by Sunday #new";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
-    private final int filteredPersonListIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final int filteredTaskListIndex;
+    private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
-        assert filteredPersonListIndex > 0;
-        assert editPersonDescriptor != null;
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+        assert filteredTaskListIndex > 0;
+        assert editTaskDescriptor != null;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
-        this.filteredPersonListIndex = filteredPersonListIndex - 1;
-
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        // converts filteredTaskListIndex from one-based to zero-based.
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (filteredTaskListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASKS_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            saveCurrentState();
+            model.updateTask(filteredTaskListIndex, editedTask);
+        } catch (UniqueTaskList.DuplicateTaskException dte) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
+     * edited with {@code editTaskDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
+                                             EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        Optional<Deadline> updatedStartTime;
+        Optional<Deadline> updatedDeadline;
+        Optional<Recurrence> updatedRecurrence;
+        Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
+        if ((editTaskDescriptor.getClearDates().isPresent() && editTaskDescriptor.getClearDates().get() == true)
+                || editTaskDescriptor.isDateEdited()) {
+            updatedStartTime = editTaskDescriptor.getStartTime();
+            updatedDeadline = editTaskDescriptor.getDeadline();
+        } else {
+            updatedStartTime = taskToEdit.getStartTime();
+            updatedDeadline = taskToEdit.getDeadline();
+        }
+        Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
+        UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
+        Boolean isRecurring;
+        if (editTaskDescriptor.isRecurrenceEdited()) {
+            isRecurring = editTaskDescriptor.getIsRecurring().get();
+            updatedRecurrence = editTaskDescriptor.getRecurrence();
+        } else {
+            updatedRecurrence = taskToEdit.getRecurrence();
+            isRecurring = taskToEdit.isRecurring();
+        }
+        UniqueBookingList updatedBookings = editTaskDescriptor.getBookings().orElseGet(taskToEdit::getBookings);
+        Task newTask = new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels,
+                            isRecurring, updatedRecurrence);
+        newTask.setBookings(updatedBookings);
+        return newTask;
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the task with. Each non-empty field value will replace the
+     * corresponding field value of the task.
      */
-    public static class EditPersonDescriptor {
-        private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+    public static class EditTaskDescriptor {
+        private Optional<Title> title = Optional.empty();
+        private Optional<Deadline> startTime = Optional.empty();
+        private Optional<Deadline> deadline = Optional.empty();
+        private Optional<UniqueLabelList> labels = Optional.empty();
+        private Optional<Boolean> isCompleted = Optional.empty();
+        private Optional<Boolean> clearDates = Optional.empty();
+        private Optional<Boolean> isRecurring = Optional.empty();
+        private Optional<Boolean> removeRecurrence = Optional.empty();
+        private Optional<Recurrence> recurrence = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        private Optional<UniqueBookingList> bookings = Optional.empty();
+        public EditTaskDescriptor() {}
 
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
-            this.tags = toCopy.getTags();
+
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+            this.title = toCopy.getTitle();
+            this.startTime = toCopy.getStartTime();
+            this.deadline = toCopy.getDeadline();
+            this.isCompleted = toCopy.isCompleted();
+            this.labels = toCopy.getLabels();
+            this.clearDates = toCopy.getClearDates();
+            this.bookings = toCopy.getBookings();
+            this.isRecurring = toCopy.getIsRecurring();
+            this.recurrence = toCopy.getRecurrence();
+            this.removeRecurrence = toCopy.getRemoveRecurrence();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.startTime,
+                    this.isCompleted, this.deadline, this.labels, this.clearDates,
+                    this.isRecurring, this.recurrence, this.removeRecurrence);
         }
 
-        public void setName(Optional<Name> name) {
-            assert name != null;
-            this.name = name;
+        /**
+         * Returns true if any date is edited.
+         */
+        public boolean isDateEdited() {
+            return CollectionUtil.isAnyPresent(this.startTime, this.deadline);
         }
 
-        public Optional<Name> getName() {
-            return name;
+        public boolean isRecurrenceEdited() {
+            return CollectionUtil.isAnyPresent(this.recurrence, this.isRecurring);
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setName(Optional<Title> title) {
+            assert title != null;
+            this.title = title;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<Title> getTitle() {
+            return title;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setStartTime(Optional<Deadline> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<Deadline> getStartTime() {
+            return startTime;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setDeadline(Optional<Deadline> deadline) {
+            assert deadline != null;
+            this.deadline = deadline;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<Deadline> getDeadline() {
+            return deadline;
         }
 
-        public void setTags(Optional<UniqueTagList> tags) {
-            assert tags != null;
-            this.tags = tags;
+        public void setLabels(Optional<UniqueLabelList> labels) {
+            assert labels != null;
+            this.labels = labels;
         }
 
-        public Optional<UniqueTagList> getTags() {
-            return tags;
+        public Optional<UniqueLabelList> getLabels() {
+            return labels;
         }
+
+        public Optional<UniqueBookingList> getBookings() {
+            return bookings;
+        }
+
+        public void setIsCompleted(Optional<Boolean> isCompleted) {
+            this.isCompleted = isCompleted;
+        }
+
+        public Optional<Boolean> isCompleted() {
+            return isCompleted;
+        }
+
+        public void setClearDates(Optional<Boolean> clearDates) {
+            this.clearDates = clearDates;
+        }
+
+        public Optional<Boolean> getClearDates() {
+            return clearDates;
+        }
+
+        public void setIsRecurring(Optional<Boolean> isRecurring) {
+            this.isRecurring = isRecurring;
+        }
+
+        public Optional<Boolean> getIsRecurring() {
+            return isRecurring;
+        }
+
+        public void setRemoveRecurrence(Optional<Boolean> removeRecurrence) {
+            this.removeRecurrence = removeRecurrence;
+        }
+
+        public Optional<Boolean> getRemoveRecurrence() {
+            return removeRecurrence;
+        }
+
+        public void setRecurrence(Optional<Recurrence> recurrence) {
+            this.recurrence = recurrence;
+        }
+
+        public Optional<Recurrence> getRecurrence() {
+            return recurrence;
+        }
+
+    }
+
+    /**
+     * Save the data in task manager if command is mutating the data
+     */
+    public void saveCurrentState() {
+        if (isMutating()) {
+            try {
+                LogicManager.undoCommandHistory.addStorageHistory(model.getTaskManager().getImmutableTaskList(),
+                        model.getTaskManager().getImmutableLabelList());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 }
