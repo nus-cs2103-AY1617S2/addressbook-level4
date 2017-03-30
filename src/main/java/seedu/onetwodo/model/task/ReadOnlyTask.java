@@ -27,6 +27,8 @@ public interface ReadOnlyTask {
 
     boolean getTodayStatus();
 
+    boolean isOverdue();
+
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
      * the returned list will not affect the task's internal tags.
@@ -67,8 +69,8 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName()))
-                        && String.valueOf(other.getDoneStatus()).equals(String.valueOf(this.getDoneStatus()));
+                && other.getName().equals(this.getName()))
+                && String.valueOf(other.getDoneStatus()).equals(String.valueOf(this.getDoneStatus()));
     }
 
     /**

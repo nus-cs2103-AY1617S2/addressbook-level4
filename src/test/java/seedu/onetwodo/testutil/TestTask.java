@@ -1,5 +1,7 @@
 package seedu.onetwodo.testutil;
 
+import java.time.LocalDateTime;
+
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
@@ -173,6 +175,18 @@ public class TestTask implements ReadOnlyTask {
         }
 
         return sb.toString();
+    }
+
+    @Override
+    public boolean isOverdue() {
+        switch (type) {
+        case DEADLINE:
+        case EVENT:
+            return LocalDateTime.now().isAfter(endDate.getLocalDateTime());
+        default:
+        case TODO:
+            return false;
+        }
     }
 
 }
