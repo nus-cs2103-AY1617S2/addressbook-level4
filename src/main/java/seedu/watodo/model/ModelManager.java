@@ -2,9 +2,9 @@ package seedu.watodo.model;
 
 import java.util.Calendar;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.Stack;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.watodo.commons.core.ComponentManager;
@@ -14,12 +14,12 @@ import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.commons.util.StringUtil;
+import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.ListDeadlineCommand;
 import seedu.watodo.logic.commands.ListDoneCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
 import seedu.watodo.logic.commands.ListUndoneCommand;
-import seedu.watodo.logic.commands.Command;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
@@ -366,7 +366,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addCommandToHistory(Command command) {
         commandHistory.push(command);
-        
+
     }
     
     @Override
@@ -384,7 +384,6 @@ public class ModelManager extends ComponentManager implements Model {
         this.undoneHistory.clear();
     }
 
-    
     //@@author
 
 }

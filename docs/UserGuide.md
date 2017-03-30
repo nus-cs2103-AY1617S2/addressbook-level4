@@ -284,7 +284,7 @@ Below is a list of shortcut keys for some of the above commands:
 > * add: `a`
 > * edit: `e`
 > * list: `l`
-> * delete: `d`
+> * delete: `d`, `del`
 > * mark: `m`, `check`
 > * unmark: `um`, `uncheck`
 > * find: `f`, `search`
@@ -374,5 +374,5 @@ There is no need to save manually.
 > * find: `f`, `search`
 
 * **Customize Alternative Commands** : 'shortcut'
-> * `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature)
-> * `shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY)
+> * `shortcut + COMMAND_WORD SHORTCUT_KEY`
+> * `shortcut - COMMAND_WORD SHORTCUT_KEY`

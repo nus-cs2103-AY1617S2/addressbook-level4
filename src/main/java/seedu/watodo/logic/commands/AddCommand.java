@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private Task toAdd;
-    
+
     private Task undoAdd;
 
     //@@author A0143076J
@@ -81,7 +81,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
     }
-    
+
     //@@author A0139845R
     @Override
     public void unexecute() {

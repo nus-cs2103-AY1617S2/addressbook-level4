@@ -34,6 +34,7 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
+
         if(!commandText.equals("undo") && !commandText.equals("redo")) {
             model.addCommandToHistory(command);
             model.clearRedo();

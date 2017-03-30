@@ -8,6 +8,7 @@ import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0141077L-reused
 /**
  * Deletes a task identified using it's last displayed index from the task manager.
  */
@@ -25,7 +26,7 @@ public class DeleteCommand extends Command {
 
 
     private int[] filteredTaskListIndices;
-    
+
     private ReadOnlyTask taskToDelete;
 
     public DeleteCommand(int[] args) {
@@ -66,17 +67,17 @@ public class DeleteCommand extends Command {
 
         return new CommandResult(tasksDeletedMessage.toString());
     }
-    
+
     @Override
     public void unexecute() {
         assert model != null;
-        
+
         try {
             
             model.addTask(new Task(taskToDelete));
             model.updateFilteredListToShowAll();
         } catch (DuplicateTaskException e) {
-            
+
         }
     }
     
