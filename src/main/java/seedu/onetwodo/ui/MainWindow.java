@@ -1,5 +1,7 @@
 package seedu.onetwodo.ui;
 
+import java.net.URL;
+
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 
@@ -17,12 +19,15 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import seedu.onetwodo.MainApp;
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.GuiSettings;
 import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
+import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.logic.Logic;
 import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.logic.commands.RedoCommand;
@@ -44,11 +49,16 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final String DONE_STYLESHEET = "view/Strikethrough.css";
+    private static final String HELPWINDOW_URL = "/view/help.html";
+
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 650;
 
     private Stage primaryStage;
     private Logic logic;
+
+    private WelcomeWindow welcomeWindow;
+    private Stage secondaryStage;
 
     // Independent Ui parts residing in this Ui container
     private static StatusBarFooter statusBarFooter;
@@ -117,6 +127,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowMinSize();
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
+
         loadFonts(scene);
         loadStyleSheets(scene);
         primaryStage.setScene(scene);
@@ -255,8 +266,15 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     public void handleHelp() {
-        HelpWindow helpWindow = new HelpWindow();
-        helpWindow.show();
+        JFXDialogLayout content = new JFXDialogLayout();
+        WebView browser = new WebView();
+        URL help = MainApp.class.getResource(HELPWINDOW_URL);
+        browser.getEngine().load(help.toString());
+        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
+        content.setBody(browser);
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+        closeDialogOnNextKeyPress();
     }
 
     @FXML
@@ -332,6 +350,9 @@ public class MainWindow extends UiPart<Region> {
         descriptionText.setWrappingWidth(MIN_WIDTH);
         content.setHeading(nameText);
         content.setBody(descriptionText);
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+
         commandBox.setKeyListener(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
@@ -341,8 +362,6 @@ public class MainWindow extends UiPart<Region> {
                 commandBox.removeKeyListeners();
             }
         });
-        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
-        dialog.show();
     }
 
     private void deselectTaskCards() {
@@ -354,12 +373,32 @@ public class MainWindow extends UiPart<Region> {
             return;
         }
         dialog.close();
-        dialog = null;
         commandBox.focus();
     }
 
     void releaseResources() {
         browserPanel.freeResources();
+    }
+
+    public void showWelcomeDialog() {
+        welcomeWindow = new WelcomeWindow(logic);
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setBody(welcomeWindow.todayTaskListPanel.getRoot());
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+        closeDialogOnNextKeyPress();
+    }
+
+    private void closeDialogOnNextKeyPress() {
+        commandBox.setKeyListener(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                ke.consume();
+                closeDialog();
+                commandBox.removeKeyListeners();
+            }
+        });
+
     }
 
 }

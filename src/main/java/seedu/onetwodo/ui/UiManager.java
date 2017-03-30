@@ -31,7 +31,6 @@ public class UiManager extends ComponentManager implements Ui {
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
-    private WelcomeWindow welcomeWindow;
 
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
@@ -47,7 +46,6 @@ public class UiManager extends ComponentManager implements Ui {
 
         // Set the application icon.
         // primaryStage.getIcons().add(getImage(ICON_APPLICATION));
-        Stage secondaryStage = new Stage();
 
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
@@ -55,9 +53,7 @@ public class UiManager extends ComponentManager implements Ui {
                                // parts
             mainWindow.fillInnerParts();
 
-            welcomeWindow = new WelcomeWindow(secondaryStage, logic);
-            welcomeWindow.show();
-            welcomeWindow.fillInnerParts();
+            mainWindow.showWelcomeDialog();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
