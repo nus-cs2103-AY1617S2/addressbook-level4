@@ -105,7 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
             throw new IllegalValueException("This task has been done");
         }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        if(!taskToComplete.hasRecur()) {
+        if (!taskToComplete.hasRecur()) {
             toDoList.doneTask(taskToComplete);
         } else {
             Task newTask = new Task(taskToComplete);
