@@ -7,9 +7,9 @@ import java.io.IOException;
 
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.model.TaskListChangedEvent;
 import seedu.address.commons.events.storage.FileLocationChangedEvent;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.storage.XmlTaskListStorage;
 
 
 /**
@@ -43,8 +43,9 @@ public class SaveCommand extends Command {
                 File file = new File(filePath);
                 FileUtil.createIfMissing(file);
                 message = String.format(MESSAGE_SUCCESS, filePath);
+                XmlTaskListStorage storage = new XmlTaskListStorage(filePath);
+                storage.saveTaskList(model.getTaskList(), filePath);
                 EventsCenter.getInstance().post(new FileLocationChangedEvent(filePath, model.getTaskList()));
-                EventsCenter.getInstance().post(new TaskListChangedEvent(model.getTaskList()));
                 return new CommandResult(message);
             } catch (IOException e) {
                 return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
