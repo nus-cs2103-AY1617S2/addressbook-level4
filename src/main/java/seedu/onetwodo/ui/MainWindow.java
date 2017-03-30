@@ -404,6 +404,7 @@ public class MainWindow extends UiPart<Region> {
                 ke.consume();
                 closeDialog();
                 commandBox.removeKeyListeners();
+                commandBox.focus();
             }
         });
 

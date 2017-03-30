@@ -3,6 +3,8 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
+import seedu.onetwodo.commons.core.EventsCenter;
+import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
 import seedu.onetwodo.logic.commands.SelectCommand;
 
 /**
@@ -35,12 +37,14 @@ public class CommandBoxHandle extends GuiHandle {
      * Enters the given command in the Command Box and presses enter.
      */
     public void runCommand(String command) {
+        removeDialog();
         enterCommand(command);
         pressEnter();
-        if (command.length() > 5 && command.substring(0, 6).equals(SelectCommand.COMMAND_WORD)) {
-            pressEnter();
-        }
         guiRobot.sleep(200); //Give time for the command to take effect
+    }
+
+    private void removeDialog() {
+        EventsCenter.getInstance().post(new CloseDialogEvent());
     }
 
     public HelpWindowHandle runHelpCommand() {
