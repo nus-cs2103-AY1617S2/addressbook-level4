@@ -12,6 +12,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String SORT_KEYWORD_STARTDATE = "s/";
     public static final String SORT_KEYWORD_ENDDATE = "e/";
+    public static final String SORT_KEYWORD_OTHERS = "other";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts tasks by either startdate or enddate in the task manager. " + "Examples: " + COMMAND_WORD
