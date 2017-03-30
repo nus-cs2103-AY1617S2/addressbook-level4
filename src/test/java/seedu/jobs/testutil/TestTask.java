@@ -61,6 +61,10 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
+
     @Override
     public Name getName() {
         return name;
@@ -92,6 +96,10 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Period getPeriod() {
+        return period;
+    }
+    @Override
     public String toString() {
         return getAsText();
     }
@@ -109,11 +117,6 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public void markComplete() {
         this.status = true;
-    }
-
-    @Override
-    public Period getPeriod() {
-        return period;
     }
 
 }
