@@ -19,6 +19,7 @@ import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.Priority;
+import seedu.onetwodo.model.task.Recurring;
 import seedu.onetwodo.model.task.StartDate;
 
 /**
@@ -115,6 +116,17 @@ public class ParserUtil {
         return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
+    //@@author A0139343E
+    /**
+     * Parses a {@code Optional<String> recur} into an
+     * {@code Optional<Recurring>} if {@code recur} is present.
+     */
+    public static Optional<Recurring> parseRecur(Optional<String> recur) throws IllegalValueException {
+        assert recur != null;
+        return recur.isPresent() ? Optional.of(new Recurring(recur.get())) : Optional.empty();
+    }
+
+    //@@author
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */

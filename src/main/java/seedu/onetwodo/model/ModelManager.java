@@ -109,14 +109,11 @@ public class ModelManager extends ComponentManager implements Model {
             toDoList.doneTask(taskToComplete);
         } else {
             Task newTask = new Task(taskToComplete);
-            Task doneTask = new Task(taskToComplete);
-
             newTask.forwardTaskRecurDate();
-            toDoList.doneTask(doneTask);
+            toDoList.doneTask(taskToComplete);
             toDoList.addTask(newTask);
         }
 
-        toDoList.doneTask(taskToComplete);
         history.saveUndoInformationAndClearRedoHistory(DoneCommand.COMMAND_WORD, taskToComplete, copiedCurrentToDoList);
         indicateToDoListChanged();
     }

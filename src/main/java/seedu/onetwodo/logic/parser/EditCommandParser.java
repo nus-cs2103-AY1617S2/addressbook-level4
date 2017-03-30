@@ -4,6 +4,7 @@ import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_RECUR;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -36,8 +37,8 @@ public class EditCommandParser {
         }
         char taskType = argsTrimmed.charAt(0);
 
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_PRIORITY,
-                PREFIX_DESCRIPTION, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE,
+                PREFIX_RECUR, PREFIX_PRIORITY, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(argsTrimmed.substring(1));
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -51,6 +52,7 @@ public class EditCommandParser {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_START_DATE)));
             editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_END_DATE)));
+            editTaskDescriptor.setRecur(ParserUtil.parseRecur(argsTokenizer.getValue(PREFIX_RECUR)));
             editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
