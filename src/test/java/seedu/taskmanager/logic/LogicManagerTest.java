@@ -417,7 +417,9 @@ public class LogicManagerTest {
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        // @@author A0140032E
+        List<Task> expectedList = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
+        // @@author
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
