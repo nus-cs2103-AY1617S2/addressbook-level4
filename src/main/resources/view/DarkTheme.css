@@ -337,6 +337,7 @@
 }
 
 .list-cell { /* <=== changed to even */
+	-fx-padding: 10px ;
     -fx-background-color: transparent;
 }
 
