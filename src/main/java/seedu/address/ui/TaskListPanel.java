@@ -43,12 +43,12 @@ public class TaskListPanel extends UiPart<Region> {
     // Additional status to view all tasks
     private static final String ALL_TASKS = "All";
     private static final String CALENDAR = "Calendar";
+    private static final String UNFINISHED = "Unfinished";
 
     private HashMap<String, ObservableList<ReadOnlyTask>> taskListMap;
     private HashMap<String, ArrayList<Integer>> taskIndexMap;
     private HashMap<String, TaskGroupPanel> childGroupMap;
 
-    private ArrayList<ReadOnlyTask> displayedTasks;
 
     @FXML
     private VBox taskListView;
@@ -64,7 +64,7 @@ public class TaskListPanel extends UiPart<Region> {
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         setTaskList(taskList);
-        viewTasksWithStatus(Arrays.asList(ALL_TASKS));
+        viewTasksWithStatus(Arrays.asList(Status.DONE, UNFINISHED));
         addToPlaceholder(taskListPlaceholder);
         registerAsAnEventHandler(this);
     }
@@ -126,7 +126,6 @@ public class TaskListPanel extends UiPart<Region> {
      */
     private void initTaskListsByStatus(List<String> statusList) {
         // Clear current data
-        displayedTasks = new ArrayList<ReadOnlyTask>();
         taskListMap = new HashMap<String, ObservableList<ReadOnlyTask>>();
         taskIndexMap = new HashMap<String, ArrayList<Integer>>();
         for (String status : statusList) {
@@ -146,8 +145,9 @@ public class TaskListPanel extends UiPart<Region> {
                 taskListMap.get(ALL_TASKS).add(task);
                 taskIndexMap.get(ALL_TASKS).add(index);
             }
-            if (taskListMap.containsKey(ALL_TASKS) || taskListMap.containsKey(taskStatus)) {
-                displayedTasks.add(task);
+            if (taskListMap.containsKey(UNFINISHED) && taskStatus != Status.DONE) {
+                taskListMap.get(UNFINISHED).add(task);
+                taskIndexMap.get(UNFINISHED).add(index);
             }
             index++;
         }
@@ -177,8 +177,14 @@ public class TaskListPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
-    private List<ReadOnlyTask> getDisplayedTasks() {
-        return displayedTasks;
+    private List<String> removeDuplicateViews(List<String> views) {
+        ArrayList<String> resView = new ArrayList<String>();
+        for (String view : views) {
+            if (!resView.contains(view)) {
+                resView.add(view);
+            }
+        }
+        return resView;
     }
 
     @Subscribe
@@ -192,7 +198,7 @@ public class TaskListPanel extends UiPart<Region> {
                 groupsToView.add(group);
             }
         }
-        viewTasksWithStatus(groupsToView);
+        viewTasksWithStatus(removeDuplicateViews(groupsToView));
     }
 
 }
