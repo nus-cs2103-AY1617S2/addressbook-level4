@@ -473,7 +473,7 @@ public class LogicManagerTest {
         Task tTarget4 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
         // @@author A0140032E
         List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
         // @@author
