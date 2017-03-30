@@ -21,6 +21,7 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 
+//@@author A0146757R-reused
 /**
  * The manager of the UI component.
  */
@@ -128,3 +129,4 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
 }
+//@@author
