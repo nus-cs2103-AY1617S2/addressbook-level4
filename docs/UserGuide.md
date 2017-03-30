@@ -29,7 +29,7 @@ and will aid you in organizing all your corresponding tasks and events.
 2. Download the latest `ProcrastiNomore.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your Task Manager.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/ProcrastiNomore_Covershot.png" width="300">
+   > <img src="images/ProcrastiNomore_Covershot.PNG" width="300">
 
 5. Using the application
 
@@ -39,7 +39,7 @@ and will aid you in organizing all your corresponding tasks and events.
    quick access of several functions.<br>
    >d. typing **`help`** and pressing <kbd>Enter</kbd> in the command box and it will
    open the help window.
-   > <img src="images/ProcrastiNomore_Help.png" width="300">
+   > <img src="images/ProcrastiNomore_Help.PNG" width="300">
 
 6. Refer to the [Features](#features) section below for more details on the various
 commands you can use.<br>
@@ -59,7 +59,7 @@ commands you can use.<br>
 Format: `HELP`
 
 > Help is also shown if you enter an incorrect command e.g. `ADD`
-> <img src="images/ProcrastiNomore_Help_Shown.png" width="200">
+> <img src="images/ProcrastiNomore_Help_Shown.PNG" width="200">
 
 ### 3.2. Adding a new Task: `ADD`
 
@@ -70,7 +70,7 @@ There are 4 forms of task that ProcrastiNomore supports:
 Format: `ADD TASK ON DATE/DAY` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTDATE STARTTIME TO ENDDATE ENDTIME` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY STARTTIME TO ENDTIME` <br />
-> <img src="images/ProcrastiNomore_Add_Event.png" width="200">
+> <img src="images/ProcrastiNomore_Add_Event.PNG" width="200">
 
 #### 3.2.2. Deadlines
 
