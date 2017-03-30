@@ -100,14 +100,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTaskForEdit(ReadOnlyTask target) throws TaskNotFoundException {
-        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        toDoList.removeTask(target);
-        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, target, copiedCurrentToDoList);
-        indicateToDoListChanged();
-    }
-
-    @Override
     public synchronized void doneTask(ReadOnlyTask taskToComplete) throws IllegalValueException {
         if (taskToComplete.getDoneStatus() == true) {
             throw new IllegalValueException("This task has been done");
@@ -139,18 +131,23 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTaskForEdit(int internalIdx, Task task) throws UniqueTaskList.DuplicateTaskException {
-        toDoList.addTask(internalIdx, task);
-        indicateToDoListChanged();
-    };
-
-    @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+    public void updateTask(ReadOnlyTask taskToEdit, int internalIdx, Task editedTask)
+            throws TaskNotFoundException, UniqueTaskList.DuplicateTaskException{
+        assert taskToEdit != null;
         assert editedTask != null;
-
-        int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        toDoList.updateTask(toDoListIndex, editedTask);
+        
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        toDoList.removeTask(taskToEdit);
+        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, taskToEdit, copiedCurrentToDoList);
+        indicateToDoListChanged();
+        
+        addTaskForEdit(internalIdx, editedTask);
+        indicateToDoListChanged();
+    }
+    
+    @Override
+    public void addTaskForEdit(int internalIdx, Task editedTask) throws UniqueTaskList.DuplicateTaskException{
+        toDoList.addTask(internalIdx, editedTask);
         indicateToDoListChanged();
     }
 

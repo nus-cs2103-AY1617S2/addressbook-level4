@@ -75,8 +75,7 @@ public class EditCommand extends Command {
         try {
             // Not using model.updateTask as it does not trigger observers
             // model.updateTask(filteredTaskListIndex, editedTask);
-            model.deleteTaskForEdit(taskToEdit);
-            model.addTaskForEdit(internalIdx, editedTask);
+            model.updateTask(taskToEdit, internalIdx, editedTask);
             jumpToNewTask(editedTask);
             EventsCenter.getInstance().post(new DeselectCardsEvent());
         } catch (UniqueTaskList.DuplicateTaskException dpe) {

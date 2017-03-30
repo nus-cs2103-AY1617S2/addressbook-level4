@@ -26,6 +26,13 @@ public class ToDoListHistoryManager implements ToDoListHistory {
         this.nextCommandHistory = new Stack<CommandHistoryEntry>();
     }
 
+    
+    public void saveUndoInformationAndClearRedoHistory(String commandWord, ReadOnlyTask taskBefore, 
+            ReadOnlyTask task, ToDoList toDoList) {
+        
+    }
+    
+    
     @Override
     public void saveUndoInformationAndClearRedoHistory(String commandWord, ReadOnlyTask task,
             ToDoList toDoList) {
