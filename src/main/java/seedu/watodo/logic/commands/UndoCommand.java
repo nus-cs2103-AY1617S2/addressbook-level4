@@ -7,7 +7,7 @@ package seedu.watodo.logic.commands;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Last command reverted.";
+    public static final String MESSAGE_SUCCESS = " reverted.";
     public static final String MESSAGE_EMPTY = "No command left to undo.";
     public static final String MESSAGE_FAILURE = "Failed to undo";
 
@@ -20,7 +20,8 @@ public class UndoCommand extends Command {
 
         if (previousCommand != null) {
             previousCommand.unexecute();
-            return new CommandResult(MESSAGE_SUCCESS);
+            
+            return new CommandResult(previousCommand + " " + MESSAGE_SUCCESS);
         }
 
         return new CommandResult(MESSAGE_EMPTY);

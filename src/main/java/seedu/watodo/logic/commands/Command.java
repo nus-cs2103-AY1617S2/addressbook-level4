@@ -40,4 +40,8 @@ public abstract class Command {
     public void unexecute() {
 
     }
+
+    public void redo() {
+        
+    }
 }

@@ -73,6 +73,8 @@ public class UnmarkCommand extends Command {
 
         return new CommandResult(tasksUnmarkedMessage.toString());
     }
+    
+    //@@author A0139845R
 
     @Override
     public void unexecute() {
@@ -82,6 +84,16 @@ public class UnmarkCommand extends Command {
 
         }
     }
+    
+    @Override
+    public void redo() {
+        try {
+            model.updateFilteredListToShowAll();
+            this.execute();
+        } catch (CommandException e) {
+        }
+    }
+    //@@author 
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToUnmark}

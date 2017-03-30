@@ -36,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private Stack< Command > commandHistory;
+    private Stack< Command > undoneHistory;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -47,6 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.commandHistory = new Stack< Command >();
+        this.undoneHistory = new Stack< Command >();
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
@@ -354,7 +356,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public Command getPreviousCommand() {
         if (!commandHistory.isEmpty()) {
-            return commandHistory.pop();
+            Command commandToReturn = commandHistory.pop();
+            undoneHistory.push(commandToReturn);
+            return commandToReturn;
         }
         return null;
     }
@@ -363,6 +367,21 @@ public class ModelManager extends ComponentManager implements Model {
     public void addCommandToHistory(Command command) {
         commandHistory.push(command);
 
+    }
+    
+    @Override
+    public Command getUndoneCommand() {
+        if (!undoneHistory.isEmpty()) {
+            Command commandToReturn = undoneHistory.pop();
+            commandHistory.push(commandToReturn);
+            return commandToReturn;
+        }
+        return null;
+    }
+    
+    @Override
+    public void clearRedo() {
+        this.undoneHistory.clear();
     }
 
     //@@author

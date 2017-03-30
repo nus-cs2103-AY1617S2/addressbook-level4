@@ -22,10 +22,23 @@ public class ClearCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    //@@author A0139845R
     @Override
     public void unexecute() {
         assert model != null;
         model.resetData(dataToClear);
 
     }
+    
+    @Override
+    public void redo() {
+        assert model != null;
+        this.execute();
+        model.updateFilteredListToShowAll();
+
+    }
+    
+    //@@author
+    
+    
 }
