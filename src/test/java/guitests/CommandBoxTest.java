@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.tache.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends TaskManagerGuiTest {
 
     private static final String COMMAND_THAT_SUCCEEDS = "select 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
@@ -30,7 +30,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
+    public void commandBoxCommandSucceedsTextClearedAndStyleClassRemainsTheSame() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals("", commandBox.getCommandInput());
@@ -38,7 +38,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
+    public void commandBoxCommandFailsTextStaysAndErrorStyleClassAdded() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
         assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
@@ -46,7 +46,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
+    public void commandBoxCommandSucceedsAfterFailedCommandTextClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
         commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
 
@@ -56,4 +56,18 @@ public class CommandBoxTest extends AddressBookGuiTest {
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
+    //@@author A0142255M
+    @Test
+    public void commandAutocompletesWithEnterKey() {
+        commandBox.enterCommand("del");
+        commandBox.pressEnterKey();
+        assertEquals(commandBox.getCommandInput(), "delete ");
+    }
+
+    @Test
+    public void commandAutocompletesLexicographicallySmallerCommand() {
+        commandBox.enterCommand("e"); // autocomplete options: edit or exit
+        commandBox.pressEnterKey();
+        assertEquals(commandBox.getCommandInput(), "clear");
+    }
 }
