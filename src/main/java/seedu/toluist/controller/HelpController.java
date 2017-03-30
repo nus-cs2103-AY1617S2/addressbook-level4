@@ -76,14 +76,15 @@ public class HelpController extends Controller {
     }
 
     private void showGeneralHelp() {
-        Iterator<Class<? extends Controller>> controllerIterator = getHelpControllerClasses().iterator(); 
-        Class <? extends Controller> controller;
-        ArrayList<String> helpArray = new ArrayList<String>();
-        while (controllerIterator.hasNext()) {
-            controller = (Class<? extends Controller>) controllerIterator.next();
-            helpArray.add(controller.)
+        List<List<String>> commandsBasicHelp = getBasicHelpFromClasses();
+        List<String> resultText;
+
+
+        for ( List<String> commandHelpMessage : commandsBasicHelp) {
+            resultText.add(String.join("\n", commandHelpMessage));
         }
-        
+
+        uiStore.setTasks(resultText);
     }
 
     public HashMap<String, String> tokenize(String command) {
@@ -144,6 +145,22 @@ public class HelpController extends Controller {
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
         return new HashSet<>(keywordList);
+    }
+
+    private List<List<String>> getBasicHelpFromClasses() {
+        List<List<String>> keywordList = getHelpControllerClasses()
+                .stream()
+                .map((Class<? extends Controller> klass) -> {
+                    try {
+                        final String methodName = "getBasicHelp";
+                        Method method = klass.getMethod(methodName);
+                        return Arrays.asList((String[]) method.invoke(null));
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        return new ArrayList<String>();
+                    }
+                })
+                .collect(Collectors.toList());
+        return keywordList;
     }
 
     public static String[] getCommandWords() {
