@@ -30,6 +30,7 @@ public class MarkCommand extends Command {
     private int[] filteredTaskListIndices;
     private int undoMarkInt;
     private Task undoMark;
+    private Task markedTask;
 
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -59,7 +60,7 @@ public class MarkCommand extends Command {
             this.undoMark = new Task(taskToMark);
 
             try {
-                Task markedTask = createMarkedTask(taskToMark);
+                markedTask = createMarkedTask(taskToMark);
                 model.updateTask(filteredTaskListIndices[i], markedTask);
                 this.undoMarkInt = filteredTaskListIndices[i];
 
@@ -72,15 +73,29 @@ public class MarkCommand extends Command {
 
         return new CommandResult(tasksMarkedMessage.toString());
     }
-    
+
+    //@@author A0139845R
+
     @Override
     public void unexecute() {
         try {
+            model.updateFilteredListToShowAll();
             model.updateTask(undoMarkInt, undoMark);
         } catch (DuplicateTaskException e) {
-            
+
         }
     }
+
+    @Override
+    public void redo() {
+        try {
+            model.updateFilteredListToShowAll();
+            this.execute();
+        } catch (CommandException e) {
+        }
+    }
+
+    //@@author
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToMark}

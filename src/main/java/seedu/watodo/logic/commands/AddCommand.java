@@ -12,6 +12,7 @@ import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -29,7 +30,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private Task toAdd;
-    
+
     private Task undoAdd;
 
     //@@author A0143076J
@@ -80,15 +81,27 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
     }
-    
+
     //@@author A0139845R
     @Override
     public void unexecute() {
         assert model != null;
         try {
+            model.updateFilteredListToShowAll();
             model.deleteTask(undoAdd);
         } catch (TaskNotFoundException e) {
             System.out.println(undoAdd);
+        }
+    }
+
+    @Override
+    public void redo() {
+        assert model != null;
+        try {
+            model.updateFilteredListToShowAll();
+            model.addTask(undoAdd);
+        } catch (DuplicateTaskException e) {
+
         }
     }
 

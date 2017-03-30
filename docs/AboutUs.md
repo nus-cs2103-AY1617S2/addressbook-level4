@@ -12,7 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * **Features implemented:** <br>
    * [List tasks](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#23-listing-tasks-by-type--list-list_type)<br>
    * [Edit tags](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#25-editing-a-task--edit)<br>
-* **Code written**: [[functional code](A123456.md)][[test code](A123456.md)]<br>
+* **Code written**: [[functional code](A0139872R.md)][[test code](A0139872R.md)]<br>
 * **Other major contributions:** <br>
 
 
@@ -28,7 +28,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Edit task](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#25-editing-a-task--edit)<br>
    * [Alternative commands](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#215-alternative-commands)<br>
    * [Customize alternative commands](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#216-customize-alternative-commands-shortcut)<br>
-* **Code written**: [[functional code](A123456.md)][[test code](A123456.md)]<br>
+* **Code written**: [[functional code](A0143076J.md)][[test code](A0143076J.md)]<br>
 * **Other major contributions:** <br>
 
 
@@ -46,7 +46,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Import storage file](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#212-load-data-from-a-specified-file--import)<br>
    * [Change storage file location](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#213-change-storage-file-location--saveas)<br>
    * [View current storage file location](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#214-view-current-storage-file-location--viewfile)<br>
-* **Code written**: [[functional code](A123456.md)][[test code](A123456.md)]<br>
+* **Code written**: [[functional code](A0141077L.md)][[test code](A0141077L.md)]<br>
 * **Other major contributions:** <br>
 
 
@@ -60,7 +60,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * **Features implemented:** <br>
    * [Undo](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#29-undoing-previous-step--undo)<br>
    * [Redo](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#210-redoing-previous-step--redo)<br>
-* **Code written**: [[functional code](A123456.md)][[test code](A123456.md)]<br>
+* **Code written**: [[functional code](A0139845R.md)][[test code](A0139845R.md)]<br>
 * **Other major contributions:** <br>
 
 

@@ -22,6 +22,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private final String SUPPORTED_UNDO_STRING = "add delete clear edit mark unmark";
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -33,8 +34,12 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
-        if(!commandText.equals("undo"))
+
+        if(!commandText.equals("undo") && !commandText.equals("redo")) {
             model.addCommandToHistory(command);
+            model.clearRedo();
+        }
+
         return command.execute();
     }
 

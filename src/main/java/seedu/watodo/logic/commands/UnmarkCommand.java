@@ -28,7 +28,7 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_STATUS_UNDONE = "The task status is already set to Undone.";
 
     private int[] filteredTaskListIndices;
-    
+
     private Task undoUnmark;
     private int undoUnmarkInt;
 
@@ -73,15 +73,27 @@ public class UnmarkCommand extends Command {
 
         return new CommandResult(tasksUnmarkedMessage.toString());
     }
-    
+
+    //@@author A0139845R
+
     @Override
     public void unexecute() {
         try {
             model.updateTask(undoUnmarkInt, undoUnmark);
         } catch (DuplicateTaskException e) {
-        
+
         }
     }
+
+    @Override
+    public void redo() {
+        try {
+            model.updateFilteredListToShowAll();
+            this.execute();
+        } catch (CommandException e) {
+        }
+    }
+    //@@author
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToUnmark}
