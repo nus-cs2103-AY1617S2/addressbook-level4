@@ -160,6 +160,15 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+Author: Amro Shohoud
+
+`UI` design
+
+* Priority - Sets background color for TaskCard (transparent, yellow, red) based on the value of priority (low, medium, high). No label for priority is inserted in fxml file.
+* Events - Events such as clicking trigger the listener to select a TaskCard, highlighting the background to show selection.
+* Filtering - Logic creates a filtered list of ReadOnlyTasks, which is used by TaskListPanel to create TaskCards that populate the panel.
+
+
 ### 2.3. Logic component
 
 Author: Bernard Choo
