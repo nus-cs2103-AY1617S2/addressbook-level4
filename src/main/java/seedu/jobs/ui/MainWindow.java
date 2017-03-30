@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.jobs.ui.BrowserPanel;
 import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.GuiSettings;
 import seedu.jobs.commons.events.ui.ExitAppRequestEvent;
@@ -116,7 +117,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-
+    	browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskBookFilePath());
@@ -203,7 +204,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
+    	browserPanel.loadTaskPage();
     }
 
     void releaseResources() {

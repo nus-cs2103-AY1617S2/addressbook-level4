@@ -29,8 +29,8 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadTaskPage(ReadOnlyTask task) {
-        //loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().fullName.replaceAll(" ", "+"));
+    public void loadTaskPage() {
+    	//loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().fullName.replaceAll(" ", "+"));
     	loadPage("https://calendar.google.com/calendar/render#main_7%7Cmonth");
     }
 
