@@ -1,3 +1,4 @@
+//@@author A0139539R
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -14,20 +15,20 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 public class SampleDataUtil {
 
     public static final int SAMPLE_TASKS_LENGTH = 50;
-    private static String[] sampleItems = new String[] {"apples", "bananas", "coconuts", "durians",
-        "elderberries", "figs", "grapes", "honeydews", "imbes", "jackfruits", "kiwis", "lemons",
-        "mangoes", "nectarines", "oranges", "pineapples", "quinces", "rambutans", "strawberries",
-        "tangerines", "ugnis", "vanilla beans", "watermelons", "xango mangosteens", "yangmeis",
-        "zuchinnis", "almonds", "bonbons", "cupcakes", "donuts", "eclairs", "froyos", "gingerbreads",
-        "honeycombs", "ice cream sandwiches", "jellybeans", "kitkats", "lollipops", "marshmellows",
-        "nougats", "orange tarts", "petit fours", "red velvet cakes", "swiss rolls", "tiramisus",
-        "unsalted popcorns", "waffles", "xtremes", "yule logs", "zeppoles"};
 
+    private static String[] sampleItems = new String[] {
+        "apples", "bananas", "coconuts", "durians", "elderberries", "figs", "grapes",
+        "honeydews", "imbes", "jackfruits", "kiwis", "lemons", "mangoes", "nectarines",
+        "oranges", "pineapples", "quinces", "rambutans", "strawberries", "tangerines",
+        "ugnis", "vanilla beans", "watermelons", "xango mangosteens", "yangmeis",
+        "zuchinnis", "almonds", "bonbons", "cupcakes", "donuts", "eclairs", "froyos",
+        "gingerbreads", "honeycombs", "ice cream sandwiches", "jellybeans", "kitkats",
+        "lollipops", "marshmellows", "nougats", "orange tarts", "petit fours",
+        "red velvet cakes", "swiss rolls", "tiramisus", "unsalted popcorns",
+        "waffles", "xtremes", "yule logs", "zeppoles"};
     private static String[] sampleVerbs = new String[] {"Buy ", "Eat ", "Taste ", "Get "};
-
     private static String[] sampleDays = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday",
         "Friday", "Saturday", "Sunday", "floating"};
-
     private static String[] samplePriorities = new String[] {"1", "2", "3", "4", "5", "-1"};
 
     public static Task[] getSampleTasks() {
@@ -53,11 +54,11 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
+            AddressBook sampleTaskManager = new AddressBook();
             for (Task sampleTask : getSampleTasks()) {
-                sampleAB.addTask(sampleTask);
+                sampleTaskManager.addTask(sampleTask);
             }
-            return sampleAB;
+            return sampleTaskManager;
         } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
