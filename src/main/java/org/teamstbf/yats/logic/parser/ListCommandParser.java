@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.ListCommand;
+import org.teamstbf.yats.logic.commands.ListCommandDeadline;
 import org.teamstbf.yats.logic.commands.ListCommandDone;
 import org.teamstbf.yats.logic.commands.ListCommandEndTime;
 import org.teamstbf.yats.logic.commands.ListCommandLocation;
@@ -21,6 +22,7 @@ public class ListCommandParser {
 	private final int LIST_COMMAND_SUFFIX = 2;
 	private final String COMMAND_EXTENSION_END = "by end";
 	private final String COMMAND_EXTENSION_START = "by start";
+	private final String COMMAND_EXTENSION_DEADLINE = "by deadline";
 	private final String COMMAND_EXTENSION_LOCATION = "by location";
 	private final String COMMAND_EXTENSION_DONE = "done";
 	private final String COMMAND_EXTENSION_TAG = "by tag";
@@ -40,6 +42,8 @@ public class ListCommandParser {
 				return new ListCommandEndTime(internalParser(args, COMMAND_EXTENSION_END, KEYWORD_PERIOD));
 			case (ListCommand.COMMAND_WORD_SUFFIX_START):
 				return new ListCommandStartTime(internalParser(args, COMMAND_EXTENSION_START, KEYWORD_PERIOD));
+			case (ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
+				return new ListCommandDeadline(internalParser(args, COMMAND_EXTENSION_DEADLINE, KEYWORD_PERIOD));
 			case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION):
 				return new ListCommandLocation(internalParser(args, COMMAND_EXTENSION_LOCATION, KEYWORD_PERIOD));
 			case (ListCommand.COMMAND_WORD_SUFFIX_TAG):

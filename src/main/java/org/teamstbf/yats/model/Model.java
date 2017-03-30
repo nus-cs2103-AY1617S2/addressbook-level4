@@ -57,8 +57,8 @@ public interface Model {
 
 	// @@author A0139448U
 	/*
-	 * force saves the current state of the taskmanager
-	 * for use in changing save location to create a file in new location
+	 * force saves the current state of the taskmanager for use in changing save
+	 * location to create a file in new location
 	 */
 	void saveTaskManager();
 
@@ -69,13 +69,18 @@ public interface Model {
 	void updateFilteredListToShowLocation(Set<String> keywords);
 
 	/** Updates the filter of the filtered event list to show specified date */
-	void updateFilteredListToShowDate(Set<String> keywords);
+	void updateFilteredListToShowEndTime(Set<String> keywords);
 
 	/**
 	 * Updates the filter of the filtered event list to show specified start
 	 * time
 	 */
 	void updateFilteredListToShowStartTime(Set<String> keywords);
+
+	/**
+	 * Updates the filter of the filtered event list to show specified deadline
+	 */
+	void updateFilteredListToShowDeadline(Set<String> keywords)
 
 	/** Updates the filter of the filtered event list to show done tasks */
 	void updateFilteredListToShowDone(Set<String> keywords);

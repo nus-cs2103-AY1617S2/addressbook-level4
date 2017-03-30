@@ -10,6 +10,7 @@ public class ListCommand extends Command {
 	public static final String COMMAND_WORD_EXTENTION = "by";
 	public static final String COMMAND_WORD_SUFFIX_END = "end";
 	public static final String COMMAND_WORD_SUFFIX_START = "start";
+	public static final String COMMAND_WORD_SUFFIX_DEADLINE = "deadline";
 	public static final String COMMAND_WORD_SUFFIX_LOCATION = "location";
 	public static final String COMMAND_WORD_SUFFIX_DONE = "done";
 	public static final String COMMAND_WORD_SUFFIX_TAG = "tag";

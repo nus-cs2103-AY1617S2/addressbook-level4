@@ -5,7 +5,7 @@ import java.util.Set;
 //@@author A0138952W
 public class ListCommandEndTime extends ListCommand {
 
-	public static final String MESSAGE_SUCCESS = "Listed all tasks by deadline";
+	public static final String MESSAGE_SUCCESS = "Listed all tasks by end time";
 
 	private final Set<String> keywords;
 
@@ -15,7 +15,7 @@ public class ListCommandEndTime extends ListCommand {
 
 	@Override
 	public CommandResult execute() {
-		model.updateFilteredListToShowDate(keywords);
+		model.updateFilteredListToShowEndTime(keywords);
 		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
 	}
 }

@@ -232,13 +232,18 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updateFilteredListToShowDate(Set<String> keywords) {
+	public void updateFilteredListToShowEndTime(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new EndTimeQualifier(keywords)));
 	}
 
 	@Override
 	public void updateFilteredListToShowStartTime(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywords)));
+	}
+
+	@Override
+	public void updateFilteredListToShowDeadline(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new DeadlineQualifier(keywords)));
 	}
 
 	@Override
@@ -365,6 +370,27 @@ public class ModelManager extends ComponentManager implements Model {
 		public boolean run(ReadOnlyEvent event) {
 			return startTimeKeyWords.stream()
 					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
+					.findAny().isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "startTime=" + String.join(", ", startTimeKeyWords);
+		}
+	}
+
+	private class DeadlineQualifier implements Qualifier {
+
+		private Set<String> startTimeKeyWords;
+
+		DeadlineQualifier(Set<String> startTimeKeyWords) {
+			this.startTimeKeyWords = startTimeKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return startTimeKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDeadline().toString(), keyword))
 					.findAny().isPresent();
 		}
 
