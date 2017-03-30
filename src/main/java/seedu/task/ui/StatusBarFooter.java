@@ -29,7 +29,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     private static final String FXML = "StatusBarFooterDefault.fxml";
     protected static final String FXML_Light = "StatusBarFooterLight.fxml";
-    protected static final String FXML_Dark= "StatusBarFooterDark.fxml";
+    protected static final String FXML_Dark = "StatusBarFooterDark.fxml";
 
     public StatusBarFooter(AnchorPane placeHolder, String saveLocation) {
         super(FXML);
@@ -52,6 +52,7 @@ public class StatusBarFooter extends UiPart<Region> {
         placeHolder.getChildren().add(getRoot());
     }
 
+    //@@author A0142939W
     private void setSaveLocation(String location) {
         this.saveLocationStatus.setText(location);
     }
@@ -60,6 +61,7 @@ public class StatusBarFooter extends UiPart<Region> {
         this.syncStatus.setText(status);
     }
 
+    //@@author A0142939W
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent fpce) {
         setSaveLocation("./" + fpce.path);
