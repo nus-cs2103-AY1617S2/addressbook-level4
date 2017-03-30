@@ -1,3 +1,4 @@
+/*@@author A0124377A */
 
 .error {
     -fx-background-color: #ff9f80;
@@ -13,4 +14,79 @@
 
 .tooltip-text {
     -fx-text-fill: white;
+}
+
+/**Group 0 for events */
+.group0{
+    -fx-background-color: #ecf0f1;
+    -fx-fill: transparent; 
+    -fx-text-fill: white;
+    -fx-font-family: "Montserrat_Light";
+    -fx-border-width: 5px 0px 5px 0px;
+    -fx-border-color: #6897BB ;
+}
+
+/**Group 1 for deadlines and tasks */
+.group12{ 
+    -fx-background-color:#ecf0f1 ;
+    -fx-fill: transparent; 
+    -fx-text-fill: white;
+    -fx-font-family: "Montserrat_Light";
+    -fx-border-width: 5px 0px 5px 0px;
+    -fx-border-color: #6DC066;
+    
+}
+
+.anchor-pane{
+    -fx-background-color: #7f8c8d;
+}
+
+.event-panel-header {
+    -fx-font-family: "Beon";
+    -fx-font-size:20px;
+    -fx-text-fill: #ecf0f1;
+    -fx-background-color:#2E6991;
+}
+
+.task-panel-header {
+    -fx-font-family: "Beon";
+    -fx-font-size:20px;
+    -fx-text-fill: #ecf0f1;
+    -fx-background-color:#008000;
+}
+
+
+.Agenda .Selected { 
+    -xfx-color: -fx-focused-base;
+    -fx-background-color: #FFF68F, -fx-outer-border, -fx-inner-border, #FFF68F;
+    -fx-background-insets: -1.4, 0, 1, 2;
+    -fx-background-radius: 10, 5, 4, 3;
+}
+
+.status-complete {
+    -fx-border-color: #008000;
+    -fx-border-width:5px;
+    -fx-background-image: url('/images/tick.png');
+    -fx-background-position: right center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 60px;
+    -fx-right-padding: 40px;
+}
+
+
+.status-dueOrOverdue {
+    -fx-border-color: #ff9f80;
+    -fx-background-image: url('/images/exclam.png');
+    -fx-background-position: right center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 60px;
+    -fx-right-padding: 25px;
+    -fx-border-width: 5px;
+}
+
+.tag-selector {
+    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
 }

@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import javafx.fxml.FXML;
 
 //import javafx.beans.binding.Bindings;
@@ -66,13 +70,35 @@ public class TaskCard extends UiPart<Region> {
             locations.setText("");
         }
         initTags(task);
-
+        setCardLook(task);
     }
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    private void setCardLook(ReadOnlyTask task) {
+        if (task.getStatus()) {
+            cardPane.getStyleClass().add("status-complete");
+        } else if (isDueAndOverdue(task)) {
+            cardPane.getStyleClass().add("status-dueOrOverdue");
+        }
+    }
+
+    private boolean isDueAndOverdue(ReadOnlyTask task) {
+        LocalDate taskDate = task.getByDate().getValue();
+        LocalTime taskTime = task.getByTime().getValue();
+        if (taskDate != null && taskTime != null) {
+            return ((task.hasDeadline()
+                && LocalDateTime.of(taskDate, taskTime)
+                .isBefore(LocalDateTime.now()))
+                || (LocalDateTime.of(taskDate, taskTime).getDayOfYear()
+                        == LocalDateTime.now().getDayOfYear()));
+        }
+        else return false;
+    }
+
+}
  //   private void feedback() {
   //      cardVBox.requestFocus();
  //       cardVBox.backgroundProperty().bind(Bindings
@@ -80,4 +106,3 @@ public class TaskCard extends UiPart<Region> {
  //               .then(focusBackground)
   //              .otherwise(unfocusBackground));
   //  }
-}

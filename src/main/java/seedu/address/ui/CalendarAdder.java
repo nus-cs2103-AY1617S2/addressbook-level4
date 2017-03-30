@@ -19,7 +19,7 @@ import seedu.address.model.person.ReadOnlyTask;
 public class CalendarAdder extends AppointmentImplBase implements Appointment {
     private static final String EVENT_GROUP = "group0";
     private static final long DEFAULT_DURATION = 1;
-    private static final String TASK_GROUP = "group1";
+    private static final String TASK_GROUP = "group12";
     private static Map<String, AppointmentGroup> groupMap;
     private static CalendarAdder instance;
 
