@@ -111,7 +111,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'task amanger' and the 'last shown list' are verified to be unchanged.
+     * Both the 'task manager' and the 'last shown list' are verified to be unchanged.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
@@ -186,9 +186,9 @@ public class LogicManagerTest {
 
     @Test
     public void executeAddInvalidTaskData() {
-        assertCommandFailure("add [!*^]\\[] ;HighPriority",
+        assertCommandFailure("add [!*^]\\[] t/HighPriority",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Task ;invalid_-[.tag",
+        assertCommandFailure("add Valid Task t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -235,7 +235,7 @@ public class LogicManagerTest {
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
-                ListCommand.MESSAGE_SUCCESS,
+                String.format(ListCommand.MESSAGE_SUCCESS, "Uncompleted"),
                 expectedAB,
                 expectedList);
     }
@@ -412,8 +412,11 @@ public class LogicManagerTest {
             cmd.append(p.getName().toString());
 
             UniqueTagList tags = p.getTags();
+            if (tags.iterator().hasNext()) {
+                cmd.append("t/");
+            }
             for (Tag t: tags) {
-                cmd.append(" ;").append(t.tagName);
+                cmd.append(t.tagName + " ");
             }
 
             return cmd.toString();

@@ -56,4 +56,18 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
+    //@@author A0142255M
+    @Test
+    public void commandAutocompletesWithEnterKey() {
+        commandBox.enterCommand("del");
+        commandBox.pressEnterKey();
+        assertEquals(commandBox.getCommandInput(), "delete ");
+    }
+
+    @Test
+    public void commandAutocompletesLexicographicallySmallerCommand() {
+        commandBox.enterCommand("e"); // autocomplete options: edit or exit
+        commandBox.pressEnterKey();
+        assertEquals(commandBox.getCommandInput(), "clear");
+    }
 }

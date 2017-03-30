@@ -31,6 +31,7 @@ public class DeleteCommand extends Command implements Undoable {
     public final TaskType type;
     //@@author A0150120H
     private ReadOnlyTask taskToDelete;
+    private int originalIndex;
     private boolean commandSuccess;
     //@@author
 
@@ -58,6 +59,7 @@ public class DeleteCommand extends Command implements Undoable {
         taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
+            originalIndex = model.getTaskManager().getTaskList().indexOf(taskToDelete);
             model.deleteTask(taskToDelete);
             commandSuccess = true;
             undoHistory.push(this);
@@ -81,7 +83,7 @@ public class DeleteCommand extends Command implements Undoable {
         try {
             assert taskToDelete instanceof Task;
 
-            model.addTask((Task) taskToDelete);
+            model.addTask(originalIndex, (Task) taskToDelete);
             return String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
         } catch (DuplicateTaskException e) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, taskToDelete));

@@ -1,5 +1,7 @@
 package seedu.tache.model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -8,6 +10,7 @@ import seedu.tache.commons.core.ComponentManager;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
+import seedu.tache.commons.events.ui.FilteredTaskListUpdatedEvent;
 import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
@@ -22,19 +25,27 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+    //@@author A0139925U
     public static final int MARGIN_OF_ERROR = 1;
     //@@author A0142255M
-    public static final String ALL_TASK_LIST_TYPE = "all tasks";
-    public static final String COMPLETED_TASK_LIST_TYPE = "completed tasks";
-    public static final String UNCOMPLETED_TASK_LIST_TYPE = "uncompleted tasks";
-    public static final String TIMED_TASK_LIST_TYPE = "timed tasks";
-    public static final String FLOATING_TASK_LIST_TYPE = "floating tasks";
+    public static final String ALL_TASK_LIST_TYPE = "All Tasks";
+    public static final String COMPLETED_TASK_LIST_TYPE = "Completed Tasks";
+    public static final String UNCOMPLETED_TASK_LIST_TYPE = "Uncompleted Tasks";
+    public static final String TIMED_TASK_LIST_TYPE = "Timed Tasks";
+    public static final String FLOATING_TASK_LIST_TYPE = "Floating Tasks";
+  //@@author A0139925U
+    public static final String FOUND_TASK_LIST_TYPE = "Found Tasks";
+    //@@author A0139961U
+    public static final String DUE_TODAY_TASK_LIST_TYPE = "Tasks Due Today";
+    public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Tasks Due This Week";
     //@@author
-
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
+    //@@author A0139925U
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    private Set<String> latestKeywords;
+    //@@author
     //@@author A0142255M
     private String filteredTaskListType = ALL_TASK_LIST_TYPE;
     //@@author
@@ -56,21 +67,28 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
+    //@@author A0142255M
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
         taskManager.resetData(newData);
+        updateFilteredListToShowAll();
+        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
+    //@@author A0142255M
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
+        raise(new FilteredTaskListUpdatedEvent(filteredTasks));
     }
+    //@@author
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -82,7 +100,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
+        indicateTaskManagerChanged();
+    }
+    //@@author
+
+    //@@author A0150120H
+    @Override
+    public synchronized void addTask(int index, Task task) throws DuplicateTaskException {
+        taskManager.addTask(index, task);
         indicateTaskManagerChanged();
     }
     //@@author
@@ -91,7 +116,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(ReadOnlyTask taskToUpdate, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
         taskManager.updateTask(taskToUpdate, editedTask);
         indicateTaskManagerChanged();
     }
@@ -103,11 +127,14 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    //@@author A0142255M
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
         updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
     }
+    //@@author
 
     //@@author A0139925U
     @Override
@@ -126,27 +153,47 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0142255M
     @Override
     public void updateFilteredListToShowTimed() {
-        updateFilteredTaskList(new PredicateExpression(new TimedQualifier(true)));
+        updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(true)));
         updateFilteredTaskListType(TIMED_TASK_LIST_TYPE);
     }
 
     @Override
     public void updateFilteredListToShowFloating() {
-        updateFilteredTaskList(new PredicateExpression(new TimedQualifier(false)));
+        updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(false)));
         updateFilteredTaskListType(FLOATING_TASK_LIST_TYPE);
     }
-    //@@author
 
+    //@@author A0139961U
+    @Override
+    public void updateFilteredListToShowDueToday() {
+        updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
+        updateFilteredTaskListType(DUE_TODAY_TASK_LIST_TYPE);
+    }
+
+    public void updateFilteredListToShowDueThisWeek() {
+        updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
+        updateFilteredTaskListType(DUE_THIS_WEEK_TASK_LIST_TYPE);
+    }
+
+    //@@author A0142255M
+    /**
+     * Provides functionality for find command and raises TaskListTypeChangedEvent to update UI.
+     * Set<String> is converted to ArrayList<String> so that String can be retrieved.
+     */
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
+        ArrayList<String> keywordsList = new ArrayList<String>(keywords);
+        updateFilteredTaskListType(FOUND_TASK_LIST_TYPE);
+        retainLatestKeywords(keywords);
+        raise(new TaskListTypeChangedEvent("Find \"" + keywordsList.get(0) + "\""));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
     }
 
-    //@@author A0142255M
     @Override
     public String getFilteredTaskListType() {
         return filteredTaskListType;
@@ -157,6 +204,41 @@ public class ModelManager extends ComponentManager implements Model {
             raise(new TaskListTypeChangedEvent(newFilteredTaskListType));
         }
         filteredTaskListType = newFilteredTaskListType;
+    }
+    //@@author
+    //@@author A0139925U
+    private void retainLatestKeywords(Set<String> keywords) {
+        latestKeywords = keywords;
+    }
+
+    public void updateCurrentFilteredList() {
+        switch(filteredTaskListType) {
+        case ALL_TASK_LIST_TYPE:
+            updateFilteredListToShowAll();
+            break;
+        case COMPLETED_TASK_LIST_TYPE:
+            updateFilteredListToShowCompleted();
+            break;
+        case UNCOMPLETED_TASK_LIST_TYPE:
+            updateFilteredListToShowUncompleted();
+            break;
+        case TIMED_TASK_LIST_TYPE:
+            updateFilteredListToShowTimed();
+            break;
+        case FLOATING_TASK_LIST_TYPE:
+            updateFilteredListToShowFloating();
+            break;
+        case FOUND_TASK_LIST_TYPE:
+            updateFilteredTaskList(latestKeywords);
+            break;
+        case DUE_TODAY_TASK_LIST_TYPE:
+            updateFilteredListToShowDueToday();
+            break;
+        case DUE_THIS_WEEK_TASK_LIST_TYPE:
+            updateFilteredListToShowDueThisWeek();
+            break;
+        default:
+        }
     }
     //@@author
 
@@ -265,10 +347,61 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "active=true";
+            return "active=" + isActive;
+        }
+    }
+    //@@author
+
+    //@@author A0139961U
+    private class DueTodayQualifier implements Qualifier {
+        private boolean isDueToday;
+
+        DueTodayQualifier(boolean isDueToday) {
+            this.isDueToday = isDueToday;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDateTime().isPresent() && isDueToday) {
+                if (task.getStartDateTime().isPresent()) {
+                    return task.isWithinDate(new Date());
+                }
+                return task.getEndDateTime().get().isToday();
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "dueToday=true";
         }
     }
 
+    //@@author A0139961U
+    private class DueThisWeekQualifier implements Qualifier {
+        private boolean isDueThisWeek;
+
+        DueThisWeekQualifier(boolean isDueThisWeek) {
+            this.isDueThisWeek = isDueThisWeek;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDateTime().isPresent() && isDueThisWeek) {
+                return task.getEndDateTime().get().isSameWeek();
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "dueThisWeek=true";
+        }
+    }
+
+    //@@author A0139925U
     private class DateTimeQualifier implements Qualifier {
         private Set<String> dateTimeKeyWords;
 
@@ -308,21 +441,44 @@ public class ModelManager extends ComponentManager implements Model {
         private Set<String> multiKeyWords;
         private NameQualifier nameQualifier;
         private DateTimeQualifier dateTimeQualifier;
+        private ActiveQualifier activeQualifier;
 
         MultiQualifier(Set<String> multiKeyWords) {
             this.multiKeyWords = multiKeyWords;
             nameQualifier = new NameQualifier(multiKeyWords);
             dateTimeQualifier = new DateTimeQualifier(multiKeyWords);
+            activeQualifier = new ActiveQualifier(true);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameQualifier.run(task) || dateTimeQualifier.run(task);
+            return (nameQualifier.run(task) || dateTimeQualifier.run(task)) && activeQualifier.run(task);
         }
 
         @Override
         public String toString() {
             return "multi=" + String.join(", ", multiKeyWords);
+        }
+
+    }
+
+    private class ActiveTimedQualifier implements Qualifier {
+        private TimedQualifier timedQualifier;
+        private ActiveQualifier activeQualifier;
+
+        ActiveTimedQualifier(boolean isTimed) {
+            timedQualifier = new TimedQualifier(isTimed);
+            activeQualifier = new ActiveQualifier(true);
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return timedQualifier.run(task) && activeQualifier.run(task);
+        }
+
+        @Override
+        public String toString() {
+            return "activetimed";
         }
 
     }
@@ -352,5 +508,5 @@ public class ModelManager extends ComponentManager implements Model {
     private int minimum(int a, int b, int c) {
         return Math.min(Math.min(a, b), c);
     }
-
+    //@@author
 }

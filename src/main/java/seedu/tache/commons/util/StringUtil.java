@@ -2,6 +2,7 @@ package seedu.tache.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -71,5 +72,13 @@ public class StringUtil {
         boolean b = m.find();
 
         return b;
+    }
+
+    public static String capitalizeFirstCharacter(String s) {
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
+
+    public static String generateStringFromKeywords(Set<String> s) {
+        return org.apache.commons.lang.StringUtils.join(s, " ");
     }
 }

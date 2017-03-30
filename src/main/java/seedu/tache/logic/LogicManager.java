@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.tache.commons.core.ComponentManager;
+import seedu.tache.commons.core.Config;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.CommandResult;
@@ -22,15 +23,17 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final Parser parser;
     private Storage storage;
+    private Config config;
 
     public LogicManager(Model model) {
         this.model = model;
         this.parser = new Parser();
     }
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, Config config) {
         this.model = model;
         this.storage = storage;
+        this.config = config;
         this.parser = new Parser();
     }
 
@@ -40,13 +43,14 @@ public class LogicManager extends ComponentManager implements Logic {
         Command command = parser.parseCommand(commandText);
         command.setData(model);
         command.setStorage(storage);
+        command.setConfig(config);
         return command.execute();
     }
 
     //@@author A0139925U
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
-        model.updateFilteredListToShowAll();
+        model.updateFilteredListToShowUncompleted();
         return model.getFilteredTaskList();
     }
 

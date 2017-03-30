@@ -1,5 +1,7 @@
 package seedu.tache.testutil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 import seedu.tache.model.tag.UniqueTagList;
@@ -51,6 +53,14 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
+    public void setStartDateTime(DateTime startDateTime) {
+        this.startDateTime = Optional.of(startDateTime);
+    }
+
+    public void setEndDateTime(DateTime endDateTime) {
+        this.endDateTime = Optional.of(endDateTime);
+    }
+
     @Override
     public Name getName() {
         return name;
@@ -78,10 +88,21 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0142255M
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append(";" + s.tagName + " "));
+        sb.append("add " + this.getName().fullName);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        if (this.getStartDateTime().isPresent()) {
+            sb.append(" from " + sdf.format(this.getStartDateTime().get().getDate()));
+        }
+        if (this.getEndDateTime().isPresent()) {
+            sb.append(" to " + sdf.format(this.getEndDateTime().get().getDate()));
+        }
+        if (this.getTags().iterator().hasNext()) {
+            sb.append(" t/");
+        }
+        this.getTags().asObservableList().stream().forEach(s -> sb.append(s.tagName + " "));
         return sb.toString();
     }
 
@@ -89,6 +110,7 @@ public class TestTask implements ReadOnlyTask {
     public boolean getTimedStatus() {
         return isTimed;
     }
+    //@@author
 
     @Override
     public boolean getActiveStatus() {
@@ -103,6 +125,12 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public RecurInterval getRecurInterval() {
         return interval;
+    }
+
+    @Override
+    public boolean isWithinDate(Date date) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

@@ -10,7 +10,6 @@ import java.util.List;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.CompleteCommand;
-import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.commands.IncorrectCommand;
 
 
@@ -25,9 +24,9 @@ public class CompleteCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        String[] preambleFields = args.split(INDEX_DELIMITER);
-        if (preambleFields.length == 0) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        String[] preambleFields = args.trim().split(INDEX_DELIMITER);
+        if (preambleFields.length == 0 || args.trim().equals("")) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
         }
 
         List<Integer> indexList = new ArrayList<Integer>();
@@ -35,7 +34,8 @@ public class CompleteCommandParser {
           //Checking all arguments are valid and creating list
             String currentIndex = preambleFields[i].trim();
             if (!StringUtil.isUnsignedInteger(currentIndex)) {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                CompleteCommand.MESSAGE_USAGE));
             } else {
                 indexList.add(Integer.parseInt(currentIndex));
             }

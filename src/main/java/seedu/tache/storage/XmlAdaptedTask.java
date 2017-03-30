@@ -2,15 +2,18 @@ package seedu.tache.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.Task.RecurInterval;
 
 /**
  * JAXB-friendly version of the Task.
@@ -19,6 +22,24 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
+
+    @XmlElement(required = false)
+    private String startDateTime;
+
+    @XmlElement(required = false)
+    private String endDateTime;
+
+    @XmlElement(required = false)
+    private boolean isActive;
+
+    @XmlElement(required = false)
+    private boolean isTimed;
+
+    @XmlElement(required = false)
+    private boolean isRecurring;
+
+    @XmlElement(required = false)
+    private RecurInterval interval;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -37,6 +58,16 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
+        if (source.getStartDateTime().isPresent()) {
+            startDateTime = source.getStartDateTime().get().getAmericanDateTime();
+        }
+        if (source.getEndDateTime().isPresent()) {
+            endDateTime = source.getEndDateTime().get().getAmericanDateTime();
+        }
+        isActive = source.getActiveStatus();
+        isTimed = source.getTimedStatus();
+        isRecurring = source.getRecurringStatus();
+        interval = source.getRecurInterval();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -54,7 +85,23 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
+        final Optional<DateTime> startDateTime;
+        if (this.startDateTime != null) {
+            startDateTime = Optional.of(new DateTime(this.startDateTime));
+        } else {
+            startDateTime = Optional.empty();
+        }
+        final Optional<DateTime> endDateTime;
+        if (this.endDateTime != null) {
+            endDateTime = Optional.of(new DateTime(this.endDateTime));
+        } else {
+            endDateTime = Optional.empty();
+        }
+        final boolean isActive = this.isActive;
+        final boolean isTimed = this.isTimed;
+        final boolean isRecurring = this.isRecurring;
+        final RecurInterval interval = this.interval;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, tags);
+        return new Task(name, startDateTime, endDateTime, tags, isTimed, isActive, isRecurring, interval);
     }
 }

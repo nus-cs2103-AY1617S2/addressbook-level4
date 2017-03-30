@@ -24,6 +24,9 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    /** Adds the given task to the specified index */
+    void addTask(int index, Task task) throws UniqueTaskList.DuplicateTaskException;
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -54,10 +57,21 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all uncompleted tasks */
     void updateFilteredListToShowTimed();
 
+    //@@author A0139961U
+    /** Updates the filter of the filtered task list to show all tasks due today */
+    void updateFilteredListToShowDueToday();
+
+    //@@author A0139961U
+    /** Updates the filter of the filtered task list to show all tasks due today */
+    void updateFilteredListToShowDueThisWeek();
+
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowFloating();
 
     /** Returns the filtered task list type as a {@code String} */
     String getFilteredTaskListType();
 
+    //@@author A0139925U
+    /** Updates the filter of the current filtered task list to reflect changes */
+    void updateCurrentFilteredList();
 }

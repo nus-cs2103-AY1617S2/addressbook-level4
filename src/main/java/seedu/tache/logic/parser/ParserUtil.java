@@ -3,7 +3,9 @@ package seedu.tache.logic.parser;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,11 +25,12 @@ import seedu.tache.model.task.Name;
 public class ParserUtil {
     //@@author A0139925U
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
     private static final Pattern NAME_FORMAT = Pattern.compile("^\".+\"");
-    private static final Pattern DATE_FORMAT = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/"
-                                                               + "(?:[0-9]{2})?[0-9]{2}$|^[0-3]?[0-9]-[0-1]?[0-9]-"
-                                                               + "(?:[0-9]{2})?[0-9]{2}$|^[0-3]{1}[0-9]{1}[0-1]{1}"
-                                                               + "[0-9]{1}(?:[0-9]{2})?[0-9]{2}$");
+    private static final Pattern DATE_FORMAT = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"
+                                                               + "|^[0-3]?[0-9]-[0-1]?[0-9]-(?:[0-9]{2})?[0-9]{2}$"
+                                                               + "|^[0-3]{1}[0-9]{1}[0-1]{1}[0-9]{1}"
+                                                               + "(?:[0-9]{2})?[0-9]{2}$");
     private static final Pattern TIME_FORMAT = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
                                                                + "([.][0-5][0-9])?\\s?(am|pm){1}");
     private static final Pattern DURATION_FORMAT = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
@@ -35,6 +38,13 @@ public class ParserUtil {
     public static final int TYPE_TASK = 0;
     public static final int TYPE_DETAILED_TASK = 1;
     //@@author
+
+    //@@author A0150120H
+    static enum DateTimeType { START, END, UNKNOWN };
+    public static final String[] START_DATE_IDENTIFIER = {"from"};
+    public static final String[] END_DATE_IDENTIFIER = {"to", "on", "by", "before"};
+    //@@author
+
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -47,11 +57,7 @@ public class ParserUtil {
 
         String index = matcher.group("targetIndex");
         if (!StringUtil.isUnsignedInteger(index)) {
-            if (!StringUtil.hasSpecialCharactes(index) && !index.equals("0")) {
-                return Optional.of(toAlphabeticReverse(index.toUpperCase()));
-            } else {
-                return Optional.empty();
-            }
+            return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
 
@@ -186,35 +192,63 @@ public class ParserUtil {
         throw new IllegalValueException("Invalid Input");
     }
 
-    //@@author A0139925U
-    /**
-     * Returns the corresponding integer value of the String entered
-     */
-    private static int toAlphabeticReverse(String input) {
-        char lastCharacter = input.charAt(input.length() - 1);
-        int index = lastCharacter - 'A' + 1;
-        for (int i = input.length() - 1; i > 0; i--) {
-            index += 26;
+    public static boolean isStartDateIdentifier(String s) {
+        for (String identifier: START_DATE_IDENTIFIER) {
+            if (s.equalsIgnoreCase(identifier)) {
+                return true;
+            }
         }
-        return index;
+        return false;
     }
 
-    /**
-     * Returns the type of index (Integer/Alphabet) based on the command
-     * Returns the value of TYPE_TASK if index is a integer
-     * Returns the value of TYPE_DETAILED_TASK if index is a alphabet
-     */
-    public static Optional<Integer> determineIndexType(String command) {
-        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
-        if (!matcher.matches()) {
-            return Optional.empty();
+    public static boolean isEndDateIdentifier(String s) {
+        for (String identifier: END_DATE_IDENTIFIER) {
+            if (s.equalsIgnoreCase(identifier)) {
+                return true;
+            }
         }
-
-        String index = matcher.group("targetIndex");
-        if (!StringUtil.isUnsignedInteger(index)) {
-            return Optional.of(TYPE_DETAILED_TASK);
-        }
-        return Optional.of(TYPE_TASK);
-
+        return false;
     }
+
+    public static Deque<PossibleDateTime> findDateTime(String input) {
+        String[] inputs = input.split(" ");
+        Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
+        PossibleDateTime current = new PossibleDateTime(PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+        for (int i = 0; i < inputs.length; i++) {
+            String word = inputs[i];
+            if (isStartDateIdentifier(word)) {
+                result.push(current);
+                current = new PossibleDateTime(i, DateTimeType.START);
+            } else if (isEndDateIdentifier(word)) {
+                result.push(current);
+                current = new PossibleDateTime(i, DateTimeType.END);
+            } else {
+                current.appendDateTime(i, word);
+            }
+        }
+        result.push(current);
+        return result;
+    }
+
+    static class PossibleDateTime {
+        int startIndex;
+        int endIndex;
+        String data;
+        DateTimeType type;
+
+        static final int INVALID_INDEX = -1;
+
+        PossibleDateTime(int index, DateTimeType type) {
+            this.startIndex = index;
+            this.endIndex = index;
+            this.type = type;
+            this.data = new String();
+        }
+
+        void appendDateTime(int index, String data) {
+            this.data += " " + data;
+            this.endIndex = index;
+        }
+    }
+
 }

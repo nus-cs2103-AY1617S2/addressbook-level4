@@ -13,6 +13,12 @@ public class CliSyntax {
     public static final String INDEX_DELIMITER = new String(",");
     public static final String EDIT_PARAMETER_DELIMITER = new String(" ");
 
+    /* Natural Language Processing definitions */
+    public static final String EDIT_PARAMETER_KEYWORD = " change ";
+    public static final String EDIT_PARAMETER_VALUE_KEYWORD = " to ";
+    public static final String EDIT_MULTI_PARAMETER_KEYWORD = " and ";
+    public static final String EDIT_MULTI_PARAMETER_KEYWORDS = " and change ";
+
     /* Parameter names definitions */
     public static final String NAME_PARAMETER = "name";
     public static final String NAME_PARAMETER_2 = "n";
@@ -39,6 +45,9 @@ public class CliSyntax {
     public static final String TIMED_FILTER = "timed";
     public static final String FLOATING_FILTER = "floating";
     //@@author
+    //@@author A0139961U
+    public static final String DUE_TODAY_FILTER = "today";
+    public static final String DUE_THIS_WEEK_FILTER = "this week";
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

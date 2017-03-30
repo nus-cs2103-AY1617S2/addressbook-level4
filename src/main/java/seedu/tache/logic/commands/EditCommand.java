@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.tache.commons.core.Messages;
+import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.tag.UniqueTagList;
@@ -28,7 +29,11 @@ public class EditCommand extends Command implements Undoable {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer); <parameter1> <new_value1>;"
             + "<parameter2> <new_value2>...\n"
-            + "Example: " + COMMAND_WORD + " 1; start_date 10/11/2017; start_time 3.30pm;";
+            + "Example: " + COMMAND_WORD + " 1; start_date 10/11/2017; start_time 3.30pm;"
+            + "Or alternatively you can use the following format\n"
+            + "Parameters: INDEX (must be a positive integer) change <parameter1> to <new_value1> and "
+            + "<parameter2> to <new_value2>...\n"
+            + "Example: " + COMMAND_WORD + " 1 change startdate to 10/11/2017 and change starttime to 3.30pm;";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -65,63 +70,65 @@ public class EditCommand extends Command implements Undoable {
         }
 
         taskToEdit = lastShownList.get(filteredTaskListIndex);
-        originalTask = new Task(taskToEdit);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        cloneOriginalTask(taskToEdit);
+        Task editedTask;
         try {
-            model.updateTask(taskToEdit, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            try {
+                model.updateTask(taskToEdit, editedTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+            model.updateCurrentFilteredList();
+            commandSuccess = true;
+            undoHistory.push(this);
+            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        } catch (IllegalValueException e) {
+            return new IncorrectCommand(e.getMessage()).execute();
         }
-        model.updateFilteredListToShowAll();
-        commandSuccess = true;
-        undoHistory.push(this);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalValueException if date or time could not be parsed
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+                                             EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Optional<DateTime> updatedStartDateTime = taskToEdit.getStartDateTime();
         Optional<DateTime> updatedEndDateTime = taskToEdit.getEndDateTime();
         if (editTaskDescriptor.getStartDate().isPresent()) {
-            String timeNoChange = "";
             if (updatedStartDateTime.isPresent()) {
-                timeNoChange = updatedStartDateTime.get().getTimeOnly();
+                updatedStartDateTime.get().setDateOnly(editTaskDescriptor.getStartDate().get());
+            } else {
+                updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
+                updatedStartDateTime.get().setDefaultTime();
             }
-            DateTime tempStartDateTime = new DateTime(editTaskDescriptor.getStartDate().orElse("") + " "
-                                                                                + timeNoChange);
-            updatedStartDateTime = Optional.of(tempStartDateTime);
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
-            String timeNoChange = "";
             if (updatedEndDateTime.isPresent()) {
-                timeNoChange = updatedEndDateTime.get().getTimeOnly();
+                updatedEndDateTime.get().setDateOnly(editTaskDescriptor.getEndDate().get());
+            } else {
+                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndDate().get()));
+                updatedEndDateTime.get().setDefaultTime();
             }
-            DateTime tempEndDateTime = new DateTime(editTaskDescriptor.getEndDate().orElse("") + " " + timeNoChange);
-            updatedEndDateTime = Optional.of(tempEndDateTime);
         }
         if (editTaskDescriptor.getStartTime().isPresent()) {
-            String dateNoChange = "";
             if (updatedStartDateTime.isPresent()) {
-                dateNoChange = updatedStartDateTime.get().getDateOnly();
+                updatedStartDateTime.get().setTimeOnly(editTaskDescriptor.getStartTime().get());
+            } else {
+                updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartTime().get()));
             }
-            DateTime tempStartDateTime = new DateTime(dateNoChange + " "
-                                                        + editTaskDescriptor.getStartTime().orElse(""));
-            updatedStartDateTime = Optional.of(tempStartDateTime);
         }
         if (editTaskDescriptor.getEndTime().isPresent()) {
-            String dateNoChange = "";
             if (updatedEndDateTime.isPresent()) {
-                dateNoChange = updatedEndDateTime.get().getDateOnly();
+                updatedEndDateTime.get().setTimeOnly(editTaskDescriptor.getEndTime().get());
+            } else {
+                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndTime().get()));
             }
-            DateTime tempEndDateTime = new DateTime(dateNoChange + " " + editTaskDescriptor.getEndTime().orElse(""));
-            updatedEndDateTime = Optional.of(tempEndDateTime);
         }
         boolean isTimed;
         if (updatedStartDateTime.isPresent() || updatedEndDateTime.isPresent()) {
@@ -221,6 +228,26 @@ public class EditCommand extends Command implements Undoable {
         }
     }
 
+    private void cloneOriginalTask(ReadOnlyTask taskToEdit) {
+        //Workaround as Java could not deep copy taskToEdit for some fields
+        DateTime workAroundStartDateTime = null;
+        DateTime workAroundEndDateTime = null;
+        try {
+            if (taskToEdit.getStartDateTime().isPresent()) {
+                workAroundStartDateTime = new DateTime(taskToEdit.getStartDateTime().get().getAmericanDateTime());
+            }
+            if (taskToEdit.getEndDateTime().isPresent()) {
+                workAroundEndDateTime = new DateTime(taskToEdit.getEndDateTime().get().getAmericanDateTime());
+            }
+        } catch (IllegalValueException e1) {
+            e1.printStackTrace();
+        }
+        originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
+                                        Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
+               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
+               taskToEdit.getRecurInterval());
+    }
+
     //@@author A0150120H
     @Override
     public boolean isUndoable() {
@@ -229,7 +256,6 @@ public class EditCommand extends Command implements Undoable {
 
     @Override
     public String undo() throws CommandException {
-        // TODO Auto-generated method stub
         try {
             model.updateTask(taskToEdit, originalTask);
             model.updateFilteredListToShowAll();
