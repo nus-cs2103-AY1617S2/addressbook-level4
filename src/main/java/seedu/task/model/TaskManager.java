@@ -199,17 +199,14 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
     //@@author A0139975J
     public void updateDone(int index, ReadOnlyTask target) {
-    // TODO Auto-generated method stub
         tasks.done(index);
     }
     //@@author A0139975J
     public void updateUnDone(int index, ReadOnlyTask target) {
-        // TODO Auto-generated method stub
         tasks.undone(index);
     }
 
     public void sortTaskList() {
-        // TODO Auto-generated method stub
         tasks.sort();
     }
 

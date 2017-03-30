@@ -1,5 +1,6 @@
 package seedu.task.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -126,6 +127,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.iterator();
     }
 
+    //@@author A0140063X
     @Override
     public boolean equals(Object other) {
         ObservableList<Task> list1 = this.internalList;
@@ -138,6 +140,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 ((UniqueTaskList) other).internalList));
     }
 
+    //@@author
     @Override
     public int hashCode() {
         return internalList.hashCode();
@@ -159,7 +162,6 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {}
 
     public void sort() {
-        // TODO Auto-generated method stub
         FXCollections.sort(internalList, new TaskComparator());
     }
 

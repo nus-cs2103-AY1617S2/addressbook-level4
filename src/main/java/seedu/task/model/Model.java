@@ -22,7 +22,7 @@ public interface Model {
 
     /** Undo last command.
      * @throws IllegalValueException */
-    void undoData(ReadOnlyTaskManager newData) throws IllegalValueException;
+    void loadData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
@@ -39,9 +39,9 @@ public interface Model {
     /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
-    //@@author A0140063X
     /** Adds all the given Tasks. */
     void addMultipleTasks(ArrayList<Task> tasks);
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -85,7 +85,5 @@ public interface Model {
 
     /** Sorts the task list */
     void sortTaskList();
-
-    
 
 }

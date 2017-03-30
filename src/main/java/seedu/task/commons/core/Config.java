@@ -58,7 +58,6 @@ public class Config {
         this.taskManagerName = taskManagerName;
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

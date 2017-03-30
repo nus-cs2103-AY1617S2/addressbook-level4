@@ -19,6 +19,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
 
+// @@author A0140063X-reused
 public class GoogleCalendar {
     public static final String calendarId = "primary";
     private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
@@ -97,6 +98,7 @@ public class GoogleCalendar {
                 .build();
     }
 
+    // @@author A0140063X
     public static com.google.api.services.calendar.Calendar getGoogleCalendarService() throws IOException {
         return getCalendarService();
     }

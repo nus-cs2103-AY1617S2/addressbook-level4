@@ -62,12 +62,10 @@ public class StorageManager extends ComponentManager implements Storage {
     // @@author A0142487Y
     @Override
     public void setThemeTo(String themeName) {
-        // TODO Auto-generated method stub
         Optional<UserPrefs> optionalUserPrefs = null;
         try {
             optionalUserPrefs = this.readUserPrefs();
         } catch (DataConversionException e) {
-            // TODO Auto-generated catch block
             logger.warning("Failed to load the user preference file : " + StringUtil.getDetails(e));
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Theme of KIT will not be changed");
@@ -78,7 +76,6 @@ public class StorageManager extends ComponentManager implements Storage {
             this.saveUserPrefs(userPrefs);
             raise(new UpdateUserPrefsEvent(userPrefs));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             logger.warning("Failed to save new theme to user preference file : " + StringUtil.getDetails(e));
         }
 
@@ -86,6 +83,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     // ================ TaskManager methods ==============================
 
+    //@@author
     @Override
     public String getTaskManagerFilePath() {
         return taskManagerStorage.getTaskManagerFilePath();
@@ -120,12 +118,14 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
+    //@@author A0140063X
     @Override
     public void saveBackup(String backupFilePath) throws IOException, FileNotFoundException {
         logger.fine("Attempting to backup data from " + backupFilePath);
         taskManagerStorage.saveBackup(backupFilePath);
     }
 
+    //@@author
     @Override
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent event) {
@@ -139,6 +139,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    //@@author A0140063X
     @Override
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
@@ -153,6 +154,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    //@@author
     @Override
     @Subscribe
     public void handleLoadNewFileEvent(LoadNewFileEvent event) {

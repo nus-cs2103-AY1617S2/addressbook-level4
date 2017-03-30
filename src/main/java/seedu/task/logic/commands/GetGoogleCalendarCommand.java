@@ -22,6 +22,7 @@ import seedu.task.model.task.Name;
 import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
 
+// @@author A0140063X
 /**
  * Grabs upcoming events from google and save them as tasks.
  */
@@ -37,7 +38,6 @@ public class GetGoogleCalendarCommand extends Command {
             + ": Gets your events from your Google Calendar and add them to KIT."
             + " Please note that this will only get upcoming events.\n" + "Example: " + COMMAND_WORD_2;
 
-    //@@author A0140063X
     @Override
     public CommandResult execute() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -63,15 +63,11 @@ public class GetGoogleCalendarCommand extends Command {
             return new CommandResult(MESSAGE_FAIL);
         }
 
-        assert model != null;
-        model.addMultipleTasks(tasks);
-        model.sortTaskList();
-        model.updateFilteredListToShowAll();
+        updateModel(tasks);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    //@@author A0140063X
     private List<Event> getEventsFromGoogle() throws IOException {
         com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
         DateTime now = new DateTime(new java.util.Date());
@@ -79,18 +75,25 @@ public class GetGoogleCalendarCommand extends Command {
                 .setTimeMin(now)
                 .setSingleEvents(true)
                 .execute();
+
         return events.getItems();
     }
 
-    //@@author A0140063X
     private Task createTaskFromEvent(Event event) throws IllegalValueException {
-
         Name name = new Name(event.getSummary());
         Date startDate = new Date(event.getStart());
         Date endDate = new Date(event.getEnd());
         Remark remark = new Remark(event.getDescription());
         Location location = new Location(event.getLocation());
         final Set<Tag> tagSet = new HashSet<>(); // No tags
+
         return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false);
+    }
+
+    private void updateModel(ArrayList<Task> tasks) {
+        assert model != null;
+        model.addMultipleTasks(tasks);
+        model.sortTaskList();
+        model.updateFilteredListToShowAll();
     }
 }
