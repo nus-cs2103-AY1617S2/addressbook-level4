@@ -15,7 +15,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private static final String DEFAULT_DESCRIPTION = "";
+    private static final String DEFAULT_DESCRIPTION = "No description";
     private static final IdentificationNumber DEFAULT_ID = IdentificationNumber.ZERO;
 
     //private IdentificationNumber ID;
@@ -34,7 +34,7 @@ public class Task implements ReadOnlyTask {
 
         this.name = name;
         this.deadline = new Deadline();
-        this.description = new Description();
+        this.description = new Description(DEFAULT_DESCRIPTION);
         this.tags = new UniqueTagList();
 
         // Call update status immediately after creation
