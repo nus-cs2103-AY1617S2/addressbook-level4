@@ -76,7 +76,7 @@ public class TestUtil {
             return new Task[]{
                 new Task(new Title("SE Project"), new Date(), new Date(), new Priority(), new UniqueTagList()),
                 new Task(new Title("DB Homework"), new Date(), new Date("next monday"), new Priority("high"), new UniqueTagList()),
-                new Task(new Title("Carl's Birthday Party"), new Date("this friday at 2 pm"), new Date("this friday at 7 pm"), new Priority(), new UniqueTagList())   
+                new Task(new Title("Carl's Birthday Party"), new Date("this friday at 2 pm"), new Date("this friday at 7 pm"), new Priority(), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

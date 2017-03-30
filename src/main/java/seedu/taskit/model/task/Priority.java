@@ -15,8 +15,8 @@ public class Priority {
 
     enum PriorityEnum {HIGH, MEDIUM, LOW};
     private PriorityEnum priority;
-    
-    
+
+
     /**
      * Default constructor for Priority
      */
@@ -35,7 +35,7 @@ public class Priority {
         }
         else {
             String trimmedPriority= priority.trim();
-            
+
             PriorityEnum priorityValue = getPriorityValue(trimmedPriority.toLowerCase());
             if (priorityValue == null) {
                 throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
@@ -55,7 +55,7 @@ public class Priority {
             return PriorityEnum.LOW;
         }
         return null;
-        
+
     }
 
     @Override

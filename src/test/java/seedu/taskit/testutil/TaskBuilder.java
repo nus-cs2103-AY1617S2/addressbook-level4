@@ -34,7 +34,7 @@ public class TaskBuilder {
         this.task.setPriority(new Priority(priority));
         return this;
     }
-    
+
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
         for (String tag: tags) {

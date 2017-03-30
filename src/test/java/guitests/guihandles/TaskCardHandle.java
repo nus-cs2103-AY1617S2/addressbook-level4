@@ -34,11 +34,11 @@ public class TaskCardHandle  extends GuiHandle {
     public String getTitle() {
         return getTextFromLabel(TITLE_FIELD_ID);
     }
-    
+
     public String getStart() {
         return getTextFromLabel(START_FIELD_ID);
     }
-    
+
     public String getEnd() {
         return getTextFromLabel(END_FIELD_ID);
     }
@@ -81,7 +81,7 @@ public class TaskCardHandle  extends GuiHandle {
         }
         return super.equals(obj);
     }
-    
+
     public String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle() + " ")
@@ -93,7 +93,7 @@ public class TaskCardHandle  extends GuiHandle {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-    
+
     @Override
     public String toString() {
         return getAsText();

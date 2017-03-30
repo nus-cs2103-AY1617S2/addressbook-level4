@@ -29,12 +29,12 @@ public class FindCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        
+
       //@@author A0097141H
         String keywords = matcher.group("keywords");
         final String[] groupedKeywords = parseKeywords(keywords);
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(groupedKeywords));
-        
+
         return new FindCommand(keywordSet);
     }
 

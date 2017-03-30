@@ -91,28 +91,28 @@ Format: `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>`
 > * Existing values will be updated to the input values.
 > * Can remove start or end dates by typing `null` or `none`
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `null`. 
+> * You can remove all the task's tags by typing `null`.
 
 Examples:
 
 * `edit 2 title finish SWE HW`<br>
   Edit the second task title to finish SWE HW.
-  
+
 * `edit 1 start this Friday 3 pm`<br>
   Edit the first task start time to this Friday 3pm.
 
 * `edit 5 end April 5th at 4 pm`<br>
   Edit the fifth task end time to April 5th at 4pm.
-  
+
 * `edit 5 end none`<br>
   Edit the fifth task to have no end time.
-  
+
 * `edit 2 priority high`<br>
   Edit the second task prioirty to high.
-  
+
 * `edit 1 tag null`<br>
   Remove all the tags of first task.
-  
+
 ### 2.5. Marks a task as done or undone: `mark`
 
 Mark an existing task as done or undone based on a given valid index.<br>
@@ -150,7 +150,7 @@ Examples:
 
 ### 2.7. Deleting a task : `delete`
 
-Deletes the specified task from the TaskIt. 
+Deletes the specified task from the TaskIt.
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
@@ -213,7 +213,7 @@ Example:
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous TaskIt folder.
-	
+
 [//]: # "@@author A0141872E"
 ## 4. Command Summary
 
@@ -244,8 +244,8 @@ Example:
 
 * **Mark** : `mark` <br>
   e.g. `mark 1 undone`
-  e.g. `mark 3 done` 
-  
+  e.g. `mark 3 done`
+
 * **Undo** : `undo` <br>
   e.g.
 

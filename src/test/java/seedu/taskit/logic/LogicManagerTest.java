@@ -193,13 +193,13 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add tag args wrong args", expectedMessage);
     }
-    
+
     @Test
     public void execute_add_invalidDates() {
         assertCommandFailure("add task from monday", MESSAGE_INVALID_DATES);
         assertCommandFailure("add task from 6/4/17 to 6/3/17", MESSAGE_INVALID_DATES);
     }
-    
+
     // @@author
 
     @Test

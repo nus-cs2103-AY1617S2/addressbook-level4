@@ -14,7 +14,7 @@ public interface ReadOnlyTask {
     Date getStart();
     Date getEnd();
     Priority getPriority();
-    
+
     Boolean isDone();
     Boolean isOverdue();
     void setDone(Boolean status);
@@ -33,7 +33,7 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getTitle().equals(this.getTitle())); // state checks here onwards
     }
-    
+
     // @@author A0163996J
     /**
      * Formats the task as text, showing all details.
@@ -41,16 +41,16 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle() + " ")
-        		.append("Start: ")
-        		.append(getStart() + " ")
-        		.append("End: ")
-        		.append(getEnd() + " ")
+            .append("Start: ")
+            .append(getStart() + " ")
+            .append("End: ")
+            .append(getEnd() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-    
-    	
+
+
     //@@author A0097141H
     /**
      * Stringifies title and tags
@@ -58,19 +58,19 @@ public interface ReadOnlyTask {
      */
 
     default String toStringTitleTagAndDateList() {
-    	String titleTagAndDateString = getTitle().title + " ";
-    	final StringBuilder builder = new StringBuilder();
-    	builder.append(getTitle()).append(" ");
-    	builder.append(getStart()).append(" ");
-    	builder.append(getEnd()).append(" ");
-    	getTags().iterator().forEachRemaining(builder::append);
-    	
-    	titleTagAndDateString = builder.toString();
-    	titleTagAndDateString = titleTagAndDateString.replace('[', ' ').replace(']', ' ');
+      String titleTagAndDateString = getTitle().title + " ";
+      final StringBuilder builder = new StringBuilder();
+      builder.append(getTitle()).append(" ");
+      builder.append(getStart()).append(" ");
+      builder.append(getEnd()).append(" ");
+      getTags().iterator().forEachRemaining(builder::append);
 
-    	return titleTagAndDateString.toLowerCase();
+      titleTagAndDateString = builder.toString();
+      titleTagAndDateString = titleTagAndDateString.replace('[', ' ').replace(']', ' ');
+
+      return titleTagAndDateString.toLowerCase();
     }
-    
+
 
 }
 

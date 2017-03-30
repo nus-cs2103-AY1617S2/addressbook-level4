@@ -37,17 +37,17 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
-    
+
     /*
     //@@author A0141011J
     /**
      * Provides the command history for current command executed.
-     
+
     public void setCommandHistory(CommandHistory commandList) {
         this.commandList = commandList;
     }
     */
-    
+
     public boolean isUndoable() {
         return false;
     }

@@ -86,7 +86,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         syncMasterTagListWith(t);
         tasks.add(t);
     }
- 
+
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedTask}.
@@ -99,7 +99,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
-        
+
         Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
@@ -107,7 +107,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         // in the task list.
         tasks.updateTask(index, editedTask);
     }
-    
+
 
     /**
      * Ensures that every tag in this task:
@@ -138,7 +138,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private void syncMasterTagListWith(UniqueTaskList tasks) {
         tasks.forEach(this::syncMasterTagListWith);
     }
-    
+
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
@@ -165,7 +165,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Tag> getTagList() {
         return new UnmodifiableObservableList<>(tags.asObservableList());
     }
-    
+
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());

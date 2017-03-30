@@ -25,7 +25,7 @@ public class Date {
     public final java.util.Date date;
     public final String dateString;
     Parser parser = new Parser();
-    
+
 
     /**
      * Default constructor for Date
@@ -59,7 +59,7 @@ public class Date {
             this.date = null;
         }
     }
-    
+
     @Override
     public String toString() {
         if (date != null) {
@@ -76,7 +76,7 @@ public class Date {
             return "";
         }
     }
-    
+
     private boolean exists() {
         if (date == null) {
             return false;
@@ -98,14 +98,14 @@ public class Date {
                         && this.date.equals(((Date) other).date)); // state
                                                                    // check
     }
-    
+
     public boolean isBefore(Date other) {
         if (!this.exists() || !other.exists()) {
             return false;
         }
         return this.date.before(other.date);
     }
-    
+
     public boolean isStartValidComparedToEnd(Date end) {
         if (this.exists() && !end.exists()) {
             return false;
@@ -115,7 +115,7 @@ public class Date {
         }
         return true;
     }
-    
+
     //@@author A0141872E
     public boolean isEndTimePassCurrentTime() {
         java.util.Date currentDate = new java.util.Date();
@@ -124,7 +124,7 @@ public class Date {
         }
         return false;
     }
-    
+
     public boolean isDateEqualCurrentDate() {
         java.util.Date currentDate = new java.util.Date();
         if(date!= null && DateUtils.isSameDay(date, currentDate)) {
@@ -132,20 +132,20 @@ public class Date {
         }
         return false;
     }
-    
+
     //@@author A0097141H
     public boolean isDateEqualsDate(Date other) {
-    	
-    	return date != null && DateUtils.isSameDay(date, other.date);
+
+      return date != null && DateUtils.isSameDay(date, other.date);
     }
-    
+
     public boolean isMonthEqualsMonth(Date other) {
-    	Calendar c1 = Calendar.getInstance();
-    	c1.setTime(date);
-    	Calendar c2 = Calendar.getInstance();
-    	c2.setTime(other.date);
-    	
-    	return date != null && c1.get(Calendar.MONTH)==c2.get(Calendar.MONTH);
+      Calendar c1 = Calendar.getInstance();
+      c1.setTime(date);
+      Calendar c2 = Calendar.getInstance();
+      c2.setTime(other.date);
+
+      return date != null && c1.get(Calendar.MONTH)==c2.get(Calendar.MONTH);
     }
 
     @Override

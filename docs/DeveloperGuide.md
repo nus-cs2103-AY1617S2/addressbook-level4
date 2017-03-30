@@ -622,7 +622,7 @@ Author: Peng Chong
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should come with automated unit tests and open source code.
-5. Should return to a functioning state when system restarts 
+5. Should return to a functioning state when system restarts
 6. Should function well offline
 7. Shuld have no unhandled exceptions from incorrect user input
 8. Should work well stand-alone and should not be a plug-in to another software

@@ -36,19 +36,19 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         List<Optional<String>> editInformation = ParserUtil.splitArgument(args.trim(),3);
-        
+
         if (!(editInformation.size()==3)){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,EditCommand.MESSAGE_USAGE));
         }
-        
+
         Optional<Integer> index = editInformation.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_NOT_EDITED));
         }
-        
+
         Optional<String> fieldWord = editInformation.get(1);
         Optional<String> updateInformation = editInformation.get(2);
-        
+
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             String fieldWordName = fieldWord.get();
@@ -99,7 +99,7 @@ public class EditCommandParser {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        
+
         Collection<String> tagSet = tags.size() == 1 && tags.contains("null") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }

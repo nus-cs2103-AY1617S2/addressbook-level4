@@ -14,7 +14,7 @@ public class TestTask implements ReadOnlyTask {
     private Date start;
     private Date end;
     private Priority priority;
-     
+
     private boolean isDone;
     private boolean isOverdue;
 
@@ -40,15 +40,15 @@ public class TestTask implements ReadOnlyTask {
     public void setTitle(Title title) {
         this.title = title;
     }
-    
+
     public void setStart(Date start) {
         this.start = start;
     }
-    
+
     public void setEnd(Date end) {
         this.end = end;
     }
-    
+
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
@@ -56,7 +56,7 @@ public class TestTask implements ReadOnlyTask {
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
-    
+
     @Override
     public Title getTitle() {
         return title;
@@ -69,7 +69,7 @@ public class TestTask implements ReadOnlyTask {
         }
         return start;
     }
-    
+
     @Override
     public Date getEnd() {
         if (end == null) {
@@ -77,7 +77,7 @@ public class TestTask implements ReadOnlyTask {
         }
         return end;
     }
-    
+
     @Override
     public Priority getPriority() {
         return priority;
@@ -87,7 +87,7 @@ public class TestTask implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return tags;
     }
-    
+
     @Override
     public String toString() {
         return getAsText();
@@ -99,7 +99,7 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("tag " + s.tagName + " "));
         return sb.toString();
     }
-    
+
     // @@author
 
     @Override

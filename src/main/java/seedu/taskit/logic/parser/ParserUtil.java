@@ -44,7 +44,7 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
 
     }
-    
+
     //@@author A0141872E
     /**
      * Returns the specified parameter in the {@code parameter} if it only contains alphanumeric
@@ -79,11 +79,11 @@ public class ParserUtil {
                 .map(Optional::ofNullable)
                 .collect(Collectors.toList());
     }
-    
+
     /**
      * Splits an argument string into ordered fields.
-     * @return A list of size {@code numFields} where the first element is the index, second element is 
-     *         the fieldword and last element is the update information, 
+     * @return A list of size {@code numFields} where the first element is the index, second element is
+     *         the fieldword and last element is the update information,
      *         {@code Optional.empty()} otherwise.
      */
      public static List<Optional<String>> splitArgument(String args, int numFields) {
@@ -91,7 +91,7 @@ public class ParserUtil {
                  .map(Optional::ofNullable)
                  .collect(Collectors.toList());
      }
-    
+
     /**
      * Parses a {@code Optional<String> title} into an {@code Optional<Title>} if {@code title} is present.
      */
@@ -99,7 +99,7 @@ public class ParserUtil {
         assert title != null;
         return title.isPresent() ? Optional.of(new Title(title.get())) : Optional.empty();
     }
-    
+
     // @@author A0163996J
     /**
      * Parses a {@code Optional<String> Date} into an {@code Optional<Date>} if {@code date} is present.
@@ -117,7 +117,7 @@ public class ParserUtil {
             return Optional.empty();
         }
     }
-    
+
     // @@author A0163996J
     /**
      * Parses a {@code Optional<String> Priority} into an {@code Optional<Priority>} if {@code priority} is present.

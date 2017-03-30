@@ -48,14 +48,14 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given parameter*/
     int updateFilteredTaskList(String parameter);
 
-    
+
     //@@author A0141011J
     /** Reverts to the previous state*/
     void revert() throws NoValidStateException;
-    
+
     /** Redo the last undone command*/
     void redo() throws NoValidStateException;
-    
+
     /** Records the current state of the model */
     void save();
 }

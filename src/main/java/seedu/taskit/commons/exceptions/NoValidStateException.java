@@ -7,7 +7,7 @@ package seedu.taskit.commons.exceptions;
  *
  */
 
-public class NoValidStateException extends Exception {  
+public class NoValidStateException extends Exception {
     public NoValidStateException() {
         super("No valid state to change to");
     }

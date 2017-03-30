@@ -43,7 +43,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
-    
+
     // @@author
 
     /**
@@ -67,7 +67,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
     }
-    
+
  // @@author A0163996J
 
     /**

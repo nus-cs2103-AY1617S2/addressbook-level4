@@ -61,7 +61,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 title");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
-    
+
     @Test
     public void edit_missingTaskIndex_failure() {
         commandBox.runCommand("edit title Homework due");

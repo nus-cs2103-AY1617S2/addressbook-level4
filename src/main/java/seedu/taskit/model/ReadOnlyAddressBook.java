@@ -15,7 +15,7 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate tags.
      */
     ObservableList<Tag> getTagList();
-    
+
     /**
     * Returns an unmodifiable view of the tasks list.
     * This list will not contain any duplicate tasks.

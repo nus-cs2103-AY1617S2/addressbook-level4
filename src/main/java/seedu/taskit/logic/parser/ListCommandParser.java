@@ -11,9 +11,9 @@ import seedu.taskit.logic.commands.ListCommand;
 
 //@@author A0141872E
 public class ListCommandParser {
-    
+
     private static final List<String> parameters = Arrays.asList("all","done", "undone", "overdue", "today", "low","medium","high");
-    
+
     public Command parse(String args) {
         String parameter = args.trim();
         if(!isValidParameter(parameter)){
@@ -21,7 +21,7 @@ public class ListCommandParser {
         }
         return new ListCommand(parameter);
     }
-    
+
     private boolean isValidParameter(String parameter) {
         if(parameters.contains(parameter)){
             return true;

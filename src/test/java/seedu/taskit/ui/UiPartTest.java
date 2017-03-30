@@ -46,7 +46,7 @@ public class UiPartTest {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(invalidFileUrl);
     }
-    
+
     //TODO make this test pass
 //    @Test
 //    public void constructor_validFileUrl_loadsFile() {

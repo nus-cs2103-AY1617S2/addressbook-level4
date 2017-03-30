@@ -9,28 +9,28 @@ import seedu.taskit.storage.XmlAddressBookStorage;
  * Specify a specific folder and a file for data storage
  */
 public class SaveCommand extends Command{
-    
+
     public static final String COMMAND_WORD = "save";
-    
+
     public static final String MESSAGE_SUCCESS = "Saved to ";
 
     public static final String MESSAGE_INVALID_FILE = "The new file path is invalid";
-    
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Save the task manager to the specified file path.\n"
             + "Parameters: FILEPATH (must be a string)\n"
             + "Example: " + COMMAND_WORD + " newFile.txt";
 
     public static final String MESSAGE_SAVE_SUCCESS = "Saved to ";
-    
+
     private String newFilePath;
-    
+
     private XmlAddressBookStorage newStorage;
 
     public SaveCommand(String newPath){
         newFilePath=newPath;
     }
-    
+
 
     @Override
     public CommandResult execute() {

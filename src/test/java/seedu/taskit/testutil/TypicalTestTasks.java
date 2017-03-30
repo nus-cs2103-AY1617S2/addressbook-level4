@@ -27,7 +27,7 @@ public class TypicalTestTasks {
             shopping = new TaskBuilder().withTitle("Shopping with friends")
                     .withPriority("low")
                     .withTags("leisure", "friends").build();
-            
+
             // Manually added
             meeting = new TaskBuilder().withTitle("Software Engineering Meeting")
                     .withPriority("high")
@@ -35,7 +35,7 @@ public class TypicalTestTasks {
             assignment = new TaskBuilder().withTitle("CS3230 Assignment")
                     .withPriority("medium")
                     .withTags("school").build();
-                   
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

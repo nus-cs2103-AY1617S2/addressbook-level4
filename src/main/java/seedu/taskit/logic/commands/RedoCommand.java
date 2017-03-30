@@ -10,11 +10,11 @@ public class RedoCommand extends Command {
 
     public static final String MESSAGE_REDO_SUCCESS = "Action redone.";
     public static final String MESSAGE_NO_NEXT_STATE = "No undone commands to redo.";
-    
+
     public RedoCommand() {
-        
+
     }
-    
+
     @Override
     public CommandResult execute() {
         try {
