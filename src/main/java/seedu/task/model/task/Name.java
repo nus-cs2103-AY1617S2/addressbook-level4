@@ -9,13 +9,13 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Task name should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task name should not be blank";
 
     /*
      * The first character of the task must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = ".*";
+    public static final String NAME_VALIDATION_REGEX = "[^\\s].*.*";
 
     public final String fullName;
 
