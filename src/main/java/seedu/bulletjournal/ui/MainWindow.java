@@ -119,7 +119,7 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), config.getBulletJournalFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
-    
+
     //@@author A0105748B
     void fillInnerPartsAtStart() {
         browserPanel = new BrowserPanel(browserPlaceholder);
