@@ -7,7 +7,9 @@ import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
+//@@author A0141077L-reused
 /**
  * Marks a task identified using it's last displayed index from the task manager
  * as undone.
@@ -21,11 +23,14 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]\n" + "Example: " + COMMAND_WORD
             + " 1 2";
 
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Task undone: %1$s";
+    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Task undone: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_STATUS_UNDONE = "The task status is already set to Undone.";
 
     private int[] filteredTaskListIndices;
+    
+    private Task undoUnmark;
+    private int undoUnmarkInt;
 
     public UnmarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -52,22 +57,30 @@ public class UnmarkCommand extends Command {
             }
 
             ReadOnlyTask taskToUnmark = lastShownList.get(filteredTaskListIndices[i]);
+            this.undoUnmark = new Task(taskToUnmark);
 
             try {
                 Task unmarkedTask = createUnmarkedTask(taskToUnmark);
                 model.updateTask(filteredTaskListIndices[i], unmarkedTask);
+                this.undoUnmarkInt = filteredTaskListIndices[i];
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
-
-            } catch (CommandException ce) {
-                throw new CommandException(MESSAGE_STATUS_UNDONE);
             }
 
-            tasksUnmarkedMessage.append(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToUnmark) + "\n");
+            tasksUnmarkedMessage.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, taskToUnmark) + "\n");
         }
 
         return new CommandResult(tasksUnmarkedMessage.toString());
+    }
+    
+    @Override
+    public void unexecute() {
+        try {
+            model.updateTask(undoUnmarkInt, undoUnmark);
+        } catch (DuplicateTaskException e) {
+        
+        }
     }
 
     /**

@@ -17,7 +17,6 @@ public class Config {
     private String watodoFilePath = "data/watodo.xml";
     private String watodoName = "My Tasks";
 
-
     public String getAppTitle() {
         return appTitle;
     }
