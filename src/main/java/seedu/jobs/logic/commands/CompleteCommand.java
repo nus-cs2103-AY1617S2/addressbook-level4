@@ -8,7 +8,7 @@ import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class CompleteCommand extends Command {
 
-	public static final String COMMAND_WORD = "complete";
+    public static final String COMMAND_WORD = "complete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": completes the task identified by the index number used in the last task listing.\n"
@@ -16,13 +16,12 @@ public class CompleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed Task: %1$s";
-
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the description book.";
     public final int targetIndex;
 
     public CompleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -33,15 +32,15 @@ public class CompleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask taskToComplete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deleteTask(taskToDelete);
+            model.completeTask(targetIndex - 1, taskToComplete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
 
-        return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToDelete));
+        return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
     }
 
 }

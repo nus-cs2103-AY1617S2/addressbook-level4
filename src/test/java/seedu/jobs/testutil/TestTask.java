@@ -19,7 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private UniqueTagList tags;
     private boolean status;
     private Period period;
-    
+
     public TestTask() {
         tags = new UniqueTagList();
     }
@@ -52,13 +52,17 @@ public class TestTask implements ReadOnlyTask {
     public void setDescription(Description description) {
         this.description = description;
     }
-    
-    public void setStatus(boolean status){
-    	this.status = status;
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
-    
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
     }
 
     @Override
@@ -70,12 +74,12 @@ public class TestTask implements ReadOnlyTask {
     public Time getStartTime() {
         return startTime;
     }
-    
+
     @Override
     public Time getEndTime() {
         return endTime;
     }
-    
+
     @Override
     public Description getDescription() {
         return description;
@@ -92,6 +96,10 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Period getPeriod() {
+        return period;
+    }
+    @Override
     public String toString() {
         return getAsText();
     }
@@ -102,18 +110,14 @@ public class TestTask implements ReadOnlyTask {
         sb.append("start/" + this.getStartTime().value + " ");
         sb.append("end/" + this.getEndTime().value + " ");
         sb.append("desc/" + this.getDescription().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("tag/" + s.tagName + " "));
+        sb.append("recur/" + this.getPeriod().toString() + " ");
         return sb.toString();
     }
 
-	@Override
-	public void markComplete() {
-		this.status = true;
-	}
-
     @Override
-    public Period getPeriod() {
-        return period;
+    public void markComplete() {
+        this.status = true;
     }
 
 }

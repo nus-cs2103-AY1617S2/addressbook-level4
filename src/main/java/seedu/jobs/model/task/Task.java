@@ -35,7 +35,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(), source.getTags(), source.getPeriod());
+        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(),
+                source.getTags(), source.getPeriod());
         this.isCompleted = source.isCompleted();
     }
 
@@ -90,29 +91,29 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-    
-    public Period getPeriod(){
-    	return period;
+
+    public Period getPeriod() {
+        return period;
     }
-    
-    public void setPeriod(Period period){
-    	this.period = period;
+
+    public void setPeriod(Period period) {
+        this.period = period;
     }
-    
+
     /**
      * Updates this task with the details of {@code replacement}.
      */
-    
+
     @Override
     /**
      * Mark this task as completed
      */
-    public void markComplete(){
-    	this.isCompleted = true;
-    	this.startTime.addDays(period.value);
-    	this.endTime.addDays(period.value);
+    public void markComplete() {
+        this.isCompleted = (period.value == 0);
+        this.startTime.addDays(period.value);
+        this.endTime.addDays(period.value);
     }
-    
+
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
@@ -122,8 +123,7 @@ public class Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
-    
-    
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

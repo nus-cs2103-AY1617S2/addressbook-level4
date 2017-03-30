@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.jobs.logic.commands.AddCommand;
 import seedu.jobs.logic.commands.ClearCommand;
 import seedu.jobs.logic.commands.Command;
+import seedu.jobs.logic.commands.CompleteCommand;
 import seedu.jobs.logic.commands.DeleteCommand;
 import seedu.jobs.logic.commands.EditCommand;
 import seedu.jobs.logic.commands.ExitCommand;
@@ -16,7 +17,9 @@ import seedu.jobs.logic.commands.FindCommand;
 import seedu.jobs.logic.commands.HelpCommand;
 import seedu.jobs.logic.commands.IncorrectCommand;
 import seedu.jobs.logic.commands.ListCommand;
+import seedu.jobs.logic.commands.RedoCommand;
 import seedu.jobs.logic.commands.SelectCommand;
+import seedu.jobs.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -56,6 +59,9 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case CompleteCommand.COMMAND_WORD:
+            return new CompleteCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -70,6 +76,12 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

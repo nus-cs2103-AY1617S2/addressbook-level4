@@ -7,6 +7,7 @@ import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.Time;
 
 /**
@@ -52,6 +53,11 @@ public class TaskBuilder {
 
     public TaskBuilder withEndTime(String time) throws IllegalValueException {
         this.task.setEndTime(new Time(Optional.of(time)));
+        return this;
+    }
+
+    public TaskBuilder withPeriod(String period) throws IllegalValueException {
+        this.task.setPeriod(new Period(Optional.of(period)));
         return this;
     }
 

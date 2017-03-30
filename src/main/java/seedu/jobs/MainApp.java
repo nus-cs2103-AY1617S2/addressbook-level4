@@ -20,10 +20,10 @@ import seedu.jobs.commons.util.ConfigUtil;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.logic.LogicManager;
-import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.Model;
 import seedu.jobs.model.ModelManager;
 import seedu.jobs.model.ReadOnlyTaskBook;
+import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.UserPrefs;
 import seedu.jobs.model.util.SampleDataUtil;
 import seedu.jobs.storage.Storage;
@@ -53,7 +53,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 

@@ -9,7 +9,6 @@ import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
-import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
@@ -28,7 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs){
+    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(taskBook, userPrefs);
 
@@ -38,12 +37,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
     }
 
-    public ModelManager(){
+    public ModelManager() {
         this(new TaskBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskBook newData){
+    public void resetData(ReadOnlyTaskBook newData) {
         taskBook.resetData(newData);
         indicateTaskBookChanged();
     }
@@ -65,6 +64,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void completeTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        taskBook.completeTask(index, target);
+        indicateTaskBookChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskBook.addTask(task);
         updateFilteredListToShowAll();
@@ -72,11 +77,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredPersonListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException{
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int taskBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
+        int taskBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBook.updateTask(taskBookIndex, editedTask);
         indicateTaskBookChanged();
     }
@@ -100,6 +105,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredPersonList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+    }
+
+    //=========== Undo & redo commands =======================================================================
+
+    @Override
+    public synchronized void undoCommand() throws TaskNotFoundException {
+        taskBook.undoTask();
+        indicateTaskBookChanged();
+    }
+
+    @Override
+    public void redoCommand() throws TaskNotFoundException {
+        taskBook.redoTask();
+        indicateTaskBookChanged();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -143,7 +162,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
+                    .filter(keyword -> task.getName().fullName.toLowerCase().contains(keyword.toLowerCase()))
                     .findAny()
                     .isPresent();
         }
@@ -153,6 +172,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
 
 
 }

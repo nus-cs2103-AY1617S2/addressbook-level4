@@ -1,6 +1,5 @@
 package seedu.jobs.model;
 
-
 import javafx.collections.ObservableList;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.task.ReadOnlyTask;

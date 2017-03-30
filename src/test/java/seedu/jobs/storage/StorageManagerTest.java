@@ -1,6 +1,5 @@
 package seedu.jobs.storage;
 
-
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -14,8 +13,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
-import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.ReadOnlyTaskBook;
+import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.UserPrefs;
 import seedu.jobs.testutil.EventsCollector;
 import seedu.jobs.testutil.TypicalTestTasks;

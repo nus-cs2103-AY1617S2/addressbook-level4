@@ -1,6 +1,7 @@
 package seedu.jobs.model.task;
 
 import java.util.Optional;
+
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
 /**

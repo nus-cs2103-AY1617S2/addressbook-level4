@@ -8,21 +8,24 @@ import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.exceptions.DuplicateDataException;
 import seedu.jobs.commons.util.CollectionUtil;
+import seedu.jobs.model.FixedStack;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#equals(Object)
+ * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final FixedStack<ObservableList<Task>> undoStack = new FixedStack();
+    private final FixedStack<ObservableList<Task>> redoStack = new FixedStack();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent task as the given argument.
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
@@ -30,7 +33,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a person to the list.
+     * Adds a task to the list.
      *
      * @throws DuplicateTaskException if the person to add is a duplicate of an existing person in the list.
      */
@@ -39,18 +42,31 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        undoStack.push(stackList);
         internalList.add(toAdd);
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedPerson}.
      *
-     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
+
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        Task temp;
+        for (Task t : internalList) {
+            temp = new Task(t);
+            stackList.add(temp);
+        }
+        undoStack.push(stackList);
 
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
@@ -65,17 +81,63 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such person could be found in the list.
+     * @throws TaskNotFoundException if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        undoStack.push(stackList);
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
         return taskFoundAndDeleted;
+    }
+
+    /**
+     * Completes the equivalent task from the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean complete(int index, ReadOnlyTask toComplete) {
+        assert toComplete != null;
+
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        undoStack.push(stackList);
+        Task taskToComplete = internalList.get(index);
+        taskToComplete.markComplete();
+        internalList.set(index, taskToComplete);
+        return true;
+    }
+
+    /**
+     *
+     * @param replacement
+     */
+
+    public boolean undo() {
+        ObservableList<Task> replacement = undoStack.pop();
+        ObservableList<Task> redoTemp = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            redoTemp.add(t);
+        }
+        redoStack.push(redoTemp);
+        this.internalList.setAll(replacement);
+        return true;
+    }
+
+    public boolean redo() {
+        ObservableList<Task> replacement = redoStack.pop();
+        this.internalList.setAll(replacement);
+        return true;
     }
 
     public void setTasks(UniqueTaskList replacement) {

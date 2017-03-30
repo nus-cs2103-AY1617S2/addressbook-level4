@@ -15,8 +15,8 @@ import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
-import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
+import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.model.UserPrefs;
@@ -52,7 +52,7 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts(); 
+            mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -124,7 +124,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        
+
         //FOR BROWSER
         //mainWindow.loadTaskPage(event.getNewSelection());
     }
