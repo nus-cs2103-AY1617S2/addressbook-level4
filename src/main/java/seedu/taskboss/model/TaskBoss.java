@@ -11,6 +11,7 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
+import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -150,6 +151,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         }
     }
 
+    //@@author A0143157J
     /**
      * Sorts tasks in TaskBoss according to these sort types:
      * - start date and time
@@ -169,6 +171,13 @@ public class TaskBoss implements ReadOnlyTaskBoss {
     //@@author A0147990R
     public void removeCategory(Category t) {
         categories.remove(t);
+    }
+
+    public void renameCategory(Category newCategory, Category oldCategory) throws IllegalValueException,
+        CommandException {
+        categories.replace(newCategory, oldCategory);
+        tasks.renameCategory(oldCategory, newCategory);
+      
     }
 
 //// util methods

@@ -15,7 +15,6 @@ import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.commons.util.StringUtil;
-import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
@@ -90,6 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
     }
+
     //@@author A0138961W
     @Override
     public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException,
@@ -102,6 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         indicateTaskBossChanged();
     }
+
     //@@author
     @Override
     public synchronized void addTask(Task task) throws IllegalValueException {
@@ -161,54 +162,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void renameCategory(Category oldCategory, Category newCategory)
             throws IllegalValueException, CommandException, DuplicateCategoryException {
         assert oldCategory != null;
-
-        boolean isFound = false;
-
         taskbossHistory.push(new TaskBoss(this.taskBoss));
-        FilteredList<ReadOnlyTask> oldCategoryTaskList = filteredTasks;
-        int listSize = oldCategoryTaskList.size();
-
-        // remember all tasks
-        ArrayList<ReadOnlyTask> allReadOnlyTasks = new ArrayList<ReadOnlyTask> ();
-        for (ReadOnlyTask task : oldCategoryTaskList) {
-            allReadOnlyTasks.add(task);
-        }
-
-        // remember all task index
-        int[] taskIndex = new int[listSize];
-        for (int i = 0; i < listSize; i++) {
-            taskIndex[i] = oldCategoryTaskList.getSourceIndex(i);
-        }
-
-        for (int i = 0; i < listSize; i++) {
-            // get each task on the filtered task list
-            ReadOnlyTask target = allReadOnlyTasks.get(i);
-            // get the UniqueCategoryList of the task
-            UniqueCategoryList targetCategoryList = target.getCategories();
-
-            UniqueCategoryList newCategoryList = new UniqueCategoryList();
-
-            try {
-                for (Category category : targetCategoryList) {
-                    if (category.equals(oldCategory)) {
-                        isFound = true;
-                        newCategoryList.add(newCategory);
-                    } else {
-                        newCategoryList.add(category);
-                    }
-                }
-            } catch (DuplicateCategoryException dce) {
-                throw new DuplicateCategoryException();
-            }
-
-            Task editedTask = new Task(target);
-            editedTask.setCategories(newCategoryList);
-            int taskBossIndex = taskIndex[i];
-            taskBoss.updateTask(taskBossIndex, editedTask);
-        }
-
-        errorDoesNotExistDetect(oldCategory, isFound);
-
+        taskBoss.renameCategory(newCategory, oldCategory);
         removeCategoryFromTaskboss(oldCategory);
         indicateTaskBossChanged();
     }
@@ -221,21 +176,6 @@ public class ModelManager extends ComponentManager implements Model {
         Task newRecurredTask = new Task(taskToMarkDone);
         newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
         return newRecurredTask;
-    }
-
-    //@@author A0144904H
-    /**
-     * detects the category does not exist error
-     * @param oldCategory
-     * @param isFound
-     * @throws CommandException
-     */
-    private void errorDoesNotExistDetect(Category oldCategory, boolean isFound) throws CommandException {
-        if (!isFound) {
-            updateFilteredListToShowAll();
-            throw new CommandException(oldCategory.toString()
-                    + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
-        }
     }
 
     //=========== Filtered Task List Accessors =============================================================
