@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.ui.NewResultAvailableEvent;
-import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.commons.util.FxViewUtil;
 import seedu.taskit.logic.Logic;
 import seedu.taskit.logic.commands.CommandResult;

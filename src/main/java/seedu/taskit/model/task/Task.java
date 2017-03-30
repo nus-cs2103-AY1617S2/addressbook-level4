@@ -9,8 +9,6 @@ import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_DATES;
 
-import java.util.Calendar;
-
 public class Task implements ReadOnlyTask{
 
     protected Title title;

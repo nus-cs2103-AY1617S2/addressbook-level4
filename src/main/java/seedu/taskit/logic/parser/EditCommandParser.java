@@ -21,7 +21,6 @@ import seedu.taskit.logic.commands.IncorrectCommand;
 import seedu.taskit.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.taskit.model.tag.Tag;
 import seedu.taskit.model.tag.UniqueTagList;
-import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.Title;
 
 /**

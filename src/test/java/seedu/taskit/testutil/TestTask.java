@@ -6,7 +6,6 @@ import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.Priority;
 import seedu.taskit.model.task.ReadOnlyTask;
-import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
 
 public class TestTask implements ReadOnlyTask {

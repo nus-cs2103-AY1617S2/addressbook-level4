@@ -5,14 +5,9 @@ import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.time.DateUtils;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 import edu.emory.mathcs.backport.java.util.Collections;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Calendar;
 import javafx.collections.transformation.FilteredList;
 import seedu.taskit.commons.core.ComponentManager;
 import seedu.taskit.commons.core.LogsCenter;

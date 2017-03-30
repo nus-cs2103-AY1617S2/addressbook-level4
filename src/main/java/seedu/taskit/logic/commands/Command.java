@@ -1,7 +1,6 @@
 package seedu.taskit.logic.commands;
 
 import seedu.taskit.commons.core.Messages;
-import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.logic.commands.exceptions.CommandException;
 import seedu.taskit.model.Model;
 
