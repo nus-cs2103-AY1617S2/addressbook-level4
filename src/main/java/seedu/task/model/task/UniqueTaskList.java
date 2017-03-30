@@ -102,6 +102,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
+            System.out.println("task description: " + task.getDescription());
             replacement.add(new Task(task));
         }
         setTasks(replacement);

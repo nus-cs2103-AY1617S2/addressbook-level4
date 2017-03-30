@@ -334,15 +334,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
 
         if (compareToResult == 0) {
-            compareToResult =
-                    this.occurrences.get(0).getEndTiming()
-                    .compareTo(compareTask.occurrences.get(0).getEndTiming());
+            compareToResult = this.getEndTiming().compareTo(compareTask.getEndTiming());
         }
 
         if (compareToResult == 0) {
-            compareToResult =
-                    this.occurrences.get(0).getStartTiming()
-                    .compareTo(compareTask.occurrences.get(0).getStartTiming());
+            compareToResult = this.getStartTiming().compareTo(compareTask.getStartTiming());
         }
 
         if (compareToResult == 0) {

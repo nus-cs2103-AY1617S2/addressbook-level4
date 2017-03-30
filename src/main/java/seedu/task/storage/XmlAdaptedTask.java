@@ -50,6 +50,8 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
         priority = source.getPriority().value;
+        // startTiming = source.getStartTiming().value;
+        // endTiming = source.getEndTiming().value;
         recurring = source.isRecurring();
         frequency = source.getFrequency().toString();
         tagged = new ArrayList<>();
@@ -71,6 +73,8 @@ public class XmlAdaptedTask {
         }
         final Description description = new Description(this.description);
         final Priority priority = new Priority(this.priority);
+        // final Timing startTiming = new Timing(this.startTiming);
+        // final Timing endTiming = new Timing(this.endTiming);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final RecurringFrequency frequency = new RecurringFrequency(this.frequency);
         return new Task(description, priority, occurrences, tags, recurring, frequency);

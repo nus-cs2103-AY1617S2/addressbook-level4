@@ -79,8 +79,8 @@ public class Priority implements Comparable<Priority> {
             break;
         }
     }
-    //@@author
 
+    //@@author A0163559U
     /**
      * Results in Priority sorted in ascending order.
      */
@@ -90,5 +90,6 @@ public class Priority implements Comparable<Priority> {
         int otherValue = Integer.parseInt(comparePriority.value);
         return thisValue - otherValue;
     }
+    //@@author
 
 }

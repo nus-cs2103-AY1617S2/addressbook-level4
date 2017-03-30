@@ -31,8 +31,8 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE, PREFIX_END_DATE,
-                        PREFIX_TAG, PREFIX_RECURRING);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE,
+                    PREFIX_END_DATE, PREFIX_TAG, PREFIX_RECURRING);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
