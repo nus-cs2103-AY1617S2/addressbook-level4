@@ -64,8 +64,7 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-//        THIS IS FOR BROWSER (the releaseResources)
-//        mainWindow.releaseResources();
+        mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -124,9 +123,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-
-        //FOR BROWSER
-        //mainWindow.loadTaskPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 
