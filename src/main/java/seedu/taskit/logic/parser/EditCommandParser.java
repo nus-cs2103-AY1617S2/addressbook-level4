@@ -65,11 +65,11 @@ public class EditCommandParser {
                 editTaskDescriptor.setTags(parseTagsForEdit(separateTags(updateInformation)));
             }
             if (FIELDWORD_START.equals(fieldWordName)) {
-            	editTaskDescriptor.setStart(ParserUtil.parseDate(updateInformation));
+                editTaskDescriptor.setStart(ParserUtil.parseDate(updateInformation));
             }
             if (FIELDWORD_END.equals(fieldWordName)) {
-            	editTaskDescriptor.setEnd(ParserUtil.parseDate(updateInformation));
-            }   
+                editTaskDescriptor.setEnd(ParserUtil.parseDate(updateInformation));
+            }
             if (FIELDWORD_PRIORITY.equals(fieldWordName)) {
                 editTaskDescriptor.setPriority(ParserUtil.parsePriority(updateInformation));
             }

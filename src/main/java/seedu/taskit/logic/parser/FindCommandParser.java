@@ -47,30 +47,30 @@ public class FindCommandParser {
      * @return String[] keywords of
      */
     private String[] parseKeywords(String str){
-    	String[] keywords = {"keyword"}; //will eventually be overridden
+        String[] keywords = {"keyword"}; //will eventually be overridden
 
-    	String keywordsStr = str;
-    	
-    	int[] invCommaIdx = findInvCommasIndexes(keywordsStr);
-    	int idxOpenInvComma =	 invCommaIdx[0];
-    	int idxCloseInvComma = 	 invCommaIdx[1];
+        String keywordsStr = str;
 
-    	if(idxOpenInvComma < idxCloseInvComma){ //found a pair of inverted commas!
-    		//extract inverted commas
-    		keywords[0] = keywordsStr.substring(idxOpenInvComma+1, idxCloseInvComma);
+        int[] invCommaIdx = findInvCommasIndexes(keywordsStr);
+        int idxOpenInvComma =	 invCommaIdx[0];
+        int idxCloseInvComma = 	 invCommaIdx[1];
 
-    		//create new substring by removing keywords in inverted commas
-    		String subStrKeywords = keywordsStr.replace(keywordsStr.substring(idxOpenInvComma,idxCloseInvComma+1), "");
+        if(idxOpenInvComma < idxCloseInvComma){ //found a pair of inverted commas!
+            //extract inverted commas
+            keywords[0] = keywordsStr.substring(idxOpenInvComma+1, idxCloseInvComma);
 
-    		//if subStrKeywords is not empty string
-    		if(!subStrKeywords.trim().equals("")){
-    			String[] keywordsToAdd = subStrKeywords.trim().split("\\s+");    		
-    			keywords = concatStringArrays(keywords, keywordsToAdd);
-    		}
-    	} else{//invalid or don't have inverted commas, just split normally
-    		keywords = keywordsStr.split("\\s+");
-    	}
-    	return keywords;
+            //create new substring by removing keywords in inverted commas
+            String subStrKeywords = keywordsStr.replace(keywordsStr.substring(idxOpenInvComma,idxCloseInvComma+1), "");
+
+            //if subStrKeywords is not empty string
+            if(!subStrKeywords.trim().equals("")){
+                String[] keywordsToAdd = subStrKeywords.trim().split("\\s+");
+                keywords = concatStringArrays(keywords, keywordsToAdd);
+            }
+        } else{//invalid or don't have inverted commas, just split normally
+            keywords = keywordsStr.split("\\s+");
+        }
+        return keywords;
     }
 
   //@@author A0097141H
@@ -82,28 +82,28 @@ public class FindCommandParser {
      */
     private int[] findInvCommasIndexes(String str){
 
-    	int[] idx = {0,0,0};
-    	
+        int[] idx = {0,0,0};
+
         int idxOpenInvComma = 0;
         int idxCloseInvComma = 0;
         boolean foundInvComma = false;
 
         for (int i=0;i<str.length();i++){
-        	if (str.charAt(i) == '\"'){
-        		if(!foundInvComma){
-        			idxOpenInvComma = i;
-        			foundInvComma = true;
-        		}else{
-        			//found a matching inverted comma
-        			idxCloseInvComma = i;
-        			foundInvComma = false;
-        		}
-        		idx[2]++;
-        	}
+            if (str.charAt(i) == '\"'){
+                if(!foundInvComma){
+                    idxOpenInvComma = i;
+                    foundInvComma = true;
+                }else{
+                    //found a matching inverted comma
+                    idxCloseInvComma = i;
+                    foundInvComma = false;
+                }
+                idx[2]++;
+            }
         }
-    	idx[0] = idxOpenInvComma;
-    	idx[1] = idxCloseInvComma;
-    	return idx;
+        idx[0] = idxOpenInvComma;
+        idx[1] = idxCloseInvComma;
+        return idx;
     }
 
   //@@author A0097141H
@@ -115,10 +115,10 @@ public class FindCommandParser {
      */
     private String[] concatStringArrays(String[] strArr1, String[] strArr2){
 
-    	Object[] objArr = ArrayUtils.addAll(strArr1, strArr2);
-		String[] keywords = Arrays.copyOf(objArr, objArr.length, String[].class);
-		
-    	return keywords;
+        Object[] objArr = ArrayUtils.addAll(strArr1, strArr2);
+        String[] keywords = Arrays.copyOf(objArr, objArr.length, String[].class);
+
+        return keywords;
     }
 
 }
