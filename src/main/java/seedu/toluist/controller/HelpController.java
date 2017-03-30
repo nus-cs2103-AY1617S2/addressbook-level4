@@ -15,27 +15,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.controller.AddTaskController;
-import seedu.toluist.controller.AliasController;
-import seedu.toluist.controller.ClearController;
-import seedu.toluist.controller.Controller;
-import seedu.toluist.controller.DeleteTaskController;
-import seedu.toluist.controller.ExitController;
-import seedu.toluist.controller.FindController;
-import seedu.toluist.controller.HelpController;
-import seedu.toluist.controller.HistoryController;
-import seedu.toluist.controller.LoadController;
-import seedu.toluist.controller.MarkController;
-import seedu.toluist.controller.RedoController;
-import seedu.toluist.controller.StoreController;
-import seedu.toluist.controller.SwitchController;
-import seedu.toluist.controller.TagController;
-import seedu.toluist.controller.UnaliasController;
-import seedu.toluist.controller.UndoController;
-import seedu.toluist.controller.UnknownCommandController;
-import seedu.toluist.controller.UntagController;
-import seedu.toluist.controller.UpdateTaskController;
-import seedu.toluist.controller.ViewAliasController;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -67,12 +46,12 @@ public class HelpController extends Controller {
             uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT));
         } else {
             uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR));
-        }        
+        }
     }
 
     private void showSpecificHelp(String commandWord) {
         // TODO Auto-generated method stub
-        
+
     }
 
     private void showGeneralHelp() {
@@ -80,7 +59,7 @@ public class HelpController extends Controller {
         List<String> resultText = new ArrayList<String>();
 
 
-        for ( List<String> commandHelpMessage : commandsBasicHelp) {
+        for (List<String> commandHelpMessage : commandsBasicHelp) {
             resultText.add(String.join("\n", commandHelpMessage));
         }
 
