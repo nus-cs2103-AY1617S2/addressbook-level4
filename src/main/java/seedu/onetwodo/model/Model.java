@@ -60,11 +60,12 @@ public interface Model {
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the
      *             filtered list.
      */
-    void updateTask(ReadOnlyTask taskToEdit, int internalIdx, Task editedTask) throws TaskNotFoundException, UniqueTaskList.DuplicateTaskException;
+    void updateTask(ReadOnlyTask taskToEdit, int internalIdx, Task editedTask) throws TaskNotFoundException,
+            UniqueTaskList.DuplicateTaskException;
 
     void addTaskForEdit(int internalIdx, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException;
-    
+
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}

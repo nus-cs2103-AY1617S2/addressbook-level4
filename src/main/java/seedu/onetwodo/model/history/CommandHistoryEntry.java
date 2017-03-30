@@ -28,7 +28,7 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
         entry.add(commandWord);
         entry.add(String.format(COMMAND_FORMATTER, task));
     }
-    
+
     public CommandHistoryEntry (String commandWord, ReadOnlyTask taskBeforeEdit, ReadOnlyTask taskAfterEdit) {
         entry = new ArrayList<String>();
         entry.add(commandWord);
@@ -41,7 +41,7 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
         if (entry.size() == 1) {
             assert entry.get(0).equals(ClearCommand.COMMAND_WORD);
             return ClearCommand.MESSAGE_SUCCESS;
-        } else if (entry.size() == 2){
+        } else if (entry.size() == 2) {
             return entry.get(0).concat(entry.get(1));
         } else {
             return entry.get(0).concat(entry.get(2));

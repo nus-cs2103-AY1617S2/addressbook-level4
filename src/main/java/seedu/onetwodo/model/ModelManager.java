@@ -132,21 +132,23 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void updateTask(ReadOnlyTask taskToEdit, int internalIdx, Task editedTask)
-            throws TaskNotFoundException, UniqueTaskList.DuplicateTaskException{
+            throws TaskNotFoundException, UniqueTaskList.DuplicateTaskException {
         assert taskToEdit != null;
         assert editedTask != null;
-        
+
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.removeTask(taskToEdit);
         indicateToDoListChanged();
-        
+
         addTaskForEdit(internalIdx, editedTask);
-        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, taskToEdit, editedTask, copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(EditCommand.COMMAND_WORD, taskToEdit,
+                editedTask, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
-    
+
     @Override
-    public synchronized void addTaskForEdit(int internalIdx, Task editedTask) throws UniqueTaskList.DuplicateTaskException{
+    public synchronized void addTaskForEdit(int internalIdx, Task editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
         toDoList.addTask(internalIdx, editedTask);
         indicateToDoListChanged();
     }
