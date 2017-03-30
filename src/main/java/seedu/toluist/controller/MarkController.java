@@ -36,9 +36,21 @@ public class MarkController extends Controller {
     private static final String PARAMETER_MARK_INCOMPLETE = "incomplete";
     private static final Logger logger = LogsCenter.getLogger(MarkController.class);
 
+    //@@author A0162011A
     private static final String HELP_DETAILS = "Marks a task to be complete or incomplete.";
     private static final String HELP_FORMAT = "mark [complete/incomplete] INDEX(ES)";
+    private static final String[] HELP_COMMENTS = { "Using complete as a parameter will mark the selected task(s) as complete.",
+                                                    "Using incomplete as a parameter will mark the selected task(s) as incomplete.",
+                                                    "Using neither will default the command to mark as complete.",
+                                                    "Supports marking of multiple indexes in a single command." };
+    private static final String[] HELP_EXAMPLES = { "`mark 1`\nMarks the task at index 1 complete.",
+                                                    "`mark incomplete 2`\nMarks the task at index 2 incomplete.",
+                                                    "`mark complete 3`\nMarks the task at index 3 complete.",
+                                                    "`mark -4`\nMarks the tasks up to index 4 complete.",
+                                                    "`mark 5-`\nMarks the tasks starting from index 5 complete.",
+                                                    "`mark 1, 6`\nMarks the tasks at index 1 and 6 complete." };
 
+    //@@author A0131125Y
     public void execute(String command) {
         logger.info(getClass().toString() + " will handle command");
 
@@ -108,7 +120,7 @@ public class MarkController extends Controller {
         return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
     }
 
-    public static String[] getDetailedHelp() {
-        return getBasicHelp();
+    public static String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

@@ -16,6 +16,8 @@ public class ExitController extends Controller {
 
     private static final String HELP_DETAILS = "Exits the program.";
     private static final String HELP_FORMAT = "exit/quit";
+    private static final String[] HELP_COMMENTS = { "Your data will save automatically.",
+                                                    "You can re-open the program by clicking on the .jar file." };
 
     public void execute(String command) {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
@@ -38,7 +40,7 @@ public class ExitController extends Controller {
         return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
     }
 
-    public static String[] getDetailedHelp() {
-        return getBasicHelp();
+    public static String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, null };
     }
 }
