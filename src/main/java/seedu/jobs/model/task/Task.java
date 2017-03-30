@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.tag.UniqueTagList;
-
+//@@author A0130979U
 public class Task implements ReadOnlyTask {
 
     private Name name;
@@ -149,3 +149,4 @@ public class Task implements ReadOnlyTask {
     }
 
 }
+//@@author A0130979U

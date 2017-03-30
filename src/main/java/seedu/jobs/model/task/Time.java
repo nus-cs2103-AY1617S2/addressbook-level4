@@ -15,7 +15,7 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
  * as declared in {@link #isValidTime(String)}
  */
 
-
+//@@author A0130979U
 public class Time {
 
     public static final String MESSAGE_TIME_CONSTRAINT = "Time should always follow the dd/mm/yy hh:mm format";
@@ -118,3 +118,4 @@ public class Time {
     }
 
 }
+//@@author A0130979U

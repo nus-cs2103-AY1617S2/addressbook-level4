@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+/* @@author A0164039E */
 <VBox id="cardPane" fx:id="cardPane" prefWidth="345.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="25.0">
@@ -36,3 +37,4 @@
       <AnchorPane prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: white;" />
    </children>
 </VBox>
+/* @@author */

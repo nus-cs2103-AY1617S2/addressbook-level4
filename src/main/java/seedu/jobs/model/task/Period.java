@@ -3,7 +3,7 @@ package seedu.jobs.model.task;
 import java.util.Optional;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
-
+//@@author A0130979U
 public class Period {
 
     public static final String MESSAGE_PERIOD_CONSTRAINT = "Period of recurrence must be a positive integer";
@@ -52,3 +52,4 @@ public class Period {
     }
 
 }
+//@@author A0130979U

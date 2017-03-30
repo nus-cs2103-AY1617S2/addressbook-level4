@@ -151,6 +151,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         }
     }
 
+  //@@author A0130979U
     public boolean completeTask(int index, ReadOnlyTask taskToComplete) throws TaskNotFoundException {
         if (tasks.complete(index, taskToComplete)) {
             return true;
@@ -158,8 +159,9 @@ public class TaskBook implements ReadOnlyTaskBook {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
+  //@@author
 
-
+  //@@author A0164440M
     public void undoTask() throws EmptyStackException {
         tasks.undo();
     }
@@ -167,6 +169,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     public void redoTask() throws EmptyStackException {
         tasks.redo();
     }
+  //@@author
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {

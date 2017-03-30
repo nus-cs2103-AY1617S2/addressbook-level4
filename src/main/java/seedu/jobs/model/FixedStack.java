@@ -8,6 +8,7 @@ import java.util.Stack;
  *
  * @param <T>
  */
+//@@author A0164440M
 public class FixedStack<T> extends Stack<T> {
 
     private int maxSize = 10;
@@ -30,3 +31,4 @@ public class FixedStack<T> extends Stack<T> {
     }
 
 }
+//@@author

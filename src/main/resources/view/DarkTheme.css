@@ -178,9 +178,11 @@
     -fx-background-color: derive(#000000, 20%);
 }
 
+/* @@author A0164039E */
 .menu-bar :hover{
     -fx-background-color: transparent;
 }
+/* @@author */
 
 .menu-bar .label {
     -fx-font-size: 12pt;
@@ -189,6 +191,7 @@
     -fx-opacity: 0.9;
 }
 
+/* @@author A0164039E */
 .menu-bar :hover {
 	-fx-background-color: derive(white, -5%);
 }
@@ -196,6 +199,7 @@
 .menu-bar :selected {
 	-fx-background-color: derive(white, -5%);
 }
+/* @@author */
 
 .menu .left-container {
     -fx-background-color: black;

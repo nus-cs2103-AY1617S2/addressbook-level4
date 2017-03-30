@@ -109,7 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Undo & redo commands =======================================================================
-
+  //@@author A0164440M
     @Override
     public synchronized void undoCommand() throws EmptyStackException {
         taskBook.undoTask();
@@ -117,10 +117,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void redoCommand() throws EmptyStackException {
+    public synchronized void redoCommand() throws EmptyStackException {
         taskBook.redoTask();
         indicateTaskBookChanged();
     }
+  //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 

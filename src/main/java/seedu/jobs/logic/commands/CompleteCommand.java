@@ -6,6 +6,7 @@ import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0130979U
 public class CompleteCommand extends Command {
 
     public static final String COMMAND_WORD = "complete";
@@ -44,3 +45,4 @@ public class CompleteCommand extends Command {
     }
 
 }
+//@@author A0130979U
