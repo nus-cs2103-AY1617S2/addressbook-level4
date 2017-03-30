@@ -234,8 +234,10 @@ Example:
    e.g. `delete 3`
 
 * **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
-  e.g. `edit 1 title Movie at 3pm`
-  e.g. `edit 1 start this Friday 3 pm`
+  e.g. `edit 1 title Movie`
+  e.g. `edit 2 start this Friday 3 pm`
+  e.g. `edit 2 end none`
+  e.g. `edit 2 end null`
   e.g. `edit 1 tag School`
   e.g. `edit 1 tag null`
 
@@ -254,10 +256,10 @@ Example:
   e.g. `mark 3 done`
 
 * **Undo** : `undo` <br>
-  e.g.
+  
+* **Redo** : `redo` <br>
 
 * **Help** : `help` <br>
-  e.g.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
