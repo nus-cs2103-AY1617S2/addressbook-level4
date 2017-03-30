@@ -10,12 +10,12 @@ public class ClearCommandTest extends TodoListGuiTest {
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(taskListPanel.isListMatching(td.getUndoneTasks()));
         assertClearCommandSuccess("clear");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(taskListPanel.isListMatching(td.hangclothes));
+        commandBox.runCommand(td.interviewprep.getAddCommand("add "));
+        assertTrue(taskListPanel.isListMatching(td.interviewprep));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
@@ -23,38 +23,38 @@ public class ClearCommandTest extends TodoListGuiTest {
         assertClearCommandSuccess("clear");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(taskListPanel.isListMatching(td.hangclothes));
+        commandBox.runCommand(td.submitreport.getAddCommand("add "));
+        assertTrue(taskListPanel.isListMatching(td.submitreport));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("clr");
 
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(taskListPanel.isListMatching(td.hangclothes));
+        commandBox.runCommand(td.submitreport.getAddCommand("add "));
+        assertTrue(taskListPanel.isListMatching(td.submitreport));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("c");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(taskListPanel.isListMatching(td.hangclothes));
+        commandBox.runCommand(td.submitreport.getAddCommand("add "));
+        assertTrue(taskListPanel.isListMatching(td.submitreport));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("clears");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(taskListPanel.isListMatching(td.hangclothes));
+        commandBox.runCommand(td.submitreport.getAddCommand("add "));
+        assertTrue(taskListPanel.isListMatching(td.submitreport));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("empty");
 
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(taskListPanel.isListMatching(td.hangclothes));
+        commandBox.runCommand(td.submitreport.getAddCommand("add "));
+        assertTrue(taskListPanel.isListMatching(td.submitreport));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("empties");

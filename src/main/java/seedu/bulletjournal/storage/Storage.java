@@ -21,7 +21,7 @@ public interface Storage extends TodoListStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getBulletJournalFilePath();
 
     @Override
     Optional<ReadOnlyTodoList> readAddressBook() throws DataConversionException, IOException;

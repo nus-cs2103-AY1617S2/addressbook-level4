@@ -17,7 +17,7 @@ import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.UniqueTaskList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the bullet-journal level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TodoList implements ReadOnlyTodoList {
@@ -40,7 +40,7 @@ public class TodoList implements ReadOnlyTodoList {
     public TodoList() {}
 
     /**
-     * Creates an AddressBook using the Tasks and Tags in the {@code toBeCopied}
+     * Creates an TodoList using the Tasks and Tags in the {@code toBeCopied}
      */
     public TodoList(ReadOnlyTodoList toBeCopied) {
         this();
