@@ -5,14 +5,16 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList;
+
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Group;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.StartDate;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniquePersonList;
 
 /**
  * Adds a person to the address book.
@@ -21,32 +23,67 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD
-            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the todo list. "
+            + "Parameters: NAME [s/START DATE] [d/DEADLINE] e/EMAIL g/GROUP  [t/TAG]...\n "
+            + "Start date and deadline are not necessary. \n" + "Example: " + COMMAND_WORD
+            + " study english s/01.01 d/03.21 e/johnd@gmail.com g/learning t/everyday t/undone";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
-    private final Person toAdd;
+    private final Task toAdd;
 
     /**
-     * Creates an AddCommand using raw values.
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * Creates an AddCommand using raw values. This case is only have the
+     * deadline
+     * @throws IllegalValueException
+     *             if any of the raw values are invalid
      */
-    public AddCommand(String name, String phone, String email, String address, Set<String> tags)
+    public AddCommand(String name, String date, String email, String group, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
-                new Name(name),
-                new Phone(phone),
+        this.toAdd = new Task(new Name(name),
+                new Date(date),
+                new StartDate("00.00"),
                 new Email(email),
-                new Address(address),
+                new Group(group),
+                new UniqueTagList(tagSet));
+    }
+
+    /*
+     * Constructor: floating task without starting date and end date
+     */
+    public AddCommand(String name, String email, String group, Set<String> tags) throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new Task(new Name(name),
+                new Date("00.00"),
+                new StartDate("00.00"),
+                new Email(email),
+                new Group(group),
+                new UniqueTagList(tagSet));
+    }
+
+    public AddCommand(String name, String date, String sdate, String email, String group, Set<String> tags)
+            throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new Task(
+                new Name(name),
+                new Date(date),
+                new StartDate(sdate),
+                new Email(email),
+                new Group(group),
                 new UniqueTagList(tagSet)
         );
     }
@@ -58,7 +95,7 @@ public class AddCommand extends Command {
             model.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }
