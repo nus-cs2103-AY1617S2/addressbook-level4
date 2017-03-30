@@ -131,7 +131,7 @@ Examples:
   `mark 1 undone`<br>
   Marks the 1st task in the results of the `find` command as undone.
 
-### 2.6. Searching all tasks containing any keyword in their name: `find`
+### 2.6. Searching all tasks based on keywords or date: `find`
 
 Finds tasks which matched name/deadline/tag.<br>
 Format: ` find <[NAME]|[DATE]|[TAG]>`
@@ -146,6 +146,8 @@ Examples:
 
 * `find do HW`<br>
   Returns tasks with 'do' or 'HW' or both
+* `find monday`<br>
+  Returns tasks with dates on monday
 
 
 ### 2.7. Deleting a task : `delete`
@@ -232,8 +234,10 @@ Example:
    e.g. `delete 3`
 
 * **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
-  e.g. `edit 1 title Movie at 3pm`
-  e.g. `edit 1 start this Friday 3 pm`
+  e.g. `edit 1 title Movie`
+  e.g. `edit 2 start this Friday 3 pm`
+  e.g. `edit 2 end none`
+  e.g. `edit 2 end null`
   e.g. `edit 1 tag School`
   e.g. `edit 1 tag null`
 
@@ -252,10 +256,10 @@ Example:
   e.g. `mark 3 done`
 
 * **Undo** : `undo` <br>
-  e.g.
+  
+* **Redo** : `redo` <br>
 
 * **Help** : `help` <br>
-  e.g.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
