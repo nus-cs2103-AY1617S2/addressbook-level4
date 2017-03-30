@@ -18,9 +18,9 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-            <TitledPane fx:id="plane">
+            <TitledPane fx:id="plane" styleClass="title-pane">
                <content>
-                      <VBox alignment="CENTER_LEFT" minHeight="105.0">
+                      <VBox alignment="CENTER_LEFT" minHeight="105.0" styleClass="v-box">
                           <stylesheets>
                               <URL value="@DarkTheme.css" />
                               <URL value="@Extensions.css" />
@@ -45,4 +45,8 @@
          </rowConstraints>
         </GridPane>
     </children>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
 </HBox>

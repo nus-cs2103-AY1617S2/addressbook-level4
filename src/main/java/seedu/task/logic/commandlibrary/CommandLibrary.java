@@ -27,6 +27,7 @@ import seedu.task.logic.commands.PostGoogleCalendarCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.ThemeChangeCommand;
 import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.UndoneCommand;
 import seedu.task.logic.parser.AddCommandParser;
@@ -51,6 +52,7 @@ import seedu.task.logic.parser.PostGoogleCalendarCommandParser;
 import seedu.task.logic.parser.RedoCommandParser;
 import seedu.task.logic.parser.SaveCommandParser;
 import seedu.task.logic.parser.SelectCommandParser;
+import seedu.task.logic.parser.ThemeChangeCommandParser;
 import seedu.task.logic.parser.UndoCommandParser;
 import seedu.task.logic.parser.UndoneCommandParser;
 
@@ -82,7 +84,7 @@ public class CommandLibrary {
         commandParserTable.put(AddCommand.COMMAND_WORD_1, new AddCommandParser());
         
         commandParserTable.put(ClearCommand.COMMAND_WORD_1, new ClearCommandParser());
-
+        
         commandParserTable.put(DeleteCommand.COMMAND_WORD_1, new DeleteCommandParser());
 
         commandParserTable.put(DoneCommand.COMMAND_WORD_1, new DoneCommandParser());
@@ -142,6 +144,8 @@ public class CommandLibrary {
 
         commandParserTable.put(SelectCommand.COMMAND_WORD_1, new SelectCommandParser());
         commandParserTable.put(SelectCommand.COMMAND_WORD_2, new SelectCommandParser());
+        
+        commandParserTable.put(ThemeChangeCommand.COMMAND_WORD_1, new ThemeChangeCommandParser());
 
         commandParserTable.put(UndoCommand.COMMAND_WORD_1, new UndoCommandParser());
         commandParserTable.put(UndoCommand.COMMAND_WORD_2, new UndoCommandParser());

@@ -103,17 +103,17 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
+                TaskCard taskcard = null;
                 switch (TaskListPanel.this.theme) {
                 case Dark:
-                    setGraphic(new TaskCard(task, getIndex() + 1, TaskCard.FXML_Dark).getRoot());
+                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_Dark);
                     break;
                 case Light:
-                    setGraphic(new TaskCard(task, getIndex() + 1, TaskCard.FXML_Light).getRoot());
+                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_Light);
                     break;
                 default:
-                    setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                    taskcard = new TaskCard(task, getIndex() + 1);
                 }
-                TaskCard taskcard = new TaskCard(task, getIndex() + 1);
                 setGraphic(taskcard.getRoot());
               cardlist[getIndex()+1]=(taskcard);  
                

@@ -5,10 +5,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@Extensions.css" />
-        <URL value="@LightTheme.css" />
-    </stylesheets>
     <children>
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS">
          <stylesheets>
@@ -16,4 +12,8 @@
             <URL value="@Extensions.css" />
          </stylesheets></ListView>
     </children>
+   <stylesheets>
+      <URL value="@Extensions.css" />
+      <URL value="@DefaultTheme.css" />
+   </stylesheets>
 </VBox>

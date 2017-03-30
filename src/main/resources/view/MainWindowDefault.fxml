@@ -65,6 +65,6 @@
    </children>
    <stylesheets>
       <URL value="@Extensions.css" />
-      <URL value="@DarkTheme.css" />
+      <URL value="@DefaultTheme.css" />
    </stylesheets>
 </VBox>

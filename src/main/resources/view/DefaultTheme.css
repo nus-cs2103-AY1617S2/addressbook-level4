@@ -90,6 +90,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color : derive(C7D0D4,85%);
 }
 
 .list-cell .label {
@@ -104,6 +105,7 @@
 .cell_small_label {
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-background-color : white;
 }
 
 .anchor-pane {
@@ -174,6 +176,14 @@
 
 .menu .left-container {
     -fx-background-color: black;
+}
+
+.list-view {
+	-fx-background-color: white;
+}
+
+.V-box {
+	-fx-background-color: white;
 }
 
 /*
