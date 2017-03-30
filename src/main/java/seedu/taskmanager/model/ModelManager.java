@@ -319,14 +319,13 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean run(ReadOnlyTask task) {
-            return (task.getIsMarkedAsComplete().equals(isComplete)) && (taskKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword)).findAny()
-                    .isPresent());
-            // && (taskKeyWords.stream()
-            // .filter(keyword ->
-            // StringUtil.containsWordIgnoreCase(task.getEndDate().value,
-            // keyword))
-            // .findAny().isPresent());
+            return (task.getIsMarkedAsComplete().equals(isComplete))
+                    && (taskKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword))
+                            .findAny().isPresent())
+                    || (taskKeyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
+                            .findAny().isPresent());
         }
 
         @Override
