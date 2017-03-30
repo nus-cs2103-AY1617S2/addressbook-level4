@@ -510,10 +510,10 @@ Use case ends.
 
 **MSS**
 
-1. User types absolute file path to a save file
+1. User types absolute file path
 2. Task Manager verifies file path
-3. Task Manager saves tasks in specified save file <br>
-4. Task Manager sets this save file as default
+3. Task Manager saves tasks in specified save file
+4. Task Manager sets this save file as default <br>
 Use case ends.
 
 **Extensions**
@@ -522,25 +522,37 @@ Use case ends.
 > 2a1. Task Manager shows an error message
 > Use case ends.
 
+3a. The file path does not end with a file name
+> 3a1. Task Manager uses a default file name
+> 3a2. Task Manager prints a message notifying User
+> Use case resumes at step 4
+
 #### Use case: Load tasks from file
 
 **MSS**
 
-1. User types absolute file path to a load file
+1. User types absolute file path
 2. Task Manager verifies file path
-3. Task Manager loads task data from load file <br>
-4. Task Manager sets this load file as default
+3. Task Manager loads task data from load file
+4. Task Manager sets this load file as default <br>
 Use case ends.
 
 **Extensions**
 
-2a. The task does not exist
+2a. The file path does not exist
 > 2a1. Task Manager shows an error message
 > Use case ends.
 
-3. The load file is invalid or does not exist.
+2b. The file path does not end with a file name
+> 2b1. Task Manager prints a message notifying User
+> 2b2. Task Manager searches for default file name
+> Use case ends if default file not found
+> Use case resumes at step 3, otherwise
+
+3a. The load file has an invalid format.
 > 3a1. Task Manager shows an error message
 > Use case ends.
+
 
 ## Appendix C : Non Functional Requirements
 

@@ -178,8 +178,7 @@ There is no need to save manually.
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous task list folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.
 
 ## 4. Command Summary
 
@@ -211,3 +210,9 @@ There is no need to save manually.
 
 * **Exit ** : `exit` <br>
    e.g. `exit`
+
+* **Load ** : `load PATH/TO/LOAD_FILE` <br>
+   e.g. `load /Documents/task/tasklist.xml`
+
+* **Save ** : `save PATH/TO/SAVE_FILE` <br>
+   e.g. `save /Documents/task/tasklist.xml`
