@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Hans Muster</name>
+        <time isPrivate="false">01/03/2015</time>
+    </tasks>
+    <tasks>
+        <name>Ruth Mueller</name>
+        <time isPrivate="false">01/03/2015</time>
+    </tasks>
+    <tasks>
+        <name>Heinz Kurz</name>
+        <time isPrivate="false">01/03/2015</time>
+        </tasks>
+    <tasks>
+        <name>Cornelia Meier</name>
+        <time isPrivate="false">01/03/2015</time>
+        </tasks>
+    <tasks>
+        <name>Werner Meyer</name>
+        <time isPrivate="false">01/03/2015</time>
+        </tasks>
+    <tasks>
+        <name>Lydia Kunz</name>
+        <time isPrivate="false">01/03/2015</time>
+        </tasks>
+    <tasks>
+        <name>Anna Best</name>
+        <time isPrivate="false">01/03/2015</time>
+        </tasks>
+    <tasks>
+        <name>Stefan Meier</name>
+        <time isPrivate="false">01/03/2015</time>
+        </tasks>
+    <tasks>
+        <name>Martin Mueller</name>
+        <time isPrivate="false">01/03/2015</time>
+        </tasks>
+</taskmanager>

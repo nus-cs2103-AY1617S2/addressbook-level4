@@ -1,52 +1,26 @@
 # About Us
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+Hello from the developers of Watodo! We are an international software engineering team from 3 countries: China, Singapore and Turkey. We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [He Xing Darius](https://github.com/hesingon) <br>
+<img src="images/hesingon.png" width="150"><br>
+Role: Team Lead, Deliverables and deadlines, Developer
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Li Wentong](http://github.com/Wentong-DST) <br>
+<img src="images/wentong.png" width="150"><br>
+Role: Developer, Integration, Scheduling and tracking, Final version software, some documentation <br>
+-----
+
+#### [Oguz Yuksek](http://github.com/yuksek) <br>
+<img src="images/OguzYuksek.png" width="150"><br>
+Role: Developer, Integration, Scheduling and tracking, Final version software, some documentation <br>
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
-
------
-
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+#### [Lin Minhui](http://github.com/lmh1234) <br>
+<img src="images/minhui.png" width="150"><br>
+Role: Developer<br>
