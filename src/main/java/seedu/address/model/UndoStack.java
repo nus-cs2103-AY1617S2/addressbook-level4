@@ -33,14 +33,20 @@ public class UndoStack {
     }
     
     public YTomorrow at() {
-        return current.getElement();
+        if (current != null) {
+            return current.getElement();
+        } else {
+            return null;
+        }
     }
     
     public void push(YTomorrow next) {
         Node nextNode = new Node(next);
         
-        nextNode.setPrevious(current);
-        current.setNext(nextNode);
+        if (current != null) {
+            nextNode.setPrevious(current);
+            current.setNext(nextNode);
+        }
         
         current = nextNode;
     }
