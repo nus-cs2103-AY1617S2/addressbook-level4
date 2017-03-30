@@ -32,6 +32,11 @@ public class HelpController extends Controller {
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
     private static final String COMMAND_SPLITTER_REGEX = " ";
 
+    private static final String HELP_DETAILS = "Marks a task to be complete or incomplete.";
+    private static final String HELP_FORMAT = "mark [complete/incomplete] INDEX(ES)";
+    private static final String[] HELP_EXAMPLES = { "`help`\nShows general help for all commands.",
+                                                    "`help add`\nShows detailed help for `add` command." };
+
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
         HashMap<String, String> tokens = tokenize(command);
@@ -143,5 +148,13 @@ public class HelpController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    public static String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+    }
+
+    public static String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), null, HELP_EXAMPLES };
     }
 }
