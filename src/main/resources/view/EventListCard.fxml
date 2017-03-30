@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<!-- @@author A0148038A -->
+<!-- @@author A0124377A -->
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
@@ -18,7 +18,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" minHeight="80.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@WhiteTheme.css" />
                         <URL value="@Extensions.css" />
@@ -45,7 +45,8 @@
                         <Label fx:id="locations" styleClass="cell_medium_label" text="\$location" />                       
                     </children>
                 </VBox>
-            </children>
+                <VBox alignment="CENTER_LEFT" minHeight="80.0" GridPane.columnIndex="1" />                
+            </children>            
         </GridPane>
     </children>
 </HBox>

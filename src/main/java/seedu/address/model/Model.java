@@ -88,7 +88,6 @@ public interface Model {
 
     void setDisplayStatus(String status);
 
-
     /** Finds the index of the event in the filtered list*/
     int findEventIndex(Event event);
 

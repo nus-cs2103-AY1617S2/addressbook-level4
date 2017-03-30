@@ -7,11 +7,13 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
 import jfxtras.internal.scene.control.skin.agenda.AgendaDaySkin;
+import jfxtras.internal.scene.control.skin.agenda.AgendaDaysFromDisplayedSkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
 import jfxtras.scene.control.agenda.Agenda.Appointment;
@@ -33,7 +35,7 @@ public class CalendarPanel extends UiPart<Region> {
     private static final String CALENDAR_UNSYC_MESSAGE = "Calendar is not synced";
     private static final String CALENDAR_VIEW_ID = "calendar";
     private static final int DEFAULT_BEFORE = -1;
-    private static final int DEFAULT_AFTER = 5;
+    private static final int DEFAULT_AFTER = 3;
     private static final double DEFAULT_WEEK_VIEW_DAYS = 4.0;
     private Agenda agenda;
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
@@ -61,10 +63,11 @@ public class CalendarPanel extends UiPart<Region> {
      */
     private void setWeekView(int before, int after) {
         AgendaWeekSkin skin = new AgendaWeekSkin(this.agenda);
-//      skin.setDaysBeforeFurthest(before);
-//      skin.setDaysAfterFurthest(after);
-//      Slider slider = (Slider)this.agenda.lookup("#daysAfterSlider");
-//      slider.setValue(DEFAULT_WEEK_VIEW_DAYS);
+        //        AgendaDaysFromDisplayedSkin skin = new AgendaDaysFromDisplayedSkin(this.agenda);
+//        skin.setDaysBeforeFurthest(before);
+//        skin.setDaysAfterFurthest(after);
+//        Slider slider = (Slider) this.agenda.lookup("#daysAfterSlider");
+//        slider.setValue(DEFAULT_WEEK_VIEW_DAYS);
         this.agenda.setSkin(skin);
     }
 

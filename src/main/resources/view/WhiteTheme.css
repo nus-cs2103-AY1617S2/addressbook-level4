@@ -32,7 +32,7 @@
 
 .label-header {
     -fx-font-size: 20pt;
-    -fx-font-family: "Beon";
+    -fx-font-family: "Montserrat_Regular";
     -fx-text-fill: #000000;
     -fx-opacity: 1;
     -fx-underline: true;
@@ -118,13 +118,18 @@
 }
 
 .cell_big_label {
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
     -fx-font-size: 11px;
     -fx-text-fill: #010504;
+}
+
+.cell_small_impt_label {
+    -fx-font-size: 11px;
+    -fx-text-fill: derive(#FF7F50,100%);
 }
 
 .anchor-pane {
