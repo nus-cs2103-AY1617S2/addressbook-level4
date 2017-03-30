@@ -67,12 +67,12 @@ public class TaskBook implements ReadOnlyTaskBook {
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "AddressBooks should not have duplicate tasks";
+            assert false : "TaskBook should not have duplicate tasks";
         }
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "AddressBooks should not have duplicate tags";
+            assert false : "TaskBook should not have duplicate tags";
         }
         syncMasterTagListWith(tasks);
     }
