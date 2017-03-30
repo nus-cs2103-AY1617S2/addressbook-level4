@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
@@ -27,21 +27,24 @@
                     </padding>
 
                     <children>
-                        <HBox spacing="5" alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="title" text="\$first" styleClass="cell_big_label"/>
+                                    <Label fx:id="id" styleClass="cell_big_label" />
+                                    <Label fx:id="title" styleClass="cell_big_label" text="\$first" underline="true" wrapText="true" />
                                 </HBox>
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
-                        <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                        <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" wrapText="true" />
+                        <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" wrapText="true" />
+                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
                     </children>
                 </VBox>
             </children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
     </children>
 </HBox>

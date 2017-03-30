@@ -16,7 +16,8 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
  * Path matching is case sensitive.
  */
 public class ChangeDirectoryCommand extends Command {
-    public static final String COMMAND_WORD = "cd";
+    public static final String COMMAND_WORD = "load";
+    public static final String ALTERNATIVE_COMMAND_WORD = "cd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the directory of the taskmanager."
             + "xml file to allow user to sync with cloud services\n"

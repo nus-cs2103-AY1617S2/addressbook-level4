@@ -18,7 +18,7 @@ public class HelpWindow extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
-    private static final String TITLE = "Help";
+    private static final String TITLE = "User Guide";
     private static final String USERGUIDE_URL =
             "https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md";
 
