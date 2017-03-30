@@ -68,7 +68,7 @@ public class RenameCategoryCommand extends Command {
             return new CommandResult(EMPTY_STRING); // will never reach this statement
         } catch (DuplicateCategoryException e) {
             logger.info("User attempted to create duplicate categories. Returning user feedback");
-            return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
+            throw new CommandException(MESSAGE_DUPLICATE_CATEGORY);
         }
     }
 
