@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Task List ]===========================");
+        logger.info("=============================[ Initializing Task Manager ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
@@ -166,7 +166,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Task List ] =============================");
+        logger.info("============================ [ Stopping Task Manager ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
