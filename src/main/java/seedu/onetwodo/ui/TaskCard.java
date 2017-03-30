@@ -24,6 +24,7 @@ public class TaskCard extends UiPart<Region> {
     private static final String FXML = "TaskListCard.fxml";
     private static final String DONE_PSEUDO_CLASS = "done";
     private static final String SELECTED_PSEUDO_CLASS = "selected";
+    private static final String OVERDUE_PSEUDO_CLASS = "overdue";
     public static final String DATE_SPACING = "  -  ";
     public static final String DEADLINE_PREFIX = "by: ";
     public static final DateTimeFormatter INFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -98,16 +99,28 @@ public class TaskCard extends UiPart<Region> {
         case DEADLINE:
             LocalDateTime deadlineDateTime = task.getEndDate().getLocalDateTime();
             endDate.setText(DEADLINE_PREFIX + deadlineDateTime.format(OUTFORMATTER));
+            highlightIfOverdue(task, endDate);
             break;
         case EVENT:
             LocalDateTime eventStartDateTime = task.getStartDate().getLocalDateTime();
             LocalDateTime eventEndDateTime = task.getEndDate().getLocalDateTime();
             startDate.setText(eventStartDateTime.format(OUTFORMATTER) + DATE_SPACING);
             endDate.setText(eventEndDateTime.format(OUTFORMATTER));
+            highlightIfOverdue(task, startDate, endDate);
             break;
         case TODO:
             dateBox.getChildren().clear();
             break;
+        }
+    }
+
+    private void highlightIfOverdue(ReadOnlyTask task, Label... labels) {
+        if (!task.isOverdue()) {
+            return;
+        }
+        for (Label label : labels) {
+            PseudoClass overduePseudoClass = PseudoClass.getPseudoClass(OVERDUE_PSEUDO_CLASS);
+            label.pseudoClassStateChanged(overduePseudoClass, true);
         }
     }
 

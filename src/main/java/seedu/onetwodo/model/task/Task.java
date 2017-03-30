@@ -1,6 +1,7 @@
 package seedu.onetwodo.model.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.onetwodo.model.tag.UniqueTagList;
@@ -34,7 +35,7 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
+        // changes in the arg list
         this.isDone = false;
         checkTaskType(startDate, endDate);
         isToday(startDate, endDate);
@@ -196,6 +197,17 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
+    }
+
+    public boolean isOverdue() {
+        switch (type) {
+        case DEADLINE:
+        case EVENT:
+            return LocalDateTime.now().isAfter(endDate.getLocalDateTime());
+        default:
+        case TODO:
+            return false;
+        }
     }
 
     @Override
