@@ -40,7 +40,7 @@
 #### Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...` 
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskbook
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -90,21 +90,21 @@ Each of the four components
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/Logic_JOBS.png" width="800"><br>
 
 ##### Events-Driven nature of the design 
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800">
+<img src="images\SDforDelete_JOBS.png" width="800">
 
 >Note how the `Model` simply raises a `TaskBookChangedEvent` when the JOBS data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800">
+<img src="images\EventHandleforDelete_JOBS.png" width="800">
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct 
@@ -114,7 +114,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/UI_JOBS.png" width="800"><br>
 
 **API** : [`Ui.java`](../src/main/java/seedu/jobs/ui/Ui.java)
 
@@ -134,7 +134,7 @@ The `UI` component,
 
 ### Logic component
 
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/Logic_JOBS.png" width="800"><br>
 
 **API** : [`Logic.java`](../src/main/java/seedu/jobs/logic/Logic.java)
 
@@ -145,11 +145,11 @@ The `UI` component,
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/LogicforDelete_JOBS.png" width="800"><br>
 
 ### Model component
 
-<img src="images/ModelClassDiagram.png" width="800"><br>
+<img src="images/Model_JOBS.png" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/jobs/model/Model.java)
 
@@ -162,7 +162,7 @@ The `Model`,
 
 ### Storage component
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
+<img src="images/Storage_JOBS.png" width="800"><br>
 
 **API** : [`Storage.java`](../src/main/java/seedu/jobs/storage/Storage.java)
 
