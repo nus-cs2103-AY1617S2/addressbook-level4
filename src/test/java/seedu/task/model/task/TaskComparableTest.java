@@ -15,12 +15,12 @@ import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
 
 public class TaskComparableTest {
 
-    String description = "task description ";
-    String priority = "2";
-    String timing = "03/03/2017";
+    private String description = "task description ";
+    private String priority = "2";
+    private String timing = "03/03/2017";
 
-    String tag1 = "friendship";
-    String tag2 = "love";
+    private String tag1 = "friendship";
+    private String tag2 = "love";
 
     @Test
     public void sortDescriptions() throws IllegalValueException {
@@ -188,19 +188,19 @@ public class TaskComparableTest {
         //expect tasks to sort by complete, then priority, then description
         expected = new ArrayList<Task>(Arrays.asList(t2, t3, t5, t6, t8, t9, t1, t4, t7));
         sort_and_assertEquals(actual, expected);
-        Task t2_et = new Task(new Description(description + "b t2et"), new Priority("1"),
+        Task t2et = new Task(new Description(description + "b t2et"), new Priority("1"),
                 time, new Timing("01/01/2017"), utl, false, null);
-        Task t5_et = new Task(new Description(description + "b t5et"), new Priority("2"),
+        Task t5et = new Task(new Description(description + "b t5et"), new Priority("2"),
                 time, new Timing("01/02/2017"), utl, false, null);
-        Task t8_et = new Task(new Description(description + "b t8et"), new Priority("3"),
+        Task t8et = new Task(new Description(description + "b t8et"), new Priority("3"),
                 time, new Timing("01/03/2017"), utl, false, null);
 
-        actual.add(t2_et);
-        actual.add(t5_et);
-        actual.add(t8_et);
+        actual.add(t2et);
+        actual.add(t5et);
+        actual.add(t8et);
 
         //expect tasks to sort by complete, then end timing, priority, description
-        expected = new ArrayList<Task>(Arrays.asList(t2_et, t2, t3, t5_et, t5, t6, t8_et,
+        expected = new ArrayList<Task>(Arrays.asList(t2et, t2, t3, t5et, t5, t6, t8et,
                 t8, t9, t1, t4, t7));
         sort_and_assertEquals(actual, expected);
 
@@ -217,8 +217,9 @@ public class TaskComparableTest {
         for (Task t : al) {
             System.out.print(t.getPriority() + " " + t.getDescription() +
                     " " + t.getEndTiming());
-            if (t.isComplete())
+            if (t.isComplete()) {
                 System.out.print(" complete");
+            }
             System.out.println();
         }
         System.out.println("Ending print.");
