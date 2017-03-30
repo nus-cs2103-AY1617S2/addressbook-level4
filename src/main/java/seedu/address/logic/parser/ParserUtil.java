@@ -32,7 +32,7 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetType>[et][vs])\\s(?<targetIndex>.+)");
     private static final Pattern INDEX_ALONE_ARG_FORMAT = Pattern.compile("(?<index>.+)");
-
+    private static final Pattern CONFIG_FILEPATH_FORMAT = Pattern.compile("(?<filepath>.*)");
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -48,8 +48,25 @@ public class ParserUtil {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
-
     }
+
+    //@@author A0121668A
+    /**
+     * Returns the specified location in the {@code command}
+     * Returns an {@code Optional.empty()} otherwise
+     * @param command
+     * @return
+     */
+    public static Optional<String> parseFilePath(String command) {
+        final Matcher matcher = CONFIG_FILEPATH_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String filePath = matcher.group("filepath");
+        return Optional.of(filePath);
+    }
+
     //@@author A0110491U
     public static Optional<Integer> parseIndexAlone(String command) {
         final Matcher matcher = INDEX_ALONE_ARG_FORMAT.matcher(command.trim());
