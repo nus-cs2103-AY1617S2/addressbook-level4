@@ -80,7 +80,7 @@ public interface Model {
 	/**
 	 * Updates the filter of the filtered event list to show specified deadline
 	 */
-	void updateFilteredListToShowDeadline(Set<String> keywords)
+	void updateFilteredListToShowDeadline(Set<String> keywords);
 
 	/** Updates the filter of the filtered event list to show done tasks */
 	void updateFilteredListToShowDone(Set<String> keywords);
