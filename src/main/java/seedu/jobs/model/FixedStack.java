@@ -12,6 +12,10 @@ public class FixedStack<T> extends Stack<T> {
 
     private int maxSize = 10;
 
+    public FixedStack() {
+        super();
+    }
+
     public FixedStack(int size) {
         super();
         this.maxSize = size;
