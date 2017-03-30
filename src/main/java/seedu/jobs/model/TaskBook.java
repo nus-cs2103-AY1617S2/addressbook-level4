@@ -160,7 +160,15 @@ public class TaskBook implements ReadOnlyTaskBook {
 
 
     public boolean undoTask() throws TaskNotFoundException {
-        if (tasks.pop()) {
+        if (tasks.undo()) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+
+    public boolean redoTask() throws TaskNotFoundException {
+        if (tasks.redo()) {
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
@@ -203,5 +211,6 @@ public class TaskBook implements ReadOnlyTaskBook {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
+
 
 }

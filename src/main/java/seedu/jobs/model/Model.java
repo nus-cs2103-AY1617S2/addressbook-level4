@@ -57,5 +57,7 @@ public interface Model {
 
     void undoCommand() throws TaskNotFoundException;
 
+    void redoCommand() throws TaskNotFoundException;
+
 
 }

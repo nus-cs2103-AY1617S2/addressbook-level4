@@ -116,6 +116,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBookChanged();
     }
 
+    @Override
+    public void redoCommand() throws TaskNotFoundException {
+        taskBook.redoTask();
+        indicateTaskBookChanged();
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -167,6 +173,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
 
 
 }
