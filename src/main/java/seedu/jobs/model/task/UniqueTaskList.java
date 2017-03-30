@@ -1,6 +1,5 @@
 package seedu.jobs.model.task;
 
-import java.util.Collection;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.List;
@@ -126,13 +125,13 @@ public class UniqueTaskList implements Iterable<Task> {
      */
 
     public void undo() throws EmptyStackException {
-            ObservableList<Task> replacement = undoStack.pop();
-            ObservableList<Task> redoTemp = FXCollections.observableArrayList();
-            for (Task t : internalList) {
-                redoTemp.add(t);
-            }
-            redoStack.push(redoTemp);
-            this.internalList.setAll(replacement);
+        ObservableList<Task> replacement = undoStack.pop();
+        ObservableList<Task> redoTemp = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            redoTemp.add(t);
+        }
+        redoStack.push(redoTemp);
+        this.internalList.setAll(replacement);
     }
 
     public void redo() throws EmptyStackException {
@@ -152,13 +151,13 @@ public class UniqueTaskList implements Iterable<Task> {
             stackList.add(t);
         }
         undoStack.push(stackList);
-        
+
         this.internalList.setAll(replacement.internalList);
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        
+
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
         }
