@@ -49,7 +49,8 @@ public class TypicalTestTasks {
                     .withStartDateTime("Feb 21, 2017 1pm")
                     .withEndDateTime("Dec 10, 2017 5pm")
                     .withRecurrence(Frequency.WEEKLY)
-                    .withInformation("little tokyo").build();
+                    .withInformation("little tokyo")
+                    .withCategories("school").build();
             taskG = new TaskBuilder().withName("Game project player testing").withPriorityLevel("Yes")
                     .withStartDateTime("Jan 1, 2017 5pm")
                     .withEndDateTime("Nov 28, 2017 5pm")
