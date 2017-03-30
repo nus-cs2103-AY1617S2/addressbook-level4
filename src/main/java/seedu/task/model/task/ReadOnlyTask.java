@@ -47,7 +47,7 @@ public interface ReadOnlyTask {
 			&& other.getTaskDescription().equals(this.getTaskDescription()) && other.getTaskStatus() != null
 			&& other.getTaskStatus().equals(this.getTaskStatus());
     }
-
+//@@author A0146757R
     /**
      * Formats the task as text, showing all task details.
      */
@@ -60,5 +60,5 @@ public interface ReadOnlyTask {
 	getTags().forEach(builder::append);
 	return builder.toString();
     }
-
+//@@author
 }
