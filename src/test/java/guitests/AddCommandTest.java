@@ -15,38 +15,38 @@ public class AddCommandTest extends TodoListGuiTest {
     @Test
     public void add() {
         //add one task
-        TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.hangclothes;
+        TestTask[] currentList = td.getUndoneTasks();
+        TestTask taskToAdd = td.interviewprep;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
-        taskToAdd = td.interviewprep;
+        taskToAdd = td.submitreport;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
-        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
+        commandBox.runCommand(td.submitreport.getAddCommand("add "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate task
-        commandBox.runCommand(td.hangclothes.getAddCommand("adds "));
+        commandBox.runCommand(td.submitreport.getAddCommand("adds "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate task with "a" command
-        commandBox.runCommand(td.hangclothes.getAddCommand("a "));
+        commandBox.runCommand(td.submitreport.getAddCommand("a "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate task with "new" command
-        commandBox.runCommand(td.hangclothes.getAddCommand("new "));
+        commandBox.runCommand(td.submitreport.getAddCommand("new "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate task with "create" command
-        commandBox.runCommand(td.hangclothes.getAddCommand("create "));
+        commandBox.runCommand(td.submitreport.getAddCommand("create "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 

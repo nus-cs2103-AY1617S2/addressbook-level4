@@ -21,7 +21,7 @@ public class ShowCommand extends Command {
     public ShowCommand(Set<String> keywords) {
         this.keywords = keywords;
         if (this.keywords.contains("undone")) {
-            keywords.add("float");
+            keywords.add("empty");
         }
     }
 

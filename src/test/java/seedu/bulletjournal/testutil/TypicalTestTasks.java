@@ -11,7 +11,7 @@ import seedu.bulletjournal.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask assignment, buymilk, creatework, dumpmilk, eatleftovers, findsocks, getclothes, hangclothes,
-            interviewprep;
+            interviewprep, submitreport;
 
     public TypicalTestTasks() {
         try {
@@ -36,6 +36,8 @@ public class TypicalTestTasks {
                     .withStatus("done").withBeginDate("little india").build();
             interviewprep = new TaskBuilder().withTaskName("Interview preparation").withDueDate("8482131")
                     .withStatus("undone").withBeginDate("chicago ave").build();
+            submitreport = new TaskBuilder().withTaskName("Submit FYP report").withDueDate("the sooner the better")
+                    .withStatus("undone").withBeginDate("before deadline").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -54,6 +56,11 @@ public class TypicalTestTasks {
 
     public TestTask[] getTypicalTasks() {
         return new TestTask[] { assignment, buymilk, creatework, dumpmilk, eatleftovers, findsocks, getclothes };
+    }
+    
+    //@@author A0105748B
+    public TestTask[] getUndoneTasks() {
+        return new TestTask[] { assignment, dumpmilk, findsocks, getclothes };
     }
 
     public TodoList getTypicalTodoList() {

@@ -21,7 +21,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedTasksList = td.getTypicalTasks();
+    TestTask[] expectedTasksList = td.getUndoneTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
@@ -59,14 +59,14 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Eat");
+        commandBox.runCommand("find socks");
 
-        String detailsToEdit = "Burn leftovers";
+        String detailsToEdit = "Burn socks";
         int filteredTaskListIndex = 1;
-        int addressBookIndex = 5;
+        int addressBookIndex = 3;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTaskName("Burn leftovers").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTaskName("Burn socks").build();
 
         assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
     }

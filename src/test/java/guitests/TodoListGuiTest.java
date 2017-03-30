@@ -30,7 +30,7 @@ import seedu.bulletjournal.testutil.TestUtil;
 import seedu.bulletjournal.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for BulletJournal.
  */
 public abstract class TodoListGuiTest {
 

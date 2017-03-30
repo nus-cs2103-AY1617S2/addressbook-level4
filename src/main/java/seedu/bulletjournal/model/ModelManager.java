@@ -95,7 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getUndoneTaskList() {
         String[] keywords = new String[2];
         keywords[0] = "undone";
-        keywords[1] = "float";
+        keywords[1] = "empty";
         Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         updateMatchedTaskList(keywordSet);
         return new UnmodifiableObservableList<>(filteredTasks);
@@ -105,7 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowUndone() {
         String[] keywords = new String[2];
         keywords[0] = "undone";
-        keywords[1] = "float";
+        keywords[1] = "empty";
         Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         updateMatchedTaskList(keywordSet);
     }
@@ -196,7 +196,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return statusKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStatus() == null ?
-                            "float" : task.getStatus().value, keyword))
+                            "empty" : task.getStatus().value, keyword))
                     .findAny()
                     .isPresent();
         }
