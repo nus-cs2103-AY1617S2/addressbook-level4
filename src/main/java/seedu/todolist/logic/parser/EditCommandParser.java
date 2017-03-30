@@ -52,11 +52,14 @@ public class EditCommandParser {
             if (!index.isPresent()) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-
+            isTimeValid(startTime);
+            isTimeValid(endTime);
             if (startTime.isPresent() && endTime.isPresent()) { //for event
                 setEditTodoDescriptroForEvent(editTodoDescriptor, startTime, endTime);
             } else if (endTime.isPresent() && !startTime.isPresent()) { //for deadLine
                 setEditTodoDescriptroForDeadLine(editTodoDescriptor, endTime);
+            } else if (startTime.isPresent() && !endTime.isPresent()) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
 
             editTodoDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
@@ -77,8 +80,9 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        } catch (ParseException pe) {
+            return new IncorrectCommand(pe.getMessage());
         }
-
     }
     private void setEditTodoDescriptroForEvent(EditTodoDescriptor editTodoDescriptor,
             Optional<String> startTime, Optional<String> endTime) {
@@ -132,6 +136,17 @@ public class EditCommandParser {
         DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
         dateFormat.format(dt);
         return dt;
+    }
+
+    private void isTimeValid (Optional<String> time) throws ParseException {
+        if (!time.equals(Optional.empty()) && !time.get().equals("")) {
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+                dateFormat.parse(time.get());
+            } catch (ParseException e) {
+                throw new ParseException(AddCommand.MESSAGE_INVALID_TIME, 0);
+            }
+        }
     }
     //@@author
     /**

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-
 import seedu.todolist.commons.core.Messages;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.logic.commands.exceptions.CommandException;
@@ -95,6 +94,7 @@ public class EditCommand extends Command {
         }
     }
     //@@author
+
     /**
      * Stores the details to edit the todo with. Each non-empty field value will replace the
      * corresponding field value of the todo.

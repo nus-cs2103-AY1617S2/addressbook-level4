@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import guitests.guihandles.TodoCardHandle;
 import seedu.todolist.commons.core.Messages;
+import seedu.todolist.logic.commands.AddCommand;
 import seedu.todolist.logic.commands.EditCommand;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.todo.Name;
@@ -134,7 +135,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void editDeadLineToTaskSuccess() throws Exception {
-        String detailsToEdit = "Bobby  t/husband";
+        String detailsToEdit = " Bobby t/husband";
         int todoListIndex = 8;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
@@ -262,6 +263,12 @@ public class EditCommandTest extends TodoListGuiTest {
     public void edit_duplicateTodo_failure() {
         commandBox.runCommand("edit 2 Walk the dog t/petcare");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TODO);
+    }
+
+    @Test
+    public void editWithInvalidValuefailure() {
+        commandBox.runCommand("edit 1 Walk the dog s/12 e/12");
+        assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
     }
 
     /**
