@@ -44,7 +44,7 @@ public class FindCommandParser {
      * Method to separate keywords by whitespace or double inverted commas
      * Assume only 1 set of wrapped keywords are allowed.
      * @param matcher
-     * @return String[] keywords of 
+     * @return String[] keywords of
      */
     private String[] parseKeywords(String str){
     	String[] keywords = {"keyword"}; //will eventually be overridden
@@ -72,10 +72,10 @@ public class FindCommandParser {
     	}
     	return keywords;
     }
-    
+
   //@@author A0097141H
     /**
-     * returns indexes of occurrences of '\"' 
+     * returns indexes of occurrences of '\"'
      * @param str
      * @return int[] {openInvCommaIndex,closeInvCommaIndex,invCommaCount}
      * invCommaCount not in use for now, but future releases maybe
@@ -87,7 +87,7 @@ public class FindCommandParser {
         int idxOpenInvComma = 0;
         int idxCloseInvComma = 0;
         boolean foundInvComma = false;
-        
+
         for (int i=0;i<str.length();i++){
         	if (str.charAt(i) == '\"'){
         		if(!foundInvComma){
@@ -105,7 +105,7 @@ public class FindCommandParser {
     	idx[1] = idxCloseInvComma;
     	return idx;
     }
-    
+
   //@@author A0097141H
     /**
      * simple method to return a String[] array based on 2 String[] arrays

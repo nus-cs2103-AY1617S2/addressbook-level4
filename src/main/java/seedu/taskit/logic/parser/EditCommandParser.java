@@ -76,13 +76,13 @@ public class EditCommandParser {
         }catch (IllegalValueException ive) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-        
+
         if (!editTaskDescriptor.isAnyFieldEdited()) {
                return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
             }
         return new EditCommand(index.get(), editTaskDescriptor);
     }
-    
+
     private Collection<String> separateTags(Optional<String> updateInformation) {
         List<String> separatedTags = Arrays.asList(updateInformation.get().split("s//+"));
         return separatedTags;
