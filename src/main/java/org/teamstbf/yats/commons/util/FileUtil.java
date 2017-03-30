@@ -79,7 +79,7 @@ public class FileUtil {
 
     /**
      * Converts a string to a platform-specific file path
-     * 
+     *
      * @param pathWithForwardSlash
      *            A String representing a file path but using '/' as the
      *            separator

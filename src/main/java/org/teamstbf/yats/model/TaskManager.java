@@ -106,7 +106,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Updates the person in the list at position {@code index} with
      * {@code editedReadOnlyPerson}. {@code AddressBook}'s tag list will be
      * updated with the tags of {@code editedReadOnlyPerson}.
-     * 
+     *
      * @see #syncMasterTagListWith(Task)
      *
      * @throws DuplicateEventException
@@ -152,7 +152,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Ensures that every tag in these persons: - exists in the master list
      * {@link #tags} - points to a Tag object in the master list
-     * 
+     *
      * @see #syncMasterTagListWith(Task)
      */
     private void syncMasterTagListWith(UniqueEventList persons) {

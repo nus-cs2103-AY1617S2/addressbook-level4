@@ -19,7 +19,7 @@ public interface TaskManagerStorage {
     /**
      * Returns AddressBook data as a {@link ReadOnlyTaskManager}. Returns
      * {@code Optional.empty()} if storage file is not found.
-     * 
+     *
      * @throws DataConversionException
      *             if the data in storage is not in the expected format.
      * @throws IOException
@@ -34,7 +34,7 @@ public interface TaskManagerStorage {
 
     /**
      * Saves the given {@link ReadOnlyTaskManager} to the storage.
-     * 
+     *
      * @param addressBook
      *            cannot be null.
      * @throws IOException
