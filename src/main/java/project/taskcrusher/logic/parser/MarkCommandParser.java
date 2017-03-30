@@ -10,7 +10,7 @@ import project.taskcrusher.logic.commands.MarkCommand;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.task.Task;
 
-//@@author Anshul
+//@@author A0163639W
 /**
  * Parser for mark command. If successful, parses flag, index and mark-mode (c or ic)
  */
