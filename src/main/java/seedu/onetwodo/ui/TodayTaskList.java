@@ -22,6 +22,8 @@ public class TodayTaskList extends UiPart<Region> {
 
     // For tests robot.lookup(#{ID})
     public static final String TODAY_PANEL_ID = "today-panel";
+
+    FilteredList<ReadOnlyTask> list;
     boolean isEmpty = false;
 
     @FXML
@@ -30,19 +32,24 @@ public class TodayTaskList extends UiPart<Region> {
     public TodayTaskList(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         taskListView.setId(TODAY_PANEL_ID);
-        setConnections(taskList);
+        list = getFilteredTasks(taskList);
+        checkListEmpty(list);
+        setConnections(list);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        taskListView.setItems(getFilteredTasks(taskList));
+    private void checkListEmpty(FilteredList<ReadOnlyTask> list) {
+        if (list.isEmpty()) {
+            isEmpty = true;
+        }
+    }
+
+    private void setConnections(FilteredList<ReadOnlyTask> list) {
+        taskListView.setItems(list);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }
 
     private FilteredList<ReadOnlyTask> getFilteredTasks(ObservableList<ReadOnlyTask> taskList) {
-        if (taskList.isEmpty()) {
-            isEmpty = true;
-        }
         return new FilteredList<ReadOnlyTask>(taskList, t -> t.getTodayStatus() == true);
     }
 

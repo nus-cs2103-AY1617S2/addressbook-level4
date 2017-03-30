@@ -11,6 +11,7 @@ public class WelcomeWindow extends UiPart<Region> {
 
     private static final String FXML = "WelcomeWindow.fxml";
     public static final String WELCOME = "Hey there! Here are your tasks for the day!";
+    public static final String DEFAULT = "Hurray! You have no tasks for the day!";
 
     public TodayTaskList todayTaskListPanel;
     public Logic logic;
