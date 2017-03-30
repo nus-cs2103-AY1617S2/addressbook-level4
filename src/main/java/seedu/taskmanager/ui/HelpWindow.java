@@ -29,6 +29,7 @@ public class HelpWindow extends UiPart<Region> {
     private WebView browser;
 
     private final Stage dialogStage;
+
     
     public HelpWindow() {
     	super(FXML);
