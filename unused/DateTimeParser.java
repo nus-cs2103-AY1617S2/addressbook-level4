@@ -17,9 +17,9 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.task.DateTime;
 
 // @@author A0143076J-unused
-//meant to allow user to add events in the format from/friday 1pm to/ 4pm where the endDate is captured as 
+//meant to allow user to add events in the format from/friday 1pm to/ 4pm where the endDate is captured as
 //friday 4pm rather than current one of today 4pm, and thus throwing an exception warning that end date cannot
-//be earlier than startDate. However, decided to do away with this as the format becomes rather messy and 
+//be earlier than startDate. However, decided to do away with this as the format becomes rather messy and
 //also code feels messier due to the way natty was implemented. ie. this addition enhancement not very value-adding.
 /**
  * Parses out the startDate and endDate, and determines the corresponding
