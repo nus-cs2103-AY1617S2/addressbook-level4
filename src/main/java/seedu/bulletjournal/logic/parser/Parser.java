@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.bulletjournal.logic.commands.AddCommand;
+import seedu.bulletjournal.logic.commands.ChangePathCommand;
 import seedu.bulletjournal.logic.commands.ClearCommand;
 import seedu.bulletjournal.logic.commands.Command;
 import seedu.bulletjournal.logic.commands.DeleteCommand;
@@ -76,6 +77,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ChangePathCommand.COMMAND_WORD:
+            return new ChangePathCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
