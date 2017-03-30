@@ -28,6 +28,6 @@ document.getElementById("title").innerHTML = "[OffDoc]: " + mdfile;
 $.get(mdfile, function(bodydata) {
   $.get(navbar, function(navdata) {
     document.getElementById("body").innerHTML = bodydata + "\n\n---\n\n### [Navigation]:\n" + navdata;
-    $.getScript(".offdoc/strapdown.js", function(){}); // Execute strapdown.js
+    $.getScript("offdoc/strapdown.js", function(){}); // Execute strapdown.js
   }, 'text');
 }, 'text');
