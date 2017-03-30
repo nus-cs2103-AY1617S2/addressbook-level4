@@ -121,7 +121,10 @@ public class MainWindow extends UiPart<Region> {
     }
 
     //@@author A0105748B
-    void fillInnerPartsAtStart() {
+    /**
+     * Decides what to show on main window when the application initializes.
+     */
+    public void fillInnerPartsAtStart() {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getUndoneTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
