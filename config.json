@@ -1,0 +1,7 @@
+{
+  "appTitle" : "TaskIt",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json",
+  "taskManagerFilePath" : "data/taskmanager.xml",
+  "taskManagerName" : "TaskIt"
+}
