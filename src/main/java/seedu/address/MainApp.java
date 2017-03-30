@@ -20,6 +20,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.ReadCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -70,6 +71,8 @@ public class MainApp extends Application {
 
         SaveCommand.setStorage(storage);
         SaveCommand.setConfig(config);
+        ReadCommand.setStorage(storage);
+        ReadCommand.setConfig(config);
     }
 
     private String getApplicationParameter(String parameterName) {
