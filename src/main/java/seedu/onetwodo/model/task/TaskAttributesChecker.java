@@ -17,6 +17,8 @@ public class TaskAttributesChecker {
     public static final String MESSAGE_INVALID_START = "Start time needs to be later than current time.";
     public static final String MESSAGE_INVALID_END = "End time needs to be later than current time.";
     public static final String MESSAGE_INVALID_EVENT = "End time needs to be later than start time.";
+    public static final String MESSAGE_INVALID_RECUR = "Task without date cannot be recurring";
+
 
     public static void checkValidAttributes(Task taskUnderTest, LocalDateTime dateCreated)
             throws IllegalValueException {
@@ -24,6 +26,7 @@ public class TaskAttributesChecker {
         checkIsValidStartDate(taskUnderTest, dateCreated);
         checkIsValidEndDate(taskUnderTest, dateCreated);
         checkIsValidEvent(taskUnderTest);
+        checkIsValidRecur(taskUnderTest);
     }
 
     private static void checkIsValidTodo(Task taskUnderTest) throws IllegalValueException {
@@ -94,6 +97,16 @@ public class TaskAttributesChecker {
             if (startDate.hasDate() || endDate.hasDate()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MESSAGE_MISSING_DATE) + AddCommand.MESSAGE_USAGE);
+            }
+        }
+    }
+
+    //@@author A0139343E
+    private static void checkIsValidRecur(Task taskUnderTest) throws IllegalValueException {
+        if (!taskUnderTest.getStartDate().hasDate() && !taskUnderTest.getEndDate().hasDate()) {
+            if (taskUnderTest.hasRecur()) {
+                throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_INVALID_RECUR) + AddCommand.MESSAGE_USAGE);
             }
         }
     }

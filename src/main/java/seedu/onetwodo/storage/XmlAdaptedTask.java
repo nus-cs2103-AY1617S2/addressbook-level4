@@ -13,6 +13,7 @@ import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Recurring;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
 
@@ -27,6 +28,8 @@ public class XmlAdaptedTask {
     private String startDate;
     @XmlElement(required = true)
     private String endDate;
+    @XmlElement(required = true)
+    private String recur;
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
@@ -55,6 +58,7 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         startDate = source.getStartDate().value;
         endDate = source.getEndDate().value;
+        recur = source.getRecur().value;
         priority = source.getPriority().value;
         description = source.getDescription().value;
         isDone = String.valueOf(source.getDoneStatus());
@@ -80,10 +84,12 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final StartDate startDate = new StartDate(this.startDate);
         final EndDate endDate = new EndDate(this.endDate);
+        final Recurring recur = new Recurring(this.recur);
         final Priority priority = new Priority(this.priority);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        Task task = new Task(name, startDate, endDate, priority, description, tags, Boolean.valueOf(this.isDone));
+        Task task = new Task(name, startDate, endDate, recur, priority, description,
+                tags, Boolean.valueOf(this.isDone));
         return task;
     }
 }

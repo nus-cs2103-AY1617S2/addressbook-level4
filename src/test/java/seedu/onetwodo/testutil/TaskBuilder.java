@@ -7,6 +7,7 @@ import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.Priority;
+import seedu.onetwodo.model.task.Recurring;
 import seedu.onetwodo.model.task.StartDate;
 
 /**
@@ -42,6 +43,16 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder withRecurring(String recur) throws IllegalValueException {
+        this.task.setRecur(new Recurring(recur));
+        return this;
+    }
+
+    public TaskBuilder withPriority(char c) throws IllegalValueException {
+        this.task.setPriority(new Priority(String.valueOf(c)));
+        return this;
+    }
+
     public TaskBuilder withDescription(String description) throws IllegalValueException {
         this.task.setDescription(new Description(description));
         return this;
@@ -58,11 +69,6 @@ public class TaskBuilder {
     public TestTask build() {
         this.task.initTaskType();
         return this.task;
-    }
-
-    public TaskBuilder withPriority(char c) throws IllegalValueException {
-        this.task.setPriority(new Priority(String.valueOf(c)));
-        return this;
     }
 
 }

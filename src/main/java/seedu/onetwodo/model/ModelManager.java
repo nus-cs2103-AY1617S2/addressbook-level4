@@ -110,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @Override
     public synchronized void todayTask(ReadOnlyTask taskForToday) throws IllegalValueException {
         if (taskForToday.getTodayStatus() == false) {
@@ -122,6 +122,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    //@@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
@@ -410,5 +411,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", keyWords);
         }
     }
+    //@@author
 
 }

@@ -7,6 +7,7 @@ import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Recurring;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.TaskType;
 
@@ -17,8 +18,9 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Description description;
-    private EndDate endDate;
     private StartDate startDate;
+    private EndDate endDate;
+    private Recurring recur;
     private Priority priority;
     private boolean isDone = false;
     private boolean isToday = false;
@@ -37,6 +39,7 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.startDate = taskToCopy.getStartDate();
         this.endDate = taskToCopy.getEndDate();
+        this.recur = taskToCopy.getRecur();
         this.priority = taskToCopy.getPriority();
         this.description = taskToCopy.getDescription();
         this.isDone = taskToCopy.getDoneStatus();
@@ -68,6 +71,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public EndDate getEndDate() {
         return endDate;
+    }
+
+    @Override
+    public Recurring getRecur() {
+        return recur;
     }
 
     @Override
@@ -113,6 +121,10 @@ public class TestTask implements ReadOnlyTask {
         this.endDate = endDate;
     }
 
+    public void setRecur(Recurring recur) {
+        this.recur = recur;
+    }
+
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
@@ -146,6 +158,9 @@ public class TestTask implements ReadOnlyTask {
         }
         if (this.hasEndDate()) {
             sb.append("e/" + this.getEndDate().value + " ");
+        }
+        if (this.hasRecur()) {
+            sb.append("r/" + this.getRecur().value + " ");
         }
         if (this.hasPriority()) {
             sb.append("p/" + this.getPriority().value + " ");

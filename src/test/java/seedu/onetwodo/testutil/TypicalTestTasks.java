@@ -19,6 +19,7 @@ public class TypicalTestTasks {
             // Event with all info
             taskA = new TaskBuilder().withName("guard duty")
                     .withStartDate("15/12/2018 7am").withEndDate("16/12/2018 11pm")
+                    .withRecurring("monthly")
                     .withDescription("bring weapon")
                     .withTags("army", "work")
                     .withPriority('l')
@@ -26,6 +27,7 @@ public class TypicalTestTasks {
             // Event with some missing info
             taskB = new TaskBuilder().withName("study at home")
                     .withStartDate("10 Mar 2018").withEndDate("13 mar 2018")
+                    .withRecurring("weekly")
                     .withDescription("")
                     .withTags("work", "school")
                     .withPriority('l')
@@ -33,12 +35,14 @@ public class TypicalTestTasks {
             // Event with many missing info
             taskC = new TaskBuilder().withName("meet boss")
                     .withStartDate("10 Mar 2018 08:00").withEndDate("10 mar 2018 12:00")
+                    .withRecurring("")
                     .withDescription("")
                     .withPriority('h')
                     .build();
             // Deadline with all date info
             taskD = new TaskBuilder().withName("submit cs2101 reflection")
                     .withStartDate("").withEndDate("13-05-2018 23:30")
+                    .withRecurring("")
                     .withDescription("use the 7 C")
                     .withTags("school")
                     .withPriority('l')
@@ -46,6 +50,7 @@ public class TypicalTestTasks {
             // Deadline with no time
             taskE = new TaskBuilder().withName("complete 2103 tutorial")
                     .withStartDate("").withEndDate("tomorrow")
+                    .withRecurring("weekly")
                     .withDescription("bring laptop")
                     .withTags("school", "favourite")
                     .withPriority('l')
@@ -53,12 +58,14 @@ public class TypicalTestTasks {
             // Deadline with many missing info
             taskF = new TaskBuilder().withName("finish assignments")
                     .withStartDate("").withEndDate("11pm")
+                    .withRecurring("monthly")
                     .withDescription("")
                     .withPriority('l')
                     .build();
             // To-do with all info
             taskG = new TaskBuilder().withName("buy new bag")
                     .withStartDate("").withEndDate("")
+                    .withRecurring("")
                     .withDescription("find cheap ones")
                     .withTags("shopping", "favourite", "hobby")
                     .withPriority('l')
@@ -66,6 +73,7 @@ public class TypicalTestTasks {
             // To-do with some missing info
             taskH = new TaskBuilder().withName("change shirt")
                     .withStartDate("").withEndDate("")
+                    .withRecurring("")
                     .withDescription("")
                     .withTags("habit", "favourite", "hobby")
                     .withPriority('l')
@@ -73,6 +81,7 @@ public class TypicalTestTasks {
             // To-do with many missing info
             taskI = new TaskBuilder().withName("change pants")
                     .withStartDate("").withEndDate("")
+                    .withRecurring("")
                     .withDescription("")
                     .withPriority('l')
                     .build();
@@ -81,18 +90,21 @@ public class TypicalTestTasks {
             // Manually added
             task1 = new TaskBuilder().withName("stay over boss house")
                     .withStartDate("tomorrow 11am").withEndDate("tomorrow 2359")
+                    .withRecurring("weekly")
                     .withDescription("prepare to get scolded")
                     .withTags("work")
                     .withPriority('m')
                     .build();
             task2 = new TaskBuilder().withName("do boss evaluation")
                     .withStartDate("").withEndDate("16 july 2018 10:00")
+                    .withRecurring("")
                     .withDescription("grade him 10/10")
                     .withTags("work", "school")
                     .withPriority('h')
                     .build();
             task3 = new TaskBuilder().withName("reply boss email")
                     .withStartDate("").withEndDate("")
+                    .withRecurring("")
                     .withDescription("")
                     .withPriority('l')
                     .build();
