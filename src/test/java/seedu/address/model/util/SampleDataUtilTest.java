@@ -8,20 +8,21 @@ import org.junit.Test;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.task.Task;
 
+
 public class SampleDataUtilTest {
 
     @Test
     public void getSampleTasksTest() {
         Task[] sampleTasks = SampleDataUtil.getSampleTasks();
         assertNotNull(sampleTasks);
-        assertTrue(sampleTasks.length == 50);
+        assertTrue(sampleTasks.length == SampleDataUtil.SAMPLE_TASKS_LENGTH);
     }
 
     @Test
     public void getSampleAddressBookTest() {
         ReadOnlyAddressBook sampleAB = SampleDataUtil.getSampleAddressBook();
         assertNotNull(sampleAB);
-        assertTrue(sampleAB.getTaskList().size() == 50);
+        assertTrue(sampleAB.getTaskList().size() == SampleDataUtil.SAMPLE_TASKS_LENGTH);
     }
 
 }

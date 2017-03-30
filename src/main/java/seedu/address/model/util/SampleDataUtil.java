@@ -13,6 +13,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
 
+    public static final int SAMPLE_TASKS_LENGTH = 50;
     private static String[] sampleItems = new String[] {"apples", "bananas", "coconuts", "durians",
         "elderberries", "figs", "grapes", "honeydews", "imbes", "jackfruits", "kiwis", "lemons",
         "mangoes", "nectarines", "oranges", "pineapples", "quinces", "rambutans", "strawberries",
@@ -30,9 +31,8 @@ public class SampleDataUtil {
     private static String[] samplePriorities = new String[] {"1", "2", "3", "4", "5", "-1"};
 
     public static Task[] getSampleTasks() {
-        int numberOfTasks = 50;
-        Task[] sampleTasks = new Task[numberOfTasks];
-        for (int i = 0; i < numberOfTasks; i++) {
+        Task[] sampleTasks = new Task[SAMPLE_TASKS_LENGTH];
+        for (int i = 0; i < SAMPLE_TASKS_LENGTH; i++) {
             try {
                 int itemIndex = i % sampleItems.length;
                 int verbIndex = i % sampleVerbs.length;
