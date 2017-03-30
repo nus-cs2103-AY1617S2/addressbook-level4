@@ -328,7 +328,31 @@
 
 .list-cell:filled:selected:focused {
     -fx-background-color: #b7b7b7;
+    -fx-blend-mode: hard-light;
     -fx-text-fill: white;
+}
+
+
+.list-view .scroll-bar:vertical {
+	-fx-background-color: transparent;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+	-fx-background-color: transparent;
+}
+
+.list-view .scroll-bar:vertical .thumb:hover {
+	-fx-background-color: black;
+	-fx-blend-mode: soft-light;
+}
+
+
+
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
 }
 
 .text-area {
@@ -369,6 +393,7 @@
 }
 .titled-pane .title:hover {
     -fx-background-color: #b7b7b7;
+    -fx-blend-mode: hard-light;
 }
 .titled-pane .title:pressed {
     -fx-background-color: #DDDDDD;

@@ -27,6 +27,8 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane recurringTag;
+    @FXML
+    private FlowPane eventTag;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -40,11 +42,19 @@ public class TaskCard extends UiPart<Region> {
         if(task.getDeadline().isRecurring()) {
             initRecurTag();
         }
+        /*if(task.getDeadline().isFromTo()) {
+            initEventTag();
+        }*/
+    }
+
+    private void initEventTag() {
+        recurringTag.getChildren().add(new Label("Event"));
+        
     }
 
     private void initRecurTag() {
         //recurringTag.getChildren().add(new Label("Recurring"));
-        recurringTag.setStyle("-fx-background-color: #ff884c; -fx-blend-mode: multipy;");
+        recurringTag.setStyle("-fx-background-color: #ff884c;");
         //recurringTag.setStyle("-fx-background-blend-mode: multiply;");
         
     }
