@@ -58,6 +58,8 @@ public class EditCommandParser {
                 setEditTodoDescriptroForEvent(editTodoDescriptor, startTime, endTime);
             } else if (endTime.isPresent() && !startTime.isPresent()) { //for deadLine
                 setEditTodoDescriptroForDeadLine(editTodoDescriptor, endTime);
+            } else if (startTime.isPresent() && !endTime.isPresent()) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
 
             editTodoDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));

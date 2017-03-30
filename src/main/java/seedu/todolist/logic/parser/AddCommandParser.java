@@ -12,11 +12,11 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
-import seedu.todolist.model.todo.Name;
+
 import seedu.todolist.logic.commands.AddCommand;
 import seedu.todolist.logic.commands.Command;
+import seedu.todolist.logic.commands.EditCommand;
 import seedu.todolist.logic.commands.IncorrectCommand;
-
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -45,12 +45,14 @@ public class AddCommandParser {
                         endTime,
                         ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
                 );
-            } else if (endTime.isPresent() && !startTime.isPresent()) {
+            } else if (!startTime.isPresent() && endTime.isPresent()) {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         endTime,
                         ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
                 );
+            } else if (startTime.isPresent() && !endTime.isPresent()) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             } else {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),

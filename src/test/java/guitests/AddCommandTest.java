@@ -69,15 +69,22 @@ public class AddCommandTest extends TodoListGuiTest {
         try {
             Set<String> str = new HashSet<String>();
             AddCommand addComand = new AddCommand("testGetTime", str);
+
             TestTodo[] currentList = td.getTypicalTodos();
+
             TestTodo eventToAdd = new TodoBuilder().withName("DefaultEvent").
                     withStartTime(getTodaytoString(addComand.getToday())).
                     withEndTime(getTomorrowtoString(addComand.getTomorrow())).build();
+
             assertAddSuccess(eventToAdd, currentList);
+
             commandBox.runCommand("undo");
+
             TestTodo deadLineToAdd = new TodoBuilder().withName("DefaultDeadLine").
                     withEndTime(getTomorrowtoString(addComand.getTomorrow())).build();
+
             assertAddSuccess(deadLineToAdd, currentList);
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : " get time fail";
@@ -88,6 +95,9 @@ public class AddCommandTest extends TodoListGuiTest {
     public void invalidDateTimeInputTest() {
         commandBox.runCommand("add invalidDateTimeInput s/11");
         assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
+
+        commandBox.runCommand("adds Johonny s/");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     private void assertAddSuccess(TestTodo todoToAdd, TestTodo... currentList) {
