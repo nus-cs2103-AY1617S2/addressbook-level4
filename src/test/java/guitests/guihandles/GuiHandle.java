@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import guitests.GuiRobot;
@@ -72,6 +73,14 @@ public class GuiHandle {
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {
         return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
+    }
+
+    public Node getNodeWithID(String nodeId) {
+        return guiRobot.lookup(nodeId).query();
+    }
+
+    public Set<Node> getSetNodesWithID(String nodeId) {
+        return guiRobot.lookup(nodeId).queryAll();
     }
 
     public void focusOnSelf() {
