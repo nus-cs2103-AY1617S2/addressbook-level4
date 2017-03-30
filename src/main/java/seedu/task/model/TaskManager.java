@@ -15,6 +15,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.TaskTimeComparable;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
@@ -207,6 +208,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 	// your own
     	return Objects.hash(tasks);
     }
+    //@@author A0163845X
     public void undo() throws Exception {
     	if (backupTasks == null) {
     		throw new Exception("Can't undo without undo state");
@@ -218,6 +220,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     		backupTasks = null;
     	}
     }
+    //@@author A0163845X
     public void updateBackup() throws DuplicateTaskException {
     	if (backupTasks != null) {
     		backupTasks.clear();
@@ -230,38 +233,15 @@ public class TaskManager implements ReadOnlyTaskManager {
     	}
     }
 
-	public void sortTasksByTime() {
+    //@@author A0163845X
+	public void sort(TaskComparable comparator) {
 		List<Task> taskList = new ArrayList<Task>();
 		for (Task t : tasks) {
 			taskList.add(t);
 		}
 		for (int i = 0; i < taskList.size() - 1; i++) {
 			for (int j = i; j < taskList.size(); j++) {
-				if (new TaskTimeComparable(taskList.get(i)).compareTo(new TaskTimeComparable(taskList.get(j))) > 0) {
-					Task temp = taskList.get(i);
-					taskList.set(i, taskList.get(j));
-					taskList.set(j, temp);
-				}
-			}
-		}
-		tasks.clear();
-		for (Task t : taskList) {
-			try {
-				tasks.add(t);
-			} catch (DuplicateTaskException dte) {
-				System.out.println("Unexpected error in TASKMANAGER sort by name");
-			}
-		}
-	}
-
-	public void sortTasksByName() {
-		List<Task> taskList = new ArrayList<Task>();
-		for (Task t : tasks) {
-			taskList.add(t);
-		}
-		for (int i = 0; i < taskList.size() - 1; i++) {
-			for (int j = i; j < taskList.size(); j++) {
-				if (taskList.get(i).getTaskName().compareTo(taskList.get(j).getTaskName()) > 0) {
+				if (comparator.compareTo(taskList.get(i), taskList.get(j)) > 0) {
 					Task temp = taskList.get(i);
 					taskList.set(i, taskList.get(j));
 					taskList.set(j, temp);

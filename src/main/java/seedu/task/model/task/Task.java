@@ -20,6 +20,8 @@ public class Task implements ReadOnlyTask {
     private TaskTime taskEndTime;
     private String taskDescription;
     private TaskStatus taskStatus;
+    private LocalDate localDate;
+    private LocalTime localTime;
     // private TaskPath taskPath;
 
     public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time.";
@@ -40,6 +42,7 @@ public class Task implements ReadOnlyTask {
 	this.taskStatus = taskStatus;
 	this.tags = new UniqueTagList(tags); // protect internal tags from
 					     // changes in the arg list
+	setCreationTime();
     }
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
@@ -222,5 +225,24 @@ public class Task implements ReadOnlyTask {
 	} else {
 	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
 	}
+    }
+    //@@author A0163845X
+    public void setCreationTime() {
+    	localDate = LocalDate.now();
+    	localTime = LocalTime.now();
+    }
+    //@@author A0163845X
+    public LocalDate getLocalDate() {
+    	if (localDate == null) {
+    		setCreationTime();
+    	}
+    	return localDate;
+    }
+    //@@author A0163845X
+    public LocalTime getLocalTime() {
+    	if (localTime == null) {
+    		setCreationTime();
+    	}
+    	return localTime;
     }
 }

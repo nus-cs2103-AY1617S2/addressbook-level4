@@ -188,7 +188,7 @@ public class MainApp extends Application {
     	logger.info(LogsCenter.getEventHandlingLogMessage(event));
     	this.stop();
     }
-    
+    //@@author A0163845X
     @Subscribe
     public void handleChangePathNameEvent(ChangePathNameEvent event) {
     	System.out.println("working");

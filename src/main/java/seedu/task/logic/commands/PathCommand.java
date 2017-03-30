@@ -14,7 +14,7 @@ public class PathCommand extends Command {
 	public static final String COMMAND_WORD = "path";
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": changes the path of the save location for "
 		    + "task manager data \n" + "Parameters: PATHNAME\n" + "Example: " 
-			+ COMMAND_WORD + " C:\\Program Files\\DropBox";
+			+ COMMAND_WORD + " C:\\Program Files\\DropBox\\saveFile.xml";
 
 	public static final String MESSAGE_SUCCESS = "Successfully changed the save path.";
 	public static final String MESSAGE_FAIL = "Not a valid path";
@@ -23,7 +23,6 @@ public class PathCommand extends Command {
 		this.path = path;
 	}
     
-	
 	@Override
 	public CommandResult execute() throws CommandException {
 		EventsCenter.getInstance().post(new ChangePathNameEvent(path));
