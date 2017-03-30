@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_DATES;
 
 import java.util.Date;
 
@@ -25,35 +26,35 @@ public class EditCommandTest extends DoistGUITest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby";  // p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Buy mangoes \\under groceries \\from \\to \\as normal";
         int addressBookIndex = 1;
 
-        TestTask editedPerson = new TaskBuilder().withName("Bobby").build();  //.withTags("husband").build();
+        TestTask editedPerson = new TaskBuilder().withName("Buy mangoes").
+                withTags("groceries").withDates(null, null).withPriority("normal").build();
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+    }
+
+    @Test
+    public void edit_notAllFieldsSpecified_success() throws Exception {
+        String detailsToEdit = "\\as very important";
+        int addressBookIndex = 2;
+
+        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withPriority("very important").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
-//    @Test
-//    public void edit_notAllFieldsSpecified_success() throws Exception {
-//        String detailsToEdit = "t/sweetie t/bestie";
-//        int addressBookIndex = 2;
-//
-//        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-//        TestTask editedPerson = new TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
-//
-//        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
-//    }
+    @Test
+    public void edit_clearDates_success() throws Exception {
+        String detailsToEdit = "\\by";
+        int addressBookIndex = 2;
 
-//    @Test
-//    public void edit_clearTags_success() throws Exception {
-//        String detailsToEdit = "t/";
-//        int addressBookIndex = 2;
-//
-//        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-//        TestTask editedPerson = new TaskBuilder(personToEdit).withTags().build();
-//
-//        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
-//    }
+        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withDates(null, null).build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+    }
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
@@ -103,6 +104,17 @@ public class EditCommandTest extends DoistGUITest {
 
         commandBox.runCommand("edit 1 \\from today");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void edit_invalidDates_failure() {
+        commandBox.runCommand("edit 1 \\from tomorrow \\to today");
+        assertResultMessage(MESSAGE_INVALID_DATES);
+
+        //Date that can't be parsed
+        commandBox.runCommand("edit 1 \\by tomr");
+        assertResultMessage(MESSAGE_INVALID_DATES);
+
     }
 
     @Test

@@ -1,6 +1,7 @@
 package seedu.doist.logic.parser;
 
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_DATES;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_AS;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_EVERY;
@@ -83,7 +84,6 @@ public class AddCommandParser {
         if (tagsParameterString.isPresent()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterString.get());
         }
-
         Date startDate = null;
         Date endDate = null;
         boolean validDate = true;
@@ -99,7 +99,8 @@ public class AddCommandParser {
         default : break;
         }
         if (!validDate) {
-            throw new IllegalValueException("Incorrect Dates");
+            throw new IllegalValueException(MESSAGE_INVALID_DATES);
+
         }
         Task toAdd = new Task(new Description(preamble), new TaskDate(startDate, endDate), tagList);
         // set priority
