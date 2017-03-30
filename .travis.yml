@@ -5,7 +5,6 @@ matrix:
 
 script: >-
     ./config/travis/run-checks.sh &&
-    ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V &&
     travis_retry ./gradlew clean headless allTests coverage coveralls
 
 before_install:

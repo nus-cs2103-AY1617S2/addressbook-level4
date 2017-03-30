@@ -34,10 +34,10 @@ public class PersonCardHandle extends GuiHandle {
 	public boolean equals(Object obj) {
 		if (obj instanceof PersonCardHandle) {
 			PersonCardHandle handle = (PersonCardHandle) obj;
-			return getTitle().equals(handle.getTitle()) && 
-					getStartTime().equals(handle.getStartTime()) && getEndTime().equals(handle.getEndTime())
-					&& getDescription().equals(handle.getDescription()) && getLocation().equals(handle.getLocation())
-					&& getEndTime().equals(handle.getEndTime()) && getTags().equals(handle.getTags());
+			return getTitle().equals(handle.getTitle()) && getStartTime().equals(handle.getStartTime())
+					&& getEndTime().equals(handle.getEndTime()) && getDescription().equals(handle.getDescription())
+					&& getLocation().equals(handle.getLocation()) && getEndTime().equals(handle.getEndTime())
+					&& getTags().equals(handle.getTags());
 		}
 		return super.equals(obj);
 	}
@@ -86,8 +86,8 @@ public class PersonCardHandle extends GuiHandle {
 	public boolean isSamePerson(ReadOnlyEvent person) {
 		return getTitle().equals(person.getTitle().fullName) && getStartTime().equals(person.getStartTime().toString())
 				&& getDescription().equals(person.getDescription().value)
-				&& getLocation().equals(person.getLocation().value) && getEndTime().equals(person.getEndTime().toString())
-				&& getTags().equals(getTags(person.getTags()));
+				&& getLocation().equals(person.getLocation().value)
+				&& getEndTime().equals(person.getEndTime().toString()) && getTags().equals(getTags(person.getTags()));
 	}
 
 	@Override

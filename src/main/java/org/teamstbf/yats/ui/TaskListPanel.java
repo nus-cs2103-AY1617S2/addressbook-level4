@@ -48,8 +48,7 @@ public class TaskListPanel extends UiPart<Region> {
 	}
 
 	private void setEventHandlerForSelectionChangeEvent() {
-		personListView.getSelectionModel().selectedItemProperty()
-		.addListener((observable, oldValue, newValue) -> {
+		personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
 				logger.fine("Selection in task list panel changed to : '" + newValue + "'");
 				raise(new EventPanelSelectionChangedEvent(newValue));
@@ -75,10 +74,10 @@ public class TaskListPanel extends UiPart<Region> {
 				setText(null);
 			} else {
 				if (person.getIsDone().getValue().equals("Yes")) {
-                    setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSONDONE).getRoot());
-                } else { 
-                    setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSON).getRoot());
-                }
+					setGraphic(new TaskCard(person, getIndex() + 1, FXMLPERSONDONE).getRoot());
+				} else {
+					setGraphic(new TaskCard(person, getIndex() + 1, FXMLPERSON).getRoot());
+				}
 			}
 		}
 	}

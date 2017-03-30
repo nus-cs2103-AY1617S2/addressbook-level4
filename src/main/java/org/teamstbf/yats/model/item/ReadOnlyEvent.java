@@ -18,10 +18,10 @@ public interface ReadOnlyEvent {
 	default String getAsText() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append(getTitle()).append(MESSAGE_NEWLINE).append("Location: ").append(getLocation())
-		.append(MESSAGE_NEWLINE).append("Description: ").append(getDescription()).append(MESSAGE_NEWLINE)
-		.append("Time: ").append(getStartTime()).append(MESSAGE_HYPEN).append(getEndTime())
-		.append(MESSAGE_NEWLINE).append("Completed: ").append(getIsDone().getValue()) // String.valueOf(isTaskDone())
-		.append(MESSAGE_NEWLINE).append("Tags: ");
+				.append(MESSAGE_NEWLINE).append("Description: ").append(getDescription()).append(MESSAGE_NEWLINE)
+				.append("Time: ").append(getStartTime()).append(MESSAGE_HYPEN).append(getEndTime())
+				.append(MESSAGE_NEWLINE).append("Completed: ").append(getIsDone().getValue()) // String.valueOf(isTaskDone())
+				.append(MESSAGE_NEWLINE).append("Tags: ");
 		getTags().forEach(builder::append);
 		return builder.toString();
 	}
@@ -37,11 +37,11 @@ public interface ReadOnlyEvent {
 	Schedule getEndTime();
 
 	Schedule getDeadline();
-	
+
 	boolean hasDeadline();
-	
+
 	boolean hasStartEndTime();
-	
+
 	IsDone getIsDone();
 
 	public void markDone();
@@ -59,11 +59,11 @@ public interface ReadOnlyEvent {
 	default boolean isSameStateAs(ReadOnlyEvent other) {
 		return other == this // short circuit if same object
 				|| (other != null // this is first to avoid NPE below
-				&& other.getTitle().equals(this.getTitle()) // state
-				// checks
-				// here
-				// onwards
-				&& other.getDescription().equals(this.getDescription()));
+						&& other.getTitle().equals(this.getTitle()) // state
+						// checks
+						// here
+						// onwards
+						&& other.getDescription().equals(this.getDescription()));
 	}
 
 }

@@ -125,28 +125,28 @@ public class TestEvent implements ReadOnlyEvent {
 		isDone.markDone();
 	}
 
-    @Override
-    public Schedule getDeadline() {
-        return deadline;
-    }
+	@Override
+	public Schedule getDeadline() {
+		return deadline;
+	}
 
-    @Override
-    public boolean hasDeadline() {
-        if (this.deadline.toString().equals("")) {
-            return false;
-        }
-        return true;
-    }
-    
-    @Override
-    public boolean hasStartEndTime() {
-        if (this.startTime.toString().equals("") || this.startTime.toString().equals("")) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean hasDeadline() {
+		if (this.deadline.toString().equals("")) {
+			return false;
+		}
+		return true;
+	}
 
-    public void setDeadline(Schedule schedule) {
-        this.deadline = schedule;
-    }
+	@Override
+	public boolean hasStartEndTime() {
+		if (this.startTime.toString().equals("") || this.startTime.toString().equals("")) {
+			return false;
+		}
+		return true;
+	}
+
+	public void setDeadline(Schedule schedule) {
+		this.deadline = schedule;
+	}
 }

@@ -211,7 +211,7 @@ public class ParserUtil {
 
 	/**
 	 * Utility method to be used in conjuction with {@code isAllIntegers}
-	 * 
+	 *
 	 * @param toCheck
 	 * @return
 	 */
