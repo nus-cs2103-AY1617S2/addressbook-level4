@@ -39,17 +39,25 @@ public class AddTaskController extends Controller {
 
     //@@author A0162011A
     private static final String HELP_DETAILS = "Adds a task to the todo list.";
-    private static final String HELP_FORMAT = "add NAME [from/STARTDATE to/ENDDATE] [by/ENDDATE] [repeat/PERIOD(daily/weekly/monthly)] [priority/PRIORITY(high/low)] [tags/TAGS]";
+    private static final String HELP_FORMAT = "add NAME [from/STARTDATE to/ENDDATE] "
+                                                  + "[by/ENDDATE] [repeat/PERIOD(daily/weekly/monthly)] "
+                                                  + "[priority/PRIORITY(high/low)] [tags/TAGS]";
     private static final String[] HELP_COMMENTS = { "Related commands: `delete`, `update`",
                                                     "Only fields entered will be used.",
                                                     "Events can be created by entering a value for `by/`",
-                                                    "Deadlines can be created by entering a value for `from/` and `to/`" };
+                                                    "Deadlines can be created by "
+                                                        + "entering a value for `from/` and `to/`" };
     private static final String[] HELP_EXAMPLES = { "`add new floating task`\nAdds a new floating task.",
-                                                    "`add new deadline by/friday`\nAdds a new deadline, with deadline friday.",
-                                                    "`add new event from/5pm to/7pm`\nAdds a new event, with start date 5pm today and end date 7pm today.",
-                                                    "`add new recurring task by/10pm repeat/daily`\nAdds a new recurring task, with deadline 10pm.",
-                                                    "`add new tagged task tags/newtag`\nAdds a new task, with the tag `newtag`.",
-                                                    "`add new priority task priority/high`\nAdds a new task, with high priority." };
+                                                    "`add new deadline by/friday`\n"
+                                                        + "Adds a new deadline, with deadline friday.",
+                                                    "`add new event from/tuesday to/thursday`\nAdds a new event, "
+                                                        + "with start date tuesday and end date thursday.",
+                                                    "`add new recurring task by/10pm repeat/daily`\n"
+                                                        + "Adds a new recurring task, with deadline 10pm.",
+                                                    "`add new tagged task tags/newtag`\n"
+                                                        + "Adds a new task, with the tag `newtag`.",
+                                                    "`add new priority task priority/high`\n"
+                                                        + "Adds a new task, with high priority." };
 
     //@@author A0127545A
     public void execute(String command) {

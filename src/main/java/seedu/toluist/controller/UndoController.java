@@ -27,7 +27,8 @@ public class UndoController extends Controller {
     private static final String[] HELP_COMMENTS = { "Related commands: `undo`",
                                                     "Undo commands which `morph` data in the program.",
                                                     "If a number is entered, will undo that amount of commands.",
-                                                    "Commands which can be undone: `add`, `update`, `delete`, `clear`, `tag`, `untag`, `mark`" };
+                                                    "Commands which can be undone: `add`, "
+                                                        + "`update`, `delete`, `clear`, `tag`, `untag`, `mark`" };
     private static final String[] HELP_EXAMPLES = { "`undo`\nUndo the latest morphing command.",
                                                     "`undo 5`\nUndo the latest 5 morphing commands." };
 

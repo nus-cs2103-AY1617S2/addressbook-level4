@@ -30,10 +30,13 @@ public class SwitchController extends Controller {
     //@@author A0162011A
     private static final String HELP_DETAILS = "Changes the displayed task list.";
     private static final String HELP_FORMAT = "switch WINDOWIDENTIFIER";
-    private static final String[] HELP_COMMENTS = { "`WindowIdentifier` corresponds to the underlined letter at the top of the program.",
+    private static final String[] HELP_COMMENTS = { "`WindowIdentifier` corresponds to the underlined letter "
+                                                        + "at the top of the program.",
                                                     "Allowed values are `I`, `T`, `N`, `C`, `A`.",
-                                                    "Alternatively, you can call them by their order: `1`, `2`, `3`, `4`, `5`",
-                                                    "Alternatively, you can use the shortcut command `ctrl + (`I`/`T`/`N`/`C`/`A`)." };
+                                                    "Alternatively, you can call them by their order: "
+                                                        + "+`1`, `2`, `3`, `4`, `5`",
+                                                    "Alternatively, you can use the shortcut command "
+                                                        + "+`ctrl + (`I`/`T`/`N`/`C`/`A`)." };
     private static final String[] HELP_EXAMPLES = { "`switch 1`\nSwitches the screen to the `Incomplete` window.",
                                                     "`switch T`\nSwitches the screen to the `Today` window.",
                                                     "`ctrl + N`\nSwitches the screen to the `Next 7 Days` window." };

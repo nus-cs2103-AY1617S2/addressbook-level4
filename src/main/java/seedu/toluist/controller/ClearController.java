@@ -20,7 +20,8 @@ public class ClearController extends Controller {
 
     private static final String HELP_DETAILS = "Clears all entries from the todo list.";
     private static final String HELP_FORMAT = "clear";
-    private static final String[] HELP_COMMENTS = { "All entries from every list is affected, not just on the current task window.",
+    private static final String[] HELP_COMMENTS = { "All entries from every list is affected, "
+                                                        + "not just on the current task window.",
                                                     "The `undo` command can undo this action." };
 
     public void execute(String command) {

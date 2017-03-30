@@ -38,8 +38,10 @@ public class UntagController extends Controller {
     private static final String[] HELP_COMMENTS = { "Related commands: `tag`",
                                                     "All tags are one word long.",
                                                     "Each word entered after the index will be untagged separately.", };
-    private static final String[] HELP_EXAMPLES = { "`untag 1 schoolwork`\nRemoves the tag `schoolwork` from the task at index 1.",
-                                                    "`untag 1 housework groceries`\nRemoves the tags `housework` and `groceries` from the task at index 1." };
+    private static final String[] HELP_EXAMPLES = { "`untag 1 schoolwork`\n"
+                                                        + "Removes the tag `schoolwork` from the task at index 1.",
+                                                    "`untag 1 housework groceries`\nRemoves the tags "
+                                                        + "`housework` and `groceries` from the task at index 1." };
 
     private static final Logger logger = LogsCenter.getLogger(UntagController.class);
 

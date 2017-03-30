@@ -27,8 +27,10 @@ public class RedoController extends Controller {
     private static final String[] HELP_COMMENTS = { "Related commands: `undo`",
                                                     "Redo commands which were undone by the `undo` command.",
                                                     "If a number is entered, will redo that amount of `undo` commands.",
-                                                    "Commands which can be undone: `add`, `update`, `delete`, `clear`, `tag`, `untag`, `mark`",
-                                                    "Warning: After undo, once a new command which can be undone is entered, redo cannot be used." };
+                                                    "Commands which can be undone: `add`, `update`, `delete`, "
+                                                        + "`clear`, `tag`, `untag`, `mark`",
+                                                    "Warning: After undo, once a new command "
+                                                        + "which can be undone is entered, redo cannot be used." };
     private static final String[] HELP_EXAMPLES = { "`redo`\nRedo the latest undo command.",
                                                     "`redo 5`\nRedo the latest 5 undo commands." };
 

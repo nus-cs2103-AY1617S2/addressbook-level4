@@ -38,8 +38,10 @@ public class TagController extends Controller {
     private static final String[] HELP_COMMENTS = { "Related commands: `untag`",
                                                     "All tags are one word long.",
                                                     "Each word entered after the index will be its own tag.", };
-    private static final String[] HELP_EXAMPLES = { "`tag 1 schoolwork`\nAdds the tag `schoolwork` to the task at index 1.",
-                                                    "`tag 1 housework groceries`\nAdds the tags `housework` and `groceries` to the task at index 1." };
+    private static final String[] HELP_EXAMPLES = { "`tag 1 schoolwork`\n"
+                                                        + "Adds the tag `schoolwork` to the task at index 1.",
+                                                    "`tag 1 housework groceries`\nAdds the tags "
+                                                        + "`housework` and `groceries` to the task at index 1." };
 
     private static final Logger logger = LogsCenter.getLogger(TagController.class);
 

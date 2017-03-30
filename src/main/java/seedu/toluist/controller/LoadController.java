@@ -29,11 +29,15 @@ public class LoadController extends Controller {
     private static final String[] HELP_COMMENTS = { "Related commands: `save`",
                                                     "The displayed data will be updated to the data from the new file.",
                                                     "The old file will remain in your computer.",
-                                                    "The file location entered is relative to the location of the program.",
-                                                    "Warning: If a file with the requested name already exists, it will be overwritten." };
+                                                    "The file location entered is relative "
+                                                        + "to the location of the program.",
+                                                    "Warning: If a file with the requested name already exists, "
+                                                        + "it will be overwritten." };
     private static final String[] HELP_EXAMPLES = { "`load newfile.json`\nLoads ToLuist data from `newfile.json`.",
-                                                    "`load newfolder/newfile.json`\nLoads ToLuist data from `newfile.json` in the folder `newfolder`.",
-                                                    "`load ../newfile.json`\nLoads ToLuist data from `newfile.json` in the parent folder" };
+                                                    "`load newfolder/newfile.json`\nLoads ToLuist data "
+                                                        + "from `newfile.json` in the folder `newfolder`.",
+                                                    "`load ../newfile.json`\nLoads ToLuist data "
+                                                        + "from `newfile.json` in the parent folder" };
 
   //@@author A0131125Y
     public void execute(String command) {
