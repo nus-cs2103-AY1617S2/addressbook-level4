@@ -1,4 +1,4 @@
-/*
+/Users/cindra/.credentials/calendar-java-quickstart/*
  * Gradle Configuration File
  *
  * For more details take a look at the Java Quickstart chapter in the Gradle
@@ -13,6 +13,7 @@ plugins {
 
 // Specifies the entry point of the application
 mainClassName = 'seedu.address.MainApp'
+
 
 allprojects {
     apply plugin: 'idea'
@@ -63,6 +64,10 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        
+        compile 'com.google.api-client:google-api-client:1.22.0'
+		compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
+    	compile 'com.google.apis:google-api-services-calendar:v3-rev240-1.22.0'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"

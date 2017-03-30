@@ -30,7 +30,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadTaskPage(ReadOnlyTask task) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().fullName.replaceAll(" ", "+"));
+        //loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().fullName.replaceAll(" ", "+"));
+    	loadPage("https://calendar.google.com/calendar/render#main_7%7Cmonth");
     }
 
     public void loadPage(String url) {
