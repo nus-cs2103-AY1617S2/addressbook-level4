@@ -3,15 +3,17 @@
 This product is a tool to accept natural language commands via keyboards to manage the user's schedule and todo tasks.
 
 * [Start the program](#start-the-program)
-* [Commands](#commands)
-    * [help](#view-help--help)
-    * [add](#add-a-task-add)
-    * [delete](#delete-a-task-delete)
-    * [find](#find-a-task-find)
-    * [list](#list-tasks--list)
-    * [update](#update-a-task-update)
-    * [exit](#exit-the-program--exit)
-    * [save](#save-the-data)
+* [Feature Details](#feature-details)
+	* [help](#view-help--help)
+	* [add](#add-a-task-add)
+	* [delete](#delete-a-task-delete)
+   * [clear](#clear-a-task-clear)
+	* [find](#find-a-task-find)
+	* [list](#list-tasks--list)
+	* [edit](#edit-a-task-edit)
+   * [undo/redo](#undo/redo-the-data-undo-redo)
+	* [exit](#exit-the-program--exit)
+	* [save](#save-the-data)
 * [Command Summary](#command-summary)
 
 
@@ -21,7 +23,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 1. Double click the JOBS.jar file to start the program.
 2. The application will be launched in few seconds.
 
-## Commands
+## Feature details
 
 ### View help : `help`
 Format: `help`
@@ -50,8 +52,12 @@ Format: `delete index/INDEX`
 Example:
 * `Delete 1`
 
+### Clear a task: `clear`
+Clear is the command word that can be used to delete all task
+Format: `clear`
+
 ### Find a task: `find`
-Find is the command word that can be used to find a task.
+Find is the command word that can be used to find a task
 Format: `find name/Name`
 >The command finds tasks which have names containing any of the given keywords including substring.
 
@@ -61,7 +67,7 @@ Example:
 
 ### List tasks : `list`
 List is the command word to list down all the existing tasks
-Formats: `list * | completed | pending | overdue`
+Format: `list * | completed | pending | overdue`
 1. \* will list all tasks
 2. completed will list all completed tasks
 3. pending will list all pending tasks
@@ -73,30 +79,39 @@ Example:
 * `list pending`
 * `list overdue`
 
-### Update a task: `update`
-Update is the command word to edit a specific tasks
-Format : `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
+### Edit a task: `edit`
+Edit is the command word to edit a specific task
+Format : `edit index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
 1. The commands inside square bracket are optional.
->User updates a specific task by specifying the new entry they wish to be reflected on the existing task list
+>User edits a specific task by specifying the new entry they wish to be reflected on the existing task list
 
 Example:
-* `update index/1 desc/"The venue has been changed"`
-* `update index/2 start/02-04-17 17:20`
+* `edit index/1 desc/"The venue has been changed"`
+* `edit index/2 start/02-04-17 17:20`
+
+### Undo/Redo a task: `undo` `redo`
+Undo is the command word to erase the last change done
+Format : `undo` `undo` 
+
+Example:
+* `delete 1` >> `undo` to retrieve task indexed 1
 
 ### Exit the program : `exit`
 Exits the program.
-Format: `exit`
+Format: `exit`  
 
-### Save the data
+### Save the data 
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Command Summary
-Command | Format
+Command | Format  
 -------- | :--------
 help | `help`
 add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
 delete | `delete index\INDEX`
+clear | `clear`
 find | `find name/Name`
 list | `list * | completed | pending | overdue`
-update | `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
+edit | `edit index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
+undo/redo | `undo` `redo`
 exit | `exit`
