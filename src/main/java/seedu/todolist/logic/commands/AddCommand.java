@@ -36,6 +36,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the todo list";
     public static final String MESSAGE_INVALID_STARTTIME = "Invalid start time entered";
     public static final String MESSAGE_INVALID_ENDTIME = "Invalid end time entered";
+    public static final String MESSAGE_INVALID_TIME = "Invalid time entered";
 
     private final Todo toAdd;
 
@@ -116,7 +117,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
     }
-    private Date getTomorrow() {
+    public Date getTomorrow() {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -127,7 +128,7 @@ public class AddCommand extends Command {
         return dt;
     }
 
-    private Date getToday() {
+    public Date getToday() {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
