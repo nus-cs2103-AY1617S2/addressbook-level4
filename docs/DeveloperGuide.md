@@ -359,6 +359,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | Redo my actions | revert any undo command.
 `* * *` | user | Mark task as done based on index | Clear done tasks if needed
 `* * *` | user | List all tasks by deadlines | View which tasks needs to be completed first
+`* * *` | user | Change my save location | I can choose where my data file is saved
 `* * ` | user | Mark task as done based name, or any unique identifying string for that task | Clear done tasks if needed
 `* * ` | user | List all tasks based on importance | View which tasks have higher priorities
 `* * ` | user | Schedule a recurring (daily/weekly/monthly..) | Not add the recurring tasks manually

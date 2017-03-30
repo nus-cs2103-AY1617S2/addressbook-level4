@@ -95,7 +95,7 @@ Examples:
   Returns `School`, `My`
 * `list by tag date1 tag2 Task3`<br>
   Returns any task that has the tags of the keywords `date1` , `tag2`  or `Task3`
-  
+
 ### 2.6 Finding tasks containing any keyword in title and description: `find`
 
 Shows the tasks that are linked to a specific string. <br>
@@ -153,11 +153,11 @@ Examples:
 * `list Task2`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `list` command.
-  
-### 2.9 Mark task as done : `done`
+
+### 2.9. Mark task as done : `mark`
 
 Marks the specified task from the task scheduler as done.
-Format: `done INDEX`
+Format: `mark INDEX`
 
 > Marks the task at the specified `INDEX` as done. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -169,23 +169,54 @@ Examples:
 * `mark 1`<br>
   Marks the 1st task in the task scheduler as done.
 
-### 2.10. Clearing all done tasks : `clear`
+### 2.10. Mark task as not done : `unmark`
+
+Marks the specified task from the task scheduler as done.
+Format: `unmark INDEX`
+
+> Marks the task at the specified `INDEX` as not done. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive interger** 1, 2, 3, ...
+> The index must be within the specified list of indexes available
+
+Examples:
+
+* `unmark 1`<br>
+  Marks the 1st task in the task scheduler as not done.
+
+### 2.11. Clearing all done tasks : `clear`
 
 Clears all done tasks from TaskManager <br>
 Format: `clear`
 
-### 2.11. Exiting the program : `exit`
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data
+### 2.13. Saving the data
 
 Task Scheduler data are saved in the hard disk automatically after any command that changes the data.<br>
 
 There is no need to save manually.
 
-### 2.13. Undo : `undo`
+### 2.14. Changing save location : `save`
+
+Changes the file directory of the save location to a file directory specified by the user.<br>
+Format: `save`
+
+> File directory specified must be exisiting file directory in disk
+> File directory specified cannot be same as current save location file directory
+
+Example:
+
+* `save default`
+   Changes save location to the default file directory
+* `save /Users/main/Desktop/data`
+   Saves the data file of the task scheduler to /Users/main/Desktop/data/YATS.xml
+
+
+### 2.15. Undo : `undo`
 
 Undo the last command that was performed in the task scheduler
 Format: `undo`
@@ -199,7 +230,7 @@ Example:
 * `undo`
    Undoes the delete that was just done
 
-### 2.14. Redo : `redo`
+### 2.16. Redo : `redo`
 
 Redo an undone command in the task scheduler
 Format: `redo`
@@ -217,7 +248,7 @@ Example:
 
 ## 3. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another Computer? <br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Task Scheduler folder.
 
@@ -229,9 +260,12 @@ Example:
 * **Add Event** : `add event NAME [s/START TIME,END TIME t/TAG d/DESCRIPTION p/PERIODICITY]` <br>
    e.g. `add event meeting with john s/mon 11.30, mon 13.30 t/work, important  d/meeting about work where I won’t fall asleep`
 
-* **Mark as Done** : `done INDEX`
-   e.g. `done 1`
-   
+* **Mark as Done** : `mark INDEX` <br>
+   e.g. `mark 1`
+
+* **Mark as Not Done** : `unmark INDEX` <br>
+   e.g. `unmark 1`
+
 * **Clear Done Task** : `clear` <br>
    e.g. `clear`
 
@@ -244,6 +278,10 @@ Example:
 
 * **List** : `list` <br>
    e.g. `list`
+
+* **Change Save Location** : `save` <br>
+   e.g. `save default`
+   e.g. `save /Users/main/Desktop/data`
 
 * **Help** : `help` <br>
    e.g. `help`

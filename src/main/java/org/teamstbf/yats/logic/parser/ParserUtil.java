@@ -1,8 +1,10 @@
 package org.teamstbf.yats.logic.parser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -16,10 +18,11 @@ import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
+
+import com.joestelmach.natty.DateGroup;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -107,11 +110,16 @@ public class ParserUtil {
 
 	/**
 	 * Parses a {@code Optional<String> schedule} into an
-	 * {@code Optional<Schedule>} if {@code schedule} is present.
+	 * {@code Optional<List<Date>>} if {@code schedule} is present.
 	 */
-	public static Optional<Schedule> parseSchedule(Optional<String> schedule) throws IllegalValueException {
+	public static Optional<List<Date>> parseSchedule(Optional<String> schedule) throws IllegalValueException {
+		// String -> DateList -> Optional
 		assert schedule != null;
-		return schedule.isPresent() ? Optional.of(new Schedule(schedule.get())) : Optional.empty();
+		if (schedule.isPresent()) {
+			return Optional.of(parseDateTime(schedule.get()));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	/**
@@ -125,4 +133,95 @@ public class ParserUtil {
 		}
 		return new UniqueTagList(tagSet);
 	}
+
+	/**
+	 * Parses {@code String words} to a {@code List<Date>}, using natty library
+	 *
+	 * @param a
+	 *            string containing date and time information
+	 * @return a list of Date objects
+	 * @throws IllegalValueException
+	 */
+	public static List<Date> parseDateTime(String words) throws IllegalValueException {
+		// Date referenceDate = new Date();
+		if (words == null) {
+			return null;
+		}
+		com.joestelmach.natty.Parser dateParser = new com.joestelmach.natty.Parser();
+		// dateGroup contains isRecurring() and getRecursUntil() methods that
+		// can be used later
+		List<DateGroup> dateGroup = dateParser.parse(words);
+		List<Date> dateList = dateGroup.isEmpty() ? new ArrayList<Date>() : dateGroup.get(0).getDates();
+		return dateList;
+	}
+
+	public static Date parseSingleDate(String words) throws IllegalValueException {
+		List<Date> dates = parseDateTime(words);
+		// Assert.assertEquals(1, dates.size());
+		return dates.get(0);
+	}
+
+	/**
+	 * Parses a {@code String} and splits it to its tokens
+	 *
+	 * @param commandText
+	 * @return
+	 */
+	public static String[] stringTokenizer(String commandText) {
+		String[] splitText = commandText.trim().split(" ");
+		for (String element : splitText) {
+			element.trim();
+		}
+		return splitText;
+	}
+
+	/**
+	 * Sorts a string array into its natural order, increasing String array
+	 * should only contain integers only
+	 *
+	 * @param stringArray
+	 * @return
+	 */
+	public static String[] sortIndexArr(String[] stringArray) {
+		int[] intArray = new int[stringArray.length];
+		for (int i = 0; i < stringArray.length; i++) {
+			intArray[i] = Integer.parseInt(stringArray[i]);
+		}
+		Arrays.sort(intArray);
+		for (int i = 0; i < intArray.length; i++) {
+			stringArray[i] = Integer.toString(intArray[i]);
+		}
+		return stringArray;
+	}
+
+	/**
+	 * Checks the string array if all the elements are integers
+	 *
+	 * @param stringArray
+	 * @return
+	 */
+	public static boolean isAllIntegers(String[] stringArray) {
+		for (int i = 0; i < stringArray.length; i++) {
+			if (!isInteger(stringArray[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Utility method to be used in conjuction with {@code isAllIntegers}
+	 *
+	 * @param toCheck
+	 * @return
+	 */
+	public static boolean isInteger(String toCheck) {
+		try {
+			Integer.parseInt(toCheck);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
+
 }

@@ -17,12 +17,10 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.FileUtil;
 import org.teamstbf.yats.commons.util.XmlUtil;
 import org.teamstbf.yats.model.TaskManager;
-import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
-import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
@@ -78,8 +76,8 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Event[]{
-                new Event(new Title("Ali Muster"), new Location("School"), new Periodic("none"),new Schedule("7:00am"), new Schedule("9:00am"), new Description("lame"), new UniqueTagList(), new IsDone()),
-                new Event(new Title("Best"), new Location("Home"), new Periodic("daily"),new Schedule("12:00am"), new Schedule("11:00am"), new Description("do what"), new UniqueTagList(), new IsDone())
+                new Event(new Title("Ali Muster"), new Location("School"),new Schedule("11:59PM 08/04/2017"), new Schedule("11:59PM 08/04/2017"), new Schedule(""), new Description("lame"), new UniqueTagList(), new IsDone()),
+                new Event(new Title("Best"), new Location("Home"),new Schedule(""), new Schedule(""), new Schedule("11:59PM 08/04/2017"), new Description("do what"), new UniqueTagList(), new IsDone())
          };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

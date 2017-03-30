@@ -17,11 +17,10 @@ import javafx.stage.Stage;
  */
 public class PersonCardHandle extends GuiHandle {
 	private static final String NAME_FIELD_ID = "#name";
-	private static final String PERIOD_FIELD_ID = "#period";
 	private static final String STARTTIME_FIELD_ID = "#startTime";
 	private static final String ENDTIME_FIELD_ID = "#endTime";
 	private static final String DESCRIPTION_FIELD_ID = "#description";
-	private static final String LOCATION_FIELD_ID = "#location";
+	private static final String LOCATION_FIELD_ID = "#loc";
 	private static final String TAGS_FIELD_ID = "#tags";
 
 	private Node node;
@@ -35,10 +34,10 @@ public class PersonCardHandle extends GuiHandle {
 	public boolean equals(Object obj) {
 		if (obj instanceof PersonCardHandle) {
 			PersonCardHandle handle = (PersonCardHandle) obj;
-			return getTitle().equals(handle.getTitle()) && getPeriod().equals(handle.getPeriod())
-					&& getStartTime().equals(handle.getStartTime()) && getEndTime().equals(handle.getEndTime())
-					&& getDescription().equals(handle.getDescription()) && getLocation().equals(handle.getLocation())
-					&& getEndTime().equals(handle.getEndTime()) && getTags().equals(handle.getTags());
+			return getTitle().equals(handle.getTitle()) && getStartTime().equals(handle.getStartTime())
+					&& getEndTime().equals(handle.getEndTime()) && getDescription().equals(handle.getDescription())
+					&& getLocation().equals(handle.getLocation()) && getEndTime().equals(handle.getEndTime())
+					&& getTags().equals(handle.getTags());
 		}
 		return super.equals(obj);
 	}
@@ -53,10 +52,6 @@ public class PersonCardHandle extends GuiHandle {
 
 	public String getLocation() {
 		return getTextFromLabel(LOCATION_FIELD_ID);
-	}
-
-	public String getPeriod() {
-		return getTextFromLabel(PERIOD_FIELD_ID);
 	}
 
 	public String getStartTime() {
@@ -89,11 +84,10 @@ public class PersonCardHandle extends GuiHandle {
 	}
 
 	public boolean isSamePerson(ReadOnlyEvent person) {
-		return getTitle().equals(person.getTitle().fullName) && getStartTime().equals(person.getStartTime().value)
-				&& getPeriod().equals(person.getPeriod().value) && getEndTime().equals(person.getEndTime().value)
+		return getTitle().equals(person.getTitle().fullName) && getStartTime().equals(person.getStartTime().toString())
 				&& getDescription().equals(person.getDescription().value)
-				&& getLocation().equals(person.getLocation().value) && getEndTime().equals(person.getEndTime().value)
-				&& getTags().equals(getTags(person.getTags()));
+				&& getLocation().equals(person.getLocation().value)
+				&& getEndTime().equals(person.getEndTime().toString()) && getTags().equals(getTags(person.getTags()));
 	}
 
 	@Override

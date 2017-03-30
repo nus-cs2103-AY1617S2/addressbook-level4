@@ -18,10 +18,12 @@ public class CliSyntax {
     public static final Prefix PREFIX_PERIOD = new Prefix("p/");
     public static final Prefix PREFIX_DEADLINE = new Prefix("b/");
 
-    /*old Prefix definitions */
-    public static final Prefix PREFIX_PHONE = new Prefix("q/");
-    public static final Prefix PREFIX_EMAIL = new Prefix("z/");
-    public static final Prefix PREFIX_ADDRESS = new Prefix("x/");
+
+    /*NLP Prefix definitions */
+    public static final Prefix PREFIX_NLP_TIME = new Prefix(",");
+    public static final Prefix PREFIX_NLP_LOCATION = new Prefix("@");
+    public static final Prefix PREFIX_NLP_TAG = new Prefix("#");
+    public static final Prefix PREFIX_NLP_DESCRIPTION = new Prefix("//");
 
 
     /* Patterns definitions */

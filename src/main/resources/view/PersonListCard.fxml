@@ -3,6 +3,8 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,17 +13,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111"
-	xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<GridPane HBox.hgrow="ALWAYS">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-					prefWidth="150.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
 			</columnConstraints>
 			<children>
-				<VBox alignment="CENTER_LEFT" minHeight="105.0"
-					GridPane.columnIndex="0">
+				<VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
 					<stylesheets>
 						<URL value="@DarkTheme.css" />
 						<URL value="@Extensions.css" />
@@ -42,16 +41,21 @@
 									</Label>
 									<Label fx:id="name" styleClass="cell_big_label" text="\$first" />
 								</HBox>
+                        <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/task_search.png" />
+                           </image>
+                        </ImageView>
 							</children>
 						</HBox>
 						<FlowPane fx:id="tags" />
-						<Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-						<Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+						<Label fx:id="description" styleClass="cell_small_label" text="\$phone" />
+						<Label fx:id="loc" styleClass="cell_small_label" text="\$address" />
 						<HBox prefHeight="0.0" prefWidth="130.0">
 							<children>
-								<Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-								<Label fx:id="hypen" styleClass="cell_small_label" text=" - " />
+								<Label fx:id="startTime" styleClass="cell_small_label" text="\$email" />
 								<Label fx:id="endTime" styleClass="cell_small_label" text="\$email" />
+								<Label fx:id="deadline" styleClass="cell_small_label" text="\$email" />
 							</children>
 						</HBox>
 					</children>

@@ -58,8 +58,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		int taskManagerIndex = 1;
 
 		TestEvent editedPerson = new EventBuilder().withTitle("Usorp the throne").withLocation("Ruvenheigen City")
-				.withPeriodic("none").withStartTime("5:45am").withEndTime("11:59pm")
-				.withDescription("Down to all traitors! Down to all non-believers!").withTags("Betrayal").build();
+				.withStartTime("5:45am").withEndTime("11:59pm")
+				.withDescription("Down to all traitors! Down to all non-believers!").withTags("Betrayal").withIsDone("Yes").build();
 
 		assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedPerson);
 	}

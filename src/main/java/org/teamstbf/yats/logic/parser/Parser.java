@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.teamstbf.yats.logic.commands.AddCommand;
+import org.teamstbf.yats.logic.commands.ChangeSaveLocationCommand;
 import org.teamstbf.yats.logic.commands.ClearCommand;
 import org.teamstbf.yats.logic.commands.ClearDoneCommand;
 import org.teamstbf.yats.logic.commands.Command;
@@ -18,6 +19,7 @@ import org.teamstbf.yats.logic.commands.HelpCommand;
 import org.teamstbf.yats.logic.commands.IncorrectCommand;
 import org.teamstbf.yats.logic.commands.ListCommand;
 import org.teamstbf.yats.logic.commands.MarkDoneCommand;
+import org.teamstbf.yats.logic.commands.MarkUndoneCommand;
 import org.teamstbf.yats.logic.commands.RedoCommand;
 import org.teamstbf.yats.logic.commands.SelectCommand;
 import org.teamstbf.yats.logic.commands.UndoCommand;
@@ -44,7 +46,6 @@ public class Parser {
 		if (!matcher.matches()) {
 			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
 		}
-
 		final String commandWord = matcher.group("commandWord");
 		final String arguments = matcher.group("arguments");
 		switch (commandWord) {
@@ -85,8 +86,14 @@ public class Parser {
 		case MarkDoneCommand.COMMAND_WORD:
 			return new MarkDoneCommandParser().parse(arguments);
 
+		case MarkUndoneCommand.COMMAND_WORD:
+			return new MarkUndoneCommandParser().parse(arguments);
+
 		case ClearDoneCommand.COMMAND_WORD:
 			return new ClearDoneCommand();
+
+		case ChangeSaveLocationCommand.COMMAND_WORD:
+			return new ChangeSaveLocationCommandParser().parse(arguments);
 
 		default:
 			return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
