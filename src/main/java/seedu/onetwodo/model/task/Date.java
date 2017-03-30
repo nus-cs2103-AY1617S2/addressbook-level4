@@ -8,15 +8,14 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
 //@@author A0139343E
 /**
- * Represents a Task's date in the toDo list.
- * Guarantees: immutable.
+ * Represents a Task's date in the toDo list. Guarantees: immutable.
  */
 public class Date {
 
     public static final String MESSAGE_DATE_INPUT_CONSTRAINTS = "Invalid date input. "
             + "Please check the format in user guide or help command.";
 
-    public String value;  // value to be displayed to user
+    public String value; // value to be displayed to user
     protected Optional<LocalDateTime> localDateTime;
 
     // to be used if no date OR time is specified.
@@ -25,7 +24,8 @@ public class Date {
     /**
      * Create a date.
      *
-     * @throws IllegalValueException if given date toDo string is invalid.
+     * @throws IllegalValueException
+     *             if given date toDo string is invalid.
      */
     public Date(String input) throws IllegalValueException {
         assert input != null;
@@ -34,7 +34,8 @@ public class Date {
 
     /**
      *
-     * @param localDateTime input optional LocalDateTime
+     * @param localDateTime
+     *            input optional LocalDateTime
      * @return String to be displayed to user.
      */
     public String createDisplayValue(Optional<LocalDateTime> localDateTime) {
@@ -64,7 +65,8 @@ public class Date {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
-                && this.value.equals(((Date) other).value)); // state check
+                        && this.value.equals(((Date) other).value)); // state
+                                                                     // check
     }
 
     @Override

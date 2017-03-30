@@ -28,7 +28,6 @@ public class FileTransferCommandTest extends ToDoListGuiTest {
     private static final String TEST_EXPORT_FOLDER = FileUtil.getPath("test/data/FileTransferToTest.xml");
     private static final String TEST_INVALID_NAME_FOLDER = FileUtil.getPath("test/data/(\"=^_^=\".xml");
 
-
     // SaveToCommand tests
 
     @Test
@@ -163,7 +162,7 @@ public class FileTransferCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void fileTransfer_incorrectInput_failureResultMessage() {
+    public void fileTransfer_incorrectInput_failureResultMessage() throws Exception {
         resetStorages();
 
         // no file path

@@ -14,9 +14,11 @@ public class ConfigUtil {
     public static Optional<Config> readConfig(String configFilePath) throws DataConversionException {
         return JsonUtil.readJsonFile(configFilePath, Config.class);
     }
-
+//@@author A0139343E
     public static void saveConfig(Config config, String configFilePath) throws IOException {
-        JsonUtil.saveJsonFile(config, configFilePath);
+        if (!config.getAppTitle().equals("Test App")) {
+            JsonUtil.saveJsonFile(config, configFilePath);
+        }
     }
 
 }

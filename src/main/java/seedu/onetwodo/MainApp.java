@@ -14,6 +14,7 @@ import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.core.Version;
+import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
 import seedu.onetwodo.commons.util.ConfigUtil;
@@ -42,11 +43,12 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
-    protected  Storage storage;
-    protected  Model model;
-    protected  Config config;
+    protected Storage storage;
+    protected Model model;
+    protected Config config;
     protected UserPrefs userPrefs;
 
+    //@@author A0139343E
     public static MainApp getInstance() {
         if (instance == null) {
             instance = new MainApp();
@@ -60,6 +62,7 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing ToDoList ]===========================");
         super.init();
 
+        
         instance.config = initConfig(getApplicationParameter("config"));
         instance.storage = new StorageManager(instance.config.getToDoListFilePath(),
                 instance.config.getUserPrefsFilePath());
@@ -75,6 +78,8 @@ public class MainApp extends Application {
         instance.ui = new UiManager(instance.logic, instance.config, instance.userPrefs);
 
         initEventsCenter();
+        EventsCenter.getInstance().post(new ToDoListChangedEvent(instance.model.getToDoList()));
+
     }
 
     private String getApplicationParameter(String parameterName) {
@@ -82,18 +87,19 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    public  Config getConfig() {
-        return config;
+    public Config getConfig() {
+        return MainApp.getInstance().config;
     }
 
-    public  Storage getStorage() {
-        return storage;
+    public Storage getStorage() {
+        return MainApp.getInstance().storage;
     }
 
-    public  Model getModel() {
-        return model;
+    public Model getModel() {
+        return MainApp.getInstance().model;
     }
-
+    
+    //@@author
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyToDoList> toDoOptional;
         ReadOnlyToDoList initialData;

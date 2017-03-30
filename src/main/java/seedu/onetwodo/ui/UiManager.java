@@ -31,6 +31,7 @@ public class UiManager extends ComponentManager implements Ui {
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
+    private WelcomeWindow welcomeWindow;
 
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
@@ -44,13 +45,19 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info("Starting UI...");
         primaryStage.setTitle(config.getAppTitle());
 
-        //Set the application icon.
+        // Set the application icon.
         // primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+        Stage secondaryStage = new Stage();
 
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
+            mainWindow.show(); // This should be called before creating other UI
+                               // parts
             mainWindow.fillInnerParts();
+
+            welcomeWindow = new WelcomeWindow(secondaryStage, logic);
+            welcomeWindow.show();
+            welcomeWindow.fillInnerParts();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -76,7 +83,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
-                                               String contentText) {
+            String contentText) {
         final Alert alert = new Alert(type);
         alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
         alert.initOwner(owner);
@@ -94,7 +101,8 @@ public class UiManager extends ComponentManager implements Ui {
         System.exit(1);
     }
 
-    //==================== Event Handling Code ===============================================================
+    // ==================== Event Handling Code
+    // ===============================================================
     @Subscribe
     private void handleCloseDialog(CloseDialogEvent event) {
         mainWindow.closeDialog();

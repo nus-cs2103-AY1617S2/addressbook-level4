@@ -21,6 +21,7 @@ public class TestTask implements ReadOnlyTask {
     private StartDate startDate;
     private Priority priority;
     private boolean isDone = false;
+    private boolean isToday = false;
     private TaskType type;
     private UniqueTagList tags;
 
@@ -87,6 +88,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public boolean getDoneStatus() {
         return isDone;
+    }
+
+    @Override
+    public boolean getTodayStatus() {
+        return isToday;
     }
 
     @Override
