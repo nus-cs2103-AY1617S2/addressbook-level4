@@ -20,6 +20,8 @@ public class ClearController extends Controller {
 
     private static final String HELP_DETAILS = "Clears all entries from the todo list.";
     private static final String HELP_FORMAT = "clear";
+    private static final String[] HELP_COMMENTS = { "All entries from every list is affected, not just on the current task window.",
+                                                    "The `undo` command can undo this action." };
 
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
@@ -48,7 +50,7 @@ public class ClearController extends Controller {
         return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
     }
 
-    public static String[] getDetailedHelp() {
-        return getBasicHelp();
+    public static String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, null };
     }
 }

@@ -20,6 +20,8 @@ public class HistoryController extends Controller {
 
     private static final String HELP_DETAILS = "Shows previous commands entered.";
     private static final String HELP_FORMAT = "history";
+    private static final String[] HELP_COMMENTS = { "Commands are listed in order from latest command to earlier command.",
+                                                    "You can also use the up and down arrow keys to cycle through the commands in the command box." };
 
     private ArrayList<String> commandHistory;
 
@@ -52,7 +54,7 @@ public class HistoryController extends Controller {
         return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
     }
 
-    public static String[] getDetailedHelp() {
-        return getBasicHelp();
+    public static String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, null };
     }
 }
