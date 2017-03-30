@@ -368,7 +368,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*`| user | email updates on tasks to people | alert individuals when a task is done
 `*`| user | see percentage of time I spend doing certain types of tasks | have a better understanding of how my time is allocated
 `*`| user | easily share tasks with other people | collaborate on a project with them
-`*`| new user | import task data from other TODO products | easily migrate to DoTomorrow
+`*`| new user | import task data from other TODO products | easily migrate to Yesterday's Tomorrow
 `*`| user | add subtasks to tasks | break down larger tasks
 `*`| user | have a history of task edits | keep track of when tasks change (or when I make mistakes)
 `**`| user | edit tag labels | update tag labels (or when I make mistakes)
@@ -389,9 +389,9 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User requests to list all tasks
-2. Yesterday's Tomorrow shows a list of tasks
+2. System shows a list of tasks
 3. User requests to delete a specific task in the list
-4. Yesterday's Tomorrow deletes the task <br>
+4. System deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -402,7 +402,7 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. Yesterday's Tomorrow shows an error message <br>
+> 3a1. System shows an error message <br>
   Use case resumes at step 2
   
 #### Use case: Edit task
@@ -410,16 +410,16 @@ Use case ends.
 **MSS**
 
 1. User requests a list of all tasks
-2. DoTomorrow shows a list of all tasks
+2. System shows a list of all tasks
 3. User requests changes to a certain parameter of a specific task
-4. DoTomorrow changes the requested parameter of the task and displays the updated item to the user
+4. System changes the requested parameter of the task and displays the updated item to the user
 Use case ends.
 
 **Extensions**
 
 3a. The given index is invalid
 
-> 3a1. DoTomorrow shows an error message <br>
+> 3a1. System shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Add task or event
@@ -427,14 +427,14 @@ Use case ends.
 **MSS**
 
 1. User enters the task with optional parameters such as due date, start and end time
-2. DoTomorrow parses task and stores it to memory, then displays the task with formatted parameters back to user
+2. System parses task and stores it to memory, then displays the task with formatted parameters back to user
 Use case ends.
 
 **Extensions**
 
 2a. Parameters are entered in the wrong format
 
-> 2a1. DoTomorrow shows an error message and an example of correct formatting
+> 2a1. System shows an error message and an example of correct formatting
 > Use case resumes at step 1
 
 #### Use case: Undo last action
@@ -442,7 +442,7 @@ Use case ends.
 **MSS**
 
 1. User enters undo command
-2. DoTomorrow display command to be undone, and undoes the command
+2. System display command to be undone, and undoes the command
 Use case ends.
 
 **Extensions**
@@ -456,14 +456,14 @@ Use case ends.
 **MSS**
 
 1. User enters the search command with given parameters to search for
-2. DoTomorrow interprets the search command and displays a list of matching tasks
+2. System interprets the search command and displays a list of matching tasks
 Use case ends.
 
 **Extensions**
 
 2a. No search terms are given
 
-> 2a1. DoTomorrow shows an error message indicating the user's error
+> 2a1. System shows an error message indicating the user's error
 > Use case resumes at step 1
 
 
