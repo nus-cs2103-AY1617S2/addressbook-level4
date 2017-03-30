@@ -209,16 +209,6 @@ public class LogicManagerTest {
         assertCommandSuccess("empty", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
     }
 
-
-    @Test
-    public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 s/validEmail.butNoPhonePrefix b/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name d/12345 validEmail.butNoPrefix b/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name d/12345 s/validEmail.butNoAddressPrefix valid, address", expectedMessage);
-    }
-
     @Test
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] d/12345 s/undone b/valid, address",

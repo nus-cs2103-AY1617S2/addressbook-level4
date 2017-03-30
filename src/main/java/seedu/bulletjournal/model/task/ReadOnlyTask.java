@@ -20,6 +20,7 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    //@@author A0105748B
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
@@ -27,9 +28,15 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTaskName().equals(this.getTaskName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                && other.getStatus().equals(this.getStatus())
-                && other.getAddress().equals(this.getAddress()));
+                && (other.getPhone() == null ?
+                        "" : other.getPhone()).equals(this.getPhone() == null ?
+                                "" : this.getPhone())
+                && (other.getStatus() == null ?
+                        "" : other.getStatus()).equals(this.getStatus() == null ?
+                                "" : this.getStatus())
+                && (other.getAddress() == null ?
+                        "" : other.getAddress()).equals(this.getAddress() == null ?
+                                "" : this.getAddress()));
     }
 
     /**

@@ -29,9 +29,12 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
-                    argsTokenizer.getValue(PREFIX_STATUS).get(),
-                    argsTokenizer.getValue(PREFIX_BEGINTIME).get(),
+                    argsTokenizer.getValue(PREFIX_DEADLINE).isPresent() ?
+                            argsTokenizer.getValue(PREFIX_DEADLINE).get() : null,
+                    argsTokenizer.getValue(PREFIX_STATUS).isPresent() ?
+                            argsTokenizer.getValue(PREFIX_STATUS).get() : null,
+                    argsTokenizer.getValue(PREFIX_BEGINTIME).isPresent() ?
+                            argsTokenizer.getValue(PREFIX_BEGINTIME).get() : null,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
