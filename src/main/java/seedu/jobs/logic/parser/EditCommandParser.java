@@ -3,9 +3,9 @@ package seedu.jobs.logic.parser;
 import static seedu.jobs.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.jobs.logic.parser.CliSyntax.PREFIX_RECUR;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.jobs.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.jobs.logic.parser.CliSyntax.PREFIX_RECUR;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -31,7 +31,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_RECUR,PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_RECUR, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 

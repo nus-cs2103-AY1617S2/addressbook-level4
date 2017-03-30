@@ -97,7 +97,7 @@ public class ParserUtil {
         assert endTime != null;
         return endTime.isPresent() ? Optional.of(new Time(endTime)) : Optional.empty();
     }
-    
+
     public static Optional<Period> parsePeriod(Optional<String> period) throws IllegalValueException {
         assert period != null;
         return period.isPresent() ? Optional.of(new Period(period)) : Optional.empty();
