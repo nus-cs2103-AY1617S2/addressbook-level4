@@ -169,13 +169,13 @@ There is no need to save manually.
 Load Task Manager data from specified file path and continue using that directory for operations.<br>
 Create new file if no such file exists and cancel operations if given non-XML address or invalid XML file.<br>
 Default file path is at data/taskmanager.xml.<br>
-Format: `load FILEPATH`
+Format: `load FILEPATH` `cd FILEPATH`
 
 Examples:
 
-* `cd /Users/admin/taskmanager.xml`<br>
+* `load /Users/admin/taskmanager.xml`<br>
   Changes the Storage Directory to /Users/admin/taskmanager.xml in UNIX/MAC system
-* `load data/new/cloudsync.xml`<br>
+* `cd data/new/cloudsync.xml`<br>
   Changes the Storage Directory to ./data/new/cloudsync.xml
 
 ### 2.14. Move the directory of the task manager : `move` or  `movefile`
@@ -183,7 +183,7 @@ Examples:
 Save Task Manager data to specified file path and continue using that directory for operations.<br>
 If existing file with the same name exists, it will be overwritten with current Task Manager data.<br>
 Default file path is at data/taskmanager.xml.<br>
-Format: `move FILEPATH`
+Format: `move FILEPATH` `movefile FILEPATH`
 
 Examples:
 
