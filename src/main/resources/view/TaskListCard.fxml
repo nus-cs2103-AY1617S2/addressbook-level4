@@ -45,6 +45,14 @@
                                     <Insets right="6.0" />
                                  </padding>
                               </Label>
+                              <Label fx:id="recur" alignment="CENTER" contentDisplay="CENTER" style="-fx-padding: 3; -fx-font-size: 10;" stylesheets="@PanelTheme.css" text="\$r" wrapText="true">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
                                   </children>
                            <VBox.margin>
                               <Insets top="3.0" />
@@ -74,17 +82,6 @@
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
-                  </Label>
-                  <Label fx:id="recur" alignment="CENTER" contentDisplay="CENTER" minWidth="50.0" prefHeight="23.0" prefWidth="111.0" style="-fx-padding: 3;" styleClass="label-recur" stylesheets="@PanelTheme.css" text="\$r" translateX="1.0" wrapText="true">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets left="-50.0" top="55.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="12.0" />
-                     </font>
                   </Label>
                </children>
             </HBox>
