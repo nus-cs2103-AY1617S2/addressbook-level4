@@ -37,7 +37,10 @@
                   <HBox>
                      <children>
                         <Label fx:id="name" text="\$title" />
-                              <FlowPane fx:id="tags" styleClass="content" />
+                              <FlowPane fx:id="tags" styleClass="content">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></FlowPane>
                      </children>
                   </HBox>
                </graphic>

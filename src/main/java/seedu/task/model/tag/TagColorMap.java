@@ -3,8 +3,6 @@ package seedu.task.model.tag;
 import java.util.HashMap;
 import java.util.Random;
 
-import javafx.scene.paint.Color;
-
 public class TagColorMap {
 	private static HashMap<String, String> tagColorMap;
 
