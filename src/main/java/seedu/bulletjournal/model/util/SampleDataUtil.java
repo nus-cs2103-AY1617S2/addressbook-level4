@@ -25,7 +25,7 @@ public class SampleDataUtil {
                             new BeginDate("evening"), new UniqueTagList("routine")),
                 new Task(new TaskName("Play basketball"), new DueDate("soon"), new Status("undone"),
                             new BeginDate("soon"), new UniqueTagList("love")),
-                new Task(new TaskName("Change test cases"), new DueDate("today"), new Status("done"),
+                new Task(new TaskName("Change test cases"), new DueDate("today"), new Status("undone"),
                             new BeginDate("yesterday"), new UniqueTagList("homework")),
                 new Task(new TaskName("Ride bicycle"), new DueDate("every day"), new Status("undone"),
                             new BeginDate("anytime"), new UniqueTagList("exercise")) };
