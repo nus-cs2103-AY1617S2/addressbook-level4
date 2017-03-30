@@ -5,7 +5,8 @@ import java.util.regex.Pattern;
 import org.teamstbf.yats.logic.parser.ArgumentTokenizer.Prefix;
 
 /**
- * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
+ * Contains Command Line Interface (CLI) syntax definitions common to multiple
+ * commands
  */
 public class CliSyntax {
 
@@ -18,16 +19,19 @@ public class CliSyntax {
     public static final Prefix PREFIX_PERIOD = new Prefix("p/");
     public static final Prefix PREFIX_DEADLINE = new Prefix("b/");
 
-
-    /*NLP Prefix definitions */
+    /* NLP Prefix definitions */
     public static final Prefix PREFIX_NLP_TIME = new Prefix(",");
     public static final Prefix PREFIX_NLP_LOCATION = new Prefix("@");
     public static final Prefix PREFIX_NLP_TAG = new Prefix("#");
     public static final Prefix PREFIX_NLP_DESCRIPTION = new Prefix("//");
 
-
     /* Patterns definitions */
-    public static final Pattern KEYWORDS_ARGS_FORMAT =
-            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
+    public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
+													  // or
+													  // more
+													  // keywords
+													  // separated
+													  // by
+													  // whitespace
 
 }
