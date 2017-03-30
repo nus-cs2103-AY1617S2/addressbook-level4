@@ -71,7 +71,7 @@ public class ParserUtil {
      */
     public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
         assert name != null;
-        return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
+        return name.isPresent() ? Optional.of(new Name(name.get().replace("\\", ""))) : Optional.empty();
     }
 
     /**
@@ -95,7 +95,7 @@ public class ParserUtil {
      */
     public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
         assert location != null;
-        return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
+        return location.isPresent() ? Optional.of(new Location(location.get().replace("\\", ""))) : Optional.empty();
     }
 
     /**
@@ -103,7 +103,7 @@ public class ParserUtil {
      */
     public static Optional<Remark> parseRemark(Optional<String> remark) throws IllegalValueException {
         assert remark != null;
-        return remark.isPresent() ? Optional.of(new Remark(remark.get())) : Optional.empty();
+        return remark.isPresent() ? Optional.of(new Remark(remark.get().replace("\\", ""))) : Optional.empty();
     }
 
     /**
