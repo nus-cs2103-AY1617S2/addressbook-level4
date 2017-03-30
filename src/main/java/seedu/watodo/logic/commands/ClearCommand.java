@@ -29,7 +29,7 @@ public class ClearCommand extends Command {
         model.resetData(dataToClear);
 
     }
-    
+
     @Override
     public void redo() {
         assert model != null;
@@ -37,8 +37,8 @@ public class ClearCommand extends Command {
         model.updateFilteredListToShowAll();
 
     }
-    
+
     //@@author
-    
-    
+
+
 }

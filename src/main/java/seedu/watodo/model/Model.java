@@ -66,5 +66,5 @@ public interface Model {
     Command getUndoneCommand();
 
     void clearRedo();
-    
+
 }

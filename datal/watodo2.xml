@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tasklist>
     <tasks>
-        <name>lmae</name>
+        <name>lol</name>
         <status>Undone</status>
     </tasks>
     <tasks>
         <name>hello</name>
-        <status>Undone</status>
+        <status>Done</status>
     </tasks>
 </tasklist>

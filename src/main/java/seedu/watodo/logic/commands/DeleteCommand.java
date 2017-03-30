@@ -73,23 +73,23 @@ public class DeleteCommand extends Command {
         assert model != null;
 
         try {
-            
+
             model.addTask(new Task(taskToDelete));
             model.updateFilteredListToShowAll();
         } catch (DuplicateTaskException e) {
 
         }
     }
-    
+
     @Override
     public void redo() {
         assert model != null;
-        
+
             try {
                 model.updateFilteredListToShowAll();
                 model.deleteTask(taskToDelete);
             } catch (TaskNotFoundException e) {
-                
+
             }
     }
 
