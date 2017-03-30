@@ -18,7 +18,7 @@ public class ViewCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void viewDefault() {
-        assertGroupsDisplay("All");
+        assertGroupsDisplay("Done", "Unfinished");
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ViewCommandTest extends TaskManagerGuiTest {
     @Test
     public void viewWrongInput() {
         commandBox.runCommand("view randomstring");
-        assertGroupsDisplay("All");
+        assertGroupsDisplay("Done", "Unfinished");
         assertResultMessage(ViewCommand.MESSAGE_ERROR);
     }
 
