@@ -36,8 +36,14 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    /** Returns the undone task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getUndoneTaskList();
+
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+
+    /** Updates the filter of the filtered task list to show undone tasks */
+    void updateFilteredListToShowUndone();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);

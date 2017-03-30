@@ -1,5 +1,7 @@
 package seedu.bulletjournal.model;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -26,17 +28,16 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given bulletJournal and userPrefs.
      */
-    public ModelManager(ReadOnlyTodoList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTodoList bulletJournal, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(bulletJournal, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with bullet journal: " + bulletJournal + " and user prefs " + userPrefs);
 
-        this.todoList = new TodoList(addressBook);
+        this.todoList = new TodoList(bulletJournal);
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
-
     }
 
     public ModelManager() {
@@ -68,7 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
 
@@ -89,6 +90,25 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    //@@author A0105748B
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getUndoneTaskList() {
+        String[] keywords = new String[2];
+        keywords[0] = "undone";
+        keywords[1] = "empty";
+        Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        updateMatchedTaskList(keywordSet);
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
+
+    @Override
+    public void updateFilteredListToShowUndone() {
+        String[] keywords = new String[2];
+        keywords[0] = "undone";
+        keywords[1] = "empty";
+        Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        updateMatchedTaskList(keywordSet);
+    }
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
@@ -176,7 +196,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return statusKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStatus() == null ?
-                            "" : task.getStatus().value, keyword))
+                            "empty" : task.getStatus().value, keyword))
                     .findAny()
                     .isPresent();
         }

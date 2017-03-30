@@ -14,7 +14,7 @@ public interface TodoListStorage {
     /**
      * Returns the file path of the data file.
      */
-    String getAddressBookFilePath();
+    String getBulletJournalFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyTodoList}.
@@ -25,7 +25,7 @@ public interface TodoListStorage {
     Optional<ReadOnlyTodoList> readAddressBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getBulletJournalFilePath()
      */
     Optional<ReadOnlyTodoList> readAddressBook(String filePath) throws DataConversionException, IOException;
 

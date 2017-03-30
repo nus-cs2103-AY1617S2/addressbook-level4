@@ -14,7 +14,7 @@ public class DeleteCommandTest extends TodoListGuiTest {
     public void delete() {
 
         //delete the first in the list
-        TestTask[] currentList = td.getTypicalTasks();
+        TestTask[] currentList = td.getUndoneTasks();
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 

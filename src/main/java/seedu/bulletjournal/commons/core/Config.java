@@ -42,7 +42,7 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getBulletJournalFilePath() {
         return todoListFilePath;
     }
 

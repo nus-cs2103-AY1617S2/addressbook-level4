@@ -116,7 +116,19 @@ public class MainWindow extends UiPart<Region> {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getBulletJournalFilePath());
+        new CommandBox(getCommandBoxPlaceholder(), logic);
+    }
+
+    //@@author A0105748B
+    /**
+     * Decides what to show on main window when the application initializes.
+     */
+    public void fillInnerPartsAtStart() {
+        browserPanel = new BrowserPanel(browserPlaceholder);
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getUndoneTaskList());
+        new ResultDisplay(getResultDisplayPlaceholder());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getBulletJournalFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 

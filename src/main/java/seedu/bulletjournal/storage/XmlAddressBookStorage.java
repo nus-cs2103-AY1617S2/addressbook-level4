@@ -24,7 +24,7 @@ public class XmlAddressBookStorage implements TodoListStorage {
         this.filePath = filePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getBulletJournalFilePath() {
         return filePath;
     }
 
