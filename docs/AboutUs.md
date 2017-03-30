@@ -11,7 +11,7 @@ Role: Developer <br>
 * Features implemented:
    * [Path Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written: 
-   * [[functional code](A0164061N.md)]
+   * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0164061N.md)]
 * Other major contributions: User Guide, Developer Guide, Scheduling and Tracking
 
 -----
@@ -26,7 +26,7 @@ Role: Developer <br>
    * [Find Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Undo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written: 
-   * [[functional code](A0163845X.md)]
+   * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0163845X.md)]
 * Other major contributions: Set up back end for file manipulation
 -----
 
@@ -37,7 +37,7 @@ Role: Developer <br>
 * Features implemented:
    * [Done Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written: 
-   * [[functional code](A0146757R.md)]
+   * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0146757R.md)]
 * Other major contributions:
    * Did the initial refactoring from AddressBook to Fast Task
    * Set up Travis and Coverage
@@ -52,7 +52,7 @@ Role: Developer <br>
    * [Flexible Commands](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Delete Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written: 
-   * [[functional code](A0152855Y.md)]
+   * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0152855Y.md)]
 * Other major contributions: 
    * Did the initial refactoring from AddressBook to Fast Task
 
