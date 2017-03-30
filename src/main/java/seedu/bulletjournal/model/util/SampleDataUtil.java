@@ -17,18 +17,18 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new TaskName("Assignment for CS"), new DueDate("210317"), new Status("undone"),
-                            new BeginDate("210217"), new UniqueTagList("friends")),
-                new Task(new TaskName("Burn homework"), new DueDate("210317"), new Status("undone"),
-                            new BeginDate("210217"), new UniqueTagList("colleagues", "friends")),
-                new Task(new TaskName("Carry burdens"), new DueDate("210317"), new Status("undone"),
-                            new BeginDate("210217"), new UniqueTagList("neighbours")),
-                new Task(new TaskName("Destroy homework"), new DueDate("210317"), new Status("undone"),
-                            new BeginDate("210217"), new UniqueTagList("family")),
-                new Task(new TaskName("Irrigate fields"), new DueDate("210317"), new Status("undone"),
-                            new BeginDate("210217"), new UniqueTagList("classmates")),
-                new Task(new TaskName("Return bicycle"), new DueDate("210317"), new Status("undone"),
-                            new BeginDate("210217"), new UniqueTagList("colleagues")) };
+                new Task(new TaskName("Assignment for CS"), new DueDate("14th May"), new Status("undone"),
+                            new BeginDate("long long ago"), new UniqueTagList("homework")),
+                new Task(new TaskName("Other homework"), new DueDate("Forever"), new Status("undone"),
+                            new BeginDate("tmr"), new UniqueTagList("unimportant")),
+                new Task(new TaskName("Take shower"), new DueDate("tonight"), new Status("undone"),
+                            new BeginDate("evening"), new UniqueTagList("routine")),
+                new Task(new TaskName("Play basketball"), new DueDate("soon"), new Status("undone"),
+                            new BeginDate("soon"), new UniqueTagList("love")),
+                new Task(new TaskName("Change test cases"), new DueDate("today"), new Status("done"),
+                            new BeginDate("yesterday"), new UniqueTagList("homework")),
+                new Task(new TaskName("Ride bicycle"), new DueDate("every day"), new Status("undone"),
+                            new BeginDate("anytime"), new UniqueTagList("exercise")) };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }
