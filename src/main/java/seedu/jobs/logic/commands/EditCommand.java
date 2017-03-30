@@ -166,12 +166,12 @@ public class EditCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
-        
-        public void setPeriod(Optional<Period> period){
+
+        public void setPeriod(Optional<Period> period) {
             assert period != null;
             this.period = period;
         }
-        
+
         public Optional<Period> getPeriod() {
             return period;
         }

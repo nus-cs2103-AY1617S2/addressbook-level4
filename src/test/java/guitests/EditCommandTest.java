@@ -66,7 +66,7 @@ public class EditCommandTest extends TaskBookGuiTest {
 //
 //        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
 //        TestTask editedTask = new TaskBuilder(personToEdit).withName("CS3101S").build();
-//        
+//
 //        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedTask);
 //    }
 
