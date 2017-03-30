@@ -69,6 +69,7 @@ public class MainApp extends Application {
         initEventsCenter();
 
         SaveCommand.setStorage(storage);
+        SaveCommand.setConfig(config);
     }
 
     private String getApplicationParameter(String parameterName) {
