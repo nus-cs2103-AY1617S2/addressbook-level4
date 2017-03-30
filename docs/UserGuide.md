@@ -11,7 +11,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 	* [find](#find-a-task-find)
 	* [list](#list-tasks--list)
 	* [edit](#edit-a-task-edit)
-   * [undo/redo](#undo/redo-the-data-undo-redo)
+   * [undo/redo](#undo/redo-a-task-undo-redo)
 	* [exit](#exit-the-program--exit)
 	* [save](#save-the-data)
 * [Command Summary](#command-summary)
