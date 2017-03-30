@@ -302,7 +302,7 @@ One of the design we considered for undo involves the Command pattern. The idea 
 
 When undo command is called, it can obtain the latest command from History and invoke it's undo method. An undo call is simple with this design, however each current Command and every new Command needs it's own individual implementation of undo method.
 
-The alternate design, which was implemented, involves storing a backup file. This makes use of how every command that modifies data will invoke an automatic save to kit.xml. Before the data is saved, a backup is saved. Undo command now simply loads the backup into memory. Future commands can also support undo easily as they do not need to implmennt any new methods.
+The alternate design, which was implemented, involves storing a backup file. This makes use of how every command that modifies data will invoke an automatic save to kit.xml. Before the data is saved, a backup is saved. Undo command now simply loads the backup into memory. Future commands can also support undo easily as they do not need to implement any new methods.
 
 The downside is the extra storage space used. To reduce the downside, the backup file is deleted everytime the program closes. The backup file thus functions as a temporary file.
 
