@@ -1,5 +1,7 @@
 package seedu.doist.model.task;
 
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_DATES;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -74,7 +76,7 @@ public class TaskDate {
      */
     public static boolean validateDate (Date startDate, Date endDate) throws IllegalValueException {
         if (startDate == null || endDate == null) {
-            throw new IllegalValueException("Incorrect Dates");
+            throw new IllegalValueException(MESSAGE_INVALID_DATES);
         } else {
             return (startDate.compareTo(endDate) <= 0) ? true : false;
         }
