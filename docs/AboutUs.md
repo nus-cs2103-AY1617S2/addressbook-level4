@@ -10,12 +10,12 @@ Role: Team lead <br>
 * Components in charge of: Model, Logic
 * Aspects/tools in charge of: Deliverables and deadlines <br>
 * Features implemented:
-   * [Add floating tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
+   * [Add floating tasks](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#221-adding-a-floating-task-addf)
    * [Add deadline tasks]
-(https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
+(https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#222-adding-a-deadline-task-addd)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/collated/main/A0146738U.md)][[test code](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/collated/test/A0146738U.md)]
 * Other major contributions:
-   * Set up Travis, Appveyor, Coveralls and Codacy
+   * Did initial refactoring from AddressBook to TodoList
    * Set up Travis, Appveyor, Coveralls and Codacy
    * Set up team organisation, labels and milestones
 
