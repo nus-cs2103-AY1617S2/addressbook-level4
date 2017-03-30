@@ -21,7 +21,8 @@ import seedu.toluist.ui.commons.CommandResult;
  */
 public class HelpController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(HelpController.class);
-    private static final String MESSAGE_ERROR = "Sorry, that command does not exist.\nPlease try something else.";
+    private static final String MESSAGE_ERROR = "Sorry, that command does not exist.\n"
+                                                    + "Please type help for available commands.";
     private static final String MESSAGE_RESULT = "Displaying Help Screen.";
     private static final String COMMAND_WORD = "help";
     private static final String COMMAND_REGEX = "(?iu)^\\s*help.*";
