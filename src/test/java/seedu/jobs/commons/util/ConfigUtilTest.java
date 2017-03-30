@@ -52,8 +52,9 @@ public class ConfigUtilTest {
     public void read_fileInOrder_successfullyRead() throws DataConversionException {
 
         Config expected = getTypicalConfig();
-
+        System.out.println(expected);
         Config actual = read("TypicalConfig.json").get();
+        System.out.println(actual);
         assertEquals(expected, actual);
     }
 
@@ -67,7 +68,8 @@ public class ConfigUtilTest {
     public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
         Config expected = getTypicalConfig();
         Config actual = read("ExtraValuesConfig.json").get();
-
+        System.out.println(actual);
+        System.out.println(expected);
         assertEquals(expected, actual);
     }
 
@@ -76,8 +78,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setTaskBookFilePath("addressbook.xml");
-        config.setTaskBook("TypicalAddressBookName");
+        config.setTaskBookFilePath("data/addressbook.xml");
+        config.setTaskBook("MyTaskBook");
         return config;
     }
 
