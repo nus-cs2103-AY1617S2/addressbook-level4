@@ -9,7 +9,6 @@ We are a team based in the [School of Computing, National University of Singapor
 Role: Developer <br>
 * Aspects/Tools in charge of: Github, Source Tree, Eclipse
 * Features implemented:
-   * [Task Date](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Path Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written: 
    * [[functional code](A0164061N.md)]
@@ -27,7 +26,7 @@ Role: Developer <br>
    * [Find Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Undo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written: 
-   * [[functional code](A0164061N.md)]
+   * [[functional code](A0163845X.md)]
 * Other major contributions: Set up back end for file manipulation
 -----
 
@@ -38,22 +37,22 @@ Role: Developer <br>
 * Features implemented:
    * [Done Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written: 
-   * [[functional code](A0164061N.md)]
+   * [[functional code](A0146757R.md)]
 * Other major contributions:
    * Did the initial refactoring from AddressBook to Fast Task
    * Set up Travis and Coverage
 
 -----
 
-#### [Yunchun Liu](http://github.com/yunchun-liu)
+#### [Yun-chun Liu](http://github.com/yunchun-liu)
 <img src="images/edith.jpg" width="150"><br>
 Role: Developer <br>
 * Aspects/Tools in charge of: UI, JavaFX
 * Features implemented:
-   * [Task Display](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
+   * [Flexible Commands](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Delete Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written: 
-   * [[functional code](A0164061N.md)]
+   * [[functional code](A0152855Y.md)]
 * Other major contributions: 
    * Did the initial refactoring from AddressBook to Fast Task
 
