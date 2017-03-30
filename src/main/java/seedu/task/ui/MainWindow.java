@@ -18,6 +18,7 @@ import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 import seedu.task.model.task.ReadOnlyTask;
 
+//@@author A0146757R-reused
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
  * and space where other JavaFX elements can be placed.
@@ -212,3 +213,4 @@ public class MainWindow extends UiPart<Region> {
     }
 
 }
+//@@author
