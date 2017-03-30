@@ -243,7 +243,7 @@ Examples:
 Undo the previous command and restore the data to one step before.<br>
 Format: `undo`
 
-### 2.10 Redoing previous step : `redo`
+### 2.10. Redoing previous step : `redo`
 
 Redo the previous command and restore the data to one step before. <br>
 
@@ -252,17 +252,32 @@ Redo the previous command and restore the data to one step before. <br>
 Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.12. Exiting the program : `exit`
+### 2.12. Load data from a specified file : `import`
 
-Exits the program.<br>
-Format: `exit`
+Clears all entries from the task manager.<br>
+Format: `import FILE_PATH`
 
-### 2.13. Saving the data
+Examples:
 
-Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+* `import data/watodo2.xml`
+  Load data from data/watodo2.xml and saves future data to the same file location.
 
-### 2.14 Alternative commands
+### 2.13. Change storage file location : `saveas`
+
+Saves task list data to the new specified file path and loads task list from that location in the future.<br>
+Format: `saveas FILE_PATH`
+> * 'FILE_PATH' must end with **.xml**
+
+Examples:
+
+* `saveas data/watodo2.xml`
+  Saves current and future data to data/watodo2.xml.
+
+### 2.14. View current storage file location : `viewfile`
+
+Format: `viewfile`
+
+### 2.15 Alternative commands
 
 Below is a list of shortcut keys for some of the above commands:
 
@@ -274,7 +289,7 @@ Below is a list of shortcut keys for some of the above commands:
 > * unmark: `um`, `uncheck`
 > * find: `f`, `search`
 
-### 2.15 Customize alternative commands: `shortcut`
+### 2.16 Customize alternative commands: `shortcut`
 
 You can add and delete your own personal shortcut keys to the various commands.
 Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature)
@@ -287,6 +302,16 @@ Examples:
 * shortcut + add @@
 * shortcut + undo z
 * shortcut - undo z
+
+### 2.17. Exiting the program : `exit`
+
+Exits the program.<br>
+Format: `exit`
+
+### 2.18. Saving the data
+
+Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.
 
 ## 3. FAQ
 
@@ -319,14 +344,35 @@ Examples:
 
 * **Edit** : `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...` <br>
 
+* **Delete** : `delete INDEX [MORE_INDICES]...` <br>
+
 * **Mark** : `mark INDEX [MORE_INDICES]...` <br>
 
 * **Unmark** : `unmark INDEX [MORE_INDICES]...` <br>
 
-* **Delete** : `delete INDEX [MORE_INDICES]...` <br>
+* **Undo** : `undo` <br>
+
+* **Redo** : `redo` <br>
 
 * **Clear** : `clear` <br>
 
-* **Undo** : `undo` <br>
+* **Import** : `import FILE_PATH` <br>
+
+* **Save As** : `saveas FILE_PATH` <br>
+
+* **View File** : `viewfile` <br>
 
 * **Help** : `help` <br>
+
+* **Alternative Commands** : <br>
+> * add: `a`
+> * edit: `e`
+> * list: `l`
+> * delete: `d`
+> * mark: `m`, `check`
+> * unmark: `um`, `uncheck`
+> * find: `f`, `search`
+
+* **Customize Alternative Commands** : 'shortcut'
+> * `shortcut + COMMAND_WORD SHORTCUT_KEY`
+> * `shortcut - COMMAND_WORD SHORTCUT_KEY`

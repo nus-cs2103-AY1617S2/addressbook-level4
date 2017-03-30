@@ -21,8 +21,10 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
+
     @XmlElement(required = false)
     private String startDate;
+
     @XmlElement(required = false)
     private String endDate;
 
@@ -37,7 +39,6 @@ public class XmlAdaptedTask {
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedTask() {}
-
 
     /**
      * Converts a given Task into this class for JAXB use.
@@ -83,14 +84,14 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(taskTags);
         if (startDate == null && endDate == null) {
             return new Task(name, tags, status);
+
         } else if (startDate == null && endDate != null) {
             final DateTime eDate = new DateTime(endDate);
-
             return new Task(name, eDate, tags, status);
+
         } else if (startDate != null && endDate != null) {
             final DateTime sDate = new DateTime(startDate);
             final DateTime eDate = new DateTime(endDate);
-
             return new Task(name, sDate, eDate, tags, status);
         }
 

@@ -4,8 +4,11 @@ import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0141077L-reused
 /**
  * Deletes a task identified using it's last displayed index from the task manager.
  */
@@ -19,8 +22,12 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate.";
+
 
     private int[] filteredTaskListIndices;
+    
+    private ReadOnlyTask taskToDelete;
 
     public DeleteCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -47,7 +54,7 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
-            ReadOnlyTask taskToDelete = lastShownList.get(filteredTaskListIndices[i]);
+            taskToDelete = lastShownList.get(filteredTaskListIndices[i]);
 
             try {
                 model.deleteTask(taskToDelete);
@@ -59,6 +66,17 @@ public class DeleteCommand extends Command {
         }
 
         return new CommandResult(tasksDeletedMessage.toString());
+    }
+    
+    @Override
+    public void unexecute() {
+        assert model != null;
+        
+        try {
+            model.addTask(new Task(taskToDelete));
+        } catch (DuplicateTaskException e) {
+            
+        }
     }
 
 }
