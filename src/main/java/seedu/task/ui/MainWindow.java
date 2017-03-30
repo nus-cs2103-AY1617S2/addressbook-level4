@@ -18,14 +18,15 @@ import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 import seedu.task.model.task.ReadOnlyTask;
 
-//@@author A0146757R-reused
+
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
-
+//@@author A0146757R
     private static final String ICON = "/images/task_manager.png";
+//@@author
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
@@ -213,4 +214,4 @@ public class MainWindow extends UiPart<Region> {
     }
 
 }
-//@@author
+
