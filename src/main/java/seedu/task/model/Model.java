@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
@@ -63,6 +64,8 @@ public interface Model {
 	void updateBackup() throws DuplicateTaskException;
     //@@author A0163845X
 	void sort(TaskComparable t);
+
+	void setTaskManager(Optional<ReadOnlyTaskManager> readTaskManager);
 	
 	//void getPath(String path);
 

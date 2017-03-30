@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 
@@ -271,5 +272,20 @@ public class TaskManager implements ReadOnlyTaskManager {
 			}
 		}
 		
+	}
+    //@@author A0163845X
+
+	public void loadNewTaskList(Optional<ReadOnlyTaskManager> readTaskManager) {
+
+		tasks.clear();
+		for (ReadOnlyTask t : readTaskManager.get().getTaskList()) {
+			Task temp = new Task (t);
+			try {
+				tasks.add(temp);
+			} catch (DuplicateTaskException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

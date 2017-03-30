@@ -15,6 +15,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.FileNameHandler;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
+import seedu.task.commons.events.storage.LoadDataEvent;
 import seedu.task.commons.events.ui.ChangePathNameEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
@@ -191,7 +192,7 @@ public class MainApp extends Application {
     //@@author A0163845X
     @Subscribe
     public void handleChangePathNameEvent(ChangePathNameEvent event) {
-    	System.out.println("working");
+    	System.out.println("working cpne");
     	storage.setPathName(event.getPathName());
     	FileNameHandler.setFileName(event.getPathName());
     	try {
@@ -201,6 +202,27 @@ public class MainApp extends Application {
 			storage.setPathName(FileNameHandler.DEFAULT_FILEPATH);
 	    	FileNameHandler.setFileName(FileNameHandler.DEFAULT_FILEPATH);
 		}
+    }
+    
+    //@@author A0163845X
+    @Subscribe
+    public void handleLoadDataEvent(LoadDataEvent event) {
+    	System.out.println("working lde");
+	    	for (int i = 0; i < 4; i++) {
+	    	try {
+	    		StorageManager temp = new StorageManager(event.getPathName(), config.getUserPrefsFilePath());
+	    		System.out.println(temp.equals(storage));
+	    		if (!temp.readTaskManager().isPresent()) {
+	    			throw new Exception();
+	    		}
+	    		model.setTaskManager(temp.readTaskManager());
+	        	FileNameHandler.setFileName(event.getPathName());
+			} catch (Exception e) {
+				System.out.println("Unexpected exception");
+				storage.setPathName(FileNameHandler.DEFAULT_FILEPATH);
+		    	FileNameHandler.setFileName(FileNameHandler.DEFAULT_FILEPATH);
+			}
+    	}
     }
     
 

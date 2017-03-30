@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -205,6 +206,14 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void sort(TaskComparable t) {
 		taskManager.sort(t);
+	}
+    //@@author A0163845X
+
+	@Override
+	public void setTaskManager(Optional<ReadOnlyTaskManager> readTaskManager) {
+		if (readTaskManager.isPresent()) {
+			taskManager.loadNewTaskList(readTaskManager);
+		}
 	}
 
 }
