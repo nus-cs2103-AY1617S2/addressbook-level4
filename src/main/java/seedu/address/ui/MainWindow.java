@@ -144,7 +144,7 @@ public class MainWindow extends Window {
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(stage.getWidth(), stage.getHeight(),
                 (int) stage.getX(), (int) stage.getY(),
-                Paths.get(getRoot().getStylesheets().get(0)).getFileName().toString());
+                Paths.get(getRoot().getStylesheets().get(0)).getFileName().toString().replaceFirst("[.][^.]+$", ""));
     }
 
     @FXML

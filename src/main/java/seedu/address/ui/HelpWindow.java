@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+
 import javafx.fxml.FXML;
 import javafx.scene.web.WebView;
+import seedu.address.MainApp;
 import seedu.address.commons.util.FxViewUtil;
 
 /**
@@ -12,7 +16,8 @@ public class HelpWindow extends Window {
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
     private static final String TITLE = "Help";
-    private static final String HELP_HTML_FILE = "/offdoc.html?mdfile=docs/UserGuide.md";
+    private static final String HELP_HTML =
+            "CS2103JAN2017-F11-B3.github.io/main/util/offdoc.html?mdfile=https://raw.githubusercontent.com/CS2103JAN2017-F11-B3/main/master/docs/UserGuide.md";
 
     @FXML
     private WebView browser;
@@ -24,7 +29,7 @@ public class HelpWindow extends Window {
         stage.setMaximized(true); //TODO: set a more appropriate initial size
         FxViewUtil.setStageIcon(stage, ICON);
 
-        browser.getEngine().load("file://" + System.getProperty("user.dir") + HELP_HTML_FILE);
+        browser.getEngine().load(HELP_HTML);
 
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
     }

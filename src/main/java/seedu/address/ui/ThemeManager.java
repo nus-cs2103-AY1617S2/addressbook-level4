@@ -12,7 +12,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.MainApp;
-import seedu.address.commons.util.ResourceUtil;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -21,7 +20,8 @@ import seedu.address.model.UserPrefs;
 public class ThemeManager extends UiPart<Region> {
 
     public static final String THEME_FILE_FOLDER = "/themes/";
-    public static final String DEFAULT_STYLESHEET = "DarkTheme.css";
+    public static final String STYLESHEET_EXTENSION = ".css";
+    public static final String DEFAULT_STYLESHEET = "LimeTheme";
     
     private static final String FXML = "ThemeManager.fxml";
 
@@ -50,7 +50,7 @@ public class ThemeManager extends UiPart<Region> {
 
     public static void changeTheme(Parent root, String theme) {
         root.getStylesheets().clear();
-        root.getStylesheets().add(MainApp.class.getResource(THEME_FILE_FOLDER + theme).toString());
+        root.getStylesheets().add(MainApp.class.getResource(THEME_FILE_FOLDER + theme + STYLESHEET_EXTENSION).toString());
     }
 
     private void setConnections(String path) {
@@ -74,7 +74,11 @@ public class ThemeManager extends UiPart<Region> {
     }
 
     private ObservableList<String> getThemes(String path) {
-        ObservableList<String> items = FXCollections.observableArrayList();
+        ObservableList<String> items = FXCollections.observableArrayList(
+                "BlandTheme",
+                "DarkTheme",
+                "LimeTheme");
+        /*
         try {
             for (String fileName : ResourceUtil.getResourceFiles(path)) {
                 items.add(fileName);
@@ -82,6 +86,7 @@ public class ThemeManager extends UiPart<Region> {
         } catch (IOException e) {
             logger.warning(e.toString());
         }
+        */
         return items;
     }
 
