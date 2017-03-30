@@ -19,7 +19,8 @@ This product is a tool to accept natural language commands via keyboards to mana
 ## Start the program
 
 Double click the JOBS.jar file to start the program.
-<img src="images/Display_JOBS.png" width="600"><br>
+
+<img src="images/DIsplay_JOBS.png" width="600"><br>
 
 1. User input/command bar: Enter your to-dos here easily using the given Command Tags.
 2. Feedback prompt: The outcome to any changes that you make to your tasks is shown here.
