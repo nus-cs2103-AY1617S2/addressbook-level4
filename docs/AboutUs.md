@@ -5,14 +5,17 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Lee Jun Han Bryan](https://github.com/bryanleejh)<br>
-<img src="https://avatars3.githubusercontent.com/u/12642495?v=3&s=460" width="150"><br>
+<img src="images/BryanLee.png" width="150"><br>
 Role: Team lead <br>
-Responsibilities: Deliverables and deadlines, Scheduling and tracking <br>
 * Components in charge of: Model, Logic
-* Aspects/tools in charge of:
+* Aspects/tools in charge of: Deliverables and deadlines <br>
 * Features implemented:
-* Code written:
+   * [Add floating tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
+   * [Add deadline tasks]
+(https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
+* Code written: [[functional code](A0146738U.md)][[test code](A0146738U.md)]
 * Other major contributions:
+   * Set up Travis, Appveyor, Coveralls and Codacy
    * Set up Travis, Appveyor, Coveralls and Codacy
    * Set up team organisation, labels and milestones
 
