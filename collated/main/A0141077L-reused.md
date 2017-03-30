@@ -14,8 +14,12 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate.";
+
 
     private int[] filteredTaskListIndices;
+
+    private ReadOnlyTask taskToDelete;
 
     public DeleteCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -42,7 +46,7 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
-            ReadOnlyTask taskToDelete = lastShownList.get(filteredTaskListIndices[i]);
+            taskToDelete = lastShownList.get(filteredTaskListIndices[i]);
 
             try {
                 model.deleteTask(taskToDelete);
@@ -54,6 +58,17 @@ public class DeleteCommand extends Command {
         }
 
         return new CommandResult(tasksDeletedMessage.toString());
+    }
+
+    @Override
+    public void unexecute() {
+        assert model != null;
+
+        try {
+            model.addTask(new Task(taskToDelete));
+        } catch (DuplicateTaskException e) {
+
+        }
     }
 
 }
@@ -78,6 +93,9 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_STATUS_UNDONE = "The task status is already set to Undone.";
 
     private int[] filteredTaskListIndices;
+
+    private Task undoUnmark;
+    private int undoUnmarkInt;
 
     public UnmarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -104,10 +122,12 @@ public class UnmarkCommand extends Command {
             }
 
             ReadOnlyTask taskToUnmark = lastShownList.get(filteredTaskListIndices[i]);
+            this.undoUnmark = new Task(taskToUnmark);
 
             try {
                 Task unmarkedTask = createUnmarkedTask(taskToUnmark);
                 model.updateTask(filteredTaskListIndices[i], unmarkedTask);
+                this.undoUnmarkInt = filteredTaskListIndices[i];
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -117,6 +137,15 @@ public class UnmarkCommand extends Command {
         }
 
         return new CommandResult(tasksUnmarkedMessage.toString());
+    }
+
+    @Override
+    public void unexecute() {
+        try {
+            model.updateTask(undoUnmarkInt, undoUnmark);
+        } catch (DuplicateTaskException e) {
+
+        }
     }
 
     /**

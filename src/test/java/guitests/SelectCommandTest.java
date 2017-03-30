@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import seedu.watodo.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends AddressBookGuiTest {
+public class SelectCommandTest extends TaskManagerGuiTest {
 
 
     @Test

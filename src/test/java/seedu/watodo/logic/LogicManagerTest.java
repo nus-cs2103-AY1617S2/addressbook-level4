@@ -211,7 +211,7 @@ public class LogicManagerTest {
             {
                 add(helper.floating());
               //  add(helper.deadline());
-                add(helper.event());
+              //  add(helper.event());
             }
         };
         TaskManager expectedAB = new TaskManager();
@@ -337,8 +337,8 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
-                threeTasks.get(1)), expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess("delete 1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
+                threeTasks.get(0)), expectedAB, expectedAB.getTaskList());
     }
 
     @Test
@@ -532,8 +532,8 @@ public class LogicManagerTest {
             return tasks;
         }
 
-        List<Task> generateTaskList(Task... persons) {
-            return Arrays.asList(persons);
+        List<Task> generateTaskList(Task... tasks) {
+            return Arrays.asList(tasks);
         }
 
         /**
