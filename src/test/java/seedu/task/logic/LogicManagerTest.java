@@ -31,6 +31,7 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.DeleteCommand;
+import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
@@ -280,6 +281,18 @@ public class LogicManagerTest {
 		expectedTM, expectedTM.getTaskList());
     }
     
+    @Test
+    public void execute_edit_successful() throws Exception {
+	TestDataHelper helper = new TestDataHelper();
+	List<Task> threeTasks = helper.generateTaskList(3);
+
+	TaskManager expectedTM = helper.generateTaskManager(threeTasks);
+	expectedTM.updateTask(1,threeTasks.get(1));
+	helper.addToModel(model, threeTasks);
+
+	assertCommandSuccess("edit 2 d/090919", String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, threeTasks.get(1)),
+		expectedTM, expectedTM.getTaskList());
+    }
     
     @Test
     public void execute_list_showsAllTasks() throws Exception {
