@@ -55,18 +55,17 @@ public class Task implements ReadOnlyTask {
 
     // @@author A0141138N
     private void isToday(StartDate startDate, EndDate endDate) {
-        LocalDate dateEnd = LocalDate.now();
-        LocalDate dateStart = LocalDate.now();
+        LocalDate dateEnd = LocalDate.MIN;
+        LocalDate dateStart = LocalDate.MAX;
         if (endDate.hasDate()) {
             dateEnd = endDate.getLocalDateTime().toLocalDate();
         }
         if (startDate.hasDate()) {
             dateStart = startDate.getLocalDateTime().toLocalDate();
         }
-
-        if ((type.equals(TaskType.DEADLINE)) && (dateEnd.isEqual(LocalDate.now()))) {
+        if ((endDate.hasDate()) && (!startDate.hasDate()) && (dateEnd.isEqual(LocalDate.now()))) {
             this.isToday = true;
-        } else if (type.equals(TaskType.EVENT)) {
+        } else if ((endDate.hasDate()) && (startDate.hasDate())) {
             if ((dateStart.isEqual(LocalDate.now())) || (dateEnd.isEqual(LocalDate.now()))) {
                 this.isToday = true;
             } else if ((dateStart.isBefore(LocalDate.now())) && (dateEnd.isAfter(LocalDate.now()))) {
