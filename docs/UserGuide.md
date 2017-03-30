@@ -111,8 +111,8 @@ Examples:
 
 ### 2.7. Deleting a task : `delete` or `remove`
 
-Deletes the specified task from the task manager. Irreversible.<br>
-Format: `delete INDEX`
+Deletes the specified task from the task manager.<br>
+Format: `delete INDEX` `remove INDEX`
 
 > Deletes the task at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
