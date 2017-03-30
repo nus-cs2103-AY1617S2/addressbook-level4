@@ -59,6 +59,16 @@ public class UniqueTaskList implements Iterable<Task> {
     public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        Task temp;
+        for (Task t : internalList) {
+            temp = new Task(t);
+            stackList.add(temp);
+        }
+        taskStack.push(stackList);
+
+        System.out.println(taskStack.toString());
+
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
@@ -68,12 +78,8 @@ public class UniqueTaskList implements Iterable<Task> {
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
-        ObservableList<Task> stackList = FXCollections.observableArrayList();
-        for (Task t : internalList) {
-            stackList.add(t);
-        }
-        taskStack.push(stackList);
         internalList.set(index, taskToUpdate);
+        System.out.println(taskStack.toString());
     }
 
     /**
@@ -120,7 +126,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
 
     public boolean pop() {
-//        System.out.println(taskStack.toString());
+        System.out.println(taskStack.toString());
         ObservableList<Task> replacement = taskStack.pop();
         this.internalList.setAll(replacement);
         return true;
