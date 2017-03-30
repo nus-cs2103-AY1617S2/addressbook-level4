@@ -179,19 +179,19 @@ public class Task implements ReadOnlyTask {
     public TaskTime getTaskEndTime() {
 	return taskEndTime;
     }
-
+//@@author A0146757R
     public TaskStatus getTaskStatus() {
 	return taskStatus;
     }
-
+//@@author
     public String getTaskDescription() {
 	return taskDescription;
     }
-
+//@@author A0146757R
     public void setTaskStatus(TaskStatus taskStatus) {
 	this.taskStatus = taskStatus;
     }
-
+//@@author
     public void setTaskDescription(String description) {
 	this.taskDescription = description;
     }
