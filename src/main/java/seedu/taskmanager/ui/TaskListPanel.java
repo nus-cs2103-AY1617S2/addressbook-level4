@@ -71,10 +71,6 @@ public class TaskListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
-                // @@author A0131278H
-                scrollTo(getIndex());
-                taskListView.getFocusModel().focus(getIndex());
-                // @@author A0131278H
             }
         }
     }
