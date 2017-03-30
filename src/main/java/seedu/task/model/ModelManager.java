@@ -11,6 +11,7 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -38,7 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 	this.taskManager = new TaskManager(taskManager);
 	filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
-
+    //@@author A0163845X
     // brute force pattern matching algorithm
     public static boolean patternStringMatch(String p, String t) {
 	int i = 0;
@@ -189,30 +190,21 @@ public class ModelManager extends ComponentManager implements Model {
 	    return "name=" + String.join(", ", nameKeyWords);
 	}
     }
-
+    //@@author A0163845X
 	@Override
 	public void undo() throws Exception {
 		taskManager.undo();
 		indicateTaskManagerChanged();
 	}
-
+    //@@author A0163845X
 	@Override
 	public void updateBackup() throws DuplicateTaskException {
 		taskManager.updateBackup();
-		
-		// TODO Auto-generated method stub
-		
 	}
-
+    //@@author A0163845X
 	@Override
-	public void sortByTime() {
-		taskManager.sortTasksByTime();
-		indicateTaskManagerChanged();
-		
-	}
-	public void sortByName() {
-		taskManager.sortTasksByName();
-		indicateTaskManagerChanged();
+	public void sort(TaskComparable t) {
+		taskManager.sort(t);
 	}
 
 }

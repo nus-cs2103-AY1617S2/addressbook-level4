@@ -43,7 +43,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
-    
+    //@@author A0163845X
     public void clear() {
     	while (!internalList.isEmpty()) {
     		internalList.remove(0);
@@ -51,7 +51,7 @@ public class UniqueTaskList implements Iterable<Task> {
 		// TODO Auto-generated method stub
 		
 	}
-    
+    //@@author A0163845X
     public void addAll(UniqueTaskList toAdd) {
     	for (Task t : toAdd) {
     		internalList.add(t);
@@ -103,7 +103,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    
+    //@@author A0163845X
     public void complete(int index) {
     	Task temp = internalList.get(index);
     	temp.setTaskStatus(new TaskStatus(TaskStatus.MESSAGE_DONE));

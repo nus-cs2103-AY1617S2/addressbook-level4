@@ -4,6 +4,7 @@ import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -56,14 +57,12 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
-
+    //@@author A0163845X
 	void undo() throws Exception;
-
+    //@@author A0163845X
 	void updateBackup() throws DuplicateTaskException;
-
-	void sortByTime();
-
-	void sortByName();
+    //@@author A0163845X
+	void sort(TaskComparable t);
 	
 	//void getPath(String path);
 

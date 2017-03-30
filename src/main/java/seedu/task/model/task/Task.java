@@ -20,6 +20,8 @@ public class Task implements ReadOnlyTask {
     private TaskTime taskEndTime;
     private String taskDescription;
     private TaskStatus taskStatus;
+    private LocalDate localDate;
+    private LocalTime localTime;
     // private TaskPath taskPath;
 
     public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time.";
@@ -40,6 +42,9 @@ public class Task implements ReadOnlyTask {
 	this.taskStatus = taskStatus;
 	this.tags = new UniqueTagList(tags); // protect internal tags from
 					     // changes in the arg list
+	if (localTime == null) {
+		setCreationTime();
+	}
     }
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
@@ -66,6 +71,9 @@ public class Task implements ReadOnlyTask {
 	}
 	this.taskStatus = new TaskStatus(TaskStatus.MESSAGE_INCOMPLETE);
 	this.tags = new UniqueTagList();
+	if (localTime == null) {
+		setCreationTime();
+	}
 
     }
 
@@ -93,7 +101,9 @@ public class Task implements ReadOnlyTask {
 	    this.taskStatus = parseTaskStatus.get();
 	}
 	this.tags = tags;
-
+	if (localTime == null) {
+		setCreationTime();
+	}
     }
 
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
@@ -108,6 +118,8 @@ public class Task implements ReadOnlyTask {
     public Task(ReadOnlyTask source) {
 	this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(),
 		source.getTaskDescription(), source.getTaskStatus(), source.getTags());
+		this.setLocalDate(source.getLocalDate());
+		this.setLocalTime(source.getLocalTime());
     }
 
     @Override
@@ -222,5 +234,32 @@ public class Task implements ReadOnlyTask {
 	} else {
 	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
 	}
+    }
+    //@@author A0163845X
+    public void setCreationTime() {
+    	localDate = LocalDate.now();
+    	localTime = LocalTime.now();
+    }
+    //@@author A0163845X
+    public LocalDate getLocalDate() {
+    	if (localDate == null) {
+    		setCreationTime();
+    	}
+    	return localDate;
+    }
+    //@@author A0163845X
+    public LocalTime getLocalTime() {
+    	if (localTime == null) {
+    		setCreationTime();
+    	}
+    	return localTime;
+    }
+  //@@author A0163845X
+    private void setLocalDate(LocalDate localDate) {
+    	this.localDate = localDate;
+    }
+  //@@author A0163845X
+    private void setLocalTime(LocalTime localTime) {
+    	this.localTime = localTime;
     }
 }

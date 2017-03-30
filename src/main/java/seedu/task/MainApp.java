@@ -188,7 +188,7 @@ public class MainApp extends Application {
     	logger.info(LogsCenter.getEventHandlingLogMessage(event));
     	this.stop();
     }
-    
+    //@@author A0163845X
     @Subscribe
     public void handleChangePathNameEvent(ChangePathNameEvent event) {
     	System.out.println("working");
@@ -198,6 +198,8 @@ public class MainApp extends Application {
 			storage.saveTaskManager(model.getTaskManager());
 		} catch (IOException e) {
 			System.out.println("Unexpected IOE in main app");
+			storage.setPathName(FileNameHandler.DEFAULT_FILEPATH);
+	    	FileNameHandler.setFileName(FileNameHandler.DEFAULT_FILEPATH);
 		}
     }
     
