@@ -21,7 +21,8 @@ import seedu.jobs.model.FixedStack;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
-    private final FixedStack<ObservableList<Task>> taskStack = new FixedStack();
+    private final FixedStack<ObservableList<Task>> undoStack = new FixedStack();
+    private final FixedStack<ObservableList<Task>> redoStack = new FixedStack();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -45,7 +46,7 @@ public class UniqueTaskList implements Iterable<Task> {
         for (Task t : internalList) {
             stackList.add(t);
         }
-        taskStack.push(stackList);
+        undoStack.push(stackList);
         internalList.add(toAdd);
     }
 
@@ -65,9 +66,7 @@ public class UniqueTaskList implements Iterable<Task> {
             temp = new Task(t);
             stackList.add(temp);
         }
-        taskStack.push(stackList);
-
-        System.out.println(taskStack.toString());
+        undoStack.push(stackList);
 
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
@@ -79,7 +78,6 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
-        System.out.println(taskStack.toString());
     }
 
     /**
@@ -93,7 +91,7 @@ public class UniqueTaskList implements Iterable<Task> {
         for (Task t : internalList) {
             stackList.add(t);
         }
-        taskStack.push(stackList);
+        undoStack.push(stackList);
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
@@ -113,7 +111,7 @@ public class UniqueTaskList implements Iterable<Task> {
         for (Task t : internalList) {
             stackList.add(t);
         }
-        taskStack.push(stackList);
+        undoStack.push(stackList);
         Task taskToComplete = internalList.get(index);
         taskToComplete.markComplete();
         internalList.set(index, taskToComplete);
@@ -125,9 +123,19 @@ public class UniqueTaskList implements Iterable<Task> {
      * @param replacement
      */
 
-    public boolean pop() {
-        System.out.println(taskStack.toString());
-        ObservableList<Task> replacement = taskStack.pop();
+    public boolean undo() {
+        ObservableList<Task> replacement = undoStack.pop();
+        ObservableList<Task> redoTemp = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            redoTemp.add(t);
+        }
+        redoStack.push(redoTemp);
+        this.internalList.setAll(replacement);
+        return true;
+    }
+
+    public boolean redo() {
+        ObservableList<Task> replacement = redoStack.pop();
         this.internalList.setAll(replacement);
         return true;
     }
