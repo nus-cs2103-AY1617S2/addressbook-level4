@@ -15,7 +15,7 @@
     <children>
       <FlowPane fx:id="recurringTag" minWidth="350.0" style="-fx-background-color: transparent;">
          <children>
-            <TitledPane style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css">
+            <TitledPane expanded="false" style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css">
                <content>
                     <GridPane maxHeight="60.0" minHeight="60.0" translateX="40.0">
                         <columnConstraints>
@@ -37,7 +37,6 @@
                                             <HBox style="-fx-background-color: transparent; -fx-border-color: transparent;" />
                                         </children>
                                     </HBox>
-                                    <Label fx:id="date" styleClass="cell_small_label_date" text="\$date" />
                                     <Label fx:id="instruction" styleClass="cell_small_label_instruction" text="\$instruction" />
                                     <Label fx:id="priority" styleClass="cell_small_label_priority" text="\$priority" />
                                 </children>
@@ -49,13 +48,18 @@
                     </GridPane>
                </content>
                <graphic>
-                        <FlowPane fx:id="tags" prefWrapLength="1400.0">
+                  <FlowPane fx:id="eventTag" maxWidth="50.0" prefWrapLength="1400.0" styleClass="events" stylesheets="@DarkTheme.css" translateX="35.0">
                      <children>
-                                 <Label fx:id="title" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-size: 24; -fx-font-family: Arial; -fx-font-weight: bold;" styleClass="cell_big_label" text="\$first">
-                           <graphic>
-                                       <Label fx:id="id" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-family: Arial; -fx-font-size: 24; -fx-font-weight: bold;" styleClass="cell_big_label" />
-                           </graphic>
-                        </Label>
+                              <FlowPane fx:id="tags" prefWrapLength="1400.0" translateX="-35.0">
+                           <children>
+                                       <Label fx:id="title" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-size: 24; -fx-font-family: Arial; -fx-font-weight: bold;" styleClass="cell_big_label" text="\$first">
+                                 <graphic>
+                                             <Label fx:id="id" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-family: Arial; -fx-font-size: 24; -fx-font-weight: bold;" styleClass="cell_big_label" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </FlowPane>
+                              <Label fx:id="date" style="-fx-background-color: transparent; -fx-text-fill: black;" styleClass="cell_small_label_date" text="\$date" />
                      </children>
                   </FlowPane>
                </graphic>

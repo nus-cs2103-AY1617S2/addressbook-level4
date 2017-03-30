@@ -42,14 +42,15 @@ public class TaskCard extends UiPart<Region> {
         if(task.getDeadline().isRecurring()) {
             initRecurTag();
         }
-        /*if(task.getDeadline().isFromTo()) {
+        if(task.getDeadline().isFromTo()) {
             initEventTag();
-        }*/
+        }
     }
 
     private void initEventTag() {
-        recurringTag.getChildren().add(new Label("Event"));
-        
+        Label eventLabel = new Label("E");
+        eventLabel.setStyle("-fx-text-fill: black; -fx-background-color: white; -fx-font-family: Arial; -fx-font-weight: bold;");
+        eventTag.getChildren().add(eventLabel);
     }
 
     private void initRecurTag() {
