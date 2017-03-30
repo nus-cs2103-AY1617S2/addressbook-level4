@@ -57,7 +57,7 @@ public class TypicalTestTasks {
     public TestTask[] getTypicalTasks() {
         return new TestTask[] { assignment, buymilk, creatework, dumpmilk, eatleftovers, findsocks, getclothes };
     }
-    
+
     //@@author A0105748B
     public TestTask[] getUndoneTasks() {
         return new TestTask[] { assignment, dumpmilk, findsocks, getclothes };
