@@ -33,7 +33,7 @@ public class LoadController extends Controller {
                                                     "Warning: If a file with the requested name already exists, it will be overwritten." };
     private static final String[] HELP_EXAMPLES = { "`load newfile.json`\nLoads ToLuist data from `newfile.json`.",
                                                     "`load newfolder/newfile.json`\nLoads ToLuist data from `newfile.json` in the folder `newfolder`.",
-                                                    "`load ../newfile.json`\nLoads ToLuist data from `newfile.json` in the parent folder"};
+                                                    "`load ../newfile.json`\nLoads ToLuist data from `newfile.json` in the parent folder" };
 
   //@@author A0131125Y
     public void execute(String command) {

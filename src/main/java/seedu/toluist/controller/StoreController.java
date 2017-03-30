@@ -36,7 +36,7 @@ public class StoreController extends Controller {
                                                     "Warning: If a file with the requested name already exists, it will be overwritten." };
     private static final String[] HELP_EXAMPLES = { "`save newfile.json`\nSaves ToLuist data to `newfile.json`.",
                                                     "`save newfolder/newfile.json`\nSaves ToLuist data to `newfile.json` in the folder `newfolder`.",
-                                                    "`save ../newfile.json`\nSaves ToLuist data to `newfile.json` in the parent folder"};
+                                                    "`save ../newfile.json`\nSaves ToLuist data to `newfile.json` in the parent folder" };
 
 
     //@@author A0131125Y

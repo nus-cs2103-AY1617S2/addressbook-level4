@@ -35,6 +35,11 @@ public class UntagController extends Controller {
 
     private static final String HELP_DETAILS = "Removes a tag or multiple tags from an existing task.";
     private static final String HELP_FORMAT = "untag INDEX TAG(S)";
+    private static final String[] HELP_COMMENTS = { "Related commands: `tag`",
+                                                    "All tags are one word long.",
+                                                    "Each word entered after the index will be untagged separately.", };
+    private static final String[] HELP_EXAMPLES = { "`untag 1 schoolwork`\nRemoves the tag `schoolwork` from the task at index 1.",
+                                                    "`untag 1 housework groceries`\nRemoves the tags `housework` and `groceries` from the task at index 1." };
 
     private static final Logger logger = LogsCenter.getLogger(UntagController.class);
 
@@ -126,7 +131,7 @@ public class UntagController extends Controller {
         return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
     }
 
-    public static String[] getDetailedHelp() {
-        return getBasicHelp();
+    public static String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }
