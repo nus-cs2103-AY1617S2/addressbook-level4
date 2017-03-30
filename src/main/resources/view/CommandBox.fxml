@@ -4,6 +4,6 @@
 <?import javafx.scene.control.TextField?>
 <AnchorPane styleClass="command-box-holder" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             stylesheets="@DarkTheme.css">
-			<TextField fx:id="commandTextField" minHeight="40" onAction="#handleCommandInputChanged" promptText="Enter command here..."/>
+			<TextField fx:id="commandTextField" minHeight="40" onKeyReleased="#handleKeyReleased" promptText="Enter command here..."/>
 </AnchorPane>
 
