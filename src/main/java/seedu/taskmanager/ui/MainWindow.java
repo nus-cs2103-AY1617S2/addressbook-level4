@@ -16,7 +16,7 @@ import seedu.taskmanager.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
 import seedu.taskmanager.logic.Logic;
 import seedu.taskmanager.model.UserPrefs;
-import seedu.taskmanager.model.task.ReadOnlyTask;
+//import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
