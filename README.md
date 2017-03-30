@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W10-B4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W10-B4/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a)](https://www.codacy.com/app/gillro/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W10-B4/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/WhatsLeftUi.png" width="600"><br>
 
 * Whatsleft is a text-based task management application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It is developed by a group of passionate NUS undergraduate students from different disciplines.

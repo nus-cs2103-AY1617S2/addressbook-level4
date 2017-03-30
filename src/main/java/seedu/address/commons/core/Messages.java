@@ -12,5 +12,6 @@ public class Messages {
     public static final String MESSAGE_ACTIVITIES_LISTED_OVERVIEW = "%1$d activities listed!";
     public static final String MESSAGE_CAN_ONLY_ADD_ONE = "You can only add Task or Event";
     public static final String MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT = "You cannot change a task to event or vice versa";
+    public static final String MESSAGE_INVALID_DISPLAY_STATUS_KEYWORD = "Display preference provided is invalid";
 
 }

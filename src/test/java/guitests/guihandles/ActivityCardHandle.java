@@ -8,7 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -17,7 +17,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class ActivityCardHandle extends GuiHandle {
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String LOCATION_FIELD_ID = "#locations";
-    private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String DURATION_FIELD_ID = "#duration";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -39,8 +39,8 @@ public class ActivityCardHandle extends GuiHandle {
         return getTextFromLabel(LOCATION_FIELD_ID);
     }
 
-    public String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID);
+    public String getDuration() {
+        return getTextFromLabel(DURATION_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -67,11 +67,14 @@ public class ActivityCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSameActivity(ReadOnlyActivity activity) {
-        return getDescription().equals(activity.getDescription().description)
-                && getPriority().equals(activity.getPriority().value)
-                && getLocation().equals(activity.getLocation().value)
-                && getTags().equals(getTags(activity.getTags()));
+    public boolean isSameEvent(ReadOnlyEvent event) {
+        return getDescription().equals(event.getDescription().description)
+                && getDuration().equals(event.getStartTime().toString()
+                        + " " + event.getStartDate().toString()
+                        + " ~ " + event.getEndTime().toString()
+                        + " " + event.getEndDate().toString())
+                && getLocation().equals(event.getLocation().value)
+                && getTags().equals(getTags(event.getTags()));
     }
 
     @Override
@@ -79,7 +82,7 @@ public class ActivityCardHandle extends GuiHandle {
         if (obj instanceof ActivityCardHandle) {
             ActivityCardHandle handle = (ActivityCardHandle) obj;
             return getDescription().equals(handle.getDescription())
-                    && getPriority().equals(handle.getPriority())
+                    && getDuration().equals(handle.getDuration())
                     && getLocation().equals(handle.getLocation())
                     && getTags().equals(handle.getTags());
         }
@@ -88,6 +91,6 @@ public class ActivityCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getDescription() + " " + getLocation();
+        return getDescription() + " " + getDuration() + " " + getLocation();
     }
 }

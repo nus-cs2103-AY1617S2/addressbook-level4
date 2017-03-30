@@ -3,8 +3,15 @@ package seedu.address.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.model.WhatsLeftChangedEvent;
+import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
+import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.person.ByDate;
 import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
@@ -13,10 +20,13 @@ import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList;
 
 import seedu.address.model.tag.Tag;
@@ -40,6 +50,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
+    public static final String MESSAGE_CLASH_TIMING = "This event clashes with another event";
+    public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date!";
 
     private final Event toAddEvent;
     private final Task toAddTask;
@@ -64,7 +76,8 @@ public class AddCommand extends Command {
                     new ByTime(bytime),
                     new ByDate(bydate),
                     new Location(location),
-                    new UniqueTagList(tagSet));
+                    new UniqueTagList(tagSet),
+                    Task.DEFAULT_TASK_STATUS);
             this.toAddEvent = null;
         } else {
             this.toAddEvent = new Event(
@@ -76,6 +89,10 @@ public class AddCommand extends Command {
                     new Location(location),
                     new UniqueTagList(tagSet));
             this.toAddTask = null;
+            if (!Event.isValideEndDateTime(toAddEvent.getEndTime(), toAddEvent.getEndDate(),
+                    toAddEvent.getStartTime(), toAddEvent.getStartDate())) {
+                throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+            }
         }
     }
 
@@ -84,15 +101,27 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.storePreviousCommand("");
+            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+            ModelManager.setPreviousState(currState);
             if (toAddTask == null) {
-                model.addEvent(toAddEvent);                
+                model.addEvent(toAddEvent);
+                UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
+                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
+                EventsCenter.getInstance().post(new WhatsLeftChangedEvent(currState));
+                model.storePreviousCommand("add");
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
             } else if (toAddEvent == null) {
                 model.addTask(toAddTask);
+                UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+                EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(toAddTask)));
+                EventsCenter.getInstance().post(new WhatsLeftChangedEvent(currState));
+                model.storePreviousCommand("add");
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
             }
         } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
+        } catch (DuplicateTimeClashException e) {
+            throw new CommandException(MESSAGE_CLASH_TIMING);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
 

@@ -24,7 +24,7 @@
                         <URL value="@Extensions.css" />
                     </stylesheets>
                     <padding>
-                        <Insets bottom="5" left="15" right="5" top="5" />
+                        <Insets bottom="1" left="15" right="5" top="1" />
                     </padding>
 
                     <children>

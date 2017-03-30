@@ -44,6 +44,9 @@ public class Location {
         if (test == null) {
             return true;
         }
+        if (test == "") {
+            return false;
+        }
         return test.matches(LOCATION_VALIDATION_REGEX);
     }
 

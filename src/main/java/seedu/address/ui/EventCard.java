@@ -37,31 +37,11 @@ public class EventCard extends UiPart<Region> {
         super(FXML);
         description.setText(event.getDescription().description);
         id.setText(displayedIndex + ". ");
-        
-        duration.setText(event.getStartTime().toString() 
-        		+ " " + event.getStartDate().toString() 
-        		+ " ~ " + event.getEndTime().toString()
-        		+ " " + event.getEndDate().toString());
-        
-//        if (event.getStartTime().value == null) {
-//            startTime.setText("Start Time: -");
-//        } else {
-//            startTime.setText("Start Time: " + event.getStartTime().value);
-//        }
-//        
-//        startDate.setText("Start Date: " + event.getStartDate().value);
-//        
-//        if (event.getEndTime().value == null) {
-//            endTime.setText("End Time: -");
-//        } else {
-//            endTime.setText("End Time: " + event.getEndTime().value);
-//        }
-//
-//        if (event.getEndDate().value == null) {
-//            endDate.setText("End Date: -");
-//        } else {
-//            endDate.setText("End Date: " + event.getEndDate().value);
-//        }
+
+        duration.setText(event.getStartTime().toString()
+                + " " + event.getStartDate().toString()
+                + " ~ " + event.getEndTime().toString()
+                + " " + event.getEndDate().toString());
 
         locations.setText("@" + event.getLocation().toString());
         initTags(event);

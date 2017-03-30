@@ -30,11 +30,14 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.WhatsLeft;
-import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
+import seedu.address.model.person.EndDate;
+import seedu.address.model.person.EndTime;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Priority;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.StartDate;
+import seedu.address.model.person.StartTime;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.XmlSerializableWhatsLeft;
@@ -51,7 +54,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Activity[] SAMPLE_ACTIVITY_DATA = getSampleActivityData();
+    public static final Event[] SAMPLE_EVENT_DATA = getSampleEventData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -70,19 +73,19 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Activity[] getSampleActivityData() {
+    private static Event[] getSampleEventData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Activity[]{
-                new Activity(new Description("Ali Muster"), new Priority("high"), new Location("4th street"), new UniqueTagList()),
-                new Activity(new Description("Boris Mueller"), new Priority("low"), new Location("81th street"), new UniqueTagList()),
-                new Activity(new Description("Carl Kurz"), new Priority("medium"), new Location("wall street"), new UniqueTagList()),
-                new Activity(new Description("Daniel Meier"), new Priority("medium"), new Location("10th street"), new UniqueTagList()),
-                new Activity(new Description("Elle Meyer"), new Priority("high"), new Location("michegan ave"), new UniqueTagList()),
-                new Activity(new Description("Fiona Kunz"), new Priority("low"), new Location("little tokyo"), new UniqueTagList()),
-                new Activity(new Description("George Best"), new Priority("medium"), new Location("4th street"), new UniqueTagList()),
-                new Activity(new Description("Hoon Meier"), new Priority("high"), new Location("little india"), new UniqueTagList()),
-                new Activity(new Description("Ida Mueller"), new Priority("high"), new Location("chicago ave"), new UniqueTagList())
+            return new Event[]{
+                new Event(new Description("CS2103 TUT 1"), new StartTime("0900"), new StartDate("200517"), new EndTime("1000"), new EndDate("200517"), new Location("NUS"), new UniqueTagList()),
+                new Event(new Description("CS2104 TUT 1"), new StartTime("0900"), new StartDate("210517"), new EndTime("1000"), new EndDate("210517"), new Location("NUS"), new UniqueTagList()),
+                new Event(new Description("CS2105 TUT 1"), new StartTime("0900"), new StartDate("220517"), new EndTime("1000"), new EndDate("220517"), new Location("NUS"), new UniqueTagList()),
+                new Event(new Description("CS2106 TUT 1"), new StartTime("0900"), new StartDate("230517"), new EndTime("1000"), new EndDate("230517"), new Location("NUS"), new UniqueTagList()),
+                new Event(new Description("CS2107 TUT 1"), new StartTime("0900"), new StartDate("240517"), new EndTime("1000"), new EndDate("240517"), new Location("NUS"), new UniqueTagList()),
+                new Event(new Description("CS2108 TUT 1"), new StartTime("0900"), new StartDate("250517"), new EndTime("1000"), new EndDate("250517"), new Location("NUS"), new UniqueTagList()),
+                new Event(new Description("CS2109 TUT 1"), new StartTime("0900"), new StartDate("260517"), new EndTime("1000"), new EndDate("260517"), new Location("NUS"), new UniqueTagList()),
+                new Event(new Description("CS2110 TUT 1"), new StartTime("0900"), new StartDate("270517"), new EndTime("1000"), new EndDate("270517"), new Location("NUS"), new UniqueTagList()),
+                new Event(new Description("CS2111 TUT 1"), new StartTime("0900"), new StartDate("280517"), new EndTime("1000"), new EndDate("280517"), new Location("NUS"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -96,8 +99,8 @@ public class TestUtil {
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+                new Tag("presentation"),
+                new Tag("webcast")
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -106,8 +109,8 @@ public class TestUtil {
         }
     }
 
-    public static List<Activity> generateSampleActivityData() {
-        return Arrays.asList(SAMPLE_ACTIVITY_DATA);
+    public static List<Event> generateSampleEventData() {
+        return Arrays.asList(SAMPLE_EVENT_DATA);
     }
 
     /**
@@ -333,8 +336,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndActivity(ActivityCardHandle card, ReadOnlyActivity activity) {
-        return card.isSameActivity(activity);
+    public static boolean compareCardAndEvent(ActivityCardHandle card, ReadOnlyEvent event) {
+        return card.isSameEvent(event);
     }
 
     public static Tag[] getTagList(String tags) {

@@ -10,12 +10,14 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
+import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.Tag;
@@ -27,8 +29,8 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class WhatsLeft implements ReadOnlyWhatsLeft {
 
-    private final UniqueTaskList tasks;
     private final UniqueEventList events;
+    private final UniqueTaskList tasks;
     private final UniqueTagList tags;
 
 
@@ -40,8 +42,8 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      *   among constructors.
      */
     {
-        tasks = new UniqueTaskList();
         events = new UniqueEventList();
+        tasks = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
@@ -61,9 +63,9 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
-    
+
     public void setEvents(List<? extends ReadOnlyEvent> events)
-            throws UniqueEventList.DuplicateEventException {
+            throws IllegalValueException {
         this.events.setEvents(events);
     }
 
@@ -80,8 +82,10 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         }
         try {
             setEvents(newData.getEventList());
-        } catch (UniqueEventList.DuplicateEventException e) {
+        } catch (UniqueEventList.DuplicateEventException | DuplicateTimeClashException e) {
             assert false : "WhatsLeft should not have duplicate events";
+        } catch (IllegalValueException e) {
+            assert false : "WhatsLeft should not have events with start date after end date";
         }
         try {
             setTags(newData.getTagList());
@@ -105,17 +109,40 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         syncMasterTagListWith(t);
         tasks.add(t);
     }
-    
+
     /**
      * Adds a event to WhatsLeft.
      * Also checks the new event's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the event to point to those in {@link #tags}.
      *
      * @throws UniqueEventList.DuplicateEventException if an equivalent event already exists.
+     * @throws DuplicateTimeClashException if another event with time that clashes exist.
      */
-    public void addEvent(Event e) throws UniqueEventList.DuplicateEventException {
+    public void addEvent(Event e) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
         syncMasterTagListWith(e);
         events.add(e);
+    }
+
+    //@@author A0148038A
+    /**
+     * Updates the event in the list at position {@code index} with {@code editedReadOnlyEvent}.
+     * {@code WhatsLeft}'s tag list will be updated with the tags of {@code editedReadOnlyEvent}.
+     * @see #syncMasterTagListWith(Event)
+     *
+     * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
+     *      another existing event in the list.
+     * @throws DuplicateTimeClashException if the updating event clashes with another event
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void updateEvent(Event eventToEdit, Event editedEvent)
+            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+        assert editedEvent != null;
+
+        syncMasterTagListWith(editedEvent);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any event
+        // in the event list.
+        events.updateEvent(eventToEdit, editedEvent);
     }
 
     /**
@@ -127,37 +154,31 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+    public void updateTask(Task taskToEdit, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException {
-        assert editedReadOnlyTask != null;
+        assert taskToEdit != null;
 
-        Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
-        tasks.updateTask(index, editedTask);
+        tasks.updateTask(taskToEdit, editedTask);
     }
-    
-    /**
-     * Updates the event in the list at position {@code index} with {@code editedReadOnlyEvent}.
-     * {@code WhatsLeft}'s tag list will be updated with the tags of {@code editedReadOnlyEvent}.
-     * @see #syncMasterTagListWith(Event)
-     *
-     * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
-     *      another existing event in the list.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
-     */
-    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
-            throws UniqueEventList.DuplicateEventException {
-        assert editedReadOnlyEvent != null;
 
-        Event editedEvent = new Event(editedReadOnlyEvent);
-        syncMasterTagListWith(editedEvent);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any event
-        // in the event list.
-        events.updateEvent(index, editedEvent);
+    //@@author
+    /**
+     * Marks the task in the list at position {@code index} as complete.
+     */
+    public void completeTask(ReadOnlyTask taskToMark) {
+        tasks.completeTask(taskToMark);
+    }
+
+    /**
+     * Marks the task in the list at position {@code index} as pending.
+     */
+    public void redoTask(ReadOnlyTask taskToMark) {
+        tasks.RedoTask(taskToMark);
+
     }
 
     /**
@@ -179,7 +200,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }
-    
+
     /**
      * Ensures that every tag in this event:
      *  - exists in the master list {@link #tags}
@@ -209,7 +230,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
     private void syncMasterTagListWith(UniqueTaskList tasks) {
         tasks.forEach(this::syncMasterTagListWith);
     }
-    
+
     /**
      * Ensures that every tag in these events:
      *  - exists in the master list {@link #tags}
@@ -227,7 +248,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-    
+
     public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
         if (events.remove(key)) {
             return true;
@@ -246,7 +267,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
 
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " tasks, " + events.asObservableList().size() + " events, " 
+        return tasks.asObservableList().size() + " tasks, " + events.asObservableList().size() + " events, "
                                                         + tags.asObservableList().size() +  " tags";
         // TODO: refine later
     }
@@ -255,7 +276,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
-    
+
     @Override
     public ObservableList<ReadOnlyEvent> getEventList() {
         return new UnmodifiableObservableList<>(events.asObservableList());
@@ -279,5 +300,9 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, events, tags);
+    }
+
+    public ObservableList<Event> getEvents() {
+        return events.getInternalList();
     }
 }

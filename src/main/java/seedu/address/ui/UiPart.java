@@ -37,6 +37,10 @@ public abstract class UiPart<T> {
         }
     }
 
+    public UiPart(){
+
+    }
+
     /**
      * Constructs a UiPart using the specified FXML file within {@link #FXML_FILE_FOLDER}.
      * @see #UiPart(URL)

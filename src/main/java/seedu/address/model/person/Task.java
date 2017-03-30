@@ -4,14 +4,18 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
-
+//@@author A0121668A
 public class Task implements ReadOnlyTask {
+
+    public static final boolean DEFAULT_TASK_STATUS = false;
+    public static final boolean COMPLETED_TASK_STATUS = true;
 
     private Description description;
     private Priority priority;
-    private ByDate byDate;
     private ByTime byTime;
+    private ByDate byDate;
     private Location location;
+    private boolean status;
 
     private UniqueTagList tags;
 
@@ -19,22 +23,25 @@ public class Task implements ReadOnlyTask {
      * Description and Priority must be present.
      */
     public Task(Description description, Priority priority, ByTime byTime, ByDate byDate,
-            Location location, UniqueTagList tags) {
+            Location location, UniqueTagList tags, boolean status) {
+
         assert !CollectionUtil.isAnyNull(description, priority, tags);
         this.description = description;
         this.priority = priority;
         this.byTime = byTime;
         this.byDate = byDate;
         this.location = location;
+        this.status = status;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
+  //@@author
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
         this(source.getDescription(), source.getPriority(), source.getByTime(),
-                source.getByDate(), source.getLocation(), source.getTags());
+                source.getByDate(), source.getLocation(), source.getTags(), source.getStatus());
     }
 
     public void setDescription(Description description) {
@@ -63,7 +70,7 @@ public class Task implements ReadOnlyTask {
     public ByTime getByTime() {
         return byTime;
     }
-    
+
     public void setByDate(ByDate byDate) {
         assert byDate != null;
         this.byDate = byDate;
@@ -96,6 +103,23 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    public boolean hasDeadline() {
+        if (getByDate() != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     /**
      * Updates this task with the details of {@code replacement}.
      */
@@ -109,6 +133,23 @@ public class Task implements ReadOnlyTask {
         this.setTags(replacement.getTags());
     }
 
+    //@@author A0121668A
+    /**
+     * Mark a task as complete
+     */
+
+    public void completeTask() {
+        this.status = true;
+    }
+
+    /**
+     * Mark a task as pending
+     */
+    public void redoTask() {
+        this.status = false;
+
+    }
+    //@@author A0121668A
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

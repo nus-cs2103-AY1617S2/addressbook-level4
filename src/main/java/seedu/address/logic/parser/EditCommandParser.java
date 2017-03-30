@@ -29,16 +29,15 @@ import seedu.address.model.tag.UniqueTagList;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
-    //@@author A0110491U
+    // @@author A0110491U
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * EditCommand and returns an EditCommand object for execution.
      */
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_LOCATION, PREFIX_STARTDATE, PREFIX_ENDDATE,
-                        PREFIX_BYDATE, PREFIX_STARTTIME, PREFIX_ENDTIME, PREFIX_BYTIME, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_LOCATION, PREFIX_STARTDATE,
+                PREFIX_ENDDATE, PREFIX_BYDATE, PREFIX_STARTTIME, PREFIX_ENDTIME, PREFIX_BYTIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 3);
 
@@ -65,19 +64,18 @@ public class EditCommandParser {
             boolean starttimeExists = argsTokenizer.getValue(PREFIX_STARTTIME).isPresent();
             boolean endtimeExists = argsTokenizer.getValue(PREFIX_ENDTIME).isPresent();
 
-            //trying to morph a task/deadline into an event
-            if (priorityExists && (startdateExists || enddateExists || starttimeExists ||
-                    endtimeExists)) {
+            // trying to morph a task/deadline into an event
+            if (priorityExists && (startdateExists || enddateExists || starttimeExists || endtimeExists)) {
                 throw new IllegalValueException(MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT);
             }
-            //trying to morph a task/deadline into an event
-            if ((bydateExists || bytimeExists) && (startdateExists || enddateExists || starttimeExists ||
-                    endtimeExists)) {
+            // trying to morph a task/deadline into an event
+            if ((bydateExists || bytimeExists)
+                    && (startdateExists || enddateExists || starttimeExists || endtimeExists)) {
                 throw new IllegalValueException(MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT);
             }
-            //trying to morph an event to a task/deadline
-            if ((startdateExists || enddateExists || starttimeExists ||
-                    endtimeExists) && (bydateExists || priorityExists || bytimeExists)) {
+            // trying to morph an event to a task/deadline
+            if ((startdateExists || enddateExists || starttimeExists || endtimeExists)
+                    && (bydateExists || priorityExists || bytimeExists)) {
                 throw new IllegalValueException(MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT);
             }
 
@@ -88,32 +86,35 @@ public class EditCommandParser {
                 editEventDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTTIME)));
                 editEventDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
                 editEventDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-                editEventDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.
-                        getAllValues(PREFIX_TAG))));
+                editEventDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
             } else if (type.equals("ts")) {
                 editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(2)));
                 editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
                 editTaskDescriptor.setByDate(ParserUtil.parseByDate(argsTokenizer.getValue(PREFIX_BYDATE)));
                 editTaskDescriptor.setByTime(ParserUtil.parseByTime(argsTokenizer.getValue(PREFIX_BYTIME)));
                 editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-                editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.
-                        getAllValues(PREFIX_TAG))));
+                editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
             }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editEventDescriptor.isAnyFieldEdited()) {
+        if (!editEventDescriptor.isAnyFieldEdited() && !editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
         String taskorevent = preambleFields.get(0).get();
-        return new EditCommand(index.get(), editEventDescriptor, editTaskDescriptor, taskorevent);
+        try {
+            return new EditCommand(index.get(), editEventDescriptor, editTaskDescriptor, taskorevent);
+        } catch (IllegalValueException ile) {
+            return new IncorrectCommand(EditCommand.MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+        }
     }
 
     /**
-     * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Optional<UniqueTagList>} containing zero tags.
+     * Parses {@code Collection<String> tags} into an
+     * {@code Optional<UniqueTagList>} if {@code tags} is non-empty. If
+     * {@code tags} contain only one element which is an empty string, it will
+     * be parsed into a {@code Optional<UniqueTagList>} containing zero tags.
      */
     private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
         assert tags != null;

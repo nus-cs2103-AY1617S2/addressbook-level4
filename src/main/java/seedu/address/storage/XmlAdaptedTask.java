@@ -9,17 +9,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Task;
 import seedu.address.model.person.ByDate;
 import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
-//@@author A0148038A
+//@@author A0121668A
 /**
  * JAXB-friendly version of the Task.
  */
@@ -32,13 +32,15 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     private LocalTime byTime;
-    @XmlElement(required = true) 
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate byDate;
     @XmlElement(required = true)
     private String location;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElement(required = true)
+    private boolean status;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -46,7 +48,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask() {}
 
-
+  //@@author A0148038A
     /**
      * Converts a given Task into this class for JAXB use.
      *
@@ -62,6 +64,7 @@ public class XmlAdaptedTask {
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
+        status = source.getStatus();
     }
 
     /**
@@ -80,6 +83,9 @@ public class XmlAdaptedTask {
         final ByDate byDate = new ByDate(this.byDate);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(description, priority, byTime, byDate, location, tags);
+        final boolean status = this.status;
+
+        return new Task(description, priority, byTime, byDate, location, tags, status);
+
     }
 }

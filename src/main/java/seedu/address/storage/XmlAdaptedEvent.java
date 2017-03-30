@@ -9,10 +9,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Event;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.StartDate;
@@ -20,7 +20,7 @@ import seedu.address.model.person.StartTime;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
-//@@author A0148038A
+//@@author A0121668A
 /**
  * JAXB-friendly version of the Event.
  */
@@ -31,7 +31,7 @@ public class XmlAdaptedEvent {
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     private LocalTime startTime;
-    @XmlElement(required = true) 
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate startDate;
     @XmlElement(required = true)
@@ -51,7 +51,7 @@ public class XmlAdaptedEvent {
      */
     public XmlAdaptedEvent() {}
 
-
+  //@@author A0148038A
     /**
      * Converts a given Event into this class for JAXB use.
      *

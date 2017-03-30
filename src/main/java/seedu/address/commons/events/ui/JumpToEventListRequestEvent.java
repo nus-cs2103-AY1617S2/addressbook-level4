@@ -1,7 +1,6 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.person.ReadOnlyEvent;
 
 //@@author A0148038A
 /**
@@ -10,11 +9,9 @@ import seedu.address.model.person.ReadOnlyEvent;
 public class JumpToEventListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
-    public final ReadOnlyEvent targetEvent;
 
-    public JumpToEventListRequestEvent(ReadOnlyEvent event, int targetIndex) {
+    public JumpToEventListRequestEvent(int targetIndex) {
         this.targetIndex = targetIndex;
-        this.targetEvent = event;
     }
 
     @Override

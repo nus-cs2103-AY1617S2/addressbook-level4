@@ -15,33 +15,37 @@ public interface ReadOnlyTask {
     ByDate getByDate();
     ByTime getByTime();
     Location getLocation();
+    boolean getStatus();
+    boolean hasDeadline();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the event's internal tags.
      */
     UniqueTagList getTags();
-
+    //@@author A0121668A
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && (other.getDescription().toString() == null? this.getDescription().toString() == null :
-                    other.getDescription().toString().equals(this.getDescription().toString())) // state checks here onwards
-                && (other.getPriority().toString() == null? this.getPriority().toString() == null :
+                && (other.getDescription().toString() == null ? this.getDescription().toString() == null :
+                    other.getDescription().toString().equals(this.getDescription().
+                            toString())) // state checks here onwards
+                && (other.getPriority().toString() == null ? this.getPriority().toString() == null :
                     other.getPriority().toString().equals(this.getPriority().toString()))
-                && (other.getByDate().toString() == null? this.getByDate().toString() == null :
+                && (other.getByDate().toString() == null ? this.getByDate().toString() == null :
                     other.getByDate().toString().equals(this.getByDate().toString()))
-                && (other.getByTime().toString() == null? this.getByTime().toString() == null :
+                && (other.getByTime().toString() == null ? this.getByTime().toString() == null :
                     other.getByTime().toString().equals(this.getByTime().toString()))
-                && (other.getLocation().toString() == null? this.getLocation().toString() == null :
+                && (other.getLocation().toString() == null ? this.getLocation().toString() == null :
                     other.getLocation().toString().equals(this.getLocation().toString()))
-                && (other.getTags().equals(other.getTags()))
+                && (other.getTags().equals(this.getTags()))
+                && (other.getStatus() == this.getStatus())
                 );
     }
-
+    //@@author
     /**
      * Formats the activity as text, showing all details.
      */
@@ -60,18 +64,34 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-    
-    //@@author A0148038A
-	static Comparator<? super ReadOnlyTask> getComparator() {
-		// sort by by date first
-		Comparator<ReadOnlyTask> byByDate = (t1, t2) -> t1.getByDate().compareTo(t2.getByDate());
-						
-		// then sort by by time
-		Comparator<ReadOnlyTask> byByTime = (t1, t2) -> t1.getByTime().compareTo(t2.getByTime());
-				
-		// then sort by priority
-		Comparator<ReadOnlyTask> byPriority = (t1, t2) -> t1.getPriority().compareTo(t2.getPriority());
-						
-		return byByDate.thenComparing(byByTime).thenComparing(byByTime).thenComparing(byPriority);
-	}
+
+
+//    //@@author A0148038A
+//    default int compareTo(ReadOnlyTask o) {
+//      if (!this.hasDeadline() && !o.hasDeadline()) {
+//          return this.getPriority().compareTo(o.getPriority());
+//      } else if (this.hasDeadline() && !o.hasDeadline()) {
+//          return 1;
+//      } else if (!this.hasDeadline() && o.hasDeadline()) {
+//          return -1;
+//      } else {
+//          if (!this.getByDate().equals(o.getByDate())) {
+//              return getByDate().compareTo(o.getByDate());
+//          } else if (!this.getByTime().equals(o.getByTime())) {
+//              return getByTime().compareTo(o.getByTime());
+//          } else {
+//              return this.getPriority().compareTo(o.getPriority());
+//          }
+//      }
+//    }
+//
+//    //@@author A0148038A
+//  static Comparator<? super ReadOnlyTask> getComparator() {
+//      Comparator<ReadOnlyTask> byTask = (t1, t2) -> t1.compareTo(t2);
+//      return byTask;
+//  }
+    static Comparator<? super ReadOnlyTask> getComparator() {
+        Comparator<ReadOnlyTask> byPriority = (t1, t2) -> t1.getPriority().compareTo(t2.getPriority());
+        return byPriority;
+    }
 }

@@ -1,8 +1,10 @@
 package seedu.address.model.person;
 
-import java.util.Comparator;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -10,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 /**
  * Represents an event in WhatsLeft
  */
-public class Event implements ReadOnlyEvent{
+public class Event implements ReadOnlyEvent {
 
     private Description description;
     private StartTime startTime;
@@ -23,13 +25,15 @@ public class Event implements ReadOnlyEvent{
 
     /**
      * Description and start date must be present and not null.
+     * @throws IllegalValueException
      */
     public Event(Description description, StartTime startTime, StartDate startDate,
-    		EndTime endTime, EndDate endDate, Location location, UniqueTagList tags) {
-    	
-    	//check description and start date are present
+            EndTime endTime, EndDate endDate, Location location, UniqueTagList tags) {
+
+        //check description and start date are present
         assert !CollectionUtil.isAnyNull(description, startDate);
-        
+        assert isValideEndDateTime(endTime, endDate, startTime, startDate);
+
         this.description = description;
         this.startTime = startTime;
         this.startDate = startDate;
@@ -41,10 +45,11 @@ public class Event implements ReadOnlyEvent{
 
     /**
      * Creates a copy of the given ReadOnlyEvent.
+     * @throws IllegalValueException
      */
     public Event(ReadOnlyEvent source) {
         this(source.getDescription(), source.getStartTime(), source.getStartDate(),
-        		source.getEndTime(), source.getEndDate(), source.getLocation(), source.getTags());
+                source.getEndTime(), source.getEndDate(), source.getLocation(), source.getTags());
     }
 
     public void setDescription(Description description) {
@@ -56,7 +61,7 @@ public class Event implements ReadOnlyEvent{
     public Description getDescription() {
         return description;
     }
-    
+
     public void setStartTime(StartTime startTime) {
         this.startTime = startTime;
     }
@@ -75,7 +80,7 @@ public class Event implements ReadOnlyEvent{
     public StartDate getStartDate() {
         return startDate;
     }
-    
+
     public void setEndTime(EndTime endTime) {
         this.endTime = endTime;
     }
@@ -107,7 +112,22 @@ public class Event implements ReadOnlyEvent{
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
+    //@@author A0121668A
 
+    /**
+     * Checks if start Date/Time is before end Date/Time
+     */
+    public static boolean isValideEndDateTime(EndTime et, EndDate ed, StartTime st, StartDate sd) {
+        if (sd.getValue().isAfter(ed.getValue())) {
+            return false;
+        }
+        if (sd.getValue().equals(ed.getValue()) && st.getValue().isAfter(et.getValue())) {
+            return false;
+        }
+        return true;
+    }
+
+    //@@author A0121668A
     /**
      * Replaces this event's tags with the tags in the argument tag list.
      */
@@ -130,6 +150,23 @@ public class Event implements ReadOnlyEvent{
         this.setTags(replacement.getTags());
     }
 
+    //@@author A0121668A
+    @Override
+    public boolean isOver() {
+        if (LocalDate.now().isAfter(this.getEndDate().getValue())) {
+            return true;
+        } else if (LocalDate.now().isBefore(this.getEndDate().getValue())) {
+            return false;
+        } else {
+            if (LocalTime.now().isAfter(this.getEndTime().getValue())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    //@@author A0121668A
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -147,20 +184,4 @@ public class Event implements ReadOnlyEvent{
     public String toString() {
         return getAsText();
     }
- 
-	public static Comparator<? super Event> getComparator() {
-		// sort by start date first
-		Comparator<Event> byStartDate = (e1, e2) -> e1.getStartDate().compareTo(e2.getStartDate());
-				
-		// then sort by start time
-		Comparator<Event> byStartTime = (e1, e2) -> e1.getStartTime().compareTo(e2.getStartTime());
-		
-		// then sort by end date
-		Comparator<Event> byEndDate = (e1, e2) -> e1.getEndDate().compareTo(e2.getEndDate());
-		
-		// then sort by end time
-		Comparator<Event> byEndTime = (e1, e2) -> e1.getEndTime().compareTo(e2.getEndTime());
-				
-		return byStartDate.thenComparing(byStartTime).thenComparing(byEndDate).thenComparing(byEndTime);
-	}
 }

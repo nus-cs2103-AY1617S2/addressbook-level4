@@ -16,12 +16,12 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.ByDate;
 import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
+import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
-import seedu.address.model.person.StartDate;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
-import seedu.address.model.person.EndDate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -113,7 +113,7 @@ public class ParserUtil {
         assert priority != null;
         return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> startTime} into an {@code Optional<StartTime>} if {@code startTime} is present.
      */
@@ -121,7 +121,7 @@ public class ParserUtil {
         assert startTime != null;
         return startTime.isPresent() ? Optional.of(new StartTime(startTime.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> startDate} into an {@code Optional<StartDate>} if {@code startDate} is present.
      */
@@ -129,7 +129,7 @@ public class ParserUtil {
         assert startDate != null;
         return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> startTime} into an {@code Optional<StartTime>} if {@code startTime} is present.
      */
@@ -153,7 +153,7 @@ public class ParserUtil {
         assert byTime != null;
         return byTime.isPresent() ? Optional.of(new ByTime(byTime.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> byDate} into an {@code Optional<byDate>} if {@code ByDate} is present.
      */
@@ -161,7 +161,7 @@ public class ParserUtil {
         assert byDate != null;
         return byDate.isPresent() ? Optional.of(new ByDate(byDate.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
      */
@@ -180,5 +180,11 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+    //@@author A0121668A
+    public static String parseStatus(String command) {
+        String trimmedCommand = command.trim();
+        return trimmedCommand;
     }
 }

@@ -22,7 +22,7 @@ public class ByDate {
         return value;
     }
 
-    //@@author A0110491U A0121668A
+    //@@author A0121668A
     /**
      * Validates given by date.
      *
@@ -39,7 +39,21 @@ public class ByDate {
             }
         }
     }
-    
+
+    //@@author A0110491U
+    /**
+     * Checks if given ByDate string is valid
+     * returns true if it is valid according to MESSAGE_BYDATE_CONSTRAINTS
+     */
+    public static boolean isValidByDate(String args) {
+        try {
+            StringUtil.parseStringToDate(args);
+        } catch (DateTimeException ive) {
+            return false;
+        }
+        return true;
+    }
+
     //@@author A0121668A
     /*
      * For JAXB use
@@ -68,10 +82,10 @@ public class ByDate {
     public int hashCode() {
         return value.hashCode();
     }
-    
+
     //@@author A0148038A
-	public int compareTo(ByDate o) {
-		return this.getValue().compareTo(o.getValue());
-	}
+    public int compareTo(ByDate o) {
+        return this.getValue().compareTo(o.getValue());
+    }
 
 }

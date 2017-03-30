@@ -18,7 +18,7 @@ public class ByTime {
 
     public final LocalTime value;
 
-    //@@author A0110491U A0121668A
+    //@@author A0121668A
     /**
      * Validates given start time.
      *
@@ -27,24 +27,38 @@ public class ByTime {
     public ByTime(String byTimeArg) throws IllegalValueException {
         if (byTimeArg == null) {
             this.value = null;
-        } 
-        else {
+        } else {
             try {
                 this.value = StringUtil.parseStringToTime(byTimeArg);
             } catch (DateTimeException illegalValueException) {
                 throw new IllegalValueException(MESSAGE_BYTIME_CONSTRAINTS);
-                }
             }
         }
+    }
+
+    //@@author A0110491U
+    /**
+     * Checks if given ByTime string is valid
+     * returns true if it is valid according to MESSAGE_BYTIME_CONSTRAINTS
+     */
+    public static boolean isValidByTime(String args) {
+        try {
+            StringUtil.parseStringToTime(args);
+        } catch (DateTimeException ive) {
+            return false;
+        }
+        return true;
+    }
+    //@@author
 
     //@@author A0121668A
     /**
      * For JAXB use
      */
     public ByTime(LocalTime bytime) {
-            value = bytime;
-        }
-    
+        value = bytime;
+    }
+
     public LocalTime getValue() {
         return value;
     }
@@ -68,9 +82,9 @@ public class ByTime {
     public int hashCode() {
         return value.hashCode();
     }
-    
+
     //@@author A0148038A
-  	public int compareTo(ByTime o) {
-  		return this.getValue().compareTo(o.getValue());
-  	}
+    public int compareTo(ByTime o) {
+        return this.getValue().compareTo(o.getValue());
+    }
 }
