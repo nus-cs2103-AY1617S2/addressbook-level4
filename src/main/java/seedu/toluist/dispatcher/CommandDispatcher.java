@@ -30,6 +30,7 @@ import seedu.toluist.controller.HelpController;
 import seedu.toluist.controller.HistoryController;
 import seedu.toluist.controller.LoadController;
 import seedu.toluist.controller.MarkController;
+import seedu.toluist.controller.NavigateHistoryController;
 import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
 import seedu.toluist.controller.SwitchController;
@@ -41,6 +42,8 @@ import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
 
+import seedu.toluist.model.CommandHistoryList;
+
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
 
@@ -48,19 +51,18 @@ public class CommandDispatcher extends Dispatcher {
     /**
      * ArrayList to store previous commands entered since starting the application
      */
-    private ArrayList<String> commandHistory;
-    private int historyPointer = 0;
+    private CommandHistoryList commandHistory;
 
     //@@author A0131125Y
     public CommandDispatcher() {
         super();
         aliasConfig.setReservedKeywords(getControllerKeywords());
-        commandHistory = new ArrayList<>();
+        commandHistory = new CommandHistoryList();
     }
 
     public void dispatchRecordingHistory(String command) {
-        recordCommand(command);
         dispatch(command);
+        commandHistory.recordCommand(command);
     }
 
     public void dispatch(String command) {
@@ -72,6 +74,9 @@ public class CommandDispatcher extends Dispatcher {
 
         if (controller instanceof HistoryController) {
             ((HistoryController) controller).setCommandHistory(commandHistory);
+        }
+        if (controller instanceof NavigateHistoryController) {
+            ((NavigateHistoryController) controller).setCommandHistory(commandHistory);
         }
         controller.execute(deAliasedCommand);
     }
@@ -109,11 +114,6 @@ public class CommandDispatcher extends Dispatcher {
         return aliasConfig.dealias(trimmedCommand);
     }
 
-    private void recordCommand(String command) {
-        commandHistory.add(command);
-        historyPointer = commandHistory.size();
-    }
-
     //@@author A0131125Y
     private Controller getBestFitController(String command) {
         Collection<Controller> controllerCollection = getAllControllers();
@@ -140,6 +140,7 @@ public class CommandDispatcher extends Dispatcher {
                 ExitController.class,
                 AliasController.class,
                 UnaliasController.class,
+                NavigateHistoryController.class,
                 ViewAliasController.class,
                 UntagController.class,
                 FindController.class,

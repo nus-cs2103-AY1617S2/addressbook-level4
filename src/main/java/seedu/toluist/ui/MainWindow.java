@@ -42,6 +42,13 @@ public class MainWindow extends UiPart<Region> {
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 800;
 
+    private static final String COMMAND_UNDO = "undo";
+    private static final String COMMAND_REDO = "redo";
+    private static final String COMMAND_SWITCH = "switch ";
+    private static final String COMMAND_NAVIGATEHISTORY = "navigatehistory ";
+    private static final String[] KEYCODES_NAVIGATEHISTORY = new String[] { "up", "down" };
+    private static final String[] KEYCODES_SWITCH = new String[] { "i", "t", "n", "c", "a" };
+
     private Stage primaryStage;
     private Dispatcher dispatcher;
 
@@ -53,7 +60,6 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane resultDisplayPlaceholder;
     @FXML
     private AnchorPane tabPanePlaceholder;
-
     @FXML
     private AnchorPane commandAutoCompletePlaceholder;
 
@@ -77,8 +83,8 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize();
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-        configureKeyCombinations();
         configureChildrenViews();
+        configureKeyCombinations();
     }
 
     public Stage getPrimaryStage() {
@@ -96,6 +102,8 @@ public class MainWindow extends UiPart<Region> {
     private void configureKeyCombinations() {
         configureSwitchTabKeyCombinations();
         configureUndoKeyCombination();
+        configureRedoKeyCombination();
+        configureHistoryNavigationKeyPresses();
     }
 
     void hide() {
@@ -106,11 +114,10 @@ public class MainWindow extends UiPart<Region> {
      * Configure switch tab hotkey, using underlined letters
      */
     private void configureSwitchTabKeyCombinations() {
-        String[] tabNames = new String[] { "i", "t", "n", "c", "a" };
-        Arrays.stream(tabNames).forEach(tabName -> {
+        Arrays.stream(KEYCODES_SWITCH).forEach(tabName -> {
             KeyCombination keyCombination = new KeyCodeCombination(getKeyCode(tabName),
                     KeyCombination.CONTROL_DOWN);
-            String switchCommand = "switch " + tabName;
+            String switchCommand = COMMAND_SWITCH + tabName;
             EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(switchCommand);
             FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
         });
@@ -121,15 +128,39 @@ public class MainWindow extends UiPart<Region> {
      */
     private void configureUndoKeyCombination() {
         KeyCombination keyCombination = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
-        String undoCommand = "undo";
+        String undoCommand = COMMAND_UNDO;
         EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(undoCommand);
         FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
     }
 
     /**
+     * Configure CTRL+Y for quick redo
+     */
+    private void configureRedoKeyCombination() {
+        KeyCombination keyCombination = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+        String redoCommand = COMMAND_REDO;
+        EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(redoCommand);
+        FxViewUtil.setKeyCombination(getRoot(), keyCombination, handler);
+    }
+
+    //@@author A0162011A
+    /**
+     * Configure Up/Down for history navigation
+     */
+    private void configureHistoryNavigationKeyPresses() {
+        Arrays.stream(KEYCODES_NAVIGATEHISTORY).forEach(keyName -> {
+            KeyCode keycode = getKeyCode(keyName);
+            String navigateCommand = COMMAND_NAVIGATEHISTORY + keyName;
+            EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(navigateCommand);
+            FxViewUtil.setKeyCode(commandBox.getRoot(), keycode, handler);
+        });
+    }
+
+    //@@author A0131125Y
+    /**
      * Get matching key code for a string
      * @param s string
-     * @returna key code
+     * @return a key code
      */
     private KeyCode getKeyCode(String s) {
         switch (s) {
@@ -138,6 +169,8 @@ public class MainWindow extends UiPart<Region> {
         case "n": return KeyCode.N;
         case "c": return KeyCode.C;
         case "a": return KeyCode.A;
+        case "up": return KeyCode.UP;
+        case "down": return KeyCode.DOWN;
         default: return KeyCode.ESCAPE;
         }
     }

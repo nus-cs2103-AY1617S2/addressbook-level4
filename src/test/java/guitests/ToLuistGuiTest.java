@@ -85,6 +85,8 @@ public abstract class ToLuistGuiTest {
         FxToolkit.showStage();
         while (!stage.isShowing());
         mainGui.focusOnMainApp();
+        String switchToDefaulTab = "switch i";
+        commandBox.runCommand(switchToDefaulTab);
     }
 
     /**

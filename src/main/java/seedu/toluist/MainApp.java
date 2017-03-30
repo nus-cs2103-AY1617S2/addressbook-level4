@@ -13,6 +13,7 @@ import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Version;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
+import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.dispatcher.CommandDispatcher;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.model.TodoList;
@@ -38,14 +39,28 @@ public class MainApp extends Application {
         super.init();
 
         initLogging(config);
+        initDispatcher();
+        initDispatcher();
+        initUi();
+        initModel();
+        initEventsCenter();
+    }
 
-        // Configure dependencies
+    private void initDispatcher() {
         dispatcher = new CommandDispatcher();
+    }
+
+    private void initUi() {
         ui = UiManager.getInstance();
         ui.init(dispatcher);
-        TodoList.getInstance().load();
+    }
 
-        initEventsCenter();
+    private void initModel() {
+        try {
+            TodoList.getInstance().load();
+        } catch (DataStorageException e) {
+            logger.info("No existing data file found");
+        }
     }
 
     private void initLogging(Config config) {
