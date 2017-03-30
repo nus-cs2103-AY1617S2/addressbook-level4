@@ -466,14 +466,17 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
+
         Task tTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
         Task tTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
-        Task t1 = helper.generateTaskWithTitle("KE Y");
-        Task t2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
+        Task tTarget3 = helper.generateTaskWithTitle("KE Y");
+        Task tTarget4 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
+        List<Task> fourTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
         TaskManager expectedTM = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2);
+        // @@author A0140032E
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
+        // @@author
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
