@@ -1,7 +1,6 @@
 package seedu.onetwodo.logic;
 
 import static org.junit.Assert.assertEquals;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -50,6 +49,7 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Recurring;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskAttributesChecker;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.storage.StorageManager;
 
@@ -209,8 +209,11 @@ public class LogicManagerTest {
                 EndDate.MESSAGE_DATE_INPUT_CONSTRAINTS);
         assertCommandFailure("add Valid Name s/tomorrow 8pm e/tomorrow 9pm d/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertCommandFailure("add Valid Name r/daily d/valid",
+        assertCommandFailure("add Valid Name e/tomorrow r/dailyyyy d/valid",
                 Recurring.RECURRING_CONSTRAINTS);
+        String result = TaskAttributesChecker.MESSAGE_INVALID_RECUR + AddCommand.MESSAGE_USAGE;
+        assertCommandFailure("add Valid Name r/daily d/no date",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, result));
 
     }
 

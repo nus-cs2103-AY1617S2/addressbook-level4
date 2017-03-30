@@ -6,7 +6,6 @@ import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.logic.commands.FindCommand;
@@ -33,6 +32,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
         TestTask editedTask = new TaskBuilder().withName("GUARD duties")
                 .withStartDate("15-12-2018 7:30am").withEndDate("16-12-2018 11:30pm")
+                .withRecurring("monthly")
                 .withDescription("bring helmet")
                 .withPriority('l')
                 .withTags("army")
