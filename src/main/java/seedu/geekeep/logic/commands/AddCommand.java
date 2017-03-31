@@ -38,7 +38,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String title, Optional<String> startDateTime, Optional<String> endDateTime,
-            Optional<String> location, Set<String> tags)
+            Optional<String> description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
 
         DateTime start = null;
         DateTime end = null;
-        Description loc = null;
+        Description desc = null;
 
         if (startDateTime.isPresent()) {
             start = new DateTime(startDateTime.get());
@@ -55,15 +55,15 @@ public class AddCommand extends Command {
         if (endDateTime.isPresent()) {
             end = new DateTime(endDateTime.get());
         }
-        if (location.isPresent()) {
-            loc = new Description(location.get());
+        if (description.isPresent()) {
+            desc = new Description(description.get());
         }
 
         this.toAdd = new Task(
                 new Title(title),
                 start,
                 end,
-                loc,
+                desc,
                 new UniqueTagList(tagSet),
                 false
         );
