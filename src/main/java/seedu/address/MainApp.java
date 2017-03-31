@@ -163,7 +163,7 @@ public class MainApp extends Application {
         EventsCenter.getInstance().registerHandler(this);
     }
 
-//@@LiuYulin A0148052L
+//@@author A0148052L
     protected String initConfigFilePath(String filePath) {
         if (filePath == null) {
             return Config.DEFAULT_CONFIG_FILE;
@@ -176,7 +176,7 @@ public class MainApp extends Application {
             return Config.DEFAULT_CONFIG_FILE;
         }
     }
-//@@LiuYulin
+//@@author
 
     @Override
     public void start(Stage primaryStage) {

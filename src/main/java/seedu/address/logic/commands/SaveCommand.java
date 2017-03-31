@@ -1,4 +1,4 @@
-//@@Liu Yulin A0148052L
+//@@author A0148052L
 
 package seedu.address.logic.commands;
 
