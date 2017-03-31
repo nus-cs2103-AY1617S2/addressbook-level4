@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.bulletjournal.MainApp'
 
 allprojects {
     apply plugin: 'idea'
