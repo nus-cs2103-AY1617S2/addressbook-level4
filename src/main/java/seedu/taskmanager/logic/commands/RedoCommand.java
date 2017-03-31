@@ -4,19 +4,19 @@ import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.HistoryManager;
 
 // @@author A0140032E
-public class UndoCommand extends Command {
-    public static final String COMMAND_WORD = "undo";
+public class RedoCommand extends Command {
+    public static final String COMMAND_WORD = "redo";
 
-    public static final String MESSAGE_SUCCESS = "Undo successful";
-    public static final String MESSAGE_NO_MORE_UNDO = "No more actions available to undo";
+    public static final String MESSAGE_SUCCESS = "Redo successful";
+    public static final String MESSAGE_NO_MORE_REDO = "No more actions available to redo";
 
     @Override
     public CommandResult execute() throws CommandException {
         HistoryManager historyManager = HistoryManager.getInstance();
         try {
-            historyManager.undo();
+            historyManager.redo();
         } catch (Exception e) {
-            throw new CommandException(MESSAGE_NO_MORE_UNDO);
+            throw new CommandException(MESSAGE_NO_MORE_REDO);
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }

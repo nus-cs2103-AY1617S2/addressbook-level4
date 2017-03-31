@@ -20,6 +20,7 @@ import seedu.taskmanager.commons.util.ConfigUtil;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.Logic;
 import seedu.taskmanager.logic.LogicManager;
+import seedu.taskmanager.model.HistoryManager;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
@@ -45,6 +46,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    protected HistoryManager history;
 
 
     @Override
@@ -60,6 +62,8 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
+
+        history = HistoryManager.createInstance(model);
 
         logic = new LogicManager(model, storage);
 

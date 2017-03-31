@@ -18,6 +18,7 @@ import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.MoveCommand;
+import seedu.taskmanager.logic.commands.RedoCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
 import seedu.taskmanager.logic.commands.UndoCommand;
@@ -90,6 +91,9 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         case MoveCommand.COMMAND_WORD:
             return new MoveCommandParser().parse(arguments);
