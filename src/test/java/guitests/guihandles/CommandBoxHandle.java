@@ -44,6 +44,7 @@ public class CommandBoxHandle extends GuiHandle {
      * Use clickOn() instead of just typing Enter
      * @author A0140036X
      */
+    @Override
     public void pressEnter() {
         guiRobot.clickOn(COMMAND_INPUT_FIELD_ID).type(KeyCode.ENTER);
     }

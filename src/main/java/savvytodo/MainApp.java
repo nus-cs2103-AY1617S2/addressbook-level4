@@ -59,8 +59,9 @@ public class MainApp extends Application {
         initApplicationFromConfig(getApplicationParameter("config"), true);
     }
 
+    //@@author A0140036X
     /**
-     * Starts application. Updates UI with new logic if UI already exists.
+     * Starts application. Updates UI with new logic and storage if UI already exists.
      * @author A0140036X
      * @param configFilePath File path of json file containing configurations
      * @param useSampleDataIfStorageFileNotFound If true, sample data is to be used if storage file is not found.
@@ -91,6 +92,7 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
+    //@@author A0140036X
     /**
      * Initializes model based on storage. If storage file is not found, default task manager provided will be used.
      * If task manager is null, sample task manager will be created.

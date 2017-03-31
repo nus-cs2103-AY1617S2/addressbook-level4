@@ -14,6 +14,7 @@ public interface Ui {
     /** Stops the UI. */
     void stop();
 
+    //@@author A0140036X
     /** Updates UI with new logic */
     void setLogic(Logic logic);
 }
