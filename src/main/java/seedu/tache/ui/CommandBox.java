@@ -1,5 +1,6 @@
 package seedu.tache.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -68,7 +69,17 @@ public class CommandBox extends UiPart<Region> {
     private void setAutocomplete() {
         String[] possibleCommands = {"add ", "clear", "complete ", "delete ", "edit ", "exit", "find ",
                                         "help", "list", "save ", "select ", "load ", "undo" };
-        AutoCompletionBinding<String> binding = TextFields.bindAutoCompletion(commandTextField, possibleCommands);
+        //AutoCompletionBinding<String> binding = TextFields.bindAutoCompletion(commandTextField, possibleCommands);
+        AutoCompletionBinding<String> binding = TextFields.bindAutoCompletion(commandTextField, sr -> {
+            ArrayList<String> commands = new ArrayList<String>();
+            for (String str : possibleCommands) {
+                String userInput = sr.getUserText();
+                if (!userInput.equals("") && str.startsWith(userInput)) {
+                    commands.add(str);
+                }
+            }
+            return commands;
+        });
         binding.setMaxWidth(100);
         binding.setDelay(50);
     }
