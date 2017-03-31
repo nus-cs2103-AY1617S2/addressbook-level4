@@ -41,18 +41,22 @@
 						<Label fx:id="description" styleClass="cell_small_label" text="\$description" />
 					</children>
 				</HBox>
-				<FlowPane>
+				<HBox>
 					<children>
-						<Label styleClass="cell_small_label" text="Date: " />
-						<Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+						<FlowPane HBox.hgrow="ALWAYS">
+							<children>
+								<Label styleClass="cell_small_label" text="Date: " />
+								<Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+							</children>
+						</FlowPane>
+						<FlowPane HBox.hgrow="ALWAYS">
+							<children>
+								<Label styleClass="cell_small_label" text="Status: " />
+								<Label fx:id="status" styleClass="cell_small_label" text="\$status" />
+							</children>
+						</FlowPane>
 					</children>
-				</FlowPane>
-				<FlowPane>
-					<children>
-						<Label styleClass="cell_small_label" text="Status: " />
-						<Label fx:id="status" styleClass="cell_small_label" text="\$status" />
-					</children>
-				</FlowPane>
+				</HBox>
 				<FlowPane fx:id="tags" />
 			</children>
 		</VBox>
