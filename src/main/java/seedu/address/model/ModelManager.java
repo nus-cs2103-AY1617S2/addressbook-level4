@@ -60,6 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskListChangedEvent(taskList));
     }
 
+    // TODO change the name typeOfListView to something else
     /** Raises an event to indicate the filteredList has changed */
     private void indicateViewListChanged(String typeOfListView) {
         raise(new ViewListChangedEvent(typeOfListView));

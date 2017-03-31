@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
+    // TODO change personListPanel to another name
     private PersonListPanel personListPanel;
     private TaskTabPanel taskTabPanel;
     private Config config;
@@ -112,9 +113,10 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
+    public void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskTabPanel = new TaskTabPanel(taskTabPanelPlaceHolder);
+        // TODO rename this
         personListPanel = new PersonListPanel(taskTabPanel.getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());

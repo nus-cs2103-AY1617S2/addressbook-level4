@@ -37,6 +37,7 @@ public class TaskTabPanel extends UiPart<Region> {
     @FXML
     private Tab pendingTasksTab;
 
+    // TODO rename this
     @FXML
     private AnchorPane personListPanelPlaceholder;
 
@@ -60,6 +61,7 @@ public class TaskTabPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(taskTabPanel);
     }
 
+    // TODO rename typeOfList
     public void switchTabPanel(String typeOfList) {
         switch(typeOfList) {
         case ViewCommand.TYPE_DONE :
@@ -83,6 +85,7 @@ public class TaskTabPanel extends UiPart<Region> {
         }
     }
 
+    // TODO rename this
     public AnchorPane getPersonListPlaceholder() {
         return personListPanelPlaceholder;
     }
