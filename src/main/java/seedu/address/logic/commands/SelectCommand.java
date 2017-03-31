@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.ui.JumpToCalendarEventEvent;
+import seedu.address.commons.events.ui.JumpToCalendarTaskEvent;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -44,6 +46,7 @@ public class SelectCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
             }
             EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
+            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(lastShownEventList.get(targetIndex - 1)));
             return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS, targetIndex));
         }
         if (type.equals("ts")) {
@@ -51,6 +54,7 @@ public class SelectCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex - 1));
+            EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(lastShownTaskList.get(targetIndex - 1)));
             return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));

@@ -11,12 +11,10 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
-import jfxtras.internal.scene.control.skin.agenda.AgendaDaySkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
 import jfxtras.scene.control.agenda.Agenda.Appointment;
 import jfxtras.scene.control.agenda.Agenda.LocalDateTimeRange;
-import seedu.address.commons.core.CalendarLayout;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.CalendarUnsyncException;
 import seedu.address.model.person.ReadOnlyEvent;
@@ -24,53 +22,48 @@ import seedu.address.model.person.ReadOnlyTask;
 
 //@@author A0124377A
 
-/**
- * The Calendar window controller
- * Responsible for loading the calendar
- * Updating the calendar view
- */
 public class CalendarPanel extends UiPart<Region> {
     private static final String CALENDAR_UNSYC_MESSAGE = "Calendar is not synced";
-    private static final String CALENDAR_VIEW_ID = "calendar";
-    private static final int DEFAULT_BEFORE = -1;
-    private static final int DEFAULT_AFTER = 3;
-    private static final double DEFAULT_WEEK_VIEW_DAYS = 4.0;
+    private static final String CALENDAR_ID = "calendar";
     private Agenda agenda;
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
     private final CalendarAdder calAdder;
-    private static final String FXML = "nil";
 
     public CalendarPanel(AnchorPane calendarPlaceholder, ObservableList<ReadOnlyEvent> eventList,
             ObservableList<ReadOnlyTask> taskList) {
         agenda = new Agenda();
-        calAdder = CalendarAdder.getInstance();
+        calAdder = CalendarAdder.initializeCalendar();
         addToPlaceHolder(calendarPlaceholder);
-        configure(eventList, taskList);
+        setConnection(eventList, taskList);
         logger.info("Setting up Calendar panel...");
         setBoundary();
-        setWeekView(DEFAULT_BEFORE, DEFAULT_AFTER);
+        setWeekView();
         agenda.setAllowDragging(false);
         agenda.setDisplayedLocalDateTime(LocalDateTime.now());
         resetCallBack();
     }
 
    /**
-     * Set up the week view by setting the default value for the sliders.
+     * Set up the default week view
      * @param before
      * @param after
      */
-    private void setWeekView(int before, int after) {
+    private void setWeekView() {
         AgendaWeekSkin skin = new AgendaWeekSkin(this.agenda);
-        //        AgendaDaysFromDisplayedSkin skin = new AgendaDaysFromDisplayedSkin(this.agenda);
-//        skin.setDaysBeforeFurthest(before);
-//        skin.setDaysAfterFurthest(after);
-//        Slider slider = (Slider) this.agenda.lookup("#daysAfterSlider");
-//        slider.setValue(DEFAULT_WEEK_VIEW_DAYS);
         this.agenda.setSkin(skin);
     }
 
+   /* Set up the selected month view
+    * @param before
+    * @param after
+
+    private void setMonthView() {
+        AgendaMonthSkin skin = new AgendaMonthSkin(this.agenda);
+        this.agenda.setSkin(skin);
+    }
+    */
    /**
-    * Reset callbacks which modify the calendar so that the calendar depends solely on the event list
+    * Reset callbacks which to automatically update
     */
     private void resetCallBack() {
         agenda.setActionCallback(new Callback<Appointment, Void>() {
@@ -84,15 +77,14 @@ public class CalendarPanel extends UiPart<Region> {
         agenda.setEditAppointmentCallback(new Callback<Appointment, Void>() {
             @Override
             public Void call(Appointment param) {
-                // Do nothing
                 return null;
             }
         });
 
+        // Disallow adding activity just by clicking.
         agenda.setNewAppointmentCallback(new Callback<LocalDateTimeRange, Appointment>() {
             @Override
             public Appointment call(LocalDateTimeRange param) {
-                // Not allowing adding new events by clicking.
                 return null;
             }
         });
@@ -101,7 +93,7 @@ public class CalendarPanel extends UiPart<Region> {
 
     private void addToPlaceHolder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, true);
-        agenda.setId(CALENDAR_VIEW_ID);
+        agenda.setId(CALENDAR_ID);
         placeHolderPane.getChildren().add(agenda);
     }
 
@@ -113,14 +105,9 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Set data connection of calendar and the lists
      * @param eventList
      * @param taskList
      */
-    private void configure(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
-        setConnection(eventList, taskList);
-    }
-
     private void setConnection(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
         agenda.appointments().clear();
         agenda.selectedAppointments().clear();
@@ -129,7 +116,11 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     private void setConnectionEvent(List<ReadOnlyEvent> eventList) {
-        eventList.forEach(event -> agenda.appointments().add(calAdder.convertFromEvent(event)));
+        eventList.stream()
+             .filter(event -> LocalDateTime.of(event.getEndDate().getValue(),
+                     event.getEndTime().getValue()).isAfter(LocalDateTime.now()))
+             .collect(Collectors.toList())
+             .forEach(event -> agenda.appointments().add(calAdder.convertFromEvent(event)));
     }
 
     private void setConnectionTask(List<ReadOnlyTask> taskList) {
@@ -149,34 +140,15 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
    /**
-     * Toggle the Calendar display mode
-     * @param calendarViewMode
-     */
-    public void updateCalendarMode(CalendarLayout calendarViewMode) {
-        switch(calendarViewMode) {
-        case DAY:
-            agenda.setSkin(new AgendaDaySkin(agenda));
-            break;
-        case WEEK:
-            setWeekView(DEFAULT_BEFORE, DEFAULT_AFTER);
-            break;
-        default:
-            setWeekView(DEFAULT_BEFORE, DEFAULT_AFTER);
-        }
-    }
-
-   /**
-     * Select an event in the calendar and show its details.
+     * Select an event in the calendar and show its details. Had help for this function
      * @param targetEvent
-     * @throws exception if calendar is not sync with event list. Restart needed.
+     * @throws exception if calendar is not sync with event list
      */
-    public void select(ReadOnlyEvent event) throws CalendarUnsyncException {
-        // focus on the event
+    public void selection(ReadOnlyEvent event) throws CalendarUnsyncException {
         LocalDateTime displayedDateTime = LocalDateTime.of(event.getStartDate().getValue(),
                 event.getStartTime().getValue());
         updateCalendarShownPeriod(displayedDateTime);
 
-        //highlight the event
         Appointment targetAppoint  = agenda.appointments()
                 .stream()
                 .filter((Predicate<? super Agenda.Appointment>) eventInCalendar
@@ -186,9 +158,13 @@ public class CalendarPanel extends UiPart<Region> {
 
         agenda.selectedAppointments().add(targetAppoint);
     }
-
-    public void select(ReadOnlyTask task) throws CalendarUnsyncException {
-        if (isCompleted(task) || isFloatingTask(task)) {
+    /**
+     * Select a task in the calendar and show its details.
+     * @param targetTask
+     * @throws exception if calendar is not sync with task list
+     */
+    public void selection(ReadOnlyTask task) throws CalendarUnsyncException {
+        if (isFloatingTask(task) || isCompleted(task)) {
             return;
         }
 
@@ -205,7 +181,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Focus the calendar to a certain time frame
+     * Focus the calendar on selected time frame
      * @param t
      */
     public void updateCalendarShownPeriod(LocalDateTime t) {
