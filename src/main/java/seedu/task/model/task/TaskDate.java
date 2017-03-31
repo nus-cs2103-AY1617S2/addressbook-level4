@@ -143,10 +143,10 @@ public class TaskDate {
     	
     }
     }
-    public String toString() {
-	
-	return value;
-    }
+//    public String toString() {
+//	
+//	return value;
+//    }
 
     public static int[] dateFormatConverter(String date) {
 	if (date.length() == 6) {

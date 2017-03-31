@@ -31,6 +31,7 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.DeleteCommand;
+import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
@@ -334,6 +335,19 @@ public class LogicManagerTest {
 		expectedTM, expectedTM.getTaskList());
     }
 
+    @Test
+    public void execute_done_marksCorrectTask() throws Exception {
+	TestDataHelper helper = new TestDataHelper();
+	List<Task> threeTasks = helper.generateTaskList(3);
+
+	TaskManager expectedTM = helper.generateTaskManager(threeTasks);
+	expectedTM.completeTask(1);
+	helper.addToModel(model, threeTasks);
+
+	assertCommandSuccess("delete 2", String.format(DoneCommand.MESSAGE_COMPLETED_TASK_SUCCESS, 2).concat("\n"),
+		expectedTM, expectedTM.getTaskList());
+    }
+    
     @Test
     public void execute_find_invalidArgsFormat() {
 	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);

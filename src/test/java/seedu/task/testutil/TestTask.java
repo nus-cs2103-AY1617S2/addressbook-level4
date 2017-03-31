@@ -4,6 +4,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.TaskName;
+import seedu.task.model.task.TaskPath;
 import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.TaskTime;
@@ -20,7 +21,8 @@ public class TestTask implements ReadOnlyTask {
     private TaskTime taskEndTime;
     private String taskDescription;
     private TaskStatus taskStatus;
-
+    private TaskPath taskPath;
+    
     public TestTask() {
 	tags = new UniqueTagList();
     }
@@ -116,6 +118,11 @@ public class TestTask implements ReadOnlyTask {
 	sb.append(this.getTaskStatus() + " ");
 	this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
 	return sb.toString();
+    }
+
+    public String getTaskPath() {
+	// TODO Auto-generated method stub
+	return null;
     }
 
 }
