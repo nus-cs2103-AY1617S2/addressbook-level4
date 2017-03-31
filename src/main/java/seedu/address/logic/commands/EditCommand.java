@@ -136,6 +136,7 @@ public class EditCommand extends Command {
 
             startEndDateTime = Optional.empty();
             if (getRawStartDateTime().isPresent() && !getRawEndDateTime().isPresent()) {
+                // TODO remove println
                 System.out.println("From only!");
                 if (taskToEdit.getStartEndDateTime().isPresent()) {
                     // TODO should we wrap this into ParserUtil as well?
@@ -150,6 +151,7 @@ public class EditCommand extends Command {
                     throw new IllegalValueException("Start Date must comes with an End Date");
                 }
             } else if (!getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent()) {
+                // TODO remove println
                 System.out.println("To only!");
                 if (taskToEdit.getStartEndDateTime().isPresent()) {
                     // TODO should we wrap this into ParserUtil as well?
