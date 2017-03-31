@@ -3,7 +3,7 @@
     "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
     "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
-<!-- This configuration file enforces rules for a modified version of the 
+<!-- This configuration file enforces rules for a modified version of the
 	module's code standard at https://oss-generic.github.io/process/codingstandards/coding-standards-java.html -->
 
 <module name="Checker">
@@ -13,7 +13,7 @@
 	</module>
 
 	<module name="NewlineAtEndOfFile">
-		<!-- Accept LF, CR or CRLF to accomodate devs who prefer different line 
+		<!-- Accept LF, CR or CRLF to accomodate devs who prefer different line
 			endings -->
 		<property name="lineSeparator" value="lf_cr_crlf" />
 	</module>
@@ -40,10 +40,10 @@
 
 		<!-- IMPORT CHECKS -->
 
-		<!-- Checks the ordering of import statements follow the rules that the 
-			default Eclipse formatter uses. The order rule "STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE" 
-			consists of: 1. STATIC: static imports 2. STANDARD_JAVA_PACKAGE: standard 
-			java/javax imports 3. SPECIAL_IMPORTS: defined as org imports 4. THIRD_PARTY_PACKAGE: 
+		<!-- Checks the ordering of import statements follow the rules that the
+			default Eclipse formatter uses. The order rule "STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"
+			consists of: 1. STATIC: static imports 2. STANDARD_JAVA_PACKAGE: standard
+			java/javax imports 3. SPECIAL_IMPORTS: defined as org imports 4. THIRD_PARTY_PACKAGE:
 			defined as com imports -->
 		<module name="CustomImportOrder">
 			<property name="customImportOrderRules"
@@ -54,14 +54,14 @@
 			<property name="separateLineBetweenGroups" value="true" />
 		</module>
 
-		<!-- Checks for redundant import statements. An import statement is redundant 
-			if: * It is a duplicate of another import. This is, when a class is imported 
-			more than once. * The class non-statically imported is from the java.lang 
-			package, e.g. importing java.lang.String. * The class non-statically imported 
+		<!-- Checks for redundant import statements. An import statement is redundant
+			if: * It is a duplicate of another import. This is, when a class is imported
+			more than once. * The class non-statically imported is from the java.lang
+			package, e.g. importing java.lang.String. * The class non-statically imported
 			is from the same package as the current package. -->
 		<module name="RedundantImport" />
 
-		<!-- Checks for unused import statements. An import statement is unused 
+		<!-- Checks for unused import statements. An import statement is unused
 			if: It's not referenced in the file. -->
 		<module name="UnusedImports" />
 
@@ -85,7 +85,7 @@
 		</module>
 
 		<module name="ConstantName">
-			<!-- Validates non-private, static, final fields against the expression 
+			<!-- Validates non-private, static, final fields against the expression
 				"^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$". -->
 			<metadata name="altname" value="ConstantName" />
 			<property name="applyToPublic" value="true" />
@@ -128,19 +128,19 @@
 		</module>
 
 		<module name="ParameterName">
-			<!-- Validates identifiers for method parameters against the expression 
+			<!-- Validates identifiers for method parameters against the expression
 				"^[a-z][a-zA-Z0-9]*$". -->
 			<property name="severity" value="warning" />
 		</module>
 
 		<module name="LocalFinalVariableName">
-			<!-- Validates identifiers for local final variables against the expression 
+			<!-- Validates identifiers for local final variables against the expression
 				"^[a-z][a-zA-Z0-9]*$". -->
 			<property name="severity" value="warning" />
 		</module>
 
 		<module name="LocalVariableName">
-			<!-- Validates identifiers for local variables against the expression 
+			<!-- Validates identifiers for local variables against the expression
 				"^[a-z][a-zA-Z0-9]*$". -->
 			<property name="severity" value="warning" />
 		</module>
@@ -160,7 +160,7 @@
 		</module>
 
 		<module name="RightCurly">
-			<!-- Checks right curlies on CATCH, ELSE, and TRY blocks are on the same 
+			<!-- Checks right curlies on CATCH, ELSE, and TRY blocks are on the same
 				line. e.g., the following example is fine: <pre> if { ... } else </pre> -->
 			<!-- This next example is not fine: <pre> if { ... } else </pre> -->
 			<property name="option" value="same" />
@@ -172,8 +172,8 @@
 			<property name="severity" value="warning" />
 			<property name="tokens"
 				value="LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, LITERAL_IF, LITERAL_ELSE" />
-			<!-- if (true) return 1; // Allowed if (true) { return 1; } // Not allowed 
-				else if { return 1; // else if should always be multi line } if (true) return 
+			<!-- if (true) return 1; // Allowed if (true) { return 1; } // Not allowed
+				else if { return 1; // else if should always be multi line } if (true) return
 				1; // Not allowed -->
 			<property name="allowEmptyLoopBody" value="true" />
 			<property name="allowSingleLineStatement" value="true" />
@@ -185,9 +185,9 @@
 		</module>
 
 		<module name="FallThrough">
-			<!-- Warn about falling through to the next case statement. Similar to 
-				javac -Xlint:fallthrough, but the check is suppressed if a single-line comment 
-				on the last non-blank line preceding the fallen-into case contains 'fall 
+			<!-- Warn about falling through to the next case statement. Similar to
+				javac -Xlint:fallthrough, but the check is suppressed if a single-line comment
+				on the last non-blank line preceding the fallen-into case contains 'fall
 				through' (or some other variants which we don't publicized to promote consistency). -->
 			<property name="reliefPattern"
 				value="fall through|Fall through|fallthru|Fallthru|falls through|Falls through|fallthrough|Fallthrough|No break|NO break|no break|continue on" />
@@ -198,8 +198,8 @@
 		<!-- ORDER CHECKS -->
 
 		<module name="ModifierOrder">
-			<!-- Warn if modifier order is inconsistent with JLS3 8.1.1, 8.3.1, and 
-				8.4.3. The prescribed order is: public, protected, private, abstract, static, 
+			<!-- Warn if modifier order is inconsistent with JLS3 8.1.1, 8.3.1, and
+				8.4.3. The prescribed order is: public, protected, private, abstract, static,
 				final, transient, volatile, synchronized, native, strictfp -->
 		</module>
 
@@ -208,7 +208,7 @@
 		<!-- WHITESPACE CHECKS -->
 
 		<module name="WhitespaceAround">
-			<!-- Checks that various tokens are surrounded by whitespace. This includes 
+			<!-- Checks that various tokens are surrounded by whitespace. This includes
 				most binary operators and keywords followed by regular or curly braces. -->
 			<property name="tokens"
 				value="ASSIGN, BAND, BAND_ASSIGN, BOR,
@@ -237,7 +237,7 @@
 		</module>
 
 		<module name="NoWhitespaceAfter">
-			<!-- Checks that there is no whitespace after various unary operators. 
+			<!-- Checks that there is no whitespace after various unary operators.
 				Linebreaks are allowed. -->
 			<property name="tokens"
 				value="BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS,
@@ -258,7 +258,7 @@
 		</module>
 
 		<module name="NoWhitespaceBefore">
-			<!-- Checks that there is no whitespace before various unary operators. 
+			<!-- Checks that there is no whitespace before various unary operators.
 				Linebreaks are allowed. -->
 			<property name="tokens" value="SEMI, DOT, POST_DEC, POST_INC" />
 			<property name="allowLineBreaks" value="true" />
@@ -266,7 +266,7 @@
 		</module>
 
 		<module name="ParenPad">
-			<!-- Checks that there is no whitespace before close parenthesis or after 
+			<!-- Checks that there is no whitespace before close parenthesis or after
 				open parenthesis. -->
 			<property name="severity" value="warning" />
 		</module>

@@ -63,7 +63,7 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
-        
+
         compile fileTree(dir: 'lib', include: '*.jar')
 
         testCompile "junit:junit:$junitVersion"

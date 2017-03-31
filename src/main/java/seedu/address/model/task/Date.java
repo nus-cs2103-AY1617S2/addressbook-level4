@@ -25,7 +25,7 @@ public class Date {
     public Date(String date) throws IllegalValueException {
         assert date != null;
         String trimmedDate = date.trim();
-        
+
         //@@author A0163848R
         this.value = parse(trimmedDate);
         //@@author
@@ -39,7 +39,7 @@ public class Date {
         return dateText;
     }
     //@@author
-    
+
     @Override
     public String toString() {
         return value;

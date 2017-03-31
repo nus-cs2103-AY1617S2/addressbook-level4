@@ -17,7 +17,7 @@ import seedu.address.model.task.UniquePersonList;
  * Command that marks a task as complete.
  */
 public class MarkCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks as complete the task identified "
@@ -29,14 +29,14 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This task is already complete.";
 
     private final int filteredPersonListIndex;
-    
+
     /**
      * @param filteredPersonListIndex the index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public MarkCommand(int filteredPersonListIndex) {
         assert filteredPersonListIndex > 0;
-        
+
         // converts filteredPersonListIndex from one-based to zero-based.
         this.filteredPersonListIndex = filteredPersonListIndex - 1;
     }
@@ -67,14 +67,14 @@ public class MarkCommand extends Command {
      */
     private static Task createMarkedPerson(ReadOnlyPerson personToEdit) {
         assert personToEdit != null;
-        
+
         UniqueTagList updatedTags =
                 personToEdit
                 .getTags()
                 .except(UniqueTagList.constructUniqueTagList(
                                 Tag.TAG_COMPLETE,
                                 Tag.TAG_INCOMPLETE));
-        
+
         try {
             updatedTags.add(new Tag(Tag.TAG_COMPLETE));
         } catch (DuplicateTagException e) {

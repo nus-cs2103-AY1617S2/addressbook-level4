@@ -89,10 +89,10 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public UniqueTagList except(UniqueTagList except) {
         UniqueTagList remaining = new UniqueTagList();
-        
+
         for (Tag tag : except) {
             if (except.contains(tag)) continue;
-            
+
             try {
                 remaining.add(new Tag(tag.tagName));
             } catch (DuplicateTagException e) {
@@ -101,11 +101,11 @@ public class UniqueTagList implements Iterable<Tag> {
                 e.printStackTrace();
             }
         }
-        
+
         return remaining;
     }
     //@@author
-    
+
     /**
      * Returns all tags in this list as a Set.
      * This set is mutable and change-insulated against the internal list.
@@ -159,7 +159,7 @@ public class UniqueTagList implements Iterable<Tag> {
         }
         internalList.add(toAdd);
     }
-    
+
     /**
      * Returns number of tags contained.
      */
@@ -201,14 +201,14 @@ public class UniqueTagList implements Iterable<Tag> {
             super("Operation would result in duplicate tags");
         }
     }
-    
+
     //@@author A0163848R
     /**
      * Constructs a tag list from a variadic parameter list of strings
      */
     public static UniqueTagList constructUniqueTagList(String ... tagNames) {
         UniqueTagList tags = new UniqueTagList();
-        
+
         try {
             for (String tagName : tagNames) {
                 tags.add(new Tag(tagName));
@@ -218,7 +218,7 @@ public class UniqueTagList implements Iterable<Tag> {
         } catch (IllegalValueException e) {
             e.printStackTrace();
         }
-            
+
         return tags;
     }
 

@@ -17,7 +17,7 @@ import seedu.address.model.task.UniquePersonList;
  * Command that marks task as incomplete
  */
 public class UnmarkCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks as incomplete the task identified "
@@ -29,14 +29,14 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This task is already incomplete.";
 
     private final int filteredPersonListIndex;
-    
+
     /**
      * @param filteredPersonListIndex the index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public UnmarkCommand(int filteredPersonListIndex) {
         assert filteredPersonListIndex > 0;
-        
+
         // converts filteredPersonListIndex from one-based to zero-based.
         this.filteredPersonListIndex = filteredPersonListIndex - 1;
     }
@@ -67,14 +67,14 @@ public class UnmarkCommand extends Command {
      */
     private static Task createUnmarkedPerson(ReadOnlyPerson personToEdit) {
         assert personToEdit != null;
-        
+
         UniqueTagList updatedTags =
                 personToEdit
                 .getTags()
                 .except(UniqueTagList.constructUniqueTagList(
                                 Tag.TAG_COMPLETE,
                                 Tag.TAG_INCOMPLETE));
-        
+
         try {
             updatedTags.add(new Tag(Tag.TAG_INCOMPLETE));
         } catch (DuplicateTagException e) {

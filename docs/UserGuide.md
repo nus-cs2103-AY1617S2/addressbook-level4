@@ -82,13 +82,13 @@ Format: `edit INDEX PARAMETER NEW_VALUE` <br>
 
 > * Edits the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
 > * One parameter and updated value needs to be provided.
-> * Existing value will be updated to the input value. 
+> * Existing value will be updated to the input value.
 
 Examples:
 
 * `edit 1 due 20/03/2017`<br>
   Edits the due date and email address of the 1st item to 20/03/2017.
-  
+
 * `edit 2 description buy milk`<br>
   Edits the description of the 2nd task to read “buy milk”.
 
@@ -173,8 +173,8 @@ There is no need to save manually.
 **A**: Please feel free to open a pull request with implementation of new features. Our only request is that you review the [developer guide](https://github.com/CS2103JAN2017-T11-B4/main/blob/developer-guide/docs/DeveloperGuide.md) and abide to all the requirements.
 
 **Q**: Is it possible for me to change the appearance of the application?<br>
-**A**: At the moment, there are no ways to edit the theme of the application.      
- 
+**A**: At the moment, there are no ways to edit the theme of the application.
+
 
 ## 4. Command Summary
 
@@ -198,23 +198,23 @@ There is no need to save manually.
 
 * **Edit**  `edit INDEX PARAMETER NEW_VALUE` <br>
   e.g. `edit 2 due 23/03/2017 1200`
-  
+
 * **Complete** `complete INDEX` <br>
   e.g. `complete 2`
-    
+
 * **Delete** : `delete INDEX` <br>
 `- INDEX` <br>
   e.g. `delete 3`, `- 3`
 
 * **Delete all: `delete all` <br>
   e.g. `delete all`
- 
+
 * **Find**: `find KEYWORD [MORE_KEYWORDS]` <br>
 `/ KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find James Jake`
-  		  
+
 * **Undo**: `undo` <br>
   e.g. `undo`
-  		  
+
 * **Exit**: `exit` <br>
   e.g. `exit`

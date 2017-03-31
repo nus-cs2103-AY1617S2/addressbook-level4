@@ -20,7 +20,7 @@ public class RedoCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         boolean result = model.redoLastModification();
-        
+
         return new CommandResult(result ? REDO_SUCCESS : REDO_FAILURE);
     }
 

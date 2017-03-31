@@ -24,7 +24,7 @@ public class RedoCommandParser {
             return new RedoCommand();
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        } 
+        }
     }
 
 }

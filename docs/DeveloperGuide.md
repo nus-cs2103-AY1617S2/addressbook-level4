@@ -404,7 +404,7 @@ Use case ends.
 
 > 3a1. Yesterday's Tomorrow shows an error message <br>
   Use case resumes at step 2
-  
+
 #### Use case: Edit task
 
 **MSS**
@@ -634,7 +634,7 @@ Pros:
 * Lightweight, eats less battery.
 
 Cons:
-  		  
+
 * Alarm would stop ringing all together.
 * If a reminder comes due and your away from your phone it stays on screen few minutes then its gone
 * It alerts user 10 minutes prior. Then you snooze for 15 minutes.

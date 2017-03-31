@@ -20,7 +20,7 @@ public class ThemeManager extends UiPart<Region> {
     public static final String THEME_FILE_FOLDER = "/themes/";
     public static final String STYLESHEET_EXTENSION = ".css";
     public static final String DEFAULT_STYLESHEET = "LimeTheme";
-    
+
     private static final String FXML = "ThemeManager.fxml";
 
     @FXML
@@ -47,13 +47,17 @@ public class ThemeManager extends UiPart<Region> {
     }
 
     /**
-     * 
+     *
      * @param Parent to set theme of.
      * @param Theme filename (without path or extension) to be applied.
      */
     public static void changeTheme(Parent root, String theme) {
         root.getStylesheets().clear();
-        root.getStylesheets().add(MainApp.class.getResource(THEME_FILE_FOLDER + theme + STYLESHEET_EXTENSION).toString());
+        root.getStylesheets().add(MainApp.class.getResource(
+                THEME_FILE_FOLDER
+                + theme
+                + STYLESHEET_EXTENSION)
+                .toString());
     }
 
     private void setConnections(String path) {

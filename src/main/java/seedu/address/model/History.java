@@ -6,9 +6,9 @@ package seedu.address.model;
  * @param <T> State type to save
  */
 public class History<T> {
-    
+
     private Node<T> current = null;
-    
+
     /**
      * Moves current state back one push.
      * @return State after undo
@@ -16,8 +16,8 @@ public class History<T> {
     public T undo() {
         if (current == null) {
             return null;
-            }
-        
+        }
+
         Node<T> prev = current.getPrevious();
         if (prev == null) {
             return null;
@@ -26,7 +26,7 @@ public class History<T> {
             return prev.getElement();
         }
     }
-    
+
     /**
      * Moves current state forward one push.
      * @return State after redo
@@ -35,7 +35,7 @@ public class History<T> {
         if (current == null) {
             return null;
         }
-        
+
         Node<T> next = current.getNext();
         if (next == null) {
             return null;
@@ -44,7 +44,7 @@ public class History<T> {
             return next.getElement();
         }
     }
-    
+
     /**
      * @return Current state
      */
@@ -55,67 +55,67 @@ public class History<T> {
             return null;
         }
     }
-    
+
     public void push(T next) {
         Node<T> nextNode = new Node<T>(next);
-        
+
         if (current != null) {
             nextNode.setPrevious(current);
             current.setNext(nextNode);
         }
-        
+
         current = nextNode;
     }
-    
+
     /**
      * @return Total number of saved states
      */
     public int size() {
         return 1 + sizePrev(current) + sizeNext(current);
     }
-    
+
     private int sizePrev(Node source) {
         return source.getPrevious() == null ? 0 : 1 + sizePrev(source.getPrevious());
     }
-    
+
     private int sizeNext(Node source) {
         return source.getNext() == null ? 0 : 1 + sizePrev(source.getNext());
     }
-    
+
     /**
      * Double linked list node
      * @param <T> Element type to store
      */
     private class Node<T> {
-        
+
         private T element;
-        
+
         private Node<T> prev = null;
         private Node<T> next = null;
-        
+
         public Node(T element) {
             this.element = element;
         }
-        
+
         public T getElement() {
             return element;
         }
-        
+
         public Node<T> getPrevious() {
             return prev;
         }
-        
+
         public Node<T> getNext() {
             return next;
         }
-        
+
         public void setNext(Node<T> next) {
             this.next = next;
         }
-        
+
         public void setPrevious(Node<T> prev) {
             this.prev = prev;
         }
-        
+
     }
 }

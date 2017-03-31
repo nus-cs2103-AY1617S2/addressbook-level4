@@ -38,7 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.addressBook = new YTomorrow(addressBook);
         this.history = new History<ReadOnlyAddressBook>();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        
+
         //@@author A0163848R
         history.push(addressBook);
         //@@author
@@ -88,8 +88,8 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
         addressBook.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
-    }  
-    
+    }
+
     //@@author A0163848R
     @Override
     public boolean undoLastModification() {
@@ -111,7 +111,7 @@ public class ModelManager extends ComponentManager implements Model {
         return false;
     }
     //@@author
-    
+
     @Override
     public void addToHistory(ReadOnlyAddressBook state) {
         history.push(state);

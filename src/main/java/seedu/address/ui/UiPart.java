@@ -49,8 +49,8 @@ public abstract class UiPart<T> {
     public UiPart(String fxmlFileName) {
         this(fxmlFileName != null ? MainApp.class.getResource(FXML_FILE_FOLDER + fxmlFileName) : null);
     }
-    
-    //@@author A0163848R 
+
+    //@@author A0163848R
     /**
      * Sets the css file used for the UIPart's FXML.
      */

@@ -20,7 +20,7 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         boolean result = model.undoLastModification();
-        
+
         return new CommandResult(result ? UNDO_SUCCESS : UNDO_FAILURE);
     }
 
