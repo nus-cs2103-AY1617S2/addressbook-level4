@@ -45,7 +45,6 @@ public class MarkCommand extends Command {
         }
 
         ReadOnlyTask taskToMark = lastShownList.get(targetIndex - 1);
-        //@@author A0138377U
         Task markedTask = null;
         try {
             markedTask = (!taskToMark.getStatus().toString().equals("Done") ?
@@ -54,7 +53,6 @@ public class MarkCommand extends Command {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //@@author A0138377U-reused
         model.updateCopy(model.getTaskManager());
         model.updateFlag("undo copy");
         model.updateTask(targetIndex - 1, markedTask);
