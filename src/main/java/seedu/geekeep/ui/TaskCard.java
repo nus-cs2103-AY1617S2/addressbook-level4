@@ -25,7 +25,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
-    private Label locationOfTask;
+    private Label descriptionOfTask;
     @FXML
     private FlowPane tags;
 
@@ -42,10 +42,10 @@ public class TaskCard extends UiPart<Region> {
             date.setText(null);
         }
 
-        if (task.getLocation() == null) {
-            locationOfTask.setText("");
+        if (task.getDescriptoin() == null) {
+            descriptionOfTask.setText("");
         } else {
-            locationOfTask.setText(task.getLocation().value);
+            descriptionOfTask.setText(task.getDescriptoin().value);
         }
 
         initTags(task);

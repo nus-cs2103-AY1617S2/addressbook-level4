@@ -22,7 +22,7 @@ public class Task implements ReadOnlyTask  {
     private Title title;
     private DateTime endDateTime;
     private DateTime startDateTime;
-    private Location location;
+    private Description description;
     private boolean isDone;
 
     private UniqueTagList tags;
@@ -32,11 +32,11 @@ public class Task implements ReadOnlyTask  {
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getTitle(), source.getStartDateTime(),
-                source.getEndDateTime(), source.getLocation(), source.getTags(), source.isDone());
+                source.getEndDateTime(), source.getDescriptoin(), source.getTags(), source.isDone());
     }
 
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location,
+                DateTime endDateTime, Description description,
                 UniqueTagList tags, boolean isDone) throws IllegalValueException {
         assert title != null;
         if (startDateTime != null && endDateTime == null) {
@@ -50,7 +50,7 @@ public class Task implements ReadOnlyTask  {
         this.title = title;
         this.endDateTime = endDateTime;
         this.startDateTime = startDateTime;
-        this.location = location;
+        this.description = description;
         this.isDone = isDone;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -68,8 +68,8 @@ public class Task implements ReadOnlyTask  {
     }
 
     @Override
-    public Location getLocation() {
-        return location;
+    public Description getDescriptoin() {
+        return description;
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Task implements ReadOnlyTask  {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, endDateTime, startDateTime, location, tags);
+        return Objects.hash(title, endDateTime, startDateTime, description, tags);
     }
 
     //@@author A0148037E
@@ -182,7 +182,7 @@ public class Task implements ReadOnlyTask  {
         this.setTitle(replacement.getTitle());
         this.setEndDateTime(replacement.getEndDateTime());
         this.setStartDateTime(replacement.getStartDateTime());
-        this.setLocation(replacement.getLocation());
+        this.setDescription(replacement.getDescriptoin());
         this.setTags(replacement.getTags());
         this.setDone(replacement.isDone());
     }
@@ -197,9 +197,9 @@ public class Task implements ReadOnlyTask  {
         this.endDateTime = endDateTime;
     }
 
-    public void setLocation(Location location) {
-        assert location != null;
-        this.location = location;
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     public void setDone(boolean isDone) {
