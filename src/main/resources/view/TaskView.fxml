@@ -48,7 +48,7 @@
                   </FlowPane>
                </children>
             </FlowPane>
-            <HBox alignment="CENTER_LEFT">
+            <HBox fx:id="dateBox" alignment="CENTER_LEFT">
                <children>
                   <ImageView fx:id="clockIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="date">
@@ -68,7 +68,7 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT">
+            <HBox fx:id="recurringBox" alignment="CENTER_LEFT">
                <children>
                   <ImageView fx:id="recurringIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="recurringDate">
