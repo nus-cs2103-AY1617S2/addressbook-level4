@@ -38,6 +38,8 @@
 
 .list-cell {
     -fx-background-color: transparent;
+    -fx-border-color: theme-secondary-text;
+    -fx-border-width: 0 0 1 0;
 }
 
 .text-field {
@@ -122,11 +124,6 @@
 }
 
 /* TASK */
-
-.tasks .task {
-    -fx-border-color: theme-secondary-text;
-    -fx-border-width: 0 0 1 0;
-}
 
 .tasks .task.completed .status-text .text {
     -fx-strikethrough: true;
