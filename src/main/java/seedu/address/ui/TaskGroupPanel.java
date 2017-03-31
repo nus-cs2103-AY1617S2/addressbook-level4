@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ScrollingEvent;
 import seedu.address.commons.events.ui.ShowTaskGroupEvent;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -79,6 +80,25 @@ public class TaskGroupPanel extends UiPart<Region> {
         safelyScrollTo(vValue);
     }
 
+    /**
+     * Return the scroll value every time user presses pageup or pagedown
+     */
+    public double getScrollValuePerKeyPress() {
+        double fullHeight = taskGroupView.getHeight();
+        double scrollHeight = 150.0;  // 200 px at a time
+        return scrollHeight / fullHeight;
+    }
+
+    public void scrollToNextPage() {
+        double viewPercentage = getScrollValuePerKeyPress();
+        scrollTo(scrollPane.getVvalue() + viewPercentage);
+    }
+
+    public void scrollToPrevPage() {
+        double viewPercentage = getScrollValuePerKeyPress();
+        scrollTo(scrollPane.getVvalue() - viewPercentage);
+    }
+
     public int getTaskCount() {
         return taskGroupView.getChildren().size();
     }
@@ -109,6 +129,17 @@ public class TaskGroupPanel extends UiPart<Region> {
                 EventsCenter.getInstance().post(new ShowTaskGroupEvent(getTitle()));
             }
         });
+    }
+
+    @Subscribe
+    private void handleScrollingEvent(ScrollingEvent event) {
+        if (titledPane.isExpanded()) {
+            if (event.scrollType == ScrollingEvent.SCROLL_DOWN) {
+                scrollToNextPage();
+            } else {
+                scrollToPrevPage();
+            }
+        }
     }
 
     @Subscribe

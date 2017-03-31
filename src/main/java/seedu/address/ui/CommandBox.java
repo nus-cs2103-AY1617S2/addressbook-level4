@@ -9,8 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.commons.events.ui.ScrollingEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -36,6 +38,7 @@ public class CommandBox extends UiPart<Region> {
         // Preempt history with empty string
         history.add(EMPTY_STRING);
         addToPlaceholder(commandBoxPlaceholder);
+        registerAsAnEventHandler(this);
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -60,6 +63,14 @@ public class CommandBox extends UiPart<Region> {
             moveDownHistoryStack();
             break;
 
+        case PAGE_UP:
+            broadcastPageUpEvents();
+            break;
+
+        case PAGE_DOWN:
+            broadcastPageDownEvents();
+            break;
+
         case ENTER:
             handleInputEntered();
             break;
@@ -67,6 +78,14 @@ public class CommandBox extends UiPart<Region> {
         default:
             break;
         }
+    }
+
+    private void broadcastPageUpEvents() {
+        EventsCenter.getInstance().post(new ScrollingEvent(ScrollingEvent.SCROLL_UP));
+    }
+
+    private void broadcastPageDownEvents() {
+        EventsCenter.getInstance().post(new ScrollingEvent(ScrollingEvent.SCROLL_DOWN));
     }
 
     private void moveUpHistoryStack() {
