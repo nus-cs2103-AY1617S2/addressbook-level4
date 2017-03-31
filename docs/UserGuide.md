@@ -445,7 +445,7 @@ _**Maps a command to the shortcut specified.**_<br>
 
 #### Example:
 
-*  Map the **`quit`** command to the shortcut **`boom`**: <br> 
+*  Map the **`quit`** command to the shortcut **`boom`**: <br>
 **`alias quit boom`** <br><br>
 Now you can quit ezDo by entering **`boom`**<br>
 
