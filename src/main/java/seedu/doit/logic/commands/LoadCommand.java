@@ -23,7 +23,6 @@ public class LoadCommand extends Command {
             + " load/xml/in/this/file/as/name.xml";
 
     public static final String MESSAGE_SUCCESS = " Tasks loaded at %1$s";
-    public static final String MESSAGE_DUPLICATE_FILE = "Another file already exists in the file path!";
 
     public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file path!\n" + MESSAGE_USAGE;
     private static final Logger logger = LogsCenter.getLogger(SaveCommand.class);

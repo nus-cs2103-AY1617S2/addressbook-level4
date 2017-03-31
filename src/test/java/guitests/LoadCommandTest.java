@@ -17,6 +17,7 @@ import seedu.doit.testutil.TypicalTestTasks;
 public class LoadCommandTest extends TaskManagerGuiTest {
     private static final String GUI_ALTERNATE_XML_FILE = "guitest1.xml";
     private static final String ALTERNATE_XML = TestUtil.SANDBOX_FOLDER + GUI_ALTERNATE_XML_FILE;
+    private static final String INVALID_XML = "guitest2.xml";
 
     @Test
     public void load() throws DataConversionException, IOException, IllegalValueException {
@@ -44,5 +45,10 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         assertAllPanelsMatch(currentList);
         File file = new File(ALTERNATE_XML);
         file.delete();
+
+        // file do not exist
+        this.commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + INVALID_XML);
+        assertResultMessage(LoadCommand.MESSAGE_INVALID_FILE_NAME);
     }
+
 }
