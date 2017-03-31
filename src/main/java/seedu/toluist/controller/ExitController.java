@@ -31,16 +31,16 @@ public class ExitController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD_EXIT, COMMAND_WORD_QUIT };
     }
 
     //@@author A0162011A
-    public static String[] getBasicHelp() {
+    public String[] getBasicHelp() {
         return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
     }
 
-    public static String[][] getDetailedHelp() {
+    public String[][] getDetailedHelp() {
         return new String[][] { getBasicHelp(), HELP_COMMENTS, null };
     }
 }

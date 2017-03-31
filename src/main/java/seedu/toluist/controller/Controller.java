@@ -43,7 +43,7 @@ public abstract class Controller {
     /**
      * Returns command word(s) used by controller
      */
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] {};
     }
 
@@ -52,7 +52,7 @@ public abstract class Controller {
      * Returns basic help command(s) used by help controller
      * Format is String[CommandWords, Format, Details]
      */
-    public static String[] getBasicHelp() {
+    public String[] getBasicHelp() {
         return new String[] {};
     }
 
@@ -61,7 +61,7 @@ public abstract class Controller {
      * Format is String[String[BasicHelp], String[Comments], String[Examples]]
      * Comments and Examples can be null, but at least one should be there to make this not pointless
      */
-    public static String[][] getDetailedHelp() {
+    public String[][] getDetailedHelp() {
         return new String[][] {};
     }
 }

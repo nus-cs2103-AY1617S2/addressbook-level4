@@ -21,7 +21,8 @@ public class AliasControllerTest extends ControllerTest {
 
     @Test
     public void getCommandWord() {
-        assertEquals(Arrays.asList(AliasController.COMMAND_WORD), Arrays.asList(AliasController.getCommandWords()));
+        assertEquals(Arrays.asList(AliasController.COMMAND_WORD),
+                Arrays.asList(new AliasController().getCommandWords()));
     }
 
     @Test

@@ -141,15 +141,15 @@ public class FindController extends Controller {
                 || trimmedAndLowerCasedCommand.startsWith(COMMAND_WORD_LIST.toLowerCase()));
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD_FILTER, COMMAND_WORD_FIND, COMMAND_WORD_LIST };
     }
 
-    public static String[] getBasicHelp() {
+    public String[] getBasicHelp() {
         return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
     }
 
-    public static String[][] getDetailedHelp() {
+    public String[][] getDetailedHelp() {
         return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

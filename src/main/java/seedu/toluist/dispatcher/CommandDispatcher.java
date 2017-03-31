@@ -1,46 +1,21 @@
 //@@author A0131125Y
 package seedu.toluist.dispatcher;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.controller.AddTaskController;
-import seedu.toluist.controller.AliasController;
-import seedu.toluist.controller.ClearController;
 import seedu.toluist.controller.Controller;
-import seedu.toluist.controller.DeleteTaskController;
-import seedu.toluist.controller.ExitController;
-import seedu.toluist.controller.FindController;
-import seedu.toluist.controller.HelpController;
+import seedu.toluist.controller.ControllerLibrary;
 import seedu.toluist.controller.HistoryController;
-import seedu.toluist.controller.LoadController;
-import seedu.toluist.controller.MarkController;
 import seedu.toluist.controller.NavigateHistoryController;
-import seedu.toluist.controller.RedoController;
-import seedu.toluist.controller.StoreController;
-import seedu.toluist.controller.SwitchController;
-import seedu.toluist.controller.TagController;
-import seedu.toluist.controller.UnaliasController;
-import seedu.toluist.controller.UndoController;
 import seedu.toluist.controller.UnknownCommandController;
-import seedu.toluist.controller.UntagController;
-import seedu.toluist.controller.UpdateTaskController;
-import seedu.toluist.controller.ViewAliasController;
 
 import seedu.toluist.model.CommandHistoryList;
 
@@ -52,11 +27,12 @@ public class CommandDispatcher extends Dispatcher {
      * ArrayList to store previous commands entered since starting the application
      */
     private CommandHistoryList commandHistory;
+    private ControllerLibrary controllerLibrary = new ControllerLibrary();
 
     //@@author A0131125Y
     public CommandDispatcher() {
         super();
-        aliasConfig.setReservedKeywords(getControllerKeywords());
+        aliasConfig.setReservedKeywords(getAllControllerKeywords());
         commandHistory = new CommandHistoryList();
     }
 
@@ -98,7 +74,7 @@ public class CommandDispatcher extends Dispatcher {
             }
         }
 
-        for (String commandWord : getControllerKeywords()) {
+        for (String commandWord : getAllControllerKeywords()) {
             if (StringUtil.startsWithIgnoreCase(commandWord, firstWordOfCommand)) {
                 predictedCommands.add(
                         command.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord).trim());
@@ -109,6 +85,10 @@ public class CommandDispatcher extends Dispatcher {
         return predictedCommands;
     }
 
+    private Set<String> getAllControllerKeywords() {
+        return controllerLibrary.getControllerKeywords(controllerLibrary.getAllControllers());
+    }
+
     private String getDealiasedCommand(String command) {
         String trimmedCommand = command.trim();
         return aliasConfig.dealias(trimmedCommand);
@@ -116,71 +96,12 @@ public class CommandDispatcher extends Dispatcher {
 
     //@@author A0131125Y
     private Controller getBestFitController(String command) {
-        Collection<Controller> controllerCollection = getAllControllers();
+        Collection<Controller> controllerCollection = controllerLibrary.getAllControllers();
 
         return controllerCollection
                 .stream()
                 .filter(controller -> controller.matchesCommand(command))
                 .findFirst()
                 .orElse(new UnknownCommandController()); // fail-safe
-    }
-
-    private Collection<Class <? extends Controller>> getAllControllerClasses() {
-        return new ArrayList<>(Arrays.asList(
-                AddTaskController.class,
-                ClearController.class,
-                UpdateTaskController.class,
-                DeleteTaskController.class,
-                StoreController.class,
-                HistoryController.class,
-                LoadController.class,
-                UndoController.class,
-                HelpController.class,
-                RedoController.class,
-                ExitController.class,
-                AliasController.class,
-                UnaliasController.class,
-                NavigateHistoryController.class,
-                ViewAliasController.class,
-                UntagController.class,
-                FindController.class,
-                TagController.class,
-                MarkController.class,
-                SwitchController.class,
-                UnknownCommandController.class
-        ));
-    }
-
-    private Collection<Controller> getAllControllers() {
-        return getAllControllerClasses()
-                .stream()
-                .map((Class<? extends Controller> klass) -> {
-                    try {
-                        Constructor constructor = klass.getConstructor();
-                        return (Controller) constructor.newInstance();
-                    } catch (NoSuchMethodException | InstantiationException
-                            | IllegalAccessException | InvocationTargetException e) {
-                        // fail-safe. But should not actually reach here
-                        return new UnknownCommandController();
-                    }
-                })
-                .collect(Collectors.toList());
-    }
-
-    private Set<String> getControllerKeywords() {
-        List<String> keywordList = getAllControllerClasses()
-                .stream()
-                .map((Class<? extends Controller> klass) -> {
-                    try {
-                        final String methodName = "getCommandWords";
-                        Method method = klass.getMethod(methodName);
-                        return Arrays.asList((String[]) method.invoke(null));
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                        return new ArrayList<String>();
-                    }
-                })
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
-        return new HashSet<>(keywordList);
     }
 }

@@ -1,14 +1,10 @@
 //@@author A0162011A
 package seedu.toluist.controller;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -35,10 +31,6 @@ public class HelpController extends Controller {
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
     private static final String COMMAND_SPLITTER_REGEX = " ";
 
-    private static final String METHOD_BASIC_HELP = "getBasicHelp";
-    private static final String METHOD_DETAILED_HELP = "getDetailedHelp";
-    private static final String METHOD_CONTROLLER_KEYWORDS = "getCommandWords";
-
     private static final String HELP_DETAILS = "Marks a task to be complete or incomplete.";
     private static final String HELP_FORMAT = "mark [complete/incomplete] INDEX(ES)";
     private static final String[] HELP_EXAMPLES = { "`help`\nShows general help for all commands.",
@@ -61,6 +53,8 @@ public class HelpController extends Controller {
     private static final int INDEX_HELP_FORMAT = 1;
     private static final String FORMAT_LARGESPACING = "\n\n";
 
+    private ControllerLibrary controllerLibrary = new ControllerLibrary();
+
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
         HashMap<String, String> tokens = tokenize(command);
@@ -69,7 +63,7 @@ public class HelpController extends Controller {
         if (commandWord.equals("")) {
             showGeneralHelp();
             uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT_GENERAL));
-        } else if (getControllerKeywords().contains(commandWord.toLowerCase())) {
+        } else if (getCommandControllerKeywords().contains(commandWord.toLowerCase())) {
             showSpecificHelp(commandWord);
             uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_SPECIFIC, commandWord)));
         } else {
@@ -78,61 +72,28 @@ public class HelpController extends Controller {
     }
 
     private void showSpecificHelp(String commandWord) {
-        List<List<String>> detailedHelp = getDetailedHelpFromController(findControllerFromKeyword(commandWord));
+        List<List<String>> detailedHelp =
+                Arrays.asList(getControllerFromKeyword(commandWord).getDetailedHelp()).stream()
+                .map(help -> Arrays.asList(help))
+                .collect(Collectors.toList());
         uiStore.setHelp(detailedHelp);
         uiStore.setCommandResult(new CommandResult(convertListListToStringForDetailed(detailedHelp)));
     }
 
-    private List<List<String>> getDetailedHelpFromController(Class<? extends Controller> controller) {
-        String methodName = METHOD_DETAILED_HELP;
-        List<List<String>> detailedHelp;
-        try {
-            Method method = controller.getMethod(methodName);
-            detailedHelp = convertString2dToListList((String[][]) method.invoke(null));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            return null;
-        }
-        return detailedHelp;
-    }
-
-    private List<List<String>> convertString2dToListList(String[][] data) {
-        List<String> subList;
-        List<List<String>> list = new ArrayList<List<String>>();
-        for (int firstPosition = 0; firstPosition < data.length; firstPosition++) {
-            subList = new ArrayList<String>();
-            for (int secondPosition = 0; secondPosition < data[firstPosition].length; secondPosition++) {
-                subList.add(data[firstPosition][secondPosition]);
-            }
-            list.add(subList);
-        }
-        return list;
-    }
-
-    private Class<? extends Controller> findControllerFromKeyword(String commandWord) {
-        Iterator iterator = getHelpControllerClasses().iterator();
-        Class<? extends Controller> nextController;
-        String[] keywordList;
-        Method method;
-        String methodName = METHOD_CONTROLLER_KEYWORDS;
-        while (iterator.hasNext()) {
-            nextController = (Class<? extends Controller>) iterator.next();
-            try {
-                method = nextController.getMethod(methodName);
-                keywordList = (String[]) method.invoke(null);
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                keywordList = null;
-            }
-            for (int i = 0; i < keywordList.length; i++) {
-                if (commandWord.equalsIgnoreCase(keywordList[i])) {
-                    return nextController;
-                }
+    private Controller getControllerFromKeyword(String commandWord) {
+        Collection<Controller> controllers = controllerLibrary.getCommandControllers();
+        for (Controller controller : controllers) {
+            if (Arrays.stream(controller.getCommandWords())
+                    .anyMatch(word -> commandWord.equalsIgnoreCase(word))) {
+                return controller;
             }
         }
         return null;
     }
 
     private void showGeneralHelp() {
-        List<List<String>> generalHelp = getBasicHelpFromClasses();
+        List<List<String>> generalHelp = controllerLibrary.getControllerBasicHelps(
+                controllerLibrary.getCommandControllers());
         uiStore.setCommandResult(new CommandResult(convertListListToStringForGeneral(generalHelp)));
     }
 
@@ -180,72 +141,23 @@ public class HelpController extends Controller {
         return command.matches(COMMAND_REGEX);
     }
 
-    private Collection<Class <? extends Controller>> getHelpControllerClasses() {
-        return new ArrayList<>(Arrays.asList(
-                AddTaskController.class,
-                ClearController.class,
-                UpdateTaskController.class,
-                DeleteTaskController.class,
-                StoreController.class,
-                HistoryController.class,
-                LoadController.class,
-                UndoController.class,
-                HelpController.class,
-                RedoController.class,
-                ExitController.class,
-                AliasController.class,
-                UnaliasController.class,
-                ViewAliasController.class,
-                UntagController.class,
-                FindController.class,
-                TagController.class,
-                MarkController.class,
-                SwitchController.class
-        ));
-    }
-
-    private Set<String> getControllerKeywords() {
-        List<String> keywordList = getHelpControllerClasses()
-                .stream()
-                .map((Class<? extends Controller> klass) -> {
-                    try {
-                        final String methodName = METHOD_CONTROLLER_KEYWORDS;
-                        Method method = klass.getMethod(methodName);
-                        return Arrays.asList((String[]) method.invoke(null));
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                        return new ArrayList<String>();
-                    }
-                })
+    private Set<String> getCommandControllerKeywords() {
+        List<String> keywordList = controllerLibrary.getCommandControllers().stream()
+                .map(controller -> Arrays.asList(controller.getCommandWords()))
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
         return new HashSet<>(keywordList);
     }
 
-    private List<List<String>> getBasicHelpFromClasses() {
-        List<List<String>> keywordList = getHelpControllerClasses()
-                .stream()
-                .map((Class<? extends Controller> klass) -> {
-                    try {
-                        final String methodName = METHOD_BASIC_HELP;
-                        Method method = klass.getMethod(methodName);
-                        return Arrays.asList((String[]) method.invoke(null));
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                        return new ArrayList<String>();
-                    }
-                })
-                .collect(Collectors.toList());
-        return keywordList;
-    }
-
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
     }
 
-    public static String[] getBasicHelp() {
+    public String[] getBasicHelp() {
         return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
     }
 
-    public static String[][] getDetailedHelp() {
+    public String[][] getDetailedHelp() {
         return new String[][] { getBasicHelp(), null, HELP_EXAMPLES };
     }
 }
