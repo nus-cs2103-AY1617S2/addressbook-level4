@@ -41,25 +41,28 @@ Format: `help`
 
 A command guide will be shown in the window
 
-### 2.2. Adding a task: `add`
+### 2.2. Adding a task : `add`
 
-Adds a task to the task manager<br>
-Format: `add TASK s/STARTING DATE e/ENDING DATE d/Description#tags`
+Adds a task to the task manager.<br>
+Format: `add TASK s/STARTING_DATE_TIME e/ENDING_DATE_TIME d/Description #tags`
 
-> Only Task title is a compulsory field
-> Tasks can have any number of tags (including 0)
-> Tasks without starting starting or ending date will have it defaulted to the current time.
+> Only Task title is a compulsory field.<br>
+> Tasks can have any number of tags (including none).<br>
+> Tasks with date specified without time will have the time defaulted to the current time.<br>
+> Tasks with time specified without date will have the date defaulted to the current date.<br>
+> Date and time supports natural language.
 
 Examples:
 
-* `add submit report e/29/07/2017 d/Assignment 1 #academic`
-* `add read Harry Potter s/12/03/2017 e/25/06/2017 d/chapter 5 #personal`
+* `add submit report e/29/07/2017 3pm d/Assignment 1 #academic`
+* `add read Harry Potter s/12 March 2017 1300 e/15 December 2017 d/chapter 5 #personal`
+* `add do homework s/today e/tmr #urgent`
+* `add buy groceries`
 
 ### 2.3. Listing all tasks : `list`
 
-Shows a list of all currently ongoing tasks in the task manager.<br>
+Shows a list of all tasks in the task manager.<br>
 Format: `list`
-A list of tasks with index number will be shown in the column
 
 ### 2.4. Select a task : `select`
 
@@ -79,7 +82,8 @@ Examples:
 
 Edits an existing task in the task manager.<br>
 The tasks can be edited through the index from a list.<br>
-Format: `edit INDEX COMPONENT`
+Multiple fields in a task can be edited at once.<br>
+Format: `edit INDEX COMPONENT(s)`
 
 Examples:
 
@@ -90,6 +94,8 @@ Examples:
 
 ### 2.6. Finding all tasks containing any keyword in their task title / description / tags: `find`
 
+Finds a task with the given keyword.<br>
+Supports partial matching and tolerance for misspelled keywords.<br>
 Format: `find KEYWORD`
 
 Examples:
@@ -98,15 +104,26 @@ Examples:
   Returns `submit report`  `print report` `#report` etc. in the column
 * `find schoolwork sports`<br>
   Returns `do schoolwork`  `play sports` `#schoolwork` `#sports` etc. in the column
+* `find work`<br>
+  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
+* `find werk`<br>
+  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column  
 
 ### 2.7. Deleting a task : `delete` or `remove`
 
-Deletes the specified task from the task manager. Irreversible.<br>
-Format: `delete INDEX`
+Deletes the specified task from the task manager.<br>
+Format: `delete INDEX` `remove INDEX`
 
 > Deletes the task at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `delete 1`<br>
+   Delete the task with index 1 in the Task Manager
+* `remove 3`<br>
+   Delete the task with index 3 in the Task Manager
 
 ### 2.8. Sorting tasks : `sort`
 
@@ -114,56 +131,59 @@ Sorts all tasks by their start date or end date.<br>
 Format: `sort KEYWORD`
 
 > Sorts tasks according to the input `KEYWORD`.<br>
-> The keyword refers to start date or end date.<br>
-> The keyword can be `s/` for start date or `e/` for end date.<br>
+> The keyword refers to `s/` for start date or `e/` for end date.<br>
+> Invalid keyword will trigger sort by end date as default.<br>
+> New addition of tasks will follow the sort order. <br>
 > Any trailing symbols after a valid keyword will be ignored.
+
+Examples:
+
+* `sort s/`<br>
+   Sort the task by the start date
+* `sort e/`<br>
+   Sort the task by the end date
 
 ### 2.9. Clearing all entries : `clear`
 
 Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.10. Viewing history of task : `history`
-
-A list of history of tasks that have been completed will be shown in the column sorted in reverse-chronological order
-Format: `history`
-
-### 2.11. Exiting the program : `exit`
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data
+### 2.11. Saving the data
 
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.13. Change the directory of the task manager : `cd`
+### 2.12. Change the directory of the task manager : `load` or `cd`
 
 Load Task Manager data from specified file path and continue using that directory for operations.<br>
 Create new file if no such file exists and cancel operations if given non-XML address or invalid XML file.<br>
 Default file path is at data/taskmanager.xml.<br>
-Format: `cd FILEPATH`
+Format: `load FILEPATH` `cd FILEPATH`
 
 Examples:
 
-* `cd /Users/admin/taskmanager.xml`<br>
+* `load /Users/admin/taskmanager.xml`<br>
   Changes the Storage Directory to /Users/admin/taskmanager.xml in UNIX/MAC system
 * `cd data/new/cloudsync.xml`<br>
   Changes the Storage Directory to ./data/new/cloudsync.xml
 
-### 2.14. Move the directory of the task manager : `mv`
+### 2.13. Move the directory of the task manager : `move` or  `movefile`
 
 Save Task Manager data to specified file path and continue using that directory for operations.<br>
 If existing file with the same name exists, it will be overwritten with current Task Manager data.<br>
 Default file path is at data/taskmanager.xml.<br>
-Format: `mv FILEPATH`
+Format: `move FILEPATH` `movefile FILEPATH`
 
 Examples:
 
-* `mv /Users/admin/taskmanager.xml`<br>
+* `move /Users/admin/taskmanager.xml`<br>
   Moves the Storage Directory to /Users/admin/taskmanager.xml in UNIX/MAC system
-* `mv data/new/cloudsync.xml`<br>
+* `movefile data/new/cloudsync.xml`<br>
   Moves the Storage Directory to ./data/new/cloudsync.xml
 
 ## 3. FAQ

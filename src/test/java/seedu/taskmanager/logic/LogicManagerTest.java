@@ -466,14 +466,17 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
+
         Task tTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
         Task tTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
-        Task t1 = helper.generateTaskWithTitle("KE Y");
-        Task t2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
+        Task tTarget3 = helper.generateTaskWithTitle("KE Y");
+        Task tTarget4 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
+        List<Task> fourTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
         TaskManager expectedTM = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2);
+        // @@author A0140032E
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
+        // @@author
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
@@ -497,6 +500,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    //@@author A0114269E
     @Test
     public void execute_cd_invalidFilePath() throws Exception {
         assertCommandFailure("cd !asdwie34$2.xml",
@@ -505,13 +509,15 @@ public class LogicManagerTest {
                 String.format(Messages.MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
     }
 
-    /*
-     * @Test public void execute_cd_invalidXmlFile() throws Exception {
-     * assertCommandFailure("cd src/test/data/cd_test/empty.xml",
-     * ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
-     * assertCommandFailure("cd src/test/data/cd_test/invalid.xml",
-     * ChangeDirectoryCommand.MESSAGE_INVALID_DATA); }
-     */
+    // @@author A0114269E
+    @Test
+    public void execute_cd_invalidXmlFile() throws Exception {
+        assertCommandFailure("cd src/test/data/cd_test/empty.xml",
+                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+        assertCommandFailure("cd src/test/data/cd_test/invalid.xml",
+                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+    }
+    // @@author
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
