@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import seedu.onetwodo.ui.CommandBox;
 
+//@@author A0143029M
 public class CommandBoxTest extends ToDoListGuiTest {
 
     private static final String COMMAND_THAT_SUCCEEDS = "select t3";
@@ -22,7 +23,7 @@ public class CommandBoxTest extends ToDoListGuiTest {
     public void setUp() {
         defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
         assertFalse("CommandBox default style classes should not contain error style class.",
-                    defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
+                defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
 
         // build style class for error
         errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);

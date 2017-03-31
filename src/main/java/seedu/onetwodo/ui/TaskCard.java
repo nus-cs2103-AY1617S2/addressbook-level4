@@ -56,6 +56,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    //@@author A0143029M
     public TaskCard(ReadOnlyTask task, int displayedIndex, char indexPrefix) {
         super(FXML);
         prefixId = Character.toString(indexPrefix) + displayedIndex;

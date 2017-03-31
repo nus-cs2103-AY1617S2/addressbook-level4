@@ -42,11 +42,13 @@ public class LogicManager extends ComponentManager implements Logic {
         return command.execute();
     }
 
+    //@@author A0143029M
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();
     }
 
+    @Override
     public ObservableList<ReadOnlyTask> getFilteredTasksByDoneStatus() {
         DoneStatus doneStatus = model.getDoneStatus();
         switch (doneStatus) {

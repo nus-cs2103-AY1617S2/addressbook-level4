@@ -1,5 +1,6 @@
 package seedu.onetwodo.model;
 
+//@@author A0143029M
 public enum DoneStatus {
     DONE("done"),
     UNDONE("undone"),
@@ -18,6 +19,7 @@ public enum DoneStatus {
         return status;
     }
 
+    @Override
     public String toString() {
         return status;
     }

@@ -13,7 +13,7 @@
 
 <HBox id="cardPane" fx:id="cardPane" fillHeight="false" maxHeight="120.0" prefWidth="202.0" style="-fx-border-color: white white lightgray white; -fx-border-width: 0 0 1 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <GridPane prefHeight="80.0" prefWidth="296.0" stylesheets="@PanelTheme.css" HBox.hgrow="ALWAYS">
+        <GridPane prefHeight="45.0" prefWidth="202.0" stylesheets="@PanelTheme.css" HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
@@ -77,7 +77,7 @@
                       </VBox>
                   <Label fx:id="priority" alignment="CENTER" contentDisplay="CENTER" minWidth="40.0" prefHeight="0.0" prefWidth="40.0" style="-fx-padding: 3;" styleClass="label-priority" stylesheets="@PanelTheme.css" text="\$p" translateX="1.0">
                      <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
+                        <Insets right="10.0" top="15.0" />
                      </HBox.margin>
                      <opaqueInsets>
                         <Insets />
