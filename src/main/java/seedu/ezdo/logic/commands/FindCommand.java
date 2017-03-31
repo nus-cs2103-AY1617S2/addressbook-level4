@@ -1,7 +1,5 @@
 package seedu.ezdo.logic.commands;
 
-import java.util.ArrayList;
-
 import seedu.ezdo.commons.util.SearchParameters;
 //@@author A0141010L
 /**

@@ -7,7 +7,6 @@ import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -47,8 +46,6 @@ public class FindCommandParser implements CommandParser {
         String namesToMatch = argsTokenizer.getPreamble().orElse("");
         String[] splitNames = namesToMatch.split("\\s+");
 
-       //ArrayList<Object> listToCompare = new ArrayList<Object>();
-       // ArrayList<Boolean> searchIndicatorList = new ArrayList<Boolean>();
         Optional<Priority> findPriority;
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
@@ -98,17 +95,7 @@ public class FindCommandParser implements CommandParser {
         	      .priority(findPriority).startDate(findStartDate).dueDate(findDueDate)
         	      .tags(findTags).startBefore(searchBeforeStartDate).dueBefore(searchBeforeDueDate)
         	      .startAfter(searchAfterStartDate).dueAfter(searchAfterDueDate).build();
-        /*
-        listToCompare.add(keywords);
-        listToCompare.add(findPriority);
-        listToCompare.add(findStartDate);
-        listToCompare.add(findDueDate);
-        listToCompare.add(findTags);
-        searchIndicatorList.add(searchBeforeStartDate);
-        searchIndicatorList.add(searchBeforeDueDate);
-        searchIndicatorList.add(searchAfterStartDate);
-        searchIndicatorList.add(searchAfterDueDate);
-*/
+
         return new FindCommand(searchParameters);
     }
 

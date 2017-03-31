@@ -21,10 +21,8 @@ import seedu.ezdo.commons.util.DateUtil;
 import seedu.ezdo.commons.util.SearchParameters;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
-import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.model.todo.UniqueTaskList;
@@ -282,6 +280,7 @@ public class ModelManager extends ComponentManager implements Model {
         private boolean dueAfter;
 
         NameQualifier(SearchParameters searchParameters) {
+
             this.nameKeyWords = searchParameters.getNames();
             this.priority = searchParameters.getPriority();
             this.startDate = searchParameters.getStartDate();
