@@ -64,34 +64,34 @@ public class CommandBox extends UiPart<Region> {
                 int key = keyCode.charAt(keyCode.length() - 1) - '0';
                 changeExpandedGroup(key);
             }
-        }
+        } else {
+            switch (event.getCode()) {
 
-        switch (event.getCode()) {
+            case UP:
+            case KP_UP:
+                moveUpHistoryStack();
+                break;
 
-        case UP:
-        case KP_UP:
-            moveUpHistoryStack();
-            break;
+            case DOWN:
+            case KP_DOWN:
+                moveDownHistoryStack();
+                break;
 
-        case DOWN:
-        case KP_DOWN:
-            moveDownHistoryStack();
-            break;
+            case PAGE_UP:
+                broadcastPageUpEvents();
+                break;
 
-        case PAGE_UP:
-            broadcastPageUpEvents();
-            break;
+            case PAGE_DOWN:
+                broadcastPageDownEvents();
+                break;
 
-        case PAGE_DOWN:
-            broadcastPageDownEvents();
-            break;
+            case ENTER:
+                handleInputEntered();
+                break;
 
-        case ENTER:
-            handleInputEntered();
-            break;
-
-        default:
-            break;
+            default:
+                break;
+            }
         }
     }
 
