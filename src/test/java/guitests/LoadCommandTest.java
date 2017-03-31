@@ -1,6 +1,7 @@
 // @@author A0138909R
 package guitests;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -41,5 +42,7 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         this.commandBox.runCommand(taskToAdd.getAddCommand());
         this.commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + getDataFileLocation());
         assertAllPanelsMatch(currentList);
+        File file = new File(ALTERNATE_XML);
+        file.delete();
     }
 }
