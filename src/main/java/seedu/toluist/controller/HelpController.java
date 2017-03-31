@@ -52,7 +52,7 @@ public class HelpController extends Controller {
         if (commandWord.equals("")) {
             showGeneralHelp();
             uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT_GENERAL));
-        } else if (getControllerKeywords().contains(commandWord)) {
+        } else if (getControllerKeywords().contains(commandWord.toLowerCase())) {
             showSpecificHelp(commandWord);
             uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_SPECIFIC, commandWord)));
         } else {
@@ -93,7 +93,7 @@ public class HelpController extends Controller {
                 keywordList = null;
             }
             for (int i = 0; i < keywordList.length; i++) {
-                if (commandWord.equals(keywordList[i])) {
+                if (commandWord.equalsIgnoreCase(keywordList[i])) {
                     return nextController;
                 }
             }
