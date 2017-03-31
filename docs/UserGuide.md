@@ -186,6 +186,38 @@ Examples:
 * `movefile data/new/cloudsync.xml`<br>
   Moves the Storage Directory to ./data/new/cloudsync.xml
 
+### 2.14. Undo the last user command that changes data: `undo`
+
+Undo the last user command in that user session that changes data, i.e. add, edit, delete, clear, sort.<br>
+Does nothing if there are no more previous user commands. 
+
+Examples: 
+
+* `clear`<br> 
+  `undo`<br>
+  Restores the data before the clear command
+* `add New task`<br>
+  `list`<br>
+  `undo`<br>
+  Undoes last user command that changes data, i.e `add New task`. Removes New task
+
+### 2.15. Redo the last undo command: `redo`
+
+Redo the last undo command by user<br>
+Does nothing if there are no commands to redo that the user has undone 
+
+Examples: 
+
+* `clear`<br> 
+  `undo`<br>
+  `redo`<br>
+  Redoes last user command in undo history, i.e `clear`. Task manager will be cleared
+* `add New task`<br>
+  `list`<br>
+  `undo`<br>
+  `redo`<br>
+  Redoes last user command in undo history, i.e `add New task`. Adds New task
+  
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
