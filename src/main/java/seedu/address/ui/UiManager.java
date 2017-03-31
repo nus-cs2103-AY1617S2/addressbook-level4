@@ -118,7 +118,6 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
-        System.out.println(event.toString());
     }
 
     @Subscribe
@@ -131,10 +130,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleViewListChangedEvent(ViewListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        // TODO don't use event.toString(), use for example event.data
-        int firstSpaceIndex = event.toString().indexOf(" ");
-        String typeOfList = event.toString().substring(0, firstSpaceIndex);
-        mainWindow.switchTabPanel(typeOfList);
+        mainWindow.switchTabPanel(event.getTypeOfListView());
     }
 
 }

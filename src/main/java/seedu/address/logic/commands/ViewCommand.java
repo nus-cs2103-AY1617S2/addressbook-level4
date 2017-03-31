@@ -7,15 +7,14 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String TYPE_ALL = "all";
-    public static final String TYPE_DONE = "done";
-    public static final String TYPE_FLOATING = "floating";
-    public static final String TYPE_OVERDUE = "overdue";
-    public static final String TYPE_PENDING = "pending";
-    public static final String TYPE_TODAY = "today";
+    public static final String TYPE_ALL = "";
+    public static final String TYPE_DONE = "d";
+    public static final String TYPE_FLOATING = "f";
+    public static final String TYPE_OVERDUE = "o";
+    public static final String TYPE_PENDING = "p";
+    public static final String TYPE_TODAY = "t";
 
-
-    public static final String MESSAGE_SUCCESS = "Viewed all tasks";
+    public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
 
     @Override

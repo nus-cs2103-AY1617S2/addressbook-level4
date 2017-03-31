@@ -37,7 +37,7 @@
       </VBox>
       <StackPane prefHeight="78.0" prefWidth="346.0" HBox.hgrow="ALWAYS">
          <children>
-            <HBox fx:id="startEndOnly" prefHeight="100.0" prefWidth="268.0">
+            <HBox fx:id="showStartEndDate" prefHeight="100.0" prefWidth="268.0">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="170.0" HBox.hgrow="NEVER">
                      <padding>
@@ -75,7 +75,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox fx:id="deadlineOnly">
+            <HBox fx:id="showDeadline">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="170.0" HBox.hgrow="NEVER">
                      <padding>

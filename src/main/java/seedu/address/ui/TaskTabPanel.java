@@ -11,18 +11,13 @@ import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.model.task.ReadOnlyTask;
 
+//@@author A0135998H
 /**
  * The Browser Panel of the App.
  */
 public class TaskTabPanel extends UiPart<Region> {
 
     private static final String FXML = "TaskTabPanel.fxml";
-    public static final String ALL_TASKS_TAB = "all";
-    public static final String DONE_TASKS_TAB = "done";
-    public static final String FLOATING_TASKS_TAB = "floating";
-    public static final String OVERDUE_TASKS_TAB = "overdue";
-    public static final String PENDING_TASKS_TAB = "pending";
-    public static final String TODAY_TASKS_TAB = "today";
 
     private ObservableList<ReadOnlyTask> taskList;
 
@@ -84,7 +79,6 @@ public class TaskTabPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(taskTabPanel);
     }
 
-    //todo fill
     public void switchTabPanel(String typeOfList) {
         switch(typeOfList) {
         case ViewCommand.TYPE_DONE :
