@@ -1,3 +1,4 @@
+//@@author A0164103W
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -17,13 +18,13 @@ public class RedoCommandTest extends TaskListGuiTest {
         assertResultMessage(RedoCommand.MESSAGE_NO_HISTORY);
 
         //undo add
-        TestTask[] list = td.getTypicalPersons();
-        commandBox.runCommand(td.hoon.getAddCommand());
-        TestTask personToAdd = td.hoon;
+        TestTask[] list = td.getTypicalTasks();
+        commandBox.runCommand(td.iguana.getAddCommand());
+        TestTask personToAdd = td.iguana;
         list = TestUtil.addPersonsToList(list, personToAdd);
         commandBox.runCommand("undo");
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(list));
+        assertTrue(taskListPanel.isListMatching(list));
 
         //redo while no more commands are present
         commandBox.runCommand("redo");

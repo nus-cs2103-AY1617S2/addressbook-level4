@@ -3,10 +3,12 @@ package seedu.task.testutil;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
 import seedu.task.model.task.TaskId;
+
 /**
  *
  */
@@ -30,10 +32,12 @@ public class TaskBuilder {
         return this;
     }
 
+    //@@author A0163744B
     public TaskBuilder withDuration(String startDate, String endDate) throws IllegalValueException {
         this.task.setDuration(new Duration(startDate, endDate));
         return this;
     }
+    //@@author
 
     public TaskBuilder withDueDate(String dueDate) throws IllegalValueException {
         this.task.setDueDate(new DueDate(dueDate));
@@ -57,4 +61,9 @@ public class TaskBuilder {
         return this.task;
     }
 
+    //@@author A0163744B
+    public TaskBuilder withCompletion(boolean isComplete) {
+        this.task.setCompletion(new Complete(isComplete));
+        return this;
+    }
 }

@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.task.model.task.ReadOnlyTask;
 
+//@@author A0163673Y
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -44,7 +45,6 @@ public class TaskCard extends UiPart<Region> {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    // @@joshuaching A0163673Y
     private void updateDueLabel(ReadOnlyTask task) {
         if (task.getDueDate() == null) {
             due.setVisible(false);
@@ -72,5 +72,4 @@ public class TaskCard extends UiPart<Region> {
         }
         complete.setText(task.getComplete().getCompletion() ? CHECKMARK_STRING : EMPTY_STRING);
     }
-    // @@author
 }

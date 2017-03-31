@@ -25,9 +25,9 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all TODOs
-   * **`add`**`Email manager due/2017/01/08 0900`: adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
-   * **`complete`**`2` : marks the 2nd task as completed
-   * **`delete`**`3` : deletes the 3rd task shown in the current list
+   * **`add`** : `Email manager due/08/01/2017 0900`: adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
+   * **`complete`** `2` : marks the 2nd task as completed
+   * **`delete`** `3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -41,44 +41,58 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-### 2.1. Viewing help : `help`, `?`
+### 2.1. Viewing help : `help`
 
-Shows information about how to use DoTomorrow.
-Format: `help`, `?`
+Shows information about how to use DoTomorrow.<br>
+Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task : `add`, `+`
+### 2.2. Adding a task : `add`
 
 Adds a task to the list<br>
-Format: `add TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]`, `+ TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]`
+Format: `add TASK_DESCRIPTION [due/DATE_AND_TIME] [starts/DATE_AND_TIME ends/DATE_AND_TIME]`
 
 Examples:
 
-* `add CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`
-* `+ CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`
-* `add CS2013 assignment due 23/03/2017`
-* `+ CS2013 assignment due 23/03/2017`
+* `add CS2103 assignment due/23/03/2017 1600 starts/22/03/2017 ends/23/03/2017 1800`
+* `add CS2013 assignment due/23/03/2017`
 
-### 2.3. Listing all : `list all`, `ls`
+### 2.3. Listing: `list`
 
-Shows a list of all **uncompleted** tasks.<br>
-Format: `list`, `list all`, `ls`
+Shows a list of all tasks.<br>
+Format: `list`
 
-### 2.4. Listing completed tasks: `list complete`
+### 2.3.1. Listing completed tasks: `list complete`
 
 Shows a list of all completed tasks.<br>
 Format: `list complete`
 
-### 2.5. Sort current list : `sort`
+### 2.3.2. Listing incomplete tasks: `list incomplete`
+
+Shows a list of all incomplete tasks.<br>
+Format: `list incomplete`
+
+### 2.3.3. Sort current list : `list by`
 
 Sort the current task list in a particular order.<br>
-Format: `sort by SORTCRITERIA`
+Format: `list by SORTING_CRITERIA`<br>
+`SORTING_CRITERIA` may be:
 
-### 2.6. Editing a task : `edit`
+* `added`
+* `due`
+* `starts`
+* `ends`
+
+Examples:
+
+* `list by added`
+* `list by due`
+
+### 2.4. Editing a task : `edit`
 
 Edits an existing task in the list.<br>
-Format: `edit INDEX NEWDESCRIPTION PARAMETER1/VALUE1 PARAMETER2/VALUE2 ...` <br>
+Format: `edit INDEX [NEW_TASK_DESCRIPTION] [PARAMETER1/VALUE1] [PARAMETER2/VALUE2] ...` <br>
 
 > * Edits the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
 > * New description must follow index if necessary
@@ -86,6 +100,9 @@ Format: `edit INDEX NEWDESCRIPTION PARAMETER1/VALUE1 PARAMETER2/VALUE2 ...` <br>
 > * Existing value will be updated to the input value.
 > * Existing value removed if no value follow parameter
 > * Can update multiple parameters in one command (see examples below)
+> * New values must be different from existing value
+> * At least one property (description, due date, start date, etc.) must be specified
+> * If a task does not have a start and end time, both start and end times must be edited at the same time
 
 Examples:
 
@@ -95,13 +112,13 @@ Examples:
 * `edit 2 buy milk t/groceries`<br>
   Edits the description of the 2nd to read “buy milk” and change tags to "groceries".
 
-* `edit 1 t/hipri starts/2016/01/01 1230 ends/2017/01/01 1230` <br>
+* `edit 1 t/hipri starts/01/01/2016 1230 ends/01/01/2017 1230` <br>
 Edits the tag, duration start, and duration end for the 1st task.
 
 * `edit 1 t/` <br>
   Removes all tags from the 1st task
 
-### 2.7. Completing a task : `complete`
+### 2.5. Completing a task : `complete`
 
 Marks a task as completed.<br>
 Format: `complete INDEX` <br>
@@ -113,8 +130,21 @@ Examples:
 
 * `complete 1`<br>
   Marks the 1st task as complete.
+  
+### 2.6. Uncompleting a task : `uncomplete`
 
-### 2.8. Deleting a task : `delete`
+Marks a task as incomplete.<br>
+Format: `uncomplete INDEX` <br>
+
+> * Uncompletes the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
+> * Marks the task as incomplete.
+
+Examples:
+
+* `uncomplete 1`<br>
+  Marks the 1st task as incomplete.
+
+### 2.7. Deleting a task : `delete`
 
 Deletes the specified task. Irreversible.<br>
 Format: `delete INDEX`
@@ -127,34 +157,38 @@ Examples:
 * `delete 2`<br>
   Deletes the 2nd task.
 
-### 2.9. Delete all tasks : `clear`
+### 2.8. Delete all tasks : `clear`
 
 Deletes all tasks.<br>
 Format: `clear`
 
-### 2.10. Finding all tasks containing any keyword in their description: `find`
+### 2.9. Finding all tasks containing any keyword in their description: `find`
 
 Finds tasks whose descriptions contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `milk` will not match `Milk`
 > * The order of the keywords does not matter. e.g. `buy milk` will match `milk buy`
-> * Only the description is searched.
-> * Only full words will be matched e.g. `day` will not match `monday`
+> * The description and tags will be searched.
+> * Partial words will be matched e.g. `day` will match `monday`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `milk` will match `buy milk`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find milk`<br>
+  Returns `Buy milk` but not `Milk`
+* `find home school hipri`<br>
+  Returns Any task having description or tag `home`, `school`, or `hipri`
 
-### 2.11. Undo : `undo`
+### 2.10. Undo : `undo`
 
 Undoes the previous action. This command will return the program to the state it was in before the previous action was executed<br>
 Format: `undo`
+
+### 2.11. Redo : `redo`
+
+Re-executes the previous undo action. This command will return the program to the state it was in before the previous undo was executed<br>
+Format: `redo`
 
 ### 2.12. Exiting the program : `exit`
 
@@ -165,6 +199,15 @@ Format: `exit`
 
 DoTomorrow data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.14. Changing storage file path: `setstorage`
+
+Change storage path to user specifed path<br>
+Format: `setstorage PATH`
+
+Example:
+
+* `setstorage /Users/Jim/Documents` will store the to-do list file to `/Users/Jim/Documents`
 
 ## 3. FAQ
 
@@ -184,42 +227,49 @@ There is no need to save manually.
 ## 4. Command Summary
 
 * **Help**: `help` <br>
-`?` <br>
-  e.g. `help`, `?`
+  e.g. `help`
 
-* **Add**  `add TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]` <br>
-`+ TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]` <br>
-  e.g. `add CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`, `+ CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`
+* **Add**  `add TASK_DESCRIPTION [due/DATE_AND_TIME] [starts/DATE_AND_TIME ends/DATE_AND_TIME]` <br>
+  e.g. `add CS2103 assignment due/23/03/2017 1600 starts/22/03/2017 ends/23/03/2017 1800`
 
-* **List All**: `list all` <br>
-`ls` <br>
-  e.g. `list all`, `ls`
+* **List All Tasks**: `list` <br>
+  e.g. `list`
 
-* **List Completed tasks**: `list complete` <br>
+* **List Completed Tasks**: `list complete` <br>
   e.g. `list complete`
+  
+* **List Incomplete Tasks**: `list incomplete` <br>
+  e.g. `list incomplete`
 
-* **Sort By**: `sort by SORTCRITERIA` <br>
+* **List By (i.e. Sorting)**: `list by SORTING_CRITERIA` <br>
   e.g. `sort by due`
 
-* **Edit**  `edit INDEX PARAMETER NEW_VALUE` <br>
-  e.g. `edit 2 due 23/03/2017 1200`
+* **Edit**  `edit INDEX PARAMETER/NEW_VALUE` <br>
+  e.g. `edit 2 due/23/03/2017 1200`
 
 * **Complete** `complete INDEX` <br>
   e.g. `complete 2`
+  
+* **Uncomplete** `uncomplete INDEX` <br>
+  e.g. `uncomplete 2`
 
-* **Delete** : `delete INDEX` <br>
-`- INDEX` <br>
-  e.g. `delete 3`, `- 3`
+* **Delete** `delete INDEX` <br>
+  e.g. `delete 3`
 
-* **Delete all: `deleteall` <br>
-  e.g. `deleteall`
+* **Delete all** `clear` <br>
+  e.g. `clear`
 
-* **Find**: `find KEYWORD [MORE_KEYWORDS]` <br>
-`/ KEYWORD [MORE_KEYWORDS]` <br>
+* **Find**: `find KEYWORD [MORE_KEYWORDS]...` <br>
   e.g. `find James Jake`
 
 * **Undo**: `undo` <br>
   e.g. `undo`
+
+* **Redo**: `redo` <br>
+  e.g. `redo`
+
+* **Set storage path**: `setstorage PATH` <br>
+  e.g. `setstorage /Users/Jim/Documents`
 
 * **Exit**: `exit` <br>
   e.g. `exit`

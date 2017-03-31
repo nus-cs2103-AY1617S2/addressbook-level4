@@ -172,4 +172,26 @@ public class UniqueTagList implements Iterable<Tag> {
         }
     }
 
+    //@@author A0163673Y
+    /**
+     *
+     * Checks if a keyword exists within a {@link #UniqueTagList()}.
+     *
+     * @param uniqueTagList
+     * @param keyword
+     * @return returns true if a keyword is found within a {@link #UniqueTagList()}
+     */
+    public static boolean containsWordIgnoreCase(UniqueTagList uniqueTagList, String keyword) {
+        assert uniqueTagList != null : "uniqueTagList parameter cannot be null";
+        assert keyword != null : "keyword parameter cannot be null";
+
+        for (Tag tag : uniqueTagList) {
+            if (tag.tagName.toLowerCase().contains(keyword.toLowerCase())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    //@@author
 }

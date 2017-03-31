@@ -22,11 +22,11 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    //@@author A0163744B
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
-      //@@evanyeung A0163744B
         if (other == this) {
             return true; // short circuit if same object
         }

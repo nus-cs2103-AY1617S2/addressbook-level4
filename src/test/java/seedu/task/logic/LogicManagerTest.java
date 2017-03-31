@@ -239,7 +239,7 @@ public class LogicManagerTest {
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskList expectedAB = helper.generateAddressBook(2);
+        TaskList expectedAB = helper.generateTaskList(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare task list state
@@ -276,7 +276,7 @@ public class LogicManagerTest {
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
-        List<Task> personList = helper.generatePersonList(2);
+        List<Task> personList = helper.generateListOfTasks(2);
 
         // set AB state to 2 persons
         model.resetData(new TaskList());
@@ -301,9 +301,9 @@ public class LogicManagerTest {
     @Test
     public void execute_delete_removesCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+        List<Task> threePersons = helper.generateListOfTasks(3);
 
-        TaskList expectedAB = helper.generateAddressBook(threePersons);
+        TaskList expectedAB = helper.generateTaskList(threePersons);
         expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
@@ -321,16 +321,16 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_find_onlyContainsWordsInDescriptions() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
         Task pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generatePersonWithName("KE Y");
-        Task p2 = helper.generatePersonWithName("KEYKEYKEY sduauo");
+        Task p3 = helper.generatePersonWithName("KE Y");
+        Task pTarget4 = helper.generatePersonWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
-        TaskList expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generatePersonList(pTarget1, pTarget2);
+        List<Task> fourPersons = helper.generateListOfTasks(pTarget1, pTarget2, p3, pTarget4);
+        TaskList expectedAB = helper.generateTaskList(fourPersons);
+        List<Task> expectedList = helper.generateListOfTasks(pTarget1, pTarget2, pTarget4);
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
@@ -338,6 +338,33 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
+
+    //@@author A0163673Y
+    @Test
+    public void execute_find_containsWordsInDescriptionsAndTags() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task t1 = helper.generateTaskWithDescriptionAndTags("a", "bcd", "efg", "jj");
+        Task t2 = helper.generateTaskWithDescriptionAndTags("aa", "bcd");
+        Task t3 = helper.generateTaskWithDescriptionAndTags("h");
+        Task t4 = helper.generateTaskWithDescriptionAndTags("hhh", "efg");
+
+        // search by tag only
+        List<Task> fourTasks = helper.generateListOfTasks(t1, t2, t3, t4);
+        TaskList expectedAB = helper.generateTaskList(fourTasks);
+        List<Task> expectedList = helper.generateListOfTasks(t1, t4);
+        helper.addToModel(model, fourTasks);
+        assertCommandSuccess("find efg",
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+
+        // search by description and tag
+        assertCommandSuccess("find hh j",
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+    }
+    //@@author
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
@@ -347,8 +374,8 @@ public class LogicManagerTest {
         Task p3 = helper.generatePersonWithName("key key");
         Task p4 = helper.generatePersonWithName("KEy sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(p3, p1, p4, p2);
-        TaskList expectedAB = helper.generateAddressBook(fourPersons);
+        List<Task> fourPersons = helper.generateListOfTasks(p1, p2, p3, p4);
+        TaskList expectedAB = helper.generateTaskList(fourPersons);
         List<Task> expectedList = fourPersons;
         helper.addToModel(model, fourPersons);
 
@@ -366,9 +393,9 @@ public class LogicManagerTest {
         Task pTarget3 = helper.generatePersonWithName("key key");
         Task p1 = helper.generatePersonWithName("sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(pTarget1, p1, pTarget2, pTarget3);
-        TaskList expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generatePersonList(pTarget1, pTarget2, pTarget3);
+        List<Task> fourPersons = helper.generateListOfTasks(pTarget1, p1, pTarget2, pTarget3);
+        TaskList expectedAB = helper.generateTaskList(fourPersons);
+        List<Task> expectedList = helper.generateListOfTasks(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find key rAnDoM",
@@ -389,7 +416,7 @@ public class LogicManagerTest {
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             Complete complete = new Complete(false);
-            return new Task(name, null, null, tags, complete, new TaskId(System.currentTimeMillis()));
+            return new Task(name, null, null, tags, complete, new TaskId(1));
         }
 
         /**
@@ -406,7 +433,7 @@ public class LogicManagerTest {
                     null,
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
                     new Complete(false),
-                    new TaskId(System.currentTimeMillis())
+                    new TaskId(seed)
             );
         }
 
@@ -429,7 +456,7 @@ public class LogicManagerTest {
         /**
          * Generates a TaskList with auto-generated persons.
          */
-        TaskList generateAddressBook(int numGenerated) throws Exception {
+        TaskList generateTaskList(int numGenerated) throws Exception {
             TaskList taskList = new TaskList();
             addToAddressBook(taskList, numGenerated);
             return taskList;
@@ -438,7 +465,7 @@ public class LogicManagerTest {
         /**
          * Generates a TaskList based on the list of Persons given.
          */
-        TaskList generateAddressBook(List<Task> persons) throws Exception {
+        TaskList generateTaskList(List<Task> persons) throws Exception {
             TaskList taskList = new TaskList();
             addToAddressBook(taskList, persons);
             return taskList;
@@ -449,7 +476,7 @@ public class LogicManagerTest {
          * @param taskList The task list to which the Persons will be added
          */
         void addToAddressBook(TaskList taskList, int numGenerated) throws Exception {
-            addToAddressBook(taskList, generatePersonList(numGenerated));
+            addToAddressBook(taskList, generateListOfTasks(numGenerated));
         }
 
         /**
@@ -466,7 +493,7 @@ public class LogicManagerTest {
          * @param model The model to which the Persons will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {
-            addToModel(model, generatePersonList(numGenerated));
+            addToModel(model, generateListOfTasks(numGenerated));
         }
 
         /**
@@ -481,7 +508,7 @@ public class LogicManagerTest {
         /**
          * Generates a list of Persons based on the flags.
          */
-        List<Task> generatePersonList(int numGenerated) throws Exception {
+        List<Task> generateListOfTasks(int numGenerated) throws Exception {
             List<Task> persons = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
                 persons.add(generatePerson(i));
@@ -489,22 +516,49 @@ public class LogicManagerTest {
             return persons;
         }
 
-        List<Task> generatePersonList(Task... persons) {
+        List<Task> generateListOfTasks(Task... persons) {
             return Arrays.asList(persons);
         }
 
+        //@@author A0163744B
+        private int nextGeneratePersonWithNameId = 0;
         /**
          * Generates a Person object with given name. Other fields will have some dummy values.
          */
         Task generatePersonWithName(String description) throws Exception {
+            nextGeneratePersonWithNameId++;
             return new Task(
                     new Description(description),
                     null,
                     null,
                     new UniqueTagList(new Tag("tag")),
                     new Complete(false),
-                    new TaskId(System.currentTimeMillis())
+                    new TaskId(nextGeneratePersonWithNameId)
             );
         }
+
+        private int nextGenerateTaskWithDescriptionAndTagsId = 0;
+        //@@author
+        //@@author A0163673Y
+        /**
+         * Generates a Task object with given description and tags.
+         * Other fields will have some dummy values.
+         */
+        Task generateTaskWithDescriptionAndTags(String description, String... tags) throws Exception {
+            UniqueTagList uniqueTagList = new UniqueTagList();
+            for (String tag: tags) {
+                uniqueTagList.add(new Tag(tag));
+            }
+            nextGenerateTaskWithDescriptionAndTagsId++;
+            return new Task(
+                    new Description(description),
+                    null,
+                    null,
+                    uniqueTagList,
+                    new Complete(false),
+                    new TaskId(nextGenerateTaskWithDescriptionAndTagsId)
+            );
+        }
+        //@@author
     }
 }

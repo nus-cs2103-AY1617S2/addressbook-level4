@@ -1,4 +1,4 @@
-//@@evanyeung A0163744B
+//@@author A0163744B
 package seedu.test.logic.history;
 
 import static org.junit.Assert.assertFalse;
@@ -30,8 +30,8 @@ public class TaskMementoTest {
     @Before
     public void setup() throws DuplicateTagException, IllegalValueException {
         description = new Description("Task");
-        dueDate = new DueDate("2017/01/01 0100");
-        duration = new Duration("2017/01/01 0000", "2017/01/01 0100");
+        dueDate = new DueDate("01/01/2017 0100");
+        duration = new Duration("01/01/2017 0000", "01/01/2017 0100");
         tags = new UniqueTagList("Task");
         complete = new Complete(false);
         id = new TaskId(100);

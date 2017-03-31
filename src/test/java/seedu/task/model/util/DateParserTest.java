@@ -1,4 +1,4 @@
-//@@evanyeung A0163744B
+//@@author A0163744B
 package seedu.task.model.util;
 
 import static org.junit.Assert.assertEquals;
@@ -17,26 +17,33 @@ public class DateParserTest {
     public void isValidDateString() {
         // invalid date
         assertFalse(DateParser.isValidDateString(""));
-        assertFalse(DateParser.isValidDateString("1234/12/12"));
-        assertFalse(DateParser.isValidDateString("123412/12 0000"));
+        assertFalse(DateParser.isValidDateString("12/12/1234"));
+        assertFalse(DateParser.isValidDateString("12/123412 0000"));
         assertFalse(DateParser.isValidDateString("1234/1212 0000"));
-        assertFalse(DateParser.isValidDateString("200a/01/01 0000"));
-        assertFalse(DateParser.isValidDateString("2000/ba/01 0000"));
+        assertFalse(DateParser.isValidDateString("/01/01200a 0000"));
+        assertFalse(DateParser.isValidDateString("/ba/012000 0000"));
         assertFalse(DateParser.isValidDateString("0000"));
-        assertFalse(DateParser.isValidDateString("2000/23/01 0000"));
-        assertFalse(DateParser.isValidDateString("2000/12/42 0000"));
-        assertFalse(DateParser.isValidDateString("2000/12/01 3000"));
-        assertFalse(DateParser.isValidDateString("2000/12/01 0160"));
-        assertFalse(DateParser.isValidDateString("2000/12/01 20000"));
-        assertFalse(DateParser.isValidDateString("2000/12/010 2000"));
-        assertFalse(DateParser.isValidDateString("2000/123/10 2000"));
-        assertFalse(DateParser.isValidDateString("20010/123/10 2000"));
+        assertFalse(DateParser.isValidDateString("01/23/2000 0000"));
+        assertFalse(DateParser.isValidDateString("42/12/2000 0000"));
+        assertFalse(DateParser.isValidDateString("01/12/2000 3000"));
+        assertFalse(DateParser.isValidDateString("01/12/2000 0160"));
+        assertFalse(DateParser.isValidDateString("01/12/2000 20000"));
+        assertFalse(DateParser.isValidDateString("010/12/2000 2000"));
+        assertFalse(DateParser.isValidDateString("10/123/2000 2000"));
+        assertFalse(DateParser.isValidDateString("10/123/20010 2000"));
+
+        assertFalse(DateParser.isValidDateString("a 2000"));
+        assertFalse(DateParser.isValidDateString("aaaaaaaaaa 2000"));
 
         // valid date
-        assertTrue(DateParser.isValidDateString("2000/01/01 0000"));
-        assertTrue(DateParser.isValidDateString("2000/01/01 1200"));
-        assertTrue(DateParser.isValidDateString("0000/01/01 1200"));
-        assertTrue(DateParser.isValidDateString("2017/03/10 0317"));
+        assertTrue(DateParser.isValidDateString("01/01/2000 0000"));
+        assertTrue(DateParser.isValidDateString("01/01/2000 1200"));
+        assertTrue(DateParser.isValidDateString("01/01/0000 1200"));
+        assertTrue(DateParser.isValidDateString("10/03/2017 0317"));
+        assertTrue(DateParser.isValidDateString("Mon 0317"));
+        assertTrue(DateParser.isValidDateString("Monday 0317"));
+        assertTrue(DateParser.isValidDateString("Wednesday 0000"));
+        assertTrue(DateParser.isValidDateString("foo 0317"));
     }
 
     @Test
@@ -48,7 +55,6 @@ public class DateParserTest {
         assertFalse(DateParser.isValidDate(2017, 0, 0, 0, 0));
         assertFalse(DateParser.isValidDate(2017, 0, 32, 0, 0));
         assertFalse(DateParser.isValidDate(2017, 5, 31, 0, 0));
-        assertFalse(DateParser.isValidDate(2017, 1, 29, 0, 0));
         assertFalse(DateParser.isValidDate(2017, 0, 1, -1, 0));
         assertFalse(DateParser.isValidDate(2017, 0, 1, 24, 0));
         assertFalse(DateParser.isValidDate(2017, 0, 1, 0, -1));
@@ -72,7 +78,7 @@ public class DateParserTest {
         cal.set(2000, 00, 01, 0, 0, 0);
         assertEquals(
                 cal.getTimeInMillis(),
-                DateParser.parse("2000/01/01 0000").getTimeInMillis());
+                DateParser.parse("01/01/2000 0000").getTimeInMillis());
     }
 
     @Test
@@ -80,8 +86,8 @@ public class DateParserTest {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.MILLISECOND, 0);
         cal.set(2000, 00, 01, 0, 0, 0);
-        assertEquals("2000/01/01 0000", DateParser.toString(cal));
+        assertEquals("01/01/2000 0000", DateParser.toString(cal));
         cal.set(1990, 05, 22, 23, 54, 0);
-        assertEquals("1990/06/22 2354", DateParser.toString(cal));
+        assertEquals("22/06/1990 2354", DateParser.toString(cal));
     }
 }

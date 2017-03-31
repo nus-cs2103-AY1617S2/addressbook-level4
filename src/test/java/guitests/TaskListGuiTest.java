@@ -26,7 +26,7 @@ import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.TaskList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.testutil.TestUtil;
-import seedu.task.testutil.TypicalTestPersons;
+import seedu.task.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for TaskList.
@@ -39,7 +39,7 @@ public abstract class TaskListGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -47,7 +47,7 @@ public abstract class TaskListGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected PersonListPanelHandle personListPanel;
+    protected PersonListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     private Stage stage;
@@ -67,7 +67,7 @@ public abstract class TaskListGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            personListPanel = mainGui.getPersonListPanel();
+            taskListPanel = mainGui.getPersonListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             this.stage = stage;
@@ -85,7 +85,7 @@ public abstract class TaskListGuiTest {
      */
     protected TaskList getInitialData() {
         TaskList ab = new TaskList();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
+        TypicalTestTasks.loadAddressBookWithSampleData(ab, new TypicalTestTasks().getTypicalTasks());
         return ab;
     }
 
@@ -112,7 +112,7 @@ public abstract class TaskListGuiTest {
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfTasks = personListPanel.getNumberOfPeople();
+        int numberOfTasks = taskListPanel.getNumberOfTasks();
         assertEquals(size, numberOfTasks);
     }
 

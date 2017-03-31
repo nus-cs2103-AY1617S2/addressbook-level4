@@ -11,19 +11,19 @@ public class SelectCommandTest extends TaskListGuiTest {
     public void selectPerson_nonEmptyList() {
 
         assertNoPersonSelected();
-        assertNoTasksFoundWithTerm("elephant"); // no tasks of 'elephant' found
+        assertNoTasksFoundWithTerm("unicorn"); // no tasks of 'elephant' found
 
-        assertTasksFoundWithTerm("Alice"); // task found of 'Alice' found
+        assertTasksFoundWithTerm("bear"); // task found of 'Alice' found
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }
 
     @Test
     public void selectPerson_emptyList() {
-        assertTasksFoundWithTerm("Alice"); // task found of 'Alice' found
+        assertTasksFoundWithTerm("bear"); // task found of 'Alice' found
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertNoTasksFoundWithTerm("Alice"); // no tasks of 'Alice' found
+        assertNoTasksFoundWithTerm("bear"); // no tasks of 'Alice' found
     }
 
     private void assertNoTasksFoundWithTerm(String term) {
@@ -37,7 +37,7 @@ public class SelectCommandTest extends TaskListGuiTest {
     }
 
     private void assertNoPersonSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0);
+        assertEquals(taskListPanel.getSelectedPersons().size(), 0);
     }
 
 }

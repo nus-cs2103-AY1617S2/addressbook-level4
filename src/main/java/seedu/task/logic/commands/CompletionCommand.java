@@ -1,3 +1,4 @@
+//@@author A0163744B
 package seedu.task.logic.commands;
 
 import java.util.List;
@@ -66,6 +67,7 @@ public abstract class CompletionCommand extends Command {
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(messageCompleteTaskSuccess, taskToComplete));
     }
+    //@@author
 
     /**
      * Creates a new task with the given completion state

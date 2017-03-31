@@ -69,16 +69,18 @@ public class Task implements ReadOnlyTask {
         return description;
     }
 
+    //@@author A0163673Y
     public void setDueDate(DueDate dueDate) {
         this.dueDate = dueDate;
     }
+    //@@author
 
     @Override
     public DueDate getDueDate() {
         return dueDate;
     }
 
-    //@@evanyeung A0163744B
+    //@@author A0163744B
     @Override
     public Duration getDuration() {
         return duration;
@@ -92,7 +94,7 @@ public class Task implements ReadOnlyTask {
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
-    //@@evanyeung
+    //@@author
 
     public void setComplete() {
         this.complete.setComplete();
@@ -111,9 +113,7 @@ public class Task implements ReadOnlyTask {
      * Replaces this tasks's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
-        //@@evanyeung A0163744B
         assert replacement != null;
-        //@@evanyeung
         tags.setTags(replacement);
     }
 
@@ -152,6 +152,7 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0163673Y
     @Override
     public String getDurationStart() {
         return duration == null ? null : duration.getStartString();
@@ -161,4 +162,5 @@ public class Task implements ReadOnlyTask {
     public String getDurationEnd() {
         return duration == null ? null : duration.getEndString();
     }
+    //@@author
 }

@@ -1,4 +1,4 @@
-//@@evanyeung A0163744B
+//@@author A0163744B
 package seedu.test.logic.history;
 
 import static org.junit.Assert.assertEquals;
@@ -30,16 +30,16 @@ public class TaskMementosTest {
         memento1 = new TaskMemento(
                 new Task(
                     new Description("Task 1"),
-                    new DueDate("2017/01/01 0100"),
-                    new Duration("2017/01/01 0000", "2017/01/01 0100"),
+                    new DueDate("01/01/2017 0100"),
+                    new Duration("01/01/2017 0000", "01/01/2017 0100"),
                     new UniqueTagList("Task1"),
                     new Complete(false),
                     new TaskId(101)
                 ),
                 new Task(
                     new Description("Task"),
-                    new DueDate("2017/01/01 0100"),
-                    new Duration("2017/01/01 0000", "2017/01/01 0100"),
+                    new DueDate("01/01/2017 0100"),
+                    new Duration("01/01/2017 0000", "01/01/2017 0100"),
                     new UniqueTagList("Task"),
                     new Complete(false),
                     new TaskId(101)
@@ -48,16 +48,16 @@ public class TaskMementosTest {
         memento2 = new TaskMemento(
                 new Task(
                     new Description("Task 2"),
-                    new DueDate("2017/01/01 0100"),
-                    new Duration("2015/01/01 1200", "2016/02/01 0100"),
+                    new DueDate("01/01/2017 0100"),
+                    new Duration("01/01/2015 1200", "01/02/2016 0100"),
                     new UniqueTagList("Task2"),
                     new Complete(false),
                     new TaskId(102)
                 ),
                 new Task(
                     new Description("Task"),
-                    new DueDate("2017/01/01 0100"),
-                    new Duration("2017/01/01 0000", "2017/01/01 0100"),
+                    new DueDate("01/01/2017 0100"),
+                    new Duration("01/01/2017 0000", "01/01/2017 0100"),
                     new UniqueTagList("Task"),
                     new Complete(false),
                     new TaskId(102)
@@ -66,16 +66,16 @@ public class TaskMementosTest {
         memento3 = new TaskMemento(
                 new Task(
                     new Description("Task 3"),
-                    new DueDate("2017/02/22 2300"),
-                    new Duration("2017/02/19 1243", "2017/05/25 1245"),
+                    new DueDate("22/02/2017 2300"),
+                    new Duration("19/02/2017 1243", "23/05/2017 1245"),
                     new UniqueTagList("Task3"),
                     new Complete(false),
                     new TaskId(103)
                 ),
                 new Task(
                     new Description("Task"),
-                    new DueDate("2017/01/01 0100"),
-                    new Duration("2017/01/01 0000", "2017/01/01 0100"),
+                    new DueDate("01/01/2017 0100"),
+                    new Duration("01/01/2017 0000", "01/01/2017 0100"),
                     new UniqueTagList("Task"),
                     new Complete(false),
                     new TaskId(103)

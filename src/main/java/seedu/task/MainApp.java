@@ -47,12 +47,15 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
     public static TaskMementos taskMementos;
+    public static MainApp app;
 
 
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing DoTomorrow ]===========================");
         super.init();
+
+        app = this;
 
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
@@ -193,4 +196,19 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    //@@author A0163673Y
+    public static MainApp getInstance() {
+        return app;
+    }
+
+    public Config getConfig() {
+        return config;
+    }
+
+    public void setTaskListFilePath(String path) {
+        config.setAddressBookFilePath(path);
+        storage.setTaskListStorageFilePath(path);
+    }
+    //@@author
 }

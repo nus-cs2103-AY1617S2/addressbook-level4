@@ -41,6 +41,7 @@ public class TestTask implements ReadOnlyTask {
         this.description = description;
     }
 
+    //@@author A0163744B
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
@@ -48,34 +49,47 @@ public class TestTask implements ReadOnlyTask {
     public void setTaskId(TaskId id) {
         this.id = id;
     }
+    //@@author
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
 
+    //@@author A160004845
     public void setDueDate(DueDate dueDate) {
         this.dueDate = dueDate;
+    }
+    //@@author
+
+    //@@author A0163744B
+    public void setCompletion(Complete completion) {
+        this.complete = completion;
     }
 
     @Override
     public TaskId getTaskId() {
         return this.id;
     }
+    //@@author
 
     @Override
     public Description getDescription() {
         return description;
     }
 
+    //@@author A160004845
     @Override
     public DueDate getDueDate() {
         return this.dueDate;
     }
+    //@@author
 
+    //@@author A0163744B
     @Override
     public Duration getDuration() {
         return duration;
     }
+    //@@author
 
     @Override
     public UniqueTagList getTags() {
@@ -101,6 +115,7 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    //@@author A0163673Y
     @Override
     public String getDurationStart() {
         return duration == null ? null : duration.getStartString();
@@ -110,6 +125,7 @@ public class TestTask implements ReadOnlyTask {
     public String getDurationEnd() {
         return duration == null ? null : duration.getEndString();
     }
+    //@@author
 
     @Override
     public Complete getComplete() {
