@@ -9,7 +9,7 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
@@ -22,9 +22,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Task Manager. "
-            + "Parameters: TITLE s/STARTING_DATETIME e/ENDING_DATETIME l/LOCATION [t/TAG]...\n"
+            + "Parameters: TITLE s/STARTING_DATETIME e/ENDING_DATETIME d/DESCRIPTION [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Meeting 1 s/01-04-17 1630 e/01-04-17 1730 l/311, Clementi Ave 2, #02-25 t/friends";
+            + " Meeting 1 s/01-04-17 1630 e/01-04-17 1730 d/311, Clementi Ave 2, #02-25 t/friends";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in GeeKeep";
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String title, Optional<String> startDateTime, Optional<String> endDateTime,
-            Optional<String> location, Set<String> tags)
+            Optional<String> description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
 
         DateTime start = null;
         DateTime end = null;
-        Location loc = null;
+        Description desc = null;
 
         if (startDateTime.isPresent()) {
             start = new DateTime(startDateTime.get());
@@ -55,15 +55,15 @@ public class AddCommand extends Command {
         if (endDateTime.isPresent()) {
             end = new DateTime(endDateTime.get());
         }
-        if (location.isPresent()) {
-            loc = new Location(location.get());
+        if (description.isPresent()) {
+            desc = new Description(description.get());
         }
 
         this.toAdd = new Task(
                 new Title(title),
                 start,
                 end,
-                loc,
+                desc,
                 new UniqueTagList(tagSet),
                 false
         );

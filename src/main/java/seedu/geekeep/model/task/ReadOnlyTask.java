@@ -16,14 +16,14 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle()).append(" Ending DateTime: ").append(getEndDateTime())
                .append(" Starting DateTime: ").append(getStartDateTime())
-               .append(" Location: ").append(getLocation()).append(" Tags: ");
+               .append(" Description: ").append(getDescriptoin()).append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
 
     DateTime getEndDateTime();
 
-    Location getLocation();
+    Description getDescriptoin();
 
     DateTime getStartDateTime();
 
