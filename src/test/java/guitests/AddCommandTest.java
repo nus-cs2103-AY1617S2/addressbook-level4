@@ -46,11 +46,11 @@ public class AddCommandTest extends EzDoGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 
         //invalid command
-        commandBox.runCommand("add s/12/12/2016 00:01 d/01/01/2017 12:36 p/1");
+        commandBox.runCommand("add s/12/12/2016 00:01 d/01/01/2017 12:36 r/weekly p/1");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         //command with invalid date
-        commandBox.runCommand("add Buy new computer s/12/12/2016 00:00 d/12/12/2015 00:00");
+        commandBox.runCommand("add Buy new computer s/12/12/2016 00:00 d/12/12/2015 00:00 r/monthly");
         assertResultMessage(Messages.MESSAGE_TASK_DATES_INVALID);
 
     }
