@@ -62,18 +62,18 @@ public class EditCommandTest extends TodoListGuiTest {
         String detailsToEdit = "e/";
         int todoListIndex = 8;
 
-        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withEndTime(getTomorrow()).build();
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withEndTime(getTomorrowMidnight()).build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
-    public void editEventToWithDefaultSuccess() throws Exception {
+    public void editEventWithDefaultSuccess() throws Exception {
         String detailsToEdit = "s/ e/";
         int todoListIndex = 9;
 
         TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom")
-                .withStartTime(getToday()).withEndTime(getTomorrow()).withTags("personal").build();
+                .withStartTime(getTodayMidnight()).withEndTime(getTomorrowMidnight()).withTags("personal").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
@@ -96,17 +96,6 @@ public class EditCommandTest extends TodoListGuiTest {
 
         TestTodo editedTodo = new TodoBuilder().withName("Write essay").withStartTime("6:00AM 18/11/2011").
                 withEndTime("6:00AM 17/11/2011").build();
-
-        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
-    }
-
-    @Test
-    public void editEventToDeadLineWithoutOtherChangeSuccess() throws Exception {
-        String detailsToEdit = "s/ e/1:00PM 11/11/2017";
-        int todoListIndex = 9;
-
-        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").withEndTime("1:00PM 11/11/2017").
-                withTags("personal").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
@@ -232,10 +221,31 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
+    public void editWithOnlyDateSuccess() throws Exception {
+        String detailsToEdit = "e/11/11/11";
+        int todoListIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Walk the dog").withEndTime("12:00AM 11/11/11").
+                withTags("petcare").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+
+        commandBox.runCommand("undo");
+        detailsToEdit = "s/11/11/11 e/11/11/11";
+        todoListIndex = 1;
+
+        editedTodo = new TodoBuilder().withName("Walk the dog").withStartTime("12:00AM 11/11/11").
+                withEndTime("12:00AM 11/11/11").
+                withTags("petcare").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+    @Test
     public void edit_missingTodoIndex_failure() {
         commandBox.runCommand("edit Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
+
 
     @Test
     public void edit_invalidTodoIndex_failure() {
@@ -271,6 +281,13 @@ public class EditCommandTest extends TodoListGuiTest {
         assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
     }
 
+    @Test
+    public void editTimeOnlyFailure() {
+        commandBox.runCommand("edit 1 s/12:00PM");
+        assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
+    }
+
+
     /**
      * Checks whether the edited todo has the correct updated details.
      *
@@ -296,22 +313,22 @@ public class EditCommandTest extends TodoListGuiTest {
         //assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));
     }
 
-    private String getTomorrow() {
-        Date dt = new Date();
+    private String getTomorrowMidnight() {
+        Date dtAssign = new Date();
         Calendar c = Calendar.getInstance();
-        c.setTime(dt);
+        c.setTime(dtAssign);
         c.add(Calendar.DATE, 1);
-        dt = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        return dateFormat.format(dt);
+        dtAssign = c.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return "12:00AM" + " " + dateFormat.format(dtAssign);
     }
 
-    private String getToday() {
-        Date dt = new Date();
+    private String getTodayMidnight() {
+        Date dtAssign = new Date();
         Calendar c = Calendar.getInstance();
-        c.setTime(dt);
-        dt = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        return dateFormat.format(dt);
+        c.setTime(dtAssign);
+        dtAssign = c.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return "12:00AM" + " " + dateFormat.format(dtAssign);
     }
 }
