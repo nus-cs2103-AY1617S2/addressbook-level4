@@ -149,6 +149,21 @@ public class UniqueCategoryList implements Iterable<Category> {
         }
     }
 
+    //@@author A0143157J
+    /**
+     * Replaces a Category in the list.
+     * On client-side, this operation is to rename a Category.
+     * @throws IllegalValueException
+     */
+    public void replace(Category newCategory, Category oldCategory) throws IllegalValueException {
+        for (Category category : this) {
+            if (category.categoryName.equals(new Category(oldCategory.categoryName))) {
+                this.remove(oldCategory);
+            }
+        }
+        this.add(newCategory);
+    }
+
     //@@author
     @Override
     public Iterator<Category> iterator() {
@@ -184,5 +199,6 @@ public class UniqueCategoryList implements Iterable<Category> {
             super("Operation would result in duplicate categories");
         }
     }
+
 
 }

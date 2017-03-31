@@ -1,5 +1,3 @@
-
-
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -37,7 +35,7 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Feb 18, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.NONE)
-                .withCategories("Project", AddCommand.DEFAULT_ALL_TASKS).build();
+                .withCategories(AddCommand.DEFAULT_ALL_TASKS, "Project").build();
         sampleB = new TaskBuilder().withName("Birthday party")
                 .withInformation("311, Clementi Ave 2, #02-25")
                 .withPriorityLevel("No")
@@ -51,7 +49,6 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         assertResultMessage(RenameCategoryCommand.MESSAGE_SUCCESS);
         assertTrue(taskListPanel.isListMatching(taskListExpected));
     }
-
 
     @Test
     public void rename_unsuccessful() {
@@ -93,9 +90,20 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         //rename category to AllTasks
         commandBox.runCommand("name owesMoney AllTasks");
         assertResultMessage(RenameCategoryCommand.MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
+    }
 
-        //duplicate category
+    //@@author A0143157J
+    //BVA: Duplicate categories in a task
+    @Test
+    public void rename_duplicate_categories_within_task_failure() {
         commandBox.runCommand("name owesMoney friends");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_DUPLICATE_CATEGORY);
+    }
+
+    //BVA: Duplicate categories in TaskBoss (but different tasks)
+    @Test
+    public void rename_duplicate_categories_within_taskboss_failure() {
+        commandBox.runCommand("name school owesMoney");
         assertResultMessage(RenameCategoryCommand.MESSAGE_DUPLICATE_CATEGORY);
     }
 }

@@ -11,7 +11,12 @@ import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.DuplicateDataException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
+import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.commands.SortCommand;
+import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -164,6 +169,53 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
+    //@@author A0143157J
+    /**
+     * Renames a certain category for all tasks in this category.
+     * @throws IllegalValueException
+     * @throws CommandException
+     */
+    public void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException,
+        CommandException {
+        assert oldCategory != null;
+
+        boolean isFound = false;
+
+        for (Task task : this) {
+            UniqueCategoryList targetCategoryList = task.getCategories();
+            UniqueCategoryList newCategoryList = new UniqueCategoryList();
+            try {
+                for (Category category : targetCategoryList) {
+                    if (category.equals(oldCategory)) {
+                        isFound = true;
+                        newCategoryList.add(newCategory);
+                    } else {
+                        newCategoryList.add(category);
+                    }
+                }
+            } catch (DuplicateCategoryException dce) {
+                throw new DuplicateCategoryException();
+            }
+            task.setCategories(newCategoryList);
+        }
+        errorDoesNotExistDetect(oldCategory, isFound);
+    }
+
+    //@@author A0144904H
+    /**
+     * detects the category does not exist error
+     * @param oldCategory
+     * @param isFound
+     * @throws CommandException
+     */
+    private void errorDoesNotExistDetect(Category oldCategory, boolean isFound) throws CommandException {
+        if (!isFound) {
+            throw new CommandException(oldCategory.toString()
+                    + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
+        }
+    }
+
+    //@@author
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
