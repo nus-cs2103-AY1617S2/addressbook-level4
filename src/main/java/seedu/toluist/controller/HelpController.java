@@ -68,10 +68,10 @@ public class HelpController extends Controller {
         String commandWord = tokens.get(PARAMETER_COMMAND);
         if (commandWord.equals("")) {
             showGeneralHelp();
-            //uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT_GENERAL));
+            uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT_GENERAL));
         } else if (getControllerKeywords().contains(commandWord.toLowerCase())) {
             showSpecificHelp(commandWord);
-            //uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_SPECIFIC, commandWord)));
+            uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_SPECIFIC, commandWord)));
         } else {
             uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR));
         }
