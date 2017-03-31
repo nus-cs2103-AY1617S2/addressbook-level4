@@ -318,7 +318,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeEvents);
 
         assertCommandSuccess("select ev 2",
-                String.format(SelectCommand.MESSAGE_SELECT_EVENT_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_EVENT_SUCCESS, expectedAB.getEventList().get(1)),
                 expectedAB,
                 expectedAB.getEventList());
         assertEquals(1, targetedEventJumpIndex);
