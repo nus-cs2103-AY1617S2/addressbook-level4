@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -60,9 +61,11 @@ public class UiStore {
     public void bind(UiView view, ObservableList<?> observableList) {
         WeakReference<UiView> weakView = new WeakReference<>(view);
         observableList.addListener((ListChangeListener) (c -> {
-            if (weakView.get() != null) {
-                weakView.get().render();
-            }
+            Platform.runLater(() -> {
+                if (weakView.get() != null) {
+                    weakView.get().render();
+                }
+            });
         }));
     }
 
@@ -74,9 +77,11 @@ public class UiStore {
     public void bind(UiView view, ObservableValue<?> observableValue) {
         WeakReference<UiView> weakView = new WeakReference<>(view);
         observableValue.addListener(c -> {
-            if (weakView.get() != null) {
-                weakView.get().render();
-            }
+            Platform.runLater(() -> {
+                if (weakView.get() != null) {
+                    weakView.get().render();
+                }
+            });
         });
     }
 

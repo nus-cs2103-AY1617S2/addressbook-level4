@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.commons.util.DateTimeUtil;
@@ -42,6 +43,13 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
     private Tag tag1 = new Tag("tag1");
     private Tag tag2 = new Tag("tag2");
     private Tag tag3 = new Tag("tag3");
+
+    @Before
+    public void setUp() {
+        String switchToDefaulTab = "switch i";
+        commandBox.runCommand(switchToDefaulTab);
+    }
+
 
     @Test
     public void addFloatingTask() {

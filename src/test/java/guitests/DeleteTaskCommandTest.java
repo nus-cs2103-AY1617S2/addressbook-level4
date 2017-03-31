@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.commons.util.DateTimeUtil;
@@ -21,6 +22,12 @@ import seedu.toluist.ui.UiStore;
  * Gui tests for delete task command
  */
 public class DeleteTaskCommandTest extends ToLuistGuiTest {
+    @Before
+    public void setUp() {
+        String switchToDefaulTab = "switch i";
+        commandBox.runCommand(switchToDefaulTab);
+    }
+
     @Test
     public void deleteTask() {
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
