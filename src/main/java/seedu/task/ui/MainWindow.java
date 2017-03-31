@@ -311,8 +311,9 @@ public class MainWindow extends UiPart<Region> {
         commandBox.type("load ");
     }
 
+    //@@author A0142939W
     @FXML
-    public void handleScrollDown() {
+    public void handleScrollDown() {	
         taskListPanel.scrollDown(scroll);
     }
 
@@ -320,6 +321,7 @@ public class MainWindow extends UiPart<Region> {
     public void handleScrollUp() {
         taskListPanel.scrollUp(scroll);
     }
+    //@@author
 
     void show() {
         primaryStage.show();
