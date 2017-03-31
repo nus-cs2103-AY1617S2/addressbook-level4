@@ -119,7 +119,7 @@ public class MainWindow extends UiPart<Region> {
         // TODO rename this
         personListPanel = new PersonListPanel(taskTabPanel.getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
