@@ -220,7 +220,7 @@ public class Recurrence {
         case YEARLY:
             return "YEARLY";
         default:
-            return "NONE";
+            return EMPTY_STRING;
         }
     }
 
