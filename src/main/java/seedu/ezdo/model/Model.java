@@ -39,9 +39,9 @@ public interface Model {
      */
     void checkTaskDate(ReadOnlyTask task) throws DateException;
 
-    /** Marks a task as done.
+    /** Toggles a task as done/undone.
      * @throws TaskNotFoundException */
-    void doneTasks(ArrayList<Task> tasksToDone);
+    boolean toggleTasksDone(ArrayList<Task> tasksToToggle);
 
     /** Undo the previous undoable command
      * @throws EmptyStackException */
