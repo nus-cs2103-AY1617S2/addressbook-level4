@@ -56,18 +56,22 @@ public class DoneCommand extends Command implements MultipleIndexCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        if (isAnyTaskDone(lastShownList)) {
-            throw new CommandException(Messages.MESSAGE_WRONG_LIST);
-        }
+        //if (isAnyTaskDone(lastShownList)) {
+        //    throw new CommandException(Messages.MESSAGE_WRONG_LIST);
+        //}
 
         for (int i = 0; i < targetIndexes.size(); i++) {
-            Task taskToDone = (Task) lastShownList.get(targetIndexes.get(i) - 1);
-            tasksToDone.add(taskToDone);
+            Task taskToToggle = (Task) lastShownList.get(targetIndexes.get(i) - 1);
+            tasksToToggle.add(taskToToggle);
         }
 
-        model.doneTasks(tasksToDone);
+        boolean isDone = model.toggleTasksDone(tasksToToggle);
 
-        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
+        if (isDone) {
+            return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToToggle));
+        } else {
+            return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, tasksToToggle));
+        }
     }
   //@@author A0139248X
     private boolean isAnyTaskDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
