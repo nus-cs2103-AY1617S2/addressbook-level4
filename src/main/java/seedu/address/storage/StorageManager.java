@@ -115,6 +115,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+//@@Liu Yulin A0148052L
     public void handleFileLocationChangedEvent(FileLocationChangedEvent event) throws
         DataConversionException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "File Location is changed."));

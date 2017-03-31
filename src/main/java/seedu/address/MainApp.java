@@ -163,6 +163,7 @@ public class MainApp extends Application {
         EventsCenter.getInstance().registerHandler(this);
     }
 
+//@@LiuYulin A0148052L
     protected String initConfigFilePath(String filePath) {
         if (filePath == null) {
             return Config.DEFAULT_CONFIG_FILE;
@@ -175,6 +176,8 @@ public class MainApp extends Application {
             return Config.DEFAULT_CONFIG_FILE;
         }
     }
+//@@LiuYulin
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
