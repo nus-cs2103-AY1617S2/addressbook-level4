@@ -117,24 +117,20 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
-        System.out.println(event.toString());
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
     //@@author A0135998H
     @Subscribe
     private void handleViewListChangedEvent(ViewListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        // TODO don't use event.toString(), use for example event.data
-        int firstSpaceIndex = event.toString().indexOf(" ");
-        String typeOfList = event.toString().substring(0, firstSpaceIndex);
-        mainWindow.switchTabPanel(typeOfList);
+        mainWindow.switchTabPanel(event.getTypeOfListView());
     }
 
 }
