@@ -107,13 +107,13 @@ Format: `exit`
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Command Summary
-Command | Format
--------- | :--------
-help | `help`
-add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
-delete | `delete index\INDEX`
-find | `find name/Name`
-list | `list * | completed | pending | overdue`
-edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
-undo/redo | `undo` `redo`
-exit | `exit`
+| Command | Format 
+| --------| --------
+| help | `help` 
+| add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]` 
+| delete | `delete index\INDEX` 
+| find | `find name/Name` 
+| list | `list * | completed | pending | overdue` 
+| edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]` 
+| undo/redo | `undo` `redo` 
+| exit | `exit` 
