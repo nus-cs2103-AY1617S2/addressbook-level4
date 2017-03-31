@@ -29,6 +29,10 @@ import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    public final String DISPLAY_STATUS_COMPLETED = "COMPLETED";
+    public final String DISPLAY_STATUS_ALL = "ALL";
+    public final String DISPLAY_STATUS_PENDING = "PENDING";
+
     private final WhatsLeft whatsLeft;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
     private final FilteredList<ReadOnlyTask> filteredTasks;
@@ -50,7 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEvents = new FilteredList<>(this.whatsLeft.getEventList());
         filteredTasks = new FilteredList<>(this.whatsLeft.getTaskList());
         previousCommand = "";
-        displayStatus = "Pending";
+        displayStatus = DISPLAY_STATUS_PENDING;
         updateFilteredListToShowAll();
     }
     //@@author
@@ -226,13 +230,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         try {
-            if (displayStatus.equals("All")) {
+            if (displayStatus.equals(DISPLAY_STATUS_ALL)) {
                 filteredTasks.setPredicate(null);
                 filteredEvents.setPredicate(null);
-            } else if (displayStatus.equals("Completed")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_COMPLETED)) {
                 filteredTasks.setPredicate(new PredicateExpression(new StatusQualifier(true))::satisfies);
                 filteredEvents.setPredicate(new PredicateExpression(new StatusQualifier(true))::satisfies);
-            } else if (displayStatus.equals("Pending")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_PENDING)) {
                 filteredTasks.setPredicate(new PredicateExpression(new StatusQualifier(false))::satisfies);
                 filteredEvents.setPredicate(new PredicateExpression(new StatusQualifier(false))::satisfies);
             } else {
@@ -315,16 +319,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (displayStatus.equals("All")) {
+            if (displayStatus.equals(DISPLAY_STATUS_ALL)) {
                 return nameKeyWords.stream().filter(
                     keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
                         .findAny().isPresent();
-            } else if (displayStatus.equals("Completed")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_COMPLETED)) {
                 return nameKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword)
                                 && task.getStatus())
                         .findAny().isPresent();
-            } else if (displayStatus.equals("Pending")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_PENDING)) {
                 return nameKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword)
                                 && !task.getStatus())
@@ -341,16 +345,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyEvent event) {
-            if (displayStatus.equals("All")) {
+            if (displayStatus.equals(DISPLAY_STATUS_ALL)) {
                 return nameKeyWords.stream().filter(
                     keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword))
                         .findAny().isPresent();
-            } else if (displayStatus.equals("Completed")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_COMPLETED)) {
                 return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
                                 && event.isOver())
                         .findAny().isPresent();
-            } else if (displayStatus.equals("Pending")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_PENDING)) {
                 return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
                                 && !event.isOver())
