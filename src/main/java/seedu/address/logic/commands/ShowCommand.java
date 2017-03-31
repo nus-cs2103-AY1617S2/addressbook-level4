@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.events.model.ShowStatusChangedEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 
@@ -45,7 +47,13 @@ public class ShowCommand extends Command {
         }
         model.setDisplayStatus(preference);
         model.updateFilteredListToShowAll();
+        indicateShowStatusChanged();
         return new CommandResult(String.format(MESSAGE_DISPLAY_PREFERENCE_SUCCESS, preference));
     }
+
+    private void indicateShowStatusChanged() {
+        EventsCenter.getInstance().post(new ShowStatusChangedEvent(model.getDisplayStatus()));
+    }
+
     //@@author
 }

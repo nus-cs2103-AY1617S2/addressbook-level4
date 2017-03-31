@@ -80,6 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
     }
 
+    @Override
     public String getDisplayStatus() {
         return displayStatus;
     }
