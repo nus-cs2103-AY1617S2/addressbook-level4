@@ -9,7 +9,7 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
 
         DateTime start = null;
         DateTime end = null;
-        Location loc = null;
+        Description loc = null;
 
         if (startDateTime.isPresent()) {
             start = new DateTime(startDateTime.get());
@@ -56,7 +56,7 @@ public class AddCommand extends Command {
             end = new DateTime(endDateTime.get());
         }
         if (location.isPresent()) {
-            loc = new Location(location.get());
+            loc = new Description(location.get());
         }
 
         this.toAdd = new Task(

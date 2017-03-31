@@ -9,7 +9,7 @@ import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -95,7 +95,7 @@ public class UpdateCommand extends Command {
         if (updateTaskDescriptor.getStartDateTime() != null) {
             updatedStartDateTime = updateTaskDescriptor.getStartDateTime().orElseGet(taskToUpdate::getStartDateTime);
         }
-        Location updatedLocation = updateTaskDescriptor.getLocation().orElseGet(taskToUpdate::getLocation);
+        Description updatedLocation = updateTaskDescriptor.getLocation().orElseGet(taskToUpdate::getLocation);
         UniqueTagList updatedTags = updateTaskDescriptor.getTags().orElseGet(taskToUpdate::getTags);
 
         return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags,
@@ -110,7 +110,7 @@ public class UpdateCommand extends Command {
         private Optional<Title> title = Optional.empty();
         private Optional<DateTime> endDateTime = Optional.empty();
         private Optional<DateTime> startDateTime = Optional.empty();
-        private Optional<Location> location = Optional.empty();
+        private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public UpdateTaskDescriptor() {}
@@ -119,7 +119,7 @@ public class UpdateCommand extends Command {
             this.title = toCopy.getTitle();
             this.endDateTime = toCopy.getEndDateTime();
             this.startDateTime = toCopy.getStartDateTime();
-            this.location = toCopy.getLocation();
+            this.description = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
 
@@ -127,8 +127,8 @@ public class UpdateCommand extends Command {
             return endDateTime;
         }
 
-        public Optional<Location> getLocation() {
-            return location;
+        public Optional<Description> getLocation() {
+            return description;
         }
 
         public Optional<DateTime> getStartDateTime() {
@@ -150,7 +150,7 @@ public class UpdateCommand extends Command {
             if (this.startDateTime == null || this.endDateTime == null) {
                 return true;
             }
-            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags,
+            return CollectionUtil.isAnyPresent(this.title, this.description, this.tags,
                     this.startDateTime, this.endDateTime);
         }
 
@@ -158,9 +158,9 @@ public class UpdateCommand extends Command {
             this.endDateTime = endDateTime;
         }
 
-        public void setLocation(Optional<Location> location) {
-            assert location != null;
-            this.location = location;
+        public void setLocation(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
         public void setStartDateTime(Optional<DateTime> startDateTime) {

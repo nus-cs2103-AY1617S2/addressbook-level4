@@ -10,7 +10,7 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -70,17 +70,17 @@ public class XmlAdaptedTask {
         final Title title = new Title(this.title);
         final DateTime endDateTime = convertStringToDateTime(this.endDateTime);
         final DateTime startDateTime = convertStringToDateTime(this.startDateTime);
-        final Location location = convertStringToLocation(this.location);
+        final Description description = convertStringToLocation(this.location);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final boolean isDone = this.isDone.equals("True");
-        return new Task(title, startDateTime, endDateTime, location, tags, isDone);
+        return new Task(title, startDateTime, endDateTime, description, tags, isDone);
     }
 
     private DateTime convertStringToDateTime(String date) throws IllegalValueException {
         return date.isEmpty() ? null : new DateTime(date);
     }
 
-    private Location convertStringToLocation(String location) throws IllegalValueException {
-        return location.isEmpty() ? null : new Location(location);
+    private Description convertStringToLocation(String location) throws IllegalValueException {
+        return location.isEmpty() ? null : new Description(location);
     }
 }

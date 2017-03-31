@@ -4,7 +4,7 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.Title;
 
 /**
@@ -35,7 +35,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withLocation(String location) throws IllegalValueException {
-        this.task.setLocation(new Location(location));
+        this.task.setLocation(new Description(location));
         return this;
     }
 

@@ -5,38 +5,38 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's location in GeeKeep. Guarantees: immutable; is valid as declared in
- * {@link #isValidLocation(String)}
+ * {@link #isValidDescription(String)}
  */
-public class Location {
+public class Description {
 
-    public static final String MESSAGE_LOCATION_CONSTRAINTS =
-            "Task location can take any values, and it should not be blank";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
+            "Task description can take any values, and it should not be blank";
 
     /*
      * The first character of the location must not be a whitespace, otherwise " " (a blank string) becomes a valid
      * input.
      */
-    public static final String LOCATION_VALIDATION_REGEX = ".*";
+    public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
 
     public final String value;
 
     /**
-     * Returns true if a given string is a valid task location.
+     * Returns true if a given string is a valid task description.
      */
-    public static boolean isValidLocation(String test) {
-        return test.matches(LOCATION_VALIDATION_REGEX);
+    public static boolean isValidDescription(String test) {
+        return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
     /**
-     * Validates given location.
+     * Validates given description.
      *
      * @throws IllegalValueException
      *             if given location string is invalid.
      */
-    public Location(String location) throws IllegalValueException {
+    public Description(String location) throws IllegalValueException {
         assert location != null;
-        if (!isValidLocation(location)) {
-            throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
+        if (!isValidDescription(location)) {
+            throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
         this.value = location;
     }
@@ -44,8 +44,8 @@ public class Location {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Location // instanceof handles nulls
-                        && this.value.equals(((Location) other).value)); // state check
+                || (other instanceof Description // instanceof handles nulls
+                        && this.value.equals(((Description) other).value)); // state check
     }
 
     @Override

@@ -23,7 +23,7 @@ public interface ReadOnlyTask {
 
     DateTime getEndDateTime();
 
-    Location getLocation();
+    Description getLocation();
 
     DateTime getStartDateTime();
 

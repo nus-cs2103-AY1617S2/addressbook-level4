@@ -47,7 +47,7 @@ import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -76,42 +76,42 @@ public class LogicManagerTest {
             Title title = new Title("Event");
             DateTime endDateTime = new DateTime("01-05-17 1630");
             DateTime startDateTime = new DateTime("01-04-17 1630");
-            Location location = new Location("111, alpha street");
+            Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, startDateTime, endDateTime, location, tags, false);
+            return new Task(title, startDateTime, endDateTime, description, tags, false);
         }
 
         //@@author A0139438W
         public Task deadline() throws Exception {
             Title title = new Title("Deadline");
             DateTime endDateTime = new DateTime("01-05-17 1630");
-            Location location = new Location("222, beta street");
+            Description description = new Description("222, beta street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, null, endDateTime, location, tags, false);
+            return new Task(title, null, endDateTime, description, tags, false);
         }
 
         public Task eventWithoutTime() throws Exception {
             Title title = new Title("Event Without Time");
             DateTime endDateTime = new DateTime("01-05-17");
             DateTime startDateTime = new DateTime("01-04-17");
-            Location location = new Location("111, alpha street");
+            Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, startDateTime, endDateTime, location, tags, false);
+            return new Task(title, startDateTime, endDateTime, description, tags, false);
         }
 
         public Task floatingTask() throws Exception {
             Title title = new Title("Floating Task");
-            Location location = new Location("333, charlie street");
+            Description description = new Description("333, charlie street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, null, null, location, tags, false);
+            return new Task(title, null, null, description, tags, false);
         }
 
         //@@author
@@ -184,7 +184,7 @@ public class LogicManagerTest {
                     new Title("Task " + seed),
                     new DateTime("01-04-17 1630"),
                     new DateTime("01-05-17 1630"),
-                    new Location("House of " + seed),
+                    new Description("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
                     false
             );
@@ -231,7 +231,7 @@ public class LogicManagerTest {
                     new Title(title),
                     new DateTime("01-04-17 1630"),
                     new DateTime("01-05-17 1630"),
-                    new Location("House of 1"),
+                    new Description("House of 1"),
                     new UniqueTagList(new Tag("tag")),
                     false
             );

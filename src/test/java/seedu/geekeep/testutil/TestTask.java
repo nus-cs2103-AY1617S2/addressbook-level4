@@ -3,7 +3,7 @@ package seedu.geekeep.testutil;
 
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Title;
 
@@ -13,7 +13,7 @@ import seedu.geekeep.model.task.Title;
 public class TestTask implements ReadOnlyTask {
 
     private Title title;
-    private Location location;
+    private Description description;
     private DateTime startDateTime;
     private DateTime endDateTime;
     private UniqueTagList tags;
@@ -29,7 +29,7 @@ public class TestTask implements ReadOnlyTask {
         this.title = taskToCopy.getTitle();
         this.endDateTime = taskToCopy.getEndDateTime();
         this.startDateTime = taskToCopy.getStartDateTime();
-        this.location = taskToCopy.getLocation();
+        this.description = taskToCopy.getLocation();
         this.tags = taskToCopy.getTags();
     }
 
@@ -50,8 +50,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Location getLocation() {
-        return location;
+    public Description getLocation() {
+        return description;
     }
 
     @Override
@@ -73,8 +73,8 @@ public class TestTask implements ReadOnlyTask {
         this.endDateTime = endDateTime;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocation(Description description) {
+        this.description = description;
     }
 
     public void setStartDateTime(DateTime startDateTime) {
