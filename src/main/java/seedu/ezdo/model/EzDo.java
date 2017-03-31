@@ -152,9 +152,9 @@ public class EzDo implements ReadOnlyEzDo {
         return true;
     }
 
-    public void doneTasks(ArrayList<Task> p) {
+    public void toggleTasksDone(ArrayList<Task> p) {
         for (int i = 0; i < p.size(); i++) {
-            p.get(i).setDone();
+            p.get(i).toggleDone();
         }
     }
 //@@author
