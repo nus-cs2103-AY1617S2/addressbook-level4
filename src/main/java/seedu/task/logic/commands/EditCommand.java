@@ -16,7 +16,6 @@ import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
-import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -66,23 +65,16 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task newTask = null;
-
-        if (isSpecific) {
-            newTask = Task.modifyOccurrence(taskToEdit);
-            try {
-                model.addTask(newTask);
-            } catch (DuplicateTaskException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
         Task editedTask;
+
         try {
             if (isSpecific) {
+                newTask = Task.modifyOccurrence(taskToEdit);
+                model.addTask(newTask);
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
                 int newIndex = model.getFilteredTaskList().indexOf(newTask);
                 model.updateTask(newIndex, editedTask);
+
             } else {
                 editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
                 model.updateTask(filteredTaskListIndex, editedTask);
@@ -92,12 +84,11 @@ public class EditCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        //@@author
-
 
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
+    //@@author
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}

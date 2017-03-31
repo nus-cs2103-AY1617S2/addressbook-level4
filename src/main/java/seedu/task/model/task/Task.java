@@ -342,6 +342,23 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return newTask;
     }
 
+    /**
+     * converts readOnlyTask object to Task object
+     * @param readOnlyTask
+     * @return Task
+     */
+    public static Task readOnlyToTask(ReadOnlyTask readOnlyTask) {
+        assert readOnlyTask != null;
+        Task task = new Task(
+                readOnlyTask.getDescription(),
+                readOnlyTask.getPriority(),
+                readOnlyTask.getOccurrences(),
+                readOnlyTask.getTags(),
+                readOnlyTask.isRecurring(),
+                readOnlyTask.getFrequency());
+        return task;
+    }
+
     //@@author A0163559U
     /**
      * Results in Tasks sorted by completed state, followed by priority, endTiming, startTiming

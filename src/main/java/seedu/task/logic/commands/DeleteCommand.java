@@ -4,6 +4,8 @@ import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -29,7 +31,7 @@ public class DeleteCommand extends Command {
         this.isSpecific = isSpecific;
     }
 
-
+    //@@author A0164212U
     @Override
     public CommandResult execute() throws CommandException {
 
@@ -40,19 +42,22 @@ public class DeleteCommand extends Command {
         }
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
-
-        //        if (isSpecific) {
-        //            if (taskToDelete.getOccurrenceIndexList().size() == 0) {
-        //                taskToDelete.getOccurrenceIndexList().add(0);
-        //            }
-        //            int occurrenceIndex = taskToDelete.getOccurrenceIndexList().get(0);
-        //            taskToDelete.removeOccurrence(occurrenceIndex);
-        //        }
+        Task newTask = null;
 
         try {
             model.deleteTask(taskToDelete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
+        }
+
+        if (isSpecific) {
+            newTask = Task.modifyOccurrence(taskToDelete);
+            try {
+                model.addTask(Task.readOnlyToTask(taskToDelete));
+                return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, newTask));
+            } catch (DuplicateTaskException e) {
+                throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);            }
+
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
