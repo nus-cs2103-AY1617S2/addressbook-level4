@@ -314,6 +314,35 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
+    public static Task modifyOccurrence(ReadOnlyTask taskToModify) {
+        Task newTask = null;
+        if (taskToModify.getOccurrenceIndexList().size() == 0) {
+            taskToModify.getOccurrenceIndexList().add(0);
+        }
+        int occurrenceIndex = taskToModify.getOccurrenceIndexList().get(0);
+        RecurringFrequency freq = null;
+        try {
+            freq = new RecurringFrequency(RecurringFrequency.NULL_FREQUENCY);
+        } catch (IllegalValueException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        newTask = new Task(
+                taskToModify.getDescription(),
+                taskToModify.getPriority(),
+                taskToModify.getOccurrences().get(occurrenceIndex).getStartTiming(),
+                taskToModify.getOccurrences().get(occurrenceIndex).getEndTiming(),
+                taskToModify.getTags(),
+                false,
+                freq);
+        newTask.getStartTiming().setTiming(newTask.getStartTiming().toString());
+        newTask.getEndTiming().setTiming(newTask.getEndTiming().toString());
+        taskToModify.removeOccurrence(occurrenceIndex);
+        //        taskToModify.getOccurrenceIndexList().set(0, occurrenceIndex);
+
+        return newTask;
+    }
+
     //@@author A0163559U
     /**
      * Results in Tasks sorted by completed state, followed by priority, endTiming, startTiming

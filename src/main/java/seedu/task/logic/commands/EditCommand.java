@@ -6,7 +6,6 @@ import java.util.List;
 
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalTimingOrderException;
-import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
@@ -69,37 +68,13 @@ public class EditCommand extends Command {
         Task newTask = null;
 
         if (isSpecific) {
-            if (taskToEdit.getOccurrenceIndexList().size() == 0) {
-                taskToEdit.getOccurrenceIndexList().add(0);
-            }
-            int occurrenceIndex = taskToEdit.getOccurrenceIndexList().get(0);
-            RecurringFrequency freq = null;
-            try {
-                freq = new RecurringFrequency(RecurringFrequency.NULL_FREQUENCY);
-            } catch (IllegalValueException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            newTask = new Task(
-                    taskToEdit.getDescription(),
-                    taskToEdit.getPriority(),
-                    taskToEdit.getOccurrences().get(occurrenceIndex).getStartTiming(),
-                    taskToEdit.getOccurrences().get(occurrenceIndex).getEndTiming(),
-                    taskToEdit.getTags(),
-                    false,
-                    freq);
-            newTask.getStartTiming().setTiming(newTask.getStartTiming().toString());
-            newTask.getEndTiming().setTiming(newTask.getEndTiming().toString());
-            taskToEdit.removeOccurrence(occurrenceIndex);
-            occurrenceIndex--;
-            taskToEdit.getOccurrenceIndexList().set(0, occurrenceIndex);
+            newTask = Task.modifyOccurrence(taskToEdit);
             try {
                 model.addTask(newTask);
             } catch (DuplicateTaskException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
         }
 
         Task editedTask;
