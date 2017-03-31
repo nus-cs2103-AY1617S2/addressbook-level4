@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
 import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 

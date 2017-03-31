@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-import java.io.IOException;
-import java.nio.file.Paths;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -72,7 +69,7 @@ public class ThemeManager extends UiPart<Region> {
         cssList.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Theme has changed to : '" + newValue + "'");
+                        LOGGER.fine("Theme has changed to : '" + newValue + "'");
                         changeTheme(fxmlToApply, newValue);
                         saveThemePreference(newValue, prefs);
                     }

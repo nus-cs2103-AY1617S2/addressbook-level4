@@ -22,7 +22,7 @@ public abstract class UiPart<T> {
 
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
-    protected static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    protected static final Logger LOGGER = LogsCenter.getLogger(HelpWindow.class);
 
     private FXMLLoader fxmlLoader;
 

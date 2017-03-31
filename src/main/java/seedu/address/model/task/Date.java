@@ -1,11 +1,11 @@
 package seedu.address.model.task;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 import java.util.List;
 
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.

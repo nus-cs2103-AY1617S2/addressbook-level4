@@ -8,8 +8,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
 
 //@@author A0163848R
@@ -17,8 +17,8 @@ import seedu.address.model.task.UniquePersonList;
  * Command that marks a task as complete.
  */
 public class MarkCommand extends Command {
-	
-	public static final String COMMAND_WORD = "mark";
+    
+    public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks as complete the task identified "
             + "by the index number used in the last task listing.\n"
@@ -67,23 +67,23 @@ public class MarkCommand extends Command {
      */
     private static Task createMarkedPerson(ReadOnlyPerson personToEdit) {
         assert personToEdit != null;
-    	
-    	UniqueTagList updatedTags =
-    	        personToEdit
-    	        .getTags()
-    	        .except(UniqueTagList.constructUniqueTagList(
-    	                        Tag.TAG_COMPLETE,
-    	                        Tag.TAG_INCOMPLETE));
+        
+        UniqueTagList updatedTags =
+                personToEdit
+                .getTags()
+                .except(UniqueTagList.constructUniqueTagList(
+                                Tag.TAG_COMPLETE,
+                                Tag.TAG_INCOMPLETE));
         
         try {
-			updatedTags.add(new Tag(Tag.TAG_COMPLETE));
-		} catch (DuplicateTagException e) {
-			e.printStackTrace();
-		} catch (IllegalValueException e) {
-			e.printStackTrace();
-		}
+            updatedTags.add(new Tag(Tag.TAG_COMPLETE));
+        } catch (DuplicateTagException e) {
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
 
         return new Task(personToEdit.getName(),
-        		personToEdit.getDate(), personToEdit.getEmail(), personToEdit.getGroup(), updatedTags);
+                personToEdit.getDate(), personToEdit.getEmail(), personToEdit.getGroup(), updatedTags);
     }
 }

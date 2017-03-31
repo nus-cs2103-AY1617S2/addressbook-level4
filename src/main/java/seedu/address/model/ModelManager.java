@@ -10,8 +10,8 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
 import seedu.address.model.task.UniquePersonList.PersonNotFoundException;
 

@@ -56,7 +56,7 @@ public abstract class Window extends UiPart<Region> {
     }
 
     protected void show() {
-        logger.fine("Showing " + stage.getTitle());
+        LOGGER.fine("Showing " + stage.getTitle());
         stage.show();
     }
 

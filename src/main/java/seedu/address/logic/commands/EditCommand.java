@@ -11,8 +11,8 @@ import seedu.address.model.task.Date;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
 
 /**

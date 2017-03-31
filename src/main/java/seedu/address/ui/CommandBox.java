@@ -42,13 +42,13 @@ public class CommandBox extends UiPart<Region> {
             // process result of the command
             setStyleToIndicateCommandSuccess();
             commandTextField.setText("");
-            logger.info("Result: " + commandResult.feedbackToUser);
+            LOGGER.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
-            logger.info("Invalid command: " + commandTextField.getText());
+            LOGGER.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }

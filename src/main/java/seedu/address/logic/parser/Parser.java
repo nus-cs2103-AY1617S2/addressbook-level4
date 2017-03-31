@@ -77,11 +77,11 @@ public class Parser {
         
         //@@author A0163848R
         case MarkCommand.COMMAND_WORD:
-        	return new MarkCommandParser().parse(arguments);
-        	
+            return new MarkCommandParser().parse(arguments);
+            
         case UnmarkCommand.COMMAND_WORD:
-        	return new UnmarkCommandParser().parse(arguments);
-        	
+            return new UnmarkCommandParser().parse(arguments);
+            
         case UndoCommand.COMMAND_WORD:
             return new UndoCommandParser().parse(arguments);
             
