@@ -10,8 +10,11 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.task.commons.core.FileNameHandler;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.events.storage.LoadDataEvent;
+import seedu.task.commons.events.ui.ChangePathNameEvent;
 import seedu.task.commons.util.FxViewUtil;
 
 /**
@@ -31,7 +34,7 @@ public class StatusBarFooter extends UiPart<Region> {
 	super(FXML);
 	addToPlaceholder(placeHolder);
 	setSyncStatus("Not updated yet in this session");
-	setSaveLocation("./" + saveLocation);
+	setSaveLocation("./" + FileNameHandler.getFileName());
 	registerAsAnEventHandler(this);
     }
 
@@ -53,5 +56,17 @@ public class StatusBarFooter extends UiPart<Region> {
 	String lastUpdated = (new Date()).toString();
 	logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
 	setSyncStatus("Last Updated: " + lastUpdated);
+    }
+    //@@author A0163845X
+    @Subscribe
+    private void handleChangePathNameEvent(ChangePathNameEvent event) {
+    	logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    	setSaveLocation("./" + event.getPathName());
+    }
+    //@@author A0163845X
+    @Subscribe
+    private void loadDataEvent(LoadDataEvent event) {
+    	logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    	setSaveLocation("./" + event.getPathName());
     }
 }
