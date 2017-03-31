@@ -17,9 +17,15 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ExportRequestEvent;
+import seedu.address.commons.events.ui.ImportRequestEvent;
+import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.XmlUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.YTomorrow;
 import seedu.address.model.task.ReadOnlyPerson;
 
 /**
@@ -170,7 +176,7 @@ public class MainWindow extends Window {
                 (int) stage.getX(),
                 (int) stage.getY(),
                 Paths.get(getRoot().getStylesheets().get(0)).getFileName().toString().replaceFirst("[.][^.]+$", ""),
-                null);
+                prefs.getGuiSettings().getLastLoadedYTomorrow());
     }
     
     @FXML
@@ -186,7 +192,9 @@ public class MainWindow extends Window {
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
         
         if (selected != null) {
-            //model.save(selectedFile);
+            ReadOnlyAddressBook current = logic.getYTomorrow();
+            raise(new ExportRequestEvent(current, selected));
+            raise(new TargetFileRequestEvent(selected, prefs));
         }
     }
     
@@ -196,7 +204,10 @@ public class MainWindow extends Window {
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
         
         if (selected != null) {
-            //model.load(selectedFile);
+            YTomorrow readIn = new YTomorrow();
+            raise(new ImportRequestEvent(readIn, selected));
+            logic.importYTomorrow(readIn);
+            raise(new TargetFileRequestEvent(selected, prefs));
         }
     }
     
@@ -206,7 +217,8 @@ public class MainWindow extends Window {
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
         
         if (selected != null) {
-            //model.export(selectedFile);
+            ReadOnlyAddressBook current = logic.getYTomorrow();
+            raise(new ExportRequestEvent(current, selected));
         }
     }
     
@@ -216,7 +228,9 @@ public class MainWindow extends Window {
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
         
         if (selected != null) {
-            //model.import(selectedFile);
+            YTomorrow readIn = new YTomorrow();
+            raise(new ImportRequestEvent(readIn, selected));
+            logic.importYTomorrow(readIn);
         }
     }
     
