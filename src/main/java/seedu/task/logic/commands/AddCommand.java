@@ -18,7 +18,7 @@ import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the task list.
  */
 public class AddCommand extends Command {
 
