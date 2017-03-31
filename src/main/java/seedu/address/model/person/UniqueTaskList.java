@@ -9,7 +9,6 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
 

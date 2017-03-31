@@ -29,7 +29,6 @@ import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList;
 
 import seedu.address.model.tag.UniqueTagList;
@@ -49,6 +48,7 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " ts 1 p/high bd/050517";
 
     public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
+    public static final String MESSAGE_EDIT_SUCCESS_CLASH = "Edited Activity with possible clash! : %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in WhatsLeft.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in WhatsLeft.";
@@ -105,8 +105,6 @@ public class EditCommand extends Command {
                     model.updateEvent(eventToEdit, editedEvent);
                 } catch (UniqueEventList.DuplicateEventException dpe) {
                     throw new CommandException(MESSAGE_DUPLICATE_EVENT);
-                } catch (DuplicateTimeClashException e) {
-                    throw new CommandException(MESSAGE_EDIT_CLASH_TIME);
                 }
                 model.updateFilteredListToShowAll();
                 model.storePreviousCommand("edit");
@@ -114,6 +112,9 @@ public class EditCommand extends Command {
                 UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
                 EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
                 EventsCenter.getInstance().post(new JumpToCalendarEventEvent(editedEvent));
+                if (model.eventHasClash(editedEvent)) {
+                    return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS_CLASH, editedEvent));
+                }
                 return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
             } catch (IllegalValueException e) {
                 throw new CommandException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);

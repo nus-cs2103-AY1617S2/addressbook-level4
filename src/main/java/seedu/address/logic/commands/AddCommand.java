@@ -27,7 +27,6 @@ import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList;
 
 import seedu.address.model.tag.Tag;
@@ -50,6 +49,7 @@ public class AddCommand extends Command {
             + " Project Discussion p/high l/discussion room t/formal";
 
     public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
+    public static final String MESSAGE_SUCCESS_WITH_CLASH = "New activity added but with possible clash! : %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
     public static final String MESSAGE_CLASH_TIMING = "This event clashes with another event";
     public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date!";
@@ -110,6 +110,9 @@ public class AddCommand extends Command {
                 EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
                 EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
                 model.storePreviousCommand("add");
+                if (model.eventHasClash(toAddEvent)) {
+                    return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_CLASH, toAddEvent));
+                }
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
             } else if (toAddEvent == null) {
                 model.addTask(toAddTask);
@@ -121,8 +124,6 @@ public class AddCommand extends Command {
             }
         } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
-        } catch (DuplicateTimeClashException e) {
-            throw new CommandException(MESSAGE_CLASH_TIMING);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
 

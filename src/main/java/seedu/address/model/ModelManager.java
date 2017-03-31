@@ -17,7 +17,6 @@ import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueEventList.EventNotFoundException;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
@@ -134,7 +133,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0148038A
     @Override
     public synchronized void addEvent(Event event)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+            throws UniqueEventList.DuplicateEventException {
         whatsLeft.addEvent(event);
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
@@ -149,7 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateEvent(Event eventToEdit, Event editedEvent)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+            throws UniqueEventList.DuplicateEventException {
         assert editedEvent != null;
 
         whatsLeft.updateEvent(eventToEdit, editedEvent);
@@ -414,6 +413,12 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "status =" + String.valueOf(statusKey);
         }
+    }
+
+    //@@author A0110491U
+    @Override
+    public boolean eventHasClash(Event toAddEvent) {
+        return whatsLeft.eventHasClash(toAddEvent);
     }
 
 }

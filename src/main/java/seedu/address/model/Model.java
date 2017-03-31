@@ -8,7 +8,6 @@ import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueEventList;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
@@ -48,7 +47,7 @@ public interface Model {
 
     /** Adds the given Event
      * @throws DuplicateTimeClashException */
-    void addEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
+    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
 
     //@@author A0148038A
     /**
@@ -60,7 +59,7 @@ public interface Model {
      * @throws IndexOutOfBoundsException if {@code filteredEventListIndex} < 0 or >= the size of the filtered list.
      */
     void updateEvent(Event eventToEdit, Event editedEvent)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
+            throws UniqueEventList.DuplicateEventException;
 
     /**
      * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -107,4 +106,8 @@ public interface Model {
 
     /** Finds the index of the task in the filtered list*/
     int findTaskIndex(Task task);
+
+    //@@author A0110491U
+    /** Finds whether there is a clash of timing of event */
+    boolean eventHasClash(Event toAddEvent);
 }
