@@ -14,9 +14,11 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: [UI](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/DeveloperGuide.md#23-logic-component)
 * Aspects/tools in charge of: Testing, Git
 * Features implemented:
-   * [Change Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#212-change-the-directory-of-the-task-manager--load-or-cd)
-   * [Move Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#213-move-the-directory-of-the-task-manager--move-or--movefile)
-* Code written: [[functional code](A0114269E.md)][[test code](A0114269E.md)]
+   * [Find](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#26-finding-all-tasks-containing-any-keyword-in-their-task-title--description--tags-find)
+   * [Edit](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#25-editing-a-task--edit)
+   * [Undo](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#214-undo-the-last-user-command-that-changes-data-undo)
+   * [Redo](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#215-redo-the-last-undo-command-redo)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/main/A0140032E.md)][[test code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/test/A0140032E.md)]
 * Other major contributions:
   * Team Leader
   * Did the initial refactoring from AddressBook to TaskManager
@@ -29,9 +31,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: [Model](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/DeveloperGuide.md#24-model-component)
 * Aspects/tools in charge of: Testing, Git
 * Features implemented:
-   * [Change Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#212-change-the-directory-of-the-task-manager--load-or-cd)
-   * [Move Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#213-move-the-directory-of-the-task-manager--move-or--movefile)
-* Code written: [[functional code](A0114269E.md)][[test code](A0114269E.md)]
+   * [Sort](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#28-sorting-tasks--sort)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/main/A0131278H.md)][[test code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/test/A0131278H.md)]
 * Other major contributions:
   * Did most code quality inspection
   * Did the initial refactoring from AddressBook to TaskManager
@@ -43,9 +44,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: [UI](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/DeveloperGuide.md#22-ui-component)
 * Aspects/tools in charge of: Testing, Git
 * Features implemented:
-   * [Change Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#212-change-the-directory-of-the-task-manager--load-or-cd)
-   * [Move Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#213-move-the-directory-of-the-task-manager--move-or--movefile)
-* Code written: [[functional code](A0114269E.md)][[test code](A0114269E.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/main/A0131277H.md)][[test code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/test/A0131277H.md)]
 * Other major contributions:
   * Did modification for UI
   * Did initial fixes for most JUnits tests
@@ -59,7 +58,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
    * [Change Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#212-change-the-directory-of-the-task-manager--load-or-cd)
    * [Move Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#213-move-the-directory-of-the-task-manager--move-or--movefile)
-* Code written: [[functional code](A0114269E.md)][[test code](A0114269E.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/main/A0114269E.md)][[test code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/test/A0114269E.md)]
 * Other major contributions:
   * Managing most documentations
   * Did the initial refactoring from AddressBook to TaskManager
