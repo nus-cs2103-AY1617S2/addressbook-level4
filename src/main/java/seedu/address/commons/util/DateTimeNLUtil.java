@@ -63,7 +63,6 @@ public class DateTimeNLUtil {
         arg = arg.toLowerCase();
         String[] args = arg.split(" ");
         if (args.length == 1) {
-            System.out.println("ARGS 0 : " + args[0]);
             if (isARelativeDay(args[0])) {
                 int relative = relativedaymap.get(getRelativeEnum(args[0]));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyy");
