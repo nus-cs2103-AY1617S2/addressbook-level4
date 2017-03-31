@@ -19,19 +19,28 @@ public class GuiSettings implements Serializable {
     private Point windowCoordinates;
 
     private String styleSheet;
+    private String lastLoadedYTomorrow;
 
     public GuiSettings() {
         this.windowWidth = DEFAULT_WIDTH;
         this.windowHeight = DEFAULT_HEIGHT;
         this.windowCoordinates = null; // null represent no coordinates
         this.styleSheet = ThemeManager.DEFAULT_STYLESHEET;
+        this.lastLoadedYTomorrow = null;
     }
 
-    public GuiSettings(Double windowWidth, Double windowHeight, int xPosition, int yPosition, String styleSheet) {
+    public GuiSettings(
+            Double windowWidth,
+            Double windowHeight,
+            int xPosition,
+            int yPosition,
+            String styleSheet,
+            String lastLoadedYTomorrow) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         this.windowCoordinates = new Point(xPosition, yPosition);
         this.styleSheet = styleSheet;
+        this.lastLoadedYTomorrow = lastLoadedYTomorrow;
     }
 
     public Double getWindowWidth() {
@@ -46,13 +55,21 @@ public class GuiSettings implements Serializable {
         return windowCoordinates;
     }
 
+    //@@author A0163848R
     public String getStyleSheet() {
         return styleSheet;
     }
-
-    //@@author A0163848R
+    
+    public String getLastLoadedYTomorrow() {
+        return lastLoadedYTomorrow;
+    }
+    
     public void setStyleSheet(String path) {
-        this.styleSheet = path;
+        styleSheet = path;
+    }
+    
+    public void setLastLoadedYTomorrow(String path) {
+        lastLoadedYTomorrow = path;
     }
     //@@author
 

@@ -53,5 +53,8 @@ public interface Model {
 
     /** Adds the current AddressBook state to the undo/redo history */
     void addToHistory(ReadOnlyAddressBook state);
+    
+    /** Adds entries from the given YTomorrow to the current YTomorrow and updates equivalent entries. */
+    void mergeYTomorrow(ReadOnlyAddressBook add);
 
 }
