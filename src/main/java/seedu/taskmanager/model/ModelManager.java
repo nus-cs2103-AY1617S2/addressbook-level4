@@ -5,9 +5,11 @@ import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.taskmanager.commons.core.ComponentManager;
+import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
+import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.tag.Tag;
@@ -18,8 +20,8 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the task manager data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -60,6 +62,12 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
+    // @@author A0131278H
+    private void indicateJumpToListRequestEvent(int index) {
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+    }
+    // @@author
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
@@ -68,9 +76,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskManager.addTask(task);
+        int index = taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        // @@author A0131278H
+        indicateJumpToListRequestEvent(index);
+        // @@author
     }
 
     @Override
@@ -79,8 +90,11 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskManagerIndex, editedTask);
+        int updatedIndex = taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+        // @@author A0131278H
+        indicateJumpToListRequestEvent(updatedIndex);
+        // @@author
     }
 
     // @@author A0131278H
@@ -119,6 +133,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -143,6 +158,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -157,8 +173,7 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0140032E
         public boolean run(ReadOnlyTask task) {
             boolean hasName = nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().value, keyword))
-                    .findAny()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().value, keyword)).findAny()
                     .isPresent();
             boolean hasDescription = nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().isPresent() ?
@@ -169,8 +184,7 @@ public class ModelManager extends ComponentManager implements Model {
             UniqueTagList tagList = task.getTags();
             for (Tag tag : tagList) {
                 hasTag = hasTag || nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))
-                        .findAny()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)).findAny()
                         .isPresent();
             }
             return hasName || hasDescription || hasTag;

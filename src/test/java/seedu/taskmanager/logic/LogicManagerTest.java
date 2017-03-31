@@ -538,12 +538,6 @@ public class LogicManagerTest {
 
     // @@author A0131278H
     @Test
-    public void executeSortInvalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
-        assertCommandFailure("sort ", expectedMessage);
-    }
-
-    @Test
     public void executeSortByStartDateCorrectOrderofTasks() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithStartDate("03/03/2017");
