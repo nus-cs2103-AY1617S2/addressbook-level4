@@ -12,6 +12,7 @@ import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 import seedu.ezdo.model.util.SampleDataUtil;
 
+//@@author A0139248X
 @RunWith(JMockit.class)
 public class SampleDataUtilTest {
 
@@ -24,7 +25,6 @@ public class SampleDataUtilTest {
         new Expectations(Name.class) {{
             new Name("Buy one cherry fruit"); result = new IllegalValueException("illegal value");
         }};
-
         SampleDataUtil.getSampleTasks();
     }
 
@@ -36,5 +36,4 @@ public class SampleDataUtilTest {
         }};
         SampleDataUtil.getSampleEzDo();
     }
-
 }
