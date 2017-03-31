@@ -7,13 +7,15 @@ import seedu.task.model.ReadOnlyTaskManager;
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;
-    public final boolean shouldBackup;
+    public final String backupFilePath;
 
-    public TaskManagerChangedEvent(ReadOnlyTaskManager data, boolean shouldBackup) {
+    // @@author A0140063X
+    public TaskManagerChangedEvent(ReadOnlyTaskManager data, String backupFilePath) {
         this.data = data;
-        this.shouldBackup = shouldBackup;
+        this.backupFilePath = backupFilePath;
     }
 
+    // @@author
     @Override
     public String toString() {
         return "number of tasks " + data.getTaskList().size() + ", number of tags " + data.getTagList().size();

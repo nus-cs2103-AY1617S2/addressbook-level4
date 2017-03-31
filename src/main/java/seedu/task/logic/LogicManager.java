@@ -23,12 +23,14 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Storage storage;
     private final Parser parser;
 
+    // @@author A0140063X
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         this.parser = new Parser();
     }
 
+    // @@author A0140063X
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
@@ -37,6 +39,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return command.execute();
     }
 
+    // @@author
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();

@@ -29,8 +29,7 @@ public class Location {
      *             if given location string is invalid.
      */
     public Location(String location) throws IllegalValueException {
-        assert location != null;
-        if (location.equals(DEFAULT_LOCATION) || location.trim().equals("")) {
+        if (location == null || location.equals(DEFAULT_LOCATION) || location.trim().equals("")) {
             this.value = "";
         } else {
             if (!isValidLocation(location)) {

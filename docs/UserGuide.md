@@ -31,7 +31,7 @@
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
+> * Items in `[SQUARE_BRACKETS]` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
@@ -39,17 +39,18 @@
 
 If you are not sure where to start, take a sneakpeek at the help sheet!
 
-Format: `help`, `h`
+Format: `help [COMMANDNAME]`, `h [COMMANDNAME]`, `man [COMMANDNAME]`, `manual [COMMANDNAME]`
 
-> Help brings up user guide in another window.
-> Tips: You can also bring up the help window by pressing F1.
+> * If COMMANDNAME is entered, displays the help message for that specific command
+> * If COMMANDNAME is not entered, displays user guide in another window.
+> * Tips: You can also bring up the help window by pressing F1.
 
 ### 2.1.2 Viewing quick overview of command formats : `helpf`
 
 Format: `helpformat`, `helpf`, `summary`, `hf`
 
-> Helpf shows a quick summary of command formats.
-> Tips: You can also bring up the help window by pressing F3.
+> * Helpf shows a quick summary of command formats.
+> * Tips: You can also bring up the help window by pressing F3.
 
 ### 2.2 Adding a task: `add`
 
@@ -146,13 +147,27 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-### 2.7	Undo: `undo`
+### 2.7.1	Undo: `undo`
 
 Made a mistake? No worries. You can retract it by using the `undo` command.
 
-Description: Undo the last command. <br>
+Description: Undo the last command.<br>
 
 Format: `undo`, `uhoh`
+
+> Able to undo up to 10 times.
+
+### 2.7.2	Redo: `redo`
+
+Along with undo comes redo. Just in case you changed your mind, you can also retract your `undo` by using the `redo` command.
+
+Description: Redo the last undo. <br>
+
+Format: `redo`
+
+> Able to redo up till 10 times.
+> If you make any new commands, you will not be able to do any more redo.
+> Work similarly to the page back and page forward button in your browser.
 
 ### 2.8 Editing a task: `edit`
 
@@ -208,7 +223,38 @@ Format: `findexact KEYWORD...`, `fexact KEYWORD...`, `finde KEYWORD...`, `fe KEY
 > * The search is the same as to `find` except it only matches tasks that contains **all** keywords.
 e.g `do project` will match `do School project` but not `do homework`
 
-### 2.10 Clearing all task: `clear`
+### 2.10 Google Calendar.
+
+If you are using Google Calendar, we support some Google Calendar operations too.
+To use Google Calendar with KIT, we first require your permission to read and add event to your Google Calendar.
+
+> * The request will open in your default browser.
+> * Log in to your Google account and approve the request to use this feature.
+> * You only need to do this for the first time.
+
+### 2.10.1 Get Events from Google Calendar: `gg`
+
+The first thing you might want to do with is to import your events to KIT. You can do this with the `getgoogle` command.
+
+Description: Add your upcoming Events from your Google Calendar to KIT. <br>
+
+Format: `getgoogle`, `gg`
+
+> This command will only grab upcoming Events and ignore duplicate Events.
+
+### 2.10.2 Post Task to Google Calendar: `pg`
+
+Other than getting events from Google Calendar, you are also able to add a task from KIT as an Event to your calendar.
+
+Description: Add the specified task to your Google Calendar. <br>
+
+Format: `postgoogle [INDEX]`, `pg [INDEX]`
+
+> If INDEX is specified and correct, adds the selected task to calendar.
+> If INDEX is not specified, adds **all** displayed task to calendar.
+> Note that start date and end date must not be empty to add your event to the calendar.
+
+### 2.11 Clearing all task: `clear`
 
 If you would like to remove every task of the manager, just use `clear`.
 
@@ -216,12 +262,12 @@ Description: Clears all entries from KIT. <br>
 
 Format: `clear`
 
-### 2.11 Exiting the program: `exit`
+### 2.12 Exiting the program: `exit`
 Description: Exits the program. <br>
 
 Format: `exit`
 
-### 2.12 Specifying save location: `save`
+### 2.13 Specifying save location: `save`
 
 If you wish to save the file to a custom location, you can do so using the `save` function.
 
@@ -229,7 +275,7 @@ Description: Specify location of save file. <br>
 
 Format: `save PATHNAME`
 
-### 2.13. Saving the data
+### 2.14. Saving the data
 
 You do not have to worry about saving changes, because KIT saves it for you!
 
@@ -238,7 +284,7 @@ In KIT, data are saved automatically after a change has been made. There is no n
 ## 3. FAQ
 
 **Q**: Does KIT support Windows 10? <br>
-**A**: Yes! KIT works on computers running Windows 7 and later.
+**A**: Yes! KIT works as long as you have Java 8.
 
 **Q**: Will my tasks be saved after I close the application?  <br>
 **A**: Yes. Your data is saved after every command, you can safely exit KIT when you are done.
@@ -261,4 +307,5 @@ The other task will remain in KIT. Instructions on these commands can be found i
 
 ## 4. Command Summary
 
-<img src="images/Command Summary.png" width="600">
+<img src="images/Command Summary 1.png" width="600">
+<img src="images/Command Summary 2.png" width="600">

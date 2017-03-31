@@ -455,8 +455,8 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-| Priority | As a user I want to ... | So that I can... 
-| -------- | :-------- | :---------  
+| Priority | As a user I want to ... | So that I can...
+| -------- | :-------- | :---------
 | `* * *` | see usage instructions | know how to use the commands
 | `* * *` | add a new task without deadlines | plan for the future
 | `* * *` | add a new task with deadline | know when my task is due

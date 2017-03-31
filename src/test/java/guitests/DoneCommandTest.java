@@ -5,6 +5,7 @@ import static seedu.task.logic.commands.DoneCommand.MESSAGE_DONE_TASK_SUCCESS;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.task.logic.commands.ListCommand;
 import seedu.task.testutil.TestTask;
 
 public class DoneCommandTest extends TaskManagerGuiTest {
@@ -12,6 +13,7 @@ public class DoneCommandTest extends TaskManagerGuiTest {
     @Test
     public void done() {
 
+        commandBox.runCommand(ListCommand.COMMAND_WORD_1);
         // done the first in the list
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
@@ -28,7 +30,6 @@ public class DoneCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertIsDoneSuccess(int targetIndex, final TestTask[] currentList) {
-        // TODO Auto-generated method stub
         currentList[targetIndex - 1].setIsDone(true);
         //boolean expectedRemainder = TestUtil.taskIsDone();
 

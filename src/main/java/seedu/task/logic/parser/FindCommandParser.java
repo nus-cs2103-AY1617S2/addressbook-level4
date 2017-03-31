@@ -15,7 +15,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindCommandParser {
+public class FindCommandParser extends CommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

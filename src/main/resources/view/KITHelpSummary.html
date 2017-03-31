@@ -121,30 +121,101 @@ tr:last-of-type td:last-child {
   <thead>
     <tr>
       <th>Command</th>
-      <th>Format</th>
+      <th>Format (with some examples)</th>
       <th>Alternate Formats</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+	<tr>
+      <td><strong>Add</strong></td>
+      <td>add NAME [r/REMARKS] [s/STARTDATE] [s/ENDDATE] [l/LOCATION] [t/TAG]...
+			<br>
+			<br><strong>Example:</strong>
+			<br>add Meet John s/tomorrow 3pm e/tomorrow 5pm r/regarding project l/canteen t/work </td>
+      <td>-</td>
+      <td>Adds a task to KIT with specifications from the user.</td>
+    </tr>
+     <tr>
+      <td><strong>Clear</strong></td>
+      <td>clear</td>
+      <td></td>
+      <td>Clears all tasks.</td>
+    </tr>
+    <tr>
+      <td><strong>Delete</strong></td>
+      <td>delete INDEX
+			<br>
+			<br><strong>Example:</strong>
+			<br>delete 1</td>
+      <td></td>
+      <td>Deletes the specified task.</td>
+    </tr>
+    <tr>
+      <td><strong>Done</strong></td>
+      <td>done INDEX
+			<br>
+			<br><strong>Example:</strong>
+			<br>done 1</td>
+      <td>d INDEX</td>
+      <td>Marks the specified task as done.</td>
+    </tr>
+     <tr>
+      <td><strong>Edit</strong></td>
+      <td>edit INDEX NAME [r/REMARKS] [s/STARTDATE] [e/ENDDATE] [l/LOCATION] [t/TAG]...
+			<br>
+			<br><strong>Example:</strong>
+			<br>edit 1 s/Friday morning e/friday afternoon</td>
+      <td></td>
+      <td>Edits an existing task.</td>
+    </tr>
+     <tr>
+      <td><strong>Exit</strong></td>
+      <td>exit</td>
+      <td></td>
+      <td>Exits the program.</td>
+    </tr>
+    <tr>
+      <td><strong>Find</strong></td>
+      <td>find KEYWORD...
+			<br>
+			<br><strong>Example:</strong>
+			<br>find meet</td>
+      <td>f KEYWORD...</td>
+      <td>Finds tasks that contains <b>at least one</b> keyword.</td>
+    </tr>
+	<tr>
+      <td><strong>Find Exact</strong></td>
+      <td>findexact KEYWORD...
+			<br>
+			<br><strong>Example:</strong>
+			<br>findexact meet john</td>
+      <td>fexact KEYWORD..., finde KEYWORD..., fe KEYWORD...</td>
+      <td>Finds tasks that contains <b>all<b/> keywords.</td>
+    </tr>
+	<tr>
+      <td><strong>Get Event from Google Calendar</strong></td>
+      <td>getgoogle</td>
+      <td>gg</td>
+      <td>Get upcoming events from your Google Calendar and add them as tasks.</td>
+    </tr>
     <tr>
       <td><strong>Help</strong></td>
-      <td>help</td>
-      <td>h</td>
-      <td>Brings up user guide in another window</td>
+      <td>help [COMMANDNAME]
+			<br>
+			<br><strong>Example:</strong>
+			<br>help add</td>
+      <td>h, man, manual</td>
+      <td>If COMMANDNAME not entered, brings up user guide in another window.
+			<br>If COMMANDNAME entered, shows help message for that command only.</td>
     </tr>
     <tr>
       <td><strong>Help Format</strong></td>
       <td>helpformat</td>
-      <td>helpf, summary, hf</td>
+      <td>helpf, summary, hf, man, manual</td>
       <td>Shows a quick summary of the command formats</td>
     </tr>
-    <tr>
-      <td><strong>Add</strong></td>
-      <td>add NAME [r/REMARKS] [s/STARTDATE] [s/ENDDATE] [l/LOCATION] [t/TAG]... </td>
-      <td>-</td>
-      <td>Adds a task to KIT with specifications from the user.</td>
-    </tr>
+
     <tr>
       <td><strong>List</strong></td>
       <td>list</td>
@@ -165,21 +236,45 @@ tr:last-of-type td:last-child {
     </tr>
     <tr>
       <td><strong>List Tag</strong></td>
-      <td>listtag TAGNAME</td>
+      <td>listtag TAGNAME
+			<br>
+			<br><strong>Example:</strong>
+			<br>listtag work</td>
       <td>listag TAGNAME, ltag TAGNAME, lt TAGNAME</td>
       <td>Lists all tasks of a certain tag.</td>
     </tr>
     <tr>
-      <td><strong>Done</strong></td>
-      <td>done INDEX</td>
-      <td>d INDEX</td>
-      <td>Marks the specified task as done.</td>
+      <td><strong>Load</strong></td>
+      <td>load PATHNAME
+			<br>
+			<br><strong>Example:</strong>
+			<br>load C:/Users/User/Documents/kit.xml</td>
+      <td></td>
+      <td>Loads data from the specified file.</td>
     </tr>
     <tr>
-      <td><strong>Undone</strong></td>
-      <td>undone INDEX</td>
-      <td>notdone INDEX, ud INDEX, nd INDEX</td>
-      <td>Marks the specified task as not done.</td>
+      <td><strong>Post Event to Google Calendar</strong></td>
+      <td>postgoogle INDEX
+			<br>
+			<br><strong>Example:</strong>
+			<br>pg 1</td>
+      <td>pg</td>
+      <td>Posts the specified task to your Google Calendar.</td>
+    </tr>
+    <tr>
+      <td><strong>Redo</strong></td>
+      <td>Redo</td>
+      <td></td>
+      <td>Revert the last undo.</td>
+    </tr>
+    <tr>
+      <td><strong>Save</strong></td>
+      <td>save PATHNAME
+			<br>
+			<br><strong>Example:</strong>
+			<br>save C:/Users/User/Documents/kit.xml</td>
+      <td></td>
+      <td>Saves the file to a specified location.</td>
     </tr>
      <tr>
       <td><strong>Undo</strong></td>
@@ -187,47 +282,14 @@ tr:last-of-type td:last-child {
       <td>uhoh</td>
       <td>Undo the previous command.</td>
     </tr>
-     <tr>
-      <td><strong>Edit</strong></td>
-      <td>edit NAME [r/REMARKS] [s/STARTDATE] [e/ENDDATE] [l/LOCATION] [t/TAG]...</td>
-      <td></td>
-      <td>Edits an existing task.</td>
-    </tr>
     <tr>
-      <td><strong>Find</strong></td>
-      <td>find KEYWORD...</td>
-      <td>f KEYWORD...</td>
-      <td>Finds tasks that contains <b>at least one</b> keyword.</td>
-    </tr>
-	<tr>
-      <td><strong>Find Exact</strong></td>
-      <td>findexact KEYWORD...</td>
-      <td>fexact KEYWORD..., finde KEYWORD..., fe KEYWORD...</td>
-      <td>Finds tasks that contains <b>all<b/> keywords.</td>
-    </tr>
-    <tr>
-      <td><strong>Delete</strong></td>
-      <td>delete INDEX</td>
-      <td></td>
-      <td>Deletes the specified task.</td>
-    </tr>
-     <tr>
-      <td><strong>Clear</strong></td>
-      <td>clear</td>
-      <td></td>
-      <td>Clears all tasks.</td>
-    </tr>
-     <tr>
-      <td><strong>Exit</strong></td>
-      <td>exit</td>
-      <td></td>
-      <td>Exits the program.</td>
-    </tr>
-     <tr>
-      <td><strong>Save</strong></td>
-      <td>save PATHNAME</td>
-      <td></td>
-      <td>Saves the file to a specified location.</td>
+      <td><strong>Undone</strong></td>
+      <td>undone INDEX
+			<br>
+			<br><strong>Example:</strong>
+			<br>undone 1</td>
+      <td>notdone INDEX, ud INDEX, nd INDEX</td>
+      <td>Marks the specified task as not done.</td>
     </tr>
 
   </tbody>

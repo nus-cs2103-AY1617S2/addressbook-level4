@@ -3,7 +3,9 @@ package seedu.task.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.Messages;
+import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
@@ -69,7 +71,9 @@ public class EditCommand extends Command {
         } catch (IllegalValueException ive) {
             throw new CommandException(Task.MESSAGE_TASK_CONSTRAINTS);
         }
-        model.updateFilteredListToShowAll();
+//        model.updateFilteredListToShowAll();
+
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
@@ -133,24 +137,27 @@ public class EditCommand extends Command {
             return name;
         }
 
+        // @@author A0140063X
         public void setStartDate(Optional<Date> startDate) {
-            assert startDate != null;
             this.startDate = startDate;
         }
 
+        // @@author A0140063X
         public Optional<Date> getStartDate() {
             return startDate;
         }
 
+        // @@author A0140063X
         public void setEndDate(Optional<Date> endDate) {
-            assert endDate != null;
             this.endDate = endDate;
         }
 
+        // @@author A0140063X
         public Optional<Date> getEndDate() {
             return endDate;
         }
 
+        // @@author
         public void setRemark(Optional<Remark> remark) {
             assert remark != null;
             this.remark = remark;

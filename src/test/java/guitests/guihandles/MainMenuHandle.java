@@ -21,7 +21,7 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     public HelpWindowHandle openHelpWindowUsingMenu() {
-        clickOn("Help", "F1");
+        clickOn("Help", "Help");
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 

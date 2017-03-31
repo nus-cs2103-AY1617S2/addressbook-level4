@@ -6,7 +6,8 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
-public class UnDoneCommand extends Command {
+    //@@author A0139975J
+public class UndoneCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "undone";
     public static final String COMMAND_WORD_2 = "ud";
@@ -19,12 +20,12 @@ public class UnDoneCommand extends Command {
     public static final String MESSAGE_UNDONE_TASK_SUCCESS = "UnDone Task: %1$s";
 
     public final int targetIndex;
-
-    public UnDoneCommand(int targetIndex) {
+    //@@author A0139975J
+    public UndoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
-
+    //@@author A0139975J
     @Override
     public CommandResult execute() throws CommandException {
 
@@ -41,7 +42,7 @@ public class UnDoneCommand extends Command {
             assert false : "The target task cannot be missing";
         }
 
-        model.updateFilteredListToShowAll();
+//        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, updatedTaskDone));
     }
 

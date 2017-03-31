@@ -78,12 +78,17 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
+    //@@author A0140063X
     public boolean isSameTask(ReadOnlyTask task) {
         List<String> testTag = getTags();
         List<String> taskTag = getTags(task.getTags());
         Collections.sort(testTag);
         Collections.sort(taskTag);
-        return getName().equals(task.getName().fullName)
+        //Split the returned name into two parts, index and name, both as strings
+        //only compare name with name, without index
+        String[] indexAndName = getName().split(" ", 2);
+
+        return indexAndName[1].equals(task.getName().fullName)
                 && (task.getStartDate() == null || getStartDate().equals(task.getStartDate().toString()))
                 && (task.getEndDate() == null || getEndDate().equals(task.getEndDate().toString()))
                 && (task.getRemark() == null || getRemark().equals(task.getRemark().value))
@@ -91,6 +96,7 @@ public class TaskCardHandle extends GuiHandle {
                 && testTag.equals(taskTag);
     }
 
+    //@@author
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {

@@ -34,21 +34,24 @@ public class CollectionUtil {
         return Stream.of(items).anyMatch(Optional::isPresent);
     }
 
+    // @@author A0142487Y
     /**
      * Returns true if the given item is found in the given collection
      *
      */
     public static boolean doesAnyMatch(Collection<?> items, Object item) {
-        return items.stream().anyMatch(s ->  s.equals(item));
+        return items.stream().anyMatch(s -> s.equals(item));
     }
 
+    // @@author A0142487Y
     /*
      * Returns true if the given string is found in the given collection
      */
     public static boolean doesAnyStringMatch(Collection<String> words, String keyword) {
-        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase((String) s, (String) keyword));
+        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase(s, keyword));
     }
 
+    // @@author
     /**
      * Returns true if every element in a collection are unique by
      * {@link Object#equals(Object)}.

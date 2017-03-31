@@ -11,7 +11,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class DeleteCommandParser {
+public class DeleteCommandParser extends CommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand

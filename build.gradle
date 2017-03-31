@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.task.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -63,6 +63,9 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile 'com.google.api-client:google-api-client:1.22.0'
+        compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
+        compile 'com.google.apis:google-api-services-calendar:v3-rev239-1.22.0'
         // https://mvnrepository.com/artifact/org.ocpsoft.prettytime/prettytime
         // http://www.ocpsoft.org/prettytime/
         compile group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.0.Final'
@@ -89,7 +92,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "KIT.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }

@@ -6,17 +6,17 @@ import java.util.Optional;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
-import seedu.task.logic.commands.UnDoneCommand;
+import seedu.task.logic.commands.UndoneCommand;
 
-
-public class EditUnDoneParser {
-
+//@@author A0139975J
+public class UndoneCommandParser extends CommandParser {
+    //@@author A0139975J
     public Command parse(String args) {
         Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnDoneCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE));
         }
 
-        return new UnDoneCommand(index.get());
+        return new UndoneCommand(index.get());
     }
 }
