@@ -7,11 +7,9 @@ import java.util.HashMap;
 
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.ui.QueryUnknownCommandEvent;
-import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
-import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
