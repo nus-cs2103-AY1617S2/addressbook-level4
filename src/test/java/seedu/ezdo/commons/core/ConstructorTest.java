@@ -1,0 +1,28 @@
+package seedu.ezdo.commons.core;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
+import seedu.ezdo.commons.core.LogsCenter;
+import seedu.ezdo.commons.core.Messages;
+import seedu.ezdo.commons.util.CollectionUtil;
+import seedu.ezdo.commons.util.ConfigUtil;
+import seedu.ezdo.commons.util.UrlUtil;
+import seedu.ezdo.logic.parser.CliSyntax;
+import seedu.ezdo.model.util.SampleDataUtil;
+
+public class ConstructorTest {
+
+    @Test
+    public void test() {
+        assertNotNull(new Messages());
+        assertNotNull(new SampleDataUtil());
+        assertNotNull(new ConfigUtil());
+        assertNotNull(new UrlUtil());
+        assertNotNull(new CliSyntax());
+        assertNotNull(new CollectionUtil());
+        assertNotNull(new LogsCenter());
+    }
+
+}
