@@ -36,12 +36,9 @@ public class KillCommandTest extends EzDoGuiTest {
         targetIndex = currentList.length / 2;
         assertKillSuccess(false, targetIndex, currentList);
 
-
-
         //invalid index
         commandBox.runCommand("kill " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid.");
-
     }
 
     /**
