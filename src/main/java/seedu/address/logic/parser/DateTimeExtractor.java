@@ -23,7 +23,9 @@ import seedu.address.model.task.exceptions.PastDateTimeException;
 public class DateTimeExtractor {
     private final Logger logger = LogsCenter.getLogger(DateTimeExtractor.class);
 
-    public static final Pattern HAS_STARTENDATETIME_FORMAT = Pattern.compile(
+    // TODO note that the below formats allow tags to be before from, to and by
+
+    public static final Pattern HAS_STARTENDDATETIME_FORMAT = Pattern.compile(
             // match everything greedily so we can also include any number of [from] and [to]
             ".*"
             // match the final from with spaces to prevent matching words like therefrom and fromage
@@ -50,6 +52,30 @@ public class DateTimeExtractor {
             + "(?<tagArguments>(\\st/[^/]+)*)");
             // match a white space character with zero or one tag;
             // + "(?<tagArguments>(\\stags\\s[^/]+)?)"); // TODO change tag format
+
+    public static final Pattern HAS_STARTDATETIME_FORMAT = Pattern.compile(
+            // match everything greedily so we can also include any number of [from] and [to]
+            ".*"
+            // match the final from with spaces to prevent matching words like therefrom and fromage
+            + "(?<fromArg>\\sfrom\\s)"
+            // now match LAZILY as the next expression that follows is optional
+            + "(?<startDateTime>.+?)"
+            // match a white space character and a tag with zero or more times
+            + "(?<tagArguments>(\\st/[^/]+)*)");
+            // match a white space character with zero or one tag; // TODO change tag format
+            // + "(?<tagArguments>(\\stags\\s[^/]+)?)");
+
+    public static final Pattern HAS_ENDDATETIME_FORMAT = Pattern.compile(
+            // match everything greedily so we can also include any number of [from] and [to]
+            ".*"
+            // match the final to with spaces to prevent matching words like auto and tomorrow
+            + "(?<toArg>\\sto\\s)"
+            // now match LAZILY as the next expression that follows is optional
+            + "(?<endDateTime>.+?)"
+            // match a white space character and a tag with zero or more times
+            + "(?<tagArguments>(\\st/[^/]+)*)");
+            // match a white space character with zero or one tag; // TODO change tag format
+            // + "(?<tagArguments>(\\stags\\s[^/]+)?)");
 
     /**
      * Contains the argument string after processing
@@ -160,7 +186,7 @@ public class DateTimeExtractor {
 
         // TODO add this
         //if (getProcessedDeadline() == null || !getProcessedDeadline().isPresent()) {
-        Matcher matcher = HAS_STARTENDATETIME_FORMAT.matcher(processedArgs);
+        Matcher matcher = HAS_STARTENDDATETIME_FORMAT.matcher(processedArgs);
 
         if (matcher.matches()) {
             logger.info("----------------[PROCESS STARTENDDATETIME][Start:"
@@ -196,7 +222,7 @@ public class DateTimeExtractor {
 
         // TODO add this
         //if (getProcessedDeadline() == null || !getProcessedDeadline().isPresent()) {
-        Matcher matcher = HAS_STARTENDATETIME_FORMAT.matcher(processedArgs);
+        Matcher matcher = HAS_STARTENDDATETIME_FORMAT.matcher(processedArgs);
 
         if (matcher.matches()) {
             final String matchedStartDateTime = matcher.group("startDateTime");
@@ -231,7 +257,86 @@ public class DateTimeExtractor {
             logger.info("----------------[PROCESS RAWSTARTENDDATETIME][No Start and End Date Time found]");
         }
     }
-    // TODO processStartDateTime and processEndDateTime only for special case for EditCommandParser
+    // TODO processRawStartDateTime and processRawEndDateTime only for special case for EditCommandParser
+
+    public void processRawStartDateTime() throws IllegalValueException {
+        // TODO only initialize if haven't initialized
+        if (rawStartDateTime == null) {
+            rawStartDateTime = Optional.empty();
+        }
+
+        // TODO add this
+        //if (getProcessedDeadline() == null || !getProcessedDeadline().isPresent()) {
+        Matcher matcher = HAS_STARTDATETIME_FORMAT.matcher(processedArgs);
+
+        if (matcher.matches()) {
+            final String matchedStartDateTime = matcher.group("startDateTime");
+            logger.info("----------------[PROCESS RAWSTARTDATETIME][Start:"
+                    + matchedStartDateTime + "]");
+            if (!ParserUtil.isDateTimeString(matchedStartDateTime)) {
+                return;
+            }
+            rawStartDateTime = Optional.of(matchedStartDateTime);
+            // TODO whether the comment about past date time still need to be kept
+            // since we don't actually know the date or time we don't know if it is past date yet
+            // so no need to construct StartEndDateTime or check if it is past date
+            // no InvalidDurationException as well
+            // NO new StartEndDateTime();
+
+            // assuming that rawStart and end will result into not a past date time and invaliddurationexception
+            // but past date times don't pass through anyway later on even with this "wrong" processedArgs
+            // because exceptions will be thrown later
+            processedArgs =
+                    new StringBuilder(processedArgs).replace(matcher.start("fromArg"),
+                            matcher.end("startDateTime"), "").toString();
+            // there will be extra whitespaces after extracting out the start and end date
+            // e.g. meeting from Wednesday to Thursday t/tag => meeting from t/tag
+            // so we will normalize the whitespace
+            processedArgs = StringUtils.normalizeSpace(processedArgs);
+        } else {
+            logger.info("----------------[PROCESS RAWSTARTDATETIME][No Start Time found]");
+        }
+    }
+
+    public void processRawEndDateTime() throws IllegalValueException {
+        // TODO only initialize if haven't initialized
+        if (rawEndDateTime == null) {
+            rawEndDateTime = Optional.empty();
+        }
+
+        // TODO add this
+        //if (getProcessedDeadline() == null || !getProcessedDeadline().isPresent()) {
+        Matcher matcher = HAS_ENDDATETIME_FORMAT.matcher(processedArgs);
+
+        if (matcher.matches()) {
+            final String matchedEndDateTime = matcher.group("endDateTime");
+            logger.info("----------------[PROCESS RAWENDDATETIME][End:"
+                    + matchedEndDateTime + "]");
+            if (!ParserUtil.isDateTimeString(matchedEndDateTime)) {
+                return;
+            }
+            rawEndDateTime = Optional.of(matchedEndDateTime);
+            // TODO whether the comment about past date time still need to be kept
+            // since we don't actually know the date or time we don't know if it is past date yet
+            // so no need to construct StartEndDateTime or check if it is past date
+            // no InvalidDurationException as well
+            // NO new StartEndDateTime();
+
+            // assuming that rawStart and end will result into not a past date time and invaliddurationexception
+            // but past date times don't pass through anyway later on even with this "wrong" processedArgs
+            // because exceptions will be thrown later
+            processedArgs =
+                    new StringBuilder(processedArgs).replace(matcher.start("toArg"),
+                            matcher.end("endDateTime"), "").toString();
+            // there will be extra whitespaces after extracting out the start and end date
+            // e.g. meeting from Wednesday to Thursday t/tag => meeting from t/tag
+            // so we will normalize the whitespace
+            processedArgs = StringUtils.normalizeSpace(processedArgs);
+        } else {
+            logger.info("----------------[PROCESS RAWENDDATETIME][No Start Time found]");
+        }
+
+    }
 
     /**
      * Returns the argument after processing
@@ -274,5 +379,4 @@ public class DateTimeExtractor {
     public Optional<String> getProcessedEndDateTime() {
         return rawEndDateTime;
     }
-
 }

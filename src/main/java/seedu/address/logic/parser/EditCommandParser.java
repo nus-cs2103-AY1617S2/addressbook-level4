@@ -52,6 +52,22 @@ public class EditCommandParser {
             // No date is found so we silently skip
             System.out.println("No date found for deadline!");
         }
+        // TODO process from later
+        // because for example edit 10 test by 2 days from 25 Apr
+        // note again that edit 10 test by 2 days later from 25 Apr will ignore the from later
+        try {
+            dateTimeExtractor.processRawStartDateTime();
+        } catch (IllegalValueException e) {
+            // No date is found so we silently skip
+            System.out.println("No date found for start date only!");
+        }
+        // TODO process to later because it is even shorter
+        try {
+            dateTimeExtractor.processRawEndDateTime();
+        } catch (IllegalValueException e) {
+            // No date is found so we silently skip
+            System.out.println("No date found for start date only!");
+        }
 
         // TODO ArgumentTokenizer became very irrelevant in this class but is it still relevant for other classes?
         ArgumentTokenizer argsTokenizer =
