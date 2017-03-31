@@ -1,3 +1,4 @@
+/*@@author A0115959R*/
 package seedu.bulletjournal.logic.parser;
 
 import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -7,8 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.bulletjournal.logic.commands.AddCommand;
-import seedu.bulletjournal.logic.commands.AddCommandDeadline;
-import seedu.bulletjournal.logic.commands.AddCommandFloating;
+import seedu.bulletjournal.logic.commands.ChangePathCommand;
 import seedu.bulletjournal.logic.commands.ClearCommand;
 import seedu.bulletjournal.logic.commands.Command;
 import seedu.bulletjournal.logic.commands.DeleteCommand;
@@ -52,12 +52,6 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case AddCommandFloating.COMMAND_WORD:
-            return new AddCommandParserFloating().parse(arguments);
-
-        case AddCommandDeadline.COMMAND_WORD:
-            return new AddCommandParserDeadline().parse(arguments);
-
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -84,6 +78,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ChangePathCommand.COMMAND_WORD:
+            return new ChangePathCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
