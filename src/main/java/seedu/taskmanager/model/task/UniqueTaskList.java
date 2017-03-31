@@ -186,7 +186,9 @@ public class UniqueTaskList implements Iterable<Task> {
                         return t1.getStartDate().get().compareTo(t2.getStartDate().get());
                     }
                     // @@author A0140032E
-                    if (t2.getStartDate().isPresent()) {
+                    if (!t1.getStartDate().isPresent() && !t2.getStartDate().isPresent()) {
+                        return 0;
+                    } else if (t1.getStartDate().isPresent()) {
                         return -1;
                     } else {
                         return 1;
@@ -203,7 +205,9 @@ public class UniqueTaskList implements Iterable<Task> {
                         return t1.getEndDate().get().compareTo(t2.getEndDate().get());
                     }
                     // @@author A0140032E
-                    if (t2.getEndDate().isPresent()) {
+                    if (!t1.getEndDate().isPresent() && !t2.getEndDate().isPresent()) {
+                        return 0;
+                    } else if (t1.getEndDate().isPresent()) {
                         return -1;
                     } else {
                         return 1;
