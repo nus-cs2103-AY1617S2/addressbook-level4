@@ -13,9 +13,9 @@
 
 <HBox id="cardPane" fx:id="cardPane" maxHeight="110.0" maxWidth="500.0" minWidth="500.0" style="-fx-border-color: black; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <FlowPane fx:id="overdueTag" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+      <FlowPane fx:id="overdueTag" HBox.hgrow="ALWAYS">
          <children>
-            <TitledPane maxWidth="500.0" minWidth="490.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css" wrapText="true">
+            <TitledPane expanded="false" maxWidth="500.0" minWidth="490.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css" wrapText="true">
                <content>
                     <GridPane maxHeight="60.0" maxWidth="420.0" minHeight="60.0" minWidth="420.0">
                         <columnConstraints>
