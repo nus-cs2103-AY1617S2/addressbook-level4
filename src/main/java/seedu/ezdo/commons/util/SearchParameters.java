@@ -3,15 +3,14 @@ package seedu.ezdo.commons.util;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Priority;
-import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.model.todo.TaskDate;
 
 public class SearchParameters {
 	private Set<String> namesToCompare;
 	private Optional<Priority> priorityToCompare;
-	private Optional<StartDate> startDateToCompare;
-	private Optional<DueDate> dueDateToCompare;
+	private Optional<TaskDate> startDateToCompare;
+	private Optional<TaskDate> dueDateToCompare;
 	private Set<String> tagsToCompare;
 	private boolean startBefore = false;
 	private boolean dueBefore = false;
@@ -26,11 +25,11 @@ public class SearchParameters {
 		return priorityToCompare;
 	}
 
-	public Optional<StartDate> getStartDate() {
+	public Optional<TaskDate> getStartDate() {
 		return startDateToCompare;
 	}
 
-	public Optional<DueDate> getDueDate() {
+	public Optional<TaskDate> getDueDate() {
 		return dueDateToCompare;
 	}
 
@@ -58,21 +57,41 @@ public class SearchParameters {
 		// required parameters
 		private Set<String> namesToCompare;
 		private Optional<Priority> priorityToCompare;
-		private Optional<StartDate> startDateToCompare;
-		private Optional<DueDate> dueDateToCompare;
+		private Optional<TaskDate> startDateToCompare;
+		private Optional<TaskDate> dueDateToCompare;
 		private Set<String> tagsToCompare;
 		private boolean startBefore = false;
 		private boolean dueBefore = false;
 		private boolean startAfter = false;
 		private boolean dueAfter = false;
 
-		public Builder(Set<String> names, Optional<Priority> priority, Optional<StartDate> startDate,
-	    		 Optional<DueDate> dueDate, Set<String> tags) {  
-	       this.namesToCompare = names;  
-	       this.priorityToCompare = priority;
-	       this.startDateToCompare = startDate;
-	       this.dueDateToCompare = dueDate;
-	       this.tagsToCompare = tags;
+		public Builder() {  
+
+		}
+
+		public Builder name(Set<String> names) {
+			namesToCompare = names;
+			return this;
+		}
+
+		public Builder priority(Optional<Priority> priority) {
+			priorityToCompare = priority;
+			return this;
+		}
+
+		public Builder startDate(Optional<TaskDate> findStartDate) {
+			startDateToCompare = findStartDate;
+			return this;
+		}
+
+		public Builder dueDate(Optional<TaskDate> dueDate) {
+			dueDateToCompare = dueDate;
+			return this;
+		}
+
+		public Builder tags(Set<String> tags) {
+			tagsToCompare = tags;
+			return this;
 		}
 
 		public Builder startBefore(boolean before) {
