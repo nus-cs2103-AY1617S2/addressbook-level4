@@ -36,7 +36,7 @@
     -fx-text-fill: #000000;
     -fx-opacity: 1;
     -fx-underline: true;
-    
+
 }
 
 .text-field {
@@ -135,7 +135,7 @@
 .anchor-pane {
      -fx-background-color: derive(#000000, 100%);
      -fx-alignment: center-left;
-        
+
 }
 
 .anchor-pane-with-border {

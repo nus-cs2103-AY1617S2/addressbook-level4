@@ -19,7 +19,7 @@
 /**Group 0 for events */
 .group0{
     -fx-background-color: #ecf0f1;
-    -fx-fill: transparent; 
+    -fx-fill: transparent;
     -fx-text-fill: white;
     -fx-font-family: "Montserrat_Light";
     -fx-border-width: 5px 0px 5px 0px;
@@ -27,14 +27,14 @@
 }
 
 /**Group 1 for deadlines and tasks */
-.group12{ 
+.group12{
     -fx-background-color:#ecf0f1 ;
-    -fx-fill: transparent; 
+    -fx-fill: transparent;
     -fx-text-fill: white;
     -fx-font-family: "Montserrat_Light";
     -fx-border-width: 5px 0px 5px 0px;
     -fx-border-color: #6DC066;
-    
+
 }
 
 .anchor-pane{
@@ -56,7 +56,7 @@
 }
 
 
-.Agenda .Selected { 
+.Agenda .Selected {
     -xfx-color: -fx-focused-base;
     -fx-background-color: #FFF68F, -fx-outer-border, -fx-inner-border, #FFF68F;
     -fx-background-insets: -1.4, 0, 1, 2;
