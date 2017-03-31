@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -7,6 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
+import seedu.task.commons.core.History;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.FilePathChangedEvent;
@@ -16,9 +18,11 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.model.task.Date;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -30,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final History history;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -43,38 +48,43 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+
+        this.history = History.getInstance();
     }
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
 
+    //@@author A0140063X
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    /**
-     * undo should not update kit.xml
-     */
+    //@@author A0140063X
     @Override
-    public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
+    public void loadData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
-        indicateTaskManagerChanged(false);
+        raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
+    //@@author A0140063X
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
+    //@@author A0140063X
     /** Raises an event to indicate the model has changed
-     * @param shouldBackup */
-    private void indicateTaskManagerChanged(boolean shouldBackup) {
-        raise(new TaskManagerChangedEvent(taskManager, shouldBackup));
+     * @param backupFilePath */
+    private void indicateTaskManagerChanged(String backupFilePath) {
+        history.handleTaskManagerChanged(backupFilePath);
+        raise(new TaskManagerChangedEvent(taskManager, backupFilePath));
     }
 
+    //@@author
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
         raise(new FilePathChangedEvent(newPath, taskManager));
@@ -88,30 +98,46 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
-
+    //@@author A0139975J
     @Override
     public synchronized void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
         taskManager.updateDone(taskManagerIndex, target);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
-
+    //@@author A0139975J
     @Override
     public synchronized void unDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
         taskManager.updateUnDone(taskManagerIndex, target);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTaskToFront(task);
         updateFilteredListToShowAll();
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
+    //@@author A0140063X
+    @Override
+    public void addMultipleTasks(ArrayList<Task> tasks) {
+        for (Task task : tasks) {
+            try {
+                taskManager.addTaskToFront(task);
+            } catch (DuplicateTaskException e) {
+                logger.info("Duplicate task " + task.getName() + " from google calendar not added.");
+            }
+        }
+
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged(history.getBackupFilePath());
+    }
+
+    //@@author
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws IllegalValueException {
@@ -119,26 +145,26 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        indicateTaskManagerChanged(true);
+        indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     @Override
     public void sortTaskList() {
         taskManager.sortTaskList();
-        indicateTaskManagerChanged(false);
+        indicateTaskManagerChanged("");
     }
-
 
     @Override
     public void changeFilePath(String newPath) {
         indicateFilePathChanged(newPath);
-        indicateTaskManagerChanged(false);
+        indicateTaskManagerChanged("");
     }
 
     @Override
     public void loadFromLocation(String loadPath) {
         indicateLoadChanged(loadPath);
     }
+
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -166,10 +192,17 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(String keyword) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keyword)));
     }
-
+    //@@author A0139975J-reused
     @Override
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
+    }
+
+    //@@author A0139975J-reused
+    @Override
+    public void updateFilteredTaskList(Date date) {
+        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -183,6 +216,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         String toString();
     }
+
 
     private class PredicateExpression implements Expression {
 
@@ -209,22 +243,27 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+  //@@author A0142487Y
     private class NameQualifier implements Qualifier {
         private boolean isExact = false;
-        private Set<String> nameKeyWords;
+        private Set<String> keyWords;
 
-        NameQualifier(Set<String> nameKeyWords, boolean isExact) {
+        NameQualifier(Set<String> keyWords, boolean isExact) {
             this.isExact = isExact;
-            this.nameKeyWords = nameKeyWords;
+            this.keyWords = keyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
             if (isExact) {
-                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, nameKeyWords);
+                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keyWords)
+                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords);
             } else {
-                return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
+                return keyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
+                            || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
+                            || StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
+                            || StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword))
                     .findAny()
                     .isPresent();
             }
@@ -232,10 +271,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "name=" + String.join(", ", keyWords);
         }
     }
 
+  //@@author A0142487Y-reused
     private class TagQualifier implements Qualifier {
 
         private String tagKeyWord;
@@ -255,14 +295,35 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author
+    private class DateQualifier implements Qualifier {
+
+        private Date date;
+
+        //@@author A0139975J
+        DateQualifier(Date date) {
+            this.date = date;
+        }
+
+        //@@author A0139975J
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     private class DoneQualifier implements Qualifier {
 
         private boolean value;
-
+        //@@author A0139975J
         DoneQualifier(boolean value) {
             this.value = value;
         }
-
+        //@@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
             if (this.value  & task.isDone()) {
@@ -276,6 +337,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author
     @Override
     @Subscribe
     public void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event) {

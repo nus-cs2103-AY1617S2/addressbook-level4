@@ -1,8 +1,7 @@
 package seedu.task.testutil;
 
 import java.util.ArrayList;
-
-import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
+import java.util.Arrays;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskManager;
@@ -82,14 +81,7 @@ public class TypicalTestTasks {
         //, handle, identify, jump , kick, look, mark, neglect   manually added tasks,
         //that cause errors because of empty fields
 
-        ArrayList<TestTask> typicalTaskList = new ArrayList<>();
-        for (TestTask t : typicalTasks) {
-            typicalTaskList.add(t);
-        }
-        Collections.sort(typicalTaskList);
-        for (int i = 0; i < typicalTasks.length; i++) {
-            typicalTasks[i] = typicalTaskList.get(i);
-        }
+        Arrays.sort(typicalTasks);
         return typicalTasks;
     }
 

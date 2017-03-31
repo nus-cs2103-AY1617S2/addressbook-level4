@@ -66,7 +66,8 @@ public class GuiHandle {
         guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
     }
 
-    public void pressEnter() {
+    public void pressEnter(String textFieldId) {
+        guiRobot.clickOn(textFieldId);
         guiRobot.type(KeyCode.ENTER).sleep(500);
     }
 

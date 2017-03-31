@@ -1,8 +1,13 @@
 package seedu.task.commons.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+
+import javax.xml.bind.JAXBException;
+
+import seedu.task.storage.XmlSerializableTaskManager;
 
 /**
  * Writes and reads files
@@ -20,6 +25,24 @@ public class FileUtil {
             createFile(file);
         }
     }
+
+    //@@author A0142939W
+    public static boolean isFileDirectory(File file) {
+        return file.isDirectory();
+    }
+
+    public static boolean isFileFormatCorrect(File file) {
+        assert file != null;
+        try {
+            XmlUtil.getDataFromFile(file, XmlSerializableTaskManager.class);
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (JAXBException e) {
+            return false;
+        }
+    }
+    //@@author
 
     /**
      * Creates a file if it does not exist along with its missing parent directories

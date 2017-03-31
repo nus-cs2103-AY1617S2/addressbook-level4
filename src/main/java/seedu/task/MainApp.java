@@ -12,9 +12,11 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.core.History;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.events.storage.UpdateUserPrefsEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
@@ -47,7 +49,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    protected History history;
 
     @Override
     public void init() throws Exception {
@@ -68,11 +70,20 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+        initHistory();
 
-        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(model.getTaskManager(), true));
         logic.execute(ListByNotDoneCommand.COMMAND_WORD_1);
     }
 
+    // @@author A0140063X
+    private void initHistory() {
+        this.history = History.getInstance();
+
+        TaskManagerChangedEvent tmce = new TaskManagerChangedEvent(model.getTaskManager(), "");
+        storage.handleTaskManagerChangedEvent(tmce);
+    }
+
+    // @@author
     private String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
@@ -119,12 +130,13 @@ public class MainApp extends Application {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
-                    "Using default config properties");
+            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
+                    + "Using default config properties");
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -141,6 +153,7 @@ public class MainApp extends Application {
         }
     }
 
+    // @@author A0142487Y-reused
     protected UserPrefs initPrefs(Config config) {
         assert config != null;
 
@@ -152,15 +165,16 @@ public class MainApp extends Application {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
-            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
-                    "Using default user prefs");
+            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
@@ -170,6 +184,7 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
+    // @@author
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
@@ -193,6 +208,14 @@ public class MainApp extends Application {
         System.exit(0);
     }
 
+    // @@author A0142487Y
+    @Subscribe
+    public void handleUpdateUserPrefsEvent(UpdateUserPrefsEvent event) {
+        userPrefs = event.getUserPrefs();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "New user preference handled, saving to file"));
+    }
+
+    // @@author
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

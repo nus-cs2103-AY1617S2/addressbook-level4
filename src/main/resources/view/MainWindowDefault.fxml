@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                  <MenuItem fx:id="helpFormatMenuItem" mnemonicParsing="false" onAction="#handleHelpFormat" text="Summary" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Shortcut">
+              <items>
+                <MenuItem fx:id="quickAddMenuItem" mnemonicParsing="false" onAction="#handleAdd" text="Quick Add" />
+                  <MenuItem fx:id="quickUndoMenuItem" mnemonicParsing="false" onAction="#handleUndo" text="Quick Undo" />
+                  <MenuItem fx:id="quickDoneMenuItem" mnemonicParsing="false" onAction="#handleDone" text="Quick Done" />
+                  <MenuItem fx:id="quickEditMenuItem" mnemonicParsing="false" onAction="#handleEdit" text="Quick Edit" />
+                  <MenuItem fx:id="quickSelectMenuItem" mnemonicParsing="false" onAction="#handleSelect" text="Quick Select" />
+                  <MenuItem fx:id="quickSaveMenuItem" mnemonicParsing="false" onAction="#handleSave" text="Quick Save" />
+                  <MenuItem fx:id="quickLoadMenuItem" mnemonicParsing="false" onAction="#handleLoad" text="Quick Load" />
+                  <MenuItem fx:id="quickScrollDownMenuItem" mnemonicParsing="false" onAction="#handleScrollDown" text="Quick Scroll Down" />
+                  <MenuItem fx:id="quickScrollUpMenuItem" mnemonicParsing="false" onAction="#handleScrollUp" text="Quick Scroll Up" />
+              </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </AnchorPane>
+       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+           <padding>
+               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+           </padding>
+       </AnchorPane>
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+         <items>
+            <VBox fx:id="taskList" minWidth="340" prefWidth="340">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+               <children>
+                  <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <AnchorPane fx:id="browserPlaceholder" prefWidth="340">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10" />
+                </padding>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+   </children>
+   <stylesheets>
+      <URL value="@Extensions.css" />
+      <URL value="@DefaultTheme.css" />
+   </stylesheets>
+</VBox>

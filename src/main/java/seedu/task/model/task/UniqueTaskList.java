@@ -78,13 +78,13 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskToUpdate);
 
     }
-
+    //@@author A0139975J
     public void done(int index) {
         Task taskDone = internalList.get(index);
         taskDone.setIsDone(true);
         internalList.set(index, taskDone);
     }
-
+    //@@author A0139975J
     public void undone(int index) {
         Task taskUnDone = internalList.get(index);
         taskUnDone.setIsDone(false);
@@ -126,6 +126,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.iterator();
     }
 
+    //@@author A0140063X
     @Override
     public boolean equals(Object other) {
         ObservableList<Task> list1 = this.internalList;
@@ -138,6 +139,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 ((UniqueTaskList) other).internalList));
     }
 
+    //@@author
     @Override
     public int hashCode() {
         return internalList.hashCode();
@@ -159,7 +161,6 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {}
 
     public void sort() {
-        // TODO Auto-generated method stub
         FXCollections.sort(internalList, new TaskComparator());
     }
 

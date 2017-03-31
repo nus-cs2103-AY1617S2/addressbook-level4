@@ -42,6 +42,25 @@ public class StringUtil {
     }
 
     /**
+     *
+     * Returns true if the {@code sentence} contains the {@code word}
+     * Ignores cases, does not have to be full word match
+     * @param sentence
+     * @param word
+     * @return
+     */
+    public static boolean containsSubstringIgnoreCase(String sentence, String word) {
+        assert word != null : "Word parameter cannot be null";
+        assert sentence != null : "Sentence parameter cannot be null";
+
+        String preppedWord = word.trim();
+        assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
+        assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
+
+        return sentence.toLowerCase().contains(word.toLowerCase());
+    }
+
+    /**
      * Returns true if the {@code sentence} contains the {@code keywords}.
      *   Ignores case, but a full word match is required for each keyword.
      * @param sentence cannot be null
@@ -49,6 +68,8 @@ public class StringUtil {
      */
     public static boolean containsExactWordsIgnoreCase(String sentence, Set<String> keywords) {
 
+        assert keywords != null : "Word parameter cannot be null";
+        assert sentence != null : "Sentence parameter cannot be null";
         String lowerCaseSentence = sentence.toLowerCase();
         Set<String> lowerCaseKeywords = new HashSet<>(keywords.size());
         for (String s : keywords) {

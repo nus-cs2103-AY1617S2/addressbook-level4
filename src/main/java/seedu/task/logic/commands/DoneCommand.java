@@ -19,12 +19,12 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Done Task: %1$s";
 
     public final int targetIndex;
-
+    //@@author A0139975J
     public DoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
-
+    //@@author A0139975J
     @Override
     public CommandResult execute() throws CommandException {
 
@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
             assert false : "The target task cannot be missing";
         }
 
-        model.updateFilteredListToShowAll();
+//        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, updatedTaskDone));
     }
 

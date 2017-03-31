@@ -15,26 +15,44 @@ import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.model.task.ReadOnlyTask;
 
-
 /**
  * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
+    protected Theme theme = Theme.Default;
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML = "TaskListPanel.fxml";
+    private static final String FXML = "TaskListPanelDefault.fxml";
+    protected static final String FXML_Light = "TaskListPanelLight.fxml";
+    protected static final String FXML_Dark = "TaskListPanelDark.fxml";
+
+    private TaskCard [] cardlist = new TaskCard [1000];
+
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
+        //System.out.println("print");
+        setConnections(taskList);
+        addToPlaceholder(taskListPlaceholder);
+    }
+  //@@author A0142487Y-reused
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, String fxml,
+            Theme theme) {
+        super(fxml);
+        this.theme = theme;
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
+    //@@author
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
+        //System.out.println("when pass");
+        //cardlist = new ArrayList<TaskCard>();
         taskListView.setCellFactory(listView -> new TaskListViewCell());
+
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -45,24 +63,42 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new TaskPanelSelectionChangedEvent(newValue));
-                    }
-                });
+        taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                raise(new TaskPanelSelectionChangedEvent(newValue));
+            }
+        });
     }
 
+    //@@author A0139975J
     public void scrollTo(int index) {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
+            if (cardlist[index + 1].expendStatus()) {
+                cardlist[index + 1].setExpend(false);
+            } else {
+                cardlist[index + 1].setExpend(true);
+            }
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
+    //@@author A0142939W
+    public void scrollDown(Scroll scroll) {
+        scroll = new Scroll();
+        scroll.scrollDown(taskListView);
+    }
+
+    //@@author A0142939W
+    public void scrollUp(Scroll scroll) {
+        scroll = new Scroll();
+        scroll.scrollUp(taskListView);
+    }
+
+    class TaskListViewCell extends ListCell<ReadOnlyTask> {
+        //@@author A0139975J-reused
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
@@ -71,7 +107,20 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                TaskCard taskcard = null;
+                switch (TaskListPanel.this.theme) {
+                case Dark:
+                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_Dark);
+                    break;
+                case Light:
+                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_Light);
+                    break;
+                default:
+                    taskcard = new TaskCard(task, getIndex() + 1);
+                }
+                setGraphic(taskcard.getRoot());
+                cardlist[getIndex() + 1] = (taskcard);
+
             }
         }
     }

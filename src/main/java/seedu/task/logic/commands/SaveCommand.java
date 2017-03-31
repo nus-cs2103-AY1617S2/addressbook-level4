@@ -2,16 +2,19 @@ package seedu.task.logic.commands;
 
 import java.io.File;
 
+import seedu.task.commons.util.FileUtil;
+
+//@@author A0142939W
 /**
  * Saves task manager in a different directory.
  */
 public class SaveCommand extends Command {
 
-    public static final String COMMAND_WORD = "save";
+    public static final String COMMAND_WORD_1 = "save";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves the task manager in a different directory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Saves the task manager in a different directory. "
             + "Parameters: PATHNAME \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD_1
             + " ";
 
     public static final String MESSAGE_SUCCESS = "File save at: %1$s";
@@ -29,9 +32,11 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() {
         File file = new File(pathName);
-        if (file.isDirectory()) {
+
+        if (FileUtil.isFileDirectory(file)) {
             return new CommandResult(String.format(MESSAGE_FAILURE_DIRECTORY, pathName));
         }
+
         model.changeFilePath(pathName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, pathName));
     }

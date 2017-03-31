@@ -302,7 +302,7 @@ One of the design we considered for undo involves the Command pattern. The idea 
 
 When undo command is called, it can obtain the latest command from History and invoke it's undo method. An undo call is simple with this design, however each current Command and every new Command needs it's own individual implementation of undo method.
 
-The alternate design, which was implemented, involves storing a backup file. This makes use of how every command that modifies data will invoke an automatic save to kit.xml. Before the data is saved, a backup is saved. Undo command now simply loads the backup into memory. Future commands can also support undo easily as they do not need to implmennt any new methods.
+The alternate design, which was implemented, involves storing a backup file. This makes use of how every command that modifies data will invoke an automatic save to kit.xml. Before the data is saved, a backup is saved. Undo command now simply loads the backup into memory. Future commands can also support undo easily as they do not need to implement any new methods.
 
 The downside is the extra storage space used. To reduce the downside, the backup file is deleted everytime the program closes. The backup file thus functions as a temporary file.
 
@@ -455,10 +455,9 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
-| Priority | As a user I want to ... | So that I can... |
-| -------- | :-------- | :--------- | :----------- |
-| `* * *` | see usage instructions | know how to use the commands |
+| Priority | As a user I want to ... | So that I can...
+| -------- | :-------- | :---------
+| `* * *` | see usage instructions | know how to use the commands
 | `* * *` | add a new task without deadlines | plan for the future
 | `* * *` | add a new task with deadline | know when my task is due
 | `* * *` | add a new task with start and end time | fit it into my calendar
@@ -480,7 +479,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 | `* *` | list task in sorted order | plan my time
 | `* *` | list task by due date | see which task are most urgent
 | `* *` | mark a task as not done | undone a done task
-
 
 ## Appendix B : Use Cases
 (For all use cases below, the **System** is the `KIT` and the **Actor** is the `user`, unless specified otherwise)

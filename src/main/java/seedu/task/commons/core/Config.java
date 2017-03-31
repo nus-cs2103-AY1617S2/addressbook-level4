@@ -46,9 +46,11 @@ public class Config {
         return taskManagerFilePath;
     }
 
+    //@@author A0142939W
     public void setTaskManagerFilePath(String taskManagerFilePath) {
         this.taskManagerFilePath = taskManagerFilePath;
     }
+    //@@author
 
     public String getTaskManagerName() {
         return taskManagerName;
@@ -57,7 +59,6 @@ public class Config {
     public void setTaskManagerName(String taskManagerName) {
         this.taskManagerName = taskManagerName;
     }
-
 
     @Override
     public boolean equals(Object other) {

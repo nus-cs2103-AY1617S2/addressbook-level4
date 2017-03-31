@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0142487Y-reused -->
+<?import java.net.URL?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@Extensions.css" />
+        <URL value="@DarkTheme.css" />
+    </stylesheets>
+    <children>
+        <ListView fx:id="taskListView" styleClass="background" VBox.vgrow="ALWAYS">
+         <stylesheets>
+            <URL value="@DarkTheme.css" />
+            <URL value="@Extensions.css" />
+         </stylesheets></ListView>
+    </children>
+</VBox>

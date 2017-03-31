@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0142487Y-reused -->
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+            </columnConstraints>
+            <children>
+            <TitledPane fx:id="plane">
+               <content>
+                      <VBox alignment="CENTER_LEFT" minHeight="105.0" styleClass="V-box">
+                          <padding>
+                              <Insets bottom="5" left="15" right="5" top="5" />
+                          </padding>
+
+                                <children>
+                              <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
+                              <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
+                              <Label fx:id="loc" styleClass="cell_small_label" text="\$loc" />
+                              <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+                          </children>
+                      </VBox>
+               </content>
+               <graphic>
+                  <HBox>
+                     <children>
+                        <Label fx:id="name" text="\$title" />
+                              <FlowPane fx:id="tags" styleClass="content">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></FlowPane>
+                     </children>
+                  </HBox>
+               </graphic>
+            </TitledPane>
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </children>
+   <stylesheets>
+      <URL value="@LightTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
+</HBox>

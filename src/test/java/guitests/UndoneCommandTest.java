@@ -1,6 +1,6 @@
 package guitests;
 
-import static seedu.task.logic.commands.UnDoneCommand.MESSAGE_UNDONE_TASK_SUCCESS;
+import static seedu.task.logic.commands.UndoneCommand.MESSAGE_UNDONE_TASK_SUCCESS;
 
 import org.junit.Test;
 

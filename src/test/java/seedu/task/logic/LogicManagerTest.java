@@ -67,17 +67,17 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
+    public void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
         latestSavedTaskManager = new TaskManager(abce.data);
     }
 
     @Subscribe
-    private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
+    public void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
         helpShown = true;
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
+    public void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
         targetedJumpIndex = je.targetIndex;
     }
 
@@ -201,8 +201,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] s/6789 e/12345 r/validRemark l/valid, address",
-                Name.MESSAGE_NAME_CONSTRAINTS);
+//        assertCommandFailure("add []\\[;] s/6789 e/12345 r/validRemark l/valid, address",
+//                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name s/not_numbers e/not_numbers r/validRemark l/valid, address",
                 Date.MESSAGE_DATE_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/12345 r/notAnEmail a/valid, address",
@@ -356,17 +356,19 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    //@@author A0140063X
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task tTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task t1 = helper.generateTaskWithName("KE Y");
-        Task t2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task shouldBeFoundTask1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task shouldBeFoundTask2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task shouldBeFoundTask3 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task shouldNotBeFoundTask = helper.generateTaskWithName("KE Y");
 
-        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
+        List<Task> fourTasks = helper.generateTaskList(shouldBeFoundTask1, shouldBeFoundTask2,
+                shouldBeFoundTask3, shouldNotBeFoundTask);
         TaskManager expectedTM = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2);
+        List<Task> expectedList = helper.generateTaskList(shouldBeFoundTask1, shouldBeFoundTask2, shouldBeFoundTask3);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
@@ -375,6 +377,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    //@@author
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
