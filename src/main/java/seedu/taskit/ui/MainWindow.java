@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -39,7 +40,7 @@ public class MainWindow extends UiPart<Region> {
     private static final short INDEX_RECURRING = 4;
     private static final short INDEX_HELP = 5;
     
-    private static final List<String> TABS = Arrays.asList(new String[]{ "Home", "Task", "Event", "Deadline", "Recurring"});
+    private static final List<String> TABS = Arrays.asList(new String[]{ "Home", "Floating Task", "Event", "Deadline", "Overdue"});
 
     private Stage primaryStage;
     private Logic logic;
@@ -57,6 +58,25 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem helpMenuItem;
+    
+    @FXML
+    private TabPane tabPane;
+    
+    @FXML
+    private AnchorPane floatingTaskViewPlaceholder;
+    private FloatingTaskWindow tasksView;
+
+    @FXML
+    private AnchorPane eventTaskViewPlaceholder;
+    private EventTaskWindow eventsView;
+
+    @FXML
+    private AnchorPane deadlineTasksViewPlaceholder;
+    private DeadlineTaskWindow deadlineTasksView;
+
+    @FXML
+    private AnchorPane overdueTasksViewPlaceholder;
+    private OverdueTaskWindow overdueTasksView;
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
