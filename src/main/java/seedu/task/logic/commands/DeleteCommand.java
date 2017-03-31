@@ -12,6 +12,7 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD_REC = "deletethis";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
@@ -21,9 +22,11 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     public final int targetIndex;
+    //    public final boolean isSpecific;
 
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
+        //        this.isSpecific = isSpecific;
     }
 
 
@@ -38,12 +41,19 @@ public class DeleteCommand extends Command {
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
+        //        if (isSpecific) {
+        //            if (taskToDelete.getOccurrenceIndexList().size() == 0) {
+        //                taskToDelete.getOccurrenceIndexList().add(0);
+        //            }
+        //            int occurrenceIndex = taskToDelete.getOccurrenceIndexList().get(0);
+        //            taskToDelete.removeOccurrence(occurrenceIndex);
+        //        }
+
         try {
             model.deleteTask(taskToDelete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
-
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 

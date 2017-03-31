@@ -56,6 +56,7 @@ public class EditCommand extends Command {
         this.isSpecific = isSpecific;
     }
 
+    //@@author A0164212U
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -90,6 +91,8 @@ public class EditCommand extends Command {
             newTask.getStartTiming().setTiming(newTask.getStartTiming().toString());
             newTask.getEndTiming().setTiming(newTask.getEndTiming().toString());
             taskToEdit.removeOccurrence(occurrenceIndex);
+            occurrenceIndex--;
+            taskToEdit.getOccurrenceIndexList().set(0, occurrenceIndex);
             try {
                 model.addTask(newTask);
             } catch (DuplicateTaskException e) {
@@ -103,18 +106,21 @@ public class EditCommand extends Command {
         try {
             if (isSpecific) {
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
+                int newIndex = model.getFilteredTaskList().indexOf(newTask);
+                System.out.println(newIndex);
+                model.updateTask(newIndex, editedTask);
             } else {
                 editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+                model.updateTask(filteredTaskListIndex, editedTask);
             }
         } catch (IllegalTimingOrderException e) {
             throw new CommandException(MESSSAGE_INVALID_TIMING_ORDER);
-        }
-
-        try {
-            model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
+        //@@author
+
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
