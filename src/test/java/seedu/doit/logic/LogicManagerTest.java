@@ -59,6 +59,8 @@ import seedu.doit.storage.StorageManager;
 
 public class LogicManagerTest {
 
+    private static final String SAVE = SaveCommand.COMMAND_WORD + " ";
+
     /**
      * See https://github.com/junit-team/junit4/wiki/rules#temporaryfolder-rule
      */
@@ -426,7 +428,7 @@ public class LogicManagerTest {
         String filePath = "data/testfile1.xml";
         File file = new File(filePath);
         file.delete();
-        assertCommandSuccess("save " + filePath, String.format(SaveCommand.MESSAGE_SUCCESS, filePath),
+        assertCommandSuccess(SAVE + filePath, String.format(SaveCommand.MESSAGE_SUCCESS, filePath),
                 this.model.getTaskManager(), this.model.getFilteredTaskList());
         file.delete();
     }
@@ -434,13 +436,13 @@ public class LogicManagerTest {
     @Test
     public void execute_save_not_xml() throws Exception {
         String filePath = "";
-        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_NOT_XML_FILE);
+        assertCommandFailure(SAVE + filePath, SaveCommand.MESSAGE_NOT_XML_FILE);
     }
 
     @Test
     public void execute_save_invalidFileName() throws Exception {
         String filePath = "data/??.xml";
-        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_INVALID_FILE_NAME);
+        assertCommandFailure(SAVE + filePath, SaveCommand.MESSAGE_INVALID_FILE_NAME);
     }
 
     @Test
@@ -448,14 +450,14 @@ public class LogicManagerTest {
         String filePath = "data/testfile3.xml";
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_DUPLICATE_FILE);
+        assertCommandFailure(SAVE + filePath, SaveCommand.MESSAGE_DUPLICATE_FILE);
         file.delete();
     }
 
     @Test
     public void execute_save_inSameFile() throws Exception {
         String filePath = this.storage.getTaskManagerFilePath();
-        assertCommandFailure("save " + filePath, filePath + SaveCommand.MESSAGE_USING_SAME_FILE);
+        assertCommandFailure(SAVE + filePath, filePath + SaveCommand.MESSAGE_USING_SAME_FILE);
     }
 
     // @@author
@@ -464,9 +466,11 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
+        private static final String PRIORITY_LOW = "low";
+
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Priority privatePriority = new Priority("low");
+            Priority privatePriority = new Priority(PRIORITY_LOW);
             EndTime endTime = new EndTime("tomorrow");
             Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -586,8 +590,8 @@ public class LogicManagerTest {
          * dummy values.
          */
         private Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new Priority("low"), new EndTime("today"), new Description("House of 1"),
-                    new UniqueTagList(new Tag("tag")));
+            return new Task(new Name(name), new Priority(PRIORITY_LOW), new EndTime("today"),
+                    new Description("House of 1"), new UniqueTagList(new Tag("tag")));
         }
     }
 }
