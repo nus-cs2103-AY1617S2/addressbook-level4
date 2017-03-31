@@ -245,7 +245,7 @@ Burdens further separates the packages into sub-packages - `core`, `events`, `ex
 * `Events` -This package consists of the different type of events that can occur; these are used mainly by EventManager and EventBus.
 * `Exceptions` - This package consists of exceptions that may occur with the use of Burdens.
 * `Util` - This package consists of additional utilities for the different components.
- 
+
 ## 3. Implementation
 
 ### 3.1 Logging
