@@ -1,9 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -17,8 +14,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.exceptions.InvalidDurationException;
-import seedu.address.model.task.exceptions.PastDateTimeException;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -32,9 +27,36 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
+        // TODO use the new dateTimeExtractor class
+        DateTimeExtractor dateTimeExtractor = new DateTimeExtractor(args);
+        // TODO Returns an exception in a method? Doesn't make sense
+        // Returns a string? seems brittle, therefore to rewrite the class to preserve state
+        try {
+            // process StartEndDateTime first because it is more constrained
+            // TODO there are special from and to cases so maybe we don't have to necessarily process
+            // this first. create a special optional regex for this?
+            //dateTimeExtractor.processStartEndDateTime();
+            dateTimeExtractor.processRawStartEndDateTime();
+        } catch (IllegalValueException e) {
+            // Dates can't be parsed so we silently skip first
+            // all other exceptions have been handled
+            // Pass rose from Uncle to Jane by tmr
+            // we should not return an error because that case is a valid task
+            System.out.println("No date is found for start and end date");
+        }
+        // TODO Returns an exception in a method? Doesn't make sense
+        // Returns a string? seems brittle
+        try {
+            dateTimeExtractor.processRawDeadline();
+        } catch (IllegalValueException e) {
+            // No date is found so we silently skip
+            System.out.println("No date found for deadline!");
+        }
+
+        // TODO ArgumentTokenizer became very irrelevant in this class but is it still relevant for other classes?
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE_DATETIME, PREFIX_START_DATETIME, PREFIX_END_DATETIME, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
+                new ArgumentTokenizer(PREFIX_TAG);
+        argsTokenizer.tokenize(dateTimeExtractor.getProcessedArgs());
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
@@ -45,25 +67,24 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setDeadline(
-                    ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE_DATETIME)));
-            editTaskDescriptor.setStartEndDateTime(
-                    ParserUtil.parseStartEndDateTime(argsTokenizer.getValue(PREFIX_START_DATETIME),
-                                                     argsTokenizer.getValue(PREFIX_END_DATETIME)));
+
+            editTaskDescriptor.setRawDeadline(dateTimeExtractor.getProcessedRawDeadline());
+            editTaskDescriptor.setRawStartDateTime(dateTimeExtractor.getProcessedStartDateTime());
+            editTaskDescriptor.setRawEndDateTime(dateTimeExtractor.getProcessedEndDateTime());
+
+
+            //editTaskDescriptor.setDeadline(
+            //        ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE_DATETIME)));
+            //editTaskDescriptor.setStartEndDateTime(
+            //        ParserUtil.parseStartEndDateTime(argsTokenizer.getValue(PREFIX_START_DATETIME),
+            //                                         argsTokenizer.getValue(PREFIX_END_DATETIME)));
             editTaskDescriptor.setTagList(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-        } catch (PastDateTimeException e) {
-            return new IncorrectCommand(e.getMessage());
-        } catch (InvalidDurationException e) {
-            return new IncorrectCommand(e.getMessage());
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
-            return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
-        }
-
         return new EditCommand(index.get(), editTaskDescriptor);
+        // TODO note that there is a NoFieldEditedException handled in execute, thus to change
     }
 
     //@@author

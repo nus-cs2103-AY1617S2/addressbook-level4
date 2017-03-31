@@ -26,7 +26,7 @@ public class AddCommandParser {
     public Command parse(String args) {
         DateTimeExtractor dateTimeExtractor = new DateTimeExtractor(args);
         // TODO Returns an exception in a method? Doesn't make sense
-        // Returns a string? seems brittle
+        // Returns a string? seems brittle, therefore to rewrite the class to preserve state
         try {
             // process StartEndDateTime first because it is more constrained
             dateTimeExtractor.processStartEndDateTime();
@@ -39,7 +39,7 @@ public class AddCommandParser {
             // all other exceptions have been handled
             // Pass rose from Uncle to Jane by tmr
             // we should not return an error because that case is a valid task
-            System.out.println("No date is found for start and en date");
+            System.out.println("No date is found for start and end date");
         }
         // TODO Returns an exception in a method? Doesn't make sense
         // Returns a string? seems brittle
