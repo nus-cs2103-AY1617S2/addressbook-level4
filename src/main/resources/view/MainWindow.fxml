@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- @@author A0135998H -->
+
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -8,8 +10,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -91,40 +91,7 @@
                                     </AnchorPane>
                                  </children>
                               </HBox>
-                              <TabPane tabClosingPolicy="UNAVAILABLE" tabMinWidth="73.0" VBox.vgrow="ALWAYS">
-                                <tabs>
-                                    <Tab text="All">
-                                       <content>
-                                          <AnchorPane fx:id="personListPanelPlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                       </content>
-                                    </Tab>
-                                    <Tab text="Today">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                       </content>
-                                    </Tab>
-                                    <Tab text="Pending">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                       </content>
-                                    </Tab>
-                                    <Tab text="Done">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                       </content>
-                                    </Tab>
-                                    <Tab text="Floating">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                       </content>
-                                    </Tab>
-                                    <Tab text="Overdue">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                       </content>
-                                    </Tab>
-                                </tabs>
-                              </TabPane>
+                              <AnchorPane fx:id="taskTabPanelPlaceHolder" prefHeight="364.0" prefWidth="608.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                      </children>
