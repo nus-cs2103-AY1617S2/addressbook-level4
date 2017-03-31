@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -36,7 +37,16 @@ public class CommandBoxHandle extends GuiHandle {
     public void runCommand(String command) {
         enterCommand(command);
         pressEnter();
-        guiRobot.sleep(200); //Give time for the command to take effect
+        guiRobot.sleep(100); //Give time for the command to take effect
+    }
+
+    /**
+     * Use clickOn() instead of just typing Enter
+     * @author A0140036X
+     */
+    @Override
+    public void pressEnter() {
+        guiRobot.clickOn(COMMAND_INPUT_FIELD_ID).type(KeyCode.ENTER);
     }
 
     public HelpWindowHandle runHelpCommand() {

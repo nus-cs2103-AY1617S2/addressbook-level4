@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Project Security</name>
+        <priority>Low</priority>
+        <description>milestone 3</description>
+        <location>Blk 30 NUS Street 29, #06-40</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>project</categorized>
+    </tasks>
+    <tasks>
+        <name>Meet up with aunty</name>
+        <priority>Low</priority>
+        <description>2pm, Rmb to bring gifts</description>
+        <location>Blk 30 Lorong 3 Serangoon Gardens, #07-18</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>family</categorized>
+        <categorized>meetup</categorized>
+    </tasks>
+    <tasks>
+        <name>Skype Meeting 3</name>
+        <priority>High</priority>
+        <description>Skype meeting with project team 2</description>
+        <location>None</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>project</categorized>
+    </tasks>
+    <tasks>
+        <name>David Li BDay</name>
+        <priority>Low</priority>
+        <description>6pm, rmb to buy present</description>
+        <location>Blk 436 Botanic Gardens 26, #16-43</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>family</categorized>
+    </tasks>
+    <tasks>
+        <name>Driving lesson</name>
+        <priority>Medium</priority>
+        <description>Bring PDL and wear shoes</description>
+        <location>Ubi Crescent</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>Driving</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Test</name>
+        <priority>High</priority>
+        <description>3pm, Open Book</description>
+        <location>NUS, MPSH 4</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>test</categorized>
+    </tasks>
+</taskmanager>

@@ -4,49 +4,62 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Yee Jian Feng, Eric](http://github.com/yeejfe) <br>
+<img src="images/yeejfe.png" width="150"><br>
+**Roles**: Team Lead, Integration, Scheduling <br>
+**Responsibilities**:
+* Aspects/tools in charge of: Managing GitHub organization page
+* Components in charge of:
+* Features implemented:
+* Code written:
+* Other major contributions:
+  * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do
+  * Issue tracker and repo setup
+  * Set up Travis, Appveyor, Coveralls and Codacy
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Goh Jing Loon](https://github.com/jingloon)
+<img src="images/jingloon.png" width="150"><br>
+**Role**: Documentation, UI Expert <br>
+**Responsibilities**:
+* Aspects/tools in charge of: UI Element designs
+* Components in charge of:
+* Features implemented:
+* Code written:
+* Other major contributions:
+    * UI mockup and prototyping
+    * Post initial refactoring system testings
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
-
+#### [Joel Lim](https://github.com/aljorhythm)
+<img src="images/aljorhythm.png" width="150"><br>
+**Role**: Code Quality, Git Expert <br>
+**Responsibilities**:
+* Aspects/tools in charge of:
+* Components in charge of: JUnit testings
+* Features implemented:
+* Code written:
+* Other major contributions:
+    * Post initial refactoring system testings
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
+#### [Wang Si Qi](https://github.com/coyotestarrkwsq)
+<img src="images/coyotestarrkwsq.png" width="150"><br>
+**Role**: Testing, Deliverables and Deadlines <br>
+**Responsibilities**:
+* Aspects/tools in charge of:
+* Components in charge of:
+* Features implemented:
+	* Undo operation
+	* Redo operation
+* Code written:
+* Other major contributions:
+    * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do
 
  -----
 
 # Contributors
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)

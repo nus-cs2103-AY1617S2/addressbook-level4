@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import savvytodo.TestApp;
 
 /**
  * A handler for the BrowserPanel of the UI
