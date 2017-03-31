@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ChangeViewRequestEvent;
+import seedu.address.commons.events.ui.ExpandingEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Status;
@@ -58,6 +59,7 @@ public class TaskListPanel extends UiPart<Region> {
     private double lastScrollPosition;
 
     private ObservableList<ReadOnlyTask> taskList;
+    private List<String> statusList;
 
     private ListChangeListener taskListListener;
 
@@ -73,7 +75,12 @@ public class TaskListPanel extends UiPart<Region> {
         this.taskList = taskList;
     }
 
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
+    }
+
     private void viewTasksWithStatus(List<String> statusList) {
+        setStatusList(statusList);
         initTaskListsByStatus(statusList);
         createTaskListView(statusList);
 
@@ -196,6 +203,18 @@ public class TaskListPanel extends UiPart<Region> {
             }
         }
         return resView;
+    }
+
+    @Subscribe
+    private void handleExpandingEvent(ExpandingEvent event) {
+        int groupIndex = event.groupIndex;
+        logger.info("User expand group by key combination: Alt + " + groupIndex);
+        // groupIndex is in 1-based index, convert to 0-based
+        if (groupIndex >= 1 && groupIndex <= statusList.size()) {
+            String groupName = statusList.get(groupIndex - 1);
+            TaskGroupPanel group = childGroupMap.get(groupName);
+            group.openTitlePane();
+        }
     }
 
     @Subscribe

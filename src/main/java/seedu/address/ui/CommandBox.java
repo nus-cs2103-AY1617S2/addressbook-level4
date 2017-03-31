@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ExpandingEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.ScrollingEvent;
 import seedu.address.commons.util.FxViewUtil;
@@ -49,8 +50,22 @@ public class CommandBox extends UiPart<Region> {
     }
 
     //@@author A0144885R
+    /**
+     * List of key events that commandbox handles:
+     * - Alt + Number key: Change expanded group
+     * - UP, DOWN: Change to previously typed inputs
+     * - PAGEUP, PAGEDOWN: Scroll expanded group up and down
+     */
     @FXML
     private void handleKeyReleased(KeyEvent event) {
+        if (event.isAltDown()) {
+            if (event.getCode().isDigitKey()) {
+                String keyCode = event.getCode().toString();
+                int key = keyCode.charAt(keyCode.length() - 1) - '0';
+                changeExpandedGroup(key);
+            }
+        }
+
         switch (event.getCode()) {
 
         case UP:
@@ -78,6 +93,10 @@ public class CommandBox extends UiPart<Region> {
         default:
             break;
         }
+    }
+
+    private void changeExpandedGroup(int groupIndex) {
+        EventsCenter.getInstance().post(new ExpandingEvent(groupIndex));
     }
 
     private void broadcastPageUpEvents() {
