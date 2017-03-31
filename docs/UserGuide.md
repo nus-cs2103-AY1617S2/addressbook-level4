@@ -134,6 +134,7 @@ Format: `sort KEYWORD`
 > The keyword refers to `s/` for start date or `e/` for end date.<br>
 > Invalid keyword will trigger sort by end date as default.<br>
 > New addition of tasks will follow the sort order. <br>
+> Floating tasks will be listed below the sorted tasks.<br>
 > Any trailing symbols after a valid keyword will be ignored.
 
 Examples:
