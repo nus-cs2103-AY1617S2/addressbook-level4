@@ -1,3 +1,5 @@
+// @@author A0163996J
+
 package seedu.taskit.testutil;
 
 import seedu.taskit.commons.exceptions.IllegalValueException;
@@ -11,22 +13,29 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             hw1 = new TaskBuilder().withTitle("Do HW 1")
+                    .withPriority("medium")
                     .withTags("school").build();
             hw2 = new TaskBuilder().withTitle("Do HW 2")
+                    .withPriority("medium")
                     .withTags("school").build();
             lunch = new TaskBuilder().withTitle("Lunch with Bob")
+                    .withPriority("low")
                     .withTags("leisure", "friends").build();
             interview = new TaskBuilder().withTitle("Interview for big company")
+                    .withPriority("high")
                     .withTags("career").build();
             shopping = new TaskBuilder().withTitle("Shopping with friends")
+                    .withPriority("low")
                     .withTags("leisure", "friends").build();
-            
+
             // Manually added
             meeting = new TaskBuilder().withTitle("Software Engineering Meeting")
+                    .withPriority("high")
                     .withTags("school").build();
             assignment = new TaskBuilder().withTitle("CS3230 Assignment")
+                    .withPriority("medium")
                     .withTags("school").build();
-                   
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

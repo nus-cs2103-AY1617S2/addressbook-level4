@@ -78,7 +78,7 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
@@ -129,7 +129,7 @@ public class EditCommand extends Command {
         private Optional<Title> getTitle() {
             return title;
         }
-        
+
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
@@ -138,9 +138,9 @@ public class EditCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
-        
+
         // @@author A0163996J
-        
+
         public void setStart(Optional<Date> start) {
             this.start = start;
         }
@@ -148,7 +148,7 @@ public class EditCommand extends Command {
         private Optional<Date> getStart() {
             return start;
         }
-        
+
         public void setEnd(Optional<Date> end) {
             this.end = end;
         }
@@ -156,15 +156,20 @@ public class EditCommand extends Command {
         private Optional<Date> getEnd() {
             return end;
         }
-        
+
         public void setPriority(Optional<Priority> priority) {
-            this.priority = priority; 
+            this.priority = priority;
         }
-        
+
         private Optional<Priority> getPriority() {
             return priority;
         }
-        
+
         // @@ author
+    }
+
+    //@@author A0141011J
+    public boolean isUndoable() {
+        return true;
     }
 }

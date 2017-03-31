@@ -24,13 +24,13 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = false)
     private String start;
-    
+
     @XmlElement(required = false)
     private String end;
-    
+
     @XmlElement(required = true)
     private String priority;
-    
+
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -73,9 +73,5 @@ public class XmlAdaptedTask {
         final Priority priority = new Priority(this.priority);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(title, start, end, priority, tags);
-    }
-    
-    public String getEnd() {
-    	return this.end;
     }
 }

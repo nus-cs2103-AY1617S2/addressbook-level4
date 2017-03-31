@@ -28,4 +28,8 @@ public class FindCommand extends Command {
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
+    //@@author A0141011J
+    public boolean isUndoable() {
+        return true;
+    }
 }

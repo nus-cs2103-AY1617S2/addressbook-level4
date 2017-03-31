@@ -17,4 +17,10 @@ public class ClearCommand extends Command {
         model.resetData(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    //@@author A0141011J
+    @Override
+    public boolean isUndoable() {
+        return true;
+    }
 }

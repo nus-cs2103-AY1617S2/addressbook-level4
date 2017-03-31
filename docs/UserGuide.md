@@ -91,28 +91,28 @@ Format: `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>`
 > * Existing values will be updated to the input values.
 > * Can remove start or end dates by typing `null` or `none`
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `null`. 
+> * You can remove all the task's tags by typing `null`.
 
 Examples:
 
 * `edit 2 title finish SWE HW`<br>
   Edit the second task title to finish SWE HW.
-  
+
 * `edit 1 start this Friday 3 pm`<br>
   Edit the first task start time to this Friday 3pm.
 
 * `edit 5 end April 5th at 4 pm`<br>
   Edit the fifth task end time to April 5th at 4pm.
-  
+
 * `edit 5 end none`<br>
   Edit the fifth task to have no end time.
-  
+
 * `edit 2 priority high`<br>
   Edit the second task prioirty to high.
-  
+
 * `edit 1 tag null`<br>
   Remove all the tags of first task.
-  
+
 ### 2.5. Marks a task as done or undone: `mark`
 
 Mark an existing task as done or undone based on a given valid index.<br>
@@ -131,7 +131,7 @@ Examples:
   `mark 1 undone`<br>
   Marks the 1st task in the results of the `find` command as undone.
 
-### 2.6. Searching all tasks containing any keyword in their name: `find`
+### 2.6. Searching all tasks based on keywords or date: `find`
 
 Finds tasks which matched name/deadline/tag.<br>
 Format: ` find <[NAME]|[DATE]|[TAG]>`
@@ -146,11 +146,13 @@ Examples:
 
 * `find do HW`<br>
   Returns tasks with 'do' or 'HW' or both
+* `find monday`<br>
+  Returns tasks with dates on monday
 
 
 ### 2.7. Deleting a task : `delete`
 
-Deletes the specified task from the TaskIt. 
+Deletes the specified task from the TaskIt.
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
@@ -194,12 +196,17 @@ Format: `clear`
 Undo the prevous actions.<br>
 Format: `undo`
 
-### 2.11. Exiting the program : `exit`
+### 2.11. Redo previous undo: `redo`
+
+Redo the prevous undone action.<br>
+Format: `redo`
+
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data in specified file/folder
+### 2.13. Saving the data in specified file/folder
 
 Puts all TaskIt storage in the given path to file.
 Format: `save FILEPATH`
@@ -213,7 +220,7 @@ Example:
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous TaskIt folder.
-	
+
 [//]: # "@@author A0141872E"
 ## 4. Command Summary
 
@@ -227,8 +234,10 @@ Example:
    e.g. `delete 3`
 
 * **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
-  e.g. `edit 1 title Movie at 3pm`
-  e.g. `edit 1 start this Friday 3 pm`
+  e.g. `edit 1 title Movie`
+  e.g. `edit 2 start this Friday 3 pm`
+  e.g. `edit 2 end none`
+  e.g. `edit 2 end null`
   e.g. `edit 1 tag School`
   e.g. `edit 1 tag null`
 
@@ -244,13 +253,13 @@ Example:
 
 * **Mark** : `mark` <br>
   e.g. `mark 1 undone`
-  e.g. `mark 3 done` 
-  
+  e.g. `mark 3 done`
+
 * **Undo** : `undo` <br>
-  e.g.
+  
+* **Redo** : `redo` <br>
 
 * **Help** : `help` <br>
-  e.g.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`

@@ -3,6 +3,7 @@ package seedu.taskit.model.task;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 
+//@@author A0141011J
 /**
  * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
@@ -13,7 +14,7 @@ public interface ReadOnlyTask {
     Date getStart();
     Date getEnd();
     Priority getPriority();
-    
+
     Boolean isDone();
     Boolean isOverdue();
     void setDone(Boolean status);
@@ -33,39 +34,43 @@ public interface ReadOnlyTask {
                 && other.getTitle().equals(this.getTitle())); // state checks here onwards
     }
 
+    // @@author A0163996J
     /**
      * Formats the task as text, showing all details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle())
-        		.append("Start: ")
-        		.append(getStart() + " ")
-        		.append("End: ")
-        		.append(getEnd() + " ")
+        builder.append(getTitle() + " ")
+            .append("Start: ")
+            .append(getStart() + " ")
+            .append("End: ")
+            .append(getEnd() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-    
-    	
+
+
     //@@author A0097141H
     /**
      * Stringifies title and tags
      * @return lowercase String with title and tags for easy string matching
      */
-    default String toStringTitleAndTagList() {
-    	String titleAndTagString = getTitle().title + " ";
-    	final StringBuilder builder = new StringBuilder();
-    	builder.append(getTitle()).append(" ");
-    	getTags().iterator().forEachRemaining(builder::append);
-    	
-    	titleAndTagString = builder.toString();
-    	titleAndTagString = titleAndTagString.replace('[', ' ').replace(']', ' ');
-    	
-    	return titleAndTagString.toLowerCase();
+
+    default String toStringTitleTagAndDateList() {
+      String titleTagAndDateString = getTitle().title + " ";
+      final StringBuilder builder = new StringBuilder();
+      builder.append(getTitle()).append(" ");
+      builder.append(getStart()).append(" ");
+      builder.append(getEnd()).append(" ");
+      getTags().iterator().forEachRemaining(builder::append);
+
+      titleTagAndDateString = builder.toString();
+      titleTagAndDateString = titleTagAndDateString.replace('[', ' ').replace(']', ' ');
+
+      return titleTagAndDateString.toLowerCase();
     }
-    
+
 
 }
 

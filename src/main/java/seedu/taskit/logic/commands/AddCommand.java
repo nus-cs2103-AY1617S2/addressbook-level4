@@ -15,6 +15,7 @@ import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
 import seedu.taskit.model.task.UniqueTaskList;
 
+
 /**
  * Add a new task to TaskIt
  */
@@ -63,6 +64,12 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
+    }
+
+    //@@author A0141011J
+    @Override
+    public boolean isUndoable() {
+        return true;
     }
 
 }

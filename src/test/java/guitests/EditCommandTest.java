@@ -26,7 +26,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "title Do Homework";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withTags("school").build();
+        TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withPriority("medium").withTags("school").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -37,7 +37,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -61,7 +61,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 title");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
-    
+
     @Test
     public void edit_missingTaskIndex_failure() {
         commandBox.runCommand("edit title Homework due");
@@ -99,7 +99,7 @@ public class EditCommandTest extends AddressBookGuiTest {
      * Checks whether the edited task has the correct updated details.
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
-     * @param addressBookIndex index of task to edit in the address book.
+     * @param addressBookIndex index of task to edit in the task manager.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
@@ -107,7 +107,6 @@ public class EditCommandTest extends AddressBookGuiTest {
     private void assertEditSuccess(int filteredTaskListIndex, int addressBookIndex,
                                     String detailsToEdit, TestTask editedTask) {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
-
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
         assertMatching(editedTask, editedCard);

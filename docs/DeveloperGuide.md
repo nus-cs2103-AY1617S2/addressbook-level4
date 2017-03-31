@@ -160,6 +160,15 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+Author: Amro Shohoud
+
+`UI` design
+
+* Priority - Sets background color for TaskCard (transparent, yellow, red) based on the value of priority (low, medium, high). No label for priority is inserted in fxml file.
+* Events - Events such as clicking trigger the listener to select a TaskCard, highlighting the background to show selection.
+* Filtering - Logic creates a filtered list of ReadOnlyTasks, which is used by TaskListPanel to create TaskCards that populate the panel.
+
+
 ### 2.3. Logic component
 
 Author: Bernard Choo
@@ -363,7 +372,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | view all tasks | see all the tasks I've ever added
 `* * *` | user | view all undone or done tasks | see what tasks I still need to work on
 `* * *` | user | view all tasks due today | see what tasks I will need to finish by today
-`* * *` | user | view all overdued tasks | see what tasks I can delete
+`* * *` | user | view all overdue tasks | see what tasks I can delete
 `* * *` | user | Save all the tasks in specified local folder/file | Store everything in local file that is controlled by a cloud syncing service (e.g. dropbox) to synchronise across multiple computers
 `* *` | user | categorize tasks into work, study, leisure etc | group my tasks together
 `* *` | user | view all floating tasks | see which tasks do not have a deadline
@@ -509,7 +518,7 @@ Use case ends.
 > 1b2. User specifies task to delete based on index <br>
 Use case ends.
 
-#### Use case 6: Mark a task as completed or incompleted
+#### Use case 6: Mark a task as done or undone
 
 **MSS**
 
@@ -566,7 +575,7 @@ Use case ends.
 > Use case resumes at step 1 <br>
 Use case ends.
 
-#### Use case 9: View all overdued tasks
+#### Use case 9: View all overdue tasks
 
 **MSS**
 
@@ -622,7 +631,7 @@ Author: Peng Chong
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should come with automated unit tests and open source code.
-5. Should return to a functioning state when system restarts 
+5. Should return to a functioning state when system restarts
 6. Should function well offline
 7. Shuld have no unhandled exceptions from incorrect user input
 8. Should work well stand-alone and should not be a plug-in to another software

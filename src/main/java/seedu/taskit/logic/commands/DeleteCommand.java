@@ -1,3 +1,5 @@
+//@@author A0141011J
+
 package seedu.taskit.logic.commands;
 
 import seedu.taskit.commons.core.Messages;
@@ -48,4 +50,9 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
+    //@@author A0141011J
+    @Override
+    public boolean isUndoable() {
+        return true;
+    }
 }

@@ -16,6 +16,8 @@ import seedu.taskit.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle  extends GuiHandle {
     private static final String TITLE_FIELD_ID = "#title";
+    private static final String START_FIELD_ID = "#start";
+    private static final String END_FIELD_ID = "#end";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -31,6 +33,14 @@ public class TaskCardHandle  extends GuiHandle {
 
     public String getTitle() {
         return getTextFromLabel(TITLE_FIELD_ID);
+    }
+
+    public String getStart() {
+        return getTextFromLabel(START_FIELD_ID);
+    }
+
+    public String getEnd() {
+        return getTextFromLabel(END_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -72,8 +82,20 @@ public class TaskCardHandle  extends GuiHandle {
         return super.equals(obj);
     }
 
+    public String getAsText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getTitle() + " ")
+                .append("Start: ")
+                .append(getStart() + " ")
+                .append("End: ")
+                .append(getEnd() + " ")
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
-        return getTitle();
+        return getAsText();
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_DATES;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.taskit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -185,20 +186,25 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new AddressBook(), Collections.emptyList());
     }
 
+    // @@author A0163996J
 
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add t/args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Title from by invalidDate", expectedMessage);
-        assertCommandFailure("add Valid Title t/tag NoTagPrefix", expectedMessage);
+        assertCommandFailure("add tag args wrong args", expectedMessage);
     }
 
     @Test
+    public void execute_add_invalidDates() {
+        assertCommandFailure("add task from monday", MESSAGE_INVALID_DATES);
+        assertCommandFailure("add task from 6/4/17 to 6/3/17", MESSAGE_INVALID_DATES);
+    }
+
+    // @@author
+
+    @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add *[]\\[;] ",
-                Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name tag invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -244,7 +250,7 @@ public class LogicManagerTest {
         // prepare address book state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list",
+        assertCommandSuccess("list all",
                 ListCommand.MESSAGE_SUCCESS_ALL,
                 expectedAB,
                 expectedList);
@@ -351,14 +357,13 @@ public class LogicManagerTest {
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task pTarget2 = helper.generateTaskWithName("KEYKEYKEY");
         Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        AddressBook expectedAB = helper.generateAddressBook(fourTasks);
+        List<Task> threeTasks = helper.generateTaskList(p1, pTarget1, pTarget2);
+        AddressBook expectedAB = helper.generateAddressBook(threeTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
-        helper.addToModel(model, fourTasks);
+        helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
@@ -411,9 +416,9 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task interview() throws Exception {
-            Title title = new Title("Adam Brown");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
+            Title title = new Title("interview");
+            Tag tag1 = new Tag("shorter");
+            Tag tag2 = new Tag("longer");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             return new Task(title, new Date(), new Date(), new Priority(), tags);
         }
@@ -445,7 +450,7 @@ public class LogicManagerTest {
 
             UniqueTagList tags = ta.getTags();
             for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" tag").append(t.tagName);
             }
 
             return cmd.toString();

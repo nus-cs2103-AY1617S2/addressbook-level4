@@ -1,7 +1,6 @@
 package seedu.taskit.logic.commands;
 
 import seedu.taskit.commons.core.Messages;
-import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.logic.commands.exceptions.CommandException;
 import seedu.taskit.model.Model;
 
@@ -36,5 +35,19 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    /*
+    //@@author A0141011J
+    /**
+     * Provides the command history for current command executed.
+
+    public void setCommandHistory(CommandHistory commandList) {
+        this.commandList = commandList;
+    }
+    */
+
+    public boolean isUndoable() {
+        return false;
     }
 }
