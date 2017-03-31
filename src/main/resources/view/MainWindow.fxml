@@ -13,7 +13,15 @@
 			<menus>
 				<Menu mnemonicParsing="false" text="File">
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#handleExit"
+						<MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#handleSave"
+							text="Save As" />
+						<MenuItem fx:id="loadMenuItem" mnemonicParsing="false" onAction="#handleLoad"
+							text="Load" />
+						<MenuItem fx:id="exportMenuItem" mnemonicParsing="false" onAction="#handleExport"
+							text="Export" />
+						<MenuItem fx:id="importMenuItem" mnemonicParsing="false" onAction="#handleImport"
+							text="Import" />
+						<MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleExit"
 							text="Exit" />
 					</items>
 				</Menu>

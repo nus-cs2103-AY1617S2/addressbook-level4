@@ -75,7 +75,6 @@ public class ThemeManager extends UiPart<Region> {
                     if (newValue != null) {
                         LOGGER.fine("Theme has changed to : '" + newValue + "'");
                         changeTheme(fxmlToApply, newValue);
-                        saveThemePreference(newValue, prefs);
                     }
                 });
     }
@@ -90,13 +89,5 @@ public class ThemeManager extends UiPart<Region> {
                 "LimeTheme");
         return items;
     }
-
-    /**
-     * Commits theme to user preferences.
-     * @param Theme to save.
-     * @param Preferences to save theme to
-     */
-    private void saveThemePreference(String theme, UserPrefs prefs) {
-        prefs.getGuiSettings().setStyleSheet(theme);
-    }
+    
 }
