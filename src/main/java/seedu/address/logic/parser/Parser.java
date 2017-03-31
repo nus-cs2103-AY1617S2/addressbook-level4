@@ -74,7 +74,8 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+        
+        //@@author A0163848R
         case MarkCommand.COMMAND_WORD:
         	return new MarkCommandParser().parse(arguments);
         	
@@ -86,7 +87,8 @@ public class Parser {
             
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
-
+        //@@author
+            
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

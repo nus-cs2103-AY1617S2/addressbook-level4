@@ -12,6 +12,10 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.UniquePersonList;
 
+//@@author A0163848R
+/**
+ * Command that marks task as incomplete
+ */
 public class UnmarkCommand extends Command {
 	
 	public static final String COMMAND_WORD = "unmark";

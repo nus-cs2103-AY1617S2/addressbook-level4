@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <persons>
-        <name>Hans Muster</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">hans@google.com</email>
-        <group isPrivate="false">4th street</group>
-    </persons>
-    <persons>
-        <name>Ruth Mueller</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">ruth@google.com</email>
-        <group isPrivate="false">81th street</group>
-    </persons>
-    <persons>
-        <name>Heinz Kurz</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">heinz@yahoo.com</email>
-        <group isPrivate="false">wall street</group>
-    </persons>
-    <persons>
-        <name>Cornelia Meier</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">cornelia@google.com</email>
-        <group isPrivate="false">10th street</group>
-    </persons>
-    <persons>
-        <name>Werner Meyer</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">werner@gmail.com</email>
-        <group isPrivate="false">michegan ave</group>
-    </persons>
-    <persons>
-        <name>Lydia Kunz</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">lydia@gmail.com</email>
-        <group isPrivate="false">little tokyo</group>
-    </persons>
-    <persons>
-        <name>Anna Best</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">anna@google.com</email>
-        <group isPrivate="false">4th street</group>
-    </persons>
-    <persons>
-        <name>Stefan Meier</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">stefan@mail.com</email>
-        <group isPrivate="false">little india</group>
-    </persons>
-    <persons>
-        <name>Martin Mueller</name>
-        <date isPrivate="false">12.12</date>
-        <email isPrivate="false">hans@google.com</email>
-        <group isPrivate="false">chicago ave</group>
-    </persons>
+	<persons>
+		<name>Hans Muster</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">hans@google.com</email>
+		<group isPrivate="false">4th street</group>
+	</persons>
+	<persons>
+		<name>Ruth Mueller</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">ruth@google.com</email>
+		<group isPrivate="false">81th street</group>
+	</persons>
+	<persons>
+		<name>Heinz Kurz</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">heinz@yahoo.com</email>
+		<group isPrivate="false">wall street</group>
+	</persons>
+	<persons>
+		<name>Cornelia Meier</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">cornelia@google.com</email>
+		<group isPrivate="false">10th street</group>
+	</persons>
+	<persons>
+		<name>Werner Meyer</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">werner@gmail.com</email>
+		<group isPrivate="false">michegan ave</group>
+	</persons>
+	<persons>
+		<name>Lydia Kunz</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">lydia@gmail.com</email>
+		<group isPrivate="false">little tokyo</group>
+	</persons>
+	<persons>
+		<name>Anna Best</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">anna@google.com</email>
+		<group isPrivate="false">4th street</group>
+	</persons>
+	<persons>
+		<name>Stefan Meier</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">stefan@mail.com</email>
+		<group isPrivate="false">little india</group>
+	</persons>
+	<persons>
+		<name>Martin Mueller</name>
+		<date isPrivate="false">12.12</date>
+		<email isPrivate="false">hans@google.com</email>
+		<group isPrivate="false">chicago ave</group>
+	</persons>
 </addressbook>

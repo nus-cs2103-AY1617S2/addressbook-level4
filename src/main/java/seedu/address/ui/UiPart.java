@@ -22,7 +22,6 @@ public abstract class UiPart<T> {
 
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
-    public static final String DEFAULT_STYLESHEET = "/themes/DarkTheme.css";
     protected static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
 
     private FXMLLoader fxmlLoader;
@@ -40,7 +39,7 @@ public abstract class UiPart<T> {
         } catch (IOException e) {
             throw new AssertionError(e);
         }
-        setStyleSheet(DEFAULT_STYLESHEET);
+        setStyleSheet(ThemeManager.DEFAULT_STYLESHEET);
     }
 
     /**
@@ -50,13 +49,15 @@ public abstract class UiPart<T> {
     public UiPart(String fxmlFileName) {
         this(fxmlFileName != null ? MainApp.class.getResource(FXML_FILE_FOLDER + fxmlFileName) : null);
     }
-
+    
+    //@@author A0163848R 
     /**
      * Sets the css file used for the UIPart's FXML.
      */
     public void setStyleSheet(String path) {
         ((Parent) fxmlLoader.getRoot()).getStylesheets().add(path);
     }
+    //@@author
 
     /**
      * Returns the root object of the scene graph of this UiPart.

@@ -25,29 +25,31 @@ public class DeleteCommand extends Command {
     private String targetName = null;
 
     public DeleteCommand(String token) {
+        //@@author A0163848R
         try {
             this.targetIndex = Integer.parseInt(token);
         } catch (NumberFormatException e) {
             this.targetName = token;
         }
+        //@@author
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
+        //@@author A0163848R
         if (targetIndex != null && lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyPerson personToDelete = null;
         if (targetIndex != null) personToDelete = lastShownList.get(targetIndex - 1);
+        if (targetName != null) personToDelete = getPersonByName(lastShownList, targetName);
+        //@@author
 
         try {
-            if (targetName != null) personToDelete = getPersonByName(lastShownList, targetName);
-            
             model.deletePerson(personToDelete);
         } catch (Exception pnfe) {
             assert false : "The target task cannot be missing";

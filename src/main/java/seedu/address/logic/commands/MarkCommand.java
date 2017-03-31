@@ -12,6 +12,10 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.UniquePersonList;
 
+//@@author A0163848R
+/**
+ * Command that marks a task as complete.
+ */
 public class MarkCommand extends Command {
 	
 	public static final String COMMAND_WORD = "mark";

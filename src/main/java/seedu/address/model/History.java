@@ -1,9 +1,18 @@
 package seedu.address.model;
 
+//@@author A0163848R
+/**
+ * Data structure for undo/redo history
+ * @param <T> State type to save
+ */
 public class History<T> {
     
     private Node<T> current = null;
     
+    /**
+     * Moves current state back one push.
+     * @return State after undo
+     */
     public T undo() {
         if (current == null) {
             return null;
@@ -18,6 +27,10 @@ public class History<T> {
         }
     }
     
+    /**
+     * Moves current state forward one push.
+     * @return State after redo
+     */
     public T redo() {
         if (current == null) {
             return null;
@@ -32,6 +45,9 @@ public class History<T> {
         }
     }
     
+    /**
+     * @return Current state
+     */
     public T at() {
         if (current != null) {
             return current.getElement();
@@ -51,6 +67,9 @@ public class History<T> {
         current = nextNode;
     }
     
+    /**
+     * @return Total number of saved states
+     */
     public int size() {
         return 1 + sizePrev(current) + sizeNext(current);
     }
@@ -63,6 +82,10 @@ public class History<T> {
         return source.getNext() == null ? 0 : 1 + sizePrev(source.getNext());
     }
     
+    /**
+     * Double linked list node
+     * @param <T> Element type to store
+     */
     private class Node<T> {
         
         private T element;

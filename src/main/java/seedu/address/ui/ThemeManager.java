@@ -14,6 +14,7 @@ import javafx.scene.layout.Region;
 import seedu.address.MainApp;
 import seedu.address.model.UserPrefs;
 
+//@@author A0163848R
 /**
  * The theme manager of the App.
  */
@@ -48,13 +49,18 @@ public class ThemeManager extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
+    /**
+     * 
+     * @param Parent to set theme of.
+     * @param Theme filename (without path or extension) to be applied.
+     */
     public static void changeTheme(Parent root, String theme) {
         root.getStylesheets().clear();
         root.getStylesheets().add(MainApp.class.getResource(THEME_FILE_FOLDER + theme + STYLESHEET_EXTENSION).toString());
     }
 
     private void setConnections(String path) {
-        cssList.setItems(getThemes(path));
+        cssList.setItems(getThemes());
     }
 
     private void addToPlaceholder(AnchorPane placeholder) {
@@ -73,24 +79,22 @@ public class ThemeManager extends UiPart<Region> {
                 });
     }
 
-    private ObservableList<String> getThemes(String path) {
+    /**
+     * @return Prewritten list of acceptable theme filenames (without path or extension).
+     */
+    private ObservableList<String> getThemes() {
         ObservableList<String> items = FXCollections.observableArrayList(
                 "BlandTheme",
                 "DarkTheme",
                 "LimeTheme");
-        /*
-        ObservableList<String> items = FXCollections.observableArrayList();
-        try {
-            for (String fileName : ResourceUtil.getResourceFiles(path)) {
-                items.add(fileName);
-            }
-        } catch (IOException e) {
-            logger.warning(e.toString());
-        }
-        */
         return items;
     }
 
+    /**
+     * Commits theme to user preferences.
+     * @param Theme to save.
+     * @param Preferences to save theme to
+     */
     private void saveThemePreference(String theme, UserPrefs prefs) {
         prefs.getGuiSettings().setStyleSheet(theme);
     }

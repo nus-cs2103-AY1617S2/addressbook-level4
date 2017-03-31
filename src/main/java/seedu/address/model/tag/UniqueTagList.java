@@ -84,6 +84,7 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.addAll(source.internalList); // insulate internal list from changes in argument
     }
 
+    //@@author A0163848R
     /**
      * Creates copy of this tag list containing all tags except those in the passed tag list
      */
@@ -104,6 +105,7 @@ public class UniqueTagList implements Iterable<Tag> {
         
         return remaining;
     }
+    //@@author
     
     /**
      * Returns all tags in this list as a Set.
@@ -201,7 +203,7 @@ public class UniqueTagList implements Iterable<Tag> {
         }
     }
     
-    
+    //@@author A0163848R
     /**
      * Constructs a tag list from a variadic parameter list of strings
      */

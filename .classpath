@@ -2,26 +2,29 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java">
 		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+			<attribute name="FROM_GRADLE_MODEL" value="true" />
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/resources">
 		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+			<attribute name="FROM_GRADLE_MODEL" value="true" />
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src/test/java">
 		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+			<attribute name="FROM_GRADLE_MODEL" value="true" />
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src/test/resources">
 		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+			<attribute name="FROM_GRADLE_MODEL" value="true" />
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/natty-0.13-jar-with-dependencies.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con"
+		path="org.eclipse.buildship.core.gradleclasspathcontainer" />
+	<classpathentry kind="con"
+		path="org.eclipse.jdt.launching.JRE_CONTAINER" />
+	<classpathentry kind="lib"
+		path="lib/natty-0.13-jar-with-dependencies.jar" />
+	<classpathentry kind="output" path="bin" />
 </classpath>

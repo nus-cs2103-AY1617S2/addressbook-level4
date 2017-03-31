@@ -2,8 +2,9 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
+//@@author A0163848R
 /**
- * Undoes changes caused by the last command.
+ * Command that undoes changes caused by the last command.
  */
 public class UndoCommand extends Command {
 

@@ -50,9 +50,11 @@ public class GuiSettings implements Serializable {
         return styleSheet;
     }
 
+    //@@author A0163848R
     public void setStyleSheet(String path) {
         this.styleSheet = path;
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

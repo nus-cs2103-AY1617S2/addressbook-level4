@@ -37,8 +37,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new YTomorrow(addressBook);
         this.history = new History<ReadOnlyAddressBook>();
-        history.push(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        
+        //@@author A0163848R
+        history.push(addressBook);
+        //@@author
     }
 
     public ModelManager() {
@@ -58,7 +61,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
+        //@@author A0163848R-reused
         addToHistory(new YTomorrow(addressBook));
+        //@@author
         raise(new AddressBookChangedEvent(addressBook));
     }
 
@@ -83,8 +88,9 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
         addressBook.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
-    }
+    }  
     
+    //@@author A0163848R
     @Override
     public boolean undoLastModification() {
         ReadOnlyAddressBook undone = history.undo();
@@ -104,6 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
+    //@@author
     
     @Override
     public void addToHistory(ReadOnlyAddressBook state) {

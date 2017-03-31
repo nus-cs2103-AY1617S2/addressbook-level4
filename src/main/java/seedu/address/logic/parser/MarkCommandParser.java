@@ -32,6 +32,7 @@ public class MarkCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
 
+        //@@author A0163848R
         return new MarkCommand(index.get());
     }
 }

@@ -75,7 +75,10 @@ public class MainWindow extends Window {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         getStage().setScene(scene);
+        
+        //@@author A0163848R
         ThemeManager.changeTheme(getRoot(), prefs.getGuiSettings().getStyleSheet());
+        //@@author
 
         setAccelerators();
     }
@@ -152,13 +155,15 @@ public class MainWindow extends Window {
         HelpWindow helpWindow = new HelpWindow();
         helpWindow.show();
     }
-
+    
+    //@@author A0163848R
     @FXML
     public void handleTheme() {
         ThemeWindow themeWindow = new ThemeWindow(getRoot(), prefs);
         themeWindow.fillInnerParts();
         themeWindow.show();
     }
+    //@@author
 
     /**
      * Closes the application.
