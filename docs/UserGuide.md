@@ -89,11 +89,11 @@ You may also want to be familiar with the formats and keywords, explained furthe
 > * Parameters can be in any order.
 
 > **Parameter Format**
-> 
+>
 > * Each parameter has its own prefix, for example, the `START_DATETIME` has the prefix `s/` or `start/`. See the [Parameter Summary](#6-parameter-summary) for a complete list.
 > * *DateTime*<br>The dateTime format should be `DD-MM-YY HHMM`
-> * *Location*<br>The location description has no restriction.
-> * *Tag*<br>Each tag is a single word. 
+> * *Description*<br>The description has no restriction.
+> * *Tag*<br>Each tag is a single word.
 
 > **Task Type**
 >
@@ -113,7 +113,7 @@ Format: `help`
 
 Adds a task with the specified details.
 
-Format: `add TASKTITLE [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
+Format: `add TASKTITLE [start/START_DATETIME] [end/END_DATETIME]  [d/DESCRIPTION] [tag/TAGS...]`
 
 > * Each parameter has its own prefix. See the [Parameter Summary](#6-parameter-summary) for a complete list.
 > * You can use abbreviations to represent all the parameter prefixes<br>
@@ -134,9 +134,9 @@ You should see the following after the above commands are entered.
 
 Updates any details of existing task's to the new specified .
 
-Format: `update TASKID [TASKTITLE] [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
+Format: `update TASKID [TASKTITLE] [start/START_DATETIME] [end/END_DATETIME]  [d/DESCRIPTOIN] [tag/TAGS...]`
 
-> * Updates the task at the specified *TaskID*. 
+> * Updates the task at the specified *TaskID*.
 > * *TaskID* refers to the number shown beside the title of the task.
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
@@ -313,7 +313,7 @@ Format: `exit`
 | TASKTITLE | - | Alphanumeric Characters and spaces | :x: |`CS2103 Assignment 1`|
 | START_DATETIME | `start/` | `DD-MM-YY HHMM` | :heavy_check_mark: |`01-04-17 0000`|
 | END_DATETIME | `end/` | `DD-MM-YY HHMM` | :heavy_check_mark: | `01-04-17 2359`|
-| LOCATION | `loc/` | No restriction | :heavy_check_mark: | `School of Computing`|
+| DESCRIPTION | `d/` | No restriction | :heavy_check_mark: | `School of Computing`|
 
 **[⬆ back to top](#table-of-contents)**
 
