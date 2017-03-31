@@ -13,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
 	* [Task priority]
 	* [Task types]
 	* [Welcome window]
-* Code written: [[functional code](A0141138N.md)][[test code](A0141138N.md)]
+* Code written: [[functional code](../collated/main/A0141138N.md)][[test code](../collated/main/A0141138N.md)]
 * Other major contributions:
 
 -----
@@ -27,7 +27,7 @@ We are a team based in the [School of Computing, National University of Singapor
 	* [End and start Task date]
 	* [Save, import and export]
 	* [Recurring task]
-* Code written: [[functional code](A0139343E.md)][[test code](A0139343E.md)]
+* Code written: [[functional code](../collated/main/A0139343E.md)][[test code](../collated/main/A0139343E.md)]
 * Other major contributions:
 
 -----
@@ -41,7 +41,7 @@ We are a team based in the [School of Computing, National University of Singapor
 	* [All UI]
 	* [Edit command]
 	* [List, sort, filter]
-* Code written: [[functional code](A0143029M.md)][[test code](A0143029M.md)]
+* Code written: [[functional code](../collated/main/A0143029M.md)][[test code](../collated/main/A0143029M.md)]
 * Other major contributions:
 
 -----
@@ -56,7 +56,7 @@ Role: Developer
 	* [Done task]
 	* [Undo, redo]
 	* [Task attribute checker]
-* Code written: [[functional code](A0135739W.md)][[test code](A0135739W.md)]
+* Code written: [[functional code](../collated/main/A0135739W.md)][[test code](../collated/main/A0135739W.md)]
 * Other major contributions:
 
 -----
