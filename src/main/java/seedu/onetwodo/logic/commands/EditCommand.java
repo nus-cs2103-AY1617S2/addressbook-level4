@@ -21,6 +21,7 @@ import seedu.onetwodo.model.task.TaskAttributesChecker;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
+//@@author A0143029M
 /**
  * Edits the details of an existing task in the todo task.
  */
@@ -74,8 +75,6 @@ public class EditCommand extends Command {
         // Throw CommandException if edited task is invalid
         TaskAttributesChecker.validateEditedAttributes(editedTask);
         try {
-            // Not using model.updateTask as it does not trigger observers
-            // model.updateTask(filteredTaskListIndex, editedTask);
             model.updateTask(taskToEdit, internalIdx, editedTask);
             jumpToNewTask(editedTask);
             EventsCenter.getInstance().post(new DeselectCardsEvent());

@@ -18,7 +18,7 @@ import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
 
-// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
+//@@author A0143029M
 public class EditCommandTest extends ToDoListGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.

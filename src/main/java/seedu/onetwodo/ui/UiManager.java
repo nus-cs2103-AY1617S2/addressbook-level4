@@ -50,7 +50,7 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); // This should be called before creating other UI
-                               // parts
+            // parts
             mainWindow.fillInnerParts();
 
             mainWindow.showWelcomeDialog();
@@ -116,6 +116,7 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
 
+    //@@author A0143029M
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         // Scroll when testing
@@ -137,8 +138,6 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.openDialog(event.getNewSelection());
-        // Opens browserPanel
-        // mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 }
