@@ -73,7 +73,7 @@ public class UndoController extends Controller {
 
     //@@author A0162011A
     public static String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
     }
 
     public static String[][] getDetailedHelp() {
