@@ -8,6 +8,7 @@ import org.junit.Test;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
 
@@ -58,7 +59,15 @@ public class ListCommandTest extends ToDoListGuiTest {
         //assert taskListPanel displays correct tasks
         TestTask[] filteredTaskList = TestUtil.getTasksByTaskType(currentList, taskType);
         int testTaskIndex = TestUtil.getFilteredIndexInt(filteredTaskListIndex);
-        filteredTaskList[testTaskIndex].setIsDone(true);
+        TestTask targetTask = filteredTaskList[testTaskIndex];
+        if (!targetTask.hasRecur()) {
+            targetTask.setIsDone(true);
+        } else {
+            TestTask newTestTask = new TaskBuilder(targetTask).build();
+            newTestTask.forwardTaskRecurDate();
+            targetTask.setIsDone(true);
+            filteredTaskList = TestUtil.addTasksToList(currentList, newTestTask);
+        }
         assertTrue(taskListPanel.isListMatching(taskType, filteredTaskList));
         assertResultMessage(expectedFeedbackMessage);
 
@@ -80,8 +89,15 @@ public class ListCommandTest extends ToDoListGuiTest {
         //assert taskListPanel displays correct tasks
         TestTask[] filteredTaskList = TestUtil.getTasksByTaskType(currentList, taskType);
         int testTaskIndex = TestUtil.getFilteredIndexInt(filteredTaskListIndex);
-        filteredTaskList[testTaskIndex].setIsDone(true);
-        TestTask[] filteredResultList = TestUtil.getTasksByDoneStatus(filteredTaskList, isDone);
+        TestTask targetTask = filteredTaskList[testTaskIndex];
+        if (!targetTask.hasRecur()) {
+            targetTask.setIsDone(true);
+        } else {
+            TestTask newTestTask = new TaskBuilder(targetTask).build();
+            newTestTask.forwardTaskRecurDate();
+            targetTask.setIsDone(true);
+            filteredTaskList = TestUtil.addTasksToList(currentList, newTestTask);
+        }        TestTask[] filteredResultList = TestUtil.getTasksByDoneStatus(filteredTaskList, isDone);
         assertTrue(taskListPanel.isListMatching(taskType, filteredResultList));
         assertResultMessage(expectedFeedbackMessage);
     }

@@ -189,4 +189,43 @@ public class TestTask implements ReadOnlyTask {
         }
     }
 
+    //@@author A0139343E
+    public void forwardTaskRecurDate() {
+        assert this.getTaskType() != TaskType.TODO;
+        StartDate tempStartDate;
+        EndDate tempEndDate = getEndDate();
+        switch(this.getRecur().value) {
+        case Recurring.RECUR_DAILY:
+            this.setEndDate(new EndDate(tempEndDate.getLocalDateTime().plusDays(1)));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.setStartDate(new StartDate(tempStartDate.getLocalDateTime().plusDays(1)));
+            }
+            break;
+        case Recurring.RECUR_WEEKLY:
+            this.setEndDate(new EndDate(tempEndDate.getLocalDateTime().plusWeeks(1)));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.setStartDate(new StartDate(tempStartDate.getLocalDateTime().plusWeeks(1)));
+            }
+            break;
+        case Recurring.RECUR_MONTHLY:
+            this.setEndDate(new EndDate(tempEndDate.getLocalDateTime().plusMonths(1)));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.setStartDate(new StartDate(tempStartDate.getLocalDateTime().plusMonths(1)));
+            }
+            break;
+        case Recurring.RECUR_YEARLY:
+            this.setEndDate(new EndDate(tempEndDate.getLocalDateTime().plusYears(1)));
+            if (this.hasStartDate()) {
+                tempStartDate = getStartDate();
+                this.setStartDate(new StartDate(tempStartDate.getLocalDateTime().plusYears(1)));
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
 }

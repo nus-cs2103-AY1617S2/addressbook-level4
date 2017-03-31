@@ -9,6 +9,7 @@ import org.junit.Test;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
 
@@ -70,16 +71,24 @@ public class DoneCommandTest extends ToDoListGuiTest {
 
         TestTask[] filteredTaskList = TestUtil.getTasksByTaskType(currentList, taskType);
         int testTaskIndex = TestUtil.getFilteredIndexInt(filteredTaskListIndex);
-        filteredTaskList[testTaskIndex].setIsDone(true);
+        TestTask targetTask = filteredTaskList[testTaskIndex];
+        if (!targetTask.hasRecur()) {
+            targetTask.setIsDone(true);
+        } else {
+            TestTask newTestTask = new TaskBuilder(targetTask).build();
+            newTestTask.forwardTaskRecurDate();
+            targetTask.setIsDone(true);
+            filteredTaskList = TestUtil.addTasksToList(currentList, newTestTask);
+        }
 
         //Assert taskListPanel correctly shows tasks left undone
         TestTask[] filteredUndoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, false);
         assertTrue(taskListPanel.isListMatching(taskType, filteredUndoneList));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, filteredTaskList[testTaskIndex]));
+        assertResultMessage(String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, targetTask));
 
-        //Assert taskListPanel correctly shows tasks that are undone
+        //Assert taskListPanel correctly shows tasks that are done
         commandBox.runCommand(ListCommand.COMMAND_WORD + " done");
         TestTask[] filteredDoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, true);
         assertTrue(taskListPanel.isListMatching(taskType, filteredDoneList));

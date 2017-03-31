@@ -100,11 +100,22 @@ public class RedoCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(RedoCommand.COMMAND_WORD);
 
         TestTask[] filteredTaskList = TestUtil.getTasksByTaskType(currentList, TaskType.DEADLINE);
-        filteredTaskList[1].setIsDone(true);
+        int testTaskIndex = TestUtil.getFilteredIndexInt("d2");
+
+        TestTask targetTask = filteredTaskList[testTaskIndex];
+        if (!targetTask.hasRecur()) {
+            targetTask.setIsDone(true);
+        } else {
+            TestTask newTestTask = new TaskBuilder(targetTask).build();
+            newTestTask.forwardTaskRecurDate();
+            targetTask.setIsDone(true);
+            filteredTaskList = TestUtil.addTasksToList(currentList, newTestTask);
+        }
         TestTask[] filteredUndoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, false);
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, filteredUndoneList));
 
-        String feedbackMessage = String.format(DoneCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), filteredTaskList[1]);
+        String feedbackMessage = String.format(DoneCommand.COMMAND_WORD.concat(COMMAND_FORMATTER),
+                targetTask);
         assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
     }
 
