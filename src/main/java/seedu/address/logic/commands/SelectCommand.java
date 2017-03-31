@@ -47,6 +47,7 @@ public class SelectCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
             }
             EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
+            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(lastShownEventList.get(targetIndex - 1)));
             ReadOnlyEvent selected = lastShownEventList.get(targetIndex - 1);
             return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS, selected));
         }
@@ -55,7 +56,8 @@ public class SelectCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex - 1));
-            ReadOnlyTask selected = lastShownTaskList.get(targetIndex - 1);
+            EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(lastShownTaskList.get(targetIndex - 1)));
+            ReadOnlyTask selected = lastShownTaskList.get(targetIndex - 1);            
             return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, selected));
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
