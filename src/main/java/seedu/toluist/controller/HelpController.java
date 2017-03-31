@@ -44,6 +44,23 @@ public class HelpController extends Controller {
     private static final String[] HELP_EXAMPLES = { "`help`\nShows general help for all commands.",
                                                     "`help add`\nShows detailed help for `add` command." };
 
+    //for detailed help
+    private static final String STRING_BASIC_INFO = "Basic info:\n";
+    private static final String STRING_COMMENTS = "\n\nComments:\n";
+    private static final String STRING_EXAMPLES = "\n\nExamples:\n";
+    private static final int INDEX_HELP_BASIC = 0;
+    private static final int INDEX_HELP_COMMENTS = 1;
+    private static final int INDEX_HELP_EXAMPLES = 2;
+    private static final String FORMAT_SPACING = "\n";
+    //for basic help
+    private static final String STRING_COMMAND = "Command: ";
+    private static final String STRING_DESCRIPTION = "\n";
+    private static final String STRING_FORMAT = "\nFormat: ";
+    private static final int INDEX_HELP_COMMAND = 0;
+    private static final int INDEX_HELP_DESCRIPTION = 2;
+    private static final int INDEX_HELP_FORMAT = 1;
+    private static final String FORMAT_LARGESPACING = "\n\n";
+
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
         HashMap<String, String> tokens = tokenize(command);
@@ -51,31 +68,43 @@ public class HelpController extends Controller {
         String commandWord = tokens.get(PARAMETER_COMMAND);
         if (commandWord.equals("")) {
             showGeneralHelp();
-            uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT_GENERAL));
+            //uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT_GENERAL));
         } else if (getControllerKeywords().contains(commandWord.toLowerCase())) {
             showSpecificHelp(commandWord);
-            uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_SPECIFIC, commandWord)));
+            //uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_SPECIFIC, commandWord)));
         } else {
             uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR));
         }
     }
 
     private void showSpecificHelp(String commandWord) {
-        Class<? extends Controller> controller = findControllerFromKeyword(commandWord);
-      //uiStore.setTasks(controller.getDetailedHelp());
-        getDetailedHelpFromController(controller);
+        uiStore.setHelp(getDetailedHelpFromController(findControllerFromKeyword(commandWord)));
+        uiStore.setCommandResult(new CommandResult(convertListListToStringForDetailed(getDetailedHelpFromController(findControllerFromKeyword(commandWord)))));
     }
 
-    private String[][] getDetailedHelpFromController(Class<? extends Controller> controller) {
+    private List<List<String>> getDetailedHelpFromController(Class<? extends Controller> controller) {
         String methodName = METHOD_DETAILED_HELP;
-        String[][] detailedHelp;
+        List<List<String>> detailedHelp;
         try {
             Method method = controller.getMethod(methodName);
-            detailedHelp = (String[][]) method.invoke(null);
+            detailedHelp = convertString2dToListList((String[][]) method.invoke(null));
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             return null;
         }
         return detailedHelp;
+    }
+
+    private List<List<String>> convertString2dToListList(String[][] data) {
+        List<String> subList;
+        List<List<String>> list = new ArrayList<List<String>>();
+        for (int firstPosition = 0; firstPosition < data.length; firstPosition++) {
+            subList = new ArrayList<String>();
+            for (int secondPosition = 0; secondPosition < data[firstPosition].length; secondPosition++) {
+                subList.add(data[firstPosition][secondPosition]);
+            }
+            list.add(subList);
+        }
+        return list;
     }
 
     private Class<? extends Controller> findControllerFromKeyword(String commandWord) {
@@ -102,15 +131,33 @@ public class HelpController extends Controller {
     }
 
     private void showGeneralHelp() {
-        List<List<String>> commandsBasicHelp = getBasicHelpFromClasses();
-        List<String> resultText = new ArrayList<String>();
+        List<List<String>> generalHelp = getBasicHelpFromClasses();
+        uiStore.setCommandResult(new CommandResult(convertListListToStringForGeneral(generalHelp)));
+    }
 
-
-        for (List<String> commandHelpMessage : commandsBasicHelp) {
-            resultText.add(String.join("\n", commandHelpMessage));
+    private String convertListListToStringForGeneral(List<List<String>> generalHelp) {
+        String finalResult = "";
+        for (int i = 0; i < generalHelp.size(); i++) {
+            finalResult += STRING_COMMAND;
+            finalResult += String.join(FORMAT_SPACING, generalHelp.get(i).get(INDEX_HELP_COMMAND));
+            finalResult += STRING_FORMAT;
+            finalResult += String.join(FORMAT_SPACING, generalHelp.get(i).get(INDEX_HELP_FORMAT));
+            finalResult += STRING_DESCRIPTION;
+            finalResult += String.join(FORMAT_SPACING, generalHelp.get(i).get(INDEX_HELP_DESCRIPTION));
+            finalResult += FORMAT_LARGESPACING;
         }
+        return finalResult;
+    }
 
-        //uiStore.setTasks(resultText);
+    private String convertListListToStringForDetailed(List<List<String>> detailedHelp) {
+        String finalResult = "";
+        finalResult += STRING_BASIC_INFO;
+        finalResult += String.join(FORMAT_SPACING, detailedHelp.get(INDEX_HELP_BASIC));
+        finalResult += STRING_COMMENTS;
+        finalResult += String.join(FORMAT_SPACING, detailedHelp.get(INDEX_HELP_COMMENTS));
+        finalResult += STRING_EXAMPLES;
+        finalResult += String.join(FORMAT_SPACING, detailedHelp.get(INDEX_HELP_EXAMPLES));
+        return finalResult;
     }
 
     public HashMap<String, String> tokenize(String command) {
@@ -194,7 +241,7 @@ public class HelpController extends Controller {
     }
 
     public static String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_DETAILS, HELP_FORMAT };
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
     }
 
     public static String[][] getDetailedHelp() {
