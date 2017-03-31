@@ -112,11 +112,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
   //@@author
     @Override
-    public synchronized void doneTasks(ArrayList<Task> doneTasks) {
+    public synchronized boolean toggleTasksDone(ArrayList<Task> toggleTasks) {
         updateStacks();
-        ezDo.doneTasks(doneTasks);
-        updateFilteredListToShowAll();
+        ezDo.toggleTasksDone(toggleTasks);
+        if (toggleTasks.get(0).getDone()) {
+            updateFilteredListToShowAll();
+        } else {
+            updateFilteredDoneList();
+        }
         indicateEzDoChanged();
+        return toggleTasks.get(0).getDone();
     }
 
     @Override
