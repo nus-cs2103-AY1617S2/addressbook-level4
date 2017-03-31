@@ -1,6 +1,9 @@
 package seedu.geekeep.storage;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -116,10 +119,12 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) throws IOException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "GeeKeep file path changed, saving to file"));
-        configStorage.saveConfig(event.config);
-        setGeeKeepFilePath(event.config.getGeekeepFilePath());
+        Config config = event.config;
+        String filePath = config.getGeekeepFilePath();
         try {
-            saveGeeKeep(event.geekeep);
+            Files.move(Paths.get(getGeeKeepFilePath()), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+            saveConfig(config);
+            setGeeKeepFilePath(filePath);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
