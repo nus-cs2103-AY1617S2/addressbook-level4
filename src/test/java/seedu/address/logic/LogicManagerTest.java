@@ -184,7 +184,7 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new YTomorrow(), Collections.emptyList());
     }
 
-
+    //@@author A0164889E
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -194,6 +194,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name d/12.12 e/valid@email.butNoGroupPrefix valid, address", expectedMessage);
     }
 
+    //@@author A0164889E
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add Valid Name d/not_numbers e/valid@e.mail g/valid, group",
@@ -413,13 +414,11 @@ public class LogicManagerTest {
      * A utility class to generate test data.
      */
     class TestDataHelper {
-
+        //@@author A0164889E
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            //Phone privatePhone = new Phone("111111");
             Date privateDate = new Date("12.11");
             Email email = new Email("adam@gmail.com");
-            //Address privateAddress = new Address("111, alpha street");
             Group privateGroup = new Group("leisure time");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -428,6 +427,7 @@ public class LogicManagerTest {
             return new Task(name, privateDate, email, privateGroup, tags);
         }
 
+        //@@author A0164889E
         /**
          * Generates a valid person using the given seed.
          * Running this function with the same parameter values guarantees the returned person will have the same state.
@@ -438,10 +438,8 @@ public class LogicManagerTest {
         Task generatePerson(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
-                    //new Phone("" + Math.abs(seed)),
                     new Date("0" + Math.abs(seed) + ".0" + Math.abs(seed)),
                     new Email(seed + "@email"),
-                    //new Address("House of " + seed),
                     new Group("list of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -455,9 +453,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getName().toString());
             cmd.append(" e/").append(p.getEmail());
-            //cmd.append(" p/").append(p.getPhone());
             cmd.append(" d/").append(p.getDate());
-            //cmd.append(" a/").append(p.getAddress());
             cmd.append(" g/").append(p.getGroup());
 
             UniqueTagList tags = p.getTags();
@@ -535,6 +531,7 @@ public class LogicManagerTest {
             return Arrays.asList(persons);
         }
 
+        //@@author A0164889E
         /**
          * Generates a Person object with given name. Other fields will have some dummy values.
          */

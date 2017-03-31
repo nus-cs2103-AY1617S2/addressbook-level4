@@ -11,7 +11,8 @@ import seedu.address.model.task.UniquePersonList;
 public class TypicalTestPersons {
 
     public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
-
+    
+    //@@author A0164889E
     public TypicalTestPersons() {
         try {
             alice = new PersonBuilder().withName("Alice Paul").withGroup("group1")

@@ -26,8 +26,9 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         int addressBookIndex = 1;
+        //@@author A0164889E
         String detailsToEdit = "Bobby d/12.04 e/bobby@gmail.com g/project t/undone";
-
+        //@@author A0164889E
         TestPerson editedPerson = new PersonBuilder().withName("Bobby").withDate("12.04")
                 .withEmail("bobby@gmail.com").withGroup("project").withTags("undone").build();
 
@@ -108,6 +109,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicatePerson_failure() {
+        //@@author A0164889E
         commandBox.runCommand("edit 3 Alice Paul d/12.12 e/a@gml.com "
                                 + "g/group1 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);

@@ -71,6 +71,7 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
+    //@@author A0164889E
     private static Task[] getSamplePersonData() {
         try {
             //CHECKSTYLE.OFF: LineLength

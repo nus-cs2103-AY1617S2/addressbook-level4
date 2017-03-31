@@ -16,9 +16,7 @@ import seedu.address.model.task.ReadOnlyPerson;
  */
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    //private static final String ADDRESS_FIELD_ID = "#address";
     private static final String GROUP_FIELD_ID = "#group";
-    //private static final String PHONE_FIELD_ID = "#phone";
     private static final String DATE_FIELD_ID = "#date";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
@@ -37,17 +35,11 @@ public class PersonCardHandle extends GuiHandle {
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
-
-//    public String getAddress() {
-//        return getTextFromLabel(ADDRESS_FIELD_ID);
-//    }
+    //@@author A0164889E
     public String getGroup() {
         return getTextFromLabel(GROUP_FIELD_ID);
     }
-
-//    public String getPhone() {
-//        return getTextFromLabel(PHONE_FIELD_ID);
-//    }
+    //@@author A0164889E
     public String getDate() {
         return getTextFromLabel(DATE_FIELD_ID);
     }
