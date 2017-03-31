@@ -1,7 +1,5 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import seedu.address.logic.commands.RedoCommand;
@@ -46,6 +44,5 @@ public class UnrevertCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("revert");
         commandBox.runCommand("unrevert");
         assertResultMessage(UnrevertCommand.MESSAGE_SUCCESS);
-        //assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

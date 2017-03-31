@@ -1,6 +1,5 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
@@ -44,11 +43,6 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
-
-        //confirm the list now contains all previous persons except the deleted person
-        //assertTrue(taskListPanel.isListMatching(expectedRemainder));
-
-        //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 

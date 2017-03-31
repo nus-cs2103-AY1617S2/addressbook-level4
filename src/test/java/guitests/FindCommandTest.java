@@ -1,7 +1,5 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -35,6 +33,5 @@ public class FindCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " tasks listed!");
-        //assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }

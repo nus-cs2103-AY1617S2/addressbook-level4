@@ -1,11 +1,9 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
@@ -122,14 +120,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     private void assertEditSuccess(int filteredTaskListIndex, int addressBookIndex,
                                     String detailsToEdit, TestTask editedTask) {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
-
-        // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
-        //assertMatching(editedTask, editedCard);
-
-        // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[addressBookIndex - 1] = editedTask;
-        //assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }

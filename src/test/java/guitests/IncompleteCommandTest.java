@@ -1,6 +1,5 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.IncompleteCommand;
 import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
 
 public class IncompleteCommandTest extends AddressBookGuiTest {
 
@@ -54,11 +52,7 @@ public class IncompleteCommandTest extends AddressBookGuiTest {
     private void assertIncompleteSuccess(int targetIndexOneIndexed, TestTask editedTask) {
         commandBox.runCommand("complete " + targetIndexOneIndexed);
         commandBox.runCommand("incomplete 1");
-        TestTask[] expectedTaskList = TestUtil.addTasksToList(originalTaskList, editedTask);
-
         assertResultMessage(String.format(IncompleteCommand.MESSAGE_MARK_INCOMPLETE_SUCCESS, editedTask));
-        //assertTrue(taskListPanel.isListMatching(expectedTaskList));
-
     }
 
 }
