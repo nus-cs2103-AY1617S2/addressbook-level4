@@ -36,7 +36,7 @@ public class HelpController extends Controller {
     private static final String COMMAND_SPLITTER_REGEX = " ";
 
     private static final String METHOD_BASIC_HELP = "getBasicHelp";
-    private static final String METHOD_DETAILED_HELP = "";
+    private static final String METHOD_DETAILED_HELP = "getDetailedHelp";
     private static final String METHOD_CONTROLLER_KEYWORDS = "getCommandWords";
 
     private static final String HELP_DETAILS = "Marks a task to be complete or incomplete.";
