@@ -189,20 +189,15 @@ public class EditCommand extends Command {
 
         public void setRawDeadline(Optional<String> rawDeadline) {
             this.rawDeadline = rawDeadline;
-            // TODO Auto-generated method stub
 
         }
 
         public void setRawStartDateTime(Optional<String> value) {
             rawStartDateTime = value;
-            // TODO Auto-generated method stub
-
         }
 
         public void setRawEndDateTime(Optional<String> value) {
             rawEndDateTime = value;
-            // TODO Auto-generated method stub
-
         }
 
         public Optional<String> getRawDeadline() {
