@@ -1,8 +1,8 @@
 package seedu.geekeep.logic.parser;
 
 import static seedu.geekeep.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_ENDING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_ENDING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_STARTING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_TAG;
 

@@ -1,8 +1,8 @@
 package seedu.geekeep.logic.parser;
 
 import static seedu.geekeep.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_ENDING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_ENDING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_STARTING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -46,7 +46,8 @@ public class UpdateCommandParser {
                     ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_ENDING_DATETIME)));
             updateTaskDescriptor.setStartDateTime(
                     ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_STARTING_DATETIME)));
-            updateTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            updateTaskDescriptor.setDescription(
+                    ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             updateTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
