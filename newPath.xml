@@ -9,15 +9,15 @@
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
-        <taskName>three</taskName>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
         <taskName>four</taskName>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>five</taskName>
         <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>three</taskName>
+        <taskStatus>Completed</taskStatus>
     </tasks>
 </taskmanager>

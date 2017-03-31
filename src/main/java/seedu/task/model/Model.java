@@ -64,11 +64,15 @@ public interface Model {
 	void updateBackup() throws DuplicateTaskException;
     //@@author A0163845X
 	void sort(TaskComparable t);
+    //@@author A0163845X
 
 	void setTaskManager(Optional<ReadOnlyTaskManager> readTaskManager);
+    //@@author A0163845X
 
 	void redo() throws Exception;
-	
+    //@@author A0163845X
+
+	public void filterStatus(String status);
 	//void getPath(String path);
 
 }

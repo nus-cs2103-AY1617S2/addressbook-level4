@@ -13,6 +13,7 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskComparable;
+import seedu.task.model.task.TaskStatusPredicate;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -174,7 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
 	NameQualifier(Set<String> nameKeyWords) {
 	    this.nameKeyWords = nameKeyWords;
 	}
-
+    //@@author A0163845X
 	@Override
 	public boolean run(ReadOnlyTask task) {
 	    for (String s : nameKeyWords) {
@@ -220,5 +221,9 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.redo();
 		indicateTaskManagerChanged();
 	}
+    //@@author A0163845X
 
+	public void filterStatus(String status) {
+		filteredTasks.setPredicate(new TaskStatusPredicate(status));
+	}
 }
