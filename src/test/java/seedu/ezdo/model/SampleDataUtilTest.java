@@ -22,18 +22,22 @@ public class SampleDataUtilTest {
     @Test
     public void getSampleTasks_ive_throwsAssertionError() throws Exception {
         thrown.expect(AssertionError.class);
-        new Expectations(Name.class) {{
-            new Name("Buy one cherry fruit"); result = new IllegalValueException("illegal value");
-        }};
+        new Expectations(Name.class) {
+            {
+                new Name("Buy one cherry fruit"); result = new IllegalValueException("illegal value");
+            }
+        };
         SampleDataUtil.getSampleTasks();
     }
 
     @Test
     public void getSampleEzDo_duplicateTask_throwsAssertionError() throws Exception {
         thrown.expect(AssertionError.class);
-        new Expectations(EzDo.class) {{
-            new EzDo(); result = new DuplicateTaskException();
-        }};
+        new Expectations(EzDo.class) {
+            {
+                new EzDo(); result = new DuplicateTaskException();
+            }
+        };
         SampleDataUtil.getSampleEzDo();
     }
 }
