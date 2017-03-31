@@ -7,6 +7,12 @@ import java.util.EnumMap;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 //@@author A0110491U
+/**
+ * This class is a Date-Time Natural Language Utility class that supports the natural language processing
+ * for the date attributes implemented by the Events and Tasks classes. Natural Language for this is defined
+ * as any String that does not fully contain digits. e.g. {"\\d+"} will not be considered natural language
+ *
+ */
 public class DateTimeNLUtil {
 
     public static final String MESSAGE_DATELANG_CONSTRAINTS = "natural language function only supports"
@@ -29,6 +35,9 @@ public class DateTimeNLUtil {
         mon, tue, wed, thu, fri, sat, sun
     }
 
+    /**
+     * Constructor sets up the default values in the EnumMaps for instance of this class
+     */
     public DateTimeNLUtil() {
         today = LocalDate.now();
         modmap.put(Modifier.next, 1);
@@ -44,6 +53,12 @@ public class DateTimeNLUtil {
         absdaymap.put(AbsDay.sun, "SUNDAY");
     }
 
+    /**
+     * This method takes in a natural language String argument, and processes it to determine
+     * if it has the required format to be converted to a date in String (DDMMYY)
+     * @return 6 digit String in the format (DDMMYY)
+     * @throws IllegalNLException if the natural language
+     */
     public String getDate(String arg) throws IllegalNLException {
         String[] args = arg.split(" ");
         if (args.length == 1) {
@@ -88,6 +103,9 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    /**
+     * Determines if this String argument is in the RelativeDay Enum
+     */
     public static boolean isARelativeDay(String arg) {
         for (RelativeDay each : RelativeDay.values()) {
             if (each.name().equals(arg)) {
@@ -97,6 +115,9 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    /**
+     * returns the Enum value in RelativeDay Enum that matches the given String argument
+     */
     public static RelativeDay getRelativeEnum(String arg) {
         for (RelativeDay each : RelativeDay.values()) {
             if (each.name().equals(arg)) {
@@ -106,6 +127,9 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    /**
+     * Determines if this String argument is in the AbsDay Enum
+     */
     public static boolean isAnAbsDay(String arg) {
         for (AbsDay day : AbsDay.values()) {
             if (day.name().equals(arg)) {
@@ -115,6 +139,9 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    /**
+     * returns the Enum value in AbsDay Enum that matches the given String argument
+     */
     public static AbsDay getAbsDay(String arg) {
         for (AbsDay day : AbsDay.values()) {
             if (day.name().equals(arg)) {
@@ -124,6 +151,9 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    /**
+     * Determines if this String argument is in the Modifier Enum
+     */
     public static boolean isAModifier(String arg) {
         for (Modifier mod : Modifier.values()) {
             if (mod.name().equals(arg)) {
@@ -133,6 +163,9 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    /**
+     * returns the Enum value in Modifier Enum that matches the given String argument
+     */
     public static Modifier getModifier(String arg) {
         for (Modifier mod : Modifier.values()) {
             if (mod.name().equals(arg)) {
@@ -142,6 +175,10 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    /**
+     * Represents the IllegalValueException for a Natural Language that was parsed
+     *
+     */
     public class IllegalNLException extends IllegalValueException {
 
         public IllegalNLException(String message) {

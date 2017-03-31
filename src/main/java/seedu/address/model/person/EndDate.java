@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateTimeNLUtil;
 import seedu.address.commons.util.StringUtil;
 
 //@@author A0148038A
@@ -17,9 +18,10 @@ public class EndDate {
             "Event End Date can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
 
     public final LocalDate value;
-
+    //@@author A0110491U
     /**
-     * Validates given end date.
+     * Validates given end date. If given in digits, tries to parse into date. If given in non-digit
+     * format, tries to process using the DateTimeNLUtil class that tries to read natural language
      *
      * @throws IllegalValueException if given start date is invalid.
      */
@@ -27,10 +29,16 @@ public class EndDate {
         if (endDateArg == null) {
             this.value = null;
         } else {
-            try {
-                this.value = StringUtil.parseStringToDate(endDateArg);
-            } catch (DateTimeException illegalValueException) {
-                throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
+            if (endDateArg.matches("\\d+")) {
+                try {
+                    this.value = StringUtil.parseStringToDate(endDateArg);
+                } catch (DateTimeException illegalValueException) {
+                    throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
+                }
+            } else {
+                DateTimeNLUtil dt = new DateTimeNLUtil();
+                String nldate = dt.getDate(endDateArg);
+                this.value = StringUtil.parseStringToDate(nldate);
             }
         }
     }

@@ -25,7 +25,8 @@ public class ByDate {
 
     //@@author A0110491U
     /**
-     * Validates given by date.
+     * Validates given by date. If given in digits, tries to parse into date. If given in non-digit
+     * format, tries to process using the DateTimeNLUtil class that tries to read natural language
      *
      * @throws IllegalValueException if given start date is invalid.
      */

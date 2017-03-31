@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateTimeNLUtil;
 import seedu.address.commons.util.StringUtil;
 
 //@@author A0148038A
@@ -17,17 +18,24 @@ public class StartDate {
             "Event Start Date can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
 
     public final LocalDate value;
-
+    //@@author A0110491U
     /**
-     * Validates given start date.
+     * Validates given start date. If given in digits, tries to parse into date. If given in non-digit
+     * format, tries to process using the DateTimeNLUtil class that tries to read natural language
      *
      * @throws IllegalValueException if given start date is invalid.
      */
     public StartDate(String startDateArg) throws IllegalValueException {
-        try {
-            this.value = StringUtil.parseStringToDate(startDateArg);
-        } catch (DateTimeException illegalValueException) {
-            throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
+        if (startDateArg.matches("\\d+")) {
+            try {
+                this.value = StringUtil.parseStringToDate(startDateArg);
+            } catch (DateTimeException illegalValueException) {
+                throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
+            }
+        } else {
+            DateTimeNLUtil dt = new DateTimeNLUtil();
+            String nldate = dt.getDate(startDateArg);
+            this.value = StringUtil.parseStringToDate(nldate);
         }
     }
 
