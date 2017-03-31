@@ -85,7 +85,7 @@ public class EditCommandTest extends EzDoGuiTest {
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
-        
+
         detailsToEdit = "Alson t/brother";
 
         editedTask = new TaskBuilder().withName("Alson").withPriority("3")
