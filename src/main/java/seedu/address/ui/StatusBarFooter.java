@@ -36,7 +36,7 @@ public class StatusBarFooter extends UiPart<Region> {
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
         setSaveLocation(saveLocation);
-        setDisplayStatus("Currently showing [Pending] activities");
+        setDisplayStatus("Currently showing [PENDING] activities");
         registerAsAnEventHandler(this);
     }
 
