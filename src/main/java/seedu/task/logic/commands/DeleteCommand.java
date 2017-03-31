@@ -56,7 +56,8 @@ public class DeleteCommand extends Command {
                 model.addTask(Task.readOnlyToTask(taskToDelete));
                 return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, newTask));
             } catch (DuplicateTaskException e) {
-                throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);            }
+                throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);
+            }
 
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
