@@ -108,7 +108,7 @@ public class TaskTabPanel extends UiPart<Region> {
         }
     }
 
-    void fillTaskListPanel(AnchorPane placeholder) {
+    private void fillTaskListPanel(AnchorPane placeholder) {
         placeholder.getChildren().clear();
         taskListPanel = new TaskListPanel(placeholder, taskList);
     }
