@@ -110,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
-  //@@author
+
     @Override
     public synchronized boolean toggleTasksDone(ArrayList<Task> toggleTasks) {
         updateStacks();
@@ -135,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         indicateEzDoChanged();
     }
-  //@@author A0139248X
+
     @Override
     public void undo() throws EmptyStackException {
         ReadOnlyEzDo currentState = new EzDo(this.getEzDo());
