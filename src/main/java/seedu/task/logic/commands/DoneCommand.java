@@ -10,6 +10,7 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0146757R
 /**
  * Mark a task as completed which is identified using it's last displayed index
  * from the task manager.
@@ -56,7 +57,7 @@ public class DoneCommand extends Command {
         try {
             model.completeTask(targetIndex[i] - 1);
             //to focus on the completed task
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskList().size() - 1));
+            //EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskList().size() - 1));
             
             
        } catch (TaskNotFoundException pnfe) {
@@ -72,3 +73,4 @@ public class DoneCommand extends Command {
     	return true;
     }
 }
+//@@author

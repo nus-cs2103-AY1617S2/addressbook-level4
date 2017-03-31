@@ -2,10 +2,7 @@ package seedu.task.logic.commands;
 
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.UniqueTaskList;
-/**
- * @author Daniel Mullen
- *
- */
+//@@author A0163845X
 public class UndoCommand extends Command {
 	public static final String COMMAND_WORD = "undo";
 	public static final String MESSAGE_SUCCESS = "Undo successful";

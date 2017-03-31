@@ -1,9 +1,11 @@
 package seedu.task.model;
 
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -25,10 +27,10 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-
+//@@author A0146757R
     /** Complete the given task. */
     void completeTask(int index) throws UniqueTaskList.TaskNotFoundException;
-    
+//@@author    
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
      * {@code editedTask}.
@@ -56,14 +58,14 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
-
+    //@@author A0163845X
 	void undo() throws Exception;
-
+    //@@author A0163845X
 	void updateBackup() throws DuplicateTaskException;
+    //@@author A0163845X
+	void sort(TaskComparable t);
 
-	void sortByTime();
-
-	void sortByName();
+	void setTaskManager(Optional<ReadOnlyTaskManager> readTaskManager);
 	
 	//void getPath(String path);
 

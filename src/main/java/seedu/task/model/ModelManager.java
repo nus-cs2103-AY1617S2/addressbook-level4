@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -38,7 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
 	this.taskManager = new TaskManager(taskManager);
 	filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
-
+    //@@author A0163845X
     // brute force pattern matching algorithm
     public static boolean patternStringMatch(String p, String t) {
 	int i = 0;
@@ -86,13 +88,13 @@ public class ModelManager extends ComponentManager implements Model {
 	taskManager.removeTask(target);
 	indicateTaskManagerChanged();
     }
-
+//@@author A0146757R
     @Override
 	public synchronized void completeTask(int index) throws TaskNotFoundException {
 		taskManager.completeTask(index);
 		indicateTaskManagerChanged();
 	}
-    
+//@@author    
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
 	taskManager.addJobTask(task);
@@ -189,31 +191,29 @@ public class ModelManager extends ComponentManager implements Model {
 	    return "name=" + String.join(", ", nameKeyWords);
 	}
     }
-
+    //@@author A0163845X
 	@Override
 	public void undo() throws Exception {
 		taskManager.undo();
 		indicateTaskManagerChanged();
 	}
-
+    //@@author A0163845X
 	@Override
 	public void updateBackup() throws DuplicateTaskException {
 		taskManager.updateBackup();
-		
-		// TODO Auto-generated method stub
-		
 	}
+    //@@author A0163845X
+	@Override
+	public void sort(TaskComparable t) {
+		taskManager.sort(t);
+	}
+    //@@author A0163845X
 
 	@Override
-	public void sortByTime() {
-		taskManager.sortTasksByTime();
-		indicateTaskManagerChanged();
-		
-	}
-	public void sortByName() {
-		System.out.println("test");
-		taskManager.sortTasksByName();
-		indicateTaskManagerChanged();
+	public void setTaskManager(Optional<ReadOnlyTaskManager> readTaskManager) {
+		if (readTaskManager.isPresent()) {
+			taskManager.loadNewTaskList(readTaskManager);
+		}
 	}
 
 }

@@ -220,7 +220,7 @@ public class LogicManagerTest {
 
 	assertCommandFailure(commandWord + " 3", expectedMessage);
     }
-
+//@@author A0146757R
     @Test
     public void execute_invalid() {
 	String invalidCommand = "       ";
@@ -255,20 +255,6 @@ public class LogicManagerTest {
 	assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
     
-    /*
-    @Test
-    public void execute_add_invalidTaskData() {
-	assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", TaskName.MESSAGE_NAME_CONSTRAINTS);
-	/*
-	 * assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address"
-	 * , Phone.MESSAGE_PHONE_CONSTRAINTS);
-	 * assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address"
-	 * , Email.MESSAGE_EMAIL_CONSTRAINTS);
-	 */
-//	assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-//		Tag.MESSAGE_TAG_CONSTRAINTS);
-//    }
-
     @Test
     public void execute_add_successful() throws Exception {
 	// setup expectations
@@ -443,26 +429,7 @@ public class LogicManagerTest {
 
 	    return cmd.toString();
 	}
-	
-	String generateEditCommand(Task t, int index) {
-		StringBuffer cmd = new StringBuffer();
-
-		cmd.append("edit ");
-
-		cmd.append(index);
-		cmd.append(" d/").append(t.getTaskDate());
-		    cmd.append(" s/").append(t.getTaskStartTime());
-		    cmd.append(" e/").append(t.getTaskEndTime());
-		    cmd.append(" m/").append(t.getTaskDescription());
-		   // cmd.append("Ongoing");
-		    UniqueTagList tags = t.getTags();
-		for (Tag tag : tags) {
-			cmd.append(" t/").append(tag.tagName);
-		}
-		
-		return cmd.toString();
-	}
-
+//@@author
 	/**
 	 * Generates an TaskManager with auto-generated tasks.
 	 */
@@ -535,7 +502,7 @@ public class LogicManagerTest {
 	List<Task> generateTaskList(Task... tasks) {
 	    return Arrays.asList(tasks);
 	}
-
+//@@author A0146757R
 	/**
 	 * Generates a Task object with given name. Other fields will have some
 	 * dummy values.
@@ -545,5 +512,6 @@ public class LogicManagerTest {
 		    new String("This is some description."), new TaskStatus("Ongoing"),
 		    new UniqueTagList());
 	}
+//@@author	    
     }
 }

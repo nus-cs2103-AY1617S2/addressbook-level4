@@ -3,11 +3,15 @@ package seedu.task.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Queue;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -15,6 +19,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.TaskTimeComparable;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
@@ -29,8 +34,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
-    private UniqueTaskList backupTasks;
-
+    private Deque<UniqueTaskList> backupTasks = new LinkedList<UniqueTaskList>();
+    private final int BACKUP_LIST_MAX_SIZE = 10;
     /*
      * The 'unusual' code block below is an non-static initialization block,
      * sometimes used to avoid duplication between constructors. See
@@ -122,7 +127,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 	// in the task list.
 	tasks.updateTask(index, editedTask);
     }
-
+//@@author A0146757R
     //Mark a task as completed
     public void completeTask(int index) throws UniqueTaskList.TaskNotFoundException {
         try {
@@ -131,7 +136,7 @@ public class TaskManager implements ReadOnlyTaskManager {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-    
+//@@author    
     /**
      * Ensures that every tag in this task: - exists in the master list
      * {@link #tags} - points to a Tag object in the master list
@@ -207,61 +212,51 @@ public class TaskManager implements ReadOnlyTaskManager {
 	// your own
     	return Objects.hash(tasks);
     }
+    //@@author A0163845X
     public void undo() throws Exception {
-    	if (backupTasks == null) {
+    	if (backupTasks == null || backupTasks.size() == 0) {
     		throw new Exception("Can't undo without undo state");
     	} else {
     		tasks.clear();
-    		for (Task t : backupTasks) {
+    		for (Task t : backupTasks.getLast()) {
     			tasks.add(t);
     		}
-    		backupTasks = null;
+    		backupTasks.removeLast();
     	}
     }
+    //@@author A0163845X
     public void updateBackup() throws DuplicateTaskException {
-    	if (backupTasks != null) {
-    		backupTasks.clear();
+    	if (backupTasks == null) {
+    		backupTasks = new LinkedList<UniqueTaskList>();
+    	} 
+    	if (backupTasks.size() < BACKUP_LIST_MAX_SIZE) {
+    		UniqueTaskList temp = new UniqueTaskList();
+    		for (Task t : tasks) {
+    			temp.add(new Task(t));
+    		}
+    		backupTasks.addLast(temp);
+    	} else if (backupTasks.size() == BACKUP_LIST_MAX_SIZE) {
+    		UniqueTaskList temp = new UniqueTaskList();
+    		for (Task t : tasks) {
+    			temp.add(new Task(t));
+    		}
+    		backupTasks.addLast(temp);
+    		backupTasks.removeFirst();
     	} else {
-    		backupTasks = new UniqueTaskList();
-    		backupTasks.clear();
-    	}
-    	for (Task t : tasks) {
-    		backupTasks.add(new Task(t));
+    		backupTasks = new LinkedList<UniqueTaskList>();
+    		System.out.println("error in updateBackup, backup list deleted");
     	}
     }
 
-	public void sortTasksByTime() {
+    //@@author A0163845X
+	public void sort(TaskComparable comparator) {
 		List<Task> taskList = new ArrayList<Task>();
 		for (Task t : tasks) {
 			taskList.add(t);
 		}
 		for (int i = 0; i < taskList.size() - 1; i++) {
 			for (int j = i; j < taskList.size(); j++) {
-				if (new TaskTimeComparable(taskList.get(i)).compareTo(new TaskTimeComparable(taskList.get(j))) > 0) {
-					Task temp = taskList.get(i);
-					taskList.set(i, taskList.get(j));
-					taskList.set(j, temp);
-				}
-			}
-		}
-		tasks.clear();
-		for (Task t : taskList) {
-			try {
-				tasks.add(t);
-			} catch (DuplicateTaskException dte) {
-				System.out.println("Unexpected error in TASKMANAGER sort by name");
-			}
-		}
-	}
-
-	public void sortTasksByName() {
-		List<Task> taskList = new ArrayList<Task>();
-		for (Task t : tasks) {
-			taskList.add(t);
-		}
-		for (int i = 0; i < taskList.size() - 1; i++) {
-			for (int j = i; j < taskList.size(); j++) {
-				if (taskList.get(i).getTaskName().compareTo(taskList.get(j).getTaskName()) > 0) {
+				if (comparator.compareTo(taskList.get(i), taskList.get(j)) > 0) {
 					Task temp = taskList.get(i);
 					taskList.set(i, taskList.get(j));
 					taskList.set(j, temp);
@@ -277,5 +272,20 @@ public class TaskManager implements ReadOnlyTaskManager {
 			}
 		}
 		
+	}
+    //@@author A0163845X
+
+	public void loadNewTaskList(Optional<ReadOnlyTaskManager> readTaskManager) {
+
+		tasks.clear();
+		for (ReadOnlyTask t : readTaskManager.get().getTaskList()) {
+			Task temp = new Task (t);
+			try {
+				tasks.add(temp);
+			} catch (DuplicateTaskException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

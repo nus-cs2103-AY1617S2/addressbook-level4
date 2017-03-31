@@ -10,12 +10,12 @@ import java.util.regex.Matcher;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.PathCommand;
 
 
- //@@author A0164061N
 
-public class PathCommandParser {
+public class LoadCommandParser {
 	   /**
      * Parses the given {@code String} in the context of the
      * PathCommand and returns a PathCommand object for execution.
@@ -28,7 +28,8 @@ public class PathCommandParser {
 
 	// keywords delimited by whitespace
 	final String path = matcher.group("keyword");
-	return new PathCommand(path);
+	//final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+	return new LoadCommand(path);
     }
 
 }

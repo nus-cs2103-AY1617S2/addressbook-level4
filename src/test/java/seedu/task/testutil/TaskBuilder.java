@@ -8,9 +8,7 @@ import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.TaskStatus;
 
-/**
- *
- */
+//@@author A0146757R
 public class TaskBuilder {
 
     private TestTask task;
@@ -20,7 +18,7 @@ public class TaskBuilder {
     }
 
     /**
-     * Initializes the TaskBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
     public TaskBuilder(TestTask taskToCopy) {
         this.task = new TestTask(taskToCopy);
@@ -69,3 +67,4 @@ public class TaskBuilder {
     }
 
 }
+//@@author

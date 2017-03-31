@@ -6,15 +6,12 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-/**
- * @author Daniel Mullen and Jacob Levy
- *
- */
+//@@author A0163845X
 public class TaskDate {
 	
 	private List<Date> dates;
     private SimpleDateFormat formatter;
-    public final String OUTPUT_FORMAT = " MMM dd (EEE) ";
+    public final String OUTPUT_FORMAT = " dd/mm/yy";
 	
     private int day;
     private int month;
@@ -143,10 +140,6 @@ public class TaskDate {
     	
     }
     }
-//    public String toString() {
-//	
-//	return value;
-//    }
 
     public static int[] dateFormatConverter(String date) {
 	if (date.length() == 6) {

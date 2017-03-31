@@ -17,6 +17,7 @@ import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.SortCommand;
 import seedu.task.logic.commands.UndoCommand;
@@ -87,6 +88,9 @@ public class Parser {
 		
 	case PathCommand.COMMAND_WORD:
 		return new PathCommandParser().parse(arguments);
+		
+	case LoadCommand.COMMAND_WORD:
+		return new LoadCommandParser().parse(arguments);
 
 	default:
 	    return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

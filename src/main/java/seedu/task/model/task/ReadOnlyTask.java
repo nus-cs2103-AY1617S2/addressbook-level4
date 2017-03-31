@@ -1,5 +1,8 @@
 package seedu.task.model.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import seedu.task.model.tag.UniqueTagList;
 
 /**
@@ -20,6 +23,10 @@ public interface ReadOnlyTask {
     String getTaskDescription();
 
     TaskStatus getTaskStatus();
+    
+    LocalTime getLocalTime();
+    
+    LocalDate getLocalDate();
 
     // String getTaskPath();
 
@@ -47,18 +54,27 @@ public interface ReadOnlyTask {
 			&& other.getTaskDescription().equals(this.getTaskDescription()) && other.getTaskStatus() != null
 			&& other.getTaskStatus().equals(this.getTaskStatus());
     }
-
+//@@author A0146757R
     /**
      * Formats the task as text, showing all task details.
      */
     default String getAsText() {
 	final StringBuilder builder = new StringBuilder();
-	builder.append(getTaskName()).append(" Date: ").append(getTaskDate().toString()).append(" Start Time: ")
-		.append(getTaskStartTime()).append(" End Time: ").append(getTaskEndTime())
-		.append(" Description: " + getTaskDescription()).append(" Status: ").append(getTaskStatus());
+	builder.append(getTaskName());
+	if (getTaskDate() != null) {
+		builder.append(" Date: ").append(getTaskDate().toString());
+	}
+	if (getTaskStartTime() != null) {
+		builder.append("Start time: ").append(getTaskStartTime());
+	}
+	if (getTaskEndTime() != null) {
+		builder.append(" End Time: ").append(getTaskEndTime());
+	}
+	builder.append(" Description: " + getTaskDescription()).append(" Status: ").append(getTaskStatus());
+
 
 	getTags().forEach(builder::append);
 	return builder.toString();
     }
-
+//@@author
 }

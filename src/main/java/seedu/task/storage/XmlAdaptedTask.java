@@ -16,6 +16,7 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.TaskTime;
 
+//@@author A0146757R
 /**
  * JAXB-friendly version of the Task.
  */
@@ -36,7 +37,7 @@ public class XmlAdaptedTask {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
-
+//@@author
     /**
      * Constructs an XmlAdaptedTask. This is the no-arg constructor that is
      * required by JAXB.
