@@ -22,26 +22,26 @@ public interface Model {
 
     /** Undo last command.
      * @throws IllegalValueException */
-    void undoData(ReadOnlyTaskManager newData) throws IllegalValueException;
+    void loadData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-
+    //@@author A0139975J
     /** Updates the task to done. */
     void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-
+    //@@author A0139975J
     /** Updates the task from done to undone */
     void unDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
-    //@@author A0140063X
     /** Adds all the given Tasks. */
     void addMultipleTasks(ArrayList<Task> tasks);
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -67,10 +67,10 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keyword of tags */
     void updateFilteredTaskList(String keyword);
-    
+    //@@author A0139975J
     /** Updates the filter of the filtered task list to filter by the given date */
     void updateFilteredTaskList(Date value);
-
+  //@@author A0139975J
     /** Updates the filer of the filtered task list to filter by done or undone task */
     void updateFilteredTaskList(boolean value);
 
@@ -85,7 +85,5 @@ public interface Model {
 
     /** Sorts the task list */
     void sortTaskList();
-
-    
 
 }

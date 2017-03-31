@@ -229,7 +229,7 @@ If you are using Google Calendar, we support some Google Calendar operations too
 To use Google Calendar with KIT, we first require your permission to read and add event to your Google Calendar.
 
 > * The request will open in your default browser.
-> * Log in to your Google account and approve the request to use this feature. 
+> * Log in to your Google account and approve the request to use this feature.
 > * You only need to do this for the first time.
 
 ### 2.10.1 Get Events from Google Calendar: `gg`

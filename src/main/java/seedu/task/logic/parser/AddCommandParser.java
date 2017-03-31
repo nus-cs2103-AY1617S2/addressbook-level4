@@ -31,6 +31,7 @@ public class AddCommandParser extends CommandParser {
      * Parses the given {@code String} of arguments in the context of the
      * AddCommand and returns an AddCommand object for execution.
      */
+    @Override
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_REMARK,
                 PREFIX_LOCATION, PREFIX_TAG);
@@ -45,7 +46,8 @@ public class AddCommandParser extends CommandParser {
         LOCATION = tokenizedArguments.containsKey(PREFIX_LOCATION) ? argsTokenizer.getValue(PREFIX_LOCATION).get()
                 : Location.DEFAULT_LOCATION;
         try {
-            return new AddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), START_DATE, END_DATE, REMARK.replace("\\", ""), LOCATION.replace("\\", ""),
+            return new AddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), START_DATE, END_DATE,
+                    REMARK.replace("\\", ""), LOCATION.replace("\\", ""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

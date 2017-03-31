@@ -137,24 +137,27 @@ public class EditCommand extends Command {
             return name;
         }
 
+        // @@author A0140063X
         public void setStartDate(Optional<Date> startDate) {
-            assert startDate != null;
             this.startDate = startDate;
         }
 
+        // @@author A0140063X
         public Optional<Date> getStartDate() {
             return startDate;
         }
 
+        // @@author A0140063X
         public void setEndDate(Optional<Date> endDate) {
-            assert endDate != null;
             this.endDate = endDate;
         }
 
+        // @@author A0140063X
         public Optional<Date> getEndDate() {
             return endDate;
         }
 
+        // @@author
         public void setRemark(Optional<Remark> remark) {
             assert remark != null;
             this.remark = remark;

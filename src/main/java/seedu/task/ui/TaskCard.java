@@ -42,9 +42,9 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private TitledPane plane;
-    
-   private boolean status;
 
+    private boolean status;
+    //@@author A0139975J
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         //plane.setText(displayedIndex + ". " + task.getName().fullName);
@@ -88,7 +88,7 @@ public class TaskCard extends UiPart<Region> {
         plane.setExpanded(false);
         this.status = false;
         name.setText(displayedIndex + ". " + task.getName().fullName);
-        name.setFont(Font.font("Verdana", FontWeight.BOLD,20));
+        name.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         //id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().toString());
         endDate.setText(task.getEndDate().toString());
@@ -111,22 +111,25 @@ public class TaskCard extends UiPart<Region> {
         remark.setText(task.getRemark().value);
         initTags(task);
     }
-
+    //@@author A0142939W
     private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(createLabel(tag.tagName, TagColorMap.getColor(tag.tagName))));
+        task.getTags().forEach(tag -> tags.getChildren().add(
+                createLabel(tag.tagName, TagColorMap.getColor(tag.tagName))));
     }
-    
+
+    //@@author A0142939W
     private Label createLabel(String tagName, String color) {
-    	Label tag = new Label(tagName);
-    	tag.setStyle("-fx-background-color: " + color);
-    	return tag;
+        Label tag = new Label(tagName);
+        tag.setStyle("-fx-background-color: " + color);
+        return tag;
     }
-    
-    public  void setExpend(boolean value ){
-        this.status=value;
+    //@@author A0139975J
+    public  void setExpend(boolean value) {
+        this.status = value;
         plane.setExpanded(value);
     }
-    public boolean expendStatus(){
+    //@@author A0139975J
+    public boolean expendStatus() {
         return this.status;
     }
 }

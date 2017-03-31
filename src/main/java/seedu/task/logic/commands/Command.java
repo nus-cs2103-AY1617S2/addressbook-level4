@@ -1,8 +1,14 @@
 package seedu.task.logic.commands;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import seedu.task.commons.core.Messages;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
+import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.storage.Storage;
 
 /**
@@ -39,6 +45,7 @@ public abstract class Command {
     public abstract CommandResult execute() throws CommandException;
 
 
+    // @@author A0140063X
     /**
      * Provides any needed dependencies to the command.
      * Commands making use of any of these should override this method to gain
@@ -47,5 +54,22 @@ public abstract class Command {
     public void setData(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
+    }
+
+    // @@author A0140063X
+    public ReadOnlyTaskManager readTaskManager(String filePath) throws IOException, IllegalValueException {
+        try {
+            Optional<ReadOnlyTaskManager> taskManagerOptional = storage.readTaskManager(filePath);
+
+            if (!taskManagerOptional.isPresent()) {
+                throw new IOException("File not found.");
+            }
+
+            return taskManagerOptional.get();
+        } catch (DataConversionException dce) {
+            throw new IOException("Data conversion error.");
+        } catch (IOException ioe) {
+            throw new IOException("File not found.");
+        }
     }
 }

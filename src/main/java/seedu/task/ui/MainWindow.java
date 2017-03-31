@@ -60,6 +60,21 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem quickUndoMenuItem;
 
     @FXML
+    private MenuItem quickDoneMenuItem;
+
+    @FXML
+    private MenuItem quickEditMenuItem;
+
+    @FXML
+    private MenuItem quickSelectMenuItem;
+
+    @FXML
+    private MenuItem quickSaveMenuItem;
+
+    @FXML
+    private MenuItem quickLoadMenuItem;
+
+    @FXML
     private MenuItem quickScrollDownMenuItem;
 
     @FXML
@@ -115,6 +130,7 @@ public class MainWindow extends UiPart<Region> {
         setScroll();
     }
 
+    //@@author
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -124,17 +140,22 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(helpFormatMenuItem, KeyCombination.valueOf("F3"));
         setAccelerator(quickAddMenuItem, KeyCombination.valueOf("Ctrl+Alt+A"));
         setAccelerator(quickUndoMenuItem, KeyCombination.valueOf("Ctrl+Alt+Z"));
+        setAccelerator(quickDoneMenuItem, KeyCombination.valueOf("Ctrl+Alt+D"));
+        setAccelerator(quickEditMenuItem, KeyCombination.valueOf("Ctrl+Alt+E"));
+        setAccelerator(quickSelectMenuItem, KeyCombination.valueOf("Ctrl+Alt+S"));
+        setAccelerator(quickSaveMenuItem, KeyCombination.valueOf("Ctrl+S"));
+        setAccelerator(quickLoadMenuItem, KeyCombination.valueOf("Ctrl+Alt+L"));
         setAccelerator(quickScrollDownMenuItem, KeyCombination.valueOf("Shift+DOWN"));
         setAccelerator(quickScrollUpMenuItem, KeyCombination.valueOf("SHIFT+UP"));
     }
-    
+
     private void setScroll() {
-    	scroll = new Scroll();
+        scroll = new Scroll();
     }
 
     /**
      * Sets the accelerator of a MenuItem.
-     * 
+     *
      * @param keyCombination
      *            the KeyCombination value of the accelerator
      */
@@ -188,6 +209,7 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
     }
 
+    //@@author
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
@@ -214,7 +236,7 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the given image as the icon of the main window.
-     * 
+     *
      * @param iconSource
      *            e.g. {@code "/images/help_icon.png"}
      */
@@ -268,25 +290,25 @@ public class MainWindow extends UiPart<Region> {
     public void handleUndo() {
         commandBox.type("undo");
     }
-    
+
     public void handleDone() {
-    	commandBox.type("done ");
+        commandBox.type("done ");
     }
-    
+
     public void handleEdit() {
-    	commandBox.type("edit ");
+        commandBox.type("edit ");
     }
-    
+
     public void handleSelect() {
-    	commandBox.type("select ");
+        commandBox.type("select ");
     }
-    
+
     public void handleSave() {
-    	commandBox.type("save");
+        commandBox.type("save");
     }
-    
+
     public void handleLoad() {
-    	commandBox.type("load ");
+        commandBox.type("load ");
     }
 
     @FXML
@@ -318,7 +340,7 @@ public class MainWindow extends UiPart<Region> {
     public void setFocus() {
         commandBox.requestFocus();
     }
-    
+
 //    void loadTaskPage(ReadOnlyTask task) {
 //        browserPanel.loadTaskPage(task);
 //    }

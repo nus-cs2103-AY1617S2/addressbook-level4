@@ -356,6 +356,7 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    //@@author A0140063X
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -364,7 +365,8 @@ public class LogicManagerTest {
         Task shouldBeFoundTask3 = helper.generateTaskWithName("KEYKEYKEY sduauo");
         Task shouldNotBeFoundTask = helper.generateTaskWithName("KE Y");
 
-        List<Task> fourTasks = helper.generateTaskList(shouldBeFoundTask1, shouldBeFoundTask2, shouldBeFoundTask3, shouldNotBeFoundTask);
+        List<Task> fourTasks = helper.generateTaskList(shouldBeFoundTask1, shouldBeFoundTask2,
+                shouldBeFoundTask3, shouldNotBeFoundTask);
         TaskManager expectedTM = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(shouldBeFoundTask1, shouldBeFoundTask2, shouldBeFoundTask3);
         helper.addToModel(model, fourTasks);
@@ -375,6 +377,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    //@@author
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();

@@ -1,7 +1,6 @@
 package seedu.task;
 
 import java.io.IOException;
-import java.util.EventListener;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -76,6 +75,7 @@ public class MainApp extends Application {
         logic.execute(ListByNotDoneCommand.COMMAND_WORD_1);
     }
 
+    // @@author A0140063X
     private void initHistory() {
         this.history = History.getInstance();
 
@@ -83,6 +83,7 @@ public class MainApp extends Application {
         storage.handleTaskManagerChangedEvent(tmce);
     }
 
+    // @@author
     private String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
@@ -183,6 +184,7 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
+    // @@author
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
@@ -213,6 +215,7 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "New user preference handled, saving to file"));
     }
 
+    // @@author
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

@@ -214,10 +214,10 @@
 
 .titled-pane:focused {
 	-fx-text-fill: derive(#dde2e3,10%);
-	
+
 }
 
-.titled-pane > .title 
+.titled-pane > .title
 {
 	-fx-background-color: derive(#1d1d1d, 15.0%);
 	-fx-background-insets: 0.0, 1.0, 2.0;

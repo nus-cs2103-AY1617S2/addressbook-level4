@@ -24,9 +24,9 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanelDefault.fxml";
     protected static final String FXML_Light = "TaskListPanelLight.fxml";
     protected static final String FXML_Dark = "TaskListPanelDark.fxml";
-    
+
     private TaskCard [] cardlist = new TaskCard [1000];
-    
+
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
@@ -46,12 +46,13 @@ public class TaskListPanel extends UiPart<Region> {
         addToPlaceholder(taskListPlaceholder);
     }
 
+    //@@author
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         //System.out.println("when pass");
         //cardlist = new ArrayList<TaskCard>();
         taskListView.setCellFactory(listView -> new TaskListViewCell());
-        
+
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -70,14 +71,15 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
+    //@@author A0139975J
     public void scrollTo(int index) {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
-            if(cardlist[index+1].expendStatus()) {
-                cardlist[index+1].setExpend(false);
+            if (cardlist[index + 1].expendStatus()) {
+                cardlist[index + 1].setExpend(false);
             } else {
-                cardlist[index+1].setExpend(true); 
+                cardlist[index + 1].setExpend(true);
             }
         });
     }
@@ -85,16 +87,16 @@ public class TaskListPanel extends UiPart<Region> {
 
     //@@author A0142939W
     public void scrollDown(Scroll scroll) {
-    	scroll.scrollDown(taskListView);
+        scroll.scrollDown(taskListView);
     }
 
     //@@author A0142939W
     public void scrollUp(Scroll scroll) {
-    	scroll.scrollUp(taskListView);
+        scroll.scrollUp(taskListView);
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
-
+        //@@author A0139975J-reused
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
@@ -115,8 +117,8 @@ public class TaskListPanel extends UiPart<Region> {
                     taskcard = new TaskCard(task, getIndex() + 1);
                 }
                 setGraphic(taskcard.getRoot());
-              cardlist[getIndex()+1]=(taskcard);  
-               
+                cardlist[getIndex() + 1] = (taskcard);
+
             }
         }
     }

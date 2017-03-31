@@ -22,7 +22,7 @@ public class ResultDisplay extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplayDefault.fxml";
     protected static final String FXML_Light = "ResultDisplayLight.fxml";
-    protected static final String FXML_Dark= "ResultDisplayDark.fxml";
+    protected static final String FXML_Dark = "ResultDisplayDark.fxml";
 
     private final StringProperty displayed = new SimpleStringProperty("");
 
@@ -50,6 +50,7 @@ public class ResultDisplay extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    //@@author
     @Subscribe
     public void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

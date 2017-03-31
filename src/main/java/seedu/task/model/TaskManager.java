@@ -197,19 +197,16 @@ public class TaskManager implements ReadOnlyTaskManager {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
-
+    //@@author A0139975J
     public void updateDone(int index, ReadOnlyTask target) {
-    // TODO Auto-generated method stub
         tasks.done(index);
     }
-
+    //@@author A0139975J
     public void updateUnDone(int index, ReadOnlyTask target) {
-        // TODO Auto-generated method stub
         tasks.undone(index);
     }
 
     public void sortTaskList() {
-        // TODO Auto-generated method stub
         tasks.sort();
     }
 

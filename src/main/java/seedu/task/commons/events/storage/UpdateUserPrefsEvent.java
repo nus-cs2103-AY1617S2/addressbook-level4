@@ -14,8 +14,8 @@ public class UpdateUserPrefsEvent extends BaseEvent {
     public UpdateUserPrefsEvent(UserPrefs userPrefs) {
         this.userPrefs = userPrefs;
     }
-    
-    public UserPrefs getUserPrefs(){
+
+    public UserPrefs getUserPrefs() {
         return this.userPrefs;
     }
 
