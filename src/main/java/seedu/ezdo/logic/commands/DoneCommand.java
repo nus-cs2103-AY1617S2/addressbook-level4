@@ -73,17 +73,8 @@ public class DoneCommand extends Command implements MultipleIndexCommand {
             return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, tasksToToggle));
         }
     }
-  //@@author A0139248X
-    private boolean isAnyTaskDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
-        for (int i = 0; i < targetIndexes.size(); i++) {
-            Task taskToDone = (Task) lastShownList.get(targetIndexes.get(i) - 1);
-            if (taskToDone.getDone()) {
-                return true;
-            }
-        }
-        return false;
-    }
 
+  //@@author A0139248X
     @Override
     public boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
         return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
