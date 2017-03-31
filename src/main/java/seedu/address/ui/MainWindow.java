@@ -34,7 +34,9 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
+    // TODO change personListPanel to another name
     private PersonListPanel personListPanel;
+    private TaskTabPanel taskTabPanel;
     private Config config;
 
     @FXML
@@ -47,13 +49,13 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
-
-    @FXML
     private AnchorPane resultDisplayPlaceholder;
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane taskTabPanelPlaceHolder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -70,7 +72,6 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-
         setAccelerators();
     }
 
@@ -112,9 +113,11 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
+    public void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        taskTabPanel = new TaskTabPanel(taskTabPanelPlaceHolder);
+        // TODO rename this
+        personListPanel = new PersonListPanel(taskTabPanel.getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -130,10 +133,6 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
-    }
-
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
     }
 
     void hide() {
@@ -205,6 +204,10 @@ public class MainWindow extends UiPart<Region> {
 
     void releaseResources() {
         browserPanel.freeResources();
+    }
+
+    public void switchTabPanel(String typeOfList) {
+        taskTabPanel.switchTabPanel(typeOfList);
     }
 
 }

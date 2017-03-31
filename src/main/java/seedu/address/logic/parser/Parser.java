@@ -15,8 +15,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ViewCommand;
 
 /**
  * Parses user input.
@@ -62,8 +62,8 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

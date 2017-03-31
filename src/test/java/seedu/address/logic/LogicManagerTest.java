@@ -35,8 +35,8 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
@@ -249,7 +249,7 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_list_showsAllTasks() throws Exception {
+    public void execute_view_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         TaskList expectedAB = helper.generateTaskList(2);
@@ -258,8 +258,8 @@ public class LogicManagerTest {
         // prepare address book state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list",
-                ListCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess("view",
+                ViewCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
     }
