@@ -14,14 +14,14 @@ import seedu.taskmanager.storage.StorageManager;
 /**
  * Represents the History of user commands in this session
  */
-public class HistoryManager extends ComponentManager{
+public class HistoryManager extends ComponentManager {
 
     private final Model model;
     private static HistoryManager instance = null;
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private ArrayList<ReadOnlyTaskManager> historyList;
     private ArrayList<ReadOnlyTaskManager> futureList;
-    
+
     public static final String INITIALIZATION_ERROR = "HistoryManager has not been initialized with a Model yet";
 
 
@@ -53,7 +53,7 @@ public class HistoryManager extends ComponentManager{
         TaskManager taskManager = new TaskManager(event.data);
         historyList.add(taskManager);
     }
-    
+
     private ReadOnlyTaskManager getMostRecentHistory() {
         if (historyList.size() < 2) {
             throw new NullPointerException();
@@ -62,7 +62,7 @@ public class HistoryManager extends ComponentManager{
         futureList.add(new TaskManager(t));
         return historyList.remove(historyList.size() - 1);
     }
-    
+
     private ReadOnlyTaskManager getMostRecentFuture() {
         if (futureList.size() < 1) {
             throw new NullPointerException();
@@ -70,7 +70,7 @@ public class HistoryManager extends ComponentManager{
         ReadOnlyTaskManager t = futureList.remove(futureList.size() - 1);
         return t;
     }
-    
+
     public void undo() {
         ReadOnlyTaskManager t = getMostRecentHistory();
         model.resetData(t);
