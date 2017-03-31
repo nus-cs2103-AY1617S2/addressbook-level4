@@ -38,6 +38,7 @@ public abstract class Command {
      */
     public abstract CommandResult execute() throws CommandException;
 
+
     /**
      * Provides any needed dependencies to the command.
      * Commands making use of any of these should override this method to gain

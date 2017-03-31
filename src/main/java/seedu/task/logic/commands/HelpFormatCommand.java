@@ -12,8 +12,6 @@ public class HelpFormatCommand extends Command {
     public static final String COMMAND_WORD_2 = "helpformat";
     public static final String COMMAND_WORD_3 = "summary";
     public static final String COMMAND_WORD_4 = "hf";
-    public static final String COMMAND_WORD_5 = "man";
-    public static final String COMMAND_WORD_6 = "manual";
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Shows summary of commands.\n"

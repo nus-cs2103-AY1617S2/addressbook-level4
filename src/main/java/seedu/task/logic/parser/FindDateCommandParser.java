@@ -6,7 +6,7 @@ import seedu.task.logic.commands.FindDateCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 
 
-public class FindDateParser extends CommandParser{
+public class FindDateCommandParser extends CommandParser{
  
     public static final String DEFAULT_DATE = "DEFAULT_DATE";
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, try dates like,"

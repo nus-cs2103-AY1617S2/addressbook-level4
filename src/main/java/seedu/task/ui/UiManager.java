@@ -12,13 +12,17 @@ import javafx.stage.Stage;
 import seedu.task.MainApp;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
+import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
+import seedu.task.commons.events.ui.QueryUnknownCommandEvent;
 import seedu.task.commons.events.ui.ShowHelpFormatRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
+import seedu.task.logic.commands.CommandResult;
+import seedu.task.logic.commands.HelpCommand;
 import seedu.task.model.UserPrefs;
 
 /**
@@ -118,6 +122,12 @@ public class UiManager extends ComponentManager implements Ui {
     public void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
+    }
+    
+    @Subscribe
+    public CommandResult handleQueryUnknownCommandEvent(QueryUnknownCommandEvent event) {
+        EventsCenter.getInstance().post(new ShowHelpFormatRequestEvent());
+        return new CommandResult(HelpCommand.SHOWING_HELP_MESSAGE);
     }
 
     @Subscribe
