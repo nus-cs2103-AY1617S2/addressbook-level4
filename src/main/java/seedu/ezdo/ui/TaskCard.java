@@ -38,11 +38,11 @@ public class TaskCard extends UiPart<Region> {
 
     private static final String CSS_STARTDATE_PAST_CURRENT_DATE_COLOR =
             "-fx-text-fill: darkgreen; -fx-font-weight: bold";
-    
+
     private static final String CSS_OVERDUE_COLOR =
             "-fx-text-fill: red; -fx-font-weight: bold";
-    
-    private static final String CSS_ABOUT_TO_DUE_COLOR = 
+
+    private static final String CSS_ABOUT_TO_DUE_COLOR =
             "-fx-text-fill: orangered; -fx-font-weight: bold";
 
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat(DateParser.USER_DATE_OUTPUT_FORMAT);
