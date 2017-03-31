@@ -178,6 +178,7 @@ public class Timing implements Comparable<Timing> {
             Calendar thisCal = Calendar.getInstance();
             Calendar otherCal = Calendar.getInstance();
             thisCal.setTime(this.getTiming());
+            compareTiming.setTiming(compareTiming.toString());
             otherCal.setTime(compareTiming.getTiming());
             compareToResult = thisCal.compareTo(otherCal);
         }

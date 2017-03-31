@@ -190,6 +190,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return recurring;
     }
 
+    @Override
     public void setRecurring(boolean recurring) {
         this.recurring = recurring;
     }
@@ -207,6 +208,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
             format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         }
         return format;
+    }
+
+    @Override
+    public void removeOccurrence(int i) {
+        this.occurrences.remove(i);
     }
 
     public void setOccurrences(ArrayList<RecurringTaskOccurrence> occurrences) {
@@ -308,8 +314,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-    //@@author
-
     //@@author A0163559U
     /**
      * Results in Tasks sorted by completed state, followed by priority, endTiming, startTiming
@@ -352,6 +356,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
         @Override
         public int compare(Task task1, Task task2) {
+            task1.getStartTiming().setTiming(task1.getStartTiming().toString());
+            task1.getEndTiming().setTiming(task1.getEndTiming().toString());
             return task1.compareTo(task2);
         }
 

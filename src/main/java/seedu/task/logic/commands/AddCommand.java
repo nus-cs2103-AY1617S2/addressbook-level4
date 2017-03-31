@@ -12,6 +12,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
+import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
@@ -62,6 +63,10 @@ public class AddCommand extends Command {
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
+    }
+
+    public AddCommand(ReadOnlyTask task) {
+        this.toAdd = (Task) task;
     }
     //@@author
 

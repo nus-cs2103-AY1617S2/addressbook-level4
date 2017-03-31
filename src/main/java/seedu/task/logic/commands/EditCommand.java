@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalTimingOrderException;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
@@ -16,6 +17,7 @@ import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -23,6 +25,7 @@ import seedu.task.model.task.UniqueTaskList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_REC = "editthis";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
@@ -37,19 +40,20 @@ public class EditCommand extends Command {
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
+    private boolean isSpecific;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered person list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor, boolean isSpecific) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredPersonListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.isSpecific = isSpecific;
     }
 
     @Override
@@ -61,9 +65,47 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        Task newTask = null;
+
+        if (isSpecific) {
+            if (taskToEdit.getOccurrenceIndexList().size() == 0) {
+                taskToEdit.getOccurrenceIndexList().add(0);
+            }
+            int occurrenceIndex = taskToEdit.getOccurrenceIndexList().get(0);
+            RecurringFrequency freq = null;
+            try {
+                freq = new RecurringFrequency(RecurringFrequency.NULL_FREQUENCY);
+            } catch (IllegalValueException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            newTask = new Task(
+                    taskToEdit.getDescription(),
+                    taskToEdit.getPriority(),
+                    taskToEdit.getOccurrences().get(occurrenceIndex).getStartTiming(),
+                    taskToEdit.getOccurrences().get(occurrenceIndex).getEndTiming(),
+                    taskToEdit.getTags(),
+                    false,
+                    freq);
+            newTask.getStartTiming().setTiming(newTask.getStartTiming().toString());
+            newTask.getEndTiming().setTiming(newTask.getEndTiming().toString());
+            taskToEdit.removeOccurrence(occurrenceIndex);
+            try {
+                model.addTask(newTask);
+            } catch (DuplicateTaskException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
+
         Task editedTask;
         try {
-            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            if (isSpecific) {
+                editedTask = createEditedTask(newTask, editTaskDescriptor);
+            } else {
+                editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            }
         } catch (IllegalTimingOrderException e) {
             throw new CommandException(MESSSAGE_INVALID_TIMING_ORDER);
         }

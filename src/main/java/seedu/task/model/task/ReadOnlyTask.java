@@ -25,6 +25,8 @@ public interface ReadOnlyTask {
 
     boolean isRecurring();
 
+    void setRecurring(boolean b);
+
     RecurringFrequency getFrequency();
 
     void setFrequency(RecurringFrequency frequency);
@@ -36,7 +38,10 @@ public interface ReadOnlyTask {
     void setEndTiming(Timing endTiming);
 
     ArrayList<Integer> getOccurrenceIndexList();
+
     void setOccurrenceIndexList(ArrayList<Integer> list);
+
+    public void removeOccurrence(int i);
 
 
 
@@ -70,6 +75,7 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
 
 
 }
