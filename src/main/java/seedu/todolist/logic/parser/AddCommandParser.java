@@ -7,9 +7,7 @@ import static seedu.todolist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
