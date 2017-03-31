@@ -149,11 +149,13 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToCalendarTaskEvent(JumpToCalendarTaskEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        try {
-            mainWindow.getCalendarPanel().selection(event.targetTask);
-        } catch (CalendarUnsyncException e) {
-            logger.severe(StringUtil.getDetails(e));
-            showFatalErrorDialogAndShutdown("Fatal error unsycn calendar:", e);
+        if (event.canJumpTo()) {
+            try {
+                mainWindow.getCalendarPanel().selection(event.targetTask);
+            } catch (CalendarUnsyncException e) {
+                logger.severe(StringUtil.getDetails(e));
+                showFatalErrorDialogAndShutdown("Fatal error unsycn calendar:", e);
+            }
         }
     }
 
