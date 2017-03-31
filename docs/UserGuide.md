@@ -108,7 +108,7 @@ Task data are saved in the hard disk automatically after any command that change
 
 ## Command Summary
 | Command | Format |
-| -------- | :-------- |
+| -------- | -------- |
 | help | `help` |
 | add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]` |
 | delete | `delete index\INDEX` |
