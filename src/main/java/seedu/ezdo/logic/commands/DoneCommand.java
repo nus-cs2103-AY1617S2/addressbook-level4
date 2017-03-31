@@ -22,7 +22,7 @@ public class DoneCommand extends Command implements MultipleIndexCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Done task: %1$s";
-    private static final String MESSAGE_UNDONE_TASK_SUCCESS = "Undone task: %1$s";
+    public static final String MESSAGE_UNDONE_TASK_SUCCESS = "Undone task: %1$s";
     public static final String MESSAGE_DONE_LISTED = "Done tasks listed";
 
     private final ArrayList<Integer> targetIndexes;
@@ -55,10 +55,6 @@ public class DoneCommand extends Command implements MultipleIndexCommand {
         if (!isIndexValid(lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
-        //if (isAnyTaskDone(lastShownList)) {
-        //    throw new CommandException(Messages.MESSAGE_WRONG_LIST);
-        //}
 
         for (int i = 0; i < targetIndexes.size(); i++) {
             Task taskToToggle = (Task) lastShownList.get(targetIndexes.get(i) - 1);
