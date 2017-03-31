@@ -76,8 +76,7 @@ public class HelpController extends Controller {
                 Arrays.asList(getControllerFromKeyword(commandWord).getDetailedHelp()).stream()
                 .map(help -> Arrays.asList(help))
                 .collect(Collectors.toList());
-        uiStore.setHelp(detailedHelp);
-        uiStore.setCommandResult(new CommandResult(convertListListToStringForDetailed(detailedHelp)));
+        uiStore.setHelp(Arrays.asList(convertListListToStringForDetailed(detailedHelp)));
     }
 
     private Controller getControllerFromKeyword(String commandWord) {
@@ -94,21 +93,21 @@ public class HelpController extends Controller {
     private void showGeneralHelp() {
         List<List<String>> generalHelp = controllerLibrary.getControllerBasicHelps(
                 controllerLibrary.getCommandControllers());
-        uiStore.setCommandResult(new CommandResult(convertListListToStringForGeneral(generalHelp)));
+        uiStore.setHelp(convertListListToListStringForGeneral(generalHelp));
     }
 
-    private String convertListListToStringForGeneral(List<List<String>> generalHelp) {
-        String finalResult = "";
-        for (int i = 0; i < generalHelp.size(); i++) {
+    private List<String> convertListListToListStringForGeneral(List<List<String>> generalHelp) {
+        return generalHelp.stream().map(help -> {
+            String finalResult = "";
             finalResult += STRING_COMMAND;
-            finalResult += String.join(FORMAT_SPACING, generalHelp.get(i).get(INDEX_HELP_COMMAND));
+            finalResult += String.join(FORMAT_SPACING, help.get(INDEX_HELP_COMMAND));
             finalResult += STRING_FORMAT;
-            finalResult += String.join(FORMAT_SPACING, generalHelp.get(i).get(INDEX_HELP_FORMAT));
+            finalResult += String.join(FORMAT_SPACING, help.get(INDEX_HELP_FORMAT));
             finalResult += STRING_DESCRIPTION;
-            finalResult += String.join(FORMAT_SPACING, generalHelp.get(i).get(INDEX_HELP_DESCRIPTION));
+            finalResult += String.join(FORMAT_SPACING, help.get(INDEX_HELP_DESCRIPTION));
             finalResult += FORMAT_LARGESPACING;
-        }
-        return finalResult;
+            return finalResult;
+        }).collect(Collectors.toList());
     }
 
     private String convertListListToStringForDetailed(List<List<String>> detailedHelp) {

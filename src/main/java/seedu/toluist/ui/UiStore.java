@@ -35,7 +35,7 @@ public class UiStore {
     private ObjectProperty<TaskSwitchPredicate> observableSwitchPredicate =
             new SimpleObjectProperty<>(TaskSwitchPredicate.SWITCH_PREDICATE_INCOMPLETE);
     private ObservableList<Task> observableTasks = FXCollections.observableArrayList();
-    private ObservableList<List<List<String>>> observableHelp = FXCollections.observableArrayList();
+    private ObservableList<String> observableHelp = FXCollections.observableArrayList();
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));
     private ObjectProperty<CommandInput> observableCommandInput =
@@ -191,7 +191,7 @@ public class UiStore {
     }
 
     //@@author A0162011A
-    public ObservableList<List<List<String>>> getObservableHelp() {
+    public ObservableList<String> getObservableHelp() {
         return observableHelp;
     }
 
@@ -199,8 +199,7 @@ public class UiStore {
      * method to setHelp
      * @param help details to replace current help
      */
-    public void setHelp(List<List<String>> help) {
-        observableHelp.clear();
-        observableHelp.setAll(help);
+    public void setHelp(List<String> helpList) {
+        observableHelp.setAll(helpList);
     }
 }

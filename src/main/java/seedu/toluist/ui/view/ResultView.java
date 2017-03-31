@@ -20,8 +20,9 @@ public class ResultView extends UiView {
     @FXML
     private TextArea resultDisplay;
 
-    public ResultView () {
+    public ResultView() {
         super(FXML);
+        makeFullWidth();
         configureBindings();
     }
 
@@ -33,7 +34,6 @@ public class ResultView extends UiView {
     @Override
     protected void viewDidMount() {
         registerAsAnEventHandler(this);
-        makeFullWidth();
         String result = UiStore.getInstance().getObservableCommandResult().getValue().getFeedbackToUser();
         resultDisplay.setText(result);
     }

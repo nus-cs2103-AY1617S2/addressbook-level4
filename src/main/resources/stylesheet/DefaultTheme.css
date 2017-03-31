@@ -169,4 +169,8 @@
     -fx-text-fill: theme-primary-dark;
 }
 
-/* COMMAND INPUT */
+/* HELP */
+
+.help-container {
+    -fx-background-color: theme-background;
+}

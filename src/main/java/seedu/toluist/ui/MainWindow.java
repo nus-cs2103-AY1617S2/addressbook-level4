@@ -27,6 +27,7 @@ import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.view.CommandAutoCompleteView;
 import seedu.toluist.ui.view.CommandBox;
+import seedu.toluist.ui.view.HelpListView;
 import seedu.toluist.ui.view.ResultView;
 import seedu.toluist.ui.view.TabBarView;
 import seedu.toluist.ui.view.TaskListUiView;
@@ -62,12 +63,15 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane tabPanePlaceholder;
     @FXML
     private AnchorPane commandAutoCompletePlaceholder;
+    @FXML
+    private AnchorPane helpPlaceholder;
 
     private CommandBox commandBox;
     private TaskListUiView taskListUiView;
     private ResultView resultView;
     private TabBarView tabBarView;
     private CommandAutoCompleteView commandAutoCompleteView;
+    private HelpListView helpListView;
 
 
     public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
@@ -97,6 +101,7 @@ public class MainWindow extends UiPart<Region> {
         resultView.render();
         tabBarView.render();
         commandAutoCompleteView.render();
+        helpListView.render();
     }
 
     private void configureKeyCombinations() {
@@ -195,6 +200,10 @@ public class MainWindow extends UiPart<Region> {
         return commandAutoCompletePlaceholder;
     }
 
+    private AnchorPane getHelpPlaceholder() {
+        return helpPlaceholder;
+    }
+
     private void setWindowMinSize() {
         primaryStage.setMinHeight(MIN_HEIGHT);
         primaryStage.setMinWidth(MIN_WIDTH);
@@ -248,6 +257,10 @@ public class MainWindow extends UiPart<Region> {
 
         commandAutoCompleteView = new CommandAutoCompleteView();
         commandAutoCompleteView.setParent(getCommandAutoCompletePlaceholder());
+
+        FxViewUtil.makeFullWidth(helpPlaceholder);
+        helpListView = new HelpListView();
+        helpListView.setParent(helpPlaceholder);
     }
 
     void show() {
