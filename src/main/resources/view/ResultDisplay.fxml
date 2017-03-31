@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -10,6 +11,12 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <AnchorPane fx:id="mainPane" style="-fx-background-color: transparent;">
-        <TextArea fx:id="resultDisplay" blendMode="MULTIPLY" editable="false" minWidth="750.0" style="-fx-background-color: transparent;" styleClass="text-area" wrapText="true" />
+        <TextArea fx:id="resultDisplay" blendMode="MULTIPLY" editable="false" minWidth="750.0" style="-fx-background-color: transparent;" styleClass="result-display" wrapText="true" />
+      <padding>
+         <Insets top="10.0" />
+      </padding>
     </AnchorPane>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
 </AnchorPane>

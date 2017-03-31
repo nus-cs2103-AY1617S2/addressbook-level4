@@ -138,12 +138,13 @@
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
     -fx-text-fill: black;
 }
 
 .result-display {
     -fx-background-color: transparent;
+    -fx-font-size: 15pt;
 }
 
 .result-display .label {
@@ -155,7 +156,7 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent;
     -fx-border-color: derive(#1d1d1d, 25%);
     -fx-border-width: 1px;
 }

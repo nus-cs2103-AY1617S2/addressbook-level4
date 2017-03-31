@@ -29,6 +29,8 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane recurringTag;
     @FXML
     private FlowPane eventTag;
+    @FXML
+    private FlowPane overdueTag;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -38,13 +40,22 @@ public class TaskCard extends UiPart<Region> {
         instruction.setText(task.getInstruction().value);
         priority.setText(task.getPriority().toString());
         initTags(task);
-
+        
+        if (task.getDeadline().isOverdue()) {
+            initOverdueTag();
+        }
         if (task.getDeadline().isRecurring()) {
             initRecurTag();
         }
         if (task.getDeadline().isFromTo()) {
             initEventTag();
         }
+    }
+
+    private void initOverdueTag() {
+        //recurringTag.getChildren().add(new Label("Recurring"));
+        overdueTag.setStyle("-fx-background-color: #d12b2b;");
+        //overdueTag.setStyle("-fx-background-blend-mode: overlay;");  
     }
 
     private void initEventTag() {
@@ -58,9 +69,13 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void initRecurTag() {
-        //recurringTag.getChildren().add(new Label("Recurring"));
-        recurringTag.setStyle("-fx-background-color: #ff884c;");
-        //recurringTag.setStyle("-fx-background-blend-mode: multiply;");
+        Label recurringLabel = new Label("R");
+        recurringLabel.setStyle("-fx-text-fill: black;"
+                + "-fx-background-color: white;"
+                + "-fx-font-family: Arial;"
+                + "-fx-font-weight: bold;"
+        );
+        recurringTag.getChildren().add(recurringLabel);
     }
 
     private void initTags(ReadOnlyTask task) {

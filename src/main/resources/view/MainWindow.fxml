@@ -86,14 +86,26 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </TextFlow>
-                   <AnchorPane fx:id="resultDisplayPlaceholder" minHeight="160.0" minWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 4;" VBox.vgrow="ALWAYS">
+                   <AnchorPane fx:id="resultDisplayPlaceholder" minHeight="110.0" minWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 4;" translateY="15.0" VBox.vgrow="ALWAYS">
                      <padding>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <VBox.margin>
                         <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                      </VBox.margin>
+                     <children>
+                        <Text layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result Display">
+                           <font>
+                              <Font name="Arial Bold" size="23.0" />
+                           </font>
+                        </Text>
+                     </children>
                    </AnchorPane>
+                  <AnchorPane fx:id="statusbarPlaceholder" minHeight="20.0" style="-fx-border-radius: 0; -fx-border-color: transparent;" translateY="-5.0">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                  </AnchorPane>
                   <AnchorPane fx:id="commandBoxPlaceholder" minHeight="50.0" minWidth="250.0" VBox.vgrow="NEVER">
                      <padding>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />

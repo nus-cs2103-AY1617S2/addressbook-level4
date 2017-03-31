@@ -64,8 +64,8 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
-    /*@FXML
-    private AnchorPane statusbarPlaceholder;*/
+    @FXML
+    private AnchorPane statusbarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -140,7 +140,7 @@ public class MainWindow extends UiPart<Region> {
                 logic.getFilteredCompletedTaskList()
                 );
         new ResultDisplay(getResultDisplayPlaceholder());
-        //new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
@@ -148,9 +148,9 @@ public class MainWindow extends UiPart<Region> {
         return commandBoxPlaceholder;
     }
 
-    /*private AnchorPane getStatusbarPlaceholder() {
+   private AnchorPane getStatusbarPlaceholder() {
         return statusbarPlaceholder;
-    }*/
+    }
 
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
