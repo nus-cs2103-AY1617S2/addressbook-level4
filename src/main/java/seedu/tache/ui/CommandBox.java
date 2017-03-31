@@ -70,6 +70,7 @@ public class CommandBox extends UiPart<Region> {
                                         "help", "list", "save ", "select ", "load ", "undo" };
         AutoCompletionBinding<String> binding = TextFields.bindAutoCompletion(commandTextField, possibleCommands);
         binding.setMaxWidth(100);
+        binding.setDelay(50);
     }
     //@@author
 
