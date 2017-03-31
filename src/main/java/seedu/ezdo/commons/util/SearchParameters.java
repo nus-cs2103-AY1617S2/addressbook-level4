@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.TaskDate;
-
+//@@author A0141010L
 public class SearchParameters {
 	private Set<String> namesToCompare;
 	private Optional<Priority> priorityToCompare;
