@@ -32,7 +32,7 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_SUCCESS_VIEW_FLOATING_TASKS = "List all Floating Tasks";
     public static final String MESSAGE_SUCCESS_VIEW_OVERDUE_TASKS = "List all Overdue Tasks";
     public static final String MESSAGE_SUCCESS_VIEW_PENDING_TASKS = "List all Pending Tasks";
-    public static final String MESSAGE_SUCCESS_VIEW_TODAY_TOSKS = "List all Today's Tasks";
+    public static final String MESSAGE_SUCCESS_VIEW_TODAY_TASKS = "List all Today's Tasks";
 
     private final String typeOfList;
 

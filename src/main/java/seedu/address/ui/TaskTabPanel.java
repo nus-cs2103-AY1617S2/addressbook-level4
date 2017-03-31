@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
@@ -8,8 +7,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.FxViewUtil;
+import seedu.address.logic.Logic;
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.model.task.ReadOnlyTask;
 
 //@@author A0135998H
 /**
@@ -19,7 +18,7 @@ public class TaskTabPanel extends UiPart<Region> {
 
     private static final String FXML = "TaskTabPanel.fxml";
 
-    private ObservableList<ReadOnlyTask> taskList;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
@@ -66,9 +65,9 @@ public class TaskTabPanel extends UiPart<Region> {
     /**
      * @param placeholder The AnchorPane where the taskTabPanel must be inserted
      */
-    public TaskTabPanel(AnchorPane placeholder, ObservableList<ReadOnlyTask> taskList) {
+    public TaskTabPanel(AnchorPane placeholder, Logic logic) {
         super(FXML);
-        this.taskList = taskList;
+        this.logic = logic;
         addToPlaceholder(placeholder);
         fillTaskListPanel(allTasksListPanelPlaceholder);
     }
@@ -110,7 +109,7 @@ public class TaskTabPanel extends UiPart<Region> {
 
     private void fillTaskListPanel(AnchorPane placeholder) {
         placeholder.getChildren().clear();
-        taskListPanel = new TaskListPanel(placeholder, taskList);
+        taskListPanel = new TaskListPanel(placeholder, logic.getFilteredPersonList());
     }
 
     public TaskListPanel getTaskListPanel() {

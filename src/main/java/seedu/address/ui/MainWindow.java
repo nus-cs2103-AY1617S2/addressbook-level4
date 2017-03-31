@@ -113,7 +113,7 @@ public class MainWindow extends UiPart<Region> {
 
     public void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        taskTabPanel = new TaskTabPanel(taskTabPanelPlaceHolder, logic.getFilteredPersonList());
+        taskTabPanel = new TaskTabPanel(taskTabPanelPlaceHolder, logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
