@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import seedu.opus.model.task.ReadOnlyTask;
 
+//@@author A0148081H
 public class EndTimeComparator implements Comparator<ReadOnlyTask> {
     public int compare(ReadOnlyTask d1, ReadOnlyTask d2) {
         boolean bothHaveEnd = d1.getEndTime().isPresent() && d2.getEndTime().isPresent();
@@ -19,7 +20,11 @@ public class EndTimeComparator implements Comparator<ReadOnlyTask> {
                 return 0;
             }
         } else if (oneHasEnd) {
-            return -1;
+            if (d1.getEndTime().isPresent()) {
+                return -1;
+            } else {
+                return 1;
+            }
         } else {
             return 1;
         }

@@ -5,12 +5,27 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 ---
 
 1. [Setting Up](#1-setting-up)
+    1. [Prerequisites](#11-prerequisites)
+    2. [Installing Checkstyle manually](#12-installing-checkstyle-manually)
 2. [Design](#2-design)
+    1. [Architecture](#21-architecture)
+    2. [UI Component](#22-ui-component)
+    3. [Logic Component](#23-logic-component)
+    4. [Model Component](#24-model-component)
+    5. [Storage Component](#25-storage-component)
 3. [Implementation](#3-implementation)
 4. [Code Quality and Testing](#4-code-quality-and-testing)
+    1. [Code Quality](#41-code-quality)
+    2. [Testing](#42-testing)
+    3. [Improving test coverage using Coveralls](#43-improving-test-coverage-using-coveralls)
+    4. [Troubleshooting tests](#44-troubleshooting-tests)
 5. [Dev Ops](#5-dev-ops)
 6. [Version Control](#6-version-control)
+    1. [Git + GitHub](#61-git--github)
+    2. [Branching and Workflow](#62-branching-and-workflow)
+    3. [Commit Messages](#63-commit-messages)
 
+<br/>
 * [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
 * [Appendix B: Glossary](#appendix-b--glossary)
 * [Appendix C : Product Survey](#appendix-c--product-survey)
@@ -93,11 +108,11 @@ More information about using Gradle can be found [here](https://github.com/CS210
 
 #### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git.
     This is because Eclipse failed to recognize the new files that are pulled from Git.
-1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
+<br>1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
 
 #### 1.5.2.  Eclipse reports missing libraries.
     Eclipse has failed to retrieve all required dependencies during the project import.
-1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
+<br>1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
 
 ## 2. Design
 
@@ -136,7 +151,7 @@ The [**`Logic`**](#23-logic-component) accepts commands sent from the user pass 
 The [**`Model`**](#24-model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
 
 #### Storage
-The [**`Storage`**](#25-storage-component) Reads data from, and writes data to, the hard disk.
+The [**`Storage`**](#25-storage-component) Reads data from and writes data to, the hard disk.
 
 Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-logic-component),
 [**`Model`**](#24-model-component) and [**`Storage`**](#25-storage-component)
@@ -144,7 +159,7 @@ Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-log
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given below) defines it's Application Programming Interface (API) in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br><br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.1.2 : Class Diagram of the Logic Component_
@@ -176,38 +191,33 @@ The sections below give more details of each component.
 
 Author: [Xu Bili](http://github.com/xbili)
 
-The `UI` component allows users to enter commands and receive the results through its graphical interfaces. It is responsible to handle the user interactions and ensure the commands are passed to `Logic` correctly.
+The `UI` component allows users to enter commands and receive the results through its graphical interface. This component is the first point of contact with the user. It is responsible for passing the correct input from the user to the `Logic` component.
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` consists of multiple parts e.g.`CommandBox`, `ResultDisplay`, `TodayTaskListPanel`,
-`WeekTaskListPanel`, `FloatingTaskListPanel`,`StatusBarFooter` etc.
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` which contains `CommandBox`, `ResultDisplay`, `MainPanel`, `SidePanel`, and a `StatusBarFooter`.
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class. Below is a table describing each UI component's responsibility.
 
-The `CommandBox` allows users to enter the commands which will later be executed in `Logic`.
-
-The `ResultDisplay` panel shows the feedback of the commands.
-
-The `TodayTaskListPanel` shows all incomplete tasks that are due today and completed tasks that have been done today.
-
-The `WeekTaskListPanel` shows all incomplete tasks that are due within a week.
-
-The `FloatingTaskListPanel` shows all the incomplete tasks that do not have deadlines.
-
-The `StatusBarFooter` shows when the app has been last updated and storage file path.
+| Component         | Description                                                                  |
+| ----------------- |------------------------------------------------------------------------------|
+| `CommandBox`      | Allows users to enter the commands for `Logic` component to execute          |
+| `ResultDisplay`   | Shows feedback from command execution                                        |
+| `MainPanel`       | Displays tasks that are the result of command execution                      |
+| `SidePanel`       | Displays tasks that are due, or events that are starting in the current week |
+| `StatusBarFooter` | Displays the time when the app has be last updated and the storage file path |
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 * Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Binds itself to some data in the `Model` that updates the UI when the data changes.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
 ### 2.3. Logic component
@@ -221,40 +231,42 @@ to display the final output.
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)<br>
+This section will elaborate on the functions of the `Logic` component; i.e how an input is received from the user and passed through as a command before the final product is ready to be stored and displayed on the UI.
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+1. `Logic` uses the `Parser` class to process the input provided by the user.
+2. This creates a `Command` object according to the command word input (eg. `add` will cause the AddCommand to create an AddCommand object).
+3. This is then executed by the `LogicManager`, which will process the command accordingly.
+4. The command execution will interact with the `Model` component (eg. adding a task), to create a new task.
+4. The result of the command execution is encapsulated as a `CommandResult` object which will be handed back to the `Ui` component and display the relevant results to the user.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-In this diagram, the `Logic Manager` receives an event to delete the task at index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is pass back to the `UI` component through `CommandResult`.
+In this diagram, the `Logic Manager` receives an event to delete the task from index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is passed back to the `UI` component through `CommandResult`.
 
 ### 2.4. Model component
 
 Author: [Han Lynn](http://github.com/hlynn93)
 
-The `Model` component handles the data related logic and defines the structure of the data. It reacts to the `Logic` requests and changes its and its attributes' states accordingly.
+The `Model` component handles the data related logic and defines the structure of the data. It reacts to the `Logic` requests and changes its own state and its attributes' states accordingly.
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-The `Model` component does not depends on other three components and consists of three main objects: `Task`, `Tag` and `UserPref`.
+The `Model` component does not depend on other three components and consists of three main objects: `Task`, `Tag` and `UserPref`.
 * The `UserPref` object represents the user's preferences.
-* The `Task` object stores the attributes of task which consist of `Name`, `Priority`, `Status`, `Note`, `StartTime` and `EndTime`. It is also linked to the `Tag` object that categorises the existing tasks.
+* The `Task` object stores the attributes of a task which consist of `Name`, `Priority`, `Status`, `Note`, `StartTime` and `EndTime`. It is also linked to the `Tag` object that categorises the existing tasks.
 
 The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
 #### 2.4.1 Undo/Redo implementation
 
-The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `oringator` the component that generates the `momento` object and the `momento collector`.
+The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `originator` the component that generates the `momento` object and the `momento collector`.
 
 Whenever the data object is modified, the `originator` sends a copy of the current state of the data as a `memento` object to the `momento collector` to keep track of. When the undo command is given, the `momento collector` simply returns the `momento` object representing the previous state of the data.
 
@@ -263,11 +275,11 @@ In Opus, we have:
 * `TaskManagers` as `momento` objects.
 * `History` as the `momento collector`.
 
-`History` contains two list of `TaskManager`, one for the backward `undo` operation and another for the forward `redo` operation.
+`History` contains two lists of `TaskManager`, one for the backwards `undo` operation and another for the forward `redo` operation.
 
-Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplfies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
+Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplifies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
 
-Futhermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
+Furthermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
 
 ### 2.5. Storage component
 
@@ -283,12 +295,12 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component listens the `TaskManagerChangedEvent` and
 whenever there is a change to the task manager data, the component updates the storage files accordingly. It
 
-* saves `UserPref` objects in json format and read it back.
-* saves the Task Manager data in xml format and read it back.
+* saves `UserPref` objects in JSON format and read it back.
+* saves the Task Manager data in XML format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.opus.commons` package.
 
 ## 3. Implementation
 
@@ -384,8 +396,8 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 ### 4.4. Troubleshooting tests
 
 #### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
-    This is because Assertions are not enabled for JUnit tests. <br>
-1. Enable assertions in JUnit tests as described
+    This is because Assertions are not enabled for JUnit tests.
+<br>1. Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
 2. Delete run configurations created when you ran tests earlier.
 
@@ -555,4 +567,3 @@ Cons:
 * Specific to technical tasks
 * Tasks have to be small enough to be broken down into cards
 * Gets really messy when the project scales up
-

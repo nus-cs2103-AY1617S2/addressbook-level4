@@ -7,6 +7,7 @@ import seedu.opus.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.opus.logic.commands.exceptions.CommandException;
 import seedu.opus.model.task.Status;
 
+//@@author A0124368A
 public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
@@ -39,3 +40,4 @@ public class MarkCommand extends Command {
     }
 
 }
+//@@author

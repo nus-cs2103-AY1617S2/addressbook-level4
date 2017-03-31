@@ -8,6 +8,7 @@ import seedu.opus.logic.commands.Command;
 import seedu.opus.logic.commands.IncorrectCommand;
 import seedu.opus.logic.commands.MarkCommand;
 
+//@@author A0124368A
 /**
  * Parses input arguments and creates a new MarkCommand object
  */
@@ -29,3 +30,4 @@ public class MarkCommandParser {
     }
 
 }
+//@@author

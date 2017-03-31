@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import seedu.opus.model.task.ReadOnlyTask;
 
+//@@author A0148081H
 public class StartTimeComparator implements Comparator<ReadOnlyTask> {
     public int compare(ReadOnlyTask d1, ReadOnlyTask d2) {
         boolean bothHaveStart = d1.getStartTime().isPresent() && d2.getStartTime().isPresent();
@@ -19,7 +20,11 @@ public class StartTimeComparator implements Comparator<ReadOnlyTask> {
                 return 0;
             }
         } else if (oneHasStart) {
-            return -1;
+            if (d1.getStartTime().isPresent()) {
+                return -1;
+            } else {
+                return 1;
+            }
         } else {
             return 1;
         }

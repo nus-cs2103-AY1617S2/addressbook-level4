@@ -18,6 +18,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertFindResult("find milk", td.grocery);
     }
 
+    //@@author A0126345J
     @Test
     public void findByTagSuccess() {
         assertFindResult("find chores", td.laundry, td.dishes); // no results
@@ -27,6 +28,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     public void findByNoteSuccess() {
         assertFindResult("find Twice", td.laundry); // no results
     }
+    //@@author
 
     @Test
     public void find_emptyList() {

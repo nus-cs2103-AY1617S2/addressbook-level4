@@ -8,6 +8,7 @@ import seedu.opus.logic.commands.UndoCommand;
 import seedu.opus.testutil.TestTask;
 import seedu.opus.testutil.TestUtil;
 
+//@@author A0148087W
 public class UndoCommandTest extends TaskManagerGuiTest {
 
     private TestTask[] expectedTasksList = td.getTypicalTasks();
@@ -23,7 +24,6 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
         assertTrue(taskListPanel.isListMatching(currentTasksList));
         assertUndoSuccess(expectedTasksList);
-
     }
 
     /**

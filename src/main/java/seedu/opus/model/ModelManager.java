@@ -93,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0148087W
     @Override
     public void resetToPreviousState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
@@ -104,6 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
         indicateTaskManagerChanged();
     }
+    //@@author
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -112,10 +114,12 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    //@@author A0148081H
     @Override
     public void sortList(String keyword) {
         filteredTasks = new FilteredList<>(this.taskManager.getSortedList(keyword));
     }
+    //@@author
 
     @Override
     public void updateFilteredListToShowAll() {
@@ -139,6 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean satisfies(ReadOnlyTask task);
     }
 
+    //@@author A0126345J
     private class PredicateExpression implements Expression {
 
         private final List<Qualifier> qualifiers;
