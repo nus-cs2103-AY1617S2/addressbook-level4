@@ -18,7 +18,7 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the view of UI."
-        + "e.g. view [all|calendar|done|floating|overdue|today|tomorrow|future]";
+        + "e.g. view [all|calendar|done|floating|overdue|today|tomorrow|future|unfinished]";
 
     public static final String MESSAGE_SUCCESS = "View changed to %s";
     public static final String MESSAGE_ERROR = "Invalid input, allowed input: all|calendar|done|"
@@ -26,12 +26,13 @@ public class ViewCommand extends Command {
 
     public static final String ALL = "All";
     public static final String CALENDAR = "Calendar";
+    public static final String UNFINISHED = "Unfinished";
     public static final String EMPTY = "";
     public static final int NOT_FOUND = -1;
 
     public static final String[] VIEW_GROUPS = {
         Status.DONE, Status.FLOATING, Status.OVERDUE, Status.TODAY, Status.TOMORROW, Status.FUTURE,
-        ALL, CALENDAR
+        ALL, CALENDAR, UNFINISHED
     };
 
     public final ArrayList<String> viewGroups;
@@ -52,6 +53,11 @@ public class ViewCommand extends Command {
                 throw new IllegalValueException(MESSAGE_ERROR);
             }
             this.viewGroups.add(VIEW_GROUPS[index]);
+        }
+        // Default view has DONE and UNFINISHED
+        if (this.viewGroups.isEmpty()) {
+            this.viewGroups.add(Status.DONE);
+            this.viewGroups.add(UNFINISHED);
         }
     }
 
