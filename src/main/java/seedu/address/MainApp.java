@@ -75,24 +75,23 @@ public class MainApp extends Application {
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData = null;
+        ReadOnlyAddressBook initialData;
         
         try {
             addressBookOptional = storage.readAddressBook(userPrefs.getGuiSettings().getLastLoadedYTomorrow());
-        } catch (DataConversionException | IOException e) {
-            try {
+            if (!addressBookOptional.isPresent()) {
                 addressBookOptional = storage.readAddressBook();
-                if (!addressBookOptional.isPresent()) {
-                    logger.info("Data file not found. Will be starting with a sample AddressBook");
-                }
-                initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            } catch (DataConversionException el) {
-                logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-                initialData = new YTomorrow();
-            } catch (IOException el) {
-                logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-                initialData = new YTomorrow();
             }
+            if (!addressBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            }
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            initialData = new YTomorrow();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initialData = new YTomorrow();
         }
 
         return new ModelManager(initialData, userPrefs);
