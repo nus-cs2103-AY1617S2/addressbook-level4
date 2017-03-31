@@ -63,6 +63,27 @@ public class AddCommandTest extends TodoListGuiTest {
         TestTodo todoToAdd = td.job;
         assertAddSuccess(todoToAdd, currentList);
     }
+    @Test
+    public void addEventByDateTest() {
+        TestTodo[] currentList = td.getTypicalTodos();
+        TestTodo todoToAdd;
+        try {
+            todoToAdd = new TodoBuilder().withName("DefaultEvent").
+                    withStartTime("12:00AM 11/11/11").
+                    withEndTime("12:00AM 11/11/11").build();
+
+            commandBox.runCommand("add DefaultEvent s/11/11/11 e/11/11/11");
+
+            TodoCardHandle addedCard = todoListPanel.navigateToTodo(todoToAdd.getName().fullName);
+            assertMatching(todoToAdd, addedCard);
+
+            TestTodo[] expectedList = TestUtil.addTodosToList(currentList, todoToAdd);
+            assertTrue(todoListPanel.isListMatching(true, expectedList));
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void getTimeByDefaultTest() {
@@ -73,15 +94,15 @@ public class AddCommandTest extends TodoListGuiTest {
             TestTodo[] currentList = td.getTypicalTodos();
 
             TestTodo eventToAdd = new TodoBuilder().withName("DefaultEvent").
-                    withStartTime(getTodaytoString(addComand.getToday())).
-                    withEndTime(getTomorrowtoString(addComand.getTomorrow())).build();
+                    withStartTime(getTodayMidnighttoString(addComand.getTodayMidnight())).
+                    withEndTime(getTomorrowMidnighttoString(addComand.getTomorrowMidnight())).build();
 
             assertAddSuccess(eventToAdd, currentList);
 
             commandBox.runCommand("undo");
 
             TestTodo deadLineToAdd = new TodoBuilder().withName("DefaultDeadLine").
-                    withEndTime(getTomorrowtoString(addComand.getTomorrow())).build();
+                    withEndTime(getTomorrowMidnighttoString(addComand.getTomorrowMidnight())).build();
 
             assertAddSuccess(deadLineToAdd, currentList);
 
@@ -113,22 +134,22 @@ public class AddCommandTest extends TodoListGuiTest {
         assertTrue(todoListPanel.isListMatching(true, expectedList));
     }
 
-    private String getTomorrowtoString(Date dt) {
+    private String getTomorrowMidnighttoString(Date dt) {
         Date dtAssign = dt;
         Calendar c = Calendar.getInstance();
         c.setTime(dtAssign);
         c.add(Calendar.DATE, 1);
         dtAssign = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        return dateFormat.format(dtAssign);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return "12:00AM" + " " + dateFormat.format(dtAssign);
     }
 
-    private String getTodaytoString(Date dt) {
+    private String getTodayMidnighttoString(Date dt) {
         Date dtAssign = dt;
         Calendar c = Calendar.getInstance();
         c.setTime(dtAssign);
         dtAssign = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        return dateFormat.format(dtAssign);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return "12:00AM" + " " + dateFormat.format(dtAssign);
     }
 }

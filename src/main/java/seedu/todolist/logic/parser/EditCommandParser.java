@@ -52,8 +52,8 @@ public class EditCommandParser {
             if (!index.isPresent()) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-            isTimeValid(startTime);
-            isTimeValid(endTime);
+            startTime = formatAndCheckValidTime(startTime);
+            endTime = formatAndCheckValidTime(endTime);
             if (startTime.isPresent() && endTime.isPresent()) { //for event
                 setEditTodoDescriptroForEvent(editTodoDescriptor, startTime, endTime);
             } else if (endTime.isPresent() && !startTime.isPresent()) { //for deadLine
@@ -123,8 +123,14 @@ public class EditCommandParser {
         c.setTime(dt);
         c.add(Calendar.DATE, 1);
         dt = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        dateFormat.format(dt);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateTimeFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+        try {
+            dt = dateTimeFormat.parse("12:00AM" + " " + dateFormat.format(dt));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return dt;
     }
 
@@ -133,19 +139,36 @@ public class EditCommandParser {
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         dt = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        dateFormat.format(dt);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateTimeFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+        try {
+            dt = dateTimeFormat.parse("12:00AM" + " " + dateFormat.format(dt));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return dt;
     }
 
-    private void isTimeValid (Optional<String> time) throws ParseException {
+    private Optional<String> formatAndCheckValidTime (Optional<String> time) throws ParseException {
         if (!time.equals(Optional.empty()) && !time.get().equals("")) {
             try {
-                DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-                dateFormat.parse(time.get());
+                String[] dateAndTime = time.get().split(" ");
+                if (dateAndTime.length == 1) { //date only
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    dateFormat.parse(time.get());
+                    Optional<String> midnightPlusDate = Optional.of("12:00AM " + time.get());
+                    return midnightPlusDate;
+                } else {
+                    DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+                    dateFormat.parse(time.get());
+                    return time;
+                }
             } catch (ParseException e) {
                 throw new ParseException(AddCommand.MESSAGE_INVALID_TIME, 0);
             }
+        } else {
+            return time;
         }
     }
     //@@author

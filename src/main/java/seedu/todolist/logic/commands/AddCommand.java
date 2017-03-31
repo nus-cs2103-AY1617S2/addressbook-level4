@@ -3,6 +3,7 @@ package seedu.todolist.logic.commands;
 import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -60,7 +61,7 @@ public class AddCommand extends Command {
             Date start;
             if (startTime.isPresent()) {
                 start =  (!startTime.get().isEmpty()) ?
-                        StringUtil.parseDate(startTime.get() , DATE_FORMAT) : getToday();
+                        StringUtil.parseDate(startTime.get() , DATE_FORMAT) : getTodayMidnight();
             } else {
                 start = null;
             }
@@ -68,7 +69,7 @@ public class AddCommand extends Command {
             Date end;
             if (endTime.isPresent()) {
                 end =  (!endTime.get().isEmpty()) ?
-                        StringUtil.parseDate(endTime.get() , DATE_FORMAT) : getTomorrow();
+                        StringUtil.parseDate(endTime.get() , DATE_FORMAT) : getTomorrowMidnight();
             } else {
                 end = null;
             }
@@ -117,24 +118,36 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
     }
-    public Date getTomorrow() {
+    public Date getTomorrowMidnight() {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         c.add(Calendar.DATE, 1);
         dt = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        dateFormat.format(dt);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateTimeFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+        try {
+            dt = dateTimeFormat.parse("12:00am" + " " + dateFormat.format(dt));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return dt;
     }
 
-    public Date getToday() {
+    public Date getTodayMidnight() {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         dt = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        dateFormat.format(dt);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateTimeFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+        try {
+            dt = dateTimeFormat.parse("12:00am" + " " + dateFormat.format(dt));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return dt;
     }
 }
