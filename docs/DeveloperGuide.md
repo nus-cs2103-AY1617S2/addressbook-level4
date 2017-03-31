@@ -571,7 +571,7 @@ Use case ends.
 **MSS**
 
 1. User requests to sort tasks by start dates
-2. TaskManager shows a sorted list of tasks according to their start dates in ascending order
+2. TaskManager shows a sorted list of tasks according to their start dates in ascending order <br>
 Use case ends.
 
 **Extensions**
