@@ -277,7 +277,7 @@ public class ModelManager extends ComponentManager implements Model {
         private boolean startBefore;
         private boolean dueBefore;
         private boolean startAfter;
-        private boolean dueAfter;   
+        private boolean dueAfter;
 
         NameQualifier(SearchParameters searchParameters) {
 
