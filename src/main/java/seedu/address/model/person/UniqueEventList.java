@@ -35,6 +35,11 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList;
     }
 
+    //@@author A0148038A
+    public void clearAll() {
+        internalList.clear();
+    }
+
     //@@author A0110491U
     /**
      *

@@ -96,6 +96,15 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         syncMasterTagListWith(events);
     }
 
+    //@@author A0148038A
+    public void resetEventData() {
+        events.clearAll();
+    }
+
+    public void resetTaskData() {
+        tasks.clearAll();
+    }
+
 //// activity-level operations
 
     /**

@@ -20,6 +20,14 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyWhatsLeft newData);
 
+    //@@author A0148038A
+    /** Clears all events in WhatsLeft*/
+    void resetEvent();
+
+    /** Clears all tasks in WhatsLeft*/
+    void resetTask();
+
+    //@@author
     /** Returns the WhatsLeft */
     ReadOnlyWhatsLeft getWhatsLeft();
 

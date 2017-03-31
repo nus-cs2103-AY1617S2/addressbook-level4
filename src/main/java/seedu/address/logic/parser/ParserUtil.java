@@ -204,4 +204,10 @@ public class ParserUtil {
         String trimmedCommand = command.trim();
         return trimmedCommand;
     }
+
+    //@@author A0148038A
+    public static String parseClearType(String command) {
+        String trimmedCommand = command.trim();
+        return trimmedCommand;
+    }
 }

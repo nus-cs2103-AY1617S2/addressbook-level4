@@ -34,6 +34,11 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.contains(toCheck);
     }
 
+    //@@author A0148038A
+    public void clearAll() {
+        internalList.clear();
+    }
+
     /**
      * Adds an Task to the list.
      *

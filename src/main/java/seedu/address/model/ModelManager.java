@@ -58,12 +58,26 @@ public class ModelManager extends ComponentManager implements Model {
         this(new WhatsLeft(), new UserPrefs());
     }
 
+    //@@author A0148038A
     @Override
     public void resetData(ReadOnlyWhatsLeft newData) {
         whatsLeft.resetData(newData);
         indicateWhatsLeftChanged();
     }
 
+    @Override
+    public void resetEvent() {
+        whatsLeft.resetEventData();
+        indicateWhatsLeftChanged();
+    }
+
+    @Override
+    public void resetTask() {
+        whatsLeft.resetTaskData();
+        indicateWhatsLeftChanged();
+    }
+
+    //@@author
     @Override
     public ReadOnlyWhatsLeft getWhatsLeft() {
         return whatsLeft;
