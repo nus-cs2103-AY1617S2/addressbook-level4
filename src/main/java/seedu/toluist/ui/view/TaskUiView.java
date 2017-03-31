@@ -44,6 +44,10 @@ public class TaskUiView extends UiView {
     @FXML
     private HBox statusBox;
     @FXML
+    private HBox dateBox;
+    @FXML
+    private HBox recurringBox;
+    @FXML
     private ImageView clockIcon;
     @FXML
     private ImageView recurringIcon;
@@ -70,6 +74,7 @@ public class TaskUiView extends UiView {
         handleRecurringTask(task.isRecurring());
         handleCompletedTask();
         handleNewTask(task.equals(UiStore.getInstance().getLastEditedTask()));
+        handleStatusBox(!statusBox.getChildren().isEmpty());
     }
 
     private void initializeView() {
@@ -119,6 +124,8 @@ public class TaskUiView extends UiView {
     }
 
     private void handleTaskWithDates(boolean isShown) {
+        dateBox.setVisible(isShown);
+        dateBox.setManaged(isShown);
         if (isShown) {
             clockIcon.setImage(AppUtil.getImage(IMAGE_PATH_CLOCK_ICON));
             if (task.isTaskWithDeadline()) {
@@ -126,23 +133,12 @@ public class TaskUiView extends UiView {
             } else if (task.isEvent()) {
                 date.setText(DateTimeFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
             }
-        } else {
-            hideDateBox();
-            hideClockIcon();
         }
     }
 
-    private void hideDateBox() {
-        date.setVisible(false);
-        date.setManaged(false);
-    }
-
-    private void hideClockIcon() {
-        clockIcon.setVisible(false);
-        clockIcon.setManaged(false);
-    }
-
     private void handleRecurringTask(boolean isShown) {
+        recurringBox.setVisible(isShown);
+        recurringBox.setManaged(isShown);
         if (isShown) {
             recurringIcon.setImage(AppUtil.getImage(IMAGE_PATH_RECURRING_ICON));
             if (task.isFloatingTask()) {
@@ -164,20 +160,7 @@ public class TaskUiView extends UiView {
                         task.getRecurringEndDateTime(),
                         task.getRecurringFrequency()));
             }
-        } else {
-            hideRecurringIcon();
-            hideRecurringDateBox();
         }
-    }
-
-    private void hideRecurringIcon() {
-        recurringIcon.setVisible(false);
-        recurringIcon.setManaged(false);
-    }
-
-    private void hideRecurringDateBox() {
-        recurringIcon.setVisible(false);
-        recurringIcon.setManaged(false);
     }
 
     private void handleCompletedTask() {
@@ -190,5 +173,10 @@ public class TaskUiView extends UiView {
         if (isNew) {
             FxViewUtil.addStyleClass(taskPane, STYLE_CLASS_NEW);
         }
+    }
+
+    private void handleStatusBox(boolean isShown) {
+        statusBox.setVisible(isShown);
+        statusBox.setManaged(isShown);
     }
 }
