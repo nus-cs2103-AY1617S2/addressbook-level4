@@ -114,7 +114,7 @@ public class HelpCommandTest extends ToLuistGuiTest {
 
     @Test
     public void viewUnaliasHelp() {
-        String command = "help load";
+        String command = "help unalias";
         commandBox.runCommand(command);
         assertResultMessage(String.format("Displaying detailed help for %s.", "unalias"));
     }
