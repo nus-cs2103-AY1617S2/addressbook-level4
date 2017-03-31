@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Region> {
         browserPanel.freeResources();
     }
 
-    void switchTabPanel(String typeOfList) {
+    public void switchTabPanel(String typeOfList) {
         taskTabPanel.switchTabPanel(typeOfList);
     }
 
