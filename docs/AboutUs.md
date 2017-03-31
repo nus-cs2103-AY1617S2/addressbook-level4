@@ -17,10 +17,10 @@ Role: Team lead <br>
 #### [Walter Tay](http://github.com/waltertay)
 <img src="images/WalterTay.png" width="150"><br>
 Role: Developer <br>
-- Components in charge of: [Storage](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#storage-component)
+- Components in charge of:[UI](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#ui-component)
 - Aspects/tools in charge of: Code quality, Git expert and deadlines.
-- Features implemented:
-- Other major contributions:
+- Features implemented: Done/Undone Command, ListDone/ListUndone Command
+- Other major contributions: Implementation of UI.
 
 -----
 
@@ -30,14 +30,14 @@ Role: Developer <br>
 - Components in charge of: [Logic](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#logic-component)
 - Aspects/tools in charge of: Documentation, Eclipse expert
 - Features implemented: ChangeTheme Command, power search
-- Other major contributions: Implementation of CommandLibrary
+- Other major contributions: Implementation of CommandLibrary, and oversee other implementations of components in Logic.
 
 -----
 
 #### [Zhang Ying](http://github.com/zing1996)
 <img src="images/ZhangYing.png" width="150"><br>
 Role: Developer <br>
-- Components in charge of: [UI](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#ui-component)
+- Components in charge of:  [Storage](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#storage-component)
 - Aspects/tools in charge of: Testing, Scheduling and tracking
 - Features implemented:
 - Other major contributions:
