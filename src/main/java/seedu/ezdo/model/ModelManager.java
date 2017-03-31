@@ -18,6 +18,7 @@ import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.DateUtil;
+import seedu.ezdo.commons.util.SearchParameters;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.DueDate;
@@ -178,8 +179,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(listToCompare, searchIndicatorList)));
+    public void updateFilteredTaskList(SearchParameters searchParameters) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(searchParameters)));
     }
 
     @Override
@@ -272,24 +273,24 @@ public class ModelManager extends ComponentManager implements Model {
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private Optional<Priority> priority;
-        private Optional<StartDate> startDate;
-        private Optional<DueDate> dueDate;
+        private Optional<TaskDate> startDate;
+        private Optional<TaskDate> dueDate;
         private Set<String> tags;
         private boolean startBefore;
         private boolean dueBefore;
         private boolean startAfter;
         private boolean dueAfter;
 
-        NameQualifier(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
-            this.nameKeyWords = (Set<String>) listToCompare.get(0);
-            this.priority = (Optional<Priority>) listToCompare.get(1);
-            this.startDate = (Optional<StartDate>) listToCompare.get(2);
-            this.dueDate = (Optional<DueDate>) listToCompare.get(3);
-            this.tags = (Set<String>) listToCompare.get(4);
-            this.startBefore = searchIndicatorList.get(0);
-            this.dueBefore = searchIndicatorList.get(1);
-            this.startAfter = searchIndicatorList.get(2);
-            this.dueAfter = searchIndicatorList.get(3);
+        NameQualifier(SearchParameters searchParameters) {
+            this.nameKeyWords = searchParameters.getNames();
+            this.priority = searchParameters.getPriority();
+            this.startDate = searchParameters.getStartDate();
+            this.dueDate = searchParameters.getDueDate();
+            this.tags = searchParameters.getTags();
+            this.startBefore = searchParameters.getStartBefore();
+            this.dueBefore = searchParameters.getdueBefore();
+            this.startAfter = searchParameters.getStartAfter();
+            this.dueAfter = searchParameters.getDueAfter();
 
         }
 
