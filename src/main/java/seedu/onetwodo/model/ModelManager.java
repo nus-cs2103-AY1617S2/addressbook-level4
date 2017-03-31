@@ -6,9 +6,11 @@ import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.ComponentManager;
+import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
+import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.CollectionUtil;
@@ -112,6 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
             newTask.forwardTaskRecurDate();
             toDoList.doneTask(taskToComplete);
             toDoList.addTask(newTask);
+            jumpToNewTask(newTask);
         }
 
         history.saveUndoInformationAndClearRedoHistory(DoneCommand.COMMAND_WORD, taskToComplete, copiedCurrentToDoList);
@@ -348,6 +351,27 @@ public class ModelManager extends ComponentManager implements Model {
     public int getTaskIndex(ReadOnlyTask task) {
         FilteredList<ReadOnlyTask> filtered = getFilteredByDoneFindType(task.getTaskType());
         return filtered.indexOf(task);
+    }
+
+    /**
+     * Scroll to task provided
+     *
+     * @param task to jump to
+     */
+    @Override
+    public void jumpToNewTask(ReadOnlyTask task) {
+        int filteredIndex = getTaskIndex(task);
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        EventsCenter.getInstance().post(
+                                new JumpToListRequestEvent(filteredIndex, task.getTaskType())
+                        );
+                    }
+                },
+                300
+        );
     }
 
     // ========== Inner classes/interfaces used for filtering

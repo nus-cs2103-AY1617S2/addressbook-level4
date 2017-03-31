@@ -76,7 +76,7 @@ public class EditCommand extends Command {
         TaskAttributesChecker.validateEditedAttributes(editedTask);
         try {
             model.updateTask(taskToEdit, internalIdx, editedTask);
-            jumpToNewTask(editedTask);
+            model.jumpToNewTask(editedTask);
             EventsCenter.getInstance().post(new DeselectCardsEvent());
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             reverseAdd(taskToEdit, internalIdx);

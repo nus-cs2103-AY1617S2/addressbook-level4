@@ -125,4 +125,6 @@ public interface Model {
 
     void sortBy(SortOrder sortOrder);
 
+    public void jumpToNewTask(ReadOnlyTask task);
+
 }
