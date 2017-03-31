@@ -12,10 +12,11 @@ public enum Theme {
     public static Theme getTheme(String themeName) {
         // TODO Auto-generated method stub
         for (Theme t : Theme.values()) {
-            if (t.toString().equalsIgnoreCase(themeName.trim())) {
+            if (t.themeDescription.equalsIgnoreCase(themeName.trim())) {
                 return t;
             }
         }
+        System.out.println("assigning default");
         return Default;
     }
 

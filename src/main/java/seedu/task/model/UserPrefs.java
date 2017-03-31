@@ -18,8 +18,9 @@ public class UserPrefs {
     }
 
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
-        this.guiSettings = guiSettings;
-        this.theme = Theme.Default;
+        updateLastUsedGuiSetting(guiSettings, this.theme);
+//        this.guiSettings = guiSettings;
+//        this.theme = Theme.Default;
     }
 
     public void updateLastUsedGuiSetting(GuiSettings guiSettings, Theme theme) {
