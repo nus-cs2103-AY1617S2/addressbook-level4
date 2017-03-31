@@ -6,6 +6,7 @@ import java.util.List;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.NoChangeException;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.history.TaskMemento;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
@@ -55,6 +56,7 @@ public abstract class CompletionCommand extends Command {
 
         try {
             Task completedTask = createTaskWithCompletion(taskToComplete, shouldMarkComplete, messageSameState);
+            mementos.addUndoMementoAndClearRedo(new TaskMemento((Task) new Task(taskToComplete), completedTask));
             model.updateTask(targetIndex, completedTask);
         } catch (NoChangeException nce) {
             throw new CommandException(messageSameState);

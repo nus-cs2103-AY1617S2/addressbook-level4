@@ -116,6 +116,7 @@ public class TaskList implements ReadOnlyTaskList {
 
         Task newTask = new Task(newReadOnlyTask);
         syncMasterTagListWith(newTask);
+
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
