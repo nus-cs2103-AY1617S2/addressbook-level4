@@ -1,7 +1,6 @@
 package seedu.task.logic.commands;
 
 import seedu.task.commons.core.EventsCenter;
-import seedu.task.commons.events.ui.QueryUnknownCommandEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.logic.commandlibrary.CommandLibrary;
 

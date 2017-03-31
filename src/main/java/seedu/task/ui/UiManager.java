@@ -124,7 +124,7 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
     }
-    
+
     @Subscribe
     public CommandResult handleQueryUnknownCommandEvent(QueryUnknownCommandEvent event) {
         EventsCenter.getInstance().post(new ShowHelpFormatRequestEvent());
