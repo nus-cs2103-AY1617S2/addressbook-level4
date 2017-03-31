@@ -82,7 +82,6 @@ public class EditCommand extends Command {
             if (isSpecific) {
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
                 int newIndex = model.getFilteredTaskList().indexOf(newTask);
-                System.out.println(newIndex);
                 model.updateTask(newIndex, editedTask);
             } else {
                 editedTask = createEditedTask(taskToEdit, editTaskDescriptor);

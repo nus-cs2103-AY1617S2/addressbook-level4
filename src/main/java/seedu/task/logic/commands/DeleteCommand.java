@@ -22,11 +22,11 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     public final int targetIndex;
-    //    public final boolean isSpecific;
+    public final boolean isSpecific;
 
-    public DeleteCommand(int targetIndex) {
+    public DeleteCommand(int targetIndex, boolean isSpecific) {
         this.targetIndex = targetIndex;
-        //        this.isSpecific = isSpecific;
+        this.isSpecific = isSpecific;
     }
 
 

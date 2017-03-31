@@ -148,10 +148,9 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
         this.setDescription(replacement.getDescription());
         this.setPriority(replacement.getPriority());
-        //        this.setStartTiming(replacement.getStartTiming());
-        //        this.setEndTiming(replacement.getEndTiming());
         this.setOccurrences(replacement.getOccurrences());
         this.setTags(replacement.getTags());
+        this.setFrequency(replacement.getFrequency());
     }
 
     @Override
