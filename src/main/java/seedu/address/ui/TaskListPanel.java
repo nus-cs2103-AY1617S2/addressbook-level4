@@ -155,10 +155,13 @@ public class TaskListPanel extends UiPart<Region> {
 
     /**
      * Instantiate TaskGroupPanel objects and add them to taskListView.
+     *
+     * The last group that is non-empty will be expanded
      */
     private void createTaskListView(List<String> statusList) {
         taskListView.getChildren().clear();
         childGroupMap = new HashMap<String, TaskGroupPanel>();
+        TaskGroupPanel lastOne = null;
 
         for (String status : statusList) {
             // Create new task group & add them to current view.
@@ -168,6 +171,14 @@ public class TaskListPanel extends UiPart<Region> {
 
             childGroupMap.put(status, taskGroupPanel);
             taskListView.getChildren().add(taskGroupPanel.getRoot());
+            if (!taskIndexList.isEmpty()) {
+                lastOne = taskGroupPanel;
+            }
+        }
+
+        // Expand the last group that is non-empty
+        if (lastOne != null) {
+            lastOne.openTitlePane();
         }
     }
 
@@ -199,6 +210,7 @@ public class TaskListPanel extends UiPart<Region> {
             }
         }
         viewTasksWithStatus(removeDuplicateViews(groupsToView));
+        logger.info("View changed to " + String.join("|", groupsToView));
     }
 
 }
