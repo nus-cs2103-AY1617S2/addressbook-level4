@@ -22,22 +22,23 @@ public class DoneCommand extends Command implements MultipleIndexCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Done task: %1$s";
+    private static final String MESSAGE_UNDONE_TASK_SUCCESS = "Undone task: %1$s";
     public static final String MESSAGE_DONE_LISTED = "Done tasks listed";
 
     private final ArrayList<Integer> targetIndexes;
-    private final ArrayList<Task> tasksToDone;
+    private final ArrayList<Task> tasksToToggle;
     private final boolean requestToViewDoneOnly;
 
     public DoneCommand(ArrayList<Integer> indexes) {
         this.targetIndexes = new ArrayList<Integer>(indexes);
         this.requestToViewDoneOnly = false;
-        this.tasksToDone = new ArrayList<Task>();
+        this.tasksToToggle = new ArrayList<Task>();
     }
 
     public DoneCommand() {
         this.targetIndexes = null;
         this.requestToViewDoneOnly = true;
-        this.tasksToDone = null;
+        this.tasksToToggle = null;
     }
 
 
