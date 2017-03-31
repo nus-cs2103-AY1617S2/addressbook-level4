@@ -2,7 +2,7 @@ package seedu.task.commons.events.ui;
 
 import seedu.task.commons.events.BaseEvent;
 
-public class QueryUnknownCommandEvent extends BaseEvent{
+public class QueryUnknownCommandEvent extends BaseEvent {
 
     @Override
     public String toString() {

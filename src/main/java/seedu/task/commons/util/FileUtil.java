@@ -31,7 +31,6 @@ public class FileUtil {
         return file.isDirectory();
     }
 
-    //@@author A0142939W
     public static boolean isFileFormatCorrect(File file) {
         assert file != null;
         try {
@@ -43,6 +42,7 @@ public class FileUtil {
             return false;
         }
     }
+    //@@author
 
     /**
      * Creates a file if it does not exist along with its missing parent directories
