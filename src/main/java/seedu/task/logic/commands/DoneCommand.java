@@ -42,12 +42,12 @@ public class DoneCommand extends Command {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         StringBuilder sb = new StringBuilder();
 	for (int i = 0; i < targetIndex.length; i++) {
-        if (lastShownList.size() < targetIndex[i] - i) {
+        if (lastShownList.size() < targetIndex[i]) {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         
         }
-        ReadOnlyTask taskToComplete = lastShownList.get(targetIndex[i] - 1 - i);
+        ReadOnlyTask taskToComplete = lastShownList.get(targetIndex[i] - 1);
 
         targetStatus= taskToComplete.getTaskStatus().status;
         if (targetStatus.equals(TaskStatus.MESSAGE_DONE)) {
