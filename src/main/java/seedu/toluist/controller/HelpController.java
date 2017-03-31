@@ -78,8 +78,9 @@ public class HelpController extends Controller {
     }
 
     private void showSpecificHelp(String commandWord) {
-        uiStore.setHelp(getDetailedHelpFromController(findControllerFromKeyword(commandWord)));
-        uiStore.setCommandResult(new CommandResult(convertListListToStringForDetailed(getDetailedHelpFromController(findControllerFromKeyword(commandWord)))));
+        List<List<String>> detailedHelp = getDetailedHelpFromController(findControllerFromKeyword(commandWord));
+        uiStore.setHelp(detailedHelp);
+        uiStore.setCommandResult(new CommandResult(convertListListToStringForDetailed(detailedHelp)));
     }
 
     private List<List<String>> getDetailedHelpFromController(Class<? extends Controller> controller) {
