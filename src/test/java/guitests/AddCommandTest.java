@@ -63,6 +63,27 @@ public class AddCommandTest extends TodoListGuiTest {
         TestTodo todoToAdd = td.job;
         assertAddSuccess(todoToAdd, currentList);
     }
+    @Test
+    public void addEventByDateTest() {
+        TestTodo[] currentList = td.getTypicalTodos();
+        TestTodo todoToAdd;
+        try {
+            todoToAdd = new TodoBuilder().withName("DefaultEvent").
+                    withStartTime("12:00AM 11/11/11").
+                    withEndTime("12:00AM 11/11/11").build();
+
+            commandBox.runCommand("add DefaultEvent s/11/11/11 e/11/11/11");
+
+            TodoCardHandle addedCard = todoListPanel.navigateToTodo(todoToAdd.getName().fullName);
+            assertMatching(todoToAdd, addedCard);
+
+            TestTodo[] expectedList = TestUtil.addTodosToList(currentList, todoToAdd);
+            assertTrue(todoListPanel.isListMatching(true, expectedList));
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void getTimeByDefaultTest() {
