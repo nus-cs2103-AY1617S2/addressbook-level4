@@ -9,10 +9,9 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartEndDateTime;
 
-// TODO card design
-public class PersonCard extends UiPart<Region> {
+public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
@@ -33,32 +32,30 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().value);
+        name.setText(task.getName().value);
         id.setText(displayedIndex + ". ");
 
-        // TODO make sure both address and email are available though
-        // and also SLAP
-        if (person.getStartEndDateTime().isPresent()) {
+        if (task.getStartEndDateTime().isPresent()) {
             startEndOnly.setVisible(true);
             deadlineOnly.setVisible(false);
-            StartEndDateTime startEndDateTime = person.getStartEndDateTime().get();
+            StartEndDateTime startEndDateTime = task.getStartEndDateTime().get();
             startDate.setText(startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
             endDate.setText(startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
-        } else if (person.getDeadline().isPresent()) {
+        } else if (task.getDeadline().isPresent()) {
             startEndOnly.setVisible(false);
             deadlineOnly.setVisible(true);
-            deadline.setText(person.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
+            deadline.setText(task.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
         } else {
             startEndOnly.setVisible(false);
             deadlineOnly.setVisible(false);
         }
 
-        initTags(person);
+        initTags(task);
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
