@@ -149,7 +149,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         assertTabShown(TAB_INCOMPLETE + " (2/3)");
 
         commandBox.runCommand("history");
-        assertResultMessage("switch i\nlist\nswitch i\n3 commands displayed.");
+        assertResultMessage("list\nswitch i\n2 commands displayed.");
     }
 
     /**
