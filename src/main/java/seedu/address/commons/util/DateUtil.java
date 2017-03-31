@@ -1,8 +1,11 @@
 //@@author A0144885R
 package seedu.address.commons.util;
 
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.date.DateTime;
 import seedu.address.model.task.date.DateValue;
+import seedu.address.model.task.date.TaskDate;
+import seedu.address.model.task.date.TimeUnassigned;
 
 /**
  * Helper functions for handling DateValue.
@@ -44,6 +47,23 @@ public class DateUtil {
         } else {
             return true;
         }
+    }
+
+    public static boolean isTaskDateMatch(TaskDate d1, TaskDate d2) {
+        if (d1 instanceof TimeUnassigned && d2 instanceof TimeUnassigned) {
+            return true;
+        }
+        if (d1 instanceof TimeUnassigned) {
+            return false;
+        }
+        if (d2 instanceof TimeUnassigned) {
+            return false;
+        }
+        return haveIntersection(d1.getBeginning(), d1.getEnding(), d2.getBeginning(), d2.getEnding());
+    }
+
+    public static boolean isDeadlineMatch(Deadline d1, Deadline d2) {
+        return isTaskDateMatch(d1.date, d2.date);
     }
 
     /**

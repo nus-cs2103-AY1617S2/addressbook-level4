@@ -11,4 +11,7 @@ public interface TaskDate {
     public boolean hasPassed();
     public boolean isHappeningToday();
     public boolean isHappeningTomorrow();
+
+    public DateValue getBeginning();
+    public DateValue getEnding();
 }

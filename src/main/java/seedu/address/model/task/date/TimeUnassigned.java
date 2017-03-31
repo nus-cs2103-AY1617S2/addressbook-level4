@@ -32,6 +32,14 @@ public class TimeUnassigned implements TaskDate {
         return false;
     }
 
+    public DateValue getBeginning() {
+        return null;
+    }
+
+    public DateValue getEnding() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return MESSAGE_UNASSIGNED_DATE;

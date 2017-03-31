@@ -54,6 +54,14 @@ public class TimePeriod implements TaskDate {
                                 DateUtil.getBeginOfDay(tmr), DateUtil.getEndOfDay(tmr));
     }
 
+    public DateValue getBeginning() {
+        return beginDate.getBeginning();
+    }
+
+    public DateValue getEnding() {
+        return endDate.getEnding();
+    }
+
     @Override
     public String toString() {
         return String.format(OUTPUT_FORMAT, beginDate.toString(), endDate.toString());

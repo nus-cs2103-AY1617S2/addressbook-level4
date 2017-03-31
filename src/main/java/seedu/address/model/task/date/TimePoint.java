@@ -46,6 +46,14 @@ public class TimePoint implements TaskDate {
                                 DateUtil.getBeginOfDay(tmr), DateUtil.getEndOfDay(tmr));
     }
 
+    public DateValue getBeginning() {
+        return date.getBeginning();
+    }
+
+    public DateValue getEnding() {
+        return date.getEnding();
+    }
+
     @Override
     public String toString() {
         return String.format(OUTPUT_FORMAT, date.toString());
