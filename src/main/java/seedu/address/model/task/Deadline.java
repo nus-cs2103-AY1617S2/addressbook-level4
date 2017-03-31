@@ -128,6 +128,13 @@ public class Deadline {
     }
 
     /**
+     * Returns true if this deadline is past.
+     */
+    public boolean isOverdue() {
+        return (new Date()).after(toDeadline());
+    }
+
+    /**
      * Returns the From date object.
      */
     public Date fromDeadline() {
