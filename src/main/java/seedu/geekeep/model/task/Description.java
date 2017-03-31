@@ -1,8 +1,8 @@
-//@@author A0121658E
 package seedu.geekeep.model.task;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
+//@@author A0121658E
 /**
  * Represents a Task's description in GeeKeep. Guarantees: immutable; is valid as declared in
  * {@link #isValidDescription(String)}
