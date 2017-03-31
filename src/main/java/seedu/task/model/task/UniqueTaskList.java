@@ -57,6 +57,13 @@ public class UniqueTaskList implements Iterable<Task> {
     		internalList.add(t);
     	}
     }
+    
+    //@@author A0163845X
+    public static UniqueTaskList copy(UniqueTaskList toCopy) {
+    	UniqueTaskList ret = new UniqueTaskList();
+    	ret.addAll(toCopy);
+    	return ret;
+    }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.

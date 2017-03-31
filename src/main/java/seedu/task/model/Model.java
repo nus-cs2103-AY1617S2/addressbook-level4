@@ -66,6 +66,8 @@ public interface Model {
 	void sort(TaskComparable t);
 
 	void setTaskManager(Optional<ReadOnlyTaskManager> readTaskManager);
+
+	void redo() throws Exception;
 	
 	//void getPath(String path);
 

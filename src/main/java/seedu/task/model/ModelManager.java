@@ -215,5 +215,10 @@ public class ModelManager extends ComponentManager implements Model {
 			taskManager.loadNewTaskList(readTaskManager);
 		}
 	}
+    //@@author A0163845X
+	public void redo() throws Exception {
+		taskManager.redo();
+		indicateTaskManagerChanged();
+	}
 
 }
