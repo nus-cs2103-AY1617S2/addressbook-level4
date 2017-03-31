@@ -47,26 +47,16 @@ public class SelectCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
             }
             EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
-<<<<<<< HEAD
-            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(lastShownEventList.get(targetIndex - 1)));
-            return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS, targetIndex));
-=======
             ReadOnlyEvent selected = lastShownEventList.get(targetIndex - 1);
             return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS, selected));
->>>>>>> 9788ea2f6f891e9fce10ddef7392f561b040b5c2
         }
         if (type.equals("ts")) {
             if (lastShownTaskList.size() < targetIndex) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex - 1));
-<<<<<<< HEAD
-            EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(lastShownTaskList.get(targetIndex - 1)));
-            return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
-=======
             ReadOnlyTask selected = lastShownTaskList.get(targetIndex - 1);
             return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, selected));
->>>>>>> 9788ea2f6f891e9fce10ddef7392f561b040b5c2
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
