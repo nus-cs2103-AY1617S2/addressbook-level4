@@ -32,6 +32,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Code quality inspection
 * Features implemented:
    * [Sort](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#28-sorting-tasks--sort)
+   * [UI Improvements](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#28-UI)
+   * [Tests](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#28-Tests)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/main/A0131278H.md)][[test code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/test/A0131278H.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
