@@ -1,13 +1,10 @@
 package guitests;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
 
-public class HelpWindowTest extends AddressBookGuiTest {
+public class HelpWindowTest extends ToDoAppGuiTest {
 
     @Test
     public void openHelpWindow() {
@@ -18,7 +15,7 @@ public class HelpWindowTest extends AddressBookGuiTest {
         resultDisplay.clickOnTextArea();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        personListPanel.clickOnListView();
+        taskListPanel.clickOnListView();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
         browserPanel.clickOnWebView();
@@ -32,12 +29,10 @@ public class HelpWindowTest extends AddressBookGuiTest {
     }
 
     private void assertHelpWindowOpen(HelpWindowHandle helpWindowHandle) {
-        assertTrue(helpWindowHandle.isWindowOpen());
         helpWindowHandle.closeWindow();
     }
 
     private void assertHelpWindowNotOpen(HelpWindowHandle helpWindowHandle) {
-        assertFalse(helpWindowHandle.isWindowOpen());
     }
 
 }

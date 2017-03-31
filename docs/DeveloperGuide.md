@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# ToDoApp - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103JAN2017-F12-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. ToDoApp
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -123,7 +123,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `ToDoAppChangedEvent` when the Address Book data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -134,6 +134,29 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
+
+<!-- @@author A0114395E -->
+The Activity Diagram below shows the flow when a Command is being executed in ToDoApp<br><br>
+<img src="images/ToDoApp_Activity-Diagram.png" width="600"><br>
+_Figure 2.1.4 : Component interactions for commands_
+
+The Sequence Diagram below shows the flow when `add`, `edit`, `delete` Command is being executed in ToDoApp<br><br>
+<img src="images/ToDoApp_Seq-Diag-AddDelEdit.png" width="800"><br>
+_Figure 2.1.5 : Sequence diagram for commands_
+
+> Note how if a comand is `add`, `delete`, or `edit`, we will parse the inverse of it's command to be stored as well.
+
+The Sequence Diagram below shows how ToDoApp handles `undo` and `redo` requests from the user.<br><br>
+<img src="images/ToDoApp_Seq-Diag-UndoRedo.png" width="800"><br>
+_Figure 2.1.6 : Sequence diagram for `undo` & `redo` commands_
+
+> Note how `StateManager` is implemented as a Singleton. This is by design, as we do not want more than one instance of a `StateManager` to handle undo/redo states. The `StateManager` consists of 2 stacks - `undoStack` & `redoStack`, holding a `StateCommandPair` object. <br>
+> The `StateCommandPair` class contains of 2 commands. The Command itself, and the inverse of it's Command. The inverse command is evaluated during the parsing of the actual command. <br><br>
+> When `undo` command is invoked, we pop the `StateCommandPair` from `undoStack` and put it on `redoStack`. We invoke the `undoCommand` from the `StateCommandPair`. <br>
+> Vice versa, when `redo` command is invoked, we pop the `StateCommandPair` from `redoStack` and put it on the `undoStack`. We then invoke the `executeCommand` from `StateCommandPair`. <br><br>
+> When the user performs any action, the redo stack is cleared. <br>
+> Undoability and Redoability are defined by whether either stack is empty, as well as if an action is undo-able, i.e only `add`, `edit`, `delete`, `mark`, `unmark` commands.
+<!-- @@author -->
 
 The sections below give more details of each component.
 
@@ -191,7 +214,7 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the ToDoApp data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
@@ -208,11 +231,11 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the ToDoApp data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## 3. Implementation
 
@@ -239,7 +262,6 @@ and logging destinations.
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
-
 
 ## 4. Testing
 
@@ -323,7 +345,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://CS2103JAN2017-F12-B2.github.io/addressbook-level4/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -332,7 +354,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, ToDoApp depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -347,47 +369,253 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task |
+`* * *` | user | edit a new task | change information of a task
+`* * *` | user | delete a task | remove tasks that I no longer need to track
+`* * *` | user | list out all uncompleted tasks | To view outstanding tasks
+`* * *` | user | block out a period of time | keep a period of time unavailable
+`* * *` | user | release a blocked period of time | make a period of time available again
+`* * *` | user | find upcoming tasks by date | can track of what is dued soon
+`* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
+`* * *` | user | unmark a task as undone | differentiate between completed and uncompleted tasks
+`* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
+`* * *` | user | get more information about a command | learn how to use various commands
+`* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task
+`* * *` | user | retrieve tasks by tag | so that I can see tasks associated with a label
+`* * *` | user | retrieve tasks due on certain date | so that I can see tasks due on specified date
+`* * *` | user | assign priority to tasks | so that I can keep track of the priority of tasks
+`* * *` | user | retrieve tasks based on priority | so that I can see tasks ranked by priority
+`* * *` | user | undo a command | correct mistakes
+`* * *` | user | redo a command | correct mistakes
+`* *` | advanced user | use shorter versions of a command to type faster | more quickly use the app
+`* *` | complex user | break a task into subtasks | keep track of complex tasks
+`* *` | frequent user | add a recurring task | keep track of task that needs to be done many times
+`* *` | user | get a week view of tasks | plan for my week
+`* *` | frequent user | access app with shortcut | quickly access the app
+`* *` | user | change the reccurence setting of a task | update if the task is recurring
+`* ` | user | create a copy of task in google calendar | refer to tasks outside of app
+`* ` | user | set task reminders | remind myself of certain tasks
+`* ` | user | sync the  to my google calendar | sync the tasks with the calendar and get notified
+`* ` | user | specify the location of the storage file | save the data to the location of my preference
+`* ` | international user | specify the timezone of task | keep track of tasks due across different timezones
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TodoApp` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User inputs command to add a new task
+2. TodoApp adds said task, and shows the task's details
+Use case ends
+
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to delete a specific task in the list
+4. TodoApp deletes the task
+Use case ends
 
 **Extensions**
 
-2a. The list is empty
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to delete
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+#### Use case: Edit a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to edit the details of a specific task in the list
+4. TodoApp edits the details of that task
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to edit
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3b. The attribute given is invalid
+
+> 3b1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3c. Value of the attribute is invalid
+
+> 3c1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3d. Value of the attribute is the same as the previous value
+> 3d1. TodoApp does nothing
+
+>Use case ends
+
+
+#### Use case: Mark or unmark a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to mark/unmark a specific task in the list
+4. TodoApp sets completion of the task to true/false
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to delete
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3d. Value of completion is the same as the previous value
+> 3d1. TodoApp does nothing
+
+>Use case ends
+
+#### Use case: Retrieve a task
+
+**MSS**
+
+1. User requests to retrieve tasks by name/priority/deadline/completion
+2. TodoApp shows a list of tasks that matches
+Use case ends
+
+1a. List is empty
+
+> Use case ends
+
+1b. Given inputs not found
+
+> Use case ends
+
+#### Use case: List task
+
+**MSS**
+
+1. User input command to list task
+2. TodoApp shows a list of tasks sorted by due dates
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> 2a1. TodoApp shows a message to indicate that the list is empty
+Use case ends
+
+#### Use case: Mark a task as complete
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User marks a specific task in the list as complete
+4. TodoApp marks the task as complete
+Use case ends
+
+**Extensions**
+
+2a. List is empty
 
 > Use case ends
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 3a1. TodoApp shows an error message
+Use case resumes at step 2
+
+#### Use case: Set deadline to a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to set a deadline to a specific task
+4. TodoApp sets a deadline for the task and displays the task
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TodoApp shows an error message
+Use case resumes at step 2
+
+3b. The date input by user is invalid
+
+> 3b1. TodoApp shows an error message
+Use case resumes at step 2
+
+#### Use case: Undo a command
+
+**MSS**
+
+1. User does `add`, `edit`, `delete`, `mark`, `unmark` command
+2. TodoApp executes command
+3. User wants to undo previous command, executes `undo`
+4. ToDoApp reverts the command
+5. Use case ends
+
+**Extensions**
+
+3a. No command to revert
+
+> Use case ends
+
+#### Use case: Redo a command
+
+**MSS**
+
+1. User executes an `undo` command
+2. User wants to undo previous `undo` command, executes `redo`
+4. ToDoApp undoes the `undo` command
+5. Use case ends
+
+**Extensions**
+
+2a. No command to redo
+
+> Use case ends
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should include well-written guides for both users and developers
+5. Should follow good OOP principles
+6. Should be integrated with automated tests
 
 {More to be added}
 
@@ -403,17 +631,57 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Trello**
 
-Author: ...
+Author: Lim Jing Rong
 
 Pros:
 
-* ...
-* ...
+* Simple to use
+* Intuitive UI
+* Cloud support
+* Good integration (Github, etc)
+* Modular and flexible based on user
+* Can be fitlered by tags & users
 
 Cons:
 
-* ...
-* ...
+* Tasks have to be small enough to be described in a few words
+* Okay for specific projects/todo lists. Bad if you have multiple 'big projects'
 
+**Wunderlist**
+
+Author: Lim Jing Rong
+
+Pros:
+
+* Straight forward to use
+* Multi-platform (Desktop application, Chrome ext, mobile app, web app, etc)
+* Cloud support
+* Great UI/ graphics
+* Free
+* Good search
+
+Cons:
+
+* Not much integrations
+* No options for subtasks
+* No repeat options
+
+**Google Calendar**
+
+Author: Lim Huan Hock
+
+Pros:
+
+* Straight forward to use
+* Multi-platform (Mobile app, web app, etc)
+* Cloud support
+* Free
+* API-friendly
+
+Cons:
+
+* No options for subtasks
+* No repeat options
+* Plain UI/ graphics

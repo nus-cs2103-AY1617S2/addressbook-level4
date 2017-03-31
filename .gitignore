@@ -3,7 +3,6 @@ build/
 .checkstyle
 .settings/
 .idea/
-lib/*
 *.iml
 *.log
 *.log.*

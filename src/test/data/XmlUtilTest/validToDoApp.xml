@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<todoapp>
+    <tasks>
+        <name>Buy printer</name>
+        <start>today</start>
+        <deadline>tomorrow</deadline>
+        <priority>1</priority>
+        <tagged>shopping</tagged>
+        <notes>this is a note</notes>
+        <completion>true</completion>
+    </tasks>
+    <tasks>
+        <name>Go to the gym</name>
+        <start></start>
+        <deadline></deadline>
+        <priority>0</priority>
+        <tagged>exercise</tagged>
+        <notes></notes>
+        <completion>false</completion>
+    </tasks>
+    <tasks>
+        <name>swimming lesson</name>
+        <start>-</start>
+        <deadline>Thu Mar 23 17:00:00 SGT 2017</deadline>
+        <priority>5</priority>
+        <notes>-</notes>
+        <completion>false</completion>
+    </tasks>
+    <tags>shopping</tags>
+    <tags>exercise</tags>
+</todoapp>

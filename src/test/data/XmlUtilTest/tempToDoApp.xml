@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<todoapp>
+    <tasks>
+        <name>Ali Muster</name>
+        <start></start>
+        <deadline></deadline>
+        <priority>0</priority>
+        <notes></notes>
+        <completion>false</completion>
+    </tasks>
+    <tags>Friends</tags>
+</todoapp>
