@@ -260,7 +260,7 @@ public class LogicManagerTest {
         helper.addToModel(model, 2);
 
         assertCommandSuccess("view",
-                ViewCommand.MESSAGE_SUCCESS,
+                ViewCommand.MESSAGE_SUCCESS_VIEW_ALL_TASKS,
                 expectedAB,
                 expectedList);
     }
