@@ -17,7 +17,6 @@ import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -42,8 +41,7 @@ public class MarkController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         String indexToken = tokens.get(PARAMETER_INDEX);
         String markTypeToken = tokens.get(PARAMETER_MARK);
-        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken,
-                UiStore.getInstance().getShownTasks().size());
+        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
 
         if (indexes.isEmpty()) {
             uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX));
@@ -61,12 +59,12 @@ public class MarkController extends Controller {
         if (!todoList.save()) {
             uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_SAVING_FAILURE));
         }
-        UiStore.getInstance().setTasks(todoList.getTasks());
+        uiStore.setTasks(todoList.getTasks());
         uiStore.setCommandResult(commandResult);
     }
 
     private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
-        ArrayList<Task> tasks = UiStore.getInstance().getShownTasks(taskIndexes);
+        ArrayList<Task> tasks = uiStore.getShownTasks(taskIndexes);
         for (Task task : tasks) {
             if (task.canUpdateToNextRecurringTask()) {
                 task.updateToNextRecurringTask();

@@ -32,7 +32,8 @@ public class TaskListUiView extends UiView {
     protected void viewDidMount () {
         UiStore store = UiStore.getInstance();
         taskListView.setItems(FXCollections.observableArrayList(store.getShownTasks()));
-        Platform.runLater(() -> taskListView.scrollTo(store.getLastEditedTask()));
+        int scrollIndex = Math.max(store.getShownTasks().indexOf(store.getLastEditedTask()) - 1, 0);
+        Platform.runLater(() -> taskListView.scrollTo(scrollIndex));
     }
 
     private void configureBindings() {
