@@ -29,8 +29,8 @@ Role: Developer <br>
 Role: Developer <br>
 - Components in charge of: [Logic](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#logic-component)
 - Aspects/tools in charge of: Documentation, Eclipse expert
-- Features implemented:
-- Other major contributions:
+- Features implemented: ChangeTheme Command, power search
+- Other major contributions: Implementation of CommandLibrary
 
 -----
 
