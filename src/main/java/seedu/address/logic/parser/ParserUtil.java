@@ -168,7 +168,7 @@ public class ParserUtil {
         return Optional.of(startEndDateTime);
     }
 
-    private static ZonedDateTime parseEditedDateTimeString(String dateTime, ZonedDateTime previousDate)
+    public static ZonedDateTime parseEditedDateTimeString(String dateTime, ZonedDateTime previousDate)
             throws IllegalValueException {
         // TODO extract commonalities from parseDateTimeString
         // TODO check if only one group and only one date from list (date alternatives)

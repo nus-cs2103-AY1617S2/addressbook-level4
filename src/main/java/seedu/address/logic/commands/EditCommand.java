@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -133,7 +134,38 @@ public class EditCommand extends Command {
                 deadline = taskToEdit.getDeadline();
             }
 
-            if (getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent()) {
+            startEndDateTime = Optional.empty();
+            if (getRawStartDateTime().isPresent() && !getRawEndDateTime().isPresent()) {
+                // TODO remove println
+                System.out.println("From only!");
+                if (taskToEdit.getStartEndDateTime().isPresent()) {
+                    // TODO should we wrap this into ParserUtil as well?
+                    final StartEndDateTime editedTaskStartEndDateTime = taskToEdit.getStartEndDateTime().get();
+                    ZonedDateTime startDateTime =
+                            ParserUtil.parseEditedDateTimeString(getRawStartDateTime().get(),
+                                    editedTaskStartEndDateTime.getStartDateTime());
+                    startEndDateTime = Optional.of(new StartEndDateTime(startDateTime,
+                            editedTaskStartEndDateTime.getEndDateTime()));
+                } else {
+                    // TODO message change
+                    throw new IllegalValueException("Start Date must comes with an End Date");
+                }
+            } else if (!getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent()) {
+                // TODO remove println
+                System.out.println("To only!");
+                if (taskToEdit.getStartEndDateTime().isPresent()) {
+                    // TODO should we wrap this into ParserUtil as well?
+                    final StartEndDateTime editedTaskStartEndDateTime = taskToEdit.getStartEndDateTime().get();
+                    ZonedDateTime endDateTime =
+                            ParserUtil.parseEditedDateTimeString(getRawEndDateTime().get(),
+                                    editedTaskStartEndDateTime.getEndDateTime());
+                    startEndDateTime = Optional.of(
+                            new StartEndDateTime(editedTaskStartEndDateTime.getStartDateTime(), endDateTime));
+                } else {
+                    // TODO message change
+                    throw new IllegalValueException("End Date must come with a Start Date");
+                }
+            } else if (getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent()) {
                 if (taskToEdit.getStartEndDateTime().isPresent()) {
                     startEndDateTime =
                             ParserUtil.parseEditedStartEndDateTime(getRawStartDateTime(), getRawEndDateTime(),
