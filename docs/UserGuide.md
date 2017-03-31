@@ -240,7 +240,8 @@ Edit    | edit INDEX COMPONENT            | edit 3 e/04/04/2017
 Find    | find KEYWORD(s)                 | find report assignment
 Delete  | delete INDEX                    | delete 3
 Sort    | sort KEYWORD                    | sort e/
+Undo    | undo
+Redo    | redo
 Clear   | clear
-History | history
 Exit    | exit
 <br>
