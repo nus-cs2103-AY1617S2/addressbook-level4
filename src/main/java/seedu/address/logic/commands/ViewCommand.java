@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+//@@author A0135998H
 /**
  * View all tasks in the view list to the user.
  */
@@ -14,12 +18,42 @@ public class ViewCommand extends Command {
     public static final String TYPE_PENDING = "p";
     public static final String TYPE_TODAY = "t";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    private static ArrayList<String> validCommands = new ArrayList<String>(Arrays.asList(
+            TYPE_ALL, TYPE_DONE, TYPE_FLOATING, TYPE_OVERDUE, TYPE_PENDING, TYPE_TODAY));
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": View a type of specified tasks.\n"
+            + "Parameters: TYPE\n"
+            + "Example: " + COMMAND_WORD + TYPE_DONE;
+
+
+    public static final String MESSAGE_SUCCESS_VIEW_ALL_TASKS = "List All Tasks";
+    public static final String MESSAGE_SUCCESS_VIEW_DONE_TASKS = "List all Done Tasks";
+    public static final String MESSAGE_SUCCESS_VIEW_FLOATING_TASKS = "List all Floating Tasks";
+    public static final String MESSAGE_SUCCESS_VIEW_OVERDUE_TASKS = "List all Overdue Tasks";
+    public static final String MESSAGE_SUCCESS_VIEW_PENDING_TASKS = "List all Pending Tasks";
+    public static final String MESSAGE_SUCCESS_VIEW_TODAY_TOSKS = "List all Today's Tasks";
+
+    private final String typeOfList;
+
+    public ViewCommand(String typeOfList) {
+        this.typeOfList = typeOfList;
+    }
+
+    public static boolean isValidCommand(String command) {
+        return validCommands.contains(command);
+    }
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredListToShowAll();
-        return new CommandResult(MESSAGE_SUCCESS);
+        switch(typeOfList) {
+        case TYPE_OVERDUE:
+            model.updateFilteredListToShowOverdue();
+            return new CommandResult(MESSAGE_SUCCESS_VIEW_OVERDUE_TASKS);
+
+        default:
+            model.updateFilteredListToShowAll();
+            return new CommandResult(MESSAGE_SUCCESS_VIEW_ALL_TASKS);
+        }
     }
 }
