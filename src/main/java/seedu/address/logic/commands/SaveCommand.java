@@ -7,7 +7,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.io.File;
 import java.io.IOException;
 
-
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.storage.FileLocationChangedEvent;
 import seedu.address.commons.util.FileUtil;
