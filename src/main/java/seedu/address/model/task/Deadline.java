@@ -78,10 +78,6 @@ public class Deadline {
     }
 
     /**
-     * Returns true if the deadline contains more than 1 date object.
-     */
-
-    /**
      * Returns a formatted String of the given Date object.
      */
     public static String format(Date date) {
@@ -153,6 +149,9 @@ public class Deadline {
 
     /**
      * Returns the To date object.
+     * If the parsedDeadline object contains 2 Date objects, returns the second one,
+     * else if there is only 1 Date object, returns it. When no Date objects found,
+     * return a new Date object.
      */
     public Date toDeadline() {
         if (parsedDeadline.size() != 0) {

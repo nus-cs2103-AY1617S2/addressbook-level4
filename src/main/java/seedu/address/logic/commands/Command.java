@@ -60,7 +60,7 @@ public abstract class Command {
     }
 
     /**
-     * Throws an exception if the given index number is invalid for the given task list
+     * Checks if the given index number is valid for the given task list.
      *
      * @param targetIndex
      * @param taskList

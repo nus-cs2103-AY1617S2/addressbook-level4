@@ -1,4 +1,3 @@
-//@@author A0144813J
 package guitests;
 
 import static org.junit.Assert.assertTrue;

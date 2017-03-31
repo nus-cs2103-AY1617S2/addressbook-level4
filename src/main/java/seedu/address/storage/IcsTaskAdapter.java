@@ -29,6 +29,7 @@ public class IcsTaskAdapter {
 
     /**
      * Converts the given Task object into an ICS-friendly VEvent object.
+     *
      * @param task The Task object to be converted.
      * @return the The VEvent object corresponds to the given task object.
      */
@@ -50,6 +51,7 @@ public class IcsTaskAdapter {
 
     /**
      * Converts the given Component object to the model's Task object.
+     *
      * @param component The component object to be converted.
      * @return the Task object corresponds to the given Component object.
      * @throws IllegalValueException thrown when the event data in component is not valid.

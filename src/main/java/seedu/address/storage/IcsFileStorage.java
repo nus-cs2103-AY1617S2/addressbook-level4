@@ -25,6 +25,7 @@ import seedu.address.model.task.Task;
 public class IcsFileStorage {
     /**
      * Saves the given list of tasks to the specified file path.
+     *
      * @throws IOException         thrown when the ICS file path is invalid.
      * @throws ValidationException thrown when task data is incompatible for ICS file type.
      */
@@ -43,6 +44,7 @@ public class IcsFileStorage {
 
     /**
      * Returns a list of task objects from file.
+     *
      * @throws ParserException       thrown when the ICS file is corrupted.
      * @throws IOException           thrown when the ICS file path is invalid.
      * @throws IllegalValueException thrown when data in ICS file is incompatible to be added to the task manager.

@@ -350,27 +350,6 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
-    /*
-    @Test
-    public void execute_find_onlyMatchesFullWordsInTitles() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithTitle("KE Y");
-        Task p2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
-
-        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        AddressBook expectedAB = helper.generateAddressBook(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget2);
-        helper.addToModel(model, fourTasks);
-
-        assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
-    }
-    */
-
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -389,29 +368,6 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-
-
-    /*
-    @Test
-    public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithTitle("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithTitle("key key");
-        Task p1 = helper.generateTaskWithTitle("sduauo");
-
-        List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        AddressBook expectedAB = helper.generateAddressBook(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
-        helper.addToModel(model, fourTasks);
-
-        assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
-    }
-    */
-
 
     /**
      * A utility class to generate test data.

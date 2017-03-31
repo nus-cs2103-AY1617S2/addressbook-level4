@@ -1,3 +1,4 @@
+//@@author A0144813J
 package seedu.address.model.task;
 
 import static org.junit.Assert.assertFalse;
@@ -7,10 +8,6 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-/**
- * @author ryuus
- *
- */
 public class InstructionTest {
 
     @Test

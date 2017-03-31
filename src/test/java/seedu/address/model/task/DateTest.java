@@ -1,3 +1,4 @@
+//@@author A0144813J
 package seedu.address.model.task;
 
 import static org.junit.Assert.assertFalse;
@@ -5,10 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-/**
- * @author ryuus
- *
- */
 public class DateTest {
 
     @Test

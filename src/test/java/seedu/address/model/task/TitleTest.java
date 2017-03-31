@@ -5,10 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-/**
- * @author ryuus
- *
- */
 public class TitleTest {
 
     @Test
