@@ -13,6 +13,7 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription(" ")); // spaces only
         assertTrue(Description.isValidDescription("Blk 456, Den Road, #01-355"));
         assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("Leng Inc; 123 Market St; San Francisco CA 2349879; USA")); // long location
+        assertTrue(Description.isValidDescription(
+                "Leng Inc; 123 Market St; San Francisco CA 2349879; USA")); // long descriptoin
     }
 }
