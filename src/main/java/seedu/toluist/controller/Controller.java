@@ -50,7 +50,7 @@ public abstract class Controller {
     //@@author A0162011A
     /**
      * Returns basic help command(s) used by help controller
-     * Format is String[CommandWords, Details, Format]
+     * Format is String[CommandWords, Format, Details]
      */
     public static String[] getBasicHelp() {
         return new String[] {};
