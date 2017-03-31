@@ -83,6 +83,7 @@ public class MainWindow extends Window {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(themeMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
