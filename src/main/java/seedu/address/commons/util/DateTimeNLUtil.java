@@ -60,6 +60,7 @@ public class DateTimeNLUtil {
      * @throws IllegalNLException if the natural language
      */
     public String getDate(String arg) throws IllegalNLException {
+        arg = arg.toLowerCase();
         String[] args = arg.split(" ");
         if (args.length == 1) {
             System.out.println("ARGS 0 : " + args[0]);
