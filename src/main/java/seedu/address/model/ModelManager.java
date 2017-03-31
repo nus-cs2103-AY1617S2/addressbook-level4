@@ -13,6 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
+import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 import seedu.address.model.task.UniquePersonList.PersonNotFoundException;
 
 /**
@@ -109,6 +110,24 @@ public class ModelManager extends ComponentManager implements Model {
             return true;
         }
         return false;
+    }
+    
+    @Override
+    public void mergeYTomorrow(ReadOnlyAddressBook add) {
+        for (ReadOnlyPerson readOnlyTask : add.getPersonList()) {
+            Task task = new Task(readOnlyTask);
+            try {
+                addressBook.addPerson(task);
+            } catch (DuplicatePersonException e) {
+                try {
+                    addressBook.removePerson(task);
+                    addressBook.addPerson(task);
+                } catch (PersonNotFoundException | DuplicatePersonException el) {
+                }
+                
+            }
+        }
+        indicateAddressBookChanged();
     }
     //@@author
 

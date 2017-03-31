@@ -41,4 +41,8 @@ public interface AddressBookStorage {
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
 
+    //@@author A0163848R
+    /** Sets the Address Book file path */
+    void setAddressBookFilePath(String path);
+
 }

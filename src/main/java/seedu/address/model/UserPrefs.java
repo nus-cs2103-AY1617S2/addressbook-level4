@@ -21,11 +21,17 @@ public class UserPrefs {
     }
 
     public UserPrefs() {
-        this.setGuiSettings(500, 500, 0, 0, ThemeManager.DEFAULT_STYLESHEET);
+        this.setGuiSettings(500, 500, 0, 0, ThemeManager.DEFAULT_STYLESHEET, null);
     }
 
-    public void setGuiSettings(double width, double height, int x, int y, String styleSheet) {
-        guiSettings = new GuiSettings(width, height, x, y, styleSheet);
+    public void setGuiSettings(
+            double width,
+            double height,
+            int x,
+            int y,
+            String styleSheet,
+            String lastLoadedYTomorrow) {
+        guiSettings = new GuiSettings(width, height, x, y, styleSheet, lastLoadedYTomorrow);
     }
 
     @Override

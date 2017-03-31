@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.File;
 import java.nio.file.Paths;
 
 import javafx.event.ActionEvent;
@@ -10,12 +11,21 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ExportRequestEvent;
+import seedu.address.commons.events.ui.ImportRequestEvent;
+import seedu.address.commons.events.ui.TargetFileRequestEvent;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.XmlUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.YTomorrow;
 import seedu.address.model.task.ReadOnlyPerson;
 
 /**
@@ -44,12 +54,6 @@ public class MainWindow extends Window {
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
-
-    @FXML
-    private MenuItem themeMenuItem;
-
-    @FXML
     private AnchorPane personListPanelPlaceholder;
 
     @FXML
@@ -58,6 +62,24 @@ public class MainWindow extends Window {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
+    @FXML
+    private MenuItem saveMenuItem;
+    
+    @FXML
+    private MenuItem loadMenuItem;
+    
+    @FXML
+    private MenuItem exportMenuItem;
+    
+    @FXML
+    private MenuItem importMenuItem;
+    
+    @FXML
+    private MenuItem helpMenuItem;
+    
+    @FXML
+    private MenuItem themeMenuItem;
+    
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
 
@@ -82,8 +104,12 @@ public class MainWindow extends Window {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-        setAccelerator(themeMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(saveMenuItem,   KeyCombination.valueOf("ctrl+s"));
+        setAccelerator(loadMenuItem,   KeyCombination.valueOf("ctrl+v"));
+        setAccelerator(exportMenuItem, KeyCombination.valueOf("ctrl+e"));
+        setAccelerator(importMenuItem, KeyCombination.valueOf("ctrl+i"));
+        setAccelerator(helpMenuItem,   KeyCombination.valueOf("ctrl+h"));
+        setAccelerator(themeMenuItem,  KeyCombination.valueOf("ctrl+c"));
     }
 
     /**
@@ -144,11 +170,15 @@ public class MainWindow extends Window {
      * Returns the current size and the position of the main Window.
      */
     GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(stage.getWidth(), stage.getHeight(),
-                (int) stage.getX(), (int) stage.getY(),
-                Paths.get(getRoot().getStylesheets().get(0)).getFileName().toString().replaceFirst("[.][^.]+$", ""));
+        return new GuiSettings(
+                stage.getWidth(),
+                stage.getHeight(),
+                (int) stage.getX(),
+                (int) stage.getY(),
+                Paths.get(getRoot().getStylesheets().get(0)).getFileName().toString().replaceFirst("[.][^.]+$", ""),
+                prefs.getGuiSettings().getLastLoadedYTomorrow());
     }
-
+    
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
@@ -156,6 +186,54 @@ public class MainWindow extends Window {
     }
 
     //@@author A0163848R
+    @FXML
+    public void handleSave() {
+        File selected = FileUtil.promptSaveFileDialog("Save and Use YTomorrow File", getStage(),
+                new ExtensionFilter("YTomorrow XML Files", "*.xml"));
+        
+        if (selected != null) {
+            ReadOnlyAddressBook current = logic.getYTomorrow();
+            raise(new ExportRequestEvent(current, selected));
+            raise(new TargetFileRequestEvent(selected, prefs));
+        }
+    }
+    
+    @FXML
+    public void handleLoad() {
+        File selected = FileUtil.promptOpenFileDialog("Load and Use YTomorrow File", getStage(),
+                new ExtensionFilter("YTomorrow XML Files", "*.xml"));
+        
+        if (selected != null) {
+            YTomorrow readIn = new YTomorrow();
+            raise(new ImportRequestEvent(readIn, selected));
+            logic.importYTomorrow(readIn);
+            raise(new TargetFileRequestEvent(selected, prefs));
+        }
+    }
+    
+    @FXML
+    public void handleExport() {
+        File selected = FileUtil.promptSaveFileDialog("Export YTomorrow File", getStage(),
+                new ExtensionFilter("YTomorrow XML Files", "*.xml"));
+        
+        if (selected != null) {
+            ReadOnlyAddressBook current = logic.getYTomorrow();
+            raise(new ExportRequestEvent(current, selected));
+        }
+    }
+    
+    @FXML
+    public void handleImport() {
+        File selected = FileUtil.promptOpenFileDialog("Import YTomorrow File", getStage(),
+                new ExtensionFilter("YTomorrow XML Files", "*.xml"));
+        
+        if (selected != null) {
+            YTomorrow readIn = new YTomorrow();
+            raise(new ImportRequestEvent(readIn, selected));
+            logic.importYTomorrow(readIn);
+        }
+    }
+    
     @FXML
     public void handleTheme() {
         ThemeWindow themeWindow = new ThemeWindow(getRoot(), prefs);
