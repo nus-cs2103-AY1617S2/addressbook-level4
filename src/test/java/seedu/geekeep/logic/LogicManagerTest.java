@@ -162,7 +162,7 @@ public class LogicManagerTest {
                 }
                 cmd.append(" e/").append(p.getEndDateTime());
             }
-            cmd.append(" l/").append(p.getLocation());
+            cmd.append(" d/").append(p.getDescriptoin());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -337,18 +337,18 @@ public class LogicManagerTest {
     //@@author A0139438W
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 l/valid, location",
+        assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 d/valid, location",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/not_numbers e/01-05-17 1630 l/valid, location",
+        assertCommandFailure("add Valid Title s/not_numbers e/01-05-17 1630 d/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01-04-17 1630 e/not_numbers l/valid, location",
+        assertCommandFailure("add Valid Title s/01-04-17 1630 e/not_numbers d/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01-05-17 1630 e/01-04-17 1630 l/valid, location",
+        assertCommandFailure("add Valid Title s/01-05-17 1630 e/01-04-17 1630 d/valid, location",
                 Task.MESSAGE_ENDDATETIME_LATER_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01-05-17 1630 l/valid, location",
+        assertCommandFailure("add Valid Title s/01-05-17 1630 d/valid, location",
                 Task.MESSAGE_DATETIME_MATCH_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Title s/01-04-17 1630 e/01-05-17 1630 l/valid, location t/invalid_-[.tag",
+                "add Valid Title s/01-04-17 1630 e/01-05-17 1630 d/valid, location t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 

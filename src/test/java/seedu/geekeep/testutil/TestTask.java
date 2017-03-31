@@ -29,14 +29,14 @@ public class TestTask implements ReadOnlyTask {
         this.title = taskToCopy.getTitle();
         this.endDateTime = taskToCopy.getEndDateTime();
         this.startDateTime = taskToCopy.getStartDateTime();
-        this.description = taskToCopy.getLocation();
+        this.description = taskToCopy.getDescriptoin();
         this.tags = taskToCopy.getTags();
     }
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append("l/" + this.getLocation().value + " ");
+        sb.append("d/" + this.getDescriptoin().value + " ");
         sb.append("e/" + this.getEndDateTime().value + " ");
         sb.append("s/" + this.getStartDateTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
@@ -50,7 +50,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Description getLocation() {
+    public Description getDescriptoin() {
         return description;
     }
 
@@ -73,7 +73,7 @@ public class TestTask implements ReadOnlyTask {
         this.endDateTime = endDateTime;
     }
 
-    public void setLocation(Description description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 

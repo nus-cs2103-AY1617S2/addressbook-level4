@@ -31,12 +31,12 @@ public class AddCommandParser {
             String title = argsTokenizer.getPreamble().get();
             Optional<String> startDateTime = argsTokenizer.getValue(PREFIX_STARTING_DATETIME);
             Optional<String> endDateTime = argsTokenizer.getValue(PREFIX_ENDING_DATETIME);
-            Optional<String> location = argsTokenizer.getValue(PREFIX_DESCRIPTION);
+            Optional<String> description = argsTokenizer.getValue(PREFIX_DESCRIPTION);
             return new AddCommand(
                     title,
                     startDateTime,
                     endDateTime,
-                    location,
+                    description,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

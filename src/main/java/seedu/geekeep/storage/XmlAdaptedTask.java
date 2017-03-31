@@ -27,7 +27,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String endDateTime;
     @XmlElement(required = true)
-    private String location;
+    private String description;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
     @XmlElement
@@ -49,7 +49,7 @@ public class XmlAdaptedTask {
         title = source.getTitle().title;
         endDateTime = source.getEndDateTime() == null ? "" : source.getEndDateTime().value;
         startDateTime = source.getStartDateTime() == null ? "" : source.getStartDateTime().value;
-        location = source.getLocation() == null ? "" : source.getLocation().value;
+        description = source.getDescriptoin() == null ? "" : source.getDescriptoin().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -70,7 +70,7 @@ public class XmlAdaptedTask {
         final Title title = new Title(this.title);
         final DateTime endDateTime = convertStringToDateTime(this.endDateTime);
         final DateTime startDateTime = convertStringToDateTime(this.startDateTime);
-        final Description description = convertStringToLocation(this.location);
+        final Description description = convertStringToDescription(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final boolean isDone = this.isDone.equals("True");
         return new Task(title, startDateTime, endDateTime, description, tags, isDone);
@@ -80,7 +80,7 @@ public class XmlAdaptedTask {
         return date.isEmpty() ? null : new DateTime(date);
     }
 
-    private Description convertStringToLocation(String location) throws IllegalValueException {
-        return location.isEmpty() ? null : new Description(location);
+    private Description convertStringToDescription(String description) throws IllegalValueException {
+        return description.isEmpty() ? null : new Description(description);
     }
 }

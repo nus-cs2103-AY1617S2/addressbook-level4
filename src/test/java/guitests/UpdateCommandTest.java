@@ -49,13 +49,13 @@ public class UpdateCommandTest extends GeeKeepGuiTest {
     @Test
     public void update_allFieldsSpecified_success() throws Exception {
         String detailsToEdit
-            = "Smile s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
+            = "Smile s/01-04-17 1630 e/01-05-17 1630 d/Block 123, Bobby Street 3 t/husband";
         int geeKeepIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Smile")
                 .withEndDateTime("01-05-17 1630")
                 .withStartDateTime("01-04-17 1630")
-                .withLocation("Block 123, Bobby Street 3")
+                .withDescription("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 
         assertUpdateSuccess(geeKeepIndex, geeKeepIndex, detailsToEdit, editedTask);
@@ -76,7 +76,7 @@ public class UpdateCommandTest extends GeeKeepGuiTest {
     public void update_duplicateTask_failure() {
         commandBox.runCommand("update 3 Dance Camp s/01-04-17 1630 e/01-05-17 1630 "
 
-                                + "l/123, Jurong West Ave 6, #08-111 t/friends");
+                                + "d/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
     }
 

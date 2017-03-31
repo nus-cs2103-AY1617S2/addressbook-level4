@@ -26,7 +26,7 @@ public class UpdateCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[TITLE] [s/STARTING_TIME] [e/ENDING_TIME] [l/LOCATION] [t/TAG]...\n"
+            + "[TITLE] [s/STARTING_TIME] [e/ENDING_TIME] [d/DESCRIPTION] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 s/01-04-17 1630 e/01-04-17 1730";
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
@@ -95,10 +95,10 @@ public class UpdateCommand extends Command {
         if (updateTaskDescriptor.getStartDateTime() != null) {
             updatedStartDateTime = updateTaskDescriptor.getStartDateTime().orElseGet(taskToUpdate::getStartDateTime);
         }
-        Description updatedLocation = updateTaskDescriptor.getLocation().orElseGet(taskToUpdate::getLocation);
+        Description updatedDescription = updateTaskDescriptor.getDescription().orElseGet(taskToUpdate::getDescriptoin);
         UniqueTagList updatedTags = updateTaskDescriptor.getTags().orElseGet(taskToUpdate::getTags);
 
-        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags,
+        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedDescription, updatedTags,
                 taskToUpdate.isDone());
     }
 
@@ -119,7 +119,7 @@ public class UpdateCommand extends Command {
             this.title = toCopy.getTitle();
             this.endDateTime = toCopy.getEndDateTime();
             this.startDateTime = toCopy.getStartDateTime();
-            this.description = toCopy.getLocation();
+            this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
         }
 
@@ -127,7 +127,7 @@ public class UpdateCommand extends Command {
             return endDateTime;
         }
 
-        public Optional<Description> getLocation() {
+        public Optional<Description> getDescription() {
             return description;
         }
 
@@ -158,7 +158,7 @@ public class UpdateCommand extends Command {
             this.endDateTime = endDateTime;
         }
 
-        public void setLocation(Optional<Description> description) {
+        public void setDescription(Optional<Description> description) {
             assert description != null;
             this.description = description;
         }

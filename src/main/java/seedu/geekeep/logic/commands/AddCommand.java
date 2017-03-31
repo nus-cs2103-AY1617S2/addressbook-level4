@@ -22,9 +22,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Task Manager. "
-            + "Parameters: TITLE s/STARTING_DATETIME e/ENDING_DATETIME l/LOCATION [t/TAG]...\n"
+            + "Parameters: TITLE s/STARTING_DATETIME e/ENDING_DATETIME d/DESCRIPTION [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Meeting 1 s/01-04-17 1630 e/01-04-17 1730 l/311, Clementi Ave 2, #02-25 t/friends";
+            + " Meeting 1 s/01-04-17 1630 e/01-04-17 1730 d/311, Clementi Ave 2, #02-25 t/friends";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in GeeKeep";

@@ -32,7 +32,7 @@ public class Task implements ReadOnlyTask  {
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getTitle(), source.getStartDateTime(),
-                source.getEndDateTime(), source.getLocation(), source.getTags(), source.isDone());
+                source.getEndDateTime(), source.getDescriptoin(), source.getTags(), source.isDone());
     }
 
     public Task(Title title, DateTime startDateTime,
@@ -68,7 +68,7 @@ public class Task implements ReadOnlyTask  {
     }
 
     @Override
-    public Description getLocation() {
+    public Description getDescriptoin() {
         return description;
     }
 
@@ -182,7 +182,7 @@ public class Task implements ReadOnlyTask  {
         this.setTitle(replacement.getTitle());
         this.setEndDateTime(replacement.getEndDateTime());
         this.setStartDateTime(replacement.getStartDateTime());
-        this.setLocation(replacement.getLocation());
+        this.setDescription(replacement.getDescriptoin());
         this.setTags(replacement.getTags());
         this.setDone(replacement.isDone());
     }
@@ -197,7 +197,7 @@ public class Task implements ReadOnlyTask  {
         this.endDateTime = endDateTime;
     }
 
-    public void setLocation(Description description) {
+    public void setDescription(Description description) {
         assert description != null;
         this.description = description;
     }

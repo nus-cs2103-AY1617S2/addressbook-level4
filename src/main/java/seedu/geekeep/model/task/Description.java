@@ -4,7 +4,7 @@ package seedu.geekeep.model.task;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's location in GeeKeep. Guarantees: immutable; is valid as declared in
+ * Represents a Task's description in GeeKeep. Guarantees: immutable; is valid as declared in
  * {@link #isValidDescription(String)}
  */
 public class Description {
@@ -13,7 +13,7 @@ public class Description {
             "Task description can take any values, and it should not be blank";
 
     /*
-     * The first character of the location must not be a whitespace, otherwise " " (a blank string) becomes a valid
+     * The first character of the description must not be a whitespace, otherwise " " (a blank string) becomes a valid
      * input.
      */
     public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
@@ -31,14 +31,14 @@ public class Description {
      * Validates given description.
      *
      * @throws IllegalValueException
-     *             if given location string is invalid.
+     *             if given description string is invalid.
      */
-    public Description(String location) throws IllegalValueException {
-        assert location != null;
-        if (!isValidDescription(location)) {
+    public Description(String description) throws IllegalValueException {
+        assert description != null;
+        if (!isValidDescription(description)) {
             throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        this.value = location;
+        this.value = description;
     }
 
     @Override

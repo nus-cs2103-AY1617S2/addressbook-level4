@@ -46,7 +46,7 @@ public class UpdateCommandParser {
                     ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_ENDING_DATETIME)));
             updateTaskDescriptor.setStartDateTime(
                     ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_STARTING_DATETIME)));
-            updateTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            updateTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             updateTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

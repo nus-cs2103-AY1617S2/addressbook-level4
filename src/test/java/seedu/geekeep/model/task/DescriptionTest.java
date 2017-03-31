@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class LocationTest {
+public class DescriptionTest {
 
     @Test
-    public void isValidLocation() {
+    public void isValidDescription() {
         // valid locations
         assertTrue(Description.isValidDescription("")); // empty string
         assertTrue(Description.isValidDescription(" ")); // spaces only
