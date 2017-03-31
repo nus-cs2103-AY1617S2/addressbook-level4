@@ -6,28 +6,43 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Apoorva Ullas](http://github.com/apoorva17)
 <img src="images/apoorva17.jpg" width="150"><br>
-Role: Developer
 
-- Components in charge of: Model
-- Aspects/tools in charge of: Travis, Coveralls, Codacy, Code Quality
+* Components in charge of: [Model] 
+* Aspects/tools in charge of: Travis, Coveralls, Codacy, Code Quality
+* Features implemented:
+	* [Task priority]
+	* [Task types]
+	* [Welcome window]
+* Code written: [[functional code](A0141138N.md)][[test code](A0141138N.md)]
+* Other major contributions:
 
 -----
 
 #### [Chan Yu Feng](http://github.com/fishwind)
 <img src="images/fishwind.jpg" width="150"><br>
-Role: Developer
 
-- Components in charge of: Logic
+- Components in charge of: [Storage]
 - Aspects/tools in charge of: Logic, Natty, CommandParser
+* Features implemented:
+	* [End and start Task date]
+	* [Save, import and export]
+	* [Recurring task]
+* Code written: [[functional code](A0139343E.md)][[test code](A0139343E.md)]
+* Other major contributions:
 
 -----
 
 #### [Leon Mak](http://github.com/leonmak)
 <img src="images/leonmak.jpg" width="150"><br>
-Role: Developer
 
-- Components in charge of: UI
+- Components in charge of: [UI]
 - Aspects/tools in charge of: Testing, Integration, Git Expert
+* Features implemented:
+	* [All UI]
+	* [Edit command]
+	* [List, sort, filter]
+* Code written: [[functional code](A0143029M.md)][[test code](A0143029M.md)]
+* Other major contributions:
 
 -----
 
@@ -35,8 +50,14 @@ Role: Developer
 <img src="images/Li-Heng-LH.jpg" width="150"><br>
 Role: Developer
 
-- Components in charge of: Storage
+- Components in charge of: [Logic]
 - Aspects/tools in charge of: Testing, Documentation, Eclipse expert
+* Features implemented:
+	* [Done task]
+	* [Undo, redo]
+	* [Task attribute checker]
+* Code written: [[functional code](A0135739W.md)][[test code](A0135739W.md)]
+* Other major contributions:
 
 -----
 
