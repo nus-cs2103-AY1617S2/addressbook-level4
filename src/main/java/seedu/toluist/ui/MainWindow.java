@@ -3,6 +3,7 @@ package seedu.toluist.ui;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -109,6 +111,7 @@ public class MainWindow extends UiPart<Region> {
         configureUndoKeyCombination();
         configureRedoKeyCombination();
         configureHistoryNavigationKeyPresses();
+        configureExitHelpKeyPress();
     }
 
     void hide() {
@@ -159,6 +162,13 @@ public class MainWindow extends UiPart<Region> {
             EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(navigateCommand);
             FxViewUtil.setKeyCode(commandBox.getRoot(), keycode, handler);
         });
+    }
+
+    /**
+     * Configure ESC for exitting help
+     */
+    private void configureExitHelpKeyPress() {
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> UiStore.getInstance().setHelp(new ArrayList()));
     }
 
     //@@author A0131125Y

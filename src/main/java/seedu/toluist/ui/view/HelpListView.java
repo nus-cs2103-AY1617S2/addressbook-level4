@@ -3,9 +3,11 @@ package seedu.toluist.ui.view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.text.Text;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.ui.UiStore;
 
@@ -19,10 +21,14 @@ public class HelpListView extends UiView {
 
     @FXML
     private ListView<String> helpListView;
+    @FXML
+    private Label headerLabel;
 
     public HelpListView() {
         super(FXML);
         FxViewUtil.makeFullWidth(getRoot());
+        FxViewUtil.makeFullWidth(helpListView);
+        FxViewUtil.makeFullWidth(headerLabel);
         helpListView.setCellFactory(help -> new HelpListCell());
         configureBindings();
     }
@@ -30,6 +36,7 @@ public class HelpListView extends UiView {
     private void configureBindings() {
         UiStore store = UiStore.getInstance();
         store.bind(this, store.getObservableHelp());
+        helpListView.prefHeightProperty().bind(getRoot().heightProperty());
     }
 
     protected void viewDidMount() {
@@ -50,11 +57,13 @@ public class HelpListView extends UiView {
                 setGraphic(null);
                 setText(null);
             } else {
-                Text text = new Text(helpString);
-                text.wrappingWidthProperty().bind(helpListView.widthProperty().subtract(OFFSET_WRAPPING));
-                text.textProperty().bind(itemProperty());
+                Label label = new Label(helpString);
+                label.setWrapText(true);
+                label.maxWidthProperty().bind(helpListView.widthProperty().subtract(OFFSET_WRAPPING));
+                label.setContentDisplay(ContentDisplay.CENTER);
                 setPrefWidth(0);
-                setGraphic(text);
+                setGraphic(label);
+                setAlignment(Pos.CENTER_LEFT);
             }
         }
     }
