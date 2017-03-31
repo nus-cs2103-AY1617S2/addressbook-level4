@@ -42,19 +42,19 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                CreateDeadline(deadline),
-                CreateDescription(description),
+                createDeadline(deadline),
+                createDescription(description),
                 //new IdentificationNumber(id),
                 new UniqueTagList(tagSet)
         );
     }
 
     //@@author A0138377U
-    public Deadline CreateDeadline(String deadline) throws IllegalValueException {
+    public Deadline createDeadline(String deadline) throws IllegalValueException {
         return (deadline == null ? new Deadline() : new Deadline(deadline));
     }
 
-    public Description CreateDescription(String description) {
+    public Description createDescription(String description) {
         return (description == null ? new Description() : new Description(description));
     }
     //@@author
