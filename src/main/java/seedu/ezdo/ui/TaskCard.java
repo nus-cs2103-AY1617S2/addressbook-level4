@@ -90,7 +90,6 @@ public class TaskCard extends UiPart<Region> {
         try {
             if (dateReference.after(DATE_FORMAT.parse(startDate.getText()))) {
                 startDate.setStyle(cssColor);
-                name.setStyle(cssColor);
             }
         } catch (ParseException pe) {
             // Do nothing as the start date is optional
@@ -115,7 +114,6 @@ public class TaskCard extends UiPart<Region> {
             if (dateReference.after(DATE_FORMAT.parse(dueDate.getText()))) {
                 startDate.setStyle(null);
                 dueDate.setStyle(cssColor);
-                name.setStyle(cssColor);
             }
         } catch (ParseException pe) {
             // Do nothing as the due date is optional
