@@ -6,6 +6,8 @@ import java.util.Optional;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.ui.JumpToCalendarEventEvent;
+import seedu.address.commons.events.ui.JumpToCalendarTaskEvent;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -111,6 +113,7 @@ public class EditCommand extends Command {
 
                 UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
                 EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
+                EventsCenter.getInstance().post(new JumpToCalendarEventEvent(editedEvent));
                 return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
             } catch (IllegalValueException e) {
                 throw new CommandException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
@@ -138,6 +141,7 @@ public class EditCommand extends Command {
 
             UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
             EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(editedTask)));
+            EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(editedTask));
             return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));

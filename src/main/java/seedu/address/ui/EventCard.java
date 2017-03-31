@@ -53,7 +53,8 @@ public class EventCard extends UiPart<Region> {
     private void initTags(ReadOnlyEvent event) {
         event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
-//@@author A0124377A
+    //@@author A0124377A
+    //add badge to list card for certain statuses
     private void setCardLook(ReadOnlyEvent event) {
         if (event.isOver()) {
             cardPane.getStyleClass().add("status-complete");

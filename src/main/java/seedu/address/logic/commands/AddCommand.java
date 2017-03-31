@@ -5,7 +5,8 @@ import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.WhatsLeftChangedEvent;
+import seedu.address.commons.events.ui.JumpToCalendarEventEvent;
+import seedu.address.commons.events.ui.JumpToCalendarTaskEvent;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -107,14 +108,14 @@ public class AddCommand extends Command {
                 model.addEvent(toAddEvent);
                 UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
                 EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
-                EventsCenter.getInstance().post(new WhatsLeftChangedEvent(currState));
+                EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
                 model.storePreviousCommand("add");
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
             } else if (toAddEvent == null) {
                 model.addTask(toAddTask);
                 UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
                 EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(toAddTask)));
-                EventsCenter.getInstance().post(new WhatsLeftChangedEvent(currState));
+                EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(toAddTask));
                 model.storePreviousCommand("add");
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
             }

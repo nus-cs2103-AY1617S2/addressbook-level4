@@ -86,8 +86,14 @@ public interface Model {
     /** Updates the filter of the filtered Event list to show unfinished task*/
     //void updateFilteredListToShowIncomplete();
 
+    //@@author A0121668A
+    /** Sets the display status in model */
     void setDisplayStatus(String status);
 
+    /** returns the current display status in model */
+    String getDisplayStatus();
+
+    //@@author
     /** Finds the index of the event in the filtered list*/
     int findEventIndex(Event event);
 

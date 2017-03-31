@@ -23,6 +23,12 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
     private static Map<String, AppointmentGroup> groupMap;
     private static CalendarAdder instance;
 
+    public static CalendarAdder initializeCalendar() {
+        if (instance == null) {
+            instance = new CalendarAdder();
+        }
+        return instance;
+    }
     private CalendarAdder() {
         setGroups();
     }
@@ -63,16 +69,10 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
         return item;
     }
 
-    public static CalendarAdder getInstance() {
-        if (instance == null) {
-            instance = new CalendarAdder();
-        }
-        return instance;
-    }
 
    /**
-     * Compare the equality of a task with an item in the calendar.
-     * @param targetTask
+     * Compare activity in calendar with a task
+     * @param task
      * @param taskInCalendar
      * @return
      */
@@ -83,6 +83,12 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
                         task.getByDate().getValue(), task.getByTime().getValue()));
     }
 
+    /**
+     * Compare activity in calendar with an event
+     * @param event
+     * @param eventInCalendar
+     * @return
+     */
     public static boolean compareWithEvent(ReadOnlyEvent event, Appointment eventInCalendar) {
         return eventInCalendar.getSummary().equals(event.getDescription().toString())
                 && eventInCalendar.getStartLocalDateTime().equals(
