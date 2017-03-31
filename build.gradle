@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.task.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -92,7 +92,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "KIT.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
