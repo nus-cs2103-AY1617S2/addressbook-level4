@@ -1,4 +1,3 @@
-//@@author A0121658E
 package seedu.geekeep.model.task;
 
 import java.time.LocalDateTime;
@@ -6,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
+//@@author A0121658E
 /**
  * Represents the ending date and time of a task. Guarantees: immutable; is valid as declared in
  * {@link #isValidDateTime()}

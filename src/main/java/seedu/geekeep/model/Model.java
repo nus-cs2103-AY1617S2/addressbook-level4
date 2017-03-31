@@ -1,4 +1,4 @@
-//@@author A0121658E
+
 package seedu.geekeep.model;
 
 import java.util.Set;
@@ -11,7 +11,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 public interface Model {
-
+    //@@author A0121658E
     /**
      * Signals that an undo command would fail because there is nothing to undo.
      */

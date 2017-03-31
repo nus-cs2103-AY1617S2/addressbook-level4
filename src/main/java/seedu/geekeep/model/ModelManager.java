@@ -1,4 +1,4 @@
-//@@author A0121658E
+
 package seedu.geekeep.model;
 
 import java.util.Set;
@@ -56,10 +56,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0121658E
+    public void syncWithStacks(ReadOnlyGeeKeep newGeeKeep) {
+        pastGeeKeeps.add(new GeeKeep(newGeeKeep));
+        futureGeeKeeps.clear();
+    }
+
     @Override
     public void resetData(ReadOnlyGeeKeep newData) {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        syncWithStacks(geeKeep);
         geeKeep.resetData(newData);
         indicateGeeKeepChanged();
     }
@@ -76,16 +80,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        syncWithStacks(geeKeep);
         geeKeep.removeTask(target);
         indicateGeeKeepChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        syncWithStacks(geeKeep);
         geeKeep.addTask(task);
         updateFilteredListToShowAll();
         indicateGeeKeepChanged();
@@ -96,14 +98,13 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert updatedTask != null;
 
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        syncWithStacks(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.updateTask(taskListIndex, updatedTask);
 
         indicateGeeKeepChanged();
     }
-
+    //@@author
     // =========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -182,6 +183,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0121658E
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
         pastGeeKeeps.add(new GeeKeep(geeKeep));
