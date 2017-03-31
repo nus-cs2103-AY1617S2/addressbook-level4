@@ -81,8 +81,9 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
+    // @@author A0114269E
     /**
-     * @@author A0114269E
+     *
      * Method for user-initiated change of Storage Directory
      * @param newFilePath
      * @param newConfig
@@ -91,9 +92,10 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage = new XmlTaskManagerStorage(newFilePath);
         indicateTaskManagerStorageDirectoryChanged(newFilePath, newConfig);
     }
+    // @@author
 
+    // @@author A0114269E
     /**
-     * @@author A0114269E
      * Raise an event that the tars storage directory has changed
      * @param newFilePath
      * @param newConfig
@@ -101,6 +103,7 @@ public class StorageManager extends ComponentManager implements Storage {
     private void indicateTaskManagerStorageDirectoryChanged(String newFilePath, Config newConfig) {
         raise(new TaskManagerStorageDirectoryChangedEvent(newFilePath, newConfig));
     }
+    // @@author
 
     @Override
     @Subscribe

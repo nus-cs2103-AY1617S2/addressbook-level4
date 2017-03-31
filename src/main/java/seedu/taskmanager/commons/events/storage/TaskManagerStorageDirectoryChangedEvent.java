@@ -3,9 +3,9 @@ package seedu.taskmanager.commons.events.storage;
 import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.events.BaseEvent;
 
+// @@author A0114269E
 /**
  * Indicates a change in directory of the TaskManager initiated by user
- * @@author A0114269E
  */
 public class TaskManagerStorageDirectoryChangedEvent extends BaseEvent {
     private final String newFilePath;

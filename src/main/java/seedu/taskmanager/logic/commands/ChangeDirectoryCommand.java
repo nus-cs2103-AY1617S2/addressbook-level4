@@ -10,8 +10,8 @@ import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 
+// @@author A0114269E
 /**
- * @@author A0114269E
  * Change the directory of taskmanager.xml file to user-specified path to allow cloud service sync.
  * Path matching is case sensitive.
  */
