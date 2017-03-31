@@ -10,8 +10,8 @@ import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 
+// @@author A0114269E
 /**
- * @@author A0114269E
  * Parses input arguments and creates a new ChangeDirectoryCommand object
  */
 public class ChangeDirectoryCommandParser {

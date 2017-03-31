@@ -12,6 +12,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String SORT_KEYWORD_STARTDATE = "s/";
     public static final String SORT_KEYWORD_ENDDATE = "e/";
+    public static final String SORT_KEYWORD_OTHERS = "other";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts tasks by either startdate or enddate in the task manager. " + "Examples: " + COMMAND_WORD
@@ -19,6 +20,8 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_START = "Tasks sorted by start dates.";
     public static final String MESSAGE_SUCCESS_END = "Tasks sorted by end dates.";
+    public static final String MESSAGE_SUCCESS_INVALID_KEYWORD = "Input keyword is invalid. "
+            + "Tasks sorted by end dates by default.";
 
     private final String sortCriterion;
 
@@ -35,14 +38,14 @@ public class SortCommand extends Command {
         assert model != null;
         model.sortTasks(sortCriterion);
         model.updateFilteredListToShowAll();
+
         switch (sortCriterion) {
         case SORT_KEYWORD_STARTDATE:
             return new CommandResult(MESSAGE_SUCCESS_START);
         case SORT_KEYWORD_ENDDATE:
             return new CommandResult(MESSAGE_SUCCESS_END);
-
         default:
-            return new CommandResult(MESSAGE_SUCCESS_END);
+            return new CommandResult(MESSAGE_SUCCESS_INVALID_KEYWORD);
         }
 
     }

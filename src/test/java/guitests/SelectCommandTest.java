@@ -8,7 +8,6 @@ package guitests;
 
 public class SelectCommandTest extends TaskManagerGuiTest {
 
-//
 //    @Test
 //    public void selectTask_nonEmptyList() {
 //
@@ -33,7 +32,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
 //        assertListSize(0);
 //        assertSelectionInvalid(1); //invalid index
 //    }
-
+//
 //    private void assertSelectionInvalid(int index) {
 //        commandBox.runCommand("select " + index);
 //        assertResultMessage("The task index provided is invalid");
@@ -44,7 +43,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
 //        assertResultMessage("Selected Task: " + index);
 //        assertTaskSelected(index);
 //    }
-
+//
 //    private void assertTaskSelected(int index) {
 //        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
 //        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);

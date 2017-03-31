@@ -10,8 +10,8 @@ import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.MoveCommand;
 
+// @@author A0114269E
 /**
- * @@author A0114269E
  * Parses input arguments and creates a new MoveCommand object
  */
 public class MoveCommandParser {
