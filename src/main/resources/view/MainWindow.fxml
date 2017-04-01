@@ -41,10 +41,13 @@
             </MenuBar>
             <HBox prefHeight="73.0" prefWidth="800.0" VBox.vgrow="NEVER">
                <children>
-                  <AnchorPane prefHeight="63.0" prefWidth="66.0" HBox.hgrow="ALWAYS" />
-                  <AnchorPane fx:id="commandBoxPlaceholder" prefHeight="73.0" prefWidth="447.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="clockPlaceholder" HBox.hgrow="NEVER">
                      <HBox.margin>
-                        <Insets left="20.0" right="15.0" top="15.0" />
+                        <Insets left="20.0" right="30.0" />
+                     </HBox.margin></AnchorPane>
+                  <AnchorPane fx:id="commandBoxPlaceholder" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="15.0" top="15.0" />
                      </HBox.margin>
                   </AnchorPane>
                </children>

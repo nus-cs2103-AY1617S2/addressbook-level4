@@ -17,6 +17,7 @@ import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
+//@@author A0135998H
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -40,6 +41,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
+
+    @FXML
+    private AnchorPane clockPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -114,6 +118,7 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        new Clock(getDigitalClockPlaceholder());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -126,6 +131,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
+    }
+
+    private AnchorPane getDigitalClockPlaceholder() {
+        return clockPlaceholder;
     }
 
     void hide() {
