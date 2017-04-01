@@ -100,8 +100,8 @@ public class Parser {
         case UndoCommand.COMMAND_WORD:
         case UndoCommand.COMMAND_WORD_SHORT:
             return new UndoCommand();
-         
-	    case RedoCommand.COMMAND_WORD:
+
+        case RedoCommand.COMMAND_WORD:
         case RedoCommand.COMMAND_WORD_SHORT:
             return new RedoCommand();
 
