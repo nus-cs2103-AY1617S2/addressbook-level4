@@ -72,3 +72,4 @@ public class RedoCommandTest extends TaskBossGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
     }
+}
