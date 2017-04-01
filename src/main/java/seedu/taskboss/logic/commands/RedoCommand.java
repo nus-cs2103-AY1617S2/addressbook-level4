@@ -14,7 +14,7 @@ public class RedoCommand extends Command {
     public static final String COMMAND_WORD_SHORT = "r";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-    		+ ": Redoes the previous undo operation by the user\n"
+        + ": Redoes the previous undo operation by the user\n"
         + "Example: " + COMMAND_WORD + " || " + COMMAND_WORD_SHORT;
 
     public static final String MESSAGE_SUCCESS = "The most recent operation has been redone!";
