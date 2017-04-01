@@ -7,7 +7,6 @@ import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -15,12 +14,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
+import seedu.ezdo.commons.util.SearchParameters;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.TaskDate;
+
 //@@author A0141010L
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -45,8 +46,6 @@ public class FindCommandParser implements CommandParser {
         String namesToMatch = argsTokenizer.getPreamble().orElse("");
         String[] splitNames = namesToMatch.split("\\s+");
 
-        ArrayList<Object> listToCompare = new ArrayList<Object>();
-        ArrayList<Boolean> searchIndicatorList = new ArrayList<Boolean>();
         Optional<Priority> findPriority;
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
@@ -92,17 +91,11 @@ public class FindCommandParser implements CommandParser {
         }
 
         Set<String> keywords = new HashSet<String>(Arrays.asList(splitNames));
-        listToCompare.add(keywords);
-        listToCompare.add(findPriority);
-        listToCompare.add(findStartDate);
-        listToCompare.add(findDueDate);
-        listToCompare.add(findTags);
-        searchIndicatorList.add(searchBeforeStartDate);
-        searchIndicatorList.add(searchBeforeDueDate);
-        searchIndicatorList.add(searchAfterStartDate);
-        searchIndicatorList.add(searchAfterDueDate);
+        SearchParameters searchParameters = new SearchParameters.Builder().name(keywords).priority(findPriority)
+                .startDate(findStartDate).dueDate(findDueDate).tags(findTags).startBefore(searchBeforeStartDate)
+                .dueBefore(searchBeforeDueDate).startAfter(searchAfterStartDate).dueAfter(searchAfterDueDate).build();
 
-        return new FindCommand(listToCompare, searchIndicatorList);
+        return new FindCommand(searchParameters);
     }
 
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {

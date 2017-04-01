@@ -5,6 +5,7 @@ import java.util.EmptyStackException;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.exceptions.DateException;
+import seedu.ezdo.commons.util.SearchParameters;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
@@ -73,7 +74,7 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by multiple fields*/
-    void updateFilteredTaskList(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList);
+    void updateFilteredTaskList(SearchParameters searchParameters);
 
     /** Updates the filter of the filtered task list to show done tasks*/
     void updateFilteredDoneList();
