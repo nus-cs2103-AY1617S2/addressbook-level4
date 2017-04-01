@@ -25,9 +25,8 @@ public class PostGoogleCalendarCommand extends Command {
     public static final int NO_INDEX = -1;
     public static final String COMMAND_WORD_1 = "postgoogle";
     public static final String COMMAND_WORD_2 = "pg";
-    public static final String MESSAGE_SUCCESS = "task posted: %1$s\n";
+    public static final String MESSAGE_SUCCESS = "Task posted: %1$s\n";
     public static final String MESSAGE_SUCCESS_MULTIPLE = "All eligible task in current listing posted.";
-    public static final String MESSAGE_FAIL = "Unable to post to Google Calendar.";
     public static final String MESSAGE_MISSING_DATE = "Both start and end dates are required"
             + " to post to Google Calendar";
     public static final String MESSAGE_USAGE = COMMAND_WORD_2
@@ -100,11 +99,11 @@ public class PostGoogleCalendarCommand extends Command {
 
         try {
             com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
-            event = service.events().insert(GoogleCalendar.calendarId, event).execute();
+            event = service.events().insert(GoogleCalendar.CALENDAR_ID, event).execute();
 
         } catch (IOException ioe) {
             logger.info("Failure due to " + ioe.getMessage());
-            throw new IOException(MESSAGE_FAIL);
+            throw new IOException(GoogleCalendar.CONNECTION_FAIL_MESSAGE);
         }
 
         logger.info(String.format("Event created: %s\n", event.getHtmlLink()));

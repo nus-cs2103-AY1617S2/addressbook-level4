@@ -21,7 +21,8 @@ import com.google.api.services.calendar.CalendarScopes;
 
 // @@author A0140063X-reused
 public class GoogleCalendar {
-    public static final String calendarId = "primary";
+    public static final String CALENDAR_ID = "primary";
+    public static final String CONNECTION_FAIL_MESSAGE = "Unable to connect to Google.";
     private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
 
     private static final String APPLICATION_NAME =
