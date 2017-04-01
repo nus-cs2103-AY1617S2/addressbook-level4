@@ -17,7 +17,7 @@ public class DateParser {
 
     public static final String USER_DATE_OUTPUT_FORMAT = "dd/MM/yyyy HH:mm";
     public static final String DAY_MONTH_YEAR_FORMAT = "^([0-9]{1,2}[-/])([0-9]{1,2}[-/])([0-9]{4}.*)";
-    public final SimpleDateFormat userOutputDateFormat = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
+    public static final SimpleDateFormat userOutputDateFormat = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
 
     public String value;
 
