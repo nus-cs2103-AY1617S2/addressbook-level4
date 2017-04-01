@@ -4,6 +4,7 @@ package seedu.toluist.controller.commons;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.util.Pair;
@@ -25,6 +26,22 @@ public class KeywordTokenizer {
      */
     public static HashMap<String, String> tokenize(String description, String defaultKeyword, String... keywords) {
         HashMap<String, String> tokens = new HashMap<>();
+        for (Pair<String, String> token : tokenizeInOrder(description, defaultKeyword, keywords)) {
+            tokens.put(token.getKey(), token.getValue());
+        }
+        return tokens;
+    }
+
+    /**
+     * Tokenize a string description into their respective keywords (by best effort matching)
+     * @param description is the full text supplied by the user to be tokenized
+     * @param defaultKeyword is for the rest of the text that did not get tokenized by any user-specified keywords
+     * @param keywords is the list of keywords to find and to tokenize
+     * @return a list of keyword-token pairs, in order of appearances
+     */
+    public static List<Pair<String, String>> tokenizeInOrder(String description, String defaultKeyword,
+                                                             String... keywords) {
+        List<Pair<String, String>> tokens = new ArrayList<>();
         if (!StringUtil.isPresent(description)) {
             // Early termination, no description means there is nothing to tokenize.
             return tokens;
@@ -59,7 +76,7 @@ public class KeywordTokenizer {
                     : description.length();
             String keyword = currentIndexKeywordPair.getValue();
             String token = description.substring(startIndex, endIndex).trim();
-            tokens.put(keyword, token);
+            tokens.add(new Pair<>(keyword, token));
         }
 
         return tokens;

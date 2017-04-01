@@ -2,9 +2,12 @@
 package seedu.toluist.dispatcher;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -12,6 +15,7 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.Controller;
@@ -20,6 +24,7 @@ import seedu.toluist.controller.HistoryController;
 import seedu.toluist.controller.NavigateHistoryController;
 import seedu.toluist.controller.UnknownCommandController;
 
+import seedu.toluist.controller.commons.KeywordTokenizer;
 import seedu.toluist.model.CommandHistoryList;
 
 public class CommandDispatcher extends Dispatcher {
@@ -62,7 +67,8 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public SortedSet<String> getSuggestions(String command) {
-        if (!StringUtil.isPresent(command)) {
+        if (!StringUtil.isPresent(command)
+            || !StringUtil.isPresent(command.substring(command.length() - 1))) {
             return new TreeSet<>();
         }
 
@@ -71,7 +77,12 @@ public class CommandDispatcher extends Dispatcher {
             return commandWordAndAliasSuggestions;
         }
 
-        return getKeywordSuggestions(command);
+        SortedSet<String> keywordSuggestions = getKeywordSuggestions(command);
+        if (!keywordSuggestions.isEmpty()) {
+            return keywordSuggestions;
+        }
+
+        return getKeywordArgumentSuggestions(command);
     }
 
     /**
@@ -105,18 +116,43 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     /**
-     * Return suggestions for command keywords
+     * Return suggestions for command keywords, not including those already used in the command
      * @param command command string
      * @return sorted set of suggestions
      */
     private SortedSet<String> getKeywordSuggestions(String command) {
-        String[] words = command.trim().split("\\s+");
-        String lastWordOfCommand = words[words.length - 1];
+        String lastWordOfCommand = StringUtil.getLastWord(command);
 
-        return Arrays.stream(getBestFitController(command).getCommandKeywords())
-                .filter(keyword -> StringUtil.startsWithIgnoreCase(keyword, lastWordOfCommand))
+        HashMap<String, String[]> keywordMap = getBestFitController(command).getCommandKeywordMap();
+        HashMap<String, String> tokens = KeywordTokenizer.tokenize(command, null,
+                keywordMap.keySet().toArray(new String[0]));
+        return keywordMap.keySet().stream()
+                .filter(keyword -> StringUtil.startsWithIgnoreCase(keyword, lastWordOfCommand)
+                        && !tokens.keySet().contains(keyword))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
+
+    /**
+     * Return suggestions for argument for command keywords
+     * @param command command string
+     * @return sorted set of suggestions
+     */
+    private SortedSet<String> getKeywordArgumentSuggestions(String command) {
+        String lastWordOfCommand = StringUtil.getLastWord(command);
+        HashMap<String, String[]> keywordMap = getBestFitController(command).getCommandKeywordMap();
+        List<Pair<String, String>> tokens = KeywordTokenizer.tokenizeInOrder(command, null,
+                keywordMap.keySet().toArray(new String[0]));
+        if (tokens.isEmpty()) {
+            return new TreeSet<>();
+        }
+
+        Pair<String, String> lastKeywordTokenPair = tokens.get(tokens.size() - 1);
+
+        return Arrays.stream(keywordMap.get(lastKeywordTokenPair.getKey()))
+                .filter(value -> StringUtil.startsWithIgnoreCase(value, lastWordOfCommand))
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
 
     /**
      * Returns de-aliased version of a command

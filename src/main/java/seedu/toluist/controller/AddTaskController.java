@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -40,7 +41,8 @@ public class AddTaskController extends Controller {
     //@@author A0162011A
     private static final String HELP_DETAILS = "Adds a task to the todo list.";
     private static final String HELP_FORMAT = "add NAME [from/STARTDATE to/ENDDATE] "
-                                                  + "[by/ENDDATE] [repeat/PERIOD(daily/weekly/monthly)] "
+                                                  + "[by/ENDDATE] [repeat/PERIOD"
+                                                    + "(daily/weekly/monthly/yearly)] "
                                                   + "[priority/PRIORITY(high/low)] [tags/TAGS]";
     private static final String[] HELP_COMMENTS = { "Related commands: `delete`, `update`",
                                                     "Only fields entered will be used.",
@@ -174,8 +176,8 @@ public class AddTaskController extends Controller {
         return new String[] { COMMAND_ADD_TASK };
     }
 
-    public String[] getCommandKeywords() {
-        return new String[] {
+    public HashMap<String, String[]> getCommandKeywordMap() {
+        String[] keywords = new String[] {
                 TaskTokenizer.KEYWORD_EVENT_END_DATE,
                 TaskTokenizer.KEYWORD_EVENT_START_DATE,
                 TaskTokenizer.KEYWORD_TASK_DEADLINE,
@@ -184,6 +186,18 @@ public class AddTaskController extends Controller {
                 TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE,
                 TaskTokenizer.KEYWORD_TASK_TAGS
         };
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : keywords) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        keywordMap.put(TaskTokenizer.KEYWORD_TASK_PRIORITY,
+                new String[] { Task.HIGH_PRIORITY_STRING, Task.LOW_PRIORITY_STRING });
+        keywordMap.put(TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+                new String[] {
+                    Task.RecurringFrequency.DAILY.name(), Task.RecurringFrequency.WEEKLY.name(),
+                    Task.RecurringFrequency.MONTHLY.name(), Task.RecurringFrequency.YEARLY.name()
+                });
+        return keywordMap;
     }
 
     //@@author A0162011A

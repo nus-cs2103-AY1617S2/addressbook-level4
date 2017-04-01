@@ -145,8 +145,13 @@ public class FindController extends Controller {
         return new String[] { COMMAND_WORD_FILTER, COMMAND_WORD_FIND, COMMAND_WORD_LIST };
     }
 
-    public String[] getCommandKeywords() {
-        return new String[] { PARAMETER_NAME, PARAMETER_TAG };
+    public HashMap<String, String[]> getCommandKeywordMap() {
+        String[] keywords = new String[] { PARAMETER_NAME, PARAMETER_TAG };
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : keywords) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        return keywordMap;
     }
 
     public String[] getBasicHelp() {

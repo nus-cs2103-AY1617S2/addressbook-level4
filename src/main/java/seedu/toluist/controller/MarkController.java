@@ -115,8 +115,13 @@ public class MarkController extends Controller {
         return new String[] { COMMAND_WORD };
     }
 
-    public String[] getCommandKeywords() {
-        return new String[] { PARAMETER_MARK_COMPLETE, PARAMETER_MARK_INCOMPLETE };
+    public HashMap<String, String[]> getCommandKeywordMap() {
+        String[] keywords = new String[] { PARAMETER_MARK_COMPLETE, PARAMETER_MARK_INCOMPLETE };
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : keywords) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        return keywordMap;
     }
 
     //@@author A0162011A

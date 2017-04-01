@@ -228,8 +228,8 @@ public class UpdateTaskController extends Controller {
         return new String[] { COMMAND_UPDATE_TASK };
     }
 
-    public String[] getCommandKeywords() {
-        return new String[] {
+    public HashMap<String, String[]> getCommandKeywordMap() {
+        String[] keywords = new String[] {
                 TaskTokenizer.KEYWORD_EVENT_END_DATE,
                 TaskTokenizer.KEYWORD_EVENT_START_DATE,
                 TaskTokenizer.KEYWORD_TASK_DEADLINE,
@@ -240,7 +240,20 @@ public class UpdateTaskController extends Controller {
                 TaskTokenizer.KEYWORD_TASK_STOP_RECURRING,
                 TaskTokenizer.KEYWORD_TASK_FLOATING,
         };
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : keywords) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        keywordMap.put(TaskTokenizer.KEYWORD_TASK_PRIORITY,
+                new String[] { Task.HIGH_PRIORITY_STRING, Task.LOW_PRIORITY_STRING });
+        keywordMap.put(TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+                new String[] {
+                        Task.RecurringFrequency.DAILY.name(), Task.RecurringFrequency.WEEKLY.name(),
+                        Task.RecurringFrequency.MONTHLY.name(), Task.RecurringFrequency.YEARLY.name()
+                });
+        return keywordMap;
     }
+
 
     //@@author A0162011A
     public String[] getBasicHelp() {

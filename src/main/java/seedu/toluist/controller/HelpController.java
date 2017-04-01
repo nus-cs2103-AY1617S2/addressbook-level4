@@ -143,8 +143,12 @@ public class HelpController extends Controller {
         return new String[] { COMMAND_WORD };
     }
 
-    public String[] getCommandKeywords() {
-        return controllerLibrary.getCommandControllerKeywords().toArray(new String[] {});
+    public HashMap<String, String[]> getCommandKeywordMap() {
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : controllerLibrary.getCommandControllerKeywords()) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        return keywordMap;
     }
 
     public String[] getBasicHelp() {

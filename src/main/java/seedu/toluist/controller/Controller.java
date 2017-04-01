@@ -48,10 +48,10 @@ public abstract class Controller {
     }
 
     /**
-     * Returns list of keywords used by controller
+     * Returns mapping of keywords with possible values used by controller
      */
-    public String[] getCommandKeywords() {
-        return new String[] {};
+    public HashMap<String, String[]> getCommandKeywordMap() {
+        return new HashMap<>();
     }
 
     //@@author A0162011A
