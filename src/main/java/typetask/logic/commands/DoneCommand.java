@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Task completed! \nTask: %1$s";
+    public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed? Yes";
 
     public final int targetIndex;
 
