@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_DATES;
+import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_PRIORITY;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.taskit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -198,6 +199,12 @@ public class LogicManagerTest {
     public void execute_add_invalidDates() {
         assertCommandFailure("add task from monday", MESSAGE_INVALID_DATES);
         assertCommandFailure("add task from 6/4/17 to 6/3/17", MESSAGE_INVALID_DATES);
+    }
+    
+    @Test
+    public void execute_add_invalidPriorities() {
+        assertCommandFailure("add task priority blah", MESSAGE_INVALID_PRIORITY);
+        assertCommandFailure("add task priority ", MESSAGE_INVALID_PRIORITY);
     }
 
     // @@author

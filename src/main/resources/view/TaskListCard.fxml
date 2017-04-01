@@ -32,6 +32,8 @@
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label"></Label>
                                     <Label fx:id="title" text="\$first" styleClass="cell_big_label"/>
+                                   	<Label fx:id="margin"/>
+                                    <Label fx:id="priority" text="\$priority" />
                                 </HBox>
                             </children>
                         </HBox>

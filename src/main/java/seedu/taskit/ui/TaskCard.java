@@ -33,10 +33,16 @@ public class TaskCard extends UiPart<Region> {
         start.setText(task.getStart().toString());
         end.setText(task.getEnd().toString());
         if (task.getPriority().toString().equals("high")) {
-            cardPane.setStyle("-fx-background-color: #fcafa6;");
+            priority.setStyle("-fx-background-color: #fcafa6;");
+            priority.setText(task.getPriority().toString());
+
         }
         else if (task.getPriority().toString().equals("medium")) {
-            cardPane.setStyle("-fx-background-color: #fafc85;");
+            priority.setStyle("-fx-background-color: #fafc85;");
+            priority.setText(task.getPriority().toString());
+        }
+        else {
+            priority.setText("");
         }
 
         if (start.getText().length() > 0) {
