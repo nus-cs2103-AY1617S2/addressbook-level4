@@ -3,13 +3,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import java.net.URL?>
 <?import javafx.scene.control.TextArea?>
-<AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="placeHolder" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css"/>
         <URL value="@Extensions.css"/>
     </stylesheets>
-    <AnchorPane fx:id="mainPane">
-        <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
-    </AnchorPane>
+	<children>
+        <TextArea fx:id="resultDisplay" wrapText="true" prefRowCount="1" editable="false" styleClass="result-display"/>
+	</children>
 </AnchorPane>

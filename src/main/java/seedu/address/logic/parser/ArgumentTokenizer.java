@@ -40,6 +40,19 @@ public class ArgumentTokenizer {
         extractArguments(argsString, positions);
     }
 
+    //@@author A0138377U
+    /**
+     * Returns false if prefix is not in Arguments
+     */
+    public boolean isEmpty(Prefix prefix) {
+        List<String> test = this.tokenizedArguments.get(prefix);
+        if (this.tokenizedArguments.containsKey(prefix) && this.tokenizedArguments.get(prefix).get(0).equals("")) {
+            return true;
+        }
+        return false;
+    }
+    //@@author
+
     /**
      * Returns last value of given prefix.
      */

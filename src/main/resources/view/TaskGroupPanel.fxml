@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+
+<TitledPane fx:id="titledPane" styleClass=".titled-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+    </stylesheets>
+	<text> </text>
+    <content>
+		<ScrollPane fx:id="scrollPane" minHeight="0.0" styleClass=".scroll-pane" fitToWidth="true" VBox.vgrow="NEVER">
+			<content>
+        		<VBox fx:id="taskGroupView" VBox.vgrow="NEVER" />
+			</content>
+		</ScrollPane>
+    </content>
+</TitledPane>

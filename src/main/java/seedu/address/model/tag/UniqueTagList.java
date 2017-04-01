@@ -11,7 +11,6 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 
@@ -19,6 +18,7 @@ import seedu.address.commons.util.CollectionUtil;
  * A list of tags that enforces no nulls and uniqueness between its elements.
  *
  * Supports minimal set of list operations for the app's features.
+ * UniqueTagList enforces uniqueness internally rather than rasing Exception
  *
  * @see Tag#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
@@ -36,7 +36,7 @@ public class UniqueTagList implements Iterable<Tag> {
      * Creates a UniqueTagList using given String tags.
      * Enforces no nulls or duplicates.
      */
-    public UniqueTagList(String... tags) throws DuplicateTagException, IllegalValueException {
+    public UniqueTagList(String... tags) throws IllegalValueException {
         final List<Tag> tagList = new ArrayList<Tag>();
         for (String tag : tags) {
             tagList.add(new Tag(tag));
@@ -48,20 +48,17 @@ public class UniqueTagList implements Iterable<Tag> {
      * Creates a UniqueTagList using given tags.
      * Enforces no nulls or duplicates.
      */
-    public UniqueTagList(Tag... tags) throws DuplicateTagException {
+    public UniqueTagList(Tag... tags) {
         assert !CollectionUtil.isAnyNull((Object[]) tags);
         final List<Tag> initialTags = Arrays.asList(tags);
-        if (!CollectionUtil.elementsAreUnique(initialTags)) {
-            throw new DuplicateTagException();
-        }
-        internalList.addAll(initialTags);
+        setTags(initialTags);
     }
 
     /**
      * Creates a UniqueTagList using given tags.
      * Enforces no null or duplicate elements.
      */
-    public UniqueTagList(Collection<Tag> tags) throws DuplicateTagException {
+    public UniqueTagList(Collection<Tag> tags) {
         this();
         setTags(tags);
     }
@@ -98,12 +95,10 @@ public class UniqueTagList implements Iterable<Tag> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTags(Collection<Tag> tags) throws DuplicateTagException {
+    public void setTags(Collection<Tag> tags) {
         assert !CollectionUtil.isAnyNull(tags);
-        if (!CollectionUtil.elementsAreUnique(tags)) {
-            throw new DuplicateTagException();
-        }
-        internalList.setAll(tags);
+        assert CollectionUtil.elementsAreUnique(tags);
+        this.internalList.setAll(tags);
     }
 
     /**
@@ -124,17 +119,17 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalList.contains(toCheck);
     }
 
-    /**
-     * Adds a Tag to the list.
-     *
-     * @throws DuplicateTagException if the Tag to add is a duplicate of an existing Tag in the list.
-     */
-    public void add(Tag toAdd) throws DuplicateTagException {
+    /** Adds a Tag to the list.  */
+    public void add(Tag toAdd) {
         assert toAdd != null;
-        if (contains(toAdd)) {
-            throw new DuplicateTagException();
+        if (!contains(toAdd)) {
+            internalList.add(toAdd);
         }
-        internalList.add(toAdd);
+    }
+
+    /** Adds a list of Tags to the list.  */
+    public void addTags(List<Tag> tags) {
+        tags.forEach(this::add);
     }
 
     @Override
@@ -161,15 +156,6 @@ public class UniqueTagList implements Iterable<Tag> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
-    }
-
-    /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
-     */
-    public static class DuplicateTagException extends DuplicateDataException {
-        protected DuplicateTagException() {
-            super("Operation would result in duplicate tags");
-        }
     }
 
 }

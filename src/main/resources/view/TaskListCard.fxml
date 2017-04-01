@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<VBox alignment="CENTER_LEFT" minHeight="80.0">
+			<stylesheets>
+				<URL value="@DarkTheme.css" />
+				<URL value="@Extensions.css" />
+			</stylesheets>
+			<padding>
+				<Insets bottom="10" left="10" right="7" top="10" />
+			</padding>
+			<children>
+				<HBox spacing="5" alignment="CENTER_LEFT">
+					<padding>
+						<Insets bottom="5"/>
+					</padding>
+
+					<children>
+						<HBox>
+							<Label fx:id="id" styleClass="cell_big_label"></Label>
+							<Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+						</HBox>
+					</children>
+				</HBox>
+				<HBox>
+					<padding>
+						<Insets bottom="5"/>
+					</padding>
+					<children>
+						<Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+					</children>
+				</HBox>
+				<HBox>
+					<children>
+						<FlowPane HBox.hgrow="ALWAYS">
+							<children>
+								<Label styleClass="cell_small_label" text="Date: " />
+								<Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+							</children>
+						</FlowPane>
+						<FlowPane HBox.hgrow="ALWAYS">
+							<children>
+								<Label styleClass="cell_small_label" text="Status: " />
+								<Label fx:id="status" styleClass="cell_small_label" text="\$status" />
+							</children>
+						</FlowPane>
+					</children>
+				</HBox>
+				<FlowPane fx:id="tags" />
+			</children>
+		</VBox>
+	</children>
+</HBox>
