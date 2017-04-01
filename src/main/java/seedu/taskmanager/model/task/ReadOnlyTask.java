@@ -25,6 +25,7 @@ public interface ReadOnlyTask {
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
+     * This ignores the Status from consideration of being in the same state.
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
@@ -32,8 +33,7 @@ public interface ReadOnlyTask {
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
                 && other.getStartDate().equals(this.getStartDate())
                 && other.getEndDate().equals(this.getEndDate())
-                && other.getDescription().equals(this.getDescription())
-                && other.getStatus().equals(this.getStatus()));
+                && other.getDescription().equals(this.getDescription()));
     }
 
     /**

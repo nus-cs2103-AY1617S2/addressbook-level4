@@ -8,6 +8,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Title;
 
 /**
@@ -19,6 +20,9 @@ public class TaskBuilder {
 
     public TaskBuilder() {
         this.task = new TestTask();
+        // @@author A0114269E
+        this.task.setStatus(new Status()); // set to undone by default
+        // @@author
     }
 
     /**
@@ -55,6 +59,16 @@ public class TaskBuilder {
         this.task.setEndDate(Optional.ofNullable(new EndDate(endDate)));
         return this;
     }
+    
+    // @@author A0114269E 
+    /**
+     * To allow building TestTask with done status 
+     */
+    public TaskBuilder withStatus(String status) {
+        this.task.setStatus(new Status(status));
+        return this;
+    }
+    // @@author A0114269E
 
     public TestTask build() {
         return this.task;
