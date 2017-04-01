@@ -142,7 +142,6 @@ public class ModelManager extends ComponentManager implements Model {
         taskBoss.sortTasks(currentSortType);
 
         indicateTaskBossChanged();
-        taskbossUndoHistory.clear();
     }
 
     //@@author A0143157J
