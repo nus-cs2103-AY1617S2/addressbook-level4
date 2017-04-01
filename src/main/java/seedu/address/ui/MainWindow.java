@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Logger;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -23,6 +24,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.UpdateStatusBarEvent;
@@ -38,6 +40,7 @@ import seedu.address.model.task.ReadOnlyTask;
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(MainWindow.class);
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
@@ -169,6 +172,7 @@ public class MainWindow extends UiPart<Region> {
         // implemented
         new ResultDisplay(getResultDisplayPlaceholder());
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
+        
     }
 
     /*

@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXListView;
-
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,13 +23,10 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-    private JFXListView<JFXListView<ReadOnlyTask>> uilist;
+    private ListView<ReadOnlyTask> todayTaskListView;
 
     @FXML
-    private JFXListView<ReadOnlyTask> todayTaskListView;
-
-    @FXML
-    private JFXListView<ReadOnlyTask> futureTaskListView;
+    private ListView<ReadOnlyTask> futureTaskListView;
 
     // height of a row should be the same as the height of a TaskCard
     final int ROW_HEIGHT = 45;
@@ -47,9 +42,8 @@ public class TaskListPanel extends UiPart<Region> {
          */
         setConnections(todayTaskListView, taskListToday);
         setConnections(futureTaskListView, taskListFuture);
-        uilist.setDepth(0);
-        uilist.setExpanded(true);
-        // todayTaskListView.depthProperty().set(1);
+
+
         // todayTaskListView.setExpanded(true);
         addToPlaceholder(taskListPlaceholder);
         // set ListView height, add 2 extra px to show border

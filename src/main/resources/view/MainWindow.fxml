@@ -65,7 +65,7 @@
          <children>
             <VBox layoutX="33.0" layoutY="-4.0" maxWidth="550.0" minWidth="550.0" prefHeight="550.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane fx:id="taskListPanelPlaceholder" />
+                  <AnchorPane fx:id="taskListPanelPlaceholder" prefWidth="550.0" />
                </children>
             </VBox>
             <AnchorPane fx:id="completedTaskListPlaceholder" prefHeight="0.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
