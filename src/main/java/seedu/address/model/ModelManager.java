@@ -108,6 +108,15 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
     }
 
+  //@@author A0135998H
+    @Override
+    public void updateFilteredListToShowFloating() {
+        filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
+            return isFloating(task);
+        });
+        indicateViewListChanged(ViewCommand.TYPE_FLOATING);
+    }
+
     //@@author A0135998H
     @Override
     public void updateFilteredListToShowOverdue() {
@@ -189,6 +198,11 @@ public class ModelManager extends ComponentManager implements Model {
             return currentDateTime.isAfter(deadline.getValue());
         }
         return false;
+    }
+
+  //@@author A0135998H
+    public boolean isFloating(ReadOnlyTask task) {
+        return !(task.getStartEndDateTime()).isPresent() && !(task.getDeadline()).isPresent();
     }
 
 }
