@@ -4,8 +4,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import seedu.ezdo.commons.core.LogsCenter;
-import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.ConfigUtil;
 import seedu.ezdo.commons.util.UrlUtil;
