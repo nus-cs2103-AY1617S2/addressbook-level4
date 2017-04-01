@@ -12,7 +12,7 @@ Role: Team lead <br>
 - Features implemented:
   - Undo and Redo Command
   - Google Calendar Integration
-- Code written:[[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0140063X.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0140063X.md)]
+- Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0140063X.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0140063X.md)]
 - Other major contributions:
   - Set up Travis, Coveralls and Codacy
   - Set up PrettyTime for date parsing
@@ -29,7 +29,7 @@ Role: Developer <br>
 - Features implemented:
 	- Done/Undone Command
 	- ListDone/ListUndone Command
-- Code written:[[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0139975J.md)]
+- Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0139975J.md)]
 - Other major contributions:
 	- Implementation of UI
 	- Ensure Travis passes for each milestone
@@ -44,7 +44,7 @@ Role: Developer <br>
 - Features implemented:
 	- ChangeTheme Command
 	- Power search
-- Code written:[[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142487Y.md)]
+- Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142487Y.md)]
 - Other major contributions:
 	- Implementation of CommandLibrary
 	- Oversee other implementations of components in Logic
@@ -61,7 +61,7 @@ Role: Developer <br>
 	- Help/HelpFormat
 	- Windows ColourCoded Tags
 	- Shortcuts
-- Code written:[[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142939W.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0142939W.md)]
+- Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142939W.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0142939W.md)]
 - Other major contributions: 
 	- UI changes
 	- Storage component
