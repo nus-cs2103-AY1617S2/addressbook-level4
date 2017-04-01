@@ -8,6 +8,9 @@ import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.SaveAtCommand;
 
 //@@author A0140887W
+/**
+ * Parses input arguments and creates a new SaveAtCommand object
+ */
 public class SaveAtCommandParser {
     public Command parse(String argument) {
         // Remove trailing whitespace
@@ -18,9 +21,9 @@ public class SaveAtCommandParser {
         if (processedArgument.isEmpty()) {
             return new IncorrectCommand(String.format(SaveAtCommand.MESSAGE_INVALID_PATH, SaveAtCommand.MESSAGE_USAGE));
         }
-        File f = new File(processedArgument);
+        File file = new File(processedArgument);
         try {
-            String path = f.getCanonicalPath();
+            String path = file.getCanonicalPath();
             return new SaveAtCommand(new File(path));
         } catch (IOException e) {
             return new IncorrectCommand(String.format(SaveAtCommand.MESSAGE_INVALID_PATH, SaveAtCommand.MESSAGE_USAGE));

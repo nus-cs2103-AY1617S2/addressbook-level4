@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import guitests.DoistGUITest;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.model.TodoList;
@@ -71,9 +72,10 @@ public class TypicalTestTasks {
         }
     }
 
-    //@@author
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{laundry, homework, work, school, groceries, shopping};
+        TestTask[] tasks = new TestTask[]{laundry, homework, work, school, groceries, shopping};
+        DoistGUITest.sortTasksByDefault(tasks);
+        return tasks;
     }
 
     public TestTask[] getAllFinishedTypicalTasks() {
@@ -81,9 +83,11 @@ public class TypicalTestTasks {
         for (TestTask task : testTasks) {
             task.setFinishedStatus(true);
         }
+        DoistGUITest.sortTasksByDefault(testTasks);
         return testTasks;
     }
 
+    //@@author
     public TodoList getTypicalTodoList() {
         TodoList ab = new TodoList();
         loadDoistWithSampleData(ab);

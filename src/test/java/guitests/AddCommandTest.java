@@ -16,6 +16,7 @@ public class AddCommandTest extends DoistGUITest {
     public void add() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
+
         TestTask taskToAdd = td.email;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);

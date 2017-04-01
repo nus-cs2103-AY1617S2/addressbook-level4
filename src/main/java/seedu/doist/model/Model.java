@@ -10,6 +10,7 @@ import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskCombinedComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.DuplicateTaskException;
@@ -28,11 +29,11 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Finishes the given task. */
-    void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
+    int finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
         UniqueTaskList.TaskAlreadyFinishedException;
 
     /** Unfinishes the given task. */
-    void unfinishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
+    int unfinishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
         UniqueTaskList.TaskAlreadyUnfinishedException;
 
     /** Adds the given task */
@@ -45,14 +46,11 @@ public interface Model {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedPerson)
+    int updateTask(int filteredTaskListIndex, ReadOnlyTask editedPerson)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-
-    /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to show the default listing of tasks */
     void updateFilteredListToShowDefault();
@@ -65,6 +63,15 @@ public interface Model {
 
     /** Sorts the tasks according to the comparators defined in the list*/
     void sortTasks(List<SortType> sortTypes);
+
+    /** Sorts the tasks according to the default sorting */
+    void sortTasksByDefault();
+
+    /** Returns default sorting */
+    List<SortType> getDefaultSorting();
+
+    /** Parses a list of sort types to a combined comparator for ReadOnlyTask */
+    ReadOnlyTaskCombinedComparator parseSortTypesToComparator(List<SortType> sortTypes);
 
     /** Returns a list of task descriptions */
     ArrayList<String> getAllNames();

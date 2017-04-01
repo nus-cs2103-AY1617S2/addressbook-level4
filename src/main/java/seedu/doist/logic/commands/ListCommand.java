@@ -21,24 +21,21 @@ public class ListCommand extends Command {
         PENDING,
         FINISHED,
         OVERDUE,
-        NOT_FINISHED
+        ALL
     }
-    //@@author
-
+    //@@author A0140887W
     public static final String DEFAULT_COMMAND_WORD = "list";
-    public static final String PREAMBLE_ALL = "ALL";
 
     public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": List tasks as specified by the parameters\n"
-            + "TYPE could be all, pending, overdue or finished\n"
-            + "Parameters: TYPE [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
+            + "TYPE could be pending, overdue or finished. If no TYPE is specified, all tasks will be listed.\n"
+            + "Parameters: [TYPE] [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " pending \\under school ";
-    public static final String MESSAGE_INVALID_PREAMBLE = "Invalid list type! Type should be all, pending,"
-                                                            + " overdue or finished";
+    //public static final String MESSAGE_INVALID_PREAMBLE = "Invalid list type! Type should be pending,"
+    //                                                        + " overdue or finished";
     public static final String MESSAGE_SUCCESS = "Listed %1$s tasks";
     public static final String MESSAGE_PENDING = String.format(MESSAGE_SUCCESS, "pending");
     public static final String MESSAGE_FINISHED = String.format(MESSAGE_SUCCESS, "finished");
-    public static final String MESSAGE_NOTFINISHED = String.format(MESSAGE_SUCCESS, "not finished");
     public static final String MESSAGE_OVERDUE = String.format(MESSAGE_SUCCESS, "overdue");
     public static final String MESSAGE_ALL = String.format(MESSAGE_SUCCESS, "all");
 
@@ -49,16 +46,12 @@ public class ListCommand extends Command {
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
         if (!preamble.trim().isEmpty()) {
             String processedPreamble = processListPreamble(preamble);
-            if (processedPreamble.equals(PREAMBLE_ALL)) {
-                listAll();
-            } else {
-                // pending, overdue or finished
-                try {
-                    type = TaskType.valueOf(processedPreamble);
-                } catch (IllegalArgumentException e) {
-                    throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        MESSAGE_INVALID_PREAMBLE));
-                }
+            // pending, overdue or finished
+            try {
+                type = TaskType.valueOf(processedPreamble);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                                MESSAGE_USAGE));
             }
         } else {
             listDefault();
@@ -85,33 +78,31 @@ public class ListCommand extends Command {
         return processedPreamble;
     }
 
-    private void listAll() {
-        type = null;
-    }
-
     /** Default list type if there is no preamble */
     private void listDefault() {
-        type = TaskType.NOT_FINISHED;
+        type = TaskType.ALL;
     }
 
     @Override
     public CommandResult execute() {
+        assert model != null;
         model.updateFilteredTaskList(type, tagList);
+        model.sortTasksByDefault();
         String message = "";
         if (type != null) {
             if (type.equals(TaskType.PENDING)) {
                 message = MESSAGE_PENDING;
             } else if (type.equals(TaskType.FINISHED)) {
                 message = MESSAGE_FINISHED;
-            } else if (type.equals(TaskType.NOT_FINISHED)) {
-                message = MESSAGE_NOTFINISHED;
+            } else if (type.equals(TaskType.ALL)) {
+                message = MESSAGE_ALL;
             } else if (type.equals(TaskType.OVERDUE)) {
                 message = MESSAGE_OVERDUE;
             } else {
                 message = "";
             }
         } else {
-            message = MESSAGE_ALL;
+            assert false : "type should not be null!";
         }
         CommandResult commandResult = tagList.isEmpty() ?
                                       new CommandResult(message) :

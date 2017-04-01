@@ -60,10 +60,12 @@ public class TodoList implements ReadOnlyTodoList {
         this.tasks.setTasks(tasks);
     }
 
+    //@@author A0140887W
     public void sortTasks(Comparator<ReadOnlyTask> comparator) {
         this.tasks.sort(comparator);
     }
 
+    //@@author
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
@@ -163,12 +165,24 @@ public class TodoList implements ReadOnlyTodoList {
     }
 
     //@@author A0140887W
-    public boolean changeTaskFinishStatus(ReadOnlyTask readOnlyTaskToFinish, boolean isToFinish)
+    /**
+     * Changes finish status of a task
+     *  @param readOnlyTask task to have its finish status to be changed
+     *  @param isToFinish true if task is to be finished, else task will be unfinished
+     */
+    public boolean changeTaskFinishStatus(ReadOnlyTask readOnlyTask, boolean isToFinish)
             throws TaskNotFoundException, TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
-        assert readOnlyTaskToFinish != null;
+        assert readOnlyTask != null;
 
-        Task taskToFinish = new Task(readOnlyTaskToFinish);
+        Task taskToFinish = new Task(readOnlyTask);
         return tasks.changeFinishStatus(taskToFinish, isToFinish);
+    }
+
+    /**
+     * Returns the index of a task in the internal list, or -1 if no such task
+     */
+    public int getTaskIndex(ReadOnlyTask readOnlyTask) {
+        return tasks.getTaskIndex(readOnlyTask);
     }
 
     //@@author A0147620L
