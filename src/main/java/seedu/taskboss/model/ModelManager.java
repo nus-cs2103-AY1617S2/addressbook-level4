@@ -118,6 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
             taskBoss.removeTask(target);
         }
         indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
     }
 
     //@@author
@@ -141,6 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskBoss.sortTasks(currentSortType);
 
         indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
     }
 
     //@@author A0143157J
@@ -151,6 +153,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskBoss.sortTasks(sortType);
 
         indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
     }
 
     //@@author A0144904H
@@ -175,6 +178,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
     }
 
     //@@author A0143157J
@@ -187,6 +191,7 @@ public class ModelManager extends ComponentManager implements Model {
         removeCategoryFromTaskboss(oldCategory);
         taskbossUndoHistory.clear();
         indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
     }
 
     /**
