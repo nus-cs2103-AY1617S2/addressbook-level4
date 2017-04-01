@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
+import seedu.ezdo.commons.util.MultipleIndexCommandUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
@@ -11,7 +12,7 @@ import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 /**
  * Deletes a task identified using its last displayed index from ezDo.
  */
-public class KillCommand extends Command implements MultipleIndexCommand {
+public class KillCommand extends Command {
 
     public static final String COMMAND_WORD = "kill";
     public static final String SHORT_COMMAND_WORD = "k";
@@ -37,7 +38,7 @@ public class KillCommand extends Command implements MultipleIndexCommand {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (!isIndexValid(lastShownList)) {
+        if (!MultipleIndexCommandUtil.isIndexValid(lastShownList, targetIndexes)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -53,10 +54,5 @@ public class KillCommand extends Command implements MultipleIndexCommand {
         }
 
         return new CommandResult(String.format(MESSAGE_KILL_TASK_SUCCESS, tasksToKill));
-    }
-
-    @Override
-    public boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
-        return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
     }
 }
