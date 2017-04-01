@@ -15,18 +15,21 @@ import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.task.UniqueTaskList;
 
+// @@author A0114269E
 /**
  * Mark a task as done in the Task Manager
  */
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
-    public static final String ALTERNATIVE_COMMAND_WORD = "completed";
+    public static final String ALTERNATIVE_COMMAND_WORD_1 = "completed";
+    public static final String ALTERNATIVE_COMMAND_WORD_2 = "finished";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Mark the task identified by the index number used in the last task listing as done.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD_1 + " or "
+            + ALTERNATIVE_COMMAND_WORD_2 + " 1";
 
     public static final String MESSAGE_MARK_DONE_TASK_SUCCESS = "Task marked done: %1$s";
     public static final String MESSAGE_MARK_DONE_TASK_FAILURE = "ERROR! Task is already done.";
@@ -79,3 +82,4 @@ public class DoneCommand extends Command {
                 updatedTags);
     }
 }
+// @@author
