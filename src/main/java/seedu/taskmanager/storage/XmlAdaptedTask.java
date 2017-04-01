@@ -79,7 +79,7 @@ public class XmlAdaptedTask {
         final Description description = this.description == null ? null : new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         // @@author A0114269E
-        final Status status = this.status == null ? null : new Status(this.status);
+        final Status status = new Status(this.status);
         // @@author
         return new Task(title, Optional.ofNullable(startDate), Optional.ofNullable(endDate),
                 Optional.ofNullable(description), status, tags);
