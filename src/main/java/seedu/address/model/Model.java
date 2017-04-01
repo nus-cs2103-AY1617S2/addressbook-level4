@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskList;
@@ -40,6 +41,9 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskListByKeywords(Set<String> keywords);
+
+    /** Updates the filter of the filtered task list to filter by the given date*/
+    void updateFilteredTaskListByDate(Deadline deadline);
 
     /** Updates undo copy of task list*/
     void updateCopy(ReadOnlyTaskManager taskManager);
