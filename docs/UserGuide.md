@@ -323,8 +323,28 @@ Examples:
 
 * `save Documents/Private data`
   Changes the location of storage file to Documents/Private data.
+  
+### 2.14. Changing Calendar Week: `next`
+Changes the weekly view on calendar according to specified weeks ahead.<br>
+Format: 'next WEEKS_AHEAD'
 
-### 2.14. Exiting the program : `exit`
+> * WEEKS_AHEAD must be an integer.
+
+Examples:
+
+* `next 2`
+  Changes the displayed calendar schedule to 2 weeks ahead.
+  
+### 2.15. Refreshing the Calendar: `refresh`
+Refresh the calendar to show current week.<br>
+Format: `refresh`
+
+Examples:
+
+* `refresh`
+  Changes the displayed calendar schedule to current week.
+
+### 2.16. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
@@ -381,5 +401,11 @@ Format: `exit`
 
 * **Save** : `save DIRECTORY`<br>
   e.g. `save Desktop/Data`
+  
+* **Next** : `next WEEKS_AHEAD`<br>
+  e.g. `next 2`
+
+* **Refresh** : `refresh`<br>
+  e.g. `refresh`
 
 * **Exit** : `exit`<br>
