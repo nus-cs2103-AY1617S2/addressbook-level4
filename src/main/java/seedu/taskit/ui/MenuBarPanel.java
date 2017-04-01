@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
@@ -13,10 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.ui.MenuBarPanelSelectionChangedEvent;
-import seedu.taskit.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskit.logic.commands.ListCommand;
-import seedu.taskit.model.task.ReadOnlyTask;
-import seedu.taskit.ui.TaskListPanel.TaskListViewCell;
 
 //@@author A0141872E
 public class MenuBarPanel extends UiPart<Region> {
@@ -45,7 +41,6 @@ public class MenuBarPanel extends UiPart<Region> {
 
     private void setConnection() {
         menuBarView.setItems(menuBarItems); 
-        menuBarView.setCellFactory(listView -> new MenuBarViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -80,21 +75,6 @@ public class MenuBarPanel extends UiPart<Region> {
                 return command;
             default:
                 return ListCommand.COMMAND_WORD + " all";
-        }
-    }
-    
-    class MenuBarViewCell extends ListCell<String> {
-
-        @Override
-        protected void updateItem(String li, boolean empty) {
-            super.updateItem(li, empty);
-
-            if (empty || li == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new MenuBarCard(li).getRoot());
-            }
         }
     }
 

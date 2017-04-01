@@ -1,19 +1,16 @@
 package seedu.taskit.ui;
 
-import java.util.List;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.taskit.ui.MenuBarPanel;
 import seedu.taskit.commons.core.Config;
 import seedu.taskit.commons.core.GuiSettings;
 import seedu.taskit.commons.events.ui.ExitAppRequestEvent;
@@ -22,7 +19,6 @@ import seedu.taskit.logic.Logic;
 import seedu.taskit.model.UserPrefs;
 import seedu.taskit.model.task.ReadOnlyTask;
 
-//@@author A0141872E
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -40,31 +36,18 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
-    //private FloatingTaskListPanel floatingTaskListPanel;
-    //private EventTaskListPanel eventTaskListPanel;
-    //private DeadlineTaskListPanel deadlineTaskListPanel;
-    //private TodayTaskListPanel todayTaskListPanel;
     private Config config;
+
+    //@FXML
+    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
-    
-    //@FXML
-    //private AnchorPane floatingTaskViewPlaceholder;
 
-    //@FXML
-    //private AnchorPane eventTaskViewPlaceholder;
-
-    //@FXML
-    //private AnchorPane deadlineTaskViewPlaceholder;
-
-    //@FXML
-    //private AnchorPane todayTaskViewPlaceholder;
-    
-    //@FXML
+    @FXML
     private AnchorPane taskListPanelPlaceholder;
 
     @FXML
@@ -134,11 +117,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
+        //browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        //floatingTaskListPanel = new FloatingTaskListPanel(getFloatingTaskPlaceholder(), logic.getFilteredTaskList());
-        //eventTaskListPanel = new EventTaskListPanel(getEventTaskPlaceholder(), logic.getFilteredTaskList());
-        //deadlineTaskListPanel = new DeadlineTaskListPanel(getDeadlineTaskPlaceholder(), logic.getFilteredTaskList());
-        //todayTaskListPanel = new TodayTaskListPanel(getTodayTaskPlaceholder(),logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -164,22 +144,6 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getMenuBarPanelPlaceholder() {
         return menuBarPanelPlaceholder;
     }
-    
-    //private AnchorPane getFloatingTaskPlaceholder() {
-    //    return floatingTaskViewPlaceholder;
-    //}
-    
-    //private AnchorPane getEventTaskPlaceholder() {
-    //   return eventTaskViewPlaceholder;
-    //}
-    
-    //private AnchorPane getDeadlineTaskPlaceholder() {
-    //    return deadlineTaskViewPlaceholder;
-    //}
-    
-    //private AnchorPane getTodayTaskPlaceholder() {
-    //    return todayTaskViewPlaceholder;
-    //}
 
     void hide() {
         primaryStage.hide();
