@@ -9,16 +9,16 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
  * Redoes the most recent undo operation done by the user.
  */
 public class RedoCommand extends Command {
-	
+
     public static final String COMMAND_WORD = "redo";
     public static final String COMMAND_WORD_SHORT = "r";
-    
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
     		+ ": Redoes the previous undo operation by the user\n"
         + "Example: " + COMMAND_WORD + " || " + COMMAND_WORD_SHORT;
-    
+
     public static final String MESSAGE_SUCCESS = "The most recent operation has been redone!";
-    
+
     public static final String MESSAGE_WITHOUT_PREVIOUS_OPERATION = "Cannot redo";
 
     public RedoCommand() {}
