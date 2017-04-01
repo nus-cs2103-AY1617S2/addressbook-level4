@@ -284,6 +284,12 @@ public class MainWindow extends UiPart<Region> {
     }
 
     @FXML
+    public void handleHelpUG() {
+        HelpUGWindow helpUGWindow = new HelpUGWindow();
+        helpUGWindow.show();
+    }
+
+    @FXML
     public void handleUndo() {
         commandBox.handleCommands(UndoCommand.COMMAND_WORD);
     }

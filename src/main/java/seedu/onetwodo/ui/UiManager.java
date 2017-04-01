@@ -15,6 +15,7 @@ import seedu.onetwodo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.commons.events.ui.ShowHelpRequestEvent;
+import seedu.onetwodo.commons.events.ui.ShowHelpUGRequestEvent;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.Logic;
@@ -116,7 +117,13 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
 
-    //@@author A0143029M
+    @Subscribe
+    private void handleShowHelpUGEvent(ShowHelpUGRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.handleHelpUG();
+    }
+
+    // @@author A0143029M
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         // Scroll when testing

@@ -16,6 +16,7 @@ import seedu.onetwodo.logic.commands.ExitCommand;
 import seedu.onetwodo.logic.commands.ExportCommand;
 import seedu.onetwodo.logic.commands.FindCommand;
 import seedu.onetwodo.logic.commands.HelpCommand;
+import seedu.onetwodo.logic.commands.HelpUGCommand;
 import seedu.onetwodo.logic.commands.ImportCommand;
 import seedu.onetwodo.logic.commands.IncorrectCommand;
 import seedu.onetwodo.logic.commands.ListCommand;
@@ -37,7 +38,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -88,6 +90,11 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case HelpUGCommand.COMMAND_WORD:
+        case HelpUGCommand.COMMAND_WORD_SHORT:
+        case HelpUGCommand.COMMAND_WORD_FULL:
+            return new HelpUGCommand();
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
