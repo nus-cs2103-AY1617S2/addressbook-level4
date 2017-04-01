@@ -59,7 +59,7 @@ public class SortCommandTest extends EzDoGuiTest {
 
         // sort by priority
         commandBox.runCommand("s p");
-        expectedList = new TestTask[] {td.alice, td.benson, td.carl, td.daniel, td.fiona, td.elle, td.george, td.kappa,
+        expectedList = new TestTask[] {td.benson, td.carl, td.daniel, td.fiona, td.elle,  td.george, td.alice, td.kappa,
                                        td.leroy, td.megan};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
