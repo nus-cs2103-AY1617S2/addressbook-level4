@@ -117,7 +117,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (ReadOnlyTask target: targets) {
             taskBoss.removeTask(target);
         }
-        taskbossUndoHistory.clear();      
+        taskbossUndoHistory.clear();
         indicateTaskBossChanged();
     }
 
