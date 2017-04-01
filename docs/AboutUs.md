@@ -5,9 +5,9 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Cheuk Ting](https://github.com/ctleungac) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-Roles: Deliverables and Deadlines, Scheduling and Task Tracking, GUI Component Lead
-Responsibilities: Ensure project deliverables are done on time and in the right format. In charge of defining, assigning, and tracking project tasks. Oversees the development of the GUI component.
+<img src="images/lct.jpg" width="150"><br>
+Role: Developer <br>
+Responsibilities: Logic
 
 (Subject to Change)
 
