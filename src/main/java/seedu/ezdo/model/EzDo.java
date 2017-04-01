@@ -32,7 +32,6 @@ import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
  */
 public class EzDo implements ReadOnlyEzDo {
 
-    private static final int RECUR_INTERVAL_INCREMENT = 1;
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
 
@@ -191,6 +190,7 @@ public class EzDo implements ReadOnlyEzDo {
 
     private String updateDate(int type, String originalDate) {
         try {
+            int RECUR_INTERVAL_INCREMENT = 1;
             Calendar c = Calendar.getInstance();
             c.setTime(DateParser.userOutputDateFormat.parse(originalDate));
             c.add(type, RECUR_INTERVAL_INCREMENT);
