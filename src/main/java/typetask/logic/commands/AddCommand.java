@@ -17,8 +17,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD3 = "+";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a task with or without date to the task list. \n"
-            + "<> means compulsory [] means optional"
-            + "Parameters: <NAME> by:[DATE][TIME]\n"
+            + "<> means compulsory [] means optional \n"
+            + "Parameters: \"<NAME> by:[DATE][TIME]\"   "
+            + "\"<NAME> from:[DATE][TIME] to: [DATE][TIME]\" \n"
             + "Example: " + COMMAND_WORD
             + " Read Harry Potter book 1 ";
 
