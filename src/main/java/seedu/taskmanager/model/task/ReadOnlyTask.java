@@ -15,6 +15,8 @@ public interface ReadOnlyTask {
     Optional<EndDate> getEndDate();
     Optional<Description> getDescription();
 
+    Status getStatus();
+
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the task's internal tags.
@@ -30,7 +32,8 @@ public interface ReadOnlyTask {
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
                 && other.getStartDate().equals(this.getStartDate())
                 && other.getEndDate().equals(this.getEndDate())
-                && other.getDescription().equals(this.getDescription()));
+                && other.getDescription().equals(this.getDescription())
+                && other.getStatus().equals(this.getStatus()));
     }
 
     /**
@@ -43,6 +46,7 @@ public interface ReadOnlyTask {
                 .append(getStartDate().isPresent() ? " Start Date: " + getStartDate().get() : "")
                 .append(getEndDate().isPresent() ? " End Date: " + getEndDate().get() : "")
                 .append(getDescription().isPresent() ? " Description: " + getDescription().get() : "")
+                .append(" Status: " + getStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         // @@author

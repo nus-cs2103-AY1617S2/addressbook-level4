@@ -13,6 +13,7 @@ import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 
@@ -29,6 +30,10 @@ public class XmlAdaptedTask {
     private String endDate;
     @XmlElement(required = true)
     private String description;
+    // @@author A0114269E
+    @XmlElement(required = true)
+    private String status;
+    // @@author
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -50,6 +55,7 @@ public class XmlAdaptedTask {
         startDate = source.getStartDate().isPresent() ? source.getStartDate().get().toFullDateString() : null;
         endDate = source.getEndDate().isPresent() ? source.getEndDate().get().toFullDateString() : null;
         description = source.getDescription().isPresent() ? source.getDescription().get().value : null;
+        status = source.getStatus().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -72,8 +78,11 @@ public class XmlAdaptedTask {
         final EndDate endDate = this.endDate == null ? null : new EndDate(this.endDate);
         final Description description = this.description == null ? null : new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
+        // @@author A0114269E
+        final Status status = this.status == null ? null : new Status(this.status);
+        // @@author
         return new Task(title, Optional.ofNullable(startDate), Optional.ofNullable(endDate),
-                Optional.ofNullable(description), tags);
+                Optional.ofNullable(description), status, tags);
     }
     // @@author
 }
