@@ -10,7 +10,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskList.TaskNotFoundException;
@@ -121,6 +123,10 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    public void updateFilteredTaskListByDate(Deadline deadline) {
+        updateFilteredTaskList(new PredicateExpression(new TaskQualifierByDate(deadline)));
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -179,6 +185,24 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", keyWords);
+        }
+    }
+
+    private class TaskQualifierByDate implements Qualifier {
+        private Deadline deadline;
+
+        TaskQualifierByDate(Deadline deadline) {
+            this.deadline = deadline;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return DateUtil.isDeadlineMatch(task.getDeadline(), deadline);
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", deadline.toString());
         }
     }
 
