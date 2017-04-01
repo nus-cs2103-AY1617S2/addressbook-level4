@@ -46,7 +46,7 @@ Role: Developer <br>
 Role: Developer <br>
 - Components in charge of:  [Storage](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#storage-component)
 - Aspects/tools in charge of: Testing, Scheduling and tracking
-- Features implemented:
-- Other major contributions:
+- Features implemented: Save/Load Command, Help/HelpFormat Windows, ColourCoded Tags, Shortcuts
+- Other major contributions: UI changes, Storage component, Documentation
 
 -----
