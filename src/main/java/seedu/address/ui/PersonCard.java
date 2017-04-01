@@ -6,9 +6,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.ReadOnlyPerson;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Date;
-import seedu.address.model.task.StartDate;
 
 //@@author A0164032U
 public class PersonCard extends UiPart<Region> {

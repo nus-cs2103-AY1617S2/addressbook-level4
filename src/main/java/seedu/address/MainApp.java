@@ -78,7 +78,11 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData ;
         
         try {
+<<<<<<< HEAD
            // addressBookOptional = storage.readAddressBook(userPrefs.getGuiSettings().getLastLoadedYTomorrow());
+=======
+            //addressBookOptional = storage.readAddressBook(userPrefs.getGuiSettings().getLastLoadedYTomorrow());
+>>>>>>> origin/master
             //if (!addressBookOptional.isPresent()) {
                 addressBookOptional = storage.readAddressBook();
             //}
