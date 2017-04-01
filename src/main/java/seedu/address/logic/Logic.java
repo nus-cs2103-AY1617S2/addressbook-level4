@@ -39,4 +39,9 @@ public interface Logic {
      * checks if a given ui index is present in model
      */
     boolean isValidUIIndex(String uiIndex);
+
+    /*
+     * Gets UI index by absolute index
+     */
+    public String getUIIndex(int index);
 }

@@ -151,4 +151,9 @@ public interface Model {
      * Imports data and adds to existing set of tasks
      */
     void handleImportEvent(ImportEvent event);
+
+    /*
+     * Gets UI index by absolute index
+     */
+    public String getUIIndex(int index);
 }

@@ -86,6 +86,14 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
+    public void showCommandCompleteAnimation(String index) {
+
+    }
+
+    public void showProgressbar() {
+
+    }
+
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
@@ -100,5 +108,6 @@ public class TaskListPanel extends UiPart<Region> {
             }
         }
     }
+
 
 }

@@ -448,6 +448,14 @@ public class ModelManager extends ComponentManager implements Model {
         return indexMap.get(uiIndex) + 1;
     }
 
+    /*
+     * gets UI index by absolute index
+     */
+    @Override
+    public String getUIIndex(int index) {
+        return filteredTasks.get(index).getID();
+    }
+
     @Override
     public boolean isValidUIIndex(String uiIndex) {
         uiIndex = uiIndex.toUpperCase();

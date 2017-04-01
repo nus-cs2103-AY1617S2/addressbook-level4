@@ -27,8 +27,14 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     // Returns id field reserved for UI to store temporary index
     String getID();
 
-    // Set id field reserved for UI to store temporary index
+    // Sets id field reserved for UI to store temporary index
     void setID(String id);
+
+    // Sets animation flag
+    void setAnimation(boolean flag);
+
+    // Gets animation flag
+    boolean isAnimated();
 
     // Returns a natural relative representation of a datetime
     String getTaskDateTime();

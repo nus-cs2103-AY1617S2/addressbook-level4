@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox id="cardPane" fx:id="cardPane" prefHeight="40.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="40.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-               <Label fx:id="id" prefHeight="35.0" prefWidth="44.0" styleClass="cell_big_label" text="ID" textFill="#389ba4" HBox.hgrow="NEVER">
-         <font>
-            <Font name="Helvetica Light" size="22.0" />
-         </font>
-         <HBox.margin>
-            <Insets left="15.0" top="-4.0" />
-         </HBox.margin></Label>
-      <VBox prefHeight="36.0" prefWidth="198.0" HBox.hgrow="ALWAYS">
+      <HBox fx:id="cardPane" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-                     <Label fx:id="name" prefHeight="25.0" prefWidth="248.0" styleClass="cell_big_label" text="TaskTitle" textFill="#105b63">
+                     <Label fx:id="id" prefHeight="35.0" prefWidth="44.0" styleClass="cell_big_label" text="ID" textFill="#389ba4" HBox.hgrow="NEVER">
                <font>
-                  <Font name="Helvetica" size="20.0" />
+                  <Font name="Helvetica Light" size="22.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
+               <HBox.margin>
+                  <Insets left="15.0" top="-4.0" />
+               </HBox.margin>
             </Label>
-                  <FlowPane fx:id="tags" prefHeight="11.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets left="12.0" />
-               </VBox.margin></FlowPane>
+            <VBox prefHeight="36.0" prefWidth="198.0" HBox.hgrow="ALWAYS">
+               <children>
+                           <Label fx:id="name" prefHeight="25.0" prefWidth="248.0" styleClass="cell_big_label" text="TaskTitle" textFill="#105b63">
+                     <font>
+                        <Font name="Helvetica" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                        <FlowPane fx:id="tags" prefHeight="11.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets left="12.0" />
+                     </VBox.margin>
+                  </FlowPane>
+               </children>
+            </VBox>
+            <Label fx:id="taskDate" prefHeight="40.0" prefWidth="158.0" text="taskDate" textAlignment="RIGHT" textFill="#757575">
+               <font>
+                  <Font name="Helvetica" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="-3.0" />
+               </HBox.margin>
+            </Label>
          </children>
-      </VBox>
-      <Label fx:id="taskDate" prefHeight="40.0" prefWidth="158.0" text="taskDate" textAlignment="RIGHT" textFill="#757575">
-         <font>
-            <Font name="Helvetica" size="12.0" />
-         </font>
-         <HBox.margin>
-            <Insets top="-3.0" />
-         </HBox.margin>
-      </Label>
+      </HBox>
+      <JFXProgressBar fx:id="progressBar" prefHeight="0.0" prefWidth="503.0" visible="false" AnchorPane.bottomAnchor="0.0" />
     </children>
-</HBox>
+</AnchorPane>
