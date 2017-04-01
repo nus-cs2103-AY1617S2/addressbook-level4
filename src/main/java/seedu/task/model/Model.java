@@ -86,4 +86,7 @@ public interface Model {
     /** Sorts the task list */
     void sortTaskList();
 
+    /** UPdates the filter of the filtered task list to filter by the given keyword and/or date */
+    void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact);
+
 }

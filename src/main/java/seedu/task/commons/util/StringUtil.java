@@ -100,5 +100,17 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
-
+    
+    
+    /*
+     * Converts an array of Strings to a string.
+     */
+    public static String arrayToString(String...words){
+        StringBuilder sb = new StringBuilder();
+        for(String word : words){
+            sb.append(word);
+            sb.append(" ");
+        }
+        return sb.toString();
+    }
 }
