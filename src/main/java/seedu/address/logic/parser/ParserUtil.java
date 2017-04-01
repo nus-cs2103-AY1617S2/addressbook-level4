@@ -133,6 +133,22 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
 
     }
+    //@@author A024377A
+    /**
+     * Returns the parsed integer when it is the only argument
+     */    
+    public static Optional<Integer> parseIntegerAlone(String command) {
+        final Matcher matcher = INDEX_ALONE_ARG_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String index = matcher.group("index");
+        if (!StringUtil.isSignedInteger(index)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(index));
+    }
 
     /**
      * Returns the parsedType when it is the first of 2 arguments

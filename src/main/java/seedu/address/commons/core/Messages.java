@@ -16,4 +16,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_FILEPATH = "The filepath provided is invalid";
     public static final String MESSAGE_DATA_CONVERSION_FAILURE = "The data file specificed is in invalid format";
     public static final String MESSAGE_INVALID_ACTIVITY_TYPE = "The type of activities to clear is invalid";
+    public static final String MESSAGE_INVALID_WEEKS_AHEAD = "Weeks ahead must be a positive integer.";
 }

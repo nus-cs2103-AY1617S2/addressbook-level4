@@ -116,6 +116,17 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+    
+    //@@author A0124377A
+    /**
+     * Returns true if s represents an signed integer e.g. -1, 1, 2, 3, ... <br>
+     * Will return false if the string is:
+     * null, empty string, " 2 " (untrimmed) "3 0" (contains whitespace).
+     * @param s Should be trimmed.
+     */
+    public static boolean isSignedInteger(String s) {
+        return s != null && s.matches("^-?\0*[1-9]\\d*$");
+    }
 
     //@@author A0110491U
     /**

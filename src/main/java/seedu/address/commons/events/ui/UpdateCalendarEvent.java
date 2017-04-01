@@ -17,7 +17,7 @@ public class UpdateCalendarEvent extends BaseEvent {
     @Override
     public String toString() {
         return "Setting updated calendar view " + this.nextDateTime.format(StringUtil.DATE_FORMATTER)
-            + " With " + weeksAhead + " weeks ahead.";
+            + " With " + weeksAhead + " week(s) ahead.";
     }
 
     public LocalDateTime getNextDateTime() {

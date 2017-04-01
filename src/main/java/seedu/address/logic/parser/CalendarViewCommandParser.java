@@ -12,17 +12,19 @@ import seedu.address.logic.commands.Command;
  */
 public class CalendarViewCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the CalendarViewCommand
-     * and returns an CalendarViewCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * CalendarViewCommand and returns an CalendarViewCommand object for
+     * execution.
      */
     public static final int DEFAULT_WEEK = 1;
+
     public Command parse(String args) {
-        Optional<Integer> index = ParserUtil.parseIndexAlone(args);
+        Optional<Integer> index = ParserUtil.parseIntegerAlone(args);
         if (!index.isPresent()) {
             return new CalendarViewCommand(DEFAULT_WEEK);
         }
-
-        return new CalendarViewCommand(index.get());
+        else 
+            return new CalendarViewCommand(index.get());
     }
 
 }
