@@ -332,7 +332,7 @@ Format: 'next WEEKS_AHEAD'
 
 Examples:
 
-* `next 2`
+* `next 2`<br>
   Changes the displayed calendar schedule to 2 weeks ahead.
   
 ### 2.15. Refreshing the Calendar: `refresh`
@@ -341,7 +341,7 @@ Format: `refresh`
 
 Examples:
 
-* `refresh`
+* `refresh`<br>
   Changes the displayed calendar schedule to current week.
 
 ### 2.16. Exiting the program : `exit`
