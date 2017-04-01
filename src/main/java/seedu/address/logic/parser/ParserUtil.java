@@ -69,6 +69,10 @@ public class ParserUtil {
         return Optional.of(filePath);
     }
 
+    //@@author A0110491U
+    /**
+     * Returns the parsedIndex for recurCommand
+     */
     public static Optional<Integer> parseIndexForRec(String command) {
         final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
@@ -80,7 +84,12 @@ public class ParserUtil {
         }
         return Optional.of(Integer.parseInt(index));
     }
+    //@@author
 
+    //@@author A0110491U
+    /**
+     * Returns the parsedFrequency for recurCommand
+     */
     public static Optional<String> parseFreqForRec(String command) {
         final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
@@ -89,7 +98,12 @@ public class ParserUtil {
         String freq = matcher.group("freq");
         return Optional.of(freq);
     }
+    //@@author
 
+    //@@author A0110491U
+    /**
+     * Returns the parsedOccurance for recurCommand
+     */
     public static Optional<Integer> parseOccurForRec(String command) {
         final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
@@ -103,6 +117,9 @@ public class ParserUtil {
     }
 
     //@@author A0110491U
+    /**
+     * Returns the parsedIndex when it is the only argument
+     */
     public static Optional<Integer> parseIndexAlone(String command) {
         final Matcher matcher = INDEX_ALONE_ARG_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
@@ -117,6 +134,9 @@ public class ParserUtil {
 
     }
 
+    /**
+     * Returns the parsedType when it is the first of 2 arguments
+     */
     public static Optional<String> parseType(String command) {
         final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {

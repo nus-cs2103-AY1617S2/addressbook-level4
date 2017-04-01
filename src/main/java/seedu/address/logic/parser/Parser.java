@@ -20,6 +20,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ReadCommand;
+import seedu.address.logic.commands.RecurCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -84,7 +85,7 @@ public class Parser {
 
         case ReadCommand.COMMAND_WORD:
             return new ReadCommandParser().parse(arguments);
-            
+
         case CalendarViewCommand.COMMAND_WORD:
             return new CalendarViewCommandParser().parse(arguments);
 
@@ -99,9 +100,12 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-            
+
         case CalendarRefreshCommand.COMMAND_WORD:
             return new CalendarRefreshCommand();
+
+        case RecurCommand.COMMAND_WORD:
+            return new RecurCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

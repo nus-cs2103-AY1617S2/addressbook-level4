@@ -13,7 +13,6 @@ import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.person.EndDate;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.ReadOnlyEvent;
-import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
 
@@ -44,7 +43,6 @@ public class RecurCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
-        UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
         ReadOnlyWhatsLeft currState = model.getWhatsLeft();
         ModelManager.setPreviousState(currState);
 
@@ -58,8 +56,6 @@ public class RecurCommand extends Command {
         LocalDate enddate = selected.getEndDate().value;
         LocalDate nextsd = startdate;
         LocalDate nexted = enddate;
-        System.out.println("START DATE: " + startdate.toString());
-        System.out.println("END DATE: " + enddate.toString());
         if (frequency.equals("daily")) {
             for (int i = 0; i < occur; i++) {
                 System.out.println(i);
@@ -68,17 +64,18 @@ public class RecurCommand extends Command {
                 Event nextOccur = new Event(selected.getDescription(), selected.getStartTime(),
                         new StartDate(nextsd), selected.getEndTime(), new EndDate(nexted),
                         selected.getLocation(), selected.getTags());
-                System.out.println("ADDING: " + nextOccur.getAsText());
                 try {
                     model.addEvent(nextOccur);
                 } catch (DuplicateEventException e) {
                     throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
                 }
             }
+            model.storePreviousCommand("add");
+            return new CommandResult(String.format(MESSAGE_ADD_RECUR_ACTIVITY_SUCCESS, selected));
         } else if (frequency.equals("weekly")) {
             for (int i = 0; i < occur; i++) {
-                nextsd = startdate.plusDays(7);
-                nexted = enddate.plusDays(7);
+                nextsd = nextsd.plusDays(7);
+                nexted = nexted.plusDays(7);
                 Event nextOccur = new Event(selected.getDescription(), selected.getStartTime(),
                         new StartDate(nextsd), selected.getEndTime(), new EndDate(nexted),
                         selected.getLocation(), selected.getTags());
@@ -88,10 +85,12 @@ public class RecurCommand extends Command {
                     throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
                 }
             }
+            model.storePreviousCommand("add");
+            return new CommandResult(String.format(MESSAGE_ADD_RECUR_ACTIVITY_SUCCESS, selected));
         }
-        model.storePreviousCommand("add");
-        return new CommandResult(String.format(MESSAGE_ADD_RECUR_ACTIVITY_SUCCESS, selected));
+        return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
+    //@@author
 }
 
 

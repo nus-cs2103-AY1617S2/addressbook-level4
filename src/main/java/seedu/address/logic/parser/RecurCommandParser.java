@@ -10,8 +10,6 @@ import seedu.address.logic.commands.RecurCommand;
 
 public class RecurCommandParser {
 
-    public static final String MESSAGE_RECUR_TASK_SUCCESS = "Recur task: %1$s";
-
     //@@author A0110491U
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
@@ -38,4 +36,5 @@ public class RecurCommandParser {
 
         return new RecurCommand(index.get(), freq.get(), occur.get());
     }
+    //@@author
 }

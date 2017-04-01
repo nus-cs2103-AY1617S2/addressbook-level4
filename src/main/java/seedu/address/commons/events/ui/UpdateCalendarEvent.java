@@ -9,7 +9,7 @@ import seedu.address.commons.util.StringUtil;
 public class UpdateCalendarEvent extends BaseEvent {
     private LocalDateTime nextDateTime;
     private int weeksAhead;
-    
+
     public UpdateCalendarEvent(LocalDateTime currDateTime, int weeksAhead) {
         this.nextDateTime = currDateTime.plusWeeks(weeksAhead);
     }
