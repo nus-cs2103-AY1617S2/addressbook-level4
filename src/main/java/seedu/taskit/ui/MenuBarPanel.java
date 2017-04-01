@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
@@ -12,14 +13,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.ui.MenuBarPanelSelectionChangedEvent;
+import seedu.taskit.commons.util.FxViewUtil;
 import seedu.taskit.logic.commands.ListCommand;
 
 //@@author A0141872E
 public class MenuBarPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(MenuBarPanel.class);
     private static final String FXML = "MenuBarPanel.fxml";
-    
-    private VBox panel;
     
     private String command = null;
     private final String MENU_FLOATING_TASK = "Floating Tasks";
@@ -41,6 +41,7 @@ public class MenuBarPanel extends UiPart<Region> {
 
     private void setConnection() {
         menuBarView.setItems(menuBarItems); 
+        menuBarView.setCellFactory(listView -> new MenuBarCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -56,7 +57,8 @@ public class MenuBarPanel extends UiPart<Region> {
 
     private void addToPlaceHolder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
-        placeHolderPane.getChildren().add(panel);
+        FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
+        placeHolderPane.getChildren().add(getRoot());
     }
     
     public String getNavigationCommand(String menuItem) {
@@ -75,6 +77,20 @@ public class MenuBarPanel extends UiPart<Region> {
                 return command;
             default:
                 return ListCommand.COMMAND_WORD + " all";
+        }
+    }
+    
+    class MenuBarCell extends ListCell<String> {
+        @Override
+        protected void updateItem(String label, boolean empty) {
+            super.updateItem(label, empty);
+
+            if (empty || label == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new MenuBarCard(label).getRoot());
+            }
         }
     }
 

@@ -36,10 +36,8 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
+    private MenuBarPanel menuBarPanel;
     private Config config;
-
-    //@FXML
-    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -121,7 +119,7 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
-        new MenuBarPanel(getMenuBarPlaceholder());
+        menuBarPanel = new MenuBarPanel(getMenuBarPlaceholder());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -205,5 +203,9 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+    
+    public MenuBarPanel getMenuBarPanel() {
+        return this.menuBarPanel;
     }
 }

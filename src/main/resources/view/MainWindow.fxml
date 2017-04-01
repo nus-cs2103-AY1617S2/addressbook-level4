@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="1545.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="870.0"  xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@DarkTheme.css" />
       <URL value="@Extensions.css" />
@@ -43,15 +43,15 @@
        </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.3" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="menuBarView">
+            <VBox fx:id="menuBarView" prefWidth="300.0">
                <padding>
          			<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          		</padding>
                <children>
-                  <AnchorPane fx:id="menuBarPanelPlaceholder" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="menuBarPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
             </VBox>
-            <VBox fx:id="taskList" minWidth="340" prefWidth="340">
+            <VBox fx:id="taskList">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
@@ -61,6 +61,6 @@
             </VBox>
          </items>
       </SplitPane>
-      <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+      <AnchorPane fx:id="statusbarPlaceholder" prefWidth="594.0" VBox.vgrow="NEVER" />
    </children>
 </VBox>

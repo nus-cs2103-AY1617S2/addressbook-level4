@@ -1,0 +1,27 @@
+package seedu.taskit.ui;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+
+//@@author A0141872E
+/**
+ * MenuBarCard defines format for individual menu bar item.
+ */
+public class MenuBarCard extends UiPart<Region> {
+    
+    private static final String FXML = "MenuBarCard.fxml";
+    
+    @FXML
+    private HBox menuBarCardPane;
+    @FXML
+    private Label title;
+    
+
+    public MenuBarCard(String label) {
+        super(FXML);
+        title.setText(label);
+    }
+
+}
