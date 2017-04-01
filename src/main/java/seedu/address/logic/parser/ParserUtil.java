@@ -33,6 +33,8 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetType>[et][vs])\\s(?<targetIndex>.+)");
     private static final Pattern INDEX_ALONE_ARG_FORMAT = Pattern.compile("(?<index>.+)");
     private static final Pattern CONFIG_FILEPATH_FORMAT = Pattern.compile("(?<filepath>.*)");
+    private static final Pattern INDEX_FREQ_OCCUR_FORMAT = Pattern.compile("(?<index>.+)\\s(?<freq>.+)\\s(?<occur>.+)");
+
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -65,6 +67,39 @@ public class ParserUtil {
 
         String filePath = matcher.group("filepath");
         return Optional.of(filePath);
+    }
+
+    public static Optional<Integer> parseIndexForRec(String command) {
+        final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+        String index = matcher.group("index");
+        if (!StringUtil.isUnsignedInteger(index)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(index));
+    }
+
+    public static Optional<String> parseFreqForRec(String command) {
+        final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+        String freq = matcher.group("freq");
+        return Optional.of(freq);
+    }
+
+    public static Optional<Integer> parseOccurForRec(String command) {
+        final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+        String occur = matcher.group("occur");
+        if (!StringUtil.isUnsignedInteger(occur)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(occur));
     }
 
     //@@author A0110491U
