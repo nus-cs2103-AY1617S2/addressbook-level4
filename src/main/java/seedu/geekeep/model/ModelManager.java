@@ -1,6 +1,8 @@
 
 package seedu.geekeep.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -33,6 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0147622H
     private final Stack<GeeKeep> pastGeeKeeps;
     private final Stack<GeeKeep> futureGeeKeeps;
+    private final List<String> commandHistory;
 
     /**
      * Initializes a ModelManager with the given geekeep and userPrefs.
@@ -48,6 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         pastGeeKeeps = new Stack<>();
         futureGeeKeeps = new Stack<>();
+        commandHistory = new ArrayList<>();
 
     }
 
@@ -233,6 +237,11 @@ public class ModelManager extends ComponentManager implements Model {
         pastGeeKeeps.push(new GeeKeep(geeKeep));
         geeKeep.resetData(futureGeeKeeps.pop());
         indicateGeeKeepChanged();
+    }
+
+    @Override
+    public void addHistory(String commandText) {
+        commandHistory.add(commandText);
     }
 
 }
