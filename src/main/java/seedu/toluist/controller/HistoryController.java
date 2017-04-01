@@ -11,13 +11,20 @@ import seedu.toluist.model.CommandHistoryList;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
- * ListController is responsible for rendering the initial UI
+ * HistoryController is responsible for showing past commands entered
  */
 public class HistoryController extends Controller {
-    private static final Logger logger = LogsCenter.getLogger(ClearController.class);
+    private static final Logger logger = LogsCenter.getLogger(HistoryController.class);
     private static final String RESULT_MESSAGE = "%s\n%s displayed.";
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "(?iu)^\\s*history\\s*";
+
+    private static final String HELP_DETAILS = "Shows previous commands entered.";
+    private static final String HELP_FORMAT = "history";
+    private static final String[] HELP_COMMENTS = { "Commands are listed in order "
+                                                        + "from latest command to earlier command.",
+                                                    "You can also use the up and down arrow keys "
+                                                        + "to cycle through the commands in the command box." };
 
     private CommandHistoryList commandHistoryList;
 
@@ -41,7 +48,15 @@ public class HistoryController extends Controller {
         return command.matches(COMMAND_REGEX);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, null };
     }
 }

@@ -21,6 +21,13 @@ public class ViewAliasController extends Controller {
     private static final String NEW_LINE = "\n";
     public static final String RESULT_MESSAGE_NO_ALIAS = "No aliases found";
 
+    //@@author A0131125Y
+    private static final String HELP_DETAILS = "Views aliases in the system.";
+    private static final String HELP_FORMAT = "viewalias";
+    private static final String[] HELP_COMMENTS = { "Related commands: `alias`, `unalias`",
+                                                    "Lists aliases in the format `ALIAS:PHRASE`" };
+
+  //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public void execute(String command) {
@@ -36,7 +43,7 @@ public class ViewAliasController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
     }
 
@@ -51,5 +58,14 @@ public class ViewAliasController extends Controller {
 
         String result = String.join(NEW_LINE, lines);
         return result.isEmpty() ? RESULT_MESSAGE_NO_ALIAS : result;
+    }
+
+    //@@author A0162011A
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, null };
     }
 }

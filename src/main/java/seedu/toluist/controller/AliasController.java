@@ -22,6 +22,21 @@ public class AliasController extends Controller {
     public static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
     private static final String COMMAND_TEMPLATE = "(?iu)\\s*alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
 
+    //@@author A0162011A
+    private static final String HELP_DETAILS = "Adds an alias for a phrase. "
+                                                   + "The alias can be used to represent that phrase for commands.";
+    private static final String HELP_FORMAT = "alias ALIAS PHRASE";
+    private static final String[] HELP_COMMENTS = { "Related commands: `unalias`, `viewalias`",
+                                                    "Once added, the alias can be used instead "
+                                                        + "of the phrase to perform commands.",
+                                                    "The phrase can be multiple words long." };
+    private static final String[] HELP_EXAMPLES = { "`alias a add`\nAdds `a` as an alias for the word `add`.",
+                                                    "`alias 1 mark complete 1`\n"
+                                                        + "Adds `1` as an alias for the phrase `mark complete 1`.",
+                                                    "`alias a alias`\nUpdates `a` "
+                                                        + "to be an alias for the word `alias` instead of `add`." };
+
+    //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public void execute(String command) {
@@ -58,7 +73,16 @@ public class AliasController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

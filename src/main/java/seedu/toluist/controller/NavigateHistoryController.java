@@ -60,7 +60,7 @@ public class NavigateHistoryController extends Controller {
         return command.startsWith(COMMAND_WORD);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
     }
 

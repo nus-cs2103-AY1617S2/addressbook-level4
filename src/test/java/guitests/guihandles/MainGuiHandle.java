@@ -32,4 +32,8 @@ public class MainGuiHandle extends GuiHandle {
     public CommandAutoCompleteViewHandle getCommandAutoCompleteView() {
         return new CommandAutoCompleteViewHandle(guiRobot, primaryStage);
     }
+
+    public HelpHandle getHelpView() {
+        return new HelpHandle(guiRobot, primaryStage);
+    }
 }

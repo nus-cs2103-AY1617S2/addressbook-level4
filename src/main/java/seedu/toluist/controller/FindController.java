@@ -41,6 +41,19 @@ public class FindController extends Controller {
     private static final String MESSAGE_NAME_AND_TAG = "name and tag";
     private static final String MESSAGE_STRING_JOINING = "\", \"";
 
+    private static final String HELP_DETAILS = "Finds tasks whose names contain any of the given keywords.";
+    private static final String HELP_FORMAT = "filter/list/find [KEYWORDS] [tag/] [name/]";
+    private static final String[] HELP_COMMENTS = { "By default the name and tag is searched.",
+                                                    "Using `tag/` will only search by tag",
+                                                    "Using `name/` will only search by name.",
+                                                    "Case insensitive. `find a` and `find A` are the same.",
+                                                    "If no keyword is entered, the list of all tasks is displayed." };
+    private static final String[] HELP_EXAMPLES = { "`find a`\nFinds tasks with `a` in the name or tag.",
+                                                    "`filter b tag/ name/`\nFinds tasks with `b` in the name or tag.",
+                                                    "`list c name/`\nFinds tasks with `c` in the name.",
+                                                    "`find d tag/`\nFinds tasks with `d` in the tag.",
+                                                    "`filter\nLists all tasks." };
+
     private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
     public void execute(String command) {
@@ -128,7 +141,15 @@ public class FindController extends Controller {
                 || trimmedAndLowerCasedCommand.startsWith(COMMAND_WORD_LIST.toLowerCase()));
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD_FILTER, COMMAND_WORD_FIND, COMMAND_WORD_LIST };
+    }
+
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

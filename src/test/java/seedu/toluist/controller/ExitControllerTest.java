@@ -19,7 +19,7 @@ public class ExitControllerTest extends ControllerTest {
     @Test
     public void getCommandWord() {
         assertEquals(Arrays.asList(ExitController.COMMAND_WORD_EXIT, ExitController.COMMAND_WORD_QUIT),
-                    Arrays.asList(ExitController.getCommandWords()));
+                    Arrays.asList(new ExitController().getCommandWords()));
     }
 
     @Test

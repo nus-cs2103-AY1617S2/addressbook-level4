@@ -21,6 +21,18 @@ public class UndoController extends Controller {
     private static final String PARAMETER_UNDO_TIMES = "number";
     private static final String RESULT_MESSAGE_TEMPLATE = "Your last %s to the data %s undone.";
 
+    //@@author A0162011A
+    private static final String HELP_DETAILS = "Undoes previous commands by the user.";
+    private static final String HELP_FORMAT = "undo [NUMBER]";
+    private static final String[] HELP_COMMENTS = { "Related commands: `undo`",
+                                                    "Undo commands which `morph` data in the program.",
+                                                    "If a number is entered, will undo that amount of commands.",
+                                                    "Commands which can be undone: `add`, "
+                                                        + "`update`, `delete`, `clear`, `tag`, `untag`, `mark`" };
+    private static final String[] HELP_EXAMPLES = { "`undo`\nUndo the latest morphing command.",
+                                                    "`undo 5`\nUndo the latest 5 morphing commands." };
+
+    //@@author A0131125Y
     private static final Logger logger = LogsCenter.getLogger(UndoController.class);
 
     public void execute(String command) {
@@ -55,7 +67,16 @@ public class UndoController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

@@ -3,6 +3,7 @@ package seedu.toluist.ui;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -27,6 +29,7 @@ import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.view.CommandAutoCompleteView;
 import seedu.toluist.ui.view.CommandBox;
+import seedu.toluist.ui.view.HelpListView;
 import seedu.toluist.ui.view.ResultView;
 import seedu.toluist.ui.view.TabBarView;
 import seedu.toluist.ui.view.TaskListUiView;
@@ -62,12 +65,15 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane tabPanePlaceholder;
     @FXML
     private AnchorPane commandAutoCompletePlaceholder;
+    @FXML
+    private AnchorPane helpPlaceholder;
 
     private CommandBox commandBox;
     private TaskListUiView taskListUiView;
     private ResultView resultView;
     private TabBarView tabBarView;
     private CommandAutoCompleteView commandAutoCompleteView;
+    private HelpListView helpListView;
 
 
     public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
@@ -97,6 +103,7 @@ public class MainWindow extends UiPart<Region> {
         resultView.render();
         tabBarView.render();
         commandAutoCompleteView.render();
+        helpListView.render();
     }
 
     private void configureKeyCombinations() {
@@ -104,6 +111,7 @@ public class MainWindow extends UiPart<Region> {
         configureUndoKeyCombination();
         configureRedoKeyCombination();
         configureHistoryNavigationKeyPresses();
+        configureExitHelpKeyPress();
     }
 
     void hide() {
@@ -156,6 +164,16 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    /**
+     * Configure ESC for exitting help
+     */
+    private void configureExitHelpKeyPress() {
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            UiStore store = UiStore.getInstance();
+            store.setHelp(null, new ArrayList<>());
+        });
+    }
+
     //@@author A0131125Y
     /**
      * Get matching key code for a string
@@ -193,6 +211,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getCommandAutoCompletePlaceholder() {
         return commandAutoCompletePlaceholder;
+    }
+
+    private AnchorPane getHelpPlaceholder() {
+        return helpPlaceholder;
     }
 
     private void setWindowMinSize() {
@@ -248,6 +270,10 @@ public class MainWindow extends UiPart<Region> {
 
         commandAutoCompleteView = new CommandAutoCompleteView();
         commandAutoCompleteView.setParent(getCommandAutoCompletePlaceholder());
+
+        FxViewUtil.makeFullWidth(helpPlaceholder);
+        helpListView = new HelpListView();
+        helpListView.setParent(helpPlaceholder);
     }
 
     void show() {

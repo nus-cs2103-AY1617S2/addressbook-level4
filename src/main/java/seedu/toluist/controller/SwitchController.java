@@ -27,6 +27,21 @@ public class SwitchController extends Controller {
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*switch(\\s+(?<tab>\\S+))?\\s*";
     private SwitchConfig switchConfig = SwitchConfig.getDefaultSwitchConfig();
 
+    //@@author A0162011A
+    private static final String HELP_DETAILS = "Changes the displayed task list.";
+    private static final String HELP_FORMAT = "switch WINDOWIDENTIFIER";
+    private static final String[] HELP_COMMENTS = { "`WindowIdentifier` corresponds to the underlined letter "
+                                                        + "at the top of the program.",
+                                                    "Allowed values are `I`, `T`, `N`, `C`, `A`.",
+                                                    "Alternatively, you can call them by their order: "
+                                                        + "+`1`, `2`, `3`, `4`, `5`",
+                                                    "Alternatively, you can use the shortcut command "
+                                                        + "+`ctrl + (`I`/`T`/`N`/`C`/`A`)." };
+    private static final String[] HELP_EXAMPLES = { "`switch 1`\nSwitches the screen to the `Incomplete` window.",
+                                                    "`switch T`\nSwitches the screen to the `Today` window.",
+                                                    "`ctrl + N`\nSwitches the screen to the `Next 7 Days` window." };
+
+    //@@author A0131125Y
     public void execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
         String keyword = tokens.get(PARAMETER_TAB);
@@ -70,7 +85,16 @@ public class SwitchController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

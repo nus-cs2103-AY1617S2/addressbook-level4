@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
+import javafx.util.Pair;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.commons.CommandInput;
@@ -35,6 +36,8 @@ public class UiStore {
     private ObjectProperty<TaskSwitchPredicate> observableSwitchPredicate =
             new SimpleObjectProperty<>(TaskSwitchPredicate.SWITCH_PREDICATE_INCOMPLETE);
     private ObservableList<Task> observableTasks = FXCollections.observableArrayList();
+    private ObjectProperty<Pair<String, List<String>>> observableHelp =
+            new SimpleObjectProperty<>(new Pair(null, new ArrayList()));
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));
     private ObjectProperty<CommandInput> observableCommandInput =
@@ -187,5 +190,19 @@ public class UiStore {
      */
     public int getTaskIndex(Task task) {
         return getShownTasks().indexOf(task);
+    }
+
+    //@@author A0162011A
+    public ObservableValue<Pair<String, List<String>>> getObservableHelp() {
+        return observableHelp;
+    }
+
+    /**
+     * method to setHelp
+     * @param heading general or help or specific command
+     * @param helpList details to replace current help
+     */
+    public void setHelp(String heading, List<String> helpList) {
+        observableHelp.setValue(new Pair(heading, helpList));
     }
 }

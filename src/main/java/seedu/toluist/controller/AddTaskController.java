@@ -37,6 +37,29 @@ public class AddTaskController extends Controller {
     private static final String RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE =
             "An event must have both a start date (from/) and an end date (to/).";
 
+    //@@author A0162011A
+    private static final String HELP_DETAILS = "Adds a task to the todo list.";
+    private static final String HELP_FORMAT = "add NAME [from/STARTDATE to/ENDDATE] "
+                                                  + "[by/ENDDATE] [repeat/PERIOD(daily/weekly/monthly)] "
+                                                  + "[priority/PRIORITY(high/low)] [tags/TAGS]";
+    private static final String[] HELP_COMMENTS = { "Related commands: `delete`, `update`",
+                                                    "Only fields entered will be used.",
+                                                    "Events can be created by entering a value for `by/`",
+                                                    "Deadlines can be created by "
+                                                        + "entering a value for `from/` and `to/`" };
+    private static final String[] HELP_EXAMPLES = { "`add new floating task`\nAdds a new floating task.",
+                                                    "`add new deadline by/friday`\n"
+                                                        + "Adds a new deadline, with deadline friday.",
+                                                    "`add new event from/tuesday to/thursday`\nAdds a new event, "
+                                                        + "with start date tuesday and end date thursday.",
+                                                    "`add new recurring task by/10pm repeat/daily`\n"
+                                                        + "Adds a new recurring task, with deadline 10pm.",
+                                                    "`add new tagged task tags/newtag`\n"
+                                                        + "Adds a new task, with the tag `newtag`.",
+                                                    "`add new priority task priority/high`\n"
+                                                        + "Adds a new task, with high priority." };
+
+    //@@author A0127545A
     public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
@@ -147,7 +170,16 @@ public class AddTaskController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_ADD_TASK };
+    }
+
+    //@@author A0162011A
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

@@ -20,7 +20,7 @@ public class SwitchControllerTest extends ControllerTest {
     @Test
     public void getCommandWord() {
         assertEquals(Arrays.asList(SwitchController.COMMAND_WORD),
-                Arrays.asList(SwitchController.getCommandWords()));
+                Arrays.asList(new SwitchController().getCommandWords()));
     }
 
     @Test

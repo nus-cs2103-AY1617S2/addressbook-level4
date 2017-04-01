@@ -7,18 +7,19 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox  maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="8.0" stylesheets="@../stylesheet/DefaultTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="8.0" stylesheets="@../stylesheet/DefaultTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
        <StackPane alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
          <children>
             <VBox>
                <children>
                   <AnchorPane fx:id="tabPanePlaceholder" prefWidth="200.0" />
-                  <AnchorPane fx:id="taskListPlaceholder" VBox.vgrow="ALWAYS"/>
-                  <AnchorPane fx:id="resultDisplayPlaceholder" VBox.vgrow="NEVER"/>
+                  <AnchorPane fx:id="taskListPlaceholder" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="resultDisplayPlaceholder" VBox.vgrow="NEVER" />
                </children>
             </VBox>
-            <AnchorPane fx:id="commandAutoCompletePlaceholder" maxHeight="-Infinity"/>
+            <AnchorPane fx:id="commandAutoCompletePlaceholder" maxHeight="-Infinity" />
+            <AnchorPane fx:id="helpPlaceholder" prefHeight="200.0" prefWidth="200.0" styleClass="help-container" />
          </children>
       </StackPane>
       <AnchorPane fx:id="commandBoxPlaceholder" styleClass="command-input-placeholder" VBox.vgrow="NEVER">

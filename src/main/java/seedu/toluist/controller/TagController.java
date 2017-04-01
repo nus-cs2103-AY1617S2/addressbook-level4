@@ -33,6 +33,16 @@ public class TagController extends Controller {
     private static final String MESSAGE_TEMPLATE_FAIL = "Failed to add \"%s\".\n";
     private static final String MESSAGE_TEMPLATE_RESULT = "%s%s successfully added.";
 
+    private static final String HELP_DETAILS = "Adds a tag(s) to an existing task.";
+    private static final String HELP_FORMAT = "tag INDEX TAG(S)";
+    private static final String[] HELP_COMMENTS = { "Related commands: `untag`",
+                                                    "All tags are one word long.",
+                                                    "Each word entered after the index will be its own tag.", };
+    private static final String[] HELP_EXAMPLES = { "`tag 1 schoolwork`\n"
+                                                        + "Adds the tag `schoolwork` to the task at index 1.",
+                                                    "`tag 1 housework groceries`\nAdds the tags "
+                                                        + "`housework` and `groceries` to the task at index 1." };
+
     private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
     public void execute(String command) {
@@ -99,7 +109,15 @@ public class TagController extends Controller {
         return trimmedAndLowercasedCommand.startsWith(COMMAND_TAG_WORD.toLowerCase());
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_TAG_WORD };
+    }
+
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

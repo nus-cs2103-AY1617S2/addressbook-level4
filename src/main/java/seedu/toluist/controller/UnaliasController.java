@@ -21,6 +21,13 @@ public class UnaliasController extends Controller {
 
     private static final String PARAMETER_ALIAS = "alias";
 
+    //@@author A0162011A
+    private static final String HELP_DETAILS = "Removes an alias for a command.";
+    private static final String HELP_FORMAT = "unalias ALIAS";
+    private static final String[] HELP_COMMENTS = { "Related commands: `alias`, `viewalias`" };
+    private static final String[] HELP_EXAMPLES = { "`unalias abc`\nRemoves the alias `abc` from the program." };
+
+  //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public void execute(String command) {
@@ -52,7 +59,16 @@ public class UnaliasController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

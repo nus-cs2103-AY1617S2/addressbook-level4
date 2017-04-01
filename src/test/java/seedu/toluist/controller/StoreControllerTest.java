@@ -21,7 +21,7 @@ public class StoreControllerTest extends ControllerTest {
     @Test
     public void getCommandWord() {
         assertEquals(Arrays.asList(StoreController.COMMAND_WORD),
-                Arrays.asList(StoreController.getCommandWords()));
+                Arrays.asList(new StoreController().getCommandWords()));
     }
 
     @Test

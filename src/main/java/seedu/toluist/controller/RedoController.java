@@ -21,6 +21,20 @@ public class RedoController extends Controller {
     private static final String PARAMETER_REDO_TIMES = "number";
     private static final String RESULT_MESSAGE_TEMPLATE = "Your last undone %s %s re-applied.";
 
+    //@@author A0162011A
+    private static final String HELP_DETAILS = "Redo previously undone commands by the user.";
+    private static final String HELP_FORMAT = "redo [NUMBER]";
+    private static final String[] HELP_COMMENTS = { "Related commands: `undo`",
+                                                    "Redo commands which were undone by the `undo` command.",
+                                                    "If a number is entered, will redo that amount of `undo` commands.",
+                                                    "Commands which can be undone: `add`, `update`, `delete`, "
+                                                        + "`clear`, `tag`, `untag`, `mark`",
+                                                    "Warning: After undo, once a new command "
+                                                        + "which can be undone is entered, redo cannot be used." };
+    private static final String[] HELP_EXAMPLES = { "`redo`\nRedo the latest undo command.",
+                                                    "`redo 5`\nRedo the latest 5 undo commands." };
+
+    //@@author A0131125Y
     private static final Logger logger = LogsCenter.getLogger(RedoController.class);
 
     public void execute(String command) {
@@ -55,7 +69,16 @@ public class RedoController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }

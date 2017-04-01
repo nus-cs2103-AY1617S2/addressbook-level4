@@ -25,6 +25,25 @@ public class StoreController extends Controller {
 
     public static final String RESULT_MESSAGE_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
 
+    //@@author A0162011A
+    private static final String HELP_DETAILS = "Changes the location for the storage file used in this system.";
+    private static final String HELP_FORMAT = "save NEWFILELOCATION";
+    private static final String[] HELP_COMMENTS = { "Related commands: `load`",
+                                                    "All data will be moved to the new file location.",
+                                                    "If the file does not exist, the file will be created.",
+                                                    "The old file will be removed.",
+                                                    "The file location entered is relative "
+                                                        + "to the location of the program.",
+                                                    "Warning: If a file with the requested name already exists, "
+                                                        + "it will be overwritten." };
+    private static final String[] HELP_EXAMPLES = { "`save newfile.json`\nSaves ToLuist data to `newfile.json`.",
+                                                    "`save newfolder/newfile.json`\nSaves ToLuist data "
+                                                        + "to `newfile.json` in the folder `newfolder`.",
+                                                    "`save ../newfile.json`\nSaves ToLuist data "
+                                                        + "to `newfile.json` in the parent folder" };
+
+
+    //@@author A0131125Y
     public void execute(String command) {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
@@ -69,7 +88,16 @@ public class StoreController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public static String[] getCommandWords() {
+    public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    //@@author A0162011A
+    public String[] getBasicHelp() {
+        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+    }
+
+    public String[][] getDetailedHelp() {
+        return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 }
