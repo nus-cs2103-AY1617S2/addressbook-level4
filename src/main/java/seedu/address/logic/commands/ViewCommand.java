@@ -47,10 +47,12 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute() {
         switch(typeOfList) {
+        case TYPE_ALL:
+            model.updateFilteredListToShowAll();
+            return new CommandResult(MESSAGE_SUCCESS_VIEW_ALL_TASKS);
         case TYPE_OVERDUE:
             model.updateFilteredListToShowOverdue();
             return new CommandResult(MESSAGE_SUCCESS_VIEW_OVERDUE_TASKS);
-
         default:
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS_VIEW_ALL_TASKS);

@@ -105,6 +105,10 @@ public class TaskTabPanel extends UiPart<Region> {
 
     public void switchTabOnCommand(String typeOfList) {
         switch(typeOfList) {
+        case ViewCommand.TYPE_ALL :
+            getTaskTabPane().getSelectionModel().select(allTasksTab);
+            fillTaskListPanel(allTasksListPanelPlaceholder);
+            break;
         case ViewCommand.TYPE_DONE :
             getTaskTabPane().getSelectionModel().select(doneTasksTab);
             fillTaskListPanel(doneTasksListPanelPlaceholder);
