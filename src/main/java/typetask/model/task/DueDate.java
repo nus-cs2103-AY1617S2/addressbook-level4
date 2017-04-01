@@ -8,8 +8,7 @@ import typetask.commons.exceptions.IllegalValueException;
  */
 //@@author A0139926R
 public class DueDate {
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Task's date should be in this format DD/MM/YYYY";
-    public static final String DATE_VALIDATION_REGEX = "(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Examples of task's dates: by tmr , today, next week 5pm";
     public final String value;
 
     /**
@@ -20,22 +19,7 @@ public class DueDate {
     public DueDate(String date) throws IllegalValueException {
         assert date != null;
         String trimmedDate = date.trim();
- //       if (!isValidDate(trimmedDate)) {
- //           throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
-//        }
         this.value = trimmedDate;
-    }
-
-    /**
-     * Returns true if a given string is a valid task date.
-     */
-    public static boolean isValidDate(String test) {
-        if (test.equals("")) {
-            return true;
-        } else {
-            return test.matches(DATE_VALIDATION_REGEX);
-        }
-
     }
 
     @Override
