@@ -23,7 +23,17 @@
    <children>
       <TabPane fx:id="dWMView" prefHeight="435.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab fx:id="dayView" text="\$dayView">
+            <Tab text="Done Task">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Browser">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+          <Tab fx:id="dayView" text="Day">
                <content>
                   <AnchorPane prefHeight="300.0" prefWidth="600.0">
                      <children>
@@ -55,7 +65,7 @@
                   </AnchorPane>
                </content>
           </Tab>
-          <Tab fx:id="weekView" text="\$weekView">
+          <Tab fx:id="weekView" text="Week">
             <content>
               <AnchorPane prefHeight="300.0" prefWidth="600.0">
                      <children>
@@ -70,28 +80,82 @@
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
+                              <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="50.0" minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                              <Label fx:id="wSun" prefHeight="396.0" prefWidth="600.0" text="\$sunday">
+                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                              <Label fx:id="wSun" alignment="CENTER" prefHeight="396.0" prefWidth="600.0" text="\$sunday" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="Segoe UI" size="15.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="wMon" prefHeight="396.0" prefWidth="600.0" text="\$monday" GridPane.columnIndex="1" />
-                              <Label fx:id="wTue" prefHeight="396.0" prefWidth="600.0" text="\$tuesday" GridPane.columnIndex="2" />
-                              <Label fx:id="wWed" prefHeight="396.0" prefWidth="600.0" text="\$wednesday" GridPane.columnIndex="3" />
-                              <Label fx:id="wThu" prefHeight="396.0" prefWidth="600.0" text="\$thursday" GridPane.columnIndex="4" />
-                              <Label fx:id="wFri" prefHeight="396.0" prefWidth="600.0" text="\$friday" GridPane.columnIndex="5" />
-                              <Label fx:id="wSat" prefHeight="396.0" prefWidth="600.0" text="\$saturday" GridPane.columnIndex="6" />
+                              <Label fx:id="wMon" alignment="CENTER" prefHeight="396.0" prefWidth="600.0" text="\$monday" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="wTue" alignment="CENTER" prefHeight="396.0" prefWidth="600.0" text="\$tuesday" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="wWed" alignment="CENTER" prefHeight="396.0" prefWidth="600.0" text="\$wednesday" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="wThu" alignment="CENTER" prefHeight="396.0" prefWidth="600.0" text="\$thursday" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="wFri" alignment="CENTER" prefHeight="396.0" prefWidth="600.0" text="\$friday" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="wSat" alignment="CENTER" prefHeight="396.0" prefWidth="600.0" text="\$saturday" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="weekSun" alignment="CENTER" contentDisplay="CENTER" prefHeight="406.0" prefWidth="600.0" text="\$day">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="weekMon" alignment="CENTER" prefHeight="406.0" prefWidth="600.0" text="\$day" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="weekSat" alignment="CENTER" prefHeight="406.0" prefWidth="600.0" text="\$day" GridPane.columnIndex="6">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="weekFri" alignment="CENTER" prefHeight="406.0" prefWidth="600.0" text="\$day" GridPane.columnIndex="5">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="weekThu" alignment="CENTER" prefHeight="406.0" prefWidth="600.0" text="\$day" GridPane.columnIndex="4">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="weekWed" alignment="CENTER" prefHeight="406.0" prefWidth="600.0" text="\$day" GridPane.columnIndex="3">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="weekTue" alignment="CENTER" prefHeight="406.0" prefWidth="600.0" text="\$day" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font name="Segoe UI" size="15.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </GridPane>
                         <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: whitesmoke;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
@@ -105,7 +169,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="monthView" text="\$monthView">
+            <Tab fx:id="monthView" text="Month">
                <content>
                   <AnchorPane prefHeight="300.0" prefWidth="600.0">
                      <children>
@@ -134,7 +198,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="yearView" text="\$yearView">
+            <Tab fx:id="yearView" text="Year">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: whitesmoke;">
                      <children>

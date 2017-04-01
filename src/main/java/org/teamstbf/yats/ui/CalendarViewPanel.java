@@ -35,6 +35,10 @@ public class CalendarViewPanel extends UiPart<Region> {
 	@FXML
 	private TabPane dWMView;
 	@FXML
+	private Tab doneTask;
+	@FXML
+	private Tab browser;
+	@FXML
 	private Tab dayView;
 	@FXML
 	private Tab weekView;
@@ -68,6 +72,20 @@ public class CalendarViewPanel extends UiPart<Region> {
 	private Label currentMonth;
 	@FXML
 	private Label currentYear;
+	@FXML
+	private Label weekSun;
+	@FXML
+	private Label weekMon;
+	@FXML
+	private Label weekTue;
+	@FXML
+	private Label weekWed;
+	@FXML
+	private Label weekThu;
+	@FXML
+	private Label weekFri;
+	@FXML
+	private Label weekSat;
 	@FXML
 	private ListView<String> timeSlots;
 
@@ -126,6 +144,8 @@ public class CalendarViewPanel extends UiPart<Region> {
 
 	private void initializeWeekView() {
 		currentWeekMonth.setText(today.format(dateFormatter("MMM")));
+		String dayValue = LocalDate.now().getDayOfWeek().toString();
+		weekSun.setText(dayValue);
 	}
 
 	private void initializeMonthView() {
