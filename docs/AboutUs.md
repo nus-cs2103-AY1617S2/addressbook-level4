@@ -26,8 +26,13 @@ Role: Team lead <br>
 Role: Developer <br>
 - Components in charge of:[UI](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#ui-component)
 - Aspects/tools in charge of: Code quality, Git expert and deadlines, JavaFX
-- Features implemented: Done/Undone Command, ListDone/ListUndone Command
-- Other major contributions: Implementation of UI.
+- Features implemented:
+	- Done/Undone Command
+	- ListDone/ListUndone Command
+- Code written:[[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0139975J.md)]
+- Other major contributions:
+	- Implementation of UI
+	- Ensure Travis passes for each milestone
 
 -----
 
@@ -36,8 +41,13 @@ Role: Developer <br>
 Role: Developer <br>
 - Components in charge of: [Logic](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#logic-component)
 - Aspects/tools in charge of: Documentation, Eclipse expert, Markdown
-- Features implemented: ChangeTheme Command, power search
-- Other major contributions: Implementation of CommandLibrary, and oversee other implementations of components in Logic.
+- Features implemented:
+	- ChangeTheme Command
+	- Power search
+- Code written:[[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142487Y.md)]
+- Other major contributions:
+	- Implementation of CommandLibrary
+	- Oversee other implementations of components in Logic
 
 -----
 
@@ -46,7 +56,16 @@ Role: Developer <br>
 Role: Developer <br>
 - Components in charge of:  [Storage](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#storage-component)
 - Aspects/tools in charge of: Testing, Scheduling and tracking
-- Features implemented: Save/Load Command, Help/HelpFormat Windows, ColourCoded Tags, Shortcuts
-- Other major contributions: UI changes, Storage component, Documentation
+- Features implemented:
+	- Save/Load Command
+	- Help/HelpFormat
+	- Windows ColourCoded Tags
+	- Shortcuts
+- Code written:[[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142939W.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0142939W.md)]
+- Other major contributions: 
+	- UI changes
+	- Storage component
+	- Documentation
+	- Prepare sample data for demo
 
 -----
