@@ -18,7 +18,7 @@ public class StartTimePredicate implements Predicate<ReadOnlyTask> {
     public boolean test(ReadOnlyTask task) {
         if (task.hasStartTime()) {
             return this.startTimeKeyWords.stream()
-                    .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTime().value, keyword));
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTime().value, keyword));
         } else {
             return false;
         }

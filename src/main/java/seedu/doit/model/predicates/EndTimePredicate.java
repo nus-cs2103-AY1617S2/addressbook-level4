@@ -18,7 +18,7 @@ public class EndTimePredicate implements Predicate<ReadOnlyTask> {
     public boolean test(ReadOnlyTask task) {
         if (task.hasEndTime()) {
             return this.endTimeKeyWords.stream()
-                    .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDeadline().value, keyword));
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDeadline().value, keyword));
         } else {
             return false;
         }
