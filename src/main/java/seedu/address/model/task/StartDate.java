@@ -14,7 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 //@@author A0164032U
 public class StartDate {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Person start date's format should resemble a date";
+    public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Person start date's format should resemble a date";
 
     public final String value;
 

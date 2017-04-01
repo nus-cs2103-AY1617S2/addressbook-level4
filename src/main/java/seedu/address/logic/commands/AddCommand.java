@@ -72,6 +72,7 @@ public class AddCommand extends Command {
                 new Group(group),
                 new UniqueTagList(tagSet));
     }
+    
     //@@author A0164032U
     public AddCommand(String name, String date, String sdate, String email, String group, Set<String> tags)
             throws IllegalValueException {

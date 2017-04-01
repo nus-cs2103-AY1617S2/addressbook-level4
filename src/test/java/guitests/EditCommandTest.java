@@ -13,6 +13,7 @@ import seedu.address.model.task.Date;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.StartDate;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 
@@ -29,7 +30,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         //@@author A0164889E
         String detailsToEdit = "Bobby d/12.04 e/bobby@gmail.com g/project t/undone";
         //@@author A0164889E
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withDate("12.04")
+        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withDate("12.04").withStartDate("01.01")
                 .withEmail("bobby@gmail.com").withGroup("project").withTags("undone").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
@@ -88,12 +89,15 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
-
+    //@@author A0164032U
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
+        commandBox.runCommand("edit 1 s/1234");
+        assertResultMessage(StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
+        
         commandBox.runCommand("edit 1 d/1234");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
@@ -110,7 +114,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_duplicatePerson_failure() {
         //@@author A0164889E
-        commandBox.runCommand("edit 3 Alice Paul d/12.12 e/a@gml.com "
+        commandBox.runCommand("edit 3 Alice Paul s/01.01 d/12.12 e/a@gml.com "
                                 + "g/group1 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }

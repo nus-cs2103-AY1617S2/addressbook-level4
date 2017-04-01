@@ -8,6 +8,7 @@ import seedu.address.model.task.Date;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.StartDate;
 
 /**
  *
@@ -49,6 +50,12 @@ public class PersonBuilder {
     //@@author A0164889E
     public PersonBuilder withDate(String date) throws IllegalValueException {
         this.person.setDate(new Date(date));
+        return this;
+    }
+    
+    //@@author A0164032U
+    public PersonBuilder withStartDate(String sdate) throws IllegalValueException {
+        this.person.setStartDate(new StartDate(sdate));
         return this;
     }
 
