@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -231,8 +232,8 @@ public class MainWindow extends UiPart<Region> {
         this.calendarPanel.refresh(eventList, taskList);
     }
 
-//    public void updateCalendarView(LocalDateTime displayedDateTime, CalendarLayout calendarViewMode) {
-//        this.calendarPanel.updateCalendarShownPeriod(displayedDateTime);
-//    }
+    public void changeCalendarView(LocalDateTime nextDateTime) {
+        this.calendarPanel.updateCalendarShownPeriod(nextDateTime);
+    }
 
 }

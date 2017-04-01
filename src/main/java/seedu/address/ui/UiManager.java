@@ -20,6 +20,7 @@ import seedu.address.commons.events.ui.JumpToCalendarTaskEvent;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.UpdateCalendarEvent;
 import seedu.address.commons.exceptions.CalendarUnsyncException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
@@ -164,6 +165,13 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleEventListUpdatedEvent(WhatsLeftChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.updateCalendar(event.data.getEventList(), event.data.getTaskList());
+    }
+    
+    // @@author A0124377A
+    @Subscribe
+    private void handleUpdateCalendarEvent(UpdateCalendarEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.changeCalendarView(event.getNextDateTime());
     }
 
 }

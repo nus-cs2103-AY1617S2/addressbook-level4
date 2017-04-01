@@ -7,6 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CalendarRefreshCommand;
+import seedu.address.logic.commands.CalendarViewCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -82,6 +84,9 @@ public class Parser {
 
         case ReadCommand.COMMAND_WORD:
             return new ReadCommandParser().parse(arguments);
+            
+        case CalendarViewCommand.COMMAND_WORD:
+            return new CalendarViewCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -94,6 +99,9 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+            
+        case CalendarRefreshCommand.COMMAND_WORD:
+            return new CalendarRefreshCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
