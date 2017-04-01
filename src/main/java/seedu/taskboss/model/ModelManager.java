@@ -117,7 +117,6 @@ public class ModelManager extends ComponentManager implements Model {
         for (ReadOnlyTask target: targets) {
             taskBoss.removeTask(target);
         }
-        taskbossUndoHistory.clear();
         indicateTaskBossChanged();
     }
 
@@ -127,7 +126,6 @@ public class ModelManager extends ComponentManager implements Model {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.addTask(task);
         taskBoss.sortTasks(currentSortType);
-        taskbossUndoHistory.clear();
         updateFilteredListToShowAll();
         indicateTaskBossChanged();
     }
