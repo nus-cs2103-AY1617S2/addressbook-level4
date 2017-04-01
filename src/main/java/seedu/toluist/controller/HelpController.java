@@ -4,9 +4,7 @@ package seedu.toluist.controller;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -20,8 +18,8 @@ public class HelpController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(HelpController.class);
     private static final String MESSAGE_ERROR = "Sorry, that command does not exist.\n"
                                                     + "Please type help for available commands.";
-    private static final String MESSAGE_RESULT_GENERAL = "Displaying general help.";
-    private static final String MESSAGE_RESULT_SPECIFIC = "Displaying detailed help for %s.";
+    private static final String HEADING_GENERAL = "Displaying general help. Press any keys to exit.";
+    private static final String HEADING_SPECIFIC = "Displaying detailed help for %s. Press any keys to exit.";
     private static final String COMMAND_WORD = "help";
     private static final String COMMAND_REGEX = "(?iu)^\\s*help.*";
 
@@ -62,10 +60,8 @@ public class HelpController extends Controller {
         String commandWord = tokens.get(PARAMETER_COMMAND);
         if (commandWord.equals("")) {
             showGeneralHelp();
-            uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT_GENERAL));
-        } else if (getCommandControllerKeywords().contains(commandWord.toLowerCase())) {
+        } else if (controllerLibrary.getCommandControllerKeywords().contains(commandWord.toLowerCase())) {
             showSpecificHelp(commandWord);
-            uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_SPECIFIC, commandWord)));
         } else {
             uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR));
         }
@@ -76,7 +72,8 @@ public class HelpController extends Controller {
                 Arrays.asList(getControllerFromKeyword(commandWord).getDetailedHelp()).stream()
                 .map(help -> Arrays.asList(help))
                 .collect(Collectors.toList());
-        uiStore.setHelp(Arrays.asList(convertListListToStringForDetailed(detailedHelp)));
+        uiStore.setHelp(String.format(HEADING_SPECIFIC, commandWord),
+                Arrays.asList(convertListListToStringForDetailed(detailedHelp)));
     }
 
     private Controller getControllerFromKeyword(String commandWord) {
@@ -91,9 +88,8 @@ public class HelpController extends Controller {
     }
 
     private void showGeneralHelp() {
-        List<List<String>> generalHelp = controllerLibrary.getControllerBasicHelps(
-                controllerLibrary.getCommandControllers());
-        uiStore.setHelp(convertListListToListStringForGeneral(generalHelp));
+        List<List<String>> generalHelp = controllerLibrary.getCommandControllerBasicHelps();
+        uiStore.setHelp(HEADING_GENERAL, convertListListToListStringForGeneral(generalHelp));
     }
 
     private List<String> convertListListToListStringForGeneral(List<List<String>> generalHelp) {
@@ -105,7 +101,6 @@ public class HelpController extends Controller {
             finalResult += String.join(FORMAT_SPACING, help.get(INDEX_HELP_FORMAT));
             finalResult += STRING_DESCRIPTION;
             finalResult += String.join(FORMAT_SPACING, help.get(INDEX_HELP_DESCRIPTION));
-            finalResult += FORMAT_LARGESPACING;
             return finalResult;
         }).collect(Collectors.toList());
     }
@@ -138,14 +133,6 @@ public class HelpController extends Controller {
 
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_REGEX);
-    }
-
-    private Set<String> getCommandControllerKeywords() {
-        List<String> keywordList = controllerLibrary.getCommandControllers().stream()
-                .map(controller -> Arrays.asList(controller.getCommandWords()))
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
-        return new HashSet<>(keywordList);
     }
 
     public String[] getCommandWords() {

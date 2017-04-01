@@ -32,7 +32,7 @@ public class CommandDispatcher extends Dispatcher {
     //@@author A0131125Y
     public CommandDispatcher() {
         super();
-        aliasConfig.setReservedKeywords(getAllControllerKeywords());
+        aliasConfig.setReservedKeywords(controllerLibrary.getCommandControllerKeywords());
         commandHistory = new CommandHistoryList();
     }
 
@@ -74,7 +74,7 @@ public class CommandDispatcher extends Dispatcher {
             }
         }
 
-        for (String commandWord : getAllControllerKeywords()) {
+        for (String commandWord : controllerLibrary.getCommandControllerKeywords()) {
             if (StringUtil.startsWithIgnoreCase(commandWord, firstWordOfCommand)) {
                 predictedCommands.add(
                         command.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord).trim());
@@ -83,10 +83,6 @@ public class CommandDispatcher extends Dispatcher {
 
         logger.info("Predicted commands: " + predictedCommands.toString());
         return predictedCommands;
-    }
-
-    private Set<String> getAllControllerKeywords() {
-        return controllerLibrary.getControllerKeywords(controllerLibrary.getAllControllers());
     }
 
     private String getDealiasedCommand(String command) {

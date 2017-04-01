@@ -8,8 +8,11 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.util.Pair;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.ui.UiStore;
+
+import java.util.List;
 
 /**
  * Created by louis on 1/4/17.
@@ -41,10 +44,12 @@ public class HelpListView extends UiView {
 
     protected void viewDidMount() {
         UiStore store = UiStore.getInstance();
-        ObservableList<String> helpList = FXCollections.observableArrayList();
-        helpList.addAll(store.getObservableHelp());
-        helpListView.setItems(helpList);
-        getParent().setVisible(!helpList.isEmpty());
+        Pair<String, List<String>> help = store.getObservableHelp().getValue();
+        String heading = help.getKey();
+        List<String> helpList = help.getValue();
+        helpListView.setItems(FXCollections.observableArrayList(helpList));
+        headerLabel.setText(heading);
+        getParent().setVisible(helpList != null && !helpList.isEmpty());
     }
 
     class HelpListCell extends ListCell<String> {

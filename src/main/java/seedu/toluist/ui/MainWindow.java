@@ -168,7 +168,10 @@ public class MainWindow extends UiPart<Region> {
      * Configure ESC for exitting help
      */
     private void configureExitHelpKeyPress() {
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> UiStore.getInstance().setHelp(new ArrayList()));
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            UiStore store = UiStore.getInstance();
+            store.setHelp(null, new ArrayList<>());
+        });
     }
 
     //@@author A0131125Y

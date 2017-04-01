@@ -61,12 +61,11 @@ public class ControllerLibrary {
     }
 
     /**
-     * Returns set of keywords for specific controllers collection
-     * @param controllers a collection of controllers
+     * Returns set of keywords for all command controllers
      * @return set of controller keywords
      */
-    public Set<String> getControllerKeywords(Collection<Controller> controllers) {
-        List<String> keywordList = controllers.stream()
+    public Set<String> getCommandControllerKeywords() {
+        List<String> keywordList = getCommandControllers().stream()
                 .map(controller -> Arrays.asList(controller.getCommandWords()))
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
@@ -75,12 +74,11 @@ public class ControllerLibrary {
 
     //@@author A0162011A
     /**
-     * Returns list of list basic help strings for specific controllers collection
-     * @param controllers a collection of controllers
+     * Returns list of list basic help strings for all command controllers
      * @return list of list of help strings
      */
-    public List<List<String>> getControllerBasicHelps(Collection<Controller> controllers) {
-        return controllers.stream()
+    public List<List<String>> getCommandControllerBasicHelps() {
+        return getCommandControllers().stream()
                 .map(controller -> Arrays.asList(controller.getBasicHelp()))
                 .collect(Collectors.toList());
     }
