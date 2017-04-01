@@ -56,7 +56,7 @@ public class MenuBarPanel extends UiPart<Region> {
 
     private void addToPlaceHolder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
-        //placeHolderPane.getChildren().add(panel);
+        placeHolderPane.getChildren().add(panel);
     }
     
     public String getNavigationCommand(String menuItem) {
