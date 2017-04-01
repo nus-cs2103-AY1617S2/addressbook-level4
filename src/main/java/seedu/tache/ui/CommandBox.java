@@ -28,7 +28,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     //@@author A0142255M
     private static ArrayList<String> userInputs = new ArrayList<String>();
-    private static int currentUserInputIndex = -1;
+    private static int currentUserInputIndex = userInputs.size();
     //@@author
 
     private final Logic logic;
@@ -57,7 +57,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             String userInput = commandTextField.getText();
             userInputs.add(userInput);
-            currentUserInputIndex = userInputs.size() - 1;
+            currentUserInputIndex = userInputs.size();
             CommandResult commandResult = logic.execute(userInput);
 
             // process result of the command
@@ -85,7 +85,7 @@ public class CommandBox extends UiPart<Region> {
             ArrayList<String> commands = new ArrayList<String>();
             for (String str : possibleCommands) {
                 String userInput = sr.getUserText();
-                if (!userInput.equals("") && str.startsWith(userInput)) {
+                if ((!userInput.equals("") && str.startsWith(userInput) && !userInput.equals(str))) {
                     commands.add(str);
                 }
             }
@@ -101,13 +101,13 @@ public class CommandBox extends UiPart<Region> {
             public void handle(KeyEvent event) {
                 String userInput;
                 if (event.getCode() == KeyCode.UP && currentUserInputIndex >= 0) {
-                    userInput = userInputs.get(currentUserInputIndex);
                     currentUserInputIndex--;
+                    userInput = userInputs.get(currentUserInputIndex);
                     setTextAndCaret(userInput);
                 }
                 if (event.getCode() == KeyCode.DOWN && currentUserInputIndex < userInputs.size() - 1) {
-                    userInput = userInputs.get(currentUserInputIndex + 1);
                     currentUserInputIndex++;
+                    userInput = userInputs.get(currentUserInputIndex);
                     setTextAndCaret(userInput);
                 }
             }
