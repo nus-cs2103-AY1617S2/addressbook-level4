@@ -56,6 +56,18 @@ function remove_all() {
     });
 }
 
+function change_view(view) {
+    var newView;
+    if (view === "day") {
+        newView = 'agendaDay';
+    } else {
+        newView = 'agendaWeek';
+    }
+    $(document).ready(function() {
+        $('#calendar').fullCalendar( 'changeView', newView );
+    });
+}
+
 function change_reference_date(date) {
     $(document).ready(function() {
         $('#calendar').fullCalendar( 'gotoDate', date );
