@@ -15,12 +15,12 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
-                    .withPriority("")
+                    .withPriority("1")
                     .withStartDate("12/12/2016 11:22")
                     .withDueDate("14/03/2017 22:33")
                     .withTags("friends").build();
             benson = new TaskBuilder().withName("Benson Meier")
-                    .withPriority("1")
+                    .withPriority("")
                     .withStartDate("11/11/2015 14:33")
                     .withDueDate("12/02/2017 23:22")
                     .withTags("owesMoney", "friends").build();
