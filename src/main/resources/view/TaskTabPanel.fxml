@@ -7,7 +7,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane fx:id="taskTabPanel" tabClosingPolicy="UNAVAILABLE" tabMinWidth="73.0">
+      <TabPane fx:id="taskTabPane" tabClosingPolicy="UNAVAILABLE" tabMinWidth="73.0">
          <tabs>
             <Tab fx:id="allTasksTab" text="All">
                <content>

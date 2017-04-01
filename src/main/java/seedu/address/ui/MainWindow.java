@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -190,20 +191,32 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    //@author A0135998H
+    public TabPane getTaskTabPane() {
+        return taskTabPanel.getTaskTabPane();
+    }
+
+    //@author A0135998H
     public TaskListPanel getTaskListPanel() {
         return taskTabPanel.getTaskListPanel();
     }
 
-    public void loadTaskPage(ReadOnlyTask task) {
+    //@author A0135998H
+    public void switchTabOnCommand(String typeOfList) {
+        taskTabPanel.switchTabOnCommand(typeOfList);
+    }
+
+    //@author A0135998H
+    public void switchTabOnClick() {
+        taskTabPanel.switchTabOnClick();
+    }
+
+    void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
     }
 
     void releaseResources() {
         browserPanel.freeResources();
-    }
-
-    public void switchTabPanel(String typeOfList) {
-        taskTabPanel.switchTabPanel(typeOfList);
     }
 
 }
