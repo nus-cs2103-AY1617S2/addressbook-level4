@@ -89,4 +89,12 @@ public class SortCommandTest extends EzDoGuiTest {
         String expectedName = taskListPanel.getTask(7).getName().toString();
         assertTrue(expectedName.equals(td.carl.getName().toString()));
     }
+
+    //@@author A0139248X
+    @Test
+    public void sort_invalidOrder() {
+        commandBox.runCommand("sort p s");
+        assertResultMessage(String.format(SortCommand.MESSAGE_INVALID_ORDER, SortCommand.MESSAGE_USAGE))
+        ;
+    }
 }
