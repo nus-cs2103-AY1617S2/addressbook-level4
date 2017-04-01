@@ -24,7 +24,7 @@ public class RedoCommandTest extends TaskBossGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
         commandBox.runCommand("undo");
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertUndoCommandSuccess(false, expectedList);
+        assertRedoCommandSuccess(false, expectedList);
 
         //redo operation fails when apply delete operation after undo operation
         commandBox.runCommand("undo");
@@ -50,7 +50,7 @@ public class RedoCommandTest extends TaskBossGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
         commandBox.runCommand("undo");
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertUndoCommandSuccess(true, expectedList);
+        assertRedoCommandSuccess(true, expectedList);
 
         //redo operation fails when apply delete operation after undo operation
         commandBox.runCommand("u");
@@ -63,7 +63,7 @@ public class RedoCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertUndoCommandSuccess(boolean isShortCommand, TestTask[] expectedList) {
+    private void assertRedoCommandSuccess(boolean isShortCommand, TestTask[] expectedList) {
         if (isShortCommand) {
             commandBox.runCommand("r");
         } else {
