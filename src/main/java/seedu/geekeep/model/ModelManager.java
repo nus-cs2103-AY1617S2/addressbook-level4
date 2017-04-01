@@ -60,14 +60,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0121658E
-    public void syncWithStacks(ReadOnlyGeeKeep newGeeKeep) {
-        pastGeeKeeps.add(new GeeKeep(newGeeKeep));
+    public void updateGeekeepHistory(ReadOnlyGeeKeep originalGeekeep) {
+        pastGeeKeeps.add(new GeeKeep(originalGeekeep));
         futureGeeKeeps.clear();
     }
 
     @Override
     public void resetData(ReadOnlyGeeKeep newData) {
-        syncWithStacks(geeKeep);
+        updateGeekeepHistory(geeKeep);
         geeKeep.resetData(newData);
         indicateGeeKeepChanged();
     }
@@ -84,14 +84,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        syncWithStacks(geeKeep);
+        updateGeekeepHistory(geeKeep);
         geeKeep.removeTask(target);
         indicateGeeKeepChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        syncWithStacks(geeKeep);
+        updateGeekeepHistory(geeKeep);
         geeKeep.addTask(task);
         updateFilteredListToShowAll();
         indicateGeeKeepChanged();
@@ -102,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert updatedTask != null;
 
-        syncWithStacks(geeKeep);
+        updateGeekeepHistory(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.updateTask(taskListIndex, updatedTask);
 
