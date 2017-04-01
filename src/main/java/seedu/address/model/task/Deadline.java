@@ -124,6 +124,9 @@ public class Deadline {
      * Returns true if the object is From - To.
      */
     public boolean isFromTo() {
+        if (this.parsedDeadline.size() == 0) {
+            return false;
+        }
         return this.parsedDeadline.get(0).getDates().size() == 2;
     }
 
@@ -135,6 +138,13 @@ public class Deadline {
             return parsedDeadline.get(0).getDates().get(0);
         }
         return new Date();
+    }
+
+    /**
+     * Returns true if this deadline is past.
+     */
+    public boolean isOverdue() {
+        return (new Date()).after(toDeadline());
     }
 
     /**

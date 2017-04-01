@@ -2,6 +2,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
@@ -49,7 +50,6 @@ public class CompleteCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("complete " + targetIndexOneIndexed);
 
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-
     }
 
     /**
@@ -63,7 +63,6 @@ public class CompleteCommandTest extends AddressBookGuiTest {
 
         assertResultMessage(String.format(CompleteCommand.MESSAGE_MARK_COMPLETE_TASK_SUCCESS, editedTask));
         assertTrue(taskListPanel.isListMatching(originalTaskList));
-
     }
 
 }

@@ -41,7 +41,6 @@ public class AddCommandTest extends AddressBookGuiTest {
 
     public void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
-
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTitle().title);
         assertMatching(taskToAdd, addedCard);
@@ -49,6 +48,8 @@ public class AddCommandTest extends AddressBookGuiTest {
         //confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
+
+        assertResultMessage(String.format(AddCommand.MESSAGE_SUCCESS, taskToAdd));
     }
 
 }

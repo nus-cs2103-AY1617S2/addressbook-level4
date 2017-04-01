@@ -82,16 +82,11 @@ public class MainWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
 
-        setAccelerators();
         registerAsAnEventHandler(this);
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
-    }
-
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
     /**
@@ -125,7 +120,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        //browserPanel = new BrowserPanel(browserPlaceholder);
         nonFloatingTaskListPanel = new TaskListPanel(
                 getNonFloatingTaskListPlaceholder(),
                 logic.getFilteredNonFloatingTaskList()

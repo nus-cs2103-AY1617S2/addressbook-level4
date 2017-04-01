@@ -2,6 +2,7 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextArea?>
 <AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1">
@@ -9,7 +10,13 @@
         <URL value="@DarkTheme.css"/>
         <URL value="@Extensions.css"/>
     </stylesheets>
-    <AnchorPane fx:id="mainPane">
-        <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
+    <AnchorPane fx:id="mainPane" style="-fx-background-color: transparent;">
+        <TextArea fx:id="resultDisplay" blendMode="MULTIPLY" editable="false" minWidth="750.0" style="-fx-background-color: transparent;" styleClass="result-display" wrapText="true" />
+      <padding>
+         <Insets top="10.0" />
+      </padding>
     </AnchorPane>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
 </AnchorPane>

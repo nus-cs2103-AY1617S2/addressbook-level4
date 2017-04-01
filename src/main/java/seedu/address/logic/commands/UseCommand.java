@@ -18,7 +18,8 @@ public class UseCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_STORAGE_FILE_PATH = "Storage file switched to %1$s";
     public static final String MESSAGE_SUCCESS_USER_PREFS_FILE_PATH = "User prefs file switched to %1$s";
-    public static final String MESSAGE_INVALID_FILE_PATH = "The file path provided is not valid!\n%1$s";
+    public static final String MESSAGE_INVALID_FILE_PATH = "The file path provided is not valid!\n"
+            + "%1$s";
     public static final String MESSAGE_DATA_CONVERSION_ERROR = "The storage file data is incompatible!";
 
     private final String filePath;
@@ -41,7 +42,7 @@ public class UseCommand extends Command {
             } catch (DataConversionException e) {
                 throw new CommandException(MESSAGE_DATA_CONVERSION_ERROR);
             } catch (IOException e) {
-                throw new CommandException(MESSAGE_INVALID_FILE_PATH);
+                throw new CommandException(String.format(MESSAGE_INVALID_FILE_PATH, MESSAGE_USAGE));
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS_STORAGE_FILE_PATH, filePath));
         } else {

@@ -59,7 +59,6 @@ public class IncompleteCommandTest extends AddressBookGuiTest {
 
         assertResultMessage(String.format(IncompleteCommand.MESSAGE_MARK_INCOMPLETE_SUCCESS, editedTask));
         assertTrue(taskListPanel.isListMatching(expectedTaskList));
-
     }
 
 }

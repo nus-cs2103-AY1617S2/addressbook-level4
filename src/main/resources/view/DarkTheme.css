@@ -117,12 +117,13 @@
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
     -fx-text-fill: black;
 }
 
 .result-display {
-    -fx-background-color: #ffffff;
+    -fx-background-color: transparent;
+    -fx-font-size: 15pt;
 }
 
 .result-display .label {
@@ -134,7 +135,7 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent;
     -fx-border-color: derive(#1d1d1d, 25%);
     -fx-border-width: 1px;
 }
@@ -299,4 +300,99 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.events {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+.events .label {
+    -fx-text-fill: white;
+    -fx-background-color: #a51818;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+.list-cell { /* <=== changed to even */
+	-fx-padding: 10px ;
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:selected:focused {
+    -fx-background-color: #b7b7b7;
+    -fx-blend-mode: hard-light;
+    -fx-text-fill: white;
+}
+
+
+.list-view .scroll-bar:vertical {
+	-fx-background-color: transparent;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+	-fx-background-color: transparent;
+}
+
+.list-view .scroll-bar:vertical .thumb:hover {
+	-fx-background-color: black;
+	-fx-blend-mode: soft-light;
+}
+
+
+
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+    -fx-text-fill: gray;
+    -fx-highlight-fill: #7ecfff;
+}
+
+.titled-pane * {
+    -fx-background-color: transparent;
+}
+
+.titled-pane > *.content {
+    -fx-border-color: transparent;
+}
+.titled-pane:pressed {
+    -fx-text-fill: red;
+}
+.titled-pane .title{
+    -fx-background-color: transparent;
+}
+.titled-pane .title:hover {
+    -fx-background-color: #b7b7b7;
+    -fx-blend-mode: hard-light;
+}
+.titled-pane .title:pressed {
+    -fx-background-color: #DDDDDD;
+}
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 0 0 0;
 }
