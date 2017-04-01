@@ -169,11 +169,11 @@ public class EzDo implements ReadOnlyEzDo {
 
     // @@author A0139177W
     private void updateRecurringDates(ArrayList<Task> p, int i) {
-               
+
         try {
             String recurIntervalInString = p.get(i).getRecur().toString().trim();
             int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
-            
+
             String startDateInString = p.get(i).getStartDate().value;
             String dueDateInString = p.get(i).getDueDate().value;
 
