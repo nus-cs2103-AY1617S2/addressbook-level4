@@ -169,22 +169,24 @@ public class EzDo implements ReadOnlyEzDo {
     // @@author A0139177W
     private void updateRecurringDates(Task task) {
 
-        try {
-            String recurIntervalInString = task.getRecur().toString().trim();
-            int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
+        if (task.getRecur().isRecur() == true) {
+            try {
+                String recurIntervalInString = task.getRecur().toString().trim();
+                int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
 
-            String startDateInString = task.getStartDate().value;
-            String dueDateInString = task.getDueDate().value;
+                String startDateInString = task.getStartDate().value;
+                String dueDateInString = task.getDueDate().value;
 
-            String startDate = updateDate(recurringInterval, startDateInString);
-            String dueDate = updateDate(recurringInterval, dueDateInString);
+                String startDate = updateDate(recurringInterval, startDateInString);
+                String dueDate = updateDate(recurringInterval, dueDateInString);
 
-            tasks.add(new Task(task.getName(), task.getPriority(), new StartDate(startDate),
-                    new DueDate(dueDate), task.getRecur(), task.getTags()));
+                tasks.add(new Task(task.getName(), task.getPriority(), new StartDate(startDate),
+                        new DueDate(dueDate), task.getRecur(), task.getTags()));
 
-        } catch (IllegalValueException ive) {
-            // Do nothing as the date is optional
-            // and cannot be parsed as Date object
+            } catch (IllegalValueException ive) {
+                // Do nothing as the date is optional
+                // and cannot be parsed as Date object
+            }
         }
     }
 
