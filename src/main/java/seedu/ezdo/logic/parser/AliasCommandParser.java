@@ -18,6 +18,8 @@ public class AliasCommandParser {
     private static final int COMMAND_INDEX = 0;
     private static final int ALIAS_INDEX = 1;
 
+    private static final String RESET_KEYWORD = "reset";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AliasCommand
      * and returns an AliasCommand object for execution.
@@ -30,8 +32,12 @@ public class AliasCommandParser {
         }
         String[] commandArguments = commandArgumentsField.get();
         String command = commandArguments[COMMAND_INDEX];
-        String alias = commandArguments[ALIAS_INDEX];
-        return new AliasCommand(command, alias);
+        if (command.equals(RESET_KEYWORD)) {
+            return new AliasCommand("", "", true);
+        } else {
+            String alias = commandArguments[ALIAS_INDEX];
+            return new AliasCommand(command, alias, false);
+        }
     }
 
 }

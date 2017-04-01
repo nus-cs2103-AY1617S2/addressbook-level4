@@ -45,10 +45,15 @@ public class UserPrefs {
     public SortCriteria getSortCriteria() {
         return sortCriteria;
     }
-  //@@author
+
+    //@@author A0138907W
     public void addCommandAlias(String command, String alias) throws AliasAlreadyInUseException,
         CommandDoesNotExistException {
         commandAliases.addAlias(command, alias);
+    }
+
+    public void clearCommandAliases() {
+        commandAliases.clearAliases();
     }
 
     public CommandAliases getCommandAliases() {
@@ -63,6 +68,7 @@ public class UserPrefs {
         return isSortedAscending;
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {
