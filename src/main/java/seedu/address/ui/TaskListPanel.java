@@ -47,6 +47,12 @@ public class TaskListPanel extends UiPart<Region> {
         // todayTaskListView.setExpanded(true);
         addToPlaceholder(taskListPlaceholder);
         // set ListView height, add 2 extra px to show border
+        updateListHeight(taskListToday, taskListFuture);
+    }
+
+    private void updateListHeight(ObservableList<ReadOnlyTask> taskListToday,
+            ObservableList<ReadOnlyTask> taskListFuture) {
+        logger.info("List height updated!");
         todayTaskListView.setPrefHeight(taskListToday.size() * ROW_HEIGHT + ROW_PADDING);
         futureTaskListView.setPrefHeight(taskListFuture.size() * ROW_HEIGHT + ROW_PADDING);
     }

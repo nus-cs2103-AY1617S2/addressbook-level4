@@ -1,3 +1,11 @@
 .list-cell:empty {
     -fx-opacity: 0;
 }
+
+.jfx-snackbar-content {
+	-fx-background-color:#7194B2;
+} 
+
+.jfx-snackbar-toast {
+	-fx-text-fill:#ffffff;
+}
