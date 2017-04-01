@@ -228,6 +228,20 @@ public class UpdateTaskController extends Controller {
         return new String[] { COMMAND_UPDATE_TASK };
     }
 
+    public String[] getCommandKeywords() {
+        return new String[] {
+                TaskTokenizer.KEYWORD_EVENT_END_DATE,
+                TaskTokenizer.KEYWORD_EVENT_START_DATE,
+                TaskTokenizer.KEYWORD_TASK_DEADLINE,
+                TaskTokenizer.KEYWORD_TASK_PRIORITY,
+                TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+                TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE,
+                TaskTokenizer.KEYWORD_TASK_TAGS,
+                TaskTokenizer.KEYWORD_TASK_STOP_RECURRING,
+                TaskTokenizer.KEYWORD_TASK_FLOATING,
+        };
+    }
+
     //@@author A0162011A
     public String[] getBasicHelp() {
         return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };

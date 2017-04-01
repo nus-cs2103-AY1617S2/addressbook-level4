@@ -143,6 +143,10 @@ public class HelpController extends Controller {
         return new String[] { COMMAND_WORD };
     }
 
+    public String[] getCommandKeywords() {
+        return controllerLibrary.getCommandControllerKeywords().toArray(new String[] {});
+    }
+
     public String[] getBasicHelp() {
         return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
     }

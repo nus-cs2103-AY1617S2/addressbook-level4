@@ -11,15 +11,15 @@ import java.util.regex.Pattern;
 public class TaskTokenizer {
     public static final String TASK_VIEW_INDEX = "index";
     public static final String PARAMETER_TASK_DESCRIPTION = "description";
-    public static final String KEYWORD_TASK_DEADLINE = "by/";
-    public static final String KEYWORD_EVENT_START_DATE = "from/";
-    public static final String KEYWORD_EVENT_END_DATE = "to/";
-    public static final String KEYWORD_TASK_TAGS = "tags/";
-    public static final String KEYWORD_TASK_FLOATING = "floating/";
-    public static final String KEYWORD_TASK_PRIORITY = "priority/";
-    public static final String KEYWORD_TASK_RECURRING_FREQUENCY = "repeat/";
-    public static final String KEYWORD_TASK_RECURRING_UNTIL_END_DATE = "repeatuntil/";
-    public static final String KEYWORD_TASK_STOP_RECURRING = "stoprepeating/";
+    public static final String KEYWORD_TASK_DEADLINE = "/by";
+    public static final String KEYWORD_EVENT_START_DATE = "/from";
+    public static final String KEYWORD_EVENT_END_DATE = "/to";
+    public static final String KEYWORD_TASK_TAGS = "/tags";
+    public static final String KEYWORD_TASK_FLOATING = "/floating";
+    public static final String KEYWORD_TASK_PRIORITY = "/priority";
+    public static final String KEYWORD_TASK_RECURRING_FREQUENCY = "/repeat";
+    public static final String KEYWORD_TASK_RECURRING_UNTIL_END_DATE = "/repeatuntil";
+    public static final String KEYWORD_TASK_STOP_RECURRING = "/stoprepeating";
 
     public static HashMap<String, String> tokenize(String commandTemplate, String commandArgs,
             boolean hasIndex, boolean hasDescription) {

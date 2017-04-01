@@ -115,6 +115,10 @@ public class MarkController extends Controller {
         return new String[] { COMMAND_WORD };
     }
 
+    public String[] getCommandKeywords() {
+        return new String[] { PARAMETER_MARK_COMPLETE, PARAMETER_MARK_INCOMPLETE };
+    }
+
     //@@author A0162011A
     public String[] getBasicHelp() {
         return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };

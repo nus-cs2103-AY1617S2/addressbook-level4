@@ -22,8 +22,8 @@ public class FindController extends Controller {
     private static final String COMMAND_WORD_FILTER = "filter";
     private static final String COMMAND_WORD_LIST = "list";
 
-    private static final String PARAMETER_TAG = "tag/";
-    private static final String PARAMETER_NAME = "name/";
+    private static final String PARAMETER_TAG = "/tag";
+    private static final String PARAMETER_NAME = "/name";
     private static final String PARAMETER_NULL = "";
     private static final String PARAMETER_TRUE = "true";
     private static final String PARAMETER_FALSE = "false";
@@ -143,6 +143,10 @@ public class FindController extends Controller {
 
     public String[] getCommandWords() {
         return new String[] { COMMAND_WORD_FILTER, COMMAND_WORD_FIND, COMMAND_WORD_LIST };
+    }
+
+    public String[] getCommandKeywords() {
+        return new String[] { PARAMETER_NAME, PARAMETER_TAG };
     }
 
     public String[] getBasicHelp() {

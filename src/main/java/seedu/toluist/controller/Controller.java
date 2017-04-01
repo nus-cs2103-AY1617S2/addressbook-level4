@@ -36,7 +36,7 @@ public abstract class Controller {
     /**
      * Check if Controller can handle this command
      * @param command
-     * @return
+     * @return true / false
      */
     public abstract boolean matchesCommand(String command);
 
@@ -44,6 +44,13 @@ public abstract class Controller {
      * Returns command word(s) used by controller
      */
     public String[] getCommandWords() {
+        return new String[] {};
+    }
+
+    /**
+     * Returns list of keywords used by controller
+     */
+    public String[] getCommandKeywords() {
         return new String[] {};
     }
 
