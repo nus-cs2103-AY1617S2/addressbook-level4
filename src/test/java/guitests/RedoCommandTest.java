@@ -38,7 +38,7 @@ public class RedoCommandTest extends TaskBossGuiTest {
     }
 
     @Test
-    public void redoShortCommand() {       
+    public void redoShortCommand() {
 
         //without any last command
         commandBox.runCommand("redo");
