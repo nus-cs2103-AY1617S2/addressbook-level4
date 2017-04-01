@@ -200,7 +200,7 @@ public class LogicManagerTest {
         assertCommandFailure("add task from monday", MESSAGE_INVALID_DATES);
         assertCommandFailure("add task from 6/4/17 to 6/3/17", MESSAGE_INVALID_DATES);
     }
-    
+
     @Test
     public void execute_add_invalidPriorities() {
         assertCommandFailure("add task priority blah", MESSAGE_INVALID_PRIORITY);
