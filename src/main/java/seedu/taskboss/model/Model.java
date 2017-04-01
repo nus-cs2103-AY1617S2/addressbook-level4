@@ -72,7 +72,7 @@ public interface Model {
     //@@author A0138961W
     /** Undoes previous command of TaskBoss*/
     void undoTaskboss() throws EmptyStackException, IllegalValueException;
-    
+
     /** Redoes previous undo command of TaskBoss*/
     void redoTaskboss() throws EmptyStackException, IllegalValueException;
 
