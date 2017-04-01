@@ -15,6 +15,7 @@ import seedu.taskit.commons.core.Config;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskit.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskit.commons.events.ui.MenuBarPanelSelectionChangedEvent;
 import seedu.taskit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskit.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskit.commons.util.StringUtil;
@@ -120,6 +121,12 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    }
+    
+    //@@author A0141872E
+    @Subscribe
+    private void handleMenuBarPanelSelectionChangedEvent(MenuBarPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
 

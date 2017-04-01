@@ -8,8 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.ui.MenuBarPanelSelectionChangedEvent;
 import seedu.taskit.logic.commands.ListCommand;
@@ -19,7 +19,7 @@ public class MenuBarPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(MenuBarPanel.class);
     private static final String FXML = "MenuBarPanel.fxml";
     
-    private HBox panel;
+    private VBox panel;
     
     private String command = null;
     private final String MENU_FLOATING_TASK = "Floating Tasks";
@@ -56,7 +56,7 @@ public class MenuBarPanel extends UiPart<Region> {
 
     private void addToPlaceHolder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
-        placeHolderPane.getChildren().add(panel);
+        //placeHolderPane.getChildren().add(panel);
     }
     
     public String getNavigationCommand(String menuItem) {
