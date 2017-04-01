@@ -11,9 +11,9 @@ import typetask.testutil.TestTask;
 //@@author A0144902L
 public class DoneCommandTest extends AddressBookGuiTest {
 
-    TestTask[] expectedTaskList = td.getTypicalTasks(); 
-    
-  //---------------- Tests for validity of given index for Different Format --------------------------------------
+    TestTask[] expectedTaskList = td.getTypicalTasks();
+
+  //---------------- Tests for validity of given index for Different Format -----------------------------
 
     /*
      * EP: Check if successfully marked tasks completed with different index and format,
@@ -38,16 +38,16 @@ public class DoneCommandTest extends AddressBookGuiTest {
         targetIndex = currentList.length / 2;
         currentList[targetIndex - 1].setIsCompleted(true);
         assertDoneSuccess(targetIndex, currentList);
-        
+
         //invalid index
         commandBox.runCommand("done " + currentList.length);
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        
+
         //missing index
         commandBox.runCommand("done ");
         //assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
-    
+
     @Test
     public void complete() {
 
@@ -70,13 +70,13 @@ public class DoneCommandTest extends AddressBookGuiTest {
         //invalid index
         commandBox.runCommand("complete " + currentList.length);
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        
+
         //missing index
         commandBox.runCommand("complete ");
 
     }
 
-    //---------------- Tests for successfully marking done a task after find command--------------------------------------
+    //---------------- Tests for successfully marking done a task after find command------------------
 
     /*
      * EP: Check if successfully marked done a command after performing a find command,
