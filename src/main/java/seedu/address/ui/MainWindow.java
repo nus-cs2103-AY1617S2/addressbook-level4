@@ -16,7 +16,6 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,7 +32,6 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private TaskTabPanel taskTabPanel;
     private Config config;
 
@@ -112,7 +110,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     public void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
         taskTabPanel = new TaskTabPanel(taskTabPanelPlaceHolder, logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskListFilePath());
@@ -192,14 +189,6 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return taskTabPanel.getTaskListPanel();
-    }
-
-    public void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
     public void switchTabPanel(String typeOfList) {
