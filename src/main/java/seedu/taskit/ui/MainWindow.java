@@ -22,6 +22,7 @@ import seedu.taskit.logic.Logic;
 import seedu.taskit.model.UserPrefs;
 import seedu.taskit.model.task.ReadOnlyTask;
 
+//@@author A0141872E
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -32,15 +33,6 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
-    
-    private static final short INDEX_HOME = 0;
-    private static final short INDEX_TASK = 1;
-    private static final short INDEX_DEADLINE = 2;
-    private static final short INDEX_EVENT = 3;
-    private static final short INDEX_RECURRING = 4;
-    private static final short INDEX_HELP = 5;
-    
-    private static final List<String> TABS = Arrays.asList(new String[]{ "Home", "Floating Task", "Event", "Deadline", "Overdue"});
 
     private Stage primaryStage;
     private Logic logic;
@@ -48,10 +40,11 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
+    //private FloatingTaskListPanel floatingTaskListPanel;
+    //private EventTaskListPanel eventTaskListPanel;
+    //private DeadlineTaskListPanel deadlineTaskListPanel;
+    //private TodayTaskListPanel todayTaskListPanel;
     private Config config;
-
-    //@FXML
-    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -59,26 +52,19 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private MenuItem helpMenuItem;
     
-    @FXML
-    private TabPane tabPane;
+    //@FXML
+    //private AnchorPane floatingTaskViewPlaceholder;
+
+    //@FXML
+    //private AnchorPane eventTaskViewPlaceholder;
+
+    //@FXML
+    //private AnchorPane deadlineTaskViewPlaceholder;
+
+    //@FXML
+    //private AnchorPane todayTaskViewPlaceholder;
     
-    @FXML
-    private AnchorPane floatingTaskViewPlaceholder;
-    private FloatingTaskWindow tasksView;
-
-    @FXML
-    private AnchorPane eventTaskViewPlaceholder;
-    private EventTaskWindow eventsView;
-
-    @FXML
-    private AnchorPane deadlineTasksViewPlaceholder;
-    private DeadlineTaskWindow deadlineTasksView;
-
-    @FXML
-    private AnchorPane overdueTasksViewPlaceholder;
-    private OverdueTaskWindow overdueTasksView;
-
-    @FXML
+    //@FXML
     private AnchorPane taskListPanelPlaceholder;
 
     @FXML
@@ -86,6 +72,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+    
+    @FXML
+    private AnchorPane menuBarPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -145,11 +134,15 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        //browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        //floatingTaskListPanel = new FloatingTaskListPanel(getFloatingTaskPlaceholder(), logic.getFilteredTaskList());
+        //eventTaskListPanel = new EventTaskListPanel(getEventTaskPlaceholder(), logic.getFilteredTaskList());
+        //deadlineTaskListPanel = new DeadlineTaskListPanel(getDeadlineTaskPlaceholder(), logic.getFilteredTaskList());
+        //todayTaskListPanel = new TodayTaskListPanel(getTodayTaskPlaceholder(),logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        new MenuBarPanel(getMenuBarPanelPlaceholder());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -167,6 +160,26 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
+    
+    private AnchorPane getMenuBarPanelPlaceholder() {
+        return menuBarPanelPlaceholder;
+    }
+    
+    //private AnchorPane getFloatingTaskPlaceholder() {
+    //    return floatingTaskViewPlaceholder;
+    //}
+    
+    //private AnchorPane getEventTaskPlaceholder() {
+    //   return eventTaskViewPlaceholder;
+    //}
+    
+    //private AnchorPane getDeadlineTaskPlaceholder() {
+    //    return deadlineTaskViewPlaceholder;
+    //}
+    
+    //private AnchorPane getTodayTaskPlaceholder() {
+    //    return todayTaskViewPlaceholder;
+    //}
 
     void hide() {
         primaryStage.hide();

@@ -27,26 +27,6 @@
                   <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Floating Task">
-              <items>
-                <MenuItem fx:id="floatingTaskMenuItem" mnemonicParsing="false" text="Floating Task" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Events">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Deadlines">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Overdued">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
          </menus>
       </MenuBar>
       <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">

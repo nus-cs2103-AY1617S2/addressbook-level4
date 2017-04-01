@@ -32,8 +32,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
-
-
     //@A0141011J
     private final Stack<State> prevStates = new Stack<State>();
     private final Stack<State> nextStates = new Stack<State>();
