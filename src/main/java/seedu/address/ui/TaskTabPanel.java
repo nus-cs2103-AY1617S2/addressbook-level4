@@ -140,11 +140,11 @@ public class TaskTabPanel extends UiPart<Region> {
             CommandResult commandResult;
 
             Tab currTaskTab = getTaskTabPane().getSelectionModel().getSelectedItem();
-            if (currTaskTab == allTasksTab) {
+            if (currTaskTab.equals(allTasksTab)) {
                 commandResult = logic.execute(ViewCommand.COMMAND_WORD + " " + ViewCommand.TYPE_ALL);
-            } else if (currTaskTab == floatingTasksTab) {
+            } else if (currTaskTab.equals(floatingTasksTab)) {
                 commandResult = logic.execute(ViewCommand.COMMAND_WORD + " " + ViewCommand.TYPE_FLOATING);
-            } else if (currTaskTab == overdueTasksTab) {
+            } else if (currTaskTab.equals(overdueTasksTab)) {
                 commandResult = logic.execute(ViewCommand.COMMAND_WORD + " " + ViewCommand.TYPE_OVERDUE);
             } else {
                 commandResult = logic.execute(ViewCommand.COMMAND_WORD + " " + ViewCommand.TYPE_ALL);

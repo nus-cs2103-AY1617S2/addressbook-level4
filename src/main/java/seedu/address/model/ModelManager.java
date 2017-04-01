@@ -202,7 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
 
   //@@author A0135998H
     public boolean isFloating(ReadOnlyTask task) {
-        return !(task.getStartEndDateTime()).isPresent() && !(task.getDeadline()).isPresent();
+        return !(task.getStartEndDateTime().isPresent()) && !(task.getDeadline().isPresent());
     }
 
 }

@@ -196,26 +196,26 @@ public class MainWindow extends UiPart<Region> {
         return taskTabPanel.getTaskTabPane();
     }
 
-    //@author A0135998H
+    //@@author A0135998H
     public TaskListPanel getTaskListPanel() {
         return taskTabPanel.getTaskListPanel();
     }
 
-    //@author A0135998H
+
     public void switchTabOnCommand(String typeOfList) {
         taskTabPanel.switchTabOnCommand(typeOfList);
     }
 
-    //@author A0135998H
+
     public void switchTabOnClick() {
         taskTabPanel.switchTabOnClick();
     }
 
-    void loadTaskPage(ReadOnlyTask task) {
+    public void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
     }
 
-    void releaseResources() {
+    public void releaseResources() {
         browserPanel.freeResources();
     }
 
