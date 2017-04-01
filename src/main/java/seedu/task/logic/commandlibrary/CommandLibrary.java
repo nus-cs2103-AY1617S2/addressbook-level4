@@ -1,7 +1,6 @@
 package seedu.task.logic.commandlibrary;
 
 import static seedu.task.commons.core.Messages.MESSAGE_COMMAND_DOES_NOT_EXIST;
-import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.HashMap;
 
@@ -20,13 +19,13 @@ import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.GetGoogleCalendarCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
-import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListByDoneCommand;
 import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.PostGoogleCalendarCommand;
+import seedu.task.logic.commands.QuickAddCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
@@ -52,6 +51,7 @@ import seedu.task.logic.parser.ListByTagCommandParser;
 import seedu.task.logic.parser.ListCommandParser;
 import seedu.task.logic.parser.LoadCommandParser;
 import seedu.task.logic.parser.PostGoogleCalendarCommandParser;
+import seedu.task.logic.parser.QuickAddCommandParser;
 import seedu.task.logic.parser.RedoCommandParser;
 import seedu.task.logic.parser.SaveCommandParser;
 import seedu.task.logic.parser.SelectCommandParser;
@@ -257,6 +257,9 @@ public class CommandLibrary {
                 new CommandInstance(PostGoogleCalendarCommand.COMMAND_WORD_1,
                         new PostGoogleCalendarCommandParser(), PostGoogleCalendarCommand.MESSAGE_USAGE));
 
+        commandTable.put(QuickAddCommand.COMMAND_WORD_1, new CommandInstance(QuickAddCommand.COMMAND_WORD_1,
+            new QuickAddCommandParser() , QuickAddCommand.MESSAGE_USAGE));
+
         commandTable.put(RedoCommand.COMMAND_WORD_1, new CommandInstance(RedoCommand.COMMAND_WORD_1,
                 new RedoCommandParser(), RedoCommand.MESSAGE_USAGE));
 
@@ -291,7 +294,7 @@ public class CommandLibrary {
      */
     public Command getCorrectCommand(String commandWord, String arguments) {
         if (!commandTable.containsKey(commandWord)) {
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+            return commandTable.get(QuickAddCommand.COMMAND_WORD_1).commandParser.parse(commandWord + arguments);
         }
         return commandTable.get(commandWord).commandParser.parse(arguments);
     }
