@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import seedu.toluist.commons.util.FxViewUtil;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.UiStore;
 
@@ -55,7 +56,7 @@ public class CommandBox extends UiView {
     }
 
     private void handleCommandInputChanged(String newCommand) {
-        List<String> suggestedCommands = new ArrayList(dispatcher.getPredictedCommands(newCommand));
+        List<String> suggestedCommands = new ArrayList(dispatcher.getSuggestions(newCommand));
         UiStore uiStore = UiStore.getInstance();
         uiStore.setCommandInput(newCommand);
         uiStore.setSuggestedCommands(suggestedCommands);
@@ -72,7 +73,8 @@ public class CommandBox extends UiView {
 
         List<String> suggestedCommands = store.getObservableSuggestedCommands();
         if (suggestedCommands.size() == 1) {
-            setCommandTextFieldText(suggestedCommands.get(0));
+            setCommandTextFieldText(
+                    StringUtil.replaceLastWord(commandTextField.getText(), suggestedCommands.get(0)));
         }
     }
 
@@ -85,15 +87,16 @@ public class CommandBox extends UiView {
         UiStore store = UiStore.getInstance();
         List<String> suggestedCommands = store.getObservableSuggestedCommands();
         int index = store.getObservableSuggestedCommandIndex().get();
+        String commandText = commandTextField.getText();
 
         if (suggestedCommands.isEmpty()
-            || index == UiStore.INDEX_INVALID_SUGGESTION
-            || suggestedCommands.get(index).trim().equals(commandTextField.getText())) {
+                || index == UiStore.INDEX_INVALID_SUGGESTION
+                || suggestedCommands.get(index).equalsIgnoreCase(StringUtil.getLastWord(commandText))) {
             dispatchCommand();
             return;
         }
 
-        store.setCommandInput(suggestedCommands.get(index));
+        store.setCommandInput(StringUtil.replaceLastWord(commandText, suggestedCommands.get(index)));
     }
 
     private void setCommandTextFieldText(String text) {

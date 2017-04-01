@@ -1,12 +1,16 @@
 //@@author A0131125Y
 package seedu.toluist.dispatcher;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
@@ -20,6 +24,7 @@ import seedu.toluist.model.CommandHistoryList;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
+    private static final int LIMIT_AUTOCORECTION_SUGGESTION = 5;
 
     //@@author A0162011A
     /**
@@ -56,34 +61,68 @@ public class CommandDispatcher extends Dispatcher {
         controller.execute(deAliasedCommand);
     }
 
-    public SortedSet<String> getPredictedCommands(String command) {
-        SortedSet<String> predictedCommands = new TreeSet<>();
-
+    public SortedSet<String> getSuggestions(String command) {
         if (!StringUtil.isPresent(command)) {
-            return predictedCommands;
+            return new TreeSet<>();
         }
 
-        String firstWordOfCommand = command.trim().split("\\s+")[0];
+        SortedSet<String> commandWordAndAliasSuggestions = getCommandWordAndAliasSuggestions(command);
+        if (!commandWordAndAliasSuggestions.isEmpty()) {
+            return commandWordAndAliasSuggestions;
+        }
+
+        return getKeywordSuggestions(command);
+    }
+
+    /**
+     * Return suggestions for command words, or possible alias expansion
+     * @param command command string
+     * @return sorted set of suggestions
+     */
+    private SortedSet<String> getCommandWordAndAliasSuggestions(String command) {
+        SortedSet<String> suggestions = new TreeSet<>();
+        String[] words = command.trim().split("\\s+");
+
+        if (words.length > 1) {
+            return suggestions;
+        }
+        String firstWordOfCommand = words[0];
 
         Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
         for (String alias : aliasMapping.keySet()) {
             if (StringUtil.startsWithIgnoreCase(alias, firstWordOfCommand)) {
-                String replacedCommand = command.replaceFirst(Pattern.quote(firstWordOfCommand), alias);
-                predictedCommands.add(getDealiasedCommand(replacedCommand).trim());
+                suggestions.add(aliasMapping.get(alias));
             }
         }
 
         for (String commandWord : controllerLibrary.getCommandControllerKeywords()) {
             if (StringUtil.startsWithIgnoreCase(commandWord, firstWordOfCommand)) {
-                predictedCommands.add(
-                        command.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord).trim());
+                suggestions.add(commandWord);
             }
         }
 
-        logger.info("Predicted commands: " + predictedCommands.toString());
-        return predictedCommands;
+        return suggestions;
     }
 
+    /**
+     * Return suggestions for command keywords
+     * @param command command string
+     * @return sorted set of suggestions
+     */
+    private SortedSet<String> getKeywordSuggestions(String command) {
+        String[] words = command.trim().split("\\s+");
+        String lastWordOfCommand = words[words.length - 1];
+
+        return Arrays.stream(getBestFitController(command).getCommandKeywords())
+                .filter(keyword -> StringUtil.startsWithIgnoreCase(keyword, lastWordOfCommand))
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    /**
+     * Returns de-aliased version of a command
+     * @param command a command string
+     * @return the converted command
+     */
     private String getDealiasedCommand(String command) {
         String trimmedCommand = command.trim();
         return aliasConfig.dealias(trimmedCommand);

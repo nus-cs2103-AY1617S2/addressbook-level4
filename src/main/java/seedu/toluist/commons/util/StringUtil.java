@@ -107,6 +107,27 @@ public class StringUtil {
     }
 
     /**
+     * Return a transformed string of an original string, with the last word replaced
+     * @param s the original string
+     * @param replacement the string to replace the first word
+     * @return the transformed string
+     */
+    public static String replaceLastWord(String s, String replacement) {
+        if (replacement == null || !StringUtil.isPresent(s)) {
+            return s;
+        }
+
+        String[] words = s.split("\\s+");
+
+        if (words.length == 0) {
+            return s;
+        }
+
+        words[words.length - 1] = replacement;
+        return String.join(" ", words);
+    }
+
+    /**
      * Return a transformed string of an original string, with the first word replaced
      * @param s the original string
      * @param replacement the string to replace the first word
@@ -125,6 +146,16 @@ public class StringUtil {
 
         words[0] = replacement;
         return String.join(" ", words);
+    }
+
+    /**
+     * Get last word of a string
+     * @param s a string
+     * @return last word of the string
+     */
+    public static String getLastWord(String s) {
+        String[] words = s.trim().split("\\s+");
+        return words[words.length - 1];
     }
 
     /**
