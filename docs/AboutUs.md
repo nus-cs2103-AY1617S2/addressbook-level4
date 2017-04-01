@@ -7,10 +7,17 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Chan Lup Seng](http://github.com/lupseng/) <br>
 <img src="images/ChanLupSeng.png" width="150"><br>
 Role: Team lead <br>
-- Components in charge of: [Model](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#model-component)
+- Components in charge of: [Model](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#2.4-model-component)
 - Aspects/tools in charge of: Integration, Deliverables and deadlines
 - Features implemented:
+  - Undo and Redo Command
+  - Google Calendar Integration
+- Code written:[[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0140063X.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0140063X.md)]
 - Other major contributions:
+  - Set up Travis, Coveralls and Codacy
+  - Set up PrettyTime for date parsing
+  - Ensure quality user experience
+  - Maintain issues and milestones
 
 -----
 
@@ -18,7 +25,7 @@ Role: Team lead <br>
 <img src="images/WalterTay.png" width="150"><br>
 Role: Developer <br>
 - Components in charge of:[UI](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#ui-component)
-- Aspects/tools in charge of: Code quality, Git expert and deadlines.
+- Aspects/tools in charge of: Code quality, Git expert and deadlines, JavaFX
 - Features implemented: Done/Undone Command, ListDone/ListUndone Command
 - Other major contributions: Implementation of UI.
 
@@ -28,7 +35,7 @@ Role: Developer <br>
 <img src="images/XuXinYi.png" width="150"><br>
 Role: Developer <br>
 - Components in charge of: [Logic](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#logic-component)
-- Aspects/tools in charge of: Documentation, Eclipse expert
+- Aspects/tools in charge of: Documentation, Eclipse expert, Markdown
 - Features implemented: ChangeTheme Command, power search
 - Other major contributions: Implementation of CommandLibrary, and oversee other implementations of components in Logic.
 
