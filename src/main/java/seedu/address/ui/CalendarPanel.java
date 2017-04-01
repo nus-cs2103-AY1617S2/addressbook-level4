@@ -180,6 +180,10 @@ public class CalendarPanel extends UiPart<Region> {
         agenda.selectedAppointments().add(targetAppoint);
     }
 
+    public void viewWeeksAhead(LocalDateTime t, int weeksAhead){
+        updateCalendarShownPeriod(t.plusWeeks(weeksAhead));
+    } 
+    
     /**
      * Focus the calendar on selected time frame
      * @param t

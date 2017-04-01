@@ -2,31 +2,29 @@ package seedu.address.commons.events.ui;
 
 import java.time.LocalDateTime;
 
-import seedu.address.commons.core.CalendarLayout;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.commons.util.StringUtil;
 
 //@@author A0124377A
 public class UpdateCalendarEvent extends BaseEvent {
-    private LocalDateTime displayedDateTime;
-    private CalendarLayout calendarLayoutMode;
-
-    public UpdateCalendarEvent(LocalDateTime displayedDateTime, CalendarLayout calendarLayoutMode) {
-        this.displayedDateTime = displayedDateTime;
-        this.calendarLayoutMode = calendarLayoutMode;
+    private LocalDateTime nextDateTime;
+    private int weeksAhead;
+    
+    public UpdateCalendarEvent(LocalDateTime currDateTime, int weeksAhead) {
+        this.nextDateTime = currDateTime.plusWeeks(weeksAhead);
     }
 
     @Override
     public String toString() {
-        return "Setting displayed time " + this.displayedDateTime.format(StringUtil.DATE_FORMATTER)
-            + " With mode: " + calendarLayoutMode;
+        return "Setting updated calendar view " + this.nextDateTime.format(StringUtil.DATE_FORMATTER)
+            + " With " + weeksAhead + " weeks ahead.";
     }
 
-    public LocalDateTime getDisplayedDateTime() {
-        return displayedDateTime;
+    public LocalDateTime getNextDateTime() {
+        return nextDateTime;
     }
 
-    public CalendarLayout getCalendarLayoutMode() {
-        return calendarLayoutMode;
+    public int getWeeksAhead() {
+        return weeksAhead;
     }
 }
