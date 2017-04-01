@@ -39,7 +39,7 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskListByKeywords(Set<String> keywords);
 
     /** Updates undo copy of task list*/
     void updateCopy(ReadOnlyTaskManager taskManager);

@@ -113,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
+    public void updateFilteredTaskListByKeywords(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
     }
 
