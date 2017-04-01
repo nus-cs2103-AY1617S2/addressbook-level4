@@ -33,8 +33,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     //@@author A0147622H
-    private final Stack<GeeKeep> pastGeeKeeps;
-    private final Stack<GeeKeep> futureGeeKeeps;
+    private final Stack<ReadOnlyGeeKeep> pastGeeKeeps;
+    private final Stack<ReadOnlyGeeKeep> futureGeeKeeps;
     private final List<String> commandHistory;
 
     /**
