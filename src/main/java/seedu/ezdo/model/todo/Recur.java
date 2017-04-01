@@ -1,32 +1,36 @@
 package seedu.ezdo.model.todo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 //@@author A0139177W
 /**
- * Represents a Task's recurring interval in ezDo.
- * Guarantees: immutable; is valid as declared in {@link #isValidRecurring(String)}
+ * Represents a Task's recurring interval in ezDo. Guarantees: immutable; is
+ * valid as declared in {@link #isValidRecurring(String)}
  */
 public class Recur {
 
-    public static final String MESSAGE_RECUR_CONSTRAINTS =
+    public static final String MESSAGE_RECUR_CONSTRAINTS = 
             "Recurring time interval should be 'daily', 'weekly', 'monthly' or 'yearly'.";
+    
     public static final String INTERVAL_NONE = "";
     public static final String INTERVAL_DAILY = "daily";
     public static final String INTERVAL_WEEKLY = "weekly";
     public static final String INTERVAL_MONTHLY = "monthly";
     public static final String INTERVAL_YEARLY = "yearly";
 
-    public static final ArrayList<String> RECUR_INTERVALS = new ArrayList<>();
+    public static final HashMap<String, Integer> RECUR_INTERVALS = new HashMap<>();
 
     public final String value;
 
     /**
      * Validates given recurring time interval.
      *
-     * @throws IllegalValueException if given recurring time interval string is invalid.
+     * @throws IllegalValueException
+     *             if given recurring time interval string is invalid.
      */
     public Recur(String recur) throws IllegalValueException {
         initialiseRecurIntervals();
@@ -39,18 +43,18 @@ public class Recur {
     }
 
     private void initialiseRecurIntervals() {
-        RECUR_INTERVALS.add(INTERVAL_NONE);
-        RECUR_INTERVALS.add(INTERVAL_DAILY);
-        RECUR_INTERVALS.add(INTERVAL_WEEKLY);
-        RECUR_INTERVALS.add(INTERVAL_MONTHLY);
-        RECUR_INTERVALS.add(INTERVAL_YEARLY);
+        RECUR_INTERVALS.put(INTERVAL_NONE, Calendar.DATE);
+        RECUR_INTERVALS.put(INTERVAL_DAILY, Calendar.DAY_OF_MONTH);
+        RECUR_INTERVALS.put(INTERVAL_WEEKLY, Calendar.WEEK_OF_MONTH);
+        RECUR_INTERVALS.put(INTERVAL_MONTHLY, Calendar.MONTH);
+        RECUR_INTERVALS.put(INTERVAL_YEARLY, Calendar.YEAR);
     }
 
     /**
      * Returns true if a given string is a valid recurring time interval.
      */
     public static boolean isValidRecur(String test) {
-        return RECUR_INTERVALS.contains(test);
+        return RECUR_INTERVALS.containsKey(test);
     }
 
     @Override
@@ -62,7 +66,7 @@ public class Recur {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Recur // instanceof handles nulls
-                && this.value.equals(((Recur) other).value)); // state check
+                        && this.value.equals(((Recur) other).value)); // state check
     }
 
     @Override
