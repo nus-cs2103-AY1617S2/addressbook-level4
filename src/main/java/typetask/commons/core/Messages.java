@@ -11,5 +11,10 @@ public class Messages {
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d task(s) listed!";
     public static final String MESSAGE_CONFIG_ERROR =
             "Issues encountered when reading config file.\nPlease restart TypeTask.";
+    public static final String MESSAGE_INVALID_START_AND_END_DATE =
+            "End date and time should not be before Start date and time";
+    public static final String MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE = "Start date is invalid";
+    public static final String MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE = "End date is invalid";
+    public static final String MESSAGE_INVALID_DATE_FORMAT_FOR_DATE = "Deadline is invalid";
 
 }
