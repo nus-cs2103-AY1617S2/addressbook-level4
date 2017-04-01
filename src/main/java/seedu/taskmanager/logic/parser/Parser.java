@@ -11,6 +11,7 @@ import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.DoneCommand;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
@@ -88,6 +89,12 @@ public class Parser {
 
         case ChangeDirectoryCommand.ALTERNATIVE_COMMAND_WORD:
             return new ChangeDirectoryCommandParser().parse(arguments);
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+
+        case DoneCommand.ALTERNATIVE_COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();

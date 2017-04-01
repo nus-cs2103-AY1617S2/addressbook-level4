@@ -109,6 +109,11 @@ public class Task implements ReadOnlyTask {
     public Status getStatus() {
         return status;
     }
+    
+    public void setStatus(Status status) {
+        assert status != null;
+        this.status = status;
+    }
     // @@author
 
     @Override
@@ -133,6 +138,7 @@ public class Task implements ReadOnlyTask {
         this.setStartDate(replacement.getStartDate());
         this.setEndDate(replacement.getEndDate());
         this.setDescription(replacement.getDescription());
+        this.setStatus(replacement.getStatus());
         this.setTags(replacement.getTags());
     }
 

@@ -29,6 +29,7 @@ public class DoneCommand extends Command {
             + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD + " 1";
 
     public static final String MESSAGE_MARK_DONE_TASK_SUCCESS = "Task marked done: %1$s";
+    public static final String MESSAGE_MARK_DONE_TASK_FAILURE = "ERROR! Task is already done.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     
     public final int targetIndex;
@@ -46,14 +47,17 @@ public class DoneCommand extends Command {
         }
 
         ReadOnlyTask taskToMarkDone = lastShownList.get(targetIndex - 1);
-        if (taskToMarkDone.getStatus().toString() == "Done") {
+        if (!taskToMarkDone.getStatus().value) {
             Task markedDoneTask = createDoneTask(taskToMarkDone);
             try {
                 model.updateTask(targetIndex - 1, markedDoneTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
+        } else {
+            return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_FAILURE, taskToMarkDone));
         }
+        model.updateFilteredListToShowAll();
 
         return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_SUCCESS, taskToMarkDone));
     }
