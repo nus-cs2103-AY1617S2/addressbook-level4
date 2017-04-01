@@ -128,6 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskBoss.sortTasks(currentSortType);
         updateFilteredListToShowAll();
         indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
     }
 
     @Override
