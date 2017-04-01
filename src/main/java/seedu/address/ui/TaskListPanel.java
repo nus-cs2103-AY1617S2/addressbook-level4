@@ -28,6 +28,10 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> futureTaskListView;
 
+    ObservableList<ReadOnlyTask> taskListToday;
+
+    ObservableList<ReadOnlyTask> taskListFuture;
+
     // height of a row should be the same as the height of a TaskCard
     final int ROW_HEIGHT = 45;
     // height of paddings after each TaskListView
@@ -36,23 +40,19 @@ public class TaskListPanel extends UiPart<Region> {
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday,
             ObservableList<ReadOnlyTask> taskListFuture) {
         super(FXML);
-        /*
-         * Test for (int i = 0; i < 10; i++) {
-         * todayTaskListView.getItems().add(new Label("" + i)); }
-         */
+        this.taskListToday = taskListToday;
+        this.taskListFuture = taskListFuture;
         setConnections(todayTaskListView, taskListToday);
         setConnections(futureTaskListView, taskListFuture);
-
 
         // todayTaskListView.setExpanded(true);
         addToPlaceholder(taskListPlaceholder);
         // set ListView height, add 2 extra px to show border
-        updateListHeight(taskListToday, taskListFuture);
+        updateListHeight();
     }
 
-    private void updateListHeight(ObservableList<ReadOnlyTask> taskListToday,
-            ObservableList<ReadOnlyTask> taskListFuture) {
-        logger.info("List height updated!");
+    public void updateListHeight() {
+        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>List height updated!");
         todayTaskListView.setPrefHeight(taskListToday.size() * ROW_HEIGHT + ROW_PADDING);
         futureTaskListView.setPrefHeight(taskListFuture.size() * ROW_HEIGHT + ROW_PADDING);
     }

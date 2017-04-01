@@ -18,7 +18,6 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
-import seedu.address.commons.events.ui.UpdateStatusBarEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -132,5 +131,6 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "###################### UI VIEW REFRESHED ###################"));
         mainWindow.prepareTaskList();
+        mainWindow.getTaskListPanel().updateListHeight();
     }
 }
