@@ -60,15 +60,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0121658E
-    public void updateGeekeepHistory(ReadOnlyGeeKeep originalGeekeep) {
-        pastGeeKeeps.add(new GeeKeep(originalGeekeep));
+    public void updateGeekeepHistory(ReadOnlyGeeKeep originalGeekeepClone) {
+        pastGeeKeeps.add(originalGeekeepClone);
         futureGeeKeeps.clear();
     }
 
     @Override
     public void resetData(ReadOnlyGeeKeep newData) {
-        updateGeekeepHistory(geeKeep);
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.resetData(newData);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
@@ -84,15 +85,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        updateGeekeepHistory(geeKeep);
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.removeTask(target);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        updateGeekeepHistory(geeKeep);
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.addTask(task);
+        updateGeekeepHistory(originalGeekeepClone);
         updateFilteredListToShowAll();
         indicateGeeKeepChanged();
     }
@@ -190,19 +193,19 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0121658E
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.markTaskDone(taskListIndex);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
     @Override
     public void markTaskUndone(int filteredTaskListIndex) {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.markTaskUndone(taskListIndex);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
