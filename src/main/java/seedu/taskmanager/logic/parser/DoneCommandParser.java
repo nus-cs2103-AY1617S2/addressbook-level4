@@ -5,8 +5,8 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import java.util.Optional;
 
 import seedu.taskmanager.logic.commands.Command;
-import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.DoneCommand;
+import seedu.taskmanager.logic.commands.IncorrectCommand;
 
 public class DoneCommandParser {
     /**

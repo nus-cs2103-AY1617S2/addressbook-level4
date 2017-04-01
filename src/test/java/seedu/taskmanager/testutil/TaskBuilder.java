@@ -59,10 +59,10 @@ public class TaskBuilder {
         this.task.setEndDate(Optional.ofNullable(new EndDate(endDate)));
         return this;
     }
-    
-    // @@author A0114269E 
+
+    // @@author A0114269E
     /**
-     * To allow building TestTask with done status 
+     * To allow building TestTask with done status
      */
     public TaskBuilder withStatus(String status) {
         this.task.setStatus(new Status(status));

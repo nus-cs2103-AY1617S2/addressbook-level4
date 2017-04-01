@@ -34,13 +34,13 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_MARK_DONE_TASK_SUCCESS = "Task marked done: %1$s";
     public static final String MESSAGE_MARK_DONE_TASK_FAILURE = "ERROR! Task is already done.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    
+
     public final int targetIndex;
-    
+
     public DoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -64,7 +64,7 @@ public class DoneCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_SUCCESS, taskToMarkDone));
     }
-    
+
     /**
      * Creates and returns a {@code Task} with the status marked done
      */
@@ -78,7 +78,7 @@ public class DoneCommand extends Command {
         Status updatedStatus = new Status(true);
         UniqueTagList updatedTags = taskToMarkDone.getTags();
 
-        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus, 
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus,
                 updatedTags);
     }
 }

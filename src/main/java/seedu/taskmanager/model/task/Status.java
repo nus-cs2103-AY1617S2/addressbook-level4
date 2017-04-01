@@ -13,13 +13,13 @@ import seedu.taskmanager.commons.core.LogsCenter;
  */
 public class Status {
     private static final Logger logger = LogsCenter.getLogger(Status.class);
-    
+
     private static final String MESSAGE_STATUS_DONE = "Done";
     private static final String MESSAGE_STATUS_NOT_DONE = "Not Done";
 
     public boolean value;
 
-    /** 
+    /**
      * Default constructor
      */
     public Status() {
@@ -40,7 +40,7 @@ public class Status {
         assert status != null;
         if (status.equals(MESSAGE_STATUS_DONE)) {
             this.value = true;
-        } else if (status.equals(MESSAGE_STATUS_NOT_DONE)){
+        } else if (status.equals(MESSAGE_STATUS_NOT_DONE)) {
             this.value = false;
         } else {
             this.value = false;

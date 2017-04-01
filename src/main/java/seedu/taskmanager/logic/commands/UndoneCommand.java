@@ -33,13 +33,13 @@ public class UndoneCommand extends Command {
     public static final String MESSAGE_MARK_UNDONE_TASK_FAILURE = "ERROR! Task is already "
             + "marked NOT done.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    
+
     public final int targetIndex;
-    
+
     public UndoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -63,7 +63,7 @@ public class UndoneCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_MARK_UNDONE_TASK_SUCCESS, taskToMarkUndone));
     }
-    
+
     /**
      * Creates and returns a {@code Task} with the status marked done
      */
@@ -77,7 +77,7 @@ public class UndoneCommand extends Command {
         Status updatedStatus = new Status(false);
         UniqueTagList updatedTags = taskToMarkUndone.getTags();
 
-        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus, 
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus,
                 updatedTags);
     }
 }

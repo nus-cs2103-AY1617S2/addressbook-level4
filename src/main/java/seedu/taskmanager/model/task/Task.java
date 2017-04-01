@@ -60,7 +60,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getStartDate(), source.getEndDate(), source.getDescription(), source.getStatus(), source.getTags());
+        this(source.getTitle(), source.getStartDate(), source.getEndDate(), source.getDescription(),
+                source.getStatus(), source.getTags());
     }
 
     public void setTitle(Title title) {
@@ -109,7 +110,7 @@ public class Task implements ReadOnlyTask {
     public Status getStatus() {
         return status;
     }
-    
+
     public void setStatus(Status status) {
         assert status != null;
         this.status = status;
