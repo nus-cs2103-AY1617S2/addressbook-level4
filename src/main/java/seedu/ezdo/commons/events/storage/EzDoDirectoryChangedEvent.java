@@ -1,7 +1,6 @@
 package seedu.ezdo.commons.events.storage;
 
 import seedu.ezdo.commons.events.BaseEvent;
-import seedu.ezdo.model.ReadOnlyEzDo;
 
 //@@author A0139248X
 /**
