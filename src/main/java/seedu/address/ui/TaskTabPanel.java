@@ -146,6 +146,8 @@ public class TaskTabPanel extends UiPart<Region> {
                 commandResult = logic.execute(ViewCommand.COMMAND_WORD + " " + ViewCommand.TYPE_FLOATING);
             } else if (currTaskTab.equals(overdueTasksTab)) {
                 commandResult = logic.execute(ViewCommand.COMMAND_WORD + " " + ViewCommand.TYPE_OVERDUE);
+            } else if (currTaskTab.equals(todayTasksTab)) {
+                commandResult = logic.execute(ViewCommand.COMMAND_WORD + " " + ViewCommand.TYPE_TODAY);
             } else {
                 commandResult = logic.execute(ViewCommand.COMMAND_WORD + " " + ViewCommand.TYPE_ALL);
             }
