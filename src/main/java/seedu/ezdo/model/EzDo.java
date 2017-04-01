@@ -1,6 +1,8 @@
 package seedu.ezdo.model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,9 +13,14 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
+import seedu.ezdo.commons.exceptions.IllegalValueException;
+import seedu.ezdo.logic.parser.DateParser;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
+import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.Recur;
+import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
@@ -25,6 +32,7 @@ import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
  */
 public class EzDo implements ReadOnlyEzDo {
 
+    private static final int RECUR_INTERVAL_INCREMENT = 1;
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
 
@@ -154,11 +162,48 @@ public class EzDo implements ReadOnlyEzDo {
 
     public void doneTasks(ArrayList<Task> p) {
         for (int i = 0; i < p.size(); i++) {
+            updateRecurringDates(p, i);
             p.get(i).setDone();
         }
     }
-//@@author
-//// tag-level operations
+
+    // @@author A0139177W
+    private void updateRecurringDates(ArrayList<Task> p, int i) {
+               
+        try {
+            String recurIntervalInString = p.get(i).getRecur().toString().trim();
+            int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
+            
+            String startDateInString = p.get(i).getStartDate().value;
+            String dueDateInString = p.get(i).getDueDate().value;
+
+            String startDate = updateDate(recurringInterval, startDateInString, i);
+            String dueDate = updateDate(recurringInterval, dueDateInString, i);
+
+            tasks.add(new Task(p.get(i).getName(), p.get(i).getPriority(), new StartDate(startDate),
+                    new DueDate(dueDate), p.get(i).getRecur(), p.get(i).getTags()));
+
+        } catch (IllegalValueException ive) {
+            // Do nothing as the date is optional
+            // and cannot be parsed as Date object
+        }
+    }
+
+    private String updateDate(int type, String originalDate, int i) {
+        try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(DateParser.userOutputDateFormat.parse(originalDate));
+            c.add(type, RECUR_INTERVAL_INCREMENT);
+            return DateParser.userOutputDateFormat.format(c.getTime());
+        } catch (ParseException pe) {
+            // Do nothing as the date is optional
+            // and cannot be parsed as Date object
+        }
+        return originalDate;
+    }
+    // @@author
+
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
