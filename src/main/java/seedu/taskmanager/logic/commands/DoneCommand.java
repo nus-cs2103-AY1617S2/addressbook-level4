@@ -18,7 +18,7 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 /**
  * Mark a task as done in the Task Manager
  */
-public class MarkDoneCommand extends Command {
+public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
     public static final String ALTERNATIVE_COMMAND_WORD = "completed";
@@ -33,7 +33,7 @@ public class MarkDoneCommand extends Command {
     
     public final int targetIndex;
     
-    public MarkDoneCommand(int targetIndex) {
+    public DoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
     
