@@ -27,8 +27,12 @@ public class Date {
         String trimmedDate = date.trim();
 
         //@@author A0163848R
-        this.value = parse(trimmedDate);
-        //@@author
+
+        if(trimmedDate == "00.00")
+            this.value = trimmedDate;
+        else
+            this.value = parse(trimmedDate);
+        //@@author A0164032U
     }
 
     //@@author A0163848R
@@ -38,7 +42,7 @@ public class Date {
         String dateText = groups.get(0).getDates().get(0).toString();
         return dateText;
     }
-    //@@author
+    
 
     @Override
     public String toString() {

@@ -6,6 +6,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.StartDate;
+
 //@@author A0164032U
 public class PersonCard extends UiPart<Region> {
 
@@ -30,22 +34,20 @@ public class PersonCard extends UiPart<Region> {
 
     public PersonCard(ReadOnlyPerson person, int displayedIndex) {
         super(FXML);
+        
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-
-        // phone.setText(person.getPhone().value);
         if (person.getDate().value.equals("00.00")) {
             date.setText("");
         } else {
             date.setText("End date: " + person.getDate().value);
         }
 
-        if (person.getStartDate().equals("00.00")) {
+        if (person.getStartDate().value.equals("00.00")) {
             sdate.setText("");
         } else {
             sdate.setText("Start Date: " + person.getStartDate().value);
         }
-        // address.setText(person.getAddress().value);
         group.setText(person.getGroup().value);
         email.setText(person.getEmail().value);
         initTags(person);

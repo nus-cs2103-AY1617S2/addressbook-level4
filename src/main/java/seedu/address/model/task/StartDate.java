@@ -27,8 +27,10 @@ public class StartDate {
         assert sdate != null;
         String trimmedDate = sdate.trim();
 
-
-        this.value = parse(trimmedDate);
+        if(trimmedDate == "00.00")
+            this.value = trimmedDate;
+        else
+            this.value = parse(trimmedDate);
 
     }
 
@@ -38,7 +40,6 @@ public class StartDate {
         String dateText = groups.get(0).getDates().get(0).toString();
         return dateText;
     }
-    //@@author
 
     @Override
     public String toString() {
