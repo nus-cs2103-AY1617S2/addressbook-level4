@@ -11,8 +11,6 @@ import typetask.testutil.TestTask;
 //@@author A0144902L
 public class DoneCommandTest extends AddressBookGuiTest {
 
-    TestTask[] expectedTaskList = td.getTypicalTasks();
-
   //---------------- Tests for validity of given index for Different Format -----------------------------
 
     /*
@@ -84,24 +82,25 @@ public class DoneCommandTest extends AddressBookGuiTest {
      * Should return true.
      */
 
-    @Test
-    public void markDone_findThenMarkDone_success() throws Exception {
-        commandBox.runCommand("find Carl");
-        commandBox.runCommand("done 1");
-
-    }
+//    @Test
+//    public void findThenDoneSuccess() throws Exception {
+//        TestTask[] currentList = td.getTypicalTasks();
+//        commandBox.runCommand("find Carl");
+//        commandBox.runCommand("done 1");
+//        assertTrue(currentList[1].getIsCompleted());
+//    }
 
 
     //---------------- End of test cases --------------------------------------
 
     /**
      * Runs the done command to mark the task as done at specified index and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
+     * @param targetIndexOneIndexed e.g. index 1 to mark the first task in the list as done,
      * @param currentList A copy of the current list of tasks (before deletion).
      */
     private void assertDoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask TaskToComplete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        boolean isTestCompleted = TaskToComplete.getIsCompleted();
+        TestTask taskToComplete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        boolean isTestCompleted = taskToComplete.getIsCompleted();
 
         commandBox.runCommand("done " + targetIndexOneIndexed);
 
@@ -109,12 +108,12 @@ public class DoneCommandTest extends AddressBookGuiTest {
         assertTrue(isTestCompleted);
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, TaskToComplete));
+        assertResultMessage(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
     }
 
     private void assertCompleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask TaskToComplete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        boolean isTestCompleted = TaskToComplete.getIsCompleted();
+        TestTask taskToComplete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        boolean isTestCompleted = taskToComplete.getIsCompleted();
 
         commandBox.runCommand("complete " + targetIndexOneIndexed);
 
@@ -122,7 +121,7 @@ public class DoneCommandTest extends AddressBookGuiTest {
         assertTrue(isTestCompleted);
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, TaskToComplete));
+        assertResultMessage(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
     }
 
 }
