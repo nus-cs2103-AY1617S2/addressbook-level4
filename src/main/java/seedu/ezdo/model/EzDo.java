@@ -162,26 +162,26 @@ public class EzDo implements ReadOnlyEzDo {
 
     public void doneTasks(ArrayList<Task> p) {
         for (int i = 0; i < p.size(); i++) {
-            updateRecurringDates(p, i);
             p.get(i).setDone();
+            updateRecurringDates(p.get(i));
         }
     }
 
     // @@author A0139177W
-    private void updateRecurringDates(ArrayList<Task> p, int i) {
+    private void updateRecurringDates(Task task) {
 
         try {
-            String recurIntervalInString = p.get(i).getRecur().toString().trim();
+            String recurIntervalInString = task.getRecur().toString().trim();
             int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
 
-            String startDateInString = p.get(i).getStartDate().value;
-            String dueDateInString = p.get(i).getDueDate().value;
+            String startDateInString = task.getStartDate().value;
+            String dueDateInString = task.getDueDate().value;
 
-            String startDate = updateDate(recurringInterval, startDateInString, i);
-            String dueDate = updateDate(recurringInterval, dueDateInString, i);
+            String startDate = updateDate(recurringInterval, startDateInString);
+            String dueDate = updateDate(recurringInterval, dueDateInString);
 
-            tasks.add(new Task(p.get(i).getName(), p.get(i).getPriority(), new StartDate(startDate),
-                    new DueDate(dueDate), p.get(i).getRecur(), p.get(i).getTags()));
+            tasks.add(new Task(task.getName(), task.getPriority(), new StartDate(startDate),
+                    new DueDate(dueDate), task.getRecur(), task.getTags()));
 
         } catch (IllegalValueException ive) {
             // Do nothing as the date is optional
@@ -189,7 +189,7 @@ public class EzDo implements ReadOnlyEzDo {
         }
     }
 
-    private String updateDate(int type, String originalDate, int i) {
+    private String updateDate(int type, String originalDate) {
         try {
             Calendar c = Calendar.getInstance();
             c.setTime(DateParser.userOutputDateFormat.parse(originalDate));
