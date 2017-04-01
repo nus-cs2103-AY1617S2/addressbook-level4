@@ -38,7 +38,8 @@ public interface ReadOnlyTask {
                                                                   // onwards
                         && other.getPriority().equals(this.getPriority())
                         && other.getStartDate().equals(this.getStartDate()))
-                        && other.getDueDate().equals(this.getDueDate());
+                        && other.getDueDate().equals(this.getDueDate())
+                        && other.getRecur().equals(this.getRecur());
     }
 
     // @@author A0139248X

@@ -35,14 +35,26 @@ public class DoneCommandTest extends EzDoGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask[] doneList = td.getTypicalDoneTasks();
         int targetIndex = currentList.length;
+        TestTask doneTask_1 = currentList[targetIndex - 1];
         assertDoneSuccess(false, targetIndex, currentList, doneList);
-//        TestTask toDone = currentList[targetIndex - 1];
-//        doneList = TestUtil.addTasksToList(doneList, toDone);
+        doneList = TestUtil.addTasksToList(doneList, doneTask_1);
 
-        commandBox.runCommand("edit " + targetIndex + " f/");
+        // reset td.george (dates taken from typical test case) and set recurrence to nil
+        commandBox.runCommand("edit " + targetIndex + " s/02/07/2012 04:55 " + "d/17/07/2015 22:22 " + "f/");
+        TestTask editedTask = new TaskBuilder(currentList[targetIndex - 1]).build();
 
-        //marks a non recurring task in a list as done
+        try {
+            editedTask.setRecur(new Recur(""));
+        } catch (IllegalValueException e) {
+
+        }
+
+        currentList[targetIndex - 1] = editedTask;
+
+        //marks that non recurring task in a list as done
+        TestTask doneTask_2 = currentList[targetIndex - 1];
         assertDoneSuccess(false, targetIndex, currentList, doneList);
+        doneList = TestUtil.addTasksToList(doneList, doneTask_2);
 
         // invalid index
         commandBox.runCommand("done " + currentList.length + 1);
@@ -85,7 +97,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         }
 
         if (!taskToDone.getRecur().isRecur()) {
-
+            System.out.println(doneList.length);
             // confirm the task list no longer has the done task
             assertTrue(taskListPanel.isListMatching(currentList));
 
@@ -124,6 +136,7 @@ public class DoneCommandTest extends EzDoGuiTest {
             // done
             commandBox.runCommand("list");
             assertTrue(taskListPanel.isListMatching(currentList));
+            System.out.println(doneList.length);
         }
     }
 
