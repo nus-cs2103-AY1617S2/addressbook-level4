@@ -27,32 +27,24 @@ import seedu.ezdo.testutil.TestUtil;
 
 //@@author A0141010L
 public class DoneCommandTest extends EzDoGuiTest {
+
     @Test
     public void done_success() {
-        // marks first task in the list as done
+
+        // marks a recurring task in the list as done
         TestTask[] currentList = td.getTypicalTasks();
         TestTask[] doneList = td.getTypicalDoneTasks();
-        int targetIndex = 1;
-        TestTask toDone = currentList[targetIndex - 1];
+        int targetIndex = currentList.length;
         assertDoneSuccess(false, targetIndex, currentList, doneList);
+//        TestTask toDone = currentList[targetIndex - 1];
+//        doneList = TestUtil.addTasksToList(doneList, toDone);
 
-        // marks the middle task in the list as done
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-        doneList = TestUtil.addTasksToList(doneList, toDone);
-        targetIndex = currentList.length / 2;
-        toDone = currentList[targetIndex - 1];
-        assertDoneSuccess(true, targetIndex, currentList, doneList);
+        commandBox.runCommand("edit " + targetIndex + " f/");
 
-        // marks last task in the list as done
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-        doneList = TestUtil.addTasksToList(doneList, toDone);
-        targetIndex = currentList.length;
-        toDone = currentList[targetIndex - 1];
+        //marks a non recurring task in a list as done
         assertDoneSuccess(false, targetIndex, currentList, doneList);
-
+        
         // invalid index
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-        doneList = TestUtil.addTasksToList(doneList, toDone);
         commandBox.runCommand("done " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid.");
 
@@ -74,8 +66,8 @@ public class DoneCommandTest extends EzDoGuiTest {
 
     }
 
-    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, final TestTask[] currentList,
-            final TestTask[] doneList) {
+    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, TestTask[] currentList,
+            TestTask[] doneList) {
 
         TestTask taskToDone = currentList[targetIndexOneIndexed - 1]; // -1 as
                                                                       // array
@@ -83,10 +75,9 @@ public class DoneCommandTest extends EzDoGuiTest {
                                                                       // zero
                                                                       // indexing
         ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
-        tasksToDone.add(taskToDone);
-        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
-        TestTask[] expectedDone = TestUtil.addTasksToList(doneList, taskToDone);
-        System.out.println(expectedRemainder.length);
+        tasksToDone.add(taskToDone); // old date
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
+        doneList = TestUtil.addTasksToList(doneList, taskToDone);
         if (usesShortCommand) {
             commandBox.runCommand("d " + targetIndexOneIndexed);
         } else {
@@ -96,7 +87,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         if (!taskToDone.getRecur().isRecur()) {
 
             // confirm the task list no longer has the done task
-            assertTrue(taskListPanel.isListMatching(expectedRemainder));
+            assertTrue(taskListPanel.isListMatching(currentList));
 
             // confirm the result message is correct
             assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
@@ -105,20 +96,20 @@ public class DoneCommandTest extends EzDoGuiTest {
             commandBox.runCommand("done");
             TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
             assertMatching(taskToDone, addedCard);
-            assertTrue(taskListPanel.isListMatching(expectedDone));
+            assertTrue(taskListPanel.isListMatching(doneList));
 
             // confirm the undone list does not contain the task just marked as
             // done
             commandBox.runCommand("list");
-            assertTrue(taskListPanel.isListMatching(expectedRemainder));
+            assertTrue(taskListPanel.isListMatching(currentList));
 
         } else {
-            taskToDone = updateRecTask(taskToDone);
-            commandBox.runCommand(taskToDone.getAddCommand(usesShortCommand));
-            expectedRemainder = TestUtil.addTasksToList(expectedRemainder, taskToDone);
+
+            TestTask recTask = updateRecTask(new TestTask(taskToDone));
+
+            currentList = TestUtil.addTasksToList(currentList, recTask);
             // confirm the task list no longer has the done task
-            System.out.println(expectedRemainder.length);
-            assertTrue(taskListPanel.isListMatching(expectedRemainder));
+            assertTrue(taskListPanel.isListMatching(currentList));
 
             // confirm the result message is correct
             assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
@@ -126,22 +117,22 @@ public class DoneCommandTest extends EzDoGuiTest {
             // confirm the new done list contains the right data
             commandBox.runCommand("done");
             TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
-            assertMatching(taskToDone, addedCard);
-            assertTrue(taskListPanel.isListMatching(expectedDone));
+            assertMatching(tasksToDone.get(0), addedCard);
+            assertTrue(taskListPanel.isListMatching(doneList));
 
             // confirm the undone list does not contain the task just marked as
             // done
             commandBox.runCommand("list");
-            assertTrue(taskListPanel.isListMatching(expectedRemainder));
+            assertTrue(taskListPanel.isListMatching(currentList));
         }
     }
 
     private String updateDate(int type, String originalDate) {
         try {
-            int RECUR_INTERVAL_INCREMENT = 1;
+            int increment = 1;
             Calendar c = Calendar.getInstance();
             c.setTime(DateParser.userOutputDateFormat.parse(originalDate));
-            c.add(type, RECUR_INTERVAL_INCREMENT);
+            c.add(type, increment);
             return DateParser.userOutputDateFormat.format(c.getTime());
         } catch (ParseException pe) {
             // Do nothing as the date is optional

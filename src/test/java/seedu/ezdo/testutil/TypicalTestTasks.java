@@ -54,7 +54,7 @@ public class TypicalTestTasks {
                     .withPriority("3")
                     .withStartDate("02/07/2012 04:55")
                     .withDueDate("17/07/2015 22:22")
-                    .withRecur("monthly")
+                    .withRecur("daily")
                     .build();
 
             // Manually added
