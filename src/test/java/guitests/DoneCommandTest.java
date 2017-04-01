@@ -43,7 +43,7 @@ public class DoneCommandTest extends EzDoGuiTest {
 
         //marks a non recurring task in a list as done
         assertDoneSuccess(false, targetIndex, currentList, doneList);
-        
+
         // invalid index
         commandBox.runCommand("done " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid.");
