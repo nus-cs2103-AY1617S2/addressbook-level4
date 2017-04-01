@@ -8,7 +8,7 @@ import seedu.onetwodo.commons.events.ui.ShowHelpUGRequestEvent;
  */
 public class HelpUGCommand extends Command {
     public static final String COMMAND_WORD = "helpug";
-    public static final String COMMAND_WORD_FULL = "help userguide";
+    public static final String COMMAND_WORD_FULL = "helpuserguide";
     public static final String COMMAND_WORD_SHORT = "ug";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n" + "Example: "
