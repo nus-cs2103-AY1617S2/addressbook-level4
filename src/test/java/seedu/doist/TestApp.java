@@ -3,7 +3,6 @@ package seedu.doist;
 import java.util.function.Supplier;
 
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 import seedu.doist.commons.core.Config;
 import seedu.doist.commons.core.GuiSettings;
 import seedu.doist.logic.LogicManager;
@@ -73,6 +72,7 @@ public class TestApp extends MainApp {
         ReadOnlyTodoList initialData = initTodoListData(storage);
         ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
 
+        // isTest is set to true so that tests don't have to consider auto sorting of tasks to pass
         return new ModelManager(initialData, initialAliasData, userPrefs, config, true);
     }
 
@@ -93,14 +93,6 @@ public class TestApp extends MainApp {
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(800.0, 1000.0, (int) x, (int) y));
         return userPrefs;
-    }
-
-
-    @Override
-    public void start(Stage primaryStage) {
-        ui.start(primaryStage);
-        // We need to show all tasks during testing, even finished ones
-        model.updateFilteredListToShowAll();
     }
 
     public static void main(String[] args) {

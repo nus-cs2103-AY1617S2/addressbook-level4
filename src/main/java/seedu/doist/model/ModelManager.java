@@ -29,6 +29,7 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskAlphabetComparator;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskCombinedComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskFinishedStatusComparator;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskTimingComparator;
 import seedu.doist.model.task.Task;
@@ -67,10 +68,10 @@ public class ModelManager extends ComponentManager implements Model {
         this.config = config;
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
-        if (!isTest) {
-            updateFilteredListToShowDefault();
-            sortTasksByDefault();
-        }
+        //if (!isTest) {
+        updateFilteredListToShowDefault();
+        sortTasksByDefault();
+        //}
         saveCurrentToHistory();
     }
 
@@ -158,7 +159,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0140887W
     @Override
-    public synchronized void finishTask(ReadOnlyTask target) throws TaskNotFoundException,
+    public int finishTask(ReadOnlyTask target) throws TaskNotFoundException,
         TaskAlreadyFinishedException {
         assert target != null;
         try {
@@ -166,44 +167,72 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (TaskAlreadyUnfinishedException e) {
             assert false : "finishTask should not try to unfinish tasks!";
         }
+        updateFilteredListToShowDefault();
+        sortTasksByDefault();
         indicateTodoListChanged();
+        return todoList.getTaskIndex(target);
     }
 
     @Override
-    public synchronized void unfinishTask(ReadOnlyTask target) throws TaskNotFoundException,
+    public int unfinishTask(ReadOnlyTask target) throws TaskNotFoundException,
         TaskAlreadyUnfinishedException {
         try {
             todoList.changeTaskFinishStatus(target, false);
         } catch (TaskAlreadyFinishedException e) {
             assert false : "unfinishTask should not try to finish tasks!";
         }
+        updateFilteredListToShowDefault();
+        sortTasksByDefault();
         indicateTodoListChanged();
+        return todoList.getTaskIndex(target);
     }
 
-    //@@author
     @Override
     public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        int index = todoList.addTask(task);
+        todoList.addTask(task);
         updateFilteredListToShowDefault();
+        sortTasksByDefault();
         indicateTodoListChanged();
-        return index;
+        return todoList.getTaskIndex(task);
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public int updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
         int todoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         todoList.updateTask(todoListIndex, editedTask);
         updateFilteredListToShowDefault();
+        sortTasksByDefault();
         indicateTodoListChanged();
+        return todoList.getTaskIndex(editedTask);
     }
 
-    //@@author A0140887W
+    @Override
+    public void sortTasksByDefault() {
+        sortTasks(getDefaultSorting());
+    }
+
+    @Override
+    public List<SortType> getDefaultSorting() {
+        List<SortType> sortTypes = new ArrayList<SortType>();
+        sortTypes.add(SortType.TIME);
+        sortTypes.add(SortType.PRIORITY);
+        sortTypes.add(SortType.ALPHA);
+        return sortTypes;
+    }
+
     @Override
     public void sortTasks(List<SortType> sortTypes) {
+        todoList.sortTasks(parseSortTypesToComparator(sortTypes));
+    }
+
+    @Override
+    public ReadOnlyTaskCombinedComparator parseSortTypesToComparator(List<SortType> sortTypes) {
         List<Comparator<ReadOnlyTask>> comparatorList = new ArrayList<Comparator<ReadOnlyTask>>();
+        // Finished tasks are always put at the bottom
+        comparatorList.add(new ReadOnlyTaskFinishedStatusComparator());
         for (SortType type : sortTypes) {
             if (type.equals(SortType.PRIORITY)) {
                 comparatorList.add(new ReadOnlyTaskPriorityComparator());
@@ -213,25 +242,15 @@ public class ModelManager extends ComponentManager implements Model {
                 comparatorList.add(new ReadOnlyTaskAlphabetComparator());
             }
         }
-        todoList.sortTasks(new ReadOnlyTaskCombinedComparator(comparatorList));
+        return new ReadOnlyTaskCombinedComparator(comparatorList);
     }
-
-    public void sortTasksByDefault() {
-        List<SortType> sortTypes = new ArrayList<SortType>();
-        sortTypes.add(SortType.TIME);
-        sortTypes.add(SortType.PRIORITY);
-        sortTypes.add(SortType.ALPHA);
-        sortTasks(sortTypes);
-    }
-    //@@author
-
 
     //@@author A0147620L
     public ArrayList<String> getAllNames() {
         return todoList.getTaskNames();
     }
 
-
+    //@@author
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -240,19 +259,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
-    }
-
-    //@@author A0140887W
-    @Override
     public void updateFilteredListToShowDefault() {
         filteredTasks.setPredicate(null);
-        Qualifier[] qualifiers = {new TaskTypeQualifier(TaskType.NOT_FINISHED)};
-        updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
-
-    //@@author
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
@@ -370,8 +379,6 @@ public class ModelManager extends ComponentManager implements Model {
                 return !task.getFinishedStatus().getIsFinished() && !task.isOverdue();
             case OVERDUE:
                 return task.isOverdue();
-            case NOT_FINISHED:
-                return !task.getFinishedStatus().getIsFinished();
             default:
                 return true;
             }
@@ -406,6 +413,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTodoListChanged();
     }
 
+  //@@author A0140887W
   //========== change absolute storage path =================================================
     @Override
     public void changeConfigAbsolutePath(Path path) {

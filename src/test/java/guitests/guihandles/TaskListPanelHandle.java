@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import guitests.DoistGUITest;
 import guitests.GuiRobot;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -57,6 +58,8 @@ public class TaskListPanelHandle extends GuiHandle {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " tasks");
         }
+        // tasks will be auto sorted in GUI so we have to sort here
+        DoistGUITest.sortTasksByDefault(tasks);
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
             final int scrollTo = i + startPosition;
@@ -90,6 +93,8 @@ public class TaskListPanelHandle extends GuiHandle {
 
         // Return false if any of the persons doesn't match
         for (int i = 0; i < tasks.length; i++) {
+            System.out.println(tasksInList.get(startPosition + i).getDescription().desc);
+            System.out.println(tasks[i].getDescription().desc);
             if (!tasksInList.get(startPosition + i).getDescription().desc.equals(tasks[i].getDescription().desc)) {
                 return false;
             }

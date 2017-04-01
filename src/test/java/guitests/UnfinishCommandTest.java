@@ -31,12 +31,12 @@ public class UnfinishCommandTest extends DoistGUITest {
         int targetIndex = 1;
         assertFinishSuccess(targetIndex, currentList);
 
-        //Unfinish the last in the list
-        targetIndex = currentList.length;
-        assertFinishSuccess(targetIndex, currentList);
-
         //Unfinish from the middle of the list
         targetIndex = currentList.length / 2;
+        assertFinishSuccess(targetIndex, currentList);
+
+        //Unfinish the last in the list
+        targetIndex = currentList.length;
         assertFinishSuccess(targetIndex, currentList);
 
         //invalid index
@@ -53,17 +53,17 @@ public class UnfinishCommandTest extends DoistGUITest {
      * @param currentList A copy of the current list of persons (before deletion).
      */
     private void assertFinishSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask[] expectedRemainder = currentList.clone();
-        TestTask taskToUnfinish = expectedRemainder[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestTask[] expectedTasks = currentList.clone();
+        TestTask taskToUnfinish = expectedTasks[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         taskToUnfinish.setFinishedStatus(false);
 
         commandBox.runCommand("unfinish " + targetIndexOneIndexed);
 
         //confirm the list matching
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedTasks));
 
         //confirm that UI is showing normal
-        TaskCardHandle finishedCard = taskListPanel.getTaskCardHandle(targetIndexOneIndexed - 1);
+        TaskCardHandle finishedCard = taskListPanel.getTaskCardHandle(taskToUnfinish);
         assertTrue(finishedCard.isStyleInStyleClass("normal"));
 
         //confirm the result message is correct

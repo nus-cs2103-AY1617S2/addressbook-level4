@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_DATES;
 
-import java.util.Date;
 
 import org.junit.Test;
 
@@ -22,7 +21,7 @@ public class EditCommandTest extends DoistGUITest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedPersonsList = td.getTypicalTasks();
+    TestTask[] expectedTasks = td.getTypicalTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
@@ -30,7 +29,7 @@ public class EditCommandTest extends DoistGUITest {
         int addressBookIndex = 1;
 
         TestTask editedPerson = new TaskBuilder().withName("Buy mangoes").
-                withTags("groceries").withDates(null, null).withPriority("normal").build();
+                withTags("groceries").withPriority("normal").build();
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
@@ -39,7 +38,7 @@ public class EditCommandTest extends DoistGUITest {
         String detailsToEdit = "\\as very important";
         int addressBookIndex = 2;
 
-        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+        TestTask personToEdit = expectedTasks[addressBookIndex - 1];
         TestTask editedPerson = new TaskBuilder(personToEdit).withPriority("very important").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
@@ -50,8 +49,8 @@ public class EditCommandTest extends DoistGUITest {
         String detailsToEdit = "\\by";
         int addressBookIndex = 2;
 
-        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withDates(null, null).build();
+        TestTask personToEdit = expectedTasks[addressBookIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -62,12 +61,11 @@ public class EditCommandTest extends DoistGUITest {
 
         String detailsToEdit = "Complete chemistry homework";
         int filteredPersonListIndex = 1;
-        int addressBookIndex = 2;
+        int todoListIndex = 3;
 
-        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework")
-                .withDates(new Date(), new Date()).build();
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        TestTask personToEdit = expectedTasks[todoListIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
+        assertEditSuccess(filteredPersonListIndex, todoListIndex, detailsToEdit, editedPerson);
     }
 
     @Test
@@ -147,8 +145,8 @@ public class EditCommandTest extends DoistGUITest {
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
-        expectedPersonsList[addressBookIndex - 1] = editedPerson;
-        assertTrue(taskListPanel.isListMatching(expectedPersonsList));
+        expectedTasks[addressBookIndex - 1] = editedPerson;
+        assertTrue(taskListPanel.isListMatching(expectedTasks));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
     }
 }

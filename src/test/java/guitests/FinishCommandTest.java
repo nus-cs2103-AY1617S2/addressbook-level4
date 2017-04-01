@@ -19,11 +19,12 @@ public class FinishCommandTest extends DoistGUITest {
 
         //finish the first in the list
         TestTask[] currentList = td.getTypicalTasks();
+
         int targetIndex = 1;
         assertFinishSuccess(targetIndex, currentList);
 
         //finish the last in the list
-        targetIndex = currentList.length;
+        targetIndex = currentList.length - 1;
         assertFinishSuccess(targetIndex, currentList);
 
         //finish from the middle of the list
@@ -35,7 +36,7 @@ public class FinishCommandTest extends DoistGUITest {
         assertResultMessage("The task index provided is invalid");
 
         // finish a task that has already been finished
-        assertAlreadyFinished(1, currentList);
+        assertAlreadyFinished(currentList.length, currentList);
     }
 
     /**
@@ -44,17 +45,18 @@ public class FinishCommandTest extends DoistGUITest {
      * @param currentList A copy of the current list of persons (before deletion).
      */
     private void assertFinishSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask[] expectedRemainder = currentList.clone();
-        TestTask taskToFinish = expectedRemainder[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        taskToFinish.setFinishedStatus(true);
+        TestTask[] expectedTasks = currentList.clone();
+        sortTasksByDefault(expectedTasks);
 
+        TestTask taskToFinish = expectedTasks[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        taskToFinish.setFinishedStatus(true);
         commandBox.runCommand("finish " + targetIndexOneIndexed);
 
         //confirm the list matching
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedTasks));
 
         //confirm that UI is showing finished
-        TaskCardHandle finishedCard = taskListPanel.getTaskCardHandle(targetIndexOneIndexed - 1);
+        TaskCardHandle finishedCard = taskListPanel.getTaskCardHandle(taskToFinish);
         assertTrue(finishedCard.isStyleInStyleClass("finished"));
 
         //confirm the result message is correct
@@ -64,14 +66,15 @@ public class FinishCommandTest extends DoistGUITest {
     }
 
     private void assertAlreadyFinished(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask[] expectedRemainder = currentList.clone();
-        TestTask taskToFinish = expectedRemainder[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestTask[] expectedTasks = currentList.clone();
+        sortTasksByDefault(expectedTasks);
+        TestTask taskToFinish = expectedTasks[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         taskToFinish.setFinishedStatus(true);
 
         commandBox.runCommand("finish " + targetIndexOneIndexed);
 
         //confirm the list matching
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedTasks));
 
         //confirm the result message is correct
         ArrayList<TestTask> tasksToFinish = new ArrayList<TestTask>();

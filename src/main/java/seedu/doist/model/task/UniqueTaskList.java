@@ -24,6 +24,13 @@ public class UniqueTaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
+     * Returns the index of a task in the internal list, or -1 if no such task
+     */
+    public int getTaskIndex(ReadOnlyTask task) {
+        return internalList.indexOf(task);
+    }
+
+    /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
     public boolean contains(ReadOnlyTask toCheck) {

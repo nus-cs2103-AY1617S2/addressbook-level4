@@ -65,12 +65,13 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            int index  = model.updateTask(filteredTaskListIndex, editedTask);
+            if (index >= 0) {
+                EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+            }
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), true);
     }
 

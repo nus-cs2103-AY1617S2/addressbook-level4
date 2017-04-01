@@ -2,6 +2,8 @@ package seedu.doist.logic.commands;
 
 import java.util.ArrayList;
 
+import seedu.doist.commons.core.EventsCenter;
+import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
@@ -40,7 +42,10 @@ public class FinishCommand extends Command {
 
         for (ReadOnlyTask task : tasksToFinish) {
             try {
-                model.finishTask(task);
+                int index  = model.finishTask(task);
+                if (index >= 0) {
+                    EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+                }
                 tasksFinished.add(task);
             } catch (TaskNotFoundException tnfe) {
                 assert false : "The target task cannot be missing";

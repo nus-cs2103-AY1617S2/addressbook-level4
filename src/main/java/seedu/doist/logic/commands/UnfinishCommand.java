@@ -2,6 +2,8 @@ package seedu.doist.logic.commands;
 
 import java.util.ArrayList;
 
+import seedu.doist.commons.core.EventsCenter;
+import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
@@ -40,7 +42,11 @@ public class UnfinishCommand extends Command {
 
         for (ReadOnlyTask task : tasksToUnfinish) {
             try {
-                model.unfinishTask(task);
+                int index  = model.unfinishTask(task);
+                if (index >= 0) {
+                    System.out.println(index);
+                    EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+                }
                 tasksUnfinished.add(task);
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";

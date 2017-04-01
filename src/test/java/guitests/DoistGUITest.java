@@ -3,6 +3,9 @@ package guitests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -25,8 +28,14 @@ import javafx.stage.Stage;
 import seedu.doist.TestApp;
 import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.events.BaseEvent;
+import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.TodoList;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskAlphabetComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskCombinedComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskFinishedStatusComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskTimingComparator;
 import seedu.doist.testutil.TestUtil;
 import seedu.doist.testutil.TypicalTestTasks;
 import seedu.doist.ui.util.CommandHighlightManager;
@@ -160,5 +169,33 @@ public abstract class DoistGUITest {
     public void raise(BaseEvent e) {
         //JUnit doesn't run its test cases on the UI thread. Platform.runLater is used to post event on the UI thread.
         Platform.runLater(() -> EventsCenter.getInstance().post(e));
+    }
+
+    //@@author A0140887W
+    public static void sortTasks(List<SortType> sortTypes, ReadOnlyTask[] tasks) {
+        List<Comparator<ReadOnlyTask>> comparatorList = new ArrayList<Comparator<ReadOnlyTask>>();
+        // Finished tasks are always put at the bottom
+        comparatorList.add(new ReadOnlyTaskFinishedStatusComparator());
+        for (SortType type : sortTypes) {
+            if (type.equals(SortType.PRIORITY)) {
+                comparatorList.add(new ReadOnlyTaskPriorityComparator());
+            } else if (type.equals(SortType.TIME)) {
+                comparatorList.add(new ReadOnlyTaskTimingComparator());
+            } else if (type.equals(SortType.ALPHA)) {
+                comparatorList.add(new ReadOnlyTaskAlphabetComparator());
+            }
+        }
+        Arrays.sort(tasks, new ReadOnlyTaskCombinedComparator(comparatorList));
+    }
+
+    /**
+     * Sorts the given tasks by priority, time then alpha. Finished tasks are always put at the bottom
+     */
+    public static void sortTasksByDefault(ReadOnlyTask[] tasks) {
+        List<SortType> sortTypes = new ArrayList<SortType>();
+        sortTypes.add(SortType.TIME);
+        sortTypes.add(SortType.PRIORITY);
+        sortTypes.add(SortType.ALPHA);
+        sortTasks(sortTypes, tasks);
     }
 }

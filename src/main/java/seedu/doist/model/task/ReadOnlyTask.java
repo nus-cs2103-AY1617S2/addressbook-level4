@@ -105,6 +105,26 @@ public interface ReadOnlyTask {
     }
 
     /**
+     * Compare the finished status of two tasks
+     * @return: -1 if task1 is not finished but task2 is finished
+     */
+    public class ReadOnlyTaskFinishedStatusComparator implements Comparator<ReadOnlyTask> {
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            FinishedStatus status1 = task1.getFinishedStatus();
+            FinishedStatus status2 = task2.getFinishedStatus();
+            // finished tasks are put behind
+            if (status1.getIsFinished() == status2.getIsFinished()) {
+                return 0;
+            } else if (!status1.getIsFinished() && status2.getIsFinished()) {
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+    }
+
+    /**
      * Combines multiple comparators together to compare tasks.
      * For example if you want to sort by end time then by priority,
      * you create a list of comparators, adding the end time comparator first
