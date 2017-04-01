@@ -13,7 +13,7 @@ import seedu.ezdo.model.util.SampleDataUtil;
 public class ConstructorTest {
 
     @Test
-    public void test() {
+    public void construct_notNull() {
         assertNotNull(new Messages());
         assertNotNull(new SampleDataUtil());
         assertNotNull(new ConfigUtil());
