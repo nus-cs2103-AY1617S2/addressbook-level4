@@ -22,5 +22,4 @@ public class ConstructorTest {
         assertNotNull(new CollectionUtil());
         assertNotNull(new LogsCenter());
     }
-
 }
