@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
-import seedu.taskboss.logic.commands.UndoCommand;
+import seedu.taskboss.logic.commands.RedoCommand;
 import seedu.taskboss.testutil.TestTask;
 import seedu.taskboss.testutil.TestUtil;
 
