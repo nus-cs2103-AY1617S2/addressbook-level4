@@ -16,6 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.CommandAutoCompleteViewHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.HelpHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TabBarViewHandle;
@@ -51,6 +52,7 @@ public abstract class ToLuistGuiTest {
     protected TaskListHandle taskList;
     protected TabBarViewHandle tabBar;
     protected CommandAutoCompleteViewHandle commandAutoCompleteView;
+    protected HelpHandle helpView;
 
     private Stage stage;
 
@@ -73,6 +75,7 @@ public abstract class ToLuistGuiTest {
             taskList = mainGui.getTaskList();
             tabBar = mainGui.getTabBar();
             commandAutoCompleteView = mainGui.getCommandAutoCompleteView();
+            helpView = mainGui.getHelpView();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();

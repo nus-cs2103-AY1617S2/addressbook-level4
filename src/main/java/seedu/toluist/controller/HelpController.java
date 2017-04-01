@@ -18,8 +18,9 @@ public class HelpController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(HelpController.class);
     private static final String MESSAGE_ERROR = "Sorry, that command does not exist.\n"
                                                     + "Please type help for available commands.";
-    private static final String HEADING_GENERAL = "Displaying general help. Press any keys to exit.";
-    private static final String HEADING_SPECIFIC = "Displaying detailed help for %s. Press any keys to exit.";
+    private static final String HEADING_GENERAL = "Displaying general help. Press any keys to go back.";
+    private static final String HEADING_SPECIFIC = "Displaying detailed help for %s. "
+                                                    + "Press any keys to go back.";
     private static final String COMMAND_WORD = "help";
     private static final String COMMAND_REGEX = "(?iu)^\\s*help.*";
 
@@ -70,8 +71,9 @@ public class HelpController extends Controller {
     private void showSpecificHelp(String commandWord) {
         List<List<String>> detailedHelp =
                 Arrays.asList(getControllerFromKeyword(commandWord).getDetailedHelp()).stream()
-                .map(help -> Arrays.asList(help))
-                .collect(Collectors.toList());
+                    .filter(help -> help != null)
+                    .map(help -> Arrays.asList(help))
+                    .collect(Collectors.toList());
         uiStore.setHelp(String.format(HEADING_SPECIFIC, commandWord),
                 Arrays.asList(convertListListToStringForDetailed(detailedHelp)));
     }
@@ -111,8 +113,10 @@ public class HelpController extends Controller {
         finalResult += String.join(FORMAT_SPACING, detailedHelp.get(INDEX_HELP_BASIC));
         finalResult += STRING_COMMENTS;
         finalResult += String.join(FORMAT_SPACING, detailedHelp.get(INDEX_HELP_COMMENTS));
-        finalResult += STRING_EXAMPLES;
-        finalResult += String.join(FORMAT_SPACING, detailedHelp.get(INDEX_HELP_EXAMPLES));
+        if (INDEX_HELP_EXAMPLES < detailedHelp.size()) {
+            finalResult += STRING_EXAMPLES;
+            finalResult += String.join(FORMAT_SPACING, detailedHelp.get(INDEX_HELP_EXAMPLES));
+        }
         return finalResult;
     }
 

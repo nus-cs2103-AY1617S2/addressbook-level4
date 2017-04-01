@@ -1,7 +1,9 @@
+//@@author A0162011A
 package seedu.toluist.ui.view;
 
+import java.util.List;
+
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
@@ -12,10 +14,8 @@ import javafx.util.Pair;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.ui.UiStore;
 
-import java.util.List;
-
 /**
- * Created by louis on 1/4/17.
+ * HelpListView is responsible for the view displaying help
  */
 public class HelpListView extends UiView {
 
