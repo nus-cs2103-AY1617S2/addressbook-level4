@@ -115,6 +115,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void doneTasks(ArrayList<Task> doneTasks) {
         updateStacks();
         ezDo.doneTasks(doneTasks);
+        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
