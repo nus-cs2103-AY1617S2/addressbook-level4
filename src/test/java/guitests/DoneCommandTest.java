@@ -19,6 +19,7 @@ import seedu.ezdo.logic.parser.DateParser;
 import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.testutil.TaskBuilder;
 import seedu.ezdo.testutil.TestTask;
 import seedu.ezdo.testutil.TestUtil;
 
