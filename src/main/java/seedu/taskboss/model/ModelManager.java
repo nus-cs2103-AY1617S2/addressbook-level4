@@ -66,7 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyTaskBoss newData) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.resetData(newData);
-        taskbossUndoHistory.clear();
+
         indicateTaskBossChanged();
     }
 
@@ -138,7 +138,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
         taskBoss.sortTasks(currentSortType);
-        taskbossUndoHistory.clear();
+
         indicateTaskBossChanged();
     }
 
@@ -148,7 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert sortType != null;
         this.currentSortType = sortType;
         taskBoss.sortTasks(sortType);
-        taskbossUndoHistory.clear();
+
         indicateTaskBossChanged();
     }
 
@@ -172,7 +172,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
             index++;
         }
-        taskbossUndoHistory.clear();
+
         indicateTaskBossChanged();
     }
 
