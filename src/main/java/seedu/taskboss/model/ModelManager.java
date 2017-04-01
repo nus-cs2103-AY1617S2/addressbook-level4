@@ -80,8 +80,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoTaskboss() throws EmptyStackException, IllegalValueException {
         TaskBoss currentTaskList = new TaskBoss(this.taskBoss);
         taskBoss.resetData(taskbossHistory.pop());
-    	taskbossUndoHistory.push(currentTaskList);
-    	updateFilteredListToShowAll();
+        taskbossUndoHistory.push(currentTaskList);
+        updateFilteredListToShowAll();
 
         indicateTaskBossChanged();
     }
@@ -89,9 +89,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void redoTaskboss() throws EmptyStackException, IllegalValueException {
         TaskBoss previousTaskList = new TaskBoss(this.taskBoss);
-    	taskBoss.resetData(taskbossUndoHistory.pop());
-    	taskbossHistory.push(previousTaskList);
-    	updateFilteredListToShowAll();
+        taskBoss.resetData(taskbossUndoHistory.pop());
+        taskbossHistory.push(previousTaskList);
+        updateFilteredListToShowAll();
 
         indicateTaskBossChanged();
     }
