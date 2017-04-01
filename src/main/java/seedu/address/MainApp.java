@@ -75,7 +75,7 @@ public class MainApp extends Application {
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialData ;
         
         try {
             addressBookOptional = storage.readAddressBook(userPrefs.getGuiSettings().getLastLoadedYTomorrow());

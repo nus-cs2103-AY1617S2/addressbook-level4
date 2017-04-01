@@ -46,6 +46,7 @@ import seedu.address.model.task.Email;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
 
@@ -418,13 +419,14 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Date privateDate = new Date("12.11");
+            StartDate privateStartDate = new StartDate("12.20");
             Email email = new Email("adam@gmail.com");
             Group privateGroup = new Group("leisure time");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             Tag tag3 = new Tag("incomplete");
             UniqueTagList tags = new UniqueTagList(tag1, tag2, tag3);
-            return new Task(name, privateDate, email, privateGroup, tags);
+            return new Task(name, privateDate,privateStartDate, email, privateGroup, tags);
         }
 
         //@@author A0164889E
@@ -439,6 +441,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Person " + seed),
                     new Date("0" + Math.abs(seed) + ".0" + Math.abs(seed)),
+                    new StartDate("0" + Math.abs(seed) + ".0" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Group("list of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -539,6 +542,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Date("12.11"),
+                    new StartDate("12.21"),
                     new Email("1@email"),
                     new Group("list of 1"),
                     new UniqueTagList(new Tag("tag"))
