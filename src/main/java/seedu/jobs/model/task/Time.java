@@ -129,5 +129,3 @@ public class Time implements Comparable<Time> {
     }
 
 }
-
-//@@author A0130979U

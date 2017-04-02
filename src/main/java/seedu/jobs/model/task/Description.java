@@ -49,5 +49,4 @@ public class Description {
     }
 
 }
-//@@author A0130979U
 

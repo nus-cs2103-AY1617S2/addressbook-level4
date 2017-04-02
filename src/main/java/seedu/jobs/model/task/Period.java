@@ -52,4 +52,3 @@ public class Period {
     }
 
 }
-//@@author A0130979U
