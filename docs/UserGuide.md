@@ -3,7 +3,7 @@
 
 ## Table of contents
 
-1. *[Intoduction](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#1-introduction) <br>
+1. [Intoduction](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#1-introduction) <br>
 2. [Quick Start](#quick-start) <br>
 3. [Features](#features) <br>
    3.1.  [Viewing Help](#viewing-help) <br>
