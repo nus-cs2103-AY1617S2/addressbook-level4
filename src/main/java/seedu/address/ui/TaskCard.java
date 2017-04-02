@@ -10,6 +10,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -34,6 +35,10 @@ public class TaskCard extends UiPart<Region> {
     private Label taskDate;
     @FXML
     private JFXProgressBar progressBar;
+    @FXML
+    private JFXProgressBar overdueBar;
+    @FXML
+    private AnchorPane cardCell;
 
     public TaskCard(ReadOnlyTask task, String displayedIndex) {
         super(FXML);
@@ -44,6 +49,7 @@ public class TaskCard extends UiPart<Region> {
         tags.setAlignment(Pos.CENTER_LEFT);
         taskDate.setAlignment(Pos.BASELINE_RIGHT);
         progressBar.setVisible(task.isAnimated());
+
         logger.info("############################################TASK ISANIMATED:" + task.isAnimated());
         if (task.isAnimated()) {
             // Play progress bar animation
@@ -55,6 +61,10 @@ public class TaskCard extends UiPart<Region> {
             timeline.setCycleCount(2);
             timeline.play();
             task.setAnimation(false);
+        }
+        // set red if overdue
+        if (task.isOverdue()) {
+            cardCell.setStyle("-fx-background-color: #ffdbe0;");
         }
     }
 
