@@ -291,7 +291,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
+    public void executeSelectIndexNotFoundErrorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("select");
     }
 

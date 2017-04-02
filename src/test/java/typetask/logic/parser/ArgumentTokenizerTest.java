@@ -16,14 +16,14 @@ public class ArgumentTokenizerTest {
     private final Prefix hatQ = new Prefix("^Q");
 
     @Test
-    public void accessors_notTokenizedYet() {
+    public void accessorsNotTokenizedYet() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP);
         assertPreambleAbsent(tokenizer);
         assertArgumentAbsent(tokenizer, slashP);
     }
 
     @Test
-    public void tokenize_emptyArgsString_noValues() {
+    public void tokenizeEmptyArgsStringNoValues() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP);
         String argsString = "  ";
         tokenizer.tokenize(argsString);
@@ -59,7 +59,7 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
-    public void tokenize_noPrefixes_allTakenAsPreamble() {
+    public void tokenizeNoPrefixes_allTakenAsPreamble() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer();
         String argsString = "  some random string /t tag with leading and trailing spaces ";
         tokenizer.tokenize(argsString);
@@ -70,7 +70,7 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
-    public void tokenize_oneArgument() {
+    public void tokenizeOneArgument() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP);
 
         // Preamble present
@@ -86,7 +86,7 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
-    public void tokenize_multipleArguments() {
+    public void tokenizeMultipleArguments() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP, dashT, hatQ);
 
         // Only two arguments are present
@@ -123,7 +123,7 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
-    public void tokenize_multipleArgumentsWithRepeats() {
+    public void tokenizeMultipleArgumentsWithRepeats() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP, dashT, hatQ);
 
         // Two arguments repeated, some have empty values

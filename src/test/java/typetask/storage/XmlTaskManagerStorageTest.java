@@ -28,7 +28,7 @@ public class XmlTaskManagerStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readTaskManager_nullFilePath_assertionFailure() throws Exception {
+    public void readTaskManagerNullFilePathAssertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
         readTaskManager(null);
     }
@@ -44,12 +44,12 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void read_missingFile_emptyResult() throws Exception {
+    public void readMissingFileEmptyResult() throws Exception {
         assertFalse(readTaskManager("NonExistentFile.xml").isPresent());
     }
 
     @Test
-    public void read_notXmlFormat_exceptionThrown() throws Exception {
+    public void readNotXmlFormatExceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
         readTaskManager("NotXmlFormatAddressBook.xml");
@@ -60,7 +60,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void readAndSaveTaskManager_allInOrder_success() throws Exception {
+    public void readAndSaveTaskManagerAllInOrderSuccess() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManager();
@@ -87,7 +87,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void saveTaskManager_nullTaskManager_assertionFailure() throws IOException {
+    public void saveTaskManagerNullTaskManagerAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(null, "SomeFile.xml");
     }
@@ -97,7 +97,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void saveTaskManager_nullFilePath_assertionFailure() throws IOException {
+    public void saveTaskManagerNullFilePathAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(new TaskManager(), null);
     }

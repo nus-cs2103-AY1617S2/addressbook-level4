@@ -58,7 +58,7 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCase_nullWord_exceptionThrown() {
+    public void containsWordIgnoreCaseNullWordExceptionThrown() {
         assertExceptionThrown("typical sentence", null, "Word parameter cannot be null");
     }
 
@@ -69,17 +69,17 @@ public class StringUtilTest {
     }
 
     @Test
-    public void containsWordIgnoreCase_emptyWord_exceptionThrown() {
+    public void containsWordIgnoreCaseEmptyWordExceptionThrown() {
         assertExceptionThrown("typical sentence", "  ", "Word parameter cannot be empty");
     }
 
     @Test
-    public void containsWordIgnoreCase_multipleWords_exceptionThrown() {
+    public void containsWordIgnoreCaseMultipleWordsExceptionThrown() {
         assertExceptionThrown("typical sentence", "aaa BBB", "Word parameter should be a single word");
     }
 
     @Test
-    public void containsWordIgnoreCase_nullSentence_exceptionThrown() {
+    public void containsWordIgnoreCaseNullSentenceExceptionThrown() {
         assertExceptionThrown(null, "abc", "Sentence parameter cannot be null");
     }
 
@@ -109,7 +109,7 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCase_validInputs_correctResult() {
+    public void containsWordIgnoreCaseValidInputsCorrectResult() {
 
         // Empty sentence
         assertFalse(StringUtil.containsWordIgnoreCase("", "abc")); // Boundary case
@@ -137,13 +137,13 @@ public class StringUtilTest {
      */
 
     @Test
-    public void getDetails_exceptionGiven() {
+    public void getDetailsExceptionGiven() {
         assertThat(StringUtil.getDetails(new FileNotFoundException("file not found")),
                    containsString("java.io.FileNotFoundException: file not found"));
     }
 
     @Test
-    public void getDetails_nullGiven_assertionError() {
+    public void getDetailsNullGivenAssertionError() {
         thrown.expect(AssertionError.class);
         StringUtil.getDetails(null);
     }
