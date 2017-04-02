@@ -127,6 +127,8 @@ public class CalendarPanel extends UiPart<Region> {
             } else {
                 changeView("week");
             }
+        } else {
+            changeView("month");
         }
     }
 

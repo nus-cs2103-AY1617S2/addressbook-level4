@@ -4,13 +4,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
 
+<!-- @@author A0142255M -->
+<style>
+    * {
+      font-family: "Segoe UI Semibold"
+    }
+    
+    .fc button {
+        color: #5f77bd;
+    }
+    
+    .fc-toolbar h2 {
+        color: #5f77bd;
+    }
+    
+    .fc-day-number {
+        color: #5f77bd;
+    }
+    
+    .fc-day-header {
+        color: #5f77bd;
+    }
+        
+    .fc-unthemed td.fc-today {
+        background: #c3cfe2;
+    }
+}
+</style>
+
 <body>
     <div id='calendar'></div>
 </body>
 
 <script>
 
-<!-- @@author A0142255M -->
 $(document).ready(function() {
     $('#calendar').fullCalendar({
         aspectRatio: 1.5,
@@ -21,9 +48,12 @@ $(document).ready(function() {
             right: 'month, basicWeek, basicDay'
         },
         navLinks: true, // can click day/week names to navigate views
-        editable: true,
+        timeFormat: 'HH:mm',
         selectable: true,
-        eventLimit: true, // allow "more" link when too many events
+        dayClick: function(date, jsEvent, view) {
+            $('#calendar').fullCalendar( 'changeView', 'agendaDay' );
+            $('#calendar').fullCalendar( 'gotoDate', date );
+        }
     });
     $('#calendar').fullCalendar('render');
 });
@@ -60,8 +90,10 @@ function change_view(view) {
     var newView;
     if (view === "day") {
         newView = 'agendaDay';
-    } else {
+    } else if (view === "week") {
         newView = 'agendaWeek';
+    } else {
+        newView = 'month';
     }
     $(document).ready(function() {
         $('#calendar').fullCalendar( 'changeView', newView );
@@ -70,7 +102,9 @@ function change_view(view) {
 
 function change_reference_date(date) {
     $(document).ready(function() {
+        $('#calendar').fullCalendar( 'changeView', 'month' );
         $('#calendar').fullCalendar( 'gotoDate', date );
+        $('#calendar').fullCalendar( 'select', date );
     });
 }
 
