@@ -96,7 +96,7 @@ Sorts the list of tasks according to status
 ### 2.5. Editing a task : `edit`
 
 Edits an existing task in Opus.<br>
-Format: `edit INDEX [NAME] [n/NOTES] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
+Format: `edit INDEX [NAME] [n/NOTES] [p/PRIORITY] [t/TAG]...`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
