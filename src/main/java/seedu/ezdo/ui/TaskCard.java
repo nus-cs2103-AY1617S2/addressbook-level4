@@ -59,7 +59,7 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
     }
 
-    public void setPriorityInString(String priorityInString) {
+    private void setPriorityInString(String priorityInString) {
         this.priorityInString = priorityInString;
     }
 
