@@ -64,11 +64,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0121658E
-    public void updateGeekeepHistory(ReadOnlyGeeKeep originalGeekeepClone) {
-        pastGeeKeeps.add(originalGeekeepClone);
-        futureGeeKeeps.clear();
-    }
-
     @Override
     public void resetData(ReadOnlyGeeKeep newData) {
         GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
@@ -247,8 +242,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addHistory(String commandText) {
+    public void updateCommandHistory(String commandText) {
         commandHistory.add(commandText);
+    }
+
+    public void updateGeekeepHistory(ReadOnlyGeeKeep originalGeekeepClone) {
+        pastGeeKeeps.add(originalGeekeepClone);
+        futureGeeKeeps.clear();
     }
 
 }

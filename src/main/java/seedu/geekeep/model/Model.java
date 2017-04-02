@@ -75,7 +75,7 @@ public interface Model {
 
     void redo() throws NothingToRedoException;
 
-    void addHistory(String commandText);
+    void updateCommandHistory(String commandText);
 
 }
 
