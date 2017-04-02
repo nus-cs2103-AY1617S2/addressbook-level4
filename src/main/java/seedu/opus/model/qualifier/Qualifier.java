@@ -8,3 +8,4 @@ import seedu.opus.model.task.ReadOnlyTask;
 public interface Qualifier {
     boolean run(ReadOnlyTask task);
 }
+
