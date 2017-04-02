@@ -73,7 +73,7 @@ public interface Model {
 
     String undo() throws NothingToUndoException;
 
-    void redo() throws NothingToRedoException;
+    String redo() throws NothingToRedoException;
 
     void updateCommandHistory(String commandText);
 

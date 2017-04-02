@@ -233,13 +233,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void redo() throws NothingToRedoException {
+    public String redo() throws NothingToRedoException {
         if (futureGeeKeeps.empty()) {
             throw new NothingToRedoException();
         }
         pastGeeKeeps.push(new GeeKeep(geeKeep));
         geeKeep.resetData(futureGeeKeeps.pop());
         indicateGeeKeepChanged();
+        return undoableCommandHistory.get(undoableCommandHistoryIndex++);
     }
 
     @Override
