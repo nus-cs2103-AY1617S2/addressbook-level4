@@ -54,6 +54,12 @@ public class XmlTaskListStorage implements TaskListStorage {
         return Optional.of(taskListOptional);
     }
 
+
+    @Override
+    public void setTaskListFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     @Override
     public void saveTaskList(ReadOnlyTaskList taskList) throws IOException {
         saveTaskList(taskList, filePath);
@@ -71,5 +77,6 @@ public class XmlTaskListStorage implements TaskListStorage {
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(taskList));
     }
+
 
 }

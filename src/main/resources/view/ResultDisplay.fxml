@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- @@author A0135998H -->
 
 <?import java.net.URL?>
@@ -9,9 +10,9 @@
    <children>
       <AnchorPane prefHeight="225.0" prefWidth="770.0">
          <children>
-            <TextArea fx:id="resultDisplay" prefHeight="225.0" prefWidth="770.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextArea fx:id="resultDisplay" prefHeight="225.0" prefWidth="770.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <stylesheets>
-                  <URL value="@RedTheme.css" />
+                  <URL value="@GraphiteTheme.css" />
                   <URL value="@Extensions.css" />
                </stylesheets></TextArea>
          </children>

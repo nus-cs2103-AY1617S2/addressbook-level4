@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.events.model.TaskListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.FileLocationChangedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.UserPrefs;
@@ -12,7 +13,7 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends TaskListStorage, UserPrefsStorage {
+public interface Storage extends TaskListStorage, UserPrefsStorage, ConfigStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -35,4 +36,6 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskListChangedEvent(TaskListChangedEvent abce);
+
+    void handleFileLocationChangedEvent(FileLocationChangedEvent event) throws DataConversionException;
 }

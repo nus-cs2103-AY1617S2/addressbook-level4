@@ -18,6 +18,7 @@ import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
+//@@author A0135998H
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -33,15 +34,14 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private TaskTabPanel taskTabPanel;
     private Config config;
 
     @FXML
-    private AnchorPane browserPlaceholder;
+    private AnchorPane commandBoxPlaceholder;
 
     @FXML
-    private AnchorPane commandBoxPlaceholder;
+    private AnchorPane clockPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -114,8 +114,9 @@ public class MainWindow extends UiPart<Region> {
     public void fillInnerParts() {
         taskTabPanel = new TaskTabPanel(taskTabPanelPlaceHolder, logic);
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        new Clock(getDigitalClockPlaceholder());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -128,6 +129,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
+    }
+
+    private AnchorPane getDigitalClockPlaceholder() {
+        return clockPlaceholder;
     }
 
     void hide() {
@@ -199,11 +204,9 @@ public class MainWindow extends UiPart<Region> {
         return taskTabPanel.getTaskListPanel();
     }
 
-
     public void switchTabOnCommand(String typeOfList) {
         taskTabPanel.switchTabOnCommand(typeOfList);
     }
-
 
     public void switchTabOnClick() {
         taskTabPanel.switchTabOnClick();

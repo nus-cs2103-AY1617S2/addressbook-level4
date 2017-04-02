@@ -1,10 +1,6 @@
 /* @@author A0135998H */
 .background {
-    -fx-background-color: #ff4745;
-}
-
-.background2 {
-    -fx-background-color: #f4f4f4;
+    -fx-background-color: #41464a;
 }
 
 .text-field,.text-area, .split-pane,.tab {
@@ -168,7 +164,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#41464a, 50%);
 }
 
 .context-menu .label {
@@ -176,7 +172,9 @@
 }
 
 .menu-bar {
-    -fx-background-color: #2e4053;
+    -fx-background-color: #1abc9c;
+    -fx-border-color: #2e4053;
+    -fx-border-width: 2;
 }
 
 .menu-bar .label {

@@ -4,6 +4,7 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
@@ -18,21 +19,24 @@
             <Insets bottom="5" left="15" right="5" top="5" />
          </padding>
          <children>
-            <HBox alignment="CENTER_LEFT" spacing="5" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="5" VBox.vgrow="NEVER">
                <children>
-                  <Label fx:id="id" styleClass="cell_event" HBox.hgrow="ALWAYS">
+                  <Label fx:id="id" styleClass="cell_event" HBox.hgrow="NEVER">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="name" styleClass="cell_event" text="\$name" HBox.hgrow="ALWAYS">
+                  <Label fx:id="name" styleClass="cell_event" text="\$name" wrapText="true" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <FlowPane fx:id="tags" />
+            <FlowPane fx:id="tags" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets left="30.0" />
+               </VBox.margin></FlowPane>
          </children>
       </VBox>
       <StackPane prefHeight="78.0" prefWidth="346.0" HBox.hgrow="ALWAYS">
@@ -44,29 +48,29 @@
                         <Insets bottom="5.0" left="15.0" top="5.0" />
                      </padding>
                      <children>
-                        <Label styleClass="cell_start" text="Start:" VBox.vgrow="NEVER">
+                        <Label styleClass="cell_start" text="Start:" VBox.vgrow="ALWAYS">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label styleClass="cell_due" text="Due:" VBox.vgrow="NEVER">
+                        <Label styleClass="cell_due" text="Due:" VBox.vgrow="ALWAYS">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="255.0" HBox.hgrow="NEVER">
+                  <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="255.0" HBox.hgrow="SOMETIMES">
                      <padding>
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </padding>
                      <children>
-                        <Label fx:id="startDate" text="\$start_date" VBox.vgrow="NEVER">
+                        <Label fx:id="startDate" text="\$start_date" VBox.vgrow="ALWAYS">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="endDate" text="\$end_date" VBox.vgrow="NEVER">
+                        <Label fx:id="endDate" text="\$end_date" VBox.vgrow="ALWAYS">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -82,19 +86,19 @@
                         <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
                      </padding>
                      <children>
-                        <Label styleClass="cell_due" text="Deadline:" VBox.vgrow="NEVER">
+                        <Label styleClass="cell_due" text="Deadline:" VBox.vgrow="ALWAYS">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="255.0" HBox.hgrow="NEVER">
+                  <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="255.0" HBox.hgrow="SOMETIMES">
                      <padding>
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </padding>
                      <children>
-                        <Label fx:id="deadline" text="\$deadline" VBox.vgrow="NEVER">
+                        <Label fx:id="deadline" text="\$deadline" VBox.vgrow="ALWAYS">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -107,7 +111,10 @@
       </StackPane>
    </children>
    <stylesheets>
-      <URL value="@RedTheme.css" />
+      <URL value="@GraphiteTheme.css" />
       <URL value="@Extensions.css" />
    </stylesheets>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </HBox>
