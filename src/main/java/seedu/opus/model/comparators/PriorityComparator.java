@@ -5,7 +5,11 @@ import java.util.Comparator;
 import seedu.opus.model.task.ReadOnlyTask;
 
 //@@author A0148081H
+/**
+ * Comparator for sorting order according to the priority given in tasks
+ */
 public class PriorityComparator implements Comparator<ReadOnlyTask> {
+
     public int compare(ReadOnlyTask p1, ReadOnlyTask p2) {
         int c;
 
