@@ -46,15 +46,15 @@ public class IncompleteCommand extends Command {
 
         validateTargetIndex(filteredTaskListIndex, lastShownList);
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = new Task(taskToEdit);
-        editedTask.setAsIncompleted();
+        ReadOnlyTask taskToMarkIncomplete = lastShownList.get(filteredTaskListIndex);
+        Task markIncompleteTask = new Task(taskToMarkIncomplete);
+        markIncompleteTask.setAsIncompleted();
         try {
-            model.updateTask(Task.TASK_NAME_COMPLETED, filteredTaskListIndex, editedTask);
-            highlight(editedTask);
+            model.updateTask(Task.TASK_NAME_COMPLETED, filteredTaskListIndex, markIncompleteTask);
+            highlight(markIncompleteTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        return new CommandResult(String.format(MESSAGE_MARK_INCOMPLETE_SUCCESS, editedTask));
+        return new CommandResult(String.format(MESSAGE_MARK_INCOMPLETE_SUCCESS, markIncompleteTask));
     }
 }

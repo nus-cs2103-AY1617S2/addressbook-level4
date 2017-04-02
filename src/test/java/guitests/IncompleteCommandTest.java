@@ -35,7 +35,7 @@ public class IncompleteCommandTest extends TaskManagerGuiTest {
     }
 
     /**
-     * Runs the incomplete command to mark as complete a task specified at an invalid index and confirms
+     * Runs the incomplete command to mark a task specified at an invalid index as incomplete and confirms
      * the index is incorrect.
      * @param currentList A copy of the current list of tasks (before deletion).
      */
@@ -47,8 +47,8 @@ public class IncompleteCommandTest extends TaskManagerGuiTest {
     }
 
     /**
-     * Runs the incomplete command to mark as complete a specified task  at an invalid index and confirms
-     * the index is incorrect.
+     * Runs the incomplete command to mark a specified task at an invalid index as incomplete and confirms
+     * the index is correct.
      * @param targetIndexOneIndexed e.g. index 1 to mark as complete the first task in the list,
      * @param currentList A copy of the current list of tasks (before deletion).
      */
