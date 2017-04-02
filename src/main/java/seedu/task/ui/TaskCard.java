@@ -34,7 +34,7 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane overdueTag;
     @FXML
     private TitledPane indivTask;
-    
+
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         title.setText(task.getTitle().title);

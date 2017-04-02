@@ -494,7 +494,7 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
                     new Title(title),
-                    new Deadline("tomorrow"),
+                    new Deadline("tomorrow noon"),
                     new Priority("1"),
                     new Instruction("House of 1"),
                     new UniqueTagList(new Tag("tag"))
