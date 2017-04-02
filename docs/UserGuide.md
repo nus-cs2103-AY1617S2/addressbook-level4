@@ -4,31 +4,31 @@
 ## Table of contents
 
 1. [Intoduction](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#1-introduction) <br>
-2. [Quick Start](#quick-start) <br>
-3. [Features](#features) <br>
-   3.1.  [Viewing Help](#viewing-help) <br>
-   3.2.  [Adding a Floating Task]()  <br>
-   3.3.  [Adding a Deadline Task]() <br>
-   3.4.  [Adding an Event Task]()<br>
-   3.5.  [Adding a Priority Task]() <br>
-   3.6.  [Finding a Task]()  <br>
-   3.7.  [Editing a Task]() <br>
-   3.8.  [Deleting a Task]() <br>
-   3.9.  [Completing a Task]() <br>
-   3.10. [Listing All Tasks]() <br>
-   3.11. [Listing Today’s Tasks]()<br>
-   3.12. [Listing Priority Tasks]()<br>
-   3.13. [Listing Completed Tasks]() <br>
-   3.14. [Undoing the Latest Command]()<br>
-   3.15. [Saving Data to Another Folder]()<br>
-   3.16. [Changing Default Storage Folder]()<br>
-   3.17. [Using Data from Another Folder]()<br>
-   3.18. [Clearing all Entries]()<br>
-   3.19. [Exiting the Program]()<br>
-   3.20. [Saving your Data]()<br>
-   3.21. [Differentiating your Tasks’ Urgency]()<br>
-4. [FAQ](#faq)<br>
-5. [Command Summary](#command-summary)<br>
+2. [Quick Start](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#2-quick-start) <br>
+3. [Features](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#3-features) <br>
+   3.1.  [Viewing Help](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#31-viewing-help--help) <br>
+   3.2.  [Adding a Floating Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#32-adding-a-floating-task-add)  <br>
+   3.3.  [Adding a Deadline Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#33-adding-a-deadline-task-add) <br>
+   3.4.  [Adding an Event Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#34-adding-an-event-task-add)<br>
+   3.5.  [Adding a Priority Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#35-adding-a-priority-taskevent--add) <br>
+   3.6.  [Finding a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#36-finding-a-task-find)  <br>
+   3.7.  [Editing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#37-editing-a-task-edit) <br>
+   3.8.  [Deleting a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#38-deleting-a-task--delete) <br>
+   3.9.  [Completing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#39-completing-a-task--done) <br>
+   3.10. [Listing All Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#310-listing-all-tasks--list) <br>
+   3.11. [Listing Today’s Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#311-listing-today-tasks--listday)<br>
+   3.12. [Listing Priority Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#312-listing-proirity-tasks--list)<br>
+   3.13. [Listing Completed Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#313-listing-completed-tasks--listdone) <br>
+   3.14. [Undoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#314-undoing-the-latest-command--undo)<br>
+   3.15. [Saving Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#315-saving-the-data-to-another-folder--save)<br>
+   3.16. [Changing Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#316-changing-the-default-storage-folder--setting)<br>
+   3.17. [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#317-using-data-from-another-folder--use)<br>
+   3.18. [Clearing all Entries](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#318-clearing-all-entries--clear)<br>
+   3.19. [Exiting the Program](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#319-exiting-the-program--exit)<br>
+   3.20. [Saving your Data](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#320-saving-the-data)<br>
+   3.21. [Differentiating your Tasks’ Urgency](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#321-differentiating-your-tasks-urgency)<br>
+4. [FAQ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#4-faq)<br>
+5. [Command Summary](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#5-command-summary)<br>
 &nbsp;
 
 ## 1. Introduction
