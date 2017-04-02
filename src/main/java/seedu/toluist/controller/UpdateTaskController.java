@@ -79,7 +79,8 @@ public class UpdateTaskController extends Controller {
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
         if (indexes == null || indexes.isEmpty()) {
-            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_ERROR_INVALID_INDEX));
+            uiStore.setCommandResult(
+                    new CommandResult(RESULT_MESSAGE_ERROR_INVALID_INDEX, CommandResult.CommandResultType.FAILURE));
             return;
         }
         List<Task> shownTasks = uiStore.getShownTasks(indexes);
@@ -124,20 +125,20 @@ public class UpdateTaskController extends Controller {
             boolean isFloating, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+            return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK, CommandResult.CommandResultType.FAILURE);
         }
         if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
+            return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING, CommandResult.CommandResultType.FAILURE);
         }
         if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
+            return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING, CommandResult.CommandResultType.FAILURE);
         }
         Task taskCopy = null;
         try {
             taskCopy = (Task) task.clone();
         } catch (CloneNotSupportedException cloneNotSupportedException) {
             // should never reach here
-            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR, CommandResult.CommandResultType.FAILURE);
         }
         try {
             if (isFloating) {
@@ -176,7 +177,7 @@ public class UpdateTaskController extends Controller {
 
             TodoList todoList = TodoList.getInstance();
             if (todoList.getTasks().contains(taskCopy)) {
-                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK, CommandResult.CommandResultType.FAILURE);
             }
 
             // Update all changes in taskCopy to task
@@ -187,9 +188,9 @@ public class UpdateTaskController extends Controller {
             }
             return new CommandResult(ResultMessage.getUpdateCommandResultMessage(oldTask, task, uiStore));
         } catch (IllegalArgumentException illegalArgumentException) {
-            return new CommandResult(illegalArgumentException.getMessage());
+            return new CommandResult(illegalArgumentException.getMessage(), CommandResult.CommandResultType.FAILURE);
         } catch (CloneNotSupportedException cloneNotSupportedException) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR, CommandResult.CommandResultType.FAILURE);
         }
     }
 

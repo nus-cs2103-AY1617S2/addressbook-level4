@@ -49,14 +49,15 @@ public class StoreController extends Controller {
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
         if (path == null) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
+            uiStore.setCommandResult(
+                    new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH, CommandResult.CommandResultType.FAILURE));
             return;
         }
 
         Config config = Config.getInstance();
         if (config.getTodoListFilePath().equals(path)) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResult.CommandResultType.FAILURE));
             return;
         }
 
@@ -69,8 +70,8 @@ public class StoreController extends Controller {
             message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, config.getTodoListFilePath());
             uiStore.setCommandResult(new CommandResult(message));
         } else {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResult.CommandResultType.FAILURE));
         }
     }
 

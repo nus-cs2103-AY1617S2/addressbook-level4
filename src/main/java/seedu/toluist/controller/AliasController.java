@@ -45,7 +45,8 @@ public class AliasController extends Controller {
 
         if (aliasConfig.isReservedWord(alias)) {
             uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias)));
+                    new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias),
+                            CommandResult.CommandResultType.FAILURE));
             return;
         }
 
@@ -54,7 +55,8 @@ public class AliasController extends Controller {
                     new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase)));
         } else {
             uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase)));
+                    new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase),
+                            CommandResult.CommandResultType.FAILURE));
         }
     }
 

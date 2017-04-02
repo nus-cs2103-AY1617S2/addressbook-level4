@@ -59,7 +59,8 @@ public class MarkController extends Controller {
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
 
         if (indexes.isEmpty()) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX));
+            uiStore.setCommandResult(
+                    new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX, CommandResult.CommandResultType.FAILURE));
             return;
         }
 
@@ -72,7 +73,7 @@ public class MarkController extends Controller {
 
         TodoList todoList = TodoList.getInstance();
         if (!todoList.save()) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_SAVING_FAILURE));
+            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_SAVING_FAILURE, CommandResult.CommandResultType.FAILURE));
         }
         uiStore.setTasks(todoList.getTasks());
         uiStore.setCommandResult(commandResult);

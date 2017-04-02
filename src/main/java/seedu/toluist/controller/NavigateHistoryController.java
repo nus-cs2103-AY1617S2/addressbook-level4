@@ -17,8 +17,6 @@ public class NavigateHistoryController extends Controller {
     private static final String UP_PARAMETER = "up";
     private static final String DOWN_PARAMETER = "down";
     private static final String DIRECTION_PARAMETER = "direction";
-    private static final String ERROR_MESSAGE = "Invalid Parameters for Navigate History command."
-                                                 + "\nnavigatehistory (up/down)";
     private CommandHistoryList commandHistory;
 
     public void execute(HashMap<String, String> tokens) {
@@ -30,8 +28,6 @@ public class NavigateHistoryController extends Controller {
             showPreviousCommand(uiStore.getCommandInputProperty().getValue());
         } else if (direction.equals(DOWN_PARAMETER)) {
             showNextCommand();
-        } else { //error
-            uiStore.setCommandResult(new CommandResult(ERROR_MESSAGE));
         }
     }
 

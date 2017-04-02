@@ -46,7 +46,7 @@ public class SwitchController extends Controller {
         String keyword = tokens.get(PARAMETER_TAB);
 
         if (keyword == null) {
-            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_NO_TAB));
+            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_NO_TAB, CommandResult.CommandResultType.FAILURE));
             return;
         }
 

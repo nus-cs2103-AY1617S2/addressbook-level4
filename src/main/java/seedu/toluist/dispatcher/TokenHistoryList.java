@@ -13,6 +13,10 @@ public class TokenHistoryList {
     public HashMap<String, HashMap<String, Set<String>>> tokenHistory = new HashMap<>();
 
     public void recordTokens(Controller controller, HashMap<String, String> tokens) {
+        if (tokens == null) {
+            return;
+        }
+
         String controllerKey = controller.getClass().getName();
         if (tokenHistory.get(controllerKey) == null) {
             tokenHistory.put(controllerKey, new HashMap());

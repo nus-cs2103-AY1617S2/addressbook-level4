@@ -48,7 +48,8 @@ public class DeleteTaskController extends Controller {
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, todoList.getTasks().size());
         if (indexes == null || indexes.isEmpty()) {
-            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED));
+            uiStore.setCommandResult(new CommandResult(
+                    RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED, CommandResult.CommandResultType.FAILURE));
             return;
         }
         List<Task> tasks = uiStore.getShownTasks(indexes);

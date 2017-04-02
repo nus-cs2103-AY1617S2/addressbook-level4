@@ -45,15 +45,16 @@ public class LoadController extends Controller {
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
         if (path == null) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
+            uiStore.setCommandResult(new CommandResult(
+                    Messages.MESSAGE_NO_STORAGE_PATH, CommandResult.CommandResultType.FAILURE));
             return;
         }
 
         Config config = Config.getInstance();
         String oldStoragePath = config.getTodoListFilePath();
         if (oldStoragePath.equals(path)) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResult.CommandResultType.FAILURE));
             return;
         }
 
@@ -64,8 +65,8 @@ public class LoadController extends Controller {
             uiStore.setCommandResult(
                     new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path)));
         } catch (DataStorageException e) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResult.CommandResultType.FAILURE));
         }
     }
 

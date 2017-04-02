@@ -34,14 +34,16 @@ public class UnaliasController extends Controller {
         String alias = tokens.get(PARAMETER_ALIAS);
 
         if (!aliasConfig.isAlias(alias)) {
-            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_NOT_ALIAS, alias)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(RESULT_MESSAGE_NOT_ALIAS, alias), CommandResult.CommandResultType.FAILURE));
             return;
         }
 
         if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {
             uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias)));
         } else {
-            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(RESULT_MESSAGE_FAILURE, alias), CommandResult.CommandResultType.FAILURE));
         }
     }
 

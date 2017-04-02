@@ -16,6 +16,7 @@ import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 import seedu.toluist.ui.commons.ResultMessage;
 
 /**
@@ -103,7 +104,7 @@ public class AddTaskController extends Controller {
             LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate) {
         if (!StringUtil.isPresent(description)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION);
+            return new CommandResult(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION, CommandResultType.FAILURE);
         }
         try {
             // validates that the dates input belongs to only one type of task, or exception is thrown
@@ -117,7 +118,7 @@ public class AddTaskController extends Controller {
                 task = new Task(description);
             } else {
                 // should not reach here since it will fail validation at the top
-                return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+                return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK, CommandResultType.FAILURE);
             }
             if (taskPriority != null) {
                 task.setTaskPriority(taskPriority);
@@ -132,7 +133,7 @@ public class AddTaskController extends Controller {
             task.replaceTags(tags);
 
             if (todoList.getTasks().contains(task)) {
-                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK, CommandResultType.FAILURE);
             }
             todoList.add(task);
             if (todoList.save()) {
@@ -140,7 +141,7 @@ public class AddTaskController extends Controller {
             }
             return new CommandResult(ResultMessage.getAddCommandResultMessage(task, uiStore));
         } catch (IllegalArgumentException exception) {
-            return new CommandResult(exception.getMessage());
+            return new CommandResult(exception.getMessage(), CommandResultType.FAILURE);
         }
     }
 

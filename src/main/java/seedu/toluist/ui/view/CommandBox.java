@@ -4,6 +4,7 @@ package seedu.toluist.ui.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -12,6 +13,7 @@ import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 public class CommandBox extends UiView {
     private static final String STYLE_CLASS_ERROR = "error";
@@ -32,6 +34,10 @@ public class CommandBox extends UiView {
     protected void viewDidMount () {
         FxViewUtil.makeFullWidth(getRoot());
         FxViewUtil.makeFullWidth(commandTextField);
+        CommandResult commandResult = UiStore.getInstance().getObservableCommandResult().getValue();
+        if (commandResult.getCommandResultType() == CommandResult.CommandResultType.FAILURE) {
+            FxViewUtil.addStyleClass(commandTextField, STYLE_CLASS_ERROR);
+        }
     }
 
     private void configureBindings() {
@@ -39,6 +45,7 @@ public class CommandBox extends UiView {
         commandTextField.textProperty().bindBidirectional(store.getCommandInputProperty());
         commandTextField.textProperty()
             .addListener(((observable, oldValue, newValue) -> handleCommandInputChanged(newValue)));
+        store.bind(this, store.getObservableCommandResult());
     }
 
     private void configureKeyCombinations() {
@@ -57,11 +64,7 @@ public class CommandBox extends UiView {
         List<String> suggestedCommands = new ArrayList(dispatcher.getSuggestions(newCommand));
         UiStore uiStore = UiStore.getInstance();
         uiStore.setSuggestedCommands(suggestedCommands);
-        if (!newCommand.isEmpty() && suggestedCommands.isEmpty()) {
-            FxViewUtil.addStyleClass(commandTextField, STYLE_CLASS_ERROR);
-        } else {
-            FxViewUtil.removeStyleClass(commandTextField, STYLE_CLASS_ERROR);
-        }
+        FxViewUtil.removeStyleClass(commandTextField, STYLE_CLASS_ERROR);
     }
 
     private void handleCommandInputAutoComplete() {
@@ -94,5 +97,6 @@ public class CommandBox extends UiView {
         }
 
         store.setCommandInput(StringUtil.replaceLastWord(commandText, suggestedCommands.get(index)));
+        Platform.runLater(() -> commandTextField.end());
     }
 }

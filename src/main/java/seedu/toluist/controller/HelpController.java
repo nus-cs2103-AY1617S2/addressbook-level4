@@ -63,7 +63,7 @@ public class HelpController extends Controller {
         } else if (controllerLibrary.getCommandControllerKeywords().contains(commandWord.toLowerCase())) {
             showSpecificHelp(commandWord);
         } else {
-            uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR));
+            uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR, CommandResult.CommandResultType.FAILURE));
         }
     }
 
