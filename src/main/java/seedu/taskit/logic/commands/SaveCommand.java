@@ -21,8 +21,6 @@ public class SaveCommand extends Command{
             + "Parameters: FILEPATH (must be a string)\n"
             + "Example: " + COMMAND_WORD + " newFile.txt";
 
-    public static final String MESSAGE_SAVE_SUCCESS = "Saved to ";
-
     private String newFilePath;
 
     private XmlAddressBookStorage newStorage;
@@ -40,7 +38,7 @@ public class SaveCommand extends Command{
         } catch(IOException e){
              return new CommandResult(MESSAGE_INVALID_FILE);
         }
-        return new CommandResult(String.format(MESSAGE_SAVE_SUCCESS) + newFilePath);
+        return new CommandResult(String.format(MESSAGE_SUCCESS) + newFilePath);
     }
 
 
