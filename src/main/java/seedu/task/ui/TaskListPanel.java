@@ -74,10 +74,11 @@ public class TaskListPanel extends UiPart<Region> {
     //@@author A0139975J
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            taskListView.scrollTo(index);
+            taskListView.scrollTo(index-3);
             taskListView.getSelectionModel().clearAndSelect(index);
             if (cardlist[index + 1].expendStatus()) {
                 cardlist[index + 1].setExpend(false);
+        
             } else {
                 cardlist[index + 1].setExpend(true);
             }
