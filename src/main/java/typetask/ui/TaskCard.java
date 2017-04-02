@@ -1,8 +1,5 @@
 package typetask.ui;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -42,38 +39,33 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label endTime;
     @FXML
+    private Label preposition;  
+    @FXML
     private Pane colourTag;
     @FXML
     private ImageView priorityMark;
 
-    private LocalDateTime now = LocalDateTime.now();
-    private LocalDate nowDate = now.toLocalDate();
-    private String inputPattern = "dd/MM/yyyy";
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern(inputPattern);
     // NOTE: only instantiated for non-floating task
-    private LocalDate parsedDate;
-    private boolean parsedDateFlag = false;
     private Image priority = new Image(PRIORITY);
+    private ReadOnlyTask task;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        this.task = task;
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        if (task.getDate().value.equals("")) {
-            date.setText("-           " + "          to");
-        } else {
-            date.setText(task.getDate().value + "                to         ");
-        }
+        date.setText(task.getDate().value);
 
         if (task.getEndDate().value.equals("")) {
             endDate.setText("-");
         } else {
             endDate.setText(task.getEndDate().value);
         }
+        setPrepositionForDates();
         setStatusForTask(task);
-        setColourCode();
 //        setImageToIndicatePriority();
     }
+
     //@@author A0139926R
     //Checks event task status. Uses endDate to check
     private void setStatusForTask(ReadOnlyTask task) {
@@ -89,14 +81,19 @@ public class TaskCard extends UiPart<Region> {
             }
         }
     }
+
+
+
     //@@author A0139154E
-    private void setColourCode() {
-        if (parsedDateFlag == true) {
-            if (parsedDate.isBefore(nowDate)) {
-                setStyleToIndicateOverdue();
-            } else {
-                setStyleToIndicatePending();
-            }
+    private void setPrepositionForDates() {
+        boolean dateIsEmpty = task.getDate().value.equals("");
+        boolean endDateIsEmpty = task.getEndDate().value.equals("");
+        if (dateIsEmpty && !endDateIsEmpty) {
+            preposition.setText("BY");
+        } else if (!dateIsEmpty && !endDateIsEmpty) {
+            preposition.setText("TO");
+        } else {
+            preposition.setText("");
         }
     }
 
