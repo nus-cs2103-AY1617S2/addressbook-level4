@@ -27,7 +27,7 @@ public class FindController extends Controller {
     private static final String PARAMETER_NULL = "";
     private static final String PARAMETER_TRUE = "true";
     private static final String PARAMETER_FALSE = "false";
-    private static final String PARAMETER_KEYWORDS = "keywords";
+    public static final String PARAMETER_KEYWORDS = "keywords";
 
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
     private static final String COMMAND_SPLITTER_REGEX = " ";
@@ -56,11 +56,10 @@ public class FindController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
-        HashMap<String, String> tokens = tokenize(command);
         boolean isSearchByTag = tokens.get(PARAMETER_TAG).equals(PARAMETER_TRUE);
         boolean isSearchByName = tokens.get(PARAMETER_NAME).equals(PARAMETER_TRUE);
         String[] keywordList = StringUtil.convertToArray(tokens.get(PARAMETER_KEYWORDS));

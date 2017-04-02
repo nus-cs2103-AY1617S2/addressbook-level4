@@ -54,9 +54,8 @@ public class HelpController extends Controller {
 
     private ControllerLibrary controllerLibrary = new ControllerLibrary();
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
-        HashMap<String, String> tokens = tokenize(command);
 
         String commandWord = tokens.get(PARAMETER_COMMAND);
         if (commandWord.equals("")) {

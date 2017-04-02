@@ -42,8 +42,7 @@ public class SwitchController extends Controller {
                                                     "`ctrl + N`\nSwitches the screen to the `Next 7 Days` window." };
 
     //@@author A0131125Y
-    public void execute(String command) {
-        HashMap<String, String> tokens = tokenize(command);
+    public void execute(HashMap<String, String> tokens) {
         String keyword = tokens.get(PARAMETER_TAB);
 
         if (keyword == null) {

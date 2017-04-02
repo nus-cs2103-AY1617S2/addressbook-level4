@@ -19,7 +19,7 @@ public class ExitController extends Controller {
     private static final String[] HELP_COMMENTS = { "Your data will save automatically.",
                                                     "You can re-open the program by clicking on the .jar file." };
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
     }
 

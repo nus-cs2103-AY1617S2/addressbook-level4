@@ -21,9 +21,9 @@ public abstract class Controller {
      * Given a command string, execute the command
      * and modifies the data appropriately. Also optionally
      * update the UI
-     * @param command
+     * @param tokens dictionary of tokens
      */
-    public abstract void execute(String command);
+    public abstract void execute(HashMap<String, String> tokens);
 
     /**
      * Given command string, tokenize the string into

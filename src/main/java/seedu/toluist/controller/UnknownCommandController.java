@@ -11,7 +11,7 @@ import seedu.toluist.ui.commons.CommandResult;
  */
 public class UnknownCommandController extends Controller {
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_UNKNOWN_COMMAND));
     }
 

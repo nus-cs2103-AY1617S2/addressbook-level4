@@ -52,10 +52,8 @@ public class MarkController extends Controller {
                                                     "`mark 1, 6`\nMarks the tasks at index 1 and 6 complete." };
 
     //@@author A0131125Y
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().toString() + " will handle command");
-
-        HashMap<String, String> tokens = tokenize(command);
         String indexToken = tokens.get(PARAMETER_INDEX);
         String markTypeToken = tokens.get(PARAMETER_MARK);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());

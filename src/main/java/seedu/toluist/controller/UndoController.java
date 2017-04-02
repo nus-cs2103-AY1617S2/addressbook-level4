@@ -35,10 +35,9 @@ public class UndoController extends Controller {
     //@@author A0131125Y
     private static final Logger logger = LogsCenter.getLogger(UndoController.class);
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass() + "will handle command");
 
-        HashMap<String, String> tokens = tokenize(command);
         String undoTimesToken = tokens.get(PARAMETER_UNDO_TIMES);
         int undoTimes = undoTimesToken != null ? Integer.parseInt(undoTimesToken) : 1;
 

@@ -39,8 +39,7 @@ public class AliasController extends Controller {
     //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(String command) {
-        HashMap<String, String> tokens = tokenize(command);
+    public void execute(HashMap<String, String> tokens) {
         String alias = tokens.get(PARAMETER_ALIAS);
         String commandPhrase = tokens.get(PARAMETER_COMMAND);
 

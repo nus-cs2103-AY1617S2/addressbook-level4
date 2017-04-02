@@ -69,12 +69,10 @@ public class UpdateTaskController extends Controller {
     //@@author A0127545A
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         CommandResult commandResult;
-
-        HashMap<String, String> tokens = tokenize(command);
 
         String description = tokens.get(TaskTokenizer.PARAMETER_TASK_DESCRIPTION);
 

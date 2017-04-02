@@ -1,18 +1,15 @@
 //@@author A0131125Y
 package seedu.toluist.dispatcher;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javafx.util.Pair;
@@ -20,12 +17,14 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.ControllerLibrary;
+import seedu.toluist.controller.FindController;
 import seedu.toluist.controller.HistoryController;
 import seedu.toluist.controller.NavigateHistoryController;
 import seedu.toluist.controller.UnknownCommandController;
 
 import seedu.toluist.controller.commons.KeywordTokenizer;
-import seedu.toluist.model.CommandHistoryList;
+
+import javax.naming.ldap.Control;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
@@ -35,14 +34,14 @@ public class CommandDispatcher extends Dispatcher {
     /**
      * ArrayList to store previous commands entered since starting the application
      */
-    private CommandHistoryList commandHistory;
+    private CommandHistoryList commandHistory = new CommandHistoryList();
     private ControllerLibrary controllerLibrary = new ControllerLibrary();
+    private TokenHistoryList tokenHistoryList = new TokenHistoryList();
 
     //@@author A0131125Y
     public CommandDispatcher() {
         super();
         aliasConfig.setReservedKeywords(controllerLibrary.getCommandControllerKeywords());
-        commandHistory = new CommandHistoryList();
     }
 
     public void dispatchRecordingHistory(String command) {
@@ -63,7 +62,9 @@ public class CommandDispatcher extends Dispatcher {
         if (controller instanceof NavigateHistoryController) {
             ((NavigateHistoryController) controller).setCommandHistory(commandHistory);
         }
-        controller.execute(deAliasedCommand);
+        HashMap<String, String> tokens = controller.tokenize(deAliasedCommand);
+        tokenHistoryList.recordTokens(controller, tokens);
+        controller.execute(tokens);
     }
 
     public SortedSet<String> getSuggestions(String command) {
@@ -82,7 +83,12 @@ public class CommandDispatcher extends Dispatcher {
             return keywordSuggestions;
         }
 
-        return getKeywordArgumentSuggestions(command);
+        SortedSet<String> keywordArgumentSuggestions = getKeywordArgumentSuggestions(command);
+        if (!keywordArgumentSuggestions.isEmpty()) {
+            return keywordArgumentSuggestions;
+        }
+
+        return getSearchSuggestions(command);
     }
 
     /**
@@ -149,6 +155,25 @@ public class CommandDispatcher extends Dispatcher {
         Pair<String, String> lastKeywordTokenPair = tokens.get(tokens.size() - 1);
 
         return Arrays.stream(keywordMap.get(lastKeywordTokenPair.getKey()))
+                .filter(value -> StringUtil.startsWithIgnoreCase(value, lastWordOfCommand))
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    /**
+     * Return suggestions for find/search command
+     * @param command command string
+     * @return sorted set of suggestions
+     */
+    private SortedSet<String> getSearchSuggestions(String command) {
+        Controller bestFitController = getBestFitController(command);
+        if (!(bestFitController instanceof FindController)) {
+            return new TreeSet<>();
+        }
+
+        String lastWordOfCommand = StringUtil.getLastWord(command);
+        return tokenHistoryList.retrieveTokens(bestFitController, FindController.PARAMETER_KEYWORDS).stream()
+                .map(keywords -> keywords.split("\\s+"))
+                .flatMap(Arrays::stream)
                 .filter(value -> StringUtil.startsWithIgnoreCase(value, lastWordOfCommand))
                 .collect(Collectors.toCollection(TreeSet::new));
     }

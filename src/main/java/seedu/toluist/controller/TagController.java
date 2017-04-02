@@ -45,11 +45,10 @@ public class TagController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
-        HashMap<String, String> tokens = tokenize(command);
         String[] keywordList = StringUtil.convertToArray(tokens.get(PARAMETER_KEYWORDS));
         int index = Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1;
         TodoList todoList = TodoList.getInstance();

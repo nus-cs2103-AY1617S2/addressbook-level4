@@ -24,7 +24,7 @@ public class ClearController extends Controller {
                                                         + "not just on the current task window.",
                                                     "The `undo` command can undo this action." };
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();

@@ -37,10 +37,8 @@ public class RedoController extends Controller {
     //@@author A0131125Y
     private static final Logger logger = LogsCenter.getLogger(RedoController.class);
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass() + "will handle command");
-
-        HashMap<String, String> tokens = tokenize(command);
         String redoTimesToken = tokens.get(PARAMETER_REDO_TIMES);
         int redoTimes = redoTimesToken != null ? Integer.parseInt(redoTimesToken) : 1;
 

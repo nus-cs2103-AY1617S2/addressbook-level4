@@ -44,9 +44,8 @@ public class StoreController extends Controller {
 
 
     //@@author A0131125Y
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass() + "will handle command");
-        HashMap<String, String> tokens = tokenize(command);
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
         if (path == null) {

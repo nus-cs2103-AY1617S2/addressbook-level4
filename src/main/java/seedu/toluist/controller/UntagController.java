@@ -45,11 +45,10 @@ public class UntagController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(UntagController.class);
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
-        HashMap<String, String> tokens = tokenize(command);
         String[] keywordList = convertToArray(tokens.get(PARAMETER_KEYWORDS));
         int index = Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1;
         TodoList todoList = TodoList.getInstance();

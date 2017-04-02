@@ -30,7 +30,7 @@ public class ViewAliasController extends Controller {
   //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
         uiStore.setCommandResult(new CommandResult(getAliasCommandResult(aliasMapping)));
     }

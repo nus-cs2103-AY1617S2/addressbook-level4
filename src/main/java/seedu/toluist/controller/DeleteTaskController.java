@@ -39,13 +39,11 @@ public class DeleteTaskController extends Controller {
     //@@author A0127545A
     private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
         CommandResult commandResult;
-
-        HashMap<String, String> tokens = tokenize(command);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, todoList.getTasks().size());

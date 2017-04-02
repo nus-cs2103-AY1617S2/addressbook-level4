@@ -62,13 +62,11 @@ public class AddTaskController extends Controller {
                                                         + "Adds a new task, with high priority." };
 
     //@@author A0127545A
-    public void execute(String command) {
+    public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
         CommandResult commandResult;
-
-        HashMap<String, String> tokens = tokenize(command);
 
         String description = tokens.get(TaskTokenizer.PARAMETER_TASK_DESCRIPTION);
 
