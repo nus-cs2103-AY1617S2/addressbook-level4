@@ -70,31 +70,15 @@ public class TaskCard extends UiPart<Region> {
         } else {
             endDate.setText(task.getEndDate().value);
         }
-        setStatusForEventTask(task);
-        setStatusForDeadlineTask(task);
+        setStatusForTask(task);
         setColourCode();
 //        setImageToIndicatePriority();
     }
     //@@author A0139926R
     //Checks event task status. Uses endDate to check
-    private void setStatusForEventTask(ReadOnlyTask task) {
+    private void setStatusForTask(ReadOnlyTask task) {
         if (!task.getEndDate().value.equals("")) {
             List<Date> dates = DateParser.parse(task.getEndDate().value);
-            Date taskDeadline = dates.get(0);
-            Calendar calendar = Calendar.getInstance();
-            Date nowDate = calendar.getTime();
-            if (nowDate.after(taskDeadline)) {
-                setStyleToIndicateOverdue();
-            } else {
-                setStyleToIndicatePending();
-            }
-        }
-    }
-    //@@author A0139926R
-    //Checks deadline task status. Uses date to check
-    private void setStatusForDeadlineTask(ReadOnlyTask task) {
-        if (!task.getDate().value.equals("")) {
-            List<Date> dates = DateParser.parse(task.getDate().value);
             Date taskDeadline = dates.get(0);
             Calendar calendar = Calendar.getInstance();
             Date nowDate = calendar.getTime();
