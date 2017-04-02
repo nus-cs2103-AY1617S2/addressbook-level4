@@ -1,5 +1,7 @@
 package seedu.doist.ui;
 
+import java.util.Date;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -53,11 +55,11 @@ public class TaskCard extends UiPart<Region> {
 
         // Times
         if (task.getDates().isDeadline()) {
-            startTime.setText(BY_TIME_TEXT + task.getDates().getStartDate());
+            startTime.setText(BY_TIME_TEXT + prettyDate(task.getDates().getStartDate()));
             endTime.setText("");
         } else if (task.getDates().isEvent()) {
-            startTime.setText(START_TIME_TEXT + task.getDates().getStartDate().toString());
-            endTime.setText(END_TIME_TEXT + task.getDates().getEndDate().toString());
+            startTime.setText(START_TIME_TEXT + prettyDate(task.getDates().getStartDate()));
+            endTime.setText(END_TIME_TEXT + prettyDate(task.getDates().getEndDate()));
         } else {
             // floating task
             startTime.setText("");
@@ -119,5 +121,39 @@ public class TaskCard extends UiPart<Region> {
         if (!cardPane.getStyleClass().contains(FINISHED_STYLE_CLASS)) {
             cardPane.getStyleClass().add(FINISHED_STYLE_CLASS);
         }
+    }
+
+    private String prettyDate (Date date) {
+        StringBuilder prettydate = new StringBuilder();
+        prettydate.append(prettyMonth (date.getMonth()));
+        prettydate.append(" " + date.getDate() + ", ");
+        prettydate.append((date.getYear() + 1900) + " at ");
+        prettydate.append(prettyTime(date.getHours(), date.getMinutes()));
+        return prettydate.toString();
+    }
+
+    private String prettyMonth (int month) {
+        switch (month) {
+        case 1 : return "January";
+        case 2 : return "February";
+        case 3 : return "March";
+        case 4 : return "April";
+        case 5 : return "May";
+        case 6 : return "June";
+        case 7 : return "July";
+        case 8 : return "August";
+        case 9 : return "September";
+        case 10 : return "October";
+        case 11 : return "November";
+        case 12 : return "December";
+        default : return null;
+        }
+    }
+
+    private String prettyTime (int hours, int minutes) {
+        String suffix = (hours <= 12) ? "am" : "pm";
+        String hour = (hours <= 12) ? Integer.toString(hours) : Integer.toString(hours - 12);
+        String minute = (minutes < 10) ? "0" + Integer.toString(minutes) : Integer.toString(minutes);
+        return hour + ":" + minute + suffix;
     }
 }
