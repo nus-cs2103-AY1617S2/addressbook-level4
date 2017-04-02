@@ -40,6 +40,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
+    /** Updates the filter of the filtered task list to show all floating tasks */
+    void updateFilteredListToShowFloating();
+
     /** Updates the filter of the filtered task list to show all overdue tasks */
     void updateFilteredListToShowOverdue();
 

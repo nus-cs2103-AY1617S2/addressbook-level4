@@ -5,8 +5,12 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
@@ -55,6 +59,15 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
+            //Listen to manual switching of tabs (if any)
+            TabPane taskTabPane = mainWindow.getTaskTabPane();
+            taskTabPane.getSelectionModel().selectedItemProperty().addListener(
+                    new ChangeListener<Tab>() {
+                        public void changed(ObservableValue<? extends Tab> observeTabID, Tab prevTab, Tab newTab) {
+                            mainWindow.switchTabOnClick();
+                        }
+                    }
+            );
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -128,7 +141,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleViewListChangedEvent(ViewListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.switchTabPanel(event.getTypeOfListView());
+        mainWindow.switchTabOnCommand(event.getTypeOfListView());
     }
 
 }
