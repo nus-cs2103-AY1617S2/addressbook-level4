@@ -34,25 +34,22 @@ public class FindCommandParser {
      */
     public Command parse(String args) {
 
+        List<Qualifier> qualifiers = new ArrayList<Qualifier>();
+
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STATUS, PREFIX_STARTTIME, PREFIX_ENDTIME);
         argsTokenizer.tokenize(args);
         String inputKeyword = argsTokenizer.getPreamble().orElse("");
 
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(inputKeyword.trim());
-        if (!matcher.matches()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        if (matcher.matches()) {
+            // keywords delimited by whitespace
+            final String[] keywords = matcher.group("keywords").split("\\s+");
+            final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+            qualifiers.add(new KeywordQualifier(keywordSet));
         }
 
-        // keywords delimited by whitespace
-        final String[] keywords = matcher.group("keywords").split("\\s+");
-        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-
-        // Bulid qualifier list
-        List<Qualifier> qualifiers = new ArrayList<Qualifier>(Arrays.asList(
-                new KeywordQualifier(keywordSet)));
-
+        // Bulid extra qualifier list
         if(argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
             qualifiers.add(new PriorityQualifier(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("")));
         }
@@ -63,6 +60,12 @@ public class FindCommandParser {
 
         if(argsTokenizer.getValue(PREFIX_ENDTIME).isPresent()) {
             qualifiers.add(new EndTimeQualifier(argsTokenizer.getValue(PREFIX_ENDTIME).orElse("")));
+        }
+
+        // has no qualifier
+        if(qualifiers.size() < 1) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         return new FindCommand(qualifiers);

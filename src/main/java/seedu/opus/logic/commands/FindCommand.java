@@ -12,10 +12,11 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " do homework";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds by keywords or attributes and displays them as a list with index numbers.\n"
+            + "At least one of the parameters below must be specified.\n"
+            + "Parameters: [KEYWORDS]... [PRIORITY] [STARTTIME] [ENDTIME]\n"
+            + "Example: " + COMMAND_WORD + " do homework b/hi";
 
     private final List<Qualifier> qualifiers;
 
