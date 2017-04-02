@@ -1,4 +1,4 @@
-# <img src="docs/images/BurdensLogo.png" width="30"> Burdens (v0.3)
+# <img src="docs/images/BurdensLogo.png" width="30"> Burdens (v0.5)
 
 [![Build Status](https://api.travis-ci.org/CS2103JAN2017-W09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W09-B1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W09-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W09-B1/main?branch=master)
