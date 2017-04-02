@@ -22,6 +22,11 @@ import typetask.logic.commands.IncorrectCommand;
  */
 public class EditCommandParser {
     //@@author A0139926R
+    private static final int day = 0;
+    private static final int month = 1;
+    private static final int dayDate = 2;
+    private static final int time = 3;
+    private static final int year = 5;
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -78,8 +83,8 @@ public class EditCommandParser {
         List<Date> dates = DateParser.parse(date);
         String nattyDate = dates.get(0).toString();
         String[] splitDate = nattyDate.split(" ");
-        String finalizedDate = splitDate[0] + " " + splitDate[1] + " " + splitDate[2] +
-                " " + splitDate[3];
+        String finalizedDate = splitDate[day] + " " + splitDate[month] + " " + splitDate[dayDate] +
+                " " + splitDate[year] + " " + splitDate[time];
         return finalizedDate;
     }
 
