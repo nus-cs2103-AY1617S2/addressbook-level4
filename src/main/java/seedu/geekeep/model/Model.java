@@ -78,7 +78,7 @@ public interface Model {
 
     List<String> getCommandHistory();
 
-    void updateCommandHistory(String commandText);
+    void appendCommandHistory(String commandText);
 
     void updateUndoableCommandHistory(String commandText);
 

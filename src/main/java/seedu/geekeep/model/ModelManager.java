@@ -250,7 +250,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateCommandHistory(String commandText) {
+    public void appendCommandHistory(String commandText) {
         commandHistory.add(commandText);
     }
 

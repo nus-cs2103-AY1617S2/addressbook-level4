@@ -30,7 +30,7 @@ public abstract class Command {
     public abstract CommandResult execute() throws CommandException;
 
     public void updateCommandHistory() {
-        model.updateCommandHistory(commandText);
+        model.appendCommandHistory(commandText);
     }
 
     public void setCommandText(String commandText) {
