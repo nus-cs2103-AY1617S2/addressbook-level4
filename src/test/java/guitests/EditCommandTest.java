@@ -116,7 +116,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find k/Ensure");
+        commandBox.runCommand("find Ensure");
 
         String detailsToEdit = "Code quality";
         int filteredTaskListIndex = 1;
