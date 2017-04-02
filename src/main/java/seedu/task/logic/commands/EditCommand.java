@@ -106,6 +106,16 @@ public class EditCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
+        // delete due date from task
+        if (editTaskDescriptor.deleteDueDate) {
+            updatedDueDate = null;
+        }
+
+        // delete duration from task
+        if (editTaskDescriptor.deleteDuration) {
+            updatedDuration = null;
+        }
+
         return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags, updatedComplete, originalId);
     }
     //@@author
@@ -121,6 +131,8 @@ public class EditCommand extends Command {
         private Optional<String> durationStart = Optional.empty();
         private Optional<String> durationEnd = Optional.empty();
         private Optional<DueDate> dueDate = Optional.empty();
+        private boolean deleteDueDate = false;
+        private boolean deleteDuration = false;
 
         public EditTaskDescriptor() {}
 
@@ -130,6 +142,8 @@ public class EditCommand extends Command {
             this.durationStart = toCopy.getDurationStart();
             this.durationEnd = toCopy.getDurationEnd();
             this.dueDate = toCopy.getDueDate();
+            this.deleteDueDate = toCopy.getDeleteDueDate();
+            this.deleteDuration = toCopy.getDeleteDuration();
         }
 
         /**
@@ -137,7 +151,9 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.description, this.tags,
-                    this.durationStart, this.durationEnd, this.dueDate);
+                    this.durationStart, this.durationEnd, this.dueDate)
+                    || this.deleteDueDate
+                    || this.deleteDuration;
         }
 
         public void setDescription(Optional<Description> description) {
@@ -183,6 +199,22 @@ public class EditCommand extends Command {
 
         public Optional<UniqueTagList> getTags() {
             return tags;
+        }
+
+        public boolean getDeleteDueDate() {
+            return this.deleteDueDate;
+        }
+
+        public void setDeleteDueDate(boolean deleteDueDate) {
+            this.deleteDueDate = deleteDueDate;
+        }
+
+        public boolean getDeleteDuration() {
+            return this.deleteDuration;
+        }
+
+        public void setDeleteDuration(boolean deleteDuration) {
+            this.deleteDuration = deleteDuration;
         }
     }
     //@@author

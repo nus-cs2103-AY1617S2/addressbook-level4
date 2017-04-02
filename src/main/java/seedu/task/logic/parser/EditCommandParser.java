@@ -23,7 +23,7 @@ import seedu.task.model.tag.UniqueTagList;
  */
 public class EditCommandParser {
 
-    //@@author A0163673Y-reused
+    //@@author A0163673Y
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -44,9 +44,23 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(1)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-            editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(argsTokenizer.getValue(PREFIX_DUEDATE)));
-            editTaskDescriptor.setDurationStart(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_START)));
-            editTaskDescriptor.setDurationEnd(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_END)));
+            // handle parsing of due date
+            if (argsTokenizer.getValue(PREFIX_DUEDATE).isPresent()
+                    && argsTokenizer.getValue(PREFIX_DUEDATE).get().equals("")) {
+                editTaskDescriptor.setDeleteDueDate(true);
+            } else {
+                editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(argsTokenizer.getValue(PREFIX_DUEDATE)));
+            }
+            // handle parsing of duration
+            if (argsTokenizer.getValue(PREFIX_START).isPresent()
+                    && argsTokenizer.getValue(PREFIX_END).isPresent()
+                    && argsTokenizer.getValue(PREFIX_START).get().equals("")
+                    && argsTokenizer.getValue(PREFIX_END).get().equals("")) {
+                editTaskDescriptor.setDeleteDuration(true);
+            } else {
+                editTaskDescriptor.setDurationStart(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_START)));
+                editTaskDescriptor.setDurationEnd(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_END)));
+            }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
