@@ -27,23 +27,26 @@ public class FindCommand extends Command {
             + "Parameters: k/NAME AND INFORMATION KEYWORDS or sd/START_DATE or ed/END_DATE \n"
             + "Example: " + COMMAND_WORD + " k/meeting" + " || " + COMMAND_WORD_SHORT + " sd/march 19";
 
+    private static final String TYPE_KEYWORDS = "keywords";
+    private static final String TYPE_START_DATE = "startDate";
+
     private final String keywords;
-    private final String prefix;
+    private final String type;
 
     //@@author A0147990R
-    public FindCommand(String pre, String keywords) {
-        this.prefix = pre;
+    public FindCommand(String type, String keywords) {
+        this.type = type;
         this.keywords = keywords;
     }
 
     @Override
     public CommandResult execute() {
-        if (prefix.equals(PREFIX_KEYWORD.toString())) {
+        if (type.equals(TYPE_KEYWORDS)) {
             String[] keywordsList = keywords.split(ALL_WHITESPACE);
             final Set<String> keywordSet = new HashSet<String>(Arrays.asList(keywordsList));
             model.updateFilteredTaskListByKeywords(keywordSet);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else if (prefix.equals(PREFIX_START_DATE.toString())) {
+        } else if (type.equals(TYPE_START_DATE)) {
             model.updateFilteredTaskListByStartDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         } else { //find by end datetime
