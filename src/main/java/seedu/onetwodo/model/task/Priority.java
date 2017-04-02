@@ -49,18 +49,22 @@ public class Priority implements Comparable<Priority> {
      * @param upperPriority
      */
     private void setPriority(String upperPriority) {
-        char firstLetter = upperPriority.toUpperCase().charAt(0);
-        switch (firstLetter) {
-        case HIGH_CHAR:
-            this.value = HIGH_LABEL;
-            break;
-        case MEDIUM_CHAR:
-            this.value = MEDIUM_LABEL;
-            break;
-        case LOW_CHAR:
-            this.value = LOW_LABEL;
-            break;
-        default:
+        if (upperPriority.isEmpty()) {
+            this.value = "";
+        } else {
+            char firstLetter = upperPriority.toUpperCase().charAt(0);
+            switch (firstLetter) {
+            case HIGH_CHAR:
+                this.value = HIGH_LABEL;
+                break;
+            case MEDIUM_CHAR:
+                this.value = MEDIUM_LABEL;
+                break;
+            case LOW_CHAR:
+                this.value = LOW_LABEL;
+                break;
+            default:
+            }
         }
     }
 
