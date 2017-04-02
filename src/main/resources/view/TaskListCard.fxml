@@ -20,7 +20,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" spacing="5" VBox.vgrow="ALWAYS">
                <children>
-                  <Label fx:id="id" styleClass="cell_event" HBox.hgrow="ALWAYS">
+                  <Label fx:id="id" minHeight="-Infinity" minWidth="-Infinity" styleClass="cell_event" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="20.0" />
                      </font>
