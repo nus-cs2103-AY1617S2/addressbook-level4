@@ -2,6 +2,7 @@
 package seedu.geekeep.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
@@ -241,6 +242,11 @@ public class ModelManager extends ComponentManager implements Model {
         geeKeep.resetData(futureGeeKeeps.pop());
         indicateGeeKeepChanged();
         return undoableCommandHistory.get(undoableCommandHistoryIndex++);
+    }
+
+    @Override
+    public List<String> getCommandHistory() {
+        return Collections.unmodifiableList(commandHistory);
     }
 
     @Override

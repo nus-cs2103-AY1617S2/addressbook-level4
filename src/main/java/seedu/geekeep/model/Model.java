@@ -1,6 +1,7 @@
 
 package seedu.geekeep.model;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
@@ -74,6 +75,8 @@ public interface Model {
     String undo() throws NothingToUndoException;
 
     String redo() throws NothingToRedoException;
+
+    List<String> getCommandHistory();
 
     void updateCommandHistory(String commandText);
 
