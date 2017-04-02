@@ -206,6 +206,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
+ 
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
@@ -408,6 +409,7 @@ A project often depends on third-party libraries. For example, Task Manager depe
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
+
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 &nbsp;
