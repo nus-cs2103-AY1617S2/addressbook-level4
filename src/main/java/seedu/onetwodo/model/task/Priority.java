@@ -26,50 +26,41 @@ public class Priority implements Comparable<Priority> {
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
-        priority = priority.trim();
-        String upperPriority = priority.toUpperCase();
-        if (priority.isEmpty()) {
-            value = priority;
-        } else if (upperPriority.length() > 1) {
-            switch (upperPriority) {
-            case HIGH_LABEL:
-                this.value = HIGH_LABEL;
-                break;
-            case MEDIUM_LABEL:
-                this.value = MEDIUM_LABEL;
-                break;
-            case LOW_LABEL:
-                this.value = LOW_LABEL;
-                break;
-            default:
-                throw new IllegalValueException(PRIORITY_CONSTRAINTS);
-            }
+        String upperPriority = priority.trim().toUpperCase();
+        if (!isValidPriority(upperPriority)) {
+            throw new IllegalValueException(PRIORITY_CONSTRAINTS);
         } else {
-            char firstLetter = upperPriority.charAt(0);
-            if (!isValidPriority(firstLetter)) {
-                throw new IllegalValueException(PRIORITY_CONSTRAINTS);
-            }
-            switch (firstLetter) {
-            case HIGH_CHAR:
-                this.value = HIGH_LABEL;
-                break;
-            case MEDIUM_CHAR:
-                this.value = MEDIUM_LABEL;
-                break;
-            case LOW_CHAR:
-                this.value = LOW_LABEL;
-                break;
-            default:
-                throw new IllegalValueException(PRIORITY_CONSTRAINTS);
-            }
+            setPriority(upperPriority);
         }
     }
 
     /**
      * Returns true if a given string is a valid task priority.
      */
-    public static boolean isValidPriority(char test) {
-        return ((test == HIGH_CHAR) || (test == MEDIUM_CHAR) || (test == LOW_CHAR));
+    public static boolean isValidPriority(String userInput) {
+        return userInput.isEmpty() || userInput.charAt(0) == HIGH_CHAR || userInput.charAt(0) == MEDIUM_CHAR
+                || userInput.charAt(0) == LOW_CHAR;
+    }
+
+    /**
+     * Sets the priority
+     *
+     * @param upperPriority
+     */
+    private void setPriority(String upperPriority) {
+        char firstLetter = upperPriority.charAt(0);
+        switch (firstLetter) {
+        case HIGH_CHAR:
+            this.value = HIGH_LABEL;
+            break;
+        case MEDIUM_CHAR:
+            this.value = MEDIUM_LABEL;
+            break;
+        case LOW_CHAR:
+            this.value = LOW_LABEL;
+            break;
+        default:
+        }
     }
 
     public boolean hasPriority() {
@@ -104,11 +95,15 @@ public class Priority implements Comparable<Priority> {
         if (p.value.equals(value)) {
             return 0;
         }
-        switch(value) {
-        case HIGH_LABEL: return 1;
-        case MEDIUM_LABEL: return p.value.equals(LOW_LABEL) ? 1 : -1;
-        case LOW_LABEL: return -1;
-        default: return -1;
+        switch (value) {
+        case HIGH_LABEL:
+            return 1;
+        case MEDIUM_LABEL:
+            return p.value.equals(LOW_LABEL) ? 1 : -1;
+        case LOW_LABEL:
+            return -1;
+        default:
+            return -1;
         }
     }
 }
