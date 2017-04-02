@@ -222,13 +222,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0147622H
     @Override
-    public void undo() throws NothingToUndoException {
+    public String undo() throws NothingToUndoException {
         if (pastGeeKeeps.empty()) {
             throw new NothingToUndoException();
         }
         futureGeeKeeps.push(new GeeKeep(geeKeep));
         geeKeep.resetData(pastGeeKeeps.pop());
         indicateGeeKeepChanged();
+        return undoableCommandHistory.get(--undoableCommandHistoryIndex);
     }
 
     @Override

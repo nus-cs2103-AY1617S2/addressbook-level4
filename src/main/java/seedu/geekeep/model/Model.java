@@ -71,7 +71,7 @@ public interface Model {
     /** Mark the specified task as undone */
     void markTaskUndone(int filteredTaskListIndex);
 
-    void undo() throws NothingToUndoException;
+    String undo() throws NothingToUndoException;
 
     void redo() throws NothingToRedoException;
 
