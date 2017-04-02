@@ -132,7 +132,7 @@ public class TaskTabPanel extends UiPart<Region> {
         }
     }
 
-     public void switchTabOnClick() {
+    public void switchTabOnClick() {
         try {
             CommandResult commandResult;
 
