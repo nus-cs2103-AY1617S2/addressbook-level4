@@ -264,7 +264,7 @@ Storing commands means there is no duplicated data stored. With the current impl
 
 The "snapshot" method was chosen over the "command" method largely because of its reduced complexity and increased robustness. Building reverse commands introduces a more complex system that increases the chance of bugs. Building snapshots of the tasks is also unlikely to overload memory as tasks are fairly small. If the data held by a task ever becomes much larger, this decision should be revisited.
 
-<h2 name"testing">4. Testing</h2>
+<h2 name="testing">4. Testing</h2>
 
 Tests can be found in the `./src/test/java` folder.
 
