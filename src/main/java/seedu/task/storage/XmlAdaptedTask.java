@@ -68,8 +68,8 @@ public class XmlAdaptedTask {
         final Title title = new Title(this.title);
         final Deadline date = new Deadline(this.date);
         final Priority priority = new Priority(this.priority);
-        final Instruction address = new Instruction(this.instruction);
+        final Instruction instruction = new Instruction(this.instruction);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, date, priority, address, tags);
+        return new Task(title, date, priority, instruction, tags);
     }
 }

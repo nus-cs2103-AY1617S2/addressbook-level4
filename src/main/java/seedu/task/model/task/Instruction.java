@@ -13,7 +13,7 @@ public class Instruction {
             "Task instructions can take any values including blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the instruction must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String INSTRUCTION_VALIDATION_REGEX = "[^\\s].*";

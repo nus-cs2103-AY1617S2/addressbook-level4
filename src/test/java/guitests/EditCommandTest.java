@@ -114,7 +114,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
      * Checks whether the edited task has the correct updated details.
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
-     * @param taskManagerIndex index of task to edit in the address book.
+     * @param taskManagerIndex index of task to edit in the task manager.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
