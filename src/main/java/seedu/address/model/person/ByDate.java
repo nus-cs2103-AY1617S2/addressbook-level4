@@ -17,7 +17,8 @@ public class ByDate {
     public static final String MESSAGE_BYDATE_CONSTRAINTS =
             "Deadline ByDate can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
 
-    public LocalDate value;
+    public final LocalDate value;
+    public final boolean isExisting;
 
     public LocalDate getValue() {
         return value;
@@ -33,10 +34,12 @@ public class ByDate {
     public ByDate(String byDateArg) throws IllegalValueException {
         if (byDateArg == null) {
             this.value = null;
+            this.isExisting = false;
         } else {
             if (byDateArg.matches("\\d+")) {
                 try {
                     this.value = StringUtil.parseStringToDate(byDateArg);
+                    this.isExisting = true;
                 } catch (DateTimeException illegalValueException) {
                     throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
                 }
@@ -44,6 +47,7 @@ public class ByDate {
                 DateTimeNLUtil dt = new DateTimeNLUtil();
                 String nldate = dt.getDate(byDateArg);
                 this.value = StringUtil.parseStringToDate(nldate);
+                this.isExisting = true;
             }
         }
     }
@@ -68,6 +72,11 @@ public class ByDate {
      */
     public ByDate(LocalDate bydate) {
         value = bydate;
+        if (bydate == null) {
+            isExisting = false;
+        } else {
+            isExisting = true;
+        }
     }
 
     //@@author
@@ -92,6 +101,10 @@ public class ByDate {
     }
 
     //@@author A0148038A
+    public boolean isExisting() {
+        return this.isExisting;
+    }
+
     public int compareTo(ByDate o) {
         return this.getValue().compareTo(o.getValue());
     }
