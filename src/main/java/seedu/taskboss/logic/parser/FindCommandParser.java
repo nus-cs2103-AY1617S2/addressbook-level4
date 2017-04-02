@@ -56,7 +56,7 @@ public class FindCommandParser {
 
         if (findType.equals(TYPE_START_DATE)) {
             inputPrefix = PREFIX_START_DATE;
-        } else { 
+        } else {
             inputPrefix = PREFIX_END_DATE;
         }
 
@@ -152,12 +152,12 @@ public class FindCommandParser {
     private String parseType(String args) {
         String input = args.trim();
         if (input.equals(EMPTY_STRING)) {
-            return EMPTY_STRING; 
-        } else if (input.length() >= 3 && 
+            return EMPTY_STRING;
+        } else if (input.length() >= 3 &&
                 input.substring(0,3).equals("sd/")) {
             System.out.println(input.substring(0,3));
             return TYPE_START_DATE;
-        } else if (input.length() >= 3 && 
+        } else if (input.length() >= 3 &&
                 input.substring(0,3).equals("ed/")) {
             System.out.println(input.substring(0,3));
             return TYPE_END_DATE;
