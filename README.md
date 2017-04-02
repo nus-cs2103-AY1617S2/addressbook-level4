@@ -22,6 +22,8 @@
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
   
+* The date and time parser for this application was borrowed from the open source [Natty Date Parser](http://natty.joestelmach.com/)
+  
 * Forked from nus-cs2103-AY1617S2/addressbook-level4
 
 #### Licence : [MIT](LICENSE)
