@@ -14,12 +14,15 @@ public class SortCommand extends Command {
             + "Parameters: name|deadline\n"
             + "Example: " + COMMAND_WORD + " deadline";
 
+    public String cmd;
+
     public SortCommand(String args) {
-        model.sort(args);
+        cmd = args;
     }
 
     @Override
     public CommandResult execute() {
+        model.sort(cmd);
         model.updateFilteredListToShowAll();
         return new CommandResult(MESSAGE_SUCCESS);
     }

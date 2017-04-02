@@ -18,7 +18,8 @@ public class SortCommandParser {
      */
     public Command parse(String args) {
 
-        if (!args.equals("name") || !args.equals("deadline")) {
+        args = args.trim();
+        if (!args.equals("name") && !args.equals("deadline")) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
