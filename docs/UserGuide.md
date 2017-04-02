@@ -1,4 +1,3 @@
-#
 # Burdens: User Guide
 
 By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp;
