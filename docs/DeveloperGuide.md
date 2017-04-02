@@ -1,10 +1,10 @@
 # Developer Guide
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: User Stories](#appendix-a-user-stories)
+* [Appendix B: Use Cases](#appendix-b-use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d-glossary)
+* [Appendix E : Product Survey](#appendix-e-product-survey)
 
 
 ## Setting up
@@ -225,10 +225,9 @@ We have two types of tests:
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
       e.g. `seedu.jobs.storage.StorageManagerTest`
-   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as 
-      how they are connected together.<br>
+   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as how they are connected together.<br>
       e.g. `seedu.jobs.logic.LogicManagerTest`
-      
+
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  our GUI tests can be run in the _headless_ mode.
@@ -311,13 +310,13 @@ Priority | As a ... | I want to ... | So that I can...
 
 1. User types in the task that he/she wishes to be included in the task reminder
 2. System informs the user that the task has been included in the task reminder
-Use case ends.  
+Use case ends.
 
 **Extensions**
 User enters the wrong task format
 
 JOBS shows the expected task format
-JOBS prompts user to re-enter the task 
+JOBS prompts user to re-enter the task
 
 > Use case ends
 
@@ -352,7 +351,7 @@ Use case resumes from step 1.
 6. System requests for confirmation.
 7. User confirms update.
 8. System updates the selected task and displays the updated taskâ€™s information.
-Use case ends.  
+Use case ends.
 
 **Extensions**
 3a. The input task cannot be found.
@@ -381,7 +380,7 @@ Use case resumes from step 6.
 2. System requests for confirmation.
 3. User confirms deletion
 4. System delete the selected task and displays the updated list of task.
-Use case ends.  
+Use case ends.
 
 **Extensions**
 

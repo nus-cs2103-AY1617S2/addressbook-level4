@@ -4,14 +4,14 @@ This product is a tool to accept natural language commands via keyboards to mana
 
 * [Start the program](#start-the-program)
 * [Feature details](#feature-details)
-    * [help](#view-help--help)
+    * [help](#view-help-help)
     * [add](#add-a-task-add)
     * [delete](#delete-a-task-delete)
     * [find](#find-a-task-find)
-    * [list](#list-tasks--list)
+    * [list](#list-tasks-list)
     * [edit](#edit-a-task-edit)
     * [undo/redo](#undo/redo-a-task-undo-redo)
-    * [exit](#exit-the-program--exit)
+    * [exit](#exit-the-program-exit)
     * [save](#save-the-data)
 * [Command Summary](#command-summary)
 
@@ -68,7 +68,7 @@ Example:
 * `find cs2103`
 * `find cs`
 
-### List tasks : `list`
+### List tasks: `list`
 List is the command word to list down all the existing tasks
 Formats: `list * | completed | pending | overdue`
 1. \* will list all tasks
@@ -99,7 +99,7 @@ Format : `undo` `redo`
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
 
-### Exit the program : `exit`
+### Exit the program: `exit`
 Exits the program.
 Format: `exit`
 
@@ -107,13 +107,13 @@ Format: `exit`
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Command Summary
-| Command | Format 
+| Command | Format
 | --------| --------
-| help | `help` 
-| add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]` 
-| delete | `delete index\INDEX` 
-| find | `find name/Name` 
-| list | `list * | completed | pending | overdue` 
-| edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]` 
-| undo/redo | `undo` `redo` 
-| exit | `exit` 
+| help | `help`
+| add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
+| delete | `delete index\INDEX`
+| find | `find name/Name`
+| list | `list * | completed | pending | overdue`
+| edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
+| undo/redo | `undo` `redo`
+| exit | `exit`
