@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+//@@author A0130979U
 public class NameTest {
 
     @Test
@@ -20,3 +21,4 @@ public class NameTest {
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }
+//@@author A0130979U

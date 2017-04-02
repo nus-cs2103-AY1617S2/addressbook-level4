@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
+//@@author A0130979U
 public class TimeTest {
 
     @Test
@@ -43,3 +44,4 @@ public class TimeTest {
         assertEquals(oldTime, new Time(Optional.of("16/12/1993 12:00")));
     }
 }
+//@@author A0130979U
