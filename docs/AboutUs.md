@@ -3,6 +3,7 @@
 Hello there from Burdens! We are a software enginerring team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
+
 #### [Nguyen Quoc Bao](https://github.com/bqnguyen94) <br>
 <img src="images/bqnguyen94.jpg" width="150"><br>
 Role: Team Lead <br>
