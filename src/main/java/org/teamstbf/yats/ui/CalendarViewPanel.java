@@ -30,6 +30,7 @@ import javafx.scene.layout.Region;
 /**
  * The Browser Panel of the App.
  */
+@SuppressWarnings("restriction")
 public class CalendarViewPanel extends UiPart<Region> {
 
 	private static final String FXML = "CalendarView.fxml";
@@ -40,11 +41,11 @@ public class CalendarViewPanel extends UiPart<Region> {
 	@FXML
 	private TabPane dWMView;
 	@FXML
-	private Tab doneTask;
+	private Tab doneTaskTab;
 	@FXML
-	private Tab browser;
+	private Tab browserTab;
 	@FXML
-	private Tab calendarView;
+	private Tab calendarViewTab;
 	@FXML
 	private BorderPane calendarRoot;
 	@FXML
@@ -62,7 +63,7 @@ public class CalendarViewPanel extends UiPart<Region> {
 	@FXML
 	private Label currentYear;
 	@FXML
-	private ListView<String> timeSlots;
+	private ListView<String> timeTasks;
 
 	private static LocalDate today = LocalDate.now();
 	private final LocalTime firstTimeSlot = LocalTime.of(0, 0);
@@ -78,28 +79,16 @@ public class CalendarViewPanel extends UiPart<Region> {
 	public CalendarViewPanel(AnchorPane placeholder) {
 		super(FXML);
 		FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
-		invokeArrowImage();
 		initializeCalendarView();
 		placeholder.getChildren().add(calendarPanel);
 	}
 
-	private void invokeArrowImage() {
-		leftArrow.setText("<<");
-		rightArrow.setText(">>");
-	}
-
-	@SuppressWarnings("restriction")
 	private void initializeCalendarView() {
 
 		DatePickerSkin calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
 		Node popupContent = calendar.getPopupContent();
 		calendarRoot.setCenter(popupContent);
 
-		for (startTime = today.atTime(firstTimeSlot); !startTime
-				.isAfter(today.atTime(lastTimeSlot)); startTime = startTime.plus(timeDifference)) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ha");
-			timeData.add(startTime.format(formatter));
-		}
 		createFullDayTime();
 		currentDay.setText(today.format(dateFormatter("d MMM")));
 	}
@@ -172,17 +161,19 @@ public class CalendarViewPanel extends UiPart<Region> {
 
 	// ========== Inner Class and Methods for calendar view ==========
 
-	private void populateMonth() {
-		LocalDate calendarDate = LocalDate.of(today.getYear(), today.getMonth(), today.getDayOfMonth());
-	}
-
 	private void createFullDayTime() {
-		timeSlots.setItems(timeData);
-		timeSlots.setCellFactory(listView -> new TimeSlotListViewCell());
+		for (startTime = today.atTime(firstTimeSlot); !startTime
+				.isAfter(today.atTime(lastTimeSlot)); startTime = startTime.plus(timeDifference)) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ha");
+			timeData.add(startTime.format(formatter));
+		}
+		timeTasks.setItems(timeData);
+		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
 	}
 
 	private class TimeSlotListViewCell extends ListCell<String> {
 
+		@SuppressWarnings("null")
 		@Override
 		protected void updateItem(String time, boolean empty) {
 			super.updateItem(time, empty);

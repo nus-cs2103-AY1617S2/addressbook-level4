@@ -24,9 +24,9 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab fx:id="browser" text="Browser">
+            <Tab text="Browser">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane fx:id="browserPanel" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
           <Tab fx:id="calendarView" text="Calendar">
@@ -43,16 +43,16 @@
                           </rowConstraints>
                            <children>
                               <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                              <BorderPane fx:id="calendarRoot" />
-                              <ListView fx:id="timeSlots" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <BorderPane fx:id="calendarRoot" minHeight="0.0" prefHeight="0.0" prefWidth="500.0" />
+                              <ListView fx:id="timeTasks" prefHeight="200.0" prefWidth="200.0" styleClass="list-cell" stylesheets="@DarkTheme.css" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                         <VBox layoutX="321.0" layoutY="352.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                            <children>
-                              <ButtonBar buttonMinWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: whitesmoke;" VBox.vgrow="NEVER">
+                              <ButtonBar buttonMinWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" stylesheets="@DarkTheme.css" VBox.vgrow="NEVER">
                                 <buttons>
-                                  <Button fx:id="rightArrow" mnemonicParsing="false" onAction="#nextDay" text="&gt;&gt;" />
-                                    <Button fx:id="leftArrow" mnemonicParsing="false" onAction="#prevDay" text="&lt;&lt;" />
+                                  <Button fx:id="rightArrow" mnemonicParsing="false" onAction="#nextDay" styleClass="increment-arrow" text="&gt;" />
+                                    <Button fx:id="leftArrow" mnemonicParsing="false" onAction="#prevDay" styleClass="decrement-arrow" text="&lt;" />
                                     <Label fx:id="currentDay" onMouseClicked="#resetTodayDay" text="\$day" />
                                 </buttons>
                               </ButtonBar>
