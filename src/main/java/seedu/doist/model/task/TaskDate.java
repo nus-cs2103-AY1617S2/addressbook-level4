@@ -124,4 +124,12 @@ public class TaskDate {
     public int hashCode() {
         return Objects.hash(startDate, endDate);
     }
+
+    public int compareTo(TaskDate dates) {
+        if (this.startDate.compareTo(dates.getStartDate()) >= 0) {
+            return this.endDate.compareTo(dates.endDate);
+        } else {
+            return -1;
+        }
+    }
 }
