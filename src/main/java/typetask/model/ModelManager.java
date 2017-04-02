@@ -1,5 +1,8 @@
 package typetask.model;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -12,6 +15,7 @@ import typetask.commons.events.model.TaskManagerChangedEvent;
 import typetask.commons.util.CollectionUtil;
 import typetask.commons.util.StorageUtil;
 import typetask.commons.util.StringUtil;
+import typetask.logic.parser.DateParser;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 import typetask.model.task.TaskList.TaskNotFoundException;
@@ -172,6 +176,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(showComplete)));
     }
 
+    //@@author A0139154E
+    @Override
+    public void updateFilteredTaskList(Calendar today) {
+        updateFilteredTaskList(new PredicateExpression(new TodayQualifier(today)));
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -257,6 +267,42 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "showComplete=" + String.valueOf(showComplete);
+        }
+    }
+
+    //@@author A0139154E
+    /** Examines if the task is qualified to be in the list of today's tasks*/
+    private class TodayQualifier implements Qualifier {
+        private Calendar today;
+
+        TodayQualifier(Calendar today) {
+            this.today = today;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isEventDueToday = false;
+            Calendar taskEndDateCalendar = Calendar.getInstance();
+            List<Date> endDates = DateParser.parse(task.getEndDate().value);
+            Date taskEndDate = endDates.get(0);
+            taskEndDateCalendar.setTime(taskEndDate);
+
+            if (!task.getDate().value.equals("")) {
+                Calendar taskStartDateCalendar = Calendar.getInstance();
+                List<Date> startDates = DateParser.parse(task.getDate().value);
+                Date taskStartDate = startDates.get(0);
+                taskStartDateCalendar.setTime(taskStartDate);
+                isEventDueToday = (taskStartDateCalendar.before(today) || (today.get(Calendar.YEAR) == taskStartDateCalendar.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == taskStartDateCalendar.get(Calendar.DAY_OF_YEAR))) && (taskEndDateCalendar.after(today) || (today.get(Calendar.YEAR) == taskEndDateCalendar.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == taskEndDateCalendar.get(Calendar.DAY_OF_YEAR)));
+            }
+
+            boolean isTaskDueToday = (today.get(Calendar.YEAR) == taskEndDateCalendar.get(Calendar.YEAR) &&
+                    today.get(Calendar.DAY_OF_YEAR) == taskEndDateCalendar.get(Calendar.DAY_OF_YEAR));
+            return (isTaskDueToday || isEventDueToday);
+        }
+
+        @Override
+        public String toString() {
+            return "showToday=" + today;
         }
     }
 

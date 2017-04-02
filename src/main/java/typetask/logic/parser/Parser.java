@@ -18,6 +18,7 @@ import typetask.logic.commands.HelpCommand;
 import typetask.logic.commands.IncorrectCommand;
 import typetask.logic.commands.ListCommand;
 import typetask.logic.commands.ListDoneCommand;
+import typetask.logic.commands.ListTodayCommand;
 import typetask.logic.commands.RedoCommand;
 import typetask.logic.commands.RemoveDeadlineCommand;
 import typetask.logic.commands.SaveCommand;
@@ -92,6 +93,9 @@ public class Parser {
 
         case ListDoneCommand.COMMAND_WORD:
             return new ListDoneCommand();
+
+        case ListTodayCommand.COMMAND_WORD:
+            return new ListTodayCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
