@@ -25,11 +25,24 @@ public class DoneCommandParser {
 	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 	}
 	final String[] index = matcher.group("index").split("\\s+");
-	final int[] targetIndex = new int[index.length];
+	int[] targetIndex = new int[index.length];
 	for (int i = 0; i < index.length; i++)
 	    targetIndex[i] = Integer.parseInt(index[i]);
-
+	targetIndex = sort(targetIndex);
 	return new DoneCommand(targetIndex);
     }
+    //sorts in reverse order
+    //@@author A0163845X
+    public static int[] sort(int[] input) {
+    	for (int i = 0; i < input.length - 1; i++) {
+    		for (int j = i; j < input.length; j++) {
+    			if (input[i] < input[j]) {
+    				int temp = input[i];
+    				input[i] = input[j];
+    				input[j] = temp;
+    			}
+    		}
+    	}
+    	return input;
+    }
 }
-//@@author

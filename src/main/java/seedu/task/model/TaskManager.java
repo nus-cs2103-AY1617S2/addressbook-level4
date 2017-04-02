@@ -35,6 +35,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
     private Deque<UniqueTaskList> backupTasks = new LinkedList<UniqueTaskList>();
+    private Deque<UniqueTaskList> redoBackup = new LinkedList<UniqueTaskList>();
     private final int BACKUP_LIST_MAX_SIZE = 10;
     /*
      * The 'unusual' code block below is an non-static initialization block,
@@ -217,6 +218,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     	if (backupTasks == null || backupTasks.size() == 0) {
     		throw new Exception("Can't undo without undo state");
     	} else {
+    		redoBackup.addLast(UniqueTaskList.copy(tasks));
     		tasks.clear();
     		for (Task t : backupTasks.getLast()) {
     			tasks.add(t);
@@ -226,6 +228,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
     //@@author A0163845X
     public void updateBackup() throws DuplicateTaskException {
+    	redoBackup.clear();
     	if (backupTasks == null) {
     		backupTasks = new LinkedList<UniqueTaskList>();
     	} 
@@ -286,6 +289,20 @@ public class TaskManager implements ReadOnlyTaskManager {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+    //@@author A0163845X
+	public void redo() throws Exception {
+		if (redoBackup.isEmpty()) {
+			throw new Exception("Can't redo");
+		} else {
+			UniqueTaskList temp = redoBackup.getLast();
+			backupTasks.addLast(UniqueTaskList.copy(tasks));
+			redoBackup.removeLast();
+			tasks.clear();
+    		for (Task t : temp) {
+    			tasks.add(t);
+    		}
 		}
 	}
 }

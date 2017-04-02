@@ -47,7 +47,23 @@ Format: `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 > `add` and `TASKNAME` must be in the order shown, but there is no set order for all other parameters.
 > A format hint will be added if the user types in an incorrect command. 
 
-> `s/STARTTIME` and `e/ENDTIME` can be entered in the format `12:12` or `1212`. `[d/DATE1 [DATE2]` can be entered in the format `ddmmyy`. Time is formated using a 24 hour clock. 
+> `s/STARTTIME` and `e/ENDTIME` can be entered in the format `mm:hh` or `mmhh`. Time is formated using a 24 hour clock. Additionally, many natural language options are available. A list of some possible natural language options are listed below.
+
+* 06:00 hours
+* 5:30 a.m.
+* noon
+* afternoon
+* midnight
+
+>`[d/DATE1 [DATE2]` can be entered in the format `ddmmyy`. Additionally, many natural language options are available. A list of some possible natural language options are listed below.
+
+* 1-02-2017
+* 2/28/79
+* Fri, 21 Nov 2017
+* Jan 21
+* next thursday
+* today
+* tomorrow
 
 Example: 
 * `add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk`
@@ -74,18 +90,32 @@ Examples:
 * `delete 2`<br>
   
 ## Editing a Task : `edit`
-Edits a specified tasks from the task manager. Irreversible.<br>
+Edits a specified task from the task manager.<br>
 Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 
 > Edits the task at the specified `INDEX`. The index refers to the 
 task number shown in the list. `INDEX` must be an exact match in order 
 for the function to work.
 
-Examples: `edit 2 m/Go to Ralph's`
+Examples: `edit 2 m/Go to Ralphs`
 
-## Editing a Task : `undo`
-Undos the most recent action. Irreversible.
+## Clearing all Tasks : `clear`
+Clears all tasks from the task manager.<br>
+Format: `clear` 
+
+## Undoing a Task : `undo`
+Undos the most recent action up to 10 times.
 Format: `undo`
+
+## Completing a Task : `done`
+Completes the specified tasks from the task manager and changes the task status from `Ongoing` to `Completed`.<br>
+Format: `done INDEX [MORE INDECIES]`
+
+## Filtering the Tasks : `filter`
+Filters the list of tasks to only see `Ongoing` or `Completed` tasks.<br>
+Format: `filter ongoing` or `filter completed`
+> Filters the tasks by either `Ongoing` or `Completed` task status. `filter ongoing` shows all completed tasks and `filter completed` shows all ongoing tasks. 
+> To return to the unsorted list of tasks, type and enter `list`.
 
 ## Sorting the Tasks : `sort`
 Sorts the tasks by date or by alphabet. 
@@ -93,17 +123,19 @@ Format: `sort name` or `sort time`
 > Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date. 
 > To return to the unsorted list of tasks, type and enter `list`.
 
-## Googling a Task or Phrase: `google` 
+## Googling the Tasks: `google` 
 Format: `google [INDEX]`
-> Googles the task name at the specified index. A user can additionally Google a task name by single clicking on a task.
+> Googles the task name at the specified index. The user can additionally Google a task name by single clicking on a task. 
 
-## Clearing All Entries : `clear`
-Clears all tasks from the task manager.<br>
-Format: `clear`  
-
-## Change the Save Path: `path`
-Changes the save path for Fast Task data. You must specify the name of the save file and mark it as a .xml file.<br>
+## Changing the Save Path: `path`
+Changes the save path for Fast Task data. Must specify the name of the save file and mark it as a .xml file.<br>
 Format: `path PATHNAME`<br>
+Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
+Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
+
+## Loading Fast Task Data: `load`
+Loads a save file for Fast Task data. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file.<br>
+Format: `load PATHNAME`<br>
 Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
 Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
 
@@ -116,14 +148,14 @@ Tasks manager data are saved in the hard disk automatically after any command th
 There is no need to save manually.
 
 ## Save Location
-Tasks manager data are saved in a file called `TasksManagerData.xml` in the project root folder.
+Fast Task data are saved in a file called `TasksManagerData.xml` in the project root folder.
 
 ## 4. Command Summary
 
+* **Help** : `help` <br>
+
 * **Add**  `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]` <br>
   e.g. `add Groceries Shopping d/030117 s/09:00 e/12:00 m/Go to Cold Storage, buy extra milk`
-
-* **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
@@ -133,14 +165,23 @@ Tasks manager data are saved in a file called `TasksManagerData.xml` in the proj
 
 * **List** : `list` <br>
 
-* **Help** : `help` <br>
+* **Clear** : `clear`
 
 * **Undo** : `undo` <br>
+
+* **Done** : `done` <br>
+ e.g. `done 3`
+
+* **Filter** : `filter` <br>
+ e.g.`filter ongoing` or `filter completed`
 
 * **Sort** : `sort time` or `sort name`<br>
 
 * **Path** : `path PATHNAME` <br>
  e.g. `path C:\Desktop\MyTasks.xml`
+ 
+ * **Load** : `load PATHNAME` <br>
+ e.g. `load C:\Desktop\MyTasks.xml`
 
 * **Google** : `google INDEX` <br>
   e.g.`google 2`

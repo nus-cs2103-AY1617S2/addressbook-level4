@@ -158,6 +158,5 @@ public class TestTask implements ReadOnlyTask {
     private void setLocalTime(LocalTime localTime) {
     	this.localTime = localTime;
     }
-
 }
 //@@author

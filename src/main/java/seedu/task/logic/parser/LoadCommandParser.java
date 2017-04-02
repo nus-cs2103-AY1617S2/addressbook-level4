@@ -3,15 +3,11 @@ package seedu.task.logic.parser;
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.logic.parser.CliSyntax.PATH_ARGS_FORMAT;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.LoadCommand;
-import seedu.task.logic.commands.PathCommand;
 
 
 
@@ -23,12 +19,11 @@ public class LoadCommandParser {
     public Command parse(String args) {
 	    final Matcher matcher = PATH_ARGS_FORMAT.matcher(args.trim());
 	    if (!matcher.matches()) {
-	        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PathCommand.MESSAGE_USAGE));
+	        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
 	}
 
 	// keywords delimited by whitespace
 	final String path = matcher.group("keyword");
-	//final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
 	return new LoadCommand(path);
     }
 

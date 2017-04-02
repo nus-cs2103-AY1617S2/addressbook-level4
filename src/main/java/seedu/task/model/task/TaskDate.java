@@ -16,12 +16,12 @@ public class TaskDate {
     private int day;
     private int month;
     private int year;
-    private int day2 = 0;
-    private int month2 = 0;
-    private int year2 = 0;
+    private int dayTwo = 0;
+    private int monthTwo = 0;
+    private int yearTwo = 0;
     public final String value;
-    private final String DATE_DELIMITER = "/";
-    private final String DATE_DELIMITER2 = "-";
+    private final String DATE_DELIMITER_SLASH = "/";
+    private final String DATE_DELIMITER_DASH = "-";
     private final int DAY_ARRAY_INDEX = 0;
     private final int MONTH_ARRAY_INDEX = 1;
     private final int YEAR_ARRAY_INDEX = 2;
@@ -60,9 +60,9 @@ public class TaskDate {
 		    setDay(dateArray[DAY_ARRAY_INDEX]);
 		    setMonth(dateArray[MONTH_ARRAY_INDEX]);
 		    setYear(dateArray[YEAR_ARRAY_INDEX]);
-		    setDay2(dateArray[DAY2_ARRAY_INDEX]);
-		    setMonth2(dateArray[MONTH2_ARRAY_INDEX]);
-		    setYear2(dateArray[YEAR2_ARRAY_INDEX]);
+		    setSecondDay(dateArray[DAY2_ARRAY_INDEX]);
+		    setSecondMonth(dateArray[MONTH2_ARRAY_INDEX]);
+		    setSecondYear(dateArray[YEAR2_ARRAY_INDEX]);
 		}
 	}catch(Exception e){
 	    formatter = new SimpleDateFormat (OUTPUT_FORMAT);
@@ -100,25 +100,25 @@ public class TaskDate {
 	}
     }
 
-    public void setDay2(int day) {
+    public void setSecondDay(int day) {
 	if (day > 0 && day <= 31) {
-	    this.day2 = day;
+	    this.dayTwo = day;
 	} else {
 	    throw new IllegalArgumentException("Invalid day");
 	}
     }
 
-    public void setMonth2(int month) {
+    public void setSecondMonth(int month) {
 	if (month > 0 && month <= 12) {
-	    this.month2 = month;
+	    this.monthTwo = month;
 	} else {
 	    throw new IllegalArgumentException("Invalid month");
 	}
     }
 
-    public void setYear2(int year) {
+    public void setSecondYear(int year) {
 	if (year > 0) {
-	    this.year2 = year;
+	    this.yearTwo = year;
 	} else {
 	    throw new IllegalArgumentException("Invalid year");
 	}
@@ -127,11 +127,11 @@ public class TaskDate {
 
     public String toString() {
     if(dates == null){
-    	if (day2 == 0 && month2 == 0 && year2 == 0) {
-    	    return day + DATE_DELIMITER + month + DATE_DELIMITER + year;
+    	if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
+    	    return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year;
     	}
-    	return day + DATE_DELIMITER + month + DATE_DELIMITER + year + " " + DATE_DELIMITER2 + " " + day2
-    		+ DATE_DELIMITER + month2 + DATE_DELIMITER + year2;
+    	return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " " + DATE_DELIMITER_DASH + " " + dayTwo
+    		+ DATE_DELIMITER_SLASH + monthTwo + DATE_DELIMITER_SLASH + yearTwo;
     }else{
     	if(dates.size() == 1)
         	return formatter.format(dates.get(0));
@@ -153,10 +153,10 @@ public class TaskDate {
 	    int day = Integer.parseInt(date.substring(DAY_START_INDEX, DAY_END_INDEX));
 	    int month = Integer.parseInt(date.substring(MONTH_START_INDEX, MONTH_END_INDEX));
 	    int year = Integer.parseInt(date.substring(YEAR_START_INDEX, YEAR_END_INDEX));
-	    int day2 = Integer.parseInt(date.substring(DAY2_START_INDEX, DAY2_END_INDEX));
-	    int month2 = Integer.parseInt(date.substring(MONTH2_START_INDEX, MONTH2_END_INDEX));
-	    int year2 = Integer.parseInt(date.substring(YEAR2_START_INDEX, YEAR2_END_INDEX));
-	    int[] returnArray = { day, month, year, day2, month2, year2 };
+	    int dayTwo = Integer.parseInt(date.substring(DAY2_START_INDEX, DAY2_END_INDEX));
+	    int monthTwo = Integer.parseInt(date.substring(MONTH2_START_INDEX, MONTH2_END_INDEX));
+	    int yearTwo = Integer.parseInt(date.substring(YEAR2_START_INDEX, YEAR2_END_INDEX));
+	    int[] returnArray = { day, month, year, dayTwo, monthTwo, yearTwo };
 	    return returnArray;
 	} else {
 	    throw new IllegalArgumentException("Invalid date format");
