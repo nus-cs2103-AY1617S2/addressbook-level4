@@ -74,34 +74,27 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    // @@author A0141138N
+    //@@author A0139343E
     private static Task[] getSampleTaskData() {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                // Event Tasks
-                new Task(new Name("PARTY TIME"), new StartDate("2/3/18 8pm"), new EndDate("3/4/18 11pm"),
-                            new Recurring("weekly"), new Priority("LOW"), new Description("bring snacks"),
-                            new UniqueTagList()),
-                new Task(new Name("study"), new StartDate("02-02-18"), new EndDate("02-06-18"),
-                            new Recurring("daily"), new Priority("h"), new Description("midterms"),
-                            new UniqueTagList("school")),
-                new Task(new Name("Holiday"), new StartDate("tomorrow 1pm"), new EndDate("next week 8pm"),
-                            new Recurring(""), new Priority("MED"), new Description("BALI"), new UniqueTagList("")),
-                // Deadline Tasks
-                new Task(new Name("2103 assignment"), new StartDate(""), new EndDate("30 apr 11:59pm"),
-                            new Recurring(""), new Priority("high"), new Description("can copy answer"),
-                            new UniqueTagList("school")),
-                new Task(new Name("project proposal"), new StartDate(""), new EndDate("today"), new Recurring(""),
-                            new Priority("HIGH"), new Description(""), new UniqueTagList()),
-                new Task(new Name("3230 assignment"), new StartDate(""), new EndDate("23 april 2017"),
-                            new Recurring("weekly"), new Priority("low"), new Description(""),
-                            new UniqueTagList("sch")),
-                // To-do Tasks
-                new Task(new Name("Laundry"), new StartDate(""), new EndDate(""), new Recurring(""),
-                            new Priority(""), new Description(""), new UniqueTagList()),
-                new Task(new Name("Buy Nancy a pet parrot"), new StartDate(""), new EndDate(""), new Recurring(""),
-                            new Priority("low"), new Description("bday present"), new UniqueTagList()),
+                new Task(new Name("Go party"), new StartDate("01-01-2018"), new EndDate("02-02-2018"),
+                            new Recurring("weekly"), new Priority("l"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Go drinking"), new StartDate("15 may 2018 6pm"), new EndDate("15 may 2018 11pm"),
+                            new Recurring("weekly"), new Priority(""), new Description("get drunk"), new UniqueTagList()),
+                new Task(new Name("Go holiday"), new StartDate("15/02/2018 6pm"), new EndDate("02-01-2019"),
+                            new Recurring(""), new Priority("m"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Finish cs2103"), new StartDate(""), new EndDate("12/12/2018 22:55"),
+                            new Recurring(""), new Priority("h"), new Description("can copy answer"), new UniqueTagList()),
+                new Task(new Name("Complete tutorial"), new StartDate(""), new EndDate("today"), new Recurring(""),
+                            new Priority("m"), new Description("can copy answer"), new UniqueTagList()),
+                new Task(new Name("Submit assignment"), new StartDate(""), new EndDate("17 june 2018"),
+                            new Recurring("weekly"), new Priority("h"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Buy pet dog"), new StartDate(""), new EndDate(""), new Recurring(""),
+                            new Priority(""), new Description("brown one"), new UniqueTagList()),
+                new Task(new Name("Go gym when free"), new StartDate(""), new EndDate(""), new Recurring(""),
+                            new Priority("h"), new Description("train legs too"), new UniqueTagList()),
                 new Task(new Name("Dye hair"), new StartDate(""), new EndDate(""), new Recurring(""),
                             new Priority(""), new Description(""), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
