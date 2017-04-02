@@ -22,6 +22,7 @@ import seedu.opus.model.qualifier.KeywordQualifier;
 import seedu.opus.model.qualifier.PriorityQualifier;
 import seedu.opus.model.qualifier.Qualifier;
 import seedu.opus.model.qualifier.StartTimeQualifier;
+import seedu.opus.model.qualifier.StatusQualifier;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -37,7 +38,8 @@ public class FindCommandParser {
         List<Qualifier> qualifiers = new ArrayList<Qualifier>();
 
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STATUS, PREFIX_STARTTIME, PREFIX_ENDTIME);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STATUS,
+                        PREFIX_STARTTIME, PREFIX_ENDTIME);
         argsTokenizer.tokenize(args);
         String inputKeyword = argsTokenizer.getPreamble().orElse("");
 
@@ -52,6 +54,10 @@ public class FindCommandParser {
         // Bulid extra qualifier list
         if(argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
             qualifiers.add(new PriorityQualifier(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("")));
+        }
+
+        if(argsTokenizer.getValue(PREFIX_STATUS).isPresent()) {
+            qualifiers.add(new StatusQualifier(argsTokenizer.getValue(PREFIX_STATUS).orElse("")));
         }
 
         if(argsTokenizer.getValue(PREFIX_STARTTIME).isPresent()) {

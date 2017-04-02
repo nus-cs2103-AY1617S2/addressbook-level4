@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds by keywords or attributes and displays them as a list with index numbers.\n"
             + "At least one of the parameters below must be specified.\n"
-            + "Parameters: [KEYWORDS]... [PRIORITY] [STARTTIME] [ENDTIME]\n"
+            + "Parameters: [KEYWORDS]... [PRIORITY] [STARTTIME] [ENDTIME] [STATUS]\n"
             + "Example: " + COMMAND_WORD + " do homework b/hi";
 
     private final List<Qualifier> qualifiers;
