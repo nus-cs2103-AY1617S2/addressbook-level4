@@ -16,7 +16,7 @@ public class FindCommand extends Command {
             + ": Finds by keywords or attributes and displays them as a list with index numbers.\n"
             + "At least one of the parameters below must be specified.\n"
             + "Parameters: [KEYWORDS]... [PRIORITY] [STARTTIME] [ENDTIME] [STATUS]\n"
-            + "Example: " + COMMAND_WORD + " do homework b/hi";
+            + "Example: " + COMMAND_WORD + " do homework p/hi";
 
     private final List<Qualifier> qualifiers;
 

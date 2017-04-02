@@ -52,24 +52,24 @@ public class FindCommandParser {
         }
 
         // Bulid extra qualifier list
-        if(argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
+        if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
             qualifiers.add(new PriorityQualifier(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("")));
         }
 
-        if(argsTokenizer.getValue(PREFIX_STATUS).isPresent()) {
+        if (argsTokenizer.getValue(PREFIX_STATUS).isPresent()) {
             qualifiers.add(new StatusQualifier(argsTokenizer.getValue(PREFIX_STATUS).orElse("")));
         }
 
-        if(argsTokenizer.getValue(PREFIX_STARTTIME).isPresent()) {
+        if (argsTokenizer.getValue(PREFIX_STARTTIME).isPresent()) {
             qualifiers.add(new StartTimeQualifier(argsTokenizer.getValue(PREFIX_STARTTIME).orElse("")));
         }
 
-        if(argsTokenizer.getValue(PREFIX_ENDTIME).isPresent()) {
+        if (argsTokenizer.getValue(PREFIX_ENDTIME).isPresent()) {
             qualifiers.add(new EndTimeQualifier(argsTokenizer.getValue(PREFIX_ENDTIME).orElse("")));
         }
 
         // has no qualifier
-        if(qualifiers.size() < 1) {
+        if (qualifiers.size() < 1) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }

@@ -22,7 +22,7 @@ public class EndTimeQualifier implements Qualifier {
     public boolean run(ReadOnlyTask task) {
         Optional<LocalDateTime> inputEndTime = DateTimeParser.parse(this.endTime);
         Optional<DateTime> taskEndTime = task.getEndTime();
-        if(!inputEndTime.isPresent() || !taskEndTime.isPresent()) {
+        if (!inputEndTime.isPresent() || !taskEndTime.isPresent()) {
             return false;
         }
         return inputEndTime.get().isAfter(taskEndTime.get().dateTime);

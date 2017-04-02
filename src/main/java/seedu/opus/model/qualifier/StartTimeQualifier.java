@@ -22,7 +22,7 @@ public class StartTimeQualifier implements Qualifier  {
     public boolean run(ReadOnlyTask task) {
         Optional<LocalDateTime> inputStartTime = DateTimeParser.parse(this.startTime);
         Optional<DateTime> taskStartTime = task.getStartTime();
-        if(!inputStartTime.isPresent() || !taskStartTime.isPresent()) {
+        if (!inputStartTime.isPresent() || !taskStartTime.isPresent()) {
             return false;
         }
         return inputStartTime.get().isAfter(taskStartTime.get().dateTime);
