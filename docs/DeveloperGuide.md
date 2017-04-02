@@ -226,10 +226,10 @@ _Figure 3.3.1 : Structure of the Logic Component_
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 ```
-The `Logic` component,
+The `Logic` component
 
-* `Logic` uses the `Parser` class to parse the user command.
-* This results in a `Command` object which is executed by the `LogicManager`.
+* The `Logic` component uses the `Parser` class to parse the user command.
+* The `Command` object created from the 'Parser' class is executed by the `LogicManager`.
 * The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 ```
@@ -251,13 +251,13 @@ _Figure 3.4.1 : Structure of the Model Component_
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
 ```
-The `Model` component,
+The `Model` component
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* The 'Model' component stores a `UserPref` object that represents the user's preferences.
+* The 'Model' component stores the Task Manager data.
+* The 'Model' component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' 
+   e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* The 'Model' component does not depend on any of the other three components.
 ```
 
 ### 3.5. Storage component
@@ -269,10 +269,10 @@ _Figure 3.5.1 : Structure of the Storage Component_
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
 ```
-The `Storage` component,
+The `Storage` component
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Task Manager data in xml format and read it back.
+* The `Storage` component can save `UserPref` objects in json format and read it back.
+* The `Storage` component can save the Task Manager data in xml format and read it back.
 ```
 
 ### 3.6. Common classes
@@ -287,11 +287,11 @@ Classes used by multiple components are in the `typetask.commons` package.
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
 
-* The logging level can be controlled using the `logLevel` setting in the configuration file
+* The logging level can be controlled using the `logLevel` setting in the configuration file.
   (See [Configuration](#configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
-  the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
+  the specified logging level.
+* The log messages are output through: `Console` and to a `.log` file.
 
 **Logging Levels**
 
@@ -314,7 +314,7 @@ Tests can be found in the `./src/test/java` folder.
 **In Eclipse**:
 
 * To run all tests, right-click on the `src/test/java` folder and choose
-  `Run as` > `JUnit Test`
+  `Run as` > `JUnit Test`.
 * To run a subset of tests, you can right-click on a test package, test class, or a test and choose
   to run as a JUnit test.
 
