@@ -37,9 +37,6 @@ public class MainWindow extends UiPart<Region> {
     private Config config;
 
     @FXML
-    private AnchorPane browserPlaceholder;
-
-    @FXML
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
