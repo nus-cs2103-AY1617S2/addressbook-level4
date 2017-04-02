@@ -46,7 +46,7 @@ public class FindCommand extends Command {
         } else if (type.equals(TYPE_START_DATE)) {
             model.updateFilteredTaskListByStartDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else { //find by end datetime
+        } else { //find by end date time
             model.updateFilteredTaskListByEndDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         }

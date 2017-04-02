@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
-import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.testutil.TestTask;
 
@@ -24,19 +23,19 @@ public class FindCommandTest extends TaskBossGuiTest {
     // Equivalence partition: find keywords in a non-empty list
     @Test
     public void find_byKeywordNonEmptyList() {
-        assertFindResult("find k/Hey"); // no results
-        assertFindResult("find k/code", td.taskE, td.taskD); // multiple results
+        assertFindResult("find Hey"); // no results
+        assertFindResult("find code", td.taskE, td.taskD); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 2");
-        assertFindResult("find k/code", td.taskE);
+        assertFindResult("find code", td.taskE);
     }
 
     // EP: find name in an empty list
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
-        assertFindResult("find k/meeting"); // no results
+        assertFindResult("find meeting"); // no results
     }
 
     // EP: find start datetime with short command
@@ -70,14 +69,6 @@ public class FindCommandTest extends TaskBossGuiTest {
     public void find_invalidDate_fail() {
         commandBox.runCommand("find sd/mynameisbob");
         assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
-    }
-
-    //EP: invalid prefix
-    @Test
-    public void find_invalidPrefix_fail() {
-        commandBox.runCommand("find keyword/");
-        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                FindCommand.MESSAGE_USAGE));
     }
 
     //@@author A0147990R

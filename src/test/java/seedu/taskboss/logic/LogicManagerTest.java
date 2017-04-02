@@ -400,7 +400,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find k/KEY",
+        assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB, expectedList);
     }
 
@@ -417,7 +417,7 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find k/KEY",
+        assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB, expectedList);
     }
 
@@ -434,7 +434,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find k/key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+        assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 
