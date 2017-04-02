@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandHistoryList;
-import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * NavigateHistoryController is responsible for handling cycling through previous commands

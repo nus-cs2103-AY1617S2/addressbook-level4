@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
@@ -24,11 +23,8 @@ import seedu.toluist.controller.UnknownCommandController;
 
 import seedu.toluist.controller.commons.KeywordTokenizer;
 
-import javax.naming.ldap.Control;
-
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
-    private static final int LIMIT_AUTOCORECTION_SUGGESTION = 5;
 
     //@@author A0162011A
     /**

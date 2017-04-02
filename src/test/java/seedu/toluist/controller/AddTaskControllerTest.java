@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -21,7 +22,9 @@ public class AddTaskControllerTest extends ControllerTest {
     public void addFloatingTask() {
         String taskDescription = "learn how to catch a pokemon";
         Task floatingTask = new Task(taskDescription);
-        controller.execute("add " + taskDescription);
+        HashMap<String, String> tokens = new HashMap<>();
+        tokens.put("add", taskDescription);
+        controller.execute(tokens);
 
         ArrayList<Task> tasksThatShouldExist = new ArrayList<>();
         for (Task task : (new TypicalTestTodoLists()).getTypicalTasks()) {

@@ -18,6 +18,7 @@ import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 
 /**
  * Mark Controller is responsible for marking task complete or incomplete
@@ -60,7 +61,7 @@ public class MarkController extends Controller {
 
         if (indexes.isEmpty()) {
             uiStore.setCommandResult(
-                    new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX, CommandResult.CommandResultType.FAILURE));
+                    new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX, CommandResultType.FAILURE));
             return;
         }
 
@@ -73,7 +74,8 @@ public class MarkController extends Controller {
 
         TodoList todoList = TodoList.getInstance();
         if (!todoList.save()) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_SAVING_FAILURE, CommandResult.CommandResultType.FAILURE));
+            uiStore.setCommandResult(
+                    new CommandResult(Messages.MESSAGE_SAVING_FAILURE, CommandResultType.FAILURE));
         }
         uiStore.setTasks(todoList.getTasks());
         uiStore.setCommandResult(commandResult);

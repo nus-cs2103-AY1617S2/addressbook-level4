@@ -13,6 +13,7 @@ import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 
 /**
  * Responsible for saving-related task
@@ -50,14 +51,14 @@ public class StoreController extends Controller {
 
         if (path == null) {
             uiStore.setCommandResult(
-                    new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH, CommandResult.CommandResultType.FAILURE));
+                    new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH, CommandResultType.FAILURE));
             return;
         }
 
         Config config = Config.getInstance();
         if (config.getTodoListFilePath().equals(path)) {
             uiStore.setCommandResult(new CommandResult(
-                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResult.CommandResultType.FAILURE));
+                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResultType.FAILURE));
             return;
         }
 
@@ -71,7 +72,7 @@ public class StoreController extends Controller {
             uiStore.setCommandResult(new CommandResult(message));
         } else {
             uiStore.setCommandResult(new CommandResult(
-                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResult.CommandResultType.FAILURE));
+                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResultType.FAILURE));
         }
     }
 

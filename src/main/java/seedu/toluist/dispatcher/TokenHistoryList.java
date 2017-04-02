@@ -1,10 +1,10 @@
 package seedu.toluist.dispatcher;
 
-import seedu.toluist.controller.Controller;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.toluist.controller.Controller;
 
 /**
  * Created by louis on 2/4/17.

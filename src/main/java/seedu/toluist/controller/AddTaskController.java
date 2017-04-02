@@ -2,7 +2,6 @@
 package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -177,13 +176,13 @@ public class AddTaskController extends Controller {
 
     public HashMap<String, String[]> getCommandKeywordMap() {
         String[] keywords = new String[] {
-                TaskTokenizer.KEYWORD_EVENT_END_DATE,
-                TaskTokenizer.KEYWORD_EVENT_START_DATE,
-                TaskTokenizer.KEYWORD_TASK_DEADLINE,
-                TaskTokenizer.KEYWORD_TASK_PRIORITY,
-                TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
-                TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE,
-                TaskTokenizer.KEYWORD_TASK_TAGS
+            TaskTokenizer.KEYWORD_EVENT_END_DATE,
+            TaskTokenizer.KEYWORD_EVENT_START_DATE,
+            TaskTokenizer.KEYWORD_TASK_DEADLINE,
+            TaskTokenizer.KEYWORD_TASK_PRIORITY,
+            TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+            TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE,
+            TaskTokenizer.KEYWORD_TASK_TAGS
         };
         HashMap<String, String[]> keywordMap = new HashMap<>();
         for (String keyword : keywords) {

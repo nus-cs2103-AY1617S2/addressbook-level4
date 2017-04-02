@@ -13,6 +13,7 @@ import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 
 /**
  * Responsible for loading-related task
@@ -46,7 +47,7 @@ public class LoadController extends Controller {
 
         if (path == null) {
             uiStore.setCommandResult(new CommandResult(
-                    Messages.MESSAGE_NO_STORAGE_PATH, CommandResult.CommandResultType.FAILURE));
+                    Messages.MESSAGE_NO_STORAGE_PATH, CommandResultType.FAILURE));
             return;
         }
 
@@ -54,7 +55,7 @@ public class LoadController extends Controller {
         String oldStoragePath = config.getTodoListFilePath();
         if (oldStoragePath.equals(path)) {
             uiStore.setCommandResult(new CommandResult(
-                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResult.CommandResultType.FAILURE));
+                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResultType.FAILURE));
             return;
         }
 
@@ -66,7 +67,7 @@ public class LoadController extends Controller {
                     new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path)));
         } catch (DataStorageException e) {
             uiStore.setCommandResult(new CommandResult(
-                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResult.CommandResultType.FAILURE));
+                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResultType.FAILURE));
         }
     }
 
