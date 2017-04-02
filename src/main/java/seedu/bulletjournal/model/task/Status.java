@@ -30,6 +30,7 @@ public class Status {
         }
         this.value = trimmedEmail;
     }
+    //@@author
 
     /**
      * Returns if a given string is a valid task status.

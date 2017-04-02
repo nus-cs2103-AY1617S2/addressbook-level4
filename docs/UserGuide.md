@@ -136,6 +136,7 @@ Examples:
 * `find Pick Do`<br>
   Returns Any tasks having names `Pick`, or `Do`
 
+<!-- @@author A0105748B -->
 ### 2.6. Showing done/undone tasks: `show`
 
 Shows tasks that are done or undone.<br>
@@ -151,6 +152,7 @@ Examples:
   Returns tasks that are done
 * `show undone`<br>
   Returns tasks that are undone
+<!-- @@author -->
 
 ### 2.7. Deleting a task : `delete`
 

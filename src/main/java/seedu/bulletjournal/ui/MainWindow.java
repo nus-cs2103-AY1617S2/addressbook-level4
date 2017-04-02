@@ -131,6 +131,7 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), config.getBulletJournalFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
+    //@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;

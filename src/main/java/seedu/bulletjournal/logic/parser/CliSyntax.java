@@ -9,6 +9,7 @@ import seedu.bulletjournal.logic.parser.ArgumentTokenizer.Prefix;
  */
 public class CliSyntax {
 
+    //@@author A0105748B
     /* Prefix definitions */
     public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
     public static final Prefix PREFIX_STATUS = new Prefix("s/");

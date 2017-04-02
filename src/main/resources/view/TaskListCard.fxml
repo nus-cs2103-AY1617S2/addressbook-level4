@@ -36,6 +36,7 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
+                        <!-- @@author A0105748B -->>
                         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
                         <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
                         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
