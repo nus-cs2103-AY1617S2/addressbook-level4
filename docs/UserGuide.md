@@ -139,19 +139,23 @@ Examples:
 * `unmark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as incomplete.
 
-### 2.8. Schedule (Work in progress) : `schedule`
+### 2.8. Schedule: `schedule`
 
 Set an event or a deadline.<br>
-Format: `schedule INDEX [STARTIME] ENDTIME`
+Format: `schedule INDEX [STARTIME to] ENDTIME`
 
 > * Set the start time and the end time of the task.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
+> * If only one datetime is specified, opus will automatically schedule for `ENDTIME`
 
 Examples:
 
-* `schedule 6 12/05/2017-13:00 12/05/2017-15:00`<br>
-Set the start time as 1pm on May 12, 2017 and the end time as 3pm on May 12, 2017.
+* `schedule 5 12/05/2017 15:00`<br>
+Set the deadline/end time as 3pm on December 5, 2017.
+
+* `schedule 6 12/05/2017 13:00 to 12/05/2017 15:00`<br>
+Set the start time as 1pm on December 5, 2017 and the end time as 3pm on December 5, 2017.
 
 ### 2.9. Delete : `delete`
 
@@ -186,11 +190,22 @@ Format: `redo`
 
 ### 2.13. Find : `find`
 
-Displays a list of tasks based on keywords and/or tags.<br>
-Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
+Displays a list of tasks based on keywords, status, start time, end time and priority.<br>
+Format: `find [KEYWORD]... [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY]`
 
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
+> * `find` requires minimal of one parameter
+> * `[KEYWORD]` can be a text from either name, note or tags
+> * Specifying `[STARTTIME]` will show the tasks before the specified time and specifying `[ENDTIME]` would do the same.
+
+Examples:
+
+* `find do homework`<br>
+Find tasks that contain `do homework` in either name, note or tag.
+
+* `find do homework p/hi e/03/04/2017`<br>
+Find tasks that contain `do homework` in either name, note or tag and due before `March 4, 2017` and the priority being set to `high`.
 
 ### 2.14. Saving and loading data
 
@@ -257,8 +272,8 @@ Closes Opus.
 
 * **Exit** `exit`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find Wash dishes`
+* **Find** : `find [KEYWORD]... [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY]` <br>
+  e.g. `find do homework p/hi e/04/04/2017`
 
 * **Help** : `help` <br>
 
@@ -271,8 +286,8 @@ Closes Opus.
 
 * **Save** : `save DIRECTORY` <br>
 
-* **Schedule** : `schedule INDEX ENDTIME` <br>
-  e.g. `schedule 6 30/3/2017`
+* **Schedule** : `schedule INDEX [STARTTIME to] ENDTIME` <br>
+  e.g. `schedule 6 03/15/2017 11:00 to 03/15/2017 12:00`
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
