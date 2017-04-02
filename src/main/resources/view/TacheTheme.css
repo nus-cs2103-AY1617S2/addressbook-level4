@@ -71,8 +71,16 @@
     -fx-text-fill: black;
 }
 
+.list-cell:selected {
+    -fx-background-color: #c3cfe2;
+}
+
 #cardPane {
     -fx-border-width: 3 3 3 3;
+}
+
+#cardPane:active {
+    -fx-background-color: gray;
 }
 
 #tags {
