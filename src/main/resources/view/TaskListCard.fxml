@@ -23,7 +23,7 @@
             </Label>
             <VBox prefHeight="36.0" prefWidth="198.0" HBox.hgrow="ALWAYS">
                <children>
-                           <Label fx:id="name" prefHeight="25.0" prefWidth="248.0" styleClass="cell_big_label" text="TaskTitle" textFill="#105b63">
+                           <Label fx:id="name" prefHeight="25.0" prefWidth="500.0" styleClass="cell_big_label" text="TaskTitle" textFill="#105b63">
                      <font>
                         <Font name="Helvetica" size="20.0" />
                      </font>
@@ -38,7 +38,7 @@
                   </FlowPane>
                </children>
             </VBox>
-            <Label fx:id="taskDate" prefHeight="40.0" prefWidth="158.0" text="taskDate" textAlignment="RIGHT" textFill="#757575">
+            <Label fx:id="taskDate" prefHeight="40.0" prefWidth="200.0" text="taskDate" textAlignment="RIGHT" textFill="#757575">
                <font>
                   <Font name="Helvetica" size="12.0" />
                </font>
