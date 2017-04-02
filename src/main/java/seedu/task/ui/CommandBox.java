@@ -1,5 +1,8 @@
 package seedu.task.ui;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -68,6 +71,14 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
+        final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+
+        exec.schedule(new Runnable() {
+            @Override
+            public void run() {
+                commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+                }
+            }, 1, TimeUnit.SECONDS);
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
 

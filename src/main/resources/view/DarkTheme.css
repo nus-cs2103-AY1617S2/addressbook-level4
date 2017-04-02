@@ -325,6 +325,7 @@
     -fx-background-color: #b7b7b7;
     -fx-blend-mode: hard-light;
     -fx-text-fill: white;
+    -fx-background-insets: 10px, 10px;
 }
 
 

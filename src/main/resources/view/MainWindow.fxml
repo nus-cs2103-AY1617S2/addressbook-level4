@@ -34,14 +34,14 @@
                   <AnchorPane fx:id="nonFloatingTaskListPanelPlaceholder" minWidth="250.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <VBox fx:id="completedTaskList" minHeight="250.0" minWidth="250.0" style="-fx-background-color: #ffcc66;">
+            <VBox fx:id="completedTaskList" minHeight="250.0" minWidth="250.0" style="-fx-background-color: #33cc66;">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
                   <TextFlow maxWidth="110.0" minHeight="40.0" style="-fx-background-color: #333333;" translateX="-10.0" translateY="-10.0">
                      <children>
-                        <Text fill="#ffcc66" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" translateX="10.0" translateY="10.0">
+                        <Text fill="#33cc66" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" translateX="10.0" translateY="10.0">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
@@ -55,14 +55,14 @@
       </SplitPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" minHeight="250.0" minWidth="500.0" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="floatingTaskList" minHeight="250.0" minWidth="250.0" style="-fx-background-color: #33cc66;">
+            <VBox fx:id="floatingTaskList" minHeight="250.0" minWidth="250.0" style="-fx-background-color: #ffcc66;">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
                   <TextFlow maxWidth="90.0" minHeight="40.0" minWidth="90.0" style="-fx-background-color: #333333;" translateX="-10.0" translateY="-10.0">
                      <children>
-                        <Text fill="#33cc66" strokeType="OUTSIDE" strokeWidth="0.0" text="Floating" translateX="10.0" translateY="10.0">
+                        <Text fill="#ffcc66" strokeType="OUTSIDE" strokeWidth="0.0" text="Floating" translateX="10.0" translateY="10.0">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
