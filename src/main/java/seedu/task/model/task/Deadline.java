@@ -36,9 +36,9 @@ public class Deadline {
         //@@author
         } else {
             String trimmedDate = date.trim();
-            if (!isValidDeadline(trimmedDate)) {
+            /*if (!isValidDeadline(trimmedDate)) {
                 throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-            }
+            }*/
             this.value = trimmedDate;
         }
     }

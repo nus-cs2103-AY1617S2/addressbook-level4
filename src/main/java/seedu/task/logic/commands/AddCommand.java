@@ -38,6 +38,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the Task Manager";
 
+    private boolean isEvent = false;
     private final Task toAdd;
 
     /**
@@ -45,6 +46,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
+    @SuppressWarnings("deprecation")
     public AddCommand(String taskName, String deadline, String priorityLevel, String info, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
@@ -52,7 +54,10 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         //@@author A0139161J
-        //NLP, Natty implementation
+        String fromDate = new String("");
+        String fromTime = null;
+        String toDate = new String("");
+        String toTime = null;
         if (!deadline.equals("")) {
             Parser parser = new Parser();
             List <DateGroup> groups = parser.parse(deadline);
@@ -77,21 +82,38 @@ public class AddCommand extends Command {
             }
 
             if (dates != null) {
-                deadline = dates.get(0).toString();
+                fromDate = dates.get(0).toString();
+                fromTime = getTime(fromDate);
+                if (dates.size() != 1) {
+                    toDate = dates.get(1).toString();
+                    toTime = getTime(toDate);
+                    isEvent = true;
+                }
             }
-            StringTokenizer st = new StringTokenizer(deadline);
+            StringTokenizer st = new StringTokenizer(fromDate);
             List<String> listDeadline = new ArrayList<String>();
             while (st.hasMoreTokens()) {
                 listDeadline.add(st.nextToken());
             }
+            List<String> endOfEvent = new ArrayList<String>();
+            if (isEvent) {
+                st = new StringTokenizer(toDate);
+                while (st.hasMoreTokens()) {
+                    endOfEvent.add(st.nextToken());
+                }
+            }
             StringBuilder deadlineString = new StringBuilder();
             deadlineString.append(listDeadline.get(2) + "-" + listDeadline.get(1)
-                + "-" + listDeadline.get(5)); // Extracting the dates.toString() format to DD-MMM-YYYY
-            deadline = deadlineString.toString();
+                + "-" + listDeadline.get(5) + " @ " + fromTime);
+            if (isEvent) {
+                deadlineString.append(" to " + endOfEvent.get(2) + "-" + endOfEvent.get(1) + "-" + endOfEvent.get(5)
+                    + " @ " + toTime);
+            }
+            fromDate = deadlineString.toString();
         }
         this.toAdd = new Task(
                 new TaskName(taskName),
-                new Deadline(deadline),
+                new Deadline(fromDate),
                 new PriorityLevel(priorityLevel),
                 new Information(info),
                 new UniqueTagList(tagSet)
@@ -109,10 +131,30 @@ public class AddCommand extends Command {
             /**Debugging purpose
              * gStack.printStack();
              */
-            //@@author
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
     }
+
+    /* Returns String in format of hh:mm:ss
+     * Precond: dateTime string formed by NattyParser required as input
+     */
+    public String getTime(String dateTime) {
+        StringTokenizer st = new StringTokenizer(dateTime);
+        List<String> list = new ArrayList<String>();
+        while (st.hasMoreTokens()) {
+            list.add(st.nextToken());
+        }
+        System.out.println(list.get(3));
+        return list.get(3);
+    }
+
+    /*public Date timeFormatter(String time) throws ParseException {
+        System.out.println("stop here");
+        DateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+        Date date = sdf.parse(time);
+        System.out.println(date.toString() + "STOP HERE");
+        return date;
+    }*/
 }
