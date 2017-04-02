@@ -1,11 +1,11 @@
 package guitests;
 
-import seedu.address.model.AddressBook;
-import seedu.address.testutil.TestUtil;
+import seedu.task.model.TaskManager;
+import seedu.task.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TaskManagerGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected TaskManager getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }

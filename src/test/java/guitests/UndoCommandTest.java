@@ -4,11 +4,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import seedu.task.logic.commands.UndoCommand;
+import seedu.task.testutil.TestTask;
+import seedu.task.testutil.TestUtil;
 
-public class UndoCommandTest extends AddressBookGuiTest {
+public class UndoCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void undo_emptySession_failure() {
@@ -92,8 +92,8 @@ public class UndoCommandTest extends AddressBookGuiTest {
 
     /**
      * Runs the undo command to undo the previously executed command and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
-     * @param currentList A copy of the current list of persons (before deletion).
+     * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
+     * @param currentList A copy of the current list of tasks (before deletion).
      */
     private void assertUndoSuccess(TestTask[] expectedList) {
         commandBox.runCommand("undo");

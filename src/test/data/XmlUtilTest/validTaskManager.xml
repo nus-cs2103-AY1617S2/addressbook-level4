@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+    	<title>Buy Groceries</title>
+    	<date>07032017</date>
+    	<priority>urgent</priority>
+    	<instruction>eggs x2, bread x2</instruction></tasks>
+    <tasks>
+    	<title>Do CS2103T</title>
+    	<date>05032017</date>
+    	<priority>quite.urgent</priority>
+    	<instruction>update tests</instruction></tasks></taskmanager>

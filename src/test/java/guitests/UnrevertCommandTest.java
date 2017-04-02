@@ -4,12 +4,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UnrevertCommand;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import seedu.task.logic.commands.RedoCommand;
+import seedu.task.logic.commands.UnrevertCommand;
+import seedu.task.testutil.TestTask;
+import seedu.task.testutil.TestUtil;
 
-public class UnrevertCommandTest extends AddressBookGuiTest {
+public class UnrevertCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void unrevert_emptySession_failure() {

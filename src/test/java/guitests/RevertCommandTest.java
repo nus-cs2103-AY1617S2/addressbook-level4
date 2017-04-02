@@ -2,11 +2,11 @@ package guitests;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.RevertCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.testutil.TestTask;
+import seedu.task.logic.commands.RevertCommand;
+import seedu.task.logic.commands.UndoCommand;
+import seedu.task.testutil.TestTask;
 
-public class RevertCommandTest extends AddressBookGuiTest {
+public class RevertCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void revert_emptySession_failure() {

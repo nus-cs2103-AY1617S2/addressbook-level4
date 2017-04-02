@@ -2,9 +2,9 @@ package guitests;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.ExportCommand;
+import seedu.task.logic.commands.ExportCommand;
 
-public class ExportCommandTest extends AddressBookGuiTest {
+public class ExportCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void export() {

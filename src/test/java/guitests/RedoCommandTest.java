@@ -3,11 +3,11 @@ package guitests;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import seedu.task.logic.commands.RedoCommand;
+import seedu.task.testutil.TestTask;
+import seedu.task.testutil.TestUtil;
 
-public class RedoCommandTest extends AddressBookGuiTest {
+public class RedoCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void redo_emptySession_failure() {
@@ -91,8 +91,8 @@ public class RedoCommandTest extends AddressBookGuiTest {
 
     /**
      * Runs the redo command to redo the previously undone command and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
-     * @param currentList A copy of the current list of persons (before deletion).
+     * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
+     * @param currentList A copy of the current list of tasks (before deletion).
      */
     private void assertRedoSuccess(TestTask[] expectedList) {
         commandBox.runCommand("undo");
