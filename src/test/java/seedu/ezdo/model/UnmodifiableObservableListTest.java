@@ -94,7 +94,7 @@ public class UnmodifiableObservableListTest {
             assertTrue(a == 10);
         }
     }
-
+//@@author A0139248X
     @Test
     public void contains_true() {
         assertTrue(list.contains(10));
