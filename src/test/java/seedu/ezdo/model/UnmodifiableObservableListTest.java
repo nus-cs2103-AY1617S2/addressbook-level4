@@ -123,10 +123,11 @@ public class UnmodifiableObservableListTest {
 
     @Test
     public void toArray_correct() {
-        Integer[] arr = backing.toArray(new Integer[1]);
+        Integer[] arr1 = list.toArray(new Integer[1]);
         Integer[] arr2 = new Integer[]{10};
-        for (int i = 0; i < arr.length; i++) {
-            assertTrue(arr[i].equals(arr2[i]));
+        for (int i = 0; i < arr1.length; i++) {
+            assertTrue(arr1[i].equals(arr2[i]));
         }
+        assertTrue(arr1.equals(arr2));
     }
 }
