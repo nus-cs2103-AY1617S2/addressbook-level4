@@ -39,7 +39,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label endTime;
     @FXML
-    private Label preposition;  
+    private Label preposition;
     @FXML
     private Pane colourTag;
     @FXML
