@@ -13,6 +13,8 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
+    private static final String RECURRENCE_NONE = "NONE";
+    private static final String PATH_IMAGE_URGENT = "/images/urgentImage.png";
     private static final String FXML = "TaskListCard.fxml";
 
     @FXML
@@ -42,20 +44,30 @@ public class TaskCard extends UiPart<Region> {
         startDateTime.setText(task.getStartDateTime().value);
         endDateTime.setText(task.getEndDateTime().value);
         information.setText(task.getInformation().value);
-        recurrence.setText(task.getRecurrence().toString());
+        initRecurrence(task);
 
         initCategories(task);
     }
 
     private void initPriority(ReadOnlyTask task) {
         PriorityLevel priority = task.getPriorityLevel();
-        Image urgentImage = AppUtil.getImage("/images/urgentImage.png");
+        Image urgentImage = AppUtil.getImage(PATH_IMAGE_URGENT);
         if (priority.value.equals(PriorityLevel.PRIORITY_HIGH_VALUE)) {
             priorityLevel.setImage(urgentImage);
         } else {
             priorityLevel.setVisible(false);
         }
     }
+
+    private void initRecurrence(ReadOnlyTask task) {
+        String recurrenceType = task.getRecurrence().toString();
+        if (recurrenceType.equals(RECURRENCE_NONE)) {
+            recurrence.setVisible(false);
+        } else {
+            recurrence.setText(task.getRecurrence().toString());
+        }
+    }
+
     private void initCategories(ReadOnlyTask task) {
         task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
     }
