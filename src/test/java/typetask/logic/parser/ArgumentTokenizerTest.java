@@ -59,7 +59,7 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
-    public void tokenizeNoPrefixes_allTakenAsPreamble() {
+    public void tokenizeNoPrefixesAllTakenAsPreamble() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer();
         String argsString = "  some random string /t tag with leading and trailing spaces ";
         tokenizer.tokenize(argsString);

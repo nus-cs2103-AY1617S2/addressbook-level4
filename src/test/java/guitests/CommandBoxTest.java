@@ -30,7 +30,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
+    public void commandBoxCommandSucceedsTextClearedAndStyleClassRemainsTheSame() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals("", commandBox.getCommandInput());
@@ -38,7 +38,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
+    public void commandBoxCommandFailsTextStaysAndErrorStyleClassAdded() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
         assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
@@ -46,7 +46,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
+    public void commandBoxCommandSucceedsAfterFailedCommandTextClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
         commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
 

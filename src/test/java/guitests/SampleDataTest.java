@@ -23,7 +23,7 @@ public class SampleDataTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void taskManager_dataFileDoesNotExist_loadSampleData() throws Exception {
+    public void taskManagerDataFileDoesNotExistLoadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
         assertTrue(personListPanel.isListMatching(expectedList));
     }

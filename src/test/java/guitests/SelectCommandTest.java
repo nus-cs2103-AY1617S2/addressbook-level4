@@ -10,10 +10,10 @@ public class SelectCommandTest extends AddressBookGuiTest {
 
 
     @Test
-    public void selectPerson_nonEmptyList() {
+    public void selectTaskNonEmptyList() {
 
         assertSelectionInvalid(10); // invalid index
-        assertNoPersonSelected();
+        assertNoTaskSelected();
 
         assertSelectionSuccess(1); // first person in the list
         int personCount = td.getTypicalTasks().length;
@@ -22,13 +22,13 @@ public class SelectCommandTest extends AddressBookGuiTest {
         assertSelectionSuccess(middleIndex); // a person in the middle of the list
 
         assertSelectionInvalid(personCount + 1); // invalid index
-        assertPersonSelected(middleIndex); // assert previous selection remains
+        assertTaskSelected(middleIndex); // assert previous selection remains
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }
 
     @Test
-    public void selectPerson_emptyList() {
+    public void selectTaskEmptyList() {
         commandBox.runCommand("clear");
         assertListSize(0);
         assertSelectionInvalid(1); //invalid index
@@ -42,17 +42,17 @@ public class SelectCommandTest extends AddressBookGuiTest {
     private void assertSelectionSuccess(int index) {
         commandBox.runCommand("select " + index);
         assertResultMessage("Selected Task: " + index);
-        assertPersonSelected(index);
+        assertTaskSelected(index);
     }
 
-    private void assertPersonSelected(int index) {
+    private void assertTaskSelected(int index) {
         assertEquals(personListPanel.getSelectedPersons().size(), 1);
         ReadOnlyTask selectedPerson = personListPanel.getSelectedPersons().get(0);
         assertEquals(personListPanel.getPerson(index - 1), selectedPerson);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
-    private void assertNoPersonSelected() {
+    private void assertNoTaskSelected() {
         assertEquals(personListPanel.getSelectedPersons().size(), 0);
     }
 
