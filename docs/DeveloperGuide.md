@@ -4,7 +4,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Setting Up](#1--setting-up)
+1. [Setting Up](#setting-up)
 2. [Design](#design)
 3. [Implementation](#implementation)
 4. [Testing](#testing)
@@ -17,7 +17,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+<h2 name="setting-up">1. Setting up</h2>
 
 ### 1.1. Prerequisites
 
@@ -73,7 +73,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## 2. Design
+<h2 name="design">2. Design</h2>
 
 ### 2.1. Architecture
 
@@ -214,7 +214,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
-## 3. Implementation
+<h2 name="implementation"> 3. Implementation</h2>
 
 ### 3.1. Logging
 
@@ -264,7 +264,7 @@ Storing commands means there is no duplicated data stored. With the current impl
 
 The "snapshot" method was chosen over the "command" method largely because of its reduced complexity and increased robustness. Building reverse commands introduces a more complex system that increases the chance of bugs. Building snapshots of the tasks is also unlikely to overload memory as tasks are fairly small. If the data held by a task ever becomes much larger, this decision should be revisited.
 
-## 4. Testing
+<h2 name"testing">4. Testing</h2>
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -311,7 +311,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+<h2 name="dev-ops">5. Dev Ops<h2>
 
 ### 5.1. Build Automation
 
