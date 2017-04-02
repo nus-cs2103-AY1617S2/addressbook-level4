@@ -290,7 +290,7 @@ public class ModelManager extends ComponentManager implements Model {
                 taskEndDateCalendar.setTime(taskEndDate);
                 isTaskDueToday = (today.get(Calendar.YEAR) == taskEndDateCalendar.get(Calendar.YEAR) &&
                         today.get(Calendar.DAY_OF_YEAR) == taskEndDateCalendar.get(Calendar.DAY_OF_YEAR));
-                
+
                 if (!task.getDate().value.equals("")) {
                     Calendar taskStartDateCalendar = Calendar.getInstance();
                     List<Date> startDates = DateParser.parse(task.getDate().value);
@@ -304,7 +304,7 @@ public class ModelManager extends ComponentManager implements Model {
                                     today.get(Calendar.DAY_OF_YEAR) == taskEndDateCalendar.get(Calendar.DAY_OF_YEAR)));
                 }
             }
-            
+
             return (isTaskDueToday || isEventDueToday);
         }
 
