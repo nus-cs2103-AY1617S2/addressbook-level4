@@ -4,7 +4,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Setting Up](#setting-up)
+1. [Setting Up](#1.-setting-up)
 2. [Design](#design)
 3. [Implementation](#implementation)
 4. [Testing](#testing)
@@ -420,12 +420,13 @@ Use case ends.
 
 2a. The list is empty
 
-> Use case ends
+ Use case ends
 
 3a. The given index is invalid
 
-> 3a1. DoTomorrow shows an error message <br>
-  Use case resumes at step 2
+> 3a1. DoTomorrow shows an error message
+
+ Use case resumes at step 2
 
 #### Use case: Edit task
 
@@ -441,8 +442,9 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. DoTomorrow shows an error message <br>
-  Use case resumes at step 2
+> 3a1. DoTomorrow shows an error message 
+  
+ Use case resumes at step 2
 
 #### Use case: Add task or event
 
@@ -457,7 +459,8 @@ Use case ends.
 2a. Parameters are entered in the wrong format
 
 > 2a1. DoTomorrow shows an error message and an example of correct formatting
-> Use case resumes at step 1
+
+ Use case resumes at step 1
 
 #### Use case: Undo last action
 
@@ -471,7 +474,7 @@ Use case ends.
 
 2a. There is no previous action
 
-> Use case ends.
+ Use case ends.
 
 #### Use case: Search tasks
 
@@ -486,7 +489,8 @@ Use case ends.
 2a. No search terms are given
 
 > 2a1. DoTomorrow shows an error message indicating the user's error
-> Use case resumes at step 1
+
+ Use case resumes at step 1
 
 
 ## Appendix C : Non Functional Requirements
@@ -497,7 +501,7 @@ Use case ends.
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. All classes and public methods should have documentation.
 5. All commands should be completed within 200ms.
-6. 80% test coverage.
+6. The product should have 80% test coverage.
 
 ## Appendix D : Glossary
 
