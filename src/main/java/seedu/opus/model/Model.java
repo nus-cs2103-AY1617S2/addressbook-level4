@@ -1,9 +1,11 @@
 package seedu.opus.model;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.exceptions.InvalidUndoException;
+import seedu.opus.model.ModelManager.Qualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
@@ -43,6 +45,9 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+
+    /** Updates the filter of the filtered task list to filter by the given qualifiers*/
+    void updateFilteredTaskList(List<Qualifier> qualifiers);
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);

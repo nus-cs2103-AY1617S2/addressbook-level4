@@ -127,6 +127,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredTaskList(List<Qualifier> qualifiers) {
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
+    }
+
+    @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(
                 new NameQualifier(keywords), new NoteQualifier(keywords), new TagQualifier(keywords)
@@ -137,7 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    //========== Classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
@@ -148,9 +153,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         private final List<Qualifier> qualifiers;
 
-
         PredicateExpression(Qualifier... qualifiers) {
             this.qualifiers = Arrays.asList(qualifiers);
+        }
+
+        PredicateExpression(List<Qualifier> qualifiers) {
+            this.qualifiers = qualifiers;
         }
 
         @Override
@@ -168,7 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
     }
 
-    private class NameQualifier implements Qualifier {
+    public class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
         NameQualifier(Set<String> nameKeyWords) {
@@ -185,7 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
-    private class NoteQualifier implements Qualifier {
+    public class NoteQualifier implements Qualifier {
         private Set<String> noteKeyWords;
 
         NoteQualifier(Set<String> noteKeyWords) {
@@ -203,7 +211,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
-    private class TagQualifier implements Qualifier {
+    public class TagQualifier implements Qualifier {
         private Set<String> tagKeyWords;
 
         TagQualifier(Set<String> tagKeyWords) {
