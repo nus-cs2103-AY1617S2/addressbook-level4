@@ -1,5 +1,7 @@
 package seedu.geekeep.logic;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.geekeep.logic.commands.CommandResult;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
@@ -29,5 +31,8 @@ public interface Logic {
 
     /** Returns the filtered list of floating tasks */
     ObservableList<ReadOnlyTask> getFilteredDeadlineList();
+
+    /** Retruns command history */
+    List<String> getCommandHistory();
 
 }
