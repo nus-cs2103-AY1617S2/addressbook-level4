@@ -18,6 +18,7 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.commons.util.TaskUtil;
 import seedu.task.model.task.Date;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -277,15 +278,21 @@ public class ModelManager extends ComponentManager implements Model {
                 return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keywords)
                         || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keywords);
             } else {
-                return keywords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
-                                || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
-                                || StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
-                                || StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword)
-                                || StringUtil.containsSubstringIgnoreCase(task.getLocation().toString(), keyword)
-                                || StringUtil.containsWordIgnoreCase(task.getLocation().toString(), keyword)
-                                || StringUtil.containsSubstringIgnoreCase(task.getTags().toString(), keyword))
-                        .findAny().isPresent();
+                for(String keyword : keywords){
+                    if( !TaskUtil.doesTaskContainKeyword(task, keyword)){
+                        return false;
+                            }
+                }
+                return true;
+                // return keywords.stream()
+                // .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
+                // || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
+                // || StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
+                // || StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword)
+                // || StringUtil.containsSubstringIgnoreCase(task.getLocation().toString(), keyword)
+                // || StringUtil.containsWordIgnoreCase(task.getLocation().toString(), keyword)
+                // || StringUtil.containsSubstringIgnoreCase(task.getTags().toString(), keyword))
+                // .findAny().isPresent();
                 // || CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), keywords);
             }
         }
@@ -356,7 +363,7 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (date.isNull() ){
+            if (date.isNull()) {
                 return false;
             }
             return task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date);
@@ -375,7 +382,7 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-//            return (this.value == task.isDone());
+            // return (this.value == task.isDone());
             if (this.value & task.isDone()) {
                 return true;
             } else if (!this.value & !task.isDone()) {
