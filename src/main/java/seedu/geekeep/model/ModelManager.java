@@ -36,6 +36,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final Stack<ReadOnlyGeeKeep> pastGeeKeeps;
     private final Stack<ReadOnlyGeeKeep> futureGeeKeeps;
     private final List<String> commandHistory;
+    private final List<String> undoableCommandHistory;
+    private int undoableCommandHistoryIndex;
 
     /**
      * Initializes a ModelManager with the given geekeep and userPrefs.
@@ -52,6 +54,8 @@ public class ModelManager extends ComponentManager implements Model {
         pastGeeKeeps = new Stack<>();
         futureGeeKeeps = new Stack<>();
         commandHistory = new ArrayList<>();
+        undoableCommandHistory = new ArrayList<>();
+        undoableCommandHistoryIndex = 0;
 
     }
 
