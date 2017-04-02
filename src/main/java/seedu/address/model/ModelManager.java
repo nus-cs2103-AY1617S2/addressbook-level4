@@ -127,6 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifierByDate(deadline)));
     }
 
+    @Override
     public void sort(String arg) {
         if (filteredTasks.size() == 0 || filteredTasks == null) {
             return;
@@ -146,7 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         while (flag) {
             flag = false;
             for (int k = 0; k < upper; k++) {
-                if (getCName(k).compareTo(getCName(k + 1)) > 0) {
+                if (getCName(k).compareToIgnoreCase(getCName(k + 1)) > 0) {
                     exchange(k , k + 1);
                     flag = true;
                 }
@@ -185,7 +186,6 @@ public class ModelManager extends ComponentManager implements Model {
         temp = new Task(temp.getName(), temp.getDeadline(), temp.getDescription(), temp.getTags());
         taskManager.updateTask(i, filteredTasks.get(j));
         taskManager.updateTask(j, temp);
-        int a = 0;
     }
 
     //========== Inner classes/interfaces used for filtering =================================================

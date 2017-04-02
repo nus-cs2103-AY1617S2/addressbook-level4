@@ -48,7 +48,7 @@ public interface Model {
     /** Updates undo copy of task list*/
     void updateCopy(ReadOnlyTaskManager taskManager);
 
-    /**Sorts the task list by deadline*/
+    /**Sorts the task list by input parameter*/
     void sort(String arg);
 
     /** Returns undo copy of task list*/
