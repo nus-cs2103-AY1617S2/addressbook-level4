@@ -3,6 +3,7 @@ package seedu.address.model.tag;
 import java.util.HashMap;
 import java.util.Random;
 
+//@@author A0135998H
 public class TagColorScheme {
     private static HashMap<String, String> tagColorMap;
 
