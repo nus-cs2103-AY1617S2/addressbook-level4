@@ -1,3 +1,9 @@
+.list-cell{
+	-fx-accent: #C1F0F6;
+	-fx-focus-color: #C1F0F6;
+}
+
+
 .list-cell:empty {
     -fx-opacity: 0;
 }
