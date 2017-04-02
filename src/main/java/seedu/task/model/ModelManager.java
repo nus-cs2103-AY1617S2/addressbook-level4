@@ -38,7 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
-     * 
+     *
      * @throws IllegalValueException
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
@@ -80,7 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0140063X
     /**
      * Raises an event to indicate the model has changed
-     * 
+     *
      * @param backupFilePath
      */
     private void indicateTaskManagerChanged(String backupFilePath) {
@@ -107,28 +107,29 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0139975J
     @Override
-    public synchronized void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void isDoneTask(int index) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
-        taskManager.updateDone(taskManagerIndex, target);
+        taskManager.updateDone(taskManagerIndex);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     // @@author A0139975J
     @Override
-    public synchronized void unDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void unDoneTask(int index) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
-        taskManager.updateUnDone(taskManagerIndex, target);
+        taskManager.updateUnDone(taskManagerIndex);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
     // @@author A0140063X
     @Override
-    public synchronized void setIsPostedTrue(int index, ReadOnlyTask target) throws TaskNotFoundException {
+    public void setTaskEventId(int index, String eventId) {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
-        taskManager.setIsPostedTrue(taskManagerIndex, target);
+        taskManager.setTaskEventId(taskManagerIndex, eventId);
         indicateTaskManagerChanged("");
     }
 
+    // @@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTaskToFront(task);
@@ -267,7 +268,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * This qualifier is specifically for strings,including name, location,remark and tags. Returns true if there is any
      * match.
-     * 
+     *
      * @author Xu
      *
      */

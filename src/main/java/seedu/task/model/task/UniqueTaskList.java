@@ -1,5 +1,6 @@
 package seedu.task.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -94,10 +95,10 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0140063X
-    public void post(int index) {
-        Task taskDone = internalList.get(index);
-        taskDone.setIsPosted(true);
-        internalList.set(index, taskDone);
+    public void setTaskEventId(int index, String eventId) {
+        Task task = internalList.get(index);
+        task.setEventId(eventId);
+        internalList.set(index, task);
     }
 
     //@@author

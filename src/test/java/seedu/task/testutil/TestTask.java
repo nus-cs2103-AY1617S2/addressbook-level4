@@ -20,7 +20,7 @@ public class TestTask implements ReadOnlyTask {
     private Date startDate;
     private Date endDate;
     private boolean isDone;
-    private boolean isPosted;
+    private String eventId;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -119,8 +119,8 @@ public class TestTask implements ReadOnlyTask {
 
     //@@author A0140063X
     @Override
-    public boolean isPosted() {
-        return isPosted;
+    public String getEventId() {
+        return eventId;
     }
 
     //@@author

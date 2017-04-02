@@ -95,10 +95,6 @@ public class PostGoogleCalendarCommand extends Command {
     private ReadOnlyTask postEvent(int index) throws CommandException, IllegalValueException, IOException, TaskNotFoundException {
         ReadOnlyTask taskToPost = getTaskToPost(index);
 
-        if (taskToPost.isPosted()) {
-            throw new IllegalValueException(MESSAGE_ALREADY_POSTED);
-        }
-        
         if (taskToPost.getStartDate().isNull() || taskToPost.getEndDate().isNull()) {
             throw new IllegalValueException(MESSAGE_MISSING_DATE);
         }
@@ -107,18 +103,25 @@ public class PostGoogleCalendarCommand extends Command {
 
         try {
             com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
-            event = service.events().insert(GoogleCalendar.CALENDAR_ID, event).execute();
-
+            if (taskToPost.getEventId().trim().isEmpty()) {
+                event = service.events().insert(GoogleCalendar.CALENDAR_ID, event).execute();
+                logger.info(String.format("Event created: %s\n", event.getHtmlLink()));
+                setTaskEventId(index, event.getId());
+            } else {
+                service.events().update(GoogleCalendar.CALENDAR_ID, event.getId(), event).execute();
+                logger.info(String.format("Event updated: %s\n", event.getHtmlLink()));
+            }
         } catch (IOException ioe) {
             logger.info("Failure due to " + ioe.getMessage());
             throw new IOException(GoogleCalendar.CONNECTION_FAIL_MESSAGE);
         }
-        
-        assert model != null;
-        model.setIsPostedTrue(index, taskToPost);
-        logger.info(String.format("Event created: %s\n", event.getHtmlLink()));
-        
+
         return taskToPost;
+    }
+
+    private void setTaskEventId(int index, String eventId) {
+        assert model != null;
+        model.setTaskEventId(index, eventId);
     }
 
     private ReadOnlyTask getTaskToPost(int index) throws CommandException {
@@ -151,6 +154,8 @@ public class PostGoogleCalendarCommand extends Command {
                 .setDateTime(endDateTime)
                 .setTimeZone("Asia/Singapore");
         event.setEnd(end);
+
+        event.setId(taskToPost.getEventId());
 
         return event;
     }

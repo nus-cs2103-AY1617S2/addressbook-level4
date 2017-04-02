@@ -31,15 +31,16 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
     //@@author A0139975J
     /** Updates the task to done. */
-    void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void isDoneTask(int index) throws UniqueTaskList.TaskNotFoundException;
     //@@author A0139975J
     /** Updates the task from done to undone */
-    void unDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void unDoneTask(int index) throws UniqueTaskList.TaskNotFoundException;
 
     //@@author A0140063X
-    /** Update isPosted status to true */
-    void setIsPostedTrue(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    /** Sets the eventId of task */
+    void setTaskEventId(int index, String eventId);
 
+    //@@author
     /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
@@ -90,7 +91,7 @@ public interface Model {
     /** Sorts the task list */
     void sortTaskList();
 
-    /** UPdates the filter of the filtered task list to filter by the given keyword and/or date */
+    /** Updates the filter of the filtered task list to filter by the given keyword and/or date */
     void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact);
 
 }

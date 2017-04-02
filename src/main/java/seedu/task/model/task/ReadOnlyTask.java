@@ -14,7 +14,7 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     Remark getRemark();
     Location getLocation();
     boolean isDone();
-    boolean isPosted();
+    String getEventId();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

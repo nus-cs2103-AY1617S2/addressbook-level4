@@ -37,7 +37,7 @@ public class UndoneCommand extends Command {
 
         ReadOnlyTask updatedTaskDone = lastShownList.get(targetIndex - 1);
         try {
-            model.unDoneTask(targetIndex - 1, updatedTaskDone);
+            model.unDoneTask(targetIndex - 1);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
