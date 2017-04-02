@@ -113,7 +113,9 @@ Format: `done INDEX [MORE INDECIES]`
 
 ## Filtering the Tasks : `filter`
 Filters the list of tasks to only see `Ongoing` or `Completed` tasks.<br>
-Format: `filter`
+Format: `filter ongoing` or `filter completed`
+> Filters the tasks by either `Ongoing` or `Completed` task status. `filter ongoing` shows all completed tasks and `filter completed` shows all ongoing tasks. 
+> To return to the unsorted list of tasks, type and enter `list`.
 
 ## Sorting the Tasks : `sort`
 Sorts the tasks by date or by alphabet. 
@@ -168,9 +170,10 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 * **Undo** : `undo` <br>
 
 * **Done** : `done` <br>
-e.g. `done 3`
+ e.g. `done 3`
 
 * **Filter** : `filter` <br>
+ e.g.`filter ongoing` or `filter completed`
 
 * **Sort** : `sort time` or `sort name`<br>
 
