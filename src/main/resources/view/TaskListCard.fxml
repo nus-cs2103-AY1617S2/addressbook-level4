@@ -15,7 +15,7 @@
     <children>
       <FlowPane fx:id="overdueTag" HBox.hgrow="ALWAYS">
          <children>
-            <TitledPane maxWidth="500.0" minWidth="490.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css" wrapText="true">
+            <TitledPane expanded="false" maxWidth="500.0" minWidth="490.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" stylesheets="@DarkTheme.css" wrapText="true">
                <content>
                     <GridPane maxWidth="420.0" minHeight="60.0" minWidth="420.0" translateX="-15.0">
                         <columnConstraints>
