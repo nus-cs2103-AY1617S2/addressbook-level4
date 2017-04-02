@@ -1,5 +1,8 @@
 package seedu.task.testutil;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
@@ -125,6 +128,18 @@ public class TestTask implements ReadOnlyTask {
 	// TODO Auto-generated method stub
 	return null;
     }
+
+	@Override
+	public LocalTime getLocalTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LocalDate getLocalDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
 //@@author
