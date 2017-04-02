@@ -17,6 +17,12 @@ import com.joestelmach.natty.Parser;
  */
 public class DateParser {
 
+    private static final int day = 0;
+    private static final int month = 1;
+    private static final int dayDate = 2;
+    private static final int time = 3;
+    private static final int year = 5;
+    private static final int dateFromUser = 0;
     /**
      * Private constructor to prevent instantiation.
      */
@@ -72,4 +78,44 @@ public class DateParser {
             date.setTime(calendar.getTime().getTime());
         }
     }
+    //@@author A0139926R
+    public static List<Date> getDate(String date) {
+        assert date != null;
+        List<Date> dates = DateParser.parse(date);
+        return dates;
+    }
+    public static String getDateString(List<Date> dates) {
+        String finalizedDate;
+        String nattyDate = dates.get(dateFromUser).toString();
+        String[] splitDate = nattyDate.split(" ");
+        finalizedDate = splitDate[day] + " " + splitDate[month] + " " + splitDate[dayDate] +
+                " " + splitDate[year] + " " + splitDate[time];
+        return finalizedDate;
+    }
+    //Compares the start date and end date
+    public static boolean checkValidSchedule(List<Date> startDate, List<Date> endDate) {
+        boolean isValidDate = false;
+        if (!startDate.isEmpty() && !endDate.isEmpty()) {
+            Date sDate = startDate.get(dateFromUser);
+            Date eDate = endDate.get(dateFromUser);
+            isValidDate = checkValidEventDate(sDate, eDate);
+        }
+        return isValidDate;
+    }
+    //Checks for valid start and end date
+    public static boolean checkValidEventDate(Date startDate, Date endDate) {
+        boolean isValidDate = false;
+        if (startDate.before(endDate)) {
+            isValidDate = true;
+        }
+        return isValidDate;
+    }
+    public static boolean checkValidDateFormat(List<Date> date) {
+        boolean isValidDate = false;
+        if (!date.isEmpty()) {
+            isValidDate = true;
+        }
+        return isValidDate;
+    }
+
 }

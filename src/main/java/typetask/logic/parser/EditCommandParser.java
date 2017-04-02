@@ -45,8 +45,8 @@ public class EditCommandParser {
             if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_DATE).get()));
                 Optional<String> emptyString = Optional.of("");
-                editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
-                editTaskDescriptor.setEndDate(ParserUtil.parseDate(emptyString));
+                editTaskDescriptor.setEndDate(ParserUtil.parseDate(parseDate));
+                editTaskDescriptor.setDate(ParserUtil.parseDate(emptyString));
             }
             if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_TIME).get()));
