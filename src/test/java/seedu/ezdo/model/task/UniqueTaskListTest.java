@@ -29,7 +29,6 @@ public class UniqueTaskListTest {
     @Mock
     public ObservableList<Task> mock;
 
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -46,5 +45,4 @@ public class UniqueTaskListTest {
     public void hashCode_equals() {
         assertTrue(utl.hashCode() == utl.hashCode());
     }
-
 }

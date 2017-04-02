@@ -16,7 +16,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Other major contributions:
    * Taking care of administrative tasks (e.g. milestones, issues, and tagging).
    * Doing regular reviews of teammates' pull requests.
-   
+
 -----
 
 #### [Loh Zi Bin, Robin](http://github.com/robinloh)
@@ -63,7 +63,5 @@ We are a team based in the [School of Computing, National University of Singapor
    * Did the initial refactoring from AddressBook to ezDo
    * Set up Travis, Appveyor, Codacy, Coveralls and CircleCI
    * Code reviews
-   
-   
-   
+
  -----

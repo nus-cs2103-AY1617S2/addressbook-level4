@@ -52,8 +52,12 @@ public class Task implements ReadOnlyTask {
         this.done = doneStatus;
     }
 
-    public void setDone() {
-        this.done = true;
+    public void toggleDone() {
+        if (this.done) {
+            done = false;
+        } else {
+            done = true;
+        }
     }
 
     @Override

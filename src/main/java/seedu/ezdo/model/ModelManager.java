@@ -18,12 +18,11 @@ import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.DateUtil;
+import seedu.ezdo.commons.util.SearchParameters;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
-import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.model.todo.UniqueTaskList;
@@ -110,14 +109,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
-  //@@author
+
     @Override
-    public synchronized void doneTasks(ArrayList<Task> doneTasks) {
+    public synchronized boolean toggleTasksDone(ArrayList<Task> toggleTasks) {
         updateStacks();
-        ezDo.doneTasks(doneTasks);
-        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
-        updateFilteredListToShowAll();
+        ezDo.toggleTasksDone(toggleTasks);
+        if (toggleTasks.get(0).getDone()) {
+            updateFilteredListToShowAll();
+        } else {
+            updateFilteredDoneList();
+        }
+
         indicateEzDoChanged();
+        return toggleTasks.get(0).getDone();
     }
 
     @Override
@@ -131,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         indicateEzDoChanged();
     }
-  //@@author A0139248X
+
     @Override
     public void undo() throws EmptyStackException {
         ReadOnlyEzDo currentState = new EzDo(this.getEzDo());
@@ -179,8 +183,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(listToCompare, searchIndicatorList)));
+    public void updateFilteredTaskList(SearchParameters searchParameters) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(searchParameters)));
     }
 
     @Override
@@ -203,9 +207,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
-
-        @Override
-        String toString();
     }
 
     private class PredicateExpression implements Expression {
@@ -220,18 +221,10 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean satisfies(ReadOnlyTask task) {
             return qualifier.run(task);
         }
-
-        @Override
-        public String toString() {
-            return qualifier.toString();
-        }
     }
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
-
-        @Override
-        String toString();
     }
 
     private class DoneQualifier implements Qualifier {
@@ -244,12 +237,6 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return task.getDone();
         }
-
-        @Override
-        public String toString() {
-            return "";
-        }
-
     }
 
     private class NotDoneQualifier implements Qualifier {
@@ -262,35 +249,30 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return !task.getDone();
         }
-
-        @Override
-        public String toString() {
-            return "";
-        }
-
     }
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private Optional<Priority> priority;
-        private Optional<StartDate> startDate;
-        private Optional<DueDate> dueDate;
+        private Optional<TaskDate> startDate;
+        private Optional<TaskDate> dueDate;
         private Set<String> tags;
         private boolean startBefore;
         private boolean dueBefore;
         private boolean startAfter;
         private boolean dueAfter;
 
-        NameQualifier(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList) {
-            this.nameKeyWords = (Set<String>) listToCompare.get(0);
-            this.priority = (Optional<Priority>) listToCompare.get(1);
-            this.startDate = (Optional<StartDate>) listToCompare.get(2);
-            this.dueDate = (Optional<DueDate>) listToCompare.get(3);
-            this.tags = (Set<String>) listToCompare.get(4);
-            this.startBefore = searchIndicatorList.get(0);
-            this.dueBefore = searchIndicatorList.get(1);
-            this.startAfter = searchIndicatorList.get(2);
-            this.dueAfter = searchIndicatorList.get(3);
+        NameQualifier(SearchParameters searchParameters) {
+
+            this.nameKeyWords = searchParameters.getNames();
+            this.priority = searchParameters.getPriority();
+            this.startDate = searchParameters.getStartDate();
+            this.dueDate = searchParameters.getDueDate();
+            this.tags = searchParameters.getTags();
+            this.startBefore = searchParameters.getStartBefore();
+            this.dueBefore = searchParameters.getdueBefore();
+            this.startAfter = searchParameters.getStartAfter();
+            this.dueAfter = searchParameters.getDueAfter();
 
         }
 
@@ -311,11 +293,6 @@ public class ModelManager extends ComponentManager implements Model {
                             || (dueAfter && compareAfterDue(task.getDueDate())))
                     && (taskTagStringSet.containsAll(tags));
 
-        }
-
-        @Override
-        public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
         }
 
         private Set<String> convertToTagStringSet(Set<Tag> tags) {
