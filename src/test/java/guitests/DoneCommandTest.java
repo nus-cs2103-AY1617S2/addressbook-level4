@@ -33,9 +33,9 @@ public class DoneCommandTest extends EzDoGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask[] doneList = td.getTypicalDoneTasks();
         int targetIndex = currentList.length;
-        TestTask doneTask_1 = currentList[targetIndex - 1];
+        TestTask doneTask1 = currentList[targetIndex - 1];
         assertDoneSuccess(false, targetIndex, currentList, doneList);
-        doneList = TestUtil.addTasksToList(doneList, doneTask_1);
+        doneList = TestUtil.addTasksToList(doneList, doneTask1);
 
         // reset td.george (dates taken from typical test case) and set recurrence to nil
         commandBox.runCommand("edit " + targetIndex + " s/02/07/2012 04:55 " + "d/17/07/2015 22:22 " + "f/");
@@ -50,9 +50,9 @@ public class DoneCommandTest extends EzDoGuiTest {
         currentList[targetIndex - 1] = editedTask;
 
         //marks that non recurring task in a list as done
-        TestTask doneTask_2 = currentList[targetIndex - 1];
+        TestTask doneTask2 = currentList[targetIndex - 1];
         assertDoneSuccess(false, targetIndex, currentList, doneList);
-        doneList = TestUtil.addTasksToList(doneList, doneTask_2);
+        doneList = TestUtil.addTasksToList(doneList, doneTask2);
 
         // invalid index
         commandBox.runCommand("done " + currentList.length + 1);
