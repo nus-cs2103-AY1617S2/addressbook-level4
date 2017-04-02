@@ -127,6 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifierByDate(deadline)));
     }
 
+  //@@ author A0138377U
     @Override
     public void sort(String arg) {
         if (filteredTasks.size() == 0 || filteredTasks == null) {
@@ -187,6 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(i, filteredTasks.get(j));
         taskManager.updateTask(j, temp);
     }
+  //@@author A0143504R
 
     //========== Inner classes/interfaces used for filtering =================================================
 

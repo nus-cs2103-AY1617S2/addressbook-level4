@@ -1,4 +1,4 @@
-//@@ author A0138377U
+//@@author A0138377U
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;

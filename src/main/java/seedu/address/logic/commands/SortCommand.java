@@ -1,3 +1,4 @@
+//@@author A0138377U
 package seedu.address.logic.commands;
 
 /**
@@ -24,6 +25,6 @@ public class SortCommand extends Command {
     public CommandResult execute() {
         model.sort(cmd);
         model.updateFilteredListToShowAll();
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + " by " + cmd + ".");
     }
 }
