@@ -1,6 +1,7 @@
 package seedu.task.logic.commandlibrary;
 
 import static seedu.task.commons.core.Messages.MESSAGE_COMMAND_DOES_NOT_EXIST;
+import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.HashMap;
 
@@ -19,6 +20,7 @@ import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.GetGoogleCalendarCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
+import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListByDoneCommand;
 import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListByTagCommand;
@@ -294,7 +296,7 @@ public class CommandLibrary {
      */
     public Command getCorrectCommand(String commandWord, String arguments) {
         if (!commandTable.containsKey(commandWord)) {
-            return commandTable.get(QuickAddCommand.COMMAND_WORD_1).commandParser.parse(commandWord + arguments);
+            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
         return commandTable.get(commandWord).commandParser.parse(arguments);
     }
