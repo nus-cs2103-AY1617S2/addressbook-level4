@@ -74,7 +74,7 @@ public class FindCommandParser {
 
             // only parse if input is (not only integers and not a single word) or (contains time)
             // so that user can also search for numeral day_of_month/year
-            if ((findType == TYPE_START_DATE || findType == TYPE_START_DATE) &&
+            if ((findType == TYPE_START_DATE || findType == TYPE_END_DATE) &&
                     (keywords.replaceAll(DIGITS, EMPTY_STRING).length() > 0 || hasAmOrPm(keywords))) {
                 updatedKeywords = parseFindDates(keywords);
             } else {
