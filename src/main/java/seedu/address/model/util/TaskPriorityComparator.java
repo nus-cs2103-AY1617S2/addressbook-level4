@@ -8,6 +8,11 @@ import seedu.address.model.task.ReadOnlyTask;
 
 public class TaskPriorityComparator implements Comparator<ReadOnlyTask> {
     @Override
+    /**
+     * Compares two tasks according to their priority
+     * @param ReadOnlyTasks firstTask and secondTask
+     * @return an integer after comparing priority
+     */
     public int compare(ReadOnlyTask firstTask, ReadOnlyTask secondTask) {
         String firstPriority = firstTask.getPriority().value;
         String secondPriority = secondTask.getPriority().value;

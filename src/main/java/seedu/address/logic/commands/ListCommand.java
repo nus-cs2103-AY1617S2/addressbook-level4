@@ -4,7 +4,7 @@ package seedu.address.logic.commands;
 import java.util.Optional;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons in the task manager to the user.
  */
 public class ListCommand extends Command {
 

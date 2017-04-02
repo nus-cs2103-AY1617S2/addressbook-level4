@@ -31,6 +31,10 @@ public class SampleDataUtil {
         "Friday", "Saturday", "Sunday", "floating"};
     private static String[] samplePriorities = new String[] {"1", "2", "3", "4", "5", "-1"};
 
+    /**
+     * Generates a sample list of tasks
+     * @return a sample list of tasks
+     */
     public static Task[] getSampleTasks() {
         Task[] sampleTasks = new Task[SAMPLE_TASKS_LENGTH];
         for (int i = 0; i < SAMPLE_TASKS_LENGTH; i++) {
@@ -51,7 +55,10 @@ public class SampleDataUtil {
         }
         return sampleTasks;
     }
-
+    /**
+     * Generates a task manager with sample tasks
+     * @return a sample task manager
+     */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
             AddressBook sampleTaskManager = new AddressBook();

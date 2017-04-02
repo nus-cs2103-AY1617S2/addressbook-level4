@@ -64,7 +64,7 @@ public class FindCommandParser {
         return new FindCommand(keywordSet);
     }
 
-  //@@author A0144813J
+    //@@author A0144813J
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
      */

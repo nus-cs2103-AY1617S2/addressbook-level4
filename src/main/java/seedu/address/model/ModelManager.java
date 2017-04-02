@@ -155,7 +155,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(this.currentAddressBook));
     }
 
-  //@@author A0144813J
+    //@@author A0144813J
     @Override
     public void indicateAddressBookFilePathChanged(String filePath) throws DataConversionException, IOException {
         raise(new StorageFilePathChangedEvent(filePath));
@@ -257,7 +257,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return index;
     }
-
+    //@@author A0139539R
     @Override
     public void updateTask(String targetList, int taskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
@@ -328,7 +328,7 @@ public class ModelManager extends ComponentManager implements Model {
         setCurrentPredicateToShowAllTasks();
         updateTaskListPredicate();
     }
-
+    //@@author
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -359,7 +359,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-  //@@author A0144813J
+    //@@author A0144813J
     private class TagFloatingTaskQualifier implements Qualifier {
         private UniqueTagList tagList;
 
@@ -450,7 +450,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-  //@@author
+    //@@author
     //@@author A0139539R
     private class NameFloatingTaskQualifier implements Qualifier {
         private Set<String> nameKeyWords;
