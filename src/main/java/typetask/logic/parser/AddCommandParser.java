@@ -56,7 +56,7 @@ public class AddCommandParser {
             if (!DateParser.checkValidDateFormat(endDate)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE));
             }
-            if (DateParser.checkValidSchedule(startDate,endDate)) {
+            if (DateParser.checkValidSchedule(startDate, endDate)) {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         DateParser.getDateString(startDate),
