@@ -154,12 +154,10 @@ public class FindCommandParser {
         if (input.equals(EMPTY_STRING)) {
             return EMPTY_STRING;
         } else if (input.length() >= 3 &&
-                input.substring(0,3).equals("sd/")) {
-            System.out.println(input.substring(0,3));
+                input.substring(0, 3).equals("sd/")) {
             return TYPE_START_DATE;
         } else if (input.length() >= 3 &&
-                input.substring(0,3).equals("ed/")) {
-            System.out.println(input.substring(0,3));
+                input.substring(0, 3).equals("ed/")) {
             return TYPE_END_DATE;
         } else {
             return TYPE_KEYWORDS;
