@@ -5,7 +5,7 @@ import seedu.opus.model.task.ReadOnlyTask;
 /**
  * Compares and filters the priority attribute of a task in the task manager
  */
-public class PriorityQualifier {
+public class PriorityQualifier implements Qualifier {
 
     private String priority;
 
@@ -13,6 +13,7 @@ public class PriorityQualifier {
         this.priority = priority;
     }
 
+    @Override
     public boolean run(ReadOnlyTask task) {
         String priority = task.getPriority().isPresent() ? task.getPriority().get().toString() : "";
         return priority.equalsIgnoreCase(this.priority);

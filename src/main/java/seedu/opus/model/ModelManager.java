@@ -148,9 +148,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            boolean result = false;
+            boolean result = true;
             for (Qualifier qualifier: qualifiers) {
-                result = result | qualifier.run(task);
+                result = result & qualifier.run(task);
             }
             return result;
         }

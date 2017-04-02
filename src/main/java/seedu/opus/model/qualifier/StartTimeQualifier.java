@@ -10,17 +10,18 @@ import seedu.opus.model.task.ReadOnlyTask;
 /**
  * Compares and filters the startTime attribute of a task in the task manager
  */
-public class StartTimeQualifier {
+public class StartTimeQualifier implements Qualifier  {
 
     private String startTime;
 
-    public StartTimeQualifier(String endTime) {
-        this.startTime = endTime;
+    public StartTimeQualifier(String startTime) {
+        this.startTime = startTime;
     }
 
+    @Override
     public boolean run(ReadOnlyTask task) {
         Optional<LocalDateTime> inputStartTime = DateTimeParser.parse(this.startTime);
-        Optional<DateTime> taskStartTime = task.getEndTime();
+        Optional<DateTime> taskStartTime = task.getStartTime();
         if(!inputStartTime.isPresent() || !taskStartTime.isPresent()) {
             return false;
         }

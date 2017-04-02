@@ -10,7 +10,7 @@ import seedu.opus.model.task.ReadOnlyTask;
 /**
  * Compares and filters the endTime attribute of a task in the task manager
  */
-public class EndTimeQualifier {
+public class EndTimeQualifier implements Qualifier {
 
     private String endTime;
 
@@ -18,6 +18,7 @@ public class EndTimeQualifier {
         this.endTime = endTime;
     }
 
+    @Override
     public boolean run(ReadOnlyTask task) {
         Optional<LocalDateTime> inputEndTime = DateTimeParser.parse(this.endTime);
         Optional<DateTime> taskEndTime = task.getEndTime();
