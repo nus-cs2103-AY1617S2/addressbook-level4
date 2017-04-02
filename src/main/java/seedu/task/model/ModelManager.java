@@ -278,10 +278,10 @@ public class ModelManager extends ComponentManager implements Model {
                 return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keywords)
                         || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keywords);
             } else {
-                for(String keyword : keywords){
-                    if( !TaskUtil.doesTaskContainKeyword(task, keyword)){
+                for (String keyword : keywords) {
+                    if (!TaskUtil.doesTaskContainKeyword(task, keyword)) {
                         return false;
-                            }
+                    }
                 }
                 return true;
                 // return keywords.stream()
@@ -325,7 +325,9 @@ public class ModelManager extends ComponentManager implements Model {
                         || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords)
                         || StringUtil.containsExactWordsIgnoreCase(task.getLocation().toString(), keyWords);
             } else {
-                return this.stringQualifier.run(task) || this.dateQualifier.run(task);
+                return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
+                        : this.stringQualifier.run(task) && this.dateQualifier.run(task);
+
             }
         }
     }
