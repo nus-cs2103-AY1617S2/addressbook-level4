@@ -49,14 +49,14 @@ public class CompleteCommand extends Command {
         validateTargetIndex(filteredTaskListIndex, lastShownList);
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = new Task(taskToEdit);
-        editedTask.setAsCompleted();
+        Task changedTask = new Task(taskToEdit);
+        changedTask.setAsCompleted();
         try {
-            model.updateTask(targetList, filteredTaskListIndex, editedTask);
-            highlight(editedTask);
+            model.updateTask(targetList, filteredTaskListIndex, changedTask);
+            highlight(changedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        return new CommandResult(String.format(MESSAGE_MARK_COMPLETE_TASK_SUCCESS, editedTask));
+        return new CommandResult(String.format(MESSAGE_MARK_COMPLETE_TASK_SUCCESS, changedTask));
     }
 }

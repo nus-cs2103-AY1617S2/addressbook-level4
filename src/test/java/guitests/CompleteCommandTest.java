@@ -52,7 +52,7 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     }
 
     /**
-     * Runs the complete command to mark as complete a specified task  at an invalid index and confirms
+     * Runs the complete command to mark as complete a specified task at an invalid index and confirms
      * the index is incorrect.
      * @param targetIndexOneIndexed e.g. index 1 to mark as complete the first task in the list,
      * @param currentList A copy of the current list of persons (before deletion).
