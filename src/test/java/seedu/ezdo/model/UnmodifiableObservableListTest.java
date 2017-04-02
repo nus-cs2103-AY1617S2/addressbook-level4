@@ -128,6 +128,5 @@ public class UnmodifiableObservableListTest {
         for (int i = 0; i < arr1.length; i++) {
             assertTrue(arr1[i].equals(arr2[i]));
         }
-        assertTrue(arr1.equals(arr2));
     }
 }
