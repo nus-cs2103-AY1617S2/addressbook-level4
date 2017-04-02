@@ -9,7 +9,10 @@ import guitests.guihandles.PersonCardHandle;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
+import seedu.task.model.task.DueDate;
+import seedu.task.model.task.Duration;
 import seedu.task.testutil.TaskBuilder;
 import seedu.task.testutil.TestTask;
 
@@ -20,26 +23,76 @@ public class EditCommandTest extends TaskListGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTaskList = td.getTypicalTasks();
 
+    //@@author A0163673Y
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby t/husband";
+        // first edit all fields together
         int taskListIndex = 1;
-
-        TestTask editedTask = new TaskBuilder().withDescription("Bobby").withTags("husband").build();
-
+        String detailsToEdit = "testDescription t/testTag due/today 1000 starts/today 1000 ends/tomorrow 1000";
+        TestTask editedTask = new TaskBuilder()
+                .withDescription("testDescription")
+                .withTags("testTag")
+                .withDueDate("today 1000")
+                .withDuration("today 1000", "tomorrow 1000")
+                .build();
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit description
+        detailsToEdit = "aaa";
+        editedTask.setDescription(new Description("aaa"));
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit due date
+        detailsToEdit = "due/today 1001";
+        editedTask.setDueDate(new DueDate("today 1001"));
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit duration
+        detailsToEdit = "starts/today 1002 ends/tomorrow 1002";
+        editedTask.setDuration(new Duration("today 1002", "tomorrow 1002"));
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit for 1 tag
+        detailsToEdit = "t/bbb";
+        editedTask.setTags(new UniqueTagList("bbb"));
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit for multiple tags
+        detailsToEdit = "t/ccc t/ddd";
+        editedTask.setTags(new UniqueTagList("ccc", "ddd"));
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
-        int taskListIndex = 2;
-
-        TestTask taskToEdit = expectedTaskList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
-
+        // edit description
+        int taskListIndex = 3;
+        String detailsToEdit = "testDescription";
+        TestTask editedTask = new TaskBuilder()
+                .withDescription("testDescription")
+                .build();
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit tags
+        detailsToEdit = "t/aaa";
+        editedTask.setTags(new UniqueTagList("aaa"));
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit due date
+        detailsToEdit = "due/today 1000";
+        editedTask.setDueDate(new DueDate("today 1000"));
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit remove tags
+        detailsToEdit = "t/";
+        editedTask.setTags(new UniqueTagList());
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit duration
+        detailsToEdit = "starts/today 1000 ends/tomorrow 1000";
+        editedTask.setDuration(new Duration("today 1000", "tomorrow 1000"));
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit remove due date
+        detailsToEdit = "due/";
+        editedTask.setDueDate(null);
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+        // edit remove duration
+        detailsToEdit = "starts/ ends/";
+        editedTask.setDuration(null);
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
+    //@@author
 
     @Test
     public void edit_clearTags_success() throws Exception {
