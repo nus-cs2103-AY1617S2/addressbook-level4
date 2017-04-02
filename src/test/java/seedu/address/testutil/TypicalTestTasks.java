@@ -9,6 +9,8 @@ import seedu.address.model.task.Deadline;
 import seedu.address.model.task.StartEndDateTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.exceptions.InvalidDurationException;
+import seedu.address.model.task.exceptions.PastDateTimeException;
 
 /**
  * TODO
@@ -51,6 +53,12 @@ public class TypicalTestTasks {
             // TODO maybe to use non-floating tasks here
             helpMe = new TaskBuilder().withName("Help me").build();
             iAmCode = new TaskBuilder().withName("I am code").build();
+        } catch (PastDateTimeException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        } catch (InvalidDurationException e) {
+            e.printStackTrace();
+            assert false : "not possible";
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

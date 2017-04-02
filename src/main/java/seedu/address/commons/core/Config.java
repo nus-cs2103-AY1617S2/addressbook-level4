@@ -42,11 +42,11 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getTaskListFilePath() {
         return addressBookFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
+    public void setTaskListFilePath(String addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
     }
 

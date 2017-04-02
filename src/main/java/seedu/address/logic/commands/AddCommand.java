@@ -1,13 +1,11 @@
 package seedu.address.logic.commands;
 
-import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
@@ -35,59 +33,13 @@ public class AddCommand extends Command {
 
     //@@author A0140023E
     /**
-     * Creates an AddCommand using raw values.
-     *
+     * Creates an AddCommand using raw values except {@code deadline} and {@code startEndDateTime}
+     * that must be pre-initialized.
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, Optional<String> deadlineDateTimeArgs, Optional<String> startDateTimeArgs,
-                      Optional<String> endDateTimeArgs, Set<String> tags) throws IllegalValueException {
-        // TODO the init method names may be improved
-        final Optional<Deadline> deadline = initDeadline(deadlineDateTimeArgs);
-        final Optional<StartEndDateTime> startEndDateTime =
-                initStartEndDateTime(startDateTimeArgs, endDateTimeArgs);
-        final UniqueTagList tagList = initTagList(tags);
-
-        // maybe to rearrange the tag to be before
-        this.toAdd = new Task(
-                new Name(name),
-                deadline,
-                startEndDateTime,
-                tagList
-        );
-    }
-
-    /**
-     * Returns an Optional of {@link Deadline} if deadline arguments are present, otherwise return an empty Optional.
-     * @throws IllegalValueException if the deadline string cannot be parsed as date
-     */
-    private Optional<Deadline> initDeadline(Optional<String> deadlineDateTimeArgs)
-            throws IllegalValueException {
-        if (deadlineDateTimeArgs.isPresent()) {
-            ZonedDateTime deadlineDateTime = ParserUtil.parseDateTimeString(deadlineDateTimeArgs.get());
-            return Optional.of(new Deadline(deadlineDateTime));
-        }
-        return Optional.empty();
-    }
-
-    /**
-     * Returns an Optional of {@link StartEndDateTime} if Start and End Date time arguments are
-     * present, otherwise return an empty Optional.
-     * @throws IllegalValueException if a StartEndDateTime cannot be constructed
-     */
-    private Optional<StartEndDateTime> initStartEndDateTime(Optional<String> startDateTimeArgs,
-            Optional<String> endDateTimeArgs) throws IllegalValueException {
-        if (startDateTimeArgs.isPresent()) {
-            if (!endDateTimeArgs.isPresent()) {
-                throw new IllegalValueException("End date must exist if there is a start date");
-                // TODO currently not worth the effort but can consider allowing endDateTime to be
-                // optional in the future
-            }
-
-            ZonedDateTime startDateTime = ParserUtil.parseDateTimeString(startDateTimeArgs.get());
-            ZonedDateTime endDateTime = ParserUtil.parseDateTimeString(endDateTimeArgs.get());
-            return Optional.of(new StartEndDateTime(startDateTime, endDateTime));
-        }
-        return Optional.empty();
+    public AddCommand(String nameArgs, Optional<Deadline> deadline,
+            Optional<StartEndDateTime> startEndDateTime, Set<String> tags) throws IllegalValueException {
+        toAdd = new Task(new Name(nameArgs), deadline, startEndDateTime, initTagList(tags));
     }
 
     /**

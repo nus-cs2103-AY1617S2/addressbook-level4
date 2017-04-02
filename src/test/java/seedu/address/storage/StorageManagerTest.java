@@ -29,7 +29,8 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        storageManager = new StorageManager(getTempFilePath("taskList"), getTempFilePath("prefs"));
+        storageManager = new StorageManager(getTempFilePath("taskList"), getTempFilePath("prefs"),
+                         getTempFilePath("config"));
     }
 
 
@@ -74,7 +75,8 @@ public class StorageManagerTest {
     public void handleTaskListChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlTaskListStorageExceptionThrowingStub("dummy"),
-                                             new JsonUserPrefsStorage("dummy"));
+                                             new JsonUserPrefsStorage("dummy"),
+                                             new JsonConfigStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
         storage.handleTaskListChangedEvent(new TaskListChangedEvent(new TaskList()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);

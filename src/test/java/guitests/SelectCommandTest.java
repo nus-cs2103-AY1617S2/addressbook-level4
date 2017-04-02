@@ -49,7 +49,6 @@ public class SelectCommandTest extends TaskListGuiTest {
         assertEquals(personListPanel.getSelectedPersons().size(), 1);
         ReadOnlyTask selectedTask = personListPanel.getSelectedPersons().get(0); // TODO ui
         assertEquals(personListPanel.getPerson(index - 1), selectedTask);
-        //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoTaskSelected() {
