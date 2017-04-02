@@ -126,6 +126,15 @@ public class ModelManager extends ComponentManager implements Model {
         indicateViewListChanged(ViewCommand.TYPE_OVERDUE);
     }
 
+    //@@author A0135998H
+    @Override
+    public void updateFilteredListToShowToday() {
+        filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
+            return isToday(task);
+        });
+        indicateViewListChanged(ViewCommand.TYPE_TODAY);
+    }
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
@@ -200,9 +209,23 @@ public class ModelManager extends ComponentManager implements Model {
         return false;
     }
 
-  //@@author A0135998H
+    //@@author A0135998H
     public boolean isFloating(ReadOnlyTask task) {
         return !(task.getStartEndDateTime().isPresent()) && !(task.getDeadline().isPresent());
+    }
+
+    //@@author A0135998H
+    public boolean isToday(ReadOnlyTask task) {
+        ZonedDateTime currentDateTime = ZonedDateTime.now();
+        if (task.getStartEndDateTime().isPresent()) {
+            StartEndDateTime startEndDateTime = task.getStartEndDateTime().get();
+            return !(currentDateTime.isBefore(startEndDateTime.getStartDateTime())
+                    || currentDateTime.isAfter(startEndDateTime.getEndDateTime()));
+        } else if (task.getDeadline().isPresent()) {
+            Deadline deadline = task.getDeadline().get();
+            return !(currentDateTime.isAfter(deadline.getValue()));
+        }
+        return false;
     }
 
 }
