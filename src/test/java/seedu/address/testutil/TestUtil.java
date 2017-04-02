@@ -16,7 +16,8 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.ActivityCardHandle;
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -36,6 +37,7 @@ import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.tag.Tag;
@@ -336,8 +338,12 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndEvent(ActivityCardHandle card, ReadOnlyEvent event) {
+    public static boolean compareCardAndEvent(EventCardHandle card, ReadOnlyEvent event) {
         return card.isSameEvent(event);
+    }
+
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
