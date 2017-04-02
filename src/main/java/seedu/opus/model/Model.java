@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.exceptions.InvalidUndoException;
-import seedu.opus.model.ModelManager.Qualifier;
+import seedu.opus.model.qualifier.Qualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;

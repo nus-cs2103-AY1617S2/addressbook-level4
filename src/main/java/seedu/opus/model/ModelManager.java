@@ -10,11 +10,12 @@ import seedu.opus.commons.core.ComponentManager;
 import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
-import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.commons.util.CollectionUtil;
-import seedu.opus.commons.util.StringUtil;
-import seedu.opus.model.tag.Tag;
+import seedu.opus.model.qualifier.NameQualifier;
+import seedu.opus.model.qualifier.NoteQualifier;
+import seedu.opus.model.qualifier.Qualifier;
+import seedu.opus.model.qualifier.TagQualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
@@ -172,67 +173,5 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-    }
-
-    public class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
-
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-    }
-
-    public class NoteQualifier implements Qualifier {
-        private Set<String> noteKeyWords;
-
-        NoteQualifier(Set<String> noteKeyWords) {
-            this.noteKeyWords = noteKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            String note = task.getNote().isPresent() ? task.getNote().get().value : "";
-            return noteKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(note, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-    }
-
-    public class TagQualifier implements Qualifier {
-        private Set<String> tagKeyWords;
-
-        TagQualifier(Set<String> tagKeyWords) {
-            this.tagKeyWords = tagKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return tagKeyWords.stream()
-                    .filter(keyword -> {
-                        try {
-                            return task.getTags().contains(new Tag(keyword));
-                        } catch (IllegalValueException e) {
-                            e.printStackTrace();
-                        }
-                        return false;
-                    })
-                    .findAny()
-                    .isPresent();
-        }
-
-    }
 
 }
