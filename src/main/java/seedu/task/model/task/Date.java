@@ -162,7 +162,7 @@ public class Date {
         return value.hashCode();
     }
 
-    public String getExtractedFrom(){
+    public String getExtractedFrom() {
         return this.extractedFrom;
     }
 }

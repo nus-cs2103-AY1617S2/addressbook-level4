@@ -142,7 +142,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     //@@author A0140063X
     public void setEventId(String eventId) {
-        assert eventId!= null && eventId.trim() != "";
+        assert eventId != null && eventId.trim() != "";
         this.eventId = eventId;
     }
 

@@ -92,7 +92,8 @@ public class PostGoogleCalendarCommand extends Command {
         }
     }
 
-    private ReadOnlyTask postEvent(int index) throws CommandException, IllegalValueException, IOException, TaskNotFoundException {
+    private ReadOnlyTask postEvent(int index) throws CommandException, IllegalValueException,
+                                                    IOException, TaskNotFoundException {
         ReadOnlyTask taskToPost = getTaskToPost(index);
 
         if (taskToPost.getStartDate().isNull() || taskToPost.getEndDate().isNull()) {
