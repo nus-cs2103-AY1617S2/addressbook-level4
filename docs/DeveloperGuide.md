@@ -4,7 +4,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Setting Up](#1.-setting-up)
+1. [Setting Up](#1--setting-up)
 2. [Design](#design)
 3. [Implementation](#implementation)
 4. [Testing](#testing)
