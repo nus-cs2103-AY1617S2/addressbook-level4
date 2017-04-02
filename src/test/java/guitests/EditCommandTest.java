@@ -173,7 +173,8 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/1 "
-                                + "s/12/12/2016 11:22 d/14/03/2017 22:33 f/daily t/friends");
+                                + "s/12/12/2016 11:22 d/14/03/2017 22:33 f/daily"
+                                + " t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
