@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.tag.TagColorScheme;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartEndDateTime;
 
@@ -55,7 +56,15 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
     }
 
-    private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private Label createLabel(String tagName, String color) {
+        Label newTag = new Label(tagName);
+        newTag.setStyle("-fx-background-color: " + color);
+        return newTag;
     }
+
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(
+                createLabel(tag.tagName, TagColorScheme.getColor(tag.tagName))));
+    }
+
 }
