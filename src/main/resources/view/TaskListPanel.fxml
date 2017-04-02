@@ -11,7 +11,7 @@
       <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
    </children>
    <stylesheets>
-      <URL value="@RedTheme.css" />
+      <URL value="@GraphiteTheme.css" />
       <URL value="@Extensions.css" />
    </stylesheets>
 </VBox>

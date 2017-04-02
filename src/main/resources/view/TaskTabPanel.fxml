@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +12,10 @@
          <tabs>
             <Tab fx:id="allTasksTab" text="All">
                <content>
-                  <AnchorPane fx:id="allTasksListPanelPlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane fx:id="allTasksListPanelPlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor></AnchorPane>
                </content>
             </Tab>
             <Tab fx:id="todayTasksTab" text="Today">
@@ -40,10 +44,13 @@
                </content>
             </Tab>
          </tabs>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </TabPane>
    </children>
    <stylesheets>
-      <URL value="@RedTheme.css" />
+      <URL value="@GraphiteTheme.css" />
       <URL value="@Extensions.css" />
    </stylesheets>
 </AnchorPane>

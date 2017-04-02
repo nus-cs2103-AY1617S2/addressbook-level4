@@ -1,14 +1,17 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.tag.TagColorScheme;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartEndDateTime;
 
+//@@author A0135998H
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -55,7 +58,15 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
     }
 
-    private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private Label createLabel(String tagName, String color) {
+        Label newTag = new Label(tagName);
+        newTag.setStyle("-fx-background-color: " + color);
+        return newTag;
     }
+
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(
+                createLabel(tag.tagName, TagColorScheme.getColor(tag.tagName))));
+    }
+
 }

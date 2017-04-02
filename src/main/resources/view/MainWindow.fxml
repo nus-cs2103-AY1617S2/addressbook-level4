@@ -4,6 +4,7 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -21,7 +22,7 @@
    <children>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <MenuBar prefHeight="29.0" prefWidth="800.0">
+            <MenuBar accessibleRole="LIST_VIEW" prefHeight="29.0" prefWidth="800.0">
                <menus>
                   <Menu mnemonicParsing="false" text="File">
                      <items>
@@ -34,37 +35,29 @@
                      </items>
                   </Menu>
                </menus>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </MenuBar>
-            <HBox prefHeight="73.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+            <HBox prefHeight="73.0" prefWidth="800.0" VBox.vgrow="NEVER">
                <children>
-                  <AnchorPane prefHeight="63.0" prefWidth="66.0" HBox.hgrow="ALWAYS" />
-                  <VBox prefHeight="63.0" prefWidth="20.0">
-                     <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                        <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="46.0" prefWidth="211.0" styleClass="button2">
-                           <graphic>
-                              <ImageView fitHeight="34.0" fitWidth="38.0">
-                                 <image>
-                                    <Image url="@../images/Setting.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </VBox>
-                  <AnchorPane fx:id="commandBoxPlaceholder" prefHeight="73.0" prefWidth="447.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="clockPlaceholder" HBox.hgrow="NEVER">
                      <HBox.margin>
-                        <Insets left="20.0" right="15.0" top="15.0" />
+                        <Insets left="20.0" right="30.0" />
+                     </HBox.margin></AnchorPane>
+                  <AnchorPane fx:id="commandBoxPlaceholder" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="15.0" top="15.0" />
                      </HBox.margin>
                   </AnchorPane>
                </children>
             </HBox>
-            <AnchorPane fx:id="resultDisplayPlaceholder" prefHeight="225.0" prefWidth="770.0">
+            <AnchorPane fx:id="resultDisplayPlaceholder" prefHeight="160.0" prefWidth="970.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </AnchorPane>
-            <SplitPane fx:id="splitPlane" dividerPositions="0.6335078534031413" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <SplitPane fx:id="splitPlane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="479.0" prefWidth="970.0" VBox.vgrow="NEVER">
               <items>
                 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
@@ -78,7 +71,7 @@
                                           <Image url="@../images/clock.png" />
                                        </image>
                                     </ImageView>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="5.0" prefWidth="233.0" text="Remainders &amp; Deadlines" HBox.hgrow="NEVER">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="5.0" prefWidth="233.0" text="Reminders &amp; Deadlines" HBox.hgrow="NEVER">
                                        <font>
                                           <Font name="Franklin Gothic Book" size="20.0" />
                                        </font>
@@ -96,29 +89,6 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                     <children>
-                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <HBox styleClass="background2" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <AnchorPane prefHeight="26.0" prefWidth="14.0" />
-                                    <ImageView fitHeight="22.0" fitWidth="25.0">
-                                       <image>
-                                          <Image url="@../images/calendar.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="78.0" text="Events">
-                                       <font>
-                                          <Font name="Franklin Gothic Book" size="20.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <AnchorPane fx:id="browserPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="438.0" prefWidth="292.0" VBox.vgrow="ALWAYS" />
-                           </children></VBox>
-                     </children>
-                  </AnchorPane>
               </items>
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" />
@@ -129,7 +99,7 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@RedTheme.css" />
+      <URL value="@GraphiteTheme.css" />
       <URL value="@Extensions.css" />
    </stylesheets>
 </AnchorPane>

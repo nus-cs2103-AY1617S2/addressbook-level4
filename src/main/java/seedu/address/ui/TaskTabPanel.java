@@ -12,9 +12,6 @@ import seedu.address.logic.commands.ViewCommand;
 import seedu.address.model.task.ReadOnlyTask;
 
 //@@author A0135998H
-/**
- * The Browser Panel of the App.
- */
 public class TaskTabPanel extends UiPart<Region> {
 
     private static final String FXML = "TaskTabPanel.fxml";
