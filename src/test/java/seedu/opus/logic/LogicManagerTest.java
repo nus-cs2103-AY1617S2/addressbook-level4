@@ -856,7 +856,7 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given name. Other fields will be null except for status and tags
          */
-        Task generateFloatingTask(String name) throws Exception {
+        private Task generateFloatingTask(String name) throws Exception {
             return new Task(
                     new Name(name),
                     null,
