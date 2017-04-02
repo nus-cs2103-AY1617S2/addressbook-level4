@@ -42,4 +42,4 @@ Responsibilities: UI
  | Christopher Hendra | [A0130979U](https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0130979U.md) |
  | Cindra | [A0164039E](https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0164039E.md) |
  | Deng Yue | [A0164440M](https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0164440M.md) |
- | Zhuang Lei | [A0140055W]((https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0140055W.md) |
+ | Zhuang Lei | [A0140055W](https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0140055W.md) |
