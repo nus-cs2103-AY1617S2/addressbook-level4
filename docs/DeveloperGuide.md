@@ -211,7 +211,7 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 ```
-The `UI` component,
+Function of `UI`
 
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
@@ -227,7 +227,7 @@ _Figure 3.3.1 : Structure of the Logic Component_
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 ```
-The `Logic` component
+Function of `Logic`
 
 * The `Logic` component uses the `Parser` class to parse the user command.
 * The `Command` object created from the 'Parser' class is executed by the `LogicManager`.
@@ -252,7 +252,7 @@ _Figure 3.4.1 : Structure of the Model Component_
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
 ```
-The `Model` component
+Function of `Model`
 
 * The 'Model' component stores a `UserPref` object that represents the user's preferences.
 * The 'Model' component stores the Task Manager data.
@@ -270,7 +270,7 @@ _Figure 3.5.1 : Structure of the Storage Component_
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
 ```
-The `Storage` component
+Function of `Storage`
 
 * The `Storage` component can save `UserPref` objects in json format and read it back.
 * The `Storage` component can save the Task Manager data in xml format and read it back.
