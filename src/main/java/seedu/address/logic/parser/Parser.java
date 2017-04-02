@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ResetCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -21,6 +20,7 @@ import seedu.address.logic.commands.IncompleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ResetCommand;
 import seedu.address.logic.commands.RevertCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;

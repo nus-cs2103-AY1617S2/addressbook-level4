@@ -58,7 +58,8 @@ public class EditCommandParser {
         }
 
         return new EditCommand(targetList.get(), Integer.parseInt(index.get()), editTaskDescriptor);
-    }//@@author
+    }
+    //@@author
 
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
