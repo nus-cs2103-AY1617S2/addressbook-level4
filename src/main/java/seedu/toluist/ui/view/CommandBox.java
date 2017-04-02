@@ -32,15 +32,13 @@ public class CommandBox extends UiView {
     protected void viewDidMount () {
         FxViewUtil.makeFullWidth(getRoot());
         FxViewUtil.makeFullWidth(commandTextField);
-        UiStore store = UiStore.getInstance();
-        setCommandTextFieldText(store.getObservableCommandInput().getValue().getCommand());
     }
 
     private void configureBindings() {
         UiStore store = UiStore.getInstance();
-        store.bind(this, store.getObservableCommandInput());
+        commandTextField.textProperty().bindBidirectional(store.getCommandInputProperty());
         commandTextField.textProperty()
-                .addListener((observable, oldValue, newValue) -> handleCommandInputChanged(newValue));
+            .addListener(((observable, oldValue, newValue) -> handleCommandInputChanged(newValue)));
     }
 
     private void configureKeyCombinations() {
@@ -52,13 +50,12 @@ public class CommandBox extends UiView {
 
     private void dispatchCommand() {
         dispatcher.dispatchRecordingHistory(commandTextField.getText());
-        commandTextField.setText("");
+        UiStore.getInstance().setCommandInput("");
     }
 
     private void handleCommandInputChanged(String newCommand) {
         List<String> suggestedCommands = new ArrayList(dispatcher.getSuggestions(newCommand));
         UiStore uiStore = UiStore.getInstance();
-        uiStore.setCommandInput(newCommand);
         uiStore.setSuggestedCommands(suggestedCommands);
         if (!newCommand.isEmpty() && suggestedCommands.isEmpty()) {
             FxViewUtil.addStyleClass(commandTextField, STYLE_CLASS_ERROR);
@@ -73,7 +70,7 @@ public class CommandBox extends UiView {
 
         List<String> suggestedCommands = store.getObservableSuggestedCommands();
         if (suggestedCommands.size() == 1) {
-            setCommandTextFieldText(
+            store.setCommandInput(
                     StringUtil.replaceLastWord(commandTextField.getText(), suggestedCommands.get(0)));
         }
     }
@@ -97,10 +94,5 @@ public class CommandBox extends UiView {
         }
 
         store.setCommandInput(StringUtil.replaceLastWord(commandText, suggestedCommands.get(index)));
-    }
-
-    private void setCommandTextFieldText(String text) {
-        commandTextField.setText(text);
-        commandTextField.end();
     }
 }

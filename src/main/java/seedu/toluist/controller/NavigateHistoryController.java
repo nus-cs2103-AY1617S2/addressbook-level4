@@ -29,7 +29,7 @@ public class NavigateHistoryController extends Controller {
         String direction = tokens.get(DIRECTION_PARAMETER);
 
         if (direction.equals(UP_PARAMETER)) {
-            showPreviousCommand(uiStore.getObservableCommandInput().getValue().getCommand());
+            showPreviousCommand(uiStore.getCommandInputProperty().getValue());
         } else if (direction.equals(DOWN_PARAMETER)) {
             showNextCommand();
         } else { //error

@@ -11,6 +11,8 @@ import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,7 +22,6 @@ import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
-import seedu.toluist.ui.commons.CommandInput;
 import seedu.toluist.ui.commons.CommandResult;
 import seedu.toluist.ui.view.UiView;
 
@@ -40,8 +41,7 @@ public class UiStore {
             new SimpleObjectProperty<>(new Pair(null, new ArrayList()));
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));
-    private ObjectProperty<CommandInput> observableCommandInput =
-            new SimpleObjectProperty<>(new CommandInput(""));
+    private StringProperty commandInputProperty = new SimpleStringProperty("");
     private ObservableList<String> observableSuggestedCommands = FXCollections.observableArrayList();
     private SimpleIntegerProperty observableSuggestedCommandIndex =
             new SimpleIntegerProperty(INDEX_INVALID_SUGGESTION);
@@ -109,12 +109,12 @@ public class UiStore {
         return observableSuggestedCommands;
     }
 
-    public void setCommandInput(String command) {
-        observableCommandInput.setValue(new CommandInput(command));
+    public void setCommandInput(String commandInput) {
+        commandInputProperty.setValue(commandInput);
     }
 
-    public ObservableValue<CommandInput> getObservableCommandInput() {
-        return observableCommandInput;
+    public StringProperty getCommandInputProperty() {
+        return commandInputProperty;
     }
 
     public ObservableValue<CommandResult> getObservableCommandResult() {
