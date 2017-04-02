@@ -9,16 +9,21 @@ import java.time.format.DateTimeFormatter;
 import org.teamstbf.yats.commons.util.FxViewUtil;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 
+import com.sun.javafx.scene.control.skin.DatePickerSkin;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 
 //@@author A0138952W
@@ -31,7 +36,7 @@ public class CalendarViewPanel extends UiPart<Region> {
 	private static ObservableList<String> timeData = FXCollections.observableArrayList();
 
 	@FXML
-	private AnchorPane calendarView;
+	private AnchorPane calendarPanel;
 	@FXML
 	private TabPane dWMView;
 	@FXML
@@ -39,31 +44,15 @@ public class CalendarViewPanel extends UiPart<Region> {
 	@FXML
 	private Tab browser;
 	@FXML
-	private Tab dayView;
+	private Tab calendarView;
 	@FXML
-	private Tab weekView;
-	@FXML
-	private Tab monthView;
-	@FXML
-	private Tab yearView;
+	private BorderPane calendarRoot;
 	@FXML
 	private ListView<ReadOnlyEvent> taskListView;
 	@FXML
-	private Button leftArrowDay;
+	private Button leftArrow;
 	@FXML
-	private Button rightArrowDay;
-	@FXML
-	private Button leftArrowWeek;
-	@FXML
-	private Button rightArrowWeek;
-	@FXML
-	private Button leftArrowMonth;
-	@FXML
-	private Button rightArrowMonth;
-	@FXML
-	private Button leftArrowYear;
-	@FXML
-	private Button rightArrowYear;
+	private Button rightArrow;
 	@FXML
 	private Label currentDay;
 	@FXML
@@ -72,20 +61,6 @@ public class CalendarViewPanel extends UiPart<Region> {
 	private Label currentMonth;
 	@FXML
 	private Label currentYear;
-	@FXML
-	private Label weekSun;
-	@FXML
-	private Label weekMon;
-	@FXML
-	private Label weekTue;
-	@FXML
-	private Label weekWed;
-	@FXML
-	private Label weekThu;
-	@FXML
-	private Label weekFri;
-	@FXML
-	private Label weekSat;
 	@FXML
 	private ListView<String> timeSlots;
 
@@ -102,36 +77,23 @@ public class CalendarViewPanel extends UiPart<Region> {
 	 */
 	public CalendarViewPanel(AnchorPane placeholder) {
 		super(FXML);
-		FxViewUtil.applyAnchorBoundaryParameters(calendarView, 0.0, 0.0, 0.0, 0.0);
-		invokeTabPane();
+		FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
 		invokeArrowImage();
-		initializeDayView();
-		initializeWeekView();
-		initializeMonthView();
-		initializeYearView();
-		placeholder.getChildren().add(calendarView);
-	}
-
-	// Initialize headers for the tabs
-	private void invokeTabPane() {
-		dayView.setText("Day");
-		weekView.setText("Week");
-		monthView.setText("Month");
-		yearView.setText("Year");
+		initializeCalendarView();
+		placeholder.getChildren().add(calendarPanel);
 	}
 
 	private void invokeArrowImage() {
-		leftArrowDay.setText("<<");
-		rightArrowDay.setText(">>");
-		leftArrowWeek.setText("<<");
-		rightArrowWeek.setText(">>");
-		leftArrowMonth.setText("<<");
-		rightArrowMonth.setText(">>");
-		leftArrowYear.setText("<<");
-		rightArrowYear.setText(">>");
+		leftArrow.setText("<<");
+		rightArrow.setText(">>");
 	}
 
-	private void initializeDayView() {
+	@SuppressWarnings("restriction")
+	private void initializeCalendarView() {
+
+		DatePickerSkin calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
+		Node popupContent = calendar.getPopupContent();
+		calendarRoot.setCenter(popupContent);
 
 		for (startTime = today.atTime(firstTimeSlot); !startTime
 				.isAfter(today.atTime(lastTimeSlot)); startTime = startTime.plus(timeDifference)) {
@@ -140,20 +102,6 @@ public class CalendarViewPanel extends UiPart<Region> {
 		}
 		createFullDayTime();
 		currentDay.setText(today.format(dateFormatter("d MMM")));
-	}
-
-	private void initializeWeekView() {
-		currentWeekMonth.setText(today.format(dateFormatter("MMM")));
-		String dayValue = LocalDate.now().getDayOfWeek().toString();
-		weekSun.setText(dayValue);
-	}
-
-	private void initializeMonthView() {
-		currentMonth.setText(today.format(dateFormatter("MMM")));
-	}
-
-	private void initializeYearView() {
-		currentYear.setText(today.format(dateFormatter("uuuu")));
 	}
 
 	// ======= Utility methods for the Button Bar ==========
