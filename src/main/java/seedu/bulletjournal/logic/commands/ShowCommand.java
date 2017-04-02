@@ -17,7 +17,7 @@ public class ShowCommand extends Command {
             + "Example: " + COMMAND_WORD + " done";
 
     private final Set<String> keywords;
-    
+
     public ShowCommand(Set<String> keywords) {
         this.keywords = keywords;
         if (this.keywords.contains("undone")) {
