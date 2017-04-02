@@ -25,7 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
+    private FilteredList<ReadOnlyTask> filteredTasks;
     private TaskManager taskManagerCopy;
     private String flag;
 
@@ -106,25 +106,68 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        this.sort();
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
+        this.sort();
         filteredTasks.setPredicate(null);
     }
 
     @Override
     public void updateFilteredTaskListByKeywords(Set<String> keywords) {
+        this.sort();
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
+        this.sort();
         filteredTasks.setPredicate(expression::satisfies);
     }
 
     public void updateFilteredTaskListByDate(Deadline deadline) {
+        this.sort();
         updateFilteredTaskList(new PredicateExpression(new TaskQualifierByDate(deadline)));
+    }
+
+    private void sort() {
+        if (filteredTasks.size() == 0 || filteredTasks == null) {
+            return;
+        }
+
+        bubblesort(filteredTasks.size() - 1);
+    }
+
+    private void bubblesort(int upper) {
+        boolean flag = true;
+
+        while (flag) {
+            flag = false;
+            for (int k = 0; k < upper; k++) {
+                if (getCTime(k) < getCTime(k + 1)) {
+                    exchange(k , k + 1);
+                    flag = true;
+                }
+            }
+        }
+    }
+
+    private long getCTime(int task) {
+        try {
+            return filteredTasks.get(task).getDeadline().date.getBeginning().getTime();
+        } catch (NullPointerException e) {
+            return Long.MAX_VALUE;
+        }
+    }
+
+    private void exchange (int i, int j) {
+        ReadOnlyTask temp = filteredTasks.get(i);
+        temp = new Task(temp.getName(), temp.getDeadline(), temp.getDescription(), temp.getTags());
+        taskManager.updateTask(i, filteredTasks.get(j));
+        taskManager.updateTask(j, temp);
+        int a = 0;
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
