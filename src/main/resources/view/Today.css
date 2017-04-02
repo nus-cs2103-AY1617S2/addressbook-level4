@@ -9,3 +9,8 @@
 .jfx-snackbar-toast {
 	-fx-text-fill:#ffffff;
 }
+
+.jfx-progress-bar{
+	-fx-progress-color: #CE2345;
+	-fx-stroke-width:3;
+}
