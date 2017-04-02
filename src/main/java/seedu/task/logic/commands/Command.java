@@ -1,7 +1,11 @@
 package seedu.task.logic.commands;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+
+import com.google.api.services.calendar.model.Event;
 
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.DataConversionException;
@@ -9,6 +13,13 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.Remark;
+import seedu.task.model.task.Task;
 import seedu.task.storage.Storage;
 
 /**
@@ -57,7 +68,7 @@ public abstract class Command {
     }
 
     // @@author A0140063X
-    public ReadOnlyTaskManager readTaskManager(String filePath) throws IOException, IllegalValueException {
+    protected ReadOnlyTaskManager readTaskManager(String filePath) throws IOException, IllegalValueException {
         try {
             Optional<ReadOnlyTaskManager> taskManagerOptional = storage.readTaskManager(filePath);
 
@@ -71,5 +82,20 @@ public abstract class Command {
         } catch (IOException ioe) {
             throw new IOException("File not found.");
         }
+    }
+
+    // @@author A0140063X
+    protected static Task createTaskFromEvent(Event event) throws IllegalValueException {
+        if (event.getSummary() == null) {
+            throw new IllegalValueException("Name must not be empty.");
+        }
+        Name name = new Name(event.getSummary());
+        Date startDate = new Date(event.getStart());
+        Date endDate = new Date(event.getEnd());
+        Remark remark = new Remark(event.getDescription());
+        Location location = new Location(event.getLocation());
+        final Set<Tag> tagSet = new HashSet<>(); // No tags
+
+        return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false);
     }
 }
