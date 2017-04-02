@@ -36,6 +36,9 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     // Gets animation flag
     boolean isAnimated();
 
+    // Returns whether the task is overdue
+    boolean isOverdue();
+
     // Returns a natural relative representation of a datetime
     String getTaskDateTime();
 

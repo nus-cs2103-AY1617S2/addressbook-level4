@@ -34,6 +34,7 @@ public class DeadlineTask extends Task {
      *
      * @return true for overdue, false otherwise
      */
+    @Override
     public boolean isOverdue() {
         return deadline.getDate().compareTo(new Date()) <= 0;
     }
@@ -53,7 +54,7 @@ public class DeadlineTask extends Task {
     @Override
     public boolean isToday() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-        return manualToday || fmt.format(this.deadline.getDate()).equals(fmt.format(new Date()));
+        return manualToday || fmt.format(this.deadline.getDate()).equals(fmt.format(new Date())) || isOverdue();
     }
 
     // @@author A0093999Y

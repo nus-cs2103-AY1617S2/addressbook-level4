@@ -53,6 +53,7 @@ public class EventTask extends Task {
      *
      * @return true for overdue, false otherwise
      */
+    @Override
     public boolean isOverdue() {
         return deadline.getDate().compareTo(new Date()) <= 0;
     }
@@ -77,7 +78,7 @@ public class EventTask extends Task {
         boolean startToday = fmt.format(this.startingTime.getDate()).equals(fmt.format(timeNow));
         boolean withinStartAndEnd = startingTime.getDate().compareTo(timeNow) <= 0
                 && deadline.getDate().compareTo(timeNow) >= 0;
-        return manualToday || startToday || withinStartAndEnd;
+        return manualToday || startToday || withinStartAndEnd || isOverdue();
     }
 
     @Override
