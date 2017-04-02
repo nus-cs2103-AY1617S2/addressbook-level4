@@ -62,7 +62,7 @@ public class TaskCard extends UiPart<Region> {
         if (task.getDate().value.equals("")) {
             date.setText("-           " + "          to");
         } else {
-            date.setText(task.getDate().value + "                to           ");
+            date.setText(task.getDate().value + "                to         ");
         }
 
         if (task.getEndDate().value.equals("")) {
