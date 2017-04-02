@@ -27,6 +27,7 @@ import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.PostGoogleCalendarCommand;
+import seedu.task.logic.commands.QuickAddCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
@@ -52,6 +53,7 @@ import seedu.task.logic.parser.ListByTagCommandParser;
 import seedu.task.logic.parser.ListCommandParser;
 import seedu.task.logic.parser.LoadCommandParser;
 import seedu.task.logic.parser.PostGoogleCalendarCommandParser;
+import seedu.task.logic.parser.QuickAddCommandParser;
 import seedu.task.logic.parser.RedoCommandParser;
 import seedu.task.logic.parser.SaveCommandParser;
 import seedu.task.logic.parser.SelectCommandParser;
@@ -256,6 +258,9 @@ public class CommandLibrary {
         commandTable.put(PostGoogleCalendarCommand.COMMAND_WORD_2,
                 new CommandInstance(PostGoogleCalendarCommand.COMMAND_WORD_1,
                         new PostGoogleCalendarCommandParser(), PostGoogleCalendarCommand.MESSAGE_USAGE));
+
+        commandTable.put(QuickAddCommand.COMMAND_WORD_1, new CommandInstance(QuickAddCommand.COMMAND_WORD_1,
+            new QuickAddCommandParser() , QuickAddCommand.MESSAGE_USAGE));
 
         commandTable.put(RedoCommand.COMMAND_WORD_1, new CommandInstance(RedoCommand.COMMAND_WORD_1,
                 new RedoCommandParser(), RedoCommand.MESSAGE_USAGE));
