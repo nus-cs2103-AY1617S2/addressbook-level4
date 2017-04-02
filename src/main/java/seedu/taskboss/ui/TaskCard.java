@@ -41,14 +41,16 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         initPriority(task);
-        startDateTime.setText(task.getStartDateTime().value);
-        endDateTime.setText(task.getEndDateTime().value);
+        initStartDateTime(task);
+        initEndDateTime(task);
         information.setText(task.getInformation().value);
         initRecurrence(task);
-
         initCategories(task);
     }
 
+    /**
+     * Initialises priority level
+     */
     private void initPriority(ReadOnlyTask task) {
         PriorityLevel priority = task.getPriorityLevel();
         Image urgentImage = AppUtil.getImage(PATH_IMAGE_URGENT);
@@ -59,6 +61,33 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Initialises start date time
+     */
+    private void initStartDateTime(ReadOnlyTask task) {
+        String startDate = task.getStartDateTime().value;
+        if (startDate.isEmpty()) {
+            startDateTime.setVisible(false);
+        } else {
+            startDateTime.setText("Start: " + task.getStartDateTime().value);
+        }
+    }
+
+    /**
+     * Initialises end date time
+     */
+    private void initEndDateTime(ReadOnlyTask task) {
+        String endDate = task.getEndDateTime().value;
+        if (endDate.isEmpty()) {
+            endDateTime.setVisible(false);
+        } else {
+            endDateTime.setText("End: " + task.getEndDateTime().value);
+        }
+    }
+
+    /**
+     * Initialises recurrence
+     */
     private void initRecurrence(ReadOnlyTask task) {
         String recurrenceType = task.getRecurrence().toString();
         if (recurrenceType.equals(RECURRENCE_NONE)) {
