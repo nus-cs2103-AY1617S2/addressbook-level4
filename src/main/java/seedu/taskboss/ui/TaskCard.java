@@ -2,9 +2,13 @@ package seedu.taskboss.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.taskboss.commons.util.AppUtil;
+import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -18,7 +22,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label priorityLevel;
+    private ImageView priorityLevel;
     @FXML
     private Label startDateTime;
     @FXML
@@ -34,7 +38,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        priorityLevel.setText(task.getPriorityLevel().value);
+        initPriority(task);
         startDateTime.setText(task.getStartDateTime().value);
         endDateTime.setText(task.getEndDateTime().value);
         information.setText(task.getInformation().value);
@@ -43,6 +47,15 @@ public class TaskCard extends UiPart<Region> {
         initCategories(task);
     }
 
+    private void initPriority(ReadOnlyTask task) {
+        PriorityLevel priority = task.getPriorityLevel();
+        Image urgentImage = AppUtil.getImage("/images/urgentImage.png");
+        if (priority.value.equals(PriorityLevel.PRIORITY_HIGH_VALUE)) {
+            priorityLevel.setImage(urgentImage);
+        } else {
+            priorityLevel.setVisible(false);
+        }
+    }
     private void initCategories(ReadOnlyTask task) {
         task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
     }
