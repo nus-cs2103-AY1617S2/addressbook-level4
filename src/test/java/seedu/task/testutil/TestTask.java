@@ -1,5 +1,8 @@
 package seedu.task.testutil;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
@@ -22,10 +25,13 @@ public class TestTask implements ReadOnlyTask {
     private TaskTime taskEndTime;
     private String taskDescription;
     private TaskStatus taskStatus;
-    private TaskPath taskPath;
+    private LocalDate localDate;
+    private LocalTime localTime;
+    
     
     public TestTask() {
 	tags = new UniqueTagList();
+	
     }
 
     /**
@@ -124,6 +130,33 @@ public class TestTask implements ReadOnlyTask {
     public String getTaskPath() {
 	// TODO Auto-generated method stub
 	return null;
+    }
+
+    public void setCreationTime() {
+    	localDate = LocalDate.now();
+    	localTime = LocalTime.now();
+    }
+    
+    public LocalDate getLocalDate() {
+    	if (localDate == null) {
+    		setCreationTime();
+    	}
+    	return localDate;
+    }
+
+    public LocalTime getLocalTime() {
+    	if (localTime == null) {
+    		setCreationTime();
+    	}
+    	return localTime;
+    }
+
+    private void setLocalDate(LocalDate localDate) {
+    	this.localDate = localDate;
+    }
+
+    private void setLocalTime(LocalTime localTime) {
+    	this.localTime = localTime;
     }
 
 }
