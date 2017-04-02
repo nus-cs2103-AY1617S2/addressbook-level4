@@ -136,7 +136,7 @@ public class ParserUtil {
     //@@author A024377A
     /**
      * Returns the parsed integer when it is the only argument
-     */    
+     */
     public static Optional<Integer> parseIntegerAlone(String command) {
         final Matcher matcher = INDEX_ALONE_ARG_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {

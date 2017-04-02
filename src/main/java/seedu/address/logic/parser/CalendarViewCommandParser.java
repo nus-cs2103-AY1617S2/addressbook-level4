@@ -22,9 +22,9 @@ public class CalendarViewCommandParser {
         Optional<Integer> index = ParserUtil.parseIntegerAlone(args);
         if (!index.isPresent()) {
             return new CalendarViewCommand(DEFAULT_WEEK);
-        }
-        else 
+        } else {
             return new CalendarViewCommand(index.get());
+        }
     }
 
 }

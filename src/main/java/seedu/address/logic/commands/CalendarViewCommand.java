@@ -34,7 +34,7 @@ public class CalendarViewCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         logger.info("-------[Executing CalendarViewCommand]");
-        if (weeksAhead<0)
+        if (weeksAhead < 0)
             throw new CommandException(Messages.MESSAGE_INVALID_WEEKS_AHEAD);
         EventsCenter.getInstance().post(new UpdateCalendarEvent(currentDateTime, weeksAhead));
         return new CommandResult(String.format(MESSAGE_SUCCESS, weeksAhead));
