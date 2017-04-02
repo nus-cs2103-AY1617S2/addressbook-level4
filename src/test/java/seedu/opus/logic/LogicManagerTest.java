@@ -267,10 +267,11 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithStartTime("p4", "03/01/2017 00:00");
         Task p5 = helper.generateTaskWithStartTime("p5", "03/02/2017 00:00");
         Task p6 = helper.generateTaskWithStartTime("p6", "03/02/2018 00:00");
-        Task p7 = helper.generateFloatingTask("Floating Task");
+        Task p7 = helper.generateFloatingTask("Floating Task 1");
+        Task p8 = helper.generateFloatingTask("Floating Task 2");
 
-        List<Task> sevenTasks = helper.generateTaskList(p1, p2, p3, p4, p5, p6, p7);
-        TaskManager expectedTaskManager = helper.generateTaskManager(sevenTasks);
+        List<Task> eightTasks = helper.generateTaskList(p1, p2, p3, p4, p5, p6, p7, p8);
+        TaskManager expectedTaskManager = helper.generateTaskManager(eightTasks);
 
         model.resetData(new TaskManager());
         model.addTask(p6);
@@ -280,11 +281,12 @@ public class LogicManagerTest {
         model.addTask(p5);
         model.addTask(p2);
         model.addTask(p4);
+        model.addTask(p8);
 
         assertCommandSuccess("sort start",
                 SortCommand.MESSAGE_SUCCESS + "start",
                 expectedTaskManager,
-                sevenTasks);
+                eightTasks);
     }
 
     @Test
@@ -296,10 +298,11 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithEndTime("p4", "03/01/2017 00:00");
         Task p5 = helper.generateTaskWithEndTime("p5", "03/02/2017 00:00");
         Task p6 = helper.generateTaskWithEndTime("p6", "03/02/2018 00:00");
-        Task p7 = helper.generateFloatingTask("Floating Task");
+        Task p7 = helper.generateFloatingTask("Floating Task 1");
+        Task p8 = helper.generateFloatingTask("Floating Task 2");
 
-        List<Task> sevenTasks = helper.generateTaskList(p1, p2, p3, p4, p5, p6, p7);
-        TaskManager expectedTaskManager = helper.generateTaskManager(sevenTasks);
+        List<Task> eightTasks = helper.generateTaskList(p1, p2, p3, p4, p5, p6, p7, p8);
+        TaskManager expectedTaskManager = helper.generateTaskManager(eightTasks);
 
         model.resetData(new TaskManager());
         model.addTask(p6);
@@ -309,11 +312,12 @@ public class LogicManagerTest {
         model.addTask(p5);
         model.addTask(p2);
         model.addTask(p4);
+        model.addTask(p8);
 
         assertCommandSuccess("sort end",
                 SortCommand.MESSAGE_SUCCESS + "end",
                 expectedTaskManager,
-                sevenTasks);
+                eightTasks);
     }
 
     @Test
@@ -323,10 +327,11 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithPriority("p2", "hi");
         Task p3 = helper.generateTaskWithPriority("p3", "mid");
         Task p4 = helper.generateTaskWithPriority("p4", "low");
-        Task p5 = helper.generateFloatingTask("Floating Task");
+        Task p5 = helper.generateFloatingTask("Floating Task 1");
+        Task p6 = helper.generateFloatingTask("Floating Task 2");
 
-        List<Task> fiveTasks = helper.generateTaskList(p1, p2, p3, p4, p5);
-        TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
+        List<Task> sixTasks = helper.generateTaskList(p1, p2, p3, p4, p5, p6);
+        TaskManager expectedTaskManager = helper.generateTaskManager(sixTasks);
 
         model.resetData(new TaskManager());
         model.addTask(p1);
@@ -334,11 +339,12 @@ public class LogicManagerTest {
         model.addTask(p2);
         model.addTask(p5);
         model.addTask(p4);
+        model.addTask(p6);
 
         assertCommandSuccess("sort priority",
                 SortCommand.MESSAGE_SUCCESS + "priority",
                 expectedTaskManager,
-                fiveTasks);
+                sixTasks);
     }
 
     @Test
