@@ -27,6 +27,9 @@ import seedu.address.model.task.Title;
  */
 public class ParserUtil {
     //@@author A0139539R
+    /**
+     * Defines a regex format for comparator names in a specified order
+     */
     private static final Pattern COMPARATOR_NAME_ARGS_FORMAT = Pattern.compile(
             "(?<comparatorName>("
             + ListCommand.COMPARATOR_NAME_DATE
@@ -83,8 +86,8 @@ public class ParserUtil {
     //@@author
     //@@author A0139539R
     /**
-     * Returns the specified task list name in the {@code command} if it is an alpha-non-numeric string
-     * that corresponds to a valid task list name.
+     * Returns the specified task comparator name in the {@code command} if it is an alpha-non-numeric string
+     * that corresponds to a valid task comparator name.
      * Returns "invalid" otherwise.
      */
     public static Optional<String> parseComparatorName(String command) {
@@ -94,7 +97,8 @@ public class ParserUtil {
         }
 
         String comparatorName = matcher.group("comparatorName").isEmpty()
-                ? "priority" : matcher.group("comparatorName");
+                ? "priority"
+                : matcher.group("comparatorName");
         return Optional.of(comparatorName);
 
     }
