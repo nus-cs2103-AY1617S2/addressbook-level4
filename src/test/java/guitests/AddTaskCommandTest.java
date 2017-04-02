@@ -33,13 +33,13 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
             new IllegalArgumentException("Recurring frequency must be either 'daily',"
                     + "'weekly', 'monthly' or 'yearly'.");
     private static final String ADD = "add ";
-    private static final String FROM = " from/";
-    private static final String TO = " to/";
-    private static final String BY = " by/";
-    private static final String TAGS = " tags/";
-    private static final String PRIORITY = " priority/";
-    private static final String REPEAT = " repeat/";
-    private static final String REPEAT_UNTIL = " repeatuntil/";
+    private static final String FROM = " /from ";
+    private static final String TO = " /to ";
+    private static final String BY = " /by ";
+    private static final String TAGS = " /tags ";
+    private static final String PRIORITY = " /priority ";
+    private static final String REPEAT = " /repeat ";
+    private static final String REPEAT_UNTIL = " /recuruntil";
     private Tag tag1 = new Tag("tag1");
     private Tag tag2 = new Tag("tag2");
     private Tag tag3 = new Tag("tag3");

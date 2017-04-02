@@ -35,7 +35,7 @@ public class FindCommandTest extends ToLuistGuiTest {
         testFindCommand(commandPartialWord, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
 
         // Find with explicit parameter
-        String commandExplicitByName = "find  clean name/";
+        String commandExplicitByName = "find  clean /name";
         testFindCommand(commandExplicitByName, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
 
         // Check that find is case-insensitive
@@ -52,24 +52,24 @@ public class FindCommandTest extends ToLuistGuiTest {
         Task[] sampleTasks = (new TypicalTestTodoLists()).getTypicalTasks();
 
         // Find with only spaces
-        String commandOnlySpaces = "find  tag/";
+        String commandOnlySpaces = "find  /tag";
         testFindCommand(commandOnlySpaces, sampleTasks, new Task[0]);
 
         // Find by complete word
-        String commandCompleteWord = "find lewis  tag/";
+        String commandCompleteWord = "find lewis  /tag";
         testFindCommand(commandCompleteWord, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
 
         // Find by partial word
-        String commandPartialWord = "find  lew tag/";
+        String commandPartialWord = "find  lew /tag";
         testFindCommand(commandPartialWord, new Task[] { sampleTasks[0] }, new Task[] { sampleTasks[1] });
 
 
         // Check that find is case-insensitive
-        String commandCaseInsensitive = "find WORK tag/";
+        String commandCaseInsensitive = "find WORK /tag";
         testFindCommand(commandCaseInsensitive, sampleTasks, new Task[0]);
 
         // Find with multiple words
-        String commandMultipleWords = "find lewis  louis tag/";
+        String commandMultipleWords = "find lewis  louis /tag";
         testFindCommand(commandMultipleWords, sampleTasks, new Task[0]);
     }
 

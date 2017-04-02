@@ -66,6 +66,7 @@ public class KeywordTokenizer {
 
         Collections.sort(indexKeywordPairs, Comparator.comparing(pair -> ((Pair<Integer, String>) pair).getKey()));
 
+
         for (int i = 0; i < indexKeywordPairs.size(); i++) {
             Pair<Integer, String> currentIndexKeywordPair = indexKeywordPairs.get(i);
             int startIndex = currentIndexKeywordPair.getKey();

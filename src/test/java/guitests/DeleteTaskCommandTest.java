@@ -51,7 +51,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         // add task with deadline
         String taskDescription2 = "get v0.2 ready";
         LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
-        String command2 = "add " + taskDescription2 + " by/" + endDate2;
+        String command2 = "add " + taskDescription2 + " /by " + endDate2;
         commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, endDate2);
 
@@ -59,7 +59,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         String taskDescription3 = "attend CS2103T tutorial";
         LocalDateTime startDate3 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime endDate3 = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
-        String command3 = "add " + taskDescription3 + " from/" + startDate3 + " to/" + endDate3;
+        String command3 = "add " + taskDescription3 + " /from " + startDate3 + " /to " + endDate3;
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
 
@@ -168,8 +168,8 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         String taskDescription = "do homework for Melvin";
         String recurFrequencyString = "daily";
         LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("15 May 2018, 12pm");
-        String command = "add " + taskDescription + " repeat/" + recurFrequencyString
-                       + " repeatuntil/" + recurUntilEndDate;
+        String command = "add " + taskDescription + " /repeat " + recurFrequencyString
+                       + " /recuruntil " + recurUntilEndDate;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription);
         task.setRecurring(recurUntilEndDate, recurFrequencyString);
@@ -180,7 +180,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         String recurFrequencyString2 = "monthly";
         LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime recurUntilEndDate2 = DateTimeUtil.parseDateString("30 Apr 2017, 12pm");
-        String command2 = "add " + taskDescription2 + " by/" + endDate2 + " repeat/" + recurFrequencyString2
+        String command2 = "add " + taskDescription2 + " /by " + endDate2 + " /repeat " + recurFrequencyString2
                 + " repeatuntil/" + recurUntilEndDate2;
         commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, endDate2);
@@ -193,8 +193,8 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime startDate3 = DateTimeUtil.parseDateString("24 Mar 2017, 12pm");
         LocalDateTime endDate3 = DateTimeUtil.parseDateString("24 Mar 2017, 1pm");
         LocalDateTime recurUntilEndDate3 = DateTimeUtil.parseDateString("28 Mar 2017, 1pm");
-        String command3 = "add " + taskDescription3 + " from/" + startDate3 + " to/" + endDate3
-                        + " repeat/" + recurFrequencyString3 + " repeatuntil/" + recurUntilEndDate3;
+        String command3 = "add " + taskDescription3 + " /from " + startDate3 + " /to " + endDate3
+                        + " /repeat " + recurFrequencyString3 + " /recuruntil " + recurUntilEndDate3;
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
         task3.setRecurring(recurUntilEndDate3, recurFrequencyString3);

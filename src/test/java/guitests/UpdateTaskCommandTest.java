@@ -24,15 +24,15 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
 public class UpdateTaskCommandTest extends ToLuistGuiTest {
     private static final String ADD = "add ";
     private static final String UPDATE = "update ";
-    private static final String FROM = " from/";
-    private static final String TO = " to/";
-    private static final String BY = " by/";
-    private static final String FLOATING = " floating/";
-    private static final String TAGS = " tags/";
-    private static final String PRIORITY = " priority/";
-    private static final String REPEAT = " repeat/";
-    private static final String REPEAT_UNTIL = " repeatuntil/";
-    private static final String STOP_REPEATING = " stoprepeating/";
+    private static final String FROM = " /from ";
+    private static final String TO = " /to ";
+    private static final String BY = " /by ";
+    private static final String FLOATING = " /floating ";
+    private static final String TAGS = " /tags ";
+    private static final String PRIORITY = " /priority ";
+    private static final String REPEAT = " /repeat ";
+    private static final String REPEAT_UNTIL = " /recuruntil ";
+    private static final String STOP_REPEATING = " /stoprepeating ";
 
     private static Tag tag1 = new Tag("tag1");
     private static Tag tag2 = new Tag("tag2");
