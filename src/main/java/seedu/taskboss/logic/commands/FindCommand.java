@@ -1,8 +1,5 @@
 package seedu.taskboss.logic.commands;
 
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_KEYWORD;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,8 +21,8 @@ public class FindCommand extends Command {
             + " or with dates specified in any of following formats"
             + " e.g 28 / Feb / Feb 28 / Feb 28, 2017,\n"
             + " and displays them in a list.\n"
-            + "Parameters: k/NAME AND INFORMATION KEYWORDS or sd/START_DATE or ed/END_DATE \n"
-            + "Example: " + COMMAND_WORD + " k/meeting" + " || " + COMMAND_WORD_SHORT + " sd/march 19";
+            + "Parameters: NAME AND INFORMATION KEYWORDS or sd/START_DATE or ed/END_DATE \n"
+            + "Example: " + COMMAND_WORD + " meeting" + " || " + COMMAND_WORD_SHORT + " sd/march 19";
 
     private static final String TYPE_KEYWORDS = "keywords";
     private static final String TYPE_START_DATE = "startDate";
