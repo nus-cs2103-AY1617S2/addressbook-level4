@@ -1,7 +1,9 @@
 //@@author A0139961U
 package seedu.tache.model.task;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -24,6 +26,7 @@ public class Task implements ReadOnlyTask {
     private boolean isTimed;
     private boolean isRecurring;
     private RecurInterval interval;
+    private List<Date> recurCompletedList;
 
     /**
      * Every field must be present and not null.
@@ -38,11 +41,12 @@ public class Task implements ReadOnlyTask {
         this.isTimed = false;
         this.isRecurring = false;
         this.interval = RecurInterval.NONE;
+        this.recurCompletedList = new ArrayList<Date>();
     }
 
     public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime,
                     UniqueTagList tags, boolean isTimed, boolean isActive, boolean isRecurring,
-                    RecurInterval interval) {
+                    RecurInterval interval, List<Date> recurCompletedList) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -56,6 +60,7 @@ public class Task implements ReadOnlyTask {
         }
         this.isRecurring = isRecurring;
         this.interval = interval;
+        this.recurCompletedList = recurCompletedList;
     }
 
     /**
@@ -64,7 +69,7 @@ public class Task implements ReadOnlyTask {
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags(),
                     source.getTimedStatus(), source.getActiveStatus(), source.getRecurringStatus(),
-                    source.getRecurInterval());
+                    source.getRecurInterval(), source.getRecurCompletedList());
     }
 
     @Override
@@ -126,7 +131,7 @@ public class Task implements ReadOnlyTask {
     public void setActiveStatus(boolean isActive) {
         this.isActive = isActive;
     }
-
+    //@@author A0139925U
     @Override
     public boolean getRecurringStatus() {
         return isRecurring;
@@ -145,6 +150,16 @@ public class Task implements ReadOnlyTask {
         this.interval = interval;
     }
 
+    @Override
+    public List<Date> getRecurCompletedList() {
+        return this.recurCompletedList;
+    }
+
+    public void addRecurCompletedToList(Date date) {
+        assert date != null;
+        this.recurCompletedList.add(date);
+    }
+    //@@author
     /**
      * Updates this task with the details of {@code replacement}.
      */

@@ -1,6 +1,8 @@
 //@@author A0139925U
 package seedu.tache.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -138,7 +140,7 @@ public class EditCommand extends Command implements Undoable {
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
-                            updatedTags, isTimed, true, false, RecurInterval.NONE);
+                            updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
 
     }
 
@@ -245,7 +247,7 @@ public class EditCommand extends Command implements Undoable {
         originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
                                         Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
                taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
-               taskToEdit.getRecurInterval());
+               taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
     }
 
     //@@author A0150120H

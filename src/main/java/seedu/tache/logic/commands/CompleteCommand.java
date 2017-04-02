@@ -9,7 +9,6 @@ import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -89,7 +88,8 @@ public class CompleteCommand extends Command implements Undoable {
         assert taskToEdit != null;
 
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), false, false, RecurInterval.NONE);
+                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), false, taskToEdit.getRecurringStatus(),
+                            taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
 
     }
 
@@ -101,7 +101,8 @@ public class CompleteCommand extends Command implements Undoable {
         assert taskToEdit != null;
 
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), true, false, RecurInterval.NONE);
+                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), true, taskToEdit.getRecurringStatus(),
+                                taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
 
     }
 

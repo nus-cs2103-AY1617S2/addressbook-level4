@@ -1,6 +1,7 @@
 package seedu.tache.storage;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,9 @@ public class XmlAdaptedTask {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    @XmlElement(required = false)
+    private List<Date> recurCompletedList = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -102,6 +106,8 @@ public class XmlAdaptedTask {
         final boolean isRecurring = this.isRecurring;
         final RecurInterval interval = this.interval;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startDateTime, endDateTime, tags, isTimed, isActive, isRecurring, interval);
+        final List<Date> recurCompletedList = this.recurCompletedList;
+        return new Task(name, startDateTime, endDateTime, tags, isTimed, isActive, isRecurring,
+                            interval, recurCompletedList);
     }
 }
