@@ -19,7 +19,9 @@
 
 #### Acknowledgements
 
-* Some parts of this sample application were inspired by the excellent
+* The source of this project derives from a sample project created by SE-EDU initiative at https://github.com/se-edu/
+
+* Some parts of this sample application were inspired by
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
   
 * The date and time parser for this application was borrowed from the open source [Natty Date Parser](http://natty.joestelmach.com/)
