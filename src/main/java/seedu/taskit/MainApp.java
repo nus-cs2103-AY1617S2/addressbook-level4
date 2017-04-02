@@ -199,15 +199,13 @@ public class MainApp extends Application {
         try {
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
 
-            ReadOnlyAddressBook currentAddressBook = storage.readAddressBook().orElse(new AddressBook());
+            ReadOnlyAddressBook currentTaskManager = model.getAddressBook();
 
             //reset the storage object to the new file path and save the current task manager into it
             storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
-            storage.saveAddressBook(currentAddressBook);
+            storage.saveAddressBook(currentTaskManager);
         } catch (IOException ioe) {
             EventsCenter.getInstance().post(new DataSavingExceptionEvent(ioe));
-        } catch (DataConversionException dce) {
-            EventsCenter.getInstance().post(new DataSavingExceptionEvent(dce));
         }
     }
     //@@author
