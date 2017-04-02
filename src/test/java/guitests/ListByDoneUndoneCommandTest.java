@@ -15,7 +15,7 @@ public class ListByDoneUndoneCommandTest extends TaskManagerGuiTest {
     public void listbydoneundone_nonEmptyList() {
         TestTask[] currentList = td.getTypicalTasks();
         // done the first task
-        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " done 1");
+        commandBox.runCommand("done 1");
         currentList[0].setIsDone(true);
         assertListByDone(currentList);
         assertListByUndone(currentList);
@@ -40,7 +40,7 @@ public class ListByDoneUndoneCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertListByUndone(TestTask... currentList) {
-        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " done");
+        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " notdone");
         TestTask[] expectedList = TestUtil.filterUndoneTasks(currentList);
         assertListSize(expectedList.length);
         assertResultMessage(expectedList.length + " undone tasks listed!");
