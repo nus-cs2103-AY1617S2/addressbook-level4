@@ -114,11 +114,14 @@ public class TaskListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
-
+            
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
+            	if (task.isOverdue() && !this.isSelected()) {
+                	this.setStyle("-fx-background-color: #ffdbe0;");
+                }
                 setGraphic(new TaskCard(task, task.getID()).getRoot());
             }
         }

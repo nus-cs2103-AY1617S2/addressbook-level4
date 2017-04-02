@@ -62,10 +62,6 @@ public class TaskCard extends UiPart<Region> {
             timeline.play();
             task.setAnimation(false);
         }
-        // set red if overdue
-        if (task.isOverdue()) {
-            cardCell.setStyle("-fx-background-color: #ffdbe0;");
-        }
     }
 
     private void initTags(ReadOnlyTask task) {
