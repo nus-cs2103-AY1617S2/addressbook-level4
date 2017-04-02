@@ -26,11 +26,11 @@ public class Priority implements Comparable<Priority> {
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
-        String upperPriority = priority.trim().toUpperCase();
-        if (!isValidPriority(upperPriority)) {
+        priority = priority.trim();
+        if (!isValidPriority(priority)) {
             throw new IllegalValueException(PRIORITY_CONSTRAINTS);
         } else {
-            setPriority(upperPriority);
+            setPriority(priority);
         }
     }
 
@@ -38,6 +38,7 @@ public class Priority implements Comparable<Priority> {
      * Returns true if a given string is a valid task priority.
      */
     public static boolean isValidPriority(String userInput) {
+        userInput = userInput.toUpperCase();
         return userInput.isEmpty() || userInput.charAt(0) == HIGH_CHAR || userInput.charAt(0) == MEDIUM_CHAR
                 || userInput.charAt(0) == LOW_CHAR;
     }
@@ -48,7 +49,7 @@ public class Priority implements Comparable<Priority> {
      * @param upperPriority
      */
     private void setPriority(String upperPriority) {
-        char firstLetter = upperPriority.charAt(0);
+        char firstLetter = upperPriority.toUpperCase().charAt(0);
         switch (firstLetter) {
         case HIGH_CHAR:
             this.value = HIGH_LABEL;
@@ -76,7 +77,8 @@ public class Priority implements Comparable<Priority> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                        && this.value.equals(((Priority) other).value)); // state check
+                        && this.value.equals(((Priority) other).value)); // state
+                                                                         // check
     }
 
     @Override
