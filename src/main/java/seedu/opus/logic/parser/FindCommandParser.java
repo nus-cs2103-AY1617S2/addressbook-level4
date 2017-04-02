@@ -2,6 +2,10 @@ package seedu.opus.logic.parser;
 
 import static seedu.opus.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.opus.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
+import static seedu.opus.logic.parser.CliSyntax.PREFIX_ENDTIME;
+import static seedu.opus.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.opus.logic.parser.CliSyntax.PREFIX_STARTTIME;
+import static seedu.opus.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -22,7 +26,13 @@ public class FindCommandParser {
      * and returns an FindCommand object for execution.
      */
     public Command parse(String args) {
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+
+        ArgumentTokenizer argsTokenizer =
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STATUS, PREFIX_STARTTIME, PREFIX_ENDTIME);
+        argsTokenizer.tokenize(args);
+        String inputKeyword = argsTokenizer.getPreamble().orElse("");
+
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(inputKeyword.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
