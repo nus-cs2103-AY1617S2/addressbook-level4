@@ -4,51 +4,79 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import guitests.guihandles.TaskCardHandle;
+import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
+import seedu.taskboss.logic.commands.AddCommand;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
+import seedu.taskboss.testutil.TestTask;
+import seedu.taskboss.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskBossGuiTest {
 
     @Test
-    public void add() {
-        //add one person
-        TestPerson[] currentList = td.getTypicalPersons();
-        TestPerson personToAdd = td.hoon;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+    public void add() throws DuplicateCategoryException, IllegalValueException {
+        TestTask[] currentList = td.getTypicalTasks();
+        //add one task
+        TestTask taskToAdd = td.taskH;
 
-        //add another person
-        personToAdd = td.ida;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        assertAddSuccess(false, false, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        //add another task
+        taskToAdd = td.taskI;
+        assertAddSuccess(false, false, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
+        //add another task using short command
+        taskToAdd = td.taskK;
+        assertAddSuccess(false, true, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
+        //add another task using short command '+'
+        taskToAdd = td.taskL;
+        assertAddSuccess(true, false, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
+        //add duplicate task
+        commandBox.runCommand(td.taskH.getAddCommand());
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
+
+        //add invalid dates task
+        commandBox.runCommand(td.taskJ.getAddCommand());
+        assertResultMessage(AddCommand.ERROR_INVALID_DATES);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(false, false, td.taskA);
 
         //invalid command
-        commandBox.runCommand("adds Johnny");
+        commandBox.runCommand("adds new task");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestPerson personToAdd, TestPerson... currentList) {
-        commandBox.runCommand(personToAdd.getAddCommand());
+    private void assertAddSuccess(boolean isPlusSign, boolean isShortCommand, TestTask taskToAdd,
+                    TestTask... currentList)
+            throws DuplicateCategoryException, IllegalValueException {
+        if (isShortCommand) {
+            commandBox.runCommand(taskToAdd.getShortAddCommand());
+        } else {
+            if (isPlusSign) {
+                commandBox.runCommand(taskToAdd.getAddCommandPlus());
+            } else {
+                commandBox.runCommand(taskToAdd.getAddCommand());
+            }
+        }
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
-        assertMatching(personToAdd, addedCard);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        assertMatching(taskToAdd, addedCard);
 
-        //confirm the list now contains all previous persons plus the new person
-        TestPerson[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        //confirm the list now contains all previous tasks plus the new task
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

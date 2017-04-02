@@ -1,10 +1,10 @@
 
 .error {
-    -fx-background-color: red;
+    -fx-background-color: #fc8383;
 }
 
 
-.tag-selector {
+.category-selector {
     -fx-border-width: 1;
     -fx-border-color: white;
     -fx-border-radius: 3;
