@@ -64,7 +64,7 @@ Fig 1. TypeTask’s User Interface <br>
 
 6. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**` CS2103T Meeting d/12022107 t/11:00am` :
+   * **`add`**` CS2103T Meeting by: 12 Feb 11am` :
      adds a task named `CS2103T Meeting` to the Task Manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -96,39 +96,49 @@ Examples:
 ### 3.3. Adding a Deadline Task: `add`
 What if you want to submit a report by a certain date or time. You might want to add a task that has a deadline. <br>
 
-Format: `add <TASK NAME> d/<DATE> or add <TASK NAME> d/<DATE> t/<TIME>`
+Format: `add <TASK NAME> by:<DATE> or add <TASK NAME> by:<DATE> <TIME>`
 
 ```
 Things To Note:
-> Date must be in dd/mm/yyyy format
-> Time must be in hh:mm am/pm format
+> Date can be in mm/dd/yyyy format
+> Space must be used between words for dates.
+   e.g "15 Oct", "next monday"
 > Time is optional
+> Time can be in hh:mm format. 24 hours format is used.
+> Time and Date must have a space in between them.
+   e.g. "today 8pm", "15 Oct 11am"
 ```
 
 Examples:
 
-* `add CS2103T Meeting d/13/10/2016`
-* `add CS2103T Meeting d/13/10/2016 t/11:10am`
+* `add CS2103T Meeting by: next week`
+* `add CS2103T Meeting by: next monday 11:10am`
 
 
 ### 3.4. Adding an Event Task: `add`
 Now you might be interested in adding an event, which has a start time and an end time. <br>
 
-Format: `add <EVENT NAME> from d/<DATE> t/<TIME> to d/<DATE> t/<TIME>`
+Format: `add <EVENT NAME> from:<DATE> <TIME> to: <DATE> t/<TIME>`
 
 ```
 Things To Note:
-> Date must be in dd/mm/yyyy format
-> Time must be in hh:mm am/pm format
 > Start Date and End Date is compulsory
 > End Date must not be before Start Date
 > Start Time and End Time is compulsory
+> Date can be in mm/dd/yyyy format
+> Space must be used between words for Date. 
+   e.g "15 Oct", "next monday"
+> Time is optional
+> Time can be in hh:mm format. 24 hours format is used.
+> Time and Date must have a space in between them.
+   e.g. "today 8pm", "15 Oct 11am"
+
 ```
 
 Examples:
 
-* `add OPEN HOUSE from d/13/10/2016 t/10:00am to d/16/10/2016 t/5:00 pm`
-* `add CS1010 Lecture from d/10/10/2016 t/12:00pm to d/10/4/2017 t/2:00 pm`
+* `add OPEN HOUSE from: 13 Oct 10:00am to: 16 Oct 5:00pm`
+* `add CS1010 Lecture from: tuesday 12:00pm to: tuesday 2:00 pm`
 
 
 ### 3.5. Adding a Priority Task/Event : `add`
@@ -167,27 +177,30 @@ Things To Note:
 
 Examples:
 * `find Meeting`
-* `find Open house`
+* `find oct`
 
 
 ### 3.7 Editing a Task: `edit`
 Sometimes you may want to change the details of a certain task you have. No need to worry! You can modify a certain task by typing the edit command.
 
-Format: `edit INDEX <TASK NAME> d/<DATE> t/<TIME> p/<PRIORITY>`
+Format: `edit INDEX <TASK NAME> by: <DATE> <TIME> p/<PRIORITY> or edit INDEX from:<DATE> <TIME> to:<DATE> <TIME>`
 
 ```
 Things To Note:
 > Edits the task at the specified INDEX.
   The index refers to the number shown in the last task listing.
-> The index must be a positive integer 1, 2, 3, …
 > Optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>
 > At least one of the optional fields must be provided.
 > Existing field(s) will be updated with the input fields.
 ```
 
 Examples:
-* `edit 1 d/02122017 t/11:00am`
-* `edit 2 CS2013T Meeting`
+* `edit 1 by:2 Dec 11:00am`
+What it does: Edit your task deadline to 2 Dec 11am
+* `edit 2 CS2103T Meeting`
+What it does: Edit your task name to CS2103T Meeting
+* `edit 3 from: next week to: next month`
+What it does: Edit your task schedule to be from next week to next month
 
 
 ### 3.8 Deleting a Task : `delete`
