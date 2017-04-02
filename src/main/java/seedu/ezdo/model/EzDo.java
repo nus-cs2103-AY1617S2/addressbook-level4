@@ -192,10 +192,10 @@ public class EzDo implements ReadOnlyEzDo {
 
     private String updateDate(int type, String originalDate) {
         try {
-            int RECUR_INTERVAL_INCREMENT = 1;
+            int recur_interval_increment = 1;
             Calendar c = Calendar.getInstance();
             c.setTime(DateParser.USER_OUTPUT_DATE_FORMAT.parse(originalDate));
-            c.add(type, RECUR_INTERVAL_INCREMENT);
+            c.add(type, recur_interval_increment);
             return DateParser.USER_OUTPUT_DATE_FORMAT.format(c.getTime());
         } catch (ParseException pe) {
             // Do nothing as the date is optional
