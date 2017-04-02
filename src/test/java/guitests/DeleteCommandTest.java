@@ -1,36 +1,65 @@
 package guitests;
 
-//import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_ACTIVITY_SUCCESS;
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestActivity;
+import seedu.address.testutil.TestEvent;
+import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
+//@@author A0148038A
+/*
+ * GUI test for DeleteCommand
+ */
 public class DeleteCommandTest extends WhatsLeftGuiTest {
 
     @Test
-    public void delete() {
+    public void deleteEvent() {
 
         //delete the first in the list
-        TestActivity[] currentList = td.getTypicalActivities();
+        TestEvent[] currentList = te.getTypicalEvents();
         int targetIndex = 1;
-        assertDeleteSuccess(targetIndex, currentList);
+        assertDeleteEventSuccess(targetIndex, currentList);
 
         //delete the last in the list
-        currentList = TestUtil.removeActivityFromList(currentList, targetIndex);
+        currentList = TestUtil.removeEventFromList(currentList, targetIndex);
         targetIndex = currentList.length;
-        assertDeleteSuccess(targetIndex, currentList);
+        assertDeleteEventSuccess(targetIndex, currentList);
 
         //delete from the middle of the list
-        currentList = TestUtil.removeActivityFromList(currentList, targetIndex);
+        currentList = TestUtil.removeEventFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
-        assertDeleteSuccess(targetIndex, currentList);
+        assertDeleteEventSuccess(targetIndex, currentList);
 
         //invalid index
         commandBox.runCommand("delete ev " + currentList.length + 1);
-        assertResultMessage("The Event index provided is invalid");
+        assertResultMessage("The event index provided is invalid");
+
+    }
+
+    @Test
+    public void deleteTask() {
+
+        //delete the first in the list
+        TestTask[] currentList = tt.getTypicalTasks();
+        int targetIndex = 1;
+        assertDeleteTaskSuccess(targetIndex, currentList);
+
+        //delete the last in the list
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        targetIndex = currentList.length;
+        assertDeleteTaskSuccess(targetIndex, currentList);
+
+        //delete from the middle of the list
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        targetIndex = currentList.length / 2;
+        assertDeleteTaskSuccess(targetIndex, currentList);
+
+        //invalid index
+        commandBox.runCommand("delete ts " + currentList.length + 1);
+        assertResultMessage("The task index provided is invalid");
 
     }
 
@@ -39,17 +68,30 @@ public class DeleteCommandTest extends WhatsLeftGuiTest {
      * @param targetIndexOneIndexed e.g. index 1 to delete the first activity in the list,
      * @param currentList A copy of the current list of activities (before deletion).
      */
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestActivity[] currentList) {
-        TestActivity activityToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        TestActivity[] expectedRemainder = TestUtil.removeActivityFromList(currentList, targetIndexOneIndexed);
+    private void assertDeleteEventSuccess(int targetIndexOneIndexed, final TestEvent[] currentList) {
+        TestEvent eventToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestEvent[] expectedRemainder = TestUtil.removeEventFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete ev " + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous activities except the deleted activity
-        //assertTrue(activityListPanel.isListMatching(expectedRemainder));
+        //confirm the list now contains all previous events except the deleted event
+        assertTrue(eventListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_ACTIVITY_SUCCESS, activityToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_ACTIVITY_SUCCESS, eventToDelete));
+    }
+
+    private void assertDeleteTaskSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+        TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
+
+        commandBox.runCommand("delete ts " + targetIndexOneIndexed);
+
+        //confirm the list now contains all previous tasks except the deleted task
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+
+        //confirm the result message is correct
+        assertResultMessage(String.format(MESSAGE_DELETE_ACTIVITY_SUCCESS, taskToDelete));
     }
 
 }

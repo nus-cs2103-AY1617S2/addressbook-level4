@@ -168,7 +168,7 @@ public class EventListPanelHandle extends GuiHandle {
         return guiRobot.lookup(CARD_PANE_ID).queryAll();
     }
 
-    public int getNumberOfPeople() {
+    public int getNumberOfEvent() {
         return getListView().getItems().size();
     }
 }

@@ -3,13 +3,13 @@ package seedu.address.testutil;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.WhatsLeft;
 import seedu.address.model.person.Event;
-import seedu.address.model.person.UniqueEventList;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
+import seedu.address.model.person.UniqueEventList.DuplicateEventException;
 
+//@@author A0148038A
 /**
- *
+ * TypicalTestEvents for GUI test
  */
-public class TypicalTestActivities {
+public class TypicalTestEvents {
 
     public TestEvent tutorial, lecture, meeting, talk, exam, presentation, discussion, consultation, workshop;
 
@@ -87,13 +87,13 @@ public class TypicalTestActivities {
     }
 
     public static void loadWhatsLeftWithSampleData(WhatsLeft ab) {
-        for (TestActivity event : new TypicalTestActivities().getTypicalEvents()) {
+        for (TestEvent event : new TypicalTestEvents().getTypicalEvents()) {
             try {
                 ab.addEvent(new Event(event));
-            } catch (UniqueEventList.DuplicateEventException | DuplicateTimeClashException e) {
+            } catch (DuplicateEventException e) {
                 assert false : "not possible";
             }
-
+        }
     }
 
     public TestEvent[] getTypicalEvents() {

@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-
 import java.util.List;
 
 import javafx.collections.ObservableList;

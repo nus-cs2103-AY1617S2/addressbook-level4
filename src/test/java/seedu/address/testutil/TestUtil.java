@@ -296,6 +296,50 @@ public class TestUtil {
         return listOfActivities.toArray(new TestActivity[listOfActivities.size()]);
     }
 
+    /**
+     * Removes a subset from the list of events.
+     * @param events The list of events
+     * @param eventsToRemove The subset of events.
+     * @return The modified events after removal of the subset from events.
+     */
+    public static TestEvent[] removeEventsFromList(
+            final TestEvent[] events, TestEvent... eventsToRemove) {
+        List<TestEvent> listOfEvents = asList(events);
+        listOfEvents.removeAll(asList(eventsToRemove));
+        return listOfEvents.toArray(new TestEvent[listOfEvents.size()]);
+    }
+
+    /**
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasks The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
+     */
+    public static TestTask[] removeTasksFromList(
+            final TestTask[] tasks, TestTask... tasksToRemove) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.removeAll(asList(tasksToRemove));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+    }
+
+    /**
+     * Returns a copy of the list with the event at specified index removed.
+     * @param list original list to copy from
+     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     */
+    public static TestEvent[] removeEventFromList(final TestEvent[] list, int targetIndexInOneIndexedFormat) {
+        return removeEventsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    }
+
+    /**
+     * Returns a copy of the list with the task at specified index removed.
+     * @param list original list to copy from
+     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     */
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
+        return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    }
+
 
     /**
      * Returns a copy of the list with the activity at specified index removed.
@@ -328,6 +372,30 @@ public class TestUtil {
         List<TestActivity> listOfActivities = asList(activities);
         listOfActivities.addAll(asList(activitiesToAdd));
         return listOfActivities.toArray(new TestActivity[listOfActivities.size()]);
+    }
+
+    /**
+     * Appends events to the array of events.
+     * @param events A array of events.
+     * @param eventsToAdd The events that are to be appended behind the original array.
+     * @return The modified array of events.
+     */
+    public static TestEvent[] addEventsToList(final TestEvent[] events, TestEvent... eventsToAdd) {
+        List<TestEvent> listOfEvents = asList(events);
+        listOfEvents.addAll(asList(eventsToAdd));
+        return listOfEvents.toArray(new TestEvent[listOfEvents.size()]);
+    }
+
+    /**
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasks The activities that are to be appended behind the original array.
+     * @return The modified array of tasks.
+     */
+    public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.addAll(asList(tasksToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {

@@ -12,13 +12,20 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.ActivityCardHandle;
 import guitests.guihandles.ActivityListPanelHandle;
+
+//import guitests.guihandles.ActivityCardHandle;
+//import guitests.guihandles.ActivityListPanelHandle;
+
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.EventListPanelHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
@@ -26,8 +33,11 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.WhatsLeft;
 import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestActivities;
+import seedu.address.testutil.TypicalTestEvents;
+import seedu.address.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for WhatsLeft.
@@ -41,6 +51,8 @@ public abstract class WhatsLeftGuiTest {
     TestApp testApp;
 
     protected TypicalTestActivities td = new TypicalTestActivities();
+    protected TypicalTestEvents te = new TypicalTestEvents();
+    protected TypicalTestTasks tt = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -49,6 +61,8 @@ public abstract class WhatsLeftGuiTest {
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
     protected ActivityListPanelHandle activityListPanel;
+    protected EventListPanelHandle eventListPanel;
+    protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -104,18 +118,33 @@ public abstract class WhatsLeftGuiTest {
     }
 
     /**
-     * Asserts the activity shown in the card is same as the given activity
+     * Asserts the event shown in the card is same as the given activity
      */
-    public void assertMatching(ReadOnlyEvent event, ActivityCardHandle card) {
+    public void assertMatchingEvent(ReadOnlyEvent event, EventCardHandle card) {
         assertTrue(TestUtil.compareCardAndEvent(card, event));
     }
 
     /**
-     * Asserts the size of the activity list is equal to the given number.
+     * Asserts the task shown in the card is same as the given activity
      */
-    protected void assertListSize(int size) {
-        int numberOfPeople = activityListPanel.getNumberOfPeople();
-        assertEquals(size, numberOfPeople);
+    public void assertMatchingTask(ReadOnlyTask task, TaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndTask(card, task));
+    }
+
+    /**
+     * Asserts the size of the event list is equal to the given number.
+     */
+    protected void assertEventListSize(int size) {
+        int numberOfEvent = eventListPanel.getNumberOfEvent();
+        assertEquals(size, numberOfEvent);
+    }
+
+    /**
+     * Asserts the size of the task list is equal to the given number.
+     */
+    protected void assertTaskListSize(int size) {
+        int numberOfTask = taskListPanel.getNumberOfTask();
+        assertEquals(size, numberOfTask);
     }
 
     /**

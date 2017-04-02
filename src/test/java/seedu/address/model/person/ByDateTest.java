@@ -10,8 +10,8 @@ public class ByDateTest {
     @Test
     public void isValidFromDate() {
         //invalid day
-        assertFalse(ByDate.isValidByDate("320416")); //2400 and above
-        assertFalse(ByDate.isValidByDate("500216")); //2400 and above
+        assertFalse(ByDate.isValidByDate("320416")); //no 32nd
+        assertFalse(ByDate.isValidByDate("500216")); //no 50th
 
         //invalid month
         assertFalse(ByDate.isValidByDate("311316")); //no 13 month
