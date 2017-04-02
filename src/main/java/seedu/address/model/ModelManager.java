@@ -106,41 +106,55 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        this.sort();
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        this.sort();
         filteredTasks.setPredicate(null);
     }
 
     @Override
     public void updateFilteredTaskListByKeywords(Set<String> keywords) {
-        this.sort();
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
-        this.sort();
         filteredTasks.setPredicate(expression::satisfies);
     }
 
     public void updateFilteredTaskListByDate(Deadline deadline) {
-        this.sort();
         updateFilteredTaskList(new PredicateExpression(new TaskQualifierByDate(deadline)));
     }
 
-    private void sort() {
+    public void sort(String arg) {
         if (filteredTasks.size() == 0 || filteredTasks == null) {
             return;
         }
 
-        bubblesort(filteredTasks.size() - 1);
+        if (arg.equals("name")) {
+            bubbleSortName(filteredTasks.size() - 1);
+        } else {
+            bubbleSortDate(filteredTasks.size() - 1);
+        }
+
     }
 
-    private void bubblesort(int upper) {
+    private void bubbleSortName(int upper) {
+        boolean flag = true;
+
+        while (flag) {
+            flag = false;
+            for (int k = 0; k < upper; k++) {
+                if (getCName(k).compareTo(getCName(k + 1)) > 0) {
+                    exchange(k , k + 1);
+                    flag = true;
+                }
+            }
+        }
+    }
+
+    private void bubbleSortDate(int upper) {
         boolean flag = true;
 
         while (flag) {
@@ -152,6 +166,10 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
         }
+    }
+
+    private String getCName(int task) {
+        return filteredTasks.get(task).getName().toString();
     }
 
     private long getCTime(int task) {
