@@ -16,15 +16,15 @@ public class SortCommandParser {
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns an DeleteCommand object for execution.
      */
-    public Command parse(String args) {
+    public Command parse(String para) {
 
-        args = args.trim();
-        if (!args.equals("name") && !args.equals("deadline")) {
+        para = para.trim();
+        if (!"name".equals(para) && !"deadline".equals(para)) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        return new SortCommand(args);
+        return new SortCommand(para);
     }
 
 }

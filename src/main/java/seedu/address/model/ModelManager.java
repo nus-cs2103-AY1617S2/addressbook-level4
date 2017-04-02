@@ -129,12 +129,12 @@ public class ModelManager extends ComponentManager implements Model {
 
   //@@ author A0138377U
     @Override
-    public void sort(String arg) {
+    public void sort(String para) {
         if (filteredTasks.size() == 0 || filteredTasks == null) {
             return;
         }
 
-        if (arg.equals("name")) {
+        if ("name".equals(para)) {
             bubbleSortName(filteredTasks.size() - 1);
         } else {
             bubbleSortDate(filteredTasks.size() - 1);
