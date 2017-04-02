@@ -17,7 +17,7 @@ public class DateParser {
 
     public static final String USER_DATE_OUTPUT_FORMAT = "dd/MM/yyyy HH:mm";
     public static final String DAY_MONTH_YEAR_FORMAT = "^([0-9]{1,2}[-/])([0-9]{1,2}[-/])([0-9]{4}.*)";
-    public static final SimpleDateFormat userOutputDateFormat = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
+    public static final SimpleDateFormat USER_OUTPUT_DATE_FORMAT = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
 
     public String value;
 
@@ -67,7 +67,7 @@ public class DateParser {
             Date parsedDate = dateGroupList.get(0).getDates().get(0);
 
             // Format parsed date to suit the UI
-            return userOutputDateFormat.format(parsedDate);
+            return USER_OUTPUT_DATE_FORMAT.format(parsedDate);
 
         } catch (IndexOutOfBoundsException e) {
             return taskDate;

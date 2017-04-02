@@ -11,6 +11,7 @@ import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
@@ -25,9 +26,9 @@ public class UniqueTaskListEnumTest {
     @PrepareForTest(SortCriteria.class)
     public void unknownValueShouldThrowException() throws Exception {
         utl.add(new Task(new Name("lol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),
-                new UniqueTagList("jesus")));
+                new Recur(""), new UniqueTagList("jesus")));
         utl.add(new Task(new Name("lasdfol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),
-                new UniqueTagList("jesus")));
+                new Recur(""), new UniqueTagList("jesus")));
 
         SortCriteria C = PowerMockito.mock(SortCriteria.class);
         Whitebox.setInternalState(C, "name", "C");

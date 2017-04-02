@@ -181,7 +181,7 @@ public class EzDo implements ReadOnlyEzDo {
                 String dueDate = updateDate(recurringInterval, dueDateInString);
 
                 tasks.add(new Task(task.getName(), task.getPriority(), new StartDate(startDate),
-                        new DueDate(dueDate), task.getRecur(), task.getTags()));
+                        new DueDate(dueDate), new Recur(""), task.getTags()));
 
             } catch (IllegalValueException ive) {
                 // Do nothing as the date is optional
@@ -194,9 +194,9 @@ public class EzDo implements ReadOnlyEzDo {
         try {
             int RECUR_INTERVAL_INCREMENT = 1;
             Calendar c = Calendar.getInstance();
-            c.setTime(DateParser.userOutputDateFormat.parse(originalDate));
+            c.setTime(DateParser.USER_OUTPUT_DATE_FORMAT.parse(originalDate));
             c.add(type, RECUR_INTERVAL_INCREMENT);
-            return DateParser.userOutputDateFormat.format(c.getTime());
+            return DateParser.USER_OUTPUT_DATE_FORMAT.format(c.getTime());
         } catch (ParseException pe) {
             // Do nothing as the date is optional
             // and cannot be parsed as Date object
