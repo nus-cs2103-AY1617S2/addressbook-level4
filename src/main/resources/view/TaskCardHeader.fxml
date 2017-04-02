@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- @@author A0139177W -->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -19,28 +21,28 @@
          <children>
             <HBox spacing="10.0">
                <children>
-                  <Label alignment="BOTTOM_RIGHT" minWidth="75.0" styleClass="cell_small_label" text="Index" textAlignment="RIGHT" wrapText="true">
+                  <Label alignment="BOTTOM_RIGHT" minWidth="80.0" styleClass="task-header" text="Index" textAlignment="RIGHT" wrapText="true">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Label>
 
-                  <Label alignment="BOTTOM_LEFT" minWidth="400.0" prefWidth="400.0" styleClass="cell_small_label" text="Task" wrapText="true">
+                  <Label alignment="BOTTOM_LEFT" minWidth="400.0" prefWidth="400.0" styleClass="task-header" text="Task" wrapText="true">
                      <HBox.margin>
                         <Insets right="80.0" />
                      </HBox.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" minWidth="180.0" prefWidth="180.0" styleClass="cell_small_label" text="Start Date" wrapText="true">
+                  <Label alignment="BOTTOM_LEFT" minWidth="150.0" prefWidth="150.0" styleClass="task-header" text="Start Date" wrapText="true">
                      <HBox.margin>
                         <Insets right="80.0" />
                      </HBox.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" minWidth="180.0" prefWidth="180.0" styleClass="cell_small_label" text="Due Date" wrapText="true">
+                  <Label alignment="BOTTOM_LEFT" minWidth="150.0" prefWidth="150.0" styleClass="task-header" text="Due Date" wrapText="true">
                      <HBox.margin>
                         <Insets right="80.0" />
                      </HBox.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" minWidth="180.0" prefWidth="180.0" styleClass="cell_small_label" text="Tags" wrapText="true" />
+                  <Label alignment="BOTTOM_LEFT" minWidth="180.0" prefWidth="180.0" styleClass="task-header" text="Tags" wrapText="true" />
                </children>
                <GridPane.margin>
                   <Insets />
