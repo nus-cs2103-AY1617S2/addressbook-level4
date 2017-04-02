@@ -18,7 +18,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
 /**
  * Edits the details of an existing task in GeeKeep.
  */
-public class UpdateCommand extends Command {
+public class UpdateCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "update";
 

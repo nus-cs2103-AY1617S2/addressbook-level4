@@ -9,7 +9,7 @@ import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 /**
  * Deletes a task identified using it's last displayed index from GeeKeep.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "delete";
 
