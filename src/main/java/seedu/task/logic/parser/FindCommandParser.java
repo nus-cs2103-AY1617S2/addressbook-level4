@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.DateUtil;
+import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -36,24 +37,17 @@ public class FindCommandParser extends CommandParser {
         }
         
         Date targetDate = null;
-//        if(Date.isValidDate(args)){
-//            try {
-//                targetDate = new Date(args);
-//            } catch (IllegalValueException ive) {
-//                // TODO Auto-generated catch block
-//                logger.info(ive.getMessage());
-//            }
-//        }
-//        System.out.println(targetDate.toString());
 
         // keywords delimited by whitespace
         String[] keywords = matcher.group("keywords").split("\\s+");
         // if a targetDate is successfully extracted, the used words in the keywords are removed
         targetDate = DateUtil.extractValidDate(keywords);
-        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        if(targetDate!=null)System.out.println(targetDate.toString());
-        System.out.println(Arrays.toString(keywords));
-        
+        final Set<String> keywordSet = new HashSet<>(StringUtil.asListWithoutEmptyString(keywords));
+//        System.out.println(StringUtil.asListWithoutEmptyString(keywords));
+//        if(targetDate!=null){
+//            System.out.println(targetDate.toString());
+//            System.out.println(targetDate.getExtractedFrom()+" information");
+//        }
         return targetDate==null? new FindCommand(keywordSet):new FindCommand(keywordSet,targetDate);
     }
 

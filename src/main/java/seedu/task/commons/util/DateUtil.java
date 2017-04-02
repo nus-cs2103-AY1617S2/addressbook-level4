@@ -23,8 +23,9 @@ public class DateUtil {
      * Extracts valid information by parsing a sentence to formulate a Date object. If no valid date can be inferred, an
      * empty Date object will be returned.
      * 
-     *  If a valid Date is succefully extracted, the given String[] will be modified
-     *  E.g. sentence is : Do work Thursday -> Do work after the extraction of Thursday.
+     * If a valid Date is succefully extracted, the given String[] will be modified E.g. sentence is : Do work Thursday
+     * -> Do work after the extraction of Thursday.
+     * 
      * @param sentence
      * @return
      */
@@ -33,20 +34,24 @@ public class DateUtil {
         assert sentence != null;
         Date date = null, tempDate;
         String[] words = sentence;
-        for (int i = words.length; i > 0; i--) {
-            for (int j = 0; j < i; j++) {
-                String[] tempSentence = (String[]) Arrays.copyOfRange(words, j, i - 1);
-                tempDate = extractValidDate(tempSentence, i);
+        String[] currentDateWords ={};// the words that form the currently accepted date
+        for (int length = words.length; length > 0; length--) {
+            for (int start = 0; start + length <= words.length; start++) {
+                String[] tempSentence = (String[]) Arrays.copyOfRange(words, start, start + length);
+                tempDate = extractValidDate(tempSentence, length);
                 if (tempDate != null) {
                     if (date == null) {
                         date = tempDate;
-                    } else if (!date.equalsIgnoreTime(tempDate)) {
-                        removeUsedWordsFromSentence(sentence, tempSentence);
-                        return date;
+                        currentDateWords = tempSentence;
+                    } else if (date.equalsIgnoreTime(tempDate)) {
+                        currentDateWords = tempSentence;
+//                        System.out.println(Arrays.toString(tempSentence));
+//                        System.out.println(Arrays.toString(currentDateWords));
                     }
                 }
             }
         }
+        removeUsedWordsFromSentence(sentence, currentDateWords);
         return date == null ? new Date() : date;
 
     }
