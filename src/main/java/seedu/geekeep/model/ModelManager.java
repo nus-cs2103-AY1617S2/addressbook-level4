@@ -249,7 +249,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateUndoableCommandHistory(String commandText) {
+        while (undoableCommandHistory.size() > undoableCommandHistoryIndex) {
+            undoableCommandHistory.remove(undoableCommandHistory.size() - 1);
+        }
         undoableCommandHistory.add(commandText);
+        undoableCommandHistoryIndex++;
     }
 
     public void updateGeekeepHistory(ReadOnlyGeeKeep originalGeekeepClone) {
