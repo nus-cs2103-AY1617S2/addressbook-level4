@@ -1,8 +1,6 @@
 package seedu.opus.model;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -12,10 +10,7 @@ import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
 import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.commons.util.CollectionUtil;
-import seedu.opus.model.qualifier.NameQualifier;
-import seedu.opus.model.qualifier.NoteQualifier;
 import seedu.opus.model.qualifier.Qualifier;
-import seedu.opus.model.qualifier.TagQualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
@@ -132,13 +127,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
-    @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(
-                new NameQualifier(keywords), new NoteQualifier(keywords), new TagQualifier(keywords)
-                ));
-    }
-
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -153,10 +141,6 @@ public class ModelManager extends ComponentManager implements Model {
     private class PredicateExpression implements Expression {
 
         private final List<Qualifier> qualifiers;
-
-        PredicateExpression(Qualifier... qualifiers) {
-            this.qualifiers = Arrays.asList(qualifiers);
-        }
 
         PredicateExpression(List<Qualifier> qualifiers) {
             this.qualifiers = qualifiers;

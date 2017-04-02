@@ -9,12 +9,17 @@ import static seedu.opus.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 
 import seedu.opus.logic.commands.Command;
 import seedu.opus.logic.commands.FindCommand;
 import seedu.opus.logic.commands.IncorrectCommand;
+import seedu.opus.model.qualifier.NameQualifier;
+import seedu.opus.model.qualifier.NoteQualifier;
+import seedu.opus.model.qualifier.Qualifier;
+import seedu.opus.model.qualifier.TagQualifier;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -41,7 +46,9 @@ public class FindCommandParser {
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet);
+        List<Qualifier> qualifiers = Arrays.asList(
+                new NameQualifier(keywordSet), new NoteQualifier(keywordSet), new TagQualifier(keywordSet));
+        return new FindCommand(qualifiers);
     }
 
 }
