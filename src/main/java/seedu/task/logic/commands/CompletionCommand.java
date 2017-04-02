@@ -82,7 +82,7 @@ public abstract class CompletionCommand extends Command {
             boolean shouldMarkComplete,
             String messageSameState
     ) throws NoChangeException {
-        if (task.getComplete().getCompletion() == shouldMarkComplete) {
+        if (task.getComplete().isComplete == shouldMarkComplete) {
             throw new NoChangeException(messageSameState);
         }
         Description description = task.getDescription();

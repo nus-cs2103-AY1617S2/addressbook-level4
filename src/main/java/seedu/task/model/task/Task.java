@@ -48,7 +48,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags(),
-                new Complete(source.getComplete().completion), source.getTaskId());
+                new Complete(source.getComplete().isComplete), source.getTaskId());
     }
 
     @Override
@@ -86,23 +86,19 @@ public class Task implements ReadOnlyTask {
         return duration;
     }
 
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
     @Override
     public Complete getComplete() {
         return complete;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setComplete(Complete completion) {
+        this.complete = completion;
     }
     //@@author
-
-    public void setComplete() {
-        this.complete.setComplete();
-    }
-
-    public void setNotComplete() {
-        this.complete.setNotComplete();
-    }
 
     @Override
     public UniqueTagList getTags() {
@@ -126,11 +122,7 @@ public class Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setDuration(replacement.getDuration());
         this.setDueDate(replacement.getDueDate());
-        if (replacement.getComplete().getCompletion()) {
-            this.setComplete();
-        } else {
-            this.setNotComplete();
-        }
+        this.setComplete(replacement.getComplete());
         this.setTags(replacement.getTags());
     }
 

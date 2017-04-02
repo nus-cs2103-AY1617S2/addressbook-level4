@@ -84,7 +84,7 @@ public class XmlAdaptedTask {
                 new DueDate(this.dueDate) :
                 null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        final Complete complete = this.complete.equals(Complete.COMPLETE_VALUE) ?
+        final Complete complete = this.complete.equals(Complete.COMPLETE_STRING) ?
             new Complete(true) : new Complete(false);
         final TaskId id = new TaskId(this.id);
         return new Task(description, dueDate, duration, tags, complete, id);

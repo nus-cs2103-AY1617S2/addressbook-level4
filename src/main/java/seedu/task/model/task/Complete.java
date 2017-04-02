@@ -1,37 +1,19 @@
+//@@author A0163744B
 package seedu.task.model.task;
-
-import seedu.task.commons.exceptions.IllegalValueException;
 
 public class Complete {
 
-    public static final String COMPLETE_VALUE = "true";
-    public static final String UNCOMPLETE_VALUE = "false";
+    public static final String COMPLETE_STRING = "true";
+    public static final String INCOMPLETE_STRING = "false";
 
-    public boolean completion = false;
+    public final boolean isComplete;
 
-    /**
-    * Validates given description.
-    *
-    * @throws IllegalValueException if given description string is invalid.
-    */
-    public Complete(boolean completion) {
-        this.completion = completion;
-    }
-
-    public void setComplete() {
-        this.completion = true;
-    }
-
-    public void setNotComplete() {
-        this.completion = false;
-    }
-
-    public boolean getCompletion() {
-        return this.completion;
+    public Complete(boolean isComplete) {
+        this.isComplete = isComplete;
     }
 
     public String getString() {
-        return completion == true ? COMPLETE_VALUE : UNCOMPLETE_VALUE;
+        return isComplete == true ? COMPLETE_STRING : INCOMPLETE_STRING;
     }
 
 }

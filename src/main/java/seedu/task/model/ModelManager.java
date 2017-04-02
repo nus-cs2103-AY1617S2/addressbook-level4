@@ -217,7 +217,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getComplete().getCompletion() == this.isComplete;
+            return task.getComplete().isComplete == this.isComplete;
         }
 
         @Override

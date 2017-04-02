@@ -70,6 +70,6 @@ public class TaskCard extends UiPart<Region> {
         if (task.getComplete() == null) {
             return;
         }
-        complete.setText(task.getComplete().getCompletion() ? CHECKMARK_STRING : EMPTY_STRING);
+        complete.setText(task.getComplete().isComplete ? CHECKMARK_STRING : EMPTY_STRING);
     }
 }
