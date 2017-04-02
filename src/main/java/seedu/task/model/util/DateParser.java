@@ -17,7 +17,7 @@ public class DateParser {
     private static final String EMPTY_DATE_STRING = "";
     private static final int MONTH_OFFSET = 1;
 
-    //@@author A160004845
+    //@@author A0164103W
     private static int parsedDate[] = new int[3];
     private static final int DAY_INDEX = 0;
     private static final int MONTH_INDEX = 1;
@@ -87,7 +87,7 @@ public class DateParser {
         return true;
     }
 
-    //@@author A160004845
+    //@@author A0164103W
     private static int[] getDate(String date) throws IllegalValueException {
         Calendar calDate = Calendar.getInstance();
         int dayOfWeek = calDate.get(Calendar.DAY_OF_WEEK);
