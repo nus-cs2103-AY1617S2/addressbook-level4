@@ -17,7 +17,6 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -113,7 +112,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     public void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
         taskTabPanel = new TaskTabPanel(taskTabPanelPlaceHolder, logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
@@ -210,13 +208,4 @@ public class MainWindow extends UiPart<Region> {
     public void switchTabOnClick() {
         taskTabPanel.switchTabOnClick();
     }
-
-    public void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    public void releaseResources() {
-        browserPanel.freeResources();
-    }
-
 }
