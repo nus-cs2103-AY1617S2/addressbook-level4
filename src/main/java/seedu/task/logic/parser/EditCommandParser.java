@@ -23,7 +23,9 @@ import seedu.task.model.tag.UniqueTagList;
  */
 public class EditCommandParser {
 
-    //@@author A0163673Y-reused
+    //@@author A0163673Y
+    public static final String EMPTY_STRING = "";
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -33,7 +35,8 @@ public class EditCommandParser {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_TAG, PREFIX_START, PREFIX_END, PREFIX_DUEDATE);
         argsTokenizer.tokenize(args);
-        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(
+                argsTokenizer.getPreamble().orElse(EMPTY_STRING), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
@@ -44,9 +47,23 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(1)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-            editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(argsTokenizer.getValue(PREFIX_DUEDATE)));
-            editTaskDescriptor.setDurationStart(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_START)));
-            editTaskDescriptor.setDurationEnd(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_END)));
+            // handle parsing of due date
+            if (argsTokenizer.getValue(PREFIX_DUEDATE).isPresent()
+                    && argsTokenizer.getValue(PREFIX_DUEDATE).get().equals(EMPTY_STRING)) {
+                editTaskDescriptor.setDeleteDueDate(true);
+            } else {
+                editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(argsTokenizer.getValue(PREFIX_DUEDATE)));
+            }
+            // handle parsing of duration
+            if (argsTokenizer.getValue(PREFIX_START).isPresent()
+                    && argsTokenizer.getValue(PREFIX_END).isPresent()
+                    && argsTokenizer.getValue(PREFIX_START).get().equals(EMPTY_STRING)
+                    && argsTokenizer.getValue(PREFIX_END).get().equals(EMPTY_STRING)) {
+                editTaskDescriptor.setDeleteDuration(true);
+            } else {
+                editTaskDescriptor.setDurationStart(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_START)));
+                editTaskDescriptor.setDurationEnd(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_END)));
+            }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -70,7 +87,7 @@ public class EditCommandParser {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        Collection<String> tagSet = tags.size() == 1 && tags.contains(EMPTY_STRING) ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 

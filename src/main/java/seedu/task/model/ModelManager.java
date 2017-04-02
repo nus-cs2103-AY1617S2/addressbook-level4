@@ -187,7 +187,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
-        //@@author A0163673Y-reused
+        //@@author A0163673Y
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
