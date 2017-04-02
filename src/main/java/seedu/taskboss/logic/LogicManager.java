@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.taskboss.commons.core.ComponentManager;
 import seedu.taskboss.commons.core.LogsCenter;
-import seedu.taskboss.commons.exceptions.DefaultCategoryException;
+import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.CommandResult;
@@ -34,7 +34,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException,
-        IllegalValueException, InvalidDatesException, DefaultCategoryException {
+        IllegalValueException, InvalidDatesException, BuiltInCategoryException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
