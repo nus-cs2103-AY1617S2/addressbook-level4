@@ -16,12 +16,12 @@ public class StartEndDateTime {
     private ZonedDateTime endDateTime;
 
     /**
-     * Constructs a new StartDateTime with the given start and end DateTime.
+     * Constructs a new StartDateTime with the given start and end date-time.
      *
-     * @param startDateTime the start DateTime
-     * @param endDateTime the end DateTime
-     * @throws PastDateTimeException if any of the DateTimes are before the current DateTime
-     * @throws InvalidDurationException if the end DateTime is before or same as the start DateTime
+     * @param startDateTime the start date-time
+     * @param endDateTime the end date-time
+     * @throws PastDateTimeException if any of the date-times are before the current date-time
+     * @throws InvalidDurationException if the end date-time is before or same as the start date-time
      */
     public StartEndDateTime(ZonedDateTime startDateTime, ZonedDateTime endDateTime)
             throws PastDateTimeException, InvalidDurationException {
@@ -29,25 +29,26 @@ public class StartEndDateTime {
     }
 
     /**
-     * Constructs a new StartEndDateTime with the given start and end DateTime. Ignores checking for
+     * Constructs a new StartEndDateTime with the given start and end date-time. Ignores checking for
      * dates in the past if {@code ignorePast} is true.
      *
-     * @param startDateTime the start DateTime
-     * @param endDateTime the end DateTime
-     * @param allowPastDateTime ignore checking if DateTimes are in the past. Avoid setting to true
+     * @param startDateTime the start date-time
+     * @param endDateTime the end date-time
+     * @param allowPastDateTime ignore checking if date-times are in the past. Avoid setting to true
      *        except for special cases such as loading from storage
-     * @throws PastDateTimeException if any of the DateTimes are before the current DateTime and
+     * @throws PastDateTimeException if any of the date-times are before the current date-time and
      *         {@code allowPastDateTime} is {@code false}
-     * @throws InvalidDurationException if the end DateTime is before or same as the start DateTime
+     * @throws InvalidDurationException if the end date-time is before or same as the start date-time
      */
     public StartEndDateTime(ZonedDateTime startDateTime, ZonedDateTime endDateTime, boolean allowPastDateTime)
             throws PastDateTimeException, InvalidDurationException {
         assert startDateTime != null && endDateTime != null;
 
         if (!allowPastDateTime) {
-            // fix the current date time otherwise testing startDateTime might pass but
-            // testing endDateTime might fail because the current DateTime might have passed endDateTime
+            // Keep a snapshot of current date time otherwise startDateTime might be after the current date but
+            // endDateTime might be before the current date due to a different currentDateTime used
             ZonedDateTime currentDateTime = ZonedDateTime.now();
+
             if (startDateTime.isBefore(currentDateTime)) {
                 throw new PastDateTimeException(MESSAGE_STARTDATETIME_CONSTRAINTS);
             }

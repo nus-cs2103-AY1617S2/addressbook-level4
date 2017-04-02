@@ -26,48 +26,7 @@ public class EditCommandParser {
      * and returns an EditCommand object for execution.
      */
     public Command parse(String args) {
-        assert args != null;
-        // TODO use the new dateTimeExtractor class
-        DateTimeExtractor dateTimeExtractor = new DateTimeExtractor(args);
-        // TODO Returns an exception in a method? Doesn't make sense
-        // Returns a string? seems brittle, therefore to rewrite the class to preserve state
-        try {
-            // process StartEndDateTime first because it is more constrained
-            // TODO there are special from and to cases so maybe we don't have to necessarily process
-            // this first. create a special optional regex for this?
-            //dateTimeExtractor.processStartEndDateTime();
-            dateTimeExtractor.processRawStartEndDateTime();
-        } catch (IllegalValueException e) {
-            // Dates can't be parsed so we silently skip first
-            // all other exceptions have been handled
-            // Pass rose from Uncle to Jane by tmr
-            // we should not return an error because that case is a valid task
-            System.out.println("No date is found for start and end date");
-        }
-        // TODO Returns an exception in a method? Doesn't make sense
-        // Returns a string? seems brittle
-        try {
-            dateTimeExtractor.processRawDeadline();
-        } catch (IllegalValueException e) {
-            // No date is found so we silently skip
-            System.out.println("No date found for deadline!");
-        }
-        // TODO process from later
-        // because for example edit 10 test by 2 days from 25 Apr
-        // note again that edit 10 test by 2 days later from 25 Apr will ignore the from later
-        try {
-            dateTimeExtractor.processRawStartDateTime();
-        } catch (IllegalValueException e) {
-            // No date is found so we silently skip
-            System.out.println("No date found for start date only!");
-        }
-        // TODO process to later because it is even shorter
-        try {
-            dateTimeExtractor.processRawEndDateTime();
-        } catch (IllegalValueException e) {
-            // No date is found so we silently skip
-            System.out.println("No date found for start date only!");
-        }
+        DateTimeExtractor dateTimeExtractor = extractDateTimes(args);
 
         // TODO ArgumentTokenizer became very irrelevant in this class but is it still relevant for other classes?
         ArgumentTokenizer argsTokenizer =
@@ -84,23 +43,43 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
 
+            // set raw dates as they are to be referenced from the task's previous dates
             editTaskDescriptor.setRawDeadline(dateTimeExtractor.getProcessedRawDeadline());
-            editTaskDescriptor.setRawStartDateTime(dateTimeExtractor.getProcessedStartDateTime());
-            editTaskDescriptor.setRawEndDateTime(dateTimeExtractor.getProcessedEndDateTime());
+            editTaskDescriptor.setRawStartDateTime(dateTimeExtractor.getProcessedRawStartDateTime());
+            editTaskDescriptor.setRawEndDateTime(dateTimeExtractor.getProcessedRawEndDateTime());
 
-
-            //editTaskDescriptor.setDeadline(
-            //        ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE_DATETIME)));
-            //editTaskDescriptor.setStartEndDateTime(
-            //        ParserUtil.parseStartEndDateTime(argsTokenizer.getValue(PREFIX_START_DATETIME),
-            //                                         argsTokenizer.getValue(PREFIX_END_DATETIME)));
             editTaskDescriptor.setTagList(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
         return new EditCommand(index.get(), editTaskDescriptor);
-        // TODO note that there is a NoFieldEditedException handled in execute, thus to change
+    }
+
+    /**
+     * Extracts date-times from the arguments if they exist and returns a {@link DateTimeExtractor} with the
+     * processed raw date-times if they exist.
+     *
+     * @param args the arguments to extract date/time from
+     */
+    private DateTimeExtractor extractDateTimes(String args) {
+        // TODO extract comments for testing
+        DateTimeExtractor dateTimeExtractor = new DateTimeExtractor(args);
+        // process StartEndDateTime first because it is more likely to fail due to more constraints
+        // e.g. from [some date to some date] will be parsed as a single date if we process only the
+        // startDateTime first
+        // Pass rose from Uncle to Jane by tmr
+        // we should not return an error because that case is a valid task
+        dateTimeExtractor.processRawStartEndDateTime();
+        // constraints for deadline are looser so it is less likely to fail
+        dateTimeExtractor.processRawDeadline();
+        // TODO process from later
+        // because for example edit 10 test by 2 days from 25 Apr
+        // note again that edit 10 test by 2 days later from 25 Apr will ignore the from later
+        dateTimeExtractor.processRawStartDateTime();
+        dateTimeExtractor.processRawEndDateTime();
+
+        return dateTimeExtractor;
     }
 
     //@@author

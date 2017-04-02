@@ -256,7 +256,7 @@ public class ParserUtil {
     /**
      * Returns if Date strings are valid DateTimes.
      */
-    public static boolean isDateTimeString(String dateTime) throws IllegalValueException {
+    public static boolean isDateTimeString(String dateTime) {
         List<DateGroup> groups = dateTimeParser.parse(dateTime);
         // TODO check if only one group and only one date from list (date alternatives)
         for (DateGroup group : groups) {

@@ -34,7 +34,6 @@ public class Deadline {
     public Deadline(ZonedDateTime dateTime, boolean allowPastDateTime) throws PastDateTimeException {
         assert dateTime != null;
 
-        // TODO
         if (!allowPastDateTime) {
             if (dateTime.isBefore(ZonedDateTime.now())) {
                 throw new PastDateTimeException(MESSAGE_DEADLINE_CONSTRAINTS);

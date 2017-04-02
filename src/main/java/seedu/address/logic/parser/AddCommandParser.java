@@ -18,38 +18,18 @@ import seedu.address.model.task.exceptions.PastDateTimeException;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser {
+    //private DateTimeExtractor dateTimeExtractor;
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        DateTimeExtractor dateTimeExtractor = new DateTimeExtractor(args);
-        // TODO Returns an exception in a method? Doesn't make sense
-        // Returns a string? seems brittle, therefore to rewrite the class to preserve state
+        DateTimeExtractor dateTimeExtractor;
         try {
-            // process StartEndDateTime first because it is more constrained
-            dateTimeExtractor.processStartEndDateTime();
-        } catch (PastDateTimeException e) {
+            dateTimeExtractor = extractDateTimes(args);
+        } catch (PastDateTimeException | InvalidDurationException e) {
             return new IncorrectCommand(e.getMessage());
-        } catch (InvalidDurationException e) {
-            return new IncorrectCommand(e.getMessage());
-        } catch (IllegalValueException e) {
-            // Dates can't be parsed so we silently skip first
-            // all other exceptions have been handled
-            // Pass rose from Uncle to Jane by tmr
-            // we should not return an error because that case is a valid task
-            System.out.println("No date is found for start and end date");
-        }
-        // TODO Returns an exception in a method? Doesn't make sense
-        // Returns a string? seems brittle
-        try {
-            dateTimeExtractor.processDeadline();
-        } catch (PastDateTimeException e) {
-            return new IncorrectCommand(e.getMessage());
-        } catch (IllegalValueException e) {
-            // No date is found so we silently skip
-            System.out.println("No date found for deadline!");
         }
 
         // TODO ArgumentTokenizer became very irrelevant in this class but is it still relevant for other classes?
@@ -66,6 +46,26 @@ public class AddCommandParser {
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+    }
+
+    /**
+     * Extracts date-times from the arguments if they exist and returns a {@link DateTimeExtractor}
+     * with the processed date-times if they exist.
+     *
+     * @param args the arguments to extract date/time from
+     * @throws PastDateTimeException if any of the extracted date-times are in the past
+     * @throws InvalidDurationException if a start and end date-time is found and the end date-time
+     *         is before or same as the start date-time
+     */
+    private DateTimeExtractor extractDateTimes(String args)
+            throws PastDateTimeException, InvalidDurationException {
+        DateTimeExtractor dateTimeExtractor = new DateTimeExtractor(args);
+        // process StartEndDateTime first because it is more likely to fail due to more constraints
+        dateTimeExtractor.processStartEndDateTime();
+        // constraints for deadline are looser so it is less likely to fail
+        dateTimeExtractor.processDeadline();
+
+        return dateTimeExtractor;
     }
 
 }

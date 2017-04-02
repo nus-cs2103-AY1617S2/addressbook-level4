@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.tag.UniqueTagList;
@@ -34,7 +33,7 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 by the day after tomorrow";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit that is different must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
 
     private final int filteredTaskListIndex;
@@ -52,8 +51,6 @@ public class EditCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
-        // TODO if we don't know which index, we don't know if date is past date, and if we don't know if date
-        // is past date we can't construct it
     }
 
     //@@author A0140023E
@@ -66,29 +63,20 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        //Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
         try {
             editTaskDescriptor.processFields(taskToEdit);
-        } catch (PastDateTimeException e) {
-            throw new CommandException(e.getMessage());
-        } catch (InvalidDurationException e) {
-            throw new CommandException(e.getMessage());
-        } catch (IllegalValueException e) {
+        } catch (PastDateTimeException | InvalidDurationException | IllegalValueException e) {
             throw new CommandException(e.getMessage());
         }
 
-        // TODO convert to exception like a NoFieldEditedException
-        if (!this.editTaskDescriptor.isAnyFieldEdited()) {
+        if (!this.editTaskDescriptor.isAnyFieldEdited(taskToEdit)) {
             throw new CommandException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        Name updatedName = editTaskDescriptor.getUpdatedName();
-        Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline(); // getUpdatedDeadline
-        // getUpdatedStartEndDateTime
-        Optional<StartEndDateTime> updatedStartEndDateTime = editTaskDescriptor.getStartEndDateTime();
-        UniqueTagList updatedTagList = editTaskDescriptor.getUpdatedTagList();
-
-        Task editedTask = new Task(updatedName, updatedDeadline, updatedStartEndDateTime, updatedTagList);
+        Task editedTask = new Task(editTaskDescriptor.getUpdatedName(),
+                editTaskDescriptor.getUpdatedDeadline(),
+                editTaskDescriptor.getUpdatedStartEndDateTime(),
+                editTaskDescriptor.getUpdatedTagList());
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -105,131 +93,187 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
-        private Optional<StartEndDateTime> startEndDateTime = Optional.empty();
+        private Optional<String> rawDeadline = Optional.empty();
+        private Optional<String> rawStartDateTime = Optional.empty();
+        private Optional<String> rawEndDateTime = Optional.empty();
         private Optional<UniqueTagList> tagList = Optional.empty();
 
-        private Optional<String> rawDeadline;
-        private Optional<String> rawStartDateTime;
-        private Optional<String> rawEndDateTime;
-
         private Name updatedName;
+        private Optional<Deadline> updatedDeadline;
+        private Optional<StartEndDateTime> updatedStartEndDateTime;
         private UniqueTagList updatedTagList;
 
         public EditTaskDescriptor() {}
 
-        public void processFields(ReadOnlyTask taskToEdit)
-                throws PastDateTimeException, InvalidDurationException, IllegalValueException {
-
-            updatedName = getName().orElseGet(taskToEdit::getName);
-
-            if (getRawDeadline().isPresent()) {
-                if (taskToEdit.getDeadline().isPresent()) {
-                    // Bubble up the exception
-                    deadline = ParserUtil.parseEditedDeadline(getRawDeadline(), taskToEdit.getDeadline().get());
-                } else {
-                    deadline = ParserUtil.parseNewDeadline(getRawDeadline());
-                }
-            } else {
-                deadline = taskToEdit.getDeadline();
-            }
-
-            startEndDateTime = Optional.empty();
-            if (getRawStartDateTime().isPresent() && !getRawEndDateTime().isPresent()) {
-                // TODO remove println
-                System.out.println("From only!");
-                if (taskToEdit.getStartEndDateTime().isPresent()) {
-                    // TODO should we wrap this into ParserUtil as well?
-                    final StartEndDateTime editedTaskStartEndDateTime = taskToEdit.getStartEndDateTime().get();
-                    ZonedDateTime startDateTime =
-                            ParserUtil.parseEditedDateTimeString(getRawStartDateTime().get(),
-                                    editedTaskStartEndDateTime.getStartDateTime());
-                    startEndDateTime = Optional.of(new StartEndDateTime(startDateTime,
-                            editedTaskStartEndDateTime.getEndDateTime()));
-                } else {
-                    // TODO message change
-                    throw new IllegalValueException("Start Date must comes with an End Date");
-                }
-            } else if (!getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent()) {
-                // TODO remove println
-                System.out.println("To only!");
-                if (taskToEdit.getStartEndDateTime().isPresent()) {
-                    // TODO should we wrap this into ParserUtil as well?
-                    final StartEndDateTime editedTaskStartEndDateTime = taskToEdit.getStartEndDateTime().get();
-                    ZonedDateTime endDateTime =
-                            ParserUtil.parseEditedDateTimeString(getRawEndDateTime().get(),
-                                    editedTaskStartEndDateTime.getEndDateTime());
-                    startEndDateTime = Optional.of(
-                            new StartEndDateTime(editedTaskStartEndDateTime.getStartDateTime(), endDateTime));
-                } else {
-                    // TODO message change
-                    throw new IllegalValueException("End Date must come with a Start Date");
-                }
-            } else if (getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent()) {
-                if (taskToEdit.getStartEndDateTime().isPresent()) {
-                    startEndDateTime =
-                            ParserUtil.parseEditedStartEndDateTime(getRawStartDateTime(), getRawEndDateTime(),
-                                    taskToEdit.getStartEndDateTime().get());
-                } else {
-                    startEndDateTime =
-                            ParserUtil.parseNewStartEndDateTime(getRawStartDateTime(), getRawEndDateTime());
-                }
-            } else {
-                startEndDateTime = taskToEdit.getStartEndDateTime();
-            }
-            updatedTagList = getTagList().orElseGet(taskToEdit::getTags);
-
-        }
-
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             name = toCopy.getName();
-            deadline = toCopy.getDeadline();
-            startEndDateTime = toCopy.getStartEndDateTime();
-            tagList = toCopy.getTagList();
-
             rawDeadline = toCopy.getRawDeadline();
             rawStartDateTime = toCopy.getRawStartDateTime();
             rawEndDateTime = toCopy.getRawEndDateTime();
+            tagList = toCopy.getTagList();
+
+            updatedName = toCopy.getUpdatedName();
+            updatedDeadline = toCopy.getUpdatedDeadline();
+            updatedStartEndDateTime = toCopy.getUpdatedStartEndDateTime();
+            updatedTagList = toCopy.getUpdatedTagList();
+        }
+
+        public void processFields(ReadOnlyTask taskToEdit)
+                throws PastDateTimeException, InvalidDurationException, IllegalValueException {
+
+            processName(taskToEdit);
+            processDeadline(taskToEdit);
+            processStartEndDateTime(taskToEdit);
+            processTagList(taskToEdit);
+        }
+
+        private void processName(ReadOnlyTask taskToEdit) {
+            updatedName = getName().orElseGet(taskToEdit::getName);
+        }
+
+        private void processDeadline(ReadOnlyTask taskToEdit)
+                throws PastDateTimeException, IllegalValueException {
+            if (!getRawDeadline().isPresent()) {
+                updatedDeadline = taskToEdit.getDeadline();
+                return;
+            }
+
+            if (taskToEdit.getDeadline().isPresent()) {
+                updatedDeadline = ParserUtil.parseEditedDeadline(getRawDeadline(), taskToEdit.getDeadline().get());
+            } else {
+                updatedDeadline = ParserUtil.parseNewDeadline(getRawDeadline());
+            }
+        }
+
+        private void processStartEndDateTime(ReadOnlyTask taskToEdit)
+                throws PastDateTimeException, InvalidDurationException, IllegalValueException {
+            updatedStartEndDateTime = Optional.empty();
+
+            if (hasNoRawStartAndEndDateTime()) {
+                updatedStartEndDateTime = taskToEdit.getStartEndDateTime();
+                return;
+            }
+
+            if (!taskToEdit.getStartEndDateTime().isPresent()) {
+                if (hasBothRawStartAndEndDateTime()) {
+                    updatedStartEndDateTime =
+                            ParserUtil.parseNewStartEndDateTime(getRawStartDateTime(), getRawEndDateTime());
+                    return;
+                }
+                throw new IllegalValueException("Must have both start and end date-time");
+            }
+
+            final StartEndDateTime originalStartEndDateTime = taskToEdit.getStartEndDateTime().get();
+
+            if (hasBothRawStartAndEndDateTime()) {
+                processUsingRawStartAndEnd(originalStartEndDateTime);
+            } else if (hasOnlyRawStartDateTime()) {
+                processUsingRawStart(originalStartEndDateTime);
+            } else if (hasOnlyRawEndDateTime()) {
+                processUsingRawEnd(originalStartEndDateTime);
+            }
+        }
+
+        private boolean hasNoRawStartAndEndDateTime() {
+            return !getRawStartDateTime().isPresent() && !getRawEndDateTime().isPresent();
+        }
+
+        private boolean hasBothRawStartAndEndDateTime() {
+            return getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent();
+        }
+
+        private boolean hasOnlyRawStartDateTime() {
+            return getRawStartDateTime().isPresent() && !getRawEndDateTime().isPresent();
+        }
+
+        private boolean hasOnlyRawEndDateTime() {
+            return !getRawStartDateTime().isPresent() && getRawEndDateTime().isPresent();
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Process the updated StartEndDateTime with the raw start and date-time with reference to the
+         * original start-end date-time.
          */
-        public boolean isAnyFieldEdited() {
-            // TODO note that we ignore raw fields because they are not important
-            return CollectionUtil.isAnyPresent(name, deadline, startEndDateTime, tagList);
+        private void processUsingRawStartAndEnd(StartEndDateTime originalStartEndDateTime)
+                throws PastDateTimeException, InvalidDurationException, IllegalValueException {
+
+            updatedStartEndDateTime = ParserUtil.parseEditedStartEndDateTime(getRawStartDateTime(),
+                    getRawEndDateTime(), originalStartEndDateTime);
         }
 
+        /**
+         * Process the updated StartEndDateTime with the raw start date-time with reference to the
+         * original end date time.
+         */
+        private void processUsingRawStart(StartEndDateTime originalStartEndDateTime)
+                throws PastDateTimeException, InvalidDurationException, IllegalValueException {
+
+            ZonedDateTime startDateTime = ParserUtil.parseEditedDateTimeString(
+                    getRawStartDateTime().get(), originalStartEndDateTime.getStartDateTime());
+            ZonedDateTime endDateTime = originalStartEndDateTime.getEndDateTime();
+            updatedStartEndDateTime = Optional.of(new StartEndDateTime(startDateTime, endDateTime));
+        }
+
+        /**
+         * Process the updated StartEndDateTime with the raw end date-time with reference to the
+         * original start date time.
+         */
+        private void processUsingRawEnd(StartEndDateTime originalStartEndDateTime)
+                throws PastDateTimeException, InvalidDurationException, IllegalValueException {
+
+            ZonedDateTime startDateTime = originalStartEndDateTime.getStartDateTime();
+            ZonedDateTime endDateTime = ParserUtil.parseEditedDateTimeString(getRawEndDateTime().get(),
+                    originalStartEndDateTime.getEndDateTime());
+            updatedStartEndDateTime = Optional.of(new StartEndDateTime(startDateTime, endDateTime));
+        }
+
+        private void processTagList(ReadOnlyTask taskToEdit) {
+            updatedTagList = getTagList().orElseGet(taskToEdit::getTags);
+        }
+
+        /**
+         * Returns true if at least one field that is different is edited.
+         */
+        public boolean isAnyFieldEdited(ReadOnlyTask taskToEdit) {
+            // note that the tags are added in alphabetical order and uses list compare vs set compare
+            if (updatedName.equals(taskToEdit.getName())
+                    && updatedDeadline.equals(taskToEdit.getDeadline())
+                    && updatedStartEndDateTime.equals(taskToEdit.getStartEndDateTime())
+                    && updatedTagList.equals(taskToEdit.getTags())) {
+                return false;
+            }
+            return true;
+        }
+
+        //// methods for initializing an EditTaskDescriptor
         public void setName(Optional<Name> name) {
             assert name != null;
             this.name = name;
         }
 
+        public void setRawDeadline(Optional<String> rawDeadline) {
+            assert rawDeadline != null;
+            this.rawDeadline = rawDeadline;
+        }
+
+        public void setRawStartDateTime(Optional<String> rawStartDateTime) {
+            assert rawStartDateTime != null;
+            this.rawStartDateTime = rawStartDateTime;
+        }
+
+        public void setRawEndDateTime(Optional<String> rawEndDateTime) {
+            assert rawEndDateTime != null;
+            this.rawEndDateTime = rawEndDateTime;
+        }
+
+        public void setTagList(Optional<UniqueTagList> tagList) {
+            assert tagList != null;
+            this.tagList = tagList;
+        }
+
+        //// methods for getting the un-processed edited fields
         public Optional<Name> getName() {
             return name;
-        }
-
-        // get updated
-        public Optional<Deadline> getDeadline() {
-            return deadline;
-        }
-        // get updated
-        public Optional<StartEndDateTime> getStartEndDateTime() {
-            return startEndDateTime;
-        }
-
-
-        public void setRawDeadline(Optional<String> rawDeadline) {
-            this.rawDeadline = rawDeadline;
-
-        }
-
-        public void setRawStartDateTime(Optional<String> value) {
-            rawStartDateTime = value;
-        }
-
-        public void setRawEndDateTime(Optional<String> value) {
-            rawEndDateTime = value;
         }
 
         public Optional<String> getRawDeadline() {
@@ -244,23 +288,24 @@ public class EditCommand extends Command {
             return rawEndDateTime;
         }
 
-
         public Optional<UniqueTagList> getTagList() {
             return tagList;
         }
 
-        public void setTagList(Optional<UniqueTagList> tags) {
-            assert tags != null;
-            this.tagList = tags;
-        }
-
+        //// methods for getting the processed edited fields
         public Name getUpdatedName() {
             return updatedName;
+        }
+
+        public Optional<Deadline> getUpdatedDeadline() {
+            return updatedDeadline;
+        }
+        public Optional<StartEndDateTime> getUpdatedStartEndDateTime() {
+            return updatedStartEndDateTime;
         }
 
         public UniqueTagList getUpdatedTagList() {
             return updatedTagList;
         }
-
     }
 }
