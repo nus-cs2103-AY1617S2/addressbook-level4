@@ -111,12 +111,14 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
     }
 
+    // @@author A0141138N
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
     }
 
+    // @@author A0141138N
     @Subscribe
     private void handleShowHelpUGEvent(ShowHelpUGRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

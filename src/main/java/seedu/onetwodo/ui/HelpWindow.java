@@ -1,3 +1,4 @@
+//@@author A0141138N
 package seedu.onetwodo.ui;
 
 import java.net.URL;
@@ -30,7 +31,6 @@ public class HelpWindow extends UiPart<Region> {
 
     private final Stage dialogStage;
 
-    // @@author A0141138N
     public HelpWindow() {
         super(FXML);
         Scene scene = new Scene(getRoot());

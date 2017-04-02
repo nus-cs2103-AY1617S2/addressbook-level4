@@ -268,6 +268,7 @@ public class MainWindow extends UiPart<Region> {
                 (int) primaryStage.getY());
     }
 
+    // @@author A0141138N
     @FXML
     public void handleHelp() {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -283,12 +284,14 @@ public class MainWindow extends UiPart<Region> {
         closeDialogOnNextKeyPress();
     }
 
+    // @@author A0141138N
     @FXML
     public void handleHelpUG() {
         HelpUGWindow helpUGWindow = new HelpUGWindow();
         helpUGWindow.show();
     }
 
+    // @@author
     @FXML
     public void handleUndo() {
         commandBox.handleCommands(UndoCommand.COMMAND_WORD);
