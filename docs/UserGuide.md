@@ -99,11 +99,11 @@ for the function to work.
 
 Examples: `edit 2 m/Go to Ralphs`
 
-## Clearing All Entries : `clear`
+## Clearing all Tasks : `clear`
 Clears all tasks from the task manager.<br>
 Format: `clear` 
 
-## Editing a Task : `undo`
+## Undoing a Task : `undo`
 Undos the most recent action up to 10 times.
 Format: `undo`
 
@@ -111,7 +111,7 @@ Format: `undo`
 Completes the specified tasks from the task manager and changes the task status from `Ongoing` to `Completed`.<br>
 Format: `done INDEX [MORE INDECIES]`
 
-## Completing a Task : `filter`
+## Filtering the Tasks : `filter`
 Filters the list of tasks to only see `Ongoing` or `Completed` tasks.<br>
 Format: `filter`
 
@@ -121,17 +121,17 @@ Format: `sort name` or `sort time`
 > Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date. 
 > To return to the unsorted list of tasks, type and enter `list`.
 
-## Googling a Task or Phrase: `google` 
+## Googling the Tasks: `google` 
 Format: `google [INDEX]`
-> Googles the task name at the specified index. A user can additionally Google a task name by single clicking on a task. 
+> Googles the task name at the specified index. The user can additionally Google a task name by single clicking on a task. 
 
-## Change the Save Path: `path`
+## Changing the Save Path: `path`
 Changes the save path for Fast Task data. Must specify the name of the save file and mark it as a .xml file.<br>
 Format: `path PATHNAME`<br>
 Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
 Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
 
-## Load Fast Task Data: `load`
+## Loading Fast Task Data: `load`
 Loads a save file for Fast Task data. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file.<br>
 Format: `load PATHNAME`<br>
 Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
