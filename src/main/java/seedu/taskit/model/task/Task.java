@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
-import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_DATES;
+import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_START_DATE;
 
 public class Task implements ReadOnlyTask{
 
@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask{
     public Task(Title title, Date start, Date end, Priority priority, UniqueTagList tags) throws IllegalValueException {
         this.title = title;
         if (!start.isStartValidComparedToEnd(end)) {
-            throw new IllegalValueException(MESSAGE_INVALID_DATES);
+            throw new IllegalValueException(MESSAGE_INVALID_START_DATE);
         }
         this.start = start;
         this.end = end;

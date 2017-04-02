@@ -11,14 +11,14 @@ import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 import seedu.taskit.commons.exceptions.IllegalValueException;
+import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_DATE;
 
 /**
  * Represents a Task's start or end date and time in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
-    public static final String MESSAGE_DATE_FAIL = "Date not valid. Try formats such as: "
-            + "'next friday at 2 pm' or '2/12/17'";
+    public static final String MESSAGE_DATE_FAIL = MESSAGE_INVALID_DATE;
 
     public static final String DATE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
@@ -42,6 +42,7 @@ public class Date {
      *             if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
+        System.out.println(date);
         this.dateString = date;
         if (date != null && date.length() > 0) {
             List<DateGroup> groups = parser.parse(date);
@@ -58,6 +59,7 @@ public class Date {
         } else {
             this.date = null;
         }
+        System.out.println(this.date);
     }
 
     @Override
