@@ -18,6 +18,7 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.commons.util.TaskUtil;
 import seedu.task.model.task.Date;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -26,8 +27,7 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of KIT data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of KIT data. All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -38,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     * 
      * @throws IllegalValueException
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
@@ -56,35 +57,38 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public void loadData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
-    //@@author A0140063X
-    /** Raises an event to indicate the model has changed
-     * @param backupFilePath */
+    // @@author A0140063X
+    /**
+     * Raises an event to indicate the model has changed
+     * 
+     * @param backupFilePath
+     */
     private void indicateTaskManagerChanged(String backupFilePath) {
         history.handleTaskManagerChanged(backupFilePath);
         raise(new TaskManagerChangedEvent(taskManager, backupFilePath));
     }
 
-    //@@author
+    // @@author
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
         raise(new FilePathChangedEvent(newPath, taskManager));
@@ -100,14 +104,16 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.removeTask(target);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
-    //@@author A0139975J
+
+    // @@author A0139975J
     @Override
     public synchronized void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
         taskManager.updateDone(taskManagerIndex, target);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
-    //@@author A0139975J
+
+    // @@author A0139975J
     @Override
     public synchronized void unDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
@@ -122,7 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public void addMultipleTasks(ArrayList<Task> tasks) {
         for (Task task : tasks) {
@@ -137,10 +143,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author
+    // @@author
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws IllegalValueException {
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws IllegalValueException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
@@ -165,8 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateLoadChanged(loadPath);
     }
 
-
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -180,43 +184,50 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, false)));
+        updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, false)));
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, isExact)));
+        updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, isExact)));
     }
 
     @Override
     public void updateFilteredTaskList(String keyword) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keyword)));
     }
-    //@@author A0139975J-reused
+
+    // @@author A0139975J-reused
     @Override
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
 
-    //@@author A0139975J-reused
+    // @@author A0139975J-reused
     @Override
     public void updateFilteredTaskList(Date date) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
 
     }
 
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact) {
+        // TODO Auto-generated method stub
+        updateFilteredTaskList(new PredicateExpression(new StringAndDateQualifier(keywords, date)));
+    }
+
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         @Override
         String toString();
     }
-
 
     private class PredicateExpression implements Expression {
 
@@ -239,96 +250,144 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         @Override
         String toString();
     }
 
-  //@@author A0142487Y
-    private class NameQualifier implements Qualifier {
+    // @@author A0142487Y
+    /**
+     * This qualifier is specifically for strings,including name, location,remark and tags. Returns true if there is any
+     * match.
+     * 
+     * @author Xu
+     *
+     */
+    private class StringQualifier implements Qualifier {
+        private boolean isExact = false;
+        private Set<String> keywords;
+
+        StringQualifier(Set<String> keywords, boolean isExact) {
+            this.isExact = isExact;
+            this.keywords = keywords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (isExact) {
+                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keywords)
+                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keywords);
+            } else {
+                for (String keyword : keywords) {
+                    if (!TaskUtil.doesTaskContainKeyword(task, keyword)) {
+                        return false;
+                    }
+                }
+                return true;
+                // return keywords.stream()
+                // .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
+                // || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
+                // || StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
+                // || StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword)
+                // || StringUtil.containsSubstringIgnoreCase(task.getLocation().toString(), keyword)
+                // || StringUtil.containsWordIgnoreCase(task.getLocation().toString(), keyword)
+                // || StringUtil.containsSubstringIgnoreCase(task.getTags().toString(), keyword))
+                // .findAny().isPresent();
+                // || CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), keywords);
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "Target to be searched for =" + String.join(", ", keywords);
+        }
+    }
+
+    // @@author A0142487Y
+    private class StringAndDateQualifier implements Qualifier {
         private boolean isExact = false;
         private Set<String> keyWords;
+        private StringQualifier stringQualifier;
+        private DateQualifier dateQualifier;
 
-        NameQualifier(Set<String> keyWords, boolean isExact) {
-            this.isExact = isExact;
-            this.keyWords = keyWords;
+        StringAndDateQualifier(Set<String> keywords, Date date) {
+            assert date != null;
+            assert keywords != null;
+            this.keyWords = keywords;
+            this.stringQualifier = new StringQualifier(keywords, isExact);
+            this.dateQualifier = new DateQualifier(date);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
             if (isExact) {
                 return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keyWords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords);
+                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords)
+                        || StringUtil.containsExactWordsIgnoreCase(task.getLocation().toString(), keyWords);
             } else {
-                return keyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
-                            || StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
-                            || StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword))
-                    .findAny()
-                    .isPresent();
-            }
-        }
+                return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
+                        : this.stringQualifier.run(task) && this.dateQualifier.run(task);
 
-        @Override
-        public String toString() {
-            return "name=" + String.join(", ", keyWords);
+            }
         }
     }
 
-  //@@author A0142487Y-reused
+    // @@author A0142487Y-reused
     private class TagQualifier implements Qualifier {
 
-        private String tagKeyWord;
+        private String tagKeyword;
 
         TagQualifier(String tagKeyWord) {
-            this.tagKeyWord = tagKeyWord;
+            this.tagKeyword = tagKeyWord;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyWord);
+            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyword);
         }
 
         @Override
         public String toString() {
-            return "Tag=" +  tagKeyWord;
+            return "Tag =" + tagKeyword;
         }
     }
 
-    //@@author
+    // @@author
     private class DateQualifier implements Qualifier {
 
         private Date date;
 
-        //@@author A0139975J
+        // @@author A0139975J
         DateQualifier(Date date) {
             this.date = date;
         }
 
-        //@@author A0139975J
+        // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date)) {
-                return true;
-            } else {
+            if (date.isNull()) {
                 return false;
             }
+            return task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date);
         }
     }
 
     private class DoneQualifier implements Qualifier {
 
         private boolean value;
-        //@@author A0139975J
+
+        // @@author A0139975J
         DoneQualifier(boolean value) {
             this.value = value;
         }
-        //@@author A0139975J
+
+        // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (this.value  & task.isDone()) {
+            // return (this.value == task.isDone());
+            if (this.value & task.isDone()) {
                 return true;
-            } else if (!this.value  & !task.isDone()) {
+            } else if (!this.value & !task.isDone()) {
                 return true;
             } else {
                 return false;
@@ -337,13 +396,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author
+    // @@author
     @Override
     @Subscribe
     public void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event) {
         taskManager.resetData(event.readOnlyTaskManager);
         logger.info("Resetting data from new load location.");
     }
-
 
 }

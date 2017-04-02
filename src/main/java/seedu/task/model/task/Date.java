@@ -24,6 +24,7 @@ public class Date {
     public static final String DEFAULT_DATE = "DEFAULT_DATE";
     private final java.util.Date value;
     private static PrettyTimeParser pretty = new PrettyTimeParser();
+    private String extractedFrom = "";
 
     //@@author A0140063X
     public Date() {
@@ -57,6 +58,7 @@ public class Date {
             long time = cal.getTimeInMillis();
 
             this.value = new java.util.Date(time);
+            extractedFrom += date;
         }
     }
 
@@ -158,5 +160,9 @@ public class Date {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+    
+    public String getExtractedFrom(){
+        return this.extractedFrom;
     }
 }

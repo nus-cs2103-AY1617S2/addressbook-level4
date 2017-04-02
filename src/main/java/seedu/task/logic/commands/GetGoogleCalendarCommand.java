@@ -22,7 +22,7 @@ public class GetGoogleCalendarCommand extends Command {
 
     private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
     public static final String COMMAND_WORD_1 = "getgoogle";
-    public static final String COMMAND_WORD_2 = "ggc";
+    public static final String COMMAND_WORD_2 = "gg";
     public static final String MESSAGE_SUCCESS = "Upcoming events obtained from Google successfully!\n"
             + "Note that duplicate events or events without names are ignored.";
     public static final String MESSAGE_USAGE = COMMAND_WORD_2
