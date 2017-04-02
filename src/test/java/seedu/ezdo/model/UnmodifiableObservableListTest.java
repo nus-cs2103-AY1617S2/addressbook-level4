@@ -88,7 +88,7 @@ public class UnmodifiableObservableListTest {
         final Iterator<Integer> iter2 = list.iterator();
         iter2.forEachRemaining(item -> {
             assertTrue(item.equals(10));
-         });
+        });
 
         final ListIterator<Integer> liter = list.listIterator();
         liter.next();
@@ -101,15 +101,15 @@ public class UnmodifiableObservableListTest {
             assertTrue(a == 10);
         }
 
-        list.forEach(item ->{
+        list.forEach(item -> {
             assertTrue(item.equals(10));
         });
 
         liter.forEachRemaining(item -> {
-           assertTrue(item.equals(10));
+            assertTrue(item.equals(10));
         });
     }
-//@@author A0139248X
+    //@@author A0139248X
     @Test
     public void contains_true() {
         assertTrue(list.contains(10));
@@ -144,7 +144,7 @@ public class UnmodifiableObservableListTest {
             assertTrue(arr1[i].equals(arr2[i]));
         }
     }
-//@@author
+    //@@author
     @Test
     public void add_remove_listeners() {
         list.removeListener((ListChangeListener<Integer>)(c -> {/* ... */}));
