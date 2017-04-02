@@ -25,7 +25,6 @@ public class ChangePathCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangePathCommand.MESSAGE_USAGE));
         }
-
         return new ChangePathCommand(newFilePath.get());
     }
 }
