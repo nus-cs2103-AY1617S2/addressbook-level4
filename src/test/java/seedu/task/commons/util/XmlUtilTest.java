@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.task.commons.util.FileUtil;
-import seedu.task.commons.util.XmlUtil;
 import seedu.task.model.TaskManager;
 import seedu.task.storage.XmlSerializableTaskManager;
 import seedu.task.testutil.TaskManagerBuilder;

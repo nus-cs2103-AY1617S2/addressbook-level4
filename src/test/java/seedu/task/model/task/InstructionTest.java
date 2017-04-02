@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.task.Instruction;
 
 public class InstructionTest {
 

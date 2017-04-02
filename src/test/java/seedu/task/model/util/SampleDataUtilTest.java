@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.task.Task;
-import seedu.task.model.util.SampleDataUtil;
 
 public class SampleDataUtilTest {
 

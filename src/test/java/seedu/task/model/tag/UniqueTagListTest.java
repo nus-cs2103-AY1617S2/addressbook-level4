@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
 
 public class UniqueTagListTest {

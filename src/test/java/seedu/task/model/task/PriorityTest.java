@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.task.model.task.Priority;
-
 public class PriorityTest {
 
     @Test

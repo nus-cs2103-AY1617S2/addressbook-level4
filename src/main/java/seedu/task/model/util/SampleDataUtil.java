@@ -2,8 +2,8 @@
 package seedu.task.model.util;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.TaskManager;
 import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.TaskManager;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Deadline;
 import seedu.task.model.task.Instruction;
