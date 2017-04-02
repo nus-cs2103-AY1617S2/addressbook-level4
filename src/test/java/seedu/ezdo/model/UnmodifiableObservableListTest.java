@@ -19,7 +19,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 
 public class UnmodifiableObservableListTest {
@@ -83,6 +85,11 @@ public class UnmodifiableObservableListTest {
         iter.next();
         assertThrows(ex, iter::remove);
 
+        final Iterator<Integer> iter2 = list.iterator();
+        iter2.forEachRemaining(item -> {
+            assertTrue(item.equals(10));
+         });
+
         final ListIterator<Integer> liter = list.listIterator();
         liter.next();
         assertThrows(ex, liter::remove);
@@ -93,6 +100,14 @@ public class UnmodifiableObservableListTest {
             Integer a = liter.previous();
             assertTrue(a == 10);
         }
+
+        list.forEach(item ->{
+            assertTrue(item.equals(10));
+        });
+
+        liter.forEachRemaining(item -> {
+           assertTrue(item.equals(10));
+        });
     }
 //@@author A0139248X
     @Test
@@ -128,5 +143,12 @@ public class UnmodifiableObservableListTest {
         for (int i = 0; i < arr1.length; i++) {
             assertTrue(arr1[i].equals(arr2[i]));
         }
+    }
+//@@author
+    @Test
+    public void add_remove_listeners() {
+        list.removeListener((ListChangeListener<Integer>)(c -> {/* ... */}));
+        list.addListener((InvalidationListener)(c -> {/* ... */}));
+        list.removeListener((InvalidationListener)(c -> {/* ... */}));
     }
 }
