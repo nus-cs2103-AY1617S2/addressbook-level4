@@ -72,7 +72,7 @@ public class DoneCommandTest extends EzDoGuiTest {
 
         // invalid input when viewing done task
         commandBox.runCommand("done " + doneList.length);
-        assertResultMessage(MESSAGE_WRONG_LIST);
+        assertResultMessage(Messages.MESSAGE_WRONG_LIST);
 
     }
 
@@ -95,7 +95,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         }
 
         if (!taskToDone.getRecur().isRecur()) {
-            System.out.println(doneList.length);
+
             // confirm the task list no longer has the done task
             assertTrue(taskListPanel.isListMatching(currentList));
 
@@ -134,7 +134,6 @@ public class DoneCommandTest extends EzDoGuiTest {
             // done
             commandBox.runCommand("list");
             assertTrue(taskListPanel.isListMatching(currentList));
-            System.out.println(doneList.length);
         }
     }
 
@@ -142,9 +141,9 @@ public class DoneCommandTest extends EzDoGuiTest {
         try {
             int increment = 1;
             Calendar c = Calendar.getInstance();
-            c.setTime(DateParser.userOutputDateFormat.parse(originalDate));
+            c.setTime(DateParser.USER_OUTPUT_DATE_FORMAT.parse(originalDate));
             c.add(type, increment);
-            return DateParser.userOutputDateFormat.format(c.getTime());
+            return DateParser.USER_OUTPUT_DATE_FORMAT.format(c.getTime());
         } catch (ParseException pe) {
             // Do nothing as the date is optional
             // and cannot be parsed as Date object
@@ -165,6 +164,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         try {
             taskToDone.setStartDate(new StartDate(newStartDate));
             taskToDone.setDueDate(new DueDate(newDueDate));
+            taskToDone.setRecur(new Recur(""));
         } catch (IllegalValueException e) {
 
         }
