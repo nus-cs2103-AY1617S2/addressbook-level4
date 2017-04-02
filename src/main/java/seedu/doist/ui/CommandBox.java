@@ -134,14 +134,18 @@ public class CommandBox extends UiPart<Region> {
     //Handle Control + z key combination
     private void handleCtrlZKeyCombination() {
         try {
-            logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
+            CommandResult commandResult  = logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
+            logger.info("Result: " + commandResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
         } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
     }
 
     //Handle Control + y key combination
     private void handleCtrlYKeyCombination() {
         try {
-            logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
+            CommandResult commandResult  = logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
+            logger.info("Result: " + commandResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
         } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
     }
 
