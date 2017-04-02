@@ -49,7 +49,7 @@ public class EditCommandParser {
             } else {
                 editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
             }
-            //@@ author
+            //@@author
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setID(ParserUtil.parseId(argsTokenizer.getValue(PREFIX_ID)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
