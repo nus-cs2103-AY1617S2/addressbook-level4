@@ -1,6 +1,5 @@
 package typetask.storage;
 
-
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -72,7 +71,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleAddressBookChangedEventExceptionThrownEventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlTaskManagerStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));

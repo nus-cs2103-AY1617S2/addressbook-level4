@@ -21,7 +21,7 @@ public class AppUtilTest {
 
 
     @Test
-    public void getImage_nullGiven_assertionError() {
+    public void getImageNullGivenAssertionError() {
         thrown.expect(AssertionError.class);
         AppUtil.getImage(null);
     }
