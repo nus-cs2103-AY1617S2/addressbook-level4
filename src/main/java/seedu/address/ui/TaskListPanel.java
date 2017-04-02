@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -27,6 +28,12 @@ public class TaskListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<ReadOnlyTask> futureTaskListView;
+
+    @FXML
+    private TitledPane todayTaskListPanel;
+
+    @FXML
+    private TitledPane futureTaskListPanel;
 
     ObservableList<ReadOnlyTask> taskListToday;
 
@@ -94,6 +101,14 @@ public class TaskListPanel extends UiPart<Region> {
 
     }
 
+    public TitledPane getTodayTaskListPanel() {
+        return todayTaskListPanel;
+    }
+
+    public TitledPane getFutureTaskListPanel() {
+        return futureTaskListPanel;
+    }
+
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
@@ -108,6 +123,5 @@ public class TaskListPanel extends UiPart<Region> {
             }
         }
     }
-
 
 }

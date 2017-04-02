@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.VBox?>
 
 <ScrollPane fitToWidth="true" stylesheets="@Extensions.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-  <content>	
+  <content>
 	<VBox prefWidth="550.0">
 	      <children>
 	      	<AnchorPane>
-	          
-	          <TitledPane animated="false" prefWidth="550.0" text="Today" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+	          <TitledPane fx:id="todayTaskListPanel" animated="false" prefWidth="550.0" text="Today" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 	               <content>
 	            		    <ListView fx:id="todayTaskListView" prefHeight="1000.0" prefWidth="550.0" />
 	               </content>
 	            </TitledPane>
 	        </AnchorPane>
 	        <AnchorPane>
-	          <TitledPane animated="false" prefWidth="550.0" text="Future" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+	          <TitledPane fx:id="futureTaskListPanel" animated="false" prefWidth="550.0" text="Future" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 	               <content>
 			              	<ListView fx:id="futureTaskListView" prefHeight="1000.0" prefWidth="550.0" />
 	               </content>
