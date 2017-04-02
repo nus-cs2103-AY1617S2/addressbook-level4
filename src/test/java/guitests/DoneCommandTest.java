@@ -70,10 +70,6 @@ public class DoneCommandTest extends EzDoGuiTest {
         commandBox.runCommand("done");
         assertTrue(taskListPanel.isListMatching(doneList));
 
-        // invalid input when viewing done task
-        commandBox.runCommand("done " + doneList.length);
-        assertResultMessage(Messages.MESSAGE_WRONG_LIST);
-
     }
 
     private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, TestTask[] currentList,
