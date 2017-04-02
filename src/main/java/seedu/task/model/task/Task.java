@@ -21,6 +21,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     private Remark remark;
     private Location location;
     private boolean isDone;
+    private boolean isPosted;
     private UniqueTagList tags;
 
     /**
@@ -28,7 +29,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      * @throws IllegalValueException
      */
     public Task(Name name, Date startDate, Date endDate, Remark remark,
-        Location location, UniqueTagList tags, boolean isDone) throws IllegalValueException {
+        Location location, UniqueTagList tags, boolean isDone, boolean isPosted) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, endDate, remark, location, tags);
 
         if (!isValidDates(startDate, endDate)) {
@@ -41,6 +42,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.remark = remark;
         this.location = location;
         this.isDone = isDone;
+        this.isPosted = isPosted;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -62,7 +64,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRemark(),
-                source.getLocation(), source.getTags(), source.isDone());
+                source.getLocation(), source.getTags(), source.isDone(), source.isPosted());
     }
 
     public void setName(Name name) {
@@ -117,6 +119,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public Location getLocation() {
         return location;
     }
+    
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
@@ -131,6 +134,18 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         return new UniqueTagList(tags);
     }
 
+    //@@author A0140063X
+    @Override
+    public boolean isPosted() {
+        return isPosted;
+    }
+
+    //@@author A0140063X
+    public void setIsPosted(boolean isPosted) {
+        this.isPosted = isPosted;
+    }
+
+    //@@author
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
@@ -150,6 +165,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.setRemark(replacement.getRemark());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
+        this.isPosted = false;
     }
 
     @Override
@@ -183,4 +199,5 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
             return (Date.isBefore(this.getEndDate(), o.getEndDate())) ? -1 : 1;
         }
     }
+
 }

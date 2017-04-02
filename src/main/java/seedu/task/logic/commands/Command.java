@@ -85,7 +85,7 @@ public abstract class Command {
     }
 
     // @@author A0140063X
-    protected static Task createTaskFromEvent(Event event) throws IllegalValueException {
+    protected static Task createTaskFromEvent(Event event, boolean isPosted) throws IllegalValueException {
         if (event.getSummary() == null) {
             throw new IllegalValueException("Name must not be empty.");
         }
@@ -96,6 +96,6 @@ public abstract class Command {
         Location location = new Location(event.getLocation());
         final Set<Tag> tagSet = new HashSet<>(); // No tags
 
-        return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false);
+        return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false, isPosted);
     }
 }

@@ -43,7 +43,7 @@ public class GetGoogleCalendarCommand extends Command {
 
             for (Event event : events) {
                 try {
-                    tasks.add(createTaskFromEvent(event));
+                    tasks.add(createTaskFromEvent(event, true));
                     logger.info("New event from google calendar sucessfully added.");
                 } catch (IllegalValueException ive) {
                     logger.info(ive.getMessage());

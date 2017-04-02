@@ -206,6 +206,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.undone(index);
     }
 
+    //@@author A0140063X
+    public void setIsPostedTrue(int index, ReadOnlyTask target) {
+        tasks.post(index);
+    }
+
     public void sortTaskList() {
         tasks.sort();
     }

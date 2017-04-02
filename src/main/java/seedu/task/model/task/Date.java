@@ -161,7 +161,7 @@ public class Date {
     public int hashCode() {
         return value.hashCode();
     }
-    
+
     public String getExtractedFrom(){
         return this.extractedFrom;
     }

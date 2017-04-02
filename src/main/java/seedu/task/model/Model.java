@@ -36,6 +36,10 @@ public interface Model {
     /** Updates the task from done to undone */
     void unDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
+    //@@author A0140063X
+    /** Update isPosted status to true */
+    void setIsPostedTrue(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+
     /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 

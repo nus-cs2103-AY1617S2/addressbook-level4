@@ -121,6 +121,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
+    // @@author A0140063X
+    @Override
+    public synchronized void setIsPostedTrue(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        int taskManagerIndex = filteredTasks.getSourceIndex(index);
+        taskManager.setIsPostedTrue(taskManagerIndex, target);
+        indicateTaskManagerChanged("");
+    }
+
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTaskToFront(task);
