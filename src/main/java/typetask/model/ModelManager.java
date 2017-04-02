@@ -292,7 +292,11 @@ public class ModelManager extends ComponentManager implements Model {
                 List<Date> startDates = DateParser.parse(task.getDate().value);
                 Date taskStartDate = startDates.get(0);
                 taskStartDateCalendar.setTime(taskStartDate);
-                isEventDueToday = (taskStartDateCalendar.before(today) || (today.get(Calendar.YEAR) == taskStartDateCalendar.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == taskStartDateCalendar.get(Calendar.DAY_OF_YEAR))) && (taskEndDateCalendar.after(today) || (today.get(Calendar.YEAR) == taskEndDateCalendar.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == taskEndDateCalendar.get(Calendar.DAY_OF_YEAR)));
+                isEventDueToday = (taskStartDateCalendar.before(today) || 
+                        (today.get(Calendar.YEAR) == taskStartDateCalendar.get(Calendar.YEAR) &&
+                        today.get(Calendar.DAY_OF_YEAR) == taskStartDateCalendar.get(Calendar.DAY_OF_YEAR))) &&
+                        (taskEndDateCalendar.after(today) || (today.get(Calendar.YEAR) == taskEndDateCalendar.get(Calendar.YEAR) &&
+                        today.get(Calendar.DAY_OF_YEAR) == taskEndDateCalendar.get(Calendar.DAY_OF_YEAR)));
             }
 
             boolean isTaskDueToday = (today.get(Calendar.YEAR) == taskEndDateCalendar.get(Calendar.YEAR) &&
