@@ -23,6 +23,7 @@ import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 public class EditCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String SHORT_COMMAND_WORD = "ed";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last tasks listing. "
