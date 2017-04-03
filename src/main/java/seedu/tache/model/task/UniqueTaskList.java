@@ -107,9 +107,12 @@ public class UniqueTaskList implements Iterable<Task> {
         setTasks(replacement);
     }
 
+    //@@author A0139961U
     public UnmodifiableObservableList<Task> asObservableList() {
+        internalList.sort(Task.taskDateComparator);
         return new UnmodifiableObservableList<>(internalList);
     }
+    //@@author
 
     @Override
     public Iterator<Task> iterator() {
