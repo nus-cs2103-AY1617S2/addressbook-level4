@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.taskit.logic.commands.AddCommand;
+import seedu.taskit.logic.commands.ChangePathCommand;
 import seedu.taskit.logic.commands.ClearCommand;
 import seedu.taskit.logic.commands.Command;
 import seedu.taskit.logic.commands.DeleteCommand;
@@ -78,10 +79,13 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        //@@author A0141011J
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
 
-        //@@author A0141011J
+        case ChangePathCommand.COMMAND_WORD:
+            return new ChangePathCommandParser().parse(arguments);
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 

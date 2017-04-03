@@ -14,6 +14,8 @@ import seedu.taskit.commons.core.Config;
 import seedu.taskit.commons.core.EventsCenter;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.core.Version;
+import seedu.taskit.commons.events.storage.DataSavingExceptionEvent;
+import seedu.taskit.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.taskit.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskit.commons.exceptions.DataConversionException;
 import seedu.taskit.commons.util.ConfigUtil;
@@ -185,6 +187,28 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
+
+    //@@author A0141011J
+    @Subscribe
+    public void handleStorageChangedEvent(StorageFilePathChangedEvent event) throws DataConversionException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        //set the new file path in config
+        config.setAddressBookFilePath(event.getPath());
+
+        try {
+            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+
+            ReadOnlyAddressBook currentTaskManager = model.getAddressBook();
+
+            //reset the storage object to the new file path and save the current task manager into it
+            storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+            storage.saveAddressBook(currentTaskManager);
+        } catch (IOException ioe) {
+            EventsCenter.getInstance().post(new DataSavingExceptionEvent(ioe));
+        }
+    }
+    //@@author
 
     public static void main(String[] args) {
         launch(args);
