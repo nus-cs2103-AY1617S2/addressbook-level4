@@ -82,7 +82,7 @@ public class Priority implements Comparable<Priority> {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
                         && this.value.equals(((Priority) other).value)); // state
-                                                                         // check
+        // check
     }
 
     @Override
@@ -93,23 +93,23 @@ public class Priority implements Comparable<Priority> {
     @Override
     public int compareTo(Priority p) {
         if (!hasPriority()) {
-            return -1;
+            return 1;
         }
         if (!p.hasPriority()) {
-            return 1;
+            return -1;
         }
         if (p.value.equals(value)) {
             return 0;
         }
         switch (value) {
         case HIGH_LABEL:
-            return 1;
+            return -1;
         case MEDIUM_LABEL:
-            return p.value.equals(LOW_LABEL) ? 1 : -1;
+            return p.value.equals(LOW_LABEL) ? -1 : 1;
         case LOW_LABEL:
-            return -1;
+            return 1;
         default:
-            return -1;
+            return 1;
         }
     }
 }
