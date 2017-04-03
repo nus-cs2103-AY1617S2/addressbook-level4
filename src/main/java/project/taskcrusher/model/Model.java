@@ -63,6 +63,8 @@ public interface Model {
 
     void updateFilteredTaskList(Timeslot userInterestedTimeSlot);
 
+    void updateFilteredTaskListToShowComplete();
+
     // ========== for events =================================================
 
     /** deletes the given event */
@@ -107,6 +109,8 @@ public interface Model {
     void updateFilteredEventList(Timeslot userInterestedTimeSlot);
 
     void markEvent(int filteredListIndex, int markFlag);
+
+    void updateFilteredEventListToShowComplete();
 
     /**
      * TODO this javadoc

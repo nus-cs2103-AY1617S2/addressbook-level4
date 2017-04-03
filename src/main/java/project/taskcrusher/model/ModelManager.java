@@ -188,6 +188,11 @@ public class ModelManager extends ComponentManager implements Model {
         prepareListsForUi();
     }
 
+    @Override
+    public void updateFilteredTaskListToShowComplete() {
+        updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(true)));
+    }
+
     //=========== Filtered Event List Accessors =============================================================
 
     @Override
@@ -215,6 +220,11 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
         prepareListsForUi();
+    }
+
+    @Override
+    public void updateFilteredEventListToShowComplete() {
+        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(true)));
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
