@@ -46,16 +46,26 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(INFORMATION_FIELD_ID);
     }
 
-    public ImageView getPriority() {
-        return getImageFromImageView(PRIORITY_FIELD_ID);
+    public String getPriority() {
+        ImageView imageView = getImageFromImageView(PRIORITY_FIELD_ID);
+
+        if (imageView.isVisible()) {
+            return "High priority";
+        } else {
+            return "No priority";
+        }
     }
 
     public String getStartDateTime() {
-        return getTextFromLabel(START_DATE_FIELD_ID);
+        String value = getTextFromLabel(START_DATE_FIELD_ID);
+        String result = value.substring(6).trim();
+        return result;
     }
 
     public String getEndDateTime() {
-        return getTextFromLabel(END_DATE_FIELD_ID);
+        String value = getTextFromLabel(END_DATE_FIELD_ID);
+        String result = value.substring(4).trim();
+        return result;
     }
 
     public String getRecurrence() {

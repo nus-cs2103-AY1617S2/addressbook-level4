@@ -91,6 +91,7 @@ public class TaskCard extends UiPart<Region> {
     private void initRecurrence(ReadOnlyTask task) {
         String recurrenceType = task.getRecurrence().toString();
         if (recurrenceType.equals(RECURRENCE_NONE)) {
+            recurrence.setText(task.getRecurrence().toString());
             recurrence.setVisible(false);
         } else {
             recurrence.setText(task.getRecurrence().toString());
