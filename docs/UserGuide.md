@@ -5,22 +5,25 @@ By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)
-   > 3.1. [Help](#31-viewing-help--help)<br/>
-     3.2. [Add tasks](#32-adding-a-task--add)<br/>
-     3.3. [List tasks](#33-listing-all-tasks--list)<br/>
-     3.4. [Edit tasks](#34-editing-a-task--edit)<br/>
+   > 3.1. [Add tasks](#32-adding-a-task--add)<br/>
+     3.2. [Delete tasks](#36-deleting-a-task--delete)<br/>
+     3.3. [Edit tasks](#34-editing-a-task--edit)<br/>
+     3.4. [List tasks](#33-listing-all-tasks--list)<br/>
      3.5. [Find tasks](#35-finding-all-tasks-containing-any-keyword-in-their-title--find)<br/>
-     3.6. [Delete tasks](#36-deleting-a-task--delete)<br/>
+     3.6. [Select tasks](#311-selecting-a-task--select)<br/>
      3.7. [Mark tasks as complete](#37-marking-a-task-as-complete--complete)<br/>
      3.8. [Mark tasks as incomplete](#38-marking-a-task-as-incomplete--incomplete)<br/>
      3.9. [Undo](#39-undo-the-previous-command--undo)<br/>
      3.10. [Redo](#310-redo-a-command--redo)<br/>
-     3.11. [Select tasks](#311-selecting-a-task--select)<br/>
-     3.12. [Reset](#312-clearing-all-tasks--reset)<br/>
-     3.13. [Exit](#313-exiting-the-program--exit)<br/>
-     3.14. [Import](#314-importing-files-into-the-program--import)<br/>
-     3.15. [Export](#315-exporting-files-from-the-program--export)<br/>
+     3.11. [Revert](#310-redo-a-command--redo)<br/>
+     3.12. [Unrevert](#310-redo-a-command--redo)<br/>
+     3.13. [Specifying the data storage location](#39-undo-the-previous-command--undo)<br/>
+     3.14. [Import as Google Calender file](#314-importing-files-into-the-program--import)<br/>
+     3.15. [Export as Google Calender file](#315-exporting-files-from-the-program--export)<br/>
      3.16. [Save](#316-saving-the-data)<br/>
+     3.17. [Reset](#312-clearing-all-tasks--reset)<br/>
+     3.18. [Help](#31-viewing-help--help)<br/>
+     3.19. [Exit](#313-exiting-the-program--exit)<br/>
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -33,7 +36,7 @@ Are you overwhelmed by your daily tasks and deadlines in life?<br/>
 Enter **Burdens**.<br/>
 <br/>
 A task manager that structures your tasks and deadlines<br/>
-using your keyboard commands with a beautiful customisable interface.<br/>
+using your keyboard commands with a beautiful interface.<br/>
 <br/>
 Read on and discover how to install and use **Burdens**<br/>
 to make sense of your daily life activities.<br/>
@@ -59,76 +62,173 @@ You will see four sections:
 - Completed: Shows a list of completed tasks.
 - Command: Displays the results of a command and the contains the command box.
 
+Each square has the own respective lists and indexes.
+
 Type a command in the command box and press <kbd>Enter</kbd> to execute it.
 
 e.g. typing `help` and pressing <kbd>Enter</kbd> will open the Help window.
-
-Here are some example commands you can try:
-
-  - `list` : lists all tasks.
-  - `add Buy groceries for: tomorrow priority: 5 note: eggs x10, milk x2, bread x2 #home #errand` : adds a task titled Buy groceries to the list.
-  - `delete 3` : deletes the 3rd task shown in the current list.
-  - `exit` : exits the app.
 
 Refer to the [Features](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#features) section below for details of each command.
 
 # 3. Features
 
-> **Command Format**
->
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
+To use Burdens effectively, we need to master the following commands.
+
+> ### Commands
+> **Please note the following:**
+> * Commands words are case-sensitive, please follow the command summary.
+> * Words with a colon `:` at the end are keywords.
+> * Items in `<Angle Brackets>` are parameters.
+> * Items in `[Square Brackets]` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
+> * The following section heads show a description of the command and the command to be used.
 
-### 3.1. Viewing help : `help`
+### 3.1. Adding a task : `add`
 
-Prompts a help page with all the existing commands.
+Let's begin to add a task to Burdens.
 
-Format: `help`
+Here are the **allowed formats**:
 
-> Help is also shown if you enter an incorrect command e.g. abcd
+* `add <title>` - adds a floating task with the title to Burdens.
+* `add <title> for: <deadline>` - adds a task which have to be done by the specified deadline. Please use the keyword `for: `.
+* `add <title> for: <start of deadline> to <end of deadline>` - adds an event which will take place between start and end of the deadline. Note the keyword `for:` and `to`.
+* `add <title> priority: <1 to 5>` - adds a floating task with a priority level.
+* `add <title> note: <instructions>` - adds a floating task with instructions.
+* `add <title> #<tag>` - adds a floating task with a tag. Note that you can have multiple tags.
+For full details of each parameter, please view their formats in their respective sections below. 
 
-### 3.2. Adding a task : `add`
+The full allowed command format is therefore:
 
-Adds a task to the list.
+* `add <title> for:<deadline> priority:<priority level> note:<instructions> #<tag>`
 
-Format: `add TITLE [for: DEADLINE] [priority: PRIORITY] [note: INSTRUCTION] [t/TAG]...`
+#### Date Time Format
+Let us show you the parameters to fill for `<start of deadline>` and `<end of deadline>`.
+Firstly, type the "for: " tag after the add command.<br>
+Burdens employs natural date formats.<br>
+You are free to use any of the date formats and time formats below.<br>
 
-> The deadline parameter can be entered in natural language, e.g. &quot;today&quot;, &quot;tomorrow at noon&quot;, &quot;this Sunday&quot;, &quot;every Tuesday&quot;. If deadline is not specified, it is assumed that the task is floating, which means the task can be performed earlier or later in the schedule without any form of urgency.<br><br>
-The priority parameter only accepts levels 1 - 5.<br><br>
-Tasks can have any number of tags, including 0.
+| Deadline Format | Example(s)                |
+|-----------------|---------------------------|
+| Floating        | `nothing`/floating        |
+| Month/day       | 1/23                      |
+| Month/day time  | 1/23 6pm                  |
+| Day Month       | 1 Oct                     |
+| Month Day       | Oct 1                     |
+| Day of the Week | Wed, Wednesday            |
+| Relative date   | today, tomorrow, next fri |
 
-Examples:
+**Tip** : You can use holidays like Christmas as well!<br>
 
-- `add Buy groceries priority: 3 note: eggs x10, milk x2, bread x2 #home #errand`
-- `add Watch webcast #CS2103 #school`
+#### Priority Format
+Let us show you the parameters to fill for `<priority level>`.<br>
+Remember to put the `priority:` keyword.<br>
+Burdens will assign this numbers as a unique tag.<br>
+The priority parameter only accepts levels 1 - 5.<br>
 
-### 3.3. Listing all tasks : `list`
+| Priority Format | Tag                       |
+|-----------------|---------------------------|
+| 1               | lame                      |
+| 2               | decent                    |
+| 3               | moderate                  |
+| 4               | forreal                   |
+| 5               | urgent                    |
+
+#### Instruction Format
+Let us show you the parameters to fill for `<instructions>`.<br>
+Remember to put the `note:` keyword.<br>
+You can put any instruction you like, similar to `<title>`.<br>
+
+#### Tag Format
+Let us show you the parameters to fill for `tag`.<br>
+Remember to put the `#` keyword before all tags.<br>
+Tasks can have any number of tags, including 0.<br>
+
+Let us show you some *examples*:
+```
+I want to buy apples but I don't wish to have a deadline.
+> Command: add Buy Appples
+Result: Burdens will ask this task to the "Floating" square.
+
+I want to buy oranges by the end of this week.
+> Command: add Buy Oranges for: end of this week
+Result: Burdens will add this task to the "Ongoing" square and assign it to the Friday of that week.
+
+I want to buy pears which will happen on Christmas and eat them from 6pm to 12am.
+> Command: add Buy Pears for: Christmas from 6pm to 12am
+Result: Burdens will add this task to the "Ongoing" square and assign it to the Christmas of that year and add an event tag `E`.
+
+I want to buy mangoes, it's extremely decent and I want to add an instruction that it's due on Friday.
+> Command: add Buy Mangoes for: Friday priority: 2 note: I must buy it on Friday.
+Result: Burdens will add this task to the "Ongoing" square and assign it to a priority level of 5.
+
+Now it's time for a full command.
+I want to buy Burdens today, it's of the utmost importance, I want to note that I have to get it and I want to tag it as cool and awesome!
+> Command: add Buy Burdens for: today priority: 5 note: I have to get it #cool #awesome
+```
+
+### 3.2. Deleting a task : `delete`
+
+CLeared a burden? You can eliminate it by using the `delete` a command.
+
+Let's begin to delete a task from Burdens.
+
+Here are the **allowed formats**:
+
+* `delete <index>` - deletes an ongoing task from Burdens at the specified index.
+* `delete floating <index>` - deletes a floating task from Burdens at the specified index.
+* `delete completed <index>` - deletes a completed task from Burdens at the specified index.
+
+Let us show you some *examples*:
+```
+I no longer want to buy my apples and wish to remove the task from Burdens. It is in the ongoing list at index 3.
+> Command: delete 3
+Result: Burdens will delete this task from the "Ongoing" square.
+
+I bought my oranges and completed the task. It is now at index 2 of the completed list. Now I wish to delete it from Burdens.
+> Command: delete completed 2
+Result: Burdens will delete this task from the "Completed" square.
+```
+
+### 3.3. Editing a task : `edit`
+
+Want to rectify something that was not right? Changed dates?
+
+Burdens allows you to edit your tasks at any field, at any square.
+
+Let's begin to edit a task from Burdens.
+
+Here are the **allowed formats**:
+
+*  You can add any of these fields after the `<index>` of all the commands below to edit them, <br>
+   `<title> <for: deadline> <priority: priority> <note: instructions> <#tag>`
+* `edit <index>` - edits an ongoing task from Burdens at the specified index.
+* `edit floating <index>` - deletes a floating task from Burdens at the specified index.
+* `edit completed <index>` - deletes a completed task from Burdens at the specified index.
+
+Note: 
+
+* At least one of the optional fields apart from the task list name must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+* You can remove all tags by typing `#` and nothing after that.
+
+Let us show you some *examples*:
+```
+I want to buy oranges tomorrow instead of apples today. My task is in the ongoing list at index 3.
+> Command: edit 3 Buy Oranges for: tomorrow
+Result: Burdens will edit this task and change the title to Buy Oranges and deadline to tomorrow at the "Ongoing" square.
+
+I want to change the instructions of task 2 at the floating list from fruits to vegetables.
+> Command: edit floating 2 note: vegetables
+Result: Burdens will edit the instructions of the second task to vegetables at the "Floating" square.
+```
+
+### 3.4. Listing all tasks : `list`
 
 Shows a list of all tasks.
 
 Format: `list`
-
-### 3.4. Editing a task : `edit`
-
-Edits an existing task in the list.
-
-Format: `edit [TASK_LIST] INDEX [TITLE] [for: DATE] [priority: PRIORITY] [note: INSTRUCTION] [#TAG]...`
-
-> Edits the task at the specified TASK\_LIST and INDEX. The task list refers to the name of the task list e.g. &quot;floating&quot;, &quot;ongoing&quot; and &quot;completed&quot;. If no task list name specified, it is assumed to be &quot;ongoing&quot;. The index refers to the index number shown in the last task listing.<br><br>
-The index must be a positive integer 1, 2, 3, ...<br><br>
-At least one of the optional fields apart from the task list name must be provided.<br><br>
-Existing values will be updated to the input values.<br><br>
-When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.<br><br>
-You can remove all the task&#39;s tags by typing t/ without specifying any tags after it.
-
-Examples:
-
-- `edit 1 priority: 1 for: 07032017`
-   - Edits the priority and date of the 1st task to be 1 and 07032017 respectively.
-- `edit floating 2 Drink Coffee #`
-   - Edits the title of the 2nd task in the floating task list to be Drink Coffee and clears all existing tags.
 
 ### 3.5. Finding all tasks containing any keyword in their title : `find`
 
@@ -150,25 +250,6 @@ Examples:
    - Returns Buy groceries but not Groceries
 - `find buy webcast`
    - Returns any tasks having titles buy or webcast
-
-### 3.6. Deleting a task : `delete`
-
-Deletes the task identified by the index number used in the last task listing.
-
-Format: `delete [TASK_LIST] INDEX`
-
-> Deletes the task at the specified TASK\_LIST and INDEX. The task list refers to the name of the task list e.g. &quot;floating&quot;, &quot;ongoing&quot; and &quot;completed&quot;. If no task list name specified, it is assumed to be &quot;ongoing&quot;.
-The index refers to the index number shown in the most recent listing.<br><br>
-The index must be a positive integer 1, 2, 3, ...
-
-Examples:
-
-- `list`
-- `delete 2`
-   - Deletes the 2nd task in the list.
-- `find 2103T`
-- `delete 1`
-   - Deletes the 1st task in the results of the `find` command.
 
 ### 3.7. Marking a task as complete : `complete`
 
@@ -255,6 +336,14 @@ Format: `export path/to/file.ics`
 All data are saved in the hard disk automatically after any command that changes the data.
 
 There is no need to save manually.
+
+### 3.18. Viewing help : `help`
+
+Prompts a help page with all the existing commands.
+
+Format: `help`
+
+> Help is also shown if you enter an incorrect command e.g. abcd
 
 # 4. FAQ
 
