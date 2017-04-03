@@ -21,7 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_INFORMATION = new Prefix("i/");
     public static final Prefix PREFIX_RECURRENCE = new Prefix("r/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
-    public static final Prefix PREFIX_KEYWORD = new Prefix("k/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
