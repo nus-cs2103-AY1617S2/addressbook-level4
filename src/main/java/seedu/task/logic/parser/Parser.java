@@ -11,6 +11,7 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CompleteCommand;
 import seedu.task.logic.commands.DeleteCommand;
+import seedu.task.logic.commands.DeleteCompleteCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
@@ -91,7 +92,7 @@ public class Parser {
         case UpcomingCommand.COMMAND_WORD:
             return new UpcomingCommand();
 
-        //@@Dylan Sng A0139161J
+        //@@author A0139161J
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
@@ -103,7 +104,10 @@ public class Parser {
 
         case UncompleteCommand.COMMAND_WORD:
             return new UncompleteCommandParser().parse(arguments);
-        //@@Dylan Sng
+
+        case DeleteCompleteCommand.COMMAND_WORD:
+            return new DeleteCompleteCommandParser().parse(arguments);
+        //@@author
 
         case FindPriorityCommand.COMMAND_WORD:
             return new FindPriorityCommand();

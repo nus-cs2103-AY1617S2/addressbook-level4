@@ -101,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getCompletedTaskList() {
+    public UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList() {
         return new UnmodifiableObservableList<>(completedTasks);
     }
 
@@ -113,6 +113,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
         taskManager.transferTaskFromComplete(t);
+    }
+
+    @Override
+    public void deleteCompletedTask(ReadOnlyTask t) throws TaskNotFoundException {
+        taskManager.deleteCompletedTask(t);
+        indicateAddressBookChanged();
     }
     //@@author
 
