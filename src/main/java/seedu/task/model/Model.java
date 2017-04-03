@@ -77,4 +77,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords, near match cases are allowed */
     void updateAdvancedFilteredTaskList(Set<String> keywords);
+
+    /** Updates the filter of the filtered task list to filter by the highest priority */
+    void updatePriorityTaskList();
 }
