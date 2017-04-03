@@ -22,8 +22,10 @@ import seedu.ezdo.commons.util.FxViewUtil;
  */
 public class StatusBarFooter extends UiPart<Region> {
 
-    private static final String MESSAGE_SAVE_LOCATION_TOOLTIP = "ezDo Directory Box\nDisplays the directory of ezDo data file.";
-    private static final String MESSAGE_STATUS_BAR_TOOLTIP = "Status Box\nDisplays when ezDo data file is last updated.";
+    private static final String MESSAGE_SAVE_LOCATION_TOOLTIP = 
+            "ezDo Directory Box\nDisplays the directory of ezDo data file.";
+    private static final String MESSAGE_STATUS_BAR_TOOLTIP = 
+            "Status Box\nDisplays when ezDo data file is last updated.";
 
     private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
 
