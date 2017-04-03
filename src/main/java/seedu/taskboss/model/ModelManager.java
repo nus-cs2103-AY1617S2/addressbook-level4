@@ -239,7 +239,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Removes the category from the UniqueCategoryList of Taskboss 
+     * Removes the category from the UniqueCategoryList of Taskboss
      * if the category is not a build-in category
      **/
     public void removeCategoryFromTaskboss(Category category) {

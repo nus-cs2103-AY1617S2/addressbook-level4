@@ -54,7 +54,7 @@ public class Category {
         return '[' + categoryName + ']';
     }
 
-    //@@author A0147990R   
+    //@@author A0147990R
     private String formatName(String name) {
         if (name.length() <= 1) {
             return name.toUpperCase();
