@@ -152,7 +152,7 @@ public class TypicalTestTasks {
             }
         }
     }
-    
+
     public static void loadEzDoWithSampleDataNonRecurring(EzDo ez) {
         for (TestTask task : new TypicalTestTasks().getTypicalNonRecurringTasks()) {
             try {
@@ -166,7 +166,7 @@ public class TypicalTestTasks {
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
-    
+
     public TestTask[] getTypicalNonRecurringTasks() {
         return new TestTask[]{alice2, benson2, carl2, daniel2, elle2, fiona2, george2};
     }

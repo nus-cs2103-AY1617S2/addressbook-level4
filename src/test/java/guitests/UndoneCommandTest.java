@@ -14,14 +14,14 @@ import seedu.ezdo.testutil.TestUtil;
 import seedu.ezdo.testutil.TypicalTestTasks;
 //@@author A0139248X
 public class UndoneCommandTest extends EzDoGuiTest {
-    
+
     @Override
     protected EzDo getInitialData() {
         EzDo ez = new EzDo();
         TypicalTestTasks.loadEzDoWithSampleDataNonRecurring(ez);
         return ez;
     }
-    
+
     @Test
     public void undone_success() {
         TestTask[] currentList = td.getTypicalDoneTasks();
@@ -30,7 +30,7 @@ public class UndoneCommandTest extends EzDoGuiTest {
         int targetIndex = 1;
         assertUndoneSuccess(false, targetIndex, currentList, doneList);
     }
-    
+
     @Test
     public void undone_empty() {
         //no tasks in done list to undone
