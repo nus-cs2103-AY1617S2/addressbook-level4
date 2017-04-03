@@ -31,10 +31,7 @@ public class ListCommandParser {
     }
     
     private boolean isValidParameter(String parameter) {
-        if(PARAMETERS.contains(parameter)){
-            return true;
-        }
-        return false;
+        return PARAMETERS.contains(parameter);
     }
 
 }

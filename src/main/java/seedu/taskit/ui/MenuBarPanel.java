@@ -67,23 +67,8 @@ public class MenuBarPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
     
-    public String getNavigationCommand(String menuItem) {
-        switch (menuItem) {
-            case MENU_FLOATING_TASK:
-                command = ListCommand.COMMAND_WORD + " floating";
-                return command;
-            case MENU_EVENT_TASK:
-                command = ListCommand.COMMAND_WORD + " event";
-                return command;
-            case MENU_DEADLINE_TASK:
-                command = ListCommand.COMMAND_WORD + " deadline";
-                return command;
-            case MENU_TODAY_TASK:
-                command = ListCommand.COMMAND_WORD + " today";
-                return command;
-            default:
-                return ListCommand.COMMAND_WORD + " all";
-        }
+    public String getNavigationCommand(String parameter) {
+        return ListCommand.COMMAND_WORD +" "+ parameter;
     }
     
     class MenuBarCell extends ListCell<String> {

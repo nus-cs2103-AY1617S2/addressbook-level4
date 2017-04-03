@@ -114,13 +114,14 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0141872E
     void fillInnerParts() {
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
         menuBarPanel = new MenuBarPanel(getMenuBarPlaceholder());
-    }
+    }//@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -205,6 +206,7 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
     
+    //@@author A0141872E
     public MenuBarPanel getMenuBarPanel() {
         return this.menuBarPanel;
     }

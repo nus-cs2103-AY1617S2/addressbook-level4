@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <!--@@author A0141872E-->
@@ -38,9 +37,6 @@
                     </children>
                 </VBox>
             </children>
-         <rowConstraints>
-            <RowConstraints />
-         </rowConstraints>
         </GridPane>
     </children>
 </HBox>
