@@ -88,11 +88,6 @@ public class TaskManagerTest {
         }
 
         @Override
-        public ObservableList<ReadOnlyTask> getSortedList(String keyword) {
-            return tasks;
-        }
-
-        @Override
         public ObservableList<Tag> getTagList() {
             return tags;
         }
