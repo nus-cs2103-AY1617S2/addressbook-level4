@@ -243,9 +243,14 @@ public class ModelManager extends ComponentManager implements Model {
      * if the category is not a build-in category
      **/
     public void removeCategoryFromTaskboss(Category category) {
-        if (!category.toString().equals(CATEGORY_ALL_TASKS) &&
-                !category.toString().equals(CATEGORY_DONE)) {
-            taskBoss.removeCategory(category);
+        try {
+            if (!category.equals(new Category(CATEGORY_ALL_TASKS)) &&
+                    !category.equals(new Category(CATEGORY_DONE))) {
+                taskBoss.removeCategory(category);
+            }
+        } catch (IllegalValueException ive) {
+            //this exception should never be caught as CATEGORY_ALL_TASKS and CATEGORY_DONE
+            // are always valid
         }
     }
 
