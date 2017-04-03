@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,7 @@ import seedu.toluist.controller.commons.KeywordTokenizer;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
+    private static final int SUGGESTION_LIMIT = 7;
 
     //@@author A0162011A
     /**
@@ -64,27 +66,28 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public SortedSet<String> getSuggestions(String command) {
-        if (!StringUtil.isPresent(command)
-            || !StringUtil.isPresent(command.substring(command.length() - 1))) {
+        if (!StringUtil.isPresent(command)) {
             return new TreeSet<>();
         }
 
-        SortedSet<String> commandWordAndAliasSuggestions = getCommandWordAndAliasSuggestions(command);
-        if (!commandWordAndAliasSuggestions.isEmpty()) {
-            return commandWordAndAliasSuggestions;
-        }
+        List<Function<String, SortedSet<String>>> getSuggestionMethods = Arrays.asList(
+                this::getCommandWordAndAliasSuggestions,
+                this::getKeywordSuggestions,
+                this::getKeywordArgumentSuggestions,
+                this::getSearchSuggestions
+        );
 
-        SortedSet<String> keywordSuggestions = getKeywordSuggestions(command);
-        if (!keywordSuggestions.isEmpty()) {
-            return keywordSuggestions;
-        }
-
-        SortedSet<String> keywordArgumentSuggestions = getKeywordArgumentSuggestions(command);
-        if (!keywordArgumentSuggestions.isEmpty()) {
-            return keywordArgumentSuggestions;
-        }
-
-        return getSearchSuggestions(command);
+        return getSuggestionMethods.stream()
+                .reduce(new TreeSet<String>(),
+                        (accumulator, next) -> {
+                            if (!accumulator.isEmpty()) {
+                                return accumulator;
+                            }
+                            return next.apply(command).stream()
+                                    .limit(SUGGESTION_LIMIT)
+                                    .collect(Collectors.toCollection(TreeSet::new));
+                        },
+                        (set1, set2) -> set1); // This line will not be actually be run
     }
 
     /**
@@ -94,9 +97,9 @@ public class CommandDispatcher extends Dispatcher {
      */
     private SortedSet<String> getCommandWordAndAliasSuggestions(String command) {
         SortedSet<String> suggestions = new TreeSet<>();
-        String[] words = command.trim().split("\\s+");
+        String[] words = command.trim().split(StringUtil.WHITE_SPACE);
 
-        if (words.length > 1) {
+        if (command.substring(command.length() - 1).equals(" ") || words.length > 1) {
             return suggestions;
         }
         String firstWordOfCommand = words[0];
@@ -123,13 +126,13 @@ public class CommandDispatcher extends Dispatcher {
      * @return sorted set of suggestions
      */
     private SortedSet<String> getKeywordSuggestions(String command) {
-        String lastWordOfCommand = StringUtil.getLastWord(command);
+        String lastComponentOfCommand = StringUtil.getLastComponent(command);
 
         HashMap<String, String[]> keywordMap = getBestFitController(command).getCommandKeywordMap();
         HashMap<String, String> tokens = KeywordTokenizer.tokenize(command, null,
                 keywordMap.keySet().toArray(new String[0]));
         return keywordMap.keySet().stream()
-                .filter(keyword -> StringUtil.startsWithIgnoreCase(keyword, lastWordOfCommand)
+                .filter(keyword -> StringUtil.startsWithIgnoreCase(keyword, lastComponentOfCommand)
                         && !tokens.keySet().contains(keyword))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
@@ -140,7 +143,7 @@ public class CommandDispatcher extends Dispatcher {
      * @return sorted set of suggestions
      */
     private SortedSet<String> getKeywordArgumentSuggestions(String command) {
-        String lastWordOfCommand = StringUtil.getLastWord(command);
+        String lastComponentOfCommand = StringUtil.getLastComponent(command);
         HashMap<String, String[]> keywordMap = getBestFitController(command).getCommandKeywordMap();
         List<Pair<String, String>> tokens = KeywordTokenizer.tokenizeInOrder(command, null,
                 keywordMap.keySet().toArray(new String[0]));
@@ -151,7 +154,7 @@ public class CommandDispatcher extends Dispatcher {
         Pair<String, String> lastKeywordTokenPair = tokens.get(tokens.size() - 1);
 
         return Arrays.stream(keywordMap.get(lastKeywordTokenPair.getKey()))
-                .filter(value -> StringUtil.startsWithIgnoreCase(value, lastWordOfCommand))
+                .filter(value -> StringUtil.startsWithIgnoreCase(value, lastComponentOfCommand))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
@@ -166,11 +169,11 @@ public class CommandDispatcher extends Dispatcher {
             return new TreeSet<>();
         }
 
-        String lastWordOfCommand = StringUtil.getLastWord(command);
+        String lastComponentOfCommand = StringUtil.getLastComponent(command);
         return tokenHistoryList.retrieveTokens(bestFitController, FindController.PARAMETER_KEYWORDS).stream()
                 .map(keywords -> keywords.split("\\s+"))
                 .flatMap(Arrays::stream)
-                .filter(value -> StringUtil.startsWithIgnoreCase(value, lastWordOfCommand))
+                .filter(value -> StringUtil.startsWithIgnoreCase(value, lastComponentOfCommand))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 

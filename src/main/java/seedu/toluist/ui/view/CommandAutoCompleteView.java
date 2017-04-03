@@ -47,8 +47,6 @@ public class CommandAutoCompleteView extends UiView {
 
     private void configureConstraints() {
         AnchorPane.setBottomAnchor(getRoot(), MARGIN);
-        AnchorPane.setLeftAnchor(getRoot(), MARGIN);
-        AnchorPane.setRightAnchor(getRoot(), MARGIN);
     }
 
     /**

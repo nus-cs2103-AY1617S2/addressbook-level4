@@ -73,8 +73,8 @@ public class CommandBox extends UiView {
 
         List<String> suggestedCommands = store.getObservableSuggestedCommands();
         if (suggestedCommands.size() == 1) {
-            store.setCommandInput(
-                    StringUtil.replaceLastWord(commandTextField.getText(), suggestedCommands.get(0)));
+            setCommandTextField(
+                    StringUtil.replaceLastComponent(commandTextField.getText(), suggestedCommands.get(0)));
         }
     }
 
@@ -96,7 +96,11 @@ public class CommandBox extends UiView {
             return;
         }
 
-        store.setCommandInput(StringUtil.replaceLastWord(commandText, suggestedCommands.get(index)));
-        Platform.runLater(() -> commandTextField.end());
+        setCommandTextField(StringUtil.replaceLastComponent(commandText, suggestedCommands.get(index)));
+    }
+
+    private void setCommandTextField(String command) {
+        commandTextField.setText(command);
+        commandTextField.end();
     }
 }
