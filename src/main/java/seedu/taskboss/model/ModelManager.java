@@ -30,6 +30,7 @@ import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final String CATEGORY_DONE = "Done";
+    private static final String CATEGORY_ALL_TASKS = "Alltasks";
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
@@ -238,10 +239,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Removes the category from the UniqueCategoryList of Taskboss
+     * Removes the category from the UniqueCategoryList of Taskboss 
+     * if the category is not a build-in category
      **/
     public void removeCategoryFromTaskboss(Category category) {
-        taskBoss.removeCategory(category);
+        if (!category.toString().equals(CATEGORY_ALL_TASKS) &&
+                !category.toString().equals(CATEGORY_DONE)) {
+            taskBoss.removeCategory(category);
+        }
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
