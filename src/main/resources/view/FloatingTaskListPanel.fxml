@@ -25,7 +25,7 @@
                         <ListView fx:id="allListView" layoutY="34.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
                         <Text fill="#f1f1f1" layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floating Tasks:">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Segoe UI Semibold" size="19.0" />
                            </font>
                         </Text>
                      </children>
@@ -39,21 +39,21 @@
                         <ListView fx:id="upcomingListView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
                         <Text fill="#f1f1f1" layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floating Tasks:">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Segoe UI Semibold" size="19.0" />
                            </font>
                         </Text>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab text="Compeleted">
+          <Tab text="Finished">
                <content>
                   <AnchorPane>
                      <children>
-                        <ListView fx:id="completedListView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
+                        <ListView fx:id="finishedListView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
                         <Text fill="#f1f1f1" layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floating Tasks:">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Segoe UI Semibold" size="19.0" />
                            </font>
                         </Text>
                      </children>

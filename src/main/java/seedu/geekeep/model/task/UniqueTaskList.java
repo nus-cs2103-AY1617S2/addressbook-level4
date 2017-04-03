@@ -1,4 +1,4 @@
-//@@author A0121658E
+
 package seedu.geekeep.model.task;
 
 import java.util.Iterator;
@@ -23,6 +23,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
+    //@@author A0121658E
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -54,6 +55,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.sort((thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
     }
 
+    //@@author
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
@@ -137,6 +139,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.sort((thisTask, otherTask) -> thisTask.comparePriorityAndDatetimeAndTitle(otherTask));
     }
 
+    //@@author A0121658E
     public void markTaskDone(int index) {
         Task taskToMark = internalList.get(index);
         taskToMark.markDone();

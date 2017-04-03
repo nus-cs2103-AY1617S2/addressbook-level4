@@ -16,7 +16,7 @@ import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.Title;
 
 /**
@@ -57,11 +57,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
+     * Parses a {@code Optional<String> description} into an {@code Optional<description>} if {@code description
+     * } is present.
      */
-    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
-        assert location != null;
-        return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
+    public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
+        assert description != null;
+        return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
     }
 
     /**

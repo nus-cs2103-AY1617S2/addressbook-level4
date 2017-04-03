@@ -1,6 +1,7 @@
-//@@author A0121658E
+
 package seedu.geekeep.model;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
@@ -11,7 +12,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 public interface Model {
-
+    //@@author A0121658E
     /**
      * Signals that an undo command would fail because there is nothing to undo.
      */
@@ -29,6 +30,9 @@ public interface Model {
 
     /** Deletes the task */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+
+    /** Returns the config */
+    Config getConfig();
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
@@ -71,9 +75,17 @@ public interface Model {
     /** Mark the specified task as undone */
     void markTaskUndone(int filteredTaskListIndex);
 
-    void undo() throws NothingToUndoException;
+    String undo() throws NothingToUndoException;
 
-    void redo() throws NothingToRedoException;
+    String redo() throws NothingToRedoException;
+
+    List<String> getCommandHistory();
+
+    void appendCommandHistory(String commandText);
+
+    void updateUndoableCommandHistory(String commandText);
+
+    void setGeekeepFilePath(String filePath);
 
 }
 

@@ -4,7 +4,7 @@
         <title>Hans Muster</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">4th street</location>
+        <description isPrivate="false">4th street</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>
@@ -12,7 +12,7 @@
         <title>Ruth Mueller</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">81th street</location>
+        <description isPrivate="false">81th street</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>
@@ -20,7 +20,7 @@
         <title>Heinz Kurz</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">wall street</location>
+        <description isPrivate="false">wall street</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>
@@ -28,7 +28,7 @@
         <title>Cornelia Meier</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">10th street</location>
+        <description isPrivate="false">10th street</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>
@@ -36,7 +36,7 @@
         <title>Werner Meyer</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">michegan ave</location>
+        <description isPrivate="false">michegan ave</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>
@@ -44,7 +44,7 @@
         <title>Lydia Kunz</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">little tokyo</location>
+        <description isPrivate="false">little tokyo</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>
@@ -52,7 +52,7 @@
         <title>Anna Best</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">4th street</location>
+        <description isPrivate="false">4th street</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>
@@ -60,7 +60,7 @@
         <title>Stefan Meier</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">little india</location>
+        <description isPrivate="false">little india</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>
@@ -68,7 +68,7 @@
         <title>Martin Mueller</title>
         <startDateTime isPrivate="false">01-04-17 0000</startDateTime>
         <endDateTime isPrivate="false">27-04-17 2359</endDateTime>
-        <location isPrivate="false">chicago ave</location>
+        <description isPrivate="false">chicago ave</description>
         <tagged>friends</tagged>
         <isDone>False</isDone>
     </tasks>

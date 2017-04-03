@@ -25,7 +25,7 @@
                         <ListView fx:id="allListView" layoutY="34.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
                         <Text fill="#f1f1f1" layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Events:">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Segoe UI Semibold" size="19.0" />
                            </font>
                         </Text>
                      </children>
@@ -38,7 +38,7 @@
                      <children>
                         <Text fill="#f1f1f1" layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Events:">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Segoe UI Semibold" size="19.0" />
                            </font>
                         </Text>
                         <ListView fx:id="upcomingListView" layoutY="34.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
@@ -46,16 +46,16 @@
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab text="Compeleted">
+          <Tab text="Finished">
                <content>
                   <AnchorPane>
                      <children>
                         <Text fill="#f1f1f1" layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Events:">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Segoe UI Semibold" size="19.0" />
                            </font>
                         </Text>
-                        <ListView fx:id="completedListView" layoutY="34.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
+                        <ListView fx:id="finishedListView" layoutY="34.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0" />
                      </children>
                   </AnchorPane>
                </content>

@@ -24,9 +24,9 @@ import seedu.geekeep.model.task.ReadOnlyTask;
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String EVENTFXML = "EventListPanel.fxml";
-    private static final String FTASKFXML = "FloatingTaskListPanel.fxml";
-    private static final String DEADLINEFXML = "DeadlineListPanel.fxml";
+    private static final String EVENT_FXML = "EventListPanel.fxml";
+    private static final String FLOATING_TASK_FXML = "FloatingTaskListPanel.fxml";
+    private static final String DEADLINE_FXML = "DeadlineListPanel.fxml";
     private ListView<ReadOnlyTask> currentListView;
     private String type;
 
@@ -40,7 +40,7 @@ public class TaskListPanel extends UiPart<Region> {
     private ListView<ReadOnlyTask> upcomingListView;
 
     @FXML
-    private ListView<ReadOnlyTask> completedListView;
+    private ListView<ReadOnlyTask> finishedListView;
 
     public TaskListPanel(String type, AnchorPane taskListPlaceholder,
             ObservableList<ReadOnlyTask> filteredList) {
@@ -48,7 +48,7 @@ public class TaskListPanel extends UiPart<Region> {
         this.type = type;
         currentListView = allListView;
         setConnections(filteredList, allListView);
-        setConnections(filteredList, completedListView);
+        setConnections(filteredList, finishedListView);
         setConnections(filteredList, upcomingListView);
         addToPlaceholder(taskListPlaceholder);
         selectTab(0);
@@ -57,12 +57,12 @@ public class TaskListPanel extends UiPart<Region> {
     //TODO to remove
     private static String getFxmlFromType(String type) {
         if ("deadline".equals(type)) {
-            return DEADLINEFXML;
+            return DEADLINE_FXML;
         } else if ("floatingTask".equals(type)) {
-            return FTASKFXML;
+            return FLOATING_TASK_FXML;
         } else {
             assert "event".equals(type);
-            return EVENTFXML;
+            return EVENT_FXML;
         }
     }
 

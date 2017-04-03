@@ -10,22 +10,23 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.core.EventsCenter;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.Version;
 import seedu.geekeep.commons.events.ui.ExitAppRequestEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
-import seedu.geekeep.commons.util.ConfigUtil;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.logic.Logic;
 import seedu.geekeep.logic.LogicManager;
+import seedu.geekeep.model.Config;
 import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
 import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.model.util.SampleDataUtil;
+import seedu.geekeep.storage.ConfigStorage;
+import seedu.geekeep.storage.JsonConfigStorage;
 import seedu.geekeep.storage.Storage;
 import seedu.geekeep.storage.StorageManager;
 import seedu.geekeep.ui.Ui;
@@ -52,14 +53,18 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing GeeKeep ]===========================");
         super.init();
 
-        config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getGeekeepFilePath(), config.getUserPrefsFilePath());
+        String configFilePath = getApplicationParameter("config");
+        config = initConfig(configFilePath);
+        if (configFilePath == null) {
+            configFilePath = Config.DEFAULT_CONFIG_FILE;
+        }
+        storage = new StorageManager(configFilePath, config.getGeekeepFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(config, storage, userPrefs);
 
         logic = new LogicManager(model);
 
@@ -77,7 +82,7 @@ public class MainApp extends Application {
         }
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Config config, Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyGeeKeep> geeKeepOptional;
         ReadOnlyGeeKeep initialData;
         try {
@@ -94,7 +99,7 @@ public class MainApp extends Application {
             initialData = new GeeKeep();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(config, initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -114,8 +119,9 @@ public class MainApp extends Application {
 
         logger.info("Using config file : " + configFilePathUsed);
 
+        ConfigStorage configStorage = new JsonConfigStorage(configFilePathUsed);
         try {
-            Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
+            Optional<Config> configOptional = configStorage.readConfig();
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
             logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
@@ -125,7 +131,7 @@ public class MainApp extends Application {
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
-            ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
+            configStorage.saveConfig(initializedConfig);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
@@ -145,9 +151,6 @@ public class MainApp extends Application {
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
                     "Using default user prefs");
-            initializedPrefs = new UserPrefs();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty GeeKeep");
             initializedPrefs = new UserPrefs();
         }
 

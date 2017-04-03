@@ -9,7 +9,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 /**
  * Marks 'done' for task identified using it's last displayed index from GeeKeep.
  */
-public class DoneCommand extends Command {
+public class DoneCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "done";
 

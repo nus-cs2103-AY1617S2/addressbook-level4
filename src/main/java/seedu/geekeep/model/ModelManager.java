@@ -1,6 +1,9 @@
-//@@author A0121658E
+
 package seedu.geekeep.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -11,6 +14,7 @@ import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.TaskCategory;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
+import seedu.geekeep.commons.events.model.GeekeepFilePathChangedEvent;
 import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
@@ -27,40 +31,54 @@ public class ModelManager extends ComponentManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private final Config config;
     private final GeeKeep geeKeep;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     //@@author A0147622H
-    private final Stack<GeeKeep> pastGeeKeeps;
-    private final Stack<GeeKeep> futureGeeKeeps;
+    private final Stack<ReadOnlyGeeKeep> pastGeeKeeps;
+    private final Stack<ReadOnlyGeeKeep> futureGeeKeeps;
+    private final List<String> commandHistory;
+    private final List<String> undoableCommandHistory;
+    private int undoableCommandHistoryIndex;
 
     /**
      * Initializes a ModelManager with the given geekeep and userPrefs.
      */
-    public ModelManager(ReadOnlyGeeKeep geeKeep, UserPrefs userPrefs) {
+    public ModelManager(Config config, ReadOnlyGeeKeep geeKeep, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(geeKeep, userPrefs);
+        assert !CollectionUtil.isAnyNull(config, geeKeep, userPrefs);
 
-        logger.fine("Initializing with GeeKeep: " + geeKeep + " and user prefs " + userPrefs);
+        logger.fine(
+                "Initializing with" + " config " + config + " GeeKeep " + geeKeep + " and user prefs " + userPrefs);
 
+        this.config = config;
         this.geeKeep = new GeeKeep(geeKeep);
         filteredTasks = new FilteredList<>(this.geeKeep.getTaskList());
 
         pastGeeKeeps = new Stack<>();
         futureGeeKeeps = new Stack<>();
+        commandHistory = new ArrayList<>();
+        undoableCommandHistory = new ArrayList<>();
+        undoableCommandHistoryIndex = 0;
 
     }
 
     public ModelManager() {
-        this(new GeeKeep(), new UserPrefs());
+        this(new Config(), new GeeKeep(), new UserPrefs());
+    }
+
+    @Override
+    public Config getConfig() {
+        return config;
     }
 
     //@@author A0121658E
     @Override
     public void resetData(ReadOnlyGeeKeep newData) {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.resetData(newData);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
@@ -76,17 +94,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.removeTask(target);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.addTask(task);
+        updateGeekeepHistory(originalGeekeepClone);
         updateFilteredListToShowAll();
         indicateGeeKeepChanged();
     }
@@ -96,14 +114,13 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert updatedTask != null;
 
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        updateGeekeepHistory(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.updateTask(taskListIndex, updatedTask);
 
         indicateGeeKeepChanged();
     }
-
+    //@@author
     // =========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -182,21 +199,22 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0121658E
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.markTaskDone(taskListIndex);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
     @Override
     public void markTaskUndone(int filteredTaskListIndex) {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.markTaskUndone(taskListIndex);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
@@ -214,23 +232,60 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0147622H
     @Override
-    public void undo() throws NothingToUndoException {
+    public String undo() throws NothingToUndoException {
         if (pastGeeKeeps.empty()) {
             throw new NothingToUndoException();
         }
         futureGeeKeeps.push(new GeeKeep(geeKeep));
         geeKeep.resetData(pastGeeKeeps.pop());
         indicateGeeKeepChanged();
+        return undoableCommandHistory.get(--undoableCommandHistoryIndex);
     }
 
     @Override
-    public void redo() throws NothingToRedoException {
+    public String redo() throws NothingToRedoException {
         if (futureGeeKeeps.empty()) {
             throw new NothingToRedoException();
         }
         pastGeeKeeps.push(new GeeKeep(geeKeep));
         geeKeep.resetData(futureGeeKeeps.pop());
         indicateGeeKeepChanged();
+        return undoableCommandHistory.get(undoableCommandHistoryIndex++);
+    }
+
+    @Override
+    public List<String> getCommandHistory() {
+        return Collections.unmodifiableList(commandHistory);
+    }
+
+    @Override
+    public void appendCommandHistory(String commandText) {
+        commandHistory.add(commandText);
+    }
+
+    @Override
+    public void updateUndoableCommandHistory(String commandText) {
+        while (undoableCommandHistory.size() > undoableCommandHistoryIndex) {
+            undoableCommandHistory.remove(undoableCommandHistory.size() - 1);
+        }
+        undoableCommandHistory.add(commandText);
+        undoableCommandHistoryIndex++;
+    }
+
+    public void updateGeekeepHistory(ReadOnlyGeeKeep originalGeekeepClone) {
+        pastGeeKeeps.add(originalGeekeepClone);
+        futureGeeKeeps.clear();
+    }
+
+    @Override
+    public void setGeekeepFilePath(String filePath) {
+        config.setGeeKeepFilePath(filePath);
+        indicateGeekeepFilePathChanged();
+    }
+
+    /** Raises an event to indicate the geeKeepFilePath has changed */
+    private void indicateGeekeepFilePathChanged() {
+        raise(new GeekeepFilePathChangedEvent(config, geeKeep));
     }
 
 }

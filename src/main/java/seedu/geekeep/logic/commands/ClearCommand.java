@@ -5,7 +5,7 @@ import seedu.geekeep.model.GeeKeep;
 /**
  * Clears the Task Manager.
  */
-public class ClearCommand extends Command {
+public class ClearCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Task Manager has been cleared!";
