@@ -1,8 +1,5 @@
 package seedu.taskboss.logic.commands;
 
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_KEYWORD;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,29 +21,32 @@ public class FindCommand extends Command {
             + " or with dates specified in any of following formats"
             + " e.g 28 / Feb / Feb 28 / Feb 28, 2017,\n"
             + " and displays them in a list.\n"
-            + "Parameters: k/NAME AND INFORMATION KEYWORDS or sd/START_DATE or ed/END_DATE \n"
-            + "Example: " + COMMAND_WORD + " k/meeting" + " || " + COMMAND_WORD_SHORT + " sd/march 19";
+            + "Parameters: NAME AND INFORMATION KEYWORDS or sd/START_DATE or ed/END_DATE \n"
+            + "Example: " + COMMAND_WORD + " meeting" + " || " + COMMAND_WORD_SHORT + " sd/march 19";
+
+    private static final String TYPE_KEYWORDS = "keywords";
+    private static final String TYPE_START_DATE = "startDate";
 
     private final String keywords;
-    private final String prefix;
+    private final String type;
 
     //@@author A0147990R
-    public FindCommand(String pre, String keywords) {
-        this.prefix = pre;
+    public FindCommand(String type, String keywords) {
+        this.type = type;
         this.keywords = keywords;
     }
 
     @Override
     public CommandResult execute() {
-        if (prefix.equals(PREFIX_KEYWORD.toString())) {
+        if (type.equals(TYPE_KEYWORDS)) {
             String[] keywordsList = keywords.split(ALL_WHITESPACE);
             final Set<String> keywordSet = new HashSet<String>(Arrays.asList(keywordsList));
             model.updateFilteredTaskListByKeywords(keywordSet);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else if (prefix.equals(PREFIX_START_DATE.toString())) {
+        } else if (type.equals(TYPE_START_DATE)) {
             model.updateFilteredTaskListByStartDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else { //find by end datetime
+        } else { //find by end date time
             model.updateFilteredTaskListByEndDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         }

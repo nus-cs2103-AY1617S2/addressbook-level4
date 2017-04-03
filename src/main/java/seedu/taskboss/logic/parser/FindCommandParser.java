@@ -3,7 +3,6 @@ package seedu.taskboss.logic.parser;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_KEYWORD;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.HashMap;
@@ -30,9 +29,9 @@ public class FindCommandParser {
     private static final int INDEX_MONTH_START_POSITION = 0;
     private static final int INDEX_MONTH_END_POSITION = 2;
 
-    private static final String prefixStartDate = PREFIX_START_DATE.getPrefix();
-    private static final String prefixEndDate = PREFIX_END_DATE.getPrefix();
-    private static final String prefixKeyword = PREFIX_KEYWORD.getPrefix();
+    private static final String TYPE_KEYWORDS = "keywords";
+    private static final String TYPE_START_DATE = "startDate";
+    private static final String TYPE_END_DATE = "endDate";
 
     private static final HashMap<String, String> oneWordDays = new HashMap<String, String>();
 
@@ -44,40 +43,38 @@ public class FindCommandParser {
      */
     public Command parse(String args) throws IllegalValueException {
 
-        String inputprefix = parsePrefix(args);
-        String pre;
+        String findType = parseType(args);
 
         initOneWordDay();
 
-        if (inputprefix.equals(EMPTY_STRING)) {
+        if (findType.equals(EMPTY_STRING)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
         }
 
         Prefix inputPrefix;
-        if (inputprefix.equals(prefixKeyword)) {
-            inputPrefix = PREFIX_KEYWORD;
-            pre = PREFIX_KEYWORD.toString();
-        } else if (inputprefix.equals(prefixStartDate)) {
+
+        if (findType.equals(TYPE_START_DATE)) {
             inputPrefix = PREFIX_START_DATE;
-            pre = PREFIX_START_DATE.toString();
-        } else if (inputprefix.equals(prefixEndDate)) {
-            inputPrefix = PREFIX_END_DATE;
-            pre = PREFIX_END_DATE.toString();
         } else {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCommand.MESSAGE_USAGE));
+            inputPrefix = PREFIX_END_DATE;
         }
 
         try {
             ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(inputPrefix);
             argsTokenizer.tokenize(args);
-            String keywords = argsTokenizer.getValue(inputPrefix).get();
+            String keywords;
             String updatedKeywords;
+
+            if (findType.equals(TYPE_KEYWORDS)) {
+                keywords = argsTokenizer.getPreamble().get();
+            } else {
+                keywords = argsTokenizer.getValue(inputPrefix).get();
+            }
 
             // only parse if input is (not only integers and not a single word) or (contains time)
             // so that user can also search for numeral day_of_month/year
-            if ((inputPrefix == PREFIX_START_DATE || inputPrefix == PREFIX_END_DATE) &&
+            if ((findType.equals(TYPE_START_DATE) || findType.equals(TYPE_END_DATE)) &&
                     (keywords.replaceAll(DIGITS, EMPTY_STRING).length() > 0 || hasAmOrPm(keywords))) {
                 updatedKeywords = parseFindDates(keywords);
             } else {
@@ -89,7 +86,7 @@ public class FindCommandParser {
                 return new IncorrectCommand(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
-            return new FindCommand(pre, updatedKeywords);
+            return new FindCommand(findType, updatedKeywords);
 
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -149,12 +146,21 @@ public class FindCommandParser {
     }
 
     //@@author A0147990R
-    private String parsePrefix(String args) {
-        int prefixIndex = args.indexOf("/");
-        if (prefixIndex == -1) {
+    /**
+     * Get the find type of user input
+     */
+    private String parseType(String args) {
+        String input = args.trim();
+        if (input.equals(EMPTY_STRING)) {
             return EMPTY_STRING;
+        } else if (input.length() >= 3 &&
+                input.substring(0, 3).equals("sd/")) {
+            return TYPE_START_DATE;
+        } else if (input.length() >= 3 &&
+                input.substring(0, 3).equals("ed/")) {
+            return TYPE_END_DATE;
         } else {
-            return args.substring(1, prefixIndex + 1);
+            return TYPE_KEYWORDS;
         }
     }
 

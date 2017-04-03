@@ -6,7 +6,7 @@ import java.util.Set;
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
-import seedu.taskboss.commons.exceptions.DefaultCategoryException;
+import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
@@ -49,8 +49,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
     public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
     //@@author A0144904H
-    public static final String DEFAULT_ALL_TASKS = "Alltasks";
-    public static final String DEFAULT_DONE = "Done";
+    public static final String BUILT_IN_ALL_TASKS = "Alltasks";
+    public static final String BUILT_IN_DONE = "Done";
     public static final String ERROR_CANNOT_ADD_DONE_CATEGORY = "Cannot add Done category";
 
     //@@author A0143157J
@@ -61,11 +61,11 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      * @throws InvalidDatesException
-     * @throws DefaultCategoryException
+     * @throws BuiltInCategoryException
      */
     public AddCommand(String name, String priorityLevel, String startDateTime, String endDateTime,
             String information, String frequency, Set<String> categories)
-                    throws IllegalValueException, InvalidDatesException, DefaultCategoryException {
+                    throws IllegalValueException, InvalidDatesException, BuiltInCategoryException {
         final Set<Category> categorySet = new HashSet<>();
 
         categoriesSetUp(categories, categorySet);
@@ -101,17 +101,17 @@ public class AddCommand extends Command {
     //@@author A0144904H
     /**
      * Sets up the set of categories a task is supposed to have
-     * default Category "All Tasks" will be assigned to all tasks automatically
+     * Built in Category "All Tasks" will be assigned to all tasks automatically
      * @param categories the set of categories being assigned to a task
      * @param categorySet the set of categories that is being added after modification occurs
      * @throws IllegalValueException
-     * @throws DefaultCategoryException
+     * @throws BuiltInCategoryException
      */
     private void categoriesSetUp(Set<String> categories, final Set<Category> categorySet)
-            throws IllegalValueException, DefaultCategoryException {
-        categorySet.add(new Category(DEFAULT_ALL_TASKS));
-        if (categories.contains(DEFAULT_DONE)) {
-            throw new DefaultCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
+            throws IllegalValueException, BuiltInCategoryException {
+        categorySet.add(new Category(BUILT_IN_ALL_TASKS));
+        if (categories.contains(BUILT_IN_DONE)) {
+            throw new BuiltInCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
         }
 
         for (String categoryName : categories) {
