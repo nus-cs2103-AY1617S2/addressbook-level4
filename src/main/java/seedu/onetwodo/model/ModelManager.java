@@ -369,18 +369,12 @@ public class ModelManager extends ComponentManager implements Model {
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
-                        EventsCenter.getInstance().post(
-                                new JumpToListRequestEvent(filteredIndex, task.getTaskType())
-                                );
+                        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredIndex, task.getTaskType()));
                     }
-                },
-                300
-                );
+                }, 300);
     }
 
     // ========== Inner classes/interfaces used for filtering
-    // =================================================
-
     @Override
     public DoneStatus getDoneStatus() {
         return doneStatus;
