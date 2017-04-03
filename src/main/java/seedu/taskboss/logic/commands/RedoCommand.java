@@ -21,8 +21,6 @@ public class RedoCommand extends Command {
 
     public static final String MESSAGE_WITHOUT_PREVIOUS_OPERATION = "Cannot redo";
 
-    public RedoCommand() {}
-
     @Override
     public CommandResult execute() {
         assert model != null;
