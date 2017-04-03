@@ -18,12 +18,11 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Sorted all tasks by ";
 
     public static final String ALL = "all";
-    public static final String STATUS = "status";
     public static final String PRIORITY = "priority";
     public static final String STARTTIME = "start";
     public static final String ENDTIME = "end";
 
-    private static String[] keywordCheckList = new String[]{"all", "status", "priority", "start", "end"};
+    private static String[] keywordCheckList = new String[]{"all", "priority", "start", "end"};
 
     private String keyword;
 

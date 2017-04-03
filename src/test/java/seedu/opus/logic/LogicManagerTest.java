@@ -261,91 +261,90 @@ public class LogicManagerTest {
     @Test
     public void executeSortTasksByStartTime() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithStartTime("02/01/2017 00:00");
-        Task p2 = helper.generateTaskWithStartTime("02/01/2017 23:59");
-        Task p3 = helper.generateTaskWithStartTime("03/01/2017 00:00");
-        Task p4 = helper.generateTaskWithStartTime("03/02/2017 00:00");
-        Task p5 = helper.generateTaskWithStartTime("03/02/2018 00:00");
+        Task p1 = helper.generateTaskWithStartTime("p1", "02/01/2017 00:00");
+        Task p2 = helper.generateTaskWithStartTime("p2", "02/01/2017 00:00");
+        Task p3 = helper.generateTaskWithStartTime("p3", "02/01/2017 23:59");
+        Task p4 = helper.generateTaskWithStartTime("p4", "03/01/2017 00:00");
+        Task p5 = helper.generateTaskWithStartTime("p5", "03/02/2017 00:00");
+        Task p6 = helper.generateTaskWithStartTime("p6", "03/02/2018 00:00");
+        Task p7 = helper.generateFloatingTask("Floating Task 1");
+        Task p8 = helper.generateFloatingTask("Floating Task 2");
 
-        List<Task> fiveTasks = helper.generateTaskList(p1, p2, p3, p4, p5);
-        TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
+        List<Task> eightTasks = helper.generateTaskList(p1, p2, p3, p4, p5, p6, p7, p8);
+        TaskManager expectedTaskManager = helper.generateTaskManager(eightTasks);
 
         model.resetData(new TaskManager());
-        model.addTask(p2);
+        model.addTask(p6);
         model.addTask(p3);
-        model.addTask(p5);
         model.addTask(p1);
+        model.addTask(p7);
+        model.addTask(p5);
+        model.addTask(p2);
         model.addTask(p4);
+        model.addTask(p8);
 
-        assertCommandSuccess("sort end",
-                SortCommand.MESSAGE_SUCCESS + "end",
+        assertCommandSuccess("sort start",
+                SortCommand.MESSAGE_SUCCESS + "start",
                 expectedTaskManager,
-                fiveTasks);
+                eightTasks);
     }
 
     @Test
     public void executeSortTasksByEndTime() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithEndTime("02/01/2017 00:00");
-        Task p2 = helper.generateTaskWithEndTime("02/01/2017 23:59");
-        Task p3 = helper.generateTaskWithEndTime("03/01/2017 00:00");
-        Task p4 = helper.generateTaskWithEndTime("03/02/2017 00:00");
-        Task p5 = helper.generateTaskWithEndTime("03/02/2018 00:00");
+        Task p1 = helper.generateTaskWithEndTime("p1", "02/01/2017 00:00");
+        Task p2 = helper.generateTaskWithEndTime("p2", "02/01/2017 00:00");
+        Task p3 = helper.generateTaskWithEndTime("p3", "02/01/2017 23:59");
+        Task p4 = helper.generateTaskWithEndTime("p4", "03/01/2017 00:00");
+        Task p5 = helper.generateTaskWithEndTime("p5", "03/02/2017 00:00");
+        Task p6 = helper.generateTaskWithEndTime("p6", "03/02/2018 00:00");
+        Task p7 = helper.generateFloatingTask("Floating Task 1");
+        Task p8 = helper.generateFloatingTask("Floating Task 2");
 
-        List<Task> fiveTasks = helper.generateTaskList(p1, p2, p3, p4, p5);
-        TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
+        List<Task> eightTasks = helper.generateTaskList(p1, p2, p3, p4, p5, p6, p7, p8);
+        TaskManager expectedTaskManager = helper.generateTaskManager(eightTasks);
 
         model.resetData(new TaskManager());
-        model.addTask(p2);
+        model.addTask(p6);
         model.addTask(p3);
-        model.addTask(p5);
         model.addTask(p1);
+        model.addTask(p7);
+        model.addTask(p5);
+        model.addTask(p2);
         model.addTask(p4);
+        model.addTask(p8);
 
         assertCommandSuccess("sort end",
                 SortCommand.MESSAGE_SUCCESS + "end",
                 expectedTaskManager,
-                fiveTasks);
+                eightTasks);
     }
 
     @Test
     public void executeSortTasksByPriority() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithPriority("hi");
-        Task p2 = helper.generateTaskWithPriority("mid");
-        Task p3 = helper.generateTaskWithPriority("low");
+        Task p1 = helper.generateTaskWithPriority("p1", "hi");
+        Task p2 = helper.generateTaskWithPriority("p2", "hi");
+        Task p3 = helper.generateTaskWithPriority("p3", "mid");
+        Task p4 = helper.generateTaskWithPriority("p4", "low");
+        Task p5 = helper.generateFloatingTask("Floating Task 1");
+        Task p6 = helper.generateFloatingTask("Floating Task 2");
 
-        List<Task> threeTasks = helper.generateTaskList(p1, p2, p3);
-        TaskManager expectedTaskManager = helper.generateTaskManager(threeTasks);
+        List<Task> sixTasks = helper.generateTaskList(p1, p2, p3, p4, p5, p6);
+        TaskManager expectedTaskManager = helper.generateTaskManager(sixTasks);
 
         model.resetData(new TaskManager());
-        model.addTask(p2);
-        model.addTask(p3);
         model.addTask(p1);
+        model.addTask(p3);
+        model.addTask(p2);
+        model.addTask(p5);
+        model.addTask(p4);
+        model.addTask(p6);
 
         assertCommandSuccess("sort priority",
                 SortCommand.MESSAGE_SUCCESS + "priority",
                 expectedTaskManager,
-                threeTasks);
-    }
-
-    @Test
-    public void executeSortTasksByStatus() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithStatus("incomplete");
-        Task p2 = helper.generateTaskWithStatus("complete");
-
-        List<Task> twoTasks = helper.generateTaskList(p1, p2);
-        TaskManager expectedTaskManager = helper.generateTaskManager(twoTasks);
-
-        model.resetData(new TaskManager());
-        model.addTask(p2);
-        model.addTask(p1);
-
-        assertCommandSuccess("sort status",
-                SortCommand.MESSAGE_SUCCESS + "status",
-                expectedTaskManager,
-                twoTasks);
+                sixTasks);
     }
 
     @Test
@@ -801,11 +800,11 @@ public class LogicManagerTest {
 
         //@@author A0148081H-reused
         /**
-         * Generates a Task object with given start time. Other fields will have some dummy values.
+         * Generates a Task object with given name and start time. Other fields will have some dummy values.
          */
-        private Task generateTaskWithStartTime(String startTime) throws Exception {
+        private Task generateTaskWithStartTime(String name, String startTime) throws Exception {
             return new Task(
-                    new Name("Finish assignment"),
+                    new Name(name),
                     new Priority("hi"),
                     new Status("incomplete"),
                     new Note("House of 1"),
@@ -816,11 +815,11 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given end time. Other fields will have some dummy values.
+         * Generates a Task object with given name and end time. Other fields will have some dummy values.
          */
-        private Task generateTaskWithEndTime(String endTime) throws Exception {
+        private Task generateTaskWithEndTime(String name, String endTime) throws Exception {
             return new Task(
-                    new Name("Finish assignment"),
+                    new Name(name),
                     new Priority("hi"),
                     new Status("incomplete"),
                     new Note("House of 1"),
@@ -831,11 +830,11 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given priority. Other fields will have some dummy values.
+         * Generates a Task object with given name and priority. Other fields will have some dummy values.
          */
-        private Task generateTaskWithPriority(String priority) throws Exception {
+        private Task generateTaskWithPriority(String name, String priority) throws Exception {
             return new Task(
-                    new Name("Finish assignment"),
+                    new Name(name),
                     new Priority(priority),
                     new Status("incomplete"),
                     new Note("House of 1"),
@@ -856,6 +855,21 @@ public class LogicManagerTest {
                     new Note("House of 1"),
                     new DateTime("01/01/2017 00:00"),
                     new DateTime("01/01/2017 23:59"),
+                    new UniqueTagList(new Tag("tag"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given name. Other fields will be null except for status and tags
+         */
+        private Task generateFloatingTask(String name) throws Exception {
+            return new Task(
+                    new Name(name),
+                    null,
+                    new Status(),
+                    null,
+                    null,
+                    null,
                     new UniqueTagList(new Tag("tag"))
             );
         }
