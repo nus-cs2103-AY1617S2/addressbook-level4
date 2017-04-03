@@ -5,6 +5,7 @@ import java.util.Set;
 import seedu.opus.commons.util.StringUtil;
 import seedu.opus.model.task.ReadOnlyTask;
 
+//@@author A0126345J
 /**
  * Compares and filters the name attribute of a task in the task manager
  */
@@ -24,3 +25,4 @@ public class NameQualifier implements Qualifier {
     }
 
 }
+//@@author

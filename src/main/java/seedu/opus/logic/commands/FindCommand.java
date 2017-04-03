@@ -10,6 +10,7 @@ import seedu.opus.model.qualifier.Qualifier;
  */
 public class FindCommand extends Command {
 
+    //@@author A0126345J
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -23,6 +24,7 @@ public class FindCommand extends Command {
     public FindCommand(List<Qualifier> qualifiers) {
         this.qualifiers = qualifiers;
     }
+    //@@author
 
     @Override
     public CommandResult execute() {

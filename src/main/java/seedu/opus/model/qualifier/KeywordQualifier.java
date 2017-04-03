@@ -4,6 +4,7 @@ import java.util.Set;
 
 import seedu.opus.model.task.ReadOnlyTask;
 
+//@@author A0126345J
 /**
  * Compares and filters the name, note and tag attributes of a task in the task manager
  */
@@ -25,3 +26,4 @@ public class KeywordQualifier implements Qualifier {
     }
 
 }
+//@@author

@@ -29,6 +29,7 @@ import seedu.opus.model.qualifier.StatusQualifier;
  */
 public class FindCommandParser {
 
+    //@@author A0126345J
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
@@ -76,5 +77,6 @@ public class FindCommandParser {
 
         return new FindCommand(qualifiers);
     }
+    //@@author
 
 }

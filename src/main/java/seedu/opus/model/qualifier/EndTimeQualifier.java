@@ -7,6 +7,7 @@ import seedu.opus.logic.parser.DateTimeParser;
 import seedu.opus.model.task.DateTime;
 import seedu.opus.model.task.ReadOnlyTask;
 
+//@@author A0126345J
 /**
  * Compares and filters the endTime attribute of a task in the task manager
  */
@@ -28,3 +29,4 @@ public class EndTimeQualifier implements Qualifier {
         return inputEndTime.get().isAfter(taskEndTime.get().dateTime);
     }
 }
+//@@author
