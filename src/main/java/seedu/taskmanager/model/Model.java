@@ -44,6 +44,9 @@ public interface Model {
     int deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
             throws UniqueTaskList.TaskNotFoundException;
 
+    /** Adds the given task */
+    void addTask(int addIndex, Task task) throws UniqueTaskList.DuplicateTaskException;
+
     // @@author
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
