@@ -28,7 +28,7 @@ public class RedoCommandTest extends TaskBookGuiTest {
 	public void redo() throws IllegalArgumentException, IllegalTimeException, EmptyStackException {
 		commandBox.runCommand("redo");
 		assertResultMessage(MESSAGE_FAILURE);
-		TestTask[] currentList = td.getTypicalTasks();		
+		TestTask[] currentList = td.getTypicalTasks();
 		// add a task for undoing to enable redoing
 		TestTask taskToAdd = td.CS4101;
 		commandBox.runCommand(td.CS4101.getAddCommand());
@@ -61,5 +61,6 @@ public class RedoCommandTest extends TaskBookGuiTest {
 		assertTrue(taskListPanel.isListMatching(expectedResult));
 		// confirm that the result message is correct
         assertResultMessage(String.format(MESSAGE_SUCCESS, taskToBeRedone));
+        
 	}
 }
