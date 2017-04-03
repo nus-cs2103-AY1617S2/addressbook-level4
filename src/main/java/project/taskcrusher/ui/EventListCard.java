@@ -2,6 +2,7 @@ package project.taskcrusher.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -15,7 +16,6 @@ import project.taskcrusher.model.shared.DateUtilApache;
 public class EventListCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
-    private static final String MESSAGE_NO_LOCATION = "No location";
     private static final String LOCATION_AT = "@ ";
 
     @FXML
@@ -33,7 +33,8 @@ public class EventListCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label completeFlag;
+    private ImageView tickIcon;
+
     public EventListCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
         name.setText(event.getName().name);
@@ -47,10 +48,8 @@ public class EventListCard extends UiPart<Region> {
     }
 
     private void displayComplete(ReadOnlyEvent event) {
-        if (event.isComplete()) {
-            completeFlag.setText("COMPLETE");
-        } else {
-            completeFlag.setText("INCOMPLETE");
+        if (!event.isComplete()) {
+            tickIcon.setVisible(false);
         }
     }
     private void showDescription(ReadOnlyEvent event) {
@@ -61,7 +60,7 @@ public class EventListCard extends UiPart<Region> {
         if (event.getLocation().hasLocation()) {
             eventLocation.setText(LOCATION_AT + event.getLocation().location);
         } else {
-            eventLocation.setText(MESSAGE_NO_LOCATION);
+            eventLocation.setText("");
         }
     }
 

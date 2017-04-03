@@ -2,6 +2,7 @@ package project.taskcrusher.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -34,7 +35,7 @@ public class TaskListCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label completeFlag;
+    private ImageView tickIcon;
 
     public TaskListCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -49,10 +50,8 @@ public class TaskListCard extends UiPart<Region> {
     }
 
     private void displayComplete(ReadOnlyTask task) {
-        if (task.isComplete()) {
-            completeFlag.setText("COMPLETE");
-        } else {
-            completeFlag.setText("INCOMPLETE");
+        if (!task.isComplete()) {
+            tickIcon.setVisible(false);
         }
     }
 

@@ -9,6 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -31,15 +34,18 @@
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label"></Label>
                                     <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
+                                    <Label fx:id="eventLocation" styleClass="cell_big_label" text="\$location" />
                                     <FlowPane fx:id="tags" />
+                                    <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
+                                    <image>
+                                        <Image url = "images/tick_icon.png" ></Image>
+                                    </image>
+                                    </ImageView>
                                 </HBox>
                             </children>
                         </HBox>
-<!--                         <FlowPane fx:id="tags" /> -->
                         <FlowPane fx:id="timeslots" />
-                        <Label fx:id="eventLocation" styleClass="cell_small_label" text="\$location" />
                         <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
-                        <Label fx:id="completeFlag" text="\$completeFlag" styleClass="cell_big_label"/>
                     </children>
                 </VBox>
             </children>
