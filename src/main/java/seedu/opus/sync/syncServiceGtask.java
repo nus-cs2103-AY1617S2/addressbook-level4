@@ -67,7 +67,7 @@ public class syncServiceGtask implements syncService {
 
     private boolean isRunning;
 
-    public syncServiceGtask() throws SyncException, IOException {
+    public syncServiceGtask() {
         addTaskQueue = new ArrayBlockingQueue<Task>(50);
         deleteTaskQueue = new ArrayBlockingQueue<Task>(50);
         updateTaskQueue = new ArrayBlockingQueue<Task>(50);
@@ -77,16 +77,14 @@ public class syncServiceGtask implements syncService {
             DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
         } catch (IOException ioe) {
             ioe.printStackTrace();
-            throw new IOException(SYNC_ERROR_MESSAGE);
         } catch (Throwable t) {
             t.printStackTrace();
-            throw new SyncException(SYNC_ERROR_MESSAGE);
         }
         this.isRunning = false;
     }
 
     @Override
-    public void start() throws SyncException {
+    public void start() {
         logger.info("Starting Google Task");
         this.isRunning = true;
         try {
@@ -96,6 +94,8 @@ public class syncServiceGtask implements syncService {
             Executors.newSingleThreadExecutor().execute(() -> processUpdateTaskListDeque());
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SyncException e) {
             e.printStackTrace();
         }
     }

@@ -1,10 +1,8 @@
 package seedu.opus.sync;
 
-import java.io.IOException;
 import java.util.List;
 
 import seedu.opus.model.task.Task;
-import seedu.opus.sync.exceptions.SyncException;
 
 public class SyncManager implements Sync {
 
@@ -40,7 +38,7 @@ public class SyncManager implements Sync {
     }
 
     @Override
-    public void startSync() throws IOException, SyncException {
+    public void startSync() {
         this.service.start();
     }
 

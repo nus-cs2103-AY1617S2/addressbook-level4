@@ -19,6 +19,8 @@ import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.opus.sync.SyncManager;
+import seedu.opus.sync.syncServiceGtask;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -32,10 +34,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     private History history;
 
-    //private final SyncManager syncManager;
+    private final SyncManager syncManager;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     *
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
@@ -47,8 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         history = new History();
 
-        //syncManager = new SyncManager(new syncServiceGtask());
-        //syncManager.startSync();
+        syncManager = new SyncManager(new syncServiceGtask());
     }
 
     public ModelManager() {
@@ -60,7 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
-        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -78,7 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
-        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -87,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
-        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -99,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
-        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     //@@author A0148087W
@@ -107,15 +109,26 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetToPreviousState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
         indicateTaskManagerChanged();
-        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
     public void resetToPrecedingState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
         indicateTaskManagerChanged();
-        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
+
+    @Override
+    public void startSync() {
+        this.syncManager.startSync();
+    }
+
+    @Override
+    public void stopSync() {
+        this.syncManager.stopSync();
+    }
+
     //@@author
 
     //=========== Filtered Task List Accessors =============================================================
@@ -240,7 +253,5 @@ public class ModelManager extends ComponentManager implements Model {
                     .findAny()
                     .isPresent();
         }
-
     }
-
 }

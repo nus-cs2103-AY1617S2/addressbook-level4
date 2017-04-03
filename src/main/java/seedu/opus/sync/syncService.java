@@ -13,7 +13,7 @@ public interface syncService {
      * @throws SyncException
      * @throws IOException
      */
-    public void start() throws IOException, SyncException;
+    public void start();
 
     /**
      * Stop service
