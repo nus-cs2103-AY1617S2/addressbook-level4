@@ -125,7 +125,7 @@ Examples:
 ### 3.5. Finding all tasks by Keywords or by Datetime : `find / f`
 
 Finds tasks whose names or information contain any of the given keywords<br>
-Format: `find k/KEYWORDS` 
+Format: `find KEYWORDS` 
 
 Finds tasks whose start datetime matches the given datetime<br>
 Formats: `find sd/date and time` `find ed/date and time`
@@ -138,10 +138,10 @@ Formats: `find sd/date and time` `find ed/date and time`
 
 Examples:
 
-* `find k/Meeting`<br>
+* `find Meeting`<br>
   Returns all tasks whose name or information contains `Meeting`.
   
-* `find k/shopping milk`<br>
+* `find shopping milk`<br>
   Returns all tasks whose name or information contains at least one of the keywords: `shopping` and `milk`.
 
 * `find sd/2 april`<br>
@@ -176,9 +176,9 @@ Examples:
 Clears all tasks under the specified category<br>
 Format: `clear CATEGORY`
 
-> * Category names are case-sensitive. <br>
+> * Category names are case-insensitive. <br>
 > * The default categories of TaskBoss are `AllTasks` and `Done`. <br>
-> * `AllTasks` and `Done` cannot be cleared in TaskBoss.<br>
+> * `Alltasks` and `Done` cannot be cleared in TaskBoss.<br>
 
 ### 3.8. Viewing a task : `view / v`
 
@@ -264,7 +264,7 @@ A: Install TaskBoss in the other computer and overwrite the empty data file it c
 |[add / a](#32-adding-a-task-add)                         |**`add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**             |
 |[list / l](#33-listing-all-tasks--list)                  |**`list` `list c/CATEGORY NAME`**        |
 |[edit / e](#34-editing-a-task--edit)                     |**`edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**|
-|[find / f](#35-finding-all-tasks-by-name-or-by-datetime--find)|**`find n/TASK_NAME`  `find sd/date and time`  `find ed/date and time`**|
+|[find / f](#35-finding-all-tasks-by-keywords-or-by-datetime--find)|**`find KEYWORDS`  `find sd/date and time`  `find ed/date and time`**|
 |[delete / d](#36-deleting-a-task--delete)                |**`delete INDEX`**         |
 |[clear / c](#37-clearing-tasks-by-category--clear)       |**`clear CATEGORY`** |
 |[view / v](#38-viewing-a-task--view)                    |**`view INDEX`**             |
