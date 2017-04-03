@@ -13,10 +13,10 @@ import seedu.toluist.ui.UiStore;
  * View to display suggest command
  */
 public class CommandAutoCompleteView extends UiView {
+
     private static final String FXML = "CommandAutoCompleteView.fxml";
     private static final String STYLE_CLASS_SELECTED_SUGGESTION = "selected";
     private static final String STYLE_CLASS_SUGGESTION = "command-suggestion";
-    private static final double MARGIN = 8;
     private static final double SUGGESTION_HEIGHT = 20;
 
     @FXML
@@ -25,13 +25,13 @@ public class CommandAutoCompleteView extends UiView {
     public CommandAutoCompleteView() {
         super(FXML);
         configureBindings();
-        configureConstraints();
     }
 
     private void configureBindings() {
         UiStore store = UiStore.getInstance();
         store.bind(this, store.getObservableSuggestedCommands());
         store.bind(this, store.getObservableSuggestedCommandIndex());
+        store.bind(this, store.getObservableCommandTextWidth());
     }
 
     @Override
@@ -43,10 +43,9 @@ public class CommandAutoCompleteView extends UiView {
         for (int i = 0; i < observableSuggestedCommands.size(); i++) {
             addCommandSuggestion(observableSuggestedCommands.get(i), i);
         }
-    }
-
-    private void configureConstraints() {
-        AnchorPane.setBottomAnchor(getRoot(), MARGIN);
+        getRoot().translateXProperty().setValue(
+                Math.min(store.getObservableCommandTextWidth().getValue() / 2,
+                        getParent().getWidth() / 2 - getRoot().getWidth()));
     }
 
     /**

@@ -4,6 +4,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -18,7 +20,18 @@
                   <AnchorPane fx:id="resultDisplayPlaceholder" VBox.vgrow="NEVER" />
                </children>
             </VBox>
-            <AnchorPane fx:id="commandAutoCompletePlaceholder" maxHeight="-Infinity" />
+            <BorderPane StackPane.alignment="CENTER">
+               <bottom>
+                  <HBox fx:id="commandAutoCompletePlaceholder" alignment="CENTER" BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <BorderPane.margin>
+                        <Insets bottom="8.0" />
+                     </BorderPane.margin>
+                  </HBox>
+               </bottom>
+            </BorderPane>
             <AnchorPane fx:id="helpPlaceholder" prefHeight="200.0" prefWidth="200.0" styleClass="help-container" />
          </children>
       </StackPane>

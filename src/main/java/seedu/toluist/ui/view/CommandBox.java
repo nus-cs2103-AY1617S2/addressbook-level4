@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.text.Text;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.Dispatcher;
@@ -63,6 +64,7 @@ public class CommandBox extends UiView {
         List<String> suggestedCommands = new ArrayList(dispatcher.getSuggestions(newCommand));
         UiStore uiStore = UiStore.getInstance();
         uiStore.setSuggestedCommands(suggestedCommands);
+        uiStore.setCommandTextWidth(getTextWidth(newCommand));
         FxViewUtil.removeStyleClass(commandTextField, STYLE_CLASS_ERROR);
     }
 
@@ -101,5 +103,15 @@ public class CommandBox extends UiView {
     private void setCommandTextField(String command) {
         commandTextField.setText(command);
         commandTextField.end();
+    }
+
+    /**
+     * Estimate the width of certain command text
+     * @param text the text string
+     * @return width in double
+     */
+    private double getTextWidth(String text) {
+        Text dummyText = new Text(text);
+        return dummyText.getBoundsInLocal().getWidth();
     }
 }

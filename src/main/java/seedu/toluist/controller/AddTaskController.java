@@ -24,8 +24,8 @@ import seedu.toluist.ui.commons.ResultMessage;
 public class AddTaskController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(AddTaskController.class);
 
-    private static final String COMMAND_TEMPLATE = "(?iu)^add"
-            + "(\\s+(?<description>.+))?";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*add"
+            + "(\\s+(?<description>.+))?\\s*";
 
     private static final String COMMAND_ADD_TASK = "add";
 

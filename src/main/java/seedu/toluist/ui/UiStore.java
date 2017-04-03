@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -45,6 +47,7 @@ public class UiStore {
     private ObservableList<String> observableSuggestedCommands = FXCollections.observableArrayList();
     private SimpleIntegerProperty observableSuggestedCommandIndex =
             new SimpleIntegerProperty(INDEX_INVALID_SUGGESTION);
+    private SimpleDoubleProperty observableCommandTextWidth = new SimpleDoubleProperty(0);
     private Task lastEditedTask;
 
     public static UiStore getInstance() {
@@ -132,6 +135,14 @@ public class UiStore {
 
     public ObservableIntegerValue getObservableSuggestedCommandIndex() {
         return observableSuggestedCommandIndex;
+    }
+
+    public void setCommandTextWidth(double width) {
+        observableCommandTextWidth.setValue(width);
+    }
+
+    public DoubleProperty getObservableCommandTextWidth() {
+        return observableCommandTextWidth;
     }
 
     public void setTasks(ArrayList<Task> tasks) {

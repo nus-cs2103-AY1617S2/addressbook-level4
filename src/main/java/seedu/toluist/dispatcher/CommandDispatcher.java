@@ -129,7 +129,7 @@ public class CommandDispatcher extends Dispatcher {
     private SortedSet<String> getKeywordSuggestions(String command) {
         String lastComponentOfCommand = StringUtil.getLastComponent(command);
         Controller bestFitController = getBestFitController(command);
-        HashMap<String, String[]> keywordMap = getBestFitController(command).getCommandKeywordMap();
+        HashMap<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
         HashMap<String, String> tokens = KeywordTokenizer.tokenize(command, null,
                 keywordMap.keySet().toArray(new String[0]));
         return keywordMap.keySet().stream()
