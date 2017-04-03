@@ -141,14 +141,8 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder(); //TO DO the timing
+        final StringBuilder builder = new StringBuilder();
         builder.append(getAsText());
-        if (startDate != null) {
-            builder.append("\nStart: ").append(startDate);
-        }
-        if (endDate != null) {
-            builder.append("\nEnd: ").append(endDate);
-        }
         return builder.toString();
     }
 
