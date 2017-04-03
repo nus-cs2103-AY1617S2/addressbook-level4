@@ -64,7 +64,6 @@ public class DateTime {
             cal.set(Calendar.SECOND, 00);
             cal.set(Calendar.MILLISECOND, 00);
             cal.set(Calendar.AM_PM, Calendar.PM);
-            System.out.println(cal.toString());
         }
         return cal;
     }
