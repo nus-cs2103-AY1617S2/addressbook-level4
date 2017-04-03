@@ -64,7 +64,8 @@ public class KeywordTokenizerTest {
 
     @Test
     public void tokenize_updateTaskCommandCaseSensitive() {
-        String description = "update v0.3 to/next wednesday tags/ohno tag manysubtasks from/today floating/";
+        String description = "update v0.3 to/ next wednesday tags/ ohno tag manysubtasks from/ today " +
+                "floating/";
         HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description", "from/",
                                                                                                "to/",
                                                                                                "by/",
@@ -81,7 +82,8 @@ public class KeywordTokenizerTest {
 
     @Test
     public void tokenize_updateTaskCommandCaseInsensitive() {
-        String description = "update v0.3 to/next wednesday tAgS/ohno tag manysubtasks frOM/today floating/";
+        String description = "update v0.3 to/ next wednesday tAgS/ ohno tag manysubtasks frOM/ today " +
+                "floating/";
         HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description", "from/",
                                                                                                "to/",
                                                                                                "by/",
@@ -105,6 +107,17 @@ public class KeywordTokenizerTest {
         expected.put("description", "update v0.3");
         expected.put("/repeatuntil", "tomorrow");
         expected.put("/repeat", "daily");
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
+    public void tokenize_tokenAtTheEnd() {
+        String description = "help help";
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description",
+                "help");
+        HashMap<String, String> expected = new HashMap<String, String>();
+        expected.put("description", "help");
+        expected.put("help", "");
         assertTrue(actual.equals(expected));
     }
 }

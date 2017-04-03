@@ -113,4 +113,11 @@ public class CommandDispatcherTests {
         expected.remove("/tags");
         assertEquals(dispatcher.getSuggestions("add task /tags "), expected);
     }
+
+    @Test
+    public void getSuggestions_invalidKeywords() {
+        SortedSet<String> expected = new TreeSet<>();
+
+        assertEquals(dispatcher.getSuggestions("help asdfasdfsadfaf"), expected);
+    }
 }

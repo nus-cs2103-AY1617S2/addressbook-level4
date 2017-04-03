@@ -45,14 +45,14 @@ public class MarkCommandTest extends ToLuistGuiTest {
         assertTaskComplete(true, task1);
 
         Task task2 = new TypicalTestTodoLists().getTypicalTasks()[1];
-        String command2 = "mark complete 2";
+        String command2 = "mark 2 complete";
         commandBox.runCommand(command2);
         assertTaskComplete(true, task2);
     }
 
     @Test
     public void markComplete_multipleTasks() {
-        String command = "mark complete 1-2";
+        String command = "mark 1-2";
         commandBox.runCommand(command);
         assertTaskComplete(true, new TypicalTestTodoLists().getTypicalTasks());
     }

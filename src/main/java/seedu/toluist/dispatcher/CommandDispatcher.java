@@ -152,6 +152,7 @@ public class CommandDispatcher extends Dispatcher {
         Controller bestFitController = getBestFitController(command);
         HashMap<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
         List<Pair<String, String>> keywordValuePairs = bestFitController.keywordize(command);
+        keywordValuePairs.remove(0);
         if (keywordValuePairs.isEmpty()) {
             return new TreeSet<>();
         }

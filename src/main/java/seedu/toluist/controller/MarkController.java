@@ -25,7 +25,8 @@ import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 public class MarkController extends Controller {
     private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "%s %s marked completed";
     private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "%s %s marked incomplete";
-    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*mark(\\s+?(?<index>.*))?.*";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*mark(\\s+(complete|incomplete))?"
+            + "(\\s+(?<index>.*))?(\\s+(complete|incomplete))?.*";
     private static final String COMMAND_WORD = "mark";
 
     private static final String PARAMETER_INDEX = "index";

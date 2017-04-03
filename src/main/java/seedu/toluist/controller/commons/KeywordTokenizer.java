@@ -46,7 +46,8 @@ public class KeywordTokenizer {
             // Early termination, no description means there is nothing to tokenize.
             return tokens;
         }
-        String descriptionInLowerCase = description.toLowerCase();
+        String normalizedDescription = " " + description + " ";
+        String normalizedDescriptionInLowerCase = normalizedDescription.toLowerCase();
 
         ArrayList<Pair<Integer, String>> indexKeywordPairs = new ArrayList<>();
         String[] nonNullKeywords = keywords == null ? new String[] {} : keywords;
@@ -56,14 +57,11 @@ public class KeywordTokenizer {
         }
 
         for (String keyword : nonNullKeywords) {
-            int index = descriptionInLowerCase.lastIndexOf(keyword);
-            if (index != descriptionInLowerCase.length() - 1) {
-                index = descriptionInLowerCase.lastIndexOf(keyword + " ");
-            }
+            int index = normalizedDescriptionInLowerCase.lastIndexOf(" " + keyword + " ");
 
             if (index != INDEX_INVALID) {
                 // Index in indexKeywordPairs refers to the index behind the last character of the keyword.
-                Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length(), keyword);
+                Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length() + 1, keyword);
                 indexKeywordPairs.add(indexKeywordPair);
             }
         }
@@ -78,9 +76,9 @@ public class KeywordTokenizer {
             // For last pair of currentIndexKeywordPair, we simply match the text to the end of the description.
             int endIndex = i + 1 < indexKeywordPairs.size()
                     ? indexKeywordPairs.get(i + 1).getKey() - indexKeywordPairs.get(i + 1).getValue().length()
-                    : description.length();
+                    : normalizedDescription.length();
             String keyword = currentIndexKeywordPair.getValue();
-            String token = description.substring(startIndex, endIndex).trim();
+            String token = normalizedDescription.substring(startIndex, endIndex).trim();
             tokens.add(new Pair<>(keyword, token));
         }
 

@@ -165,7 +165,8 @@ public class HelpCommandTest extends ToLuistGuiTest {
     public void viewCaseInsensitiveHelp() {
         String command = "HeLp AdD";
         commandBox.runCommand(command);
-        assertHelpHeading(String.format("Displaying detailed help for %s. Press any keys to go back.", "AdD"));
+        assertHelpHeading(String.format("Displaying detailed help for %s. Press any keys to go back.",
+                "add"));
     }
 
     private void assertHelpHeading(String expected) {
