@@ -343,23 +343,23 @@ public class LogicManagerTest {
     @Test
     public void execute_find_containsWordsInDescriptionsAndTags() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task t1 = helper.generateTaskWithDescriptionAndTags("a", "bcd", "efg", "jj");
-        Task t2 = helper.generateTaskWithDescriptionAndTags("aa", "bcd");
-        Task t3 = helper.generateTaskWithDescriptionAndTags("h");
-        Task t4 = helper.generateTaskWithDescriptionAndTags("hhh", "efg");
+        Task t1 = helper.generateTaskWithDescriptionAndTags("a b c", "e", "f", "g", "z", "y");
+        Task t2 = helper.generateTaskWithDescriptionAndTags("h", "i");
+        Task t3 = helper.generateTaskWithDescriptionAndTags("hh");
+        Task t4 = helper.generateTaskWithDescriptionAndTags("a b c d z y", "e", "f", "g");
 
         // search by tag only
         List<Task> fourTasks = helper.generateListOfTasks(t1, t2, t3, t4);
         TaskList expectedAB = helper.generateTaskList(fourTasks);
         List<Task> expectedList = helper.generateListOfTasks(t1, t4);
         helper.addToModel(model, fourTasks);
-        assertCommandSuccess("find efg",
+        assertCommandSuccess("find e f g",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
 
         // search by description and tag
-        assertCommandSuccess("find hh j",
+        assertCommandSuccess("find z y",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -386,16 +386,16 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
+    public void execute_find_matchesIfAllKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generatePersonWithName("bla rAnDoM bla bceofeia");
+        Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla random");
+        Task pTarget2 = helper.generatePersonWithName("bla rAnDoM key bla bceofeia");
         Task pTarget3 = helper.generatePersonWithName("key key");
         Task p1 = helper.generatePersonWithName("sduauo");
 
         List<Task> fourPersons = helper.generateListOfTasks(pTarget1, p1, pTarget2, pTarget3);
         TaskList expectedAB = helper.generateTaskList(fourPersons);
-        List<Task> expectedList = helper.generateListOfTasks(pTarget1, pTarget2, pTarget3);
+        List<Task> expectedList = helper.generateListOfTasks(pTarget1, pTarget2);
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find key rAnDoM",
