@@ -38,16 +38,16 @@
                                 <Label fx:id="id" styleClass="cell_big_label" />
                                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                                 <Label fx:id="priority" styleClass="cell_big_label" text="\$priority" />
+                                <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
                                 <FlowPane fx:id="tags" />
-                                    <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
+                                <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
                                     <image>
                                         <Image url = "images/tick_icon.png" ></Image>
                                     </image>
-                                    </ImageView>
+                                </ImageView>
                             </children>
                         </HBox>
                         <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
                     </children>
                 </VBox>
             </children>

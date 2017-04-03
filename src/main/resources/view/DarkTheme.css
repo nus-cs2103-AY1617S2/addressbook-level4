@@ -109,6 +109,7 @@
 .anchor-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
+
 /*change colour here for command, result */
 .anchor-pane-with-border {
      -fx-background-color: derive(#bbddfa, 20%);
@@ -325,4 +326,9 @@
 
 #name {
     -fx-padding: 0 10 0 5;
+}
+
+#timeslots {
+    -fx-hgap: 7;
+    -fx-vgap: 0;
 }

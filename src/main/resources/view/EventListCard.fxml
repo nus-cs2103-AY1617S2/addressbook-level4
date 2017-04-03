@@ -12,7 +12,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
@@ -30,22 +29,18 @@
                     </padding>
                     <children>
                         <HBox spacing="5" alignment="CENTER_LEFT">
-                            <children>
-                                <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
-                                    <Label fx:id="eventLocation" styleClass="cell_big_label" text="\$location" />
-                                    <FlowPane fx:id="tags" />
-                                    <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
-                                    <image>
-                                        <Image url = "images/tick_icon.png" ></Image>
-                                    </image>
-                                    </ImageView>
-                                </HBox>
-                            </children>
+                            <Label fx:id="id" styleClass="cell_big_label"></Label>
+                            <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
+                            <Label fx:id="eventLocation" styleClass="cell_big_label" text="\$location" />
+                            <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                            <FlowPane fx:id="tags" />
+                            <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
+                            <image>
+                                <Image url = "images/tick_icon.png" ></Image>
+                            </image>
+                            </ImageView>
                         </HBox>
                         <FlowPane fx:id="timeslots" />
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
                     </children>
                 </VBox>
             </children>
