@@ -181,7 +181,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime recurUntilEndDate2 = DateTimeUtil.parseDateString("30 Apr 2017, 12pm");
         String command2 = "add " + taskDescription2 + " /by " + endDate2 + " /repeat " + recurFrequencyString2
-                + " repeatuntil/" + recurUntilEndDate2;
+                + " /recuruntil " + recurUntilEndDate2;
         commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, endDate2);
         task2.setRecurring(recurUntilEndDate2, recurFrequencyString2);

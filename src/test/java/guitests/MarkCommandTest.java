@@ -113,8 +113,8 @@ public class MarkCommandTest extends ToLuistGuiTest {
         String taskDescription = "do homework for Melvin";
         String recurFrequencyString = "daily";
         LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("15 May 2018, 12pm");
-        String command = "add " + taskDescription + " repeat/" + recurFrequencyString
-                       + " repeatuntil/" + recurUntilEndDate;
+        String command = "add " + taskDescription + " /repeat " + recurFrequencyString
+                       + " /recuruntil " + recurUntilEndDate;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription);
         task.setRecurring(recurUntilEndDate, recurFrequencyString);
@@ -125,8 +125,8 @@ public class MarkCommandTest extends ToLuistGuiTest {
         String recurFrequencyString2 = "monthly";
         LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime recurUntilEndDate2 = DateTimeUtil.parseDateString("30 Apr 2017, 12pm");
-        String command2 = "add " + taskDescription2 + " by/" + endDate2 + " repeat/" + recurFrequencyString2
-                + " repeatuntil/" + recurUntilEndDate2;
+        String command2 = "add " + taskDescription2 + " /by " + endDate2 + " /repeat " + recurFrequencyString2
+                + " /recuruntil " + recurUntilEndDate2;
         commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, endDate2);
         task2.setRecurring(recurUntilEndDate2, recurFrequencyString2);
@@ -138,8 +138,8 @@ public class MarkCommandTest extends ToLuistGuiTest {
         LocalDateTime startDate3 = DateTimeUtil.parseDateString("24 Mar 2017, 12pm");
         LocalDateTime endDate3 = DateTimeUtil.parseDateString("24 Mar 2017, 1pm");
         LocalDateTime recurUntilEndDate3 = DateTimeUtil.parseDateString("28 Mar 2017, 1pm");
-        String command3 = "add " + taskDescription3 + " from/" + startDate3 + " to/" + endDate3
-                        + " repeat/" + recurFrequencyString3 + " repeatuntil/" + recurUntilEndDate3;
+        String command3 = "add " + taskDescription3 + " /from " + startDate3 + " /to " + endDate3
+                        + " /repeat " + recurFrequencyString3 + " /recuruntil " + recurUntilEndDate3;
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
         task3.setRecurring(recurUntilEndDate3, recurFrequencyString3);
@@ -172,8 +172,8 @@ public class MarkCommandTest extends ToLuistGuiTest {
         String recurFrequencyString = "monthly";
         LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime endDate = DateTimeUtil.parseDateString("31 Mar 2017, 1pm");
-        String command = "add " + taskDescription + " from/" + startDate + " to/" + endDate
-                        + " repeat/" + recurFrequencyString;
+        String command = "add " + taskDescription + " /from " + startDate + " /to " + endDate
+                        + " /repeat " + recurFrequencyString;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription, startDate, endDate);
         task.setRecurring(recurFrequencyString);

@@ -23,7 +23,7 @@ public class AddTaskControllerTest extends ControllerTest {
         String taskDescription = "learn how to catch a pokemon";
         Task floatingTask = new Task(taskDescription);
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put("add", taskDescription);
+        tokens.put("description", taskDescription);
         controller.execute(tokens);
 
         ArrayList<Task> tasksThatShouldExist = new ArrayList<>();
