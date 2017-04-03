@@ -208,40 +208,8 @@ public class ModelManager extends ComponentManager implements Model {
         //@@author A0163786N
         @Override
         public boolean run(ReadOnlyTodo todo) {
-            if (!nameKeyWords.isEmpty()) {
-                String name = todo.getName().fullName;
-                if (!(nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(name, keyword))
-                        .findAny()
-                        .isPresent())) {
-                    return false;
-                }
-            }
-            if (startTime != null) {
-                Date todoStartTime = todo.getStartTime();
-                if (todoStartTime == null || todoStartTime.after(startTime)) {
-                    return false;
-                }
-            }
-            if (endTime != null) {
-                Date todoEndTime = todo.getEndTime();
-                if (todoEndTime == null || todoEndTime.after(endTime)) {
-                    return false;
-                }
-            }
-            if (completeTime != null && !checkCompleteTime(todo)) {
-                return false;
-            }
-            if (!tags.isEmpty()) {
-                String todoTags = todo.getTagsAsString();
-                if (!(tagKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(todoTags, keyword))
-                        .findAny()
-                        .isPresent())) {
-                    return false;
-                }
-            }
-            return true;
+            return checkName(todo) && checkStartTime(todo) && checkEndTime(todo)
+                    && checkCompleteTime(todo) && checkTags(todo);
         }
         //@@author A0163720M
         /**
@@ -277,17 +245,83 @@ public class ModelManager extends ComponentManager implements Model {
          * and returns true if todo should be shown in filtered list
          */
         private boolean checkCompleteTime(ReadOnlyTodo todo) {
-            Date todoCompleteTime = todo.getCompleteTime();
-            if (completeTime instanceof Date) {
-                if (todoCompleteTime == null || todoCompleteTime.after((Date) completeTime)) {
+            if (completeTime != null) {
+                Date todoCompleteTime = todo.getCompleteTime();
+                if (completeTime instanceof Date) {
+                    if (todoCompleteTime == null || todoCompleteTime.after((Date) completeTime)) {
+                        return false;
+                    }
+                } else if (completeTime.equals("")) {
+                    if (todoCompleteTime == null) {
+                        return false;
+                    }
+                } else if (completeTime.equals("not") && todoCompleteTime != null) {
                     return false;
                 }
-            } else if (completeTime.equals("")) {
-                if (todoCompleteTime == null) {
+            }
+            return true;
+        }
+        //@@author
+        //@@author A0163786N
+        /**
+         * Helper function to simplify run function. Checks start time
+         * and returns true if todo should be shown in filtered list
+         */
+        private boolean checkStartTime(ReadOnlyTodo todo) {
+            if (startTime != null) {
+                Date todoStartTime = todo.getStartTime();
+                if (todoStartTime == null || todoStartTime.after(startTime)) {
                     return false;
                 }
-            } else if (completeTime.equals("not")) {
-                if (todoCompleteTime != null) {
+            }
+            return true;
+        }
+        //@@author
+        //@@author A0163786N
+        /**
+         * Helper function to simplify run function. Checks end time
+         * and returns true if todo should be shown in filtered list
+         */
+        private boolean checkEndTime(ReadOnlyTodo todo) {
+            if (endTime != null) {
+                Date todoEndTime = todo.getEndTime();
+                if (todoEndTime == null || todoEndTime.after(endTime)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        //@@author
+        //@@author A0163786N
+        /**
+         * Helper function to simplify run function. Checks todo name
+         * and returns true if todo should be shown in filtered list
+         */
+        private boolean checkName(ReadOnlyTodo todo) {
+            if (!nameKeyWords.isEmpty()) {
+                String name = todo.getName().fullName;
+                if (!(nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(name, keyword))
+                        .findAny()
+                        .isPresent())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        //@@author
+        //@@author A0163786N
+        /**
+         * Helper function to simplify run function. Checks todo tags
+         * and returns true if todo should be shown in filtered list
+         */
+        private boolean checkTags(ReadOnlyTodo todo) {
+            if (!tags.isEmpty()) {
+                String todoTags = todo.getTagsAsString();
+                if (!(tagKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(todoTags, keyword))
+                        .findAny()
+                        .isPresent())) {
                     return false;
                 }
             }
