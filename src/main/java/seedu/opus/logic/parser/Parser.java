@@ -21,7 +21,9 @@ import seedu.opus.logic.commands.RedoCommand;
 import seedu.opus.logic.commands.ScheduleCommand;
 import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
+import seedu.opus.logic.commands.SyncCommand;
 import seedu.opus.logic.commands.UndoCommand;
+import seedu.opus.logic.commands.exceptions.SyncCommandParser;
 
 /**
  * Parses user input.
@@ -92,6 +94,9 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case SyncCommand.COMMAND_WORD:
+            return new SyncCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
