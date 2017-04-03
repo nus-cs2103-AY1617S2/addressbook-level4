@@ -6,6 +6,7 @@ import seedu.opus.model.task.ReadOnlyTask;
  * The API of the Qualifier component.
  */
 public interface Qualifier {
-    boolean run(ReadOnlyTask task);
-}
 
+    boolean run(ReadOnlyTask task);
+
+}
