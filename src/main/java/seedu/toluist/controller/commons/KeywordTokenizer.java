@@ -57,6 +57,10 @@ public class KeywordTokenizer {
 
         for (String keyword : nonNullKeywords) {
             int index = descriptionInLowerCase.lastIndexOf(keyword);
+            if (index != descriptionInLowerCase.length() - 1) {
+                index = descriptionInLowerCase.lastIndexOf(keyword + " ");
+            }
+
             if (index != INDEX_INVALID) {
                 // Index in indexKeywordPairs refers to the index behind the last character of the keyword.
                 Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length(), keyword);

@@ -56,13 +56,16 @@ public class HelpController extends Controller {
     public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
+        if (tokens.keySet().isEmpty()) {
+            uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR, CommandResult.CommandResultType.FAILURE));
+        }
+
         String commandWord = tokens.keySet().iterator().next();
+
         if (commandWord.equals("")) {
             showGeneralHelp();
         } else if (controllerLibrary.getCommandControllerCommandWords().contains(commandWord.toLowerCase())) {
             showSpecificHelp(commandWord);
-        } else {
-            uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR, CommandResult.CommandResultType.FAILURE));
         }
     }
 

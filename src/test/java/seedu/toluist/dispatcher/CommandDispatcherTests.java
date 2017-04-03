@@ -103,7 +103,7 @@ public class CommandDispatcherTests {
         expected.add("/from");
         expected.add("/to");
         expected.add("/repeat");
-        expected.add("/recuruntil");
+        expected.add("/repeatuntil");
         expected.add("/tags");
         expected.add("/priority");
 

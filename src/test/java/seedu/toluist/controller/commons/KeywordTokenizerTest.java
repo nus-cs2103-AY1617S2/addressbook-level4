@@ -95,4 +95,16 @@ public class KeywordTokenizerTest {
         expected.put("floating/", "");
         assertTrue(actual.equals(expected));
     }
+
+    @Test
+    public void tokenize_partialWord() {
+        String description = "update v0.3 /repeatuntil tomorrow /repeat daily";
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description",
+                "/repeatuntil", "/repeat");
+        HashMap<String, String> expected = new HashMap<String, String>();
+        expected.put("description", "update v0.3");
+        expected.put("/repeatuntil", "tomorrow");
+        expected.put("/repeat", "daily");
+        assertTrue(actual.equals(expected));
+    }
 }

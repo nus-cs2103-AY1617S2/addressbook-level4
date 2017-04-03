@@ -18,7 +18,7 @@ public class TaskTokenizer {
     public static final String KEYWORD_TASK_FLOATING = "/floating";
     public static final String KEYWORD_TASK_PRIORITY = "/priority";
     public static final String KEYWORD_TASK_RECURRING_FREQUENCY = "/repeat";
-    public static final String KEYWORD_TASK_RECURRING_UNTIL_END_DATE = "/recuruntil";
+    public static final String KEYWORD_TASK_RECURRING_UNTIL_END_DATE = "/repeatuntil";
     public static final String KEYWORD_TASK_STOP_RECURRING = "/stoprepeating";
 
     public static HashMap<String, String> tokenize(String commandTemplate, String commandArgs,
