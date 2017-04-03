@@ -71,20 +71,30 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getTitle().equals(task.getTitle().title)
                 && getDate().equals(getDisplayedDate(task))
-                && getDescription().equals(task.getDescriptoin().value)
+                && getDescription().equals(getDisplayedLocation(task))
                 && getTags().equals(getTags(task.getTags()));
     }
 
     public String getDisplayedDate(ReadOnlyTask task) {
         String displayedDate = "";
         if (task.getEndDateTime() != null && task.getStartDateTime() != null) {
-            displayedDate = task.getStartDateTime() + " until " + task.getEndDateTime();
+            displayedDate = "From: " + task.getStartDateTime() + " until " + task.getEndDateTime();
         } else if (task.getEndDateTime() != null && task.getStartDateTime() == null) {
-            displayedDate = task.getEndDateTime().value;
+            displayedDate = "By: " + task.getEndDateTime().value;
         } else {
-            displayedDate = "";
+            displayedDate = "-";
         }
         return displayedDate;
+    }
+
+    public String getDisplayedLocation(ReadOnlyTask task) {
+        String displayedLocation = "";
+        if (task.getDescriptoin() == null || task.getDescriptoin().equals("")) {
+            displayedLocation = "Details: -";
+        } else {
+            displayedLocation = "Details: " + task.getDescriptoin().value;
+        }
+        return displayedLocation;
     }
 
     @Override

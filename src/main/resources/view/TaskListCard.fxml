@@ -31,7 +31,7 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="138.0">
                             <children>
-                                 <Label fx:id="id" styleClass="cell_big_label">
+                                 <Label fx:id="id" prefHeight="20.0" prefWidth="40.0" styleClass="cell_big_label">
                                      <minWidth>
                                          <Region fx:constant="USE_PREF_SIZE" />
                                      </minWidth>
@@ -42,16 +42,17 @@
                         </HBox>
                         <FlowPane fx:id="tags">
                      <VBox.margin>
-                        <Insets left="60.0" top="5.0" />
-                     </VBox.margin></FlowPane>
+                        <Insets left="50.0" top="15.0" />
+                     </VBox.margin>
+                  </FlowPane>
                         <Label fx:id="date" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="14.0" prefWidth="250.0" styleClass="cell_small_label" text="\$date">
                      <VBox.margin>
-                        <Insets left="60.0" />
+                        <Insets left="50.0" />
                      </VBox.margin>
                   </Label>
                         <Label fx:id="descriptionOfTask" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="14.0" prefWidth="227.0" styleClass="cell_small_label" text="\$descriptionOfTask" wrapText="true">
                      <VBox.margin>
-                        <Insets left="60.0" />
+                        <Insets left="50.0" />
                      </VBox.margin>
                   </Label>
                     </children>

@@ -646,13 +646,7 @@ public class LogicManagerTest {
                 expectedList);
 
         // prepare expectations for list done tasks
-        expectedAB.markTaskDone(0);
         expectedList = expectedAB.getTaskList().filtered(t -> t.isDone());
-
-        assertCommandSuccess("done 1",
-                String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, expectedList.get(0)),
-                expectedAB,
-                expectedAB.getTaskList());
 
         assertCommandSuccess("listdone",
                 ListDoneCommand.MESSAGE_SUCCESS,
