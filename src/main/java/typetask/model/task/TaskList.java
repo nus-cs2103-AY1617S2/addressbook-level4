@@ -37,6 +37,7 @@ public class TaskList implements Iterable<Task> {
     }
     /**
      * Refreshes the task list and sort them by deadlines
+     * This is not unused code. For future implementation for sorting
      */
  //   public void refreshInternalList() {
   //      internalList.sort(new TaskComparator());

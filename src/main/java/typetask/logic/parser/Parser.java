@@ -115,11 +115,11 @@ public class Parser {
 
         //@@author A0139926R
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommandParser().parse(arguments);
+            return new UndoCommandParser().parse();
         case RedoCommand.COMMAND_WORD:
-            return new RedoCommandParser().parse(arguments);
+            return new RedoCommandParser().parse();
         case RedoCommand.COMMAND_WORD_SHORT:
-            return new RedoCommandParser().parse(arguments);
+            return new RedoCommandParser().parse();
         case RemoveDeadlineCommand.COMMAND_WORD:
             return new RemoveDeadlineCommandParser().parse(arguments);
         case RemoveDeadlineCommand.COMMAND_WORD_SHORT:

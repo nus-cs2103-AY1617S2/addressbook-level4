@@ -102,7 +102,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0139926R
-    /** Stores current TaskManager state */
+    /**
+     * Stores current TaskManager state for undo and redo features
+     */
     @Override
     public synchronized void storeTaskManager(String command) {
 
@@ -112,7 +114,9 @@ public class ModelManager extends ComponentManager implements Model {
         StorageUtil.clearRedoConfig();
     }
   //@@author A0139926R
-    /** Reverts changes made from restoring recently saved TaskManager state */
+    /**
+     * Reverts changes made from restoring recently saved TaskManager state for redo command
+     */
     @Override
     public synchronized int revertTaskManager() {
         if (StorageUtil.isRedoConfigHistoryEmpty() && redoTaskManagerHistory.isEmpty()) {
@@ -129,7 +133,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
   //@@author A0139926R
-    /** Restores recently saved TaskManager state */
+    /**
+     * Restores recently saved TaskManager state for undo command
+     */
     @Override
     public synchronized int restoreTaskManager() {
         if (StorageUtil.isConfigHistoryEmpty() && taskManagerHistory.isEmpty()) {
@@ -147,6 +153,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
   //@@author A0139926R
+    /**
+     * Restores configuration to the previous configuration
+     * Not implemented yet
+     */
     @Override
     public synchronized void rollBackTaskManager(boolean isStorageOperation) {
 

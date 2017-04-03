@@ -15,10 +15,10 @@ public class Task implements ReadOnlyTask {
     private boolean isCompleted;
     private DueDate endDate;
 
+    //@@author A0139926R
     /**
      * Every field must be present and not null.
      */
-
     public Task(Name name, DueDate date, DueDate endDate, boolean isCompleted) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;

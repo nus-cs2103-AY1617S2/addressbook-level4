@@ -67,7 +67,11 @@ public class TaskCard extends UiPart<Region> {
     }
 
     //@@author A0139926R
-    //Checks event task status. Uses endDate to check
+    /**
+     * Takes @param task to check if this task is overdue or not
+     * Compares using current date
+     * Sets color for overdue task and pending task
+     */
     private void setStatusForTask(ReadOnlyTask task) {
         if (!task.getEndDate().value.equals("")) {
             List<Date> dates = DateParser.parse(task.getEndDate().value);

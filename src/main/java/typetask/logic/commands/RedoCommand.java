@@ -2,6 +2,9 @@ package typetask.logic.commands;
 
 
 //@@author A0139926R
+/**
+ * Redo recent command entered.
+ */
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
     public static final String COMMAND_WORD_SHORT = "r";
@@ -16,6 +19,9 @@ public class RedoCommand extends Command {
     private static final int STATUS_ERROR_HISTORY = -1;
 
     @Override
+    /**
+     * Returns failure if there is no undo command executed before, otherwise returns true
+     */
     public CommandResult execute() {
         switch (model.revertTaskManager()) {
         case STATUS_ERROR_HISTORY:

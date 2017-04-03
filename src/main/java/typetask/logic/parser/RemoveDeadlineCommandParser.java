@@ -10,11 +10,14 @@ import typetask.logic.commands.IncorrectCommand;
 import typetask.logic.commands.RemoveDeadlineCommand;
 
 //@@author A0139926R
+/**
+ * Parses input arguments and creates a new RemoveDeadlineCommand object
+ */
 public class RemoveDeadlineCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * and returns an RemoveDeadlineCommand object for execution.
      */
     public Command parse(String args) {
         assert args != null;
