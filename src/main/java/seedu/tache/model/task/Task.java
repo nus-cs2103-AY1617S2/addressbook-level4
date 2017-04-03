@@ -185,8 +185,8 @@ public class Task implements ReadOnlyTask {
      */
     public boolean isWithinDate(Date date) {
         if (this.startDateTime.isPresent() && this.endDateTime.isPresent()) {
-            if (this.startDateTime.get().getDate().before(date) &&
-                    this.endDateTime.get().getDate().after(date)) {
+            if ((this.startDateTime.get().getDate().before(date) || this.startDateTime.get().getDate().equals(date)) &&
+                    this.endDateTime.get().getDate().after(date) || this.startDateTime.get().getDate().equals(date)) {
                 return true;
             } else {
                 return false;
