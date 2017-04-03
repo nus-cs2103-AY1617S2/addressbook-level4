@@ -25,7 +25,7 @@ public class ResultDisplay extends UiPart<Region> {
 
     private final StringProperty displayed = new SimpleStringProperty("");
 
-    public static final String MESSAGE_RESULTDISPLAY_TOOLTIP = 
+    public static final String MESSAGE_RESULTDISPLAY_TOOLTIP =
             "Description Box\nThe results of your command executions will be shown here.";
 
     @FXML
