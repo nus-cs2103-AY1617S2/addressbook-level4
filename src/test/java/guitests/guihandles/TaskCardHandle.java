@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.taskboss.model.category.UniqueCategoryList;
@@ -34,6 +35,9 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
+    protected ImageView getImageFromImageView(String fieldId) {
+        return getImageFromImageView(fieldId, node);
+    }
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
@@ -42,8 +46,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(INFORMATION_FIELD_ID);
     }
 
-    public String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID);
+    public ImageView getPriority() {
+        return getImageFromImageView(PRIORITY_FIELD_ID);
     }
 
     public String getStartDateTime() {
