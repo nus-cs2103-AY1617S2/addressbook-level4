@@ -48,7 +48,7 @@ public class CollectionUtil {
      * Returns true if the given string is found in the given collection
      */
     public static boolean doesAnyStringMatch(Collection<String> words, String keyword) {
-        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase(s, keyword));
+        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase(s, keyword.trim()));
     }
 
     // @@author A0142487Y

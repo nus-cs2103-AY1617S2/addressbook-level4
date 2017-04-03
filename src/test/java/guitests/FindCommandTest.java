@@ -5,23 +5,66 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.task.commons.core.Messages;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.testutil.TestTask;
 
 public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find din", td.eat, td.decide); // no results
+    public void find_nonEmptyList_success() {
+        
+        //find full name
         assertFindResult("find dinner", td.eat, td.decide); // multiple results
 
-        //find after deleting one result
+        //find substring
+        assertFindResult("find din", td.eat, td.decide); // multiple results
+        
+        // find after deleting one result
         commandBox.runCommand("delete 1");
         assertFindResult("find dinner", td.decide);
     }
 
     @Test
-    public void find_emptyList() {
+    public void find_nonEmptyList_byName_success() {
+        assertFindResult("find dinner", td.eat, td.decide); // 2 results
+        assertFindResult("find Mark"); // no results
+        
+    }
+
+    @Test
+    public void find_nonEmptyList_byTag_success() {
+        assertFindResult("find personal", td.apply); 
+    }
+
+    @Test
+    public void find_nonEmptyList_byLocation_success() {
+        assertFindResult("find ERC field", td.jump); 
+        
+    }
+
+    @Test
+    public void find_nonEmptyList_byRemark_success() {
+        try {
+            commandBox.runCommand(new TestTask(td.neglect).getAddCommand());
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        assertFindResult("find remark",td.neglect);
+    }
+
+    @Test
+    public void find_nonEmptyList_byDate_success() {
+        assertFindResult("find Feb 27 2112",td.look);
+    }
+    
+    @Test
+    public void find_nonEmptyList_byDate_fail(){
+        
+    }
+
+    @Test
+    public void find_emptyList_success() {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); // no results
     }

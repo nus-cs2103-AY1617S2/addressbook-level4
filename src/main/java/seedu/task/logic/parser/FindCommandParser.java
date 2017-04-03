@@ -43,11 +43,11 @@ public class FindCommandParser extends CommandParser {
         // if a targetDate is successfully extracted, the used words in the keywords are removed
         targetDate = DateUtil.extractValidDate(keywords);
         final Set<String> keywordSet = new HashSet<>(StringUtil.asListWithoutEmptyString(keywords));
-//        System.out.println(StringUtil.asListWithoutEmptyString(keywords));
-//        if(targetDate!=null){
-//            System.out.println(targetDate.toString());
-//            System.out.println(targetDate.getExtractedFrom()+" information");
-//        }
+        System.out.println(StringUtil.asListWithoutEmptyString(keywords));
+        if(targetDate!=null){
+            System.out.println(targetDate.toString());
+            System.out.println(targetDate.getExtractedFrom()+" information");
+        }
         return targetDate==null? new FindCommand(keywordSet):new FindCommand(keywordSet,targetDate);
     }
 

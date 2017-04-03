@@ -5,6 +5,7 @@ import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.Date;
 
+//@@author A0142487Y
 public class DateUtil {
 
     /**
@@ -45,8 +46,6 @@ public class DateUtil {
                         currentDateWords = tempSentence;
                     } else if (date.equalsIgnoreTime(tempDate)) {
                         currentDateWords = tempSentence;
-//                        System.out.println(Arrays.toString(tempSentence));
-//                        System.out.println(Arrays.toString(currentDateWords));
                     }
                 }
             }

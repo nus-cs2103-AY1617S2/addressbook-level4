@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -265,6 +266,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     private class StringQualifier implements Qualifier {
         private boolean isExact = false;
+        private boolean isPossibleDate = false;
         private Set<String> keywords;
 
         StringQualifier(Set<String> keywords, boolean isExact) {
@@ -272,11 +274,18 @@ public class ModelManager extends ComponentManager implements Model {
             this.keywords = keywords;
         }
 
+        StringQualifier(Set<String> keywords, boolean isExact, boolean isPossibleDate) {
+            this.isExact = isExact;
+            this.keywords = keywords;
+            this.isPossibleDate = isPossibleDate;
+        }
+
         @Override
         public boolean run(ReadOnlyTask task) {
             if (isExact) {
-                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keywords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keywords);
+                return TaskUtil.doesTaskContainExactKeywords(task, keywords);
+            } else if (isPossibleDate) {
+                return TaskUtil.doesTaskContainExactKeyword(task, keywords);
             } else {
                 for (String keyword : keywords) {
                     if (!TaskUtil.doesTaskContainKeyword(task, keyword)) {
@@ -284,16 +293,6 @@ public class ModelManager extends ComponentManager implements Model {
                     }
                 }
                 return true;
-                // return keywords.stream()
-                // .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
-                // || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
-                // || StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
-                // || StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword)
-                // || StringUtil.containsSubstringIgnoreCase(task.getLocation().toString(), keyword)
-                // || StringUtil.containsWordIgnoreCase(task.getLocation().toString(), keyword)
-                // || StringUtil.containsSubstringIgnoreCase(task.getTags().toString(), keyword))
-                // .findAny().isPresent();
-                // || CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), keywords);
             }
         }
 
@@ -306,31 +305,42 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0142487Y
     private class StringAndDateQualifier implements Qualifier {
         private boolean isExact = false;
-        private Set<String> keyWords;
+        private boolean isPossibleDate = true;
+        private Set<String> keywords;
+        private Date date;
         private StringQualifier stringQualifier;
+        private StringQualifier dateAsStringQualifier; // e.g. to search "tomorrow" as a string instead of a date
         private DateQualifier dateQualifier;
 
         StringAndDateQualifier(Set<String> keywords, Date date) {
-            assert date != null;
             assert keywords != null;
-            this.keyWords = keywords;
-            this.stringQualifier = new StringQualifier(keywords, isExact);
-            this.dateQualifier = new DateQualifier(date);
+            assert date != null;
+            this.date = date;
+            this.keywords = keywords;
+            this.dateQualifier = new DateQualifier(this.date);
+            this.stringQualifier = new StringQualifier(this.keywords, isExact);
+
+            // this particular qualifier parses the keywords used to formulate a date as separate strings and search for
+            // those strings
+            this.dateAsStringQualifier = new StringQualifier(
+                    new HashSet<>(StringUtil.asListWithoutEmptyString(this.date.getExtractedFrom())), isExact,
+                    isPossibleDate);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
             if (isExact) {
-                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keyWords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getLocation().toString(), keyWords);
+                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keywords)
+                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keywords)
+                        || StringUtil.containsExactWordsIgnoreCase(task.getLocation().toString(), keywords);
             } else {
                 return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
-                        : this.stringQualifier.run(task) && this.dateQualifier.run(task);
-
+                        : (this.stringQualifier.run(task)
+                                && (this.dateQualifier.run(task) || this.dateAsStringQualifier.run(task)));
             }
         }
     }
+    // @@author
 
     // @@author A0142487Y-reused
     private class TagQualifier implements Qualifier {
@@ -360,6 +370,7 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         DateQualifier(Date date) {
             this.date = date;
+            System.out.println(date.toString());
         }
 
         // @@author A0139975J

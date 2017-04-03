@@ -133,4 +133,9 @@ public class StringUtil {
         }
         return sentenceAsList;
     }
+
+    public static ArrayList<String> asListWithoutEmptyString(String sentence) {
+        String[] words = sentence.split(" ");
+        return asListWithoutEmptyString(words);
+    }
 }

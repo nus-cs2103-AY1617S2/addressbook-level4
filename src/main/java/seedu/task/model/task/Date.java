@@ -84,7 +84,7 @@ public class Date {
      */
     public static boolean isValidDate(String input) {
         List<java.util.Date> dates = pretty.parse(input);
-
+//        List<java.util.Date> dates = pretty.parse("remark");
         if (dates.isEmpty()) {
             return false;
         } else {
