@@ -164,6 +164,7 @@ public class UiManager extends ComponentManager implements Ui {
     //@@author A0139961U
     /**
      * Shows a notification from the javafx UI
+     * @param task: The task that is being notified about.
      */
     /*private void showUpdateNotification(ReadOnlyTask task) {
         ImageView icon = new ImageView(this.getClass().getResource("/images/info_icon.png").toString());
