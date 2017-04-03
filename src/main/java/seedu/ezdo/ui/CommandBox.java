@@ -39,6 +39,11 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private void handleCommandInputChanged() {
+        // reset command text field color if it is 
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        });
+        
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
