@@ -57,7 +57,7 @@
 }
 
 .chip {
-    -fx-background-color: lightgrey;
+    -fx-background-color: darkgrey;
     -fx-background-radius: 40;
     -fx-text-fill: white;
     -fx-background-position: center center;

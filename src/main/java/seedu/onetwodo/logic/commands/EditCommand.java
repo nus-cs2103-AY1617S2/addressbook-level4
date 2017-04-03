@@ -36,7 +36,7 @@ public class EditCommand extends Command {
             + "[s/START_DATE] [e/END_DATE] [r/RECUR] [p/PRIORITY] [d/DESCRIPTION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " e1 s/tmr 9:00am d/beware of dogs";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task Result: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list.";
     public static final String MESSAGE_TYPE_ERROR = "Task is invalid.";

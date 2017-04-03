@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " Take nap s/03-03-2018 17:00 e/03-03-2018 21:00 r/daily"
             + "d/tonight don't need to sleep already t/nap t/habbit";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Added %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
     private final Task toAdd;

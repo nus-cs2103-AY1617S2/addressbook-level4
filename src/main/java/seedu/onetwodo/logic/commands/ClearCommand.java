@@ -7,7 +7,7 @@ package seedu.onetwodo.logic.commands;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "ToDo List has been cleared!";
+    public static final String MESSAGE_SUCCESS = "All tasks have been removed!";
 
 
     @Override
