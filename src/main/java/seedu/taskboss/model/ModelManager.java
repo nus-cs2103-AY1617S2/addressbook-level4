@@ -254,6 +254,13 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
+    /**
+     * Check whether task boss contains the specified category
+     **/
+    public boolean hasCategory(Category t) {
+        return taskBoss.hasCategory(t);
+    }
     //========== Inner classes/interfaces used for filtering =================================================
     //@@author
     interface Expression {

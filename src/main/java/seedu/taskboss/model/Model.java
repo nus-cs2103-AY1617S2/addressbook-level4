@@ -69,6 +69,8 @@ public interface Model {
     /** clear all tasks in the filtered task list by the given keywords as category*/
     void clearTasksByCategory(Category category) throws IllegalValueException;
 
+    boolean hasCategory(Category t);
+
     //@@author A0138961W
     /** Undoes previous command of TaskBoss*/
     void undoTaskboss() throws EmptyStackException, IllegalValueException;

@@ -29,9 +29,8 @@ public class ClearByCategoryCommand extends Command {
     @Override
     public CommandResult execute() throws IllegalValueException {
         model.updateFilteredTaskListByCategory(category);
-        UnmodifiableObservableList<ReadOnlyTask> taskListWithCategory = model.getFilteredTaskList();
 
-        if (taskListWithCategory.size() < 1) {
+        if (!model.hasCategory(category)) {
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_CATEGORY_NOT_FOUND));
         }
