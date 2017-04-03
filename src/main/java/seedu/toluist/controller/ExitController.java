@@ -23,10 +23,6 @@ public class ExitController extends Controller {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
     }
 
-    public HashMap<String, String> tokenize(String command) {
-        return null; // not used
-    }
-
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

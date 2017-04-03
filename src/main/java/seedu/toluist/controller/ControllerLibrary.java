@@ -61,10 +61,10 @@ public class ControllerLibrary {
     }
 
     /**
-     * Returns set of keywords for all command controllers
-     * @return set of controller keywords
+     * Returns set of command words for all command controllers
+     * @return set of controller command words
      */
-    public Set<String> getCommandControllerKeywords() {
+    public Set<String> getCommandControllerCommandWords() {
         List<String> keywordList = getCommandControllers().stream()
                 .map(controller -> Arrays.asList(controller.getCommandWords()))
                 .flatMap(List::stream)

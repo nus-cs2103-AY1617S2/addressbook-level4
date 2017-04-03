@@ -56,10 +56,10 @@ public class HelpController extends Controller {
     public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
-        String commandWord = tokens.get(PARAMETER_COMMAND);
+        String commandWord = tokens.keySet().iterator().next();
         if (commandWord.equals("")) {
             showGeneralHelp();
-        } else if (controllerLibrary.getCommandControllerKeywords().contains(commandWord.toLowerCase())) {
+        } else if (controllerLibrary.getCommandControllerCommandWords().contains(commandWord.toLowerCase())) {
             showSpecificHelp(commandWord);
         } else {
             uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR, CommandResult.CommandResultType.FAILURE));
@@ -118,21 +118,6 @@ public class HelpController extends Controller {
         return finalResult;
     }
 
-    public HashMap<String, String> tokenize(String command) {
-        HashMap<String, String> tokens = new HashMap<>();
-        command = command.trim();
-
-        String[] listOfParameters = command
-                .split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
-        try {
-            tokens.put(PARAMETER_COMMAND, listOfParameters[SECTION_COMMAND]);
-        } catch (Exception e) {
-            tokens.put(PARAMETER_COMMAND, "");
-        }
-
-        return tokens;
-    }
-
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_REGEX);
     }
@@ -143,8 +128,19 @@ public class HelpController extends Controller {
 
     public HashMap<String, String[]> getCommandKeywordMap() {
         HashMap<String, String[]> keywordMap = new HashMap<>();
-        keywordMap.put(COMMAND_WORD, controllerLibrary.getCommandControllerKeywords().toArray(new String[0]));
+        for (String keyword : controllerLibrary.getCommandControllerCommandWords()) {
+            keywordMap.put(keyword, new String[0]);
+        }
         return keywordMap;
+    }
+
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] {
+                controllerLibrary.getCommandControllerCommandWords().stream()
+                    .map(commandWord -> new String[] { commandWord })
+                    .collect(Collectors.toList())
+                    .toArray(new String[0][0])
+        };
     }
 
     public String[] getBasicHelp() {

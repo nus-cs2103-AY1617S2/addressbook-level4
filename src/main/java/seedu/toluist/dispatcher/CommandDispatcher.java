@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.Function;
@@ -23,8 +24,6 @@ import seedu.toluist.controller.HistoryController;
 import seedu.toluist.controller.NavigateHistoryController;
 import seedu.toluist.controller.UnknownCommandController;
 
-import seedu.toluist.controller.commons.KeywordTokenizer;
-
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
     private static final int SUGGESTION_LIMIT = 7;
@@ -40,7 +39,7 @@ public class CommandDispatcher extends Dispatcher {
     //@@author A0131125Y
     public CommandDispatcher() {
         super();
-        aliasConfig.setReservedKeywords(controllerLibrary.getCommandControllerKeywords());
+        aliasConfig.setReservedKeywords(controllerLibrary.getCommandControllerCommandWords());
     }
 
     public void dispatchRecordingHistory(String command) {
@@ -112,7 +111,7 @@ public class CommandDispatcher extends Dispatcher {
             }
         }
 
-        for (String commandWord : controllerLibrary.getCommandControllerKeywords()) {
+        for (String commandWord : controllerLibrary.getCommandControllerCommandWords()) {
             if (StringUtil.startsWithIgnoreCase(commandWord, firstWordOfCommand)) {
                 suggestions.add(commandWord);
             }
@@ -130,14 +129,15 @@ public class CommandDispatcher extends Dispatcher {
         String lastComponentOfCommand = StringUtil.getLastComponent(command);
         Controller bestFitController = getBestFitController(command);
         HashMap<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
-        HashMap<String, String> tokens = KeywordTokenizer.tokenize(command, null,
-                keywordMap.keySet().toArray(new String[0]));
+        Set<String> existingKeywords = bestFitController.keywordize(command).stream()
+                .map(keywordValuePair -> keywordValuePair.getKey())
+                .collect(Collectors.toSet());
         return keywordMap.keySet().stream()
                 // do not repeat keywords
-                .filter(keyword -> !tokens.keySet().contains(keyword))
+                .filter(keyword -> !existingKeywords.contains(keyword))
                 // do not suggest keywords that conflict with existing keywords
                 .filter(keyword -> Collections.disjoint(bestFitController.getConflictingKeywords(keyword),
-                        tokens.keySet()))
+                        existingKeywords))
                 .filter(keyword -> StringUtil.startsWithIgnoreCase(keyword, lastComponentOfCommand))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
@@ -149,19 +149,14 @@ public class CommandDispatcher extends Dispatcher {
      */
     private SortedSet<String> getKeywordArgumentSuggestions(String command) {
         String lastComponentOfCommand = StringUtil.getLastComponent(command);
-        HashMap<String, String[]> keywordMap = getBestFitController(command).getCommandKeywordMap();
-        List<Pair<String, String>> tokens = KeywordTokenizer.tokenizeInOrder(command, null,
-                keywordMap.keySet().toArray(new String[0]));
-        if (tokens.isEmpty()) {
+        Controller bestFitController = getBestFitController(command);
+        HashMap<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
+        List<Pair<String, String>> keywordValuePairs = bestFitController.keywordize(command);
+        if (keywordValuePairs.isEmpty()) {
             return new TreeSet<>();
         }
 
-        // Special handling for help. Since KeywordTokenizer might mix this up
-        if (command.matches("(?iu)^\\s*help\\s+\\S+.+")) {
-            return new TreeSet<>();
-        }
-
-        Pair<String, String> lastKeywordTokenPair = tokens.get(tokens.size() - 1);
+        Pair<String, String> lastKeywordTokenPair = keywordValuePairs.get(keywordValuePairs.size() - 1);
 
         return Arrays.stream(keywordMap.get(lastKeywordTokenPair.getKey()))
                 .filter(value -> StringUtil.startsWithIgnoreCase(value, lastComponentOfCommand))

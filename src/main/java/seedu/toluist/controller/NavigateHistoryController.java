@@ -13,19 +13,19 @@ import seedu.toluist.dispatcher.CommandHistoryList;
 public class NavigateHistoryController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(NavigateHistoryController.class);
     private static final String COMMAND_WORD = "navigatehistory";
-    private static final String UP_PARAMETER = "up";
-    private static final String DOWN_PARAMETER = "down";
-    private static final String DIRECTION_PARAMETER = "direction";
+    private static final String PARAMETER_UP = "up";
+    private static final String PARAMETER_DOWN = "down";
+    private static final String PARAMETER_DIRECTION = "direction";
     private CommandHistoryList commandHistory;
 
     public void execute(HashMap<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
-        String direction = tokens.get(DIRECTION_PARAMETER);
+        String direction = tokens.get(PARAMETER_DIRECTION);
 
-        if (direction.equals(UP_PARAMETER)) {
+        if (direction.equals(PARAMETER_UP)) {
             showPreviousCommand(uiStore.getCommandInputProperty().getValue());
-        } else if (direction.equals(DOWN_PARAMETER)) {
+        } else if (direction.equals(PARAMETER_DOWN)) {
             showNextCommand();
         }
     }
@@ -44,7 +44,7 @@ public class NavigateHistoryController extends Controller {
         HashMap<String, String> tokens = new HashMap<>();
 
         command = command.replace(COMMAND_WORD, "").trim();
-        tokens.put(DIRECTION_PARAMETER, command);
+        tokens.put(PARAMETER_DIRECTION, command);
 
         return tokens;
     }

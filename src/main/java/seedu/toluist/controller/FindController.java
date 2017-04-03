@@ -25,8 +25,6 @@ public class FindController extends Controller {
     private static final String PARAMETER_TAG = "/tag";
     private static final String PARAMETER_NAME = "/name";
     private static final String PARAMETER_NULL = "";
-    private static final String PARAMETER_TRUE = "true";
-    private static final String PARAMETER_FALSE = "false";
     public static final String PARAMETER_KEYWORDS = "keywords";
 
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
@@ -60,8 +58,8 @@ public class FindController extends Controller {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
-        boolean isSearchByTag = tokens.get(PARAMETER_TAG).equals(PARAMETER_TRUE);
-        boolean isSearchByName = tokens.get(PARAMETER_NAME).equals(PARAMETER_TRUE);
+        boolean isSearchByTag = tokens.get(PARAMETER_NAME) == null;
+        boolean isSearchByName = tokens.get(PARAMETER_TAG) == null;
         String[] keywordList = StringUtil.convertToArray(tokens.get(PARAMETER_KEYWORDS));
 
         Predicate<Task> taskPredicate = task ->
@@ -102,23 +100,7 @@ public class FindController extends Controller {
     }
 
     public HashMap<String, String> tokenize(String command) {
-        HashMap<String, String> tokens = new HashMap<>();
-
-        // search by tag
-        if (StringUtil.containsWordIgnoreCase(command, PARAMETER_TAG)
-            || !StringUtil.containsWordIgnoreCase(command, PARAMETER_NAME)) {
-            tokens.put(PARAMETER_TAG, PARAMETER_TRUE);
-        } else {
-            tokens.put(PARAMETER_TAG, PARAMETER_FALSE);
-        }
-
-        // search by name
-        if (StringUtil.containsWordIgnoreCase(command, PARAMETER_NAME)
-            || !StringUtil.containsWordIgnoreCase(command, PARAMETER_TAG)) {
-            tokens.put(PARAMETER_NAME, PARAMETER_TRUE);
-        } else {
-            tokens.put(PARAMETER_NAME, PARAMETER_FALSE);
-        }
+        HashMap<String, String> tokens = super.tokenize(command);
 
         // keyword for matching
         String keywords = Pattern.compile(PARAMETER_TAG, Pattern.CASE_INSENSITIVE).matcher(command)

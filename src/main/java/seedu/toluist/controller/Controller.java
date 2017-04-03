@@ -1,11 +1,16 @@
 //@@author A0131125Y
 package seedu.toluist.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
+import seedu.toluist.commons.util.StringUtil;
+import seedu.toluist.controller.commons.KeywordTokenizer;
 import seedu.toluist.ui.UiStore;
 
 
@@ -15,6 +20,8 @@ import seedu.toluist.ui.UiStore;
  * modifies the models as appropriate, and render the updated UI subsequently
  */
 public abstract class Controller {
+    public static final String DEFAULT_DESCRIPTION_KEYWORD = "description";
+
     /**
      * UiStore to store data to be used by Ui
      */
@@ -31,10 +38,33 @@ public abstract class Controller {
     /**
      * Given command string, tokenize the string into
      * a dictionary of tokens
+     * The default implementation uses keywordize to tokenize,
+     * so controllers without keywords can override this to have their own tokenization logic
      * @param command
-     * @return
+     * @return dictionary of tokens with value
      */
-    public abstract HashMap<String, String> tokenize(String command);
+    public HashMap<String, String> tokenize(String command) {
+        HashMap<String, String> tokens = new HashMap<>();
+        for (Pair<String, String> tokenPair : keywordize(command)) {
+            tokens.put(tokenPair.getKey(), tokenPair.getValue());
+        }
+        return tokens;
+    }
+
+    /**
+     * Given command string, make that into a list of keywords,
+     * in order of appearance in the commands
+     * @param command
+     * @return list of keywords and associated value
+     */
+    public List<Pair<String, String>> keywordize(String command) {
+        if (!StringUtil.isPresent(command)) {
+            return new ArrayList<>();
+        }
+        String commandWithoutCommandWord = StringUtil.replaceFirstWord(command, "");
+        return KeywordTokenizer.tokenizeInOrder(commandWithoutCommandWord, DEFAULT_DESCRIPTION_KEYWORD,
+                getCommandKeywordMap().keySet().toArray(new String[0]));
+    }
 
     /**
      * Check if Controller can handle this command

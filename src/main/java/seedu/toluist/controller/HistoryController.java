@@ -40,10 +40,6 @@ public class HistoryController extends Controller {
                 RESULT_MESSAGE, result, StringUtil.nounWithCount("command", commandHistory.size()))));
     }
 
-    public HashMap<String, String> tokenize(String command) {
-        return null; // not used
-    }
-
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_REGEX);
     }

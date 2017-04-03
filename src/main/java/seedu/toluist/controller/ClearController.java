@@ -35,10 +35,6 @@ public class ClearController extends Controller {
         uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE));
     }
 
-    public HashMap<String, String> tokenize(String command) {
-        return null; // not used
-    }
-
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_REGEX);
     }
