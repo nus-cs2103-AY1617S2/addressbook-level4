@@ -179,19 +179,18 @@ public class Task implements ReadOnlyTask{
     }
 
     public void setOverdue() {
-        this.isOverdue=checkOverdue();
+        this.isOverdue = checkOverdue();
     }
+    //@@author
 
+    //@@author A0141011J
     @Override
     public Boolean isOverdue() {
+        setOverdue();
         return isOverdue;
     }
 
     private boolean checkOverdue() {
-        if (this.end.isEndTimePassCurrentTime()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.end.isEndTimePassCurrentTime();
     }//@@author
 }
