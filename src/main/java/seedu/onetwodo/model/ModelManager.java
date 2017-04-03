@@ -20,6 +20,7 @@ import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
+import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.history.ToDoListHistoryManager;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.task.EndDate;
@@ -118,6 +119,27 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         history.saveUndoInformationAndClearRedoHistory(DoneCommand.COMMAND_WORD, taskToComplete, copiedCurrentToDoList);
+        indicateToDoListChanged();
+    }
+
+    @Override
+    public synchronized void undoneTask(ReadOnlyTask taskToUncomplete)
+            throws IllegalValueException, TaskNotFoundException {
+        if (taskToUncomplete.getDoneStatus() == false) {
+            throw new IllegalValueException("This task has not been done");
+        }
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        if (!taskToUncomplete.hasRecur()) {
+            toDoList.undoneTask(taskToUncomplete);
+        } else {
+            Task existingTask = new Task(taskToUncomplete);
+            existingTask.forwardTaskRecurDate();
+            toDoList.removeTask(existingTask);
+            toDoList.undoneTask(taskToUncomplete);
+            jumpToNewTask(taskToUncomplete);
+        }
+        history.saveUndoInformationAndClearRedoHistory(UndoneCommand.COMMAND_WORD, taskToUncomplete,
+                copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 

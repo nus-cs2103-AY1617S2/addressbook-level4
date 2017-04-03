@@ -24,6 +24,7 @@ import seedu.onetwodo.logic.commands.RedoCommand;
 import seedu.onetwodo.logic.commands.SaveToCommand;
 import seedu.onetwodo.logic.commands.SelectCommand;
 import seedu.onetwodo.logic.commands.UndoCommand;
+import seedu.onetwodo.logic.commands.UndoneCommand;
 
 /**
  * Parses user input.
@@ -66,6 +67,9 @@ public class Parser {
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
+
+        case UndoneCommand.COMMAND_WORD:
+            return new UndoneCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

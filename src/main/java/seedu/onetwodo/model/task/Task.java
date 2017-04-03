@@ -193,6 +193,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         isDone = true;
     }
 
+    public void setUndone() {
+        assert isDone == true;
+        isDone = false;
+    }
+
     public void setToday() {
         assert isToday == false;
         isToday = true;

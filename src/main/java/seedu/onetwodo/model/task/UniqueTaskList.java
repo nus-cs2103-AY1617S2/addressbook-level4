@@ -112,6 +112,19 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Marks the equivalent task as uncompleted.
+     *
+     *
+     */
+    public void undone(ReadOnlyTask taskToUncomplete) {
+        int index = internalList.indexOf(taskToUncomplete);
+        assert index >= 0;
+        Task targetTask = (Task) taskToUncomplete;
+        targetTask.setUndone();
+        internalList.set(index, targetTask);
+    }
+
+    /**
      * Marks the equivalent task as task for today.
      *
      *

@@ -167,6 +167,10 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.done(taskToComplete);
     }
 
+    public void undoneTask(ReadOnlyTask taskToUncomplete) {
+        tasks.undone(taskToUncomplete);
+    }
+
     public void todayTask(ReadOnlyTask taskForToday) {
         tasks.today(taskForToday);
     }
