@@ -559,7 +559,7 @@ public class LogicManagerTest {
     public void executeFindMatchesIfAnyAttributePresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget1 = helper.generateTaskWithStartTime("12/12/2017");
+        Task pTarget1 = helper.generateTaskWithStartTime("pTarget1", "12/12/2017");
         Task p2 = helper.generateTaskWithName("key key");
         Task p3 = helper.generateTaskWithName("sduauo");
 

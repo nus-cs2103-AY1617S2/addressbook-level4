@@ -16,8 +16,10 @@ public class PriorityQualifier implements Qualifier {
 
     @Override
     public boolean run(ReadOnlyTask task) {
-        String priority = task.getPriority().isPresent() ? task.getPriority().get().toString() : "";
+        String priority = task.getPriority().isPresent() ?
+                task.getPriority().get().toString() : "";
         return priority.equalsIgnoreCase(this.priority);
     }
 }
+
 //@@author
