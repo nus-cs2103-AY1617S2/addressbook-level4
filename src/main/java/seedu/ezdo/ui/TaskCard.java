@@ -101,10 +101,10 @@ public class TaskCard extends UiPart<Region> {
 
     private void setDueDate(ReadOnlyTask task) {
         Date currentDate = new Date();
-        Date dateAWeekInAdvance = createDateAWeekInAdvance();
+        Date dateSevenDaysInAdvance = createDateSevenDaysInAdvance();
 
         dueDate.setText(task.getDueDate().value);
-        setDueDateColor(dateAWeekInAdvance, CSS_ABOUT_TO_DUE_COLOR);
+        setDueDateColor(dateSevenDaysInAdvance, CSS_ABOUT_TO_DUE_COLOR);
         setDueDateColor(currentDate, CSS_OVERDUE_COLOR);
     }
 
@@ -121,9 +121,10 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
-    private Date createDateAWeekInAdvance() {
+    private Date createDateSevenDaysInAdvance() {
+        int weekIncrement = 7;
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, +7);
+        cal.add(Calendar.DATE, weekIncrement);
         return cal.getTime();
     }
 
