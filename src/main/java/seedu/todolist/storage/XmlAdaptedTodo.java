@@ -19,6 +19,8 @@ import seedu.todolist.model.todo.Todo;
  */
 public class XmlAdaptedTodo {
 
+    public static final String DATE_SAVE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
+
     @XmlElement(required = true)
     private String name;
 
@@ -80,23 +82,23 @@ public class XmlAdaptedTodo {
         Date completeTime = null;
         if (!this.startTime.isEmpty()) {
             try {
-                startTime = StringUtil.parseDate(this.startTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+                startTime = StringUtil.parseDate(this.startTime, DATE_SAVE_FORMAT);
             } catch (IllegalValueException e) {
-                e.printStackTrace();
+                assert false : "Stored todos cannot be in invalid format";
             }
         }
         if (!this.endTime.isEmpty()) {
             try {
-                endTime = StringUtil.parseDate(this.endTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+                endTime = StringUtil.parseDate(this.endTime, DATE_SAVE_FORMAT);
             } catch (IllegalValueException e) {
-                e.printStackTrace();
+                assert false : "Stored todos cannot be in invalid format";
             }
         }
         if (!this.completeTime.isEmpty()) {
             try {
-                completeTime = StringUtil.parseDate(this.completeTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+                completeTime = StringUtil.parseDate(this.completeTime, DATE_SAVE_FORMAT);
             } catch (IllegalValueException e) {
-                e.printStackTrace();
+                assert false : "Stored todos cannot be in invalid format";
             }
         }
         return new Todo(name, startTime, endTime, completeTime, tags);
