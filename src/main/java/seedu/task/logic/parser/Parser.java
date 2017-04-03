@@ -14,12 +14,14 @@ import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
+import seedu.task.logic.commands.FindPriorityCommand;
 import seedu.task.logic.commands.FindTagCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
+import seedu.task.logic.commands.SearchCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UncompleteCommand;
 import seedu.task.logic.commands.UndoCommand;
@@ -70,6 +72,9 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case SearchCommand.COMMAND_WORD:
+            return new SearchCommandParser().parse(arguments);
+
         //@@author A0139322L
         case FindTagCommand.COMMAND_WORD:
             return new FindTagCommandParser().parse(arguments);
@@ -105,6 +110,9 @@ public class Parser {
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
         //@@author
+
+        case FindPriorityCommand.COMMAND_WORD:
+            return new FindPriorityCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

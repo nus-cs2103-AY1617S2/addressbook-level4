@@ -1,15 +1,22 @@
 package seedu.task.logic.parser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.StringUtil;
@@ -79,8 +86,49 @@ public class ParserUtil {
      */
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;
-        return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
+        //@@author A0139161J
+        //For implementation of Natty, needed for conversion
+        Parser parser = new Parser();
+        String deadlineStringFinal = null;
+        if (deadline.isPresent()) {
+            String deadlineString = deadline.toString();
+            List <DateGroup> groups = parser.parse(deadlineString);
+            List dates = null;
+            int line;
+            int column;
+            String matchingValue;
+            String syntaxTree;
+            Map parseMap;
+            boolean isRecurring;
+            Date recursUntil;
+
+            for (DateGroup group: groups) {
+                dates = group.getDates();
+                line = group.getLine();
+                column = group.getPosition();
+                matchingValue = group.getText();
+                syntaxTree = group.getSyntaxTree().toStringTree();
+                parseMap = group.getParseLocations();
+                isRecurring = group.isRecurring();
+                recursUntil = group.getRecursUntil();
+            }
+
+            if (dates != null) {
+                deadlineStringFinal = dates.get(0).toString();
+            }
+            StringTokenizer st = new StringTokenizer(deadlineStringFinal);
+            List<String> listDeadline = new ArrayList<String>();
+            while (st.hasMoreTokens()) {
+                listDeadline.add(st.nextToken());
+            }
+            StringBuilder deadlineStringBuilder = new StringBuilder();
+            deadlineStringBuilder.append(listDeadline.get(2) + "-" + listDeadline.get(1)
+                + "-" + listDeadline.get(5)); // Extracting the dates.toString() format to DD-MMM-YYYY
+            deadlineStringFinal = deadlineStringBuilder.toString();
+        }
+        return deadline.isPresent() ? Optional.of(new Deadline(deadlineStringFinal)) : Optional.empty();
     }
+    //@@author
 
     /**
      * Parses a {@code Optional<String> information} into an {@code Optional<Information>}

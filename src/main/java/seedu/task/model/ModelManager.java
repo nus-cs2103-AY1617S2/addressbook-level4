@@ -130,7 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new TotalQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -159,7 +159,74 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getAdvancedFilteredTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
+
+    @Override
+    public void updateAdvancedFilteredTaskList(Set<String> keywords) {
+        updateAdvancedFilteredTaskList(new PredicateExpression(new AdvancedQualifier(keywords)));
+    }
+
+    private void updateAdvancedFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+
+    @Override
+    public void updatePriorityTaskList() {
+        Predicate<? super ReadOnlyTask> pred  = s -> s.getPriority().toString().equals("1");
+        filteredTasks.setPredicate(pred);
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
+
+    private class LevenshteinDistance {
+        private int minimum(int a, int b, int c) {
+            return Math.min(Math.min(a, b), c);
+        }
+
+        private int computeLevenshteinDistance(String lhs, String rhs) {
+            int[][] distance = new int[lhs.length() + 1][rhs.length() + 1];
+
+            for (int i = 0; i <= lhs.length(); i++) {
+                distance[i][0] = i;
+            }
+            for (int j = 1; j <= rhs.length(); j++) {
+                distance[0][j] = j;
+            }
+
+            for (int i = 1; i <= lhs.length(); i++) {
+                for (int j = 1; j <= rhs.length(); j++) {
+                    distance[i][j] = minimum(distance[i - 1][j] + 1, distance[i][j - 1] + 1,
+                    distance[i - 1][j - 1] + ((lhs.charAt(i - 1) == rhs.charAt(j - 1)) ? 0 : 1));
+                }
+            }
+
+            return distance[lhs.length()][rhs.length()];
+        }
+
+        public boolean validLevenshteinDistance(String lhs, String rhs) {
+            if (StringUtil.containsWordIgnoreCase(lhs, rhs)) {
+                return true;
+            }
+
+            String newLHS = lhs.toLowerCase();
+            String newRHS = rhs.toLowerCase();
+
+            for (String word : newLHS.split(" ")) {
+                int value = computeLevenshteinDistance(word, newRHS);
+
+                if (value < 2) {
+                    return true;
+                } else {
+                    continue;
+                }
+            }
+
+            return false;
+        }
+    }
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
@@ -190,24 +257,51 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    private class TotalQualifier implements Qualifier {
+        private Set<String> totalKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
+        TotalQualifier(Set<String> totalKeyWords) {
+            this.totalKeyWords = totalKeyWords;
         }
+
+        //@@author-A0139322L
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return totalKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword)
+                            || StringUtil.containsWordIgnoreCase(task.getInfo().value, keyword))
+                    .findAny()
+                    .isPresent();
+        }
+        //@@author
+
+        @Override
+        public String toString() {
+            return "keywords =" + String.join(", ", totalKeyWords);
+        }
+    }
+
+    private class AdvancedQualifier implements Qualifier {
+        private Set<String> totalKeyWords;
+
+        AdvancedQualifier(Set<String> totalKeyWords) {
+            this.totalKeyWords = totalKeyWords;
+        }
+
+        LevenshteinDistance result = new LevenshteinDistance();
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword))
+            return totalKeyWords.stream()
+                    .filter(keyword -> result.validLevenshteinDistance(task.getTaskName().taskName, keyword)
+                            || result.validLevenshteinDistance(task.getInfo().value, keyword))
                     .findAny()
                     .isPresent();
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "keywords =" + String.join(", ", totalKeyWords);
         }
     }
 
