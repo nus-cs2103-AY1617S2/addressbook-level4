@@ -197,10 +197,16 @@ public class Task implements ReadOnlyTask {
                                             + " " + startDateTime.get().getTimeOnly());
             Calendar calendarNow = Calendar.getInstance();
             calendarNow.setTime(new Date());
-            while (currentDate.before(calendarNow.getTime())
+            while ((currentDate.before(calendarNow.getTime())
                     || (currentDate.getDate() == calendarNow.get(Calendar.DAY_OF_MONTH)
-                    && (currentDate.getMonth() == calendarNow.get(Calendar.MONTH)
-                    && (currentDate.getYear() == calendarNow.get(Calendar.YEAR))))) {
+                    && currentDate.getMonth() == calendarNow.get(Calendar.MONTH)
+                    && currentDate.getYear() == calendarNow.get(Calendar.YEAR)))) {
+                if (endDateTime.isPresent()) {
+                    if (currentDate.after(new Date(endDateTime.get().getAmericanDateOnly()
+                                            + " " + endDateTime.get().getTimeOnly()))) {
+                        break;
+                    }
+                }
                 Task temp = new Task(this);
                 if (!temp.isRecurCompleted(currentDate)) {
                     DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
@@ -212,6 +218,9 @@ public class Task implements ReadOnlyTask {
                 calendar.setTime(currentDate);
                 if (temp.interval == RecurInterval.DAY) {
                     calendar.add(Calendar.DATE, 1);
+                    currentDate = calendar.getTime();
+                } else if (temp.interval == RecurInterval.WEEK) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 1);
                     currentDate = calendar.getTime();
                 } else if (temp.interval == RecurInterval.MONTH) {
                     calendar.add(Calendar.MONTH, 1);
