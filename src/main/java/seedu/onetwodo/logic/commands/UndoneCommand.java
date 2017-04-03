@@ -6,7 +6,6 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
-import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class UndoneCommand extends Command {
 
