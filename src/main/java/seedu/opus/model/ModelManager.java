@@ -20,7 +20,7 @@ import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.opus.sync.SyncManager;
-import seedu.opus.sync.syncServiceGtask;
+import seedu.opus.sync.SyncServiceGtask;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -50,7 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         history = new History();
 
-        syncManager = new SyncManager(new syncServiceGtask());
+        syncManager = new SyncManager(new SyncServiceGtask());
     }
 
     public ModelManager() {
