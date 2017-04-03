@@ -76,6 +76,7 @@ public class XmlAdaptedTask {
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
+        recurCompletedList = source.getRecurCompletedList();
     }
 
     /**

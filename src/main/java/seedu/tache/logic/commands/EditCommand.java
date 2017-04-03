@@ -40,6 +40,8 @@ public class EditCommand extends Command implements Undoable {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_PART_OF_RECURRING_TASK =
+                        "This task is part of a recurring task and cannot be edited.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -75,6 +77,7 @@ public class EditCommand extends Command implements Undoable {
         cloneOriginalTask(taskToEdit);
         Task editedTask;
         try {
+            checkPartOfRecurringTask(taskToEdit);
             editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             try {
                 model.updateTask(taskToEdit, editedTask);
@@ -248,6 +251,12 @@ public class EditCommand extends Command implements Undoable {
                                         Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
                taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
                taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
+    }
+
+    private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {
+        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
+            throw new IllegalValueException(MESSAGE_PART_OF_RECURRING_TASK);
+        }
     }
 
     //@@author A0150120H
