@@ -80,9 +80,10 @@ public class EditCommandParser extends SeperableParser {
                 return new IncorrectCommand(e.getMessage());
             }
         }
-        if (!logic.isValidUIIndex(index.get()))
+        if (!logic.isValidUIIndex(index.get())) {
             return new IncorrectCommand(
                     Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
         return new EditCommand(logic.parseUIIndex(index.get()),
                 editTaskDescriptor);
     }

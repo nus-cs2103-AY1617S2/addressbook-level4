@@ -79,7 +79,7 @@ public class CommandBox extends UiPart<Region> {
     /*
      * public void setCommandMessage(String message) {
      * this.commandMessage.setText(message); }
-     * 
+     *
      * @Subscribe public void handleUpdateStatusBarEvent(UpdateStatusBarEvent
      * event) { logger.info(">>>>>>>>COMMAND MESSAGE" + event.getMessage());
      * setCommandMessage(event.getMessage()); }

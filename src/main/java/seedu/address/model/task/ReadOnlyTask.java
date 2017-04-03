@@ -88,11 +88,10 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         int compareEnd = this.getDeadline().orElse(minDateTime).compareTo(other.getDeadline().orElse(minDateTime));
         int compareStart = this.getStartingTime().orElse(minDateTime)
                 .compareTo(other.getStartingTime().orElse(minDateTime));
-        
         if (this.isOverdue() && !other.isOverdue()) {
-        	return -1;
-        } else if (!this.isOverdue() && other.isOverdue()){
-        	return 1;
+            return -1;
+        } else if (!this.isOverdue() && other.isOverdue()) {
+            return 1;
         } else if (compareEnd != 0) {
             return compareEnd;
         } else {
