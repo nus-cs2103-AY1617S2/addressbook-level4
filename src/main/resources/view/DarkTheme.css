@@ -316,7 +316,7 @@
 .list_header {
     -fx-text-fill: black;
     -fx-padding: 10 10 10 10;
-    -fx-font-size: 16px;
+    -fx-font-size: 17px;
 }
 
 /*To cut down the padding at the top */
@@ -331,4 +331,9 @@
 #timeslots {
     -fx-hgap: 7;
     -fx-vgap: 0;
+}
+
+#description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
 }

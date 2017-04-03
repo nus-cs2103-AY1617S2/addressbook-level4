@@ -56,7 +56,11 @@ public class TaskListCard extends UiPart<Region> {
     }
 
     private void showDescription(ReadOnlyTask task) {
-        description.setText(task.getDescription().toString());
+        if (task.getDescription().hasDescription()) {
+            description.setText("// " + task.getDescription().toString());
+        } else {
+            description.setText("");
+        }
     }
 
     private void showPriority(ReadOnlyTask task) {

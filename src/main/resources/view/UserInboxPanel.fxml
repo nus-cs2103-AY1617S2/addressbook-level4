@@ -13,17 +13,17 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-        <Label fx:id="taskHeader" text=" Tasks: " styleClass="list_header">
+        <Label fx:id="taskHeader" text="Tasks: " styleClass="list_header">
         <graphic>
-        <ImageView fitHeight="23.0" fitWidth="23.0">
-        <image>
-        <Image url = "images/sand_glass_icon.png" ></Image>
-        </image>
-        </ImageView>
+           <ImageView fitHeight="23.0" fitWidth="23.0">
+                <image>
+                <Image url = "images/sand_glass_icon.png" ></Image>
+                </image>
+            </ImageView>
         </graphic>
         </Label>
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
-        <Label fx:id="eventHeader" text=" Events: " styleClass="list_header">
+        <Label fx:id="eventHeader" text="Events: " styleClass="list_header">
         <graphic>
         <ImageView fitHeight="23.0" fitWidth="23.0">
         <image>

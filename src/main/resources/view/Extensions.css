@@ -12,8 +12,3 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
-
-#completeFlag {
-    -fx-alignment: center-left;
-    -fx-font-size: 10pt;
-}

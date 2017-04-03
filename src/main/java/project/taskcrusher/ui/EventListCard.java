@@ -52,8 +52,13 @@ public class EventListCard extends UiPart<Region> {
             tickIcon.setVisible(false);
         }
     }
+
     private void showDescription(ReadOnlyEvent event) {
-        description.setText(event.getDescription().toString());
+        if (event.getDescription().hasDescription()) {
+            description.setText("// " + event.getDescription().toString());
+        } else {
+            description.setText("");
+        }
     }
 
     private void showLocation(ReadOnlyEvent event) {

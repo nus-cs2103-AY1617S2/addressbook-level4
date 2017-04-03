@@ -104,6 +104,11 @@ public class DateUtilApache {
         if (isToday(timeslot.start)) {
             startFormat = PARSE_PATTERNS[FORMAT_DATE_RELATIVE];
             prepend = "Today ";
+        } else if (isThisYear(timeslot.start)) {
+            startFormat = PARSE_PATTERNS[FORMAT_THIS_YEAR];
+            if (isThisYear(timeslot.end)) {
+                endFormat = PARSE_PATTERNS[FORMAT_THIS_YEAR];
+            }
         } else {
             startFormat = PARSE_PATTERNS[FORMAT_DATE_ABSOLUTE];
         }

@@ -32,7 +32,7 @@
                             <Label fx:id="id" styleClass="cell_big_label"></Label>
                             <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
                             <Label fx:id="eventLocation" styleClass="cell_big_label" text="\$location" />
-                            <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                            <Label fx:id="description" text="\$description" />
                             <FlowPane fx:id="tags" />
                             <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
                             <image>

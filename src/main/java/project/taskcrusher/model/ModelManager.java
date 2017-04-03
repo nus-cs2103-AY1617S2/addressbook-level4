@@ -46,6 +46,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.userInbox = new UserInbox(userInbox);
         filteredTasks = new FilteredList<>(this.userInbox.getTaskList());
         filteredEvents = new FilteredList<>(this.userInbox.getEventList());
+        updateFilteredEventListToShowAll();
+        updateFilteredTaskListToShowAll();
     }
 
     public ModelManager() {
