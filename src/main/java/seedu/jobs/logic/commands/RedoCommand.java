@@ -14,7 +14,7 @@ public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_SUCCESS = "Redo previous command";
-    public static final String MESSAGE_FAILUIRE = "No more commands to redo";
+    public static final String MESSAGE_FAILURE = "No more commands to redo";
 
 
     @Override
@@ -23,7 +23,7 @@ public class RedoCommand extends Command {
             model.redoCommand();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (EmptyStackException e) {
-            throw new CommandException(MESSAGE_FAILUIRE);
+            throw new CommandException(MESSAGE_FAILURE);
         }
     }
 }
