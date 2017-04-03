@@ -27,8 +27,9 @@ import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueEventList.DuplicateEventException;
 import seedu.address.model.person.UniqueTaskList;
-
+import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -62,7 +63,6 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-
     public AddCommand(String description, String priority, String starttime, String startdate, String endtime,
             String enddate, String bydate, String bytime, String location, Set<String> tags)
             throws IllegalValueException {
@@ -105,28 +105,46 @@ public class AddCommand extends Command {
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
             if (toAddTask == null) {
-                model.addEvent(toAddEvent);
-                UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
-                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
-                EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
-                model.storePreviousCommand("add");
-                if (model.eventHasClash(toAddEvent)) {
-                    return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_CLASH, toAddEvent));
-                }
-                return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
+                return addingEvent();
             } else if (toAddEvent == null) {
-                model.addTask(toAddTask);
-                UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-                EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(toAddTask)));
-                EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(toAddTask));
-                model.storePreviousCommand("add");
-                return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
+                return addingTask();
             }
         } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
 
+    }
+
+    //@@author A0110491U
+    /**
+     * @return CommandResult of adding a Task
+     * @throws DuplicateTaskException if duplicate task is found
+     */
+    private CommandResult addingTask() throws DuplicateTaskException {
+        model.addTask(toAddTask);
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(toAddTask)));
+        EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(toAddTask));
+        model.storePreviousCommand("add");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
+    }
+
+    //@@author A0110491U
+    /**
+     * @return CommandResult of adding an Event
+     * @throws DuplicateEventException if duplicate event is found
+     */
+    private CommandResult addingEvent() throws DuplicateEventException {
+        model.addEvent(toAddEvent);
+        UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
+        EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
+        EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
+        model.storePreviousCommand("add");
+        if (model.eventHasClash(toAddEvent)) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_CLASH, toAddEvent));
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
     }
 
 }

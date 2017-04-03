@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    private static final String DEFAULT_BY_TIME = "2359";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the activity identified "
             + "by the type and index number used in the last activity listing. "
@@ -87,66 +89,86 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         if (type.equals("ev")) {
-            List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
-            if (filteredActivityListIndex >= lastShownEventList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-            }
-
-            Event eventToEdit = (Event) lastShownEventList.get(filteredActivityListIndex);
-            try {
-                if (!isValidEndDateTime()) {
-                    throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
-                }
-                Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
-                try {
-                //store for undo operation
-                    ReadOnlyWhatsLeft currState = model.getWhatsLeft();
-                    ModelManager.setPreviousState(currState);
-                    model.updateEvent(eventToEdit, editedEvent);
-                } catch (UniqueEventList.DuplicateEventException dpe) {
-                    throw new CommandException(MESSAGE_DUPLICATE_EVENT);
-                }
-                model.updateFilteredListToShowAll();
-                model.storePreviousCommand("edit");
-
-                UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
-                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
-                EventsCenter.getInstance().post(new JumpToCalendarEventEvent(editedEvent));
-                if (model.eventHasClash(editedEvent)) {
-                    return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS_CLASH, editedEvent));
-                }
-                return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
-            } catch (IllegalValueException e) {
-                throw new CommandException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
-            }
+            return editingEvent();
         }
 
         if (type.equals("ts")) {
-            List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
-            if (filteredActivityListIndex >= lastShownTaskList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
+            return editingTask();
+        }
+        return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
-            Task taskToEdit = (Task) lastShownTaskList.get(filteredActivityListIndex);
-            Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+    }
+
+    //@@author A0110491U
+    /**
+     * This method edits the event chosen
+     * @return CommandResult of the editing of an event
+     * @throws CommandException if invalid index or incorrect end_date/time or duplicate event
+     */
+    private CommandResult editingEvent() throws CommandException {
+        List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
+        if (filteredActivityListIndex >= lastShownEventList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
+        Event eventToEdit = (Event) lastShownEventList.get(filteredActivityListIndex);
+        try {
+            if (!isValidEndDateTime()) {
+                throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+            }
+            Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
             try {
-                //store for undo operation
+            //store for undo operation
                 ReadOnlyWhatsLeft currState = model.getWhatsLeft();
                 ModelManager.setPreviousState(currState);
-                model.updateTask(taskToEdit, editedTask);
-            } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+                model.updateEvent(eventToEdit, editedEvent);
+            } catch (UniqueEventList.DuplicateEventException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_EVENT);
             }
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
 
-            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(editedTask)));
-            EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(editedTask));
-            return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
+            UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
+            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
+            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(editedEvent));
+            if (model.eventHasClash(editedEvent)) {
+                return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS_CLASH, editedEvent));
+            }
+            return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
         }
-        return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
 
+    //@@author A0110491U
+    /**
+     * This method edits the task chosen
+     * @return CommandResult of the editing of an task
+     * @throws CommandException if invalid index or duplicate task
+     */
+    private CommandResult editingTask() throws CommandException {
+        List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
+        if (filteredActivityListIndex >= lastShownTaskList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
+        Task taskToEdit = (Task) lastShownTaskList.get(filteredActivityListIndex);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        try {
+            //store for undo operation
+            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+            ModelManager.setPreviousState(currState);
+            model.updateTask(taskToEdit, editedTask);
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+        model.updateFilteredListToShowAll();
+        model.storePreviousCommand("edit");
+
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(editedTask)));
+        EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(editedTask));
+        return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
     }
 
     /**
@@ -165,10 +187,22 @@ public class EditCommand extends Command {
         Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
+        if (updatedByDate.value != null && updatedByTime.value == null) {
+            try {
+                updatedByTime = new ByTime(DEFAULT_BY_TIME);
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (updatedByTime.value != null && updatedByDate.value == null) {
+            updatedByDate = new ByDate(LocalDate.now());
+        }
         return new Task(updatedDescription, updatedPriority, updatedByTime, updatedByDate,
                  updatedLocation, updatedTags, taskToEdit.getStatus());
     }
 
+    //@@author A0110491U
     /**
      * Creates and returns a {@code Activity} with the details of {@code activityToEdit}
      * edited with {@code editActivityDescriptor}.
@@ -190,6 +224,8 @@ public class EditCommand extends Command {
         return new Event(updatedDescription, updatedStartTime, updatedStartDate,
                 updatedEndTime, updatedEndDate, updatedLocation, updatedTags);
     }
+
+    //@@author A0110491U
     /**
      * Stores the details to edit the activity with. Each non-empty field value will replace the
      * corresponding field value of the activity.
@@ -320,6 +356,8 @@ public class EditCommand extends Command {
 
         return Event.isValideEndDateTime(endTimeToCompare, endDateToCompare, startTimeToCompare, startDateToCompare);
     }
+
+    //@@author A0110491U
     /**
      * Stores the details to edit the Task with. Each non-empty field value will replace the
      * corresponding field value of the activity.
