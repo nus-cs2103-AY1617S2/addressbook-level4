@@ -1,6 +1,6 @@
 package guitests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.logic.commands.DoneCommand.MESSAGE_UNDONE_TASK_SUCCESS;
 
 import java.util.ArrayList;

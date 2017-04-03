@@ -18,19 +18,15 @@ public class LogsCenterTest {
 
     @Test
     public void test() throws Exception {
-        new MockUp<LogsCenter>()
-        {
+        new MockUp<LogsCenter>() {
             @Mock
-            FileHandler createFileHandler() throws IOException
-            {
+            FileHandler createFileHandler() throws IOException {
                 throw new IOException();
             }
         };
         Logger logger = LogsCenter.getLogger("test logger");
-        new Verifications() {
-            {
+        new Verifications() {{
                 logger.warning("Error adding file handler for logger.");
-            }
-        };
+        }};
     }
 }

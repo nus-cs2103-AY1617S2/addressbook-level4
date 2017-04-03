@@ -48,11 +48,9 @@ public class KillCommandTest extends EzDoGuiTest {
 
     @Test
     public void kill_taskNotFound_throwsAssertion() {
-        new MockUp<ModelManager>()
-        {
+        new MockUp<ModelManager>() {
             @Mock
-            void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws TaskNotFoundException
-            {
+            void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws TaskNotFoundException {
                 throw new TaskNotFoundException();
             }
         };
