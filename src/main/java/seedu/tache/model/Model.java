@@ -2,6 +2,7 @@ package seedu.tache.model;
 
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
@@ -40,8 +41,9 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getInitialTaskList();
+    /** Returns the all recurring ghost (not an actual task but will still be displayed to the user) tasks
+     * as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    ObservableList<ReadOnlyTask> getAllRecurringGhostTasks();
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();

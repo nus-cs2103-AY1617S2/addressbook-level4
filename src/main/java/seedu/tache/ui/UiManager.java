@@ -36,6 +36,7 @@ import seedu.tache.commons.core.Config;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.storage.DataSavingExceptionEvent;
 import seedu.tache.commons.events.ui.JumpToListRequestEvent;
+import seedu.tache.commons.events.ui.PopulateRecurringGhostTaskEvent;
 import seedu.tache.commons.events.ui.ShowHelpRequestEvent;
 import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
@@ -250,6 +251,14 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (mainWindow.getTaskListPanel() != null) {
             mainWindow.getTaskListPanel().resetConnections(event.getNewConnection());
+        }
+    }
+
+    @Subscribe
+    private void handlePopulateRecurringGhostTaskEvent(PopulateRecurringGhostTaskEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (mainWindow.getTaskListPanel() != null) {
+            mainWindow.getCalendarPanel().addAllEvents(event.getAllRecurringGhostTasks());;
         }
     }
 

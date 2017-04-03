@@ -93,7 +93,11 @@ public class Task implements ReadOnlyTask {
     public Optional<DateTime> getStartDateTime() {
         if (!recurDisplayDate.equals("")) {
             try {
-                return Optional.of(new DateTime(recurDisplayDate));
+                String time = "";
+                if (startDateTime.isPresent()) {
+                    time = " " + startDateTime.get().getTimeOnly();
+                }
+                return Optional.of(new DateTime(recurDisplayDate + time));
             } catch (IllegalValueException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -110,7 +114,11 @@ public class Task implements ReadOnlyTask {
     public Optional<DateTime> getEndDateTime() {
         if (!recurDisplayDate.equals("")) {
             try {
-                return Optional.of(new DateTime(recurDisplayDate));
+                String time = "";
+                if (endDateTime.isPresent()) {
+                    time = " " + endDateTime.get().getTimeOnly();
+                }
+                return Optional.of(new DateTime(recurDisplayDate + time));
             } catch (IllegalValueException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -187,7 +195,12 @@ public class Task implements ReadOnlyTask {
         if (startDateTime.isPresent() && isRecurring) {
             Date currentDate = new Date(startDateTime.get().getAmericanDateOnly()
                                             + " " + startDateTime.get().getTimeOnly());
-            while (currentDate.before(new Date())) {
+            Calendar calendarNow = Calendar.getInstance();
+            calendarNow.setTime(new Date());
+            while (currentDate.before(calendarNow.getTime())
+                    || (currentDate.getDate() == calendarNow.get(Calendar.DAY_OF_MONTH)
+                    && (currentDate.getMonth() == calendarNow.get(Calendar.MONTH)
+                    && (currentDate.getYear() == calendarNow.get(Calendar.YEAR))))) {
                 Task temp = new Task(this);
                 if (!temp.isRecurCompleted(currentDate)) {
                     DateFormat df = new SimpleDateFormat("MM/dd/yyyy");

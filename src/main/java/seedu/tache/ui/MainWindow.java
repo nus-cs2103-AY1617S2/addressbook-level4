@@ -225,6 +225,11 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
+    //@@author A0139925U
+    public CalendarPanel getCalendarPanel() {
+        return this.calendarPanel;
+    }
+
     //@@author A0142255M
     void viewTaskEvent(ReadOnlyTask task) {
         //browserPanel.viewEvent(task);

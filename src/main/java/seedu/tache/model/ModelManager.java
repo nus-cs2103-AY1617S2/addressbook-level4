@@ -15,6 +15,7 @@ import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.events.ui.FilteredTaskListUpdatedEvent;
+import seedu.tache.commons.events.ui.PopulateRecurringGhostTaskEvent;
 import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
@@ -92,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
+        raise(new PopulateRecurringGhostTaskEvent(getAllRecurringGhostTasks()));
     }
     //@@author
 
@@ -132,11 +134,6 @@ public class ModelManager extends ComponentManager implements Model {
         ObservableList<ReadOnlyTask> filteredTasksWithRecurringTasks = populateUncompletedRecurringDatesAsTask();
         raise(new TaskPanelConnectionChangedEvent(filteredTasksWithRecurringTasks));
         return new UnmodifiableObservableList<>(filteredTasksWithRecurringTasks);
-    }
-
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getInitialTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     //@@author A0142255M
@@ -251,17 +248,6 @@ public class ModelManager extends ComponentManager implements Model {
             break;
         default:
         }
-    }
-
-    public ObservableList<ReadOnlyTask> populateUncompletedRecurringDatesAsTask() {
-        List<ReadOnlyTask> concatenated = new ArrayList<>();
-        for (int i = 0; i < filteredTasks.size(); i++) {
-            if (filteredTasks.get(i).getRecurringStatus()) {
-                Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList().toArray());
-            }
-        }
-        Collections.addAll(concatenated, filteredTasks.toArray());
-        return FXCollections.observableList(concatenated);
     }
     //@@author
 
@@ -530,6 +516,27 @@ public class ModelManager extends ComponentManager implements Model {
 
     private int minimum(int a, int b, int c) {
         return Math.min(Math.min(a, b), c);
+    }
+
+    private ObservableList<ReadOnlyTask> populateUncompletedRecurringDatesAsTask() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            if (filteredTasks.get(i).getRecurringStatus()) {
+                Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList().toArray());
+            }
+        }
+        Collections.addAll(concatenated, filteredTasks.toArray());
+        return FXCollections.observableList(concatenated);
+    }
+
+    public ObservableList<ReadOnlyTask> getAllRecurringGhostTasks() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+            if (taskManager.getTaskList().get(i).getRecurringStatus()) {
+                Collections.addAll(concatenated, taskManager.getTaskList().get(i).getUncompletedRecurList().toArray());
+            }
+        }
+        return FXCollections.observableList(concatenated);
     }
     //@@author
 }
