@@ -49,7 +49,6 @@ public class TaskCard extends UiPart<Region> {
         tags.setAlignment(Pos.CENTER_LEFT);
         taskDate.setAlignment(Pos.BASELINE_RIGHT);
         progressBar.setVisible(task.isAnimated());
-
         logger.info("############################################TASK ISANIMATED:" + task.isAnimated());
         if (task.isAnimated()) {
             // Play progress bar animation

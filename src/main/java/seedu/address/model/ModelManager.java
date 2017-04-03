@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -344,19 +345,31 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
-            ObservableList<ReadOnlyTask> taskListCompleted) {
-        splitTaskList(taskListToday, taskListFuture, taskListCompleted);
-        sortTaskList(taskListToday, taskListFuture, taskListCompleted);
-        assignUiIndex(taskListToday, taskListFuture, taskListCompleted);
-    }
-
-    private void splitTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday,
+            ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
         ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
         taskListToday.clear();
         taskListFuture.clear();
         taskListCompleted.clear();
+        // All operations to be done in a temporary list to prevent
+        // ObservableList from refreshing UI multiple times
+        ArrayList<ReadOnlyTask> todayTempList = new ArrayList<ReadOnlyTask>();
+        ArrayList<ReadOnlyTask> futureTempList = new ArrayList<ReadOnlyTask>();
+        ArrayList<ReadOnlyTask> completedTempList = new ArrayList<ReadOnlyTask>();
+
+        splitTaskList(taskList, todayTempList, futureTempList, completedTempList);
+        sortTaskLists(todayTempList, futureTempList, completedTempList);
+        assignUiIndex(todayTempList, futureTempList, completedTempList);
+
+        // add local temporary lists back to ObservableList to update UI views
+        taskListToday.addAll(todayTempList);
+        taskListFuture.addAll(futureTempList);
+        taskListCompleted.addAll(completedTempList);
+    }
+
+    private void splitTaskList(ObservableList<ReadOnlyTask> taskList, ArrayList<ReadOnlyTask> todayTempList,
+            ArrayList<ReadOnlyTask> futureTempList, ArrayList<ReadOnlyTask> completedTempList) {
         ListIterator<ReadOnlyTask> iter = taskList.listIterator();
         while (iter.hasNext()) {
             ReadOnlyTask tmpTask = iter.next();
@@ -365,26 +378,26 @@ public class ModelManager extends ComponentManager implements Model {
                 // absolute index here will be replace to relative index in
                 // assignUiIndex method
                 tmpTask.setID("" + (iter.nextIndex() - 1));
-                taskListToday.add(tmpTask);
+                todayTempList.add(tmpTask);
             } else if (!tmpTask.isDone()) {
                 tmpTask.setID("" + (iter.nextIndex() - 1));
-                taskListFuture.add(tmpTask);
+                futureTempList.add(tmpTask);
             } else {
                 tmpTask.setID("" + (iter.nextIndex() - 1));
-                taskListCompleted.add(tmpTask);
+                completedTempList.add(tmpTask);
             }
         }
     }
 
-    private void sortTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
-            ObservableList<ReadOnlyTask> taskListCompleted) {
-        taskListToday.sort(TaskDatetimeComparator);
-        taskListFuture.sort(TaskDatetimeComparator);
-        taskListCompleted.sort(TaskDatetimeComparator);
+    private void sortTaskLists(ArrayList<ReadOnlyTask> todayTempList, ArrayList<ReadOnlyTask> futureTempList,
+            ArrayList<ReadOnlyTask> completedTempList) {
+        todayTempList.sort(TaskDatetimeComparator);
+        futureTempList.sort(TaskDatetimeComparator);
+        completedTempList.sort(TaskDatetimeComparator);
     }
 
-    private void assignUiIndex(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
-            ObservableList<ReadOnlyTask> taskListCompleted) {
+    private void assignUiIndex(ArrayList<ReadOnlyTask> taskListToday, ArrayList<ReadOnlyTask> taskListFuture,
+            ArrayList<ReadOnlyTask> taskListCompleted) {
         // TODO potential performance bottleneck here
         indexMap.clear();
         // initialise displayed index
