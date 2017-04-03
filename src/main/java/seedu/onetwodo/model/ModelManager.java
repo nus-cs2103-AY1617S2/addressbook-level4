@@ -123,21 +123,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void undoneTask(ReadOnlyTask taskToUncomplete)
-            throws IllegalValueException, TaskNotFoundException {
+    public synchronized void undoneTask(ReadOnlyTask taskToUncomplete) throws IllegalValueException {
         if (taskToUncomplete.getDoneStatus() == false) {
             throw new IllegalValueException("This task has not been done");
         }
-        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        if (!taskToUncomplete.hasRecur()) {
-            toDoList.undoneTask(taskToUncomplete);
-        } else {
-            Task existingTask = new Task(taskToUncomplete);
-            existingTask.forwardTaskRecurDate();
-            toDoList.removeTask(existingTask);
-            toDoList.undoneTask(taskToUncomplete);
-            jumpToNewTask(taskToUncomplete);
+        if (taskToUncomplete.hasRecur()) {
+            throw new IllegalValueException("Recurring tasks cannot be undone");
         }
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        toDoList.undoneTask(taskToUncomplete);
         history.saveUndoInformationAndClearRedoHistory(UndoneCommand.COMMAND_WORD, taskToUncomplete,
                 copiedCurrentToDoList);
         indicateToDoListChanged();

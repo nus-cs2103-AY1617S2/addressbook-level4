@@ -40,8 +40,6 @@ public class UndoneCommand extends Command {
             model.undoneTask(taskToUncomplete);
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
-        } catch (TaskNotFoundException tnfe) {
-            assert false : "The target task cannot be missing";
         }
         return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, taskToUncomplete));
     }

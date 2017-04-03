@@ -44,7 +44,7 @@ public interface Model {
      *
      * @throws IllegalValueException
      */
-    void undoneTask(ReadOnlyTask taskToComplete) throws IllegalValueException, TaskNotFoundException;
+    void undoneTask(ReadOnlyTask taskToComplete) throws IllegalValueException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
