@@ -1,8 +1,10 @@
 package seedu.opus.sync;
 
+import java.io.IOException;
 import java.util.List;
 
 import seedu.opus.model.task.Task;
+import seedu.opus.sync.exceptions.SyncException;
 
 //@@author A0148087W
 /**
@@ -10,7 +12,7 @@ import seedu.opus.model.task.Task;
  */
 public interface Sync {
 
-    public void startSync();
+    public void startSync() throws IOException, SyncException;
 
     public void stopSync();
 

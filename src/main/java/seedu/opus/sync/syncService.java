@@ -1,15 +1,19 @@
 package seedu.opus.sync;
 
+import java.io.IOException;
 import java.util.List;
 
 import seedu.opus.model.task.Task;
+import seedu.opus.sync.exceptions.SyncException;
 
 public interface syncService {
 
     /**
      * Initialise and start the service
+     * @throws SyncException
+     * @throws IOException
      */
-    public void start();
+    public void start() throws IOException, SyncException;
 
     /**
      * Stop service

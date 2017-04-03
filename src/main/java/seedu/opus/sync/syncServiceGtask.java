@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.logging.Logger;
 
@@ -36,6 +36,7 @@ import seedu.opus.model.task.Note;
 import seedu.opus.model.task.Status;
 import seedu.opus.model.task.Status.Flag;
 import seedu.opus.model.task.Task;
+import seedu.opus.sync.exceptions.SyncException;
 
 public class syncServiceGtask implements syncService {
     private static HttpTransport HTTP_TRANSPORT;
@@ -66,7 +67,7 @@ public class syncServiceGtask implements syncService {
 
     private boolean isRunning;
 
-    public syncServiceGtask() {
+    public syncServiceGtask() throws SyncException, IOException {
         addTaskQueue = new ArrayBlockingQueue<Task>(50);
         deleteTaskQueue = new ArrayBlockingQueue<Task>(50);
         updateTaskQueue = new ArrayBlockingQueue<Task>(50);
@@ -76,23 +77,23 @@ public class syncServiceGtask implements syncService {
             DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
         } catch (IOException ioe) {
             ioe.printStackTrace();
+            throw new IOException(SYNC_ERROR_MESSAGE);
         } catch (Throwable t) {
             t.printStackTrace();
+            throw new SyncException(SYNC_ERROR_MESSAGE);
         }
         this.isRunning = false;
     }
 
     @Override
-    public void start() {
+    public void start() throws SyncException {
         logger.info("Starting Google Task");
         this.isRunning = true;
         try {
             service = getTasksService();
             opusTaskList = getOpusTasks();
-            //Executors.newSingleThreadExecutor().execute(() -> processAddTaskQueue());
-            //Executors.newSingleThreadExecutor().execute(() -> processDeleteTaskQueue());
-            //Executors.newSingleThreadExecutor().execute(() -> processUpdateTaskQueue());
-            //Executors.newSingleThreadExecutor().execute(() -> processUpdateTaskListDeque());
+
+            Executors.newSingleThreadExecutor().execute(() -> processUpdateTaskListDeque());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -177,7 +178,7 @@ public class syncServiceGtask implements syncService {
         }
     }
 
-    private Credential authorize() throws IOException {
+    private Credential authorize() throws IOException, SyncException {
         GoogleClientSecrets.Details clientSecretsDetails = new GoogleClientSecrets.Details();
         clientSecretsDetails.setClientId(CLIENT_ID);
         clientSecretsDetails.setClientSecret(CLIENT_SECRET);
@@ -192,6 +193,7 @@ public class syncServiceGtask implements syncService {
             credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize(APPLICATION_NAME);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new SyncException(SYNC_ERROR_MESSAGE);
         }
 
         logger.info("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
@@ -199,7 +201,7 @@ public class syncServiceGtask implements syncService {
         return credential;
     }
 
-    private com.google.api.services.tasks.Tasks getTasksService() throws IOException {
+    private com.google.api.services.tasks.Tasks getTasksService() throws IOException, SyncException {
         Credential credential = authorize();
         return new com.google.api.services.tasks.Tasks.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, credential)
@@ -207,7 +209,7 @@ public class syncServiceGtask implements syncService {
                 .build();
     }
 
-    private TaskList getOpusTasks() {
+    private TaskList getOpusTasks() throws SyncException {
         try {
             TaskLists taskList = service.tasklists().list().execute();
             List<TaskList> items = taskList.getItems();
@@ -219,21 +221,19 @@ public class syncServiceGtask implements syncService {
             }
             return createOpusTaskList();
         } catch (IOException e) {
-            System.out.println("failed");
             e.printStackTrace();
-            throw new NoSuchElementException();
+            throw new SyncException(SYNC_ERROR_MESSAGE);
         }
     }
 
-    public TaskList createOpusTaskList() {
+    public TaskList createOpusTaskList() throws SyncException {
         TaskList opusTaskList = new TaskList();
         opusTaskList.setTitle("Opus");
         try {
             return service.tasklists().insert(opusTaskList).execute();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new SyncException(SYNC_ERROR_MESSAGE);
         }
-        return null;
     }
 
     private com.google.api.services.tasks.model.Task toGoogleAdaptedTask(Task source) {
