@@ -11,7 +11,7 @@ import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import seedu.taskboss.commons.exceptions.DefaultCategoryException;
+import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.Command;
@@ -30,9 +30,9 @@ public class AddCommandParser {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws InvalidDatesException
-     * @throws DefaultCategoryException
+     * @throws BuiltInCategoryException
      */
-    public Command parse(String args) throws InvalidDatesException, DefaultCategoryException {
+    public Command parse(String args) throws InvalidDatesException, BuiltInCategoryException {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE,
                         PREFIX_END_DATE, PREFIX_INFORMATION, PREFIX_RECURRENCE, PREFIX_CATEGORY);
@@ -55,7 +55,7 @@ public class AddCommandParser {
             return new IncorrectCommand(ide.getMessage());
         } catch (IllegalArgumentException iae) {
             return new IncorrectCommand(Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
-        } catch (DefaultCategoryException dce) {
+        } catch (BuiltInCategoryException dce) {
             return new IncorrectCommand(dce.getMessage());
         }
     }

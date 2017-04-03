@@ -6,7 +6,7 @@ import java.util.Optional;
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
-import seedu.taskboss.commons.exceptions.DefaultCategoryException;
+import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
@@ -72,7 +72,7 @@ public class EditCommand extends Command {
     //@@author A0144904H
     @Override
     public CommandResult execute() throws CommandException, InvalidDatesException,
-                                        IllegalValueException, DefaultCategoryException {
+                                        IllegalValueException, BuiltInCategoryException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -88,7 +88,7 @@ public class EditCommand extends Command {
             throw new CommandException(ERROR_INVALID_DATES);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        } catch (DefaultCategoryException dce) {
+        } catch (BuiltInCategoryException dce) {
             if (dce.getMessage().equals(ERROR_CANNOT_EDIT_DONE_TASK)) {
                 throw new CommandException(ERROR_CANNOT_EDIT_DONE_TASK);
             } else if (dce.getMessage().equals(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY)) {
@@ -118,13 +118,13 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      * @throws InvalidDatesException
-     * @throws DefaultCategoryException
+     * @throws BuiltInCategoryException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor)
                                                      throws InvalidDatesException, DuplicateCategoryException,
                                                      IllegalValueException, InvalidDatesException,
-                                                     IllegalValueException, DefaultCategoryException {
+                                                     IllegalValueException, BuiltInCategoryException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -158,15 +158,15 @@ public class EditCommand extends Command {
      * @param taskToEdit
      * @param updatedCategories
      * @throws IllegalValueException
-     * @throws DefaultCategoryException
+     * @throws BuiltInCategoryException
      * @throws DuplicateCategoryException
      */
     private static void errorDetect(ReadOnlyTask taskToEdit, UniqueCategoryList updatedCategories)
-            throws IllegalValueException, DefaultCategoryException, DuplicateCategoryException {
-        if (taskToEdit.getCategories().contains(new Category(AddCommand.DEFAULT_DONE))) {
-            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
+            throws IllegalValueException, BuiltInCategoryException, DuplicateCategoryException {
+        if (taskToEdit.getCategories().contains(new Category(AddCommand.BUILT_IN_DONE))) {
+            throw new BuiltInCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
         } else {
-            updatedCategories.add(new Category(AddCommand.DEFAULT_ALL_TASKS));
+            updatedCategories.add(new Category(AddCommand.BUILT_IN_ALL_TASKS));
         }
     }
 
@@ -175,22 +175,22 @@ public class EditCommand extends Command {
      * @param taskToEdit
      * @return the new Category List of the to be edited task
      * @throws IllegalValueException
-     * @throws DefaultCategoryException
+     * @throws BuiltInCategoryException
      */
     private static UniqueCategoryList createUpdatedCategorySet(ReadOnlyTask taskToEdit,
                     EditTaskDescriptor editTaskDescriptor) throws IllegalValueException,
-                                                                DefaultCategoryException {
+                                                                BuiltInCategoryException {
 
         //check whether user input for editing task categories contains Done category
-        //and throw DefaultCategoryException
+        //and throw BuiltInCategoryException
         if (editTaskDescriptor.getCategories().isPresent() &&
-                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.DEFAULT_DONE))) {
-            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
+                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.BUILT_IN_DONE))) {
+            throw new BuiltInCategoryException(ERROR_CANNOT_EDIT_DONE_CATEGORY);
         }
 
         if (editTaskDescriptor.getCategories().isPresent() &&
-                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
-            throw new DefaultCategoryException(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY);
+                editTaskDescriptor.getCategories().get().contains(new Category(AddCommand.BUILT_IN_ALL_TASKS))) {
+            throw new BuiltInCategoryException(ERROR_CANNOT_EDIT_ALL_TASKS_CATEGORY);
         }
 
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()

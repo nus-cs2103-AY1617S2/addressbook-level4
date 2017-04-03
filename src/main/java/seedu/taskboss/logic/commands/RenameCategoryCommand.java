@@ -3,7 +3,7 @@ package seedu.taskboss.logic.commands;
 import java.util.logging.Logger;
 
 import seedu.taskboss.commons.core.LogsCenter;
-import seedu.taskboss.commons.exceptions.DefaultCategoryException;
+import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
@@ -58,13 +58,13 @@ public class RenameCategoryCommand extends Command {
 
         try {
             logger.info("Attempting to rename category");
-            checkDefaultCategoryViolation(oldCategory, newCategory);
+            checkBuiltINCategoryViolation(oldCategory, newCategory);
             model.renameCategory(oldCategory, newCategory);
             model.updateFilteredTaskListByCategory(newCategory);
             return new CommandResult(MESSAGE_SUCCESS);
-        } catch (DefaultCategoryException dce) {
+        } catch (BuiltInCategoryException dce) {
             logger.info("User attempted to modify built-in categories' names. Throwing CommandException");
-            throwCommandExceptionForDefaultCategory(dce);
+            throwCommandExceptionForBuiltInCategory(dce);
             return new CommandResult(EMPTY_STRING); // will never reach this statement
         } catch (DuplicateCategoryException e) {
             logger.info("User attempted to create duplicate categories. Returning user feedback");
@@ -73,7 +73,7 @@ public class RenameCategoryCommand extends Command {
     }
 
     //@@author A0144904H
-    private void throwCommandExceptionForDefaultCategory(DefaultCategoryException dce)
+    private void throwCommandExceptionForBuiltInCategory(BuiltInCategoryException dce)
             throws CommandException {
         if (dce.getMessage().equals(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME)) {
             throw new CommandException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
@@ -86,16 +86,16 @@ public class RenameCategoryCommand extends Command {
         }
     }
 
-    private void checkDefaultCategoryViolation(Category oldCategory, Category newCategory)
-            throws DefaultCategoryException, IllegalValueException {
-        if (oldCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
-            throw new DefaultCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
-        } else if (oldCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
-            throw new DefaultCategoryException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
-        } else if (newCategory.equals(new Category(AddCommand.DEFAULT_DONE))) {
-            throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
-        } else if (newCategory.equals(new Category(AddCommand.DEFAULT_ALL_TASKS))) {
-            throw new DefaultCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
+    private void checkBuiltINCategoryViolation(Category oldCategory, Category newCategory)
+            throws BuiltInCategoryException, IllegalValueException {
+        if (oldCategory.equals(new Category(AddCommand.BUILT_IN_ALL_TASKS))) {
+            throw new BuiltInCategoryException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
+        } else if (oldCategory.equals(new Category(AddCommand.BUILT_IN_DONE))) {
+            throw new BuiltInCategoryException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
+        } else if (newCategory.equals(new Category(AddCommand.BUILT_IN_DONE))) {
+            throw new BuiltInCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_DONE);
+        } else if (newCategory.equals(new Category(AddCommand.BUILT_IN_ALL_TASKS))) {
+            throw new BuiltInCategoryException(MESSAGE_CATEGORY_CANNOT_RENAME_TO_ALL_TASKS);
         }
     }
 

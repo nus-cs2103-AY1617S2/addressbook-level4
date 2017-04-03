@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.events.ui.NewResultAvailableEvent;
-import seedu.taskboss.commons.exceptions.DefaultCategoryException;
+import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.logic.Logic;
@@ -42,7 +42,7 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private void handleCommandInputChanged() throws IllegalValueException,
-                                                InvalidDatesException, DefaultCategoryException {
+                                                InvalidDatesException, BuiltInCategoryException {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
