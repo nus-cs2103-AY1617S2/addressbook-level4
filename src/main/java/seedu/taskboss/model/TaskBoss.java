@@ -173,6 +173,10 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         categories.remove(t);
     }
 
+    public boolean hasCategory(Category t) {
+        return categories.contains(t);
+    }
+
     //@@authour A0143157J
     /**
      * Renames a category in TaskBoss.

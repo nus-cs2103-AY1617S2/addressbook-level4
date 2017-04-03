@@ -25,7 +25,7 @@ public class Category {
         if (!isValidCategoryName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_CATEGORY_CONSTRAINTS);
         }
-        this.categoryName = trimmedName;
+        this.categoryName = formatName(trimmedName);
     }
 
     /**
@@ -52,6 +52,17 @@ public class Category {
      */
     public String toString() {
         return '[' + categoryName + ']';
+    }
+
+    //@@author A0147990R
+    private String formatName(String name) {
+        if (name.length() <= 1) {
+            return name.toUpperCase();
+        } else {
+            String first = name.substring(0, 1).toUpperCase();
+            String rest = name.substring(1).toLowerCase();
+            return first + rest;
+        }
     }
 
 }

@@ -42,7 +42,7 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Feb 23, 2017 10pm")
                 .withEndDateTime("Jun 28, 2017 5pm")
                 .withRecurrence(Frequency.NONE)
-                .withCategories("owesMoney", "Project").build();
+                .withCategories("Project", "Owesmoney").build();
 
         TestTask[] taskListExpected = {sampleA, sampleB};
         commandBox.runCommand(command);
@@ -73,7 +73,7 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
 
         //category name does not exist
         commandBox.runCommand("name superman batman");
-        assertResultMessage("[superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
+        assertResultMessage("[Superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
 
         //category name is AllTasks
         commandBox.runCommand("name AllTasks batman");

@@ -495,10 +495,9 @@ public class LogicManagerTest {
             DateTime endDateTime = new DateTime("tomorrow 8pm");
             Information information = new Information("111, alpha street");
             Recurrence recurrence = new Recurrence(Frequency.NONE);
-            Category category1 = new Category("category1");
-            Category category2 = new Category("longercategory2");
-            UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            categories.add(new Category("AllTasks"));
+            Category category1 = new Category("Category1");
+            Category category2 = new Category("Longercategory2");
+            UniqueCategoryList categories = new UniqueCategoryList(category2, new Category("Alltasks"), category1);
             return new Task(name, priorityLevel, startDateTime,
                     endDateTime, information, recurrence, categories);
         }

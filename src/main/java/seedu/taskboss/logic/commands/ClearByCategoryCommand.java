@@ -1,9 +1,7 @@
 package seedu.taskboss.logic.commands;
 
-import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
-import seedu.taskboss.model.task.ReadOnlyTask;
 
 //@@author A0147990R
 public class ClearByCategoryCommand extends Command {
@@ -29,9 +27,8 @@ public class ClearByCategoryCommand extends Command {
     @Override
     public CommandResult execute() throws IllegalValueException {
         model.updateFilteredTaskListByCategory(category);
-        UnmodifiableObservableList<ReadOnlyTask> taskListWithCategory = model.getFilteredTaskList();
 
-        if (taskListWithCategory.size() < 1) {
+        if (!model.hasCategory(category)) {
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_CATEGORY_NOT_FOUND));
         }

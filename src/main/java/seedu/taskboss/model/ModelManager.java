@@ -30,6 +30,7 @@ import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final String CATEGORY_DONE = "Done";
+    private static final String CATEGORY_ALL_TASKS = "Alltasks";
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
@@ -239,11 +240,27 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Removes the category from the UniqueCategoryList of Taskboss
+     * if the category is not a build-in category
      **/
     public void removeCategoryFromTaskboss(Category category) {
-        taskBoss.removeCategory(category);
+        try {
+            if (!category.equals(new Category(CATEGORY_ALL_TASKS)) &&
+                    !category.equals(new Category(CATEGORY_DONE))) {
+                taskBoss.removeCategory(category);
+            }
+        } catch (IllegalValueException ive) {
+            //this exception should never be caught as CATEGORY_ALL_TASKS and CATEGORY_DONE
+            // are always valid
+        }
     }
 
+    @Override
+    /**
+     * Check whether task boss contains the specified category
+     **/
+    public boolean hasCategory(Category t) {
+        return taskBoss.hasCategory(t);
+    }
     //========== Inner classes/interfaces used for filtering =================================================
     //@@author
     interface Expression {
