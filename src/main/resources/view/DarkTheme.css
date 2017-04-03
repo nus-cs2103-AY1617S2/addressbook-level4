@@ -93,12 +93,12 @@
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1C2122, 20%);
 }
 
 .list-view {
-    -fx-background-color: #293132;
     -fx-border-color: transparent;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
 }
 
 .list-cell {
