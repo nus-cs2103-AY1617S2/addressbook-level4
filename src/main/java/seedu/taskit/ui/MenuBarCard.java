@@ -14,6 +14,8 @@ import javafx.scene.layout.Region;
 public class MenuBarCard extends UiPart<Region> {
     
     private static final String FXML = "MenuBarCard.fxml";
+    
+    @FXML
     private ImageView imageView;
     
     @FXML
