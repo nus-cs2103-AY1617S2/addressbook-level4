@@ -89,10 +89,10 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getDisplayedLocation(ReadOnlyTask task) {
         String displayedLocation = "";
-        if (task.getLocation() == null || task.getLocation().equals("")) {
+        if (task.getDescriptoin() == null || task.getDescriptoin().equals("")) {
             displayedLocation = "Details: -";
         } else {
-            displayedLocation = "Details: " + task.getLocation().value;
+            displayedLocation = "Details: " + task.getDescriptoin().value;
         }
         return displayedLocation;
     }
