@@ -10,10 +10,9 @@ import com.joestelmach.natty.Parser;
 
 /**
  * A Parser class that implements natty library to convert string objects into
- * dates. Returns a null date object if the argument is not recognised as a
+ * dates. Returns a null date object if the argument is not recognized as a
  * date.
  */
-
 public class DateParser {
 
     private static Parser dateParser = new Parser(TimeZone.getDefault());
@@ -23,7 +22,7 @@ public class DateParser {
 
     /**
      * Parses date object from a string. Only parses first recognised date
-     * instance
+     * instance.
      */
     public static Date parse(String date) {
         List<DateGroup> parsedDates = dateParser.parse(date);

@@ -22,6 +22,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="libs/natty-0.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/lenovo/Downloads/natty-0.13.jar" sourcepath="C:/Users/lenovo/Downloads/natty-natty-0.13.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/lenovo/Downloads/natty-natty-0.13.zip!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

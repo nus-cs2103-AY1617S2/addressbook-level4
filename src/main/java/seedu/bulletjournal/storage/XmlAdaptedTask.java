@@ -47,9 +47,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getTaskName().fullName;
-        phone = source.getPhone() == null ? null : source.getPhone().value;
+        phone = source.getPhone() == null ? null : source.getPhone().toString();
         email = source.getStatus() == null ? null : source.getStatus().value;
-        address = source.getAddress() == null ? null : source.getAddress().value;
+        address = source.getAddress() == null ? null : source.getAddress().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -67,9 +67,9 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final TaskName taskName = new TaskName(this.name);
-        final DueDate dueDate = this.phone == null ? null : new DueDate(this.phone);
+        final DueDate dueDate = this.phone == null ? null : new DueDate(this.toString());
         final Status status = this.email == null ? null : new Status(this.email);
-        final BeginDate beginDate = this.address == null ? null : new BeginDate(this.address);
+        final BeginDate beginDate = this.address == null ? null : new BeginDate(this.toString());
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(taskName, dueDate, status, beginDate, tags);
     }
