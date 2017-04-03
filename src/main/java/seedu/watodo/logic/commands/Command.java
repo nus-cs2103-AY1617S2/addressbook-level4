@@ -3,7 +3,6 @@ package seedu.watodo.logic.commands;
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.model.Model;
-import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
@@ -39,6 +38,10 @@ public abstract class Command {
     }
 
     public void unexecute() {
-        
+
+    }
+
+    public void redo() {
+
     }
 }

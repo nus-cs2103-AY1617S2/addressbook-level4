@@ -7,7 +7,7 @@ import org.junit.Test;
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_nonEmptyList() {

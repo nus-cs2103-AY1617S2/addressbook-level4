@@ -39,7 +39,7 @@ public class EditCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
     private final boolean hasEditDate;
     private final boolean hasRemoveDate;
-    
+
     private Task oldTask;
     private Task newTask;
 
@@ -80,12 +80,26 @@ public class EditCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
-    
+
     @Override
     public void unexecute() {
         try {
+            model.updateFilteredListToShowAll();
             model.deleteTask(newTask);
             model.addTask(oldTask);
+        } catch (TaskNotFoundException e) {
+
+        } catch (DuplicateTaskException e) {
+
+        }
+    }
+
+    @Override
+    public void redo() {
+        try {
+            model.updateFilteredListToShowAll();
+            model.deleteTask(oldTask);
+            model.addTask(newTask);
         } catch (TaskNotFoundException e) {
 
         } catch (DuplicateTaskException e) {

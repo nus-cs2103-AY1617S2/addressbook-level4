@@ -63,4 +63,8 @@ public interface Model {
 
     void addCommandToHistory(Command command);
 
+    Command getUndoneCommand();
+
+    void clearRedo();
+
 }
