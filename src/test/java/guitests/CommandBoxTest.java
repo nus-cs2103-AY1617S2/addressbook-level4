@@ -6,7 +6,6 @@ import static org.junit.Assert.assertFalse;
 import java.util.ArrayList;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import seedu.address.ui.CommandBox;
 
@@ -43,7 +42,6 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
     }
 
-    @Test
     public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
         commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
