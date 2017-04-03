@@ -200,6 +200,13 @@ public class DateTimeFormatterUtil {
     }
 
     //@@author A0127545A
+    /**
+     * Gets the suffix for a given day number
+     * e.g.  3 -> rd
+     *      12 -> th
+     *      15 -> th
+     *      21 -> st
+     */
     public static String getDayNumberSuffix(int day) {
         if (day >= 11 && day <= 13) {
             return SUFFIX_FOURTH_ONWARDS;

@@ -125,68 +125,28 @@ public class UpdateTaskController extends Controller {
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime, LocalDateTime taskDeadline,
             boolean isFloating, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring) {
-        if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
-        }
-        if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
-        }
-        if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
-        }
-        Task taskCopy = null;
         try {
-            taskCopy = (Task) task.clone();
-        } catch (CloneNotSupportedException cloneNotSupportedException) {
-            // should never reach here
-            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
-        }
-        try {
-            if (isFloating) {
-                taskCopy.setStartDateTime(null);
-                taskCopy.setEndDateTime(null);
-            } else if (taskDeadline != null) {
-                taskCopy.setStartDateTime(null);
-                taskCopy.setEndDateTime(taskDeadline);
-            } else {
-                if (eventStartDateTime != null) {
-                    taskCopy.setStartDateTime(eventStartDateTime);
-                }
-                if (eventEndDateTime != null) {
-                    taskCopy.setEndDateTime(eventEndDateTime);
-                }
-            }
+            validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating);
+            validateTaskRecurringStatusInput(recurringFrequency, recurringUntilEndDate, isStopRecurring);
+            validateTaskFloatingStatusInput(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating);
 
-            if (StringUtil.isPresent(description)) {
-                taskCopy.setDescription(description);
-            }
-            if (StringUtil.isPresent(taskPriority)) {
-                taskCopy.setTaskPriority(taskPriority);
-            }
-            if (StringUtil.isPresent(recurringFrequency)) {
-                taskCopy.setRecurringFrequency(recurringFrequency);
-            }
-            if (recurringUntilEndDate != null) {
-                taskCopy.setRecurringEndDateTime(recurringUntilEndDate);
-            }
-            if (!tags.isEmpty()) {
-                taskCopy.replaceTags(tags);
-            }
-            if (isStopRecurring) {
-                taskCopy.unsetRecurring();
-            }
+            Task taskCopy = (Task) task.clone();
+            taskCopy = updateTaskDates(taskCopy, isFloating, eventStartDateTime, eventEndDateTime, taskDeadline);
+            taskCopy = updateTaskDescription(taskCopy, description);
+            taskCopy = updateTaskPriority(taskCopy, taskPriority);
+            taskCopy = updateTaskRecurringFrequency(taskCopy, recurringFrequency);
+            taskCopy = updateTaskRecurringUntilEndDate(taskCopy, recurringUntilEndDate);
+            taskCopy = updateTaskTags(taskCopy, tags);
+            taskCopy = updateTaskUnsetRecurringStatus(taskCopy, isStopRecurring);
 
             TodoList todoList = TodoList.getInstance();
-            if (todoList.getTasks().contains(taskCopy)) {
-                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
-            }
+            validatesNoDuplicateTask(taskCopy, todoList);
 
             // Update all changes in taskCopy to task
             Task oldTask = (Task) task.clone();
             task.setTask(taskCopy);
-            if (todoList.save()) {
-                uiStore.setTasks(todoList.getTasks(), task);
-            }
+
+            updateTaskInTodoList(task, todoList);
             return new CommandResult(ResultMessage.getUpdateCommandResultMessage(oldTask, task, uiStore));
         } catch (IllegalArgumentException illegalArgumentException) {
             return new CommandResult(illegalArgumentException.getMessage());
@@ -202,10 +162,10 @@ public class UpdateTaskController extends Controller {
      * @param eventEndDateTime
      * @param taskDeadline
      * @param isFloating
-     * @return true if there is at most 1 possible task type
+     * @throws IllegalArgumentException if there is more than 1 possible task type
      */
-    private boolean isValidTaskType(LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
-            LocalDateTime taskDeadline, boolean isFloating) {
+    private void validateTaskDatesInput(LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
+            LocalDateTime taskDeadline, boolean isFloating) throws IllegalArgumentException {
         int numberOfTaskTypes = 0;
         // Can update event start date time OR end date time
         if (eventStartDateTime != null || eventEndDateTime != null) {
@@ -217,7 +177,111 @@ public class UpdateTaskController extends Controller {
         if (isFloating) {
             numberOfTaskTypes++;
         }
-        return numberOfTaskTypes <= 1;
+        if (numberOfTaskTypes > 1) {
+            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+        }
+    }
+
+    /**
+     * Check that there is no recurring task arguments together with non-recurring task arguments
+     * @param recurringFrequency
+     * @param recurringUntilEndDate
+     * @param isStopRecurring
+     * @throws IllegalArgumentException if both recurring and non-recurring task arguments are present
+     */
+    private void validateTaskRecurringStatusInput(String recurringFrequency, LocalDateTime recurringUntilEndDate,
+            boolean isStopRecurring) throws IllegalArgumentException {
+        if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
+            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
+        }
+    }
+
+    /**
+     * Check that there is no floating task arguments together with non-floating task arguments
+     * @param eventStartDateTime
+     * @param eventEndDateTime
+     * @param taskDeadline
+     * @param isFloating
+     * @throws IllegalArgumentException if both floating and non-floating task arguments are present
+     */
+    private void validateTaskFloatingStatusInput(LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
+            LocalDateTime taskDeadline, boolean isFloating) throws IllegalArgumentException {
+        if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
+            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
+        }
+    }
+
+    private Task updateTaskDates(Task task, boolean isFloating,
+            LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime, LocalDateTime taskDeadline) {
+        if (isFloating) {
+            task.setStartDateTime(null);
+            task.setEndDateTime(null);
+        } else if (taskDeadline != null) {
+            task.setStartDateTime(null);
+            task.setEndDateTime(taskDeadline);
+        } else {
+            if (eventStartDateTime != null) {
+                task.setStartDateTime(eventStartDateTime);
+            }
+            if (eventEndDateTime != null) {
+                task.setEndDateTime(eventEndDateTime);
+            }
+        }
+        return task;
+    }
+
+    private Task updateTaskDescription(Task task, String description) {
+        if (StringUtil.isPresent(description)) {
+            task.setDescription(description);
+        }
+        return task;
+    }
+
+    private Task updateTaskPriority(Task task, String taskPriority) {
+        if (StringUtil.isPresent(taskPriority)) {
+            task.setTaskPriority(taskPriority);
+        }
+        return task;
+    }
+
+    private Task updateTaskRecurringFrequency(Task task, String recurringFrequency) {
+        if (StringUtil.isPresent(recurringFrequency)) {
+            task.setRecurringFrequency(recurringFrequency);
+        }
+        return task;
+    }
+
+    private Task updateTaskRecurringUntilEndDate(Task task, LocalDateTime recurringUntilEndDate) {
+        if (recurringUntilEndDate != null) {
+            task.setRecurringEndDateTime(recurringUntilEndDate);
+        }
+        return task;
+    }
+
+    private Task updateTaskTags(Task task, Set<Tag> tags) {
+        if (!tags.isEmpty()) {
+            task.replaceTags(tags);
+        }
+        return task;
+    }
+
+    private Task updateTaskUnsetRecurringStatus(Task task, boolean isStopRecurring) {
+        if (isStopRecurring) {
+            task.unsetRecurring();
+        }
+        return task;
+    }
+
+    private void validatesNoDuplicateTask(Task task, TodoList todoList) throws IllegalArgumentException {
+        if (todoList.getTasks().contains(task)) {
+            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+        }
+    }
+
+    private void updateTaskInTodoList(Task task, TodoList todoList) {
+        if (todoList.save()) {
+            uiStore.setTasks(todoList.getTasks(), task);
+        }
     }
 
     public boolean matchesCommand(String command) {
