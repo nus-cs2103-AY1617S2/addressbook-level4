@@ -31,9 +31,10 @@ public class ListCommand extends Command {
     private Priority priority;
     private Set<Tag> tagSet;
     private SortOrder sortOrder;
+    private boolean isReversed = false;
 
     public ListCommand(String doneString, String beforeDate, String afterDate,
-            String priorityString, Set<String> tags, String order) throws IllegalValueException {
+            String priorityString, Set<String> tags, String order, boolean isReversed) throws IllegalValueException {
         assert doneString != null;
         switch (doneString) {
         case DoneStatus.DONE_STRING: // view done tasks
@@ -47,6 +48,7 @@ public class ListCommand extends Command {
             break;
         }
         sortOrder = SortOrder.getSortOrder(order);
+        this.isReversed = isReversed;
         before = new EndDate(beforeDate);
         after = new StartDate(afterDate);
         if (before.hasDate() && after.hasDate() && before.getLocalDateTime().isBefore(after.getLocalDateTime())) {
@@ -78,7 +80,7 @@ public class ListCommand extends Command {
             feecbackMessageToReturn = MESSAGE_LIST_UNDONE_SUCCESS;
         }
         if (sortOrder != SortOrder.NONE) {
-            model.sortBy(sortOrder);
+            model.sortBy(sortOrder, isReversed);
         }
         model.resetSearchStrings();
         model.updateByDoneDatePriorityTags(before, after, priority, tagSet);

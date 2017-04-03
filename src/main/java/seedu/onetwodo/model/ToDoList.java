@@ -159,8 +159,8 @@ public class ToDoList implements ReadOnlyToDoList {
         }
     }
 
-    public void sortTasks(SortOrder sortOrder) {
-        tasks.sortTasks(sortOrder);
+    public void sortTasks(SortOrder sortOrder, boolean isReversed) {
+        tasks.sortTasks(sortOrder, isReversed);
     }
 
     public void doneTask(ReadOnlyTask taskToComplete) {

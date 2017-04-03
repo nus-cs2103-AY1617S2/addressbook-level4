@@ -137,16 +137,28 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, targetTask);
     }
 
-    public void sortTasks(SortOrder sortOrder) {
+    public void sortTasks(SortOrder sortOrder, boolean isReversed) {
         switch (sortOrder) {
         case ALPHANUMERIC:
-            FXCollections.sort(internalList, (Task t1, Task t2) -> t1.getName().compareTo(t2.getName()));
+            if (!isReversed) {
+                FXCollections.sort(internalList, (Task t1, Task t2) -> t1.getName().compareTo(t2.getName()));
+            } else {
+                FXCollections.sort(internalList, (Task t1, Task t2) -> t2.getName().compareTo(t1.getName()));
+            }
             break;
         case PRIORITY:
-            FXCollections.sort(internalList, (Task t1, Task t2) -> t1.getPriority().compareTo(t2.getPriority()));
+            if (!isReversed) {
+                FXCollections.sort(internalList, (Task t1, Task t2) -> t1.getPriority().compareTo(t2.getPriority()));
+            } else {
+                FXCollections.sort(internalList, (Task t1, Task t2) -> t2.getPriority().compareTo(t1.getPriority()));
+            }
             break;
         case DATETIME:
-            FXCollections.sort(internalList, (Task t1, Task t2) -> t1.compareTo(t2));
+            if (!isReversed) {
+                FXCollections.sort(internalList, (Task t1, Task t2) -> t1.compareTo(t2));
+            } else {
+                FXCollections.sort(internalList, (Task t1, Task t2) -> t2.compareTo(t1));
+            }
             break;
         default:
         }

@@ -5,6 +5,7 @@ import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_AFTER;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_BEFORE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_REVERSE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Optional;
@@ -32,29 +33,30 @@ public class ListCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(
-                PREFIX_BEFORE, PREFIX_AFTER, PREFIX_PRIORITY, PREFIX_TAG, PREFIX_ORDER);
+                PREFIX_BEFORE, PREFIX_AFTER, PREFIX_PRIORITY, PREFIX_TAG, PREFIX_ORDER, PREFIX_REVERSE);
         argsTokenizer.tokenize(args);
         Optional<String> preamble = argsTokenizer.getPreamble();
         String beforeDate = argsTokenizer.getValue(PREFIX_BEFORE).orElse("");
         String afterDate = argsTokenizer.getValue(PREFIX_AFTER).orElse("");
         String priority = argsTokenizer.getValue(PREFIX_PRIORITY).orElse("");
         String order = argsTokenizer.getValue(PREFIX_ORDER).orElse("");
+        boolean isReversed = argsTokenizer.getValue(PREFIX_REVERSE).isPresent();
         Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
 
         try {
             if (!preamble.isPresent()) {
-                return new ListCommand(DoneStatus.UNDONE_STRING, beforeDate, afterDate, priority, tags, order);
+                return new ListCommand(DoneStatus.UNDONE_STRING, beforeDate, afterDate, priority, tags, order, isReversed);
             }
             switch (preamble.get().toLowerCase()) {
             case DoneStatus.DONE_STRING:
-                return new ListCommand(DoneStatus.DONE_STRING, beforeDate, afterDate, priority, tags, order);
+                return new ListCommand(DoneStatus.DONE_STRING, beforeDate, afterDate, priority, tags, order, isReversed);
             case DoneStatus.ALL_STRING:
-                return new ListCommand(DoneStatus.ALL_STRING, beforeDate, afterDate, priority, tags, order);
+                return new ListCommand(DoneStatus.ALL_STRING, beforeDate, afterDate, priority, tags, order, isReversed);
             case DoneStatus.UNDONE_STRING:
             case "":
-                return new ListCommand(DoneStatus.UNDONE_STRING, beforeDate, afterDate, priority, tags, order);
+                return new ListCommand(DoneStatus.UNDONE_STRING, beforeDate, afterDate, priority, tags, order, isReversed);
             case TODAY:
-                return new ListCommand(DoneStatus.UNDONE_STRING, TOMORROW, TODAY_START, priority, tags, order);
+                return new ListCommand(DoneStatus.UNDONE_STRING, TOMORROW, TODAY_START, priority, tags, order, isReversed);
             default:
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }

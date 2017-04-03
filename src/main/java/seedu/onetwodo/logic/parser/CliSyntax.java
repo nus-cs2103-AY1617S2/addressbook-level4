@@ -20,6 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_AFTER = PREFIX_START_DATE;
     public static final Prefix PREFIX_BEFORE = PREFIX_END_DATE;
     public static final Prefix PREFIX_ORDER = new Prefix("o/");
+    public static final Prefix PREFIX_REVERSE = new Prefix("rev/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one

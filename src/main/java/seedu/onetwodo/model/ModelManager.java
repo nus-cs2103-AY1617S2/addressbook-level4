@@ -139,8 +139,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author
     @Override
-    public synchronized void sortBy(SortOrder sortOrder) {
-        toDoList.sortTasks(sortOrder);
+    public synchronized void sortBy(SortOrder sortOrder, boolean isReversed) {
+        toDoList.sortTasks(sortOrder, isReversed);
         indicateToDoListChanged();
     }
 
@@ -371,11 +371,11 @@ public class ModelManager extends ComponentManager implements Model {
                     public void run() {
                         EventsCenter.getInstance().post(
                                 new JumpToListRequestEvent(filteredIndex, task.getTaskType())
-                        );
+                                );
                     }
                 },
                 300
-        );
+                );
     }
 
     // ========== Inner classes/interfaces used for filtering

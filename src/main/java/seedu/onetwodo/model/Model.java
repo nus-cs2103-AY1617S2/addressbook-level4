@@ -123,7 +123,7 @@ public interface Model {
 
     void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags);
 
-    void sortBy(SortOrder sortOrder);
+    void sortBy(SortOrder sortOrder, boolean isReversed);
 
     public void jumpToNewTask(ReadOnlyTask task);
 
