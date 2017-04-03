@@ -188,14 +188,10 @@ public class Task implements ReadOnlyTask{
 
     @Override
     public Boolean isOverdue() {
-        return isOverdue;
+        return checkOverdue();
     }
 
     private boolean checkOverdue() {
-        if (this.end.isEndTimePassCurrentTime()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.end.isEndTimePassCurrentTime();
     }//@@author
 }
