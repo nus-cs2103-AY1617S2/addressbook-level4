@@ -39,6 +39,21 @@ public class UniqueTaskList implements Iterable<Task> {
      *             if the task to add is a duplicate of an existing task in the
      *             list.
      */
+    public void add(int addIndex, Task toAdd) throws DuplicateTaskException {
+        assert toAdd != null;
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(addIndex, toAdd);
+    }
+    
+    /**
+     * Adds a task to the list.
+     *
+     * @throws DuplicateTaskException
+     *             if the task to add is a duplicate of an existing task in the
+     *             list.
+     */
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
