@@ -248,7 +248,9 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleTaskPanelConnectionChangedEvent(TaskPanelConnectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTaskListPanel().resetConnections(event.getNewConnection());
+        if (mainWindow.getTaskListPanel() != null) {
+            mainWindow.getTaskListPanel().resetConnections(event.getNewConnection());
+        }
     }
 
 }
