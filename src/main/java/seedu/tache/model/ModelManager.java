@@ -2,9 +2,13 @@ package seedu.tache.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.tache.commons.core.ComponentManager;
 import seedu.tache.commons.core.LogsCenter;
@@ -12,6 +16,7 @@ import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.events.ui.FilteredTaskListUpdatedEvent;
 import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
+import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.model.task.ReadOnlyTask;
@@ -124,6 +129,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        ObservableList<ReadOnlyTask> filteredTasksWithRecurringTasks = populateUncompletedRecurringDatesAsTask();
+        raise(new TaskPanelConnectionChangedEvent(filteredTasksWithRecurringTasks));
+        return new UnmodifiableObservableList<>(filteredTasksWithRecurringTasks);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getInitialTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -239,6 +251,17 @@ public class ModelManager extends ComponentManager implements Model {
             break;
         default:
         }
+    }
+
+    public ObservableList<ReadOnlyTask> populateUncompletedRecurringDatesAsTask() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            if (filteredTasks.get(i).getRecurringStatus()) {
+                Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList().toArray());
+            }
+        }
+        Collections.addAll(concatenated, filteredTasks.toArray());
+        return FXCollections.observableList(concatenated);
     }
     //@@author
 

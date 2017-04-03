@@ -9,6 +9,7 @@ import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
 import seedu.tache.model.task.Task.RecurInterval;
 
 /**
@@ -135,6 +136,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public List<Date> getRecurCompletedList() {
         return recurCompletedList;
+    }
+
+    @Override
+    public List<Task> getUncompletedRecurList() {
+        return null;
     }
 
 }

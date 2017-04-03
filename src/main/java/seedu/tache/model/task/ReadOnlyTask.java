@@ -23,6 +23,7 @@ public interface ReadOnlyTask {
     RecurInterval getRecurInterval();
     boolean isWithinDate(Date date);
     List<Date> getRecurCompletedList();
+    List<Task> getUncompletedRecurList();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

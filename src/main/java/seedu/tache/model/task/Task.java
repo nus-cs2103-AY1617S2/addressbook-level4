@@ -1,12 +1,16 @@
 //@@author A0139961U
 package seedu.tache.model.task;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.model.tag.UniqueTagList;
 
@@ -27,6 +31,7 @@ public class Task implements ReadOnlyTask {
     private boolean isRecurring;
     private RecurInterval interval;
     private List<Date> recurCompletedList;
+    private String recurDisplayDate;
 
     /**
      * Every field must be present and not null.
@@ -42,6 +47,7 @@ public class Task implements ReadOnlyTask {
         this.isRecurring = false;
         this.interval = RecurInterval.NONE;
         this.recurCompletedList = new ArrayList<Date>();
+        this.recurDisplayDate = "";
     }
 
     public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime,
@@ -61,6 +67,7 @@ public class Task implements ReadOnlyTask {
         this.isRecurring = isRecurring;
         this.interval = interval;
         this.recurCompletedList = recurCompletedList;
+        this.recurDisplayDate = "";
     }
 
     /**
@@ -93,6 +100,13 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getEndDateTime() {
+        if (!recurDisplayDate.equals(""))
+            try {
+                return Optional.of(new DateTime(recurDisplayDate));
+            } catch (IllegalValueException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         return endDateTime;
     }
 
@@ -158,6 +172,54 @@ public class Task implements ReadOnlyTask {
     public void addRecurCompletedToList(Date date) {
         assert date != null;
         this.recurCompletedList.add(date);
+    }
+
+    public List<Task> getUncompletedRecurList() {
+        List<Task> uncompletedRecurList = new ArrayList<Task>();
+        if (startDateTime.isPresent() && isRecurring) {
+            Date currentDate = new Date(startDateTime.get().getAmericanDateOnly()
+                                            + " " + startDateTime.get().getTimeOnly());
+            while (currentDate.before(new Date())) {
+                Task temp = new Task(this);
+                if (!temp.isRecurCompleted(currentDate)) {
+                    temp.setRecurDisplayDate(currentDate.toString());
+                    uncompletedRecurList.add(temp);
+                }
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                if (temp.interval == RecurInterval.DAY) {
+                    calendar.add(Calendar.DATE, 1);
+                    currentDate = calendar.getTime();
+                } else if (temp.interval == RecurInterval.MONTH) {
+                    calendar.add(Calendar.MONTH, 1);
+                    currentDate = calendar.getTime();
+                } else if (temp.interval == RecurInterval.YEAR) {
+                    calendar.add(Calendar.YEAR, 1);
+                    currentDate = calendar.getTime();
+                }
+            }
+        }
+        return uncompletedRecurList;
+
+    }
+
+    public boolean isRecurCompleted(Date recurCompleted) {
+        DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
+        for (int i = 0; i < getRecurCompletedList().size(); i++) {
+            if (outputFormatter.format(getRecurCompletedList().get(i))
+                                .equals(outputFormatter.format(recurCompleted))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getRecurDisplayDate() {
+        return this.recurDisplayDate;
+    }
+
+    public void setRecurDisplayDate(String recurDisplayDate) {
+        this.recurDisplayDate = recurDisplayDate;
     }
     //@@author
     /**
