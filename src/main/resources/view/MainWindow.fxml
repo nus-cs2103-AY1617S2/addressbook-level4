@@ -1,64 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="650.0" maxWidth="550.0" minHeight="650.0" minWidth="550.0" style="-fx-background-color: #ffffff;" stylesheets="@Today.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-         <menus>
-            <Menu mnemonicParsing="false" text="File">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-   </top>
-   <bottom>
-      <VBox BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="550.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border">
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="166.0" text="TODAY" textFill="#db9e36">
+               <font>
+                  <Font name="Helvetica Light" size="45.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </HBox.margin>
+            </Label>
+            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="titleDate" text="Date" textFill="#105b63">
+                     <VBox.margin>
+                        <Insets top="38.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Helvetica Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="titleDay" text="Day" textFill="#105b63">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Helvetica Light" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="279.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <JFXTextField fx:id="commandTextField" onAction="#handleCommandInputChanged" prefHeight="40.0" prefWidth="244.0" promptText="&gt; Enter Command">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <AnchorPane fx:id="commandBoxPlaceholder" maxHeight="105.0" prefHeight="50.0" prefWidth="279.0">
+                     <children>
+                        <Label fx:id="commandResult" layoutY="6.0" text="command result" textFill="WHITE" />
+                     </children></AnchorPane>
+               </children>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane prefHeight="550.0" prefWidth="550.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="33.0" layoutY="-4.0" maxWidth="550.0" minWidth="550.0" prefHeight="550.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane fx:id="taskListPanelPlaceholder" prefWidth="550.0" />
+               </children>
+            </VBox>
+            <AnchorPane fx:id="completedTaskListPlaceholder" prefHeight="0.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="15.0" right="15.0" />
+         </BorderPane.margin>
+      </AnchorPane>
+   </center>
+   <bottom>
+      <AnchorPane prefHeight="29.0" prefWidth="550.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="commandBoxPlaceholderOld" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="anchor-pane-with-border">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
             </AnchorPane>
-            <AnchorPane fx:id="statusbarPlaceholder" />
+            <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" styleClass="anchor-pane-with-border" AnchorPane.bottomAnchor="0.0">
+           		<padding>
+               		<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+           		</padding>
+       		</AnchorPane>
+            <AnchorPane fx:id="statusbarPlaceholder" prefHeight="30.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
-      </VBox>
+      </AnchorPane>
    </bottom>
-   <center>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <AnchorPane>
-               <children>
-                  <VBox fx:id="taskList" minWidth="340" prefWidth="340" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                     <children>
-                        <AnchorPane fx:id="taskListPanelPlaceholder" />
-                     </children>
-                  </VBox>
-                  <AnchorPane fx:id="completedTaskListPlaceholder" prefHeight="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="0.0" minHeight="0.0" opacity="0.0" prefHeight="0.0" styleClass="anchor-pane-with-border">
-                 		<padding>
-                     		<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                 		</padding>
-             		</AnchorPane>
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
-   </center>
 </BorderPane>

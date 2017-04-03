@@ -65,7 +65,7 @@ public class ParserUtil {
         assert original != null;
         original = original.trim();
         Pattern pattern = Pattern.compile(
-                "(?<=^|\\s)(\\d{1,2})(-|/)(\\d{1,2})(-|/)(\\d{4})(?=$|\\s)");
+                "(?<=^|\\s)(\\d{1,2})(-|/)(\\d{1,2})(-|/)(\\d{2,4})(?=$|\\s)");
         Matcher matcher = pattern.matcher(original);
         original = matcher.replaceAll("$3/$1/$5");
         if (original.endsWith(" later") || original.endsWith(" ago")) {

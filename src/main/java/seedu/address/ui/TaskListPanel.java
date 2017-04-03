@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -28,12 +29,39 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> futureTaskListView;
 
+    @FXML
+    private TitledPane todayTaskListPanel;
+
+    @FXML
+    private TitledPane futureTaskListPanel;
+
+    ObservableList<ReadOnlyTask> taskListToday;
+
+    ObservableList<ReadOnlyTask> taskListFuture;
+
+    // height of a row should be the same as the height of a TaskCard
+    final int ROW_HEIGHT = 45;
+    // height of paddings after each TaskListView
+    final int ROW_PADDING = 80;
+
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday,
             ObservableList<ReadOnlyTask> taskListFuture) {
         super(FXML);
+        this.taskListToday = taskListToday;
+        this.taskListFuture = taskListFuture;
         setConnections(todayTaskListView, taskListToday);
         setConnections(futureTaskListView, taskListFuture);
+
+        // todayTaskListView.setExpanded(true);
         addToPlaceholder(taskListPlaceholder);
+        // set ListView height, add 2 extra px to show border
+        updateListHeight();
+    }
+
+    public void updateListHeight() {
+        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>List height updated!");
+        todayTaskListView.setPrefHeight(taskListToday.size() * ROW_HEIGHT + ROW_PADDING);
+        futureTaskListView.setPrefHeight(taskListFuture.size() * ROW_HEIGHT + ROW_PADDING);
     }
 
     private void setConnections(ListView<ReadOnlyTask> taskListView, ObservableList<ReadOnlyTask> taskList) {
@@ -65,12 +93,27 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
+    public void showCommandCompleteAnimation(String index) {
+
+    }
+
+    public void showProgressbar() {
+
+    }
+
+    public TitledPane getTodayTaskListPanel() {
+        return todayTaskListPanel;
+    }
+
+    public TitledPane getFutureTaskListPanel() {
+        return futureTaskListPanel;
+    }
+
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
-
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);

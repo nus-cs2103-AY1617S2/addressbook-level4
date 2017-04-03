@@ -40,6 +40,11 @@ public class FloatingTask extends Task {
 
     @Override
     public boolean isToday() {
-        return manualToday;
+        return manualToday || isOverdue();
+    }
+
+    @Override
+    public boolean isOverdue() {
+        return false;
     }
 }

@@ -131,6 +131,6 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "###################### UI VIEW REFRESHED ###################"));
         mainWindow.prepareTaskList();
+        mainWindow.getTaskListPanel().updateListHeight();
     }
-
 }

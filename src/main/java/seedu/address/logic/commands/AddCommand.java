@@ -43,6 +43,7 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName.trim()));
         }
         this.toAdd = new FloatingTask(new Name(name), new UniqueTagList(tagSet), false, false);
+        this.toAdd.setAnimation(true);
     }
 
     /**
@@ -58,6 +59,7 @@ public class AddCommand extends Command {
         }
         System.out.print("deadline: " + deadline);
         this.toAdd = new DeadlineTask(new Name(name), new UniqueTagList(tagSet), deadline, false, false);
+        this.toAdd.setAnimation(true);
     }
 
     /**
@@ -72,6 +74,7 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName.trim()));
         }
         this.toAdd = new EventTask(new Name(name), new UniqueTagList(tagSet), deadline, startingTime, false, false);
+        this.toAdd.setAnimation(true);
     }
 
     @Override
@@ -79,7 +82,6 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), MESSAGE_SUCCESS_STATUS_BAR);
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

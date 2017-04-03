@@ -25,6 +25,7 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
+
     }
 
 

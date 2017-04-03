@@ -66,6 +66,7 @@ allprojects {
         compile 'com.jfoenix:jfoenix:1.2.0'
         compile 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
         compile 'org.ocpsoft.prettytime:prettytime-nlp:4.0.0.Final'
+        compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.12'
         compile fileTree(dir: 'libs', include: ['*.jar'])
 
         testCompile "junit:junit:$junitVersion"

@@ -17,6 +17,15 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
+    static final String MESSAGE_ON_DELETE = "Task deleted";
+    static final String MESSAGE_ON_ADD = "Task added";
+    static final String MESSAGE_ON_RESET = "Task list loaded";
+    static final String MESSAGE_ON_UPDATE = "Task updated";
+    static final String MESSAGE_ON_SAVETO = "Save location changed to ";
+    static final String MESSAGE_ON_EXPORT = "Data to be exported to ";
+    static final String MESSAGE_ON_USETHIS = "Reading data from ";
+    static final String MESSAGE_ON_IMPORT = "Importing data from ";
+
     /**
      * Show completed task list
      */
@@ -63,6 +72,9 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+
+    /** Updates the filter of the filtered task list to show all tasks */
+    void indicateTaskManagerChanged(String message);
 
     /**
      * Updates the filter of the filtered task list to filter by the given
@@ -151,4 +163,9 @@ public interface Model {
      * Imports data and adds to existing set of tasks
      */
     void handleImportEvent(ImportEvent event);
+
+    /*
+     * Gets UI index by absolute index
+     */
+    public String getUIIndex(int index);
 }

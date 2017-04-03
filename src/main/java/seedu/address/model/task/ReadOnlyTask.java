@@ -27,8 +27,17 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     // Returns id field reserved for UI to store temporary index
     String getID();
 
-    // Set id field reserved for UI to store temporary index
+    // Sets id field reserved for UI to store temporary index
     void setID(String id);
+
+    // Sets animation flag
+    void setAnimation(boolean flag);
+
+    // Gets animation flag
+    boolean isAnimated();
+
+    // Returns whether the task is overdue
+    boolean isOverdue();
 
     // Returns a natural relative representation of a datetime
     String getTaskDateTime();
@@ -79,8 +88,12 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         int compareEnd = this.getDeadline().orElse(minDateTime).compareTo(other.getDeadline().orElse(minDateTime));
         int compareStart = this.getStartingTime().orElse(minDateTime)
                 .compareTo(other.getStartingTime().orElse(minDateTime));
-
-        if (compareEnd != 0) {
+        
+        if (this.isOverdue() && !other.isOverdue()) {
+        	return -1;
+        } else if (!this.isOverdue() && other.isOverdue()){
+        	return 1;
+        } else if (compareEnd != 0) {
             return compareEnd;
         } else {
             return compareStart;

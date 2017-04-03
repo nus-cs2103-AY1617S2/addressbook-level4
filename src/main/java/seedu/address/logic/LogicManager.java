@@ -90,4 +90,12 @@ public class LogicManager extends ComponentManager implements Logic {
     public boolean isValidUIIndex(String uiIndex) {
         return model.isValidUIIndex(uiIndex);
     }
+
+    /*
+     * Gets UI index by absolute index
+     */
+    @Override
+    public String getUIIndex(int index) {
+        return model.getUIIndex(index);
+    }
 }

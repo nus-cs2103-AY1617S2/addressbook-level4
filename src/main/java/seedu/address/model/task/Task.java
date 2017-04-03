@@ -20,6 +20,7 @@ public abstract class Task implements ReadOnlyTask {
     private UniqueTagList tags;
 
     private boolean done;
+    private boolean isAnimated = false;
     protected boolean manualToday = false;
 
     /**
@@ -144,6 +145,16 @@ public abstract class Task implements ReadOnlyTask {
     @Override
     public void setID(String id) {
         this.id = id;
+    }
+
+    @Override
+    public void setAnimation(boolean flag) {
+        this.isAnimated = flag;
+    }
+
+    @Override
+    public boolean isAnimated() {
+        return this.isAnimated;
     }
 
     @Override

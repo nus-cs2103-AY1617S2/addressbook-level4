@@ -13,16 +13,10 @@ public class HelpWindowTest extends TaskManagerGuiTest {
     public void openHelpWindow() throws InterruptedException {
         //use accelerator
         commandBox.clickOnTextField();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
-
-        resultDisplay.clickOnTextArea();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
+        assertHelpWindowOpen(commandBox.runHelpCommand());
 
         futureTaskListPanel.clickOnListView();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
-
-        //use menu button
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
+        assertHelpWindowOpen(commandBox.runHelpCommand());
 
         //use command
         assertHelpWindowOpen(commandBox.runHelpCommand());

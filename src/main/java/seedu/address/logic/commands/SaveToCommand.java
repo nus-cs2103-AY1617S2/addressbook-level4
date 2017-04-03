@@ -38,7 +38,7 @@ public class SaveToCommand extends Command {
         if (FileUtil.isWritable(path)) {
             model.updateSaveLocation(path);
             return new CommandResult(String.format(MESSAGE_SUCCESS, path),
-                    String.format(MESSAGE_SUCCESS_STATUS_BAR, path));
+                    String.format(MESSAGE_SUCCESS_STATUS_BAR, this.saveToDir));
         } else {
             throw new CommandException(String.format(MESSAGE_WRITE_FILE_ERROR, path));
         }

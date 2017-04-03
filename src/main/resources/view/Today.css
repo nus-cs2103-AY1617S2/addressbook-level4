@@ -1,0 +1,22 @@
+.list-cell{
+	-fx-accent: #C1F0F6;
+	-fx-focus-color: #C1F0F6;
+}
+
+
+.list-cell:empty {
+    -fx-opacity: 0;
+}
+
+.jfx-snackbar-content {
+	-fx-background-color:#7194B2;
+} 
+
+.jfx-snackbar-toast {
+	-fx-text-fill:#ffffff;
+}
+
+.jfx-progress-bar{
+	-fx-progress-color: #CE2345;
+	-fx-stroke-width:3;
+}
