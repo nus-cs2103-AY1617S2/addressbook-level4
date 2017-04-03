@@ -49,8 +49,10 @@ public class DeleteTaskController extends Controller {
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, todoList.getTasks().size());
-        if (indexes == null || indexes.isEmpty()) {
-            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED));
+        try {
+            validateIndexIsPresent(indexes);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            uiStore.setCommandResult(new CommandResult(illegalArgumentException.getMessage()));
             return;
         }
         List<Task> tasks = uiStore.getShownTasks(indexes);
@@ -65,6 +67,12 @@ public class DeleteTaskController extends Controller {
 
     public HashMap<String, String> tokenize(String command) {
         return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, true, false);
+    }
+
+    private void validateIndexIsPresent(List<Integer> indexes) throws IllegalArgumentException {
+        if (indexes == null || indexes.isEmpty()) {
+            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED);
+        }
     }
 
     private CommandResult delete(TodoList todoList, List<Task> tasks) {
