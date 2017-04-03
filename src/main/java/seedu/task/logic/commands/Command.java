@@ -96,6 +96,6 @@ public abstract class Command {
         Location location = new Location(event.getLocation());
         final Set<Tag> tagSet = new HashSet<>(); // No tags
 
-        return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false);
+        return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false, event.getId());
     }
 }

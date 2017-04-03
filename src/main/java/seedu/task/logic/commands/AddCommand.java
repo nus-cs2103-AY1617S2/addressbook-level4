@@ -50,7 +50,8 @@ public class AddCommand extends Command {
                 new Date(startDate),
                 new Date(endDate),
                 new Remark(remark),
-                new Location(location), new UniqueTagList(tagSet), false
+                new Location(location), new UniqueTagList(tagSet),
+                false, ""
         );
     }
 

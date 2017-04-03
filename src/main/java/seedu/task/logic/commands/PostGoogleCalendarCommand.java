@@ -14,6 +14,7 @@ import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0140063X
 /**
@@ -29,6 +30,7 @@ public class PostGoogleCalendarCommand extends Command {
     public static final String MESSAGE_SUCCESS_MULTIPLE = "All eligible task in current listing posted.";
     public static final String MESSAGE_MISSING_DATE = "Both start and end dates are required"
             + " to post to Google Calendar";
+    public static final String MESSAGE_ALREADY_POSTED = "Task already posted to Google Calendar";
     public static final String MESSAGE_USAGE = COMMAND_WORD_2
             + " 1 : Posts the first event to your Google Calendar.\n"
             + "Example: " + COMMAND_WORD_2;
@@ -65,6 +67,8 @@ public class PostGoogleCalendarCommand extends Command {
                 return new CommandResult(ive.getMessage());
             } catch (IOException ioe) {
                 return new CommandResult(ioe.getMessage());
+            } catch (TaskNotFoundException tnfe) {
+                return new CommandResult(tnfe.getMessage());
             }
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, taskToPost));
@@ -79,16 +83,17 @@ public class PostGoogleCalendarCommand extends Command {
             try {
                 postEvent(i);
 
-            } catch (CommandException ce) {
+            } catch (CommandException | TaskNotFoundException e) {
                 logger.warning("Invalid index when posting multiple events to calendar. This should not happen!");
             } catch (IllegalValueException ive) {
-                logger.info("Failure due to one of the dates missing");
+                logger.info(ive.getMessage());
             }
             //continue to post next event even if one event fails
         }
     }
 
-    private ReadOnlyTask postEvent(int index) throws CommandException, IllegalValueException, IOException {
+    private ReadOnlyTask postEvent(int index) throws CommandException, IllegalValueException,
+                                                    IOException, TaskNotFoundException {
         ReadOnlyTask taskToPost = getTaskToPost(index);
 
         if (taskToPost.getStartDate().isNull() || taskToPost.getEndDate().isNull()) {
@@ -99,15 +104,25 @@ public class PostGoogleCalendarCommand extends Command {
 
         try {
             com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
-            event = service.events().insert(GoogleCalendar.CALENDAR_ID, event).execute();
-
+            if (taskToPost.getEventId().trim().isEmpty()) {
+                event = service.events().insert(GoogleCalendar.CALENDAR_ID, event).execute();
+                logger.info(String.format("Event created: %s\n", event.getHtmlLink()));
+                setTaskEventId(index, event.getId());
+            } else {
+                service.events().update(GoogleCalendar.CALENDAR_ID, event.getId(), event).execute();
+                logger.info(String.format("Event updated: %s\n", event.getHtmlLink()));
+            }
         } catch (IOException ioe) {
             logger.info("Failure due to " + ioe.getMessage());
             throw new IOException(GoogleCalendar.CONNECTION_FAIL_MESSAGE);
         }
 
-        logger.info(String.format("Event created: %s\n", event.getHtmlLink()));
         return taskToPost;
+    }
+
+    private void setTaskEventId(int index, String eventId) {
+        assert model != null;
+        model.setTaskEventId(index, eventId);
     }
 
     private ReadOnlyTask getTaskToPost(int index) throws CommandException {
@@ -140,6 +155,8 @@ public class PostGoogleCalendarCommand extends Command {
                 .setDateTime(endDateTime)
                 .setTimeZone("Asia/Singapore");
         event.setEnd(end);
+
+        event.setId(taskToPost.getEventId());
 
         return event;
     }

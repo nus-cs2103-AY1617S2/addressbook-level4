@@ -20,6 +20,7 @@ public class TestTask implements ReadOnlyTask {
     private Date startDate;
     private Date endDate;
     private boolean isDone;
+    private String eventId;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -116,6 +117,13 @@ public class TestTask implements ReadOnlyTask {
         return isDone;
     }
 
+    //@@author A0140063X
+    @Override
+    public String getEventId() {
+        return eventId;
+    }
+
+    //@@author
     @Override
     public UniqueTagList getTags() {
         return tags;
