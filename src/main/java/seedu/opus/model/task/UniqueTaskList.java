@@ -12,7 +12,6 @@ import seedu.opus.logic.commands.SortCommand;
 import seedu.opus.model.comparators.EndTimeComparator;
 import seedu.opus.model.comparators.PriorityComparator;
 import seedu.opus.model.comparators.StartTimeComparator;
-import seedu.opus.model.comparators.StatusComparator;
 import seedu.opus.model.comparators.TaskComparator;
 
 /**
@@ -106,9 +105,6 @@ public class UniqueTaskList implements Iterable<Task> {
         switch (keyword) {
         case SortCommand.ALL:
             FXCollections.sort(internalList, new TaskComparator());
-            break;
-        case SortCommand.STATUS:
-            FXCollections.sort(internalList, new StatusComparator());
             break;
         case SortCommand.PRIORITY:
             FXCollections.sort(internalList, new PriorityComparator());
