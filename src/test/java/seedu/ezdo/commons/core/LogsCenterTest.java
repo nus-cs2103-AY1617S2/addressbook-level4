@@ -17,7 +17,7 @@ import mockit.integration.junit4.JMockit;
 public class LogsCenterTest {
 
     @Test
-    public void test() throws Exception {
+    public void addFileHandler_IOException_logged() throws Exception {
         new MockUp<LogsCenter>() {
             @Mock
             FileHandler createFileHandler() throws IOException {
