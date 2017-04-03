@@ -31,6 +31,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> completedTaskListView;
 
+    // @@author A0144315N
     public CompletedTaskListPanel(AnchorPane completedTaskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         setConnections(taskList);
@@ -45,6 +46,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
+    // @@author A0144315N
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
@@ -83,6 +85,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
         }
     }
 
+    // @@author A0144315N
     public void display(boolean show) {
         if (show) {
             // show completed task list panel

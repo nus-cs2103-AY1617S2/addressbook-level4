@@ -40,6 +40,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private AnchorPane cardCell;
 
+    // @@author A0144315N
     public TaskCard(ReadOnlyTask task, String displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);

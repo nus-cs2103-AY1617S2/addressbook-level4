@@ -61,6 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final HashMap<String, Integer> indexMap;
     private boolean completedViewOpen;
 
+    // @@author A0144315N
     /**
      * Compares two ReadOnlyTask by deadline. Tasks without deadline will be
      * deemed as the smallest. If both tasks have deadline, the result will be
@@ -73,6 +74,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     };
 
+    // @@author
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
@@ -348,6 +350,7 @@ public class ModelManager extends ComponentManager implements Model {
         };
     }
 
+    // @@author A0144315N
     @Override
     public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday,
             ObservableList<ReadOnlyTask> taskListFuture,

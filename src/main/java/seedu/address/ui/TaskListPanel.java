@@ -44,6 +44,7 @@ public class TaskListPanel extends UiPart<Region> {
     // height of paddings after each TaskListView
     final int rowPadding = 80;
 
+    // @@author A0144315N
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday,
             ObservableList<ReadOnlyTask> taskListFuture) {
         super(FXML);
@@ -59,11 +60,11 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     public void updateListHeight() {
-        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>List height updated!");
         todayTaskListView.setPrefHeight(taskListToday.size() * rowHeight + rowPadding);
         futureTaskListView.setPrefHeight(taskListFuture.size() * rowHeight + rowPadding);
     }
 
+    // @@author
     private void setConnections(ListView<ReadOnlyTask> taskListView, ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());

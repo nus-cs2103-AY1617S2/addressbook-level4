@@ -91,6 +91,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private Label commandResult;
 
+    // @@author A0144315N
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
 
@@ -118,6 +119,7 @@ public class MainWindow extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    // @@author
     /** Set hotkeys for today and future tasklists */
     private void setHotKeys() {
         KeyCodeCombination todayKey = new KeyCodeCombination(KeyCode.DIGIT1, KeyCombination.CONTROL_ANY);
@@ -147,6 +149,7 @@ public class MainWindow extends UiPart<Region> {
     private void setHotKeyForTaskLists(TitledPane panel, KeyCombination k) {
     }
 
+    // @@author A0144315N
     void fillInnerParts() {
         taskListToday = FXCollections.observableArrayList();
         taskListFuture = FXCollections.observableArrayList();
@@ -181,6 +184,7 @@ public class MainWindow extends UiPart<Region> {
      * commandBoxPlaceholder; }
      */
 
+    // @@author
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
     }
@@ -277,6 +281,7 @@ public class MainWindow extends UiPart<Region> {
         }
     }
 
+    // @@author A0144315N
     @Subscribe
     public void handleUpdateStatusBarEvent(UpdateStatusBarEvent event) {
         this.commandResult.setText(event.getMessage());
