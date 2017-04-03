@@ -51,6 +51,14 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager() {
         this(new UserInbox(), new UserPrefs());
     }
+    
+    public void undo() {
+        userInbox.undo();
+    }
+    
+    public void redo() {
+        userInbox.redo();
+    }
 
     @Override
     public void resetData(ReadOnlyUserInbox newData) {

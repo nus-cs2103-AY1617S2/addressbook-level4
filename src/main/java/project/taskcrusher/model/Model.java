@@ -20,7 +20,8 @@ public interface Model {
      * Clears existing backing model and replaces with the provided new data.
      */
     void resetData(ReadOnlyUserInbox newData);
-
+    void undo();
+    void redo();
     /** Returns the UserInbox */
     ReadOnlyUserInbox getUserInbox();
 
