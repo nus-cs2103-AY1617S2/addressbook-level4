@@ -3,7 +3,6 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ezdo.logic.commands.DoneCommand.MESSAGE_DONE_TASK_SUCCESS;
-import static seedu.ezdo.logic.commands.DoneCommand.MESSAGE_UNDONE_TASK_SUCCESS;
 
 import java.text.ParseException;
 import java.util.ArrayList;
