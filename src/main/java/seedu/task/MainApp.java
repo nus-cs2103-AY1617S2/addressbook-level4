@@ -172,11 +172,17 @@ public class MainApp extends Application {
     }
 
     //@@author A0141928B
+    /**
+     * Initialise notifications
+     */
     public void initNotifications() {
         TimedEvent event = new TimedEvent(model.getTaskManager().getTaskList(), 120000);
         event.start();
     }
 
+    /**
+     * Handle ChangeStorageFilePathEvent by updating the file path in config and storage and reinitialising everything
+     */
     @Subscribe
     public void handleChangeStorageFilePathEvent(ChangeStorageFilePathEvent event) throws IOException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -185,13 +191,17 @@ public class MainApp extends Application {
         ConfigUtil.saveConfig(config, config.DEFAULT_CONFIG_FILE);
 
         reInit(event);
+
+        storage.saveTaskManager(model.getTaskManager(), event.toString());
     }
 
-    public void reInit(ChangeStorageFilePathEvent event) throws IOException {
+    /**
+     * Re-initialise everything
+     */
+    public void reInit(ChangeStorageFilePathEvent event) {
         model = initModelManager(storage, userPrefs);
-        logic = new LogicManager(model, storage);
         model.updateFilteredListToShowAll();
-        storage.saveTaskManager(model.getTaskManager(), event.toString());
+        logic = new LogicManager(model, storage);
     }
     //@@author
 
