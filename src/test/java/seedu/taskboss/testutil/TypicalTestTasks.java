@@ -29,7 +29,7 @@ public class TypicalTestTasks {
                     .withRecurrence(Frequency.NONE)
                     .withStartDateTime("Feb 23, 2017 10pm")
                     .withEndDateTime("Jun 28, 2017 5pm")
-                    .withCategories("Friends", "Ownsmoney").build();
+                    .withCategories("Friends", "Owesmoney").build();
             taskC = new TaskBuilder().withName("Clean house").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 11pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
