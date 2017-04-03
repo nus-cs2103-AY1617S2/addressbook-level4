@@ -35,7 +35,6 @@ public class ListCommand extends Command {
     
     public ListCommand(String args) {
         // TODO Auto-generated constructor stub
-        System.out.println("print" +args);
         if (args.trim().isEmpty()) {
             this.value = 1;
         }
@@ -44,6 +43,9 @@ public class ListCommand extends Command {
         }
         else if (args.trim().equals("undone") || args.trim().equals("notdone")) {
             this.value = 3;
+        }
+        else if (args.trim().equals("floating") || args.trim().equals("float")) {
+            this.value = 4;
         }
         else {
             this.value =0;
@@ -66,7 +68,11 @@ public class ListCommand extends Command {
         else if (value == 3) {
             model.updateFilteredTaskList(false);
             return new CommandResult(getMessageForUnDoneTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else {
+        } else if (value ==4) {
+            model.updateFilteredTaskListFloat();
+            return new CommandResult(getMessageForFloatingTaskListShownSummary(model.getFilteredTaskList().size()));
+        }
+        else {
         return  new CommandResult(MESSAGE_FAIL);
     }
     }    

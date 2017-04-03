@@ -46,6 +46,10 @@ public abstract class Command {
     public static String getMessageForUnDoneTaskListShownSummary(int displaySize) {
         return String.format(Messages.MESSAGE_TASKS_UNDONE_LISTED_OVERVIEW, displaySize);
     }
+    
+    public static String getMessageForFloatingTaskListShownSummary(int displaySize) {
+        return String.format(Messages.MESSAGE_TASKS_FLOAT_LISTED_OVERVIEW, displaySize);
+    }
 
     /**
      * Executes the command and returns the result message.

@@ -209,6 +209,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
 
     }
+    
+    @Override 
+    public void updateFilteredTaskListFloat() {
+        updateFilteredTaskList(new PredicateExpression(new FloatDateQualifier()));
+    }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact) {
@@ -369,6 +374,25 @@ public class ModelManager extends ComponentManager implements Model {
                 return false;
             }
             return task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date);
+        }
+    }
+    
+    private class FloatDateQualifier implements Qualifier {
+
+        private Date date;
+
+        // @@author A0139975J
+//        FloatDateQualifier(Date date) {
+//            this.date = date;
+//        }
+
+        // @@author A0139975J
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDate().isNull() && task.getStartDate().isNull()) {
+                return true;
+            }
+            return false;
         }
     }
 
