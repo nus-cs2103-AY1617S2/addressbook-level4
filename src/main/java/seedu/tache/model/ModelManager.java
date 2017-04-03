@@ -91,7 +91,7 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
-        raise(new FilteredTaskListUpdatedEvent(filteredTasks));
+        raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
     }
     //@@author
 

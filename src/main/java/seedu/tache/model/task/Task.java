@@ -91,6 +91,14 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getStartDateTime() {
+        if (!recurDisplayDate.equals("")) {
+            try {
+                return Optional.of(new DateTime(recurDisplayDate));
+            } catch (IllegalValueException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         return startDateTime;
     }
 
@@ -100,13 +108,14 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getEndDateTime() {
-        if (!recurDisplayDate.equals(""))
+        if (!recurDisplayDate.equals("")) {
             try {
                 return Optional.of(new DateTime(recurDisplayDate));
             } catch (IllegalValueException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
         return endDateTime;
     }
 
@@ -169,9 +178,8 @@ public class Task implements ReadOnlyTask {
         return this.recurCompletedList;
     }
 
-    public void addRecurCompletedToList(Date date) {
-        assert date != null;
-        this.recurCompletedList.add(date);
+    public void setRecurCompletedList(List<Date> recurCompletedList) {
+        this.recurCompletedList = recurCompletedList;
     }
 
     public List<Task> getUncompletedRecurList() {
@@ -182,7 +190,9 @@ public class Task implements ReadOnlyTask {
             while (currentDate.before(new Date())) {
                 Task temp = new Task(this);
                 if (!temp.isRecurCompleted(currentDate)) {
-                    temp.setRecurDisplayDate(currentDate.toString());
+                    DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                    String tempDate = df.format(currentDate);
+                    temp.setRecurDisplayDate(tempDate);
                     uncompletedRecurList.add(temp);
                 }
                 Calendar calendar = Calendar.getInstance();
@@ -235,6 +245,7 @@ public class Task implements ReadOnlyTask {
         this.setActiveStatus(replacement.getActiveStatus());
         this.setRecurringStatus(replacement.getRecurringStatus());
         this.setRecurInterval(replacement.getRecurInterval());
+        this.setRecurCompletedList(replacement.getRecurCompletedList());
     }
 
     @Override
