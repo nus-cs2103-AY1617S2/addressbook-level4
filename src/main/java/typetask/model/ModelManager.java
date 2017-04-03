@@ -102,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0139926R
-    /** 
+    /**
      * Stores current TaskManager state for undo and redo features
      */
     @Override
@@ -114,7 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
         StorageUtil.clearRedoConfig();
     }
   //@@author A0139926R
-    /** 
+    /**
      * Reverts changes made from restoring recently saved TaskManager state for redo command
      */
     @Override
