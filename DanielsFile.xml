@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <taskName>Buy apple juice</taskName>
+        <taskDate>010117</taskDate>
+        <taskStartTime>0800</taskStartTime>
+        <taskEndTime>1000</taskEndTime>
+        <taskDescription>Look out for lucky draws.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy blueberry juice</taskName>
+        <taskDate>020117</taskDate>
+        <taskStartTime>0900</taskStartTime>
+        <taskEndTime>1001</taskEndTime>
+        <taskDescription>Look out for lucky dips.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy coke</taskName>
+        <taskDate>030117</taskDate>
+        <taskStartTime>0930</taskStartTime>
+        <taskEndTime>1002</taskEndTime>
+        <taskDescription>Look out for traffic.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy isotonic drinks</taskName>
+        <taskDate>040117</taskDate>
+        <taskStartTime>1000</taskStartTime>
+        <taskEndTime>1100</taskEndTime>
+        <taskDescription>Look out for promotions.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy orange juice</taskName>
+        <taskDate>050117</taskDate>
+        <taskStartTime>1010</taskStartTime>
+        <taskEndTime>1100</taskEndTime>
+        <taskDescription>Look out for sweets along the way.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>task</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+</taskmanager>

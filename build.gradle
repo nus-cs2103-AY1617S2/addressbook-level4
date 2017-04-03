@@ -12,7 +12,10 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+//Comment this out to make jar
+//mainClassName = 'seedu.address.MainApp' 
+//comment this out to run program in Eclipse
+mainClassName = 'seedu.task.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -63,6 +66,9 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile "com.joestelmach:natty:0.11"
+        compile "org.slf4j:slf4j-api:1.7.5"
+        compile "org.slf4j:slf4j-log4j12:1.7.5"
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
@@ -85,7 +91,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "fasttask.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -156,7 +162,8 @@ task guiTests(type: AddressBookTest) {
 
 
 task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+    //include 'seedu/address/**'
+    include 'seedu/task/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")

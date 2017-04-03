@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <taskName>Pick Adam</taskName>
+        <taskDate>10/10/10</taskDate>
+        <taskStartTime>11:00</taskStartTime>
+        <taskEndTime>11:30</taskEndTime>
+        <taskDescription>Buy popcorn</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+</taskmanager>
