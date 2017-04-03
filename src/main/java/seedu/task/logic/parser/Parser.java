@@ -14,6 +14,7 @@ import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
+import seedu.task.logic.commands.FindPriorityCommand;
 import seedu.task.logic.commands.FindTagCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -103,6 +104,9 @@ public class Parser {
         case UncompleteCommand.COMMAND_WORD:
             return new UncompleteCommandParser().parse(arguments);
         //@@Dylan Sng
+
+        case FindPriorityCommand.COMMAND_WORD:
+            return new FindPriorityCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

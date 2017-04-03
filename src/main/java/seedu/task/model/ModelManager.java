@@ -173,6 +173,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    @Override
+    public void updatePriorityTaskList() {
+        Predicate<? super ReadOnlyTask> pred  = s -> s.getPriority().toString().equals("1");
+        filteredTasks.setPredicate(pred);
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     private class LevenshteinDistance {
