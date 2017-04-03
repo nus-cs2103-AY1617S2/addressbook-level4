@@ -152,6 +152,12 @@
 
 .result-display {
     -fx-background-color: #ffffff;
+    -fx-font-size: 20px;
+}
+
+.result-display *.text {
+    -fx-text-alignment: center;
+    -fx-font-family: "Avenir Light";
 }
 
 .result-display .label {
