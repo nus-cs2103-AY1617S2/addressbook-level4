@@ -1,9 +1,7 @@
 package seedu.taskboss.logic.commands;
 
-import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
-import seedu.taskboss.model.task.ReadOnlyTask;
 
 //@@author A0147990R
 public class ClearByCategoryCommand extends Command {
