@@ -15,6 +15,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
+import seedu.task.commons.events.storage.ChangeStorageFilePathEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
@@ -171,9 +172,36 @@ public class MainApp extends Application {
     }
 
     //@@author A0141928B
+    /**
+     * Initialise notifications
+     */
     public void initNotifications() {
         TimedEvent event = new TimedEvent(model.getTaskManager().getTaskList(), 120000);
         event.start();
+    }
+
+    /**
+     * Handle ChangeStorageFilePathEvent by updating the file path in config and storage and reinitialising everything
+     */
+    @Subscribe
+    public void handleChangeStorageFilePathEvent(ChangeStorageFilePathEvent event) throws IOException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        config.setTaskManagerFilePath(event.toString());
+        storage.setTaskManagerFilePath(event.toString());
+        ConfigUtil.saveConfig(config, config.DEFAULT_CONFIG_FILE);
+
+        reInit(event);
+
+        storage.saveTaskManager(model.getTaskManager(), event.toString());
+    }
+
+    /**
+     * Re-initialise everything
+     */
+    public void reInit(ChangeStorageFilePathEvent event) {
+        model = initModelManager(storage, userPrefs);
+        model.updateFilteredListToShowAll();
+        logic = new LogicManager(model, storage);
     }
     //@@author
 

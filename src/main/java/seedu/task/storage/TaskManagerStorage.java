@@ -9,12 +9,12 @@ import seedu.task.model.ReadOnlyTaskManager;
 /**
  * Represents a storage for {@link seedu.task.model.TaskManager}.
  */
-public interface AddressBookStorage {
+public interface TaskManagerStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    String getAddressBookFilePath();
+    String getTaskManagerFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyTaskManager}.
@@ -25,9 +25,9 @@ public interface AddressBookStorage {
     Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getTaskManagerFilePath()
      */
-    Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyTaskManager} to the storage.
