@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.ezdo.commons.core.LogsCenter;
@@ -19,6 +20,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
     public static final String SUCCESS_STYLE_CLASS = "success";
+    public static final String MESSAGE_COMMANDBOX_TOOLTIP = "Command Box\nYou can type your commands here.";
 
     private final Logic logic;
 
@@ -27,6 +29,7 @@ public class CommandBox extends UiPart<Region> {
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
+        commandTextField.setTooltip(new Tooltip(MESSAGE_COMMANDBOX_TOOLTIP));
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }

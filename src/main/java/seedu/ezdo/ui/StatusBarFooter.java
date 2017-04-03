@@ -9,6 +9,7 @@ import org.controlsfx.control.StatusBar;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.ezdo.commons.core.LogsCenter;
@@ -20,6 +21,10 @@ import seedu.ezdo.commons.util.FxViewUtil;
  * A ui for the status bar that is displayed at the footer of the application.
  */
 public class StatusBarFooter extends UiPart<Region> {
+
+    private static final String MESSAGE_SAVE_LOCATION_TOOLTIP = "ezDo Directory Box\nDisplays the directory of ezDo data file.";
+    private static final String MESSAGE_STATUS_BAR_TOOLTIP = "Status Box\nDisplays when ezDo data file is last updated.";
+
     private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
 
     @FXML
@@ -31,6 +36,8 @@ public class StatusBarFooter extends UiPart<Region> {
 
     public StatusBarFooter(AnchorPane placeHolder, String saveLocation) {
         super(FXML);
+        syncStatus.setTooltip(new Tooltip(MESSAGE_STATUS_BAR_TOOLTIP));
+        saveLocationStatus.setTooltip(new Tooltip(MESSAGE_SAVE_LOCATION_TOOLTIP));
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
         setSaveLocation(saveLocation);
