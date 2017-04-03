@@ -72,11 +72,4 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskList {
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tags);
     }
-
-    @Override
-    public ObservableList<ReadOnlyTask> getRecurringTaskList() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }

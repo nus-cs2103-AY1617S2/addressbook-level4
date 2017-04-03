@@ -185,8 +185,4 @@ public class TaskList implements ReadOnlyTaskList {
         return Objects.hash(tasks, tags);
     }
 
-    @Override
-    public ObservableList<ReadOnlyTask> getRecurringTaskList() {
-        return null;
-    }
 }

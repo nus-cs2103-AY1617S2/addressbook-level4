@@ -48,7 +48,6 @@ public class CommandBox extends UiPart<Region> {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             //@@author A0163935X
-            System.out.println(logic.getFilteredPersonList());
             updateCalender(this.mainwindow , logic.getFilteredPersonList());
             //@@author
             // process result of the command

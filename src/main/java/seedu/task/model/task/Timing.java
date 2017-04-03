@@ -60,7 +60,7 @@ public class Timing implements Comparable<Timing> {
         boolean isValid = false;
         if (test.equals(TIMING_NOT_SPECIFIED)) {
             isValid = true;
-        } else {
+        } else if (test.length() == 16 || test.length() == 10) {
             for (int i = 0; i < TIMING_FORMAT.length; i++) {
                 SimpleDateFormat sdf = new SimpleDateFormat(TIMING_FORMAT[i]);
                 sdf.setLenient(false);
@@ -178,6 +178,7 @@ public class Timing implements Comparable<Timing> {
             Calendar thisCal = Calendar.getInstance();
             Calendar otherCal = Calendar.getInstance();
             thisCal.setTime(this.getTiming());
+            compareTiming.setTiming(compareTiming.toString());
             otherCal.setTime(compareTiming.getTiming());
             compareToResult = thisCal.compareTo(otherCal);
         }

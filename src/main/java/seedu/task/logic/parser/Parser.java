@@ -52,13 +52,19 @@ public class Parser {
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCommandParser().parse(arguments, false);
+
+        case EditCommand.COMMAND_WORD_REC:
+            return new EditCommandParser().parse(arguments, true);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser().parse(arguments, false);
+
+        case DeleteCommand.COMMAND_WORD_REC:
+            return new DeleteCommandParser().parse(arguments, true);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
