@@ -20,20 +20,20 @@ import javafx.stage.Stage;
 /**
  * Provides a handle for the panel containing the person list.
  */
-public class PersonListPanelHandle extends GuiHandle {
+public class TaskListPanelHandle extends GuiHandle {
 
 	public static final int NOT_FOUND = -1;
 	public static final String CARD_PANE_ID = "#cardPane";
 
 	private static final String PERSON_LIST_VIEW_ID = "#personListView";
 
-	public PersonListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
+	public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
 		super(guiRobot, primaryStage, TestApp.APP_TITLE);
 	}
 
-	public List<ReadOnlyEvent> getSelectedPersons() {
-		ListView<ReadOnlyEvent> personList = getListView();
-		return personList.getSelectionModel().getSelectedItems();
+	public List<ReadOnlyEvent> getSelectedEvent() {
+		ListView<ReadOnlyEvent> eventList = getListView();
+		return eventList.getSelectionModel().getSelectedItems();
 	}
 
 	public ListView<ReadOnlyEvent> getListView() {
@@ -47,8 +47,8 @@ public class PersonListPanelHandle extends GuiHandle {
 	 * @param expectedList
 	 *            A list of person in the correct order.
 	 */
-	public boolean isListMatching(ReadOnlyEvent... persons) {
-		return this.isListMatching(0, persons);
+	public boolean isListMatching(ReadOnlyEvent... events) {
+		return this.isListMatching(0, events);
 	}
 
 	/**
@@ -57,20 +57,20 @@ public class PersonListPanelHandle extends GuiHandle {
 	 *
 	 * @param startPosition
 	 *            The starting position of the sub list.
-	 * @param persons
+	 * @param events
 	 *            A list of person in the correct order.
 	 */
-	public boolean isListMatching(int startPosition, ReadOnlyEvent... persons) throws IllegalArgumentException {
-		if (persons.length + startPosition != getListView().getItems().size()) {
+	public boolean isListMatching(int startPosition, ReadOnlyEvent... events) throws IllegalArgumentException {
+		if (events.length + startPosition != getListView().getItems().size()) {
 			throw new IllegalArgumentException(
 					"List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " persons");
 		}
-		assertTrue(this.containsInOrder(startPosition, persons));
-		for (int i = 0; i < persons.length; i++) {
+		assertTrue(this.containsInOrder(startPosition, events));
+		for (int i = 0; i < events.length; i++) {
 			final int scrollTo = i + startPosition;
 			guiRobot.interact(() -> getListView().scrollTo(scrollTo));
 			guiRobot.sleep(200);
-			if (!TestUtil.compareCardAndPerson(getPersonCardHandle(startPosition + i), persons[i])) {
+			if (!TestUtil.compareCardAndEvent(getEventCardHandle(startPosition + i), events[i])) {
 				return false;
 			}
 		}
@@ -89,18 +89,18 @@ public class PersonListPanelHandle extends GuiHandle {
 	 * Returns true if the {@code persons} appear as the sub list (in that
 	 * order) at position {@code startPosition}.
 	 */
-	public boolean containsInOrder(int startPosition, ReadOnlyEvent... persons) {
-		List<ReadOnlyEvent> personsInList = getListView().getItems();
+	public boolean containsInOrder(int startPosition, ReadOnlyEvent... events) {
+		List<ReadOnlyEvent> eventsInList = getListView().getItems();
 
 		// Return false if the list in panel is too short to contain the given
 		// list
-		if (startPosition + persons.length > personsInList.size()) {
+		if (startPosition + events.length > eventsInList.size()) {
 			return false;
 		}
 
 		// Return false if any of the persons doesn't match
-		for (int i = 0; i < persons.length; i++) {
-			if (!personsInList.get(startPosition + i).getTitle().fullName.equals(persons[i].getTitle().fullName)) {
+		for (int i = 0; i < events.length; i++) {
+			if (!eventsInList.get(startPosition + i).getTitle().fullName.equals(events[i].getTitle().fullName)) {
 				return false;
 			}
 		}
@@ -108,7 +108,7 @@ public class PersonListPanelHandle extends GuiHandle {
 		return true;
 	}
 
-	public PersonCardHandle navigateToPerson(String name) {
+	public EventCardHandle navigateToEvent(String name) {
 		guiRobot.sleep(500); // Allow a bit of time for the list to be updated
 		final Optional<ReadOnlyEvent> person = getListView().getItems().stream()
 				.filter(p -> p.getTitle().fullName.equals(name)).findAny();
@@ -116,14 +116,14 @@ public class PersonListPanelHandle extends GuiHandle {
 			throw new IllegalStateException("Name not found: " + name);
 		}
 
-		return navigateToPerson(person.get());
+		return navigateToEvent(person.get());
 	}
 
 	/**
 	 * Navigates the listview to display and select the person.
 	 */
-	public PersonCardHandle navigateToPerson(ReadOnlyEvent person) {
-		int index = getPersonIndex(person);
+	public EventCardHandle navigateToEvent(ReadOnlyEvent event) {
+		int index = getEventIndex(event);
 
 		guiRobot.interact(() -> {
 			getListView().scrollTo(index);
@@ -131,17 +131,17 @@ public class PersonListPanelHandle extends GuiHandle {
 			getListView().getSelectionModel().select(index);
 		});
 		guiRobot.sleep(100);
-		return getPersonCardHandle(person);
+		return getEventCardHandle(event);
 	}
 
 	/**
 	 * Returns the position of the person given, {@code NOT_FOUND} if not found
 	 * in the list.
 	 */
-	public int getPersonIndex(ReadOnlyEvent targetPerson) {
-		List<ReadOnlyEvent> personsInList = getListView().getItems();
-		for (int i = 0; i < personsInList.size(); i++) {
-			if (personsInList.get(i).getTitle().equals(targetPerson.getTitle())) {
+	public int getEventIndex(ReadOnlyEvent targetEvent) {
+		List<ReadOnlyEvent> eventsInList = getListView().getItems();
+		for (int i = 0; i < eventsInList.size(); i++) {
+			if (eventsInList.get(i).getTitle().equals(targetEvent.getTitle())) {
 				return i;
 			}
 		}
@@ -151,20 +151,20 @@ public class PersonListPanelHandle extends GuiHandle {
 	/**
 	 * Gets a person from the list by index
 	 */
-	public ReadOnlyEvent getPerson(int index) {
+	public ReadOnlyEvent getEvent(int index) {
 		return getListView().getItems().get(index);
 	}
 
-	public PersonCardHandle getPersonCardHandle(int index) {
-		return getPersonCardHandle(new Event(getListView().getItems().get(index)));
+	public EventCardHandle getEventCardHandle(int index) {
+		return getEventCardHandle(new Event(getListView().getItems().get(index)));
 	}
 
-	public PersonCardHandle getPersonCardHandle(ReadOnlyEvent person) {
+	public EventCardHandle getEventCardHandle(ReadOnlyEvent event) {
 		Set<Node> nodes = getAllCardNodes();
-		Optional<Node> personCardNode = nodes.stream()
-				.filter(n -> new PersonCardHandle(guiRobot, primaryStage, n).isSamePerson(person)).findFirst();
-		if (personCardNode.isPresent()) {
-			return new PersonCardHandle(guiRobot, primaryStage, personCardNode.get());
+		Optional<Node> eventCardNode = nodes.stream()
+				.filter(n -> new EventCardHandle(guiRobot, primaryStage, n).isSameEvent(event)).findFirst();
+		if (eventCardNode.isPresent()) {
+			return new EventCardHandle(guiRobot, primaryStage, eventCardNode.get());
 		} else {
 			return null;
 		}
@@ -174,7 +174,7 @@ public class PersonListPanelHandle extends GuiHandle {
 		return guiRobot.lookup(CARD_PANE_ID).queryAll();
 	}
 
-	public int getNumberOfPeople() {
+	public int getNumberOfEvent() {
 		return getListView().getItems().size();
 	}
 }

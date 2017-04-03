@@ -8,7 +8,7 @@ import org.teamstbf.yats.logic.commands.AddCommand;
 import org.teamstbf.yats.testutil.TestEvent;
 import org.teamstbf.yats.testutil.TestUtil;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.EventCardHandle;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
@@ -18,12 +18,12 @@ public class AddCommandTest extends TaskManagerGuiTest {
         TestEvent[] currentList = td.getTypicalTasks();
         TestEvent personToAdd = td.cower;
         assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        currentList = TestUtil.addEventsToList(currentList, personToAdd);
 
         //add another person
         personToAdd = td.cower;
         assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        currentList = TestUtil.addEventsToList(currentList, personToAdd);
 
         //add duplicate person
         commandBox.runCommand(td.cower.getAddCommand());
@@ -43,11 +43,11 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = taskListPanel.navigateToPerson(personToAdd.getTitle().fullName);
+        EventCardHandle addedCard = taskListPanel.navigateToEvent(personToAdd.getTitle().fullName);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
-        TestEvent[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
+        TestEvent[] expectedList = TestUtil.addEventsToList(currentList, personToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

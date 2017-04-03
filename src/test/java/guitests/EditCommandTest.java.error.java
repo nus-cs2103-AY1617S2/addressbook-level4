@@ -13,7 +13,7 @@ import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.testutil.EventBuilder;
 import org.teamstbf.yats.testutil.TestEvent;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.EventCardHandle;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskManagerGuiTest {
@@ -41,7 +41,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
 		// confirm the new card contains the right data
-		PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedTask.getTitle().fullName);
+		EventCardHandle editedCard = taskListPanel.navigateToEvent(editedTask.getTitle().fullName);
 		assertMatching(editedTask, editedCard);
 
 		// confirm the list now contains all previous persons plus the person

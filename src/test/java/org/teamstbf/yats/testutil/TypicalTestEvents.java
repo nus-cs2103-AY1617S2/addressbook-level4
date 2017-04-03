@@ -26,21 +26,21 @@ public class TypicalTestEvents {
 		try {
 			abdicate = new EventBuilder().withTitle("Abdicate the British Throne")
 					.withDescription("caught having a mistress").withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("")
-					.withLocation("Buckingham Palace").withTags("KingGeorgeVI").withIsDone("Yes").build();
+					.withLocation("Buckingham Palace").withTags("KingGeorgeVI").withIsDone("No").build();
 			boop = new EventBuilder().withTitle("Boop with the Act").withDescription("Boop that nose")
 					.withStartTime("").withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("King's Row")
-					.withTags("reaper").withIsDone("Yes").build();
+					.withTags("reaper").withIsDone("No").build();
 			oxygen = new EventBuilder().withTitle("Oxygen not Included").withDescription("Don't starve together")
 					.withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("").withLocation("Klei Entertainment")
-					.withTags("ONN").withIsDone("Yes").build();
+					.withTags("ONN").withIsDone("No").build();
 
 			// Manually added
 			cower = new EventBuilder().withTitle("Act like a craven")
 					.withDescription("fighting the wildings, but extremely scared").withStartTime("11:59PM 08/04/2017")
 					.withEndTime("11:59PM 08/04/2017").withDeadline("").withLocation("The Wall")
-					.withTags("LordCommanderJonSnow").withIsDone("Yes").build();
+					.withTags("LordCommanderJonSnow").withIsDone("No").build();
 			duck = new EventBuilder().withTitle("ahhhh").withDescription("AHHHHHHHHH").withStartTime("")
-					.withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("AHHH").withTags("AHHHHHHHHHHHHHH").withIsDone("Yes")
+					.withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("AHHH").withTags("AHHHHHHHHHHHHHH").withIsDone("No")
 					.build();
 
 		} catch (IllegalValueException e) {
@@ -49,7 +49,7 @@ public class TypicalTestEvents {
 		}
 	}
 
-	public TaskManager getTypicalAddressBook() {
+	public TaskManager getTypicalTaskManager() {
 		TaskManager ab = new TaskManager();
 		loadAddressBookWithSampleData(ab);
 		return ab;
