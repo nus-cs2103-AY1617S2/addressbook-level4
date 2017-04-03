@@ -261,7 +261,7 @@ public class CommandSettings implements Serializable {
         } else if (SelectCommand.COMMAND_WORD.equals(oldCommand) || this.select.equals(oldCommand)) {
             setSelect(newCommand);
         } else if (DoneCommand.COMMAND_WORD.equals(oldCommand) || this.done.equals(oldCommand)) {
-            setMark(newCommand);
+            setDone(newCommand);
         } else if (MarkCommand.COMMAND_WORD.equals(oldCommand) || this.mark.equals(oldCommand)) {
             setMark(newCommand);
         } else if (UnmarkCommand.COMMAND_WORD.equals(oldCommand) || this.unmark.equals(oldCommand)) {
