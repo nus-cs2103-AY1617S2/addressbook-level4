@@ -15,6 +15,7 @@
 
 .label-priority {
 	-fx-font-weight: bold;
+	-fx-text-fill: darkgray;
 }
 
 .label-priority:HIGH {
