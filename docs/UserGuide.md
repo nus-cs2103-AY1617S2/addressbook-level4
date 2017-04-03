@@ -73,7 +73,7 @@ Examples:
 * `add PhotoShop Workshop st/1900 sd/130217 ed/130217 l/CLB ta/take laptop`
 * `add Industrial Talk st/1800 sd/030517 et/2000 ed/030517 l/FoS`
 
-#### 2.2.2. Adding a [task] : `add`
+#### 2.2.2. Adding an [task] : `add`
 
 ##### 2.2.2.1. Adding a floating task: `add`
 
@@ -83,7 +83,7 @@ User can mark a task as [Completed]. (See section 2.13) <br>
 Format: `add DESCRIPTION p/PRIORITY [l/LOCATION] [ta/TAG]...`
 
 > * Tasks must be added with description and priority.
-> * Priority can only take on the values `high`. `mediu.` or `low`.
+> * Priority can only take on the values `high`. `medium` or `low`.
 > * Tags can contain only one word without space.
 > * Other fields are optional.
 > * Tasks can have any number of tags (including 0).
@@ -146,7 +146,8 @@ Format: `edit ev INDEX [DESCRIPTION] [st/START_TIME] [sd/START_DATE] [et/END_TIM
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.
-> * You can remove start time, end time, end date, tags or location by typing `st/`, `et/`, `ed/`, `l/` or `ta/` without specifying any content after it.
+> * You can remove tags by typing `ta/` without specifying any content after it.
+> * Removal of other attributes are not allowed.
 
 Examples:
 
@@ -167,7 +168,7 @@ Format: `edit ts INDEX [DESCRIPTION] [p/PRIORITY] [bt/BY_TIME] [bd\BYDATE] [l/LO
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove by time, by date, location or tags by typing `bt/`, `bd/`, `l` or `ta/` without specifying any content after it.
+> * You can remove tags by typing `ta/` without specifying any content after it.
 
 Examples:
 
@@ -210,6 +211,7 @@ Format: `view TYPE INDEX`
 > * Selects the event/task at the specified `INDEX`.
 > * The index refers to the index number shown in the most recent event/task listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
+> * Activity list and calendar will jump to the selected activity.
 
 Examples:
 
@@ -253,7 +255,8 @@ Examples:
 * `clear ev`<br>
   Removes all events in WhatsLeft.
 
-### 2.9. Finishing a task: `finish`
+### 2.9. Finishing/Redoing a task:
+#### 2.9.1. Finishing a task:
 
 Finishes the specified task/deadline from WhatsLeft. Undoable.<br>
 Format: `finish INDEX`
@@ -266,31 +269,45 @@ Examples:
 
 * `list`<br>
   `finish 2`<br>
-  Deletes the 2nd event in the event list.
+  Finishes the 2nd event in the event list.
 * `find Assignment`<br>
   `delete 1`<br>
-  Deletes the 1st event in the results of the `find` command.
+  Finishes the 1st event in the results of the `find` command.
+
+#### 2.9.2. Redoing a completed task: `redo`
+
+  Redoes a completed task.<br>
+  Format: `redo INDEX`
+
+  > * Changes the status of a task from `completed` to `pending`.
+
+  Examples:
+
+  * `finish 2`<br>
+    `show com`<br>
+    `redo 1`<br>
+    Changes the status of a completed task back to pending.
 
 ### 2.10. Task display preference: `show`
 
-  Sets the display preference of tasks in three categories.<br>
-  User is able to view all tasks, completed tasks or pending tasks.
+  Sets the display status preference.<br>
+  User is able to view all, completed or pending tasks as well as past or future events.
   Format: `show [DISPLAY_PREFERENCE]`
 
-  > * Display preference should be empty, `com` or `pend` representing all tasks, completed tasks and pending tasks respectively.
+  > * Display preference should be empty, `com` or `pend` representing all activities, completed activities and pending activities respectively.
 
 Examples:
 
-* `show`<br>
-* `show com`<br>
-* `show pend`<br>
+* `show`<br> display all events and tasks
+* `show com`<br> display completed tasks and past events
+* `show pend`<br> display pending tasks and future events
 
 ### 2.11. Undoing the latest command : `undo`
 
 Undoes the latest command.<br>
 Format: `undo`
 
-> * Undoes immediately after `edit`, `delete`, `finish` and `clear` commands.
+> * Undoes immediately after `edit`, `delete`, `finish`, `clear` and `finish` commands.
 > * Cannot undo more than once consecutively.
 
 Examples:
@@ -299,32 +316,31 @@ Examples:
   `undo`<br>
   Undoes finishing task 4.
 
-### 2.12. Redoing the completed task : `redo`
-
-Redoes the completed task.<br>
-Format: `redo INDEX`
-
-> * Changes the status of a task from completed to pending after `finish`.
-
-Examples:
-
-* `finish 2`<br>
-  `show com`<br>
-  `redo 1`<br>
-  Changes the status of a completed task to pending.
-
-### 2.13. Changing file location: `save`
-Changes the location of storage file.<br>
+### 2.12. Save/Read WhatsLeft to/from new location: `save`
+#### 2.12.1. Save WhatsLeft to new location: `save`
+Changes the location of storage file to designated directory.<br>
 Format: `save DIRECTORY`
 
 > * Directory should be valid and exist.
+> * WhatsLeft application will automatically load from the new storage location when started in the future.
+
+Examples:
+* `save /User/Andy/Documents`
+  Saves the current WhatsLeft content to /User/Andy/Documents.
+#### 2.12.2. Read WhatsLeft from new location
+Loads WhatsLeft from storage file stored in the designated directory.<br>
+Format: `read DIRECTORY`
+
+> * Directory should be valid and exist.
+> * WhatsLeft application will automatically load from the new storage location when started in the future.
+> * If no WhatsLeft storage file exists in the designated directory, a blank task book will be created and loaded.
 
 Examples:
 
-* `save Documents/Private data`
-  Changes the location of storage file to Documents/Private data.
-  
-### 2.14. Changing Calendar Week: `next`
+* `read /User/Andy/Documents`
+  Loads WhatsLeft from the WhatsLeft storage file stored in /User/Andy/Documents.
+
+### 2.13. Changing Calendar Week: `next`
 Changes the weekly view on calendar according to specified weeks ahead.<br>
 Format: 'next WEEKS_AHEAD'
 
@@ -334,17 +350,17 @@ Examples:
 
 * `next 2`<br>
   Changes the displayed calendar schedule to 2 weeks ahead.
-  
-### 2.15. Refreshing the Calendar: `refresh`
+
+### 2.14. Refreshing the Calendar: `refresh`
 Refresh the calendar to show current week.<br>
 Format: `refresh`
 
 Examples:
 
 * `refresh`<br>
-  Changes the displayed calendar schedule to current week.
+  Changes the displayed calendar to show current week schedule.
 
-### 2.16. Exiting the program : `exit`
+### 2.15. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
@@ -401,7 +417,7 @@ Format: `exit`
 
 * **Save** : `save DIRECTORY`<br>
   e.g. `save Desktop/Data`
-  
+
 * **Next** : `next WEEKS_AHEAD`<br>
   e.g. `next 2`
 
