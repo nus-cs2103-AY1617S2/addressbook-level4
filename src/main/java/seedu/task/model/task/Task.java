@@ -294,10 +294,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-    //    public int getUpcomingOccurrenceIndex() {
-    //        String today = Timing.getTodayDate();
-    //    }
-
     public static Task modifyOccurrence(ReadOnlyTask taskToModify) {
         Task newTask = null;
         if (taskToModify.getOccurrenceIndexList().size() == 0) {
@@ -321,7 +317,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         newTask.getStartTiming().setTiming(newTask.getStartTiming().toString());
         newTask.getEndTiming().setTiming(newTask.getEndTiming().toString());
         taskToModify.removeOccurrence(occurrenceIndex);
-        //        taskToModify.getOccurrenceIndexList().set(0, occurrenceIndex--);
 
         return newTask;
     }
