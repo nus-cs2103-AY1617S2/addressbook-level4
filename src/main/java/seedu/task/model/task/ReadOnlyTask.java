@@ -65,7 +65,7 @@ public interface ReadOnlyTask {
 		builder.append(" Date: ").append(getTaskDate().toString());
 	}
 	if (getTaskStartTime() != null) {
-		builder.append("Start time: ").append(getTaskStartTime());
+		builder.append(" Start time: ").append(getTaskStartTime());
 	}
 	if (getTaskEndTime() != null) {
 		builder.append(" End Time: ").append(getTaskEndTime());

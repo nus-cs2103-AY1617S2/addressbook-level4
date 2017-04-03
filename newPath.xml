@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <taskName>one</taskName>
-        <taskStartTime>1111</taskStartTime>
+        <taskName>Pick Adam</taskName>
+        <taskDate>10/10/10</taskDate>
+        <taskStartTime>11:00</taskStartTime>
+        <taskEndTime>11:30</taskEndTime>
+        <taskDescription>Buy popcorn</taskDescription>
         <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>two</taskName>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>four</taskName>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>five</taskName>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>three</taskName>
-        <taskStatus>Completed</taskStatus>
     </tasks>
 </taskmanager>
