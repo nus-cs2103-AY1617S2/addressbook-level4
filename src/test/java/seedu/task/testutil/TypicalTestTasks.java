@@ -14,6 +14,7 @@ import seedu.task.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask alice, benson, carl, daniel, elle, fiona, george, ida, hoon;
+    public TestTask recMonth;
 
     public TypicalTestTasks() {
         try {
@@ -74,6 +75,12 @@ public class TypicalTestTasks {
                     .withStartTiming("01/02/2020")
                     .withEndTiming("12/10/2100")
                     .withPriority("3").build();
+            recMonth = new TaskBuilder().withDescription("recMonth")
+                    .withOccurrences(new ArrayList<RecurringTaskOccurrence>())
+                    .withFrequency("2m")
+                    .withStartTiming("01/01/2017")
+                    .withEndTiming("05/01/2017")
+                    .withPriority("1").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

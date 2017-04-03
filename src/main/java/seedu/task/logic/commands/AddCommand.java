@@ -34,7 +34,6 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
-    //    private RecurringTask toAddRecur = null;
     //@@author A0164212U
     /**
      * Creates an AddCommand using raw values.
@@ -59,7 +58,6 @@ public class AddCommand extends Command {
                 recurring,
                 new RecurringFrequency(recurFreq)
                 );
-
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }

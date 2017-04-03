@@ -100,6 +100,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public Timing getStartTiming(int i) { //add parameter to index into correct endTime
+        if (this.occurrences.size() == 0) {
+            try {
+                return new Timing(Timing.TIMING_NOT_SPECIFIED);
+            } catch (IllegalValueException e) {
+                assert false : "Illegal timing value";
+            }
+        }
         return this.occurrences.get(i).getStartTiming();
     }
 
@@ -116,6 +123,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public Timing getEndTiming() {
+        if (this.occurrences.size() == 0) {
+            try {
+                return new Timing(Timing.TIMING_NOT_SPECIFIED);
+            } catch (IllegalValueException e) {
+                assert false : "Illegal timing value";
+            }
+        }
         return this.occurrences.get(0).getEndTiming();
     }
 
@@ -280,6 +294,10 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
+    //    public int getUpcomingOccurrenceIndex() {
+    //        String today = Timing.getTodayDate();
+    //    }
+
     public static Task modifyOccurrence(ReadOnlyTask taskToModify) {
         Task newTask = null;
         if (taskToModify.getOccurrenceIndexList().size() == 0) {
@@ -303,7 +321,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         newTask.getStartTiming().setTiming(newTask.getStartTiming().toString());
         newTask.getEndTiming().setTiming(newTask.getEndTiming().toString());
         taskToModify.removeOccurrence(occurrenceIndex);
-        //        taskToModify.getOccurrenceIndexList().set(0, occurrenceIndex);
+        //        taskToModify.getOccurrenceIndexList().set(0, occurrenceIndex--);
 
         return newTask;
     }

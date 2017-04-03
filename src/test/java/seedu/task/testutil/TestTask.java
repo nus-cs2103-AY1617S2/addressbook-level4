@@ -166,6 +166,4 @@ public class TestTask implements ReadOnlyTask {
         this.occurrences.remove(i);
     }
 
-
-
 }

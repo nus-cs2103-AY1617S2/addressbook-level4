@@ -50,7 +50,7 @@ public class DeleteCommand extends Command {
             assert false : "The target task cannot be missing";
         }
 
-        if (isSpecific) {
+        if (isSpecific && taskToDelete.getOccurrences().size() > 1) {
             newTask = Task.modifyOccurrence(taskToDelete);
             try {
                 model.addTask(Task.readOnlyToTask(taskToDelete));

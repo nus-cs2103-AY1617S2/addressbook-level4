@@ -58,6 +58,7 @@ public class CompleteCommand extends Command {
         }
     }
 
+    //@@author A0164212U
     @Override
     public CommandResult execute() throws CommandException {
 
@@ -67,18 +68,31 @@ public class CompleteCommand extends Command {
         }
 
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex);
-        Task completedTask = createCompletedTask(taskToComplete, completeTaskDescriptor);
-        completedTask.setComplete();
+        Task newTask = null;
+        Task completedTask;
 
         try {
-            model.updateTask(targetIndex, completedTask);
+            if (taskToComplete.isRecurring()) {
+                newTask = Task.modifyOccurrence(taskToComplete);
+                model.addTask(newTask);
+                completedTask = createCompletedTask(newTask, completeTaskDescriptor);
+                int newIndex = model.getFilteredTaskList().indexOf(newTask);
+                model.updateTask(newIndex, completedTask);
+                completedTask.setComplete();
+                model.updateFilteredListToShowAll();
+                return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, newTask));
+            } else {
+                completedTask = createCompletedTask(taskToComplete, completeTaskDescriptor);
+                model.updateTask(targetIndex, completedTask);
+                completedTask.setComplete();
+                model.updateFilteredListToShowAll();
+                return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
+            }
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
     }
-
+    //@@author A0113795Y
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToComplete}
      * edited with {@code editTaskDescriptor}.
@@ -95,6 +109,8 @@ public class CompleteCommand extends Command {
         boolean updatedRecurring = editTaskDescriptor.isRecurring().orElseGet(taskToComplete::isRecurring);
         RecurringFrequency updatedFrequency = editTaskDescriptor.getFrequency().orElseGet(taskToComplete::getFrequency);
 
+        updatedStartDate.setTiming(updatedStartDate.toString());
+        updatedEndDate.setTiming(updatedEndDate.toString());
 
         return new Task(updatedDescription, updatedPriority, updatedStartDate,
                 updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);

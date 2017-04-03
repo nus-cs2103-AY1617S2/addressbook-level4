@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.task.commons.core.Messages;
+import seedu.task.model.task.Timing;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
@@ -15,7 +16,6 @@ public class AddCommandTest extends AddressBookGuiTest {
         // add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.ida;
-        // System.out.println(currentList[0]);
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
@@ -46,17 +46,30 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("add timeOrderTest sd/10:45 26/03/2017 ed/10:45 25/03/2016");
         assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
         //start date > end date (no time)
-        commandBox.runCommand("add timeOrderTest sd/3/8/2017 ed/25/03/2016");
+        commandBox.runCommand("add timeOrderTest sd/03/08/2017 ed/25/03/2016");
         assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
         //start date > end date (start time > end time)
-        commandBox.runCommand("add timeOrderTest sd/10:45 1/1/2017 ed/9:45 1/1/2016");
+        commandBox.runCommand("add timeOrderTest sd/10:45 01/01/2017 ed/09:45 01/01/2016");
         assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
         //start date > end date (start time < end time)
-        commandBox.runCommand("add timeOrderTest sd/8:45 05/06/2012 ed/9:45 02/05/2012");
+        commandBox.runCommand("add timeOrderTest sd/08:45 05/06/2012 ed/09:45 02/05/2012");
         assertResultMessage(Messages.MESSSAGE_INVALID_TIMING_ORDER);
-
+        // //invalid syntax for timing
+        commandBox.runCommand("add timeSyntaxTest sd/1:45");
+        assertResultMessage(Timing.MESSAGE_TIMING_CONSTRAINTS);
+        //should be 01:45
+        commandBox.runCommand("add timeSyntaxTest sd/01:45 1/01/2017");
+        assertResultMessage(Timing.MESSAGE_TIMING_CONSTRAINTS);
+        //should be 01/01/2017 for date
+        commandBox.runCommand("add timeSyntaxTest sd/01:45 01/01/2017 ed/3:15 01/01/2017");
+        assertResultMessage(Timing.MESSAGE_TIMING_CONSTRAINTS);
+        //should be 03:15
+        commandBox.runCommand("add timeSyntaxTest sd/01:45 01/01/2017 ed/03:15 01/2/2017");
+        assertResultMessage(Timing.MESSAGE_TIMING_CONSTRAINTS);
+        //should be 01/02/2017
         //@@author
     }
+
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         for (int i = 0; i < currentList.length; i++) {
