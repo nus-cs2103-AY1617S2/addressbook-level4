@@ -127,8 +127,8 @@ public class MarkController extends Controller {
 
     public String[][][] getConflictingKeywordsList() {
         return new String[][][] { new String[][] {
-                new String[] { PARAMETER_MARK_INCOMPLETE },
-                new String[] { PARAMETER_MARK_COMPLETE }
+            new String[] { PARAMETER_MARK_INCOMPLETE },
+            new String[] { PARAMETER_MARK_COMPLETE }
         }};
     }
 

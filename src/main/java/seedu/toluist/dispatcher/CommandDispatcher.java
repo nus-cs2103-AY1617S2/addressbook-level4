@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.ControllerLibrary;
@@ -81,15 +80,15 @@ public class CommandDispatcher extends Dispatcher {
 
         return getSuggestionMethods.stream()
                 .reduce(new TreeSet<String>(),
-                        (accumulator, next) -> {
-                            if (!accumulator.isEmpty()) {
-                                return accumulator;
-                            }
-                            return next.apply(command).stream()
-                                    .limit(SUGGESTION_LIMIT)
-                                    .collect(Collectors.toCollection(TreeSet::new));
-                        },
-                        (set1, set2) -> set1); // This line will not be actually be run
+                    (accumulator, next) -> {
+                        if (!accumulator.isEmpty()) {
+                            return accumulator;
+                        }
+                        return next.apply(command).stream()
+                                .limit(SUGGESTION_LIMIT)
+                                .collect(Collectors.toCollection(TreeSet::new));
+                    },
+                    (set1, set2) -> set1); // This line will not be actually be run
     }
 
     /**

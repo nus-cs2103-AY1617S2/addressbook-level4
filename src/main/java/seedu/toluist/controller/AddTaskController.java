@@ -200,8 +200,8 @@ public class AddTaskController extends Controller {
 
     public String[][][] getConflictingKeywordsList() {
         return new String[][][] { new String[][] {
-                new String[] { TaskTokenizer.KEYWORD_EVENT_START_DATE, TaskTokenizer.KEYWORD_EVENT_END_DATE },
-                new String[] { TaskTokenizer.KEYWORD_TASK_DEADLINE }
+            new String[] { TaskTokenizer.KEYWORD_EVENT_START_DATE, TaskTokenizer.KEYWORD_EVENT_END_DATE },
+            new String[] { TaskTokenizer.KEYWORD_TASK_DEADLINE }
         }};
     }
 

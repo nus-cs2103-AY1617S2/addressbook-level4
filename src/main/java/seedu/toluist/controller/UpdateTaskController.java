@@ -264,11 +264,11 @@ public class UpdateTaskController extends Controller {
                 new String[] { TaskTokenizer.KEYWORD_TASK_FLOATING }
             },
             new String[][] {
-                    new String[] {
-                            TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
-                            TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE
-                    },
-                    new String[] { TaskTokenizer.KEYWORD_TASK_STOP_RECURRING }
+                new String[] {
+                    TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+                    TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE
+                },
+                new String[] { TaskTokenizer.KEYWORD_TASK_STOP_RECURRING }
             }
         };
     }
