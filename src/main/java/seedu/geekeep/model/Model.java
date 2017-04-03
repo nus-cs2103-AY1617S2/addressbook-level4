@@ -1,6 +1,7 @@
 
 package seedu.geekeep.model;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
@@ -71,9 +72,15 @@ public interface Model {
     /** Mark the specified task as undone */
     void markTaskUndone(int filteredTaskListIndex);
 
-    void undo() throws NothingToUndoException;
+    String undo() throws NothingToUndoException;
 
-    void redo() throws NothingToRedoException;
+    String redo() throws NothingToRedoException;
+
+    List<String> getCommandHistory();
+
+    void appendCommandHistory(String commandText);
+
+    void updateUndoableCommandHistory(String commandText);
 
 }
 

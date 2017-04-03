@@ -1,6 +1,9 @@
 
 package seedu.geekeep.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -31,8 +34,11 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     //@@author A0147622H
-    private final Stack<GeeKeep> pastGeeKeeps;
-    private final Stack<GeeKeep> futureGeeKeeps;
+    private final Stack<ReadOnlyGeeKeep> pastGeeKeeps;
+    private final Stack<ReadOnlyGeeKeep> futureGeeKeeps;
+    private final List<String> commandHistory;
+    private final List<String> undoableCommandHistory;
+    private int undoableCommandHistoryIndex;
 
     /**
      * Initializes a ModelManager with the given geekeep and userPrefs.
@@ -48,6 +54,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         pastGeeKeeps = new Stack<>();
         futureGeeKeeps = new Stack<>();
+        commandHistory = new ArrayList<>();
+        undoableCommandHistory = new ArrayList<>();
+        undoableCommandHistoryIndex = 0;
 
     }
 
@@ -56,15 +65,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0121658E
-    public void syncWithStacks(ReadOnlyGeeKeep newGeeKeep) {
-        pastGeeKeeps.add(new GeeKeep(newGeeKeep));
-        futureGeeKeeps.clear();
-    }
-
     @Override
     public void resetData(ReadOnlyGeeKeep newData) {
-        syncWithStacks(geeKeep);
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.resetData(newData);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
@@ -80,15 +85,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        syncWithStacks(geeKeep);
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.removeTask(target);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        syncWithStacks(geeKeep);
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.addTask(task);
+        updateGeekeepHistory(originalGeekeepClone);
         updateFilteredListToShowAll();
         indicateGeeKeepChanged();
     }
@@ -98,7 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert updatedTask != null;
 
-        syncWithStacks(geeKeep);
+        updateGeekeepHistory(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.updateTask(taskListIndex, updatedTask);
 
@@ -186,19 +193,19 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0121658E
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.markTaskDone(taskListIndex);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
     @Override
     public void markTaskUndone(int filteredTaskListIndex) {
-        pastGeeKeeps.add(new GeeKeep(geeKeep));
-        futureGeeKeeps.clear();
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.markTaskUndone(taskListIndex);
+        updateGeekeepHistory(originalGeekeepClone);
         indicateGeeKeepChanged();
     }
 
@@ -216,23 +223,49 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0147622H
     @Override
-    public void undo() throws NothingToUndoException {
+    public String undo() throws NothingToUndoException {
         if (pastGeeKeeps.empty()) {
             throw new NothingToUndoException();
         }
         futureGeeKeeps.push(new GeeKeep(geeKeep));
         geeKeep.resetData(pastGeeKeeps.pop());
         indicateGeeKeepChanged();
+        return undoableCommandHistory.get(--undoableCommandHistoryIndex);
     }
 
     @Override
-    public void redo() throws NothingToRedoException {
+    public String redo() throws NothingToRedoException {
         if (futureGeeKeeps.empty()) {
             throw new NothingToRedoException();
         }
         pastGeeKeeps.push(new GeeKeep(geeKeep));
         geeKeep.resetData(futureGeeKeeps.pop());
         indicateGeeKeepChanged();
+        return undoableCommandHistory.get(undoableCommandHistoryIndex++);
+    }
+
+    @Override
+    public List<String> getCommandHistory() {
+        return Collections.unmodifiableList(commandHistory);
+    }
+
+    @Override
+    public void appendCommandHistory(String commandText) {
+        commandHistory.add(commandText);
+    }
+
+    @Override
+    public void updateUndoableCommandHistory(String commandText) {
+        while (undoableCommandHistory.size() > undoableCommandHistoryIndex) {
+            undoableCommandHistory.remove(undoableCommandHistory.size() - 1);
+        }
+        undoableCommandHistory.add(commandText);
+        undoableCommandHistoryIndex++;
+    }
+
+    public void updateGeekeepHistory(ReadOnlyGeeKeep originalGeekeepClone) {
+        pastGeeKeeps.add(originalGeekeepClone);
+        futureGeeKeeps.clear();
     }
 
 }

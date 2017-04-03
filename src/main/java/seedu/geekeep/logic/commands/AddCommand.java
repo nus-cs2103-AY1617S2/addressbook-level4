@@ -17,7 +17,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
 /**
  * Adds a task to the Task Manager.
  */
-public class AddCommand extends Command {
+public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "add";
 

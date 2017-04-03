@@ -478,7 +478,7 @@ public class LogicManagerTest {
         expectedAB.addTask(threeTasks.get(2));
 
         assertCommandSuccess("undo",
-                String.format(UndoCommand.MESSAGE_SUCCESS),
+                String.format(UndoCommand.MESSAGE_SUCCESS, "delete 3"),
                 expectedAB,
                 expectedAB.getTaskList());
 
@@ -486,7 +486,7 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(2));
 
         assertCommandSuccess("redo",
-                String.format(RedoCommand.MESSAGE_SUCCESS),
+                String.format(RedoCommand.MESSAGE_SUCCESS, "delete 3"),
                 expectedAB,
                 expectedAB.getTaskList());
     }
