@@ -10,7 +10,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.ui.MenuBarPanelSelectionChangedEvent;
 import seedu.taskit.commons.util.FxViewUtil;
@@ -22,16 +21,23 @@ public class MenuBarPanel extends UiPart<Region> {
     private static final String FXML = "MenuBarPanel.fxml";
     
     private String command = null;
-    private final String MENU_FLOATING_TASK = "Floating Tasks";
-    private final String MENU_EVENT_TASK = "Event Tasks";
-    private final String MENU_DEADLINE_TASK = "Deadline Tasks";
-    private final String MENU_TODAY_TASK = "Today Tasks";
+    private static final String MENU_FLOATING_TASK = "Floating Tasks";
+    private static final String MENU_EVENT_TASK = "Event Tasks";
+    private static final String MENU_DEADLINE_TASK = "Deadline Tasks";
+    private static final String MENU_TODAY_TASK = "Today Tasks";
+    
+    private static final String FLOATING_TASK_ICON_PATH = "/images/floatingtask_icon.png";
+    private static final String EVENT_TASK_ICON_PATH = "/images/event_icon.png";
+    private static final String DEADLINE_TASK_ICON_PATH = "/images/deadline_icon.png";
+    private static final String TODAY_TASK_ICON_PATH = "/images/today_icon.png";
     
     @FXML
     private ListView<String> menuBarView;
     
     private final ObservableList<String> menuBarItems = FXCollections.observableArrayList(MENU_FLOATING_TASK, 
             MENU_EVENT_TASK, MENU_DEADLINE_TASK, MENU_TODAY_TASK);
+    private final String[] iconPaths = {FLOATING_TASK_ICON_PATH,EVENT_TASK_ICON_PATH, DEADLINE_TASK_ICON_PATH,
+            TODAY_TASK_ICON_PATH};
 
     public MenuBarPanel(AnchorPane menuBarPanelPlaceholder) {
         super(FXML);
@@ -89,7 +95,7 @@ public class MenuBarPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new MenuBarCard(label).getRoot());
+                setGraphic(new MenuBarCard(label,iconPaths[getIndex()]).getRoot());
             }
         }
     }

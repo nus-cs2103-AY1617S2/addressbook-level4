@@ -311,26 +311,28 @@
 	-fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 10;
     -fx-padding: 0 0 0 0;
-    -fx-background-color : derive(#9ad3de, 20%);
+    -fx-background-color: derive(#9ad3de, 20%);
 }
 
 #menuBarView .list-cell .label {
-    -fx-font-size: 22px;
+    -fx-font-size: 20px;
     -fx-font-family: "Lato";
-    -fx-text-fill: derive(#1d1d1d, 80%);
+    -fx-text-fill: #1d1d1d, 80%;
     -fx-opacity: 1;
     -fx-text-alignment: center;
 }
 
 #menuBarView .list-cell:filled:selected:focused, #menuBarView .list-cell:filled:selected {
-    -fx-background-color: derive(#9ad3de, 50%);
-    -fx-text-fill: black;
-}
-
-#menuBarView .list-cell:odd:filled {
     -fx-background-color: derive(#89bdd3, 20%);
+    -fx-text-fill: black;
+    -fx-border-radius: 0.5;
+    -fx-border-width: 1,1,1,1;
+    -fx-border-color: #c9c9c9;
 }
 
-#menuBarView .list-cell:even:filled {
-    -fx-background-color: derive(#89bdd3, 50%);
+#menuBarView .list-cell:filled {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 0.5;
+    -fx-border-width: 1,1,1,1;
+    -fx-border-color: #c9c9c9;
 }
