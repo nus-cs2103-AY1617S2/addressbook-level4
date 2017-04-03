@@ -124,7 +124,7 @@ public class Deadline {
      * Returns true if the object is From - To.
      */
     public boolean isFromTo() {
-        if (this.parsedDeadline.size() == 0) {
+        if (parsedDeadline.size() == 0) {
             return false;
         }
         return this.parsedDeadline.get(0).getDates().size() == 2;
@@ -165,7 +165,7 @@ public class Deadline {
      */
     public Date toDeadline() {
         if (parsedDeadline.size() != 0) {
-            if (parsedDeadline.size() == 2) {
+            if (parsedDeadline.get(0).getDates().size() == 2) {
                 return parsedDeadline.get(0).getDates().get(1);
             }
             return parsedDeadline.get(0).getDates().get(0);
