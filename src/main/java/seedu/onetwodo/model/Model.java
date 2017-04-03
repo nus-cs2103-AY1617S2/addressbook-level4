@@ -39,13 +39,6 @@ public interface Model {
      */
     void doneTask(ReadOnlyTask taskToComplete) throws IllegalValueException;
 
-    /**
-     * Mark the given tasks for today.
-     *
-     * @throws IllegalValueException
-     */
-    void todayTask(ReadOnlyTask taskForToday) throws IllegalValueException;
-
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 

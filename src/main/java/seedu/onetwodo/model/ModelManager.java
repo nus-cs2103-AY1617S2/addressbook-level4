@@ -128,18 +128,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
-    // @@author A0141138N
-    @Override
-    public synchronized void todayTask(ReadOnlyTask taskForToday) throws IllegalValueException {
-        if (taskForToday.getTodayStatus() == false) {
-            throw new IllegalValueException("This task is not for today");
-        }
-        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        toDoList.todayTask(taskForToday);
-        history.saveUndoInformationAndClearRedoHistory(AddCommand.COMMAND_WORD, taskForToday, copiedCurrentToDoList);
-        indicateToDoListChanged();
-    }
-
     //@@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
