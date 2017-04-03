@@ -15,6 +15,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
+import seedu.task.commons.events.storage.ChangeStorageFilePathEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
@@ -174,6 +175,23 @@ public class MainApp extends Application {
     public void initNotifications() {
         TimedEvent event = new TimedEvent(model.getTaskManager().getTaskList(), 120000);
         event.start();
+    }
+
+    @Subscribe
+    public void handleChangeStorageFilePathEvent(ChangeStorageFilePathEvent event) throws IOException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        config.setTaskManagerFilePath(event.toString());
+        storage.setTaskManagerFilePath(event.toString());
+        ConfigUtil.saveConfig(config, config.DEFAULT_CONFIG_FILE);
+
+        reInit(event);
+    }
+
+    public void reInit(ChangeStorageFilePathEvent event) throws IOException {
+        model = initModelManager(storage, userPrefs);
+        logic = new LogicManager(model, storage);
+        model.updateFilteredListToShowAll();
+        storage.saveTaskManager(model.getTaskManager(), event.toString());
     }
     //@@author
 

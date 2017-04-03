@@ -21,7 +21,7 @@ import seedu.task.model.UserPrefs;
 import seedu.task.storage.JsonUserPrefsStorage;
 import seedu.task.storage.Storage;
 import seedu.task.storage.StorageManager;
-import seedu.task.storage.XmlAddressBookStorage;
+import seedu.task.storage.XmlTaskManagerStorage;
 
 public class StorageManagerTest {
 
@@ -71,7 +71,7 @@ public class StorageManagerTest {
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getTaskManagerFilePath());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskManagerStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
