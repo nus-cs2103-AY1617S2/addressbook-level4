@@ -23,7 +23,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_LIST_UNDONE_SUCCESS = "Listed incompleted tasks";
     public static final String MESSAGE_LIST_ALL_SUCCESS = "Listed all tasks";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List tasks by done status"
-            + "Parameters: [DONE_STATUS] [DATE] [p/PRIORITY] [t/TAG]...\n";
+            + "\nParameters: [DONE_STATUS] [DATE] [p/PRIORITY] [t/TAG]...\n";
 
     private DoneStatus doneStatus;
     private EndDate before;

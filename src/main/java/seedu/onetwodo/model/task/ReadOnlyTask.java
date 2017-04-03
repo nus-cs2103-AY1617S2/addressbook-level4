@@ -83,19 +83,19 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTaskType().toString() + ": ");
+        builder.append(getTaskType().getDescription() + ": ");
         builder.append(getName());
 
         if (this.hasStartDate()) {
-            builder.append("\n").append(getStartDate());
+            builder.append("\nStarting on: ").append(getStartDate());
         }
 
         if (this.hasEndDate()) {
-            builder.append("\n").append(getEndDate());
+            builder.append("\nEnding on: ").append(getEndDate());
         }
 
         if (this.hasRecur()) {
-            builder.append(" " + getRecur());
+            builder.append("\nRecurring: " + getRecur());
         }
 
         if (this.hasPriority()) {

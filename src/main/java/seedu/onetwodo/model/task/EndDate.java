@@ -41,9 +41,8 @@ public class EndDate extends Date {
         if (!localDateTime.isPresent()) {
             return "";
         } else {
-            return "End: " + localDateTime.get().toLocalDate().toString()
-                    + " " + localDateTime.get().toLocalTime().toString();
+            return localDateTime.get().toLocalDate().toString() + " "
+                    + localDateTime.get().toLocalTime().toString();
         }
     }
-
 }

@@ -18,7 +18,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-            <HBox prefHeight="35.0" prefWidth="202.0">
+            <HBox prefHeight="35.0" prefWidth="213.0">
                <children>
                   <Label fx:id="id" alignment="CENTER" contentDisplay="CENTER" minHeight="33.0" minWidth="33.0" style="-fx-text-fill: white;" styleClass="chip" stylesheets="@PanelTheme.css" text="E1" textAlignment="CENTER" HBox.hgrow="NEVER">
                      <HBox.margin>
@@ -75,7 +75,7 @@
                         </HBox>
                           </children>
                       </VBox>
-                  <Label fx:id="priority" alignment="CENTER" contentDisplay="CENTER" minWidth="40.0" prefHeight="0.0" prefWidth="40.0" style="-fx-padding: 3;" styleClass="label-priority" stylesheets="@PanelTheme.css" text="\$p" translateX="1.0">
+                  <Label fx:id="priority" alignment="CENTER" contentDisplay="CENTER" minWidth="45.0" prefHeight="0.0" prefWidth="45.0" style="-fx-padding: 3;" styleClass="label-priority" stylesheets="@PanelTheme.css" text="\$p" translateX="1.0">
                      <HBox.margin>
                         <Insets right="10.0" top="15.0" />
                      </HBox.margin>

@@ -13,6 +13,10 @@
 	-fx-text-fill: white;
 }
 
+.label-priority {
+	-fx-font-weight: bold;
+}
+
 .label-priority:HIGH {
 	-fx-background-color: #FF4C25 !important;
 	-fx-padding: 3px;

@@ -20,7 +20,7 @@ public class DoneCommand extends Command {
             + "Parameters: PREFIX_INDEX (must be a prefix positive integer)\n"
             + "Example: " + COMMAND_WORD + " e1";
 
-    public static final String MESSAGE_DONE_TASK_SUCCESS = "Completed Task: %1$s";
+    public static final String MESSAGE_DONE_TASK_SUCCESS = "Completed %1$s.";
 
     public final TaskType taskType;
     public final int targetIndex;
