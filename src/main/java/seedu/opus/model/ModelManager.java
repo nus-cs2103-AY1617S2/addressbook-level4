@@ -32,6 +32,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private History history;
 
+    //private final SyncManager syncManager;
+
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
@@ -44,6 +46,9 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         history = new History();
+
+        //syncManager = new SyncManager(new syncServiceGtask());
+        //syncManager.startSync();
     }
 
     public ModelManager() {
@@ -55,6 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
+        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -72,6 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
+        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -80,6 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -91,6 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     //@@author A0148087W
@@ -98,12 +107,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetToPreviousState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
         indicateTaskManagerChanged();
+        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
     public void resetToPrecedingState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
         indicateTaskManagerChanged();
+        //syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
     //@@author
 
@@ -121,6 +132,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
+    @Override
     public int getTaskIndex(ReadOnlyTask task) {
         return filteredTasks.indexOf(task);
     }
