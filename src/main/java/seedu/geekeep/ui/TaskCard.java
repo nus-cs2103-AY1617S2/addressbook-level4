@@ -46,10 +46,6 @@ public class TaskCard extends UiPart<Region> {
             descriptionOfTask.setText("Details: -");
         } else {
             descriptionOfTask.setText("Details: " + task.getDescriptoin().value);
-        if (task.getDescriptoin() == null) {
-            descriptionOfTask.setText("");
-        } else {
-            descriptionOfTask.setText(task.getDescriptoin().value);
         }
 
         initTags(task);
