@@ -25,8 +25,8 @@ public class LogsCenterTest {
             }
         };
         Logger logger = LogsCenter.getLogger("test logger");
-        new Verifications() {{
-                logger.warning("Error adding file handler for logger.");
-        }};
+        new Verifications() {
+            {logger.warning("Error adding file handler for logger.");}
+        };
     }
 }
