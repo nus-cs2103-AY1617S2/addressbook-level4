@@ -31,6 +31,9 @@ public interface Model {
     /** Deletes the task */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
+    /** Returns the config */
+    Config getConfig();
+
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
@@ -81,6 +84,8 @@ public interface Model {
     void appendCommandHistory(String commandText);
 
     void updateUndoableCommandHistory(String commandText);
+
+    void setGeekeepFilePath(String filePath);
 
 }
 

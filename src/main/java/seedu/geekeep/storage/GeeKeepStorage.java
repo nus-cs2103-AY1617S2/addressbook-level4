@@ -17,6 +17,11 @@ public interface GeeKeepStorage {
     String getGeeKeepFilePath();
 
     /**
+     * Set the file path of the data file.
+     */
+    void setGeeKeepFilePath(String filePath);
+
+    /**
      * Returns GeeKeep data as a {@link ReadOnlyGeeKeep}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
