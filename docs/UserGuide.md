@@ -73,7 +73,7 @@ Format: `help`
 ### 3.2. Adding a task: `add / a`
 
 Adds a task<br>
-Format: `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`
+Format: `add TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`
 
 > * Date can be written in UK-time format with slashes, `i.e dd-mm-yyyy` or natural language, `i.e this sunday`.  <br>
 > * Time should be in 24-hour clock format or 12-hour format with AM or PM next to it, i.e `1700 hr:min <PM/AM>`. <br>
@@ -85,9 +85,9 @@ Format: `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/
 
 Examples:
 
-* `add n/Buy groceries ed/19-02-2017 c/Home p/YES r/weekly`
-* `add n/Dinner with Jim i/@Orchard sd/next friday ed/19-02-2017 c/Leisure p/no`
-* `add n/Post-exam celebration i/@Zouk sd/tomorrow at 3 PM ed/tomorrow 20.30  c/Leisure p/No`
+* `add Buy groceries ed/19-02-2017 c/Home p/YES r/weekly`
+* `add Dinner with Jim i/@Orchard sd/next friday ed/19-02-2017 c/Leisure p/no`
+* `add Post-exam celebration i/@Zouk sd/tomorrow at 3 PM ed/tomorrow 20.30  c/Leisure p/No`
 
 
 ### 3.3. Listing all tasks : `list / l`
@@ -105,7 +105,7 @@ Example:
 ### 3.4. Editing a task : `edit / e`
 
 Edits an existing task<br>
-Format: `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`
+Format: `edit INDEX [TASK NAME] [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number last shown in the last task listing.<br>
@@ -174,10 +174,10 @@ Examples:
 ### 3.7. Clearing tasks by category : `clear / c`
 
 Clears all tasks under the specified category<br>
-Format: `clear CATEGORY`
+Format: `clear c/CATEGORY`
 
 > * Category names are case-insensitive. <br>
-> * The default categories of TaskBoss are `AllTasks` and `Done`. <br>
+> * The build-in categories of TaskBoss are `Alltasks` and `Done`. <br>
 > * `Alltasks` and `Done` cannot be cleared in TaskBoss.<br>
 
 ### 3.8. Viewing a task : `view / v`
@@ -261,12 +261,12 @@ A: Install TaskBoss in the other computer and overwrite the empty data file it c
 |Command    |Parameters                                                        |
 |:---------:|:-------------------------------------------------------------------------------------------|
 |[help / h](#31-viewing-help--help)                       |**`help`**              |
-|[add / a](#32-adding-a-task-add)                         |**`add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**             |
+|[add / a](#32-adding-a-task-add)                         |**`add TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**             |
 |[list / l](#33-listing-all-tasks--list)                  |**`list` `list c/CATEGORY NAME`**        |
-|[edit / e](#34-editing-a-task--edit)                     |**`edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**|
+|[edit / e](#34-editing-a-task--edit)                     |**`edit INDEX [TASK NAME] [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**|
 |[find / f](#35-finding-all-tasks-by-keywords-or-by-datetime--find)|**`find KEYWORDS`  `find sd/date and time`  `find ed/date and time`**|
 |[delete / d](#36-deleting-a-task--delete)                |**`delete INDEX`**         |
-|[clear / c](#37-clearing-tasks-by-category--clear)       |**`clear CATEGORY`** |
+|[clear / c](#37-clearing-tasks-by-category--clear)       |**`clear c/CATEGORY NAME`** |
 |[view / v](#38-viewing-a-task--view)                    |**`view INDEX`**             |
 |[name / n](#39-modifying-a-category-name--name)         |**`name EXISTING_CATEGORY NEW_CATEGORY`**       |
 |[mark / m](#310--marking-a-task-done--done)               |**`mark INDEX`**        |
