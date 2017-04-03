@@ -23,9 +23,6 @@
             <BorderPane StackPane.alignment="CENTER">
                <bottom>
                   <HBox fx:id="commandAutoCompletePlaceholder" alignment="CENTER" BorderPane.alignment="CENTER">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
                      <BorderPane.margin>
                         <Insets bottom="8.0" />
                      </BorderPane.margin>
