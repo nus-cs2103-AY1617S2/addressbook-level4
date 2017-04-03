@@ -4,33 +4,18 @@ import java.util.List;
 
 import seedu.opus.model.task.Task;
 
+//@@author A0148087W
+/**
+ * Manage all available sync services and push/pull requests from Model
+ *
+ */
 public class SyncManager implements Sync {
 
-    public SyncManager(syncService service) {
+    public SyncManager(SyncService service) {
         this.service = service;
     }
 
-    private syncService service;
-
-    @Override
-    public void addTask(Task taskToAdd) {
-        service.addTask(taskToAdd);
-    }
-
-    @Override
-    public void deleteTask(Task taskToDelete) {
-        service.deleteTask(taskToDelete);
-    }
-
-    @Override
-    public void updateTask(Task taskToUpdate) {
-        service.updateTask(taskToUpdate);
-    }
-
-    @Override
-    public List<Task> getTaskListFromSync() {
-        return null;
-    }
+    private SyncService service;
 
     @Override
     public void updateTaskList(List<Task> taskList) {
