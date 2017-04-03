@@ -157,7 +157,6 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement);
     }
   //@@author
-    
     public void setTasks(UniqueTaskList replacement) {
 
       //@@author A0164440M
