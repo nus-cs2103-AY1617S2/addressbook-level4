@@ -33,10 +33,24 @@ public class Task extends UserToDo implements ReadOnlyTask {
     }
 
     /**
+     * This constructor is used when loading from storage
+     */
+    public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags,
+            boolean isComplete, boolean isOverdue) {
+        super(name, priority, description, tags);
+        assert deadline != null;
+
+        this.deadline = deadline;
+        this.isOverdue = isOverdue;
+        this.isComplete = isComplete;
+    }
+
+    /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getPriority(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getDeadline(), source.getPriority(), source.getDescription(),
+                source.getTags(), source.isComplete(), source.isOverdue());
     }
 
     @Override

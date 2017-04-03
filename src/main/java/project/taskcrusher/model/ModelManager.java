@@ -70,14 +70,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0127737X
     public void prepareListsForUi() {
-        boolean taskListToShowEmpty = false, eventListToShowEmpty = false;
+        boolean isTaskListToShowEmpty = false, isEventListToShowEmpty = false;
         if (filteredEvents.isEmpty()) {
-            eventListToShowEmpty = LIST_EMPTY;
+            isEventListToShowEmpty = LIST_EMPTY;
         }
         if (filteredTasks.isEmpty()) {
-            taskListToShowEmpty = LIST_EMPTY;
+            isTaskListToShowEmpty = LIST_EMPTY;
         }
-        raise(new ListsToShowUpdatedEvent(eventListToShowEmpty, taskListToShowEmpty));
+        raise(new ListsToShowUpdatedEvent(isEventListToShowEmpty, isTaskListToShowEmpty));
     }
 
     //=========== Task operations =========================================================================
@@ -111,11 +111,14 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void markTask(int filteredTaskListIndex, int markFlag) {
         userInbox.markTask(filteredTaskListIndex, markFlag);
         indicateUserInboxChanged();
+        prepareListsForUi();
     }
 
     @Override
     public synchronized void markEvent(int filteredEventListIndex, int markFlag) {
         userInbox.markEvent(filteredEventListIndex, markFlag);
+        indicateUserInboxChanged();
+        prepareListsForUi();
     }
 
     //=========== Event operations =========================================================================
@@ -164,13 +167,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskListToShowAll() {
-        filteredTasks.setPredicate(null);
+        updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(false)));
         prepareListsForUi();
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new KeywordQualifier(keywords , false)));
     }
 
     @Override
@@ -192,13 +195,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredEventListToShowAll() {
-        filteredEvents.setPredicate(null);
+//        filteredEvents.setPredicate(null);
+        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(false)));
         prepareListsForUi();
     }
 
     @Override
     public void updateFilteredEventList(Set<String> keywords) {
-        updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredEventList(new PredicateExpression(new KeywordQualifier(keywords, false)));
     }
 
     @Override
@@ -242,19 +246,28 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
+    private class KeywordQualifier implements Qualifier {
         private Set<String> nameKeyWords;
+        private boolean showCompletedToo;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        KeywordQualifier(Set<String> nameKeyWords, boolean showCompletedToo) {
             this.nameKeyWords = nameKeyWords;
+            this.showCompletedToo = showCompletedToo;
         }
 
         @Override
         public boolean run(ReadOnlyUserToDo item) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(item.getName().toString(), keyword))
+            if (showCompletedToo) {
+                return nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(item.toString(), keyword))
                     .findAny()
                     .isPresent();
+            } else {
+                return !item.isComplete() && nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(item.toString(), keyword))
+                        .findAny()
+                        .isPresent();
+            }
         }
 
         @Override
@@ -291,7 +304,7 @@ public class ModelManager extends ComponentManager implements Model {
                 ReadOnlyTask task = (ReadOnlyTask) item;
                 if (task.isComplete()) {
                     return false;
-                } else if (task.getDeadline().isWithin(userInterestedTimeslot)) {
+                } else if (task.getDeadline().isWithin(userInterestedTimeslot)) { // more OOP way
                     return true;
                 } else {
                     return false;
@@ -304,6 +317,28 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "user-interested timeslot is " + userInterestedTimeslot.toString();
+        }
+    }
+    /**
+     * checks if the given UserToDo is marked as complete or incomplete
+     */
+    private class CompletionQualifier implements Qualifier {
+        boolean showComplete;
+        CompletionQualifier(boolean showComplete) {
+            this.showComplete = showComplete;
+        }
+
+        @Override
+        public boolean run(ReadOnlyUserToDo item) {
+            if (item.isComplete()) {
+                return this.showComplete ? true : false;
+            }
+            return this.showComplete ? false : true;
+        }
+
+        @Override
+        public String toString() {
+            return "separate between ongoing and completed tasks and events";
         }
     }
 }

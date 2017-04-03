@@ -20,4 +20,5 @@ public interface ReadOnlyUserToDo {
     void markComplete();
     void markIncomplete();
     boolean isComplete();
+    String toString();
 }

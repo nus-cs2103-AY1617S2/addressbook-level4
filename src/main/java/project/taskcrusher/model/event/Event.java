@@ -33,11 +33,25 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.isOverdue = false;
     }
 
+    public Event(Name name, List<Timeslot> timeslots, Location location, Description description,
+            UniqueTagList tags, boolean isComplete, boolean isOverdue) {
+        super(name, null, description, tags); // TODO: remove this stub priority
+        // later
+
+        assert !CollectionUtil.isAnyNull(timeslots, location);
+
+        this.timeslots = timeslots;
+        this.location = location;
+        this.isComplete = isComplete;
+        this.isOverdue = isOverdue;
+    }
+
     /**
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getName(), source.getTimeslots(), source.getLocation(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getTimeslots(), source.getLocation(), source.getDescription(),
+                source.getTags(), source.isComplete(), source.isOverdue());
     }
 
     /**

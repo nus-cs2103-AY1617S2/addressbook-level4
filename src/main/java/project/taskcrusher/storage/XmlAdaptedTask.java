@@ -82,16 +82,6 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(personTags);
 
         final Deadline deadline = new Deadline(this.deadline, Deadline.IS_LOADING_FROM_STORAGE);
-        Task thisTask = new Task(name, deadline, priority, description, tags);
-
-        if (isOverdue) {
-            thisTask.markOverdue();
-        }
-
-        if (isComplete) {
-            thisTask.markComplete();
-            //System.out.println("marked as complete during storage: "  + thisTask.isComplete());
-        }
-        return thisTask;
+        return new Task(name, deadline, priority, description, tags, isComplete, isOverdue);
     }
 }

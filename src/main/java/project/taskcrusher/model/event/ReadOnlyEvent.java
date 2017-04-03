@@ -34,6 +34,7 @@ public interface ReadOnlyEvent extends ReadOnlyUserToDo, Comparable<ReadOnlyEven
         builder.append(getName() + " ")
                 .append(getTimeslots() + " ")
                 .append(getDescription() + " ")
+                .append(getLocation() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

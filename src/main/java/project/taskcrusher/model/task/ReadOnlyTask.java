@@ -29,15 +29,10 @@ public interface ReadOnlyTask extends ReadOnlyUserToDo, Comparable<ReadOnlyTask>
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName());
-        if (getDeadline().hasDeadline()) {
-            builder.append(" " + getDeadline().toString() + " ");
-        }
-        if (getDescription().hasDescription()) {
-            builder.append(getDescription().toString() + " ");
-        }
-
-        builder.append(" Tags: ");
+        builder.append(getName() + " ")
+                .append(getDeadline() + " ")
+                .append(getDescription() + " ")
+                .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
