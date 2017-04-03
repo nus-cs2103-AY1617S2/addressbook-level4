@@ -45,7 +45,7 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
             commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
         });
-        
+
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
