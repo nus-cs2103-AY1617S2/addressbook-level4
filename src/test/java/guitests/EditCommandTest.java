@@ -1,6 +1,6 @@
 package guitests;
 
-//@author A0141872E
+//@@author A0141872E
 import static org.junit.Assert.assertTrue;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 

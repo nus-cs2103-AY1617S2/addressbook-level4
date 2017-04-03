@@ -44,19 +44,22 @@ public static final String COMMAND_WORD = "mark";
         }
 
         ReadOnlyTask taskToMark = lastShownList.get(filteredTaskListIndex);
-
-        if(parameter.equals("done")){
-            if(taskToMark.isDone() == true){
-                return new CommandResult(String.format(MESSAGE_DUPLICATE_MARKING,parameter));
-            }
-            taskToMark.setDone(true);
-        } else {
-            if(taskToMark.isDone() == false){
-                return new CommandResult(String.format(MESSAGE_DUPLICATE_MARKING,parameter));
-            }
-            taskToMark.setDone(false);
+        
+        if(!checkDuplicateMarking(taskToMark)) {
+            taskToMark.setDone(parameter);
+        } else{
+            return new CommandResult(String.format(MESSAGE_DUPLICATE_MARKING,parameter));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS_ALL, parameter));
     }
-
+    
+    public Boolean checkDuplicateMarking(ReadOnlyTask taskToMark) {
+        if(parameter.equals("done") && taskToMark.isDone() == true){
+            return true;
+        } else if(parameter.equals("undone") && taskToMark.isDone() == false){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

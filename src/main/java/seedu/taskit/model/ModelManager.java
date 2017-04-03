@@ -244,13 +244,9 @@ public class ModelManager extends ComponentManager implements Model {
                     return task.isOverdue() && !task.isDone();
 
                 case "low":
-                    return task.getPriority().toString().equals("low");
-
                 case "medium":
-                    return task.getPriority().toString().equals("medium");
-
                 case "high":
-                    return task.getPriority().toString().equals("high");
+                    return task.getPriority().toString().equals(parameter);
 
                 case "today":
                     return !task.isDone() && task.getEnd().isDateEqualCurrentDate();

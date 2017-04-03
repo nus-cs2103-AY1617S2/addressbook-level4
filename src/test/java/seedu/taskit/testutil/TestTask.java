@@ -100,7 +100,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     // @@author
-
+    
+    //@@author A0141872E
     @Override
     public Boolean isDone() {
         return isDone;
@@ -112,7 +113,11 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public void setDone(Boolean status) {
-        this.isDone=status;
-    }
+    public void setDone(String status) {
+        if(status.equals("done")) {
+            this.isDone = true;
+        } else {
+            this.isDone = false;
+        }
+    }//@@author
 }

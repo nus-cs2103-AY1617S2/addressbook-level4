@@ -17,7 +17,7 @@ public interface ReadOnlyTask {
 
     Boolean isDone();
     Boolean isOverdue();
-    void setDone(Boolean status);
+    void setDone(String status);
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
