@@ -2,9 +2,12 @@ package seedu.doit.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.doit.commons.core.LogsCenter;
@@ -43,7 +46,7 @@ public class CommandBox extends UiPart<Region> {
 
             // process result of the command
             setStyleToIndicateCommandSuccess();
-            this.commandTextField.setText("");
+            setCommandBoxText("");
             this.logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
@@ -54,7 +57,6 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
-
 
     /**
      * Sets the command box style to indicate a successful command.
@@ -69,5 +71,34 @@ public class CommandBox extends UiPart<Region> {
     private void setStyleToIndicateCommandFailure() {
         this.commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
+
+    // @@A0138909R
+    /**
+     * sets the text in the command box
+     */
+    public void setCommandBoxText(String text) {
+        this.commandTextField.setText(text);
+    }
+
+    @Subscribe
+    /**
+     * Listens to keyEvents when command Box is focused
+     */
+    public void handleKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+        case UP:
+            // up arrow
+
+            break;
+        case DOWN:
+            // down arrow
+
+            break;
+        default:
+            break;
+        }
+    }
+
+    // @@author
 
 }
