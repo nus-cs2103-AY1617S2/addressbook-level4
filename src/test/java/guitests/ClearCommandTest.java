@@ -27,7 +27,7 @@ public class ClearCommandTest extends TaskManagerGuiTest {
         assertClearCommandSuccess();
     }
 
-    private void assertClearCommandSuccess() {
+    public void assertClearCommandSuccess() {
         this.commandBox.runCommand(ClearCommand.COMMAND_WORD);
         assertListSize(0);
         assertResultMessage("All tasks has been cleared!");
