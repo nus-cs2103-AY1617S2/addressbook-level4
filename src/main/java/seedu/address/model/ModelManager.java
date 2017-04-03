@@ -309,7 +309,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
-        indicateTaskManagerChanged(MESSAGE_ON_UPDATELIST);
     }
 
     @Override
