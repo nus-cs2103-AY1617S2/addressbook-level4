@@ -50,7 +50,6 @@ public class HelpController extends Controller {
     private static final int INDEX_HELP_COMMAND = 0;
     private static final int INDEX_HELP_DESCRIPTION = 2;
     private static final int INDEX_HELP_FORMAT = 1;
-    private static final String FORMAT_LARGESPACING = "\n\n";
 
     private ControllerLibrary controllerLibrary = new ControllerLibrary();
 
@@ -144,9 +143,7 @@ public class HelpController extends Controller {
 
     public HashMap<String, String[]> getCommandKeywordMap() {
         HashMap<String, String[]> keywordMap = new HashMap<>();
-        for (String keyword : controllerLibrary.getCommandControllerKeywords()) {
-            keywordMap.put(keyword, new String[0]);
-        }
+        keywordMap.put(COMMAND_WORD, controllerLibrary.getCommandControllerKeywords().toArray(new String[0]));
         return keywordMap;
     }
 

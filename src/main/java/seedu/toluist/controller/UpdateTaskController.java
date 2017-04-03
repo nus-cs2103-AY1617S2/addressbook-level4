@@ -256,6 +256,22 @@ public class UpdateTaskController extends Controller {
         return keywordMap;
     }
 
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] {
+            new String[][] {
+                new String[] { TaskTokenizer.KEYWORD_EVENT_START_DATE, TaskTokenizer.KEYWORD_EVENT_END_DATE },
+                new String[] { TaskTokenizer.KEYWORD_TASK_DEADLINE },
+                new String[] { TaskTokenizer.KEYWORD_TASK_FLOATING }
+            },
+            new String[][] {
+                    new String[] {
+                            TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+                            TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE
+                    },
+                    new String[] { TaskTokenizer.KEYWORD_TASK_STOP_RECURRING }
+            }
+        };
+    }
 
     //@@author A0162011A
     public String[] getBasicHelp() {

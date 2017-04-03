@@ -1,7 +1,11 @@
 //@@author A0131125Y
 package seedu.toluist.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import seedu.toluist.ui.UiStore;
 
@@ -44,7 +48,7 @@ public abstract class Controller {
      * Returns command word(s) used by controller
      */
     public String[] getCommandWords() {
-        return new String[] {};
+        return new String[0];
     }
 
     /**
@@ -54,13 +58,40 @@ public abstract class Controller {
         return new HashMap<>();
     }
 
+    /**
+     * Returns array of groups of keywords that should not appear together
+     * E.g /by & /from in add controller
+     */
+    public String[][][] getConflictingKeywordsList() {
+        return new String[0][0][0];
+    }
+
+    /**
+     * Return the set of all keywords that conflict with the current keyword
+     * @param keyword a keyword
+     * @return set of conflicting keywords
+     */
+    public final Set<String> getConflictingKeywords(String keyword) {
+        return Arrays.stream(getConflictingKeywordsList())
+                .filter(conflictingRule -> Arrays.stream(conflictingRule)
+                        .flatMap(Arrays::stream)
+                        .collect(Collectors.toList())
+                        .contains(keyword))
+                .map(conflictingRule -> Arrays.stream(conflictingRule)
+                        .filter(group -> !Arrays.asList(group).contains(keyword))
+                        .flatMap(Arrays::stream)
+                        .collect(Collectors.toSet()))
+                .flatMap(Set::stream)
+                .collect(Collectors.toSet());
+    }
+
     //@@author A0162011A
     /**
      * Returns basic help command(s) used by help controller
      * Format is String[CommandWords, Format, Details]
      */
     public String[] getBasicHelp() {
-        return new String[] {};
+        return new String[0];
     }
 
     /**
@@ -69,6 +100,6 @@ public abstract class Controller {
      * Comments and Examples can be null, but at least one should be there to make this not pointless
      */
     public String[][] getDetailedHelp() {
-        return new String[][] {};
+        return new String[0][0];
     }
 }

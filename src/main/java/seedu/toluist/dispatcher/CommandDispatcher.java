@@ -12,8 +12,10 @@ import java.util.function.Function;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.ControllerLibrary;
@@ -127,13 +129,17 @@ public class CommandDispatcher extends Dispatcher {
      */
     private SortedSet<String> getKeywordSuggestions(String command) {
         String lastComponentOfCommand = StringUtil.getLastComponent(command);
-
+        Controller bestFitController = getBestFitController(command);
         HashMap<String, String[]> keywordMap = getBestFitController(command).getCommandKeywordMap();
         HashMap<String, String> tokens = KeywordTokenizer.tokenize(command, null,
                 keywordMap.keySet().toArray(new String[0]));
         return keywordMap.keySet().stream()
-                .filter(keyword -> StringUtil.startsWithIgnoreCase(keyword, lastComponentOfCommand)
-                        && !tokens.keySet().contains(keyword))
+                // do not repeat keywords
+                .filter(keyword -> !tokens.keySet().contains(keyword))
+                // do not suggest keywords that conflict with existing keywords
+                .filter(keyword -> Collections.disjoint(bestFitController.getConflictingKeywords(keyword),
+                        tokens.keySet()))
+                .filter(keyword -> StringUtil.startsWithIgnoreCase(keyword, lastComponentOfCommand))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
@@ -148,6 +154,11 @@ public class CommandDispatcher extends Dispatcher {
         List<Pair<String, String>> tokens = KeywordTokenizer.tokenizeInOrder(command, null,
                 keywordMap.keySet().toArray(new String[0]));
         if (tokens.isEmpty()) {
+            return new TreeSet<>();
+        }
+
+        // Special handling for help. Since KeywordTokenizer might mix this up
+        if (command.matches("(?iu)^\\s*help\\s+\\S+.+")) {
             return new TreeSet<>();
         }
 

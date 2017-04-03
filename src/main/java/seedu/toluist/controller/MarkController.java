@@ -125,6 +125,13 @@ public class MarkController extends Controller {
         return keywordMap;
     }
 
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] { new String[][] {
+                new String[] { PARAMETER_MARK_INCOMPLETE },
+                new String[] { PARAMETER_MARK_COMPLETE }
+        }};
+    }
+
     //@@author A0162011A
     public String[] getBasicHelp() {
         return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
