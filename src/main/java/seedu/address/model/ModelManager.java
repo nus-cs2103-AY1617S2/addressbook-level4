@@ -53,15 +53,6 @@ public class ModelManager extends ComponentManager implements Model {
     private Stack<String> redoCommandHistory;
     private Stack<Boolean> completedViewHistory;
 
-    private static final String MESSAGE_ON_DELETE = "Task deleted";
-    private static final String MESSAGE_ON_ADD = "Task added";
-    private static final String MESSAGE_ON_RESET = "Task list loaded";
-    private static final String MESSAGE_ON_UPDATE = "Task updated";
-    private static final String MESSAGE_ON_SAVETO = "Save location changed to ";
-    private static final String MESSAGE_ON_EXPORT = "Data to be exported to ";
-    private static final String MESSAGE_ON_USETHIS = "Reading data from ";
-    private static final String MESSAGE_ON_IMPORT = "Importing data from ";
-
     // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
     private static final String MESSAGE_ON_UNDO = "Undo completed";
@@ -129,7 +120,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged(String message) {
+    @Override
+    public void indicateTaskManagerChanged(String message) {
         logger.fine(message);
         raise(new TaskManagerChangedEvent(taskManager));
     }
