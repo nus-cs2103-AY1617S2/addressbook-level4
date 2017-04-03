@@ -167,10 +167,9 @@ public class AddCommand extends Command {
                     readOnlyTask.getEndDate().value.substring(readOnlyTask.getEndDate().value.length() - 2)) == 0) {
                 if (toAdd.getEndDate().value
                         .substring(toAdd.getEndDate().value.length() - 5, toAdd.getEndDate().value.length() - 3)
-                        .compareTo(readOnlyTask.getEndDate().value.substring(
-                                readOnlyTask.getEndDate().value.length()
-                                        - 5,
-                                readOnlyTask.getEndDate().value.length() - 3)) < 0) {
+                        .compareTo(
+                                readOnlyTask.getEndDate().value.substring(readOnlyTask.getEndDate().value.length() - 5,
+                                        readOnlyTask.getEndDate().value.length() - 3)) < 0) {
                     return true;
                 } else {
                     if (toAdd.getEndDate().value
