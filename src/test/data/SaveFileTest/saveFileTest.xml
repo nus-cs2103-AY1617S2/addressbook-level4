@@ -1,15 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <todolist>
-    <todos>
-        <name>test</name>
-        <startTime></startTime>
-        <endTime>Tue Apr 04 17:00:00 HKT 2017</endTime>
-        <completeTime></completeTime>
-    </todos>
-    <todos>
-        <name>test2</name>
-        <startTime></startTime>
-        <endTime>Mon Apr 03 00:00:00 HKT 2017</endTime>
-        <completeTime></completeTime>
-    </todos>
 </todolist>
