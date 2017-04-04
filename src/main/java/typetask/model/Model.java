@@ -46,6 +46,7 @@ public interface Model {
 
     void updateFilteredTaskList(Calendar today);
 
+    //@@author A0139926R
     /** Stores current TaskManager state */
     void storeTaskManager(String command);
 

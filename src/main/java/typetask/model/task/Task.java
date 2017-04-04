@@ -83,7 +83,7 @@ public class Task implements ReadOnlyTask {
             return "No";
         }
     }
-    //@@author
+    //@@author A0139926R
 
     /**
      * Updates this task with the details of {@code replacement}.
@@ -94,7 +94,7 @@ public class Task implements ReadOnlyTask {
         this.setDate(replacement.getDate());
         this.setEndDate(replacement.getEndDate());
     }
-
+    //@@author
     /**
      * @@author A0144902L
      * Marks this task as completed {boolean is set TRUE}.
