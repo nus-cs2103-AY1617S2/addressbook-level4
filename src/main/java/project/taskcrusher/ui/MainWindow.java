@@ -3,6 +3,7 @@ package project.taskcrusher.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -40,6 +41,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem helpMenuItem;
+    
+    @FXML
+    private MenuBar menuBar;
 
     @FXML
     private AnchorPane userInboxPanelPlaceholder;
@@ -65,6 +69,8 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        menuBar.setManaged(false);
+        menuBar.setVisible(false);
 
         setAccelerators();
     }
