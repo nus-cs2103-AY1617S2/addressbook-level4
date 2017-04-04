@@ -4,6 +4,7 @@ package seedu.toluist.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,7 +52,7 @@ public class MarkController extends Controller {
                                                     "`mark 1, 6`\nMarks the tasks at index 1 and 6 complete." };
 
     //@@author A0131125Y
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().toString() + " will handle command");
         String indexToken = tokens.get(PARAMETER_INDEX);
         boolean isMarkComplete = !tokens.keySet().contains(PARAMETER_MARK_INCOMPLETE);
@@ -96,8 +97,8 @@ public class MarkController extends Controller {
                 English.plural("Task", taskIndexes.size()), indexString));
     }
 
-    public HashMap<String, String> tokenize(String command) {
-        HashMap<String, String> tokens = super.tokenize(command);
+    public Map<String, String> tokenize(String command) {
+        Map<String, String> tokens = super.tokenize(command);
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
@@ -113,7 +114,7 @@ public class MarkController extends Controller {
         return new String[] { COMMAND_WORD };
     }
 
-    public HashMap<String, String[]> getCommandKeywordMap() {
+    public Map<String, String[]> getCommandKeywordMap() {
         String[] keywords = new String[] { PARAMETER_MARK_COMPLETE, PARAMETER_MARK_INCOMPLETE };
         HashMap<String, String[]> keywordMap = new HashMap<>();
         for (String keyword : keywords) {

@@ -1,7 +1,7 @@
 //@@author A0131125Y
 package seedu.toluist.controller;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.ui.commons.CommandResult;
@@ -11,12 +11,12 @@ import seedu.toluist.ui.commons.CommandResult;
  */
 public class UnknownCommandController extends Controller {
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         uiStore.setCommandResult(
                 new CommandResult(Messages.MESSAGE_UNKNOWN_COMMAND, CommandResult.CommandResultType.FAILURE));
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         return null; // not used
     }
 

@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,7 +43,7 @@ public class SwitchController extends Controller {
                                                     "`ctrl + N`\nSwitches the screen to the `Next 7 Days` window." };
 
     //@@author A0131125Y
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         String keyword = tokens.get(PARAMETER_TAB);
 
         if (keyword == null) {
@@ -71,7 +72,7 @@ public class SwitchController extends Controller {
                 UiStore.getInstance().getTasks().size())));
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

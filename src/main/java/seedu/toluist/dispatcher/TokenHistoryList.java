@@ -1,18 +1,21 @@
+//@@author A0131125Y
 package seedu.toluist.dispatcher;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.toluist.controller.Controller;
 
 /**
- * Created by louis on 2/4/17.
+ * TokenHistoryList records the list of tokens and values used in the current session
+ * Sort like a cookie
  */
 public class TokenHistoryList {
     public HashMap<String, HashMap<String, Set<String>>> tokenHistory = new HashMap<>();
 
-    public void recordTokens(Controller controller, HashMap<String, String> tokens) {
+    public void recordTokens(Controller controller, Map<String, String> tokens) {
         if (tokens == null) {
             return;
         }

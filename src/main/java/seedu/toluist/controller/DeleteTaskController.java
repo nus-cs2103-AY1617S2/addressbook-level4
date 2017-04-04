@@ -1,7 +1,8 @@
 //@@author A0127545A
 package seedu.toluist.controller;
-import java.util.HashMap;
+
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,7 @@ public class DeleteTaskController extends Controller {
     //@@author A0127545A
     private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
@@ -62,7 +63,7 @@ public class DeleteTaskController extends Controller {
         uiStore.setCommandResult(commandResult);
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, true, false);
     }
 

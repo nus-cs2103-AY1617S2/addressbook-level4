@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
@@ -18,7 +19,7 @@ public class NavigateHistoryController extends Controller {
     private static final String PARAMETER_DIRECTION = "direction";
     private CommandHistoryList commandHistory;
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         String direction = tokens.get(PARAMETER_DIRECTION);
@@ -40,7 +41,7 @@ public class NavigateHistoryController extends Controller {
         uiStore.setCommandInput(command);
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
         command = command.replace(COMMAND_WORD, "").trim();

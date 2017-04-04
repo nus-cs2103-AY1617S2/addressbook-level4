@@ -3,6 +3,7 @@ package seedu.toluist.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -54,7 +55,7 @@ public class FindController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
@@ -99,8 +100,8 @@ public class FindController extends Controller {
                 + String.format(MESSAGE_RESULT_TEMPLATE_TAB, uiStore.getShownTasks().size()));
     }
 
-    public HashMap<String, String> tokenize(String command) {
-        HashMap<String, String> tokens = super.tokenize(command);
+    public Map<String, String> tokenize(String command) {
+        Map<String, String> tokens = super.tokenize(command);
 
         // keyword for matching
         String keywords = Pattern.compile(PARAMETER_TAG, Pattern.CASE_INSENSITIVE).matcher(command)
@@ -126,7 +127,7 @@ public class FindController extends Controller {
         return new String[] { COMMAND_WORD_FILTER, COMMAND_WORD_FIND, COMMAND_WORD_LIST };
     }
 
-    public HashMap<String, String[]> getCommandKeywordMap() {
+    public Map<String, String[]> getCommandKeywordMap() {
         String[] keywords = new String[] { PARAMETER_NAME, PARAMETER_TAG };
         HashMap<String, String[]> keywordMap = new HashMap<>();
         for (String keyword : keywords) {

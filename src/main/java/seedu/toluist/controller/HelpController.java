@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -49,7 +50,7 @@ public class HelpController extends Controller {
 
     private ControllerLibrary controllerLibrary = new ControllerLibrary();
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         Optional<String> commandWord = tokens.keySet().stream()
@@ -130,7 +131,7 @@ public class HelpController extends Controller {
         return new String[] { COMMAND_WORD };
     }
 
-    public HashMap<String, String[]> getCommandKeywordMap() {
+    public Map<String, String[]> getCommandKeywordMap() {
         HashMap<String, String[]> keywordMap = new HashMap<>();
         for (String keyword : controllerLibrary.getCommandControllerCommandWords()) {
             keywordMap.put(keyword, new String[0]);

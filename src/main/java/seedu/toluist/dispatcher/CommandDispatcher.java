@@ -3,7 +3,6 @@ package seedu.toluist.dispatcher;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +60,7 @@ public class CommandDispatcher extends Dispatcher {
         if (controller instanceof NavigateHistoryController) {
             ((NavigateHistoryController) controller).setCommandHistory(commandHistory);
         }
-        HashMap<String, String> tokens = controller.tokenize(deAliasedCommand);
+        Map<String, String> tokens = controller.tokenize(deAliasedCommand);
         tokenHistoryList.recordTokens(controller, tokens);
         controller.execute(tokens);
     }
@@ -129,7 +128,7 @@ public class CommandDispatcher extends Dispatcher {
     private SortedSet<String> getKeywordSuggestions(String command) {
         String lastComponentOfCommand = StringUtil.getLastComponent(command);
         Controller bestFitController = getBestFitController(command);
-        HashMap<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
+        Map<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
         Set<String> existingKeywords = bestFitController.keywordize(command).stream()
                 .map(keywordValuePair -> keywordValuePair.getKey())
                 .collect(Collectors.toSet());
@@ -151,7 +150,7 @@ public class CommandDispatcher extends Dispatcher {
     private SortedSet<String> getKeywordArgumentSuggestions(String command) {
         String lastComponentOfCommand = StringUtil.getLastComponent(command);
         Controller bestFitController = getBestFitController(command);
-        HashMap<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
+        Map<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
         List<Pair<String, String>> keywordValuePairs = bestFitController.keywordize(command);
         if (keywordValuePairs.size() < 2) {
             return new TreeSet<>();

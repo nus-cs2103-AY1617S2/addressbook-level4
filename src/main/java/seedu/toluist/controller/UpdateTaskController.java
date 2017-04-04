@@ -3,6 +3,7 @@ package seedu.toluist.controller;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -70,7 +71,7 @@ public class UpdateTaskController extends Controller {
     //@@author A0127545A
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         CommandResult commandResult;
@@ -117,7 +118,7 @@ public class UpdateTaskController extends Controller {
         uiStore.setCommandResult(commandResult);
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, true, true);
     }
 
@@ -230,7 +231,7 @@ public class UpdateTaskController extends Controller {
         return new String[] { COMMAND_UPDATE_TASK };
     }
 
-    public HashMap<String, String[]> getCommandKeywordMap() {
+    public Map<String, String[]> getCommandKeywordMap() {
         String[] keywords = new String[] {
             TaskTokenizer.KEYWORD_EVENT_END_DATE,
             TaskTokenizer.KEYWORD_EVENT_START_DATE,

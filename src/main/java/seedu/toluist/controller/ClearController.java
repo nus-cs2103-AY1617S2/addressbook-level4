@@ -2,7 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
@@ -24,7 +24,7 @@ public class ClearController extends Controller {
                                                         + "not just on the current task window.",
                                                     "The `undo` command can undo this action." };
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();

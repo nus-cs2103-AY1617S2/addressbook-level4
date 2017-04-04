@@ -3,6 +3,7 @@ package seedu.toluist.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
@@ -45,7 +46,7 @@ public class TagController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
@@ -90,7 +91,7 @@ public class TagController extends Controller {
                 StringUtil.nounWithCount("tag", successCount)));
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
         String replacedCommand = Pattern.compile(COMMAND_TAG_WORD, Pattern.CASE_INSENSITIVE).matcher(command)

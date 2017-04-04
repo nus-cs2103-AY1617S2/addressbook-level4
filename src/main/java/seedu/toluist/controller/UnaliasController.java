@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +31,7 @@ public class UnaliasController extends Controller {
   //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         String alias = tokens.get(PARAMETER_ALIAS);
 
         if (!aliasConfig.isAlias(alias)) {
@@ -47,7 +48,7 @@ public class UnaliasController extends Controller {
         }
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

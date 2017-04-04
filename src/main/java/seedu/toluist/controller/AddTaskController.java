@@ -3,6 +3,7 @@ package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -62,7 +63,7 @@ public class AddTaskController extends Controller {
                                                         + "Adds a new task, with high priority." };
 
     //@@author A0127545A
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
@@ -94,7 +95,7 @@ public class AddTaskController extends Controller {
         uiStore.setCommandResult(commandResult);
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, false, true);
     }
 
@@ -174,7 +175,7 @@ public class AddTaskController extends Controller {
         return new String[] { COMMAND_ADD_TASK };
     }
 
-    public HashMap<String, String[]> getCommandKeywordMap() {
+    public Map<String, String[]> getCommandKeywordMap() {
         String[] keywords = new String[] {
             TaskTokenizer.KEYWORD_EVENT_END_DATE,
             TaskTokenizer.KEYWORD_EVENT_START_DATE,

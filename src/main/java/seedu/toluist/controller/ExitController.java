@@ -1,7 +1,7 @@
 //@@author A0131125Y
 package seedu.toluist.controller;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
@@ -19,7 +19,7 @@ public class ExitController extends Controller {
     private static final String[] HELP_COMMENTS = { "Your data will save automatically.",
                                                     "You can re-open the program by clicking on the .jar file." };
 
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
     }
 

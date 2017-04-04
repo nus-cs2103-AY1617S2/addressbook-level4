@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,7 @@ public abstract class Controller {
      * update the UI
      * @param tokens dictionary of tokens
      */
-    public abstract void execute(HashMap<String, String> tokens);
+    public abstract void execute(Map<String, String> tokens);
 
     /**
      * Given command string, tokenize the string into
@@ -43,7 +44,7 @@ public abstract class Controller {
      * @param command
      * @return dictionary of tokens with value
      */
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
         for (Pair<String, String> tokenPair : keywordize(command)) {
             tokens.put(tokenPair.getKey(), tokenPair.getValue());
@@ -83,7 +84,7 @@ public abstract class Controller {
     /**
      * Returns mapping of keywords with possible values used by controller
      */
-    public HashMap<String, String[]> getCommandKeywordMap() {
+    public Map<String, String[]> getCommandKeywordMap() {
         return new HashMap<>();
     }
 

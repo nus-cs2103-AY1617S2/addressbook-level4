@@ -3,6 +3,7 @@ package seedu.toluist.controller;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,7 +46,7 @@ public class StoreController extends Controller {
 
 
     //@@author A0131125Y
-    public void execute(HashMap<String, String> tokens) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass() + "will handle command");
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
@@ -76,7 +77,7 @@ public class StoreController extends Controller {
         }
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
