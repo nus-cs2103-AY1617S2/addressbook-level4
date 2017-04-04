@@ -66,10 +66,6 @@ public class SearchParameters {
         private boolean startAfter = false;
         private boolean dueAfter = false;
 
-        public Builder() {
-
-        }
-
         public Builder name(Set<String> names) {
             namesToCompare = names;
             return this;
