@@ -16,6 +16,7 @@ import seedu.tache.commons.util.StringUtil;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
+    public static final String SHORT_COMMAND_WORD = "li";
 
     public static final String MESSAGE_SUCCESS = "%1$s tasks listed";
 

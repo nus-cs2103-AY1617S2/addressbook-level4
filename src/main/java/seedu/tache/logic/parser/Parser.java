@@ -49,42 +49,54 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.SHORT_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.SHORT_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.SHORT_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+        case ClearCommand.SHORT_COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.SHORT_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.SHORT_COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
+        case ExitCommand.SHORT_COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+        case HelpCommand.SHORT_COMMAND_WORD:
             return new HelpCommandParser().parse(arguments);
 
         case CompleteCommand.COMMAND_WORD:
+        case CompleteCommand.SHORT_COMMAND_WORD:
             return new CompleteCommandParser().parse(arguments);
 
         case SaveCommand.COMMAND_WORD:
+        case SaveCommand.SHORT_COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
 
         case LoadCommand.COMMAND_WORD:
+        case LoadCommand.SHORT_COMMAND_WORD:
             return new LoadCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
+        case UndoCommand.SHORT_COMMAND_WORD:
             return new UndoCommand();
 
         default:

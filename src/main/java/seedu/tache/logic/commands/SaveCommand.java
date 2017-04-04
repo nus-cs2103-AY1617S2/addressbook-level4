@@ -19,6 +19,7 @@ import seedu.tache.model.util.SampleDataUtil;
 public class SaveCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "save";
+    public static final String SHORT_COMMAND_WORD = "s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the save location of the"
             + "data files based on the directory entered or selected.\n"

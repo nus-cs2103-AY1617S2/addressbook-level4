@@ -23,6 +23,7 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 public class AddCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "add";
+    public static final String SHORT_COMMAND_WORD = "a";
     public static final String TAG_SEPARATOR = "t/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
