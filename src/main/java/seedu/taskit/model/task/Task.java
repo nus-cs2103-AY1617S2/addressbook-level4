@@ -23,14 +23,6 @@ public class Task implements ReadOnlyTask{
 
     /**
      * Constructor for tasks
-<<<<<<< HEAD
-=======
-     * @param title
-     * @param start
-     * @param end
-     * @param priority
-     * @param tags
->>>>>>> GUI_new
      * @throws IllegalValueException
      */
     public Task(Title title, Date start, Date end, Priority priority, UniqueTagList tags) throws IllegalValueException {
