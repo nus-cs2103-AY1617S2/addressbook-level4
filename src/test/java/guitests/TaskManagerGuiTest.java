@@ -119,6 +119,15 @@ public abstract class TaskManagerGuiTest {
         assertEquals(size, numberOfTasks);
     }
 
+    //@@author A0124368A
+    /**
+     * Asserts that the placeholder text exists in the task panels.
+     */
+    protected void assertPlaceholderTextExists() {
+        assertTrue(taskListPanel.getPlaceholderText().length() > 0);
+    }
+    //@@author
+
     /**
      * Asserts the message shown in the Result Display area is same as the given string.
      */
