@@ -20,6 +20,7 @@ public class TaskCard extends UiPart<Region> {
     private static final String STYLE_PRIORITY_HIGH = "priority-high";
     private static final String STYLE_PRIORITY_MID = "priority-mid";
     private static final String STYLE_PRIORITY_LOW = "priority-low";
+    private static final String STYLE_COMPLETED_TASK = "complete";
     //@@author
 
     @FXML
@@ -50,7 +51,11 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         setPriorityView(task);
         note.setText(task.getNote().map(Note::toString).orElse(""));
-        status.setText(task.getStatus().toString());
+
+        if (task.getStatus().isComplete()) {
+            cardPane.getStyleClass().add(STYLE_COMPLETED_TASK);
+        }
+
         startTime.setText(task.getStartTime().map(DateTime::toString).map(s -> "Start: " + s).orElse(""));
         endTime.setText(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""));
         //@@author
