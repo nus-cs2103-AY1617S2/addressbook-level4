@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0142255M -->
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="taskListTypePlaceholder" styleClass="task-list-header" xmlns="http://javafx.com/javafx/8.0.111"
+    xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@TacheTheme.css" />
+    </stylesheets>
+    <Label fx:id="taskListType" maxWidth="200" prefWidth="200" minHeight="80"/>
+</AnchorPane>

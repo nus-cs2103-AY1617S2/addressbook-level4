@@ -1,0 +1,111 @@
+<!-- @@author A0139925U -->
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
+
+<!-- @@author A0142255M -->
+<style>
+    * {
+      font-family: "Segoe UI Semibold"
+    }
+
+    .fc button {
+        color: #5f77bd;
+    }
+
+    .fc-toolbar h2 {
+        color: #5f77bd;
+    }
+
+    .fc-day-number {
+        color: #5f77bd;
+    }
+
+    .fc-day-header {
+        color: #5f77bd;
+    }
+
+    .fc-unthemed td.fc-today {
+        background: #c3cfe2;
+    }
+}
+</style>
+
+<body>
+    <div id='calendar'></div>
+</body>
+
+<script>
+
+$(document).ready(function() {
+    $('#calendar').fullCalendar({
+        aspectRatio: 1.5,
+        height: 'parent',
+        header: {
+            left: 'prev, next, today',
+            center: 'title',
+            right: 'month, basicWeek, basicDay'
+        },
+        navLinks: true, // can click day/week names to navigate views
+        timeFormat: 'HH:mm',
+        selectable: true,
+        dayClick: function(date, jsEvent, view) {
+            $('#calendar').fullCalendar( 'changeView', 'agendaDay' );
+            $('#calendar').fullCalendar( 'gotoDate', date );
+        }
+    });
+    $('#calendar').fullCalendar('render');
+});
+
+function add_event(title, start, end, status) {
+    $(document).ready(function() {
+        var color = 'white';
+        if (status === "uncompleted") {
+            color = '#5f77bd';
+        } else if (status === "overdue") {
+            color = '#ef044b';
+        } else {
+            color = 'grey';
+        }
+        var event = {
+            title: title,
+            start: start,
+            color: color
+        };
+        if (end !== "'0'") {
+            event.end = end;
+        }
+        $('#calendar').fullCalendar( 'renderEvent', event, true );
+    });
+}
+
+function remove_all() {
+    $(document).ready(function() {
+        $('#calendar').fullCalendar( 'removeEvents' );
+    });
+}
+
+function change_view(view) {
+    var newView;
+    if (view === "day") {
+        newView = 'agendaDay';
+    } else if (view === "week") {
+        newView = 'agendaWeek';
+    } else {
+        newView = 'month';
+    }
+    $(document).ready(function() {
+        $('#calendar').fullCalendar( 'changeView', newView );
+    });
+}
+
+function change_reference_date(date) {
+    $(document).ready(function() {
+        $('#calendar').fullCalendar( 'changeView', 'month' );
+        $('#calendar').fullCalendar( 'gotoDate', date );
+        $('#calendar').fullCalendar( 'select', date );
+    });
+}
+
+</script>

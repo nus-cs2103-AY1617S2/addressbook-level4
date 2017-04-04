@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@TacheTheme.css" />
+    </stylesheets>
+    <children>
+        <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
+    </children>
+</VBox>
