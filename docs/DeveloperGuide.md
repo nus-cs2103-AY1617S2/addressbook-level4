@@ -200,9 +200,9 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-**Handling Undo Command**
+**Handling Undo/Redo Command**
 
-The second TodoList object stored by the Model makes undoing commands very simple. When the Logic component instructs the Model to undo the last command, the Model simply copies the previous state into the TodoList data and sets the previous state to null. Of course, as with other modifying commands, a TodoListEventChanged event is raised. The Sequence Diagram below shows how the components interact when the user enters the "undo" command.
+As shown is Figure 2.4.1, the `Model` component stores two stacks. One of these stacks keeps a record of all previous states, and one keeps a record of all next states. Initially, the next states stack is empty. When a user runs a modifying command such as `add`, the current todo list is pushed into the previous states stack before the command is run. If the user then runs `undo`, the current todo list is pushed into the next states stack. Then, the previous state is popped from previous states stack and used to populate the current todo list. If the user subsequenty runs `redo`, the current todo list is pushed into the previous states stack. Then, the next state is popped from the next states stack and used to populate the current todo list. This allows the user to undo/redo as many commands as they wish. The Sequence Diagram below shows how the components interact when the user enters the "undo" command.
 
 <img src="images/SDforUndoCommand.png" width="800"><br>
 _Figure 2.4.1 : Sequence Diagram for Undo Command_
