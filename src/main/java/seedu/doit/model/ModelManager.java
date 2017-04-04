@@ -126,6 +126,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void deleteTasks(Set<ReadOnlyTask> targets) throws TaskNotFoundException {
+        logger.info("delete task(s) in model manager");
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
+        for (ReadOnlyTask target: targets) {
+            this.taskManager.removeTask(target);
+        }
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         logger.info("add task in model manager");
         taskManagerStack.addToUndoStack(this.getTaskManager());

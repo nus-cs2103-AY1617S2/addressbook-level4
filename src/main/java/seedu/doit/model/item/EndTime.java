@@ -80,11 +80,6 @@ public class EndTime  implements Comparable<EndTime> {
     }
 
     @Override
-    public int hashCode() {
-        return this.value.hashCode();
-    }
-
-    @Override
     public int compareTo(EndTime other) {
         return this.value.compareTo(other.value);
     }
