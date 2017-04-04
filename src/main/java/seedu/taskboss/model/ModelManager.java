@@ -147,10 +147,12 @@ public class ModelManager extends ComponentManager implements Model {
                         task.getStartDateTime(), task.getEndDateTime(),
                         task.getInformation(), task.getRecurrence(),
                         new UniqueCategoryList(CATEGORY_DONE));
-                this.taskBoss.updateTask(targetIndex, newTask);
+                int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
+                this.taskBoss.updateTask(taskBossIndex, newTask);
             } else {
                 Task newRecurredTask = createRecurredTask(task);
-                this.taskBoss.updateTask(targetIndex, newRecurredTask);
+                int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
+                this.taskBoss.updateTask(taskBossIndex, newRecurredTask);
             }
             index++;
         }
