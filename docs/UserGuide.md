@@ -28,7 +28,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 Do you love the adrenaline rush you get when you check an item off your to-do list, but are you too busy to actually make one? Use Doist today, be a Doist and feel more organised than ever before!
 
-Doist is the comprehensive tool to help you in all your planning. It allows you to key in, sort, tag, set reminders and even search for your tasks and events so that you can focus on getting things done. Your hands never need to leave the keyboard with our command-line input interface, and our easy-to-use UI will keep you coming back for more. Once you are a Doist, there's no looking back.
+Doist is the comprehensive tool to help you in all your planning. It allows you to key in, sort, tag and even search for your tasks and events so that you can focus on getting things done. Your hands never need to leave the keyboard with our command-line input interface, and our easy-to-use UI will keep you coming back for more. Once you are a Doist, there's no looking back.
 
 Doist. Rediscover your love for doing things, one line at a time!
 
@@ -53,7 +53,11 @@ Are you ready to be a Doist?
 
 ### Getting started with commands :
 
+You will notice that the commands get *highlighted* with different colours as you type!
+Additionally, when you start typing a command, Doist will provide you with command word suggestions.
+Just press <kbd>TAB</kbd> to accept the first suggestion! <br> <br>
 Type the following commands and press <kbd>Enter</kbd> after each command.
+
 1. **`add Attend group meeting \from 3pm \to 5pm`**. <br>
 Adds an event for today with a description of "Attend group meeting" from 3pm to 5pm today
 2. **`add Go grocery shopping \by 6pm 25th Oct`**. <br>
@@ -81,7 +85,7 @@ Take note of some general information for our commands :
 > * All keys start with the backslash `\`. <br>
 > *e.g.* `\from`, `\to` are the keys in `add Buy the milk \from 3pm \to 5pm` <br>
 > * Command words and keys that consist of multiple words will not contain spaces. Underscores are used instead. <br>
-> *e.g.* `list_tag`, `\remind_at` <br>
+> *e.g.* `list_tag` <br>
 > * Words in `UPPER_CASE` are the values. You can enter whatever you want for them!<br>
 > * If you want to use backslash `\` in the value, use `\\`. <br>
 > *e.g.* `add Remember to check file at C:\\users\\! \by 3pm` would appear as Remember to check file at C:\users\. <br>
@@ -156,7 +160,7 @@ Hour (24 hour format)| 3
 > - If you do not explicitly state the date, the date will be assumed to be within the next 24 hours <br>
 > - If you do not explicitly state the time, the time will be assumed to be the current time of the day
 > - If you do not explicitly state the year, the year will be assumed to be the current year
-> - Note that the start time and remind time must be earlier or equal to the end time
+> - Note that the start time must be earlier or equal to the end time
 
 **Priority** <br>
 Add a task with higher priorities with the `\as` key. By default, tasks are of normal priority. Since we all have certain tasks that are more important than others, you can indicate that they are important or very important! <br>
@@ -184,7 +188,7 @@ Format: `[\under TAG...]`
 **Sample Commands:**
 
 * `do group meeting \from 4pm today \to 6pm today \as important \under school_work CS2103T`
-* `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday`
+* `add submit pre-tutorial activities \by 6pm this Wednesday`
 
 ### 3.3 Listing tasks : `list`
 
@@ -232,8 +236,9 @@ Format: `[\under TAG]`
 
 ### 3.4 Finding a task : `find`
 
-You can use the `find` command to find tasks whose description contains any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br>
-<br>
+You can use the `find` command to find tasks whose description contains any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br> <br>
+Doist will suggest descriptions of existing tasks. Just press <kbd>TAB</kbd> to accept the first suggestion!
+<br><br>
 Format: `find 'QUERY' ['QUERY'...]`
 > **Examples:** <br>
 > - `find buy groceries` <br>
