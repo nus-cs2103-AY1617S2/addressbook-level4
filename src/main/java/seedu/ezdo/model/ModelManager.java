@@ -146,8 +146,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void undo() throws EmptyStackException {
         ReadOnlyEzDo currentState = new EzDo(this.getEzDo());
-        ReadOnlyEzDo prevState = undoStack.pop();
-        ezDo.resetData(prevState);
+        ezDo.resetData(undoStack.pop());
         redoStack.push(currentState);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
