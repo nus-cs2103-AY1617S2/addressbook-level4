@@ -36,6 +36,7 @@ public interface ReadOnlyTask {
                         && other.getName().equals(this.getName()) // state
                                                                   // checks here
                                                                   // onwards
+                        && other.getDone() == this.getDone()
                         && other.getPriority().equals(this.getPriority())
                         && other.getStartDate().equals(this.getStartDate()))
                         && other.getDueDate().equals(this.getDueDate())

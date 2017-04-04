@@ -161,9 +161,19 @@ public class EzDo implements ReadOnlyEzDo {
 
     public void toggleTasksDone(ArrayList<Task> p) {
         for (int i = 0; i < p.size(); i++) {
-            p.get(i).toggleDone();
-            updateRecurringDates(p.get(i));
+            Task task = p.get(i);
+            updateRecurringDates(task);
+            moveCurrentTaskToDone(task);
         }
+    }
+
+    private void moveCurrentTaskToDone(Task task) {
+        try {
+            task.setRecur(new Recur(""));
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+        task.toggleDone();
     }
 
     // @@author A0139177W
@@ -181,11 +191,12 @@ public class EzDo implements ReadOnlyEzDo {
                 String dueDate = updateDate(recurringInterval, dueDateInString);
 
                 tasks.add(new Task(task.getName(), task.getPriority(), new StartDate(startDate),
-                        new DueDate(dueDate), new Recur(""), task.getTags()));
+                        new DueDate(dueDate), task.getRecur(), task.getTags()));
 
             } catch (IllegalValueException ive) {
                 // Do nothing as the date is optional
                 // and cannot be parsed as Date object
+                ive.printStackTrace();
             }
         }
     }
@@ -200,6 +211,7 @@ public class EzDo implements ReadOnlyEzDo {
         } catch (ParseException pe) {
             // Do nothing as the date is optional
             // and cannot be parsed as Date object
+            pe.printStackTrace();
         }
         return originalDate;
     }
