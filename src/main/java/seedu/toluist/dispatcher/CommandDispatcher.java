@@ -81,8 +81,8 @@ public class CommandDispatcher extends Dispatcher {
         List<Function<String, SortedSet<String>>> getSuggestionMethods = Arrays.asList(
                 this::getCommandWordAndAliasSuggestions,
                 this::getSearchSuggestions,
-                this::getKeywordSuggestions,
-                this::getKeywordArgumentSuggestions
+                this::getKeywordArgumentSuggestions,
+                this::getKeywordSuggestions
         );
 
         return getSuggestionMethods.stream()
@@ -167,6 +167,12 @@ public class CommandDispatcher extends Dispatcher {
         keywordValuePairs.remove(0);
 
         Pair<String, String> lastKeywordTokenPair = keywordValuePairs.get(keywordValuePairs.size() - 1);
+
+        // Do not suggests arguments if something is already there
+        if (!StringUtil.isPresent(lastComponentOfCommand)
+            && StringUtil.isPresent(lastKeywordTokenPair.getValue())) {
+            return new TreeSet<>();
+        }
 
         return Arrays.stream(keywordMap.get(lastKeywordTokenPair.getKey()))
                 .filter(value -> StringUtil.startsWithIgnoreCase(value, lastComponentOfCommand))

@@ -120,4 +120,28 @@ public class CommandDispatcherTests {
 
         assertEquals(dispatcher.getSuggestions("help asdfasdfsadfaf"), expected);
     }
+
+    @Test
+    public void getSuggestions_keywordWithArgumentsOverMoreKeywords() {
+        SortedSet<String> expected = new TreeSet<>();
+        expected.add("daily");
+        expected.add("monthly");
+        expected.add("weekly");
+        expected.add("yearly");
+
+        assertEquals(dispatcher.getSuggestions("add task /repeat "), expected);
+    }
+
+    @Test
+    public void getSuggestions_noSuggestKeywordArgumentsIfAlreadyThere() {
+        SortedSet<String> expected = new TreeSet<>();
+        expected.add("/by");
+        expected.add("/from");
+        expected.add("/to");
+        expected.add("/repeatuntil");
+        expected.add("/tags");
+        expected.add("/priority");
+
+        assertEquals(dispatcher.getSuggestions("add task /repeat daily "), expected);
+    }
 }

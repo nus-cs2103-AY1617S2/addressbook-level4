@@ -231,8 +231,10 @@ public class AddTaskController extends Controller {
                 new String[] { Task.HIGH_PRIORITY_STRING, Task.LOW_PRIORITY_STRING });
         keywordMap.put(TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
                 new String[] {
-                    Task.RecurringFrequency.DAILY.name(), Task.RecurringFrequency.WEEKLY.name(),
-                    Task.RecurringFrequency.MONTHLY.name(), Task.RecurringFrequency.YEARLY.name()
+                    Task.RecurringFrequency.DAILY.name().toLowerCase(),
+                    Task.RecurringFrequency.WEEKLY.name().toLowerCase(),
+                    Task.RecurringFrequency.MONTHLY.name().toLowerCase(),
+                    Task.RecurringFrequency.YEARLY.name().toLowerCase()
                 });
         return keywordMap;
     }
