@@ -2,98 +2,183 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ezdo.commons.core.Messages.MESSAGE_WRONG_LIST;
 import static seedu.ezdo.logic.commands.DoneCommand.MESSAGE_DONE_TASK_SUCCESS;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.ezdo.commons.core.Messages;
+import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.logic.commands.DoneCommand;
+import seedu.ezdo.logic.parser.DateParser;
+import seedu.ezdo.model.todo.DueDate;
+import seedu.ezdo.model.todo.Recur;
+import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.testutil.TaskBuilder;
 import seedu.ezdo.testutil.TestTask;
 import seedu.ezdo.testutil.TestUtil;
+
 //@@author A0141010L
 public class DoneCommandTest extends EzDoGuiTest {
+
     @Test
     public void done_success() {
-        //marks first task in the list as done
+
+        // marks a recurring task in the list as done
         TestTask[] currentList = td.getTypicalTasks();
         TestTask[] doneList = td.getTypicalDoneTasks();
-        int targetIndex = 1;
-        TestTask toDone = currentList[targetIndex - 1];
+        int targetIndex = currentList.length;
+        TestTask doneTask1 = currentList[targetIndex - 1];
         assertDoneSuccess(false, targetIndex, currentList, doneList);
+        doneList = TestUtil.addTasksToList(doneList, doneTask1);
 
-        //marks the middle task in the list as done
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-        doneList = TestUtil.addTasksToList(doneList, toDone);
-        targetIndex = currentList.length / 2;
-        toDone = currentList[targetIndex - 1];
-        assertDoneSuccess(true, targetIndex, currentList, doneList);
+        // reset td.george (dates taken from typical test case) and set recurrence to nil
+        commandBox.runCommand("edit " + targetIndex + " s/02/07/2012 04:55 " + "d/17/07/2015 22:22 " + "f/");
+        TestTask editedTask = new TaskBuilder(currentList[targetIndex - 1]).build();
 
-        //marks last task in the list as done
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-        doneList = TestUtil.addTasksToList(doneList, toDone);
+        //marks that non recurring task in a list as done
         targetIndex = currentList.length;
-        toDone = currentList[targetIndex - 1];
         assertDoneSuccess(false, targetIndex, currentList, doneList);
+        doneList = TestUtil.addTasksToList(doneList, editedTask);
 
-        //invalid index
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-        doneList = TestUtil.addTasksToList(doneList, toDone);
+        // invalid index
         commandBox.runCommand("done " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid.");
 
-        //invalid command
+        // invalid command
         commandBox.runCommand("done a");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
 
-        //invalid command
+        // invalid command
         commandBox.runCommand("dones 1");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 
-        //view done tasks
+        // view done tasks
         commandBox.runCommand("done");
         assertTrue(taskListPanel.isListMatching(doneList));
 
-        //invalid input when viewing done task
-        commandBox.runCommand("done " + doneList.length);
-        assertResultMessage(MESSAGE_WRONG_LIST);
-
     }
 
-    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, final TestTask[] currentList,
-                                   final TestTask[] doneList) {
+    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, TestTask[] currentTaskList,
+            TestTask[] doneTaskList) {
 
-        TestTask taskToDone = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestTask taskToDone = currentTaskList[targetIndexOneIndexed - 1]; // -1 as
+                                                                      // array
+                                                                      // uses
+                                                                      // zero
+                                                                      // indexing
+        /* try {
+            taskToDone.setRecur(new Recur(""));
+        } catch (IllegalValueException e) {
+
+        }
         ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
-        tasksToDone.add(taskToDone);
-        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
-        TestTask[] expectedDone = TestUtil.addTasksToList(doneList, taskToDone);
-
+        tasksToDone.add(taskToDone); // old date
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
+        doneList = TestUtil.addTasksToList(doneList, taskToDone);
+        */
         if (usesShortCommand) {
             commandBox.runCommand("d " + targetIndexOneIndexed);
         } else {
             commandBox.runCommand("done " + targetIndexOneIndexed);
         }
 
-        //confirm the list now contains all done tasks including the one just marked as done
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        if (!taskToDone.getRecur().isRecur()) {
+            try {
+                taskToDone.setRecur(new Recur(""));
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+            ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
+            tasksToDone.add(taskToDone); // old date
+            currentTaskList = TestUtil.removeTaskFromList(currentTaskList, targetIndexOneIndexed);
+            doneTaskList = TestUtil.addTasksToList(doneTaskList, taskToDone);
 
-        //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
+            // confirm the task list no longer has the done task
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
 
-        //confirm the new done list contains the right data
-        commandBox.runCommand("done");
-        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
-        assertMatching(taskToDone, addedCard);
-        assertTrue(taskListPanel.isListMatching(expectedDone));
+            // confirm the result message is correct
+            assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
 
-        //confirm the undone list does not contain the task just marked as done
-        commandBox.runCommand("list");
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+            // confirm the new done list contains the right data
+            commandBox.runCommand("done");
+            TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
+            assertMatching(taskToDone, addedCard);
+            assertTrue(taskListPanel.isListMatching(doneTaskList));
 
+            // confirm the undone list does not contain the task just marked as
+            // done
+            commandBox.runCommand("list");
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
+
+        } else {
+
+            ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
+            tasksToDone.add(taskToDone); // old date
+            currentTaskList = TestUtil.removeTaskFromList(currentTaskList, targetIndexOneIndexed);
+            doneTaskList = TestUtil.addTasksToList(doneTaskList, taskToDone);
+
+            TestTask recTask = updateRecTask(new TestTask(taskToDone));
+            try {
+                taskToDone.setRecur(new Recur(""));
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+            currentTaskList = TestUtil.addTasksToList(currentTaskList, recTask);
+            // confirm the task list no longer has the done task
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
+
+            // confirm the result message is correct
+            assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
+
+            // confirm the new done list contains the right data
+            commandBox.runCommand("done");
+            TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
+            assertMatching(tasksToDone.get(0), addedCard);
+            assertTrue(taskListPanel.isListMatching(doneTaskList));
+
+            // confirm the undone list does not contain the task just marked as
+            // done
+            commandBox.runCommand("list");
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
+        }
     }
 
+    private String updateDate(int type, String originalDate) {
+        try {
+            int increment = 1;
+            Calendar c = Calendar.getInstance();
+            c.setTime(DateParser.USER_OUTPUT_DATE_FORMAT.parse(originalDate));
+            c.add(type, increment);
+            return DateParser.USER_OUTPUT_DATE_FORMAT.format(c.getTime());
+        } catch (ParseException pe) {
+            // Do nothing as the date is optional
+            // and cannot be parsed as Date object
+        }
+        return originalDate;
+    }
+
+    private TestTask updateRecTask(TestTask taskToDone) {
+        String recurIntervalInString = taskToDone.getRecur().toString().trim();
+        int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
+
+        String startDateInString = taskToDone.getStartDate().value;
+        String dueDateInString = taskToDone.getDueDate().value;
+
+        String newStartDate = updateDate(recurringInterval, startDateInString);
+        String newDueDate = updateDate(recurringInterval, dueDateInString);
+
+        try {
+            taskToDone.setStartDate(new StartDate(newStartDate));
+            taskToDone.setDueDate(new DueDate(newDueDate));
+            taskToDone.setRecur(new Recur(""));
+        } catch (IllegalValueException e) {
+
+        }
+        return taskToDone;
+    }
 }

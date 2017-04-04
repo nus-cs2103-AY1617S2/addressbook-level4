@@ -17,15 +17,14 @@ public class DateParser {
 
     public static final String USER_DATE_OUTPUT_FORMAT = "dd/MM/yyyy HH:mm";
     public static final String DAY_MONTH_YEAR_FORMAT = "^([0-9]{1,2}[-/])([0-9]{1,2}[-/])([0-9]{4}.*)";
-    public final SimpleDateFormat userOutputDateFormat = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
+    public static final SimpleDateFormat USER_OUTPUT_DATE_FORMAT = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
 
     public String value;
 
-    /*
+    //@@author A0138907W
+    /**
      * Converts the date format from from user's input for Natty dependency.
      */
-    //@@author A0138907W
-
     public DateParser(String input) {
         // swap day and month as natty only accepts the MM/DD/YYYY format
         if (input.matches(DAY_MONTH_YEAR_FORMAT)) {
@@ -67,7 +66,7 @@ public class DateParser {
             Date parsedDate = dateGroupList.get(0).getDates().get(0);
 
             // Format parsed date to suit the UI
-            return userOutputDateFormat.format(parsedDate);
+            return USER_OUTPUT_DATE_FORMAT.format(parsedDate);
 
         } catch (IndexOutOfBoundsException e) {
             return taskDate;

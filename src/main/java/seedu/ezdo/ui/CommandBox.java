@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.ezdo.commons.core.LogsCenter;
@@ -18,6 +19,8 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
+    public static final String SUCCESS_STYLE_CLASS = "success";
+    public static final String MESSAGE_COMMANDBOX_TOOLTIP = "Command Box\nYou can type your commands here.";
 
     private final Logic logic;
 
@@ -26,6 +29,7 @@ public class CommandBox extends UiPart<Region> {
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
+        commandTextField.setTooltip(new Tooltip(MESSAGE_COMMANDBOX_TOOLTIP));
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }
@@ -39,12 +43,18 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private void handleCommandInputChanged() {
+        // reset command text field color if it is changed.
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+            commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
+        });
+
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
             // process result of the command
-            setStyleToIndicateCommandSuccess();
             commandTextField.setText("");
+            setStyleToIndicateCommandSuccess();
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
@@ -61,7 +71,7 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to indicate a successful command.
      */
     private void setStyleToIndicateCommandSuccess() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextField.getStyleClass().add(SUCCESS_STYLE_CLASS);
     }
 
     /**

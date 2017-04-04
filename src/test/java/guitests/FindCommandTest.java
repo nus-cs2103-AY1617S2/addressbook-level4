@@ -3,6 +3,9 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import seedu.ezdo.commons.core.Messages;
@@ -17,7 +20,7 @@ public class FindCommandTest extends EzDoGuiTest {
 
         assertFindResult("find Mark"); // no results
         assertFindResult("find Meier", td.benson, td.daniel); // multiple results
-        assertFindResult("find p/1", td.alice, td.benson);
+        assertFindResult("find p/1", td.alice);
         assertFindResult("find s/11/11/2015", td.benson);
         assertFindResult("find s/before 30/12/2012", td.daniel, td.elle, td.george);
         assertFindResult("find s/after 01/12/2015", td.alice, td.fiona);
@@ -25,19 +28,28 @@ public class FindCommandTest extends EzDoGuiTest {
         assertFindResult("find d/before 30/12/2014", td.carl);
         assertFindResult("find d/after 30/12/2016", td.alice, td.benson);
         assertFindResult("find t/owesMoney", td.benson);
-        assertFindResult("find Meier p/1", td.benson);
-        assertFindResult("find Meier p/1 s/11/11/2015", td.benson);
-        assertFindResult("find Meier p/1 s/11th Nov 2015", td.benson);
-        assertFindResult("find Meier p/1 s/Nov 11th 2015", td.benson);
-        assertFindResult("find Meier p/1 s/11-11-2015 d/12/02/2017 t/owesMoney t/friends", td.benson);
+        assertFindResult("find Meier p/2", td.daniel);
+        assertFindResult("find Meier s/11/11/2015", td.benson);
+        assertFindResult("find Meier s/11th Nov 2015", td.benson);
+        assertFindResult("find Meier s/Nov 11th 2015", td.benson);
+        assertFindResult("find Meier s/11-11-2015 d/12/02/2017 t/owesMoney t/friends", td.benson);
         assertFindResult("find p/2 d/april 14th 2016", td.daniel);
         assertFindResult("find p/2 d/14/04/2016", td.daniel);
-        assertFindResult("find p/1", td.alice, td.benson);
+        assertFindResult("find p/1", td.alice);
+
+        //find all tasks with priority
+        TestTask[] allTask = td.getTypicalTasks();
+        ArrayList<TestTask> resultList = new ArrayList<TestTask>();
+        resultList.addAll(Arrays.asList(allTask));
+        resultList.remove(1); //remove task without priority
+        TestTask[] resultArray = resultList.toArray(new TestTask[resultList.size()]);
+        assertFindResult("find p/", resultArray);
 
         //find after deleting one result
         commandBox.runCommand("list");
         commandBox.runCommand("kill 1");
         assertFindResult("find Meier", td.benson, td.daniel);
+
     }
 
     //@@author A0138907W
@@ -52,6 +64,7 @@ public class FindCommandTest extends EzDoGuiTest {
     }
 
     //@@author
+    //@@author A0141010L
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
@@ -67,6 +80,16 @@ public class FindCommandTest extends EzDoGuiTest {
         commandBox.runCommand("find s/10a");
         assertResultMessage("0 tasks listed!");
         commandBox.runCommand("find Meier p/1 s/11-11-2015 d/02/12/2017 t/owesMoney t/nonExistentTag");
+        assertResultMessage("0 tasks listed!");
+    }
+
+    @Test
+    public void find_nonexisting_task() {
+        commandBox.runCommand("find s/10a");
+        assertResultMessage("0 tasks listed!");
+        commandBox.runCommand("find Meier p/1 s/11-11-2015 d/02/12/2017 t/owesMoney t/nonExistentTag");
+        assertResultMessage("0 tasks listed!");
+        commandBox.runCommand("find CashMeOutsideHowBoutDat");
         assertResultMessage("0 tasks listed!");
     }
 

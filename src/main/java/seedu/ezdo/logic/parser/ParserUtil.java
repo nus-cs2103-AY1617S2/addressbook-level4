@@ -19,6 +19,7 @@ import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.TaskDate;
 
@@ -30,7 +31,14 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern SORT_CRITERIA_ARGS_FORMAT = Pattern.compile("(?<sortCriteria>.) ?(?<sortOrder>.)?");
     private static final Pattern INDEXES_ARGS_FORMAT = Pattern.compile("^([0-9]*\\s+)*[0-9]*$");
-    private static final Pattern COMMAND_ALIAS_ARGS_FORMAT = Pattern.compile("(?<command>.+) (?<alias>.+)");;
+    private static final String WHITESPACE_DELIMITER = "\\s+";
+
+    private static final int ALIAS_COMMAND_ADD_EXPECTED_ARGS = 2;
+    private static final int ALIAS_COMMAND_RESET_EXPECTED_ARGS = 1;
+    private static final int ALIAS_COMMAND_ARGS_COMMAND_INDEX = 0;
+    private static final int ALIAS_COMMAND_ARGS_ALIAS_INDEX = 1;
+    private static final String ALIAS_COMMAND_RESET_KEYWORD = "reset";
+
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -52,8 +60,8 @@ public class ParserUtil {
   //@@author A0139248X
     /**
      * Returns the specified indexes in the {@code command} if they are
-     * positive unsigned integers separated by whitespaces.
-     * Returns empty array list otherwise.
+     * positive unsigned integers separated by whitespace.
+     * Returns an empty {@code ArrayList<Integer>()} otherwise.
      */
     public static ArrayList<Integer> parseIndexes(String command) {
         final Matcher matcher = INDEXES_ARGS_FORMAT.matcher(command.trim());
@@ -61,8 +69,9 @@ public class ParserUtil {
             return new ArrayList<Integer>();
         }
         ArrayList<Integer> indexes = new ArrayList<Integer>();
-        for (String index : command.trim().split("\\s+")) {
-            indexes.add(Integer.parseInt(index));
+        String[] splitIndexes = command.trim().split(WHITESPACE_DELIMITER);
+        for (int i = 0; i < splitIndexes.length; i++) {
+            indexes.add(Integer.parseInt(splitIndexes[i]));
         }
         return indexes;
     }
@@ -85,16 +94,20 @@ public class ParserUtil {
 
     /**
      * Returns a string array of the specified command and alias in the {@code command} if both are present.
-     * Returns an empty String {@code Array} otherwise.
+     * Returns an {@code Optional.empty()} otherwise.
      */
-    public static String[] parseCommandAlias(String command) {
-        final Matcher matcher = COMMAND_ALIAS_ARGS_FORMAT.matcher(command.trim());
-        if (!matcher.matches()) {
-            return new String[0];
+    public static Optional<String[]> parseCommandAlias(String command) {
+        String[] args = command.trim().split("\\s+");
+        if (args.length == ALIAS_COMMAND_RESET_EXPECTED_ARGS
+            && args[ALIAS_COMMAND_ARGS_COMMAND_INDEX].equals(ALIAS_COMMAND_RESET_KEYWORD)) {
+            return Optional.of(new String[] {ALIAS_COMMAND_RESET_KEYWORD});
         }
-        String commandToAlias = matcher.group("command");
-        String alias = matcher.group("alias");
-        return new String[] {commandToAlias, alias};
+        if (args.length == ALIAS_COMMAND_ADD_EXPECTED_ARGS) {
+            String commandToAlias = args[ALIAS_COMMAND_ARGS_COMMAND_INDEX];
+            String alias = args[ALIAS_COMMAND_ARGS_ALIAS_INDEX];
+            return Optional.of(new String[] {commandToAlias, alias});
+        }
+        return Optional.empty();
     }
 
     //@@author
@@ -166,6 +179,17 @@ public class ParserUtil {
         return dueDate.isPresent() ? Optional.of(new DueDate(dueDate.get(), isFind)) : Optional.empty();
     }
 //@@author
+
+    //@@author A0139177W
+    /**
+     * Parses a {@code Optional<String> recur} into an {@code Optional<Recur>} if {@code recur} is present.
+     */
+    public static Optional<Recur> parseRecur(Optional<String> recur) throws IllegalValueException {
+        assert recur != null;
+        return recur.isPresent() ? Optional.of(new Recur(recur.get())) : Optional.empty();
+    }
+    //@@author
+
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */

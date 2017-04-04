@@ -47,5 +47,4 @@ public class FileUtilTest {
         when(dir.mkdirs()).thenReturn(false);
         FileUtil.createDirs(dir);
     }
-
 }

@@ -16,7 +16,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Other major contributions:
    * Taking care of administrative tasks (e.g. milestones, issues, and tagging).
    * Doing regular reviews of teammates' pull requests.
-   
+
 -----
 
 #### [Loh Zi Bin, Robin](http://github.com/robinloh)
@@ -40,7 +40,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Testing, Task comparision and searching
 * Features implemented:
    * [Done task index](https://github.com/CS2103JAN2017-W14-B4/main/blob/master/docs/UserGuide.md#3-marking-a-task-as-done-done--d)
-   * [Delete person](https://github.com/CS2103JAN2017-W14-B4/main/blob/master/docs/UserGuide.md#6-finding-tasks-find--f)
+   * [Find task](https://github.com/CS2103JAN2017-W14-B4/main/blob/master/docs/UserGuide.md#6-finding-tasks-find--f)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/main/A0141010L.md)][[test code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/main/A0141010L.md)]
 * Other major contributions:
   * Did the initial refactoring of Person's Email to Task's Priority
@@ -58,12 +58,12 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Undo command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#38-reverting-the-last-action-undo--u)
    * [Redo command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#39-redoing-the-last-undone-action-redo--r)
    * [Kill command](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#34-deleting-a-task-kill--k)
+   * [Multiple index command] (https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/docs/UserGuide.md#34-deleting-a-task-kill--k)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/main/A0139248X.md)][[test code](https://github.com/CS2103JAN2017-W14-B4/main/blob/v0.4/collated/test/A0139248X.md)]
 * Other major contributions:
    * Did the initial refactoring from AddressBook to ezDo
    * Set up Travis, Appveyor, Codacy, Coveralls and CircleCI
    * Code reviews
-   
-   
-   
+   * Code coverage
+
  -----

@@ -34,6 +34,7 @@ public class XmlEzDoStorage implements EzDoStorage {
 
     @Override
     public void setEzDoFilePath(String filePath) {
+        assert filePath != null;
         this.filePath = filePath;
     }
 
@@ -51,16 +52,12 @@ public class XmlEzDoStorage implements EzDoStorage {
     public Optional<ReadOnlyEzDo> readEzDo(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
-
         File ezDoFile = new File(filePath);
-
         if (!ezDoFile.exists()) {
             logger.info("EzDo file "  + ezDoFile + " not found");
             return Optional.empty();
         }
-
         ReadOnlyEzDo ezDoOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
-
         return Optional.of(ezDoOptional);
     }
 

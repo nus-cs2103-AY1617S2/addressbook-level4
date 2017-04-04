@@ -11,6 +11,9 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
  */
 public class DateUtil {
 
+    private static final String COMPARE_DATE_STRINGS_ACCEPTED_FORMAT = "dd/MM/yyyy HH:mm";
+    private static final String INVALID_DATE_FORMAT_MESSAGE = "The date format should not be invalid.";
+
     /**
      * Checks whether a task's dates are valid
      * @return true if the start date is earlier than or equal to the due date OR if either date is empty
@@ -18,12 +21,16 @@ public class DateUtil {
      */
     public static boolean isTaskDateValid(ReadOnlyTask task) throws ParseException {
         assert task != null;
-        if (task.getStartDate().toString().isEmpty() || task.getDueDate().toString().isEmpty()) {
+        String taskStartDate = task.getStartDate().toString();
+        String taskDueDate = task.getDueDate().toString();
+        final boolean isStartDateMissing = taskStartDate.isEmpty();
+        final boolean isDueDateMissing = taskDueDate.isEmpty();
+        if (isStartDateMissing || isDueDateMissing) {
             return true;
         }
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy H:mm");
-        Date startDate = df.parse(task.getStartDate().toString());
-        Date dueDate = df.parse(task.getDueDate().toString());
+        SimpleDateFormat df = new SimpleDateFormat(COMPARE_DATE_STRINGS_ACCEPTED_FORMAT);
+        Date startDate = df.parse(taskStartDate);
+        Date dueDate = df.parse(taskDueDate);
         return (startDate.compareTo(dueDate) <= 0);
     }
 
@@ -37,7 +44,7 @@ public class DateUtil {
      * @throws ParseException if any of the date strings cannot be parsed.
      */
     public static int compareDateStrings(String dateString1, String dateString2, Boolean isSortedAscending) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(COMPARE_DATE_STRINGS_ACCEPTED_FORMAT);
         Date date1 = null;
         Date date2 = null;
 
@@ -54,7 +61,7 @@ public class DateUtil {
             date1 = dateFormat.parse(dateString1);
             date2 = dateFormat.parse(dateString2);
         } catch (ParseException pe) {
-            assert false : "The date format should not be invalid.";
+            assert false : INVALID_DATE_FORMAT_MESSAGE;
         }
         int result = date1.compareTo(date2);
 

@@ -5,6 +5,7 @@ import java.util.EmptyStackException;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.exceptions.DateException;
+import seedu.ezdo.commons.util.SearchParameters;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
@@ -27,33 +28,35 @@ public interface Model {
 
     void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending);
   //@@author A0139248X
-    /** Deletes the given task. */
+    /** Deletes the given tasks.
+     * @throws TaskNotFoundException if any task is not found in ezDo
+     */
     void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given task. */
+    /** Adds a task.
+     * @throws DuplicateTaskException if the same task (all attributes and fields same) is already in ezDo
+     * @throws DateException if the start date is after the due date
+     */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException;
 
     /** Checks the task and makes sure the dates are logical.
-     * i.e. start date not after due date.
-     * @throws DateException
+     * @throws DateException if the start date is after the due date.
      */
     void checkTaskDate(ReadOnlyTask task) throws DateException;
 
-    /** Marks a task as done.
-     * @throws TaskNotFoundException */
-    void doneTasks(ArrayList<Task> tasksToDone);
+    /** Toggles the tasks as done/undone. */
+    boolean toggleTasksDone(ArrayList<Task> tasksToToggle);
 
-    /** Undo the previous undoable command
-     * @throws EmptyStackException */
+    /** Undo the previous undoable (add/edit/clear/kill/done) command
+     * @throws EmptyStackException if there are no commands to undo*/
     void undo() throws EmptyStackException;
 
     /** Redo the previous undone command
-     * @throws EmptyStackException */
+     * @throws EmptyStackException if there were no undone commands to redo*/
     void redo() throws EmptyStackException;
 
-    /** Update stack when new command is executed
-     * @throws EmptyStackException */
-    void updateStacks() throws EmptyStackException;
+    /** Update stacks when new command is executed*/
+    void updateStacks();
   //@@author A0139248X
 
     /**
@@ -73,7 +76,7 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by multiple fields*/
-    void updateFilteredTaskList(ArrayList<Object> listToCompare, ArrayList<Boolean> searchIndicatorList);
+    void updateFilteredTaskList(SearchParameters searchParameters);
 
     /** Updates the filter of the filtered task list to show done tasks*/
     void updateFilteredDoneList();

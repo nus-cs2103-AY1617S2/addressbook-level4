@@ -15,6 +15,7 @@ import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
@@ -28,7 +29,6 @@ public class UniqueTaskListTest {
     @Mock
     public ObservableList<Task> mock;
 
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -36,7 +36,7 @@ public class UniqueTaskListTest {
     public void remove_notFoundAndKilled() throws Exception {
         thrown.expect(TaskNotFoundException.class);
         Task task = new Task(new Name("lol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),
-                new UniqueTagList("jesus"));
+                new Recur(""), new UniqueTagList("jesus"));
         when(mock.remove(task)).thenReturn(false);
         utl.remove(task);
     }
@@ -45,5 +45,4 @@ public class UniqueTaskListTest {
     public void hashCode_equals() {
         assertTrue(utl.hashCode() == utl.hashCode());
     }
-
 }
