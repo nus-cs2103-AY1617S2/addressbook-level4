@@ -75,7 +75,7 @@ public class EditCommandParser {
     /**
      * convert the given startTime and endTime to editTodoDescriptor
      * if startTime lack of date information, it will set today as default
-     * if endTime lack of date information, it will set tomorrow as default 
+     * if endTime lack of date information, it will set tomorrow as default
      * @param editTodoDescriptor
      * @param startTime
      * @param endTime
