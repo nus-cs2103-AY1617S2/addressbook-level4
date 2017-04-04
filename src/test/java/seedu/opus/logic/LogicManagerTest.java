@@ -652,8 +652,10 @@ public class LogicManagerTest {
                              new TaskManager(), Collections.emptyList());
     }
 
+    @Test
     public void executeSyncCommandWithInvalidArgumentException() {
-        assertCommandFailure("sync invalid", SyncCommand.MESSAGE_USAGE);
+        assertCommandFailure("sync invalid", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                           SyncCommand.MESSAGE_USAGE));
     }
     //@@author
 
