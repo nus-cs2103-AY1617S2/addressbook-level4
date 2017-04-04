@@ -16,6 +16,7 @@ import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
+
 //@@author A0139248X
 @RunWith(PowerMockRunner.class)
 public class UniqueTaskListEnumTest {
@@ -31,13 +32,13 @@ public class UniqueTaskListEnumTest {
                 new Recur(""), new UniqueTagList("jesus")));
 
         SortCriteria c = PowerMockito.mock(SortCriteria.class);
-        Whitebox.setInternalState(c, "name", "C");
+        Whitebox.setInternalState(c, "name", "c");
         Whitebox.setInternalState(c, "ordinal", 4);
 
         PowerMockito.mockStatic(SortCriteria.class);
-        PowerMockito.when(SortCriteria.values()).thenReturn(
-                new SortCriteria[] {SortCriteria.NAME, SortCriteria.PRIORITY,
-                                    SortCriteria.DUE_DATE, SortCriteria.START_DATE, c});
+        PowerMockito.when(SortCriteria.values()).thenReturn(new SortCriteria[] {
+            SortCriteria.NAME, SortCriteria.PRIORITY, SortCriteria.DUE_DATE,
+            SortCriteria.START_DATE, c});
 
         utl.sortTasks(c, true);
     }
