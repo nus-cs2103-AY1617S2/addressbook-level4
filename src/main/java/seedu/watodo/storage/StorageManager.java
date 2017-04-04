@@ -76,13 +76,6 @@ public class StorageManager extends ComponentManager implements Storage {
         taskListStorage.saveTaskList(taskList, filePath);
     }
 
-    //@@author A0141077L
-    @Subscribe
-    public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
-        taskListStorage = new XmlTaskListStorage(event.newFilePath);
-    }
-    //@@author
-
     @Override
     @Subscribe
     public void handleTaskListChangedEvent(TaskListChangedEvent event) {
@@ -93,5 +86,13 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+
+    //@@author A0141077L
+    @Override
+    @Subscribe
+    public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
+        taskListStorage = new XmlTaskListStorage(event.newFilePath);
+    }
+    //@@author
 
 }
