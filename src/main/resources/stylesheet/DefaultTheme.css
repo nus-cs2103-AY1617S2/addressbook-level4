@@ -193,7 +193,7 @@
 /* STATUS BAR */
 
 .status-bar {
-    -fx-background-color: theme-primary-dark;
+    -fx-background-color: theme-primary-text;
     -fx-padding: 5;
 }
 
