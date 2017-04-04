@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_DATES;
 
-
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -47,26 +46,37 @@ public class EditCommandTest extends DoistGUITest {
     @Test
     public void edit_clearDates_success() throws Exception {
         String detailsToEdit = "\\by";
-        int addressBookIndex = 2;
+        int addressBookIndex = 1;
 
         TestTask personToEdit = expectedTasks[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).build();
+        TestTask editedPerson = new TaskBuilder(personToEdit).withDates(null, null).build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
     @Test
-    public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find math");
+    public void edit_clearTags_success() throws Exception {
+        String detailsToEdit = "\\under";
+        int addressBookIndex = 3;
 
-        String detailsToEdit = "Complete chemistry homework";
-        int filteredPersonListIndex = 1;
-        int todoListIndex = 3;
+        TestTask personToEdit = expectedTasks[addressBookIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withTags().build();
 
-        TestTask personToEdit = expectedTasks[todoListIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
-        assertEditSuccess(filteredPersonListIndex, todoListIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
+
+//    @Test
+//    public void edit_findThenEdit_success() throws Exception {
+//        commandBox.runCommand("find math");
+//
+//        String detailsToEdit = "Complete chemistry homework";
+//        int filteredPersonListIndex = 1;
+//        int todoListIndex = 3;
+//
+//        TestTask personToEdit = expectedTasks[todoListIndex - 1];
+//        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
+//        assertEditSuccess(filteredPersonListIndex, todoListIndex, detailsToEdit, editedPerson);
+//    }
 
     @Test
     public void edit_missingPersonIndex_failure() {

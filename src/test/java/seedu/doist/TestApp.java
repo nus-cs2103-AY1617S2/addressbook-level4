@@ -72,8 +72,7 @@ public class TestApp extends MainApp {
         ReadOnlyTodoList initialData = initTodoListData(storage);
         ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
 
-        // isTest is set to true so that tests don't have to consider auto sorting of tasks to pass
-        return new ModelManager(initialData, initialAliasData, userPrefs, config, true);
+        return new ModelManager(initialData, initialAliasData, userPrefs, config);
     }
 
     @Override

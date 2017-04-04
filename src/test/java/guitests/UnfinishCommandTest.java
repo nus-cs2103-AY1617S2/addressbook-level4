@@ -64,7 +64,7 @@ public class UnfinishCommandTest extends DoistGUITest {
 
         //confirm that UI is showing normal
         TaskCardHandle finishedCard = taskListPanel.getTaskCardHandle(taskToUnfinish);
-        assertTrue(finishedCard.isStyleInStyleClass("normal"));
+        assertTrue(finishedCard.isStyleInStyleClass("normal") || finishedCard.isStyleInStyleClass("overdue"));
 
         //confirm the result message is correct
         ArrayList<TestTask> tasksToUnfinish = new ArrayList<TestTask>();

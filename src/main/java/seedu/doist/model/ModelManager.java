@@ -56,7 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Initializes a ModelManager with the given to-do list and userPrefs.
      */
     public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs,
-                          Config config, boolean isTest) {
+                          Config config) {
         super();
         assert !CollectionUtil.isAnyNull(todoList, aliasListMap, userPrefs, config);
 
@@ -68,22 +68,14 @@ public class ModelManager extends ComponentManager implements Model {
         this.config = config;
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
-        //if (!isTest) {
         updateFilteredListToShowDefault();
         sortTasksByDefault();
-        //}
         saveCurrentToHistory();
     }
 
     public ModelManager() {
-        this(new TodoList(), new AliasListMap(), new UserPrefs(), new Config(), false);
+        this(new TodoList(), new AliasListMap(), new UserPrefs(), new Config());
     }
-
-    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs,
-                          Config config) {
-        this(todoList, aliasListMap, userPrefs, config, false);
-    }
-
 
 
     //=========== AliasListMap =============================================================
@@ -167,33 +159,31 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (TaskAlreadyUnfinishedException e) {
             assert false : "finishTask should not try to unfinish tasks!";
         }
-        updateFilteredListToShowDefault();
         sortTasksByDefault();
         indicateTodoListChanged();
-        return todoList.getTaskIndex(target);
+        return getFilteredTaskList().indexOf(target);
     }
 
     @Override
     public int unfinishTask(ReadOnlyTask target) throws TaskNotFoundException,
         TaskAlreadyUnfinishedException {
+        assert target != null;
         try {
             todoList.changeTaskFinishStatus(target, false);
         } catch (TaskAlreadyFinishedException e) {
             assert false : "unfinishTask should not try to finish tasks!";
         }
-        updateFilteredListToShowDefault();
         sortTasksByDefault();
         indicateTodoListChanged();
-        return todoList.getTaskIndex(target);
+        return getFilteredTaskList().indexOf(target);
     }
 
     @Override
     public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
-        updateFilteredListToShowDefault();
         sortTasksByDefault();
         indicateTodoListChanged();
-        return todoList.getTaskIndex(task);
+        return getFilteredTaskList().indexOf(task);
     }
 
     @Override
@@ -203,10 +193,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         int todoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         todoList.updateTask(todoListIndex, editedTask);
-        updateFilteredListToShowDefault();
         sortTasksByDefault();
         indicateTodoListChanged();
-        return todoList.getTaskIndex(editedTask);
+        return getFilteredTaskList().indexOf(editedTask);
     }
 
     @Override

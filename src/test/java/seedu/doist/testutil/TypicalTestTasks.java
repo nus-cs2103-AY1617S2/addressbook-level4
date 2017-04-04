@@ -29,7 +29,7 @@ public class TypicalTestTasks {
             work = new TaskBuilder().withName("Schedule meeting with boss").withPriority("IMPORTANT").build();
             school = new TaskBuilder().withName("Submit chemistry assignment").build();
             groceries = new TaskBuilder().withName("Pick up milk").build();
-            shopping = new TaskBuilder().withName("Buy new clock").build();
+            shopping = new TaskBuilder().withName("Buy new clock").withDates(new Date(), new Date()).build();
 
             // Manually added
             email = new TaskBuilder().withName("Send emails to client").build();
