@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import seedu.watodo.commons.core.Config;
 import seedu.watodo.commons.core.EventsCenter;
 import seedu.watodo.commons.core.LogsCenter;
-import seedu.watodo.commons.events.model.StorageFilePathChangedEvent;
+import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.ConfigUtil;
@@ -48,12 +48,15 @@ public class SaveAsCommand extends Command {
     }
 
     private Config getConfig() {
+        Config initialisedConfig;
+
         try {
             Optional<Config> optionalConfig = ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE);
-            return optionalConfig.orElse(new Config());
+            initialisedConfig = optionalConfig.orElse(new Config());
         } catch (DataConversionException dce) {
-            return new Config();
+            initialisedConfig = new Config();
         }
+        return initialisedConfig;
     }
 
     @Override
@@ -72,7 +75,7 @@ public class SaveAsCommand extends Command {
             return new CommandResult (ioe.getMessage());
         }
 
-        EventsCenter.getInstance().post(new StorageFilePathChangedEvent(this.currConfig));
+        EventsCenter.getInstance().post(new StorageFilePathChangedEvent(this.newFilePath));
         logger.log(Level.INFO, "Storage file location moved successfully.");
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.newFilePath));
     }
