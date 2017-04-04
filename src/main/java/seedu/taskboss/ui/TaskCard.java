@@ -67,6 +67,7 @@ public class TaskCard extends UiPart<Region> {
     private void initStartDateTime(ReadOnlyTask task) {
         String startDate = task.getStartDateTime().value;
         if (startDate.isEmpty()) {
+            startDateTime.setText("Start: " + startDate);
             startDateTime.setVisible(false);
         } else {
             startDateTime.setText("Start: " + task.getStartDateTime().value);
@@ -79,6 +80,7 @@ public class TaskCard extends UiPart<Region> {
     private void initEndDateTime(ReadOnlyTask task) {
         String endDate = task.getEndDateTime().value;
         if (endDate.isEmpty()) {
+            endDateTime.setText("End: " + endDate);
             endDateTime.setVisible(false);
         } else {
             endDateTime.setText("End: " + task.getEndDateTime().value);
