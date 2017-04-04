@@ -35,6 +35,11 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList;
     }
 
+    //@@author A0148038A
+    public void clearAll() {
+        internalList.clear();
+    }
+
     //@@author A0110491U
     /**
      *
@@ -67,14 +72,10 @@ public class UniqueEventList implements Iterable<Event> {
      * @throws DuplicateEventException if the event to add is a duplicate of an existing event in the list.
      * @throws DuplicateTimeClashException
      */
-    public void add(Event toAdd) throws DuplicateEventException, DuplicateTimeClashException {
+    public void add(Event toAdd) throws DuplicateEventException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateEventException();
-        }
-
-        if (containsTimeClash(toAdd)) {
-            throw new DuplicateTimeClashException();
         }
         internalList.add(toAdd);
         internalList.sorted();
@@ -88,14 +89,11 @@ public class UniqueEventList implements Iterable<Event> {
      * @throws DuplicateTimeClashException if the edited event clashes with any other event
      */
     public void updateEvent(Event eventToEdit, Event editedEvent) throws UniqueEventList.
-        DuplicateEventException, DuplicateTimeClashException {
+        DuplicateEventException {
         assert eventToEdit != null && editedEvent != null;
 
         if (!eventToEdit.equals(editedEvent) && internalList.contains(editedEvent)) {
             throw new DuplicateEventException();
-        }
-        if (containsTimeClash(eventToEdit)) {
-            throw new DuplicateTimeClashException();
         }
         int index = internalList.indexOf(eventToEdit);
         internalList.set(index, editedEvent);
@@ -159,22 +157,18 @@ public class UniqueEventList implements Iterable<Event> {
         }
     }
 
-    //@@author A0110491U
-    /**
-     * Signals that an operation would violate the "no clashing time" property of this list
-     */
-    public static class DuplicateTimeClashException extends DuplicateDataException {
-        protected DuplicateTimeClashException() {
-            super("Operation would result in clash of event timing");
-        }
-    }
-    //@@author
     /**
      * Signals that an operation targeting a specified event in the list would fail because
      * there is no such matching event in the list.
      */
     public static class EventNotFoundException extends Exception {}
 
+    /**
+     * Signals that two events have time clash
+     * @author LiChengcheng
+     *
+     */
+    public class DuplicateTimeClashException extends Exception {}
 
     public void setEvents(List<? extends ReadOnlyEvent> events) throws IllegalValueException {
         final UniqueEventList replacement = new UniqueEventList();

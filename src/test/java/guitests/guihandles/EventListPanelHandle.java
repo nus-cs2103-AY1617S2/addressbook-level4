@@ -1,8 +1,6 @@
 package guitests.guihandles;
 
-
-import static org.junit.Assert.assertTrue;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -17,17 +15,18 @@ import seedu.address.model.person.Event;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.testutil.TestUtil;
 
+//@@author A0148038A
 /**
- * Provides a handle for the panel containing the activity list.
+ * Provides a handle for the panel containing the event list.
  */
-public class ActivityListPanelHandle extends GuiHandle {
+public class EventListPanelHandle extends GuiHandle {
 
     public static final int NOT_FOUND = -1;
     public static final String CARD_PANE_ID = "#cardPane";
 
-    private static final String PERSON_LIST_VIEW_ID = "#activityListView";
+    private static final String EVENT_LIST_VIEW_ID = "#eventListView";
 
-    public ActivityListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
+    public EventListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
@@ -37,7 +36,7 @@ public class ActivityListPanelHandle extends GuiHandle {
     }
 
     public ListView<ReadOnlyEvent> getListView() {
-        return getNode(PERSON_LIST_VIEW_ID);
+        return getNode(EVENT_LIST_VIEW_ID);
     }
 
     /**
@@ -54,16 +53,39 @@ public class ActivityListPanelHandle extends GuiHandle {
      * @param events A list of events in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyEvent... events) throws IllegalArgumentException {
+        int numInUIView = 0;
+        ArrayList<ReadOnlyEvent> eventslist = new ArrayList<ReadOnlyEvent>();
+        for (ReadOnlyEvent a : events) {
+            if (!a.isOver()) {
+                numInUIView++;
+                eventslist.add(a);
+            }
+        }
+        ReadOnlyEvent[] eventUIView = new ReadOnlyEvent[numInUIView];
+        int counter = 0;
+        for (ReadOnlyEvent each : eventslist) {
+            eventUIView[counter] = each;
+            counter++;
+        }
+        events = eventUIView;
         if (events.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " activities");
+                    "Expected " + (getListView().getItems().size() - 1) + " events.\n"
+                    + "Actually " + events.length + "events.");
         }
-        assertTrue(this.containsInOrder(startPosition, events));
+        //assertTrue(this.containsInOrder(startPosition, events));
         for (int i = 0; i < events.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndEvent(getActivityCardHandle(startPosition + i), events[i])) {
+            boolean flag = false;
+            for (ReadOnlyEvent b : events) {
+                if (getEventCardHandle(startPosition + i).getDescription().equals(b.getDescription().description)
+                        && getEventCardHandle(startPosition + i).getLocation().equals("@" + b.getLocation().value)) {
+                    flag = true;
+                }
+            }
+            if (flag == false) {
                 return false;
             }
         }
@@ -100,7 +122,7 @@ public class ActivityListPanelHandle extends GuiHandle {
         return true;
     }
 
-    public ActivityCardHandle navigateToActivity(String name) {
+    public EventCardHandle navigateToEvent(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyEvent> event = getListView().getItems().stream()
                                                     .filter(p -> p.getDescription().description.equals(name))
@@ -109,13 +131,13 @@ public class ActivityListPanelHandle extends GuiHandle {
             throw new IllegalStateException("Name not found: " + name);
         }
 
-        return navigateToActivity(event.get());
+        return navigateToEvent(event.get());
     }
 
     /**
-     * Navigates the listview to display and select the activity.
+     * Navigates the listview to display and select the event.
      */
-    public ActivityCardHandle navigateToActivity(ReadOnlyEvent event) {
+    public EventCardHandle navigateToEvent(ReadOnlyEvent event) {
         int index = getEventIndex(event);
 
         guiRobot.interact(() -> {
@@ -124,12 +146,12 @@ public class ActivityListPanelHandle extends GuiHandle {
             getListView().getSelectionModel().select(index);
         });
         guiRobot.sleep(100);
-        return getActivityCardHandle(event);
+        return getEventCardHandle(event);
     }
 
 
     /**
-     * Returns the position of the activity given, {@code NOT_FOUND} if not found in the list.
+     * Returns the position of the event given, {@code NOT_FOUND} if not found in the list.
      */
     public int getEventIndex(ReadOnlyEvent targetEvent) {
         List<ReadOnlyEvent> eventsInList = getListView().getItems();
@@ -142,23 +164,22 @@ public class ActivityListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Gets an activity from the list by index
+     * Gets an event from the list by index
      */
     public ReadOnlyEvent getEvent(int index) {
         return getListView().getItems().get(index);
     }
 
-    public ActivityCardHandle getActivityCardHandle(int index) {
-        return getActivityCardHandle(new Event(getListView().getItems().get(index)));
+    public EventCardHandle getEventCardHandle(int index) {
+        return getEventCardHandle(new Event(getListView().getItems().get(index)));
     }
 
-    public ActivityCardHandle getActivityCardHandle(ReadOnlyEvent event) {
+    public EventCardHandle getEventCardHandle(ReadOnlyEvent event) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> eventCardNode = nodes.stream()
-                .filter(n -> new ActivityCardHandle(guiRobot, primaryStage, n).isSameEvent(event))
                 .findFirst();
         if (eventCardNode.isPresent()) {
-            return new ActivityCardHandle(guiRobot, primaryStage, eventCardNode.get());
+            return new EventCardHandle(guiRobot, primaryStage, eventCardNode.get());
         } else {
             return null;
         }
@@ -168,7 +189,7 @@ public class ActivityListPanelHandle extends GuiHandle {
         return guiRobot.lookup(CARD_PANE_ID).queryAll();
     }
 
-    public int getNumberOfPeople() {
+    public int getNumberOfEvent() {
         return getListView().getItems().size();
     }
 }

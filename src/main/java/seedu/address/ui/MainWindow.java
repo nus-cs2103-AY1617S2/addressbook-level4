@@ -13,7 +13,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.commons.core.CalendarLayout;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -233,9 +232,8 @@ public class MainWindow extends UiPart<Region> {
         this.calendarPanel.refresh(eventList, taskList);
     }
 
-    public void updateCalendarView(LocalDateTime displayedDateTime, CalendarLayout calendarViewMode) {
-        this.calendarPanel.updateCalendarMode(calendarViewMode);
-        this.calendarPanel.updateCalendarShownPeriod(displayedDateTime);
+    public void changeCalendarView(LocalDateTime nextDateTime) {
+        this.calendarPanel.updateCalendarShownPeriod(nextDateTime);
     }
 
 }

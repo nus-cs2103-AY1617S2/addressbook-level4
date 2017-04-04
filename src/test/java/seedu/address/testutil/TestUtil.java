@@ -16,7 +16,8 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.ActivityCardHandle;
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -30,14 +31,19 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.WhatsLeft;
+import seedu.address.model.person.ByDate;
+import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
+import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.XmlSerializableWhatsLeft;
@@ -55,6 +61,8 @@ public class TestUtil {
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
     public static final Event[] SAMPLE_EVENT_DATA = getSampleEventData();
+
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -91,6 +99,34 @@ public class TestUtil {
         } catch (IllegalValueException e) {
             assert false;
             // not possible
+            return null;
+        }
+    }
+
+    private static Task[] getSampleTaskData() {
+        try {
+            return new Task[]{
+                new Task(new Description("Homework 1"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("200517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                new Task(new Description("Homework 2"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("210517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                new Task(new Description("Homework 3"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("220517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                new Task(new Description("Homework 4"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("230517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                new Task(new Description("Homework 5"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("240517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                new Task(new Description("Homework 6"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("250517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                new Task(new Description("Homework 7"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("260517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                new Task(new Description("Homework 8"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("270517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                new Task(new Description("Homework 9"), new Priority("high"), new ByTime("1000"),
+                        new ByDate("280517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS)
+            };
+        } catch (IllegalValueException e) {
+            assert false;
             return null;
         }
     }
@@ -282,50 +318,95 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of activities.
-     * @param activities The list of activities
-     * @param activitiesToRemove The subset of activities.
-     * @return The modified activities after removal of the subset from activities.
+     * Removes a subset from the list of events.
+     * @param events The list of events
+     * @param eventsToRemove The subset of events.
+     * @return The modified events after removal of the subset from events.
      */
-    public static TestActivity[] removeActivitiesFromList(
-            final TestActivity[] activities, TestActivity... activitiesToRemove) {
-        List<TestActivity> listOfActivities = asList(activities);
-        listOfActivities.removeAll(asList(activitiesToRemove));
-        return listOfActivities.toArray(new TestActivity[listOfActivities.size()]);
+    public static TestEvent[] removeEventsFromList(
+            final TestEvent[] events, TestEvent... eventsToRemove) {
+        List<TestEvent> listOfEvents = asList(events);
+        listOfEvents.removeAll(asList(eventsToRemove));
+        return listOfEvents.toArray(new TestEvent[listOfEvents.size()]);
     }
 
+    /**
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasks The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
+     */
+    public static TestTask[] removeTasksFromList(
+            final TestTask[] tasks, TestTask... tasksToRemove) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.removeAll(asList(tasksToRemove));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+    }
 
     /**
-     * Returns a copy of the list with the activity at specified index removed.
+     * Returns a copy of the list with the event at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestActivity[] removeActivityFromList(final TestActivity[] list, int targetIndexInOneIndexedFormat) {
-        return removeActivitiesFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    public static TestEvent[] removeEventFromList(final TestEvent[] list, int targetIndexInOneIndexedFormat) {
+        return removeEventsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
-     * Replaces activities[i] with an activity.
-     * @param activities The array of activities.
-     * @param activity The replacement activity
-     * @param index The index of the activity to be replaced.
+     * Returns a copy of the list with the task at specified index removed.
+     * @param list original list to copy from
+     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     */
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
+        return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    }
+
+    /**
+     * Replaces events[i] with an event.
+     * @param events The array of events.
+     * @param event The replacement event
+     * @param index The index of the event to be replaced.
      * @return
      */
-    public static TestActivity[] replaceActivityFromList(TestActivity[] activities, TestActivity activity, int index) {
-        activities[index] = activity;
-        return activities;
+    public static TestEvent[] replaceEventFromList(TestEvent[] events, TestEvent event, int index) {
+        events[index] = event;
+        return events;
     }
 
     /**
-     * Appends activities to the array of activities.
-     * @param activities A array of activities.
-     * @param activitiesToAdd The activities that are to be appended behind the original array.
-     * @return The modified array of activities.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement task
+     * @param index The index of the task to be replaced.
+     * @return
      */
-    public static TestActivity[] addActivitiesToList(final TestActivity[] activities, TestActivity... activitiesToAdd) {
-        List<TestActivity> listOfActivities = asList(activities);
-        listOfActivities.addAll(asList(activitiesToAdd));
-        return listOfActivities.toArray(new TestActivity[listOfActivities.size()]);
+    public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
+        tasks[index] = task;
+        return tasks;
+    }
+
+    /**
+     * Appends events to the array of events.
+     * @param events A array of events.
+     * @param eventsToAdd The events that are to be appended behind the original array.
+     * @return The modified array of events.
+     */
+    public static TestEvent[] addEventsToList(final TestEvent[] events, TestEvent... eventsToAdd) {
+        List<TestEvent> listOfEvents = asList(events);
+        listOfEvents.addAll(asList(eventsToAdd));
+        return listOfEvents.toArray(new TestEvent[listOfEvents.size()]);
+    }
+
+    /**
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasks The activities that are to be appended behind the original array.
+     * @return The modified array of tasks.
+     */
+    public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.addAll(asList(tasksToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
@@ -336,8 +417,12 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndEvent(ActivityCardHandle card, ReadOnlyEvent event) {
+    public static boolean compareCardAndEvent(EventCardHandle card, ReadOnlyEvent event) {
         return card.isSameEvent(event);
+    }
+
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {

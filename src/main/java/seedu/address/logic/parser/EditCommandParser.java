@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.DateTimeException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +30,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
+
     // @@author A0110491U
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -78,25 +80,16 @@ public class EditCommandParser {
                     && (bydateExists || priorityExists || bytimeExists)) {
                 throw new IllegalValueException(MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT);
             }
-
+            //decide what to do depending on whether event or task is input
             if (type.equals("ev")) {
-                editEventDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(2)));
-                editEventDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_STARTDATE)));
-                editEventDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_ENDDATE)));
-                editEventDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTTIME)));
-                editEventDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
-                editEventDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-                editEventDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+                setEventInfo(argsTokenizer, preambleFields, editEventDescriptor);
             } else if (type.equals("ts")) {
-                editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(2)));
-                editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
-                editTaskDescriptor.setByDate(ParserUtil.parseByDate(argsTokenizer.getValue(PREFIX_BYDATE)));
-                editTaskDescriptor.setByTime(ParserUtil.parseByTime(argsTokenizer.getValue(PREFIX_BYTIME)));
-                editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-                editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+                setTaskInfo(argsTokenizer, preambleFields, editTaskDescriptor);
             }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        } catch (DateTimeException dte) {
+            return new IncorrectCommand(dte.getMessage());
         }
 
         if (!editEventDescriptor.isAnyFieldEdited() && !editTaskDescriptor.isAnyFieldEdited()) {
@@ -108,6 +101,41 @@ public class EditCommandParser {
         } catch (IllegalValueException ile) {
             return new IncorrectCommand(EditCommand.MESSAGE_ILLEGAL_EVENT_END_DATETIME);
         }
+    }
+
+    /**
+     * This method sets the task information using the editTaskDescriptor
+     * @param argsTokenizer
+     * @param preambleFields
+     * @param editTaskDescriptor
+     * @throws IllegalValueException
+     */
+    private void setTaskInfo(ArgumentTokenizer argsTokenizer, List<Optional<String>> preambleFields,
+            EditTaskDescriptor editTaskDescriptor) throws IllegalValueException, DateTimeException {
+        editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(2)));
+        editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+        editTaskDescriptor.setByDate(ParserUtil.parseByDate(argsTokenizer.getValue(PREFIX_BYDATE)));
+        editTaskDescriptor.setByTime(ParserUtil.parseByTime(argsTokenizer.getValue(PREFIX_BYTIME)));
+        editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+        editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+    }
+
+    /**
+     * This method sets the event information using the editEventDescriptor
+     * @param argsTokenizer
+     * @param preambleFields
+     * @param editEventDescriptor
+     * @throws IllegalValueException
+     */
+    private void setEventInfo(ArgumentTokenizer argsTokenizer, List<Optional<String>> preambleFields,
+            EditEventDescriptor editEventDescriptor) throws IllegalValueException, DateTimeException {
+        editEventDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(2)));
+        editEventDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_STARTDATE)));
+        editEventDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_ENDDATE)));
+        editEventDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTTIME)));
+        editEventDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
+        editEventDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+        editEventDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
     }
 
     /**

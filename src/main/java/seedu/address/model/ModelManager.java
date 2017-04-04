@@ -17,7 +17,6 @@ import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueEventList.EventNotFoundException;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
@@ -28,6 +27,10 @@ import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+
+    public static final String DISPLAY_STATUS_COMPLETED = "COMPLETED";
+    public static final String DISPLAY_STATUS_ALL = "ALL";
+    public static final String DISPLAY_STATUS_PENDING = "PENDING";
 
     private final WhatsLeft whatsLeft;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
@@ -50,7 +53,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEvents = new FilteredList<>(this.whatsLeft.getEventList());
         filteredTasks = new FilteredList<>(this.whatsLeft.getTaskList());
         previousCommand = "";
-        displayStatus = "Pending";
+        displayStatus = DISPLAY_STATUS_PENDING;
         updateFilteredListToShowAll();
     }
     //@@author
@@ -58,12 +61,26 @@ public class ModelManager extends ComponentManager implements Model {
         this(new WhatsLeft(), new UserPrefs());
     }
 
+    //@@author A0148038A
     @Override
     public void resetData(ReadOnlyWhatsLeft newData) {
         whatsLeft.resetData(newData);
         indicateWhatsLeftChanged();
     }
 
+    @Override
+    public void resetEvent() {
+        whatsLeft.resetEventData();
+        indicateWhatsLeftChanged();
+    }
+
+    @Override
+    public void resetTask() {
+        whatsLeft.resetTaskData();
+        indicateWhatsLeftChanged();
+    }
+
+    //@@author
     @Override
     public ReadOnlyWhatsLeft getWhatsLeft() {
         return whatsLeft;
@@ -80,6 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
     }
 
+    @Override
     public String getDisplayStatus() {
         return displayStatus;
     }
@@ -115,7 +133,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0148038A
     @Override
     public synchronized void addEvent(Event event)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+            throws UniqueEventList.DuplicateEventException {
         whatsLeft.addEvent(event);
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
@@ -130,7 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateEvent(Event eventToEdit, Event editedEvent)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+            throws UniqueEventList.DuplicateEventException {
         assert editedEvent != null;
 
         whatsLeft.updateEvent(eventToEdit, editedEvent);
@@ -225,13 +243,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         try {
-            if (displayStatus.equals("All")) {
+            if (displayStatus.equals(DISPLAY_STATUS_ALL)) {
                 filteredTasks.setPredicate(null);
                 filteredEvents.setPredicate(null);
-            } else if (displayStatus.equals("Completed")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_COMPLETED)) {
                 filteredTasks.setPredicate(new PredicateExpression(new StatusQualifier(true))::satisfies);
                 filteredEvents.setPredicate(new PredicateExpression(new StatusQualifier(true))::satisfies);
-            } else if (displayStatus.equals("Pending")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_PENDING)) {
                 filteredTasks.setPredicate(new PredicateExpression(new StatusQualifier(false))::satisfies);
                 filteredEvents.setPredicate(new PredicateExpression(new StatusQualifier(false))::satisfies);
             } else {
@@ -314,16 +332,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (displayStatus.equals("All")) {
+            if (displayStatus.equals(DISPLAY_STATUS_ALL)) {
                 return nameKeyWords.stream().filter(
                     keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
                         .findAny().isPresent();
-            } else if (displayStatus.equals("Completed")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_COMPLETED)) {
                 return nameKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword)
                                 && task.getStatus())
                         .findAny().isPresent();
-            } else if (displayStatus.equals("Pending")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_PENDING)) {
                 return nameKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword)
                                 && !task.getStatus())
@@ -340,16 +358,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyEvent event) {
-            if (displayStatus.equals("All")) {
+            if (displayStatus.equals(DISPLAY_STATUS_ALL)) {
                 return nameKeyWords.stream().filter(
                     keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword))
                         .findAny().isPresent();
-            } else if (displayStatus.equals("Completed")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_COMPLETED)) {
                 return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
                                 && event.isOver())
                         .findAny().isPresent();
-            } else if (displayStatus.equals("Pending")) {
+            } else if (displayStatus.equals(DISPLAY_STATUS_PENDING)) {
                 return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDescription().description, keyword)
                                 && !event.isOver())
@@ -395,6 +413,12 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "status =" + String.valueOf(statusKey);
         }
+    }
+
+    //@@author A0110491U
+    @Override
+    public boolean eventHasClash(Event toAddEvent) {
+        return whatsLeft.eventHasClash(toAddEvent);
     }
 
 }

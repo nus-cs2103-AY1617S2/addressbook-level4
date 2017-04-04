@@ -11,18 +11,19 @@ import javafx.stage.Stage;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0148038A
 /**
- * Provides a handle to an activity card in the activity list panel.
+ * Provides a handle to an event card in the event list panel.
  */
-public class ActivityCardHandle extends GuiHandle {
+public class EventCardHandle extends GuiHandle {
     private static final String DESCRIPTION_FIELD_ID = "#description";
-    private static final String LOCATION_FIELD_ID = "#locations";
     private static final String DURATION_FIELD_ID = "#duration";
+    private static final String LOCATION_FIELD_ID = "#locations";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
 
-    public ActivityCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public EventCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -35,12 +36,12 @@ public class ActivityCardHandle extends GuiHandle {
         return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
-    public String getLocation() {
-        return getTextFromLabel(LOCATION_FIELD_ID);
-    }
-
     public String getDuration() {
         return getTextFromLabel(DURATION_FIELD_ID);
+    }
+
+    public String getLocation() {
+        return getTextFromLabel(LOCATION_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -79,8 +80,8 @@ public class ActivityCardHandle extends GuiHandle {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof ActivityCardHandle) {
-            ActivityCardHandle handle = (ActivityCardHandle) obj;
+        if (obj instanceof EventCardHandle) {
+            EventCardHandle handle = (EventCardHandle) obj;
             return getDescription().equals(handle.getDescription())
                     && getDuration().equals(handle.getDuration())
                     && getLocation().equals(handle.getLocation())

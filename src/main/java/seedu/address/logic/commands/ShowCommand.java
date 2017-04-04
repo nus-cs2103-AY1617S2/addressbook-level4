@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.events.model.ShowStatusChangedEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 
@@ -21,7 +23,7 @@ public class ShowCommand extends Command {
             + "Example: " + COMMAND_WORD + " com";
 
     public static final String MESSAGE_DISPLAY_PREFERENCE_SUCCESS = "Successfully changed display"
-            + " preference to show %1$s tasks";
+            + " preference to show [%1$s] tasks";
 
     private final String displayPreference;
 
@@ -35,17 +37,23 @@ public class ShowCommand extends Command {
     public CommandResult execute() throws CommandException {
         String preference;
         if (displayPreference.equals("com")) {
-            preference = "Completed";
+            preference = "COMPLETED";
         } else if (displayPreference.equals("pend")) {
-            preference = "Pending";
+            preference = "PENDING";
         } else if (displayPreference.equals("")) {
-            preference = "All";
+            preference = "ALL";
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAY_STATUS_KEYWORD);
         }
         model.setDisplayStatus(preference);
         model.updateFilteredListToShowAll();
+        indicateShowStatusChanged();
         return new CommandResult(String.format(MESSAGE_DISPLAY_PREFERENCE_SUCCESS, preference));
     }
+
+    private void indicateShowStatusChanged() {
+        EventsCenter.getInstance().post(new ShowStatusChangedEvent(model.getDisplayStatus()));
+    }
+
     //@@author
 }

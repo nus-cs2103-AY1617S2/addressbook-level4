@@ -17,7 +17,6 @@ import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.Tag;
@@ -82,7 +81,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         }
         try {
             setEvents(newData.getEventList());
-        } catch (UniqueEventList.DuplicateEventException | DuplicateTimeClashException e) {
+        } catch (UniqueEventList.DuplicateEventException e) {
             assert false : "WhatsLeft should not have duplicate events";
         } catch (IllegalValueException e) {
             assert false : "WhatsLeft should not have events with start date after end date";
@@ -94,6 +93,15 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         }
         syncMasterTagListWith(tasks);
         syncMasterTagListWith(events);
+    }
+
+    //@@author A0148038A
+    public void resetEventData() {
+        events.clearAll();
+    }
+
+    public void resetTaskData() {
+        tasks.clearAll();
     }
 
 //// activity-level operations
@@ -118,7 +126,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      * @throws UniqueEventList.DuplicateEventException if an equivalent event already exists.
      * @throws DuplicateTimeClashException if another event with time that clashes exist.
      */
-    public void addEvent(Event e) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+    public void addEvent(Event e) throws UniqueEventList.DuplicateEventException {
         syncMasterTagListWith(e);
         events.add(e);
     }
@@ -135,7 +143,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateEvent(Event eventToEdit, Event editedEvent)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException {
+            throws UniqueEventList.DuplicateEventException {
         assert editedEvent != null;
 
         syncMasterTagListWith(editedEvent);
@@ -177,7 +185,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      * Marks the task in the list at position {@code index} as pending.
      */
     public void redoTask(ReadOnlyTask taskToMark) {
-        tasks.RedoTask(taskToMark);
+        tasks.redoTask(taskToMark);
 
     }
 
@@ -304,5 +312,10 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
 
     public ObservableList<Event> getEvents() {
         return events.getInternalList();
+    }
+
+    //@@author A0110491U
+    public boolean eventHasClash(Event toAddEvent) {
+        return events.containsTimeClash(toAddEvent);
     }
 }

@@ -24,6 +24,10 @@ public class XmlWhatsLeftStorage implements WhatsLeftStorage {
         this.filePath = filePath;
     }
 
+    public void setWhatsLeftFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     public String getWhatsLeftFilePath() {
         return filePath;
     }
@@ -71,5 +75,4 @@ public class XmlWhatsLeftStorage implements WhatsLeftStorage {
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableWhatsLeft(whatsLeft));
     }
-
 }

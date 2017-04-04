@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.ConfigChangedEvent;
+import seedu.address.commons.events.model.ShowStatusChangedEvent;
 import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 
@@ -24,6 +26,8 @@ public class StatusBarFooter extends UiPart<Region> {
     private StatusBar syncStatus;
     @FXML
     private StatusBar saveLocationStatus;
+    @FXML
+    private StatusBar displayStatus;
 
     private static final String FXML = "StatusBarFooter.fxml";
 
@@ -31,7 +35,8 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
+        setSaveLocation(saveLocation);
+        setDisplayStatus("Currently showing [PENDING] activities");
         registerAsAnEventHandler(this);
     }
 
@@ -47,6 +52,11 @@ public class StatusBarFooter extends UiPart<Region> {
     private void setSyncStatus(String status) {
         this.syncStatus.setText(status);
     }
+    //@@author A0121668A
+    private void setDisplayStatus(String displayStatus) {
+        this.displayStatus.setText(displayStatus);
+    }
+    //@@author
 
     @Subscribe
     public void handleWhatsLeftChangedEvent(WhatsLeftChangedEvent abce) {
@@ -54,4 +64,19 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
+    //@@author A0121668A
+    @Subscribe
+    public void handleConfigChangedEvent(ConfigChangedEvent cce) {
+        String newLocation = cce.data.getWhatsLeftFilePath();
+        logger.info(LogsCenter.getEventHandlingLogMessage(cce, "Setting save location to " + newLocation));
+        setSaveLocation(newLocation);
+    }
+
+    @Subscribe
+    public void handleShowStatusChangedEvent(ShowStatusChangedEvent ssce) {
+        String showStatus = ssce.toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(ssce, ""));
+        setDisplayStatus(showStatus);
+    }
+    //@@author
 }

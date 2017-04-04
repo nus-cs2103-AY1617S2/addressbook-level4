@@ -1,0 +1,9 @@
+{
+  "appTitle" : "TestApp",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json",
+  "whatsLeftFilePath" : "data/whatsleft.xml",
+  "whatsLeftName" : "myTestWhatsLeft",
+  "x" : "abc",
+  "y" : "abc"
+}

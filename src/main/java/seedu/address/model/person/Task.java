@@ -72,7 +72,6 @@ public class Task implements ReadOnlyTask {
     }
 
     public void setByDate(ByDate byDate) {
-        assert byDate != null;
         this.byDate = byDate;
     }
 
@@ -103,14 +102,6 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
-    public boolean hasDeadline() {
-        if (getByDate() != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public boolean getStatus() {
         return status;
@@ -118,6 +109,14 @@ public class Task implements ReadOnlyTask {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public boolean hasDeadline() {
+        if (!this.byTime.isExisting() && !this.byDate.isExisting()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

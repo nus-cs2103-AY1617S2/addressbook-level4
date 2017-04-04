@@ -60,11 +60,13 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:<br>
 
   * [Finish task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#29-finishing-a-task-finish)
-  * [Show completed/pending tasks](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#210-task-display-preference-show)
+  * [Show completed/pending/all tasks](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#210-task-display-preference-show)
   * [Redo task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#212-redoing-the-completed-task--redo)
+  * [Save/Read WhatsLeft from another folder]
 * Code written:
 * Other major contributions:
   * Fixed GUI testing
+  * Added start-end constraint for Event
 
  -----
 

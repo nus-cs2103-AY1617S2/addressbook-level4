@@ -359,6 +359,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | undo my last [mutating operation](#mutating-operation) | reverse any mistake made
 `* * *` | user | let passed events automatically archive themselves | save time checking them off
 `* * *` | user | view all finished event/deadline/task | keep track of my progress in task completion
+`* * *` | user | save the storage file to designated folder, e.g. dropbox sync folder | access my task manager from multiple devices
+`* * *` | user | load WhatsLeft content from designated folder, e.g. dropbox sync folder | access my task manager from multiple devices
 `* *` | user | search for event/deadline/task by attribute | find out details on specific event/deadline/task
 `* *` | user | set up recurring event/deadline/task | save time setting them up every day/month/year
 `* *` | user | sync my events/deadlines/tasks with google calendar/tasks | access them online through other applications and devices (mobile)
@@ -375,7 +377,8 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | send reminders to other people involved in certain event or deadline | notify collaborators
 `*` | Advanced user | color code the events/deadlines/tasks myself | see the importance of events/deadlines/tasks without opening them up
 `*` | user | view list of deleted events/deadlines/tasks | check details of deleted events/deadlines/tasks
-`*` | user | view list of finished events/deadlines/tasks | check details of finished events/deadlines/tasks
+`*` | user | view list of finished/pending/all events/deadlines/tasks | check details of finished events/deadlines/tasks
+`*` | user | change the status of a task from completed back to pending | improve/redo the task
 `*` | user | move an event/deadline/task from deleted list to [active list](#active-list) | add the event/deadline/task without re-creating it entirely
 `*` | user | copy an event/deadline/task from the archived list to the active list | add the same event/deadline/task without re-creating it entirely
 

@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,7 +17,7 @@ import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.WhatsLeft;
 import seedu.address.testutil.EventsCollector;
-import seedu.address.testutil.TypicalTestActivities;
+import seedu.address.testutil.TypicalTestEvents;
 
 public class StorageManagerTest {
 
@@ -60,7 +59,7 @@ public class StorageManagerTest {
          * {@link XmlWhatsLeftStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlWhatsLeftStorageTest} class.
          */
-        WhatsLeft original = new TypicalTestActivities().getTypicalWhatsLeft();
+        WhatsLeft original = new TypicalTestEvents().getTypicalWhatsLeft();
         storageManager.saveWhatsLeft(original);
         ReadOnlyWhatsLeft retrieved = storageManager.readWhatsLeft().get();
         assertEquals(original, new WhatsLeft(retrieved));

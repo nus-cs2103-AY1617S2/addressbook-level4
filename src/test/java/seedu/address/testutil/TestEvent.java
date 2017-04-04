@@ -16,29 +16,29 @@ import seedu.address.model.tag.UniqueTagList;
 /**
  * A mutable Event object. For testing only.
  */
-public class TestActivity implements ReadOnlyEvent {
+public class TestEvent implements ReadOnlyEvent {
 
     private Description description;
+    private StartTime startTime;
+    private StartDate startDate;
+    private EndTime endTime;
+    private EndDate endDate;
     private Location location;
-    private StartTime starttime;
-    private StartDate startdate;
-    private EndTime endtime;
-    private EndDate enddate;
     private UniqueTagList tags;
 
-    public TestActivity() {
+    public TestEvent() {
         tags = new UniqueTagList();
     }
 
     /**
-     * Creates a copy of {@code activityToCopy}.
+     * Creates a copy of {@code eventToCopy}.
      */
-    public TestActivity(TestActivity eventToCopy) {
+    public TestEvent(TestEvent eventToCopy) {
         this.description = eventToCopy.getDescription();
-        this.starttime = eventToCopy.getStartTime();
-        this.startdate = eventToCopy.getStartDate();
-        this.endtime = eventToCopy.getEndTime();
-        this.enddate = eventToCopy.getEndDate();
+        this.startTime = eventToCopy.getStartTime();
+        this.startDate = eventToCopy.getStartDate();
+        this.endTime = eventToCopy.getEndTime();
+        this.endDate = eventToCopy.getEndDate();
         this.location = eventToCopy.getLocation();
         this.tags = eventToCopy.getTags();
     }
@@ -51,20 +51,20 @@ public class TestActivity implements ReadOnlyEvent {
         this.location = location;
     }
 
-    public void setStartTime(StartTime starttime) {
-        this.starttime = starttime;
+    public void setStartTime(StartTime startTime) {
+        this.startTime = startTime;
     }
 
-    public void setStartDate(StartDate startdate) {
-        this.startdate = startdate;
+    public void setStartDate(StartDate startDate) {
+        this.startDate = startDate;
     }
 
-    public void setEndTime(EndTime endtime) {
-        this.endtime = endtime;
+    public void setEndTime(EndTime endTime) {
+        this.endTime = endTime;
     }
 
-    public void setEndDate(EndDate enddate) {
-        this.enddate = enddate;
+    public void setEndDate(EndDate endDate) {
+        this.endDate = endDate;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -78,22 +78,22 @@ public class TestActivity implements ReadOnlyEvent {
 
     @Override
     public StartTime getStartTime() {
-        return starttime;
+        return startTime;
     }
 
     @Override
     public StartDate getStartDate() {
-        return startdate;
+        return startDate;
     }
 
     @Override
     public EndTime getEndTime() {
-        return endtime;
+        return endTime;
     }
 
     @Override
     public EndDate getEndDate() {
-        return enddate;
+        return endDate;
     }
 
 
@@ -111,18 +111,20 @@ public class TestActivity implements ReadOnlyEvent {
     public String toString() {
         return getAsText();
     }
+
     //@@author A0110491U
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("sd/" + this.getStartDate().getValue().format(DateTimeFormatter.ofPattern("ddMMyy")));
         sb.append("st/" + this.getStartTime().getValue().format(DateTimeFormatter.ofPattern("HHmm")));
-        sb.append("ed/" + this.getEndDate().getValue().format(DateTimeFormatter.ofPattern("ddMMyy")));
+        sb.append("sd/" + this.getStartDate().getValue().format(DateTimeFormatter.ofPattern("ddMMyy")));
         sb.append("et/" + this.getEndTime().getValue().format(DateTimeFormatter.ofPattern("HHmm")));
+        sb.append("ed/" + this.getEndDate().getValue().format(DateTimeFormatter.ofPattern("ddMMyy")));
         sb.append("l/" + this.getLocation().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("ta/" + s.tagName + " "));
         return sb.toString();
     }
+
     //@@author
     @Override
     public boolean isOver() {

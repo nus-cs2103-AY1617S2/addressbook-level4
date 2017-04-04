@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateTimeNLUtil;
 import seedu.address.commons.util.StringUtil;
 
 //@@author A0121668A
@@ -17,25 +18,36 @@ public class ByDate {
             "Deadline ByDate can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
 
     public final LocalDate value;
+    public final boolean isExisting;
 
     public LocalDate getValue() {
         return value;
     }
 
-    //@@author A0121668A
+    //@@author A0110491U
     /**
-     * Validates given by date.
+     * Validates given by date. If given in digits, tries to parse into date. If given in non-digit
+     * format, tries to process using the DateTimeNLUtil class that tries to read natural language
      *
      * @throws IllegalValueException if given start date is invalid.
      */
     public ByDate(String byDateArg) throws IllegalValueException {
         if (byDateArg == null) {
             this.value = null;
+            this.isExisting = false;
         } else {
-            try {
-                this.value = StringUtil.parseStringToDate(byDateArg);
-            } catch (DateTimeException illegalValueException) {
-                throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
+            if (byDateArg.matches("\\d+")) {
+                try {
+                    this.value = StringUtil.parseStringToDate(byDateArg);
+                    this.isExisting = true;
+                } catch (DateTimeException illegalValueException) {
+                    throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
+                }
+            } else {
+                DateTimeNLUtil dt = new DateTimeNLUtil();
+                String nldate = dt.getDate(byDateArg);
+                this.value = StringUtil.parseStringToDate(nldate);
+                this.isExisting = true;
             }
         }
     }
@@ -60,6 +72,11 @@ public class ByDate {
      */
     public ByDate(LocalDate bydate) {
         value = bydate;
+        if (bydate == null) {
+            isExisting = false;
+        } else {
+            isExisting = true;
+        }
     }
 
     //@@author
@@ -84,6 +101,10 @@ public class ByDate {
     }
 
     //@@author A0148038A
+    public boolean isExisting() {
+        return this.isExisting;
+    }
+
     public int compareTo(ByDate o) {
         return this.getValue().compareTo(o.getValue());
     }

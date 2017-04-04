@@ -7,6 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CalendarRefreshCommand;
+import seedu.address.logic.commands.CalendarViewCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -17,7 +19,10 @@ import seedu.address.logic.commands.FinishCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ReadCommand;
+import seedu.address.logic.commands.RecurCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -61,7 +66,7 @@ public class Parser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
@@ -75,6 +80,15 @@ public class Parser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
 
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
+
+        case ReadCommand.COMMAND_WORD:
+            return new ReadCommandParser().parse(arguments);
+
+        case CalendarViewCommand.COMMAND_WORD:
+            return new CalendarViewCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -86,6 +100,12 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case CalendarRefreshCommand.COMMAND_WORD:
+            return new CalendarRefreshCommand();
+
+        case RecurCommand.COMMAND_WORD:
+            return new RecurCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

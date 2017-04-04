@@ -8,7 +8,6 @@ import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueEventList;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
@@ -20,6 +19,14 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyWhatsLeft newData);
 
+    //@@author A0148038A
+    /** Clears all events in WhatsLeft*/
+    void resetEvent();
+
+    /** Clears all tasks in WhatsLeft*/
+    void resetTask();
+
+    //@@author
     /** Returns the WhatsLeft */
     ReadOnlyWhatsLeft getWhatsLeft();
 
@@ -40,7 +47,7 @@ public interface Model {
 
     /** Adds the given Event
      * @throws DuplicateTimeClashException */
-    void addEvent(Event event) throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
+    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
 
     //@@author A0148038A
     /**
@@ -52,7 +59,7 @@ public interface Model {
      * @throws IndexOutOfBoundsException if {@code filteredEventListIndex} < 0 or >= the size of the filtered list.
      */
     void updateEvent(Event eventToEdit, Event editedEvent)
-            throws UniqueEventList.DuplicateEventException, DuplicateTimeClashException;
+            throws UniqueEventList.DuplicateEventException;
 
     /**
      * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -86,12 +93,21 @@ public interface Model {
     /** Updates the filter of the filtered Event list to show unfinished task*/
     //void updateFilteredListToShowIncomplete();
 
+    //@@author A0121668A
+    /** Sets the display status in model */
     void setDisplayStatus(String status);
 
+    /** returns the current display status in model */
+    String getDisplayStatus();
 
+    //@@author
     /** Finds the index of the event in the filtered list*/
     int findEventIndex(Event event);
 
     /** Finds the index of the task in the filtered list*/
     int findTaskIndex(Task task);
+
+    //@@author A0110491U
+    /** Finds whether there is a clash of timing of event */
+    boolean eventHasClash(Event toAddEvent);
 }

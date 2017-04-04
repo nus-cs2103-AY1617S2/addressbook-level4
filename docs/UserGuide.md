@@ -58,32 +58,51 @@ Adds an event to the event list. Undoable.<br>
 Format: `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...`
 
 > * Events must be added with description.
-> * Start date is required, while other fields are optional.
-> * Start date and end date should have format `DDMMYY`, e.g. `230117`
+> * Start date is required, while other fields are optional. Start date can be easily input with 'today', 'tmr' (tomorrow), 'mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'. 'next' and 'following' can also be used in conjunction with the 7 days.
+> * Otherwise, Start date, and end date should have format `DDMMYY`, e.g. `230117`
 > * Start time and end time should have format `MMHH`, e.g. `2359`
 > * Default value for end date is set to be the same as start date
 > * Default value for start time is set to be 00:01
 > * Default value for end time is set to be 23:59
 > * Tags can contain only one word without space.
 > * Events can have any number of tags (including 0).
+> * Clashing events are allowed and will display as normal.
+> * Events that are occuring on present day will be indicated with a badge.
 > * If description or start date is not entered, help message for add will appear.
 
 Examples:
 
 * `add PhotoShop Workshop st/1900 sd/130217 ed/130217 l/CLB ta/take laptop`
 * `add Industrial Talk st/1800 sd/030517 et/2000 ed/030517 l/FoS`
+* `add Visit Museum st/1800 sd/next fri et/2000 l/SAM`
 
-#### 2.2.2. Adding a [task] : `add`
+#### 2.2.2. Adding a recurring [event] : `recur`
 
-##### 2.2.2.1. Adding a floating task: `add`
+Adds recurring instances of the same event. <br>
+Format: `recur EVENT_INDEX FREQUENCY NUMBER_OF_TIMES`
 
-Adds a floating task to the task list. Undoable.<br>
+> * Event must be chosen from the list of existing events.
+> * Acceptable parameters for FREQEUNCY are 'daily' and 'weekly'.
+> * Acceptable parameters for NUMBER_OF_TIMES are positive integers indicating how many days/weeks you wish to recur the event for.
+
+Examples:
+
+* `recur 1 daily 4' <br>
+   Automatically recur event INDEX:1 for the next 4 days.
+* `recur 4 weekly 12' <br>
+   Automatically recur event INDEX:4 for the next 13 weeks.
+
+#### 2.2.3. Adding an [task] : `add`
+
+##### 2.2.3.1. Adding a floating task: `add`
+
+Adds a floating task to the task list. <br>
 Tasks have completion status, which is set to [pending] by default. <br>
-User can mark a task as [Completed]. (See section 2.13) <br>
+User can mark a task as [Completed] with finish command. (See section 2.9) <br>
 Format: `add DESCRIPTION p/PRIORITY [l/LOCATION] [ta/TAG]...`
 
 > * Tasks must be added with description and priority.
-> * Priority can only take on the values `high`. `mediu.` or `low`.
+> * Priority can only take on the values `high`. `medium` or `low`.
 > * Tags can contain only one word without space.
 > * Other fields are optional.
 > * Tasks can have any number of tags (including 0).
@@ -94,27 +113,30 @@ Examples:
 * `add Review CS2103 p/high ta/review`
 * `add Buy groceries p/medium`
 
-##### 2.2.2.2. Adding a deadline: `add`
+##### 2.2.3.2. Adding a deadline: `add`
 
-Adds a deadline equivalent to adding a task with by time and by date. Undoable. <br>
+Adds a deadline equivalent to adding a task with by time and by date. <br>
 Deadlines have completion status, which is set to [pending] by default. <br>
-User can mark a deadline as [Completed]. (See section 2.13) <br>
+User can mark a deadline as [Completed] with the finish command. (See section 2.9) <br>
 Format: `add DESCRIPTION p/PRIORITY [bt/BYTIME] bd/BY_DATE [l/LOCATION] [ta/TAG]...`
 
 > * Deadlines must be added with description and priority.
 > * By date and By time is to be specified to make it a deadline, which would otherwise remains a task.
-> * By date should have format `DDMMYY`, e.g. `230117`
+> * By date can be easily input with 'today', 'tmr' (tomorrow), 'mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'. 'next' and 'following' can also be used in conjunction with the 7 days.
+> * Otherwise, By date should have format `DDMMYY`, e.g. `230117`
 > * End time should have format `MMHH`, e.g. `2359`
 > * If only by time is specified, by date would be set as the current day by default.
 > * If only by date is specified, by time would be set as 23:59 by default.
 > * Tags can contain only one word without space.
 > * Deadlines can have any number of tags (including 0).
+> * Deadlines that have past the current date and time, or are happening today, will be marked with a badge.
 > * If description is not entered, help message for add will appear.
 
 Examples:
 
 * `add Home Assignment 1 p/high bd/210317 l/general office ta/hardcopy`
 * `add Project Report p/medium bt/2300 bd/120417 ta/softcopy`
+* `add MKT2411 Report due p/medium bt/2300 bd/following sat ta/softcopy`
 
 ### 2.3. Listing all events/tasks : `list`
 
@@ -146,7 +168,8 @@ Format: `edit ev INDEX [DESCRIPTION] [st/START_TIME] [sd/START_DATE] [et/END_TIM
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.
-> * You can remove start time, end time, end date, tags or location by typing `st/`, `et/`, `ed/`, `l/` or `ta/` without specifying any content after it.
+> * You can remove tags by typing `ta/` without specifying any content after it.
+> * Removal of other attributes are not allowed.
 
 Examples:
 
@@ -167,7 +190,7 @@ Format: `edit ts INDEX [DESCRIPTION] [p/PRIORITY] [bt/BY_TIME] [bd\BYDATE] [l/LO
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove by time, by date, location or tags by typing `bt/`, `bd/`, `l` or `ta/` without specifying any content after it.
+> * You can remove tags by typing `ta/` without specifying any content after it.
 
 Examples:
 
@@ -210,6 +233,7 @@ Format: `view TYPE INDEX`
 > * Selects the event/task at the specified `INDEX`.
 > * The index refers to the index number shown in the most recent event/task listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
+> * Activity list and calendar will jump to the selected activity.
 
 Examples:
 
@@ -253,7 +277,8 @@ Examples:
 * `clear ev`<br>
   Removes all events in WhatsLeft.
 
-### 2.9. Finishing a task: `finish`
+### 2.9. Finishing/Redoing a task:
+#### 2.9.1. Finishing a task:
 
 Finishes the specified task/deadline from WhatsLeft. Undoable.<br>
 Format: `finish INDEX`
@@ -266,31 +291,47 @@ Examples:
 
 * `list`<br>
   `finish 2`<br>
-  Deletes the 2nd event in the event list.
+  Finishes the 2nd event in the event list.
 * `find Assignment`<br>
   `delete 1`<br>
-  Deletes the 1st event in the results of the `find` command.
+  Finishes the 1st event in the results of the `find` command.
+
+#### 2.9.2. Redoing a completed task: `redo`
+
+Redoes a completed task.<br>
+Format: `redo INDEX`
+
+> * Changes the status of a task from `completed` to `pending`.
+Examples:
+
+* `finish 2`<br>
+   `show com`<br>
+   `redo 1`<br>
+   Changes the status of a completed task back to pending.
 
 ### 2.10. Task display preference: `show`
 
-  Sets the display preference of tasks in three categories.<br>
-  User is able to view all tasks, completed tasks or pending tasks.
+  Sets the display status preference.<br>
+  User is able to view all, completed or pending tasks as well as past or future events.
   Format: `show [DISPLAY_PREFERENCE]`
 
-  > * Display preference should be empty, `com` or `pend` representing all tasks, completed tasks and pending tasks respectively.
+> * Display preference should be empty, `com` or `pend` representing all activities, completed activities and pending activities respectively.
 
 Examples:
 
 * `show`<br>
+   Display all events and tasks
 * `show com`<br>
+   Display completed tasks and past events
 * `show pend`<br>
+   Display pending tasks and future events
 
 ### 2.11. Undoing the latest command : `undo`
 
 Undoes the latest command.<br>
 Format: `undo`
 
-> * Undoes immediately after `edit`, `delete`, `finish` and `clear` commands.
+> * Undoes immediately after `edit`, `delete`, `finish`, `clear` and `finish` commands.
 > * Cannot undo more than once consecutively.
 
 Examples:
@@ -299,32 +340,53 @@ Examples:
   `undo`<br>
   Undoes finishing task 4.
 
-### 2.12. Redoing the completed task : `redo`
-
-Redoes the completed task.<br>
-Format: `redo INDEX`
-
-> * Changes the status of a task from completed to pending after `finish`.
-
-Examples:
-
-* `finish 2`<br>
-  `show com`<br>
-  `redo 1`<br>
-  Changes the status of a completed task to pending.
-
-### 2.13. Changing file location: `save`
-Changes the location of storage file.<br>
+### 2.12. Save/Read WhatsLeft to/from new location: `save`
+#### 2.12.1. Save WhatsLeft to new location: `save`
+Changes the location of storage file to designated directory.<br>
 Format: `save DIRECTORY`
 
 > * Directory should be valid and exist.
+> * WhatsLeft application will automatically load from the new storage location when started in the future.
 
 Examples:
 
-* `save Documents/Private data`
-  Changes the location of storage file to Documents/Private data.
+* `save /User/Andy/Documents`
+  Saves the current WhatsLeft content to /User/Andy/Documents.
 
-### 2.14. Exiting the program : `exit`
+#### 2.12.2. Read WhatsLeft from new location
+Loads WhatsLeft from storage file stored in the designated directory.<br>
+Format: `read DIRECTORY`
+
+> * Directory should be valid and exist.
+> * WhatsLeft application will automatically load from the new storage location when started in the future.
+> * If no WhatsLeft storage file exists in the designated directory, a blank task book will be created and loaded.
+
+Examples:
+
+* `read /User/Andy/Documents`
+  Loads WhatsLeft from the WhatsLeft storage file stored in /User/Andy/Documents.
+
+### 2.13. Changing Calendar Week: `next`
+Changes the weekly view on calendar according to specified weeks ahead.<br>
+Format: 'next [WEEKS_AHEAD]'
+
+> * WEEKS_AHEAD must be an integer.
+
+Examples:
+
+* `next 2`<br>
+  Changes the displayed calendar schedule to 2 weeks ahead.
+
+### 2.14. Refreshing the Calendar: `refresh`
+Refresh the calendar to show current week.<br>
+Format: `refresh`
+
+Examples:
+
+* `refresh`<br>
+  Changes the displayed calendar to show current week schedule.
+
+### 2.15. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
@@ -340,6 +402,9 @@ Format: `exit`
 * **Help** : `help` <br>
 
 * **Add Event** : `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...`<br>
+  e.g. `add Industrial Talk st/1800 sd/030517 et/2000 l/FoS`
+
+* **Recur Event** : `recur EVENT_INDEX FREQUENCY NUMBER_OF_TIMES`<br>
   e.g. `add Industrial Talk st/1800 sd/030517 et/2000 l/FoS`
 
 * **Add Task** : `add DESCRIPTION p/PRIORITY [l/LOCATION] [ta/TAG]...`<br>
@@ -381,5 +446,14 @@ Format: `exit`
 
 * **Save** : `save DIRECTORY`<br>
   e.g. `save Desktop/Data`
+
+* **Read** : `read DIRECTORY`<br>
+  e.g. `read Desktop/Data2`
+
+* **Next** : `next WEEKS_AHEAD`<br>
+  e.g. `next 2`
+
+* **Refresh** : `refresh`<br>
+  e.g. `refresh`
 
 * **Exit** : `exit`<br>

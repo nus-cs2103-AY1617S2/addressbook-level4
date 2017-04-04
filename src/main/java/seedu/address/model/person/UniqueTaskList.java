@@ -9,7 +9,6 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.person.UniqueEventList.DuplicateEventException;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
 
@@ -32,6 +31,11 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
+    }
+
+    //@@author A0148038A
+    public void clearAll() {
+        internalList.clear();
     }
 
     /**
@@ -85,7 +89,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void RedoTask(ReadOnlyTask taskToMark) {
+    public void redoTask(ReadOnlyTask taskToMark) {
         Task taskToComplete = new Task(taskToMark);
         int index = internalList.indexOf(taskToComplete);
         taskToComplete.redoTask();

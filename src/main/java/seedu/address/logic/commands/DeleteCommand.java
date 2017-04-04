@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
+import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyWhatsLeft;
@@ -31,7 +34,7 @@ public class DeleteCommand extends Command {
         this.targetIndex = targetIndex;
         this.targetType = targetType;
     }
-
+    //@@author A0124377A
     @Override
     public CommandResult execute() throws CommandException {
 
@@ -47,6 +50,7 @@ public class DeleteCommand extends Command {
                 //store for undo operation
                 ReadOnlyWhatsLeft currState = model.getWhatsLeft();
                 ModelManager.setPreviousState(currState);
+                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
                 model.deleteEvent(eventToDelete);
                 model.storePreviousCommand("delete");
             } catch (EventNotFoundException pnfe) {
@@ -64,6 +68,7 @@ public class DeleteCommand extends Command {
                 //store for undo operation
                 ReadOnlyWhatsLeft currState = model.getWhatsLeft();
                 ModelManager.setPreviousState(currState);
+                EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex - 1));
                 model.deleteTask(taskToDelete);
                 model.storePreviousCommand("delete");
             } catch (TaskNotFoundException pnfe) {

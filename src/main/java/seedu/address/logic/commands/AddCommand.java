@@ -5,7 +5,8 @@ import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.WhatsLeftChangedEvent;
+import seedu.address.commons.events.ui.JumpToCalendarEventEvent;
+import seedu.address.commons.events.ui.JumpToCalendarTaskEvent;
 import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -26,9 +27,9 @@ import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueEventList;
-import seedu.address.model.person.UniqueEventList.DuplicateTimeClashException;
+import seedu.address.model.person.UniqueEventList.DuplicateEventException;
 import seedu.address.model.person.UniqueTaskList;
-
+import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -43,15 +44,16 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an activity to WhatsLeft. "
             + "Parameters: DESCRIPTION p/PRIORITY l/LOCATION sd/STARTDATE ed/ENDDATE st/STARTTIME"
-            + "et/ENDTIME bd/BYDATE bt/BYTIME \n"
+            + " et/ENDTIME bd/BYDATE bt/BYTIME \n"
             + "Event must have sd/STARTDATE, Task/Deadline must have p/PRIORITY \n"
             + "Example: " + COMMAND_WORD
             + " Project Discussion p/high l/discussion room t/formal";
 
     public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
+    public static final String MESSAGE_SUCCESS_WITH_CLASH = "New activity added but with possible clash! : %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
     public static final String MESSAGE_CLASH_TIMING = "This event clashes with another event";
-    public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date!";
+    public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date/Time!";
 
     private final Event toAddEvent;
     private final Task toAddTask;
@@ -61,7 +63,6 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-
     public AddCommand(String description, String priority, String starttime, String startdate, String endtime,
             String enddate, String bydate, String bytime, String location, Set<String> tags)
             throws IllegalValueException {
@@ -104,27 +105,48 @@ public class AddCommand extends Command {
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
             if (toAddTask == null) {
-                model.addEvent(toAddEvent);
-                UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
-                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
-                EventsCenter.getInstance().post(new WhatsLeftChangedEvent(currState));
-                model.storePreviousCommand("add");
-                return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
+                return addingEvent();
             } else if (toAddEvent == null) {
-                model.addTask(toAddTask);
-                UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-                EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(toAddTask)));
-                EventsCenter.getInstance().post(new WhatsLeftChangedEvent(currState));
-                model.storePreviousCommand("add");
-                return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
+                return addingTask();
             }
         } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
-        } catch (DuplicateTimeClashException e) {
-            throw new CommandException(MESSAGE_CLASH_TIMING);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
 
+    }
+
+    //@@author A0110491U
+    /**
+     * @return CommandResult of adding a Task
+     * @throws DuplicateTaskException if duplicate task is found
+     */
+    private CommandResult addingTask() throws DuplicateTaskException {
+        model.addTask(toAddTask);
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(toAddTask)));
+        EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(toAddTask));
+        model.storePreviousCommand("add");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
+    }
+
+    //@@author A0110491U
+    /**
+     * @return CommandResult of adding an Event
+     * @throws DuplicateEventException if duplicate event is found
+     */
+    private CommandResult addingEvent() throws DuplicateEventException {
+        model.addEvent(toAddEvent);
+        UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
+        EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
+        if (!toAddEvent.isOver()) {
+            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
+        }
+        model.storePreviousCommand("add");
+        if (model.eventHasClash(toAddEvent)) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_CLASH, toAddEvent));
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
     }
 
 }

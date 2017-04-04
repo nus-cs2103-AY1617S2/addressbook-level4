@@ -66,32 +66,28 @@ public interface ReadOnlyTask {
     }
 
 
-//    //@@author A0148038A
-//    default int compareTo(ReadOnlyTask o) {
-//      if (!this.hasDeadline() && !o.hasDeadline()) {
-//          return this.getPriority().compareTo(o.getPriority());
-//      } else if (this.hasDeadline() && !o.hasDeadline()) {
-//          return 1;
-//      } else if (!this.hasDeadline() && o.hasDeadline()) {
-//          return -1;
-//      } else {
-//          if (!this.getByDate().equals(o.getByDate())) {
-//              return getByDate().compareTo(o.getByDate());
-//          } else if (!this.getByTime().equals(o.getByTime())) {
-//              return getByTime().compareTo(o.getByTime());
-//          } else {
-//              return this.getPriority().compareTo(o.getPriority());
-//          }
-//      }
-//    }
-//
-//    //@@author A0148038A
-//  static Comparator<? super ReadOnlyTask> getComparator() {
-//      Comparator<ReadOnlyTask> byTask = (t1, t2) -> t1.compareTo(t2);
-//      return byTask;
-//  }
-    static Comparator<? super ReadOnlyTask> getComparator() {
-        Comparator<ReadOnlyTask> byPriority = (t1, t2) -> t1.getPriority().compareTo(t2.getPriority());
-        return byPriority;
+    //@@author A0148038A
+    default int compareTo(ReadOnlyTask o) {
+        if (!this.hasDeadline() && !o.hasDeadline()) {
+            return this.getPriority().compareTo(o.getPriority());
+        } else if (this.hasDeadline() && !o.hasDeadline()) {
+            return -1;
+        } else if (!this.hasDeadline() && o.hasDeadline()) {
+            return 1;
+        } else {
+            if (!this.getByDate().equals(o.getByDate())) {
+                return this.getByDate().compareTo(o.getByDate());
+            } else if (!this.getByTime().equals(o.getByTime())) {
+                return this.getByTime().compareTo(o.getByTime());
+            } else {
+                return this.getPriority().compareTo(o.getPriority());
+            }
+        }
     }
+
+    static Comparator<? super ReadOnlyTask> getComparator() {
+        Comparator<ReadOnlyTask> byTask = (t1, t2) -> t1.compareTo(t2);
+        return byTask;
+    }
+
 }

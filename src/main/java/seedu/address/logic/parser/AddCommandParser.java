@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.DateTimeException;
 import java.util.NoSuchElementException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -25,9 +26,9 @@ import seedu.address.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser {
 
-    private static String DEFAULT_START_TIME = "0001";
-    private static String DEFAULT_END_TIME = "2359";
-    private static String DEFAULT_BY_TIME = "2359";
+    private static final String DEFAULT_START_TIME = "0001";
+    private static final String DEFAULT_END_TIME = "2359";
+    private static final String DEFAULT_BY_TIME = "2359";
 
     //@@author A0110491U
     /**
@@ -117,6 +118,8 @@ public class AddCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        } catch (DateTimeException dte) {
+            return new IncorrectCommand(dte.getLocalizedMessage());
         }
     }
 

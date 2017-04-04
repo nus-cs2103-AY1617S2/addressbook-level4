@@ -17,6 +17,7 @@ public class ByTime {
             "Deadline ByTime can only be in this format: hhmm, e.g. 1300";
 
     public final LocalTime value;
+    public final boolean isExisting;
 
     //@@author A0121668A
     /**
@@ -27,9 +28,11 @@ public class ByTime {
     public ByTime(String byTimeArg) throws IllegalValueException {
         if (byTimeArg == null) {
             this.value = null;
+            this.isExisting = false;
         } else {
             try {
                 this.value = StringUtil.parseStringToTime(byTimeArg);
+                this.isExisting = true;
             } catch (DateTimeException illegalValueException) {
                 throw new IllegalValueException(MESSAGE_BYTIME_CONSTRAINTS);
             }
@@ -57,6 +60,11 @@ public class ByTime {
      */
     public ByTime(LocalTime bytime) {
         value = bytime;
+        if (bytime == null) {
+            isExisting = false;
+        } else {
+            isExisting = true;
+        }
     }
 
     public LocalTime getValue() {
@@ -84,6 +92,10 @@ public class ByTime {
     }
 
     //@@author A0148038A
+    public boolean isExisting() {
+        return this.isExisting;
+    }
+
     public int compareTo(ByTime o) {
         return this.getValue().compareTo(o.getValue());
     }

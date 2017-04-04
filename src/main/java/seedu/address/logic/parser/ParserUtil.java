@@ -32,6 +32,8 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetType>[et][vs])\\s(?<targetIndex>.+)");
     private static final Pattern INDEX_ALONE_ARG_FORMAT = Pattern.compile("(?<index>.+)");
+    private static final Pattern CONFIG_FILEPATH_FORMAT = Pattern.compile("(?<filepath>.*)");
+    private static final Pattern INDEX_FREQ_OCCUR_FORMAT = Pattern.compile("(?<index>.+)\\s(?<freq>.+)\\s(?<occur>.+)");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -48,9 +50,76 @@ public class ParserUtil {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
-
     }
+
+    //@@author A0121668A
+    /**
+     * Returns the specified location in the {@code command}
+     * Returns an {@code Optional.empty()} otherwise
+     * @param command
+     * @return
+     */
+    public static Optional<String> parseFilePath(String command) {
+        final Matcher matcher = CONFIG_FILEPATH_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String filePath = matcher.group("filepath");
+        return Optional.of(filePath);
+    }
+
     //@@author A0110491U
+    /**
+     * Returns the parsedIndex for recurCommand
+     */
+    public static Optional<Integer> parseIndexForRec(String command) {
+        final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+        String index = matcher.group("index");
+        if (!StringUtil.isUnsignedInteger(index)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(index));
+    }
+    //@@author
+
+    //@@author A0110491U
+    /**
+     * Returns the parsedFrequency for recurCommand
+     */
+    public static Optional<String> parseFreqForRec(String command) {
+        final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+        String freq = matcher.group("freq");
+        return Optional.of(freq);
+    }
+    //@@author
+
+    //@@author A0110491U
+    /**
+     * Returns the parsedOccurance for recurCommand
+     */
+    public static Optional<Integer> parseOccurForRec(String command) {
+        final Matcher matcher = INDEX_FREQ_OCCUR_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+        String occur = matcher.group("occur");
+        if (!StringUtil.isUnsignedInteger(occur)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(occur));
+    }
+
+    //@@author A0110491U
+    /**
+     * Returns the parsedIndex when it is the only argument
+     */
     public static Optional<Integer> parseIndexAlone(String command) {
         final Matcher matcher = INDEX_ALONE_ARG_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
@@ -64,7 +133,26 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
 
     }
+    //@@author A024377A
+    /**
+     * Returns the parsed integer when it is the only argument
+     */
+    public static Optional<Integer> parseIntegerAlone(String command) {
+        final Matcher matcher = INDEX_ALONE_ARG_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
 
+        String index = matcher.group("index");
+        if (!StringUtil.isSignedInteger(index)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(index));
+    }
+
+    /**
+     * Returns the parsedType when it is the first of 2 arguments
+     */
     public static Optional<String> parseType(String command) {
         final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
@@ -184,6 +272,12 @@ public class ParserUtil {
 
     //@@author A0121668A
     public static String parseStatus(String command) {
+        String trimmedCommand = command.trim();
+        return trimmedCommand;
+    }
+
+    //@@author A0148038A
+    public static String parseClearType(String command) {
         String trimmedCommand = command.trim();
         return trimmedCommand;
     }

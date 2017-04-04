@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -45,9 +47,25 @@ public class EventCard extends UiPart<Region> {
 
         locations.setText("@" + event.getLocation().toString());
         initTags(event);
+        setCardLook(event);
     }
 
     private void initTags(ReadOnlyEvent event) {
         event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+    //@@author A0124377A
+    //add badge to list card for certain statuses
+    private void setCardLook(ReadOnlyEvent event) {
+        if (event.isOver()) {
+            cardPane.getStyleClass().add("status-complete");
+        } else if (isDueToday(event)) {
+            cardPane.getStyleClass().add("status-dueOrOverdue");
+        }
+    }
+
+    private boolean isDueToday(ReadOnlyEvent event) {
+        LocalDateTime eventTime = LocalDateTime.of(event.getStartDate().getValue(),
+                event.getStartTime().getValue());
+        return eventTime.getDayOfYear() == LocalDateTime.now().getDayOfYear();
     }
 }
