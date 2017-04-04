@@ -54,7 +54,6 @@ public class XmlAdaptedTask {
             priority = "Low";
         }
         isCompleted = source.getIsCompleted();
-        
     }
   //@@author A0139926R
     /**
