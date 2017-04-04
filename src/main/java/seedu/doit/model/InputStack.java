@@ -59,7 +59,7 @@ public class InputStack {
         }
         logger.info("UP adding (" + input + ") to downstack");
         addToDownStack(input);
-        logger.info("UPUPUPUP up " + upStack.peek() + " down " + downStack.peek());
+        logger.info("UP up " + upStack.peek() + " down " + downStack.peek());
         String newInput = upStack.pop();
         logger.info("UP output (" + newInput + ")");
         return newInput;
@@ -77,7 +77,7 @@ public class InputStack {
         }
         logger.info("DOWN adding (" + input + ") to upstack");
         addToUpStack(input);
-        logger.info("DOWNDOWN up " + upStack.peek() + " down " + downStack.peek());
+        logger.info("DOWN up " + upStack.peek() + " down " + downStack.peek());
         String newInput = downStack.pop();
         logger.info("DOWN output (" + newInput + ")");
         return newInput;
@@ -90,10 +90,4 @@ public class InputStack {
         downStack.clear();
     }
 
-    /**
-     * Clears Up stack
-     */
-    public void clearUpStack() {
-        upStack.clear();
-    }
 }
