@@ -17,7 +17,7 @@ import seedu.ezdo.model.todo.Task;
 public class EventsTest {
 
     @Test
-    public void TaskPanelSelectionChangedEventGetData() throws Exception {
+    public void taskPanelSelectionChangedEvent_GetData() throws Exception {
         ReadOnlyTask task = new Task(new Name("hello"), new Priority(""),
                 new StartDate(""), new DueDate(""), new Recur(""), new UniqueTagList("what"));
         TaskPanelSelectionChangedEvent tpsce = new TaskPanelSelectionChangedEvent(task);
