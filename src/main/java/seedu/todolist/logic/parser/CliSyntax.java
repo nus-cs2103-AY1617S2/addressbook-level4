@@ -15,7 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_END_TIME = new Prefix("e/");
     public static final Prefix PREFIX_TAG_ADD = new Prefix("ta/");
     public static final Prefix PREFIX_COMPLETE_TIME = new Prefix("c/");
-    public static final Prefix PREFIX_TODO_TYPE = new Prefix("type/");
+    public static final Prefix PREFIX_TODO_TYPE = new Prefix("ty/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

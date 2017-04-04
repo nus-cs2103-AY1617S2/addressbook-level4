@@ -40,10 +40,11 @@ public class FindCommandParser {
      * @throws IllegalValueException
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(
-                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_TAG, PREFIX_COMPLETE_TIME, 
-                        PREFIX_TODO_TYPE);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_START_TIME,
+                                                                PREFIX_END_TIME,
+                                                                PREFIX_TAG,
+                                                                PREFIX_COMPLETE_TIME,
+                                                                PREFIX_TODO_TYPE);
         argsTokenizer.tokenize(args);
         // Fetch the keyword string before the prefix
         Optional<String> keywordsString = argsTokenizer.getPreamble();
