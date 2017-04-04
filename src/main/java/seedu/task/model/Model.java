@@ -72,15 +72,22 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keyword of tags */
     void updateFilteredTaskList(String keyword);
+
     //@@author A0139975J
     /** Updates the filter of the filtered task list to filter by the given date */
     void updateFilteredTaskList(Date value);
+
   //@@author A0139975J
     /** Updates the filer of the filtered task list to filter by done or undone task */
     void updateFilteredTaskList(boolean value);
+
+    /** Updates the filter of the filtered task list to filter by the given keyword and/or date */
+    void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact);
+
     //@@author A0139975J
     /** Updates the filer of the filtered task list to filter by floating task */
     void updateFilteredTaskListFloat();
+
     //@@author
     /** Changes the file path for data to be saved in */
     void changeFilePath(String pathName);
@@ -94,7 +101,5 @@ public interface Model {
     /** Sorts the task list */
     void sortTaskList();
 
-    /** Updates the filter of the filtered task list to filter by the given keyword and/or date */
-    void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact);
 
 }

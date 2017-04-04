@@ -10,7 +10,7 @@ public class TaskUtil {
     /**
      * Checks if the given task contains the searched keyword (case insensitive), in any field, both a fullword and a
      * substring
-     * 
+     *
      * @param task
      * @param keyword
      * @return
@@ -27,7 +27,7 @@ public class TaskUtil {
 
     /**
      * Checks if the given task contains an exact full match of the searched keywords, in any of the fields
-     * 
+     *
      * @param task
      * @param keywords
      * @return
@@ -44,7 +44,7 @@ public class TaskUtil {
     /**
      * Checks if the given task contains a full match of any of the given keywords. One successful full match in any of
      * the fields will return true.
-     * 
+     *
      * @param task
      * @param keywords
      * @return

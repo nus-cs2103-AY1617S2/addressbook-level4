@@ -11,13 +11,13 @@ public class ListFloatingDateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void listbyfloatingTask_nonEmptyList() {
-        //add one task that does not contain start and end date, floating task 
+        //add one task that does not contain start and end date, floating task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.milk;
         commandBox.runCommand(taskToAdd.getAddCommand());
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertListByFloat(currentList);
-        
+
     }
 
 
@@ -25,7 +25,7 @@ public class ListFloatingDateCommandTest extends TaskManagerGuiTest {
     public void find_emptyList() {
         commandBox.runCommand("clear");
         assertListByFloat(); // no results
-       
+
     }
 
     private void assertListByFloat(TestTask... currentList) {
@@ -37,5 +37,4 @@ public class ListFloatingDateCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
-  
 }
