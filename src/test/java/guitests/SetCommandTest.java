@@ -239,9 +239,16 @@ public class SetCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void set_Fail_Command_Exist() {
+    public void set_Fail_Command_Exist_In_Default() {
         this.commandBox
                 .runCommand(SetCommand.COMMAND_WORD + " " + SetCommand.COMMAND_WORD + " " + SetCommand.COMMAND_WORD);
+        assertResultMessage(SetCommand.COMMAND_ALREADY_EXISTS);
+    }
+
+    @Test
+    public void set_Fail_Command_Exist_In_CommandSettings() {
+        this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + SetCommand.COMMAND_WORD + " " + NEW_SET);
+        this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + SetCommand.COMMAND_WORD + " " + NEW_SET);
         assertResultMessage(SetCommand.COMMAND_ALREADY_EXISTS);
     }
 

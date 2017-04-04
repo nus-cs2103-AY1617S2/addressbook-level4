@@ -47,13 +47,6 @@ public class UserPrefs {
     }
 
     // @@author A0138909R
-    public void setCommandSettings(String add, String delete, String done, String edit, String clear, String exit,
-            String find, String help, String list, String load, String mark, String redo, String save, String select,
-            String set, String sort, String undo, String unmark) {
-        CommandSettings.getInstance().setCommandSettings(add, delete, done, edit, clear, exit, find, help, list, load,
-                mark, redo, save, select, set, sort, undo, unmark);
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
