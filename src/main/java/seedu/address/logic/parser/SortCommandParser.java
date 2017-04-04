@@ -13,8 +13,8 @@ import seedu.address.logic.commands.SortCommand;
 public class SortCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns an DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns an SortCommand object for execution.
      */
     public Command parse(String para) {
 

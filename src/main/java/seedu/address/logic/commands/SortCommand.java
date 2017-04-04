@@ -11,7 +11,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Sorted all tasks";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the list of tasks by the parameter indicated\n"
+            + ": Sorts the list of tasks according to the parameter indicated\n"
             + "Parameters: name|deadline\n"
             + "Example: " + COMMAND_WORD + " deadline";
 
