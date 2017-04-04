@@ -20,7 +20,7 @@
                   <AnchorPane fx:id="resultDisplayPlaceholder" VBox.vgrow="NEVER" />
                </children>
             </VBox>
-            <BorderPane StackPane.alignment="CENTER">
+            <BorderPane fx:id="commandAutoCompleteContainer" StackPane.alignment="CENTER">
                <bottom>
                   <HBox fx:id="commandAutoCompletePlaceholder" alignment="CENTER" BorderPane.alignment="CENTER">
                      <BorderPane.margin>

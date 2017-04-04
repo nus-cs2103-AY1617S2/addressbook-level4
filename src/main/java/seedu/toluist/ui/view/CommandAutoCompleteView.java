@@ -24,6 +24,7 @@ public class CommandAutoCompleteView extends UiView {
 
     public CommandAutoCompleteView() {
         super(FXML);
+        getRoot().setPickOnBounds(false);
         configureBindings();
     }
 

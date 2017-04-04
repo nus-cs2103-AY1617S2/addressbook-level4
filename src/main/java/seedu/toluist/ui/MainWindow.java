@@ -18,6 +18,7 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -70,6 +71,8 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane tabPanePlaceholder;
     @FXML
     private HBox commandAutoCompletePlaceholder;
+    @FXML
+    private BorderPane commandAutoCompleteContainer;
     @FXML
     private AnchorPane helpPlaceholder;
 
@@ -272,6 +275,7 @@ public class MainWindow extends UiPart<Region> {
         tabBarView = new TabBarView();
         tabBarView.setParent(getTabPanePlaceholder());
 
+        commandAutoCompleteContainer.setPickOnBounds(false);
         commandAutoCompleteView = new CommandAutoCompleteView();
         commandAutoCompleteView.setParent(getCommandAutoCompletePlaceholder());
 
