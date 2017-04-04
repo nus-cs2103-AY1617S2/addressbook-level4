@@ -42,19 +42,23 @@
                      </HBox.margin>
                   </Label>
 
-                  <Label fx:id="name" alignment="TOP_LEFT" minWidth="400.0" prefWidth="400.0" styleClass="task" text="\$first" wrapText="true">
+                  <Label fx:id="name" alignment="TOP_LEFT" minWidth="300.0" prefWidth="300.0" styleClass="task" text="\$first" wrapText="true">
                      <HBox.margin>
-                        <Insets right="80.0" />
+                        <Insets right="50.0" />
                      </HBox.margin>
                   </Label>
                   <Label fx:id="startDate" alignment="TOP_LEFT" minWidth="150.0" prefWidth="150.0" styleClass="task" text="\$startDate" wrapText="true">
                      <HBox.margin>
-                        <Insets right="80.0" />
+                        <Insets right="50.0" />
                      </HBox.margin>
                   </Label>
+                  <Label fx:id="recur" alignment="TOP_LEFT" minWidth="100.0" prefWidth="100.0" styleClass="task" text="\\$recur" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin></Label>
                   <Label fx:id="dueDate" alignment="TOP_LEFT" minWidth="150.0" prefWidth="150.0" styleClass="task" text="\$dueDate" wrapText="true">
                      <HBox.margin>
-                        <Insets right="80.0" />
+                        <Insets right="50.0" />
                      </HBox.margin>
                   </Label>
                   <FlowPane fx:id="tags" prefWrapLength="800.0">

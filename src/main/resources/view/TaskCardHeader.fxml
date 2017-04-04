@@ -27,19 +27,24 @@
                      </HBox.margin>
                   </Label>
 
-                  <Label alignment="BOTTOM_LEFT" minWidth="400.0" prefWidth="400.0" styleClass="task-header" text="Task" wrapText="true">
+                  <Label alignment="BOTTOM_LEFT" minWidth="300.0" prefWidth="300.0" styleClass="task-header" text="Task" wrapText="true">
                      <HBox.margin>
-                        <Insets right="80.0" />
+                        <Insets right="50.0" />
                      </HBox.margin>
                   </Label>
                   <Label alignment="BOTTOM_LEFT" minWidth="150.0" prefWidth="150.0" styleClass="task-header" text="Start Date" wrapText="true">
                      <HBox.margin>
-                        <Insets right="80.0" />
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="BOTTOM_LEFT" minWidth="100.0" prefWidth="100.0" styleClass="task-header" text="Recur" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="50.0" />
                      </HBox.margin>
                   </Label>
                   <Label alignment="BOTTOM_LEFT" minWidth="150.0" prefWidth="150.0" styleClass="task-header" text="Due Date" wrapText="true">
                      <HBox.margin>
-                        <Insets right="80.0" />
+                        <Insets right="50.0" />
                      </HBox.margin>
                   </Label>
                   <Label alignment="BOTTOM_LEFT" minWidth="180.0" prefWidth="180.0" styleClass="task-header" text="Tags" wrapText="true" />

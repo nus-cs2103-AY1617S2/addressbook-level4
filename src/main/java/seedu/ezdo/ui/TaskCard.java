@@ -64,6 +64,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label dueDate;
     @FXML
+    private Label recur;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -74,6 +76,7 @@ public class TaskCard extends UiPart<Region> {
         setPriority(task);
         setStartDate(task);
         setDueDate(task);
+        recur.setText(task.getRecur().value);
         initTags(task);
     }
 
