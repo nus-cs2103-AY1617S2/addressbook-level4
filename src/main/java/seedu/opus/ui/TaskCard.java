@@ -34,8 +34,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label note;
     @FXML
-    private Label status;
-    @FXML
     private Label startTime;
     @FXML
     private Label endTime;
