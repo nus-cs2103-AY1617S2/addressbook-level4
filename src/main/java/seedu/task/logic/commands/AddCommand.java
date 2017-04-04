@@ -28,7 +28,11 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
-
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invaid date, try ddmmyy-ddmmyy ";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format, be more prcise or try hhmm, hh:mm, or h:mm";
+    public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time.";
+    public static final String MESSAGE_INVALID_DATE = "Start time can't be after end time.";
+    
     private final Task taskToAdd;
 
     /**

@@ -25,10 +25,13 @@ public class TestTask implements ReadOnlyTask {
     private TaskTime taskEndTime;
     private String taskDescription;
     private TaskStatus taskStatus;
-    private TaskPath taskPath;
+    private LocalDate localDate;
+    private LocalTime localTime;
+    
     
     public TestTask() {
 	tags = new UniqueTagList();
+	
     }
 
     /**
@@ -114,7 +117,7 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
 	StringBuilder sb = new StringBuilder();
-	sb.append("add " + this.getTaskName().fullTaskName + " ");
+	sb.append("add" + this.getTaskName().fullTaskName + " ");
 	sb.append("d/" + this.getTaskDate().value + " ");
 	sb.append("s/" + this.getTaskStartTime().value + " ");
 	sb.append("e/" + this.getTaskEndTime().value + " ");
@@ -129,17 +132,31 @@ public class TestTask implements ReadOnlyTask {
 	return null;
     }
 
-	@Override
-	public LocalTime getLocalTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setCreationTime() {
+    	localDate = LocalDate.now();
+    	localTime = LocalTime.now();
+    }
+    
+    public LocalDate getLocalDate() {
+    	if (localDate == null) {
+    		setCreationTime();
+    	}
+    	return localDate;
+    }
 
-	@Override
-	public LocalDate getLocalDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public LocalTime getLocalTime() {
+    	if (localTime == null) {
+    		setCreationTime();
+    	}
+    	return localTime;
+    }
 
+    private void setLocalDate(LocalDate localDate) {
+    	this.localDate = localDate;
+    }
+
+    private void setLocalTime(LocalTime localTime) {
+    	this.localTime = localTime;
+    }
 }
 //@@author
