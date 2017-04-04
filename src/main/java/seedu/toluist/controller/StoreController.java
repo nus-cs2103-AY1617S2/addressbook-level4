@@ -67,6 +67,7 @@ public class StoreController extends Controller {
             message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS,
                     Config.getInstance().getTodoListFilePath());
             uiStore.setCommandResult(new CommandResult(message));
+            uiStore.setStoragePath(path);
         } else {
             throw new InvalidCommandException(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
         }

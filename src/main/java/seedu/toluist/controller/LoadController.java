@@ -59,6 +59,7 @@ public class LoadController extends Controller {
             UiStore.getInstance().setTasks(todoList.getTasks());
             uiStore.setCommandResult(
                     new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path)));
+            uiStore.setStoragePath(path);
         } catch (DataStorageException e) {
             throw new InvalidCommandException(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
         }

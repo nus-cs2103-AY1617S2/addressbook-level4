@@ -33,6 +33,7 @@ import seedu.toluist.ui.view.CommandAutoCompleteView;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.HelpListView;
 import seedu.toluist.ui.view.ResultView;
+import seedu.toluist.ui.view.StatusBar;
 import seedu.toluist.ui.view.TabBarView;
 import seedu.toluist.ui.view.TaskListUiView;
 
@@ -75,6 +76,8 @@ public class MainWindow extends UiPart<Region> {
     private BorderPane commandAutoCompleteContainer;
     @FXML
     private AnchorPane helpPlaceholder;
+    @FXML
+    private AnchorPane statusBarPlaceholder;
 
     private CommandBox commandBox;
     private TaskListUiView taskListUiView;
@@ -82,6 +85,7 @@ public class MainWindow extends UiPart<Region> {
     private TabBarView tabBarView;
     private CommandAutoCompleteView commandAutoCompleteView;
     private HelpListView helpListView;
+    private StatusBar statusBar;
 
 
     public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
@@ -112,6 +116,7 @@ public class MainWindow extends UiPart<Region> {
         tabBarView.render();
         commandAutoCompleteView.render();
         helpListView.render();
+        statusBar.render();
     }
 
     private void configureKeyCombinations() {
@@ -221,6 +226,10 @@ public class MainWindow extends UiPart<Region> {
         return commandAutoCompletePlaceholder;
     }
 
+    private AnchorPane getStatusBarPlaceholder() {
+        return statusBarPlaceholder;
+    }
+
     /**
      * Set min size for window
      */
@@ -282,6 +291,9 @@ public class MainWindow extends UiPart<Region> {
         FxViewUtil.makeFullWidth(helpPlaceholder);
         helpListView = new HelpListView();
         helpListView.setParent(helpPlaceholder);
+
+        statusBar = new StatusBar();
+        statusBar.setParent(getStatusBarPlaceholder());
     }
 
     void show() {
