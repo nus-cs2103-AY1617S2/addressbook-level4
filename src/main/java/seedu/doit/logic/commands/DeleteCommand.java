@@ -1,8 +1,10 @@
 package seedu.doit.logic.commands;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.logic.commands.exceptions.CommandException;
@@ -25,7 +27,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     private Set<Integer> targetIndexes;
-    private Set<ReadOnlyTask> tasksToDeleteSet;
+    private HashSet<ReadOnlyTask> tasksToDeleteSet = new HashSet<>();
+
 
     public DeleteCommand(Set<Integer> targetIndexes) {
         this.targetIndexes = targetIndexes;
