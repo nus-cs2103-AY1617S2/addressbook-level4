@@ -18,12 +18,16 @@ public class DateUtil {
      */
     public static boolean isTaskDateValid(ReadOnlyTask task) throws ParseException {
         assert task != null;
-        if (task.getStartDate().toString().isEmpty() || task.getDueDate().toString().isEmpty()) {
+        String taskStartDate = task.getStartDate().toString();
+        String taskDueDate = task.getDueDate().toString();
+        final boolean isStartDateMissing = taskStartDate.isEmpty();
+        final boolean isDueDateMissing = taskDueDate.isEmpty();
+        if (isStartDateMissing || isDueDateMissing) {
             return true;
         }
         SimpleDateFormat df = new SimpleDateFormat(DATE_REGEX);
-        Date startDate = df.parse(task.getStartDate().toString());
-        Date dueDate = df.parse(task.getDueDate().toString());
+        Date startDate = df.parse(taskStartDate);
+        Date dueDate = df.parse(taskDueDate);
         return (startDate.compareTo(dueDate) <= 0);
     }
 
