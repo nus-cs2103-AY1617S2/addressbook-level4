@@ -37,12 +37,12 @@ public class Recur {
     }
 
     private void initialiseRecurIntervals() {
-        
+
         String intervalDaily = "daily";
         String intervalWeekly = "weekly";
         String intervalMonthly = "monthly";
         String intervalYearly = "yearly";
-        
+
         RECUR_INTERVALS.put(INTERVAL_NONE, Calendar.DATE);
         RECUR_INTERVALS.put(intervalDaily, Calendar.DAY_OF_MONTH);
         RECUR_INTERVALS.put(intervalWeekly, Calendar.WEEK_OF_MONTH);
