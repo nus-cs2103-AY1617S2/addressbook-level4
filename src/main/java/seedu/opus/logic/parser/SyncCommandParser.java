@@ -18,9 +18,9 @@ public class SyncCommandParser {
      * and returns an SyncCommand object for execution.
      */
     public Command parse(String args) {
-        if (args.trim().toLowerCase().equals(SyncCommand.SYNC_ON_ARGUMENT)) {
+        if (args.trim().equalsIgnoreCase(SyncCommand.SYNC_ON_ARGUMENT)) {
             return new SyncCommand(true);
-        } else if (args.trim().toLowerCase().equals(SyncCommand.SYNC_OFF_ARGUMENT)) {
+        } else if (args.trim().equalsIgnoreCase(SyncCommand.SYNC_OFF_ARGUMENT)) {
             return new SyncCommand(false);
         } else {
             return new IncorrectCommand(
