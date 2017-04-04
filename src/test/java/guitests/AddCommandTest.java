@@ -25,7 +25,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add to empty list
-        commandBox.runCommand("clear");
+        commandBox.runCommand("clear all");
         assertAddSuccess(td.alice);
 
         //invalid command
