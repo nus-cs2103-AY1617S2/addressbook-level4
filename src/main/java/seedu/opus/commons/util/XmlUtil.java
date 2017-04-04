@@ -32,7 +32,7 @@ public class XmlUtil {
         assert file != null;
         assert classToConvert != null;
 
-        if (!FileUtil.doesFileExist(file)) {
+        if (!FileUtil.fileExists(file)) {
             throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
         }
 
@@ -73,7 +73,9 @@ public class XmlUtil {
         try {
             getDataFromFile(file, XmlSerializableTaskManager.class);
             return true;
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (JAXBException e) {
             return false;
         }
     }
