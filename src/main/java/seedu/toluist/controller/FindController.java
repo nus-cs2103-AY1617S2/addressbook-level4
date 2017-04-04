@@ -92,7 +92,7 @@ public class FindController extends Controller {
                 keywords, searchParameters, StringUtil.nounWithCount("result", foundCount))
                 + String.format(MESSAGE_RESULT_TEMPLATE_TAB, uiStore.getShownTasks().size()));
     }
-    
+
     private String nameSearchParameters(boolean isSearchByTag, boolean isSearchByName) {
         if (isSearchByName && isSearchByTag) {
             return MESSAGE_NAME_AND_TAG;

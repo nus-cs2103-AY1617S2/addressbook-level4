@@ -12,5 +12,6 @@ public class Messages {
     public static final String MESSAGE_NO_STORAGE_PATH = "No storage path was provided.";
     public static final String MESSAGE_SET_STORAGE_FAILURE = "The storage path %s is invalid.";
     public static final String MESSAGE_SET_STORAGE_SUCCESS = "Data storage path was changed to %s.";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format. Please type `help %s` for assistance.";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format. "
+            + "Please type `help %s` for assistance.";
 }

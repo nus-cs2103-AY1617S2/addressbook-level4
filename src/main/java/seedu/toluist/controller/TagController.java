@@ -89,7 +89,7 @@ public class TagController extends Controller {
         if (!StringUtils.isNumeric(index)) {
             return true;
         }
-        
+
         return false;
     }
 
