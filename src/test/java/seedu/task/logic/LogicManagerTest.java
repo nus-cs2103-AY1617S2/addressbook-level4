@@ -122,7 +122,6 @@ public class LogicManagerTest {
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-
 	    ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
 	assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
 
@@ -355,8 +354,9 @@ public class LogicManagerTest {
 	TaskManager expectedTM = helper.generateTaskManager(threeTasks);
 	expectedTM.removeTask(threeTasks.get(1));
 	helper.addToModel(model, threeTasks);
-
-	assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, 2).concat("\n"),
+	
+	String deletedTaskName = threeTasks.get(1).getTaskName().toString();
+	assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, deletedTaskName).concat("\n"),
 		expectedTM, expectedTM.getTaskList());
     }
 
