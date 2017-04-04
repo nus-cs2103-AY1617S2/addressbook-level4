@@ -125,11 +125,20 @@ public class TaskDate {
         return Objects.hash(startDate, endDate);
     }
 
+    /**
+     * Method that returns 1 if the parameter lies within this tasks dates,
+     * or there is some overlap i.e, the task's startDate > parameter's startDate
+     * or the task's endDate < parameter's endDate
+     * @param dates
+     * @return 1 if overlapping dates, else 0
+     */
     public int compareTo(TaskDate dates) {
         if (this.startDate.compareTo(dates.getStartDate()) >= 0) {
-            return this.endDate.compareTo(dates.endDate);
+            return 1;
+        } else if (this.endDate.compareTo(dates.getEndDate()) <= 0) {
+            return 1;
         } else {
-            return -1;
+            return 0;
         }
     }
 }
