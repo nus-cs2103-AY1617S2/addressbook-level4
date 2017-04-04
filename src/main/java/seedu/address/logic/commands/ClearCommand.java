@@ -21,6 +21,8 @@ public class ClearCommand extends Command {
             + "Example: " + COMMAND_WORD + " ev\n"
             + "Example: " + COMMAND_WORD + "";
     public static final String MESSAGE_SUCCESS = "WhatsLeft has been cleared!";
+    public static final String CLEAR_EVENTS_SUCCESS = "Event list in WhatsLeft has been cleared!";
+    public static final String CLEAR_TASKS_SUCCESS = "Task list in WhatsLeft has been cleared!";
 
     public final String typeToClear;
 
@@ -47,7 +49,7 @@ public class ClearCommand extends Command {
             model.resetEvent();
             //store for undo operation
             model.storePreviousCommand("clear");
-            return new CommandResult(MESSAGE_SUCCESS);
+            return new CommandResult(CLEAR_EVENTS_SUCCESS);
         } else if (typeToClear.equals("ts")) {
             assert model != null;
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
@@ -55,7 +57,7 @@ public class ClearCommand extends Command {
             model.resetTask();
             //store for undo operation
             model.storePreviousCommand("clear");
-            return new CommandResult(MESSAGE_SUCCESS);
+            return new CommandResult(CLEAR_TASKS_SUCCESS);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_TYPE);
         }
