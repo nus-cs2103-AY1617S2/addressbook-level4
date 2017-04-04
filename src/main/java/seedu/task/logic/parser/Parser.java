@@ -62,7 +62,7 @@ public class Parser {
                 assert false : "ParserException to be caused by timeFormatter() method, which will definitely pass";
                 return null;
             }
-            
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
