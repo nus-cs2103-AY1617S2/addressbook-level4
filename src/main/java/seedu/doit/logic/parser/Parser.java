@@ -57,48 +57,210 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        CommandSettings commandSettings = CommandSettings.getInstance();
+        final CommandSettings commandSettings = CommandSettings.getInstance();
 
-        if (AddCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getAdd().equals(commandWord)) {
+        if (isAddCommandWord(commandWord, commandSettings)) {
             return new AddCommandParser().parse(arguments);
-        } else if (EditCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getEdit().equals(commandWord)) {
+        } else if (isEditCommandWord(commandWord, commandSettings)) {
             return new EditCommandParser().parse(arguments);
-        } else if (SelectCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSelect().equals(commandWord)) {
+        } else if (inSelectCommandWord(commandWord, commandSettings)) {
             return new SelectCommandParser().parse(arguments);
-        } else if (DoneCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDone().equals(commandWord)) {
+        } else if (isDoneCommandWord(commandWord, commandSettings)) {
             return new DoneCommand();
-        } else if (MarkCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getMark().equals(commandWord)) {
+        } else if (isMarkCommandWord(commandWord, commandSettings)) {
             return new MarkCommandParser().parse(arguments);
-        } else if (UnmarkCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUnmark().equals(commandWord)) {
+        } else if (isUnmarkCommandWord(commandWord, commandSettings)) {
             return new UnmarkCommandParser().parse(arguments);
-        } else if (SortCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSort().equals(commandWord)) {
+        } else if (isSortCommandWord(commandWord, commandSettings)) {
             return new SortCommandParser().parse(arguments);
-        } else if (DeleteCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDelete().equals(commandWord)) {
+        } else if (isDeleteCommandWord(commandWord, commandSettings)) {
             return new DeleteCommandParser().parse(arguments);
-        } else if (ClearCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getClear().equals(commandWord)) {
+        } else if (isClearCommandWord(commandWord, commandSettings)) {
             return new ClearCommand();
-        } else if (FindCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getFind().equals(commandWord)) {
+        } else if (isFindCommandWord(commandWord, commandSettings)) {
             return new FindCommandParser().parse(arguments);
-        } else if (ListCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getList().equals(commandWord)) {
+        } else if (isListCommandWord(commandWord, commandSettings)) {
             return new ListCommand();
-        } else if (ExitCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getExit().equals(commandWord)) {
+        } else if (isExitCommandWord(commandWord, commandSettings)) {
             return new ExitCommand();
-        } else if (HelpCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getHelp().equals(commandWord)) {
+        } else if (isHelpCommandWord(commandWord, commandSettings)) {
             return new HelpCommand();
-        } else if (SaveCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSave().equals(commandWord)) {
+        } else if (isSaveCommandWord(commandWord, commandSettings)) {
             return new SaveCommandParser().parse(arguments);
-        } else if (LoadCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getLoad().equals(commandWord)) {
+        } else if (isLoadCommandWord(commandWord, commandSettings)) {
             return new LoadCommandParser().parse(arguments);
-        } else if (UndoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUndo().equals(commandWord)) {
+        } else if (isUndoCommandWord(commandWord, commandSettings)) {
             return new UndoCommand();
-        } else if (RedoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getRedo().equals(commandWord)) {
+        } else if (isRedoCommandWord(commandWord, commandSettings)) {
             return new RedoCommand();
-        } else if (SetCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSet().equals(commandWord)) {
+        } else if (isSetCommandWord(commandWord, commandSettings)) {
             return new SetCommandParser().parse(arguments);
         } else {
             logger.info(commandWord + " add command in command settings is: " + commandSettings.toString());
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isSetCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return SetCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSet().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isRedoCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return RedoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getRedo().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isUndoCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return UndoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUndo().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isLoadCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return LoadCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getLoad().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isSaveCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return SaveCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSave().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isHelpCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return HelpCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getHelp().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isExitCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return ExitCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getExit().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isListCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return ListCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getList().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isFindCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return FindCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getFind().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isClearCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return ClearCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getClear().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isDeleteCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return DeleteCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDelete().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isSortCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return SortCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSort().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isUnmarkCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return UnmarkCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUnmark().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isMarkCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return MarkCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getMark().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isDoneCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return DoneCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDone().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean inSelectCommandWord(final String commandWord, final CommandSettings commandSettings) {
+        return SelectCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSelect().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isEditCommandWord(final String commandWord, CommandSettings commandSettings) {
+        return EditCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getEdit().equals(commandWord);
+    }
+
+    /**
+     * @param commandWord
+     * @param commandSettings
+     * @return
+     */
+    public boolean isAddCommandWord(final String commandWord, CommandSettings commandSettings) {
+        return AddCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getAdd().equals(commandWord);
     }
 
 }
