@@ -38,7 +38,7 @@ public class DateTimeExtractor {
 
     /**
      * Regex that matches the argument name [from].
-     * Matches a single whitespace character (i.e. \t\n\x0B\f\r) in between a "from".
+     * Matches a single whitespace character (i.e. 0x20\t\n\x0B\f\r) in between a "from".
      * This prevents matching words such as therefrom and fromage.
      */
     private static final String ARG_NAME_FROM_REGEX = "(?<fromArg>\\sfrom\\s)";
@@ -57,7 +57,7 @@ public class DateTimeExtractor {
 
     /**
      * Regex that matches the argument name [to].
-     * Matches a single whitespace character (i.e. \t\n\x0B\f\r) in between a "to".
+     * Matches a single whitespace character (i.e. 0x20\t\n\x0B\f\r) in between a "to".
      * This prevents matching words such as auto and tomorrow.
      */
     private static final String ARG_NAME_TO_REGEX =  "(?<toArg>\\sto\\s)";
@@ -70,7 +70,7 @@ public class DateTimeExtractor {
 
     /**
      * Regex that matches the argument name [by].
-     * Matches a single whitespace character (i.e. \t\n\x0B\f\r) in between a "by".
+     * Matches a single whitespace character (i.e. 0x20\t\n\x0B\f\r) in between a "by".
      * This prevents matching words such as baby and bypass.
      */
     private static final String ARG_NAME_BY_REGEX = "(?<byArg>\\sby\\s)";

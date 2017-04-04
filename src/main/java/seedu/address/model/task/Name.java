@@ -14,7 +14,7 @@ public class Name {
 
     /**
      * The first character of the name must not be a whitespace or a forward slash,
-     * otherwise a whitespace character (i.e.\t\n\x0B\f\r) becomes a valid input.
+     * otherwise a whitespace character (i.e.0x20\t\n\x0B\f\r) becomes a valid input.
      */
     public static final String NAME_VALIDATION_REGEX = "[^/\\s][^/]*";
 

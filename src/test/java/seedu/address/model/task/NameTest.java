@@ -7,19 +7,28 @@ import org.junit.Test;
 
 public class NameTest {
 
+    //@@author A0140023E
     @Test
     public void isValidName() {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName(" ")); // space only (0x20)
+        assertFalse(Name.isValidName("\t")); // tab only
+        assertFalse(Name.isValidName("\n")); // new line only
+        assertFalse(Name.isValidName("\u000B")); // Vertical tab only
+        assertFalse(Name.isValidName("\f")); // form feed only
+        assertFalse(Name.isValidName("\r")); // carriage return only
+        assertFalse(Name.isValidName("//")); // only slashes
+        assertFalse(Name.isValidName("fetch colleague/boss")); // contains forward slashes
 
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("assignment")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("2nd draft")); // alphanumeric characters
+        assertTrue(Name.isValidName("Software Engineering Exam")); // with capital letters
+        assertTrue(Name.isValidName("Super duper the long task")); // long names
+        assertTrue(Name.isValidName("#$!$#!$!@#$!@!~@~!")); // tons of random symbols
+        assertTrue(Name.isValidName("Whee~~~~")); // alphabets with symbols
+        assertTrue(Name.isValidName("Omg!!")); // alphabets with symbols
     }
 }
