@@ -112,16 +112,8 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     @Test
     public void commandBox_pressDown_emptyString() {
         this.commandBox.runCommand(EMPTY_STRING);
-        this.commandBox.runCommand(EMPTY_STRING);
-        this.commandBox.runCommand(EMPTY_STRING);
-        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
-        this.commandBox.runCommand(COMMAND_THAT_FAILS);
-        this.commandBox.clickUpInTextField();
-        this.commandBox.clickUpInTextField();
-        this.commandBox.clickUpInTextField();
-        this.commandBox.clickUpInTextField();
         this.commandBox.clickDownInTextField();
-        assertEquals(COMMAND_THAT_FAILS, this.commandBox.getCommandInput());
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
     }
 
     @Test
