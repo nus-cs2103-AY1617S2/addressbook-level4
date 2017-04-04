@@ -33,6 +33,11 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /**
+     * Deletes the given task.
+     */
+    void deleteTasks(Set<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException;
+
+    /**
      * Adds the given task
      */
     void addTask(Task task) throws DuplicateTaskException;
