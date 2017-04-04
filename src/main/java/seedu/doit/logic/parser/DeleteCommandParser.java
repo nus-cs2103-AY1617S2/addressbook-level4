@@ -3,7 +3,6 @@ package seedu.doit.logic.parser;
 
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.doit.logic.commands.Command;

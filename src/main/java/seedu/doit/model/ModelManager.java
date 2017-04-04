@@ -1,7 +1,6 @@
 //@@author A0139399J
 package seedu.doit.model;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
