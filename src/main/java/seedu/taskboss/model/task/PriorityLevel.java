@@ -33,7 +33,7 @@ public class PriorityLevel {
     public PriorityLevel(String priorityLevel) throws IllegalValueException {
         assert priorityLevel != null;
 
-        this.value = PRIORITY_NO_VALUE;;
+        this.value = PRIORITY_NO_VALUE;
         this.input = STRING_NO;
         String trimmedPriorityLevel = priorityLevel.trim();
 
