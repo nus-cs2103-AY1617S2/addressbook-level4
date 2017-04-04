@@ -13,7 +13,7 @@ public class ListFloatingDateCommandTest extends TaskManagerGuiTest {
     public void listbyfloatingTask_nonEmptyList() {
         //add one task that does not contain start and end date, floating task 
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.queue;
+        TestTask taskToAdd = td.milk;
         commandBox.runCommand(taskToAdd.getAddCommand());
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertListByFloat(currentList);
