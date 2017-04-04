@@ -11,7 +11,7 @@ import java.util.Set;
  * Sort like a cookie
  */
 public class TokenHistoryList {
-    public HashMap<String, HashMap<String, Set<String>>> tokenHistory = new HashMap<>();
+    private HashMap<String, HashMap<String, Set<String>>> tokenHistory = new HashMap<>();
 
     /**
      * Record token map for a particular controller
