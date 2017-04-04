@@ -31,6 +31,8 @@ public class UpdateTaskController extends Controller {
 
     private static final String COMMAND_UPDATE_TASK = "update";
 
+    private static final int MAX_NUMBER_OF_TASK_TYPE = 1;
+
     private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
             "Task provided already exist in the list.";
     private static final String RESULT_MESSAGE_ERROR_INVALID_INDEX =
@@ -177,7 +179,7 @@ public class UpdateTaskController extends Controller {
         if (isFloating) {
             numberOfTaskTypes++;
         }
-        if (numberOfTaskTypes > 1) {
+        if (numberOfTaskTypes > MAX_NUMBER_OF_TASK_TYPE) {
             throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
         }
     }

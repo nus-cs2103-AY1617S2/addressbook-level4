@@ -106,8 +106,7 @@ public class AddTaskController extends Controller {
         try {
             validateTaskDescription(description);
             validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline);
-            Task task = null;
-            task = createTask(task, description, eventStartDateTime, eventEndDateTime, taskDeadline);
+            Task task = createTask(null, description, eventStartDateTime, eventEndDateTime, taskDeadline);
             task = addPriorityToTask(task, taskPriority);
             task = addRecurringStatusToTask(task, recurringFrequency, recurringUntilEndDate);
             task = addTagsToTask(task, tags);
