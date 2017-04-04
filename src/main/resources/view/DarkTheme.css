@@ -288,6 +288,14 @@
     -fx-border-width: 1 1 1 1;
 }
 
+.complete .card .cell_small_label {
+    -fx-text-fill: #4D4D4D;
+}
+
+.complete .card .cell_big_label {
+    -fx-text-fill: #4D4D4D;
+}
+
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
