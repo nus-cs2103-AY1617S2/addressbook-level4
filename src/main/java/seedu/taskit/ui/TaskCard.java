@@ -52,11 +52,11 @@ public class TaskCard extends UiPart<Region> {
         else if (end.getText().length() > 0) {
         	end.setText("Deadline: " + end.getText());
         }
-        
+
         if (task.isDone()){
             getRoot().getStyleClass().add("done");
         }
-        
+
         id.setText(displayedIndex + ". ");
         initTags(task);
     }

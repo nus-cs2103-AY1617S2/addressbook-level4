@@ -98,7 +98,7 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("tag " + s.tagName + " "));
         return sb.toString();
     }// @@author
-    
+
     //@@author A0141872E
     @Override
     public Boolean isDone() {

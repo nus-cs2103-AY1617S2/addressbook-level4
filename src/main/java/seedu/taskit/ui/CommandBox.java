@@ -77,7 +77,7 @@ public class CommandBox extends UiPart<Region> {
     private void setStyleToIndicateCommandFailure() {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
-    
+
     //@@author A0141872E
     public void handleMenuBarSelectionChanged(String parameter) {
         try {
@@ -96,22 +96,22 @@ public class CommandBox extends UiPart<Region> {
 
     private String changeToCommandFormat(String parameter) {
         switch (parameter) {
-        
+
         case MENU_FLOATING_TASK:
             return ListCommand.COMMAND_WORD + " floating";
-        
+
         case MENU_EVENT_TASK:
             return ListCommand.COMMAND_WORD + " event";
-            
+
         case MENU_DEADLINE_TASK:
             return ListCommand.COMMAND_WORD + " deadline";
-        
+
         case MENU_TODAY_TASK:
             return ListCommand.COMMAND_WORD + " today";
-        
+
         case MENU_OVERDUE_TASK:
             return ListCommand.COMMAND_WORD + " overdue";
-            
+
         default:
             return ListCommand.COMMAND_WORD + " all";
         }
