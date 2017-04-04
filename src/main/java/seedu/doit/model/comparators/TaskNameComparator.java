@@ -8,6 +8,9 @@ import seedu.doit.model.item.ReadOnlyTask;
  */
 public class TaskNameComparator implements TaskComparator {
 
+    private static final int CURR_BIGGER_THAN_OTHER = 1;
+    private static final int CURR_SMALLER_THAN_OTHER = -1;
+
     @Override
     public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
         return compareDone(t1, t2);
@@ -20,9 +23,9 @@ public class TaskNameComparator implements TaskComparator {
      */
     private int compareDone(ReadOnlyTask curr, ReadOnlyTask other) {
         if (curr.getIsDone() && !other.getIsDone()) {
-            return 1;
+            return CURR_BIGGER_THAN_OTHER;
         } else if (!curr.getIsDone() && other.getIsDone()) {
-            return -1;
+            return CURR_SMALLER_THAN_OTHER;
         }
         return compareItems(curr, other);
     }

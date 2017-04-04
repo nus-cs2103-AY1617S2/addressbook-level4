@@ -21,11 +21,10 @@ public class Description {
      * Validates given description.
      *
      * @throws IllegalValueException
-     *             if given description string is invalid.
+     *             if given description string is invalid or null.
      */
     public Description(String description) throws IllegalValueException {
-        assert description != null;
-        if (!isValidDescription(description)) {
+        if (description == null || !isValidDescription(description)) {
             throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
         this.value = description;
@@ -48,11 +47,6 @@ public class Description {
         return other == this // short circuit if same object
             || (other instanceof Description // instanceof handles nulls
             && this.value.equals(((Description) other).value)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
     }
 
 }

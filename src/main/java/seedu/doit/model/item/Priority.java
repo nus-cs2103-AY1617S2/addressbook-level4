@@ -49,11 +49,6 @@ public class Priority implements Comparable<Priority> {
             && this.value.equals(((Priority) other).value)); // state check
     }
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
     private int getPriorityValue() {
         if (PRIORITY_LOW.equals(value)) {
             return 3;

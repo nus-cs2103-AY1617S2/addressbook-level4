@@ -12,11 +12,14 @@ import seedu.doit.model.item.Task;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.tag.UniqueTagList;
 
+/**
+ * Represents sample data of tasks that will be loaded into TaskManager if the
+ * data file is not found on startup
+ */
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
-            return new Task[] {
-                new Task(new Name("Refactor"), new Priority("low"), new EndTime("today"),
+            return new Task[] { new Task(new Name("Refactor"), new Priority("low"), new EndTime("today"),
                     new Description("Refactor all mentions of task / taskManager"),
                     new UniqueTagList("Huanhui")),
                 new Task(new Name("pass Travis"), new Priority("med"), new EndTime("today"),

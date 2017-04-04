@@ -74,7 +74,8 @@ public class TypicalTestTasks {
                                      .withStartTime("yesterday")
                                      .withDescription("event")
                                      .withPriority("high")
-                                     .withDeadline("tomorrow").build();
+                                     .withDeadline("tomorrow")
+                                     .withTags("tttttttttag").build();
     }
 
     public static TestTask getDeadlineTestTask() throws IllegalValueException {
@@ -88,7 +89,8 @@ public class TypicalTestTasks {
     public static TestTask getFloatingTestTask() throws IllegalValueException {
         return new TaskBuilder().withName("anytime")
                                         .withDescription("fTask")
-                                        .withPriority("high").build();
+                                        .withPriority("high")
+                                        .withTags("tttttttttag").build();
     }
 
 
