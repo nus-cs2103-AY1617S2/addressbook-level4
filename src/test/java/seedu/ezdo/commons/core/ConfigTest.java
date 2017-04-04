@@ -38,7 +38,7 @@ public class ConfigTest {
     }
 
     @Test
-    public void hashCodeMethod_equals() {
+    public void hashcodeMethod_equals() {
         Config defaultConfig = new Config();
         assertEquals(defaultConfig.hashCode(), defaultConfig.hashCode());
     }
@@ -49,5 +49,4 @@ public class ConfigTest {
         assertNotNull(defaultConfig);
         assertEquals(defaultConfig.getEzDoName(), "ezDo");
     }
-
 }
