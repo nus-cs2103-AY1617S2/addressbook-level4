@@ -13,6 +13,9 @@ import seedu.todolist.commons.util.ConfigUtil;
 import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.storage.StorageManager;
 
+/*
+ * Updates the save file location
+ */
 public class SaveFileCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(SaveFileCommand.class);
     private String saveFilePath;

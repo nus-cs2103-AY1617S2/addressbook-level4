@@ -23,7 +23,7 @@ public class SaveFileCommandTest extends TodoListGuiTest {
      * Change save file location given that the new file exists
      */
     @Test
-    public void updateSaveFileTest() {
+    public void saveFile_validPath_success() {
         commandBox.runCommand(TestUtil.getSaveFileCommand(EXISTING_SAVE_FILE));
 
         try {
@@ -41,7 +41,7 @@ public class SaveFileCommandTest extends TodoListGuiTest {
      * Save File command should create the new file and update the location
      */
     @Test
-    public void createAndUpdateSaveFileTest() {
+    public void saveFile_nonExistingPath_success() {
         try {
             // If the file already exists, delete it
             Path path = FileSystems.getDefault().getPath(NON_EXISTING_SAVE_FILE);
