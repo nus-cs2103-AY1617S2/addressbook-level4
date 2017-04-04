@@ -179,7 +179,7 @@ public class EzDo implements ReadOnlyEzDo {
     // @@author A0139177W
     private void updateRecurringDates(Task task) {
 
-        if (task.getRecur().isRecur() == true) {
+        if (task.getRecur().isRecur()) {
             try {
                 String recurIntervalInString = task.getRecur().toString().trim();
                 int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
