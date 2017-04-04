@@ -204,7 +204,7 @@ public class CalendarPanel extends UiPart<Region> {
      * Inputs all timed events in task list to calendar.
      * For deadline tasks (only have end but no start date/time), convert end date/time to start date/time.
      */
-    private void addAllEvents(ObservableList<ReadOnlyTask> taskList) {
+    public void addAllEvents(ObservableList<ReadOnlyTask> taskList) {
         for (ReadOnlyTask task : taskList) {
             if (task.getTimedStatus()) {
                 if (!task.getStartDateTime().isPresent()) {
@@ -212,6 +212,9 @@ public class CalendarPanel extends UiPart<Region> {
                     newTask.setStartDateTime(newTask.getEndDateTime());
                     newTask.setEndDateTime(Optional.empty());
                     task = newTask;
+                }
+                if (task.isMasterRecurring()) {
+                    continue;
                 }
                 addCurrentEvent(task);
             }

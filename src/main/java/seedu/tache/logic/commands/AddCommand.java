@@ -1,5 +1,7 @@
 package seedu.tache.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -62,7 +64,8 @@ public class AddCommand extends Command implements Undoable {
         }
 
         UniqueTagList tagList = new UniqueTagList(tagSet);
-        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, true, false, RecurInterval.NONE);
+        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, true, false,
+                                    RecurInterval.NONE, new ArrayList<Date>());
         commandSuccess = false;
     }
 

@@ -36,7 +36,9 @@ import seedu.tache.commons.core.Config;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.storage.DataSavingExceptionEvent;
 import seedu.tache.commons.events.ui.JumpToListRequestEvent;
+import seedu.tache.commons.events.ui.PopulateRecurringGhostTaskEvent;
 import seedu.tache.commons.events.ui.ShowHelpRequestEvent;
+import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.logic.Logic;
@@ -241,6 +243,23 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.viewTaskEvent(event.getNewSelection());
+    }
+
+    //@@author A0139925U
+    @Subscribe
+    private void handleTaskPanelConnectionChangedEvent(TaskPanelConnectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (mainWindow.getTaskListPanel() != null) {
+            mainWindow.getTaskListPanel().resetConnections(event.getNewConnection());
+        }
+    }
+
+    @Subscribe
+    private void handlePopulateRecurringGhostTaskEvent(PopulateRecurringGhostTaskEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (mainWindow.getTaskListPanel() != null) {
+            mainWindow.getCalendarPanel().addAllEvents(event.getAllRecurringGhostTasks());;
+        }
     }
 
 }

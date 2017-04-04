@@ -2,6 +2,7 @@ package seedu.tache.logic.commands;
 
 import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.core.UnmodifiableObservableList;
+import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
@@ -24,6 +25,8 @@ public class DeleteCommand extends Command implements Undoable {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_PART_OF_RECURRING_TASK =
+            "This task is part of a recurring task and cannot be edited.";
     //@@author A0150120H
     public static final String MESSAGE_DUPLICATE_TASK = "%1$s already exists in the task manager";
     //@@author
@@ -60,17 +63,25 @@ public class DeleteCommand extends Command implements Undoable {
         taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
+            checkPartOfRecurringTask(taskToDelete);
             originalIndex = model.getTaskManager().getTaskList().indexOf(taskToDelete);
             model.deleteTask(taskToDelete);
             commandSuccess = true;
             undoHistory.push(this);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
-
+        } catch (IllegalValueException e) {
+            return new IncorrectCommand(e.getMessage()).execute();
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
 
+    }
+    //@@author A0139925U
+    private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {
+        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
+            throw new IllegalValueException(MESSAGE_PART_OF_RECURRING_TASK);
+        }
     }
 
     //@@author A0150120H

@@ -1,7 +1,11 @@
 package seedu.tache.logic;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tache.commons.core.ComponentManager;
 import seedu.tache.commons.core.Config;
@@ -52,6 +56,14 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         model.updateFilteredListToShowUncompleted();
         return model.getFilteredTaskList();
+    }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getFullTaskList() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        Collections.addAll(concatenated, model.getTaskManager().getTaskList().toArray());
+        Collections.addAll(concatenated, model.getAllRecurringGhostTasks().toArray());
+        return FXCollections.observableList(concatenated);
     }
 
     //@@author A0142255M
