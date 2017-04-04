@@ -43,7 +43,7 @@
                                 </ImageView>
                                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                                 <Label fx:id="priority" styleClass="priority" text="\$priority" />
-                                <Label fx:id="description" text="\$description" />
+<!--                                 <Label fx:id="description" text="\$description" /> -->
                                 <FlowPane fx:id="tags" />
                                 <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
                                     <image>
@@ -53,6 +53,7 @@
                             </children>
                         </HBox>
                         <Label fx:id="deadline" text="\$deadline" />
+                        <Label fx:id="description" text="\$description" />
                     </children>
                 </VBox>
             </children>

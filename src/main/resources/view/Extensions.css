@@ -13,6 +13,9 @@
     -fx-text-fill: white;
 }
 
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 1 0 1;
+}
 /*somehow adjusting this doesn't work, probably gets overwritten by something */
 /*
 .overdue {

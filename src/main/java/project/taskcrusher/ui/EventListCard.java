@@ -44,6 +44,7 @@ public class EventListCard extends UiPart<Region> {
     public EventListCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
         name.setText(event.getName().name);
+        name.setMinWidth(Region.USE_PREF_SIZE);
         id.setText(displayedIndex + ". ");
         showLocation(event);
         showDescription(event);
@@ -65,23 +66,22 @@ public class EventListCard extends UiPart<Region> {
         if (event.isOverdue()) {
             overdueIcon.setVisible(true);
             overdueIcon.setManaged(true);
-//            timeslots.getStyleClass().add(OVERDUE_STYLE_CLASS);
             for (Node child: timeslots.getChildren()) {
                 child.setStyle("-fx-text-fill: red"); //should not be done this way
             }
         } else {
             overdueIcon.setVisible(false);
             overdueIcon.setManaged(false);
-//            timeslots.getStyleClass().add(OVERDUE_STYLE_CLASS);
         }
     }
 
     private void showDescription(ReadOnlyEvent event) {
         if (event.getDescription().hasDescription()) {
-            description.setText("//" + event.getDescription().toString());
+            description.setText(event.getDescription().toString());
         } else {
             description.setVisible(false);
         }
+        description.setMinWidth(Region.USE_PREF_SIZE);
     }
 
     private void showPriority(ReadOnlyEvent event) {
@@ -99,6 +99,7 @@ public class EventListCard extends UiPart<Region> {
         default:
             priority.setVisible(false);
         }
+        priority.setMinWidth(Region.USE_PREF_SIZE);
     }
 
     private void showLocation(ReadOnlyEvent event) {
@@ -107,6 +108,7 @@ public class EventListCard extends UiPart<Region> {
         } else {
             eventLocation.setText("");
         }
+        eventLocation.setMinWidth(Region.USE_PREF_SIZE);
     }
 
     private void showEventTimeSlots(ReadOnlyEvent event) {

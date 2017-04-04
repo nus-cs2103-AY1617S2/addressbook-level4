@@ -42,6 +42,7 @@ public class TaskListCard extends UiPart<Region> {
     public TaskListCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().toString());
+        name.setMinWidth(Region.USE_PREF_SIZE);
         id.setText(displayedIndex + ". ");
         showDeadline(task);
         showPriority(task);
@@ -62,18 +63,17 @@ public class TaskListCard extends UiPart<Region> {
         if (task.isOverdue()) {
             overdueIcon.setVisible(true);
             overdueIcon.setManaged(true);
-//            deadline.getStyleClass().add(OVERDUE_STYLE_CLASS);
             deadline.setStyle("-fx-text-fill: red"); //should not be done this way
         } else {
             overdueIcon.setVisible(false);
             overdueIcon.setManaged(false);
-//            deadline.getStyleClass().add(OVERDUE_STYLE_CLASS);
         }
     }
 
     private void showDescription(ReadOnlyTask task) {
         if (task.getDescription().hasDescription()) {
-            description.setText("//" + task.getDescription().toString());
+            description.setText(task.getDescription().toString());
+            description.setMinWidth(Region.USE_PREF_SIZE);
         } else {
             description.setVisible(false);;
         }
@@ -93,7 +93,9 @@ public class TaskListCard extends UiPart<Region> {
             break;
         default:
             priority.setVisible(false);
+            priority.setManaged(false);
         }
+        priority.setMinWidth(Region.USE_PREF_SIZE);
     }
 
     private void showDeadline(ReadOnlyTask task) {
@@ -103,6 +105,7 @@ public class TaskListCard extends UiPart<Region> {
         } else {
             deadline.setText(MESSAGE_NO_DEADLINE);
         }
+        deadline.setMinWidth(Region.USE_PREF_SIZE);
     }
 
     private void initTags(ReadOnlyTask person) {

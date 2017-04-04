@@ -76,8 +76,10 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    /*-fx-border-color: transparent #1d1d1d transparent #1d1d1d;*/
+    -fx-border-color: transparent;
+    /*-fx-background-color: transparent, derive(#1d1d1d, 10%);*/
+    -fx-background-color: transparent;
 }
 
 /* this is where userInbox can change colour */
@@ -296,7 +298,7 @@
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 0;
-    -fx-padding: 4 0 0 0;
+    -fx-padding: 3 0 0 0;
 }
 
 #tags .label {
@@ -305,7 +307,7 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 13;
 }
 
 /*for the header labels */
@@ -315,11 +317,11 @@
     -fx-font-size: 17px;
 }
 
-/*To cut down the padding at the top */
+/*To cut down the padding at the top 
 #taskHeader {
     -fx-padding: -3 10 7 10;
 }
-
+*/
 #id {
    -fx-min-width: 20px;
 }
@@ -337,7 +339,7 @@
 #description {
     -fx-font-size: 13px;
     -fx-text-fill: #252c36;
-    -fx-padding: 0 0 0 5;
+    -fx-padding: 0 0 0 0;
 }
 
 .priority {
@@ -346,7 +348,6 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 13;
-    -fx-min-width: 5px;
 }
 
 .priority-one {
