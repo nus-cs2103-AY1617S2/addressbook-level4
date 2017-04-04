@@ -30,8 +30,12 @@ public class FindCommandParser {
 
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
+        StringBuilder desc = new StringBuilder();
+        for (int i = 0; i < keywords.length; i++) {
+            desc.append(keywords[i] + " ");
+        }
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet);
+        return new FindCommand(desc.toString().trim());
     }
 
 }
