@@ -24,7 +24,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 1;
 
         TestTask editedPerson = new TaskBuilder().withName("Bobby").withDate("").withEndDate("")
-                .withCompleted(false).build();
+                .withCompleted(false).withPriority("Low").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -36,7 +36,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
         TestTask editedPerson = new TaskBuilder(personToEdit).withDate("Sun Oct 10 23:59:59").withEndDate("")
-                .withCompleted(false).build();
+                .withCompleted(false).withPriority("Low").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -53,7 +53,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
         TestTask editedPerson = new TaskBuilder(personToEdit).withName("Belle").withDate("").withEndDate("")
-                .withCompleted(false).build();
+                .withCompleted(false).withPriority("Low").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

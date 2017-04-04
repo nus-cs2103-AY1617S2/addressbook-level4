@@ -106,10 +106,11 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setDate(replacement.getDate());
         this.setEndDate(replacement.getEndDate());
+        this.setPriority(replacement.getPriority());
     }
     //@@author A0144902L
     /**
-     * Marks this task as completed {boolean is set TRUE}.
+     * Marks this task as completed {boolean is set true}.
      */
     public void markComplete(ReadOnlyTask complete) {
         assert complete != null;

@@ -14,7 +14,7 @@ public class TestTask implements ReadOnlyTask {
     private DueDate date;
     private DueDate endDate;
     private boolean isCompleted;
-    Priority priority;
+    private Priority priority;
 
     public TestTask() {
     }
