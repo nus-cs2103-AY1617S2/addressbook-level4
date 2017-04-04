@@ -28,7 +28,7 @@ public class HelpCommandTest extends ToLuistGuiTest {
                                  "redo", "save", "switch",
                                  "tag", "unalias", "undo",
                                  "untag", "update", "viewalias" };
-        for ( String command : commandList ) {
+        for (String command : commandList) {
             commandBox.runCommand("help " + command);
             assertHelpHeading(String.format("Displaying detailed help for %s. Press any keys to go back.", command));
         }
