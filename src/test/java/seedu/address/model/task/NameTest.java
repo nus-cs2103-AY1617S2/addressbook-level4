@@ -30,5 +30,6 @@ public class NameTest {
         assertTrue(Name.isValidName("#$!$#!$!@#$!@!~@~!")); // tons of random symbols
         assertTrue(Name.isValidName("Whee~~~~")); // alphabets with symbols
         assertTrue(Name.isValidName("Omg!!")); // alphabets with symbols
+        assertTrue(Name.isValidName("你好吗?")); // Valid UTF-16 string with symbols
     }
 }
