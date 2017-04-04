@@ -57,4 +57,97 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals(this.defaultStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
+    // @@author A0138909R
+    @Test
+    public void commandBox_pressUp() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDowntoEmpty() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickDownInTextField();
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDown() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickDownInTextField();
+        assertEquals(COMMAND_THAT_FAILS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDown_excessDown() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickDownInTextField();
+        this.commandBox.clickDownInTextField();
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressUp_excessUp() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressUp_emptyString() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(EMPTY_STRING);
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDown_emptyString() {
+        this.commandBox.runCommand(EMPTY_STRING);
+        this.commandBox.runCommand(EMPTY_STRING);
+        this.commandBox.runCommand(EMPTY_STRING);
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickDownInTextField();
+        assertEquals(COMMAND_THAT_FAILS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressUp_afterUsingOlderCommand() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.pressEnter();
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_FAILS, this.commandBox.getCommandInput());
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDown_afterUsingOlderCommand() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.pressEnter();
+        this.commandBox.clickDownInTextField();
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+    }
+    // @@author
 }

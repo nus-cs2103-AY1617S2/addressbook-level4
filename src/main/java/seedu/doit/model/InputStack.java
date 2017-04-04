@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import seedu.doit.commons.core.LogsCenter;
 
 public class InputStack {
+    public static final String EMPTY_STRING = "";
     private static final Stack<String> mainStack = new Stack<String>();
     private static Stack<String> upStack = new Stack<String>();
     private static Stack<String> downStack = new Stack<String>();
@@ -71,7 +72,7 @@ public class InputStack {
     public String pressedDown(String input) {
         if (downStack.isEmpty()) {
             logger.info("DOWN down stack is empty");
-            return input;
+            return EMPTY_STRING;
         }
         logger.info("DOWN adding (" + input + ") to upstack");
         addToUpStack(input);

@@ -55,4 +55,14 @@ public class CommandBoxHandle extends GuiHandle {
     public ObservableList<String> getStyleClass() {
         return getNode(COMMAND_INPUT_FIELD_ID).getStyleClass();
     }
+
+    public void clickUpInTextField() {
+        clickOnTextField();
+        pressUp();
+    }
+
+    public void clickDownInTextField() {
+        clickOnTextField();
+        pressDown();
+    }
 }
