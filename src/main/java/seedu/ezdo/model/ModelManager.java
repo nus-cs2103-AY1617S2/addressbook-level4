@@ -127,6 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         } else {
             updateFilteredDoneList();
         }
+
         indicateEzDoChanged();
         return toggleTasks.get(0).getDone();
     }

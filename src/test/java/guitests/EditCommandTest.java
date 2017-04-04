@@ -24,11 +24,11 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Alson p/1 s/01/01/2017 12:00 d/08/09/2018 12:00 t/husband";
+        String detailsToEdit = "Alson p/1 s/01/01/2017 12:00 d/08/09/2018 12:00 f/yearly t/husband";
         int ezDoIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("1")
-                .withStartDate("01/01/2017 12:00").withDueDate("08/09/2018 12:00")
+                .withStartDate("01/01/2017 12:00").withDueDate("08/09/2018 12:00").withRecur("yearly")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -36,11 +36,11 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_shortCommand_success() throws Exception {
-        String detailsToEdit = "Alson p/3 s/02/02/2017 12:00 d/10/10/2019 12:00 t/guy";
+        String detailsToEdit = "Alson p/3 s/02/02/2017 12:00 d/10/10/2019 12:00 f/monthly t/guy";
         int ezDoIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("02/02/2017 12:00").withDueDate("10/10/2019 12:00")
+                .withStartDate("02/02/2017 12:00").withDueDate("10/10/2019 12:00").withRecur("monthly")
                 .withTags("guy").build();
 
         assertEditSuccess(true, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -50,14 +50,14 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_eachFieldSpecified_success() throws Exception {
 
-        commandBox.runCommand("edit 1 Alson p/1 s/01/01/2017 12:00 d/08/09/2018 12:00 t/husband");
+        commandBox.runCommand("edit 1 Alson p/1 s/01/01/2017 12:00 d/08/09/2018 12:00 f/daily t/husband");
 
         int ezDoIndex = 1;
 
         String detailsToEdit = "p/3";
 
         TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("01/01/2017 12:00").withDueDate("08/09/2018 12:00")
+                .withStartDate("01/01/2017 12:00").withDueDate("08/09/2018 12:00").withRecur("daily")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -65,7 +65,7 @@ public class EditCommandTest extends EzDoGuiTest {
         detailsToEdit = "Alson s/11/11/2017 12:00";
 
         editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("11/11/2017 12:00").withDueDate("08/09/2018 12:00")
+                .withStartDate("11/11/2017 12:00").withDueDate("08/09/2018 12:00").withRecur("daily")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -73,7 +73,15 @@ public class EditCommandTest extends EzDoGuiTest {
         detailsToEdit = "Alson d/01/01/2018 12:00";
 
         editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("11/11/2017 12:00").withDueDate("01/01/2018 12:00")
+                .withStartDate("11/11/2017 12:00").withDueDate("01/01/2018 12:00").withRecur("daily")
+                .withTags("husband").build();
+
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+
+        detailsToEdit = "Alson f/";
+
+        editedTask = new TaskBuilder().withName("Alson").withPriority("3")
+                .withStartDate("11/11/2017 12:00").withDueDate("01/01/2018 12:00").withRecur("")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -81,7 +89,7 @@ public class EditCommandTest extends EzDoGuiTest {
         detailsToEdit = "Alson t/brother";
 
         editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("11/11/2017 12:00").withDueDate("01/01/2018 12:00")
+                .withStartDate("11/11/2017 12:00").withDueDate("01/01/2018 12:00").withRecur("")
                 .withTags("brother").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -165,7 +173,8 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/1 "
-                                + "s/12/12/2016 11:22 d/14/03/2017 22:33 t/friends");
+                                + "s/12/12/2016 11:22 d/14/03/2017 22:33 f/daily"
+                                + " t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

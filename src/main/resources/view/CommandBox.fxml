@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane styleClass="anchor-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@DarkTheme.css">
-   <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..."/>
-</AnchorPane>
 
+<AnchorPane stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <TextField fx:id="commandTextField" alignment="TOP_LEFT" onAction="#handleCommandInputChanged" promptText="Enter command here..." styleClass="command-text-field" />
+</AnchorPane>

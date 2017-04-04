@@ -26,11 +26,9 @@ public class XmlFileStorageTest {
         thrown.expect(AssertionError.class);
         File file = new File("omg");
         XmlSerializableEzDo ezDo = new XmlSerializableEzDo();
-        new MockUp<XmlUtil>()
-        {
+        new MockUp<XmlUtil>() {
             @Mock
-            <T> void saveDataToFile(File file, T data) throws FileNotFoundException, JAXBException
-            {
+            <T> void saveDataToFile(File file, T data) throws FileNotFoundException, JAXBException {
                 throw new JAXBException("exception");
             }
         };

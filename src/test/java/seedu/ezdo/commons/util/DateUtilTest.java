@@ -27,11 +27,9 @@ public class DateUtilTest {
     @Test
     public void dateFormat_parseException() throws Exception {
         thrown.expect(AssertionError.class);
-        new MockUp<SimpleDateFormat>()
-        {
+        new MockUp<SimpleDateFormat>() {
             @Mock
-            Date parse(String date) throws ParseException
-            {
+            Date parse(String date) throws ParseException {
                 throw new ParseException("parse exception", 1);
             }
         };

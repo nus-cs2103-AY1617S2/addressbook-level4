@@ -99,7 +99,6 @@ public class TaskCardHandle extends GuiHandle {
         List<String> taskTags = getTags(task.getTags());
         List<String> cardTags = getTags();
         boolean equalTags = taskTags.containsAll(cardTags) && cardTags.containsAll(taskTags);
-
         return getFullName().equals(task.getName().fullName) && getPriority().equals(task.getPriority().value)
                 && getTaskPriorityColor().equals(TEST_PRIORITY_COLOR_HASHMAP.get(getPriority()))
                 && getStartDate().equals(task.getStartDate().value) && getDueDate().equals(task.getDueDate().value)
