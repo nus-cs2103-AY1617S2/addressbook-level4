@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.util.Pair;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.KeywordTokenizer;
 import seedu.toluist.ui.UiStore;
@@ -33,8 +34,9 @@ public abstract class Controller {
      * and modifies the data appropriately. Also optionally
      * update the UI
      * @param tokens dictionary of tokens
+     * @throws InvalidCommandException if some constraints fail
      */
-    public abstract void execute(Map<String, String> tokens);
+    public abstract void execute(Map<String, String> tokens) throws InvalidCommandException;
 
     /**
      * Given command string, tokenize the string into

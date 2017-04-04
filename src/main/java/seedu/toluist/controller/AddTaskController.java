@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.TagParser;
@@ -16,7 +17,6 @@ import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
-import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 import seedu.toluist.ui.commons.ResultMessage;
 
 /**
@@ -63,7 +63,7 @@ public class AddTaskController extends Controller {
                                                         + "Adds a new task, with high priority." };
 
     //@@author A0127545A
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
@@ -102,9 +102,10 @@ public class AddTaskController extends Controller {
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
             LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags,
-            String recurringFrequency, LocalDateTime recurringUntilEndDate) {
+            String recurringFrequency, LocalDateTime recurringUntilEndDate)
+            throws InvalidCommandException {
         if (!StringUtil.isPresent(description)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION, CommandResultType.FAILURE);
+            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION);
         }
         try {
             // validates that the dates input belongs to only one type of task, or exception is thrown
@@ -118,7 +119,7 @@ public class AddTaskController extends Controller {
                 task = new Task(description);
             } else {
                 // should not reach here since it will fail validation at the top
-                return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK, CommandResultType.FAILURE);
+                throw new InvalidCommandException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
             }
             if (taskPriority != null) {
                 task.setTaskPriority(taskPriority);
@@ -133,7 +134,7 @@ public class AddTaskController extends Controller {
             task.replaceTags(tags);
 
             if (todoList.getTasks().contains(task)) {
-                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK, CommandResultType.FAILURE);
+                throw new InvalidCommandException(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
             }
             todoList.add(task);
             if (todoList.save()) {
@@ -141,7 +142,7 @@ public class AddTaskController extends Controller {
             }
             return new CommandResult(ResultMessage.getAddCommandResultMessage(task, uiStore));
         } catch (IllegalArgumentException exception) {
-            return new CommandResult(exception.getMessage(), CommandResultType.FAILURE);
+            throw new InvalidCommandException(exception.getMessage());
         }
     }
 

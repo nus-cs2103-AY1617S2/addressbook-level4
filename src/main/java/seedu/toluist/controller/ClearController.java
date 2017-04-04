@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -24,7 +25,7 @@ public class ClearController extends Controller {
                                                         + "not just on the current task window.",
                                                     "The `undo` command can undo this action." };
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();

@@ -11,6 +11,7 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.DataStorageException;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
@@ -42,14 +43,12 @@ public class LoadController extends Controller {
                                                         + "from `newfile.json` in the parent folder" };
 
   //@@author A0131125Y
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
         if (path == null) {
-            uiStore.setCommandResult(new CommandResult(
-                    Messages.MESSAGE_NO_STORAGE_PATH, CommandResultType.FAILURE));
-            return;
+            throw new InvalidCommandException(Messages.MESSAGE_NO_STORAGE_PATH);
         }
 
         Config config = Config.getInstance();
@@ -67,8 +66,7 @@ public class LoadController extends Controller {
             uiStore.setCommandResult(
                     new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path)));
         } catch (DataStorageException e) {
-            uiStore.setCommandResult(new CommandResult(
-                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResultType.FAILURE));
+            throw new InvalidCommandException(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
         }
     }
 

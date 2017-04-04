@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.SwitchConfig;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
@@ -43,20 +44,17 @@ public class SwitchController extends Controller {
                                                     "`ctrl + N`\nSwitches the screen to the `Next 7 Days` window." };
 
     //@@author A0131125Y
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         String keyword = tokens.get(PARAMETER_TAB);
 
         if (keyword == null) {
-            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_NO_TAB, CommandResult.CommandResultType.FAILURE));
-            return;
+            throw new InvalidCommandException(RESULT_MESSAGE_NO_TAB);
         }
 
         Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
 
         if (!switchPredicateOptional.isPresent()) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword)));
-            return;
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
         }
 
         String messageTemplate = uiStore.getTasks().size() == TodoList.getInstance().getTasks().size()

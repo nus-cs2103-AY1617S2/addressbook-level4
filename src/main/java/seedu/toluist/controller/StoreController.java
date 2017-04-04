@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
-import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 
 /**
  * Responsible for saving-related task
@@ -46,21 +46,17 @@ public class StoreController extends Controller {
 
 
     //@@author A0131125Y
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
         if (path == null) {
-            uiStore.setCommandResult(
-                    new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH, CommandResultType.FAILURE));
-            return;
+            throw new InvalidCommandException(Messages.MESSAGE_NO_STORAGE_PATH);
         }
 
         Config config = Config.getInstance();
         if (config.getTodoListFilePath().equals(path)) {
-            uiStore.setCommandResult(new CommandResult(
-                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResultType.FAILURE));
-            return;
+            throw new InvalidCommandException(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path));
         }
 
         String message = "";
@@ -72,8 +68,7 @@ public class StoreController extends Controller {
             message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, config.getTodoListFilePath());
             uiStore.setCommandResult(new CommandResult(message));
         } else {
-            uiStore.setCommandResult(new CommandResult(
-                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResultType.FAILURE));
+            throw new InvalidCommandException(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
         }
     }
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandHistoryList;
 import seedu.toluist.ui.commons.CommandResult;
@@ -32,7 +33,7 @@ public class HistoryController extends Controller {
         this.commandHistoryList = commandHistoryList;
     }
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
         ArrayList<String> commandHistory = commandHistoryList.getCommandHistory();
         String result = String.join("\n", commandHistory);

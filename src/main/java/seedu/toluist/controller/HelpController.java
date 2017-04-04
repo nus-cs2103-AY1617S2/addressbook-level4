@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * HelpController is responsible for rendering the initial UI
@@ -50,7 +50,7 @@ public class HelpController extends Controller {
 
     private ControllerLibrary controllerLibrary = new ControllerLibrary();
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
 
         Optional<String> commandWord = tokens.keySet().stream()
@@ -67,7 +67,7 @@ public class HelpController extends Controller {
         } else if (isSpecificHelp) {
             showSpecificHelp(commandWord.get());
         } else {
-            uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR, CommandResult.CommandResultType.FAILURE));
+            throw new InvalidCommandException(MESSAGE_ERROR);
         }
     }
 

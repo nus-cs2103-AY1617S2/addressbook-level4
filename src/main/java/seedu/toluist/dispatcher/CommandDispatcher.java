@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.ControllerLibrary;
@@ -23,6 +24,8 @@ import seedu.toluist.controller.FindController;
 import seedu.toluist.controller.HistoryController;
 import seedu.toluist.controller.NavigateHistoryController;
 import seedu.toluist.controller.UnknownCommandController;
+import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
@@ -62,7 +65,12 @@ public class CommandDispatcher extends Dispatcher {
         }
         Map<String, String> tokens = controller.tokenize(deAliasedCommand);
         tokenHistoryList.recordTokens(controller.getClass(), tokens);
-        controller.execute(tokens);
+        try {
+            controller.execute(tokens);
+        } catch (InvalidCommandException e) {
+            UiStore.getInstance().setCommandResult(
+                    new CommandResult(e.getMessage(), CommandResult.CommandResultType.FAILURE));
+        }
     }
 
     public SortedSet<String> getSuggestions(String command) {

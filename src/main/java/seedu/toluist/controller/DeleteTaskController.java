@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Task;
@@ -40,7 +41,7 @@ public class DeleteTaskController extends Controller {
     //@@author A0127545A
     private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException  {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
@@ -49,9 +50,7 @@ public class DeleteTaskController extends Controller {
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, todoList.getTasks().size());
         if (indexes == null || indexes.isEmpty()) {
-            uiStore.setCommandResult(new CommandResult(
-                    RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED, CommandResult.CommandResultType.FAILURE));
-            return;
+            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED);
         }
         List<Task> tasks = uiStore.getShownTasks(indexes);
         commandResult = delete(todoList, tasks);

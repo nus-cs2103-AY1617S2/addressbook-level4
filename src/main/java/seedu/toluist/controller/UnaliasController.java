@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -31,20 +32,17 @@ public class UnaliasController extends Controller {
   //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         String alias = tokens.get(PARAMETER_ALIAS);
 
         if (!aliasConfig.isAlias(alias)) {
-            uiStore.setCommandResult(new CommandResult(
-                    String.format(RESULT_MESSAGE_NOT_ALIAS, alias), CommandResult.CommandResultType.FAILURE));
-            return;
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_NOT_ALIAS, alias));
         }
 
         if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {
             uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias)));
         } else {
-            uiStore.setCommandResult(new CommandResult(
-                    String.format(RESULT_MESSAGE_FAILURE, alias), CommandResult.CommandResultType.FAILURE));
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_FAILURE, alias));
         }
     }
 

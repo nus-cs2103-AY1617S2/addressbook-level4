@@ -5,6 +5,7 @@ import java.util.Map;
 
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 
 /**
  * Handle exit command
@@ -19,7 +20,7 @@ public class ExitController extends Controller {
     private static final String[] HELP_COMMENTS = { "Your data will save automatically.",
                                                     "You can re-open the program by clicking on the .jar file." };
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
     }
 

@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.IndexParser;
@@ -17,7 +18,6 @@ import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
-import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 import seedu.toluist.ui.commons.ResultMessage;
 
 /**
@@ -71,7 +71,7 @@ public class UpdateTaskController extends Controller {
     //@@author A0127545A
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
 
         CommandResult commandResult;
@@ -81,9 +81,7 @@ public class UpdateTaskController extends Controller {
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
         if (indexes == null || indexes.isEmpty()) {
-            uiStore.setCommandResult(
-                    new CommandResult(RESULT_MESSAGE_ERROR_INVALID_INDEX, CommandResultType.FAILURE));
-            return;
+            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_INVALID_INDEX);
         }
         List<Task> shownTasks = uiStore.getShownTasks(indexes);
         Task task = shownTasks.get(0);
@@ -125,24 +123,23 @@ public class UpdateTaskController extends Controller {
     private CommandResult update(Task task, String description,
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime, LocalDateTime taskDeadline,
             boolean isFloating, String taskPriority, Set<Tag> tags,
-            String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring) {
+            String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring)
+            throws InvalidCommandException {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK, CommandResultType.FAILURE);
+            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
         }
         if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING,
-                    CommandResultType.FAILURE);
+            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
         }
         if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING,
-                    CommandResultType.FAILURE);
+            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
         }
         Task taskCopy = null;
         try {
             taskCopy = (Task) task.clone();
         } catch (CloneNotSupportedException cloneNotSupportedException) {
             // should never reach here
-            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR, CommandResultType.FAILURE);
+            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_CLONING_ERROR);
         }
         try {
             if (isFloating) {
@@ -181,7 +178,7 @@ public class UpdateTaskController extends Controller {
 
             TodoList todoList = TodoList.getInstance();
             if (todoList.getTasks().contains(taskCopy)) {
-                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK, CommandResultType.FAILURE);
+                throw new InvalidCommandException(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
             }
 
             // Update all changes in taskCopy to task
@@ -192,9 +189,9 @@ public class UpdateTaskController extends Controller {
             }
             return new CommandResult(ResultMessage.getUpdateCommandResultMessage(oldTask, task, uiStore));
         } catch (IllegalArgumentException illegalArgumentException) {
-            return new CommandResult(illegalArgumentException.getMessage(), CommandResultType.FAILURE);
+            throw new InvalidCommandException(illegalArgumentException.getMessage());
         } catch (CloneNotSupportedException cloneNotSupportedException) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR, CommandResultType.FAILURE);
+            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_CLONING_ERROR);
         }
     }
 

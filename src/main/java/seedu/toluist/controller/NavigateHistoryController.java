@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.dispatcher.CommandHistoryList;
 
 /**
@@ -19,7 +20,7 @@ public class NavigateHistoryController extends Controller {
     private static final String PARAMETER_DIRECTION = "direction";
     private CommandHistoryList commandHistory;
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
 
         String direction = tokens.get(PARAMETER_DIRECTION);

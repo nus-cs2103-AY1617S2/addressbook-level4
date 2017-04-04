@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -40,24 +41,23 @@ public class AliasController extends Controller {
     //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         String alias = tokens.get(PARAMETER_ALIAS);
         String commandPhrase = tokens.get(PARAMETER_COMMAND);
 
-        if (aliasConfig.isReservedWord(alias)) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias),
-                            CommandResult.CommandResultType.FAILURE));
-            return;
-        }
+        validateReservedWord(alias);
 
         if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {
             uiStore.setCommandResult(
                     new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase)));
         } else {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase),
-                            CommandResult.CommandResultType.FAILURE));
+            throw new InvalidCommandException((String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase)));
+        }
+    }
+
+    private void validateReservedWord(String alias) throws InvalidCommandException {
+        if (aliasConfig.isReservedWord(alias)) {
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_RESERVED_WORD, alias));
         }
     }
 

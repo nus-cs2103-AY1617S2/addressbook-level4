@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
@@ -36,7 +37,7 @@ public class UndoController extends Controller {
     //@@author A0131125Y
     private static final Logger logger = LogsCenter.getLogger(UndoController.class);
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
 
         String undoTimesToken = tokens.get(PARAMETER_UNDO_TIMES);

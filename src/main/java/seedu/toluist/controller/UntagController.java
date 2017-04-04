@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.LogsCenter;
 
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
@@ -46,7 +47,7 @@ public class UntagController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(UntagController.class);
 
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching

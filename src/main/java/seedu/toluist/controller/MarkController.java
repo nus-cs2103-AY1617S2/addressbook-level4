@@ -13,12 +13,12 @@ import org.atteo.evo.inflector.English;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
-import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 
 /**
  * Mark Controller is responsible for marking task complete or incomplete
@@ -52,24 +52,21 @@ public class MarkController extends Controller {
                                                     "`mark 1, 6`\nMarks the tasks at index 1 and 6 complete." };
 
     //@@author A0131125Y
-    public void execute(Map<String, String> tokens) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().toString() + " will handle command");
         String indexToken = tokens.get(PARAMETER_INDEX);
         boolean isMarkComplete = !tokens.keySet().contains(PARAMETER_MARK_INCOMPLETE);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
 
         if (indexes.isEmpty()) {
-            uiStore.setCommandResult(
-                    new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX, CommandResultType.FAILURE));
-            return;
+            throw new InvalidCommandException(Messages.MESSAGE_INVALID_TASK_INDEX);
         }
 
         CommandResult commandResult = mark(indexes, isMarkComplete);
 
         TodoList todoList = TodoList.getInstance();
         if (!todoList.save()) {
-            uiStore.setCommandResult(
-                    new CommandResult(Messages.MESSAGE_SAVING_FAILURE, CommandResultType.FAILURE));
+            throw new InvalidCommandException(Messages.MESSAGE_SAVING_FAILURE);
         }
         uiStore.setTasks(todoList.getTasks());
         uiStore.setCommandResult(commandResult);
