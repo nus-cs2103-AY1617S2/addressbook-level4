@@ -285,7 +285,7 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #taskListPanel, #taskWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -301,4 +301,19 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#taskListView .list-cell:filled:selected:focused, #taskListView .list-cell:filled:selected {
+    -fx-background-color: #FFFEE7;
+    /* Up Right Down Left */
+    -fx-border-width: 0 0 0 5;
+    -fx-border-color: #50E3C2;
+}
+
+#categoryListView .list-cell:filled:selected:focused, #categoryListView .list-cell:filled:selected {
+    -fx-background-color: #E9E9E9;
+}
+
+#categoryTaskCount {
+    -fx-text-fill: #FFFFFF;
 }
