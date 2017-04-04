@@ -19,6 +19,7 @@ import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
+import seedu.taskboss.logic.commands.RedoCommand;
 import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.commands.SaveCommand;
 import seedu.taskboss.logic.commands.SortCommand;
@@ -99,6 +100,10 @@ public class Parser {
         case UndoCommand.COMMAND_WORD:
         case UndoCommand.COMMAND_WORD_SHORT:
             return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+        case RedoCommand.COMMAND_WORD_SHORT:
+            return new RedoCommand();
 
         case SortCommand.COMMAND_WORD:
         case SortCommand.COMMAND_WORD_SHORT:
