@@ -10,48 +10,48 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public class TypicalTestTasks {
 
-    public TestTask task1, task2, task3, task4, task5, task6, task7, task8, task9;
+    public TestTask task11, task22, task33, task44, task55, task66, task77, task88, task99;
 
     public TypicalTestTasks() {
         try {
-            task1 = new TaskBuilder().withName("Task1")
+            task11 = new TaskBuilder().withName("Task11")
                     .withInformation("Information 1")
                     .withPriorityLevel("1")
                     .withDeadline("01-Jan-2017 @ 10:00:00")
                     .withTags("friends").build();
-            task2 = new TaskBuilder().withName("Task2")
+            task22 = new TaskBuilder().withName("Task22")
                     .withInformation("Information 2")
                     .withPriorityLevel("2")
                     .withDeadline("02-Feb-2017 @ 10:00:00")
                     .withTags("owesMoney", "friends").build();
-            task3 = new TaskBuilder().withName("Task3")
+            task33 = new TaskBuilder().withName("Task33")
                     .withDeadline("03-Mar-2017 @ 10:00:00")
                     .withPriorityLevel("3")
                     .withInformation("Information 3").build();
-            task4 = new TaskBuilder().withName("Task4")
+            task44 = new TaskBuilder().withName("Task44")
                     .withDeadline("04-Apr-2017 @ 10:00:00")
                     .withPriorityLevel("4")
                     .withInformation("Information 4").build();
-            task5 = new TaskBuilder().withName("Task5")
+            task55 = new TaskBuilder().withName("Task55")
                     .withDeadline("05-May-2017 @ 10:00:00")
                     .withPriorityLevel("1")
                     .withInformation("Information 5").build();
-            task6 = new TaskBuilder().withName("Task6")
+            task66 = new TaskBuilder().withName("Task66")
                     .withDeadline("06-Jun-2017 @ 10:00:00")
                     .withPriorityLevel("2")
                     .withInformation("Information 6").build();
-            task7 = new TaskBuilder().withName("Task7")
+            task77 = new TaskBuilder().withName("Task77")
                     .withDeadline("07-Jul-2017 @ 10:00:00")
                     .withPriorityLevel("3")
                     .withInformation("Information 7").build();
 
             // Manually added
-            task8 = new TaskBuilder().withName("Task8")
+            task88 = new TaskBuilder().withName("Task88")
                     .withDeadline("08-Aug-2017 @ 10:00:00")
                     .withPriorityLevel("4")
                     .withInformation("Information 8").build();
 
-            task9 = new TaskBuilder().withName("Task9")
+            task99 = new TaskBuilder().withName("Task99")
                     .withDeadline("09-Sep-2017 @ 10:00:00")
                     .withPriorityLevel("1")
                     .withInformation("Information 9").build();
@@ -73,7 +73,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{task1, task2, task3, task4, task5, task6, task7};
+        return new TestTask[]{task11, task22, task33, task44, task55, task66, task77};
     }
 
     public TaskManager getTypicalTaskManger() {

@@ -23,7 +23,6 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
-import seedu.task.logic.commands.SearchCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UncompleteCommand;
 import seedu.task.logic.commands.UndoCommand;
@@ -77,9 +76,6 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
 
         //@@author A0139322L
         case FindTagCommand.COMMAND_WORD:

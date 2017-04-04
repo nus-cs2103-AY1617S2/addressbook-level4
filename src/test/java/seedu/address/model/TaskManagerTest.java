@@ -51,9 +51,9 @@ public class TaskManagerTest {
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.task1), new Task(td.task1));
-        List<Task> completedTasks = Arrays.asList(new Task(td.task3));
-        List<Tag> newTags = td.task1.getTags().asObservableList();
+        List<Task> newTasks = Arrays.asList(new Task(td.task11), new Task(td.task11));
+        List<Task> completedTasks = Arrays.asList(new Task(td.task33));
+        List<Tag> newTags = td.task11.getTags().asObservableList();
         TaskManagerStub newData = new TaskManagerStub(newTasks, completedTasks, newTags);
 
         thrown.expect(AssertionError.class);
