@@ -10,9 +10,8 @@ import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 import seedu.bulletjournal.logic.parser.DateParser;
 
 /**
- * Address morphed into task start time
- * Represents a Task's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Task's begin date in the bullet journal.
+ * Guarantees: immutable; is valid as declared in {@link #isValidBeginDate(String)}
  */
 public class BeginDate {
 

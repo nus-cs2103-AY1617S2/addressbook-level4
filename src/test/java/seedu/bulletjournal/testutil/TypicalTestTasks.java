@@ -16,28 +16,28 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             assignment = new TaskBuilder().withTaskName("Assignment for CS2103")
-                    .withBeginDate("123, Jurong West Ave 6, #08-111").withStatus("undone")
-                    .withDueDate("85355255").withTags("friends").build();
-            buymilk = new TaskBuilder().withTaskName("Buy milk").withBeginDate("311, Clementi Ave 2, #02-25")
-                    .withStatus("done").withDueDate("98765432").withTags("owesMoney", "friends").build();
-            creatework = new TaskBuilder().withTaskName("Create more work").withDueDate("95352563")
-                    .withStatus("done").withBeginDate("wall street").build();
-            dumpmilk = new TaskBuilder().withTaskName("Dump milk").withDueDate("87652533")
-                    .withStatus("undone").withBeginDate("10th street").build();
-            eatleftovers = new TaskBuilder().withTaskName("Eat leftovers").withDueDate("9482224")
-                    .withStatus("done").withBeginDate("michegan ave").build();
-            findsocks = new TaskBuilder().withTaskName("Find socks").withDueDate("9482427")
+                    .withBeginDate("14th April 12pm").withStatus("undone")
+                    .withDueDate("14th April 4pm").withTags("friends").build();
+            buymilk = new TaskBuilder().withTaskName("Buy milk").withBeginDate("14th April 12pm")
+                    .withStatus("done").withDueDate("14th April 4pm").withTags("owesMoney", "friends").build();
+            creatework = new TaskBuilder().withTaskName("Create more work").withDueDate("14th April 4pm")
+                    .withStatus("done").withBeginDate("14th April 12pm").build();
+            dumpmilk = new TaskBuilder().withTaskName("Dump milk").withDueDate("14th April 4pm")
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
+            eatleftovers = new TaskBuilder().withTaskName("Eat leftovers").withDueDate("14th April 4pm")
+                    .withStatus("done").withBeginDate("14th April 12pm").build();
+            findsocks = new TaskBuilder().withTaskName("Find socks").withDueDate("14th April 4pm")
                     .withStatus("undone").withBeginDate("little tokyo").build();
-            getclothes = new TaskBuilder().withTaskName("Get clothes").withDueDate("9482442")
-                    .withStatus("undone").withBeginDate("4th street").build();
+            getclothes = new TaskBuilder().withTaskName("Get clothes").withDueDate("14th April 4pm")
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
 
             // Manually added
-            hangclothes = new TaskBuilder().withTaskName("Hang up clothes").withDueDate("8482424")
-                    .withStatus("done").withBeginDate("little india").build();
-            interviewprep = new TaskBuilder().withTaskName("Interview preparation").withDueDate("8482131")
-                    .withStatus("undone").withBeginDate("chicago ave").build();
-            submitreport = new TaskBuilder().withTaskName("Submit FYP report").withDueDate("the sooner the better")
-                    .withStatus("undone").withBeginDate("before deadline").build();
+            hangclothes = new TaskBuilder().withTaskName("Hang up clothes").withDueDate("14th April 4pm")
+                    .withStatus("done").withBeginDate("14th April 12pm").build();
+            interviewprep = new TaskBuilder().withTaskName("Interview preparation").withDueDate("14th April 4pm")
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
+            submitreport = new TaskBuilder().withTaskName("Submit FYP report").withDueDate("14th April 4pm")
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
             floatone = new TaskBuilder().withTaskName("Float task one").withDueDate("-")
                     .withStatus("undone").withBeginDate("-").build();
             floattwo = new TaskBuilder().withTaskName("Float task two").withDueDate("-")
