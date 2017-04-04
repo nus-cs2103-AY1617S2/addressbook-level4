@@ -10,7 +10,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
  * Checks for dates
  */
 public class DateUtil {
-
+    public static final String DATE_REGEX = "dd/MM/yyyy H:mm";
     /**
      * Checks whether a task's dates are valid
      * @return true if the start date is earlier than or equal to the due date OR if either date is empty
@@ -21,7 +21,7 @@ public class DateUtil {
         if (task.getStartDate().toString().isEmpty() || task.getDueDate().toString().isEmpty()) {
             return true;
         }
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy H:mm");
+        SimpleDateFormat df = new SimpleDateFormat(DATE_REGEX);
         Date startDate = df.parse(task.getStartDate().toString());
         Date dueDate = df.parse(task.getDueDate().toString());
         return (startDate.compareTo(dueDate) <= 0);
