@@ -27,8 +27,8 @@ public class KillCommandParser implements CommandParser {
         }
         ArrayList<Integer> indexes = ParserUtil.parseIndexes(args);
         if (indexes.isEmpty()) {
-            return new IncorrectCommand
-                    (String.format(MESSAGE_INVALID_COMMAND_FORMAT, KillCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, KillCommand.MESSAGE_USAGE));
         }
         return new KillCommand(indexes);
     }
