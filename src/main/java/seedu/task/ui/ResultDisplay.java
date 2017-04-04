@@ -21,8 +21,8 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplayDefault.fxml";
-    protected static final String FXML_Light = "ResultDisplayLight.fxml";
-    protected static final String FXML_Dark = "ResultDisplayDark.fxml";
+    protected static final String FXML_LIGHT = "ResultDisplayLight.fxml";
+    protected static final String FXML_DARK = "ResultDisplayDark.fxml";
 
     private final StringProperty displayed = new SimpleStringProperty("");
 
@@ -32,17 +32,9 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
-    public ResultDisplay(AnchorPane placeHolder) {
-        super(FXML);
-        resultDisplay.textProperty().bind(displayed);
-        FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
-        FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
-        placeHolder.getChildren().add(mainPane);
-        registerAsAnEventHandler(this);
-    }
   //@@author A0142487Y-reused
-    public ResultDisplay(AnchorPane placeHolder, String fxml) {
-        super(fxml);
+    public ResultDisplay(AnchorPane placeHolder, String...fxml) {
+        super(fxml.length==0?FXML:fxml[0]);
         resultDisplay.textProperty().bind(displayed);
         FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);

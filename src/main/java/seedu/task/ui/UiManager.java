@@ -57,10 +57,10 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             switch (prefs.getTheme()) {
             case Dark:
-                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_Dark);
+                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_DARK);
                 break;
             case Light:
-                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_Light);
+                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_LIGHT);
                 break;
             default:
                 mainWindow = new MainWindow(primaryStage, config, prefs, logic);

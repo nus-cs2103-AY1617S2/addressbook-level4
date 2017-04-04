@@ -28,19 +28,12 @@ public class StatusBarFooter extends UiPart<Region> {
     private StatusBar saveLocationStatus;
 
     private static final String FXML = "StatusBarFooterDefault.fxml";
-    protected static final String FXML_Light = "StatusBarFooterLight.fxml";
-    protected static final String FXML_Dark = "StatusBarFooterDark.fxml";
+    protected static final String FXML_LIGHT = "StatusBarFooterLight.fxml";
+    protected static final String FXML_DARK = "StatusBarFooterDark.fxml";
 
-    public StatusBarFooter(AnchorPane placeHolder, String saveLocation) {
-        super(FXML);
-        addToPlaceholder(placeHolder);
-        setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
-        registerAsAnEventHandler(this);
-    }
   //@@author A0142487Y-reused
-    public StatusBarFooter(AnchorPane placeHolder, String saveLocation, String fxml) {
-        super(fxml);
+    public StatusBarFooter(AnchorPane placeHolder, String saveLocation, String...fxml) {
+        super(fxml.length==0?FXML:fxml[0]);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
         setSaveLocation("./" + saveLocation);
