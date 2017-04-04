@@ -55,7 +55,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
-    
+
     @FXML
     private AnchorPane menuBarPanelPlaceholder;
 
@@ -140,7 +140,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
-    
+
     private AnchorPane getMenuBarPlaceholder() {
         return menuBarPanelPlaceholder;
     }
@@ -207,12 +207,12 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-    
+
     //@@author A0141872E
     public MenuBarPanel getMenuBarPanel() {
         return this.menuBarPanel;
     }
-    
+
     public CommandBox getCommandBox() {
         return this.commandBox;
     }

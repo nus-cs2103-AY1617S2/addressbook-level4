@@ -14,11 +14,8 @@ import seedu.taskit.logic.commands.SaveCommand;
 //@@author A0141872E
 public class ListCommandParser {
 
-    private static final List<String> parameters = Arrays.asList("all","done", "undone", "overdue", "today", "low","medium","high");
-
-    
     private static final List<String> PARAMETERS = Arrays.asList("all", "done", "undone", "overdue", "today", "low", "medium", "high" );
-    
+
     public Command parse(String args) {
         Optional<String> parameters = Optional.of(args);
         if (!parameters.isPresent()) {

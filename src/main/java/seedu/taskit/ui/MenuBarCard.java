@@ -12,12 +12,12 @@ import javafx.scene.layout.Region;
  * MenuBarCard defines format for individual menu bar item.
  */
 public class MenuBarCard extends UiPart<Region> {
-    
+
     private static final String FXML = "MenuBarCard.fxml";
-    
+
     @FXML
     private ImageView imageView;
-    
+
     @FXML
     private HBox menuBarCardPane;
     @FXML

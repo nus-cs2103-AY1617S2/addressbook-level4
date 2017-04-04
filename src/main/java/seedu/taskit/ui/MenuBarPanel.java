@@ -18,23 +18,23 @@ import seedu.taskit.commons.util.FxViewUtil;
 public class MenuBarPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(MenuBarPanel.class);
     private static final String FXML = "MenuBarPanel.fxml";
-    
+
     public static final String MENU_FLOATING_TASK = "Floating Tasks";
     public static final String MENU_EVENT_TASK = "Event";
     public static final String MENU_DEADLINE_TASK = "Deadline";
     public static final String MENU_TODAY_TASK = "Today";
     public static final String MENU_OVERDUE_TASK = "Overdue";
-    
+
     private static final String FLOATING_TASK_ICON_PATH = "/images/floatingtask_icon.png";
     private static final String EVENT_TASK_ICON_PATH = "/images/event_icon.png";
     private static final String DEADLINE_TASK_ICON_PATH = "/images/deadline_icon.png";
     private static final String TODAY_TASK_ICON_PATH = "/images/today_icon.png";
     private static final String TODAY_OVERDUE_ICON_PATH = "/images/overdue_icon.png";
-    
+
     @FXML
     private ListView<String> menuBarView;
-    
-    private final ObservableList<String> menuBarItems = FXCollections.observableArrayList(MENU_FLOATING_TASK, 
+
+    private final ObservableList<String> menuBarItems = FXCollections.observableArrayList(MENU_FLOATING_TASK,
             MENU_EVENT_TASK, MENU_DEADLINE_TASK, MENU_TODAY_TASK,MENU_OVERDUE_TASK);
     private final String[] iconPaths = {FLOATING_TASK_ICON_PATH,EVENT_TASK_ICON_PATH, DEADLINE_TASK_ICON_PATH,
             TODAY_TASK_ICON_PATH,TODAY_OVERDUE_ICON_PATH};
@@ -46,7 +46,7 @@ public class MenuBarPanel extends UiPart<Region> {
     }
 
     private void setConnection() {
-        menuBarView.setItems(menuBarItems); 
+        menuBarView.setItems(menuBarItems);
         menuBarView.setCellFactory(listView -> new MenuBarCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -66,7 +66,7 @@ public class MenuBarPanel extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
     }
-    
+
     class MenuBarCell extends ListCell<String> {
         @Override
         protected void updateItem(String label, boolean empty) {

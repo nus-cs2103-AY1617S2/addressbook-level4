@@ -123,7 +123,7 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
-    
+
     //@@author A0141872E
     @Subscribe
     private void handleMenuBarPanelSelectionChangedEvent(MenuBarPanelSelectionChangedEvent event) {

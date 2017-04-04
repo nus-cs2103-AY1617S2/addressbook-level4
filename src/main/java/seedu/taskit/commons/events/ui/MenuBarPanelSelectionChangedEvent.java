@@ -9,7 +9,7 @@ import seedu.taskit.commons.events.BaseEvent;
 public class MenuBarPanelSelectionChangedEvent extends BaseEvent {
 
     private final String newSelection;
-    
+
     public MenuBarPanelSelectionChangedEvent(String newSelection) {
         this.newSelection = newSelection;
     }
