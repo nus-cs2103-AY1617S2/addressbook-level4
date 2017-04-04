@@ -5,19 +5,19 @@ By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)
-   > 3.1. [Add tasks](#32-adding-a-task--add)<br/>
-     3.2. [Delete tasks](#36-deleting-a-task--delete)<br/>
-     3.3. [Edit tasks](#34-editing-a-task--edit)<br/>
-     3.4. [List tasks](#33-listing-all-tasks--list)<br/>
-     3.5. [Find tasks](#35-finding-all-tasks-containing-any-keyword-in-their-title--find)<br/>
-     3.6. [Select tasks](#311-selecting-a-task--select)<br/>
+   > 3.1. [Add tasks](#31-adding-a-task--add)<br/>
+     3.2. [Delete tasks](#32-deleting-a-task--delete)<br/>
+     3.3. [Edit tasks](#33-editing-a-task--edit)<br/>
+     3.4. [Find tasks](#34-finding-all-tasks-containing-any-keyword-in-their-title--find)<br/>
+     3.5. [List tasks](#35-listing-all-tasks--list)<br/>
+     3.6. [Select tasks](#36-selecting-a-task--select)<br/>
      3.7. [Mark tasks as complete](#37-marking-a-task-as-complete--complete)<br/>
      3.8. [Mark tasks as incomplete](#38-marking-a-task-as-incomplete--incomplete)<br/>
      3.9. [Undo](#39-undo-the-previous-command--undo)<br/>
      3.10. [Redo](#310-redo-a-command--redo)<br/>
-     3.11. [Revert](#310-redo-a-command--redo)<br/>
-     3.12. [Unrevert](#310-redo-a-command--redo)<br/>
-     3.13. [Specifying the data storage location](#39-undo-the-previous-command--undo)<br/>
+     3.11. [Revert](#311-revert-a-command--redo)<br/>
+     3.12. [Unrevert](#312-unrevert-a-command--redo)<br/>
+     3.13. [Specifying the data storage location](#39-use--use)<br/>
      3.14. [Import as Google Calender file](#314-importing-files-into-the-program--import)<br/>
      3.15. [Export as Google Calender file](#315-exporting-files-from-the-program--export)<br/>
      3.16. [Save](#316-saving-the-data)<br/>
@@ -96,7 +96,7 @@ Here are the **allowed formats**:
 * `add <title> priority: <1 to 5>` - adds a floating task with a priority level.
 * `add <title> note: <instructions>` - adds a floating task with instructions.
 * `add <title> #<tag>` - adds a floating task with a tag. Note that you can have multiple tags.
-For full details of each parameter, please view their formats in their respective sections below.
+For full details of each parameter, please view their formats in their respective sections below. 
 
 The full allowed command format is therefore:
 
@@ -147,24 +147,31 @@ Tasks can have any number of tags, including 0.<br>
 Let us show you some *examples*:
 ```
 I want to buy apples but I don't wish to have a deadline.
-> Command: add Buy Appples
+> Command: add Buy Apples
 Result: Burdens will ask this task to the "Floating" square.
 
 I want to buy oranges by the end of this week.
 > Command: add Buy Oranges for: end of this week
-Result: Burdens will add this task to the "Ongoing" square and assign it to the Friday of that week.
+Result: Burdens will add this task to the "Ongoing" square and
+        assign it to the Friday of that week.
 
 I want to buy pears which will happen on Christmas and eat them from 6pm to 12am.
 > Command: add Buy Pears for: Christmas from 6pm to 12am
-Result: Burdens will add this task to the "Ongoing" square and assign it to the Christmas of that year and add an event tag `E`.
+Result: Burdens will add this task to the "Ongoing" square and assign it to the 
+        Christmas of that year and add an event tag `E`.
 
-I want to buy mangoes, it's extremely decent and I want to add an instruction that it's due on Friday.
+I want to buy mangoes, it's extremely decent and I want to add an
+instruction that it's due on Friday.
 > Command: add Buy Mangoes for: Friday priority: 2 note: I must buy it on Friday.
-Result: Burdens will add this task to the "Ongoing" square and assign it to a priority level of 5.
+Result: Burdens will add this task to the "Ongoing" square and
+        assign it to a priority level of 2.
 
 Now it's time for a full command.
-I want to buy Burdens today, it's of the utmost importance, I want to note that I have to get it and I want to tag it as cool and awesome!
+I want to buy Burdens today, it's of the utmost importance,
+I want to note that I have to get it and I want to tag it as cool and awesome!
 > Command: add Buy Burdens for: today priority: 5 note: I have to get it #cool #awesome
+Result: Burdens will add this task to the "Ongoing: square and 
+        assign it to a priority level of 5. It will also add 2 tags called awesome and cool.
 ```
 
 ### 3.2. Deleting a task : `delete`
@@ -181,11 +188,13 @@ Here are the **allowed formats**:
 
 Let us show you some *examples*:
 ```
-I no longer want to buy my apples and wish to remove the task from Burdens. It is in the ongoing list at index 3.
+I no longer want to buy my apples and wish to remove the task from Burdens. 
+It is in the ongoing list at index 3.
 > Command: delete 3
 Result: Burdens will delete this task from the "Ongoing" square.
 
-I bought my oranges and completed the task. It is now at index 2 of the completed list. Now I wish to delete it from Burdens.
+I bought my oranges and completed the task. It is now at index 2 of the completed list. 
+Now I wish to delete it from Burdens.
 > Command: delete completed 2
 Result: Burdens will delete this task from the "Completed" square.
 ```
@@ -206,7 +215,7 @@ Here are the **allowed formats**:
 * `edit floating <index>` - deletes a floating task from Burdens at the specified index.
 * `edit completed <index>` - deletes a completed task from Burdens at the specified index.
 
-Note:
+Note: 
 
 * At least one of the optional fields apart from the task list name must be provided.
 * Existing values will be updated to the input values.
@@ -217,133 +226,271 @@ Let us show you some *examples*:
 ```
 I want to buy oranges tomorrow instead of apples today. My task is in the ongoing list at index 3.
 > Command: edit 3 Buy Oranges for: tomorrow
-Result: Burdens will edit this task and change the title to Buy Oranges and deadline to tomorrow at the "Ongoing" square.
+Result: Burdens will edit this task and change the title
+        to Buy Oranges and deadline to tomorrow at the "Ongoing" square.
 
 I want to change the instructions of task 2 at the floating list from fruits to vegetables.
 > Command: edit floating 2 note: vegetables
-Result: Burdens will edit the instructions of the second task to vegetables at the "Floating" square.
+Result: Burdens will edit the instructions of the second task to vegetables 
+        at the "Floating" square.
 ```
 
-### 3.4. Listing all tasks : `list`
+### 3.4. Finding a specific task : `find`
 
-Shows a list of all tasks.
+One simply has too much to do. At the crucial moments, you need to find something fast.
 
-Format: `list`
+Naturally, Burdens allows you to find a task in a few ways quickly.
 
-### 3.5. Finding all tasks containing any keyword in their title : `find`
+Let's begin to find a task in Burdens.
 
-Finds tasks with titles containing any of the given keywords. This command requires at least 3 letters e.g. `find Han` will be accepted, but `find Ha` is an invalid command format.
+Here are the **allowed formats**:
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+* `find <title>` - displays all tasks that fit the title on all 3 relevant squares.
+* `find #<tag>` - displays all tasks that has the `<tag>` on all 3 relevant squares. Note: `#` has to be before the `<tag>`.
 
-> The search is simultaneously applied to all task lists.<br><br>
-The search is case sensitive. e.g hans will not match<br><br>
-The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans<br><br>
-Only the title is searched.<br><br>
-Tasks matching at least one keyword will be returned (i.e. OR search). e.g. Hans will match Hans Bo.<br><br>
-Fuzzy Find is implemented such that e.g. Hns will match Hans.
-> - Fuzzy Find works by returning a list of results based on likely relevance even though search argument words and spellings may not exactly match
+Note: 
 
-Examples:
+* At least 3 letters of a keyword must be provided.
+* The keyword is not case-sensitive.
+* Multiple keywords are allowed. The order of the keywords do not matter.
+* Missing single letters or minor spelling mistakes are automatically processed to match<br>
+  the intended keyword thanks to a feature called Fuzzy Find.
 
-- `find groceries Buy`
-   - Returns Buy groceries but not Groceries
-- `find buy webcast`
-   - Returns any tasks having titles buy or webcast
+Let us show you some *examples*:
+```
+I want to find a task called Buy Apples that is on the ongoing panel.
+> Command: find Buy or find Apples
+Result: Burdens will display the task required on the "Ongoing" square 
+        as well as other relevant tasks on the other squares.
 
-### 3.7. Marking a task as complete : `complete`
+I want to find a task by a tag. The tag is fruits.
+> Command: find #fruits
+Result: Burdens will edit the instructions of the second task to vegetables
+        at the "Floating" square.
+```
 
-Marks a task as completed and moves it to the list of completed tasks.
+### 3.5. Listing all tasks : `list`
 
-Format: `complete [TASK_LIST] INDEX`
+Want to show your lists of all tasks in a certain order?
 
-> Marks the task at the specified TASK\_LIST and INDEX as completed. The task list refers to the name of the task list e.g. &quot;floating&quot;, &quot;ongoing&quot;; &quot;completed&quot; is invalid as task list name. If no task list name specified, it is assumed to be &quot;ongoing&quot;.<br><br>
-The index refers to the index number shown in the most recent listing.<br><br>
-The index must be a positive integer 1, 2, 3, …
+Let's begin to list all tasks in Burdens.
 
-### 3.8. Marking a task as incomplete : `incomplete`
+Here are the **allowed formats**:
 
-Marks a task as incomplete and moves it back to the list of either floating or ongoing tasks.
+* `list` - lists all tasks by priority by default.
+* `list date` - lists all tasks sorted by the earliest dates.
+* `list priority` - lists all tasks sorted by priority of urgency.
+* `list title` - lists all tasks sorted by title in alphabetical order.
 
-Format: `incomplete INDEX`
+### 3.6. Selecting a task : `select`
 
-> Resets the task priority from complete to its old priority level at the specified INDEX, and places the task at its original column.<br><br>
-The index refers to the index number shown in the most recent listing of the completed tasks.<br><br>
-The index must be a positive integer 1, 2, 3, ...
+Need to select a task at a particular square quickly?
 
-### 3.9. Undo the previous command : `undo`
-
-Undo the command previously entered.
-
-Format: `undo`
-
-> If there&#39;s a previous command that changed the state of any of the task lists e.g. add, edit or delete, it is undone and the respective task list is reverted to its prior state before the add, edit or delete command was entered.
-
-### 3.10. Redo a command : `redo`
-
-Redo the command previously undone.
-
-Format: `redo`
-
-> If there&#39;s a previous command that changed the state of any of the task lists e.g. add, edit or delete, and was undone by the undo command afterwards, it is redone and the respective task list is reverted to its prior state after the add, edit or delete command was entered.<br><br>
-If the undo command was followed by another state-changing command, the command that was previously undone would not be redone.
-
-### 3.11. Selecting a task : `select`
+Let's begin to select a task in Burdens.
 
 Selects the task identified by the index number used in the last task listing.
 
-Format: `select [TASK_LIST] INDEX`
+Here are the **allowed formats**:
 
-> Selects the task and loads the Google search page the title at the specified INDEX.<br><br>
-The index refers to the index number shown in the most recent listing.<br><br>
-The index must be a positive integer 1, 2, 3, ...
+* `select <index>` - selects a task at the particular index in the `Ongoing` square.
+* `select floating <index>` - selects a task at the particular index in the `Floating` square.
+* `select completed <index>` - selects a task the particular
 
-Examples:
+Note: 
 
-- `list`
-- `select 2`
-   - Selects the 2nd task in the list.
-- `find Eat Chips and Pizza`
-- `select 1`
-   - Selects the 1st task in the results of the find command.
+* A valid index must be provided. We cannot process an index if it's larger
+  than the amount of tasks present.
 
-### 3.12. Clearing all tasks : `reset`
+### 3.7. Marking a task as complete : `complete`
 
-Clears all tasks from the list.
+Finally got rid of a burden? Awesome.
 
-Format: `clear`
+Move it to the `Completed` square.
 
-### 3.13. Exiting the program : `exit`
+Let's begin to complete a task in Burdens.
 
-Exits the program.
+Here are the **allowed formats**:
 
-Format: `exit`
+* `complete <index>` - completes the task at that index at the `Ongoing` square.
+* `complete floating <index>` - completes the task at that index at the `Floating` square.
 
-### 3.14. Importing files into the program : `import`
+Note: 
 
-Import an ICal-formatted file into the program.
+* A valid index must be provided. We cannot process an index if it's larger
+  than the amount of tasks present.
 
-Format: `import path/to/file.ics`
+### 3.8. Marking a task as incomplete : `incomplete`
 
-### 3.15. Exporting files from the program : `export`
+Want to renew a task from the `Completed` square?
 
-Export the current task list into an ICal-formatted file.
+Let's begin to move it back to the square it belonged to.
 
-Format: `export path/to/file.ics`
+Here is the **allowed format**:
+
+* `incomplete <index>` - moves the completed task at that index back to where it belonged.
+
+Note: 
+
+* A valid index must be provided. We cannot process an index if it's larger
+  than the amount of tasks present.
+* There must be a task in the `Completed` column.
+
+### 3.9. Undo the previous command : `undo`
+
+Did something wrong? Do not worry, we can reverse it.
+
+Let's begin to undo the process.
+
+Here is the **allowed format**:
+
+* `undo` - undo the previous command process.
+
+Note: 
+
+* A valid command must have been done before it can be undone when Burdens is first initiated.
+  
+### 3.10. Redo a command : `redo`
+
+Changed your mind? Want to reverse a undone process?
+
+Let's begin to redo the undone process.
+
+Here is the **allowed format**:
+
+* `redo` - redo the previous undone process.
+
+Note: 
+
+* There must be an undone process before you can redo.
+ 
+### 3.11. Revert : `revert`
+
+Sometimes you wish that you could go back to the beginning, to where you
+first initiated the application.
+
+Let's begin to revert to square one.
+
+Here is the **allowed format**:
+
+* `revert` - reverts to the state when Burdens was started.
+
+Note: 
+
+* The undo command does not work for revert.
+* This process is irreversible once Burdens is closed.
+* There must be an undone process before you can redo.
+ 
+### 3.12. Unrevert : `unrevert`
+
+Accidentally reverted? It's fine.
+
+Let's begin to unrevert Burdens.
+
+Here is the **allowed format**:
+
+* `unrevert` - undo the revert to the state when Burdens was last edited.
+
+### 3.13 Specifying the data storage location : `use`
+
+Want to personalise where you save the data file of Burdens?
+
+Let's begin to change the directory of the save file.
+
+Here are the **allowed formats**:
+
+For Macintosh users:
+* `use` - changes the directory to the file path stated after the command
+
+For Windows users:
+* `use` - changes the directory to the file path stated after the command
+
+Note: 
+
+* A valid file path must be provided.
+
+### 3.14. Import as Google Calender file
+
+Want to import a Google Calendar file into Burdens?
+
+Let's begin to import the file.
+
+Here are the **allowed formats**:
+
+* `import <filename>.ics` - imports a Google calendar file into Burdens
+
+Note: 
+
+* A valid file must be provided.
+* The file name is casel-sensitive.
+
+### 3.15. Export as Google Calendar file
+
+Want to export Burden's task as a Google Calendar file?
+
+Let's begin to export the file.
+
+Here are the **allowed formats**:
+
+* `export <filename>.ics` - exports a Google calendar file into Burdens
+
+Note: 
+
+* A valid file name must be provided.
 
 ### 3.16. Saving the data
+
+Want to save what you have done for Burdens?
 
 All data are saved in the hard disk automatically after any command that changes the data.
 
 There is no need to save manually.
 
+### 3.17. Resetting Burdens : `reset`
+
+Want a fresh start for Burdens? 
+
+Let's begin to reset Burdens afresh.
+
+Here is the **allowed format**:
+
+* `reset` - resets Burdens to factory state.
+
+Note: 
+
+* This process cannot be undone when Burdens is closed. Be sure to 
+  undo before data is irreversibly lost.
+ 
 ### 3.18. Viewing help : `help`
 
-Prompts a help page with all the existing commands.
+Need help?
 
-Format: `help`
+Burdens has a help summary that's designed to be easy to follow.
 
-> Help is also shown if you enter an incorrect command e.g. abcd
+Let's begin to help.
+
+Here is the **allowed format**:
+
+* `help` - loads the help page that will pop up.
+
+Note:
+
+* if an incorrect command is entered, the result display will display a
+  help message regarding the incorrect command. This is provided if the
+  command is typed correctly.
+* You can type a command on it's own too to jog your memory of the fields
+  required to complete the command
+  
+### 3.19. Exiting the program : `exit`
+
+Saying goodbye to Burdens?
+
+Let's begin to exit Burdens.
+
+Here is the **allowed format**:
+
+* `exit` - exits Burdens.
+
+Format: `exit`
 
 # 4. FAQ
 
@@ -357,29 +504,4 @@ A: No prior command line knowledge is required to use **Burdens**. Instead, just
 
 # 5. Command Summary
 
-- Help : `help`
-- Add : `add TITLE [for: DEADLINE] [priority: PRIORITY] [note: INSTRUCTION] [t/TAG]...`
-  - e.g. add Buy groceries for: the first Thursday of May priority: 5 note: eggs x10, milk x2, bread x2 #home #errand
-- List : `list`
-- Edit : `edit INDEX [TITLE] [for: DATE] [priority: PRIORITY] [note: INSTRUCTION] [#TAG]…`
-   - e.g. edit Buy dinner for: everyday  p/5 note: Chicken Rice #home #food
-- Find : `find KEYWORD [MORE_KEYWORDS]`
-  - e.g. find Play basketball
-- Delete : `delete INDEX`
-  - e.g. delete 3
-- Complete : `complete [TASK_LIST] INDEX`
-  - e.g complete 1 2
-- Incomplete : `incomplete INDEX`
-  - e.g incomplete 3
-- Undo : `undo`
-   - e.g undo
-- Redo : `redo`
-   - e.g redo
-- Select : `select INDEX`
-  - e.g select 2
-- Clear : `reset`
-   - e.g reset
-- Exit : `exit`
-   - e.g exit
-- List : `list`
-   - e.g list
+I will photoshop this section for a table that will summarise all the commands.
