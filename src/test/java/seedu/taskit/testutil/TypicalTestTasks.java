@@ -6,9 +6,10 @@ import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.model.AddressBook;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
+import seedu.taskit.model.task.Date;
 
 public class TypicalTestTasks {
-    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment, cleaning, gymming;
+    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment, cleaning, gymming, golfing;
 
     public TypicalTestTasks() {
         try {
@@ -43,6 +44,9 @@ public class TypicalTestTasks {
             assignment = new TaskBuilder().withTitle("CS3230 Assignment")
                     .withPriority("medium")
                     .withTags("school").build();
+            golfing = new TaskBuilder().withTitle("Golf with Cher")
+                    .withPriority("medium")
+                    .withTags("school").withEnd(new Date("today")).build();
 
         } catch (IllegalValueException e) {
             e.printStackTrace();
