@@ -119,7 +119,7 @@ public class TaskCard extends UiPart<Region> {
             // and cannot be parsed as Date object
         }
     }
-    
+
     private void setDueDateColor(Date dateReference, String cssColor) {
         try {
             if (dateReference.after(DATE_FORMAT.parse(dueDate.getText()))) {
