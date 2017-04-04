@@ -156,10 +156,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
+    //@@author A0163720M
     @Subscribe
     public void handleSaveFileChangedEvent(SaveFilePathChangedEvent evt) {
         this.todoList.resetData(evt.data);
     }
+    //@@author
 
     //=========== Filtered Todo List Accessors =============================================================
 
