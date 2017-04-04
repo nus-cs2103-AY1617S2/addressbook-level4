@@ -107,5 +107,4 @@ public class SyncProviderGoogleTests {
         // Verify sync status changed
         verify(syncProviderGoogle).stop();
     }
-
 }
