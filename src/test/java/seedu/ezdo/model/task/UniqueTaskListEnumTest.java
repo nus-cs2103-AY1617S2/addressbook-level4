@@ -36,7 +36,7 @@ public class UniqueTaskListEnumTest {
 
         PowerMockito.mockStatic(SortCriteria.class);
         PowerMockito.when(SortCriteria.values()).thenReturn(
-                new SortCriteria[] {SortCriteria.NAME, SortCriteria.PRIORITY, 
+                new SortCriteria[] {SortCriteria.NAME, SortCriteria.PRIORITY,
                         SortCriteria.DUE_DATE, SortCriteria.START_DATE, c});
 
         utl.sortTasks(c, true);
