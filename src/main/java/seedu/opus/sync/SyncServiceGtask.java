@@ -32,8 +32,8 @@ import seedu.opus.model.task.Task;
 import seedu.opus.sync.exceptions.SyncException;
 
 public class SyncServiceGtask implements SyncService {
-    private static HttpTransport HTTP_TRANSPORT;
-    private static FileDataStoreFactory DATA_STORE_FACTORY;
+    private static HttpTransport httpTransport;
+    private static FileDataStoreFactory dataStoreFactory;
     private static final java.io.File DATA_STORE_DIR = new java.io.File("data/credentials");
     private static final String CLIENT_ID = "972603165301-kls9usprmd2fpaelvrd0937dlcj43g6f.apps.googleusercontent.com";
     private static final String CLIENT_SECRET = "07B1QJ73rQECWSoIjAPHMDNG";
@@ -60,8 +60,8 @@ public class SyncServiceGtask implements SyncService {
     @Override
     public void start() {
         try {
-            HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
+            httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+            dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (Throwable t) {
@@ -85,12 +85,14 @@ public class SyncServiceGtask implements SyncService {
     @Override
     public void stop() {
         this.isRunning = false;
+        logger.info("Stopping Google Task");
     }
 
     @Override
     public void updateTaskList(List<Task> taskList) {
         assert taskList != null;
         this.taskListDeque.addFirst(taskList);
+        logger.info("New data added to Google Task update queue");
     }
 
     /**
@@ -106,19 +108,14 @@ public class SyncServiceGtask implements SyncService {
                 List<Task> taskList = this.taskListDeque.takeFirst();
                 this.taskListDeque.clear();
 
-                Tasks currentTaskList = service.tasks().list(opusTaskList.getId()).execute();
+                Tasks currentTaskList = listTasksFromGtask(this.opusTaskList.getId());
                 if (!currentTaskList.getItems().isEmpty()) {
                     for (com.google.api.services.tasks.model.Task task : currentTaskList.getItems()) {
-                        service.tasks().delete(opusTaskList.getId(), task.getId()).execute();
+                        deleteTaskFromGtask(task);
                     }
                 }
                 for (Task taskToPush : taskList) {
-                    com.google.api.services.tasks.model.Task googleAdaptedTask = toGoogleAdaptedTask(taskToPush);
-                    com.google.api.services.tasks.model.Task result = service
-                                                                      .tasks()
-                                                                      .insert(opusTaskList.getId(), googleAdaptedTask)
-                                                                      .execute();
-                    logger.info(result.toString());
+                    insertTasktoGtask(taskToPush);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -139,9 +136,9 @@ public class SyncServiceGtask implements SyncService {
         clientSecretsDetails.setClientId(CLIENT_ID);
         clientSecretsDetails.setClientSecret(CLIENT_SECRET);
         GoogleClientSecrets clientSecrets = new GoogleClientSecrets().setInstalled(clientSecretsDetails);
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT,
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport,
                                             JSON_FACTORY, clientSecrets, SCOPES)
-                                            .setDataStoreFactory(DATA_STORE_FACTORY)
+                                            .setDataStoreFactory(dataStoreFactory)
                                             .build();
 
         Credential credential = null;
@@ -156,17 +153,16 @@ public class SyncServiceGtask implements SyncService {
     }
 
     /**
-     * Initialise Google Task Service
+     * Initialise Google Task API Service
      * @return
      * @throws IOException
      * @throws SyncException
      */
     private com.google.api.services.tasks.Tasks getTasksService() throws IOException, SyncException {
         Credential credential = authorize();
-        return new com.google.api.services.tasks.Tasks.Builder(
-                HTTP_TRANSPORT, JSON_FACTORY, credential)
-                .setApplicationName(APPLICATION_NAME)
-                .build();
+        return new com.google.api.services.tasks.Tasks.Builder(httpTransport, JSON_FACTORY, credential)
+                                                                .setApplicationName(APPLICATION_NAME)
+                                                                .build();
     }
 
     /**
@@ -177,11 +173,11 @@ public class SyncServiceGtask implements SyncService {
      */
     private TaskList getOpusTasks() throws SyncException {
         try {
-            TaskLists taskList = service.tasklists().list().execute();
+            TaskLists taskList = getAllTaskListFromGtask();
             List<TaskList> items = taskList.getItems();
             for (TaskList entry: items) {
                 if (entry.getTitle().equals(APPLICATION_NAME)) {
-                    TaskList tasks = service.tasklists().get(entry.getId()).execute();
+                    TaskList tasks = getTaskListFromGtask(entry);
                     return tasks;
                 }
             }
@@ -201,7 +197,7 @@ public class SyncServiceGtask implements SyncService {
         TaskList opusTaskList = new TaskList();
         opusTaskList.setTitle("Opus");
         try {
-            return service.tasklists().insert(opusTaskList).execute();
+            return insertTaskListToGtask(opusTaskList);
         } catch (IOException e) {
             throw new SyncException(SYNC_ERROR_MESSAGE);
         }
@@ -231,5 +227,68 @@ public class SyncServiceGtask implements SyncService {
                                     ? TASK_STATUS_COMPLETE
                                     : TASK_STATUS_INCOMPLETE);
         return googleAdaptedTask;
+    }
+
+    //====================Google Task API Service Call Methods==============================================
+
+    /**
+     * API service call to insert new task to Google Task
+     * @param taskToPush
+     * @throws IOException
+     */
+    private void insertTasktoGtask(Task taskToPush) throws IOException {
+        com.google.api.services.tasks.model.Task googleAdaptedTask = toGoogleAdaptedTask(taskToPush);
+        com.google.api.services.tasks.model.Task result = service
+                                                          .tasks()
+                                                          .insert(opusTaskList.getId(), googleAdaptedTask)
+                                                          .execute();
+        logger.info(result.toString());
+    }
+
+    /**
+     * API service call to delete task from Google Task
+     * @param taskToDelete
+     * @throws IOException
+     */
+    private void deleteTaskFromGtask(com.google.api.services.tasks.model.Task taskToDelete) throws IOException {
+        service.tasks().delete(opusTaskList.getId(), taskToDelete.getId()).execute();
+    }
+
+    /**
+     * API service call to retrieve Tasks list from Google Task
+     * @return
+     * @throws IOException
+     */
+    private Tasks listTasksFromGtask(String taskListId) throws IOException {
+        return service.tasks().list(taskListId).execute();
+    }
+
+    /**
+     * API service call to retrieve all user Task list from Google Task
+     * @return
+     * @throws IOException
+     */
+    private TaskLists getAllTaskListFromGtask() throws IOException {
+        return service.tasklists().list().execute();
+    }
+
+    /**
+     * API Service call to retrieve a specific Task List from Google Task
+     * @param entry
+     * @return
+     * @throws IOException
+     */
+    private TaskList getTaskListFromGtask(TaskList entry) throws IOException {
+        return service.tasklists().get(entry.getId()).execute();
+    }
+
+    /**
+     * API service call to insert a new Task List to Google Task
+     * @param taskList
+     * @return
+     * @throws IOException
+     */
+    private TaskList insertTaskListToGtask(TaskList taskList) throws IOException {
+        return service.tasklists().insert(taskList).execute();
     }
 }
