@@ -142,12 +142,13 @@ Marks tasks at index 3, 4 and 5 as incomplete.
 ### 2.8. Schedule: `schedule`
 
 Set an event or a deadline.<br>
-Format: `schedule INDEX [STARTIME to] ENDTIME`
+Format: `schedule INDEX [STARTIME] to ENDTIME`
 
 > * Set the start time and the end time of the task.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * If only one datetime is specified, opus will automatically schedule for `ENDTIME`
+> * If only the end time is specified, the prefix `to` can be ignored.
 
 Examples:
 
@@ -286,7 +287,7 @@ Closes Opus.
 
 * **Save** : `save DIRECTORY` <br>
 
-* **Schedule** : `schedule INDEX [STARTTIME to] ENDTIME` <br>
+* **Schedule** : `schedule INDEX [STARTTIME] to ENDTIME` <br>
   e.g. `schedule 6 03/15/2017 11:00 to 03/15/2017 12:00`
 
 * **Select** : `select INDEX` <br>
