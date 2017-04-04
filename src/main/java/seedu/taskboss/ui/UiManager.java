@@ -124,6 +124,11 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
 
+    //@@author A0143157J
+    /**
+     * Subscribe to click events on the CategoryListPanel
+     * and loads task in the selected category
+     */
     @Subscribe
     private void handleCategoryListPanelSelectionChangedEvent(CategoryListPanelViewingChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

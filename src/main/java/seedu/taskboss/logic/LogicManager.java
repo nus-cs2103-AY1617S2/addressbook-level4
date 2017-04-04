@@ -48,6 +48,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredTaskList();
     }
 
+    //@@author A0143157J
     @Override
     public void updateFilteredTaskListByCategory(Category category) {
         model.updateFilteredTaskListByCategory(category);

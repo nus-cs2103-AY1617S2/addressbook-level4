@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.taskboss.model.category.Category;
 
+//@@author A0143157J
 public class CategoryCard extends UiPart<Region> {
 
     private static final String FXML = "CategoryCard.fxml";

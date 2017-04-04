@@ -3,6 +3,10 @@ package seedu.taskboss.commons.events.ui;
 import seedu.taskboss.commons.events.BaseEvent;
 import seedu.taskboss.model.category.Category;
 
+//@@author A0143157J
+/**
+ * Represents a viewing change in the Category List Panel
+ */
 public class CategoryListPanelViewingChangedEvent extends BaseEvent {
 
     private final Category newViewing;

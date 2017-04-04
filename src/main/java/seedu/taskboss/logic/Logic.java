@@ -27,6 +27,8 @@ public interface Logic {
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    //@@author A0143157J
+    /** Returns the filtered list of tasks according to specified category */
     void updateFilteredTaskListByCategory(Category category);
 
 }
