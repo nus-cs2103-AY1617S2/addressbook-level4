@@ -42,7 +42,7 @@ public class UndoCommandTest extends ToDoListGuiTest {
 
     @Test
     public void undo_failedAdd_failure() {
-        commandBox.runCommand(AddCommand.COMMAND_WORD + " " + td.taskA.getName());
+        commandBox.runCommand(AddCommand.COMMAND_WORD + " ");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         assertResultMessage(MESSAGE_EMPTYUNDOHISTORY);
     }
@@ -84,7 +84,7 @@ public class UndoCommandTest extends ToDoListGuiTest {
 
     @Test
     public void undo_failedEdit_addRepeatedTask_failure() {
-        commandBox.runCommand(EditCommand.COMMAND_WORD + " e1 " + td.taskD.getName());
+        commandBox.runCommand(EditCommand.COMMAND_WORD + " e1");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         assertResultMessage(MESSAGE_EMPTYUNDOHISTORY);
     }
