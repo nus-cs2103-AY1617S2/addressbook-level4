@@ -63,4 +63,6 @@ public interface Model {
      */
     void resetToPrecedingState() throws InvalidUndoException;
 
+    /** Change the data storage location */
+    void changeSaveLocation(String location);
 }

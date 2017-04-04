@@ -55,4 +55,14 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+
+    //@@author A0148081H
+    /**
+     * Checks whether the string matches an approved file path.
+     * @param s should be trimmed
+     * @return true if it is a valid file path
+     */
+    public static boolean isValidPathToFile(String s) {
+        return s != null && !s.isEmpty() && s.matches("([A-z]\\:)?(\\/?[\\w-_()]+(\\s[\\w-_()])?)+(\\.[\\w]+)");
+    }
 }
