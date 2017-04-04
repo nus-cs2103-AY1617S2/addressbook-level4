@@ -1,11 +1,13 @@
 package seedu.todolist.logic.parser;
 
 import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+import static seedu.todolist.commons.core.GlobalConstants.TODO_TYPES;
 import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.todolist.logic.parser.CliSyntax.PREFIX_COMPLETE_TIME;
 import static seedu.todolist.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.todolist.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.todolist.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.todolist.logic.parser.CliSyntax.PREFIX_TODO_TYPE;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,7 +41,7 @@ public class FindCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_TAG, PREFIX_COMPLETE_TIME);
+                new ArgumentTokenizer(PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_TAG, PREFIX_COMPLETE_TIME, PREFIX_TODO_TYPE);
         argsTokenizer.tokenize(args);
         // Fetch the keyword string before the prefix
         Optional<String> keywordsString = argsTokenizer.getPreamble();
@@ -47,10 +49,11 @@ public class FindCommandParser {
         Optional<String> startTime = argsTokenizer.getValue(PREFIX_START_TIME);
         Optional<String> endTime = argsTokenizer.getValue(PREFIX_END_TIME);
         Optional<String> completeTime = argsTokenizer.getValue(PREFIX_COMPLETE_TIME);
+        Optional<String> todoType = argsTokenizer.getValue(PREFIX_TODO_TYPE);
 
         // User must enter either the search keyword or at least one parameter
         if (!(keywordsString.isPresent() || tags.isPresent() || startTime.isPresent()
-            || endTime.isPresent() || completeTime.isPresent())) {
+            || endTime.isPresent() || completeTime.isPresent() || todoType.isPresent())) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -59,6 +62,7 @@ public class FindCommandParser {
             Date startTimeSet = null;
             Date endTimeSet = null;
             Object completeTimeSet = null;
+            String todoTypeSet = null;
             final Set<Tag> tagsSet = new HashSet<>();
 
             if (keywordsString.isPresent()) {
@@ -79,6 +83,11 @@ public class FindCommandParser {
                     completeTimeSet = parseDateParameter(completeTime.get());
                 }
             }
+            //@@author A0163720M
+            // string must be 'floating', 'event', or 'deadline'
+            if (todoType.isPresent() && TODO_TYPES.contains(todoType.get())) {
+                todoTypeSet = todoType.get();
+            }
             if (tags.isPresent()) {
                 // Store the individual tag strings in a set
                 final Set<String> tagsStrings = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
@@ -87,7 +96,8 @@ public class FindCommandParser {
                     tagsSet.add(new Tag(tagName));
                 }
             }
-            return new FindCommand(keywordsSet, startTimeSet, endTimeSet, completeTimeSet, new UniqueTagList(tagsSet));
+            return new FindCommand(keywordsSet, startTimeSet, endTimeSet,
+                    completeTimeSet, todoTypeSet, new UniqueTagList(tagsSet));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }

@@ -29,11 +29,14 @@ public class FindCommand extends Command {
             + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "\n"
             + "To search for all completed todos: "
             + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "not \n"
+            + "To search for floating, deadline or event todos: "
+            + CliSyntax.PREFIX_TODO_TYPE.getPrefix() + " 'floating' OR 'deadline' OR 'event' \n"
             + "Example: " + COMMAND_WORD + " groceries\n"
             + "Example 2: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG.getPrefix() + "milk\n"
             + "Example 3: " + COMMAND_WORD + " " + CliSyntax.PREFIX_START_TIME.getPrefix() + "9:00AM 28/03/17 \n"
             + "Example 4: " + COMMAND_WORD + " " + CliSyntax.PREFIX_END_TIME.getPrefix() + "9:00AM 28/03/17 \n"
-            + "Example 5: " + COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "9:00AM 28/03/17 \n";
+            + "Example 5: " + COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "9:00AM 28/03/17 \n"
+            + "Example 6: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TODO_TYPE.getPrefix() + "deadline \n";
 
     public static final String MESSAGE_EMPTY_ERROR = "Cannot leave fields blank.";
 
@@ -42,22 +45,25 @@ public class FindCommand extends Command {
     private Date startTime;
     private Date endTime;
     private Object completeTime;
+    private String todoType;
 
     /**
      * Creates a FindCommand with keywords as parameters
      */
-    public FindCommand(Set<String> keywords, Date startTime, Date endTime, Object completeTime, UniqueTagList tags) {
+    public FindCommand(Set<String> keywords, Date startTime, Date endTime,
+            Object completeTime, String todoType, UniqueTagList tags) {
         this.keywords = keywords;
         this.startTime = startTime;
         this.endTime = endTime;
         this.completeTime = completeTime;
+        this.todoType = todoType;
         this.tags = tags;
     }
 
     //@@author A0163720M
     @Override
     public CommandResult execute() {
-        model.updateFilteredTodoList(keywords, startTime, endTime, completeTime, tags);
+        model.updateFilteredTodoList(keywords, startTime, endTime, completeTime, todoType, tags);
         return new CommandResult(getMessageForTodoListShownSummary(model.getFilteredTodoList().size()));
     }
     //@@author

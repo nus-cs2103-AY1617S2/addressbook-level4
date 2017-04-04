@@ -175,9 +175,9 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0163786N
     @Override
     public void updateFilteredTodoList(Set<String> keywords, Date startTime,
-        Date endTime, Object completeTime, UniqueTagList tags) {
+        Date endTime, Object completeTime, String todoType, UniqueTagList tags) {
         updateFilteredTodoList(new PredicateExpression(
-                new NameQualifier(keywords, startTime, endTime, completeTime, tags)));
+                new NameQualifier(keywords, startTime, endTime, completeTime, todoType, tags)));
     }
     //@@author
     private void updateFilteredTodoList(Expression expression) {
@@ -223,12 +223,15 @@ public class ModelManager extends ComponentManager implements Model {
         private Date startTime;
         private Date endTime;
         private Object completeTime;
+        private String todoType;
 
-        NameQualifier(Set<String> nameKeyWords, Date startTime, Date endTime, Object completeTime, UniqueTagList tags) {
+        NameQualifier(Set<String> nameKeyWords, Date startTime, Date endTime, 
+                Object completeTime, String todoType, UniqueTagList tags) {
             this.nameKeyWords = nameKeyWords;
             this.startTime = startTime;
             this.endTime = endTime;
             this.completeTime = completeTime;
+            this.todoType = todoType;
             this.tags = tags.toSet();
 
             // for simplicity sake, convert the Set<Tag> into Set<String> so that it can easily be filtered out
@@ -243,7 +246,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTodo todo) {
             return checkName(todo) && checkStartTime(todo) && checkEndTime(todo)
-                    && checkCompleteTime(todo) && checkTags(todo);
+                    && checkCompleteTime(todo) && checkTodoType(todo) && checkTags(todo);
         }
         //@@author A0163720M
         /**
@@ -296,6 +299,31 @@ public class ModelManager extends ComponentManager implements Model {
             return true;
         }
         //@@author
+        
+        //@@author A0163720M
+        /**
+         * Checks todo type and returns true if todo should be shown in filtered list
+         */
+        private boolean checkTodoType(ReadOnlyTodo todo) {
+            if (todoType != null) {
+                Date startTime = todo.getStartTime();
+                Date endTime = todo.getEndTime();
+                
+                switch (todoType) {
+                    case "floating":
+                        return startTime == null && endTime == null;
+                    case "deadline":
+                        return startTime == null && endTime != null;
+                    case "event":
+                        return startTime != null && endTime != null;
+                    default:
+                        return false;
+                }
+            }
+            return true;
+        }
+        //@@author
+        
         //@@author A0163786N
         /**
          * Helper function to simplify run function. Checks start time
