@@ -1,9 +1,9 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_DATES;
-
 
 import org.junit.Test;
 
@@ -65,7 +65,7 @@ public class EditCommandTest extends DoistGUITest {
 
         TestTask personToEdit = expectedTasks[todoListIndex - 1];
         TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
-        assertEditSuccess(filteredPersonListIndex, todoListIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(filteredPersonListIndex, todoListIndex, detailsToEdit, editedPerson, true);
     }
 
     @Test
@@ -135,18 +135,34 @@ public class EditCommandTest extends DoistGUITest {
      *      Must refer to the same person as {@code filteredPersonListIndex}
      * @param detailsToEdit details to edit the person with as input to the edit command
      * @param editedPerson the expected person after editing the person's details
+     * @param isFindAndDisappear true if edit is done after a find and thus task will disappear after editing
      */
     private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestTask editedPerson) {
+                                    String detailsToEdit, TestTask editedPerson, boolean isFindAndDisappear) {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
-        // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedPerson.getDescription().desc);
-        assertMatching(editedPerson, editedCard);
+        if (!isFindAndDisappear) {
+            // confirm the new card contains the right data
+            TaskCardHandle editedCard = taskListPanel.navigateToTask(editedPerson.getDescription().desc);
+            assertMatching(editedPerson, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
-        expectedTasks[addressBookIndex - 1] = editedPerson;
-        assertTrue(taskListPanel.isListMatching(expectedTasks));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
+            // confirm the list now contains all previous persons plus the person with updated details
+            expectedTasks[addressBookIndex - 1] = editedPerson;
+            assertTrue(taskListPanel.isListMatching(expectedTasks));
+            assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
+        } else {
+            // Task is supposed to not exist after editing because of find
+            try {
+                TaskCardHandle editedCard = taskListPanel.navigateToTask(editedPerson.getDescription().desc);
+                fail();
+            } catch (IllegalStateException e) {
+                return;
+            }
+        }
+    }
+
+    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
+            String detailsToEdit, TestTask editedPerson) {
+        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson, false);
     }
 }
