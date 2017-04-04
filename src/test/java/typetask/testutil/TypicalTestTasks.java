@@ -14,25 +14,25 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
             benson = new TaskBuilder().withName("Benson Meier").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
             carl = new TaskBuilder().withName("Carl Kurz").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
             elle = new TaskBuilder().withName("Elle Meyer").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
             fiona = new TaskBuilder().withName("Fiona Kunz").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
             george = new TaskBuilder().withName("George Best").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
 
             // Manually added
             hoon = new TaskBuilder().withName("Hoon Meier").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
             ida = new TaskBuilder().withName("Ida Mueller").withDate("").withEndDate("")
-                    .withCompleted(false).build();
+                    .withCompleted(false).withPriority("Low").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
