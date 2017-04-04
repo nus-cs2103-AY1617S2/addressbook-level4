@@ -6,6 +6,9 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.commons.util.StringUtil;
 
 //@@author A0124377A
+/**
+ * Indicates request to change calendar view by number of weeks ahead.
+ */
 public class UpdateCalendarEvent extends BaseEvent {
     private LocalDateTime nextDateTime;
     private int weeksAhead;

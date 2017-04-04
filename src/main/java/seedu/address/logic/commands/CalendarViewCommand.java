@@ -11,7 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 
 //@@author A0124377A
 /**
- * View calendar schedule for next week
+ * View calendar schedule for next week(s)
  */
 public class CalendarViewCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(CalendarViewCommand.class);

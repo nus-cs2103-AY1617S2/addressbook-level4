@@ -5,7 +5,7 @@ import seedu.address.model.person.ReadOnlyEvent;
 
 //@@author A0124377A
 /**
- * Indicates a request to jump in the calendar
+ * Indicates a request for feedback: jump to selected/added/edited event in calendar
  */
 public class JumpToCalendarEventEvent extends BaseEvent {
 

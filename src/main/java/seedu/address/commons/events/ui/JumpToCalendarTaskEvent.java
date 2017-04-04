@@ -5,7 +5,7 @@ import seedu.address.model.person.ReadOnlyTask;
 
 //@@author A0124377A
 /**
- * Indicates a request to jump in the calendar
+ * Indicates a request for feedback: jump to selected/added/edited task in calendar
  */
 public class JumpToCalendarTaskEvent extends BaseEvent {
 

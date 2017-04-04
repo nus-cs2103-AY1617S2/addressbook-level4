@@ -53,15 +53,6 @@ public class CalendarPanel extends UiPart<Region> {
         this.agenda.setSkin(skin);
     }
 
-   /* Set up the selected month view
-    * @param before
-    * @param after
-
-    private void setMonthView() {
-        AgendaMonthSkin skin = new AgendaMonthSkin(this.agenda);
-        this.agenda.setSkin(skin);
-    }
-    */
    /**
     * Reset callbacks which to automatically update
     */
@@ -155,7 +146,7 @@ public class CalendarPanel extends UiPart<Region> {
                     -> CalendarAdder.compareWithEvent(event, eventInCalendar))
                 .findAny()
                 .orElseThrow(()-> new CalendarUnsyncException(CALENDAR_UNSYC_MESSAGE));
-
+        agenda.selectedAppointments().clear();
         agenda.selectedAppointments().add(targetAppoint);
     }
     /**
@@ -176,10 +167,11 @@ public class CalendarPanel extends UiPart<Region> {
                     -> CalendarAdder.compareWithTask(task, taskInCalendar))
                 .findAny()
                 .orElseThrow(() -> new CalendarUnsyncException(CALENDAR_UNSYC_MESSAGE));
-
+        agenda.selectedAppointments().clear();
         agenda.selectedAppointments().add(targetAppoint);
     }
-
+    
+    //Update the calendar to show new view with user input weeks ahead
     public void viewWeeksAhead(LocalDateTime t, int weeksAhead) {
         updateCalendarShownPeriod(t.plusWeeks(weeksAhead));
     }
