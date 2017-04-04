@@ -269,7 +269,8 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return totalKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getInfo().value, keyword))
+                            || StringUtil.containsWordIgnoreCase(task.getInfo().value, keyword)
+                            || StringUtil.containsWordIgnoreCase(task.getDate().value, keyword))
                     .findAny()
                     .isPresent();
         }
