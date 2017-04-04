@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.taskmanager.commons.core.ComponentManager;
 import seedu.taskmanager.commons.core.LogsCenter;
+import seedu.taskmanager.commons.events.logic.CommandInputEvent;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
@@ -35,7 +36,10 @@ public class LogicManager extends ComponentManager implements Logic {
         Command command = parser.parseCommand(commandText);
         command.setData(model);
         command.setStorage(storage);
-        return command.execute();
+        // @@author A0140032E
+        CommandResult commandResult = command.execute();
+        raise (new CommandInputEvent(commandText));
+        return commandResult;
     }
 
     @Override
