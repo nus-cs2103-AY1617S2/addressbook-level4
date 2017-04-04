@@ -128,7 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
         } else {
             updateFilteredDoneList();
         }
-
+        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         indicateEzDoChanged();
         return isSetToDone;
     }
