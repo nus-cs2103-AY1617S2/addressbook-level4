@@ -9,6 +9,6 @@
         <URL value="@Extensions.css"/>
     </stylesheets>
     <children>
-        <ListView fx:id="floatingTaskListView" VBox.vgrow="ALWAYS" Style="-fx-background-color:#ffccbb"/>
+        <ListView fx:id="floatingTaskListView" VBox.vgrow="ALWAYS" Style="-fx-background-color:#ff9966"/>
     </children>
 </VBox>
