@@ -3,7 +3,9 @@ matrix:
   include:
     - jdk: oraclejdk8
 
-script: > travis_retry ./gradlew clean headless allTests coverage coveralls -i
+script: >-
+    ./config/travis/run-checks.sh &&
+    travis_retry ./gradlew clean checkstyleMain checkstyleTest headless allTests coverage coveralls
 
 before_install:
           - "export DISPLAY=:99.0"
