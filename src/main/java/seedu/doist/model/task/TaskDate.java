@@ -126,13 +126,11 @@ public class TaskDate {
         if (this.startDate == otherDate.startDate && this.endDate == otherDate.endDate) {
             return true;
         } else if (this.startDate == null || otherDate.startDate == null
-                || this.endDate == null || otherDate.endDate == null ) {
+                || this.endDate == null || otherDate.endDate == null) {
             return false;
-        } else if (this.startDate.toString().equals(otherDate.startDate.toString())
-                && this.endDate.toString().equals(otherDate.endDate.toString())) {
-            return true;
         } else {
-            return false;
+            return (this.startDate.toString().equals(otherDate.startDate.toString())
+                && this.endDate.toString().equals(otherDate.endDate.toString()));
         }
     }
 
