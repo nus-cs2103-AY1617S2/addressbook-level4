@@ -9,7 +9,7 @@ import seedu.todolist.model.ReadOnlyTodoList;
 public class SaveFilePathChangedEvent extends BaseEvent {
     public final String saveFilePath;
     public final ReadOnlyTodoList data;
-    
+
     public SaveFilePathChangedEvent(String saveFilePath, ReadOnlyTodoList newData) {
         this.saveFilePath = saveFilePath;
         this.data = newData;

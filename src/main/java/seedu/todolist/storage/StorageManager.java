@@ -60,14 +60,14 @@ public class StorageManager extends ComponentManager implements Storage {
     private void indicateSaveFilePathChanged(String saveFilePath) throws DataConversionException, IOException {
         File f = new File(saveFilePath);
         ReadOnlyTodoList newData;
-        
+
         // if the file is completely empty (i.e. just created), reset the list with a new list
         if (f.length() == 0) {
             newData = new TodoList();
         } else {
             newData = readTodoList(saveFilePath).get();
         }
-        
+
         raise(new SaveFilePathChangedEvent(saveFilePath, newData));
     }
     //@@author
