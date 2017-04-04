@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.tache.commons.core.EventsCenter;
+import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.tag.Tag;
@@ -71,6 +73,7 @@ public class AddCommand extends Command implements Undoable {
             model.addTask(toAdd);
             commandSuccess = true;
             undoHistory.push(this);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskList().indexOf(toAdd)));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

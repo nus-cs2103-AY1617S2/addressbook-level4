@@ -81,7 +81,7 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
         case HelpCommand.SHORT_COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         case CompleteCommand.COMMAND_WORD:
         case CompleteCommand.SHORT_COMMAND_WORD:
