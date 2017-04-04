@@ -120,7 +120,6 @@ public class FindCommandParser implements CommandParser {
         Optional<String> optionalDate;
         String taskDateString = taskDate.get();
         String commandString = taskDateString.substring(5, taskDateString.length()).trim();
-        System.out.println(commandString);
         optionalDate = Optional.of(commandString);
         return optionalDate;
     }
