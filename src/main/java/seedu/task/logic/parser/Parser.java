@@ -92,6 +92,7 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        //@@author A0135762A
         case UpcomingCommand.COMMAND_WORD:
             return new UpcomingCommand();
 
@@ -114,13 +115,14 @@ public class Parser {
         //@@author A0141928B
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
-        //@@author
 
+        //@@author A0135762A
         case FindPriorityCommand.COMMAND_WORD:
             return new FindPriorityCommand();
 
         case OverdueCommand.COMMAND_WORD:
             return new OverdueCommand();
+        //@@author
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

@@ -63,20 +63,23 @@ public interface Model {
     void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException;
 
     void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException;
-    //@@author
 
+    //@@author A0135762A
     /** Updates the filter of the filtered task list to filter by the today's date */
     void updateUpcomingTaskList();
+    //@@author
 
     /** Updates the filter of the filtered task list to filter by the given tags
      * @throws IllegalValueException */
     void updateFilteredTagTaskList(String tagName) throws IllegalValueException;
 
+    //@@author A0135762A
     /** Updates the filter of the filtered task list to filter by the highest priority */
     void updatePriorityTaskList();
 
     /** Updates the filter of the filtered task list to filter by the overdue tasks */
     void updateOverdueTaskList();
+    //@@author
 
     /** Deletes the given completed task from the completed task list
      * @throws TaskNotFoundException */

@@ -146,6 +146,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    //@@author A0135762A
     @Override
     public void updateUpcomingTaskList() {
         DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm:ss");
@@ -175,8 +176,8 @@ public class ModelManager extends ComponentManager implements Model {
         Predicate<? super ReadOnlyTask> pred = s -> s.getTags().contains(tag);
         filteredTasks.setPredicate(pred);
     }
-    //@@author
 
+    //@@author A0135762A
     @Override
     public void updatePriorityTaskList() {
         Predicate<? super ReadOnlyTask> pred  = s -> s.getPriority().toString().equals("1");
@@ -201,9 +202,11 @@ public class ModelManager extends ComponentManager implements Model {
         };
         filteredTasks.setPredicate(pred);
     }
+    //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 
+    //@@author A0135762A
     private class LevenshteinDistance {
         private int minimum(int a, int b, int c) {
             return Math.min(Math.min(a, b), c);
@@ -250,6 +253,7 @@ public class ModelManager extends ComponentManager implements Model {
             return false;
         }
     }
+    //@@author
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
