@@ -60,7 +60,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[**name / n**](#39-modifying-a-category-name--name)         |Rename a category      |
 |[**mark / m**](#310-marking-a-task-done--done)               |Mark a task as done      |
 |[**undo / u**](#311-undoing-a-command--undo)                 |Undo a task            |
-|[**redo / u**](#312-redoing-a-command--undo)                 |Redo a task            |
+|[**redo / r**](#312-redoing-a-command--redo)                 |Redo a task            |
 |[**sort / s**](#313-sorting-tasks--sort)                     |Sort tasks by deadline or by priority|
 |[**save / sv**](#315-exporting-the-data--save)                |Save TaskBoss          |
 |[**exit / x**](#316-exiting-the-program--exit)               |Exit TaskBoss          |
@@ -277,7 +277,7 @@ A: Install TaskBoss in the other computer and overwrite the empty data file it c
 |[name / n](#39-modifying-a-category-name--name)         |**`name EXISTING_CATEGORY NEW_CATEGORY`**       |
 |[mark / m](#310--marking-a-task-done--done)               |**`mark INDEX`**        |
 |[undo / u](#311-undoing-a-command--undo)                 |**`undo`**            |
-|[redo / r](#312-redoing-a-command--undo)                     |**`redo`**            |
+|[redo / r](#312-redoing-a-command--redo)                     |**`redo`**            |
 |[sort / s](#313-sorting-tasks--sort)                     |**`sort ed` `sort sd` `sort p`**   |
 |[save / sv](#315-exporting-the-data--save)                |**`save FILE_PATH` `save NEW_FILE_PATH`**|
 |[exit / x](#316-exiting-the-program--exit)               |**`exit`**           |
