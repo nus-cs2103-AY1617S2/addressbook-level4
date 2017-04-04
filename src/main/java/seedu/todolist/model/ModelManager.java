@@ -68,7 +68,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0163786N
     /** Helper function to handle storing previous state */
     private void handleStateChange(ReadOnlyTodoList todoList) {
-        previousStates.push(todoList);
+        previousStates.push(new TodoList(todoList));
         if (!nextStates.empty()) {
             nextStates.clear();
         }
@@ -83,7 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void clearData() {
         handleStateChange(todoList);
-        todoList.resetData(new TodoList());
+        resetData(new TodoList());
     }
     //@@author
     @Override
