@@ -17,6 +17,7 @@ import seedu.todolist.logic.commands.FindCommand;
 import seedu.todolist.logic.commands.HelpCommand;
 import seedu.todolist.logic.commands.IncorrectCommand;
 import seedu.todolist.logic.commands.ListCommand;
+import seedu.todolist.logic.commands.RedoCommand;
 import seedu.todolist.logic.commands.SaveFileCommand;
 import seedu.todolist.logic.commands.UncompleteCommand;
 import seedu.todolist.logic.commands.UndoCommand;
@@ -73,6 +74,9 @@ public class Parser {
 
             case UndoCommand.COMMAND_WORD:
                 return new UndoCommand();
+
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
 
             case CompleteCommand.COMMAND_WORD:
                 return new CompleteCommandParser().parse(arguments);
