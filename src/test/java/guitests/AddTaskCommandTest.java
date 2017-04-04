@@ -63,11 +63,10 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         // add another task, with tags
         String taskDescription2 = "drink Koi after school";
         String command2 = ADD + taskDescription2 + TAGS + "tag1 tag2 tag3" + PRIORITY + "high";
-        commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, null, null);
         task2.setTaskPriority(TaskPriority.HIGH);
         task2.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag2, tag3)));
-        assertTrue(areTasksShown(task, task2));
+        runCommandWithCallback(command2, () -> assertTasksShown(true, task, task2));
     }
 
     @Test
@@ -99,11 +98,9 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         String taskDescription3 = "get v0.3 ready";
         LocalDateTime endDate3 = DateTimeUtil.parseDateString("22 Mar 2017, 12pm");
         String command3 = ADD + taskDescription3 + BY + endDate3 + PRIORITY + "low" + TAGS + "tag1 tag2";
-        commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, null, endDate3);
         task3.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag2)));
-        assertTrue(areTasksShown(task1, task3));
-        assertFalse(isTaskShown(task2));
+        runCommandWithCallback(command3, () -> assertTasksShown(true, task1, task3));
     }
 
     @Test
@@ -156,13 +153,10 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime endDate4 = DateTimeUtil.parseDateString("16 Mar 2017, 12pm");
         String command4 = ADD + taskDescription4 + TAGS + "tag3" +
                  FROM + startDate4 + TO + endDate4 + PRIORITY + "high";
-        commandBox.runCommand(command4);
         Task task4 = new Task(taskDescription4, startDate4, endDate4);
         task4.setTaskPriority(TaskPriority.HIGH);
         task4.replaceTags(new ArrayList<>(Arrays.asList(tag3)));
-        assertTrue(areTasksShown(task1, task4));
-        assertFalse(isTaskShown(task2));
-        assertFalse(isTaskShown(task3));
+        runCommandWithCallback(command4, () -> assertTasksShown(true, task1, task4));
     }
 
     @Test
@@ -243,10 +237,9 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
 
         LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017, 2pm");
         command = ADD + taskDescription + REPEAT + recurFrequencyString + REPEAT_UNTIL + recurUntilEndDate;
-        commandBox.runCommand(command);
         Task task2 = new Task(taskDescription);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
-        assertTrue(areTasksShown(task1, task2));
+        runCommandWithCallback(command, () -> assertTasksShown(true, task1, task2));
     }
 
     @Test
@@ -266,10 +259,9 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017, 2pm");
         command = ADD + taskDescription + BY + endDate + REPEAT + recurFrequencyString
                 + REPEAT_UNTIL + recurUntilEndDate;
-        commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, endDate);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
-        assertTrue(areTasksShown(task1, task2));
+        runCommandWithCallback(command, () -> assertTasksShown(true, task1, task2));
     }
 
     @Test
@@ -291,10 +283,9 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017, 2pm");
         command = ADD + taskDescription + FROM + from + TO + to + REPEAT + recurFrequencyString
                 + REPEAT_UNTIL + recurUntilEndDate;
-        commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, from, to);
         task2.setRecurring(recurUntilEndDate, recurFrequencyString);
-        assertTrue(areTasksShown(task1, task2));
+        runCommandWithCallback(command, () -> assertTasksShown(true, task1, task2));
     }
 
     @Test
@@ -319,18 +310,14 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
 
         // Recurring event with two repeats
         recurFrequencyString = "weekly yearly";
-        command = ADD + taskDescription + REPEAT + recurFrequencyString
-                + FROM + from + TO + to;
         Task task2 = null;
         try {
-            commandBox.runCommand(command);
             task2 = new Task(taskDescription, from, to);
             task2.setRecurring(recurFrequencyString);
             fail("Should not reach here since recurring task must have only one repeat frequency.");
         } catch (IllegalArgumentException illegalArgumentException) {
             assertTrue(illegalArgumentException.getMessage().equals(ILLEGAL_ARGUMENT_EXCEPTION_4.getMessage()));
         }
-        assertTrue(isTaskShown(task2));
     }
 
     @Test

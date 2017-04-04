@@ -192,16 +192,16 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         command = ADD + taskDescription;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription);
-        assertTrue(areTasksShown(task, task2));
+        assertTasksShown(true, task, task2);
 
         command = UPDATE + " 3 " + taskDescription;
         commandBox.runCommand(command);
-        assertTrue(areTasksShown(task, task2));
+        assertTasksShown(true, task, task2);
         assertResultMessage("Task provided already exist in the list.");
 
         command = UPDATE + " 4 " + taskDescription;
         commandBox.runCommand(command);
-        assertTrue(areTasksShown(task, task2));
+        assertTasksShown(true, task, task2);
         assertResultMessage("Task provided already exist in the list.");
     }
 

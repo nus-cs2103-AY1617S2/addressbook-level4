@@ -63,11 +63,11 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
 
-        assertTrue(areTasksShown(task, task2, task3));
+        assertTasksShown(true, task, task2, task3);
 
         commandBox.runCommand("delete 3");
         assertFalse(isTaskShown(task));
-        assertTrue(areTasksShown(task2, task3));
+        assertTasksShown(true, task2, task3);
 
         commandBox.runCommand("delete 1");
         assertFalse(isTaskShown(task));
@@ -159,7 +159,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(switchAgainCommand);
 
         TodoList todoList = new TypicalTestTodoLists().getTypicalTodoList();
-        assertTrue(areTasksShown(todoList.getTasks().get(0), todoList.getTasks().get(1)));
+        assertTasksShown(true, todoList.getTasks().get(0), todoList.getTasks().get(1));
     }
 
     @Test

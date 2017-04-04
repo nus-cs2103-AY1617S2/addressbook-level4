@@ -33,21 +33,18 @@ public class MarkCommandTest extends ToLuistGuiTest {
     @Test
     public void mark_invalidIndex() {
         String command = "mark";
-        commandBox.runCommand(command);
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_INDEX);
+        runCommandThenCheckForResultMessage(command, Messages.MESSAGE_INVALID_TASK_INDEX);
     }
 
     @Test
     public void markComplete_singleTask() {
         Task task1 = new TypicalTestTodoLists().getTypicalTasks()[0];
         String command1 = "mark complete 1";
-        commandBox.runCommand(command1);
-        assertTaskComplete(true, task1);
+        runCommandWithCallback(command1, () -> assertTaskComplete(true, task1));
 
         Task task2 = new TypicalTestTodoLists().getTypicalTasks()[1];
         String command2 = "mark 2 complete";
-        commandBox.runCommand(command2);
-        assertTaskComplete(true, task2);
+        runCommandWithCallback(command2, () -> assertTaskComplete(true, task2));
     }
 
     @Test
@@ -61,23 +58,21 @@ public class MarkCommandTest extends ToLuistGuiTest {
     public void markIncomplete_singleTask() {
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
         String markCompleteCommand = "mark complete 1";
-        commandBox.runCommand(markCompleteCommand);
-        assertTaskComplete(true, task);
+        runCommandWithCallback(markCompleteCommand, () -> assertTaskComplete(true, task));
 
         String markIncompleteCommand = "mark incomplete 1";
-        commandBox.runCommand(markIncompleteCommand);
-        assertTaskComplete(false, task);
+        runCommandWithCallback(markIncompleteCommand, () -> assertTaskComplete(false, task));
     }
 
     @Test
     public void markIncomplete_multipleTasks() {
         String markCompleteCommand = "mark complete 1 - ";
-        commandBox.runCommand(markCompleteCommand);
-        assertTaskComplete(true, new TypicalTestTodoLists().getTypicalTasks());
+        runCommandWithCallback(markCompleteCommand,
+            () -> assertTaskComplete(true, new TypicalTestTodoLists().getTypicalTasks()));
 
         String markIncompleteCommand = "mark incomplete  - 2";
-        commandBox.runCommand(markIncompleteCommand);
-        assertTaskComplete(false, new TypicalTestTodoLists().getTypicalTasks());
+        runCommandWithCallback(markIncompleteCommand,
+            () -> assertTaskComplete(false, new TypicalTestTodoLists().getTypicalTasks()));
     }
 
     /**
