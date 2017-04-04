@@ -91,7 +91,7 @@ Examples:
   
 ## Editing a Task : `edit`
 Edits a specified task from the task manager.<br>
-Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
+Format: `edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 
 > Edits the task at the specified `INDEX`. The index refers to the 
 task number shown in the list. `INDEX` must be an exact match in order 
@@ -166,6 +166,9 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find groceries`
+  
+* **Edit** : ``edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`` <br>
+  e.g. `edit 2 m/Go to Guardian`
 
 * **List** : `list` <br>
 
@@ -175,7 +178,7 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 
 * **Redo** : `redo` <br>
 
-* **Done** : `done` <br>
+* **Done** : `done INDEX [MORE INDECIES]` <br>
  e.g. `done 3`
 
 * **Filter** : `filter` <br>
