@@ -36,8 +36,13 @@
                         <HBox alignment="CENTER_LEFT" spacing="3">
                             <children>
                                 <Label fx:id="id" styleClass="cell_big_label" />
+                                <ImageView fx:id="overdueIcon" fitHeight="16.0" fitWidth="16.0">
+                                    <image>
+                                        <Image url = "images/overdue.png" ></Image>
+                                    </image>
+                                </ImageView>
                                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-                                <Label fx:id="priority" styleClass="cell_big_label" text="\$priority" />
+                                <Label fx:id="priority" styleClass="priority" text="\$priority" />
                                 <Label fx:id="description" text="\$description" />
                                 <FlowPane fx:id="tags" />
                                 <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
@@ -47,7 +52,7 @@
                                 </ImageView>
                             </children>
                         </HBox>
-                        <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+                        <Label fx:id="deadline" text="\$deadline" />
                     </children>
                 </VBox>
             </children>

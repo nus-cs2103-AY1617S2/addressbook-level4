@@ -1,6 +1,7 @@
 package project.taskcrusher.ui;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -17,6 +18,7 @@ public class EventListCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
     private static final String LOCATION_AT = "@ ";
+//    private static final String OVERDUE_STYLE_CLASS = "overdue";
 
     @FXML
     private HBox cardPane;
@@ -29,11 +31,15 @@ public class EventListCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
+    private Label priority;
+    @FXML
     private FlowPane timeslots;
     @FXML
     private FlowPane tags;
     @FXML
     private ImageView tickIcon;
+    @FXML
+    private ImageView overdueIcon;
 
     public EventListCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
@@ -41,8 +47,10 @@ public class EventListCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         showLocation(event);
         showDescription(event);
+        showPriority(event);
         showEventTimeSlots(event);
         displayComplete(event);
+        displayOverdueStatusIfAny(event);
 
         initTags(event);
     }
@@ -53,11 +61,43 @@ public class EventListCard extends UiPart<Region> {
         }
     }
 
+    private void displayOverdueStatusIfAny(ReadOnlyEvent event) {
+        if (event.isOverdue()) {
+            overdueIcon.setVisible(true);
+            overdueIcon.setManaged(true);
+//            timeslots.getStyleClass().add(OVERDUE_STYLE_CLASS);
+            for (Node child: timeslots.getChildren()) {
+                child.setStyle("-fx-text-fill: red"); //should not be done this way
+            }
+        } else {
+            overdueIcon.setVisible(false);
+            overdueIcon.setManaged(false);
+//            timeslots.getStyleClass().add(OVERDUE_STYLE_CLASS);
+        }
+    }
+
     private void showDescription(ReadOnlyEvent event) {
         if (event.getDescription().hasDescription()) {
             description.setText("// " + event.getDescription().toString());
         } else {
             description.setText("");
+        }
+    }
+
+    private void showPriority(ReadOnlyEvent event) {
+        priority.setText("p=" + event.getPriority().priority);
+        switch (event.getPriority().priority) {
+        case "1":
+            priority.getStyleClass().add("priority-one");
+            break;
+        case "2":
+            priority.getStyleClass().add("priority-two");
+            break;
+        case "3":
+            priority.getStyleClass().add("priority-three");
+            break;
+        default:
+            priority.setVisible(false);
         }
     }
 

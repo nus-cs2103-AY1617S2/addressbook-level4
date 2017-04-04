@@ -114,21 +114,29 @@ public class UserInboxPanel extends UiPart<Region> {
         if (event.eventListToShowEmpty) {
             eventListView.setManaged(SET_LIST_HIDDEN);
             eventListView.setVisible(SET_LIST_HIDDEN);
-            eventHeader.setText("Events: Nothing to Show!");
+//            eventHeader.setText("Events: Nothing to Show!");
+            eventHeader.setManaged(SET_LIST_HIDDEN);
+            eventHeader.setVisible(SET_LIST_HIDDEN);
         } else {
             eventListView.setManaged(SET_LIST_VISIBLE);
             eventListView.setVisible(SET_LIST_VISIBLE);
-            eventHeader.setText("Events: ");
+//            eventHeader.setText("Events: ");
+            eventHeader.setManaged(SET_LIST_VISIBLE);
+            eventHeader.setVisible(SET_LIST_VISIBLE);
         }
 
         if (event.taskListToShowEmpty) {
             taskListView.setManaged(SET_LIST_HIDDEN);
             taskListView.setVisible(SET_LIST_HIDDEN);
-            taskHeader.setText("Tasks: Nothing to Show!");
+//            taskHeader.setText("Tasks: Nothing to Show!");
+            taskHeader.setManaged(SET_LIST_HIDDEN);
+            taskHeader.setVisible(SET_LIST_HIDDEN);
         } else {
             taskListView.setManaged(SET_LIST_VISIBLE);
             taskListView.setVisible(SET_LIST_VISIBLE);
-            taskHeader.setText("Tasks: ");
+//            taskHeader.setText("Tasks: ");
+            taskHeader.setManaged(SET_LIST_VISIBLE);
+            taskHeader.setVisible(SET_LIST_VISIBLE);
         }
     }
 

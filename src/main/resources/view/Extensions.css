@@ -12,3 +12,12 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+/*somehow adjusting this doesn't work, probably gets overwritten by something */
+/* 
+.overdue {
+    -fx-text-fill: white; 
+    -fx-background-color: #ff628a;
+}
+*/
+

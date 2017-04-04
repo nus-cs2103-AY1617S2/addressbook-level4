@@ -19,6 +19,7 @@ public class TaskListCard extends UiPart<Region> {
     private static final String MESSAGE_NO_DEADLINE = "no deadline";
     private static final String MESSAGE_DEADLINE_BY = "By ";
     private static final String PRIORITY_PREPEND = " ";
+    private static final String OVERDUE_STYLE_CLASS = "overdue";
 
     @FXML
     private HBox cardPane;
@@ -36,6 +37,8 @@ public class TaskListCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private ImageView tickIcon;
+    @FXML
+    private ImageView overdueIcon;
 
     public TaskListCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -45,6 +48,7 @@ public class TaskListCard extends UiPart<Region> {
         showPriority(task);
         showDescription(task);
         displayComplete(task);
+        displayOverdueStatusIfAny(task);
 
         initTags(task);
     }
@@ -52,6 +56,19 @@ public class TaskListCard extends UiPart<Region> {
     private void displayComplete(ReadOnlyTask task) {
         if (!task.isComplete()) {
             tickIcon.setVisible(false);
+        }
+    }
+
+    private void displayOverdueStatusIfAny(ReadOnlyTask task) {
+        if (task.isOverdue()) {
+            overdueIcon.setVisible(true);
+            overdueIcon.setManaged(true);
+//            deadline.getStyleClass().add(OVERDUE_STYLE_CLASS);
+            deadline.setStyle("-fx-text-fill: red"); //should not be done this way
+        } else {
+            overdueIcon.setVisible(false);
+            overdueIcon.setManaged(false);
+//            deadline.getStyleClass().add(OVERDUE_STYLE_CLASS);
         }
     }
 
@@ -64,14 +81,19 @@ public class TaskListCard extends UiPart<Region> {
     }
 
     private void showPriority(ReadOnlyTask task) {
-        if (task.getPriority().hasPriority()) {
-            StringBuilder stars = new StringBuilder();
-            for (int i = 0; i < Integer.parseInt(task.getPriority().toString()); i++) {
-                stars.append("*");
-            }
-            priority.setText(PRIORITY_PREPEND + stars.toString());
-        } else {
-            priority.setText("");
+        priority.setText("p=" + task.getPriority().priority);
+        switch (task.getPriority().priority) {
+        case "1":
+            priority.getStyleClass().add("priority-one");
+            break;
+        case "2":
+            priority.getStyleClass().add("priority-two");
+            break;
+        case "3":
+            priority.getStyleClass().add("priority-three");
+            break;
+        default:
+            priority.setVisible(false);
         }
     }
 

@@ -79,11 +79,12 @@
     -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
     -fx-background-color: transparent, derive(#1d1d1d, 10%);
 }
+
 /* this is where userInbox can change colour */
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#f5ffff, 20%);
+    -fx-background-color: derive(#fbfbf3, 20%);
 }
 
 .list-cell {
@@ -287,6 +288,9 @@
 #filterField, #activeListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
+
+/*Things added from here By Yoshi */
+
 /*padding added to align vertically with names */
 #tags {
     -fx-hgap: 7;
@@ -301,15 +305,6 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
-}
-
-#timeslots .label {
-    -fx-text-fill: white;
-    -fx-background-color: #383838;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 13;
 }
 
 /*for the header labels */
@@ -335,5 +330,34 @@
 
 #description {
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #252c36;
+}
+
+.priority {
+    -fx-text-fill: white;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 13;
+}
+
+.priority-one {
+	-fx-background-color: derive(#fff54e, 30%);
+}
+
+.priority-two {
+	-fx-background-color: derive(#ffbd00, 30%);
+}
+
+.priority-three {
+	-fx-background-color: derive(#ff3f36, 30%);
+}
+
+#timeslots .label, #deadline {
+    -fx-text-fill: black;
+    -fx-background-color: derive(#d3d8e4, 10%);
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 13;
 }
