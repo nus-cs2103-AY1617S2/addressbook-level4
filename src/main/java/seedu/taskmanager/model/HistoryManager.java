@@ -19,7 +19,7 @@ import seedu.taskmanager.storage.StorageManager;
  */
 public class HistoryManager extends ComponentManager {
 
-    private final Model model;
+    private Model model;
     private static HistoryManager instance = null;
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private ArrayList<ReadOnlyTaskManager> historyList;
@@ -27,11 +27,8 @@ public class HistoryManager extends ComponentManager {
     private ArrayList<String> historyCommands;
     private ArrayList<String> futureCommands;
 
-    public static final String INITIALIZATION_ERROR = "HistoryManager has not been initialized with a Model yet";
-
-    protected HistoryManager(Model model) {
+    protected HistoryManager() {
         super();
-        this.model = model;
 
         historyList = new ArrayList<ReadOnlyTaskManager>();
         futureList = new ArrayList<ReadOnlyTaskManager>();
@@ -41,16 +38,15 @@ public class HistoryManager extends ComponentManager {
         historyList.add(taskManager);
     }
 
-    public static HistoryManager createInstance(Model model) {
-        instance = new HistoryManager(model);
+    public static HistoryManager getInstance() {
+        if (instance == null) {
+            instance = new HistoryManager();
+        }
         return instance;
     }
 
-    public static HistoryManager getInstance() {
-        if (instance == null) {
-            throw new NullPointerException(INITIALIZATION_ERROR);
-        }
-        return instance;
+    public void init(Model model) {
+        this.model = model;
     }
 
     @Subscribe
