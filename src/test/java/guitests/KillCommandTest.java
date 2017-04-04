@@ -81,5 +81,4 @@ public class KillCommandTest extends EzDoGuiTest {
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_KILL_TASK_SUCCESS, tasksToKill));
     }
-
 }

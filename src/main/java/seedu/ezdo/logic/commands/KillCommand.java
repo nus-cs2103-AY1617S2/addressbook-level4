@@ -43,10 +43,7 @@ public class KillCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        for (int i = 0; i < targetIndexes.size(); i++) {
-            ReadOnlyTask taskToKill = lastShownList.get(targetIndexes.get(i) - 1);
-            tasksToKill.add(taskToKill);
-        }
+        MultipleIndexCommandUtil.addReadOnlyTasksToList(tasksToKill, lastShownList, targetIndexes);
 
         try {
             model.killTasks(tasksToKill);
