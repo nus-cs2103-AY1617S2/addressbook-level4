@@ -41,7 +41,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem helpMenuItem;
-    
+
     @FXML
     private MenuBar menuBar;
 
