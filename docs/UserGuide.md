@@ -96,7 +96,7 @@ Here are the **allowed formats**:
 * `add <title> priority: <1 to 5>` - adds a floating task with a priority level.
 * `add <title> note: <instructions>` - adds a floating task with instructions.
 * `add <title> #<tag>` - adds a floating task with a tag. Note that you can have multiple tags.
-For full details of each parameter, please view their formats in their respective sections below. 
+For full details of each parameter, please view their formats in their respective sections below.
 
 The full allowed command format is therefore:
 
@@ -157,7 +157,7 @@ Result: Burdens will add this task to the "Ongoing" square and
 
 I want to buy pears which will happen on Christmas and eat them from 6pm to 12am.
 > Command: add Buy Pears for: Christmas from 6pm to 12am
-Result: Burdens will add this task to the "Ongoing" square and assign it to the 
+Result: Burdens will add this task to the "Ongoing" square and assign it to the
         Christmas of that year and add an event tag `E`.
 
 I want to buy mangoes, it's extremely decent and I want to add an
@@ -170,7 +170,7 @@ Now it's time for a full command.
 I want to buy Burdens today, it's of the utmost importance,
 I want to note that I have to get it and I want to tag it as cool and awesome!
 > Command: add Buy Burdens for: today priority: 5 note: I have to get it #cool #awesome
-Result: Burdens will add this task to the "Ongoing: square and 
+Result: Burdens will add this task to the "Ongoing: square and
         assign it to a priority level of 5. It will also add 2 tags called awesome and cool.
 ```
 
@@ -188,12 +188,12 @@ Here are the **allowed formats**:
 
 Let us show you some *examples*:
 ```
-I no longer want to buy my apples and wish to remove the task from Burdens. 
+I no longer want to buy my apples and wish to remove the task from Burdens.
 It is in the ongoing list at index 3.
 > Command: delete 3
 Result: Burdens will delete this task from the "Ongoing" square.
 
-I bought my oranges and completed the task. It is now at index 2 of the completed list. 
+I bought my oranges and completed the task. It is now at index 2 of the completed list.
 Now I wish to delete it from Burdens.
 > Command: delete completed 2
 Result: Burdens will delete this task from the "Completed" square.
@@ -215,7 +215,7 @@ Here are the **allowed formats**:
 * `edit floating <index>` - deletes a floating task from Burdens at the specified index.
 * `edit completed <index>` - deletes a completed task from Burdens at the specified index.
 
-Note: 
+Note:
 
 * At least one of the optional fields apart from the task list name must be provided.
 * Existing values will be updated to the input values.
@@ -231,7 +231,7 @@ Result: Burdens will edit this task and change the title
 
 I want to change the instructions of task 2 at the floating list from fruits to vegetables.
 > Command: edit floating 2 note: vegetables
-Result: Burdens will edit the instructions of the second task to vegetables 
+Result: Burdens will edit the instructions of the second task to vegetables
         at the "Floating" square.
 ```
 
@@ -248,7 +248,7 @@ Here are the **allowed formats**:
 * `find <title>` - displays all tasks that fit the title on all 3 relevant squares.
 * `find #<tag>` - displays all tasks that has the `<tag>` on all 3 relevant squares. Note: `#` has to be before the `<tag>`.
 
-Note: 
+Note:
 
 * At least 3 letters of a keyword must be provided.
 * The keyword is not case-sensitive.
@@ -260,7 +260,7 @@ Let us show you some *examples*:
 ```
 I want to find a task called Buy Apples that is on the ongoing panel.
 > Command: find Buy or find Apples
-Result: Burdens will display the task required on the "Ongoing" square 
+Result: Burdens will display the task required on the "Ongoing" square
         as well as other relevant tasks on the other squares.
 
 I want to find a task by a tag. The tag is fruits.
@@ -296,7 +296,7 @@ Here are the **allowed formats**:
 * `select floating <index>` - selects a task at the particular index in the `Floating` square.
 * `select completed <index>` - selects a task the particular
 
-Note: 
+Note:
 
 * A valid index must be provided. We cannot process an index if it's larger
   than the amount of tasks present.
@@ -314,7 +314,7 @@ Here are the **allowed formats**:
 * `complete <index>` - completes the task at that index at the `Ongoing` square.
 * `complete floating <index>` - completes the task at that index at the `Floating` square.
 
-Note: 
+Note:
 
 * A valid index must be provided. We cannot process an index if it's larger
   than the amount of tasks present.
@@ -329,7 +329,7 @@ Here is the **allowed format**:
 
 * `incomplete <index>` - moves the completed task at that index back to where it belonged.
 
-Note: 
+Note:
 
 * A valid index must be provided. We cannot process an index if it's larger
   than the amount of tasks present.
@@ -345,10 +345,10 @@ Here is the **allowed format**:
 
 * `undo` - undo the previous command process.
 
-Note: 
+Note:
 
 * A valid command must have been done before it can be undone when Burdens is first initiated.
-  
+
 ### 3.10. Redo a command : `redo`
 
 Changed your mind? Want to reverse a undone process?
@@ -359,10 +359,10 @@ Here is the **allowed format**:
 
 * `redo` - redo the previous undone process.
 
-Note: 
+Note:
 
 * There must be an undone process before you can redo.
- 
+
 ### 3.11. Revert : `revert`
 
 Sometimes you wish that you could go back to the beginning, to where you
@@ -374,12 +374,12 @@ Here is the **allowed format**:
 
 * `revert` - reverts to the state when Burdens was started.
 
-Note: 
+Note:
 
 * The undo command does not work for revert.
 * This process is irreversible once Burdens is closed.
 * There must be an undone process before you can redo.
- 
+
 ### 3.12. Unrevert : `unrevert`
 
 Accidentally reverted? It's fine.
@@ -404,7 +404,7 @@ For Macintosh users:
 For Windows users:
 * `use` - changes the directory to the file path stated after the command
 
-Note: 
+Note:
 
 * A valid file path must be provided.
 
@@ -418,7 +418,7 @@ Here are the **allowed formats**:
 
 * `import <filename>.ics` - imports a Google calendar file into Burdens
 
-Note: 
+Note:
 
 * A valid file must be provided.
 * The file name is casel-sensitive.
@@ -433,7 +433,7 @@ Here are the **allowed formats**:
 
 * `export <filename>.ics` - exports a Google calendar file into Burdens
 
-Note: 
+Note:
 
 * A valid file name must be provided.
 
@@ -447,7 +447,7 @@ There is no need to save manually.
 
 ### 3.17. Resetting Burdens : `reset`
 
-Want a fresh start for Burdens? 
+Want a fresh start for Burdens?
 
 Let's begin to reset Burdens afresh.
 
@@ -455,11 +455,11 @@ Here is the **allowed format**:
 
 * `reset` - resets Burdens to factory state.
 
-Note: 
+Note:
 
-* This process cannot be undone when Burdens is closed. Be sure to 
+* This process cannot be undone when Burdens is closed. Be sure to
   undo before data is irreversibly lost.
- 
+
 ### 3.18. Viewing help : `help`
 
 Need help?
@@ -479,7 +479,7 @@ Note:
   command is typed correctly.
 * You can type a command on it's own too to jog your memory of the fields
   required to complete the command
-  
+
 ### 3.19. Exiting the program : `exit`
 
 Saying goodbye to Burdens?
