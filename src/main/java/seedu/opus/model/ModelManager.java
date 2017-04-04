@@ -120,7 +120,6 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0148081H
     @Override
     public synchronized void changeSaveLocation(String location) {
-        assert StringUtil.isValidPathToFile(location);
         indicateChangeSaveLocation(location);
         indicateTaskManagerChanged();
     }
