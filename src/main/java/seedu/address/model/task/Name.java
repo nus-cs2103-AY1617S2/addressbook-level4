@@ -8,15 +8,17 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Name {
 
+    //@@author A0140023E
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task names should not contain forward slashes, and it should not be blank";
 
-    /*
-     * The first character of the name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+    /**
+     * The first character of the name must not be a whitespace or a forward slash,
+     * otherwise a whitespace character (i.e.0x20\t\n\x0B\f\r) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String NAME_VALIDATION_REGEX = "[^/\\s][^/]*";
 
+    //@@author
     public final String value;
 
     /**

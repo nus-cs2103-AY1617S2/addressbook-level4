@@ -12,6 +12,7 @@ import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartEndDateTime;
 import seedu.address.testutil.TaskBuilder;
@@ -110,24 +111,30 @@ public class EditCommandTest extends TaskListGuiTest {
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
+    //@@author A0140023E
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
+        // TODO constraints for date-time fields are also checked in other tests as they are constrained differently
+        commandBox.runCommand("edit 1 //comments");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        //commandBox.runCommand("edit 1 p/abcd"); TODO currently not sufficient constraints so commented
-        //assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        commandBox.runCommand("edit 1 by yesterday");
+        assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
 
-        //commandBox.runCommand("edit 1 e/yahoo!!!");
-        //assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        commandBox.runCommand("edit 1 from yesterday to tmr");
+        assertResultMessage(StartEndDateTime.MESSAGE_STARTDATETIME_CONSTRAINTS);
 
-        //commandBox.runCommand("edit 1 a/");
-        //assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        commandBox.runCommand("edit 1 from tmr to yesterday");
+        assertResultMessage(StartEndDateTime.MESSAGE_ENDDATETIME_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1 from 2 days later to 1 day later");
+        assertResultMessage(StartEndDateTime.MESSAGE_STARTENDDATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
+    //@@author
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Amuse friend t/friends");
