@@ -22,7 +22,6 @@ import seedu.task.model.task.UniqueTaskList;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    public static final String COMMAND_WORD_ALTERNATIVE = "create";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
             + "Parameters: TITLE [for: DATE] [priority: PRIORITY] [note: INSTRUCTION] [#TAG]...\n"

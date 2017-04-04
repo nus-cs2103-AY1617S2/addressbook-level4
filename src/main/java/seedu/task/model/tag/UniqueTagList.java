@@ -25,7 +25,7 @@ import seedu.task.commons.util.CollectionUtil;
  */
 public class UniqueTagList implements Iterable<Tag> {
 
-    private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
+    public final ObservableList<Tag> internalList = FXCollections.observableArrayList();
 
     /**
      * Constructs empty TagList.

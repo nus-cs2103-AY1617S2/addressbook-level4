@@ -21,7 +21,7 @@ public class CompleteCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        Optional<Integer> index = ParserUtil.parseIndex(args);
+        Optional<Integer> index = ParserUtil.parseIndex(args.trim());
         Optional<String> listName = ParserUtil.parseListName(args);
         if (!index.isPresent() || !listName.isPresent() || listName.get().equals(Task.TASK_NAME_COMPLETED)) {
             return new IncorrectCommand(

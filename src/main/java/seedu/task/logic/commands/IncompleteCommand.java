@@ -15,8 +15,6 @@ import seedu.task.model.task.UniqueTaskList;
 public class IncompleteCommand extends Command {
 
     public static final String COMMAND_WORD = "incomplete";
-    public static final String COMMAND_WORD_FIRST_ALTERNATIVE = "unfinish";
-    public static final String COMMAND_WORD_SECOND_ALTERNATIVE = "undone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task as incomplete "
