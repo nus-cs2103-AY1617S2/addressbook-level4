@@ -35,6 +35,7 @@ public class CommandBox extends UiPart<Region> {
 
     private final Logic logic;
     private final History<String> commandHistory = new History<String>();
+    private String unEnteredInput = "";
 
     private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
     private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
@@ -95,7 +96,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleDownKey() {
         String userCommandText = commandHistory.getNextState();
         if (userCommandText == null) {
-            setCommandInput("");
+            setCommandInput(unEnteredInput);
         } else {
             setCommandInput(userCommandText);
         }
@@ -103,6 +104,9 @@ public class CommandBox extends UiPart<Region> {
 
     //Handle Up key press
     private void handleUpKey() {
+        if (commandHistory.isAtMostRecentState()) {
+            unEnteredInput = commandTextField.getText();
+        }
         String userCommandText = commandHistory.getPreviousState();
         if (userCommandText != null) {
             setCommandInput(userCommandText);
@@ -159,7 +163,8 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void setCommandInput(String string) {
-        commandTextField.replaceText(string);
+        commandTextField.clear();
+        commandTextField.appendText(string);
 
         // move the cursor to the end of the input string
         commandTextField.positionCaret(string.length());

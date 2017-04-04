@@ -47,11 +47,21 @@ public class EditCommandTest extends DoistGUITest {
     @Test
     public void edit_clearDates_success() throws Exception {
         String detailsToEdit = "\\by";
-        int addressBookIndex = 2;
+        int addressBookIndex = 1;
 
         TestTask personToEdit = expectedTasks[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).build();
+        TestTask editedPerson = new TaskBuilder(personToEdit).withDates(null, null).build();
 
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+    }
+
+    @Test
+    public void edit_clearTags_success() throws Exception {
+        String detailsToEdit = "\\under";
+        int addressBookIndex = 3;
+
+        TestTask personToEdit = expectedTasks[addressBookIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withTags().build();
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
