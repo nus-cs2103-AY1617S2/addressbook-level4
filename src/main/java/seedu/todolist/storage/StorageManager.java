@@ -1,5 +1,6 @@
 package seedu.todolist.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ import seedu.todolist.commons.events.storage.SaveFilePathChangedEvent;
 import seedu.todolist.commons.exceptions.DataConversionException;
 import seedu.todolist.commons.util.ConfigUtil;
 import seedu.todolist.model.ReadOnlyTodoList;
+import seedu.todolist.model.TodoList;
 import seedu.todolist.model.UserPrefs;
 
 /**
@@ -51,9 +53,21 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ TodoList methods ==============================
 
     //@@author A0163720M
-    /** Raises an event to indicate the save file path has changed */
-    private void indicateSaveFilePathChanged(String saveFilePath) {
-        raise(new SaveFilePathChangedEvent(saveFilePath));
+    /** Raises an event to indicate the save file path has changed
+     * @throws IOException
+     * @throws DataConversionException */
+    private void indicateSaveFilePathChanged(String saveFilePath) throws DataConversionException, IOException {
+        File f = new File(saveFilePath);
+        ReadOnlyTodoList newData;
+
+        // if the file is completely empty (i.e. just created), reset the list with a new list
+        if (f.length() == 0) {
+            newData = new TodoList();
+        } else {
+            newData = readTodoList(saveFilePath).get();
+        }
+
+        raise(new SaveFilePathChangedEvent(saveFilePath, newData));
     }
     //@@author
 
@@ -94,7 +108,6 @@ public class StorageManager extends ComponentManager implements Storage {
         config.setTodoListFilePath(saveFilePath);
         // Update config file in case it was missing to begin with or there
         // are new/unused fields
-        //@@author A0163786N
         ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
         indicateSaveFilePathChanged(saveFilePath);
     }
