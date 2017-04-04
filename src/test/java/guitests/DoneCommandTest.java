@@ -63,10 +63,10 @@ public class DoneCommandTest extends EzDoGuiTest {
 
     }
 
-    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, TestTask[] currentList,
-            TestTask[] doneList) {
+    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, TestTask[] currentTaskList,
+            TestTask[] doneTaskList) {
 
-        TestTask taskToDone = currentList[targetIndexOneIndexed - 1]; // -1 as
+        TestTask taskToDone = currentTaskList[targetIndexOneIndexed - 1]; // -1 as
                                                                       // array
                                                                       // uses
                                                                       // zero
@@ -95,11 +95,11 @@ public class DoneCommandTest extends EzDoGuiTest {
             }
             ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
             tasksToDone.add(taskToDone); // old date
-            currentList = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
-            doneList = TestUtil.addTasksToList(doneList, taskToDone);
+            currentTaskList = TestUtil.removeTaskFromList(currentTaskList, targetIndexOneIndexed);
+            doneTaskList = TestUtil.addTasksToList(doneTaskList, taskToDone);
 
             // confirm the task list no longer has the done task
-            assertTrue(taskListPanel.isListMatching(currentList));
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
 
             // confirm the result message is correct
             assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
@@ -108,19 +108,19 @@ public class DoneCommandTest extends EzDoGuiTest {
             commandBox.runCommand("done");
             TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
             assertMatching(taskToDone, addedCard);
-            assertTrue(taskListPanel.isListMatching(doneList));
+            assertTrue(taskListPanel.isListMatching(doneTaskList));
 
             // confirm the undone list does not contain the task just marked as
             // done
             commandBox.runCommand("list");
-            assertTrue(taskListPanel.isListMatching(currentList));
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
 
         } else {
 
             ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
             tasksToDone.add(taskToDone); // old date
-            currentList = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
-            doneList = TestUtil.addTasksToList(doneList, taskToDone);
+            currentTaskList = TestUtil.removeTaskFromList(currentTaskList, targetIndexOneIndexed);
+            doneTaskList = TestUtil.addTasksToList(doneTaskList, taskToDone);
 
             TestTask recTask = updateRecTask(new TestTask(taskToDone));
             try {
@@ -128,9 +128,9 @@ public class DoneCommandTest extends EzDoGuiTest {
             } catch (IllegalValueException e) {
                 e.printStackTrace();
             }
-            currentList = TestUtil.addTasksToList(currentList, recTask);
+            currentTaskList = TestUtil.addTasksToList(currentTaskList, recTask);
             // confirm the task list no longer has the done task
-            assertTrue(taskListPanel.isListMatching(currentList));
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
 
             // confirm the result message is correct
             assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
@@ -139,12 +139,12 @@ public class DoneCommandTest extends EzDoGuiTest {
             commandBox.runCommand("done");
             TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
             assertMatching(tasksToDone.get(0), addedCard);
-            assertTrue(taskListPanel.isListMatching(doneList));
+            assertTrue(taskListPanel.isListMatching(doneTaskList));
 
             // confirm the undone list does not contain the task just marked as
             // done
             commandBox.runCommand("list");
-            assertTrue(taskListPanel.isListMatching(currentList));
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
         }
     }
 
