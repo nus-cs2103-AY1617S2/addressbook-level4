@@ -30,14 +30,15 @@ public class UniqueTaskListEnumTest {
         utl.add(new Task(new Name("lasdfol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),
                 new UniqueTagList("jesus")));
 
-        SortCriteria C = PowerMockito.mock(SortCriteria.class);
-        Whitebox.setInternalState(C, "name", "C");
-        Whitebox.setInternalState(C, "ordinal", 4);
+        SortCriteria c = PowerMockito.mock(SortCriteria.class);
+        Whitebox.setInternalState(c, "name", "c");
+        Whitebox.setInternalState(c, "ordinal", 4);
 
         PowerMockito.mockStatic(SortCriteria.class);
-        PowerMockito.when(SortCriteria.values()).thenReturn(new SortCriteria[] {SortCriteria.NAME,
-                SortCriteria.PRIORITY, SortCriteria.DUE_DATE, SortCriteria.START_DATE, C});
+        PowerMockito.when(SortCriteria.values()).thenReturn(new SortCriteria[] {
+                SortCriteria.NAME, SortCriteria.PRIORITY, SortCriteria.DUE_DATE, 
+                SortCriteria.START_DATE, c});
 
-        utl.sortTasks(C, true);
+        utl.sortTasks(c, true);
     }
 }
