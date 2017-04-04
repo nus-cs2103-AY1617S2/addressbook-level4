@@ -1,3 +1,4 @@
+
 package seedu.bulletjournal.logic.commands;
 
 import java.io.IOException;
@@ -20,7 +21,8 @@ public class ChangeDirectoryCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the directory for the tasklist."
             + "Parameters: FILE_PATH\n" + "Example: " + COMMAND_WORD + " D:\t.xml";
 
-    public static final String MESSAGE_SUCCESS = "Alert: This operation is irreversible.\nFile path successfully changed to : %1$s";
+    public static final String MESSAGE_SUCCESS = "Alert: This operation is irreversible."
+            + "\nFile path successfully changed to : %1$s";
     public static final String MESSAGE_IO_ERROR = "Error when saving/reading file...";
     public static final String MESSAGE_CONVENSION_ERROR = "Wrong file type/Invalid file path detected.";
 
@@ -33,8 +35,9 @@ public class ChangeDirectoryCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            if (!filePath.endsWith(".xml"))
+            if (!filePath.endsWith(".xml")) {
                 throw new DataConversionException(null);
+            }
             XmlTodoListStorage newFile = new XmlTodoListStorage(filePath);
             newFile.saveTodoList(model.getTodoList(), filePath);
             model.changeDirectory(filePath);

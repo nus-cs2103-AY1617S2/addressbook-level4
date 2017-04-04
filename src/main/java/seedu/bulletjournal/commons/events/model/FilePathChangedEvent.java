@@ -1,5 +1,4 @@
 //@@author A0146738U-reused
-
 package seedu.bulletjournal.commons.events.model;
 
 import seedu.bulletjournal.commons.events.BaseEvent;
