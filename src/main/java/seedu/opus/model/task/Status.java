@@ -78,11 +78,7 @@ public class Status {
      * @return true if status is in complete state
      */
     public boolean isComplete() {
-        if (value == Flag.COMPLETE) {
-            return true;
-        }
-
-        return false;
+        return value == Flag.COMPLETE;
     }
     //@@author
 
