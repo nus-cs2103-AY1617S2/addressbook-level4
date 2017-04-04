@@ -185,7 +185,7 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      * Marks the task in the list at position {@code index} as pending.
      */
     public void redoTask(ReadOnlyTask taskToMark) {
-        tasks.RedoTask(taskToMark);
+        tasks.redoTask(taskToMark);
 
     }
 

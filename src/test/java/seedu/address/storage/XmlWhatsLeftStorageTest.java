@@ -71,14 +71,14 @@ public class XmlWhatsLeftStorageTest {
         assertEquals(original, new WhatsLeft(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addEvent(new Event(td.hoon));
-        original.removeEvent(new Event(td.alice));
+        original.addEvent(new Event(td.lecture));
+        original.removeEvent(new Event(td.tutorial));
         xmlWhatsLeftStorage.saveWhatsLeft(original, filePath);
         readBack = xmlWhatsLeftStorage.readWhatsLeft(filePath).get();
         assertEquals(original, new WhatsLeft(readBack));
 
         //Save and read without specifying file path
-        original.addEvent(new Event(td.ida));
+        original.addEvent(new Event(td.meeting));
         xmlWhatsLeftStorage.saveWhatsLeft(original); //file path not specified
         readBack = xmlWhatsLeftStorage.readWhatsLeft().get(); //file path not specified
         assertEquals(original, new WhatsLeft(readBack));

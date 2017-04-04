@@ -28,9 +28,9 @@ import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    public final String DISPLAY_STATUS_COMPLETED = "COMPLETED";
-    public final String DISPLAY_STATUS_ALL = "ALL";
-    public final String DISPLAY_STATUS_PENDING = "PENDING";
+    public static final String DISPLAY_STATUS_COMPLETED = "COMPLETED";
+    public static final String DISPLAY_STATUS_ALL = "ALL";
+    public static final String DISPLAY_STATUS_PENDING = "PENDING";
 
     private final WhatsLeft whatsLeft;
     private final FilteredList<ReadOnlyEvent> filteredEvents;

@@ -38,13 +38,15 @@ public class TaskCard extends UiPart<Region> {
     private Label locations;
     @FXML
     private FlowPane tags;
-  //  private final Background focusBackground =
-//            new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY));
- //   private final Background unfocusBackground =
-//            new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
-//    private VBox cardVBox = new VBox();
+    // private final Background focusBackground =
+    // new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY,
+    // Insets.EMPTY));
+    // private final Background unfocusBackground =
+    // new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY,
+    // Insets.EMPTY));
+    // private VBox cardVBox = new VBox();
 
-//@@author A0124377A
+    // @@author A0124377A
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         description.setText(task.getDescription().description);
@@ -89,20 +91,17 @@ public class TaskCard extends UiPart<Region> {
         LocalDate taskDate = task.getByDate().getValue();
         LocalTime taskTime = task.getByTime().getValue();
         if (taskDate != null && taskTime != null) {
-            return ((task.hasDeadline()
-                && LocalDateTime.of(taskDate, taskTime)
-                .isBefore(LocalDateTime.now()))
-                || (LocalDateTime.of(taskDate, taskTime).getDayOfYear()
-                        == LocalDateTime.now().getDayOfYear()));
+            return ((task.hasDeadline() && LocalDateTime.of(taskDate, taskTime).isBefore(LocalDateTime.now()))
+                    || (LocalDateTime.of(taskDate, taskTime).getDayOfYear() == LocalDateTime.now().getDayOfYear()));
+        } else {
+            return false;
         }
-        else return false;
     }
-
 }
- //   private void feedback() {
-  //      cardVBox.requestFocus();
- //       cardVBox.backgroundProperty().bind(Bindings
- //               .when(cardVBox.focusedProperty())
- //               .then(focusBackground)
-  //              .otherwise(unfocusBackground));
-  //  }
+// private void feedback() {
+// cardVBox.requestFocus();
+// cardVBox.backgroundProperty().bind(Bindings
+// .when(cardVBox.focusedProperty())
+// .then(focusBackground)
+// .otherwise(unfocusBackground));
+// }

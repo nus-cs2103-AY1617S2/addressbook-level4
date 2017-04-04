@@ -24,6 +24,8 @@ public class TestTask implements ReadOnlyTask {
     private ByDate byDate;
     private Location location;
     private UniqueTagList tags;
+    private boolean status;
+    private boolean hasDeadline;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -39,6 +41,8 @@ public class TestTask implements ReadOnlyTask {
         this.byDate = taskToCopy.getByDate();
         this.location = taskToCopy.getLocation();
         this.tags = taskToCopy.getTags();
+        this.status = taskToCopy.getStatus();
+        this.hasDeadline = taskToCopy.hasDeadline();
     }
 
     public void setDescription(Description description) {
@@ -93,6 +97,16 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public UniqueTagList getTags() {
         return tags;
+    }
+    
+    @Override
+    public boolean getStatus() {
+        return status;
+    }
+    
+    @Override
+    public boolean hasDeadline() {
+        return hasDeadline;
     }
 
     @Override

@@ -50,8 +50,8 @@ public class WhatsLeftTest {
     public void resetData_withDuplicateActivities_throwsAssertionError() {
         TypicalTestActivities td = new TypicalTestActivities();
         // Repeat td.alice twice
-        List<Event> newEvents = Arrays.asList(new Event(td.alice), new Event(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
+        List<Event> newEvents = Arrays.asList(new Event(td.tutorial), new Event(td.tutorial));
+        List<Tag> newTags = td.tutorial.getTags().asObservableList();
         WhatsLeftStub newData = new WhatsLeftStub(newEvents, newTags);
 
         thrown.expect(AssertionError.class);
