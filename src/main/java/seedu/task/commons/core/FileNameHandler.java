@@ -10,6 +10,7 @@ import java.io.IOException;
 public class FileNameHandler {
 	private static String filePath = "fileName.txt";
 	public static final String DEFAULT_FILEPATH = "data/TaskManagerData.xml";
+
 	public static String getFileName() {
 		try {
 			FileInputStream fis = new FileInputStream(filePath);
@@ -27,8 +28,9 @@ public class FileNameHandler {
 			System.out.println("IOException");
 			return DEFAULT_FILEPATH;
 		}
-		
+
 	}
+
 	public static void setFileName(String fileName) {
 		FileOutputStream fos;
 		try {
@@ -40,6 +42,7 @@ public class FileNameHandler {
 			System.out.println("IOException");
 		}
 	}
+
 	public static boolean isValid(String str) {
 		if (str.length() <= 4) {
 			return false;

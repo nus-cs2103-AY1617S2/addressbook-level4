@@ -10,16 +10,15 @@ import seedu.task.ui.UiManager;
  */
 public class AlertDialogHandle extends GuiHandle {
 
+	public AlertDialogHandle(GuiRobot guiRobot, Stage primaryStage, String dialogTitle) {
+		super(guiRobot, primaryStage, dialogTitle);
+	}
 
-    public AlertDialogHandle(GuiRobot guiRobot, Stage primaryStage, String dialogTitle) {
-        super(guiRobot, primaryStage, dialogTitle);
-    }
-
-    public boolean isMatching(String headerMessage, String contentMessage) {
-        assert intermediateStage.isPresent() : "Alert dialog is not present";
-        DialogPane dialogPane = getNode("#" + UiManager.ALERT_DIALOG_PANE_FIELD_ID);
-        boolean isMatching = dialogPane.getHeaderText().equals(headerMessage)
-                && dialogPane.getContentText().equals(contentMessage);
-        return isMatching;
-    }
+	public boolean isMatching(String headerMessage, String contentMessage) {
+		assert intermediateStage.isPresent() : "Alert dialog is not present";
+		DialogPane dialogPane = getNode("#" + UiManager.ALERT_DIALOG_PANE_FIELD_ID);
+		boolean isMatching = dialogPane.getHeaderText().equals(headerMessage)
+				&& dialogPane.getContentText().equals(contentMessage);
+		return isMatching;
+	}
 }

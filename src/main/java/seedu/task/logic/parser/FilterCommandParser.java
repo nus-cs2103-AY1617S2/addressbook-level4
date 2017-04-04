@@ -9,7 +9,6 @@ import seedu.task.logic.commands.FilterCommand;
 //@@author A0163845X
 public class FilterCommandParser {
 
-
 	public Command parse(String arguments) {
 		arguments = arguments.toLowerCase();
 		arguments = arguments.trim();
