@@ -59,7 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
         taskbossHistory = new Stack<ReadOnlyTaskBoss>();
         taskbossUndoHistory = new Stack<ReadOnlyTaskBoss>();
-        undoInput = new Stack<String>();
+        undoInputList = new Stack<String>();
     }
 
     public ModelManager() throws IllegalValueException {
