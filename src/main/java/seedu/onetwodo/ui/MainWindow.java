@@ -26,7 +26,6 @@ import seedu.onetwodo.MainApp;
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.GuiSettings;
-import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.commons.events.ui.NewResultAvailableEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
@@ -373,14 +372,9 @@ public class MainWindow extends UiPart<Region> {
             public void handle(KeyEvent ke) {
                 ke.consume();
                 closeDialog();
-                deselectTaskCards();
-                commandBox.removeKeyListeners();
+                commandBox.resetKeyListener();
             }
         });
-    }
-
-    private void deselectTaskCards() {
-        EventsCenter.getInstance().post(new DeselectCardsEvent());
     }
 
     void closeDialog() {
@@ -418,11 +412,10 @@ public class MainWindow extends UiPart<Region> {
             public void handle(KeyEvent ke) {
                 ke.consume();
                 closeDialog();
-                commandBox.removeKeyListeners();
+                commandBox.resetKeyListener();
                 commandBox.focus();
             }
         });
-
     }
 
 }

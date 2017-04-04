@@ -98,8 +98,9 @@ public class UiManager extends ComponentManager implements Ui {
         System.exit(1);
     }
 
-    // ==================== Event Handling Code
+    // ==================== Event Handling Code ======================
     // ===============================================================
+
     @Subscribe
     private void handleCloseDialog(CloseDialogEvent event) {
         mainWindow.closeDialog();

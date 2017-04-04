@@ -3,9 +3,7 @@ package seedu.onetwodo.logic.commands;
 import java.util.Optional;
 
 import javafx.collections.transformation.FilteredList;
-import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.Messages;
-import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.tag.UniqueTagList;
@@ -77,7 +75,6 @@ public class EditCommand extends Command {
         try {
             model.updateTask(taskToEdit, internalIdx, editedTask);
             model.jumpToNewTask(editedTask);
-            EventsCenter.getInstance().post(new DeselectCardsEvent());
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             reverseAdd(taskToEdit, internalIdx);
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

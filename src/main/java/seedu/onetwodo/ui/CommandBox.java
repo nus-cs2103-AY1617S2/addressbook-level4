@@ -1,11 +1,13 @@
 package seedu.onetwodo.ui;
 
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -21,6 +23,8 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
+    private Stack<String> previousCommands = new Stack<String>();
+    private Stack<String> refilledCommands = new Stack<String>();
 
     private final Logic logic;
 
@@ -38,37 +42,25 @@ public class CommandBox extends UiPart<Region> {
         placeHolderPane.getChildren().add(commandTextField);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
-        setKeyListener(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                setStyleToIndicateCommandSuccess();
-                deselectCards();
-            }
-        });
-    }
+        resetKeyListener();
 
-    protected void deselectCards() {
-        if (commandTextField.getText().length() == 1) {
-            raise(new DeselectCardsEvent());
-        }
     }
-
     @FXML
     private void handleCommandInputChanged() {
         String command = commandTextField.getText();
+        previousCommands.push(command);
         handleCommands(command);
     }
 
     public void handleCommands(String command) {
         try {
             CommandResult commandResult = logic.execute(command);
-
+            setKeyListenerForMutators(command);
             // process result of the command
             setStyleToIndicateCommandSuccess();
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
-
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
@@ -95,11 +87,68 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.requestFocus();
     }
 
+    public void undoTextField() {
+        commandTextField.undo();
+    }
+
     public void setKeyListener(EventHandler<KeyEvent> ke) {
         commandTextField.setOnKeyPressed(ke);
     }
 
-    public void removeKeyListeners() {
-        commandTextField.setOnKeyPressed(null);
+    private void setKeyListenerForMutators(String command) {
+        commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                raise(new DeselectCardsEvent());
+                resetKeyListener();
+            }
+        });
     }
+
+    public void resetKeyListener() {
+        commandTextField.setOnKeyPressed(null);
+        commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                setStyleToIndicateCommandSuccess();
+                resetIfUpDownKey(ke);
+            }
+        });
+    }
+
+    private void resetIfUpDownKey(KeyEvent ke) {
+        KeyCode keyCode = ke.getCode();
+        switch (keyCode) {
+        case UP: undoTextArea();
+        case DOWN: redoTextArea();
+        default: break;
+        }
+    }
+
+    private void undoTextArea() {
+        if (previousCommands.isEmpty()) {
+            return;
+        }
+        String previousCommand = previousCommands.pop();
+        refilledCommands.push(previousCommand);
+        if (refilledCommands.isEmpty()) {
+            commandTextField.setText("");
+        } else {
+            commandTextField.setText(refilledCommands.peek());
+        }
+    }
+
+    private void redoTextArea() {
+        if (refilledCommands.isEmpty()) {
+            return;
+        }
+        String previousRefilledCommand = refilledCommands.pop();
+        previousCommands.push(previousRefilledCommand);
+        if (refilledCommands.isEmpty()) {
+            commandTextField.setText("");
+        } else {
+            commandTextField.setText(refilledCommands.peek());
+        }
+    }
+
 }
