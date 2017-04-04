@@ -68,8 +68,12 @@ public class HistoryCommandTest extends ToLuistGuiTest {
             resultMessage += command;
             resultMessage += "\n";
         }
-        resultMessage += commandList.length;
-        resultMessage += " commands displayed.";
+        int length = commandList.length;
+        if (length > 1) {
+            resultMessage += length + " commands displayed.";
+        } else {
+            resultMessage += "1 command displayed.";
+        }
         assertResultMessage(resultMessage);
     }
 
