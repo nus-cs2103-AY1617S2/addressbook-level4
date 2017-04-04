@@ -14,9 +14,9 @@ import seedu.ezdo.commons.util.XmlUtil;
 public class XmlFileStorage {
     /**
      * Saves the given ezDo data to the specified file.
+     * @throws FileNotFoundException if the file is not found
      */
-    public static void saveDataToFile(File file, XmlSerializableEzDo ezDo)
-            throws FileNotFoundException {
+    public static void saveDataToFile(File file, XmlSerializableEzDo ezDo) throws FileNotFoundException {
         try {
             XmlUtil.saveDataToFile(file, ezDo);
         } catch (JAXBException e) {
@@ -26,6 +26,8 @@ public class XmlFileStorage {
 
     /**
      * Returns ezDo in the file or an empty ezDo
+     * @throws DataConversionException if the file is empty or does not have the correct format.
+     * @throws FileNotFoundException if the file is missing
      */
     public static XmlSerializableEzDo loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {
