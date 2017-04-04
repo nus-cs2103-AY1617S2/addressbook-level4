@@ -9,6 +9,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.opus.commons.core.ComponentManager;
 import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.core.UnmodifiableObservableList;
+import seedu.opus.commons.events.model.ChangeSaveLocationEvent;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
 import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.commons.exceptions.InvalidUndoException;
@@ -67,6 +68,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
+    //@@author A0148081H
+    /** Raises an event to indicate that save location has changed */
+    private void indicateChangeSaveLocation(String location) {
+        raise(new ChangeSaveLocationEvent(location));
+    }
+    //@@author
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         history.backupCurrentState(this.taskManager);
@@ -103,6 +111,17 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetToPrecedingState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
+        indicateTaskManagerChanged();
+    }
+    //@@author
+
+    //@@author A0148081H
+    //=========== Storage Methods ==========================================================================
+
+    @Override
+    public synchronized void changeSaveLocation(String location) {
+        assert StringUtil.isValidPathToFile(location);
+        indicateChangeSaveLocation(location);
         indicateTaskManagerChanged();
     }
     //@@author

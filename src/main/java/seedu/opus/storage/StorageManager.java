@@ -7,10 +7,14 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.opus.commons.core.ComponentManager;
+import seedu.opus.commons.core.Config;
 import seedu.opus.commons.core.LogsCenter;
+import seedu.opus.commons.events.model.ChangeSaveLocationEvent;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
 import seedu.opus.commons.events.storage.DataSavingExceptionEvent;
 import seedu.opus.commons.exceptions.DataConversionException;
+import seedu.opus.commons.util.ConfigUtil;
+import seedu.opus.commons.util.StringUtil;
 import seedu.opus.model.ReadOnlyTaskManager;
 import seedu.opus.model.UserPrefs;
 
@@ -22,7 +26,7 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private TaskManagerStorage taskManagerStorage;
     private UserPrefsStorage userPrefsStorage;
-
+    private Config config;
 
     public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -30,9 +34,24 @@ public class StorageManager extends ComponentManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
+    //@@author A0148081H
+    public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage, Config config) {
+        super();
+        this.taskManagerStorage = taskManagerStorage;
+        this.userPrefsStorage = userPrefsStorage;
+        this.config = config;
+    }
+    //@@author
+
     public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
         this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
+
+    //@@author A0148081H
+    public StorageManager(String taskManagerFilePath, String userPrefsFilePath, Config config) {
+        this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath), config);
+    }
+    //@@author
 
     // ================ UserPrefs methods ==============================
 
@@ -76,6 +95,33 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
+    //@@author A0148081H
+    @Override
+    public void setTaskManagerFilePath(String filePath) {
+        assert StringUtil.isValidPathToFile(filePath);
+        taskManagerStorage.setTaskManagerFilePath(filePath);
+        logger.info("Setting todo list file path to: " + filePath);
+    }
+
+    private void saveConfigFile() {
+        try {
+            ConfigUtil.saveConfig(config, config.getConfigFilePath());
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleChangeSaveLocationEvent(ChangeSaveLocationEvent event) {
+        String location = event.location;
+
+        setTaskManagerFilePath(location);
+        config.setTaskManagerFilePath(location);
+        saveConfigFile();
+
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    }
 
     @Override
     @Subscribe
@@ -87,5 +133,4 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
 }
