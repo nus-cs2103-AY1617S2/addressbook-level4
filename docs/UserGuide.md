@@ -319,11 +319,11 @@ Examples:
 
 Examples:
 
-* `show`<br> 
+* `show`<br>
    Display all events and tasks
-* `show com`<br> 
+* `show com`<br>
    Display completed tasks and past events
-* `show pend`<br> 
+* `show pend`<br>
    Display pending tasks and future events
 
 ### 2.11. Undoing the latest command : `undo`
@@ -352,7 +352,7 @@ Examples:
 
 * `save /User/Andy/Documents`
   Saves the current WhatsLeft content to /User/Andy/Documents.
-  
+
 #### 2.12.2. Read WhatsLeft from new location
 Loads WhatsLeft from storage file stored in the designated directory.<br>
 Format: `read DIRECTORY`
@@ -403,7 +403,7 @@ Format: `exit`
 
 * **Add Event** : `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...`<br>
   e.g. `add Industrial Talk st/1800 sd/030517 et/2000 l/FoS`
-  
+
 * **Recur Event** : `recur EVENT_INDEX FREQUENCY NUMBER_OF_TIMES`<br>
   e.g. `add Industrial Talk st/1800 sd/030517 et/2000 l/FoS`
 
@@ -446,7 +446,7 @@ Format: `exit`
 
 * **Save** : `save DIRECTORY`<br>
   e.g. `save Desktop/Data`
-  
+
 * **Read** : `read DIRECTORY`<br>
   e.g. `read Desktop/Data2`
 
