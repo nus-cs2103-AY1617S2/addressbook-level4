@@ -21,11 +21,10 @@ public class DateParser {
 
     public String value;
 
-    /*
+    //@@author A0138907W
+    /**
      * Converts the date format from from user's input for Natty dependency.
      */
-    //@@author A0138907W
-
     public DateParser(String input) {
         // swap day and month as natty only accepts the MM/DD/YYYY format
         if (input.matches(DAY_MONTH_YEAR_FORMAT)) {
