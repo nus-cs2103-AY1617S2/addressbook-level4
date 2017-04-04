@@ -22,24 +22,24 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="C:/Users/lenovo/Documents/main/libs/natty-0.13.jar" sourcepath="C:/Users/lenovo/Documents/main/libs/natty-natty-0.13.zip">
+	<classpathentry kind="lib" path="libs/natty-0.13.jar" sourcepath="libs/natty-natty-0.13.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/lenovo/Documents/main/libs/natty-natty-0.13.zip!/"/>
+			<attribute name="javadoc_location" value="jar:file:/libs/natty-natty-0.13.zip!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/lenovo/Documents/main/libs/antlr-4.7-complete.jar" sourcepath="C:/Users/lenovo/Documents/main/libs/antlr4-4.7.zip">
+	<classpathentry kind="lib" path="libs/antlr-4.7-complete.jar" sourcepath="libs/antlr4-4.7.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/lenovo/Documents/main/libs/antlr4-4.7.zip!/"/>
+			<attribute name="javadoc_location" value="jar:file:/libs/antlr4-4.7.zip!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/lenovo/Documents/main/libs/commons-logging-1.2.jar" sourcepath="C:/Users/lenovo/Documents/main/libs/commons-logging-1.2-src.zip">
+	<classpathentry kind="lib" path="libs/commons-logging-1.2.jar" sourcepath="libs/commons-logging-1.2-src.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/lenovo/Documents/main/libs/commons-logging-1.2-src.zip!/"/>
+			<attribute name="javadoc_location" value="jar:file:/libs/commons-logging-1.2-src.zip!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/lenovo/Documents/main/libs/slf4j-api-1.7.10.jar" sourcepath="C:/Users/lenovo/Documents/main/libs/slf4j-api-1.7.10.zip">
+	<classpathentry kind="lib" path="libs/slf4j-api-1.7.10.jar" sourcepath="libs/slf4j-api-1.7.10.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/lenovo/Documents/main/libs/slf4j-api-1.7.10.zip!/"/>
+			<attribute name="javadoc_location" value="jar:file:/libs/slf4j-api-1.7.10.zip!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
