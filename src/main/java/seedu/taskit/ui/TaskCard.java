@@ -62,6 +62,12 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        UniqueTagList tagList = task.getTags();
+        for(Tag t : tagList) {
+            Label newTag = new Label(t.tagName);
+            String tagColor = TagColor.getColorCode(t.getColor());
+            newTag.setStyle("-fx-background-color: " + tagColor + ";");
+            tags.getChildren().add(newTag);
+        }
     }
 }
