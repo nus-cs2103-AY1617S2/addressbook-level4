@@ -106,7 +106,7 @@ public class AddTaskController extends Controller {
         try {
             validateTaskDescription(description);
             validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline);
-            Task task = createTask(null, description, eventStartDateTime, eventEndDateTime, taskDeadline);
+            Task task = createTask(description, eventStartDateTime, eventEndDateTime, taskDeadline);
             task = addPriorityToTask(task, taskPriority);
             task = addRecurringStatusToTask(task, recurringFrequency, recurringUntilEndDate);
             task = addTagsToTask(task, tags);
@@ -152,8 +152,9 @@ public class AddTaskController extends Controller {
         } // else it is a valid task (floating or deadline)
     }
 
-    private Task createTask(Task task, String description, LocalDateTime eventStartDateTime,
+    private Task createTask(String description, LocalDateTime eventStartDateTime,
             LocalDateTime eventEndDateTime, LocalDateTime taskDeadline) throws IllegalArgumentException {
+        Task task = null;
         if (eventStartDateTime != null && eventEndDateTime != null) {
             task = new Task(description, eventStartDateTime, eventEndDateTime);
         } else if (taskDeadline != null) {
