@@ -382,24 +382,30 @@ public class ModelManager extends ComponentManager implements Model {
         todoListHistory.addToHistory(toSave);
     }
 
-    public void recoverPreviousTodoList() {
+    public boolean recoverPreviousTodoList() {
         boolean isAtMostRecentState = todoListHistory.isAtMostRecentState();
         TodoList previousTodoList = todoListHistory.getPreviousState();
         if (previousTodoList != null) {
             todoList.resetData(previousTodoList);
+        } else {
+            return false;
         }
         if (isAtMostRecentState) {
             recoverPreviousTodoList();
         }
         indicateTodoListChanged();
+        return true;
     }
 
-    public void recoverNextTodoList() {
+    public boolean recoverNextTodoList() {
         TodoList nextTodoList = todoListHistory.getNextState();
         if (nextTodoList != null) {
             todoList.resetData(nextTodoList);
+        } else {
+            return false;
         }
         indicateTodoListChanged();
+        return true;
     }
 
   //@@author A0140887W

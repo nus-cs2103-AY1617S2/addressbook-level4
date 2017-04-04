@@ -78,8 +78,8 @@ public interface Model {
 
     //========== handle undo and redo operation =================================================
     void saveCurrentToHistory();
-    void recoverPreviousTodoList();
-    void recoverNextTodoList();
+    boolean recoverPreviousTodoList();
+    boolean recoverNextTodoList();
 
     ///// Alias List Map
     /** Returns the AliasListMap */
