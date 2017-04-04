@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import seedu.toluist.controller.Controller;
-
 /**
  * TokenHistoryList records the list of tokens and values used in the current session
  * Sort like a cookie
@@ -15,12 +13,17 @@ import seedu.toluist.controller.Controller;
 public class TokenHistoryList {
     public HashMap<String, HashMap<String, Set<String>>> tokenHistory = new HashMap<>();
 
-    public void recordTokens(Controller controller, Map<String, String> tokens) {
+    /**
+     * Record token map for a particular controller
+     * @param controllerClass a controller class
+     * @param tokens dictionary of tokens
+     */
+    public void recordTokens(Class controllerClass, Map<String, String> tokens) {
         if (tokens == null) {
             return;
         }
 
-        String controllerKey = controller.getClass().getName();
+        String controllerKey = controllerClass.getName();
         if (tokenHistory.get(controllerKey) == null) {
             tokenHistory.put(controllerKey, new HashMap());
         }
@@ -33,8 +36,14 @@ public class TokenHistoryList {
         }
     }
 
-    public Set<String> retrieveTokens(Controller controller, String tokenName) {
-        String controllerKey = controller.getClass().getName();
+    /**
+     * Retrieve past values for a token in the current session for a particular controller
+     * @param controllerClass a controller class
+     * @param tokenName token value
+     * @return
+     */
+    public Set<String> retrieveTokens(Class controllerClass, String tokenName) {
+        String controllerKey = controllerClass.getName();
         if (tokenHistory.get(controllerKey) == null
             || tokenHistory.get(controllerKey).get(tokenName) == null) {
             return new HashSet<>();

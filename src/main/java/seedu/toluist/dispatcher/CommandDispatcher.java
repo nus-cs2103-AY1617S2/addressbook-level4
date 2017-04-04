@@ -61,7 +61,7 @@ public class CommandDispatcher extends Dispatcher {
             ((NavigateHistoryController) controller).setCommandHistory(commandHistory);
         }
         Map<String, String> tokens = controller.tokenize(deAliasedCommand);
-        tokenHistoryList.recordTokens(controller, tokens);
+        tokenHistoryList.recordTokens(controller.getClass(), tokens);
         controller.execute(tokens);
     }
 
@@ -180,7 +180,8 @@ public class CommandDispatcher extends Dispatcher {
                 .get(FindController.PARAMETER_KEYWORDS).split(StringUtil.WHITE_SPACE)));
 
         String lastComponentOfCommand = StringUtil.getLastComponent(command);
-        return tokenHistoryList.retrieveTokens(bestFitController, FindController.PARAMETER_KEYWORDS).stream()
+        return tokenHistoryList.retrieveTokens(bestFitController.getClass(), FindController.PARAMETER_KEYWORDS)
+                .stream()
                 .map(keywords -> keywords.split(StringUtil.WHITE_SPACE))
                 .flatMap(Arrays::stream)
                 .filter(value -> !existingKeywords.contains(value))
