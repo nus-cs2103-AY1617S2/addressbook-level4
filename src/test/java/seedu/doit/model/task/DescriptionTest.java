@@ -8,7 +8,6 @@ import org.junit.rules.ExpectedException;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.item.Description;
-import seedu.doit.model.item.EndTime;
 
 public class DescriptionTest {
 
@@ -28,6 +27,6 @@ public class DescriptionTest {
     @Test
     public void invalidDescription_IllegalValueException() throws Exception {
         thrown.expect(IllegalValueException.class);
-        EndTime one = new EndTime(null);
+        Description one = new Description(null);
     }
 }
