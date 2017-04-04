@@ -31,24 +31,21 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         TestTask[] currentList = this.td.getTypicalTasks();
         TestTask taskToAdd = TypicalTestTasks.getFloatingTestTask();
         this.commandBox.runCommand(taskToAdd.getAddCommand());
-        this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
-        this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
+        executeUndoThenRedo();
         assertAddSuccess(taskToAdd, currentList);
     }
 
     @Test
     public void redo_delete_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_DELETE_COMMAND);
-        this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
-        this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
+        executeUndoThenRedo();
         assertDeleteSuccess();
     }
 
     @Test
     public void redo_edit_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_EDIT_COMMAND);
-        this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
-        this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
+        executeUndoThenRedo();
         assertEditSuccess();
 
     }
@@ -56,16 +53,14 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     @Test
     public void redo_mark_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_MARK_COMMAND);
-        this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
-        this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
+        executeUndoThenRedo();
         assertDoneSuccess();
     }
 
     @Test
     public void redo_clear_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_CLEAR_COMMAND);
-        this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
-        this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
+        executeUndoThenRedo();
         assertClearCommandSuccess();
     }
 
@@ -74,6 +69,11 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
         assertResultMessage(RedoCommand.MESSAGE_FAILURE);
 
+    }
+
+    private void executeUndoThenRedo() {
+        this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
+        this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
     }
 
     private void assertClearCommandSuccess() {
