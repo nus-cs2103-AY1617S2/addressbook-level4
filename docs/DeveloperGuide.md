@@ -101,7 +101,7 @@ Two of those classes play important roles at the architecture level.
 The rest of the App consists of four components.
 
 * [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
+* [**`Logic`**](#logic-component) : The command executor and holds command history.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
