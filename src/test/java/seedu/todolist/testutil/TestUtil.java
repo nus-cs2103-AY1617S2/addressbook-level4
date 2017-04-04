@@ -58,8 +58,6 @@ public class TestUtil {
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
-    public static final String SAVE_FILE_TEST = "src/test/data/SaveFileTest/saveFileTest.xml";
-
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
             executable.run();
@@ -398,9 +396,9 @@ public class TestUtil {
     }
 
     //@@author A0163720M
-    public static String getSaveFileCommand() {
+    public static String getSaveFileCommand(String saveFile) {
         StringBuilder sb = new StringBuilder();
-        sb.append(SaveFileCommand.COMMAND_WORD + " " + SAVE_FILE_TEST);
+        sb.append(SaveFileCommand.COMMAND_WORD + " " + saveFile);
         return sb.toString();
     }
     //@@author
