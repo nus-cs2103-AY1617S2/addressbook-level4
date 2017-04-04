@@ -26,7 +26,7 @@ public class EditCommandTest extends TodoListGuiTest {
     TestTodo[] expectedTodosList = td.getTypicalTodos();
 
     @Test
-    public void edit_allFieldsSpecified_success() throws Exception {
+    public void editAllFieldsSpecifiedSuccess() throws Exception {
         String detailsToEdit = "Bobby t/husband";
         int todoListIndex = 1;
 
@@ -62,7 +62,8 @@ public class EditCommandTest extends TodoListGuiTest {
         String detailsToEdit = "e/";
         int todoListIndex = 8;
 
-        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withEndTime(getTomorrowMidnight()).build();
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").
+                withEndTime(getTodayPlusDaysMidnight(1)).build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
@@ -72,8 +73,9 @@ public class EditCommandTest extends TodoListGuiTest {
         String detailsToEdit = "s/ e/";
         int todoListIndex = 9;
 
-        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom")
-                .withStartTime(getTodayMidnight()).withEndTime(getTomorrowMidnight()).withTags("personal").build();
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").
+                withStartTime(getTodayPlusDaysMidnight(0)).
+                withEndTime(getTodayPlusDaysMidnight(1)).withTags("personal").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
@@ -185,7 +187,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
+    public void editNotAllFieldsSpecifiedSuccess() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
         int todoListIndex = 2;
 
@@ -196,10 +198,9 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void edit_clearTags_success() throws Exception {
+    public void editClearTagsSuccess() throws Exception {
         String detailsToEdit = "t/";
         int todoListIndex = 2;
-        //commandBox.runCommand("edit " + "1" + " t/aaa" );
         TestTodo todoToEdit = expectedTodosList[todoListIndex - 1];
         TestTodo editedTodo = new TodoBuilder(todoToEdit).withTags().build();
 
@@ -207,7 +208,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void edit_findThenEdit_success() throws Exception {
+    public void editFindThenEditSuccess() throws Exception {
         commandBox.runCommand("find cat");
 
         String detailsToEdit = "Feed the cat";
@@ -219,7 +220,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
         assertEditSuccess(filteredTodoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
-
+    //@@author A0165043M
     @Test
     public void editWithOnlyDateSuccess() throws Exception {
         String detailsToEdit = "e/11/11/11";
@@ -241,41 +242,6 @@ public class EditCommandTest extends TodoListGuiTest {
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
     @Test
-    public void edit_missingTodoIndex_failure() {
-        commandBox.runCommand("edit Bobby");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-    }
-
-
-    @Test
-    public void edit_invalidTodoIndex_failure() {
-        int invalidTodoIndex = expectedTodosList.length + 1;
-        commandBox.runCommand("edit " + invalidTodoIndex + " Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void edit_noFieldsSpecified_failure() {
-        commandBox.runCommand("edit 1");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
-    }
-
-    @Test
-    public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
-    }
-
-    @Test
-    public void edit_duplicateTodo_failure() {
-        commandBox.runCommand("edit 2 Walk the dog t/petcare");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TODO);
-    }
-
-    @Test
     public void editWithInvalidValuefailure() {
         commandBox.runCommand("edit 1 Walk the dog s/12 e/12");
         assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
@@ -286,7 +252,41 @@ public class EditCommandTest extends TodoListGuiTest {
         commandBox.runCommand("edit 1 s/12:00PM");
         assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
     }
+    //@@author
+    @Test
+    public void editMissingTodoIndexFailure() {
+        commandBox.runCommand("edit Bobby");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
 
+
+    @Test
+    public void editInvalidTodoIndexFailure() {
+        int invalidTodoIndex = expectedTodosList.length + 1;
+        commandBox.runCommand("edit " + invalidTodoIndex + " Bobby");
+        assertResultMessage(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void editNoFieldsSpecifiedFailure() {
+        commandBox.runCommand("edit 1");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void editInvalidValuesFailure() {
+        commandBox.runCommand("edit 1 *&");
+        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1 t/*&");
+        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+    }
+
+    @Test
+    public void editDuplicateTodoFailure() {
+        commandBox.runCommand("edit 2 Walk the dog t/petcare");
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TODO);
+    }
 
     /**
      * Checks whether the edited todo has the correct updated details.
@@ -313,20 +313,11 @@ public class EditCommandTest extends TodoListGuiTest {
         //assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));
     }
 
-    private String getTomorrowMidnight() {
+    private String getTodayPlusDaysMidnight(int addDays) {
         Date dtAssign = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dtAssign);
-        c.add(Calendar.DATE, 1);
-        dtAssign = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return "12:00AM" + " " + dateFormat.format(dtAssign);
-    }
-
-    private String getTodayMidnight() {
-        Date dtAssign = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(dtAssign);
+        c.add(Calendar.DATE, addDays);
         dtAssign = c.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return "12:00AM" + " " + dateFormat.format(dtAssign);

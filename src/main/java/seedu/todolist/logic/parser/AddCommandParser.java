@@ -21,7 +21,7 @@ import seedu.todolist.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser {
-    //@@author A0163720M
+    //@@author A0163720M, A0165043M
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -30,11 +30,8 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
-            Optional<String> startTime = argsTokenizer.getValue(PREFIX_START_TIME);
-            Optional<String> endTime = argsTokenizer.getValue(PREFIX_END_TIME);
-
-            startTime = formatAndCheckValidTime(startTime);
-            endTime = formatAndCheckValidTime(endTime);
+            Optional<String> startTime = formatAndCheckValidTime(argsTokenizer.getValue(PREFIX_START_TIME));
+            Optional<String> endTime = formatAndCheckValidTime(argsTokenizer.getValue(PREFIX_END_TIME));
             if (startTime.isPresent() && endTime.isPresent()) {
                 return new AddCommand (
                         argsTokenizer.getPreamble().get(),
@@ -66,6 +63,15 @@ public class AddCommandParser {
         }
     }
     //@@author
+    //@@author A0165043M
+    /**
+     * This function will check and format the time into "h:mma dd/MM/yyyy" time string
+     * if the input doesn't contain time information,
+     * this function will append "12:00AM" to the return string
+     * @param time
+     * @return a valid time string
+     * @throws ParseException
+     */
     private Optional<String> formatAndCheckValidTime (Optional<String> time) throws ParseException {
         if (!time.equals(Optional.empty()) && !time.get().equals("")) {
             try {
@@ -87,4 +93,5 @@ public class AddCommandParser {
             return time;
         }
     }
+    //@@author
 }

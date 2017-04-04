@@ -72,6 +72,14 @@ public class EditCommandParser {
         }
     }
 
+    /**
+     * convert the given startTime and endTime to editTodoDescriptor
+     * if startTime lack of date information, it will set today as default
+     * if endTime lack of date information, it will set tomorrow as default 
+     * @param editTodoDescriptor
+     * @param startTime
+     * @param endTime
+     */
     private void setEditTodoDescriptor(EditTodoDescriptor editTodoDescriptor,
             Optional<String> startTime, Optional<String> endTime) {
         try {
@@ -95,6 +103,11 @@ public class EditCommandParser {
         }
     }
 
+    /**
+     * returns today plus addDays as Date
+     * @param addDays
+     * @return today plus addDays
+     */
     private Date getTodayPlusDays(int addDays) {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
@@ -110,7 +123,7 @@ public class EditCommandParser {
         }
         return dt;
     }
-
+    //@@author
     private Optional<String> formatAndCheckValidTime (Optional<String> time) throws ParseException {
         if (!time.equals(Optional.empty()) && !time.get().equals("")) {
             try {
@@ -132,7 +145,7 @@ public class EditCommandParser {
             return time;
         }
     }
-    //@@author
+
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a

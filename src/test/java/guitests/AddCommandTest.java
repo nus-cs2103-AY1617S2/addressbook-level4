@@ -49,7 +49,7 @@ public class AddCommandTest extends TodoListGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 
     }
-
+  //@@author A0165043M
     @Test
     public void addEventTest() {
         TestTodo[] currentList = td.getTypicalTodos();
@@ -94,15 +94,15 @@ public class AddCommandTest extends TodoListGuiTest {
             TestTodo[] currentList = td.getTypicalTodos();
 
             TestTodo eventToAdd = new TodoBuilder().withName("DefaultEvent").
-                    withStartTime(getTodayMidnighttoString(addComand.getTodayMidnight())).
-                    withEndTime(getTomorrowMidnighttoString(addComand.getTomorrowMidnight())).build();
+                    withStartTime(getTodayMidnightPlusDaystoString(addComand.getTodayMidnightPlusDays(0), 0)).
+                    withEndTime(getTodayMidnightPlusDaystoString(addComand.getTodayMidnightPlusDays(1) , 1)).build();
 
             assertAddSuccess(eventToAdd, currentList);
 
             commandBox.runCommand("undo");
 
             TestTodo deadLineToAdd = new TodoBuilder().withName("DefaultDeadLine").
-                    withEndTime(getTomorrowMidnighttoString(addComand.getTomorrowMidnight())).build();
+                    withEndTime(getTodayMidnightPlusDaystoString(addComand.getTodayMidnightPlusDays(1) , 1)).build();
 
             assertAddSuccess(deadLineToAdd, currentList);
 
@@ -120,7 +120,7 @@ public class AddCommandTest extends TodoListGuiTest {
         commandBox.runCommand("adds Johonny s/");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
-
+  //@@author
     private void assertAddSuccess(TestTodo todoToAdd, TestTodo... currentList) {
 
         commandBox.runCommand(todoToAdd.getAddCommand());
@@ -133,23 +133,15 @@ public class AddCommandTest extends TodoListGuiTest {
         TestTodo[] expectedList = TestUtil.addTodosToList(currentList, todoToAdd);
         assertTrue(todoListPanel.isListMatching(true, expectedList));
     }
-
-    private String getTomorrowMidnighttoString(Date dt) {
+    //@@author A0165043M
+    private String getTodayMidnightPlusDaystoString(Date dt, int days) {
         Date dtAssign = dt;
         Calendar c = Calendar.getInstance();
         c.setTime(dtAssign);
-        c.add(Calendar.DATE, 1);
+        c.add(Calendar.DATE, days);
         dtAssign = c.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return "12:00AM" + " " + dateFormat.format(dtAssign);
     }
-
-    private String getTodayMidnighttoString(Date dt) {
-        Date dtAssign = dt;
-        Calendar c = Calendar.getInstance();
-        c.setTime(dtAssign);
-        dtAssign = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return "12:00AM" + " " + dateFormat.format(dtAssign);
-    }
+    //@@author
 }
