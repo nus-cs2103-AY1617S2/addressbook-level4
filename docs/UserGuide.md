@@ -29,6 +29,7 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    * **`complete`**` 3`: marks the 3rd Todo shown in the current list as complete
    * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
    * **`undo`** : undoes last command that modified the todo list
+   * **`redo`** : redoes the last undo command
    * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -187,24 +188,31 @@ Example:
 Undoes last command if it involves changing a todo.<br>
 Format: `undo`
 
-> * You may also redo a command by simply running undo again. This will undo the effects of the last undo command.
+> * You may undo as many commands as you wish up to and including the first modifying command
 
-### 2.10. Clearing all entries : `clear`
+### 2.10. Redo last undo : `redo`
+
+Redoes last undo command<br>
+Format: `redo`
+
+> * You may redo as many undos as you wish, however if you undo a command and then run a new modifying command such as 'add', you will not be able to redo the undone command
+
+### 2.11. Clearing all entries : `clear`
 
 Clears all todos. Irreversible.<br>
 Format: `clear`
 
-### 2.11. Exiting the program : `exit`
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data
+### 2.13. Saving the data
 
 Todo data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.13 Setting the data save location : `savefile`
+### 2.14 Setting the data save location : `savefile`
 
 Sets the save file location containing todo data.<br>
 If the file does not exist, the application will create the file in the file path automatically.<br>
@@ -248,10 +256,13 @@ Examples:
 * **Complete** : `complete INDEX [COMPLETETIME]` <br>
   e.g. `complete 1 17-03-17T8:00`
 
-  * **Uncomplete** : `uncomplete INDEX` <br>
+* **Uncomplete** : `uncomplete INDEX` <br>
   e.g. `uncomplete 1`
 
 * **Undo** : `undo` <br>
+  e.g. `undo`
+
+* **Redo** : `undo` <br>
   e.g. `undo`
 
 * **List** : `list` <br>

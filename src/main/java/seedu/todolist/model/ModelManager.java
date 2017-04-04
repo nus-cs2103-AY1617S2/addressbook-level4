@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -35,9 +36,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TodoList todoList;
     /**
-     * Holds the previous state of the todo list before the most recent modifying change
+     * Holds the previous states of the todo list
      */
-    private TodoList previousTodoList;
+    private final Stack<ReadOnlyTodoList> previousStates = new Stack<ReadOnlyTodoList>();
+    private final Stack<ReadOnlyTodoList> nextStates = new Stack<ReadOnlyTodoList>();
     private final FilteredList<ReadOnlyTodo> filteredTodos;
 
     /**
@@ -58,13 +60,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTodoList newData) {
-        previousTodoList = new TodoList(todoList);
-        todoList.resetData(newData);
-        indicateTodoListChanged();
-    }
-
-    @Override
     public ReadOnlyTodoList getTodoList() {
         return todoList;
     }
@@ -74,11 +69,32 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TodoListChangedEvent(todoList));
     }
 
+    //@@author A0163786N
+    /** Helper function to handle storing previous state */
+    private void handleStateChange(ReadOnlyTodoList todoList) {
+        previousStates.push(new TodoList(todoList));
+        if (!nextStates.empty()) {
+            nextStates.clear();
+        }
+    }
+    //@@author
+    @Override
+    public void resetData(ReadOnlyTodoList newData) {
+        todoList.resetData(newData);
+        indicateTodoListChanged();
+    }
+    //@@author A0163786N
+    @Override
+    public void clearData() {
+        handleStateChange(todoList);
+        resetData(new TodoList());
+    }
+    //@@author
     @Override
     public synchronized void deleteTodo(ReadOnlyTodo target) throws TodoNotFoundException {
         TodoList tempTodoList = new TodoList(todoList);
         todoList.removeTodo(target);
-        previousTodoList = tempTodoList;
+        handleStateChange(tempTodoList);
         indicateTodoListChanged();
     }
 
@@ -86,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTodo(Todo todo) throws UniqueTodoList.DuplicateTodoException {
         TodoList tempTodoList = new TodoList(todoList);
         todoList.addTodo(todo);
-        previousTodoList = tempTodoList;
+        handleStateChange(tempTodoList);
         updateFilteredListToShowAll();
         indicateTodoListChanged();
     }
@@ -99,36 +115,45 @@ public class ModelManager extends ComponentManager implements Model {
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         TodoList tempTodoList = new TodoList(todoList);
         todoList.updateTodo(todoListIndex, editedTodo);
-        previousTodoList = tempTodoList;
+        handleStateChange(tempTodoList);
         indicateTodoListChanged();
     }
     //@@author A0163786N
     @Override
     public void completeTodo(int filteredTodoListIndex, Date completeTime) {
-        TodoList tempTodoList = new TodoList(todoList);
+        handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.completeTodo(todoListIndex, completeTime);
-        previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
     //@@author
     //@@author A0163786N
     @Override
     public void uncompleteTodo(int filteredTodoListIndex) {
-        TodoList tempTodoList = new TodoList(todoList);
+        handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.uncompleteTodo(todoListIndex);
-        previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
     //@@author
     //@@author A0163786N
     @Override
     public void loadPreviousState() throws NoPreviousStateException {
-        if (previousTodoList == null) {
+        if (previousStates.empty()) {
             throw new NoPreviousStateException();
         }
-        resetData(previousTodoList);
+        nextStates.push(new TodoList(todoList));
+        resetData(previousStates.pop());
+    }
+    //@@author
+    //@@author A0163786N
+    @Override
+    public void loadNextState() throws NoNextStateException {
+        if (nextStates.empty()) {
+            throw new NoNextStateException();
+        }
+        previousStates.push(new TodoList(todoList));
+        resetData(nextStates.pop());
     }
     //@@author
 

@@ -17,6 +17,9 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyTodoList newData);
 
+    /** Clears existing backing model and replaces with empty todo list. */
+    void clearData();
+
     /** Returns the TodoList */
     ReadOnlyTodoList getTodoList();
 
@@ -52,17 +55,24 @@ public interface Model {
 
     /** Updates the filter of the filtered todo list to show all todos */
     void updateFilteredListToShowAll();
-    //@@author A0163786N
+
     /** Updates the filter of the filtered todo list*/
     public void updateFilteredTodoList(Set<String> keywords, Date startTime,
             Date endTime, Object completeTime, UniqueTagList tags);
-    //@@author
+
     /** Loads the previous state of the todo list*/
     void loadPreviousState() throws NoPreviousStateException;
+
+    /** Loads the next state of the todo list*/
+    void loadNextState() throws NoNextStateException;
 
     /**
      * Signals that there is no previous todo state to load
      */
     public static class NoPreviousStateException extends Exception {}
 
+    /**
+     * Signals that there is no next todo state to load
+     */
+    public static class NoNextStateException extends Exception {}
 }
