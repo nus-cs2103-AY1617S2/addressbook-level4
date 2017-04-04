@@ -11,10 +11,10 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
 public class StringUtil {
 
     // @@author A0140032E
-    private static final int TOLERANCE_SIMPLE_RATIO = 75;
-    private static final int TOLERANCE_PARTIAL_RATIO = 75;
-    private static final int TOLERANCE_TOKEN_SORT_PARTIAL_RATIO = 75;
-    private static final int TOLERANCE_TOKEN_SORT_RATIO = 75;
+    private static final int MATCH_REQUIREMENT_SIMPLE_RATIO = 90;
+    private static final int MATCH_REQUIREMENT_PARTIAL_RATIO = 90;
+    private static final int MATCH_REQUIREMENT_TOKEN_SORT_PARTIAL_RATIO = 90;
+    private static final int MATCH_REQUIREMENT_TOKEN_SORT_RATIO = 90;
     // @@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -49,10 +49,10 @@ public class StringUtil {
         int partialRatio = FuzzySearch.partialRatio(preppedSentence, preppedWord);
         int tokenSortPartialRatio = FuzzySearch.tokenSortPartialRatio(preppedSentence, preppedWord);
         int tokenSortRatio = FuzzySearch.tokenSortRatio(preppedSentence, preppedWord);
-        if (simpleRatio >= TOLERANCE_SIMPLE_RATIO ||
-                partialRatio >= TOLERANCE_PARTIAL_RATIO ||
-                tokenSortPartialRatio >= TOLERANCE_TOKEN_SORT_PARTIAL_RATIO ||
-                tokenSortRatio >= TOLERANCE_TOKEN_SORT_RATIO) {
+        if (simpleRatio >= MATCH_REQUIREMENT_SIMPLE_RATIO ||
+                partialRatio >= MATCH_REQUIREMENT_PARTIAL_RATIO ||
+                tokenSortPartialRatio >= MATCH_REQUIREMENT_TOKEN_SORT_PARTIAL_RATIO ||
+                tokenSortRatio >= MATCH_REQUIREMENT_TOKEN_SORT_RATIO) {
             return true;
         }
         // @@author
