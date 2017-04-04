@@ -11,7 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -31,9 +32,16 @@ import seedu.opus.model.task.Task;
  * Credits: burnflare
  */
 public class SyncProviderGoogleTests {
-    private static final File DATA_STORE_CREDENTIAL = new File(SyncServiceGtask.DATA_STORE_DIR + "StoredCredential");
 
-    private static File DATA_STORE_TEST_CREDENTIALS;
+
+    private static final List<File> DATA_STORE_TEST_CREDENTIALS = Arrays.asList(
+            new File("data/StoredCredential_1"),
+            new File("data/StoredCredential_2"),
+            new File("data/StoredCredential_3")
+            );
+
+    public static final File DATA_TEST_CREDENTIAL = new File("data/testCredential");
+    public static final java.io.File DATA_STORE_DIR = new java.io.File("data/credentials");
 
     private static final SyncServiceGtask syncProviderGoogle = spy(new SyncServiceGtask());
     private static final SyncManager mockSyncManager = mock(SyncManager.class);
@@ -41,8 +49,7 @@ public class SyncProviderGoogleTests {
 
     @BeforeClass
     public static void setUp() {
-        DATA_STORE_TEST_CREDENTIALS = new File("data/StoredCredential");
-        copyTestCredentials();
+        //copyTestCredentials();
 
         try {
             Optional<DateTime> fakeTime = Optional.of(new DateTime(LocalDateTime.now()));
@@ -68,18 +75,19 @@ public class SyncProviderGoogleTests {
     public static void copyTestCredentials() {
         try {
             deleteCredential();
-            Files.copy(getTestCredential().toPath(), DATA_STORE_CREDENTIAL.toPath());
+            Files.copy(new File("data/testCredential").toPath(), new File("data/credentials").toPath());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void deleteCredential() {
-        DATA_STORE_CREDENTIAL.delete();
+        DATA_STORE_DIR.delete();
     }
 
-    private static File getTestCredential() {
-        return DATA_STORE_TEST_CREDENTIALS;
+    private static File getRandomCredential() {
+        int r = new Random().nextInt(DATA_STORE_TEST_CREDENTIALS.size());
+        return DATA_STORE_TEST_CREDENTIALS.get(r);
     }
 
     @Test
@@ -92,7 +100,7 @@ public class SyncProviderGoogleTests {
 
 
     @Test
-    public void syncProviderGoogle_stop_successful() {
+    public void syncProviderGoogleStopTest() {
         reset(mockSyncManager);
         syncProviderGoogle.stop();
 
@@ -100,11 +108,4 @@ public class SyncProviderGoogleTests {
         verify(syncProviderGoogle).stop();
     }
 
-    @Test
-    public void syncProviderGoogle_addEvent_successful() {
-        LinkedList<Task> list = new LinkedList<Task>();
-        list.add(mockTask);
-        syncProviderGoogle.updateTaskList(list);
-
-    }
 }
