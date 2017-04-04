@@ -2,11 +2,18 @@ package seedu.doit.model.task;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
 
 public class DescriptionTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void isValidDescription() {
@@ -16,5 +23,11 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription("Task is extremely hard" + ""));
         assertTrue(Description.isValidDescription("-")); // one character
         assertTrue(Description.isValidDescription("Task is very easy"));
+    }
+
+    @Test
+    public void invalidDescription_IllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        EndTime one = new EndTime(null);
     }
 }
