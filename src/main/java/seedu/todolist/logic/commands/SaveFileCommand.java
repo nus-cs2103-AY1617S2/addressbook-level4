@@ -3,8 +3,10 @@ package seedu.todolist.logic.commands;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import seedu.todolist.commons.core.Config;
+import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.core.Messages;
 import seedu.todolist.commons.exceptions.DataConversionException;
 import seedu.todolist.commons.util.ConfigUtil;
@@ -12,6 +14,7 @@ import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.storage.StorageManager;
 
 public class SaveFileCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(SaveFileCommand.class);
     private String saveFilePath;
     public static final String MESSAGE_CONFIG_ERROR = "Error handling the config file.";
     public static final String MESSAGE_SUCCESS = "Save file updated!";
@@ -26,13 +29,15 @@ public class SaveFileCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        File f = new File(saveFilePath);
-
-        if (!f.exists() || f.isDirectory()) {
-            throw new CommandException(Messages.MESSAGE_FILE_NOT_FOUND);
-        }
-
         try {
+            // If the file does not exist, create it (as per Ashkay's recommendations)
+            File f = new File(saveFilePath);
+            final boolean fileCreated = f.createNewFile();
+
+            if (fileCreated) {
+                logger.info("File " + saveFilePath + " did not exist. Created file instead.");
+            }
+
             // There should only be one instance of config each session - grab a
             // handle on that specific one
             Config config = ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
