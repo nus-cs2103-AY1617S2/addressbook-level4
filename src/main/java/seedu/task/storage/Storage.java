@@ -12,7 +12,7 @@ import seedu.task.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends TaskManagerStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,7 +21,11 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getTaskManagerFilePath();
+
+    //@@author A0141928B
+    void setTaskManagerFilePath(String taskManagerFilePath);
+    //@@author
 
     @Override
     Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
@@ -35,4 +39,5 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(TaskManagerChangedEvent abce);
+
 }

@@ -49,15 +49,18 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList <ReadOnlyTask> getFilteredTaskList();
 
+    /** Returns the advanced filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList <ReadOnlyTask> getAdvancedFilteredTaskList();
+
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    /** Updates the filter of the filtered task list to filter by the given keywords */
     void updateFilteredTaskList(Set<String> keywords);
 
     //@@author A0139161J
     /** Returns the filtered completed task list */
-    ObservableList<ReadOnlyTask> getCompletedTaskList();
+    UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList();
 
     /** Transfers the specified task to the completed task list section */
     void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException;
@@ -71,4 +74,14 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given tags
      * @throws IllegalValueException */
     void updateFilteredTagTaskList(String tagName) throws IllegalValueException;
+
+    /** Updates the filter of the filtered task list to filter by the given keywords, near match cases are allowed */
+    void updateAdvancedFilteredTaskList(Set<String> keywords);
+
+    /** Updates the filter of the filtered task list to filter by the highest priority */
+    void updatePriorityTaskList();
+
+    /** Deletes the given completed task from the completed task list
+     * @throws TaskNotFoundException */
+    void deleteCompletedTask(ReadOnlyTask t) throws TaskNotFoundException;
 }
