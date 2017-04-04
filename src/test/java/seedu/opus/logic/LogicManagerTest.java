@@ -650,7 +650,7 @@ public class LogicManagerTest {
     @Test
     public void executeSyncCommandWithValidOnArgumentSuccess() {
         SyncProviderGoogleTests.copyTestCredentials();
-        assertCommandSuccess("sync off", SyncCommand.MESSAGE_SYNC_OFF_SUCCESS,
+        assertCommandSuccess("sync on", SyncCommand.MESSAGE_SYNC_ON_SUCCESS,
                              new TaskManager(), Collections.emptyList());
         SyncProviderGoogleTests.deleteCredential();
     }
