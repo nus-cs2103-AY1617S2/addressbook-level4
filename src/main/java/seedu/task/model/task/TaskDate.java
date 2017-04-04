@@ -49,9 +49,9 @@ public class TaskDate {
 
 	public TaskDate(String input) throws IllegalValueException {
 
-		value = input.trim();
+		this.value = input.trim();
 		try {
-			int[] dateArray = dateFormatConverter(input);
+			int[] dateArray = dateFormatConverter(value);
 			if (input.length() == 6) {
 				setDay(dateArray[DAY_ARRAY_INDEX]);
 				setMonth(dateArray[MONTH_ARRAY_INDEX]);
