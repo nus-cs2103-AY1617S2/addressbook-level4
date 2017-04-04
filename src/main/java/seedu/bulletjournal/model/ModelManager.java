@@ -9,6 +9,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.bulletjournal.commons.core.ComponentManager;
 import seedu.bulletjournal.commons.core.LogsCenter;
 import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
+import seedu.bulletjournal.commons.events.model.FilePathChangedEvent;
 import seedu.bulletjournal.commons.events.model.TodoListChangedEvent;
 import seedu.bulletjournal.commons.util.CollectionUtil;
 import seedu.bulletjournal.commons.util.StringUtil;
@@ -18,8 +19,8 @@ import seedu.bulletjournal.model.task.UniqueTaskList;
 import seedu.bulletjournal.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the address book data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -37,7 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with bullet journal: " + bulletJournal + " and user prefs " + userPrefs);
 
         this.todoList = new TodoList(bulletJournal);
-        filteredTasks = new FilteredList<>(this.todoList.getTaskList());
+        filteredTasks = new FilteredList<>(this.todoList.getTodoList());
     }
 
     public ModelManager() {
@@ -51,7 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyTodoList getAddressBook() {
+    public ReadOnlyTodoList getTodoList() {
         return todoList;
     }
 
@@ -83,14 +84,15 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
-    //@@author A0105748B
+    // @@author A0105748B
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getUndoneTaskList() {
         String[] keywords = new String[2];
@@ -109,6 +111,7 @@ public class ModelManager extends ComponentManager implements Model {
         Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         updateMatchedTaskList(keywordSet);
     }
+
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
@@ -123,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //@@author A0105748B
+    // @@author A0105748B
     @Override
     public void updateMatchedTaskList(Set<String> keywords) {
         updateMatchedTaskList(new PredicateExpression(new StatusQualifier(keywords)));
@@ -133,10 +136,13 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
+        @Override
         String toString();
     }
 
@@ -161,6 +167,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
+        @Override
         String toString();
     }
 
@@ -175,8 +183,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+                    .findAny().isPresent();
         }
 
         @Override
@@ -195,16 +202,20 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return statusKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStatus() == null ?
-                            "empty" : task.getStatus().value, keyword))
-                    .findAny()
-                    .isPresent();
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                            task.getStatus() == null ? "empty" : task.getStatus().value, keyword))
+                    .findAny().isPresent();
         }
 
         @Override
         public String toString() {
             return "status=" + String.join(", ", statusKeyWords);
         }
+    }
+
+    @Override
+    public void changeDirectory(String filePath) {
+        raise(new FilePathChangedEvent(filePath));
     }
 
 }

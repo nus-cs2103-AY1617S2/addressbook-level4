@@ -3,6 +3,7 @@ package seedu.bulletjournal.storage;
 import java.io.IOException;
 import java.util.Optional;
 
+import seedu.bulletjournal.commons.events.model.FilePathChangedEvent;
 import seedu.bulletjournal.commons.events.model.TodoListChangedEvent;
 import seedu.bulletjournal.commons.events.storage.DataSavingExceptionEvent;
 import seedu.bulletjournal.commons.exceptions.DataConversionException;
@@ -27,12 +28,17 @@ public interface Storage extends TodoListStorage, UserPrefsStorage {
     Optional<ReadOnlyTodoList> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyTodoList addressBook) throws IOException;
+    void saveTodoList(ReadOnlyTodoList addressBook) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
-     *   Creates the data file if it is missing.
-     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     * Saves the current version of the Address Book to the hard disk. Creates
+     * the data file if it is missing. Raises {@link DataSavingExceptionEvent}
+     * if there was an error during saving.
      */
     void handleAddressBookChangedEvent(TodoListChangedEvent abce);
+
+    /**
+     * Changes the file path for current storage manager.
+     */
+    void handleFilePathChangedEvent(FilePathChangedEvent fpce);
 }

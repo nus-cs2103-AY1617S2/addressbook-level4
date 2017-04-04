@@ -17,10 +17,13 @@ public interface TodoListStorage {
     String getBulletJournalFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyTodoList}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     * Returns AddressBook data as a {@link ReadOnlyTodoList}. Returns
+     * {@code Optional.empty()} if storage file is not found.
+     *
+     * @throws DataConversionException
+     *             if the data in storage is not in the expected format.
+     * @throws IOException
+     *             if there was any problem when reading from the storage.
      */
     Optional<ReadOnlyTodoList> readAddressBook() throws DataConversionException, IOException;
 
@@ -31,14 +34,17 @@ public interface TodoListStorage {
 
     /**
      * Saves the given {@link ReadOnlyTodoList} to the storage.
-     * @param addressBook cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     *
+     * @param addressBook
+     *            cannot be null.
+     * @throws IOException
+     *             if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyTodoList addressBook) throws IOException;
+    void saveTodoList(ReadOnlyTodoList addressBook) throws IOException;
 
     /**
      * @see #saveAddressBook(ReadOnlyTodoList)
      */
-    void saveAddressBook(ReadOnlyTodoList addressBook, String filePath) throws IOException;
+    void saveTodoList(ReadOnlyTodoList addressBook, String filePath) throws IOException;
 
 }

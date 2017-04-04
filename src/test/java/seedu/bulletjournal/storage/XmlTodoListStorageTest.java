@@ -33,13 +33,11 @@ public class XmlTodoListStorageTest {
     }
 
     private java.util.Optional<ReadOnlyTodoList> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlTodoListStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
-                : null;
+        return prefsFileInTestDataFolder != null ? TEST_DATA_FOLDER + prefsFileInTestDataFolder : null;
     }
 
     @Test
@@ -53,8 +51,10 @@ public class XmlTodoListStorageTest {
         thrown.expect(DataConversionException.class);
         readAddressBook("NotXmlFormatAddressBook.xml");
 
-        /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
-         * That means you should not have more than one exception test in one method
+        /*
+         * IMPORTANT: Any code below an exception-throwing line (like the one
+         * above) will be ignored. That means you should not have more than one
+         * exception test in one method
          */
     }
 
@@ -63,24 +63,25 @@ public class XmlTodoListStorageTest {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TodoList original = td.getTypicalTodoList();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        XmlTodoListStorage xmlTodoListStorage = new XmlTodoListStorage(filePath);
 
-        //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyTodoList readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        // Save in new file and read back
+        xmlTodoListStorage.saveTodoList(original, filePath);
+        ReadOnlyTodoList readBack = xmlTodoListStorage.readAddressBook(filePath).get();
         assertEquals(original, new TodoList(readBack));
 
-        //Modify data, overwrite exiting file, and read back
+        // Modify data, overwrite exiting file, and read back
         original.addTask(new Task(td.hangclothes));
         original.removeTask(new Task(td.assignment));
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlTodoListStorage.saveTodoList(original, filePath);
+        readBack = xmlTodoListStorage.readAddressBook(filePath).get();
         assertEquals(original, new TodoList(readBack));
 
-        //Save and read without specifying file path
+        // Save and read without specifying file path
         original.addTask(new Task(td.interviewprep));
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        xmlTodoListStorage.saveTodoList(original); // file path not specified
+        readBack = xmlTodoListStorage.readAddressBook().get(); // file path not
+                                                               // specified
         assertEquals(original, new TodoList(readBack));
 
     }
@@ -92,7 +93,7 @@ public class XmlTodoListStorageTest {
     }
 
     private void saveAddressBook(ReadOnlyTodoList addressBook, String filePath) throws IOException {
-        new XmlAddressBookStorage(filePath).saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+        new XmlTodoListStorage(filePath).saveTodoList(addressBook, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
@@ -100,6 +101,5 @@ public class XmlTodoListStorageTest {
         thrown.expect(AssertionError.class);
         saveAddressBook(new TodoList(), null);
     }
-
 
 }

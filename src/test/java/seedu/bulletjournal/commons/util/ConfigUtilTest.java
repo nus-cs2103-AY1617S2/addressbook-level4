@@ -43,8 +43,10 @@ public class ConfigUtilTest {
         thrown.expect(DataConversionException.class);
         read("NotJsonFormatConfig.json");
 
-        /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
-         * That means you should not have more than one exception test in one method
+        /*
+         * IMPORTANT: Any code below an exception-throwing line (like the one
+         * above) will be ignored. That means you should not have more than one
+         * exception test in one method
          */
     }
 
@@ -76,7 +78,7 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setAddressBookFilePath("bulletjournal.xml");
+        config.setBulletJournalFilePath("bulletjournal.xml");
         config.setAddressBookName("TypicalTodoListName");
         return config;
     }
@@ -104,12 +106,12 @@ public class ConfigUtilTest {
 
         String configFilePath = testFolder.getRoot() + File.separator + "TempConfig.json";
 
-        //Try writing when the file doesn't exist
+        // Try writing when the file doesn't exist
         ConfigUtil.saveConfig(original, configFilePath);
         Config readBack = ConfigUtil.readConfig(configFilePath).get();
         assertEquals(original, readBack);
 
-        //Try saving when the file exists
+        // Try saving when the file exists
         original.setAppTitle("Updated Title");
         original.setLogLevel(Level.FINE);
         ConfigUtil.saveConfig(original, configFilePath);
@@ -123,10 +125,7 @@ public class ConfigUtilTest {
     }
 
     private String addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
-        return configFileInTestDataFolder != null
-                                  ? TEST_DATA_FOLDER + configFileInTestDataFolder
-                                  : null;
+        return configFileInTestDataFolder != null ? TEST_DATA_FOLDER + configFileInTestDataFolder : null;
     }
-
 
 }
