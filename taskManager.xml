@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Hospital Appointment</name>
+        <deadline>14-Apr-2017</deadline>
+        <priority>1</priority>
+        <information>KTPH</information>
+    </tasks>
+    <tasks>
+        <name>CS2101 Presentation script making</name>
+        <deadline>30-Mar-2017</deadline>
+        <priority>1</priority>
+        <information></information>
+        <tagged>School</tagged>
+    </tasks>
+    <tasks>
+        <name>GET1006 Essay</name>
+        <deadline>4-Apr-2017</deadline>
+        <priority>1</priority>
+        <information>TR5</information>
+        <tagged>School</tagged>
+    </tasks>
+    <tasks>
+        <name>GET1006 Essay Draft</name>
+        <deadline>04-Apr-2017</deadline>
+        <priority>1</priority>
+        <information>TR5</information>
+        <tagged>School</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy Milk</name>
+        <deadline>05-Apr-2017</deadline>
+        <priority></priority>
+        <information>from NTUC</information>
+        <tagged>Home</tagged>
+    </tasks>
+    <tags>school</tags>
+    <tags>Schoolwork</tags>
+    <tags>Home</tags>
+    <tags>School</tags>
+    <completedTasks>
+        <name>Rent a car</name>
+        <deadline>13-Dec-2016</deadline>
+        <priority>2</priority>
+        <information>Contact dad</information>
+        <tagged>Malaysia</tagged>
+    </completedTasks>
+</taskmanager>

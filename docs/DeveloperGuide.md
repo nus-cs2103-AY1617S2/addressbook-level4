@@ -1,33 +1,32 @@
-# AddressBook Level 4 - Developer Guide
+# doTASK - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Miao Ling`, `Ian`, `Qi Xiang` and `Dylan`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: User Stories](#appendix-a-user-stories)
+* [Appendix B: Use Cases](#appendix-b-use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
+* [Appendix D: Product Survey](#appendix-d-product-survey)
 
 
 ## 1. Setting up
 
 ### 1.1. Prerequisites
 
-1. **JDK `1.8.0_60`**  or later<br>
+1. **JDK `1.8.0_111`**  or later<br>
 
     > Having any Java 8 version is not enough. <br>
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
+3. **e(fx)clipse** plugin for Eclipse (Do steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
@@ -51,7 +50,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskmanager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -91,7 +90,7 @@ Given below is a quick overview of each component.
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#2-6-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -100,10 +99,10 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#2-2-ui-component) : The UI of the App.
+* [**`Logic`**](#2-3-logic-component) : The command executor.
+* [**`Model`**](#2-4-model-component) : Holds the data of the App in-memory.
+* [**`Storage`**](#2-5-storage-component) : Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -123,7 +122,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -191,8 +190,8 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the Task Manager data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -208,7 +207,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
@@ -222,7 +221,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](#3-2-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
@@ -263,13 +262,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.task.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -332,7 +331,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -343,30 +342,115 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
+### New User Guide
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | new user | get a list of basic commands | understand what the task manager will allow me to do.
+`* * *` | new user | get help if I enter an invalid command | know that I am using it wrongly and how to correct myself.
+`* * *` | new user | view more information about a particular command | learn how to use various commands.
+`* * *` | new user | view the features offered by this task manager | identify what I can actually do with this task manager.
+
+
+### Essential Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | add a task | use the keep track of the tasks to be completed.
+`* * *` | user | delete a task | get rid of tasks that I no longer care to track.
+`* * *` | user | edit a task detail/deadline | change the deadline or the specifics of the tasks.
+`* * *` | user | add comments/notes to a created task | in order to provide extra details that aids in describing the task, without being a subtask.
+`* * *` | user | search for tasks using keywords | find the tasks with similar details.
+`* * *` | user | mark a task as done | track my progress through cleared tasks.
+`* * *` | user | clear all the tasks | erase all tasks without deleting them individually.
+`* * *` | user | clear a subset of tasks | erase a specific category or type of task without deleting them individually.
+`* * *` | user | view the task manager in a calendar mode | have an overall picture of how busy I will be over the next few days/weeks.
+`* * *` | user | save my task list | easily retrieve my tasks.
+`* * *` | user | find upcoming tasks | decide what needs to be done soon.
+
+
+### Reminders
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | reminders about a task that is due soon | start working on the more important tasks first.
+`* * *` | user | have recurring reminders for every deadline that is coming | not forget to wrap up a task.
+
+
+### Prioritization
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | add priority levels to different tasks | identify which tasks are the most urgent.
+`* * *` | user | edit the priority levels of the tasks | change the priority levels to suit my needs.
+`* * *` | user | sort the tasks by deadline | know which tasks are more urgent and which are less urgent.
+
+
+### Tagging-related
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | tag the tasks with relevant tags ( eg. study / work ) | easily categorise tasks.
+`* * *` | user | search for tasks using tags | easily find a category of tasks.
+`* * *` | user | delete a tag | remove a category of tasks that I no longer care to track.
+`* * *` | user | sort the tasks by tags | prioritise a certain category of tasks.
+
+
+### Security Features
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* *` | user | be able to encrypt the information in the task manager | ensure the security of my data.
+
+### Subtasking
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* *` | user | add subtasks to a task that is already present | break down said task into smaller problems.
+`* *` | user | delete subtasks | get rid of subtasks that are no longer relevant.
+`* *` | user | clear subtasks | keep track of my progress against the big picture.
+
+### Customization
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* *` | user | set a quote of the day at the frontpage of the task manager | be more motivated in doing my tasks.
+`* *` | user | set a custom/standard background image of the task manager | be more motivated.
+`* *` | user | change the aesthetics (colours/layout) of the task manager | make it feel more personalised.
+
+### Advanced Features
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* *` | user | view the tasks that were completed | keep track of my efficiency
+`* *` | user | sync my tasks and notes from any device | have higher convenience in viewing my tasks.
+`* *` | user | set the type of reminder about a task (vibration/ring) about a task that is due soon | punctually complete the tasks.
+`* *` | user | share tasks with teammates and co-workers | work on a task together and clear it together.
+`* *` | user | type a command to grab all the details of a chosen task at a quick glance | single out a task to focus on and find out everything I need at once.
+`* *` | user | add media to a tasks | choose not to type the entire details out.
+
+
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `doTASK` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case 1 : Add Task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User request to add a task
+2. doTASK adds the task <br>
+Use case ends.
+
+**Extensions**
+
+1a. The task has invalid parameters eg. a/
+
+> 1a1. doTASK shows an error message <br>
+  Use case resumes at step 1
+
+#### Use case 2 : Delete Task
+
+**MSS**
+
+1. User requests to list tasks
+2. doTASK shows a list of tasks
+3. User requests to delete a specific task in the list
+4. doTASK deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,43 +461,193 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. doTASK shows an error message <br>
   Use case resumes at step 2
 
-{More to be added}
+#### Use case 3 : Prioritize a task
+
+**MSS**
+
+1. User requests to list down the tasks by priority
+2. doTASK shows a list of tasks in 2x2 matrix which are sorted in 4 different priorities
+Use case ends
+
+**Extensions**
+
+1a. The list is empty
+
+> Use case ends
+
+#### Use case 4 : Tagging a task
+
+**MSS**
+
+1. User requests to list down the tasks by tags
+2. doTASK request the user for the name of the tag
+3. User input the name of the tag
+2. doTASK executes the command and list the task under the given tag
+Use case ends
+
+**Extensions**
+
+1a. The list is empty
+
+> Use case ends
+
+2a. The name of the tag does not exist
+
+> doTASK show an error message.
+
+#### Use case 5 : List commands
+
+**MSS**
+
+1. User requests to get a list of basic commands
+2. doTASK shows a list of basic commands <br>
+Use case ends.
+
+#### Use case 6 : Editing parameters of a specified task
+
+**MSS**
+
+1. User requests to get a list of tasks
+2. doTASK shows a list of tasks
+3. User requests to edit the parameters of a specified task
+4. doTASK edits the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends.
+
+3a. Specified parameters are wrong
+
+> 3a1. doTASK shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case 7 : Searching for a task
+
+**MSS**
+
+1. User requests to search for a task
+2. doTASK shows a list of tasks related to the the keyword
+Use case ends.
+
+**Extensions**
+
+2a. There no tasks related to the keyword
+
+> Use case ends
+
+#### Use case 8 : Completing a task
+
+**MSS**
+
+1. User requests to search for a task
+2. doTask shows a list of tasks related to the keyword
+3. User requests to mark the task as completed
+4. doTASK marks the task as completed
+Use case ends.
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+#### Use case 9 : Clear all the tasks
+
+**MSS**
+
+1. User requests to clear all the tasks
+2. doTASK clears the list of tasks
+Use case ends.
+
+#### Use case 10 : Clearing a specified subset of tasks
+
+**MSS**
+
+1. User requests to search for the tasks related to the input
+2. doTASK shows the list of tasks related to the input
+3. User requests to clear the list of tasks
+4. doTASK clears the list of tasks
+Use case ends.
+
+#### Use case 11 : Find upcoming tasks
+
+**MSS**
+
+1. User requests to search for the upcoming tasks
+2. doTASK shows the list of task that is near to the dateline
+Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1. Should work on Windows 7 or later as long as it has Java `1.8.0_111` or higher installed.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. A user should be able to start using this without needing an installer.
+5. Commands should take less than 3 seconds to run.
+6. Should come with automated unit tests and open source code.
 
-{More to be added}
+## Appendix D : Product Survey
 
-## Appendix D : Glossary
+**Google Tasks**
 
-##### Mainstream OS
-
-> Windows, Linux, Unix, OS-X
-
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
-## Appendix E : Product Survey
-
-**Product Name**
-
-Author: ...
+Author: Lim Miao Ling
 
 Pros:
 
-* ...
-* ...
+* Supported on almost every platform, web or mobile.
+* Synced with Google Calendar. Displays tasks with deadlines along with Google calendar so you can better manage your schedule.
+* Able to add task by deadline by clicking the date in Google Calendar.
+* Able to create subtasks easily (just by pressing tab). Marking the supertask as complete will auto-complete all subtasks as complete.
+* Uncluttered presentation as you can only see the task title along with the deadline.
+* Extremely easy to get into and use.
+* Completely free to use. No features locked behind a paywall.
 
 Cons:
 
-* ...
-* ...
+* Can't categorise tasks. You can make different lists for tasks, but then you can't view more than one list simultaneously.
+* Must refresh page if the computer goes to sleep while the page is open. (Fixed recently.)
+* No reminders or notifications for tasks that are due soon. No indication if a task is overdue.
+* Can't see or edit task hiearchy when sorted by deadline.
+* No search function, so it can be difficult to find a specific task when the user has a lot of tasks.
 
+**Trello**
+
+Author: Dylan
+
+Pros:
+
+* A well constructed GUI
+* Logical flow of task construction
+* A subtle reminder that involves changes in the layout of the taskcard
+* Allows the sharing of information about a task with others
+
+Cons:
+
+* No calendar
+* No progress chart to indicate the amount of tasks completed
+
+
+**Wunderlist**
+
+Author: Ian
+
+Pros:
+
+* Pleasant, detailed GUI
+* Adding a task is quick, and allows for adding a flexible deadline
+* Allows tasks to have extra details and information
+* Organises everything into different lists
+* Marking a task as completed is met with a satisfying jingle
+* Reminders are present
+
+Cons:
+
+* No tutorial for new users
+* Many features are locked behind a paywall
