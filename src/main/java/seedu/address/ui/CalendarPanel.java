@@ -170,7 +170,7 @@ public class CalendarPanel extends UiPart<Region> {
         agenda.selectedAppointments().clear();
         agenda.selectedAppointments().add(targetAppoint);
     }
-    
+
     //Update the calendar to show new view with user input weeks ahead
     public void viewWeeksAhead(LocalDateTime t, int weeksAhead) {
         updateCalendarShownPeriod(t.plusWeeks(weeksAhead));
