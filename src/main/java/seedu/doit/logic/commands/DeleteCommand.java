@@ -1,5 +1,8 @@
 package seedu.doit.logic.commands;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.logic.commands.exceptions.CommandException;
@@ -21,10 +24,12 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
-    public final int targetIndex;
+    private Set<Integer> targetIndexes;
+    private Set<ReadOnlyTask> tasksToDeleteSet;
 
-    public DeleteCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(Set<Integer> targetIndexes) {
+        this.targetIndexes = targetIndexes;
+        this.targetIndexes = this.targetIndexes.stream().sorted().collect(Collectors.toSet());
     }
 
     @Override
@@ -32,19 +37,30 @@ public class DeleteCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
 
-
-        if (targetIndex <= lastShownTaskList.size()) {
-            ReadOnlyTask taskToDelete = lastShownTaskList.get(targetIndex - 1);
-
-            try {
-                model.deleteTask(taskToDelete);
-            } catch (TaskNotFoundException pnfe) {
-                assert false : "The target task cannot be missing";
-            }
-            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
-        } else {
+        if (isAnyInvalidIndex(lastShownTaskList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+
+        for (int index: targetIndexes){
+            ReadOnlyTask taskToBeDeleted = lastShownTaskList.get(index - 1);
+            tasksToDeleteSet.add(taskToBeDeleted);
+        }
+
+        try {
+            model.deleteTasks(tasksToDeleteSet);
+        } catch (TaskNotFoundException pnfe) {
+            assert false : "The target task cannot be missing";
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDeleteSet));
+
+    }
+
+
+    /**
+     * Checks if any index is invalid
+     */
+    private boolean isAnyInvalidIndex(UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList) {
+        return targetIndexes.stream().anyMatch(index -> index < 0 && index > lastShownTaskList.size());
     }
 
 }

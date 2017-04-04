@@ -1,6 +1,7 @@
 //@@author A0139399J
 package seedu.doit.model;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -123,6 +124,18 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
 
+    }
+
+    @Override
+    public synchronized void deleteTasks(Set<ReadOnlyTask> targets) throws TaskNotFoundException {
+        logger.info("delete task(s) in model manager");
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
+        for (ReadOnlyTask target: targets) {
+            this.taskManager.removeTask(target);
+        }
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
     }
 
     @Override

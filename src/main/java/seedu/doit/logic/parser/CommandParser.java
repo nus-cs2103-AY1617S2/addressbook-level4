@@ -9,6 +9,6 @@ public interface CommandParser {
      * Parses the given {@code String} of arguments
      * and returns a Command object for execution.
      */
-    public Command parse(String args);
+    Command parse(String args);
 
 }

@@ -4,6 +4,7 @@ package seedu.doit.logic.parser;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.DeleteCommand;
@@ -21,13 +22,13 @@ public class DeleteCommandParser implements CommandParser {
     @Override
     public Command parse(String args) {
 
-        Optional<Integer> index = ParserUtil.parseIndex(args);
-        if (!index.isPresent()) {
+        Set<Integer> indexes = ParserUtil.parseIndexes(args);
+        if (indexes.isEmpty()) {
             return new IncorrectCommand(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        return new DeleteCommand(index.get());
+        return new DeleteCommand(indexes);
     }
 
 }

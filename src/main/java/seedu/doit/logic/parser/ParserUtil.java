@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.StringUtil;
@@ -44,6 +45,39 @@ public class ParserUtil {
         }
         return Optional.of(Integer.parseInt(index));
 
+    }
+
+    /**
+     * Returns a set of specified indexes in the {@code command} if it is a set of positive unsigned integers
+     * Returns an {@code Optional.empty()} otherwise.
+     */
+    public static Set<Integer> parseIndexes(String args) {
+        Pattern indexesPattern = Pattern.compile("(\\d+|\\d+-\\d+)");
+        Matcher matcher = indexesPattern.matcher(args.trim());
+
+        Set<Integer> emptySet = new HashSet<>();
+        Set<Integer> taskNumSet = new HashSet<>();
+
+        if (!matcher.matches()) {
+            return emptySet;
+        }
+
+        String[] taskNumStringArr = args.split(" ");
+        for (String taskNumString : taskNumStringArr) {
+            if (taskNumString.matches("\\d+")) {
+                taskNumSet.add(Integer.parseInt(taskNumString));
+            } else if (taskNumString.matches("\\d+-\\d+")) {
+                String[] startAndEndIndexes = taskNumString.split("-");
+                int startIndex = Integer.parseInt(startAndEndIndexes[0]);
+                int endIndex = Integer.parseInt(startAndEndIndexes[1]);
+                taskNumSet.addAll(IntStream.rangeClosed(startIndex, endIndex).boxed().collect(Collectors.toSet()));
+            }
+        }
+
+        if (taskNumSet.remove(0)) {
+            return emptySet;
+        }
+        return taskNumSet;
     }
 
     /**
