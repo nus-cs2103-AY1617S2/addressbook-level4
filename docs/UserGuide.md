@@ -49,21 +49,21 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 
 |Command    |Description                                                          |
 |:---------:|:-------------------------------------------------------------------:|
-|[**help / h**](#31-viewing-help--help)                       |View help              |
-|[**add / a**](#32-adding-a-task-add)                         |Add a task             |
-|[**list / l**](#33-listing-all-tasks--list)                  |List the tasks         |
-|[**edit / e**](#34-editing-a-task--edit)                     |Edit a task            |
-|[**find / f**](#35-finding-all-tasks-by-keywords-or-by-datetime--find)           |Find tasks by keywords or by datetime             |
-|[**delete / d**](#36-deleting-a-task--delete)                |Delete a task          |
-|[**clear / c**](#37-clearing-tasks-by-category--clear)       |Clear tasks in category|
-|[**view / v**](#38-viewing-a-task--view)                    |View a task            |
-|[**name / n**](#39-modifying-a-category-name--name)         |Rename a category      |
-|[**mark / m**](#310-marking-a-task-done--done)               |Mark a task as done      |
+|[**help / h**](#31-viewing-help--help--h)                       |View help              |
+|[**add / a**](#32-adding-a-task-add--a)                         |Add a task             |
+|[**list / l**](#33-listing-all-tasks--list--l)                  |List the tasks         |
+|[**edit / e**](#34-editing-a-task--edit--e)                     |Edit a task            |
+|[**find / f**](#35-finding-all-tasks-by-keywords-or-by-datetime--find--f)           |Find tasks by keywords or by datetime             |
+|[**delete / d**](#36-deleting-a-task--delete--d)                |Delete a task          |
+|[**clear / c**](#37-clearing-tasks-by-category--clear--c)       |Clear tasks in category|
+|[**view / v**](#38-viewing-a-task--view--v)                    |View a task            |
+|[**name / n**](#39-modifying-a-category-name--name--n)         |Rename a category      |
+|[**mark / m**](#310-marking-tasks-done--mark--m)               |Mark a task as done      |
 |[**undo / u**](#311-undoing-a-command--undo--u)                 |Undo a task            |
 |[**redo / r**](#312-redoing-a-command--redo--r)                 |Redo a task            |
-|[**sort / s**](#313-sorting-tasks--sort)                     |Sort tasks by deadline or by priority|
-|[**save / sv**](#315-exporting-the-data--save)                |Save TaskBoss          |
-|[**exit / x**](#316-exiting-the-program--exit)               |Exit TaskBoss          |
+|[**sort / s**](#313-sorting-tasks--sort--s)                     |Sort tasks by deadline or by priority|
+|[**save / sv**](#315-exporting-the-data--save--sv)                |Save TaskBoss          |
+|[**exit / x**](#316-exiting-the-program--exit--x)               |Exit TaskBoss          |
 
 <br>
 
