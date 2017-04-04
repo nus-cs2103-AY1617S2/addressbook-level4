@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
         menuBarPanel = new MenuBarPanel(getMenuBarPlaceholder());
-    }//@@author
+    }//@@author generated
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;

@@ -115,6 +115,6 @@ public class CommandBox extends UiPart<Region> {
         default:
             return ListCommand.COMMAND_WORD + " all";
         }
-    }//@@author
+    }
 
 }

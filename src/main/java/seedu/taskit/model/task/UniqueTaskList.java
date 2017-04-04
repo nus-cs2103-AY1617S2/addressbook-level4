@@ -44,7 +44,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
-    // @@author
+    // @@author generated
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.

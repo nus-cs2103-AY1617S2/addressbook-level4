@@ -35,7 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@A0141011J
     private final Stack<State> prevStates = new Stack<State>();
     private final Stack<State> nextStates = new Stack<State>();
-    //@@author
+    //@@author generated
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -119,7 +119,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new ParameterQualifier(parameter)));
         return filteredTasks.size();
     }
-    //@@author
+    //@@author generated
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -216,8 +216,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
-    //@@author
 
     //@@author A0141872E
     private class ParameterQualifier implements Qualifier {

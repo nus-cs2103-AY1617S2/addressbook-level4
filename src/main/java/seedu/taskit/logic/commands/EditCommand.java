@@ -164,8 +164,6 @@ public class EditCommand extends Command {
         private Optional<Priority> getPriority() {
             return priority;
         }
-
-        // @@ author
     }
 
     //@@author A0141011J

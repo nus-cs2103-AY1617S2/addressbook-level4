@@ -33,7 +33,6 @@ public class AddCommand extends Command {
 
     private final Task toAdd;
 
-    // @@author A0163996J
     /**
      * Creates an AddCommand using raw values.
      *

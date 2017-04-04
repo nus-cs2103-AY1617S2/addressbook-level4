@@ -118,7 +118,6 @@ public class ParserUtil {
         }
     }
 
-    // @@author A0163996J
     /**
      * Parses a {@code Optional<String> Priority} into an {@code Optional<Priority>} if {@code priority} is present.
      */
@@ -127,7 +126,7 @@ public class ParserUtil {
         return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
-    // @@author
+    // @@author generated
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */

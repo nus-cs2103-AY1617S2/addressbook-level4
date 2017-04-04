@@ -40,7 +40,7 @@ public class LogicManager extends ComponentManager implements Logic {
         }
         return command.execute();
     }
-    //@@author
+    //@@author generated
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {

@@ -188,5 +188,5 @@ public class Task implements ReadOnlyTask{
 
     private boolean checkOverdue() {
         return this.end.isEndTimePassCurrentTime();
-    }//@@author
+    }
 }
