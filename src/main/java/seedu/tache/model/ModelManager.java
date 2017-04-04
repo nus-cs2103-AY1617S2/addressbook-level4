@@ -21,6 +21,7 @@ import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
@@ -374,7 +375,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             if (task.getEndDateTime().isPresent() && isDueToday) {
                 if (task.getStartDateTime().isPresent()) {
-                    return task.isWithinDate(new Date());
+                    return task.isWithinDate(DateTime.removeTime(new Date()));
                 }
                 return task.getEndDateTime().get().isToday();
             } else {
