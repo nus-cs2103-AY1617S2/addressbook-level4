@@ -22,7 +22,7 @@ public class ByTime {
     //@@author A0121668A
     /**
      * Validates given start time.
-     *
+     * @param byTime Argument in string format
      * @throws IllegalValueException if given start time is invalid.
      */
     public ByTime(String byTimeArg) throws IllegalValueException {

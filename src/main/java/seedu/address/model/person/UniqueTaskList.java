@@ -74,7 +74,7 @@ public class UniqueTaskList implements Iterable<Task> {
     //@@author A0121668A
     /**
      * Marks the task in the list at position {@code index} as complete.
-     *
+     * @param task to mark as complete in ReadOnlyTask format
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void completeTask(ReadOnlyTask taskToMark) {

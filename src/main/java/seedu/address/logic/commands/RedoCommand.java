@@ -9,7 +9,7 @@ import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
 //@@ author A0121668A
-/*
+/**
  * Mark a Task as complete
  */
 public class RedoCommand extends Command {

@@ -19,7 +19,7 @@ import seedu.address.storage.Storage;
 
 //@@ author A0121668A
 
-/*
+/**
  * Reads WhatsLeft from a specific location
  */
 public class ReadCommand extends Command {

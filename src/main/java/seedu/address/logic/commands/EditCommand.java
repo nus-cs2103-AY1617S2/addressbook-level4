@@ -323,6 +323,7 @@ public class EditCommand extends Command {
     //@@author A0121668A
     /**
      * Checks if input values violates time/date constraint
+     * @return true if constraint violated, no otherwise
      */
     private boolean isValidEndDateTime() {
 
