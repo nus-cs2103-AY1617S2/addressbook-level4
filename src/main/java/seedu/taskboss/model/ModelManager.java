@@ -15,6 +15,7 @@ import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.commons.util.StringUtil;
+import seedu.taskboss.logic.commands.TerminateCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
@@ -175,6 +176,32 @@ public class ModelManager extends ComponentManager implements Model {
                 Task newRecurredTask = createRecurredTask(task);
                 int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
                 this.taskBoss.updateTask(taskBossIndex, newRecurredTask);
+            }
+            index++;
+        }
+
+        indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
+    }
+
+  //@@author A0144904H
+    @Override
+    public void end(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
+                                                                       throws IllegalValueException,
+                                                                       CommandException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        int index = 0;
+        for (ReadOnlyTask task : tasksToMarkDone) {
+            int targetIndex = indices.get(index) - 1;
+            if (task.isRecurring()) {
+                Task newTask = new Task(task.getName(), task.getPriorityLevel(),
+                        task.getStartDateTime(), task.getEndDateTime(),
+                        task.getInformation(), task.getRecurrence(),
+                        new UniqueCategoryList(CATEGORY_DONE));
+                int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
+                this.taskBoss.updateTask(taskBossIndex, newTask);
+            } else {
+                throw new CommandException(TerminateCommand.ERROR_TASK_NOT_RECURRING);
             }
             index++;
         }

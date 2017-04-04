@@ -92,6 +92,16 @@ public interface Model {
     void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException,
         DuplicateCategoryException;
 
+    //@@author A0144904H
+    /**
+     * marks tasks done if they are non recurring or updates date if it's recurring
+     */
     void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException;
+
+    /**
+     * marks recurring tasks done
+     * @throws CommandException
+     */
+    void end(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException, CommandException;
 
 }
