@@ -34,7 +34,7 @@ public class ResultDisplay extends UiPart<Region> {
 
   //@@author A0142487Y-reused
     public ResultDisplay(AnchorPane placeHolder, String...fxml) {
-        super(fxml.length==0?FXML:fxml[0]);
+        super(fxml.length == 0 ? FXML : fxml[0]);
         resultDisplay.textProperty().bind(displayed);
         FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);

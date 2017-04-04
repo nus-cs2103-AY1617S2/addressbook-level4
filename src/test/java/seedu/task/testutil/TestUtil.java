@@ -418,10 +418,10 @@ public class TestUtil {
     }
     public static TestTask[] filterFloatTasks(final TestTask[] tasks) {
         List<TestTask> filteredTaskList = new ArrayList<>();
-        for(TestTask tt: tasks) {
-            if(tt.getStartDate().isNull() && tt.getEndDate().isNull()) {
+        for (TestTask tt: tasks) {
+            if (tt.getStartDate().isNull() && tt.getEndDate().isNull()) {
                 filteredTaskList.add(tt);
-            }   
+            }
         }
         return filteredTaskList.toArray(new TestTask[filteredTaskList.size()]);
     }

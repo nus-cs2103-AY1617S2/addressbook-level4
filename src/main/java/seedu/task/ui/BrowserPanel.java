@@ -25,7 +25,7 @@ public class BrowserPanel extends UiPart<Region> {
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
     public BrowserPanel(AnchorPane placeholder, String...fxml) {
-        super(fxml.length==0?FXML:fxml[0]);
+        super(fxml.length == 0 ? FXML : fxml[0]);
         placeholder.setOnKeyPressed(Event::consume); // To prevent triggering events for typing inside the
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);

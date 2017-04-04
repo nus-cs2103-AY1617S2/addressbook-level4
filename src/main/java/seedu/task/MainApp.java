@@ -73,7 +73,7 @@ public class MainApp extends Application {
         initEventsCenter();
         initHistory();
 
-        logic.execute("list " +ListCommand.COMMAND_WORD_NOT_DONE);
+        logic.execute("list " + ListCommand.COMMAND_WORD_NOT_DONE);
     }
 
     // @@author A0140063X

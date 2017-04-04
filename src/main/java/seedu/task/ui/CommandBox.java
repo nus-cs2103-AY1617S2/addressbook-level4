@@ -25,10 +25,10 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextField commandTextField;
-    
+
   //@@author A0142487Y-reused
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, String...fxml) {
-        super(fxml.length==0?FXML:fxml[0]);
+        super(fxml.length == 0 ? FXML : fxml[0]);
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }

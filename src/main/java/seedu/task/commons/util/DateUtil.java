@@ -11,7 +11,7 @@ public class DateUtil {
     /**
      * Extracts valid information by parsing a sentence to formulate a Date object. If no valid date can be inferred, an
      * empty Date object will be returned.
-     * 
+     *
      * @param sentence
      * @return
      */
@@ -23,10 +23,10 @@ public class DateUtil {
     /**
      * Extracts valid information by parsing a sentence to formulate a Date object. If no valid date can be inferred, an
      * empty Date object will be returned.
-     * 
+     *
      * If a valid Date is succefully extracted, the given String[] will be modified E.g. sentence is : Do work Thursday
      * -> Do work after the extraction of Thursday.
-     * 
+     *
      * @param sentence
      * @return
      */
@@ -35,7 +35,7 @@ public class DateUtil {
         assert sentence != null;
         Date date = null, tempDate;
         String[] words = sentence;
-        String[] currentDateWords ={};// the words that form the currently accepted date
+        String[] currentDateWords = {}; // the words that form the currently accepted date
         for (int length = words.length; length > 0; length--) {
             for (int start = 0; start + length <= words.length; start++) {
                 String[] tempSentence = (String[]) Arrays.copyOfRange(words, start, start + length);
@@ -58,7 +58,7 @@ public class DateUtil {
     /**
      * Extracts valid information by parsing a given number of words to formulate a Date object. If no valid date can be
      * inferred, null will be returned.
-     * 
+     *
      * @param words
      * @param number
      * @return
@@ -84,7 +84,7 @@ public class DateUtil {
 
     /**
      * Takes in two arrays of Strings and removes all matches of the second array from the first array
-     * 
+     *
      * @param sentence
      * @param words
      */

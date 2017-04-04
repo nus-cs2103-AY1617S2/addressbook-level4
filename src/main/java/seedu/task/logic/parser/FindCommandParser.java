@@ -35,7 +35,7 @@ public class FindCommandParser extends CommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        
+
         Date targetDate = null;
 
         // keywords delimited by whitespace
@@ -44,11 +44,11 @@ public class FindCommandParser extends CommandParser {
         targetDate = DateUtil.extractValidDate(keywords);
         final Set<String> keywordSet = new HashSet<>(StringUtil.asListWithoutEmptyString(keywords));
         System.out.println(StringUtil.asListWithoutEmptyString(keywords));
-        if(targetDate!=null){
+        if (targetDate != null) {
             System.out.println(targetDate.toString());
-            System.out.println(targetDate.getExtractedFrom()+" information");
+            System.out.println(targetDate.getExtractedFrom() + " information");
         }
-        return targetDate==null? new FindCommand(keywordSet):new FindCommand(keywordSet,targetDate);
+        return targetDate == null ? new FindCommand(keywordSet) : new FindCommand(keywordSet, targetDate);
     }
 
 }

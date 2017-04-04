@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;

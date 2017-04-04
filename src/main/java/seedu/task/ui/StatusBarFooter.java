@@ -33,7 +33,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
   //@@author A0142487Y-reused
     public StatusBarFooter(AnchorPane placeHolder, String saveLocation, String...fxml) {
-        super(fxml.length==0?FXML:fxml[0]);
+        super(fxml.length == 0 ? FXML : fxml[0]);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
         setSaveLocation("./" + saveLocation);
