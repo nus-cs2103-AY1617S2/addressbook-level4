@@ -8,6 +8,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.taskmanager.commons.core.ComponentManager;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
+import seedu.taskmanager.commons.events.storage.TaskManagerStorageDirectoryChangedEvent;
 import seedu.taskmanager.storage.StorageManager;
 
 // @@author A0140032E
@@ -24,7 +25,6 @@ public class HistoryManager extends ComponentManager {
 
     public static final String INITIALIZATION_ERROR = "HistoryManager has not been initialized with a Model yet";
 
-
     protected HistoryManager(Model model) {
         super();
         this.model = model;
@@ -40,6 +40,7 @@ public class HistoryManager extends ComponentManager {
         instance = new HistoryManager(model);
         return instance;
     }
+
     public static HistoryManager getInstance() {
         if (instance == null) {
             throw new NullPointerException(INITIALIZATION_ERROR);
@@ -49,9 +50,20 @@ public class HistoryManager extends ComponentManager {
 
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, updating history manager"));
         TaskManager taskManager = new TaskManager(event.data);
         historyList.add(taskManager);
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                ("Local data changed, updating history manager. Histories = " + historyList.size() + " Futures = "
+                        + futureList.size())));
+    }
+
+    @Subscribe
+    public void handleTaskManagerStorageDirectoryChangedEvent(TaskManagerStorageDirectoryChangedEvent event) {
+        historyList = new ArrayList<ReadOnlyTaskManager>();
+        futureList = new ArrayList<ReadOnlyTaskManager>();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                ("Storage file location changed, resetting history. Histories = " + historyList.size() + " Futures = "
+                        + futureList.size())));
     }
 
     private ReadOnlyTaskManager getMostRecentHistory() {
