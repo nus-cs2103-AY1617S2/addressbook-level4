@@ -93,7 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String undoTaskbossInput() throws IllegalValueException {
         undoInput = undoInputList.pop();
-        
+
         return undoInput;
     }
 
