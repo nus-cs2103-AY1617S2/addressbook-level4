@@ -46,6 +46,7 @@ public class CommandBox extends UiPart<Region> {
         resetKeyListener();
 
     }
+
     @FXML
     private void handleCommandInputChanged() {
         String command = commandTextField.getText();
@@ -53,6 +54,7 @@ public class CommandBox extends UiPart<Region> {
         handleCommands(command);
     }
 
+    //@@author A0143029M
     public void handleCommands(String command) {
         try {
             CommandResult commandResult = logic.execute(command);
