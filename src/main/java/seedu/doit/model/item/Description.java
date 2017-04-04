@@ -50,9 +50,4 @@ public class Description {
             && this.value.equals(((Description) other).value)); // state check
     }
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
 }

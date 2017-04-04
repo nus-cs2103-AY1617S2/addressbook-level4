@@ -13,8 +13,7 @@ public class DescriptionTest {
         // valid tasks
         assertTrue(Description.isValidDescription("")); // empty string
         assertTrue(Description.isValidDescription(" ")); // spaces only
-        assertTrue(Description.isValidDescription("Task is extremely hard" +
-            ""));
+        assertTrue(Description.isValidDescription("Task is extremely hard" + ""));
         assertTrue(Description.isValidDescription("-")); // one character
         assertTrue(Description.isValidDescription("Task is very easy"));
     }
