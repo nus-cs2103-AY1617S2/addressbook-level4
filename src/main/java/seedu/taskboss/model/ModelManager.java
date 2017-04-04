@@ -39,7 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final Stack<ReadOnlyTaskBoss> taskbossHistory;
     private final Stack<ReadOnlyTaskBoss> taskbossUndoHistory;
     private SortBy currentSortType;
-    
+
     private String undoInput = null;
 
     /**
