@@ -12,9 +12,23 @@ import org.atteo.evo.inflector.English;
  */
 public class StringUtil {
 
-    public static final String EMPTY_COMPONENT = "";
+    public static final String EMPTY_STRING = "";
+    public static final String NEW_LINE = "\n";
+    public static final String FORWARD_SLASH = "/";
     public static final String WHITE_SPACE = "\\s+";
-    public static final String JOINER = " ";
+    public static final String SINGLE_SPACE = " ";
+    public static final String QUOTE_DELIMITER = "\", \"";
+    public static final String COMMA_DELIMITER = ", ";
+
+    public static final String WORD_TASK = "task";
+    public static final String WORD_TAG = "tag";
+    public static final String WORD_CHANGE = "change";
+    public static final String WORD_WAS = "was";
+    public static final String WORD_WERE = "were";
+
+    public static String capitalize(String word) {
+        return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+    }
 
     //@@author A0127545A
     /**
@@ -63,7 +77,7 @@ public class StringUtil {
         assert t != null;
         StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
-        return t.getMessage() + "\n" + sw.toString();
+        return t.getMessage() + NEW_LINE + sw.toString();
     }
 
     /**
@@ -87,24 +101,24 @@ public class StringUtil {
      * @return noun with count
      */
     public static String nounWithCount(String noun, int count) {
-        return count + " " + English.plural(noun, count);
+        return count + StringUtil.SINGLE_SPACE + English.plural(noun, count);
     }
 
     //@@author A0162011A
     /**
      * Returns an array containing each word in the string.
-     * @param string
+     * @param keywords
      */
     public static String[] convertToArray(String keywords) {
         if (keywords == null || keywords.trim().isEmpty()) {
-            return new String[] { EMPTY_COMPONENT };
+            return new String[] { EMPTY_STRING };
         }
 
         String trimmedKeywords = keywords.trim();
         String[] keywordList = trimmedKeywords.split(WHITE_SPACE);
         ArrayList<String> replacementList = new ArrayList<>();
         for (String keyword : keywordList) {
-            if (!keyword.equals(EMPTY_COMPONENT)) {
+            if (!keyword.equals(EMPTY_STRING)) {
                 replacementList.add(keyword);
             }
         }
@@ -124,8 +138,8 @@ public class StringUtil {
 
         ArrayList<String> words = new ArrayList(Arrays.asList(s.split(WHITE_SPACE)));
 
-        if (getLastComponent(s).equals(EMPTY_COMPONENT)) {
-            words.add(EMPTY_COMPONENT);
+        if (getLastComponent(s).equals(EMPTY_STRING)) {
+            words.add(EMPTY_STRING);
         }
 
         if (words.isEmpty()) {
@@ -133,7 +147,7 @@ public class StringUtil {
         }
 
         words.set(words.size() - 1, replacement);
-        return String.join(JOINER, words);
+        return String.join(SINGLE_SPACE, words);
     }
 
     /**
@@ -154,7 +168,7 @@ public class StringUtil {
         }
 
         words[0] = replacement;
-        return String.join(JOINER, words);
+        return String.join(SINGLE_SPACE, words);
     }
 
     /**
@@ -176,10 +190,10 @@ public class StringUtil {
      */
     public static String getLastComponent(String s) {
         assert s != null;
-        assert !s.equals(EMPTY_COMPONENT);
+        assert !s.equals(EMPTY_STRING);
 
         if (s.substring(s.length() - 1).matches(WHITE_SPACE)) {
-            return EMPTY_COMPONENT;
+            return EMPTY_STRING;
         }
         return getLastWord(s);
     }

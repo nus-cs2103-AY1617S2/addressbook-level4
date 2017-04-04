@@ -99,8 +99,8 @@ public class FileUtil {
      */
     public static String getPath(String pathWithForwardSlash) {
         assert pathWithForwardSlash != null;
-        assert pathWithForwardSlash.contains("/");
-        return pathWithForwardSlash.replace("/", File.separator);
+        assert pathWithForwardSlash.contains(StringUtil.FORWARD_SLASH);
+        return pathWithForwardSlash.replace(StringUtil.FORWARD_SLASH, File.separator);
     }
 
     /**
@@ -109,7 +109,7 @@ public class FileUtil {
      * @return a new File
      */
     public static File getFile(String path) {
-        String normalizedPath = path.replace("/", File.separator);
+        String normalizedPath = path.replace(StringUtil.FORWARD_SLASH, File.separator);
         return new File(normalizedPath);
     }
 

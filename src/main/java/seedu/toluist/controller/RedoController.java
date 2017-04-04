@@ -22,6 +22,7 @@ public class RedoController extends Controller {
     private static final String COMMAND_WORD = "redo";
     private static final String PARAMETER_REDO_TIMES = "number";
     private static final String RESULT_MESSAGE_TEMPLATE = "Your last undone %s %s re-applied.";
+    private static final int SINGLE_REDO = 1;
 
     //@@author A0162011A
     private static final String HELP_DETAILS = "Redo previously undone commands by the user.";
@@ -42,7 +43,7 @@ public class RedoController extends Controller {
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
         String redoTimesToken = tokens.get(PARAMETER_REDO_TIMES);
-        int redoTimes = redoTimesToken != null ? Integer.parseInt(redoTimesToken) : 1;
+        int redoTimes = redoTimesToken != null ? Integer.parseInt(redoTimesToken) : SINGLE_REDO;
         redo(redoTimes);
     }
 
@@ -53,10 +54,9 @@ public class RedoController extends Controller {
         int actualRedoTimes = redoResult.getValue();
 
         uiStore.setTasks(todoList.getTasks());
-
         uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
-                StringUtil.nounWithCount("change", actualRedoTimes),
-                actualRedoTimes == 1 ? "was" : "were")));
+                StringUtil.nounWithCount(StringUtil.WORD_CHANGE, actualRedoTimes),
+                actualRedoTimes == SINGLE_REDO ? StringUtil.WORD_WAS : StringUtil.WORD_WERE)));
     }
 
     public Map<String, String> tokenize(String command) {
@@ -78,7 +78,8 @@ public class RedoController extends Controller {
 
     //@@author A0162011A
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

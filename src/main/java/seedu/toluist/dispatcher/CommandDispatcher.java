@@ -107,7 +107,7 @@ public class CommandDispatcher extends Dispatcher {
         SortedSet<String> suggestions = new TreeSet<>();
         String[] words = command.trim().split(StringUtil.WHITE_SPACE);
 
-        if (command.substring(command.length() - 1).equals(" ") || words.length > 1) {
+        if (command.substring(command.length() - 1).equals(StringUtil.SINGLE_SPACE) || words.length > 1) {
             return suggestions;
         }
         String firstWordOfCommand = words[0];

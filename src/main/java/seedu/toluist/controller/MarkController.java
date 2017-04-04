@@ -15,6 +15,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.CollectionUtil;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
@@ -88,12 +89,12 @@ public class MarkController extends Controller {
                 task.setCompleted(isCompleted);
             }
         }
-        String indexString = CollectionUtil.toString(", ", taskIndexes);
+        String indexString = CollectionUtil.getStringRepresentation(StringUtil.COMMA_DELIMITER, taskIndexes);
         String messageTemplate = isCompleted
                 ? RESULT_MESSAGE_COMPLETED_SUCCESS
                 : RESULT_MESSAGE_INCOMPLETE_SUCCESS;
         return new CommandResult(String.format(messageTemplate,
-                English.plural("Task", taskIndexes.size()), indexString));
+                English.plural(StringUtil.capitalize(StringUtil.WORD_TASK), taskIndexes.size()), indexString));
     }
 
     public Map<String, String> tokenize(String command) {
@@ -131,7 +132,8 @@ public class MarkController extends Controller {
 
     //@@author A0162011A
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

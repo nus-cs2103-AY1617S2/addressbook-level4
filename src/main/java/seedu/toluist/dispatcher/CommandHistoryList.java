@@ -3,14 +3,16 @@ package seedu.toluist.dispatcher;
 
 import java.util.ArrayList;
 
+import seedu.toluist.commons.util.StringUtil;
+
 public class CommandHistoryList {
     private ArrayList<String> commandHistory;
     private int historyPointer = 0;
     private String currentCommand;
 
     public CommandHistoryList() {
-        commandHistory = new ArrayList<String>();
-        currentCommand = "";
+        commandHistory = new ArrayList();
+        currentCommand = StringUtil.EMPTY_STRING;
     }
 
     public ArrayList<String> getCommandHistory() {

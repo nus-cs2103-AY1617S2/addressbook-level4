@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -84,7 +85,8 @@ public class AliasController extends Controller {
 
     //@@author A0162011A
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

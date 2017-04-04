@@ -29,7 +29,7 @@ public class DateTimeFormatterUtil {
     public static final String FORMAT_DATE = "E, dd MMM yyy";
     public static final String FORMAT_TIME = "hh:mm a";
     public static final String DATE_TIME_SEPARATOR = ", ";
-    public static final String RECURRING_DATE_SEPARATOR = " ";
+    public static final String RECURRING_DATE_SEPARATOR = StringUtil.SINGLE_SPACE;
     public static final String SUFFIX_FIRST = "st";
     public static final String SUFFIX_SECOND = "nd";
     public static final String SUFFIX_THIRD = "rd";
@@ -64,25 +64,26 @@ public class DateTimeFormatterUtil {
      */
     public static String formatRecurringFloatingTask(LocalDateTime recurringEndDateTime,
             RecurringFrequency recurringFrequency) {
-        String formattedResult = "";
+        String formattedResult = StringUtil.EMPTY_STRING;
         switch (recurringFrequency) {
         case DAILY:
-            formattedResult += String.join(" ", EVERY, DAY);
+            formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, DAY);
             break;
         case WEEKLY:
-            formattedResult += String.join(" ", EVERY, WEEK);
+            formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, WEEK);
             break;
         case MONTHLY:
-            formattedResult += String.join(" ", EVERY, MONTH);
+            formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, MONTH);
             break;
         case YEARLY:
-            formattedResult += String.join(" ", EVERY, YEAR);
+            formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, YEAR);
             break;
         default:
             // won't happen
         }
         if (recurringEndDateTime != null) {
-            formattedResult += RECURRING_DATE_SEPARATOR + String.join(" ", UNTIL, formatDate(recurringEndDateTime));
+            formattedResult += RECURRING_DATE_SEPARATOR
+                    + String.join(StringUtil.SINGLE_SPACE, UNTIL, formatDate(recurringEndDateTime));
         }
         return formattedResult;
     }
@@ -92,25 +93,26 @@ public class DateTimeFormatterUtil {
      */
     public static String formatRecurringTaskDeadline(LocalDateTime deadline, LocalDateTime recurringEndDateTime,
             RecurringFrequency recurringFrequency) {
-        String formattedResult = "";
+        String formattedResult = StringUtil.EMPTY_STRING;
         switch (recurringFrequency) {
         case DAILY:
-            formattedResult += String.join(" ", EVERY, formatTime(deadline), OF_THE, DAY);
+            formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatTime(deadline), OF_THE, DAY);
             break;
         case WEEKLY:
-            formattedResult += String.join(" ", EVERY, formatDayOfWeek(deadline), OF_THE, WEEK);
+            formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatDayOfWeek(deadline), OF_THE, WEEK);
             break;
         case MONTHLY:
-            formattedResult += String.join(" ", EVERY, formatDayOfMonth(deadline), OF_THE, MONTH);
+            formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatDayOfMonth(deadline), OF_THE, MONTH);
             break;
         case YEARLY:
-            formattedResult += String.join(" ", EVERY, formatDateOfYear(deadline), OF_THE, YEAR);
+            formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatDateOfYear(deadline), OF_THE, YEAR);
             break;
         default:
             // won't happen
         }
         if (recurringEndDateTime != null) {
-            formattedResult += RECURRING_DATE_SEPARATOR + String.join(" ", UNTIL, formatDate(recurringEndDateTime));
+            formattedResult += RECURRING_DATE_SEPARATOR
+                    + String.join(StringUtil.SINGLE_SPACE, UNTIL, formatDate(recurringEndDateTime));
         }
         return formattedResult;
     }
@@ -118,38 +120,42 @@ public class DateTimeFormatterUtil {
     /**
      * Format recurring event
      */
-    public static String formatRecurringEvent(LocalDateTime from, LocalDateTime to, LocalDateTime recurringEndDateTime,
-            RecurringFrequency recurringFrequency) {
-        String formattedResult = "";
+    public static String formatRecurringEvent(LocalDateTime from, LocalDateTime to,
+            LocalDateTime recurringEndDateTime, RecurringFrequency recurringFrequency) {
+        String formattedResult = StringUtil.EMPTY_STRING;
         switch (recurringFrequency) {
         case DAILY:
             if (formatTime(from).equals(formatTime(to))) {
-                formattedResult += String.join(" ", EVERY, formatTime(from), OF_THE, DAY);
+                formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatTime(from), OF_THE, DAY);
             } else {
-                formattedResult += String.join(" ", EVERY, formatTime(from), TO, formatTime(to), OF_THE, DAY);
+                formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY,
+                        formatTime(from), TO, formatTime(to), OF_THE, DAY);
             }
             break;
         case WEEKLY:
             if (formatDayOfWeek(from).equals(formatDayOfWeek(to))) {
-                formattedResult += String.join(" ", EVERY, formatDayOfWeek(from), OF_THE, WEEK);
+                formattedResult +=
+                        String.join(StringUtil.SINGLE_SPACE, EVERY, formatDayOfWeek(from), OF_THE, WEEK);
             } else {
-                formattedResult += String.join(" ", EVERY, formatDayOfWeek(from),
+                formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatDayOfWeek(from),
                                                        TO, formatDayOfWeek(to), OF_THE, WEEK);
             }
             break;
         case MONTHLY:
             if (formatDayOfMonth(from).equals(formatDayOfMonth(to))) {
-                formattedResult += String.join(" ", EVERY, formatDayOfMonth(from), OF_THE, MONTH);
+                formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatDayOfMonth(from),
+                        OF_THE, MONTH);
             } else {
-                formattedResult += String.join(" ", EVERY, formatDayOfMonth(from),
+                formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatDayOfMonth(from),
                                                        TO, formatDayOfMonth(to), OF_THE, MONTH);
             }
             break;
         case YEARLY:
             if (formatDateOfYear(from).equals(formatDateOfYear(to))) {
-                formattedResult += String.join(" ", EVERY, formatDateOfYear(from), OF_THE, YEAR);
+                formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatDateOfYear(from),
+                        OF_THE, YEAR);
             } else {
-                formattedResult += String.join(" ", EVERY, formatDateOfYear(from),
+                formattedResult += String.join(StringUtil.SINGLE_SPACE, EVERY, formatDateOfYear(from),
                                                        TO, formatDateOfYear(to), OF_THE, YEAR);
             }
             break;
@@ -157,7 +163,8 @@ public class DateTimeFormatterUtil {
             // won't happen
         }
         if (recurringEndDateTime != null) {
-            formattedResult += RECURRING_DATE_SEPARATOR + String.join(" ", UNTIL, formatDate(recurringEndDateTime));
+            formattedResult += RECURRING_DATE_SEPARATOR + String.join(StringUtil.SINGLE_SPACE, UNTIL,
+                    formatDate(recurringEndDateTime));
         }
         return formattedResult;
     }
@@ -178,7 +185,7 @@ public class DateTimeFormatterUtil {
         String formattedDay = formatDayOfMonth(dateTime);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMAT_MONTH_OF_YEAR);
         String formattedMonth = dateTime.format(formatter);
-        return String.join(" ", formattedDay, formattedMonth);
+        return String.join(StringUtil.SINGLE_SPACE, formattedDay, formattedMonth);
     }
 
     public static String formatDate(LocalDateTime dateTime) {

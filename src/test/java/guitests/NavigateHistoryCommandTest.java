@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -33,7 +34,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
     public void viewNextAfterACommand() {
         commandBox.runCommand(command1);
         mainGui.press(KeyCode.DOWN);
-        assertEquals(uiStore.getCommandInputProperty().getValue(), "");
+        assertEquals(uiStore.getCommandInputProperty().getValue(), StringUtil.EMPTY_STRING);
     }
 
     @Test

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandHistoryList;
 
 /**
@@ -45,7 +46,7 @@ public class NavigateHistoryController extends Controller {
     public Map<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
-        command = command.replace(COMMAND_WORD, "").trim();
+        command = command.replace(COMMAND_WORD, StringUtil.EMPTY_STRING).trim();
         tokens.put(PARAMETER_DIRECTION, command);
 
         return tokens;

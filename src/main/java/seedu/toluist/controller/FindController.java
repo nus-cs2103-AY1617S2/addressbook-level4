@@ -26,11 +26,11 @@ public class FindController extends Controller {
 
     private static final String PARAMETER_TAG = "/tag";
     private static final String PARAMETER_NAME = "/name";
-    private static final String PARAMETER_NULL = "";
+    private static final String PARAMETER_NULL = StringUtil.EMPTY_STRING;
     public static final String PARAMETER_KEYWORDS = "keywords";
 
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
-    private static final String COMMAND_SPLITTER_REGEX = " ";
+    private static final String COMMAND_SPLITTER_REGEX = StringUtil.SINGLE_SPACE;
     private static final int SECTION_PARAMETER = 1;
 
     private static final String MESSAGE_RESULT_TEMPLATE_FIND = "Searching for \"%s\" by %s.\n%s found";
@@ -138,7 +138,8 @@ public class FindController extends Controller {
     }
 
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

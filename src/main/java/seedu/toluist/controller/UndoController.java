@@ -22,6 +22,7 @@ public class UndoController extends Controller {
     private static final String COMMAND_WORD = "undo";
     private static final String PARAMETER_UNDO_TIMES = "number";
     private static final String RESULT_MESSAGE_TEMPLATE = "Your last %s to the data %s undone.";
+    private static final int SINGLE_UNDO = 1;
 
     //@@author A0162011A
     private static final String HELP_DETAILS = "Undoes previous commands by the user.";
@@ -41,7 +42,7 @@ public class UndoController extends Controller {
         logger.info(getClass() + "will handle command");
 
         String undoTimesToken = tokens.get(PARAMETER_UNDO_TIMES);
-        int undoTimes = undoTimesToken != null ? Integer.parseInt(undoTimesToken) : 1;
+        int undoTimes = undoTimesToken != null ? Integer.parseInt(undoTimesToken) : SINGLE_UNDO;
 
         undo(undoTimes);
     }
@@ -55,8 +56,8 @@ public class UndoController extends Controller {
         uiStore.setTasks(todoList.getTasks());
 
         uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
-                StringUtil.nounWithCount ("change", actualUndoTimes),
-                actualUndoTimes == 1 ? "was" : "were")));
+                StringUtil.nounWithCount (StringUtil.WORD_CHANGE, actualUndoTimes),
+                actualUndoTimes == SINGLE_UNDO ? StringUtil.WORD_WAS : StringUtil.WORD_WERE)));
     }
 
     public Map<String, String> tokenize(String command) {
@@ -78,7 +79,8 @@ public class UndoController extends Controller {
 
     //@@author A0162011A
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

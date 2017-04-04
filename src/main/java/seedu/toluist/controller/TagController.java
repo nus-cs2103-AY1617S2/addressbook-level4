@@ -27,7 +27,7 @@ public class TagController extends Controller {
     private static final String PARAMETER_KEYWORDS = "keywords";
 
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
-    private static final String COMMAND_SPLITTER_REGEX = " ";
+    private static final String COMMAND_SPLITTER_REGEX = StringUtil.SINGLE_SPACE;
     private static final int SECTION_INDEX = 0;
     private static final int SECTION_KEYWORDS = 1;
 
@@ -77,9 +77,9 @@ public class TagController extends Controller {
     }
 
     private CommandResult formatDisplay(String[] successfulList, String[] failedList, int successCount) {
-        String successWords = String.join("\", \"", successfulList);
-        String failWords = String.join("\", \"", failedList);
-        String resultMessage = "";
+        String successWords = String.join(StringUtil.QUOTE_DELIMITER, successfulList);
+        String failWords = String.join(StringUtil.QUOTE_DELIMITER, failedList);
+        String resultMessage = StringUtil.EMPTY_STRING;
 
         if (successfulList.length > 0) {
             resultMessage += String.format(MESSAGE_TEMPLATE_SUCCESS, successWords);
@@ -89,14 +89,14 @@ public class TagController extends Controller {
         }
 
         return new CommandResult(String.format(MESSAGE_TEMPLATE_RESULT, resultMessage,
-                StringUtil.nounWithCount("tag", successCount)));
+                StringUtil.nounWithCount(StringUtil.WORD_TAG, successCount)));
     }
 
     public Map<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
         String replacedCommand = Pattern.compile(COMMAND_TAG_WORD, Pattern.CASE_INSENSITIVE).matcher(command)
-                .replaceFirst("").trim();
+                .replaceFirst(StringUtil.EMPTY_STRING).trim();
         String[] listOfParameters = replacedCommand
                 .split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
         tokens.put(PARAMETER_INDEX, listOfParameters[SECTION_INDEX]);
@@ -115,7 +115,8 @@ public class TagController extends Controller {
     }
 
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

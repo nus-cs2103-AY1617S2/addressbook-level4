@@ -53,6 +53,10 @@ public class MainWindow extends UiPart<Region> {
     private static final String[] KEYCODES_NAVIGATEHISTORY = new String[] { "up", "down" };
     private static final String[] KEYCODES_SWITCH = new String[] { "i", "t", "n", "c", "a" };
 
+    private static final String APPLICATION_CLASS = "com.apple.eawt.Application";
+    private static final String METHOD_GET_APPLICATION = "getApplication";
+    private static final String METHOD_SET_DOCK_ICON = "setDockIconImage";
+
     private Stage primaryStage;
     private Dispatcher dispatcher;
 
@@ -214,10 +218,9 @@ public class MainWindow extends UiPart<Region> {
         return commandAutoCompletePlaceholder;
     }
 
-    private AnchorPane getHelpPlaceholder() {
-        return helpPlaceholder;
-    }
-
+    /**
+     * Set min size for window
+     */
     private void setWindowMinSize() {
         primaryStage.setMinHeight(MIN_HEIGHT);
         primaryStage.setMinWidth(MIN_WIDTH);
@@ -231,15 +234,15 @@ public class MainWindow extends UiPart<Region> {
         // Only in macOS, you can try to use reflection to access this library
         // and use it to set a custom app icon
         try {
-            Class applicationClass = Class.forName("com.apple.eawt.Application");
-            Method getApplication = applicationClass.getMethod("getApplication");
+            Class applicationClass = Class.forName(APPLICATION_CLASS);
+            Method getApplication = applicationClass.getMethod(METHOD_GET_APPLICATION);
             Object application = getApplication.invoke(applicationClass);
-            Method setDockIconImage = applicationClass.getMethod("setDockIconImage", java.awt.Image.class);
+            Method setDockIconImage = applicationClass.getMethod(METHOD_SET_DOCK_ICON, java.awt.Image.class);
             setDockIconImage.invoke(application,
                     new ImageIcon(MainWindow.class.getResource(IMAGE_PATH_LOGO)).getImage());
         } catch (NoSuchMethodException | IllegalAccessException
                 | InvocationTargetException | ClassNotFoundException e) {
-            logger.info("Not on macOS");
+            logger.info(e.getMessage());
         }
     }
 
@@ -290,14 +293,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /** ================ ACTION HANDLERS ================== **/
-
-    @FXML
-    public void handleHelp() {
-    }
-
-    @FXML
-    public void handleMenu() {
-    }
 
     /**
      * Closes the application.

@@ -85,7 +85,7 @@ public class AliasTable {
      * @return converted command
      */
     public String dealias(String command) {
-        String[] wordsInCommand = command.split("\\s+");
+        String[] wordsInCommand = command.split(StringUtil.WHITE_SPACE);
         if (wordsInCommand.length == 0) {
             return command;
         }

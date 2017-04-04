@@ -18,6 +18,7 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE_PATH = "data/config.json";
     public static final String DEFAULT_TODO_LIST_FILE_PATH = "data/todolist.json";
     public static final String APP_NAME = "ToLuist App";
+    public static final String LOG_MESSAGE_SAVE_CONFIG_FAILURE = "Saving config failed";
 
     private static Config instance;
     private static String configFilePath = DEFAULT_CONFIG_FILE_PATH;
@@ -53,7 +54,7 @@ public class Config {
             JsonUtil.saveJsonFile(this, configFilePath);
             return true;
         } catch (IOException e) {
-            logger.severe("Saving config failed");
+            logger.severe(LOG_MESSAGE_SAVE_CONFIG_FAILURE);
             return false;
         }
     }

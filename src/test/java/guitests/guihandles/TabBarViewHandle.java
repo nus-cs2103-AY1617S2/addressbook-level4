@@ -11,6 +11,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import seedu.toluist.TestApp;
+import seedu.toluist.commons.util.StringUtil;
 
 /**
  * Provide a handle for TabBarView
@@ -32,6 +33,6 @@ public class TabBarViewHandle extends GuiHandle {
                    .map(hBox -> Arrays.asList(((HBox) hBox).getChildren().toArray()))
                    .flatMap(List::stream)
                    .map(label -> ((Label) label).getText())
-                   .collect(Collectors.joining(""));
+                   .collect(Collectors.joining(StringUtil.EMPTY_STRING));
     }
 }

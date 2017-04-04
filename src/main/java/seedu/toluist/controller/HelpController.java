@@ -99,7 +99,7 @@ public class HelpController extends Controller {
 
     private List<String> convertListListToListStringForGeneral(List<List<String>> generalHelp) {
         return generalHelp.stream().map(help -> {
-            String finalResult = "";
+            String finalResult = StringUtil.EMPTY_STRING;
             finalResult += STRING_COMMAND;
             finalResult += String.join(FORMAT_SPACING, help.get(INDEX_HELP_COMMAND));
             finalResult += STRING_FORMAT;
@@ -111,7 +111,7 @@ public class HelpController extends Controller {
     }
 
     private String convertListListToStringForDetailed(List<List<String>> detailedHelp) {
-        String finalResult = "";
+        String finalResult = StringUtil.EMPTY_STRING;
         finalResult += STRING_BASIC_INFO;
         finalResult += String.join(FORMAT_SPACING, detailedHelp.get(INDEX_HELP_BASIC));
         finalResult += STRING_COMMENTS;
@@ -149,7 +149,8 @@ public class HelpController extends Controller {
     }
 
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

@@ -27,7 +27,7 @@ public class UntagController extends Controller {
     private static final String PARAMETER_KEYWORDS = "keywords";
 
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
-    private static final String COMMAND_SPLITTER_REGEX = " ";
+    private static final String COMMAND_SPLITTER_REGEX = StringUtil.SINGLE_SPACE;
     private static final int SECTION_INDEX = 0;
     private static final int SECTION_KEYWORDS = 1;
 
@@ -55,8 +55,8 @@ public class UntagController extends Controller {
         int index = Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1;
         TodoList todoList = TodoList.getInstance();
         Task task = UiStore.getInstance().getShownTasks().get(index);
-        ArrayList<String> successfulList = new ArrayList<String>();
-        ArrayList<String> failedList = new ArrayList<String>();
+        ArrayList<String> successfulList = new ArrayList();
+        ArrayList<String> failedList = new ArrayList();
 
         for (String keyword : keywordList) {
             if (task.removeTag(new Tag(keyword))) {
@@ -79,14 +79,14 @@ public class UntagController extends Controller {
     //!!!!!same as FindController method
     private String[] convertToArray(String keywords) {
         if (keywords == null || keywords.trim().isEmpty()) {
-            return new String[] { "" };
+            return new String[] { StringUtil.EMPTY_STRING };
         }
 
         String trimmedKeywords = keywords.trim();
-        String[] keywordList = trimmedKeywords.split(" ");
+        String[] keywordList = trimmedKeywords.split(StringUtil.WHITE_SPACE);
         ArrayList<String> replacementList = new ArrayList<>();
         for (String keyword : keywordList) {
-            if (!keyword.equals("")) {
+            if (!keyword.equals(StringUtil.EMPTY_STRING)) {
                 replacementList.add(keyword);
             }
         }
@@ -94,9 +94,9 @@ public class UntagController extends Controller {
     }
 
     private CommandResult formatDisplay(String[] successfulList, String[] failedList, int successCount) {
-        String successWords = String.join("\", \"", successfulList);
-        String failWords = String.join("\", \"", failedList);
-        String resultMessage = "";
+        String successWords = String.join(StringUtil.QUOTE_DELIMITER, successfulList);
+        String failWords = String.join(StringUtil.QUOTE_DELIMITER, failedList);
+        String resultMessage = StringUtil.EMPTY_STRING;
 
         if (successfulList.length > 0) {
             resultMessage += String.format(MESSAGE_TEMPLATE_SUCCESS, successWords);
@@ -106,14 +106,14 @@ public class UntagController extends Controller {
         }
 
         return new CommandResult(String.format(MESSAGE_TEMPLATE_RESULT, resultMessage,
-                StringUtil.nounWithCount("tag", successCount)));
+                StringUtil.nounWithCount(StringUtil.WORD_TAG, successCount)));
     }
 
     public Map<String, String> tokenize(String command) {
-        HashMap<String, String> tokens = new HashMap<>();
+        HashMap<String, String> tokens = new HashMap();
 
         command = Pattern.compile(COMMAND_UNTAG_WORD, Pattern.CASE_INSENSITIVE).matcher(command)
-                .replaceFirst("").trim();
+                .replaceFirst(StringUtil.EMPTY_STRING).trim();
         String[] listOfParameters = command.split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
         tokens.put(PARAMETER_INDEX, listOfParameters[SECTION_INDEX]);
         tokens.put(PARAMETER_KEYWORDS, listOfParameters[SECTION_KEYWORDS]);
@@ -131,7 +131,8 @@ public class UntagController extends Controller {
     }
 
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

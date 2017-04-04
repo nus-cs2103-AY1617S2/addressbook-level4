@@ -46,18 +46,19 @@ public class KeywordTokenizer {
             // Early termination, no description means there is nothing to tokenize.
             return tokens;
         }
-        String normalizedDescription = " " + description + " ";
+        String normalizedDescription = StringUtil.SINGLE_SPACE + description + StringUtil.SINGLE_SPACE;
         String normalizedDescriptionInLowerCase = normalizedDescription.toLowerCase();
 
         ArrayList<Pair<Integer, String>> indexKeywordPairs = new ArrayList<>();
-        String[] nonNullKeywords = keywords == null ? new String[] {} : keywords;
+        String[] nonNullKeywords = keywords == null ? new String[0] : keywords;
         if (defaultKeyword != null) {
             // Everything that is not matched (guaranteed to be at the left) will be tokenized to the default keyword
             indexKeywordPairs.add(new Pair<>(INDEX_START, defaultKeyword));
         }
 
         for (String keyword : nonNullKeywords) {
-            int index = normalizedDescriptionInLowerCase.lastIndexOf(" " + keyword + " ");
+            int index = normalizedDescriptionInLowerCase
+                    .lastIndexOf(StringUtil.SINGLE_SPACE + keyword + StringUtil.SINGLE_SPACE);
 
             if (index != INDEX_INVALID) {
                 // Index in indexKeywordPairs refers to the index behind the last character of the keyword.

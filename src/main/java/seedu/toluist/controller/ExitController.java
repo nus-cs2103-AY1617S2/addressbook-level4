@@ -6,6 +6,7 @@ import java.util.Map;
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
+import seedu.toluist.commons.util.StringUtil;
 
 /**
  * Handle exit command
@@ -34,7 +35,8 @@ public class ExitController extends Controller {
 
     //@@author A0162011A
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

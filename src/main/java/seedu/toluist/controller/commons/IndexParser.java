@@ -14,6 +14,7 @@ import seedu.toluist.commons.util.StringUtil;
  */
 public class IndexParser {
     private static final String HYPHEN = "-";
+    private static final String COMMA = ",";
 
     /**
      * Split a string of unprocessed indexes into a list.
@@ -22,10 +23,10 @@ public class IndexParser {
      */
     public static List<Integer> splitStringToIndexes(String indexToken, int maxIndex) {
         if (!StringUtil.isPresent(indexToken)) {
-            return new ArrayList<Integer>();
+            return new ArrayList();
         }
-        String[] splittedStringIndexes = indexToken.split(",");
-        Set<Integer> indexes = new TreeSet<Integer>();
+        String[] splittedStringIndexes = indexToken.split(COMMA);
+        Set<Integer> indexes = new TreeSet();
         for (String splittedStringIndex : splittedStringIndexes) {
             List<Integer> splittedIndexes = parseIndexes(splittedStringIndex, maxIndex);
             for (int splittedIndex : splittedIndexes) {
@@ -51,15 +52,16 @@ public class IndexParser {
     private static List<Integer> parseIndexes(String stringIndexes, int maxIndex) {
         // Prepare stringIndexes in the correct format to be processed
         // Correct format example: ["2", "-", "5", "7", "11", "-", "13", "15"]
-        String processedStringIndexes = stringIndexes.replaceAll(HYPHEN, " - ");
-        String[] splittedStringIndexes = processedStringIndexes.split(" ");
-        splittedStringIndexes = Arrays.
-                stream(splittedStringIndexes).
-                filter(s -> !s.isEmpty()).
-                toArray(String[]::new);
+        String processedStringIndexes = stringIndexes.replaceAll(HYPHEN,
+                StringUtil.SINGLE_SPACE + HYPHEN + StringUtil.SINGLE_SPACE);
+        String[] splittedStringIndexes = processedStringIndexes.split(StringUtil.WHITE_SPACE);
+        splittedStringIndexes = Arrays
+                .stream(splittedStringIndexes)
+                .filter(s -> !s.isEmpty())
+                .toArray(String[]::new);
 
         // Process formatted stringIndexes
-        List<Integer> indexes = new ArrayList<Integer>();
+        List<Integer> indexes = new ArrayList();
         int i = 0;
         while (i < splittedStringIndexes.length) {
             String splittedStringIndex = splittedStringIndexes[i];

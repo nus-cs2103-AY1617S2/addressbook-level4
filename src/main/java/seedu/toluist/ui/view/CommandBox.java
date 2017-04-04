@@ -55,11 +55,18 @@ public class CommandBox extends UiView {
             event -> handleCommandInputSelectSuggestedCommand());
     }
 
+    /**
+     * Dispatch the command text to the Dispatcher
+     */
     private void dispatchCommand() {
         dispatcher.dispatchRecordingHistory(commandTextField.getText());
-        UiStore.getInstance().setCommandInput("");
+        UiStore.getInstance().setCommandInput(StringUtil.EMPTY_STRING);
     }
 
+    /**
+     * Handler for command text change
+     * @param newCommand the new command text
+     */
     private void handleCommandInputChanged(String newCommand) {
         List<String> suggestedCommands = new ArrayList(dispatcher.getSuggestions(newCommand));
         UiStore uiStore = UiStore.getInstance();
@@ -68,6 +75,9 @@ public class CommandBox extends UiView {
         FxViewUtil.removeStyleClass(commandTextField, STYLE_CLASS_ERROR);
     }
 
+    /**
+     * Handle command auto complete on TAB
+     */
     private void handleCommandInputAutoComplete() {
         UiStore store = UiStore.getInstance();
         store.incrementSuggestedCommandIndex();
@@ -100,6 +110,10 @@ public class CommandBox extends UiView {
         setCommandTextField(StringUtil.replaceLastComponent(commandText, suggestedCommands.get(index)));
     }
 
+    /**
+     * Set command text to text field. Also move the caret to the end
+     * @param command command string
+     */
     private void setCommandTextField(String command) {
         commandTextField.setText(command);
         commandTextField.end();

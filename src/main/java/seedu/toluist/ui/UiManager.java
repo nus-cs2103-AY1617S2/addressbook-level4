@@ -3,8 +3,6 @@ package seedu.toluist.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -12,7 +10,6 @@ import javafx.stage.Stage;
 import seedu.toluist.commons.core.ComponentManager;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 
@@ -21,6 +18,8 @@ import seedu.toluist.dispatcher.Dispatcher;
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
+    private static final String BOOTSTRAP_COMMAND = "list";
+    private static final String STYLESHEET_PATH = "stylesheet/DefaultTheme.css";
     private static UiManager instance;
 
     private MainWindow mainWindow;
@@ -48,8 +47,7 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow.render();
             mainWindow.show();
             // Initial dispatch call
-            String listCommand = "list";
-            dispatcher.dispatch(listCommand);
+            dispatcher.dispatch(BOOTSTRAP_COMMAND);
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -75,7 +73,7 @@ public class UiManager extends ComponentManager implements Ui {
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
         final Alert alert = new Alert(type);
-        alert.getDialogPane().getStylesheets().add("stylesheet/DefaultTheme.css");
+        alert.getDialogPane().getStylesheets().add(STYLESHEET_PATH);
         alert.initOwner(owner);
         alert.setTitle(title);
         alert.setHeaderText(headerText);
@@ -84,17 +82,9 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     private void showFatalErrorDialogAndShutdown(String title, Throwable e) {
-        logger.severe(title + " " + e.getMessage() + StringUtil.getDetails(e));
+        logger.severe(title + StringUtil.SINGLE_SPACE + e.getMessage() + StringUtil.getDetails(e));
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
-    }
-
-    //==================== Event Handling Code ===============================================================
-
-    @Subscribe
-    private void handleShowHelpEvent(ShowHelpRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-//        mainWindow.handleHelp();
     }
 }

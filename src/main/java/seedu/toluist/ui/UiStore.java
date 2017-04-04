@@ -22,6 +22,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 import javafx.util.Pair;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.commons.CommandResult;
@@ -42,8 +43,8 @@ public class UiStore {
     private ObjectProperty<Pair<String, List<String>>> observableHelp =
             new SimpleObjectProperty<>(new Pair(null, new ArrayList()));
     private ObjectProperty<CommandResult> observableCommandResult =
-            new SimpleObjectProperty<>(new CommandResult(""));
-    private StringProperty commandInputProperty = new SimpleStringProperty("");
+            new SimpleObjectProperty<>(new CommandResult(StringUtil.EMPTY_STRING));
+    private StringProperty commandInputProperty = new SimpleStringProperty(StringUtil.EMPTY_STRING);
     private ObservableList<String> observableSuggestedCommands = FXCollections.observableArrayList();
     private SimpleIntegerProperty observableSuggestedCommandIndex =
             new SimpleIntegerProperty(INDEX_INVALID_SUGGESTION);

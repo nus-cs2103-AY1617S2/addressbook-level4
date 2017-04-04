@@ -64,7 +64,7 @@ public abstract class Controller {
         if (!StringUtil.isPresent(command)) {
             return new ArrayList<>();
         }
-        String commandWithoutCommandWord = StringUtil.replaceFirstWord(command, "");
+        String commandWithoutCommandWord = StringUtil.replaceFirstWord(command, StringUtil.EMPTY_STRING);
         return KeywordTokenizer.tokenizeInOrder(commandWithoutCommandWord, DEFAULT_DESCRIPTION_KEYWORD,
                 getCommandKeywordMap().keySet().toArray(new String[0]));
     }

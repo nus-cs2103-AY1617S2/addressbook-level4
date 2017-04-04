@@ -8,6 +8,7 @@ import java.util.TreeSet;
 
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -18,7 +19,6 @@ public class ViewAliasController extends Controller {
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*viewalias\\s*";
     private static final String COMMAND_WORD = "viewalias";
     private static final String COMMAND_SEPARATOR_ALIAS = ":";
-    private static final String NEW_LINE = "\n";
     public static final String RESULT_MESSAGE_NO_ALIAS = "No aliases found";
 
     //@@author A0131125Y
@@ -56,13 +56,14 @@ public class ViewAliasController extends Controller {
             lines.add(line);
         }
 
-        String result = String.join(NEW_LINE, lines);
+        String result = String.join(StringUtil.NEW_LINE, lines);
         return result.isEmpty() ? RESULT_MESSAGE_NO_ALIAS : result;
     }
 
     //@@author A0162011A
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {

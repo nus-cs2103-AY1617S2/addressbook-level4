@@ -64,7 +64,7 @@ public class CollectionUtil {
     /**
      * Convert items to string, using each item's default toString method
      */
-    public static <T> String toString(String delimiter, Collection<T> items) {
+    public static <T> String getStringRepresentation(String delimiter, Collection<T> items) {
         List<String> itemStringList = items.stream().map(T::toString).collect(Collectors.toList());
         return String.join(delimiter, itemStringList);
     }

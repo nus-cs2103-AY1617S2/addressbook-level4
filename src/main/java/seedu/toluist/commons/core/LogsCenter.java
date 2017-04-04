@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import seedu.toluist.commons.events.BaseEvent;
+import seedu.toluist.commons.util.StringUtil;
 
 /**
  * Configures and manages loggers and handlers, including their logging level
@@ -56,7 +57,7 @@ public class LogsCenter {
      */
     public static <T> Logger getLogger(Class<T> clazz) {
         if (clazz == null) {
-            return Logger.getLogger("");
+            return Logger.getLogger(StringUtil.EMPTY_STRING);
         }
         return getLogger(clazz.getSimpleName());
     }
@@ -110,6 +111,6 @@ public class LogsCenter {
      * @see #getEventHandlingLogMessage(BaseEvent, String)
      */
     public static String getEventHandlingLogMessage(BaseEvent e) {
-        return getEventHandlingLogMessage(e, "");
+        return getEventHandlingLogMessage(e, StringUtil.EMPTY_STRING);
     }
 }

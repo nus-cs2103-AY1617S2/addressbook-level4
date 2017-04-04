@@ -13,6 +13,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.FileUtil;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -57,9 +58,9 @@ public class StoreController extends Controller {
     }
 
     private void save(String path) throws InvalidCommandException {
-        String message = "";
+        String message = StringUtil.EMPTY_STRING;
         if (FileUtil.isFileExists(new File(path))) {
-            message += String.format(RESULT_MESSAGE_WARNING_OVERWRITE, path) + "\n";
+            message += String.format(RESULT_MESSAGE_WARNING_OVERWRITE, path) + StringUtil.NEW_LINE;
         }
 
         if (TodoList.getInstance().getStorage().move(path)) {
@@ -102,7 +103,8 @@ public class StoreController extends Controller {
 
     //@@author A0162011A
     public String[] getBasicHelp() {
-        return new String[] { String.join("/", getCommandWords()), HELP_FORMAT, HELP_DETAILS };
+        return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,
+            HELP_DETAILS };
     }
 
     public String[][] getDetailedHelp() {
