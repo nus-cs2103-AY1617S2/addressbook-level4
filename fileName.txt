@@ -1,1 +1,1 @@
-newPath.xml
+c:/te:t.xml

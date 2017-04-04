@@ -16,4 +16,8 @@
         <taskDescription>Description2</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
+    <tasks>
+        <taskName>task</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
 </taskmanager>
