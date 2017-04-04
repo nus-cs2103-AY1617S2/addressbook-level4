@@ -44,6 +44,7 @@ public abstract class Command {
         this.model = model;
     }
 
+    // @@author A0146738U-reused
     /**
      * Raises an event to indicate an attempt to execute an incorrect command
      */
@@ -57,4 +58,5 @@ public abstract class Command {
     protected void indicateAttemptToExecuteFailedCommand() {
         EventsCenter.getInstance().post(new FailedCommandAttemptedEvent());
     }
+    // @@author
 }

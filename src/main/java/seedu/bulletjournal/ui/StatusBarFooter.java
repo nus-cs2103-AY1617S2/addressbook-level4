@@ -56,8 +56,10 @@ public class StatusBarFooter extends UiPart<Region> {
         setSyncStatus("Last Updated: " + lastUpdated);
     }
 
+    // @@author A0146738U-reused
     @Subscribe
     public void handleFilePathChangeEvent(FilePathChangedEvent fpce) {
         setSaveLocation(fpce.newFilePath);
     }
+    // @@author
 }
