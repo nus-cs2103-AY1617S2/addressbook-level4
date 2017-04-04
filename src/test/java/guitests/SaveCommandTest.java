@@ -15,31 +15,30 @@ public class SaveCommandTest extends TaskManagerGuiTest {
 
     private final String validLocation = "data/test.xml";
     private final String badLocation = "opus/.xml";
-    private final String inaccessibleLocation = "C:/windows/system32/opus/data.xml";
 
     @Test
-    public void save_validLocation_messageSuccess() {
+    public void saveValidLocationMessage() {
         //save to a valid directory
         commandBox.runCommand("save " + validLocation);
         assertResultMessage(String.format(SaveCommand.MESSAGE_SUCCESS, validLocation));
     }
 
     @Test
-    public void save_defaultLocation_messageSuccessDefaultLocation() {
+    public void saveDefaultLocationMessage() {
         //save to default directory
         commandBox.runCommand("save default");
         assertResultMessage(String.format(SaveCommand.MESSAGE_LOCATION_DEFAULT, Config.DEFAULT_SAVE_LOCATION));
     }
 
     @Test
-    public void save_invalidLocation_messageInvalidPath() {
+    public void saveInvalidLocationMessage() {
         //invalid Location
         commandBox.runCommand("save " + badLocation);
         assertResultMessage(SaveCommand.MESSAGE_PATH_WRONG_FORMAT);
     }
 
     @Test
-    public void save_fileExists_messageFileExists() throws IOException, FileDeletionException {
+    public void saveExistingFileMessage() throws IOException, FileDeletionException {
         //file exists
         FileUtil.createIfMissing(new File(validLocation));
         commandBox.runCommand("save " + validLocation);

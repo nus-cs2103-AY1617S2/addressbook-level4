@@ -46,18 +46,18 @@ public class FileUtil {
         return true;
     }
 
-    public static boolean doesFileExist(String filePath) {
+    public static boolean fileExists(String filePath) {
         File file = new File(filePath);
-        return doesFileExist(file);
+        return fileExists(file);
     }
     //@@author
 
-    public static boolean doesFileExist(File file) {
+    public static boolean fileExists(File file) {
         return file.exists() && file.isFile();
     }
 
     public static void createIfMissing(File file) throws IOException {
-        if (!doesFileExist(file)) {
+        if (!fileExists(file)) {
             createFile(file);
         }
     }

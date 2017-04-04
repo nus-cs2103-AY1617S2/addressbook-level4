@@ -43,11 +43,11 @@ public class SaveCommand extends Command {
             return new CommandResult(String.format(MESSAGE_LOCATION_DEFAULT, defaultLocation));
         }
 
-        if (doesFileExist()) {
+        if (fileExists()) {
             return new CommandResult(MESSAGE_FILE_EXISTS);
         }
 
-        if (!isPathCorrectFormat()) {
+        if (!isCorrectPathFormat()) {
             return new CommandResult(MESSAGE_PATH_WRONG_FORMAT);
         }
 
@@ -59,7 +59,7 @@ public class SaveCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, pathToFile));
     }
 
-    private boolean isPathCorrectFormat() {
+    private boolean isCorrectPathFormat() {
         return StringUtil.isValidPathToFile(pathToFile);
     }
 
@@ -67,8 +67,8 @@ public class SaveCommand extends Command {
         return FileUtil.isPathAvailable(pathToFile);
     }
 
-    private boolean doesFileExist() {
-        return FileUtil.doesFileExist(pathToFile);
+    private boolean fileExists() {
+        return FileUtil.fileExists(pathToFile);
     }
 
     public static String getName() {
