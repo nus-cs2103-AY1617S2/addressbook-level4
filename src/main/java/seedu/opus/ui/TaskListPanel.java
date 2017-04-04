@@ -28,7 +28,11 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, boolean showIndex, String emptyTasksMessage) {
+    public TaskListPanel(
+            AnchorPane taskListPlaceholder,
+            ObservableList<ReadOnlyTask> taskList,
+            boolean showIndex,
+            String emptyTasksMessage) {
         super(FXML);
         this.showIndex = showIndex;
 
