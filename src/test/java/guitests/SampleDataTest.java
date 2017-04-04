@@ -1,5 +1,7 @@
 package guitests;
 
+import static org.junit.Assert.assertTrue;
+
 //import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -25,6 +27,6 @@ public class SampleDataTest extends WhatsLeftGuiTest {
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
         Event[] expectedList = SampleDataUtil.getSampleEvents();
-        //assertTrue(activityListPanel.isListMatching(expectedList));
+        assertTrue(eventListPanel.isListMatching(expectedList));
     }
 }
