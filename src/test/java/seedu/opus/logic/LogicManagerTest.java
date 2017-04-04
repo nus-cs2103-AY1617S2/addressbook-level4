@@ -648,7 +648,8 @@ public class LogicManagerTest {
 
     @Test
     public void executeSyncCommandWithValidOffArgumentSuccess() {
-        assertCommandSuccess("sync off", SyncCommand.MESSAGE_SYNC_OFF_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("sync off", SyncCommand.MESSAGE_SYNC_OFF_SUCCESS,
+                             new TaskManager(), Collections.emptyList());
     }
 
     public void executeSyncCommandWithInvalidArgumentException() {
