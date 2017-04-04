@@ -686,11 +686,13 @@ public class LogicManagerTest {
         assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
     }
 
+    /*
     @Test
     public void executeSyncCommandWithValidOnArgumentSuccess() {
         assertCommandSuccess("sync on", SyncCommand.MESSAGE_SYNC_ON_SUCCESS,
                              new TaskManager(), Collections.emptyList());
     }
+    */
 
 
     @Test
