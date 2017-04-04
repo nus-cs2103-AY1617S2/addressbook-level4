@@ -74,7 +74,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         /* try {
             taskToDone.setRecur(new Recur(""));
         } catch (IllegalValueException e) {
-            
+
         }
         ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
         tasksToDone.add(taskToDone); // old date
@@ -91,13 +91,13 @@ public class DoneCommandTest extends EzDoGuiTest {
             try {
                 taskToDone.setRecur(new Recur(""));
             } catch (IllegalValueException e) {
-                
+   
             }
             ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
             tasksToDone.add(taskToDone); // old date
             currentList = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
             doneList = TestUtil.addTasksToList(doneList, taskToDone);
-            
+
             // confirm the task list no longer has the done task
             assertTrue(taskListPanel.isListMatching(currentList));
 

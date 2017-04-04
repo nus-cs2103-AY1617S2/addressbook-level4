@@ -40,14 +40,14 @@ public class RecurTest {
         Recur testRecur = new Recur("daily");
         assertEquals(testRecur.toString(), "daily");
     }
-    
+
     @Test
     public void testEquals() throws Exception {
         Recur testRecur = new Recur("daily");
         Recur testRecur2 = testRecur;
         assertTrue(testRecur.equals(testRecur2));
     }
-    
+
     @Test
     public void hashCode_equals() throws Exception {
         Recur testRecur = new Recur("daily");
