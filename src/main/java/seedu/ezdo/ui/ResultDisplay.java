@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.ezdo.commons.core.LogsCenter;
@@ -24,6 +25,9 @@ public class ResultDisplay extends UiPart<Region> {
 
     private final StringProperty displayed = new SimpleStringProperty("");
 
+    public static final String MESSAGE_RESULTDISPLAY_TOOLTIP =
+            "Description Box\nThe results of your command executions will be shown here.";
+
     @FXML
     private AnchorPane mainPane;
 
@@ -32,6 +36,7 @@ public class ResultDisplay extends UiPart<Region> {
 
     public ResultDisplay(AnchorPane placeHolder) {
         super(FXML);
+        resultDisplay.setTooltip(new Tooltip(MESSAGE_RESULTDISPLAY_TOOLTIP));
         resultDisplay.textProperty().bind(displayed);
         FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
