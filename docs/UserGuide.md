@@ -236,14 +236,26 @@ Examples:
 * **Add Task** : `add TASK` <br>
   e.g. `add Finish math homework`
 
-* **Add Event** : `add TODO s/STARTTIME e/ENDTIME` <br>
+* **Add Task With Tag** : `add TASK t/TAG` <br>
+  e.g. `add Finish math homework t/school`
+
+* **Add Task With Multiple Tags** : `add TASK t/TAG1 t/TAG2 t/TAG3 ...` <br>
+  e.g. `add Finish math homework t/school t/boring t/difficult`
+
+* **Add Event** : `add TODO s/STARTTIME e/ENDTIME t/TAG` <br>
   e.g. `add Take the dog for a walk s/6:00PM 11/11/17 e/7:00PM 11/11/17`
 
-* **Add Deadline** : `add TODO e/DEADLINE` <br>
+* **Add Deadline** : `add TODO e/DEADLINE t/TAG` <br>
   e.g. `add Finish programming project e/17-03-17T8:00`
 
-* **Edit** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME t/TAGS` <br>
+* **Edit Event** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME t/TAGS` <br>
   e.g. `edit 1 Take cat for a walk s/11:11am 11/11/11 e/12:12pm 11/11/11 t/cat`
+
+* **Edit Deadline** : `edit INDEX [TASK] e/ENDTIME t/TAGS` <br>
+  e.g. `edit 1 Take cat for a walk e/12:12pm 11/11/11 t/cat`
+
+* **Edit New Tags** : `edit INDEX ta/TAG1 ta/TAG2 ta/TAG3 ...` <br>
+  e.g. `edit 1 ta/cat ta/pet ta/cute`
 
 * **Clear** : `clear` <br>
   e.g. `clear`
