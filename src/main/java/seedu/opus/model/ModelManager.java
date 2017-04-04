@@ -1,8 +1,6 @@
 package seedu.opus.model;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -10,11 +8,9 @@ import seedu.opus.commons.core.ComponentManager;
 import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
-import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.commons.util.CollectionUtil;
-import seedu.opus.commons.util.StringUtil;
-import seedu.opus.model.tag.Tag;
+import seedu.opus.model.qualifier.Qualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
@@ -141,7 +137,8 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0148081H
     @Override
     public void sortList(String keyword) {
-        filteredTasks = new FilteredList<>(this.taskManager.getSortedList(keyword));
+        taskManager.sortTasks(keyword);
+        indicateTaskManagerChanged();
     }
     //@@author
 
@@ -155,103 +152,39 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
     }
 
+    //@@author A0126345J
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(
-                new NameQualifier(keywords), new NoteQualifier(keywords), new TagQualifier(keywords)
-                ));
+    public void updateFilteredTaskList(List<Qualifier> qualifiers) {
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    //========== Classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
     }
 
-    //@@author A0126345J
     private class PredicateExpression implements Expression {
 
         private final List<Qualifier> qualifiers;
 
-
-        PredicateExpression(Qualifier... qualifiers) {
-            this.qualifiers = Arrays.asList(qualifiers);
+        PredicateExpression(List<Qualifier> qualifiers) {
+            this.qualifiers = qualifiers;
         }
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            boolean result = false;
+            boolean result = true;
             for (Qualifier qualifier: qualifiers) {
-                result = result | qualifier.run(task);
+                result = result & qualifier.run(task);
             }
             return result;
         }
 
     }
-
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-    }
-
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
-
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-    }
-
-    private class NoteQualifier implements Qualifier {
-        private Set<String> noteKeyWords;
-
-        NoteQualifier(Set<String> noteKeyWords) {
-            this.noteKeyWords = noteKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            String note = task.getNote().isPresent() ? task.getNote().get().value : "";
-            return noteKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(note, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-    }
-
-    private class TagQualifier implements Qualifier {
-        private Set<String> tagKeyWords;
-
-        TagQualifier(Set<String> tagKeyWords) {
-            this.tagKeyWords = tagKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return tagKeyWords.stream()
-                    .filter(keyword -> {
-                        try {
-                            return task.getTags().contains(new Tag(keyword));
-                        } catch (IllegalValueException e) {
-                            e.printStackTrace();
-                        }
-                        return false;
-                    })
-                    .findAny()
-                    .isPresent();
-        }
-    }
+    //@@author
 }

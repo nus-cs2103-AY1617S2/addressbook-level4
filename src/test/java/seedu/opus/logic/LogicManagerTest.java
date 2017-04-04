@@ -537,6 +537,46 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    //@@author A0126345J
+    @Test
+    public void executeFindMatchesIfAllAttributesPresent() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task pTarget1 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
+        Task p2 = helper.generateTaskWithName("key key");
+        Task p3 = helper.generateTaskWithName("sduauo");
+
+        List<Task> fourTasks = helper.generateTaskList(p1, p2, pTarget1, p3);
+        TaskManager expectedTaskManager = helper.generateTaskManager(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget1);
+        helper.addToModel(model, fourTasks);
+
+        assertCommandSuccess("find rAnDoM b/12/20/2020 e/12/20/2020 p/hi s/incomplete",
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedTaskManager,
+                expectedList);
+    }
+
+    @Test
+    public void executeFindMatchesIfAnyAttributePresent() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task pTarget1 = helper.generateTaskWithStartTime("pTarget1", "12/12/2017");
+        Task p2 = helper.generateTaskWithName("key key");
+        Task p3 = helper.generateTaskWithName("sduauo");
+
+        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, p3);
+        TaskManager expectedTaskManager = helper.generateTaskManager(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget1);
+        helper.addToModel(model, fourTasks);
+
+        assertCommandSuccess("find b/12/20/2017",
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedTaskManager,
+                expectedList);
+    }
+    //@@author
+
     //@@author A0148087W
     @Test
     public void executeUndoResetToPreviousState() throws Exception {

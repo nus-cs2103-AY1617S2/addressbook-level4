@@ -148,6 +148,15 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
+    /**
+     * Sorts the tasks based on the given keyword.
+     *
+     * @param keyword to sort the tasks by
+     */
+    public void sortTasks(String keyword) {
+        tasks.sortList(keyword);
+    }
+
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
@@ -181,13 +190,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
-
-    //@@author A0148081H
-    @Override
-    public ObservableList<ReadOnlyTask> getSortedList(String keyword) {
-        return new UnmodifiableObservableList<>(tasks.asSortedList(keyword));
-    }
-    //@@author
 
     @Override
     public ObservableList<Tag> getTagList() {

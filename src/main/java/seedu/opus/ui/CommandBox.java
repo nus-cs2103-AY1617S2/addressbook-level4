@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
@@ -11,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.core.Trie;
 import seedu.opus.commons.events.ui.NewResultAvailableEvent;
@@ -78,6 +80,7 @@ public class CommandBox extends UiPart<Region> {
 
         } catch (CommandException e) {
             // handle command failure
+            setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             commandTextField.setText(EMPTY_STRING);
             raise(new NewResultAvailableEvent(e.getMessage()));
@@ -127,6 +130,20 @@ public class CommandBox extends UiPart<Region> {
     private void setStyleToIndicateCommandSuccess() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
+
+    //@@author A0124368A
+    /**
+     * Blinks the command box when command fails.
+     */
+    private void setStyleToIndicateCommandFailure() {
+        FadeTransition ft = new FadeTransition(Duration.millis(150), commandTextField);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.1);
+        ft.setAutoReverse(true);
+        ft.setCycleCount(4);
+        ft.play();
+    }
+    //@@author
 
     //@@author A0148087W
     private void setCommandLineInput(String input) {
