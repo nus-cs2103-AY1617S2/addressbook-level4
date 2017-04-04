@@ -26,6 +26,7 @@ public class CompleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+
         assert model != null;
 
         UnmodifiableObservableList<ReadOnlyTask> list = model.getFilteredTaskList();

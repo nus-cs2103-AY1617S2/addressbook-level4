@@ -22,10 +22,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Task1 d/15-Mar-2015 p/1 i/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Task1 d/15-Mar-2015 @ 22:00:00 p/1 i/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Task1").withDeadline("15-Mar-2015")
+        TestTask editedTask = new TaskBuilder().withName("Task1").withDeadline("15-Mar-2015 @ 22:00:00")
                 .withPriorityLevel("1").withInformation("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);

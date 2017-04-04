@@ -34,6 +34,7 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
+    private static boolean isEvent = false;
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -80,16 +81,17 @@ public class ParserUtil {
         assert name != null;
         return name.isPresent() ? Optional.of(new TaskName(name.get())) : Optional.empty();
     }
-
+    //@@author A0139161J
     /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
      */
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;
-        //@@author A0139161J
-        //For implementation of Natty, needed for conversion
         Parser parser = new Parser();
-        String deadlineStringFinal = null;
+        String fromDate = new String("");
+        String fromTime = null;
+        String toDate = new String("");
+        String toTime = null;
         if (deadline.isPresent()) {
             String deadlineString = deadline.toString();
             List <DateGroup> groups = parser.parse(deadlineString);
@@ -114,19 +116,36 @@ public class ParserUtil {
             }
 
             if (dates != null) {
-                deadlineStringFinal = dates.get(0).toString();
+                fromDate = dates.get(0).toString();
+                fromTime = getTime(fromDate);
+                if (dates.size() != 1) {
+                    toDate = dates.get(1).toString();
+                    toTime = getTime(toDate);
+                    isEvent = true;
+                }
             }
-            StringTokenizer st = new StringTokenizer(deadlineStringFinal);
+            StringTokenizer st = new StringTokenizer(fromDate);
             List<String> listDeadline = new ArrayList<String>();
             while (st.hasMoreTokens()) {
                 listDeadline.add(st.nextToken());
             }
+            List<String> endOfEvent = new ArrayList<String>();
+            if (isEvent) {
+                st = new StringTokenizer(toDate);
+                while (st.hasMoreTokens()) {
+                    endOfEvent.add(st.nextToken());
+                }
+            }
             StringBuilder deadlineStringBuilder = new StringBuilder();
             deadlineStringBuilder.append(listDeadline.get(2) + "-" + listDeadline.get(1)
-                + "-" + listDeadline.get(5)); // Extracting the dates.toString() format to DD-MMM-YYYY
-            deadlineStringFinal = deadlineStringBuilder.toString();
+                + "-" + listDeadline.get(5) + " @ " + fromTime);
+            if (isEvent) {
+                deadlineStringBuilder.append(" to " + endOfEvent.get(2) + "-" + endOfEvent.get(1)
+                    + "-" + endOfEvent.get(5) + " @ " + toTime);
+            }
+            fromDate = deadlineStringBuilder.toString();
         }
-        return deadline.isPresent() ? Optional.of(new Deadline(deadlineStringFinal)) : Optional.empty();
+        return deadline.isPresent() ? Optional.of(new Deadline(fromDate)) : Optional.empty();
     }
     //@@author
 
@@ -134,7 +153,6 @@ public class ParserUtil {
      * Parses a {@code Optional<String> information} into an {@code Optional<Information>}
      * if {@code information} is present.
      */
-    // Keep, just rename
     public static Optional<Information> parseInfo(Optional<String> information) throws IllegalValueException {
         assert information != null;
         return information.isPresent() ? Optional.of(new Information(information.get())) : Optional.empty();
@@ -144,7 +162,6 @@ public class ParserUtil {
      * Parses a {@code Optional<String> priorityLevel} into an {@code Optional<PriorityLevel>}
      * if {@code priorityLevel} is present.
      */
-    // Convert to ANY_INFO
     public static Optional<PriorityLevel> parsePriorityLevel(Optional<String> priorityLevel)
             throws IllegalValueException {
         assert priorityLevel != null;
@@ -154,7 +171,6 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
-    // keep
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
         final Set<Tag> tagSet = new HashSet<>();
@@ -162,5 +178,18 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+    //@@author A0139161J
+    /* Returns String in format of hh:mm:ss
+     * Precond: dateTime string formed by NattyParser required as input
+     */
+    public static String getTime(String dateTime) {
+        StringTokenizer st = new StringTokenizer(dateTime);
+        List<String> list = new ArrayList<String>();
+        while (st.hasMoreTokens()) {
+            list.add(st.nextToken());
+        }
+        System.out.println(list.get(3));
+        return list.get(3);
     }
 }
