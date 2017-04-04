@@ -23,11 +23,8 @@
             </StackPane>
             <Label fx:id="categoryText" text="\$categoryText">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="14.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
-               <font>
-                  <Font name="Avenir Roman" size="13.0" />
-               </font>
             </Label>
          </children>
       </HBox>

@@ -317,3 +317,9 @@
 #categoryTaskCount {
     -fx-text-fill: #FFFFFF;
 }
+
+#categoryText {
+    -fx-font-family: "Avenir";
+    -fx-font-size: 19;
+    -fx-font-weight: lighter;
+}
