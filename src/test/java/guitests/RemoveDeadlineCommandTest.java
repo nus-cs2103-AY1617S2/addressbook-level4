@@ -13,8 +13,8 @@ import typetask.testutil.TestTask;
 //@@author A0139926R
 public class RemoveDeadlineCommandTest extends AddressBookGuiTest{
 
-    private final String REMOVEDEADLINE_COMMAND = "removedeadline";
-    private final String ADD_DEADLINE_TO_EXISTING = "edit 1 by: tmr";
+    private static final String REMOVEDEADLINE_COMMAND = "removedeadline";
+    private static final String ADD_DEADLINE_TO_EXISTING = "edit 1 by: tmr";
 
     @Test
     public void removedeadline_success() throws IllegalValueException {

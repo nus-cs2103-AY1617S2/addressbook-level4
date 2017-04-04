@@ -10,10 +10,10 @@ import typetask.testutil.TestTask;
 //@@author A0139926R
 public class RedoCommandTest extends AddressBookGuiTest {
 
-    private final String CLEAR_COMMAND = "clear";
-    private final String UNDO_COMMAND = "undo";
-    private final String REDO_COMMAND = "redo";
-    private final String REDO_SHORT_COMMAND = "r";
+    private static final String CLEAR_COMMAND = "clear";
+    private static final String UNDO_COMMAND = "undo";
+    private static final String REDO_COMMAND = "redo";
+    private static final String REDO_SHORT_COMMAND = "r";
     @Test
     public void redo_clear_success() {
         TestTask[] expectedTaskList = {};

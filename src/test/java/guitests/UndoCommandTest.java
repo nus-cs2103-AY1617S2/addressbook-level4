@@ -10,14 +10,14 @@ import typetask.logic.commands.UndoCommand;
 //@@author A0139926R
 public class UndoCommandTest extends AddressBookGuiTest {
 
-    private final String ADD_COMMAND = "add test";
-    private final String EDIT_COMMAND = "edit 1 by: tmr";
-    private final String DELETE_COMMAND = "delete 1";
-    private final String CLEAR_COMMAND = "clear";
-    private final String LIST_COMMAND = "list";
-    private final String FIND_COMMAND = "find alice";
-    private final String UNDO_COMMAND = "undo";
-    private final String UNDO_SHORT_COMMAND = "u";
+    private static final String ADD_COMMAND = "add test";
+    private static final String EDIT_COMMAND = "edit 1 by: tmr";
+    private static final String DELETE_COMMAND = "delete 1";
+    private static final String CLEAR_COMMAND = "clear";
+    private static final String LIST_COMMAND = "list";
+    private static final String FIND_COMMAND = "find alice";
+    private static final String UNDO_COMMAND = "undo";
+    private static final String UNDO_SHORT_COMMAND = "u";
     @Test
     public void undo_add_success() throws IllegalValueException {
         commandBox.runCommand(ADD_COMMAND);
