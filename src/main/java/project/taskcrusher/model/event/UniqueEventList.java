@@ -20,6 +20,18 @@ public class UniqueEventList implements Iterable<Event> {
     public void sortEventsByEarliestTimeslot() {
         internalList.sort(null);
     }
+
+    /**
+     *  Checks and marks any active events that are out-dated as overdue
+     */
+    public void updateOverdueStatus() {
+        for (Event event: internalList) {
+            if (!event.isComplete()) {
+                event.updateOverdueStatus();
+            }
+        }
+    }
+
     /**
      * Returns true if the list contains an equivalent event as the given argument.
      */

@@ -82,6 +82,10 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ListsToShowUpdatedEvent(isEventListToShowEmpty, isTaskListToShowEmpty));
     }
 
+    public synchronized void updateOverdueStatus() {
+        userInbox.updateOverdueStatus();
+    }
+
     //=========== Task operations =========================================================================
 
     @Override
@@ -167,6 +171,10 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    /* (non-Javadoc)
+     * @see project.taskcrusher.model.Model#updateFilteredTaskListToShowAll()
+     * Note that this filters out the completed tasks
+     */
     @Override
     public void updateFilteredTaskListToShowAll() {
         updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(false)));
@@ -191,6 +199,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowComplete() {
         updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(true)));
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowNone() {
+        updateFilteredTaskList(new PredicateExpression(new FalseQualifier()));
     }
 
     //=========== Filtered Event List Accessors =============================================================
@@ -225,6 +238,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredEventListToShowComplete() {
         updateFilteredEventList(new PredicateExpression(new CompletionQualifier(true)));
+    }
+
+    @Override
+    public void updateFilteredEventListToShowNone() {
+        updateFilteredEventList(new PredicateExpression(new FalseQualifier()));
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -351,6 +369,20 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "separate between ongoing and completed tasks and events";
+        }
+    }
+
+    private class FalseQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyUserToDo item) {
+            assert item != null;
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            return "returns always false";
         }
     }
 }

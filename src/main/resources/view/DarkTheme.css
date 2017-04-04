@@ -325,7 +325,7 @@
 
 #name {
     -fx-padding: 0 10 0 5;
-    -fx-min-width: 150px;
+    -fx-min-width: 180px;
 }
 
 #timeslots {

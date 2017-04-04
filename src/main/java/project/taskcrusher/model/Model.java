@@ -65,6 +65,8 @@ public interface Model {
 
     void updateFilteredTaskListToShowComplete();
 
+    public void updateFilteredTaskListToShowNone();
+
     // ========== for events =================================================
 
     /** deletes the given event */
@@ -111,6 +113,8 @@ public interface Model {
     void markEvent(int filteredListIndex, int markFlag);
 
     void updateFilteredEventListToShowComplete();
+
+    public void updateFilteredEventListToShowNone();
 
     /**
      * TODO this javadoc

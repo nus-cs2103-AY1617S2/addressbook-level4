@@ -94,6 +94,11 @@ public class UserInbox implements ReadOnlyUserInbox {
         syncMasterTagListWith(tasks);
     }
 
+    public void updateOverdueStatus() {
+        this.events.updateOverdueStatus();
+        this.tasks.updateOverdueStatus();
+    }
+
     //// task-level operations
 
     /**

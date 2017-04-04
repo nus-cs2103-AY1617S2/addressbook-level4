@@ -78,6 +78,15 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         return true;
     }
 
+    public void updateOverdueStatus() {
+        Date now = new Date();
+        for (Timeslot timeslot: getTimeslots()) {
+            if (now.after(timeslot.end)) {
+                markOverdue();
+            }
+        }
+    }
+
     public List<Timeslot> getTimeslots() {
         return this.timeslots;
     }

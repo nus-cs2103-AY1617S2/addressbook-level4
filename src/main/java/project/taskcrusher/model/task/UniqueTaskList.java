@@ -34,6 +34,17 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     *  Checks and marks any active tasks whose deadline is past the current time as overdue.
+     */
+    public void updateOverdueStatus() {
+        for (Task task: internalList) {
+            if (!task.isComplete()) {
+                task.updateOverdueStatus();
+            }
+        }
+    }
+
+    /**
      * Adds a task to the list.
      *
      * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
