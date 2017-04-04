@@ -16,6 +16,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 
+//@@author A0121668A
 public class JsonUserConfigStorageTest {
 
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/JsonUserConfigStorageTest/");
