@@ -70,6 +70,7 @@ public class GuiHandle {
         this.guiRobot.type(KeyCode.ENTER).sleep(500);
     }
 
+    // @@author A0138909R
     public void pressUp() {
         this.guiRobot.type(KeyCode.UP).sleep(500);
     }
@@ -78,6 +79,7 @@ public class GuiHandle {
         this.guiRobot.type(KeyCode.DOWN).sleep(500);
     }
 
+    // @@author
     protected String getTextFromLabel(String fieldId, Node parentNode) {
         return ((Label) this.guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
     }

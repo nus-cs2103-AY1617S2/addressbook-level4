@@ -40,6 +40,7 @@ public class CommandBox extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(this.commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
 
+    // @@author A0138909R
     @FXML
     private void handleCommandInputChanged() {
         String currentText = this.commandTextField.getText();
@@ -61,6 +62,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    // @@author
     /**
      * Sets the command box style to indicate a successful command.
      */

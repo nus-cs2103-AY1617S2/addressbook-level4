@@ -56,6 +56,7 @@ public class CommandBoxHandle extends GuiHandle {
         return getNode(COMMAND_INPUT_FIELD_ID).getStyleClass();
     }
 
+    // @@author A0138909R
     public void clickUpInTextField() {
         clickOnTextField();
         pressUp();
@@ -65,4 +66,5 @@ public class CommandBoxHandle extends GuiHandle {
         clickOnTextField();
         pressDown();
     }
+    // @@author
 }
