@@ -52,7 +52,7 @@ public class DeleteTaskController extends Controller {
         try {
             validateIndexIsPresent(indexes);
         } catch (IllegalArgumentException illegalArgumentException) {
-            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED);
+            throw new InvalidCommandException(illegalArgumentException.getMessage());
         }
         List<Task> tasks = uiStore.getShownTasks(indexes);
         commandResult = delete(todoList, tasks);
