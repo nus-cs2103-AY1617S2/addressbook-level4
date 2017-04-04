@@ -128,6 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
         } else {
             updateFilteredDoneList();
         }
+
         indicateEzDoChanged();
         return isSetToDone;
     }

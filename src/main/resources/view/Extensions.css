@@ -3,6 +3,10 @@
     -fx-background-color: pink;
 }
 
+.success {
+    -fx-background-color: green;
+}
+
 
 .tag-selector {
     -fx-border-width: 1;

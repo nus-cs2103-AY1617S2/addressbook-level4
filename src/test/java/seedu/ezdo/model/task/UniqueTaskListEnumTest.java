@@ -11,10 +11,12 @@ import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
+
 //@@author A0139248X
 @RunWith(PowerMockRunner.class)
 public class UniqueTaskListEnumTest {
@@ -25,18 +27,19 @@ public class UniqueTaskListEnumTest {
     @PrepareForTest(SortCriteria.class)
     public void unknownValueShouldThrowException() throws Exception {
         utl.add(new Task(new Name("lol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),
-                new UniqueTagList("jesus")));
+                new Recur(""), new UniqueTagList("jesus")));
         utl.add(new Task(new Name("lasdfol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),
-                new UniqueTagList("jesus")));
+                new Recur(""), new UniqueTagList("jesus")));
 
-        SortCriteria C = PowerMockito.mock(SortCriteria.class);
-        Whitebox.setInternalState(C, "name", "C");
-        Whitebox.setInternalState(C, "ordinal", 4);
+        SortCriteria c = PowerMockito.mock(SortCriteria.class);
+        Whitebox.setInternalState(c, "name", "c");
+        Whitebox.setInternalState(c, "ordinal", 4);
 
         PowerMockito.mockStatic(SortCriteria.class);
-        PowerMockito.when(SortCriteria.values()).thenReturn(new SortCriteria[]
-            {SortCriteria.NAME, SortCriteria.PRIORITY, SortCriteria.DUE_DATE, SortCriteria.START_DATE, C});
+        PowerMockito.when(SortCriteria.values()).thenReturn(new SortCriteria[] {
+            SortCriteria.NAME, SortCriteria.PRIORITY, SortCriteria.DUE_DATE,
+            SortCriteria.START_DATE, c});
 
-        utl.sortTasks(C, true);
+        utl.sortTasks(c, true);
     }
 }

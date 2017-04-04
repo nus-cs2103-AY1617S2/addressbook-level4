@@ -147,8 +147,8 @@ public class UnmodifiableObservableListTest {
     //@@author
     @Test
     public void add_remove_listeners() {
-        list.removeListener((ListChangeListener<Integer>) (c -> { /* ... */ } ));
-        list.addListener((InvalidationListener) (c -> { /* ... */ } ));
-        list.removeListener((InvalidationListener) (c -> { /* ... */ } ));
+        list.removeListener((ListChangeListener<Integer>) (c -> { /* ... */ }));
+        list.addListener((InvalidationListener) (c -> { /* ... */ }));
+        list.removeListener((InvalidationListener) (c -> { /* ... */ }));
     }
 }
