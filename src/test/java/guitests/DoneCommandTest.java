@@ -91,7 +91,7 @@ public class DoneCommandTest extends EzDoGuiTest {
             try {
                 taskToDone.setRecur(new Recur(""));
             } catch (IllegalValueException e) {
-   
+                e.printStackTrace();
             }
             ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
             tasksToDone.add(taskToDone); // old date
