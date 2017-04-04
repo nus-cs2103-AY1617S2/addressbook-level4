@@ -44,8 +44,6 @@ public class AddCommandParser {
         try {
             priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
         } catch (NoSuchElementException nsee2) {}
-
-        System.out.println("parser: " + end);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),

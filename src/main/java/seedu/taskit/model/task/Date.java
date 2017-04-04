@@ -42,24 +42,18 @@ public class Date {
      *             if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
-        System.out.println(date);
         this.dateString = date;
         if (date != null && date.length() > 0) {
             List<DateGroup> groups = parser.parse(date);
-            if (groups.size() >= 0) {
-                try {
-                    DateGroup group = (DateGroup) groups.get(0);
-                    this.date = group.getDates().get(0);
-                } catch (Exception exception) {
-                    throw new IllegalValueException(MESSAGE_DATE_FAIL);
-                }
-            } else {
-                this.date = null;
-            }
+            try {
+                DateGroup group = (DateGroup) groups.get(0);
+                this.date = group.getDates().get(0);
+            } catch (Exception exception) {
+                throw new IllegalValueException(MESSAGE_DATE_FAIL);
+           }
         } else {
             this.date = null;
         }
-        System.out.println(this.date);
     }
 
     @Override

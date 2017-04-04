@@ -203,12 +203,8 @@ public class ModelManager extends ComponentManager implements Model {
                     nameKeyWords.stream()
                     .filter(keyword -> {
             try {
-              System.out.println("taskDate is: " + task.getEnd().toString());
-              System.out.println("date is " + (new Date(keyword)).toString() + " " + task.getEnd().isDateEqualsDate(new Date(keyword)));
               return task.getEnd().isDateEqualsDate(new Date(keyword)) | task.getStart().isDateEqualsDate(new Date(keyword));
             } catch (IllegalValueException e) {
-              //e.printStackTrace();
-              System.out.println("Illegal value thrown");
               return false;
             }
           })
