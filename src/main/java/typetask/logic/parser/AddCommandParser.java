@@ -29,7 +29,7 @@ public class AddCommandParser {
     private final int deadlineTaskWithDate = 2;
     private final int eventTask = 3;
     private final int invalidEvent = 4;
-    private final int priorityTask = 5;
+    //private final int priorityTask = 5;
     private final int day = 0;
     private final int month = 1;
     private final int dayDate = 2;

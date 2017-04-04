@@ -38,7 +38,7 @@ public class AddCommand extends Command {
     //Floating Task
     public AddCommand(String name)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority("Low"));;
+        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority("Low"));
     }
     //Deadline Task
     public AddCommand(String name, String dateTime)
