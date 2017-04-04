@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.exceptions.DataConversionException;
 import seedu.opus.commons.util.FileUtil;
+import seedu.opus.commons.util.StringUtil;
 import seedu.opus.model.ReadOnlyTaskManager;
 
 /**
@@ -72,4 +73,11 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
 
+    //@@author A0148081H
+    @Override
+    public void setTaskManagerFilePath(String filePath) {
+        assert StringUtil.isValidPathToFile(filePath);
+        this.filePath = filePath;
+    }
+    //@@author
 }
