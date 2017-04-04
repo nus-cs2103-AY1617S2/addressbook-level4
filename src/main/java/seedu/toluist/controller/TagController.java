@@ -7,8 +7,10 @@ import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import seedu.toluist.commons.core.LogsCenter;
+import org.apache.commons.lang.StringUtils;
 
+import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.Tag;
@@ -50,14 +52,59 @@ public class TagController extends Controller {
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
 
-        // initialize keywords and variables for searching
+        if (isInvalidFormat(tokens)) {
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, COMMAND_TAG_WORD)));
+            return;
+        }
+        if (isIndexOutOfBounds(tokens)) {
+            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX));
+            return;
+        }
+
+        ArrayList<String> successfulList = new ArrayList<String>();
+        ArrayList<String> failedList = new ArrayList<String>();
+        addTagsToIndex(tokens, successfulList, failedList);
+
+        updateList();
+
+        uiStore.setCommandResult(formatDisplay(successfulList.toArray(new String[successfulList.size()]),
+                                failedList.toArray(new String[failedList.size()]),
+                                successfulList.size()));
+    }
+
+    private boolean isIndexOutOfBounds(Map<String, String> tokens) {
+        int index = Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1;
+        if (index < 0 || index >= UiStore.getInstance().getShownTasks().size()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isInvalidFormat(Map<String, String> tokens) {
+        String index = tokens.get(PARAMETER_INDEX);
+        if (index.equals("") || tokens.get(PARAMETER_KEYWORDS).equals("")) {
+            return true;
+        }
+        if (!StringUtils.isNumeric(index)) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    private void updateList() {
+        TodoList todoList = TodoList.getInstance();
+        if (todoList.save()) {
+            uiStore.setTasks(todoList.getTasks());
+        }
+    }
+
+    private void addTagsToIndex(Map<String, String> tokens, ArrayList<String> successfulList,
+            ArrayList<String> failedList) {
         String[] keywordList = StringUtil.convertToArray(tokens.get(PARAMETER_KEYWORDS));
         int index = Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1;
-        TodoList todoList = TodoList.getInstance();
         Task task = UiStore.getInstance().getShownTasks().get(index);
-        ArrayList<String> successfulList = new ArrayList<>();
-        ArrayList<String> failedList = new ArrayList<>();
-
         for (String keyword : keywordList) {
             if (task.addTag(new Tag(keyword))) {
                 successfulList.add(keyword);
@@ -65,15 +112,6 @@ public class TagController extends Controller {
                 failedList.add(keyword);
             }
         }
-
-        if (todoList.save()) {
-            uiStore.setTasks(todoList.getTasks());
-        }
-
-        // display formatting
-        uiStore.setCommandResult(formatDisplay(successfulList.toArray(new String[successfulList.size()]),
-                                failedList.toArray(new String[failedList.size()]),
-                                successfulList.size()));
     }
 
     private CommandResult formatDisplay(String[] successfulList, String[] failedList, int successCount) {
@@ -95,14 +133,22 @@ public class TagController extends Controller {
     public Map<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
-        String replacedCommand = Pattern.compile(COMMAND_TAG_WORD, Pattern.CASE_INSENSITIVE).matcher(command)
-                .replaceFirst(StringUtil.EMPTY_STRING).trim();
-        String[] listOfParameters = replacedCommand
-                .split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
-        tokens.put(PARAMETER_INDEX, listOfParameters[SECTION_INDEX]);
-        tokens.put(PARAMETER_KEYWORDS, listOfParameters[SECTION_KEYWORDS]);
+        String[] listOfParameters = extractCommandWords(command);
+        try {
+            tokens.put(PARAMETER_INDEX, listOfParameters[SECTION_INDEX]);
+            tokens.put(PARAMETER_KEYWORDS, listOfParameters[SECTION_KEYWORDS]);
+        } catch (Exception e) {
+            tokens.put(PARAMETER_INDEX, "");
+            tokens.put(PARAMETER_KEYWORDS, "");
+        }
 
         return tokens;
+    }
+
+    private String[] extractCommandWords(String command) {
+        String replacedCommand = Pattern.compile(COMMAND_TAG_WORD, Pattern.CASE_INSENSITIVE).matcher(command)
+            .replaceFirst(StringUtil.EMPTY_STRING).trim();
+        return replacedCommand.split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
     }
 
     public boolean matchesCommand(String command) {
