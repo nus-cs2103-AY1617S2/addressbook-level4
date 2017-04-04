@@ -182,6 +182,16 @@ public class Task implements ReadOnlyTask {
         return false;
     }
 
+    //@@author A0148087W
+    /**
+     * Check if the task is a Event with a StartDate and EndDate
+     * @return
+     */
+    public boolean isEvent() {
+        return this.getStartTime().isPresent() ? true : false;
+    }
+    //@@author
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

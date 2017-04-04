@@ -22,6 +22,7 @@ import seedu.opus.logic.commands.SaveCommand;
 import seedu.opus.logic.commands.ScheduleCommand;
 import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
+import seedu.opus.logic.commands.SyncCommand;
 import seedu.opus.logic.commands.UndoCommand;
 
 /**
@@ -93,6 +94,9 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case SyncCommand.COMMAND_WORD:
+            return new SyncCommandParser().parse(arguments);
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand(arguments);

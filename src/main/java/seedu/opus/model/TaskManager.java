@@ -1,5 +1,6 @@
 package seedu.opus.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -163,6 +164,21 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
 //// util methods
+
+    //@@author A0148087W
+    /**
+     * Returns a list with Tasks that is not a Event
+     * @return
+     */
+    public List<Task> getNonEventTaskList() {
+        List<Task> list = new ArrayList<Task>();
+        for (Task task : tasks.asObservableList()) {
+            if (!task.isEvent()) {
+                list.add(task);
+            }
+        }
+        return list;
+    }
 
     @Override
     public String toString() {

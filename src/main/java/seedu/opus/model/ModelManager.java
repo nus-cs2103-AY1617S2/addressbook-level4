@@ -16,6 +16,8 @@ import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.opus.sync.SyncManager;
+import seedu.opus.sync.SyncServiceGtask;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -29,8 +31,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     private History history;
 
+    private final SyncManager syncManager;
+
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     *
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
@@ -41,6 +46,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         history = new History();
+
+        syncManager = new SyncManager(new SyncServiceGtask());
     }
 
     public ModelManager() {
@@ -52,6 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -76,6 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -84,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -95,6 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     //@@author A0148087W
@@ -102,13 +113,26 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetToPreviousState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
     public void resetToPrecedingState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
+
+    @Override
+    public void startSync() {
+        this.syncManager.startSync();
+    }
+
+    @Override
+    public void stopSync() {
+        this.syncManager.stopSync();
+    }
+
     //@@author
 
     //=========== Storage Method ==========================================================================
@@ -136,6 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
+    @Override
     public int getTaskIndex(ReadOnlyTask task) {
         return filteredTasks.indexOf(task);
     }
@@ -180,5 +205,4 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
     //@@author
-
 }

@@ -63,6 +63,16 @@ public interface Model {
      */
     void resetToPrecedingState() throws InvalidUndoException;
 
+    /**
+     * Set Model to start syncing with sync service
+     */
+    void startSync();
+
+    /**
+     * Set Model to stop syncing with sync service
+     */
+    void stopSync();
+
     /** Change the data storage location */
     void changeSaveLocation(String location);
 }
