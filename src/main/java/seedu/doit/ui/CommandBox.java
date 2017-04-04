@@ -93,13 +93,13 @@ public class CommandBox extends UiPart<Region> {
             // up arrow
             this.output = this.inputs.pressedUp(this.output);
             setCommandBoxText(this.output);
-            this.logger.info("UP pressed!!!!!!!!!!!!!!!!!!!!");
+            this.logger.info("UP pressed");
             break;
         case DOWN:
             // down arrow
             this.output = this.inputs.pressedDown(this.output);
             setCommandBoxText(this.output);
-            this.logger.info("DOWN pressed!!!!!!!!!!!!!!!!!!!!");
+            this.logger.info("DOWN pressed");
             break;
         default:
             break;
