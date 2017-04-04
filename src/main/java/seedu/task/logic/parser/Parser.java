@@ -12,14 +12,18 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CompleteCommand;
 import seedu.task.logic.commands.DeleteCommand;
+import seedu.task.logic.commands.DeleteCompleteCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
+import seedu.task.logic.commands.FindPriorityCommand;
 import seedu.task.logic.commands.FindTagCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.RedoCommand;
+import seedu.task.logic.commands.SaveCommand;
+import seedu.task.logic.commands.SearchCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UncompleteCommand;
 import seedu.task.logic.commands.UndoCommand;
@@ -51,7 +55,6 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        //Keep & Done
         case AddCommand.COMMAND_WORD:
             try {
                 return new AddCommandParser().parse(arguments);
@@ -59,13 +62,13 @@ public class Parser {
                 assert false : "ParserException to be caused by timeFormatter() method, which will definitely pass";
                 return null;
             }
-        //Keep & Done
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
-        // Keep & Done
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
@@ -74,6 +77,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case SearchCommand.COMMAND_WORD:
+            return new SearchCommandParser().parse(arguments);
 
         //@@author A0139322L
         case FindTagCommand.COMMAND_WORD:
@@ -92,7 +98,7 @@ public class Parser {
         case UpcomingCommand.COMMAND_WORD:
             return new UpcomingCommand();
 
-        //@@Dylan Sng A0139161J
+        //@@author A0139161J
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
@@ -104,7 +110,17 @@ public class Parser {
 
         case UncompleteCommand.COMMAND_WORD:
             return new UncompleteCommandParser().parse(arguments);
-        //@@Dylan Sng
+
+        case DeleteCompleteCommand.COMMAND_WORD:
+            return new DeleteCompleteCommandParser().parse(arguments);
+
+        //@@author A0141928B
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
+        //@@author
+
+        case FindPriorityCommand.COMMAND_WORD:
+            return new FindPriorityCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
