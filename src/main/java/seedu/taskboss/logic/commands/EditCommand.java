@@ -147,7 +147,7 @@ public class EditCommand extends Command {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
-        errorDetect(taskToEdit, updatedCategories);
+        intigrateAllTasksCategory(taskToEdit, updatedCategories);
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
                 updatedInformation, updatedRecurrence, updatedCategories);
@@ -161,7 +161,7 @@ public class EditCommand extends Command {
      * @throws BuiltInCategoryException
      * @throws DuplicateCategoryException
      */
-    private static void errorDetect(ReadOnlyTask taskToEdit, UniqueCategoryList updatedCategories)
+    private static void intigrateAllTasksCategory(ReadOnlyTask taskToEdit, UniqueCategoryList updatedCategories)
             throws IllegalValueException, BuiltInCategoryException, DuplicateCategoryException {
         if (taskToEdit.getCategories().contains(new Category(AddCommand.BUILT_IN_DONE))) {
             throw new BuiltInCategoryException(ERROR_CANNOT_EDIT_DONE_TASK);
