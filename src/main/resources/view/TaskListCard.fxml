@@ -17,15 +17,15 @@
 
 <!--@@author A0141011J -->
 
-<HBox id="cardPane" fx:id="cardPane" styleClass="card" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" prefWidth="350.0" styleClass="card" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Rectangle fx:id="overdue" arcHeight="5.0" arcWidth="5.0" fill="#FFFFFF" height="93.0" stroke="TRANSPARENT" strokeType="INSIDE" width="7.0" />
+        <Rectangle fx:id="overdue" arcHeight="5.0" arcWidth="5.0" fill="#FFFFFF" height="80.0" stroke="TRANSPARENT" strokeType="INSIDE" width="7.0" />
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="90.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" minHeight="80.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
@@ -39,14 +39,14 @@
                             <children>
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label" />
-                                    <Label fx:id="title" styleClass="cell_big_label" text="\$first" />
-                                     <Label fx:id="margin" />
+                                    <Label fx:id="title" prefHeight="20.0" styleClass="cell_big_label" text="\$first" />
+                                    <Label fx:id="margin" />
+                                    <FlowPane fx:id="tags" prefHeight="27.0" prefWidth="103.0" />
                                 </HBox>
                             </children>
                         </HBox>
                         <Label fx:id="start" styleClass="cell_small_label" text="\$start" />
                         <Label fx:id="end" styleClass="cell_small_label" text="\$end" />
-                        <FlowPane fx:id="tags" />
                     </children>
                 </VBox>
             </children>

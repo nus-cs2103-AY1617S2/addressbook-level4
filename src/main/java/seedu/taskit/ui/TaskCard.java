@@ -63,11 +63,11 @@ public class TaskCard extends UiPart<Region> {
 
         //display start and end time for events and deadlines
         if (start.getText().length() > 0) {
-            start.setText("Start: " + start.getText());
-            end.setText("End: " + end.getText());
+            start.setText("From " + start.getText());
+            end.setText("To " + end.getText());
         }
         else if (end.getText().length() > 0) {
-            end.setText("Deadline: " + end.getText());
+            end.setText("Due " + end.getText());
         }
 
         if (task.isDone()){
