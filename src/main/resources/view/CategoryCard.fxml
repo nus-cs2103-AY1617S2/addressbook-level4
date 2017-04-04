@@ -14,7 +14,7 @@
          <children>
             <StackPane>
                <children>
-                  <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#BA68C8" height="25.0" width="25.0" />
+                  <Rectangle fx:id="taskCountRectangle" arcHeight="10.0" arcWidth="10.0" fill="#BA68C8" height="25.0" width="25.0" />
                   <Label fx:id="categoryTaskCount" text="\$categoryTaskCount" />
                </children>
                <HBox.margin>
