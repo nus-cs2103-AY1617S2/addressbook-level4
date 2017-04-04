@@ -225,7 +225,7 @@ public class ModelManager extends ComponentManager implements Model {
         private Object completeTime;
         private String todoType;
 
-        NameQualifier(Set<String> nameKeyWords, Date startTime, Date endTime, 
+        NameQualifier(Set<String> nameKeyWords, Date startTime, Date endTime,
                 Object completeTime, String todoType, UniqueTagList tags) {
             this.nameKeyWords = nameKeyWords;
             this.startTime = startTime;
@@ -299,7 +299,7 @@ public class ModelManager extends ComponentManager implements Model {
             return true;
         }
         //@@author
-        
+
         //@@author A0163720M
         /**
          * Checks todo type and returns true if todo should be shown in filtered list
@@ -308,7 +308,7 @@ public class ModelManager extends ComponentManager implements Model {
             if (todoType != null) {
                 Date startTime = todo.getStartTime();
                 Date endTime = todo.getEndTime();
-                
+
                 switch (todoType) {
                     case "floating":
                         return startTime == null && endTime == null;
@@ -323,7 +323,7 @@ public class ModelManager extends ComponentManager implements Model {
             return true;
         }
         //@@author
-        
+
         //@@author A0163786N
         /**
          * Helper function to simplify run function. Checks start time
