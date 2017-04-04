@@ -58,8 +58,8 @@ public class TaskCard extends UiPart<Region> {
     private void initOverdueTag() {
         String image = this.getClass().getResource("overdue.png").toExternalForm();
         //Label overdueLabel = new Label("GG");
-        overdueTag.setStyle("-fx-background-image: url('" + image + "'); " 
-                + "-fx-background-position: center center; " 
+        overdueTag.setStyle("-fx-background-image: url('" + image + "'); "
+                + "-fx-background-position: center center; "
                 + "-fx-background-repeat: stretch;"
                 + "-fx-background-size: contain;"
                 + "-fx-font-weight: bold;"

@@ -96,7 +96,7 @@ Here are the **allowed formats**:
 * `add <title> priority: <1 to 5>` - adds a floating task with a priority level.
 * `add <title> note: <instructions>` - adds a floating task with instructions.
 * `add <title> #<tag>` - adds a floating task with a tag. Note that you can have multiple tags.
-For full details of each parameter, please view their formats in their respective sections below. 
+For full details of each parameter, please view their formats in their respective sections below.
 
 The full allowed command format is therefore:
 
@@ -206,7 +206,7 @@ Here are the **allowed formats**:
 * `edit floating <index>` - deletes a floating task from Burdens at the specified index.
 * `edit completed <index>` - deletes a completed task from Burdens at the specified index.
 
-Note: 
+Note:
 
 * At least one of the optional fields apart from the task list name must be provided.
 * Existing values will be updated to the input values.
