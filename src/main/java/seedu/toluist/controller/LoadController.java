@@ -15,7 +15,6 @@ import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
-import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 
 /**
  * Responsible for loading-related task
