@@ -23,7 +23,6 @@ import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
 import seedu.opus.logic.commands.SyncCommand;
 import seedu.opus.logic.commands.UndoCommand;
-import seedu.opus.logic.commands.exceptions.SyncCommandParser;
 
 /**
  * Parses user input.

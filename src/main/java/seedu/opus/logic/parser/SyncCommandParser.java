@@ -1,4 +1,4 @@
-package seedu.opus.logic.commands.exceptions;
+package seedu.opus.logic.parser;
 
 import static seedu.opus.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
