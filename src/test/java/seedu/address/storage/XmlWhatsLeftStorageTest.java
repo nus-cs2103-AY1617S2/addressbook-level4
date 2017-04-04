@@ -77,13 +77,11 @@ public class XmlWhatsLeftStorageTest {
         readBack = xmlWhatsLeftStorage.readWhatsLeft(filePath).get();
         assertEquals(original, new WhatsLeft(readBack));
 
-        /*
         //Save and read without specifying file path
-        original.addEvent(new Event(te.meeting));
+        original.addEvent(new Event(te.workshop));
         xmlWhatsLeftStorage.saveWhatsLeft(original); //file path not specified
         readBack = xmlWhatsLeftStorage.readWhatsLeft().get(); //file path not specified
         assertEquals(original, new WhatsLeft(readBack));
-        */
     }
 
     @Test

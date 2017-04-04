@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import java.util.Set;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
+import seedu.address.commons.events.ui.JumpToTaskListRequestEvent;
+
 /**
  * Finds and lists all activities in WhatsLeft whose description contains any of the argument keywords.
  * Keyword matching is case sensitive.
@@ -27,6 +31,8 @@ public class FindCommand extends Command {
         model.updateFilteredEventList(keywords);
         model.updateFilteredTaskList(keywords);
         model.storePreviousCommand("");
+        EventsCenter.getInstance().post(new JumpToEventListRequestEvent(0));
+        EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(0));
         return new CommandResult(getMessageForActivityListShownSummary(model.getFilteredEventList().size() +
                 model.getFilteredTaskList().size()));
     }
