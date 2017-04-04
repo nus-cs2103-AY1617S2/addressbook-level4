@@ -2,7 +2,6 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -13,31 +12,31 @@ import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
-import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received
  */
-public class UntagController extends TagController {
-    private static final String COMMAND_UNTAG_WORD = "untag";
+public class AddTagController extends TagController {
+    private static final String COMMAND_TAG_WORD = "tag";
 
-    private static final String MESSAGE_TEMPLATE_SUCCESS = "Sucessfully removed \"%s\".\n";
-    private static final String MESSAGE_TEMPLATE_FAIL = "Failed to remove \"%s\".\n";
-    private static final String MESSAGE_TEMPLATE_RESULT = "%s%s successfully removed.";
+    private static final String MESSAGE_TEMPLATE_SUCCESS = "Successfully added \"%s\".\n";
+    private static final String MESSAGE_TEMPLATE_FAIL = "Failed to add \"%s\".\n";
+    private static final String MESSAGE_TEMPLATE_RESULT = "%s%s successfully added.";
 
-    private static final String HELP_DETAILS = "Removes a tag or multiple tags from an existing task.";
-    private static final String HELP_FORMAT = "untag INDEX TAG(S)";
-    private static final String[] HELP_COMMENTS = { "Related commands: `tag`",
+    private static final String HELP_DETAILS = "Adds a tag(s) to an existing task.";
+    private static final String HELP_FORMAT = "tag INDEX TAG(S)";
+    private static final String[] HELP_COMMENTS = { "Related commands: `untag`",
                                                     "All tags are one word long.",
-                                                    "Each word entered after the index will be untagged separately.", };
-    private static final String[] HELP_EXAMPLES = { "`untag 1 schoolwork`\n"
-                                                        + "Removes the tag `schoolwork` from the task at index 1.",
-                                                    "`untag 1 housework groceries`\nRemoves the tags "
-                                                        + "`housework` and `groceries` from the task at index 1." };
+                                                    "Each word entered after the index will be its own tag.", };
+    private static final String[] HELP_EXAMPLES = { "`tag 1 schoolwork`\n"
+                                                        + "Adds the tag `schoolwork` to the task at index 1.",
+                                                    "`tag 1 housework groceries`\nAdds the tags "
+                                                        + "`housework` and `groceries` to the task at index 1." };
 
-    private static final Logger logger = LogsCenter.getLogger(UntagController.class);
+
+    private static final Logger logger = LogsCenter.getLogger(AddTagController.class);
 
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
@@ -47,17 +46,17 @@ public class UntagController extends TagController {
 
     public boolean matchesCommand(String command) {
         String trimmedAndLowercasedCommand = command.trim().toLowerCase();
-        return trimmedAndLowercasedCommand.startsWith(COMMAND_UNTAG_WORD);
+        return trimmedAndLowercasedCommand.startsWith(COMMAND_TAG_WORD.toLowerCase());
     }
 
     protected String[] extractCommandWords(String command) {
-        String replacedCommand = Pattern.compile(COMMAND_UNTAG_WORD, Pattern.CASE_INSENSITIVE).matcher(command)
+        String replacedCommand = Pattern.compile(COMMAND_TAG_WORD, Pattern.CASE_INSENSITIVE).matcher(command)
             .replaceFirst(StringUtil.EMPTY_STRING).trim();
         return super.extractCommandWords(replacedCommand);
     }
 
     public String[] getCommandWords() {
-        return new String[] { COMMAND_UNTAG_WORD };
+        return new String[] { COMMAND_TAG_WORD };
     }
 
     public String[] getBasicHelp() {
@@ -74,7 +73,7 @@ public class UntagController extends TagController {
         String[] keywordList = StringUtil.convertToArray(keywords);
         Task task = UiStore.getInstance().getShownTasks().get(index);
         for (String keyword : keywordList) {
-            if (task.removeTag(new Tag(keyword))) {
+            if (task.addTag(new Tag(keyword))) {
                 successfulList.add(keyword);
             } else {
                 failedList.add(keyword);
@@ -100,6 +99,6 @@ public class UntagController extends TagController {
 
     protected void showInvalidFormatMessage() {
         uiStore.setCommandResult(new CommandResult(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, COMMAND_UNTAG_WORD)));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, COMMAND_TAG_WORD)));
     }
 }

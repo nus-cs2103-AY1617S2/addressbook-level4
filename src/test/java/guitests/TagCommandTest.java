@@ -59,7 +59,7 @@ public class TagCommandTest extends ToLuistGuiTest {
         String[] invalidCommands = { "tag", "tag aTag", "tag aTag bTag", "tag aTag 1",  "tag 1"};
         for (String command : invalidCommands) {
             commandBox.runCommand(command);
-            assertResultMessage(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+            assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, "tag"));
         }
     }
 }
