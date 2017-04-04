@@ -226,4 +226,9 @@ public class ModelManager extends ComponentManager implements Model {
 	public void filterStatus(String status) {
 		filteredTasks.setPredicate(new TaskStatusPredicate(status));
 	}
+	@Override
+	public void showcase(int numberOfTasks) throws DuplicateTaskException {
+		taskManager.showcase(numberOfTasks);
+		indicateTaskManagerChanged();
+	}
 }

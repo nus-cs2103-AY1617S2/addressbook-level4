@@ -47,6 +47,9 @@ public class TaskDate {
 
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invaid date, try ddmmyy-ddmmyy ";
 
+    
+    
+    
     public TaskDate(String input) throws IllegalValueException {
 
 	value = input.trim();
@@ -73,9 +76,19 @@ public class TaskDate {
 	    if (dates == null)
 		throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
 	}
+	
 
     }
 
+	public TaskDate(int inputDay, int inputMonth, int inputYear) {
+		this.setDay(inputDay);
+		this.setMonth(inputMonth);
+		this.setYear(inputYear);
+		value = day + "" + month + "" + year;
+	}
+    
+    
+    
     public void setDay(int day) {
 	if (day > 0 && day <= 31) {
 	    this.day = day;

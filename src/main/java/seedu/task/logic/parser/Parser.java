@@ -20,6 +20,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.ShowcaseCommand;
 import seedu.task.logic.commands.SortCommand;
 import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.PathCommand;
@@ -99,6 +100,9 @@ public class Parser {
 	
 	case FilterCommand.COMMAND_WORD:
 		return new FilterCommandParser().parse(arguments);
+		
+	case ShowcaseCommand.COMMAND_WORD:
+		return new ShowcaseCommandParser().parse(arguments);
 
 	default:
 	    return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

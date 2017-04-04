@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.TaskTimeComparable;
+import seedu.task.model.task.RandomTaskGenerator;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -250,22 +252,37 @@ public class TaskManager implements ReadOnlyTaskManager {
     		System.out.println("error in updateBackup, backup list deleted");
     	}
     }
+    //@@author A0163845X
 
+    public static LinkedList<Task> quickSort(TaskComparable comparator, LinkedList<Task> taskList) {
+    	if (taskList.size() <= 1) {
+    		return taskList;
+    	}
+    	Random rand = new Random();
+		int pivot = rand.nextInt(taskList.size());
+		Task pivotTask = taskList.remove(pivot);
+		LinkedList<Task> previous = new LinkedList<Task>();
+		LinkedList<Task> next = new LinkedList<Task>();
+		for (Task t : taskList) {
+			if (comparator.compareTo(t, pivotTask) < 0) {
+				previous.addFirst(t);
+			} else {
+				next.addFirst(t);
+			}
+		}
+		previous = quickSort(comparator, previous);
+		next = quickSort(comparator, next);
+		previous.add(pivotTask);
+		previous.addAll(next);
+		return previous;
+    }
     //@@author A0163845X
 	public void sort(TaskComparable comparator) {
-		List<Task> taskList = new ArrayList<Task>();
+		LinkedList<Task> taskList = new LinkedList<Task>();
 		for (Task t : tasks) {
 			taskList.add(t);
 		}
-		for (int i = 0; i < taskList.size() - 1; i++) {
-			for (int j = i; j < taskList.size(); j++) {
-				if (comparator.compareTo(taskList.get(i), taskList.get(j)) > 0) {
-					Task temp = taskList.get(i);
-					taskList.set(i, taskList.get(j));
-					taskList.set(j, temp);
-				}
-			}
-		}
+		taskList = quickSort(comparator, taskList);
 		tasks.clear();
 		for (Task t : taskList) {
 			try {
@@ -305,4 +322,17 @@ public class TaskManager implements ReadOnlyTaskManager {
     		}
 		}
 	}
+	//@@author A0163845X
+	
+	public void showcase(int numberOfTasks) throws DuplicateTaskException {
+		UniqueTaskList temp = new UniqueTaskList();
+		for (int i = 0; i < numberOfTasks; i++) {
+			temp.add(RandomTaskGenerator.generateTask());
+		}
+		tasks.clear();
+		for (Task t : temp) {
+			tasks.add(t);
+		}
+	}
 }
+

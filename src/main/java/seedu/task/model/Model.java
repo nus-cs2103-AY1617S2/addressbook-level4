@@ -74,5 +74,7 @@ public interface Model {
 
 	public void filterStatus(String status);
 	//void getPath(String path);
+	//@@author A0163845X
+	void showcase(int numberOfTasks) throws DuplicateTaskException;
 
 }
