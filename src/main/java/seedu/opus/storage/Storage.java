@@ -3,6 +3,7 @@ package seedu.opus.storage;
 import java.io.IOException;
 import java.util.Optional;
 
+import seedu.opus.commons.events.model.ChangeSaveLocationEvent;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
 import seedu.opus.commons.events.storage.DataSavingExceptionEvent;
 import seedu.opus.commons.exceptions.DataConversionException;
@@ -35,4 +36,9 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+
+    /**
+     * Sets the save location
+     */
+    void handleChangeSaveLocationEvent(ChangeSaveLocationEvent event);
 }

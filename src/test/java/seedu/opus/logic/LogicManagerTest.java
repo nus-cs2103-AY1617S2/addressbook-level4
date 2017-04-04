@@ -7,6 +7,7 @@ import static seedu.opus.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.opus.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.opus.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,10 +22,13 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.opus.commons.core.Config;
 import seedu.opus.commons.core.EventsCenter;
+import seedu.opus.commons.events.model.ChangeSaveLocationEvent;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
 import seedu.opus.commons.events.ui.JumpToListRequestEvent;
 import seedu.opus.commons.events.ui.ShowHelpRequestEvent;
+import seedu.opus.commons.util.FileUtil;
 import seedu.opus.logic.commands.AddCommand;
 import seedu.opus.logic.commands.ClearCommand;
 import seedu.opus.logic.commands.Command;
@@ -37,6 +41,7 @@ import seedu.opus.logic.commands.HelpCommand;
 import seedu.opus.logic.commands.ListCommand;
 import seedu.opus.logic.commands.MarkCommand;
 import seedu.opus.logic.commands.RedoCommand;
+import seedu.opus.logic.commands.SaveCommand;
 import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
 import seedu.opus.logic.commands.SyncCommand;
@@ -57,6 +62,7 @@ import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Status;
 import seedu.opus.model.task.Task;
 import seedu.opus.storage.StorageManager;
+import seedu.opus.testutil.EventsCollector;
 
 
 public class LogicManagerTest {
@@ -352,6 +358,58 @@ public class LogicManagerTest {
     public void executeSortInvalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
         assertCommandFailure("sort ", expectedMessage);
+    }
+
+    @Test
+    public void executeSaveSuccessful() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        TaskManager expectedTaskManager = new TaskManager();
+        Task testTask = helper.generateTaskWithName("test");
+        expectedTaskManager.addTask(testTask);
+        model.addTask(testTask);
+
+        String location = "data/test_successful.xml";
+        CommandResult result;
+        String inputCommand;
+        String feedback;
+        EventsCollector eventCollector = new EventsCollector();
+
+        inputCommand = "save " + location;
+        result = logic.execute(inputCommand);
+        feedback = String.format(SaveCommand.MESSAGE_SUCCESS, location);
+        assertEquals(feedback, result.feedbackToUser);
+        assertTrue(eventCollector.get(0) instanceof ChangeSaveLocationEvent);
+        assertTrue(eventCollector.get(1) instanceof TaskManagerChangedEvent);
+
+        inputCommand = "save default";
+        result = logic.execute(inputCommand);
+        feedback = String.format(SaveCommand.MESSAGE_LOCATION_DEFAULT, Config.DEFAULT_SAVE_LOCATION);
+        assertEquals(feedback, result.feedbackToUser);
+        assertTrue(eventCollector.get(2) instanceof ChangeSaveLocationEvent);
+        assertTrue(eventCollector.get(3) instanceof TaskManagerChangedEvent);
+
+        // delete file
+        FileUtil.deleteFile(location);
+    }
+
+    @Test
+    public void executeSaveFileExistsFail() throws Exception {
+        // setup expectations
+        TaskManager expectedTaskManager = new TaskManager();
+        String location = "data/test_save_fail.xml";
+
+        // create file
+        FileUtil.createIfMissing(new File(location));
+
+        // error that file already exists
+        assertCommandSuccess("save " + location,
+                String.format(SaveCommand.MESSAGE_FILE_EXISTS, location),
+                expectedTaskManager,
+                expectedTaskManager.getTaskList());
+
+        // delete file
+        FileUtil.deleteFile(location);
     }
     //@@author
 

@@ -73,4 +73,6 @@ public interface Model {
      */
     void stopSync();
 
+    /** Change the data storage location */
+    void changeSaveLocation(String location);
 }

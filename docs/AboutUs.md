@@ -41,6 +41,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Only person who can merge PRs after code review<br>
 * Features implemented:
    * [Sort tasks](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#24-sort-tasks--sort)
+   * [Save directory](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#215-specify-data-file-directory--save)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148081H.md)][[test code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148081H.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager

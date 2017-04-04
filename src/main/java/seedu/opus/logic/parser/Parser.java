@@ -18,6 +18,7 @@ import seedu.opus.logic.commands.IncorrectCommand;
 import seedu.opus.logic.commands.ListCommand;
 import seedu.opus.logic.commands.MarkCommand;
 import seedu.opus.logic.commands.RedoCommand;
+import seedu.opus.logic.commands.SaveCommand;
 import seedu.opus.logic.commands.ScheduleCommand;
 import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
@@ -96,6 +97,9 @@ public class Parser {
 
         case SyncCommand.COMMAND_WORD:
             return new SyncCommandParser().parse(arguments);
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommand(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
