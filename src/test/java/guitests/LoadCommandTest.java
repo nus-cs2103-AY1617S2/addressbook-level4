@@ -66,7 +66,6 @@ public class LoadCommandTest extends ToLuistGuiTest {
     public void load_invalidStoragePath() {
         String newPath = "sfas?////sffsf.json";
         String command = "load " + newPath;
-        commandBox.runCommand(command);
         runCommandThenCheckForResultMessage(command,
                 String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, newPath));
     }
@@ -75,7 +74,7 @@ public class LoadCommandTest extends ToLuistGuiTest {
     public void load_invalidData() {
         String newPath = "./src/test/data/StorageTest/NotJsonFormatData.json";
         String command = "load " + newPath;
-        String.format(Messages.MESSAGE_SET_STORAGE_FAILURE,
+        runCommandThenCheckForResultMessage(command,
                 String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, newPath));
 
         assertEquals(Config.getInstance().getTodoListFilePath(), TestApp.SAVE_LOCATION_FOR_TESTING);
