@@ -57,6 +57,7 @@ import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Status;
 import seedu.opus.model.task.Task;
 import seedu.opus.storage.StorageManager;
+import seedu.opus.sync.SyncProviderGoogleTests;
 
 
 public class LogicManagerTest {
@@ -686,7 +687,6 @@ public class LogicManagerTest {
         assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
     }
 
-    /*
     @Test
     public void executeSyncCommandWithValidOnArgumentSuccess() {
         SyncProviderGoogleTests.copyTestCredentials();
@@ -694,7 +694,7 @@ public class LogicManagerTest {
                              new TaskManager(), Collections.emptyList());
         SyncProviderGoogleTests.deleteCredential();
     }
-    */
+
 
     @Test
     public void executeSyncCommandWithValidOffArgumentSuccess() {
